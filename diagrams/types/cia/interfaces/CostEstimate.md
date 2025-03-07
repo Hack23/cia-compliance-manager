@@ -6,7 +6,7 @@
 
 # Interface: CostEstimate
 
-Defined in: [types/cia.ts:241](https://github.com/Hack23/cia-compliance-manager/blob/9ac1595ff2000bb3e7f5d15d352afef5decc025d/src/types/cia.ts#L241)
+Defined in: [types/cia.ts:241](https://github.com/Hack23/cia-compliance-manager/blob/8fd9c10973b52d0d78d7f90b0376987bfdcead6f/src/types/cia.ts#L241)
 
 CostEstimate represents the estimated cost of implementing
 a specific security measure or control
@@ -17,7 +17,7 @@ a specific security measure or control
 
 > **capex**: `number`
 
-Defined in: [types/cia.ts:242](https://github.com/Hack23/cia-compliance-manager/blob/9ac1595ff2000bb3e7f5d15d352afef5decc025d/src/types/cia.ts#L242)
+Defined in: [types/cia.ts:242](https://github.com/Hack23/cia-compliance-manager/blob/8fd9c10973b52d0d78d7f90b0376987bfdcead6f/src/types/cia.ts#L242)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [types/cia.ts:242](https://github.com/Hack23/cia-compliance-manager/
 
 > **opex**: `number`
 
-Defined in: [types/cia.ts:243](https://github.com/Hack23/cia-compliance-manager/blob/9ac1595ff2000bb3e7f5d15d352afef5decc025d/src/types/cia.ts#L243)
+Defined in: [types/cia.ts:243](https://github.com/Hack23/cia-compliance-manager/blob/8fd9c10973b52d0d78d7f90b0376987bfdcead6f/src/types/cia.ts#L243)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [types/cia.ts:243](https://github.com/Hack23/cia-compliance-manager/
 
 > **paybackPeriod**: `string`
 
-Defined in: [types/cia.ts:245](https://github.com/Hack23/cia-compliance-manager/blob/9ac1595ff2000bb3e7f5d15d352afef5decc025d/src/types/cia.ts#L245)
+Defined in: [types/cia.ts:245](https://github.com/Hack23/cia-compliance-manager/blob/8fd9c10973b52d0d78d7f90b0376987bfdcead6f/src/types/cia.ts#L245)
 
 ***
 
@@ -41,4 +41,4 @@ Defined in: [types/cia.ts:245](https://github.com/Hack23/cia-compliance-manager/
 
 > **roi**: `string`
 
-Defined in: [types/cia.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/9ac1595ff2000bb3e7f5d15d352afef5decc025d/src/types/cia.ts#L244)
+Defined in: [types/cia.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/8fd9c10973b52d0d78d7f90b0376987bfdcead6f/src/types/cia.ts#L244)
