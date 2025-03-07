@@ -1,44 +1,45 @@
 import fs from "fs-extra";
 import path from "path";
 
+/**
+ * Legacy function maintained for backward compatibility
+ * The new junit-reporter.ts handles this functionality now
+ */
 export const resetJunitResults = async () => {
+  console.log(
+    "Using legacy resetJunitResults - consider using cleanJunitReports from junit-reporter instead"
+  );
+
   const junitReportDir = "cypress/results";
   try {
     // Ensure directory exists
     await fs.ensureDir(junitReportDir);
 
-    // Instead of just deleting the main combined report, make a backup first
-    const mainReportPath = path.join(junitReportDir, "junit.xml");
-    if (await fs.pathExists(mainReportPath)) {
-      // Create a timestamped backup copy
+    // Look for any junit XML files
+    const xmlFiles = fs
+      .readdirSync(junitReportDir)
+      .filter((file) => file.endsWith(".xml"))
+      .map((file) => path.join(junitReportDir, file));
+
+    if (xmlFiles.length > 0) {
+      // Create a timestamped backup directory
       const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-      const backupPath = path.join(
-        junitReportDir,
-        `junit-backup-${timestamp}.xml`
-      );
+      const backupDir = path.join(junitReportDir, `backup`);
+      await fs.ensureDir(backupDir);
 
-      // Copy the file before removing it
-      await fs.copy(mainReportPath, backupPath);
-      console.log(`Backed up main JUnit report to: ${backupPath}`);
-
-      // Now remove the original file
-      await fs.unlink(mainReportPath);
+      // Move files to backup
+      for (const file of xmlFiles) {
+        const fileName = path.basename(file);
+        await fs.copy(file, path.join(backupDir, fileName));
+        await fs.unlink(file);
+      }
     }
 
-    // Also remove the temp results file that tracks accumulated data
-    const tempResultsPath = path.join(junitReportDir, "temp-results.json");
-    if (await fs.pathExists(tempResultsPath)) {
-      await fs.unlink(tempResultsPath);
-    }
-
-    // But leave individual test report files in place
-
-    console.log(
-      `JUnit results reset: Backed up and reset main report while preserving individual test reports`
-    );
-    return null; // Return null to indicate task completion
+    return null;
   } catch (err) {
     console.error(`Failed to reset JUnit results: ${err}`);
     throw err;
   }
 };
+
+export default resetJunitResults;

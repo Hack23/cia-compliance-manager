@@ -194,3 +194,4 @@ Thumbs.db
 
 # Generated files
 public/mockServiceWorker.js
+test-results.xml

@@ -31,6 +31,7 @@ vi.mock("./components/Dashboard", () => ({
   ),
 }));
 
+// Mock all widgets
 vi.mock("./components/widgets/SecurityLevelWidget", () => ({
   default: () => (
     <div data-testid="mock-security-level">Security Level Widget</div>
@@ -57,8 +58,41 @@ vi.mock("./components/widgets/ComplianceStatusWidget", () => ({
   ),
 }));
 
+// Mock the new widgets
+vi.mock("./components/widgets/IntegrityImpactWidget", () => ({
+  default: () => (
+    <div data-testid="mock-integrity-impact">Integrity Impact</div>
+  ),
+}));
+
+vi.mock("./components/widgets/ConfidentialityImpactWidget", () => ({
+  default: () => (
+    <div data-testid="mock-confidentiality-impact">Confidentiality Impact</div>
+  ),
+}));
+
+vi.mock("./components/widgets/AvailabilityImpactWidget", () => ({
+  default: () => (
+    <div data-testid="mock-availability-impact">Availability Impact</div>
+  ),
+}));
+
+vi.mock("./components/widgets/SecurityResourcesWidget", () => ({
+  default: () => (
+    <div data-testid="mock-security-resources">Security Resources</div>
+  ),
+}));
+
+vi.mock("./components/widgets/TechnicalDetailsWidget", () => ({
+  default: () => (
+    <div data-testid="mock-technical-details">Technical Details</div>
+  ),
+}));
+
 vi.mock("./components/widgets/BusinessImpactAnalysisWidget", () => ({
-  default: () => <div data-testid="mock-business-impact">Business Impact</div>,
+  default: () => (
+    <div data-testid="mock-business-impact">Business Impact Analysis</div>
+  ),
 }));
 
 vi.mock("./components/RadarChart", () => {
@@ -97,6 +131,20 @@ describe("CIAClassificationApp", () => {
     // Verify all widgets are rendered
     expect(screen.getByTestId("mock-security-level")).toBeInTheDocument();
     expect(screen.getByTestId("mock-radar-chart")).toBeInTheDocument();
+    expect(screen.getByTestId("mock-security-summary")).toBeInTheDocument();
+    expect(screen.getByTestId("mock-cost-estimation")).toBeInTheDocument();
+    expect(screen.getByTestId("mock-value-creation")).toBeInTheDocument();
+    expect(screen.getByTestId("mock-compliance-status")).toBeInTheDocument();
+
+    // Test for new widgets
+    expect(screen.getByTestId("mock-integrity-impact")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("mock-confidentiality-impact")
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("mock-availability-impact")).toBeInTheDocument();
+    expect(screen.getByTestId("mock-security-resources")).toBeInTheDocument();
+    expect(screen.getByTestId("mock-technical-details")).toBeInTheDocument();
+    expect(screen.getByTestId("mock-business-impact")).toBeInTheDocument();
   });
 
   it("updates the radar chart when security levels change", async () => {

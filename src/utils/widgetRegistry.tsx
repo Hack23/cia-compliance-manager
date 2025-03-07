@@ -100,9 +100,32 @@ import SecuritySummaryWidget from "../components/widgets/SecuritySummaryWidget";
 import ComplianceStatusWidget from "../components/widgets/ComplianceStatusWidget";
 import ValueCreationWidget from "../components/widgets/ValueCreationWidget";
 import CostEstimationWidget from "../components/widgets/CostEstimationWidget";
+import SecurityLevelWidget from "../components/widgets/SecurityLevelWidget";
+import RadarChart from "../components/RadarChart";
+import IntegrityImpactWidget from "../components/widgets/IntegrityImpactWidget";
+import ConfidentialityImpactWidget from "../components/widgets/ConfidentialityImpactWidget";
+import AvailabilityImpactWidget from "../components/widgets/AvailabilityImpactWidget";
+import SecurityResourcesWidget from "../components/widgets/SecurityResourcesWidget";
+import TechnicalDetailsWidget from "../components/widgets/TechnicalDetailsWidget";
 import BusinessImpactAnalysisWidget from "../components/widgets/BusinessImpactAnalysisWidget";
 
 // Pre-register core widgets
+widgetRegistry.register({
+  id: "security-level",
+  title: "Security Level Selection",
+  component: SecurityLevelWidget,
+  size: "medium",
+  order: 5,
+});
+
+widgetRegistry.register({
+  id: "security-visualization",
+  title: "Security Profile Visualization",
+  component: RadarChart,
+  size: "medium",
+  order: 15,
+});
+
 widgetRegistry.register({
   id: "security-summary",
   title: WIDGET_TITLES.SECURITY_SUMMARY,
@@ -141,9 +164,8 @@ widgetRegistry.register({
 
 widgetRegistry.register({
   id: "availability-impact",
-  title: "Availability Impact", // Use string literal instead of constant
-  component: BusinessImpactAnalysisWidget,
-  defaultProps: { category: "Availability" },
+  title: "Availability Impact",
+  component: AvailabilityImpactWidget,
   icon: WIDGET_ICONS.AVAILABILITY_IMPACT,
   size: "medium",
   order: 50,
@@ -151,9 +173,8 @@ widgetRegistry.register({
 
 widgetRegistry.register({
   id: "integrity-impact",
-  title: "Integrity Impact", // Use string literal instead of constant
-  component: BusinessImpactAnalysisWidget,
-  defaultProps: { category: "Integrity" },
+  title: "Integrity Impact",
+  component: IntegrityImpactWidget,
   icon: WIDGET_ICONS.INTEGRITY_IMPACT,
   size: "medium",
   order: 60,
@@ -161,12 +182,35 @@ widgetRegistry.register({
 
 widgetRegistry.register({
   id: "confidentiality-impact",
-  title: "Confidentiality Impact", // Use string literal instead of constant
-  component: BusinessImpactAnalysisWidget,
-  defaultProps: { category: "Confidentiality" },
+  title: "Confidentiality Impact",
+  component: ConfidentialityImpactWidget,
   icon: WIDGET_ICONS.CONFIDENTIALITY_IMPACT,
   size: "medium",
   order: 70,
+});
+
+widgetRegistry.register({
+  id: "security-resources",
+  title: "Security Resources",
+  component: SecurityResourcesWidget,
+  size: "medium",
+  order: 80,
+});
+
+widgetRegistry.register({
+  id: "technical-details",
+  title: "Technical Implementation",
+  component: TechnicalDetailsWidget,
+  size: "medium",
+  order: 90,
+});
+
+widgetRegistry.register({
+  id: "business-impact-analysis",
+  title: "Business Impact Analysis",
+  component: BusinessImpactAnalysisWidget,
+  size: "medium",
+  order: 100,
 });
 
 export default widgetRegistry;

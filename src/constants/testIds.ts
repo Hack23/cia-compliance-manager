@@ -148,6 +148,12 @@ export const WIDGET_TEST_IDS = {
   COMPLIANCE_STATUS_WIDGET: "widget-compliance-status",
   RADAR_CHART_WIDGET: "widget-radar-chart",
   VALUE_CREATION_WIDGET: "widget-value-creation",
+
+  // Add these new widget test IDs
+  INTEGRITY_IMPACT_WIDGET: "widget-integrity-impact",
+  CONFIDENTIALITY_IMPACT_WIDGET: "widget-confidentiality-impact",
+  AVAILABILITY_IMPACT_WIDGET: "widget-availability-impact",
+  SECURITY_RESOURCES_WIDGET: "widget-security-resources",
 };
 
 // BusinessImpactAnalysisWidget IDs - KEEP ORIGINAL VALUES FOR BACKWARD COMPATIBILITY
