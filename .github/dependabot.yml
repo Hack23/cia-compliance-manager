@@ -30,3 +30,8 @@ updates:
       - "build"
     commit-message:
       prefix: "build(deps)"
+
+  - package-ecosystem: docker
+    directory: /.devcontainer
+    schedule:
+      interval: daily
