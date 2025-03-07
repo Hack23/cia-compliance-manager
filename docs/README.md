@@ -57,7 +57,7 @@ For detailed architecture diagrams and documentation, see the [Architecture sect
 
 This diagram shows the relationship between different modules in the codebase:
 
-![Module Dependencies](https://raw.githubusercontent.com/Hack23/cia-compliance-manager/refs/heads/docportal/docs/dependencies/module-dependencies.svg)
+![Module Dependencies](https://hack23.github.io/cia-compliance-manager/dependencies/module-dependencies.svg)
 
 ## 🔒 Security Features
 
