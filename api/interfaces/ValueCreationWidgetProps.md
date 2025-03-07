@@ -6,7 +6,7 @@
 
 # Interface: ValueCreationWidgetProps
 
-Defined in: [src/types/widgets.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L16)
+Defined in: [src/types/widgets.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L18)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [src/types/widgets.ts:16](https://github.com/Hack23/cia-compliance-m
 
 > **securityLevel**: `string`
 
-Defined in: [src/types/widgets.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L17)
+Defined in: [src/types/widgets.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L19)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [src/types/widgets.ts:17](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.ts:3](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L3)
+Defined in: [src/types/widgets.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L5)
 
 #### Inherited from
 

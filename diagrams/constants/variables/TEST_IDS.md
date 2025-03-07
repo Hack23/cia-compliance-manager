@@ -8,7 +8,7 @@
 
 > `const` **TEST\_IDS**: `object`
 
-Defined in: [constants/testIds.ts:409](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/constants/testIds.ts#L409)
+Defined in: [constants/testIds.ts:415](https://github.com/Hack23/cia-compliance-manager/blob/c560b17eefe52a4a8326894c342aaa04a58b47bb/src/constants/testIds.ts#L415)
 
 ## Type declaration
 
@@ -55,6 +55,10 @@ Defined in: [constants/testIds.ts:409](https://github.com/Hack23/cia-compliance-
 ### AVAILABILITY\_IMPACT\_HEADING
 
 > **AVAILABILITY\_IMPACT\_HEADING**: `string` = `"availability-impact-heading"`
+
+### AVAILABILITY\_IMPACT\_WIDGET
+
+> **AVAILABILITY\_IMPACT\_WIDGET**: `string` = `"widget-availability-impact"`
 
 ### AVAILABILITY\_KV
 
@@ -303,6 +307,10 @@ Defined in: [constants/testIds.ts:409](https://github.com/Hack23/cia-compliance-
 ### CONFIDENTIALITY\_IMPACT\_HEADING
 
 > **CONFIDENTIALITY\_IMPACT\_HEADING**: `string` = `"confidentiality-impact-heading"`
+
+### CONFIDENTIALITY\_IMPACT\_WIDGET
+
+> **CONFIDENTIALITY\_IMPACT\_WIDGET**: `string` = `"widget-confidentiality-impact"`
 
 ### CONFIDENTIALITY\_KV
 
@@ -750,6 +758,10 @@ Helper to generate dynamic test IDs with consistent patterns
 
 > **INTEGRITY\_IMPACT\_HEADING**: `string` = `"integrity-impact-heading"`
 
+### INTEGRITY\_IMPACT\_WIDGET
+
+> **INTEGRITY\_IMPACT\_WIDGET**: `string` = `"widget-integrity-impact"`
+
 ### INTEGRITY\_KV
 
 > **INTEGRITY\_KV**: `string` = `"integrity-kv"`
@@ -1037,6 +1049,10 @@ Helper to generate dynamic test IDs with consistent patterns
 ### SECURITY\_RECOMMENDATIONS
 
 > **SECURITY\_RECOMMENDATIONS**: `string` = `"security-recommendations"`
+
+### SECURITY\_RESOURCES\_WIDGET
+
+> **SECURITY\_RESOURCES\_WIDGET**: `string` = `"widget-security-resources"`
 
 ### SECURITY\_SUMMARY\_CONTAINER
 

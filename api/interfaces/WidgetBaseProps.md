@@ -6,14 +6,17 @@
 
 # Interface: WidgetBaseProps
 
-Defined in: [src/types/widgets.ts:2](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L2)
+Defined in: [src/types/widgets.ts:4](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L4)
 
 ## Extended by
 
 - [`CostEstimationWidgetProps`](CostEstimationWidgetProps.md)
 - [`ValueCreationWidgetProps`](ValueCreationWidgetProps.md)
 - [`SecuritySummaryWidgetProps`](SecuritySummaryWidgetProps.md)
-- [`CombinedBusinessImpactWidgetProps`](CombinedBusinessImpactWidgetProps.md)
+- [`IntegrityImpactWidgetProps`](IntegrityImpactWidgetProps.md)
+- [`ConfidentialityImpactWidgetProps`](ConfidentialityImpactWidgetProps.md)
+- [`AvailabilityImpactWidgetProps`](AvailabilityImpactWidgetProps.md)
+- [`SecurityResourcesWidgetProps`](SecurityResourcesWidgetProps.md)
 
 ## Properties
 
@@ -21,4 +24,4 @@ Defined in: [src/types/widgets.ts:2](https://github.com/Hack23/cia-compliance-ma
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.ts:3](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L3)
+Defined in: [src/types/widgets.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L5)

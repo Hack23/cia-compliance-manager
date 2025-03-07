@@ -6,7 +6,7 @@
 
 # Interface: SecuritySummaryWidgetProps
 
-Defined in: [src/types/widgets.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L20)
+Defined in: [src/types/widgets.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L22)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [src/types/widgets.ts:20](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **availabilityLevel**: `string`
 
-Defined in: [src/types/widgets.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L22)
+Defined in: [src/types/widgets.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L24)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [src/types/widgets.ts:22](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **confidentialityLevel**: `string`
 
-Defined in: [src/types/widgets.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L24)
+Defined in: [src/types/widgets.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L26)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [src/types/widgets.ts:24](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **integrityLevel**: `string`
 
-Defined in: [src/types/widgets.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L23)
+Defined in: [src/types/widgets.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L25)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [src/types/widgets.ts:23](https://github.com/Hack23/cia-compliance-m
 
 > **securityLevel**: `string`
 
-Defined in: [src/types/widgets.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L21)
+Defined in: [src/types/widgets.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L23)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [src/types/widgets.ts:21](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.ts:3](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L3)
+Defined in: [src/types/widgets.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L5)
 
 #### Inherited from
 

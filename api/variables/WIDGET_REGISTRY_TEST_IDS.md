@@ -8,7 +8,7 @@
 
 > `const` **WIDGET\_REGISTRY\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:361](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L361)
+Defined in: [src/constants/testIds.ts:367](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L367)
 
 ## Type declaration
 

@@ -8,7 +8,7 @@
 
 > `const` **SECURITY\_LEVEL\_COLORS**: `object`
 
-Defined in: [constants/uiConstants.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/constants/uiConstants.ts#L40)
+Defined in: [constants/uiConstants.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/c560b17eefe52a4a8326894c342aaa04a58b47bb/src/constants/uiConstants.ts#L40)
 
 ## Type declaration
 

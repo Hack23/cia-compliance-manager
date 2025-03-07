@@ -22,6 +22,14 @@ Availability security level
 
 ***
 
+### availabilityLevel?
+
+> `optional` **availabilityLevel**: `string`
+
+Defined in: [src/types/componentProps.ts:357](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L357)
+
+***
+
 ### availabilityOptions?
 
 > `optional` **availabilityOptions**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
@@ -52,6 +60,14 @@ Confidentiality security level
 
 ***
 
+### confidentialityLevel?
+
+> `optional` **confidentialityLevel**: `string`
+
+Defined in: [src/types/componentProps.ts:359](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L359)
+
+***
+
 ### confidentialityOptions?
 
 > `optional` **confidentialityOptions**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
@@ -69,6 +85,14 @@ Confidentiality options
 Defined in: [src/types/componentProps.ts:298](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L298)
 
 Integrity security level
+
+***
+
+### integrityLevel?
+
+> `optional` **integrityLevel**: `string`
+
+Defined in: [src/types/componentProps.ts:358](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L358)
 
 ***
 

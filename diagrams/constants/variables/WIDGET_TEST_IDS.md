@@ -8,9 +8,13 @@
 
 > `const` **WIDGET\_TEST\_IDS**: `object`
 
-Defined in: [constants/testIds.ts:105](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/constants/testIds.ts#L105)
+Defined in: [constants/testIds.ts:105](https://github.com/Hack23/cia-compliance-manager/blob/c560b17eefe52a4a8326894c342aaa04a58b47bb/src/constants/testIds.ts#L105)
 
 ## Type declaration
+
+### AVAILABILITY\_IMPACT\_WIDGET
+
+> **AVAILABILITY\_IMPACT\_WIDGET**: `string` = `"widget-availability-impact"`
 
 ### AVAILABILITY\_TAB
 
@@ -52,6 +56,10 @@ Defined in: [constants/testIds.ts:105](https://github.com/Hack23/cia-compliance-
 
 > **COMPLIANCE\_STATUS\_WIDGET**: `string` = `"widget-compliance-status"`
 
+### CONFIDENTIALITY\_IMPACT\_WIDGET
+
+> **CONFIDENTIALITY\_IMPACT\_WIDGET**: `string` = `"widget-confidentiality-impact"`
+
 ### CONFIDENTIALITY\_TAB
 
 > **CONFIDENTIALITY\_TAB**: `string` = `"confidentiality-tab"`
@@ -75,6 +83,10 @@ Defined in: [constants/testIds.ts:105](https://github.com/Hack23/cia-compliance-
 ### IMPLEMENTATION\_HEADER
 
 > **IMPLEMENTATION\_HEADER**: `string` = `"implementation-header"`
+
+### INTEGRITY\_IMPACT\_WIDGET
+
+> **INTEGRITY\_IMPACT\_WIDGET**: `string` = `"widget-integrity-impact"`
 
 ### INTEGRITY\_TAB
 
@@ -119,6 +131,10 @@ Defined in: [constants/testIds.ts:105](https://github.com/Hack23/cia-compliance-
 ### SECURITY\_LEVEL\_WIDGET
 
 > **SECURITY\_LEVEL\_WIDGET**: `string` = `"widget-security-level"`
+
+### SECURITY\_RESOURCES\_WIDGET
+
+> **SECURITY\_RESOURCES\_WIDGET**: `string` = `"widget-security-resources"`
 
 ### SECURITY\_SUMMARY\_TITLE
 

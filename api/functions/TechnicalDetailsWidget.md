@@ -8,7 +8,7 @@
 
 > **TechnicalDetailsWidget**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/TechnicalDetailsWidget.tsx#L27)
+Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:23](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/TechnicalDetailsWidget.tsx#L23)
 
 ## Parameters
 

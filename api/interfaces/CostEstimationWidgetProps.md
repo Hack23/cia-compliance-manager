@@ -6,7 +6,7 @@
 
 # Interface: CostEstimationWidgetProps
 
-Defined in: [src/types/widgets.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L6)
+Defined in: [src/types/widgets.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L8)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [src/types/widgets.ts:6](https://github.com/Hack23/cia-compliance-ma
 
 > **capexEstimate**: `string`
 
-Defined in: [src/types/widgets.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L9)
+Defined in: [src/types/widgets.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L11)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [src/types/widgets.ts:9](https://github.com/Hack23/cia-compliance-ma
 
 > `optional` **implementationTime**: `string`
 
-Defined in: [src/types/widgets.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L13)
+Defined in: [src/types/widgets.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L15)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [src/types/widgets.ts:13](https://github.com/Hack23/cia-compliance-m
 
 > **isSmallSolution**: `boolean`
 
-Defined in: [src/types/widgets.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L11)
+Defined in: [src/types/widgets.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L13)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [src/types/widgets.ts:11](https://github.com/Hack23/cia-compliance-m
 
 > **opexEstimate**: `string`
 
-Defined in: [src/types/widgets.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L10)
+Defined in: [src/types/widgets.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L12)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [src/types/widgets.ts:10](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **roi**: `string`
 
-Defined in: [src/types/widgets.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L12)
+Defined in: [src/types/widgets.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L14)
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [src/types/widgets.ts:12](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.ts:3](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L3)
+Defined in: [src/types/widgets.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L5)
 
 #### Inherited from
 
@@ -70,7 +70,7 @@ Defined in: [src/types/widgets.ts:3](https://github.com/Hack23/cia-compliance-ma
 
 > **totalCapex**: `number`
 
-Defined in: [src/types/widgets.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L7)
+Defined in: [src/types/widgets.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L9)
 
 ***
 
@@ -78,4 +78,4 @@ Defined in: [src/types/widgets.ts:7](https://github.com/Hack23/cia-compliance-ma
 
 > **totalOpex**: `number`
 
-Defined in: [src/types/widgets.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L8)
+Defined in: [src/types/widgets.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L10)

@@ -8,7 +8,7 @@
 
 > `const` **SECURITY\_LEVELS**: `object`
 
-Defined in: [constants/coreConstants.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/constants/coreConstants.ts#L42)
+Defined in: [constants/coreConstants.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/c560b17eefe52a4a8326894c342aaa04a58b47bb/src/constants/coreConstants.ts#L42)
 
 ## Type declaration
 
