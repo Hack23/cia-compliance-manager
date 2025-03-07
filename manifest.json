@@ -1,0 +1,32 @@
+{
+  "name": "CIA Compliance Manager",
+  "short_name": "CIA Manager",
+  "description": "Security compliance tracking application for confidentiality, integrity and availability",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#00cc66",
+  "background_color": "#001a1a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
