@@ -3,6 +3,7 @@ import vitePreprocessor from "cypress-vite";
 import { resolve } from "path";
 import * as fs from "fs";
 import junitReporter from "./cypress/support/plugins/junit-reporter";
+import { resetJunitResults } from "./cypress/tasks/junit-reset";
 
 // Use __dirname in a more TypeScript-friendly way
 const __dirname = resolve(process.cwd());
@@ -43,8 +44,9 @@ export default defineConfig({
         })
       );
 
-      // Add a task to list JUnit files
+      // Register tasks for backward compatibility
       on("task", {
+        resetJunitResults: resetJunitResults,
         listJunitFiles() {
           const resultsDir = resolve(__dirname, "cypress/results");
           if (!fs.existsSync(resultsDir)) {
@@ -55,9 +57,6 @@ export default defineConfig({
           const files = fs
             .readdirSync(resultsDir)
             .filter((file) => file.endsWith(".xml"));
-
-          console.log(`Found ${files.length} JUnit files in ${resultsDir}`);
-          files.forEach((file) => console.log(`- ${file}`));
 
           return files;
         },
