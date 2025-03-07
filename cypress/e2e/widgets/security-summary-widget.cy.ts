@@ -123,13 +123,19 @@ describe("Security Summary Widget", () => {
     cy.get("body").then(($body) => {
       // Try to find metrics section by clicking headers or buttons
       cy.contains(/key metrics|metrics|details/i).then(($el) => {
-        // If it looks like a button or tab, click it
-        if (
-          $el.is("button") ||
-          $el.attr("role") === "tab" ||
-          $el.css("cursor") === "pointer"
-        ) {
-          cy.wrap($el).click({ force: true });
+        // Use type assertion to tell TypeScript this is a jQuery object
+        const $element = $el as unknown as JQuery<HTMLElement>;
+
+        // Now we can safely use jQuery methods
+        if ($element && $element.length > 0) {
+          // If it looks like a button or tab, click it
+          if (
+            $element.is("button") ||
+            $element.attr("role") === "tab" ||
+            $element.css("cursor") === "pointer"
+          ) {
+            cy.wrap($element).click({ force: true });
+          }
         }
       });
 

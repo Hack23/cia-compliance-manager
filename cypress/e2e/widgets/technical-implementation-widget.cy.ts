@@ -6,7 +6,7 @@ describe("Technical Implementation Widget", () => {
     cy.visit("/");
     cy.ensureAppLoaded();
 
-    // Set security levels high to ensure we get detailed implementation guidance
+    // Set security levels high to ensure we get detailed implementation information
     cy.setSecurityLevels(
       SECURITY_LEVELS.HIGH,
       SECURITY_LEVELS.HIGH,
