@@ -1,0 +1,129 @@
+[**CIA Compliance Manager Diagrams v0.6.0**](../../../README.md)
+
+***
+
+[CIA Compliance Manager Diagrams](../../../modules.md) / [types/cia](../README.md) / CIADetails
+
+# Interface: CIADetails
+
+Defined in: [types/cia.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L73)
+
+## Properties
+
+### bg?
+
+> `optional` **bg**: `string`
+
+Defined in: [types/cia.ts:80](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L80)
+
+***
+
+### businessImpact
+
+> **businessImpact**: `string`
+
+Defined in: [types/cia.ts:77](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L77)
+
+***
+
+### businessImpactDetails?
+
+> `optional` **businessImpactDetails**: [`BusinessImpactDetails`](BusinessImpactDetails.md)
+
+Defined in: [types/cia.ts:84](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L84)
+
+***
+
+### capex
+
+> **capex**: `number`
+
+Defined in: [types/cia.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L78)
+
+***
+
+### complexity?
+
+> `optional` **complexity**: `string`
+
+Defined in: [types/cia.ts:89](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L89)
+
+***
+
+### description
+
+> **description**: `string`
+
+Defined in: [types/cia.ts:74](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L74)
+
+***
+
+### impact
+
+> **impact**: `string`
+
+Defined in: [types/cia.ts:75](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L75)
+
+***
+
+### implementationSteps?
+
+> `optional` **implementationSteps**: `string`[]
+
+Defined in: [types/cia.ts:88](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L88)
+
+***
+
+### opex
+
+> **opex**: `number`
+
+Defined in: [types/cia.ts:79](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L79)
+
+***
+
+### protectionMethod?
+
+> `optional` **protectionMethod**: `string`
+
+Defined in: [types/cia.ts:87](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L87)
+
+***
+
+### recommendations?
+
+> `optional` **recommendations**: `string`[]
+
+Defined in: [types/cia.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L82)
+
+***
+
+### technical
+
+> **technical**: `string`
+
+Defined in: [types/cia.ts:76](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L76)
+
+***
+
+### text?
+
+> `optional` **text**: `string`
+
+Defined in: [types/cia.ts:81](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L81)
+
+***
+
+### uptime?
+
+> `optional` **uptime**: `string`
+
+Defined in: [types/cia.ts:85](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L85)
+
+***
+
+### validationMethod?
+
+> `optional` **validationMethod**: `string`
+
+Defined in: [types/cia.ts:86](https://github.com/Hack23/cia-compliance-manager/blob/76f9392dfce60a69a89c4c52edf7bd9f7c07dae3/src/types/cia.ts#L86)
