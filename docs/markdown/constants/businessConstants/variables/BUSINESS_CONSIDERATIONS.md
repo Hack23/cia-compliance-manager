@@ -8,4 +8,4 @@
 
 > `const` **BUSINESS\_CONSIDERATIONS**: [`BusinessConsiderations`](../../../types/businessImpact/interfaces/BusinessConsiderations.md)
 
-Defined in: [src/constants/businessConstants.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/constants/businessConstants.ts#L8)
+Defined in: [src/constants/businessConstants.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/constants/businessConstants.ts#L8)

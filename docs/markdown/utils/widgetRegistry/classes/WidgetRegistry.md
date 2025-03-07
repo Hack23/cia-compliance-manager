@@ -6,7 +6,7 @@
 
 # Class: WidgetRegistry
 
-Defined in: [src/utils/widgetRegistry.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L18)
+Defined in: [src/utils/widgetRegistry.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L18)
 
 ## Constructors
 
@@ -24,7 +24,7 @@ Defined in: [src/utils/widgetRegistry.tsx:18](https://github.com/Hack23/cia-comp
 
 > `private` **widgets**: `Map`\<`string`, [`WidgetDefinition`](../interfaces/WidgetDefinition.md)\>
 
-Defined in: [src/utils/widgetRegistry.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L19)
+Defined in: [src/utils/widgetRegistry.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L19)
 
 ## Methods
 
@@ -32,7 +32,7 @@ Defined in: [src/utils/widgetRegistry.tsx:19](https://github.com/Hack23/cia-comp
 
 > **get**(`id`): `undefined` \| [`WidgetDefinition`](../interfaces/WidgetDefinition.md)
 
-Defined in: [src/utils/widgetRegistry.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L31)
+Defined in: [src/utils/widgetRegistry.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L31)
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [src/utils/widgetRegistry.tsx:31](https://github.com/Hack23/cia-comp
 
 > **getAll**(): [`WidgetDefinition`](../interfaces/WidgetDefinition.md)[]
 
-Defined in: [src/utils/widgetRegistry.tsx:36](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L36)
+Defined in: [src/utils/widgetRegistry.tsx:36](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L36)
 
 #### Returns
 
@@ -62,7 +62,7 @@ Defined in: [src/utils/widgetRegistry.tsx:36](https://github.com/Hack23/cia-comp
 
 > **register**(`widgetDef`): `void`
 
-Defined in: [src/utils/widgetRegistry.tsx:22](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L22)
+Defined in: [src/utils/widgetRegistry.tsx:22](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L22)
 
 #### Parameters
 
@@ -80,7 +80,7 @@ Defined in: [src/utils/widgetRegistry.tsx:22](https://github.com/Hack23/cia-comp
 
 > **renderWidget**(`id`, `props`): `ReactNode`
 
-Defined in: [src/utils/widgetRegistry.tsx:47](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L47)
+Defined in: [src/utils/widgetRegistry.tsx:47](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L47)
 
 #### Parameters
 
@@ -102,7 +102,7 @@ Defined in: [src/utils/widgetRegistry.tsx:47](https://github.com/Hack23/cia-comp
 
 > **renderWidgets**(`filter`?, `props`?): `ReactNode`[]
 
-Defined in: [src/utils/widgetRegistry.tsx:67](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L67)
+Defined in: [src/utils/widgetRegistry.tsx:67](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L67)
 
 #### Parameters
 

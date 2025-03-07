@@ -6,7 +6,7 @@
 
 # Interface: ComplianceStatusWidgetProps
 
-Defined in: src/types/componentProps.ts:226
+Defined in: [src/types/componentProps.ts:226](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L226)
 
 Props for the ComplianceStatusWidget component that displays compliance status.
 
@@ -16,7 +16,7 @@ Props for the ComplianceStatusWidget component that displays compliance status.
 
 > `optional` **availability**: `string`
 
-Defined in: src/types/componentProps.ts:236
+Defined in: [src/types/componentProps.ts:236](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L236)
 
 Backward compatibility for availability
 
@@ -26,7 +26,7 @@ Backward compatibility for availability
 
 > `optional` **availabilityLevel**: `string`
 
-Defined in: src/types/componentProps.ts:230
+Defined in: [src/types/componentProps.ts:230](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L230)
 
 Availability security level
 
@@ -36,7 +36,7 @@ Availability security level
 
 > `optional` **confidentiality**: `string`
 
-Defined in: src/types/componentProps.ts:240
+Defined in: [src/types/componentProps.ts:240](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L240)
 
 Backward compatibility for confidentiality
 
@@ -46,7 +46,7 @@ Backward compatibility for confidentiality
 
 > `optional` **confidentialityLevel**: `string`
 
-Defined in: src/types/componentProps.ts:234
+Defined in: [src/types/componentProps.ts:234](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L234)
 
 Confidentiality security level
 
@@ -56,7 +56,7 @@ Confidentiality security level
 
 > `optional` **integrity**: `string`
 
-Defined in: src/types/componentProps.ts:238
+Defined in: [src/types/componentProps.ts:238](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L238)
 
 Backward compatibility for integrity
 
@@ -66,7 +66,7 @@ Backward compatibility for integrity
 
 > `optional` **integrityLevel**: `string`
 
-Defined in: src/types/componentProps.ts:232
+Defined in: [src/types/componentProps.ts:232](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L232)
 
 Integrity security level
 
@@ -76,7 +76,7 @@ Integrity security level
 
 > `optional` **securityLevel**: `string`
 
-Defined in: src/types/componentProps.ts:228
+Defined in: [src/types/componentProps.ts:228](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L228)
 
 Overall security level
 
@@ -86,6 +86,6 @@ Overall security level
 
 > `optional` **testId**: `string`
 
-Defined in: src/types/componentProps.ts:242
+Defined in: [src/types/componentProps.ts:242](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L242)
 
 Optional test ID for component selection in tests

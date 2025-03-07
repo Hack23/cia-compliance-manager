@@ -8,7 +8,7 @@
 
 > **default**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/SecurityLevelWidget.tsx:23](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/components/widgets/SecurityLevelWidget.tsx#L23)
+Defined in: [src/components/widgets/SecurityLevelWidget.tsx:23](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/components/widgets/SecurityLevelWidget.tsx#L23)
 
 ## Parameters
 

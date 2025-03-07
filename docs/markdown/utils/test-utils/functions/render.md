@@ -8,7 +8,7 @@
 
 > **render**(`ui`, `options`?): `RenderResult`\<`__module`, `HTMLElement`, `HTMLElement`\>
 
-Defined in: [src/utils/test-utils.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/test-utils.tsx#L25)
+Defined in: [src/utils/test-utils.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/test-utils.tsx#L25)
 
 ## Parameters
 

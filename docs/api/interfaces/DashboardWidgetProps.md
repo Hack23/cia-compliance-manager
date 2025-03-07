@@ -6,7 +6,7 @@
 
 # Interface: DashboardWidgetProps
 
-Defined in: src/types/componentProps.ts:134
+Defined in: [src/types/componentProps.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L134)
 
 Props for the DashboardWidget component that displays widgets within the dashboard.
 
@@ -16,7 +16,7 @@ Props for the DashboardWidget component that displays widgets within the dashboa
 
 > **component**: `ComponentType`\<`any`\>
 
-Defined in: src/types/componentProps.ts:140
+Defined in: [src/types/componentProps.ts:140](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L140)
 
 Widget component
 
@@ -26,7 +26,7 @@ Widget component
 
 > **id**: `string`
 
-Defined in: src/types/componentProps.ts:136
+Defined in: [src/types/componentProps.ts:136](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L136)
 
 Widget ID
 
@@ -36,7 +36,7 @@ Widget ID
 
 > `optional` **position**: `number`
 
-Defined in: src/types/componentProps.ts:144
+Defined in: [src/types/componentProps.ts:144](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L144)
 
 Optional position
 
@@ -46,7 +46,7 @@ Optional position
 
 > `optional` **props**: `Record`\<`string`, `any`\>
 
-Defined in: src/types/componentProps.ts:142
+Defined in: [src/types/componentProps.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L142)
 
 Widget props
 
@@ -56,7 +56,7 @@ Widget props
 
 > `optional` **size**: `"small"` \| `"medium"` \| `"large"` \| `"full"`
 
-Defined in: src/types/componentProps.ts:146
+Defined in: [src/types/componentProps.ts:146](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L146)
 
 Widget size
 
@@ -66,6 +66,6 @@ Widget size
 
 > **title**: `string`
 
-Defined in: src/types/componentProps.ts:138
+Defined in: [src/types/componentProps.ts:138](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L138)
 
 Widget title

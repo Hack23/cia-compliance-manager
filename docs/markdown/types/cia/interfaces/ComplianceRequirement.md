@@ -6,7 +6,7 @@
 
 # Interface: ComplianceRequirement
 
-Defined in: [src/types/cia.ts:206](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L206)
+Defined in: [src/types/cia.ts:206](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L206)
 
 ComplianceRequirement represents a specific compliance requirement
 that must be met
@@ -17,7 +17,7 @@ that must be met
 
 > **control**: `string`
 
-Defined in: [src/types/cia.ts:208](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L208)
+Defined in: [src/types/cia.ts:208](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L208)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [src/types/cia.ts:208](https://github.com/Hack23/cia-compliance-mana
 
 > **description**: `string`
 
-Defined in: [src/types/cia.ts:209](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L209)
+Defined in: [src/types/cia.ts:209](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L209)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [src/types/cia.ts:209](https://github.com/Hack23/cia-compliance-mana
 
 > **framework**: `string`
 
-Defined in: [src/types/cia.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L207)
+Defined in: [src/types/cia.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L207)
 
 ***
 
@@ -41,4 +41,4 @@ Defined in: [src/types/cia.ts:207](https://github.com/Hack23/cia-compliance-mana
 
 > **status**: `"compliant"` \| `"non-compliant"` \| `"partial"`
 
-Defined in: [src/types/cia.ts:210](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L210)
+Defined in: [src/types/cia.ts:210](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L210)

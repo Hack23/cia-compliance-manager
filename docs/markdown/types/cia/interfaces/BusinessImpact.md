@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpact
 
-Defined in: [src/types/cia.ts:183](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L183)
+Defined in: [src/types/cia.ts:183](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L183)
 
 BusinessImpact represents the impact of a security breach or failure
 on various aspects of the business
@@ -17,7 +17,7 @@ on various aspects of the business
 
 > **financial**: `string`
 
-Defined in: [src/types/cia.ts:184](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L184)
+Defined in: [src/types/cia.ts:184](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L184)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [src/types/cia.ts:184](https://github.com/Hack23/cia-compliance-mana
 
 > **operational**: `string`
 
-Defined in: [src/types/cia.ts:185](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L185)
+Defined in: [src/types/cia.ts:185](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L185)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [src/types/cia.ts:185](https://github.com/Hack23/cia-compliance-mana
 
 > **regulatory**: `string`
 
-Defined in: [src/types/cia.ts:187](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L187)
+Defined in: [src/types/cia.ts:187](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L187)
 
 ***
 
@@ -41,4 +41,4 @@ Defined in: [src/types/cia.ts:187](https://github.com/Hack23/cia-compliance-mana
 
 > **reputational**: `string`
 
-Defined in: [src/types/cia.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L186)
+Defined in: [src/types/cia.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L186)

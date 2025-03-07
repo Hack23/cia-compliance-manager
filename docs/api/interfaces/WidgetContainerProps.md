@@ -6,7 +6,7 @@
 
 # Interface: WidgetContainerProps
 
-Defined in: src/types/componentProps.ts:70
+Defined in: [src/types/componentProps.ts:70](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L70)
 
 Props for the WidgetContainer component that provides a consistent container for widgets.
 
@@ -16,7 +16,7 @@ Props for the WidgetContainer component that provides a consistent container for
 
 > **children**: `ReactNode`
 
-Defined in: src/types/componentProps.ts:74
+Defined in: [src/types/componentProps.ts:74](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L74)
 
 Widget content
 
@@ -26,7 +26,7 @@ Widget content
 
 > `optional` **className**: `string`
 
-Defined in: src/types/componentProps.ts:76
+Defined in: [src/types/componentProps.ts:76](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L76)
 
 Optional CSS class name
 
@@ -36,7 +36,7 @@ Optional CSS class name
 
 > `optional` **icon**: `string`
 
-Defined in: src/types/componentProps.ts:80
+Defined in: [src/types/componentProps.ts:80](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L80)
 
 Icon to display in the header
 
@@ -46,7 +46,7 @@ Icon to display in the header
 
 > `optional` **testId**: `string`
 
-Defined in: src/types/componentProps.ts:78
+Defined in: [src/types/componentProps.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L78)
 
 Optional test ID for component selection in tests
 
@@ -56,6 +56,6 @@ Optional test ID for component selection in tests
 
 > **title**: `string`
 
-Defined in: src/types/componentProps.ts:72
+Defined in: [src/types/componentProps.ts:72](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L72)
 
 Title of the widget

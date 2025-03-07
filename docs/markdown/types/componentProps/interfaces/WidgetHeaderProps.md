@@ -6,7 +6,7 @@
 
 # Interface: WidgetHeaderProps
 
-Defined in: src/types/componentProps.ts:88
+Defined in: [src/types/componentProps.ts:88](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L88)
 
 Props for the WidgetHeader component that provides a consistent header for widgets.
 
@@ -16,7 +16,7 @@ Props for the WidgetHeader component that provides a consistent header for widge
 
 > `optional` **className**: `string`
 
-Defined in: src/types/componentProps.ts:92
+Defined in: [src/types/componentProps.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L92)
 
 Optional CSS class name
 
@@ -26,7 +26,7 @@ Optional CSS class name
 
 > `optional` **icon**: `string`
 
-Defined in: src/types/componentProps.ts:96
+Defined in: [src/types/componentProps.ts:96](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L96)
 
 Icon to display in the header
 
@@ -36,7 +36,7 @@ Icon to display in the header
 
 > `optional` **testId**: `string`
 
-Defined in: src/types/componentProps.ts:94
+Defined in: [src/types/componentProps.ts:94](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L94)
 
 Optional test ID for component selection in tests
 
@@ -46,6 +46,6 @@ Optional test ID for component selection in tests
 
 > **title**: `string`
 
-Defined in: src/types/componentProps.ts:90
+Defined in: [src/types/componentProps.ts:90](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L90)
 
 Title of the widget

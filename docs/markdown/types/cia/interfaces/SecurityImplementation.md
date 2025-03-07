@@ -6,7 +6,7 @@
 
 # Interface: SecurityImplementation
 
-Defined in: [src/types/cia.ts:194](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L194)
+Defined in: [src/types/cia.ts:194](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L194)
 
 SecurityImplementation represents implementation details for a specific
 security control or measure
@@ -17,7 +17,7 @@ security control or measure
 
 > **complexity**: `string`
 
-Defined in: [src/types/cia.ts:198](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L198)
+Defined in: [src/types/cia.ts:198](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L198)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [src/types/cia.ts:198](https://github.com/Hack23/cia-compliance-mana
 
 > **steps**: `string`[]
 
-Defined in: [src/types/cia.ts:196](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L196)
+Defined in: [src/types/cia.ts:196](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L196)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [src/types/cia.ts:196](https://github.com/Hack23/cia-compliance-mana
 
 > **team**: `string`[]
 
-Defined in: [src/types/cia.ts:199](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L199)
+Defined in: [src/types/cia.ts:199](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L199)
 
 ***
 
@@ -41,7 +41,7 @@ Defined in: [src/types/cia.ts:199](https://github.com/Hack23/cia-compliance-mana
 
 > **technologies**: `string`[]
 
-Defined in: [src/types/cia.ts:195](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L195)
+Defined in: [src/types/cia.ts:195](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L195)
 
 ***
 
@@ -49,4 +49,4 @@ Defined in: [src/types/cia.ts:195](https://github.com/Hack23/cia-compliance-mana
 
 > **timeframe**: `string`
 
-Defined in: [src/types/cia.ts:197](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L197)
+Defined in: [src/types/cia.ts:197](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L197)
