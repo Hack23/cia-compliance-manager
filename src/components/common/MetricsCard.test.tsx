@@ -31,6 +31,23 @@ describe("MetricsCard Component", () => {
   it("renders with trend indicator", () => {
     render(
       <MetricsCard
+        title="Test Metric"
+        value="100%"
+        trend={{ value: "+10%", direction: "up" }}
+      />
+    );
+
+    expect(
+      screen.getByTestId(COMMON_COMPONENT_TEST_IDS.METRICS_CARD_TREND)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(COMMON_COMPONENT_TEST_IDS.METRICS_CARD_TREND)
+    ).toHaveTextContent("+10%");
+  });
+
+  it("renders with trend indicator", () => {
+    render(
+      <MetricsCard
         title="Growth Metric"
         value="25%"
         trend={{ value: "+5%", direction: "up" }}

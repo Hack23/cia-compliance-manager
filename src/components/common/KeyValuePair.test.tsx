@@ -57,4 +57,17 @@ describe("KeyValuePair Component", () => {
     const kvPair = screen.getByTestId(COMMON_COMPONENT_TEST_IDS.KEY_VALUE_PAIR);
     expect(kvPair.className).toContain("flex-col");
   });
+
+  it("renders with custom style class", () => {
+    // Using className instead of non-existent variant prop
+    render(
+      <KeyValuePair
+        label="Test Label"
+        value="Test Value"
+        className="highlighted-pair"
+      />
+    );
+    const kvPair = screen.getByTestId(COMMON_COMPONENT_TEST_IDS.KEY_VALUE_PAIR);
+    expect(kvPair.className).toContain("highlighted-pair");
+  });
 });

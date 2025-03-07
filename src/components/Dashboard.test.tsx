@@ -27,7 +27,7 @@ vi.mock("../hooks/useCIAOptions", () => ({
 
 describe("Dashboard Component", () => {
   const defaultProps = {
-    children: <div data-testid="test-child">Test Child</div>,
+    children: <div data-testid="test-child">Test Child Content</div>,
     availability: "Moderate",
     integrity: "Moderate",
     confidentiality: "Moderate",

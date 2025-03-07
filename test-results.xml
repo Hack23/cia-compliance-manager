@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.180" tests="0" failures="1">
+  <testsuite name="Root Suite" timestamp="2025-03-07T22:30:33" tests="0" file="cypress/e2e/widgets/cost-estimation-widget.cy.ts" time="0.178" failures="1">
+    <testcase name="Cost Estimation Widget &quot;before all&quot; hook for &quot;provides accurate financial impact analysis of security choices&quot;" time="0.000" classname="&quot;before all&quot; hook for &quot;provides accurate financial impact analysis of security choices&quot;">
+      <failure message="`cy.task(&apos;resetJunitResults&apos;)` failed with the following error:
+
+The task &apos;resetJunitResults&apos; was not handled in the setupNodeEvents method. The following tasks are registered: listJunitReports, cleanJunitReports, listJunitFiles
+
+Fix this in your setupNodeEvents method here:
+/workspaces/cia-compliance-manager/cypress.config.ts
+
+https://on.cypress.io/api/task
+
+Because this error occurred during a `before all` hook we are skipping all of the remaining tests.
+
+Although you have test retries enabled, we do not retry tests when `before all` or `after all` hooks fail" type="CypressError"><![CDATA[CypressError: `cy.task('resetJunitResults')` failed with the following error:
+
+The task 'resetJunitResults' was not handled in the setupNodeEvents method. The following tasks are registered: listJunitReports, cleanJunitReports, listJunitFiles
+
+Fix this in your setupNodeEvents method here:
+/workspaces/cia-compliance-manager/cypress.config.ts
+
+https://on.cypress.io/api/task
+
+Because this error occurred during a `before all` hook we are skipping all of the remaining tests.
+
+Although you have test retries enabled, we do not retry tests when `before all` or `after all` hooks fail
+    at <unknown> (http://localhost:5173/__cypress/runner/cypress_runner.js:135851:72)
+    at tryCatcher (http://localhost:5173/__cypress/runner/cypress_runner.js:1777:23)
+    at Promise._settlePromiseFromHandler (http://localhost:5173/__cypress/runner/cypress_runner.js:1489:31)
+    at Promise._settlePromise (http://localhost:5173/__cypress/runner/cypress_runner.js:1546:18)
+    at Promise._settlePromise0 (http://localhost:5173/__cypress/runner/cypress_runner.js:1591:10)
+    at Promise._settlePromises (http://localhost:5173/__cypress/runner/cypress_runner.js:1667:18)
+    at _drainQueueStep (http://localhost:5173/__cypress/runner/cypress_runner.js:2377:12)
+    at _drainQueue (http://localhost:5173/__cypress/runner/cypress_runner.js:2370:9)
+    at Async._drainQueues (http://localhost:5173/__cypress/runner/cypress_runner.js:2386:5)
+    at Async.drainQueues (http://localhost:5173/__cypress/runner/cypress_runner.js:2256:14)
+From Your Spec Code:
+    at Context.eval (http://localhost:5173/__cypress/tests?p=cypress/support/e2e.ts:26693:8)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>
