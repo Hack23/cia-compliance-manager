@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactDetails
 
-Defined in: [types/cia.ts:62](https://github.com/Hack23/cia-compliance-manager/blob/d7cd209155c580f9196e3c2aba55b12664a7b76b/src/types/cia.ts#L62)
+Defined in: [types/cia.ts:62](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/types/cia.ts#L62)
 
 ## Indexable
 
@@ -18,7 +18,7 @@ Defined in: [types/cia.ts:62](https://github.com/Hack23/cia-compliance-manager/b
 
 > `optional` **competitiveAdvantage**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
 
-Defined in: [types/cia.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/d7cd209155c580f9196e3c2aba55b12664a7b76b/src/types/cia.ts#L68)
+Defined in: [types/cia.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/types/cia.ts#L68)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [types/cia.ts:68](https://github.com/Hack23/cia-compliance-manager/b
 
 > `optional` **financialImpact**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
 
-Defined in: [types/cia.ts:63](https://github.com/Hack23/cia-compliance-manager/blob/d7cd209155c580f9196e3c2aba55b12664a7b76b/src/types/cia.ts#L63)
+Defined in: [types/cia.ts:63](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/types/cia.ts#L63)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [types/cia.ts:63](https://github.com/Hack23/cia-compliance-manager/b
 
 > `optional` **operationalImpact**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
 
-Defined in: [types/cia.ts:64](https://github.com/Hack23/cia-compliance-manager/blob/d7cd209155c580f9196e3c2aba55b12664a7b76b/src/types/cia.ts#L64)
+Defined in: [types/cia.ts:64](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/types/cia.ts#L64)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [types/cia.ts:64](https://github.com/Hack23/cia-compliance-manager/b
 
 > `optional` **regulatoryImpact**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
 
-Defined in: [types/cia.ts:66](https://github.com/Hack23/cia-compliance-manager/blob/d7cd209155c580f9196e3c2aba55b12664a7b76b/src/types/cia.ts#L66)
+Defined in: [types/cia.ts:66](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/types/cia.ts#L66)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [types/cia.ts:66](https://github.com/Hack23/cia-compliance-manager/b
 
 > `optional` **reputationalImpact**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
 
-Defined in: [types/cia.ts:65](https://github.com/Hack23/cia-compliance-manager/blob/d7cd209155c580f9196e3c2aba55b12664a7b76b/src/types/cia.ts#L65)
+Defined in: [types/cia.ts:65](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/types/cia.ts#L65)
 
 ***
 
@@ -58,4 +58,4 @@ Defined in: [types/cia.ts:65](https://github.com/Hack23/cia-compliance-manager/b
 
 > `optional` **strategicImpact**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
 
-Defined in: [types/cia.ts:67](https://github.com/Hack23/cia-compliance-manager/blob/d7cd209155c580f9196e3c2aba55b12664a7b76b/src/types/cia.ts#L67)
+Defined in: [types/cia.ts:67](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/types/cia.ts#L67)

@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpact
 
-Defined in: [types/cia.ts:183](https://github.com/Hack23/cia-compliance-manager/blob/d7cd209155c580f9196e3c2aba55b12664a7b76b/src/types/cia.ts#L183)
+Defined in: [types/cia.ts:183](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/types/cia.ts#L183)
 
 BusinessImpact represents the impact of a security breach or failure
 on various aspects of the business
@@ -17,7 +17,7 @@ on various aspects of the business
 
 > **financial**: `string`
 
-Defined in: [types/cia.ts:184](https://github.com/Hack23/cia-compliance-manager/blob/d7cd209155c580f9196e3c2aba55b12664a7b76b/src/types/cia.ts#L184)
+Defined in: [types/cia.ts:184](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/types/cia.ts#L184)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [types/cia.ts:184](https://github.com/Hack23/cia-compliance-manager/
 
 > **operational**: `string`
 
-Defined in: [types/cia.ts:185](https://github.com/Hack23/cia-compliance-manager/blob/d7cd209155c580f9196e3c2aba55b12664a7b76b/src/types/cia.ts#L185)
+Defined in: [types/cia.ts:185](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/types/cia.ts#L185)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [types/cia.ts:185](https://github.com/Hack23/cia-compliance-manager/
 
 > **regulatory**: `string`
 
-Defined in: [types/cia.ts:187](https://github.com/Hack23/cia-compliance-manager/blob/d7cd209155c580f9196e3c2aba55b12664a7b76b/src/types/cia.ts#L187)
+Defined in: [types/cia.ts:187](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/types/cia.ts#L187)
 
 ***
 
@@ -41,4 +41,4 @@ Defined in: [types/cia.ts:187](https://github.com/Hack23/cia-compliance-manager/
 
 > **reputational**: `string`
 
-Defined in: [types/cia.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/d7cd209155c580f9196e3c2aba55b12664a7b76b/src/types/cia.ts#L186)
+Defined in: [types/cia.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/a8b89d3adc819c90423fa5570b147e5ed837e26a/src/types/cia.ts#L186)
