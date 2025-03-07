@@ -149,4 +149,81 @@ describe("TechnicalDetailsWidget", () => {
       screen.getByTestId("availability-level-indicator")
     ).toHaveTextContent("High");
   });
+
+  it("handles edge case with empty options", () => {
+    // Test with no options provided
+    render(
+      <TechnicalDetailsWidget
+        availabilityLevel="High"
+        integrityLevel="High"
+        confidentialityLevel="High"
+      />
+    );
+
+    // Should display fallback text for technical details
+    expect(screen.getByTestId("technical-description")).toHaveTextContent(
+      "No technical details available."
+    );
+
+    // Should still display implementation steps (generated defaults)
+    const steps = screen.getAllByTestId(/implementation-step-\d+/);
+    expect(steps.length).toBeGreaterThan(0);
+  });
+
+  it("displays recommended technologies appropriately", () => {
+    const { unmount } = render(<TechnicalDetailsWidget {...defaultProps} />);
+
+    // Initial render should show "No technologies" for "None" level
+    const techItems = screen.getAllByTestId(/tech-stack-\d+/);
+    expect(techItems.length).toBeGreaterThan(0);
+    expect(techItems[0]).toHaveTextContent("No technologies");
+
+    // Unmount and render with High level
+    unmount();
+
+    // Create new props with High level and render a fresh component
+    const highProps = {
+      ...defaultProps,
+      availabilityLevel: "High",
+    };
+
+    render(<TechnicalDetailsWidget {...highProps} />);
+
+    // Now it should show High level technologies
+    const highTechItems = screen.getAllByTestId(/tech-stack-\d+/);
+    expect(highTechItems.length).toBeGreaterThan(0);
+
+    // Instead of checking it doesn't contain "No technologies",
+    // check it contains expected High level tech
+    expect(highTechItems[0]).toHaveTextContent("Multi-region deployment");
+  });
+
+  it("handles custom testId prop", () => {
+    const customTestId = "custom-technical-details";
+    render(<TechnicalDetailsWidget {...defaultProps} testId={customTestId} />);
+
+    expect(screen.getByTestId(customTestId)).toBeInTheDocument();
+  });
+
+  it("correctly displays implementation costs when available", () => {
+    vi.mock("../../constants/appConstants", async () => {
+      const actual = await vi.importActual("../../constants/appConstants");
+      return {
+        ...actual,
+        IMPLEMENTATION_COSTS: {
+          None: {
+            developmentEffort: "Test Effort",
+            maintenance: "Test Maintenance",
+            expertise: "Test Expertise",
+          },
+        },
+      };
+    });
+
+    render(<TechnicalDetailsWidget {...defaultProps} />);
+
+    expect(screen.getByTestId("development-effort")).toBeInTheDocument();
+    expect(screen.getByTestId("maintenance-level")).toBeInTheDocument();
+    expect(screen.getByTestId("required-expertise")).toBeInTheDocument();
+  });
 });

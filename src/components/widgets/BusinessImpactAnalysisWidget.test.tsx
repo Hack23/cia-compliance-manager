@@ -1,12 +1,60 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { vi } from "vitest";
-import BusinessImpactAnalysisWidget from "./BusinessImpactAnalysisWidget";
 import {
   BUSINESS_IMPACT_TEST_IDS,
   CIA_TEST_IDS,
 } from "../../constants/testIds";
-import { BusinessKeyBenefits } from "../../types/businessImpact";
+
+// Important: Define the mock BEFORE importing the component
+vi.mock("../../types/businessImpact", () => {
+  return {
+    BusinessKeyBenefits: {
+      HIGH: ["Test benefit 1", "Test benefit 2"],
+      NONE: [],
+      LOW: [],
+      MODERATE: [],
+      VERY_HIGH: [],
+    },
+    BUSINESS_CONSIDERATIONS: {
+      AVAILABILITY: {
+        NONE: [
+          {
+            type: "financial",
+            risk: "Critical Risk",
+            description: "Test critical risk",
+          },
+          {
+            type: "operational",
+            risk: "High Risk",
+            description: "Test high risk",
+          },
+        ],
+        LOW: [],
+        MODERATE: [],
+        HIGH: [],
+        VERY_HIGH: [],
+      },
+      INTEGRITY: {
+        NONE: [],
+        LOW: [],
+        MODERATE: [],
+        HIGH: [],
+        VERY_HIGH: [],
+      },
+      CONFIDENTIALITY: {
+        NONE: [],
+        LOW: [],
+        MODERATE: [],
+        HIGH: [],
+        VERY_HIGH: [],
+      },
+    },
+  };
+});
+
+// Only import the component AFTER the mock is defined
+import BusinessImpactAnalysisWidget from "./BusinessImpactAnalysisWidget";
 
 describe("BusinessImpactAnalysisWidget", () => {
   it("renders correctly with default props", () => {
@@ -107,23 +155,31 @@ describe("BusinessImpactAnalysisWidget", () => {
   });
 
   it("displays correct benefits for security level", () => {
-    // Assuming we have benefits defined for the High level
+    // Testing with a mocked HIGH level that has benefits defined
     render(<BusinessImpactAnalysisWidget securityLevel="High" />);
 
     // Switch to benefits tab
     fireEvent.click(screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.TAB_BENEFITS));
 
-    // If there are benefits for High level, they should be displayed
-    if (BusinessKeyBenefits.HIGH && BusinessKeyBenefits.HIGH.length > 0) {
-      expect(
-        screen.queryByTestId(BUSINESS_IMPACT_TEST_IDS.NO_BENEFITS_MESSAGE)
-      ).not.toBeInTheDocument();
-      expect(screen.getByTestId("benefit-item-0")).toBeInTheDocument();
-    } else {
-      // Otherwise, the no benefits message should be displayed
-      expect(
-        screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.NO_BENEFITS_MESSAGE)
-      ).toBeInTheDocument();
-    }
+    // Should show benefits from our mock
+    expect(
+      screen.queryByTestId(BUSINESS_IMPACT_TEST_IDS.NO_BENEFITS_MESSAGE)
+    ).not.toBeInTheDocument();
+    expect(screen.getByTestId("benefit-item-0")).toBeInTheDocument();
+    expect(screen.getByText("Test benefit 1")).toBeInTheDocument();
+  });
+
+  it("renders risk badges with appropriate colors", () => {
+    render(<BusinessImpactAnalysisWidget availability="None" />);
+
+    // We should see our mocked considerations with risk badges
+    const considerationItems = screen.getAllByTestId(/consideration-item-\d+/);
+    expect(considerationItems.length).toBeGreaterThan(0);
+
+    // Check for risk badges
+    const riskBadges = screen.getAllByTestId(/risk-badge-\d+/);
+    expect(riskBadges.length).toBeGreaterThan(0);
+    expect(riskBadges[0]).toHaveTextContent("Critical Risk");
+    expect(riskBadges[1]).toHaveTextContent("High Risk");
   });
 });

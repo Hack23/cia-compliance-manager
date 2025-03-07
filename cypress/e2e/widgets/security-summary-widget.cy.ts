@@ -150,4 +150,28 @@ describe("Security Summary Widget", () => {
       }
     });
   });
+
+  it("checks security level class and text", () => {
+    cy.get("@securityLevel").then(($el) => {
+      // Check if $el exists before accessing it
+      if ($el) {
+        expect($el.hasClass("text-red-600")).to.be.true;
+        expect($el.text().trim()).to.include("None");
+        expect($el.find("span")).to.have.length(1);
+      }
+    });
+
+    // Or alternatively, use Cypress's built-in assertions that handle undefined elements:
+    cy.get("@securityLevel").should("have.class", "text-red-600");
+    cy.get("@securityLevel").should("include.text", "None");
+    cy.get("@securityLevel").find("span").should("have.length", 1);
+
+    // Or fix the parameter naming in the original code:
+    cy.get("@securityLevel").then(($el) => {
+      // Use the parameter name $el to match what you're referencing
+      expect($el.hasClass("text-red-600")).to.be.true;
+      expect($el.text().trim()).to.include("None");
+      expect($el.find("span")).to.have.length(1);
+    });
+  });
 });

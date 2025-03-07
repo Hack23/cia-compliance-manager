@@ -112,4 +112,86 @@ describe("Selection Component", () => {
       });
     });
   });
+
+  describe("Info and Context Functionality", () => {
+    it("toggles info content when info button is clicked", () => {
+      render(<Selection {...defaultProps} infoContent="Test info content" />);
+
+      // Info content should be hidden initially
+      expect(screen.queryByText("Test info content")).not.toBeInTheDocument();
+
+      // Click the info button
+      const infoButton = screen.getByRole("button", {
+        name: /Show information about Availability/,
+      });
+      fireEvent.click(infoButton);
+
+      // Info content should now be visible
+      expect(screen.getByText("Test info content")).toBeInTheDocument();
+
+      // Click the info button again to hide content
+      fireEvent.click(infoButton);
+
+      // Info content should be hidden again
+      expect(screen.queryByText("Test info content")).not.toBeInTheDocument();
+    });
+
+    it("toggles context info when show/hide context button is clicked", () => {
+      render(
+        <Selection {...defaultProps} contextInfo="Test context information" />
+      );
+
+      // Context button should be visible and context info should be hidden initially
+      const contextButton = screen.getByRole("button", {
+        name: "Show context",
+      });
+      expect(contextButton).toBeInTheDocument();
+      expect(
+        screen.queryByTestId(COMMON_COMPONENT_TEST_IDS.CONTEXT_INFO)
+      ).not.toBeInTheDocument();
+
+      // Click the context button
+      fireEvent.click(contextButton);
+
+      // Context info should now be visible and button text should change
+      expect(
+        screen.getByTestId(COMMON_COMPONENT_TEST_IDS.CONTEXT_INFO)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId(COMMON_COMPONENT_TEST_IDS.CONTEXT_INFO)
+      ).toHaveTextContent("Test context information");
+      expect(
+        screen.getByRole("button", { name: "Hide context" })
+      ).toBeInTheDocument();
+
+      // Click the context button again to hide info
+      fireEvent.click(screen.getByRole("button", { name: "Hide context" }));
+
+      // Context info should be hidden again
+      expect(
+        screen.queryByTestId(COMMON_COMPONENT_TEST_IDS.CONTEXT_INFO)
+      ).not.toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: "Show context" })
+      ).toBeInTheDocument();
+    });
+
+    it("doesn't render info button when infoContent is not provided", () => {
+      render(<Selection {...defaultProps} />);
+
+      // Info button shouldn't be present
+      expect(
+        screen.queryByRole("button", { name: /Show information about/ })
+      ).not.toBeInTheDocument();
+    });
+
+    it("doesn't render context section when contextInfo is not provided", () => {
+      render(<Selection {...defaultProps} />);
+
+      // Context button shouldn't be present
+      expect(
+        screen.queryByRole("button", { name: /context/ })
+      ).not.toBeInTheDocument();
+    });
+  });
 });
