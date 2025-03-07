@@ -309,3 +309,71 @@ export interface TechnicalDetailsWidgetProps {
   /** Optional test ID for component selection in tests */
   testId?: string;
 }
+
+/**
+ * Props for the IntegrityImpactWidget component
+ * @interface IntegrityImpactWidgetProps
+ */
+export interface IntegrityImpactWidgetProps {
+  level?: string;
+  options?: Record<string, CIADetails>;
+  testId?: string;
+}
+
+/**
+ * Props for the ConfidentialityImpactWidget component
+ * @interface ConfidentialityImpactWidgetProps
+ */
+export interface ConfidentialityImpactWidgetProps {
+  level?: string;
+  options?: Record<string, CIADetails>;
+  testId?: string;
+}
+
+/**
+ * Props for the AvailabilityImpactWidget component
+ * @interface AvailabilityImpactWidgetProps
+ */
+export interface AvailabilityImpactWidgetProps {
+  level?: string;
+  options?: Record<string, CIADetails>;
+  testId?: string;
+}
+
+/**
+ * Props for the SecurityResourcesWidget component
+ * @interface SecurityResourcesWidgetProps
+ */
+export interface SecurityResourcesWidgetProps {
+  securityLevel?: string;
+  testId?: string;
+}
+
+/**
+ * Props for the TechnicalDetailsWidget component
+ * @interface TechnicalDetailsWidgetProps
+ */
+export interface TechnicalDetailsWidgetProps {
+  availabilityLevel?: string;
+  integrityLevel?: string;
+  confidentialityLevel?: string;
+  availability?: string; // For backward compatibility
+  integrity?: string; // For backward compatibility
+  confidentiality?: string; // For backward compatibility
+  availabilityOptions?: Record<string, CIADetails>;
+  integrityOptions?: Record<string, CIADetails>;
+  confidentialityOptions?: Record<string, CIADetails>;
+  testId?: string;
+}
+
+/**
+ * Props for the BusinessImpactAnalysisWidget component
+ * @interface BusinessImpactAnalysisWidgetProps
+ */
+export interface BusinessImpactAnalysisWidgetProps {
+  availability?: string;
+  integrity?: string;
+  confidentiality?: string;
+  securityLevel?: string;
+  testId?: string;
+}

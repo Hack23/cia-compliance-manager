@@ -19,7 +19,10 @@ export * from "./componentProps";
 export type {
   WidgetBaseProps,
   SecuritySummaryWidgetProps,
-  CombinedBusinessImpactWidgetProps,
+  IntegrityImpactWidgetProps,
+  ConfidentialityImpactWidgetProps,
+  AvailabilityImpactWidgetProps,
+  SecurityResourcesWidgetProps,
   // Add any other non-conflicting types from widgets.ts here
 } from "./widgets";
 

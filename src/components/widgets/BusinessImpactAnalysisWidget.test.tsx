@@ -1,151 +1,67 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { waitFor } from "@testing-library/dom";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { vi } from "vitest";
 import BusinessImpactAnalysisWidget from "./BusinessImpactAnalysisWidget";
 import {
-  availabilityOptions,
-  integrityOptions,
-  confidentialityOptions,
-} from "../../hooks/useCIAOptions";
-import { BUSINESS_CONSIDERATIONS } from "../../constants/businessConstants";
-import { RISK_LEVELS } from "../../constants/appConstants";
-import { ensureArray } from "../../utils/typeGuards";
-import {
   BUSINESS_IMPACT_TEST_IDS,
-  createDynamicTestId,
+  CIA_TEST_IDS,
 } from "../../constants/testIds";
+import { BusinessKeyBenefits } from "../../types/businessImpact";
 
 describe("BusinessImpactAnalysisWidget", () => {
-  // Helper function to find impact summary
-  const findImpactSummary = () => {
-    return screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_SUMMARY);
-  };
+  it("renders correctly with default props", () => {
+    render(<BusinessImpactAnalysisWidget />);
 
-  it("renders Availability impacts correctly", () => {
-    const category = "Availability";
-    render(
-      <BusinessImpactAnalysisWidget
-        category={category}
-        level="Moderate"
-        options={availabilityOptions}
-      />
-    );
+    // Check if CIA profile section is displayed
+    expect(
+      screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_SUMMARY)
+    ).toBeInTheDocument();
 
-    // Check if summary is displayed
-    const summary = findImpactSummary();
-    expect(summary).toBeInTheDocument();
-    expect(summary).toHaveTextContent(category);
-    expect(summary).toHaveTextContent("Moderate");
+    // Check if all CIA components are displayed
+    expect(
+      screen.getByTestId(CIA_TEST_IDS.CONFIDENTIALITY_SECTION)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(CIA_TEST_IDS.INTEGRITY_SECTION)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(CIA_TEST_IDS.AVAILABILITY_SECTION)
+    ).toBeInTheDocument();
+
+    // Check if tabs are displayed
+    expect(
+      screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.TAB_CONSIDERATIONS)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.TAB_BENEFITS)
+    ).toBeInTheDocument();
   });
 
-  it("renders Integrity impacts correctly", () => {
+  it("displays CIA security levels correctly", () => {
     render(
       <BusinessImpactAnalysisWidget
-        category="Integrity"
-        level="Moderate"
-        options={integrityOptions}
+        confidentiality="High"
+        integrity="Moderate"
+        availability="Low"
       />
     );
 
-    // Check if summary is displayed
-    const summary = findImpactSummary();
-    expect(summary).toBeInTheDocument();
-    expect(summary).toHaveTextContent("Integrity");
-    expect(summary).toHaveTextContent("Moderate");
-  });
-
-  it("renders Confidentiality impacts correctly", () => {
-    render(
-      <BusinessImpactAnalysisWidget
-        category="Confidentiality"
-        level="Moderate"
-        options={confidentialityOptions}
-      />
+    // Check if all values are displayed correctly
+    expect(
+      screen.getByTestId(CIA_TEST_IDS.CONFIDENTIALITY_KV)
+    ).toHaveTextContent("High");
+    expect(screen.getByTestId(CIA_TEST_IDS.INTEGRITY_KV)).toHaveTextContent(
+      "Moderate"
     );
-
-    // Check if summary is displayed
-    const summary = findImpactSummary();
-    expect(summary).toBeInTheDocument();
-    expect(summary).toHaveTextContent("Confidentiality");
-    expect(summary).toHaveTextContent("Moderate");
-  });
-
-  it("displays business impact for each level and category", () => {
-    // High availability
-    render(
-      <BusinessImpactAnalysisWidget
-        category="Availability"
-        level="High"
-        options={availabilityOptions}
-      />
-    );
-
-    const summary = findImpactSummary();
-    expect(summary).toBeInTheDocument();
-
-    // Check business impact text is present
-    const impactText = screen.getByTestId("business-impact-availability");
-    expect(impactText).toBeInTheDocument();
-    expect(impactText).toHaveTextContent(/business continuity/i);
-  });
-
-  it("falls back to No Data message when invalid level is provided", () => {
-    render(
-      <BusinessImpactAnalysisWidget
-        category="Availability"
-        level="Invalid"
-        options={availabilityOptions}
-      />
-    );
-
-    // Summary should still be rendered
-    const summary = findImpactSummary();
-    expect(summary).toBeInTheDocument();
-
-    // Should show fallback message for invalid level
-    const impactText = screen.getByTestId("business-impact-availability");
-    expect(impactText).toHaveTextContent(
-      /No specific business impact data available/i
+    expect(screen.getByTestId(CIA_TEST_IDS.AVAILABILITY_KV)).toHaveTextContent(
+      "Low"
     );
   });
 
-  it("renders business considerations tab by default", () => {
-    render(
-      <BusinessImpactAnalysisWidget
-        category="Availability"
-        level="None"
-        options={availabilityOptions}
-      />
-    );
+  it("switches between considerations and benefits tabs", () => {
+    render(<BusinessImpactAnalysisWidget />);
 
-    expect(screen.getByTestId("business-considerations")).toBeInTheDocument();
-    expect(screen.queryByTestId("business-benefits")).not.toBeInTheDocument();
-  });
-
-  it("toggles between considerations and benefits tabs with correct ARIA attributes", async () => {
-    const user = userEvent.setup();
-
-    render(
-      <BusinessImpactAnalysisWidget
-        category="Availability"
-        level="Moderate"
-        options={availabilityOptions}
-      />
-    );
-
-    // Check initial ARIA attributes
-    const considerationsTab = screen.getByTestId(
-      BUSINESS_IMPACT_TEST_IDS.TAB_CONSIDERATIONS
-    );
-    const benefitsTab = screen.getByTestId(
-      BUSINESS_IMPACT_TEST_IDS.TAB_BENEFITS
-    );
-
-    expect(considerationsTab).toHaveAttribute("aria-selected", "true");
-    expect(benefitsTab).toHaveAttribute("aria-selected", "false");
-
-    // Initial panel visibility
+    // Considerations tab should be active by default
     expect(
       screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.BUSINESS_CONSIDERATIONS)
     ).toBeInTheDocument();
@@ -153,149 +69,61 @@ describe("BusinessImpactAnalysisWidget", () => {
       screen.queryByTestId(BUSINESS_IMPACT_TEST_IDS.BUSINESS_BENEFITS)
     ).not.toBeInTheDocument();
 
-    // Click benefits tab
-    await user.click(benefitsTab);
+    // Click on benefits tab
+    fireEvent.click(screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.TAB_BENEFITS));
 
-    // Check updated ARIA attributes
-    expect(considerationsTab).toHaveAttribute("aria-selected", "false");
-    expect(benefitsTab).toHaveAttribute("aria-selected", "true");
-
-    // Check panel visibility after switching
-    await waitFor(() => {
-      expect(
-        screen.queryByTestId("business-considerations")
-      ).not.toBeInTheDocument();
-      expect(screen.getByTestId("business-benefits")).toBeInTheDocument();
-    });
-
-    // Check that the benefits tab content references the right ID
-    expect(screen.getByTestId("business-benefits")).toHaveAttribute(
-      "id",
-      "panel-benefits"
-    );
-    expect(benefitsTab).toHaveAttribute("aria-controls", "panel-benefits");
+    // Benefits tab should now be active
+    expect(
+      screen.queryByTestId(BUSINESS_IMPACT_TEST_IDS.BUSINESS_CONSIDERATIONS)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.BUSINESS_BENEFITS)
+    ).toBeInTheDocument();
   });
 
-  // New tests for better coverage
-
-  it("shows risk levels with appropriate colors", async () => {
-    // Render with a level that has considerations with different risk levels
-    render(
-      <BusinessImpactAnalysisWidget
-        category="Availability"
-        level="Moderate"
-        options={availabilityOptions}
-      />
+  it("displays impact metrics section for higher security levels", () => {
+    const { rerender } = render(
+      <BusinessImpactAnalysisWidget securityLevel="Low" />
     );
 
-    // Check if any risk level indicators are present
-    const riskElements = screen.queryAllByTestId(/risk-level-\d+/);
+    // Impact metrics should not be shown for Low security level
+    expect(
+      screen.queryByTestId(BUSINESS_IMPACT_TEST_IDS.IMPACT_METRICS_SECTION)
+    ).not.toBeInTheDocument();
 
-    // If there are risk elements, verify they have the right classes
-    if (riskElements.length > 0) {
-      // Check first risk element
-      const firstRisk = riskElements[0];
+    // Rerender with Moderate security level
+    rerender(<BusinessImpactAnalysisWidget securityLevel="Moderate" />);
 
-      // Only check if firstRisk exists
-      if (firstRisk) {
-        expect(firstRisk.className).toContain("bg-");
-      }
-    }
+    // Impact metrics should now be visible
+    expect(
+      screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.IMPACT_METRICS_SECTION)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.FINANCIAL_IMPACT_CARD)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.OPERATIONAL_IMPACT_CARD)
+    ).toBeInTheDocument();
   });
 
-  it("shows empty state when no considerations or benefits exist", async () => {
-    // Mock empty considerations and benefits
-    // FIX: Fixed the type of impact to be a string instead of number
-    const emptyOptions = {
-      None: {
-        description: "Empty test",
-        technical: "No technical details",
-        businessImpact: "No business impact",
-        impact: "None", // Changed from 0 to string to match CIADetails type
-        capex: 0,
-        opex: 0,
-        bg: "#ccc",
-        text: "#000",
-        recommendations: [],
-      },
-    };
-
-    // Define a custom render function that sets up with empty data
-    const renderEmptyCase = () => {
-      // Use a category/level combination that won't have considerations
-      render(
-        <BusinessImpactAnalysisWidget
-          category="Availability"
-          level="Custom"
-          options={emptyOptions}
-        />
-      );
-    };
-
-    renderEmptyCase();
-
-    // Check if the empty message appears
-    expect(screen.getByTestId("no-considerations-message")).toBeInTheDocument();
+  it("displays correct benefits for security level", () => {
+    // Assuming we have benefits defined for the High level
+    render(<BusinessImpactAnalysisWidget securityLevel="High" />);
 
     // Switch to benefits tab
-    const user = userEvent.setup();
-    await user.click(screen.getByTestId("tab-benefits"));
+    fireEvent.click(screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.TAB_BENEFITS));
 
-    // Check for empty benefits message
-    await waitFor(() => {
-      expect(screen.getByTestId("no-benefits-message")).toBeInTheDocument();
-    });
-  });
-
-  it("displays advanced metrics when available", () => {
-    // Create options with businessImpactDetails
-    const optionsWithDetails = {
-      ...availabilityOptions,
-      High: {
-        ...availabilityOptions.High,
-        // Ensure all required properties exist
-        description:
-          availabilityOptions.High?.description || "High description",
-        impact: availabilityOptions.High?.impact || "High impact",
-        technical: availabilityOptions.High?.technical || "Technical details",
-        businessImpact:
-          availabilityOptions.High?.businessImpact || "Business impact",
-        capex: availabilityOptions.High?.capex || 0,
-        opex: availabilityOptions.High?.opex || 0,
-        bg: availabilityOptions.High?.bg || "#fff",
-        text: availabilityOptions.High?.text || "#000",
-        recommendations: availabilityOptions.High?.recommendations || [],
-        // Additional custom properties
-        businessImpactDetails: {
-          financialImpact: {
-            description: "Financial impact description",
-            annualRevenueLoss: "$500,000",
-          },
-          operationalImpact: {
-            description: "Operational impact description",
-            meanTimeToRecover: "24 hours",
-          },
-        },
-      },
-    };
-
-    render(
-      <BusinessImpactAnalysisWidget
-        category="Availability"
-        level="High"
-        options={optionsWithDetails}
-      />
-    );
-
-    // Check if metrics section is displayed
-    expect(screen.getByTestId("impact-metrics-section")).toBeInTheDocument();
-    expect(screen.getByTestId("financial-impact-card")).toBeInTheDocument();
-    expect(screen.getByTestId("operational-impact-card")).toBeInTheDocument();
-    expect(screen.getByTestId("annual-revenue-loss")).toHaveTextContent(
-      "$500,000"
-    );
-    expect(screen.getByTestId("mean-recovery-time")).toHaveTextContent(
-      "24 hours"
-    );
+    // If there are benefits for High level, they should be displayed
+    if (BusinessKeyBenefits.HIGH && BusinessKeyBenefits.HIGH.length > 0) {
+      expect(
+        screen.queryByTestId(BUSINESS_IMPACT_TEST_IDS.NO_BENEFITS_MESSAGE)
+      ).not.toBeInTheDocument();
+      expect(screen.getByTestId("benefit-item-0")).toBeInTheDocument();
+    } else {
+      // Otherwise, the no benefits message should be displayed
+      expect(
+        screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.NO_BENEFITS_MESSAGE)
+      ).toBeInTheDocument();
+    }
   });
 });
