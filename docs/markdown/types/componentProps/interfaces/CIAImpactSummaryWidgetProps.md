@@ -6,7 +6,7 @@
 
 # Interface: CIAImpactSummaryWidgetProps
 
-Defined in: src/types/componentProps.ts:208
+Defined in: [src/types/componentProps.ts:208](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L208)
 
 Props for the CIAImpactSummaryWidget component that summarizes CIA impacts.
 
@@ -16,7 +16,7 @@ Props for the CIAImpactSummaryWidget component that summarizes CIA impacts.
 
 > **availability**: `string`
 
-Defined in: src/types/componentProps.ts:210
+Defined in: [src/types/componentProps.ts:210](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L210)
 
 Availability security level
 
@@ -26,7 +26,7 @@ Availability security level
 
 > `optional` **className**: `string`
 
-Defined in: src/types/componentProps.ts:216
+Defined in: [src/types/componentProps.ts:216](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L216)
 
 Optional CSS class name
 
@@ -36,7 +36,7 @@ Optional CSS class name
 
 > **confidentiality**: `string`
 
-Defined in: src/types/componentProps.ts:214
+Defined in: [src/types/componentProps.ts:214](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L214)
 
 Confidentiality security level
 
@@ -46,7 +46,7 @@ Confidentiality security level
 
 > **integrity**: `string`
 
-Defined in: src/types/componentProps.ts:212
+Defined in: [src/types/componentProps.ts:212](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L212)
 
 Integrity security level
 
@@ -56,6 +56,6 @@ Integrity security level
 
 > `optional` **testId**: `string`
 
-Defined in: src/types/componentProps.ts:218
+Defined in: [src/types/componentProps.ts:218](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L218)
 
 Optional test ID for component selection in tests

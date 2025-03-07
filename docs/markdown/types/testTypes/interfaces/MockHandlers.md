@@ -6,7 +6,7 @@
 
 # Interface: MockHandlers
 
-Defined in: [src/types/testTypes.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/testTypes.ts#L17)
+Defined in: [src/types/testTypes.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L17)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/types/testTypes.ts:17](https://github.com/Hack23/cia-compliance
 
 > **setAvailability**: (`level`) => `void`
 
-Defined in: [src/types/testTypes.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/testTypes.ts#L18)
+Defined in: [src/types/testTypes.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L18)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [src/types/testTypes.ts:18](https://github.com/Hack23/cia-compliance
 
 > **setConfidentiality**: (`level`) => `void`
 
-Defined in: [src/types/testTypes.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/testTypes.ts#L20)
+Defined in: [src/types/testTypes.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L20)
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [src/types/testTypes.ts:20](https://github.com/Hack23/cia-compliance
 
 > **setIntegrity**: (`level`) => `void`
 
-Defined in: [src/types/testTypes.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/testTypes.ts#L19)
+Defined in: [src/types/testTypes.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L19)
 
 #### Parameters
 

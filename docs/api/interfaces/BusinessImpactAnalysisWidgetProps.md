@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactAnalysisWidgetProps
 
-Defined in: src/types/componentProps.ts:192
+Defined in: [src/types/componentProps.ts:192](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L192)
 
 Props for the BusinessImpactAnalysisWidget component that displays business impact analysis.
 
@@ -16,7 +16,7 @@ Props for the BusinessImpactAnalysisWidget component that displays business impa
 
 > **category**: `"Availability"` \| `"Integrity"` \| `"Confidentiality"`
 
-Defined in: src/types/componentProps.ts:194
+Defined in: [src/types/componentProps.ts:194](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L194)
 
 Category (Availability, Integrity, Confidentiality)
 
@@ -26,7 +26,7 @@ Category (Availability, Integrity, Confidentiality)
 
 > **level**: `string`
 
-Defined in: src/types/componentProps.ts:196
+Defined in: [src/types/componentProps.ts:196](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L196)
 
 Security level
 
@@ -36,7 +36,7 @@ Security level
 
 > `optional` **options**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
 
-Defined in: src/types/componentProps.ts:198
+Defined in: [src/types/componentProps.ts:198](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L198)
 
 Security level options
 
@@ -46,6 +46,6 @@ Security level options
 
 > `optional` **testId**: `string`
 
-Defined in: src/types/componentProps.ts:200
+Defined in: [src/types/componentProps.ts:200](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L200)
 
 Optional test ID for component selection in tests

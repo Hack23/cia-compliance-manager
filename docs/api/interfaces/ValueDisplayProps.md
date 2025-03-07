@@ -6,7 +6,7 @@
 
 # Interface: ValueDisplayProps
 
-Defined in: src/types/componentProps.ts:52
+Defined in: [src/types/componentProps.ts:52](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L52)
 
 Props for the ValueDisplay component that formats and displays values.
 
@@ -16,7 +16,7 @@ Props for the ValueDisplay component that formats and displays values.
 
 > `optional` **className**: `string`
 
-Defined in: src/types/componentProps.ts:60
+Defined in: [src/types/componentProps.ts:60](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L60)
 
 Optional CSS class name
 
@@ -26,7 +26,7 @@ Optional CSS class name
 
 > `optional` **prefix**: `string`
 
-Defined in: src/types/componentProps.ts:56
+Defined in: [src/types/componentProps.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L56)
 
 Optional prefix (e.g. "$")
 
@@ -36,7 +36,7 @@ Optional prefix (e.g. "$")
 
 > `optional` **suffix**: `string`
 
-Defined in: src/types/componentProps.ts:58
+Defined in: [src/types/componentProps.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L58)
 
 Optional suffix (e.g. "%")
 
@@ -46,7 +46,7 @@ Optional suffix (e.g. "%")
 
 > `optional` **testId**: `string`
 
-Defined in: src/types/componentProps.ts:62
+Defined in: [src/types/componentProps.ts:62](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L62)
 
 Optional test ID for component selection in tests
 
@@ -56,6 +56,6 @@ Optional test ID for component selection in tests
 
 > **value**: `string` \| `number`
 
-Defined in: src/types/componentProps.ts:54
+Defined in: [src/types/componentProps.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L54)
 
 Value to display

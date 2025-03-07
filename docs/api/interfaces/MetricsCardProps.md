@@ -6,7 +6,7 @@
 
 # Interface: MetricsCardProps
 
-Defined in: src/types/componentProps.ts:34
+Defined in: [src/types/componentProps.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L34)
 
 Props for the MetricsCard component that displays numerical metrics.
 
@@ -16,7 +16,7 @@ Props for the MetricsCard component that displays numerical metrics.
 
 > `optional` **className**: `string`
 
-Defined in: src/types/componentProps.ts:42
+Defined in: [src/types/componentProps.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L42)
 
 Optional CSS class name
 
@@ -26,7 +26,7 @@ Optional CSS class name
 
 > `optional` **testId**: `string`
 
-Defined in: src/types/componentProps.ts:44
+Defined in: [src/types/componentProps.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L44)
 
 Optional test ID for component selection in tests
 
@@ -36,7 +36,7 @@ Optional test ID for component selection in tests
 
 > **title**: `string`
 
-Defined in: src/types/componentProps.ts:36
+Defined in: [src/types/componentProps.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L36)
 
 Title of the metrics card
 
@@ -46,7 +46,7 @@ Title of the metrics card
 
 > `optional` **trend**: `"up"` \| `"down"` \| `"neutral"`
 
-Defined in: src/types/componentProps.ts:40
+Defined in: [src/types/componentProps.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L40)
 
 Optional trend indicator (up/down)
 
@@ -56,6 +56,6 @@ Optional trend indicator (up/down)
 
 > **value**: `ReactNode`
 
-Defined in: src/types/componentProps.ts:38
+Defined in: [src/types/componentProps.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L38)
 
 Main value to display

@@ -6,7 +6,7 @@
 
 # Interface: TechnicalDetailsWidgetProps
 
-Defined in: src/types/componentProps.ts:294
+Defined in: [src/types/componentProps.ts:294](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L294)
 
 Props for the TechnicalDetailsWidget component that displays technical implementation details.
 
@@ -16,7 +16,7 @@ Props for the TechnicalDetailsWidget component that displays technical implement
 
 > `optional` **availability**: `string`
 
-Defined in: src/types/componentProps.ts:296
+Defined in: [src/types/componentProps.ts:296](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L296)
 
 Availability security level
 
@@ -26,7 +26,7 @@ Availability security level
 
 > `optional` **availabilityOptions**: `Record`\<`string`, [`CIADetails`](../../cia/interfaces/CIADetails.md)\>
 
-Defined in: src/types/componentProps.ts:302
+Defined in: [src/types/componentProps.ts:302](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L302)
 
 Availability options
 
@@ -36,7 +36,7 @@ Availability options
 
 > `optional` **className**: `string`
 
-Defined in: src/types/componentProps.ts:308
+Defined in: [src/types/componentProps.ts:308](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L308)
 
 Optional CSS class name
 
@@ -46,7 +46,7 @@ Optional CSS class name
 
 > `optional` **confidentiality**: `string`
 
-Defined in: src/types/componentProps.ts:300
+Defined in: [src/types/componentProps.ts:300](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L300)
 
 Confidentiality security level
 
@@ -56,7 +56,7 @@ Confidentiality security level
 
 > `optional` **confidentialityOptions**: `Record`\<`string`, [`CIADetails`](../../cia/interfaces/CIADetails.md)\>
 
-Defined in: src/types/componentProps.ts:306
+Defined in: [src/types/componentProps.ts:306](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L306)
 
 Confidentiality options
 
@@ -66,7 +66,7 @@ Confidentiality options
 
 > `optional` **integrity**: `string`
 
-Defined in: src/types/componentProps.ts:298
+Defined in: [src/types/componentProps.ts:298](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L298)
 
 Integrity security level
 
@@ -76,7 +76,7 @@ Integrity security level
 
 > `optional` **integrityOptions**: `Record`\<`string`, [`CIADetails`](../../cia/interfaces/CIADetails.md)\>
 
-Defined in: src/types/componentProps.ts:304
+Defined in: [src/types/componentProps.ts:304](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L304)
 
 Integrity options
 
@@ -86,6 +86,6 @@ Integrity options
 
 > `optional` **testId**: `string`
 
-Defined in: src/types/componentProps.ts:310
+Defined in: [src/types/componentProps.ts:310](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L310)
 
 Optional test ID for component selection in tests

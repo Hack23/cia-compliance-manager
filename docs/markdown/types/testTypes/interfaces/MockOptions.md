@@ -6,7 +6,7 @@
 
 # Interface: MockOptions
 
-Defined in: [src/types/testTypes.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/testTypes.ts#L5)
+Defined in: [src/types/testTypes.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L5)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/types/testTypes.ts:5](https://github.com/Hack23/cia-compliance-
 
 > `optional` **bg**: `string`
 
-Defined in: [src/types/testTypes.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/testTypes.ts#L11)
+Defined in: [src/types/testTypes.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L11)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/types/testTypes.ts:11](https://github.com/Hack23/cia-compliance
 
 > **capex**: `number`
 
-Defined in: [src/types/testTypes.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/testTypes.ts#L9)
+Defined in: [src/types/testTypes.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L9)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/types/testTypes.ts:9](https://github.com/Hack23/cia-compliance-
 
 > **description**: `string`
 
-Defined in: [src/types/testTypes.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/testTypes.ts#L6)
+Defined in: [src/types/testTypes.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L6)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/types/testTypes.ts:6](https://github.com/Hack23/cia-compliance-
 
 > `optional` **impact**: `string`
 
-Defined in: [src/types/testTypes.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/testTypes.ts#L8)
+Defined in: [src/types/testTypes.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L8)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/types/testTypes.ts:8](https://github.com/Hack23/cia-compliance-
 
 > **opex**: `number`
 
-Defined in: [src/types/testTypes.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/testTypes.ts#L10)
+Defined in: [src/types/testTypes.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L10)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [src/types/testTypes.ts:10](https://github.com/Hack23/cia-compliance
 
 > `optional` **recommendations**: `string`[]
 
-Defined in: [src/types/testTypes.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/testTypes.ts#L13)
+Defined in: [src/types/testTypes.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L13)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [src/types/testTypes.ts:13](https://github.com/Hack23/cia-compliance
 
 > **technical**: `string`
 
-Defined in: [src/types/testTypes.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/testTypes.ts#L7)
+Defined in: [src/types/testTypes.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L7)
 
 ***
 
@@ -70,4 +70,4 @@ Defined in: [src/types/testTypes.ts:7](https://github.com/Hack23/cia-compliance-
 
 > `optional` **text**: `string`
 
-Defined in: [src/types/testTypes.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/testTypes.ts#L12)
+Defined in: [src/types/testTypes.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L12)
