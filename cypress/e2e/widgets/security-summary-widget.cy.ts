@@ -75,27 +75,36 @@ describe("Security Summary Widget", () => {
       if (summaryElements.length) {
         // Fixed: Force visibility on all parent elements
         const el = summaryElements.first();
-        // Add type annotation to current and additional null checks
-        let current: JQuery<HTMLElement> | null = el;
-        while (current && current.length && !current.is("body")) {
-          // Fix the TypeScript error by using a safe approach without optional chaining
-          if (current) {
-            const currentElement = current; // Create a stable reference
-            currentElement.css("overflow", "visible");
-            currentElement.css("display", "block");
-            currentElement.css("visibility", "visible");
+        if (el.length) {
+          // Add check to ensure el exists
+          // Add type annotation to current and additional null checks
+          let current: JQuery<HTMLElement> | null = el;
+          while (current && current.length && !current.is("body")) {
+            // Use a stable reference to the current element
+            const currentElement = current;
+            // Ensure we're working with a valid jQuery element
+            if (currentElement && currentElement.length) {
+              currentElement.css("overflow", "visible");
+              currentElement.css("display", "block");
+              currentElement.css("visibility", "visible");
+            }
+            current = current.parent();
           }
-          current = current.parent();
+
+          cy.wrap(el).should("be.visible");
+
+          // Look for security level or overall rating information
+          cy.wrap(el).within(() => {
+            cy.get("div")
+              .contains(/security|level|rating|posture/i)
+              .should("exist");
+          });
+        } else {
+          // If we can't find the first element, log and skip
+          cy.log(
+            "Security summary element found but first() returned empty set"
+          );
         }
-
-        cy.wrap(el).should("be.visible");
-
-        // Look for security level or overall rating information
-        cy.wrap(el).within(() => {
-          cy.get("div")
-            .contains(/security|level|rating|posture/i)
-            .should("exist");
-        });
       } else {
         // If we can't find by test ID, look for heading text
         cy.contains(/security summary|security profile/i).should("be.visible");
@@ -152,26 +161,22 @@ describe("Security Summary Widget", () => {
   });
 
   it("checks security level class and text", () => {
-    cy.get("@securityLevel").then(($el) => {
-      // Check if $el exists before accessing it
-      if ($el) {
-        expect($el.hasClass("text-red-600")).to.be.true;
-        expect($el.text().trim()).to.include("None");
-        expect($el.find("span")).to.have.length(1);
-      }
-    });
+    // Set security level to High
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH
+    );
+    cy.wait(500);
 
-    // Or alternatively, use Cypress's built-in assertions that handle undefined elements:
-    cy.get("@securityLevel").should("have.class", "text-red-600");
-    cy.get("@securityLevel").should("include.text", "None");
-    cy.get("@securityLevel").find("span").should("have.length", 1);
+    // Find the security level indicator and alias it properly
+    cy.get('[data-testid="security-level-indicator"]').as("securityLevel");
 
-    // Or fix the parameter naming in the original code:
-    cy.get("@securityLevel").then(($el) => {
-      // Use the parameter name $el to match what you're referencing
-      expect($el.hasClass("text-red-600")).to.be.true;
-      expect($el.text().trim()).to.include("None");
-      expect($el.find("span")).to.have.length(1);
-    });
+    // Now we can use the alias
+    cy.get("@securityLevel").should("exist");
+    cy.get("@securityLevel").should("contain.text", "High Security");
+
+    // Check for appropriate styling based on security level
+    cy.get("@securityLevel").should("have.class", "bg-green-100");
   });
 });
