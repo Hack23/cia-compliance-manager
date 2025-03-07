@@ -48,6 +48,34 @@ export {
 export const getTestSelector = (testId: string): string =>
   `[data-testid="${testId}"]`;
 
+// Add a new helper for flexible test ID matching
+export function getFlexibleTestSelector(testIds: string[]): string {
+  return testIds.map((id) => `[data-testid="${id}"]`).join(", ");
+}
+
+// Add common aliases for test IDs that might have changed
+export const FLEXIBLE_TEST_IDS = {
+  BUSINESS_IMPACT: [
+    BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_SUMMARY,
+    BUSINESS_IMPACT_TEST_IDS.COMBINED_BUSINESS_IMPACT_WIDGET,
+    "business-impact-widget",
+    "impact-analysis-widget",
+  ],
+  COMPLIANCE_STATUS: [
+    FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_WIDGET,
+    FRAMEWORK_TEST_IDS.COMPLIANCE_FRAMEWORKS_CONTAINER,
+    "compliance-widget",
+    "framework-compliance-widget",
+  ],
+  COST_ESTIMATION: [
+    COST_TEST_IDS.COST_CONTAINER,
+    COST_TEST_IDS.COST_ESTIMATION_CONTENT,
+    "cost-widget",
+    "cost-estimation-widget",
+  ],
+  // ... add more as needed
+};
+
 // Generate selector functions for common test ID patterns
 export const SELECTORS = {
   WIDGETS: {
