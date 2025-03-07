@@ -37,7 +37,10 @@ const CIAClassificationApp: React.FC = () => {
   );
 
   // Dark mode state
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(
+    window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
 
   useEffect(() => {
     const testEventHandler = (e: Event) => {
@@ -129,7 +132,20 @@ const CIAClassificationApp: React.FC = () => {
   }, [availability, integrity, confidentiality]);
 
   // Toggle dark mode
-  const toggleDarkMode = () => setDarkMode(!darkMode);
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => {
+      const newMode = !prev;
+      // Apply dark mode class to HTML element (more standard approach)
+      if (newMode) {
+        document.documentElement.classList.add("dark");
+        document.getElementById("root")?.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+        document.getElementById("root")?.classList.remove("dark");
+      }
+      return newMode;
+    });
+  };
 
   // Determine if we're dealing with a small solution for UI adaptation
   const isSmallSolution = totalCapex <= 60;
