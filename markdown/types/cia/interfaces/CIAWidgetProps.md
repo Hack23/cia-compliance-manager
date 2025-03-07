@@ -6,7 +6,7 @@
 
 # Interface: CIAWidgetProps
 
-Defined in: [src/types/cia.ts:139](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L139)
+Defined in: [src/types/cia.ts:139](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L139)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/types/cia.ts:139](https://github.com/Hack23/cia-compliance-mana
 
 > **children**: `ReactNode`
 
-Defined in: [src/types/cia.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L142)
+Defined in: [src/types/cia.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L142)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/types/cia.ts:142](https://github.com/Hack23/cia-compliance-mana
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/cia.ts:141](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L141)
+Defined in: [src/types/cia.ts:141](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L141)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [src/types/cia.ts:141](https://github.com/Hack23/cia-compliance-mana
 
 > **title**: `string`
 
-Defined in: [src/types/cia.ts:140](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L140)
+Defined in: [src/types/cia.ts:140](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L140)

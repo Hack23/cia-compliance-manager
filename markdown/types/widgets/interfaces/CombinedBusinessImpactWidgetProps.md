@@ -6,7 +6,7 @@
 
 # Interface: CombinedBusinessImpactWidgetProps
 
-Defined in: [src/types/widgets.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/widgets.ts#L38)
+Defined in: [src/types/widgets.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/widgets.ts#L38)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [src/types/widgets.ts:38](https://github.com/Hack23/cia-compliance-m
 
 > **availability**: `string`
 
-Defined in: [src/types/widgets.ts:39](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/widgets.ts#L39)
+Defined in: [src/types/widgets.ts:39](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/widgets.ts#L39)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [src/types/widgets.ts:39](https://github.com/Hack23/cia-compliance-m
 
 > **availabilityOptions**: `Record`\<`string`, `any`\>
 
-Defined in: [src/types/widgets.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/widgets.ts#L42)
+Defined in: [src/types/widgets.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/widgets.ts#L42)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [src/types/widgets.ts:42](https://github.com/Hack23/cia-compliance-m
 
 > **confidentiality**: `string`
 
-Defined in: [src/types/widgets.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/widgets.ts#L41)
+Defined in: [src/types/widgets.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/widgets.ts#L41)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [src/types/widgets.ts:41](https://github.com/Hack23/cia-compliance-m
 
 > **confidentialityOptions**: `Record`\<`string`, `any`\>
 
-Defined in: [src/types/widgets.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/widgets.ts#L44)
+Defined in: [src/types/widgets.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/widgets.ts#L44)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [src/types/widgets.ts:44](https://github.com/Hack23/cia-compliance-m
 
 > **integrity**: `string`
 
-Defined in: [src/types/widgets.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/widgets.ts#L40)
+Defined in: [src/types/widgets.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/widgets.ts#L40)
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [src/types/widgets.ts:40](https://github.com/Hack23/cia-compliance-m
 
 > **integrityOptions**: `Record`\<`string`, `any`\>
 
-Defined in: [src/types/widgets.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/widgets.ts#L43)
+Defined in: [src/types/widgets.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/widgets.ts#L43)
 
 ***
 
@@ -66,7 +66,7 @@ Defined in: [src/types/widgets.ts:43](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.ts:3](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/widgets.ts#L3)
+Defined in: [src/types/widgets.ts:3](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/widgets.ts#L3)
 
 #### Inherited from
 

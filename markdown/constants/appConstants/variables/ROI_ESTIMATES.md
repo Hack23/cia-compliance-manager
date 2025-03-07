@@ -8,7 +8,7 @@
 
 > `const` **ROI\_ESTIMATES**: `object`
 
-Defined in: [src/constants/appConstants.ts:268](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/constants/appConstants.ts#L268)
+Defined in: [src/constants/appConstants.ts:268](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/constants/appConstants.ts#L268)
 
 ## Type declaration
 

@@ -6,7 +6,7 @@
 
 # Interface: SecurityLevelOptions
 
-Defined in: [types/cia.ts:173](https://github.com/Hack23/cia-compliance-manager/blob/8fd9c10973b52d0d78d7f90b0376987bfdcead6f/src/types/cia.ts#L173)
+Defined in: [types/cia.ts:173](https://github.com/Hack23/cia-compliance-manager/blob/95d8c9dc6dfe5ca856f66eeb46aa099c5e9c0cb7/src/types/cia.ts#L173)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/cia.ts:173](https://github.com/Hack23/cia-compliance-manager/
 
 > **availabilityOptions**: [`CIAOptions`](CIAOptions.md)
 
-Defined in: [types/cia.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/8fd9c10973b52d0d78d7f90b0376987bfdcead6f/src/types/cia.ts#L174)
+Defined in: [types/cia.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/95d8c9dc6dfe5ca856f66eeb46aa099c5e9c0cb7/src/types/cia.ts#L174)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types/cia.ts:174](https://github.com/Hack23/cia-compliance-manager/
 
 > **confidentialityOptions**: [`CIAOptions`](CIAOptions.md)
 
-Defined in: [types/cia.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/8fd9c10973b52d0d78d7f90b0376987bfdcead6f/src/types/cia.ts#L176)
+Defined in: [types/cia.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/95d8c9dc6dfe5ca856f66eeb46aa099c5e9c0cb7/src/types/cia.ts#L176)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [types/cia.ts:176](https://github.com/Hack23/cia-compliance-manager/
 
 > **integrityOptions**: [`CIAOptions`](CIAOptions.md)
 
-Defined in: [types/cia.ts:175](https://github.com/Hack23/cia-compliance-manager/blob/8fd9c10973b52d0d78d7f90b0376987bfdcead6f/src/types/cia.ts#L175)
+Defined in: [types/cia.ts:175](https://github.com/Hack23/cia-compliance-manager/blob/95d8c9dc6dfe5ca856f66eeb46aa099c5e9c0cb7/src/types/cia.ts#L175)

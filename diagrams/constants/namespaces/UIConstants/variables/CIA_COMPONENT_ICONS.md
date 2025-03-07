@@ -8,7 +8,7 @@
 
 > `const` **CIA\_COMPONENT\_ICONS**: `object`
 
-Defined in: [constants/uiConstants.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/8fd9c10973b52d0d78d7f90b0376987bfdcead6f/src/constants/uiConstants.ts#L33)
+Defined in: [constants/uiConstants.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/95d8c9dc6dfe5ca856f66eeb46aa099c5e9c0cb7/src/constants/uiConstants.ts#L33)
 
 ## Type declaration
 

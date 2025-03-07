@@ -8,7 +8,7 @@
 
 > `const` **UI\_TEXT**: `object`
 
-Defined in: [constants/appConstants.ts:301](https://github.com/Hack23/cia-compliance-manager/blob/8fd9c10973b52d0d78d7f90b0376987bfdcead6f/src/constants/appConstants.ts#L301)
+Defined in: [constants/appConstants.ts:301](https://github.com/Hack23/cia-compliance-manager/blob/95d8c9dc6dfe5ca856f66eeb46aa099c5e9c0cb7/src/constants/appConstants.ts#L301)
 
 ## Type declaration
 

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CIA Compliance Manager Documentation</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eaeaea;
+      }
+      h1 {
+        margin-top: 0;
+        color: #0366d6;
+      }
+      h2 {
+        color: #0366d6;
+        margin-top: 2rem;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1rem;
+      }
+      .card {
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 1.5rem;
+        background: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      .card h3 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        color: #0366d6;
+      }
+      .card p {
+        margin-bottom: 1rem;
+        color: #586069;
+      }
+      .card a {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        background: #0366d6;
+        color: white;
+        text-decoration: none;
+      }
+      .card a:hover {
+        background: #024ea4;
+      }
+      footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid #eaeaea;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #586069;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>CIA Compliance Manager Documentation</h1>
+      <p>
+        Comprehensive documentation for the CIA (Confidentiality, Integrity,
+        Availability) Compliance Manager
+      </p>
+    </header>
+
+    <div class="cards">
+      <div class="card" id="api-documentation">
+        <h3>API Documentation</h3>
+        <p>
+          Detailed API reference for all components, types, and functions used
+          in the application.
+        </p>
+        <a href="https://hack23.github.io/cia-compliance-manager/api"
+          >View API Docs</a
+        >
+      </div>
+
+      <div class="card" id="diagrams">
+        <h3>Diagrams</h3>
+        <p>
+          UML and Mermaid diagrams showing the relationships between core types
+          and components.
+        </p>
+        <a href="https://hack23.github.io/cia-compliance-manager/diagrams"
+          >View Diagrams</a
+        >
+      </div>
+
+      <div class="card" id="architecture">
+        <h3>Architecture</h3>
+        <p>
+          System architecture diagrams showing module dependencies and component
+          relationships.
+        </p>
+        <a href="https://hack23.github.io/cia-compliance-manager/architecture"
+          >View Architecture</a
+        >
+      </div>
+
+      <div class="card" id="code-coverage">
+        <h3>Code Coverage</h3>
+        <p>
+          Test coverage reports showing how much of the codebase is covered by
+          tests.
+        </p>
+        <a href="https://hack23.github.io/cia-compliance-manager/coverage"
+          >View Coverage Report</a
+        >
+      </div>
+
+      <div class="card" id="dependencies">
+        <h3>Dependencies</h3>
+        <p>
+          Visual representation of module dependencies throughout the codebase.
+        </p>
+        <a
+          href="https://hack23.github.io/cia-compliance-manager/dependencies/module-dependencies.svg"
+          >View Dependencies</a
+        >
+      </div>
+
+      <div class="card" id="markdown">
+        <h3>Markdown Docs</h3>
+        <p>
+          API documentation in Markdown format for easy integration with other
+          tools.
+        </p>
+        <a href="https://hack23.github.io/cia-compliance-manager/markdown"
+          >View Markdown</a
+        >
+      </div>
+
+      <div class="card" id="project-architecture">
+        <h3>Project Architecture</h3>
+        <p>C4 model diagrams and other architectural documentation.</p>
+        <a
+          href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md"
+          >View Current Architecture</a
+        >
+        <br /><br />
+        <a
+          href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md"
+          >View Future Architecture Plans</a
+        >
+      </div>
+
+      <div class="card" id="security">
+        <h3>Security Documentation</h3>
+        <p>
+          Details on security features, architecture, and certifications
+          implemented in the application.
+        </p>
+        <a href="https://hack23.github.io/cia-compliance-manager/security"
+          >View Security Docs</a
+        >
+      </div>
+    </div>
+
+    <h2>Documentation Overview</h2>
+    <p>
+      This documentation is automatically generated from the source code and
+      documentation files in the repository. It includes API reference, type
+      definitions, architecture diagrams, and more to help you understand the
+      CIA Compliance Manager codebase.
+    </p>
+
+    <h2 id="architecture-overview">Architecture Overview</h2>
+    <p>
+      The CIA Compliance Manager follows a React-based architecture designed for
+      extensibility and maintainability. The current implementation focuses on
+      core security assessment capabilities with a path for future enhancements.
+      For complete details on the current architecture, see the
+      <a
+        href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md"
+        >Architecture Documentation</a
+      >.
+    </p>
+
+    <h2 id="future-plans">Future Development</h2>
+    <p>
+      The project has well-defined plans for future architectural enhancements,
+      detailed in the
+      <a
+        href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md"
+        >Future Architecture</a
+      >
+      documentation. These plans represent the project roadmap but have not yet
+      been implemented in the current codebase.
+    </p>
+
+    <footer>
+      <p>
+        Generated on
+        <script>
+          document.write(new Date().toDateString());
+        </script>
+        |
+        <a href="https://github.com/Hack23/cia-compliance-manager"
+          >GitHub Repository</a
+        >
+      </p>
+    </footer>
+  </body>
+</html>

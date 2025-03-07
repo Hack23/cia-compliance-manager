@@ -6,7 +6,7 @@
 
 # Interface: CostEstimate
 
-Defined in: [src/types/cia.ts:241](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L241)
+Defined in: [src/types/cia.ts:241](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L241)
 
 CostEstimate represents the estimated cost of implementing
 a specific security measure or control
@@ -17,7 +17,7 @@ a specific security measure or control
 
 > **capex**: `number`
 
-Defined in: [src/types/cia.ts:242](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L242)
+Defined in: [src/types/cia.ts:242](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L242)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [src/types/cia.ts:242](https://github.com/Hack23/cia-compliance-mana
 
 > **opex**: `number`
 
-Defined in: [src/types/cia.ts:243](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L243)
+Defined in: [src/types/cia.ts:243](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L243)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [src/types/cia.ts:243](https://github.com/Hack23/cia-compliance-mana
 
 > **paybackPeriod**: `string`
 
-Defined in: [src/types/cia.ts:245](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L245)
+Defined in: [src/types/cia.ts:245](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L245)
 
 ***
 
@@ -41,4 +41,4 @@ Defined in: [src/types/cia.ts:245](https://github.com/Hack23/cia-compliance-mana
 
 > **roi**: `string`
 
-Defined in: [src/types/cia.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/types/cia.ts#L244)
+Defined in: [src/types/cia.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L244)

@@ -6,7 +6,7 @@
 
 # Interface: WidgetDefinition
 
-Defined in: [src/utils/widgetRegistry.tsx:7](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L7)
+Defined in: [src/utils/widgetRegistry.tsx:7](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L7)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/utils/widgetRegistry.tsx:7](https://github.com/Hack23/cia-compl
 
 > **component**: `ComponentType`\<`any`\>
 
-Defined in: [src/utils/widgetRegistry.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L10)
+Defined in: [src/utils/widgetRegistry.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L10)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/utils/widgetRegistry.tsx:10](https://github.com/Hack23/cia-comp
 
 > `optional` **defaultProps**: `object`
 
-Defined in: [src/utils/widgetRegistry.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L11)
+Defined in: [src/utils/widgetRegistry.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L11)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/utils/widgetRegistry.tsx:11](https://github.com/Hack23/cia-comp
 
 > `optional` **icon**: `ReactNode`
 
-Defined in: [src/utils/widgetRegistry.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L12)
+Defined in: [src/utils/widgetRegistry.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L12)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/utils/widgetRegistry.tsx:12](https://github.com/Hack23/cia-comp
 
 > **id**: `string`
 
-Defined in: [src/utils/widgetRegistry.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L8)
+Defined in: [src/utils/widgetRegistry.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L8)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/utils/widgetRegistry.tsx:8](https://github.com/Hack23/cia-compl
 
 > `optional` **order**: `number`
 
-Defined in: [src/utils/widgetRegistry.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L14)
+Defined in: [src/utils/widgetRegistry.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L14)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [src/utils/widgetRegistry.tsx:14](https://github.com/Hack23/cia-comp
 
 > `optional` **size**: `"small"` \| `"medium"` \| `"large"` \| `"full"`
 
-Defined in: [src/utils/widgetRegistry.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L13)
+Defined in: [src/utils/widgetRegistry.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L13)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [src/utils/widgetRegistry.tsx:13](https://github.com/Hack23/cia-comp
 
 > **title**: `string`
 
-Defined in: [src/utils/widgetRegistry.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/ca083b463223765b22422b66b3a43930241849bd/src/utils/widgetRegistry.tsx#L9)
+Defined in: [src/utils/widgetRegistry.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/utils/widgetRegistry.tsx#L9)
