@@ -12,7 +12,13 @@ import {
 
 describe("ComplianceStatusWidget", () => {
   it("shows non-compliant status for None security level", () => {
-    render(<ComplianceStatusWidget securityLevel={SECURITY_LEVELS.NONE} />);
+    render(
+      <ComplianceStatusWidget
+        availabilityLevel={SECURITY_LEVELS.NONE}
+        integrityLevel={SECURITY_LEVELS.NONE}
+        confidentialityLevel={SECURITY_LEVELS.NONE}
+      />
+    );
 
     const statusBadge = screen.getByTestId(
       FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_BADGE
@@ -22,7 +28,13 @@ describe("ComplianceStatusWidget", () => {
   });
 
   it("shows basic compliance for Low security level", () => {
-    render(<ComplianceStatusWidget securityLevel={SECURITY_LEVELS.LOW} />);
+    render(
+      <ComplianceStatusWidget
+        availabilityLevel={SECURITY_LEVELS.LOW}
+        integrityLevel={SECURITY_LEVELS.LOW}
+        confidentialityLevel={SECURITY_LEVELS.LOW}
+      />
+    );
 
     const statusBadge = screen.getByTestId(
       FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_BADGE
@@ -36,7 +48,13 @@ describe("ComplianceStatusWidget", () => {
   });
 
   it("shows standard compliance for Moderate security level", () => {
-    render(<ComplianceStatusWidget securityLevel={SECURITY_LEVELS.MODERATE} />);
+    render(
+      <ComplianceStatusWidget
+        availabilityLevel={SECURITY_LEVELS.MODERATE}
+        integrityLevel={SECURITY_LEVELS.MODERATE}
+        confidentialityLevel={SECURITY_LEVELS.MODERATE}
+      />
+    );
 
     const statusBadge = screen.getByTestId(
       FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_BADGE
@@ -59,7 +77,13 @@ describe("ComplianceStatusWidget", () => {
   });
 
   it("shows full compliance for High security level", () => {
-    render(<ComplianceStatusWidget securityLevel={SECURITY_LEVELS.HIGH} />);
+    render(
+      <ComplianceStatusWidget
+        availabilityLevel={SECURITY_LEVELS.HIGH}
+        integrityLevel={SECURITY_LEVELS.HIGH}
+        confidentialityLevel={SECURITY_LEVELS.HIGH}
+      />
+    );
 
     const statusBadge = screen.getByTestId(
       FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_BADGE
@@ -68,7 +92,13 @@ describe("ComplianceStatusWidget", () => {
   });
 
   it("displays compliant frameworks", () => {
-    render(<ComplianceStatusWidget securityLevel={SECURITY_LEVELS.HIGH} />);
+    render(
+      <ComplianceStatusWidget
+        availabilityLevel={SECURITY_LEVELS.HIGH}
+        integrityLevel={SECURITY_LEVELS.HIGH}
+        confidentialityLevel={SECURITY_LEVELS.HIGH}
+      />
+    );
 
     // Get the framework list container
     const requirementsList = screen.getByTestId(
@@ -94,7 +124,13 @@ describe("ComplianceStatusWidget", () => {
 
   it("handles unknown security level", () => {
     // @ts-ignore - intentionally testing with invalid value
-    render(<ComplianceStatusWidget securityLevel="Unknown" />);
+    render(
+      <ComplianceStatusWidget
+        availabilityLevel="Unknown"
+        integrityLevel="Unknown"
+        confidentialityLevel="Unknown"
+      />
+    );
 
     const statusBadge = screen.getByTestId(
       FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_BADGE

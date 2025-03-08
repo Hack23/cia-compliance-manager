@@ -1,56 +1,98 @@
-import React, { useState } from "react";
-import {
-  CIA_LABELS,
-  CIA_DESCRIPTIONS,
-  CIA_COMPONENT_ICONS,
-} from "../../constants/appConstants";
-import { CIA_TEST_IDS } from "../../constants/testIds";
-import SecurityLevelSelector from "../SecurityLevelSelector";
+import React from "react";
+import { SECURITY_LEVEL_TEST_IDS } from "../../constants/testIds";
+import { SECURITY_LEVELS } from "../../constants/appConstants";
+
+interface SecurityLevelSelectorProps {
+  label: string;
+  level: string;
+  onChange: (level: string) => void;
+  description?: string;
+  icon?: string;
+  testId?: string;
+  color?: string;
+}
+
+const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
+  label,
+  level,
+  onChange,
+  description,
+  icon,
+  testId,
+  color,
+}) => (
+  <div data-testid={testId}>
+    <label>{label}</label>
+    <select value={level} onChange={(e) => onChange(e.target.value)}>
+      <option value="None">None</option>
+      <option value="Low">Low</option>
+      <option value="Moderate">Moderate</option>
+      <option value="High">High</option>
+      <option value="Very High">Very High</option>
+    </select>
+    {description && <p>{description}</p>}
+  </div>
+);
 
 interface SecurityLevelWidgetProps {
-  availability: string;
-  integrity: string;
-  confidentiality: string;
+  availabilityLevel: string;
+  integrityLevel: string;
+  confidentialityLevel: string;
   setAvailability: (level: string) => void;
   setIntegrity: (level: string) => void;
   setConfidentiality: (level: string) => void;
-  availabilityOptions?: Record<string, any>;
-  integrityOptions?: Record<string, any>;
-  confidentialityOptions?: Record<string, any>;
-  disabled?: boolean;
+  testId?: string;
 }
 
 const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
-  availability,
-  integrity,
-  confidentiality,
+  availabilityLevel = SECURITY_LEVELS.NONE,
+  integrityLevel = SECURITY_LEVELS.NONE,
+  confidentialityLevel = SECURITY_LEVELS.NONE,
   setAvailability,
   setIntegrity,
   setConfidentiality,
-  availabilityOptions,
-  integrityOptions,
-  confidentialityOptions,
-  disabled = false,
+  testId = SECURITY_LEVEL_TEST_IDS.SECURITY_LEVEL_PREFIX,
 }) => {
-  // Use the SecurityLevelSelector component to handle the selections
   return (
-    <div
-      className="bg-white dark:bg-gray-800 p-4 rounded-lg"
-      data-testid={CIA_TEST_IDS.SECURITY_LEVEL_CONTROLS}
-    >
-      <SecurityLevelSelector
-        initialAvailability={availability}
-        initialIntegrity={integrity}
-        initialConfidentiality={confidentiality}
-        onAvailabilityChange={setAvailability}
-        onIntegrityChange={setIntegrity}
-        onConfidentialityChange={setConfidentiality}
-        availabilityOptions={availabilityOptions}
-        integrityOptions={integrityOptions}
-        confidentialityOptions={confidentialityOptions}
-        disabled={disabled}
-        testId={CIA_TEST_IDS.SECURITY_LEVEL_SELECTOR}
-      />
+    <div className="p-4" data-testid={testId}>
+      <div className="mb-6">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          Select the appropriate security level for each of the CIA security
+          dimensions.
+        </p>
+      </div>
+
+      <div className="space-y-6">
+        <SecurityLevelSelector
+          label="Confidentiality"
+          level={confidentialityLevel} // This should match the expected prop in SecurityLevelSelector
+          onChange={setConfidentiality}
+          description="Protection of data from unauthorized access"
+          icon="🔒"
+          testId={`${testId}-confidentiality`}
+          color="purple"
+        />
+
+        <SecurityLevelSelector
+          label="Integrity"
+          level={integrityLevel} // This should match the expected prop in SecurityLevelSelector
+          onChange={setIntegrity}
+          description="Accuracy and consistency of data"
+          icon="✓"
+          testId={`${testId}-integrity`}
+          color="green"
+        />
+
+        <SecurityLevelSelector
+          label="Availability"
+          level={availabilityLevel} // This should match the expected prop in SecurityLevelSelector
+          onChange={setAvailability}
+          description="Access to data when needed"
+          icon="⟳"
+          testId={`${testId}-availability`}
+          color="blue"
+        />
+      </div>
     </div>
   );
 };

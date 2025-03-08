@@ -1,28 +1,24 @@
 import React from "react";
+import { AVAILABILITY_IMPACT_TEST_IDS } from "../../constants/testIds"; // This should now resolve
 import { CIADetails } from "../../types/cia";
-import { WIDGET_TEST_IDS } from "../../constants/testIds";
 import { CIA_COMPONENT_ICONS } from "../../constants/coreConstants";
 import { BUSINESS_IMPACT_ICONS } from "../../constants/uiConstants";
 
 interface AvailabilityImpactWidgetProps {
-  level?: string;
-  options?: Record<string, CIADetails>;
+  level: string;
+  options: Record<string, CIADetails>;
+  testId?: string;
 }
 
 const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   level = "None",
   options = {},
+  testId = AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_PREFIX,
 }) => {
   const currentOption: CIADetails = (options[level] || {}) as CIADetails;
 
   return (
-    <div
-      className="p-4 space-y-4"
-      data-testid={
-        WIDGET_TEST_IDS.AVAILABILITY_IMPACT_WIDGET ||
-        "widget-availability-impact"
-      }
-    >
+    <div className="p-4 space-y-4" data-testid={testId}>
       <div className="flex items-center mb-4">
         <span className="text-xl mr-2">{CIA_COMPONENT_ICONS.AVAILABILITY}</span>
         <h3 className="text-md font-medium">Availability Impact: {level}</h3>

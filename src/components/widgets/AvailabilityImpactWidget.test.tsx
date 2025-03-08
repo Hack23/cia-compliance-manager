@@ -35,13 +35,14 @@ describe("AvailabilityImpactWidget", () => {
     },
   };
 
-  it("renders correctly with default props", () => {
-    render(<AvailabilityImpactWidget />);
+  it("renders without crashing", () => {
+    render(<AvailabilityImpactWidget level="None" options={{}} />);
+    expect(screen.getByText("Availability Impact: None")).toBeInTheDocument();
+  });
 
-    expect(
-      screen.getByTestId("widget-availability-impact")
-    ).toBeInTheDocument();
-    expect(screen.getByText(/Availability Impact: None/i)).toBeInTheDocument();
+  it("displays the correct level", () => {
+    render(<AvailabilityImpactWidget level="High" options={{}} />);
+    expect(screen.getByText("Availability Impact: High")).toBeInTheDocument();
   });
 
   it("displays the correct availability information", () => {

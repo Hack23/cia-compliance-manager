@@ -1,192 +1,185 @@
 import React from "react";
-import { SECURITY_LEVELS } from "../../constants/appConstants";
-import { FRAMEWORK_TEST_IDS } from "../../constants/testIds";
+import { COMPLIANCE_STATUS_TEST_IDS } from "../../constants/testIds";
 
 interface ComplianceStatusWidgetProps {
-  securityLevel?: string;
-  availabilityLevel?: string;
-  integrityLevel?: string;
-  confidentialityLevel?: string;
-  availability?: string; // For backwards compatibility
-  integrity?: string; // For backwards compatibility
-  confidentiality?: string; // For backwards compatibility
+  availabilityLevel: string;
+  integrityLevel: string;
+  confidentialityLevel: string;
   testId?: string;
 }
 
 const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
-  securityLevel,
-  availabilityLevel,
-  integrityLevel,
-  confidentialityLevel,
-  availability, // For backwards compatibility
-  integrity, // For backwards compatibility
-  confidentiality, // For backwards compatibility
-  testId = FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_WIDGET,
+  availabilityLevel = "None",
+  integrityLevel = "None",
+  confidentialityLevel = "None",
+  testId = COMPLIANCE_STATUS_TEST_IDS.COMPLIANCE_STATUS_PREFIX,
 }) => {
-  // Use provided levels or fallback to backward compatibility props
-  const actualAvailLevel = availabilityLevel || availability;
-  const actualIntLevel = integrityLevel || integrity;
-  const actualConfLevel = confidentialityLevel || confidentiality;
-
-  // Determine security level if not explicitly provided
-  const determinedSecurityLevel =
-    securityLevel ||
-    (() => {
-      if (!actualAvailLevel && !actualIntLevel && !actualConfLevel) {
-        return SECURITY_LEVELS.NONE;
-      }
-
-      // Calculate a rough average level - this is simplified
-      const levels = [actualAvailLevel, actualIntLevel, actualConfLevel].filter(
-        Boolean
-      );
-      const avgLevel = levels.length
-        ? levels.reduce(
-            (a, b) =>
-              a +
-              (b === SECURITY_LEVELS.HIGH
-                ? 3
-                : b === SECURITY_LEVELS.MODERATE
-                ? 2
-                : b === SECURITY_LEVELS.LOW
-                ? 1
-                : 0),
-            0
-          ) / levels.length
-        : 0;
-
-      if (avgLevel >= 2.5) return SECURITY_LEVELS.HIGH;
-      if (avgLevel >= 1.5) return SECURITY_LEVELS.MODERATE;
-      if (avgLevel >= 0.5) return SECURITY_LEVELS.LOW;
-      return SECURITY_LEVELS.NONE;
-    })();
-
-  const getComplianceFrameworks = () => {
-    switch (determinedSecurityLevel) {
-      case SECURITY_LEVELS.HIGH:
-        return [
-          "SOC 2 Type 2",
-          "HIPAA",
-          "PCI-DSS",
-          "ISO 27001",
-          "NIST 800-53 High",
-        ];
-      case SECURITY_LEVELS.MODERATE:
-        return ["SOC 2 Type 1", "NIST 800-53 Moderate", "ISO 27001 (partial)"];
-      case SECURITY_LEVELS.LOW:
-        return ["SOC 2 Type 1"];
-      case SECURITY_LEVELS.NONE:
-      default:
-        return [];
-    }
-  };
-
-  const getComplianceStatus = () => {
-    switch (determinedSecurityLevel) {
-      case SECURITY_LEVELS.HIGH:
-        return "Compliant with all major frameworks";
-      case SECURITY_LEVELS.MODERATE:
-        return "Meets standard compliance requirements";
-      case SECURITY_LEVELS.LOW:
-        return "Meets basic compliance only";
-      case SECURITY_LEVELS.NONE:
-      default:
-        return "Non-compliant with most frameworks";
-    }
-  };
-
-  const getRequirementsForNextLevel = () => {
-    switch (determinedSecurityLevel) {
-      case SECURITY_LEVELS.HIGH:
-        return [
-          "Maintain current security posture",
-          "Regular security assessments",
-          "Continuous monitoring",
-        ];
-      case SECURITY_LEVELS.MODERATE:
-        return [
-          "Minimum High level for all CIA components",
-          "Advanced encryption for data at rest and in transit",
-          "Regular penetration testing",
-        ];
-      case SECURITY_LEVELS.LOW:
-        return [
-          "Minimum Moderate level for all CIA components",
-          "High  to meet financial regulations",
-          "High  for data privacy compliance",
-        ];
-      case SECURITY_LEVELS.NONE:
-      default:
-        return [
-          "Implement at least Low level security for all CIA components",
-          "Basic access controls",
-          "Security awareness training",
-        ];
-    }
-  };
-
-  const frameworks = getComplianceFrameworks();
+  // Generate compliance recommendations based on CIA levels
+  const complianceStatus = generateComplianceStatus(
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel
+  );
 
   return (
-    <div className="p-4" data-testid={testId}>
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300">
-          Compliance Status
-        </h3>
-        <span
-          className={`inline-flex items-center justify-center rounded-full font-medium text-sm px-2 py-1 ${
-            determinedSecurityLevel === SECURITY_LEVELS.NONE
-              ? "bg-red-100 text-red-800"
-              : "bg-yellow-100 text-yellow-800"
-          }`}
-          data-testid={FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_BADGE}
-        >
-          {getComplianceStatus()}
-        </span>
+    <div data-testid={testId} className="compliance-status-widget">
+      <div className="mb-4">
+        <h3 className="text-lg font-medium mb-2">Compliance Recommendations</h3>
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Based on your security requirements, the following compliance
+          standards may be relevant:
+        </p>
       </div>
 
-      <div
-        className="space-y-2"
-        data-testid={FRAMEWORK_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST}
-      >
-        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">
-          Compliant Frameworks:
-        </h4>
-        <div className="flex flex-wrap gap-2">
-          {frameworks.length > 0 ? (
-            frameworks.map((framework, index) => (
+      <div className="space-y-3">
+        {complianceStatus.map((item, index) => (
+          <div
+            key={index}
+            className="p-3 border rounded-lg bg-white dark:bg-gray-800 shadow-sm"
+            data-testid={`${testId}-item-${index}`}
+          >
+            <div className="flex items-center">
               <div
-                key={framework}
-                className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs py-1 px-2 rounded"
-              >
-                <span data-testid={`framework-${index}`}>{framework}</span>
-              </div>
-            ))
-          ) : (
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              No compliant frameworks
+                className={`h-3 w-3 rounded-full ${getRelevanceColor(
+                  item.relevance
+                )} mr-2`}
+              ></div>
+              <h4 className="font-medium">{item.standard}</h4>
             </div>
-          )}
-        </div>
-      </div>
-
-      <div className="mt-4">
-        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Requirements for Next Level:
-        </h4>
-        <ul
-          className="list-disc pl-5 space-y-1 text-sm text-gray-600 dark:text-gray-400"
-          data-testid={FRAMEWORK_TEST_IDS.COMPLIANCE_REQUIREMENTS_LIST}
-        >
-          {getRequirementsForNextLevel().map((req, index) => (
-            <li key={index} className="text-sm">
-              {req}
-            </li>
-          ))}
-        </ul>
+            <div className="ml-5">
+              <p className="text-sm mt-1">{item.description}</p>
+              <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                Relevance: {item.relevance}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
 };
+
+function getRelevanceColor(relevance: string): string {
+  switch (relevance) {
+    case "High":
+      return "bg-red-500";
+    case "Moderate":
+      return "bg-yellow-500";
+    case "Low":
+      return "bg-blue-500";
+    default:
+      return "bg-gray-400";
+  }
+}
+
+interface ComplianceItem {
+  standard: string;
+  description: string;
+  relevance: string;
+}
+
+function generateComplianceStatus(
+  availability: string,
+  integrity: string,
+  confidentiality: string
+): ComplianceItem[] {
+  const complianceItems: ComplianceItem[] = [];
+
+  // Add PCI DSS if confidentiality is high
+  if (["High", "Very High"].includes(confidentiality)) {
+    complianceItems.push({
+      standard: "PCI DSS",
+      description:
+        "Payment Card Industry Data Security Standard - required for handling payment card data.",
+      relevance: "High",
+    });
+  }
+
+  // Add HIPAA if confidentiality and integrity are moderate or higher
+  if (
+    ["Moderate", "High", "Very High"].includes(confidentiality) &&
+    ["Moderate", "High", "Very High"].includes(integrity)
+  ) {
+    complianceItems.push({
+      standard: "HIPAA",
+      description:
+        "Health Insurance Portability and Accountability Act - required for handling protected health information.",
+      relevance: ["High", "Very High"].includes(confidentiality)
+        ? "High"
+        : "Moderate",
+    });
+  }
+
+  // Add GDPR if confidentiality is at least moderate
+  if (["Moderate", "High", "Very High"].includes(confidentiality)) {
+    complianceItems.push({
+      standard: "GDPR",
+      description:
+        "General Data Protection Regulation - required for handling EU citizens' personal data.",
+      relevance: ["High", "Very High"].includes(confidentiality)
+        ? "High"
+        : "Moderate",
+    });
+  }
+
+  // Add ISO 27001 for all configurations, but with different relevance
+  complianceItems.push({
+    standard: "ISO 27001",
+    description:
+      "Information security management standard - recommended for all organizations.",
+    relevance:
+      getHighestLevel(availability, integrity, confidentiality) === "Very High"
+        ? "High"
+        : getHighestLevel(availability, integrity, confidentiality) === "High"
+        ? "Moderate"
+        : "Low",
+  });
+
+  // Add SOC 2 if availability and integrity are at least moderate
+  if (
+    ["Moderate", "High", "Very High"].includes(availability) &&
+    ["Moderate", "High", "Very High"].includes(integrity)
+  ) {
+    complianceItems.push({
+      standard: "SOC 2",
+      description:
+        "Service Organization Control 2 - focuses on security, availability, processing integrity, confidentiality, and privacy.",
+      relevance: ["High", "Very High"].includes(integrity)
+        ? "High"
+        : "Moderate",
+    });
+  }
+
+  // Add NIST for significant security requirements
+  if (getHighestLevel(availability, integrity, confidentiality) !== "None") {
+    complianceItems.push({
+      standard: "NIST Cybersecurity Framework",
+      description:
+        "National Institute of Standards and Technology framework for improving critical infrastructure cybersecurity.",
+      relevance:
+        getHighestLevel(availability, integrity, confidentiality) ===
+        "Very High"
+          ? "High"
+          : getHighestLevel(availability, integrity, confidentiality) === "High"
+          ? "Moderate"
+          : "Low",
+    });
+  }
+
+  return complianceItems;
+}
+
+function getHighestLevel(
+  availability: string,
+  integrity: string,
+  confidentiality: string
+): string {
+  const levels = ["None", "Low", "Moderate", "High", "Very High"];
+  const maxA = levels.indexOf(availability);
+  const maxI = levels.indexOf(integrity);
+  const maxC = levels.indexOf(confidentiality);
+  const maxIndex = Math.max(maxA, maxI, maxC);
+  return levels[maxIndex] || "None"; // Add fallback to avoid undefined
+}
 
 export default ComplianceStatusWidget;

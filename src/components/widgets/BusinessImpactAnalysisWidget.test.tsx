@@ -57,8 +57,21 @@ vi.mock("../../types/businessImpact", () => {
 import BusinessImpactAnalysisWidget from "./BusinessImpactAnalysisWidget";
 
 describe("BusinessImpactAnalysisWidget", () => {
+  // Default props to use in tests
+  const defaultProps = {
+    availabilityLevel: "None",
+    integrityLevel: "None",
+    confidentialityLevel: "None",
+    securityLevel: "None",
+  };
+
+  it("renders without crashing", () => {
+    render(<BusinessImpactAnalysisWidget {...defaultProps} />);
+    expect(screen.getByText(/CIA Security Profile/i)).toBeInTheDocument();
+  });
+
   it("renders correctly with default props", () => {
-    render(<BusinessImpactAnalysisWidget />);
+    render(<BusinessImpactAnalysisWidget {...defaultProps} />);
 
     // Check if CIA profile section is displayed
     expect(
@@ -88,9 +101,9 @@ describe("BusinessImpactAnalysisWidget", () => {
   it("displays CIA security levels correctly", () => {
     render(
       <BusinessImpactAnalysisWidget
-        confidentiality="High"
-        integrity="Moderate"
-        availability="Low"
+        confidentialityLevel="High"
+        integrityLevel="Moderate"
+        availabilityLevel="Low"
       />
     );
 
@@ -107,7 +120,7 @@ describe("BusinessImpactAnalysisWidget", () => {
   });
 
   it("switches between considerations and benefits tabs", () => {
-    render(<BusinessImpactAnalysisWidget />);
+    render(<BusinessImpactAnalysisWidget {...defaultProps} />);
 
     // Considerations tab should be active by default
     expect(
@@ -131,7 +144,12 @@ describe("BusinessImpactAnalysisWidget", () => {
 
   it("displays impact metrics section for higher security levels", () => {
     const { rerender } = render(
-      <BusinessImpactAnalysisWidget securityLevel="Low" />
+      <BusinessImpactAnalysisWidget
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        securityLevel="Low"
+      />
     );
 
     // Impact metrics should not be shown for Low security level
@@ -140,7 +158,14 @@ describe("BusinessImpactAnalysisWidget", () => {
     ).not.toBeInTheDocument();
 
     // Rerender with Moderate security level
-    rerender(<BusinessImpactAnalysisWidget securityLevel="Moderate" />);
+    rerender(
+      <BusinessImpactAnalysisWidget
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        securityLevel="Moderate"
+      />
+    );
 
     // Impact metrics should now be visible
     expect(
@@ -156,7 +181,14 @@ describe("BusinessImpactAnalysisWidget", () => {
 
   it("displays correct benefits for security level", () => {
     // Testing with a mocked HIGH level that has benefits defined
-    render(<BusinessImpactAnalysisWidget securityLevel="High" />);
+    render(
+      <BusinessImpactAnalysisWidget
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        securityLevel="High"
+      />
+    );
 
     // Switch to benefits tab
     fireEvent.click(screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.TAB_BENEFITS));
@@ -170,7 +202,13 @@ describe("BusinessImpactAnalysisWidget", () => {
   });
 
   it("renders risk badges with appropriate colors", () => {
-    render(<BusinessImpactAnalysisWidget availability="None" />);
+    render(
+      <BusinessImpactAnalysisWidget
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+      />
+    );
 
     // We should see our mocked considerations with risk badges
     const considerationItems = screen.getAllByTestId(/consideration-item-\d+/);
@@ -181,5 +219,16 @@ describe("BusinessImpactAnalysisWidget", () => {
     expect(riskBadges.length).toBeGreaterThan(0);
     expect(riskBadges[0]).toHaveTextContent("Critical Risk");
     expect(riskBadges[1]).toHaveTextContent("High Risk");
+  });
+
+  it("shows different business considerations based on security levels", () => {
+    render(
+      <BusinessImpactAnalysisWidget
+        availabilityLevel="High"
+        integrityLevel="High"
+        confidentialityLevel="High"
+        securityLevel="High"
+      />
+    );
   });
 });

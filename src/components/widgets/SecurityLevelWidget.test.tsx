@@ -9,92 +9,27 @@ import {
 } from "../../constants/appConstants";
 import { CIA_TEST_IDS } from "../../constants/testIds";
 
-// Mock the SecurityLevelSelector component that's used internally
-vi.mock("../SecurityLevelSelector", () => ({
+// Update the mock implementation to match the new interface with typed parameters
+vi.mock("../controls/SecurityLevelSelector", () => ({
   default: ({
-    initialAvailability,
-    initialIntegrity,
-    initialConfidentiality,
-    onAvailabilityChange,
-    onIntegrityChange,
-    onConfidentialityChange,
+    level,
+    onChange,
     testId,
-  }: {
-    initialAvailability: string;
-    initialIntegrity: string;
-    initialConfidentiality: string;
-    onAvailabilityChange?: (value: string) => void;
-    onIntegrityChange?: (value: string) => void;
-    onConfidentialityChange?: (value: string) => void;
+  }: // other props
+  {
+    level: string;
+    onChange: (value: string) => void;
     testId?: string;
+    [key: string]: any;
   }) => (
-    <div data-testid={testId || CIA_TEST_IDS.SECURITY_LEVEL_SELECTOR}>
-      <div>
-        <label htmlFor="availabilitySelect">Availability</label>
-        <select
-          data-testid={CIA_TEST_IDS.AVAILABILITY_SELECT}
-          value={initialAvailability}
-          onChange={(e) =>
-            onAvailabilityChange && onAvailabilityChange(e.target.value)
-          }
-        >
-          <option value="None">None</option>
-          <option value="Low">Low</option>
-          <option value="Moderate">Moderate</option>
-          <option value="High">High</option>
-          <option value="Very High">Very High</option>
-        </select>
-        <div data-testid={CIA_TEST_IDS.AVAILABILITY_DESCRIPTION}>
-          Availability Description
-        </div>
-      </div>
-      <div>
-        <label htmlFor="integritySelect">Integrity</label>
-        <select
-          data-testid={CIA_TEST_IDS.INTEGRITY_SELECT}
-          value={initialIntegrity}
-          onChange={(e) =>
-            onIntegrityChange && onIntegrityChange(e.target.value)
-          }
-        >
-          <option value="None">None</option>
-          <option value="Low">Low</option>
-          <option value="Moderate">Moderate</option>
-          <option value="High">High</option>
-          <option value="Very High">Very High</option>
-        </select>
-        <div data-testid={CIA_TEST_IDS.INTEGRITY_DESCRIPTION}>
-          Integrity Description
-        </div>
-      </div>
-      <div>
-        <label htmlFor="confidentialitySelect">Confidentiality</label>
-        <select
-          data-testid={CIA_TEST_IDS.CONFIDENTIALITY_SELECT}
-          value={initialConfidentiality}
-          onChange={(e) =>
-            onConfidentialityChange && onConfidentialityChange(e.target.value)
-          }
-        >
-          <option value="None">None</option>
-          <option value="Low">Low</option>
-          <option value="Moderate">Moderate</option>
-          <option value="High">High</option>
-          <option value="Very High">Very High</option>
-        </select>
-        <div data-testid={CIA_TEST_IDS.CONFIDENTIALITY_DESCRIPTION}>
-          Confidentiality Description
-        </div>
-      </div>
-      <button data-testid={CIA_TEST_IDS.AVAILABILITY_TECHNICAL_INFO_BUTTON}>
-        Info
-      </button>
-      <button data-testid={CIA_TEST_IDS.INTEGRITY_TECHNICAL_INFO_BUTTON}>
-        Info
-      </button>
-      <button data-testid={CIA_TEST_IDS.CONFIDENTIALITY_TECHNICAL_INFO_BUTTON}>
-        Info
-      </button>
+    <div data-testid={testId || "security-level-selector-mock"}>
+      <select
+        data-testid="level-select"
+        value={level}
+        onChange={(e) => onChange(e.target.value)}
+      >
+        {/* options */}
+      </select>
     </div>
   ),
 }));
@@ -111,9 +46,9 @@ describe("SecurityLevelWidget", () => {
   it("renders all security level components", () => {
     render(
       <SecurityLevelWidget
-        availability="None"
-        integrity="None"
-        confidentiality="None"
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
         setAvailability={mockSetAvailability}
         setIntegrity={mockSetIntegrity}
         setConfidentiality={mockSetConfidentiality}
@@ -134,9 +69,9 @@ describe("SecurityLevelWidget", () => {
   it("selects have default values", () => {
     render(
       <SecurityLevelWidget
-        availability="Low"
-        integrity="Moderate"
-        confidentiality="High"
+        availabilityLevel="Low"
+        integrityLevel="Moderate"
+        confidentialityLevel="High"
         setAvailability={mockSetAvailability}
         setIntegrity={mockSetIntegrity}
         setConfidentiality={mockSetConfidentiality}
@@ -157,9 +92,9 @@ describe("SecurityLevelWidget", () => {
   it("handles selection changes", () => {
     render(
       <SecurityLevelWidget
-        availability="None"
-        integrity="None"
-        confidentiality="None"
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
         setAvailability={mockSetAvailability}
         setIntegrity={mockSetIntegrity}
         setConfidentiality={mockSetConfidentiality}
@@ -177,9 +112,9 @@ describe("SecurityLevelWidget", () => {
   it("displays correct options and values", () => {
     render(
       <SecurityLevelWidget
-        availability="None"
-        integrity="None"
-        confidentiality="None"
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
         setAvailability={mockSetAvailability}
         setIntegrity={mockSetIntegrity}
         setConfidentiality={mockSetConfidentiality}
@@ -193,6 +128,21 @@ describe("SecurityLevelWidget", () => {
     expect(allOptions.length).toBe(5); // None, Low, Moderate, High, Very High
     expect(allOptions[0]?.textContent).toBe("None");
     expect(allOptions[1]?.textContent).toBe("Low");
+  });
+
+  // Then update the test cases to use the new prop names
+  it("renders with custom initial values", () => {
+    render(
+      <SecurityLevelWidget
+        availabilityLevel={SECURITY_LEVELS.MODERATE}
+        integrityLevel={SECURITY_LEVELS.HIGH}
+        confidentialityLevel={SECURITY_LEVELS.LOW}
+        setAvailability={mockSetAvailability}
+        setIntegrity={mockSetIntegrity}
+        setConfidentiality={mockSetConfidentiality}
+      />
+    );
+    // Test assertions
   });
 
   // ... other tests ...

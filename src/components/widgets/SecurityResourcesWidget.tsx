@@ -1,20 +1,20 @@
 import React from "react";
-import { WIDGET_TEST_IDS } from "../../constants/testIds";
+import { SECURITY_RESOURCES_TEST_IDS } from "../../constants/testIds";
 import { WIDGET_ICONS } from "../../constants/coreConstants";
 
 interface SecurityResourcesWidgetProps {
-  securityLevel?: string;
+  securityLevel: string;
+  testId?: string;
 }
 
 const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   securityLevel = "None",
+  testId = SECURITY_RESOURCES_TEST_IDS.SECURITY_RESOURCES_PREFIX,
 }) => {
   return (
     <div
       className="p-4 space-y-4"
-      data-testid={
-        WIDGET_TEST_IDS.SECURITY_RESOURCES_WIDGET || "widget-security-resources"
-      }
+      data-testid={testId || "widget-security-resources"}
     >
       <div className="flex items-center mb-4">
         <span className="text-xl mr-2">{WIDGET_ICONS.SECURITY_RESOURCES}</span>

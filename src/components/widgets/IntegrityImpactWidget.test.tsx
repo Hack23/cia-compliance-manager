@@ -1,41 +1,34 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
 import IntegrityImpactWidget from "./IntegrityImpactWidget";
-import { CIADetails } from "../../types/cia";
+
+// Add mock options for testing
+const mockOptions = {
+  None: {
+    description: "No data integrity controls.",
+    businessImpact: "Decisions based on potentially corrupt data",
+    validationMethod: "None",
+    recommendations: [
+      "Implement basic data validation",
+      "Create manual verification processes",
+    ],
+  },
+  High: {
+    description: "Advanced integrity with blockchain verification.",
+    businessImpact: "High confidence in data integrity",
+    validationMethod: "Blockchain verification",
+    recommendations: ["Regular audits", "Automated verification"],
+  },
+};
 
 describe("IntegrityImpactWidget", () => {
-  const mockOptions: Record<string, CIADetails> = {
-    None: {
-      description: "No data integrity controls.",
-      impact: "Data corruption may go undetected",
-      technical: "No validation or verification processes.",
-      businessImpact: "Decisions based on potentially corrupt data",
-      capex: 0,
-      opex: 0,
-      validationMethod: "None",
-      recommendations: [
-        "Implement basic data validation",
-        "Create manual verification processes",
-      ],
-    },
-    High: {
-      description: "Advanced integrity with blockchain verification.",
-      impact: "All changes tracked and validated",
-      technical: "Distributed ledger technology and digital signatures.",
-      businessImpact: "Full validation trail for all critical information",
-      capex: 25,
-      opex: 15,
-      validationMethod: "Blockchain verification",
-      recommendations: [
-        "Implement immutable audit logs",
-        "Hash-based verification systems",
-      ],
-    },
-  };
+  it("renders without crashing", () => {
+    render(<IntegrityImpactWidget level="None" options={{}} />);
+    expect(screen.getByText("Integrity Impact: None")).toBeInTheDocument();
+  });
 
   it("renders correctly with default props", () => {
-    render(<IntegrityImpactWidget />);
+    render(<IntegrityImpactWidget level="None" options={{}} />);
 
     expect(screen.getByTestId("widget-integrity-impact")).toBeInTheDocument();
     expect(screen.getByText(/Integrity Impact: None/i)).toBeInTheDocument();

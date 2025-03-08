@@ -75,12 +75,36 @@ const BusinessImpactExpandedWrapper: React.FC = () => (
 );
 
 const MetricsExpandedWrapper: React.FC = () => (
-  <SecuritySummaryWidget securityLevel="Moderate" />
+  <SecuritySummaryWidget
+    securityLevel="Moderate"
+    availabilityLevel="Moderate"
+    integrityLevel="Moderate"
+    confidentialityLevel="Moderate"
+  />
 );
 
 describe("SecuritySummaryWidget", () => {
+  it("renders with proper security level", () => {
+    render(
+      <SecuritySummaryWidget
+        securityLevel="Moderate"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
+    // ...existing code...
+  });
+
   it("renders None level summary correctly", () => {
-    render(<SecuritySummaryWidget securityLevel="None" />);
+    render(
+      <SecuritySummaryWidget
+        securityLevel="None"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     // Use a custom matcher that can handle the title format
     const titleElement = screen.getByTestId(
@@ -96,7 +120,14 @@ describe("SecuritySummaryWidget", () => {
   });
 
   it("renders Low level summary correctly", () => {
-    render(<SecuritySummaryWidget securityLevel="Low" />);
+    render(
+      <SecuritySummaryWidget
+        securityLevel="Low"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     const titleElement = screen.getByText((content, element) => {
       return (
@@ -113,7 +144,14 @@ describe("SecuritySummaryWidget", () => {
   });
 
   it("renders Moderate level summary correctly", () => {
-    render(<SecuritySummaryWidget securityLevel="Moderate" />);
+    render(
+      <SecuritySummaryWidget
+        securityLevel="Moderate"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     const titleElement = screen.getByText((content, element) => {
       return (
@@ -130,7 +168,14 @@ describe("SecuritySummaryWidget", () => {
   });
 
   it("renders High level summary correctly", () => {
-    render(<SecuritySummaryWidget securityLevel="High" />);
+    render(
+      <SecuritySummaryWidget
+        securityLevel="High"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     const titleElement = screen.getByText((content, element) => {
       return (
@@ -147,7 +192,14 @@ describe("SecuritySummaryWidget", () => {
   });
 
   it("renders Very High level summary correctly", () => {
-    render(<SecuritySummaryWidget securityLevel="Very High" />);
+    render(
+      <SecuritySummaryWidget
+        securityLevel="Very High"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     const titleElement = screen.getByText((content, element) => {
       return (
@@ -164,34 +216,76 @@ describe("SecuritySummaryWidget", () => {
   });
 
   it("displays appropriate security level icon", () => {
-    const { rerender } = render(<SecuritySummaryWidget securityLevel="Low" />);
+    const { rerender } = render(
+      <SecuritySummaryWidget
+        securityLevel="Low"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
     expect(
       screen.getByTestId(SUMMARY_TEST_IDS.SECURITY_ICON)
     ).toHaveTextContent(UI_ICONS.SECURITY_LOW);
 
-    rerender(<SecuritySummaryWidget securityLevel="Moderate" />);
+    rerender(
+      <SecuritySummaryWidget
+        securityLevel="Moderate"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
     expect(
       screen.getByTestId(SUMMARY_TEST_IDS.SECURITY_ICON)
     ).toHaveTextContent(UI_ICONS.SECURITY_MODERATE);
 
-    rerender(<SecuritySummaryWidget securityLevel="High" />);
+    rerender(
+      <SecuritySummaryWidget
+        securityLevel="High"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
     expect(
       screen.getByTestId(SUMMARY_TEST_IDS.SECURITY_ICON)
     ).toHaveTextContent(UI_ICONS.SECURITY_HIGH);
 
-    rerender(<SecuritySummaryWidget securityLevel="Very High" />);
+    rerender(
+      <SecuritySummaryWidget
+        securityLevel="Very High"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
     expect(
       screen.getByTestId(SUMMARY_TEST_IDS.SECURITY_ICON)
     ).toHaveTextContent(UI_ICONS.SECURITY_VERY_HIGH);
 
-    rerender(<SecuritySummaryWidget securityLevel="None" />);
+    rerender(
+      <SecuritySummaryWidget
+        securityLevel="None"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
     expect(
       screen.getByTestId(SUMMARY_TEST_IDS.SECURITY_ICON)
     ).toHaveTextContent(UI_ICONS.SECURITY_NONE);
   });
 
   it("falls back to None when invalid security level is provided", () => {
-    render(<SecuritySummaryWidget securityLevel="Invalid" />);
+    render(
+      <SecuritySummaryWidget
+        securityLevel="Invalid"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     const titleElement = screen.getByText((content, element) => {
       return (
@@ -227,7 +321,14 @@ describe("SecuritySummaryWidget", () => {
   });
 
   it("handles Basic security level correctly", () => {
-    render(<SecuritySummaryWidget securityLevel="Basic" />);
+    render(
+      <SecuritySummaryWidget
+        securityLevel="Basic"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     // Use the testid to find the specific element instead of generic text search
     expect(screen.getByTestId("security-summary-title")).toHaveTextContent(
@@ -246,7 +347,14 @@ describe("SecuritySummaryWidget", () => {
 
   it("displays key benefits based on security level", async () => {
     // Render with Moderate security level
-    render(<SecuritySummaryWidget securityLevel={SECURITY_LEVELS.MODERATE} />);
+    render(
+      <SecuritySummaryWidget
+        securityLevel={SECURITY_LEVELS.MODERATE}
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     // Get the key benefits list
     const benefitsList = screen.getByTestId("key-benefits-list");
@@ -277,7 +385,12 @@ describe("SecuritySummaryWidget", () => {
 
     // Change to a different security level and verify benefits update
     const { rerender } = render(
-      <SecuritySummaryWidget securityLevel={SECURITY_LEVELS.HIGH} />
+      <SecuritySummaryWidget
+        securityLevel={SECURITY_LEVELS.HIGH}
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
     );
 
     // Check for HIGH level benefits - fix type safety
@@ -289,7 +402,14 @@ describe("SecuritySummaryWidget", () => {
     expect(highBenefits.length).toBeGreaterThan(0);
 
     // Check that at least one HIGH benefit is shown
-    rerender(<SecuritySummaryWidget securityLevel={SECURITY_LEVELS.HIGH} />);
+    rerender(
+      <SecuritySummaryWidget
+        securityLevel={SECURITY_LEVELS.HIGH}
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     // Get the updated benefit items
     const highBenefitItems = screen.getAllByTestId(/^key-benefit-/);
@@ -310,14 +430,28 @@ describe("SecuritySummaryWidget", () => {
   });
 
   it("displays ROI estimates based on security level", async () => {
-    const { rerender } = render(<SecuritySummaryWidget securityLevel="High" />);
+    const { rerender } = render(
+      <SecuritySummaryWidget
+        securityLevel="High"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     // Now checking the exposed ROI summary instead of the hidden section
     expect(screen.getByTestId("roi-estimate-summary")).toHaveTextContent(
       ROI_ESTIMATES.HIGH
     );
 
-    rerender(<SecuritySummaryWidget securityLevel="Low" />);
+    rerender(
+      <SecuritySummaryWidget
+        securityLevel="Low"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
     expect(screen.getByTestId("roi-estimate-summary")).toHaveTextContent(
       ROI_ESTIMATES.LOW
     );
@@ -380,7 +514,14 @@ describe("SecuritySummaryWidget", () => {
   });
 
   it("expands metrics section when clicked", async () => {
-    render(<SecuritySummaryWidget securityLevel="Moderate" />);
+    render(
+      <SecuritySummaryWidget
+        securityLevel="Moderate"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     // Find and click the metrics section header
     const metricsHeader = screen.getByTestId("metrics-toggle");
@@ -393,7 +534,14 @@ describe("SecuritySummaryWidget", () => {
   });
 
   it("displays recommendations based on security level", () => {
-    const { rerender } = render(<SecuritySummaryWidget securityLevel="None" />);
+    const { rerender } = render(
+      <SecuritySummaryWidget
+        securityLevel="None"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     expect(screen.getByTestId("recommendation-heading")).toBeInTheDocument();
     expect(screen.getByTestId("security-recommendation")).toBeInTheDocument();
@@ -403,7 +551,14 @@ describe("SecuritySummaryWidget", () => {
     expect(screen.getByTestId("badge-not-recommended")).toBeInTheDocument();
 
     // Test different security level badges
-    rerender(<SecuritySummaryWidget securityLevel="High" />);
+    rerender(
+      <SecuritySummaryWidget
+        securityLevel="High"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
     expect(screen.getByText(/Strong Protection/i)).toBeInTheDocument();
     expect(screen.getByText(/Sensitive Data Ready/i)).toBeInTheDocument();
   });
@@ -411,7 +566,14 @@ describe("SecuritySummaryWidget", () => {
   // Adding additional test cases to improve coverage
 
   it("handles expandable sections correctly with keyboard interaction", async () => {
-    render(<SecuritySummaryWidget securityLevel="Moderate" />);
+    render(
+      <SecuritySummaryWidget
+        securityLevel="Moderate"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     const technicalSectionButton = screen.getByTestId(
       "technical-section-toggle"
@@ -446,7 +608,14 @@ describe("SecuritySummaryWidget", () => {
   });
 
   it("applies the correct variant for different security levels", () => {
-    const { rerender } = render(<SecuritySummaryWidget securityLevel="None" />);
+    const { rerender } = render(
+      <SecuritySummaryWidget
+        securityLevel="None"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     // We'll check for the value content instead of class since ValueDisplay uses different classes
     expect(screen.getByTestId("roi-estimate-summary-value")).toHaveTextContent(
@@ -456,7 +625,14 @@ describe("SecuritySummaryWidget", () => {
     const levels = ["None", "Low", "Moderate", "High", "Very High"];
 
     levels.forEach((level) => {
-      rerender(<SecuritySummaryWidget securityLevel={level} />);
+      rerender(
+        <SecuritySummaryWidget
+          securityLevel={level}
+          availabilityLevel="Moderate"
+          integrityLevel="Moderate"
+          confidentialityLevel="Moderate"
+        />
+      );
 
       // For each level, check that the correct ROI message is shown
       const keyForROI = level

@@ -154,6 +154,10 @@ const CIAClassificationApp: React.FC = () => {
   const capexEstimate = isSmallSolution ? "$5,000" : "$50,000";
   const opexEstimate = isSmallSolution ? "$500" : "$50,000";
 
+  // Make sure the function returns a single root element and all components are properly nested.
+  // The error suggests there might be a fragment or structural issue.
+
+  // Verify the proper structure:
   return (
     <div
       className={`app-container ${darkMode ? "dark bg-pattern" : ""}`}
@@ -209,9 +213,9 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-security-level-selection"
               >
                 <SecurityLevelWidget
-                  availability={availability}
-                  integrity={integrity}
-                  confidentiality={confidentiality}
+                  availabilityLevel={availability}
+                  integrityLevel={integrity}
+                  confidentialityLevel={confidentiality}
                   setAvailability={setAvailability}
                   setIntegrity={setIntegrity}
                   setConfidentiality={setConfidentiality}
@@ -225,9 +229,9 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-radar-chart"
               >
                 <RadarChart
-                  availability={availability}
-                  integrity={integrity}
-                  confidentiality={confidentiality}
+                  availabilityLevel={availability}
+                  integrityLevel={integrity}
+                  confidentialityLevel={confidentiality}
                 />
               </DashboardWidget>
 
@@ -341,9 +345,9 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-business-impact-container"
               >
                 <BusinessImpactAnalysisWidget
-                  availability={availability}
-                  integrity={integrity}
-                  confidentiality={confidentiality}
+                  availabilityLevel={availability}
+                  integrityLevel={integrity}
+                  confidentialityLevel={confidentiality}
                   securityLevel={overallSecurityLevel}
                 />
               </DashboardWidget>

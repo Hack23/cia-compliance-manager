@@ -1,41 +1,36 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
 import ConfidentialityImpactWidget from "./ConfidentialityImpactWidget";
-import { CIADetails } from "../../types/cia";
+
+// Add mock options for testing
+const mockOptions = {
+  None: {
+    description: "No confidentiality controls.",
+    businessImpact: "No protection for sensitive information",
+    protectionMethod: "None",
+    recommendations: [
+      "Implement basic access controls",
+      "Create classification policy",
+    ],
+  },
+  High: {
+    description: "Advanced confidentiality with end-to-end encryption.",
+    businessImpact: "Strong protection for sensitive information",
+    protectionMethod: "E2E encryption",
+    recommendations: ["Regular security assessments", "Monitor access logs"],
+  },
+};
 
 describe("ConfidentialityImpactWidget", () => {
-  const mockOptions: Record<string, CIADetails> = {
-    None: {
-      description: "No confidentiality controls.",
-      impact: "Data accessible to anyone",
-      technical: "No access control or encryption.",
-      businessImpact: "No protection for sensitive information",
-      capex: 0,
-      opex: 0,
-      protectionMethod: "None",
-      recommendations: [
-        "Implement basic access controls",
-        "Create classification policy",
-      ],
-    },
-    High: {
-      description: "Advanced confidentiality with end-to-end encryption.",
-      impact: "Protected against sophisticated attacks",
-      technical: "End-to-end encryption with multi-factor authentication.",
-      businessImpact: "Protects against advanced persistent threats",
-      capex: 25,
-      opex: 15,
-      protectionMethod: "E2E encryption",
-      recommendations: [
-        "Implement E2E encryption",
-        "Military-grade protection",
-      ],
-    },
-  };
+  it("renders without crashing", () => {
+    render(<ConfidentialityImpactWidget level="None" options={{}} />);
+    expect(
+      screen.getByText("Confidentiality Impact: None")
+    ).toBeInTheDocument();
+  });
 
   it("renders correctly with default props", () => {
-    render(<ConfidentialityImpactWidget />);
+    render(<ConfidentialityImpactWidget level="None" options={{}} />);
 
     expect(
       screen.getByTestId("widget-confidentiality-impact")
@@ -46,7 +41,7 @@ describe("ConfidentialityImpactWidget", () => {
   });
 
   it("displays the correct confidentiality information", () => {
-    render(<ConfidentialityImpactWidget level="None" options={mockOptions} />);
+    render(<ConfidentialityImpactWidget level="None" options={{}} />);
 
     expect(
       screen.getByText("No confidentiality controls.")
@@ -58,7 +53,7 @@ describe("ConfidentialityImpactWidget", () => {
   });
 
   it("displays recommendations when available", () => {
-    render(<ConfidentialityImpactWidget level="None" options={mockOptions} />);
+    render(<ConfidentialityImpactWidget level="None" options={{}} />);
 
     expect(
       screen.getByText("Implement basic access controls")
@@ -70,16 +65,14 @@ describe("ConfidentialityImpactWidget", () => {
 
   it("updates content when level changes", () => {
     const { rerender } = render(
-      <ConfidentialityImpactWidget level="None" options={mockOptions} />
+      <ConfidentialityImpactWidget level="None" options={{}} />
     );
 
     expect(
       screen.getByText("No confidentiality controls.")
     ).toBeInTheDocument();
 
-    rerender(
-      <ConfidentialityImpactWidget level="High" options={mockOptions} />
-    );
+    rerender(<ConfidentialityImpactWidget level="High" options={{}} />);
 
     expect(
       screen.getByText("Advanced confidentiality with end-to-end encryption.")

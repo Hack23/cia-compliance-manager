@@ -67,7 +67,16 @@ describe("TechnicalDetailsWidget", () => {
   };
 
   it("renders without crashing", () => {
-    render(<TechnicalDetailsWidget {...defaultProps} />);
+    render(
+      <TechnicalDetailsWidget
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        availabilityOptions={{}}
+        integrityOptions={{}}
+        confidentialityOptions={{}}
+      />
+    );
     expect(
       screen.getByTestId(WIDGET_TEST_IDS.TECHNICAL_DETAILS_WIDGET)
     ).toBeInTheDocument();
@@ -151,12 +160,15 @@ describe("TechnicalDetailsWidget", () => {
   });
 
   it("handles edge case with empty options", () => {
-    // Test with no options provided
+    // Test with no options provided - add empty objects for required options props
     render(
       <TechnicalDetailsWidget
         availabilityLevel="High"
         integrityLevel="High"
         confidentialityLevel="High"
+        availabilityOptions={{}}
+        integrityOptions={{}}
+        confidentialityOptions={{}}
       />
     );
 
@@ -225,5 +237,21 @@ describe("TechnicalDetailsWidget", () => {
     expect(screen.getByTestId("development-effort")).toBeInTheDocument();
     expect(screen.getByTestId("maintenance-level")).toBeInTheDocument();
     expect(screen.getByTestId("required-expertise")).toBeInTheDocument();
+  });
+
+  it("renders without crashing", () => {
+    render(
+      <TechnicalDetailsWidget
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        availabilityOptions={{}}
+        integrityOptions={{}}
+        confidentialityOptions={{}}
+      />
+    );
+    expect(
+      screen.getByText("Technical Implementation Guide")
+    ).toBeInTheDocument();
   });
 });

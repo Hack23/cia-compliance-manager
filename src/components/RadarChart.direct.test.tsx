@@ -36,7 +36,11 @@ describe("RadarChart Component", () => {
 
   it("creates a canvas element", () => {
     const { container } = render(
-      <RadarChart availability="Low" integrity="Low" confidentiality="Low" />
+      <RadarChart
+        availabilityLevel="Low"
+        integrityLevel="Low"
+        confidentialityLevel="Low"
+      />
     );
 
     // Verify the canvas element is created
@@ -48,7 +52,11 @@ describe("RadarChart Component", () => {
   it("renders without errors with chart context", () => {
     // Render the component
     render(
-      <RadarChart availability="High" integrity="High" confidentiality="High" />
+      <RadarChart
+        availabilityLevel="High"
+        integrityLevel="High"
+        confidentialityLevel="High"
+      />
     );
 
     // Just verify the canvas exists without checking mock internals
@@ -58,15 +66,19 @@ describe("RadarChart Component", () => {
 
   it("handles various security levels", () => {
     const { rerender } = render(
-      <RadarChart availability="None" integrity="None" confidentiality="None" />
+      <RadarChart
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+      />
     );
 
     // Test with different combinations of security levels
     rerender(
       <RadarChart
-        availability="Very High"
-        integrity="Moderate"
-        confidentiality="Low"
+        availabilityLevel="Very High"
+        integrityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 

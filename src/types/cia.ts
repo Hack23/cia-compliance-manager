@@ -71,22 +71,17 @@ export interface BusinessImpactDetails {
 
 // Base interface for CIA details
 export interface CIADetails {
-  description: string;
-  impact: string;
-  technical: string;
-  businessImpact: string;
-  capex: number;
-  opex: number;
-  bg?: string;
-  text?: string;
-  recommendations?: string[];
-  // Optional fields that might be present in some implementations
-  businessImpactDetails?: BusinessImpactDetails; // Use the BusinessImpactDetails interface
-  uptime?: string;
-  validationMethod?: string;
+  description?: string;
+  businessImpact?: string;
+  capex?: number;
+  opex?: number;
+  technical?: string;
   protectionMethod?: string;
-  implementationSteps?: string[];
-  complexity?: string;
+  validationMethod?: string;
+  uptime?: string;
+  recommendations?: string[];
+  // Allow additional properties with an index signature
+  [key: string]: any;
 }
 
 // Types for CIA ratings

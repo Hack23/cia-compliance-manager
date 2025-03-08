@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { WidgetContainer } from "../components/common";
-// Import directly from core constants
+// Add SECURITY_LEVELS import
+import { SECURITY_LEVELS } from "../constants/appConstants";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../constants/coreConstants";
 
 // Add export to the interface definition
@@ -37,7 +38,7 @@ export class WidgetRegistry {
     return Array.from(this.widgets.values()).sort((a, b) => {
       // Handle undefined order values safely
       const orderA = typeof a.order === "number" ? a.order : 999;
-      const orderB = typeof b.order === "number" ? b.order : 999;
+      const orderB = typeof b.order === "number" ? a.order : 999;
       // Ensure we're working with numbers for the subtraction
       return (orderA || 999) - (orderB || 999);
     });
@@ -133,8 +134,17 @@ widgetRegistry.register({
   icon: WIDGET_ICONS.SECURITY_SUMMARY,
   size: "medium",
   order: 10,
+  // Define defaultProps with the standardized prop names
+  defaultProps: {
+    availabilityLevel: SECURITY_LEVELS.NONE,
+    integrityLevel: SECURITY_LEVELS.NONE,
+    confidentialityLevel: SECURITY_LEVELS.NONE,
+  },
 });
 
+// Update all widget registrations to use standardized props
+
+// Add defaultProps for compliance status widget
 widgetRegistry.register({
   id: "compliance-status",
   title: WIDGET_TITLES.COMPLIANCE_STATUS,
@@ -142,6 +152,11 @@ widgetRegistry.register({
   icon: WIDGET_ICONS.COMPLIANCE_STATUS,
   size: "medium",
   order: 20,
+  defaultProps: {
+    availabilityLevel: SECURITY_LEVELS.NONE,
+    integrityLevel: SECURITY_LEVELS.NONE,
+    confidentialityLevel: SECURITY_LEVELS.NONE,
+  },
 });
 
 widgetRegistry.register({
@@ -169,8 +184,14 @@ widgetRegistry.register({
   icon: WIDGET_ICONS.AVAILABILITY_IMPACT,
   size: "medium",
   order: 50,
+  // Use component-specific pattern
+  defaultProps: {
+    level: SECURITY_LEVELS.NONE,
+    options: {},
+  },
 });
 
+// Add defaultProps for integrity impact widget
 widgetRegistry.register({
   id: "integrity-impact",
   title: "Integrity Impact",
@@ -178,8 +199,13 @@ widgetRegistry.register({
   icon: WIDGET_ICONS.INTEGRITY_IMPACT,
   size: "medium",
   order: 60,
+  defaultProps: {
+    level: SECURITY_LEVELS.NONE,
+    options: {},
+  },
 });
 
+// Add defaultProps for confidentiality impact widget
 widgetRegistry.register({
   id: "confidentiality-impact",
   title: "Confidentiality Impact",
@@ -187,6 +213,10 @@ widgetRegistry.register({
   icon: WIDGET_ICONS.CONFIDENTIALITY_IMPACT,
   size: "medium",
   order: 70,
+  defaultProps: {
+    level: SECURITY_LEVELS.NONE,
+    options: {},
+  },
 });
 
 widgetRegistry.register({
@@ -197,20 +227,36 @@ widgetRegistry.register({
   order: 80,
 });
 
+// Add defaultProps for technical details widget
 widgetRegistry.register({
   id: "technical-details",
   title: "Technical Implementation",
   component: TechnicalDetailsWidget,
   size: "medium",
   order: 90,
+  defaultProps: {
+    availabilityLevel: SECURITY_LEVELS.NONE,
+    integrityLevel: SECURITY_LEVELS.NONE,
+    confidentialityLevel: SECURITY_LEVELS.NONE,
+    availabilityOptions: {},
+    integrityOptions: {},
+    confidentialityOptions: {},
+  },
 });
 
+// Add defaultProps for business impact analysis widget
 widgetRegistry.register({
   id: "business-impact-analysis",
   title: "Business Impact Analysis",
   component: BusinessImpactAnalysisWidget,
   size: "medium",
   order: 100,
+  defaultProps: {
+    availabilityLevel: SECURITY_LEVELS.NONE,
+    integrityLevel: SECURITY_LEVELS.NONE,
+    confidentialityLevel: SECURITY_LEVELS.NONE,
+    securityLevel: SECURITY_LEVELS.NONE,
+  },
 });
 
 export default widgetRegistry;

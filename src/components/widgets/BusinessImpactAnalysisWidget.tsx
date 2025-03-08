@@ -16,9 +16,9 @@ import { RISK_LEVELS } from "../../constants/riskConstants";
 import KeyValuePair from "../common/KeyValuePair";
 
 interface BusinessImpactAnalysisWidgetProps {
-  availability?: string;
-  integrity?: string;
-  confidentiality?: string;
+  availabilityLevel: string;
+  integrityLevel: string;
+  confidentialityLevel: string;
   securityLevel?: string;
   testId?: string;
 }
@@ -26,9 +26,9 @@ interface BusinessImpactAnalysisWidgetProps {
 const BusinessImpactAnalysisWidget: React.FC<
   BusinessImpactAnalysisWidgetProps
 > = ({
-  availability = "None",
-  integrity = "None",
-  confidentiality = "None",
+  availabilityLevel = "None",
+  integrityLevel = "None",
+  confidentialityLevel = "None",
   securityLevel = "None",
   testId = BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_ANALYSIS_PREFIX,
 }) => {
@@ -76,15 +76,15 @@ const BusinessImpactAnalysisWidget: React.FC<
   const getAllConsiderations = () => {
     const availabilityConsiderations = getConsiderationsForComponent(
       "AVAILABILITY",
-      availability
+      availabilityLevel
     );
     const integrityConsiderations = getConsiderationsForComponent(
       "INTEGRITY",
-      integrity
+      integrityLevel
     );
     const confidentialityConsiderations = getConsiderationsForComponent(
       "CONFIDENTIALITY",
-      confidentiality
+      confidentialityLevel
     );
 
     return [
@@ -138,8 +138,8 @@ const BusinessImpactAnalysisWidget: React.FC<
             <KeyValuePair
               label="Confidentiality:"
               value={
-                <span className={getSecurityLevelClass(confidentiality)}>
-                  {confidentiality}
+                <span className={getSecurityLevelClass(confidentialityLevel)}>
+                  {confidentialityLevel}
                 </span>
               }
               testId={CIA_TEST_IDS.CONFIDENTIALITY_KV}
@@ -156,8 +156,8 @@ const BusinessImpactAnalysisWidget: React.FC<
             <KeyValuePair
               label="Integrity:"
               value={
-                <span className={getSecurityLevelClass(integrity)}>
-                  {integrity}
+                <span className={getSecurityLevelClass(integrityLevel)}>
+                  {integrityLevel}
                 </span>
               }
               testId={CIA_TEST_IDS.INTEGRITY_KV}
@@ -174,8 +174,8 @@ const BusinessImpactAnalysisWidget: React.FC<
             <KeyValuePair
               label="Availability:"
               value={
-                <span className={getSecurityLevelClass(availability)}>
-                  {availability}
+                <span className={getSecurityLevelClass(availabilityLevel)}>
+                  {availabilityLevel}
                 </span>
               }
               testId={CIA_TEST_IDS.AVAILABILITY_KV}
@@ -370,5 +370,65 @@ const BusinessImpactAnalysisWidget: React.FC<
     </div>
   );
 };
+
+function getAvailabilityImpact(level: string): string {
+  switch (level) {
+    case "Very High":
+      return "Business operations are guaranteed with 99.999% uptime. Critical systems have robust failover mechanisms and redundancy.";
+    case "High":
+      return "Business operations maintain 99.9% uptime with reliable recovery procedures for critical systems.";
+    case "Moderate":
+      return "Standard business operations with acceptable downtime windows and basic recovery capabilities.";
+    case "Low":
+      return "Minimal availability controls with potential for extended downtime during outages.";
+    default:
+      return "No specific availability controls. Business operations may be severely impacted during outages.";
+  }
+}
+
+function getIntegrityImpact(level: string): string {
+  switch (level) {
+    case "Very High":
+      return "Data integrity is guaranteed through comprehensive validation, verification, and audit trails. Tamper-evident controls are in place.";
+    case "High":
+      return "Strong data integrity with validation mechanisms and protected audit logs for all important business data.";
+    case "Moderate":
+      return "Standard integrity controls for key business data with basic audit capabilities.";
+    case "Low":
+      return "Minimal data integrity controls with limited detection of unauthorized modifications.";
+    default:
+      return "No specific data integrity controls. Business data is vulnerable to undetected modification.";
+  }
+}
+
+function getConfidentialityImpact(level: string): string {
+  switch (level) {
+    case "Very High":
+      return "Business data is protected with the highest level of confidentiality controls, including encryption, strict access controls, and comprehensive monitoring.";
+    case "High":
+      return "Sensitive business information is well-protected with strong encryption and role-based access controls.";
+    case "Moderate":
+      return "Standard confidentiality measures protect important business information with defined access controls.";
+    case "Low":
+      return "Basic confidentiality controls with limited protection for business information.";
+    default:
+      return "No specific confidentiality controls. Business information may be exposed to unauthorized access.";
+  }
+}
+
+function getOverallBusinessImpact(level?: string): string {
+  switch (level) {
+    case "Very High":
+      return "Enterprise-grade security posture ensures business continuity, data integrity, and confidentiality at all times. This security level is appropriate for organizations with critical operations, sensitive data, or regulatory requirements.";
+    case "High":
+      return "Strong security posture that supports reliable business operations and protects sensitive information. Suitable for businesses with important data assets or compliance needs.";
+    case "Moderate":
+      return "Balanced security controls that provide reasonable protection for business operations and data. Appropriate for most standard business applications.";
+    case "Low":
+      return "Basic security measures that provide minimal protection for business operations and data. May be sufficient for non-critical, low-risk applications.";
+    default:
+      return "Minimal or no security controls. Business operations and data are vulnerable to disruption or compromise. Not recommended for production business systems.";
+  }
+}
 
 export default BusinessImpactAnalysisWidget;

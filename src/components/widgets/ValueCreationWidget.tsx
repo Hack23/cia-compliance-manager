@@ -9,11 +9,24 @@ import {
 import { ensureArray } from "../../utils/typeGuards";
 import ValueDisplay from "../common/ValueDisplay";
 import KeyValuePair from "../common/KeyValuePair";
-import { WIDGET_TEST_IDS, createDynamicTestId } from "../../constants/testIds"; // Import test ID constants
-import { ValueCreationWidgetProps } from "../../types/widgets";
+import {
+  WIDGET_TEST_IDS,
+  createDynamicTestId,
+  VALUE_CREATION_TEST_IDS,
+} from "../../constants/testIds"; // Import test ID constants
+
+// Remove conflicting import
+// import { ValueCreationWidgetProps } from "../../types/widgets";
+
+// Define interface locally instead
+interface ValueCreationWidgetProps {
+  securityLevel: string;
+  testId?: string;
+}
 
 const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
-  securityLevel,
+  securityLevel = SECURITY_LEVELS.NONE,
+  testId = VALUE_CREATION_TEST_IDS.VALUE_CREATION_PREFIX,
 }) => {
   // Create a mapping to simplify the getValuePoints function
   const getValuePoints = () => {
