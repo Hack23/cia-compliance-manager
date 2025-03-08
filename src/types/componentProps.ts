@@ -7,6 +7,7 @@
 
 import React from "react";
 import { CIADetails } from "./cia";
+import { ReactNode } from "react";
 
 /**
  * Props for the KeyValuePair component that displays a key-value combination.
@@ -78,6 +79,8 @@ export interface WidgetContainerProps {
   testId?: string;
   /** Icon to display in the header */
   icon?: string;
+  loading?: boolean;
+  error?: Error | null;
 }
 
 /**
@@ -293,10 +296,16 @@ export interface SecurityLevelWidgetProps {
  */
 export interface TechnicalDetailsWidgetProps {
   /** Availability security level */
-  availability?: string;
+  availabilityLevel?: string;
   /** Integrity security level */
-  integrity?: string;
+  integrityLevel?: string;
   /** Confidentiality security level */
+  confidentialityLevel?: string;
+  /** Backward compatibility availability security level */
+  availability?: string;
+  /** Backward compatibility integrity security level */
+  integrity?: string;
+  /** Backward compatibility confidentiality security level */
   confidentiality?: string;
   /** Availability options */
   availabilityOptions?: Record<string, CIADetails>;
@@ -375,5 +384,13 @@ export interface BusinessImpactAnalysisWidgetProps {
   integrity?: string;
   confidentiality?: string;
   securityLevel?: string;
+  testId?: string;
+}
+
+export interface SecuritySummaryWidgetProps {
+  securityLevel: string;
+  availabilityLevel: string;
+  integrityLevel: string;
+  confidentialityLevel: string;
   testId?: string;
 }

@@ -390,9 +390,23 @@ export const INTEGRITY_IMPACT_TEST_IDS = {
 
 export const SECURITY_SUMMARY_TEST_IDS = {
   SECURITY_SUMMARY_PREFIX: "security-summary",
-  SECURITY_LEVEL_INDICATOR: "security-level-indicator",
-  SECURITY_SUMMARY_DESCRIPTION: "security-summary-description",
-  SECURITY_SUMMARY_CONTAINER: "security-summary-container",
+  SECURITY_ICON: "security-icon",
+  OVERALL_LEVEL: "overall-level",
+  AVAILABILITY_LEVEL: "availability-level",
+  INTEGRITY_LEVEL: "integrity-level",
+  CONFIDENTIALITY_LEVEL: "confidentiality-level",
+  IMPLICATIONS: "implications",
+  TECHNICAL_SECTION_TOGGLE: "technical-section-toggle",
+  TECHNICAL_DETAILS_SECTION: "technical-details-section",
+  BUSINESS_IMPACT_TOGGLE: "business-impact-toggle",
+  BUSINESS_IMPACT_SECTION: "business-impact-section",
+  METRICS_TOGGLE: "metrics-toggle",
+  METRICS_SECTION: "metrics-section",
+  TECHNICAL_IMPLEMENTATION_DETAILS: "technical-implementation-details",
+  AVAILABILITY_TECH_HEADING: "availability-tech-heading",
+  INTEGRITY_TECH_HEADING: "integrity-tech-heading",
+  CONFIDENTIALITY_TECH_HEADING: "confidentiality-tech-heading",
+  SECURITY_RECOMMENDATION: "security-recommendation",
 };
 
 export const TECHNICAL_DETAILS_TEST_IDS = {

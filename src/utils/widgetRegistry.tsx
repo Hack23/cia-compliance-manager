@@ -1,8 +1,24 @@
+// First, import React essentials
 import React, { ReactNode } from "react";
-import { WidgetContainer } from "../components/common";
-// Add SECURITY_LEVELS import
+
+// Then import constants
+import { WIDGET_TITLES, WIDGET_ICONS } from "../constants/coreConstants";
 import { SECURITY_LEVELS } from "../constants/appConstants";
-import { WIDGET_ICONS, WIDGET_TITLES } from "../constants/coreConstants";
+
+// Now import widgets in alphabetical order
+import AvailabilityImpactWidget from "../components/widgets/AvailabilityImpactWidget";
+import BusinessImpactAnalysisWidget from "../components/widgets/BusinessImpactAnalysisWidget";
+import ComplianceStatusWidget from "../components/widgets/ComplianceStatusWidget";
+import ConfidentialityImpactWidget from "../components/widgets/ConfidentialityImpactWidget";
+import CostEstimationWidget from "../components/widgets/CostEstimationWidget";
+import IntegrityImpactWidget from "../components/widgets/IntegrityImpactWidget";
+import RadarChart from "../components/RadarChart";
+import SecurityLevelWidget from "../components/widgets/SecurityLevelWidget";
+import SecurityResourcesWidget from "../components/widgets/SecurityResourcesWidget";
+import SecuritySummaryWidget from "../components/widgets/SecuritySummaryWidget";
+import TechnicalDetailsWidget from "../components/widgets/TechnicalDetailsWidget";
+import ValueCreationWidget from "../components/widgets/ValueCreationWidget";
+import { WidgetContainer } from "../components/common";
 
 // Add export to the interface definition
 export interface WidgetDefinition {
@@ -94,21 +110,6 @@ export class WidgetRegistry {
 
 // Create and export a singleton instance
 export const widgetRegistry = new WidgetRegistry();
-
-// Fix: Import components directly instead of using require()
-// This avoids issues during testing
-import SecuritySummaryWidget from "../components/widgets/SecuritySummaryWidget";
-import ComplianceStatusWidget from "../components/widgets/ComplianceStatusWidget";
-import ValueCreationWidget from "../components/widgets/ValueCreationWidget";
-import CostEstimationWidget from "../components/widgets/CostEstimationWidget";
-import SecurityLevelWidget from "../components/widgets/SecurityLevelWidget";
-import RadarChart from "../components/RadarChart";
-import IntegrityImpactWidget from "../components/widgets/IntegrityImpactWidget";
-import ConfidentialityImpactWidget from "../components/widgets/ConfidentialityImpactWidget";
-import AvailabilityImpactWidget from "../components/widgets/AvailabilityImpactWidget";
-import SecurityResourcesWidget from "../components/widgets/SecurityResourcesWidget";
-import TechnicalDetailsWidget from "../components/widgets/TechnicalDetailsWidget";
-import BusinessImpactAnalysisWidget from "../components/widgets/BusinessImpactAnalysisWidget";
 
 // Pre-register core widgets
 widgetRegistry.register({

@@ -1,7 +1,10 @@
 import { CIADetails } from "./cia";
 
-// Add testId to all widget interfaces
+/**
+ * Base properties for all widgets
+ */
 export interface WidgetBaseProps {
+  /** Test ID for component selection in tests */
   testId?: string;
 }
 
@@ -37,23 +40,41 @@ export interface ComplianceStatusWidgetProps {
   testId?: string;
 }
 
-// Replace CombinedBusinessImpactWidgetProps with separate interfaces
+/**
+ * Properties for the IntegrityImpactWidget component
+ */
 export interface IntegrityImpactWidgetProps extends WidgetBaseProps {
+  /** Integrity security level */
   level?: string;
+  /** Options for each level */
   options?: Record<string, CIADetails>;
 }
 
+/**
+ * Properties for the ConfidentialityImpactWidget component
+ */
 export interface ConfidentialityImpactWidgetProps extends WidgetBaseProps {
+  /** Confidentiality security level */
   level?: string;
+  /** Options for each level */
   options?: Record<string, CIADetails>;
 }
 
+/**
+ * Properties for the AvailabilityImpactWidget component
+ */
 export interface AvailabilityImpactWidgetProps extends WidgetBaseProps {
+  /** Availability security level */
   level?: string;
+  /** Options for each level */
   options?: Record<string, CIADetails>;
 }
 
+/**
+ * Properties for the SecurityResourcesWidget component
+ */
 export interface SecurityResourcesWidgetProps extends WidgetBaseProps {
+  /** Overall security level */
   securityLevel?: string;
 }
 
