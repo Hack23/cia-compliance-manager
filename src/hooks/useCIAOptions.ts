@@ -316,12 +316,73 @@ export const confidentialityOptions: Record<string, CIADetails> = {
   },
 };
 
+// Add ROI estimates for different security levels
+export const ROI_ESTIMATES = {
+  // Keep the new structure with uppercase keys
+  NONE: {
+    description: "No security investment means no return",
+    potentialLosses: "Very High",
+    estimatedSavings: "$0",
+    returnRate: "0%",
+    breakEvenPeriod: "N/A",
+  },
+  LOW: {
+    description: "Basic security measures provide minimal protection",
+    potentialLosses: "High",
+    estimatedSavings: "$10,000-50,000",
+    returnRate: "120%",
+    breakEvenPeriod: "10-12 months",
+  },
+  MODERATE: {
+    description:
+      "Standard security implementation provides good cost-benefit balance",
+    potentialLosses: "Medium",
+    estimatedSavings: "$50,000-200,000",
+    returnRate: "200%",
+    breakEvenPeriod: "6-8 months",
+  },
+  HIGH: {
+    description:
+      "Advanced security implementations provide significant protection",
+    potentialLosses: "Low",
+    estimatedSavings: "$200,000-500,000",
+    returnRate: "350%",
+    breakEvenPeriod: "3-5 months",
+  },
+  VERY_HIGH: {
+    description:
+      "Maximum security measures provide optimal protection and returns",
+    potentialLosses: "Very Low",
+    estimatedSavings: "$500,000+",
+    returnRate: "450%",
+    breakEvenPeriod: "1-3 months",
+  },
+
+  // Add the structure expected by TypeScript errors
+  highImpact: {
+    minSavings: 500000,
+    maxSavings: 2000000,
+    averageReturn: 4.5, // 450% ROI
+  },
+  mediumImpact: {
+    minSavings: 100000,
+    maxSavings: 500000,
+    averageReturn: 3.2, // 320% ROI
+  },
+  lowImpact: {
+    minSavings: 10000,
+    maxSavings: 100000,
+    averageReturn: 1.8, // 180% ROI
+  },
+};
+
 export const useCIAOptions = () => {
   return useMemo(() => {
     return {
       availabilityOptions,
       integrityOptions,
       confidentialityOptions,
+      ROI_ESTIMATES, // Add ROI_ESTIMATES to the returned object
     };
   }, []);
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { SECURITY_LEVELS } from "../../constants/appConstants";
+import { useCIAOptions } from "../../hooks/useCIAOptions";
 import { SECURITY_SUMMARY_TEST_IDS } from "../../constants/testIds";
-import { ROI_ESTIMATES } from "../../constants/businessConstants";
 
 interface SecuritySummaryWidgetProps {
   availabilityLevel: string;
@@ -34,6 +35,9 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
       [section]: !prev[section],
     }));
   };
+
+  // Use the hook to get the ROI_ESTIMATES
+  const { ROI_ESTIMATES } = useCIAOptions();
 
   return (
     <div data-testid={testId} className="security-summary">
@@ -214,6 +218,21 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
       </div>
     </div>
   );
+
+  function getRoiEstimate(level: string): string {
+    switch (level) {
+      case "Very High":
+        return ROI_ESTIMATES.VERY_HIGH.returnRate || "450%";
+      case "High":
+        return ROI_ESTIMATES.HIGH.returnRate || "350%";
+      case "Moderate":
+        return ROI_ESTIMATES.MODERATE.returnRate || "200%";
+      case "Low":
+        return ROI_ESTIMATES.LOW.returnRate || "120%";
+      default:
+        return ROI_ESTIMATES.NONE.returnRate || "0%";
+    }
+  }
 };
 
 function getSecurityLevelColor(level: string): string {
@@ -307,21 +326,6 @@ function getBusinessImpact(level: string): string {
       return "Offers minimal protection. May be acceptable for non-critical business functions with low sensitivity requirements.";
     default:
       return "Provides minimal or no business protection. Substantial risk of breaches, data loss, and operational disruptions.";
-  }
-}
-
-function getRoiEstimate(level: string): string {
-  switch (level) {
-    case "Very High":
-      return ROI_ESTIMATES.VERY_HIGH;
-    case "High":
-      return ROI_ESTIMATES.HIGH;
-    case "Moderate":
-      return ROI_ESTIMATES.MODERATE;
-    case "Low":
-      return ROI_ESTIMATES.LOW;
-    default:
-      return ROI_ESTIMATES.NONE;
   }
 }
 
