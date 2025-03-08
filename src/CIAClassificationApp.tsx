@@ -22,6 +22,7 @@ import SecurityResourcesWidget from "./components/widgets/SecurityResourcesWidge
 import TechnicalDetailsWidget from "./components/widgets/TechnicalDetailsWidget";
 import BusinessImpactAnalysisWidget from "./components/widgets/BusinessImpactAnalysisWidget";
 import { SecurityLevel } from "./types/cia";
+import { typeAdapters } from "./types/widgets";
 
 /**
  * Main component for the CIA Classification App
@@ -154,10 +155,30 @@ const CIAClassificationApp: React.FC = () => {
   const capexEstimate = isSmallSolution ? "$5,000" : "$50,000";
   const opexEstimate = isSmallSolution ? "$500" : "$50,000";
 
-  // Make sure the function returns a single root element and all components are properly nested.
-  // The error suggests there might be a fragment or structural issue.
+  // Prepare adapter functions for options
+  const adaptedIntegrityOptions = Object.entries(integrityOptions).reduce(
+    (acc, [key, value]) => {
+      acc[key] = typeAdapters.toIntegrityDetail(value);
+      return acc;
+    },
+    {} as Record<string, any>
+  );
 
-  // Verify the proper structure:
+  const adaptedConfidentialityOptions = Object.entries(
+    confidentialityOptions
+  ).reduce((acc, [key, value]) => {
+    acc[key] = typeAdapters.toConfidentialityDetail(value);
+    return acc;
+  }, {} as Record<string, any>);
+
+  const adaptedAvailabilityOptions = Object.entries(availabilityOptions).reduce(
+    (acc, [key, value]) => {
+      acc[key] = typeAdapters.toAvailabilityDetail(value);
+      return acc;
+    },
+    {} as Record<string, any>
+  );
+
   return (
     <div
       className={`app-container ${darkMode ? "dark bg-pattern" : ""}`}
@@ -294,7 +315,7 @@ const CIAClassificationApp: React.FC = () => {
               >
                 <IntegrityImpactWidget
                   level={integrity}
-                  options={integrityOptions}
+                  options={adaptedIntegrityOptions}
                 />
               </DashboardWidget>
 
@@ -306,7 +327,7 @@ const CIAClassificationApp: React.FC = () => {
               >
                 <ConfidentialityImpactWidget
                   level={confidentiality}
-                  options={confidentialityOptions}
+                  options={adaptedConfidentialityOptions}
                 />
               </DashboardWidget>
 
@@ -318,8 +339,17 @@ const CIAClassificationApp: React.FC = () => {
               >
                 <AvailabilityImpactWidget
                   level={availability}
-                  options={availabilityOptions}
+                  options={adaptedAvailabilityOptions}
                 />
+              </DashboardWidget>
+
+              {/* Security Resources - New Widget */}
+              <DashboardWidget
+                title={WIDGET_TITLES.SECURITY_RESOURCES}
+                icon="SECURITY_RESOURCES"
+                testId="widget-security-resources-container"
+              >
+                <SecurityResourcesWidget securityLevel={overallSecurityLevel} />
               </DashboardWidget>
 
               {/* Technical Details - New Widget */}
@@ -350,15 +380,6 @@ const CIAClassificationApp: React.FC = () => {
                   confidentialityLevel={confidentiality}
                   securityLevel={overallSecurityLevel}
                 />
-              </DashboardWidget>
-
-              {/* Security Resources - New Widget */}
-              <DashboardWidget
-                title={WIDGET_TITLES.SECURITY_RESOURCES}
-                icon="SECURITY_RESOURCES"
-                testId="widget-security-resources-container"
-              >
-                <SecurityResourcesWidget securityLevel={overallSecurityLevel} />
               </DashboardWidget>
             </Dashboard>
           </div>

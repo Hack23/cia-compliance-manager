@@ -56,7 +56,7 @@ export interface BusinessImpactDetail {
     description: string;
     value: string;
   };
-  [key: string]: any; // Allow for flexible additional properties
+  [key: string]: unknown; // Allow for flexible additional properties with stricter type
 }
 
 export interface BusinessImpactDetails {

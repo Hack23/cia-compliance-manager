@@ -46,20 +46,36 @@ describe("Widget Types", () => {
   it("ConfidentialityImpactWidgetProps should have correct structure", () => {
     const props: ConfidentialityImpactWidgetProps = {
       level: "High",
+      options: {
+        High: {
+          impact: "Strong confidentiality protection",
+          businessImpact: "Business data is well-protected",
+          recommendations: ["Use encryption", "Implement access control"],
+        },
+      },
     };
 
     expect(props.level).toBe("High");
-    expect(props.options).toBeUndefined();
+    expect(props.options).toBeDefined();
   });
 
   it("AvailabilityImpactWidgetProps should have correct structure", () => {
     const props: AvailabilityImpactWidgetProps = {
       level: "Moderate",
       testId: "test-id",
+      options: {
+        High: {
+          description: "High availability",
+          businessImpact: "Business remains operational",
+          uptime: "99.9%",
+          recommendations: ["Use load balancing", "Implement failover"],
+        },
+      },
     };
 
     expect(props.level).toBe("Moderate");
     expect(props.testId).toBe("test-id");
+    expect(props.options).toBeDefined();
   });
 
   it("SecurityResourcesWidgetProps should have correct structure", () => {
@@ -68,5 +84,40 @@ describe("Widget Types", () => {
     };
 
     expect(props.securityLevel).toBe("Very High");
+  });
+
+  it("tests confidentiality impact widget props", () => {
+    const props: ConfidentialityImpactWidgetProps = {
+      level: "High",
+      options: {
+        High: {
+          impact: "Strong confidentiality protection",
+          businessImpact: "Business data is well-protected",
+          recommendations: ["Use encryption", "Implement access control"],
+        },
+      },
+    };
+
+    expect(props.level).toBe("High");
+    expect(props.options).toBeDefined();
+  });
+
+  it("tests availability impact widget props", () => {
+    const props: AvailabilityImpactWidgetProps = {
+      level: "High",
+      testId: "availability-widget",
+      options: {
+        High: {
+          description: "High availability",
+          businessImpact: "Business remains operational",
+          uptime: "99.9%",
+          recommendations: ["Use load balancing", "Implement failover"],
+        },
+      },
+    };
+
+    expect(props.level).toBe("High");
+    expect(props.testId).toBe("availability-widget");
+    expect(props.options).toBeDefined();
   });
 });

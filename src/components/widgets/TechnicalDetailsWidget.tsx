@@ -30,7 +30,11 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   };
 
   return (
-    <div data-testid={testId} className="technical-details-widget">
+    <div
+      data-testid={testId}
+      className="technical-details-widget p-4 border rounded-lg bg-white dark:bg-gray-800 shadow-sm"
+      aria-labelledby="technical-details-title"
+    >
       {/* Remove duplicate testId */}
       <div
         style={{ display: "none" }}
@@ -38,7 +42,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
       ></div>
 
       <div className="mb-4">
-        <h3 className="text-lg font-medium mb-1">
+        <h3 id="technical-details-title" className="text-lg font-medium mb-1">
           Technical Implementation Guide
         </h3>
         <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -48,31 +52,49 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
       </div>
 
       {/* Tab navigation with both sets of test IDs for compatibility */}
-      <div className="flex border-b mb-4">
+      <div className="flex border-b mb-4" role="tablist">
         <button
-          className={`px-4 py-2 ${
-            activeTab === "availability" ? "border-b-2 border-blue-500" : ""
+          className={`px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+            activeTab === "availability"
+              ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
+              : "text-gray-600 dark:text-gray-400"
           }`}
           onClick={() => handleTabChange("availability")}
           data-testid={`${testId}-availability-tab`}
+          role="tab"
+          aria-selected={activeTab === "availability"}
+          aria-controls="availability-tab-panel"
+          id="availability-tab-button"
         >
           Availability
         </button>
         <button
-          className={`px-4 py-2 ${
-            activeTab === "integrity" ? "border-b-2 border-blue-500" : ""
+          className={`px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+            activeTab === "integrity"
+              ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
+              : "text-gray-600 dark:text-gray-400"
           }`}
           onClick={() => handleTabChange("integrity")}
           data-testid={`${testId}-integrity-tab`}
+          role="tab"
+          aria-selected={activeTab === "integrity"}
+          aria-controls="integrity-tab-panel"
+          id="integrity-tab-button"
         >
           Integrity
         </button>
         <button
-          className={`px-4 py-2 ${
-            activeTab === "confidentiality" ? "border-b-2 border-blue-500" : ""
+          className={`px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+            activeTab === "confidentiality"
+              ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
+              : "text-gray-600 dark:text-gray-400"
           }`}
           onClick={() => handleTabChange("confidentiality")}
           data-testid={`${testId}-confidentiality-tab`}
+          role="tab"
+          aria-selected={activeTab === "confidentiality"}
+          aria-controls="confidentiality-tab-panel"
+          id="confidentiality-tab-button"
         >
           Confidentiality
         </button>
@@ -101,13 +123,20 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
       </div>
 
       {/* Tab content */}
-      <div className="p-4 border rounded-lg">
+      <div className="p-4 border rounded-lg bg-gray-50 dark:bg-gray-700">
         {activeTab === "availability" && (
-          <>
+          <div
+            role="tabpanel"
+            id="availability-tab-panel"
+            aria-labelledby="availability-tab-button"
+          >
             <h3 className="font-medium mb-2" data-testid="technical-header">
               Availability Implementation
             </h3>
-            <div data-testid="availability-level-indicator">
+            <div
+              data-testid="availability-level-indicator"
+              className="inline-flex px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 mb-2"
+            >
               {actualAvailabilityLevel}
             </div>
             <p className="text-sm my-2" data-testid="technical-description">
@@ -140,7 +169,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
               >
                 Resources Required
               </h4>
-              <div className="grid grid-cols-2 gap-2 text-xs mt-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs mt-1">
                 <div data-testid="development-effort">
                   <span className="font-medium">Development Effort:</span>{" "}
                   {getEffortLevel(actualAvailabilityLevel)}
@@ -155,15 +184,22 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                 </div>
               </div>
             </div>
-          </>
+          </div>
         )}
 
         {activeTab === "integrity" && (
-          <>
+          <div
+            role="tabpanel"
+            id="integrity-tab-panel"
+            aria-labelledby="integrity-tab-button"
+          >
             <h3 className="font-medium mb-2" data-testid="technical-header">
               Integrity Implementation
             </h3>
-            <div data-testid="integrity-level-indicator">
+            <div
+              data-testid="integrity-level-indicator"
+              className="inline-flex px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mb-2"
+            >
               {actualIntegrityLevel}
             </div>
             <p className="text-sm my-2" data-testid="technical-description">
@@ -195,7 +231,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
               >
                 Resources Required
               </h4>
-              <div className="grid grid-cols-2 gap-2 text-xs mt-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs mt-1">
                 <div data-testid="development-effort">
                   <span className="font-medium">Development Effort:</span>{" "}
                   {getEffortLevel(actualIntegrityLevel)}
@@ -210,15 +246,22 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                 </div>
               </div>
             </div>
-          </>
+          </div>
         )}
 
         {activeTab === "confidentiality" && (
-          <>
+          <div
+            role="tabpanel"
+            id="confidentiality-tab-panel"
+            aria-labelledby="confidentiality-tab-button"
+          >
             <h3 className="font-medium mb-2" data-testid="technical-header">
               Confidentiality Implementation
             </h3>
-            <div data-testid="confidentiality-level-indicator">
+            <div
+              data-testid="confidentiality-level-indicator"
+              className="inline-flex px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 mb-2"
+            >
               {actualConfidentialityLevel}
             </div>
             <p className="text-sm my-2" data-testid="technical-description">
@@ -251,7 +294,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
               >
                 Resources Required
               </h4>
-              <div className="grid grid-cols-2 gap-2 text-xs mt-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs mt-1">
                 <div data-testid="development-effort">
                   <span className="font-medium">Development Effort:</span>{" "}
                   {getEffortLevel(actualConfidentialityLevel)}
@@ -266,7 +309,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                 </div>
               </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

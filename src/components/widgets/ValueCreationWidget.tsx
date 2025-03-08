@@ -121,11 +121,13 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
   return (
     <div
-      className="space-y-4"
+      className="space-y-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm"
       data-testid={WIDGET_TEST_IDS.VALUE_CREATION_CONTENT}
+      aria-labelledby="value-creation-title"
     >
       <div className="flex items-center justify-between">
         <h3
+          id="value-creation-title"
           className={`text-lg font-bold ${getLevelColorClass()}`}
           data-testid={WIDGET_TEST_IDS.VALUE_CREATION_TITLE}
         >
@@ -139,14 +141,20 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         </p>
       </div>
 
-      <ul className="space-y-2" data-testid={WIDGET_TEST_IDS.VALUE_POINTS_LIST}>
+      <ul
+        className="space-y-2"
+        data-testid={WIDGET_TEST_IDS.VALUE_POINTS_LIST}
+        aria-label="Value creation points"
+      >
         {ensureArray(valuePoints).map((point, index) => (
           <li
             key={index}
             className="flex items-start"
             data-testid={createDynamicTestId.valuePoint(index)}
           >
-            <span className={`mr-2 ${getLevelColorClass()}`}>•</span>
+            <span className={`mr-2 ${getLevelColorClass()}`} aria-hidden="true">
+              •
+            </span>
             <span className="font-medium text-sm text-gray-700 dark:text-gray-300">
               {point}
             </span>
@@ -154,7 +162,13 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         ))}
       </ul>
 
-      <div className="border-t pt-2 mt-4">
+      <div
+        className="border-t pt-4 mt-4 bg-gray-50 dark:bg-gray-700 p-3 rounded-lg"
+        aria-labelledby="roi-section-title"
+      >
+        <h4 id="roi-section-title" className="text-sm font-medium mb-2">
+          Return on Investment Analysis
+        </h4>
         <KeyValuePair
           label="Return on Investment:"
           value={
@@ -166,12 +180,33 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           }
           testId={WIDGET_TEST_IDS.ROI_SECTION}
         />
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
           {roiData.description}
         </p>
+
+        <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+          <h5 className="font-medium mb-1">Implementation Considerations</h5>
+          <p>{getImplementationConsiderations(securityLevel)}</p>
+        </div>
       </div>
     </div>
   );
 };
+
+// Add a new helper function
+function getImplementationConsiderations(level: string): string {
+  switch (level) {
+    case SECURITY_LEVELS.VERY_HIGH:
+      return "Implementation requires significant upfront investment but offers maximum long-term value through comprehensive risk reduction and regulatory compliance.";
+    case SECURITY_LEVELS.HIGH:
+      return "Balanced approach with substantial security benefits and reasonable implementation costs for most organizations with sensitive data or operations.";
+    case SECURITY_LEVELS.MODERATE:
+      return "Cost-effective implementation that provides standard security capabilities suitable for most business applications and moderate risk environments.";
+    case SECURITY_LEVELS.LOW:
+      return "Minimal implementation effort focused on essential security controls, appropriate for non-critical systems or limited budgets.";
+    default:
+      return "No security implementation considerations. Consider baseline security controls for any business system.";
+  }
+}
 
 export default ValueCreationWidget;

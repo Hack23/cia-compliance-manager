@@ -1,6 +1,9 @@
 import React from "react";
-import { ConfidentialityImpactWidgetProps } from "../../types/widgets";
 import { WIDGET_TEST_IDS } from "../../constants/testIds";
+import {
+  ConfidentialityImpactWidgetProps,
+  ConfidentialityDetail,
+} from "../../types/widgets";
 
 const ConfidentialityImpactWidget: React.FC<
   ConfidentialityImpactWidgetProps
@@ -9,82 +12,85 @@ const ConfidentialityImpactWidget: React.FC<
   options,
   testId = WIDGET_TEST_IDS.CONFIDENTIALITY_IMPACT_WIDGET,
 }) => {
-  // Default options if none provided - ensure these are type-safe
-  const defaultOptions: Record<
-    string,
-    {
-      impact: string;
-      businessImpact: string;
-      recommendations: string[];
-    }
-  > = {
+  // Default options with improved business context
+  const defaultOptions: Record<string, ConfidentialityDetail> = {
     None: {
       impact: "No data protection, high risk of unauthorized access",
       businessImpact:
-        "Critical vulnerability to data breaches and confidentiality violations",
+        "Critical vulnerability to data breaches and confidentiality violations that could lead to reputation damage, customer loss, and legal liability",
       recommendations: [
-        "Implement basic access controls",
-        "Create data classification policy",
+        "Implement basic access controls and authentication",
+        "Create data classification policy and handling procedures",
+        "Conduct basic security awareness training for employees",
       ],
     },
     Low: {
       impact: "Basic access controls, protection against casual snooping only",
       businessImpact:
-        "Significant vulnerability to targeted attacks, suitable for public data only",
+        "Significant vulnerability to targeted attacks, suitable for public data only. Limited protection for business information.",
       recommendations: [
-        "Implement proper authentication",
-        "Add basic encryption for sensitive data",
+        "Implement proper authentication with password policies",
+        "Add basic encryption for sensitive data in transit",
+        "Deploy access logging for security monitoring",
       ],
     },
     Moderate: {
       impact: "Standard protection mechanisms for sensitive data",
       businessImpact:
-        "Reasonable protection for business data, some vulnerability to sophisticated attacks",
+        "Reasonable protection for business data, providing adequate safeguards for most regulatory compliance needs with moderate risk acceptance",
       recommendations: [
-        "Deploy data loss prevention tools",
-        "Implement strong access controls",
+        "Deploy data loss prevention tools to prevent unauthorized sharing",
+        "Implement role-based access controls with regular review",
+        "Enable encryption for sensitive data at rest and in transit",
       ],
     },
     High: {
       impact: "Strong protection for sensitive information",
-      businessImpact: "Robust protection for confidential business information",
+      businessImpact:
+        "Robust protection for confidential business information meeting most regulatory requirements and reducing data breach risk significantly",
       recommendations: [
-        "Implement comprehensive data encryption",
-        "Deploy advanced access controls",
+        "Implement comprehensive data encryption for all sensitive information",
+        "Deploy multi-factor authentication for all system access",
+        "Establish advanced access controls with just-in-time provisioning",
       ],
     },
     "Very High": {
       impact: "Maximum protection mechanisms for highly sensitive data",
       businessImpact:
-        "Enterprise-grade protection for critical business secrets",
+        "Enterprise-grade protection for critical business secrets with comprehensive safeguards exceeding regulatory requirements and minimizing breach risk",
       recommendations: [
-        "Implement military-grade encryption",
-        "Deploy zero-trust security model",
+        "Implement end-to-end encryption with strong key management",
+        "Deploy zero-trust security model with continuous validation",
+        "Establish comprehensive data protection governance and controls",
       ],
     },
   };
 
-  // Use type assertion to ensure finalOptions is properly typed
-  const finalOptions = (options || defaultOptions) as typeof defaultOptions;
+  // Use options provided or default, with null/undefined safety
+  const finalOptions = options || defaultOptions;
 
-  // Fix: Ensure we have a valid level key or fall back to Moderate
-  const normalizedLevel = (level || "Moderate") as keyof typeof finalOptions;
+  // Safe access to level data with fallback
+  // Add adapter logic to handle both types (CIADetails and ConfidentialityDetail)
+  const levelData = finalOptions[level] || finalOptions["Moderate"] || {};
 
-  // Fix: Always get a valid data object with a guaranteed fallback to Moderate
-  const levelData = finalOptions[normalizedLevel] ||
-    finalOptions["Moderate"] || {
-      impact: "Standard protection mechanisms for sensitive data",
-      businessImpact: "Reasonable protection for business data",
-      recommendations: ["Implement security controls"],
-    };
+  // Extract the important fields, handling both types of data
+  const impact =
+    levelData && "impact" in levelData
+      ? levelData.impact
+      : (levelData && levelData.description) || "";
+
+  const businessImpact = (levelData && levelData.businessImpact) || "";
+  const recommendations = (levelData && levelData.recommendations) || [];
 
   return (
+    // ... existing component jsx with improved accessibility ...
     <div
       data-testid={testId}
       className="confidentiality-impact-widget p-4 border rounded-lg bg-white dark:bg-gray-800"
+      aria-labelledby="confidentiality-impact-title"
     >
       <div className="mb-4">
-        <h3 className="text-lg font-semibold">
+        <h3 id="confidentiality-impact-title" className="text-lg font-semibold">
           Confidentiality Impact: {level}
         </h3>
         <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -98,7 +104,7 @@ const ConfidentialityImpactWidget: React.FC<
           className="text-sm p-2 bg-gray-50 dark:bg-gray-700 rounded"
           data-testid="confidentiality-impact"
         >
-          {levelData.impact}
+          {impact}
         </p>
       </div>
 
@@ -108,14 +114,17 @@ const ConfidentialityImpactWidget: React.FC<
           className="text-sm p-2 bg-gray-50 dark:bg-gray-700 rounded"
           data-testid="business-impact"
         >
-          {levelData.businessImpact}
+          {businessImpact}
         </p>
       </div>
 
       <div className="mb-2">
         <h4 className="font-medium text-sm mb-1">Recommendations</h4>
-        <ul className="list-disc list-inside text-sm">
-          {(levelData.recommendations || []).map((rec, index) => (
+        <ul
+          className="list-disc list-inside text-sm"
+          aria-label="Security recommendations"
+        >
+          {(recommendations || []).map((rec, index) => (
             <li
               key={index}
               className="p-1 bg-gray-50 dark:bg-gray-700 rounded mb-1"

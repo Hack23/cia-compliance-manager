@@ -1,85 +1,132 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import AvailabilityImpactWidget from "./AvailabilityImpactWidget";
-import { CIADetails } from "../../types/cia";
+import { AVAILABILITY_IMPACT_TEST_IDS } from "../../constants/testIds";
+
+// Mock the constants and icons
+vi.mock("../../constants/coreConstants", () => ({
+  CIA_COMPONENT_ICONS: {
+    AVAILABILITY: "⏱️",
+  },
+}));
+
+// Create a test object to provide default options for tests
+const TEST_OPTIONS = {
+  None: {
+    description: "Test none description",
+    businessImpact: "Test none impact",
+    uptime: "< 90%",
+    recommendations: ["Test rec 1", "Test rec 2"],
+    mttr: "Days",
+    rto: "Undefined",
+    rpo: "Undefined",
+  },
+  High: {
+    description: "Test high description",
+    businessImpact: "Test high impact",
+    uptime: "99.9%",
+    recommendations: ["Test high rec 1", "Test high rec 2"],
+    mttr: "Minutes",
+    rto: "1 hour",
+    rpo: "15 minutes",
+  },
+};
 
 describe("AvailabilityImpactWidget", () => {
-  const mockOptions: Record<string, CIADetails> = {
-    None: {
-      description: "No guaranteed uptime or availability controls.",
-      impact: "Complete business disruption during outages",
-      technical: "No redundancy or monitoring in place.",
-      businessImpact:
-        "Critical business operations completely halt during outages",
-      capex: 0,
-      opex: 0,
-      uptime: "< 90%",
-      recommendations: [
-        "Implement basic monitoring",
-        "Create backup procedures",
-      ],
-    },
-    High: {
-      description: "Robust high availability with multiple redundancy.",
-      impact: "Near-zero downtime except in catastrophic scenarios",
-      technical: "Multiple redundant systems with automated recovery.",
-      businessImpact: "Business continuity preserved in most scenarios",
-      capex: 25,
-      opex: 15,
-      uptime: "99.9%",
-      recommendations: [
-        "Implement geographic redundancy",
-        "Partially active redundant systems",
-      ],
-    },
-  };
+  // Test rendering with default props
+  it("renders with default props", () => {
+    render(<AvailabilityImpactWidget level="None" options={TEST_OPTIONS} />);
 
-  it("renders without crashing", () => {
-    render(<AvailabilityImpactWidget level="None" options={{}} />);
-    expect(screen.getByText("Availability Impact: None")).toBeInTheDocument();
+    // Verify widget renders with default level text
+    expect(screen.getByText(/Availability Impact: None/i)).toBeInTheDocument();
+
+    // Check that content sections are present
+    expect(screen.getByText("Test none description")).toBeInTheDocument();
+    expect(screen.getByText("Test none impact")).toBeInTheDocument();
+    expect(screen.getByText(/< 90%/i)).toBeInTheDocument();
   });
 
-  it("displays the correct level", () => {
-    render(<AvailabilityImpactWidget level="High" options={{}} />);
-    expect(screen.getByText("Availability Impact: High")).toBeInTheDocument();
+  // Test with different availability levels
+  it("displays correct content for High availability level", () => {
+    render(<AvailabilityImpactWidget level="High" options={TEST_OPTIONS} />);
+
+    // Verify level is displayed correctly
+    expect(screen.getByText(/Availability Impact: High/i)).toBeInTheDocument();
+
+    // Check for High-specific content
+    expect(screen.getByText(/99.9%/i)).toBeInTheDocument();
+    expect(screen.getByText(/Minutes/i)).toBeInTheDocument();
+
+    // Check for High-specific business perspective
+    const businessPerspective = screen.getByText(/High availability provides/i);
+    expect(businessPerspective).toBeInTheDocument();
   });
 
-  it("displays the correct availability information", () => {
-    render(<AvailabilityImpactWidget level="None" options={mockOptions} />);
+  // Test with custom options
+  it("uses provided custom options", () => {
+    const customOptions = {
+      Moderate: {
+        description: "Custom description",
+        businessImpact: "Custom business impact",
+        uptime: "Custom uptime",
+        recommendations: ["Custom recommendation 1", "Custom recommendation 2"],
+        mttr: "Custom MTTR",
+        rto: "Custom RTO",
+        rpo: "Custom RPO",
+      },
+    };
 
-    expect(
-      screen.getByText("No guaranteed uptime or availability controls.")
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        "Critical business operations completely halt during outages"
-      )
-    ).toBeInTheDocument();
-    expect(screen.getByText("< 90%")).toBeInTheDocument();
-  });
-
-  it("displays recommendations when available", () => {
-    render(<AvailabilityImpactWidget level="None" options={mockOptions} />);
-
-    expect(screen.getByText("Implement basic monitoring")).toBeInTheDocument();
-    expect(screen.getByText("Create backup procedures")).toBeInTheDocument();
-  });
-
-  it("updates content when level changes", () => {
-    const { rerender } = render(
-      <AvailabilityImpactWidget level="None" options={mockOptions} />
+    render(
+      <AvailabilityImpactWidget level="Moderate" options={customOptions} />
     );
 
-    expect(
-      screen.getByText("No guaranteed uptime or availability controls.")
-    ).toBeInTheDocument();
+    // Check for custom content
+    expect(screen.getByText("Custom description")).toBeInTheDocument();
+    expect(screen.getByText("Custom business impact")).toBeInTheDocument();
+    expect(screen.getByText("Custom uptime")).toBeInTheDocument();
+    expect(screen.getByText("Custom MTTR")).toBeInTheDocument();
+    expect(screen.getByText("Custom RTO")).toBeInTheDocument();
+    expect(screen.getByText("Custom RPO")).toBeInTheDocument();
+    expect(screen.getByText("Custom recommendation 1")).toBeInTheDocument();
+  });
 
-    rerender(<AvailabilityImpactWidget level="High" options={mockOptions} />);
+  // Test with custom testId
+  it("uses the provided testId", () => {
+    const testId = "custom-availability-widget";
+    render(
+      <AvailabilityImpactWidget
+        level="None"
+        options={TEST_OPTIONS}
+        testId={testId}
+      />
+    );
 
+    // Check that testId is applied
+    expect(screen.getByTestId(testId)).toBeInTheDocument();
+  });
+
+  // Test with level that doesn't exist in options
+  it("handles unknown level gracefully", () => {
+    // @ts-ignore - intentionally testing with invalid level
+    render(<AvailabilityImpactWidget level="Unknown" options={TEST_OPTIONS} />);
+
+    // Should fall back to "None" level content
     expect(
-      screen.getByText("Robust high availability with multiple redundancy.")
+      screen.getByText(/No availability information available/i)
     ).toBeInTheDocument();
-    expect(screen.getByText("99.9%")).toBeInTheDocument();
+  });
+
+  // Test for accessibility
+  it("has proper accessibility attributes", () => {
+    render(<AvailabilityImpactWidget level="None" options={TEST_OPTIONS} />);
+
+    // Check for accessible elements
+    expect(
+      document.getElementById("availability-impact-title")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(/Implementation recommendations/i)
+    ).toBeInTheDocument();
   });
 });

@@ -1,54 +1,4 @@
-import {
-  AvailabilityDetail,
-  IntegrityDetail,
-  ConfidentialityDetail,
-} from "../types/widgets";
 import { CIADetails } from "../types/cia";
-
-/**
- * Type guard to check if an object is an AvailabilityDetail
- */
-export function isAvailabilityDetail(obj: unknown): obj is AvailabilityDetail {
-  if (!obj || typeof obj !== "object") return false;
-
-  const detail = obj as Partial<AvailabilityDetail>;
-  return (
-    typeof detail.description === "string" &&
-    typeof detail.businessImpact === "string" &&
-    typeof detail.uptime === "string" &&
-    Array.isArray(detail.recommendations)
-  );
-}
-
-/**
- * Type guard to check if an object is an IntegrityDetail
- */
-export function isIntegrityDetail(obj: unknown): obj is IntegrityDetail {
-  if (!obj || typeof obj !== "object") return false;
-
-  const detail = obj as Partial<IntegrityDetail>;
-  return (
-    typeof detail.description === "string" &&
-    typeof detail.businessImpact === "string" &&
-    Array.isArray(detail.recommendations)
-  );
-}
-
-/**
- * Type guard to check if an object is a ConfidentialityDetail
- */
-export function isConfidentialityDetail(
-  obj: unknown
-): obj is ConfidentialityDetail {
-  if (!obj || typeof obj !== "object") return false;
-
-  const detail = obj as Partial<ConfidentialityDetail>;
-  return (
-    typeof detail.impact === "string" &&
-    typeof detail.businessImpact === "string" &&
-    Array.isArray(detail.recommendations)
-  );
-}
 
 /**
  * Type guard to check if a CIA detail object exists
@@ -57,21 +7,6 @@ export function isValidCIADetail(
   detail: CIADetails | undefined | null
 ): detail is CIADetails {
   return detail !== undefined && detail !== null;
-}
-
-/**
- * New alias for backward compatibility
- */
-export function isCIADetails(obj: unknown): obj is CIADetails {
-  if (!obj || typeof obj !== "object") return false;
-
-  const details = obj as Partial<CIADetails>;
-  return (
-    (typeof details.description === "string" ||
-      details.description === undefined) &&
-    (typeof details.businessImpact === "string" ||
-      details.businessImpact === undefined)
-  );
 }
 
 /**

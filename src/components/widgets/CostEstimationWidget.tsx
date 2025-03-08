@@ -9,6 +9,16 @@ import KeyValuePair from "../common/KeyValuePair";
 import ValueDisplay from "../common/ValueDisplay";
 import { COST_TEST_IDS } from "../../constants/testIds";
 
+// Define proper TypeScript interfaces
+interface CostOption {
+  capex: number;
+  opex: number;
+}
+
+interface CostOptionsMap {
+  [level: string]: CostOption;
+}
+
 interface CostEstimationWidgetProps {
   totalCapex: number;
   totalOpex: number;
@@ -21,9 +31,9 @@ interface CostEstimationWidgetProps {
   availabilityLevel?: string;
   integrityLevel?: string;
   confidentialityLevel?: string;
-  availabilityOptions?: Record<string, any>; // Change from string[]
-  integrityOptions?: Record<string, any>; // Change from string[]
-  confidentialityOptions?: Record<string, any>; // Change from string[]
+  availabilityOptions?: CostOptionsMap;
+  integrityOptions?: CostOptionsMap;
+  confidentialityOptions?: CostOptionsMap;
 }
 
 const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({

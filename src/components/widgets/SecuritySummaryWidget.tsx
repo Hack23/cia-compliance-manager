@@ -632,15 +632,15 @@ function getTechnicalImplementation(level: string): string {
 function getBusinessImpact(level: string): string {
   switch (level) {
     case "Very High":
-      return "Provides maximum protection for critical business assets. Significantly reduces risk of breaches, data loss, and operational disruptions. Supports compliance with stringent regulatory requirements.";
+      return "Enterprise-grade security posture with maximum protection for critical business assets. Significantly reduces risk of breaches, data loss, and operational disruptions while supporting compliance with stringent regulatory requirements.";
     case "High":
-      return "Offers strong protection for important business assets. Reduces risk of security incidents and supports regulatory compliance needs for sensitive data.";
+      return "Strong security posture that substantially reduces business risk through robust protection for important assets. Offers strong regulatory compliance capabilities and protection against most common threats.";
     case "Moderate":
-      return "Provides standard protection for business operations. Balances security costs with risk reduction for typical business applications.";
+      return "Balanced security controls that provide reasonable protection for business operations and data. Supports compliance with common regulatory frameworks while managing implementation costs effectively.";
     case "Low":
-      return "Offers minimal protection. May be acceptable for non-critical business functions with low sensitivity requirements.";
+      return "Basic security measures that provide minimal protection for business assets. May be acceptable for non-critical business functions with low sensitivity requirements.";
     default:
-      return "Provides minimal or no business protection. Substantial risk of breaches, data loss, and operational disruptions.";
+      return "Minimal business protection with high exposure to security incidents. Substantial risk of breaches, data loss, operational disruptions, and compliance violations.";
   }
 }
 
@@ -674,6 +674,21 @@ function getIncidentsMetric(level: string): string {
   }
 }
 
+function getMTTDMetric(level: string): string {
+  switch (level) {
+    case "Very High":
+      return "Minutes";
+    case "High":
+      return "Hours";
+    case "Moderate":
+      return "1-2 Days";
+    case "Low":
+      return "Weeks";
+    default:
+      return "Months/Unknown";
+  }
+}
+
 function getComplianceScore(level: string): number {
   switch (level) {
     case "Very High":
@@ -704,6 +719,21 @@ function getRiskLevel(level: string): string {
   }
 }
 
+function getRiskLevelClass(level: string): string {
+  switch (level) {
+    case "Very High":
+      return "text-green-600 dark:text-green-400";
+    case "High":
+      return "text-blue-600 dark:text-blue-400";
+    case "Moderate":
+      return "text-yellow-600 dark:text-yellow-400";
+    case "Low":
+      return "text-orange-600 dark:text-orange-400";
+    default:
+      return "text-red-600 dark:text-red-400";
+  }
+}
+
 function getVulnerabilityScore(level: string): string {
   switch (level) {
     case "Very High":
@@ -719,42 +749,57 @@ function getVulnerabilityScore(level: string): string {
   }
 }
 
+function getDataProtectionRating(level: string): string {
+  switch (level) {
+    case "Very High":
+      return "Enterprise-grade";
+    case "High":
+      return "Advanced";
+    case "Moderate":
+      return "Standard";
+    case "Low":
+      return "Basic";
+    default:
+      return "Inadequate";
+  }
+}
+
 function getRecommendations(level: string): string[] {
   switch (level) {
     case "Very High":
       return [
-        "Maintain security controls with regular assessments and updates",
-        "Perform penetration testing at least quarterly",
-        "Conduct comprehensive security awareness training",
-        "Implement advanced threat detection and prevention",
+        "Maintain comprehensive security controls with regular assessments",
+        "Perform quarterly penetration testing and architecture reviews",
+        "Implement advanced threat detection and prevention systems",
+        "Establish comprehensive security governance framework",
       ];
     case "High":
       return [
-        "Enhance authentication with multi-factor mechanisms",
-        "Implement robust access controls and review them regularly",
-        "Deploy comprehensive monitoring and alerting",
-        "Establish detailed incident response procedures",
+        "Enhance authentication with multi-factor mechanisms for all systems",
+        "Implement robust access controls and review them quarterly",
+        "Deploy comprehensive monitoring and automated alerting",
+        "Establish detailed incident response and business continuity procedures",
       ];
     case "Moderate":
       return [
-        "Implement standard authentication and access controls",
-        "Deploy basic monitoring and alerting",
-        "Establish regular backup procedures",
-        "Create basic incident response plans",
+        "Implement standard authentication and access controls for all systems",
+        "Deploy centralized monitoring and basic alerting",
+        "Establish regular backup procedures and test them periodically",
+        "Create formal incident response plans and conduct tabletop exercises",
       ];
     case "Low":
       return [
-        "Implement basic authentication mechanisms",
-        "Establish minimal access controls",
-        "Set up basic backup procedures",
-        "Document simple incident handling steps",
+        "Implement basic authentication for all access points",
+        "Establish minimal access controls following least privilege",
+        "Set up basic backup procedures for critical systems",
+        "Document simple incident handling procedures",
       ];
     default:
       return [
-        "Implement basic security controls",
-        "Create a security baseline assessment",
-        "Identify critical assets and security requirements",
-        "Develop a security improvement roadmap",
+        "Implement foundational security controls to establish a baseline",
+        "Create a security assessment to identify critical vulnerabilities",
+        "Identify and prioritize protection for critical assets",
+        "Develop a phased security improvement roadmap",
       ];
   }
 }
@@ -777,6 +822,66 @@ function getKeyBenefits(level: string): string[] {
   return benefits.map((benefit) =>
     typeof benefit === "string" ? benefit : benefit.title
   );
+}
+
+function getAvailabilityBusinessImpact(level: string): string {
+  switch (level) {
+    case "Very High":
+      return "Provides near-continuous business operations even during major disruptions with minimal downtime (99.999% uptime).";
+    case "High":
+      return "Enables reliable business operations with minimal interruptions (99.9% uptime) and quick recovery from issues.";
+    case "Moderate":
+      return "Maintains acceptable business continuity with planned maintenance windows and reasonable recovery timeframes.";
+    case "Low":
+      return "Provides basic operational stability for non-critical business functions with potential for extended recovery times.";
+    default:
+      return "Business operations vulnerable to disruption with prolonged recovery times.";
+  }
+}
+
+function getIntegrityBusinessImpact(level: string): string {
+  switch (level) {
+    case "Very High":
+      return "Ensures complete data accuracy and trustworthiness for all business information, enabling confident decision-making.";
+    case "High":
+      return "Provides strong assurance of data accuracy for critical business information and processes.";
+    case "Moderate":
+      return "Offers reasonable protection against data corruption for important business information.";
+    case "Low":
+      return "Provides basic protection against unintentional data corruption with limited detection capabilities.";
+    default:
+      return "Business information vulnerable to undetected modifications and corruption, potentially leading to faulty decisions.";
+  }
+}
+
+function getConfidentialityBusinessImpact(level: string): string {
+  switch (level) {
+    case "Very High":
+      return "Ensures maximum protection for sensitive business information with robust controls against data leakage and unauthorized access.";
+    case "High":
+      return "Provides strong protection for business-sensitive information with comprehensive access controls and monitoring.";
+    case "Moderate":
+      return "Offers reasonable data protection controls suitable for most business information with defined access management.";
+    case "Low":
+      return "Provides basic protection for business information with limited access control mechanisms.";
+    default:
+      return "Business information vulnerable to unauthorized access and disclosure, potentially leading to competitive disadvantage.";
+  }
+}
+
+function getConfidentialityImplementation(level: string): string {
+  switch (level) {
+    case "Very High":
+      return "Implement end-to-end encryption for all sensitive data at rest and in transit. Deploy multi-factor authentication with hardware tokens for all access. Implement just-in-time privileged access with comprehensive logging. Deploy data loss prevention systems with advanced behavioral analytics. Conduct regular penetration testing and security assessments.";
+    case "High":
+      return "Implement encryption for all sensitive data. Use multi-factor authentication for all privileged users. Deploy role-based access controls with principle of least privilege. Conduct regular security assessments and vulnerability scanning.";
+    case "Moderate":
+      return "Implement TLS for all network communications. Apply encryption for important data at rest. Set up standard authentication mechanisms and role-based access controls. Monitor access to sensitive resources.";
+    case "Low":
+      return "Deploy basic authentication mechanisms. Implement minimal access controls. Apply encryption for highly sensitive data.";
+    default:
+      return "No specific confidentiality controls implemented. Data may be accessed by unauthorized parties without detection.";
+  }
 }
 
 export default SecuritySummaryWidget;
