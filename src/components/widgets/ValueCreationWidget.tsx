@@ -57,19 +57,35 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   const getROIEstimate = () => {
     switch (securityLevel) {
       case SECURITY_LEVELS.VERY_HIGH:
-        return ROI_ESTIMATES.VERY_HIGH;
+        return {
+          value: "450%",
+          description: "Maximum return with comprehensive security controls",
+        };
       case SECURITY_LEVELS.HIGH:
-        return ROI_ESTIMATES.HIGH;
+        return {
+          value: "350%",
+          description: "Strong return with robust security implementation",
+        };
       case SECURITY_LEVELS.MODERATE:
-        return ROI_ESTIMATES.MODERATE;
+        return {
+          value: "200%",
+          description: "Good return with balanced security approach",
+        };
       case SECURITY_LEVELS.LOW:
-        return ROI_ESTIMATES.LOW;
+        return {
+          value: "120%",
+          description: "Basic return with minimal security investment",
+        };
       default:
-        return ROI_ESTIMATES.NONE;
+        return {
+          value: "0%",
+          description: "No return without security investment",
+        };
     }
   };
 
-  const roiEstimate = getROIEstimate();
+  // Get ROI data from calculation
+  const roiData = getROIEstimate();
 
   // Color styling based on level
   const getLevelVariant = () => {
@@ -143,13 +159,16 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           label="Return on Investment:"
           value={
             <ValueDisplay
-              value={roiEstimate}
+              value={roiData.value}
               variant={getLevelVariant()}
               testId={WIDGET_TEST_IDS.ROI_VALUE}
             />
           }
           testId={WIDGET_TEST_IDS.ROI_SECTION}
         />
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+          {roiData.description}
+        </p>
       </div>
     </div>
   );

@@ -4,9 +4,11 @@ import { useCIAOptions } from "../../hooks/useCIAOptions";
 import {
   SECURITY_SUMMARY_TEST_IDS,
   WIDGET_TEST_IDS,
+  SUMMARY_TEST_IDS,
 } from "../../constants/testIds";
 import { BusinessKeyBenefits } from "../../types/businessImpact";
 import { TEST_MATCHERS } from "../../constants/testConstants";
+import { UI_ICONS, SECURITY_DESCRIPTIONS } from "../../constants/appConstants";
 
 interface SecuritySummaryWidgetProps {
   availabilityLevel: string;
@@ -44,10 +46,35 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
   // Use the hook to get the ROI_ESTIMATES
   const { ROI_ESTIMATES } = useCIAOptions();
 
+  // Get the appropriate security icon for this level
+  const getSecurityIcon = (level: string): string => {
+    switch (level) {
+      case "Very High":
+        return UI_ICONS.SECURITY_VERY_HIGH;
+      case "High":
+        return UI_ICONS.SECURITY_HIGH;
+      case "Moderate":
+        return UI_ICONS.SECURITY_MODERATE;
+      case "Low":
+        return UI_ICONS.SECURITY_LOW;
+      case "Basic":
+        return UI_ICONS.BASIC_COMPLIANCE;
+      default:
+        return UI_ICONS.SECURITY_NONE;
+    }
+  };
+
   return (
     <div data-testid={testId} className="security-summary">
       <div className="mb-4 text-center">
-        {/* Add the specific test ID that tests are looking for */}
+        {/* Add the security icon element that tests are looking for */}
+        <span
+          className="text-2xl block mb-2"
+          data-testid={SUMMARY_TEST_IDS.SECURITY_ICON}
+        >
+          {getSecurityIcon(securityLevel)}
+        </span>
+
         <h3
           className="text-xl font-semibold"
           data-testid={`${testId}-overall-level`}
@@ -465,16 +492,26 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
   function getRoiEstimate(level: string, ROI_ESTIMATES: any): string {
     switch (level) {
       case "Very High":
-        return ROI_ESTIMATES.VERY_HIGH?.returnRate || "450%";
+        return typeof ROI_ESTIMATES.VERY_HIGH === "string"
+          ? ROI_ESTIMATES.VERY_HIGH
+          : ROI_ESTIMATES.VERY_HIGH?.returnRate || "450%";
       case "High":
-        return ROI_ESTIMATES.HIGH?.returnRate || "350%";
+        return typeof ROI_ESTIMATES.HIGH === "string"
+          ? ROI_ESTIMATES.HIGH
+          : ROI_ESTIMATES.HIGH?.returnRate || "350%";
       case "Moderate":
-        return ROI_ESTIMATES.MODERATE?.returnRate || "200%";
+        return typeof ROI_ESTIMATES.MODERATE === "string"
+          ? ROI_ESTIMATES.MODERATE
+          : ROI_ESTIMATES.MODERATE?.returnRate || "200%";
       case "Low":
-        return ROI_ESTIMATES.LOW?.returnRate || "120%";
+        return typeof ROI_ESTIMATES.LOW === "string"
+          ? ROI_ESTIMATES.LOW
+          : ROI_ESTIMATES.LOW?.returnRate || "120%";
       default:
         // For None/Basic, use NONE's returnRate if it exists, otherwise use "0%"
-        return ROI_ESTIMATES.NONE?.returnRate || "0%";
+        return typeof ROI_ESTIMATES.NONE === "string"
+          ? ROI_ESTIMATES.NONE
+          : ROI_ESTIMATES.NONE?.returnRate || "0%";
     }
   }
 
@@ -514,15 +551,16 @@ function getSecurityLevelColor(level: string): string {
 function getSecurityLevelDescription(level: string): string {
   switch (level) {
     case "None":
-      return "Minimal or no security controls";
+      return SECURITY_DESCRIPTIONS.NONE;
     case "Low":
-      return "Basic security measures for non-critical systems";
+    case "Basic": // Map Basic to use Low description
+      return SECURITY_DESCRIPTIONS.LOW;
     case "Moderate":
-      return "Standard security controls for normal business functions";
+      return SECURITY_DESCRIPTIONS.MODERATE;
     case "High":
-      return "Strong protection for sensitive information and critical systems";
+      return SECURITY_DESCRIPTIONS.HIGH;
     case "Very High":
-      return "Maximum security for highly sensitive systems and data";
+      return SECURITY_DESCRIPTIONS.VERY_HIGH;
     default:
       return "Security level not specified";
   }
