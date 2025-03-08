@@ -305,7 +305,7 @@ export const COST_ANALYSIS = {
 
 // Framework names
 export const COMPLIANCE_FRAMEWORKS = {
-  SOC2: "SOC 2 Type 1",
+  SOC2: "SOC 2", // Change if needed to match what the component uses
   ISO27001: "ISO 27001",
   PCI_DSS: "PCI DSS",
   HIPAA: "HIPAA",

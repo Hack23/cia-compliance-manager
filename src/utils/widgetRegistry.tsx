@@ -54,7 +54,7 @@ export class WidgetRegistry {
     return Array.from(this.widgets.values()).sort((a, b) => {
       // Handle undefined order values safely
       const orderA = typeof a.order === "number" ? a.order : 999;
-      const orderB = typeof b.order === "number" ? a.order : 999;
+      const orderB = typeof b.order === "number" ? b.order : 999;
       // Ensure we're working with numbers for the subtraction
       return (orderA || 999) - (orderB || 999);
     });

@@ -1,7 +1,7 @@
 import React from "react";
 import {
-  COMPLIANCE_STATUS_TEST_IDS,
   FRAMEWORK_TEST_IDS,
+  createDynamicTestId,
 } from "../../constants/testIds";
 import {
   COMPLIANCE_FRAMEWORKS,
@@ -28,7 +28,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
   availability,
   integrity,
   confidentiality,
-  testId = COMPLIANCE_STATUS_TEST_IDS.COMPLIANCE_STATUS_PREFIX,
+  testId = FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_WIDGET,
 }) => {
   // Use provided values or fall back to backward compatibility props
   const actualAvailability = availability || availabilityLevel;
@@ -136,7 +136,8 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         {complianceStatus.map((item, index) => (
           <div
             key={index}
-            data-testid={`${testId}-item-${index}`}
+            // Use the framework-specific test ID that tests are looking for
+            data-testid={createDynamicTestId.framework(index)}
             className="p-3 border rounded-lg bg-white dark:bg-gray-800 shadow-sm"
           >
             <div className="flex items-center">
@@ -331,6 +332,7 @@ function getCompliantFrameworks(
     frameworks.push("ISO 27001 (Basic Controls)");
   }
 
+  // Make SOC2 appear at Moderate level (avgLevel >= 2) instead of requiring avgLevel >= 3
   if (avgLevel >= 2) {
     frameworks.push("SOC 2 Type 1");
     frameworks.push("NIST CSF (Tier 1-2)");

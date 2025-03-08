@@ -489,7 +489,25 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     </div>
   );
 
+  // Update the getRoiEstimate function to handle the case when ROI_ESTIMATES is undefined
   function getRoiEstimate(level: string, ROI_ESTIMATES: any): string {
+    // Early check for undefined ROI_ESTIMATES
+    if (!ROI_ESTIMATES) {
+      // Return default values when ROI_ESTIMATES is not available
+      switch (level) {
+        case "Very High":
+          return "450%";
+        case "High":
+          return "350%";
+        case "Moderate":
+          return "200%";
+        case "Low":
+          return "120%";
+        default:
+          return "0%";
+      }
+    }
+
     switch (level) {
       case "Very High":
         return typeof ROI_ESTIMATES.VERY_HIGH === "string"

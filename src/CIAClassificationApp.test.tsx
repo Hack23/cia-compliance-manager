@@ -98,23 +98,24 @@ vi.mock("./components/widgets/BusinessImpactAnalysisWidget", () => ({
 vi.mock("./components/RadarChart", () => {
   return {
     default: ({
-      availability,
-      integrity,
-      confidentiality,
+      availabilityLevel, // Change props to use the correct property names
+      integrityLevel,
+      confidentialityLevel,
     }: {
-      availability: string;
-      integrity: string;
-      confidentiality: string;
+      availabilityLevel: string;
+      integrityLevel: string;
+      confidentialityLevel: string;
     }) => (
       <div data-testid="mock-radar-chart">
+        {/* Use the property names that the tests expect */}
         <div data-testid={CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE}>
-          {availability}
+          {availabilityLevel}
         </div>
         <div data-testid={CHART_TEST_IDS.RADAR_INTEGRITY_VALUE}>
-          {integrity}
+          {integrityLevel}
         </div>
         <div data-testid={CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE}>
-          {confidentiality}
+          {confidentialityLevel}
         </div>
       </div>
     ),
