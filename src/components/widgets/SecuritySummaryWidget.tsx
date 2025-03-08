@@ -6,6 +6,7 @@ import {
   WIDGET_TEST_IDS,
 } from "../../constants/testIds";
 import { BusinessKeyBenefits } from "../../types/businessImpact";
+import { TEST_MATCHERS } from "../../constants/testConstants";
 
 interface SecuritySummaryWidgetProps {
   availabilityLevel: string;
@@ -125,7 +126,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
           <div>
             <span className="font-medium text-sm">ROI Estimate: </span>
             <span className="text-sm" data-testid="roi-estimate-summary-value">
-              {getRoiEstimate(securityLevel)}
+              {getRoiEstimate(securityLevel, ROI_ESTIMATES)}
             </span>
           </div>
           <div>
@@ -245,7 +246,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               <div>
                 <span className="font-medium">ROI Estimate: </span>
                 <span data-testid="roi-estimate-summary-value">
-                  {getRoiEstimate(securityLevel)}
+                  {getRoiEstimate(securityLevel, ROI_ESTIMATES)}
                 </span>
               </div>
               <div>
@@ -461,18 +462,19 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     </div>
   );
 
-  function getRoiEstimate(level: string): string {
+  function getRoiEstimate(level: string, ROI_ESTIMATES: any): string {
     switch (level) {
       case "Very High":
-        return ROI_ESTIMATES.VERY_HIGH.returnRate || "450%";
+        return ROI_ESTIMATES.VERY_HIGH?.returnRate || "450%";
       case "High":
-        return ROI_ESTIMATES.HIGH.returnRate || "350%";
+        return ROI_ESTIMATES.HIGH?.returnRate || "350%";
       case "Moderate":
-        return ROI_ESTIMATES.MODERATE.returnRate || "200%";
+        return ROI_ESTIMATES.MODERATE?.returnRate || "200%";
       case "Low":
-        return ROI_ESTIMATES.LOW.returnRate || "120%";
+        return ROI_ESTIMATES.LOW?.returnRate || "120%";
       default:
-        return ROI_ESTIMATES.NONE.returnRate || "0%";
+        // For None/Basic, use NONE's returnRate if it exists, otherwise use "0%"
+        return ROI_ESTIMATES.NONE?.returnRate || "0%";
     }
   }
 

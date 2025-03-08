@@ -13,10 +13,10 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
 }) => {
   // Use provided values or fall back to backward compatibility props
   const actualAvailabilityLevel =
-    availabilityLevel || availability || "Moderate";
-  const actualIntegrityLevel = integrityLevel || integrity || "Moderate";
+    availability || availabilityLevel || "Moderate";
+  const actualIntegrityLevel = integrity || integrityLevel || "Moderate";
   const actualConfidentialityLevel =
-    confidentialityLevel || confidentiality || "Moderate";
+    confidentiality || confidentialityLevel || "Moderate";
 
   const [activeTab, setActiveTab] = useState<
     "availability" | "integrity" | "confidentiality"
@@ -31,9 +31,10 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
 
   return (
     <div data-testid={testId} className="technical-details-widget">
+      {/* Remove duplicate testId */}
       <div
-        data-testid={WIDGET_TEST_IDS.TECHNICAL_DETAILS_WIDGET}
         style={{ display: "none" }}
+        id="technical-details-widget-hidden"
       ></div>
 
       <div className="mb-4">

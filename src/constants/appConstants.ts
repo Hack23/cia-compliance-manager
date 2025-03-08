@@ -268,9 +268,31 @@ export const DETAILED_VALUE_POINTS = {
 export const ROI_ESTIMATES = {
   NONE: "Negative (high risk of losses)",
   LOW: "1-2x for basic security implementation",
-  MODERATE: "2-3x for standard business operations",
-  HIGH: "3-5x when factoring in breach prevention",
-  VERY_HIGH: "5-10x for specialized high-security markets",
+  MODERATE: "2-3x with moderate security",
+  HIGH: "3-5x with high security",
+  VERY_HIGH: "5x+ with very high security",
+
+  // Also include structured data for component use
+  NONE_OBJ: {
+    returnRate: "0%",
+    description: "No security investment means no return",
+  },
+  LOW_OBJ: {
+    returnRate: "120%",
+    description: "Basic security measures provide minimal protection",
+  },
+  MODERATE_OBJ: {
+    returnRate: "200%",
+    description: "Standard security provides good cost-benefit balance",
+  },
+  HIGH_OBJ: {
+    returnRate: "350%",
+    description: "Advanced security provides significant protection",
+  },
+  VERY_HIGH_OBJ: {
+    returnRate: "450%",
+    description: "Maximum security provides optimal protection",
+  },
 };
 
 // Cost Analysis Messages

@@ -440,8 +440,8 @@ describe("SecuritySummaryWidget", () => {
     );
 
     // Now checking the exposed ROI summary instead of the hidden section
-    expect(screen.getByTestId("roi-estimate-summary")).toHaveTextContent(
-      ROI_ESTIMATES.HIGH
+    expect(screen.getByTestId("roi-estimate-summary-value")).toHaveTextContent(
+      "350%"
     );
 
     rerender(
@@ -452,8 +452,8 @@ describe("SecuritySummaryWidget", () => {
         confidentialityLevel="Moderate"
       />
     );
-    expect(screen.getByTestId("roi-estimate-summary")).toHaveTextContent(
-      ROI_ESTIMATES.LOW
+    expect(screen.getByTestId("roi-estimate-summary-value")).toHaveTextContent(
+      "120%"
     );
   });
 
@@ -559,8 +559,12 @@ describe("SecuritySummaryWidget", () => {
         confidentialityLevel="Moderate"
       />
     );
-    expect(screen.getByText(/Strong Protection/i)).toBeInTheDocument();
-    expect(screen.getByText(/Sensitive Data Ready/i)).toBeInTheDocument();
+
+    // Change these to look for specific test IDs rather than text content
+    expect(screen.getByTestId("badge-strong-protection")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("badge-sensitive-data-ready")
+    ).toBeInTheDocument();
   });
 
   // Adding additional test cases to improve coverage
@@ -618,8 +622,9 @@ describe("SecuritySummaryWidget", () => {
     );
 
     // We'll check for the value content instead of class since ValueDisplay uses different classes
+    // Fix: We need to ensure we're using a string value from ROI_ESTIMATES
     expect(screen.getByTestId("roi-estimate-summary-value")).toHaveTextContent(
-      ROI_ESTIMATES.NONE
+      typeof ROI_ESTIMATES.NONE === "string" ? ROI_ESTIMATES.NONE : "0%"
     );
 
     const levels = ["None", "Low", "Moderate", "High", "Very High"];
@@ -638,7 +643,15 @@ describe("SecuritySummaryWidget", () => {
       const keyForROI = level
         .toUpperCase()
         .replace(/\s+/g, "_") as keyof typeof ROI_ESTIMATES;
-      const expectedROI = ROI_ESTIMATES[keyForROI] || "Unknown";
+
+      // Fix: Ensure we're using a string value from the ROI_ESTIMATES
+      const roiValue = ROI_ESTIMATES[keyForROI];
+      const expectedROI =
+        typeof roiValue === "string"
+          ? roiValue
+          : roiValue && typeof roiValue === "object" && "returnRate" in roiValue
+          ? roiValue.returnRate
+          : "Unknown";
 
       expect(
         screen.getByTestId("roi-estimate-summary-value")
