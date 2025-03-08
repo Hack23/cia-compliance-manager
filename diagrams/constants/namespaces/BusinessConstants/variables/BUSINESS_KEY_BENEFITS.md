@@ -8,4 +8,4 @@
 
 > `const` **BUSINESS\_KEY\_BENEFITS**: [`BusinessKeyBenefits`](../../../interfaces/BusinessKeyBenefits.md)
 
-Defined in: [constants/businessConstants.ts:224](https://github.com/Hack23/cia-compliance-manager/blob/c560b17eefe52a4a8326894c342aaa04a58b47bb/src/constants/businessConstants.ts#L224)
+Defined in: [constants/businessConstants.ts:224](https://github.com/Hack23/cia-compliance-manager/blob/9aafe15eec550c621832d88d750cb4cde17896e9/src/constants/businessConstants.ts#L224)

@@ -8,4 +8,4 @@
 
 > `const` **SECURITY\_LEVELS**: `Record`\<[`SecurityLevelKey`](../type-aliases/SecurityLevelKey.md), [`SecurityLevel`](../type-aliases/SecurityLevel.md)\>
 
-Defined in: [constants/appConstants.ts:106](https://github.com/Hack23/cia-compliance-manager/blob/c560b17eefe52a4a8326894c342aaa04a58b47bb/src/constants/appConstants.ts#L106)
+Defined in: [constants/appConstants.ts:106](https://github.com/Hack23/cia-compliance-manager/blob/9aafe15eec550c621832d88d750cb4cde17896e9/src/constants/appConstants.ts#L106)

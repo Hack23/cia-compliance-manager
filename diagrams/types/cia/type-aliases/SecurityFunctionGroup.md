@@ -8,4 +8,4 @@
 
 > **SecurityFunctionGroup**: `"Identify"` \| `"Protect"` \| `"Detect"` \| `"Respond"` \| `"Recover"`
 
-Defined in: [types/cia.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/c560b17eefe52a4a8326894c342aaa04a58b47bb/src/types/cia.ts#L9)
+Defined in: [types/cia.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/9aafe15eec550c621832d88d750cb4cde17896e9/src/types/cia.ts#L9)
