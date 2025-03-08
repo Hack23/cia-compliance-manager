@@ -123,7 +123,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
             activeTab === "availability" ? "border-b-2 border-blue-500" : ""
           }`}
           onClick={() => setActiveTab("availability")}
-          data-testid="availability-tab"
+          data-testid={`${testId}-availability-tab`}
         >
           Availability
         </button>
@@ -132,7 +132,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
             activeTab === "integrity" ? "border-b-2 border-blue-500" : ""
           }`}
           onClick={() => setActiveTab("integrity")}
-          data-testid="integrity-tab"
+          data-testid={`${testId}-integrity-tab`}
         >
           Integrity
         </button>
@@ -141,7 +141,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
             activeTab === "confidentiality" ? "border-b-2 border-blue-500" : ""
           }`}
           onClick={() => setActiveTab("confidentiality")}
-          data-testid="confidentiality-tab"
+          data-testid={`${testId}-confidentiality-tab`}
         >
           Confidentiality
         </button>

@@ -13,16 +13,8 @@ import {
   WIDGET_TEST_IDS,
   createDynamicTestId,
   VALUE_CREATION_TEST_IDS,
-} from "../../constants/testIds"; // Import test ID constants
-
-// Remove conflicting import
-// import { ValueCreationWidgetProps } from "../../types/widgets";
-
-// Define interface locally instead
-interface ValueCreationWidgetProps {
-  securityLevel: string;
-  testId?: string;
-}
+} from "../../constants/testIds";
+import { ValueCreationWidgetProps } from "../../types/widgets"; // Use the imported type
 
 const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   securityLevel = SECURITY_LEVELS.NONE,
