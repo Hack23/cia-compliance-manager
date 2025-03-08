@@ -57,9 +57,8 @@ describe("ConfidentialityImpactWidget", () => {
 
   it("shows protection level text", () => {
     render(<ConfidentialityImpactWidget level="None" options={mockOptions} />);
-    expect(screen.getByText(/Protection Level:/)).toHaveTextContent(
-      "No protection"
-    );
+    const protectionLevelText = screen.getByTestId("protection-level-text");
+    expect(protectionLevelText).toHaveTextContent("No protection");
   });
 
   it("handles different security levels", () => {
@@ -74,9 +73,8 @@ describe("ConfidentialityImpactWidget", () => {
     rerender(
       <ConfidentialityImpactWidget level="Unknown" options={mockOptions} />
     );
-    // Should fall back to Moderate
-    expect(screen.getByText(/Protection Level:/)).toHaveTextContent(
-      "Unknown protection level"
-    );
+    // Should fall back to Unknown protection level
+    const protectionLevelText = screen.getByTestId("protection-level-text");
+    expect(protectionLevelText).toHaveTextContent("Unknown protection level");
   });
 });

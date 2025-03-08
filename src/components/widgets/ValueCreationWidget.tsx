@@ -58,27 +58,27 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
     switch (securityLevel) {
       case SECURITY_LEVELS.VERY_HIGH:
         return {
-          value: "450%",
+          value: "5x+",
           description: "Maximum return with comprehensive security controls",
         };
       case SECURITY_LEVELS.HIGH:
         return {
-          value: "350%",
+          value: "3-5x",
           description: "Strong return with robust security implementation",
         };
       case SECURITY_LEVELS.MODERATE:
         return {
-          value: "200%",
+          value: "2-3x",
           description: "Good return with balanced security approach",
         };
       case SECURITY_LEVELS.LOW:
         return {
-          value: "120%",
+          value: "1-2x",
           description: "Basic return with minimal security investment",
         };
       default:
         return {
-          value: "0%",
+          value: "Negative (high risk of losses)",
           description: "No return without security investment",
         };
     }

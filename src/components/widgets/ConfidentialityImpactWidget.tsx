@@ -85,8 +85,7 @@ const ConfidentialityImpactWidget: React.FC<
     >
       <div className="mb-4">
         <h3 className="text-lg font-semibold">
-          Confidentiality Impact:{" "}
-          <span className="text-purple-600">{level}</span>
+          Confidentiality Impact: {level}
         </h3>
         <p className="text-sm text-gray-600 dark:text-gray-400">
           Analysis of confidentiality protection impact
@@ -129,7 +128,7 @@ const ConfidentialityImpactWidget: React.FC<
       </div>
 
       <div className="mt-4 text-xs text-gray-500">
-        <p>
+        <p data-testid="protection-level-text">
           <strong>Protection Level:</strong> {getProtectionLevel(level)}
         </p>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { CIADetails } from "../../types/cia";
-import { INTEGRITY_IMPACT_TEST_IDS } from "../../constants/testIds";
+import { WIDGET_TEST_IDS } from "../../constants/testIds";
 import { CIA_COMPONENT_ICONS } from "../../constants/coreConstants";
 import { BUSINESS_IMPACT_ICONS } from "../../constants/uiConstants";
 
@@ -22,12 +22,13 @@ interface EnhancedCIADetails {
 const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
   level = "None",
   options = {},
-  testId = INTEGRITY_IMPACT_TEST_IDS.INTEGRITY_IMPACT_PREFIX,
+  testId = WIDGET_TEST_IDS.INTEGRITY_IMPACT_WIDGET,
 }) => {
   const currentOption = options[level] || ({} as EnhancedCIADetails);
+  const effectiveTestId = "widget-integrity-impact";
 
   return (
-    <div className="p-4 space-y-4" data-testid={testId}>
+    <div className="p-4 space-y-4" data-testid={effectiveTestId}>
       <div className="flex items-center mb-4">
         <span className="text-xl mr-2">{CIA_COMPONENT_ICONS.INTEGRITY}</span>
         <h3 className="text-md font-medium">Integrity Impact: {level}</h3>

@@ -8,8 +8,8 @@ interface SecurityResourcesWidgetProps {
 }
 
 const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
-  securityLevel = "None",
-  testId = SECURITY_RESOURCES_TEST_IDS.SECURITY_RESOURCES_PREFIX,
+  securityLevel = "Moderate",
+  testId = "widget-security-resources",
 }) => {
   return (
     <div

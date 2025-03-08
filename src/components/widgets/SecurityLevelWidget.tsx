@@ -1,5 +1,5 @@
 import React from "react";
-import { SECURITY_LEVEL_TEST_IDS } from "../../constants/testIds";
+import { SECURITY_LEVEL_TEST_IDS, CIA_TEST_IDS } from "../../constants/testIds";
 import { SECURITY_LEVELS } from "../../constants/appConstants";
 
 interface SecurityLevelSelectorProps {
@@ -10,6 +10,7 @@ interface SecurityLevelSelectorProps {
   icon?: string;
   testId?: string;
   color?: string;
+  selectTestId?: string;
 }
 
 const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
@@ -20,10 +21,15 @@ const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
   icon,
   testId,
   color,
+  selectTestId,
 }) => (
   <div data-testid={testId}>
     <label>{label}</label>
-    <select value={level} onChange={(e) => onChange(e.target.value)}>
+    <select
+      value={level}
+      onChange={(e) => onChange(e.target.value)}
+      data-testid={selectTestId}
+    >
       <option value="None">None</option>
       <option value="Low">Low</option>
       <option value="Moderate">Moderate</option>
@@ -65,31 +71,34 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       <div className="space-y-6">
         <SecurityLevelSelector
           label="Confidentiality"
-          level={confidentialityLevel} // This should match the expected prop in SecurityLevelSelector
+          level={confidentialityLevel}
           onChange={setConfidentiality}
           description="Protection of data from unauthorized access"
           icon="🔒"
           testId={`${testId}-confidentiality`}
+          selectTestId={CIA_TEST_IDS.CONFIDENTIALITY_SELECT}
           color="purple"
         />
 
         <SecurityLevelSelector
           label="Integrity"
-          level={integrityLevel} // This should match the expected prop in SecurityLevelSelector
+          level={integrityLevel}
           onChange={setIntegrity}
           description="Accuracy and consistency of data"
           icon="✓"
           testId={`${testId}-integrity`}
+          selectTestId={CIA_TEST_IDS.INTEGRITY_SELECT}
           color="green"
         />
 
         <SecurityLevelSelector
           label="Availability"
-          level={availabilityLevel} // This should match the expected prop in SecurityLevelSelector
+          level={availabilityLevel}
           onChange={setAvailability}
           description="Access to data when needed"
-          icon="⟳"
+          icon="⏱️"
           testId={`${testId}-availability`}
+          selectTestId={CIA_TEST_IDS.AVAILABILITY_SELECT}
           color="blue"
         />
       </div>
