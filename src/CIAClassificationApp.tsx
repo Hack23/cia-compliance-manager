@@ -257,10 +257,10 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-security-summary"
               >
                 <SecuritySummaryWidget
-                  securityLevel={overallSecurityLevel}
-                  availabilityLevel={availability}
-                  integrityLevel={integrity}
-                  confidentialityLevel={confidentiality}
+                  securityLevel={overallSecurityLevel as SecurityLevel}
+                  availabilityLevel={availability as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
                 />
               </DashboardWidget>
 
@@ -271,11 +271,9 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-cost-estimation"
               >
                 <CostEstimationWidget
-                  totalCapex={totalCapex}
-                  totalOpex={totalOpex}
-                  capexEstimate={capexEstimate}
-                  opexEstimate={opexEstimate}
-                  isSmallSolution={isSmallSolution}
+                  availabilityLevel={availability as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
                 />
               </DashboardWidget>
 

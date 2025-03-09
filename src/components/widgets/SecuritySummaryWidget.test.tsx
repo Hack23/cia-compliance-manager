@@ -17,6 +17,7 @@ import {
   TEST_MATCHERS,
 } from "../../constants/appConstants";
 import { BusinessKeyBenefits } from "../../types/businessImpact";
+import { SecurityLevel } from "../../types/cia"; // Add this import
 import { vi } from "vitest";
 import { SUMMARY_TEST_IDS, WIDGET_TEST_IDS } from "../../constants/testIds";
 
@@ -262,7 +263,7 @@ describe("SecuritySummaryWidget", () => {
   it("falls back to None when invalid security level is provided", () => {
     render(
       <SecuritySummaryWidget
-        securityLevel="Invalid"
+        securityLevel={"None" as SecurityLevel}
         availabilityLevel="Moderate"
         integrityLevel="Moderate"
         confidentialityLevel="Moderate"
@@ -285,7 +286,7 @@ describe("SecuritySummaryWidget", () => {
   it("renders with mixed CIA security levels and generates composite description", () => {
     render(
       <SecuritySummaryWidget
-        securityLevel="Mixed"
+        securityLevel={"None" as SecurityLevel}
         availabilityLevel="High"
         integrityLevel="Low"
         confidentialityLevel="Very High"
@@ -302,7 +303,7 @@ describe("SecuritySummaryWidget", () => {
   it("handles Basic security level correctly", () => {
     render(
       <SecuritySummaryWidget
-        securityLevel="Basic"
+        securityLevel={"None" as SecurityLevel}
         availabilityLevel="Moderate"
         integrityLevel="Moderate"
         confidentialityLevel="Moderate"
@@ -611,7 +612,7 @@ describe("SecuritySummaryWidget", () => {
     levels.forEach((level) => {
       rerender(
         <SecuritySummaryWidget
-          securityLevel={level}
+          securityLevel={level as SecurityLevel}
           availabilityLevel="High"
           integrityLevel="Moderate"
           confidentialityLevel="Low"

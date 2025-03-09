@@ -211,7 +211,8 @@ widgetRegistry.register<RadarChartProps>({
 widgetRegistry.register<SecuritySummaryWidgetProps>({
   id: "security-summary",
   title: WIDGET_TITLES.SECURITY_SUMMARY,
-  component: SecuritySummaryWidget,
+  component:
+    SecuritySummaryWidget as unknown as WidgetComponentType<SecuritySummaryWidgetProps>,
   icon: WIDGET_ICONS.SECURITY_SUMMARY,
   size: "medium",
   order: 10,

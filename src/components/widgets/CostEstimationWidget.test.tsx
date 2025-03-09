@@ -1,185 +1,97 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import { vi } from "vitest";
 import CostEstimationWidget from "./CostEstimationWidget";
 import { COST_TEST_IDS } from "../../constants/testIds";
-import { SECURITY_LEVELS } from "../../constants/appConstants";
+import ciaContentService from "../../services/ciaContentService";
+import { SecurityLevel } from "../../types/cia";
 
-// Simple mock options for the tests
-const mockOptions = {
-  availability: {
-    None: { capex: 0, opex: 0 },
-    Low: { capex: 10, opex: 5 },
-    Moderate: { capex: 30, opex: 15 },
-    High: { capex: 50, opex: 30 },
+// Mock ciaContentService
+vi.mock("../../services/ciaContentService", () => ({
+  __esModule: true,
+  default: {
+    getSecurityMetrics: vi.fn().mockReturnValue({
+      totalCapex: 45,
+      totalOpex: 30,
+      capexEstimate: "$225000",
+      opexEstimate: "$60000/year",
+      isSmallSolution: true,
+      roi: "350%",
+    }),
   },
-  integrity: {
-    None: { capex: 0, opex: 0 },
-    Low: { capex: 5, opex: 5 },
-    Moderate: { capex: 20, opex: 10 },
-    High: { capex: 40, opex: 25 },
-  },
-  confidentiality: {
-    None: { capex: 0, opex: 0 },
-    Low: { capex: 5, opex: 5 },
-    Moderate: { capex: 20, opex: 10 },
-    High: { capex: 40, opex: 25 },
-  },
-};
+}));
 
 describe("CostEstimationWidget", () => {
-  it("renders with default props", () => {
-    render(
-      <CostEstimationWidget
-        totalCapex={0}
-        totalOpex={0}
-        capexEstimate="$0"
-        opexEstimate="$0"
-        isSmallSolution={true}
-        availabilityLevel={SECURITY_LEVELS.NONE}
-        integrityLevel={SECURITY_LEVELS.NONE}
-        confidentialityLevel={SECURITY_LEVELS.NONE}
-        availabilityOptions={mockOptions.availability}
-        integrityOptions={mockOptions.integrity}
-        confidentialityOptions={mockOptions.confidentiality}
-      />
-    );
+  const defaultProps = {
+    availabilityLevel: "High" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "High" as SecurityLevel,
+  };
 
-    // Verify the component renders
+  it("renders without crashing", () => {
+    render(<CostEstimationWidget {...defaultProps} />);
     expect(
-      screen.getByTestId(COST_TEST_IDS.COST_ESTIMATION_CONTENT)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(COST_TEST_IDS.ESTIMATED_COST_HEADING)
+      screen.getByText("Estimated Implementation Cost")
     ).toBeInTheDocument();
   });
 
-  it("calculates costs correctly for None security levels", () => {
-    render(
-      <CostEstimationWidget
-        totalCapex={0}
-        totalOpex={0}
-        capexEstimate="$0"
-        opexEstimate="$0"
-        isSmallSolution={true}
-        availabilityLevel={SECURITY_LEVELS.NONE}
-        integrityLevel={SECURITY_LEVELS.NONE}
-        confidentialityLevel={SECURITY_LEVELS.NONE}
-        availabilityOptions={mockOptions.availability}
-        integrityOptions={mockOptions.integrity}
-        confidentialityOptions={mockOptions.confidentiality}
-      />
-    );
+  // Replace all test cases that use totalCapex/totalOpex props directly
+  // with the new props structure that uses availabilityLevel, integrityLevel, and confidentialityLevel
 
-    // For None levels, the values should be $0 not 0%
+  it("displays cost estimates from service", () => {
+    render(<CostEstimationWidget {...defaultProps} />);
     expect(
-      screen.getByTestId(COST_TEST_IDS.CAPEX_ESTIMATE_VALUE).textContent
-    ).toBe("$0"); // Changed from .toMatch(/0%/)
+      screen.getByTestId(COST_TEST_IDS.CAPEX_ESTIMATE_VALUE)
+    ).toHaveTextContent("$225,000");
     expect(
-      screen.getByTestId(COST_TEST_IDS.OPEX_ESTIMATE_VALUE).textContent
-    ).toBe("$0"); // Changed from .toMatch(/0%/)
+      screen.getByTestId(COST_TEST_IDS.OPEX_ESTIMATE_VALUE)
+    ).toHaveTextContent("$60,000/year");
   });
 
-  it("calculates costs correctly for mixed security levels", () => {
-    render(
-      <CostEstimationWidget
-        totalCapex={75}
-        totalOpex={45}
-        capexEstimate="$375000"
-        opexEstimate="$90000"
-        isSmallSolution={false}
-        availabilityLevel={SECURITY_LEVELS.MODERATE}
-        integrityLevel={SECURITY_LEVELS.LOW}
-        confidentialityLevel={SECURITY_LEVELS.HIGH}
-        availabilityOptions={mockOptions.availability}
-        integrityOptions={mockOptions.integrity}
-        confidentialityOptions={mockOptions.confidentiality}
-      />
-    );
-
-    // Check calculated totals
-    expect(
-      screen.getByTestId(COST_TEST_IDS.TOTAL_COST_SUMMARY)
-    ).toBeInTheDocument();
-
-    // Verify the progress bars are displaying
-    expect(
-      screen.getByTestId(COST_TEST_IDS.CAPEX_PROGRESS_BAR)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(COST_TEST_IDS.OPEX_PROGRESS_BAR)
-    ).toBeInTheDocument();
-  });
-
-  it("renders cost analysis section", () => {
-    render(
-      <CostEstimationWidget
-        totalCapex={130}
-        totalOpex={80}
-        capexEstimate="$650000"
-        opexEstimate="$160000"
-        isSmallSolution={false}
-        availabilityLevel={SECURITY_LEVELS.HIGH}
-        integrityLevel={SECURITY_LEVELS.HIGH}
-        confidentialityLevel={SECURITY_LEVELS.HIGH}
-        availabilityOptions={mockOptions.availability}
-        integrityOptions={mockOptions.integrity}
-        confidentialityOptions={mockOptions.confidentiality}
-      />
-    );
-
-    expect(
-      screen.getByTestId(COST_TEST_IDS.COST_ANALYSIS_SECTION)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(COST_TEST_IDS.COST_ANALYSIS_HEADING)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(COST_TEST_IDS.COST_ANALYSIS_TEXT)
-    ).toBeInTheDocument();
-  });
-
-  it("displays implementation time estimate", () => {
-    render(
-      <CostEstimationWidget
-        totalCapex={70}
-        totalOpex={35}
-        capexEstimate="$350000"
-        opexEstimate="$70000"
-        isSmallSolution={false}
-        implementationTime="3-6 months"
-        availabilityLevel={SECURITY_LEVELS.MODERATE}
-        integrityLevel={SECURITY_LEVELS.MODERATE}
-        confidentialityLevel={SECURITY_LEVELS.MODERATE}
-        availabilityOptions={mockOptions.availability}
-        integrityOptions={mockOptions.integrity}
-        confidentialityOptions={mockOptions.confidentiality}
-      />
-    );
-
-    expect(
-      screen.getByTestId(COST_TEST_IDS.IMPLEMENTATION_TIME)
-    ).toBeInTheDocument();
-  });
-
-  it("shows three-year cost projection", () => {
-    render(
-      <CostEstimationWidget
-        totalCapex={20}
-        totalOpex={15}
-        capexEstimate="$100000"
-        opexEstimate="$30000"
-        isSmallSolution={true}
-        availabilityLevel={SECURITY_LEVELS.LOW}
-        integrityLevel={SECURITY_LEVELS.LOW}
-        confidentialityLevel={SECURITY_LEVELS.LOW}
-        availabilityOptions={mockOptions.availability}
-        integrityOptions={mockOptions.integrity}
-        confidentialityOptions={mockOptions.confidentiality}
-      />
-    );
-
+  it("calculates 3-year total cost", () => {
+    render(<CostEstimationWidget {...defaultProps} />);
     expect(
       screen.getByTestId(COST_TEST_IDS.THREE_YEAR_TOTAL)
-    ).toBeInTheDocument();
+    ).toHaveTextContent("$405,000");
+  });
+
+  it("shows correct ROI estimate", () => {
+    render(<CostEstimationWidget {...defaultProps} />);
+    expect(screen.getByTestId(COST_TEST_IDS.ROI_ESTIMATE)).toHaveTextContent(
+      "350%"
+    );
+  });
+
+  it("displays progress bars with correct percentages", () => {
+    render(<CostEstimationWidget {...defaultProps} />);
+    expect(
+      screen.getByTestId(COST_TEST_IDS.CAPEX_PERCENTAGE)
+    ).toHaveTextContent("25%");
+    expect(screen.getByTestId(COST_TEST_IDS.OPEX_PERCENTAGE)).toHaveTextContent(
+      "25%"
+    );
+  });
+
+  it("uses correct cost analysis message for small solution", () => {
+    render(<CostEstimationWidget {...defaultProps} />);
+    expect(
+      screen.getByTestId(COST_TEST_IDS.COST_ANALYSIS_TEXT)
+    ).toHaveTextContent(/Basic security implementation/);
+  });
+
+  it("uses correct cost analysis message for large solution", () => {
+    vi.mocked(ciaContentService.getSecurityMetrics).mockReturnValueOnce({
+      totalCapex: 120,
+      totalOpex: 80,
+      capexEstimate: "$600000",
+      opexEstimate: "$160000/year",
+      isSmallSolution: false,
+      roi: "275%",
+    });
+
+    render(<CostEstimationWidget {...defaultProps} />);
+    expect(
+      screen.getByTestId(COST_TEST_IDS.COST_ANALYSIS_TEXT)
+    ).toHaveTextContent(/Comprehensive security solution/);
   });
 });

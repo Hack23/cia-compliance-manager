@@ -64,9 +64,12 @@ export interface ValueCreationWidgetProps extends WidgetBaseProps {
 /**
  * Props for the SecuritySummaryWidget component
  */
-export interface SecuritySummaryWidgetProps extends WidgetBaseProps {
-  /** Overall security level */
-  securityLevel: string;
+export interface SecuritySummaryWidgetProps {
+  securityLevel: SecurityLevel;
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  // ...other existing props...
 }
 
 /**
