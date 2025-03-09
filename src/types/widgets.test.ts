@@ -1,5 +1,4 @@
-import { describe, it, expect } from "vitest";
-import { CIADetails } from "./cia";
+import { describe, it, expect, vi } from "vitest";
 import {
   WidgetBaseProps,
   IntegrityImpactWidgetProps,
@@ -8,116 +7,129 @@ import {
   SecurityResourcesWidgetProps,
 } from "./widgets";
 
-describe("Widget Types", () => {
-  it("WidgetBaseProps should have correct structure", () => {
+describe("Widget Type Definitions", () => {
+  it("validates WidgetBaseProps interface", () => {
     const props: WidgetBaseProps = {
       testId: "test-widget",
+      availabilityLevel: "None",
+      integrityLevel: "None",
+      confidentialityLevel: "None",
     };
 
-    expect(props.testId).toBe("test-widget");
+    expect(props).toHaveProperty("testId");
+    expect(props).toHaveProperty("availabilityLevel");
+    expect(props).toHaveProperty("integrityLevel");
+    expect(props).toHaveProperty("confidentialityLevel");
   });
 
-  it("IntegrityImpactWidgetProps should extend WidgetBaseProps", () => {
-    const mockOptions: Record<string, CIADetails> = {
-      None: {
-        description: "Test",
-        impact: "Test",
-        technical: "Test",
-        businessImpact: "Test",
-        capex: 0,
-        opex: 0,
-        bg: "#fff",
-        text: "#000",
-        recommendations: [],
-      },
+  it("validates IntegrityImpactWidgetProps interface", () => {
+    const mockOptions = {
+      None: { description: "No integrity" },
+      High: { description: "High integrity" },
     };
 
     const props: IntegrityImpactWidgetProps = {
-      level: "None",
+      integrityLevel: "High",
+      availabilityLevel: "None",
+      confidentialityLevel: "None",
       options: mockOptions,
-      testId: "test-integrity-widget",
     };
 
-    expect(props.testId).toBe("test-integrity-widget"); // from WidgetBaseProps
-    expect(props.level).toBe("None");
-    expect(props.options).toBe(mockOptions);
+    expect(props).toHaveProperty("integrityLevel");
+    expect(props.integrityLevel).toBe("High");
+    expect(props).toHaveProperty("options");
+    expect(props.options).toEqual(mockOptions);
   });
 
-  it("ConfidentialityImpactWidgetProps should have correct structure", () => {
+  it("validates ConfidentialityImpactWidgetProps interface", () => {
+    const mockOptions = {
+      None: { description: "No confidentiality" },
+      High: { description: "High confidentiality" },
+    };
+
     const props: ConfidentialityImpactWidgetProps = {
-      level: "High",
-      options: {
-        High: {
-          impact: "Strong confidentiality protection",
-          businessImpact: "Business data is well-protected",
-          recommendations: ["Use encryption", "Implement access control"],
-        },
-      },
+      confidentialityLevel: "High",
+      availabilityLevel: "None",
+      integrityLevel: "None",
+      options: mockOptions,
     };
 
-    expect(props.level).toBe("High");
-    expect(props.options).toBeDefined();
+    expect(props).toHaveProperty("confidentialityLevel");
+    expect(props.confidentialityLevel).toBe("High");
+    expect(props).toHaveProperty("options");
+    expect(props.options).toEqual(mockOptions);
   });
 
-  it("AvailabilityImpactWidgetProps should have correct structure", () => {
+  it("validates AvailabilityImpactWidgetProps interface", () => {
+    const mockOptions = {
+      None: { description: "No availability" },
+      High: { description: "High availability" },
+    };
+
     const props: AvailabilityImpactWidgetProps = {
-      level: "Moderate",
-      testId: "test-id",
-      options: {
-        High: {
-          description: "High availability",
-          businessImpact: "Business remains operational",
-          uptime: "99.9%",
-          recommendations: ["Use load balancing", "Implement failover"],
-        },
-      },
+      availabilityLevel: "High",
+      integrityLevel: "None",
+      confidentialityLevel: "None",
+      options: mockOptions,
     };
 
-    expect(props.level).toBe("Moderate");
-    expect(props.testId).toBe("test-id");
-    expect(props.options).toBeDefined();
+    expect(props).toHaveProperty("availabilityLevel");
+    expect(props.availabilityLevel).toBe("High");
+    expect(props).toHaveProperty("options");
+    expect(props.options).toEqual(mockOptions);
   });
 
-  it("SecurityResourcesWidgetProps should have correct structure", () => {
+  it("validates SecurityResourcesWidgetProps interface", () => {
     const props: SecurityResourcesWidgetProps = {
-      securityLevel: "Very High",
+      securityLevel: "High",
+      availabilityLevel: "Moderate",
+      integrityLevel: "Low",
+      confidentialityLevel: "High",
     };
 
-    expect(props.securityLevel).toBe("Very High");
+    expect(props).toHaveProperty("securityLevel");
+    expect(props.securityLevel).toBe("High");
+    // Add validation for required CIA properties
+    expect(props).toHaveProperty("availabilityLevel");
+    expect(props).toHaveProperty("integrityLevel");
+    expect(props).toHaveProperty("confidentialityLevel");
   });
 
-  it("tests confidentiality impact widget props", () => {
+  it("validates ConfidentialityDetailAdapter working with props", () => {
+    const mockOptions = {
+      None: { description: "No confidentiality" },
+      High: { description: "High confidentiality" },
+    };
+
     const props: ConfidentialityImpactWidgetProps = {
-      level: "High",
-      options: {
-        High: {
-          impact: "Strong confidentiality protection",
-          businessImpact: "Business data is well-protected",
-          recommendations: ["Use encryption", "Implement access control"],
-        },
-      },
+      confidentialityLevel: "High",
+      availabilityLevel: "None",
+      integrityLevel: "None",
+      options: mockOptions,
     };
 
-    expect(props.level).toBe("High");
-    expect(props.options).toBeDefined();
+    expect(props).toHaveProperty("confidentialityLevel");
+    expect(props.confidentialityLevel).toBe("High");
+    expect(props).toHaveProperty("options");
   });
 
-  it("tests availability impact widget props", () => {
-    const props: AvailabilityImpactWidgetProps = {
-      level: "High",
-      testId: "availability-widget",
-      options: {
-        High: {
-          description: "High availability",
-          businessImpact: "Business remains operational",
-          uptime: "99.9%",
-          recommendations: ["Use load balancing", "Implement failover"],
-        },
-      },
+  it("validates AvailabilityDetailAdapter working with props", () => {
+    const mockOptions = {
+      None: { description: "No availability" },
+      High: { description: "High availability", uptime: "99.9%" },
     };
 
-    expect(props.level).toBe("High");
-    expect(props.testId).toBe("availability-widget");
-    expect(props.options).toBeDefined();
+    const props: AvailabilityImpactWidgetProps = {
+      availabilityLevel: "High",
+      integrityLevel: "None",
+      confidentialityLevel: "None",
+      options: mockOptions,
+    };
+
+    expect(props).toHaveProperty("availabilityLevel");
+    expect(props.availabilityLevel).toBe("High");
+    expect(props).toHaveProperty("options");
+    // Add null check to prevent undefined error
+    expect(props.options.High?.uptime).toBe("99.9%");
   });
 });

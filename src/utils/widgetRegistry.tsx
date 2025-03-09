@@ -278,7 +278,9 @@ widgetRegistry.register<IntegrityImpactWidgetProps>({
   order: 30,
   description: "Impact and recommendations for data integrity",
   defaultProps: {
-    level: SECURITY_LEVELS.NONE,
+    integrityLevel: "Moderate",
+    availabilityLevel: "None",
+    confidentialityLevel: "None",
     options: {},
   },
 });
@@ -292,7 +294,9 @@ widgetRegistry.register<ConfidentialityImpactWidgetProps>({
   order: 35,
   description: "Impact and recommendations for data confidentiality",
   defaultProps: {
-    level: SECURITY_LEVELS.NONE,
+    confidentialityLevel: "Moderate",
+    availabilityLevel: "None",
+    integrityLevel: "None",
     options: {},
   },
 });
@@ -306,7 +310,9 @@ widgetRegistry.register<AvailabilityImpactWidgetProps>({
   order: 40,
   description: "Impact and recommendations for system availability",
   defaultProps: {
-    level: SECURITY_LEVELS.NONE,
+    availabilityLevel: "Moderate",
+    integrityLevel: "None",
+    confidentialityLevel: "None",
     options: {},
   },
 });

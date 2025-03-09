@@ -90,9 +90,9 @@ describe("ComplianceStatusWidget", () => {
   it("shows full compliance for High security level", () => {
     render(
       <ComplianceStatusWidget
-        availabilityLevel={SECURITY_LEVELS.HIGH}
-        integrityLevel={SECURITY_LEVELS.HIGH}
-        confidentialityLevel={SECURITY_LEVELS.HIGH}
+        availabilityLevel="High"
+        integrityLevel="High"
+        confidentialityLevel="High"
       />
     );
 

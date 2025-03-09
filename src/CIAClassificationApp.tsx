@@ -304,7 +304,12 @@ const CIAClassificationApp: React.FC = () => {
                 icon="VALUE_CREATION"
                 testId="widget-value-creation"
               >
-                <ValueCreationWidget securityLevel={overallSecurityLevel} />
+                <ValueCreationWidget
+                  securityLevel={overallSecurityLevel}
+                  availabilityLevel={availability}
+                  integrityLevel={integrity}
+                  confidentialityLevel={confidentiality}
+                />
               </DashboardWidget>
 
               {/* Integrity Impact - New Widget */}
@@ -314,7 +319,7 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-integrity-impact-container"
               >
                 <IntegrityImpactWidget
-                  level={integrity}
+                  integrityLevel={integrity}
                   options={adaptedIntegrityOptions}
                 />
               </DashboardWidget>
@@ -326,7 +331,7 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-confidentiality-impact-container"
               >
                 <ConfidentialityImpactWidget
-                  level={confidentiality}
+                  confidentialityLevel={confidentiality}
                   options={adaptedConfidentialityOptions}
                 />
               </DashboardWidget>
@@ -338,7 +343,7 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-availability-impact-container"
               >
                 <AvailabilityImpactWidget
-                  level={availability}
+                  availabilityLevel={availability}
                   options={adaptedAvailabilityOptions}
                 />
               </DashboardWidget>
@@ -349,7 +354,12 @@ const CIAClassificationApp: React.FC = () => {
                 icon="SECURITY_RESOURCES"
                 testId="widget-security-resources-container"
               >
-                <SecurityResourcesWidget securityLevel={overallSecurityLevel} />
+                <SecurityResourcesWidget
+                  securityLevel={overallSecurityLevel}
+                  availabilityLevel={availability}
+                  integrityLevel={integrity}
+                  confidentialityLevel={confidentiality}
+                />
               </DashboardWidget>
 
               {/* Technical Details - New Widget */}
@@ -362,9 +372,6 @@ const CIAClassificationApp: React.FC = () => {
                   availabilityLevel={availability}
                   integrityLevel={integrity}
                   confidentialityLevel={confidentiality}
-                  availabilityOptions={availabilityOptions}
-                  integrityOptions={integrityOptions}
-                  confidentialityOptions={confidentialityOptions}
                 />
               </DashboardWidget>
 

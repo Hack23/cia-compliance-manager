@@ -78,9 +78,9 @@ const Dashboard: React.FC<DashboardProps> = ({
     "security-summary": securityProps,
     "compliance-status": {
       securityLevels: {
-        availability,
-        integrity,
-        confidentiality,
+        availabilityLevel: availability,
+        integrityLevel: integrity,
+        confidentialityLevel: confidentiality,
       },
     },
     "value-creation": {
@@ -105,6 +105,11 @@ const Dashboard: React.FC<DashboardProps> = ({
             if (!React.isValidElement(child)) return null;
             return child;
           })}
+      <TechnicalDetailsWidget
+        availabilityLevel={availability}
+        integrityLevel={integrity}
+        confidentialityLevel={confidentiality}
+      />
     </div>
   );
 };

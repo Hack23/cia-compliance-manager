@@ -14,10 +14,20 @@ import {
   createDynamicTestId,
   VALUE_CREATION_TEST_IDS,
 } from "../../constants/testIds";
-import { ValueCreationWidgetProps } from "../../types/widgets"; // Use the imported type
+import { WidgetBaseProps } from "../../types/widgets";
+
+export interface ValueCreationWidgetProps extends WidgetBaseProps {
+  securityLevel: string;
+  availabilityLevel: string;
+  integrityLevel: string;
+  confidentialityLevel: string;
+}
 
 const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   securityLevel = SECURITY_LEVELS.NONE,
+  availabilityLevel,
+  integrityLevel,
+  confidentialityLevel,
   testId = VALUE_CREATION_TEST_IDS.VALUE_CREATION_PREFIX,
 }) => {
   // Create a mapping to simplify the getValuePoints function

@@ -1,8 +1,12 @@
 import React from "react";
-import { SECURITY_RESOURCES_TEST_IDS } from "../../constants/testIds";
+import { WIDGET_TEST_IDS } from "../../constants/testIds";
 import { WIDGET_ICONS } from "../../constants/coreConstants";
-import { SecurityResourcesWidgetProps } from "../../types/widgets";
 import { SECURITY_LEVELS } from "../../constants/appConstants";
+import { WidgetBaseProps } from "../../types/widgets";
+
+export interface SecurityResourcesWidgetProps extends WidgetBaseProps {
+  securityLevel: string;
+}
 
 // Define ResourceItem interface that was missing
 interface ResourceItem {
@@ -13,8 +17,11 @@ interface ResourceItem {
 }
 
 const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
-  securityLevel = SECURITY_LEVELS.NONE, // Default value to ensure it's always defined
-  testId = "widget-security-resources",
+  securityLevel,
+  availabilityLevel,
+  integrityLevel,
+  confidentialityLevel,
+  testId = WIDGET_TEST_IDS.SECURITY_RESOURCES_WIDGET,
 }) => {
   // Returns resources appropriate for the current security level
   const getResources = (): Record<string, ResourceItem[]> => {

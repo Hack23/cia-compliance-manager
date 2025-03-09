@@ -1,16 +1,35 @@
 import React from "react";
+import { WidgetBaseProps } from "../../types/widgets";
 import { AVAILABILITY_IMPACT_TEST_IDS } from "../../constants/testIds";
 import { CIA_COMPONENT_ICONS } from "../../constants/coreConstants";
-import {
-  AvailabilityImpactWidgetProps,
-  AvailabilityDetail,
-} from "../../types/widgets";
 import { SECURITY_LEVELS } from "../../constants/appConstants";
 import WidgetBase from "../common/WidgetBase";
 
+// Add the missing interface definition
+interface AvailabilityDetail {
+  description?: string;
+  businessImpact?: string;
+  uptime?: string;
+  recommendations?: string[];
+  mttr?: string;
+  rto?: string;
+  rpo?: string;
+  [key: string]: any;
+}
+
+export interface AvailabilityImpactWidgetProps extends WidgetBaseProps {
+  availabilityLevel: string;
+  integrityLevel: string;
+  confidentialityLevel: string;
+  options: Record<string, any>;
+  testId?: string;
+}
+
 const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
-  level = SECURITY_LEVELS.NONE,
-  options = {},
+  availabilityLevel,
+  integrityLevel,
+  confidentialityLevel,
+  options,
   testId = AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_PREFIX,
 }) => {
   // Define default options with improved business context
@@ -91,7 +110,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   const mergedOptions = { ...defaultOptions, ...options };
 
   // Safe access to current option with fallback
-  const currentOption = mergedOptions[level] ||
+  const currentOption = mergedOptions[availabilityLevel] ||
     mergedOptions["None"] || {
       description: "No availability information available",
       businessImpact: "No impact information available",
@@ -101,9 +120,12 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
 
   return (
     <WidgetBase
-      title={`Availability Impact: ${level}`}
+      title="Availability Impact"
       icon={CIA_COMPONENT_ICONS.AVAILABILITY}
       testId={testId}
+      availabilityLevel={availabilityLevel}
+      integrityLevel={integrityLevel}
+      confidentialityLevel={confidentialityLevel}
     >
       <div className="space-y-4">
         <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-md mb-3">
@@ -185,7 +207,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
             </span>
             Business Perspective
           </h4>
-          <p className="text-sm">{getBusinessPerspective(level)}</p>
+          <p className="text-sm">{getBusinessPerspective(availabilityLevel)}</p>
         </div>
       </div>
     </WidgetBase>

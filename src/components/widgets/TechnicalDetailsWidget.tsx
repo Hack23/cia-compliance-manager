@@ -1,22 +1,27 @@
 import React, { useState } from "react";
-import { TechnicalDetailsWidgetProps } from "../../types/componentProps";
-import { WIDGET_TEST_IDS } from "../../constants/testIds";
+import { WidgetBaseProps } from "../../types/widgets";
+import { TECHNICAL_DETAILS_TEST_IDS } from "../../constants/testIds";
+
+// Update the interface without duplicating the import
+export interface TechnicalDetailsWidgetProps extends WidgetBaseProps {
+  availabilityOptions?: Record<string, any>;
+  integrityOptions?: Record<string, any>;
+  confidentialityOptions?: Record<string, any>;
+}
 
 const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   availabilityLevel = "Moderate",
   integrityLevel = "Moderate",
   confidentialityLevel = "Moderate",
-  availability, // Backward compatibility
-  integrity, // Backward compatibility
-  confidentiality, // Backward compatibility
-  testId = WIDGET_TEST_IDS.TECHNICAL_DETAILS_WIDGET,
+  availabilityOptions = {},
+  integrityOptions = {},
+  confidentialityOptions = {},
+  testId = TECHNICAL_DETAILS_TEST_IDS.TECHNICAL_DETAILS_WIDGET,
 }) => {
   // Use provided values or fall back to backward compatibility props
-  const actualAvailabilityLevel =
-    availability || availabilityLevel || "Moderate";
-  const actualIntegrityLevel = integrity || integrityLevel || "Moderate";
-  const actualConfidentialityLevel =
-    confidentiality || confidentialityLevel || "Moderate";
+  const actualAvailabilityLevel = availabilityLevel || "Moderate";
+  const actualIntegrityLevel = integrityLevel || "Moderate";
+  const actualConfidentialityLevel = confidentialityLevel || "Moderate";
 
   const [activeTab, setActiveTab] = useState<
     "availability" | "integrity" | "confidentiality"

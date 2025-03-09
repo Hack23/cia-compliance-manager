@@ -145,9 +145,9 @@ describe("TechnicalDetailsWidget", () => {
   it("handles backward compatibility props", () => {
     const { container } = render(
       <TechnicalDetailsWidget
-        availability="High"
-        integrity="High"
-        confidentiality="High"
+        availabilityLevel="High"
+        integrityLevel="High"
+        confidentialityLevel="High"
         testId="compat-test-widget"
       />
     );

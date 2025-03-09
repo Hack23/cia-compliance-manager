@@ -8,16 +8,11 @@ import {
 } from "../../utils/widgetHelpers";
 
 interface CIAImpactSummaryWidgetProps {
-  /** Availability security level */
-  availability?: string;
-  /** Integrity security level */
-  integrity?: string;
-  /** Confidentiality security level */
-  confidentiality?: string;
-  /** Optional test ID for the component */
-  testId?: string;
-  /** Optional CSS class for styling */
-  className?: string;
+  availabilityLevel: string;
+  integrityLevel: string;
+  confidentialityLevel: string;
+  testId?: string; // Add testId prop
+  className?: string; // Add className prop
 }
 
 /**
@@ -25,16 +20,17 @@ interface CIAImpactSummaryWidgetProps {
  * with improved accessibility and type safety
  */
 const CIAImpactSummaryWidget: React.FC<CIAImpactSummaryWidgetProps> = ({
-  availability,
-  integrity,
-  confidentiality,
+  availabilityLevel,
+  integrityLevel,
+  confidentialityLevel,
   testId = WIDGET_TEST_IDS.CIA_IMPACT_SUMMARY,
   className = "",
 }) => {
   // Normalize all security levels to ensure consistent display
-  const availabilityLevel = normalizeSecurityLevel(availability);
-  const integrityLevel = normalizeSecurityLevel(integrity);
-  const confidentialityLevel = normalizeSecurityLevel(confidentiality);
+  const normalizedAvailability = normalizeSecurityLevel(availabilityLevel);
+  const normalizedIntegrity = normalizeSecurityLevel(integrityLevel);
+  const normalizedConfidentiality =
+    normalizeSecurityLevel(confidentialityLevel);
 
   // Helper function to determine color variant based on security level
   const getVariant = (
@@ -85,13 +81,13 @@ const CIAImpactSummaryWidget: React.FC<CIAImpactSummaryWidgetProps> = ({
           <span
             data-testid={`${testId}-availability-level`}
             className={`text-sm ${getSecurityLevelClass(
-              availabilityLevel
+              normalizedAvailability
             )} font-semibold`}
-            aria-label={`Availability level: ${availabilityLevel}`}
+            aria-label={`Availability level: ${normalizedAvailability}`}
           >
             <ValueDisplay
-              value={`${availabilityLevel} Availability`}
-              variant={getVariant(availabilityLevel)}
+              value={`${normalizedAvailability} Availability`}
+              variant={getVariant(normalizedAvailability)}
               testId={`${testId}-availability-level-value`}
             />
           </span>
@@ -109,13 +105,13 @@ const CIAImpactSummaryWidget: React.FC<CIAImpactSummaryWidgetProps> = ({
           <span
             data-testid={`${testId}-integrity-level`}
             className={`text-sm ${getSecurityLevelClass(
-              integrityLevel
+              normalizedIntegrity
             )} font-semibold`}
-            aria-label={`Integrity level: ${integrityLevel}`}
+            aria-label={`Integrity level: ${normalizedIntegrity}`}
           >
             <ValueDisplay
-              value={`${integrityLevel} Integrity`}
-              variant={getVariant(integrityLevel)}
+              value={`${normalizedIntegrity} Integrity`}
+              variant={getVariant(normalizedIntegrity)}
               testId={`${testId}-integrity-level-value`}
             />
           </span>
@@ -133,13 +129,13 @@ const CIAImpactSummaryWidget: React.FC<CIAImpactSummaryWidgetProps> = ({
           <span
             data-testid={`${testId}-confidentiality-level`}
             className={`text-sm ${getSecurityLevelClass(
-              confidentialityLevel
+              normalizedConfidentiality
             )} font-semibold`}
-            aria-label={`Confidentiality level: ${confidentialityLevel}`}
+            aria-label={`Confidentiality level: ${normalizedConfidentiality}`}
           >
             <ValueDisplay
-              value={`${confidentialityLevel} Confidentiality`}
-              variant={getVariant(confidentialityLevel)}
+              value={`${normalizedConfidentiality} Confidentiality`}
+              variant={getVariant(normalizedConfidentiality)}
               testId={`${testId}-confidentiality-level-value`}
             />
           </span>
@@ -153,9 +149,9 @@ const CIAImpactSummaryWidget: React.FC<CIAImpactSummaryWidgetProps> = ({
         </h4>
         <p className="text-xs text-gray-600 dark:text-gray-400">
           {getBusinessImpactSummary(
-            availabilityLevel,
-            integrityLevel,
-            confidentialityLevel
+            normalizedAvailability,
+            normalizedIntegrity,
+            normalizedConfidentiality
           )}
         </p>
       </div>

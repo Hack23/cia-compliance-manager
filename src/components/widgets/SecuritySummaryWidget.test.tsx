@@ -58,9 +58,9 @@ vi.mock("../../types/businessImpact", async () => {
 // Create wrapper components instead of mocking React.useState
 const TechnicalExpandedWrapper: React.FC = () => (
   <SecuritySummaryWidget
-    securityLevel="Moderate"
+    securityLevel="High"
     availabilityLevel="High"
-    integrityLevel="Moderate"
+    integrityLevel="High"
     confidentialityLevel="High"
   />
 );
@@ -285,7 +285,7 @@ describe("SecuritySummaryWidget", () => {
   it("renders with mixed CIA security levels and generates composite description", () => {
     render(
       <SecuritySummaryWidget
-        securityLevel="Moderate"
+        securityLevel="Mixed"
         availabilityLevel="High"
         integrityLevel="Low"
         confidentialityLevel="Very High"
@@ -329,9 +329,9 @@ describe("SecuritySummaryWidget", () => {
     render(
       <SecuritySummaryWidget
         securityLevel={SECURITY_LEVELS.MODERATE}
-        availabilityLevel="Moderate"
+        availabilityLevel="High"
         integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
@@ -366,9 +366,9 @@ describe("SecuritySummaryWidget", () => {
     const { rerender } = render(
       <SecuritySummaryWidget
         securityLevel={SECURITY_LEVELS.HIGH}
-        availabilityLevel="Moderate"
+        availabilityLevel="High"
         integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
@@ -384,9 +384,9 @@ describe("SecuritySummaryWidget", () => {
     rerender(
       <SecuritySummaryWidget
         securityLevel={SECURITY_LEVELS.HIGH}
-        availabilityLevel="Moderate"
+        availabilityLevel="High"
         integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
@@ -411,10 +411,10 @@ describe("SecuritySummaryWidget", () => {
   it("displays ROI estimates based on security level", async () => {
     const { rerender } = render(
       <SecuritySummaryWidget
-        securityLevel="High"
-        availabilityLevel="Moderate"
+        securityLevel="Moderate"
+        availabilityLevel="High"
         integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
@@ -425,10 +425,10 @@ describe("SecuritySummaryWidget", () => {
 
     rerender(
       <SecuritySummaryWidget
-        securityLevel="Low"
-        availabilityLevel="Moderate"
+        securityLevel="High"
+        availabilityLevel="High"
         integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
     expect(screen.getByTestId("roi-estimate-summary-value")).toHaveTextContent(
@@ -439,7 +439,7 @@ describe("SecuritySummaryWidget", () => {
   it("expands technical section when clicked", async () => {
     render(
       <SecuritySummaryWidget
-        securityLevel="Moderate"
+        securityLevel="High"
         availabilityLevel="High"
         integrityLevel="Moderate"
         confidentialityLevel="High"
@@ -496,9 +496,9 @@ describe("SecuritySummaryWidget", () => {
     render(
       <SecuritySummaryWidget
         securityLevel="Moderate"
-        availabilityLevel="Moderate"
+        availabilityLevel="High"
         integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
@@ -515,10 +515,10 @@ describe("SecuritySummaryWidget", () => {
   it("displays recommendations based on security level", () => {
     const { rerender } = render(
       <SecuritySummaryWidget
-        securityLevel="None"
-        availabilityLevel="Moderate"
+        securityLevel="Low"
+        availabilityLevel="High"
         integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
@@ -533,9 +533,9 @@ describe("SecuritySummaryWidget", () => {
     rerender(
       <SecuritySummaryWidget
         securityLevel="High"
-        availabilityLevel="Moderate"
+        availabilityLevel="High"
         integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
@@ -552,9 +552,9 @@ describe("SecuritySummaryWidget", () => {
     render(
       <SecuritySummaryWidget
         securityLevel="Moderate"
-        availabilityLevel="Moderate"
+        availabilityLevel="High"
         integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
@@ -593,10 +593,10 @@ describe("SecuritySummaryWidget", () => {
   it("applies the correct variant for different security levels", () => {
     const { rerender } = render(
       <SecuritySummaryWidget
-        securityLevel="None"
-        availabilityLevel="Moderate"
+        securityLevel="Moderate"
+        availabilityLevel="High"
         integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
@@ -612,9 +612,9 @@ describe("SecuritySummaryWidget", () => {
       rerender(
         <SecuritySummaryWidget
           securityLevel={level}
-          availabilityLevel="Moderate"
+          availabilityLevel="High"
           integrityLevel="Moderate"
-          confidentialityLevel="Moderate"
+          confidentialityLevel="Low"
         />
       );
 

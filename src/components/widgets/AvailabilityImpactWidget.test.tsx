@@ -35,8 +35,15 @@ const TEST_OPTIONS = {
 
 describe("AvailabilityImpactWidget", () => {
   // Test rendering with default props
-  it("renders with default props", () => {
-    render(<AvailabilityImpactWidget level="None" options={TEST_OPTIONS} />);
+  it("renders with basic options", () => {
+    render(
+      <AvailabilityImpactWidget
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        options={TEST_OPTIONS}
+      />
+    );
 
     // Verify widget renders with default level text
     expect(screen.getByText(/Availability Impact: None/i)).toBeInTheDocument();
@@ -48,8 +55,15 @@ describe("AvailabilityImpactWidget", () => {
   });
 
   // Test with different availability levels
-  it("displays correct content for High availability level", () => {
-    render(<AvailabilityImpactWidget level="High" options={TEST_OPTIONS} />);
+  it("renders with High security level", () => {
+    render(
+      <AvailabilityImpactWidget
+        availabilityLevel="High"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        options={TEST_OPTIONS}
+      />
+    );
 
     // Verify level is displayed correctly
     expect(screen.getByText(/Availability Impact: High/i)).toBeInTheDocument();
@@ -64,7 +78,7 @@ describe("AvailabilityImpactWidget", () => {
   });
 
   // Test with custom options
-  it("uses provided custom options", () => {
+  it("renders with missing options gracefully", () => {
     const customOptions = {
       Moderate: {
         description: "Custom description",
@@ -78,7 +92,12 @@ describe("AvailabilityImpactWidget", () => {
     };
 
     render(
-      <AvailabilityImpactWidget level="Moderate" options={customOptions} />
+      <AvailabilityImpactWidget
+        availabilityLevel="Moderate"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        options={customOptions}
+      />
     );
 
     // Check for custom content
@@ -92,11 +111,13 @@ describe("AvailabilityImpactWidget", () => {
   });
 
   // Test with custom testId
-  it("uses the provided testId", () => {
+  it("renders with custom testId", () => {
     const testId = "custom-availability-widget";
     render(
       <AvailabilityImpactWidget
-        level="None"
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
         options={TEST_OPTIONS}
         testId={testId}
       />
@@ -109,7 +130,14 @@ describe("AvailabilityImpactWidget", () => {
   // Test with level that doesn't exist in options
   it("handles unknown level gracefully", () => {
     // @ts-ignore - intentionally testing with invalid level
-    render(<AvailabilityImpactWidget level="Unknown" options={TEST_OPTIONS} />);
+    render(
+      <AvailabilityImpactWidget
+        availabilityLevel="Unknown"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        options={TEST_OPTIONS}
+      />
+    );
 
     // Should fall back to "None" level content
     expect(
@@ -119,7 +147,14 @@ describe("AvailabilityImpactWidget", () => {
 
   // Test for accessibility
   it("has proper accessibility attributes", () => {
-    render(<AvailabilityImpactWidget level="None" options={TEST_OPTIONS} />);
+    render(
+      <AvailabilityImpactWidget
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        options={TEST_OPTIONS}
+      />
+    );
 
     // Check for accessible elements
     expect(
@@ -128,5 +163,21 @@ describe("AvailabilityImpactWidget", () => {
     expect(
       screen.getByLabelText(/Implementation recommendations/i)
     ).toBeInTheDocument();
+  });
+
+  // Test for displaying recommendations
+  it("displays recommendations when available", () => {
+    render(
+      <AvailabilityImpactWidget
+        availabilityLevel="High"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        options={TEST_OPTIONS}
+      />
+    );
+
+    // Check for recommendations
+    expect(screen.getByText("Test high rec 1")).toBeInTheDocument();
+    expect(screen.getByText("Test high rec 2")).toBeInTheDocument();
   });
 });

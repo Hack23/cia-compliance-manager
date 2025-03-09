@@ -1,8 +1,9 @@
-import React from "react";
-import { WIDGET_TEST_IDS } from "../../constants/testIds";
+import React, { useState } from "react";
+import { WidgetBaseProps } from "../../types/widgets";
+import { INTEGRITY_IMPACT_TEST_IDS } from "../../constants/testIds";
+import WidgetBase from "../common/WidgetBase";
 import { CIA_COMPONENT_ICONS } from "../../constants/coreConstants";
 import { BUSINESS_IMPACT_ICONS } from "../../constants/uiConstants";
-import { IntegrityImpactWidgetProps } from "../../types/widgets";
 
 // Define proper TypeScript interfaces for the component props and options
 interface IntegrityDetail {
@@ -14,11 +15,24 @@ interface IntegrityDetail {
   complianceImplications?: string;
 }
 
+export interface IntegrityImpactWidgetProps extends WidgetBaseProps {
+  integrityLevel: string;
+  confidentialityLevel: string;
+  availabilityLevel: string;
+  options: Record<string, any>;
+  testId?: string;
+}
+
 const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
-  level = "None",
-  options = {},
-  testId = WIDGET_TEST_IDS.INTEGRITY_IMPACT_WIDGET,
+  integrityLevel,
+  confidentialityLevel,
+  availabilityLevel,
+  options,
+  testId = INTEGRITY_IMPACT_TEST_IDS.INTEGRITY_IMPACT_PREFIX,
 }) => {
+  // Use integrityLevel instead of level
+  const levelData = options[integrityLevel] || {};
+
   // Define default options with enhanced business context
   const defaultOptions: Record<string, IntegrityDetail> = {
     None: {
@@ -85,7 +99,8 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
   const mergedOptions = { ...defaultOptions, ...options };
 
   // Safely access the current option with fallback
-  const currentOption = mergedOptions[level] || mergedOptions["None"] || {};
+  const currentOption =
+    mergedOptions[integrityLevel] || mergedOptions["None"] || {};
 
   // Extract fields safely, handling both types
   const description = (currentOption && currentOption.description) || "";
@@ -101,53 +116,62 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
   const effectiveTestId = testId || "widget-integrity-impact";
 
   return (
-    <div
-      className="p-4 space-y-4"
-      data-testid={effectiveTestId}
-      aria-labelledby="integrity-impact-title"
+    <WidgetBase
+      title="Integrity Impact"
+      icon="🔐"
+      testId={testId}
+      availabilityLevel={availabilityLevel}
+      integrityLevel={integrityLevel}
+      confidentialityLevel={confidentialityLevel}
     >
-      <div className="flex items-center mb-4">
-        <span className="text-xl mr-2" aria-hidden="true">
-          {CIA_COMPONENT_ICONS.INTEGRITY}
-        </span>
-        <h3 id="integrity-impact-title" className="text-md font-medium">
-          Integrity Impact: {level}
-        </h3>
-      </div>
+      <div
+        className="p-4 space-y-4"
+        data-testid={effectiveTestId}
+        aria-labelledby="integrity-impact-title"
+      >
+        <div className="flex items-center mb-4">
+          <span className="text-xl mr-2" aria-hidden="true">
+            {CIA_COMPONENT_ICONS.INTEGRITY}
+          </span>
+          <h3 id="integrity-impact-title" className="text-md font-medium">
+            Integrity Impact: {integrityLevel}
+          </h3>
+        </div>
 
-      <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-md mb-3">
-        <h4 className="text-sm font-medium mb-2">Description</h4>
-        <p className="text-sm">{description}</p>
-      </div>
-
-      <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-md mb-3">
-        <h4 className="text-sm font-medium mb-2">Business Impact</h4>
-        <p className="text-sm">{businessImpact}</p>
-      </div>
-
-      {validationMethod && (
         <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-md mb-3">
-          <h4 className="text-sm font-medium mb-2">Validation Method</h4>
-          <p className="text-sm">{validationMethod}</p>
+          <h4 className="text-sm font-medium mb-2">Description</h4>
+          <p className="text-sm">{description}</p>
         </div>
-      )}
 
-      {recommendations.length > 0 && (
-        <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
-          <h4 className="text-sm font-medium mb-2">Recommendations</h4>
-          <ul
-            className="list-disc pl-5 space-y-1"
-            aria-label="Integrity recommendations"
-          >
-            {recommendations.map((rec, idx) => (
-              <li key={idx} className="text-sm">
-                {rec}
-              </li>
-            ))}
-          </ul>
+        <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-md mb-3">
+          <h4 className="text-sm font-medium mb-2">Business Impact</h4>
+          <p className="text-sm">{businessImpact}</p>
         </div>
-      )}
-    </div>
+
+        {validationMethod && (
+          <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-md mb-3">
+            <h4 className="text-sm font-medium mb-2">Validation Method</h4>
+            <p className="text-sm">{validationMethod}</p>
+          </div>
+        )}
+
+        {recommendations.length > 0 && (
+          <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
+            <h4 className="text-sm font-medium mb-2">Recommendations</h4>
+            <ul
+              className="list-disc pl-5 space-y-1"
+              aria-label="Integrity recommendations"
+            >
+              {recommendations.map((rec, idx) => (
+                <li key={idx} className="text-sm">
+                  {rec}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </WidgetBase>
   );
 };
 

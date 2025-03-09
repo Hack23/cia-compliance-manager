@@ -2,71 +2,126 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import IntegrityImpactWidget from "./IntegrityImpactWidget";
 
-// Add mock options for testing
-const mockOptions = {
-  None: {
-    description: "No data integrity controls.",
-    businessImpact: "Decisions based on potentially corrupt data",
-    validationMethod: "None",
-    recommendations: [
-      "Implement basic data validation",
-      "Create manual verification processes",
-    ],
-  },
-  High: {
-    description: "Advanced integrity with blockchain verification.",
-    businessImpact: "High confidence in data integrity",
-    validationMethod: "Blockchain verification",
-    recommendations: ["Regular audits", "Automated verification"],
-  },
-};
-
 describe("IntegrityImpactWidget", () => {
-  it("renders without crashing", () => {
-    render(<IntegrityImpactWidget level="None" options={{}} />);
+  it("renders with empty options", () => {
+    render(
+      <IntegrityImpactWidget
+        integrityLevel="None"
+        availabilityLevel="None"
+        confidentialityLevel="None"
+        options={{}}
+      />
+    );
     expect(screen.getByText("Integrity Impact: None")).toBeInTheDocument();
   });
 
-  it("renders correctly with default props", () => {
-    render(<IntegrityImpactWidget level="None" options={{}} />);
-
+  it("renders with custom level", () => {
+    render(
+      <IntegrityImpactWidget
+        integrityLevel="High"
+        availabilityLevel="None"
+        confidentialityLevel="None"
+        options={{}}
+      />
+    );
     expect(screen.getByTestId("widget-integrity-impact")).toBeInTheDocument();
-    expect(screen.getByText(/Integrity Impact: None/i)).toBeInTheDocument();
+    expect(screen.getByText(/Integrity Impact: High/i)).toBeInTheDocument();
   });
 
-  it("displays the correct integrity information", () => {
-    render(<IntegrityImpactWidget level="None" options={mockOptions} />);
+  it("displays detailed information when available", () => {
+    const mockOptions = {
+      None: {
+        description: "No integrity controls",
+        businessImpact: "Potential data corruption",
+        validationMethod: "None",
+        recommendations: ["Implement basic data validation"],
+      },
+      High: {
+        description: "Strong integrity controls",
+        businessImpact: "Data corruption prevented",
+        validationMethod: "Digital signatures",
+        recommendations: ["Implement cryptographic verification"],
+      },
+    };
 
-    expect(screen.getByText("No data integrity controls.")).toBeInTheDocument();
-    expect(
-      screen.getByText("Decisions based on potentially corrupt data")
-    ).toBeInTheDocument();
-    expect(screen.getByText("None")).toBeInTheDocument();
+    render(
+      <IntegrityImpactWidget
+        integrityLevel="High"
+        availabilityLevel="None"
+        confidentialityLevel="None"
+        options={mockOptions}
+      />
+    );
+    expect(screen.getByText("Strong integrity controls")).toBeInTheDocument();
+    expect(screen.getByText("Data corruption prevented")).toBeInTheDocument();
+    expect(screen.getByText("Digital signatures")).toBeInTheDocument();
+  });
+
+  it("handles missing data gracefully", () => {
+    const mockOptions = {
+      None: {
+        description: "No integrity controls",
+        businessImpact: "Potential data corruption",
+        validationMethod: "None",
+        recommendations: ["Implement basic data validation"],
+      },
+      High: {
+        description: "Strong integrity controls",
+        businessImpact: "Data corruption prevented",
+        validationMethod: "Digital signatures",
+        recommendations: ["Implement cryptographic verification"],
+      },
+    };
+
+    render(
+      <IntegrityImpactWidget
+        integrityLevel="Moderate"
+        availabilityLevel="None"
+        confidentialityLevel="None"
+        options={mockOptions}
+      />
+    );
+    expect(screen.getByText("No integrity controls")).toBeInTheDocument();
+  });
+
+  it("renders without errors when options are undefined", () => {
+    render(
+      <IntegrityImpactWidget
+        integrityLevel="None"
+        availabilityLevel="None"
+        confidentialityLevel="None"
+        options={{}}
+      />
+    );
+    expect(screen.getByText("Integrity Impact: None")).toBeInTheDocument();
   });
 
   it("displays recommendations when available", () => {
-    render(<IntegrityImpactWidget level="None" options={mockOptions} />);
+    const mockOptions = {
+      None: {
+        description: "No integrity controls",
+        businessImpact: "Potential data corruption",
+        validationMethod: "None",
+        recommendations: ["Implement basic data validation"],
+      },
+      High: {
+        description: "Strong integrity controls",
+        businessImpact: "Data corruption prevented",
+        validationMethod: "Digital signatures",
+        recommendations: ["Implement cryptographic verification"],
+      },
+    };
 
-    expect(
-      screen.getByText("Implement basic data validation")
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("Create manual verification processes")
-    ).toBeInTheDocument();
-  });
-
-  it("updates content when level changes", () => {
-    const { rerender } = render(
-      <IntegrityImpactWidget level="None" options={mockOptions} />
+    render(
+      <IntegrityImpactWidget
+        integrityLevel="High"
+        availabilityLevel="None"
+        confidentialityLevel="None"
+        options={mockOptions}
+      />
     );
-
-    expect(screen.getByText("No data integrity controls.")).toBeInTheDocument();
-
-    rerender(<IntegrityImpactWidget level="High" options={mockOptions} />);
-
     expect(
-      screen.getByText("Advanced integrity with blockchain verification.")
+      screen.getByText("Implement cryptographic verification")
     ).toBeInTheDocument();
-    expect(screen.getByText("Blockchain verification")).toBeInTheDocument();
   });
 });

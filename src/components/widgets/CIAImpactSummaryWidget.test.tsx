@@ -5,12 +5,12 @@ import CIAImpactSummaryWidget from "./CIAImpactSummaryWidget";
 import { WIDGET_TEST_IDS } from "../../constants/testIds";
 
 describe("CIAImpactSummaryWidget", () => {
-  it("renders all three CIA categories with correct text", () => {
+  it("renders correctly with all security levels", () => {
     render(
       <CIAImpactSummaryWidget
-        availability="High"
-        integrity="Low"
-        confidentiality="Moderate"
+        availabilityLevel="High"
+        integrityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
@@ -25,12 +25,12 @@ describe("CIAImpactSummaryWidget", () => {
     expect(screen.getByText("Moderate Confidentiality")).toBeInTheDocument();
   });
 
-  it("applies appropriate styling to different security levels", () => {
+  it("handles different security level combinations", () => {
     render(
       <CIAImpactSummaryWidget
-        availability="Very High"
-        integrity="None"
-        confidentiality="Moderate"
+        availabilityLevel="None"
+        integrityLevel="High"
+        confidentialityLevel="Very High"
       />
     );
 
@@ -53,12 +53,12 @@ describe("CIAImpactSummaryWidget", () => {
     expect(confidentialityValue).toHaveClass("text-info-600");
   });
 
-  it("uses default testId when not provided", () => {
+  it("calculates business impact summary correctly", () => {
     render(
       <CIAImpactSummaryWidget
-        availability="High"
-        integrity="High"
-        confidentiality="High"
+        availabilityLevel="High"
+        integrityLevel="High"
+        confidentialityLevel="High"
       />
     );
 

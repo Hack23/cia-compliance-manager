@@ -6,6 +6,10 @@ import { CIADetails } from "./cia";
 export interface WidgetBaseProps {
   /** Test ID for component selection in tests */
   testId?: string;
+  availabilityLevel: string;
+  integrityLevel: string;
+  confidentialityLevel: string;
+  className?: string;
 }
 
 /**
@@ -39,12 +43,6 @@ export interface CostEstimationWidgetProps extends WidgetBaseProps {
   roi?: string;
   /** Implementation time estimate */
   implementationTime?: string;
-  /** Availability level */
-  availabilityLevel?: string;
-  /** Integrity level */
-  integrityLevel?: string;
-  /** Confidentiality level */
-  confidentialityLevel?: string;
   /** Availability options */
   availabilityOptions?: Record<string, CIADetails>;
   /** Integrity options */
@@ -67,12 +65,6 @@ export interface ValueCreationWidgetProps extends WidgetBaseProps {
 export interface SecuritySummaryWidgetProps extends WidgetBaseProps {
   /** Overall security level */
   securityLevel: string;
-  /** Availability security level */
-  availabilityLevel: string;
-  /** Integrity security level */
-  integrityLevel: string;
-  /** Confidentiality security level */
-  confidentialityLevel: string;
 }
 
 /**
@@ -81,18 +73,6 @@ export interface SecuritySummaryWidgetProps extends WidgetBaseProps {
 export interface ComplianceStatusWidgetProps extends WidgetBaseProps {
   /** Overall security level */
   securityLevel?: string;
-  /** Availability security level */
-  availabilityLevel?: string;
-  /** Integrity security level */
-  integrityLevel?: string;
-  /** Confidentiality security level */
-  confidentialityLevel?: string;
-  /** Legacy availability level (backward compatibility) */
-  availability?: string;
-  /** Legacy integrity level (backward compatibility) */
-  integrity?: string;
-  /** Legacy confidentiality level (backward compatibility) */
-  confidentiality?: string;
 }
 
 /**
@@ -112,8 +92,6 @@ export interface IntegrityDetail extends BaseWidgetDetails {
  * Props for the IntegrityImpactWidget component
  */
 export interface IntegrityImpactWidgetProps extends WidgetBaseProps {
-  /** Integrity security level */
-  level: string;
   /** Options for each level */
   options: Record<string, IntegrityDetail | CIADetails>;
 }
@@ -135,8 +113,6 @@ export interface ConfidentialityDetail extends BaseWidgetDetails {
  * Props for the ConfidentialityImpactWidget component
  */
 export interface ConfidentialityImpactWidgetProps extends WidgetBaseProps {
-  /** Confidentiality security level */
-  level: string;
   /** Options for each level */
   options: Record<string, ConfidentialityDetail | CIADetails>;
 }
@@ -159,8 +135,6 @@ export interface AvailabilityDetail extends BaseWidgetDetails {
  * Props for the AvailabilityImpactWidget component
  */
 export interface AvailabilityImpactWidgetProps extends WidgetBaseProps {
-  /** Availability security level */
-  level: string;
   /** Options for each level */
   options: Record<string, AvailabilityDetail | CIADetails>;
 }
@@ -177,18 +151,6 @@ export interface SecurityResourcesWidgetProps extends WidgetBaseProps {
  * Props for the TechnicalDetailsWidget component
  */
 export interface TechnicalDetailsWidgetProps extends WidgetBaseProps {
-  /** Availability security level */
-  availabilityLevel?: string;
-  /** Integrity security level */
-  integrityLevel?: string;
-  /** Confidentiality security level */
-  confidentialityLevel?: string;
-  /** Legacy availability level (backward compatibility) */
-  availability?: string;
-  /** Legacy integrity level (backward compatibility) */
-  integrity?: string;
-  /** Legacy confidentiality level (backward compatibility) */
-  confidentiality?: string;
   /** Availability options for specific technical details */
   availabilityOptions?: Record<string, CIADetails>;
   /** Integrity options for specific technical details */
@@ -203,12 +165,6 @@ export interface TechnicalDetailsWidgetProps extends WidgetBaseProps {
  * Props for the BusinessImpactAnalysisWidget component
  */
 export interface BusinessImpactAnalysisWidgetProps extends WidgetBaseProps {
-  /** Availability security level */
-  availabilityLevel: string;
-  /** Integrity security level */
-  integrityLevel: string;
-  /** Confidentiality security level */
-  confidentialityLevel: string;
   /** Overall security level */
   securityLevel?: string;
 }
@@ -217,9 +173,6 @@ export interface BusinessImpactAnalysisWidgetProps extends WidgetBaseProps {
  * Props for the SecurityLevelWidget component
  */
 export interface SecurityLevelWidgetProps extends WidgetBaseProps {
-  availabilityLevel: string;
-  integrityLevel: string;
-  confidentialityLevel: string;
   setAvailability: (level: string) => void;
   setIntegrity: (level: string) => void;
   setConfidentiality: (level: string) => void;

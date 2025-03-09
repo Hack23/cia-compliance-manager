@@ -10,13 +10,9 @@ import {
 } from "../../constants/appConstants";
 
 interface ComplianceStatusWidgetProps {
-  availabilityLevel?: string;
-  integrityLevel?: string;
-  confidentialityLevel?: string;
-  // Add backward compatibility props
-  availability?: string;
-  integrity?: string;
-  confidentiality?: string;
+  availabilityLevel: string;
+  integrityLevel: string;
+  confidentialityLevel: string;
   testId?: string;
 }
 
@@ -24,32 +20,24 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
   availabilityLevel = "None",
   integrityLevel = "None",
   confidentialityLevel = "None",
-  // Use backward compatibility props if primary props aren't provided
-  availability,
-  integrity,
-  confidentiality,
   testId = FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_WIDGET,
 }) => {
-  // Use provided values or fall back to backward compatibility props
-  const actualAvailability = availability || availabilityLevel;
-  const actualIntegrity = integrity || integrityLevel;
-  const actualConfidentiality = confidentiality || confidentialityLevel;
+  const actualAvailability = availabilityLevel;
+  const actualIntegrity = integrityLevel;
+  const actualConfidentiality = confidentialityLevel;
 
-  // Generate compliance recommendations based on CIA levels
   const complianceStatus = generateComplianceStatus(
     actualAvailability,
     actualIntegrity,
     actualConfidentiality
   );
 
-  // Determine overall compliance status based on the levels
   const overallStatus = getOverallComplianceStatus(
     actualAvailability,
     actualIntegrity,
     actualConfidentiality
   );
 
-  // Get color class for the compliance status badge
   const getStatusColorClass = (status: string): string => {
     switch (status) {
       case COMPLIANCE_STATUS.FULL_COMPLIANCE:
@@ -63,7 +51,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
     }
   };
 
-  // Get icon for the compliance status
   const getStatusIcon = (status: string): string => {
     switch (status) {
       case COMPLIANCE_STATUS.FULL_COMPLIANCE:
@@ -87,7 +74,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         </p>
       </div>
 
-      {/* Add the compliance-status-badge element that tests are looking for */}
       <div
         className={`inline-block px-3 py-1 rounded-full text-sm mb-4 ${getStatusColorClass(
           overallStatus
@@ -98,7 +84,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         {overallStatus}
       </div>
 
-      {/* Add the compliance-requirements-list element that tests are looking for */}
       <div
         className="mb-4"
         data-testid={FRAMEWORK_TEST_IDS.COMPLIANCE_REQUIREMENTS_LIST}
@@ -115,7 +100,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         </ul>
       </div>
 
-      {/* Display compliant frameworks */}
       <div
         className="mb-4"
         data-testid={FRAMEWORK_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST}
@@ -136,7 +120,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         {complianceStatus.map((item, index) => (
           <div
             key={index}
-            // Use the framework-specific test ID that tests are looking for
             data-testid={createDynamicTestId.framework(index)}
             className="p-3 border rounded-lg bg-white dark:bg-gray-800 shadow-sm"
           >
@@ -183,17 +166,14 @@ function generateComplianceStatus(
   integrityLevel: string,
   confidentialityLevel: string
 ): ComplianceItem[] {
-  // Calculate average security level (0-4)
   const levels = ["None", "Low", "Moderate", "High", "Very High"];
   const availabilityIdx = Math.max(0, levels.indexOf(availabilityLevel));
   const integrityIdx = Math.max(0, levels.indexOf(integrityLevel));
   const confidentialityIdx = Math.max(0, levels.indexOf(confidentialityLevel));
   const avgLevel = (availabilityIdx + integrityIdx + confidentialityIdx) / 3;
 
-  // Generate framework recommendations based on average level
   const frameworks: ComplianceItem[] = [];
 
-  // Always add ISO 27001
   frameworks.push({
     name: "ISO 27001",
     description:
@@ -201,7 +181,6 @@ function generateComplianceStatus(
     relevance: avgLevel >= 2.5 ? "Moderate" : "Low",
   });
 
-  // Add NIST for levels > 0
   if (avgLevel > 0) {
     frameworks.push({
       name: "NIST Cybersecurity Framework",
@@ -211,7 +190,6 @@ function generateComplianceStatus(
     });
   }
 
-  // Add more frameworks for moderate level
   if (avgLevel >= 1.5) {
     frameworks.push({
       name: "HIPAA",
@@ -235,7 +213,6 @@ function generateComplianceStatus(
     });
   }
 
-  // Add PCI DSS for high levels
   if (avgLevel >= 2.5) {
     frameworks.push({
       name: "PCI DSS",
@@ -248,13 +225,11 @@ function generateComplianceStatus(
   return frameworks;
 }
 
-// Helper function to determine the overall compliance status based on security levels
 function getOverallComplianceStatus(
   availabilityLevel: string,
   integrityLevel: string,
   confidentialityLevel: string
 ): string {
-  // Calculate average security level (0-4)
   const levels = ["None", "Low", "Moderate", "High", "Very High"];
   const availabilityIdx = Math.max(0, levels.indexOf(availabilityLevel));
   const integrityIdx = Math.max(0, levels.indexOf(integrityLevel));
@@ -272,13 +247,11 @@ function getOverallComplianceStatus(
   }
 }
 
-// Helper function to get requirements based on security levels
 function getRequirements(
   availabilityLevel: string,
   integrityLevel: string,
   confidentialityLevel: string
 ): string[] {
-  // Calculate average security level (0-4)
   const levels = ["None", "Low", "Moderate", "High", "Very High"];
   const availabilityIdx = Math.max(0, levels.indexOf(availabilityLevel));
   const integrityIdx = Math.max(0, levels.indexOf(integrityLevel));
@@ -287,7 +260,6 @@ function getRequirements(
 
   const requirements: string[] = [];
 
-  // Add requirements based on the average security level
   if (avgLevel < 1) {
     requirements.push("Implement basic security controls");
     requirements.push("Establish minimum security policy");
@@ -313,13 +285,11 @@ function getRequirements(
   return requirements;
 }
 
-// Helper function to get compliant frameworks based on security levels
 function getCompliantFrameworks(
   availabilityLevel: string,
   integrityLevel: string,
   confidentialityLevel: string
 ): string[] {
-  // Calculate average security level (0-4)
   const levels = ["None", "Low", "Moderate", "High", "Very High"];
   const availabilityIdx = Math.max(0, levels.indexOf(availabilityLevel));
   const integrityIdx = Math.max(0, levels.indexOf(integrityLevel));
@@ -332,7 +302,6 @@ function getCompliantFrameworks(
     frameworks.push("ISO 27001 (Basic Controls)");
   }
 
-  // Make SOC2 appear at Moderate level (avgLevel >= 2) instead of requiring avgLevel >= 3
   if (avgLevel >= 2) {
     frameworks.push("SOC 2 Type 1");
     frameworks.push("NIST CSF (Tier 1-2)");

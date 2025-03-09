@@ -1,17 +1,38 @@
-import React from "react";
-import { WIDGET_TEST_IDS } from "../../constants/testIds";
-import {
-  ConfidentialityImpactWidgetProps,
-  ConfidentialityDetail,
-} from "../../types/widgets";
+import React, { useState } from "react";
+import { WidgetBaseProps } from "../../types/widgets";
+import { CONFIDENTIALITY_IMPACT_TEST_IDS } from "../../constants/testIds";
+import WidgetBase from "../common/WidgetBase";
+
+// Define or import ConfidentialityDetail interface if needed
+interface ConfidentialityDetail {
+  description?: string;
+  impact?: string;
+  businessImpact?: string;
+  recommendations?: string[];
+  protectionMethod?: string;
+  [key: string]: any;
+}
+
+export interface ConfidentialityImpactWidgetProps extends WidgetBaseProps {
+  confidentialityLevel: string;
+  integrityLevel: string;
+  availabilityLevel: string;
+  options: Record<string, ConfidentialityDetail>;
+  testId?: string;
+}
 
 const ConfidentialityImpactWidget: React.FC<
   ConfidentialityImpactWidgetProps
 > = ({
-  level = "Moderate",
+  confidentialityLevel,
+  integrityLevel,
+  availabilityLevel,
   options,
-  testId = WIDGET_TEST_IDS.CONFIDENTIALITY_IMPACT_WIDGET,
+  testId = CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_PREFIX,
 }) => {
+  // Use a different variable name to avoid redeclaring
+  const currentLevelData = options[confidentialityLevel] || {};
+
   // Default options with improved business context
   const defaultOptions: Record<string, ConfidentialityDetail> = {
     None: {
@@ -71,7 +92,8 @@ const ConfidentialityImpactWidget: React.FC<
 
   // Safe access to level data with fallback
   // Add adapter logic to handle both types (CIADetails and ConfidentialityDetail)
-  const levelData = finalOptions[level] || finalOptions["Moderate"] || {};
+  const levelData =
+    finalOptions[confidentialityLevel] || finalOptions["Moderate"] || {};
 
   // Extract the important fields, handling both types of data
   const impact =
@@ -83,65 +105,77 @@ const ConfidentialityImpactWidget: React.FC<
   const recommendations = (levelData && levelData.recommendations) || [];
 
   return (
-    // ... existing component jsx with improved accessibility ...
-    <div
-      data-testid={testId}
-      className="confidentiality-impact-widget p-4 border rounded-lg bg-white dark:bg-gray-800"
-      aria-labelledby="confidentiality-impact-title"
+    <WidgetBase
+      title="Confidentiality Impact"
+      icon="🔒"
+      testId={testId}
+      availabilityLevel={availabilityLevel}
+      integrityLevel={integrityLevel}
+      confidentialityLevel={confidentialityLevel}
     >
-      <div className="mb-4">
-        <h3 id="confidentiality-impact-title" className="text-lg font-semibold">
-          Confidentiality Impact: {level}
-        </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          Analysis of confidentiality protection impact
-        </p>
-      </div>
+      <div
+        data-testid={testId}
+        className="confidentiality-impact-widget p-4 border rounded-lg bg-white dark:bg-gray-800"
+        aria-labelledby="confidentiality-impact-title"
+      >
+        <div className="mb-4">
+          <h3
+            id="confidentiality-impact-title"
+            className="text-lg font-semibold"
+          >
+            Confidentiality Impact: {confidentialityLevel}
+          </h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Analysis of confidentiality protection impact
+          </p>
+        </div>
 
-      <div className="mb-4">
-        <h4 className="font-medium text-sm mb-1">Security Impact</h4>
-        <p
-          className="text-sm p-2 bg-gray-50 dark:bg-gray-700 rounded"
-          data-testid="confidentiality-impact"
-        >
-          {impact}
-        </p>
-      </div>
+        <div className="mb-4">
+          <h4 className="font-medium text-sm mb-1">Security Impact</h4>
+          <p
+            className="text-sm p-2 bg-gray-50 dark:bg-gray-700 rounded"
+            data-testid="confidentiality-impact"
+          >
+            {impact}
+          </p>
+        </div>
 
-      <div className="mb-4">
-        <h4 className="font-medium text-sm mb-1">Business Impact</h4>
-        <p
-          className="text-sm p-2 bg-gray-50 dark:bg-gray-700 rounded"
-          data-testid="business-impact"
-        >
-          {businessImpact}
-        </p>
-      </div>
+        <div className="mb-4">
+          <h4 className="font-medium text-sm mb-1">Business Impact</h4>
+          <p
+            className="text-sm p-2 bg-gray-50 dark:bg-gray-700 rounded"
+            data-testid="business-impact"
+          >
+            {businessImpact}
+          </p>
+        </div>
 
-      <div className="mb-2">
-        <h4 className="font-medium text-sm mb-1">Recommendations</h4>
-        <ul
-          className="list-disc list-inside text-sm"
-          aria-label="Security recommendations"
-        >
-          {(recommendations || []).map((rec, index) => (
-            <li
-              key={index}
-              className="p-1 bg-gray-50 dark:bg-gray-700 rounded mb-1"
-              data-testid={`recommendation-${index}`}
-            >
-              {rec}
-            </li>
-          ))}
-        </ul>
-      </div>
+        <div className="mb-2">
+          <h4 className="font-medium text-sm mb-1">Recommendations</h4>
+          <ul
+            className="list-disc list-inside text-sm"
+            aria-label="Security recommendations"
+          >
+            {(recommendations || []).map((rec, index) => (
+              <li
+                key={index}
+                className="p-1 bg-gray-50 dark:bg-gray-700 rounded mb-1"
+                data-testid={`recommendation-${index}`}
+              >
+                {rec}
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <div className="mt-4 text-xs text-gray-500">
-        <p data-testid="protection-level-text">
-          <strong>Protection Level:</strong> {getProtectionLevel(level)}
-        </p>
+        <div className="mt-4 text-xs text-gray-500">
+          <p data-testid="protection-level-text">
+            <strong>Protection Level:</strong>{" "}
+            {getProtectionLevel(confidentialityLevel)}
+          </p>
+        </div>
       </div>
-    </div>
+    </WidgetBase>
   );
 };
 
