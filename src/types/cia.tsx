@@ -318,3 +318,9 @@ export function calculateRiskLevel(
       return RISK_LEVELS.UNKNOWN;
   }
 }
+
+/**
+ * Component type for CIA triad
+ * @category CIA Model
+ */
+export type CIAComponentType = "availability" | "integrity" | "confidentiality";

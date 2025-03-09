@@ -18,6 +18,7 @@ import {
   contentClasses,
   gridStyle,
 } from "../styles/gridStyles";
+import { SecurityLevel } from "../types/cia";
 
 // Main Dashboard component props
 interface DashboardProps {
@@ -149,14 +150,14 @@ function calculateCostProps(
   const confLevel = confidentiality || "None";
 
   const totalCapex =
-    (availabilityOptions[availLevel]?.capex || 0) +
-    (integrityOptions[intLevel]?.capex || 0) +
-    (confidentialityOptions[confLevel]?.capex || 0);
+    (availabilityOptions[availLevel as SecurityLevel]?.capex || 0) +
+    (integrityOptions[intLevel as SecurityLevel]?.capex || 0) +
+    (confidentialityOptions[confLevel as SecurityLevel]?.capex || 0);
 
   const totalOpex =
-    (availabilityOptions[availLevel]?.opex || 0) +
-    (integrityOptions[intLevel]?.opex || 0) +
-    (confidentialityOptions[confLevel]?.opex || 0);
+    (availabilityOptions[availLevel as SecurityLevel]?.opex || 0) +
+    (integrityOptions[intLevel as SecurityLevel]?.opex || 0) +
+    (confidentialityOptions[confLevel as SecurityLevel]?.opex || 0);
 
   return {
     totalCapex,

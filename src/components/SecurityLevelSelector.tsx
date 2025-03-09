@@ -8,6 +8,7 @@ import {
 } from "../constants/appConstants";
 import { COMMON_COMPONENT_TEST_IDS, CIA_TEST_IDS } from "../constants/testIds";
 import KeyValuePair from "./common/KeyValuePair";
+import { SecurityLevel } from "../types/cia";
 
 export interface SecurityLevelSelectorProps {
   initialAvailability?: string;
@@ -187,16 +188,20 @@ const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
           className="text-sm text-gray-600 dark:text-gray-400 mt-2"
           data-testid={CIA_TEST_IDS.CONFIDENTIALITY_DESCRIPTION}
         >
-          {confidentialityOptions?.[confidentiality]?.description ||
-            CIA_DESCRIPTIONS.CONFIDENTIALITY}
+          {confidentialityOptions?.[confidentiality as SecurityLevel]
+            ?.description || CIA_DESCRIPTIONS.CONFIDENTIALITY}
         </div>
-        {confidentialityOptions?.[confidentiality]?.protectionMethod && (
+        {confidentialityOptions?.[confidentiality as SecurityLevel]
+          ?.protectionMethod && (
           <div className="mt-2">
             <span
               className="inline-flex items-center font-medium rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300 text-xs py-0.5 px-1.5 "
               data-testid={CIA_TEST_IDS.CONFIDENTIALITY_PROTECTION_BADGE}
             >
-              {confidentialityOptions[confidentiality].protectionMethod}
+              {
+                confidentialityOptions[confidentiality as SecurityLevel]
+                  .protectionMethod
+              }
             </span>
           </div>
         )}
@@ -248,16 +253,16 @@ const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
           className="text-sm text-gray-600 dark:text-gray-400 mt-2"
           data-testid={CIA_TEST_IDS.INTEGRITY_DESCRIPTION}
         >
-          {integrityOptions?.[integrity]?.description ||
+          {integrityOptions?.[integrity as SecurityLevel]?.description ||
             CIA_DESCRIPTIONS.INTEGRITY}
         </div>
-        {integrityOptions?.[integrity]?.validationMethod && (
+        {integrityOptions?.[integrity as SecurityLevel]?.validationMethod && (
           <div className="mt-2">
             <span
               className="inline-flex items-center font-medium rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 text-xs py-0.5 px-1.5 "
               data-testid={CIA_TEST_IDS.INTEGRITY_VALIDATION_BADGE}
             >
-              {integrityOptions[integrity].validationMethod}
+              {integrityOptions[integrity as SecurityLevel].validationMethod}
             </span>
           </div>
         )}
@@ -308,16 +313,16 @@ const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
           className="text-sm text-gray-600 dark:text-gray-400 mt-2"
           data-testid={CIA_TEST_IDS.AVAILABILITY_DESCRIPTION}
         >
-          {availabilityOptions?.[availability]?.description ||
+          {availabilityOptions?.[availability as SecurityLevel]?.description ||
             CIA_DESCRIPTIONS.AVAILABILITY}
         </div>
-        {availabilityOptions?.[availability]?.uptime && (
+        {availabilityOptions?.[availability as SecurityLevel]?.uptime && (
           <div className="mt-2">
             <span
               className="inline-flex items-center font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 text-xs py-0.5 px-1.5 "
               data-testid={CIA_TEST_IDS.AVAILABILITY_UPTIME_BADGE}
             >
-              {availabilityOptions[availability].uptime}
+              {availabilityOptions[availability as SecurityLevel].uptime}
             </span>
           </div>
         )}
@@ -336,13 +341,15 @@ const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
           </h4>
           <p>
             {activeTooltip === "confidentiality" &&
-              (confidentialityOptions?.[confidentiality]?.technical ||
+              (confidentialityOptions?.[confidentiality as SecurityLevel]
+                ?.technical ||
                 "Defines who can access your data and systems.")}
             {activeTooltip === "integrity" &&
-              (integrityOptions?.[integrity]?.technical ||
+              (integrityOptions?.[integrity as SecurityLevel]?.technical ||
                 "Ensures your data remains accurate and hasn't been tampered with.")}
             {activeTooltip === "availability" &&
-              (availabilityOptions?.[availability]?.technical ||
+              (availabilityOptions?.[availability as SecurityLevel]
+                ?.technical ||
                 "Defines how reliably your systems and data can be accessed.")}
           </p>
         </div>

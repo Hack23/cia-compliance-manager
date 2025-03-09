@@ -95,21 +95,15 @@ const CIAClassificationApp: React.FC = () => {
   }, []);
 
   // Calculate total costs
-  const totalCapex = useMemo(() => {
-    return (
-      (availabilityOptions[availability]?.capex || 0) +
-      (integrityOptions[integrity]?.capex || 0) +
-      (confidentialityOptions[confidentiality]?.capex || 0)
-    );
-  }, [availability, integrity, confidentiality]);
+  const totalCapex =
+    (availabilityOptions[availability as SecurityLevel]?.capex || 0) +
+    (integrityOptions[integrity as SecurityLevel]?.capex || 0) +
+    (confidentialityOptions[confidentiality as SecurityLevel]?.capex || 0);
 
-  const totalOpex = useMemo(() => {
-    return (
-      (availabilityOptions[availability]?.opex || 0) +
-      (integrityOptions[integrity]?.opex || 0) +
-      (confidentialityOptions[confidentiality]?.opex || 0)
-    );
-  }, [availability, integrity, confidentiality]);
+  const totalOpex =
+    (availabilityOptions[availability as SecurityLevel]?.opex || 0) +
+    (integrityOptions[integrity as SecurityLevel]?.opex || 0) +
+    (confidentialityOptions[confidentiality as SecurityLevel]?.opex || 0);
 
   // Calculate overall security level
   const overallSecurityLevel = useMemo(() => {
@@ -388,9 +382,9 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-business-impact-container"
               >
                 <BusinessImpactAnalysisWidget
-                  availabilityLevel={availability}
-                  integrityLevel={integrity}
-                  confidentialityLevel={confidentiality}
+                  availabilityLevel={availability as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
                   securityLevel={overallSecurityLevel}
                 />
               </DashboardWidget>

@@ -3,7 +3,7 @@ import {
   IntegrityDetail,
   ConfidentialityDetail,
 } from "../types/widgets";
-import { CIADetails } from "../types/cia";
+import { CIADetails, SecurityLevel } from "../types/cia"; // Added SecurityLevel import
 
 /**
  * Type guard to check if an object is an AvailabilityDetail
@@ -138,4 +138,30 @@ export function safeNumberConversion(
     return isNaN(parsed) ? fallback : parsed;
   }
   return fallback;
+}
+
+/**
+ * Helper function to safely access CIA options with string keys
+ * @param options The options object to access
+ * @param key The string key that should be treated as SecurityLevel
+ * @returns The option value or undefined if not found
+ */
+export function getSecurityLevelOption<T>(
+  options: Record<SecurityLevel, T>,
+  key: string | undefined
+): T | undefined {
+  // Default to "None" if key is undefined
+  const safeKey = key || "None";
+
+  // Check if the key is a valid SecurityLevel
+  if (
+    safeKey === "None" ||
+    safeKey === "Low" ||
+    safeKey === "Moderate" ||
+    safeKey === "High" ||
+    safeKey === "Very High"
+  ) {
+    return options[safeKey as SecurityLevel];
+  }
+  return undefined;
 }

@@ -45,6 +45,7 @@ export interface WidgetDefinition<T extends WidgetBaseProps> {
   size?: "small" | "medium" | "large" | "full";
   order?: number;
   description?: string;
+  position?: number; // Add position property
 }
 
 // Class to manage available widgets and their configurations
@@ -358,6 +359,16 @@ widgetRegistry.register<BusinessImpactAnalysisWidgetProps>({
     integrityLevel: SECURITY_LEVELS.NONE,
     confidentialityLevel: SECURITY_LEVELS.NONE,
   },
+});
+
+// Use type assertion for the BusinessImpactAnalysisWidget to align types
+widgetRegistry.register<BusinessImpactAnalysisWidgetProps>({
+  id: "business-impact-analysis",
+  title: "Business Impact Analysis",
+  component:
+    BusinessImpactAnalysisWidget as unknown as WidgetComponentType<BusinessImpactAnalysisWidgetProps>,
+  size: "full",
+  position: 6,
 });
 
 export default widgetRegistry;

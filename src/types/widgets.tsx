@@ -1,4 +1,5 @@
 import { CIADetails } from "./cia";
+import { SecurityLevel } from "./cia";
 
 /**
  * Base properties for all widgets
@@ -10,6 +11,7 @@ export interface WidgetBaseProps {
   integrityLevel: string;
   confidentialityLevel: string;
   className?: string;
+  securityLevel?: string; // Add this property
 }
 
 /**
@@ -164,9 +166,14 @@ export interface TechnicalDetailsWidgetProps extends WidgetBaseProps {
 /**
  * Props for the BusinessImpactAnalysisWidget component
  */
-export interface BusinessImpactAnalysisWidgetProps extends WidgetBaseProps {
-  /** Overall security level */
-  securityLevel?: string;
+export interface BusinessImpactAnalysisWidgetProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  securityLevel?: SecurityLevel; // Add securityLevel property to match component
+  className?: string;
+  testId?: string;
+  activeComponent?: "availability" | "integrity" | "confidentiality";
 }
 
 /**
