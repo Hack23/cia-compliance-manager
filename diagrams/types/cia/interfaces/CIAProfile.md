@@ -6,7 +6,7 @@
 
 # Interface: CIAProfile
 
-Defined in: [types/cia.ts:113](https://github.com/Hack23/cia-compliance-manager/blob/9aafe15eec550c621832d88d750cb4cde17896e9/src/types/cia.ts#L113)
+Defined in: [types/cia.ts:113](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/types/cia.ts#L113)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/cia.ts:113](https://github.com/Hack23/cia-compliance-manager/
 
 > **availability**: [`AvailabilityRating`](../type-aliases/AvailabilityRating.md)
 
-Defined in: [types/cia.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/9aafe15eec550c621832d88d750cb4cde17896e9/src/types/cia.ts#L114)
+Defined in: [types/cia.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/types/cia.ts#L114)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types/cia.ts:114](https://github.com/Hack23/cia-compliance-manager/
 
 > **confidentiality**: [`ConfidentialityRating`](../type-aliases/ConfidentialityRating.md)
 
-Defined in: [types/cia.ts:116](https://github.com/Hack23/cia-compliance-manager/blob/9aafe15eec550c621832d88d750cb4cde17896e9/src/types/cia.ts#L116)
+Defined in: [types/cia.ts:116](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/types/cia.ts#L116)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [types/cia.ts:116](https://github.com/Hack23/cia-compliance-manager/
 
 > **integrity**: [`IntegrityRating`](../type-aliases/IntegrityRating.md)
 
-Defined in: [types/cia.ts:115](https://github.com/Hack23/cia-compliance-manager/blob/9aafe15eec550c621832d88d750cb4cde17896e9/src/types/cia.ts#L115)
+Defined in: [types/cia.ts:115](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/types/cia.ts#L115)
