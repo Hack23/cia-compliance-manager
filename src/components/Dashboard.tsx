@@ -8,6 +8,8 @@ import {
 } from "../hooks/useCIAOptions";
 import { APP_TEST_IDS, createDynamicTestId } from "../constants/testIds";
 import WidgetHeader from "./common/WidgetHeader";
+// Add import for TechnicalDetailsWidget
+import TechnicalDetailsWidget from "./widgets/TechnicalDetailsWidget";
 // Add the missing imports for grid styles
 import {
   gridClasses,
@@ -105,11 +107,14 @@ const Dashboard: React.FC<DashboardProps> = ({
             if (!React.isValidElement(child)) return null;
             return child;
           })}
-      <TechnicalDetailsWidget
-        availabilityLevel={availability}
-        integrityLevel={integrity}
-        confidentialityLevel={confidentiality}
-      />
+      {/* Make TechnicalDetailsWidget conditional if the prop values aren't available */}
+      {availability && integrity && confidentiality && (
+        <TechnicalDetailsWidget
+          availabilityLevel={availability}
+          integrityLevel={integrity}
+          confidentialityLevel={confidentiality}
+        />
+      )}
     </div>
   );
 };

@@ -162,8 +162,11 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
               className="list-disc pl-5 space-y-1"
               aria-label="Integrity recommendations"
             >
-              {recommendations.map((rec, idx) => (
-                <li key={idx} className="text-sm">
+              {recommendations.map((rec: string, idx: number) => (
+                <li
+                  key={`recommendation-${idx}`}
+                  className="text-sm text-gray-600 dark:text-gray-400"
+                >
                   {rec}
                 </li>
               ))}
