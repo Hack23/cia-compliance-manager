@@ -1,199 +1,299 @@
-import React, { useState } from "react";
-import { WidgetBaseProps } from "../../types/widgets";
+import React, { useMemo, useState } from "react";
+import { SecurityLevel } from "../../types/cia";
 import { CONFIDENTIALITY_IMPACT_TEST_IDS } from "../../constants/testIds";
-import WidgetBase from "../common/WidgetBase";
+import ciaContentService from "../../services/ciaContentService";
+import WidgetContainer from "../common/WidgetContainer";
+import StatusBadge from "../common/StatusBadge";
+import KeyValuePair from "../common/KeyValuePair";
+import { WIDGET_TITLES, WIDGET_ICONS } from "../../constants/coreConstants";
 
-// Define or import ConfidentialityDetail interface if needed
-interface ConfidentialityDetail {
-  description?: string;
-  impact?: string;
-  businessImpact?: string;
-  recommendations?: string[];
-  protectionMethod?: string;
-  [key: string]: any;
-}
-
-export interface ConfidentialityImpactWidgetProps extends WidgetBaseProps {
-  confidentialityLevel: string;
-  integrityLevel: string;
-  availabilityLevel: string;
-  options: Record<string, ConfidentialityDetail>;
+/**
+ * Props for ConfidentialityImpactWidget component
+ *
+ * @interface ConfidentialityImpactWidgetProps
+ * @property {SecurityLevel} confidentialityLevel - The selected confidentiality security level
+ * @property {SecurityLevel} [availabilityLevel] - Optional availability security level for context
+ * @property {SecurityLevel} [integrityLevel] - Optional integrity security level for context
+ * @property {string} [className] - Optional CSS class name
+ * @property {string} [testId] - Optional test ID for testing purposes
+ */
+export interface ConfidentialityImpactWidgetProps {
+  confidentialityLevel: SecurityLevel;
+  availabilityLevel?: SecurityLevel;
+  integrityLevel?: SecurityLevel;
+  className?: string;
   testId?: string;
 }
 
+/**
+ * ConfidentialityImpactWidget displays impacts and recommendations related to data confidentiality
+ * based on the selected security level. It uses ciaContentService to fetch all relevant data.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <ConfidentialityImpactWidget
+ *   confidentialityLevel="High"
+ *   availabilityLevel="Moderate"
+ *   integrityLevel="High"
+ * />
+ * ```
+ */
 const ConfidentialityImpactWidget: React.FC<
   ConfidentialityImpactWidgetProps
 > = ({
   confidentialityLevel,
-  integrityLevel,
   availabilityLevel,
-  options,
+  integrityLevel,
+  className = "",
   testId = CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_PREFIX,
 }) => {
-  // Use a different variable name to avoid redeclaring
-  const currentLevelData = options[confidentialityLevel] || {};
+  const [showAllRecommendations, setShowAllRecommendations] = useState(false);
 
-  // Default options with improved business context
-  const defaultOptions: Record<string, ConfidentialityDetail> = {
-    None: {
-      impact: "No data protection, high risk of unauthorized access",
-      businessImpact:
-        "Critical vulnerability to data breaches and confidentiality violations that could lead to reputation damage, customer loss, and legal liability",
-      recommendations: [
-        "Implement basic access controls and authentication",
-        "Create data classification policy and handling procedures",
-        "Conduct basic security awareness training for employees",
-      ],
-    },
-    Low: {
-      impact: "Basic access controls, protection against casual snooping only",
-      businessImpact:
-        "Significant vulnerability to targeted attacks, suitable for public data only. Limited protection for business information.",
-      recommendations: [
-        "Implement proper authentication with password policies",
-        "Add basic encryption for sensitive data in transit",
-        "Deploy access logging for security monitoring",
-      ],
-    },
-    Moderate: {
-      impact: "Standard protection mechanisms for sensitive data",
-      businessImpact:
-        "Reasonable protection for business data, providing adequate safeguards for most regulatory compliance needs with moderate risk acceptance",
-      recommendations: [
-        "Deploy data loss prevention tools to prevent unauthorized sharing",
-        "Implement role-based access controls with regular review",
-        "Enable encryption for sensitive data at rest and in transit",
-      ],
-    },
-    High: {
-      impact: "Strong protection for sensitive information",
-      businessImpact:
-        "Robust protection for confidential business information meeting most regulatory requirements and reducing data breach risk significantly",
-      recommendations: [
-        "Implement comprehensive data encryption for all sensitive information",
-        "Deploy multi-factor authentication for all system access",
-        "Establish advanced access controls with just-in-time provisioning",
-      ],
-    },
-    "Very High": {
-      impact: "Maximum protection mechanisms for highly sensitive data",
-      businessImpact:
-        "Enterprise-grade protection for critical business secrets with comprehensive safeguards exceeding regulatory requirements and minimizing breach risk",
-      recommendations: [
-        "Implement end-to-end encryption with strong key management",
-        "Deploy zero-trust security model with continuous validation",
-        "Establish comprehensive data protection governance and controls",
-      ],
-    },
-  };
+  // Fetch component details from ciaContentService
+  const confidentialityDetails = useMemo(
+    () =>
+      ciaContentService.getComponentDetails(
+        "confidentiality",
+        confidentialityLevel
+      ),
+    [confidentialityLevel]
+  );
 
-  // Use options provided or default, with null/undefined safety
-  const finalOptions = options || defaultOptions;
+  // Fetch business impact from ciaContentService
+  const businessImpact = useMemo(
+    () =>
+      ciaContentService.getBusinessImpact(
+        "confidentiality",
+        confidentialityLevel
+      ),
+    [confidentialityLevel]
+  );
 
-  // Safe access to level data with fallback
-  // Add adapter logic to handle both types (CIADetails and ConfidentialityDetail)
-  const levelData =
-    finalOptions[confidentialityLevel] || finalOptions["Moderate"] || {};
+  // Get technical implementation details
+  const technicalDetails = useMemo(
+    () =>
+      ciaContentService.getTechnicalImplementation(
+        "confidentiality",
+        confidentialityLevel
+      ),
+    [confidentialityLevel]
+  );
 
-  // Extract the important fields, handling both types of data
-  const impact =
-    levelData && "impact" in levelData
-      ? levelData.impact
-      : (levelData && levelData.description) || "";
+  // Get recommendations from service
+  const recommendations = useMemo(
+    () =>
+      ciaContentService.getRecommendations(
+        "confidentiality",
+        confidentialityLevel
+      ),
+    [confidentialityLevel]
+  );
 
-  const businessImpact = (levelData && levelData.businessImpact) || "";
-  const recommendations = (levelData && levelData.recommendations) || [];
+  // Handle cases where data might not be available
+  if (!confidentialityDetails) {
+    return (
+      <WidgetContainer
+        title={WIDGET_TITLES.CONFIDENTIALITY_IMPACT}
+        icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT}
+        className={className}
+        testId={testId}
+        error={new Error("Confidentiality details not available")}
+      >
+        <div>Confidentiality details not available</div>
+      </WidgetContainer>
+    );
+  }
 
   return (
-    <WidgetBase
-      title="Confidentiality Impact"
-      icon="🔒"
+    <WidgetContainer
+      title={WIDGET_TITLES.CONFIDENTIALITY_IMPACT}
+      icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT}
+      className={className}
       testId={testId}
-      availabilityLevel={availabilityLevel}
-      integrityLevel={integrityLevel}
-      confidentialityLevel={confidentialityLevel}
     >
-      <div
-        data-testid={testId}
-        className="confidentiality-impact-widget p-4 border rounded-lg bg-white dark:bg-gray-800"
-        aria-labelledby="confidentiality-impact-title"
-      >
+      <div className="space-y-6">
         <div className="mb-4">
-          <h3
-            id="confidentiality-impact-title"
-            className="text-lg font-semibold"
-          >
-            Confidentiality Impact: {confidentialityLevel}
-          </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Analysis of confidentiality protection impact
-          </p>
-        </div>
-
-        <div className="mb-4">
-          <h4 className="font-medium text-sm mb-1">Security Impact</h4>
+          <div className="flex items-center mb-2">
+            <h3 className="text-lg font-medium mr-2">
+              {confidentialityLevel} Confidentiality
+            </h3>
+            <StatusBadge status="purple" testId={`${testId}-level-badge`}>
+              {confidentialityLevel}
+            </StatusBadge>
+          </div>
           <p
-            className="text-sm p-2 bg-gray-50 dark:bg-gray-700 rounded"
-            data-testid="confidentiality-impact"
+            className="text-gray-600 dark:text-gray-300"
+            data-testid={
+              CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_DESCRIPTION
+            }
           >
-            {impact}
+            {confidentialityDetails.description || "No description available"}
           </p>
         </div>
+
+        {technicalDetails && technicalDetails.description && (
+          <div className="mb-4 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+            <h4 className="text-md font-medium mb-2">
+              Technical Implementation
+            </h4>
+            <p className="text-gray-600 dark:text-gray-300">
+              {technicalDetails.description}
+            </p>
+            {(() => {
+              // Use an IIFE to avoid TypeScript ReactNode issues
+              if (
+                technicalDetails &&
+                typeof technicalDetails === "object" &&
+                "protectionMethod" in technicalDetails &&
+                technicalDetails.protectionMethod
+              ) {
+                return (
+                  <div className="mt-2">
+                    <KeyValuePair
+                      label="Protection Method"
+                      value={technicalDetails.protectionMethod as string}
+                      valueClassName="text-purple-600 dark:text-purple-400"
+                      testId={`${testId}-protection-method`}
+                    />
+                  </div>
+                );
+              }
+              return null;
+            })()}
+          </div>
+        )}
 
         <div className="mb-4">
-          <h4 className="font-medium text-sm mb-1">Business Impact</h4>
+          <h4 className="text-md font-medium mb-2">Business Impact</h4>
           <p
-            className="text-sm p-2 bg-gray-50 dark:bg-gray-700 rounded"
-            data-testid="business-impact"
+            className="text-gray-600 dark:text-gray-300"
+            data-testid={`${testId}-business-impact`}
           >
-            {businessImpact}
+            {businessImpact.summary ||
+              confidentialityDetails.businessImpact ||
+              "No business impact data available"}
           </p>
+
+          {businessImpact.reputational && (
+            <div className="mt-2 p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-md">
+              <div className="flex items-center mb-1">
+                <span className="mr-1">🏆</span>
+                <span className="font-medium">Reputational Impact</span>
+                <StatusBadge
+                  status={
+                    businessImpact.reputational.riskLevel?.includes("High")
+                      ? "warning"
+                      : "info"
+                  }
+                  size="xs"
+                  className="ml-2"
+                >
+                  {businessImpact.reputational.riskLevel || "Unknown Risk"}
+                </StatusBadge>
+              </div>
+              <p className="text-sm text-purple-800 dark:text-purple-300">
+                {businessImpact.reputational.description}
+              </p>
+            </div>
+          )}
+
+          {businessImpact.regulatory && (
+            <div className="mt-2 p-3 bg-indigo-50 dark:bg-indigo-900 dark:bg-opacity-20 rounded-md">
+              <div className="flex items-center mb-1">
+                <span className="mr-1">⚖️</span>
+                <span className="font-medium">Regulatory Impact</span>
+                <StatusBadge
+                  status={
+                    businessImpact.regulatory.riskLevel?.includes("High")
+                      ? "warning"
+                      : "info"
+                  }
+                  size="xs"
+                  className="ml-2"
+                >
+                  {businessImpact.regulatory.riskLevel || "Unknown Risk"}
+                </StatusBadge>
+              </div>
+              <p className="text-sm text-indigo-800 dark:text-indigo-300">
+                {businessImpact.regulatory.description}
+              </p>
+            </div>
+          )}
         </div>
 
-        <div className="mb-2">
-          <h4 className="font-medium text-sm mb-1">Recommendations</h4>
-          <ul
-            className="list-disc list-inside text-sm"
-            aria-label="Security recommendations"
-          >
-            {(recommendations || []).map((rec, index) => (
-              <li
-                key={index}
-                className="p-1 bg-gray-50 dark:bg-gray-700 rounded mb-1"
-                data-testid={`recommendation-${index}`}
-              >
-                {rec}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {recommendations && recommendations.length > 0 && (
+          <div className="mb-4">
+            <div className="flex items-center justify-between mb-2">
+              <h4 className="text-md font-medium">Recommendations</h4>
+              {recommendations.length > 3 && (
+                <button
+                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline focus:outline-none"
+                  onClick={() =>
+                    setShowAllRecommendations(!showAllRecommendations)
+                  }
+                >
+                  {showAllRecommendations ? "Show Less" : "Show All"}
+                </button>
+              )}
+            </div>
+            <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+              {(showAllRecommendations
+                ? recommendations
+                : recommendations.slice(0, 3)
+              ).map((recommendation, index) => (
+                <li
+                  key={index}
+                  data-testid={`${testId}-recommendation-${index}`}
+                >
+                  {recommendation}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
-        <div className="mt-4 text-xs text-gray-500">
-          <p data-testid="protection-level-text">
-            <strong>Protection Level:</strong>{" "}
-            {getProtectionLevel(confidentialityLevel)}
-          </p>
+        <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+          <h4 className="text-md font-medium mb-2">
+            Data Protection Classification
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <KeyValuePair
+              label="Classification Level"
+              value={confidentialityLevel}
+              testId={`${testId}-classification-level`}
+            />
+            <KeyValuePair
+              label="Information Sensitivity"
+              value={getInformationSensitivity(confidentialityLevel)}
+              testId={`${testId}-information-sensitivity`}
+            />
+          </div>
         </div>
       </div>
-    </WidgetBase>
+    </WidgetContainer>
   );
 };
 
-// Helper function to determine protection level
-function getProtectionLevel(level: string): string {
+/**
+ * Helper function to map confidentiality level to information sensitivity
+ * @param level - SecurityLevel to map
+ * @returns Information sensitivity description
+ */
+function getInformationSensitivity(level: SecurityLevel): string {
   switch (level) {
     case "None":
-      return "No protection";
+      return "Public Data";
     case "Low":
-      return "Basic protection";
+      return "Internal Data";
     case "Moderate":
-      return "Standard protection";
+      return "Sensitive Data";
     case "High":
-      return "Strong protection";
+      return "Confidential Data";
     case "Very High":
-      return "Maximum protection";
+      return "Restricted Data";
     default:
-      return "Unknown protection level";
+      return "Unknown";
   }
 }
 

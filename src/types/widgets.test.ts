@@ -23,60 +23,36 @@ describe("Widget Type Definitions", () => {
   });
 
   it("validates IntegrityImpactWidgetProps interface", () => {
-    const mockOptions = {
-      None: { description: "No integrity" },
-      High: { description: "High integrity" },
-    };
-
     const props: IntegrityImpactWidgetProps = {
       integrityLevel: "High",
       availabilityLevel: "None",
       confidentialityLevel: "None",
-      options: mockOptions,
     };
 
     expect(props).toHaveProperty("integrityLevel");
     expect(props.integrityLevel).toBe("High");
-    expect(props).toHaveProperty("options");
-    expect(props.options).toEqual(mockOptions);
   });
 
   it("validates ConfidentialityImpactWidgetProps interface", () => {
-    const mockOptions = {
-      None: { description: "No confidentiality" },
-      High: { description: "High confidentiality" },
-    };
-
     const props: ConfidentialityImpactWidgetProps = {
       confidentialityLevel: "High",
       availabilityLevel: "None",
       integrityLevel: "None",
-      options: mockOptions,
     };
 
     expect(props).toHaveProperty("confidentialityLevel");
     expect(props.confidentialityLevel).toBe("High");
-    expect(props).toHaveProperty("options");
-    expect(props.options).toEqual(mockOptions);
   });
 
   it("validates AvailabilityImpactWidgetProps interface", () => {
-    const mockOptions = {
-      None: { description: "No availability" },
-      High: { description: "High availability" },
-    };
-
     const props: AvailabilityImpactWidgetProps = {
       availabilityLevel: "High",
       integrityLevel: "None",
       confidentialityLevel: "None",
-      options: mockOptions,
     };
 
     expect(props).toHaveProperty("availabilityLevel");
     expect(props.availabilityLevel).toBe("High");
-    expect(props).toHaveProperty("options");
-    expect(props.options).toEqual(mockOptions);
   });
 
   it("validates SecurityResourcesWidgetProps interface", () => {
@@ -96,40 +72,64 @@ describe("Widget Type Definitions", () => {
   });
 
   it("validates ConfidentialityDetailAdapter working with props", () => {
-    const mockOptions = {
-      None: { description: "No confidentiality" },
-      High: { description: "High confidentiality" },
-    };
-
     const props: ConfidentialityImpactWidgetProps = {
       confidentialityLevel: "High",
       availabilityLevel: "None",
       integrityLevel: "None",
-      options: mockOptions,
     };
 
     expect(props).toHaveProperty("confidentialityLevel");
     expect(props.confidentialityLevel).toBe("High");
-    expect(props).toHaveProperty("options");
   });
 
   it("validates AvailabilityDetailAdapter working with props", () => {
-    const mockOptions = {
-      None: { description: "No availability" },
-      High: { description: "High availability", uptime: "99.9%" },
-    };
-
     const props: AvailabilityImpactWidgetProps = {
       availabilityLevel: "High",
       integrityLevel: "None",
       confidentialityLevel: "None",
-      options: mockOptions,
     };
 
     expect(props).toHaveProperty("availabilityLevel");
     expect(props.availabilityLevel).toBe("High");
-    expect(props).toHaveProperty("options");
-    // Add null check to prevent undefined error
-    expect(props.options.High?.uptime).toBe("99.9%");
+  });
+});
+
+describe("AvailabilityImpactWidgetProps", () => {
+  const mockOptions = {
+    None: {
+      description: "No availability",
+      businessImpact: "Complete service loss",
+      uptime: "<90%",
+      recommendations: ["Add redundancy"],
+    },
+    High: {
+      description: "High availability",
+      businessImpact: "Minimal service disruption",
+      uptime: "99.9%",
+      recommendations: ["Add more redundancy"],
+    },
+  };
+
+  it("validates the structure of AvailabilityImpactWidgetProps", () => {
+    const props: AvailabilityImpactWidgetProps = {
+      availabilityLevel: "None",
+      integrityLevel: "None",
+      confidentialityLevel: "None",
+      options: mockOptions, // Add the missing options property
+    };
+
+    expect(props.availabilityLevel).toBe("None");
+    expect(props.options).toEqual(mockOptions);
+  });
+
+  it("handles different security levels", () => {
+    const props: AvailabilityImpactWidgetProps = {
+      availabilityLevel: "High",
+      integrityLevel: "None",
+      confidentialityLevel: "None",
+      options: mockOptions, // Add the missing options property
+    };
+
+    expect(props.availabilityLevel).toBe("High");
   });
 });

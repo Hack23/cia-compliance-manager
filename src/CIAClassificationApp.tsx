@@ -311,10 +311,9 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-integrity-impact-container"
               >
                 <IntegrityImpactWidget
-                  integrityLevel={integrity}
-                  availabilityLevel={availability}
-                  confidentialityLevel={confidentiality}
-                  options={adaptedIntegrityOptions}
+                  integrityLevel={integrity as SecurityLevel}
+                  availabilityLevel={availability as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
                 />
               </DashboardWidget>
 
@@ -325,10 +324,9 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-confidentiality-impact-container"
               >
                 <ConfidentialityImpactWidget
-                  confidentialityLevel={confidentiality}
-                  integrityLevel={integrity}
-                  availabilityLevel={availability}
-                  options={adaptedConfidentialityOptions}
+                  confidentialityLevel={confidentiality as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  availabilityLevel={availability as SecurityLevel}
                 />
               </DashboardWidget>
 

@@ -97,8 +97,12 @@ export interface IntegrityDetail extends BaseWidgetDetails {
  * Props for the IntegrityImpactWidget component
  */
 export interface IntegrityImpactWidgetProps extends WidgetBaseProps {
-  /** Options for each level */
-  options: Record<string, IntegrityDetail | CIADetails>;
+  integrityLevel: SecurityLevel;
+  // Change the optional fields to align with WidgetBaseProps constraint
+  availabilityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  className?: string;
+  testId?: string;
 }
 
 /**
@@ -118,8 +122,12 @@ export interface ConfidentialityDetail extends BaseWidgetDetails {
  * Props for the ConfidentialityImpactWidget component
  */
 export interface ConfidentialityImpactWidgetProps extends WidgetBaseProps {
-  /** Options for each level */
-  options: Record<string, ConfidentialityDetail | CIADetails>;
+  confidentialityLevel: SecurityLevel;
+  // Change the optional fields to align with WidgetBaseProps constraint
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  className?: string;
+  testId?: string;
 }
 
 /**
@@ -140,8 +148,8 @@ export interface AvailabilityDetail extends BaseWidgetDetails {
  * Props for the AvailabilityImpactWidget component
  */
 export interface AvailabilityImpactWidgetProps extends WidgetBaseProps {
-  /** Options for each level */
-  options: Record<string, AvailabilityDetail | CIADetails>;
+  /** Options for each level - optional when using ciaContentService */
+  options?: Record<string, AvailabilityDetail | CIADetails>;
 }
 
 /**

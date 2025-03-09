@@ -271,35 +271,37 @@ widgetRegistry.register<ValueCreationWidgetProps>({
   },
 });
 
+// Register integrity impact widget with proper type assertion
 widgetRegistry.register<IntegrityImpactWidgetProps>({
   id: "integrity-impact",
   title: WIDGET_TITLES.INTEGRITY_IMPACT,
-  component: IntegrityImpactWidget,
+  component:
+    IntegrityImpactWidget as unknown as WidgetComponentType<IntegrityImpactWidgetProps>,
   icon: WIDGET_ICONS.INTEGRITY_IMPACT,
   size: "medium",
   order: 30,
   description: "Impact and recommendations for data integrity",
   defaultProps: {
-    integrityLevel: "Moderate",
-    availabilityLevel: "None",
-    confidentialityLevel: "None",
-    options: {},
+    integrityLevel: SECURITY_LEVELS.NONE,
+    availabilityLevel: SECURITY_LEVELS.NONE,
+    confidentialityLevel: SECURITY_LEVELS.NONE,
   },
 });
 
+// Register confidentiality impact widget with proper type assertion
 widgetRegistry.register<ConfidentialityImpactWidgetProps>({
   id: "confidentiality-impact",
   title: WIDGET_TITLES.CONFIDENTIALITY_IMPACT,
-  component: ConfidentialityImpactWidget,
+  component:
+    ConfidentialityImpactWidget as unknown as WidgetComponentType<ConfidentialityImpactWidgetProps>,
   icon: WIDGET_ICONS.CONFIDENTIALITY_IMPACT,
   size: "medium",
   order: 35,
   description: "Impact and recommendations for data confidentiality",
   defaultProps: {
-    confidentialityLevel: "Moderate",
-    availabilityLevel: "None",
-    integrityLevel: "None",
-    options: {},
+    confidentialityLevel: SECURITY_LEVELS.NONE,
+    availabilityLevel: SECURITY_LEVELS.NONE,
+    integrityLevel: SECURITY_LEVELS.NONE,
   },
 });
 

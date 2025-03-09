@@ -9,7 +9,6 @@ describe("ConfidentialityImpactWidget", () => {
         confidentialityLevel="None"
         integrityLevel="None"
         availabilityLevel="None"
-        options={{}}
       />
     );
     // Update test to match component heading format
@@ -24,7 +23,6 @@ describe("ConfidentialityImpactWidget", () => {
         confidentialityLevel="High"
         integrityLevel="None"
         availabilityLevel="None"
-        options={{}}
       />
     );
     expect(
@@ -33,25 +31,11 @@ describe("ConfidentialityImpactWidget", () => {
   });
 
   it("displays detailed information when available", () => {
-    const mockOptions = {
-      None: {
-        impact: "Data accessible to anyone",
-        businessImpact: "No protection for sensitive information",
-        recommendations: ["Implement basic access controls"],
-      },
-      High: {
-        impact: "Protected against sophisticated attacks",
-        businessImpact: "Protects against advanced persistent threats",
-        recommendations: ["Implement E2E encryption"],
-      },
-    };
-
     render(
       <ConfidentialityImpactWidget
         confidentialityLevel="High"
         integrityLevel="None"
         availabilityLevel="None"
-        options={mockOptions}
       />
     );
     expect(screen.getByTestId("confidentiality-impact")).toHaveTextContent(
@@ -63,25 +47,11 @@ describe("ConfidentialityImpactWidget", () => {
   });
 
   it("handles missing data gracefully", () => {
-    const mockOptions = {
-      None: {
-        impact: "Data accessible to anyone",
-        businessImpact: "No protection for sensitive information",
-        recommendations: ["Implement basic access controls"],
-      },
-      High: {
-        impact: "Protected against sophisticated attacks",
-        businessImpact: "Protects against advanced persistent threats",
-        recommendations: ["Implement E2E encryption"],
-      },
-    };
-
     render(
       <ConfidentialityImpactWidget
         confidentialityLevel="Moderate"
         integrityLevel="None"
         availabilityLevel="None"
-        options={mockOptions}
       />
     );
     // Should fall back to Unknown protection level
@@ -95,7 +65,6 @@ describe("ConfidentialityImpactWidget", () => {
         confidentialityLevel="None"
         integrityLevel="None"
         availabilityLevel="None"
-        options={{}}
       />
     );
     const protectionLevelText = screen.getByTestId("protection-level-text");
@@ -103,29 +72,26 @@ describe("ConfidentialityImpactWidget", () => {
   });
 
   it("displays recommendations when available", () => {
-    const mockOptions = {
-      None: {
-        impact: "Data accessible to anyone",
-        businessImpact: "No protection for sensitive information",
-        recommendations: ["Implement basic access controls"],
-      },
-      High: {
-        impact: "Protected against sophisticated attacks",
-        businessImpact: "Protects against advanced persistent threats",
-        recommendations: ["Implement E2E encryption"],
-      },
-    };
-
     render(
       <ConfidentialityImpactWidget
         confidentialityLevel="High"
         integrityLevel="None"
         availabilityLevel="None"
-        options={mockOptions}
       />
     );
     expect(screen.getByTestId("recommendation-0")).toHaveTextContent(
       "Implement E2E encryption"
     );
+  });
+
+  it("renders without crashing", () => {
+    render(
+      <ConfidentialityImpactWidget
+        confidentialityLevel="None"
+        integrityLevel="None"
+        availabilityLevel="None"
+      />
+    );
+    expect(screen.getByText("None Confidentiality")).toBeInTheDocument();
   });
 });
