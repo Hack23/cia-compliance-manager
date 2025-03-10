@@ -233,11 +233,11 @@ The application provides both aggregated and detailed views of cost estimates, a
 
 Our architecture documentation provides multiple views and perspectives on the CIA Compliance Manager's design and implementation:
 
-- [**C4 Model Architecture**](docs/architecture/ARCHITECTURE.md) - Visualizes the system at different levels of abstraction using C4 modeling (Context, Container, Component, and Dynamic diagrams)
-- [**State Diagrams**](docs/architecture/STATEDIAGRAM.md) - Illustrates key states and transitions for security profiles and compliance status
-- [**Mindmaps**](docs/architecture/MINDMAP.md) - Provides hierarchical visualizations of system structure, technical implementation, and business value
-- [**SWOT Analysis**](docs/architecture/SWOT.md) - Strategic assessment of Strengths, Weaknesses, Opportunities, and Threats with priority matrix
-- [**Process Flowcharts**](docs/architecture/FLOWCHART.md) - Illustrates key workflows like security assessment and compliance evaluation
+- [**C4 Model Architecture**](https://hack23.github.io/cia-compliance-manager/docs/architecture/ARCHITECTURE.md) - Visualizes the system at different levels of abstraction using C4 modeling (Context, Container, Component, and Dynamic diagrams)
+- [**State Diagrams**](https://hack23.github.io/cia-compliance-manager/docs/architecture/STATEDIAGRAM.md) - Illustrates key states and transitions for security profiles and compliance status
+- [**Mindmaps**](https://hack23.github.io/cia-compliance-manager/docs/architecture/MINDMAP.md) - Provides hierarchical visualizations of system structure, technical implementation, and business value
+- [**SWOT Analysis**](https://hack23.github.io/cia-compliance-manager/docs/architecture/SWOT.md) - Strategic assessment of Strengths, Weaknesses, Opportunities, and Threats with priority matrix
+- [**Process Flowcharts**](https://hack23.github.io/cia-compliance-manager/docs/architecture/FLOWCHART.md) - Illustrates key workflows like security assessment and compliance evaluation
 
 ### API & Component Documentation
 
