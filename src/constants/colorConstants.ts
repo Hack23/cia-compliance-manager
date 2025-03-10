@@ -7,59 +7,59 @@ import { SecurityLevel } from "../types/cia";
 export const SECURITY_LEVEL_COLORS = {
   // Primary colors for badges, buttons, etc.
   BACKGROUND: {
-    NONE: "#dc3545", // Darker red for better contrast with white
-    LOW: "#fd7e14", // Darker orange for better contrast
-    MODERATE: "#ffc107", // Yellow
-    HIGH: "#28a745", // Green
-    VERY_HIGH: "#0d6efd", // Blue
+    NONE: "#dc3545", // Stronger red
+    LOW: "#e67e22", // More vibrant orange
+    MODERATE: "#f1c40f", // Stronger yellow
+    HIGH: "#2ecc71", // More vibrant green
+    VERY_HIGH: "#3498db", // More vibrant blue
   },
 
   // Text colors that meet contrast requirements with white backgrounds
   TEXT: {
     NONE: "#7d1a1a", // Dark red
-    LOW: "#925205", // Dark orange
-    MODERATE: "#856404", // Dark yellow
-    HIGH: "#155724", // Dark green
-    VERY_HIGH: "#0a3577", // Dark blue
+    LOW: "#924d10", // Dark orange
+    MODERATE: "#7d6608", // Dark yellow
+    HIGH: "#186a3b", // Dark green
+    VERY_HIGH: "#1a5276", // Dark blue
   },
 
-  // Colors for use with dark backgrounds
+  // Colors for use with dark backgrounds - increased brightness for visibility
   DARK_MODE: {
-    NONE: "#ff8080", // Lighter red for dark backgrounds
-    LOW: "#ffb74d", // Lighter orange
-    MODERATE: "#ffeb3b", // Brighter yellow
-    HIGH: "#4caf50", // Lighter green
-    VERY_HIGH: "#63a4ff", // Lighter blue
+    NONE: "#ff6b6b", // Brighter red for dark backgrounds
+    LOW: "#ff9f43", // Brighter orange
+    MODERATE: "#feca57", // Brighter yellow
+    HIGH: "#54e346", // Brighter green
+    VERY_HIGH: "#70a1ff", // Brighter blue
   },
 
-  // For borders and accents
+  // For borders and accents - slightly higher saturation
   BORDER: {
-    NONE: "#f5c2c7", // Light red border
-    LOW: "#ffe5d0", // Light orange border
-    MODERATE: "#fff3cd", // Light yellow border
-    HIGH: "#c3e6cb", // Light green border
-    VERY_HIGH: "#b8daff", // Light blue border
+    NONE: "#f8d7da", // Light red border
+    LOW: "#ffedd8", // Light orange border
+    MODERATE: "#fff6d9", // Light yellow border
+    HIGH: "#d4edda", // Light green border
+    VERY_HIGH: "#cfe2ff", // Light blue border
   },
 };
 
 /**
- * Colors specific to CIA components
+ * Colors specific to CIA components - with enhanced distinctiveness
  */
 export const CIA_COMPONENT_COLORS = {
   CONFIDENTIALITY: {
-    PRIMARY: "#6f42c1", // Purple
-    SECONDARY: "#d3c4e3", // Light purple
-    DARK: "#4e2a89", // Dark purple
+    PRIMARY: "#9b59b6", // Brighter, more visible purple
+    SECONDARY: "#e8daef", // Lighter purple - better contrast
+    DARK: "#6c3483", // More saturated dark purple for dark mode
   },
   INTEGRITY: {
-    PRIMARY: "#28a745", // Green
-    SECONDARY: "#c3e6cb", // Light green
-    DARK: "#155724", // Dark green
+    PRIMARY: "#16a085", // Teal rather than green to distinguish from HIGH security level
+    SECONDARY: "#d1f2eb", // Light teal
+    DARK: "#0e6655", // Dark teal for dark mode
   },
   AVAILABILITY: {
-    PRIMARY: "#0d6efd", // Blue
-    SECONDARY: "#b8daff", // Light blue
-    DARK: "#0a3577", // Dark blue
+    PRIMARY: "#3498db", // Brighter blue
+    SECONDARY: "#d4e6f1", // Light blue
+    DARK: "#21618c", // Dark blue for dark mode
   },
 };
 
@@ -69,17 +69,45 @@ export const CIA_COMPONENT_COLORS = {
 export const getSecurityLevelColorPair = (
   level: SecurityLevel
 ): { bg: string; text: string } => {
+  // Check if we're in dark mode
+  const isDarkMode = document.documentElement.classList.contains("dark");
+
   const normalizedLevel = level
     .replace(/\s+/g, "_")
     .toUpperCase() as keyof typeof SECURITY_LEVEL_COLORS.BACKGROUND;
 
+  // Use different colors based on dark mode to ensure visibility
+  const bgColor = isDarkMode
+    ? SECURITY_LEVEL_COLORS.DARK_MODE[normalizedLevel] ||
+      SECURITY_LEVEL_COLORS.DARK_MODE.NONE
+    : SECURITY_LEVEL_COLORS.BACKGROUND[normalizedLevel] ||
+      SECURITY_LEVEL_COLORS.BACKGROUND.NONE;
+
+  // For dark mode, always use white/near-white text for better visibility
+  const textColor = isDarkMode
+    ? "#ffffff"
+    : normalizedLevel === "NONE" || normalizedLevel === "LOW"
+    ? "#ffffff"
+    : "#000000";
+
+  return { bg: bgColor, text: textColor };
+};
+
+/**
+ * Get component color scheme respecting dark mode
+ */
+export const getCIAComponentColors = (
+  component: "CONFIDENTIALITY" | "INTEGRITY" | "AVAILABILITY"
+): { primary: string; secondary: string } => {
+  const isDarkMode = document.documentElement.classList.contains("dark");
+
+  // Return appropriate colors based on dark mode
   return {
-    bg:
-      SECURITY_LEVEL_COLORS.BACKGROUND[normalizedLevel] ||
-      SECURITY_LEVEL_COLORS.BACKGROUND.NONE,
-    text:
-      normalizedLevel === "NONE" || normalizedLevel === "LOW"
-        ? "#ffffff"
-        : "#000000",
+    primary: isDarkMode
+      ? CIA_COMPONENT_COLORS[component].DARK
+      : CIA_COMPONENT_COLORS[component].PRIMARY,
+    secondary: isDarkMode
+      ? `${CIA_COMPONENT_COLORS[component].DARK}80` // Add transparency
+      : CIA_COMPONENT_COLORS[component].SECONDARY,
   };
 };

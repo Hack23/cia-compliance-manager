@@ -1,6 +1,9 @@
 import React, { ReactNode } from "react";
 import { SECURITY_LEVELS } from "../constants/appConstants";
-import { SECURITY_LEVEL_COLORS } from "../constants/colorConstants";
+import {
+  SECURITY_LEVEL_COLORS,
+  getSecurityLevelColorPair,
+} from "../constants/colorConstants";
 import { SecurityLevel } from "../types/cia";
 
 /**
@@ -70,18 +73,9 @@ export function getSecurityLevelColors(level: SecurityLevel): {
   text: string;
 } {
   const normalizedLevel = normalizeSecurityLevel(level) as SecurityLevel;
-  return {
-    bg:
-      SECURITY_LEVEL_COLORS.BACKGROUND[
-        normalizedLevel
-          .replace(/\s+/g, "_")
-          .toUpperCase() as keyof typeof SECURITY_LEVEL_COLORS.BACKGROUND
-      ] || SECURITY_LEVEL_COLORS.BACKGROUND.NONE,
-    text:
-      normalizedLevel === "None" || normalizedLevel === "Low"
-        ? "#ffffff"
-        : "#000000",
-  };
+
+  // Use the centralized color function instead of reimplementing the logic
+  return getSecurityLevelColorPair(normalizedLevel);
 }
 
 /**
