@@ -6,7 +6,7 @@
 
 # Interface: ComplianceRequirement
 
-Defined in: [types/cia.ts:206](https://github.com/Hack23/cia-compliance-manager/blob/809861500e89aa56fa675e29f47a30a7778b6d97/src/types/cia.ts#L206)
+Defined in: [types/cia.ts:206](https://github.com/Hack23/cia-compliance-manager/blob/0511eaee207af5980421e26795cc17b2a34d6e07/src/types/cia.ts#L206)
 
 ComplianceRequirement represents a specific compliance requirement
 that must be met
@@ -17,7 +17,7 @@ that must be met
 
 > **control**: `string`
 
-Defined in: [types/cia.ts:208](https://github.com/Hack23/cia-compliance-manager/blob/809861500e89aa56fa675e29f47a30a7778b6d97/src/types/cia.ts#L208)
+Defined in: [types/cia.ts:208](https://github.com/Hack23/cia-compliance-manager/blob/0511eaee207af5980421e26795cc17b2a34d6e07/src/types/cia.ts#L208)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [types/cia.ts:208](https://github.com/Hack23/cia-compliance-manager/
 
 > **description**: `string`
 
-Defined in: [types/cia.ts:209](https://github.com/Hack23/cia-compliance-manager/blob/809861500e89aa56fa675e29f47a30a7778b6d97/src/types/cia.ts#L209)
+Defined in: [types/cia.ts:209](https://github.com/Hack23/cia-compliance-manager/blob/0511eaee207af5980421e26795cc17b2a34d6e07/src/types/cia.ts#L209)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [types/cia.ts:209](https://github.com/Hack23/cia-compliance-manager/
 
 > **framework**: `string`
 
-Defined in: [types/cia.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/809861500e89aa56fa675e29f47a30a7778b6d97/src/types/cia.ts#L207)
+Defined in: [types/cia.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/0511eaee207af5980421e26795cc17b2a34d6e07/src/types/cia.ts#L207)
 
 ***
 
@@ -41,4 +41,4 @@ Defined in: [types/cia.ts:207](https://github.com/Hack23/cia-compliance-manager/
 
 > **status**: `"compliant"` \| `"non-compliant"` \| `"partial"`
 
-Defined in: [types/cia.ts:210](https://github.com/Hack23/cia-compliance-manager/blob/809861500e89aa56fa675e29f47a30a7778b6d97/src/types/cia.ts#L210)
+Defined in: [types/cia.ts:210](https://github.com/Hack23/cia-compliance-manager/blob/0511eaee207af5980421e26795cc17b2a34d6e07/src/types/cia.ts#L210)
