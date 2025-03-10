@@ -237,19 +237,6 @@ const CIAClassificationApp: React.FC = () => {
                 />
               </DashboardWidget>
 
-              {/* Security Visualization */}
-              <DashboardWidget
-                title={WIDGET_TITLES.SECURITY_VISUALIZATION}
-                icon="SECURITY_VISUALIZATION"
-                testId="widget-radar-chart"
-              >
-                <RadarChart
-                  availabilityLevel={availability}
-                  integrityLevel={integrity}
-                  confidentialityLevel={confidentiality}
-                />
-              </DashboardWidget>
-
               {/* Security Summary */}
               <DashboardWidget
                 title={WIDGET_TITLES.SECURITY_SUMMARY}
@@ -264,6 +251,33 @@ const CIAClassificationApp: React.FC = () => {
                 />
               </DashboardWidget>
 
+              {/* Business Impact Analysis - New Widget */}
+              <DashboardWidget
+                title={WIDGET_TITLES.BUSINESS_IMPACT}
+                icon="BUSINESS_IMPACT"
+                testId="widget-business-impact-container"
+              >
+                <BusinessImpactAnalysisWidget
+                  availabilityLevel={availability as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
+                  securityLevel={overallSecurityLevel}
+                />
+              </DashboardWidget>
+
+              {/* Technical Details - New Widget */}
+              <DashboardWidget
+                title={WIDGET_TITLES.TECHNICAL_IMPLEMENTATION}
+                icon="TECHNICAL_IMPLEMENTATION"
+                testId="widget-technical-details-container"
+              >
+                <TechnicalDetailsWidget
+                  availabilityLevel={availability}
+                  integrityLevel={integrity}
+                  confidentialityLevel={confidentiality}
+                />
+              </DashboardWidget>
+
               {/* Cost Estimation */}
               <DashboardWidget
                 title={WIDGET_TITLES.COST_ESTIMATION}
@@ -271,19 +285,6 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-cost-estimation"
               >
                 <CostEstimationWidget
-                  availabilityLevel={availability as SecurityLevel}
-                  integrityLevel={integrity as SecurityLevel}
-                  confidentialityLevel={confidentiality as SecurityLevel}
-                />
-              </DashboardWidget>
-
-              {/* Compliance Status */}
-              <DashboardWidget
-                title={WIDGET_TITLES.COMPLIANCE_STATUS}
-                icon="COMPLIANCE_STATUS"
-                testId="widget-compliance-status"
-              >
-                <ComplianceStatusWidget
                   availabilityLevel={availability as SecurityLevel}
                   integrityLevel={integrity as SecurityLevel}
                   confidentialityLevel={confidentiality as SecurityLevel}
@@ -304,16 +305,29 @@ const CIAClassificationApp: React.FC = () => {
                 />
               </DashboardWidget>
 
-              {/* Integrity Impact - New Widget */}
+              {/* Compliance Status */}
               <DashboardWidget
-                title={WIDGET_TITLES.INTEGRITY_IMPACT}
-                icon="INTEGRITY_IMPACT"
-                testId="widget-integrity-impact-container"
+                title={WIDGET_TITLES.COMPLIANCE_STATUS}
+                icon="COMPLIANCE_STATUS"
+                testId="widget-compliance-status"
               >
-                <IntegrityImpactWidget
-                  integrityLevel={integrity as SecurityLevel}
+                <ComplianceStatusWidget
                   availabilityLevel={availability as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
                   confidentialityLevel={confidentiality as SecurityLevel}
+                />
+              </DashboardWidget>
+
+              {/* Security Visualization */}
+              <DashboardWidget
+                title={WIDGET_TITLES.SECURITY_VISUALIZATION}
+                icon="SECURITY_VISUALIZATION"
+                testId="widget-radar-chart"
+              >
+                <RadarChart
+                  availabilityLevel={availability}
+                  integrityLevel={integrity}
+                  confidentialityLevel={confidentiality}
                 />
               </DashboardWidget>
 
@@ -330,6 +344,19 @@ const CIAClassificationApp: React.FC = () => {
                 />
               </DashboardWidget>
 
+              {/* Integrity Impact - New Widget */}
+              <DashboardWidget
+                title={WIDGET_TITLES.INTEGRITY_IMPACT}
+                icon="INTEGRITY_IMPACT"
+                testId="widget-integrity-impact-container"
+              >
+                <IntegrityImpactWidget
+                  integrityLevel={integrity as SecurityLevel}
+                  availabilityLevel={availability as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
+                />
+              </DashboardWidget>
+
               {/* Availability Impact - New Widget */}
               <DashboardWidget
                 title={WIDGET_TITLES.AVAILABILITY_IMPACT}
@@ -337,9 +364,9 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-availability-impact-container"
               >
                 <AvailabilityImpactWidget
-                  availabilityLevel={availability}
-                  integrityLevel={integrity}
-                  confidentialityLevel={confidentiality}
+                  availabilityLevel={availability as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
                   options={adaptedAvailabilityOptions}
                 />
               </DashboardWidget>
@@ -355,33 +382,6 @@ const CIAClassificationApp: React.FC = () => {
                   availabilityLevel={availability as SecurityLevel}
                   integrityLevel={integrity as SecurityLevel}
                   confidentialityLevel={confidentiality as SecurityLevel}
-                />
-              </DashboardWidget>
-
-              {/* Technical Details - New Widget */}
-              <DashboardWidget
-                title={WIDGET_TITLES.TECHNICAL_IMPLEMENTATION}
-                icon="TECHNICAL_IMPLEMENTATION"
-                testId="widget-technical-details-container"
-              >
-                <TechnicalDetailsWidget
-                  availabilityLevel={availability}
-                  integrityLevel={integrity}
-                  confidentialityLevel={confidentiality}
-                />
-              </DashboardWidget>
-
-              {/* Business Impact Analysis - New Widget */}
-              <DashboardWidget
-                title={WIDGET_TITLES.BUSINESS_IMPACT}
-                icon="BUSINESS_IMPACT"
-                testId="widget-business-impact-container"
-              >
-                <BusinessImpactAnalysisWidget
-                  availabilityLevel={availability as SecurityLevel}
-                  integrityLevel={integrity as SecurityLevel}
-                  confidentialityLevel={confidentiality as SecurityLevel}
-                  securityLevel={overallSecurityLevel}
                 />
               </DashboardWidget>
             </Dashboard>

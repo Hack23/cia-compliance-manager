@@ -14,6 +14,7 @@ import SecurityLevelSelector from "../SecurityLevelSelector";
 import WidgetContainer from "../common/WidgetContainer";
 import { SecurityLevel } from "../../types/cia";
 import { getSecurityLevelClass } from "../../utils/widgetHelpers";
+import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
 
 /**
  * Props for the SecurityLevelWidget component
@@ -99,6 +100,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           icon={CIA_COMPONENT_ICONS.CONFIDENTIALITY}
           testId="confidentiality-summary"
           color="purple"
+          borderColor={CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY}
         />
         <SecurityLevelSummaryItem
           label={CIA_LABELS.INTEGRITY}
@@ -106,6 +108,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           icon={CIA_COMPONENT_ICONS.INTEGRITY}
           testId="integrity-summary"
           color="green"
+          borderColor={CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY}
         />
         <SecurityLevelSummaryItem
           label={CIA_LABELS.AVAILABILITY}
@@ -113,6 +116,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           icon={CIA_COMPONENT_ICONS.AVAILABILITY}
           testId="availability-summary"
           color="blue"
+          borderColor={CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY}
         />
       </div>
     </div>
@@ -157,6 +161,7 @@ interface SecurityLevelSummaryItemProps {
   icon: string;
   testId: string;
   color: "blue" | "green" | "purple";
+  borderColor?: string;
 }
 
 const SecurityLevelSummaryItem: React.FC<SecurityLevelSummaryItemProps> = ({
@@ -165,23 +170,29 @@ const SecurityLevelSummaryItem: React.FC<SecurityLevelSummaryItemProps> = ({
   icon,
   testId,
   color,
+  borderColor,
 }) => {
   const getBorderColor = () => {
+    if (borderColor) {
+      return borderColor;
+    }
+
     switch (color) {
       case "blue":
-        return "border-blue-500";
+        return CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY;
       case "green":
-        return "border-green-500";
+        return CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY;
       case "purple":
-        return "border-purple-500";
+        return CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY;
       default:
-        return "border-gray-300";
+        return "#e5e7eb";
     }
   };
 
   return (
     <div
-      className={`flex items-center p-3 bg-white dark:bg-gray-800 rounded-md border ${getBorderColor()} dark:border-opacity-50 shadow-sm`}
+      className={`flex items-center p-3 bg-white dark:bg-gray-800 rounded-md border-l-4 shadow-sm`}
+      style={{ borderLeftColor: getBorderColor() }}
       data-testid={testId}
     >
       <span className="text-2xl mr-3">{icon}</span>

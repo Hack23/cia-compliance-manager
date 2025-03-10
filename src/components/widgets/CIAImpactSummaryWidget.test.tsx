@@ -8,10 +8,9 @@ describe("CIAImpactSummaryWidget", () => {
   it("renders with correct security levels", () => {
     render(
       <CIAImpactSummaryWidget
-        // Updated prop names from availabilityLevel to availability
-        availability="High"
-        integrity="Moderate"
-        confidentiality="Low"
+        availabilityLevel="High"
+        integrityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
@@ -39,10 +38,9 @@ describe("CIAImpactSummaryWidget", () => {
   it("handles None security level", () => {
     render(
       <CIAImpactSummaryWidget
-        // Updated prop names from availabilityLevel to availability
-        availability="None"
-        integrity="None"
-        confidentiality="None"
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
       />
     );
 
@@ -66,10 +64,9 @@ describe("CIAImpactSummaryWidget", () => {
     const customClass = "custom-class";
     render(
       <CIAImpactSummaryWidget
-        // Updated prop names from availabilityLevel to availability
-        availability="High"
-        integrity="High"
-        confidentiality="High"
+        availabilityLevel="High"
+        integrityLevel="High"
+        confidentialityLevel="High"
         className={customClass}
       />
     );

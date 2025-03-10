@@ -6,6 +6,21 @@ import WidgetContainer from "../common/WidgetContainer";
 import StatusBadge from "../common/StatusBadge";
 import KeyValuePair from "../common/KeyValuePair";
 import { WIDGET_TITLES, WIDGET_ICONS } from "../../constants/coreConstants";
+import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
+
+/**
+ * Add type for validation method that might not exist in TechnicalImplementationDetails
+ */
+interface ExtendedTechnicalDetails {
+  description: string;
+  implementationSteps: string[];
+  effort: {
+    development: string;
+    maintenance: string;
+    expertise: string;
+  };
+  validationMethod?: string;
+}
 
 /**
  * Props for IntegrityImpactWidget component
@@ -63,7 +78,10 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
   // Get technical implementation details
   const technicalDetails = useMemo(
     () =>
-      ciaContentService.getTechnicalImplementation("integrity", integrityLevel),
+      ciaContentService.getTechnicalImplementation(
+        "integrity",
+        integrityLevel
+      ) as ExtendedTechnicalDetails,
     [integrityLevel]
   );
 
@@ -98,11 +116,15 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
       <div className="space-y-6">
         {/* Integrity Level and Description */}
         <div className="mb-4">
-          <div className="flex items-center mb-2">
+          <div className="flex items-center justify-between mb-2">
             <h3 className="text-lg font-medium mr-2">
               {integrityLevel} Integrity
             </h3>
-            <StatusBadge status="success" testId={`${testId}-level-badge`}>
+            <StatusBadge
+              status="success"
+              testId={`${testId}-level-badge`}
+              className="bg-green-500 text-white"
+            >
               {integrityLevel}
             </StatusBadge>
           </div>
@@ -116,7 +138,10 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
 
         {/* Technical Implementation */}
         {technicalDetails && technicalDetails.description && (
-          <div className="mb-4 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+          <div
+            className="mb-4 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4"
+            style={{ borderLeftColor: CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY }}
+          >
             <h4 className="text-md font-medium mb-2">
               Technical Implementation
             </h4>
@@ -160,46 +185,40 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
           </p>
 
           {businessImpact.operational && (
-            <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-md">
+            <div
+              className="mt-2 p-3 rounded-md"
+              style={{
+                backgroundColor: `${CIA_COMPONENT_COLORS.INTEGRITY.SECONDARY}25`,
+              }}
+            >
               <div className="flex items-center mb-1">
                 <span className="mr-1">⚙️</span>
                 <span className="font-medium">Operational Impact</span>
-                <StatusBadge
-                  status={
-                    businessImpact.operational.riskLevel?.includes("High")
-                      ? "warning"
-                      : "info"
-                  }
-                  size="xs"
-                  className="ml-2"
-                >
-                  {businessImpact.operational.riskLevel || "Unknown Risk"}
-                </StatusBadge>
               </div>
-              <p className="text-sm text-blue-800 dark:text-blue-300">
+              <p
+                className="text-sm"
+                style={{ color: CIA_COMPONENT_COLORS.INTEGRITY.DARK }}
+              >
                 {businessImpact.operational.description}
               </p>
             </div>
           )}
 
           {businessImpact.financial && (
-            <div className="mt-2 p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-md">
+            <div
+              className="mt-2 p-3 rounded-md"
+              style={{
+                backgroundColor: `${CIA_COMPONENT_COLORS.INTEGRITY.SECONDARY}25`,
+              }}
+            >
               <div className="flex items-center mb-1">
                 <span className="mr-1">💰</span>
                 <span className="font-medium">Financial Impact</span>
-                <StatusBadge
-                  status={
-                    businessImpact.financial.riskLevel?.includes("High")
-                      ? "warning"
-                      : "success"
-                  }
-                  size="xs"
-                  className="ml-2"
-                >
-                  {businessImpact.financial.riskLevel || "Unknown Risk"}
-                </StatusBadge>
               </div>
-              <p className="text-sm text-green-800 dark:text-green-300">
+              <p
+                className="text-sm"
+                style={{ color: CIA_COMPONENT_COLORS.INTEGRITY.DARK }}
+              >
                 {businessImpact.financial.description}
               </p>
             </div>
@@ -213,7 +232,8 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
               <h4 className="text-md font-medium">Recommendations</h4>
               {recommendations.length > 3 && (
                 <button
-                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline focus:outline-none"
+                  className="text-sm hover:underline focus:outline-none"
+                  style={{ color: CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY }}
                   onClick={() =>
                     setShowAllRecommendations(!showAllRecommendations)
                   }
@@ -237,6 +257,30 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
             </ul>
           </div>
         )}
+
+        {/* Integrity Implementation Details */}
+        <div
+          className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4"
+          style={{ borderLeftColor: CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY }}
+        >
+          <h4 className="text-md font-medium mb-2">
+            Data Integrity Classification
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <KeyValuePair
+              label="Protection Level"
+              value={integrityLevel}
+              testId={`${testId}-protection-level`}
+            />
+            {technicalDetails && technicalDetails.validationMethod && (
+              <KeyValuePair
+                label="Validation Technique"
+                value={technicalDetails.validationMethod as string}
+                testId={`${testId}-validation-technique`}
+              />
+            )}
+          </div>
+        </div>
       </div>
     </WidgetContainer>
   );

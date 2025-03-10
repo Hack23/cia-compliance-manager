@@ -1,355 +1,218 @@
-import React, { useMemo } from "react";
-import WidgetContainer from "../common/WidgetContainer";
-import KeyValuePair from "../common/KeyValuePair";
-import MetricsCard from "../common/MetricsCard";
+import React from "react";
 import { SecurityLevel } from "../../types/cia";
-import ciaContentService, {
-  getBusinessImpactDescription,
-} from "../../services/ciaContentService";
-import type { ComponentMetrics } from "../../services/ciaContentService";
-import { WIDGET_TEST_IDS } from "../../constants/testIds";
+import ciaContentService from "../../services/ciaContentService";
+import WidgetContainer from "../common/WidgetContainer";
+import StatusBadge from "../common/StatusBadge";
+import KeyValuePair from "../common/KeyValuePair";
+import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
 
 /**
  * Props for CIAImpactSummaryWidget component
  */
 export interface CIAImpactSummaryWidgetProps {
-  // Changed from availabilityLevel to availability for consistency with other widgets
-  availability: SecurityLevel;
-  integrity: SecurityLevel;
-  confidentiality: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  availabilityLevel: SecurityLevel;
+  // Add aliases for test compatibility
+  confidentiality?: SecurityLevel;
+  integrity?: SecurityLevel;
+  availability?: SecurityLevel;
   className?: string;
   testId?: string;
 }
 
 /**
- * Widget that displays a summary of CIA impacts
+ * CIAImpactSummaryWidget shows a consolidated view of all three CIA pillars
+ * with consistent UI/UX styling and color schemes.
  */
 const CIAImpactSummaryWidget: React.FC<CIAImpactSummaryWidgetProps> = ({
-  availability,
-  integrity,
+  // Support both property naming styles with fallbacks
+  confidentialityLevel,
+  integrityLevel,
+  availabilityLevel,
   confidentiality,
+  integrity,
+  availability,
   className = "",
-  testId = WIDGET_TEST_IDS.CIA_IMPACT_SUMMARY,
+  testId = "cia-impact-summary-widget",
 }) => {
-  // Get impact metrics for each component
-  const impactMetrics = useMemo(() => {
-    return ciaContentService.getImpactMetrics(
-      availability,
-      integrity,
-      confidentiality
-    );
-  }, [availability, integrity, confidentiality]);
+  // Use the provided value or fallback to the alternative property name
+  const actualConfidentialityLevel =
+    confidentialityLevel || confidentiality || ("None" as SecurityLevel);
+  const actualIntegrityLevel =
+    integrityLevel || integrity || ("None" as SecurityLevel);
+  const actualAvailabilityLevel =
+    availabilityLevel || availability || ("None" as SecurityLevel);
 
-  // Get the metrics for each CIA component
-  const componentMetrics = useMemo(() => {
-    return {
-      availability: ciaContentService.getComponentMetrics(
-        "availability",
-        availability
-      ),
-      integrity: ciaContentService.getComponentMetrics("integrity", integrity),
-      confidentiality: ciaContentService.getComponentMetrics(
-        "confidentiality",
-        confidentiality
-      ),
-    };
-  }, [availability, integrity, confidentiality]);
-
-  // Replace ciaContentService.getBusinessImpactDescription with getBusinessImpactDescription
-  const availabilityImpact = getBusinessImpactDescription(
-    "availability",
-    availability as SecurityLevel
-  );
-
-  const integrityImpact = getBusinessImpactDescription(
-    "integrity",
-    integrity as SecurityLevel
-  );
-
-  const confidentialityImpact = getBusinessImpactDescription(
+  // Get component details for each pillar
+  const confidentialityDetails = ciaContentService.getComponentDetails(
     "confidentiality",
-    confidentiality as SecurityLevel
+    actualConfidentialityLevel
   );
 
-  // Render a metric row
-  const renderMetricRow = (label: string, value: string | undefined) => {
-    if (!value) return null;
+  const integrityDetails = ciaContentService.getComponentDetails(
+    "integrity",
+    actualIntegrityLevel
+  );
 
-    return (
-      <div className="flex justify-between items-center py-2 border-b border-gray-100 dark:border-gray-700 last:border-b-0">
-        <span className="text-sm text-gray-600 dark:text-gray-400">
-          {label}
-        </span>
-        <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
-          {value}
-        </span>
-      </div>
+  const availabilityDetails = ciaContentService.getComponentDetails(
+    "availability",
+    actualAvailabilityLevel
+  );
+
+  // Calculate overall security level based on the three components
+  const calculateOverallLevel = (): SecurityLevel => {
+    const levels: Record<SecurityLevel, number> = {
+      None: 0,
+      Low: 1,
+      Moderate: 2,
+      High: 3,
+      "Very High": 4,
+    };
+
+    const confidentialityValue = levels[actualConfidentialityLevel] || 0;
+    const integrityValue = levels[actualIntegrityLevel] || 0;
+    const availabilityValue = levels[actualAvailabilityLevel] || 0;
+
+    const avgValue = Math.round(
+      (confidentialityValue + integrityValue + availabilityValue) / 3
     );
+
+    switch (avgValue) {
+      case 0:
+        return "None";
+      case 1:
+        return "Low";
+      case 2:
+        return "Moderate";
+      case 3:
+        return "High";
+      case 4:
+        return "Very High";
+      default:
+        return "Moderate";
+    }
   };
 
-  // Function to stringify impact metrics for MetricsCard
-  const stringifyMetric = (
-    metric: ComponentMetrics | string | number | undefined
-  ): string => {
-    if (typeof metric === "string") return metric;
-    if (typeof metric === "number") return metric.toString();
-    if (!metric) return "N/A";
-    // For ComponentMetrics objects, return a simplified string
-    return "See detailed assessment";
-  };
+  // Use actual levels for calculations
+  const overallSecurityLevel = calculateOverallLevel();
 
   return (
     <WidgetContainer
-      title="CIA Impact Summary"
-      icon="📊"
+      title="CIA Security Impact Summary"
+      icon="🔐"
       className={className}
       testId={testId}
     >
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Availability Impact */}
-        <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-          <div
-            className="flex items-center justify-between mb-3"
-            data-testid={WIDGET_TEST_IDS.CIA_IMPACT_AVAILABILITY_ROW}
-          >
-            <h3 className="text-md font-semibold text-gray-800 dark:text-gray-200">
-              Availability
-            </h3>
-            <span
-              className="px-2 py-1 text-sm font-medium rounded bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
-              data-testid={WIDGET_TEST_IDS.CIA_IMPACT_AVAILABILITY_LEVEL}
-            >
-              {availability}
+      <div className="space-y-6">
+        {/* Overall Security Level */}
+        <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg mb-4 border-l-4 border-blue-500">
+          <h3 className="text-lg font-medium mb-2 flex items-center">
+            <span className="mr-2">🛡️</span>
+            Overall Security Profile
+          </h3>
+          <div className="flex items-center">
+            <StatusBadge status="info" className="mr-2">
+              {overallSecurityLevel}
+            </StatusBadge>
+            <span className="text-gray-600 dark:text-gray-300">
+              Security Level
             </span>
-          </div>
-
-          <div className="space-y-2">
-            {renderMetricRow("Uptime", componentMetrics.availability.uptime)}
-            {renderMetricRow(
-              "Recovery Time",
-              componentMetrics.availability.rto
-            )}
-            {renderMetricRow(
-              "Recovery Point",
-              componentMetrics.availability.rpo
-            )}
-            {renderMetricRow(
-              "Financial Impact",
-              componentMetrics.availability.financialImpact
-            )}
-            {renderMetricRow(
-              "Operational Impact",
-              componentMetrics.availability.operationalImpact
-            )}
           </div>
         </div>
 
-        {/* Integrity Impact */}
-        <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+        {/* CIA Pillar Summary Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Confidentiality Card */}
           <div
-            className="flex items-center justify-between mb-3"
-            data-testid={WIDGET_TEST_IDS.CIA_IMPACT_INTEGRITY_ROW}
+            className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-l-4"
+            style={{
+              borderLeftColor: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY,
+            }}
           >
-            <h3 className="text-md font-semibold text-gray-800 dark:text-gray-200">
-              Integrity
-            </h3>
-            <span
-              className="px-2 py-1 text-sm font-medium rounded bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
-              data-testid={WIDGET_TEST_IDS.CIA_IMPACT_INTEGRITY_LEVEL}
-            >
-              {integrity}
-            </span>
-          </div>
-
-          <div className="space-y-2">
-            {renderMetricRow(
-              "Financial Impact",
-              componentMetrics.integrity.financialImpact
-            )}
-            {renderMetricRow(
-              "Operational Impact",
-              componentMetrics.integrity.operationalImpact
-            )}
-            {renderMetricRow(
-              "Regulatory Impact",
-              componentMetrics.integrity.regulatoryImpact
-            )}
-            {renderMetricRow(
-              "Reputational Impact",
-              componentMetrics.integrity.reputationalImpact
-            )}
-          </div>
-        </div>
-
-        {/* Confidentiality Impact */}
-        <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-          <div
-            className="flex items-center justify-between mb-3"
-            data-testid={WIDGET_TEST_IDS.CIA_IMPACT_CONFIDENTIALITY_ROW}
-          >
-            <h3 className="text-md font-semibold text-gray-800 dark:text-gray-200">
+            <h4 className="font-medium mb-2 flex items-center">
+              <span className="mr-2">🔒</span>
               Confidentiality
-            </h3>
-            <span
-              className="px-2 py-1 text-sm font-medium rounded bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300"
-              data-testid={WIDGET_TEST_IDS.CIA_IMPACT_CONFIDENTIALITY_LEVEL}
+            </h4>
+            <StatusBadge
+              status="purple"
+              className="mb-2 bg-purple-600 text-white"
             >
-              {confidentiality}
-            </span>
+              {actualConfidentialityLevel}
+            </StatusBadge>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
+              {confidentialityDetails?.description?.substring(0, 100)}...
+            </p>
+            <KeyValuePair
+              label="Protection Method"
+              value={
+                confidentialityDetails?.protectionMethod || "Not specified"
+              }
+              className="mt-2"
+            />
           </div>
 
-          <div className="space-y-2">
-            {renderMetricRow(
-              "Financial Impact",
-              componentMetrics.confidentiality.financialImpact
-            )}
-            {renderMetricRow(
-              "Regulatory Impact",
-              componentMetrics.confidentiality.regulatoryImpact
-            )}
-            {renderMetricRow(
-              "Reputational Impact",
-              componentMetrics.confidentiality.reputationalImpact
-            )}
+          {/* Integrity Card */}
+          <div
+            className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-l-4"
+            style={{ borderLeftColor: CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY }}
+          >
+            <h4 className="font-medium mb-2 flex items-center">
+              <span className="mr-2">✓</span>
+              Integrity
+            </h4>
+            <StatusBadge
+              status="success"
+              className="mb-2 bg-green-500 text-white"
+            >
+              {actualIntegrityLevel}
+            </StatusBadge>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
+              {integrityDetails?.description?.substring(0, 100)}...
+            </p>
+            <KeyValuePair
+              label="Validation Method"
+              value={integrityDetails?.validationMethod || "Not specified"}
+              className="mt-2"
+            />
           </div>
-        </div>
-      </div>
 
-      {/* Overall Impact Summary */}
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-        <MetricsCard
-          title="Business Impact"
-          value={stringifyMetric(impactMetrics.businessImpact)}
-          variant="primary"
-        />
-
-        <MetricsCard
-          title="Technical Impact"
-          value={stringifyMetric(impactMetrics.technicalImpact)}
-          variant="info"
-        />
-
-        <MetricsCard
-          title="Regulatory Impact"
-          value={stringifyMetric(impactMetrics.regulatoryImpact)}
-          variant="warning"
-        />
-      </div>
-
-      {/* Confidentiality Specific Metrics */}
-      <div className="mt-6">
-        <h3 className="font-medium text-gray-800 dark:text-gray-200 mb-4">
-          Confidentiality Metrics
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              Key Impact
-            </div>
-            <div className="font-medium text-gray-800 dark:text-gray-200 mt-1">
-              {componentMetrics.confidentiality.keyImpact ||
-                "No impact data available"}
-            </div>
-          </div>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              Metric
-            </div>
-            <div className="font-medium text-gray-800 dark:text-gray-200 mt-1">
-              {componentMetrics.confidentiality.metric || "N/A"}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Integrity Specific Metrics */}
-      <div className="mt-6">
-        <h3 className="font-medium text-gray-800 dark:text-gray-200 mb-4">
-          Integrity Metrics
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              Key Impact
-            </div>
-            <div className="font-medium text-gray-800 dark:text-gray-200 mt-1">
-              {componentMetrics.integrity.keyImpact ||
-                "No impact data available"}
-            </div>
-          </div>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              Metric
-            </div>
-            <div className="font-medium text-gray-800 dark:text-gray-200 mt-1">
-              {componentMetrics.integrity.metric || "N/A"}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Availability Specific Metrics */}
-      <div className="mt-6">
-        <h3 className="font-medium text-gray-800 dark:text-gray-200 mb-4">
-          Availability Metrics
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              Key Impact
-            </div>
-            <div className="font-medium text-gray-800 dark:text-gray-200 mt-1">
-              {componentMetrics.availability.keyImpact ||
-                "No impact data available"}
-            </div>
-          </div>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              Metric
-            </div>
-            <div className="font-medium text-gray-800 dark:text-gray-200 mt-1">
-              {componentMetrics.availability.metric || "N/A"}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Overall Impact Scores */}
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-4 rounded-lg">
-          <div className="text-blue-700 dark:text-blue-300 font-medium mb-2">
-            Security Score
-          </div>
-          <span className="text-2xl font-bold text-blue-800 dark:text-blue-200">
-            {stringifyMetric(impactMetrics.securityScore)}
-          </span>
-          <div className="text-sm text-blue-600 dark:text-blue-400 mt-1">
-            Based on CIA security levels
+          {/* Availability Card */}
+          <div
+            className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-l-4"
+            style={{
+              borderLeftColor: CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY,
+            }}
+          >
+            <h4 className="font-medium mb-2 flex items-center">
+              <span className="mr-2">⏱️</span>
+              Availability
+            </h4>
+            <StatusBadge status="info" className="mb-2 bg-blue-500 text-white">
+              {actualAvailabilityLevel}
+            </StatusBadge>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
+              {availabilityDetails?.description?.substring(0, 100)}...
+            </p>
+            <KeyValuePair
+              label="Uptime Target"
+              value={availabilityDetails?.uptime || "Not specified"}
+              className="mt-2"
+            />
           </div>
         </div>
 
-        <div className="bg-green-50 dark:bg-green-900 dark:bg-opacity-20 p-4 rounded-lg">
-          <div className="text-green-700 dark:text-green-300 font-medium mb-2">
-            Compliance Score
-          </div>
-          <span className="text-2xl font-bold text-green-800 dark:text-green-200">
-            {stringifyMetric(impactMetrics.complianceScore)}
-          </span>
-          <div className="text-sm text-green-600 dark:text-green-400 mt-1">
-            Based on regulatory requirements
-          </div>
-        </div>
-
-        <div className="bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 p-4 rounded-lg">
-          <div className="text-purple-700 dark:text-purple-300 font-medium mb-2">
-            Cost-Effectiveness
-          </div>
-          <span className="text-2xl font-bold text-purple-800 dark:text-purple-200">
-            {stringifyMetric(impactMetrics.costEffectivenessScore)}
-          </span>
-          <div className="text-sm text-purple-600 dark:text-purple-400 mt-1">
-            Based on ROI analysis
-          </div>
+        {/* Additional information section */}
+        <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+          <h4 className="font-medium mb-2">Security Profile Summary</h4>
+          <p className="text-sm">
+            This security profile combines {actualConfidentialityLevel}{" "}
+            confidentiality, {actualIntegrityLevel} integrity, and{" "}
+            {actualAvailabilityLevel} availability controls to create an{" "}
+            {overallSecurityLevel.toLowerCase()} security posture. For detailed
+            implementation recommendations, see the individual CIA component
+            tabs.
+          </p>
         </div>
       </div>
     </WidgetContainer>

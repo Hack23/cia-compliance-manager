@@ -16,6 +16,7 @@ import ValueCreationWidget from "../components/widgets/ValueCreationWidget";
 import CIAImpactSummaryWidget from "../components/widgets/CIAImpactSummaryWidget";
 import { WidgetContainer } from "../components/common";
 import { handleWidgetError } from "./widgetHelpers";
+
 // Import all widget prop types
 import {
   CostEstimationWidgetProps,
@@ -30,18 +31,20 @@ import {
   BusinessImpactAnalysisWidgetProps,
   WidgetBaseProps,
 } from "../types/widgets";
-// Import SecurityLevel type from the right location
-import { SecurityLevel } from "../types/cia";
-// Import ComplianceStatusWidgetProps from component source for consistency
-import { ComplianceStatusWidgetProps as ComponentComplianceProps } from "../components/widgets/ComplianceStatusWidget";
-// Import the component-defined interface
-import { SecurityLevelWidgetProps as ComponentSecurityLevelWidgetProps } from "../components/widgets/SecurityLevelWidget";
 
-// Import SecurityLevelWidgetProps directly from the component
-import { SecurityLevelWidgetProps } from "../components/widgets/SecurityLevelWidget";
+// Import SecurityLevel type
+import { SecurityLevel } from "../types/cia";
 
 // Widget component type without constraint
 type WidgetComponentType<T> = React.ComponentType<T>;
+
+// Standardized interface for CIAImpactProps
+interface CIAImpactSummaryWidgetProps extends WidgetBaseProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  className?: string;
+}
 
 // Modified WidgetDefinition interface to make generic type constraint optional
 export interface WidgetDefinition<T> {
@@ -53,52 +56,81 @@ export interface WidgetDefinition<T> {
   size?: "small" | "medium" | "large" | "full";
   order?: number;
   description?: string;
-  position?: number; // Add position property
+  position?: number;
 }
 
 // Class to manage available widgets and their configurations
-export class WidgetRegistry {
+class WidgetRegistry {
   private widgets: Map<string, WidgetDefinition<any>> = new Map();
 
-  // Register a widget with better typing
-  register<T>(widgetDef: WidgetDefinition<T>): void {
-    this.widgets.set(widgetDef.id, widgetDef);
+  // Register a widget with the registry
+  register<T>(definition: WidgetDefinition<T>): void {
+    // Apply default values for missing properties
+    const finalDefinition = {
+      ...definition,
+      size: definition.size || "medium",
+      order: definition.order || 999,
+    };
+
+    this.widgets.set(finalDefinition.id, finalDefinition);
   }
 
-  // Get a specific widget by ID with improved typing
-  get<T extends WidgetBaseProps>(id: string): WidgetDefinition<T> | undefined {
+  // Get a widget definition by ID
+  get<T>(id: string): WidgetDefinition<T> | undefined {
     return this.widgets.get(id) as WidgetDefinition<T> | undefined;
   }
 
-  // Improved getAll method with better typing and error handling
-  getAll(): Array<WidgetDefinition<WidgetBaseProps>> {
+  // Get all registered widgets as an array
+  getAll(): WidgetDefinition<any>[] {
+    return Array.from(this.widgets.values()).sort(
+      (a, b) => a.order! - b.order!
+    );
+  }
+
+  // Render a single widget by ID with optional props
+  renderWidget<T>(id: string, props: Partial<T> = {}): ReactNode | null {
+    const widget = this.widgets.get(id);
+    if (!widget) return null;
+
     try {
-      return Array.from(this.widgets.values()).sort((a, b) => {
-        // Handle undefined order values safely
-        const orderA = typeof a.order === "number" ? a.order : 999;
-        const orderB = typeof b.order === "number" ? b.order : 999;
-        return orderA - orderB;
-      });
+      // Merge default props with provided props
+      const finalProps = {
+        ...widget.defaultProps,
+        ...props,
+      };
+
+      return (
+        <WidgetContainer
+          key={widget.id}
+          title={widget.title}
+          icon={widget.icon}
+          size={widget.size}
+          testId={`widget-${widget.id}`}
+        >
+          <widget.component {...finalProps} />
+        </WidgetContainer>
+      );
     } catch (error) {
-      console.error("Error getting widgets:", error);
-      return [];
+      // Fix error handling by creating an Error object if it's not already one
+      const errorObj =
+        error instanceof Error ? error : new Error(String(error));
+      // Swap the parameter order - Error object first, then id
+      return handleWidgetError(errorObj, id);
     }
   }
 
-  // Render a specific widget with improved type safety and error handling
-  renderWidget<T extends WidgetBaseProps>(
-    id: string,
-    props: Partial<T> = {}
-  ): ReactNode {
-    try {
-      const widget = this.widgets.get(id) as WidgetDefinition<T> | undefined;
-      if (!widget) return null;
+  // Render multiple widgets filtered by a predicate function
+  renderWidgets(
+    filter?: (widget: WidgetDefinition<any>) => boolean,
+    props: Record<string, any> = {}
+  ): ReactNode[] {
+    const widgetsToRender = Array.from(this.widgets.values())
+      .filter(filter || (() => true))
+      .sort((a, b) => a.order! - b.order!);
 
-      // Safely merge default props with provided props
-      const combinedProps = {
-        ...(widget.defaultProps || {}),
-        ...props,
-      } as T;
+    return widgetsToRender.map((widget) => {
+      const widgetProps = props[widget.id] || {};
+      const combinedProps = { ...widget.defaultProps, ...widgetProps };
 
       return (
         <WidgetContainer
@@ -111,168 +143,37 @@ export class WidgetRegistry {
           <widget.component {...combinedProps} />
         </WidgetContainer>
       );
-    } catch (error) {
-      return handleWidgetError(
-        error instanceof Error
-          ? error
-          : new Error(`Error rendering ${id} widget`)
-      );
-    }
-  }
-
-  // Render widgets with better type safety
-  renderWidgets(
-    filter?: (widget: WidgetDefinition<WidgetBaseProps>) => boolean,
-    props: Record<string, Record<string, unknown>> = {}
-  ): ReactNode[] {
-    try {
-      const widgetsToRender = Array.from(this.widgets.values())
-        .filter(filter || (() => true))
-        .sort((a, b) => (a.order || 999) - (b.order || 999));
-
-      return widgetsToRender.map((widget) => {
-        try {
-          const widgetProps = props[widget.id] || {};
-
-          // Safely merge props
-          const combinedProps = {
-            ...(widget.defaultProps || {}),
-            ...widgetProps,
-          };
-
-          return (
-            <WidgetContainer
-              key={widget.id}
-              title={widget.title}
-              icon={widget.icon}
-              size={widget.size}
-              testId={`widget-${widget.id}`}
-            >
-              <widget.component {...combinedProps} />
-            </WidgetContainer>
-          );
-        } catch (error) {
-          return (
-            <WidgetContainer
-              key={widget.id}
-              title={widget.title}
-              icon={widget.icon}
-              size={widget.size}
-              testId={`widget-${widget.id}-error`}
-            >
-              {handleWidgetError(
-                error instanceof Error
-                  ? error
-                  : new Error(`Error rendering ${widget.title} widget`)
-              )}
-            </WidgetContainer>
-          );
-        }
-      });
-    } catch (error) {
-      return [
-        handleWidgetError(
-          error instanceof Error ? error : new Error("Error rendering widgets")
-        ),
-      ];
-    }
+    });
   }
 }
 
 // Create and export a singleton instance
 export const widgetRegistry = new WidgetRegistry();
 
-// Define interface for RadarChart props
-interface RadarChartProps extends WidgetBaseProps {
-  availabilityLevel: string;
-  integrityLevel: string;
-  confidentialityLevel: string;
-}
-
-// Define interface for CIAImpactProps
-interface CIAImpactProps extends WidgetBaseProps {
-  availability: SecurityLevel; // Changed from availabilityLevel
-  integrity: SecurityLevel; // Changed from integrityLevel
-  confidentiality: SecurityLevel; // Changed from confidentialityLevel
-  className?: string;
-}
-
-// Pre-register core widgets with proper typing
-widgetRegistry.register<SecurityLevelWidgetProps>({
-  id: "security-level",
-  title: "Security Level Selection",
-  component:
-    SecurityLevelWidget as unknown as WidgetComponentType<SecurityLevelWidgetProps>,
-  size: "medium",
-  order: 5,
-  description: "Select appropriate security levels for your system",
-  defaultProps: {
-    availabilityLevel: SECURITY_LEVELS.NONE,
-    integrityLevel: SECURITY_LEVELS.NONE,
-    confidentialityLevel: SECURITY_LEVELS.NONE,
-  },
-});
-
-widgetRegistry.register<RadarChartProps>({
-  id: "security-visualization",
-  title: "Security Profile Visualization",
-  component: RadarChart,
-  size: "medium",
-  order: 15,
-  description: "Visualize your security profile across CIA dimensions",
-});
-
+// Pre-register core widgets
 widgetRegistry.register<SecuritySummaryWidgetProps>({
   id: "security-summary",
   title: WIDGET_TITLES.SECURITY_SUMMARY,
-  component:
-    SecuritySummaryWidget as unknown as WidgetComponentType<SecuritySummaryWidgetProps>,
+  component: SecuritySummaryWidget,
   icon: WIDGET_ICONS.SECURITY_SUMMARY,
   size: "medium",
   order: 10,
-  description: "Summary of your current security posture",
+});
+
+widgetRegistry.register<ComplianceStatusWidgetProps>({
+  id: "compliance-status",
+  title: WIDGET_TITLES.COMPLIANCE_STATUS,
+  // Fix the type compatibility issue with type assertion
+  component:
+    ComplianceStatusWidget as unknown as WidgetComponentType<ComplianceStatusWidgetProps>,
+  icon: WIDGET_ICONS.COMPLIANCE_STATUS,
+  size: "medium",
+  order: 20,
   defaultProps: {
-    availabilityLevel: SECURITY_LEVELS.NONE,
-    integrityLevel: SECURITY_LEVELS.NONE,
-    confidentialityLevel: SECURITY_LEVELS.NONE,
     securityLevel: SECURITY_LEVELS.NONE,
   },
 });
 
-// Fix the first registration of the compliance status widget - line ~236
-widgetRegistry.register<ComponentComplianceProps>({
-  id: "compliance-status",
-  title: WIDGET_TITLES.COMPLIANCE_STATUS,
-  component:
-    ComplianceStatusWidget as unknown as WidgetComponentType<ComponentComplianceProps>,
-  icon: WIDGET_ICONS.COMPLIANCE_STATUS,
-  size: "medium",
-  order: 20,
-  description: "Overview of your system's compliance status",
-  defaultProps: {
-    availabilityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
-    integrityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
-    confidentialityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
-  },
-});
-
-// Register the CIAImpactSummaryWidget
-widgetRegistry.register<CIAImpactProps>({
-  id: "cia-impact-summary",
-  title: "CIA Impact Summary",
-  component: CIAImpactSummaryWidget,
-  icon: "🛡️",
-  size: "small",
-  order: 12,
-  description: "Summary of CIA security impacts",
-  defaultProps: {
-    availability: SECURITY_LEVELS.NONE,
-    integrity: SECURITY_LEVELS.NONE,
-    confidentiality: SECURITY_LEVELS.NONE,
-  },
-});
-
-// Register other widgets with proper typing - add specific type annotations
 widgetRegistry.register<ValueCreationWidgetProps>({
   id: "value-creation",
   title: WIDGET_TITLES.VALUE_CREATION,
@@ -290,16 +191,15 @@ widgetRegistry.register<ValueCreationWidgetProps>({
 widgetRegistry.register<IntegrityImpactWidgetProps>({
   id: "integrity-impact",
   title: WIDGET_TITLES.INTEGRITY_IMPACT,
-  component:
-    IntegrityImpactWidget as unknown as WidgetComponentType<IntegrityImpactWidgetProps>,
+  component: IntegrityImpactWidget,
   icon: WIDGET_ICONS.INTEGRITY_IMPACT,
   size: "medium",
   order: 30,
   description: "Impact and recommendations for data integrity",
   defaultProps: {
-    integrityLevel: SECURITY_LEVELS.NONE,
-    availabilityLevel: SECURITY_LEVELS.NONE,
-    confidentialityLevel: SECURITY_LEVELS.NONE,
+    integrityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    availabilityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    confidentialityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
   },
 });
 
@@ -307,31 +207,32 @@ widgetRegistry.register<IntegrityImpactWidgetProps>({
 widgetRegistry.register<ConfidentialityImpactWidgetProps>({
   id: "confidentiality-impact",
   title: WIDGET_TITLES.CONFIDENTIALITY_IMPACT,
-  component:
-    ConfidentialityImpactWidget as unknown as WidgetComponentType<ConfidentialityImpactWidgetProps>,
+  component: ConfidentialityImpactWidget,
   icon: WIDGET_ICONS.CONFIDENTIALITY_IMPACT,
   size: "medium",
   order: 35,
   description: "Impact and recommendations for data confidentiality",
   defaultProps: {
-    confidentialityLevel: SECURITY_LEVELS.NONE,
-    availabilityLevel: SECURITY_LEVELS.NONE,
-    integrityLevel: SECURITY_LEVELS.NONE,
+    confidentialityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    availabilityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    integrityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
   },
 });
 
 widgetRegistry.register<AvailabilityImpactWidgetProps>({
   id: "availability-impact",
   title: WIDGET_TITLES.AVAILABILITY_IMPACT,
-  component: AvailabilityImpactWidget,
+  // Fix the type compatibility issue with type assertion
+  component:
+    AvailabilityImpactWidget as unknown as WidgetComponentType<AvailabilityImpactWidgetProps>,
   icon: WIDGET_ICONS.AVAILABILITY_IMPACT,
   size: "medium",
   order: 40,
   description: "Impact and recommendations for system availability",
   defaultProps: {
-    availabilityLevel: "Moderate",
-    integrityLevel: "None",
-    confidentialityLevel: "None",
+    availabilityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    integrityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    confidentialityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
     options: {},
   },
 });
@@ -339,6 +240,7 @@ widgetRegistry.register<AvailabilityImpactWidgetProps>({
 widgetRegistry.register<SecurityResourcesWidgetProps>({
   id: "security-resources",
   title: WIDGET_TITLES.SECURITY_RESOURCES,
+  // Fix the type compatibility issue with type assertion
   component:
     SecurityResourcesWidget as unknown as WidgetComponentType<SecurityResourcesWidgetProps>,
   icon: WIDGET_ICONS.SECURITY_RESOURCES,
@@ -346,7 +248,10 @@ widgetRegistry.register<SecurityResourcesWidgetProps>({
   order: 45,
   description: "Security resources and documentation",
   defaultProps: {
-    securityLevel: SECURITY_LEVELS.NONE,
+    securityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    availabilityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    integrityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    confidentialityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
   },
 });
 
@@ -359,9 +264,9 @@ widgetRegistry.register<TechnicalDetailsWidgetProps>({
   order: 50,
   description: "Technical implementation details for security controls",
   defaultProps: {
-    availabilityLevel: SECURITY_LEVELS.NONE,
-    integrityLevel: SECURITY_LEVELS.NONE,
-    confidentialityLevel: SECURITY_LEVELS.NONE,
+    availabilityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    integrityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    confidentialityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
   },
 });
 
@@ -372,59 +277,29 @@ widgetRegistry.register<BusinessImpactAnalysisWidgetProps>({
   icon: WIDGET_ICONS.BUSINESS_IMPACT,
   size: "large",
   order: 55,
-  description: "Analysis of security impacts on business operations",
-  defaultProps: {
-    availabilityLevel: SECURITY_LEVELS.NONE,
-    integrityLevel: SECURITY_LEVELS.NONE,
-    confidentialityLevel: SECURITY_LEVELS.NONE,
-  },
-});
-
-// Use type assertion for the BusinessImpactAnalysisWidget to align types
-widgetRegistry.register<BusinessImpactAnalysisWidgetProps>({
-  id: "business-impact-analysis",
-  title: "Business Impact Analysis",
-  component:
-    BusinessImpactAnalysisWidget as unknown as WidgetComponentType<BusinessImpactAnalysisWidgetProps>,
-  size: "full",
-  position: 6,
-});
-
-// Update SecurityResourcesWidget component type casting - replace the entire registration
-widgetRegistry.register<SecurityResourcesWidgetProps>({
-  id: "security-resources",
-  title: "Security Resources",
-  component:
-    SecurityResourcesWidget as unknown as WidgetComponentType<SecurityResourcesWidgetProps>,
-  // Instead of using 'props', use 'defaultProps' which is defined in WidgetDefinition interface
-  defaultProps: {
-    securityLevel: "None" as SecurityLevel,
-    availabilityLevel: "None" as SecurityLevel,
-    integrityLevel: "None" as SecurityLevel,
-    confidentialityLevel: "None" as SecurityLevel,
-  },
-  position: 11,
-  size: "medium",
-});
-
-// The second registration is correct, so we need to remove it to avoid duplicate registrations
-// Delete or comment out the following section (line ~376):
-/*
-widgetRegistry.register<ComponentComplianceProps>({
-  id: "compliance-status",
-  title: WIDGET_TITLES.COMPLIANCE_STATUS,
-  component:
-    ComplianceStatusWidget as unknown as WidgetComponentType<ComponentComplianceProps>,
-  icon: WIDGET_ICONS.COMPLIANCE_STATUS,
-  size: "medium",
-  order: 60,
-  description: "Shows compliance with security standards",
+  description: "Business impact analysis for security choices",
   defaultProps: {
     availabilityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
     integrityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
     confidentialityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
   },
 });
-*/
+
+// For CIAImpactSummaryWidget component registration
+widgetRegistry.register<CIAImpactSummaryWidgetProps>({
+  id: "cia-impact-summary",
+  title: "CIA Impact Summary",
+  description: "Shows a consolidated overview of CIA security impacts",
+  component: CIAImpactSummaryWidget,
+  defaultProps: {
+    availabilityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    integrityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    confidentialityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+  },
+  size: "small",
+  order: 12,
+  icon: "🛡️",
+  position: 0,
+});
 
 export default widgetRegistry;

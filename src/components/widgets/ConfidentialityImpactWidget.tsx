@@ -1,27 +1,18 @@
-import React, { useMemo, useState } from "react";
+import React, { useState, useMemo } from "react";
 import { SecurityLevel } from "../../types/cia";
-import {
-  CONFIDENTIALITY_IMPACT_TEST_IDS,
-  asSecurityLevel,
-} from "../../constants/testIds";
+import { CONFIDENTIALITY_IMPACT_TEST_IDS } from "../../constants/testIds";
 import ciaContentService, {
   getInformationSensitivity,
   getProtectionLevel,
 } from "../../services/ciaContentService";
-import WidgetContainer from "../common/WidgetContainer";
 import StatusBadge from "../common/StatusBadge";
 import KeyValuePair from "../common/KeyValuePair";
-import { WIDGET_TITLES, WIDGET_ICONS } from "../../constants/coreConstants";
+import WidgetContainer from "../common/WidgetContainer";
+import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
+import { normalizeSecurityLevel } from "../../utils/widgetHelpers";
 
 /**
  * Props for ConfidentialityImpactWidget component
- *
- * @interface ConfidentialityImpactWidgetProps
- * @property {SecurityLevel} confidentialityLevel - The selected confidentiality security level
- * @property {SecurityLevel} [availabilityLevel] - Optional availability security level for context
- * @property {SecurityLevel} [integrityLevel] - Optional integrity security level for context
- * @property {string} [className] - Optional CSS class name
- * @property {string} [testId] - Optional test ID for testing purposes
  */
 export interface ConfidentialityImpactWidgetProps {
   confidentialityLevel: SecurityLevel;
@@ -31,20 +22,6 @@ export interface ConfidentialityImpactWidgetProps {
   testId?: string;
 }
 
-/**
- * ConfidentialityImpactWidget displays impacts and recommendations related to data confidentiality
- * based on the selected security level. It uses ciaContentService to fetch all relevant data.
- *
- * @component
- * @example
- * ```tsx
- * <ConfidentialityImpactWidget
- *   confidentialityLevel="High"
- *   availabilityLevel="Moderate"
- *   integrityLevel="High"
- * />
- * ```
- */
 const ConfidentialityImpactWidget: React.FC<
   ConfidentialityImpactWidgetProps
 > = ({
@@ -98,20 +75,20 @@ const ConfidentialityImpactWidget: React.FC<
 
   // Get information sensitivity using service function
   const sensitivity = getInformationSensitivity(
-    asSecurityLevel(confidentialityLevel)
+    normalizeSecurityLevel(confidentialityLevel) as SecurityLevel
   );
 
   // Get protection level using service function
   const protectionLevel = getProtectionLevel(
-    asSecurityLevel(confidentialityLevel)
+    normalizeSecurityLevel(confidentialityLevel) as SecurityLevel
   );
 
   // Handle cases where data might not be available
   if (!confidentialityDetails) {
     return (
       <WidgetContainer
-        title={WIDGET_TITLES.CONFIDENTIALITY_IMPACT}
-        icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT}
+        title="Confidentiality Impact"
+        icon="🔒"
         className={className}
         testId={testId}
         error={new Error("Confidentiality details not available")}
@@ -123,18 +100,22 @@ const ConfidentialityImpactWidget: React.FC<
 
   return (
     <WidgetContainer
-      title={WIDGET_TITLES.CONFIDENTIALITY_IMPACT}
-      icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT}
+      title="Confidentiality Impact"
+      icon="🔒"
       className={className}
       testId={testId}
     >
       <div className="space-y-6">
         <div className="mb-4">
-          <div className="flex items-center mb-2">
+          <div className="flex items-center justify-between mb-2">
             <h3 className="text-lg font-medium mr-2">
               {confidentialityLevel} Confidentiality
             </h3>
-            <StatusBadge status="purple" testId={`${testId}-level-badge`}>
+            <StatusBadge
+              status="purple"
+              testId={`${testId}-level-badge`}
+              className="bg-purple-600 text-white"
+            >
               {confidentialityLevel}
             </StatusBadge>
           </div>
@@ -149,7 +130,12 @@ const ConfidentialityImpactWidget: React.FC<
         </div>
 
         {technicalDetails && technicalDetails.description && (
-          <div className="mb-4 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+          <div
+            className="mb-4 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4"
+            style={{
+              borderLeftColor: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY,
+            }}
+          >
             <h4 className="text-md font-medium mb-2">
               Technical Implementation
             </h4>
@@ -157,7 +143,6 @@ const ConfidentialityImpactWidget: React.FC<
               {technicalDetails.description}
             </p>
             {(() => {
-              // Use an IIFE to avoid TypeScript ReactNode issues
               if (
                 technicalDetails &&
                 typeof technicalDetails === "object" &&
@@ -192,47 +177,43 @@ const ConfidentialityImpactWidget: React.FC<
           </p>
 
           {businessImpact.reputational && (
-            <div className="mt-2 p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-md">
+            <div
+              className="mt-2 p-3 rounded-md"
+              style={{
+                backgroundColor: `${CIA_COMPONENT_COLORS.CONFIDENTIALITY.SECONDARY}25`,
+              }}
+            >
               <div className="flex items-center mb-1">
                 <span className="mr-1">🏆</span>
                 <span className="font-medium">Reputational Impact</span>
-                <StatusBadge
-                  status={
-                    businessImpact.reputational.riskLevel?.includes("High")
-                      ? "warning"
-                      : "info"
-                  }
-                  size="xs"
-                  className="ml-2"
-                >
-                  {businessImpact.reputational.riskLevel || "Unknown Risk"}
-                </StatusBadge>
               </div>
-              <p className="text-sm text-purple-800 dark:text-purple-300">
-                {businessImpact.reputational.description}
+              <p
+                className="text-sm"
+                style={{ color: CIA_COMPONENT_COLORS.CONFIDENTIALITY.DARK }}
+              >
+                {businessImpact.reputational.description ||
+                  "No reputational impact information available"}
               </p>
             </div>
           )}
 
           {businessImpact.regulatory && (
-            <div className="mt-2 p-3 bg-indigo-50 dark:bg-indigo-900 dark:bg-opacity-20 rounded-md">
+            <div
+              className="mt-2 p-3 rounded-md"
+              style={{
+                backgroundColor: `${CIA_COMPONENT_COLORS.CONFIDENTIALITY.SECONDARY}25`,
+              }}
+            >
               <div className="flex items-center mb-1">
-                <span className="mr-1">⚖️</span>
+                <span className="mr-1">📜</span>
                 <span className="font-medium">Regulatory Impact</span>
-                <StatusBadge
-                  status={
-                    businessImpact.regulatory.riskLevel?.includes("High")
-                      ? "warning"
-                      : "info"
-                  }
-                  size="xs"
-                  className="ml-2"
-                >
-                  {businessImpact.regulatory.riskLevel || "Unknown Risk"}
-                </StatusBadge>
               </div>
-              <p className="text-sm text-indigo-800 dark:text-indigo-300">
-                {businessImpact.regulatory.description}
+              <p
+                className="text-sm"
+                style={{ color: CIA_COMPONENT_COLORS.CONFIDENTIALITY.DARK }}
+              >
+                {businessImpact.regulatory.description ||
+                  "No regulatory impact information available"}
               </p>
             </div>
           )}
@@ -244,7 +225,10 @@ const ConfidentialityImpactWidget: React.FC<
               <h4 className="text-md font-medium">Recommendations</h4>
               {recommendations.length > 3 && (
                 <button
-                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline focus:outline-none"
+                  className="text-sm hover:underline focus:outline-none"
+                  style={{
+                    color: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY,
+                  }}
                   onClick={() =>
                     setShowAllRecommendations(!showAllRecommendations)
                   }
@@ -269,7 +253,12 @@ const ConfidentialityImpactWidget: React.FC<
           </div>
         )}
 
-        <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+        <div
+          className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4"
+          style={{
+            borderLeftColor: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY,
+          }}
+        >
           <h4 className="text-md font-medium mb-2">
             Data Protection Classification
           </h4>
@@ -281,7 +270,7 @@ const ConfidentialityImpactWidget: React.FC<
             />
             <KeyValuePair
               label="Information Sensitivity"
-              value={getInformationSensitivity(confidentialityLevel)}
+              value={sensitivity}
               testId={`${testId}-information-sensitivity`}
             />
           </div>

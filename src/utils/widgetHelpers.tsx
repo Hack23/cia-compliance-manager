@@ -136,6 +136,39 @@ export function normalizeSecurityLevel(level?: string): string {
 }
 
 /**
+ * Convert any string to a valid SecurityLevel
+ * @param level String to convert to SecurityLevel
+ * @returns Valid SecurityLevel value
+ */
+export function asSecurityLevel(level?: string): SecurityLevel {
+  if (!level) return "None";
+
+  // Check if it's already a valid SecurityLevel
+  const validLevels: SecurityLevel[] = [
+    "None",
+    "Low",
+    "Moderate",
+    "High",
+    "Very High",
+  ];
+  if (validLevels.includes(level as SecurityLevel)) {
+    return level as SecurityLevel;
+  }
+
+  // Normalize input and try to match
+  const normalizedLevel = level.trim();
+
+  for (const validLevel of validLevels) {
+    if (normalizedLevel.toLowerCase() === validLevel.toLowerCase()) {
+      return validLevel;
+    }
+  }
+
+  // Default to "None" if no match
+  return "None";
+}
+
+/**
  * Creates formatted JSX for displaying a security level with appropriate styling
  * @param level The security level to display
  * @param withLabel Whether to include a label with the value

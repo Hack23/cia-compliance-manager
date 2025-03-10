@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import AvailabilityImpactWidget from "./AvailabilityImpactWidget";
 import { AVAILABILITY_IMPACT_TEST_IDS } from "../../constants/testIds";
+import { SecurityLevel } from "../../types/cia";
 
 // Mock the constants and icons
 vi.mock("../../constants/coreConstants", () => ({
@@ -34,24 +35,31 @@ const TEST_OPTIONS = {
 };
 
 describe("AvailabilityImpactWidget", () => {
-  // Test rendering with default props
-  it("renders with basic options", () => {
+  // Test rendering with valid availability level
+  it("renders correctly with valid availability level", () => {
+    render(
+      <AvailabilityImpactWidget availabilityLevel={"High" as SecurityLevel} />
+    );
+
+    expect(screen.getByText("High Availability")).toBeInTheDocument();
+    expect(screen.getByText("Description")).toBeInTheDocument();
+    expect(screen.getByText("Business Impact")).toBeInTheDocument();
+  });
+
+  // Test rendering with error state
+  it("renders error state when availability level is unknown", () => {
     render(
       <AvailabilityImpactWidget
-        availabilityLevel="None"
-        integrityLevel="None"
-        confidentialityLevel="None"
-        options={TEST_OPTIONS}
+        availabilityLevel={"None" as SecurityLevel}
+        options={{
+          showErrorState: true,
+        }}
       />
     );
 
-    // Verify widget renders with default level text
-    expect(screen.getByText(/Availability Impact: None/i)).toBeInTheDocument();
-
-    // Check that content sections are present
-    expect(screen.getByText("Test none description")).toBeInTheDocument();
-    expect(screen.getByText("Test none impact")).toBeInTheDocument();
-    expect(screen.getByText(/< 90%/i)).toBeInTheDocument();
+    expect(
+      screen.getByText("No availability information available")
+    ).toBeInTheDocument();
   });
 
   // Test with different availability levels
@@ -77,41 +85,36 @@ describe("AvailabilityImpactWidget", () => {
     expect(businessPerspective).toBeInTheDocument();
   });
 
-  // Test with custom options
-  it("renders with missing options gracefully", () => {
-    const customOptions = {
-      Moderate: {
-        description: "Custom description",
-        businessImpact: "Custom business impact",
-        uptime: "Custom uptime",
-        recommendations: ["Custom recommendation 1", "Custom recommendation 2"],
-        mttr: "Custom MTTR",
-        rto: "Custom RTO",
-        rpo: "Custom RPO",
-      },
-    };
-
+  // Test the display of metrics
+  it("displays the correct metrics for high availability level", () => {
     render(
       <AvailabilityImpactWidget
-        availabilityLevel="Moderate"
-        integrityLevel="None"
-        confidentialityLevel="None"
-        options={customOptions}
+        availabilityLevel={"High" as SecurityLevel}
+        options={TEST_OPTIONS}
       />
     );
 
-    // Check for custom content
-    expect(screen.getByText("Custom description")).toBeInTheDocument();
-    expect(screen.getByText("Custom business impact")).toBeInTheDocument();
-    expect(screen.getByText("Custom uptime")).toBeInTheDocument();
-    expect(screen.getByText("Custom MTTR")).toBeInTheDocument();
-    expect(screen.getByText("Custom RTO")).toBeInTheDocument();
-    expect(screen.getByText("Custom RPO")).toBeInTheDocument();
-    expect(screen.getByText("Custom recommendation 1")).toBeInTheDocument();
+    expect(screen.getByText(/99.9%/)).toBeInTheDocument();
+    expect(screen.getByText(/Minutes/)).toBeInTheDocument();
+    expect(screen.getByText(/Test high description/)).toBeInTheDocument();
+  });
+
+  // Test recommendations rendering
+  it("displays recommendations properly", () => {
+    render(
+      <AvailabilityImpactWidget
+        availabilityLevel={"High" as SecurityLevel}
+        options={TEST_OPTIONS}
+      />
+    );
+
+    expect(screen.getByText("Recommendations")).toBeInTheDocument();
+    expect(screen.getByText("Test high rec 1")).toBeInTheDocument();
+    expect(screen.getByText("Test high rec 2")).toBeInTheDocument();
   });
 
   // Test with custom testId
-  it("renders with custom testId", () => {
+  it("applies custom testId correctly", () => {
     const testId = "custom-availability-widget";
     render(
       <AvailabilityImpactWidget
@@ -129,10 +132,10 @@ describe("AvailabilityImpactWidget", () => {
 
   // Test with level that doesn't exist in options
   it("handles unknown level gracefully", () => {
-    // @ts-ignore - intentionally testing with invalid level
+    // Using as any to bypass type checking, as we're intentionally testing invalid input
     render(
       <AvailabilityImpactWidget
-        availabilityLevel="Unknown"
+        availabilityLevel={"Unknown" as any as SecurityLevel}
         integrityLevel="None"
         confidentialityLevel="None"
         options={TEST_OPTIONS}
