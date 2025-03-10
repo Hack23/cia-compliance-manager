@@ -1,13 +1,16 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import ciaContentService, {
   createCIAContentService,
+  CIADataProvider,
+} from "./ciaContentService";
+import { SecurityLevel } from "../types/cia";
+import * as useCIAOptions from "../hooks/useCIAOptions";
+import {
   BusinessImpactDetails,
   TechnicalImplementationDetails,
   CIAComponentType,
   ROIMetrics,
-} from "./ciaContentService";
-import { SecurityLevel } from "../types/cia";
-import * as useCIAOptions from "../hooks/useCIAOptions";
+} from "../types/cia-services";
 
 // Mock the useCIAOptions imports
 vi.mock("../hooks/useCIAOptions", () => {
@@ -112,6 +115,16 @@ vi.mock("../hooks/useCIAOptions", () => {
 });
 
 describe("ciaContentService", () => {
+  // Define the mockDataProvider at the top level
+  const mockDataProvider: CIADataProvider = {
+    availabilityOptions: {},
+    integrityOptions: {},
+    confidentialityOptions: {},
+    roiEstimates: {},
+    getDefaultSecurityIcon: (level: SecurityLevel) => "⚠️",
+    getDefaultValuePoints: (level: SecurityLevel) => ["Test value point"],
+  };
+
   describe("Default export instance", () => {
     it("should export a default instance", () => {
       expect(ciaContentService).toBeDefined();
@@ -122,13 +135,6 @@ describe("ciaContentService", () => {
 
   describe("createCIAContentService", () => {
     it("should create a service instance with custom data provider", () => {
-      const mockDataProvider = {
-        availabilityOptions: {},
-        integrityOptions: {},
-        confidentialityOptions: {},
-        roiEstimates: {},
-      };
-
       const service = createCIAContentService(mockDataProvider);
       expect(service).toBeDefined();
       expect(typeof service.getComponentDetails).toBe("function");
@@ -312,5 +318,11 @@ describe("ciaContentService", () => {
       expect(result.isSmallSolution).toBe(true);
       expect(result.roi).toBeTruthy();
     });
+  });
+
+  test("should handle invalid component gracefully", () => {
+    const service = createCIAContentService(mockDataProvider);
+    const result = service.getDetailedDescription("invalid" as any, "Low");
+    expect(result).toContain("Invalid component");
   });
 });

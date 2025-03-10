@@ -1,21 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { SecurityLevel, CIADetails } from "../types/cia";
-
-/**
- * Enhanced interface for ROI metrics
- */
-export interface ROIMetrics {
-  returnRate: string;
-  description: string;
-  potentialSavings: string;
-  breakEvenPeriod: string;
-  implementationCost?: string;
-}
-
-/**
- * Type for ROI estimates by security level
- */
-export type ROIEstimatesMap = Record<string, ROIMetrics>;
+import { ROIMetrics, ROIEstimatesMap } from "../types/cia-services";
 
 /**
  * Common interface for all CIA security options to ensure consistency
@@ -127,6 +112,7 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
         riskLevel: "Critical Risk",
       },
     },
+    securityIcon: "⚠️", // Add default icon
   },
   Low: {
     description:
@@ -162,6 +148,7 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
         meanTimeToRecover: "12-24 hours",
       },
     },
+    securityIcon: "🔒",
   },
   Moderate: {
     description:
@@ -198,6 +185,7 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
         meanTimeToRecover: "2-4 hours",
       },
     },
+    securityIcon: "🛡️",
   },
   High: {
     description:
@@ -240,6 +228,7 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
         riskLevel: "Low Risk",
       },
     },
+    securityIcon: "🛡️🛡️",
   },
   "Very High": {
     description:
@@ -286,6 +275,7 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
         complianceViolations: [],
       },
     },
+    securityIcon: "🛡️🛡️🛡️",
   },
 };
 

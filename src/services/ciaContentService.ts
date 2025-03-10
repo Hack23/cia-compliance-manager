@@ -3,12 +3,19 @@ import {
   integrityOptions,
   confidentialityOptions,
   ROI_ESTIMATES,
-  EnhancedCIADetails, // Add the missing import
+  EnhancedCIADetails,
 } from "../hooks/useCIAOptions";
 import { BusinessImpactDetail, CIADetails, SecurityLevel } from "../types/cia";
 import { RISK_LEVELS } from "../constants/riskConstants";
+import {
+  ROIMetrics,
+  ROIEstimatesMap,
+  TechnicalImplementationDetails,
+  BusinessImpactDetails,
+  CIAComponentType,
+} from "../types/cia-services";
 
-// Add these interface definitions at the top of the file
+// Interface definitions
 interface SecurityResource {
   title: string;
   description: string;
@@ -32,84 +39,27 @@ interface ComponentMetrics {
   metric?: string;
 }
 
-/**
- * Enhanced interface for technical implementation details
- */
-export interface TechnicalImplementationDetails {
-  description: string;
-  implementationSteps: string[];
-  effort: {
-    development: string;
-    maintenance: string;
-    expertise: string;
-  };
-  requirements?: string[];
-  technologies?: string[];
-  rto?: string; // Recovery Time Objective
-  rpo?: string; // Recovery Point Objective
-  mttr?: string; // Mean Time To Recovery
-}
-
-/**
- * Enhanced interface for business impact details
- */
-export interface BusinessImpactDetails {
-  summary: string;
-  financial: {
-    description: string;
-    riskLevel: string;
-    annualRevenueLoss?: string;
-  };
-  operational: {
-    description: string;
-    riskLevel: string;
-    meanTimeToRecover?: string;
-  };
-  reputational?: {
-    description: string;
-    riskLevel: string;
-  };
-  strategic?: {
-    description: string;
-    riskLevel: string;
-    competitiveAdvantage?: string;
-  };
-  regulatory?: {
-    description: string;
-    riskLevel: string;
-    complianceImpact?: string;
-  };
-}
-
-/**
- * Component type for CIA triad
- */
-export type CIAComponentType = "availability" | "integrity" | "confidentiality";
-
-/**
- * Type for ROI metrics with specific structure
- */
-export interface ROIMetrics {
-  returnRate: string;
-  description: string;
-  potentialSavings?: string;
-  breakEvenPeriod?: string;
-  implementationCost?: string;
-}
-
-/**
- * Type for ROI estimates by security level
- */
-export type ROIEstimatesMap = Record<string, ROIMetrics>;
+// Export the types - add these exports to maintain backward compatibility
+export type {
+  ROIMetrics,
+  ROIEstimatesMap,
+  TechnicalImplementationDetails,
+  BusinessImpactDetails,
+  CIAComponentType,
+} from "../types/cia-services";
 
 /**
  * Interface for CIA data source provider
  */
 export interface CIADataProvider {
-  availabilityOptions: Record<string, EnhancedCIADetails>; // Fix type
-  integrityOptions: Record<string, EnhancedCIADetails>; // Fix type
-  confidentialityOptions: Record<string, EnhancedCIADetails>; // Fix type
+  availabilityOptions: Record<string, EnhancedCIADetails>;
+  integrityOptions: Record<string, EnhancedCIADetails>;
+  confidentialityOptions: Record<string, EnhancedCIADetails>;
   roiEstimates: ROIEstimatesMap;
+
+  // Add additional utility function to reduce fallback logic
+  getDefaultSecurityIcon(level: SecurityLevel): string;
+  getDefaultValuePoints(level: SecurityLevel): string[];
 }
 
 /**
@@ -120,6 +70,43 @@ const defaultDataProvider: CIADataProvider = {
   integrityOptions,
   confidentialityOptions,
   roiEstimates: ROI_ESTIMATES as unknown as ROIEstimatesMap,
+  getDefaultSecurityIcon: (level: SecurityLevel) => {
+    switch (level) {
+      case "Very High":
+        return "🛡️🛡️🛡️";
+      case "High":
+        return "🛡️🛡️";
+      case "Moderate":
+        return "🛡️";
+      case "Low":
+        return "🔒";
+      default:
+        return "⚠️";
+    }
+  },
+  getDefaultValuePoints: (level: SecurityLevel) => {
+    const defaultPoints = ["Provides basic security foundation"];
+    switch (level) {
+      case "Very High":
+        return [
+          "Maximum security value with comprehensive protection",
+          "Enables business in highly regulated industries",
+          "Provides competitive advantage through superior security posture",
+          "Minimizes risk of data breaches and associated costs",
+          "Ensures regulatory compliance across major frameworks",
+        ];
+      case "High":
+        return [
+          "Strong security value with robust protection",
+          "Supports business in moderately regulated industries",
+          "Reduces risk of security incidents significantly",
+          "Protects sensitive data and critical operations",
+          "Meets requirements for most compliance frameworks",
+        ];
+      default:
+        return defaultPoints;
+    }
+  },
 };
 
 /**
@@ -1058,30 +1045,8 @@ export function createCIAContentService(
       return availDetails.valuePoints;
     }
 
-    // Default points as fallback
-    const defaultPoints = ["Provides basic security foundation"];
-
-    switch (level) {
-      case "Very High":
-        return [
-          "Maximum security value with comprehensive protection",
-          "Enables business in highly regulated industries",
-          "Provides competitive advantage through superior security posture",
-          "Minimizes risk of data breaches and associated costs",
-          "Ensures regulatory compliance across major frameworks",
-        ];
-      case "High":
-        return [
-          "Strong security value with robust protection",
-          "Supports business in moderately regulated industries",
-          "Reduces risk of security incidents significantly",
-          "Protects sensitive data and critical operations",
-          "Meets requirements for most compliance frameworks",
-        ];
-      // ...other cases...
-      default:
-        return defaultPoints;
-    }
+    // Use the provider's default implementation
+    return dataProvider.getDefaultValuePoints(level);
   }
 
   /**
@@ -1213,19 +1178,8 @@ export function createCIAContentService(
       return availDetails.securityIcon;
     }
 
-    // Fallback to hardcoded icons
-    switch (level) {
-      case "Very High":
-        return "🛡️🛡️🛡️";
-      case "High":
-        return "🛡️🛡️";
-      case "Moderate":
-        return "🛡️";
-      case "Low":
-        return "🔒";
-      default:
-        return "⚠️";
-    }
+    // Use the provider's default implementation
+    return dataProvider.getDefaultSecurityIcon(level);
   }
 
   /**
