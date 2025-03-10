@@ -7,6 +7,22 @@
 
 import React from "react";
 import { CIADetails } from "./cia";
+import { ReactNode } from "react";
+// Don't import BusinessImpactAnalysisWidgetProps to avoid conflict
+import type {
+  CostEstimationWidgetProps,
+  SecuritySummaryWidgetProps,
+  ValueCreationWidgetProps,
+  IntegrityImpactWidgetProps,
+  ConfidentialityImpactWidgetProps,
+  AvailabilityImpactWidgetProps,
+  SecurityResourcesWidgetProps,
+  WidgetBaseProps,
+  TechnicalDetailsWidgetProps,
+  ComplianceStatusWidgetProps,
+  SecurityLevelWidgetProps,
+  BusinessImpactAnalysisWidgetProps, // Import this from widgets.ts
+} from "./widgets";
 
 /**
  * Props for the KeyValuePair component that displays a key-value combination.
@@ -78,6 +94,8 @@ export interface WidgetContainerProps {
   testId?: string;
   /** Icon to display in the header */
   icon?: string;
+  loading?: boolean;
+  error?: Error | null;
 }
 
 /**
@@ -137,9 +155,9 @@ export interface DashboardWidgetProps {
   /** Widget title */
   title: string;
   /** Widget component */
-  component: React.ComponentType<any>;
+  component: React.ComponentType<Record<string, unknown>>;
   /** Widget props */
-  props?: Record<string, any>;
+  props?: Record<string, unknown>;
   /** Optional position */
   position?: number;
   /** Widget size */
@@ -185,22 +203,6 @@ export interface SelectionProps {
 }
 
 /**
- * Props for the BusinessImpactAnalysisWidget component that displays business impact analysis.
- * @category Widget Components
- * @interface BusinessImpactAnalysisWidgetProps
- */
-export interface BusinessImpactAnalysisWidgetProps {
-  /** Category (Availability, Integrity, Confidentiality) */
-  category: "Availability" | "Integrity" | "Confidentiality";
-  /** Security level */
-  level: string;
-  /** Security level options */
-  options?: Record<string, CIADetails>;
-  /** Optional test ID for component selection in tests */
-  testId?: string;
-}
-
-/**
  * Props for the CIAImpactSummaryWidget component that summarizes CIA impacts.
  * @category Widget Components
  * @interface CIAImpactSummaryWidgetProps
@@ -218,162 +220,17 @@ export interface CIAImpactSummaryWidgetProps {
   testId?: string;
 }
 
-/**
- * Props for the ComplianceStatusWidget component that displays compliance status.
- * @category Widget Components
- * @interface ComplianceStatusWidgetProps
- */
-export interface ComplianceStatusWidgetProps {
-  /** Overall security level */
-  securityLevel?: string;
-  /** Availability security level */
-  availabilityLevel?: string;
-  /** Integrity security level */
-  integrityLevel?: string;
-  /** Confidentiality security level */
-  confidentialityLevel?: string;
-  /** Backward compatibility for availability */
-  availability?: string;
-  /** Backward compatibility for integrity */
-  integrity?: string;
-  /** Backward compatibility for confidentiality */
-  confidentiality?: string;
-  /** Optional test ID for component selection in tests */
-  testId?: string;
-}
-
-/**
- * Props for the CostEstimationWidget component that displays cost estimates.
- * @category Widget Components
- * @interface CostEstimationWidgetProps
- */
-export interface CostEstimationWidgetProps {
-  /** Total capital expenditure */
-  totalCapex: number;
-  /** Total operational expenditure */
-  totalOpex: number;
-  /** Capital expenditure estimate string */
-  capexEstimate: string;
-  /** Operational expenditure estimate string */
-  opexEstimate: string;
-  /** Whether the solution is small */
-  isSmallSolution: boolean;
-  /** Return on investment */
-  roi?: string;
-  /** Implementation time */
-  implementationTime?: string;
-  /** Optional test ID for component selection in tests */
-  testId?: string;
-}
-
-/**
- * Props for the SecurityLevelWidget component that displays security levels.
- * @category Widget Components
- * @interface SecurityLevelWidgetProps
- */
-export interface SecurityLevelWidgetProps {
-  /** Security level */
-  securityLevel: string;
-  /** Availability level */
-  availabilityLevel?: string;
-  /** Integrity level */
-  integrityLevel?: string;
-  /** Confidentiality level */
-  confidentialityLevel?: string;
-  /** Optional CSS class name */
-  className?: string;
-  /** Optional test ID for component selection in tests */
-  testId?: string;
-}
-
-/**
- * Props for the TechnicalDetailsWidget component that displays technical implementation details.
- * @category Widget Components
- * @interface TechnicalDetailsWidgetProps
- */
-export interface TechnicalDetailsWidgetProps {
-  /** Availability security level */
-  availability?: string;
-  /** Integrity security level */
-  integrity?: string;
-  /** Confidentiality security level */
-  confidentiality?: string;
-  /** Availability options */
-  availabilityOptions?: Record<string, CIADetails>;
-  /** Integrity options */
-  integrityOptions?: Record<string, CIADetails>;
-  /** Confidentiality options */
-  confidentialityOptions?: Record<string, CIADetails>;
-  /** Optional CSS class name */
-  className?: string;
-  /** Optional test ID for component selection in tests */
-  testId?: string;
-}
-
-/**
- * Props for the IntegrityImpactWidget component
- * @interface IntegrityImpactWidgetProps
- */
-export interface IntegrityImpactWidgetProps {
-  level?: string;
-  options?: Record<string, CIADetails>;
-  testId?: string;
-}
-
-/**
- * Props for the ConfidentialityImpactWidget component
- * @interface ConfidentialityImpactWidgetProps
- */
-export interface ConfidentialityImpactWidgetProps {
-  level?: string;
-  options?: Record<string, CIADetails>;
-  testId?: string;
-}
-
-/**
- * Props for the AvailabilityImpactWidget component
- * @interface AvailabilityImpactWidgetProps
- */
-export interface AvailabilityImpactWidgetProps {
-  level?: string;
-  options?: Record<string, CIADetails>;
-  testId?: string;
-}
-
-/**
- * Props for the SecurityResourcesWidget component
- * @interface SecurityResourcesWidgetProps
- */
-export interface SecurityResourcesWidgetProps {
-  securityLevel?: string;
-  testId?: string;
-}
-
-/**
- * Props for the TechnicalDetailsWidget component
- * @interface TechnicalDetailsWidgetProps
- */
-export interface TechnicalDetailsWidgetProps {
-  availabilityLevel?: string;
-  integrityLevel?: string;
-  confidentialityLevel?: string;
-  availability?: string; // For backward compatibility
-  integrity?: string; // For backward compatibility
-  confidentiality?: string; // For backward compatibility
-  availabilityOptions?: Record<string, CIADetails>;
-  integrityOptions?: Record<string, CIADetails>;
-  confidentialityOptions?: Record<string, CIADetails>;
-  testId?: string;
-}
-
-/**
- * Props for the BusinessImpactAnalysisWidget component
- * @interface BusinessImpactAnalysisWidgetProps
- */
-export interface BusinessImpactAnalysisWidgetProps {
-  availability?: string;
-  integrity?: string;
-  confidentiality?: string;
-  securityLevel?: string;
-  testId?: string;
-}
+// Re-export all widget props for backward compatibility
+export type {
+  CostEstimationWidgetProps,
+  SecuritySummaryWidgetProps,
+  ValueCreationWidgetProps,
+  IntegrityImpactWidgetProps,
+  ConfidentialityImpactWidgetProps,
+  AvailabilityImpactWidgetProps,
+  SecurityResourcesWidgetProps,
+  TechnicalDetailsWidgetProps,
+  ComplianceStatusWidgetProps,
+  SecurityLevelWidgetProps,
+  BusinessImpactAnalysisWidgetProps, // Include in re-export
+};

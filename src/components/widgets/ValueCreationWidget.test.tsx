@@ -10,7 +10,14 @@ import {
 
 describe("ValueCreationWidget", () => {
   it("renders the widget with None level", () => {
-    render(<ValueCreationWidget securityLevel={SECURITY_LEVELS.NONE} />);
+    render(
+      <ValueCreationWidget
+        securityLevel={SECURITY_LEVELS.NONE}
+        availabilityLevel={SECURITY_LEVELS.NONE}
+        integrityLevel={SECURITY_LEVELS.NONE}
+        confidentialityLevel={SECURITY_LEVELS.NONE}
+      />
+    );
 
     expect(
       screen.getByTestId(WIDGET_TEST_IDS.VALUE_CREATION_TITLE)
@@ -22,7 +29,14 @@ describe("ValueCreationWidget", () => {
   });
 
   it("renders the widget with High level", () => {
-    render(<ValueCreationWidget securityLevel={SECURITY_LEVELS.HIGH} />);
+    render(
+      <ValueCreationWidget
+        securityLevel={SECURITY_LEVELS.HIGH}
+        availabilityLevel={SECURITY_LEVELS.HIGH}
+        integrityLevel={SECURITY_LEVELS.HIGH}
+        confidentialityLevel={SECURITY_LEVELS.HIGH}
+      />
+    );
 
     expect(
       screen.getByTestId(WIDGET_TEST_IDS.VALUE_CREATION_TITLE)
@@ -37,7 +51,14 @@ describe("ValueCreationWidget", () => {
   });
 
   it("calculates ROI correctly", () => {
-    render(<ValueCreationWidget securityLevel={SECURITY_LEVELS.NONE} />);
+    render(
+      <ValueCreationWidget
+        securityLevel={SECURITY_LEVELS.NONE}
+        availabilityLevel={SECURITY_LEVELS.NONE}
+        integrityLevel={SECURITY_LEVELS.NONE}
+        confidentialityLevel={SECURITY_LEVELS.NONE}
+      />
+    );
 
     const roiText =
       screen.getByTestId(WIDGET_TEST_IDS.ROI_VALUE).textContent || "";
@@ -54,7 +75,12 @@ describe("ValueCreationWidget", () => {
 
   it("displays different value propositions based on security levels", () => {
     const { rerender } = render(
-      <ValueCreationWidget securityLevel={SECURITY_LEVELS.LOW} />
+      <ValueCreationWidget
+        securityLevel={SECURITY_LEVELS.LOW}
+        availabilityLevel={SECURITY_LEVELS.LOW}
+        integrityLevel={SECURITY_LEVELS.LOW}
+        confidentialityLevel={SECURITY_LEVELS.LOW}
+      />
     );
 
     const lowValuePoints =
@@ -67,7 +93,14 @@ describe("ValueCreationWidget", () => {
       ).toBeInTheDocument();
     }
 
-    rerender(<ValueCreationWidget securityLevel={SECURITY_LEVELS.HIGH} />);
+    rerender(
+      <ValueCreationWidget
+        securityLevel={SECURITY_LEVELS.HIGH}
+        availabilityLevel={SECURITY_LEVELS.HIGH}
+        integrityLevel={SECURITY_LEVELS.HIGH}
+        confidentialityLevel={SECURITY_LEVELS.HIGH}
+      />
+    );
 
     const highValuePoints =
       VALUE_CREATION_POINTS[

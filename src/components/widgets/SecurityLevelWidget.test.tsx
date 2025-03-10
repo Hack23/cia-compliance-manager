@@ -2,104 +2,69 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { vi } from "vitest";
 import SecurityLevelWidget from "./SecurityLevelWidget";
-import {
-  SECURITY_LEVELS,
-  CIA_LABELS,
-  CIA_DESCRIPTIONS,
-} from "../../constants/appConstants";
-import { CIA_TEST_IDS } from "../../constants/testIds";
+import { SECURITY_LEVEL_TEST_IDS, CIA_TEST_IDS } from "../../constants/testIds";
 
-// Mock the SecurityLevelSelector component that's used internally
-vi.mock("../SecurityLevelSelector", () => ({
-  default: ({
-    initialAvailability,
-    initialIntegrity,
-    initialConfidentiality,
-    onAvailabilityChange,
-    onIntegrityChange,
-    onConfidentialityChange,
-    testId,
-  }: {
-    initialAvailability: string;
-    initialIntegrity: string;
-    initialConfidentiality: string;
-    onAvailabilityChange?: (value: string) => void;
-    onIntegrityChange?: (value: string) => void;
-    onConfidentialityChange?: (value: string) => void;
-    testId?: string;
-  }) => (
-    <div data-testid={testId || CIA_TEST_IDS.SECURITY_LEVEL_SELECTOR}>
-      <div>
-        <label htmlFor="availabilitySelect">Availability</label>
-        <select
-          data-testid={CIA_TEST_IDS.AVAILABILITY_SELECT}
-          value={initialAvailability}
-          onChange={(e) =>
-            onAvailabilityChange && onAvailabilityChange(e.target.value)
-          }
-        >
-          <option value="None">None</option>
-          <option value="Low">Low</option>
-          <option value="Moderate">Moderate</option>
-          <option value="High">High</option>
-          <option value="Very High">Very High</option>
-        </select>
-        <div data-testid={CIA_TEST_IDS.AVAILABILITY_DESCRIPTION}>
-          Availability Description
-        </div>
-      </div>
-      <div>
-        <label htmlFor="integritySelect">Integrity</label>
-        <select
-          data-testid={CIA_TEST_IDS.INTEGRITY_SELECT}
-          value={initialIntegrity}
-          onChange={(e) =>
-            onIntegrityChange && onIntegrityChange(e.target.value)
-          }
-        >
-          <option value="None">None</option>
-          <option value="Low">Low</option>
-          <option value="Moderate">Moderate</option>
-          <option value="High">High</option>
-          <option value="Very High">Very High</option>
-        </select>
-        <div data-testid={CIA_TEST_IDS.INTEGRITY_DESCRIPTION}>
-          Integrity Description
-        </div>
-      </div>
-      <div>
-        <label htmlFor="confidentialitySelect">Confidentiality</label>
-        <select
-          data-testid={CIA_TEST_IDS.CONFIDENTIALITY_SELECT}
-          value={initialConfidentiality}
-          onChange={(e) =>
-            onConfidentialityChange && onConfidentialityChange(e.target.value)
-          }
-        >
-          <option value="None">None</option>
-          <option value="Low">Low</option>
-          <option value="Moderate">Moderate</option>
-          <option value="High">High</option>
-          <option value="Very High">Very High</option>
-        </select>
-        <div data-testid={CIA_TEST_IDS.CONFIDENTIALITY_DESCRIPTION}>
-          Confidentiality Description
-        </div>
-      </div>
-      <button data-testid={CIA_TEST_IDS.AVAILABILITY_TECHNICAL_INFO_BUTTON}>
-        Info
-      </button>
-      <button data-testid={CIA_TEST_IDS.INTEGRITY_TECHNICAL_INFO_BUTTON}>
-        Info
-      </button>
-      <button data-testid={CIA_TEST_IDS.CONFIDENTIALITY_TECHNICAL_INFO_BUTTON}>
-        Info
-      </button>
-    </div>
-  ),
+// Mock the useCIAOptions hook
+vi.mock("../../hooks/useCIAOptions", () => ({
+  useCIAOptions: () => ({
+    availabilityOptions: {
+      None: { description: "No availability controls" },
+      Low: { description: "Basic availability controls", uptime: "95%" },
+      Moderate: {
+        description: "Standard availability controls",
+        uptime: "99%",
+      },
+      High: { description: "Advanced availability controls", uptime: "99.9%" },
+      "Very High": {
+        description: "Maximum availability controls",
+        uptime: "99.999%",
+      },
+    },
+    integrityOptions: {
+      None: { description: "No integrity controls" },
+      Low: {
+        description: "Basic integrity controls",
+        validationMethod: "Manual checks",
+      },
+      Moderate: {
+        description: "Standard integrity controls",
+        validationMethod: "Automated checks",
+      },
+      High: {
+        description: "Advanced integrity controls",
+        validationMethod: "Digital signatures",
+      },
+      "Very High": {
+        description: "Maximum integrity controls",
+        validationMethod: "Blockchain validation",
+      },
+    },
+    confidentialityOptions: {
+      None: { description: "No confidentiality controls" },
+      Low: {
+        description: "Basic confidentiality controls",
+        protectionMethod: "Access control",
+      },
+      Moderate: {
+        description: "Standard confidentiality controls",
+        protectionMethod: "Encryption",
+      },
+      High: {
+        description: "Advanced confidentiality controls",
+        protectionMethod: "Strong encryption",
+      },
+      "Very High": {
+        description: "Maximum confidentiality controls",
+        protectionMethod: "End-to-end encryption",
+      },
+    },
+  }),
 }));
 
 describe("SecurityLevelWidget", () => {
+  const mockOnAvailabilityChange = vi.fn();
+  const mockOnIntegrityChange = vi.fn();
+  const mockOnConfidentialityChange = vi.fn();
   const mockSetAvailability = vi.fn();
   const mockSetIntegrity = vi.fn();
   const mockSetConfidentiality = vi.fn();
@@ -108,92 +73,163 @@ describe("SecurityLevelWidget", () => {
     vi.clearAllMocks();
   });
 
-  it("renders all security level components", () => {
-    render(
-      <SecurityLevelWidget
-        availability="None"
-        integrity="None"
-        confidentiality="None"
-        setAvailability={mockSetAvailability}
-        setIntegrity={mockSetIntegrity}
-        setConfidentiality={mockSetConfidentiality}
-      />
-    );
+  it("renders with default values", () => {
+    render(<SecurityLevelWidget />);
 
+    // Verify the widget renders
     expect(
-      screen.getByTestId(CIA_TEST_IDS.AVAILABILITY_SELECT)
+      screen.getByTestId(SECURITY_LEVEL_TEST_IDS.SECURITY_LEVEL_SELECTOR)
     ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(CIA_TEST_IDS.INTEGRITY_SELECT)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(CIA_TEST_IDS.CONFIDENTIALITY_SELECT)
-    ).toBeInTheDocument();
+
+    // Check default selection values
+    expect(screen.getByTestId(CIA_TEST_IDS.AVAILABILITY_SELECT)).toHaveValue(
+      "None"
+    );
+    expect(screen.getByTestId(CIA_TEST_IDS.INTEGRITY_SELECT)).toHaveValue(
+      "None"
+    );
+    expect(screen.getByTestId(CIA_TEST_IDS.CONFIDENTIALITY_SELECT)).toHaveValue(
+      "None"
+    );
   });
 
-  it("selects have default values", () => {
+  it("renders with custom initial values", () => {
     render(
       <SecurityLevelWidget
-        availability="Low"
-        integrity="Moderate"
-        confidentiality="High"
-        setAvailability={mockSetAvailability}
-        setIntegrity={mockSetIntegrity}
-        setConfidentiality={mockSetConfidentiality}
+        availabilityLevel="High"
+        integrityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
+    // Check initial selection values
     expect(screen.getByTestId(CIA_TEST_IDS.AVAILABILITY_SELECT)).toHaveValue(
-      "Low"
+      "High"
     );
     expect(screen.getByTestId(CIA_TEST_IDS.INTEGRITY_SELECT)).toHaveValue(
       "Moderate"
     );
     expect(screen.getByTestId(CIA_TEST_IDS.CONFIDENTIALITY_SELECT)).toHaveValue(
+      "Low"
+    );
+  });
+
+  it("calls onChange handlers when values are changed", () => {
+    render(
+      <SecurityLevelWidget
+        onAvailabilityChange={mockOnAvailabilityChange}
+        onIntegrityChange={mockOnIntegrityChange}
+        onConfidentialityChange={mockOnConfidentialityChange}
+      />
+    );
+
+    // Change availability level
+    fireEvent.change(screen.getByTestId(CIA_TEST_IDS.AVAILABILITY_SELECT), {
+      target: { value: "High" },
+    });
+    expect(mockOnAvailabilityChange).toHaveBeenCalledWith("High");
+
+    // Change integrity level
+    fireEvent.change(screen.getByTestId(CIA_TEST_IDS.INTEGRITY_SELECT), {
+      target: { value: "Moderate" },
+    });
+    expect(mockOnIntegrityChange).toHaveBeenCalledWith("Moderate");
+
+    // Change confidentiality level
+    fireEvent.change(screen.getByTestId(CIA_TEST_IDS.CONFIDENTIALITY_SELECT), {
+      target: { value: "Low" },
+    });
+    expect(mockOnConfidentialityChange).toHaveBeenCalledWith("Low");
+  });
+
+  it("displays security level summary", () => {
+    render(
+      <SecurityLevelWidget
+        availabilityLevel="High"
+        integrityLevel="Moderate"
+        confidentialityLevel="Low"
+      />
+    );
+
+    // Check if summary elements exist and show correct values
+    expect(screen.getByTestId("availability-summary")).toHaveTextContent(
       "High"
     );
+    expect(screen.getByTestId("integrity-summary")).toHaveTextContent(
+      "Moderate"
+    );
+    expect(screen.getByTestId("confidentiality-summary")).toHaveTextContent(
+      "Low"
+    );
   });
 
-  it("handles selection changes", () => {
+  it("displays loading state when loading is true", () => {
+    render(<SecurityLevelWidget loading={true} />);
+
+    // Check if loading indicator is shown
+    expect(screen.getByTestId("loading-indicator")).toBeInTheDocument();
+
+    // The security level selector should not be rendered
+    expect(
+      screen.queryByTestId(SECURITY_LEVEL_TEST_IDS.SECURITY_LEVEL_SELECTOR)
+    ).not.toBeInTheDocument();
+  });
+
+  it("shows error message when error is provided", () => {
+    const testError = new Error("Test error message");
+    render(<SecurityLevelWidget error={testError} />);
+
+    // Check if error message is displayed
+    expect(screen.getByText("Test error message")).toBeInTheDocument();
+
+    // The security level selector should not be rendered
+    expect(
+      screen.queryByTestId(SECURITY_LEVEL_TEST_IDS.SECURITY_LEVEL_SELECTOR)
+    ).not.toBeInTheDocument();
+  });
+
+  it("calls setState handlers when values are changed", () => {
     render(
       <SecurityLevelWidget
-        availability="None"
-        integrity="None"
-        confidentiality="None"
         setAvailability={mockSetAvailability}
         setIntegrity={mockSetIntegrity}
         setConfidentiality={mockSetConfidentiality}
       />
     );
 
-    fireEvent.change(screen.getByTestId(CIA_TEST_IDS.CONFIDENTIALITY_SELECT), {
-      target: { value: SECURITY_LEVELS.HIGH },
+    // Change availability level
+    fireEvent.change(screen.getByTestId(CIA_TEST_IDS.AVAILABILITY_SELECT), {
+      target: { value: "High" },
     });
-    expect(mockSetConfidentiality).toHaveBeenCalledWith(SECURITY_LEVELS.HIGH);
+    expect(mockSetAvailability).toHaveBeenCalledWith("High");
+
+    // Change integrity level
+    fireEvent.change(screen.getByTestId(CIA_TEST_IDS.INTEGRITY_SELECT), {
+      target: { value: "Moderate" },
+    });
+    expect(mockSetIntegrity).toHaveBeenCalledWith("Moderate");
+
+    // Change confidentiality level
+    fireEvent.change(screen.getByTestId(CIA_TEST_IDS.CONFIDENTIALITY_SELECT), {
+      target: { value: "Low" },
+    });
+    expect(mockSetConfidentiality).toHaveBeenCalledWith("Low");
   });
 
-  // Remaining tests still work with our mock
-
-  it("displays correct options and values", () => {
+  it("calls both regular and setState handlers when both are provided", () => {
     render(
       <SecurityLevelWidget
-        availability="None"
-        integrity="None"
-        confidentiality="None"
+        onAvailabilityChange={mockOnAvailabilityChange}
         setAvailability={mockSetAvailability}
-        setIntegrity={mockSetIntegrity}
-        setConfidentiality={mockSetConfidentiality}
       />
     );
 
-    const availabilitySelect = screen.getByTestId(
-      CIA_TEST_IDS.AVAILABILITY_SELECT
-    );
-    const allOptions = availabilitySelect.querySelectorAll("option");
-    expect(allOptions.length).toBe(5); // None, Low, Moderate, High, Very High
-    expect(allOptions[0]?.textContent).toBe("None");
-    expect(allOptions[1]?.textContent).toBe("Low");
+    // Change availability level
+    fireEvent.change(screen.getByTestId(CIA_TEST_IDS.AVAILABILITY_SELECT), {
+      target: { value: "High" },
+    });
+    
+    expect(mockOnAvailabilityChange).toHaveBeenCalledWith("High");
+    expect(mockSetAvailability).toHaveBeenCalledWith("High");
   });
-
-  // ... other tests ...
 });

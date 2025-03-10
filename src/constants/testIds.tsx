@@ -368,6 +368,88 @@ export const WIDGET_REGISTRY_TEST_IDS = {
   WIDGET_PREFIX: "widget-",
 };
 
+// Add these missing constants to the file with other test IDs
+
+export const AVAILABILITY_IMPACT_TEST_IDS = {
+  AVAILABILITY_IMPACT_PREFIX: "widget-availability-impact",
+  AVAILABILITY_IMPACT_TITLE: "availability-impact-title",
+  AVAILABILITY_IMPACT_DESCRIPTION: "availability-impact-description",
+  AVAILABILITY_IMPACT_BUSINESS_IMPACT: "availability-impact-business-impact",
+  AVAILABILITY_IMPACT_VALUE: "availability-impact-value",
+  AVAILABILITY_IMPACT_UPTIME: "availability-impact-uptime",
+  AVAILABILITY_IMPACT_MTTR: "availability-impact-mttr",
+  AVAILABILITY_IMPACT_RTO: "availability-impact-rto",
+  AVAILABILITY_IMPACT_RPO: "availability-impact-rpo",
+  AVAILABILITY_IMPACT_RECOMMENDATIONS: "availability-impact-recommendations",
+  AVAILABILITY_IMPACT_BUSINESS_PERSPECTIVE:
+    "availability-impact-business-perspective",
+};
+
+export const CONFIDENTIALITY_IMPACT_TEST_IDS = {
+  CONFIDENTIALITY_IMPACT_PREFIX: "confidentiality-impact",
+  CONFIDENTIALITY_IMPACT_DESCRIPTION: "confidentiality-impact-description",
+  CONFIDENTIALITY_IMPACT_VALUE: "confidentiality-impact-value",
+};
+
+export const INTEGRITY_IMPACT_TEST_IDS = {
+  INTEGRITY_IMPACT_PREFIX: "integrity-impact",
+  INTEGRITY_IMPACT_DESCRIPTION: "integrity-impact-description",
+  INTEGRITY_IMPACT_VALUE: "integrity-impact-value",
+};
+
+export const SECURITY_SUMMARY_TEST_IDS = {
+  SECURITY_SUMMARY_PREFIX: "security-summary",
+  SECURITY_ICON: "security-icon",
+  OVERALL_LEVEL: "overall-level",
+  AVAILABILITY_LEVEL: "availability-level",
+  INTEGRITY_LEVEL: "integrity-level",
+  CONFIDENTIALITY_LEVEL: "confidentiality-level",
+  IMPLICATIONS: "implications",
+  TECHNICAL_SECTION_TOGGLE: "technical-section-toggle",
+  TECHNICAL_DETAILS_SECTION: "technical-details-section",
+  BUSINESS_IMPACT_TOGGLE: "business-impact-toggle",
+  BUSINESS_IMPACT_SECTION: "business-impact-section",
+  METRICS_TOGGLE: "metrics-toggle",
+  METRICS_SECTION: "metrics-section",
+  TECHNICAL_IMPLEMENTATION_DETAILS: "technical-implementation-details",
+  AVAILABILITY_TECH_HEADING: "availability-tech-heading",
+  INTEGRITY_TECH_HEADING: "integrity-tech-heading",
+  CONFIDENTIALITY_TECH_HEADING: "confidentiality-tech-heading",
+  SECURITY_RECOMMENDATION: "security-recommendation",
+};
+
+export const TECHNICAL_DETAILS_TEST_IDS = {
+  TECHNICAL_DETAILS_PREFIX: "technical-details",
+  TECHNICAL_DETAILS_WIDGET: "technical-details-widget", // Add this line
+  AVAILABILITY_SECTION: "technical-details-availability",
+  INTEGRITY_SECTION: "technical-details-integrity",
+  CONFIDENTIALITY_SECTION: "technical-details-confidentiality",
+};
+
+export const COMPLIANCE_STATUS_TEST_IDS = {
+  COMPLIANCE_STATUS_PREFIX: "compliance-status",
+  COMPLIANCE_STATUS_BADGE: "compliance-status-badge",
+  COMPLIANCE_FRAMEWORK_ITEM: "compliance-framework-item",
+  COMPLIANCE_REQUIREMENTS_LIST: "compliance-requirements-list",
+};
+
+export const SECURITY_RESOURCES_TEST_IDS = {
+  SECURITY_RESOURCES_PREFIX: "security-resources",
+  RESOURCE_ITEM: "security-resource-item",
+  RESOURCE_LIST: "security-resources-list",
+};
+
+export const SECURITY_LEVEL_TEST_IDS = {
+  SECURITY_LEVEL_PREFIX: "security-level",
+  SECURITY_LEVEL_SELECTOR: "security-level-selector",
+};
+
+export const VALUE_CREATION_TEST_IDS = {
+  VALUE_CREATION_PREFIX: "value-creation",
+  VALUE_POINT: "value-point",
+  VALUE_POINTS_LIST: "value-points-list",
+};
+
 /**
  * Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
  */
@@ -423,6 +505,15 @@ export const TEST_IDS = {
   ...APP_TEST_IDS,
   ...COMMON_COMPONENT_TEST_IDS,
   ...WIDGET_REGISTRY_TEST_IDS,
+  ...AVAILABILITY_IMPACT_TEST_IDS,
+  ...CONFIDENTIALITY_IMPACT_TEST_IDS,
+  ...INTEGRITY_IMPACT_TEST_IDS,
+  ...SECURITY_SUMMARY_TEST_IDS,
+  ...TECHNICAL_DETAILS_TEST_IDS,
+  ...COMPLIANCE_STATUS_TEST_IDS,
+  ...SECURITY_RESOURCES_TEST_IDS,
+  ...SECURITY_LEVEL_TEST_IDS,
+  ...VALUE_CREATION_TEST_IDS,
   createDynamicTestId,
   getTestId,
   TEST_HELPERS,

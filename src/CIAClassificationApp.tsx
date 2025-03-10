@@ -22,6 +22,7 @@ import SecurityResourcesWidget from "./components/widgets/SecurityResourcesWidge
 import TechnicalDetailsWidget from "./components/widgets/TechnicalDetailsWidget";
 import BusinessImpactAnalysisWidget from "./components/widgets/BusinessImpactAnalysisWidget";
 import { SecurityLevel } from "./types/cia";
+import { typeAdapters } from "./types/widgets";
 
 /**
  * Main component for the CIA Classification App
@@ -94,21 +95,15 @@ const CIAClassificationApp: React.FC = () => {
   }, []);
 
   // Calculate total costs
-  const totalCapex = useMemo(() => {
-    return (
-      (availabilityOptions[availability]?.capex || 0) +
-      (integrityOptions[integrity]?.capex || 0) +
-      (confidentialityOptions[confidentiality]?.capex || 0)
-    );
-  }, [availability, integrity, confidentiality]);
+  const totalCapex =
+    (availabilityOptions[availability as SecurityLevel]?.capex || 0) +
+    (integrityOptions[integrity as SecurityLevel]?.capex || 0) +
+    (confidentialityOptions[confidentiality as SecurityLevel]?.capex || 0);
 
-  const totalOpex = useMemo(() => {
-    return (
-      (availabilityOptions[availability]?.opex || 0) +
-      (integrityOptions[integrity]?.opex || 0) +
-      (confidentialityOptions[confidentiality]?.opex || 0)
-    );
-  }, [availability, integrity, confidentiality]);
+  const totalOpex =
+    (availabilityOptions[availability as SecurityLevel]?.opex || 0) +
+    (integrityOptions[integrity as SecurityLevel]?.opex || 0) +
+    (confidentialityOptions[confidentiality as SecurityLevel]?.opex || 0);
 
   // Calculate overall security level
   const overallSecurityLevel = useMemo(() => {
@@ -153,6 +148,30 @@ const CIAClassificationApp: React.FC = () => {
   // Prepare dynamic cost estimates based on solution size
   const capexEstimate = isSmallSolution ? "$5,000" : "$50,000";
   const opexEstimate = isSmallSolution ? "$500" : "$50,000";
+
+  // Prepare adapter functions for options
+  const adaptedIntegrityOptions = Object.entries(integrityOptions).reduce(
+    (acc, [key, value]) => {
+      acc[key] = typeAdapters.toIntegrityDetail(value);
+      return acc;
+    },
+    {} as Record<string, any>
+  );
+
+  const adaptedConfidentialityOptions = Object.entries(
+    confidentialityOptions
+  ).reduce((acc, [key, value]) => {
+    acc[key] = typeAdapters.toConfidentialityDetail(value);
+    return acc;
+  }, {} as Record<string, any>);
+
+  const adaptedAvailabilityOptions = Object.entries(availabilityOptions).reduce(
+    (acc, [key, value]) => {
+      acc[key] = typeAdapters.toAvailabilityDetail(value);
+      return acc;
+    },
+    {} as Record<string, any>
+  );
 
   return (
     <div
@@ -209,9 +228,9 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-security-level-selection"
               >
                 <SecurityLevelWidget
-                  availability={availability}
-                  integrity={integrity}
-                  confidentiality={confidentiality}
+                  availabilityLevel={availability}
+                  integrityLevel={integrity}
+                  confidentialityLevel={confidentiality}
                   setAvailability={setAvailability}
                   setIntegrity={setIntegrity}
                   setConfidentiality={setConfidentiality}
@@ -225,9 +244,9 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-radar-chart"
               >
                 <RadarChart
-                  availability={availability}
-                  integrity={integrity}
-                  confidentiality={confidentiality}
+                  availabilityLevel={availability}
+                  integrityLevel={integrity}
+                  confidentialityLevel={confidentiality}
                 />
               </DashboardWidget>
 
@@ -238,10 +257,10 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-security-summary"
               >
                 <SecuritySummaryWidget
-                  securityLevel={overallSecurityLevel}
-                  availabilityLevel={availability}
-                  integrityLevel={integrity}
-                  confidentialityLevel={confidentiality}
+                  securityLevel={overallSecurityLevel as SecurityLevel}
+                  availabilityLevel={availability as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
                 />
               </DashboardWidget>
 
@@ -252,11 +271,9 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-cost-estimation"
               >
                 <CostEstimationWidget
-                  totalCapex={totalCapex}
-                  totalOpex={totalOpex}
-                  capexEstimate={capexEstimate}
-                  opexEstimate={opexEstimate}
-                  isSmallSolution={isSmallSolution}
+                  availabilityLevel={availability as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
                 />
               </DashboardWidget>
 
@@ -267,9 +284,9 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-compliance-status"
               >
                 <ComplianceStatusWidget
-                  availabilityLevel={availability}
-                  integrityLevel={integrity}
-                  confidentialityLevel={confidentiality}
+                  availabilityLevel={availability as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
                 />
               </DashboardWidget>
 
@@ -279,7 +296,12 @@ const CIAClassificationApp: React.FC = () => {
                 icon="VALUE_CREATION"
                 testId="widget-value-creation"
               >
-                <ValueCreationWidget securityLevel={overallSecurityLevel} />
+                <ValueCreationWidget
+                  securityLevel={overallSecurityLevel}
+                  availabilityLevel={availability}
+                  integrityLevel={integrity}
+                  confidentialityLevel={confidentiality}
+                />
               </DashboardWidget>
 
               {/* Integrity Impact - New Widget */}
@@ -289,8 +311,9 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-integrity-impact-container"
               >
                 <IntegrityImpactWidget
-                  level={integrity}
-                  options={integrityOptions}
+                  integrityLevel={integrity as SecurityLevel}
+                  availabilityLevel={availability as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
                 />
               </DashboardWidget>
 
@@ -301,8 +324,9 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-confidentiality-impact-container"
               >
                 <ConfidentialityImpactWidget
-                  level={confidentiality}
-                  options={confidentialityOptions}
+                  confidentialityLevel={confidentiality as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  availabilityLevel={availability as SecurityLevel}
                 />
               </DashboardWidget>
 
@@ -313,8 +337,24 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-availability-impact-container"
               >
                 <AvailabilityImpactWidget
-                  level={availability}
-                  options={availabilityOptions}
+                  availabilityLevel={availability}
+                  integrityLevel={integrity}
+                  confidentialityLevel={confidentiality}
+                  options={adaptedAvailabilityOptions}
+                />
+              </DashboardWidget>
+
+              {/* Security Resources - New Widget */}
+              <DashboardWidget
+                title={WIDGET_TITLES.SECURITY_RESOURCES}
+                icon="SECURITY_RESOURCES"
+                testId="widget-security-resources-container"
+              >
+                <SecurityResourcesWidget
+                  securityLevel={overallSecurityLevel as SecurityLevel}
+                  availabilityLevel={availability as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
                 />
               </DashboardWidget>
 
@@ -328,9 +368,6 @@ const CIAClassificationApp: React.FC = () => {
                   availabilityLevel={availability}
                   integrityLevel={integrity}
                   confidentialityLevel={confidentiality}
-                  availabilityOptions={availabilityOptions}
-                  integrityOptions={integrityOptions}
-                  confidentialityOptions={confidentialityOptions}
                 />
               </DashboardWidget>
 
@@ -341,20 +378,11 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-business-impact-container"
               >
                 <BusinessImpactAnalysisWidget
-                  availability={availability}
-                  integrity={integrity}
-                  confidentiality={confidentiality}
+                  availabilityLevel={availability as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
                   securityLevel={overallSecurityLevel}
                 />
-              </DashboardWidget>
-
-              {/* Security Resources - New Widget */}
-              <DashboardWidget
-                title={WIDGET_TITLES.SECURITY_RESOURCES}
-                icon="SECURITY_RESOURCES"
-                testId="widget-security-resources-container"
-              >
-                <SecurityResourcesWidget securityLevel={overallSecurityLevel} />
               </DashboardWidget>
             </Dashboard>
           </div>

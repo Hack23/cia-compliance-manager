@@ -56,7 +56,7 @@ export interface BusinessImpactDetail {
     description: string;
     value: string;
   };
-  [key: string]: any; // Allow for flexible additional properties
+  [key: string]: unknown; // Allow for flexible additional properties with stricter type
 }
 
 export interface BusinessImpactDetails {
@@ -71,22 +71,17 @@ export interface BusinessImpactDetails {
 
 // Base interface for CIA details
 export interface CIADetails {
-  description: string;
-  impact: string;
-  technical: string;
-  businessImpact: string;
-  capex: number;
-  opex: number;
-  bg?: string;
-  text?: string;
-  recommendations?: string[];
-  // Optional fields that might be present in some implementations
-  businessImpactDetails?: BusinessImpactDetails; // Use the BusinessImpactDetails interface
-  uptime?: string;
-  validationMethod?: string;
+  description?: string;
+  businessImpact?: string;
+  capex?: number;
+  opex?: number;
+  technical?: string;
   protectionMethod?: string;
-  implementationSteps?: string[];
-  complexity?: string;
+  validationMethod?: string;
+  uptime?: string;
+  recommendations?: string[];
+  // Allow additional properties with an index signature
+  [key: string]: any;
 }
 
 // Types for CIA ratings
@@ -323,3 +318,9 @@ export function calculateRiskLevel(
       return RISK_LEVELS.UNKNOWN;
   }
 }
+
+/**
+ * Component type for CIA triad
+ * @category CIA Model
+ */
+export type CIAComponentType = "availability" | "integrity" | "confidentiality";

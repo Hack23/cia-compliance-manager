@@ -9,11 +9,26 @@ import {
 import { ensureArray } from "../../utils/typeGuards";
 import ValueDisplay from "../common/ValueDisplay";
 import KeyValuePair from "../common/KeyValuePair";
-import { WIDGET_TEST_IDS, createDynamicTestId } from "../../constants/testIds"; // Import test ID constants
-import { ValueCreationWidgetProps } from "../../types/widgets";
+import {
+  WIDGET_TEST_IDS,
+  createDynamicTestId,
+  VALUE_CREATION_TEST_IDS,
+} from "../../constants/testIds";
+import { WidgetBaseProps } from "../../types/widgets";
+
+export interface ValueCreationWidgetProps extends WidgetBaseProps {
+  securityLevel: string;
+  availabilityLevel: string;
+  integrityLevel: string;
+  confidentialityLevel: string;
+}
 
 const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
-  securityLevel,
+  securityLevel = SECURITY_LEVELS.NONE,
+  availabilityLevel,
+  integrityLevel,
+  confidentialityLevel,
+  testId = VALUE_CREATION_TEST_IDS.VALUE_CREATION_PREFIX,
 }) => {
   // Create a mapping to simplify the getValuePoints function
   const getValuePoints = () => {
@@ -52,19 +67,35 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   const getROIEstimate = () => {
     switch (securityLevel) {
       case SECURITY_LEVELS.VERY_HIGH:
-        return ROI_ESTIMATES.VERY_HIGH;
+        return {
+          value: "5x+",
+          description: "Maximum return with comprehensive security controls",
+        };
       case SECURITY_LEVELS.HIGH:
-        return ROI_ESTIMATES.HIGH;
+        return {
+          value: "3-5x",
+          description: "Strong return with robust security implementation",
+        };
       case SECURITY_LEVELS.MODERATE:
-        return ROI_ESTIMATES.MODERATE;
+        return {
+          value: "2-3x",
+          description: "Good return with balanced security approach",
+        };
       case SECURITY_LEVELS.LOW:
-        return ROI_ESTIMATES.LOW;
+        return {
+          value: "1-2x",
+          description: "Basic return with minimal security investment",
+        };
       default:
-        return ROI_ESTIMATES.NONE;
+        return {
+          value: "Negative (high risk of losses)",
+          description: "No return without security investment",
+        };
     }
   };
 
-  const roiEstimate = getROIEstimate();
+  // Get ROI data from calculation
+  const roiData = getROIEstimate();
 
   // Color styling based on level
   const getLevelVariant = () => {
@@ -100,11 +131,13 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
   return (
     <div
-      className="space-y-4"
+      className="space-y-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm"
       data-testid={WIDGET_TEST_IDS.VALUE_CREATION_CONTENT}
+      aria-labelledby="value-creation-title"
     >
       <div className="flex items-center justify-between">
         <h3
+          id="value-creation-title"
           className={`text-lg font-bold ${getLevelColorClass()}`}
           data-testid={WIDGET_TEST_IDS.VALUE_CREATION_TITLE}
         >
@@ -118,14 +151,20 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         </p>
       </div>
 
-      <ul className="space-y-2" data-testid={WIDGET_TEST_IDS.VALUE_POINTS_LIST}>
+      <ul
+        className="space-y-2"
+        data-testid={WIDGET_TEST_IDS.VALUE_POINTS_LIST}
+        aria-label="Value creation points"
+      >
         {ensureArray(valuePoints).map((point, index) => (
           <li
             key={index}
             className="flex items-start"
             data-testid={createDynamicTestId.valuePoint(index)}
           >
-            <span className={`mr-2 ${getLevelColorClass()}`}>•</span>
+            <span className={`mr-2 ${getLevelColorClass()}`} aria-hidden="true">
+              •
+            </span>
             <span className="font-medium text-sm text-gray-700 dark:text-gray-300">
               {point}
             </span>
@@ -133,21 +172,51 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         ))}
       </ul>
 
-      <div className="border-t pt-2 mt-4">
+      <div
+        className="border-t pt-4 mt-4 bg-gray-50 dark:bg-gray-700 p-3 rounded-lg"
+        aria-labelledby="roi-section-title"
+      >
+        <h4 id="roi-section-title" className="text-sm font-medium mb-2">
+          Return on Investment Analysis
+        </h4>
         <KeyValuePair
           label="Return on Investment:"
           value={
             <ValueDisplay
-              value={roiEstimate}
+              value={roiData.value}
               variant={getLevelVariant()}
               testId={WIDGET_TEST_IDS.ROI_VALUE}
             />
           }
           testId={WIDGET_TEST_IDS.ROI_SECTION}
         />
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+          {roiData.description}
+        </p>
+
+        <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+          <h5 className="font-medium mb-1">Implementation Considerations</h5>
+          <p>{getImplementationConsiderations(securityLevel)}</p>
+        </div>
       </div>
     </div>
   );
 };
+
+// Add a new helper function
+function getImplementationConsiderations(level: string): string {
+  switch (level) {
+    case SECURITY_LEVELS.VERY_HIGH:
+      return "Implementation requires significant upfront investment but offers maximum long-term value through comprehensive risk reduction and regulatory compliance.";
+    case SECURITY_LEVELS.HIGH:
+      return "Balanced approach with substantial security benefits and reasonable implementation costs for most organizations with sensitive data or operations.";
+    case SECURITY_LEVELS.MODERATE:
+      return "Cost-effective implementation that provides standard security capabilities suitable for most business applications and moderate risk environments.";
+    case SECURITY_LEVELS.LOW:
+      return "Minimal implementation effort focused on essential security controls, appropriate for non-critical systems or limited budgets.";
+    default:
+      return "No security implementation considerations. Consider baseline security controls for any business system.";
+  }
+}
 
 export default ValueCreationWidget;
