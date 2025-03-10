@@ -91,25 +91,37 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
     technical:
       "No redundancy, backup systems, monitoring, or disaster recovery procedures are implemented.",
     businessImpact:
-      "Business operations completely stop during outages with significant revenue impact.",
+      "Business operations completely stop during outages with significant revenue impact and potential long-term customer loss.",
     capex: 0,
     opex: 0,
     bg: "#e74c3c",
     text: "#ffffff",
     recommendations: [
-      "Implement basic monitoring to detect outages",
-      "Create a simple backup process",
-      "Document manual recovery procedures",
+      "Implement basic monitoring to detect outages (e.g., simple uptime checks)",
+      "Create a simple backup process with regular verification",
+      "Document manual recovery procedures with clear responsibilities",
+      "Establish baseline uptime metrics to quantify current availability",
+      "Identify critical systems that need availability improvements first",
     ],
     uptime: "<90%",
     businessImpactDetails: {
       financialImpact: {
-        description: "Complete revenue loss during downtime periods",
+        description:
+          "Complete revenue loss during downtime periods with potential customer churn",
         riskLevel: "Critical Risk",
+        annualRevenueLoss: "10-20% of annual revenue potential",
       },
       operationalImpact: {
-        description: "Operations completely cease during outages",
+        description:
+          "Operations completely cease during outages with no recovery timeline predictability",
         riskLevel: "Critical Risk",
+        meanTimeToRecover: "Unpredictable (hours to days)",
+      },
+      regulatory: {
+        description:
+          "Likely violates basic service agreements and regulatory requirements",
+        riskLevel: "High Risk",
+        complianceViolations: ["SLAs", "Basic industry standards"],
       },
     },
     securityIcon: "⚠️", // Add default icon
