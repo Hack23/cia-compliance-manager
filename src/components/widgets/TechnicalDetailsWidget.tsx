@@ -3,12 +3,14 @@ import ciaContentService, {
   CIAComponentType,
 } from "../../services/ciaContentService";
 import { SecurityLevel } from "../../types/cia";
+import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
 
 // Define interface here instead of importing conflicting one
 export interface TechnicalDetailsWidgetProps {
-  availabilityLevel?: string;
-  integrityLevel?: string;
-  confidentialityLevel?: string;
+  // Modified to accept either SecurityLevel or string to fix type errors
+  availabilityLevel?: SecurityLevel | string;
+  integrityLevel?: SecurityLevel | string;
+  confidentialityLevel?: SecurityLevel | string;
   availabilityOptions?: Record<string, any>;
   integrityOptions?: Record<string, any>;
   confidentialityOptions?: Record<string, any>;
@@ -106,6 +108,11 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
           aria-selected={activeTab === "availability"}
           aria-controls="availability-tab-panel"
           id="availability-tab-button"
+          style={
+            activeTab === "availability"
+              ? { borderColor: CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY }
+              : undefined
+          }
         >
           Availability
         </button>
@@ -121,6 +128,11 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
           aria-selected={activeTab === "integrity"}
           aria-controls="integrity-tab-panel"
           id="integrity-tab-button"
+          style={
+            activeTab === "integrity"
+              ? { borderColor: CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY }
+              : undefined
+          }
         >
           Integrity
         </button>
@@ -136,6 +148,11 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
           aria-selected={activeTab === "confidentiality"}
           aria-controls="confidentiality-tab-panel"
           id="confidentiality-tab-button"
+          style={
+            activeTab === "confidentiality"
+              ? { borderColor: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY }
+              : undefined
+          }
         >
           Confidentiality
         </button>

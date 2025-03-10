@@ -393,6 +393,45 @@
   background-color: #6b21a8;
 }
 
+/* Security level color utilities */
+.bg-security-none {
+  background-color: var(--color-none);
+  color: var(--color-none-text);
+}
+
+.bg-security-low {
+  background-color: var(--color-low);
+  color: var(--color-low-text);
+}
+
+.bg-security-moderate {
+  background-color: var(--color-moderate);
+  color: var(--color-moderate-text);
+}
+
+.bg-security-high {
+  background-color: var(--color-high);
+  color: var(--color-high-text);
+}
+
+.bg-security-very-high {
+  background-color: var(--color-very-high);
+  color: var(--color-very-high-text);
+}
+
+/* CIA component color utilities */
+.color-confidentiality {
+  color: var(--color-confidentiality);
+}
+
+.color-integrity {
+  color: var(--color-integrity);
+}
+
+.color-availability {
+  color: var(--color-availability);
+}
+
 /* Text color utilities */
 .text-gray-300 {
   color: #d1d5db;

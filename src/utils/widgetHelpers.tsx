@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { SECURITY_LEVELS } from "../constants/appConstants";
 import { SECURITY_LEVEL_COLORS } from "../constants/colorConstants";
+import { SecurityLevel } from "../types/cia";
 
 /**
  * Types of security level severities for UI formatting
@@ -46,7 +47,7 @@ export function getSecurityLevelClass(level: string): string {
 
   switch (severity) {
     case "very-high":
-      return "text-blue-700 dark:text-blue-400 font-medium";
+      return "text-blue-700 dark:text-blue-400 font-medium"; // Changed from purple to blue for consistency
     case "high":
       return "text-green-700 dark:text-green-400 font-medium";
     case "moderate":
@@ -55,8 +56,32 @@ export function getSecurityLevelClass(level: string): string {
       return "text-orange-700 dark:text-orange-400 font-medium";
     case "none":
     default:
-      return "text-red-700 dark:text-red-400 font-medium";
+      return "text-red-700 dark:text-red-400 font-medium"; // Changed from gray to red for consistency
   }
+}
+
+/**
+ * Gets color hex values for a security level directly from constants
+ * @param level The security level string
+ * @returns Object with background and text colors
+ */
+export function getSecurityLevelColors(level: SecurityLevel): {
+  bg: string;
+  text: string;
+} {
+  const normalizedLevel = normalizeSecurityLevel(level) as SecurityLevel;
+  return {
+    bg:
+      SECURITY_LEVEL_COLORS.BACKGROUND[
+        normalizedLevel
+          .replace(/\s+/g, "_")
+          .toUpperCase() as keyof typeof SECURITY_LEVEL_COLORS.BACKGROUND
+      ] || SECURITY_LEVEL_COLORS.BACKGROUND.NONE,
+    text:
+      normalizedLevel === "None" || normalizedLevel === "Low"
+        ? "#ffffff"
+        : "#000000",
+  };
 }
 
 /**

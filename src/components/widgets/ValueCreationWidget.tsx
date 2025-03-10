@@ -14,6 +14,8 @@ import ciaContentService, {
   getImplementationConsiderations,
 } from "../../services/ciaContentService";
 import { SecurityLevel } from "../../types/cia";
+import { SECURITY_LEVEL_COLORS } from "../../constants/colorConstants";
+import { getSecurityLevelColors } from "../../utils/widgetHelpers";
 
 export interface ValueCreationWidgetProps extends WidgetBaseProps {
   securityLevel: string;
@@ -64,9 +66,9 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   const getLevelColorClass = () => {
     switch (securityLevel) {
       case SECURITY_LEVELS.VERY_HIGH:
-        return "text-green-600 dark:text-green-400";
+        return "text-blue-600 dark:text-blue-400"; // Changed to blue from green for consistency
       case SECURITY_LEVELS.HIGH:
-        return "text-blue-600 dark:text-blue-400";
+        return "text-green-600 dark:text-green-400";
       case SECURITY_LEVELS.MODERATE:
         return "text-yellow-600 dark:text-yellow-400";
       case SECURITY_LEVELS.LOW:
