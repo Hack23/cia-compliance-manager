@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import { SECURITY_LEVELS } from "../constants/appConstants";
+import { SECURITY_LEVEL_COLORS } from "../constants/colorConstants";
 
 /**
  * Types of security level severities for UI formatting
@@ -45,16 +46,16 @@ export function getSecurityLevelClass(level: string): string {
 
   switch (severity) {
     case "very-high":
-      return "text-purple-600 dark:text-purple-400 font-bold";
+      return "text-blue-700 dark:text-blue-400 font-medium";
     case "high":
-      return "text-green-600 dark:text-green-400 font-bold";
+      return "text-green-700 dark:text-green-400 font-medium";
     case "moderate":
-      return "text-blue-600 dark:text-blue-400";
+      return "text-yellow-700 dark:text-yellow-400 font-medium";
     case "low":
-      return "text-yellow-600 dark:text-yellow-400";
+      return "text-orange-700 dark:text-orange-400 font-medium";
     case "none":
     default:
-      return "text-gray-700 dark:text-gray-400";
+      return "text-red-700 dark:text-red-400 font-medium";
   }
 }
 

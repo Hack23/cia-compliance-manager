@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { SecurityLevel, CIADetails } from "../types/cia";
 import { ROIMetrics, ROIEstimatesMap } from "../types/cia-services";
+import { getSecurityLevelColorPair } from "../constants/colorConstants";
 
 /**
  * Common interface for all CIA security options to ensure consistency
@@ -94,8 +95,8 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Business operations completely stop during outages with significant revenue impact and potential long-term customer loss.",
     capex: 0,
     opex: 0,
-    bg: "#e74c3c",
-    text: "#ffffff",
+    bg: getSecurityLevelColorPair("None").bg,
+    text: getSecurityLevelColorPair("None").text,
     recommendations: [
       "Implement basic monitoring to detect outages (e.g., simple uptime checks)",
       "Create a simple backup process with regular verification",
@@ -135,8 +136,8 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Extended business disruptions during system failures with substantial recovery effort.",
     capex: 5,
     opex: 3,
-    bg: "#f39c12",
-    text: "#ffffff",
+    bg: getSecurityLevelColorPair("Low").bg,
+    text: getSecurityLevelColorPair("Low").text,
     recommendations: [
       "Implement scheduled backups",
       "Create basic monitoring alerts",
@@ -171,8 +172,8 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Business disruptions are limited to several hours with defined recovery processes.",
     capex: 15,
     opex: 10,
-    bg: "#f1c40f",
-    text: "#000000",
+    bg: getSecurityLevelColorPair("Moderate").bg,
+    text: getSecurityLevelColorPair("Moderate").text,
     recommendations: [
       "Implement redundancy for critical components",
       "Set up automated backup systems",
@@ -208,8 +209,8 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Business continuity maintained through most disruptions with minimal customer impact.",
     capex: 30,
     opex: 20,
-    bg: "#2ecc71",
-    text: "#000000",
+    bg: getSecurityLevelColorPair("High").bg,
+    text: getSecurityLevelColorPair("High").text,
     recommendations: [
       "Deploy N+1 redundancy for all critical systems",
       "Implement automated failover mechanisms",
@@ -251,8 +252,8 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Continuous business operations maintained through all but catastrophic failures.",
     capex: 60,
     opex: 40,
-    bg: "#3498db",
-    text: "#000000",
+    bg: getSecurityLevelColorPair("Very High").bg,
+    text: getSecurityLevelColorPair("Very High").text,
     recommendations: [
       "Implement N+2 redundancy for all system components",
       "Deploy multi-region active-active architecture",
@@ -302,8 +303,8 @@ const _integrityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "High risk of data corruption affecting business decisions and operations.",
     capex: 0,
     opex: 0,
-    bg: "#e74c3c",
-    text: "#ffffff",
+    bg: getSecurityLevelColorPair("None").bg,
+    text: getSecurityLevelColorPair("None").text,
     recommendations: [
       "Implement basic input validation",
       "Add application-level data checks",
@@ -329,8 +330,8 @@ const _integrityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Limited protection against data corruption with manual verification required.",
     capex: 5,
     opex: 3,
-    bg: "#f39c12",
-    text: "#ffffff",
+    bg: getSecurityLevelColorPair("Low").bg,
+    text: getSecurityLevelColorPair("Low").text,
     recommendations: [
       "Implement server-side validation",
       "Create basic data verification checks",
@@ -356,8 +357,8 @@ const _integrityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Most data corruption detected and correctable with audit trails.",
     capex: 15,
     opex: 10,
-    bg: "#f1c40f",
-    text: "#000000",
+    bg: getSecurityLevelColorPair("Moderate").bg,
+    text: getSecurityLevelColorPair("Moderate").text,
     recommendations: [
       "Implement comprehensive data validation",
       "Use database constraints and triggers",
@@ -387,8 +388,8 @@ const _integrityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Strong data integrity guarantees with cryptographic verification.",
     capex: 30,
     opex: 20,
-    bg: "#2ecc71",
-    text: "#000000",
+    bg: getSecurityLevelColorPair("High").bg,
+    text: getSecurityLevelColorPair("High").text,
     recommendations: [
       "Implement digital signatures for critical data",
       "Deploy cryptographic hash validation",
@@ -418,8 +419,8 @@ const _integrityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Complete data integrity guarantees with immutable audit trails.",
     capex: 60,
     opex: 40,
-    bg: "#3498db",
-    text: "#000000",
+    bg: getSecurityLevelColorPair("Very High").bg,
+    text: getSecurityLevelColorPair("Very High").text,
     recommendations: [
       "Implement blockchain for critical data",
       "Deploy multi-party verification systems",
@@ -453,8 +454,8 @@ const _confidentialityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "All information is accessible to anyone with system access.",
     capex: 0,
     opex: 0,
-    bg: "#e74c3c",
-    text: "#ffffff",
+    bg: getSecurityLevelColorPair("None").bg,
+    text: getSecurityLevelColorPair("None").text,
     recommendations: [
       "Implement basic authentication",
       "Add simple authorization controls",
@@ -479,8 +480,8 @@ const _confidentialityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
     businessImpact: "Basic protection against casual access attempts.",
     capex: 5,
     opex: 3,
-    bg: "#f39c12",
-    text: "#ffffff",
+    bg: getSecurityLevelColorPair("Low").bg,
+    text: getSecurityLevelColorPair("Low").text,
     recommendations: [
       "Implement proper authentication system",
       "Set up role-based access control",
@@ -506,8 +507,8 @@ const _confidentialityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Reasonable protection for sensitive information against common threats.",
     capex: 15,
     opex: 10,
-    bg: "#f1c40f",
-    text: "#000000",
+    bg: getSecurityLevelColorPair("Moderate").bg,
+    text: getSecurityLevelColorPair("Moderate").text,
     recommendations: [
       "Implement encryption for data at rest",
       "Set up comprehensive access controls",
@@ -534,8 +535,8 @@ const _confidentialityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Strong protection for sensitive information against sophisticated threats.",
     capex: 30,
     opex: 20,
-    bg: "#2ecc71",
-    text: "#000000",
+    bg: getSecurityLevelColorPair("High").bg,
+    text: getSecurityLevelColorPair("High").text,
     recommendations: [
       "Implement multi-factor authentication",
       "Deploy end-to-end encryption",
@@ -561,8 +562,8 @@ const _confidentialityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Maximum protection for highly sensitive or classified information.",
     capex: 60,
     opex: 40,
-    bg: "#3498db",
-    text: "#000000",
+    bg: getSecurityLevelColorPair("Very High").bg,
+    text: getSecurityLevelColorPair("Very High").text,
     recommendations: [
       "Implement quantum-resistant algorithms",
       "Deploy hardware security modules",
