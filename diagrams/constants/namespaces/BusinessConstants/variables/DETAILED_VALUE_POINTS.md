@@ -8,7 +8,7 @@
 
 > `const` **DETAILED\_VALUE\_POINTS**: `object`
 
-Defined in: [constants/businessConstants.ts:264](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/constants/businessConstants.ts#L264)
+Defined in: [constants/businessConstants.ts:264](https://github.com/Hack23/cia-compliance-manager/blob/af4d490af0cc82f9f34cb714ef32da0325624163/src/constants/businessConstants.ts#L264)
 
 ## Type declaration
 

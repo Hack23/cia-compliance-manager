@@ -8,7 +8,7 @@
 
 > `const` **WIDGET\_TITLES**: `object`
 
-Defined in: [constants/coreConstants.ts:51](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/constants/coreConstants.ts#L51)
+Defined in: [constants/coreConstants.ts:51](https://github.com/Hack23/cia-compliance-manager/blob/af4d490af0cc82f9f34cb714ef32da0325624163/src/constants/coreConstants.ts#L51)
 
 ## Type declaration
 

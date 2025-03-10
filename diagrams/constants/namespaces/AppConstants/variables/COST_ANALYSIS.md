@@ -8,7 +8,7 @@
 
 > `const` **COST\_ANALYSIS**: `object`
 
-Defined in: [constants/appConstants.ts:277](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/constants/appConstants.ts#L277)
+Defined in: [constants/appConstants.ts:277](https://github.com/Hack23/cia-compliance-manager/blob/af4d490af0cc82f9f34cb714ef32da0325624163/src/constants/appConstants.ts#L277)
 
 ## Type declaration
 

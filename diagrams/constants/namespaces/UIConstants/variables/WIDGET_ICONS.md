@@ -8,7 +8,7 @@
 
 > `const` **WIDGET\_ICONS**: `object`
 
-Defined in: [constants/uiConstants.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/constants/uiConstants.ts#L6)
+Defined in: [constants/uiConstants.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/af4d490af0cc82f9f34cb714ef32da0325624163/src/constants/uiConstants.ts#L6)
 
 UI-related constants for the application
 

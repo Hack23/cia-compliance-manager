@@ -8,7 +8,7 @@
 
 > **calculateOverallSecurityLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `string`
 
-Defined in: [types/cia.ts:281](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/types/cia.ts#L281)
+Defined in: [types/cia.ts:281](https://github.com/Hack23/cia-compliance-manager/blob/af4d490af0cc82f9f34cb714ef32da0325624163/src/types/cia.ts#L281)
 
 Calculate the overall security level based on CIA components
 

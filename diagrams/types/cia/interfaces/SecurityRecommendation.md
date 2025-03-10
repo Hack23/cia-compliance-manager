@@ -6,7 +6,7 @@
 
 # Interface: SecurityRecommendation
 
-Defined in: [types/cia.ts:229](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/types/cia.ts#L229)
+Defined in: [types/cia.ts:229](https://github.com/Hack23/cia-compliance-manager/blob/af4d490af0cc82f9f34cb714ef32da0325624163/src/types/cia.ts#L229)
 
 SecurityRecommendation represents a recommended security measure
 or control to implement
@@ -17,7 +17,7 @@ or control to implement
 
 > **description**: `string`
 
-Defined in: [types/cia.ts:231](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/types/cia.ts#L231)
+Defined in: [types/cia.ts:231](https://github.com/Hack23/cia-compliance-manager/blob/af4d490af0cc82f9f34cb714ef32da0325624163/src/types/cia.ts#L231)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [types/cia.ts:231](https://github.com/Hack23/cia-compliance-manager/
 
 > **effort**: `string`
 
-Defined in: [types/cia.ts:233](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/types/cia.ts#L233)
+Defined in: [types/cia.ts:233](https://github.com/Hack23/cia-compliance-manager/blob/af4d490af0cc82f9f34cb714ef32da0325624163/src/types/cia.ts#L233)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [types/cia.ts:233](https://github.com/Hack23/cia-compliance-manager/
 
 > **impact**: `string`
 
-Defined in: [types/cia.ts:232](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/types/cia.ts#L232)
+Defined in: [types/cia.ts:232](https://github.com/Hack23/cia-compliance-manager/blob/af4d490af0cc82f9f34cb714ef32da0325624163/src/types/cia.ts#L232)
 
 ***
 
@@ -41,7 +41,7 @@ Defined in: [types/cia.ts:232](https://github.com/Hack23/cia-compliance-manager/
 
 > **priority**: `"medium"` \| `"low"` \| `"high"` \| `"critical"`
 
-Defined in: [types/cia.ts:234](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/types/cia.ts#L234)
+Defined in: [types/cia.ts:234](https://github.com/Hack23/cia-compliance-manager/blob/af4d490af0cc82f9f34cb714ef32da0325624163/src/types/cia.ts#L234)
 
 ***
 
@@ -49,4 +49,4 @@ Defined in: [types/cia.ts:234](https://github.com/Hack23/cia-compliance-manager/
 
 > **title**: `string`
 
-Defined in: [types/cia.ts:230](https://github.com/Hack23/cia-compliance-manager/blob/add17cfe8ce0db92780ff671e6cb1374e3f4e52b/src/types/cia.ts#L230)
+Defined in: [types/cia.ts:230](https://github.com/Hack23/cia-compliance-manager/blob/af4d490af0cc82f9f34cb714ef32da0325624163/src/types/cia.ts#L230)
