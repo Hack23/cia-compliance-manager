@@ -392,6 +392,173 @@ export function createCIAContentService(
     };
   }
 
+  /**
+   * Get compliance status based on CIA security levels
+   */
+  function getComplianceStatus(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): {
+    compliantFrameworks: string[];
+    partiallyCompliantFrameworks: string[];
+    nonCompliantFrameworks: string[];
+    requirements?: string[];
+    remediationSteps?: string[];
+  } {
+    const levelValues = {
+      None: 0,
+      Low: 1,
+      Moderate: 2,
+      High: 3,
+      "Very High": 4,
+    };
+
+    const availValue = levelValues[availabilityLevel];
+    const integValue = levelValues[integrityLevel];
+    const confidValue = levelValues[confidentialityLevel];
+
+    const totalScore = availValue + integValue + confidValue;
+
+    // Determine compliance status based on total score
+    let compliantFrameworks: string[] = [];
+    let partiallyCompliantFrameworks: string[] = [];
+    let nonCompliantFrameworks: string[] = [];
+
+    // SOC2 compliance - requires moderate security in all areas
+    if (availValue >= 2 && integValue >= 2 && confidValue >= 2) {
+      compliantFrameworks.push("SOC2");
+    } else if (availValue >= 1 && integValue >= 1 && confidValue >= 1) {
+      partiallyCompliantFrameworks.push("SOC2");
+    } else {
+      nonCompliantFrameworks.push("SOC2");
+    }
+
+    // ISO27001 compliance - requires high security in at least one area
+    if (availValue >= 3 || integValue >= 3 || confidValue >= 3) {
+      compliantFrameworks.push("ISO27001");
+    } else if (availValue >= 2 && integValue >= 2 && confidValue >= 2) {
+      partiallyCompliantFrameworks.push("ISO27001");
+    } else {
+      nonCompliantFrameworks.push("ISO27001");
+    }
+
+    // PCI DSS - heavily focused on confidentiality
+    if (confidValue >= 3 && integValue >= 2) {
+      compliantFrameworks.push("PCI_DSS");
+    } else if (confidValue >= 2) {
+      partiallyCompliantFrameworks.push("PCI_DSS");
+    } else {
+      nonCompliantFrameworks.push("PCI_DSS");
+    }
+
+    // HIPAA - requires high on confidentiality and moderate on others
+    if (confidValue >= 3 && availValue >= 2 && integValue >= 2) {
+      compliantFrameworks.push("HIPAA");
+    } else if (confidValue >= 2 && availValue >= 1 && integValue >= 1) {
+      partiallyCompliantFrameworks.push("HIPAA");
+    } else {
+      nonCompliantFrameworks.push("HIPAA");
+    }
+
+    // NIST 800-53 High - requires high or very high on all
+    if (availValue >= 3 && integValue >= 3 && confidValue >= 3) {
+      compliantFrameworks.push("NIST");
+    } else if (availValue >= 2 && integValue >= 2 && confidValue >= 2) {
+      partiallyCompliantFrameworks.push("NIST");
+    } else {
+      nonCompliantFrameworks.push("NIST");
+    }
+
+    // Generate requirements and remediation steps
+    const requirements = generateRequirements(compliantFrameworks);
+    const remediationSteps = generateRemediationSteps(
+      partiallyCompliantFrameworks,
+      nonCompliantFrameworks
+    );
+
+    return {
+      compliantFrameworks,
+      partiallyCompliantFrameworks,
+      nonCompliantFrameworks,
+      requirements,
+      remediationSteps,
+    };
+  }
+
+  /**
+   * Generate compliance requirements based on compliant frameworks
+   */
+  function generateRequirements(compliantFrameworks: string[]): string[] {
+    const requirements: string[] = [];
+
+    if (compliantFrameworks.includes("SOC2")) {
+      requirements.push("Logical access controls");
+      requirements.push("Change management processes");
+    }
+
+    if (compliantFrameworks.includes("ISO27001")) {
+      requirements.push("Risk assessment framework");
+      requirements.push("Security incident management");
+    }
+
+    if (compliantFrameworks.includes("PCI_DSS")) {
+      requirements.push("Data encryption");
+      requirements.push("Network monitoring");
+      requirements.push("Regular vulnerability scanning");
+    }
+
+    if (compliantFrameworks.includes("HIPAA")) {
+      requirements.push("Protected health information safeguards");
+      requirements.push("Breach notification protocols");
+    }
+
+    if (compliantFrameworks.includes("NIST")) {
+      requirements.push("Continuous monitoring");
+      requirements.push("Comprehensive documentation");
+      requirements.push("Strict access controls");
+    }
+
+    return requirements;
+  }
+
+  /**
+   * Generate remediation steps for non-compliant frameworks
+   */
+  function generateRemediationSteps(
+    partiallyCompliantFrameworks: string[],
+    nonCompliantFrameworks: string[]
+  ): string[] {
+    const steps: string[] = [];
+
+    // Add steps for partially compliant frameworks
+    if (partiallyCompliantFrameworks.includes("SOC2")) {
+      steps.push("Implement additional access controls");
+    }
+
+    if (partiallyCompliantFrameworks.includes("ISO27001")) {
+      steps.push("Develop and document risk assessment framework");
+    }
+
+    // Add steps for non-compliant frameworks
+    if (nonCompliantFrameworks.includes("PCI_DSS")) {
+      steps.push("Implement encryption for sensitive data");
+      steps.push("Establish network segmentation");
+    }
+
+    if (nonCompliantFrameworks.includes("HIPAA")) {
+      steps.push("Develop PHI handling procedures");
+      steps.push("Implement breach notification process");
+    }
+
+    if (nonCompliantFrameworks.includes("NIST")) {
+      steps.push("Implement continuous monitoring solution");
+      steps.push("Develop comprehensive security documentation");
+    }
+
+    return steps;
+  }
+
   // Return the public service API
   return {
     getCIAOptions,
@@ -403,6 +570,7 @@ export function createCIAContentService(
     getRecommendations,
     getROIEstimates,
     getSecurityMetrics,
+    getComplianceStatus,
   };
 }
 
@@ -417,3 +585,4 @@ export const getBusinessPerspective = defaultService.getBusinessPerspective;
 export const getRecommendations = defaultService.getRecommendations;
 export const getROIEstimates = defaultService.getROIEstimates;
 export const getSecurityMetrics = defaultService.getSecurityMetrics;
+export const getComplianceStatus = defaultService.getComplianceStatus;

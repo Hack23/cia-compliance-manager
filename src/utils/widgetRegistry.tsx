@@ -31,6 +31,10 @@ import {
   BusinessImpactAnalysisWidgetProps,
   WidgetBaseProps,
 } from "../types/widgets";
+// Import SecurityLevel type from the right location
+import { SecurityLevel } from "../types/cia";
+// Import ComplianceStatusWidgetProps from component source for consistency
+import { ComplianceStatusWidgetProps as ComponentComplianceProps } from "../components/widgets/ComplianceStatusWidget";
 
 // Widget component type without constraint
 type WidgetComponentType<T> = React.ComponentType<T>;
@@ -225,19 +229,20 @@ widgetRegistry.register<SecuritySummaryWidgetProps>({
   },
 });
 
-// Add defaultProps for compliance status widget
-widgetRegistry.register<ComplianceStatusWidgetProps>({
+// Fix the first registration of the compliance status widget - line ~236
+widgetRegistry.register<ComponentComplianceProps>({
   id: "compliance-status",
   title: WIDGET_TITLES.COMPLIANCE_STATUS,
-  component: ComplianceStatusWidget,
+  component:
+    ComplianceStatusWidget as unknown as WidgetComponentType<ComponentComplianceProps>,
   icon: WIDGET_ICONS.COMPLIANCE_STATUS,
   size: "medium",
   order: 20,
   description: "Overview of your system's compliance status",
   defaultProps: {
-    availabilityLevel: SECURITY_LEVELS.NONE,
-    integrityLevel: SECURITY_LEVELS.NONE,
-    confidentialityLevel: SECURITY_LEVELS.NONE,
+    availabilityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    integrityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    confidentialityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
   },
 });
 
@@ -373,5 +378,25 @@ widgetRegistry.register<BusinessImpactAnalysisWidgetProps>({
   size: "full",
   position: 6,
 });
+
+// The second registration is correct, so we need to remove it to avoid duplicate registrations
+// Delete or comment out the following section (line ~376):
+/*
+widgetRegistry.register<ComponentComplianceProps>({
+  id: "compliance-status",
+  title: WIDGET_TITLES.COMPLIANCE_STATUS,
+  component:
+    ComplianceStatusWidget as unknown as WidgetComponentType<ComponentComplianceProps>,
+  icon: WIDGET_ICONS.COMPLIANCE_STATUS,
+  size: "medium",
+  order: 60,
+  description: "Shows compliance with security standards",
+  defaultProps: {
+    availabilityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    integrityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    confidentialityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+  },
+});
+*/
 
 export default widgetRegistry;

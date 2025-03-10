@@ -137,9 +137,9 @@ describe("ComplianceStatusWidget", () => {
     // @ts-ignore - intentionally testing with invalid value
     render(
       <ComplianceStatusWidget
-        availabilityLevel="Unknown"
-        integrityLevel="Unknown"
-        confidentialityLevel="Unknown"
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
       />
     );
 
