@@ -58,6 +58,53 @@ export function findComplianceWidget(): Cypress.Chainable {
 }
 
 /**
+ * Find a compliance widget with ultra-resilient approach
+ */
+export function findComplianceWidgetResilient(): Cypress.Chainable {
+  return cy.get("body").then(($body) => {
+    // List of possible selectors from most to least specific
+    const selectors = [
+      '[data-testid="compliance-status-widget"]',
+      '[data-testid="compliance-frameworks-container"]',
+      '[data-testid="compliance-status"]',
+      '[data-testid="compliance-status-badge"]',
+      '[data-testid*="compliance"]',
+      '[data-testid*="framework"]',
+      '[data-testid*="regulation"]',
+    ];
+
+    // Try to find elements using selectors
+    for (const selector of selectors) {
+      if ($body.find(selector).length > 0) {
+        return cy.get(selector).first();
+      }
+    }
+
+    // If no selectors work, try finding headings or text
+    const headingPatterns = [
+      /compliance status/i,
+      /framework compliance/i,
+      /regulatory compliance/i,
+      /compliance/i,
+    ];
+
+    // Try each heading pattern
+    for (const pattern of headingPatterns) {
+      if (
+        $body
+          .find("h1, h2, h3, h4, h5, h6")
+          .filter((_, el) => pattern.test(el.textContent || "")).length > 0
+      ) {
+        return cy.contains(pattern);
+      }
+    }
+
+    // Finally fall back to any text content
+    return cy.contains(/compliance|framework|regulation|standard/i);
+  });
+}
+
+/**
  * Find a cost estimation widget reliably
  */
 export function findCostWidget(): Cypress.Chainable {

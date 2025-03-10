@@ -56,6 +56,12 @@ export default (
         return false;
       }
     },
+
+    // Add a simple log task as a fallback
+    log(message) {
+      console.log(message);
+      return null;
+    },
   });
 
   return config;

@@ -24,17 +24,8 @@ export function logAllTestIds() {
       cy.log(`...and ${testIds.length - 20} more`);
     }
 
-    // Save all test IDs to a file for reference (in CI)
-    cy.task("writeFile", {
-      path: "cypress/results/test-ids.json",
-      content: JSON.stringify(testIds, null, 2),
-    }).then((result) => {
-      if (result) {
-        cy.log("Saved test IDs to cypress/results/test-ids.json");
-      } else {
-        cy.log("Could not save test IDs to file");
-      }
-    });
+    // Instead of writing to a file, just log
+    cy.log(`Total test IDs found: ${testIds.length}`);
   });
 }
 
