@@ -8,6 +8,30 @@ import {
 import { BusinessImpactDetail, CIADetails, SecurityLevel } from "../types/cia";
 import { RISK_LEVELS } from "../constants/riskConstants";
 
+// Add these interface definitions at the top of the file
+interface SecurityResource {
+  title: string;
+  description: string;
+  url: string;
+  category: string;
+  tags: string[];
+  relevanceScore: number;
+  type: string;
+}
+
+interface ComponentMetrics {
+  financialImpact?: string;
+  operationalImpact?: string;
+  reputationalImpact?: string;
+  regulatoryImpact?: string;
+  uptime?: string;
+  rto?: string;
+  rpo?: string;
+  mttr?: string;
+  keyImpact?: string;
+  metric?: string;
+}
+
 /**
  * Enhanced interface for technical implementation details
  */
@@ -559,11 +583,394 @@ export function createCIAContentService(
     return steps;
   }
 
+  /**
+   * Get impact metrics for a given CIA component and security level
+   */
+  const getComponentMetrics = (
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): ComponentMetrics => {
+    const details = getComponentDetails(component, level);
+
+    // Handle regulatory impact specially since the path might be different
+    let regulatoryImpactDesc = "";
+    if (
+      details?.businessImpactDetails &&
+      "regulatory" in details.businessImpactDetails
+    ) {
+      // Use type assertion to access potential regulatory field
+      const regulatory = (details.businessImpactDetails as any).regulatory;
+      regulatoryImpactDesc = regulatory?.description || "";
+    } else if (
+      details?.businessImpactDetails &&
+      "regulatoryImpact" in details.businessImpactDetails
+    ) {
+      // Use type assertion to access potential regulatoryImpact field
+      const regulatoryImpact = (details.businessImpactDetails as any)
+        .regulatoryImpact;
+      regulatoryImpactDesc = regulatoryImpact?.description || "";
+    }
+
+    return {
+      financialImpact:
+        details?.businessImpactDetails?.financialImpact?.description,
+      operationalImpact:
+        details?.businessImpactDetails?.operationalImpact?.description,
+      reputationalImpact:
+        details?.businessImpactDetails?.reputationalImpact?.description,
+      regulatoryImpact: regulatoryImpactDesc,
+      uptime: details?.uptime,
+      rto: details?.rto,
+      rpo: details?.rpo,
+      mttr: details?.mttr,
+      keyImpact: determineKeyImpact(component, level), // Added for compatibility
+      metric: determineMetric(component, level), // Added for compatibility
+    };
+  };
+
+  /**
+   * Determine a key impact message for each component and level
+   */
+  function determineKeyImpact(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): string {
+    if (component === "availability") {
+      switch (level) {
+        case "None":
+          return "No guaranteed uptime";
+        case "Low":
+          return "Basic availability";
+        case "Moderate":
+          return "Standard business hours";
+        case "High":
+          return "High availability";
+        case "Very High":
+          return "Continuous availability";
+        default:
+          return "Unknown impact";
+      }
+    } else if (component === "integrity") {
+      switch (level) {
+        case "None":
+          return "No data integrity";
+        case "Low":
+          return "Basic integrity checks";
+        case "Moderate":
+          return "Standard validation";
+        case "High":
+          return "Advanced integrity controls";
+        case "Very High":
+          return "Complete data integrity";
+        default:
+          return "Unknown impact";
+      }
+    } else if (component === "confidentiality") {
+      switch (level) {
+        case "None":
+          return "Public information only";
+        case "Low":
+          return "Limited protection";
+        case "Moderate":
+          return "Business confidential";
+        case "High":
+          return "Sensitive information";
+        case "Very High":
+          return "Highly classified";
+        default:
+          return "Unknown impact";
+      }
+    }
+    return "Unknown component";
+  }
+
+  /**
+   * Determine a metric for each component and level
+   */
+  function determineMetric(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): string {
+    if (component === "availability") {
+      switch (level) {
+        case "None":
+          return "< 90% uptime";
+        case "Low":
+          return "95% uptime";
+        case "Moderate":
+          return "99% uptime";
+        case "High":
+          return "99.9% uptime";
+        case "Very High":
+          return "99.999% uptime";
+        default:
+          return "Unknown metric";
+      }
+    } else if (component === "integrity") {
+      switch (level) {
+        case "None":
+          return "No validation";
+        case "Low":
+          return "Basic checksums";
+        case "Moderate":
+          return "Hash validation";
+        case "High":
+          return "Digital signatures";
+        case "Very High":
+          return "Blockchain verification";
+        default:
+          return "Unknown metric";
+      }
+    } else if (component === "confidentiality") {
+      switch (level) {
+        case "None":
+          return "No encryption";
+        case "Low":
+          return "Basic encryption";
+        case "Moderate":
+          return "Standard encryption";
+        case "High":
+          return "Advanced encryption";
+        case "Very High":
+          return "Quantum-safe encryption";
+        default:
+          return "Unknown metric";
+      }
+    }
+    return "Unknown component";
+  }
+
+  /**
+   * Get combined impact metrics for all CIA components
+   */
+  const getImpactMetrics = (
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): Record<string, ComponentMetrics> => {
+    return {
+      availability: getComponentMetrics("availability", availabilityLevel),
+      integrity: getComponentMetrics("integrity", integrityLevel),
+      confidentiality: getComponentMetrics(
+        "confidentiality",
+        confidentialityLevel
+      ),
+      // Add aggregate metrics as strings to avoid type issues
+      businessImpact: determineBusinessImpact(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      ) as unknown as ComponentMetrics,
+      technicalImpact: determineTechnicalImpact(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      ) as unknown as ComponentMetrics,
+      regulatoryImpact: determineRegulatoryImpact(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      ) as unknown as ComponentMetrics,
+      securityScore: calculateSecurityScore(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      ) as unknown as ComponentMetrics,
+      complianceScore: calculateComplianceScore(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      ) as unknown as ComponentMetrics,
+      costEffectivenessScore: calculateCostEffectivenessScore(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      ) as unknown as ComponentMetrics,
+    };
+  };
+
+  // Helper functions for impact metrics
+  function determineBusinessImpact(
+    a: SecurityLevel,
+    i: SecurityLevel,
+    c: SecurityLevel
+  ): string {
+    return "Business impact assessment";
+  }
+
+  function determineTechnicalImpact(
+    a: SecurityLevel,
+    i: SecurityLevel,
+    c: SecurityLevel
+  ): string {
+    return "Technical impact assessment";
+  }
+
+  function determineRegulatoryImpact(
+    a: SecurityLevel,
+    i: SecurityLevel,
+    c: SecurityLevel
+  ): string {
+    return "Regulatory impact assessment";
+  }
+
+  function calculateSecurityScore(
+    a: SecurityLevel,
+    i: SecurityLevel,
+    c: SecurityLevel
+  ): number {
+    const levelToScore = (level: SecurityLevel): number => {
+      switch (level) {
+        case "None":
+          return 0;
+        case "Low":
+          return 25;
+        case "Moderate":
+          return 50;
+        case "High":
+          return 75;
+        case "Very High":
+          return 100;
+      }
+    };
+
+    return Math.round(
+      (levelToScore(a) + levelToScore(i) + levelToScore(c)) / 3
+    );
+  }
+
+  function calculateComplianceScore(
+    a: SecurityLevel,
+    i: SecurityLevel,
+    c: SecurityLevel
+  ): number {
+    return calculateSecurityScore(a, i, c) - 10; // Just for demonstration
+  }
+
+  function calculateCostEffectivenessScore(
+    a: SecurityLevel,
+    i: SecurityLevel,
+    c: SecurityLevel
+  ): number {
+    return 100 - calculateSecurityScore(a, i, c); // Inverse correlation for demo
+  }
+
+  /**
+   * Get security resources based on security levels
+   */
+  const getSecurityResources = (
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel,
+    securityLevel: SecurityLevel
+  ): SecurityResource[] => {
+    // This is a placeholder implementation - in a real app, you would fetch these from a database or API
+    return [
+      {
+        title: "NIST Cybersecurity Framework",
+        description:
+          "Guidelines, standards, and best practices to manage cybersecurity-related risk",
+        url: "https://www.nist.gov/cyberframework",
+        category: "Framework",
+        tags: ["framework", "guidelines", "risk-management"],
+        relevanceScore: 95,
+        type: "Documentation",
+      },
+      {
+        title: "OWASP Top Ten",
+        description:
+          "Standard awareness document for developers about the most critical security risks to web applications",
+        url: "https://owasp.org/www-project-top-ten/",
+        category: "Web Security",
+        tags: ["web", "vulnerabilities", "coding-standards"],
+        relevanceScore: 90,
+        type: "Guidelines",
+      },
+      {
+        title: "AWS Well-Architected Framework",
+        description:
+          "Helps cloud architects build secure, high-performing, resilient, and efficient infrastructure",
+        url: "https://aws.amazon.com/architecture/well-architected/",
+        category: "Cloud Security",
+        tags: ["cloud", "architecture", "best-practices"],
+        relevanceScore: 85,
+        type: "Framework",
+      },
+      {
+        title: "Encryption Best Practices",
+        description:
+          "Guidelines for implementing strong encryption to protect sensitive data",
+        url: "https://csrc.nist.gov/publications/detail/sp/800-175b/rev-1/final",
+        category: "Encryption",
+        tags: ["cryptography", "data-protection", "confidentiality"],
+        relevanceScore: 80,
+        type: "Best Practices",
+      },
+      {
+        title: "Security Testing Guide",
+        description:
+          "Comprehensive guide on how to test for security vulnerabilities",
+        url: "https://owasp.org/www-project-web-security-testing-guide/",
+        category: "Security Testing",
+        tags: ["testing", "vulnerability-assessment", "penetration-testing"],
+        relevanceScore: 75,
+        type: "Guide",
+      },
+    ];
+  };
+
+  /**
+   * Get code examples for implementation
+   */
+  const getCodeExamples = (
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): Array<{ language: string; title: string; code: string }> => {
+    // This could be expanded to return real code examples based on the component and level
+    if (level === "None") return [];
+
+    const examples = [];
+
+    if (
+      component === "availability" &&
+      (level === "High" || level === "Very High")
+    ) {
+      examples.push({
+        language: "yaml",
+        title: "Kubernetes High-Availability Deployment",
+        code: `apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: high-availability-app\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: high-availability-app\n  template:\n    metadata:\n      labels:\n        app: high-availability-app\n    spec:\n      containers:\n      - name: app\n        image: your-app:latest\n        resources:\n          limits:\n            memory: "256Mi"\n            cpu: "500m"\n        readinessProbe:\n          httpGet:\n            path: /health\n            port: 8080\n          initialDelaySeconds: 5\n          periodSeconds: 10`,
+      });
+    }
+
+    if (
+      component === "integrity" &&
+      (level === "High" || level === "Very High")
+    ) {
+      examples.push({
+        language: "typescript",
+        title: "Data Integrity Validation",
+        code: `import * as crypto from 'crypto';\n\nfunction validateDataIntegrity(data: any, signature: string, publicKey: string): boolean {\n  const verifier = crypto.createVerify('SHA256');\n  verifier.update(JSON.stringify(data));\n  return verifier.verify(publicKey, signature, 'base64');\n}\n\nfunction signData(data: any, privateKey: string): string {\n  const signer = crypto.createSign('SHA256');\n  signer.update(JSON.stringify(data));\n  return signer.sign(privateKey, 'base64');\n}`,
+      });
+    }
+
+    if (
+      component === "confidentiality" &&
+      (level === "High" || level === "Very High")
+    ) {
+      examples.push({
+        language: "typescript",
+        title: "Data Encryption",
+        code: `import * as crypto from 'crypto';\n\nfunction encryptData(data: string, key: Buffer): { iv: string, encryptedData: string } {\n  const iv = crypto.randomBytes(16);\n  const cipher = crypto.createCipheriv('aes-256-gcm', key, iv);\n  \n  let encrypted = cipher.update(data, 'utf8', 'hex');\n  encrypted += cipher.final('hex');\n  \n  return {\n    iv: iv.toString('hex'),\n    encryptedData: encrypted\n  };\n}\n\nfunction decryptData(encryptedData: string, iv: string, key: Buffer): string {\n  const decipher = crypto.createDecipheriv('aes-256-gcm', key, Buffer.from(iv, 'hex'));\n  \n  let decrypted = decipher.update(encryptedData, 'hex', 'utf8');\n  decrypted += decipher.final('utf8');\n  \n  return decrypted;\n}`,
+      });
+    }
+
+    return examples;
+  };
+
   // Return the public service API
   return {
     getCIAOptions,
     getComponentDetails,
-    getTechnicalImplementation,
     getBusinessImpact,
     getDetailedDescription,
     getBusinessPerspective,
@@ -571,6 +978,11 @@ export function createCIAContentService(
     getROIEstimates,
     getSecurityMetrics,
     getComplianceStatus,
+    getComponentMetrics,
+    getImpactMetrics,
+    getSecurityResources,
+    getTechnicalImplementation,
+    getCodeExamples,
   };
 }
 
@@ -586,3 +998,6 @@ export const getRecommendations = defaultService.getRecommendations;
 export const getROIEstimates = defaultService.getROIEstimates;
 export const getSecurityMetrics = defaultService.getSecurityMetrics;
 export const getComplianceStatus = defaultService.getComplianceStatus;
+
+// Export the types
+export type { SecurityResource, ComponentMetrics };

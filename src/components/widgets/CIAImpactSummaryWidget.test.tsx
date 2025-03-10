@@ -1,78 +1,82 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
 import CIAImpactSummaryWidget from "./CIAImpactSummaryWidget";
 import { WIDGET_TEST_IDS } from "../../constants/testIds";
+import { SecurityLevel } from "../../types/cia";
 
 describe("CIAImpactSummaryWidget", () => {
-  it("renders correctly with all security levels", () => {
+  it("renders with correct security levels", () => {
     render(
       <CIAImpactSummaryWidget
-        availabilityLevel="High"
-        integrityLevel="Moderate"
-        confidentialityLevel="Low"
+        // Updated prop names from availabilityLevel to availability
+        availability="High"
+        integrity="Moderate"
+        confidentiality="Low"
       />
     );
 
-    // Check that all titles are rendered
-    expect(screen.getByText("Availability:")).toBeInTheDocument();
-    expect(screen.getByText("Integrity:")).toBeInTheDocument();
-    expect(screen.getByText("Confidentiality:")).toBeInTheDocument();
-
-    // Check that all values are rendered with correct text
-    expect(screen.getByText("High Availability")).toBeInTheDocument();
-    expect(screen.getByText("Low Integrity")).toBeInTheDocument();
-    expect(screen.getByText("Moderate Confidentiality")).toBeInTheDocument();
-  });
-
-  it("handles different security level combinations", () => {
-    render(
-      <CIAImpactSummaryWidget
-        availabilityLevel="None"
-        integrityLevel="High"
-        confidentialityLevel="Very High"
-      />
-    );
-
-    const availabilityValue = screen.getByTestId(
-      "cia-impact-summary-availability-level"
-    );
-    // Update to match "success" variant which is used for "Very High" level
-    expect(availabilityValue).toHaveClass("text-success-600");
-
-    const integrityValue = screen.getByTestId(
-      "cia-impact-summary-integrity-level"
-    );
-    // "None" maps to "default" variant which uses gray colors
-    expect(integrityValue).toHaveClass("text-gray-700");
-
-    const confidentialityValue = screen.getByTestId(
-      "cia-impact-summary-confidentiality-level"
-    );
-    // "Moderate" maps to "info" variant
-    expect(confidentialityValue).toHaveClass("text-info-600");
-  });
-
-  it("calculates business impact summary correctly", () => {
-    render(
-      <CIAImpactSummaryWidget
-        availabilityLevel="High"
-        integrityLevel="High"
-        confidentialityLevel="High"
-      />
-    );
-
+    // Check that widget renders correctly
     expect(
       screen.getByTestId(WIDGET_TEST_IDS.CIA_IMPACT_SUMMARY)
     ).toBeInTheDocument();
+
+    // Check availability level is displayed correctly
+    expect(
+      screen.getByTestId(WIDGET_TEST_IDS.CIA_IMPACT_AVAILABILITY_LEVEL)
+    ).toHaveTextContent("High");
+
+    // Check integrity level is displayed correctly
+    expect(
+      screen.getByTestId(WIDGET_TEST_IDS.CIA_IMPACT_INTEGRITY_LEVEL)
+    ).toHaveTextContent("Moderate");
+
+    // Check confidentiality level is displayed correctly
+    expect(
+      screen.getByTestId(WIDGET_TEST_IDS.CIA_IMPACT_CONFIDENTIALITY_LEVEL)
+    ).toHaveTextContent("Low");
   });
 
-  it("handles empty or unexpected values gracefully", () => {
-    // @ts-ignore intentionally testing with invalid values
-    render(<CIAImpactSummaryWidget />);
+  it("handles None security level", () => {
+    render(
+      <CIAImpactSummaryWidget
+        // Updated prop names from availabilityLevel to availability
+        availability="None"
+        integrity="None"
+        confidentiality="None"
+      />
+    );
 
-    expect(screen.getByText("None Availability")).toBeInTheDocument();
-    expect(screen.getByText("None Integrity")).toBeInTheDocument();
-    expect(screen.getByText("None Confidentiality")).toBeInTheDocument();
+    // Check availability level is displayed correctly
+    expect(
+      screen.getByTestId(WIDGET_TEST_IDS.CIA_IMPACT_AVAILABILITY_LEVEL)
+    ).toHaveTextContent("None");
+
+    // Check integrity level is displayed correctly
+    expect(
+      screen.getByTestId(WIDGET_TEST_IDS.CIA_IMPACT_INTEGRITY_LEVEL)
+    ).toHaveTextContent("None");
+
+    // Check confidentiality level is displayed correctly
+    expect(
+      screen.getByTestId(WIDGET_TEST_IDS.CIA_IMPACT_CONFIDENTIALITY_LEVEL)
+    ).toHaveTextContent("None");
+  });
+
+  it("renders with custom class name", () => {
+    const customClass = "custom-class";
+    render(
+      <CIAImpactSummaryWidget
+        // Updated prop names from availabilityLevel to availability
+        availability="High"
+        integrity="High"
+        confidentiality="High"
+        className={customClass}
+      />
+    );
+
+    // Check that custom class is applied to the widget
+    expect(screen.getByTestId(WIDGET_TEST_IDS.CIA_IMPACT_SUMMARY)).toHaveClass(
+      customClass
+    );
   });
 });

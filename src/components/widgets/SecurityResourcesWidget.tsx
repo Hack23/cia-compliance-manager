@@ -1,223 +1,207 @@
-import React from "react";
-import { WIDGET_TEST_IDS } from "../../constants/testIds";
-import { WIDGET_ICONS } from "../../constants/coreConstants";
-import { SECURITY_LEVELS } from "../../constants/appConstants";
-import { WidgetBaseProps } from "../../types/widgets";
+import React, { useState, useEffect, useMemo } from "react";
+import { SecurityLevel } from "../../types/cia";
+import WidgetContainer from "../common/WidgetContainer";
+import ciaContentService from "../../services/ciaContentService";
+import type { SecurityResource } from "../../services/ciaContentService";
+import { SECURITY_RESOURCES_TEST_IDS } from "../../constants/testIds";
 
-export interface SecurityResourcesWidgetProps extends WidgetBaseProps {
-  securityLevel: string;
+/**
+ * Props for SecurityResourcesWidget component
+ */
+export interface SecurityResourcesWidgetProps {
+  securityLevel: SecurityLevel;
+  availabilityLevel?: SecurityLevel;
+  integrityLevel?: SecurityLevel;
+  confidentialityLevel?: SecurityLevel;
+  className?: string;
+  testId?: string;
 }
 
-// Define ResourceItem interface that was missing
-interface ResourceItem {
-  title: string;
-  description?: string;
-  type: string;
-  url?: string;
-}
-
+/**
+ * Widget that displays security resources based on security levels
+ */
 const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   securityLevel,
-  availabilityLevel,
-  integrityLevel,
-  confidentialityLevel,
-  testId = WIDGET_TEST_IDS.SECURITY_RESOURCES_WIDGET,
+  availabilityLevel = "None",
+  integrityLevel = "None",
+  confidentialityLevel = "None",
+  className = "",
+  testId = SECURITY_RESOURCES_TEST_IDS.SECURITY_RESOURCES_PREFIX,
 }) => {
-  // Returns resources appropriate for the current security level
-  const getResources = (): Record<string, ResourceItem[]> => {
-    // Base resources available at all levels
-    const baseResources: Record<string, ResourceItem[]> = {
-      documentation: [
-        {
-          title: "Security Implementation Guide",
-          description: "Step-by-step guide for implementing security controls",
-          type: "documentation",
-        },
-        {
-          title: "Compliance Reporting Templates",
-          description:
-            "Templates for documenting compliance with security requirements",
-          type: "documentation",
-        },
-      ],
-      training: [
-        {
-          title: "Security Awareness Training",
-          description:
-            "Basic training for all employees on security best practices",
-          type: "training",
-        },
-      ],
-      external: [
-        {
-          title: "Industry Security Standards",
-          description: "Links to relevant industry security standards",
-          type: "external",
-        },
-      ],
-    };
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
-    // Add more advanced resources for higher security levels
-    if (["Moderate", "High", "Very High"].includes(securityLevel)) {
-      // Use null/undefined checks
-      if (baseResources.documentation) {
-        baseResources.documentation.push({
-          title: "Risk Assessment Framework",
-          description: "Framework for assessing security risks",
-          type: "documentation",
-        });
+  // Fetch resources based on security levels
+  const allResources = useMemo(() => {
+    return ciaContentService.getSecurityResources(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel,
+      securityLevel
+    );
+  }, [availabilityLevel, integrityLevel, confidentialityLevel, securityLevel]);
+
+  // Get unique resource categories
+  const uniqueCategories = useMemo(() => {
+    const categoriesSet = new Set<string>();
+    categoriesSet.add("All");
+
+    allResources.forEach((resource) => {
+      if (resource.category) {
+        categoriesSet.add(resource.category);
       }
+    });
 
-      if (baseResources.training) {
-        baseResources.training.push({
-          title: "Incident Response Procedures",
-          description: "Training on how to respond to security incidents",
-          type: "training",
-        });
-      }
+    return Array.from(categoriesSet).sort();
+  }, [allResources]);
 
-      if (baseResources.external) {
-        baseResources.external.push({
-          title: "Regulatory Compliance Guides",
-          description: "Guides for complying with relevant regulations",
-          type: "external",
-        });
-      }
-    }
+  // Filter resources by category and search term
+  const filteredResources = useMemo(() => {
+    return allResources
+      .filter((resource: SecurityResource) => {
+        // Filter by category if not "All"
+        if (
+          selectedCategory !== "All" &&
+          resource.category !== selectedCategory
+        ) {
+          return false;
+        }
 
-    // Add most comprehensive resources for high security levels
-    if (["High", "Very High"].includes(securityLevel)) {
-      if (baseResources.documentation) {
-        baseResources.documentation.push({
-          title: "Advanced Security Architecture",
-          description:
-            "Detailed architectural guidance for high-security environments",
-          type: "documentation",
-        });
-      }
+        // Filter by search term if provided
+        if (searchTerm) {
+          const searchLower = searchTerm.toLowerCase();
+          return (
+            resource.title.toLowerCase().includes(searchLower) ||
+            resource.description.toLowerCase().includes(searchLower) ||
+            resource.tags.some((tag: string) =>
+              tag.toLowerCase().includes(searchLower)
+            )
+          );
+        }
 
-      if (baseResources.training) {
-        baseResources.training.push({
-          title: "Security Certification Courses",
-          description:
-            "Professional certification courses for security specialists",
-          type: "training",
-        });
-      }
+        return true;
+      })
+      .sort(
+        (a: SecurityResource, b: SecurityResource) =>
+          b.relevanceScore - a.relevanceScore
+      );
+  }, [allResources, selectedCategory, searchTerm]);
 
-      if (baseResources.external) {
-        baseResources.external.push({
-          title: "Security Vendor Evaluations",
-          description: "Independent evaluations of security technology vendors",
-          type: "external",
-        });
-      }
-    }
-
-    return baseResources;
-  };
-
-  const resources = getResources();
+  // Extract unique categories from resources
+  const categories = useMemo(() => {
+    const uniqueCategories = new Set<string>();
+    allResources.forEach((resource: SecurityResource) =>
+      uniqueCategories.add(resource.category)
+    );
+    return ["All", ...Array.from(uniqueCategories).sort()];
+  }, [allResources]);
 
   return (
-    <div
-      className="p-4 space-y-4"
-      data-testid={testId || "widget-security-resources"}
-      aria-labelledby="security-resources-title"
+    <WidgetContainer
+      title="Security Resources"
+      icon="📚"
+      className={className}
+      testId={testId}
     >
-      <div className="flex items-center mb-4">
-        <span className="text-xl mr-2" aria-hidden="true">
-          {WIDGET_ICONS.SECURITY_RESOURCES}
-        </span>
-        <h3 id="security-resources-title" className="text-md font-medium">
-          Security Resources
-        </h3>
+      <div className="mb-4 flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-4">
+        {/* Search box */}
+        <div className="relative flex-grow">
+          <input
+            type="text"
+            placeholder="Search resources..."
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+            <svg
+              className="w-5 h-5 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </div>
+        </div>
+
+        {/* Category filter */}
+        <select
+          className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
       </div>
 
-      <p className="text-sm text-gray-600 dark:text-gray-300">
-        Access security implementation guides, training materials, and best
-        practices tailored to your{" "}
-        <span className="font-medium">{securityLevel}</span> security level.
-      </p>
-
-      <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-md mb-3">
-        <h4 className="text-sm font-medium mb-2">Documentation</h4>
-        <ul className="list-disc pl-5 space-y-1">
-          {resources.documentation &&
-            resources.documentation.map((item, index) => (
-              <li key={index} className="text-sm">
-                <div className="font-medium">{item.title}</div>
-                {item.description && (
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
-                    {item.description}
+      {/* Resources list */}
+      <ul
+        className="space-y-4"
+        data-testid={SECURITY_RESOURCES_TEST_IDS.RESOURCE_LIST}
+      >
+        {filteredResources.length === 0 ? (
+          <li className="text-center py-4 text-gray-500 dark:text-gray-400">
+            No resources found. Try adjusting your filters.
+          </li>
+        ) : (
+          filteredResources.map((resource: SecurityResource, index: number) => (
+            <li
+              key={index}
+              className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+              data-testid={`${SECURITY_RESOURCES_TEST_IDS.RESOURCE_ITEM}-${index}`}
+            >
+              <div className="flex flex-col sm:flex-row sm:justify-between">
+                <div>
+                  <h3 className="text-md font-medium text-blue-600 dark:text-blue-400">
+                    <a
+                      href={resource.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      {resource.title}
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                    {resource.description}
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {resource.tags.map((tag: string) => (
+                      <span
+                        key={tag}
+                        className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                )}
-              </li>
-            ))}
-        </ul>
-      </div>
-
-      <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-md mb-3">
-        <h4 className="text-sm font-medium mb-2">Security Training</h4>
-        <ul className="list-disc pl-5 space-y-1">
-          {resources.training &&
-            resources.training.map((item, index) => (
-              <li key={index} className="text-sm">
-                <div className="font-medium">{item.title}</div>
-                {item.description && (
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
-                    {item.description}
-                  </div>
-                )}
-              </li>
-            ))}
-        </ul>
-      </div>
-
-      <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
-        <h4 className="text-sm font-medium mb-2">External Resources</h4>
-        <ul className="list-disc pl-5 space-y-1">
-          {resources.external &&
-            resources.external.map((item, index) => (
-              <li key={index} className="text-sm">
-                <div className="font-medium">{item.title}</div>
-                {item.description && (
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
-                    {item.description}
-                  </div>
-                )}
-              </li>
-            ))}
-        </ul>
-      </div>
-
-      <div className="bg-blue-50 dark:bg-blue-900 p-3 rounded-md border border-blue-100 dark:border-blue-800">
-        <h4 className="text-sm font-medium mb-2 flex items-center">
-          <span aria-hidden="true" className="mr-2">
-            💼
-          </span>
-          Business Value
-        </h4>
-        <p className="text-sm">{getBusinessValue(securityLevel)}</p>
-      </div>
-    </div>
+                </div>
+                <div className="mt-2 sm:mt-0 flex flex-col items-start sm:items-end">
+                  <span className="px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">
+                    {resource.category}
+                  </span>
+                  <span className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                    {resource.type}
+                  </span>
+                </div>
+              </div>
+            </li>
+          ))
+        )}
+      </ul>
+    </WidgetContainer>
   );
 };
-
-// Helper function to provide business value context
-function getBusinessValue(level: string): string {
-  switch (level) {
-    case "Very High":
-      return "These enterprise-grade security resources support your maximum security implementation, helping protect your most critical business assets and maintain compliance with stringent regulatory requirements.";
-    case "High":
-      return "These comprehensive security resources help you implement robust protection for sensitive business information and operations, balancing strong security with operational efficiency.";
-    case "Moderate":
-      return "These standard security resources provide practical guidance for implementing balanced security controls that protect important business assets while managing implementation costs effectively.";
-    case "Low":
-      return "These basic security resources help you establish essential protection for your business operations, providing a foundation for future security enhancements.";
-    default:
-      return "These fundamental resources will help you establish initial security measures for your business assets and operations.";
-  }
-}
 
 export default SecurityResourcesWidget;

@@ -351,10 +351,10 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-security-resources-container"
               >
                 <SecurityResourcesWidget
-                  securityLevel={overallSecurityLevel}
-                  availabilityLevel={availability}
-                  integrityLevel={integrity}
-                  confidentialityLevel={confidentiality}
+                  securityLevel={overallSecurityLevel as SecurityLevel}
+                  availabilityLevel={availability as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
                 />
               </DashboardWidget>
 

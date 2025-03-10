@@ -187,9 +187,9 @@ interface RadarChartProps extends WidgetBaseProps {
 
 // Define interface for CIAImpactProps
 interface CIAImpactProps extends WidgetBaseProps {
-  availability?: string;
-  integrity?: string;
-  confidentiality?: string;
+  availability: SecurityLevel; // Changed from availabilityLevel
+  integrity: SecurityLevel; // Changed from integrityLevel
+  confidentiality: SecurityLevel; // Changed from confidentialityLevel
   className?: string;
 }
 
@@ -329,7 +329,8 @@ widgetRegistry.register<AvailabilityImpactWidgetProps>({
 widgetRegistry.register<SecurityResourcesWidgetProps>({
   id: "security-resources",
   title: WIDGET_TITLES.SECURITY_RESOURCES,
-  component: SecurityResourcesWidget,
+  component:
+    SecurityResourcesWidget as unknown as WidgetComponentType<SecurityResourcesWidgetProps>,
   icon: WIDGET_ICONS.SECURITY_RESOURCES,
   size: "medium",
   order: 45,
@@ -377,6 +378,23 @@ widgetRegistry.register<BusinessImpactAnalysisWidgetProps>({
     BusinessImpactAnalysisWidget as unknown as WidgetComponentType<BusinessImpactAnalysisWidgetProps>,
   size: "full",
   position: 6,
+});
+
+// Update SecurityResourcesWidget component type casting - replace the entire registration
+widgetRegistry.register<SecurityResourcesWidgetProps>({
+  id: "security-resources",
+  title: "Security Resources",
+  component:
+    SecurityResourcesWidget as unknown as WidgetComponentType<SecurityResourcesWidgetProps>,
+  // Instead of using 'props', use 'defaultProps' which is defined in WidgetDefinition interface
+  defaultProps: {
+    securityLevel: "None" as SecurityLevel,
+    availabilityLevel: "None" as SecurityLevel,
+    integrityLevel: "None" as SecurityLevel,
+    confidentialityLevel: "None" as SecurityLevel,
+  },
+  position: 11,
+  size: "medium",
 });
 
 // The second registration is correct, so we need to remove it to avoid duplicate registrations
