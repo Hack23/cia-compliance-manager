@@ -8,7 +8,7 @@
 
 > `const` **DETAILED\_VALUE\_POINTS**: `object`
 
-Defined in: [constants/appConstants.ts:234](https://github.com/Hack23/cia-compliance-manager/blob/af4d490af0cc82f9f34cb714ef32da0325624163/src/constants/appConstants.ts#L234)
+Defined in: [constants/appConstants.ts:234](https://github.com/Hack23/cia-compliance-manager/blob/809861500e89aa56fa675e29f47a30a7778b6d97/src/constants/appConstants.ts#L234)
 
 ## Type declaration
 
