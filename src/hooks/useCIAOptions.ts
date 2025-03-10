@@ -65,6 +65,37 @@ export interface EnhancedCIADetails extends CIADetails {
   requiredExpertise?: string;
   controlFamily?: string[];
   applicableFrameworks?: string[];
+  // New fields to reduce hardcoding in ciaContentService
+  businessPerspective?: string;
+  implementationSteps?: string[];
+  effort?: {
+    development: string;
+    maintenance: string;
+    expertise: string;
+  };
+  keyImpact?: string;
+  metric?: string;
+  valuePoints?: string[];
+  roiEstimate?: {
+    value: string;
+    description: string;
+  };
+  implementationConsiderations?: string;
+  securityIcon?: string;
+  complianceImpact?: {
+    frameworks: {
+      compliant: string[];
+      partiallyCompliant: string[];
+      nonCompliant: string[];
+    };
+    requirements?: string[];
+    remediationSteps?: string[];
+  };
+  codeExamples?: Array<{
+    language: string;
+    title: string;
+    code: string;
+  }>;
 }
 
 // Define all options as private internal constants
