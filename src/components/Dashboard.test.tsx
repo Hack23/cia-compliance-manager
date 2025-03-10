@@ -13,17 +13,86 @@ vi.mock("../utils/widgetRegistry", () => ({
 }));
 
 // Mock the useCIAOptions hook
-vi.mock("../hooks/useCIAOptions", () => ({
-  availabilityOptions: {
-    Moderate: { capex: 10, opex: 5 },
-  },
-  integrityOptions: {
-    Moderate: { capex: 15, opex: 7 },
-  },
-  confidentialityOptions: {
-    Moderate: { capex: 20, opex: 10 },
-  },
-}));
+vi.mock("../hooks/useCIAOptions", () => {
+  return {
+    availabilityOptions: {
+      Moderate: { capex: 10, opex: 5 },
+    },
+    integrityOptions: {
+      Moderate: { capex: 15, opex: 7 },
+    },
+    confidentialityOptions: {
+      Moderate: { capex: 20, opex: 10 },
+    },
+    __esModule: true,
+    default: {
+      ROI_ESTIMATES: {
+        NONE: {
+          returnRate: "0%",
+          description: "No security investment means no return",
+          potentialSavings: "$0",
+          breakEvenPeriod: "N/A",
+        },
+        LOW: {
+          returnRate: "100%",
+          description: "Basic security provides minimal return",
+          potentialSavings: "$10,000",
+          breakEvenPeriod: "24 months",
+        },
+        MODERATE: {
+          returnRate: "200%",
+          description: "Standard security provides good value",
+          potentialSavings: "$50,000",
+          breakEvenPeriod: "18 months",
+        },
+        HIGH: {
+          returnRate: "350%",
+          description: "Advanced security provides significant protection",
+          potentialSavings: "$250,000",
+          breakEvenPeriod: "12 months",
+        },
+        VERY_HIGH: {
+          returnRate: "500%",
+          description: "Maximum security provides optimal protection",
+          potentialSavings: "$500,000",
+          breakEvenPeriod: "6 months",
+        },
+      },
+    }, // Added missing comma here
+    ROI_ESTIMATES: {
+      NONE: {
+        returnRate: "0%",
+        description: "No security investment means no return",
+        potentialSavings: "$0",
+        breakEvenPeriod: "N/A",
+      },
+      LOW: {
+        returnRate: "100%",
+        description: "Basic security provides minimal return",
+        potentialSavings: "$10,000",
+        breakEvenPeriod: "24 months",
+      },
+      MODERATE: {
+        returnRate: "200%",
+        description: "Standard security provides good value",
+        potentialSavings: "$50,000",
+        breakEvenPeriod: "18 months",
+      },
+      HIGH: {
+        returnRate: "350%",
+        description: "Advanced security provides significant protection",
+        potentialSavings: "$250,000",
+        breakEvenPeriod: "12 months",
+      },
+      VERY_HIGH: {
+        returnRate: "500%",
+        description: "Maximum security provides optimal protection",
+        potentialSavings: "$500,000",
+        breakEvenPeriod: "6 months",
+      },
+    },
+  };
+});
 
 describe("Dashboard Component", () => {
   const defaultProps = {

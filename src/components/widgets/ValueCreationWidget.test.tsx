@@ -90,8 +90,7 @@ describe("ValueCreationWidget", () => {
   });
 
   it("displays ROI information", () => {
-    // The component may be looking for ROI data in a different format or location than we're mocking
-    // Let's modify our test to match what the component expects
+    // Fix the test to match the actual component implementation
     render(
       <ValueCreationWidget
         securityLevel={SECURITY_LEVELS.MODERATE}
@@ -101,12 +100,12 @@ describe("ValueCreationWidget", () => {
       />
     );
 
-    // Check ROI section exists without checking specific content
+    // Check ROI section exists
     const roiSection = screen.getByTestId(WIDGET_TEST_IDS.ROI_SECTION);
     expect(roiSection).toBeInTheDocument();
 
-    // Check for ROI description text instead of specific value
-    expect(roiSection).toHaveTextContent("ROI");
+    // Check for actual ROI content based on the current implementation
+    expect(roiSection).toHaveTextContent("Return on Investment:200%");
   });
 
   it("displays different value points for different security levels", () => {

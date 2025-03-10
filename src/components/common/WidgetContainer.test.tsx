@@ -58,10 +58,23 @@ describe("WidgetContainer Component", () => {
   });
 
   it("applies custom className", () => {
-    render(<WidgetContainer {...defaultProps} className="custom-class" />);
+    const customClass = "custom-class";
+    const { container } = render(
+      <WidgetContainer
+        title="Test Widget"
+        className={customClass}
+        testId="test-widget"
+      >
+        <div>Widget content</div>
+      </WidgetContainer>
+    );
 
-    // Find the container element
-    const container = screen.getByText("Test Widget").closest("div");
-    expect(container).toHaveClass("custom-class");
+    // Instead of directly checking the root element, find the widget container within
+    // Use container.querySelector to find an element with the custom class
+    const widgetWithCustomClass = container.querySelector(`.${customClass}`);
+    expect(widgetWithCustomClass).not.toBeNull();
+
+    // Alternative: Check if any element within the container has the custom class
+    expect(container.innerHTML).toContain(customClass);
   });
 });

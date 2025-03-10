@@ -7,8 +7,64 @@ import { APP_TEST_IDS, SECURITY_LEVEL_TEST_IDS } from "./constants/testIds";
 import { SECURITY_LEVELS } from "./constants/appConstants";
 
 // Mock the ROI_ESTIMATES to prevent errors
-vi.mock("./hooks/useCIAOptions", () => ({
-  useCIAOptions: () => ({
+vi.mock("./hooks/useCIAOptions", () => {
+  return {
+    __esModule: true,
+    useCIAOptions: () => ({
+      availabilityOptions: {
+        None: { capex: 0, opex: 0 },
+        Low: { capex: 5, opex: 2 },
+        Moderate: { capex: 10, opex: 5 },
+        High: { capex: 15, opex: 8 },
+        "Very High": { capex: 20, opex: 10 },
+      },
+      integrityOptions: {
+        None: { capex: 0, opex: 0 },
+        Low: { capex: 5, opex: 2 },
+        Moderate: { capex: 10, opex: 5 },
+        High: { capex: 15, opex: 8 },
+        "Very High": { capex: 20, opex: 10 },
+      },
+      confidentialityOptions: {
+        None: { capex: 0, opex: 0 },
+        Low: { capex: 5, opex: 2 },
+        Moderate: { capex: 10, opex: 5 },
+        High: { capex: 15, opex: 8 },
+        "Very High": { capex: 20, opex: 10 },
+      },
+      ROI_ESTIMATES: {
+        NONE: {
+          returnRate: "0%",
+          description: "No security investment means no return",
+          potentialSavings: "$0",
+          breakEvenPeriod: "N/A",
+        },
+        LOW: {
+          returnRate: "100%",
+          description: "Basic security provides minimal return",
+          potentialSavings: "$10,000",
+          breakEvenPeriod: "24 months",
+        },
+        MODERATE: {
+          returnRate: "200%",
+          description: "Standard security provides good value",
+          potentialSavings: "$50,000",
+          breakEvenPeriod: "18 months",
+        },
+        HIGH: {
+          returnRate: "350%",
+          description: "Advanced security provides significant protection",
+          potentialSavings: "$250,000",
+          breakEvenPeriod: "12 months",
+        },
+        VERY_HIGH: {
+          returnRate: "500%",
+          description: "Maximum security provides optimal protection",
+          potentialSavings: "$500,000",
+          breakEvenPeriod: "6 months",
+        },
+      },
+    }),
     availabilityOptions: {
       None: { capex: 0, opex: 0 },
       Low: { capex: 5, opex: 2 },
@@ -31,35 +87,39 @@ vi.mock("./hooks/useCIAOptions", () => ({
       "Very High": { capex: 20, opex: 10 },
     },
     ROI_ESTIMATES: {
-      NONE: { returnRate: "0%" },
-      LOW: { returnRate: "120%" },
-      MODERATE: { returnRate: "200%" },
-      HIGH: { returnRate: "350%" },
-      VERY_HIGH: { returnRate: "450%" },
+      NONE: {
+        returnRate: "0%",
+        description: "No security investment means no return",
+        potentialSavings: "$0",
+        breakEvenPeriod: "N/A",
+      },
+      LOW: {
+        returnRate: "100%",
+        description: "Basic security provides minimal return",
+        potentialSavings: "$10,000",
+        breakEvenPeriod: "24 months",
+      },
+      MODERATE: {
+        returnRate: "200%",
+        description: "Standard security provides good value",
+        potentialSavings: "$50,000",
+        breakEvenPeriod: "18 months",
+      },
+      HIGH: {
+        returnRate: "350%",
+        description: "Advanced security provides significant protection",
+        potentialSavings: "$250,000",
+        breakEvenPeriod: "12 months",
+      },
+      VERY_HIGH: {
+        returnRate: "500%",
+        description: "Maximum security provides optimal protection",
+        potentialSavings: "$500,000",
+        breakEvenPeriod: "6 months",
+      },
     },
-  }),
-  availabilityOptions: {
-    None: { capex: 0, opex: 0 },
-    Low: { capex: 5, opex: 2 },
-    Moderate: { capex: 10, opex: 5 },
-    High: { capex: 15, opex: 8 },
-    "Very High": { capex: 20, opex: 10 },
-  },
-  integrityOptions: {
-    None: { capex: 0, opex: 0 },
-    Low: { capex: 5, opex: 2 },
-    Moderate: { capex: 10, opex: 5 },
-    High: { capex: 15, opex: 8 },
-    "Very High": { capex: 20, opex: 10 },
-  },
-  confidentialityOptions: {
-    None: { capex: 0, opex: 0 },
-    Low: { capex: 5, opex: 2 },
-    Moderate: { capex: 10, opex: 5 },
-    High: { capex: 15, opex: 8 },
-    "Very High": { capex: 20, opex: 10 },
-  },
-}));
+  };
+});
 
 // Mock all the widget components
 vi.mock("./components/widgets/SecurityLevelWidget", () => ({

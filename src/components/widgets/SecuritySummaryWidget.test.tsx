@@ -63,6 +63,26 @@ vi.mock("../../services/ciaContentService", () => ({
     .mockImplementation(
       (component, level) => `${level} ${component} business impact description`
     ),
+  // Add the missing getSecurityIcon function
+  getSecurityIcon: vi.fn().mockImplementation((level: SecurityLevel) => {
+    const icons: Record<SecurityLevel, string> = {
+      None: "🔓",
+      Low: "🔐",
+      Moderate: "🔒",
+      High: "🛡️",
+      "Very High": "🔰",
+    };
+    return icons[level] || "🔒";
+  }),
+  // Add getCategoryIcon function that might be used internally
+  getCategoryIcon: vi.fn().mockImplementation((category: string) => {
+    const icons: Record<string, string> = {
+      availability: "⏱️",
+      integrity: "✅",
+      confidentiality: "🔒",
+    };
+    return icons[category] || "📊";
+  }),
 }));
 
 describe("SecuritySummaryWidget", () => {
@@ -77,9 +97,11 @@ describe("SecuritySummaryWidget", () => {
   it("renders with proper security level", () => {
     render(<SecuritySummaryWidget {...defaultProps} />);
 
-    // Verify the widget title displays correctly - fixed to use correct test ID
-    // Using a more generic approach to find the title
-    expect(screen.getByText(/Moderate Security/i)).toBeInTheDocument();
+    // Be more specific in our selector to avoid multiple matches
+    // Look for an h3 element with "Moderate Security" text
+    expect(
+      screen.getByRole("heading", { name: /moderate security/i, level: 3 })
+    ).toBeInTheDocument();
   });
 
   it("displays appropriate security level icon", () => {
