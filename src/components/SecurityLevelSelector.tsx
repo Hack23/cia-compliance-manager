@@ -207,11 +207,6 @@ const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
       data-testid={testId}
       className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm"
     >
-      <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-6 flex items-center">
-        <span className="mr-2">🛡️</span>
-        {UI_TEXT.WIDGET_TITLES.SECURITY_LEVEL}
-      </h3>
-
       <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
         Select appropriate security levels for your system's Confidentiality,
         Integrity, and Availability requirements.
