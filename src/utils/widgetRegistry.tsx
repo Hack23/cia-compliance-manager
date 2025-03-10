@@ -22,7 +22,6 @@ import {
   SecuritySummaryWidgetProps,
   TechnicalDetailsWidgetProps,
   ComplianceStatusWidgetProps,
-  SecurityLevelWidgetProps,
   IntegrityImpactWidgetProps,
   ConfidentialityImpactWidgetProps,
   AvailabilityImpactWidgetProps,
@@ -35,12 +34,17 @@ import {
 import { SecurityLevel } from "../types/cia";
 // Import ComplianceStatusWidgetProps from component source for consistency
 import { ComplianceStatusWidgetProps as ComponentComplianceProps } from "../components/widgets/ComplianceStatusWidget";
+// Import the component-defined interface
+import { SecurityLevelWidgetProps as ComponentSecurityLevelWidgetProps } from "../components/widgets/SecurityLevelWidget";
+
+// Import SecurityLevelWidgetProps directly from the component
+import { SecurityLevelWidgetProps } from "../components/widgets/SecurityLevelWidget";
 
 // Widget component type without constraint
 type WidgetComponentType<T> = React.ComponentType<T>;
 
-// Enhanced widget definition interface with better typing
-export interface WidgetDefinition<T extends WidgetBaseProps> {
+// Modified WidgetDefinition interface to make generic type constraint optional
+export interface WidgetDefinition<T> {
   id: string;
   title: string;
   component: WidgetComponentType<T>;
@@ -57,7 +61,7 @@ export class WidgetRegistry {
   private widgets: Map<string, WidgetDefinition<any>> = new Map();
 
   // Register a widget with better typing
-  register<T extends WidgetBaseProps>(widgetDef: WidgetDefinition<T>): void {
+  register<T>(widgetDef: WidgetDefinition<T>): void {
     this.widgets.set(widgetDef.id, widgetDef);
   }
 
@@ -197,10 +201,16 @@ interface CIAImpactProps extends WidgetBaseProps {
 widgetRegistry.register<SecurityLevelWidgetProps>({
   id: "security-level",
   title: "Security Level Selection",
-  component: SecurityLevelWidget,
+  component:
+    SecurityLevelWidget as unknown as WidgetComponentType<SecurityLevelWidgetProps>,
   size: "medium",
   order: 5,
   description: "Select appropriate security levels for your system",
+  defaultProps: {
+    availabilityLevel: SECURITY_LEVELS.NONE,
+    integrityLevel: SECURITY_LEVELS.NONE,
+    confidentialityLevel: SECURITY_LEVELS.NONE,
+  },
 });
 
 widgetRegistry.register<RadarChartProps>({

@@ -1,5 +1,6 @@
 import { CIADetails } from "./cia";
 import { SecurityLevel } from "./cia";
+import { Dispatch, SetStateAction } from "react";
 
 /**
  * Base properties for all widgets
@@ -190,10 +191,25 @@ export interface BusinessImpactAnalysisWidgetProps {
 /**
  * Props for the SecurityLevelWidget component
  */
-export interface SecurityLevelWidgetProps extends WidgetBaseProps {
-  setAvailability: (level: string) => void;
-  setIntegrity: (level: string) => void;
-  setConfidentiality: (level: string) => void;
+export interface SecurityLevelWidgetProps {
+  availabilityLevel: string;
+  integrityLevel: string;
+  confidentialityLevel: string;
+  onAvailabilityChange?: (level: string) => void;
+  onIntegrityChange?: (level: string) => void;
+  onConfidentialityChange?: (level: string) => void;
+  setAvailability?:
+    | ((level: string) => void)
+    | Dispatch<SetStateAction<string>>;
+  setIntegrity?: ((level: string) => void) | Dispatch<SetStateAction<string>>;
+  setConfidentiality?:
+    | ((level: string) => void)
+    | Dispatch<SetStateAction<string>>;
+  className?: string;
+  testId?: string;
+  title?: string;
+  loading?: boolean;
+  error?: Error | null;
 }
 
 /**
