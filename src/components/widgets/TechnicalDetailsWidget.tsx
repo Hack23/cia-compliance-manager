@@ -1,13 +1,23 @@
 import React, { useState } from "react";
-import { WidgetBaseProps } from "../../types/widgets";
-import { TECHNICAL_DETAILS_TEST_IDS } from "../../constants/testIds";
+import { CIAComponentType } from "../../constants/testIds";
+import { SecurityLevel } from "../../types/cia";
 
-// Update the interface without duplicating the import
-export interface TechnicalDetailsWidgetProps extends WidgetBaseProps {
+// Define interface here instead of importing conflicting one
+export interface TechnicalDetailsWidgetProps {
+  availabilityLevel?: string;
+  integrityLevel?: string;
+  confidentialityLevel?: string;
   availabilityOptions?: Record<string, any>;
   integrityOptions?: Record<string, any>;
   confidentialityOptions?: Record<string, any>;
+  className?: string;
+  testId?: string;
 }
+
+// Define test IDs here temporarily
+const TECHNICAL_DETAILS_TEST_IDS = {
+  TECHNICAL_DETAILS_WIDGET: "technical-details-widget",
+};
 
 const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   availabilityLevel = "Moderate",

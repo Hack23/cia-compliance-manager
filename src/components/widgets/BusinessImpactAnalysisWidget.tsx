@@ -1,11 +1,15 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import ciaContentService, {
   BusinessImpactDetails,
+  calculateBusinessImpactLevel,
+  getRiskBadgeVariant,
+  getCategoryIcon,
 } from "../../services/ciaContentService";
 import { CIAComponentType, SecurityLevel } from "../../types/cia";
 import {
   BUSINESS_IMPACT_TEST_IDS,
   WIDGET_TEST_IDS,
+  asSecurityLevel,
 } from "../../constants/testIds";
 import { BUSINESS_IMPACT_ICONS } from "../../constants/uiConstants";
 import {
@@ -82,7 +86,11 @@ const BusinessImpactAnalysisWidget: React.FC<
   );
 
   const integrityImpact = useMemo(
-    () => ciaContentService.getBusinessImpact("integrity", integrityLevel),
+    () =>
+      ciaContentService.getBusinessImpact(
+        "integrity",
+        asSecurityLevel(integrityLevel)
+      ),
     [integrityLevel]
   );
 
@@ -90,7 +98,7 @@ const BusinessImpactAnalysisWidget: React.FC<
     () =>
       ciaContentService.getBusinessImpact(
         "confidentiality",
-        confidentialityLevel
+        asSecurityLevel(confidentialityLevel)
       ),
     [confidentialityLevel]
   );
@@ -111,31 +119,6 @@ const BusinessImpactAnalysisWidget: React.FC<
   const activeImpact = getActiveImpact();
 
   /**
-   * Maps risk level to appropriate StatusBadge variant
-   *
-   * @param riskLevel - The risk level string from the service
-   * @returns The appropriate StatusBadge variant
-   */
-  const getRiskBadgeVariant = (
-    riskLevel: string
-  ): "info" | "success" | "warning" | "error" | "neutral" => {
-    switch (riskLevel) {
-      case RISK_LEVELS.CRITICAL:
-        return "error";
-      case RISK_LEVELS.HIGH:
-        return "warning";
-      case RISK_LEVELS.MEDIUM:
-        return "info";
-      case RISK_LEVELS.LOW:
-        return "success";
-      case RISK_LEVELS.MINIMAL:
-        return "success";
-      default:
-        return "neutral";
-    }
-  };
-
-  /**
    * Get component name with proper capitalization
    *
    * @param component - The component type
@@ -145,20 +128,14 @@ const BusinessImpactAnalysisWidget: React.FC<
     return component.charAt(0).toUpperCase() + component.slice(1);
   };
 
-  /**
-   * Get icon for a business impact category
-   *
-   * @param category - The impact category
-   * @returns The emoji icon for the category
-   */
-  const getCategoryIcon = (category: string): string => {
-    const normalizedCategory = category.toUpperCase();
-    return (
-      BUSINESS_IMPACT_ICONS[
-        normalizedCategory as keyof typeof BUSINESS_IMPACT_ICONS
-      ] || BUSINESS_IMPACT_ICONS.NEUTRAL
+  useEffect(() => {
+    const newImpactLevel = calculateBusinessImpactLevel(
+      asSecurityLevel(availabilityLevel),
+      asSecurityLevel(integrityLevel),
+      asSecurityLevel(confidentialityLevel)
     );
-  };
+    // ...existing code...
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
   return (
     <WidgetContainer

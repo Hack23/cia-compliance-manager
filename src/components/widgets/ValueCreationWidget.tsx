@@ -13,6 +13,7 @@ import {
   WIDGET_TEST_IDS,
   createDynamicTestId,
   VALUE_CREATION_TEST_IDS,
+  asSecurityLevel,
 } from "../../constants/testIds";
 import { WidgetBaseProps } from "../../types/widgets";
 
@@ -61,7 +62,8 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
     return levelMap[securityLevel] || levelMap[SECURITY_LEVELS.NONE];
   };
 
-  const valuePoints = getValuePoints();
+  // Fix the function call - no arguments needed
+  const valuePoints = getValuePoints() || [];
 
   // Get ROI estimation based on security level
   const getROIEstimate = () => {

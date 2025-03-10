@@ -1,7 +1,13 @@
 import React, { useMemo, useState } from "react";
 import { SecurityLevel } from "../../types/cia";
-import { CONFIDENTIALITY_IMPACT_TEST_IDS } from "../../constants/testIds";
-import ciaContentService from "../../services/ciaContentService";
+import {
+  CONFIDENTIALITY_IMPACT_TEST_IDS,
+  asSecurityLevel,
+} from "../../constants/testIds";
+import ciaContentService, {
+  getInformationSensitivity,
+  getProtectionLevel,
+} from "../../services/ciaContentService";
 import WidgetContainer from "../common/WidgetContainer";
 import StatusBadge from "../common/StatusBadge";
 import KeyValuePair from "../common/KeyValuePair";
@@ -88,6 +94,16 @@ const ConfidentialityImpactWidget: React.FC<
         confidentialityLevel
       ),
     [confidentialityLevel]
+  );
+
+  // Get information sensitivity using service function
+  const sensitivity = getInformationSensitivity(
+    asSecurityLevel(confidentialityLevel)
+  );
+
+  // Get protection level using service function
+  const protectionLevel = getProtectionLevel(
+    asSecurityLevel(confidentialityLevel)
   );
 
   // Handle cases where data might not be available
@@ -274,27 +290,5 @@ const ConfidentialityImpactWidget: React.FC<
     </WidgetContainer>
   );
 };
-
-/**
- * Helper function to map confidentiality level to information sensitivity
- * @param level - SecurityLevel to map
- * @returns Information sensitivity description
- */
-function getInformationSensitivity(level: SecurityLevel): string {
-  switch (level) {
-    case "None":
-      return "Public Data";
-    case "Low":
-      return "Internal Data";
-    case "Moderate":
-      return "Sensitive Data";
-    case "High":
-      return "Confidential Data";
-    case "Very High":
-      return "Restricted Data";
-    default:
-      return "Unknown";
-  }
-}
 
 export default ConfidentialityImpactWidget;

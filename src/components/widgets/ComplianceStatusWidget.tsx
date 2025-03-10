@@ -2,7 +2,10 @@ import React, { useMemo } from "react";
 import { SecurityLevel } from "../../types/cia";
 import { FRAMEWORK_TEST_IDS } from "../../constants/testIds";
 import { COMPLIANCE_FRAMEWORKS } from "../../constants/appConstants";
-import ciaContentService from "../../services/ciaContentService";
+import ciaContentService, {
+  getCompliantFrameworks,
+  getFrameworkDescription,
+} from "../../services/ciaContentService";
 import WidgetContainer from "../common/WidgetContainer";
 import StatusBadge from "../common/StatusBadge";
 
@@ -165,6 +168,9 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                         ]
                       }
                     </span>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {getFrameworkDescription(framework)}
+                    </p>
                   </li>
                 ))}
               </ul>

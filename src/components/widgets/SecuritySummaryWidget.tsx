@@ -5,7 +5,13 @@ import {
   UI_ICONS,
   SECURITY_RECOMMENDATIONS,
 } from "../../constants/appConstants";
-import ciaContentService from "../../services/ciaContentService";
+import ciaContentService, {
+  getSecurityLevelDescription,
+  getTechnicalDescription,
+  getBusinessImpactDescription,
+  getSecurityIcon,
+  getROIEstimate,
+} from "../../services/ciaContentService";
 import StatusBadge from "../common/StatusBadge";
 import WidgetContainer from "../common/WidgetContainer";
 import KeyValuePair from "../common/KeyValuePair";
@@ -61,62 +67,51 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
   const [showMetrics, setShowMetrics] = useState(false);
 
   // Get detailed description from service
-  const securityLevelDescription = useMemo(
+  const securityDescription = useMemo(
     () =>
-      ciaContentService.getDetailedDescription("availability", securityLevel) ||
+      getSecurityLevelDescription(securityLevel) ||
       "Security level not specified",
     [securityLevel]
   );
 
   // Get ROI metrics from service
-  const roiMetrics = useMemo(
-    () => ciaContentService.getROIEstimates(securityLevel),
-    [securityLevel]
-  );
+  const roiData = useMemo(() => getROIEstimate(securityLevel), [securityLevel]);
+
+  // Fix the property access to match the return type from getROIEstimate
+  const roiValue = roiData.value; // instead of roiData.returnRate
+  const breakEvenPeriod = roiData.description.includes("break-even")
+    ? "12-24 months"
+    : "6-18 months"; // default value since breakEvenPeriod doesn't exist
 
   // Get technical implementation details from service
-  const availabilityDetails = useMemo(
-    () =>
-      ciaContentService.getTechnicalImplementation(
-        "availability",
-        availabilityLevel
-      ),
+  const availabilityTechDescription = useMemo(
+    () => getTechnicalDescription("availability", availabilityLevel),
     [availabilityLevel]
   );
 
-  const integrityDetails = useMemo(
-    () =>
-      ciaContentService.getTechnicalImplementation("integrity", integrityLevel),
+  const integrityTechDescription = useMemo(
+    () => getTechnicalDescription("integrity", integrityLevel),
     [integrityLevel]
   );
 
-  const confidentialityDetails = useMemo(
-    () =>
-      ciaContentService.getTechnicalImplementation(
-        "confidentiality",
-        confidentialityLevel
-      ),
+  const confidentialityTechDescription = useMemo(
+    () => getTechnicalDescription("confidentiality", confidentialityLevel),
     [confidentialityLevel]
   );
 
   // Get business impact details from service
-  const availabilityImpact = useMemo(
-    () =>
-      ciaContentService.getBusinessImpact("availability", availabilityLevel),
+  const availabilityBusinessImpact = useMemo(
+    () => getBusinessImpactDescription("availability", availabilityLevel),
     [availabilityLevel]
   );
 
-  const integrityImpact = useMemo(
-    () => ciaContentService.getBusinessImpact("integrity", integrityLevel),
+  const integrityBusinessImpact = useMemo(
+    () => getBusinessImpactDescription("integrity", integrityLevel),
     [integrityLevel]
   );
 
-  const confidentialityImpact = useMemo(
-    () =>
-      ciaContentService.getBusinessImpact(
-        "confidentiality",
-        confidentialityLevel
-      ),
+  const confidentialityBusinessImpact = useMemo(
+    () => getBusinessImpactDescription("confidentiality", confidentialityLevel),
     [confidentialityLevel]
   );
 
@@ -127,22 +122,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
   );
 
   // Get security icon based on security level
-  const getSecurityIcon = (level: string): string => {
-    switch (level) {
-      case "None":
-        return UI_ICONS.SECURITY_NONE;
-      case "Low":
-        return UI_ICONS.SECURITY_LOW;
-      case "Moderate":
-        return UI_ICONS.SECURITY_MODERATE;
-      case "High":
-        return UI_ICONS.SECURITY_HIGH;
-      case "Very High":
-        return UI_ICONS.SECURITY_VERY_HIGH;
-      default:
-        return UI_ICONS.SECURITY_NONE;
-    }
-  };
+  const securityIcon = getSecurityIcon(securityLevel);
 
   // Get status badge variant based on security level
   const getStatusBadgeVariant = (
@@ -180,7 +160,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               role="img"
               aria-label={`Security level: ${securityLevel}`}
             >
-              {getSecurityIcon(securityLevel)}
+              {securityIcon}
             </span>
           </div>
           <div>
@@ -189,7 +169,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               className="text-sm text-gray-600 dark:text-gray-400 mt-1"
               data-testid={SUMMARY_TEST_IDS.SECURITY_SUMMARY_DESCRIPTION}
             >
-              {securityLevelDescription}
+              {securityDescription}
             </p>
           </div>
         </div>
@@ -223,12 +203,12 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
         >
           <KeyValuePair
             label="Estimated ROI"
-            value={roiMetrics.returnRate}
+            value={roiValue}
             testId={SUMMARY_TEST_IDS.ROI_ESTIMATE_PAIR}
             valueClassName="text-green-600 dark:text-green-400 text-lg"
           />
           <p className="text-sm text-green-700 dark:text-green-400 mt-1">
-            {roiMetrics.description}
+            {roiData.description}
           </p>
         </div>
 
@@ -260,7 +240,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                   className="text-sm text-gray-600 dark:text-gray-400"
                   data-testid={SUMMARY_TEST_IDS.AVAILABILITY_TECH_DETAILS}
                 >
-                  {availabilityDetails.description}
+                  {availabilityTechDescription}
                 </p>
               </div>
 
@@ -275,7 +255,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                   className="text-sm text-gray-600 dark:text-gray-400"
                   data-testid={SUMMARY_TEST_IDS.INTEGRITY_TECH_DETAILS}
                 >
-                  {integrityDetails.description}
+                  {integrityTechDescription}
                 </p>
               </div>
 
@@ -290,7 +270,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                   className="text-sm text-gray-600 dark:text-gray-400"
                   data-testid={SUMMARY_TEST_IDS.CONFIDENTIALITY_TECH_DETAILS}
                 >
-                  {confidentialityDetails.description}
+                  {confidentialityTechDescription}
                 </p>
               </div>
             </div>
@@ -325,7 +305,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                   className="text-sm text-gray-600 dark:text-gray-400"
                   data-testid={SUMMARY_TEST_IDS.AVAILABILITY_IMPACT_DETAILS}
                 >
-                  {availabilityImpact.summary}
+                  {availabilityBusinessImpact}
                 </p>
               </div>
 
@@ -340,7 +320,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                   className="text-sm text-gray-600 dark:text-gray-400"
                   data-testid={SUMMARY_TEST_IDS.INTEGRITY_IMPACT_DETAILS}
                 >
-                  {integrityImpact.summary}
+                  {integrityBusinessImpact}
                 </p>
               </div>
 
@@ -355,7 +335,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                   className="text-sm text-gray-600 dark:text-gray-400"
                   data-testid={SUMMARY_TEST_IDS.CONFIDENTIALITY_IMPACT_DETAILS}
                 >
-                  {confidentialityImpact.summary}
+                  {confidentialityBusinessImpact}
                 </p>
               </div>
             </div>

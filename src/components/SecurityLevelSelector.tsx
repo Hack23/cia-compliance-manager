@@ -5,12 +5,18 @@ import {
   CIA_DESCRIPTIONS,
   CIA_COMPONENT_ICONS,
   UI_TEXT,
-  SECURITY_DESCRIPTIONS,
 } from "../constants/appConstants";
-import { COMMON_COMPONENT_TEST_IDS, CIA_TEST_IDS } from "../constants/testIds";
+import {
+  COMMON_COMPONENT_TEST_IDS,
+  CIA_TEST_IDS,
+  asSecurityLevel,
+} from "../constants/testIds";
 import KeyValuePair from "./common/KeyValuePair";
 import { SecurityLevel } from "../types/cia";
-import ciaContentService from "../services/ciaContentService";
+import ciaContentService, {
+  getSecurityLevelDescription,
+  CIAComponentType, // Import the CIAComponentType
+} from "../services/ciaContentService";
 import { getSecurityLevelClass } from "../utils/widgetHelpers";
 
 export interface SecurityLevelSelectorProps {
@@ -131,27 +137,40 @@ const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
     setActiveTooltip(null);
   };
 
-  // Get component details from ciaContentService
-  const getComponentDetails = (component: string, level: SecurityLevel) => {
-    switch (component) {
-      case "confidentiality":
-        return ciaContentService.getComponentDetails("confidentiality", level);
-      case "integrity":
-        return ciaContentService.getComponentDetails("integrity", level);
-      case "availability":
-        return ciaContentService.getComponentDetails("availability", level);
-      default:
-        return null;
-    }
+  // Add a utility function to safely cast strings to CIAComponentType
+  const safeCastToComponentType = (component: string): CIAComponentType => {
+    // Check if it's a valid CIAComponentType
+    const validComponents: CIAComponentType[] = [
+      "confidentiality",
+      "integrity",
+      "availability",
+    ];
+    return validComponents.includes(component as CIAComponentType)
+      ? (component as CIAComponentType)
+      : "confidentiality"; // Default fallback
   };
 
-  // Get security level description from service or constants
-  const getSecurityLevelDescription = (level: SecurityLevel) => {
-    return (
-      SECURITY_DESCRIPTIONS[
-        level.toUpperCase() as keyof typeof SECURITY_DESCRIPTIONS
-      ] || `${level} security level`
-    );
+  // Get component details from ciaContentService
+  const getComponentDetails = (component: string, level: SecurityLevel) => {
+    const safeComponent = safeCastToComponentType(component);
+
+    // Use the safeComponent directly since it's properly typed now
+    return ciaContentService.getComponentDetails(safeComponent, level);
+  };
+
+  // Add a utility function to safely cast strings to SecurityLevel
+  const safeCastToSecurityLevel = (level: string): SecurityLevel => {
+    // Check if it's a valid SecurityLevel
+    const validLevels: SecurityLevel[] = [
+      "None",
+      "Low",
+      "Moderate",
+      "High",
+      "Very High",
+    ];
+    return validLevels.includes(level as SecurityLevel)
+      ? (level as SecurityLevel)
+      : "None";
   };
 
   // Render options with enhanced descriptions
@@ -160,11 +179,11 @@ const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
     componentType: string
   ) => {
     return Object.keys(optionsObject || {}).map((level) => {
+      const securityLevel = safeCastToSecurityLevel(level);
       const details = getComponentDetails(
-        componentType,
-        level as SecurityLevel
+        componentType, // No need for type assertion now
+        securityLevel
       );
-      // Fix the TypeScript error with a more robust null check
       const description = details?.description || "";
       const shortDesc =
         description.length > 50
@@ -534,13 +553,13 @@ const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
               <div className="font-medium flex items-center">
                 <div
                   className={`w-3 h-3 rounded-full mr-2 ${getSecurityLevelClass(
-                    level
+                    safeCastToSecurityLevel(level)
                   )}`}
                 ></div>
                 {level}
               </div>
               <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                {getSecurityLevelDescription(level as SecurityLevel)}
+                {getSecurityLevelDescription(safeCastToSecurityLevel(level))}
               </p>
             </div>
           ))}

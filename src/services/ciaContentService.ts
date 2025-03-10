@@ -967,6 +967,592 @@ export function createCIAContentService(
     return examples;
   };
 
+  /**
+   * Helper functions and types for technical implementation details
+   */
+
+  /**
+   * Technical implementation details for different security components
+   */
+  interface ComponentTechnicalDetails {
+    description: string;
+    implementationSteps: string[];
+    effort: {
+      development: string;
+      maintenance: string;
+      expertise: string;
+    };
+  }
+
+  /**
+   * Get security level description with meaningful context
+   */
+  function getSecurityLevelDescription(level: SecurityLevel): string {
+    const descriptions: Record<SecurityLevel, string> = {
+      None: "No specific security controls applied. Suitable only for non-sensitive public information.",
+      Low: "Basic security controls for internal use. Minimal protection against casual threats.",
+      Moderate:
+        "Standard security controls suitable for business data. Balanced protection against common threats.",
+      High: "Enhanced security controls for sensitive data. Robust protection against sophisticated threats.",
+      "Very High":
+        "Maximum security controls for critical data. Comprehensive protection against advanced threats.",
+    };
+
+    return descriptions[level] || `${level} security level`;
+  }
+
+  /**
+   * Get information sensitivity classification based on confidentiality level
+   */
+  function getInformationSensitivity(level: SecurityLevel): string {
+    switch (level) {
+      case "None":
+        return "Public Data";
+      case "Low":
+        return "Internal Data";
+      case "Moderate":
+        return "Sensitive Data";
+      case "High":
+        return "Confidential Data";
+      case "Very High":
+        return "Restricted Data";
+      default:
+        return "Unknown";
+    }
+  }
+
+  /**
+   * Get protection level description based on confidentiality level
+   */
+  function getProtectionLevel(level: SecurityLevel): string {
+    switch (level) {
+      case "None":
+        return "No Protection";
+      case "Low":
+        return "Basic Protection";
+      case "Moderate":
+        return "Standard Protection";
+      case "High":
+        return "Enhanced Protection";
+      case "Very High":
+        return "Maximum Protection";
+      default:
+        return "Unknown";
+    }
+  }
+
+  /**
+   * Calculate business impact level based on CIA security levels
+   */
+  function calculateBusinessImpactLevel(
+    availLevel: SecurityLevel,
+    integrLevel: SecurityLevel,
+    confLevel: SecurityLevel
+  ): SecurityLevel {
+    const levels: SecurityLevel[] = [
+      "None",
+      "Low",
+      "Moderate",
+      "High",
+      "Very High",
+    ];
+    const availIndex = levels.indexOf(availLevel);
+    const integrIndex = levels.indexOf(integrLevel);
+    const confIndex = levels.indexOf(confLevel);
+
+    const avgIndex = Math.round((availIndex + integrIndex + confIndex) / 3);
+    return levels[avgIndex] || "Moderate";
+  }
+
+  /**
+   * Get appropriate badge variant based on risk level
+   */
+  function getRiskBadgeVariant(
+    riskLevel: string
+  ): "info" | "success" | "warning" | "error" | "neutral" {
+    const riskMap: Record<
+      string,
+      "info" | "success" | "warning" | "error" | "neutral"
+    > = {
+      Critical: "error",
+      High: "warning",
+      Medium: "info",
+      Low: "success",
+      Minimal: "success",
+    };
+
+    return riskMap[riskLevel] || "neutral";
+  }
+
+  /**
+   * Get icon for business impact category
+   */
+  function getCategoryIcon(category: string): string {
+    const icons: Record<string, string> = {
+      FINANCIAL: "💰",
+      OPERATIONAL: "⚙️",
+      REPUTATIONAL: "🏆",
+      REGULATORY: "⚖️",
+      STRATEGIC: "🎯",
+      NEUTRAL: "📊",
+    };
+
+    const normalizedCategory = category.toUpperCase();
+    // Ensure we always return a string by using nullish coalescing with a default
+    return icons[normalizedCategory] ?? icons.NEUTRAL ?? "📊";
+  }
+
+  /**
+   * Get value points for a security level
+   */
+  function getValuePoints(level: SecurityLevel): string[] {
+    const valuePointsMap: Record<SecurityLevel, string[]> = {
+      None: [
+        "Minimal investment required",
+        "Suitable for non-sensitive public information",
+        "No special security expertise needed",
+      ],
+      Low: [
+        "Basic protection for internal data",
+        "Cost-effective implementation",
+        "Low maintenance overhead",
+      ],
+      Moderate: [
+        "Standard protection for business data",
+        "Balanced security investment",
+        "Meets common compliance requirements",
+      ],
+      High: [
+        "Robust protection for sensitive data",
+        "Comprehensive security controls",
+        "Strong compliance position",
+      ],
+      "Very High": [
+        "Maximum protection for critical data",
+        "Enterprise-grade security architecture",
+        "Full regulatory compliance capabilities",
+      ],
+    };
+
+    return valuePointsMap[level] || valuePointsMap["None"];
+  }
+
+  /**
+   * Get ROI estimate data for security level
+   */
+  function getROIEstimate(level: SecurityLevel): {
+    value: string;
+    description: string;
+  } {
+    switch (level) {
+      case "Very High":
+        return {
+          value: "5x+",
+          description: "Maximum return with comprehensive security controls",
+        };
+      case "High":
+        return {
+          value: "3-5x",
+          description: "Strong return with robust security implementation",
+        };
+      case "Moderate":
+        return {
+          value: "2-3x",
+          description: "Good return with balanced security approach",
+        };
+      case "Low":
+        return {
+          value: "1-2x",
+          description: "Basic return with minimal security investment",
+        };
+      default:
+        return {
+          value: "Negative",
+          description: "No return without security investment",
+        };
+    }
+  }
+
+  /**
+   * Get implementation considerations for a security level
+   */
+  function getImplementationConsiderations(level: SecurityLevel): string {
+    switch (level) {
+      case "Very High":
+        return "Implementation requires significant upfront investment but offers maximum long-term value through comprehensive risk reduction and regulatory compliance.";
+      case "High":
+        return "Balanced approach with substantial security benefits and reasonable implementation costs for most organizations with sensitive data or operations.";
+      case "Moderate":
+        return "Cost-effective implementation that provides standard security capabilities suitable for most business applications and moderate risk environments.";
+      case "Low":
+        return "Minimal implementation effort focused on essential security controls, appropriate for non-critical systems or limited budgets.";
+      default:
+        return "No security implementation considerations. Consider baseline security controls for any business system.";
+    }
+  }
+
+  /**
+   * Get technical implementation details for each component and level
+   */
+  function getComponentImplementationDetails(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): ComponentTechnicalDetails {
+    // Default implementation
+    const defaultDetails: ComponentTechnicalDetails = {
+      description: "No specific implementation details available.",
+      implementationSteps: ["Consider implementing basic security controls"],
+      effort: {
+        development: "Minimal",
+        maintenance: "None",
+        expertise: "Basic",
+      },
+    };
+
+    // Component-specific implementations
+    const implementations: Record<
+      CIAComponentType,
+      Record<SecurityLevel, ComponentTechnicalDetails>
+    > = {
+      availability: {
+        None: {
+          description: "No redundancy or monitoring in place.",
+          implementationSteps: [
+            "Document current system state",
+            "Consider backup strategy",
+          ],
+          effort: {
+            development: "None",
+            maintenance: "None",
+            expertise: "None",
+          },
+        },
+        Low: {
+          description:
+            "Implement basic backup systems with manual recovery procedures. Use minimal monitoring for critical services. RPO < 24 hours, RTO < 48 hours.",
+          implementationSteps: [
+            "Deploy basic backup solution",
+            "Create recovery documentation",
+            "Set up minimal monitoring",
+          ],
+          effort: {
+            development: "Low (10-40 person-days)",
+            maintenance: "Quarterly reviews",
+            expertise: "Basic",
+          },
+        },
+        Moderate: {
+          description:
+            "Implement redundancy for important components. Deploy backup systems with semi-automated recovery. Use basic load balancing. Implement standard monitoring with alerts. RPO < 4 hours, RTO < 8 hours.",
+          implementationSteps: [
+            "Deploy redundant infrastructure",
+            "Set up automated backups",
+            "Configure load balancing",
+            "Implement monitoring with alerts",
+          ],
+          effort: {
+            development: "Moderate (40-100 person-days)",
+            maintenance: "Monthly reviews",
+            expertise: "Intermediate",
+          },
+        },
+        High: {
+          description:
+            "Implement N+1 redundancy for critical components. Deploy multi-region standby architecture with automated failover. Use load balancers with health checks. Implement comprehensive monitoring with alerts. RPO < 15 minutes, RTO < 1 hour.",
+          implementationSteps: [
+            "Implement N+1 redundancy",
+            "Configure multi-region deployment",
+            "Set up automated failover",
+            "Deploy comprehensive monitoring",
+          ],
+          effort: {
+            development: "High (100-200 person-days)",
+            maintenance: "Weekly reviews",
+            expertise: "Advanced",
+          },
+        },
+        "Very High": {
+          description:
+            "Implement N+2 redundancy for all critical components. Deploy multi-region active-active architecture with automated failover. Use load balancers with health checks and auto-scaling. Implement comprehensive monitoring with automated remediation. RPO < 1 minute, RTO < 5 minutes.",
+          implementationSteps: [
+            "Deploy N+2 redundancy across all components",
+            "Implement active-active multi-region architecture",
+            "Configure auto-scaling",
+            "Set up automated remediation",
+          ],
+          effort: {
+            development: "Very High (200+ person-days)",
+            maintenance: "Continuous",
+            expertise: "Expert",
+          },
+        },
+      },
+      integrity: {
+        None: {
+          description:
+            "No specific data integrity controls. Data may be modified without detection or tracking.",
+          implementationSteps: [
+            "Document current data flow",
+            "Identify critical data assets",
+          ],
+          effort: {
+            development: "None",
+            maintenance: "None",
+            expertise: "None",
+          },
+        },
+        Low: {
+          description:
+            "Implement minimal input validation. Use basic access controls. Maintain simple logs of major changes. Conduct occasional integrity checks on critical data.",
+          implementationSteps: [
+            "Add basic input validation",
+            "Set up simple change logging",
+            "Implement occasional integrity checks",
+          ],
+          effort: {
+            development: "Low (10-40 person-days)",
+            maintenance: "Quarterly reviews",
+            expertise: "Basic",
+          },
+        },
+        Moderate: {
+          description:
+            "Implement basic input validation. Use version control for code and configuration. Deploy audit logging for important events. Implement standard access controls. Conduct periodic integrity checks for critical systems.",
+          implementationSteps: [
+            "Implement input validation framework",
+            "Configure comprehensive audit logging",
+            "Set up version control",
+            "Schedule regular integrity checks",
+          ],
+          effort: {
+            development: "Moderate (40-100 person-days)",
+            maintenance: "Monthly reviews",
+            expertise: "Intermediate",
+          },
+        },
+        High: {
+          description:
+            "Implement thorough input validation and output encoding. Use checksums or hashing for important data. Deploy secure logging with tamper protection. Implement role-based access controls with least privilege. Conduct regular integrity checks for important systems.",
+          implementationSteps: [
+            "Implement comprehensive validation framework",
+            "Add checksum/hash verification",
+            "Deploy tamper-resistant logging",
+            "Configure RBAC with least privilege",
+          ],
+          effort: {
+            development: "High (100-200 person-days)",
+            maintenance: "Weekly reviews",
+            expertise: "Advanced",
+          },
+        },
+        "Very High": {
+          description:
+            "Implement comprehensive input validation, output encoding, and parameterized queries. Use digital signatures for all data. Deploy tamper-evident logging with blockchain or similar technology. Implement segregation of duties and multi-party authorization for critical operations. Conduct regular integrity verification of all data stores and code.",
+          implementationSteps: [
+            "Implement digital signatures",
+            "Deploy blockchain or similar for tamper-evidence",
+            "Set up multi-party authorization",
+            "Configure comprehensive integrity verification",
+          ],
+          effort: {
+            development: "Very High (200+ person-days)",
+            maintenance: "Continuous",
+            expertise: "Expert",
+          },
+        },
+      },
+      confidentiality: {
+        None: {
+          description:
+            "No specific confidentiality controls. Data may be accessed without proper authorization or tracking.",
+          implementationSteps: [
+            "Document current access patterns",
+            "Identify sensitive data",
+          ],
+          effort: {
+            development: "None",
+            maintenance: "None",
+            expertise: "None",
+          },
+        },
+        Low: {
+          description:
+            "Implement basic access controls. Use TLS for external connections. Apply simple authorization rules. Maintain basic access logs.",
+          implementationSteps: [
+            "Configure basic access controls",
+            "Set up TLS for external connections",
+            "Implement basic logging",
+          ],
+          effort: {
+            development: "Low (10-40 person-days)",
+            maintenance: "Quarterly reviews",
+            expertise: "Basic",
+          },
+        },
+        Moderate: {
+          description:
+            "Implement TLS for data in transit. Use basic encryption for sensitive data at rest. Implement standard authentication and authorization controls. Use basic auditing for access to sensitive data.",
+          implementationSteps: [
+            "Deploy TLS across all connections",
+            "Configure basic at-rest encryption",
+            "Implement standard authentication",
+            "Set up audit trails",
+          ],
+          effort: {
+            development: "Moderate (40-100 person-days)",
+            maintenance: "Monthly reviews",
+            expertise: "Intermediate",
+          },
+        },
+        High: {
+          description:
+            "Implement encryption for sensitive data in transit and at rest. Use multi-factor authentication for privileged access. Implement role-based access control with least privilege. Conduct periodic security assessments and vulnerability scanning.",
+          implementationSteps: [
+            "Deploy comprehensive encryption",
+            "Set up MFA for privileged access",
+            "Configure RBAC with least privilege",
+            "Implement regular security assessments",
+          ],
+          effort: {
+            development: "High (100-200 person-days)",
+            maintenance: "Weekly reviews",
+            expertise: "Advanced",
+          },
+        },
+        "Very High": {
+          description:
+            "Implement end-to-end encryption with strong algorithms (AES-256) and robust key management. Use multi-factor authentication for all access. Deploy data loss prevention systems. Implement comprehensive access controls with just-in-time privileged access. Conduct regular security assessments and penetration testing.",
+          implementationSteps: [
+            "Implement end-to-end encryption",
+            "Deploy robust key management",
+            "Configure MFA for all access",
+            "Implement just-in-time privileged access",
+            "Set up regular penetration testing",
+          ],
+          effort: {
+            development: "Very High (200+ person-days)",
+            maintenance: "Continuous",
+            expertise: "Expert",
+          },
+        },
+      },
+    };
+
+    return implementations[component]?.[level] || defaultDetails;
+  }
+
+  /**
+   * Get business impact description for a component and level
+   */
+  function getBusinessImpactDescription(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): string {
+    const details = getComponentDetails(component, level);
+    return (
+      details?.businessImpact ||
+      `${level} ${component} impact on business operations`
+    );
+  }
+
+  /**
+   * Get technical description for a component and level
+   */
+  function getTechnicalDescription(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): string {
+    const details = getComponentDetails(component, level);
+    return (
+      details?.technical || `${level} ${component} technical implementation`
+    );
+  }
+
+  /**
+   * Get security icon for a security level
+   */
+  function getSecurityIcon(level: SecurityLevel): string {
+    switch (level) {
+      case "Very High":
+        return "🛡️🛡️🛡️";
+      case "High":
+        return "🛡️🛡️";
+      case "Moderate":
+        return "🛡️";
+      case "Low":
+        return "🔒";
+      default:
+        return "⚠️";
+    }
+  }
+
+  /**
+   * Get compliant frameworks based on security levels
+   */
+  function getCompliantFrameworks(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): string[] {
+    const complianceStatus = getComplianceStatus(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
+
+    return complianceStatus.compliantFrameworks;
+  }
+
+  /**
+   * Get framework description for a specific compliance framework
+   */
+  function getFrameworkDescription(framework: string): string {
+    const frameworkDescriptions: Record<string, string> = {
+      SOC2: "System and Organization Controls 2 - Focuses on security, availability, processing integrity, confidentiality, and privacy",
+      ISO27001: "International standard for information security management",
+      PCI_DSS:
+        "Payment Card Industry Data Security Standard - Security standard for organizations handling credit cards",
+      HIPAA:
+        "Health Insurance Portability and Accountability Act - Standards for sensitive patient data protection",
+      NIST: "National Institute of Standards and Technology - Framework for improving critical infrastructure cybersecurity",
+      GDPR: "General Data Protection Regulation - EU data protection and privacy regulation",
+      CCPA: "California Consumer Privacy Act - Enhances privacy rights and consumer protection",
+    };
+
+    return (
+      frameworkDescriptions[framework] || `${framework} compliance framework`
+    );
+  }
+
+  /**
+   * Get implementation time estimate based on security levels
+   */
+  function getImplementationTime(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): string {
+    const levelValues = {
+      None: 0,
+      Low: 1,
+      Moderate: 2,
+      High: 3,
+      "Very High": 4,
+    };
+
+    const availValue = levelValues[availabilityLevel];
+    const integValue = levelValues[integrityLevel];
+    const confidValue = levelValues[confidentialityLevel];
+
+    const totalScore = availValue + integValue + confidValue;
+
+    if (totalScore <= 2) return "1-2 weeks";
+    if (totalScore <= 5) return "2-4 weeks";
+    if (totalScore <= 8) return "1-3 months";
+    if (totalScore <= 10) return "3-6 months";
+    return "6+ months";
+  }
+
   // Return the public service API
   return {
     getCIAOptions,
@@ -983,6 +1569,22 @@ export function createCIAContentService(
     getSecurityResources,
     getTechnicalImplementation,
     getCodeExamples,
+    getSecurityLevelDescription,
+    getInformationSensitivity,
+    getProtectionLevel,
+    calculateBusinessImpactLevel,
+    getRiskBadgeVariant,
+    getCategoryIcon,
+    getValuePoints,
+    getROIEstimate,
+    getImplementationConsiderations,
+    getComponentImplementationDetails,
+    getBusinessImpactDescription,
+    getTechnicalDescription,
+    getSecurityIcon,
+    getCompliantFrameworks,
+    getFrameworkDescription,
+    getImplementationTime,
   };
 }
 
@@ -998,6 +1600,30 @@ export const getRecommendations = defaultService.getRecommendations;
 export const getROIEstimates = defaultService.getROIEstimates;
 export const getSecurityMetrics = defaultService.getSecurityMetrics;
 export const getComplianceStatus = defaultService.getComplianceStatus;
+
+// Add new exports for these functions
+export const getSecurityLevelDescription =
+  defaultService.getSecurityLevelDescription;
+export const getInformationSensitivity =
+  defaultService.getInformationSensitivity;
+export const getProtectionLevel = defaultService.getProtectionLevel;
+export const calculateBusinessImpactLevel =
+  defaultService.calculateBusinessImpactLevel;
+export const getRiskBadgeVariant = defaultService.getRiskBadgeVariant;
+export const getCategoryIcon = defaultService.getCategoryIcon;
+export const getValuePoints = defaultService.getValuePoints;
+export const getROIEstimate = defaultService.getROIEstimate;
+export const getImplementationConsiderations =
+  defaultService.getImplementationConsiderations;
+export const getComponentImplementationDetails =
+  defaultService.getComponentImplementationDetails;
+export const getBusinessImpactDescription =
+  defaultService.getBusinessImpactDescription;
+export const getTechnicalDescription = defaultService.getTechnicalDescription;
+export const getSecurityIcon = defaultService.getSecurityIcon;
+export const getCompliantFrameworks = defaultService.getCompliantFrameworks;
+export const getFrameworkDescription = defaultService.getFrameworkDescription;
+export const getImplementationTime = defaultService.getImplementationTime;
 
 // Export the types
 export type { SecurityResource, ComponentMetrics };

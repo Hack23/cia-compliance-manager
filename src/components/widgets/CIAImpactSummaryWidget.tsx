@@ -3,7 +3,9 @@ import WidgetContainer from "../common/WidgetContainer";
 import KeyValuePair from "../common/KeyValuePair";
 import MetricsCard from "../common/MetricsCard";
 import { SecurityLevel } from "../../types/cia";
-import ciaContentService from "../../services/ciaContentService";
+import ciaContentService, {
+  getBusinessImpactDescription,
+} from "../../services/ciaContentService";
 import type { ComponentMetrics } from "../../services/ciaContentService";
 import { WIDGET_TEST_IDS } from "../../constants/testIds";
 
@@ -52,6 +54,22 @@ const CIAImpactSummaryWidget: React.FC<CIAImpactSummaryWidgetProps> = ({
       ),
     };
   }, [availability, integrity, confidentiality]);
+
+  // Replace ciaContentService.getBusinessImpactDescription with getBusinessImpactDescription
+  const availabilityImpact = getBusinessImpactDescription(
+    "availability",
+    availability as SecurityLevel
+  );
+
+  const integrityImpact = getBusinessImpactDescription(
+    "integrity",
+    integrity as SecurityLevel
+  );
+
+  const confidentialityImpact = getBusinessImpactDescription(
+    "confidentiality",
+    confidentiality as SecurityLevel
+  );
 
   // Render a metric row
   const renderMetricRow = (label: string, value: string | undefined) => {

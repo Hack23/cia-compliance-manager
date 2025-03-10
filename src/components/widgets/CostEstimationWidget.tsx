@@ -2,7 +2,9 @@ import React, { useMemo } from "react";
 import { SecurityLevel } from "../../types/cia";
 import { COST_TEST_IDS } from "../../constants/testIds";
 import { DISPLAY_FORMAT, COST_ANALYSIS } from "../../constants/appConstants";
-import ciaContentService from "../../services/ciaContentService";
+import ciaContentService, {
+  getImplementationTime,
+} from "../../services/ciaContentService";
 import WidgetContainer from "../common/WidgetContainer";
 import KeyValuePair from "../common/KeyValuePair";
 import StatusBadge from "../common/StatusBadge";
@@ -49,6 +51,12 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         confidentialityLevel
       ) as SecurityMetricsType, // Cast to our interface
     [availabilityLevel, integrityLevel, confidentialityLevel]
+  );
+
+  const implementationTime = getImplementationTime(
+    availabilityLevel as SecurityLevel,
+    integrityLevel as SecurityLevel,
+    confidentialityLevel as SecurityLevel
   );
 
   // Calculate 3-year total cost (CAPEX + 3 years of OPEX)

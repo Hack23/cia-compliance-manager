@@ -3,10 +3,19 @@
  */
 
 import { VALUE_CREATION_POINTS } from "./appConstants";
+import { SecurityLevel } from "../types/cia";
 
 // Add this function near the top of the file to make it easier to create compound testIds
 export const createCompoundTestId = (prefix: string, suffix: string): string =>
   `${prefix}-${suffix}`;
+
+// Add the missing createContextualTestId function
+export const createContextualTestId = (
+  componentPrefix: string,
+  elementId: string
+): string => {
+  return `${componentPrefix}-${elementId}`;
+};
 
 // Add these mappings to help make testIds more unique and consistent
 export const WIDGET_PREFIXES = {
@@ -117,6 +126,8 @@ export const WIDGET_TEST_IDS = {
   VALUE_CREATION_SUBTITLE: "value-creation-subtitle",
   VALUE_POINTS_LIST: "value-points-list",
   ROI_SECTION: "roi-section",
+  // Add missing section ID for ValueCreationWidget tests
+  BENEFITS_SECTION: "benefits-section",
 
   // Technical Details Widget
   TECHNICAL_DETAILS_WIDGET: "technical-details-widget",
@@ -329,6 +340,9 @@ export const APP_TEST_IDS = {
   APP_ROOT: "app-root",
   CIA_CLASSIFICATION_APP: "cia-classification-app",
   DASHBOARD_GRID: "dashboard-grid",
+  // Add missing theme toggle specific IDs
+  THEME_TOGGLE_DARK: "theme-toggle-dark",
+  THEME_TOGGLE_LIGHT: "theme-toggle-light",
 };
 
 // Common component test IDs - KEEP ORIGINAL VALUES FOR BACKWARD COMPATIBILITY
@@ -451,6 +465,19 @@ export const VALUE_CREATION_TEST_IDS = {
 };
 
 /**
+ * Export CIA component types for usage in widgets and components
+ */
+export type CIAComponentType = "confidentiality" | "integrity" | "availability";
+
+/**
+ * Helper for type-safe SecurityLevel conversion
+ * Use this to convert strings to SecurityLevel type when needed
+ */
+export function asSecurityLevel(level: string): SecurityLevel {
+  return level as SecurityLevel;
+}
+
+/**
  * Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
  */
 export const createDynamicTestId = {
@@ -490,6 +517,13 @@ export const TEST_HELPERS = {
    */
   getValuePointsForLevel: (level: string): string[] | undefined => {
     return VALUE_CREATION_POINTS[level as keyof typeof VALUE_CREATION_POINTS];
+  },
+
+  /**
+   * Convert string to SecurityLevel type safely
+   */
+  toSecurityLevel: (level: string): SecurityLevel => {
+    return level as SecurityLevel;
   },
 };
 
