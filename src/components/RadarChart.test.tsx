@@ -27,7 +27,11 @@ describe("RadarChart", () => {
 
   it("renders without crashing", () => {
     render(
-      <RadarChart availability="None" integrity="None" confidentiality="None" />
+      <RadarChart
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+      />
     );
 
     expect(screen.getByTestId(CHART_TEST_IDS.RADAR_CHART)).toBeInTheDocument();
@@ -36,9 +40,9 @@ describe("RadarChart", () => {
   it("displays the correct security level values", () => {
     render(
       <RadarChart
-        availability="High"
-        integrity="Moderate"
-        confidentiality="Low"
+        availabilityLevel="High"
+        integrityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
@@ -73,7 +77,11 @@ describe("RadarChart", () => {
     HTMLCanvasElement.prototype.getContext = vi.fn().mockReturnValue(null);
 
     render(
-      <RadarChart availability="None" integrity="None" confidentiality="None" />
+      <RadarChart
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+      />
     );
 
     // Should render the chart container even if canvas fails
@@ -86,9 +94,9 @@ describe("RadarChart", () => {
     const customTestId = "custom-chart";
     render(
       <RadarChart
-        availability="None"
-        integrity="None"
-        confidentiality="None"
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
         testId={customTestId}
       />
     );

@@ -1,19 +1,24 @@
-// Direct exports from source constants
+// Import original constants from source files
 import {
-  TEST_IDS,
-  CIA_TEST_IDS,
-  WIDGET_TEST_IDS,
+  TEST_IDS as SOURCE_TEST_IDS,
+  CIA_TEST_IDS as SOURCE_CIA_TEST_IDS,
+  WIDGET_TEST_IDS as SOURCE_WIDGET_TEST_IDS,
   BUSINESS_IMPACT_TEST_IDS,
   CHART_TEST_IDS,
   COST_TEST_IDS,
   FRAMEWORK_TEST_IDS,
   SUMMARY_TEST_IDS,
+  VALUE_CREATION_TEST_IDS,
+  TECHNICAL_DETAILS_TEST_IDS,
+  CONFIDENTIALITY_IMPACT_TEST_IDS,
+  INTEGRITY_IMPACT_TEST_IDS,
+  AVAILABILITY_IMPACT_TEST_IDS,
 } from "../../src/constants/testIds";
 import {
   SECURITY_LEVELS,
   CIA_LABELS,
   WIDGET_TITLES,
-  UI_TEXT, // Add UI_TEXT import
+  UI_TEXT,
 } from "../../src/constants/coreConstants";
 import {
   BUSINESS_IMPACT_CATEGORIES,
@@ -24,12 +29,9 @@ import {
   COMPLIANCE_FRAMEWORKS,
 } from "../../src/constants/coreConstants";
 
-// Re-export imported constants
+// Re-export imported constants without modification
 export {
-  TEST_IDS,
-  CIA_TEST_IDS,
-  WIDGET_TEST_IDS,
-  BUSINESS_IMPACT_TEST_IDS, // Export these specific test ID objects
+  BUSINESS_IMPACT_TEST_IDS,
   CHART_TEST_IDS,
   COST_TEST_IDS,
   FRAMEWORK_TEST_IDS,
@@ -41,7 +43,51 @@ export {
   RISK_LEVELS,
   COMPLIANCE_STATUS,
   COMPLIANCE_FRAMEWORKS,
-  UI_TEXT, // Add UI_TEXT export
+  UI_TEXT,
+  VALUE_CREATION_TEST_IDS,
+  TECHNICAL_DETAILS_TEST_IDS,
+  CONFIDENTIALITY_IMPACT_TEST_IDS,
+  INTEGRITY_IMPACT_TEST_IDS,
+  AVAILABILITY_IMPACT_TEST_IDS,
+};
+
+// Export renamed source constants to avoid conflicts
+export const SOURCE_IDS = {
+  TEST_IDS: SOURCE_TEST_IDS,
+  CIA_TEST_IDS: SOURCE_CIA_TEST_IDS,
+  WIDGET_TEST_IDS: SOURCE_WIDGET_TEST_IDS,
+};
+
+// Enhanced test IDs for Cypress tests with additional properties
+export const TEST_IDS = {
+  ...SOURCE_TEST_IDS,
+  APP_CONTAINER: "app-container",
+  SECURITY_LEVEL_CONTROLS: "security-level-selector",
+  AVAILABILITY_SELECT: "availability-select",
+  INTEGRITY_SELECT: "integrity-select",
+  CONFIDENTIALITY_SELECT: "confidentiality-select",
+  THEME_TOGGLE: "theme-toggle",
+  APP_TITLE: "app-title",
+};
+
+export const WIDGET_TEST_IDS = {
+  ...SOURCE_WIDGET_TEST_IDS,
+  SECURITY_LEVEL_WIDGET: "widget-security-level",
+  VALUE_CREATION_CONTENT: "value-creation-content",
+};
+
+export const CIA_TEST_IDS = {
+  ...SOURCE_CIA_TEST_IDS,
+  AVAILABILITY_SELECT: "availability-select",
+  INTEGRITY_SELECT: "integrity-select",
+  CONFIDENTIALITY_SELECT: "confidentiality-select",
+  AVAILABILITY_SECTION: "availability-section",
+  INTEGRITY_SECTION: "integrity-section",
+  CONFIDENTIALITY_SECTION: "confidentiality-section",
+  // Add the missing description text properties
+  AVAILABILITY_DESCRIPTION_TEXT: "availability-description-text",
+  INTEGRITY_DESCRIPTION_TEXT: "integrity-description-text",
+  CONFIDENTIALITY_DESCRIPTION_TEXT: "confidentiality-description-text",
 };
 
 // Helper functions for working with test IDs

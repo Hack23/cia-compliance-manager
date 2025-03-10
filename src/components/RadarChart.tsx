@@ -3,17 +3,17 @@ import Chart from "chart.js/auto";
 import { CHART_TEST_IDS } from "../constants/testIds";
 
 interface RadarChartProps {
-  availability: string;
-  integrity: string;
-  confidentiality: string;
+  availabilityLevel: string;
+  integrityLevel: string;
+  confidentialityLevel: string;
   className?: string;
   testId?: string;
 }
 
 const RadarChart: React.FC<RadarChartProps> = ({
-  availability = "None",
-  integrity = "None",
-  confidentiality = "None",
+  availabilityLevel = "None",
+  integrityLevel = "None",
+  confidentialityLevel = "None",
   className = "",
   testId = CHART_TEST_IDS.RADAR_CHART,
 }) => {
@@ -24,11 +24,11 @@ const RadarChart: React.FC<RadarChartProps> = ({
   // Add state to track render errors for testing
   const [renderError, setRenderError] = useState<string | null>(null);
 
-  // Add visible security levels for testing
+  // Add visible security levels for testing - updated to use new prop names
   const [securityLevels] = useState({
-    availability,
-    integrity,
-    confidentiality,
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel,
   });
 
   // Convert security levels to numerical values
@@ -66,9 +66,9 @@ const RadarChart: React.FC<RadarChartProps> = ({
         return;
       }
 
-      const availabilityValue = mapLevelToValue(availability);
-      const integrityValue = mapLevelToValue(integrity);
-      const confidentialityValue = mapLevelToValue(confidentiality);
+      const availabilityValue = mapLevelToValue(availabilityLevel);
+      const integrityValue = mapLevelToValue(integrityLevel);
+      const confidentialityValue = mapLevelToValue(confidentialityLevel);
 
       // Determine if we're in dark mode
       const isDarkMode = document.documentElement.classList.contains("dark");
@@ -183,7 +183,7 @@ const RadarChart: React.FC<RadarChartProps> = ({
     } catch (error) {
       setRenderError(error instanceof Error ? error.message : String(error));
     }
-  }, [availability, integrity, confidentiality]);
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
   return (
     <div className="radar-chart-container" data-testid={`${testId}-container`}>
@@ -196,19 +196,19 @@ const RadarChart: React.FC<RadarChartProps> = ({
           <div>
             <strong>Availability:</strong>{" "}
             <span data-testid={CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE}>
-              {availability || "None"}
+              {availabilityLevel || "None"}
             </span>
           </div>
           <div>
             <strong>Integrity:</strong>{" "}
             <span data-testid={CHART_TEST_IDS.RADAR_INTEGRITY_VALUE}>
-              {integrity || "None"}
+              {integrityLevel || "None"}
             </span>
           </div>
           <div>
             <strong>Confidentiality:</strong>{" "}
             <span data-testid={CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE}>
-              {confidentiality || "None"}
+              {confidentialityLevel || "None"}
             </span>
           </div>
         </div>

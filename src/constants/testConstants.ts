@@ -53,6 +53,14 @@ export const TEST_MATCHERS = {
     HIGH: new RegExp(SECURITY_DESCRIPTIONS.HIGH),
     VERY_HIGH: new RegExp(SECURITY_DESCRIPTIONS.VERY_HIGH),
   },
+  SECURITY_NONE_PATTERN: /Minimal or no security controls/i,
+  SECURITY_LOW_PATTERN: /Basic security measures for non-critical systems/i,
+  SECURITY_MODERATE_PATTERN:
+    /Standard security controls for normal business functions/i,
+  SECURITY_HIGH_PATTERN:
+    /Strong protection for sensitive information and critical systems/i,
+  SECURITY_VERY_HIGH_PATTERN:
+    /Maximum security for highly sensitive systems and data/i,
 };
 
 // Add test matchers for CI/A levels

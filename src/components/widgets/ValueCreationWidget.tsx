@@ -1,70 +1,50 @@
-import React from "react";
-import {
-  SECURITY_LEVELS,
-  VALUE_CREATION_POINTS,
-  ROI_ESTIMATES,
-  UI_TEXT,
-  DETAILED_VALUE_POINTS,
-} from "../../constants/appConstants";
-import { ensureArray } from "../../utils/typeGuards";
+import React, { useMemo } from "react";
+import { SECURITY_LEVELS, UI_TEXT } from "../../constants/appConstants";
 import ValueDisplay from "../common/ValueDisplay";
 import KeyValuePair from "../common/KeyValuePair";
-import { WIDGET_TEST_IDS, createDynamicTestId } from "../../constants/testIds"; // Import test ID constants
-import { ValueCreationWidgetProps } from "../../types/widgets";
+import {
+  WIDGET_TEST_IDS,
+  createDynamicTestId,
+  VALUE_CREATION_TEST_IDS,
+} from "../../constants/testIds";
+import { WidgetBaseProps } from "../../types/widgets";
+import ciaContentService, {
+  getValuePoints,
+  getROIEstimate,
+  getImplementationConsiderations,
+} from "../../services/ciaContentService";
+import { SecurityLevel } from "../../types/cia";
+import { SECURITY_LEVEL_COLORS } from "../../constants/colorConstants";
+import { getSecurityLevelColors } from "../../utils/widgetHelpers";
+
+export interface ValueCreationWidgetProps extends WidgetBaseProps {
+  securityLevel: string;
+  availabilityLevel: string;
+  integrityLevel: string;
+  confidentialityLevel: string;
+}
 
 const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
-  securityLevel,
+  securityLevel = SECURITY_LEVELS.NONE,
+  availabilityLevel,
+  integrityLevel,
+  confidentialityLevel,
+  testId = VALUE_CREATION_TEST_IDS.VALUE_CREATION_PREFIX,
 }) => {
-  // Create a mapping to simplify the getValuePoints function
-  const getValuePoints = () => {
-    const levelMap: Record<string, string[]> = {
-      [SECURITY_LEVELS.VERY_HIGH]: [
-        VALUE_CREATION_POINTS[SECURITY_LEVELS.VERY_HIGH][0] ??
-          "Premium security value",
-        ...DETAILED_VALUE_POINTS.VERY_HIGH,
-      ],
-      [SECURITY_LEVELS.HIGH]: [
-        VALUE_CREATION_POINTS[SECURITY_LEVELS.HIGH][0] ?? "High security value",
-        ...DETAILED_VALUE_POINTS.HIGH,
-      ],
-      [SECURITY_LEVELS.MODERATE]: [
-        VALUE_CREATION_POINTS[SECURITY_LEVELS.MODERATE][0] ??
-          "Moderate security value",
-        ...DETAILED_VALUE_POINTS.MODERATE,
-      ],
-      [SECURITY_LEVELS.LOW]: [
-        VALUE_CREATION_POINTS[SECURITY_LEVELS.LOW][0] ?? "Basic security value",
-        ...DETAILED_VALUE_POINTS.LOW,
-      ],
-      [SECURITY_LEVELS.NONE]: [
-        VALUE_CREATION_POINTS[SECURITY_LEVELS.NONE][0] ??
-          "Minimal security value",
-        ...DETAILED_VALUE_POINTS.NONE,
-      ],
-    };
+  // Use ciaContentService to get value points
+  const valuePoints = useMemo(() => {
+    return getValuePoints(securityLevel as SecurityLevel) || [];
+  }, [securityLevel]);
 
-    return levelMap[securityLevel] || levelMap[SECURITY_LEVELS.NONE];
-  };
+  // Get ROI data from ciaContentService
+  const roiData = useMemo(() => {
+    return getROIEstimate(securityLevel as SecurityLevel);
+  }, [securityLevel]);
 
-  const valuePoints = getValuePoints();
-
-  // Get ROI estimation based on security level
-  const getROIEstimate = () => {
-    switch (securityLevel) {
-      case SECURITY_LEVELS.VERY_HIGH:
-        return ROI_ESTIMATES.VERY_HIGH;
-      case SECURITY_LEVELS.HIGH:
-        return ROI_ESTIMATES.HIGH;
-      case SECURITY_LEVELS.MODERATE:
-        return ROI_ESTIMATES.MODERATE;
-      case SECURITY_LEVELS.LOW:
-        return ROI_ESTIMATES.LOW;
-      default:
-        return ROI_ESTIMATES.NONE;
-    }
-  };
-
-  const roiEstimate = getROIEstimate();
+  // Get implementation considerations from ciaContentService
+  const implementationConsiderations = useMemo(() => {
+    return getImplementationConsiderations(securityLevel as SecurityLevel);
+  }, [securityLevel]);
 
   // Color styling based on level
   const getLevelVariant = () => {
@@ -86,9 +66,9 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   const getLevelColorClass = () => {
     switch (securityLevel) {
       case SECURITY_LEVELS.VERY_HIGH:
-        return "text-green-600 dark:text-green-400";
+        return "text-blue-600 dark:text-blue-400"; // Changed to blue from green for consistency
       case SECURITY_LEVELS.HIGH:
-        return "text-blue-600 dark:text-blue-400";
+        return "text-green-600 dark:text-green-400";
       case SECURITY_LEVELS.MODERATE:
         return "text-yellow-600 dark:text-yellow-400";
       case SECURITY_LEVELS.LOW:
@@ -100,11 +80,13 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
   return (
     <div
-      className="space-y-4"
+      className="space-y-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm"
       data-testid={WIDGET_TEST_IDS.VALUE_CREATION_CONTENT}
+      aria-labelledby="value-creation-title"
     >
       <div className="flex items-center justify-between">
         <h3
+          id="value-creation-title"
           className={`text-lg font-bold ${getLevelColorClass()}`}
           data-testid={WIDGET_TEST_IDS.VALUE_CREATION_TITLE}
         >
@@ -118,14 +100,20 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         </p>
       </div>
 
-      <ul className="space-y-2" data-testid={WIDGET_TEST_IDS.VALUE_POINTS_LIST}>
-        {ensureArray(valuePoints).map((point, index) => (
+      <ul
+        className="space-y-2"
+        data-testid={WIDGET_TEST_IDS.VALUE_POINTS_LIST}
+        aria-label="Value creation points"
+      >
+        {valuePoints.map((point, index) => (
           <li
             key={index}
             className="flex items-start"
             data-testid={createDynamicTestId.valuePoint(index)}
           >
-            <span className={`mr-2 ${getLevelColorClass()}`}>•</span>
+            <span className={`mr-2 ${getLevelColorClass()}`} aria-hidden="true">
+              •
+            </span>
             <span className="font-medium text-sm text-gray-700 dark:text-gray-300">
               {point}
             </span>
@@ -133,18 +121,32 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         ))}
       </ul>
 
-      <div className="border-t pt-2 mt-4">
+      <div
+        className="border-t pt-4 mt-4 bg-gray-50 dark:bg-gray-700 p-3 rounded-lg"
+        aria-labelledby="roi-section-title"
+      >
+        <h4 id="roi-section-title" className="text-sm font-medium mb-2">
+          Return on Investment Analysis
+        </h4>
         <KeyValuePair
           label="Return on Investment:"
           value={
             <ValueDisplay
-              value={roiEstimate}
+              value={roiData.value}
               variant={getLevelVariant()}
               testId={WIDGET_TEST_IDS.ROI_VALUE}
             />
           }
           testId={WIDGET_TEST_IDS.ROI_SECTION}
         />
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+          {roiData.description}
+        </p>
+
+        <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+          <h5 className="font-medium mb-1">Implementation Considerations</h5>
+          <p>{implementationConsiderations}</p>
+        </div>
       </div>
     </div>
   );

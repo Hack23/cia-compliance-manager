@@ -1,14 +1,32 @@
 import { vi } from "vitest";
-import { SECURITY_LEVELS } from "../constants";
-import type { SecurityLevel } from "../types/cia";
-import type { MockOptions, MockHandlers } from "../types/testTypes";
+import { SECURITY_LEVELS } from "../constants/appConstants";
+import { SecurityLevel } from "../types/cia";
 
 /**
- * Creates mock CIA options for testing components
- *
- * @param levels Array of security levels to include in the mock
- * @param customValues Optional custom values for specific fields
- * @returns Mocked options object
+ * Interface defining the structure for mock options
+ */
+interface MockOptions {
+  description: string;
+  technical: string;
+  impact: string;
+  capex: number;
+  opex: number;
+  bg: string;
+  text: string;
+  recommendations: string[];
+}
+
+/**
+ * Interface for mock event handlers
+ */
+interface MockHandlers {
+  setAvailability: ReturnType<typeof vi.fn>;
+  setIntegrity: ReturnType<typeof vi.fn>;
+  setConfidentiality: ReturnType<typeof vi.fn>;
+}
+
+/**
+ * Creates mock options for test cases
  */
 export const createMockOptions = (
   levels: string[] = Object.values(SECURITY_LEVELS),
@@ -39,8 +57,6 @@ export const createMockOptions = (
 
 /**
  * Creates mock event handlers for component testing
- *
- * @returns Object with mock functions for availability, integrity, and confidentiality
  */
 export const createMockHandlers = (): MockHandlers => {
   return {
@@ -73,11 +89,11 @@ const getDefaultOpex = (level: string): number => {
     case SECURITY_LEVELS.VERY_HIGH:
       return 70;
     case SECURITY_LEVELS.HIGH:
-      return 40;
+      return 35;
     case SECURITY_LEVELS.MODERATE:
-      return 15;
+      return 20;
     case SECURITY_LEVELS.LOW:
-      return 5;
+      return 10;
     default:
       return 0;
   }
@@ -86,19 +102,21 @@ const getDefaultOpex = (level: string): number => {
 const getDefaultColor = (level: string): string => {
   switch (level) {
     case SECURITY_LEVELS.VERY_HIGH:
-      return "#3498db";
+      return "#FF5733"; // Orange-red
     case SECURITY_LEVELS.HIGH:
-      return "#2ecc71";
+      return "#FFC300"; // Amber
     case SECURITY_LEVELS.MODERATE:
-      return "#f1c40f";
+      return "#DAF7A6"; // Light green
     case SECURITY_LEVELS.LOW:
-      return "#f39c12";
+      return "#C7F9CC"; // Very light green
     default:
-      return "#e74c3c";
+      return "#F8F9FA"; // Light gray
   }
 };
 
-export default {
+const mockFactory = {
   createMockOptions,
   createMockHandlers,
 };
+
+export default mockFactory;

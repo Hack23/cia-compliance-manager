@@ -1,5 +1,8 @@
 import { defineConfig } from "cypress";
 import { junitMerger } from "../support/plugins/junit-merger";
+import fs from "fs";
+import path from "path";
+import { resolve } from "path";
 
 // No need for module declaration now as we have proper type definitions
 
@@ -37,6 +40,27 @@ export default (
         console.error("Error running mergeAllJunitReports:", err);
         return { success: false, error: String(err) };
       }
+    },
+
+    // Add a task to write a file (used by test-debug-helper)
+    writeFile({ path, content }) {
+      try {
+        const dir = path.split("/").slice(0, -1).join("/");
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir, { recursive: true });
+        }
+        fs.writeFileSync(path, content);
+        return true;
+      } catch (error) {
+        console.error(`Error writing file ${path}:`, error);
+        return false;
+      }
+    },
+
+    // Add a simple log task as a fallback
+    log(message) {
+      console.log(message);
+      return null;
     },
   });
 

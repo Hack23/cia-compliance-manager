@@ -319,3 +319,22 @@ export const BUSINESS_VALUE_METRICS = {
     VERY_HIGH: "12-18 months",
   },
 };
+
+// Return on Investment estimates for security measures
+export const ROI_ESTIMATES = {
+  highImpact: {
+    minSavings: 500000,
+    maxSavings: 2000000,
+    averageReturn: 4.5, // 450% ROI
+  },
+  mediumImpact: {
+    minSavings: 100000,
+    maxSavings: 500000,
+    averageReturn: 3.2, // 320% ROI
+  },
+  lowImpact: {
+    minSavings: 10000,
+    maxSavings: 100000,
+    averageReturn: 1.8, // 180% ROI
+  },
+};

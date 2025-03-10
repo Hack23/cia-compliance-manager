@@ -32,6 +32,36 @@
   /* Transitions */
   --transition-speed: 0.2s;
   --transition-function: ease-in-out;
+
+  /* Base colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Security level colors - Light mode */
+  --color-none: #dc3545;
+  --color-low: #fd7e14;
+  --color-moderate: #ffc107;
+  --color-high: #28a745;
+  --color-very-high: #0d6efd;
+
+  /* Security level text colors - Light mode */
+  --color-none-text: #ffffff;
+  --color-low-text: #ffffff;
+  --color-moderate-text: #000000;
+  --color-high-text: #000000;
+  --color-very-high-text: #000000;
+
+  /* Component-specific colors */
+  --color-confidentiality: #6f42c1;
+  --color-integrity: #28a745;
+  --color-availability: #0d6efd;
+
+  /* Background colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+
+  /* Dark mode overrides will be handled with dark: classes via Tailwind */
 }
 
 /* Dark Mode - Ingress Inspired */
@@ -57,4 +87,16 @@
   color: var(--text-color);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     sans-serif;
+
+  /* Security level colors - Dark mode */
+  --color-none-dark: #ff8080;
+  --color-low-dark: #ffb74d;
+  --color-moderate-dark: #ffeb3b;
+  --color-high-dark: #4caf50;
+  --color-very-high-dark: #63a4ff;
+
+  /* Background colors - Dark mode */
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #3d3d3d;
 }

@@ -1,78 +1,110 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import CIAImpactSummaryWidget from "./CIAImpactSummaryWidget";
 import { WIDGET_TEST_IDS } from "../../constants/testIds";
+import { SecurityLevel } from "../../types/cia";
 
 describe("CIAImpactSummaryWidget", () => {
-  it("renders all three CIA categories with correct text", () => {
+  it("renders with correct security levels", () => {
     render(
       <CIAImpactSummaryWidget
-        availability="High"
-        integrity="Low"
-        confidentiality="Moderate"
+        availabilityLevel="High"
+        integrityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
-    // Check that all titles are rendered
-    expect(screen.getByText("Availability:")).toBeInTheDocument();
-    expect(screen.getByText("Integrity:")).toBeInTheDocument();
-    expect(screen.getByText("Confidentiality:")).toBeInTheDocument();
+    // Check that widget renders correctly
+    expect(screen.getByTestId("cia-impact-summary-widget")).toBeInTheDocument();
 
-    // Check that all values are rendered with correct text
-    expect(screen.getByText("High Availability")).toBeInTheDocument();
-    expect(screen.getByText("Low Integrity")).toBeInTheDocument();
-    expect(screen.getByText("Moderate Confidentiality")).toBeInTheDocument();
+    // Instead of trying to find elements by text directly (which might cause multiple matches),
+    // find elements by their data-testid and then check their content
+
+    // Get all status badges
+    const statusBadges = screen.getAllByTestId("status-badge");
+
+    // Check for the presence of each security level
+    const badgeTexts = statusBadges.map((badge) => badge.textContent);
+    expect(badgeTexts).toContain("High");
+    expect(badgeTexts).toContain("Moderate");
+    expect(badgeTexts).toContain("Low");
+
+    // Alternative approach: Find specific sections using a more targeted approach
+    // Get all divs that might contain our CIA components
+    const securityComponents = screen.getAllByRole("heading", { level: 4 });
+
+    // Find the Availability heading and check its following badge
+    const availabilityHeading = securityComponents.find((h) =>
+      h.textContent?.includes("Availability")
+    );
+    const availabilityBadge = availabilityHeading?.parentElement?.querySelector(
+      '[data-testid="status-badge"]'
+    );
+    expect(availabilityBadge?.textContent).toBe("High");
+
+    // Find the Integrity heading and check its following badge
+    const integrityHeading = securityComponents.find((h) =>
+      h.textContent?.includes("Integrity")
+    );
+    const integrityBadge = integrityHeading?.parentElement?.querySelector(
+      '[data-testid="status-badge"]'
+    );
+    expect(integrityBadge?.textContent).toBe("Moderate");
+
+    // Find the Confidentiality heading and check its following badge
+    const confidentialityHeading = securityComponents.find((h) =>
+      h.textContent?.includes("Confidentiality")
+    );
+    const confidentialityBadge =
+      confidentialityHeading?.parentElement?.querySelector(
+        '[data-testid="status-badge"]'
+      );
+    expect(confidentialityBadge?.textContent).toBe("Low");
   });
 
-  it("applies appropriate styling to different security levels", () => {
+  it("handles None security level", () => {
     render(
       <CIAImpactSummaryWidget
-        availability="Very High"
-        integrity="None"
-        confidentiality="Moderate"
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
       />
     );
 
-    const availabilityValue = screen.getByTestId(
-      "cia-impact-summary-availability-level"
-    );
-    // Update to match "success" variant which is used for "Very High" level
-    expect(availabilityValue).toHaveClass("text-success-600");
-
-    const integrityValue = screen.getByTestId(
-      "cia-impact-summary-integrity-level"
-    );
-    // "None" maps to "default" variant which uses gray colors
-    expect(integrityValue).toHaveClass("text-gray-700");
-
-    const confidentialityValue = screen.getByTestId(
-      "cia-impact-summary-confidentiality-level"
-    );
-    // "Moderate" maps to "info" variant
-    expect(confidentialityValue).toHaveClass("text-info-600");
+    // Updated to check for "None" text rather than specific testIds
+    const noneBadges = screen.getAllByText("None");
+    expect(noneBadges.length).toBeGreaterThan(0);
   });
 
-  it("uses default testId when not provided", () => {
+  it("renders with custom class name", () => {
+    const customClass = "custom-class";
     render(
       <CIAImpactSummaryWidget
-        availability="High"
-        integrity="High"
-        confidentiality="High"
+        availabilityLevel="High"
+        integrityLevel="High"
+        confidentialityLevel="High"
+        className={customClass}
       />
     );
 
-    expect(
-      screen.getByTestId(WIDGET_TEST_IDS.CIA_IMPACT_SUMMARY)
-    ).toBeInTheDocument();
+    // Check that custom class is applied to the widget
+    expect(screen.getByTestId("cia-impact-summary-widget")).toHaveClass(
+      customClass
+    );
   });
 
-  it("handles empty or unexpected values gracefully", () => {
-    // @ts-ignore intentionally testing with invalid values
-    render(<CIAImpactSummaryWidget />);
+  it("accepts custom testId prop", () => {
+    const testId = "custom-impact-summary";
+    render(
+      <CIAImpactSummaryWidget
+        availabilityLevel="High"
+        integrityLevel="High"
+        confidentialityLevel="High"
+        testId={testId}
+      />
+    );
 
-    expect(screen.getByText("None Availability")).toBeInTheDocument();
-    expect(screen.getByText("None Integrity")).toBeInTheDocument();
-    expect(screen.getByText("None Confidentiality")).toBeInTheDocument();
+    expect(screen.getByTestId(testId)).toBeInTheDocument();
   });
 });

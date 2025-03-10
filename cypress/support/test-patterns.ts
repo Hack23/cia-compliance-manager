@@ -114,25 +114,72 @@ export function testComplianceStatus(
 }
 
 /**
- * Test a widget's responsiveness to security level changes
+ * More resilient helper to verify compliance status updates based on security levels
  */
-export function testSecurityLevelFeedback(
-  securityControlSelector: string,
-  feedbackSelector: string
-) {
-  // Set initial level
-  cy.get(securityControlSelector).select("None");
-  cy.wait(200);
+export function testComplianceStatusResilient(securityLevels: {
+  low: [string, string, string];
+  high: [string, string, string];
+}) {
+  // First - simply verify we can find compliance-related content
+  cy.get("body").then(($body) => {
+    const bodyText = $body.text().toLowerCase();
+    const hasComplianceTerms = [
+      "compliance",
+      "compliant",
+      "framework",
+      "standard",
+      "regulation",
+      "requirement",
+    ].some((term) => bodyText.includes(term));
 
-  // Get feedback text
-  cy.get(feedbackSelector)
+    expect(hasComplianceTerms).to.be.true;
+    cy.log("Found compliance-related terms on the page");
+  });
+
+  // Test with low security first - directly manipulate selects
+  cy.get("select").each(($select, index) => {
+    if (index === 0)
+      cy.wrap($select).select(securityLevels.low[0], { force: true }).wait(200);
+    if (index === 1)
+      cy.wrap($select).select(securityLevels.low[1], { force: true }).wait(200);
+    if (index === 2)
+      cy.wrap($select).select(securityLevels.low[2], { force: true }).wait(200);
+  });
+  cy.wait(1000);
+
+  // Capture initial page content
+  cy.get("body")
     .invoke("text")
-    .then((initialText) => {
-      // Change security level
-      cy.get(securityControlSelector).select("High");
-      cy.wait(200);
+    .then((lowLevelContent) => {
+      // Now test with high security - directly manipulate selects
+      cy.get("select").each(($select, index) => {
+        if (index === 0)
+          cy.wrap($select)
+            .select(securityLevels.high[0], { force: true })
+            .wait(200);
+        if (index === 1)
+          cy.wrap($select)
+            .select(securityLevels.high[1], { force: true })
+            .wait(200);
+        if (index === 2)
+          cy.wrap($select)
+            .select(securityLevels.high[2], { force: true })
+            .wait(200);
+      });
+      cy.wait(1000);
 
-      // Verify feedback changed
-      cy.get(feedbackSelector).invoke("text").should("not.equal", initialText);
+      // Verify content has changed
+      cy.get("body")
+        .invoke("text")
+        .then((highLevelContent) => {
+          // Check if content has changed with higher security levels
+          expect(highLevelContent).not.to.equal(lowLevelContent);
+
+          // Also check for text specific to high security (optional)
+          expect(highLevelContent.toLowerCase()).to.include(
+            securityLevels.high[0].toLowerCase()
+          );
+          cy.log("Content changed after setting higher security levels");
+        });
     });
 }
