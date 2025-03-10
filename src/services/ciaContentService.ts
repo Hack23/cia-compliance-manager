@@ -1106,35 +1106,43 @@ export function createCIAContentService(
    * Get value points for a security level
    */
   function getValuePoints(level: SecurityLevel): string[] {
-    const valuePointsMap: Record<SecurityLevel, string[]> = {
-      None: [
-        "Minimal investment required",
-        "Suitable for non-sensitive public information",
-        "No special security expertise needed",
-      ],
-      Low: [
-        "Basic protection for internal data",
-        "Cost-effective implementation",
-        "Low maintenance overhead",
-      ],
-      Moderate: [
-        "Standard protection for business data",
-        "Balanced security investment",
-        "Meets common compliance requirements",
-      ],
-      High: [
-        "Robust protection for sensitive data",
-        "Comprehensive security controls",
-        "Strong compliance position",
-      ],
-      "Very High": [
-        "Maximum protection for critical data",
-        "Enterprise-grade security architecture",
-        "Full regulatory compliance capabilities",
-      ],
-    };
+    const defaultPoints = ["Provides basic security foundation"];
 
-    return valuePointsMap[level] || valuePointsMap["None"];
+    switch (level) {
+      case "Very High":
+        return [
+          "Maximum security value with comprehensive protection",
+          "Enables business in highly regulated industries",
+          "Provides competitive advantage through superior security posture",
+          "Minimizes risk of data breaches and associated costs",
+          "Ensures regulatory compliance across major frameworks",
+        ];
+      case "High":
+        return [
+          "Strong security value with robust protection",
+          "Supports business in moderately regulated industries",
+          "Reduces risk of security incidents significantly",
+          "Protects sensitive data and critical operations",
+          "Meets requirements for most compliance frameworks",
+        ];
+      case "Moderate":
+        return [
+          "Balanced security value for typical business needs",
+          "Provides reasonable protection against common threats",
+          "Maintains business continuity during minor incidents",
+          "Protects most business functions effectively",
+          "Meets basic regulatory requirements",
+        ];
+      case "Low":
+        return [
+          "Basic security value for minimal protection",
+          "Guards against simple, common threats",
+          "Provides foundation for future security improvements",
+          "Offers minimal protection for non-critical systems",
+        ];
+      default:
+        return defaultPoints;
+    }
   }
 
   /**

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { CIAComponentType } from "../../constants/testIds";
+import React, { useState, useMemo } from "react";
+import ciaContentService, {
+  CIAComponentType,
+} from "../../services/ciaContentService";
 import { SecurityLevel } from "../../types/cia";
 
 // Define interface here instead of importing conflicting one
@@ -43,6 +45,30 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   ): void => {
     setActiveTab(tab);
   };
+
+  // Get availability implementation details from service
+  const availabilityDetails = useMemo(() => {
+    return ciaContentService.getTechnicalImplementation(
+      "availability",
+      actualAvailabilityLevel as SecurityLevel
+    );
+  }, [actualAvailabilityLevel]);
+
+  // Get integrity implementation details from service
+  const integrityDetails = useMemo(() => {
+    return ciaContentService.getTechnicalImplementation(
+      "integrity",
+      actualIntegrityLevel as SecurityLevel
+    );
+  }, [actualIntegrityLevel]);
+
+  // Get confidentiality implementation details from service
+  const confidentialityDetails = useMemo(() => {
+    return ciaContentService.getTechnicalImplementation(
+      "confidentiality",
+      actualConfidentialityLevel as SecurityLevel
+    );
+  }, [actualConfidentialityLevel]);
 
   return (
     <div
@@ -155,7 +181,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
               {actualAvailabilityLevel}
             </div>
             <p className="text-sm my-2" data-testid="technical-description">
-              {getAvailabilityDescription(actualAvailabilityLevel)}
+              {availabilityDetails.description}
             </p>
             <div data-testid="technical-details">
               <h4
@@ -165,10 +191,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                 Implementation Steps
               </h4>
               <ul className="list-disc list-inside text-xs ml-2 mt-1">
-                {getImplementationSteps(
-                  actualAvailabilityLevel,
-                  "availability"
-                ).map((step, index) => (
+                {availabilityDetails.implementationSteps.map((step, index) => (
                   <li
                     key={`availability-step-${index}`}
                     data-testid={`implementation-step-${index}`}
@@ -187,15 +210,15 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs mt-1">
                 <div data-testid="development-effort">
                   <span className="font-medium">Development Effort:</span>{" "}
-                  {getEffortLevel(actualAvailabilityLevel)}
+                  {availabilityDetails.effort.development}
                 </div>
                 <div data-testid="maintenance-level">
                   <span className="font-medium">Maintenance:</span>{" "}
-                  {getMaintenanceLevel(actualAvailabilityLevel)}
+                  {availabilityDetails.effort.maintenance}
                 </div>
                 <div data-testid="required-expertise">
                   <span className="font-medium">Expertise:</span>{" "}
-                  {getExpertiseLevel(actualAvailabilityLevel)}
+                  {availabilityDetails.effort.expertise}
                 </div>
               </div>
             </div>
@@ -218,7 +241,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
               {actualIntegrityLevel}
             </div>
             <p className="text-sm my-2" data-testid="technical-description">
-              {getIntegrityDescription(actualIntegrityLevel)}
+              {integrityDetails.description}
             </p>
             <div data-testid="technical-details">
               <h4
@@ -228,16 +251,14 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                 Implementation Steps
               </h4>
               <ul className="list-disc list-inside text-xs ml-2 mt-1">
-                {getImplementationSteps(actualIntegrityLevel, "integrity").map(
-                  (step, index) => (
-                    <li
-                      key={`integrity-step-${index}`}
-                      data-testid={`implementation-step-${index}`}
-                    >
-                      {step}
-                    </li>
-                  )
-                )}
+                {integrityDetails.implementationSteps.map((step, index) => (
+                  <li
+                    key={`integrity-step-${index}`}
+                    data-testid={`implementation-step-${index}`}
+                  >
+                    {step}
+                  </li>
+                ))}
               </ul>
 
               <h4
@@ -249,15 +270,15 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs mt-1">
                 <div data-testid="development-effort">
                   <span className="font-medium">Development Effort:</span>{" "}
-                  {getEffortLevel(actualIntegrityLevel)}
+                  {integrityDetails.effort.development}
                 </div>
                 <div data-testid="maintenance-level">
                   <span className="font-medium">Maintenance:</span>{" "}
-                  {getMaintenanceLevel(actualIntegrityLevel)}
+                  {integrityDetails.effort.maintenance}
                 </div>
                 <div data-testid="required-expertise">
                   <span className="font-medium">Expertise:</span>{" "}
-                  {getExpertiseLevel(actualIntegrityLevel)}
+                  {integrityDetails.effort.expertise}
                 </div>
               </div>
             </div>
@@ -280,7 +301,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
               {actualConfidentialityLevel}
             </div>
             <p className="text-sm my-2" data-testid="technical-description">
-              {getConfidentialityDescription(actualConfidentialityLevel)}
+              {confidentialityDetails.description}
             </p>
             <div data-testid="technical-details">
               <h4
@@ -290,17 +311,16 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                 Implementation Steps
               </h4>
               <ul className="list-disc list-inside text-xs ml-2 mt-1">
-                {getImplementationSteps(
-                  actualConfidentialityLevel,
-                  "confidentiality"
-                ).map((step, index) => (
-                  <li
-                    key={`confidentiality-step-${index}`}
-                    data-testid={`implementation-step-${index}`}
-                  >
-                    {step}
-                  </li>
-                ))}
+                {confidentialityDetails.implementationSteps.map(
+                  (step, index) => (
+                    <li
+                      key={`confidentiality-step-${index}`}
+                      data-testid={`implementation-step-${index}`}
+                    >
+                      {step}
+                    </li>
+                  )
+                )}
               </ul>
 
               <h4
@@ -312,15 +332,15 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs mt-1">
                 <div data-testid="development-effort">
                   <span className="font-medium">Development Effort:</span>{" "}
-                  {getEffortLevel(actualConfidentialityLevel)}
+                  {confidentialityDetails.effort.development}
                 </div>
                 <div data-testid="maintenance-level">
                   <span className="font-medium">Maintenance:</span>{" "}
-                  {getMaintenanceLevel(actualConfidentialityLevel)}
+                  {confidentialityDetails.effort.maintenance}
                 </div>
                 <div data-testid="required-expertise">
                   <span className="font-medium">Expertise:</span>{" "}
-                  {getExpertiseLevel(actualConfidentialityLevel)}
+                  {confidentialityDetails.effort.expertise}
                 </div>
               </div>
             </div>
@@ -330,138 +350,5 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
     </div>
   );
 };
-
-// Helper functions for descriptions
-function getAvailabilityDescription(level: string): string {
-  switch (level) {
-    case "Very High":
-      return "Implement N+2 redundancy for all critical components. Deploy multi-region active-active architecture with automated failover. Use load balancers with health checks and auto-scaling. Implement comprehensive monitoring with automated remediation. RPO < 1 minute, RTO < 5 minutes.";
-    case "High":
-      return "Implement N+1 redundancy for critical components. Deploy multi-region standby architecture with automated failover. Use load balancers with health checks. Implement comprehensive monitoring with alerts. RPO < 15 minutes, RTO < 1 hour.";
-    case "Moderate":
-      return "Implement redundancy for important components. Deploy backup systems with semi-automated recovery. Use basic load balancing. Implement standard monitoring with alerts. RPO < 4 hours, RTO < 8 hours.";
-    case "Low":
-      return "Implement basic backup systems with manual recovery procedures. Use minimal monitoring for critical services. RPO < 24 hours, RTO < 48 hours.";
-    default:
-      return "No redundancy or monitoring in place.";
-  }
-}
-
-function getIntegrityDescription(level: string): string {
-  switch (level) {
-    case "Very High":
-      return "Implement comprehensive input validation, output encoding, and parameterized queries. Use digital signatures for all data. Deploy tamper-evident logging with blockchain or similar technology. Implement segregation of duties and multi-party authorization for critical operations. Conduct regular integrity verification of all data stores and code.";
-    case "High":
-      return "Implement thorough input validation and output encoding. Use checksums or hashing for important data. Deploy secure logging with tamper protection. Implement role-based access controls with least privilege. Conduct regular integrity checks for important systems.";
-    case "Moderate":
-      return "Implement basic input validation. Use version control for code and configuration. Deploy audit logging for important events. Implement standard access controls. Conduct periodic integrity checks for critical systems.";
-    case "Low":
-      return "Implement minimal input validation. Use basic access controls. Maintain simple logs of major changes. Conduct occasional integrity checks on critical data.";
-    default:
-      return "No specific data integrity controls. Data may be modified without detection or tracking.";
-  }
-}
-
-function getConfidentialityDescription(level: string): string {
-  switch (level) {
-    case "Very High":
-      return "Implement end-to-end encryption with strong algorithms (AES-256) and robust key management. Use multi-factor authentication for all access. Deploy data loss prevention systems. Implement comprehensive access controls with just-in-time privileged access. Conduct regular security assessments and penetration testing.";
-    case "High":
-      return "Implement encryption for sensitive data in transit and at rest. Use multi-factor authentication for privileged access. Implement role-based access control with least privilege. Conduct periodic security assessments and vulnerability scanning.";
-    case "Moderate":
-      return "Implement TLS for data in transit. Use basic encryption for sensitive data at rest. Implement standard authentication and authorization controls. Use basic auditing for access to sensitive data.";
-    case "Low":
-      return "Implement basic access controls. Use TLS for external connections. Apply simple authorization rules. Maintain basic access logs.";
-    default:
-      return "No specific confidentiality controls. Data may be accessed without proper authorization or tracking.";
-  }
-}
-
-// Helper functions for implementation steps
-function getImplementationSteps(level: string, category: string): string[] {
-  const baseSteps: Record<string, string[]> = {
-    "Very High": [
-      "Implement enterprise-grade solutions",
-      "Deploy automated recovery systems",
-      "Ensure geographic redundancy",
-      "Establish 24/7 monitoring",
-      "Create comprehensive documentation",
-    ],
-    High: [
-      "Deploy robust security controls",
-      "Implement automated alerting",
-      "Establish recovery procedures",
-      "Configure monitoring dashboards",
-      "Document critical processes",
-    ],
-    Moderate: [
-      "Set up standard security controls",
-      "Configure basic alerting",
-      "Define recovery processes",
-      "Implement regular audits",
-      "Create operational documentation",
-    ],
-    Low: [
-      "Deploy minimal security measures",
-      "Set up basic monitoring",
-      "Define basic recovery steps",
-      "Document system configuration",
-    ],
-    None: [
-      "No implementation steps defined",
-      "Consider security improvement plan",
-    ],
-  };
-
-  // Return base steps, could be enhanced with category-specific steps
-  // Fix: Ensure we always return a string array even if level isn't found
-  return baseSteps[level] || baseSteps["None"] || [];
-}
-
-// Helper functions for resource requirements
-function getEffortLevel(level: string): string {
-  switch (level) {
-    case "Very High":
-      return "Very High (200+ person-days)";
-    case "High":
-      return "High (100-200 person-days)";
-    case "Moderate":
-      return "Moderate (40-100 person-days)";
-    case "Low":
-      return "Low (10-40 person-days)";
-    default:
-      return "Minimal (< 10 person-days)";
-  }
-}
-
-function getMaintenanceLevel(level: string): string {
-  switch (level) {
-    case "Very High":
-      return "Continuous";
-    case "High":
-      return "Weekly reviews";
-    case "Moderate":
-      return "Monthly reviews";
-    case "Low":
-      return "Quarterly reviews";
-    default:
-      return "Minimal/None";
-  }
-}
-
-function getExpertiseLevel(level: string): string {
-  switch (level) {
-    case "Very High":
-      return "Expert";
-    case "High":
-      return "Advanced";
-    case "Moderate":
-      return "Intermediate";
-    case "Low":
-      return "Basic";
-    default:
-      return "None required";
-  }
-}
 
 export default TechnicalDetailsWidget;

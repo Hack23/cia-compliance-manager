@@ -1,21 +1,19 @@
-import React from "react";
-import {
-  SECURITY_LEVELS,
-  VALUE_CREATION_POINTS,
-  ROI_ESTIMATES,
-  UI_TEXT,
-  DETAILED_VALUE_POINTS,
-} from "../../constants/appConstants";
-import { ensureArray } from "../../utils/typeGuards";
+import React, { useMemo } from "react";
+import { SECURITY_LEVELS, UI_TEXT } from "../../constants/appConstants";
 import ValueDisplay from "../common/ValueDisplay";
 import KeyValuePair from "../common/KeyValuePair";
 import {
   WIDGET_TEST_IDS,
   createDynamicTestId,
   VALUE_CREATION_TEST_IDS,
-  asSecurityLevel,
 } from "../../constants/testIds";
 import { WidgetBaseProps } from "../../types/widgets";
+import ciaContentService, {
+  getValuePoints,
+  getROIEstimate,
+  getImplementationConsiderations,
+} from "../../services/ciaContentService";
+import { SecurityLevel } from "../../types/cia";
 
 export interface ValueCreationWidgetProps extends WidgetBaseProps {
   securityLevel: string;
@@ -31,73 +29,20 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   confidentialityLevel,
   testId = VALUE_CREATION_TEST_IDS.VALUE_CREATION_PREFIX,
 }) => {
-  // Create a mapping to simplify the getValuePoints function
-  const getValuePoints = () => {
-    const levelMap: Record<string, string[]> = {
-      [SECURITY_LEVELS.VERY_HIGH]: [
-        VALUE_CREATION_POINTS[SECURITY_LEVELS.VERY_HIGH][0] ??
-          "Premium security value",
-        ...DETAILED_VALUE_POINTS.VERY_HIGH,
-      ],
-      [SECURITY_LEVELS.HIGH]: [
-        VALUE_CREATION_POINTS[SECURITY_LEVELS.HIGH][0] ?? "High security value",
-        ...DETAILED_VALUE_POINTS.HIGH,
-      ],
-      [SECURITY_LEVELS.MODERATE]: [
-        VALUE_CREATION_POINTS[SECURITY_LEVELS.MODERATE][0] ??
-          "Moderate security value",
-        ...DETAILED_VALUE_POINTS.MODERATE,
-      ],
-      [SECURITY_LEVELS.LOW]: [
-        VALUE_CREATION_POINTS[SECURITY_LEVELS.LOW][0] ?? "Basic security value",
-        ...DETAILED_VALUE_POINTS.LOW,
-      ],
-      [SECURITY_LEVELS.NONE]: [
-        VALUE_CREATION_POINTS[SECURITY_LEVELS.NONE][0] ??
-          "Minimal security value",
-        ...DETAILED_VALUE_POINTS.NONE,
-      ],
-    };
+  // Use ciaContentService to get value points
+  const valuePoints = useMemo(() => {
+    return getValuePoints(securityLevel as SecurityLevel) || [];
+  }, [securityLevel]);
 
-    return levelMap[securityLevel] || levelMap[SECURITY_LEVELS.NONE];
-  };
+  // Get ROI data from ciaContentService
+  const roiData = useMemo(() => {
+    return getROIEstimate(securityLevel as SecurityLevel);
+  }, [securityLevel]);
 
-  // Fix the function call - no arguments needed
-  const valuePoints = getValuePoints() || [];
-
-  // Get ROI estimation based on security level
-  const getROIEstimate = () => {
-    switch (securityLevel) {
-      case SECURITY_LEVELS.VERY_HIGH:
-        return {
-          value: "5x+",
-          description: "Maximum return with comprehensive security controls",
-        };
-      case SECURITY_LEVELS.HIGH:
-        return {
-          value: "3-5x",
-          description: "Strong return with robust security implementation",
-        };
-      case SECURITY_LEVELS.MODERATE:
-        return {
-          value: "2-3x",
-          description: "Good return with balanced security approach",
-        };
-      case SECURITY_LEVELS.LOW:
-        return {
-          value: "1-2x",
-          description: "Basic return with minimal security investment",
-        };
-      default:
-        return {
-          value: "Negative (high risk of losses)",
-          description: "No return without security investment",
-        };
-    }
-  };
-
-  // Get ROI data from calculation
-  const roiData = getROIEstimate();
+  // Get implementation considerations from ciaContentService
+  const implementationConsiderations = useMemo(() => {
+    return getImplementationConsiderations(securityLevel as SecurityLevel);
+  }, [securityLevel]);
 
   // Color styling based on level
   const getLevelVariant = () => {
@@ -158,7 +103,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         data-testid={WIDGET_TEST_IDS.VALUE_POINTS_LIST}
         aria-label="Value creation points"
       >
-        {ensureArray(valuePoints).map((point, index) => (
+        {valuePoints.map((point, index) => (
           <li
             key={index}
             className="flex items-start"
@@ -198,27 +143,11 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
         <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
           <h5 className="font-medium mb-1">Implementation Considerations</h5>
-          <p>{getImplementationConsiderations(securityLevel)}</p>
+          <p>{implementationConsiderations}</p>
         </div>
       </div>
     </div>
   );
 };
-
-// Add a new helper function
-function getImplementationConsiderations(level: string): string {
-  switch (level) {
-    case SECURITY_LEVELS.VERY_HIGH:
-      return "Implementation requires significant upfront investment but offers maximum long-term value through comprehensive risk reduction and regulatory compliance.";
-    case SECURITY_LEVELS.HIGH:
-      return "Balanced approach with substantial security benefits and reasonable implementation costs for most organizations with sensitive data or operations.";
-    case SECURITY_LEVELS.MODERATE:
-      return "Cost-effective implementation that provides standard security capabilities suitable for most business applications and moderate risk environments.";
-    case SECURITY_LEVELS.LOW:
-      return "Minimal implementation effort focused on essential security controls, appropriate for non-critical systems or limited budgets.";
-    default:
-      return "No security implementation considerations. Consider baseline security controls for any business system.";
-  }
-}
 
 export default ValueCreationWidget;
