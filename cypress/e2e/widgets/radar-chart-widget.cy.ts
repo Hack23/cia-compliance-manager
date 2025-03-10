@@ -4,6 +4,7 @@ import { setupWidgetTest } from "./widget-test-helper";
 describe("Radar Chart Widget", () => {
   beforeEach(() => {
     // Use helper to set up test with better visibility control
+    // Use the correct test ID from the table
     setupWidgetTest("widget-radar-chart");
   });
 
@@ -11,10 +12,12 @@ describe("Radar Chart Widget", () => {
     // First check if radar chart exists, using more flexible selector strategies
     cy.get("body").then(($body) => {
       // Check for any of these elements that might be the chart
+      // Use correct test IDs from the table
       const selectors = [
         `[data-testid="${CHART_TEST_IDS.RADAR_CHART}"]`,
         `[data-testid="${CHART_TEST_IDS.RADAR_CHART_CANVAS}"]`,
-        `[data-testid="radar-chart-visualization"]`,
+        `[data-testid="${CHART_TEST_IDS.RADAR_CHART}-container"]`, // Dynamic container ID
+        `[data-testid="widget-radar-chart"]`,
         "canvas",
         ".radar-chart",
       ];
@@ -46,9 +49,30 @@ describe("Radar Chart Widget", () => {
   });
 
   it("shows all three CIA dimensions", () => {
-    // Find text mentioning all three CIA dimensions using more flexible selectors
-    cy.contains(/availability/i).should("exist");
-    cy.contains(/integrity/i).should("exist");
-    cy.contains(/confidentiality/i).should("exist");
+    // Look for specific CIA value elements first
+    cy.get("body").then(($body) => {
+      const ciaValueSelectors = [
+        `[data-testid="${CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE}"]`,
+        `[data-testid="${CHART_TEST_IDS.RADAR_INTEGRITY_VALUE}"]`,
+        `[data-testid="${CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE}"]`,
+      ];
+
+      // Check if any of the specific value elements exist
+      const hasSpecificElements = ciaValueSelectors.some(
+        (selector) => $body.find(selector).length > 0
+      );
+
+      if (hasSpecificElements) {
+        // Verify each dimension value is present
+        ciaValueSelectors.forEach((selector) => {
+          cy.get(selector).should("exist");
+        });
+      } else {
+        // Fallback to checking for text content
+        cy.contains(/availability/i).should("exist");
+        cy.contains(/integrity/i).should("exist");
+        cy.contains(/confidentiality/i).should("exist");
+      }
+    });
   });
 });

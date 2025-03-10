@@ -1,14 +1,19 @@
-import { CIA_TEST_IDS, SECURITY_LEVELS } from "../../support/constants";
+import {
+  CIA_TEST_IDS,
+  SECURITY_LEVELS,
+  WIDGET_TEST_IDS,
+} from "../../support/constants";
 import { setupWidgetTest } from "./widget-test-helper";
 
 describe("Security Profile Configuration Widget", () => {
   beforeEach(() => {
     // Use more flexible widget ID matching for security widget
     cy.document().then((doc) => {
-      // Try multiple possible IDs for security level widget
+      // Try multiple possible IDs for security level widget based on the table
       const possibleIds = [
-        "widget-security-level",
+        WIDGET_TEST_IDS.SECURITY_LEVEL_WIDGET, // Use constant from table
         "widget-security-level-selection",
+        "security-level-selector",
         "security-level-controls",
       ];
 
@@ -22,17 +27,23 @@ describe("Security Profile Configuration Widget", () => {
       }
 
       // If found, use that ID, otherwise use the original for error reporting
-      setupWidgetTest(foundId || "widget-security-level");
+      setupWidgetTest(foundId || WIDGET_TEST_IDS.SECURITY_LEVEL_WIDGET);
     });
   });
 
   it("allows business users to configure appropriate security levels", () => {
-    // Check for security level selectors
+    // Check for security level selectors using proper test IDs from table
     cy.get("body").then(($body) => {
       const selectors = [
+        // Correct test IDs from CIA_TEST_IDS
         `[data-testid="${CIA_TEST_IDS.AVAILABILITY_SELECT}"]`,
         `[data-testid="${CIA_TEST_IDS.INTEGRITY_SELECT}"]`,
         `[data-testid="${CIA_TEST_IDS.CONFIDENTIALITY_SELECT}"]`,
+        // Section selectors with inner select elements
+        `[data-testid="${CIA_TEST_IDS.AVAILABILITY_SECTION}"] select`,
+        `[data-testid="${CIA_TEST_IDS.INTEGRITY_SECTION}"] select`,
+        `[data-testid="${CIA_TEST_IDS.CONFIDENTIALITY_SECTION}"] select`,
+        // Fallbacks
         `[data-testid*="select"]`,
         "select",
       ];
@@ -58,12 +69,14 @@ describe("Security Profile Configuration Widget", () => {
   });
 
   it("provides business context through descriptions for each security level", () => {
-    // Find any description elements
+    // Find any description elements using proper test IDs
     cy.get("body").then(($body) => {
       const descriptionSelectors = [
+        // Correct test IDs for descriptions
         `[data-testid="${CIA_TEST_IDS.AVAILABILITY_DESCRIPTION_TEXT}"]`,
         `[data-testid="${CIA_TEST_IDS.INTEGRITY_DESCRIPTION_TEXT}"]`,
         `[data-testid="${CIA_TEST_IDS.CONFIDENTIALITY_DESCRIPTION_TEXT}"]`,
+        // Fallbacks
         `[data-testid*="description"]`,
         `.security-description`,
         `p`,

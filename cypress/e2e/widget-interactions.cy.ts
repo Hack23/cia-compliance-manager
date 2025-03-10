@@ -11,6 +11,9 @@ import {
   BUSINESS_IMPACT_TEST_IDS,
   COST_TEST_IDS,
   WIDGET_TEST_IDS,
+  SUMMARY_TEST_IDS,
+  CHART_TEST_IDS,
+  CIA_TEST_IDS,
   getTestSelector,
 } from "../support/constants";
 import { forceElementVisibility } from "../support/test-helpers";
@@ -42,7 +45,7 @@ const findElement = (selectors: string[]): Cypress.Chainable => {
 // Helper function to find impact level elements with more flexibility
 const findImpactLevel = (component: string): Cypress.Chainable => {
   return cy.get("body").then(($body) => {
-    // Try multiple selector patterns
+    // Try multiple selector patterns using correct test IDs
     const selectors = [
       `[data-testid="${BUSINESS_IMPACT_TEST_IDS.IMPACT_LEVEL_TEXT_PREFIX}-${component}"]`,
       `[data-testid*="impact"][data-testid*="${component}"]`,

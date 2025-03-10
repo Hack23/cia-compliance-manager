@@ -1,4 +1,9 @@
-import { TEST_IDS, getTestSelector } from "./constants";
+import {
+  TEST_IDS,
+  getTestSelector,
+  CIA_TEST_IDS,
+  WIDGET_TEST_IDS,
+} from "./constants";
 
 // DO NOT declare types here - they are in types.d.ts
 // Remove all "declare global" blocks
@@ -12,56 +17,83 @@ import { TEST_IDS, getTestSelector } from "./constants";
 Cypress.Commands.add(
   "setSecurityLevels",
   (availability: string, integrity: string, confidentiality: string) => {
-    // First make sure the security controls are visible in the viewport
-    cy.get(getTestSelector(TEST_IDS.SECURITY_LEVEL_CONTROLS), {
-      timeout: 5000, // Reduced timeout
-    })
-      .should("exist")
-      .scrollIntoView({ duration: 100 })
-      .should("be.visible")
-      .wait(300); // Reduced wait time
+    // First try to find the security controls container with more flexible selectors
+    cy.get("body").then(($body) => {
+      // Try different possible selectors for the security controls container
+      const selectors = [
+        "[data-testid='security-level-controls']",
+        "[data-testid='security-level-selector']",
+        "[data-testid='widget-security-level']",
+        "[data-testid='widget-security-level-selection']",
+        // Fallback to any element containing the security selects
+        "div:has([data-testid='confidentiality-select'])",
+      ];
+
+      // Find the first selector that exists
+      const existingSelector = selectors.find(
+        (sel) => $body.find(sel).length > 0
+      );
+
+      if (existingSelector) {
+        cy.get(existingSelector)
+          .scrollIntoView({ duration: 100 })
+          .should("be.visible")
+          .wait(300);
+      } else {
+        // If no container found, log and proceed trying to find the individual selects directly
+        cy.log(
+          "Could not find security level controls container, trying to set values directly"
+        );
+      }
+    });
 
     // Set availability level with retry logic
-    cy.get(getTestSelector(TEST_IDS.AVAILABILITY_SELECT))
+    cy.get("[data-testid='availability-select']")
+      .should("exist")
+      .scrollIntoView()
       .should("be.visible")
       .then(($el) => {
         if (!$el.is(":disabled")) {
           cy.wrap($el).select(availability, { force: true });
         } else {
           cy.log("Availability select is disabled, waiting...");
-          cy.wait(300); // Reduced wait time
+          cy.wait(300);
           cy.wrap($el)
             .should("not.be.disabled")
             .select(availability, { force: true });
         }
       })
-      .wait(200); // Reduced wait time
+      .wait(200);
 
     // Set integrity level with retry logic
-    cy.get(getTestSelector(TEST_IDS.INTEGRITY_SELECT))
+    cy.get("[data-testid='integrity-select']")
+      .should("exist")
+      .scrollIntoView()
       .should("be.visible")
       .then(($el) => {
         if (!$el.is(":disabled")) {
           cy.wrap($el).select(integrity, { force: true });
         } else {
           cy.log("Integrity select is disabled, waiting...");
-          cy.wait(300); // Reduced wait time
+          cy.wait(300);
           cy.wrap($el)
             .should("not.be.disabled")
             .select(integrity, { force: true });
         }
       })
-      .wait(200); // Reduced wait time
+      .wait(200);
 
     // Set confidentiality level with retry logic
-    cy.get(getTestSelector(TEST_IDS.CONFIDENTIALITY_SELECT))
+    cy.get("[data-testid='confidentiality-select']")
+      .should("exist")
+      .scrollIntoView()
       .should("be.visible")
       .then(($el) => {
         if (!$el.is(":disabled")) {
           cy.wrap($el).select(confidentiality, { force: true });
         } else {
           cy.log("Confidentiality select is disabled, waiting...");
-          cy.wait(300); // Reduced wait time
+          cy.wait(300);
           cy.wrap($el)
             .should("not.be.disabled")
             .select(confidentiality, { force: true });
@@ -69,7 +101,7 @@ Cypress.Commands.add(
       });
 
     // Wait for UI to update after all selections
-    cy.wait(300); // Reduced wait time
+    cy.wait(300);
   }
 );
 
@@ -148,19 +180,51 @@ Cypress.Commands.add(
     category: "availability" | "integrity" | "confidentiality",
     level: string
   ) => {
+    // Primary selector patterns to try (from most specific to most generic)
+    const selectors = [
+      // Primary test ID format
+      `[data-testid="${category}-select"]`,
+      // Alternative formats using CIA_TEST_IDS constants
+      `[data-testid="${
+        CIA_TEST_IDS[
+          `${category.toUpperCase()}_SELECT` as keyof typeof CIA_TEST_IDS
+        ]
+      }"]`,
+      `[data-testid="${
+        CIA_TEST_IDS[
+          `${category.toUpperCase()}_SECTION` as keyof typeof CIA_TEST_IDS
+        ]
+      }"] select`,
+      // Last resort - index-based approach
+      `${getTestSelector(WIDGET_TEST_IDS.SECURITY_LEVEL_WIDGET)} select`,
+      `[data-testid="widget-security-level-selection"] select`,
+      `[data-testid="security-level-controls"] select`,
+    ];
+
+    // Index fallback for generic select elements as last resort
     let index = 0;
     if (category === "integrity") index = 1;
     if (category === "confidentiality") index = 2;
 
-    cy.get(`[data-testid="${category}-select"]`, {
-      log: false,
-      timeout: 5000,
-    }).then(($el) => {
-      if ($el && $el.length) {
-        cy.wrap($el).select(level, { force: true });
+    // Try each selector in sequence until we find one that works
+    cy.get("body").then(($body) => {
+      // Find first matching selector that exists in the DOM
+      const existingSelector = selectors.find(
+        (selector) => $body.find(selector).length > 0
+      );
+
+      if (existingSelector) {
+        // Use the first working selector
+        cy.get(existingSelector, { timeout: 5000 })
+          .scrollIntoView()
+          .should("be.visible")
+          .select(level, { force: true });
       } else {
+        // Last resort - use index-based selection
+        cy.log(`Using fallback index-based selection for ${category}`);
         cy.get("select", { timeout: 5000 })
           .eq(index)
+          .scrollIntoView()
           .select(level, { force: true });
       }
     });

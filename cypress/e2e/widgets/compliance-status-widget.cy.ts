@@ -3,12 +3,16 @@ import {
   SECURITY_LEVELS,
   COMPLIANCE_FRAMEWORKS,
   COMPLIANCE_STATUS,
+  WIDGET_TEST_IDS,
 } from "../../support/constants";
 import { setupWidgetTest } from "./widget-test-helper";
 
 describe("Compliance Status Widget", () => {
   beforeEach(() => {
-    setupWidgetTest("widget-compliance-status");
+    // Use the correct test ID from the table
+    setupWidgetTest(
+      FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_WIDGET || "widget-compliance-status"
+    );
   });
 
   it("shows compliance status for regulatory requirements", () => {
@@ -17,6 +21,8 @@ describe("Compliance Status Widget", () => {
       const complianceSelectors = [
         `[data-testid="${FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_WIDGET}"]`,
         `[data-testid="${FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_BADGE}"]`,
+        `[data-testid="${FRAMEWORK_TEST_IDS.COMPLIANCE_FRAMEWORKS_CONTAINER}"]`,
+        `[data-testid="${FRAMEWORK_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST}"]`,
         `[data-testid*="compliance"]`,
         `[data-testid*="status"]`,
       ];
@@ -82,20 +88,30 @@ describe("Compliance Status Widget", () => {
 
     cy.wait(500);
 
-    // Check for any business context information
+    // Check for compliance requirements list
     cy.get("body").then(($body) => {
-      // Look for compliance-related content
-      const hasComplianceContext = [
-        "regulatory",
-        "requirement",
-        "framework",
-        "compliance",
-        "standard",
-        "certification",
-        "audit",
-      ].some((term) => $body.text().toLowerCase().includes(term));
+      if (
+        $body.find(
+          `[data-testid="${FRAMEWORK_TEST_IDS.COMPLIANCE_REQUIREMENTS_LIST}"]`
+        ).length
+      ) {
+        cy.get(
+          `[data-testid="${FRAMEWORK_TEST_IDS.COMPLIANCE_REQUIREMENTS_LIST}"]`
+        ).should("exist");
+      } else {
+        // Look for compliance-related content
+        const hasComplianceContext = [
+          "regulatory",
+          "requirement",
+          "framework",
+          "compliance",
+          "standard",
+          "certification",
+          "audit",
+        ].some((term) => $body.text().toLowerCase().includes(term));
 
-      expect(hasComplianceContext).to.be.true;
+        expect(hasComplianceContext).to.be.true;
+      }
     });
   });
 });

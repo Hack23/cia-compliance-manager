@@ -27,6 +27,7 @@ describe("Security Summary Widget", () => {
     // Force the security summary widget to be visible
     cy.get("body").then(($body) => {
       const summarySelectors = [
+        // Use the correct test ID from the table
         `[data-testid="${SUMMARY_TEST_IDS.SECURITY_SUMMARY_CONTAINER}"]`,
         `[data-testid*="security-summary"]`,
         `[data-testid="widget-security-summary"]`,
@@ -65,9 +66,11 @@ describe("Security Summary Widget", () => {
 
   it("provides overall security posture assessment", () => {
     cy.get("body").then(($body) => {
-      // Look for any security summary element
+      // Look for any security summary element using correct test IDs from the table
       const summaryElements = $body.find(`
         [data-testid="${SUMMARY_TEST_IDS.SECURITY_SUMMARY_CONTAINER}"],
+        [data-testid="${SUMMARY_TEST_IDS.SECURITY_SUMMARY_DESCRIPTION}"],
+        [data-testid="${SUMMARY_TEST_IDS.SECURITY_ICON}"],
         [data-testid*="security-summary"],
         [data-testid="widget-security-summary"]
       `);
@@ -149,8 +152,10 @@ describe("Security Summary Widget", () => {
   it("provides actionable security recommendations", () => {
     cy.get("body").then(($body) => {
       // Look for recommendation sections with flexible approach
+      // Use the correct test ID from the table
       const recommendationElements = $body.find(`
-        [data-testid="${SUMMARY_TEST_IDS.SECURITY_RECOMMENDATIONS}"],
+        [data-testid="${SUMMARY_TEST_IDS.SECURITY_RECOMMENDATION}"],
+        [data-testid="${SUMMARY_TEST_IDS.RECOMMENDATION_HEADING}"],
         [data-testid*="recommendation"],
         [data-testid*="security-suggestion"]
       `);

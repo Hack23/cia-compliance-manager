@@ -1,14 +1,19 @@
-import { COST_TEST_IDS, SECURITY_LEVELS } from "../../support/constants";
+import {
+  COST_TEST_IDS,
+  SECURITY_LEVELS,
+  WIDGET_TEST_IDS,
+} from "../../support/constants";
 import { setupWidgetTest } from "./widget-test-helper";
 
 describe("Cost Estimation Widget", () => {
   beforeEach(() => {
     // Use more flexible matching for the cost widget
     cy.document().then((doc) => {
-      // Try multiple possible IDs for cost widget
+      // Try multiple possible IDs for cost widget using test IDs from table
       const possibleIds = [
+        COST_TEST_IDS.COST_ESTIMATION_WIDGET, // Use constant from table
         "widget-cost-estimation",
-        "cost-container",
+        COST_TEST_IDS.COST_CONTAINER,
         "cost-estimation-content",
       ];
 
@@ -27,12 +32,13 @@ describe("Cost Estimation Widget", () => {
   });
 
   it("provides accurate financial impact analysis of security choices", () => {
-    // Check for cost elements using flexible selectors
+    // Check for cost elements using flexible selectors with proper test IDs
     cy.get("body").then(($body) => {
-      // Look for cost indicator elements
+      // Look for cost indicator elements using correct test IDs
       const costSelectors = [
         `[data-testid="${COST_TEST_IDS.COST_CONTAINER}"]`,
         `[data-testid="${COST_TEST_IDS.COST_ESTIMATION_CONTENT}"]`,
+        `[data-testid="${COST_TEST_IDS.COST_ESTIMATION_WIDGET}"]`,
         `[data-testid="${COST_TEST_IDS.CAPEX_SECTION}"]`,
         `[data-testid="${COST_TEST_IDS.OPEX_SECTION}"]`,
         `[data-testid*="cost"]`,
@@ -84,11 +90,12 @@ describe("Cost Estimation Widget", () => {
   });
 
   it("provides ROI analysis to justify security investments", () => {
-    // Look for ROI-related information
+    // Look for ROI-related information using proper test IDs
     cy.get("body").then(($body) => {
       const roiSelectors = [
         `[data-testid="${COST_TEST_IDS.ROI_SECTION}"]`,
         `[data-testid="${COST_TEST_IDS.ROI_ESTIMATE}"]`,
+        // Fallbacks
         `[data-testid*="roi"]`,
         `[data-testid*="return"]`,
       ];

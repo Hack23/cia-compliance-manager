@@ -1,25 +1,16 @@
-import { SECURITY_LEVELS } from "../../support/constants";
+import {
+  SECURITY_LEVELS,
+  TECHNICAL_DETAILS_TEST_IDS, // Now properly imported from constants
+} from "../../support/constants";
+import { setupWidgetTest } from "./widget-test-helper";
 
 describe("Technical Implementation Widget", () => {
   beforeEach(() => {
-    cy.viewport(1280, 720);
-    cy.visit("/");
-    cy.ensureAppLoaded();
-
-    // Add style to prevent overflow issues
-    cy.document().then((doc) => {
-      const style = doc.createElement("style");
-      style.innerHTML = `
-        * {
-          overflow: visible !important; 
-          visibility: visible !important;
-          opacity: 1 !important;
-          clip: auto !important;
-          clip-path: none !important;
-        }
-      `;
-      doc.head.appendChild(style);
-    });
+    // Use setupWidgetTest with correct test ID from the table
+    setupWidgetTest(
+      TECHNICAL_DETAILS_TEST_IDS.TECHNICAL_DETAILS_WIDGET ||
+        "widget-technical-details-container"
+    );
 
     // Set security levels high to ensure we get detailed implementation information
     cy.setSecurityLevels(

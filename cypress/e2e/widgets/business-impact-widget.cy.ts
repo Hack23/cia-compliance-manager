@@ -1,13 +1,19 @@
 import {
   BUSINESS_IMPACT_TEST_IDS,
   SECURITY_LEVELS,
+  WIDGET_TEST_IDS,
+  // Fixed imports
+  CONFIDENTIALITY_IMPACT_TEST_IDS,
+  INTEGRITY_IMPACT_TEST_IDS,
+  AVAILABILITY_IMPACT_TEST_IDS,
 } from "../../support/constants";
 import { setupWidgetTest } from "./widget-test-helper";
 
 describe("Business Impact Widget", () => {
   beforeEach(() => {
     // Use our helper to set up with proper visibility handling
-    setupWidgetTest("widget-business-impact");
+    // Use the correct test ID from the table
+    setupWidgetTest("widget-business-impact-container");
 
     // Wait for initial rendering
     cy.wait(500);
@@ -16,12 +22,40 @@ describe("Business Impact Widget", () => {
   it("shows business impact of security choices", () => {
     // More flexible selector approach
     cy.get("body").then(($body) => {
-      // Use flexible text search pattern
-      cy.contains(/business impact|security impact/i).should("exist");
+      const impactSelectors = [
+        // Primary test ID from the table
+        `[data-testid="${BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_SUMMARY}"]`,
+        // Alternative test IDs
+        `[data-testid="${BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_ANALYSIS_PREFIX}"]`,
+        `[data-testid="widget-business-impact-container"]`,
+        `[data-testid*="business-impact"]`,
+      ];
 
-      // Check for availability section using flexible matching
-      if ($body.find(`[data-testid*="availability"]`).length) {
-        cy.get(`[data-testid*="availability"]`).should("be.visible");
+      // Find first selector that exists
+      const existingSelector = impactSelectors.find(
+        (selector) => $body.find(selector).length > 0
+      );
+
+      if (existingSelector) {
+        cy.get(existingSelector).should("be.visible");
+      } else {
+        // Use flexible text search pattern
+        cy.contains(/business impact|security impact/i).should("exist");
+      }
+
+      // Check for availability section using flexible matching and correct test IDs
+      const availabilitySelectors = [
+        `[data-testid="${AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_PREFIX}"]`,
+        `[data-testid="widget-availability-impact-container"]`,
+        `[data-testid*="availability"]`,
+      ];
+
+      const existingAvailabilitySelector = availabilitySelectors.find(
+        (selector) => $body.find(selector).length > 0
+      );
+
+      if (existingAvailabilitySelector) {
+        cy.get(existingAvailabilitySelector).should("be.visible");
       } else {
         cy.contains(/availability/i).should("exist");
       }
@@ -39,7 +73,11 @@ describe("Business Impact Widget", () => {
     // Check if any impact analysis sections are present
     cy.get("body").then(($body) => {
       const selectors = [
-        `[data-testid="${BUSINESS_IMPACT_TEST_IDS.IMPACT_ANALYSIS_PREFIX}"]`,
+        // Use correct test ID from table
+        `[data-testid="${BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_ANALYSIS_PREFIX}"]`,
+        `[data-testid="${BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_SUMMARY}"]`,
+        `[data-testid="${BUSINESS_IMPACT_TEST_IDS.IMPACT_METRICS_SECTION}"]`,
+        `[data-testid="widget-business-impact-container"]`,
         `[data-testid*="impact-analysis"]`,
         `[data-testid*="business-impact"]`,
       ];
@@ -65,10 +103,14 @@ describe("Business Impact Widget", () => {
   it("provides both considerations and benefits for business analysis", () => {
     // Find and click tab elements using more reliable approach
     cy.get("body").then(($body) => {
-      // Look for anything that could be a tab
+      // Look for anything that could be a tab with correct test IDs from table
       const tabSelectors = [
         `[data-testid="${BUSINESS_IMPACT_TEST_IDS.TAB_CONSIDERATIONS}"]`,
         `[data-testid="${BUSINESS_IMPACT_TEST_IDS.TAB_BENEFITS}"]`,
+        `[data-testid="${BUSINESS_IMPACT_TEST_IDS.BUSINESS_CONSIDERATIONS}"]`,
+        `[data-testid="${BUSINESS_IMPACT_TEST_IDS.BUSINESS_BENEFITS}"]`,
+        `[data-testid*="tab-considerations"]`,
+        `[data-testid*="tab-benefits"]`,
         `[role="tab"]`,
         `button:contains("Considerations")`,
         `button:contains("Benefits")`,

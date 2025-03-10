@@ -11,58 +11,72 @@ import {
   CHART_TEST_IDS,
 } from "../../support/constants";
 import { testSecurityLevelFeedback } from "../../support/test-patterns";
+import "../../support/test-debug-helper";
 
 describe("Set Security Levels", () => {
   beforeEach(() => {
+    cy.viewport(3840, 2160);
     cy.visit("/");
     cy.ensureAppLoaded();
-    cy.viewport(3840, 2160);
+
+    // Wait for app to stabilize
+    cy.wait(1000);
+
+    // Log available test IDs to help with debugging
+    cy.logAllTestIds();
   });
 
   it("allows setting individual security levels", () => {
-    // Using the selector constants
-    cy.get(SELECTORS.WIDGETS.SECURITY_LEVEL).should("be.visible");
+    // Set security levels using our enhanced command
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.MODERATE,
+      SECURITY_LEVELS.LOW
+    );
 
-    // Using test IDs with helper function
-    cy.get(getTestSelector(TEST_IDS.AVAILABILITY_SELECT)).select(
+    // Verify the values were actually selected
+    cy.get("[data-testid='availability-select']").should(
+      "have.value",
       SECURITY_LEVELS.HIGH
     );
 
-    // Verify selection
-    cy.get(getTestSelector(TEST_IDS.AVAILABILITY_SELECT)).should(
+    cy.get("[data-testid='integrity-select']").should(
       "have.value",
-      SECURITY_LEVELS.HIGH
+      SECURITY_LEVELS.MODERATE
+    );
+
+    cy.get("[data-testid='confidentiality-select']").should(
+      "have.value",
+      SECURITY_LEVELS.LOW
     );
   });
 
   it("verifies radar chart updates with security level changes", () => {
-    // Set security levels to initial values
+    // Set all levels to HIGH
     cy.setSecurityLevels(
-      SECURITY_LEVELS.LOW,
-      SECURITY_LEVELS.LOW,
-      SECURITY_LEVELS.LOW
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH
     );
+
+    // Wait for chart to update
     cy.wait(500);
 
-    // Store radar chart state after initial values are set
-    let initialRadarState = "";
-    cy.get("body").then(($body) => {
-      initialRadarState = $body.text();
+    // Check that radar chart values match our selections
+    cy.get("[data-testid='radar-availability-value']").should(
+      "contain",
+      SECURITY_LEVELS.HIGH
+    );
 
-      // Now change to different security levels
-      cy.setSecurityLevels(
-        SECURITY_LEVELS.HIGH,
-        SECURITY_LEVELS.HIGH,
-        SECURITY_LEVELS.HIGH
-      );
-      cy.wait(500);
+    cy.get("[data-testid='radar-integrity-value']").should(
+      "contain",
+      SECURITY_LEVELS.HIGH
+    );
 
-      // Verify security levels show up in the radar chart text content
-      cy.contains(SECURITY_LEVELS.HIGH).should("exist");
-
-      // Verify content has changed by looking for specific level text
-      cy.contains(SECURITY_LEVELS.HIGH).should("be.visible");
-    });
+    cy.get("[data-testid='radar-confidentiality-value']").should(
+      "contain",
+      SECURITY_LEVELS.HIGH
+    );
   });
 
   it("verifies security widget structure", () => {
