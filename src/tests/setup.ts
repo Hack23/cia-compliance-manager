@@ -75,3 +75,11 @@ HTMLCanvasElement.prototype.getContext = vi.fn().mockImplementation(() => ({
   translate: vi.fn(),
   rotate: vi.fn(),
 }));
+
+// Create and export a function for setting up test helper functions
+export const setupTestHelpers = () => {
+  // Add any additional test helper setup here
+  return {
+    mockIntersectionObserver,
+  };
+};

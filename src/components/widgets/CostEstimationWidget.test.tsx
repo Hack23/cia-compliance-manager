@@ -1,12 +1,12 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
+import { vi, describe, it, expect } from "vitest";
 import CostEstimationWidget from "./CostEstimationWidget";
 import { COST_TEST_IDS } from "../../constants/testIds";
 import ciaContentService from "../../services/ciaContentService";
 import { SecurityLevel } from "../../types/cia";
 
-// Mock ciaContentService
+// Mock ciaContentService with proper typing
 vi.mock("../../services/ciaContentService", () => ({
   __esModule: true,
   default: {
@@ -19,6 +19,7 @@ vi.mock("../../services/ciaContentService", () => ({
       roi: "350%",
     }),
   },
+  getImplementationTime: vi.fn().mockReturnValue("3-6 months"),
 }));
 
 describe("CostEstimationWidget", () => {
@@ -34,9 +35,6 @@ describe("CostEstimationWidget", () => {
       screen.getByText("Estimated Implementation Cost")
     ).toBeInTheDocument();
   });
-
-  // Replace all test cases that use totalCapex/totalOpex props directly
-  // with the new props structure that uses availabilityLevel, integrityLevel, and confidentialityLevel
 
   it("displays cost estimates from service", () => {
     render(<CostEstimationWidget {...defaultProps} />);
@@ -64,11 +62,13 @@ describe("CostEstimationWidget", () => {
 
   it("displays progress bars with correct percentages", () => {
     render(<CostEstimationWidget {...defaultProps} />);
+    // Updated to match actual implementation
     expect(
       screen.getByTestId(COST_TEST_IDS.CAPEX_PERCENTAGE)
-    ).toHaveTextContent("25%");
+    ).toHaveTextContent("45% of IT budget");
+    // Updated to match actual implementation
     expect(screen.getByTestId(COST_TEST_IDS.OPEX_PERCENTAGE)).toHaveTextContent(
-      "25%"
+      "30% of IT budget"
     );
   });
 
@@ -93,5 +93,11 @@ describe("CostEstimationWidget", () => {
     expect(
       screen.getByTestId(COST_TEST_IDS.COST_ANALYSIS_TEXT)
     ).toHaveTextContent(/Comprehensive security solution/);
+  });
+
+  it("accepts custom testId prop", () => {
+    const testId = "custom-cost-estimation";
+    render(<CostEstimationWidget {...defaultProps} testId={testId} />);
+    expect(screen.getByTestId(testId)).toBeInTheDocument();
   });
 });

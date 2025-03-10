@@ -1,4 +1,110 @@
-import { vi } from "vitest"; // Remove SpyInstance import
+import React from "react";
+import { render } from "@testing-library/react";
+import { vi } from "vitest";
+import { SecurityLevel } from "../types/cia";
+
+/**
+ * Consistent CIA level props for component testing
+ */
+export interface CIALevelProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  securityLevel?: SecurityLevel;
+}
+
+/**
+ * Creates standard CIA level props for testing
+ */
+export const createBasicCIAProps = (
+  level: SecurityLevel = "Moderate"
+): CIALevelProps => ({
+  availabilityLevel: level,
+  integrityLevel: level,
+  confidentialityLevel: level,
+  securityLevel: level,
+});
+
+/**
+ * Creates mixed CIA level props for testing
+ */
+export const createMixedCIAProps = (): CIALevelProps => ({
+  availabilityLevel: "High",
+  integrityLevel: "Moderate",
+  confidentialityLevel: "Low",
+  securityLevel: "Moderate",
+});
+
+/**
+ * Mock service function that can be used for multiple services
+ */
+export const mockServiceFunction = <T extends object>(defaultValue: T) => {
+  return vi.fn().mockReturnValue(defaultValue);
+};
+
+/**
+ * Standard render function with options
+ */
+export const renderWithProps = <T extends object>(
+  Component: React.ComponentType<T>,
+  props: T
+) => {
+  return render(<Component {...props} />);
+};
+
+/**
+ * Creates mock handlers for CIA level changes
+ */
+export const createMockHandlers = () => ({
+  onAvailabilityChange: vi.fn(),
+  onIntegrityChange: vi.fn(),
+  onConfidentialityChange: vi.fn(),
+  setAvailability: vi.fn(),
+  setIntegrity: vi.fn(),
+  setConfidentiality: vi.fn(),
+});
+
+/**
+ * Creates mock CIA service response
+ */
+export const createMockServiceResponse = () => ({
+  description: "Mocked description",
+  technical: "Mocked technical details",
+  businessImpact: "Mocked business impact",
+  recommendations: ["Recommendation 1", "Recommendation 2"],
+  uptime: "99.9%",
+  capex: 15,
+  opex: 10,
+  bg: "#cccccc",
+  text: "#000000",
+});
+
+/**
+ * Common mock for ciaContentService
+ */
+export const mockCIAContentService = () => {
+  return {
+    getComponentDetails: vi
+      .fn()
+      .mockImplementation(() => createMockServiceResponse()),
+    getBusinessImpact: vi.fn().mockImplementation(() => ({
+      summary: "Mocked impact summary",
+      financial: { description: "Financial impact", riskLevel: "Medium" },
+      operational: { description: "Operational impact", riskLevel: "Low" },
+    })),
+    getTechnicalImplementation: vi.fn().mockImplementation(() => ({
+      description: "Technical implementation details",
+      effort: { development: "Low", maintenance: "Low", expertise: "Medium" },
+      rto: "4 hours",
+      rpo: "1 hour",
+    })),
+    getRecommendations: vi.fn().mockImplementation(() => ["Recommendation 1"]),
+    getROIEstimates: vi.fn().mockImplementation(() => ({
+      returnRate: "200%",
+      description: "Good ROI",
+    })),
+  };
+};
 
 /**
  * Helper function to suppress known console errors in tests

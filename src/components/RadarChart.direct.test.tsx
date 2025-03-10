@@ -1,40 +1,65 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import RadarChart from "./RadarChart";
-import { vi } from "vitest";
+import { vi, describe, it, expect, beforeEach } from "vitest";
 import { CHART_TEST_IDS } from "../constants/testIds";
+import {
+  mockCanvasContext,
+  suppressCanvasErrors,
+} from "../tests/testSetupHelpers";
 
-// Track if the mock was called
-let mockCalled = false;
+// Define type for the Chart mock to include register and defaults properties
+type ChartMock = ReturnType<typeof vi.fn> & {
+  register: ReturnType<typeof vi.fn>;
+  defaults: {
+    font: { family: string };
+    plugins: { legend: { display: boolean } };
+  };
+};
 
-// Create a mock for Chart.js using the factory function pattern
+// Mock Chart.js more comprehensively to avoid canvas issues
 vi.mock("chart.js/auto", () => {
+  const mockChart = vi.fn().mockImplementation(() => ({
+    destroy: vi.fn(),
+    update: vi.fn(),
+    data: {
+      labels: ["Availability", "Integrity", "Confidentiality"],
+      datasets: [],
+    },
+    options: {},
+  })) as ChartMock;
+
+  // Add properties to the mockChart function
+  mockChart.register = vi.fn();
+  mockChart.defaults = {
+    font: { family: "Arial" },
+    plugins: { legend: { display: true } },
+  };
+
   return {
     __esModule: true,
-    default: vi.fn().mockImplementation((...args: any[]) => {
-      // Set our flag when the mock is called
-      mockCalled = true;
-      return {
-        destroy: vi.fn(),
-        update: vi.fn(),
-      };
-    }),
+    default: mockChart,
   };
 });
 
 describe("RadarChart Component", () => {
+  let consoleErrorSpy: ReturnType<typeof vi.spyOn>;
+
   beforeEach(() => {
     vi.clearAllMocks();
-    // Reset our flag before each test
-    mockCalled = false;
 
-    // Mock canvas context
-    HTMLCanvasElement.prototype.getContext = vi.fn().mockReturnValue({
-      canvas: { width: 100, height: 100 },
-    });
+    // Suppress expected Canvas-related console errors
+    consoleErrorSpy = suppressCanvasErrors();
+
+    // Set up a more complete canvas mock
+    mockCanvasContext();
   });
 
-  it("creates a canvas element", () => {
+  afterEach(() => {
+    consoleErrorSpy.mockRestore();
+  });
+
+  it("creates a canvas element for the chart", () => {
     const { container } = render(
       <RadarChart
         availabilityLevel="Low"
@@ -44,13 +69,12 @@ describe("RadarChart Component", () => {
     );
 
     // Verify the canvas element is created
-    expect(container.querySelector("canvas")).toBeInTheDocument();
+    const canvasElement = container.querySelector("canvas");
+    expect(canvasElement).toBeInTheDocument();
     expect(screen.getByTestId(CHART_TEST_IDS.RADAR_CHART)).toBeInTheDocument();
   });
 
-  // Replace problematic test with a simplified version
   it("renders without errors with chart context", () => {
-    // Render the component
     render(
       <RadarChart
         availabilityLevel="High"
@@ -59,12 +83,11 @@ describe("RadarChart Component", () => {
       />
     );
 
-    // Just verify the canvas exists without checking mock internals
     expect(screen.getByTestId(CHART_TEST_IDS.RADAR_CHART)).toBeInTheDocument();
     expect(HTMLCanvasElement.prototype.getContext).toHaveBeenCalledWith("2d");
   });
 
-  it("handles various security levels", () => {
+  it("displays security levels as text values", () => {
     const { rerender } = render(
       <RadarChart
         availabilityLevel="None"
@@ -72,6 +95,17 @@ describe("RadarChart Component", () => {
         confidentialityLevel="None"
       />
     );
+
+    // Display values should reflect the current levels
+    expect(
+      screen.getByTestId(CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE)
+    ).toHaveTextContent("None");
+    expect(
+      screen.getByTestId(CHART_TEST_IDS.RADAR_INTEGRITY_VALUE)
+    ).toHaveTextContent("None");
+    expect(
+      screen.getByTestId(CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE)
+    ).toHaveTextContent("None");
 
     // Test with different combinations of security levels
     rerender(
@@ -82,7 +116,29 @@ describe("RadarChart Component", () => {
       />
     );
 
-    // Component should still be in the document
-    expect(screen.getByTestId(CHART_TEST_IDS.RADAR_CHART)).toBeInTheDocument();
+    // Updated values should be reflected
+    expect(
+      screen.getByTestId(CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE)
+    ).toHaveTextContent("Very High");
+    expect(
+      screen.getByTestId(CHART_TEST_IDS.RADAR_INTEGRITY_VALUE)
+    ).toHaveTextContent("Moderate");
+    expect(
+      screen.getByTestId(CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE)
+    ).toHaveTextContent("Low");
+  });
+
+  it("accepts custom testId prop", () => {
+    const testId = "custom-radar-chart";
+    render(
+      <RadarChart
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+        testId={testId}
+      />
+    );
+
+    expect(screen.getByTestId(testId)).toBeInTheDocument();
   });
 });
