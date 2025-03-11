@@ -38,23 +38,23 @@
   --color-black: #000000;
 
   /* Security level colors - Light mode */
-  --color-none: #dc3545;
-  --color-low: #fd7e14;
-  --color-moderate: #ffc107;
-  --color-high: #28a745;
-  --color-very-high: #0d6efd;
+  --color-none: #e74c3c;
+  --color-low: #e67e22;
+  --color-moderate: #f1c40f;
+  --color-high: #27ae60;
+  --color-very-high: #3498db;
 
   /* Security level text colors - Light mode */
   --color-none-text: #ffffff;
   --color-low-text: #ffffff;
   --color-moderate-text: #000000;
-  --color-high-text: #000000;
-  --color-very-high-text: #000000;
+  --color-high-text: #ffffff;
+  --color-very-high-text: #ffffff;
 
   /* Component-specific colors */
-  --color-confidentiality: #6f42c1;
-  --color-integrity: #28a745;
-  --color-availability: #0d6efd;
+  --color-confidentiality: #8e44ad;
+  --color-integrity: #27ae60;
+  --color-availability: #2980b9;
 
   /* Background colors */
   --bg-primary: #ffffff;
@@ -89,11 +89,16 @@
     sans-serif;
 
   /* Security level colors - Dark mode */
-  --color-none-dark: #ff8080;
-  --color-low-dark: #ffb74d;
+  --color-none-dark: #ff5252;
+  --color-low-dark: #ff9a3c;
   --color-moderate-dark: #ffeb3b;
-  --color-high-dark: #4caf50;
-  --color-very-high-dark: #63a4ff;
+  --color-high-dark: #00e676;
+  --color-very-high-dark: #40c4ff;
+
+  /* CIA component colors - Dark mode */
+  --color-confidentiality: #9b59b6;
+  --color-integrity: #2ecc71;
+  --color-availability: #3498db;
 
   /* Background colors - Dark mode */
   --bg-primary: #1a1a1a;

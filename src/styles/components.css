@@ -1,16 +1,16 @@
 /* Component-specific styles */
 
-/* Widget styles */
+/* Widget styles - with reduced spacing */
 .widget {
   background-color: var(--card-background);
   border: 1px solid var(--border-color);
-  box-shadow: 0 6px 12px var(--shadow-color);
+  box-shadow: 0 4px 8px var(--shadow-color);
   border-radius: 0.75rem;
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem; /* Reduced margin */
   height: 100%;
-  min-height: 300px;
+  min-height: 260px; /* Reduced min-height */
   display: flex !important;
   flex-direction: column !important;
   overflow: hidden !important;
@@ -18,8 +18,8 @@
 }
 
 .dark .widget {
-  border-color: var(--border-color);
-  box-shadow: 0 4px 12px var(--shadow-color), 0 0 2px var(--primary-color);
+  border-color: rgba(0, 204, 102, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 204, 102, 0.15), 0 0 2px var(--primary-color);
 }
 
 .widget:hover {
@@ -28,7 +28,7 @@
 }
 
 .dark .widget:hover {
-  box-shadow: 0 8px 16px var(--shadow-color), 0 0 4px var(--primary-color);
+  box-shadow: 0 8px 16px rgba(0, 204, 102, 0.2), 0 0 6px var(--primary-color);
 }
 
 /* Original widget header styles - keep for compatibility */
@@ -52,9 +52,9 @@
   border-top-right-radius: 0.5rem;
 }
 
-/* Target actual DOM structure for widget headers */
+/* Target actual DOM structure for widget headers - more compact */
 [data-testid$="-header"] {
-  padding: 1rem 1.25rem !important;
+  padding: 0.5rem 0.75rem !important; /* Reduced padding */
   border-bottom: 1px solid var(--border-color) !important;
   background: linear-gradient(
     to right,
@@ -72,7 +72,7 @@
   border-top-left-radius: 0.75rem !important;
   border-top-right-radius: 0.75rem !important;
   margin-bottom: 0 !important;
-  padding-bottom: 1rem !important;
+  padding-bottom: 0.5rem !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 
@@ -96,7 +96,8 @@
     rgba(0, 204, 102, 0.15),
     rgba(0, 187, 119, 0.1)
   ) !important;
-  border-bottom: 1px solid var(--primary-color) !important;
+  border-bottom: 1px solid rgba(0, 204, 102, 0.4) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 4px rgba(0, 204, 102, 0.2) !important;
 }
 
 .dark [data-testid$="-header"] h3 {
@@ -105,12 +106,12 @@
   text-transform: uppercase !important;
   letter-spacing: 1px !important;
   font-size: 0.9rem !important;
-  text-shadow: 0 0 5px rgba(0, 204, 102, 0.5) !important;
+  text-shadow: 0 0 8px rgba(0, 204, 102, 0.7) !important;
 }
 
-/* Widget body and content styles - keep these unchanged */
+/* Widget body and content styles - more compact */
 .widget-body {
-  padding: calc(var(--spacing-md) + 0.25rem) !important;
+  padding: 0.5rem !important; /* Reduced padding */
   flex: 1;
   overflow: auto;
   flex: 1 1 auto !important;
@@ -118,7 +119,7 @@
   overflow-x: hidden !important;
   display: flex !important;
   flex-direction: column !important;
-  max-height: calc(100% - 60px) !important;
+  max-height: calc(100% - 45px) !important; /* Adjusted for smaller header */
   min-height: 0 !important;
 }
 
@@ -224,18 +225,33 @@ h5 {
 }
 
 .status-success {
-  background-color: var(--primary-color);
-  box-shadow: 0 0 5px var(--primary-color);
+  background-color: var(--color-high);
+  box-shadow: 0 0 5px var(--color-high);
+}
+
+.dark .status-success {
+  background-color: var(--color-high-dark);
+  box-shadow: 0 0 8px var(--color-high-dark);
 }
 
 .status-warning {
-  background-color: orange;
-  box-shadow: 0 0 5px orange;
+  background-color: var(--color-moderate);
+  box-shadow: 0 0 5px var(--color-moderate);
+}
+
+.dark .status-warning {
+  background-color: var(--color-moderate-dark);
+  box-shadow: 0 0 8px var(--color-moderate-dark);
 }
 
 .status-danger {
-  background-color: #ff3333;
-  box-shadow: 0 0 5px #ff3333;
+  background-color: var(--color-none);
+  box-shadow: 0 0 5px var(--color-none);
+}
+
+.dark .status-danger {
+  background-color: var(--color-none-dark);
+  box-shadow: 0 0 8px var(--color-none-dark);
 }
 
 /* Progress bars */
@@ -257,7 +273,7 @@ h5 {
 }
 
 .dark .progress-bar-fill {
-  background-color: var(--primary-color);
+  background-color: var(--primary-light);
   box-shadow: 0 0 10px var(--primary-color);
 }
 
@@ -309,4 +325,125 @@ td {
   width: auto !important;
   height: auto !important;
   object-fit: contain !important;
+}
+
+/* Optimize security level selector specific styles */
+[data-testid="security-level-selector"] select {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.5rem;
+  width: 100% !important;
+  appearance: auto !important;
+  height: 30px !important; /* Force smaller height */
+}
+
+[data-testid="security-level-selector"] .section-container {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Optimize space in the security level selector */
+[data-testid="security-level-selector"] label {
+  margin-bottom: 0.25rem !important;
+}
+
+[data-testid="security-level-selector"] .mb-4 {
+  margin-bottom: 0.5rem !important;
+}
+
+[data-testid="security-level-selector"] .pb-4 {
+  padding-bottom: 0.5rem !important;
+}
+
+[data-testid="security-level-selector"] .mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+
+[data-testid="security-level-selector"] .pb-2 {
+  padding-bottom: 0.5rem !important;
+}
+
+/* Compact security level legend */
+[data-testid="security-level-selector"] .compact-legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+[data-testid="security-level-selector"] .compact-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+[data-testid="security-level-selector"] .compact-summary-item {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--border-color);
+  font-size: 0.75rem;
+}
+
+/* More compact section spacing */
+[data-testid="security-level-selector"] .mb-4 {
+  margin-bottom: 0.5rem !important;
+}
+
+[data-testid="security-level-selector"] .pb-4 {
+  padding-bottom: 0.5rem !important;
+}
+
+/* Tighter description text in security level selectors */
+[data-testid="security-level-selector"] p.text-xs {
+  margin-bottom: 0.25rem !important;
+  line-height: 1.2 !important;
+}
+
+/* Info button - smaller and consistent sizing */
+.info-button {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  font-size: 10px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: var(--text-secondary) !important;
+  margin-left: 4px !important;
+  margin-top: 0px !important;
+  transition: all 0.2s !important;
+}
+
+.dark .info-button {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: var(--text-secondary) !important;
+}
+
+.info-button:hover {
+  transform: scale(1.1) !important;
+  background-color: rgba(0, 102, 51, 0.1) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.dark .info-button:hover {
+  background-color: rgba(0, 204, 102, 0.2) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+  box-shadow: 0 0 5px rgba(0, 204, 102, 0.3) !important;
+}
+
+.info-button span {
+  font-size: 10px !important;
 }

@@ -3,6 +3,7 @@ import { SECURITY_LEVELS } from "../constants/appConstants";
 import {
   SECURITY_LEVEL_COLORS,
   getSecurityLevelColorPair,
+  CIA_COMPONENT_COLORS,
 } from "../constants/colorConstants";
 import { SecurityLevel } from "../types/cia";
 
@@ -48,18 +49,19 @@ export function mapSecurityLevelToSeverity(level: string): SecuritySeverity {
 export function getSecurityLevelClass(level: string): string {
   const severity = mapSecurityLevelToSeverity(level);
 
+  // Use classes that reference the centralized color variables
   switch (severity) {
     case "very-high":
-      return "text-blue-700 dark:text-blue-400 font-medium"; // Changed from purple to blue for consistency
+      return "text-security-very-high font-medium";
     case "high":
-      return "text-green-700 dark:text-green-400 font-medium";
+      return "text-security-high font-medium";
     case "moderate":
-      return "text-yellow-700 dark:text-yellow-400 font-medium";
+      return "text-security-moderate font-medium";
     case "low":
-      return "text-orange-700 dark:text-orange-400 font-medium";
+      return "text-security-low font-medium";
     case "none":
     default:
-      return "text-red-700 dark:text-red-400 font-medium"; // Changed from gray to red for consistency
+      return "text-security-none font-medium";
   }
 }
 
@@ -97,6 +99,8 @@ export function getRiskBadgeClass(risk: string): string {
     return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300";
   } else if (normalizedRisk.includes("low")) {
     return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
+  } else if (normalizedRisk.includes("minimal")) {
+    return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
   }
 
   return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";

@@ -419,6 +419,47 @@
   color: var(--color-very-high-text);
 }
 
+/* Security level text color utilities to centralize styling */
+.text-security-none {
+  color: var(--color-none);
+}
+
+.dark .text-security-none {
+  color: var(--color-none-dark);
+}
+
+.text-security-low {
+  color: var(--color-low);
+}
+
+.dark .text-security-low {
+  color: var(--color-low-dark);
+}
+
+.text-security-moderate {
+  color: var(--color-moderate);
+}
+
+.dark .text-security-moderate {
+  color: var(--color-moderate-dark);
+}
+
+.text-security-high {
+  color: var(--color-high);
+}
+
+.dark .text-security-high {
+  color: var(--color-high-dark);
+}
+
+.text-security-very-high {
+  color: var(--color-very-high);
+}
+
+.dark .text-security-very-high {
+  color: var(--color-very-high-dark);
+}
+
 /* CIA component color utilities */
 .color-confidentiality {
   color: var(--color-confidentiality);

@@ -47,19 +47,19 @@ export const SECURITY_LEVEL_COLORS = {
  */
 export const CIA_COMPONENT_COLORS = {
   CONFIDENTIALITY: {
-    PRIMARY: "#9b59b6", // Brighter, more visible purple
-    SECONDARY: "#e8daef", // Lighter purple - better contrast
-    DARK: "#6c3483", // More saturated dark purple for dark mode
+    PRIMARY: "#27ae60", // Brighter green for light mode/corporate style
+    SECONDARY: "#d4efdf", // Light green with better contrast
+    DARK: "#2ecc71", // Vibrant green for dark mode Ingress style
   },
   INTEGRITY: {
-    PRIMARY: "#16a085", // Teal rather than green to distinguish from HIGH security level
-    SECONDARY: "#d1f2eb", // Light teal
-    DARK: "#0e6655", // Dark teal for dark mode
+    PRIMARY: "#27ae60", // Brighter green for light mode/corporate style
+    SECONDARY: "#d4efdf", // Light green with better contrast
+    DARK: "#2ecc71", // Vibrant green for dark mode Ingress style
   },
   AVAILABILITY: {
-    PRIMARY: "#3498db", // Brighter blue
-    SECONDARY: "#d4e6f1", // Light blue
-    DARK: "#21618c", // Dark blue for dark mode
+    PRIMARY: "#27ae60", // Brighter green for light mode/corporate style
+    SECONDARY: "#d4efdf", // Light green with better contrast
+    DARK: "#2ecc71", // Vibrant green for dark mode Ingress style
   },
 };
 

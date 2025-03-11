@@ -88,12 +88,12 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
    * Summary component to display the current security profile
    */
   const SecurityLevelSummary = () => (
-    <div className="mt-6 bg-gray-50 dark:bg-gray-750 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-      <h4 className="text-md font-medium mb-3 text-gray-800 dark:text-gray-200 flex items-center">
-        <span className="mr-2">📊</span>
+    <div className="mb-2 pb-2 border-b border-gray-200 dark:border-gray-700">
+      <h4 className="text-xs font-medium mb-1 text-gray-800 dark:text-gray-200 flex items-center">
+        <span className="mr-1">📊</span>
         {UI_TEXT.LABELS.CURRENT_PROFILE}
       </h4>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="flex flex-wrap justify-between gap-1">
         <SecurityLevelSummaryItem
           label={CIA_LABELS.CONFIDENTIALITY}
           value={confidentialityLevel as SecurityLevel}
@@ -101,6 +101,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           testId="confidentiality-summary"
           color="purple"
           borderColor={CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY}
+          compact={true}
         />
         <SecurityLevelSummaryItem
           label={CIA_LABELS.INTEGRITY}
@@ -109,6 +110,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           testId="integrity-summary"
           color="green"
           borderColor={CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY}
+          compact={true}
         />
         <SecurityLevelSummaryItem
           label={CIA_LABELS.AVAILABILITY}
@@ -117,6 +119,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           testId="availability-summary"
           color="blue"
           borderColor={CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY}
+          compact={true}
         />
       </div>
     </div>
@@ -132,6 +135,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       error={error}
     >
       <div data-testid={SECURITY_LEVEL_TEST_IDS.SECURITY_LEVEL_SELECTOR}>
+        <SecurityLevelSummary />
         <SecurityLevelSelector
           initialAvailability={availabilityLevel}
           initialIntegrity={integrityLevel}
@@ -146,7 +150,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           showDescriptions={true}
           testId={SECURITY_LEVEL_TEST_IDS.SECURITY_LEVEL_SELECTOR}
         />
-        <SecurityLevelSummary />
       </div>
     </WidgetContainer>
   );
@@ -162,6 +165,7 @@ interface SecurityLevelSummaryItemProps {
   testId: string;
   color: "blue" | "green" | "purple";
   borderColor?: string;
+  compact?: boolean;
 }
 
 const SecurityLevelSummaryItem: React.FC<SecurityLevelSummaryItemProps> = ({
@@ -171,6 +175,7 @@ const SecurityLevelSummaryItem: React.FC<SecurityLevelSummaryItemProps> = ({
   testId,
   color,
   borderColor,
+  compact = false,
 }) => {
   const getBorderColor = () => {
     if (borderColor) {
@@ -189,16 +194,42 @@ const SecurityLevelSummaryItem: React.FC<SecurityLevelSummaryItemProps> = ({
     }
   };
 
+  // More compact styling for top-placed summary
+  if (compact) {
+    return (
+      <div
+        className="flex items-center py-0.5 px-1.5 rounded-md border border-gray-200 dark:border-gray-700"
+        style={{ borderLeftColor: getBorderColor(), borderLeftWidth: "2px" }}
+        data-testid={testId}
+      >
+        <span className="text-base mr-1">{icon}</span>
+        <div>
+          <div className="text-xs text-gray-500 dark:text-gray-400 leading-tight">
+            {label}
+          </div>
+          <div
+            className={`font-medium ${getSecurityLevelClass(
+              value
+            )} text-sm leading-tight`}
+          >
+            {value}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Original non-compact styling
   return (
     <div
-      className={`flex items-center p-3 bg-white dark:bg-gray-800 rounded-md border-l-4 shadow-sm`}
+      className={`flex items-center p-2 bg-white dark:bg-gray-800 rounded-md border-l-4 shadow-sm`}
       style={{ borderLeftColor: getBorderColor() }}
       data-testid={testId}
     >
-      <span className="text-2xl mr-3">{icon}</span>
+      <span className="text-xl mr-2">{icon}</span>
       <div>
-        <div className="text-sm text-gray-500 dark:text-gray-400">{label}</div>
-        <div className={`font-medium ${getSecurityLevelClass(value)}`}>
+        <div className="text-xs text-gray-500 dark:text-gray-400">{label}</div>
+        <div className={`font-medium ${getSecurityLevelClass(value)} text-sm`}>
           {value}
         </div>
       </div>
