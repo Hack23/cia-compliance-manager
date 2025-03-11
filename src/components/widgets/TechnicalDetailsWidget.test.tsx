@@ -4,6 +4,8 @@ import { describe, it, expect, afterEach, vi } from "vitest";
 import TechnicalDetailsWidget from "./TechnicalDetailsWidget";
 import { WIDGET_TEST_IDS } from "../../constants/testIds";
 import userEvent from "@testing-library/user-event";
+import * as ciaContentServiceModule from '../../services/ciaContentService';
+import { TechnicalImplementationDetails } from '../../types/cia-services';
 
 // Mock ciaContentService to control technical description content
 vi.mock("../../services/ciaContentService", () => ({
@@ -41,6 +43,7 @@ vi.mock("../../services/ciaContentService", () => ({
         };
       }),
   },
+  createCIAContentService: vi.fn(),
 }));
 
 describe("TechnicalDetailsWidget", () => {
@@ -54,6 +57,50 @@ describe("TechnicalDetailsWidget", () => {
   // Use cleanup between tests
   afterEach(() => {
     document.body.innerHTML = "";
+  });
+
+  // Update this mock to match the new structure from the refactored ciaContentService
+  const mockTechnicalImplementation: TechnicalImplementationDetails = {
+    description: 'Test technical implementation',
+    implementationSteps: ['Step 1', 'Step 2'],
+    effort: {
+      development: 'Days (1-5)',
+      maintenance: 'Minimal',
+      expertise: 'Basic security knowledge',
+    },
+    requirements: ['Req 1', 'Req 2'],
+    technologies: ['Tech 1', 'Tech 2'],
+  };
+
+  beforeEach(() => {
+    // Reset and setup the mock implementation
+    vi.mocked(ciaContentServiceModule.default.getTechnicalImplementation).mockReset();
+    vi.mocked(ciaContentServiceModule.default.getTechnicalImplementation).mockImplementation(
+      (component, level) => {
+        // Return component-specific test data based on the inputs
+        if (component === 'availability') {
+          return {
+            ...mockTechnicalImplementation,
+            description: `Availability (${level}) technical details`
+          };
+        }
+        if (component === 'integrity') {
+          return {
+            ...mockTechnicalImplementation,
+            description: `Integrity (${level}) technical details`,
+            validationMethod: 'Test validation method',
+          };
+        }
+        if (component === 'confidentiality') {
+          return {
+            ...mockTechnicalImplementation,
+            description: `Confidentiality (${level}) technical details`,
+            protectionMethod: 'Test protection method',
+          };
+        }
+        return mockTechnicalImplementation;
+      }
+    );
   });
 
   it("renders without crashing", () => {
@@ -203,4 +250,41 @@ describe("TechnicalDetailsWidget", () => {
     fireEvent.click(getByTestId("compat-test-widget-integrity-tab"));
     expect(getByTestId("integrity-level-indicator")).toHaveTextContent("High");
   });
+
+  it('renders without crashing', () => {
+    render(<TechnicalDetailsWidget 
+      availabilityLevel="Moderate" 
+      integrityLevel="Moderate" 
+      confidentialityLevel="Moderate" 
+    />);
+    
+    expect(screen.getByText(/Technical Implementation Guide/i)).toBeInTheDocument();
+  });
+
+  it('displays technical details for the selected tab', () => {
+    render(<TechnicalDetailsWidget 
+      availabilityLevel="High" 
+      integrityLevel="Moderate" 
+      confidentialityLevel="Low" 
+    />);
+    
+    // By default, it should show availability tab
+    expect(screen.getByText(/Availability \(High\) technical details/i)).toBeInTheDocument();
+    
+    // Switch to integrity tab
+    const integrityTab = screen.getByTestId('integrity-tab-button');
+    integrityTab.click();
+    
+    // Now it should show integrity details
+    expect(screen.getByText(/Integrity \(Moderate\) technical details/i)).toBeInTheDocument();
+    
+    // Switch to confidentiality tab
+    const confidentialityTab = screen.getByTestId('confidentiality-tab-button');
+    confidentialityTab.click();
+    
+    // Now it should show confidentiality details
+    expect(screen.getByText(/Confidentiality \(Low\) technical details/i)).toBeInTheDocument();
+  });
+
+  // Add more tests as needed
 });
