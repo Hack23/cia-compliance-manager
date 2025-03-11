@@ -92,7 +92,10 @@ describe("AvailabilityImpactWidget", () => {
 
   it("renders without crashing", () => {
     render(<AvailabilityImpactWidget {...defaultProps} />);
-    expect(screen.getByText("High Availability")).toBeInTheDocument();
+    // Check for Availability Profile instead of High Availability
+    expect(screen.getByText("Availability Profile")).toBeInTheDocument();
+    // Check for High in status badge
+    expect(screen.getByTestId("status-badge")).toHaveTextContent("High");
   });
 
   it("displays availability description from ciaContentService", () => {
@@ -115,9 +118,10 @@ describe("AvailabilityImpactWidget", () => {
   it("displays metrics like uptime, RTO, RPO", () => {
     render(<AvailabilityImpactWidget {...defaultProps} />);
 
-    // Check for uptime value
-    expect(screen.getByText("Uptime")).toBeInTheDocument();
-    expect(screen.getByText("99.9%")).toBeInTheDocument();
+    // Check for uptime target value - use correct text
+    expect(screen.getByText("Uptime Target")).toBeInTheDocument();
+    // Use testId to find the specific element with the uptime value instead of getByText
+    expect(screen.getByTestId("widget-availability-impact-uptime-target")).toHaveTextContent("99.9%");
 
     // Check for RTO
     expect(screen.getByText(/Recovery Time Objective/i)).toBeInTheDocument();
@@ -128,17 +132,18 @@ describe("AvailabilityImpactWidget", () => {
 
   it("renders with different availability levels", () => {
     const { rerender } = render(<AvailabilityImpactWidget {...defaultProps} />);
-    expect(screen.getByText("High Availability")).toBeInTheDocument();
+    // Check for badge with High text instead of combined "High Availability"
+    expect(screen.getByTestId("status-badge")).toHaveTextContent("High");
 
     rerender(
       <AvailabilityImpactWidget {...defaultProps} availabilityLevel="Low" />
     );
-    expect(screen.getByText("Low Availability")).toBeInTheDocument();
+    expect(screen.getByTestId("status-badge")).toHaveTextContent("Low");
 
     rerender(
       <AvailabilityImpactWidget {...defaultProps} availabilityLevel="None" />
     );
-    expect(screen.getByText("None Availability")).toBeInTheDocument();
+    expect(screen.getByTestId("status-badge")).toHaveTextContent("None");
   });
 
   it("handles unknown level gracefully", () => {

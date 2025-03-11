@@ -46,7 +46,8 @@ describe("CostEstimationWidget", () => {
     
     const opexDisplay = screen.getByTestId(COST_TEST_IDS.OPEX_ESTIMATE_VALUE);
     expect(opexDisplay).toBeInTheDocument();
-    expect(opexDisplay.textContent).toContain("Operating Expense");
+    // Fix: Check for "Operational Expenditure" instead of "Operating Expense"
+    expect(opexDisplay.textContent).toContain("Operational Expenditure");
   });
 
   it("calculates 3-year total cost", () => {

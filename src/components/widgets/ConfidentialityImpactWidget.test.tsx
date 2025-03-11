@@ -105,7 +105,9 @@ describe("ConfidentialityImpactWidget", () => {
 
   it("renders without crashing", () => {
     render(<ConfidentialityImpactWidget {...defaultProps} />);
-    expect(screen.getByText("High Confidentiality")).toBeInTheDocument();
+    // Check for proper heading and status badge instead of combined text
+    expect(screen.getByText("Confidentiality Profile")).toBeInTheDocument();
+    expect(screen.getByTestId("status-badge")).toHaveTextContent("High");
   });
 
   it("displays confidentiality description from ciaContentService", () => {
@@ -133,17 +135,18 @@ describe("ConfidentialityImpactWidget", () => {
 
   it("renders with different confidentiality levels", () => {
     const { rerender } = render(<ConfidentialityImpactWidget {...defaultProps} />);
-    expect(screen.getByText("High Confidentiality")).toBeInTheDocument();
+    // Check for status badge content instead of combined text
+    expect(screen.getByTestId("status-badge")).toHaveTextContent("High");
 
     rerender(
       <ConfidentialityImpactWidget {...defaultProps} confidentialityLevel="Low" />
     );
-    expect(screen.getByText("Low Confidentiality")).toBeInTheDocument();
+    expect(screen.getByTestId("status-badge")).toHaveTextContent("Low");
 
     rerender(
       <ConfidentialityImpactWidget {...defaultProps} confidentialityLevel="None" />
     );
-    expect(screen.getByText("None Confidentiality")).toBeInTheDocument();
+    expect(screen.getByTestId("status-badge")).toHaveTextContent("None");
   });
 
   it("handles unknown level gracefully", () => {
@@ -155,8 +158,8 @@ describe("ConfidentialityImpactWidget", () => {
       />
     );
 
-    // Check that the widget still renders with Unknown level displayed
-    expect(screen.getByText("Unknown Confidentiality")).toBeInTheDocument();
+    // Check that the widget still renders with Unknown level displayed in status badge
+    expect(screen.getByTestId("status-badge")).toHaveTextContent("Unknown");
 
     // Check for the description, which is provided by our mock
     expect(

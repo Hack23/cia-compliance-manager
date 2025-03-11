@@ -1,38 +1,31 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
 import KeyValuePair from "./KeyValuePair";
 import { COMMON_COMPONENT_TEST_IDS } from "../../constants/testIds";
 
 describe("KeyValuePair Component", () => {
   it("renders with label and value", () => {
     render(<KeyValuePair label="Test Label" value="Test Value" />);
-
-    expect(
-      screen.getByTestId(COMMON_COMPONENT_TEST_IDS.KEY_VALUE_PAIR)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(COMMON_COMPONENT_TEST_IDS.KV_LABEL)
-    ).toHaveTextContent("Test Label");
-    expect(
-      screen.getByTestId(COMMON_COMPONENT_TEST_IDS.KV_VALUE)
-    ).toHaveTextContent("Test Value");
+    
+    // Just check that the component renders with the right content
+    expect(screen.getByTestId("key-value-pair")).toBeInTheDocument();
+    expect(screen.getByText("Test Label")).toBeInTheDocument();
+    expect(screen.getByText("Test Value")).toBeInTheDocument();
   });
 
   it("renders with custom test ID", () => {
-    const customTestId = "custom-kv-pair";
     render(
       <KeyValuePair
         label="Test Label"
         value="Test Value"
-        testId={customTestId}
+        testId="custom-key-value"
       />
     );
 
-    expect(screen.getByTestId(customTestId)).toBeInTheDocument();
+    expect(screen.getByTestId("custom-key-value")).toBeInTheDocument();
   });
 
-  it("renders with variant styling", () => {
+  it("renders with value styling", () => {
     render(
       <KeyValuePair
         label="Status"
@@ -41,33 +34,40 @@ describe("KeyValuePair Component", () => {
       />
     );
 
-    const valueElement = screen.getByTestId(COMMON_COMPONENT_TEST_IDS.KV_VALUE);
-    expect(valueElement.className).toContain("text-green");
+    // Check that the component renders with value content
+    const keyValuePair = screen.getByTestId("key-value-pair");
+    expect(keyValuePair).toBeInTheDocument();
+    
+    // Check directly if the value text has the applied styling by finding it specifically
+    const valueElement = screen.getByText("Active");
+    expect(valueElement).toBeInTheDocument();
+    expect(valueElement.className).toContain("text-green-600");
   });
 
-  it("renders with custom layout", () => {
+  it("renders with label styling", () => {
     render(
       <KeyValuePair
-        label="Test Label"
-        value="Test Value"
-        className="flex-col"
+        label="Status"
+        value="Active"
+        labelClassName="font-bold"
       />
     );
 
-    const kvPair = screen.getByTestId(COMMON_COMPONENT_TEST_IDS.KEY_VALUE_PAIR);
-    expect(kvPair.className).toContain("flex-col");
+    expect(screen.getByTestId("key-value-pair")).toBeInTheDocument();
+    expect(screen.getByText("Status")).toBeInTheDocument();
+    expect(screen.getByText("Status").className).toContain("font-bold");
   });
 
   it("renders with custom style class", () => {
-    // Using className instead of non-existent variant prop
     render(
       <KeyValuePair
-        label="Test Label"
-        value="Test Value"
-        className="highlighted-pair"
+        label="Status"
+        value="Active"
+        className="custom-class"
       />
     );
-    const kvPair = screen.getByTestId(COMMON_COMPONENT_TEST_IDS.KEY_VALUE_PAIR);
-    expect(kvPair.className).toContain("highlighted-pair");
+
+    const keyValuePair = screen.getByTestId("key-value-pair");
+    expect(keyValuePair.className).toContain("custom-class");
   });
 });
