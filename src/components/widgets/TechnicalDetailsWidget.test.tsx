@@ -61,15 +61,15 @@ describe("TechnicalDetailsWidget", () => {
   it("switches between tabs", () => {
     render(<TechnicalDetailsWidget {...defaultProps} />);
     
-    // Find the integrity tab and click it
-    const integrityTab = screen.getByRole('button', { name: /integrity/i });
+    // Find the integrity tab by testId and click it
+    const integrityTab = screen.getByTestId("integrity-tab-button");
     fireEvent.click(integrityTab);
     
     // Verify tab content is displayed
     expect(screen.getByText(/integrity \(Low\) technical details/i)).toBeInTheDocument();
     
-    // Find the confidentiality tab and click it
-    const confidentialityTab = screen.getByRole('button', { name: /confidentiality/i });
+    // Find the confidentiality tab by testId and click it
+    const confidentialityTab = screen.getByTestId("confidentiality-tab-button");
     fireEvent.click(confidentialityTab);
     
     // Verify confidentiality tab content is displayed
@@ -83,10 +83,10 @@ describe("TechnicalDetailsWidget", () => {
     expect(screen.getByText(/Step 1 for availability at None level/i)).toBeInTheDocument();
     expect(screen.getByText(/Step 2 for availability at None level/i)).toBeInTheDocument();
     
-    // Check for effort details
-    expect(screen.getByText(/Development effort:/i)).toBeInTheDocument();
-    expect(screen.getByText(/Maintenance requirements:/i)).toBeInTheDocument();
-    expect(screen.getByText(/Required expertise:/i)).toBeInTheDocument();
+    // Look for the headers with emojis for effort details
+    expect(screen.getByText(/🔨 Development Effort/i)).toBeInTheDocument();
+    expect(screen.getByText(/🔄 Maintenance/i)).toBeInTheDocument();
+    expect(screen.getByText(/👤 Required Expertise/i)).toBeInTheDocument();
   });
 
   it("handles different security levels", () => {
@@ -101,15 +101,15 @@ describe("TechnicalDetailsWidget", () => {
     // Check if availability level content is correct
     expect(screen.getByText(/availability \(High\) technical details/i)).toBeInTheDocument();
     
-    // Switch to integrity tab
-    const integrityTab = screen.getByRole('button', { name: /integrity/i });
+    // Switch to integrity tab using testId
+    const integrityTab = screen.getByTestId("integrity-tab-button");
     fireEvent.click(integrityTab);
     
     // Check if integrity level content is correct
     expect(screen.getByText(/integrity \(Moderate\) technical details/i)).toBeInTheDocument();
     
-    // Switch to confidentiality tab
-    const confidentialityTab = screen.getByRole('button', { name: /confidentiality/i });
+    // Switch to confidentiality tab using testId
+    const confidentialityTab = screen.getByTestId("confidentiality-tab-button");
     fireEvent.click(confidentialityTab);
     
     // Check if confidentiality level content is correct
