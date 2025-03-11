@@ -1,7 +1,7 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
-import IntegrityImpactWidget from "./IntegrityImpactWidget";
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import IntegrityImpactWidget from './IntegrityImpactWidget';
 import { INTEGRITY_IMPACT_TEST_IDS } from "../../constants/testIds";
 import { SecurityLevel } from "../../types/cia";
 import ciaContentService from "../../services/ciaContentService";

@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import ValueCreationWidget from "./ValueCreationWidget";
-import { WIDGET_TEST_IDS, createDynamicTestId } from "../../constants/testIds";
+import { WIDGET_TEST_IDS } from "../../constants/testIds";
 import { SECURITY_LEVELS } from "../../constants/appConstants";
 
 // Mock ciaContentService
@@ -51,11 +51,15 @@ describe("ValueCreationWidget", () => {
       />
     );
 
-    // Check widget title is rendered (without using missing test IDs)
+    // Check widget title is rendered
     expect(screen.getByText("Security Value Creation")).toBeInTheDocument();
 
-    // Check for None level in the widget
-    expect(screen.getByText(SECURITY_LEVELS.NONE)).toBeInTheDocument();
+    // Check for None level in the status badge specifically
+    const statusBadge = screen.getByTestId("status-badge");
+    expect(statusBadge).toHaveTextContent(SECURITY_LEVELS.NONE);
+    
+    // Verify the ROI description is shown correctly
+    expect(screen.getByText("None ROI description")).toBeInTheDocument();
   });
 
   it("renders the widget with High level", () => {
@@ -68,9 +72,14 @@ describe("ValueCreationWidget", () => {
       />
     );
 
-    // Check for high level in the component
-    expect(screen.getByText(SECURITY_LEVELS.HIGH)).toBeInTheDocument();
+    // Check for High level in the status badge specifically
+    const statusBadge = screen.getByTestId("status-badge");
+    expect(statusBadge).toHaveTextContent(SECURITY_LEVELS.HIGH);
 
+    // Check value points are rendered correctly
+    expect(screen.getByText("High value point 1")).toBeInTheDocument();
+    expect(screen.getByText("High value point 2")).toBeInTheDocument();
+    
     // Check value points list exists by finding first value point
     const valuePoint = screen.getByTestId("value-creation-widget-value-point-0");
     expect(valuePoint).toBeInTheDocument();
