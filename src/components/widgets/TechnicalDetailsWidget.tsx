@@ -324,6 +324,67 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
             )}
           </div>
 
+          {/* Enhanced Implementation Metrics */}
+          <div className="mt-6 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4 border-gray-300 dark:border-gray-600 security-card">
+            <h3 className="text-lg font-medium mb-3 flex items-center">
+              <span className="mr-2">⚙️</span>
+              Implementation Metrics
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Development Effort */}
+              <div className="p-3 bg-gray-100 dark:bg-gray-750 rounded-lg shadow-sm security-card">
+                <h4 className="text-sm font-medium mb-2 flex items-center terminal-text">
+                  <span className="mr-2">🔨</span>
+                  Development Effort
+                </h4>
+                <div
+                  className="text-gray-700 dark:text-gray-300 font-medium"
+                  data-testid="development-effort"
+                >
+                  {details.effort?.development || "Not specified"}
+                </div>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                  Estimated time to implement and deploy
+                </p>
+              </div>
+
+              {/* Maintenance Requirements */}
+              <div className="p-3 bg-gray-100 dark:bg-gray-750 rounded-lg shadow-sm security-card">
+                <h4 className="text-sm font-medium mb-2 flex items-center terminal-text">
+                  <span className="mr-2">🔄</span>
+                  Maintenance
+                </h4>
+                <div
+                  className="text-gray-700 dark:text-gray-300 font-medium"
+                  data-testid="maintenance-level"
+                >
+                  {details.effort?.maintenance || "Not specified"}
+                </div>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                  Ongoing maintenance requirements
+                </p>
+              </div>
+
+              {/* Required Expertise */}
+              <div className="p-3 bg-gray-100 dark:bg-gray-750 rounded-lg shadow-sm security-card">
+                <h4 className="text-sm font-medium mb-2 flex items-center terminal-text">
+                  <span className="mr-2">👤</span>
+                  Required Expertise
+                </h4>
+                <div
+                  className="text-gray-700 dark:text-gray-300 font-medium"
+                  data-testid="required-expertise"
+                >
+                  {details.effort?.expertise || "Not specified"}
+                </div>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                  Team skills needed for implementation
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Component-specific metrics */}
           {activeTab === "availability" && (
             <div className="mt-4 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-3 rounded-lg border border-blue-200 dark:border-blue-800">

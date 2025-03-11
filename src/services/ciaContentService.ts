@@ -14,6 +14,7 @@ import {
   BusinessImpactDetails,
   CIAComponentType,
 } from "../types/cia-services";
+import { normalizeSecurityLevel } from "../utils/securityLevelUtils";
 
 // Interface definitions
 interface SecurityResource {
@@ -156,38 +157,119 @@ export function createCIAContentService(
    */
   function getTechnicalImplementation(
     component: CIAComponentType,
-    level: SecurityLevel
+    level: SecurityLevel | string
   ): TechnicalImplementationDetails {
-    const details = getComponentDetails(component, level);
+    const normalizedLevel = normalizeSecurityLevel(level) as SecurityLevel;
+
+    // Get component details from appropriate options object
+    let details: TechnicalImplementationDetails | undefined;
+
+    switch (component) {
+      case "confidentiality":
+        details =
+          confidentialityOptions[normalizedLevel]?.technicalImplementation;
+        break;
+      case "integrity":
+        details = integrityOptions[normalizedLevel]?.technicalImplementation;
+        break;
+      case "availability":
+        details = availabilityOptions[normalizedLevel]?.technicalImplementation;
+        break;
+    }
 
     // Default implementation if no details found
     if (!details) {
       return {
-        description: "No technical implementation details available",
+        description: `No technical implementation details available for ${normalizedLevel} ${component}`,
         implementationSteps: ["Consider implementing basic security controls"],
         effort: {
-          development: "Minimal",
-          maintenance: "None",
-          expertise: "Basic",
+          development: getDefaultDevelopmentEffort(normalizedLevel),
+          maintenance: getDefaultMaintenanceEffort(normalizedLevel),
+          expertise: getDefaultExpertiseLevel(normalizedLevel),
         },
       };
     }
 
-    // Use data from EnhancedCIADetails if available, otherwise use default values
+    // Ensure we always have default values for missing fields
     return {
       description:
-        details.technical ||
-        `Standard ${component} controls for ${level} security level`,
+        details.description ||
+        `Standard ${component} controls for ${normalizedLevel} security level`,
       implementationSteps: details.implementationSteps || [],
-      effort: details.effort || {
-        development: "Not specified",
-        maintenance: "Not specified",
-        expertise: "Not specified",
+      effort: {
+        development:
+          details.effort?.development ||
+          getDefaultDevelopmentEffort(normalizedLevel),
+        maintenance:
+          details.effort?.maintenance ||
+          getDefaultMaintenanceEffort(normalizedLevel),
+        expertise:
+          details.effort?.expertise ||
+          getDefaultExpertiseLevel(normalizedLevel),
       },
-      rto: component === "availability" ? details.rto : undefined,
-      rpo: component === "availability" ? details.rpo : undefined,
-      mttr: component === "availability" ? details.mttr : undefined,
+      requirements: details.requirements || [],
+      technologies: details.technologies || [],
     };
+  }
+
+  /**
+   * Gets default development effort based on security level
+   */
+  function getDefaultDevelopmentEffort(level: SecurityLevel): string {
+    switch (level) {
+      case "None":
+        return "None";
+      case "Low":
+        return "Days (1-5)";
+      case "Moderate":
+        return "Weeks (2-4)";
+      case "High":
+        return "Months (1-3)";
+      case "Very High":
+        return "Months (3+)";
+      default:
+        return "Not specified";
+    }
+  }
+
+  /**
+   * Gets default maintenance effort based on security level
+   */
+  function getDefaultMaintenanceEffort(level: SecurityLevel): string {
+    switch (level) {
+      case "None":
+        return "None";
+      case "Low":
+        return "Minimal (quarterly review)";
+      case "Moderate":
+        return "Regular (monthly review)";
+      case "High":
+        return "Significant (biweekly monitoring)";
+      case "Very High":
+        return "Extensive (continuous monitoring)";
+      default:
+        return "Not specified";
+    }
+  }
+
+  /**
+   * Gets default expertise level based on security level
+   */
+  function getDefaultExpertiseLevel(level: SecurityLevel): string {
+    switch (level) {
+      case "None":
+        return "None";
+      case "Low":
+        return "Basic security knowledge";
+      case "Moderate":
+        return "Security professional";
+      case "High":
+        return "Security specialist";
+      case "Very High":
+        return "Security expert team";
+      default:
+        return "Not specified";
+    }
   }
 
   /**

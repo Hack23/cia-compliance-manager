@@ -196,50 +196,42 @@ const SecurityVisualizationWidget: React.FC<
             />
           </div>
 
-          {/* Risk score gauge visualization */}
-          <div className="mt-6 bg-gray-100 dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+          {/* Risk score gauge visualization - enhanced with Ingress styling */}
+          <div className="mt-6 bg-gray-50 dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
             <h4 className="text-sm font-medium mb-3">Risk Score Gauge</h4>
             <div className="relative h-8 w-full bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-              {/* Color segments for risk levels */}
-              <div className="absolute top-0 left-0 h-full w-1/4 bg-gradient-to-r from-green-500 to-lime-500"></div>
-              <div className="absolute top-0 left-1/4 h-full w-1/4 bg-gradient-to-r from-lime-500 to-yellow-500"></div>
-              <div className="absolute top-0 left-2/4 h-full w-1/4 bg-gradient-to-r from-yellow-500 to-orange-500"></div>
-              <div className="absolute top-0 left-3/4 h-full w-1/4 bg-gradient-to-r from-orange-500 to-red-500"></div>
-
-              {/* Risk indicator needle */}
-              <div
-                className="absolute top-0 h-full w-1 bg-white dark:bg-gray-100 z-10 transition-all duration-1000 ease-out"
+              {/* Color segments for risk levels with enhanced cyberpunk styling */}
+              <div className="absolute top-0 left-0 h-full w-1/4 bg-gradient-to-r from-green-500 to-green-400"></div>
+              <div className="absolute top-0 left-1/4 h-full w-1/4 bg-gradient-to-r from-yellow-400 to-yellow-500"></div>
+              <div className="absolute top-0 left-2/4 h-full w-1/4 bg-gradient-to-r from-orange-500 to-orange-600"></div>
+              <div className="absolute top-0 left-3/4 h-full w-1/4 bg-gradient-to-r from-red-600 to-red-700"></div>
+              
+              {/* Risk score indicator with glow effect */}
+              <div 
+                className="absolute top-0 h-full w-1 bg-white dark:bg-gray-100 z-10 shadow-glow"
                 style={{
                   left: `${riskMetrics.riskScore}%`,
-                  boxShadow: "0 0 8px rgba(255,255,255,0.8)",
+                  boxShadow: '0 0 10px 2px rgba(255, 255, 255, 0.7)',
+                  transform: 'translateX(-50%)'
                 }}
               ></div>
+              
+              {/* Risk labels */}
+              <div className="absolute top-full mt-2 left-0 text-xs text-gray-600 dark:text-gray-400">Low Risk</div>
+              <div className="absolute top-full mt-2 right-0 text-xs text-gray-600 dark:text-gray-400">High Risk</div>
+            </div>
+          </div>
 
-              {/* Labels */}
-              <div
-                className="absolute top-full mt-1 text-xs text-green-700 dark:text-green-400"
-                style={{ left: "12.5%", transform: "translateX(-50%)" }}
-              >
-                Low
-              </div>
-              <div
-                className="absolute top-full mt-1 text-xs text-yellow-700 dark:text-yellow-400"
-                style={{ left: "37.5%", transform: "translateX(-50%)" }}
-              >
-                Medium
-              </div>
-              <div
-                className="absolute top-full mt-1 text-xs text-orange-700 dark:text-orange-400"
-                style={{ left: "62.5%", transform: "translateX(-50%)" }}
-              >
-                High
-              </div>
-              <div
-                className="absolute top-full mt-1 text-xs text-red-700 dark:text-red-400"
-                style={{ left: "87.5%", transform: "translateX(-50%)" }}
-              >
-                Critical
-              </div>
+          {/* Risk score details in cyberpunk style */}
+          <div className="mt-4 bg-gray-50 dark:bg-gray-800 p-3 rounded-lg border border-gray-200 dark:border-gray-700 technical-text">
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-gray-600 dark:text-gray-400">Risk Analysis:</span>
+              <span className={`font-mono ${
+                riskMetrics.riskLevel === "Critical" ? "text-red-500 dark:text-red-400" :
+                riskMetrics.riskLevel === "High" ? "text-orange-500 dark:text-orange-400" :
+                riskMetrics.riskLevel === "Medium" ? "text-yellow-500 dark:text-yellow-400" :
+                "text-green-500 dark:text-green-400"
+              }`}>{riskMetrics.riskScore}/100 - {riskMetrics.riskLevel}</span>
             </div>
           </div>
 

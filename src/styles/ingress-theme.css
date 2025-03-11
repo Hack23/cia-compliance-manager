@@ -1,3 +1,127 @@
+/* ========== SECURITY VISUALIZATION STYLING ========== */
+.dark .security-gauge {
+  position: relative;
+  height: 10px;
+  background: linear-gradient(
+    to right,
+    #00e676 0%,    /* Green - Low Risk */
+    #ffeb3b 25%,   /* Yellow - Medium Risk */
+    #ff9800 50%,   /* Orange - High Risk */
+    #ff5252 100%   /* Red - Critical Risk */
+  );
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.dark .security-gauge-indicator {
+  position: absolute;
+  top: -3px;
+  width: 3px;
+  height: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 5px #ffffff;
+  border-radius: 2px;
+  z-index: 2;
+  transform: translateX(-50%);
+}
+
+.dark .risk-score-value {
+  font-family: "Share Tech Mono", monospace;
+  text-shadow: 0 0 5px currentColor;
+  letter-spacing: 1px;
+}
+
+/* Critical risk glow animation */
+@keyframes pulse-risk {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 82, 82, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(255, 82, 82, 1), 0 0 15px rgba(255, 82, 82, 0.6);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(255, 82, 82, 0.8);
+  }
+}
+
+.dark .critical-risk {
+  animation: pulse-risk 2s infinite;
+  color: #ff5252;
+}
+
+.dark .high-risk {
+  color: #ff9800;
+  text-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
+}
+
+.dark .medium-risk {
+  color: #ffeb3b;
+  text-shadow: 0 0 8px rgba(255, 235, 59, 0.6);
+}
+
+.dark .low-risk {
+  color: #00e676;
+  text-shadow: 0 0 8px rgba(0, 230, 118, 0.6);
+}
+
+/* Enhanced technical details styling */
+.dark .tech-metric-card {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 26, 37, 0.95) 0%,
+    rgba(0, 20, 26, 0.98) 100%
+  );
+  border: 1px solid var(--ingress-border);
+  box-shadow: var(--ingress-glow);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.dark .tech-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(0, 204, 102, 0.4);
+}
+
+.dark .tech-metric-value {
+  font-family: var(--font-mono);
+  color: var(--ingress-primary);
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px rgba(0, 204, 102, 0.5);
+}
+
+.dark .tech-metric-label {
+  font-family: var(--font-accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+/* Add scanner line effect for technical cards */
+.dark .tech-metric-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--ingress-primary), transparent);
+  animation: scan-line 3s ease infinite;
+}
+
+@keyframes scan-line {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+/* Shadow glow for risk indicator */
+.shadow-glow {
+  box-shadow: 0 0 10px 2px rgba(0, 204, 102, 0.7);
+}
+
+.dark .shadow-glow {
+  box-shadow: 0 0 10px 2px rgba(0, 255, 136, 0.7), 0 0 20px rgba(0, 255, 136, 0.3);
+}
 /* Ingress-inspired Dark Theme */
 
 /* Base styles for dark mode Ingress theme */
