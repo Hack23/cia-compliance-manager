@@ -4,7 +4,7 @@ import BusinessImpactSection from './BusinessImpactSection';
 import { BusinessImpactDetails } from '../../types/cia-services';
 
 describe('BusinessImpactSection', () => {
-  // Create a mock BusinessImpactDetails object
+  // Create a mock BusinessImpactDetails object that matches the current implementation
   const mockBusinessImpact: BusinessImpactDetails = {
     summary: 'Test business impact summary',
     financial: {
@@ -14,11 +14,8 @@ describe('BusinessImpactSection', () => {
     operational: {
       description: 'Test operational impact',
       riskLevel: 'Medium',
-    },
-    reputational: {
-      description: 'Test reputational impact',
-      riskLevel: 'Low',
     }
+    // Note: reputational field not included as it's not required by the component
   };
 
   it('renders without crashing', () => {
@@ -68,5 +65,31 @@ describe('BusinessImpactSection', () => {
     );
     
     expect(screen.getByTestId('business-impact-section')).toBeInTheDocument();
+  });
+
+  it('handles missing impact properties gracefully', () => {
+    const minimalImpact: BusinessImpactDetails = {
+      summary: 'Minimal summary',
+      financial: {
+        description: '',
+        riskLevel: '',
+      },
+      operational: {
+        description: '',
+        riskLevel: '',
+      },
+    };
+
+    render(
+      <BusinessImpactSection 
+        impact={minimalImpact} 
+        color="blue"
+      />
+    );
+    
+    expect(screen.getByText('Financial Impact')).toBeInTheDocument();
+    expect(screen.getByText('Operational Impact')).toBeInTheDocument();
+    expect(screen.getByText('No financial impact information available')).toBeInTheDocument();
+    expect(screen.getByText('No operational impact information available')).toBeInTheDocument();
   });
 });

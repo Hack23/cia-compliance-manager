@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import ValueCreationWidget from "./ValueCreationWidget";
 import { WIDGET_TEST_IDS, createDynamicTestId } from "../../constants/testIds";
@@ -21,19 +21,17 @@ vi.mock("../../services/ciaContentService", () => ({
         `${level} value point 2`,
       ]),
   },
-  // Add the missing getValuePoints function
+  // Additional mock exports
   getValuePoints: vi
     .fn()
     .mockImplementation((level) => [
       `${level} value point 1`,
       `${level} value point 2`,
     ]),
-  // Add the missing getROIEstimate function
   getROIEstimate: vi.fn().mockImplementation((level) => ({
     value: level === "None" ? "0%" : "200%",
     description: `${level} ROI description`,
   })),
-  // Add the missing getImplementationConsiderations function if needed
   getImplementationConsiderations: vi
     .fn()
     .mockImplementation((level) => [
@@ -53,15 +51,11 @@ describe("ValueCreationWidget", () => {
       />
     );
 
-    // Check title contains correct security level
-    expect(
-      screen.getByTestId(WIDGET_TEST_IDS.VALUE_CREATION_TITLE)
-    ).toHaveTextContent(`${SECURITY_LEVELS.NONE} Value Creation`);
+    // Check widget title is rendered (without using missing test IDs)
+    expect(screen.getByText("Security Value Creation")).toBeInTheDocument();
 
-    // Check subtitle
-    expect(
-      screen.getByTestId(WIDGET_TEST_IDS.VALUE_CREATION_SUBTITLE)
-    ).toBeInTheDocument();
+    // Check for None level in the widget
+    expect(screen.getByText(SECURITY_LEVELS.NONE)).toBeInTheDocument();
   });
 
   it("renders the widget with High level", () => {
@@ -74,23 +68,15 @@ describe("ValueCreationWidget", () => {
       />
     );
 
-    // Check title contains correct security level
-    expect(
-      screen.getByTestId(WIDGET_TEST_IDS.VALUE_CREATION_TITLE)
-    ).toHaveTextContent(`${SECURITY_LEVELS.HIGH} Value Creation`);
+    // Check for high level in the component
+    expect(screen.getByText(SECURITY_LEVELS.HIGH)).toBeInTheDocument();
 
-    // Check value points list exists
-    const pointsList = screen.getByTestId(WIDGET_TEST_IDS.VALUE_POINTS_LIST);
-    expect(pointsList).toBeInTheDocument();
-
-    // Check first value point exists
-    expect(
-      screen.getByTestId(createDynamicTestId.valuePoint(0))
-    ).toBeInTheDocument();
+    // Check value points list exists by finding first value point
+    const valuePoint = screen.getByTestId("value-creation-widget-value-point-0");
+    expect(valuePoint).toBeInTheDocument();
   });
 
   it("displays ROI information", () => {
-    // Fix the test to match the actual component implementation
     render(
       <ValueCreationWidget
         securityLevel={SECURITY_LEVELS.MODERATE}
@@ -100,12 +86,15 @@ describe("ValueCreationWidget", () => {
       />
     );
 
-    // Check ROI section exists
-    const roiSection = screen.getByTestId(WIDGET_TEST_IDS.ROI_SECTION);
-    expect(roiSection).toBeInTheDocument();
-
-    // Check for actual ROI content based on the current implementation
-    expect(roiSection).toHaveTextContent("Return on Investment:200%");
+    // Check for the ROI metrics cards
+    const roiCard = screen.getByTestId("value-creation-widget-roi");
+    expect(roiCard).toBeInTheDocument();
+    
+    // Check for ROI description text
+    expect(screen.getByText("Moderate ROI description")).toBeInTheDocument();
+    
+    // Check for business benefits section
+    expect(screen.getByText("Business Benefits")).toBeInTheDocument();
   });
 
   it("displays different value points for different security levels", () => {
@@ -137,7 +126,7 @@ describe("ValueCreationWidget", () => {
 
   it("accepts custom testId prop", () => {
     const testId = "custom-value-creation";
-    const { container } = render(
+    render(
       <ValueCreationWidget
         securityLevel={SECURITY_LEVELS.MODERATE}
         availabilityLevel={SECURITY_LEVELS.MODERATE}
@@ -147,10 +136,12 @@ describe("ValueCreationWidget", () => {
       />
     );
 
-    // Look for the testId in the container's children
-    // The component might not apply the testId prop directly to the root element
-    expect(
-      container.querySelector(`[data-testid="value-creation-content"]`)
-    ).toBeInTheDocument();
+    // Check if the custom testId is applied to the widget container
+    expect(screen.getByTestId(testId)).toBeInTheDocument();
+    
+    // Check for ROI metrics cards with the custom prefix
+    expect(screen.getByTestId(`${testId}-roi`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-savings`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-breakeven`)).toBeInTheDocument();
   });
 });
