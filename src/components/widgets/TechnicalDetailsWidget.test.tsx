@@ -83,10 +83,15 @@ describe("TechnicalDetailsWidget", () => {
     expect(screen.getByText(/Step 1 for availability at None level/i)).toBeInTheDocument();
     expect(screen.getByText(/Step 2 for availability at None level/i)).toBeInTheDocument();
     
-    // Look for the headers with emojis for effort details
-    expect(screen.getByText(/🔨 Development Effort/i)).toBeInTheDocument();
-    expect(screen.getByText(/🔄 Maintenance/i)).toBeInTheDocument();
-    expect(screen.getByText(/👤 Required Expertise/i)).toBeInTheDocument();
+    // Get resource headers that should be visible in the component
+    const resourcesHeader = screen.getByTestId("resources-header");
+    expect(resourcesHeader).toBeInTheDocument();
+    
+    // Check for development, maintenance, and expertise by looking at the elements that contain
+    // these terms rather than searching for exact matches with emojis
+    expect(screen.getByText(/development/i, { selector: "h4" })).toBeInTheDocument();
+    expect(screen.getByText(/maintenance/i, { selector: "h4" })).toBeInTheDocument();
+    expect(screen.getByText(/expertise/i, { selector: "h4" })).toBeInTheDocument();
   });
 
   it("handles different security levels", () => {

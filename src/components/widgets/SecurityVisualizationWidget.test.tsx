@@ -42,9 +42,15 @@ describe('SecurityVisualizationWidget', () => {
     );
     
     // Check that risk metrics are displayed
-    expect(screen.getByText(/Value at Risk/i)).toBeInTheDocument();
-    expect(screen.getByText(/Probability/i)).toBeInTheDocument();
-    expect(screen.getByText(/Risk Score/i)).toBeInTheDocument();
+    expect(screen.getByTestId("radar-chart-value-at-risk")).toBeInTheDocument();
+    expect(screen.getByTestId("radar-chart-probability")).toBeInTheDocument();
+    expect(screen.getByTestId("radar-chart-risk-score")).toBeInTheDocument();
+    
+    // Use specific testId selectors to verify values and add null assertion to ensure elements have textContent
+    const metrics = screen.getAllByTestId("metrics-card-title");
+    expect(metrics[0]?.textContent).toContain("Value at Risk");
+    expect(metrics[1]?.textContent).toContain("Probability");
+    expect(metrics[2]?.textContent).toContain("Risk Score");
   });
 
   it('renders risk gauge with proper segments', () => {

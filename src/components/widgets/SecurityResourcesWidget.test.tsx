@@ -28,6 +28,7 @@ vi.mock("../../data/securityResources", () => ({
 }));
 
 describe("SecurityResourcesWidget", () => {
+  // Fix the test to use the correct testId
   it("renders without crashing", () => {
     render(
       <SecurityResourcesWidget
@@ -38,8 +39,8 @@ describe("SecurityResourcesWidget", () => {
       />
     );
 
-    // Updated to use "security-resources" instead of "widget-security-resources"
-    expect(screen.getByTestId("security-resources")).toBeInTheDocument();
+    // Changed to match the actual testId used in the component
+    expect(screen.getByTestId("security-resources-widget")).toBeInTheDocument();
     expect(screen.getByText("Security Resources")).toBeInTheDocument();
   });
 
