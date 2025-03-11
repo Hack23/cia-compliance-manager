@@ -88,61 +88,60 @@ export interface EnhancedCIADetails extends CIADetails {
 const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
   None: {
     description:
-      "No availability measures are in place. The system may experience frequent unplanned downtime with no recovery process.",
+      "No availability measures are in place. The system is prone to frequent, unpredictable outages.",
     technical:
       "No redundancy, backup systems, monitoring, or disaster recovery procedures are implemented.",
     businessImpact:
-      "Business operations completely stop during outages with significant revenue impact and potential long-term customer loss.",
+      "Severe disruptions occur during outages, potentially resulting in revenue losses estimated at 5-10% annually under prolonged conditions.",
     capex: 0,
     opex: 0,
     bg: getSecurityLevelColorPair("None").bg,
     text: getSecurityLevelColorPair("None").text,
     recommendations: [
-      "Implement basic monitoring to detect outages (e.g., simple uptime checks)",
-      "Create a simple backup process with regular verification",
-      "Document manual recovery procedures with clear responsibilities",
-      "Establish baseline uptime metrics to quantify current availability",
-      "Identify critical systems that need availability improvements first",
+      "Implement basic monitoring to detect outages early",
+      "Establish a rudimentary backup process with periodic testing",
+      "Document manual recovery procedures with clear roles",
+      "Establish baseline uptime metrics to gauge current performance",
+      "Identify and prioritize critical systems for improvement",
     ],
     uptime: "<90%",
     businessImpactDetails: {
       financialImpact: {
         description:
-          "Complete revenue loss during downtime periods with potential customer churn",
-        riskLevel: "Critical Risk",
-        annualRevenueLoss: "10-20% of annual revenue potential",
+          "Prolonged outages can lead to significant revenue loss, estimated at 5-10% of annual revenue.",
+        riskLevel: "Critical",
+        annualRevenueLoss: "5-10% of annual revenue",
       },
       operationalImpact: {
         description:
-          "Operations completely cease during outages with no recovery timeline predictability",
-        riskLevel: "Critical Risk",
+          "Operations are severely disrupted with recovery timelines that are highly unpredictable.",
+        riskLevel: "Critical",
         meanTimeToRecover: "Unpredictable (hours to days)",
       },
       regulatory: {
         description:
-          "Likely violates basic service agreements and regulatory requirements",
-        riskLevel: "High Risk",
+          "Likely violates basic service agreements and regulatory requirements.",
+        riskLevel: "High",
         complianceViolations: ["SLAs", "Basic industry standards"],
       },
     },
-    securityIcon: "⚠️", // Add default icon
+    securityIcon: "⚠️",
   },
   Low: {
     description:
-      "Basic availability measures with significant limitations. Extended downtime expected during disruptions.",
+      "Basic availability measures are present but have significant limitations, leading to extended downtime during disruptions.",
     technical:
-      "Manual backup processes, limited monitoring, basic documentation of recovery procedures.",
+      "Reliance on manual backup processes and limited monitoring, with basic recovery documentation.",
     businessImpact:
-      "Extended business disruptions during system failures with substantial recovery effort.",
+      "Moderate disruptions can lead to revenue losses estimated at 3-5% annually, heavily dependent on recovery speed.",
     capex: 5,
     opex: 3,
     bg: getSecurityLevelColorPair("Low").bg,
     text: getSecurityLevelColorPair("Low").text,
     recommendations: [
-      "Implement scheduled backups",
-      "Create basic monitoring alerts",
-      "Document and test recovery procedures",
-      "Set up simple status page for outage communication",
+      "Implement scheduled backups and test recovery procedures regularly",
+      "Set up basic monitoring alerts for early detection",
+      "Document recovery processes and establish a communication protocol for outages",
     ],
     uptime: "95%",
     rto: "24-48 hours",
@@ -150,14 +149,15 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
     mttr: "12-24 hours",
     businessImpactDetails: {
       financialImpact: {
-        description: "Revenue impact of 5-10% annually due to outages",
-        riskLevel: "High Risk",
-        annualRevenueLoss: "5-10% of annual revenue",
+        description:
+          "Revenue impact is estimated at around 3-5% annually due to extended downtimes.",
+        riskLevel: "High",
+        annualRevenueLoss: "3-5% of annual revenue",
       },
       operationalImpact: {
         description:
-          "Extended business disruptions requiring manual intervention",
-        riskLevel: "High Risk",
+          "Business disruptions are significant and require manual intervention, leading to slower recovery.",
+        riskLevel: "High",
         meanTimeToRecover: "12-24 hours",
       },
     },
@@ -165,21 +165,19 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
   },
   Moderate: {
     description:
-      "Standard availability measures ensuring reasonable uptime. Limited redundancy with planned disaster recovery.",
+      "Standard availability measures that yield acceptable uptime with planned disaster recovery processes.",
     technical:
-      "Scheduled backups, monitoring with alerts, documented recovery procedures, partial redundancy for critical components.",
+      "Scheduled backups, automated monitoring with alerts, documented recovery procedures, and partial redundancy for key components.",
     businessImpact:
-      "Business disruptions are limited to several hours with defined recovery processes.",
+      "Occasional disruptions are generally contained, with revenue losses estimated at 1-3% annually.",
     capex: 15,
     opex: 10,
     bg: getSecurityLevelColorPair("Moderate").bg,
     text: getSecurityLevelColorPair("Moderate").text,
     recommendations: [
-      "Implement redundancy for critical components",
-      "Set up automated backup systems",
-      "Deploy comprehensive monitoring with alerting",
-      "Create and test detailed disaster recovery plans",
-      "Establish SLAs for service availability",
+      "Enhance redundancy for mission-critical systems",
+      "Automate backup and disaster recovery testing",
+      "Integrate comprehensive monitoring with defined SLAs",
     ],
     uptime: "99%",
     rto: "4-8 hours",
@@ -188,13 +186,14 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
     businessImpactDetails: {
       financialImpact: {
         description:
-          "Revenue impact of 1-5% annually due to planned and unplanned downtime",
-        riskLevel: "Medium Risk",
-        annualRevenueLoss: "1-5% of annual revenue",
+          "Revenue impact is modest, estimated at approximately 1-3% annually, assuming typical outage scenarios.",
+        riskLevel: "Medium",
+        annualRevenueLoss: "1-3% of annual revenue",
       },
       operationalImpact: {
-        description: "Occasional disruptions with relatively quick recovery",
-        riskLevel: "Medium Risk",
+        description:
+          "Disruptions occur infrequently and recovery is relatively quick.",
+        riskLevel: "Medium",
         meanTimeToRecover: "2-4 hours",
       },
     },
@@ -202,22 +201,19 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
   },
   High: {
     description:
-      "Robust availability with minimal unplanned downtime. Comprehensive redundancy and automated recovery systems.",
+      "Robust availability measures with high redundancy and automated recovery systems ensure near-continuous operations.",
     technical:
-      "N+1 redundancy, multi-region standby systems, automated failover, comprehensive monitoring with alerts, regular disaster recovery testing.",
+      "N+1 redundancy, multi-region standby systems, automated failover, comprehensive monitoring, and regular disaster recovery testing.",
     businessImpact:
-      "Business continuity maintained through most disruptions with minimal customer impact.",
+      "Business continuity is well-maintained with negligible revenue impact (generally under 1%).",
     capex: 30,
     opex: 20,
     bg: getSecurityLevelColorPair("High").bg,
     text: getSecurityLevelColorPair("High").text,
     recommendations: [
       "Deploy N+1 redundancy for all critical systems",
-      "Implement automated failover mechanisms",
-      "Set up multi-region standby systems",
-      "Create comprehensive monitoring with automated alerts",
-      "Establish regular disaster recovery testing",
-      "Define clear escalation procedures",
+      "Implement automated failover and real-time monitoring",
+      "Conduct regular disaster recovery drills and define escalation procedures",
     ],
     uptime: "99.9%",
     rto: "15-60 minutes",
@@ -225,42 +221,41 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
     mttr: "10-30 minutes",
     businessImpactDetails: {
       financialImpact: {
-        description: "Minimal revenue impact under 1% annually",
-        riskLevel: "Low Risk",
+        description:
+          "Revenue impact is minimal, generally estimated at less than 1% of annual revenue.",
+        riskLevel: "Low",
         annualRevenueLoss: "<1% of annual revenue",
       },
       operationalImpact: {
         description:
-          "Very limited business disruptions with automated recovery",
-        riskLevel: "Low Risk",
+          "Disruptions are rare and recovery is almost instantaneous due to automation.",
+        riskLevel: "Low",
         meanTimeToRecover: "10-30 minutes",
       },
       strategic: {
         description:
-          "Enables expansion into markets requiring high reliability",
-        riskLevel: "Low Risk",
+          "High reliability can support market expansion and reinforces customer trust.",
+        riskLevel: "Low",
       },
     },
     securityIcon: "🛡️🛡️",
   },
   "Very High": {
     description:
-      "Maximum availability with continuous operations. Multi-region redundancy, real-time replication, and automated recovery.",
+      "Maximum availability with continuous operations enabled by multi-region redundancy, real-time replication, and fully automated recovery.",
     technical:
-      "N+2 redundancy, multi-region active-active architecture, real-time replication, comprehensive monitoring with automated remediation.",
+      "N+2 redundancy, active-active multi-region architecture, real-time replication, and automated remediation ensure near-zero downtime.",
     businessImpact:
-      "Continuous business operations maintained through all but catastrophic failures.",
+      "Operational continuity is nearly uninterrupted under normal conditions, with revenue impact considered negligible—though extreme events remain a risk.",
     capex: 60,
     opex: 40,
     bg: getSecurityLevelColorPair("Very High").bg,
     text: getSecurityLevelColorPair("Very High").text,
     recommendations: [
-      "Implement N+2 redundancy for all system components",
-      "Deploy multi-region active-active architecture",
-      "Set up real-time data replication",
-      "Create automated remediation systems",
-      "Establish 24/7 operations team coverage",
-      "Conduct regular chaos engineering exercises",
+      "Implement N+2 redundancy across all critical components",
+      "Deploy an active-active multi-region architecture with real-time replication",
+      "Establish fully automated remediation systems and 24/7 operations support",
+      "Conduct regular chaos engineering exercises to stress-test resilience",
     ],
     uptime: "99.99%",
     rto: "<5 minutes",
@@ -268,23 +263,25 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
     mttr: "<5 minutes",
     businessImpactDetails: {
       financialImpact: {
-        description: "Negligible revenue impact from availability issues",
-        riskLevel: "Minimal Risk",
+        description:
+          "Revenue losses due to availability issues are negligible under normal conditions.",
+        riskLevel: "Minimal",
       },
       operationalImpact: {
         description:
-          "Near-continuous business operations with immediate automated recovery",
-        riskLevel: "Minimal Risk",
+          "Business operations are maintained nearly continuously with rapid, automated recovery.",
+        riskLevel: "Minimal",
         meanTimeToRecover: "<5 minutes",
       },
       strategic: {
-        description: "Competitive advantage through superior reliability",
-        riskLevel: "Minimal Risk",
+        description:
+          "Superior reliability offers a competitive advantage in high-demand markets.",
+        riskLevel: "Minimal",
       },
       regulatory: {
         description:
-          "Meets most stringent regulatory availability requirements",
-        riskLevel: "Minimal Risk",
+          "Exceeds stringent regulatory and SLA requirements for availability.",
+        riskLevel: "Minimal",
         complianceViolations: [],
       },
     },
@@ -292,296 +289,332 @@ const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
   },
 };
 
-// Create full integrity options with all levels
+
+
 const _integrityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
   None: {
     description:
-      "No data integrity controls or validation mechanisms in place.",
+      "No integrity controls are implemented, leaving the system vulnerable to undetected data corruption.",
     technical:
-      "No input validation, checksums, audit logging, or data verification.",
+      "There is no input validation, no checksums, no audit logging, and no data verification mechanisms.",
     businessImpact:
-      "High risk of data corruption affecting business decisions and operations.",
+      "This lack of controls poses a critical risk to decision-making and financial reporting, potentially leading to significant operational disruptions.",
     capex: 0,
     opex: 0,
     bg: getSecurityLevelColorPair("None").bg,
     text: getSecurityLevelColorPair("None").text,
     recommendations: [
-      "Implement basic input validation",
-      "Add application-level data checks",
-      "Create simple audit logs for critical changes",
+      "Implement fundamental input validation measures",
+      "Introduce basic application-level data checks",
+      "Set up rudimentary audit logs for critical transactions",
     ],
     businessImpactDetails: {
       financialImpact: {
-        description: "Financial reporting cannot be trusted",
-        riskLevel: "Critical Risk",
+        description:
+          "Financial reporting reliability is severely compromised, risking misallocation of resources.",
+        riskLevel: "Critical",
       },
       operationalImpact: {
-        description: "Decisions based on potentially corrupted data",
-        riskLevel: "Critical Risk",
+        description:
+          "Decisions based on inaccurate data can lead to cascading failures and prolonged recovery times.",
+        riskLevel: "Critical",
       },
     },
     validationMethod: "None",
   },
   Low: {
-    description: "Basic data integrity with manual verification processes.",
+    description:
+      "Basic integrity controls are present, relying mainly on manual verification processes that are error-prone and hard to scale.",
     technical:
-      "Simple input validation, basic access controls, manual checksums.",
+      "Relies on simple input validation, rudimentary access controls, and manual checksum verification without automated oversight.",
     businessImpact:
-      "Limited protection against data corruption with manual verification required.",
+      "Data inaccuracies may occur intermittently, potentially leading to errors in financial calculations and operational inefficiencies.",
     capex: 5,
     opex: 3,
     bg: getSecurityLevelColorPair("Low").bg,
     text: getSecurityLevelColorPair("Low").text,
     recommendations: [
-      "Implement server-side validation",
-      "Create basic data verification checks",
-      "Establish manual review processes",
+      "Adopt server-side validation to minimize human error",
+      "Introduce automated data verification where possible",
+      "Schedule regular manual reviews to detect anomalies",
     ],
     validationMethod: "Manual checks",
     businessImpactDetails: {
       financialImpact: {
-        description: "Financial calculations may have errors",
-        riskLevel: "High Risk",
+        description:
+          "Financial calculations might be affected by occasional errors, though the overall impact is moderate.",
+        riskLevel: "High",
       },
       operationalImpact: {
-        description: "Data corruption may be detected but not prevented",
-        riskLevel: "High Risk",
+        description:
+          "Manual processes may catch corruption inconsistently, leading to sporadic operational delays.",
+        riskLevel: "High",
       },
     },
   },
   Moderate: {
-    description: "Standard integrity controls with automated verification.",
+    description:
+      "Standard integrity controls combine automated verification with periodic manual oversight, providing a reasonable level of assurance.",
     technical:
-      "Comprehensive validation, checksums, version control, and audit logging.",
+      "Utilizes comprehensive input validation, checksums, version control, and audit logging with a blend of automated and manual checks.",
     businessImpact:
-      "Most data corruption detected and correctable with audit trails.",
+      "Most data corruption is detected and corrected, though sophisticated attacks or subtle errors may still occur.",
     capex: 15,
     opex: 10,
     bg: getSecurityLevelColorPair("Moderate").bg,
     text: getSecurityLevelColorPair("Moderate").text,
     recommendations: [
-      "Implement comprehensive data validation",
-      "Use database constraints and triggers",
-      "Set up automated integrity checking",
+      "Implement end-to-end automated data validation",
+      "Utilize database constraints and triggers to enforce integrity rules",
+      "Establish robust audit trails and periodic integrity reviews",
     ],
     validationMethod: "Automated validation",
     businessImpactDetails: {
       financialImpact: {
-        description: "Financial data generally trustworthy",
-        riskLevel: "Medium Risk",
+        description:
+          "Financial data is generally reliable; however, occasional discrepancies may still impact reporting accuracy.",
+        riskLevel: "Medium",
       },
       operationalImpact: {
-        description: "Most data corruption detected and correctable",
-        riskLevel: "Medium Risk",
+        description:
+          "Operational disruptions are infrequent and usually resolved quickly via established audit trails.",
+        riskLevel: "Medium",
       },
       regulatory: {
-        description: "Meets basic regulatory requirements for data integrity",
-        riskLevel: "Medium Risk",
+        description:
+          "Controls meet basic regulatory standards, though they might fall short of stricter compliance requirements.",
+        riskLevel: "Medium",
       },
     },
   },
   High: {
-    description: "Advanced integrity with cryptographic verification.",
+    description:
+      "Advanced integrity controls employing cryptographic techniques provide strong data assurance, albeit with increased complexity and cost.",
     technical:
-      "Digital signatures, hash verification, tamper-resistant audit logs.",
+      "Incorporates digital signatures, hash verifications, and tamper-resistant audit logs to secure data integrity.",
     businessImpact:
-      "Strong data integrity guarantees with cryptographic verification.",
+      "Data integrity is strongly maintained, reducing risks in financial and operational decision-making, but the high investment may limit broader scalability.",
     capex: 30,
     opex: 20,
     bg: getSecurityLevelColorPair("High").bg,
     text: getSecurityLevelColorPair("High").text,
     recommendations: [
-      "Implement digital signatures for critical data",
-      "Deploy cryptographic hash validation",
-      "Set up immutable audit logging",
+      "Deploy digital signatures for high-risk data entries",
+      "Implement cryptographic hash validations for data immutability",
+      "Establish immutable audit logging mechanisms",
     ],
     validationMethod: "Cryptographic verification",
     businessImpactDetails: {
       financialImpact: {
-        description: "Financial data highly trustworthy",
-        riskLevel: "Low Risk",
+        description:
+          "High confidence in financial data minimizes the risk of significant misreporting.",
+        riskLevel: "Low",
       },
       operationalImpact: {
-        description: "All changes tracked and validated",
-        riskLevel: "Low Risk",
+        description:
+          "Robust change tracking enables timely detection and correction of data errors.",
+        riskLevel: "Low",
       },
       regulatory: {
-        description: "Meets stringent compliance requirements",
-        riskLevel: "Low Risk",
+        description:
+          "These controls typically exceed many regulatory requirements, providing a strong compliance posture.",
+        riskLevel: "Low",
       },
     },
   },
   "Very High": {
-    description: "Maximum integrity with blockchain or similar technology.",
+    description:
+      "State-of-the-art integrity controls leveraging distributed ledger technologies provide near-absolute data assurance, though they introduce significant complexity and cost.",
     technical:
-      "Multi-party verification, blockchain-based ledgers, zero-knowledge proofs.",
+      "Employs multi-party verification, blockchain-based ledgers, and zero-knowledge proofs to ensure immutable audit trails.",
     businessImpact:
-      "Complete data integrity guarantees with immutable audit trails.",
+      "Data integrity is virtually guaranteed, which is critical for high-stakes regulatory and financial environments, but the substantial investment and complexity may not be justifiable for all organizations.",
     capex: 60,
     opex: 40,
     bg: getSecurityLevelColorPair("Very High").bg,
     text: getSecurityLevelColorPair("Very High").text,
     recommendations: [
-      "Implement blockchain for critical data",
-      "Deploy multi-party verification systems",
-      "Use zero-knowledge proofs where applicable",
+      "Explore blockchain or distributed ledger solutions for critical data",
+      "Deploy multi-party verification systems to enhance auditability",
+      "Investigate zero-knowledge proofs to verify data integrity without compromising confidentiality",
     ],
     validationMethod: "Blockchain/distributed ledger",
     businessImpactDetails: {
       financialImpact: {
-        description: "Complete financial data trustworthiness",
-        riskLevel: "Minimal Risk",
+        description:
+          "Ensures exceptional reliability of financial data, enabling precise reporting in regulated sectors.",
+        riskLevel: "Minimal",
       },
       operationalImpact: {
-        description: "Data integrity guaranteed with cryptographic certainty",
-        riskLevel: "Minimal Risk",
+        description:
+          "Data integrity is nearly absolute, reducing operational risk to an absolute minimum, despite high system complexity.",
+        riskLevel: "Minimal",
       },
       strategic: {
-        description: "Enables business in highly-regulated industries",
-        riskLevel: "Minimal Risk",
+        description:
+          "Supports organizations in highly regulated or high-stakes markets; however, the cost and complexity may outweigh benefits for most.",
+        riskLevel: "Minimal",
       },
     },
   },
 };
 
+
 // Create full confidentiality options with all levels
 const _confidentialityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
   None: {
     description:
-      "No confidentiality controls to protect sensitive information.",
-    technical: "No access controls, encryption, or data classification.",
+      "No confidentiality controls are implemented, leaving sensitive information fully exposed to any user with system access.",
+    technical:
+      "There are no access controls, no encryption measures, and no data classification processes.",
     businessImpact:
-      "All information is accessible to anyone with system access.",
+      "This exposes the organization to severe reputational damage and regulatory non-compliance, with potential legal penalties if sensitive data is compromised.",
     capex: 0,
     opex: 0,
     bg: getSecurityLevelColorPair("None").bg,
     text: getSecurityLevelColorPair("None").text,
     recommendations: [
-      "Implement basic authentication",
-      "Add simple authorization controls",
-      "Create data classification scheme",
+      "Implement basic authentication mechanisms",
+      "Introduce simple authorization controls",
+      "Establish a rudimentary data classification scheme",
     ],
     protectionMethod: "None",
     businessImpactDetails: {
       reputationalImpact: {
-        description: "All data accessible to unauthorized parties",
-        riskLevel: "Critical Risk",
+        description:
+          "Without confidentiality controls, sensitive information can be accessed by unauthorized parties, severely damaging customer trust and brand reputation.",
+        riskLevel: "Critical",
       },
       regulatory: {
-        description: "Non-compliant with all data protection regulations",
-        riskLevel: "Critical Risk",
+        description:
+          "Non-compliance with data protection regulations is highly likely, potentially resulting in fines and legal action.",
+        riskLevel: "Critical",
         complianceViolations: ["GDPR", "CCPA", "HIPAA", "PCI-DSS"],
       },
     },
   },
   Low: {
-    description: "Basic confidentiality with simple access controls.",
-    technical: "Password protection, basic roles, minimal encryption.",
-    businessImpact: "Basic protection against casual access attempts.",
+    description:
+      "Basic confidentiality measures are in place but provide only minimal protection against unauthorized access.",
+    technical:
+      "Relies on password protection, basic role-based access controls, and minimal encryption.",
+    businessImpact:
+      "Sensitive data is somewhat protected, but the risk of exposure remains high, potentially leading to moderate reputational harm and regulatory challenges.",
     capex: 5,
     opex: 3,
     bg: getSecurityLevelColorPair("Low").bg,
     text: getSecurityLevelColorPair("Low").text,
     recommendations: [
-      "Implement proper authentication system",
-      "Set up role-based access control",
-      "Enable TLS for all connections",
+      "Upgrade to a robust authentication system",
+      "Implement comprehensive role-based access controls",
+      "Enforce TLS/SSL for all data in transit",
     ],
     protectionMethod: "Basic access control",
     businessImpactDetails: {
       reputationalImpact: {
-        description: "Sensitive data may be exposed",
-        riskLevel: "High Risk",
+        description:
+          "Exposure of sensitive data is possible, which could lead to moderate damage to the organization’s reputation if an incident occurs.",
+        riskLevel: "High",
       },
       regulatory: {
-        description: "May violate basic privacy requirements",
-        riskLevel: "High Risk",
+        description:
+          "Existing measures may not fully satisfy privacy regulations, leading to potential fines or legal scrutiny.",
+        riskLevel: "High",
       },
     },
   },
   Moderate: {
-    description: "Standard confidentiality with encryption for sensitive data.",
+    description:
+      "Standard confidentiality measures provide a reasonable level of protection for sensitive information under typical threat scenarios.",
     technical:
-      "Strong authentication, role-based access control, encryption at rest and in transit.",
+      "Utilizes strong authentication, role-based access control, and encryption both at rest and in transit.",
     businessImpact:
-      "Reasonable protection for sensitive information against common threats.",
+      "Most unauthorized access attempts are thwarted, reducing the risk of data breaches. However, sophisticated threats might still pose a risk, leading to moderate operational and reputational impacts.",
     capex: 15,
     opex: 10,
     bg: getSecurityLevelColorPair("Moderate").bg,
     text: getSecurityLevelColorPair("Moderate").text,
     recommendations: [
-      "Implement encryption for data at rest",
-      "Set up comprehensive access controls",
-      "Establish security monitoring",
+      "Implement robust encryption for data both at rest and in transit",
+      "Regularly review and update access controls",
+      "Establish continuous monitoring and auditing of data access",
     ],
     protectionMethod: "Standard encryption",
     businessImpactDetails: {
       reputationalImpact: {
-        description: "Most sensitive data protected",
-        riskLevel: "Medium Risk",
+        description:
+          "Sensitive data is largely protected, mitigating the risk of reputational damage in the event of an incident.",
+        riskLevel: "Medium",
       },
       regulatory: {
-        description: "Complies with standard data protection regulations",
-        riskLevel: "Medium Risk",
+        description:
+          "Generally meets standard data protection requirements, though vulnerabilities may remain against highly sophisticated attacks.",
+        riskLevel: "Medium",
       },
     },
   },
   High: {
     description:
-      "Advanced confidentiality with strong encryption and access controls.",
+      "Advanced confidentiality measures provide strong protection against unauthorized access to sensitive information.",
     technical:
-      "Multi-factor authentication, strong encryption, fine-grained access controls, security monitoring.",
+      "Employs multi-factor authentication, robust encryption, fine-grained access controls, and continuous security monitoring.",
     businessImpact:
-      "Strong protection for sensitive information against sophisticated threats.",
+      "Significantly reduces the risk of data breaches, thereby minimizing reputational damage and ensuring compliance with stringent regulatory standards.",
     capex: 30,
     opex: 20,
     bg: getSecurityLevelColorPair("High").bg,
     text: getSecurityLevelColorPair("High").text,
     recommendations: [
-      "Implement multi-factor authentication",
-      "Deploy end-to-end encryption",
-      "Establish security information management",
+      "Deploy multi-factor authentication across all user access points",
+      "Implement end-to-end encryption and conduct regular security audits",
+      "Establish comprehensive monitoring of data access and activity",
     ],
     protectionMethod: "E2E encryption",
     businessImpactDetails: {
       reputationalImpact: {
-        description: "Strong protection for sensitive data",
-        riskLevel: "Low Risk",
+        description:
+          "High-level measures substantially reduce the risk of sensitive data exposure, protecting the organization’s reputation.",
+        riskLevel: "Low",
       },
       regulatory: {
-        description: "Meets stringent privacy requirements",
-        riskLevel: "Low Risk",
+        description:
+          "Measures meet or exceed many regulatory requirements, thereby reducing legal risks.",
+        riskLevel: "Low",
       },
     },
   },
   "Very High": {
-    description: "Maximum confidentiality with military-grade protection.",
+    description:
+      "Maximum confidentiality measures are implemented for protecting highly sensitive or classified information.",
     technical:
-      "Advanced encryption, hardware security modules, strict access controls, comprehensive monitoring.",
+      "Uses advanced encryption standards, hardware security modules, strict access controls, and a zero-trust architecture with continuous monitoring.",
     businessImpact:
-      "Maximum protection for highly sensitive or classified information.",
+      "Provides best-in-class protection, virtually eliminating the risk of unauthorized data access. However, the high cost and system complexity may not be justifiable for all organizations.",
     capex: 60,
     opex: 40,
     bg: getSecurityLevelColorPair("Very High").bg,
     text: getSecurityLevelColorPair("Very High").text,
     recommendations: [
-      "Implement quantum-resistant algorithms",
-      "Deploy hardware security modules",
-      "Establish zero-trust architecture",
+      "Implement quantum-resistant encryption algorithms",
+      "Deploy hardware security modules for critical data repositories",
+      "Adopt a zero-trust architecture to continuously validate access",
     ],
     protectionMethod: "Military-grade encryption",
     businessImpactDetails: {
       reputationalImpact: {
-        description: "Maximum protection for sensitive information",
-        riskLevel: "Minimal Risk",
+        description:
+          "Provides near-absolute protection of sensitive data, virtually eliminating the risk of reputational damage.",
+        riskLevel: "Minimal",
       },
       strategic: {
-        description: "Enables handling of top-secret or classified information",
-        riskLevel: "Minimal Risk",
+        description:
+          "Enables secure handling of top-secret or highly regulated information, although the high investment and complexity require careful justification.",
+        riskLevel: "Minimal",
       },
     },
   },
 };
+
 
 // ROI estimates with proper typing
 const _ROI_ESTIMATES: ROIEstimatesMap = {
