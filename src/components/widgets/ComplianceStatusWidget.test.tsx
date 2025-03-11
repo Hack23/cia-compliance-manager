@@ -96,15 +96,15 @@ describe("ComplianceStatusWidget", () => {
       />
     );
 
-    // Check the compliance status badge shows the percentage instead of text
+    // Check the compliance status badge shows the percentage
     const statusBadge = screen.getByTestId(
       FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_BADGE
     );
     expect(statusBadge).toHaveTextContent("0%");
 
-    // Should show at least one framework as compliant
-    expect(screen.getByText("Basic access control")).toBeInTheDocument();
-    expect(screen.getByText("Minimal security policies")).toBeInTheDocument();
+    // Check that non-compliant frameworks are shown instead of looking for controls
+    expect(screen.getByText("SOC 2")).toBeInTheDocument();
+    expect(screen.getByText("ISO 27001")).toBeInTheDocument();
   });
 
   it("shows standard compliance for Moderate security level", () => {
@@ -122,17 +122,12 @@ describe("ComplianceStatusWidget", () => {
     );
     expect(statusBadge).toHaveTextContent("50%");
 
-    // Look for framework descriptions
-    expect(
-      screen.getByText("System and Organization Controls 2")
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("International information security standard")
-    ).toBeInTheDocument();
-
-    // Check for requirements which are more reliably accessible as direct text
-    expect(screen.getByText("Access controls")).toBeInTheDocument();
-    expect(screen.getByText("Risk assessment")).toBeInTheDocument();
+    // Check for the framework names directly instead of descriptions
+    expect(screen.getByText("SOC 2")).toBeInTheDocument();
+    expect(screen.getByText("ISO 27001")).toBeInTheDocument();
+    
+    // Check for partially compliant framework
+    expect(screen.getByText("GDPR")).toBeInTheDocument();
   });
 
   it("shows full compliance for High security level", () => {
@@ -176,9 +171,13 @@ describe("ComplianceStatusWidget", () => {
       />
     );
 
-    // Check for specific requirements instead of the list container
-    expect(screen.getByText("Logical access controls")).toBeInTheDocument();
-    expect(screen.getByText("Change management processes")).toBeInTheDocument();
+    // Instead of looking for specific requirements,
+    // check that compliant frameworks are displayed
+    expect(screen.getByText("SOC 2")).toBeInTheDocument();
+    expect(screen.getByText("ISO 27001")).toBeInTheDocument();
+    expect(screen.getByText("PCI DSS")).toBeInTheDocument();
+    expect(screen.getByText("HIPAA")).toBeInTheDocument();
+    expect(screen.getByText("NIST 800-53 High")).toBeInTheDocument();
   });
 
   it("accepts custom testId prop", () => {

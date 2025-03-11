@@ -160,7 +160,8 @@ describe("AvailabilityImpactWidget", () => {
     ).toBeInTheDocument();
 
     // Check the uptime value, which is provided by our mock
-    expect(screen.getByText("111%")).toBeInTheDocument();
+    // Use getAllByText instead of getByText to handle multiple elements with the same text
+    expect(screen.getAllByText("111%")[0]).toBeInTheDocument();
   });
 
   it("has proper accessibility attributes", () => {

@@ -94,7 +94,10 @@ describe("BusinessImpactAnalysisWidget", () => {
   it("displays summary and security level", () => {
     render(<BusinessImpactAnalysisWidget {...defaultProps} />);
 
-    // We should use getAllByText for elements that may appear multiple times
+    // First click on the confidentiality tab to switch to it
+    fireEvent.click(screen.getByTestId("test-business-impact-confidentiality-tab"));
+
+    // Now we should use getAllByText for elements that may appear multiple times
     const summaryTexts = screen.getAllByText(
       /Low confidentiality business impact summary/i
     );
@@ -105,8 +108,8 @@ describe("BusinessImpactAnalysisWidget", () => {
   it("allows switching between CIA components", () => {
     render(<BusinessImpactAnalysisWidget {...defaultProps} />);
 
-    // Click the integrity tab
-    fireEvent.click(screen.getByTestId("test-business-impact-tab-integrity"));
+    // Click the integrity tab - fix the test ID to match what's in the component
+    fireEvent.click(screen.getByTestId("test-business-impact-integrity-tab"));
 
     // We should use getAllByText for elements that may appear multiple times
     const integrityTexts = screen.getAllByText(
@@ -117,7 +120,7 @@ describe("BusinessImpactAnalysisWidget", () => {
 
     // Click the availability tab
     fireEvent.click(
-      screen.getByTestId("test-business-impact-tab-availability")
+      screen.getByTestId("test-business-impact-availability-tab")
     );
 
     // Use getAllByText for potentially duplicated texts

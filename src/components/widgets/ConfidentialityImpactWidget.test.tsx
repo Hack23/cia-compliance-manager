@@ -64,35 +64,36 @@ vi.mock("../../services/ciaContentService", () => ({
       `Implement ${level} encryption`,
       `Set up ${level} data classification`,
     ]),
-    
-    getInformationSensitivity: vi.fn().mockImplementation((level) => {
-      switch (level) {
-        case "None": return "Public Information";
-        case "Low": return "Internal Use Only";
-        case "Moderate": return "Sensitive Information";
-        case "High": return "Confidential Information";
-        case "Very High": return "Restricted Information";
-        default: return "Not Classified";
-      }
-    }),
-    
-    getProtectionLevel: vi.fn().mockImplementation((level) => {
-      switch (level) {
-        case "None": return "No Protection";
-        case "Low": return "Basic Protection";
-        case "Moderate": return "Standard Protection";
-        case "High": return "Enhanced Protection";
-        case "Very High": return "Maximum Protection";
-        default: return "Undefined Protection";
-      }
-    }),
-    
-    normalizeSecurityLevel: vi.fn().mockImplementation((level) => {
-      if (typeof level !== 'string') return "None";
-      const normalized = level.charAt(0).toUpperCase() + level.slice(1).toLowerCase();
-      return ["None", "Low", "Moderate", "High", "Very High"].includes(normalized) ? normalized : "None";
-    })
-  }
+  },
+  
+  // Add these missing exported functions that are directly imported
+  getInformationSensitivity: vi.fn().mockImplementation((level) => {
+    switch (level) {
+      case "None": return "Public Information";
+      case "Low": return "Internal Use Only";
+      case "Moderate": return "Sensitive Information";
+      case "High": return "Confidential Information";
+      case "Very High": return "Restricted Information";
+      default: return "Not Classified";
+    }
+  }),
+  
+  getProtectionLevel: vi.fn().mockImplementation((level) => {
+    switch (level) {
+      case "None": return "No Protection";
+      case "Low": return "Basic Protection";
+      case "Moderate": return "Standard Protection";
+      case "High": return "Enhanced Protection";
+      case "Very High": return "Maximum Protection";
+      default: return "Undefined Protection";
+    }
+  }),
+  
+  normalizeSecurityLevel: vi.fn().mockImplementation((level) => {
+    if (typeof level !== 'string') return "None";
+    const normalized = level.charAt(0).toUpperCase() + level.slice(1).toLowerCase();
+    return ["None", "Low", "Moderate", "High", "Very High"].includes(normalized) ? normalized : "None";
+  })
 }));
 
 describe("ConfidentialityImpactWidget", () => {
