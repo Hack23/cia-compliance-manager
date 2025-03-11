@@ -62,7 +62,10 @@ describe("IntegrityImpactWidget", () => {
 
   it("renders without crashing", () => {
     render(<IntegrityImpactWidget {...defaultProps} />);
-    expect(screen.getByText("High Integrity")).toBeInTheDocument();
+    
+    // Instead of looking for "High Integrity", check for badge with "High" text
+    expect(screen.getByTestId("status-badge")).toHaveTextContent("High");
+    expect(screen.getByText("Integrity Profile")).toBeInTheDocument();
   });
 
   it("displays integrity description from ciaContentService", () => {

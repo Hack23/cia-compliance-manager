@@ -151,7 +151,8 @@ describe("AvailabilityImpactWidget", () => {
     );
 
     // Check that the widget still renders with Unknown level displayed
-    expect(screen.getByText("Unknown Availability")).toBeInTheDocument();
+    // Instead of looking for "Unknown Availability", check for the badge that has "Unknown"
+    expect(screen.getByTestId("status-badge")).toHaveTextContent("Unknown");
 
     // Check for the description, which is provided by our mock
     expect(

@@ -85,6 +85,12 @@ vi.mock("../../services/ciaContentService", () => ({
         case "Very High": return "Maximum Protection";
         default: return "Undefined Protection";
       }
+    }),
+    
+    normalizeSecurityLevel: vi.fn().mockImplementation((level) => {
+      if (typeof level !== 'string') return "None";
+      const normalized = level.charAt(0).toUpperCase() + level.slice(1).toLowerCase();
+      return ["None", "Low", "Moderate", "High", "Very High"].includes(normalized) ? normalized : "None";
     })
   }
 }));
