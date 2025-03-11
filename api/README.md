@@ -1,4 +1,4 @@
-**CIA Compliance Manager API Documentation v0.6.0**
+**CIA Compliance Manager API Documentation v0.7.0**
 
 ***
 

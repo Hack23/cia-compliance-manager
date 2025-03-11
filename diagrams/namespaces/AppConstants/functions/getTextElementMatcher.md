@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.6.0**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.7.0**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getTextElementMatcher**(`text`, `className`): (`content`, `element`) => `boolean`
 
-Defined in: [constants/appConstants.ts:77](https://github.com/Hack23/cia-compliance-manager/blob/ceaab2c8f767f20a2e1d44692ab086070170b592/src/constants/appConstants.ts#L77)
+Defined in: [constants/appConstants.ts:77](https://github.com/Hack23/cia-compliance-manager/blob/522a8fc6c1388fd56a1baa43ced2d687879fd0c2/src/constants/appConstants.ts#L77)
 
 Creates a matcher function for testing that checks if text appears in an element with a specific class
 

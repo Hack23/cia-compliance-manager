@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.6.0**](../README.md)
+[**CIA Compliance Manager Diagrams v0.7.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessKeyBenefits
 
-Defined in: [types/businessImpact.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/ceaab2c8f767f20a2e1d44692ab086070170b592/src/types/businessImpact.ts#L28)
+Defined in: [types/businessImpact.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/522a8fc6c1388fd56a1baa43ced2d687879fd0c2/src/types/businessImpact.ts#L28)
 
 ## Indexable
 

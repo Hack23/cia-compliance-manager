@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.6.0**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.7.0**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **RISK\_LEVELS**: `object`
 
-Defined in: [constants/riskConstants.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/ceaab2c8f767f20a2e1d44692ab086070170b592/src/constants/riskConstants.ts#L7)
+Defined in: [constants/riskConstants.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/522a8fc6c1388fd56a1baa43ced2d687879fd0c2/src/constants/riskConstants.ts#L7)
 
 Shared constants that are needed by both app constants and CIA options
 Breaking these out helps prevent circular dependencies
