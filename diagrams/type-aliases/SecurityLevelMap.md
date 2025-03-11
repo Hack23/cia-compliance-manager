@@ -8,7 +8,7 @@
 
 > **SecurityLevelMap**\<`T`\>: `Record`\<[`SecurityLevelKey`](SecurityLevelKey.md), `T`\>
 
-Defined in: [constants/coreConstants.ts:143](https://github.com/Hack23/cia-compliance-manager/blob/522a8fc6c1388fd56a1baa43ced2d687879fd0c2/src/constants/coreConstants.ts#L143)
+Defined in: [constants/coreConstants.ts:143](https://github.com/Hack23/cia-compliance-manager/blob/62a0b1ce1347cfdc660ab942275933ab33d79712/src/constants/coreConstants.ts#L143)
 
 ## Type Parameters
 

@@ -8,7 +8,7 @@
 
 > **getTextElementMatcher**(`text`, `className`): (`content`, `element`) => `boolean`
 
-Defined in: [constants/appConstants.ts:77](https://github.com/Hack23/cia-compliance-manager/blob/522a8fc6c1388fd56a1baa43ced2d687879fd0c2/src/constants/appConstants.ts#L77)
+Defined in: [constants/appConstants.ts:77](https://github.com/Hack23/cia-compliance-manager/blob/62a0b1ce1347cfdc660ab942275933ab33d79712/src/constants/appConstants.ts#L77)
 
 Creates a matcher function for testing that checks if text appears in an element with a specific class
 
