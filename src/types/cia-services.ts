@@ -32,6 +32,7 @@ export interface TechnicalImplementationDetails {
   rto?: string; // Recovery Time Objective
   rpo?: string; // Recovery Point Objective
   mttr?: string; // Mean Time To Recovery
+  validationMethod?: string; // Add this property
 }
 
 /**

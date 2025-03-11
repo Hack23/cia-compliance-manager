@@ -13,8 +13,9 @@ import {
 import SecurityLevelSelector from "../SecurityLevelSelector";
 import WidgetContainer from "../common/WidgetContainer";
 import { SecurityLevel } from "../../types/cia";
-import { getSecurityLevelClass } from "../../utils/widgetHelpers";
+import { getSecurityLevelClass } from "../../utils/securityLevelUtils";
 import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
+import SecurityLevelSummaryItem from "../common/SecurityLevelSummaryItem";
 
 /**
  * Props for the SecurityLevelWidget component
@@ -152,88 +153,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         />
       </div>
     </WidgetContainer>
-  );
-};
-
-/**
- * Component for displaying a single security level summary item
- */
-interface SecurityLevelSummaryItemProps {
-  label: string;
-  value: SecurityLevel;
-  icon: string;
-  testId: string;
-  color: "blue" | "green" | "purple";
-  borderColor?: string;
-  compact?: boolean;
-}
-
-const SecurityLevelSummaryItem: React.FC<SecurityLevelSummaryItemProps> = ({
-  label,
-  value,
-  icon,
-  testId,
-  color,
-  borderColor,
-  compact = false,
-}) => {
-  const getBorderColor = () => {
-    if (borderColor) {
-      return borderColor;
-    }
-
-    switch (color) {
-      case "blue":
-        return CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY;
-      case "green":
-        return CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY;
-      case "purple":
-        return CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY;
-      default:
-        return "#e5e7eb";
-    }
-  };
-
-  // More compact styling for top-placed summary
-  if (compact) {
-    return (
-      <div
-        className="flex items-center py-0.5 px-1.5 rounded-md border border-gray-200 dark:border-gray-700"
-        style={{ borderLeftColor: getBorderColor(), borderLeftWidth: "2px" }}
-        data-testid={testId}
-      >
-        <span className="text-base mr-1">{icon}</span>
-        <div>
-          <div className="text-xs text-gray-500 dark:text-gray-400 leading-tight">
-            {label}
-          </div>
-          <div
-            className={`font-medium ${getSecurityLevelClass(
-              value
-            )} text-sm leading-tight`}
-          >
-            {value}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Original non-compact styling
-  return (
-    <div
-      className={`flex items-center p-2 bg-white dark:bg-gray-800 rounded-md border-l-4 shadow-sm`}
-      style={{ borderLeftColor: getBorderColor() }}
-      data-testid={testId}
-    >
-      <span className="text-xl mr-2">{icon}</span>
-      <div>
-        <div className="text-xs text-gray-500 dark:text-gray-400">{label}</div>
-        <div className={`font-medium ${getSecurityLevelClass(value)} text-sm`}>
-          {value}
-        </div>
-      </div>
-    </div>
   );
 };
 

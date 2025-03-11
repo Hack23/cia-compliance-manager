@@ -1,64 +1,27 @@
-import React, { useState, useMemo, useEffect } from "react";
-import ciaContentService, {
-  BusinessImpactDetails,
-  calculateBusinessImpactLevel,
-  getRiskBadgeVariant,
-  getCategoryIcon,
-} from "../../services/ciaContentService";
-import { CIAComponentType, SecurityLevel } from "../../types/cia";
-import {
-  BUSINESS_IMPACT_TEST_IDS,
-  WIDGET_TEST_IDS,
-  asSecurityLevel,
-} from "../../constants/testIds";
-import { BUSINESS_IMPACT_ICONS } from "../../constants/uiConstants";
-import {
-  BUSINESS_IMPACT_CATEGORIES,
-  RISK_LEVELS,
-} from "../../constants/riskConstants";
-import KeyValuePair from "../common/KeyValuePair";
-import StatusBadge from "../common/StatusBadge";
-import MetricsCard from "../common/MetricsCard";
+import React, { useState } from "react";
+import { SecurityLevel } from "../../types/cia";
+import { BUSINESS_IMPACT_TEST_IDS } from "../../constants/testIds";
+import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
+import { CIA_LABELS, CIA_COMPONENT_ICONS } from "../../constants/appConstants";
+import ciaContentService from "../../services/ciaContentService";
 import WidgetContainer from "../common/WidgetContainer";
-import { WIDGET_ICONS, WIDGET_TITLES } from "../../constants/coreConstants";
+import StatusBadge from "../common/StatusBadge";
 
 /**
  * Props for the BusinessImpactAnalysisWidget component
- *
- * @interface BusinessImpactAnalysisWidgetProps
- * @property {SecurityLevel} availabilityLevel - The selected availability security level
- * @property {SecurityLevel} integrityLevel - The selected integrity security level
- * @property {SecurityLevel} confidentialityLevel - The selected confidentiality security level
- * @property {SecurityLevel} [securityLevel] - Optional overall security level
- * @property {string} [className] - Optional CSS class to apply to the widget
- * @property {string} [testId] - Optional test ID for testing purposes
- * @property {CIAComponentType} [activeComponent] - Optional active component to focus on
  */
 export interface BusinessImpactAnalysisWidgetProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
-  securityLevel?: SecurityLevel;
+  securityLevel?: SecurityLevel; // Overall security level
   className?: string;
   testId?: string;
-  activeComponent?: CIAComponentType;
+  activeComponent?: "availability" | "integrity" | "confidentiality";
 }
 
 /**
- * BusinessImpactAnalysisWidget displays detailed business impact analysis based on the selected
- * CIA security levels. It fetches data from ciaContentService and presents a comprehensive
- * breakdown of the business impacts across different categories such as financial, operational,
- * reputational, regulatory, and strategic.
- *
- * @component
- * @example
- * ```tsx
- * <BusinessImpactAnalysisWidget
- *   availabilityLevel="High"
- *   integrityLevel="Moderate"
- *   confidentialityLevel="High"
- * />
- * ```
+ * BusinessImpactAnalysisWidget displays business impact analysis for CIA components
  */
 const BusinessImpactAnalysisWidget: React.FC<
   BusinessImpactAnalysisWidgetProps
@@ -66,382 +29,388 @@ const BusinessImpactAnalysisWidget: React.FC<
   availabilityLevel,
   integrityLevel,
   confidentialityLevel,
+  securityLevel, // Overall security level
   className = "",
-  testId = BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_ANALYSIS_PREFIX,
-  activeComponent,
+  testId = BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_WIDGET,
+  activeComponent = "availability",
 }) => {
-  // Component state
-  const [activeTab, setActiveTab] = useState<"considerations" | "benefits">(
-    "considerations"
-  );
-  const [selectedComponent, setSelectedComponent] = useState<CIAComponentType>(
-    activeComponent || "confidentiality"
+  const [activeTab, setActiveTab] = useState<
+    "availability" | "integrity" | "confidentiality"
+  >(activeComponent);
+
+  // Get business impact for each component
+  const availabilityImpact = ciaContentService.getBusinessImpact(
+    "availability",
+    availabilityLevel
   );
 
-  // Fetch business impact details from the service for each component
-  const availabilityImpact = useMemo(
-    () =>
-      ciaContentService.getBusinessImpact("availability", availabilityLevel),
-    [availabilityLevel]
+  const integrityImpact = ciaContentService.getBusinessImpact(
+    "integrity",
+    integrityLevel
   );
 
-  const integrityImpact = useMemo(
-    () =>
-      ciaContentService.getBusinessImpact(
-        "integrity",
-        asSecurityLevel(integrityLevel)
-      ),
-    [integrityLevel]
+  const confidentialityImpact = ciaContentService.getBusinessImpact(
+    "confidentiality",
+    confidentialityLevel
   );
 
-  const confidentialityImpact = useMemo(
-    () =>
-      ciaContentService.getBusinessImpact(
-        "confidentiality",
-        asSecurityLevel(confidentialityLevel)
-      ),
-    [confidentialityLevel]
+  // Get component metrics
+  const availabilityMetrics = ciaContentService.getComponentMetrics(
+    "availability",
+    availabilityLevel
   );
 
-  // Get impact details based on selected component
-  const getActiveImpact = (): BusinessImpactDetails => {
-    switch (selectedComponent) {
+  const integrityMetrics = ciaContentService.getComponentMetrics(
+    "integrity",
+    integrityLevel
+  );
+
+  const confidentialityMetrics = ciaContentService.getComponentMetrics(
+    "confidentiality",
+    confidentialityLevel
+  );
+
+  // Get appropriate badge variant for risk level
+  const getRiskBadgeVariant = (riskLevel?: string) => {
+    if (!riskLevel) return "neutral";
+
+    if (riskLevel.toLowerCase().includes("high")) {
+      return "error";
+    } else if (riskLevel.toLowerCase().includes("medium")) {
+      return "warning";
+    } else if (riskLevel.toLowerCase().includes("low")) {
+      return "success";
+    }
+
+    return "info";
+  };
+
+  // Active component details
+  const getActiveImpact = () => {
+    switch (activeTab) {
       case "availability":
-        return availabilityImpact;
+        return {
+          impact: availabilityImpact,
+          metrics: availabilityMetrics,
+          color: CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY,
+          level: availabilityLevel,
+          icon: CIA_COMPONENT_ICONS.AVAILABILITY,
+          badgeVariant: "info" as const,
+          label: CIA_LABELS.AVAILABILITY,
+        };
       case "integrity":
-        return integrityImpact;
+        return {
+          impact: integrityImpact,
+          metrics: integrityMetrics,
+          color: CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY,
+          level: integrityLevel,
+          icon: CIA_COMPONENT_ICONS.INTEGRITY,
+          badgeVariant: "success" as const,
+          label: CIA_LABELS.INTEGRITY,
+        };
       case "confidentiality":
-      default:
-        return confidentialityImpact;
+        return {
+          impact: confidentialityImpact,
+          metrics: confidentialityMetrics,
+          color: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY,
+          level: confidentialityLevel,
+          icon: CIA_COMPONENT_ICONS.CONFIDENTIALITY,
+          badgeVariant: "purple" as const,
+          label: CIA_LABELS.CONFIDENTIALITY,
+        };
     }
   };
 
-  const activeImpact = getActiveImpact();
-
-  /**
-   * Get component name with proper capitalization
-   *
-   * @param component - The component type
-   * @returns The component name with proper capitalization
-   */
-  const getComponentName = (component: CIAComponentType): string => {
-    return component.charAt(0).toUpperCase() + component.slice(1);
-  };
-
-  useEffect(() => {
-    const newImpactLevel = calculateBusinessImpactLevel(
-      asSecurityLevel(availabilityLevel),
-      asSecurityLevel(integrityLevel),
-      asSecurityLevel(confidentialityLevel)
-    );
-    // ...existing code...
-  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
+  const { impact, metrics, color, level, icon, badgeVariant, label } =
+    getActiveImpact();
 
   return (
     <WidgetContainer
-      title={WIDGET_TITLES.BUSINESS_IMPACT}
-      icon={WIDGET_ICONS.BUSINESS_IMPACT}
+      title="Business Impact Analysis"
+      icon="📊"
       className={className}
       testId={testId}
     >
-      {/* Component Selection Tabs */}
-      <div className="flex mb-4 border-b border-gray-200 dark:border-gray-700">
-        <button
-          className={`px-4 py-2 text-sm font-medium ${
-            selectedComponent === "confidentiality"
-              ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-400 dark:border-blue-400"
-              : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-          }`}
-          onClick={() => setSelectedComponent("confidentiality")}
-          data-testid={`${testId}-tab-confidentiality`}
-        >
-          🔒 Confidentiality
-        </button>
-        <button
-          className={`px-4 py-2 text-sm font-medium ${
-            selectedComponent === "integrity"
-              ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-400 dark:border-blue-400"
-              : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-          }`}
-          onClick={() => setSelectedComponent("integrity")}
-          data-testid={`${testId}-tab-integrity`}
-        >
-          🔐 Integrity
-        </button>
-        <button
-          className={`px-4 py-2 text-sm font-medium ${
-            selectedComponent === "availability"
-              ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-400 dark:border-blue-400"
-              : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-          }`}
-          onClick={() => setSelectedComponent("availability")}
-          data-testid={`${testId}-tab-availability`}
-        >
-          ⏱️ Availability
-        </button>
-      </div>
-
-      {/* Business Impact Summary */}
-      <div
-        className="mb-6"
-        data-testid={BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_SUMMARY}
-      >
-        <h3 className="text-lg font-medium mb-2">
-          {getComponentName(selectedComponent)} Impact Summary
-        </h3>
-        <p className="text-gray-700 dark:text-gray-300 mb-4">
-          {activeImpact.summary}
-        </p>
-
-        {/* Security Level Indicator */}
-        <div className="flex items-center mb-4">
-          <span className="mr-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-            Security Level:
-          </span>
-          <StatusBadge
-            status={
-              selectedComponent === "availability"
-                ? "info"
-                : selectedComponent === "integrity"
-                ? "success"
-                : "purple"
+      <div className="space-y-6">
+        {/* Tab navigation */}
+        <div className="flex border-b mb-4" role="tablist">
+          <button
+            className={`px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              activeTab === "availability"
+                ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
+                : "text-gray-600 dark:text-gray-400"
+            }`}
+            onClick={() => setActiveTab("availability")}
+            data-testid={`${testId}-availability-tab`}
+            role="tab"
+            aria-selected={activeTab === "availability"}
+            aria-controls="availability-tab-panel"
+            id="availability-tab-button"
+            style={
+              activeTab === "availability"
+                ? { borderColor: CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY }
+                : undefined
             }
-            testId={`${testId}-${selectedComponent}-level`}
           >
-            {selectedComponent === "availability"
-              ? availabilityLevel
-              : selectedComponent === "integrity"
-              ? integrityLevel
-              : confidentialityLevel}
-          </StatusBadge>
+            <span className="mr-1">{CIA_COMPONENT_ICONS.AVAILABILITY}</span>
+            Availability
+          </button>
+          <button
+            className={`px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              activeTab === "integrity"
+                ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
+                : "text-gray-600 dark:text-gray-400"
+            }`}
+            onClick={() => setActiveTab("integrity")}
+            data-testid={`${testId}-integrity-tab`}
+            role="tab"
+            aria-selected={activeTab === "integrity"}
+            aria-controls="integrity-tab-panel"
+            id="integrity-tab-button"
+            style={
+              activeTab === "integrity"
+                ? { borderColor: CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY }
+                : undefined
+            }
+          >
+            <span className="mr-1">{CIA_COMPONENT_ICONS.INTEGRITY}</span>
+            Integrity
+          </button>
+          <button
+            className={`px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+              activeTab === "confidentiality"
+                ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
+                : "text-gray-600 dark:text-gray-400"
+            }`}
+            onClick={() => setActiveTab("confidentiality")}
+            data-testid={`${testId}-confidentiality-tab`}
+            role="tab"
+            aria-selected={activeTab === "confidentiality"}
+            aria-controls="confidentiality-tab-panel"
+            id="confidentiality-tab-button"
+            style={
+              activeTab === "confidentiality"
+                ? { borderColor: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY }
+                : undefined
+            }
+          >
+            <span className="mr-1">{CIA_COMPONENT_ICONS.CONFIDENTIALITY}</span>
+            Confidentiality
+          </button>
         </div>
-      </div>
 
-      {/* Impact Metrics Panel */}
-      <div
-        className="mb-6 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg"
-        data-testid={BUSINESS_IMPACT_TEST_IDS.IMPACT_METRICS_SECTION}
-      >
-        <h3 className="text-md font-medium mb-3">Impact Metrics</h3>
+        {/* Component Summary */}
+        <div
+          className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-l-4 security-card"
+          style={{ borderLeftColor: color }}
+        >
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-lg font-medium flex items-center">
+              <span className="mr-2">{icon}</span>
+              {label} Impact
+            </h3>
+            <StatusBadge status={badgeVariant} className="text-xs px-3">
+              {level}
+            </StatusBadge>
+          </div>
 
+          <p
+            className="text-gray-600 dark:text-gray-300 mb-4"
+            data-testid={`${testId}-summary`}
+          >
+            {impact.summary}
+          </p>
+        </div>
+
+        {/* Impact Areas */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Financial Impact */}
-          {activeImpact.financial && (
-            <div
-              data-testid={BUSINESS_IMPACT_TEST_IDS.FINANCIAL_IMPACT_CARD}
-              className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm"
-            >
-              <div className="flex items-center mb-2">
-                <span className="mr-2">{getCategoryIcon("financial")}</span>
-                <h4 className="text-sm font-medium">Financial Impact</h4>
+          {/* Operational Impact */}
+          {impact.operational && (
+            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border shadow-sm security-card">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-md font-medium flex items-center">
+                  <span className="mr-2">⚙️</span>
+                  Operational Impact
+                </h4>
                 <StatusBadge
-                  status={getRiskBadgeVariant(activeImpact.financial.riskLevel)}
-                  size="xs"
-                  className="ml-auto"
-                  testId={BUSINESS_IMPACT_TEST_IDS.FINANCIAL_RISK_BADGE}
+                  status={getRiskBadgeVariant(impact.operational.riskLevel)}
+                  size="sm"
                 >
-                  {activeImpact.financial.riskLevel}
+                  {impact.operational.riskLevel || "Unknown"}
                 </StatusBadge>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                {activeImpact.financial.description}
+
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                {impact.operational.description}
               </p>
-              {activeImpact.financial.annualRevenueLoss && (
-                <div
-                  data-testid={
-                    BUSINESS_IMPACT_TEST_IDS.FINANCIAL_IMPACT_METRICS
-                  }
-                  className="mt-3"
-                >
-                  <KeyValuePair
-                    label="Potential Annual Revenue Loss"
-                    value={activeImpact.financial.annualRevenueLoss}
-                    testId={BUSINESS_IMPACT_TEST_IDS.REVENUE_LOSS_KV}
-                    valueClassName="text-red-600 dark:text-red-400 font-semibold"
-                  />
+
+              {metrics.operationalImpact && (
+                <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    Key Metric
+                  </span>
+                  <div className="text-sm font-medium mt-1">
+                    {activeTab === "availability"
+                      ? `Uptime: ${metrics.uptime || "N/A"}`
+                      : metrics.operationalImpact}
+                  </div>
                 </div>
               )}
             </div>
           )}
 
-          {/* Operational Impact */}
-          {activeImpact.operational && (
-            <div
-              data-testid={BUSINESS_IMPACT_TEST_IDS.OPERATIONAL_IMPACT_CARD}
-              className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm"
-            >
-              <div className="flex items-center mb-2">
-                <span className="mr-2">{getCategoryIcon("operational")}</span>
-                <h4 className="text-sm font-medium">Operational Impact</h4>
+          {/* Financial Impact */}
+          {impact.financial && (
+            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border shadow-sm security-card">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-md font-medium flex items-center">
+                  <span className="mr-2">💰</span>
+                  Financial Impact
+                </h4>
                 <StatusBadge
-                  status={getRiskBadgeVariant(
-                    activeImpact.operational.riskLevel
-                  )}
-                  size="xs"
-                  className="ml-auto"
+                  status={getRiskBadgeVariant(impact.financial.riskLevel)}
+                  size="sm"
                 >
-                  {activeImpact.operational.riskLevel}
+                  {impact.financial.riskLevel || "Unknown"}
                 </StatusBadge>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                {activeImpact.operational.description}
+
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                {impact.financial.description}
               </p>
-              {activeImpact.operational.meanTimeToRecover && (
-                <div
-                  data-testid={
-                    BUSINESS_IMPACT_TEST_IDS.OPERATIONAL_IMPACT_METRICS
-                  }
-                  className="mt-3"
-                >
-                  <KeyValuePair
-                    label="Mean Time to Recover"
-                    value={activeImpact.operational.meanTimeToRecover}
-                    testId={BUSINESS_IMPACT_TEST_IDS.RECOVERY_TIME_KV}
-                    valueClassName="text-blue-600 dark:text-blue-400 font-semibold"
-                  />
+
+              {metrics.financialImpact && (
+                <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    Potential Cost
+                  </span>
+                  <div className="text-sm font-medium mt-1">
+                    {metrics.financialImpact}
+                  </div>
                 </div>
               )}
             </div>
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+        {/* Secondary Impact Areas */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Reputational Impact */}
-          {activeImpact.reputational && (
-            <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
-              <div className="flex items-center mb-2">
-                <span className="mr-2">{getCategoryIcon("reputational")}</span>
-                <h4 className="text-sm font-medium">Reputational</h4>
-                <StatusBadge
-                  status={getRiskBadgeVariant(
-                    activeImpact.reputational.riskLevel
-                  )}
-                  size="xs"
-                  className="ml-auto"
-                >
-                  {activeImpact.reputational.riskLevel}
-                </StatusBadge>
+          {impact.reputational && (
+            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border shadow-sm security-card">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="text-sm font-medium flex items-center">
+                  <span className="mr-2">🏆</span>
+                  Reputational Impact
+                </h4>
+                {impact.reputational.riskLevel && (
+                  <StatusBadge
+                    status={getRiskBadgeVariant(impact.reputational.riskLevel)}
+                    size="xs"
+                  >
+                    {impact.reputational.riskLevel}
+                  </StatusBadge>
+                )}
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                {activeImpact.reputational.description}
-              </p>
-            </div>
-          )}
-
-          {/* Strategic Impact */}
-          {activeImpact.strategic && (
-            <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
-              <div className="flex items-center mb-2">
-                <span className="mr-2">{getCategoryIcon("strategic")}</span>
-                <h4 className="text-sm font-medium">Strategic</h4>
-                <StatusBadge
-                  status={getRiskBadgeVariant(activeImpact.strategic.riskLevel)}
-                  size="xs"
-                  className="ml-auto"
-                >
-                  {activeImpact.strategic.riskLevel}
-                </StatusBadge>
-              </div>
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                {activeImpact.strategic.description}
+              <p className="text-xs text-gray-600 dark:text-gray-300">
+                {impact.reputational.description}
               </p>
             </div>
           )}
 
           {/* Regulatory Impact */}
-          {activeImpact.regulatory && (
-            <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
-              <div className="flex items-center mb-2">
-                <span className="mr-2">{getCategoryIcon("regulatory")}</span>
-                <h4 className="text-sm font-medium">Regulatory</h4>
-                <StatusBadge
-                  status={getRiskBadgeVariant(
-                    activeImpact.regulatory.riskLevel
-                  )}
-                  size="xs"
-                  className="ml-auto"
-                >
-                  {activeImpact.regulatory.riskLevel}
-                </StatusBadge>
+          {impact.regulatory && (
+            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border shadow-sm security-card">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="text-sm font-medium flex items-center">
+                  <span className="mr-2">⚖️</span>
+                  Regulatory Impact
+                </h4>
+                {impact.regulatory.riskLevel && (
+                  <StatusBadge
+                    status={getRiskBadgeVariant(impact.regulatory.riskLevel)}
+                    size="xs"
+                  >
+                    {impact.regulatory.riskLevel}
+                  </StatusBadge>
+                )}
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                {activeImpact.regulatory.description}
+              <p className="text-xs text-gray-600 dark:text-gray-300">
+                {impact.regulatory.description}
               </p>
-              {activeImpact.regulatory.complianceImpact && (
-                <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                  Compliance: {activeImpact.regulatory.complianceImpact}
-                </div>
-              )}
+            </div>
+          )}
+
+          {/* Strategic Impact */}
+          {impact.strategic && (
+            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border shadow-sm security-card">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="text-sm font-medium flex items-center">
+                  <span className="mr-2">🎯</span>
+                  Strategic Impact
+                </h4>
+                {impact.strategic.riskLevel && (
+                  <StatusBadge
+                    status={getRiskBadgeVariant(impact.strategic.riskLevel)}
+                    size="xs"
+                  >
+                    {impact.strategic.riskLevel}
+                  </StatusBadge>
+                )}
+              </div>
+              <p className="text-xs text-gray-600 dark:text-gray-300">
+                {impact.strategic.description}
+              </p>
             </div>
           )}
         </div>
-      </div>
 
-      {/* View type tabs */}
-      <div className="flex mb-4 border-b border-gray-200 dark:border-gray-700">
-        <button
-          className={`px-4 py-2 text-sm font-medium ${
-            activeTab === "considerations"
-              ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-400 dark:border-blue-400"
-              : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-          }`}
-          onClick={() => setActiveTab("considerations")}
-          data-testid={BUSINESS_IMPACT_TEST_IDS.TAB_CONSIDERATIONS}
-        >
-          Business Considerations
-        </button>
-        <button
-          className={`px-4 py-2 text-sm font-medium ${
-            activeTab === "benefits"
-              ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-400 dark:border-blue-400"
-              : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-          }`}
-          onClick={() => setActiveTab("benefits")}
-          data-testid={BUSINESS_IMPACT_TEST_IDS.TAB_BENEFITS}
-        >
-          Business Benefits
-        </button>
+        {/* Component-specific metrics */}
+        {activeTab === "availability" && (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+            {metrics.uptime && (
+              <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg text-center">
+                <div className="text-xs text-gray-500 dark:text-gray-400">
+                  Uptime
+                </div>
+                <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                  {metrics.uptime}
+                </div>
+              </div>
+            )}
+            {metrics.rto && (
+              <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg text-center">
+                <div className="text-xs text-gray-500 dark:text-gray-400">
+                  RTO
+                </div>
+                <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                  {metrics.rto}
+                </div>
+              </div>
+            )}
+            {metrics.rpo && (
+              <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg text-center">
+                <div className="text-xs text-gray-500 dark:text-gray-400">
+                  RPO
+                </div>
+                <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                  {metrics.rpo}
+                </div>
+              </div>
+            )}
+            {metrics.mttr && (
+              <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg text-center">
+                <div className="text-xs text-gray-500 dark:text-gray-400">
+                  MTTR
+                </div>
+                <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                  {metrics.mttr}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
-
-      {/* Recommendations or Business Considerations */}
-      {activeTab === "considerations" ? (
-        <div data-testid={BUSINESS_IMPACT_TEST_IDS.BUSINESS_CONSIDERATIONS}>
-          <h3 className="text-md font-medium mb-2">
-            Key Business Considerations
-          </h3>
-          <div className="space-y-2">
-            {/* We would fetch and display business considerations here */}
-            {/* For now, we'll display a placeholder message */}
-            <div
-              className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
-              data-testid={BUSINESS_IMPACT_TEST_IDS.NO_CONSIDERATIONS_MESSAGE}
-            >
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                This security level for {selectedComponent} generally{" "}
-                {activeImpact.summary.toLowerCase()}
-              </p>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div data-testid={BUSINESS_IMPACT_TEST_IDS.BUSINESS_BENEFITS}>
-          <h3 className="text-md font-medium mb-2">Business Benefits</h3>
-          <div className="space-y-2">
-            {/* We would fetch and display business benefits here */}
-            {/* For now, we'll display a placeholder message */}
-            <div
-              className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
-              data-testid={BUSINESS_IMPACT_TEST_IDS.NO_BENEFITS_MESSAGE}
-            >
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Implementing this security level for {selectedComponent}{" "}
-                provides significant business benefits related to risk reduction
-                and operational stability.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
     </WidgetContainer>
   );
 };

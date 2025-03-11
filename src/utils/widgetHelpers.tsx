@@ -6,6 +6,12 @@ import {
   CIA_COMPONENT_COLORS,
 } from "../constants/colorConstants";
 import { SecurityLevel } from "../types/cia";
+import {
+  normalizeSecurityLevel,
+  getSecurityLevelClass,
+  getSecurityLevelValue,
+  getSecurityLevelPercentage,
+} from "./securityLevelUtils";
 
 /**
  * Types of security level severities for UI formatting
@@ -39,30 +45,6 @@ export function mapSecurityLevelToSeverity(level: string): SecuritySeverity {
   }
 
   return "none";
-}
-
-/**
- * Gets the appropriate CSS class for a given security level
- * @param level The security level string
- * @returns CSS class string for the security level
- */
-export function getSecurityLevelClass(level: string): string {
-  const severity = mapSecurityLevelToSeverity(level);
-
-  // Use classes that reference the centralized color variables
-  switch (severity) {
-    case "very-high":
-      return "text-security-very-high font-medium";
-    case "high":
-      return "text-security-high font-medium";
-    case "moderate":
-      return "text-security-moderate font-medium";
-    case "low":
-      return "text-security-low font-medium";
-    case "none":
-    default:
-      return "text-security-none font-medium";
-  }
 }
 
 /**
@@ -103,34 +85,7 @@ export function getRiskBadgeClass(risk: string): string {
     return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
   }
 
-  return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";
-}
-
-/**
- * Safely normalizes a security level string to a standard format
- * @param level The security level string to normalize
- * @returns A normalized security level string
- */
-export function normalizeSecurityLevel(level?: string): string {
-  if (!level) return SECURITY_LEVELS.NONE;
-
-  // Handle case variations
-  const normalized = level.trim();
-
-  // Check against valid security levels
-  const validLevels = Object.values(SECURITY_LEVELS);
-  if (validLevels.includes(normalized as any)) {
-    return normalized;
-  }
-
-  // Try to match regardless of case
-  for (const validLevel of validLevels) {
-    if (normalized.toLowerCase() === validLevel.toLowerCase()) {
-      return validLevel;
-    }
-  }
-
-  return SECURITY_LEVELS.NONE;
+  return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300";
 }
 
 /**
@@ -139,31 +94,8 @@ export function normalizeSecurityLevel(level?: string): string {
  * @returns Valid SecurityLevel value
  */
 export function asSecurityLevel(level?: string): SecurityLevel {
-  if (!level) return "None";
-
-  // Check if it's already a valid SecurityLevel
-  const validLevels: SecurityLevel[] = [
-    "None",
-    "Low",
-    "Moderate",
-    "High",
-    "Very High",
-  ];
-  if (validLevels.includes(level as SecurityLevel)) {
-    return level as SecurityLevel;
-  }
-
-  // Normalize input and try to match
-  const normalizedLevel = level.trim();
-
-  for (const validLevel of validLevels) {
-    if (normalizedLevel.toLowerCase() === validLevel.toLowerCase()) {
-      return validLevel;
-    }
-  }
-
-  // Default to "None" if no match
-  return "None";
+  // Delegate to the implementation in securityLevelUtils
+  return normalizeSecurityLevel(level);
 }
 
 /**

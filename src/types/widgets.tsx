@@ -58,8 +58,7 @@ export interface CostEstimationWidgetProps extends WidgetBaseProps {
  * Props for the ValueCreationWidget component
  */
 export interface ValueCreationWidgetProps extends WidgetBaseProps {
-  /** Overall security level */
-  securityLevel: string;
+  securityLevel: SecurityLevel;
 }
 
 /**
@@ -70,7 +69,11 @@ export interface SecuritySummaryWidgetProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
-  // ...other existing props...
+  className?: string;
+  testId?: string;
+  showTechnicalDetails?: boolean;
+  showBusinessImpact?: boolean;
+  showMetrics?: boolean;
 }
 
 /**

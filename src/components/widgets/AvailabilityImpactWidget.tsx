@@ -1,170 +1,273 @@
-import React from "react";
-import { WidgetBaseProps } from "../../types/widgets";
+import React, { useState, useMemo } from "react";
+import { SecurityLevel } from "../../types/cia";
 import { AVAILABILITY_IMPACT_TEST_IDS } from "../../constants/testIds";
 import ciaContentService from "../../services/ciaContentService";
-import StatusBadge from "../common/StatusBadge";
 import KeyValuePair from "../common/KeyValuePair";
-import { SecurityLevel } from "../../types/cia";
 import WidgetContainer from "../common/WidgetContainer";
-import { CIA_COMPONENT_ICONS } from "../../constants/coreConstants";
 import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
+import { normalizeSecurityLevel } from "../../utils/securityLevelUtils";
+import CIAImpactCard from "../common/CIAImpactCard";
 
-interface AvailabilityImpactWidgetProps {
-  availabilityLevel?: SecurityLevel;
-  // Add these props to support tests but make them optional
+/**
+ * Props for AvailabilityImpactWidget component
+ */
+export interface AvailabilityImpactWidgetProps {
+  availabilityLevel: SecurityLevel;
   integrityLevel?: SecurityLevel;
   confidentialityLevel?: SecurityLevel;
-  options?: Record<string, any>;
   className?: string;
   testId?: string;
+  options?: Record<string, any>; // Added the missing options property
 }
 
 const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
-  availabilityLevel = "None" as SecurityLevel,
-  // Ignore these props in the implementation
+  availabilityLevel,
   integrityLevel,
   confidentialityLevel,
-  options,
   className = "",
   testId = AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_PREFIX,
+  options = {}, // Add default value for options
 }) => {
-  // Check if we should show error state for testing
-  if (options?.showErrorState) {
+  const [showAllRecommendations, setShowAllRecommendations] = useState(false);
+
+  // Fetch component details from ciaContentService
+  const availabilityDetails = useMemo(
+    () =>
+      ciaContentService.getComponentDetails("availability", availabilityLevel),
+    [availabilityLevel]
+  );
+
+  // Fetch business impact from ciaContentService
+  const businessImpact = useMemo(
+    () =>
+      ciaContentService.getBusinessImpact("availability", availabilityLevel),
+    [availabilityLevel]
+  );
+
+  // Get technical implementation details
+  const technicalDetails = useMemo(
+    () =>
+      ciaContentService.getTechnicalImplementation(
+        "availability",
+        availabilityLevel
+      ),
+    [availabilityLevel]
+  );
+
+  // Get recommendations from service
+  const recommendations = useMemo(
+    () =>
+      ciaContentService.getRecommendations("availability", availabilityLevel),
+    [availabilityLevel]
+  );
+
+  // Handle cases where data might not be available
+  if (!availabilityDetails) {
     return (
       <WidgetContainer
         title="Availability Impact"
-        icon={CIA_COMPONENT_ICONS.AVAILABILITY}
-        testId={testId}
+        icon="⏱️"
         className={className}
-        error={new Error("No availability information available")}
+        testId={testId}
+        error={new Error("Availability details not available")}
       >
-        <div>No availability information available</div>
+        <div>Availability details not available</div>
       </WidgetContainer>
     );
   }
 
-  // Get availability details from ciaContentService
-  const details = ciaContentService.getComponentDetails(
-    "availability",
-    availabilityLevel as SecurityLevel
-  );
-  const businessImpact = ciaContentService.getBusinessImpact(
-    "availability",
-    availabilityLevel as SecurityLevel
-  );
-  const technicalDetails = ciaContentService.getTechnicalImplementation(
-    "availability",
-    availabilityLevel as SecurityLevel
-  );
-  const businessPerspective = ciaContentService.getBusinessPerspective(
-    "availability",
-    availabilityLevel as SecurityLevel
-  );
-  const recommendations = ciaContentService.getRecommendations(
-    "availability",
-    availabilityLevel as SecurityLevel
-  );
-
   return (
     <WidgetContainer
       title="Availability Impact"
-      icon={CIA_COMPONENT_ICONS.AVAILABILITY}
-      testId={testId}
+      icon="⏱️"
       className={className}
+      testId={testId}
     >
-      <div className="space-y-4">
-        {/* Header with status badge */}
-        <div className="flex items-center justify-between">
-          <h3 className="font-medium mb-1">{availabilityLevel} Availability</h3>
-          <StatusBadge
-            status="info"
-            testId={`${testId}-level-badge`}
-            className="bg-blue-500 text-white"
+      <div className="space-y-6">
+        <CIAImpactCard
+          title="Availability Profile"
+          level={availabilityLevel}
+          description={
+            availabilityDetails.description || "No description available"
+          }
+          icon="⏱️"
+          badgeVariant="info"
+          cardClass="availability-card"
+          testId={`${testId}-impact-card`}
+        >
+          {availabilityDetails.uptime && (
+            <div className="flex items-center mt-2 text-sm text-blue-600 dark:text-blue-400">
+              <span className="mr-2">⏱️</span>
+              <span className="font-medium">Uptime Target: </span>
+              <span className="ml-1">{availabilityDetails.uptime}</span>
+            </div>
+          )}
+        </CIAImpactCard>
+
+        {/* Business Impact Section with enhanced styling */}
+        <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border shadow-sm security-card">
+          <h4 className="text-md font-medium mb-3 flex items-center">
+            <span className="mr-2">💼</span>
+            Business Impact
+          </h4>
+
+          <p
+            className="text-gray-600 dark:text-gray-300 mb-4"
+            data-testid={`${testId}-business-impact`}
           >
-            {availabilityLevel}
-          </StatusBadge>
-        </div>
+            {businessImpact.summary ||
+              availabilityDetails.businessImpact ||
+              "No business impact data available"}
+          </p>
 
-        <div>
-          <h3 className="font-medium mb-1">Description</h3>
-          <p className="text-sm">{details?.description}</p>
-        </div>
-
-        <div>
-          <h3 className="font-medium mb-1">Business Impact</h3>
-          <p className="text-sm">{businessImpact.summary}</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {details?.uptime && (
-            <div
-              className="p-3 bg-gray-50 dark:bg-gray-800 rounded border-l-4"
-              style={{
-                borderLeftColor: CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY,
-              }}
-            >
-              <h4 className="text-sm font-medium mb-1">Uptime</h4>
-              <p className="text-sm font-bold">{details?.uptime}</p>
-            </div>
-          )}
-
-          {details?.mttr && (
-            <div
-              className="p-3 bg-gray-50 dark:bg-gray-800 rounded border-l-4"
-              style={{
-                borderLeftColor: CIA_COMPONENT_COLORS.AVAILABILITY.SECONDARY,
-              }}
-            >
-              <h4 className="text-sm font-medium mb-1">
-                Mean Time To Recovery (MTTR)
-              </h4>
-              <p className="text-sm font-bold">{details?.mttr}</p>
-            </div>
-          )}
-        </div>
-
-        {details?.rto && details?.rpo && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div
-              className="p-3 bg-gray-50 dark:bg-gray-800 rounded border-l-4"
-              style={{
-                borderLeftColor: CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY,
-              }}
-            >
-              <h4 className="text-sm font-medium mb-1 flex items-center">
-                <span className="mr-1">⏱️</span>
-                Recovery Time Objective (RTO)
-              </h4>
-              <p className="text-sm font-bold">{details?.rto}</p>
-            </div>
+            {businessImpact.operational && (
+              <div className="p-3 rounded-md bg-opacity-10 bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20 border border-blue-200 dark:border-blue-800">
+                <div className="flex items-center mb-2">
+                  <span className="mr-2">⚙️</span>
+                  <span className="font-medium text-blue-700 dark:text-blue-300">
+                    Operational Impact
+                  </span>
+                </div>
+                <p className="text-sm text-gray-700 dark:text-gray-300">
+                  {businessImpact.operational.description ||
+                    "No operational impact information available"}
+                </p>
+              </div>
+            )}
 
-            <div
-              className="p-3 bg-gray-50 dark:bg-gray-800 rounded border-l-4"
-              style={{
-                borderLeftColor: CIA_COMPONENT_COLORS.AVAILABILITY.SECONDARY,
-              }}
-            >
-              <h4 className="text-sm font-medium mb-1 flex items-center">
-                <span className="mr-1">💾</span>
-                Recovery Point Objective (RPO)
-              </h4>
-              <p className="text-sm font-bold">{details?.rpo}</p>
-            </div>
+            {businessImpact.financial && (
+              <div className="p-3 rounded-md bg-opacity-10 bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20 border border-blue-200 dark:border-blue-800">
+                <div className="flex items-center mb-2">
+                  <span className="mr-2">💰</span>
+                  <span className="font-medium text-blue-700 dark:text-blue-300">
+                    Financial Impact
+                  </span>
+                </div>
+                <p className="text-sm text-gray-700 dark:text-gray-300">
+                  {businessImpact.financial.description ||
+                    "No financial impact information available"}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Technical Details with enhanced styling */}
+        {technicalDetails && technicalDetails.description && (
+          <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4 availability-card security-card">
+            <h4 className="text-md font-medium mb-2 flex items-center">
+              <span className="mr-2">⚙️</span>
+              Technical Implementation
+            </h4>
+
+            <p className="text-gray-600 dark:text-gray-300 mb-3">
+              {technicalDetails.description}
+            </p>
+
+            {technicalDetails.implementationSteps &&
+              technicalDetails.implementationSteps.length > 0 && (
+                <div className="mt-3">
+                  <h5 className="text-sm font-medium mb-2 text-blue-700 dark:text-blue-300">
+                    Implementation Steps
+                  </h5>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-300">
+                    {technicalDetails.implementationSteps
+                      .slice(0, 3)
+                      .map((step, idx) => (
+                        <li key={idx}>{step}</li>
+                      ))}
+                  </ul>
+                </div>
+              )}
           </div>
         )}
 
-        <div>
-          <h3 className="font-medium mb-1">Business Perspective</h3>
-          <p className="text-sm">{businessPerspective}</p>
-        </div>
+        {/* Recommendations with enhanced styling */}
+        {recommendations && recommendations.length > 0 && (
+          <div className="bg-blue-50 dark:bg-gray-800 p-4 rounded-lg border border-blue-200 dark:border-blue-900 shadow-sm security-card">
+            <div className="flex items-center justify-between mb-3">
+              <h4 className="text-md font-medium flex items-center">
+                <span className="mr-2">💡</span>
+                Recommendations
+              </h4>
+              {recommendations.length > 3 && (
+                <button
+                  className="text-sm px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
+                  onClick={() =>
+                    setShowAllRecommendations(!showAllRecommendations)
+                  }
+                >
+                  {showAllRecommendations ? "Show Less" : "Show All"}
+                </button>
+              )}
+            </div>
 
-        <div>
-          <h3 className="font-medium mb-1">Recommendations</h3>
-          <ul className="list-disc list-inside text-sm">
-            {recommendations.map((recommendation, index) => (
-              <li key={index}>{recommendation}</li>
-            ))}
-          </ul>
+            <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+              {(showAllRecommendations
+                ? recommendations
+                : recommendations.slice(0, 3)
+              ).map((recommendation, index) => (
+                <li
+                  key={index}
+                  data-testid={`${testId}-recommendation-${index}`}
+                  className="text-sm"
+                >
+                  {recommendation}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Availability Metrics with enhanced styling */}
+        <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4 availability-card security-card">
+          <h4 className="text-md font-medium mb-3 flex items-center">
+            <span className="mr-2">📊</span>
+            Availability Metrics
+          </h4>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-3 rounded-md bg-opacity-10 bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20">
+              <KeyValuePair
+                label="Uptime Target"
+                value={availabilityDetails.uptime || "N/A"}
+                testId={`${testId}-uptime-target`}
+                valueClassName="text-blue-700 dark:text-blue-300 font-medium"
+              />
+            </div>
+
+            <div className="p-3 rounded-md bg-opacity-10 bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20">
+              <KeyValuePair
+                label="Recovery Time Objective"
+                value={availabilityDetails.rto || "N/A"}
+                testId={`${testId}-rto-value`}
+                valueClassName="text-blue-700 dark:text-blue-300 font-medium"
+              />
+            </div>
+
+            {availabilityDetails.rpo && (
+              <div className="p-3 rounded-md bg-opacity-10 bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20">
+                <KeyValuePair
+                  label="Recovery Point Objective"
+                  value={availabilityDetails.rpo}
+                  testId={`${testId}-rpo-value`}
+                  valueClassName="text-blue-700 dark:text-blue-300 font-medium"
+                />
+              </div>
+            )}
+
+            {availabilityDetails.mttr && (
+              <div className="p-3 rounded-md bg-opacity-10 bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20">
+                <KeyValuePair
+                  label="Mean Time To Recovery"
+                  value={availabilityDetails.mttr}
+                  testId={`${testId}-mttr-value`}
+                  valueClassName="text-blue-700 dark:text-blue-300 font-medium"
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </WidgetContainer>

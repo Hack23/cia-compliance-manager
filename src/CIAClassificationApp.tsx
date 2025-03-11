@@ -21,6 +21,7 @@ import AvailabilityImpactWidget from "./components/widgets/AvailabilityImpactWid
 import SecurityResourcesWidget from "./components/widgets/SecurityResourcesWidget";
 import TechnicalDetailsWidget from "./components/widgets/TechnicalDetailsWidget";
 import BusinessImpactAnalysisWidget from "./components/widgets/BusinessImpactAnalysisWidget";
+import SecurityVisualizationWidget from "./components/widgets/SecurityVisualizationWidget";
 import { SecurityLevel } from "./types/cia";
 import { typeAdapters } from "./types/widgets";
 
@@ -298,10 +299,10 @@ const CIAClassificationApp: React.FC = () => {
                 testId="widget-value-creation"
               >
                 <ValueCreationWidget
-                  securityLevel={overallSecurityLevel}
-                  availabilityLevel={availability}
-                  integrityLevel={integrity}
-                  confidentialityLevel={confidentiality}
+                  securityLevel={overallSecurityLevel as SecurityLevel}
+                  availabilityLevel={availability as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
                 />
               </DashboardWidget>
 
@@ -324,10 +325,10 @@ const CIAClassificationApp: React.FC = () => {
                 icon="SECURITY_VISUALIZATION"
                 testId="widget-radar-chart"
               >
-                <RadarChart
-                  availabilityLevel={availability}
-                  integrityLevel={integrity}
-                  confidentialityLevel={confidentiality}
+                <SecurityVisualizationWidget
+                  availabilityLevel={availability as SecurityLevel}
+                  integrityLevel={integrity as SecurityLevel}
+                  confidentialityLevel={confidentiality as SecurityLevel}
                 />
               </DashboardWidget>
 

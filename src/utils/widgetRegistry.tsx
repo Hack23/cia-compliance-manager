@@ -14,6 +14,7 @@ import SecuritySummaryWidget from "../components/widgets/SecuritySummaryWidget";
 import TechnicalDetailsWidget from "../components/widgets/TechnicalDetailsWidget";
 import ValueCreationWidget from "../components/widgets/ValueCreationWidget";
 import CIAImpactSummaryWidget from "../components/widgets/CIAImpactSummaryWidget";
+import SecurityVisualizationWidget from "../components/widgets/SecurityVisualizationWidget";
 import { WidgetContainer } from "../components/common";
 import { handleWidgetError } from "./widgetHelpers";
 
@@ -44,6 +45,15 @@ interface CIAImpactSummaryWidgetProps extends WidgetBaseProps {
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
   className?: string;
+}
+
+// Add widget props interface
+interface SecurityVisualizationWidgetProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  className?: string;
+  testId?: string;
 }
 
 // Modified WidgetDefinition interface to make generic type constraint optional
@@ -177,7 +187,8 @@ widgetRegistry.register<ComplianceStatusWidgetProps>({
 widgetRegistry.register<ValueCreationWidgetProps>({
   id: "value-creation",
   title: WIDGET_TITLES.VALUE_CREATION,
-  component: ValueCreationWidget,
+  component:
+    ValueCreationWidget as WidgetComponentType<ValueCreationWidgetProps>,
   icon: WIDGET_ICONS.VALUE_CREATION,
   size: "medium",
   order: 25,
@@ -300,6 +311,22 @@ widgetRegistry.register<CIAImpactSummaryWidgetProps>({
   order: 12,
   icon: "🛡️",
   position: 0,
+});
+
+// Register security visualization widget
+widgetRegistry.register<SecurityVisualizationWidgetProps>({
+  id: "security-visualization",
+  title: WIDGET_TITLES.SECURITY_VISUALIZATION,
+  component: SecurityVisualizationWidget,
+  icon: WIDGET_ICONS.SECURITY_VISUALIZATION,
+  size: "medium",
+  order: 15,
+  description: "Security profile visualization and risk assessment",
+  defaultProps: {
+    availabilityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    integrityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    confidentialityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+  },
 });
 
 export default widgetRegistry;

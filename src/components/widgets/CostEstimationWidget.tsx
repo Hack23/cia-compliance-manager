@@ -8,6 +8,8 @@ import ciaContentService, {
 import WidgetContainer from "../common/WidgetContainer";
 import KeyValuePair from "../common/KeyValuePair";
 import StatusBadge from "../common/StatusBadge";
+import MetricsCard from "../common/MetricsCard";
+import ValueDisplay from "../common/ValueDisplay";
 
 /**
  * Props for the CostEstimationWidget component
@@ -69,193 +71,198 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
   }, [securityMetrics.capexEstimate, securityMetrics.opexEstimate]);
 
   const formatCurrency = (value: string) => {
-    // Add commas to the number for better readability
-    return value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // Convert "$X" or "$X/year" to "$X,XXX" or "$X,XXX/year"
+    const match = value.match(/\$(\d+)(.*)$/);
+    if (match && match[1]) {
+      const amount = parseInt(match[1]);
+      const suffix = match[2] || "";
+      return `$${amount.toLocaleString()}${suffix}`;
+    }
+    return value;
   };
 
   return (
     <WidgetContainer
       title="Estimated Implementation Cost"
       icon="💰"
-      className={className}
       testId={testId}
+      className={className}
     >
       <div className="space-y-6">
-        {/* Implementation Time */}
-        {securityMetrics.implementationTime && (
-          <div className="mb-4">
-            <KeyValuePair
-              label="Estimated Implementation Time"
-              value={securityMetrics.implementationTime}
-              valueClassName="text-blue-600 dark:text-blue-400 font-bold text-base"
-              testId={COST_TEST_IDS.IMPLEMENTATION_TIME}
-            />
-          </div>
-        )}
-
-        {/* CAPEX Section */}
-        <div className="mb-5" data-testid={COST_TEST_IDS.CAPEX_SECTION}>
-          <div className="flex justify-between items-center mb-2">
-            <h4 className="text-md font-medium flex items-center">
-              <span
-                className="mr-2"
-                data-testid={COST_TEST_IDS.CAPEX_SEVERITY_ICON}
-              >
-                {securityMetrics.totalCapex > 50 ? "⚠️" : "💵"}
-              </span>
-              Capital Expenditure
-            </h4>
-            <div
-              className="text-lg font-bold text-blue-600 dark:text-blue-400"
-              data-testid={COST_TEST_IDS.CAPEX_ESTIMATE_VALUE}
-            >
-              {formatCurrency(securityMetrics.capexEstimate)}
-            </div>
-          </div>
-
-          <div className="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
-            <div
-              className="bg-blue-600 h-2 rounded-full dark:bg-blue-500"
-              style={{ width: `${Math.min(securityMetrics.totalCapex, 100)}%` }}
-              data-testid={COST_TEST_IDS.CAPEX_PROGRESS_BAR}
-            ></div>
-          </div>
-
-          <div
-            className="text-right text-xs text-gray-500 mt-1 dark:text-gray-400"
-            data-testid={COST_TEST_IDS.CAPEX_PERCENTAGE}
-          >
-            {securityMetrics.totalCapex}% of IT budget
-          </div>
+        {/* Cost Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <MetricsCard
+            title="Capital Expenditure"
+            value={formatCurrency(securityMetrics.capexEstimate || "")} // Add default empty string
+            icon="💼"
+            testId={COST_TEST_IDS.CAPEX_ESTIMATE_VALUE}
+            accentColor="#3498db"
+            variant="info"
+          />
+          <MetricsCard
+            title="Operational Expenditure"
+            value={formatCurrency(securityMetrics.opexEstimate)}
+            icon="⚙️"
+            testId={COST_TEST_IDS.OPEX_ESTIMATE_VALUE}
+            accentColor="#2ecc71"
+            variant="success"
+          />
+          <MetricsCard
+            title="3-Year TCO"
+            value={threeYearTotal}
+            icon="🔄"
+            testId={COST_TEST_IDS.THREE_YEAR_TOTAL}
+            accentColor="#9b59b6"
+            variant="purple"
+          />
         </div>
 
-        {/* OPEX Section */}
-        <div className="mb-5" data-testid={COST_TEST_IDS.OPEX_SECTION}>
-          <div className="flex justify-between items-center mb-2">
-            <h4 className="text-md font-medium flex items-center">
-              <span
-                className="mr-2"
-                data-testid={COST_TEST_IDS.OPEX_SEVERITY_ICON}
-              >
-                {securityMetrics.totalOpex > 50 ? "⚠️" : "💵"}
-              </span>
-              Operational Expenditure
-            </h4>
-            <div className="flex flex-col items-end">
-              <div
-                className="text-lg font-bold text-green-600 dark:text-green-400"
-                data-testid={COST_TEST_IDS.OPEX_ESTIMATE_VALUE}
-              >
-                {formatCurrency(securityMetrics.opexEstimate)}
+        {/* Budget Allocation */}
+        <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border shadow-sm">
+          <h3 className="text-lg font-medium mb-3 flex items-center">
+            <span className="mr-2">💰</span>
+            Budget Allocation
+          </h3>
+
+          <div className="space-y-4">
+            {/* CAPEX Budget Impact */}
+            <div className="space-y-1">
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-600 dark:text-gray-300">
+                  Capital Expenditure
+                </span>
+                <span
+                  className="text-sm font-medium text-blue-700 dark:text-blue-300"
+                  data-testid={COST_TEST_IDS.CAPEX_PERCENTAGE}
+                >
+                  {securityMetrics.totalCapex}% of IT budget
+                </span>
               </div>
-              <div
-                className="text-xs text-gray-500 dark:text-gray-400"
-                data-testid={COST_TEST_IDS.MONTHLY_OPEX}
-              >
-                per year
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                <div
+                  className="bg-blue-600 h-2.5 rounded-full"
+                  style={{ width: `${securityMetrics.totalCapex}%` }}
+                ></div>
               </div>
             </div>
-          </div>
 
-          <div className="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
-            <div
-              className="bg-green-600 h-2 rounded-full dark:bg-green-500"
-              style={{ width: `${Math.min(securityMetrics.totalOpex, 100)}%` }}
-              data-testid={COST_TEST_IDS.OPEX_PROGRESS_BAR}
-            ></div>
-          </div>
-
-          <div
-            className="text-right text-xs text-gray-500 mt-1 dark:text-gray-400"
-            data-testid={COST_TEST_IDS.OPEX_PERCENTAGE}
-          >
-            {securityMetrics.totalOpex}% of IT budget
-          </div>
-        </div>
-
-        {/* Total Cost Summary */}
-        <div
-          className="bg-gray-50 p-4 rounded-lg dark:bg-gray-800 mb-5"
-          data-testid={COST_TEST_IDS.TOTAL_COST_SUMMARY}
-        >
-          <div className="flex justify-between items-center">
-            <span className="text-gray-600 dark:text-gray-300">
-              Total CAPEX:
-            </span>
-            <span
-              className="font-bold text-gray-800 dark:text-gray-200"
-              data-testid={COST_TEST_IDS.CAPEX_VALUE}
-            >
-              {formatCurrency(securityMetrics.capexEstimate)}
-            </span>
-          </div>
-          <div className="flex justify-between items-center mt-1">
-            <span className="text-gray-600 dark:text-gray-300">
-              Annual OPEX:
-            </span>
-            <span
-              className="font-bold text-gray-800 dark:text-gray-200"
-              data-testid={COST_TEST_IDS.OPEX_VALUE}
-            >
-              {formatCurrency(securityMetrics.opexEstimate)}
-            </span>
-          </div>
-          <div className="border-t border-gray-200 dark:border-gray-700 mt-2 pt-2">
-            <div className="flex justify-between items-center">
-              <span className="text-gray-600 dark:text-gray-300">
-                3-Year Total Cost:
-              </span>
-              <span
-                className="font-bold text-gray-800 dark:text-gray-200"
-                data-testid={COST_TEST_IDS.THREE_YEAR_TOTAL}
-              >
-                {threeYearTotal}
-              </span>
+            {/* OPEX Budget Impact */}
+            <div className="space-y-1">
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-600 dark:text-gray-300">
+                  Operational Expenditure
+                </span>
+                <span
+                  className="text-sm font-medium text-green-700 dark:text-green-300"
+                  data-testid={COST_TEST_IDS.OPEX_PERCENTAGE}
+                >
+                  {securityMetrics.totalOpex}% of IT budget
+                </span>
+              </div>
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                <div
+                  className="bg-green-600 h-2.5 rounded-full"
+                  style={{ width: `${securityMetrics.totalOpex}%` }}
+                ></div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Cost Analysis */}
-        <div data-testid={COST_TEST_IDS.COST_ANALYSIS_SECTION}>
-          <h4
-            className="text-md font-medium mb-2"
-            data-testid={COST_TEST_IDS.COST_ANALYSIS_HEADING}
-          >
-            Cost Analysis
-          </h4>
+        {/* ROI and Implementation */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* ROI Card */}
+          <div className="bg-green-50 dark:bg-green-900 dark:bg-opacity-20 p-4 rounded-lg border border-green-200 dark:border-green-800">
+            <h3 className="text-lg font-medium mb-2 flex items-center">
+              <span className="mr-2">📈</span>
+              Return on Investment
+            </h3>
+            <div className="flex items-center mb-2">
+              <StatusBadge
+                status="success"
+                size="lg"
+                testId={COST_TEST_IDS.ROI_ESTIMATE}
+              >
+                {securityMetrics.roi}
+              </StatusBadge>
+              <span className="ml-2 text-sm text-gray-600 dark:text-gray-300">
+                Estimated ROI
+              </span>
+            </div>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Based on prevented breaches, operational efficiencies, and
+              compliance cost reduction.
+            </p>
+          </div>
+
+          {/* Implementation Timeline */}
+          <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+            <h3 className="text-lg font-medium mb-2 flex items-center">
+              <span className="mr-2">⏱️</span>
+              Implementation Timeline
+            </h3>
+            <div className="flex items-center mb-2">
+              <StatusBadge status="info" size="lg">
+                {implementationTime}
+              </StatusBadge>
+            </div>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Estimated time to fully implement and operationalize these
+              security controls.
+            </p>
+          </div>
+        </div>
+
+        {/* Cost Analysis & Recommendation */}
+        <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border shadow-sm">
+          <h3 className="text-lg font-medium mb-3">Cost Analysis</h3>
+
           <p
-            className="text-gray-600 dark:text-gray-300"
+            className="text-sm text-gray-700 dark:text-gray-300 mb-3"
             data-testid={COST_TEST_IDS.COST_ANALYSIS_TEXT}
           >
             {securityMetrics.isSmallSolution
               ? COST_ANALYSIS.SMALL_SOLUTION
               : COST_ANALYSIS.LARGE_SOLUTION}
           </p>
+
+          <div className="flex flex-wrap gap-2 mt-2">
+            <StatusBadge status="info">Capital Investment</StatusBadge>
+            <StatusBadge status="success">Recurring Costs</StatusBadge>
+            <StatusBadge status="purple">Long-term Value</StatusBadge>
+          </div>
         </div>
 
-        {/* ROI Section */}
-        {securityMetrics.roi && (
-          <div
-            className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-4 rounded-lg"
-            data-testid={COST_TEST_IDS.ROI_SECTION}
-          >
-            <h4 className="text-md font-medium mb-2 flex items-center">
-              <span className="mr-2">📈</span>
-              Return on Investment
+        {/* Cost Breakdown */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* CAPEX Components */}
+          <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-10 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+            <h4 className="text-md font-medium mb-3 flex items-center">
+              <span className="mr-2">⚙️</span>
+              CAPEX Components
             </h4>
-            <div className="flex justify-between items-center">
-              <span className="text-gray-700 dark:text-gray-300">
-                Estimated ROI:
-              </span>
-              <span
-                className="font-bold text-green-600 dark:text-green-400"
-                data-testid={COST_TEST_IDS.ROI_ESTIMATE}
-              >
-                {securityMetrics.roi}
-              </span>
-            </div>
+            <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li>Security hardware and infrastructure</li>
+              <li>Software licenses and tools</li>
+              <li>Initial implementation services</li>
+              <li>Training and certification</li>
+            </ul>
           </div>
-        )}
+
+          {/* OPEX Components */}
+          <div className="bg-green-50 dark:bg-green-900 dark:bg-opacity-10 p-4 rounded-lg border border-green-200 dark:border-green-800">
+            <h4 className="text-md font-medium mb-3 flex items-center">
+              <span className="mr-2">⚙️</span>
+              OPEX Components
+            </h4>
+            <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li>Personnel costs and staffing</li>
+              <li>Maintenance and support contracts</li>
+              <li>Subscription services</li>
+              <li>Ongoing training and awareness</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </WidgetContainer>
   );
