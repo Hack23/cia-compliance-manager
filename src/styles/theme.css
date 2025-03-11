@@ -167,3 +167,56 @@ body,
 .dark .widget-header:hover .widget-icon {
   animation: pulse 1.5s infinite;
 }
+
+/* Enhanced dark mode effects */
+.dark .widget-body {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.dark .section-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 204, 102, 0.15);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+/* CIA component specific styles for dark mode */
+.dark .color-confidentiality {
+  color: var(--color-confidentiality);
+  text-shadow: 0 0 4px rgba(155, 89, 182, 0.6);
+}
+
+.dark .color-integrity {
+  color: var(--color-integrity);
+  text-shadow: 0 0 4px rgba(46, 204, 113, 0.6);
+}
+
+.dark .color-availability {
+  color: var(--color-availability);
+  text-shadow: 0 0 4px rgba(52, 152, 219, 0.6);
+}
+
+/* Security level badges for dark mode */
+.dark .bg-security-very-high {
+  background-color: var(--color-very-high-dark);
+  box-shadow: 0 0 8px var(--color-very-high-dark);
+}
+
+.dark .bg-security-high {
+  background-color: var(--color-high-dark);
+  box-shadow: 0 0 8px var(--color-high-dark);
+}
+
+.dark .bg-security-moderate {
+  background-color: var(--color-moderate-dark);
+  box-shadow: 0 0 8px var(--color-moderate-dark);
+}
+
+.dark .bg-security-low {
+  background-color: var(--color-low-dark);
+  box-shadow: 0 0 8px var(--color-low-dark);
+}
+
+.dark .bg-security-none {
+  background-color: var(--color-none-dark);
+  box-shadow: 0 0 8px var(--color-none-dark);
+}

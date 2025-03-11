@@ -7,6 +7,7 @@ export type StatusBadgeProps = {
   size?: "xs" | "sm" | "md" | "lg";
   className?: string;
   testId?: string;
+  style?: React.CSSProperties;
 };
 
 const StatusBadge: React.FC<StatusBadgeProps> = ({
@@ -15,6 +16,7 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({
   size = "md",
   className = "",
   testId = COMMON_COMPONENT_TEST_IDS.STATUS_BADGE,
+  style,
 }) => {
   const getStatusColors = () => {
     switch (status) {
@@ -52,6 +54,7 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({
     <span
       className={`inline-flex items-center font-medium rounded-full ${getStatusColors()} ${getSizeClasses()} ${className}`}
       data-testid={testId}
+      style={style}
     >
       {children}
     </span>

@@ -8,6 +8,8 @@ import {
 } from "../hooks/useCIAOptions";
 import { APP_TEST_IDS, createDynamicTestId } from "../constants/testIds";
 import WidgetHeader from "./common/WidgetHeader";
+// Add import for TechnicalDetailsWidget
+import TechnicalDetailsWidget from "./widgets/TechnicalDetailsWidget";
 // Add the missing imports for grid styles
 import {
   gridClasses,
@@ -16,6 +18,7 @@ import {
   contentClasses,
   gridStyle,
 } from "../styles/gridStyles";
+import { SecurityLevel } from "../types/cia";
 
 // Main Dashboard component props
 interface DashboardProps {
@@ -78,9 +81,9 @@ const Dashboard: React.FC<DashboardProps> = ({
     "security-summary": securityProps,
     "compliance-status": {
       securityLevels: {
-        availability,
-        integrity,
-        confidentiality,
+        availabilityLevel: availability,
+        integrityLevel: integrity,
+        confidentialityLevel: confidentiality,
       },
     },
     "value-creation": {
@@ -105,6 +108,14 @@ const Dashboard: React.FC<DashboardProps> = ({
             if (!React.isValidElement(child)) return null;
             return child;
           })}
+      {/* Make TechnicalDetailsWidget conditional if the prop values aren't available */}
+      {availability && integrity && confidentiality && (
+        <TechnicalDetailsWidget
+          availabilityLevel={availability}
+          integrityLevel={integrity}
+          confidentialityLevel={confidentiality}
+        />
+      )}
     </div>
   );
 };
@@ -139,14 +150,14 @@ function calculateCostProps(
   const confLevel = confidentiality || "None";
 
   const totalCapex =
-    (availabilityOptions[availLevel]?.capex || 0) +
-    (integrityOptions[intLevel]?.capex || 0) +
-    (confidentialityOptions[confLevel]?.capex || 0);
+    (availabilityOptions[availLevel as SecurityLevel]?.capex || 0) +
+    (integrityOptions[intLevel as SecurityLevel]?.capex || 0) +
+    (confidentialityOptions[confLevel as SecurityLevel]?.capex || 0);
 
   const totalOpex =
-    (availabilityOptions[availLevel]?.opex || 0) +
-    (integrityOptions[intLevel]?.opex || 0) +
-    (confidentialityOptions[confLevel]?.opex || 0);
+    (availabilityOptions[availLevel as SecurityLevel]?.opex || 0) +
+    (integrityOptions[intLevel as SecurityLevel]?.opex || 0) +
+    (confidentialityOptions[confLevel as SecurityLevel]?.opex || 0);
 
   return {
     totalCapex,

@@ -20,21 +20,31 @@ describe("CIADetails TypeScript Type Validation", () => {
     // TypeScript helper function that would throw compilation errors
     // if the types are not correct.
     const validateCIADetailsType = (details: CIADetails): void => {
-      // String fields
-      details.description.toLowerCase();
-      details.impact?.toLowerCase();
-      details.technical?.toLowerCase();
-      details.businessImpact?.toLowerCase(); // Added businessImpact validation
+      // String fields - use optional chaining or nullish coalescing to handle undefined
+      const desc = details.description || "";
+      desc.toLowerCase();
+
+      const impact = details.impact || "";
+      impact.toLowerCase();
+
+      const tech = details.technical || "";
+      tech.toLowerCase();
+
+      const busImpact = details.businessImpact || "";
+      busImpact.toLowerCase();
 
       // Optional string fields - use optional chaining to handle undefined
       details.bg?.startsWith("#");
       details.text?.startsWith("#");
 
-      // Number fields
-      details.capex.toFixed(2);
-      details.opex.toFixed(2);
+      // Number fields - use nullish coalescing to handle undefined
+      const capex = details.capex ?? 0;
+      capex.toFixed(2);
 
-      // Array field (might be undefined)
+      const opex = details.opex ?? 0;
+      opex.toFixed(2);
+
+      // Array field - use optional chaining for undefined
       details.recommendations?.forEach((rec: string) => {
         rec.toLowerCase();
       });

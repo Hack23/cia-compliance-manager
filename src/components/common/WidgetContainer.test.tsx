@@ -39,7 +39,7 @@ describe("WidgetContainer Component", () => {
   });
 
   it("renders with custom header content", () => {
-    // Fix - Create a testable headerContent component with a testId
+    // Create a testable headerContent component with a testId
     const customProps = {
       ...defaultProps,
       headerContent: <button data-testid="custom-action">Custom Action</button>,
@@ -47,7 +47,7 @@ describe("WidgetContainer Component", () => {
 
     render(<WidgetContainer {...customProps} />);
 
-    // Use getByTestId instead of getByText to find the custom action button
+    // Use getByTestId to find the custom action button
     expect(screen.getByTestId("custom-action")).toBeInTheDocument();
   });
 
@@ -55,5 +55,26 @@ describe("WidgetContainer Component", () => {
     render(<WidgetContainer {...defaultProps} contentTitle="Content Title" />);
 
     expect(screen.getByText("Content Title")).toBeInTheDocument();
+  });
+
+  it("applies custom className", () => {
+    const customClass = "custom-class";
+    const { container } = render(
+      <WidgetContainer
+        title="Test Widget"
+        className={customClass}
+        testId="test-widget"
+      >
+        <div>Widget content</div>
+      </WidgetContainer>
+    );
+
+    // Instead of directly checking the root element, find the widget container within
+    // Use container.querySelector to find an element with the custom class
+    const widgetWithCustomClass = container.querySelector(`.${customClass}`);
+    expect(widgetWithCustomClass).not.toBeNull();
+
+    // Alternative: Check if any element within the container has the custom class
+    expect(container.innerHTML).toContain(customClass);
   });
 });

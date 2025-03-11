@@ -1,309 +1,263 @@
-import React from "react";
-import {
-  SECURITY_LEVELS,
-  COST_ANALYSIS,
-  UI_TEXT,
-  WIDGET_ICONS,
-} from "../../constants/appConstants";
-import KeyValuePair from "../common/KeyValuePair";
-import ValueDisplay from "../common/ValueDisplay";
+import React, { useMemo } from "react";
+import { SecurityLevel } from "../../types/cia";
 import { COST_TEST_IDS } from "../../constants/testIds";
+import { DISPLAY_FORMAT, COST_ANALYSIS } from "../../constants/appConstants";
+import ciaContentService, {
+  getImplementationTime,
+} from "../../services/ciaContentService";
+import WidgetContainer from "../common/WidgetContainer";
+import KeyValuePair from "../common/KeyValuePair";
+import StatusBadge from "../common/StatusBadge";
 
-interface CostEstimationWidgetProps {
+/**
+ * Props for the CostEstimationWidget component
+ */
+export interface CostEstimationWidgetProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  className?: string;
+  testId?: string;
+}
+
+// Define a proper interface for security metrics
+interface SecurityMetricsType {
   totalCapex: number;
   totalOpex: number;
   capexEstimate: string;
   opexEstimate: string;
   isSmallSolution: boolean;
-  roi?: string;
-  implementationTime?: string;
-  testId?: string;
-  availabilityLevel?: string;
-  integrityLevel?: string;
-  confidentialityLevel?: string;
-  availabilityOptions?: Record<string, any>; // Change from string[]
-  integrityOptions?: Record<string, any>; // Change from string[]
-  confidentialityOptions?: Record<string, any>; // Change from string[]
+  roi: string;
+  implementationTime?: string; // Make this optional
 }
 
+/**
+ * CostEstimationWidget displays cost estimates for implementing security measures
+ * based on the selected CIA levels.
+ */
 const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
-  totalCapex,
-  totalOpex,
-  capexEstimate,
-  opexEstimate,
-  isSmallSolution,
-  roi,
-  implementationTime,
-  availabilityLevel = SECURITY_LEVELS.NONE,
-  integrityLevel = SECURITY_LEVELS.NONE,
-  confidentialityLevel = SECURITY_LEVELS.NONE,
-  availabilityOptions,
-  integrityOptions,
-  confidentialityOptions,
+  availabilityLevel,
+  integrityLevel,
+  confidentialityLevel,
+  className = "",
+  testId = COST_TEST_IDS.COST_ESTIMATION_WIDGET,
 }) => {
-  const getCostSeverity = (percentage: number): string => {
-    if (percentage <= 15) return "low";
-    if (percentage <= 40) return "medium";
-    if (percentage <= 70) return "high";
-    return "very-high";
+  // Get security metrics from ciaContentService
+  const securityMetrics = useMemo<SecurityMetricsType>(
+    () =>
+      ciaContentService.getSecurityMetrics(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      ) as SecurityMetricsType, // Cast to our interface
+    [availabilityLevel, integrityLevel, confidentialityLevel]
+  );
+
+  const implementationTime = getImplementationTime(
+    availabilityLevel as SecurityLevel,
+    integrityLevel as SecurityLevel,
+    confidentialityLevel as SecurityLevel
+  );
+
+  // Calculate 3-year total cost (CAPEX + 3 years of OPEX)
+  const threeYearTotal = useMemo(() => {
+    const capex = parseInt(
+      securityMetrics.capexEstimate.replace(/[^0-9]/g, "")
+    );
+    const opex = parseInt(securityMetrics.opexEstimate.replace(/[^0-9]/g, ""));
+    return `$${(capex + opex * 3).toLocaleString()}`;
+  }, [securityMetrics.capexEstimate, securityMetrics.opexEstimate]);
+
+  const formatCurrency = (value: string) => {
+    // Add commas to the number for better readability
+    return value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
-
-  const getCapexColorClass = (): string => {
-    const severity = getCostSeverity(totalCapex);
-    switch (severity) {
-      case "low":
-        return "bg-green-500";
-      case "medium":
-        return "bg-blue-500";
-      case "high":
-        return "bg-yellow-500";
-      case "very-high":
-        return "bg-red-500";
-      default:
-        return "bg-blue-500";
-    }
-  };
-
-  const getOpexColorClass = (): string => {
-    const severity = getCostSeverity(totalOpex);
-    switch (severity) {
-      case "low":
-        return "bg-green-500";
-      case "medium":
-        return "bg-teal-500";
-      case "high":
-        return "bg-yellow-500";
-      case "very-high":
-        return "bg-red-500";
-      default:
-        return "bg-green-500";
-    }
-  };
-
-  const formatCurrency = (value: string): string => {
-    if (!value) return "";
-    if (value.startsWith("$")) return value;
-    return `$${value}`;
-  };
-
-  const getMonthlyOpex = (): string => {
-    if (/^\$\d+([,.]\d+)?$/.test(opexEstimate)) {
-      const numericValue = parseFloat(opexEstimate.replace(/[$,]/g, ""));
-      if (!isNaN(numericValue)) {
-        const monthlyValue = numericValue / 12;
-        return `$${monthlyValue.toLocaleString("en-US", {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
-        })}/month`;
-      }
-    }
-    return "";
-  };
-
-  const getTotalCost = (): string => {
-    if (
-      /^\$\d+([,.]\d+)?$/.test(capexEstimate) &&
-      /^\$\d+([,.]\d+)?$/.test(opexEstimate)
-    ) {
-      const capexValue = parseFloat(capexEstimate.replace(/[$,]/g, ""));
-      const opexValue = parseFloat(opexEstimate.replace(/[$,]/g, ""));
-
-      if (!isNaN(capexValue) && !isNaN(opexValue)) {
-        const totalCost = capexValue + 3 * opexValue;
-        return `$${totalCost.toLocaleString("en-US", {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
-        })}`;
-      }
-    }
-    return "Varies";
-  };
-
-  // Add cost icon indicators based on severity
-  const getCostIcon = (percentage: number): string => {
-    if (percentage <= 15) return "🟢"; // Low cost
-    if (percentage <= 40) return "🟡"; // Medium cost
-    if (percentage <= 70) return "🟠"; // High cost
-    return "🔴"; // Very high cost
-  };
-
-  const monthlyOpex = getMonthlyOpex();
-  const totalCost = getTotalCost();
 
   return (
-    <div
-      className="space-y-4"
-      data-testid={COST_TEST_IDS.COST_ESTIMATION_CONTENT}
+    <WidgetContainer
+      title="Estimated Implementation Cost"
+      icon="💰"
+      className={className}
+      testId={testId}
     >
-      {/* Heading */}
-      <div className="flex justify-between items-center">
-        <h3
-          className="text-lg font-medium text-gray-700 dark:text-gray-300"
-          data-testid={COST_TEST_IDS.ESTIMATED_COST_HEADING}
-        >
-          {UI_TEXT.LABELS.ESTIMATED_COST}
-        </h3>
-
-        {implementationTime && (
-          <KeyValuePair
-            label="Est. Implementation Time"
-            value={implementationTime}
-            testId={COST_TEST_IDS.IMPLEMENTATION_TIME}
-          />
-        )}
-      </div>
-
-      {/* CAPEX Section */}
-      <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-        <div className="flex justify-between mb-2">
-          <div className="flex items-center">
-            <span
-              className="text-lg text-gray-700 dark:text-gray-300 mr-2"
-              data-testid={COST_TEST_IDS.CAPEX_SEVERITY_ICON}
-            >
-              {getCostIcon(totalCapex)}
-            </span>
+      <div className="space-y-6">
+        {/* Implementation Time */}
+        {securityMetrics.implementationTime && (
+          <div className="mb-4">
             <KeyValuePair
-              label={UI_TEXT.LABELS.CAPEX}
-              value={
-                <ValueDisplay
-                  value={`${formatCurrency(capexEstimate)}`}
-                  variant="primary"
-                  size="lg"
-                  testId={COST_TEST_IDS.CAPEX_ESTIMATE_VALUE} // Ensure consistent testId with unique "-value" suffix
-                />
-              }
-              testId={COST_TEST_IDS.CAPEX_SECTION}
+              label="Estimated Implementation Time"
+              value={securityMetrics.implementationTime}
+              valueClassName="text-blue-600 dark:text-blue-400 font-bold text-base"
+              testId={COST_TEST_IDS.IMPLEMENTATION_TIME}
             />
           </div>
-        </div>
+        )}
 
-        {/* Progress bar for CAPEX % */}
-        <div className="mt-2">
-          <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
-            <span>{UI_TEXT.BUDGET.IT_BUDGET_CAPEX}</span>
-          </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-700 h-2 rounded-full">
+        {/* CAPEX Section */}
+        <div className="mb-5" data-testid={COST_TEST_IDS.CAPEX_SECTION}>
+          <div className="flex justify-between items-center mb-2">
+            <h4 className="text-md font-medium flex items-center">
+              <span
+                className="mr-2"
+                data-testid={COST_TEST_IDS.CAPEX_SEVERITY_ICON}
+              >
+                {securityMetrics.totalCapex > 50 ? "⚠️" : "💵"}
+              </span>
+              Capital Expenditure
+            </h4>
             <div
-              className={`h-2 rounded-full ${getCapexColorClass()}`}
-              style={{ width: `${Math.min(totalCapex, 100)}%` }}
+              className="text-lg font-bold text-blue-600 dark:text-blue-400"
+              data-testid={COST_TEST_IDS.CAPEX_ESTIMATE_VALUE}
+            >
+              {formatCurrency(securityMetrics.capexEstimate)}
+            </div>
+          </div>
+
+          <div className="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+            <div
+              className="bg-blue-600 h-2 rounded-full dark:bg-blue-500"
+              style={{ width: `${Math.min(securityMetrics.totalCapex, 100)}%` }}
               data-testid={COST_TEST_IDS.CAPEX_PROGRESS_BAR}
             ></div>
           </div>
-          <span
-            className="font-bold"
+
+          <div
+            className="text-right text-xs text-gray-500 mt-1 dark:text-gray-400"
             data-testid={COST_TEST_IDS.CAPEX_PERCENTAGE}
           >
-            {totalCapex}%
-          </span>
+            {securityMetrics.totalCapex}% of IT budget
+          </div>
         </div>
-      </div>
 
-      {/* OPEX Section */}
-      <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-        <div className="flex justify-between mb-2">
-          <div className="flex items-center">
-            <span
-              className="text-lg text-gray-700 dark:text-gray-300 mr-2"
-              data-testid={COST_TEST_IDS.OPEX_SEVERITY_ICON}
-            >
-              {getCostIcon(totalOpex)}
+        {/* OPEX Section */}
+        <div className="mb-5" data-testid={COST_TEST_IDS.OPEX_SECTION}>
+          <div className="flex justify-between items-center mb-2">
+            <h4 className="text-md font-medium flex items-center">
+              <span
+                className="mr-2"
+                data-testid={COST_TEST_IDS.OPEX_SEVERITY_ICON}
+              >
+                {securityMetrics.totalOpex > 50 ? "⚠️" : "💵"}
+              </span>
+              Operational Expenditure
+            </h4>
+            <div className="flex flex-col items-end">
+              <div
+                className="text-lg font-bold text-green-600 dark:text-green-400"
+                data-testid={COST_TEST_IDS.OPEX_ESTIMATE_VALUE}
+              >
+                {formatCurrency(securityMetrics.opexEstimate)}
+              </div>
+              <div
+                className="text-xs text-gray-500 dark:text-gray-400"
+                data-testid={COST_TEST_IDS.MONTHLY_OPEX}
+              >
+                per year
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+            <div
+              className="bg-green-600 h-2 rounded-full dark:bg-green-500"
+              style={{ width: `${Math.min(securityMetrics.totalOpex, 100)}%` }}
+              data-testid={COST_TEST_IDS.OPEX_PROGRESS_BAR}
+            ></div>
+          </div>
+
+          <div
+            className="text-right text-xs text-gray-500 mt-1 dark:text-gray-400"
+            data-testid={COST_TEST_IDS.OPEX_PERCENTAGE}
+          >
+            {securityMetrics.totalOpex}% of IT budget
+          </div>
+        </div>
+
+        {/* Total Cost Summary */}
+        <div
+          className="bg-gray-50 p-4 rounded-lg dark:bg-gray-800 mb-5"
+          data-testid={COST_TEST_IDS.TOTAL_COST_SUMMARY}
+        >
+          <div className="flex justify-between items-center">
+            <span className="text-gray-600 dark:text-gray-300">
+              Total CAPEX:
             </span>
-            <div>
-              <KeyValuePair
-                label={UI_TEXT.LABELS.OPEX}
-                value={
-                  <ValueDisplay
-                    value={`${formatCurrency(opexEstimate)}`}
-                    variant="primary"
-                    size="lg"
-                    testId={COST_TEST_IDS.OPEX_ESTIMATE_VALUE} // Ensure consistent testId with unique "-value" suffix
-                  />
-                }
-                testId={COST_TEST_IDS.OPEX_SECTION}
-              />
-              {monthlyOpex && (
-                <span
-                  className="text-xs text-gray-500 dark:text-gray-400"
-                  data-testid={COST_TEST_IDS.MONTHLY_OPEX}
-                >
-                  {monthlyOpex}
-                </span>
-              )}
+            <span
+              className="font-bold text-gray-800 dark:text-gray-200"
+              data-testid={COST_TEST_IDS.CAPEX_VALUE}
+            >
+              {formatCurrency(securityMetrics.capexEstimate)}
+            </span>
+          </div>
+          <div className="flex justify-between items-center mt-1">
+            <span className="text-gray-600 dark:text-gray-300">
+              Annual OPEX:
+            </span>
+            <span
+              className="font-bold text-gray-800 dark:text-gray-200"
+              data-testid={COST_TEST_IDS.OPEX_VALUE}
+            >
+              {formatCurrency(securityMetrics.opexEstimate)}
+            </span>
+          </div>
+          <div className="border-t border-gray-200 dark:border-gray-700 mt-2 pt-2">
+            <div className="flex justify-between items-center">
+              <span className="text-gray-600 dark:text-gray-300">
+                3-Year Total Cost:
+              </span>
+              <span
+                className="font-bold text-gray-800 dark:text-gray-200"
+                data-testid={COST_TEST_IDS.THREE_YEAR_TOTAL}
+              >
+                {threeYearTotal}
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Progress bar for OPEX % */}
-        <div className="mt-2">
-          <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
-            <span>{UI_TEXT.BUDGET.IT_BUDGET_OPEX}</span>
-          </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-700 h-2 rounded-full">
-            <div
-              className={`h-2 rounded-full ${getOpexColorClass()}`}
-              style={{ width: `${Math.min(totalOpex, 100)}%` }}
-              data-testid={COST_TEST_IDS.OPEX_PROGRESS_BAR}
-            ></div>
-          </div>
-          <span
-            className="font-bold"
-            data-testid={COST_TEST_IDS.OPEX_PERCENTAGE}
+        {/* Cost Analysis */}
+        <div data-testid={COST_TEST_IDS.COST_ANALYSIS_SECTION}>
+          <h4
+            className="text-md font-medium mb-2"
+            data-testid={COST_TEST_IDS.COST_ANALYSIS_HEADING}
           >
-            {totalOpex}%
-          </span>
+            Cost Analysis
+          </h4>
+          <p
+            className="text-gray-600 dark:text-gray-300"
+            data-testid={COST_TEST_IDS.COST_ANALYSIS_TEXT}
+          >
+            {securityMetrics.isSmallSolution
+              ? COST_ANALYSIS.SMALL_SOLUTION
+              : COST_ANALYSIS.LARGE_SOLUTION}
+          </p>
         </div>
-      </div>
 
-      {/* Total Cost and ROI Section */}
-      <div
-        className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700"
-        data-testid={COST_TEST_IDS.TOTAL_COST_SUMMARY}
-      >
-        <KeyValuePair
-          label="3-Year Total Cost"
-          value={totalCost}
-          testId={COST_TEST_IDS.THREE_YEAR_TOTAL}
-        />
-
-        {roi && (
-          <div className="mt-2 border-t pt-2 border-gray-100 dark:border-gray-700">
-            <KeyValuePair
-              label="Estimated ROI"
-              value={
-                <ValueDisplay
-                  value={roi}
-                  variant="success"
-                  testId={COST_TEST_IDS.ROI_ESTIMATE}
-                />
-              }
-              testId={COST_TEST_IDS.ROI_SECTION}
-            />
+        {/* ROI Section */}
+        {securityMetrics.roi && (
+          <div
+            className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-4 rounded-lg"
+            data-testid={COST_TEST_IDS.ROI_SECTION}
+          >
+            <h4 className="text-md font-medium mb-2 flex items-center">
+              <span className="mr-2">📈</span>
+              Return on Investment
+            </h4>
+            <div className="flex justify-between items-center">
+              <span className="text-gray-700 dark:text-gray-300">
+                Estimated ROI:
+              </span>
+              <span
+                className="font-bold text-green-600 dark:text-green-400"
+                data-testid={COST_TEST_IDS.ROI_ESTIMATE}
+              >
+                {securityMetrics.roi}
+              </span>
+            </div>
           </div>
         )}
       </div>
-
-      {/* Cost Analysis Section */}
-      <div
-        className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700"
-        data-testid={COST_TEST_IDS.COST_ANALYSIS_SECTION}
-      >
-        <h3
-          className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2"
-          data-testid={COST_TEST_IDS.COST_ANALYSIS_HEADING}
-        >
-          {UI_TEXT.LABELS.COST_ANALYSIS}
-        </h3>
-        <p
-          className="text-gray-600 dark:text-gray-400 text-sm"
-          data-testid={COST_TEST_IDS.COST_ANALYSIS_TEXT}
-        >
-          {isSmallSolution
-            ? COST_ANALYSIS.SMALL_SOLUTION
-            : COST_ANALYSIS.LARGE_SOLUTION}
-        </p>
-      </div>
-    </div>
+    </WidgetContainer>
   );
 };
 

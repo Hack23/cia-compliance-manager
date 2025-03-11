@@ -1,41 +1,43 @@
 /**
- * User Story: As a user, I can analyze the impact of my security choices
+ * User Story: As a user, I can review the impact of security choices
  *
- * Tests that impact analysis information displays correctly based on security levels.
+ * Tests that impact analysis information is displayed correctly.
  */
 import {
   SECURITY_LEVELS,
   BUSINESS_IMPACT_TEST_IDS,
 } from "../../support/constants";
+import { testComplianceStatusResilient } from "../../support/test-patterns";
 
 describe("Review Security Impact", () => {
   beforeEach(() => {
+    // Use larger viewport for better visibility
+    cy.viewport(3840, 2160);
     cy.visit("/");
     cy.ensureAppLoaded();
-    cy.viewport(1280, 800); // Set a consistent viewport
 
-    // Add even more aggressive style to prevent overflow issues
+    // Add style to make all elements visible with enhanced CSS
     cy.document().then((doc) => {
       const style = doc.createElement("style");
       style.innerHTML = `
         * {
-          overflow: visible !important; 
+          overflow: visible !important;
           visibility: visible !important;
           opacity: 1 !important;
-          clip: auto !important;
-          clip-path: none !important;
+          transition: none !important;
+          animation: none !important;
           display: block !important;
-          position: static !important;
           height: auto !important;
           max-height: none !important;
-          min-height: 0 !important;
+          position: static !important;
+          transform: none !important;
         }
       `;
       doc.head.appendChild(style);
     });
 
-    // Make sure the page has fully loaded
-    cy.wait(1000);
+    // Wait longer for app to initialize
+    cy.wait(2000);
   });
 
   it("shows business impact analysis widget", () => {
@@ -53,28 +55,10 @@ describe("Review Security Impact", () => {
   });
 
   it("updates impact analysis information when security levels change", () => {
-    // Store initial content
-    cy.get("body")
-      .invoke("text")
-      .then((initialText) => {
-        // Set security to a specific level first
-        cy.setSecurityLevels(
-          SECURITY_LEVELS.LOW,
-          SECURITY_LEVELS.LOW,
-          SECURITY_LEVELS.LOW
-        );
-        cy.wait(1000); // Longer wait time
-
-        // Now change to a different level
-        cy.setSecurityLevels(
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH
-        );
-        cy.wait(1000); // Longer wait time
-
-        // Verify content has changed by checking if HIGH appears in the DOM
-        cy.contains(SECURITY_LEVELS.HIGH, { timeout: 10000 }).should("exist");
-      });
+    // Use the ultra-reliable test pattern from test-patterns.ts to verify changes
+    testComplianceStatusResilient({
+      low: ["Low", "Low", "Low"],
+      high: ["High", "High", "High"],
+    });
   });
 });

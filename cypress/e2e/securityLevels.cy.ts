@@ -5,6 +5,8 @@ import {
   TEST_COMMANDS,
   getTestSelector,
   TEST_IDS,
+  WIDGET_TEST_IDS,
+  CIA_TEST_IDS,
 } from "../support/constants";
 
 describe("Security Level Selection", () => {
@@ -15,29 +17,33 @@ describe("Security Level Selection", () => {
     cy.ensureAppLoaded();
 
     // Make sure security widget is visible before testing
-    cy.get(SELECTORS.WIDGETS.SECURITY_LEVEL)
+    // Use correct test ID from the table
+    cy.get(`[data-testid="${WIDGET_TEST_IDS.SECURITY_LEVEL_WIDGET}"]`)
       .should("be.visible")
       .scrollIntoView()
       .wait(500);
   });
 
   it("should display correct CIA labels", () => {
-    // Update to use SELECTORS.WIDGETS.SECURITY_LEVEL instead of SELECTORS.SECURITY_CONTROLS
-    cy.get(SELECTORS.WIDGETS.SECURITY_LEVEL).within(() => {
-      cy.contains(CIA_LABELS.AVAILABILITY).should("be.visible");
-      cy.contains(CIA_LABELS.INTEGRITY).should("be.visible");
-      cy.contains(CIA_LABELS.CONFIDENTIALITY).should("be.visible");
-    });
+    // Use correct test IDs from the table
+    cy.get(`[data-testid="${WIDGET_TEST_IDS.SECURITY_LEVEL_WIDGET}"]`).within(
+      () => {
+        cy.contains(CIA_LABELS.AVAILABILITY).should("be.visible");
+        cy.contains(CIA_LABELS.INTEGRITY).should("be.visible");
+        cy.contains(CIA_LABELS.CONFIDENTIALITY).should("be.visible");
+      }
+    );
   });
 
   it("can set security levels using application constants", () => {
     // Make sure selectors are visible first
-    cy.get(getTestSelector(TEST_IDS.AVAILABILITY_SELECT))
+    // Use correct test IDs from CIA_TEST_IDS
+    cy.get(`[data-testid="${CIA_TEST_IDS.AVAILABILITY_SELECT}"]`)
       .scrollIntoView()
       .should("be.visible");
 
     // Uses the constants from the application code with force option
-    cy.get(getTestSelector(TEST_IDS.AVAILABILITY_SELECT)).select(
+    cy.get(`[data-testid="${CIA_TEST_IDS.AVAILABILITY_SELECT}"]`).select(
       SECURITY_LEVELS.HIGH,
       { force: true }
     );

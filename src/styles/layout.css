@@ -5,17 +5,18 @@
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  padding-right: 0.5rem; /* Reduced padding to use more space */
-  padding-left: 0.5rem;
+  padding-right: 0.25rem; /* Reduced padding to use more space */
+  padding-left: 0.25rem;
 }
 
 /* Dashboard grid with improved spacing */
 .dashboard-grid {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
-  gap: 1.25rem !important; /* Increased gap for better separation */
+  gap: 0.4rem !important; /* Reduced gap further for more content */
   width: 100%;
   max-width: 100% !important;
+  padding: 0.25rem !important;
 }
 
 /* Widget column sizing */
@@ -59,14 +60,20 @@
   overflow: hidden;
 }
 
-/* Widget sizing consistency */
+/* Widget sizing consistency - more compact */
 .widget {
-  min-height: 350px !important; /* Increased minimum height for better proportions */
+  min-height: 300px !important; /* Reduced minimum height */
+  width: 100% !important;
+}
+
+/* Each widget takes 1/3 of the grid space */
+[data-testid^="widget-"] {
+  width: 100% !important;
 }
 
 /* Smaller widgets for specific components */
 .compact-widget {
-  min-height: 280px !important;
+  min-height: 250px !important;
 }
 
 /* Larger widgets for data-heavy components */

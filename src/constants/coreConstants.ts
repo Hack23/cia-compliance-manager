@@ -144,7 +144,7 @@ export type SecurityLevelMap<T> = Record<SecurityLevelKey, T>;
 
 // Framework names
 export const COMPLIANCE_FRAMEWORKS = {
-  SOC2: "SOC 2 Type 1",
+  SOC2: "SOC 2 Type 2",
   ISO27001: "ISO 27001",
   PCI_DSS: "PCI DSS",
   HIPAA: "HIPAA",
