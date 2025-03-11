@@ -587,33 +587,38 @@ const _confidentialityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
 const _ROI_ESTIMATES: ROIEstimatesMap = {
   NONE: {
     returnRate: "0%",
-    description: "No security investment means no return",
+    description:
+      "No security investment results in no cost avoidance or operational benefits.",
     potentialSavings: "$0",
     breakEvenPeriod: "N/A",
   },
   LOW: {
-    returnRate: "120%",
-    description: "Basic security measures provide minimal protection",
-    potentialSavings: "$10,000-$50,000",
-    breakEvenPeriod: "12-18 months",
+    returnRate: "10-15%",
+    description:
+      "Basic security measures provide modest protection. Returns here are minimal and highly dependent on effective process integration.",
+    potentialSavings: "$1,000-$5,000",
+    breakEvenPeriod: "18-24 months",
   },
   MODERATE: {
-    returnRate: "200%",
-    description: "Standard security provides good cost-benefit balance",
-    potentialSavings: "$50,000-$250,000",
-    breakEvenPeriod: "8-12 months",
+    returnRate: "15-25%",
+    description:
+      "Standard security investments deliver moderate cost avoidance. Benefits are realized over time and depend on consistent operational support.",
+    potentialSavings: "$5,000-$20,000",
+    breakEvenPeriod: "12-18 months",
   },
   HIGH: {
-    returnRate: "350%",
-    description: "Advanced security provides significant protection",
-    potentialSavings: "$250,000-$1,000,000",
-    breakEvenPeriod: "6-10 months",
+    returnRate: "25-35%",
+    description:
+      "Advanced security measures can yield significant cost avoidance, though returns vary with quality of implementation and external factors.",
+    potentialSavings: "$20,000-$80,000",
+    breakEvenPeriod: "8-12 months",
   },
   VERY_HIGH: {
-    returnRate: "450%",
-    description: "Maximum security provides optimal protection",
-    potentialSavings: "$1,000,000+",
-    breakEvenPeriod: "4-8 months",
+    returnRate: "30-45%",
+    description:
+      "Maximum security investments offer the highest potential returns, yet require substantial upfront expenditure. Actual ROI remains highly variable.",
+    potentialSavings: "$80,000-$150,000",
+    breakEvenPeriod: "6-9 months",
     implementationCost: "High initial investment",
   },
 };
