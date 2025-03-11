@@ -8,13 +8,13 @@
 
 > **TechnicalDetailsWidget**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:23](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/TechnicalDetailsWidget.tsx#L23)
+Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:26](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/TechnicalDetailsWidget.tsx#L26)
 
 ## Parameters
 
 ### props
 
-`TechnicalDetailsWidgetProps`
+[`TechnicalDetailsWidgetProps`](../interfaces/TechnicalDetailsWidgetProps.md)
 
 ## Returns
 

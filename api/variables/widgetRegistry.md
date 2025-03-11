@@ -6,6 +6,6 @@
 
 # Variable: widgetRegistry
 
-> `const` **widgetRegistry**: [`WidgetRegistry`](../classes/WidgetRegistry.md)
+> `const` **widgetRegistry**: `WidgetRegistry`
 
-Defined in: [src/utils/widgetRegistry.tsx:95](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L95)
+Defined in: [src/utils/widgetRegistry.tsx:151](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L151)

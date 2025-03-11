@@ -8,7 +8,7 @@
 
 > `const` **CIA\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L24)
+Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L33)
 
 ## Type declaration
 

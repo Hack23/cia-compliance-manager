@@ -8,7 +8,7 @@
 
 > `const` **TEST\_HELPERS**: `object`
 
-Defined in: [src/constants/testIds.ts:405](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L405)
+Defined in: [src/constants/testIds.ts:514](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L514)
 
 Test helpers for working with security levels and related data
 
@@ -29,3 +29,19 @@ Type-safe way to get value points for a security level
 #### Returns
 
 `undefined` \| `string`[]
+
+### toSecurityLevel()
+
+> **toSecurityLevel**: (`level`) => [`SecurityLevel`](../type-aliases/SecurityLevel.md)
+
+Convert string to SecurityLevel type safely
+
+#### Parameters
+
+##### level
+
+`string`
+
+#### Returns
+
+[`SecurityLevel`](../type-aliases/SecurityLevel.md)

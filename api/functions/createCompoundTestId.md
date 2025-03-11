@@ -8,7 +8,7 @@
 
 > **createCompoundTestId**(`prefix`, `suffix`): `string`
 
-Defined in: [src/constants/testIds.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L8)
+Defined in: [src/constants/testIds.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L9)
 
 ## Parameters
 

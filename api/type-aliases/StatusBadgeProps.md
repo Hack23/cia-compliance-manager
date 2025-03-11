@@ -28,6 +28,10 @@ Defined in: [src/components/common/StatusBadge.tsx:4](https://github.com/Hack23/
 
 > **status**: `"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"` \| `"purple"`
 
+### style?
+
+> `optional` **style**: `React.CSSProperties`
+
 ### testId?
 
 > `optional` **testId**: `string`

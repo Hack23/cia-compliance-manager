@@ -8,7 +8,7 @@
 
 > **restoreAllMocks**(): `VitestUtils`
 
-Defined in: [src/tests/vitest-extensions.d.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L38)
+Defined in: [src/tests/vitest-extensions.d.ts:101](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L101)
 
 ## Returns
 

@@ -8,7 +8,7 @@
 
 > `const` **APP\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:324](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L324)
+Defined in: [src/constants/testIds.ts:335](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L335)
 
 ## Type declaration
 
@@ -39,3 +39,11 @@ Defined in: [src/constants/testIds.ts:324](https://github.com/Hack23/cia-complia
 ### THEME\_TOGGLE
 
 > **THEME\_TOGGLE**: `string` = `"theme-toggle"`
+
+### THEME\_TOGGLE\_DARK
+
+> **THEME\_TOGGLE\_DARK**: `string` = `"theme-toggle-dark"`
+
+### THEME\_TOGGLE\_LIGHT
+
+> **THEME\_TOGGLE\_LIGHT**: `string` = `"theme-toggle-light"`

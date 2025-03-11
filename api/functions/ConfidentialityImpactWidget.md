@@ -8,13 +8,13 @@
 
 > **ConfidentialityImpactWidget**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/ConfidentialityImpactWidget.tsx#L12)
+Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/ConfidentialityImpactWidget.tsx#L25)
 
 ## Parameters
 
 ### props
 
-`ConfidentialityImpactWidgetProps`
+[`ConfidentialityImpactWidgetProps`](../interfaces/ConfidentialityImpactWidgetProps.md)
 
 ## Returns
 

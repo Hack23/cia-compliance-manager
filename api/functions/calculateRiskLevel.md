@@ -8,7 +8,7 @@
 
 > **calculateRiskLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `string`
 
-Defined in: [src/types/cia.ts:300](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L300)
+Defined in: [src/types/cia.tsx:295](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L295)
 
 Calculate the risk level based on security levels
 

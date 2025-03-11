@@ -30,4 +30,4 @@ Defined in: [src/constants/coreConstants.ts:146](https://github.com/Hack23/cia-c
 
 ### SOC2
 
-> **SOC2**: `string` = `"SOC 2 Type 1"`
+> **SOC2**: `string` = `"SOC 2 Type 2"`

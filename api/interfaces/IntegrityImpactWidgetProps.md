@@ -6,7 +6,9 @@
 
 # Interface: IntegrityImpactWidgetProps
 
-Defined in: [src/types/widgets.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L41)
+Defined in: [src/types/widgets.tsx:100](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L100)
+
+Props for the IntegrityImpactWidget component
 
 ## Extends
 
@@ -14,19 +16,63 @@ Defined in: [src/types/widgets.ts:41](https://github.com/Hack23/cia-compliance-m
 
 ## Properties
 
-### level?
+### availabilityLevel
 
-> `optional` **level**: `string`
+> **availabilityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L42)
+Defined in: [src/types/widgets.tsx:103](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L103)
+
+#### Overrides
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`availabilityLevel`](WidgetBaseProps.md#availabilitylevel)
 
 ***
 
-### options?
+### className?
 
-> `optional` **options**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
+> `optional` **className**: `string`
 
-Defined in: [src/types/widgets.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L43)
+Defined in: [src/types/widgets.tsx:105](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L105)
+
+#### Overrides
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`className`](WidgetBaseProps.md#classname)
+
+***
+
+### confidentialityLevel
+
+> **confidentialityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
+
+Defined in: [src/types/widgets.tsx:104](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L104)
+
+#### Overrides
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`confidentialityLevel`](WidgetBaseProps.md#confidentialitylevel)
+
+***
+
+### integrityLevel
+
+> **integrityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
+
+Defined in: [src/types/widgets.tsx:101](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L101)
+
+#### Overrides
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`integrityLevel`](WidgetBaseProps.md#integritylevel)
+
+***
+
+### securityLevel?
+
+> `optional` **securityLevel**: `string`
+
+Defined in: [src/types/widgets.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L15)
+
+#### Inherited from
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`securityLevel`](WidgetBaseProps.md#securitylevel)
 
 ***
 
@@ -34,8 +80,10 @@ Defined in: [src/types/widgets.ts:43](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L5)
+Defined in: [src/types/widgets.tsx:106](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L106)
 
-#### Inherited from
+Test ID for component selection in tests
+
+#### Overrides
 
 [`WidgetBaseProps`](WidgetBaseProps.md).[`testId`](WidgetBaseProps.md#testid)

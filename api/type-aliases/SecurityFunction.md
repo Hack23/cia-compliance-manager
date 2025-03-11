@@ -8,4 +8,4 @@
 
 > **SecurityFunction**: `"ID"` \| `"PR"` \| `"DE"` \| `"RS"` \| `"RC"`
 
-Defined in: [src/types/cia.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L15)
+Defined in: [src/types/cia.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L15)

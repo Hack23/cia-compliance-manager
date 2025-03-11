@@ -8,13 +8,15 @@
 
 > **SecurityResourcesWidget**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/SecurityResourcesWidget.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/SecurityResourcesWidget.tsx#L9)
+Defined in: [src/components/widgets/SecurityResourcesWidget.tsx:23](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/SecurityResourcesWidget.tsx#L23)
+
+Widget that displays security resources based on security levels
 
 ## Parameters
 
 ### props
 
-`SecurityResourcesWidgetProps`
+[`SecurityResourcesWidgetProps`](../interfaces/SecurityResourcesWidgetProps.md)
 
 ## Returns
 

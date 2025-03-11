@@ -8,7 +8,7 @@
 
 > **getSecurityLevelFromValue**(`value`): `string`
 
-Defined in: [src/types/cia.ts:273](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L273)
+Defined in: [src/types/cia.tsx:268](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L268)
 
 Get a security level from a numeric value
 

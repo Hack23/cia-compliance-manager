@@ -8,7 +8,7 @@
 
 > `const` **WIDGET\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:105](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L105)
+Defined in: [src/constants/testIds.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L114)
 
 ## Type declaration
 
@@ -19,6 +19,10 @@ Defined in: [src/constants/testIds.ts:105](https://github.com/Hack23/cia-complia
 ### AVAILABILITY\_TAB
 
 > **AVAILABILITY\_TAB**: `string` = `"availability-tab"`
+
+### BENEFITS\_SECTION
+
+> **BENEFITS\_SECTION**: `string` = `"benefits-section"`
 
 ### BUSINESS\_IMPACT\_WIDGET
 

@@ -8,7 +8,7 @@
 
 > **mockChartJs**(): `object`
 
-Defined in: [src/tests/testSetupHelpers.ts:76](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/testSetupHelpers.ts#L76)
+Defined in: [src/tests/testSetupHelpers.tsx:182](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/testSetupHelpers.tsx#L182)
 
 Create a mock Chart.js factory
 
