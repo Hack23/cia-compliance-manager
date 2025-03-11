@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIAWidgetProps
 
-Defined in: [src/types/cia.ts:139](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L139)
+Defined in: [src/types/cia.tsx:134](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L134)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/types/cia.ts:139](https://github.com/Hack23/cia-compliance-mana
 
 > **children**: `ReactNode`
 
-Defined in: [src/types/cia.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L142)
+Defined in: [src/types/cia.tsx:137](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L137)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/types/cia.ts:142](https://github.com/Hack23/cia-compliance-mana
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/cia.ts:141](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L141)
+Defined in: [src/types/cia.tsx:136](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L136)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [src/types/cia.ts:141](https://github.com/Hack23/cia-compliance-mana
 
 > **title**: `string`
 
-Defined in: [src/types/cia.ts:140](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L140)
+Defined in: [src/types/cia.tsx:135](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L135)

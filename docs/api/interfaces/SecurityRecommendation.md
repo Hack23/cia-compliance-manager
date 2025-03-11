@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityRecommendation
 
-Defined in: [src/types/cia.ts:229](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L229)
+Defined in: [src/types/cia.tsx:224](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L224)
 
 SecurityRecommendation represents a recommended security measure
 or control to implement
@@ -17,7 +17,7 @@ or control to implement
 
 > **description**: `string`
 
-Defined in: [src/types/cia.ts:231](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L231)
+Defined in: [src/types/cia.tsx:226](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L226)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [src/types/cia.ts:231](https://github.com/Hack23/cia-compliance-mana
 
 > **effort**: `string`
 
-Defined in: [src/types/cia.ts:233](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L233)
+Defined in: [src/types/cia.tsx:228](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L228)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [src/types/cia.ts:233](https://github.com/Hack23/cia-compliance-mana
 
 > **impact**: `string`
 
-Defined in: [src/types/cia.ts:232](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L232)
+Defined in: [src/types/cia.tsx:227](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L227)
 
 ***
 
@@ -41,7 +41,7 @@ Defined in: [src/types/cia.ts:232](https://github.com/Hack23/cia-compliance-mana
 
 > **priority**: `"medium"` \| `"low"` \| `"high"` \| `"critical"`
 
-Defined in: [src/types/cia.ts:234](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L234)
+Defined in: [src/types/cia.tsx:229](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L229)
 
 ***
 
@@ -49,4 +49,4 @@ Defined in: [src/types/cia.ts:234](https://github.com/Hack23/cia-compliance-mana
 
 > **title**: `string`
 
-Defined in: [src/types/cia.ts:230](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L230)
+Defined in: [src/types/cia.tsx:225](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L225)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **ValueCreationWidget**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/ValueCreationWidget.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/ValueCreationWidget.tsx#L15)
+Defined in: [src/components/widgets/ValueCreationWidget.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/ValueCreationWidget.tsx#L27)
 
 ## Parameters
 

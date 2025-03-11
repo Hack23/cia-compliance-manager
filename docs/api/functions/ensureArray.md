@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -8,10 +8,9 @@
 
 > **ensureArray**\<`T`\>(`value`): `T`[]
 
-Defined in: [src/utils/typeGuards.ts:63](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/typeGuards.ts#L63)
+Defined in: [src/utils/typeGuards.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/typeGuards.ts#L124)
 
-Ensures the value is an array. If it's already an array, returns it.
-If it's null or undefined, returns an empty array. Otherwise wraps it in an array.
+Ensures value is an array, or converts it to one if not
 
 ## Type Parameters
 
@@ -21,12 +20,8 @@ If it's null or undefined, returns an empty array. Otherwise wraps it in an arra
 
 ### value
 
-The value to ensure is an array
-
-`undefined` | `null` | `T` | `T`[]
+`T` | `T`[]
 
 ## Returns
 
 `T`[]
-
-An array

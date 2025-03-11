@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,55 +6,61 @@
 
 # Interface: ComplianceStatusWidgetProps
 
-Defined in: [src/types/widgets.ts:27](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L27)
+Defined in: [src/types/widgets.tsx:79](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L79)
+
+Props for ComplianceStatusWidget component
+
+## Extends
+
+- [`WidgetBaseProps`](WidgetBaseProps.md)
 
 ## Properties
 
-### availability?
+### availabilityLevel
 
-> `optional` **availability**: `string`
+> **availabilityLevel**: `string`
 
-Defined in: [src/types/widgets.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L32)
+Defined in: [src/types/widgets.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L11)
 
-***
+#### Inherited from
 
-### availabilityLevel?
-
-> `optional` **availabilityLevel**: `string`
-
-Defined in: [src/types/widgets.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L29)
+[`WidgetBaseProps`](WidgetBaseProps.md).[`availabilityLevel`](WidgetBaseProps.md#availabilitylevel)
 
 ***
 
-### confidentiality?
+### className?
 
-> `optional` **confidentiality**: `string`
+> `optional` **className**: `string`
 
-Defined in: [src/types/widgets.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L34)
+Defined in: [src/types/widgets.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L14)
 
-***
+#### Inherited from
 
-### confidentialityLevel?
-
-> `optional` **confidentialityLevel**: `string`
-
-Defined in: [src/types/widgets.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L31)
+[`WidgetBaseProps`](WidgetBaseProps.md).[`className`](WidgetBaseProps.md#classname)
 
 ***
 
-### integrity?
+### confidentialityLevel
 
-> `optional` **integrity**: `string`
+> **confidentialityLevel**: `string`
 
-Defined in: [src/types/widgets.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L33)
+Defined in: [src/types/widgets.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L13)
+
+#### Inherited from
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`confidentialityLevel`](WidgetBaseProps.md#confidentialitylevel)
 
 ***
 
-### integrityLevel?
+### integrityLevel
 
-> `optional` **integrityLevel**: `string`
+> **integrityLevel**: `string`
 
-Defined in: [src/types/widgets.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L30)
+Defined in: [src/types/widgets.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L12)
+
+#### Inherited from
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`integrityLevel`](WidgetBaseProps.md#integritylevel)
 
 ***
 
@@ -62,7 +68,13 @@ Defined in: [src/types/widgets.ts:30](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **securityLevel**: `string`
 
-Defined in: [src/types/widgets.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L28)
+Defined in: [src/types/widgets.tsx:81](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L81)
+
+Overall security level
+
+#### Overrides
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`securityLevel`](WidgetBaseProps.md#securitylevel)
 
 ***
 
@@ -70,4 +82,10 @@ Defined in: [src/types/widgets.ts:28](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L35)
+Defined in: [src/types/widgets.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L10)
+
+Test ID for component selection in tests
+
+#### Inherited from
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`testId`](WidgetBaseProps.md#testid)

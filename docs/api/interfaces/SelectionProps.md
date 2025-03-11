@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SelectionProps
 
-Defined in: [src/types/componentProps.ts:172](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L172)
+Defined in: [src/types/componentProps.tsx:190](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L190)
 
 Props for the Selection component that allows users to select security levels.
 
@@ -16,7 +16,7 @@ Props for the Selection component that allows users to select security levels.
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.ts:182](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L182)
+Defined in: [src/types/componentProps.tsx:200](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L200)
 
 Optional CSS class name
 
@@ -26,7 +26,7 @@ Optional CSS class name
 
 > **label**: `string`
 
-Defined in: [src/types/componentProps.ts:180](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L180)
+Defined in: [src/types/componentProps.tsx:198](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L198)
 
 Label for the selection
 
@@ -36,7 +36,7 @@ Label for the selection
 
 > **onChange**: (`value`) => `void`
 
-Defined in: [src/types/componentProps.ts:178](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L178)
+Defined in: [src/types/componentProps.tsx:196](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L196)
 
 Change handler
 
@@ -56,7 +56,7 @@ Change handler
 
 > **options**: `string`[]
 
-Defined in: [src/types/componentProps.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L176)
+Defined in: [src/types/componentProps.tsx:194](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L194)
 
 Options for selection
 
@@ -66,7 +66,7 @@ Options for selection
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/componentProps.ts:184](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L184)
+Defined in: [src/types/componentProps.tsx:202](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L202)
 
 Optional test ID for component selection in tests
 
@@ -76,6 +76,6 @@ Optional test ID for component selection in tests
 
 > **value**: `string`
 
-Defined in: [src/types/componentProps.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L174)
+Defined in: [src/types/componentProps.tsx:192](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L192)
 
 Selected security level

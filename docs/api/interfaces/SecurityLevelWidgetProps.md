@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,19 +6,17 @@
 
 # Interface: SecurityLevelWidgetProps
 
-Defined in: [src/types/componentProps.ts:274](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L274)
+Defined in: [src/types/widgets.tsx:194](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L194)
 
-Props for the SecurityLevelWidget component that displays security levels.
+Props for the SecurityLevelWidget component
 
 ## Properties
 
-### availabilityLevel?
+### availabilityLevel
 
-> `optional` **availabilityLevel**: `string`
+> **availabilityLevel**: `string`
 
-Defined in: [src/types/componentProps.ts:278](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L278)
-
-Availability level
+Defined in: [src/types/widgets.tsx:195](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L195)
 
 ***
 
@@ -26,39 +24,117 @@ Availability level
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.ts:284](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L284)
-
-Optional CSS class name
+Defined in: [src/types/widgets.tsx:208](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L208)
 
 ***
 
-### confidentialityLevel?
+### confidentialityLevel
 
-> `optional` **confidentialityLevel**: `string`
+> **confidentialityLevel**: `string`
 
-Defined in: [src/types/componentProps.ts:282](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L282)
-
-Confidentiality level
+Defined in: [src/types/widgets.tsx:197](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L197)
 
 ***
 
-### integrityLevel?
+### error?
 
-> `optional` **integrityLevel**: `string`
+> `optional` **error**: `null` \| `Error`
 
-Defined in: [src/types/componentProps.ts:280](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L280)
-
-Integrity level
+Defined in: [src/types/widgets.tsx:212](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L212)
 
 ***
 
-### securityLevel
+### integrityLevel
 
-> **securityLevel**: `string`
+> **integrityLevel**: `string`
 
-Defined in: [src/types/componentProps.ts:276](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L276)
+Defined in: [src/types/widgets.tsx:196](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L196)
 
-Security level
+***
+
+### loading?
+
+> `optional` **loading**: `boolean`
+
+Defined in: [src/types/widgets.tsx:211](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L211)
+
+***
+
+### onAvailabilityChange()?
+
+> `optional` **onAvailabilityChange**: (`level`) => `void`
+
+Defined in: [src/types/widgets.tsx:198](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L198)
+
+#### Parameters
+
+##### level
+
+`string`
+
+#### Returns
+
+`void`
+
+***
+
+### onConfidentialityChange()?
+
+> `optional` **onConfidentialityChange**: (`level`) => `void`
+
+Defined in: [src/types/widgets.tsx:200](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L200)
+
+#### Parameters
+
+##### level
+
+`string`
+
+#### Returns
+
+`void`
+
+***
+
+### onIntegrityChange()?
+
+> `optional` **onIntegrityChange**: (`level`) => `void`
+
+Defined in: [src/types/widgets.tsx:199](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L199)
+
+#### Parameters
+
+##### level
+
+`string`
+
+#### Returns
+
+`void`
+
+***
+
+### setAvailability?
+
+> `optional` **setAvailability**: `Dispatch`\<`SetStateAction`\<`string`\>\> \| (`level`) => `void`
+
+Defined in: [src/types/widgets.tsx:201](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L201)
+
+***
+
+### setConfidentiality?
+
+> `optional` **setConfidentiality**: `Dispatch`\<`SetStateAction`\<`string`\>\> \| (`level`) => `void`
+
+Defined in: [src/types/widgets.tsx:205](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L205)
+
+***
+
+### setIntegrity?
+
+> `optional` **setIntegrity**: `Dispatch`\<`SetStateAction`\<`string`\>\> \| (`level`) => `void`
+
+Defined in: [src/types/widgets.tsx:204](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L204)
 
 ***
 
@@ -66,6 +142,12 @@ Security level
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/componentProps.ts:286](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L286)
+Defined in: [src/types/widgets.tsx:209](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L209)
 
-Optional test ID for component selection in tests
+***
+
+### title?
+
+> `optional` **title**: `string`
+
+Defined in: [src/types/widgets.tsx:210](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L210)

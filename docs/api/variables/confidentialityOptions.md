@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,6 +6,6 @@
 
 # Variable: confidentialityOptions
 
-> `const` **confidentialityOptions**: `Record`\<`string`, [`CIADetails`](../interfaces/CIADetails.md)\>
+> `const` **confidentialityOptions**: `Record`\<[`SecurityLevel`](../type-aliases/SecurityLevel.md), [`EnhancedCIADetails`](../interfaces/EnhancedCIADetails.md)\> = `_confidentialityOptions`
 
-Defined in: [src/hooks/useCIAOptions.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/main/src/hooks/useCIAOptions.ts#L244)
+Defined in: [src/hooks/useCIAOptions.ts:624](https://github.com/Hack23/cia-compliance-manager/blob/main/src/hooks/useCIAOptions.ts#L624)

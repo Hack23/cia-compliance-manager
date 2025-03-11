@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **fn**\<`T`\>(`implementation`?): `Mock`\<`T`\>
 
-Defined in: [src/tests/vitest-extensions.d.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L33)
+Defined in: [src/tests/vitest-extensions.d.ts:96](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L96)
 
 ## Type Parameters
 

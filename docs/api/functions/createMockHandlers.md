@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,14 +6,36 @@
 
 # Function: createMockHandlers()
 
-> **createMockHandlers**(): [`MockHandlers`](../interfaces/MockHandlers.md)
+> **createMockHandlers**(): `object`
 
-Defined in: [src/tests/mockFactory.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/mockFactory.ts#L45)
+Defined in: [src/tests/testSetupHelpers.tsx:58](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/testSetupHelpers.tsx#L58)
 
-Creates mock event handlers for component testing
+Creates mock handlers for CIA level changes
 
 ## Returns
 
-[`MockHandlers`](../interfaces/MockHandlers.md)
+`object`
 
-Object with mock functions for availability, integrity, and confidentiality
+### onAvailabilityChange
+
+> **onAvailabilityChange**: `Mock`\<`Procedure`\>
+
+### onConfidentialityChange
+
+> **onConfidentialityChange**: `Mock`\<`Procedure`\>
+
+### onIntegrityChange
+
+> **onIntegrityChange**: `Mock`\<`Procedure`\>
+
+### setAvailability
+
+> **setAvailability**: `Mock`\<`Procedure`\>
+
+### setConfidentiality
+
+> **setConfidentiality**: `Mock`\<`Procedure`\>
+
+### setIntegrity
+
+> **setIntegrity**: `Mock`\<`Procedure`\>

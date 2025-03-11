@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -8,9 +8,9 @@
 
 > **getSecurityLevelValue**(`level`): `number`
 
-Defined in: [src/types/cia.ts:259](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L259)
+Defined in: [src/utils/securityLevelUtils.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/securityLevelUtils.ts#L34)
 
-Get a security level value for calculations
+Gets a numerical representation of a security level for calculations
 
 ## Parameters
 
@@ -18,6 +18,10 @@ Get a security level value for calculations
 
 `string`
 
+The security level string
+
 ## Returns
 
 `number`
+
+A number from 0-4 representing the security level

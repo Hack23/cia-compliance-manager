@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -27,6 +27,10 @@ Defined in: [src/components/common/StatusBadge.tsx:4](https://github.com/Hack23/
 ### status
 
 > **status**: `"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"` \| `"purple"`
+
+### style?
+
+> `optional` **style**: `React.CSSProperties`
 
 ### testId?
 

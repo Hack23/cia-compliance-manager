@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIAImpactSummaryWidgetProps
 
-Defined in: [src/types/componentProps.ts:208](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L208)
+Defined in: [src/types/componentProps.tsx:210](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L210)
 
 Props for the CIAImpactSummaryWidget component that summarizes CIA impacts.
 
@@ -16,7 +16,7 @@ Props for the CIAImpactSummaryWidget component that summarizes CIA impacts.
 
 > **availability**: `string`
 
-Defined in: [src/types/componentProps.ts:210](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L210)
+Defined in: [src/types/componentProps.tsx:212](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L212)
 
 Availability security level
 
@@ -26,7 +26,7 @@ Availability security level
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.ts:216](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L216)
+Defined in: [src/types/componentProps.tsx:218](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L218)
 
 Optional CSS class name
 
@@ -36,7 +36,7 @@ Optional CSS class name
 
 > **confidentiality**: `string`
 
-Defined in: [src/types/componentProps.ts:214](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L214)
+Defined in: [src/types/componentProps.tsx:216](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L216)
 
 Confidentiality security level
 
@@ -46,7 +46,7 @@ Confidentiality security level
 
 > **integrity**: `string`
 
-Defined in: [src/types/componentProps.ts:212](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L212)
+Defined in: [src/types/componentProps.tsx:214](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L214)
 
 Integrity security level
 
@@ -56,6 +56,6 @@ Integrity security level
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/componentProps.ts:218](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L218)
+Defined in: [src/types/componentProps.tsx:220](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L220)
 
 Optional test ID for component selection in tests

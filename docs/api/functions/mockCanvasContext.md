@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,15 +6,10 @@
 
 # Function: mockCanvasContext()
 
-> **mockCanvasContext**(): `Mock`\<`Procedure`\>
+> **mockCanvasContext**(): `void`
 
-Defined in: [src/tests/testSetupHelpers.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/testSetupHelpers.ts#L38)
-
-Mock HTMLCanvasElement.getContext for Chart.js
-Returns a mock that doesn't throw errors
+Defined in: [src/tests/vitest-extensions.d.ts:105](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L105)
 
 ## Returns
 
-`Mock`\<`Procedure`\>
-
-The mocked getContext function
+`void`

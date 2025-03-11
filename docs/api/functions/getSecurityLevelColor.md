@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelColor**(`level`): `string`
 
-Defined in: [src/constants/testConstants.ts:79](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testConstants.ts#L79)
+Defined in: [src/constants/testConstants.ts:87](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testConstants.ts#L87)
 
 ## Parameters
 

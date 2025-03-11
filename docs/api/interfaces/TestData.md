@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: TestData
 
-Defined in: [src/types/testTypes.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/testTypes.ts#L29)
+Defined in: [src/types/testTypes.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/testTypes.tsx#L29)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/types/testTypes.ts:29](https://github.com/Hack23/cia-compliance
 
 > **descriptions**: `Record`\<`string`, `string`\>
 
-Defined in: [src/types/testTypes.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/testTypes.ts#L31)
+Defined in: [src/types/testTypes.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/testTypes.tsx#L31)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/types/testTypes.ts:31](https://github.com/Hack23/cia-compliance
 
 > **options**: `Record`\<`string`, `any`\>
 
-Defined in: [src/types/testTypes.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/testTypes.ts#L32)
+Defined in: [src/types/testTypes.tsx:32](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/testTypes.tsx#L32)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [src/types/testTypes.ts:32](https://github.com/Hack23/cia-compliance
 
 > **securityLevels**: `Record`\<`string`, `string`\>
 
-Defined in: [src/types/testTypes.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/testTypes.ts#L30)
+Defined in: [src/types/testTypes.tsx:30](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/testTypes.tsx#L30)

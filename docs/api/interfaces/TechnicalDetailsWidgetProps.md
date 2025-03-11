@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,19 +6,25 @@
 
 # Interface: TechnicalDetailsWidgetProps
 
-Defined in: [src/types/componentProps.ts:294](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L294)
+Defined in: [src/types/widgets.tsx:167](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L167)
 
-Props for the TechnicalDetailsWidget component that displays technical implementation details.
+Props for the TechnicalDetailsWidget component
+
+## Extends
+
+- [`WidgetBaseProps`](WidgetBaseProps.md)
 
 ## Properties
 
-### availability?
+### availabilityLevel
 
-> `optional` **availability**: `string`
+> **availabilityLevel**: `string`
 
-Defined in: [src/types/componentProps.ts:296](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L296)
+Defined in: [src/types/widgets.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L11)
 
-Availability security level
+#### Inherited from
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`availabilityLevel`](WidgetBaseProps.md#availabilitylevel)
 
 ***
 
@@ -26,9 +32,9 @@ Availability security level
 
 > `optional` **availabilityOptions**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
 
-Defined in: [src/types/componentProps.ts:302](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L302)
+Defined in: [src/types/widgets.tsx:169](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L169)
 
-Availability options
+Availability options for specific technical details
 
 ***
 
@@ -36,19 +42,25 @@ Availability options
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.ts:308](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L308)
+Defined in: [src/types/widgets.tsx:175](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L175)
 
 Optional CSS class name
 
+#### Overrides
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`className`](WidgetBaseProps.md#classname)
+
 ***
 
-### confidentiality?
+### confidentialityLevel
 
-> `optional` **confidentiality**: `string`
+> **confidentialityLevel**: `string`
 
-Defined in: [src/types/componentProps.ts:300](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L300)
+Defined in: [src/types/widgets.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L13)
 
-Confidentiality security level
+#### Inherited from
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`confidentialityLevel`](WidgetBaseProps.md#confidentialitylevel)
 
 ***
 
@@ -56,19 +68,21 @@ Confidentiality security level
 
 > `optional` **confidentialityOptions**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
 
-Defined in: [src/types/componentProps.ts:306](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L306)
+Defined in: [src/types/widgets.tsx:173](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L173)
 
-Confidentiality options
+Confidentiality options for specific technical details
 
 ***
 
-### integrity?
+### integrityLevel
 
-> `optional` **integrity**: `string`
+> **integrityLevel**: `string`
 
-Defined in: [src/types/componentProps.ts:298](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L298)
+Defined in: [src/types/widgets.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L12)
 
-Integrity security level
+#### Inherited from
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`integrityLevel`](WidgetBaseProps.md#integritylevel)
 
 ***
 
@@ -76,9 +90,21 @@ Integrity security level
 
 > `optional` **integrityOptions**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
 
-Defined in: [src/types/componentProps.ts:304](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L304)
+Defined in: [src/types/widgets.tsx:171](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L171)
 
-Integrity options
+Integrity options for specific technical details
+
+***
+
+### securityLevel?
+
+> `optional` **securityLevel**: `string`
+
+Defined in: [src/types/widgets.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L15)
+
+#### Inherited from
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`securityLevel`](WidgetBaseProps.md#securitylevel)
 
 ***
 
@@ -86,6 +112,10 @@ Integrity options
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/componentProps.ts:310](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L310)
+Defined in: [src/types/widgets.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L10)
 
-Optional test ID for component selection in tests
+Test ID for component selection in tests
+
+#### Inherited from
+
+[`WidgetBaseProps`](WidgetBaseProps.md).[`testId`](WidgetBaseProps.md#testid)

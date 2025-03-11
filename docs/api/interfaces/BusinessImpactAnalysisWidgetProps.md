@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,39 +6,57 @@
 
 # Interface: BusinessImpactAnalysisWidgetProps
 
-Defined in: [src/types/componentProps.ts:192](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L192)
+Defined in: [src/types/widgets.tsx:181](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L181)
 
-Props for the BusinessImpactAnalysisWidget component that displays business impact analysis.
+Props for the BusinessImpactAnalysisWidget component
 
 ## Properties
 
-### category
+### activeComponent?
 
-> **category**: `"Availability"` \| `"Integrity"` \| `"Confidentiality"`
+> `optional` **activeComponent**: `"availability"` \| `"integrity"` \| `"confidentiality"`
 
-Defined in: [src/types/componentProps.ts:194](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L194)
-
-Category (Availability, Integrity, Confidentiality)
+Defined in: [src/types/widgets.tsx:188](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L188)
 
 ***
 
-### level
+### availabilityLevel
 
-> **level**: `string`
+> **availabilityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/componentProps.ts:196](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L196)
-
-Security level
+Defined in: [src/types/widgets.tsx:182](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L182)
 
 ***
 
-### options?
+### className?
 
-> `optional` **options**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
+> `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.ts:198](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L198)
+Defined in: [src/types/widgets.tsx:186](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L186)
 
-Security level options
+***
+
+### confidentialityLevel
+
+> **confidentialityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
+
+Defined in: [src/types/widgets.tsx:184](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L184)
+
+***
+
+### integrityLevel
+
+> **integrityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
+
+Defined in: [src/types/widgets.tsx:183](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L183)
+
+***
+
+### securityLevel?
+
+> `optional` **securityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
+
+Defined in: [src/types/widgets.tsx:185](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L185)
 
 ***
 
@@ -46,6 +64,4 @@ Security level options
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/componentProps.ts:200](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L200)
-
-Optional test ID for component selection in tests
+Defined in: [src/types/widgets.tsx:187](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L187)

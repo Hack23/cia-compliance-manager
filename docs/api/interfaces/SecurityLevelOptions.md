@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityLevelOptions
 
-Defined in: [src/types/cia.ts:173](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L173)
+Defined in: [src/types/cia.tsx:168](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L168)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/types/cia.ts:173](https://github.com/Hack23/cia-compliance-mana
 
 > **availabilityOptions**: [`CIAOptions`](CIAOptions.md)
 
-Defined in: [src/types/cia.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L174)
+Defined in: [src/types/cia.tsx:169](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L169)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/types/cia.ts:174](https://github.com/Hack23/cia-compliance-mana
 
 > **confidentialityOptions**: [`CIAOptions`](CIAOptions.md)
 
-Defined in: [src/types/cia.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L176)
+Defined in: [src/types/cia.tsx:171](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L171)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [src/types/cia.ts:176](https://github.com/Hack23/cia-compliance-mana
 
 > **integrityOptions**: [`CIAOptions`](CIAOptions.md)
 
-Defined in: [src/types/cia.ts:175](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L175)
+Defined in: [src/types/cia.tsx:170](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L170)

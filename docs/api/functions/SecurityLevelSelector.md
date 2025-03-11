@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -8,7 +8,10 @@
 
 > **SecurityLevelSelector**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/SecurityLevelSelector.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L27)
+Defined in: [src/components/SecurityLevelSelector.tsx:42](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L42)
+
+SecurityLevelSelector component for selecting CIA security levels
+Enhanced with rich descriptions and visual indicators
 
 ## Parameters
 

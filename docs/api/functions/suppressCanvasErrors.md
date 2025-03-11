@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -8,13 +8,8 @@
 
 > **suppressCanvasErrors**(): `MockInstance`\<(`this`, ...`args`) => `unknown`\>
 
-Defined in: [src/tests/testSetupHelpers.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/testSetupHelpers.ts#L8)
-
-Helper function to suppress known console errors in tests
-Particularly useful for Chart.js canvas context errors
+Defined in: [src/tests/vitest-extensions.d.ts:126](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L126)
 
 ## Returns
 
 `MockInstance`\<(`this`, ...`args`) => `unknown`\>
-
-SpyInstance that can be used to restore the original console.error

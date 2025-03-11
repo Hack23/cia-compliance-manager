@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIAProfile
 
-Defined in: [src/types/cia.ts:113](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L113)
+Defined in: [src/types/cia.tsx:108](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L108)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/types/cia.ts:113](https://github.com/Hack23/cia-compliance-mana
 
 > **availability**: [`AvailabilityRating`](../type-aliases/AvailabilityRating.md)
 
-Defined in: [src/types/cia.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L114)
+Defined in: [src/types/cia.tsx:109](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L109)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/types/cia.ts:114](https://github.com/Hack23/cia-compliance-mana
 
 > **confidentiality**: [`ConfidentialityRating`](../type-aliases/ConfidentialityRating.md)
 
-Defined in: [src/types/cia.ts:116](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L116)
+Defined in: [src/types/cia.tsx:111](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L111)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [src/types/cia.ts:116](https://github.com/Hack23/cia-compliance-mana
 
 > **integrity**: [`IntegrityRating`](../type-aliases/IntegrityRating.md)
 
-Defined in: [src/types/cia.ts:115](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L115)
+Defined in: [src/types/cia.tsx:110](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L110)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **BUSINESS\_IMPACT\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:154](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L154)
+Defined in: [src/constants/testIds.ts:171](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L171)
 
 ## Type declaration
 

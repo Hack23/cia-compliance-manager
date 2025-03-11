@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **WIDGET\_PREFIXES**: `object`
 
-Defined in: [src/constants/testIds.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L12)
+Defined in: [src/constants/testIds.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L21)
 
 ## Type declaration
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: RadarChartProps
 
-Defined in: [src/types/componentProps.ts:154](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L154)
+Defined in: [src/types/componentProps.tsx:172](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L172)
 
 Props for the RadarChart component that visualizes security levels.
 
@@ -16,7 +16,7 @@ Props for the RadarChart component that visualizes security levels.
 
 > **availability**: `string`
 
-Defined in: [src/types/componentProps.ts:156](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L156)
+Defined in: [src/types/componentProps.tsx:174](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L174)
 
 Availability security level
 
@@ -26,7 +26,7 @@ Availability security level
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.ts:162](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L162)
+Defined in: [src/types/componentProps.tsx:180](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L180)
 
 Optional CSS class name
 
@@ -36,7 +36,7 @@ Optional CSS class name
 
 > **confidentiality**: `string`
 
-Defined in: [src/types/componentProps.ts:160](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L160)
+Defined in: [src/types/componentProps.tsx:178](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L178)
 
 Confidentiality security level
 
@@ -46,7 +46,7 @@ Confidentiality security level
 
 > **integrity**: `string`
 
-Defined in: [src/types/componentProps.ts:158](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L158)
+Defined in: [src/types/componentProps.tsx:176](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L176)
 
 Integrity security level
 
@@ -56,6 +56,6 @@ Integrity security level
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/componentProps.ts:164](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L164)
+Defined in: [src/types/componentProps.tsx:182](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L182)
 
 Optional test ID for component selection in tests

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,11 +6,11 @@
 
 # Function: formatSecurityLevel()
 
-> **formatSecurityLevel**(`level`): `string`
+> **formatSecurityLevel**(`level`, `withLabel`): `ReactNode`
 
-Defined in: [src/types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L251)
+Defined in: [src/utils/widgetHelpers.tsx:175](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L175)
 
-Generate a display format string for a security level
+Creates formatted JSX for displaying a security level with appropriate styling
 
 ## Parameters
 
@@ -18,6 +18,16 @@ Generate a display format string for a security level
 
 `string`
 
+The security level to display
+
+### withLabel
+
+`boolean` = `false`
+
+Whether to include a label with the value
+
 ## Returns
 
-`string`
+`ReactNode`
+
+JSX element with appropriate styling

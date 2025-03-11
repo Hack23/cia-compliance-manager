@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetHeaderProps
 
-Defined in: [src/types/componentProps.ts:88](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L88)
+Defined in: [src/types/componentProps.tsx:106](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L106)
 
 Props for the WidgetHeader component that provides a consistent header for widgets.
 
@@ -16,7 +16,7 @@ Props for the WidgetHeader component that provides a consistent header for widge
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L92)
+Defined in: [src/types/componentProps.tsx:110](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L110)
 
 Optional CSS class name
 
@@ -26,7 +26,7 @@ Optional CSS class name
 
 > `optional` **icon**: `string`
 
-Defined in: [src/types/componentProps.ts:96](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L96)
+Defined in: [src/types/componentProps.tsx:114](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L114)
 
 Icon to display in the header
 
@@ -36,7 +36,7 @@ Icon to display in the header
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/componentProps.ts:94](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L94)
+Defined in: [src/types/componentProps.tsx:112](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L112)
 
 Optional test ID for component selection in tests
 
@@ -46,6 +46,6 @@ Optional test ID for component selection in tests
 
 > **title**: `string`
 
-Defined in: [src/types/componentProps.ts:90](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.ts#L90)
+Defined in: [src/types/componentProps.tsx:108](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L108)
 
 Title of the widget

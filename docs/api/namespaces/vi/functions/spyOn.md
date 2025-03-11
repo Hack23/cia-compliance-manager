@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -10,7 +10,7 @@
 
 > **spyOn**\<`T`, `S`\>(`obj`, `methodName`, `accessType`): `MockInstance`\<() => `T`\[`S`\]\>
 
-Defined in: [src/tests/vitest-extensions.d.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L35)
+Defined in: [src/tests/vitest-extensions.d.ts:98](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L98)
 
 ### Type Parameters
 
@@ -40,7 +40,7 @@ Defined in: [src/tests/vitest-extensions.d.ts:35](https://github.com/Hack23/cia-
 
 > **spyOn**\<`T`, `G`\>(`obj`, `methodName`, `accessType`): `MockInstance`\<(`arg`) => `void`\>
 
-Defined in: [src/tests/vitest-extensions.d.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L35)
+Defined in: [src/tests/vitest-extensions.d.ts:98](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L98)
 
 ### Type Parameters
 
@@ -70,7 +70,7 @@ Defined in: [src/tests/vitest-extensions.d.ts:35](https://github.com/Hack23/cia-
 
 > **spyOn**\<`T`, `M`\>(`obj`, `methodName`): `Required`\<`T`\>\[`M`\] *extends* (...`args`) => `R` ? `MockInstance`\<(`this`, ...`args`) => `R`\> : `T`\[`M`\] *extends* `Procedure` ? `MockInstance`\<`any`\[`any`\]\> : `never`
 
-Defined in: [src/tests/vitest-extensions.d.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L35)
+Defined in: [src/tests/vitest-extensions.d.ts:98](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L98)
 
 ### Type Parameters
 
