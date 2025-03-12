@@ -1,78 +1,194 @@
 /// <reference types="cypress" />
 
+/**
+ * Extended Cypress namespace with our custom commands
+ */
 declare namespace Cypress {
   interface Chainable<Subject> {
     /**
-     * Custom command to set all three security levels at once
-     * @example cy.setSecurityLevels('High', 'Moderate', 'Low')
+     * Set security levels for all three CIA components with strong typing
+     * 
+     * @param availability - The availability security level
+     * @param integrity - The integrity security level
+     * @param confidentiality - The confidentiality security level
+     * @example
+     * cy.setSecurityLevels('High', 'Moderate', 'Low');
      */
     setSecurityLevels(
-      availability: string | null,
-      integrity: string | null,
-      confidentiality: string | null
+      availability?: string | null,
+      integrity?: string | null, 
+      confidentiality?: string | null
     ): Chainable<JQuery<HTMLElement>>;
 
     /**
-     * Custom command to check if the theme is dark or light
-     * @example cy.checkTheme(true) // checks if theme is dark
-     */
-    checkTheme(isDark: boolean): Chainable<void>;
-
-    /**
-     * Custom command to set application state directly
-     * @example cy.setAppState({ darkMode: true })
-     */
-    setAppState(stateChanges: any): Chainable<void>;
-
-    /**
-     * Custom command to check if body text contains the given string
-     * @example cy.containsText('Welcome')
-     */
-    containsText(text: string): Chainable<void>;
-
-    /**
-     * Custom command to log current state of all select elements
-     * @example cy.logCurrentState()
-     */
-    logCurrentState(): Chainable<void>;
-
-    /**
-     * Custom command for safer select operations
-     * @example cy.selectSafe('#mySelect', 'Option 1')
-     */
-    selectSafe(selector: string, value: string): Chainable<void>;
-
-    /**
-     * Custom command to log details about an element
-     * @example cy.logElementDetails('.my-element')
-     */
-    logElementDetails(selector: string): Chainable<void>;
-
-    /**
-     * Custom command for component testing with React
-     * @example cy.mount(<MyComponent />)
-     */
-    mount(component: React.ReactNode): Chainable<any>;
-
-    /**
-     * Safe select command for dropdown interactions
-     * @example cy.get('select').safeSelect('Option 1')
-     */
-    safeSelect(
-      value: string,
-      options?: Partial<Cypress.SelectOptions>
-    ): Chainable<JQuery<HTMLElement>>;
-
-    /**
-     * Custom command to ensure the app is fully loaded before proceeding
-     * @example cy.ensureAppLoaded()
+     * Ensure the application is fully loaded before proceeding
      */
     ensureAppLoaded(): Chainable<JQuery<HTMLElement>>;
 
     /**
-     * Custom command to navigate to a widget by its test ID
-     * @example cy.navigateToWidget(TEST_IDS.WIDGET_SECURITY_SUMMARY)
+     * Find a widget using multiple selector strategies
+     * 
+     * @param widgetName - Name or identifier of the widget to find
+     * @example
+     * cy.findWidget('security-level');
+     * cy.findWidget('cost-estimation');
      */
-    navigateToWidget(testId: string): Chainable<JQuery<HTMLElement>>;
+    findWidget(widgetName: string): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * Verify content patterns exist on the page
+     * 
+     * @param contentPatterns - Array of text or RegExp patterns to verify
+     * @example
+     * cy.verifyContentPresent(['Security', /level/i, 'Compliance']);
+     */
+    verifyContentPresent(
+      contentPatterns: Array<string | RegExp>
+    ): Chainable<void>;
+
+    /**
+     * Verify a widget contains specific content patterns
+     * 
+     * @param widgetName - Name or identifier of the widget
+     * @param contentPatterns - Content patterns to check for
+     * @example
+     * cy.verifyWidgetContent('cost', [/estimate/i, 'ROI']);
+     */
+    verifyWidgetContent(
+      widgetName: string,
+      contentPatterns: Array<string | RegExp>
+    ): Chainable<void>;
+
+    /**
+     * Enhanced security level selection with fallbacks
+     * 
+     * @param category - Which security category to modify
+     * @param level - Security level to select
+     * @example
+     * cy.selectSecurityLevelEnhanced('availability', 'High');
+     */
+    selectSecurityLevelEnhanced(
+      category: "availability" | "integrity" | "confidentiality",
+      level: string
+    ): Chainable<void>;
+
+    /**
+     * Attempts to click a button matching text pattern
+     * 
+     * @param textOrPattern - Text or pattern to match button content
+     * @example
+     * cy.tryClickButton('Save');
+     * cy.tryClickButton(/submit|save/i);
+     */
+    tryClickButton(textOrPattern: string | RegExp): Chainable<boolean>;
+
+    /**
+     * Wait for specific content to appear
+     * 
+     * @param contentPattern - Text or pattern to wait for
+     * @param options - Additional wait options
+     * @example
+     * cy.waitForContent('Success');
+     * cy.waitForContent(/error/i, { timeout: 5000 });
+     */
+    waitForContent(
+      contentPattern: string | RegExp,
+      options?: { timeout: number }
+    ): Chainable<boolean>;
+
+    /**
+     * Makes an element visible for testing
+     */
+    forceVisible(): Chainable<Subject>;
+
+    /**
+     * Takes a screenshot and logs DOM state at failure point
+     * 
+     * @param testName - Name of the test that failed
+     */
+    debugFailure(testName: string): void;
+
+    /**
+     * Logs information about currently visible elements
+     */
+    logVisibleElements(): void;
+
+    /**
+     * Logs all test IDs in the DOM
+     */
+    logAllTestIds(): void;
+
+    /**
+     * Highlights an element temporarily for debugging
+     */
+    highlight(): Chainable<Element>;
+
+    /**
+     * Measures execution time of a Cypress operation
+     * 
+     * @param fn - Function to measure
+     * @param label - Optional label for the measurement
+     */
+    measureTime<T>(fn: () => Chainable<T>, label?: string): Chainable<T>;
+
+    /**
+     * Initialize performance monitoring for the current test
+     */
+    initPerformanceMonitoring(): Chainable<void>;
+    
+    /**
+     * Record a performance metric
+     * @param operation Name of the operation being measured
+     * @param duration Duration of the operation in milliseconds
+     * @param category Optional category for the metric
+     * @param metadata Optional additional data to store with the metric
+     */
+    recordPerformanceMetric(
+      operation: string,
+      duration: number,
+      category?: string,
+      metadata?: Record<string, any>
+    ): Chainable<null>;
+    
+    /**
+     * Measure the execution time of an operation
+     * @param fn Function that returns a Chainable to measure
+     * @param operationName Name for the operation being measured
+     * @param category Optional category for the operation
+     */
+    measureOperation<T>(
+      fn: () => Chainable<T>,
+      operationName: string,
+      category?: string
+    ): Chainable<T>;
+    
+    /**
+     * Generate a performance report for the current test
+     */
+    generatePerformanceReport(): Chainable<any>;
+    
+    /**
+     * Save current performance metrics to disk
+     * @param reason Optional reason for flushing metrics
+     */
+    flushPerformanceMetrics(reason?: string): Chainable<null>;
+    
+    /**
+     * Create a visual performance report in the browser
+     */
+    createVisualPerformanceReport(): Chainable<null>;
+    
+    /**
+     * Start measuring time for an operation
+     * @param label Name of the operation to measure
+     */
+    startMeasurement(label: string): Chainable<void>;
+    
+    /**
+     * End time measurement for an operation and record the result
+     * @param label Name of the operation being measured
+     * @param category Optional category for the operation
+     */
+    endMeasurement(label: string, category?: string): Chainable<number>;
   }
 }

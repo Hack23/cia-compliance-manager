@@ -363,6 +363,180 @@ export function findWidgetByName(widgetName: string) {
   });
 }
 
+/**
+ * Enhanced test helpers for improved test resilience
+ */
+import { SECURITY_LEVELS } from "./constants";
+
+/**
+ * Verifies widget content with more flexible matching strategies
+ * @param widgetSelector Widget selector or name
+ * @param contentPatterns Content patterns to search for
+ * @param options Additional options
+ */
+export function verifyWidgetContent(
+  widgetSelector: string, 
+  contentPatterns: (string | RegExp)[],
+  options: {
+    exactMatch?: boolean;
+    timeout?: number;
+  } = {}
+) {
+  const { exactMatch = false, timeout = 10000 } = options;
+  
+  // Find the widget using our enhanced finder
+  cy.findWidget(widgetSelector)
+    .should('exist', { timeout })
+    .within(() => {
+      // Check each content pattern
+      contentPatterns.forEach(pattern => {
+        if (typeof pattern === 'string') {
+          if (exactMatch) {
+            // Exact string match
+            cy.contains(new RegExp(`^${pattern}$`)).should('exist');
+          } else {
+            // Flexible string match
+            cy.contains(pattern).should('exist');
+          }
+        } else {
+          // RegExp matching
+          cy.contains(pattern).should('exist');
+        }
+      });
+    });
+}
+
+/**
+ * Enhanced function to verify accessibility compliance for a widget
+ * @param widgetSelector Widget selector or name
+ */
+export function verifyWidgetAccessibility(widgetSelector: string) {
+  // Find the widget
+  cy.findWidget(widgetSelector)
+    .scrollIntoView()
+    .within(() => {
+      // Check interactive elements have accessible names
+      cy.get('button, [role="button"], a, [role="link"], select, input')
+        .each($el => {
+          cy.wrap($el).then($element => {
+            const accessibleName = 
+              $element.attr('aria-label') || 
+              $element.attr('aria-labelledby') || 
+              $element.text().trim() ||
+              $element.attr('title') ||
+              $element.attr('aria-placeholder') ||
+              $element.attr('placeholder');
+              
+            // Skip image-only elements that might be decorative
+            const isDecorative = 
+              $element.children('svg, img').length > 0 && 
+              !$element.text().trim();
+              
+            if (!accessibleName && !isDecorative) {
+              cy.log(`Element without accessible name: ${$element.prop('outerHTML')}`);
+            }
+          });
+        });
+        
+      // Check if tabbed interface is accessible
+      cy.get('[role="tab"]').each($tab => {
+        cy.wrap($tab).should('have.attr', 'aria-controls');
+      });
+      
+      cy.get('[role="tabpanel"]').each($panel => {
+        cy.wrap($panel).should('have.attr', 'aria-labelledby');
+      });
+        
+      // Check for proper heading structure
+      cy.get('h1, h2, h3, h4, h5, h6').should('exist');
+    });
+}
+
+/**
+ * Verifies that all widgets respond to security level changes
+ * @param securityLevels Security levels to test
+ */
+export function verifyAllWidgetsRespondToSecurityLevels(
+  initialLevels: [string, string, string],
+  newLevels: [string, string, string]
+) {
+  // Set initial security levels
+  cy.setSecurityLevels(...initialLevels);
+  
+  // Store initial content state
+  const widgetContent: Record<string, string> = {};
+  
+  // List of common widgets to check
+  const widgetsToCheck = [
+    'security-summary',
+    'business-impact',
+    'compliance',
+    'cost',
+    'value-creation',
+    'technical',
+    'radar-chart'
+  ];
+  
+  // Store content for each widget
+  widgetsToCheck.forEach(widget => {
+    cy.findWidget(widget)
+      .scrollIntoView()
+      .invoke('text')
+      .then(text => {
+        widgetContent[widget] = text;
+      });
+  });
+  
+  // Change security levels
+  cy.setSecurityLevels(...newLevels);
+  
+  // Verify content changed for all widgets
+  widgetsToCheck.forEach(widget => {
+    cy.findWidget(widget)
+      .scrollIntoView()
+      .invoke('text')
+      .should(text => {
+        expect(text).not.to.equal(widgetContent[widget]);
+      });
+  });
+}
+
+/**
+ * A more comprehensive test for checking a widget's response to security level changes
+ * @param widgetSelector Widget selector or name
+ */
+export function comprehensiveSecurityLevelTest(widgetSelector: string) {
+  // Test with all security level combinations
+  const levels = [
+    SECURITY_LEVELS.NONE,
+    SECURITY_LEVELS.LOW,
+    SECURITY_LEVELS.MODERATE,
+    SECURITY_LEVELS.HIGH,
+    SECURITY_LEVELS.VERY_HIGH
+  ];
+  
+  // Store initial content with lowest security
+  cy.setSecurityLevels(levels[0], levels[0], levels[0]);
+  
+  cy.findWidget(widgetSelector)
+    .scrollIntoView()
+    .invoke('text')
+    .then(initialText => {
+      // Set highest security
+      cy.setSecurityLevels(
+        levels[levels.length-1], 
+        levels[levels.length-1],
+        levels[levels.length-1]
+      );
+      
+      // Verify content has changed
+      cy.findWidget(widgetSelector)
+        .scrollIntoView()
+        .invoke('text')
+        .should('not.equal', initialText);
+    });
+}
+
 // Add to exports
 export default {
   interactWithElement,
@@ -376,4 +550,8 @@ export default {
   verifyTextContent,
   findElementByMultipleTestIds,
   findWidgetByName,
+  verifyWidgetContent,
+  verifyWidgetAccessibility,
+  verifyAllWidgetsRespondToSecurityLevels,
+  comprehensiveSecurityLevelTest
 };

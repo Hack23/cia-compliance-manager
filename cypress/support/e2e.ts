@@ -5,14 +5,37 @@ import { TEST_IDS } from "../../src/constants/testIds";
 // Import debug helpers
 import "./debug-helpers";
 
+// Update any imports from common-patterns to test-patterns
+import { 
+  verifySecurityLevelAffectsContent, 
+  testTabNavigation, 
+  testAccessibility
+} from "./test-patterns";
+// Or use the default export:
+// import testPatterns from "./test-patterns";
+
 Cypress.on("uncaught:exception", (err) => {
   console.log("Uncaught exception:", err);
+  
+  // Check for "require is not defined" errors and provide actionable feedback
+  if (err && err.message && err.message.includes('require is not defined')) {
+    console.error(`
+      ERROR: "require is not defined" detected. 
+      This is a Node.js function not available in browsers.
+      Solution: Replace require() with ES module imports in your test files.
+      Example: Change "const x = require('y')" to "import x from 'y'"
+    `);
+  }
+  
+  // Prevent test failure on uncaught exceptions for more graceful debugging
   return false;
 });
 
-Cypress.Commands.add("mount", mount);
+// Fix type for mount command
+// Use an explicit type assertion to avoid TypeScript errors
+Cypress.Commands.add("mount", mount as unknown as Cypress.CommandFn<"mount">);
 
-Cypress.Commands.add("checkTheme", (isDark: boolean) => {
+Cypress.Commands.add("checkTheme", (isDark: boolean): void => {
   if (isDark) {
     cy.get("#root").should("have.class", "dark");
     cy.get(`[data-testid="${TEST_IDS.THEME_TOGGLE}"]`).should(
@@ -138,8 +161,8 @@ before(() => {
   });
 });
 
-Cypress.Commands.add("setAppState", (stateChanges) => {
-  cy.window().then((win) => {
+Cypress.Commands.add("setAppState", (stateChanges: Record<string, any>): Cypress.Chainable<null> => {
+  return cy.window().then((win) => {
     const event = new CustomEvent("test:set-values", {
       detail: stateChanges,
     });
@@ -148,11 +171,11 @@ Cypress.Commands.add("setAppState", (stateChanges) => {
   });
 });
 
-Cypress.Commands.add("containsText", (text) => {
+Cypress.Commands.add("containsText", (text: string): void => {
   cy.get("body").invoke("text").should("include", text);
 });
 
-Cypress.Commands.add("logCurrentState", () => {
+Cypress.Commands.add("logCurrentState", (): void => {
   cy.log("------ Current App State ------");
   cy.get("select").then(($selects) => {
     $selects.each((i, el) => {
@@ -161,7 +184,7 @@ Cypress.Commands.add("logCurrentState", () => {
   });
 });
 
-Cypress.Commands.add("selectSafe", (selector, value) => {
+Cypress.Commands.add("selectSafe", (selector: string, value: string): void => {
   cy.get(selector, { timeout: 5000 })
     .should("exist")
     .scrollIntoView()
@@ -169,7 +192,7 @@ Cypress.Commands.add("selectSafe", (selector, value) => {
     .select(value, { force: true });
 });
 
-Cypress.Commands.add("logElementDetails", (selector) => {
+Cypress.Commands.add("logElementDetails", (selector: string): void => {
   cy.get(selector).then(($el) => {
     cy.log(`Element ${selector}:`);
     cy.log(`- Visible: ${$el.is(":visible")}`);
@@ -189,17 +212,10 @@ before(() => {
 });
 
 before(() => {
-  // Create results directory if it doesn't exist
-  try {
-    const fs = require("fs");
-    const resultsDir = "cypress/results";
-    if (!fs.existsSync(resultsDir)) {
-      fs.mkdirSync(resultsDir, { recursive: true });
-      console.log(`Created results directory: ${resultsDir}`);
-    }
-  } catch (err) {
-    console.log("Error creating results directory:", err);
-  }
+  // Create results directory using Cypress task instead of direct fs access
+  cy.task("ensureDir", "cypress/results").then(result => {
+    console.log(`Results directory status: ${result}`);
+  });
 });
 
 import "cypress-wait-until";
@@ -282,4 +298,110 @@ interface LoadAttributes {
 
 Cypress.on("window:load", (attributes: LoadAttributes) => {
   // Your window load handling logic here
+});
+
+// Enhanced error handling for test failures
+Cypress.on("fail", (error, runnable) => {
+  // Log test failure with enhanced debug information
+  cy.log(`Test failed: ${runnable.title}`);
+  
+  // Take screenshots with more descriptive names
+  const testPath = Cypress.spec.relative.replace(/\.cy\.ts$/, '');
+  const screenshotName = `${testPath}/${runnable.title.replace(/\s+/g, "-")}-failure`;
+  
+  cy.screenshot(screenshotName, { capture: 'viewport' });
+  
+  // Log more details about the error
+  cy.log(`Error name: ${error.name}`);
+  cy.log(`Error message: ${error.message}`);
+  
+  // For visibility issues, try to debug the element structure
+  if (error.message.includes("not visible") || error.message.includes("not found")) {
+    cy.log("Element visibility issue detected. Adding debug information...");
+    cy.logVisibleElements();
+    cy.logAllTestIds();
+  }
+  
+  // Log important DOM information
+  cy.document().then((doc) => {
+    cy.log(`Page title: ${doc.title}`);
+    cy.log(`Body classes: ${doc.body.className}`);
+    cy.log(`Number of [data-testid] elements: ${doc.querySelectorAll('[data-testid]').length}`);
+    cy.log(`URL at failure: ${doc.location.href}`);
+    
+    // Check for any error messages in the DOM
+    const errorElements = doc.querySelectorAll('.error, [role="alert"], [class*="error"]');
+    if (errorElements.length > 0) {
+      cy.log(`Found ${errorElements.length} error elements in the DOM`);
+      Array.from(errorElements).forEach((el, i) => {
+        cy.log(`Error element ${i+1}: ${el.textContent?.trim()}`);
+      });
+    }
+  });
+  
+  // Check for console errors
+  cy.window().then((win) => {
+    // If there are any console errors captured, log them
+    if (win.consoleErrors && win.consoleErrors.length) {
+      cy.log(`Found ${win.consoleErrors.length} console errors:`);
+      win.consoleErrors.forEach((err, i) => {
+        cy.log(`Console error ${i+1}: ${err}`);
+      });
+    }
+  });
+  
+  // Throw the original error to fail the test
+  throw error;
+});
+
+// Enhanced setup for all tests
+before(() => {
+  // Capture console errors
+  cy.window().then((win) => {
+    win.consoleErrors = [];
+    const originalError = win.console.error;
+    win.console.error = (...args) => {
+      win.consoleErrors.push(args.join(' '));
+      originalError.apply(win.console, args);
+    };
+  });
+  
+  // Ensure test results directory exists and is ready
+  cy.task('writeFile', {
+    path: 'cypress/results/test-setup-verification.txt',
+    content: `Test setup verified at ${new Date().toISOString()}`
+  });
+  
+  // Reset JUnit results at the start of test run
+  cy.task('resetJunitResults');
+});
+
+// Add JUnit file verification after all tests complete
+after(() => {
+  cy.task("listJunitFiles").then((files) => {
+    if (Array.isArray(files) && files.length > 0) {
+      console.log(
+        `Found ${files.length} JUnit XML files in the results directory`
+      );
+      files.forEach((file) => console.log(`  - ${file}`));
+      
+      // Verify JUnit file integrity by checking basic XML structure
+      if (typeof files[0] === 'string') {
+        cy.task('readFile', { path: files[0] }).then((result) => {
+          if (result.content && result.content.includes('<testsuite')) {
+            console.log('JUnit XML format appears valid');
+          } else {
+            console.warn('⚠️ JUnit XML may have format issues - check report content');
+          }
+        });
+      }
+    } else {
+      console.warn(
+        "⚠️ No JUnit XML files found! Reporting may not be working correctly."
+      );
+    }
+  });
+  
+  // Log final test status
+  cy.log(`Test run completed at ${new Date().toISOString()}`);
 });

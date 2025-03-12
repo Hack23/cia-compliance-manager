@@ -197,3 +197,6 @@ public/mockServiceWorker.js
 test-results.xml
 test-results.json
 test-results.json
+
+# ESLint
+.eslintcache

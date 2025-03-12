@@ -34,7 +34,16 @@
     "docs:dependencies": "mkdir -p docs/dependencies && depcruise --config .dependency-cruiser.cjs --output-type dot src | dot -T svg > docs/dependencies/module-dependencies.svg || echo 'Dependency diagram generation failed - continuing' && touch docs/dependencies/module-dependencies.svg",
     "docs:bundle": "npm run docs && npm run docs:uml && npm run docs:dependencies && npm run docs:architecture",
     "docs:architecture": "node scripts/generate-architecture-diagrams.js",
-    "docs:coverage-summary": "echo 'Documentation coverage report is not available.' > docs/coverage-summary.txt"
+    "docs:coverage-summary": "echo 'Documentation coverage report is not available.' > docs/coverage-summary.txt",
+    "fix:cypress-config": "node scripts/fix-cypress-config.js",
+    "cypress:clean": "rm -rf cypress/results/* && npm run fix:cypress-config",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:src": "eslint ./src",
+    "lint:cypress": "eslint ./cypress",
+    "lint:ci": "eslint . --max-warnings 0",
+    "pretest": "npm run lint",
+    "prebuild": "npm run lint"
   },
   "browserslist": {
     "production": [
@@ -49,7 +58,8 @@
     ]
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "4.0.12",
+    "@cypress/webpack-preprocessor": "6.0.2",
+    "@tailwindcss/postcss": "4.0.13",
     "@testing-library/cypress": "^10.0.3",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.2.0",
@@ -65,8 +75,8 @@
     "canvas": "3.1.0",
     "cross-env": "^7.0.3",
     "cypress": "^14.1.0",
-    "cypress-multi-reporters": "^2.0.5",
     "cypress-junit-reporter": "^1.3.1",
+    "cypress-multi-reporters": "^2.0.5",
     "cypress-react-selector": "^3.0.0",
     "cypress-real-events": "1.14.0",
     "cypress-vite": "^1.6.0",
@@ -76,7 +86,7 @@
     "madge": "^8.0.0",
     "postcss": "^8.5.3",
     "start-server-and-test": "^2.0.10",
-    "tailwindcss": "^4.0.11",
+    "tailwindcss": "^4.0.13",
     "typedoc": "^0.27.9",
     "typedoc-plugin-coverage": "^3.4.1",
     "typedoc-plugin-markdown": "^4.4.2",
@@ -84,7 +94,20 @@
     "typedoc-plugin-mermaid": "^1.12.0",
     "vite": "^6.2.1",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "3.0.8"
+    "vitest": "3.0.8",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-cypress": "^4.2.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-testing-library": "^7.1.1",
+    "eslint-plugin-vitest": "^0.5.4",
+    "@typescript-eslint/eslint-plugin": "^8.26.1",
+    "@typescript-eslint/parser": "^8.26.1",
+    "typescript-eslint": "^8.26.1",
+    "globals": "^16.0.0"
   },
   "engines": {
     "node": ">=20.0.0",

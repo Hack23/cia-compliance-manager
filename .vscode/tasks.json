@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": ["$eslint-stylish"],
+      "label": "npm: lint",
+      "detail": "eslint ."
+    },
+    {
+      "type": "npm",
+      "script": "lint:src",
+      "problemMatcher": ["$eslint-stylish"],
+      "label": "npm: lint:src",
+      "detail": "eslint ./src"
+    },
+    {
+      "type": "npm",
+      "script": "lint:cypress",
+      "problemMatcher": ["$eslint-stylish"],
+      "label": "npm: lint:cypress",
+      "detail": "eslint ./cypress"
+    },
+    {
+      "type": "npm",
+      "script": "lint:fix",
+      "problemMatcher": ["$eslint-stylish"],
+      "label": "npm: lint:fix",
+      "detail": "eslint . --fix"
+    },
+    {
+      "type": "shell",
+      "command": "cd ${workspaceFolder} && npx eslint .",
+      "problemMatcher": ["$eslint-stylish"],
+      "label": "shell: eslint (all)",
+      "detail": "Run ESLint on all files"
+    },
+    {
+      "type": "shell",
+      "command": "cd ${workspaceFolder} && npx eslint ./src",
+      "problemMatcher": ["$eslint-stylish"],
+      "label": "shell: eslint (src)",
+      "detail": "Run ESLint on src folder"
+    }
+  ]
+}

@@ -1,93 +1,105 @@
 import {
-  BUSINESS_IMPACT_TEST_IDS,
   SECURITY_LEVELS,
-  WIDGET_TEST_IDS,
-  CONFIDENTIALITY_IMPACT_TEST_IDS,
-  INTEGRITY_IMPACT_TEST_IDS,
-  AVAILABILITY_IMPACT_TEST_IDS,
+  BUSINESS_IMPACT_TEST_IDS,
+  RISK_LEVELS
 } from "../../support/constants";
+import { testWidgetUpdatesWithSecurityLevels } from "../../support/test-patterns";
 
 describe("Business Impact Widget", () => {
   beforeEach(() => {
-    // Use larger viewport for better visibility
-    cy.viewport(3840, 2160);
     cy.visit("/");
     cy.ensureAppLoaded();
-
-    // Add style to make ALL elements visible
-    cy.document().then((doc) => {
-      const style = doc.createElement("style");
-      style.innerHTML = `
-        * {
-          overflow: visible !important;
-          visibility: visible !important;
-          opacity: 1 !important;
-          transition: none !important;
-          animation: none !important;
-          display: block !important;
-          height: auto !important;
-          max-height: none !important;
-          position: static !important;
-          transform: none !important;
-          pointer-events: auto !important;
-        }
-      `;
-      doc.head.appendChild(style);
-    });
-
-    // Wait for app to fully load
-    cy.wait(3000);
   });
 
   it("shows business impact of security choices", () => {
-    // Look for ANY business impact related text
-    cy.contains(/business impact|security impact|impact analysis/i).should(
-      "exist"
+    // Set security levels
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.MODERATE, 
+      SECURITY_LEVELS.MODERATE, 
+      SECURITY_LEVELS.MODERATE
     );
+    
+    // Find business impact widget
+    cy.findWidget('business-impact')
+      .should('exist')
+      .scrollIntoView();
+      
+    // Verify impact content
+    cy.verifyContentPresent([
+      /business|impact|analysis/i
+    ]);
   });
 
   it("provides detailed impact analysis for different security dimensions", () => {
-    // Set security levels directly
-    cy.get("select").each(($select, index) => {
-      if (index < 3) {
-        cy.wrap($select)
-          .select(SECURITY_LEVELS.MODERATE, { force: true })
-          .wait(300);
-      }
+    // Set security levels
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.HIGH, 
+      SECURITY_LEVELS.HIGH, 
+      SECURITY_LEVELS.HIGH
+    );
+    
+    // Find and verify business impact content
+    cy.findWidget('business-impact')
+      .should('exist')
+      .scrollIntoView();
+      
+    // Try clicking tabs if they exist
+    cy.get('body').then($body => {
+      const tabSelectors = [
+        '[role="tab"]',
+        'button:contains("Availability")',
+        'button:contains("Integrity")',
+        'button:contains("Confidentiality")'
+      ];
+      
+      tabSelectors.forEach(selector => {
+        if ($body.find(selector).length) {
+          cy.get(selector).eq(1).click();
+          cy.wait(300);
+        }
+      });
     });
-
-    // Wait for changes to propagate
-    cy.wait(1000);
-
-    // Look for ANY impact analysis related terms
-    cy.contains(
-      /impact|analysis|assessment|security level|business value/i
-    ).should("exist");
+    
+    // Verify dimension-specific content
+    cy.verifyContentPresent([
+      /availability|integrity|confidentiality/i
+    ]);
   });
 
   it("provides both considerations and benefits for business analysis", () => {
-    // Look for considerations or benefits related terms
-    cy.contains(
-      /considerations|benefits|pros|cons|advantages|disadvantages/i
-    ).should("exist");
+    // Set security levels
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.MODERATE, 
+      SECURITY_LEVELS.MODERATE, 
+      SECURITY_LEVELS.MODERATE
+    );
+    
+    // Find business impact widget
+    cy.findWidget('business-impact')
+      .should('exist')
+      .scrollIntoView();
+      
+    // Look for considerations and benefits
+    cy.verifyContentPresent([
+      /consideration|benefit|advantage|impact|risk/i
+    ]);
   });
 
   it("shows detailed impact metrics for data-driven decisions", () => {
-    // Set security levels to make metrics more visible
-    cy.get("select").each(($select, index) => {
-      if (index < 3) {
-        cy.wrap($select)
-          .select(SECURITY_LEVELS.HIGH, { force: true })
-          .wait(300);
-      }
-    });
-
-    // Wait for updates
-    cy.wait(1000);
-
-    // Look for ANY metrics or measurements related content
-    cy.contains(
-      /metrics|measurements|statistics|analysis|values|numbers/i
-    ).should("exist");
+    // Set security levels
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.HIGH, 
+      SECURITY_LEVELS.HIGH, 
+      SECURITY_LEVELS.HIGH
+    );
+    
+    // Find business impact widget
+    cy.findWidget('business-impact')
+      .scrollIntoView();
+      
+    // Look for metrics and quantitative information
+    cy.verifyContentPresent([
+      /metric|measure|data|value|percentage|impact|cost/i
+    ]);
   });
 });

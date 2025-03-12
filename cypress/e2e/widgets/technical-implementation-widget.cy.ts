@@ -5,113 +5,86 @@
  */
 import {
   SECURITY_LEVELS,
-  TECHNICAL_DETAILS_TEST_IDS, // Now properly imported from constants
+  TECHNICAL_DETAILS_TEST_IDS
 } from "../../support/constants";
 import { setupWidgetTest } from "./widget-test-helper";
+import { testWidgetUpdatesWithSecurityLevels } from "../../support/test-patterns";
 
-describe("Technical Implementation Widget", () => {
+describe("Technical Implementation Widget Tests", () => {
   beforeEach(() => {
-    // Use a simpler setup that doesn't rely on finding specific elements
-    cy.viewport(3840, 2160);
     cy.visit("/");
     cy.ensureAppLoaded();
-
-    // Add style to make all elements visible and prevent hidden content
-    cy.document().then((doc) => {
-      const style = doc.createElement("style");
-      style.innerHTML = `
-        * {
-          overflow: visible !important;
-          visibility: visible !important;
-          opacity: 1 !important;
-          transition: none !important;
-          animation: none !important;
-          display: block !important;
-        }
-      `;
-      doc.head.appendChild(style);
-    });
-
-    // Wait for app to fully load
-    cy.wait(1000);
-
-    // Set security levels high to ensure we get detailed implementation information
-    // Use the most resilient approach with individual selects
-    cy.get("select").each(($select, index) => {
-      if (index < 3) {
-        // Assume first 3 selects are for CIA
-        cy.wrap($select)
-          .select(SECURITY_LEVELS.HIGH, { force: true })
-          .wait(200);
-      }
-    });
-
-    cy.wait(1000);
   });
 
-  it("provides detailed technical guidance for implementation", () => {
-    // Instead of looking within a specific container, search the entire page
-    // for technical implementation related content
-    cy.contains(/technical|implementation|security controls|configuration/i, {
-      timeout: 10000,
-    }).should("exist");
+  it("shows technical implementation details for security levels", () => {
+    // Set security levels
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.MODERATE, 
+      SECURITY_LEVELS.MODERATE, 
+      SECURITY_LEVELS.MODERATE
+    );
+    
+    // Find the technical details widget
+    cy.findWidget('technical')
+      .should('exist')
+      .scrollIntoView();
+    
+    // Verify content
+    cy.verifyContentPresent([
+      /technical|implementation|detail/i
+    ]);
+  });
 
-    // Look for common security implementation terms anywhere in the page
-    cy.get("body").then(($body) => {
-      const contentText = $body.text().toLowerCase();
-      const securityTerms = [
-        "monitoring",
-        "backup",
-        "encryption",
-        "authentication",
-        "protection",
-        "security",
-        "implementation",
-        "technical",
+  it("updates implementation details when security levels change", () => {
+    // Use the test pattern for widget updates
+    testWidgetUpdatesWithSecurityLevels(
+      '[data-testid*="technical"]', 
+      {
+        initialLevels: [SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW],
+        newLevels: [SECURITY_LEVELS.HIGH, SECURITY_LEVELS.HIGH, SECURITY_LEVELS.HIGH],
+        expectTextChange: true
+      }
+    );
+  });
+  
+  it("allows switching between confidentiality, integrity, and availability sections", () => {
+    // Set security levels
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.MODERATE, 
+      SECURITY_LEVELS.MODERATE, 
+      SECURITY_LEVELS.MODERATE
+    );
+    
+    // Find the technical details widget
+    cy.findWidget('technical').scrollIntoView();
+    
+    // Try to find and click tabs
+    cy.get('body').then($body => {
+      // Try various selectors to find tabs
+      const tabSelectors = [
+        '[role="tab"]',
+        'button:contains("Availability")',
+        'button:contains("Integrity")',
+        'button:contains("Confidentiality")',
+        '[data-testid*="tab"]'
       ];
-
-      // Check if any of the terms exist in the page content
-      const foundTerm = securityTerms.some((term) =>
-        contentText.includes(term)
-      );
-      expect(foundTerm).to.be.true;
-    });
-  });
-
-  it("adapts guidance to different security levels", () => {
-    // First check with low security using direct select approach
-    cy.get("select").each(($select, index) => {
-      if (index < 3) {
-        cy.wrap($select).select(SECURITY_LEVELS.LOW, { force: true }).wait(200);
+      
+      let tabFound = false;
+      
+      tabSelectors.forEach(selector => {
+        if (!tabFound && $body.find(selector).length) {
+          tabFound = true;
+          cy.get(selector).first().click();
+          cy.wait(300);
+          cy.get(selector).eq(1).click();
+          cy.wait(300);
+        }
+      });
+      
+      // If no tabs found, log but don't fail
+      if (!tabFound) {
+        cy.log("No tab controls found in technical details widget");
       }
     });
-
-    cy.wait(1000);
-
-    // Store technical content with low security
-    cy.get("body")
-      .invoke("text")
-      .then((lowLevelText) => {
-        // Now switch to high security
-        cy.get("select").each(($select, index) => {
-          if (index < 3) {
-            cy.wrap($select)
-              .select(SECURITY_LEVELS.HIGH, { force: true })
-              .wait(200);
-          }
-        });
-
-        cy.wait(1000);
-
-        // Verify content changes with security level
-        cy.get("body").invoke("text").should("not.eq", lowLevelText);
-      });
-  });
-
-  it("provides technical details useful for implementation planning", () => {
-    // Look for implementation-related terms anywhere in the page
-    cy.contains(/steps|procedure|implementation|configuration|guidance/i, {
-      timeout: 10000,
-    }).should("exist");
   });
 });

@@ -13,6 +13,7 @@ import {
   // Add these missing imports
   VALUE_CREATION_TEST_IDS,
   TECHNICAL_DETAILS_TEST_IDS,
+  SECURITY_LEVELS,
 } from "../../support/constants";
 
 /**
@@ -40,6 +41,7 @@ export function ensureWidgetVisible(widgetId: string) {
 
 /**
  * Standard setup for widget tests - handles visibility and scrolling
+ * 
  * @param widgetId The test ID of the widget or a partial ID to search for
  */
 export function setupWidgetTest(widgetId: string) {
@@ -254,3 +256,85 @@ export function getWidgetId(primaryId: string): string[] {
     `${featureName}-section`,
   ];
 }
+
+/**
+ * Common test for security level changes affecting widget content
+ * 
+ * @param widgetIdentifier Name or test ID of the widget
+ */
+export function testSecurityLevelChanges(widgetIdentifier: string) {
+  // First set low security and capture initial state
+  cy.setSecurityLevels(
+    SECURITY_LEVELS.LOW,
+    SECURITY_LEVELS.LOW,
+    SECURITY_LEVELS.LOW
+  );
+  
+  // Save initial content
+  cy.findWidget(widgetIdentifier).invoke('text').then(initialContent => {
+    // Change to high security
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH
+    );
+    
+    // Verify content changed
+    cy.findWidget(widgetIdentifier)
+      .invoke('text')
+      .should('not.equal', initialContent);
+  });
+}
+
+/**
+ * Verifies widget has expected tabs and tests tab switching
+ * 
+ * @param widgetIdentifier Name or test ID of the widget
+ * @param tabNames Array of expected tab names/patterns
+ */
+export function testWidgetTabSwitching(
+  widgetIdentifier: string, 
+  tabNames: (string | RegExp)[]
+) {
+  cy.findWidget(widgetIdentifier).within(() => {
+    // Find tab elements using multiple strategies
+    const selectors = [
+      '[role="tab"]',
+      'button[class*="tab"]',
+      'button:contains("Availability"), button:contains("Integrity"), button:contains("Confidentiality")'
+    ];
+    
+    // Try each selector strategy
+    cy.get('body').then($body => {
+      let tabsFound = false;
+      
+      selectors.some(selector => {
+        if ($body.find(selector).length) {
+          cy.get(selector).should('have.length.at.least', 2);
+          
+          // Click tabs in sequence with waits between
+          cy.get(selector).each(($tab, index) => {
+            if (index > 0 && index < 3) { // Skip first tab and limit to 3 tabs
+              cy.wrap($tab).click({force: true});
+              cy.wait(300); // Wait for content to update
+            }
+          });
+          
+          tabsFound = true;
+          return true; // Break the loop
+        }
+        return false;
+      });
+      
+      if (!tabsFound) {
+        cy.log("No tabs found in widget - this may be expected if the widget doesn't use tabs");
+      }
+    });
+  });
+}
+
+export default {
+  setupWidgetTest,
+  testSecurityLevelChanges,
+  testWidgetTabSwitching
+};

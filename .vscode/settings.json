@@ -119,8 +119,15 @@
   "problems.showCurrentInStatus": true,
 
   // Eslint settings - enhanced
-  "eslint.validate": ["typescript", "typescriptreact"],
+  "eslint.validate": ["typescript", "typescriptreact", "javascript", "javascriptreact"],
+  "eslint.enable": true,
+  "eslint.format.enable": true,
   "eslint.run": "onType",
+  "eslint.workingDirectories": [
+    { "mode": "auto" },
+    "./src",
+    "./cypress"
+  ],
   "eslint.codeActionsOnSave.rules": [
     "@typescript-eslint/no-unused-vars",
     "@typescript-eslint/no-explicit-any",

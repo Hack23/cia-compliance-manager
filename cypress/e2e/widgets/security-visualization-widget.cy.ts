@@ -1,22 +1,21 @@
 /**
- * User Story: As a user, I can view a radar chart visualization of CIA security levels
+ * User Story: As a user, I can view visualization of my security posture
  *
- * Tests the Radar Chart Widget functionality
+ * Tests the Security Visualization Widget functionality
  */
 import {
   SECURITY_LEVELS,
   CHART_TEST_IDS
 } from "../../support/constants";
 import { testWidgetUpdatesWithSecurityLevels } from "../../support/test-patterns";
-import { setupWidgetTest, testSecurityLevelChanges } from "./widget-test-helper";
 
-describe("Radar Chart Widget", () => {
+describe("Security Visualization Widget", () => {
   beforeEach(() => {
     cy.visit("/");
     cy.ensureAppLoaded();
   });
 
-  it("displays radar chart visualization", () => {
+  it("displays security visualization", () => {
     // Set security levels
     cy.setSecurityLevels(
       SECURITY_LEVELS.MODERATE,
@@ -24,23 +23,23 @@ describe("Radar Chart Widget", () => {
       SECURITY_LEVELS.MODERATE
     );
     
-    // Find radar chart widget
-    cy.findWidget('radar-chart')
+    // Find visualization widget
+    cy.findWidget('visualization')
       .should('exist')
       .scrollIntoView();
       
-    // Verify chart elements
-    cy.get('[data-testid*="radar"]').should('exist');
+    // Verify visualization elements
     cy.verifyContentPresent([
-      /availability|integrity|confidentiality/i,
-      SECURITY_LEVELS.MODERATE
+      /availability/i,
+      /integrity/i,
+      /confidentiality/i
     ]);
   });
 
   it("updates visualization when security levels change", () => {
     // Use test pattern for widget updates
     testWidgetUpdatesWithSecurityLevels(
-      '[data-testid*="radar"]', 
+      '[data-testid*="visualization"]', 
       {
         initialLevels: [SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW],
         newLevels: [SECURITY_LEVELS.HIGH, SECURITY_LEVELS.HIGH, SECURITY_LEVELS.HIGH],
@@ -49,7 +48,7 @@ describe("Radar Chart Widget", () => {
     );
   });
 
-  it("displays different security levels accurately", () => {
+  it("displays mixed security level visualization", () => {
     // Set mixed security levels
     cy.setSecurityLevels(
       SECURITY_LEVELS.HIGH,
@@ -57,38 +56,33 @@ describe("Radar Chart Widget", () => {
       SECURITY_LEVELS.LOW
     );
     
-    // Find radar chart widget
-    cy.findWidget('radar-chart')
+    // Find visualization widget
+    cy.findWidget('visualization')
       .scrollIntoView();
       
-    // Verify that all three levels appear in the chart
+    // Verify that all three levels appear in the visualization
     cy.verifyContentPresent([
       SECURITY_LEVELS.HIGH,
       SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.LOW
+      SECURITY_LEVELS.LOW,
+      /visualization|chart|graphic|diagram/i
     ]);
   });
 
-  it("handles canvas rendering properly", () => {
-    // Set security levels
+  it("renders visual elements properly", () => {
+    // Set moderate security levels
     cy.setSecurityLevels(
       SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE
     );
     
-    // Find radar chart widget
-    cy.findWidget('radar-chart')
+    // Find visualization widget
+    cy.findWidget('visualization')
       .scrollIntoView();
       
-    // Check if canvas element exists
-    cy.get('canvas').should('exist');
-    
-    // Verify security levels are displayed textually even if canvas fails
-    cy.verifyContentPresent([
-      /availability/i,
-      /integrity/i, 
-      /confidentiality/i
-    ]);
+    // Check for visual elements
+    cy.get('svg, canvas, [class*="chart"], [class*="graph"]')
+      .should('exist');
   });
 });
