@@ -9,9 +9,10 @@ import {
 
 // Fix for findSecurityLevelControls command
 Cypress.Commands.add("findSecurityLevelControls", () => {
-  // Try multiple selector strategies
+  // Try multiple selector strategies, updated to match DOM
   const selectors = [
-    '[data-testid="security-level-controls"]',
+    '[data-testid="security-level-selector"]', // Primary ID from DOM analysis
+    '[data-testid="widget-security-level-selection"]', // Parent widget from DOM
     '[data-testid*="security-level"]',
     '[data-testid="security-controls"]',
     '[data-testid*="security"][data-testid*="level"]',
@@ -128,133 +129,59 @@ Cypress.Commands.add(
   }
 );
 
-// Fix for findWidget command
+// Improved findWidget command with more sophisticated DOM analysis
 Cypress.Commands.add("findWidget", (widgetName: string) => {
   // Track attempts for better error reporting
   const attemptedSelectors: string[] = [];
   const startTime = performance.now();
 
+  // Import the getWidgetId function from widget-test-helper
+  const { getWidgetId } = require("../e2e/widgets/widget-test-helper");
+
   return cy.get("body").then(($body) => {
-    // Normalize widget name to improve matching
-    const normalizedName = widgetName.toLowerCase().replace(/[^a-z0-9]/g, "");
+    // Get potential widget IDs from the helper function
+    const possibleIds = getWidgetId(widgetName);
 
-    // Try standard widget prefix first
-    const prefixedId = `${WIDGET_PREFIXES.PREFIX_BASE}${normalizedName}`;
-
-    // Build comprehensive list of selectors to try
-    const selectors = [
-      // Exact test ID matches
-      `[data-testid="widget-${widgetName}"]`,
-      `[data-testid="${WIDGET_PREFIXES.PREFIX_BASE}${widgetName}"]`,
-      // Partial matches with contains
-      `[data-testid*="${widgetName}"]`,
-      `[data-testid*="${normalizedName}"]`,
-      // Matches by attribute
-      `[data-widget-name*="${widgetName}" i]`,
-      `[data-component*="${widgetName}" i]`,
-      `[data-cy*="${widgetName}" i]`,
-      // Matches by aria attributes
-      `[aria-label*="${widgetName}" i]`,
-      // Matches by role with accessible name
-      `[role="region"][aria-label*="${widgetName}" i]`,
-      // Matches by heading content (more specific to more general)
-      `h2:contains("${widgetName}")`,
-      `h3:contains("${widgetName}")`,
-      `h4:contains("${widgetName}")`,
-      `div.widget-header:contains("${widgetName}")`,
-      `div.widget-title:contains("${widgetName}")`,
-      // Class-based fallbacks
-      `.widget-${normalizedName}`,
-      `.${normalizedName}-widget`,
-      `.widget:contains("${widgetName}")`,
-      // Matches by any content (last resort)
-      `div:contains("${widgetName}")`,
-    ];
-
-    // Try each selector in order
-    for (const selector of selectors) {
+    // Try each potential widget ID
+    for (const id of possibleIds) {
+      const selector = `[data-testid="${id}"]`;
       attemptedSelectors.push(selector);
-      if ($body.find(selector).length) {
-        // Found match - record performance metric
-        const duration = performance.now() - startTime;
-        cy.task("logPerformance", {
-          operation: "findWidget",
-          duration,
-          widgetName,
-          matchedSelector: selector,
-        }).then(
-          () => {
-            // Success handler - do nothing
-          },
-          { timeout: 4000 } // Add timeout option as second parameter
-        );
 
-        cy.log(
-          `Found widget "${widgetName}" using selector: ${selector} (${duration.toFixed(
-            2
-          )}ms)`
-        );
+      if ($body.find(selector).length) {
+        cy.log(`Found widget "${widgetName}" using selector: ${selector}`);
         return cy.get(selector).first();
       }
     }
 
-    // Try flexible ID matching from predefined groups
-    // Safely check if FLEXIBLE_TEST_IDS contains the key
-    const flexibleKey = widgetName.toUpperCase();
-    const flexibleIds =
-      FLEXIBLE_TEST_IDS &&
-      typeof FLEXIBLE_TEST_IDS === "object" &&
-      flexibleKey in FLEXIBLE_TEST_IDS
-        ? (FLEXIBLE_TEST_IDS as any)[flexibleKey]
-        : undefined;
-
-    if (flexibleIds) {
-      for (const id of flexibleIds) {
-        const flexibleSelector = `[data-testid="${id}"]`;
-        attemptedSelectors.push(flexibleSelector);
-        if ($body.find(flexibleSelector).length) {
-          const duration = performance.now() - startTime;
-          cy.task("logPerformance", {
-            operation: "findWidget",
-            duration,
-            widgetName,
-            matchedSelector: flexibleSelector,
-          }).then(
-            () => {
-              // Success handler - do nothing
-            },
-            { timeout: 4000 } // Add timeout option as second parameter
-          );
-
-          cy.log(
-            `Found widget using flexible ID: ${id} (${duration.toFixed(2)}ms)`
-          );
-          return cy.get(flexibleSelector).first();
-        }
-      }
-    }
-
-    // Log available widgets to help with debugging
-    const availableWidgets = Array.from($body.find("[data-testid]"))
+    // If still not found, log available test IDs for better debugging
+    const availableTestIds = Array.from($body.find("[data-testid]"))
       .map((el) => el.getAttribute("data-testid"))
       .filter(
-        (id) => id && (id.includes("widget") || id.includes("component"))
+        (id) =>
+          id && (id.includes("widget") || id.includes(widgetName.toLowerCase()))
       );
 
     cy.log(
-      `Widget "${widgetName}" not found. Available widgets: ${availableWidgets
-        .join(", ")
-        .substring(0, 100)}...`
-    );
-    cy.log(
-      `Attempted selectors: ${attemptedSelectors
-        .join(", ")
-        .substring(0, 100)}...`
+      `Available testIds containing 'widget' or '${widgetName}': ${availableTestIds.join(
+        ", "
+      )}`
     );
 
-    // Return a placeholder element that satisfies the HTMLElement type
-    return cy.get("html") as unknown as Cypress.Chainable<JQuery<HTMLElement>>;
-  }) as Cypress.Chainable<JQuery<HTMLElement>>;
+    // If we found any potential matches, try the first one
+    if (availableTestIds.length > 0) {
+      const potentialMatch = `[data-testid="${availableTestIds[0]}"]`;
+      cy.log(`Trying potential match: ${potentialMatch}`);
+      return cy.get(potentialMatch);
+    }
+
+    // Return empty selector if nothing found
+    cy.log(
+      `No widget found with name "${widgetName}". Attempted selectors: ${attemptedSelectors.join(
+        ", "
+      )}`
+    );
+    return cy.get("body").find('[data-testid="nonexistent"]', { log: false });
+  });
 });
 
 // Fix verifyContentPresent command with proper typing
@@ -282,20 +209,6 @@ Cypress.Commands.add(
         }
       }
 
-      // Record performance metric
-      const duration = performance.now() - performance.now(); // This is just a placeholder
-      cy.task("logPerformance", {
-        operation: "verifyContentPresent",
-        duration,
-        matched,
-        matchedPattern: String(matchedPattern).substring(0, 50),
-      }).then(
-        () => {
-          // Success handler - do nothing
-        },
-        { timeout: 4000 } // Add timeout option as second parameter
-      );
-
       expect(
         matched,
         `Page should contain at least one of the patterns: ${contentPatterns.join(
@@ -304,19 +217,13 @@ Cypress.Commands.add(
       ).to.be.true;
     });
 
-    // Add visual logging for clarity in test reporter
-    contentPatterns.forEach((pattern, i) => {
-      const patternStr =
-        typeof pattern === "string" ? pattern : pattern.toString();
-      cy.log(
-        `Pattern ${i + 1}: ${patternStr.substring(0, 40)}${
-          patternStr.length > 40 ? "..." : ""
-        }`
+    // Return a proper HTMLElement type instead of HTMLBodyElement
+    return cy
+      .get("body")
+      .then(
+        () =>
+          cy.wrap(Cypress.$("body")) as Cypress.Chainable<JQuery<HTMLElement>>
       );
-    });
-
-    // Return the body element with proper type
-    return cy.get("body") as unknown as Cypress.Chainable<JQuery<HTMLElement>>;
   }
 );
 

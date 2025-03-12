@@ -10,7 +10,6 @@ import {
   BUSINESS_IMPACT_TEST_IDS,
   CHART_TEST_IDS,
   FRAMEWORK_TEST_IDS,
-  // Add these missing imports
   VALUE_CREATION_TEST_IDS,
   TECHNICAL_DETAILS_TEST_IDS,
   SECURITY_LEVELS,
@@ -41,7 +40,7 @@ export function ensureWidgetVisible(widgetId: string) {
 
 /**
  * Standard setup for widget tests - handles visibility and scrolling
- * 
+ *
  * @param widgetId The test ID of the widget or a partial ID to search for
  */
 export function setupWidgetTest(widgetId: string) {
@@ -182,55 +181,78 @@ export function checkForTextContent(content: string | RegExp) {
 /**
  * Get a test ID using primary ID or try several alternatives as fallbacks
  * Handles common test ID variations between tests and UI
- * Updated with all widget test IDs from the table
+ * Updated with all widget test IDs from the DOM analysis
  */
 export function getWidgetId(primaryId: string): string[] {
-  // Comprehensive mapping of widget IDs based on the table
+  // Comprehensive mapping of widget IDs based on the DOM analysis
   const idMappings: Record<string, string[]> = {
-    // Security Level Widget
-    "widget-security-level": [
-      WIDGET_TEST_IDS.SECURITY_LEVEL_WIDGET,
+    // Security Level Widget - updated from DOM analysis
+    "security-level": [
       "widget-security-level-selection",
       "security-level-selector",
+      "widget-security-level",
       "security-level-controls",
     ],
-    // Security Summary Widget
-    "widget-security-summary": [
-      SUMMARY_TEST_IDS.SECURITY_SUMMARY_CONTAINER,
+
+    // Security Summary Widget - updated from DOM analysis
+    "security-summary": [
       "widget-security-summary",
+      "security-summary-container",
     ],
-    // Business Impact Widget
-    "widget-business-impact": [
-      BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_ANALYSIS_PREFIX,
+
+    // Business Impact Widget - updated from DOM analysis
+    "business-impact": [
       "widget-business-impact-container",
-      "business-impact-container",
+      "business-impact-widget",
     ],
-    // Cost Estimation Widget
-    "widget-cost-estimation": [
-      COST_TEST_IDS.COST_ESTIMATION_WIDGET,
-      COST_TEST_IDS.COST_CONTAINER,
+
+    // Cost Estimation Widget - updated from DOM analysis
+    "cost-estimation": [
       "widget-cost-estimation",
-      "cost-container",
+      "cost-estimation-widget",
+      "cost-widget",
     ],
-    // Radar Chart Widget
-    "widget-radar-chart": [CHART_TEST_IDS.RADAR_CHART, "widget-radar-chart"],
-    // Compliance Status Widget
-    "widget-compliance-status": [
-      FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_WIDGET,
+
+    // Radar Chart Widget - updated from DOM analysis
+    "radar-chart": ["widget-radar-chart", "radar-chart"],
+
+    // Compliance Status Widget - updated from DOM analysis
+    "compliance-status": [
       "widget-compliance-status",
+      "compliance-status-widget",
     ],
-    // Value Creation Widget
-    "widget-value-creation": [
-      // Fixed: Use VALUE_CREATION_TEST_IDS that is now properly imported
-      VALUE_CREATION_TEST_IDS.VALUE_CREATION_PREFIX,
-      "widget-value-creation",
-    ],
-    // Technical Details Widget
-    "widget-technical-details": [
-      // Fixed: Use TECHNICAL_DETAILS_TEST_IDS that is now properly imported
-      TECHNICAL_DETAILS_TEST_IDS.TECHNICAL_DETAILS_WIDGET,
+
+    // Value Creation Widget - updated from DOM analysis
+    "value-creation": ["widget-value-creation", "value-creation-widget"],
+
+    // Technical Details Widget - updated from DOM analysis
+    "technical-details": [
       "widget-technical-details-container",
       "technical-details-widget",
+    ],
+
+    // Availability Impact Widget - updated from DOM analysis
+    "availability-impact": [
+      "widget-availability-impact-container",
+      "widget-availability-impact",
+    ],
+
+    // Integrity Impact Widget - updated from DOM analysis
+    "integrity-impact": [
+      "widget-integrity-impact-container",
+      "integrity-impact",
+    ],
+
+    // Confidentiality Impact Widget - updated from DOM analysis
+    "confidentiality-impact": [
+      "widget-confidentiality-impact-container",
+      "confidentiality-impact",
+    ],
+
+    // Security Resources Widget - updated from DOM analysis
+    "security-resources": [
+      "widget-security-resources-container",
+      "security-resources-widget",
     ],
   };
 
@@ -241,7 +263,7 @@ export function getWidgetId(primaryId: string): string[] {
 
   // Try to find a matching prefix
   for (const key of Object.keys(idMappings)) {
-    if (primaryId.startsWith(key)) {
+    if (primaryId.startsWith(key) || key.includes(primaryId)) {
       return idMappings[key];
     }
   }
@@ -252,48 +274,133 @@ export function getWidgetId(primaryId: string): string[] {
     primaryId,
     `widget-${featureName}`,
     `${featureName}-container`,
-    `${featureName}-content`,
-    `${featureName}-section`,
+    `${featureName}-widget`,
+    `widget-${featureName}-container`,
+    `${featureName}`,
   ];
 }
 
 /**
- * Common test for security level changes affecting widget content
- * 
- * @param widgetIdentifier Name or test ID of the widget
+ * Find best widget selector based on DOM analysis
+ * @param widgetName Name of widget to find
+ * @returns First matching selector or null
  */
-export function testSecurityLevelChanges(widgetIdentifier: string) {
-  // First set low security and capture initial state
-  cy.setSecurityLevels(
-    SECURITY_LEVELS.LOW,
-    SECURITY_LEVELS.LOW,
-    SECURITY_LEVELS.LOW
-  );
-  
-  // Save initial content
-  cy.findWidget(widgetIdentifier).invoke('text').then(initialContent => {
-    // Change to high security
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.HIGH
-    );
-    
-    // Verify content changed
-    cy.findWidget(widgetIdentifier)
-      .invoke('text')
-      .should('not.equal', initialContent);
+export function findBestWidgetSelector(
+  widgetName: string
+): Cypress.Chainable<string | null> {
+  const possibleIds = getWidgetId(widgetName);
+  const selectors = possibleIds.map((id) => `[data-testid="${id}"]`);
+
+  // Use a subject-independent approach to avoid Document type inference
+  return cy.wrap(null).then(() => {
+    return cy.document().then((doc) => {
+      // Store result in a local variable
+      let result: string | null = null;
+
+      // Try each selector in order
+      for (const selector of selectors) {
+        if (doc.querySelector(selector)) {
+          result = selector;
+          return result; // Early return with correct type
+        }
+      }
+
+      // Try to find by heading text if no direct match
+      if (!result) {
+        const widgetDisplayName = widgetName.replace(/-/g, " ");
+        const headers = Array.from(
+          doc.querySelectorAll("h1, h2, h3, h4, h5, h6")
+        );
+
+        for (const header of headers) {
+          if (
+            header.textContent &&
+            header.textContent.toLowerCase().includes(widgetDisplayName)
+          ) {
+            // Find closest container with data-testid
+            let el = header;
+            while (el && el !== doc.body) {
+              if (el.getAttribute("data-testid")) {
+                result = `[data-testid="${el.getAttribute("data-testid")}"]`;
+                return result; // Early return with correct type
+              }
+              el = el.parentElement!;
+            }
+          }
+        }
+      }
+
+      // Return result (will be null if nothing found)
+      return result;
+    });
   });
 }
 
 /**
+ * Get a selector for a specific control or element within a widget
+ * @param widgetName Name of the widget
+ * @param elementType Type of element to find ('tab', 'button', 'content', etc)
+ * @param index Optional index if multiple elements of same type exist
+ * @returns Selector string for the element
+ */
+export function getWidgetElementSelector(
+  widgetName: string,
+  elementType: string,
+  index: number = 0
+): string {
+  const widgetPrefix = `widget-${widgetName.toLowerCase()}`;
+
+  switch (elementType.toLowerCase()) {
+    case "tab":
+      return `[data-testid="${widgetName}-tab-${index}"], [data-testid="${widgetPrefix}-tab-${index}"]`;
+    case "button":
+      return `[data-testid="${widgetName}-button-${index}"], [data-testid="${widgetPrefix}-button-${index}"]`;
+    case "content":
+      return `[data-testid="${widgetName}-content"], [data-testid="${widgetPrefix}-content"]`;
+    case "header":
+      return `[data-testid="${widgetName}-header"], [data-testid="${widgetPrefix}-header"]`;
+    default:
+      return `[data-testid="${widgetName}-${elementType}"], [data-testid="${widgetPrefix}-${elementType}"]`;
+  }
+}
+
+/**
+ * Common test for security level changes affecting widget content
+ * Updated to be more resilient with DOM structure
+ * @param widgetIdentifier Name or test ID of the widget
+ */
+export function testSecurityLevelChanges(widgetIdentifier: string) {
+  // First set low security and capture initial state
+  cy.setSecurityLevels("Low", "Low", "Low");
+  cy.wait(300); // Add wait for UI updates
+
+  // Try to find the widget with our helper
+  cy.findWidget(widgetIdentifier)
+    .should("exist")
+    .scrollIntoView({ duration: 100 })
+    .invoke("text")
+    .then((initialContent) => {
+      // Change to high security
+      cy.setSecurityLevels("High", "High", "High");
+      cy.wait(500); // Wait longer for UI updates after change
+
+      // Verify content changed
+      cy.findWidget(widgetIdentifier)
+        .should("exist")
+        .scrollIntoView({ duration: 100 })
+        .invoke("text")
+        .should("not.equal", initialContent);
+    });
+}
+
+/**
  * Verifies widget has expected tabs and tests tab switching
- * 
+ *
  * @param widgetIdentifier Name or test ID of the widget
  * @param tabNames Array of expected tab names/patterns
  */
 export function testWidgetTabSwitching(
-  widgetIdentifier: string, 
+  widgetIdentifier: string,
   tabNames: (string | RegExp)[]
 ) {
   cy.findWidget(widgetIdentifier).within(() => {
@@ -301,33 +408,36 @@ export function testWidgetTabSwitching(
     const selectors = [
       '[role="tab"]',
       'button[class*="tab"]',
-      'button:contains("Availability"), button:contains("Integrity"), button:contains("Confidentiality")'
+      'button:contains("Availability"), button:contains("Integrity"), button:contains("Confidentiality")',
     ];
-    
+
     // Try each selector strategy
-    cy.get('body').then($body => {
+    cy.get("body").then(($body) => {
       let tabsFound = false;
-      
-      selectors.some(selector => {
+
+      selectors.some((selector) => {
         if ($body.find(selector).length) {
-          cy.get(selector).should('have.length.at.least', 2);
-          
+          cy.get(selector).should("have.length.at.least", 2);
+
           // Click tabs in sequence with waits between
           cy.get(selector).each(($tab, index) => {
-            if (index > 0 && index < 3) { // Skip first tab and limit to 3 tabs
-              cy.wrap($tab).click({force: true});
+            if (index > 0 && index < 3) {
+              // Skip first tab and limit to 3 tabs
+              cy.wrap($tab).click({ force: true });
               cy.wait(300); // Wait for content to update
             }
           });
-          
+
           tabsFound = true;
           return true; // Break the loop
         }
         return false;
       });
-      
+
       if (!tabsFound) {
-        cy.log("No tabs found in widget - this may be expected if the widget doesn't use tabs");
+        cy.log(
+          "No tabs found in widget - this may be expected if the widget doesn't use tabs"
+        );
       }
     });
   });
@@ -336,5 +446,8 @@ export function testWidgetTabSwitching(
 export default {
   setupWidgetTest,
   testSecurityLevelChanges,
-  testWidgetTabSwitching
+  testWidgetTabSwitching,
+  getWidgetId,
+  findBestWidgetSelector,
+  getWidgetElementSelector,
 };

@@ -15,21 +15,26 @@ if (!fs.existsSync(resultsDir)) {
 }
 
 export default defineConfig({
+  // Enable experimental memory management to reduce memory leaks
   experimentalMemoryManagement: true,
+  // Lower the number of tests kept in memory to reduce memory consumption
+  // during 'cypress open' (interactive mode)
+  numTestsKeptInMemory: 5, // Lower this value from default (50) to use less memory
+
   video: true,
   screenshotOnRunFailure: true,
   trashAssetsBeforeRuns: true,
   viewportWidth: 3840,
   viewportHeight: 2160,
   retries: {
-    runMode: 2,
+    runMode: 1,
     openMode: 1,
   },
   // Set reporter to junit for XML reports
-  reporter: 'junit',
+  reporter: "junit",
   reporterOptions: {
-    mochaFile: 'cypress/results/junit-[hash].xml',
-    toConsole: true
+    mochaFile: "cypress/results/junit-[hash].xml",
+    toConsole: true,
   },
   e2e: {
     baseUrl: "http://localhost:5173",
@@ -42,7 +47,7 @@ export default defineConfig({
 
       // Import the plugins directly without using either require or dynamic import
       // We'll use fs directly to handle the plugin functionality ourselves
-      
+
       // Register basic tasks
       on("task", {
         resetJunitResults: resetJunitResults,
@@ -75,22 +80,26 @@ export default defineConfig({
         listFiles(pattern) {
           try {
             // Simple implementation without glob
-            const dir = resolve(pattern.replace(/\*.*$/, ''));
+            const dir = resolve(pattern.replace(/\*.*$/, ""));
             if (fs.existsSync(dir)) {
               const files = fs.readdirSync(dir);
-              const filteredFiles = files.map(file => resolve(dir, file))
-                .filter(file => {
+              const filteredFiles = files
+                .map((file) => resolve(dir, file))
+                .filter((file) => {
                   // Simple pattern matching
-                  const basename = file.split('/').pop() || '';
-                  const patternBase = pattern.split('/').pop() || '';
-                  const regexPattern = patternBase.replace(/\*/g, '.*');
+                  const basename = file.split("/").pop() || "";
+                  const patternBase = pattern.split("/").pop() || "";
+                  const regexPattern = patternBase.replace(/\*/g, ".*");
                   return new RegExp(regexPattern).test(basename);
                 });
               return filteredFiles;
             }
             return [];
           } catch (error) {
-            console.error(`Error listing files with pattern ${pattern}:`, error);
+            console.error(
+              `Error listing files with pattern ${pattern}:`,
+              error
+            );
             return [];
           }
         },
@@ -99,8 +108,8 @@ export default defineConfig({
             if (!fs.existsSync(filePath)) {
               return { success: false, error: `File not found: ${filePath}` };
             }
-            
-            const content = fs.readFileSync(filePath, 'utf8');
+
+            const content = fs.readFileSync(filePath, "utf8");
             return { success: true, content };
           } catch (error) {
             console.error(`Error reading file from ${filePath}:`, error);
@@ -110,7 +119,7 @@ export default defineConfig({
         writeFile({ path: filePath, content }) {
           try {
             // Ensure directory exists
-            const dir = filePath.substring(0, filePath.lastIndexOf('/'));
+            const dir = filePath.substring(0, filePath.lastIndexOf("/"));
             if (!fs.existsSync(dir)) {
               fs.mkdirSync(dir, { recursive: true });
             }
@@ -128,26 +137,26 @@ export default defineConfig({
             if (!fs.existsSync(path)) {
               return { exists: false, contains: false };
             }
-            
-            const content = fs.readFileSync(path, 'utf8');
-            return { 
-              exists: true, 
+
+            const content = fs.readFileSync(path, "utf8");
+            return {
+              exists: true,
               contains: content.includes(text),
-              path
+              path,
             };
           } catch (error) {
             console.error(`Error checking file ${path}:`, error);
-            return { 
-              exists: false, 
-              contains: false, 
-              error: error.message 
+            return {
+              exists: false,
+              contains: false,
+              error: error.message,
             };
           }
-        }
+        },
       });
 
       return config;
-    }
+    },
   },
   component: {
     devServer: {

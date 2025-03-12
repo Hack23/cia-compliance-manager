@@ -3,11 +3,7 @@
  *
  * Tests the Security Resources Widget functionality
  */
-import {
-  SECURITY_LEVELS,
-  // Remove the missing constant import
-  // SECURITY_RESOURCES_TEST_IDS
-} from "../../support/constants";
+import { SECURITY_LEVELS, WIDGET_TEST_IDS } from "../../support/constants";
 import { testWidgetUpdatesWithSecurityLevels } from "../../support/test-patterns";
 import {
   setupWidgetTest,
@@ -28,7 +24,12 @@ describe("Security Resources Widget", () => {
       SECURITY_LEVELS.MODERATE
     );
 
-    // Find the security resources widget
+    // Use updated test ID from DOM analysis
+    cy.get('[data-testid="widget-security-resources-container"]')
+      .should("exist")
+      .scrollIntoView();
+
+    // Also try with the findWidget helper for resilience
     cy.findWidget("security-resources").should("exist").scrollIntoView();
 
     // Verify resource content
@@ -40,20 +41,23 @@ describe("Security Resources Widget", () => {
   });
 
   it("updates resources when security levels change", () => {
-    // Use test pattern for widget updates
-    testWidgetUpdatesWithSecurityLevels('[data-testid*="security-resources"]', {
-      initialLevels: [
-        SECURITY_LEVELS.LOW,
-        SECURITY_LEVELS.LOW,
-        SECURITY_LEVELS.LOW,
-      ],
-      newLevels: [
-        SECURITY_LEVELS.HIGH,
-        SECURITY_LEVELS.HIGH,
-        SECURITY_LEVELS.HIGH,
-      ],
-      expectTextChange: true,
-    });
+    // Use updated test ID from DOM analysis
+    testWidgetUpdatesWithSecurityLevels(
+      '[data-testid="widget-security-resources-container"]', // Updated selector
+      {
+        initialLevels: [
+          SECURITY_LEVELS.LOW,
+          SECURITY_LEVELS.LOW,
+          SECURITY_LEVELS.LOW,
+        ],
+        newLevels: [
+          SECURITY_LEVELS.HIGH,
+          SECURITY_LEVELS.HIGH,
+          SECURITY_LEVELS.HIGH,
+        ],
+        expectTextChange: true,
+      }
+    );
   });
 
   it("provides categorized security resources", () => {

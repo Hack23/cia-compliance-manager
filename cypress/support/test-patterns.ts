@@ -35,40 +35,63 @@ export function testWidgetUpdatesWithSecurityLevels(
     expectVisualChange = false,
   } = options;
 
-  // Start performance measurement
-  cy.startMeasurement(`testWidgetUpdates-${widgetSelector}`);
+  // First try to find the widget using the provided selector
+  cy.get("body").then(($body) => {
+    // Check if the selector exists in the DOM
+    if ($body.find(widgetSelector).length === 0) {
+      // If not found, try using our findWidget helper with a derived name
+      const widgetName = widgetSelector
+        .replace(/^\[data-testid="?/, "")
+        .replace(/"?\]$/, "")
+        .replace(/^widget-/, "")
+        .replace(/-container$/, "");
 
-  // Set initial levels
-  cy.setSecurityLevels(...initialLevels);
-  cy.wait(waitTime);
-
-  // Capture initial state
-  let initialContent = "";
-  let initialHtml = "";
-
-  cy.get(widgetSelector).then(($widget) => {
-    if (expectTextChange) {
-      initialContent = $widget.text();
+      cy.log(
+        `Widget selector ${widgetSelector} not found, trying findWidget with "${widgetName}"...`
+      );
+      cy.findWidget(widgetName).should("exist").as("widgetElement");
+    } else {
+      // If found, use the provided selector
+      cy.get(widgetSelector).should("exist").as("widgetElement");
     }
-    if (expectVisualChange) {
-      initialHtml = $widget.html();
-    }
 
-    // Change security levels
-    cy.setSecurityLevels(...newLevels);
+    // Set initial levels
+    cy.setSecurityLevels(...initialLevels);
     cy.wait(waitTime);
 
-    // Verify changes in widget
-    if (expectTextChange) {
-      cy.get(widgetSelector).invoke("text").should("not.eq", initialContent);
-    }
+    // Capture initial state
+    let initialContent = "";
+    let initialHtml = "";
 
-    if (expectVisualChange) {
-      cy.get(widgetSelector).invoke("html").should("not.eq", initialHtml);
-    }
+    cy.get("@widgetElement").then(($widget) => {
+      if (expectTextChange) {
+        initialContent = $widget.text();
+      }
+      if (expectVisualChange) {
+        initialHtml = $widget.html();
+      }
 
-    // End performance measurement
-    cy.endMeasurement(`testWidgetUpdates-${widgetSelector}`, "widget-updates");
+      // Change security levels
+      cy.setSecurityLevels(...newLevels);
+      cy.wait(waitTime);
+
+      // Verify changes in widget
+      if (expectTextChange) {
+        cy.get("@widgetElement")
+          .invoke("text")
+          .should("not.eq", initialContent);
+      }
+
+      if (expectVisualChange) {
+        cy.get("@widgetElement").invoke("html").should("not.eq", initialHtml);
+      }
+
+      // End performance measurement
+      cy.endMeasurement(
+        `testWidgetUpdates-${widgetSelector}`,
+        "widget-updates"
+      );
+    });
   });
 }
 
@@ -81,17 +104,27 @@ export function verifyWidgetContent(
   widgetName: string,
   contentPatterns: (string | RegExp)[]
 ) {
-  // Try to find the widget
+  // Try to find the widget with improved error handling
   cy.findWidget(widgetName)
     .should("exist")
-    .scrollIntoView()
-    .within(() => {
+    .scrollIntoView({ duration: 100 })
+    .then(($widget) => {
+      const widgetText = $widget.text();
+
       // Check each content pattern
-      contentPatterns.forEach((pattern) => {
+      contentPatterns.forEach((pattern, index) => {
         if (typeof pattern === "string") {
-          cy.contains(pattern).should("exist");
-        } else {
-          cy.contains(pattern).should("exist");
+          expect(
+            widgetText.includes(pattern),
+            `Widget "${widgetName}" should contain "${pattern}"`
+          ).to.be.true;
+          cy.log(`✅ Pattern ${index + 1} matched: "${pattern}"`);
+        } else if (pattern instanceof RegExp) {
+          expect(
+            pattern.test(widgetText),
+            `Widget "${widgetName}" should match pattern ${pattern}`
+          ).to.be.true;
+          cy.log(`✅ Pattern ${index + 1} matched: ${pattern}`);
         }
       });
     });

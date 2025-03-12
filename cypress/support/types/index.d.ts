@@ -2,6 +2,24 @@
 
 // Extend the Cypress namespace to include our custom commands
 declare namespace Cypress {
+  // Define widget name type for better intellisense and type checking
+  type WidgetName =
+    | "security-level"
+    | "security-summary"
+    | "business-impact"
+    | "cost-estimation"
+    | "value-creation"
+    | "compliance-status"
+    | "radar-chart"
+    | "technical-details"
+    | "availability-impact"
+    | "integrity-impact"
+    | "confidentiality-impact"
+    | "security-resources"
+    | "cia-impact-summary"
+    | "visualization"
+    | string; // Allow for other widget names too
+
   interface Chainable<Subject = any> {
     /**
      * Custom command to select security levels using multiple strategies
@@ -123,7 +141,7 @@ declare namespace Cypress {
      * @param widgetName - Case-insensitive name or partial ID of widget
      * @example cy.findWidget('security-summary')
      */
-    findWidget(widgetName: string): Chainable<JQuery<HTMLElement>>;
+    findWidget(widgetName: WidgetName): Chainable<JQuery<HTMLElement>>;
 
     /**
      * Verifies content exists using multiple patterns

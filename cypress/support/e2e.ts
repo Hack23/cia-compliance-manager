@@ -374,15 +374,17 @@ Cypress.on("fail", (error, runnable) => {
     }
   });
 
-  // Check for console errors
+  // Check for console errors - Fix TypeScript error by ensuring consoleErrors exists
   cy.window().then((win: Cypress.AUTWindow) => {
     // Initialize consoleErrors if it doesn't exist
-    const consoleErrors = win.consoleErrors || [];
+    if (!win.consoleErrors) {
+      win.consoleErrors = [];
+    }
 
     // Now it's safe to use the consoleErrors
-    if (consoleErrors.length > 0) {
-      cy.log(`Found ${consoleErrors.length} console errors:`);
-      consoleErrors.forEach((err: string, i: number) => {
+    if (win.consoleErrors && win.consoleErrors.length > 0) {
+      cy.log(`Found ${win.consoleErrors.length} console errors:`);
+      win.consoleErrors.forEach((err: string, i: number) => {
         cy.log(`Console error ${i + 1}: ${err}`);
       });
     }

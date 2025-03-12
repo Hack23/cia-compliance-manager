@@ -534,6 +534,48 @@ Cypress.Commands.add("logAppState", () => {
   return cy.wrap(null);
 });
 
+/**
+ * Logs detailed analysis of widget structure on the page
+ * Enhanced with DOM test ID analysis
+ */
+Cypress.Commands.add("analyzeWidgetsOnPage", () => {
+  cy.log("Analyzing widgets on page...");
+
+  // Common widget test IDs from the DOM analysis
+  const widgetIds = [
+    "widget-security-level-selection",
+    "widget-security-summary",
+    "widget-business-impact-container",
+    "widget-technical-details-container",
+    "widget-cost-estimation",
+    "widget-value-creation",
+    "widget-compliance-status",
+    "widget-radar-chart",
+    "widget-availability-impact-container",
+    "widget-integrity-impact-container",
+    "widget-confidentiality-impact-container",
+    "widget-security-resources-container",
+    "widget-cia-impact-summary",
+  ];
+
+  // Check for each widget
+  widgetIds.forEach((widgetId) => {
+    cy.get(`[data-testid="${widgetId}"]`).then(($widget) => {
+      if ($widget.length) {
+        cy.log(`✅ Found widget: ${widgetId}`);
+        // Log additional details about the widget
+        cy.log(`  - Visible: ${$widget.is(":visible")}`);
+        cy.log(`  - Children: ${$widget.children().length}`);
+        cy.log(`  - Text: ${$widget.text().substring(0, 50)}...`);
+      } else {
+        cy.log(`❌ Widget not found: ${widgetId}`);
+      }
+    });
+  });
+
+  return cy.wrap(null);
+});
+
 // Add to Cypress types
 declare global {
   namespace Cypress {
@@ -543,6 +585,7 @@ declare global {
       logWidgetStructure(): Chainable<null>;
       debugSecurityControls(): Chainable<null>;
       logAppState(): Chainable<null>;
+      analyzeWidgetsOnPage(): Chainable<null>;
     }
   }
 }

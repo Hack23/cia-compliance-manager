@@ -69,10 +69,23 @@ export const TEST_IDS = {
   APP_TITLE: "app-title",
 };
 
+// Replace the existing WIDGET_TEST_IDS with accurate IDs from the DOM analysis
 export const WIDGET_TEST_IDS = {
   ...SOURCE_WIDGET_TEST_IDS,
-  SECURITY_LEVEL_WIDGET: "widget-security-level",
-  VALUE_CREATION_CONTENT: "value-creation-content",
+  SECURITY_LEVEL_WIDGET: "widget-security-level-selection", // Updated to match DOM
+  SECURITY_LEVEL_CONTROLS: "security-level-selector", // Updated to match DOM
+  SECURITY_SUMMARY_WIDGET: "widget-security-summary",
+  BUSINESS_IMPACT_WIDGET: "widget-business-impact-container",
+  TECHNICAL_DETAILS_WIDGET: "widget-technical-details-container",
+  COST_ESTIMATION_WIDGET: "widget-cost-estimation",
+  VALUE_CREATION_WIDGET: "widget-value-creation",
+  COMPLIANCE_STATUS_WIDGET: "widget-compliance-status",
+  RADAR_CHART_WIDGET: "widget-radar-chart",
+  AVAILABILITY_IMPACT_WIDGET: "widget-availability-impact-container",
+  INTEGRITY_IMPACT_WIDGET: "widget-integrity-impact-container",
+  CONFIDENTIALITY_IMPACT_WIDGET: "widget-confidentiality-impact-container",
+  SECURITY_RESOURCES_WIDGET: "widget-security-resources-container",
+  CIA_IMPACT_SUMMARY_WIDGET: "widget-cia-impact-summary",
 };
 
 // Export CIA_TEST_IDS with enhanced properties
@@ -95,11 +108,10 @@ import { TEST_IDS as sourceTestIds } from "../../src/constants/testIds";
 
 // Now define the extended constants referring to the source
 export const SECURITY_LEVEL_TEST_IDS = {
-  // Define these properties directly instead of trying to access them from sourceTestIds
   SECURITY_LEVEL_PREFIX: "security-level",
   SECURITY_LEVEL_SELECTOR: "security-level-selector",
   SECURITY_LEVEL_CONTROLS: "security-level-controls",
-  SECURITY_LEVEL_WIDGET: "widget-security-level",
+  SECURITY_LEVEL_WIDGET: "widget-security-level-selection", // Updated from DOM
   AVAILABILITY_SECTION: "availability-section",
   INTEGRITY_SECTION: "integrity-section",
   CONFIDENTIALITY_SECTION: "confidentiality-section",
@@ -188,10 +200,27 @@ export const FLEXIBLE_TEST_IDS: Record<string, string[]> = {
     "value-creation",
   ],
   SECURITY_LEVEL: [
-    SECURITY_LEVEL_TEST_IDS.SECURITY_LEVEL_PREFIX,
-    WIDGET_TEST_IDS.SECURITY_LEVEL_WIDGET,
-    "security-level-widget",
-    "security-level-selection",
+    "widget-security-level-selection", // Updated from DOM
+    "security-level-selector", // Updated from DOM
+    "widget-security-level",
+    "security-level-controls",
+  ],
+  AVAILABILITY_IMPACT: [
+    "widget-availability-impact-container", // From DOM
+    "widget-availability-impact", // From DOM
+    "availability-impact",
+  ],
+  INTEGRITY_IMPACT: [
+    "widget-integrity-impact-container", // From DOM
+    "integrity-impact", // From DOM
+  ],
+  CONFIDENTIALITY_IMPACT: [
+    "widget-confidentiality-impact-container", // From DOM
+    "confidentiality-impact", // From DOM
+  ],
+  RADAR_CHART: [
+    "widget-radar-chart", // From DOM
+    "radar-chart", // From DOM
   ],
 };
 
