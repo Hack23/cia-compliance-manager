@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import * as fs from "fs";
+import * as path from "path";
 
 // Define custom types instead of trying to augment Cypress namespace
 type TestState = "passed" | "failed" | "skipped" | "pending";
@@ -121,7 +121,7 @@ function escapeXml(unsafe: string): string {
         return "&amp;";
       case "'":
         return "&apos;";
-      case '"':
+      case '"":
         return "&quot;";
       default:
         return c;
