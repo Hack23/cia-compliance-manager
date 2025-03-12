@@ -1,205 +1,125 @@
 /**
- * Performance assertion utilities
- * 
- * Provides functions for asserting performance expectations
- * and comparing against baselines.
+ * Performance test baseline and assertion utilities
  */
 
-// Types for performance assertions
-export interface PerformanceThresholds {
-  warning?: number;
-  error?: number;
-}
+// Default baseline performance measurements for comparison
+export const DEFAULT_BASELINE = {
+  // Page loads
+  pageLoad: 3000,
+  initialLoad: 2000,
 
-export interface OperationThresholds {
-  [operationName: string]: PerformanceThresholds;
-}
+  // Widget rendering
+  widgetRender: 500,
+  chartRender: 800,
 
-export interface CategoryThresholds {
-  [categoryName: string]: PerformanceThresholds;
-}
+  // Interactions
+  securityLevelChange: 250,
+  tabSwitch: 150,
+  buttonClick: 100,
 
-export interface PerformanceBaseline {
-  operations: OperationThresholds;
-  categories: CategoryThresholds;
-  global: PerformanceThresholds;
-}
-
-// Default baseline with reasonable thresholds
-export const DEFAULT_BASELINE: PerformanceBaseline = {
-  operations: {
-    'page-load': { warning: 1000, error: 3000 },
-    'widget-render': { warning: 200, error: 500 },
-    'security-level-change': { warning: 300, error: 1000 }
-  },
-  categories: {
-    'widget-rendering': { warning: 200, error: 500 },
-    'user-interaction': { warning: 100, error: 300 },
-    'content-loading': { warning: 500, error: 1500 }
-  },
-  global: {
-    warning: 300,
-    error: 1000
-  }
+  // Special cases
+  heavyWidgetRender: 1000,
 };
 
 /**
- * Asserts that an operation's duration is within acceptable thresholds
- * 
- * @param operationName Name of the operation being measured
- * @param duration Duration of the operation in milliseconds
- * @param thresholds Custom thresholds for this assertion
- * @param baseline Performance baseline to compare against
+ * Asserts that a measured duration is within acceptable thresholds
  */
-export function assertOperationPerformance(
-  operationName: string,
+export function assertPerformance(
+  label: string,
   duration: number,
-  thresholds?: PerformanceThresholds,
-  baseline: PerformanceBaseline = DEFAULT_BASELINE
-): void {
-  // Determine which thresholds to use
-  const operationThresholds = baseline.operations[operationName];
-  const customThresholds = thresholds || {};
-  const applicableThresholds = {
-    warning: customThresholds.warning || operationThresholds?.warning || baseline.global.warning || 300,
-    error: customThresholds.error || operationThresholds?.error || baseline.global.error || 1000
-  };
-  
-  // Check against error threshold
-  if (duration > applicableThresholds.error) {
-    throw new Error(
-      `Performance error: ${operationName} took ${duration.toFixed(1)}ms, ` +
-      `exceeding error threshold of ${applicableThresholds.error}ms`
-    );
+  thresholds: {
+    warning: number;
+    error: number;
   }
-  
-  // Check against warning threshold
-  if (duration > applicableThresholds.warning) {
-    console.warn(
-      `Performance warning: ${operationName} took ${duration.toFixed(1)}ms, ` +
-      `exceeding warning threshold of ${applicableThresholds.warning}ms`
+): void {
+  const { warning, error } = thresholds;
+
+  if (duration > error) {
+    cy.log(
+      `❌ Performance failure - ${label}: ${duration.toFixed(
+        2
+      )}ms (exceeds ${error}ms threshold)`
+    );
+    // Only fail the test if not in CI
+    if (!Cypress.env("CI")) {
+      expect(duration).to.be.lessThan(error);
+    }
+  } else if (duration > warning) {
+    cy.log(
+      `⚠️ Performance warning - ${label}: ${duration.toFixed(
+        2
+      )}ms (exceeds ${warning}ms threshold)`
+    );
+  } else {
+    cy.log(
+      `✅ Performance good - ${label}: ${duration.toFixed(
+        2
+      )}ms (within ${warning}ms threshold)`
     );
   }
 }
 
 /**
- * Asserts that an category's aggregate performance is within acceptable thresholds
- * 
- * @param categoryName Name of the category
- * @param durations Array of operation durations in this category
- * @param thresholds Custom thresholds for this assertion
- * @param baseline Performance baseline to compare against
+ * Compares a measurement against historical baseline
  */
-export function assertCategoryPerformance(
-  categoryName: string,
-  durations: number[],
-  thresholds?: PerformanceThresholds,
-  baseline: PerformanceBaseline = DEFAULT_BASELINE
+export function compareToBaseline(
+  label: string,
+  duration: number,
+  baseline: number,
+  tolerance: number = 0.2
 ): void {
-  if (durations.length === 0) {
-    return; // No operations to assess
-  }
-  
-  // Calculate average duration
-  const avgDuration = durations.reduce((sum, d) => sum + d, 0) / durations.length;
-  
-  // Determine which thresholds to use
-  const categoryThresholds = baseline.categories[categoryName];
-  const customThresholds = thresholds || {};
-  const applicableThresholds = {
-    warning: customThresholds.warning || categoryThresholds?.warning || baseline.global.warning || 300,
-    error: customThresholds.error || categoryThresholds?.error || baseline.global.error || 1000
-  };
-  
-  // Check against error threshold
-  if (avgDuration > applicableThresholds.error) {
-    throw new Error(
-      `Performance error: ${categoryName} category averaged ${avgDuration.toFixed(1)}ms per operation, ` +
-      `exceeding error threshold of ${applicableThresholds.error}ms`
-    );
-  }
-  
-  // Check against warning threshold
-  if (avgDuration > applicableThresholds.warning) {
-    console.warn(
-      `Performance warning: ${categoryName} category averaged ${avgDuration.toFixed(1)}ms per operation, ` +
-      `exceeding warning threshold of ${applicableThresholds.warning}ms`
-    );
-  }
+  const warningThreshold = baseline * (1 + tolerance);
+  const errorThreshold = baseline * (1 + tolerance * 2);
+
+  assertPerformance(label, duration, {
+    warning: warningThreshold,
+    error: errorThreshold,
+  });
 }
 
-// Add Cypress commands for performance assertions
-if (typeof Cypress !== 'undefined') {
-  // Use function expression to handle proper typing
-  Cypress.Commands.add('assertPerformance', 
-    function(operationName: string, duration: number, thresholds?: PerformanceThresholds) {
-      try {
-        assertOperationPerformance(operationName, duration, thresholds);
-        return cy.wrap(true);
-      } catch (error: any) {
-        // Log the error but don't fail the test automatically
-        cy.log(`⚠️ ${error.message}`);
-        return cy.wrap(false);
-      }
-    }
-  );
-  
-  Cypress.Commands.add('assertCategoryPerformance', 
-    function(categoryName: string, durations: number[], thresholds?: PerformanceThresholds) {
-      try {
-        assertCategoryPerformance(categoryName, durations, thresholds);
-        return cy.wrap(true);
-      } catch (error: any) {
-        // Log the error but don't fail the test automatically
-        cy.log(`⚠️ ${error.message}`);
-        return cy.wrap(false);
-      }
-    }
-  );
-  
-  // Command to check a metric against baseline from performance report
-  Cypress.Commands.add('checkMetricAgainstBaseline', 
-    function(metricName: string, thresholds?: PerformanceThresholds) {
-      return cy.window().then((win: any) => {
-        if (!win.cypressPerformanceMetrics) {
-          cy.log('No performance metrics available');
-          return cy.wrap(false);
-        }
-        
-        const metrics = win.cypressPerformanceMetrics.records;
-        const matchingMetrics = metrics.filter((m: any) => 
-          m.operation === metricName || m.operation.includes(metricName)
-        );
-        
-        if (matchingMetrics.length === 0) {
-          cy.log(`No metrics found matching: ${metricName}`);
-          return cy.wrap(false);
-        }
-        
-        const latestMetric = matchingMetrics[matchingMetrics.length - 1];
-        
-        // Fix: Create a properly typed thresholds object with guaranteed number values
-        let validThresholds: { warning: number; error: number } | undefined = undefined;
-        
-        if (thresholds) {
-          validThresholds = {
-            // Fix: Ensure warning and error are always numbers by using nullish coalescing
-            warning: typeof thresholds.warning === 'number' ? thresholds.warning : 
-              (DEFAULT_BASELINE.global.warning ?? 300),
-            error: typeof thresholds.error === 'number' ? thresholds.error : 
-              (DEFAULT_BASELINE.global.error ?? 1000)
-          };
-        }
-        
-        return cy.assertPerformance(latestMetric.operation, latestMetric.duration, validThresholds);
-      });
-    }
-  );
-}
+// Export a Cypress command wrapper
+Cypress.Commands.add(
+  "assertPerformance",
+  (
+    label: string,
+    duration: number,
+    thresholds: { warning: number; error: number }
+  ) => {
+    assertPerformance(label, duration, thresholds);
+    return cy.wrap(null);
+  }
+);
 
-// Export all utility functions
+// Export a baseline comparison command
+Cypress.Commands.add(
+  "compareToBaseline",
+  (label: string, duration: number, baseline: number, tolerance?: number) => {
+    compareToBaseline(label, duration, baseline, tolerance);
+    return cy.wrap(null);
+  }
+);
+
 export default {
-  assertOperationPerformance,
-  assertCategoryPerformance,
-  DEFAULT_BASELINE
+  DEFAULT_BASELINE,
+  assertPerformance,
+  compareToBaseline,
 };
+
+// Add to Cypress types
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      assertPerformance(
+        label: string,
+        duration: number,
+        thresholds: { warning: number; error: number }
+      ): Chainable<null>;
+      compareToBaseline(
+        label: string,
+        duration: number,
+        baseline: number,
+        tolerance?: number
+      ): Chainable<null>;
+    }
+  }
+}

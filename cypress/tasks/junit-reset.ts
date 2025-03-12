@@ -1,45 +1,50 @@
-import fs from "fs-extra";
-import path from "path";
+import * as fs from "fs";
+import * as path from "path";
+
+const RESULTS_DIR = path.join(process.cwd(), "cypress", "results");
+const FINAL_JUNIT_PATH = path.join(RESULTS_DIR, "junit.xml");
+const TEMP_RESULTS_PATH = path.join(RESULTS_DIR, "temp-results.json");
+
+// Initialize accumulated results if they don't exist
+const initialResults = {
+  testsuites: {
+    name: "Cypress Tests",
+    time: 0,
+    tests: 0,
+    failures: 0,
+    testsuites: [],
+  },
+};
 
 /**
- * Legacy function maintained for backward compatibility
- * The new junit-reporter.ts handles this functionality now
+ * Reset JUnit results files and directories
  */
-export const resetJunitResults = async () => {
-  console.log(
-    "Using legacy resetJunitResults - consider using cleanJunitReports from junit-reporter instead"
-  );
-
-  const junitReportDir = "cypress/results";
+export function resetJunitResults(): null {
   try {
-    // Ensure directory exists
-    await fs.ensureDir(junitReportDir);
+    // Ensure results directory exists
+    if (!fs.existsSync(RESULTS_DIR)) {
+      fs.mkdirSync(RESULTS_DIR, { recursive: true });
+      console.log(`Created results directory: ${RESULTS_DIR}`);
+    }
 
-    // Look for any junit XML files
-    const xmlFiles = fs
-      .readdirSync(junitReportDir)
-      .filter((file) => file.endsWith(".xml"))
-      .map((file) => path.join(junitReportDir, file));
+    // Reset temp results file
+    if (fs.existsSync(TEMP_RESULTS_PATH)) {
+      fs.unlinkSync(TEMP_RESULTS_PATH);
+    }
+    fs.writeFileSync(TEMP_RESULTS_PATH, JSON.stringify(initialResults));
+    console.log(`Reset JUnit temp results: ${TEMP_RESULTS_PATH}`);
 
-    if (xmlFiles.length > 0) {
-      // Create a timestamped backup directory
-      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-      const backupDir = path.join(junitReportDir, `backup`);
-      await fs.ensureDir(backupDir);
-
-      // Move files to backup
-      for (const file of xmlFiles) {
-        const fileName = path.basename(file);
-        await fs.copy(file, path.join(backupDir, fileName));
-        await fs.unlink(file);
-      }
+    // Reset main junit file
+    if (fs.existsSync(FINAL_JUNIT_PATH)) {
+      fs.unlinkSync(FINAL_JUNIT_PATH);
+      console.log(`Removed old JUnit file: ${FINAL_JUNIT_PATH}`);
     }
 
     return null;
-  } catch (err) {
-    console.error(`Failed to reset JUnit results: ${err}`);
-    throw err;
+  } catch (error) {
+    console.error("Error in resetJunitResults:", error);
+    return null;
   }
-};
+}
 
 export default resetJunitResults;

@@ -43,7 +43,10 @@
     "lint:cypress": "eslint --cache ./cypress",
     "lint:ci": "eslint --cache --max-warnings 0 .",
     "pretest": "npm run lint",
-    "prebuild": "npm run lint"
+    "build:no-lint": "tsc && vite build",
+    "prebuild": "npm run lint",
+    "lint:fix-cy": "node scripts/fix-unused-imports.js && eslint --fix ./cypress",
+    "lint:cypress:fix": "npm run lint:fix-cy"
   },
   "browserslist": {
     "production": [

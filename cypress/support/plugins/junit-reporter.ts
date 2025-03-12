@@ -121,7 +121,7 @@ function escapeXml(unsafe: string): string {
         return "&amp;";
       case "'":
         return "&apos;";
-      case '"":
+      case '"': // Fixed - was '"":' with an extra quote
         return "&quot;";
       default:
         return c;
