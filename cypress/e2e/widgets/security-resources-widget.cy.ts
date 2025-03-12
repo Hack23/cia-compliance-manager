@@ -5,10 +5,14 @@
  */
 import {
   SECURITY_LEVELS,
-  SECURITY_RESOURCES_TEST_IDS
+  // Remove the missing constant import
+  // SECURITY_RESOURCES_TEST_IDS
 } from "../../support/constants";
 import { testWidgetUpdatesWithSecurityLevels } from "../../support/test-patterns";
-import { setupWidgetTest, testSecurityLevelChanges } from "./widget-test-helper";
+import {
+  setupWidgetTest,
+  testSecurityLevelChanges,
+} from "./widget-test-helper";
 
 describe("Security Resources Widget", () => {
   beforeEach(() => {
@@ -23,30 +27,33 @@ describe("Security Resources Widget", () => {
       SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE
     );
-    
+
     // Find the security resources widget
-    cy.findWidget('security-resources')
-      .should('exist')
-      .scrollIntoView();
-      
+    cy.findWidget("security-resources").should("exist").scrollIntoView();
+
     // Verify resource content
     cy.verifyContentPresent([
       /resource/i,
       /security/i,
-      /guide|documentation|reference/i
+      /guide|documentation|reference/i,
     ]);
   });
 
   it("updates resources when security levels change", () => {
     // Use test pattern for widget updates
-    testWidgetUpdatesWithSecurityLevels(
-      '[data-testid*="security-resources"]', 
-      {
-        initialLevels: [SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW],
-        newLevels: [SECURITY_LEVELS.HIGH, SECURITY_LEVELS.HIGH, SECURITY_LEVELS.HIGH],
-        expectTextChange: true
-      }
-    );
+    testWidgetUpdatesWithSecurityLevels('[data-testid*="security-resources"]', {
+      initialLevels: [
+        SECURITY_LEVELS.LOW,
+        SECURITY_LEVELS.LOW,
+        SECURITY_LEVELS.LOW,
+      ],
+      newLevels: [
+        SECURITY_LEVELS.HIGH,
+        SECURITY_LEVELS.HIGH,
+        SECURITY_LEVELS.HIGH,
+      ],
+      expectTextChange: true,
+    });
   });
 
   it("provides categorized security resources", () => {
@@ -56,16 +63,15 @@ describe("Security Resources Widget", () => {
       SECURITY_LEVELS.HIGH,
       SECURITY_LEVELS.HIGH
     );
-    
+
     // Find security resources widget
-    cy.findWidget('security-resources')
-      .scrollIntoView();
-      
+    cy.findWidget("security-resources").scrollIntoView();
+
     // Check for resource categories
     cy.verifyContentPresent([
       /availability|integrity|confidentiality/i,
       /resource/i,
-      /implement|guide|standard/i
+      /implement|guide|standard/i,
     ]);
   });
 
@@ -76,32 +82,31 @@ describe("Security Resources Widget", () => {
       SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE
     );
-    
+
     // Find security resources widget
-    cy.findWidget('security-resources')
-      .scrollIntoView();
-      
+    cy.findWidget("security-resources").scrollIntoView();
+
     // Look for list items or resource entries
-    cy.get('body').then($body => {
+    cy.get("body").then(($body) => {
       // Look for list items, links, or resource cards
-      const hasResourceElements = 
-        $body.find('ul li').length > 0 || 
-        $body.find('a[href]').length > 0 || 
+      const hasResourceElements =
+        $body.find("ul li").length > 0 ||
+        $body.find("a[href]").length > 0 ||
         $body.find('[class*="resource"], [class*="card"]').length > 0;
-      
+
       // If we found resource elements, verify them
       if (hasResourceElements) {
         // Try to find and interact with resource items
         cy.get('ul li, a[href], [class*="resource"], [class*="card"]')
-          .should('exist')
+          .should("exist")
           .first()
           .scrollIntoView();
       } else {
         // Otherwise just check for text content
         cy.verifyContentPresent([
           /resource/i,
-          /security/i, 
-          /guide|tool|reference/i
+          /security/i,
+          /guide|tool|reference/i,
         ]);
       }
     });

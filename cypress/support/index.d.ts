@@ -7,7 +7,7 @@ declare namespace Cypress {
   interface Chainable<Subject> {
     /**
      * Set security levels for all three CIA components with strong typing
-     * 
+     *
      * @param availability - The availability security level
      * @param integrity - The integrity security level
      * @param confidentiality - The confidentiality security level
@@ -16,7 +16,7 @@ declare namespace Cypress {
      */
     setSecurityLevels(
       availability?: string | null,
-      integrity?: string | null, 
+      integrity?: string | null,
       confidentiality?: string | null
     ): Chainable<JQuery<HTMLElement>>;
 
@@ -27,7 +27,7 @@ declare namespace Cypress {
 
     /**
      * Find a widget using multiple selector strategies
-     * 
+     *
      * @param widgetName - Name or identifier of the widget to find
      * @example
      * cy.findWidget('security-level');
@@ -37,7 +37,7 @@ declare namespace Cypress {
 
     /**
      * Verify content patterns exist on the page
-     * 
+     *
      * @param contentPatterns - Array of text or RegExp patterns to verify
      * @example
      * cy.verifyContentPresent(['Security', /level/i, 'Compliance']);
@@ -48,7 +48,7 @@ declare namespace Cypress {
 
     /**
      * Verify a widget contains specific content patterns
-     * 
+     *
      * @param widgetName - Name or identifier of the widget
      * @param contentPatterns - Content patterns to check for
      * @example
@@ -61,7 +61,7 @@ declare namespace Cypress {
 
     /**
      * Enhanced security level selection with fallbacks
-     * 
+     *
      * @param category - Which security category to modify
      * @param level - Security level to select
      * @example
@@ -74,7 +74,7 @@ declare namespace Cypress {
 
     /**
      * Attempts to click a button matching text pattern
-     * 
+     *
      * @param textOrPattern - Text or pattern to match button content
      * @example
      * cy.tryClickButton('Save');
@@ -84,7 +84,7 @@ declare namespace Cypress {
 
     /**
      * Wait for specific content to appear
-     * 
+     *
      * @param contentPattern - Text or pattern to wait for
      * @param options - Additional wait options
      * @example
@@ -103,7 +103,7 @@ declare namespace Cypress {
 
     /**
      * Takes a screenshot and logs DOM state at failure point
-     * 
+     *
      * @param testName - Name of the test that failed
      */
     debugFailure(testName: string): void;
@@ -125,7 +125,7 @@ declare namespace Cypress {
 
     /**
      * Measures execution time of a Cypress operation
-     * 
+     *
      * @param fn - Function to measure
      * @param label - Optional label for the measurement
      */
@@ -135,7 +135,7 @@ declare namespace Cypress {
      * Initialize performance monitoring for the current test
      */
     initPerformanceMonitoring(): Chainable<void>;
-    
+
     /**
      * Record a performance metric
      * @param operation Name of the operation being measured
@@ -149,7 +149,7 @@ declare namespace Cypress {
       category?: string,
       metadata?: Record<string, any>
     ): Chainable<null>;
-    
+
     /**
      * Measure the execution time of an operation
      * @param fn Function that returns a Chainable to measure
@@ -161,34 +161,95 @@ declare namespace Cypress {
       operationName: string,
       category?: string
     ): Chainable<T>;
-    
+
     /**
      * Generate a performance report for the current test
      */
     generatePerformanceReport(): Chainable<any>;
-    
+
     /**
      * Save current performance metrics to disk
      * @param reason Optional reason for flushing metrics
      */
     flushPerformanceMetrics(reason?: string): Chainable<null>;
-    
+
     /**
      * Create a visual performance report in the browser
      */
     createVisualPerformanceReport(): Chainable<null>;
-    
+
     /**
      * Start measuring time for an operation
      * @param label Name of the operation to measure
      */
     startMeasurement(label: string): Chainable<void>;
-    
+
     /**
      * End time measurement for an operation and record the result
      * @param label Name of the operation being measured
      * @param category Optional category for the operation
      */
     endMeasurement(label: string, category?: string): Chainable<number>;
+  }
+}
+
+/// <reference types="cypress" />
+
+// Extend the Window interface to include our custom properties
+interface Window {
+  consoleErrors?: string[];
+  __REACT_APP_STATE__?: any;
+}
+
+// Extend the AUTWindow interface in Cypress namespace
+declare namespace Cypress {
+  interface AUTWindow extends Window {
+    consoleErrors: string[]; // Defined as non-optional to avoid null checks
+    __REACT_APP_STATE__?: any;
+  }
+
+  // Extend the Cypress Chainable interface with our custom commands
+  interface Chainable<Subject = any> {
+    /**
+     * Find security level controls using multiple strategies
+     * @example cy.findSecurityLevelControls()
+     */
+    findSecurityLevelControls(): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * Set security levels with flexible selectors
+     * @param availability - Security level for availability
+     * @param integrity - Security level for integrity
+     * @param confidentiality - Security level for confidentiality
+     * @example cy.setSecurityLevels('High', 'Moderate', 'Low')
+     */
+    setSecurityLevels(
+      availability?: string,
+      integrity?: string,
+      confidentiality?: string
+    ): Chainable<void>;
+
+    /**
+     * Find a widget by name with flexible matching strategies
+     * @param widgetName - Name or identifier of the widget
+     * @example cy.findWidget('security-summary')
+     */
+    findWidget(widgetName: string): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * Verify content is present using multiple patterns
+     * @param contentPatterns - Patterns to search for
+     * @example cy.verifyContentPresent(['Security', /Level/i])
+     */
+    verifyContentPresent(
+      contentPatterns: Array<string | RegExp>
+    ): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * Test if text is present in the document
+     * @param text - Text to check for
+     * @example cy.containsText('Security Level')
+     */
+    containsText(text: string): Chainable<void>;
   }
 }

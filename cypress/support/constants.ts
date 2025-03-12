@@ -77,7 +77,7 @@ export const WIDGET_TEST_IDS = {
 
 // Export CIA_TEST_IDS with enhanced properties
 export const CIA_TEST_IDS = {
-  ...IMPORTED_CIA_TEST_IDS, // Use the imported CIA_TEST_IDS 
+  ...IMPORTED_CIA_TEST_IDS, // Use the imported CIA_TEST_IDS
   AVAILABILITY_SELECT: "availability-select",
   INTEGRITY_SELECT: "integrity-select",
   CONFIDENTIALITY_SELECT: "confidentiality-select",
@@ -91,23 +91,30 @@ export const CIA_TEST_IDS = {
 };
 
 // Replace any require statements with ES module imports
-import { TEST_IDS as sourceTestIds } from '../../src/constants/testIds';
+import { TEST_IDS as sourceTestIds } from "../../src/constants/testIds";
 
-// Now define the extended constants referring to the source 
+// Now define the extended constants referring to the source
 export const SECURITY_LEVEL_TEST_IDS = {
-  ...(sourceTestIds.SECURITY_LEVEL_TEST_IDS || {}),
-  // Add any additional properties for Cypress tests
+  // Define these properties directly instead of trying to access them from sourceTestIds
   SECURITY_LEVEL_PREFIX: "security-level",
   SECURITY_LEVEL_SELECTOR: "security-level-selector",
+  SECURITY_LEVEL_CONTROLS: "security-level-controls",
+  SECURITY_LEVEL_WIDGET: "widget-security-level",
+  AVAILABILITY_SECTION: "availability-section",
+  INTEGRITY_SECTION: "integrity-section",
+  CONFIDENTIALITY_SECTION: "confidentiality-section",
 };
 
 export const SECURITY_RESOURCES_TEST_IDS = {
-  ...(sourceTestIds.SECURITY_RESOURCES_TEST_IDS || {}),
-  // Add any additional properties for Cypress tests
+  // Define these properties directly instead of trying to access them from sourceTestIds
   SECURITY_RESOURCES_PREFIX: "security-resources",
   RESOURCE_ITEM: "security-resource-item",
   RESOURCE_LIST: "security-resources-list",
   SECURITY_RESOURCES_WIDGET: "security-resources-widget",
+  SECURITY_RESOURCES_CONTAINER: "widget-security-resources-container",
+  CATEGORY_SELECT: "security-resources-widget-category-select",
+  SEARCH_INPUT: "security-resources-widget-search-input",
+  RESOURCE_PREFIX: "security-resources-widget-resource",
 };
 
 // Enhanced widget prefixes with better structure and consistency
@@ -192,19 +199,37 @@ export const FLEXIBLE_TEST_IDS: Record<string, string[]> = {
 export const SELECTORS = {
   WIDGETS: {
     // Use a record for better type safety and autocompletion
-    PREFIX: 'widget-',
+    PREFIX: "widget-",
     SECURITY_LEVEL: getTestSelector(TEST_IDS.SECURITY_LEVEL_CONTROLS),
     COST_ESTIMATION: getTestSelector(COST_TEST_IDS.COST_CONTAINER),
-    VALUE_CREATION: getTestSelector(VALUE_CREATION_TEST_IDS.VALUE_CREATION_WIDGET),
-    SECURITY_SUMMARY: getTestSelector(SUMMARY_TEST_IDS.SECURITY_SUMMARY_CONTAINER),
-    BUSINESS_IMPACT: getTestSelector(BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_WIDGET),
+    VALUE_CREATION: getTestSelector(
+      VALUE_CREATION_TEST_IDS.VALUE_CREATION_WIDGET
+    ),
+    SECURITY_SUMMARY: getTestSelector(
+      SUMMARY_TEST_IDS.SECURITY_SUMMARY_CONTAINER
+    ),
+    BUSINESS_IMPACT: getTestSelector(
+      BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_WIDGET
+    ),
     RADAR_CHART: getTestSelector(CHART_TEST_IDS.RADAR_CHART),
-    COMPLIANCE_STATUS: getTestSelector(FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_WIDGET),
-    TECHNICAL_DETAILS: getTestSelector(TECHNICAL_DETAILS_TEST_IDS.TECHNICAL_DETAILS_WIDGET),
-    AVAILABILITY_IMPACT: getTestSelector(AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_PREFIX),
-    INTEGRITY_IMPACT: getTestSelector(INTEGRITY_IMPACT_TEST_IDS.INTEGRITY_IMPACT_PREFIX),
-    CONFIDENTIALITY_IMPACT: getTestSelector(CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_PREFIX),
-    SECURITY_RESOURCES: getTestSelector(SECURITY_RESOURCES_TEST_IDS.SECURITY_RESOURCES_WIDGET),
+    COMPLIANCE_STATUS: getTestSelector(
+      FRAMEWORK_TEST_IDS.COMPLIANCE_STATUS_WIDGET
+    ),
+    TECHNICAL_DETAILS: getTestSelector(
+      TECHNICAL_DETAILS_TEST_IDS.TECHNICAL_DETAILS_WIDGET
+    ),
+    AVAILABILITY_IMPACT: getTestSelector(
+      AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_PREFIX
+    ),
+    INTEGRITY_IMPACT: getTestSelector(
+      INTEGRITY_IMPACT_TEST_IDS.INTEGRITY_IMPACT_PREFIX
+    ),
+    CONFIDENTIALITY_IMPACT: getTestSelector(
+      CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_PREFIX
+    ),
+    SECURITY_RESOURCES: getTestSelector(
+      SECURITY_RESOURCES_TEST_IDS.SECURITY_RESOURCES_WIDGET
+    ),
     CIA_IMPACT_SUMMARY: getTestSelector(WIDGET_TEST_IDS.CIA_IMPACT_SUMMARY),
   },
   CONTROLS: {
@@ -215,7 +240,9 @@ export const SELECTORS = {
   FORM: {
     AVAILABILITY_SELECT: getTestSelector(CIA_TEST_IDS.AVAILABILITY_SELECT),
     INTEGRITY_SELECT: getTestSelector(CIA_TEST_IDS.INTEGRITY_SELECT),
-    CONFIDENTIALITY_SELECT: getTestSelector(CIA_TEST_IDS.CONFIDENTIALITY_SELECT),
+    CONFIDENTIALITY_SELECT: getTestSelector(
+      CIA_TEST_IDS.CONFIDENTIALITY_SELECT
+    ),
   },
 };
 
