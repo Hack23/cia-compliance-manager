@@ -1,3 +1,4 @@
+import { existsSync } from "fs";
 import _globals from "globals";
 import tseslint from "typescript-eslint";
 import reactPlugin from "eslint-plugin-react";
@@ -16,6 +17,22 @@ const reactSettings = {
     version: "19.0.0",
   },
 };
+
+// Verify each tsconfig exists
+const rootTsConfigExists = existsSync("./tsconfig.json");
+const cypressTsConfigExists = existsSync("./cypress/tsconfig.json");
+
+if (!rootTsConfigExists) {
+  console.warn(
+    "Warning: Root tsconfig.json not found. TypeScript checking will be limited."
+  );
+}
+
+if (!cypressTsConfigExists) {
+  console.warn(
+    "Warning: Cypress tsconfig.json not found. TypeScript checking for Cypress will be disabled."
+  );
+}
 
 export default [
   // Global ignores to improve performance
@@ -64,18 +81,14 @@ export default [
     ],
   },
 
-  // Base configuration for all files
+  // Base configuration for all files - WITHOUT TypeScript type checking
   {
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
       globals: {
-        // Browser globals
-        window: "readonly",
-        document: "readonly",
-        navigator: "readonly",
-        // Node globals
-        process: "readonly",
+        ..._globals.browser,
+        ..._globals.node,
         // Common globals
         console: "readonly",
         setTimeout: "readonly",
@@ -86,105 +99,136 @@ export default [
         it: "readonly",
         test: "readonly",
         expect: "readonly",
-        // Cypress globals
-        cy: "readonly",
-        Cypress: "readonly",
       },
+      // Use TypeScript parser for all files, but without type checking by default
       parser: tseslint.parser,
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
         },
-        // Fix: Remove project option from base config to avoid TypeScript checking for all files
+        // No project by default - prevents parsing errors for non-TS files
         project: null,
       },
     },
     settings: {
       ...reactSettings,
+      // Import resolver settings
+      "import/resolver": {
+        node: {
+          extensions: [".js", ".jsx", ".ts", ".tsx"],
+        },
+      },
     },
     plugins: {
       react: reactPlugin,
       "react-hooks": reactHooksPlugin,
       "@typescript-eslint": tseslint.plugin,
-      // Add all previously unused plugins to fix the ESLint error
       "jsx-a11y": jsxA11yPlugin,
       import: importPlugin,
       vitest: vitestPlugin,
       "testing-library": testingLibraryPlugin,
     },
     rules: {
-      // Minimal set of essential rules to improve performance
+      // Base rules for all files
       "no-console": ["warn", { allow: ["warn", "error", "info"] }],
       "react/react-in-jsx-scope": "off",
       "react/display-name": "off",
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
-      ],
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
     },
   },
 
-  // JavaScript files - without TypeScript checking
+  // JavaScript files - explicit config to ensure no TS checking
   {
-    files: [
-      "**/*.js",
-      "**/*.jsx",
-      "cypress/plugins/**/*.js",
-      "cypress/support/plugins/**/*.js",
-    ],
+    files: ["**/*.js", "**/*.jsx"],
     languageOptions: {
       parserOptions: {
-        // Don't use the TypeScript parser for JS files
+        // Explicitly disable TypeScript checking for JS files
         project: null,
       },
     },
-  },
-
-  // TypeScript files in src directory
-  {
-    files: ["src/**/*.ts", "src/**/*.tsx"],
-    languageOptions: {
-      parserOptions: {
-        project: "./tsconfig.json",
-      },
-    },
     rules: {
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/explicit-module-boundary-types": "off",
-      "@typescript-eslint/no-non-null-assertion": "warn",
+      // JS-specific rules go here
     },
   },
 
-  // Cypress test files with separate project reference
-  {
-    files: [
-      "cypress/**/*.ts",
-      "cypress/**/*.js",
-      "cypress/e2e/**/*.ts",
-      "cypress/e2e/**/*.js",
-    ],
-    plugins: {
-      cypress: cypressPlugin,
-    },
-    languageOptions: {
-      globals: {
-        cy: "readonly",
-        Cypress: "readonly",
-      },
-      parserOptions: {
-        // Fix: Correct the path to Cypress tsconfig.json
-        project: "./cypress/tsconfig.json",
-      },
-    },
-    rules: {
-      "no-console": "off",
-      "@typescript-eslint/no-namespace": "off",
-      "@typescript-eslint/no-explicit-any": "off",
-    },
-  },
+  // Application TypeScript files - use root tsconfig
+  ...(rootTsConfigExists
+    ? [
+        {
+          files: ["src/**/*.ts", "src/**/*.tsx"],
+          languageOptions: {
+            parserOptions: {
+              project: "./tsconfig.json",
+              tsconfigRootDir: process.cwd(),
+            },
+          },
+          rules: {
+            // TypeScript rules for application code
+            "@typescript-eslint/explicit-function-return-type": "off",
+            "@typescript-eslint/explicit-module-boundary-types": "off",
+            "@typescript-eslint/no-non-null-assertion": "warn",
+            "@typescript-eslint/no-unused-vars": [
+              "error",
+              { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+            ],
+            "@typescript-eslint/no-explicit-any": "warn",
+            "@typescript-eslint/ban-ts-comment": [
+              "warn",
+              {
+                "ts-ignore": "allow-with-description",
+                minimumDescriptionLength: 5,
+              },
+            ],
+          },
+        },
+      ]
+    : []),
 
-  // Apply prettier config last
-  prettierConfig,
+  // Cypress test files with cypress tsconfig.json
+  ...(cypressTsConfigExists
+    ? [
+        {
+          files: [
+            "cypress/**/*.ts",
+            "cypress/**/*.js",
+            "cypress/e2e/**/*.ts",
+            "cypress/e2e/**/*.js",
+          ],
+          plugins: {
+            cypress: cypressPlugin,
+          },
+          languageOptions: {
+            globals: {
+              ..._globals.browser,
+              // Cypress globals
+              cy: "readonly",
+              Cypress: "readonly",
+              expect: "readonly",
+              assert: "readonly",
+              before: "readonly",
+              beforeEach: "readonly",
+              after: "readonly",
+              afterEach: "readonly",
+            },
+            parserOptions: {
+              project: "./cypress/tsconfig.json",
+              tsconfigRootDir: process.cwd(),
+            },
+          },
+          rules: {
+            // Cypress-specific rules
+            "no-console": "off",
+            "@typescript-eslint/no-namespace": "off",
+            "@typescript-eslint/no-explicit-any": "off",
+            "cypress/no-assigning-return-values": "error",
+            "cypress/no-unnecessary-waiting": "warn",
+            "cypress/assertion-before-screenshot": "warn",
+            "testing-library/await-async-utils": "error",
+            // Disable rules that might conflict with Cypress testing patterns
+            "@typescript-eslint/no-unused-expressions": "off",
+          },
+        },
+      ]
+    : []),
 ];
