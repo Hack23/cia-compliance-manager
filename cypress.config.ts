@@ -24,8 +24,8 @@ export default defineConfig({
   video: true,
   screenshotOnRunFailure: true,
   trashAssetsBeforeRuns: true,
-  viewportWidth: 3840,
-  viewportHeight: 2160,
+  viewportWidth: 1940,
+  viewportHeight: 1080,
   retries: {
     runMode: 1,
     openMode: 1,
