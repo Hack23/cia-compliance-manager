@@ -26,5 +26,5 @@
     "index.d.ts",
     "support/**/*.ts",
     "e2e/**/*.ts"
-  ]
+, "support/plugins/junit-merger.js"  ]
 }

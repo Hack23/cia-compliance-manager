@@ -2,6 +2,21 @@
  * Test debugging utility for diagnosing common Cypress errors
  */
 
+// Add this type declaration at the top of the file
+declare namespace Cypress {
+  interface Chainable<Subject = any> {
+    /**
+     * Diagnose test failure with enhanced debugging
+     * @param options Options for failure diagnosis
+     */
+    diagnoseFailure(options?: {
+      screenshot?: boolean;
+      logs?: boolean;
+      state?: boolean;
+    }): Chainable<null>;
+  }
+}
+
 /**
  * Analyzes a failure message to determine the root cause
  * @param errorMessage The error message to analyze
@@ -86,6 +101,9 @@ if (typeof Cypress !== 'undefined') {
     return cy.wrap(diagnosis);
   });
 }
+
+// Then your existing code should work:
+cy.diagnoseFailure(); // This should now be recognized
 
 export default {
   analyzeFailure,
