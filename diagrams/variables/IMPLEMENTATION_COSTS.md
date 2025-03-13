@@ -8,4 +8,4 @@
 
 > `const` **IMPLEMENTATION\_COSTS**: `Record`\<`SecurityLevel`, \{ `developmentEffort`: `string`; `expertise`: `string`; `maintenance`: `string`; \}\>
 
-Defined in: [constants/coreConstants.ts:69](https://github.com/Hack23/cia-compliance-manager/blob/a49474b1f59fd372b1bbc77b918221c4932a9f00/src/constants/coreConstants.ts#L69)
+Defined in: [constants/coreConstants.ts:69](https://github.com/Hack23/cia-compliance-manager/blob/eacc0bee76fd2179eab1384d4bee8cf888a704f0/src/constants/coreConstants.ts#L69)
