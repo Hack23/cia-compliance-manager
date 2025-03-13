@@ -8,7 +8,7 @@
 
 > **getPartialTextMatcher**(`text`, `length`): `string`
 
-Defined in: [constants/appConstants.ts:84](https://github.com/Hack23/cia-compliance-manager/blob/8bdea6f954ffc1eb0b71958bc6f18053b2d9a1de/src/constants/appConstants.ts#L84)
+Defined in: [constants/appConstants.ts:84](https://github.com/Hack23/cia-compliance-manager/blob/d2b0f12d179201f888df012574fdc3d11f201079/src/constants/appConstants.ts#L84)
 
 ## Parameters
 
