@@ -8,13 +8,6 @@ import { resetJunitResults } from "./cypress/tasks/junit-reset";
 // Use __dirname in a more TypeScript-friendly way
 const __dirname = resolve(process.cwd());
 
-// Ensure the results directory exists
-const resultsDir = resolve(__dirname, "cypress/results");
-if (!fs.existsSync(resultsDir)) {
-  fs.mkdirSync(resultsDir, { recursive: true });
-  console.log(`Created results directory: ${resultsDir}`);
-}
-
 export default defineConfig({
   experimentalMemoryManagement: true,
   video: true,
@@ -46,6 +39,13 @@ export default defineConfig({
 
       // Register tasks for backward compatibility
       on("task", {
+        // New readFile task
+        readFile(filePath: string) {
+          if (fs.existsSync(filePath)) {
+            return fs.readFileSync(filePath, "utf8");
+          }
+          throw new Error(`File not found: ${filePath}`);
+        },
         resetJunitResults: resetJunitResults,
         listJunitFiles() {
           const resultsDir = resolve(__dirname, "cypress/results");
