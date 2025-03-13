@@ -8,7 +8,7 @@
 
 > `const` **RISK\_LEVELS**: `object`
 
-Defined in: [constants/riskConstants.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/eacc0bee76fd2179eab1384d4bee8cf888a704f0/src/constants/riskConstants.ts#L7)
+Defined in: [constants/riskConstants.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/6543e78d82357ffb999e296cccdf10489fdd0821/src/constants/riskConstants.ts#L7)
 
 Shared constants that are needed by both app constants and CIA options
 Breaking these out helps prevent circular dependencies

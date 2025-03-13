@@ -8,7 +8,7 @@
 
 > `const` **DISPLAY\_FORMAT**: `object`
 
-Defined in: [constants/appConstants.ts:316](https://github.com/Hack23/cia-compliance-manager/blob/eacc0bee76fd2179eab1384d4bee8cf888a704f0/src/constants/appConstants.ts#L316)
+Defined in: [constants/appConstants.ts:316](https://github.com/Hack23/cia-compliance-manager/blob/6543e78d82357ffb999e296cccdf10489fdd0821/src/constants/appConstants.ts#L316)
 
 ## Type declaration
 
