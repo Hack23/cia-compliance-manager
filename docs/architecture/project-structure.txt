@@ -4,11 +4,15 @@ src/App.tsx
 src/CIAClassificationApp.direct.test.tsx
 src/CIAClassificationApp.test.tsx
 src/CIAClassificationApp.tsx
+src/components/common/BusinessImpactSection.test.tsx
+src/components/common/BusinessImpactSection.tsx
+src/components/common/CIAImpactCard.tsx
 src/components/common/index.ts
 src/components/common/KeyValuePair.test.tsx
 src/components/common/KeyValuePair.tsx
 src/components/common/MetricsCard.test.tsx
 src/components/common/MetricsCard.tsx
+src/components/common/SecurityLevelSummaryItem.tsx
 src/components/common/StatusBadge.test.tsx
 src/components/common/StatusBadge.tsx
 src/components/common/ValueDisplay.test.tsx
@@ -46,6 +50,8 @@ src/components/widgets/SecurityResourcesWidget.test.tsx
 src/components/widgets/SecurityResourcesWidget.tsx
 src/components/widgets/SecuritySummaryWidget.test.tsx
 src/components/widgets/SecuritySummaryWidget.tsx
+src/components/widgets/SecurityVisualizationWidget.test.tsx
+src/components/widgets/SecurityVisualizationWidget.tsx
 src/components/widgets/TechnicalDetailsWidget.test.tsx
 src/components/widgets/TechnicalDetailsWidget.tsx
 src/components/widgets/ValueCreationWidget.test.tsx
@@ -69,6 +75,7 @@ src/services/ciaContentService.test.ts
 src/services/ciaContentService.ts
 src/styles/components.css
 src/styles/gridStyles.ts
+src/styles/ingress-theme.css
 src/styles/layout.css
 src/styles/theme.css
 src/styles/utilities.css
@@ -96,6 +103,8 @@ src/types/testTypes.tsx
 src/types/vitest.d.ts
 src/types/widgets.test.ts
 src/types/widgets.tsx
+src/utils/securityDefaults.test.ts
+src/utils/securityDefaults.ts
 src/utils/securityLevelUtils.ts
 src/utils/test-utils.test.tsx
 src/utils/test-utils.tsx

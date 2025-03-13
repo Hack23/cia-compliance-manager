@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -9,6 +9,12 @@
 Central export file for all types used in the CIA Compliance Manager
 
 ## References
+
+### AvailabilityImpactWidgetProps
+
+Re-exports [AvailabilityImpactWidgetProps](widgets/interfaces/AvailabilityImpactWidgetProps.md)
+
+***
 
 ### AvailabilityRating
 
@@ -42,7 +48,7 @@ Re-exports [BusinessImpact](cia/interfaces/BusinessImpact.md)
 
 ### BusinessImpactAnalysisWidgetProps
 
-Re-exports [BusinessImpactAnalysisWidgetProps](componentProps/interfaces/BusinessImpactAnalysisWidgetProps.md)
+Re-exports [BusinessImpactAnalysisWidgetProps](widgets/interfaces/BusinessImpactAnalysisWidgetProps.md)
 
 ***
 
@@ -94,6 +100,12 @@ Re-exports [calculateRiskLevel](cia/functions/calculateRiskLevel.md)
 
 ***
 
+### CIAComponentType
+
+Re-exports [CIAComponentType](cia/type-aliases/CIAComponentType.md)
+
+***
+
 ### CIADetails
 
 Re-exports [CIADetails](cia/interfaces/CIADetails.md)
@@ -130,12 +142,6 @@ Re-exports [CIAWidgetProps](cia/interfaces/CIAWidgetProps.md)
 
 ***
 
-### CombinedBusinessImpactWidgetProps
-
-Re-exports [CombinedBusinessImpactWidgetProps](widgets/interfaces/CombinedBusinessImpactWidgetProps.md)
-
-***
-
 ### ComplianceFramework
 
 Re-exports [ComplianceFramework](cia/interfaces/ComplianceFramework.md)
@@ -150,7 +156,13 @@ Re-exports [ComplianceRequirement](cia/interfaces/ComplianceRequirement.md)
 
 ### ComplianceStatusWidgetProps
 
-Re-exports [ComplianceStatusWidgetProps](componentProps/interfaces/ComplianceStatusWidgetProps.md)
+Re-exports [ComplianceStatusWidgetProps](widgets/interfaces/ComplianceStatusWidgetProps.md)
+
+***
+
+### ConfidentialityImpactWidgetProps
+
+Re-exports [ConfidentialityImpactWidgetProps](widgets/interfaces/ConfidentialityImpactWidgetProps.md)
 
 ***
 
@@ -168,7 +180,7 @@ Re-exports [CostEstimate](cia/interfaces/CostEstimate.md)
 
 ### CostEstimationWidgetProps
 
-Re-exports [CostEstimationWidgetProps](componentProps/interfaces/CostEstimationWidgetProps.md)
+Re-exports [CostEstimationWidgetProps](widgets/interfaces/CostEstimationWidgetProps.md)
 
 ***
 
@@ -199,6 +211,12 @@ Re-exports [getSecurityLevelFromValue](cia/functions/getSecurityLevelFromValue.m
 ### getSecurityLevelValue
 
 Re-exports [getSecurityLevelValue](cia/functions/getSecurityLevelValue.md)
+
+***
+
+### IntegrityImpactWidgetProps
+
+Re-exports [IntegrityImpactWidgetProps](widgets/interfaces/IntegrityImpactWidgetProps.md)
 
 ***
 
@@ -264,13 +282,19 @@ Re-exports [SecurityLevelOptions](cia/interfaces/SecurityLevelOptions.md)
 
 ### SecurityLevelWidgetProps
 
-Re-exports [SecurityLevelWidgetProps](componentProps/interfaces/SecurityLevelWidgetProps.md)
+Re-exports [SecurityLevelWidgetProps](widgets/interfaces/SecurityLevelWidgetProps.md)
 
 ***
 
 ### SecurityRecommendation
 
 Re-exports [SecurityRecommendation](cia/interfaces/SecurityRecommendation.md)
+
+***
+
+### SecurityResourcesWidgetProps
+
+Re-exports [SecurityResourcesWidgetProps](widgets/interfaces/SecurityResourcesWidgetProps.md)
 
 ***
 
@@ -288,7 +312,13 @@ Re-exports [SelectionProps](componentProps/interfaces/SelectionProps.md)
 
 ### TechnicalDetailsWidgetProps
 
-Re-exports [TechnicalDetailsWidgetProps](componentProps/interfaces/TechnicalDetailsWidgetProps.md)
+Re-exports [TechnicalDetailsWidgetProps](widgets/interfaces/TechnicalDetailsWidgetProps.md)
+
+***
+
+### ValueCreationWidgetProps
+
+Re-exports [ValueCreationWidgetProps](widgets/interfaces/ValueCreationWidgetProps.md)
 
 ***
 

@@ -8,4 +8,4 @@
 
 > `const` **integrityOptions**: `Record`\<[`SecurityLevel`](../type-aliases/SecurityLevel.md), [`EnhancedCIADetails`](../interfaces/EnhancedCIADetails.md)\> = `_integrityOptions`
 
-Defined in: [src/hooks/useCIAOptions.ts:623](https://github.com/Hack23/cia-compliance-manager/blob/main/src/hooks/useCIAOptions.ts#L623)
+Defined in: [src/hooks/useCIAOptions.ts:661](https://github.com/Hack23/cia-compliance-manager/blob/main/src/hooks/useCIAOptions.ts#L661)

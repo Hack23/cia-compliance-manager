@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpact
 
-Defined in: [src/types/cia.ts:183](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L183)
+Defined in: [src/types/cia.tsx:178](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L178)
 
 BusinessImpact represents the impact of a security breach or failure
 on various aspects of the business
@@ -17,7 +17,7 @@ on various aspects of the business
 
 > **financial**: `string`
 
-Defined in: [src/types/cia.ts:184](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L184)
+Defined in: [src/types/cia.tsx:179](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L179)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [src/types/cia.ts:184](https://github.com/Hack23/cia-compliance-mana
 
 > **operational**: `string`
 
-Defined in: [src/types/cia.ts:185](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L185)
+Defined in: [src/types/cia.tsx:180](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L180)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [src/types/cia.ts:185](https://github.com/Hack23/cia-compliance-mana
 
 > **regulatory**: `string`
 
-Defined in: [src/types/cia.ts:187](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L187)
+Defined in: [src/types/cia.tsx:182](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L182)
 
 ***
 
@@ -41,4 +41,4 @@ Defined in: [src/types/cia.ts:187](https://github.com/Hack23/cia-compliance-mana
 
 > **reputational**: `string`
 
-Defined in: [src/types/cia.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L186)
+Defined in: [src/types/cia.tsx:181](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L181)

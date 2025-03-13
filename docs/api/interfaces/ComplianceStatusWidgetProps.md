@@ -6,7 +6,7 @@
 
 # Interface: ComplianceStatusWidgetProps
 
-Defined in: [src/types/widgets.tsx:79](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L79)
+Defined in: [src/types/widgets.tsx:82](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L82)
 
 Props for ComplianceStatusWidget component
 
@@ -68,7 +68,7 @@ Defined in: [src/types/widgets.tsx:12](https://github.com/Hack23/cia-compliance-
 
 > `optional` **securityLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:81](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L81)
+Defined in: [src/types/widgets.tsx:84](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L84)
 
 Overall security level
 

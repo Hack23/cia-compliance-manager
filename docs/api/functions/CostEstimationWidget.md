@@ -8,7 +8,7 @@
 
 > **CostEstimationWidget**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/CostEstimationWidget.tsx:38](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/CostEstimationWidget.tsx#L38)
+Defined in: [src/components/widgets/CostEstimationWidget.tsx:40](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/CostEstimationWidget.tsx#L40)
 
 CostEstimationWidget displays cost estimates for implementing security measures
 based on the selected CIA levels.

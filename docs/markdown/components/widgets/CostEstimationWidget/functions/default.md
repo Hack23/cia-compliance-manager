@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../../README.md)
 
 ***
 
@@ -8,13 +8,16 @@
 
 > **default**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/CostEstimationWidget.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/components/widgets/CostEstimationWidget.tsx#L29)
+Defined in: [src/components/widgets/CostEstimationWidget.tsx:40](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/components/widgets/CostEstimationWidget.tsx#L40)
+
+CostEstimationWidget displays cost estimates for implementing security measures
+based on the selected CIA levels.
 
 ## Parameters
 
 ### props
 
-`CostEstimationWidgetProps`
+[`CostEstimationWidgetProps`](../interfaces/CostEstimationWidgetProps.md)
 
 ## Returns
 

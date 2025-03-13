@@ -8,7 +8,7 @@
 
 > **getRecommendations**(`component`, `level`): `string`[]
 
-Defined in: [src/services/ciaContentService.ts:1294](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1294)
+Defined in: [src/services/ciaContentService.ts:1376](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1376)
 
 Get recommendations for a specific component and level
 Always returns a string array, even when no recommendations are found

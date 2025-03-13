@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ComplianceRequirement
 
-Defined in: [src/types/cia.ts:206](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L206)
+Defined in: [src/types/cia.tsx:201](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L201)
 
 ComplianceRequirement represents a specific compliance requirement
 that must be met
@@ -17,7 +17,7 @@ that must be met
 
 > **control**: `string`
 
-Defined in: [src/types/cia.ts:208](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L208)
+Defined in: [src/types/cia.tsx:203](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L203)
 
 ***
 
@@ -25,7 +25,7 @@ Defined in: [src/types/cia.ts:208](https://github.com/Hack23/cia-compliance-mana
 
 > **description**: `string`
 
-Defined in: [src/types/cia.ts:209](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L209)
+Defined in: [src/types/cia.tsx:204](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L204)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [src/types/cia.ts:209](https://github.com/Hack23/cia-compliance-mana
 
 > **framework**: `string`
 
-Defined in: [src/types/cia.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L207)
+Defined in: [src/types/cia.tsx:202](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L202)
 
 ***
 
@@ -41,4 +41,4 @@ Defined in: [src/types/cia.ts:207](https://github.com/Hack23/cia-compliance-mana
 
 > **status**: `"compliant"` \| `"non-compliant"` \| `"partial"`
 
-Defined in: [src/types/cia.ts:210](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L210)
+Defined in: [src/types/cia.tsx:205](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L205)

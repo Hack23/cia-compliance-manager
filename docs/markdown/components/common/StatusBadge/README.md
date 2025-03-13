@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -8,7 +8,8 @@
 
 ## Type Aliases
 
-- [StatusBadgeProps](type-aliases/StatusBadgeProps.md)
+- [StatusBadgeSize](type-aliases/StatusBadgeSize.md)
+- [StatusBadgeVariant](type-aliases/StatusBadgeVariant.md)
 
 ## Functions
 

@@ -8,7 +8,7 @@
 
 > `const` **defaultService**: `object`
 
-Defined in: [src/services/ciaContentService.ts:1287](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1287)
+Defined in: [src/services/ciaContentService.ts:1369](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1369)
 
 ## Type declaration
 
@@ -607,7 +607,7 @@ Get detailed technical implementation information
 
 ##### level
 
-[`SecurityLevel`](../type-aliases/SecurityLevel.md)
+`string`
 
 #### Returns
 

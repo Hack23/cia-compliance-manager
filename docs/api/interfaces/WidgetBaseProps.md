@@ -13,7 +13,6 @@ Base properties for all widgets
 ## Extended by
 
 - [`WidgetBaseComponentProps`](WidgetBaseComponentProps.md)
-- [`ValueCreationWidgetProps`](ValueCreationWidgetProps.md)
 - [`CostEstimationWidgetProps`](CostEstimationWidgetProps.md)
 - [`ValueCreationWidgetProps`](ValueCreationWidgetProps.md)
 - [`ComplianceStatusWidgetProps`](ComplianceStatusWidgetProps.md)

@@ -8,7 +8,7 @@
 
 > **getRiskBadgeVariant**(`riskLevel`): `"neutral"` \| `"success"` \| `"warning"` \| `"info"` \| `"error"`
 
-Defined in: [src/services/ciaContentService.ts:1307](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1307)
+Defined in: [src/services/ciaContentService.ts:1389](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1389)
 
 Get appropriate badge variant based on risk level
 

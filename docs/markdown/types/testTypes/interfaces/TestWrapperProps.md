@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: TestWrapperProps
 
-Defined in: [src/types/testTypes.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L24)
+Defined in: [src/types/testTypes.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/testTypes.tsx#L24)
 
 ## Properties
 
@@ -14,4 +14,4 @@ Defined in: [src/types/testTypes.ts:24](https://github.com/Hack23/cia-compliance
 
 > **children**: `ReactNode`
 
-Defined in: [src/types/testTypes.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L25)
+Defined in: [src/types/testTypes.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/testTypes.tsx#L25)

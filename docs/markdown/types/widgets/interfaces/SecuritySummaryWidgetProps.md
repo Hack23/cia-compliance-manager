@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -6,43 +6,73 @@
 
 # Interface: SecuritySummaryWidgetProps
 
-Defined in: [src/types/widgets.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/widgets.ts#L20)
+Defined in: [src/types/widgets.tsx:67](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/widgets.tsx#L67)
 
-## Extends
-
-- [`WidgetBaseProps`](WidgetBaseProps.md)
+Props for the SecuritySummaryWidget component
 
 ## Properties
 
-### availabilityLevel?
+### availabilityLevel
 
-> `optional` **availabilityLevel**: `string`
+> **availabilityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/widgets.ts#L22)
-
-***
-
-### confidentialityLevel?
-
-> `optional` **confidentialityLevel**: `string`
-
-Defined in: [src/types/widgets.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/widgets.ts#L24)
+Defined in: [src/types/widgets.tsx:69](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/widgets.tsx#L69)
 
 ***
 
-### integrityLevel?
+### className?
 
-> `optional` **integrityLevel**: `string`
+> `optional` **className**: `string`
 
-Defined in: [src/types/widgets.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/widgets.ts#L23)
+Defined in: [src/types/widgets.tsx:72](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/widgets.tsx#L72)
+
+***
+
+### confidentialityLevel
+
+> **confidentialityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
+
+Defined in: [src/types/widgets.tsx:71](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/widgets.tsx#L71)
+
+***
+
+### integrityLevel
+
+> **integrityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
+
+Defined in: [src/types/widgets.tsx:70](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/widgets.tsx#L70)
 
 ***
 
 ### securityLevel
 
-> **securityLevel**: `string`
+> **securityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/widgets.ts#L21)
+Defined in: [src/types/widgets.tsx:68](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/widgets.tsx#L68)
+
+***
+
+### showBusinessImpact?
+
+> `optional` **showBusinessImpact**: `boolean`
+
+Defined in: [src/types/widgets.tsx:75](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/widgets.tsx#L75)
+
+***
+
+### showMetrics?
+
+> `optional` **showMetrics**: `boolean`
+
+Defined in: [src/types/widgets.tsx:76](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/widgets.tsx#L76)
+
+***
+
+### showTechnicalDetails?
+
+> `optional` **showTechnicalDetails**: `boolean`
+
+Defined in: [src/types/widgets.tsx:74](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/widgets.tsx#L74)
 
 ***
 
@@ -50,8 +80,4 @@ Defined in: [src/types/widgets.ts:21](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.ts:3](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/widgets.ts#L3)
-
-#### Inherited from
-
-[`WidgetBaseProps`](WidgetBaseProps.md).[`testId`](WidgetBaseProps.md#testid)
+Defined in: [src/types/widgets.tsx:73](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/widgets.tsx#L73)

@@ -8,13 +8,17 @@
 
 > `const` **VALUE\_CREATION\_TEST\_IDS**: `object`
 
-Defined in: [constants/testIds.ts:461](https://github.com/Hack23/cia-compliance-manager/blob/0a3ec5feaea6fcd6a9f03fda1b8552f4c9fbfab0/src/constants/testIds.ts#L461)
+Defined in: [constants/testIds.ts:461](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/constants/testIds.ts#L461)
 
 ## Type declaration
 
 ### VALUE\_CREATION\_PREFIX
 
 > **VALUE\_CREATION\_PREFIX**: `string` = `"value-creation"`
+
+### VALUE\_CREATION\_WIDGET
+
+> **VALUE\_CREATION\_WIDGET**: `string` = `"value-creation-widget"`
 
 ### VALUE\_POINT
 

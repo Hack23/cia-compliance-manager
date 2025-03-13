@@ -6,7 +6,7 @@
 
 # Interface: SecurityResourcesWidgetProps
 
-Defined in: [src/types/widgets.tsx:159](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L159)
+Defined in: [src/types/widgets.tsx:162](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L162)
 
 Props for the SecurityResourcesWidget component
 
@@ -68,7 +68,7 @@ Defined in: [src/types/widgets.tsx:12](https://github.com/Hack23/cia-compliance-
 
 > **securityLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:161](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L161)
+Defined in: [src/types/widgets.tsx:164](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L164)
 
 Overall security level
 

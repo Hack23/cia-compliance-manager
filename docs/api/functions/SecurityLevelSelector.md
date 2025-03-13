@@ -8,7 +8,7 @@
 
 > **SecurityLevelSelector**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/SecurityLevelSelector.tsx:42](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L42)
+Defined in: [src/components/SecurityLevelSelector.tsx:41](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L41)
 
 SecurityLevelSelector component for selecting CIA security levels
 Enhanced with rich descriptions and visual indicators

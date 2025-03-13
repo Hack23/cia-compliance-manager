@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/constants/testIds.ts#L409)
+Defined in: [src/constants/testIds.ts:529](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/constants/testIds.ts#L529)
 
 ## Type declaration
 
@@ -48,6 +48,18 @@ Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-complia
 
 > **AVAILABILITY\_DESCRIPTION\_TEXT**: `string` = `"availability-description-text"`
 
+### AVAILABILITY\_IMPACT\_BUSINESS\_IMPACT
+
+> **AVAILABILITY\_IMPACT\_BUSINESS\_IMPACT**: `string` = `"availability-impact-business-impact"`
+
+### AVAILABILITY\_IMPACT\_BUSINESS\_PERSPECTIVE
+
+> **AVAILABILITY\_IMPACT\_BUSINESS\_PERSPECTIVE**: `string` = `"availability-impact-business-perspective"`
+
+### AVAILABILITY\_IMPACT\_DESCRIPTION
+
+> **AVAILABILITY\_IMPACT\_DESCRIPTION**: `string` = `"availability-impact-description"`
+
 ### AVAILABILITY\_IMPACT\_DETAILS
 
 > **AVAILABILITY\_IMPACT\_DETAILS**: `string` = `"availability-impact-details"`
@@ -56,6 +68,42 @@ Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-complia
 
 > **AVAILABILITY\_IMPACT\_HEADING**: `string` = `"availability-impact-heading"`
 
+### AVAILABILITY\_IMPACT\_MTTR
+
+> **AVAILABILITY\_IMPACT\_MTTR**: `string` = `"availability-impact-mttr"`
+
+### AVAILABILITY\_IMPACT\_PREFIX
+
+> **AVAILABILITY\_IMPACT\_PREFIX**: `string` = `"widget-availability-impact"`
+
+### AVAILABILITY\_IMPACT\_RECOMMENDATIONS
+
+> **AVAILABILITY\_IMPACT\_RECOMMENDATIONS**: `string` = `"availability-impact-recommendations"`
+
+### AVAILABILITY\_IMPACT\_RPO
+
+> **AVAILABILITY\_IMPACT\_RPO**: `string` = `"availability-impact-rpo"`
+
+### AVAILABILITY\_IMPACT\_RTO
+
+> **AVAILABILITY\_IMPACT\_RTO**: `string` = `"availability-impact-rto"`
+
+### AVAILABILITY\_IMPACT\_TITLE
+
+> **AVAILABILITY\_IMPACT\_TITLE**: `string` = `"availability-impact-title"`
+
+### AVAILABILITY\_IMPACT\_UPTIME
+
+> **AVAILABILITY\_IMPACT\_UPTIME**: `string` = `"availability-impact-uptime"`
+
+### AVAILABILITY\_IMPACT\_VALUE
+
+> **AVAILABILITY\_IMPACT\_VALUE**: `string` = `"availability-impact-value"`
+
+### AVAILABILITY\_IMPACT\_WIDGET
+
+> **AVAILABILITY\_IMPACT\_WIDGET**: `string` = `"widget-availability-impact"`
+
 ### AVAILABILITY\_KV
 
 > **AVAILABILITY\_KV**: `string` = `"availability-kv"`
@@ -63,6 +111,10 @@ Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-complia
 ### AVAILABILITY\_LABEL
 
 > **AVAILABILITY\_LABEL**: `string` = `"availability-label"`
+
+### AVAILABILITY\_LEVEL
+
+> **AVAILABILITY\_LEVEL**: `string` = `"availability-level"`
 
 ### AVAILABILITY\_LEVEL\_INDICATOR
 
@@ -74,7 +126,7 @@ Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-complia
 
 ### AVAILABILITY\_SECTION
 
-> **AVAILABILITY\_SECTION**: `string` = `"availability-section"`
+> **AVAILABILITY\_SECTION**: `string` = `"technical-details-availability"`
 
 ### AVAILABILITY\_SELECT
 
@@ -156,6 +208,10 @@ Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-complia
 
 > **BADGE\_STRONG\_PROTECTION**: `string` = `"badge-strong-protection"`
 
+### BENEFITS\_SECTION
+
+> **BENEFITS\_SECTION**: `string` = `"benefits-section"`
+
 ### BUSINESS\_BENEFITS
 
 > **BUSINESS\_BENEFITS**: `string` = `"business-benefits"`
@@ -186,7 +242,7 @@ Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-complia
 
 ### BUSINESS\_IMPACT\_WIDGET
 
-> **BUSINESS\_IMPACT\_WIDGET**: `string` = `"widget-business-impact"`
+> **BUSINESS\_IMPACT\_WIDGET**: `string` = `"business-impact-widget"`
 
 ### CAPEX\_ESTIMATE\_VALUE
 
@@ -256,6 +312,10 @@ Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-complia
 
 > **COMBINED\_BUSINESS\_IMPACT\_WIDGET**: `string` = `"combined-business-impact-widget"`
 
+### COMPLIANCE\_FRAMEWORK\_ITEM
+
+> **COMPLIANCE\_FRAMEWORK\_ITEM**: `string` = `"compliance-framework-item"`
+
 ### COMPLIANCE\_FRAMEWORKS\_CONTAINER
 
 > **COMPLIANCE\_FRAMEWORKS\_CONTAINER**: `string` = `"compliance-frameworks-container"`
@@ -267,6 +327,10 @@ Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-complia
 ### COMPLIANCE\_STATUS\_BADGE
 
 > **COMPLIANCE\_STATUS\_BADGE**: `string` = `"compliance-status-badge"`
+
+### COMPLIANCE\_STATUS\_PREFIX
+
+> **COMPLIANCE\_STATUS\_PREFIX**: `string` = `"compliance-status"`
 
 ### COMPLIANCE\_STATUS\_WIDGET
 
@@ -296,6 +360,10 @@ Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-complia
 
 > **CONFIDENTIALITY\_DESCRIPTION\_TEXT**: `string` = `"confidentiality-description-text"`
 
+### CONFIDENTIALITY\_IMPACT\_DESCRIPTION
+
+> **CONFIDENTIALITY\_IMPACT\_DESCRIPTION**: `string` = `"confidentiality-impact-description"`
+
 ### CONFIDENTIALITY\_IMPACT\_DETAILS
 
 > **CONFIDENTIALITY\_IMPACT\_DETAILS**: `string` = `"confidentiality-impact-details"`
@@ -304,6 +372,18 @@ Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-complia
 
 > **CONFIDENTIALITY\_IMPACT\_HEADING**: `string` = `"confidentiality-impact-heading"`
 
+### CONFIDENTIALITY\_IMPACT\_PREFIX
+
+> **CONFIDENTIALITY\_IMPACT\_PREFIX**: `string` = `"confidentiality-impact"`
+
+### CONFIDENTIALITY\_IMPACT\_VALUE
+
+> **CONFIDENTIALITY\_IMPACT\_VALUE**: `string` = `"confidentiality-impact-value"`
+
+### CONFIDENTIALITY\_IMPACT\_WIDGET
+
+> **CONFIDENTIALITY\_IMPACT\_WIDGET**: `string` = `"widget-confidentiality-impact"`
+
 ### CONFIDENTIALITY\_KV
 
 > **CONFIDENTIALITY\_KV**: `string` = `"confidentiality-kv"`
@@ -311,6 +391,10 @@ Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-complia
 ### CONFIDENTIALITY\_LABEL
 
 > **CONFIDENTIALITY\_LABEL**: `string` = `"confidentiality-label"`
+
+### CONFIDENTIALITY\_LEVEL
+
+> **CONFIDENTIALITY\_LEVEL**: `string` = `"confidentiality-level"`
 
 ### CONFIDENTIALITY\_LEVEL\_INDICATOR
 
@@ -326,7 +410,7 @@ Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-complia
 
 ### CONFIDENTIALITY\_SECTION
 
-> **CONFIDENTIALITY\_SECTION**: `string` = `"confidentiality-section"`
+> **CONFIDENTIALITY\_SECTION**: `string` = `"technical-details-confidentiality"`
 
 ### CONFIDENTIALITY\_SELECT
 
@@ -666,10 +750,6 @@ Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-complia
 
 > **FINANCIAL\_IMPACT\_SECTION**: `string` = `"financial-impact-section"`
 
-### FINANCIAL\_RISK\_BADGE
-
-> **FINANCIAL\_RISK\_BADGE**: `string` = `"financial-risk-badge"`
-
 ### FRAMEWORK\_ITEM\_PREFIX
 
 > **FRAMEWORK\_ITEM\_PREFIX**: `string` = `"framework-item"`
@@ -677,8 +757,6 @@ Defined in: [src/constants/testIds.ts:409](https://github.com/Hack23/cia-complia
 ### getTestId()
 
 > **getTestId**: (`prefix`, `id`) => `string`
-
-Helper to generate dynamic test IDs with consistent patterns
 
 #### Parameters
 
@@ -722,6 +800,10 @@ Helper to generate dynamic test IDs with consistent patterns
 
 > **IMPLEMENTATION\_TIME**: `string` = `"implementation-time"`
 
+### IMPLICATIONS
+
+> **IMPLICATIONS**: `string` = `"implications"`
+
 ### INTEGRITY
 
 > **INTEGRITY**: `string` = `"integrity"`
@@ -742,6 +824,10 @@ Helper to generate dynamic test IDs with consistent patterns
 
 > **INTEGRITY\_DESCRIPTION\_TEXT**: `string` = `"integrity-description-text"`
 
+### INTEGRITY\_IMPACT\_DESCRIPTION
+
+> **INTEGRITY\_IMPACT\_DESCRIPTION**: `string` = `"integrity-impact-description"`
+
 ### INTEGRITY\_IMPACT\_DETAILS
 
 > **INTEGRITY\_IMPACT\_DETAILS**: `string` = `"integrity-impact-details"`
@@ -750,6 +836,18 @@ Helper to generate dynamic test IDs with consistent patterns
 
 > **INTEGRITY\_IMPACT\_HEADING**: `string` = `"integrity-impact-heading"`
 
+### INTEGRITY\_IMPACT\_PREFIX
+
+> **INTEGRITY\_IMPACT\_PREFIX**: `string` = `"integrity-impact"`
+
+### INTEGRITY\_IMPACT\_VALUE
+
+> **INTEGRITY\_IMPACT\_VALUE**: `string` = `"integrity-impact-value"`
+
+### INTEGRITY\_IMPACT\_WIDGET
+
+> **INTEGRITY\_IMPACT\_WIDGET**: `string` = `"widget-integrity-impact"`
+
 ### INTEGRITY\_KV
 
 > **INTEGRITY\_KV**: `string` = `"integrity-kv"`
@@ -757,6 +855,10 @@ Helper to generate dynamic test IDs with consistent patterns
 ### INTEGRITY\_LABEL
 
 > **INTEGRITY\_LABEL**: `string` = `"integrity-label"`
+
+### INTEGRITY\_LEVEL
+
+> **INTEGRITY\_LEVEL**: `string` = `"integrity-level"`
 
 ### INTEGRITY\_LEVEL\_INDICATOR
 
@@ -768,7 +870,7 @@ Helper to generate dynamic test IDs with consistent patterns
 
 ### INTEGRITY\_SECTION
 
-> **INTEGRITY\_SECTION**: `string` = `"integrity-section"`
+> **INTEGRITY\_SECTION**: `string` = `"technical-details-integrity"`
 
 ### INTEGRITY\_SELECT
 
@@ -914,6 +1016,10 @@ Helper to generate dynamic test IDs with consistent patterns
 
 > **OPEX\_VALUE**: `string` = `"opex-value"`
 
+### OVERALL\_LEVEL
+
+> **OVERALL\_LEVEL**: `string` = `"overall-level"`
+
 ### OVERALL\_RATING
 
 > **OVERALL\_RATING**: `string` = `"overall-rating"`
@@ -970,6 +1076,14 @@ Helper to generate dynamic test IDs with consistent patterns
 
 > **REQUIRED\_EXPERTISE**: `string` = `"required-expertise"`
 
+### RESOURCE\_ITEM
+
+> **RESOURCE\_ITEM**: `string` = `"security-resource-item"`
+
+### RESOURCE\_LIST
+
+> **RESOURCE\_LIST**: `string` = `"security-resources-list"`
+
 ### RESOURCES\_HEADER
 
 > **RESOURCES\_HEADER**: `string` = `"resources-header"`
@@ -1014,6 +1128,10 @@ Helper to generate dynamic test IDs with consistent patterns
 
 > **SECURITY\_LEVEL\_INDICATOR**: `string` = `"security-level-indicator"`
 
+### SECURITY\_LEVEL\_PREFIX
+
+> **SECURITY\_LEVEL\_PREFIX**: `string` = `"security-level"`
+
 ### SECURITY\_LEVEL\_PROGRESS\_BAR
 
 > **SECURITY\_LEVEL\_PROGRESS\_BAR**: `string` = `"security-level-progress-bar"`
@@ -1038,6 +1156,14 @@ Helper to generate dynamic test IDs with consistent patterns
 
 > **SECURITY\_RECOMMENDATIONS**: `string` = `"security-recommendations"`
 
+### SECURITY\_RESOURCES\_PREFIX
+
+> **SECURITY\_RESOURCES\_PREFIX**: `string` = `"security-resources"`
+
+### SECURITY\_RESOURCES\_WIDGET
+
+> **SECURITY\_RESOURCES\_WIDGET**: `string` = `"security-resources-widget"`
+
 ### SECURITY\_SUMMARY\_CONTAINER
 
 > **SECURITY\_SUMMARY\_CONTAINER**: `string` = `"security-summary-container"`
@@ -1045,6 +1171,10 @@ Helper to generate dynamic test IDs with consistent patterns
 ### SECURITY\_SUMMARY\_DESCRIPTION
 
 > **SECURITY\_SUMMARY\_DESCRIPTION**: `string` = `"security-summary-description"`
+
+### SECURITY\_SUMMARY\_PREFIX
+
+> **SECURITY\_SUMMARY\_PREFIX**: `string` = `"security-summary"`
 
 ### SECURITY\_SUMMARY\_TITLE
 
@@ -1074,6 +1204,10 @@ Helper to generate dynamic test IDs with consistent patterns
 
 > **TECHNICAL\_DESCRIPTION**: `string` = `"technical-description"`
 
+### TECHNICAL\_DETAILS\_PREFIX
+
+> **TECHNICAL\_DETAILS\_PREFIX**: `string` = `"technical-details"`
+
 ### TECHNICAL\_DETAILS\_SECTION
 
 > **TECHNICAL\_DETAILS\_SECTION**: `string` = `"technical-details-section"`
@@ -1085,6 +1219,10 @@ Helper to generate dynamic test IDs with consistent patterns
 ### TECHNICAL\_HEADER
 
 > **TECHNICAL\_HEADER**: `string` = `"technical-header"`
+
+### TECHNICAL\_IMPLEMENTATION\_DETAILS
+
+> **TECHNICAL\_IMPLEMENTATION\_DETAILS**: `string` = `"technical-implementation-details"`
 
 ### TECHNICAL\_SECTION\_TOGGLE
 
@@ -1110,9 +1248,33 @@ Type-safe way to get value points for a security level
 
 `undefined` \| `string`[]
 
+#### TEST\_HELPERS.toSecurityLevel()
+
+> **toSecurityLevel**: (`level`) => [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
+
+Convert string to SecurityLevel type safely
+
+##### Parameters
+
+###### level
+
+`string`
+
+##### Returns
+
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
+
 ### THEME\_TOGGLE
 
 > **THEME\_TOGGLE**: `string` = `"theme-toggle"`
+
+### THEME\_TOGGLE\_DARK
+
+> **THEME\_TOGGLE\_DARK**: `string` = `"theme-toggle-dark"`
+
+### THEME\_TOGGLE\_LIGHT
+
+> **THEME\_TOGGLE\_LIGHT**: `string` = `"theme-toggle-light"`
 
 ### THREE\_YEAR\_TOTAL
 
@@ -1130,6 +1292,10 @@ Type-safe way to get value points for a security level
 
 > **VALUE\_CREATION\_CONTENT**: `string` = `"value-creation-content"`
 
+### VALUE\_CREATION\_PREFIX
+
+> **VALUE\_CREATION\_PREFIX**: `string` = `"value-creation"`
+
 ### VALUE\_CREATION\_SUBTITLE
 
 > **VALUE\_CREATION\_SUBTITLE**: `string` = `"value-creation-subtitle"`
@@ -1140,11 +1306,15 @@ Type-safe way to get value points for a security level
 
 ### VALUE\_CREATION\_WIDGET
 
-> **VALUE\_CREATION\_WIDGET**: `string` = `"widget-value-creation"`
+> **VALUE\_CREATION\_WIDGET**: `string` = `"value-creation-widget"`
 
 ### VALUE\_DISPLAY
 
 > **VALUE\_DISPLAY**: `string` = `"value-display"`
+
+### VALUE\_POINT
+
+> **VALUE\_POINT**: `string` = `"value-point"`
 
 ### VALUE\_POINTS\_LIST
 

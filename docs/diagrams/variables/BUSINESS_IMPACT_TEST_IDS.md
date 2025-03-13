@@ -8,7 +8,7 @@
 
 > `const` **BUSINESS\_IMPACT\_TEST\_IDS**: `object`
 
-Defined in: [constants/testIds.ts:171](https://github.com/Hack23/cia-compliance-manager/blob/0a3ec5feaea6fcd6a9f03fda1b8552f4c9fbfab0/src/constants/testIds.ts#L171)
+Defined in: [constants/testIds.ts:171](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/constants/testIds.ts#L171)
 
 ## Type declaration
 
@@ -36,6 +36,10 @@ Defined in: [constants/testIds.ts:171](https://github.com/Hack23/cia-compliance-
 
 > **BUSINESS\_IMPACT\_SUMMARY**: `string` = `"business-impact-summary"`
 
+### BUSINESS\_IMPACT\_WIDGET
+
+> **BUSINESS\_IMPACT\_WIDGET**: `string` = `"business-impact-widget"`
+
 ### CATEGORY\_ICON\_PREFIX
 
 > **CATEGORY\_ICON\_PREFIX**: `string` = `"category-icon"`
@@ -55,10 +59,6 @@ Defined in: [constants/testIds.ts:171](https://github.com/Hack23/cia-compliance-
 ### FINANCIAL\_IMPACT\_SECTION
 
 > **FINANCIAL\_IMPACT\_SECTION**: `string` = `"financial-impact-section"`
-
-### FINANCIAL\_RISK\_BADGE
-
-> **FINANCIAL\_RISK\_BADGE**: `string` = `"financial-risk-badge"`
 
 ### IMPACT\_ANALYSIS\_PREFIX
 

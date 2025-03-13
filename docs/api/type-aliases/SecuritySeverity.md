@@ -8,6 +8,6 @@
 
 > **SecuritySeverity**: `"none"` \| `"low"` \| `"moderate"` \| `"high"` \| `"very-high"`
 
-Defined in: [src/utils/widgetHelpers.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L13)
+Defined in: [src/utils/widgetHelpers.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L19)
 
 Types of security level severities for UI formatting

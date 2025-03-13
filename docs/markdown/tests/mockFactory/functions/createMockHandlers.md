@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -6,14 +6,12 @@
 
 # Function: createMockHandlers()
 
-> **createMockHandlers**(): [`MockHandlers`](../../../types/testTypes/interfaces/MockHandlers.md)
+> **createMockHandlers**(): `MockHandlers`
 
-Defined in: [src/tests/mockFactory.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/tests/mockFactory.ts#L45)
+Defined in: [src/tests/mockFactory.tsx:61](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/tests/mockFactory.tsx#L61)
 
 Creates mock event handlers for component testing
 
 ## Returns
 
-[`MockHandlers`](../../../types/testTypes/interfaces/MockHandlers.md)
-
-Object with mock functions for availability, integrity, and confidentiality
+`MockHandlers`

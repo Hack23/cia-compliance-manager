@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../../README.md)
 
 ***
 
@@ -8,15 +8,16 @@
 
 > **default**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/CIAImpactSummaryWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/components/widgets/CIAImpactSummaryWidget.tsx#L16)
+Defined in: [src/components/widgets/CIAImpactSummaryWidget.tsx:32](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/components/widgets/CIAImpactSummaryWidget.tsx#L32)
 
-Widget to display the CIA impact levels in a compact summary format
+CIAImpactSummaryWidget shows a consolidated view of all three CIA pillars
+with consistent UI/UX styling and color schemes.
 
 ## Parameters
 
 ### props
 
-`CIAImpactSummaryWidgetProps`
+[`CIAImpactSummaryWidgetProps`](../interfaces/CIAImpactSummaryWidgetProps.md)
 
 ## Returns
 

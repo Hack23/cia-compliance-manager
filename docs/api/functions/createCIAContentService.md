@@ -8,7 +8,7 @@
 
 > **createCIAContentService**(`dataProvider`): `object`
 
-Defined in: [src/services/ciaContentService.ts:115](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L115)
+Defined in: [src/services/ciaContentService.ts:116](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L116)
 
 Create a CIA content service with dependency injection
 
@@ -617,7 +617,7 @@ Get detailed technical implementation information
 
 ##### level
 
-[`SecurityLevel`](../type-aliases/SecurityLevel.md)
+`string`
 
 #### Returns
 

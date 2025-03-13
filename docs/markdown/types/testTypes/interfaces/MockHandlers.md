@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: MockHandlers
 
-Defined in: [src/types/testTypes.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L17)
+Defined in: [src/types/testTypes.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/testTypes.tsx#L17)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/types/testTypes.ts:17](https://github.com/Hack23/cia-compliance
 
 > **setAvailability**: (`level`) => `void`
 
-Defined in: [src/types/testTypes.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L18)
+Defined in: [src/types/testTypes.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/testTypes.tsx#L18)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [src/types/testTypes.ts:18](https://github.com/Hack23/cia-compliance
 
 > **setConfidentiality**: (`level`) => `void`
 
-Defined in: [src/types/testTypes.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L20)
+Defined in: [src/types/testTypes.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/testTypes.tsx#L20)
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [src/types/testTypes.ts:20](https://github.com/Hack23/cia-compliance
 
 > **setIntegrity**: (`level`) => `void`
 
-Defined in: [src/types/testTypes.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/testTypes.ts#L19)
+Defined in: [src/types/testTypes.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/testTypes.tsx#L19)
 
 #### Parameters
 

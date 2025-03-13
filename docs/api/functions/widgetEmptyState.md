@@ -8,7 +8,7 @@
 
 > **widgetEmptyState**(`message`?, `testId`?): `ReactNode`
 
-Defined in: [src/utils/widgetHelpers.tsx:261](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L261)
+Defined in: [src/utils/widgetHelpers.tsx:193](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L193)
 
 Creates an empty state indicator for widgets with no data
 

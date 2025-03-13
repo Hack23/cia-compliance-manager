@@ -6,7 +6,7 @@
 
 # Interface: TechnicalDetailsWidgetProps
 
-Defined in: [src/types/widgets.tsx:167](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L167)
+Defined in: [src/types/widgets.tsx:170](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L170)
 
 Props for the TechnicalDetailsWidget component
 
@@ -32,7 +32,7 @@ Defined in: [src/types/widgets.tsx:11](https://github.com/Hack23/cia-compliance-
 
 > `optional` **availabilityOptions**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
 
-Defined in: [src/types/widgets.tsx:169](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L169)
+Defined in: [src/types/widgets.tsx:172](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L172)
 
 Availability options for specific technical details
 
@@ -42,7 +42,7 @@ Availability options for specific technical details
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/widgets.tsx:175](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L175)
+Defined in: [src/types/widgets.tsx:178](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L178)
 
 Optional CSS class name
 
@@ -68,7 +68,7 @@ Defined in: [src/types/widgets.tsx:13](https://github.com/Hack23/cia-compliance-
 
 > `optional` **confidentialityOptions**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
 
-Defined in: [src/types/widgets.tsx:173](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L173)
+Defined in: [src/types/widgets.tsx:176](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L176)
 
 Confidentiality options for specific technical details
 
@@ -90,7 +90,7 @@ Defined in: [src/types/widgets.tsx:12](https://github.com/Hack23/cia-compliance-
 
 > `optional` **integrityOptions**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
 
-Defined in: [src/types/widgets.tsx:171](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L171)
+Defined in: [src/types/widgets.tsx:174](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L174)
 
 Integrity options for specific technical details
 

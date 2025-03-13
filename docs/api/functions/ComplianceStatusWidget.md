@@ -8,10 +8,10 @@
 
 > **ComplianceStatusWidget**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:36](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/ComplianceStatusWidget.tsx#L36)
+Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:34](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/ComplianceStatusWidget.tsx#L34)
 
-ComplianceStatusWidget shows compliance status with various frameworks
-based on the selected security levels
+ComplianceStatusWidget displays the compliance status based on selected security levels
+It shows compliant, partially compliant, and non-compliant frameworks
 
 ## Parameters
 

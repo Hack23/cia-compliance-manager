@@ -8,7 +8,7 @@
 
 > **getSecurityLevelColors**(`level`): `object`
 
-Defined in: [src/utils/widgetHelpers.tsx:73](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L73)
+Defined in: [src/utils/widgetHelpers.tsx:55](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L55)
 
 Gets color hex values for a security level directly from constants
 

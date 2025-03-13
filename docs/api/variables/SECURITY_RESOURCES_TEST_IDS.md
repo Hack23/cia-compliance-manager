@@ -8,7 +8,7 @@
 
 > `const` **SECURITY\_RESOURCES\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:450](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L450)
+Defined in: [src/constants/testIds.ts:449](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L449)
 
 ## Type declaration
 
@@ -23,3 +23,7 @@ Defined in: [src/constants/testIds.ts:450](https://github.com/Hack23/cia-complia
 ### SECURITY\_RESOURCES\_PREFIX
 
 > **SECURITY\_RESOURCES\_PREFIX**: `string` = `"security-resources"`
+
+### SECURITY\_RESOURCES\_WIDGET
+
+> **SECURITY\_RESOURCES\_WIDGET**: `string` = `"security-resources-widget"`

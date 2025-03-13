@@ -8,7 +8,7 @@
 
 > **widgetLoadingIndicator**(`testId`?): `ReactNode`
 
-Defined in: [src/utils/widgetHelpers.tsx:231](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L231)
+Defined in: [src/utils/widgetHelpers.tsx:163](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L163)
 
 Creates a loading indicator for widgets in loading state
 

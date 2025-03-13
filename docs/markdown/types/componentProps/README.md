@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../README.md)
 
 ***
 
@@ -57,31 +57,72 @@ included in the TypeDoc documentation.
 - [SelectionProps](interfaces/SelectionProps.md)
 
 ### Widget Components
- BusinessImpactAnalysisWidgetProps
-
-- [BusinessImpactAnalysisWidgetProps](interfaces/BusinessImpactAnalysisWidgetProps.md)
-
-### Widget Components
  CIAImpactSummaryWidgetProps
 
 - [CIAImpactSummaryWidgetProps](interfaces/CIAImpactSummaryWidgetProps.md)
 
-### Widget Components
- ComplianceStatusWidgetProps
+## References
 
-- [ComplianceStatusWidgetProps](interfaces/ComplianceStatusWidgetProps.md)
+### AvailabilityImpactWidgetProps
 
-### Widget Components
- CostEstimationWidgetProps
+Re-exports [AvailabilityImpactWidgetProps](../widgets/interfaces/AvailabilityImpactWidgetProps.md)
 
-- [CostEstimationWidgetProps](interfaces/CostEstimationWidgetProps.md)
+***
 
-### Widget Components
- SecurityLevelWidgetProps
+### BusinessImpactAnalysisWidgetProps
 
-- [SecurityLevelWidgetProps](interfaces/SecurityLevelWidgetProps.md)
+Re-exports [BusinessImpactAnalysisWidgetProps](../widgets/interfaces/BusinessImpactAnalysisWidgetProps.md)
 
-### Widget Components
- TechnicalDetailsWidgetProps
+***
 
-- [TechnicalDetailsWidgetProps](interfaces/TechnicalDetailsWidgetProps.md)
+### ComplianceStatusWidgetProps
+
+Re-exports [ComplianceStatusWidgetProps](../widgets/interfaces/ComplianceStatusWidgetProps.md)
+
+***
+
+### ConfidentialityImpactWidgetProps
+
+Re-exports [ConfidentialityImpactWidgetProps](../widgets/interfaces/ConfidentialityImpactWidgetProps.md)
+
+***
+
+### CostEstimationWidgetProps
+
+Re-exports [CostEstimationWidgetProps](../widgets/interfaces/CostEstimationWidgetProps.md)
+
+***
+
+### IntegrityImpactWidgetProps
+
+Re-exports [IntegrityImpactWidgetProps](../widgets/interfaces/IntegrityImpactWidgetProps.md)
+
+***
+
+### SecurityLevelWidgetProps
+
+Re-exports [SecurityLevelWidgetProps](../widgets/interfaces/SecurityLevelWidgetProps.md)
+
+***
+
+### SecurityResourcesWidgetProps
+
+Re-exports [SecurityResourcesWidgetProps](../widgets/interfaces/SecurityResourcesWidgetProps.md)
+
+***
+
+### SecuritySummaryWidgetProps
+
+Re-exports [SecuritySummaryWidgetProps](../widgets/interfaces/SecuritySummaryWidgetProps.md)
+
+***
+
+### TechnicalDetailsWidgetProps
+
+Re-exports [TechnicalDetailsWidgetProps](../widgets/interfaces/TechnicalDetailsWidgetProps.md)
+
+***
+
+### ValueCreationWidgetProps
+
+Re-exports [ValueCreationWidgetProps](../widgets/interfaces/ValueCreationWidgetProps.md)

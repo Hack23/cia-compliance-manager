@@ -8,7 +8,7 @@
 
 > **getTechnicalDescription**(`component`, `level`): `string`
 
-Defined in: [src/services/ciaContentService.ts:1317](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1317)
+Defined in: [src/services/ciaContentService.ts:1399](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1399)
 
 Get technical description for a component and level
 

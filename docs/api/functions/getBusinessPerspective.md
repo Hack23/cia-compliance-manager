@@ -8,7 +8,7 @@
 
 > **getBusinessPerspective**(`component`, `level`): `string`
 
-Defined in: [src/services/ciaContentService.ts:1293](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1293)
+Defined in: [src/services/ciaContentService.ts:1375](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1375)
 
 Get business perspective information for a component and level
 

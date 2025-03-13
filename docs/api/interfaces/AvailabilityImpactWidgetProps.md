@@ -6,7 +6,7 @@
 
 # Interface: AvailabilityImpactWidgetProps
 
-Defined in: [src/types/widgets.tsx:151](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L151)
+Defined in: [src/types/widgets.tsx:154](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L154)
 
 Props for the AvailabilityImpactWidget component
 
@@ -68,7 +68,7 @@ Defined in: [src/types/widgets.tsx:12](https://github.com/Hack23/cia-compliance-
 
 > `optional` **options**: `Record`\<`string`, [`CIADetails`](CIADetails.md) \| [`AvailabilityDetail`](AvailabilityDetail.md)\>
 
-Defined in: [src/types/widgets.tsx:153](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L153)
+Defined in: [src/types/widgets.tsx:156](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L156)
 
 Options for each level - optional when using ciaContentService
 

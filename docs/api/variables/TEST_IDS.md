@@ -8,7 +8,7 @@
 
 > `const` **TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:531](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L531)
+Defined in: [src/constants/testIds.ts:529](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L529)
 
 ## Type declaration
 
@@ -242,7 +242,7 @@ Defined in: [src/constants/testIds.ts:531](https://github.com/Hack23/cia-complia
 
 ### BUSINESS\_IMPACT\_WIDGET
 
-> **BUSINESS\_IMPACT\_WIDGET**: `string` = `"widget-business-impact"`
+> **BUSINESS\_IMPACT\_WIDGET**: `string` = `"business-impact-widget"`
 
 ### CAPEX\_ESTIMATE\_VALUE
 
@@ -750,10 +750,6 @@ Defined in: [src/constants/testIds.ts:531](https://github.com/Hack23/cia-complia
 
 > **FINANCIAL\_IMPACT\_SECTION**: `string` = `"financial-impact-section"`
 
-### FINANCIAL\_RISK\_BADGE
-
-> **FINANCIAL\_RISK\_BADGE**: `string` = `"financial-risk-badge"`
-
 ### FRAMEWORK\_ITEM\_PREFIX
 
 > **FRAMEWORK\_ITEM\_PREFIX**: `string` = `"framework-item"`
@@ -761,8 +757,6 @@ Defined in: [src/constants/testIds.ts:531](https://github.com/Hack23/cia-complia
 ### getTestId()
 
 > **getTestId**: (`prefix`, `id`) => `string`
-
-Helper to generate dynamic test IDs with consistent patterns
 
 #### Parameters
 
@@ -1168,7 +1162,7 @@ Helper to generate dynamic test IDs with consistent patterns
 
 ### SECURITY\_RESOURCES\_WIDGET
 
-> **SECURITY\_RESOURCES\_WIDGET**: `string` = `"widget-security-resources"`
+> **SECURITY\_RESOURCES\_WIDGET**: `string` = `"security-resources-widget"`
 
 ### SECURITY\_SUMMARY\_CONTAINER
 
@@ -1312,7 +1306,7 @@ Convert string to SecurityLevel type safely
 
 ### VALUE\_CREATION\_WIDGET
 
-> **VALUE\_CREATION\_WIDGET**: `string` = `"widget-value-creation"`
+> **VALUE\_CREATION\_WIDGET**: `string` = `"value-creation-widget"`
 
 ### VALUE\_DISPLAY
 

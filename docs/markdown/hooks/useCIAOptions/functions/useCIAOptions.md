@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -8,7 +8,9 @@
 
 > **useCIAOptions**(): `object`
 
-Defined in: [src/hooks/useCIAOptions.ts:319](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/hooks/useCIAOptions.ts#L319)
+Defined in: [src/hooks/useCIAOptions.ts:668](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/hooks/useCIAOptions.ts#L668)
+
+Custom hook for accessing CIA security options with memoization
 
 ## Returns
 
@@ -16,12 +18,16 @@ Defined in: [src/hooks/useCIAOptions.ts:319](https://github.com/Hack23/cia-compl
 
 ### availabilityOptions
 
-> **availabilityOptions**: `Record`\<`string`, [`CIADetails`](../../../types/cia/interfaces/CIADetails.md)\>
+> **availabilityOptions**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`EnhancedCIADetails`](../interfaces/EnhancedCIADetails.md)\> = `availabilityOpts`
 
 ### confidentialityOptions
 
-> **confidentialityOptions**: `Record`\<`string`, [`CIADetails`](../../../types/cia/interfaces/CIADetails.md)\>
+> **confidentialityOptions**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`EnhancedCIADetails`](../interfaces/EnhancedCIADetails.md)\> = `confidentialityOpts`
 
 ### integrityOptions
 
-> **integrityOptions**: `Record`\<`string`, [`CIADetails`](../../../types/cia/interfaces/CIADetails.md)\>
+> **integrityOptions**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`EnhancedCIADetails`](../interfaces/EnhancedCIADetails.md)\> = `integrityOpts`
+
+### ROI\_ESTIMATES
+
+> **ROI\_ESTIMATES**: [`ROIEstimatesMap`](../../../types/cia-services/type-aliases/ROIEstimatesMap.md) = `roiEstimates`

@@ -66,11 +66,9 @@ Defined in: [src/types/widgets.tsx:12](https://github.com/Hack23/cia-compliance-
 
 ### securityLevel
 
-> **securityLevel**: `string`
+> **securityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.tsx:62](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L62)
-
-Overall security level
+Defined in: [src/types/widgets.tsx:61](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L61)
 
 #### Overrides
 

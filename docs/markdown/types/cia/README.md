@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../README.md)
 
 ***
 
@@ -37,6 +37,7 @@
 
 ### CIA Model
 
+- [CIAComponentType](type-aliases/CIAComponentType.md)
 - [SecurityLevel](type-aliases/SecurityLevel.md)
 
 ### Other
