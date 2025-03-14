@@ -1,6 +1,6 @@
 // Define mocks at the top of the file, before imports
 vi.mock("chart.js/auto", () => {
-const mockChart = vi.fn().mockImplementation(() => ({
+  const mockChart = vi.fn().mockImplementation(() => ({
     destroy: vi.fn(),
     update: vi.fn(),
     data: {
@@ -23,15 +23,14 @@ const mockChart = vi.fn().mockImplementation(() => ({
   };
 });
 
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import RadarChart from "./RadarChart";
-import { vi, describe, it, expect, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { CHART_TEST_IDS } from "../constants/testIds";
 import {
   mockCanvasContext,
   suppressCanvasErrors,
 } from "../tests/testSetupHelpers";
+import RadarChart from "./RadarChart";
 
 // Define type for the Chart mock to include register and defaults properties
 type ChartMock = ReturnType<typeof vi.fn> & {
@@ -43,7 +42,6 @@ type ChartMock = ReturnType<typeof vi.fn> & {
 };
 
 // Mock Chart.js more comprehensively to avoid canvas issues
-
 
 describe("RadarChart Component", () => {
   let consoleErrorSpy: ReturnType<typeof vi.spyOn>;

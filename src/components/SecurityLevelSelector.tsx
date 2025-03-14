@@ -1,27 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { SecurityLevel } from "../types/cia";
-import { useCIAOptions } from "../hooks/useCIAOptions";
-import {
-  CIA_LABELS,
-  CIA_COMPONENT_ICONS,
-  SECURITY_LEVELS,
-} from "../constants/appConstants";
+import React, { useEffect, useState } from "react";
+import { CIA_COMPONENT_ICONS, CIA_LABELS } from "../constants/appConstants";
 import { CIA_TEST_IDS, COMMON_COMPONENT_TEST_IDS } from "../constants/testIds";
-import { CIA_COMPONENT_COLORS } from "../constants/colorConstants";
+import { useCIAOptions } from "../hooks/useCIAOptions";
+import ciaContentService, {
+  CIAComponentType, // Import the CIAComponentType
+} from "../services/ciaContentService";
+import { SecurityLevel } from "../types/cia";
 import {
   getSecurityLevelClass,
   normalizeSecurityLevel,
 } from "../utils/securityLevelUtils";
 import SecurityLevelSummaryItem from "./common/SecurityLevelSummaryItem";
-import ciaContentService, {
-  getSecurityLevelDescription,
-  CIAComponentType, // Import the CIAComponentType
-} from "../services/ciaContentService";
 
 export interface SecurityLevelSelectorProps {
-  initialAvailability?: string;
-  initialIntegrity?: string;
-  initialConfidentiality?: string;
+  availabilityLevel?: SecurityLevel;
+  integrityLevel?: SecurityLevel;
+  confidentialityLevel?: SecurityLevel;
   onAvailabilityChange?: (level: string) => void;
   onIntegrityChange?: (level: string) => void;
   onConfidentialityChange?: (level: string) => void;
@@ -39,9 +33,9 @@ export interface SecurityLevelSelectorProps {
  * Enhanced with rich descriptions and visual indicators
  */
 const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
-  initialAvailability = "None",
-  initialIntegrity = "None",
-  initialConfidentiality = "None",
+  availabilityLevel = "None",
+  integrityLevel = "None",
+  confidentialityLevel = "None",
   onAvailabilityChange,
   onIntegrityChange,
   onConfidentialityChange,
@@ -53,15 +47,11 @@ const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
   testId = "security-level-selector",
   showDescriptions = true,
 }) => {
-  const [availability, setAvailability] = useState<SecurityLevel>(
-    initialAvailability as SecurityLevel
-  );
-  const [integrity, setIntegrity] = useState<SecurityLevel>(
-    initialIntegrity as SecurityLevel
-  );
-  const [confidentiality, setConfidentiality] = useState<SecurityLevel>(
-    initialConfidentiality as SecurityLevel
-  );
+  const [availability, setAvailability] =
+    useState<SecurityLevel>(availabilityLevel);
+  const [integrity, setIntegrity] = useState<SecurityLevel>(integrityLevel);
+  const [confidentiality, setConfidentiality] =
+    useState<SecurityLevel>(confidentialityLevel);
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const [activeDescription, setActiveDescription] = useState<string | null>(
     null
@@ -81,16 +71,16 @@ const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
     propConfidentialityOptions || hookConfidentialityOptions;
 
   useEffect(() => {
-    setAvailability(initialAvailability as SecurityLevel);
-  }, [initialAvailability]);
+    setAvailability(availabilityLevel);
+  }, [availabilityLevel]);
 
   useEffect(() => {
-    setIntegrity(initialIntegrity as SecurityLevel);
-  }, [initialIntegrity]);
+    setIntegrity(integrityLevel);
+  }, [integrityLevel]);
 
   useEffect(() => {
-    setConfidentiality(initialConfidentiality as SecurityLevel);
-  }, [initialConfidentiality]);
+    setConfidentiality(confidentialityLevel);
+  }, [confidentialityLevel]);
 
   // Handle availability change
   const handleAvailabilityChange = (
@@ -292,7 +282,11 @@ const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
             value={confidentiality}
             onChange={handleConfidentialityChange}
             disabled={disabled}
-            data-testid={CIA_TEST_IDS.CONFIDENTIALITY_SELECT}
+            data-testid={
+              CIA_TEST_IDS.CONFIDENTIALITY_SELECT || "confidentiality-selector"
+            }
+            aria-haspopup="listbox"
+            aria-expanded="false"
           >
             {renderOptions(confidentialityOptions, "confidentiality")}
           </select>
@@ -361,7 +355,9 @@ const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
             value={integrity}
             onChange={handleIntegrityChange}
             disabled={disabled}
-            data-testid={CIA_TEST_IDS.INTEGRITY_SELECT}
+            data-testid={CIA_TEST_IDS.INTEGRITY_SELECT || "integrity-selector"}
+            aria-haspopup="listbox"
+            aria-expanded="false"
           >
             {renderOptions(integrityOptions, "integrity")}
           </select>
@@ -424,7 +420,11 @@ const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = ({
             value={availability}
             onChange={handleAvailabilityChange}
             disabled={disabled}
-            data-testid={CIA_TEST_IDS.AVAILABILITY_SELECT}
+            data-testid={
+              CIA_TEST_IDS.AVAILABILITY_SELECT || "availability-selector"
+            }
+            aria-haspopup="listbox"
+            aria-expanded="false"
           >
             {renderOptions(availabilityOptions, "availability")}
           </select>

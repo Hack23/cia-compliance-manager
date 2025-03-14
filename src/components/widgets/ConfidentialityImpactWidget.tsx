@@ -1,15 +1,14 @@
-import React, { useState, useMemo } from "react";
-import { SecurityLevel } from "../../types/cia";
+import React, { useMemo, useState } from "react";
 import { CONFIDENTIALITY_IMPACT_TEST_IDS } from "../../constants/testIds";
 import ciaContentService, {
   getInformationSensitivity,
   getProtectionLevel,
 } from "../../services/ciaContentService";
-import KeyValuePair from "../common/KeyValuePair";
-import WidgetContainer from "../common/WidgetContainer";
-import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
+import { SecurityLevel } from "../../types/cia";
 import { normalizeSecurityLevel } from "../../utils/securityLevelUtils";
 import CIAImpactCard from "../common/CIAImpactCard";
+import KeyValuePair from "../common/KeyValuePair";
+import WidgetContainer from "../common/WidgetContainer";
 
 /**
  * Props for ConfidentialityImpactWidget component

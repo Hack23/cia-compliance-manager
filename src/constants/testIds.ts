@@ -2,8 +2,8 @@
  * Centralized Test ID constants for component selection in tests
  */
 
+import { SecurityLevel } from "../types/cia"; // Updated import from .tsx to .ts
 import { VALUE_CREATION_POINTS } from "./appConstants";
-import { SecurityLevel, SecurityLevels } from "../types/cia"; // Updated import from .tsx to .ts
 
 // Add this function near the top of the file to make it easier to create compound testIds
 export const createCompoundTestId = (prefix: string, suffix: string): string =>
@@ -32,9 +32,9 @@ export const WIDGET_PREFIXES = {
 // CIA Component TestIDs - KEEP ORIGINAL VALUES FOR BACKWARD COMPATIBILITY
 export const CIA_TEST_IDS = {
   // Select dropdown elements
-  AVAILABILITY_SELECT: "availability-select",
-  INTEGRITY_SELECT: "integrity-select",
-  CONFIDENTIALITY_SELECT: "confidentiality-select",
+  AVAILABILITY_SELECT: "availability-selector",
+  INTEGRITY_SELECT: "integrity-selector",
+  CONFIDENTIALITY_SELECT: "confidentiality-selector",
 
   // Labels and descriptions
   AVAILABILITY_LABEL: "availability-label",

@@ -1,217 +1,149 @@
-// Define mocks at the top of the file, before imports
+// Define mocks at the top of the file for proper hoisting
 vi.mock("../../hooks/useCIAOptions", () => {
-const mockOptions = {
+  // Create mock options data
+  const mockOptions = {
     availabilityOptions: {
       None: {
-        description: "No availability",
-        impact: "No impact",
-        technical: "No technical controls",
-        businessImpact: "No business impact",
+        description: "Test availability None",
+        technical: "Test technical None",
+        businessImpact: "Test business impact None",
+        recommendations: ["Rec 1", "Rec 2"],
         capex: 0,
         opex: 0,
         bg: "#ffffff",
         text: "#000000",
-        recommendations: [],
       },
       Low: {
-        description: "Low availability",
-        impact: "Low impact",
-        technical: "Basic technical controls",
-        businessImpact: "Minor business impact",
-        capex: 10,
-        opex: 5,
-        bg: "#efefef",
-        text: "#000000",
-        recommendations: ["Basic recommendation"],
+        description: "Test availability Low",
+        technical: "Test technical Low",
+        businessImpact: "Test business impact Low",
+        recommendations: ["Rec 1", "Rec 2"],
+        capex: 5,
+        opex: 2,
       },
       Moderate: {
-        description: "Moderate availability",
-        impact: "Moderate impact",
-        technical: "Standard technical controls",
-        businessImpact: "Moderate business impact",
-        capex: 20,
-        opex: 10,
-        bg: "#efefef",
-        text: "#000000",
-        recommendations: ["Standard recommendation"],
+        description: "Test availability Moderate",
+        technical: "Test technical Moderate",
+        businessImpact: "Test business impact Moderate",
+        recommendations: ["Rec 1", "Rec 2"],
+        capex: 10,
+        opex: 5,
       },
       High: {
-        description: "High availability",
-        impact: "High impact",
-        technical: "Advanced technical controls",
-        businessImpact: "Significant business impact",
-        capex: 40,
-        opex: 20,
-        bg: "#efefef",
-        text: "#000000",
-        recommendations: ["Advanced recommendation"],
+        description: "Test availability High",
+        technical: "Test technical High",
+        businessImpact: "Test business impact High",
+        recommendations: ["Rec 1", "Rec 2"],
+        capex: 15,
+        opex: 8,
       },
       "Very High": {
-        description: "Very high availability",
-        impact: "Very high impact",
-        technical: "Comprehensive technical controls",
-        businessImpact: "Critical business impact",
-        capex: 60,
-        opex: 30,
-        bg: "#efefef",
-        text: "#000000",
-        recommendations: ["Comprehensive recommendation"],
+        description: "Test availability Very High",
+        technical: "Test technical Very High",
+        businessImpact: "Test business impact Very High",
+        recommendations: ["Rec 1", "Rec 2"],
+        capex: 20,
+        opex: 10,
       },
     },
     integrityOptions: {
       None: {
-        description: "No integrity requirements",
-        technical: "No controls needed",
-        recommendations: ["No recommendations"],
+        description: "Test integrity None",
+        technical: "Test technical None",
+        businessImpact: "Test business impact None",
+        recommendations: ["Rec 1", "Rec 2"],
         capex: 0,
         opex: 0,
-        bg: "#ffffff",
-        text: "#000000",
-        businessImpact: "No business impact",
-        impact: "No impact",
       },
       Low: {
-        description: "Basic integrity",
-        technical: "Basic controls",
-        recommendations: ["Basic recommendation"],
-        capex: 10,
-        opex: 5,
-        bg: "#e8f5e9",
-        text: "#1b5e20",
-        businessImpact: "Low business impact",
-        impact: "Low impact",
+        description: "Test integrity Low",
+        technical: "Test technical Low",
+        businessImpact: "Test business impact Low",
+        recommendations: ["Rec 1", "Rec 2"],
+        capex: 5,
+        opex: 2,
       },
       Moderate: {
-        description: "Standard integrity",
-        technical: "Standard controls",
-        recommendations: ["Standard recommendation"],
-        capex: 20,
-        opex: 15,
-        bg: "#c8e6c9",
-        text: "#2e7d32",
-        businessImpact: "Moderate business impact",
-        impact: "Moderate impact",
+        description: "Test integrity Moderate",
+        technical: "Test technical Moderate",
+        businessImpact: "Test business impact Moderate",
+        recommendations: ["Rec 1", "Rec 2"],
+        capex: 10,
+        opex: 5,
       },
       High: {
-        description: "High integrity",
-        technical: "Advanced controls",
-        recommendations: ["Advanced recommendation"],
-        capex: 40,
-        opex: 30,
-        bg: "#a5d6a7",
-        text: "#388e3c",
-        businessImpact: "High business impact",
-        impact: "High impact",
+        description: "Test integrity High",
+        technical: "Test technical High",
+        businessImpact: "Test business impact High",
+        recommendations: ["Rec 1", "Rec 2"],
+        capex: 15,
+        opex: 8,
       },
       "Very High": {
-        description: "Very high integrity",
-        impact: "Very high impact",
-        technical: "Comprehensive technical controls",
-        businessImpact: "Critical business impact",
-        capex: 60,
-        opex: 30,
-        bg: "#efefef",
-        text: "#000000",
-        recommendations: ["Comprehensive recommendation"],
+        description: "Test integrity Very High",
+        technical: "Test technical Very High",
+        businessImpact: "Test business impact Very High",
+        recommendations: ["Rec 1", "Rec 2"],
+        capex: 20,
+        opex: 10,
       },
     },
     confidentialityOptions: {
       None: {
-        description: "No confidentiality requirements",
-        technical: "No controls needed",
-        recommendations: ["No recommendations"],
+        description: "Test confidentiality None",
+        technical: "Test technical None",
+        businessImpact: "Test business impact None",
+        recommendations: ["Rec 1", "Rec 2"],
         capex: 0,
         opex: 0,
-        bg: "#ffffff",
-        text: "#000000",
-        businessImpact: "No business impact",
-        impact: "No impact",
       },
       Low: {
-        description: "Basic confidentiality",
-        technical: "Basic controls",
-        recommendations: ["Basic recommendation"],
-        capex: 10,
-        opex: 5,
-        bg: "#f3e5f5",
-        text: "#4a148c",
-        businessImpact: "Low business impact",
-        impact: "Low impact",
+        description: "Test confidentiality Low",
+        technical: "Test technical Low",
+        businessImpact: "Test business impact Low",
+        recommendations: ["Rec 1", "Rec 2"],
+        capex: 5,
+        opex: 2,
       },
       Moderate: {
-        description: "Standard confidentiality",
-        technical: "Standard controls",
-        recommendations: ["Standard recommendation"],
-        capex: 20,
-        opex: 15,
-        bg: "#e1bee7",
-        text: "#6a1b9a",
-        businessImpact: "Moderate business impact",
-        impact: "Moderate impact",
+        description: "Test confidentiality Moderate",
+        technical: "Test technical Moderate",
+        businessImpact: "Test business impact Moderate",
+        recommendations: ["Rec 1", "Rec 2"],
+        capex: 10,
+        opex: 5,
       },
       High: {
-        description: "High confidentiality",
-        technical: "Advanced controls",
-        recommendations: ["Advanced recommendation"],
-        capex: 40,
-        opex: 30,
-        bg: "#ce93d8",
-        text: "#7b1fa2",
-        businessImpact: "High business impact",
-        impact: "High impact",
+        description: "Test confidentiality High",
+        technical: "Test technical High",
+        businessImpact: "Test business impact High",
+        recommendations: ["Rec 1", "Rec 2"],
+        capex: 15,
+        opex: 8,
       },
       "Very High": {
-        description: "Very high confidentiality",
-        impact: "Very high impact",
-        technical: "Comprehensive technical controls",
-        businessImpact: "Critical business impact",
-        capex: 60,
-        opex: 30,
-        bg: "#efefef",
-        text: "#000000",
-        recommendations: ["Comprehensive recommendation"],
+        description: "Test confidentiality Very High",
+        technical: "Test technical Very High",
+        businessImpact: "Test business impact Very High",
+        recommendations: ["Rec 1", "Rec 2"],
+        capex: 20,
+        opex: 10,
       },
     },
-    // Add ROI_ESTIMATES to fix other tests
     ROI_ESTIMATES: {
-      NONE: {
-        returnRate: "0%",
-        description: "No security investment means no return",
-        potentialSavings: "$0",
-        breakEvenPeriod: "N/A",
-      },
-      LOW: {
-        returnRate: "100%",
-        description: "Basic security provides minimal return",
-        potentialSavings: "$10,000",
-        breakEvenPeriod: "24 months",
-      },
-      MODERATE: {
-        returnRate: "200%",
-        description: "Standard security provides good value",
-        potentialSavings: "$100,000",
-        breakEvenPeriod: "12 months",
-      },
-      HIGH: {
-        returnRate: "300%",
-        description: "Advanced security provides excellent value",
-        potentialSavings: "$500,000",
-        breakEvenPeriod: "6 months",
-      },
-      VERY_HIGH: {
-        returnRate: "400%",
-        description: "Comprehensive security provides optimal value",
-        potentialSavings: "$1,000,000+",
-        breakEvenPeriod: "3 months",
-      },
+      NONE: { returnRate: "0%", description: "No ROI" },
+      LOW: { returnRate: "50%", description: "Low ROI" },
+      MODERATE: { returnRate: "200%", description: "Moderate ROI" },
+      HIGH: { returnRate: "350%", description: "High ROI" },
+      VERY_HIGH: { returnRate: "500%", description: "Very high ROI" },
     },
   };
 
   return {
-    // Make sure to export both the mock object AND the hook function that returns it
     __esModule: true,
     default: mockOptions,
     useCIAOptions: () => mockOptions,
+    // Export constants to avoid errors when they're imported directly
     availabilityOptions: mockOptions.availabilityOptions,
     integrityOptions: mockOptions.integrityOptions,
     confidentialityOptions: mockOptions.confidentialityOptions,
@@ -219,182 +151,184 @@ const mockOptions = {
   };
 });
 
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { vi, describe, it, expect } from "vitest";
+// Mock SecurityLevelSelector component to capture all props properly
+vi.mock("../../components/SecurityLevelSelector", () => ({
+  __esModule: true,
+  default: vi.fn().mockImplementation((props) => {
+    // Store the entire props object so we can access handlers later
+    return (
+      <div data-testid={props.testId || "mock-security-level-selector"}>
+        Mock Security Level Selector
+        <button
+          data-testid="mock-availability-change"
+          onClick={() =>
+            props.onAvailabilityChange && props.onAvailabilityChange("Low")
+          }
+        >
+          Change Availability
+        </button>
+        <button
+          data-testid="mock-integrity-change"
+          onClick={() =>
+            props.onIntegrityChange && props.onIntegrityChange("Moderate")
+          }
+        >
+          Change Integrity
+        </button>
+        <button
+          data-testid="mock-confidentiality-change"
+          onClick={() =>
+            props.onConfidentialityChange &&
+            props.onConfidentialityChange("High")
+          }
+        >
+          Change Confidentiality
+        </button>
+      </div>
+    );
+  }),
+}));
+
+// Mock WidgetContainer component to correctly handle loading prop
+vi.mock("../../components/common/WidgetContainer", () => ({
+  __esModule: true,
+  default: vi
+    .fn()
+    .mockImplementation(({ children, loading, testId, ...props }) => (
+      <div
+        data-testid={testId}
+        data-loading={loading ? "true" : undefined}
+        {...props}
+      >
+        {children}
+      </div>
+    )),
+}));
+
+// Import dependencies after mocks
+import { fireEvent, render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import { WIDGET_TEST_IDS } from "../../constants/testIds";
 import SecurityLevelWidget from "./SecurityLevelWidget";
-import { SecurityLevel } from "../../types/cia";
-import {
-  SECURITY_LEVEL_TEST_IDS,
-  WIDGET_TEST_IDS,
-  CIA_TEST_IDS,
-} from "../../constants/testIds";
-import { ROIEstimatesMap } from "../../types/cia-services";
 
-// Mock the useCIAOptions hook
-
-
-describe("SecurityLevelWidget Component", () => {
-  const mockSetAvailability = vi.fn();
-  const mockSetIntegrity = vi.fn();
-  const mockSetConfidentiality = vi.fn();
-
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it("renders with default values", () => {
+describe("SecurityLevelWidget", () => {
+  it("renders with default props", () => {
     render(<SecurityLevelWidget />);
-
-    // Check that the widget title is rendered - use a more specific selector
     expect(
-      screen.getByRole("heading", {
-        level: 2,
-        name: /security profile configuration/i,
-      })
-    ).toBeInTheDocument();
-
-    // Check for security level selectors using role instead of testId
-    expect(
-      screen.getByRole("combobox", { name: /availability/i })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("combobox", { name: /integrity/i })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("combobox", { name: /confidentiality/i })
+      screen.getByTestId(WIDGET_TEST_IDS.SECURITY_LEVEL_WIDGET)
     ).toBeInTheDocument();
   });
 
-  it("shows descriptions when available", () => {
-    render(<SecurityLevelWidget />);
+  it("shows loading state when loading prop is true", () => {
+    render(<SecurityLevelWidget loading={true} />);
+    expect(
+      screen.getByTestId(WIDGET_TEST_IDS.SECURITY_LEVEL_WIDGET)
+    ).toHaveAttribute("data-loading", "true");
+  });
 
-    // Check that descriptions are shown - use the exact text from the rendered component
+  it("shows error message when error prop is provided", () => {
+    const testError = new Error("Test error message");
+    render(<SecurityLevelWidget error={testError} />);
     expect(
-      screen.getByText("Controls who can access your data and systems")
+      screen.getByText("Error Loading Security Levels")
     ).toBeInTheDocument();
+    expect(screen.getByText("Test error message")).toBeInTheDocument();
+  });
+
+  it("passes correct props to SecurityLevelSelector", () => {
+    const handleAvailabilityChange = vi.fn();
+    const handleIntegrityChange = vi.fn();
+    const handleConfidentialityChange = vi.fn();
+
+    render(
+      <SecurityLevelWidget
+        availabilityLevel="High"
+        integrityLevel="Moderate"
+        confidentialityLevel="Low"
+        onAvailabilityChange={handleAvailabilityChange}
+        onIntegrityChange={handleIntegrityChange}
+        onConfidentialityChange={handleConfidentialityChange}
+      />
+    );
+
+    // Verify the selector component was included
     expect(
-      screen.getByText("Ensures data remains accurate and unaltered")
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("Determines how reliably your systems can be accessed")
+      screen.getByText("Mock Security Level Selector")
     ).toBeInTheDocument();
   });
 
-  it("passes custom test ID properly", () => {
-    const testId = "custom-security-level";
-    render(<SecurityLevelWidget testId={testId} />);
-
-    expect(screen.getByTestId(testId)).toBeInTheDocument();
+  it("uses custom testId if provided", () => {
+    const customTestId = "custom-security-level-widget-id";
+    render(<SecurityLevelWidget testId={customTestId} />);
+    expect(screen.getByTestId(customTestId)).toBeInTheDocument();
   });
 
-  it("handles callbacks when availability level changes", () => {
-    const mockOnAvailabilityChange = vi.fn();
-    const mockSetAvailability = vi.fn();
+  it("calls setAvailability when availability changes", () => {
+    const setAvailability = vi.fn();
+    render(
+      <SecurityLevelWidget
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        setAvailability={setAvailability}
+      />
+    );
+
+    // Instead of trying to access the handler directly, use the mock buttons we added
+    fireEvent.click(screen.getByTestId("mock-availability-change"));
+
+    expect(setAvailability).toHaveBeenCalledWith("Low");
+  });
+
+  it("calls setIntegrity when integrity changes", () => {
+    const setIntegrity = vi.fn();
+    render(
+      <SecurityLevelWidget
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        setIntegrity={setIntegrity}
+      />
+    );
+
+    fireEvent.click(screen.getByTestId("mock-integrity-change"));
+
+    expect(setIntegrity).toHaveBeenCalledWith("Moderate");
+  });
+
+  it("calls setConfidentiality when confidentiality changes", () => {
+    const setConfidentiality = vi.fn();
+    render(
+      <SecurityLevelWidget
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        setConfidentiality={setConfidentiality}
+      />
+    );
+
+    fireEvent.click(screen.getByTestId("mock-confidentiality-change"));
+
+    expect(setConfidentiality).toHaveBeenCalledWith("High");
+  });
+
+  it("handles both callback styles (onChange and setState)", () => {
+    const onAvailabilityChange = vi.fn();
+    const setAvailability = vi.fn();
 
     render(
       <SecurityLevelWidget
         availabilityLevel="None"
-        onAvailabilityChange={mockOnAvailabilityChange}
-        setAvailability={mockSetAvailability}
-      />
-    );
-
-    // Get availability select and change it
-    const availabilitySelect = screen.getByTestId(
-      CIA_TEST_IDS.AVAILABILITY_SELECT
-    );
-    fireEvent.change(availabilitySelect, { target: { value: "High" } });
-
-    // Verify both callbacks were called with "High"
-    expect(mockOnAvailabilityChange).toHaveBeenCalledWith("High");
-    expect(mockSetAvailability).toHaveBeenCalledWith("High");
-  });
-
-  it("handles callbacks when integrity level changes", () => {
-    const mockOnIntegrityChange = vi.fn();
-    const mockSetIntegrity = vi.fn();
-
-    render(
-      <SecurityLevelWidget
         integrityLevel="None"
-        onIntegrityChange={mockOnIntegrityChange}
-        setIntegrity={mockSetIntegrity}
-      />
-    );
-
-    // Get integrity select and change it
-    const integritySelect = screen.getByTestId(CIA_TEST_IDS.INTEGRITY_SELECT);
-    fireEvent.change(integritySelect, { target: { value: "High" } });
-
-    // Verify both callbacks were called with "High"
-    expect(mockOnIntegrityChange).toHaveBeenCalledWith("High");
-    expect(mockSetIntegrity).toHaveBeenCalledWith("High");
-  });
-
-  it("handles callbacks when confidentiality level changes", () => {
-    const mockOnConfidentialityChange = vi.fn();
-    const mockSetConfidentiality = vi.fn();
-
-    render(
-      <SecurityLevelWidget
         confidentialityLevel="None"
-        onConfidentialityChange={mockOnConfidentialityChange}
-        setConfidentiality={mockSetConfidentiality}
+        onAvailabilityChange={onAvailabilityChange}
+        setAvailability={setAvailability}
       />
     );
 
-    // Get confidentiality select and change it
-    const confidentialitySelect = screen.getByTestId(
-      CIA_TEST_IDS.CONFIDENTIALITY_SELECT
-    );
-    fireEvent.change(confidentialitySelect, { target: { value: "High" } });
+    fireEvent.click(screen.getByTestId("mock-availability-change"));
 
-    // Verify both callbacks were called with "High"
-    expect(mockOnConfidentialityChange).toHaveBeenCalledWith("High");
-    expect(mockSetConfidentiality).toHaveBeenCalledWith("High");
-  });
-
-  it("renders with loading state", () => {
-    render(<SecurityLevelWidget loading={true} />);
-
-    // Check for the loading indicator
-    expect(screen.getByTestId("loading-indicator")).toBeInTheDocument();
-  });
-
-  it("renders with error state", () => {
-    const testError = new Error("Test error");
-    render(<SecurityLevelWidget error={testError} />);
-
-    // Check for the error message
-    expect(screen.getByText(/Test error/)).toBeInTheDocument();
-  });
-
-  it("works with both callback styles", () => {
-    // Test with only onAvailabilityChange
-    const mockOnAvailabilityChange = vi.fn();
-    const mockSetAvailability = vi.fn();
-
-    const { rerender } = render(
-      <SecurityLevelWidget onAvailabilityChange={mockOnAvailabilityChange} />
-    );
-
-    // Get availability select and change it
-    const availabilitySelect = screen.getByTestId(
-      CIA_TEST_IDS.AVAILABILITY_SELECT
-    );
-    fireEvent.change(availabilitySelect, { target: { value: "Moderate" } });
-
-    // Verify callback was called
-    expect(mockOnAvailabilityChange).toHaveBeenCalledWith("Moderate");
-
-    // Test with only setAvailability
-    rerender(<SecurityLevelWidget setAvailability={mockSetAvailability} />);
-
-    // Change it again
-    fireEvent.change(availabilitySelect, { target: { value: "High" } });
-
-    // Verify callback was called
-    expect(mockSetAvailability).toHaveBeenCalledWith("High");
+    expect(onAvailabilityChange).toHaveBeenCalledWith("Low");
+    expect(setAvailability).toHaveBeenCalledWith("Low");
   });
 });

@@ -1,10 +1,9 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import { vi, describe, it, expect } from "vitest";
-import CostEstimationWidget from "./CostEstimationWidget";
+import { describe, expect, it, vi } from "vitest";
 import { COST_TEST_IDS } from "../../constants/testIds";
 import ciaContentService from "../../services/ciaContentService";
 import { SecurityLevel } from "../../types/cia";
+import CostEstimationWidget from "./CostEstimationWidget";
 
 // Mock ciaContentService with proper typing
 vi.mock("../../services/ciaContentService", () => ({
@@ -38,12 +37,12 @@ describe("CostEstimationWidget", () => {
 
   it("displays cost estimates from service", () => {
     render(<CostEstimationWidget {...defaultProps} />);
-    
+
     // Look for the elements by testId, then check for Capital Expenditure text
     const capexDisplay = screen.getByTestId(COST_TEST_IDS.CAPEX_ESTIMATE_VALUE);
     expect(capexDisplay).toBeInTheDocument();
     expect(capexDisplay.textContent).toContain("Capital Expenditure");
-    
+
     const opexDisplay = screen.getByTestId(COST_TEST_IDS.OPEX_ESTIMATE_VALUE);
     expect(opexDisplay).toBeInTheDocument();
     // Fix: Check for "Operational Expenditure" instead of "Operating Expense"
@@ -52,7 +51,7 @@ describe("CostEstimationWidget", () => {
 
   it("calculates 3-year total cost", () => {
     render(<CostEstimationWidget {...defaultProps} />);
-    
+
     const totalCostDisplay = screen.getByTestId(COST_TEST_IDS.THREE_YEAR_TOTAL);
     expect(totalCostDisplay).toBeInTheDocument();
     // Check for "3-Year TCO" text instead of a specific dollar amount

@@ -1,44 +1,23 @@
 {
   "compilerOptions": {
-    // Update to use es2022 for the project
-    "target": "ES2022",
+    "target": "ES2020",
     "useDefineForClassFields": true,
-    // Include ES2022 in the lib array
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    // Types setup
-    "types": ["vitest/globals", "node"], // Remove "@testing-library/jest-dom" from here
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "jsx": "react-jsx",
-    // Module settings updated to ES2022
-    "module": "ES2022",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
     "moduleResolution": "bundler",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    // Type checking strictness
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "noUnusedLocals": false, // Disable unused variable checking during build
-    "noUnusedParameters": false, // Disable unused variable checking during build
-    // File behavior
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    // No emit - Vite handles this
     "noEmit": true,
-    // Type definition locations
-    "typeRoots": ["./node_modules/@types", "./src/types"],
-    // Skip type checking of declaration files in node_modules
-    "skipLibCheck": true
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   },
-  // Don't include Cypress files in main config
   "include": ["src"],
-  "exclude": ["node_modules", "cypress"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

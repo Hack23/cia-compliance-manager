@@ -1,13 +1,10 @@
-import React, { useState, useMemo } from "react";
-import { SecurityLevel } from "../../types/cia";
+import React, { useMemo, useState } from "react";
 import { INTEGRITY_IMPACT_TEST_IDS } from "../../constants/testIds";
 import ciaContentService from "../../services/ciaContentService";
+import { SecurityLevel } from "../../types/cia";
+import CIAImpactCard from "../common/CIAImpactCard";
 import KeyValuePair from "../common/KeyValuePair";
 import WidgetContainer from "../common/WidgetContainer";
-import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
-import { normalizeSecurityLevel } from "../../utils/securityLevelUtils";
-import CIAImpactCard from "../common/CIAImpactCard";
-import StatusBadge from "../common/StatusBadge";
 
 /**
  * Props for IntegrityImpactWidget component

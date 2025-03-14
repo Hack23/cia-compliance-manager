@@ -1,11 +1,9 @@
-import React from "react";
-import { render, screen, within } from "@testing-library/react";
-import { describe, it, expect, vi } from "vitest";
-import ComplianceStatusWidget from "./ComplianceStatusWidget";
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
 import { FRAMEWORK_TEST_IDS } from "../../constants/testIds";
+import ComplianceStatusWidget from "./ComplianceStatusWidget";
 // Import from appConstants instead of complianceConstants
 import { COMPLIANCE_STATUS } from "../../constants/appConstants";
-import { SecurityLevel } from "../../types/cia";
 
 // Define a type for the framework descriptions to ensure type safety
 type FrameworkDescriptions = {
@@ -125,7 +123,7 @@ describe("ComplianceStatusWidget", () => {
     // Check for the framework names directly instead of descriptions
     expect(screen.getByText("SOC 2")).toBeInTheDocument();
     expect(screen.getByText("ISO 27001")).toBeInTheDocument();
-    
+
     // Check for partially compliant framework
     expect(screen.getByText("GDPR")).toBeInTheDocument();
   });

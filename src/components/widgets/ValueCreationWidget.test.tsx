@@ -1,9 +1,7 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, vi } from "vitest";
-import ValueCreationWidget from "./ValueCreationWidget";
-import { WIDGET_TEST_IDS } from "../../constants/testIds";
+import { describe, expect, it, vi } from "vitest";
 import { SECURITY_LEVELS } from "../../constants/appConstants";
+import ValueCreationWidget from "./ValueCreationWidget";
 
 // Mock ciaContentService
 vi.mock("../../services/ciaContentService", () => ({
@@ -57,7 +55,7 @@ describe("ValueCreationWidget", () => {
     // Check for None level in the status badge specifically
     const statusBadge = screen.getByTestId("status-badge");
     expect(statusBadge).toHaveTextContent(SECURITY_LEVELS.NONE);
-    
+
     // Verify the ROI description is shown correctly
     expect(screen.getByText("None ROI description")).toBeInTheDocument();
   });
@@ -79,9 +77,11 @@ describe("ValueCreationWidget", () => {
     // Check value points are rendered correctly
     expect(screen.getByText("High value point 1")).toBeInTheDocument();
     expect(screen.getByText("High value point 2")).toBeInTheDocument();
-    
+
     // Check value points list exists by finding first value point
-    const valuePoint = screen.getByTestId("value-creation-widget-value-point-0");
+    const valuePoint = screen.getByTestId(
+      "value-creation-widget-value-point-0"
+    );
     expect(valuePoint).toBeInTheDocument();
   });
 
@@ -98,10 +98,10 @@ describe("ValueCreationWidget", () => {
     // Check for the ROI metrics cards
     const roiCard = screen.getByTestId("value-creation-widget-roi");
     expect(roiCard).toBeInTheDocument();
-    
+
     // Check for ROI description text
     expect(screen.getByText("Moderate ROI description")).toBeInTheDocument();
-    
+
     // Check for business benefits section
     expect(screen.getByText("Business Benefits")).toBeInTheDocument();
   });
@@ -147,7 +147,7 @@ describe("ValueCreationWidget", () => {
 
     // Check if the custom testId is applied to the widget container
     expect(screen.getByTestId(testId)).toBeInTheDocument();
-    
+
     // Check for ROI metrics cards with the custom prefix
     expect(screen.getByTestId(`${testId}-roi`)).toBeInTheDocument();
     expect(screen.getByTestId(`${testId}-savings`)).toBeInTheDocument();

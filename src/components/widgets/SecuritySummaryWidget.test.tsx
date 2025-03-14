@@ -1,6 +1,6 @@
 // Define mocks at the top of the file, before imports
 vi.mock("../../services/ciaContentService", () => {
-return {
+  return {
     default: {
       getComponentDetails: vi.fn().mockImplementation(() => ({
         description: "Test description",
@@ -109,7 +109,13 @@ return {
   };
 });
 
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import { vi } from "vitest";
 import { SUMMARY_TEST_IDS } from "../../constants/testIds";
 import { SecurityLevel } from "../../types/cia";
@@ -131,7 +137,6 @@ vi.mock("../../types/businessImpact", async () => {
 });
 
 // Mock the ciaContentService with all required functions
-
 
 describe("SecuritySummaryWidget", () => {
   // Default props that all tests can use
@@ -216,23 +221,55 @@ describe("SecuritySummaryWidget", () => {
       />
     );
 
-    // Use a more specific selector instead of just testId since there are multiple elements with the same testId
+    // Use getAllByTestId instead of getByTestId since there are multiple elements with same ID
+    // and select the second one which contains the security level items
+    const summaryContainers = screen.getAllByTestId(
+      SUMMARY_TEST_IDS.SUMMARY_CONTAINER
+    );
+    const summaryContainer = summaryContainers[1]; // The second element is the one containing the security level items
+
+    // Use within to search within this container for these specific security levels
+    expect(within(summaryContainer).getByText("High")).toBeInTheDocument();
+
+    // For Low, use a more specific approach by searching for it within the integrity summary
+    const integritySummary = screen.getByTestId(
+      "security-summary-container-integrity-summary"
+    );
+    expect(within(integritySummary).getByText("Low")).toBeInTheDocument();
+
+    // For Very High, use the confidentiality summary
+    const confidentialitySummary = screen.getByTestId(
+      "security-summary-container-confidentiality-summary"
+    );
     expect(
-      screen.getByRole("region", { name: /security summary/i })
+      within(confidentialitySummary).getByText("Very High")
     ).toBeInTheDocument();
 
-    // Alternatively, verify component renders by checking for specific elements within it
-    expect(screen.getByTestId("security-icon")).toBeInTheDocument();
-
-    // Use getAllByText for elements that might appear multiple times and check the first one
-    expect(screen.getAllByText(/moderate security/i)[0]).toBeInTheDocument();
+    // Use a more specific selector instead of just testId since there are multiple elements with the same testId
+    expect(
+      screen.getByRole("region", { name: "Security Summary" })
+    ).toBeInTheDocument();
   });
 
   it("renders with default props", () => {
-    render(<SecuritySummaryWidget {...defaultProps} />);
-    // Use role and accessible name instead of testId to avoid duplicate testId issue
+    render(
+      <SecuritySummaryWidget
+        securityLevel="Moderate"
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
+
+    // Check for important elements
+    expect(screen.getByText("Moderate Security")).toBeInTheDocument();
     expect(
-      screen.getByRole("region", { name: /security summary/i })
+      screen.getByTestId(SUMMARY_TEST_IDS.SECURITY_ICON)
+    ).toBeInTheDocument();
+
+    // Use role and accessible name instead of testId to avoid duplicate testIds
+    expect(
+      screen.getByRole("region", { name: "Security Summary" })
     ).toBeInTheDocument();
   });
 

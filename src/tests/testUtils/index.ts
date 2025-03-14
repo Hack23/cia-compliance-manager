@@ -96,3 +96,20 @@ export function createTestDataBySeverity<T>(
 export function createTestId(component: string, purpose: string): string {
   return `test-${component}-${purpose}`;
 }
+
+/**
+ * Central exports file for all test utilities
+ */
+export * from "./chartTestUtils";
+export * from "./mockFactory";
+export * from "./renderUtils";
+export * from "./testData";
+
+// Export hook testing utilities
+export * from "./hookTestUtils";
+
+// Re-export the standard mocks for easier imports
+export {
+  createChartJsMock,
+  createCIAOptionsMock,
+} from "../testMocks/ciaOptionsMocks";

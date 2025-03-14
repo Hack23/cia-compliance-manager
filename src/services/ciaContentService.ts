@@ -1,18 +1,18 @@
-import {
-  availabilityOptions,
-  integrityOptions,
-  confidentialityOptions,
-  ROI_ESTIMATES,
-  EnhancedCIADetails,
-} from "../hooks/useCIAOptions";
-import { BusinessImpactDetail, CIADetails, SecurityLevel } from "../types/cia";
 import { RISK_LEVELS } from "../constants/riskConstants";
 import {
-  ROIMetrics,
-  ROIEstimatesMap,
-  TechnicalImplementationDetails,
+  availabilityOptions,
+  confidentialityOptions,
+  EnhancedCIADetails,
+  integrityOptions,
+  ROI_ESTIMATES,
+} from "../hooks/useCIAOptions";
+import { SecurityLevel } from "../types/cia";
+import {
   BusinessImpactDetails,
   CIAComponentType,
+  ROIEstimatesMap,
+  ROIMetrics,
+  TechnicalImplementationDetails,
 } from "../types/cia-services";
 import { normalizeSecurityLevel } from "../utils/securityLevelUtils";
 
@@ -42,11 +42,11 @@ interface ComponentMetrics {
 
 // Export the types - add these exports to maintain backward compatibility
 export type {
-  ROIMetrics,
-  ROIEstimatesMap,
-  TechnicalImplementationDetails,
   BusinessImpactDetails,
   CIAComponentType,
+  ROIEstimatesMap,
+  ROIMetrics,
+  TechnicalImplementationDetails,
 } from "../types/cia-services";
 
 /**
@@ -1398,4 +1398,4 @@ export const getFrameworkDescription = defaultService.getFrameworkDescription;
 export const getImplementationTime = defaultService.getImplementationTime;
 
 // Export the types
-export type { SecurityResource, ComponentMetrics };
+export type { ComponentMetrics, SecurityResource };

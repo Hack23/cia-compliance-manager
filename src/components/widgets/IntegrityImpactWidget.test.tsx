@@ -1,10 +1,9 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
-import IntegrityImpactWidget from './IntegrityImpactWidget';
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
 import { INTEGRITY_IMPACT_TEST_IDS } from "../../constants/testIds";
-import { SecurityLevel } from "../../types/cia";
 import ciaContentService from "../../services/ciaContentService";
+import { SecurityLevel } from "../../types/cia";
+import IntegrityImpactWidget from "./IntegrityImpactWidget";
 
 // Mock ciaContentService
 vi.mock("../../services/ciaContentService", () => ({
@@ -62,7 +61,7 @@ describe("IntegrityImpactWidget", () => {
 
   it("renders without crashing", () => {
     render(<IntegrityImpactWidget {...defaultProps} />);
-    
+
     // Instead of looking for "High Integrity", check for badge with "High" text
     expect(screen.getByTestId("status-badge")).toHaveTextContent("High");
     expect(screen.getByText("Integrity Profile")).toBeInTheDocument();

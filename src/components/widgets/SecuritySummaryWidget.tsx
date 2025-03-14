@@ -1,29 +1,25 @@
-import React, { useState, useMemo } from "react";
-import { SecurityLevel } from "../../types/cia";
-import { SUMMARY_TEST_IDS } from "../../constants/testIds";
+import React, { useMemo, useState } from "react";
 import {
-  UI_ICONS,
-  SECURITY_RECOMMENDATIONS,
-  CIA_LABELS,
   CIA_COMPONENT_ICONS,
+  CIA_LABELS,
+  SECURITY_RECOMMENDATIONS,
 } from "../../constants/appConstants";
 import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
+import { WIDGET_ICONS, WIDGET_TITLES } from "../../constants/coreConstants";
+import { SUMMARY_TEST_IDS } from "../../constants/testIds";
 import ciaContentService, {
+  getBusinessImpactDescription,
+  getROIEstimate,
+  getSecurityIcon,
   getSecurityLevelDescription,
   getTechnicalDescription,
-  getBusinessImpactDescription,
-  getSecurityIcon,
-  getROIEstimate,
 } from "../../services/ciaContentService";
-import {
-  getSecurityLevelClass,
-  getSecurityLevelBadgeVariant,
-} from "../../utils/securityLevelUtils";
+import { SecurityLevel } from "../../types/cia";
+import { getSecurityLevelBadgeVariant } from "../../utils/securityLevelUtils";
+import KeyValuePair from "../common/KeyValuePair";
+import SecurityLevelSummaryItem from "../common/SecurityLevelSummaryItem";
 import StatusBadge from "../common/StatusBadge";
 import WidgetContainer from "../common/WidgetContainer";
-import KeyValuePair from "../common/KeyValuePair";
-import { WIDGET_TITLES, WIDGET_ICONS } from "../../constants/coreConstants";
-import SecurityLevelSummaryItem from "../common/SecurityLevelSummaryItem";
 
 /**
  * Props for SecuritySummaryWidget
@@ -139,7 +135,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
       className={className}
       testId={testId}
     >
-      <div className="space-y-6">
+      <div className="space-y-6" role="region" aria-label="Security Summary">
         {/* Security Level Header */}
         <div className="flex items-center space-x-4">
           <div className="flex-shrink-0">

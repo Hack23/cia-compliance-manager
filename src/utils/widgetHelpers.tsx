@@ -1,26 +1,11 @@
-import React, { ReactNode } from "react";
-import { getSecurityLevelColorPair } from "../constants/colorConstants";
+import { ReactNode } from "react";
+import { SECURITY_LEVELS } from "../constants/appConstants";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../constants/coreConstants";
 import { SecurityLevel } from "../types/cia";
-import {
-  getSecurityLevelClass,
-  getSecurityLevelValue,
-  normalizeSecurityLevel,
-} from "./securityLevelUtils";
+import { WidgetConfig, WidgetSize, WidgetSizePreset } from "../types/widget";
+import { getSecurityLevelValue } from "./securityLevelUtils";
 
-// Define WidgetConfig and WidgetType for local use since they're not exported from types/widgets
-export interface WidgetConfig {
-  type: string;
-  title?: string;
-  description?: string;
-  icon?: string;
-  priority?: number;
-  visible?: boolean;
-  size?: string;
-  minSecurityLevel?: number | string;
-  maxSecurityLevel?: number | string;
-}
-
+// Define WidgetType for local use since it's not exported from types/widgets
 export enum WidgetType {
   SECURITY_LEVEL = "SECURITY_LEVEL",
   SECURITY_SUMMARY = "SECURITY_SUMMARY",
@@ -63,221 +48,6 @@ export const WIDGET_CONTENT: Record<string, string> = {
   [WidgetType.SECURITY_RESOURCES]: "Security resources and references",
 };
 
-// Define WidgetSizePreset enum - re-added
-export enum WidgetSizePreset {
-  DEFAULT = "medium",
-  SMALL = "small",
-  MEDIUM = "medium",
-  LARGE = "large",
-  FULL = "full",
-}
-
-/**
- * Types of security level severities for UI formatting
- */
-export type SecuritySeverity =
-  | "none"
-  | "low"
-  | "moderate"
-  | "high"
-  | "very-high";
-
-/**
- * Maps a security level string to a standardized severity type for UI consistency
- * @param level The security level string
- * @returns A standardized severity type for UI formatting
- */
-export function mapSecurityLevelToSeverity(level: string): SecuritySeverity {
-  const normalizedLevel = level.toLowerCase();
-
-  if (normalizedLevel.includes("very") && normalizedLevel.includes("high")) {
-    return "very-high";
-  } else if (normalizedLevel.includes("high")) {
-    return "high";
-  } else if (
-    normalizedLevel.includes("moderate") ||
-    normalizedLevel.includes("medium")
-  ) {
-    return "moderate";
-  } else if (normalizedLevel.includes("low")) {
-    return "low";
-  }
-
-  return "none";
-}
-
-/**
- * Gets color hex values for a security level directly from constants
- * @param level The security level string
- * @returns Object with background and text colors
- */
-export function getSecurityLevelColors(level: SecurityLevel): {
-  bg: string;
-  text: string;
-} {
-  const normalizedLevel = normalizeSecurityLevel(level) as SecurityLevel;
-
-  // Use the centralized color function instead of reimplementing the logic
-  return getSecurityLevelColorPair(normalizedLevel);
-}
-
-/**
- * Gets the appropriate badge class for a security risk level
- * @param risk The risk level string
- * @returns CSS class string for the risk badge
- */
-export function getRiskBadgeClass(risk: string): string {
-  const normalizedRisk = risk.toLowerCase();
-
-  if (normalizedRisk.includes("critical")) {
-    return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300";
-  } else if (normalizedRisk.includes("high")) {
-    return "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300";
-  } else if (
-    normalizedRisk.includes("medium") ||
-    normalizedRisk.includes("moderate")
-  ) {
-    return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300";
-  } else if (normalizedRisk.includes("low")) {
-    return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
-  } else if (normalizedRisk.includes("minimal")) {
-    return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
-  }
-
-  return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300";
-}
-
-/**
- * Convert any string to a valid SecurityLevel
- * @param level String to convert to SecurityLevel
- * @returns Valid SecurityLevel value
- */
-export function asSecurityLevel(level?: string): SecurityLevel {
-  // Delegate to the implementation in securityLevelUtils
-  return normalizeSecurityLevel(level);
-}
-
-/**
- * Creates formatted JSX for displaying a security level with appropriate styling
- * @param level The security level to display
- * @param withLabel Whether to include a label with the value
- * @returns JSX element with appropriate styling
- */
-export function formatSecurityLevel(
-  level: string,
-  withLabel = false
-): ReactNode {
-  const normalizedLevel = normalizeSecurityLevel(level);
-  const levelClass = getSecurityLevelClass(normalizedLevel);
-
-  return React.createElement(
-    "span",
-    {
-      className: `font-medium ${levelClass}`,
-      "aria-label": `Security level: ${normalizedLevel}`,
-    },
-    `${normalizedLevel}${withLabel ? " Security" : ""}`
-  );
-}
-
-/**
- * Error handler for widget rendering that returns appropriate UI for error states
- * @param error The error object
- * @param testIdOrWidgetId Optional test ID for the error element or widget ID that failed
- * @returns JSX element for displaying the error
- */
-export function handleWidgetError(
-  error: Error | null,
-  testIdOrWidgetId?: string
-): ReactNode {
-  if (!error) return null;
-
-  // Log the error if a widget ID was provided
-  if (testIdOrWidgetId && !testIdOrWidgetId.startsWith("test-")) {
-    console.error(`Widget ${testIdOrWidgetId} error:`, error);
-  }
-
-  return (
-    <div
-      className="widget-error p-4 bg-red-50 text-red-700 rounded-lg"
-      data-testid={
-        testIdOrWidgetId?.startsWith("test-")
-          ? testIdOrWidgetId
-          : "widget-error"
-      }
-      role="alert"
-    >
-      <h3 className="font-medium">Widget Error</h3>
-      <p className="text-sm">{error.message}</p>
-    </div>
-  );
-}
-
-/**
- * Creates an empty state indicator for widgets with no data
- * @param message Custom message for the empty state
- * @param testId Optional test ID for the empty state element
- * @returns JSX element for displaying an empty state
- */
-export function widgetEmptyState(message?: string, testId?: string): ReactNode {
-  return (
-    <div
-      className="widget-empty-state p-4 text-center text-gray-500"
-      data-testid={testId || "widget-empty-state"}
-    >
-      <p>{message || "No data available"}</p>
-    </div>
-  );
-}
-
-/**
- * Creates a loading indicator for widgets in loading state
- * @param messageOrTestId Optional message or test ID
- * @param testId Optional test ID (used when first param is a message)
- * @returns JSX element for displaying a loading state
- */
-export function widgetLoadingIndicator(
-  messageOrTestId?: string,
-  testId?: string
-): ReactNode {
-  // If two params are provided, first is message, second is testId
-  // If only one param is provided, check if it looks like a testId
-  let message = "Loading...";
-  let actualTestId = "widget-loading";
-
-  if (testId) {
-    // If testId is provided, messageOrTestId is the message
-    message = messageOrTestId || "Loading...";
-    actualTestId = testId;
-  } else if (messageOrTestId) {
-    // If only messageOrTestId is provided, check if it looks like a testId
-    if (messageOrTestId.includes("-")) {
-      actualTestId = messageOrTestId;
-    } else {
-      message = messageOrTestId;
-    }
-  }
-
-  return (
-    <div
-      className="widget-loading p-4 text-center text-gray-500"
-      data-testid={actualTestId}
-      role="status"
-      aria-label="Loading widget content"
-    >
-      <p>{message}</p>
-    </div>
-  );
-}
-
-/**
- * Get the title for a widget type
- * @param type The widget type
- * @returns The title or a default value
- */
-export const getWidgetTitle = (type: WidgetType | string): string =>
-  WIDGET_TITLES[type as keyof typeof WIDGET_TITLES] || "Unknown Widget";
-
 /**
  * Get the icon for a widget type
  * @param type The widget type
@@ -285,6 +55,14 @@ export const getWidgetTitle = (type: WidgetType | string): string =>
  */
 export const getWidgetIcon = (type: WidgetType | string): string =>
   WIDGET_ICONS[type as keyof typeof WIDGET_ICONS] || "help_outline";
+
+/**
+ * Get the title for a widget type
+ * @param type The widget type
+ * @returns The title or a default value
+ */
+export const getWidgetTitle = (type: WidgetType | string): string =>
+  WIDGET_TITLES[type as keyof typeof WIDGET_TITLES] || type;
 
 /**
  * Get the description for a widget type
@@ -308,16 +86,33 @@ export const getWidgetContent = (type: WidgetType | string): string =>
  * @returns Complete widget configuration
  */
 export const createWidgetConfig = (
-  config: Partial<WidgetConfig> & { type: WidgetType | string }
-): WidgetConfig => ({
-  type: config.type,
-  title: config.title || getWidgetTitle(config.type),
-  description: config.description || getWidgetDescription(config.type),
-  icon: config.icon || getWidgetIcon(config.type),
-  priority: config.priority || 0,
-  visible: config.visible !== undefined ? config.visible : true,
-  size: config.size || WidgetSizePreset.DEFAULT,
-});
+  config: Partial<WidgetConfig> & { type: string }
+): WidgetConfig => {
+  const size = config.size || WidgetSizePreset.DEFAULT;
+  // Generate a unique ID if not provided
+  const id =
+    config.id || `${config.type}-${Math.random().toString(36).substring(2, 9)}`;
+
+  // Get dimensions for the widget
+  const dimensions = getWidgetSize({ ...config, size });
+
+  return {
+    id,
+    type: config.type,
+    title: config.title || getWidgetTitle(config.type),
+    description: config.description || getWidgetDescription(config.type),
+    icon: config.icon || getWidgetIcon(config.type),
+    priority: config.priority || 0,
+    visible: config.visible !== undefined ? config.visible : true,
+    size,
+    width: dimensions.width,
+    height: dimensions.height,
+    order: config.order || 999,
+    requiredSecurityLevels: config.requiredSecurityLevels,
+    minSecurityLevel: config.minSecurityLevel,
+    maxSecurityLevel: config.maxSecurityLevel,
+  };
+};
 
 /**
  * Filter widgets based on visibility
@@ -370,9 +165,259 @@ export const evaluateWidgetVisibility = (
 };
 
 /**
- * Get the size for a widget
- * @param widget Widget configuration
- * @returns Widget size or default size
+ * Format security level string for display
+ * @param level Security level string that might be in any case format
+ * @returns Properly formatted security level
  */
-export const getWidgetSize = (widget: WidgetConfig): string =>
-  widget.size || WidgetSizePreset.DEFAULT;
+export function formatSecurityLevel(level?: string): string {
+  if (!level) return "None";
+
+  // Check if the level matches any valid security level (case insensitive)
+  const normalizedLevel = level.toLowerCase();
+  for (const validLevel of Object.values(SECURITY_LEVELS)) {
+    if (normalizedLevel === validLevel.toLowerCase()) {
+      // Return with proper case formatting
+      return validLevel;
+    }
+  }
+
+  // Return the original value if no match found
+  return level;
+}
+
+/**
+ * Get CSS classes for a security level
+ * @param level Security level
+ * @returns Object with bg and text class names
+ */
+export function getSecurityLevelColors(level: SecurityLevel) {
+  // Convert level to lowercase for case-insensitive matching
+  const normalizedLevel = level.toLowerCase();
+
+  // Default styles
+  let bg = "bg-gray-100 dark:bg-gray-700";
+  let text = "text-gray-800 dark:text-gray-200";
+
+  // Map levels to CSS classes
+  switch (normalizedLevel) {
+    case "none":
+      bg = "bg-red-50 dark:bg-red-900 dark:bg-opacity-20";
+      text = "text-red-800 dark:text-red-300";
+      break;
+    case "low":
+      bg = "bg-amber-50 dark:bg-amber-900 dark:bg-opacity-20";
+      text = "text-amber-800 dark:text-amber-300";
+      break;
+    case "moderate":
+      bg = "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20";
+      text = "text-blue-800 dark:text-blue-300";
+      break;
+    case "high":
+      bg = "bg-green-50 dark:bg-green-900 dark:bg-opacity-20";
+      text = "text-green-800 dark:text-green-300";
+      break;
+    case "very high":
+      bg = "bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20";
+      text = "text-purple-800 dark:text-purple-300";
+      break;
+  }
+
+  return { bg, text };
+}
+
+/**
+ * Convert string to SecurityLevel type
+ * @param level String to convert to SecurityLevel
+ * @returns Valid SecurityLevel value
+ */
+export function asSecurityLevel(level?: string): SecurityLevel {
+  // Normalize the level first
+  const formattedLevel = formatSecurityLevel(level);
+
+  // Cast to SecurityLevel
+  return formattedLevel as SecurityLevel;
+}
+
+/**
+ * Get widget dimensions based on size preset
+ * @param widget Widget configuration
+ * @returns Width and height values for the widget
+ */
+export function getWidgetSize(widget: Partial<WidgetConfig>): WidgetSize {
+  // Use explicit width and height if provided
+  if (widget.width !== undefined && widget.height !== undefined) {
+    return { width: widget.width, height: widget.height };
+  }
+
+  // Get dimensions based on size preset
+  switch (widget.size) {
+    case WidgetSizePreset.SMALL:
+      return { width: 1, height: 1 };
+    case WidgetSizePreset.LARGE:
+      return { width: 2, height: 2 };
+    case "extraLarge":
+    case WidgetSizePreset.EXTRA_LARGE:
+      return { width: 4, height: 2 };
+    case "fullWidth":
+    case WidgetSizePreset.FULL_WIDTH:
+      return { width: 4, height: 1 };
+    case WidgetSizePreset.MEDIUM:
+    default:
+      return { width: 2, height: 1 };
+  }
+}
+
+/**
+ * Check if all required security levels are present in the given security levels object
+ * @param securityLevels Object containing security levels
+ * @param requiredLevels Array of required security level keys
+ * @returns True if all required levels are present, false otherwise
+ */
+export function checkRequiredSecurityLevels(
+  securityLevels: Record<string, unknown>,
+  requiredLevels?: string[]
+): boolean {
+  if (!requiredLevels || requiredLevels.length === 0) {
+    return true;
+  }
+
+  return requiredLevels.every((level) => level in securityLevels);
+}
+
+/**
+ * Determine if a widget should be shown based on configuration and security levels
+ * @param widgetConfig Widget configuration
+ * @param securityLevels Current security levels
+ * @returns True if widget should be visible, false otherwise
+ */
+export function shouldShowWidget(
+  widgetConfig: WidgetConfig,
+  securityLevels: Record<string, unknown>
+): boolean {
+  // Early return if widget is explicitly hidden
+  if (widgetConfig.visible === false) {
+    return false;
+  }
+
+  // Check required security levels
+  if (widgetConfig.requiredSecurityLevels) {
+    return checkRequiredSecurityLevels(
+      securityLevels,
+      widgetConfig.requiredSecurityLevels
+    );
+  }
+
+  return true;
+}
+
+/**
+ * Render a loading indicator for widgets
+ * @param testId Test ID for the loading indicator
+ * @returns Loading indicator JSX element
+ */
+export function widgetLoadingIndicator(testId: string) {
+  return (
+    <div
+      data-testid={testId}
+      className="flex items-center justify-center p-4 h-full w-full"
+    >
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500"></div>
+    </div>
+  );
+}
+
+/**
+ * Render an error message for widgets
+ * @param error Error object
+ * @param testId Test ID for the error message
+ * @returns Error message JSX element or null if no error
+ */
+export function handleWidgetError(error: Error | null, testId: string) {
+  if (!error) return null;
+
+  return (
+    <div
+      data-testid={testId}
+      className="bg-red-50 dark:bg-red-900 dark:bg-opacity-20 border-l-4 border-red-500 p-4"
+    >
+      <div className="flex items-center">
+        <div className="flex-shrink-0">
+          <svg
+            className="h-5 w-5 text-red-500"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </div>
+        <div className="ml-3">
+          <h3
+            className="text-sm font-medium text-red-800 dark:text-red-200"
+            role="alert"
+          >
+            Widget Error
+          </h3>
+          <div className="mt-2 text-sm text-red-700 dark:text-red-300">
+            <p>{error.message}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Render empty state message or children if not empty
+ * @param isEmpty Whether the widget is empty
+ * @param testId Test ID for the empty state
+ * @param children Children to render if not empty
+ * @returns Empty state or children
+ */
+export function widgetEmptyState(
+  isEmpty: boolean,
+  testId: string,
+  children?: ReactNode
+) {
+  if (isEmpty) {
+    return (
+      <div
+        data-testid={testId}
+        className="flex items-center justify-center p-4 h-full w-full text-gray-500 dark:text-gray-400 text-center"
+      >
+        <div>
+          <svg
+            className="h-12 w-12 mx-auto mb-3 opacity-50"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={1.5}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <p>No data available</p>
+        </div>
+      </div>
+    );
+  }
+
+  return children || null; // Return children if provided, otherwise return null
+}
+
+/**
+ * Get the test ID for a widget element
+ * @param widgetId The widget ID
+ * @param elementId The element ID
+ * @returns The test ID string
+ */
+export function getTestId(widgetId: string, elementId: string): string {
+  return `${widgetId}-${elementId}`;
+}

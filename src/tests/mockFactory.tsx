@@ -1,6 +1,5 @@
 import { vi } from "vitest";
 import { SECURITY_LEVELS } from "../constants/appConstants";
-import { SecurityLevel } from "../types/cia";
 
 /**
  * Interface defining the structure for mock options

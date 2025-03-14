@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
-import { CIADetails, SecurityLevel } from "./cia";
+import { describe, expect, it } from "vitest";
+import { CIADetails } from "./cia";
 
 describe("CIADetails Type", () => {
   // Create a test record to validate against

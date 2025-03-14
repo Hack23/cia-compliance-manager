@@ -5,7 +5,12 @@ import { defineConfig as defineVitestConfig } from "vitest/config";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), tsconfigPaths()],
+  plugins: [
+    // Enable React features
+    react(),
+    // Support for TypeScript paths
+    tsconfigPaths(),
+  ],
   publicDir: "public",
   server: {
     port: 5173,
@@ -14,12 +19,13 @@ export default defineConfig({
       "Access-Control-Allow-Origin": "*",
     },
   },
-  // Add esbuild target for ES2022
+  // Ensure proper JSX handling
   esbuild: {
     target: "es2022",
+    jsx: "automatic",
   },
   build: {
-    outDir: "dist",
+    outDir: "build",
     sourcemap: true,
     commonjsOptions: {
       include: [/node_modules/],
@@ -85,14 +91,6 @@ export default defineConfig({
           functions: 75,
           lines: 80,
         },
-        // Temporarily disable the include filter to focus on fixing the tests
-        // include: [
-        //   "src/utils/widgetHelpers.tsx",
-        //   "src/utils/typeGuards.ts",
-        //   "src/components/RadarChart.tsx",
-        //   "src/components/widgets/AvailabilityImpactWidget.tsx",
-        //   "src/components/widgets/IntegrityImpactWidget.tsx",
-        // ],
       },
     },
   }),

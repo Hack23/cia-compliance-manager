@@ -1,12 +1,10 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import KeyValuePair from "./KeyValuePair";
-import { COMMON_COMPONENT_TEST_IDS } from "../../constants/testIds";
 
 describe("KeyValuePair Component", () => {
   it("renders with label and value", () => {
     render(<KeyValuePair label="Test Label" value="Test Value" />);
-    
+
     // Just check that the component renders with the right content
     expect(screen.getByTestId("key-value-pair")).toBeInTheDocument();
     expect(screen.getByText("Test Label")).toBeInTheDocument();
@@ -37,7 +35,7 @@ describe("KeyValuePair Component", () => {
     // Check that the component renders with value content
     const keyValuePair = screen.getByTestId("key-value-pair");
     expect(keyValuePair).toBeInTheDocument();
-    
+
     // Check directly if the value text has the applied styling by finding it specifically
     const valueElement = screen.getByText("Active");
     expect(valueElement).toBeInTheDocument();
@@ -46,11 +44,7 @@ describe("KeyValuePair Component", () => {
 
   it("renders with label styling", () => {
     render(
-      <KeyValuePair
-        label="Status"
-        value="Active"
-        labelClassName="font-bold"
-      />
+      <KeyValuePair label="Status" value="Active" labelClassName="font-bold" />
     );
 
     expect(screen.getByTestId("key-value-pair")).toBeInTheDocument();
@@ -60,11 +54,7 @@ describe("KeyValuePair Component", () => {
 
   it("renders with custom style class", () => {
     render(
-      <KeyValuePair
-        label="Status"
-        value="Active"
-        className="custom-class"
-      />
+      <KeyValuePair label="Status" value="Active" className="custom-class" />
     );
 
     const keyValuePair = screen.getByTestId("key-value-pair");

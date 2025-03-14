@@ -1,27 +1,27 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   availabilityOptions,
-  integrityOptions,
   confidentialityOptions,
+  integrityOptions,
 } from "./hooks/useCIAOptions";
-import { SECURITY_LEVELS, UI_TEXT } from "./constants/appConstants";
-import { WIDGET_TITLES, WIDGET_ICONS } from "./constants/coreConstants";
-import { APP_TEST_IDS, WIDGET_TEST_IDS } from "./constants/testIds";
+
 import Dashboard, { DashboardWidget } from "./components/Dashboard";
-import SecurityLevelWidget from "./components/widgets/SecurityLevelWidget";
-import RadarChart from "./components/RadarChart";
+import ComplianceStatusWidget from "./components/widgets/ComplianceStatusWidget";
 import CostEstimationWidget from "./components/widgets/CostEstimationWidget";
+import SecurityLevelWidget from "./components/widgets/SecurityLevelWidget";
 import SecuritySummaryWidget from "./components/widgets/SecuritySummaryWidget";
 import ValueCreationWidget from "./components/widgets/ValueCreationWidget";
-import ComplianceStatusWidget from "./components/widgets/ComplianceStatusWidget";
+import { SECURITY_LEVELS, UI_TEXT } from "./constants/appConstants";
+import { WIDGET_TITLES } from "./constants/coreConstants";
+import { APP_TEST_IDS } from "./constants/testIds";
 // Import the new widgets
-import IntegrityImpactWidget from "./components/widgets/IntegrityImpactWidget";
-import ConfidentialityImpactWidget from "./components/widgets/ConfidentialityImpactWidget";
 import AvailabilityImpactWidget from "./components/widgets/AvailabilityImpactWidget";
-import SecurityResourcesWidget from "./components/widgets/SecurityResourcesWidget";
-import TechnicalDetailsWidget from "./components/widgets/TechnicalDetailsWidget";
 import BusinessImpactAnalysisWidget from "./components/widgets/BusinessImpactAnalysisWidget";
+import ConfidentialityImpactWidget from "./components/widgets/ConfidentialityImpactWidget";
+import IntegrityImpactWidget from "./components/widgets/IntegrityImpactWidget";
+import SecurityResourcesWidget from "./components/widgets/SecurityResourcesWidget";
 import SecurityVisualizationWidget from "./components/widgets/SecurityVisualizationWidget";
+import TechnicalDetailsWidget from "./components/widgets/TechnicalDetailsWidget";
 import { SecurityLevel } from "./types/cia";
 import { typeAdapters } from "./types/widgets";
 

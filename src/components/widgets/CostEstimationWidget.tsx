@@ -1,15 +1,13 @@
 import React, { useMemo } from "react";
-import { SecurityLevel } from "../../types/cia";
+import { COST_ANALYSIS } from "../../constants/appConstants";
 import { COST_TEST_IDS } from "../../constants/testIds";
-import { DISPLAY_FORMAT, COST_ANALYSIS } from "../../constants/appConstants";
 import ciaContentService, {
   getImplementationTime,
 } from "../../services/ciaContentService";
-import WidgetContainer from "../common/WidgetContainer";
-import KeyValuePair from "../common/KeyValuePair";
-import StatusBadge from "../common/StatusBadge";
+import { SecurityLevel } from "../../types/cia";
 import MetricsCard from "../common/MetricsCard";
-import ValueDisplay from "../common/ValueDisplay";
+import StatusBadge from "../common/StatusBadge";
+import WidgetContainer from "../common/WidgetContainer";
 
 /**
  * Props for the CostEstimationWidget component

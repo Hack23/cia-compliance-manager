@@ -1,6 +1,6 @@
 // Define mocks at the top of the file, before imports
 vi.mock("../hooks/useCIAOptions", () => {
-return {
+  return {
     availabilityOptions: {
       Moderate: { capex: 10, opex: 5 },
     },
@@ -80,11 +80,10 @@ return {
   };
 });
 
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-import Dashboard, { DashboardWidget } from "./Dashboard";
 import { APP_TEST_IDS } from "../constants/testIds";
+import Dashboard, { DashboardWidget } from "./Dashboard";
 
 // Mock the widget registry
 vi.mock("../utils/widgetRegistry", () => ({
@@ -95,7 +94,6 @@ vi.mock("../utils/widgetRegistry", () => ({
 }));
 
 // Mock the useCIAOptions hook
-
 
 describe("Dashboard Component", () => {
   const defaultProps = {

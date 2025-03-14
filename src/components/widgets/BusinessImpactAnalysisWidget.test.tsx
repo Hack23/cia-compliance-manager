@@ -1,9 +1,7 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { vi, describe, it, expect } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import { CIAComponentType, SecurityLevel } from "../../types/cia";
 import BusinessImpactAnalysisWidget from "./BusinessImpactAnalysisWidget";
-import { BUSINESS_IMPACT_TEST_IDS } from "../../constants/testIds";
-import { SecurityLevel, CIAComponentType } from "../../types/cia";
 
 // Mock ciaContentService with all required functions
 vi.mock("../../services/ciaContentService", () => ({
@@ -33,8 +31,10 @@ vi.mock("../../services/ciaContentService", () => ({
       mttr: component === "availability" ? `${level} MTTR` : undefined,
       annualRevenueLoss: component === "availability" ? "$100,000" : undefined,
       uptime: component === "availability" ? "99.9%" : undefined,
-      validationMethod: component === "integrity" ? `${level} Validation` : undefined,
-      protectionMethod: component === "confidentiality" ? `${level} Protection` : undefined
+      validationMethod:
+        component === "integrity" ? `${level} Validation` : undefined,
+      protectionMethod:
+        component === "confidentiality" ? `${level} Protection` : undefined,
     })),
   },
   // Add the missing getCategoryIcon function with proper typing
@@ -95,7 +95,9 @@ describe("BusinessImpactAnalysisWidget", () => {
     render(<BusinessImpactAnalysisWidget {...defaultProps} />);
 
     // First click on the confidentiality tab to switch to it
-    fireEvent.click(screen.getByTestId("test-business-impact-confidentiality-tab"));
+    fireEvent.click(
+      screen.getByTestId("test-business-impact-confidentiality-tab")
+    );
 
     // Now we should use getAllByText for elements that may appear multiple times
     const summaryTexts = screen.getAllByText(
@@ -135,7 +137,9 @@ describe("BusinessImpactAnalysisWidget", () => {
     render(<BusinessImpactAnalysisWidget {...defaultProps} />);
 
     // First click on the confidentiality tab to switch to it
-    const confidentialityTab = screen.getByTestId("test-business-impact-confidentiality-tab");
+    const confidentialityTab = screen.getByTestId(
+      "test-business-impact-confidentiality-tab"
+    );
     fireEvent.click(confidentialityTab);
 
     // Now check for operational impact section
@@ -144,13 +148,17 @@ describe("BusinessImpactAnalysisWidget", () => {
     expect(operationalHeaders[0]).toBeInTheDocument();
 
     // Check for the confidentiality operational impact text now that the tab is active
-    expect(screen.getByText(/Low confidentiality operational impact/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Low confidentiality operational impact/i)
+    ).toBeInTheDocument();
 
     // Check for financial impact section with the confidentiality tab active
     const financialHeaders = screen.getAllByText(/Financial Impact/i);
     expect(financialHeaders.length).toBeGreaterThan(0);
     expect(financialHeaders[0]).toBeInTheDocument();
-    expect(screen.getByText(/Low confidentiality financial impact/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Low confidentiality financial impact/i)
+    ).toBeInTheDocument();
   });
 
   it("renders financial metrics for impact analysis", () => {

@@ -6,21 +6,19 @@
  */
 
 import React from "react";
-import { CIADetails } from "./cia";
 // Don't import BusinessImpactAnalysisWidgetProps to avoid conflict
 import type {
-  CostEstimationWidgetProps,
-  SecuritySummaryWidgetProps,
-  ValueCreationWidgetProps,
-  IntegrityImpactWidgetProps,
-  ConfidentialityImpactWidgetProps,
   AvailabilityImpactWidgetProps,
-  SecurityResourcesWidgetProps,
-  WidgetBaseProps,
-  TechnicalDetailsWidgetProps,
+  BusinessImpactAnalysisWidgetProps,
   ComplianceStatusWidgetProps,
+  ConfidentialityImpactWidgetProps,
+  CostEstimationWidgetProps,
+  IntegrityImpactWidgetProps,
   SecurityLevelWidgetProps,
-  BusinessImpactAnalysisWidgetProps, // Import this from widgets.ts
+  SecurityResourcesWidgetProps,
+  SecuritySummaryWidgetProps,
+  TechnicalDetailsWidgetProps,
+  ValueCreationWidgetProps,
 } from "./widgets";
 
 /**
@@ -221,15 +219,15 @@ export interface CIAImpactSummaryWidgetProps {
 
 // Re-export all widget props for backward compatibility
 export type {
-  CostEstimationWidgetProps,
-  SecuritySummaryWidgetProps,
-  ValueCreationWidgetProps,
-  IntegrityImpactWidgetProps,
-  ConfidentialityImpactWidgetProps,
   AvailabilityImpactWidgetProps,
-  SecurityResourcesWidgetProps,
-  TechnicalDetailsWidgetProps,
+  BusinessImpactAnalysisWidgetProps,
   ComplianceStatusWidgetProps,
+  ConfidentialityImpactWidgetProps,
+  CostEstimationWidgetProps,
+  IntegrityImpactWidgetProps,
   SecurityLevelWidgetProps,
-  BusinessImpactAnalysisWidgetProps, // Include in re-export
+  SecurityResourcesWidgetProps,
+  SecuritySummaryWidgetProps,
+  TechnicalDetailsWidgetProps,
+  ValueCreationWidgetProps,
 };

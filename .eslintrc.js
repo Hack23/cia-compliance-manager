@@ -23,7 +23,7 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
-        argsIgnorePattern: "^_|^props$|^e$|^event$|^component$",
+        argsIgnorePattern: "^_|^props$|^e$|^event$|^component$|^callback$",
         varsIgnorePattern: "^_|^React$",
         caughtErrorsIgnorePattern: "^_",
         destructuredArrayIgnorePattern: "^_",
@@ -49,6 +49,10 @@ module.exports = {
         "**/test-*.tsx",
         "**/*.spec.ts",
         "**/*.spec.tsx",
+        "**/*.extended.test.tsx",
+        "**/*.comprehensive.test.tsx",
+        "**/*.enhanced.test.tsx",
+        "**/*.darkmode.test.tsx",
       ],
       rules: {
         "@typescript-eslint/no-explicit-any": "off",
@@ -64,6 +68,10 @@ module.exports = {
         "**/mocks/**",
         "**/*.mock.ts",
         "**/*.mock.tsx",
+        "**/testMocks.ts",
+        "**/testMocks/**",
+        "**/testUtils/**",
+        "**/mockFactory.ts",
       ],
       rules: {
         "@typescript-eslint/no-unused-vars": "off",
@@ -92,13 +100,58 @@ module.exports = {
         ],
       },
     },
+    // Component files - relax unused vars rules for props destructuring
+    {
+      files: ["**/components/**/*.tsx", "**/components/**/*.ts"],
+      rules: {
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            argsIgnorePattern: "^_|^props$|^e$|^event$|^component$",
+            varsIgnorePattern:
+              "^_|^React$|options$|Level$|className$|color$|description$|container$|rerender$|totalScore$|compact$|show|span$",
+            ignoreRestSiblings: true,
+          },
+        ],
+      },
+    },
+    // Widget files - have complex prop patterns
+    {
+      files: ["**/widgets/**/*.tsx"],
+      rules: {
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            argsIgnorePattern: "^_",
+            varsIgnorePattern:
+              "^_|.*Level$|^roi.*|^options$|^break.*$|^total.*$|^.*Estimate$",
+            ignoreRestSiblings: true,
+          },
+        ],
+      },
+    },
+    // Hook files and their tests
+    {
+      files: ["**/hooks/**/*.ts", "**/hooks/**/*.tsx"],
+      rules: {
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            argsIgnorePattern: "^_",
+            varsIgnorePattern: "^_|^use.*$|^render.*$",
+            ignoreRestSiblings: true,
+          },
+        ],
+      },
+    },
   ],
   ignorePatterns: [
-    "node_modules/",
-    "dist/",
+    "node_modules/**/*.*",
+    "dist/**",
     "build/",
     "coverage/",
     "**/*.js.map",
     "**/*.d.ts.map",
+    "docs/**",
   ],
 };

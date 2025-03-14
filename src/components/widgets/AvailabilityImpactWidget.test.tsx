@@ -1,10 +1,7 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-import AvailabilityImpactWidget from "./AvailabilityImpactWidget";
-import { AVAILABILITY_IMPACT_TEST_IDS } from "../../constants/testIds";
 import { SecurityLevel } from "../../types/cia";
-import ciaContentService from "../../services/ciaContentService";
+import AvailabilityImpactWidget from "./AvailabilityImpactWidget";
 
 // Mock ciaContentService
 vi.mock("../../services/ciaContentService", () => ({
@@ -100,11 +97,13 @@ describe("AvailabilityImpactWidget", () => {
 
   it("displays availability description from ciaContentService", () => {
     render(<AvailabilityImpactWidget {...defaultProps} />);
-    expect(
-      screen.getByText(
-        "Robust availability with minimal unplanned downtime. Comprehensive redundancy and automated recovery systems."
-      )
-    ).toBeInTheDocument();
+
+    // Use getAllByText instead of getByText since the text appears multiple times
+    const descriptionElements = screen.getAllByText(
+      "Robust availability with minimal unplanned downtime. Comprehensive redundancy and automated recovery systems."
+    );
+    expect(descriptionElements.length).toBeGreaterThan(0);
+    expect(descriptionElements[0]).toBeInTheDocument();
   });
 
   it("displays business impact information", () => {
@@ -121,7 +120,9 @@ describe("AvailabilityImpactWidget", () => {
     // Check for uptime target value - use correct text
     expect(screen.getByText("Uptime Target")).toBeInTheDocument();
     // Use testId to find the specific element with the uptime value instead of getByText
-    expect(screen.getByTestId("widget-availability-impact-uptime-target")).toHaveTextContent("99.9%");
+    expect(
+      screen.getByTestId("widget-availability-impact-uptime-target")
+    ).toHaveTextContent("99.9%");
 
     // Check for RTO
     expect(screen.getByText(/Recovery Time Objective/i)).toBeInTheDocument();
@@ -159,30 +160,42 @@ describe("AvailabilityImpactWidget", () => {
     // Instead of looking for "Unknown Availability", check for the badge that has "Unknown"
     expect(screen.getByTestId("status-badge")).toHaveTextContent("Unknown");
 
-    // Check for the description, which is provided by our mock
+    // Use a more specific selector - look for the text in the impact card description
+    // Use getAllByText and take just the first one
     expect(
-      screen.getByText("Unknown availability description")
+      screen.getAllByText("Unknown availability description")[0]
     ).toBeInTheDocument();
 
-    // Check the uptime value, which is provided by our mock
-    // Use getAllByText instead of getByText to handle multiple elements with the same text
-    expect(screen.getAllByText("111%")[0]).toBeInTheDocument();
+    // Check the uptime value using testId rather than text content
+    expect(
+      screen.getByTestId("widget-availability-impact-uptime-target")
+    ).toHaveTextContent("111%");
   });
 
-  it("has proper accessibility attributes", () => {
-    render(<AvailabilityImpactWidget {...defaultProps} />);
+  it("has proper ARIA attributes for accessibility", () => {
+    render(
+      <AvailabilityImpactWidget
+        availabilityLevel="High"
+        integrityLevel="Moderate"
+        confidentialityLevel="Low"
+      />
+    );
 
     // Check that the section has a region role
     expect(screen.getByRole("region")).toBeInTheDocument();
 
     // Check that the section has an aria-labelledby attribute
-    expect(screen.getByRole("region")).toHaveAttribute(
+    const region = screen.getByRole("region");
+    expect(region).toHaveAttribute(
       "aria-labelledby",
-      "widget-title-availability-impact"
+      "availability-impact-heading"
     );
 
-    // Check that recommendations section exists
-    expect(screen.getByText("Recommendations")).toBeInTheDocument();
+    // Check that the heading exists and has the correct ID
+    const heading = screen.getByRole("heading", {
+      name: /High Availability Impact/i,
+    });
+    expect(heading).toHaveAttribute("id", "availability-impact-heading");
   });
 
   it("displays recommendations when available", () => {

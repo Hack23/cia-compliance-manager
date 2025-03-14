@@ -1,40 +1,40 @@
 import React, { ReactNode } from "react";
-import { WIDGET_TITLES, WIDGET_ICONS } from "../constants/coreConstants";
-import { SECURITY_LEVELS } from "../constants/appConstants";
 import AvailabilityImpactWidget from "../components/widgets/AvailabilityImpactWidget";
 import BusinessImpactAnalysisWidget from "../components/widgets/BusinessImpactAnalysisWidget";
 import ComplianceStatusWidget from "../components/widgets/ComplianceStatusWidget";
 import ConfidentialityImpactWidget from "../components/widgets/ConfidentialityImpactWidget";
-import CostEstimationWidget from "../components/widgets/CostEstimationWidget";
+import { SECURITY_LEVELS } from "../constants/appConstants";
+import { WIDGET_ICONS, WIDGET_TITLES } from "../constants/coreConstants";
+// Remove unused imports
+import { WidgetContainer } from "../components/common";
+import CIAImpactSummaryWidget from "../components/widgets/CIAImpactSummaryWidget";
 import IntegrityImpactWidget from "../components/widgets/IntegrityImpactWidget";
-import RadarChart from "../components/RadarChart";
-import SecurityLevelWidget from "../components/widgets/SecurityLevelWidget";
 import SecurityResourcesWidget from "../components/widgets/SecurityResourcesWidget";
 import SecuritySummaryWidget from "../components/widgets/SecuritySummaryWidget";
+import SecurityVisualizationWidget from "../components/widgets/SecurityVisualizationWidget";
 import TechnicalDetailsWidget from "../components/widgets/TechnicalDetailsWidget";
 import ValueCreationWidget from "../components/widgets/ValueCreationWidget";
-import CIAImpactSummaryWidget from "../components/widgets/CIAImpactSummaryWidget";
-import SecurityVisualizationWidget from "../components/widgets/SecurityVisualizationWidget";
-import { WidgetContainer } from "../components/common";
 import { handleWidgetError } from "./widgetHelpers";
 
 // Import all widget prop types
 import {
-  CostEstimationWidgetProps,
+  AvailabilityImpactWidgetProps,
+  BusinessImpactAnalysisWidgetProps,
+  ComplianceStatusWidgetProps,
+  ConfidentialityImpactWidgetProps,
+  IntegrityImpactWidgetProps,
+  SecurityResourcesWidgetProps,
+  // Remove unused import
   SecuritySummaryWidgetProps,
   TechnicalDetailsWidgetProps,
-  ComplianceStatusWidgetProps,
-  IntegrityImpactWidgetProps,
-  ConfidentialityImpactWidgetProps,
-  AvailabilityImpactWidgetProps,
-  SecurityResourcesWidgetProps,
   ValueCreationWidgetProps,
-  BusinessImpactAnalysisWidgetProps,
   WidgetBaseProps,
 } from "../types/widgets";
 
 // Import SecurityLevel type
 import { SecurityLevel } from "../types/cia";
+// Import WidgetSize type for proper size handling
+import { WidgetSize } from "../types/widget";
 
 // Widget component type without constraint
 type WidgetComponentType<T> = React.ComponentType<T>;
@@ -56,6 +56,30 @@ interface SecurityVisualizationWidgetProps {
   testId?: string;
 }
 
+// Define a type for widget size options to match both string enum and WidgetSize interface
+export type WidgetSizeOption = "small" | "medium" | "large" | "full";
+
+// Helper function to convert string size to WidgetSize object
+const convertSizeToWidgetSize = (
+  size?: WidgetSizeOption
+): WidgetSize | undefined => {
+  if (!size) return undefined;
+
+  // Map string sizes to appropriate width/height dimensions
+  switch (size) {
+    case "small":
+      return { width: 1, height: 1 };
+    case "medium":
+      return { width: 2, height: 1 };
+    case "large":
+      return { width: 2, height: 2 };
+    case "full":
+      return { width: 4, height: 2 };
+    default:
+      return { width: 2, height: 1 }; // Default to medium
+  }
+};
+
 // Modified WidgetDefinition interface to make generic type constraint optional
 export interface WidgetDefinition<T> {
   id: string;
@@ -63,7 +87,7 @@ export interface WidgetDefinition<T> {
   component: WidgetComponentType<T>;
   defaultProps?: Partial<T>;
   icon?: ReactNode;
-  size?: "small" | "medium" | "large" | "full";
+  size?: WidgetSizeOption;
   order?: number;
   description?: string;
   position?: number;
@@ -114,7 +138,7 @@ class WidgetRegistry {
           key={widget.id}
           title={widget.title}
           icon={widget.icon}
-          size={widget.size}
+          size={convertSizeToWidgetSize(widget.size)}
           testId={`widget-${widget.id}`}
         >
           <widget.component {...finalProps} />
@@ -147,7 +171,7 @@ class WidgetRegistry {
           key={widget.id}
           title={widget.title}
           icon={widget.icon}
-          size={widget.size}
+          size={convertSizeToWidgetSize(widget.size)}
           testId={`widget-${widget.id}`}
         >
           <widget.component {...combinedProps} />
