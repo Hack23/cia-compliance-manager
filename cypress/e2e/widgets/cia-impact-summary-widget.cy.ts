@@ -3,130 +3,98 @@
  *
  * Tests the CIA Impact Summary Widget functionality
  */
-import { SECURITY_LEVELS, WIDGET_TEST_IDS } from "../../support/constants";
-import { testWidgetUpdatesWithSecurityLevels } from "../../support/test-patterns";
+import { SECURITY_LEVELS } from "../../support/constants";
+import { setupWidgetTest, verifyWidgetExists } from "./base-widget-tests";
+import { testSecurityLevelChanges } from "./widget-test-helper";
 
 describe("CIA Impact Summary Widget", () => {
-  beforeEach(() => {
-    cy.visit("/");
-    cy.ensureAppLoaded();
+  // Standard setup
+  setupWidgetTest("cia-impact-summary");
+
+  // Basic existence test
+  verifyWidgetExists("cia-impact-summary");
+
+  // Test standard security level changes
+  it("updates content when security levels change", () => {
+    testSecurityLevelChanges("cia-impact-summary");
   });
 
-  it("displays impacts for all three CIA dimensions", () => {
-    // Set security levels
+  // Test combined CIA impact with high security
+  it("shows comprehensive CIA impact summary at high security levels", () => {
+    cy.findWidget("cia-impact-summary").scrollIntoView();
+
+    // Set high security levels
     cy.setSecurityLevels(
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH
     );
 
-    // Look for summary elements - since we don't see a direct CIA impact summary in the DOM,
-    // we'll check for the individual impact widgets and the security summary
-    cy.get("body").then(($body) => {
-      // First try to find a widget with "cia-impact" in the test ID
-      let ciaSummaryFound = false;
+    // Verify contains details for all CIA components
+    cy.findWidget("cia-impact-summary").within(() => {
+      cy.contains(/availability|uptime|recovery/i).should("exist");
+      cy.contains(/integrity|accuracy|valid/i).should("exist");
+      cy.contains(/confidential|privacy|sensitive/i).should("exist");
 
-      if ($body.find('[data-testid*="cia-impact"]').length > 0) {
-        cy.get('[data-testid*="cia-impact"]').should("exist").scrollIntoView();
-        ciaSummaryFound = true;
-      }
-
-      // If not found, check for security summary as fallback
-      if (
-        !ciaSummaryFound &&
-        $body.find('[data-testid="security-summary-container"]').length > 0
-      ) {
-        cy.get('[data-testid="security-summary-container"]')
-          .should("exist")
-          .scrollIntoView();
-        ciaSummaryFound = true;
-      }
-
-      // If still not found, look for the three impact widgets together
-      if (!ciaSummaryFound) {
-        cy.get(
-          '[data-testid="confidentiality-impact"], [data-testid="integrity-impact"], [data-testid="widget-availability-impact"]'
-        ).should("exist");
-
-        cy.log("Using individual CIA impact widgets as summary");
-      }
+      // Verify status indicators
+      cy.get(
+        '[data-testid*="status"], [class*="status"], [data-testid*="indicator"], [class*="indicator"]'
+      ).should("have.length.at.least", 2);
     });
-
-    // Verify all three dimensions
-    cy.verifyContentPresent([
-      /availability/i,
-      /integrity/i,
-      /confidentiality/i,
-    ]);
   });
 
-  it("shows different impact levels", () => {
+  // Test asymmetric security levels
+  it("properly displays mixed security levels", () => {
+    cy.findWidget("cia-impact-summary").scrollIntoView();
+
     // Set mixed security levels
     cy.setSecurityLevels(
       SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.LOW
+      SECURITY_LEVELS.LOW,
+      SECURITY_LEVELS.MODERATE
     );
 
-    // For resilience, first check security summary and fallback to other related widgets
-    cy.get("body").then(($body) => {
-      if ($body.find('[data-testid="security-summary-container"]').length > 0) {
-        cy.get('[data-testid="security-summary-container"]').scrollIntoView();
-      } else if ($body.find('[data-testid="radar-chart"]').length > 0) {
-        cy.get('[data-testid="radar-chart"]').scrollIntoView();
-      }
-    });
+    cy.wait(300);
 
-    // Verify different impact levels
-    cy.verifyContentPresent([
-      SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.LOW,
-    ]);
-  });
+    // Verify that each component shows the correct level
+    cy.findWidget("cia-impact-summary").within(() => {
+      // Check availability section shows high
+      cy.contains(/availability/i)
+        .parent()
+        .contains(SECURITY_LEVELS.HIGH)
+        .should("exist");
 
-  it("updates when security levels change", () => {
-    // Use security summary as a proxy for CIA impact summary
-    cy.get("body").then(($body) => {
-      let selector = '[data-testid="security-summary-container"]';
+      // Check integrity section shows low
+      cy.contains(/integrity/i)
+        .parent()
+        .contains(SECURITY_LEVELS.LOW)
+        .should("exist");
 
-      if ($body.find(selector).length === 0) {
-        selector = '[data-testid="radar-chart"]';
-      }
-
-      // Use test pattern for widget updates with the selected element
-      testWidgetUpdatesWithSecurityLevels(selector, {
-        initialLevels: [
-          SECURITY_LEVELS.LOW,
-          SECURITY_LEVELS.LOW,
-          SECURITY_LEVELS.LOW,
-        ],
-        newLevels: [
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH,
-        ],
-        expectTextChange: true,
-      });
+      // Check confidentiality section shows moderate
+      cy.contains(/confidentiality/i)
+        .parent()
+        .contains(SECURITY_LEVELS.MODERATE)
+        .should("exist");
     });
   });
 
-  it("provides business context for each CIA component", () => {
-    // Set security levels
+  // Test section visibility
+  it("displays all required CIA sections", () => {
+    cy.findWidget("cia-impact-summary").scrollIntoView();
+
     cy.setSecurityLevels(
       SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE
     );
 
-    // Find security summary which should contain business context
-    cy.get('[data-testid="security-summary-container"]').scrollIntoView();
-
-    // Look for business context content
-    cy.verifyContentPresent([
-      /impact/i,
-      /business/i,
-      /value|risk|consideration/i,
-    ]);
+    // Verify all three CIA sections exist - fail fast if any missing
+    cy.findWidget("cia-impact-summary").within(() => {
+      ["availability", "integrity", "confidentiality"].forEach((component) => {
+        cy.get(`[data-testid*="${component}"], [class*="${component}"]`)
+          .should("exist")
+          .should("be.visible");
+      });
+    });
   });
 });

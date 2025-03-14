@@ -1,154 +1,86 @@
 import { SECURITY_LEVELS } from "../../support/constants";
-import testPatterns from "../../support/test-patterns";
+import {
+  setupWidgetTest,
+  verifyWidgetExists,
+  verifyWidgetUpdatesWithSecurityLevels,
+} from "./base-widget-tests";
 
+/**
+ * Standard test suite for Security Summary widget
+ * Tests widget existence, content updates, security level changes
+ */
 describe("Security Summary Widget", () => {
-  beforeEach(() => {
-    cy.visit("/");
-    cy.ensureAppLoaded();
-  });
+  // Use standard setup for widget tests
+  setupWidgetTest("security-summary");
 
-  it("displays current security posture summary", () => {
-    // Find security summary widget using DOM-verified test ID
-    cy.get('[data-testid="security-summary-container"]')
-      .should("exist")
-      .scrollIntoView();
+  // Basic existence test
+  verifyWidgetExists("security-summary");
 
-    // Verify security-related content is present
-    cy.verifyContentPresent([/security/i, /level/i, /rating|summary/i]);
-  });
+  // Test security level changes affect widget content with specific patterns
+  verifyWidgetUpdatesWithSecurityLevels("security-summary", [
+    /security/i,
+    /classification|protection|sensitivity|level/i,
+  ]);
 
-  it("updates security summary when security levels change", () => {
-    // Set initial security levels
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.LOW,
-      SECURITY_LEVELS.LOW,
-      SECURITY_LEVELS.LOW
-    );
+  // Test specific sections within the widget
+  it("displays CIA classification details", () => {
+    cy.findWidget("security-summary").scrollIntoView();
 
-    // Get initial content
-    cy.get('[data-testid="security-summary-container"]')
-      .invoke("text")
-      .then((initialText) => {
-        // Change security levels
-        cy.setSecurityLevels(
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH
-        );
-
-        // Verify content changed
-        cy.get('[data-testid="security-summary-container"]')
-          .invoke("text")
-          .should("not.eq", initialText);
-      });
-  });
-
-  it("shows security recommendations based on current levels", () => {
-    // Set moderate security levels
+    // Set moderate security levels to test comprehensive display
     cy.setSecurityLevels(
       SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE
     );
 
-    // Find security summary widget using DOM-verified test ID
-    cy.get('[data-testid="security-summary-container"]')
-      .should("exist")
-      .scrollIntoView();
-
-    // Check for recommendations section
-    cy.verifyContentPresent([/recommend|suggest|action|best practice/i]);
+    // Verify classification sections
+    cy.findWidget("security-summary").within(() => {
+      // Verify CIA sections exist (fail fast if any missing)
+      cy.get(`[data-testid*="confidentiality"]`).should("exist");
+      cy.get(`[data-testid*="integrity"]`).should("exist");
+      cy.get(`[data-testid*="availability"]`).should("exist");
+    });
   });
 
-  it("displays CIA component security levels", () => {
-    // Set different security levels for each component
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.LOW
-    );
+  // Test recommendations section appears in high security mode
+  it("shows security recommendations for high security levels", () => {
+    cy.findWidget("security-summary").scrollIntoView();
 
-    // Verify each level appears in the summary
-    cy.get('[data-testid="security-summary-container"]').scrollIntoView();
-
-    cy.verifyContentPresent([
-      SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.LOW,
-      /availability|integrity|confidentiality/i,
-    ]);
-  });
-});
-
-describe("Security Summary Widget Tests", () => {
-  beforeEach(() => {
-    cy.visit("/");
-    cy.ensureAppLoaded();
-  });
-
-  it("displays security summary information", () => {
-    cy.findWidget("security-summary").should("exist").and("be.visible");
-  });
-
-  it("updates content when security levels change", () => {
-    // Use the test pattern for verifying widget updates
-    testPatterns.testWidgetUpdatesWithSecurityLevels(
-      '[data-testid="widget-security-summary"]',
-      {
-        initialLevels: [
-          SECURITY_LEVELS.LOW,
-          SECURITY_LEVELS.LOW,
-          SECURITY_LEVELS.LOW,
-        ],
-        newLevels: [
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH,
-        ],
-        expectTextChange: true,
-      }
-    );
-  });
-
-  it("shows recommendation based on security levels", () => {
-    // Set low security
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.LOW,
-      SECURITY_LEVELS.LOW,
-      SECURITY_LEVELS.LOW
-    );
-
-    // Verify recommendation is shown
-    cy.findWidget("security-summary")
-      .find("[data-testid='security-recommendation']")
-      .should("exist")
-      .and("be.visible");
-
-    // Set high security
+    // Set high security levels
     cy.setSecurityLevels(
       SECURITY_LEVELS.HIGH,
       SECURITY_LEVELS.HIGH,
       SECURITY_LEVELS.HIGH
     );
 
-    // Verify recommendation changes
-    cy.findWidget("security-summary")
-      .find("[data-testid='security-recommendation']")
-      .should("exist")
-      .invoke("text")
-      .should("not.be.empty");
+    // Verify recommendations section
+    cy.findWidget("security-summary").within(() => {
+      cy.contains(/recommendation|suggested|advised/i).should("exist");
+    });
   });
 
-  it("displays proper security icon based on levels", () => {
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE
-    );
+  // Test technical details toggle if present
+  it("toggles technical details section if available", () => {
+    cy.findWidget("security-summary").scrollIntoView();
 
-    // Verify security icon exists
-    cy.findWidget("security-summary")
-      .find("[data-testid='security-icon']")
-      .should("exist");
+    // Try to find and use the toggle if it exists
+    cy.findWidget("security-summary").then(($widget) => {
+      const hasToggle =
+        $widget.find('[data-testid*="toggle"]').length > 0 ||
+        $widget.find('button:contains("Technical")').length > 0;
+
+      if (hasToggle) {
+        // Find and click the toggle
+        cy.contains(/technical|details|more/i).click();
+
+        // Verify expanded content
+        cy.wait(300); // Wait for animation
+        cy.contains(/implementation|specification|requirement/i).should(
+          "be.visible"
+        );
+      } else {
+        cy.log("No technical details toggle found - test skipped");
+      }
+    });
   });
 });

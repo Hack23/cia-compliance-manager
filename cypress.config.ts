@@ -20,14 +20,23 @@ export default defineConfig({
   },
   reporter: "cypress-multi-reporters",
   reporterOptions: {
-    reporterEnabled: "spec, cypress-junit-reporter",
-    cypressJunitReporterReporterOptions: {
-      mochaFile: "cypress/results/junit-[hash].xml",
+    reporterEnabled: "spec, cypress-junit-reporter, mochawesome",
+    mochaJunitReporterReporterOptions: {
+      mochaFile: "cypress/reports/junit/results-[hash].xml",
+      toConsole: false,
+      attachments: true,
+      testCaseSwitchClassnameAndName: false,
+      includePending: true,
     },
-    toConsole: true,
-    attachments: true,
-    testCaseSwitchClassnameAndName: false,
-    rootSuiteTitle: "CIA Compliance Manager Tests",
+    mochawesomeReporterOptions: {
+      reportDir: "cypress/reports/mochawesome",
+      overwrite: false,
+      html: true,
+      json: true,
+      timestamp: "mmddyyyy_HHMMss",
+      charts: true,
+      embeddedScreenshots: true,
+    },
   },
   e2e: {
     baseUrl: "http://localhost:5173",

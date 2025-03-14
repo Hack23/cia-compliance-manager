@@ -13,7 +13,7 @@ interface WindowWithDebug extends Window {
 /**
  * Takes a screenshot with current test info and logs DOM state
  */
-function debugFailure(testName: string): void {
+export function debugFailure(testName: string): void {
   cy.screenshot(`debug-${testName.replace(/\s+/g, "-")}`, {
     capture: "viewport",
   });
@@ -28,7 +28,7 @@ function debugFailure(testName: string): void {
 /**
  * Logs info about currently visible elements
  */
-function logVisibleElements(): void {
+export function logVisibleElements(): void {
   cy.log("**Visible Elements on Page**");
 
   cy.document().then((doc) => {
@@ -61,7 +61,7 @@ function logVisibleElements(): void {
 /**
  * Logs all test IDs present in the DOM for debugging
  */
-function logAllTestIds() {
+export function logAllTestIds(): void {
   cy.document().then((doc) => {
     const elements = doc.querySelectorAll("[data-testid]");
     cy.log(`Found ${elements.length} elements with data-testid`);
@@ -80,14 +80,85 @@ function logAllTestIds() {
     if (testIds.length > 20) {
       cy.log(`...and ${testIds.length - 20} more`);
     }
+
+    // Also log any elements with 'widget' in class or id
+    const widgetElements = doc.querySelectorAll(
+      "[class*='widget'], [id*='widget']"
+    );
+    cy.log(
+      `Found ${widgetElements.length} elements with widget in class or id`
+    );
+
+    if (widgetElements.length > 0 && widgetElements.length <= 10) {
+      Array.from(widgetElements).forEach((el, i) => {
+        cy.log(
+          `Widget element ${i + 1}: class="${el.className}", id="${el.id}"`
+        );
+      });
+    }
   });
 }
 
 /**
- * Shows a visual highlight around elements matching a selector
+ * Logs the current DOM structure for debugging
  */
-function addHighlightCommand() {
-  Cypress.Commands.add("highlight", { prevSubject: ["element"] }, (subject) => {
+export function logDomStructure(selector = "body > *"): void {
+  cy.get(selector).then(($elements) => {
+    cy.log(`DOM Structure for "${selector}" (${$elements.length} elements):`);
+
+    $elements.each((i, el) => {
+      if (i < 10) {
+        // Limit to first 10 elements
+        const $el = Cypress.$(el);
+        cy.log(
+          `${i + 1}: ${el.tagName.toLowerCase()}${
+            el.id ? "#" + el.id : ""
+          } - classes: ${el.className}`
+        );
+      }
+    });
+
+    if ($elements.length > 10) {
+      cy.log(`...and ${$elements.length - 10} more elements`);
+    }
+  });
+}
+
+/**
+ * Takes screenshots of all widgets for debugging
+ */
+export function screenshotAllWidgets(): void {
+  cy.get('[data-testid*="widget"], [class*="widget"]').each(($widget, i) => {
+    const testId = $widget.attr("data-testid") || `widget-${i}`;
+    cy.wrap($widget)
+      .scrollIntoView()
+      .screenshot(`widget-${testId}`, { capture: "viewport" });
+  });
+}
+
+// Register commands once
+function registerDebugCommands(): void {
+  // Register debug helpers with proper options
+  Cypress.Commands.add(
+    "debugFailure",
+    { prevSubject: false },
+    (testName: string) => {
+      debugFailure(testName);
+      return cy.wrap(null);
+    }
+  );
+
+  Cypress.Commands.add("logVisibleElements", { prevSubject: false }, () => {
+    logVisibleElements();
+    return cy.wrap(null);
+  });
+
+  Cypress.Commands.add("logAllTestIds", { prevSubject: false }, () => {
+    logAllTestIds();
+    return cy.wrap(null);
+  });
+
+  Cypress.Commands.add("highlight", { prevSubject: "element" }, (subject) => {
     cy.wrap(subject).then(($el) => {
       $el.css({
         border: "3px solid red",
@@ -107,114 +178,8 @@ function addHighlightCommand() {
       return $el;
     });
   });
-}
 
-/**
- * Dumps state information about the app from the window object
- */
-function addDumpAppStateCommand() {
-  Cypress.Commands.add("dumpAppState", () => {
-    cy.window().then((win) => {
-      // Only log if state is available
-      if (win.store && win.store.getState) {
-        console.log("App State:", win.store.getState());
-      } else {
-        console.log("App window object:", win);
-      }
-    });
-  });
-}
-
-/**
- * Log widget structure to help with debugging widget-related tests
- */
-function addLogWidgetStructureCommand() {
-  Cypress.Commands.add("logWidgetStructure", () => {
-    cy.get('[data-testid*="widget"]').then(($widgets) => {
-      cy.log(`Found ${$widgets.length} widgets on the page`);
-
-      $widgets.each((index, widget) => {
-        const $widget = Cypress.$(widget);
-        const testId = $widget.attr("data-testid");
-        const title = $widget.find("h2,h3,h4").first().text().trim();
-        const visible = $widget.is(":visible");
-
-        cy.log(`Widget ${index + 1}: ${testId || "No test ID"}`);
-        cy.log(`- Title: ${title || "No title"}`);
-        cy.log(`- Visible: ${visible ? "Yes" : "No"}`);
-        cy.log(`- Children: ${$widget.children().length}`);
-      });
-    });
-
-    return cy.wrap(null);
-  });
-}
-
-/**
- * Log diagnostic information about security level controls
- */
-function addDebugSecurityControlsCommand() {
-  Cypress.Commands.add("debugSecurityControls", () => {
-    const selectors = [
-      '[data-testid="security-level-controls"]',
-      '[data-testid*="security-level"]',
-      'select[name*="security"]',
-      "select",
-    ];
-
-    selectors.forEach((selector) => {
-      cy.get("body").then(($body) => {
-        const found = $body.find(selector).length;
-        cy.log(`Selector "${selector}": found ${found} elements`);
-
-        if (found > 0) {
-          cy.get(selector).then(($els) => {
-            cy.log(`First match details:`);
-            cy.log(
-              `- HTML: ${$els.eq(0).prop("outerHTML").substring(0, 100)}...`
-            );
-          });
-        }
-      });
-    });
-
-    return cy.wrap(null);
-  });
-}
-
-/**
- * Log information about application state
- */
-function addLogAppStateCommand() {
-  Cypress.Commands.add("logAppState", () => {
-    cy.window().then((win) => {
-      // Log React app state if available
-      if (win.__REACT_APP_STATE__) {
-        cy.log("React App State:");
-        console.log("React App State:", win.__REACT_APP_STATE__);
-      } else {
-        cy.log("React app state not exposed to window");
-      }
-
-      // Log errors
-      if (win.consoleErrors && win.consoleErrors.length) {
-        cy.log(`Console Errors (${win.consoleErrors.length}):`);
-        win.consoleErrors.forEach((err, i) => {
-          cy.log(`${i + 1}: ${String(err).substring(0, 100)}...`);
-        });
-      }
-    });
-
-    return cy.wrap(null);
-  });
-}
-
-/**
- * Logs detailed analysis of widget structure on the page
- * Enhanced with DOM test ID analysis
- */
-function addAnalyzeWidgetsOnPageCommand() {
-  Cypress.Commands.add("analyzeWidgetsOnPage", () => {
+  Cypress.Commands.add("analyzeWidgetsOnPage", { prevSubject: false }, () => {
     cy.log("Analyzing widgets on page...");
 
     // Common widget test IDs from the DOM analysis
@@ -253,36 +218,14 @@ function addAnalyzeWidgetsOnPageCommand() {
   });
 }
 
-// Register all commands once
-function registerCommands() {
-  // Register debug helpers with proper options
-  Cypress.Commands.add(
-    "debugFailure",
-    { prevSubject: false },
-    (testName: string) => {
-      debugFailure(testName);
-    }
-  );
+// Initialize commands
+registerDebugCommands();
 
-  Cypress.Commands.add("logVisibleElements", { prevSubject: false }, () => {
-    logVisibleElements();
-  });
-
-  Cypress.Commands.add("logAllTestIds", { prevSubject: false }, () => {
-    logAllTestIds();
-  });
-
-  // Register the debug commands
-  addHighlightCommand();
-  addDumpAppStateCommand();
-  addLogWidgetStructureCommand();
-  addDebugSecurityControlsCommand();
-  addLogAppStateCommand();
-  addAnalyzeWidgetsOnPageCommand();
-}
-
-// Initialize all commands
-registerCommands();
-
-// Export the functions for direct use in tests
-export { debugFailure, logAllTestIds, logVisibleElements };
+// Export helpers object
+export default {
+  debugFailure,
+  logAllTestIds,
+  logVisibleElements,
+  logDomStructure,
+  screenshotAllWidgets,
+};

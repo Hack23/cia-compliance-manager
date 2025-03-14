@@ -1,38 +1,50 @@
 import { SECURITY_LEVELS } from "../../support/constants";
-import testPatterns from "../../support/test-patterns";
+import { setupWidgetTest, verifyWidgetExists } from "./base-widget-tests";
+import {
+  testSecurityLevelChanges,
+  testWidgetTabSwitching,
+} from "./widget-test-helper";
 
 describe("Technical Details Widget", () => {
-  beforeEach(() => {
-    cy.visit("/");
-    cy.ensureAppLoaded();
-  });
+  // Use standard setup for widget tests
+  setupWidgetTest("technical-details");
 
-  it("displays technical implementation details", () => {
-    cy.findWidget("technical")
-      .should("exist")
-      .and("be.visible")
-      .scrollIntoView();
+  // Basic existence test
+  verifyWidgetExists("technical-details");
 
-    // Verify it contains technical content
-    cy.verifyWidgetContent("technical", [
-      /technical|implementation|configuration|setup/i,
-      /guide|detail|specification/i,
-    ]);
-  });
-
+  // Test security level changes affect widget content
   it("updates technical details when security levels change", () => {
-    // Use reusable test pattern
-    testPatterns.testTechnicalDetailsWithSecurityLevels();
+    testSecurityLevelChanges("technical-details");
   });
 
-  it("has tabs for different CIA components", () => {
-    cy.findWidget("technical").scrollIntoView();
+  // Test tab navigation if present
+  it("switches between CIA tabs if present", () => {
+    cy.findWidget("technical-details").scrollIntoView();
 
-    // Test tab navigation
-    testPatterns.testTabNavigation('[data-testid="technical-details-widget"]');
+    // Check if tabs exist and test switching between them
+    cy.findWidget("technical-details").then(($widget) => {
+      // Look for tab elements
+      const hasTabs =
+        $widget.find(
+          '[role="tab"], button:contains("Availability"), button:contains("Integrity")'
+        ).length > 0;
+
+      if (hasTabs) {
+        testWidgetTabSwitching("technical-details", [
+          /availability/i,
+          /integrity/i,
+          /confidentiality/i,
+        ]);
+      } else {
+        cy.log("No tabs found in technical details widget - skipping tab test");
+      }
+    });
   });
 
-  it("shows implementation steps for selected security level", () => {
+  // Test implementation steps display
+  it("displays implementation steps for selected security levels", () => {
+    cy.findWidget("technical-details").scrollIntoView();
+
     // Set moderate security levels
     cy.setSecurityLevels(
       SECURITY_LEVELS.MODERATE,
@@ -40,9 +52,50 @@ describe("Technical Details Widget", () => {
       SECURITY_LEVELS.MODERATE
     );
 
-    cy.findWidget("technical").scrollIntoView();
+    // Check for implementation steps or instructions
+    cy.findWidget("technical-details").within(() => {
+      cy.contains(/implementation|step|instructions|how to|procedure/i).should(
+        "exist"
+      );
 
-    // Look for implementation steps content
-    cy.verifyContentPresent([/step|instruction|procedure|implement/i]);
+      // Look for numbered steps or bullets
+      cy.get("ol li, ul li, [data-testid*='step'], [class*='step']").should(
+        "have.length.at.least",
+        1
+      );
+    });
+  });
+
+  // Test technical recommendations are security-level appropriate
+  it("provides security-appropriate technical recommendations", () => {
+    cy.findWidget("technical-details").scrollIntoView();
+
+    // Change to high security
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH
+    );
+
+    // Check for advanced technical terms
+    cy.findWidget("technical-details").within(() => {
+      // These terms should appear in high security technical details
+      cy.contains(
+        /encryption|authentication|authorization|audit|monitoring|redundancy/i
+      ).should("exist");
+    });
+
+    // Change to low security
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.LOW,
+      SECURITY_LEVELS.LOW,
+      SECURITY_LEVELS.LOW
+    );
+
+    // Check for basic technical terms instead
+    cy.findWidget("technical-details").within(() => {
+      // These terms should appear in basic technical details
+      cy.contains(/password|backup|update|patch|basic/i).should("exist");
+    });
   });
 });

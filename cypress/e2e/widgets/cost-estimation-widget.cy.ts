@@ -1,86 +1,101 @@
 import { SECURITY_LEVELS } from "../../support/constants";
-import testPatterns from "../../support/test-patterns";
+import { setupWidgetTest, verifyWidgetExists } from "./base-widget-tests";
+import { testSecurityLevelChanges } from "./widget-test-helper";
 
 describe("Cost Estimation Widget", () => {
-  beforeEach(() => {
-    cy.visit("/");
-    cy.ensureAppLoaded();
-  });
+  // Use standard setup for widget tests
+  setupWidgetTest("cost-estimation");
 
-  it("displays implementation cost estimates", () => {
-    cy.findWidget("cost").should("exist").and("be.visible").scrollIntoView();
+  // Basic existence test
+  verifyWidgetExists("cost-estimation");
 
-    // Verify it contains cost-related content
-    cy.verifyWidgetContent("cost", [
-      /cost|budget|expense/i,
-      /(\$|€|£|\d+%)/,
-      /capex|opex|implementation|total/i,
-    ]);
-  });
-
+  // Test security level changes affect widget content
   it("updates cost estimates when security levels change", () => {
-    // Use reusable test pattern
-    testPatterns.testCostUpdatesWithSecurityLevels();
+    testSecurityLevelChanges("cost-estimation");
   });
 
-  it("shows different cost categories", () => {
-    cy.findWidget("cost").scrollIntoView();
+  // Test cost components exist
+  it("displays CAPEX and OPEX estimates", () => {
+    cy.findWidget("cost-estimation").scrollIntoView();
 
-    // Look for common cost categories
-    cy.verifyContentPresent([
-      /initial|capex|capital/i,
-      /ongoing|opex|operational/i,
-      /total|combined/i,
-    ]);
+    // Set moderate security levels
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.MODERATE,
+      SECURITY_LEVELS.MODERATE,
+      SECURITY_LEVELS.MODERATE
+    );
+
+    // Verify cost components
+    cy.findWidget("cost-estimation").within(() => {
+      // Check for CAPEX and OPEX text
+      cy.contains(/capex|capital/i).should("exist");
+      cy.contains(/opex|operational/i).should("exist");
+
+      // Check for cost values - should contain numbers and possibly currency symbols
+      cy.contains(/\d+/).should("exist");
+    });
   });
 
-  it("displays higher costs for higher security levels", () => {
-    // Set low security levels
+  // Test cost estimates change proportionally with security levels
+  it("shows increasing costs with higher security levels", () => {
+    cy.findWidget("cost-estimation").scrollIntoView();
+
+    // Test with low security first
     cy.setSecurityLevels(
       SECURITY_LEVELS.LOW,
       SECURITY_LEVELS.LOW,
       SECURITY_LEVELS.LOW
     );
 
-    // Get initial cost text
-    let lowSecurityCostText = "";
-    cy.findWidget("cost")
-      .invoke("text")
-      .then((text) => {
-        lowSecurityCostText = text;
+    // Capture low security costs
+    cy.findWidget("cost-estimation").invoke("text").as("lowSecurityCost");
 
-        // Extract cost values using regex
-        const lowCostValues = extractCostValues(lowSecurityCostText);
+    // Change to high security
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH
+    );
 
-        // Set high security levels
-        cy.setSecurityLevels(
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH
-        );
+    // Verify costs increased
+    cy.get("@lowSecurityCost").then((lowCost) => {
+      // Extract numbers from both strings and compare
+      cy.findWidget("cost-estimation")
+        .invoke("text")
+        .then((highCost) => {
+          // Extract all numbers from text
+          const lowNumbers = String(lowCost).match(/\d+/g)?.map(Number) || [];
+          const highNumbers = String(highCost).match(/\d+/g)?.map(Number) || [];
 
-        // Get high security cost text and compare
-        cy.findWidget("cost")
-          .invoke("text")
-          .then((highSecurityText) => {
-            // Simply verify the text changed (extracting and comparing
-            // actual numeric values would be more complex)
-            expect(highSecurityText).not.to.equal(lowSecurityCostText);
-          });
-      });
+          // Verify we have numbers to compare
+          expect(lowNumbers.length).to.be.greaterThan(0);
+          expect(highNumbers.length).to.be.greaterThan(0);
+
+          // Get the largest number from each (likely the total cost)
+          const maxLow = Math.max(...lowNumbers);
+          const maxHigh = Math.max(...highNumbers);
+
+          // High security should cost more than low security
+          expect(maxHigh).to.be.greaterThan(maxLow);
+        });
+    });
+  });
+
+  // Test ROI or cost-benefit information is present
+  it("provides ROI or cost-benefit information", () => {
+    cy.findWidget("cost-estimation").scrollIntoView();
+
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.MODERATE,
+      SECURITY_LEVELS.MODERATE,
+      SECURITY_LEVELS.MODERATE
+    );
+
+    // Look for ROI or cost-benefit information
+    cy.findWidget("cost-estimation").within(() => {
+      cy.contains(/roi|return on investment|benefit|saving|value/i).should(
+        "exist"
+      );
+    });
   });
 });
-
-// Helper function to extract cost values from text
-// This is a simplified version - actual implementation would need to be more robust
-function extractCostValues(text: string): number[] {
-  // Look for patterns like $1,000 or $1000 or 1,000
-  const matches = text.match(/\$[\d,]+|\d[\d,]+/g);
-  if (!matches) return [];
-
-  // Convert to numbers
-  return matches.map((match) => {
-    // Remove currency symbols and commas
-    return parseFloat(match.replace(/[$,]/g, ""));
-  });
-}

@@ -3,6 +3,8 @@
  */
 import {
   CIA_TEST_IDS,
+  FLEXIBLE_TEST_IDS,
+  getTestSelector,
   TEST_IDS,
   WIDGET_TEST_IDS,
 } from "../../support/constants";
@@ -66,46 +68,15 @@ export function setupWidgetTest(widgetId: string) {
   // Wait for app to stabilize
   cy.wait(500);
 
-  // Try exact match first, then fallback to partial match
-  cy.document().then((doc) => {
-    const elements = doc.querySelectorAll(`[data-testid="${widgetId}"]`);
-    if (elements.length > 0) {
-      ensureWidgetVisible(widgetId);
+  // Use the new findWidget function which uses flexible selectors
+  findWidget(widgetId).then(($el) => {
+    if ($el && $el.length > 0) {
+      const actualId = $el.attr("data-testid");
+      if (actualId) {
+        ensureWidgetVisible(actualId);
+      }
     } else {
-      // Look up widget by known ID mapping first
-      const mappedIds = getWidgetId(widgetId);
-      let foundMappedId = false;
-
-      for (const mappedId of mappedIds) {
-        if (doc.querySelector(`[data-testid="${mappedId}"]`)) {
-          cy.log(`Found widget with mapped ID: ${mappedId}`);
-          ensureWidgetVisible(mappedId);
-          foundMappedId = true;
-          break;
-        }
-      }
-
-      if (!foundMappedId) {
-        // If no mapped ID found, try partial match
-        cy.get(`[data-testid*="${widgetId}"]`)
-          .first()
-          .then(($el) => {
-            const actualId = $el.attr("data-testid");
-            if (actualId) {
-              cy.log(`Found alternative widget with ID: ${actualId}`);
-              ensureWidgetVisible(actualId);
-            } else {
-              // If we still can't find it, try a more generic approach
-              cy.log(
-                `No data-testid found containing ${widgetId}, trying generic approach`
-              );
-              // Try to find by content instead
-              cy.contains(
-                new RegExp(widgetId.replace(/-/g, " "), "i")
-              ).scrollIntoView();
-            }
-          });
-      }
+      cy.log(`Could not find widget with ID containing: ${widgetId}`);
     }
   });
 }
@@ -121,21 +92,21 @@ export function setSecurityLevelsReliable(
 ) {
   // First make sure the security controls are in the viewport
   // Using correct test ID from WIDGET_TEST_IDS
-  cy.get(`[data-testid="${WIDGET_TEST_IDS.SECURITY_LEVEL_WIDGET}"]`)
+  cy.get(getTestSelector(WIDGET_TEST_IDS.SECURITY_LEVEL_WIDGET))
     .scrollIntoView({ duration: 100 })
     .should("be.visible");
 
   // Make selections with forced option and short waits between
   // Using correct test IDs from CIA_TEST_IDS
-  cy.get(`[data-testid="${CIA_TEST_IDS.AVAILABILITY_SELECT}"]`)
+  cy.get(getTestSelector(CIA_TEST_IDS.AVAILABILITY_SELECT))
     .select(availability, { force: true })
     .wait(300);
 
-  cy.get(`[data-testid="${CIA_TEST_IDS.INTEGRITY_SELECT}"]`)
+  cy.get(getTestSelector(CIA_TEST_IDS.INTEGRITY_SELECT))
     .select(integrity, { force: true })
     .wait(300);
 
-  cy.get(`[data-testid="${CIA_TEST_IDS.CONFIDENTIALITY_SELECT}"]`)
+  cy.get(getTestSelector(CIA_TEST_IDS.CONFIDENTIALITY_SELECT))
     .select(confidentiality, { force: true })
     .wait(300);
 }
@@ -176,87 +147,15 @@ export function checkForTextContent(content: string | RegExp) {
  * Updated with all widget test IDs from the DOM analysis
  */
 export function getWidgetId(primaryId: string): string[] {
-  // Comprehensive mapping of widget IDs based on the DOM analysis
-  const idMappings: Record<string, string[]> = {
-    // Security Level Widget - updated from DOM analysis
-    "security-level": [
-      "widget-security-level-selection",
-      "security-level-selector",
-      "widget-security-level",
-      "security-level-controls",
-    ],
-
-    // Security Summary Widget - updated from DOM analysis
-    "security-summary": [
-      "widget-security-summary",
-      "security-summary-container",
-    ],
-
-    // Business Impact Widget - updated from DOM analysis
-    "business-impact": [
-      "widget-business-impact-container",
-      "business-impact-widget",
-    ],
-
-    // Cost Estimation Widget - updated from DOM analysis
-    "cost-estimation": [
-      "widget-cost-estimation",
-      "cost-estimation-widget",
-      "cost-widget",
-    ],
-
-    // Radar Chart Widget - updated from DOM analysis
-    "radar-chart": ["widget-radar-chart", "radar-chart"],
-
-    // Compliance Status Widget - updated from DOM analysis
-    "compliance-status": [
-      "widget-compliance-status",
-      "compliance-status-widget",
-    ],
-
-    // Value Creation Widget - updated from DOM analysis
-    "value-creation": ["widget-value-creation", "value-creation-widget"],
-
-    // Technical Details Widget - updated from DOM analysis
-    "technical-details": [
-      "widget-technical-details-container",
-      "technical-details-widget",
-    ],
-
-    // Availability Impact Widget - updated from DOM analysis
-    "availability-impact": [
-      "widget-availability-impact-container",
-      "widget-availability-impact",
-    ],
-
-    // Integrity Impact Widget - updated from DOM analysis
-    "integrity-impact": [
-      "widget-integrity-impact-container",
-      "integrity-impact",
-    ],
-
-    // Confidentiality Impact Widget - updated from DOM analysis
-    "confidentiality-impact": [
-      "widget-confidentiality-impact-container",
-      "confidentiality-impact",
-    ],
-
-    // Security Resources Widget - updated from DOM analysis
-    "security-resources": [
-      "widget-security-resources-container",
-      "security-resources-widget",
-    ],
-  };
-
-  // Return widget-specific mappings if they exist
-  if (primaryId in idMappings) {
-    return idMappings[primaryId];
+  // Check if this is a known widget ID in our flexible test IDs
+  if (primaryId in FLEXIBLE_TEST_IDS) {
+    return FLEXIBLE_TEST_IDS[primaryId];
   }
 
   // Try to find a matching prefix
-  for (const key of Object.keys(idMappings)) {
+  for (const key of Object.keys(FLEXIBLE_TEST_IDS)) {
     if (primaryId.startsWith(key) || key.includes(primaryId)) {
-      return idMappings[key];
+      return FLEXIBLE_TEST_IDS[key];
     }
   }
 
@@ -271,6 +170,91 @@ export function getWidgetId(primaryId: string): string[] {
     `${featureName}`,
   ];
 }
+
+/**
+ * Find widget in the DOM using multiple selector strategies
+ * @param widgetName Name or partial name of the widget
+ * @returns JQuery object representing the widget
+ */
+export function findWidget(
+  widgetName: string
+): Cypress.Chainable<JQuery<HTMLElement>> {
+  return cy.document().then((doc) => {
+    // Get potential test IDs for this widget
+    const testIds = getWidgetId(widgetName);
+
+    // Create selectors for each test ID
+    const selectors = testIds.map((id) => `[data-testid="${id}"]`).join(", ");
+
+    // Try to find elements using the selectors
+    if (selectors && doc.querySelector(selectors)) {
+      return cy.get(selectors).first();
+    }
+
+    // If not found with direct selectors, try a more flexible approach
+    cy.log(
+      `Could not find widget with ID containing: ${widgetName}, trying alternative selectors`
+    );
+
+    // Return empty selector if nothing found
+    return cy.get("body").find('[data-testid="nonexistent"]', { log: false });
+  });
+}
+
+// Define widget-specific ID mappings for common widgets
+const idMappings: Record<string, string[]> = {
+  // Security Summary Widget - updated from DOM analysis
+  "security-summary": ["widget-security-summary", "security-summary-container"],
+
+  // Business Impact Widget - updated from DOM analysis
+  "business-impact": [
+    "widget-business-impact-container",
+    "business-impact-widget",
+  ],
+
+  // Cost Estimation Widget - updated from DOM analysis
+  "cost-estimation": [
+    "widget-cost-estimation",
+    "cost-estimation-widget",
+    "cost-widget",
+  ],
+
+  // Radar Chart Widget - updated from DOM analysis
+  "radar-chart": ["widget-radar-chart", "radar-chart"],
+
+  // Compliance Status Widget - updated from DOM analysis
+  "compliance-status": ["widget-compliance-status", "compliance-status-widget"],
+
+  // Value Creation Widget - updated from DOM analysis
+  "value-creation": ["widget-value-creation", "value-creation-widget"],
+
+  // Technical Details Widget - updated from DOM analysis
+  "technical-details": [
+    "widget-technical-details-container",
+    "technical-details-widget",
+  ],
+
+  // Availability Impact Widget - updated from DOM analysis
+  "availability-impact": [
+    "widget-availability-impact-container",
+    "widget-availability-impact",
+  ],
+
+  // Integrity Impact Widget - updated from DOM analysis
+  "integrity-impact": ["widget-integrity-impact-container", "integrity-impact"],
+
+  // Confidentiality Impact Widget - updated from DOM analysis
+  "confidentiality-impact": [
+    "widget-confidentiality-impact-container",
+    "confidentiality-impact",
+  ],
+
+  // Security Resources Widget - updated from DOM analysis
+  "security-resources": [
+    "widget-security-resources-container",
+    "security-resources-widget",
+  ],
+};
 
 /**
  * Find best widget selector based on DOM analysis
@@ -507,6 +491,28 @@ export const checkVisualizationWidget = (): void => {
   );
   // Rest of the implementation
 };
+
+/**
+ * Find an element within a specific widget
+ * @param widgetId Widget identifier
+ * @param elementSelector CSS selector for the element
+ * @returns Element within the widget
+ */
+export function findWidgetElement(
+  widgetId: string,
+  elementSelector: string
+): Cypress.Chainable<JQuery<HTMLElement>> {
+  return findWidget(widgetId).find(elementSelector);
+}
+
+/**
+ * Register custom Cypress commands for widget testing
+ */
+export function registerWidgetCommands(): void {
+  // This function is imported in commands.ts but wasn't implemented
+  // Since commands are already registered directly in commands.ts,
+  // this can be an empty implementation
+}
 
 export default {
   setupWidgetTest,

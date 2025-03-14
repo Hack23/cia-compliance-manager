@@ -3,12 +3,17 @@
  */
 
 // Enhanced version of setSecurityLevel that tries multiple strategies
+// Fix: Use CommandFn signature with string parameter instead of union type
 Cypress.Commands.add(
   "selectSecurityLevelEnhanced",
-  (
-    category: "availability" | "integrity" | "confidentiality",
-    level: string
-  ) => {
+  (category: string, level: string): Cypress.Chainable<void> => {
+    // Type guard to validate category at runtime
+    if (!["availability", "integrity", "confidentiality"].includes(category)) {
+      throw new Error(
+        `Invalid category: ${category}. Must be one of: availability, integrity, confidentiality`
+      );
+    }
+
     // Find security level controls section
     cy.findSecurityLevelControls().within(() => {
       // Try to find the specific category section
@@ -29,6 +34,11 @@ Cypress.Commands.add(
         }
       });
     });
+
+    // Add void return to satisfy TypeScript
+    return cy.wrap(undefined, {
+      log: false,
+    }) as unknown as Cypress.Chainable<void>;
   }
 );
 
@@ -90,8 +100,10 @@ Cypress.Commands.add(
 Cypress.Commands.add(
   "waitForAppStability",
   (timeout: number = 1000): Cypress.Chainable<void> => {
-    // Return type is now void to match the expected type
-    return cy.wait(timeout);
+    cy.wait(timeout);
+    return cy.wrap(undefined, {
+      log: false,
+    }) as unknown as Cypress.Chainable<void>;
   }
 );
 
@@ -100,9 +112,14 @@ Cypress.Commands.add(
 Cypress.Commands.add(
   "doesExist",
   (selector: string): Cypress.Chainable<boolean> => {
+    // Ensure selector is required, not optional
+    if (!selector) {
+      throw new Error("Selector is required");
+    }
+
     return cy.get("body").then(($body) => {
       return $body.find(selector).length > 0;
-    });
+    }) as unknown as Cypress.Chainable<boolean>;
   }
 );
 
@@ -149,12 +166,15 @@ Cypress.Commands.add(
 Cypress.Commands.add(
   "verifyWidgetWithContent",
   (widgetTestId: string, expectedContent: string): Cypress.Chainable<void> => {
-    return cy
-      .get(`[data-testid="${widgetTestId}"]`)
+    cy.get(`[data-testid="${widgetTestId}"]`)
       .should("exist")
       .scrollIntoView()
       .contains(expectedContent)
       .should("be.visible");
+
+    return cy.wrap(undefined, {
+      log: false,
+    }) as unknown as Cypress.Chainable<void>;
   }
 );
 
@@ -176,6 +196,102 @@ Cypress.Commands.add(
     return cy.wrap($el);
   }
 );
+
+// Fix for the Chainable<undefined> vs Chainable<void> issue
+Cypress.Commands.add("someCommand", (): Cypress.Chainable<void> => {
+  // Return type is explicitly void
+  cy.log("Command executed");
+  // Return cy to maintain chainability with void return type
+  return cy.wrap(undefined, {
+    log: false,
+  }) as unknown as Cypress.Chainable<void>;
+});
+
+// Fix the Chainable<JQuery<HTMLElement>> vs Chainable<void>
+Cypress.Commands.add(
+  "findAndClick",
+  (selector: string): Cypress.Chainable<void> => {
+    cy.get(selector).click();
+    // Return void chainable
+    return cy.wrap(undefined, {
+      log: false,
+    }) as unknown as Cypress.Chainable<void>;
+  }
+);
+
+// Add command type definitions
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      /**
+       * Enhanced version of selecting security levels that tries multiple strategies
+       * Fixed type to accept string (runtime validation will check specific values)
+       */
+      selectSecurityLevelEnhanced(
+        category: string,
+        level: string
+      ): Chainable<void>;
+
+      /**
+       * Wait for specific content to appear on the page
+       */
+      waitForContent(
+        contentPattern: string | RegExp,
+        options?: { timeout: number }
+      ): Chainable<boolean>;
+
+      /**
+       * Try to click a button that matches text
+       */
+      tryClickButton(textOrPattern: string | RegExp): Chainable<boolean>;
+
+      /**
+       * Wait for application to stabilize
+       */
+      waitForAppStability(timeout?: number): Chainable<void>;
+
+      /**
+       * Check if an element exists without failing
+       */
+      doesExist(selector: string): Chainable<boolean>;
+
+      /**
+       * Check if page contains any of the provided text patterns
+       */
+      containsAnyText(patterns: Array<string | RegExp>): Chainable<boolean>;
+
+      /**
+       * Safely scroll element into view with options
+       */
+      safeScrollIntoView(
+        options?: Partial<ScrollIntoViewOptions>
+      ): Chainable<JQuery<HTMLElement>>;
+
+      /**
+       * Verify widget contains specific content
+       */
+      verifyWidgetWithContent(
+        widgetTestId: string,
+        expectedContent: string
+      ): Chainable<void>;
+
+      /**
+       * Force an element to be visible
+       */
+      forceVisible(): Chainable<JQuery<HTMLElement>>;
+
+      /**
+       * Example command that returns void
+       */
+      someCommand(): Chainable<void>;
+
+      /**
+       * Find and click an element
+       */
+      findAndClick(selector: string): Chainable<void>;
+    }
+  }
+}
 
 // Export empty to satisfy TypeScript
 export {};

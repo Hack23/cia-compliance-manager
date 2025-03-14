@@ -13,7 +13,7 @@ import { SECURITY_LEVELS } from "./constants";
 
 /**
  * Standard patterns for testing widget updates when security levels change
- * Enhanced with better error handling
+ * Enhanced with better error handling and fallback selection methods
  * @param widgetSelector Selector for the widget to check
  * @param options Configuration options
  */
@@ -56,8 +56,23 @@ export function testWidgetUpdatesWithSecurityLevels(
         cy.get(widgetSelector).should("exist").as("widgetElement");
       }
 
-      // Set initial levels
-      cy.setSecurityLevels(...initialLevels);
+      // Check if security level selects exist
+      const selectCount = $body.find("select").length;
+      if (selectCount < 3) {
+        cy.log(
+          `⚠️ WARNING: Not enough select elements found (${selectCount}) - test may fail`
+        );
+        cy.screenshot("missing-security-selects", { capture: "viewport" });
+      }
+
+      // Set initial levels using more direct approach
+      if (selectCount >= 3) {
+        cy.get("select").eq(0).select(initialLevels[0], { force: true });
+        cy.get("select").eq(1).select(initialLevels[1], { force: true });
+        cy.get("select").eq(2).select(initialLevels[2], { force: true });
+      } else {
+        cy.setSecurityLevels(...initialLevels);
+      }
       cy.wait(waitTime);
 
       // Capture initial state
@@ -72,8 +87,14 @@ export function testWidgetUpdatesWithSecurityLevels(
           initialHtml = $widget.html();
         }
 
-        // Change security levels
-        cy.setSecurityLevels(...newLevels);
+        // Change security levels with direct approach when possible
+        if (selectCount >= 3) {
+          cy.get("select").eq(0).select(newLevels[0], { force: true });
+          cy.get("select").eq(1).select(newLevels[1], { force: true });
+          cy.get("select").eq(2).select(newLevels[2], { force: true });
+        } else {
+          cy.setSecurityLevels(...newLevels);
+        }
         cy.wait(waitTime);
 
         // Verify changes in widget

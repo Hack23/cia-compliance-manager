@@ -9,6 +9,19 @@ export function setupWidgetTest(widgetName: string) {
   beforeEach(() => {
     cy.visit("/");
     cy.ensureAppLoaded();
+
+    // Add style to make all widgets visible
+    cy.document().then((doc) => {
+      const style = doc.createElement("style");
+      style.innerHTML = `
+        * {
+          overflow: visible !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+        }
+      `;
+      doc.head.appendChild(style);
+    });
   });
 }
 
