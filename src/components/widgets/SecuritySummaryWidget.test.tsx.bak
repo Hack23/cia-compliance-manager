@@ -1,6 +1,27 @@
-// Define mocks at the top of the file, before imports
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { vi } from "vitest";
+import { SUMMARY_TEST_IDS } from "../../constants/testIds";
+import { SecurityLevel } from "../../types/cia";
+import SecuritySummaryWidget from "./SecuritySummaryWidget";
+
+// Mock the BusinessKeyBenefits to ensure consistent test data
+vi.mock("../../types/businessImpact", async () => {
+  const actual = await vi.importActual("../../types/businessImpact");
+  return {
+    ...actual,
+    BusinessKeyBenefits: {
+      NONE: ["No benefits"],
+      LOW: ["Basic security benefit"],
+      MODERATE: ["Standard security benefit"],
+      HIGH: ["Advanced security benefit"],
+      VERY_HIGH: ["Maximum security benefit"],
+    },
+  };
+});
+
+// Mock the ciaContentService with all required functions
 vi.mock("../../services/ciaContentService", () => {
-return {
+  return {
     default: {
       getComponentDetails: vi.fn().mockImplementation(() => ({
         description: "Test description",
@@ -108,30 +129,6 @@ return {
     }),
   };
 });
-
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { vi } from "vitest";
-import { SUMMARY_TEST_IDS } from "../../constants/testIds";
-import { SecurityLevel } from "../../types/cia";
-import SecuritySummaryWidget from "./SecuritySummaryWidget";
-
-// Mock the BusinessKeyBenefits to ensure consistent test data
-vi.mock("../../types/businessImpact", async () => {
-  const actual = await vi.importActual("../../types/businessImpact");
-  return {
-    ...actual,
-    BusinessKeyBenefits: {
-      NONE: ["No benefits"],
-      LOW: ["Basic security benefit"],
-      MODERATE: ["Standard security benefit"],
-      HIGH: ["Advanced security benefit"],
-      VERY_HIGH: ["Maximum security benefit"],
-    },
-  };
-});
-
-// Mock the ciaContentService with all required functions
-
 
 describe("SecuritySummaryWidget", () => {
   // Default props that all tests can use

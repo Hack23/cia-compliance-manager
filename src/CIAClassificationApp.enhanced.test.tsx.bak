@@ -1,6 +1,11 @@
-// Define mocks at the top of the file, before imports
+import { render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import CIAClassificationApp from "./CIAClassificationApp";
+import { APP_TEST_IDS } from "./constants/testIds";
+
+// Mock the imports we need
 vi.mock("./hooks/useCIAOptions", () => {
-// Create mock data objects that can be shared between exports
+  // Create mock data objects that can be shared between exports
   const availabilityOptions = {
     None: { capex: 0, opex: 0 },
     Low: { capex: 5, opex: 2 },
@@ -57,14 +62,6 @@ vi.mock("./hooks/useCIAOptions", () => {
     }),
   };
 });
-
-import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import CIAClassificationApp from "./CIAClassificationApp";
-import { APP_TEST_IDS } from "./constants/testIds";
-
-// Mock the imports we need
-
 
 // Mock Dashboard component to avoid JSDOM complexities
 vi.mock("./components/Dashboard", () => ({

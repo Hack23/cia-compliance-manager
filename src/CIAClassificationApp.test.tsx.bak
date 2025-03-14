@@ -1,6 +1,33 @@
-// Define mocks at the top of the file, before imports
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import { vi, describe, it, expect } from "vitest";
+import CIAClassificationApp from "./CIAClassificationApp";
+
+// Define mocks using vi.hoisted() to ensure they're available when the mocks are hoisted
+const mockRenderWidget = vi.hoisted(() =>
+  vi.fn().mockImplementation((id, props) => {
+    return (
+      <div key={id} data-testid={`widget-${id}`}>
+        Mock Widget {id}
+      </div>
+    );
+  })
+);
+
+const mockRenderWidgets = vi.hoisted(() =>
+  vi.fn().mockImplementation((filter, props) => [
+    <div key="widget1" data-testid="widget-1">
+      Mocked Widget 1
+    </div>,
+    <div key="widget2" data-testid="widget-2">
+      Mocked Widget 2
+    </div>,
+  ])
+);
+
+// Mock the useCIAOptions hook
 vi.mock("./hooks/useCIAOptions", () => {
-const mockOptions = {
+  const mockOptions = {
     availabilityOptions: {
       None: {
         description: "No availability",
@@ -136,8 +163,9 @@ const mockOptions = {
   };
 });
 
+// Mock the widgetRegistry module
 vi.mock("./utils/widgetRegistry", () => {
-return {
+  return {
     __esModule: true,
     default: {
       renderWidget: mockRenderWidget,
@@ -157,39 +185,6 @@ return {
     },
   };
 });
-
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import { vi, describe, it, expect } from "vitest";
-import CIAClassificationApp from "./CIAClassificationApp";
-
-// Define mocks using vi.hoisted() to ensure they're available when the mocks are hoisted
-const mockRenderWidget = vi.hoisted(() =>
-  vi.fn().mockImplementation((id, props) => {
-    return (
-      <div key={id} data-testid={`widget-${id}`}>
-        Mock Widget {id}
-      </div>
-    );
-  })
-);
-
-const mockRenderWidgets = vi.hoisted(() =>
-  vi.fn().mockImplementation((filter, props) => [
-    <div key="widget1" data-testid="widget-1">
-      Mocked Widget 1
-    </div>,
-    <div key="widget2" data-testid="widget-2">
-      Mocked Widget 2
-    </div>,
-  ])
-);
-
-// Mock the useCIAOptions hook
-
-
-// Mock the widgetRegistry module
-
 
 describe("CIAClassificationApp", () => {
   it("renders the app with all required components", () => {

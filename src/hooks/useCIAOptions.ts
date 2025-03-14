@@ -1,6 +1,6 @@
 import { useMemo } from "react"; // Replace useState with useMemo since we're not using useState
-import { SecurityLevel, CIADetails } from "../types/cia";
 import { getSecurityLevelColorPair } from "../constants/colorConstants";
+import { CIADetails, SecurityLevel } from "../types/cia";
 
 // Define ROIEstimatesMap type
 interface ROIEstimate {
@@ -653,32 +653,32 @@ const _ROI_ESTIMATES: ROIEstimatesMap = {
     breakEvenPeriod: "N/A",
   },
   LOW: {
-    returnRate: "10-15%",
+    returnRate: "30-50%",
     description:
-      "Basic security measures provide modest protection. Returns here are minimal and highly dependent on effective process integration.",
-    potentialSavings: "$1,000-$5,000",
-    breakEvenPeriod: "18-24 months",
-  },
-  MODERATE: {
-    returnRate: "15-25%",
-    description:
-      "Standard security investments deliver moderate cost avoidance. Benefits are realized over time and depend on consistent operational support.",
+      "Basic security measures provide fundamental protection. Returns are modest but tangible, especially in preventing common incidents.",
     potentialSavings: "$5,000-$20,000",
     breakEvenPeriod: "12-18 months",
   },
-  HIGH: {
-    returnRate: "25-35%",
+  MODERATE: {
+    returnRate: "50-100%",
     description:
-      "Advanced security measures can yield significant cost avoidance, though returns vary with quality of implementation and external factors.",
-    potentialSavings: "$20,000-$80,000",
-    breakEvenPeriod: "8-12 months",
+      "Standard security investments provide good value. The ROI is substantial as risk mitigation becomes more comprehensive.",
+    potentialSavings: "$20,000-$75,000",
+    breakEvenPeriod: "9-12 months",
+  },
+  HIGH: {
+    returnRate: "100-200%",
+    description:
+      "Advanced security measures yield significant returns through robust protection against sophisticated threats and compliance benefits.",
+    potentialSavings: "$75,000-$200,000",
+    breakEvenPeriod: "6-9 months",
   },
   VERY_HIGH: {
-    returnRate: "30-45%",
+    returnRate: "150-300%",
     description:
-      "Maximum security investments offer the highest potential returns, yet require substantial upfront expenditure. Actual ROI remains highly variable.",
-    potentialSavings: "$80,000-$150,000",
-    breakEvenPeriod: "6-9 months",
+      "Maximum security investments offer optimal protection and compliance coverage, with highest returns for critical systems.",
+    potentialSavings: "$200,000-$500,000",
+    breakEvenPeriod: "3-6 months",
     implementationCost: "High initial investment",
   },
 };

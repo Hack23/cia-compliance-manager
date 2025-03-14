@@ -1,6 +1,18 @@
-// Define mocks at the top of the file, before imports
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { vi, describe, it, expect } from "vitest";
+import SecurityLevelWidget from "./SecurityLevelWidget";
+import { SecurityLevel } from "../../types/cia";
+import {
+  SECURITY_LEVEL_TEST_IDS,
+  WIDGET_TEST_IDS,
+  CIA_TEST_IDS,
+} from "../../constants/testIds";
+import { ROIEstimatesMap } from "../../types/cia-services";
+
+// Mock the useCIAOptions hook
 vi.mock("../../hooks/useCIAOptions", () => {
-const mockOptions = {
+  const mockOptions = {
     availabilityOptions: {
       None: {
         description: "No availability",
@@ -218,21 +230,6 @@ const mockOptions = {
     ROI_ESTIMATES: mockOptions.ROI_ESTIMATES,
   };
 });
-
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { vi, describe, it, expect } from "vitest";
-import SecurityLevelWidget from "./SecurityLevelWidget";
-import { SecurityLevel } from "../../types/cia";
-import {
-  SECURITY_LEVEL_TEST_IDS,
-  WIDGET_TEST_IDS,
-  CIA_TEST_IDS,
-} from "../../constants/testIds";
-import { ROIEstimatesMap } from "../../types/cia-services";
-
-// Mock the useCIAOptions hook
-
 
 describe("SecurityLevelWidget Component", () => {
   const mockSetAvailability = vi.fn();

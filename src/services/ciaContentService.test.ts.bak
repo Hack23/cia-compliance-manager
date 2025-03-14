@@ -1,4 +1,3 @@
-// Import real dependencies first for access to their types
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import * as useCIAOptions from "../hooks/useCIAOptions";
 import { SecurityLevel } from "../types/cia";
@@ -10,16 +9,146 @@ import ciaContentService, {
   getValuePoints,
 } from "./ciaContentService";
 
-// Mock only when absolutely necessary, preserving real implementation
-vi.mock("../hooks/useCIAOptions", async () => {
-  // Import the actual module to access real implementation
-  const actual = await vi.importActual("../hooks/useCIAOptions");
+// Mock the useCIAOptions imports
+vi.mock("../hooks/useCIAOptions", () => {
+  // Create mock options data
+  const mockOptions = {
+    availabilityOptions: {
+      None: {
+        description: "Test availability None",
+        technical: "Test technical None",
+        businessImpact: "Test business impact None",
+        recommendations: ["Rec 1", "Rec 2"],
+        capex: 0,
+        opex: 0,
+        bg: "#ffffff",
+        text: "#000000",
+        businessImpactDetails: {
+          financialImpact: {
+            description: "Financial impact description",
+            riskLevel: "High Risk",
+          },
+          operationalImpact: {
+            description: "Operational impact description",
+            riskLevel: "Medium Risk",
+          },
+        },
+        effort: {
+          development: "Test development",
+          maintenance: "Test maintenance",
+          expertise: "Test expertise",
+        },
+        rto: "Test RTO",
+        rpo: "Test RPO",
+        mttr: "Test MTTR",
+      },
+      Moderate: {
+        description: "Test availability Moderate",
+        technical: "Test technical Moderate",
+        businessImpact: "Test business impact Moderate",
+        recommendations: ["Rec Mod 1", "Rec Mod 2"],
+        capex: 15,
+        opex: 10,
+        uptime: "99%",
+        rto: "Test Moderate RTO",
+        rpo: "Test Moderate RPO",
+        mttr: "Test Moderate MTTR",
+      },
+    },
+    integrityOptions: {
+      None: {
+        description: "Test integrity None",
+        technical: "Test technical None",
+        businessImpact: "Test business impact None",
+        recommendations: ["Rec 1", "Rec 2"],
+        capex: 0,
+        opex: 0,
+        bg: "#ffffff",
+        text: "#000000",
+        businessImpactDetails: {
+          financialImpact: {
+            description: "Financial impact description",
+            riskLevel: "High Risk",
+          },
+          operationalImpact: {
+            description: "Operational impact description",
+            riskLevel: "Medium Risk",
+          },
+        },
+        effort: {
+          development: "Test development",
+          maintenance: "Test maintenance",
+          expertise: "Test expertise",
+        },
+      },
+      High: {
+        description: "Test integrity High",
+        technical: "Test technical High",
+        businessImpact: "Test business impact High",
+        recommendations: ["Int High Rec 1", "Int High Rec 2"],
+        validationMethod: "Cryptographic verification",
+        capex: 30,
+        opex: 20,
+      },
+    },
+    confidentialityOptions: {
+      None: {
+        description: "Test confidentiality None",
+        technical: "Test technical None",
+        businessImpact: "Test business impact None",
+        recommendations: ["Conf Rec 1"],
+        capex: 0,
+        opex: 0,
+        bg: "#ffffff",
+        text: "#000000",
+        businessImpactDetails: {
+          financialImpact: {
+            description: "Financial impact description",
+            riskLevel: "High Risk",
+          },
+          operationalImpact: {
+            description: "Operational impact description",
+            riskLevel: "Medium Risk",
+          },
+        },
+        effort: {
+          development: "Test development",
+          maintenance: "Test maintenance",
+          expertise: "Test expertise",
+        },
+      },
+      Low: {
+        description: "Test confidentiality Low",
+        technical: "Test technical Low",
+        businessImpact: "Test business impact Low",
+        recommendations: ["Conf Low Rec 1"],
+        protectionMethod: "Basic access control",
+        capex: 5,
+        opex: 3,
+      },
+    },
+    ROI_ESTIMATES: {
+      NONE: {
+        returnRate: "0%",
+        description: "Test description",
+        potentialSavings: "$0",
+        breakEvenPeriod: "N/A",
+      },
+      MODERATE: {
+        returnRate: "200%",
+        description: "Standard security provides good value",
+        potentialSavings: "$100,000 - $250,000",
+        breakEvenPeriod: "12-18 months",
+      },
+    },
+  };
 
-  // Return an object that keeps the actual implementation
   return {
-    ...actual,
-    // Only override specific methods if needed for tests
-    __esModule: true,
+    availabilityOptions: mockOptions.availabilityOptions,
+    integrityOptions: mockOptions.integrityOptions,
+    confidentialityOptions: mockOptions.confidentialityOptions,
+    ROI_ESTIMATES: mockOptions.ROI_ESTIMATES,
+    useCIAOptions: () => mockOptions,
   };
 });
 
@@ -31,12 +160,17 @@ const mockROIEstimate = {
   breakEvenPeriod: "12 months",
 };
 
-// Use the real options from the module
 const mockDataProvider = {
   availabilityOptions: useCIAOptions.availabilityOptions,
   integrityOptions: useCIAOptions.integrityOptions,
   confidentialityOptions: useCIAOptions.confidentialityOptions,
-  roiEstimates: useCIAOptions.ROI_ESTIMATES,
+  roiEstimates: {
+    NONE: mockROIEstimate,
+    LOW: mockROIEstimate,
+    MODERATE: mockROIEstimate,
+    HIGH: mockROIEstimate,
+    VERY_HIGH: mockROIEstimate,
+  },
   getDefaultSecurityIcon: vi.fn().mockReturnValue("🔒"),
   getDefaultValuePoints: vi.fn().mockReturnValue([]),
 };
@@ -66,17 +200,16 @@ describe("ciaContentService", () => {
       expect(result.financial).toHaveProperty("riskLevel");
     });
 
-    it("should return business impact when details are available", () => {
+    it("should return default business impact when details are not available", () => {
       const result = ciaContentService.getBusinessImpact(
         "availability",
         "Moderate"
       );
       expect(result).toBeDefined();
-      // Fix: Add null check or non-null assertion to handle possibly undefined
-      const moderateOptions = useCIAOptions.availabilityOptions.Moderate;
-      expect(result.summary).toBe(moderateOptions?.businessImpact ?? "");
-      // Check the property exists without asserting specific content
-      expect(result.financial).toHaveProperty("description");
+      expect(result.summary).toBe("Test business impact Moderate");
+      expect(result.financial.description).toBe(
+        "Financial impact not specified"
+      );
     });
   });
 
@@ -127,9 +260,7 @@ describe("ciaContentService", () => {
         "availability",
         "None"
       );
-      // Fix: Add null check or non-null assertion for possible undefined
-      const noneOptions = useCIAOptions.availabilityOptions.None;
-      expect(result).toBe(noneOptions?.description ?? "");
+      expect(result).toBe("Test availability None");
     });
   });
 
@@ -139,9 +270,7 @@ describe("ciaContentService", () => {
         "availability",
         "None"
       );
-      // Fix: Add null check or non-null assertion for possible undefined
-      const noneOptions = useCIAOptions.availabilityOptions.None;
-      expect(result).toEqual(noneOptions?.recommendations ?? []);
+      expect(result).toEqual(["Rec 1", "Rec 2"]);
     });
 
     it("should return empty array when recommendations are not available", () => {
@@ -157,11 +286,8 @@ describe("ciaContentService", () => {
     it("should return ROI metrics for a security level", () => {
       const result = ciaContentService.getROIEstimates("Moderate");
       expect(result).toBeDefined();
-
-      // Test against actual data
-      const actualROI = useCIAOptions.ROI_ESTIMATES.MODERATE;
-      expect(result.returnRate).toBe(actualROI.returnRate);
-      expect(result.description).toBe(actualROI.description);
+      expect(result.returnRate).toBe("200%");
+      expect(result.description).toBe("Standard security provides good value");
     });
 
     it("should return default ROI metrics for invalid security level", () => {
@@ -181,31 +307,11 @@ describe("ciaContentService", () => {
         "Low"
       );
       expect(result).toBeDefined();
-
-      // Calculate expected values from real implementation with null checks
-      const availabilityCapex =
-        useCIAOptions.availabilityOptions.None?.capex ?? 0;
-      const integrityCapex = useCIAOptions.integrityOptions.High?.capex ?? 0;
-      const confidentialityCapex =
-        useCIAOptions.confidentialityOptions.Low?.capex ?? 0;
-      const expectedCapex =
-        availabilityCapex + integrityCapex + confidentialityCapex;
-
-      const availabilityOpex =
-        useCIAOptions.availabilityOptions.None?.opex ?? 0;
-      const integrityOpex = useCIAOptions.integrityOptions.High?.opex ?? 0;
-      const confidentialityOpex =
-        useCIAOptions.confidentialityOptions.Low?.opex ?? 0;
-      const expectedOpex =
-        availabilityOpex + integrityOpex + confidentialityOpex;
-
-      expect(result.totalCapex).toBe(expectedCapex);
-      expect(result.totalOpex).toBe(expectedOpex);
+      expect(result.totalCapex).toBe(35); // 0 + 30 + 5
+      expect(result.totalOpex).toBe(23); // 0 + 20 + 3
     });
   });
 });
-
-// ... existing code for the rest of the tests...
 
 describe("ciaContentService enhanced edge cases", () => {
   describe("Error handling and edge cases", () => {

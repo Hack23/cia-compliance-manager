@@ -84,6 +84,20 @@ export function isObject(
 }
 
 /**
+ * Type guard to check if a value is a string
+ */
+export function isString(value: unknown): value is string {
+  return typeof value === "string";
+}
+
+/**
+ * Type guard to check if a value is a number
+ */
+export function isNumber(value: unknown): value is number {
+  return typeof value === "number";
+}
+
+/**
  * Safely access a nested property in an object using a dot notation path
  * @param obj The object to access
  * @param path The path to the property, e.g. 'a.b.c' or 'a[0].b.c'
@@ -167,6 +181,16 @@ export function getSecurityLevelOption<T>(
 }
 
 /**
+ * Helper function to check if an object has a property
+ * @param obj The object to check
+ * @param prop The property to check for
+ * @returns True if the object has the property
+ */
+export function hasProperty(obj: any, prop: string): boolean {
+  return Boolean(obj && Object.prototype.hasOwnProperty.call(obj, prop));
+}
+
+/**
  * Type guard for ROI metrics objects
  * @param value - The value to check
  * @returns True if the value is a valid ROI metrics object
@@ -226,4 +250,135 @@ export function hasWidgetProps(value: any): boolean {
     typeof value.description === "string" &&
     typeof value.icon === "string"
   );
+}
+
+/**
+ * Checks if an object is a valid security profile
+ */
+export function isSecurityProfile(obj: any): boolean {
+  if (!isObject(obj)) return false;
+  return (
+    hasProperty(obj, "availability") &&
+    hasProperty(obj, "integrity") &&
+    hasProperty(obj, "confidentiality") &&
+    hasProperty(obj, "overall")
+  );
+}
+
+/**
+ * Checks if an object is a valid compliance status
+ */
+export function isComplianceStatus(obj: any): boolean {
+  if (!isObject(obj)) return false;
+  return (
+    hasProperty(obj, "framework") &&
+    hasProperty(obj, "status") &&
+    hasProperty(obj, "details")
+  );
+}
+
+/**
+ * Checks if an object is a valid compliance framework
+ */
+export function isComplianceFramework(obj: any): boolean {
+  if (!isObject(obj)) return false;
+  return (
+    hasProperty(obj, "id") &&
+    hasProperty(obj, "name") &&
+    hasProperty(obj, "version") &&
+    hasProperty(obj, "controls")
+  );
+}
+
+/**
+ * Checks if an object is a valid ROI metric details object
+ */
+export function isROIMetricDetails(obj: any): boolean {
+  if (!isObject(obj)) return false;
+  return (
+    hasProperty(obj, "amount") &&
+    isString(obj.amount) &&
+    hasProperty(obj, "percentage") &&
+    isString(obj.percentage) &&
+    hasProperty(obj, "timeframe") &&
+    isString(obj.timeframe)
+  );
+}
+
+/**
+ * Checks if an object is a valid widget config
+ */
+export function isWidgetConfig(obj: any): boolean {
+  if (!isObject(obj)) return false;
+  return hasProperty(obj, "type") && isString(obj.type);
+}
+
+/**
+ * Checks if an object has a specific tag value
+ */
+export function hasTagValue(obj: any, tagValue: string): boolean {
+  if (!isObject(obj) || !hasProperty(obj, "tags") || !Array.isArray(obj.tags)) {
+    return false;
+  }
+  return obj.tags.includes(tagValue);
+}
+
+/**
+ * Parses a risk level string to a number
+ */
+export function parseRiskLevel(level: string | null | undefined): number {
+  if (!level) return 0;
+
+  const numValue = parseInt(level, 10);
+  if (!isNaN(numValue)) return numValue;
+
+  // Map common risk level strings to numbers
+  const levelLower = level.toLowerCase();
+  if (levelLower.includes("high")) return 3;
+  if (levelLower.includes("medium") || levelLower.includes("moderate"))
+    return 2;
+  if (levelLower.includes("low")) return 1;
+  return 0;
+}
+
+/**
+ * Extracts CIA security levels from an object
+ */
+export function extractSecurityLevels(obj: any): {
+  availability: string;
+  integrity: string;
+  confidentiality: string;
+} {
+  if (!isObject(obj)) {
+    return {
+      availability: "None",
+      integrity: "None",
+      confidentiality: "None",
+    };
+  }
+
+  return {
+    availability: String(obj.availability || "None"),
+    integrity: String(obj.integrity || "None"),
+    confidentiality: String(obj.confidentiality || "None"),
+  };
+}
+
+/**
+ * Calculates the implementation cost from a cost object
+ */
+export function getImplementationCost(costObj: any): number {
+  if (!isObject(costObj)) return 0;
+
+  let total = 0;
+  if (hasProperty(costObj, "capex") && isNumber(costObj.capex)) {
+    total += costObj.capex;
+  }
+  if (hasProperty(costObj, "opex") && isNumber(costObj.opex)) {
+    total += costObj.opex;
+  }
+  if (hasProperty(costObj, "fte") && isNumber(costObj.fte)) {
+    total += costObj.fte * 100000; // Assuming $100k per FTE
+  }
+  return total;
 }
