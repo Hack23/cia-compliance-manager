@@ -1,95 +1,162 @@
 /// <reference types="cypress" />
 
 /**
- * Extended Cypress namespace with our custom commands
+ * Master type definitions file for Cypress custom commands
  */
+
+// Define widget name type for better intellisense and type checking
+type WidgetName =
+  // Main widget data-testid values from HTML
+  | "security-level-selection"
+  | "security-summary"
+  | "business-impact-container"
+  | "technical-details-container"
+  | "cost-estimation"
+  | "value-creation"
+  | "compliance-status"
+  | "radar-chart"
+  | "confidentiality-impact-container"
+  | "integrity-impact-container"
+  | "availability-impact-container"
+  | "security-resources-container"
+
+  // Alternative IDs found in the DOM
+  | "security-level-selector"
+  | "security-summary-container"
+  | "business-impact-widget"
+  | "technical-details-widget"
+  | "confidentiality-impact"
+  | "integrity-impact"
+  | "widget-availability-impact"
+  | "security-resources-widget"
+
+  // Simplified search terms without widget- prefix (for findWidget)
+  | "security-level"
+  | "security"
+  | "business-impact"
+  | "business"
+  | "technical-details"
+  | "technical"
+  | "cost"
+  | "value"
+  | "compliance"
+  | "radar"
+  | "confidentiality"
+  | "integrity"
+  | "availability"
+  | "resources"
+  | "cia-impact-summary"
+  | "visualization"
+  | string; // Allow for other widget names too
+
+// Performance record interface for metrics tracking
+interface PerformanceRecord {
+  operation: string;
+  duration: number;
+  timestamp: number;
+  category?: string;
+  metadata?: Record<string, any>;
+}
+
+// Type for React mount function
+declare const mount: (
+  component: React.ReactNode,
+  options?: any
+) => Cypress.Chainable;
+
+// Extend Window to include our custom properties
+interface Window {
+  store?: {
+    getState(): unknown;
+  };
+  consoleErrors?: string[];
+  __REACT_APP_STATE__?: any;
+  cypressPerformanceMetrics?: {
+    records: PerformanceRecord[];
+    startTime: number;
+  };
+}
+
+// Enhanced scroll options
+interface ScrollIntoViewOptions extends ScrollIntoViewOptionsBase {
+  /**
+   * Whether to force the action even if element is hidden, disabled etc.
+   * @default false
+   */
+  force?: boolean;
+
+  /**
+   * Duration for scrolling animation
+   */
+  duration?: number;
+}
+
+// Consolidated Cypress namespace extensions
 declare namespace Cypress {
-  interface Chainable<Subject> {
+  // Extend AUTWindow for consistent typing
+  interface AUTWindow extends Window {
+    consoleErrors: string[]; // Defined as non-optional to avoid null checks
+    __REACT_APP_STATE__?: any;
+  }
+
+  // Consolidated interface for all custom commands
+  interface Chainable<Subject = any> {
     /**
-     * Set security levels for all three CIA components with strong typing
-     *
-     * @param availability - The availability security level
-     * @param integrity - The integrity security level
-     * @param confidentiality - The confidentiality security level
-     * @example
-     * cy.setSecurityLevels('High', 'Moderate', 'Low');
+     * Custom command to select security levels using multiple strategies
+     * @param availability - Security level for availability
+     * @param integrity - Security level for integrity
+     * @param confidentiality - Security level for confidentiality
+     * @example cy.setSecurityLevels('High', 'Moderate', 'Low')
      */
     setSecurityLevels(
-      availability?: string | null,
-      integrity?: string | null,
-      confidentiality?: string | null
+      availability?: string,
+      integrity?: string,
+      confidentiality?: string
     ): Chainable<JQuery<HTMLElement>>;
 
     /**
-     * Ensure the application is fully loaded before proceeding
+     * Custom command to ensure the app has loaded
+     * @example cy.ensureAppLoaded()
      */
     ensureAppLoaded(): Chainable<JQuery<HTMLElement>>;
 
     /**
-     * Find a widget using multiple selector strategies
-     *
-     * @param widgetName - Name or identifier of the widget to find
-     * @example
-     * cy.findWidget('security-level');
-     * cy.findWidget('cost-estimation');
+     * Custom command to get element by test ID
+     * @param selector - The test ID
+     * @example cy.getByTestId('app-title')
      */
-    findWidget(widgetName: string): Chainable<JQuery<HTMLElement>>;
+    getByTestId(selector: string): Chainable<JQuery<HTMLElement>>;
 
     /**
-     * Verify content patterns exist on the page
-     *
-     * @param contentPatterns - Array of text or RegExp patterns to verify
-     * @example
-     * cy.verifyContentPresent(['Security', /level/i, 'Compliance']);
+     * Custom command to navigate to a specific widget
+     * @param widgetTestId - The widget test ID
+     * @example cy.navigateToWidget('widget-security-summary')
      */
-    verifyContentPresent(
-      contentPatterns: Array<string | RegExp>
-    ): Chainable<void>;
-
-    /**
-     * Verify a widget contains specific content patterns
-     *
-     * @param widgetName - Name or identifier of the widget
-     * @param contentPatterns - Content patterns to check for
-     * @example
-     * cy.verifyWidgetContent('cost', [/estimate/i, 'ROI']);
-     */
-    verifyWidgetContent(
-      widgetName: string,
-      contentPatterns: Array<string | RegExp>
-    ): Chainable<void>;
+    navigateToWidget(widgetTestId: string): Chainable<void>;
 
     /**
      * Enhanced security level selection with fallbacks
-     *
-     * @param category - Which security category to modify
-     * @param level - Security level to select
-     * @example
-     * cy.selectSecurityLevelEnhanced('availability', 'High');
+     * @param category - The security category
+     * @param level - The security level
+     * @example cy.selectSecurityLevelEnhanced('availability', 'High')
      */
     selectSecurityLevelEnhanced(
       category: "availability" | "integrity" | "confidentiality",
       level: string
-    ): Chainable<void>;
+    ): Chainable<JQuery<HTMLElement>>;
 
     /**
-     * Attempts to click a button matching text pattern
-     *
-     * @param textOrPattern - Text or pattern to match button content
-     * @example
-     * cy.tryClickButton('Save');
-     * cy.tryClickButton(/submit|save/i);
+     * Try to click a button matching text pattern
+     * @param textOrPattern - The text or pattern to match
+     * @example cy.tryClickButton('Submit')
      */
     tryClickButton(textOrPattern: string | RegExp): Chainable<boolean>;
 
     /**
-     * Wait for specific content to appear
-     *
-     * @param contentPattern - Text or pattern to wait for
-     * @param options - Additional wait options
-     * @example
-     * cy.waitForContent('Success');
-     * cy.waitForContent(/error/i, { timeout: 5000 });
+     * Wait for content to appear
+     * @param contentPattern - The content pattern to wait for
+     * @param options - Options for waiting
+     * @example cy.waitForContent('Security Summary')
      */
     waitForContent(
       contentPattern: string | RegExp,
@@ -97,39 +164,161 @@ declare namespace Cypress {
     ): Chainable<boolean>;
 
     /**
-     * Makes an element visible for testing
+     * Tab navigation
+     * @example cy.get('input').tab()
      */
-    forceVisible(): Chainable<Subject>;
+    tab(): Chainable<JQuery<HTMLElement>>;
 
     /**
-     * Takes a screenshot and logs DOM state at failure point
-     *
-     * @param testName - Name of the test that failed
+     * Verify widget has specific content
+     * @param widgetTestId - The widget test ID
+     * @param expectedContent - The expected content
+     * @example cy.verifyWidgetWithContent('widget-security-summary', 'Security Level')
+     */
+    verifyWidgetWithContent(
+      widgetTestId: string,
+      expectedContent: string
+    ): Chainable<void>;
+
+    /**
+     * Verify widget contains specific content patterns
+     * @param widgetName - Name or identifier of the widget
+     * @param contentPatterns - Content patterns to check for
+     * @example cy.verifyWidgetContent('cost', [/estimate/i, 'ROI']);
+     */
+    verifyWidgetContent(
+      widgetName: string,
+      contentPatterns: Array<string | RegExp>
+    ): Chainable<void>;
+
+    /**
+     * Wait for app stability
+     * @param timeout - Timeout in milliseconds
+     * @example cy.waitForAppStability()
+     */
+    waitForAppStability(timeout?: number): Chainable<void>;
+
+    /**
+     * Check if element exists
+     * @param selector - The selector
+     * @example cy.doesExist('[data-testid="app-title"]')
+     */
+    doesExist(selector?: string): Chainable<boolean>;
+
+    /**
+     * Check if page contains any matching text patterns
+     * @param patterns - Array of patterns to check
+     * @example cy.containsAnyText([/Security/, 'Level'])
+     */
+    containsAnyText(patterns: Array<RegExp | string>): Chainable<boolean>;
+
+    /**
+     * Safe scrollIntoView that properly handles the force option
+     * @param options - ScrollIntoViewOptions
+     * @example cy.get('.element').safeScrollIntoView()
+     */
+    safeScrollIntoView(
+      options?: ScrollIntoViewOptions
+    ): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * List JUnit files in the results directory
+     * @example cy.listJunitFiles()
+     */
+    listJunitFiles(): Chainable<string[]>;
+
+    /**
+     * Find a widget using multiple selector strategies with enhanced resilience
+     * @param widgetName - Case-insensitive name or partial ID of widget
+     * @example cy.findWidget('security-summary')
+     */
+    findWidget(widgetName: WidgetName): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * Find security level controls using multiple strategies
+     * @example cy.findSecurityLevelControls()
+     */
+    findSecurityLevelControls(): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * Verifies content exists using multiple patterns
+     * @param contentPatterns - Array of patterns to check
+     * @example cy.verifyContentPresent(['Security', /Level/i])
+     */
+    verifyContentPresent(
+      contentPatterns: Array<string | RegExp>
+    ): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * Enforces element visibility for testing
+     * @example cy.get('.element').forceVisible()
+     */
+    forceVisible(): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * Debug utility to log test performance metrics
+     * @param testName - Name of the test
+     * @param duration - Duration in milliseconds
+     * @example cy.logPerformance('load-test', 1500)
+     */
+    logPerformance(testName: string, duration: number): Chainable<null>;
+
+    /**
+     * Verify text is contained in element
+     * @param text - Text to check for
+     * @example cy.containsText('Security')
+     */
+    containsText(text: string): Chainable<void>;
+
+    /**
+     * Log current application state
+     * @example cy.logCurrentState()
+     */
+    logCurrentState(): Chainable<void>;
+
+    /**
+     * Mount a React component in the Cypress test environment
+     */
+    mount: typeof mount;
+
+    /**
+     * Debug utilities
      */
     debugFailure(testName: string): void;
-
-    /**
-     * Logs information about currently visible elements
-     */
     logVisibleElements(): void;
-
-    /**
-     * Logs all test IDs in the DOM
-     */
     logAllTestIds(): void;
-
-    /**
-     * Highlights an element temporarily for debugging
-     */
     highlight(): Chainable<Element>;
+    measureTime<T>(fn: () => Chainable<T>, label?: string): Chainable<T>;
+    dumpAppState(): Chainable<void>;
+    logAppState(): Chainable<null>;
+    logWidgetStructure(): Chainable<null>;
+    debugSecurityControls(): Chainable<null>;
+    analyzeWidgetsOnPage(): Chainable<null>;
 
     /**
-     * Measures execution time of a Cypress operation
-     *
-     * @param fn - Function to measure
-     * @param label - Optional label for the measurement
+     * Performance measurement commands
      */
-    measureTime<T>(fn: () => Chainable<T>, label?: string): Chainable<T>;
+    startMeasurement(label: string): Chainable<void>;
+
+    /**
+     * End a measurement and return the duration
+     * @param label The label used when starting the measurement
+     * @param category Optional category for the measurement
+     * @returns The duration of the measurement in milliseconds
+     */
+    endMeasurement(label: string, category?: string): Chainable<number | null>;
+
+    generatePerformanceReport(): Chainable<void>;
+    collectPerformanceMetrics(
+      operationName: string,
+      category?: string
+    ): Chainable<Subject>;
+
+    /**
+     * Sets application state programmatically for testing
+     * @param stateChanges Object with state properties to change
+     */
+    setAppState(stateChanges: Record<string, any>): Chainable<null>;
 
     /**
      * Initialize performance monitoring for the current test
@@ -163,11 +352,6 @@ declare namespace Cypress {
     ): Chainable<T>;
 
     /**
-     * Generate a performance report for the current test
-     */
-    generatePerformanceReport(): Chainable<any>;
-
-    /**
      * Save current performance metrics to disk
      * @param reason Optional reason for flushing metrics
      */
@@ -177,79 +361,5 @@ declare namespace Cypress {
      * Create a visual performance report in the browser
      */
     createVisualPerformanceReport(): Chainable<null>;
-
-    /**
-     * Start measuring time for an operation
-     * @param label Name of the operation to measure
-     */
-    startMeasurement(label: string): Chainable<void>;
-
-    /**
-     * End time measurement for an operation and record the result
-     * @param label Name of the operation being measured
-     * @param category Optional category for the operation
-     */
-    endMeasurement(label: string, category?: string): Chainable<number>;
-  }
-}
-
-/// <reference types="cypress" />
-
-// Extend the Window interface to include our custom properties
-interface Window {
-  consoleErrors?: string[];
-  __REACT_APP_STATE__?: any;
-}
-
-// Extend the AUTWindow interface in Cypress namespace
-declare namespace Cypress {
-  interface AUTWindow extends Window {
-    consoleErrors: string[]; // Defined as non-optional to avoid null checks
-    __REACT_APP_STATE__?: any;
-  }
-
-  // Extend the Cypress Chainable interface with our custom commands
-  interface Chainable<Subject = any> {
-    /**
-     * Find security level controls using multiple strategies
-     * @example cy.findSecurityLevelControls()
-     */
-    findSecurityLevelControls(): Chainable<JQuery<HTMLElement>>;
-
-    /**
-     * Set security levels with flexible selectors
-     * @param availability - Security level for availability
-     * @param integrity - Security level for integrity
-     * @param confidentiality - Security level for confidentiality
-     * @example cy.setSecurityLevels('High', 'Moderate', 'Low')
-     */
-    setSecurityLevels(
-      availability?: string,
-      integrity?: string,
-      confidentiality?: string
-    ): Chainable<void>;
-
-    /**
-     * Find a widget by name with flexible matching strategies
-     * @param widgetName - Name or identifier of the widget
-     * @example cy.findWidget('security-summary')
-     */
-    findWidget(widgetName: string): Chainable<JQuery<HTMLElement>>;
-
-    /**
-     * Verify content is present using multiple patterns
-     * @param contentPatterns - Patterns to search for
-     * @example cy.verifyContentPresent(['Security', /Level/i])
-     */
-    verifyContentPresent(
-      contentPatterns: Array<string | RegExp>
-    ): Chainable<JQuery<HTMLElement>>;
-
-    /**
-     * Test if text is present in the document
-     * @param text - Text to check for
-     * @example cy.containsText('Security Level')
-     */
-    containsText(text: string): Chainable<void>;
   }
 }

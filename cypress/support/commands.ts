@@ -1,11 +1,5 @@
-import {
-  TEST_IDS,
-  getTestSelector,
-  CIA_TEST_IDS,
-  WIDGET_TEST_IDS,
-  WIDGET_PREFIXES,
-  FLEXIBLE_TEST_IDS,
-} from "./constants";
+// Add this import at the top of your commands.ts file
+import "./debug-helpers";
 
 // Fix for findSecurityLevelControls command
 Cypress.Commands.add("findSecurityLevelControls", () => {
@@ -135,8 +129,18 @@ Cypress.Commands.add("findWidget", (widgetName: string) => {
   const attemptedSelectors: string[] = [];
   const startTime = performance.now();
 
-  // Import the getWidgetId function from widget-test-helper
-  const { getWidgetId } = require("../e2e/widgets/widget-test-helper");
+  // FIXED: Replace require() with simple widget ID generation logic
+  // Instead of relying on an external helper, implement the logic directly
+  function getWidgetId(name: string): string[] {
+    const normalizedName = name.toLowerCase().replace(/\s+/g, "-");
+    return [
+      `widget-${normalizedName}`,
+      `widget-${normalizedName}-container`,
+      normalizedName,
+      `${normalizedName}-widget`,
+      `${normalizedName}-container`,
+    ];
+  }
 
   return cy.get("body").then(($body) => {
     // Get potential widget IDs from the helper function
@@ -307,19 +311,6 @@ Cypress.Commands.add(
     cy.log(`End measurement: ${name} (${category})`);
   }
 );
-
-// Export empty object at the end
-export {};
-
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
 
 // Define custom command types
 declare global {

@@ -1,9 +1,5 @@
-import {
-  SECURITY_LEVELS,
-  FRAMEWORK_TEST_IDS,
-  COMPLIANCE_STATUS,
-} from "../../support/constants";
-import { testWidgetUpdatesWithSecurityLevels } from "../../support/test-patterns";
+import { SECURITY_LEVELS } from "../../support/constants";
+import testPatterns from "../../support/test-patterns";
 
 describe("Compliance Status Widget", () => {
   beforeEach(() => {
@@ -11,74 +7,45 @@ describe("Compliance Status Widget", () => {
     cy.ensureAppLoaded();
   });
 
-  it("shows compliance status for regulatory requirements", () => {
-    // Set high security
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.HIGH
-    );
-
-    // Find compliance widget using DOM-verified test ID
-    cy.get('[data-testid="compliance-status-widget"]')
+  it("displays compliance status information", () => {
+    cy.findWidget("compliance")
       .should("exist")
+      .and("be.visible")
       .scrollIntoView();
 
-    // Verify compliance content
-    cy.verifyContentPresent([/compliance|framework|regulation|requirement/i]);
-  });
-
-  it("indicates which specific frameworks are compliant", () => {
-    // Set security levels
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.HIGH
-    );
-
-    // Find compliance widget using DOM-verified test ID
-    cy.get('[data-testid="compliance-status-widget"]')
-      .should("exist")
-      .scrollIntoView();
-
-    // Look for specific frameworks or generic framework indicators
-    cy.verifyContentPresent([/gdpr|hipaa|pci|iso|nist|complian/i]);
-  });
-
-  it("provides business context for compliance requirements", () => {
-    // Set security levels
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE
-    );
-
-    // Find compliance widget using DOM-verified test ID
-    cy.get('[data-testid="compliance-status-widget"]')
-      .should("exist")
-      .scrollIntoView();
-
-    // Check for business context content
-    cy.verifyContentPresent([/business|context|impact|requirement/i]);
+    // Verify it contains compliance-related content
+    cy.verifyWidgetContent("compliance", [
+      /compliance|compliant|framework|regulation|standard/i,
+      /status|requirement|meet/i,
+    ]);
   });
 
   it("updates compliance status when security levels change", () => {
-    // Use test pattern for widget updates with DOM-verified test ID
-    testWidgetUpdatesWithSecurityLevels(
-      '[data-testid="compliance-status-widget"]',
-      {
-        initialLevels: [
-          SECURITY_LEVELS.LOW,
-          SECURITY_LEVELS.LOW,
-          SECURITY_LEVELS.LOW,
-        ],
-        newLevels: [
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH,
-        ],
-        expectTextChange: true,
-      }
+    // Use the reusable test pattern
+    testPatterns.testComplianceStatusResilient({
+      low: [SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW],
+      high: [SECURITY_LEVELS.HIGH, SECURITY_LEVELS.HIGH, SECURITY_LEVELS.HIGH],
+    });
+  });
+
+  it("shows different frameworks or regulations", () => {
+    cy.findWidget("compliance").scrollIntoView();
+
+    // Look for common compliance frameworks
+    cy.verifyContentPresent([/HIPAA|GDPR|PCI|SOX|ISO|NIST/i]);
+  });
+
+  it("displays remediation steps for non-compliant frameworks", () => {
+    // Set low security levels to ensure some non-compliance
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.LOW,
+      SECURITY_LEVELS.LOW,
+      SECURITY_LEVELS.LOW
     );
+
+    cy.findWidget("compliance").scrollIntoView();
+
+    // Look for remediation content
+    cy.verifyContentPresent([/remediation|fix|improve|step|action/i]);
   });
 });

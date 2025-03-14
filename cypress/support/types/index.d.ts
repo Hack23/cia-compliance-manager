@@ -4,18 +4,45 @@
 declare namespace Cypress {
   // Define widget name type for better intellisense and type checking
   type WidgetName =
-    | "security-level"
+    // Main widget data-testid values from HTML
+    | "security-level-selection"
     | "security-summary"
-    | "business-impact"
+    | "business-impact-container"
+    | "technical-details-container"
     | "cost-estimation"
     | "value-creation"
     | "compliance-status"
     | "radar-chart"
-    | "technical-details"
-    | "availability-impact"
-    | "integrity-impact"
+    | "confidentiality-impact-container"
+    | "integrity-impact-container"
+    | "availability-impact-container"
+    | "security-resources-container"
+
+    // Alternative IDs found in the DOM
+    | "security-level-selector"
+    | "security-summary-container"
+    | "business-impact-widget"
+    | "technical-details-widget"
     | "confidentiality-impact"
-    | "security-resources"
+    | "integrity-impact"
+    | "widget-availability-impact"
+    | "security-resources-widget"
+
+    // Simplified search terms without widget- prefix (for findWidget)
+    | "security-level"
+    | "security"
+    | "business-impact"
+    | "business"
+    | "technical-details"
+    | "technical"
+    | "cost"
+    | "value"
+    | "compliance"
+    | "radar"
+    | "confidentiality"
+    | "integrity"
+    | "availability"
+    | "resources"
     | "cia-impact-summary"
     | "visualization"
     | string; // Allow for other widget names too
