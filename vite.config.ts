@@ -78,13 +78,21 @@ export default defineConfig({
           "src/index.tsx",
           ".dependency-cruiser.cjs",
         ],
-        // Add specific thresholds for coverage requirements
+        // Maintain existing thresholds
         thresholds: {
           statements: 80,
           branches: 70,
           functions: 75,
           lines: 80,
         },
+        // Temporarily disable the include filter to focus on fixing the tests
+        // include: [
+        //   "src/utils/widgetHelpers.tsx",
+        //   "src/utils/typeGuards.ts",
+        //   "src/components/RadarChart.tsx",
+        //   "src/components/widgets/AvailabilityImpactWidget.tsx",
+        //   "src/components/widgets/IntegrityImpactWidget.tsx",
+        // ],
       },
     },
   }),

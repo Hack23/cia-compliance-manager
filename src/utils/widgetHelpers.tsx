@@ -1,10 +1,75 @@
 import React, { ReactNode } from "react";
 import { getSecurityLevelColorPair } from "../constants/colorConstants";
+import { WIDGET_ICONS, WIDGET_TITLES } from "../constants/coreConstants";
 import { SecurityLevel } from "../types/cia";
 import {
   getSecurityLevelClass,
   normalizeSecurityLevel,
 } from "./securityLevelUtils";
+
+// Define WidgetConfig and WidgetType for local use since they're not exported from types/widgets
+export interface WidgetConfig {
+  type: string;
+  title?: string;
+  description?: string;
+  icon?: string;
+  priority?: number;
+  visible?: boolean;
+  size?: string;
+  minSecurityLevel?: number | string;
+  maxSecurityLevel?: number | string;
+}
+
+export enum WidgetType {
+  SECURITY_LEVEL = "SECURITY_LEVEL",
+  SECURITY_SUMMARY = "SECURITY_SUMMARY",
+  SECURITY_VISUALIZATION = "SECURITY_VISUALIZATION",
+  COMPLIANCE_STATUS = "COMPLIANCE_STATUS",
+  VALUE_CREATION = "VALUE_CREATION",
+  COST_ESTIMATION = "COST_ESTIMATION",
+  BUSINESS_IMPACT = "BUSINESS_IMPACT",
+  TECHNICAL_DETAILS = "TECHNICAL_DETAILS",
+  SECURITY_RESOURCES = "SECURITY_RESOURCES",
+  AVAILABILITY_IMPACT = "AVAILABILITY_IMPACT",
+  INTEGRITY_IMPACT = "INTEGRITY_IMPACT",
+  CONFIDENTIALITY_IMPACT = "CONFIDENTIALITY_IMPACT",
+}
+
+// Define constants locally since they're not exported from coreConstants
+export const WIDGET_DESCRIPTIONS: Record<string, string> = {
+  [WidgetType.SECURITY_LEVEL]: "Security level selection",
+  [WidgetType.SECURITY_SUMMARY]: "Security level summary",
+  [WidgetType.COMPLIANCE_STATUS]: "Compliance status information",
+  [WidgetType.VALUE_CREATION]: "Value creation metrics",
+  [WidgetType.COST_ESTIMATION]: "Cost estimation details",
+  [WidgetType.BUSINESS_IMPACT]: "Business impact analysis",
+  [WidgetType.TECHNICAL_DETAILS]: "Technical implementation details",
+  [WidgetType.SECURITY_RESOURCES]: "Security resources and references",
+  [WidgetType.AVAILABILITY_IMPACT]: "Availability impact analysis",
+  [WidgetType.INTEGRITY_IMPACT]: "Integrity impact analysis",
+  [WidgetType.CONFIDENTIALITY_IMPACT]: "Confidentiality impact analysis",
+  [WidgetType.SECURITY_VISUALIZATION]: "Security visualization",
+};
+
+export const WIDGET_CONTENT: Record<string, string> = {
+  [WidgetType.SECURITY_LEVEL]: "Configure security levels",
+  [WidgetType.SECURITY_SUMMARY]: "Security level summary information",
+  [WidgetType.COMPLIANCE_STATUS]: "Compliance status details",
+  [WidgetType.VALUE_CREATION]: "Value creation metrics and analysis",
+  [WidgetType.COST_ESTIMATION]: "Cost estimation details and ROI",
+  [WidgetType.BUSINESS_IMPACT]: "Business impact analysis details",
+  [WidgetType.TECHNICAL_DETAILS]: "Technical implementation details",
+  [WidgetType.SECURITY_RESOURCES]: "Security resources and references",
+};
+
+// Define WidgetSizePreset enum - re-added
+export enum WidgetSizePreset {
+  DEFAULT = "medium",
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
+  FULL = "full",
+}
 
 /**
  * Types of security level severities for UI formatting
@@ -117,63 +182,33 @@ export function formatSecurityLevel(
 /**
  * Error handler for widget rendering that returns appropriate UI for error states
  * @param error The error object
- * @param testId Optional test ID for the error element
+ * @param testIdOrWidgetId Optional test ID for the error element or widget ID that failed
  * @returns JSX element for displaying the error
  */
 export function handleWidgetError(
   error: Error | null,
-  testId?: string
+  testIdOrWidgetId?: string
 ): ReactNode {
   if (!error) return null;
 
-  return React.createElement(
-    "div",
-    {
-      className: "text-red-500 p-4 border border-red-200 rounded-md",
-      "data-testid": testId || "widget-error",
-      role: "alert",
-    },
-    [
-      React.createElement(
-        "div",
-        { className: "font-bold mb-1", key: "title" },
-        "Error"
-      ),
-      React.createElement(
-        "div",
-        { className: "text-sm", key: "message" },
-        error.message
-      ),
-    ]
-  );
-}
+  // Log the error if a widget ID was provided
+  if (testIdOrWidgetId && !testIdOrWidgetId.startsWith("test-")) {
+    console.error(`Widget ${testIdOrWidgetId} error:`, error);
+  }
 
-/**
- * Creates a loading indicator for widgets in loading state
- * @param testId Optional test ID for the loading element
- * @returns JSX element for displaying a loading state
- */
-export function widgetLoadingIndicator(testId?: string): ReactNode {
-  return React.createElement(
-    "div",
-    {
-      className: "flex items-center justify-center h-32",
-      "data-testid": testId || "widget-loading",
-      role: "status",
-      "aria-label": "Loading widget content",
-    },
-    [
-      React.createElement("div", {
-        className:
-          "animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500",
-        key: "spinner",
-      }),
-      React.createElement(
-        "span",
-        { className: "sr-only", key: "text" },
-        "Loading..."
-      ),
-    ]
+  return (
+    <div
+      className="widget-error p-4 bg-red-50 text-red-700 rounded-lg"
+      data-testid={
+        testIdOrWidgetId?.startsWith("test-")
+          ? testIdOrWidgetId
+          : "widget-error"
+      }
+      role="alert"
+    >
+      <h3 className="font-medium">Widget Error</h3>
+      <p className="text-sm">{error.message}</p>
+    </div>
   );
 }
 
@@ -184,38 +219,153 @@ export function widgetLoadingIndicator(testId?: string): ReactNode {
  * @returns JSX element for displaying an empty state
  */
 export function widgetEmptyState(message?: string, testId?: string): ReactNode {
-  return React.createElement(
-    "div",
-    {
-      className: "flex flex-col items-center justify-center h-32 text-gray-500",
-      "data-testid": testId || "widget-empty-state",
-    },
-    [
-      React.createElement(
-        "svg",
-        {
-          className: "w-12 h-12 mb-2 opacity-50",
-          fill: "none",
-          stroke: "currentColor",
-          viewBox: "0 0 24 24",
-          xmlns: "http://www.w3.org/2000/svg",
-          key: "icon",
-        },
-        [
-          React.createElement("path", {
-            strokeLinecap: "round",
-            strokeLinejoin: "round",
-            strokeWidth: 2,
-            d: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
-            key: "path",
-          }),
-        ]
-      ),
-      React.createElement(
-        "p",
-        { className: "text-center text-sm", key: "message" },
-        message || "No data available"
-      ),
-    ]
+  return (
+    <div
+      className="widget-empty-state p-4 text-center text-gray-500"
+      data-testid={testId || "widget-empty-state"}
+    >
+      <p>{message || "No data available"}</p>
+    </div>
   );
 }
+
+/**
+ * Creates a loading indicator for widgets in loading state
+ * @param messageOrTestId Optional message or test ID
+ * @param testId Optional test ID (used when first param is a message)
+ * @returns JSX element for displaying a loading state
+ */
+export function widgetLoadingIndicator(
+  messageOrTestId?: string,
+  testId?: string
+): ReactNode {
+  // If two params are provided, first is message, second is testId
+  // If only one param is provided, check if it looks like a testId
+  const message = testId ? messageOrTestId : "Loading...";
+  const actualTestId =
+    testId ||
+    (messageOrTestId && messageOrTestId.includes("-")
+      ? messageOrTestId
+      : "widget-loading");
+
+  return (
+    <div
+      className="widget-loading p-4 text-center text-gray-500"
+      data-testid={actualTestId}
+      role="status"
+      aria-label="Loading widget content"
+    >
+      <p>{message}</p>
+    </div>
+  );
+}
+
+/**
+ * Get the title for a widget type
+ * @param type The widget type
+ * @returns The title or a default value
+ */
+export const getWidgetTitle = (type: WidgetType | string): string =>
+  WIDGET_TITLES[type as keyof typeof WIDGET_TITLES] || "Unknown Widget";
+
+/**
+ * Get the icon for a widget type
+ * @param type The widget type
+ * @returns The icon or a default value
+ */
+export const getWidgetIcon = (type: WidgetType | string): string =>
+  WIDGET_ICONS[type as keyof typeof WIDGET_ICONS] || "help_outline";
+
+/**
+ * Get the description for a widget type
+ * @param type The widget type
+ * @returns The description or a default value
+ */
+export const getWidgetDescription = (type: WidgetType | string): string =>
+  WIDGET_DESCRIPTIONS[type as string] || "No description available";
+
+/**
+ * Get the content for a widget type
+ * @param type The widget type
+ * @returns The content or an empty string
+ */
+export const getWidgetContent = (type: WidgetType | string): string =>
+  WIDGET_CONTENT[type as string] || "";
+
+/**
+ * Create a widget configuration object
+ * @param config Widget configuration options
+ * @returns Complete widget configuration
+ */
+export const createWidgetConfig = (
+  config: Partial<WidgetConfig> & { type: WidgetType | string }
+): WidgetConfig => ({
+  type: config.type,
+  title: config.title || getWidgetTitle(config.type),
+  description: config.description || getWidgetDescription(config.type),
+  icon: config.icon || getWidgetIcon(config.type),
+  priority: config.priority || 0,
+  visible: config.visible !== undefined ? config.visible : true,
+  size: config.size || WidgetSizePreset.DEFAULT,
+});
+
+/**
+ * Filter widgets based on visibility
+ * @param widgets Array of widget configurations
+ * @returns Filtered array of visible widgets
+ */
+export const filterWidgets = (widgets: WidgetConfig[]): WidgetConfig[] =>
+  widgets.filter((w) => w.visible);
+
+/**
+ * Sort widgets by priority
+ * @param widgets Array of widget configurations
+ * @returns Sorted array of widgets
+ */
+export const sortWidgetsByPriority = (
+  widgets: WidgetConfig[]
+): WidgetConfig[] =>
+  [...widgets].sort((a, b) => (a.priority || 0) - (b.priority || 0));
+
+/**
+ * Check if a widget should be visible based on security level
+ * @param widget Widget configuration
+ * @param securityLevel Current security level
+ * @returns True if the widget should be visible
+ */
+export const evaluateWidgetVisibility = (
+  widget: WidgetConfig,
+  securityLevel: SecurityLevel
+): boolean => {
+  if (
+    widget.minSecurityLevel === undefined &&
+    widget.maxSecurityLevel === undefined
+  )
+    return true;
+
+  // Convert security level to number safely
+  const level =
+    typeof securityLevel === "string"
+      ? parseInt(securityLevel, 10) || 0
+      : (securityLevel as unknown as number);
+
+  const min =
+    typeof widget.minSecurityLevel === "string"
+      ? parseInt(widget.minSecurityLevel, 10) || 0
+      : (widget.minSecurityLevel as number) || 0;
+
+  const max =
+    typeof widget.maxSecurityLevel === "string"
+      ? parseInt(widget.maxSecurityLevel, 10) || Infinity
+      : (widget.maxSecurityLevel as number) || Infinity;
+
+  return level >= min && level <= max;
+};
+
+/**
+ * Get the size for a widget
+ * @param widget Widget configuration
+ * @returns Widget size or default size
+ */
+export const getWidgetSize = (widget: WidgetConfig): string =>
+  widget.size || WidgetSizePreset.DEFAULT;
