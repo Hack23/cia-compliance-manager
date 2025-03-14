@@ -38,7 +38,16 @@
     "fix:cypress-config": "node scripts/fix-cypress-config.js",
     "cypress:clean": "rm -rf cypress/results/*",
     "cleanup": "bash scripts/cleanup.sh",
-    "test:e2e:report": "npm run test:e2e"
+    "test:e2e:report": "npm run test:e2e",
+    "test:analyze": "tsx scripts/analyze-test-utilities.ts",
+    "test:diagnose": "tsx scripts/test-diagnostic-report.ts",
+    "test:fix-radarChart": "vitest run src/components/RadarChart.extended.test.tsx",
+    "test:fix-darkmode": "vitest run src/CIAClassificationApp.darkmode.test.tsx",
+    "test:radar": "vitest run src/components/RadarChart.extended.test.tsx",
+    "test:radar:watch": "vitest src/components/RadarChart.extended.test.tsx",
+    "test:fixhoisting": "tsx scripts/fix-vitest-hoisting.ts",
+    "test:mocks": "vitest run src/tests/testUtils --coverage",
+    "test:fix-hoisting": "tsx scripts/fix-test-hoisting.ts"
   },
   "browserslist": {
     "production": [
