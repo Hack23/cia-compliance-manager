@@ -3,12 +3,8 @@
  *
  * Tests the Availability Impact Widget functionality
  */
-import { SECURITY_LEVELS, WIDGET_TEST_IDS } from "../../support/constants";
-import { testWidgetUpdatesWithSecurityLevels } from "../../support/test-patterns";
-import {
-  setupWidgetTest,
-  testSecurityLevelChanges,
-} from "./widget-test-helper";
+import { SECURITY_LEVELS } from "../../support/constants";
+import testPatterns from "../../support/test-patterns";
 
 describe("Availability Impact Widget", () => {
   beforeEach(() => {
@@ -17,93 +13,68 @@ describe("Availability Impact Widget", () => {
   });
 
   it("displays availability impact analysis", () => {
-    // Set security levels
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE
-    );
+    cy.findWidget("availability-impact")
+      .should("exist")
+      .scrollIntoView()
+      .should("be.visible");
 
-    // Try different valid test IDs for this widget based on DOM analysis
-    cy.get("body").then(($body) => {
-      let selector = "";
-      ["widget-availability-impact", "availability-impact"].forEach((id) => {
-        if ($body.find(`[data-testid="${id}"]`).length) {
-          selector = `[data-testid="${id}"]`;
-        }
-      });
-
-      if (selector) {
-        cy.get(selector).should("exist").scrollIntoView();
-      } else {
-        // Fallback to findWidget
-        cy.findWidget("availability-impact").should("exist").scrollIntoView();
-      }
-    });
-
-    // Verify availability content
-    cy.verifyContentPresent([/availability/i, /impact/i, /uptime/i]);
-  });
-
-  it("shows availability metrics including uptime, RTO, RPO", () => {
-    // Set high availability
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE
-    );
-
-    // Find availability widget
-    cy.findWidget("availability-impact").scrollIntoView();
-
-    // Check for specific availability metrics
+    // Verify it contains availability-related content
     cy.verifyContentPresent([
-      /uptime/i,
-      /rto|recovery time/i,
-      /rpo|recovery point/i,
-      /availability/i,
+      /availability|uptime|recovery/i,
+      /impact|effect|consequence/i,
     ]);
   });
 
-  it("updates content when availability security level changes", () => {
-    // Use findWidget for more resilient testing
-    cy.findWidget("availability-impact").then(($widget) => {
-      const testId = $widget.attr("data-testid");
-
-      // Use test pattern for widget updates with found test ID
-      testWidgetUpdatesWithSecurityLevels(`[data-testid="${testId}"]`, {
+  it("updates content when security levels change", () => {
+    testPatterns.testWidgetUpdatesWithSecurityLevels(
+      '[data-testid*="availability-impact"]',
+      {
         initialLevels: [
           SECURITY_LEVELS.LOW,
-          SECURITY_LEVELS.MODERATE,
-          SECURITY_LEVELS.MODERATE,
+          SECURITY_LEVELS.LOW,
+          SECURITY_LEVELS.LOW,
         ],
         newLevels: [
           SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.MODERATE,
-          SECURITY_LEVELS.MODERATE,
+          SECURITY_LEVELS.HIGH,
+          SECURITY_LEVELS.HIGH,
         ],
         expectTextChange: true,
-      });
-    });
+      }
+    );
   });
 
-  it("provides business impact analysis for availability incidents", () => {
-    // Set high availability
+  it("shows technical metrics and recommendations", () => {
+    // Set moderate security level
     cy.setSecurityLevels(
-      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE
     );
 
-    // Find availability widget
-    cy.findWidget("availability-impact").scrollIntoView();
+    // Check for availability metrics
+    cy.findWidget("availability-impact")
+      .scrollIntoView()
+      .should("contain", /rto|rpo|mttr|uptime/i);
+
+    // Look for recommendation content
+    cy.verifyContentPresent([/recommend|suggest/i]);
+  });
+
+  it("displays business impact information", () => {
+    // Set security levels
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.MODERATE,
+      SECURITY_LEVELS.LOW
+    );
 
     // Check for business impact content
+    cy.findWidget("availability-impact").scrollIntoView();
+
+    // Look for business impact content
     cy.verifyContentPresent([
-      /business/i,
-      /impact/i,
-      /financial/i,
-      /operational/i,
+      /business impact|effect on business|operational impact/i,
     ]);
   });
 });

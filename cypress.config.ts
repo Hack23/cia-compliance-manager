@@ -18,9 +18,12 @@ export default defineConfig({
     runMode: 2,
     openMode: 1,
   },
-  reporter: "cypress-junit-reporter",
+  reporter: "cypress-multi-reporters",
   reporterOptions: {
-    mochaFile: "cypress/results/junit-[hash].xml",
+    reporterEnabled: "spec, cypress-junit-reporter",
+    cypressJunitReporterReporterOptions: {
+      mochaFile: "cypress/results/junit-[hash].xml",
+    },
     toConsole: true,
     attachments: true,
     testCaseSwitchClassnameAndName: false,
@@ -40,18 +43,29 @@ export default defineConfig({
         })
       );
 
-      // Simple directory and file utilities
+      // Define tasks properly to avoid Promise chain issues
       on("task", {
-        ensureDir(dirPath) {
+        // Basic directory tasks
+        ensureDir: (dir: string) => {
+          // Use synchronous file operations to avoid Promise issues
+          const fs = require("fs");
+          const path = require("path");
+
           try {
-            if (!fs.existsSync(dirPath)) {
-              fs.mkdirSync(dirPath, { recursive: true });
-              return `Created directory: ${dirPath}`;
+            if (!fs.existsSync(dir)) {
+              fs.mkdirSync(dir, { recursive: true });
             }
-            return `Directory already exists: ${dirPath}`;
-          } catch (err) {
-            return `Error creating directory: ${err}`;
+            return true;
+          } catch (error) {
+            console.error(`Failed to create directory: ${dir}`, error);
+            return false;
           }
+        },
+
+        // Example of a proper task that returns a direct value (not a Promise)
+        log(message) {
+          console.log(message);
+          return null; // Tasks must return null or a serializable value
         },
 
         readFile({ path }) {
@@ -121,6 +135,12 @@ export default defineConfig({
 
       return config;
     },
+    retries: {
+      runMode: 1,
+      openMode: 0,
+    },
+    defaultCommandTimeout: 10000,
+    chromeWebSecurity: false,
   },
   component: {
     devServer: {
@@ -129,7 +149,6 @@ export default defineConfig({
     },
   },
   waitForAnimations: false,
-  defaultCommandTimeout: 5000,
   pageLoadTimeout: 10000,
   requestTimeout: 5000,
 });

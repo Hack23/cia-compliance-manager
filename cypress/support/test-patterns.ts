@@ -1,4 +1,4 @@
-import { SECURITY_LEVELS, SELECTORS } from "./constants";
+import { SECURITY_LEVELS } from "./constants";
 
 /**
  * Test pattern categories:
@@ -13,7 +13,7 @@ import { SECURITY_LEVELS, SELECTORS } from "./constants";
 
 /**
  * Standard patterns for testing widget updates when security levels change
- * Enhanced with performance tracking
+ * Enhanced with better error handling
  * @param widgetSelector Selector for the widget to check
  * @param options Configuration options
  */
@@ -37,61 +37,60 @@ export function testWidgetUpdatesWithSecurityLevels(
 
   // First try to find the widget using the provided selector
   cy.get("body").then(($body) => {
-    // Check if the selector exists in the DOM
-    if ($body.find(widgetSelector).length === 0) {
-      // If not found, try using our findWidget helper with a derived name
-      const widgetName = widgetSelector
-        .replace(/^\[data-testid="?/, "")
-        .replace(/"?\]$/, "")
-        .replace(/^widget-/, "")
-        .replace(/-container$/, "");
+    try {
+      // Check if the selector exists in the DOM
+      if ($body.find(widgetSelector).length === 0) {
+        // If not found, try using our findWidget helper with a derived name
+        const widgetName = widgetSelector
+          .replace(/^\[data-testid="?/, "")
+          .replace(/"?\]$/, "")
+          .replace(/^widget-/, "")
+          .replace(/-container$/, "");
 
-      cy.log(
-        `Widget selector ${widgetSelector} not found, trying findWidget with "${widgetName}"...`
-      );
-      cy.findWidget(widgetName).should("exist").as("widgetElement");
-    } else {
-      // If found, use the provided selector
-      cy.get(widgetSelector).should("exist").as("widgetElement");
-    }
-
-    // Set initial levels
-    cy.setSecurityLevels(...initialLevels);
-    cy.wait(waitTime);
-
-    // Capture initial state
-    let initialContent = "";
-    let initialHtml = "";
-
-    cy.get("@widgetElement").then(($widget) => {
-      if (expectTextChange) {
-        initialContent = $widget.text();
-      }
-      if (expectVisualChange) {
-        initialHtml = $widget.html();
+        cy.log(
+          `Widget selector ${widgetSelector} not found, trying findWidget with "${widgetName}"...`
+        );
+        cy.findWidget(widgetName).should("exist").as("widgetElement");
+      } else {
+        // If found, use the provided selector
+        cy.get(widgetSelector).should("exist").as("widgetElement");
       }
 
-      // Change security levels
-      cy.setSecurityLevels(...newLevels);
+      // Set initial levels
+      cy.setSecurityLevels(...initialLevels);
       cy.wait(waitTime);
 
-      // Verify changes in widget
-      if (expectTextChange) {
-        cy.get("@widgetElement")
-          .invoke("text")
-          .should("not.eq", initialContent);
-      }
+      // Capture initial state
+      let initialContent = "";
+      let initialHtml = "";
 
-      if (expectVisualChange) {
-        cy.get("@widgetElement").invoke("html").should("not.eq", initialHtml);
-      }
+      cy.get("@widgetElement").then(($widget) => {
+        if (expectTextChange) {
+          initialContent = $widget.text();
+        }
+        if (expectVisualChange) {
+          initialHtml = $widget.html();
+        }
 
-      // End performance measurement
-      cy.endMeasurement(
-        `testWidgetUpdates-${widgetSelector}`,
-        "widget-updates"
-      );
-    });
+        // Change security levels
+        cy.setSecurityLevels(...newLevels);
+        cy.wait(waitTime);
+
+        // Verify changes in widget
+        if (expectTextChange) {
+          cy.get("@widgetElement")
+            .invoke("text")
+            .should("not.eq", initialContent);
+        }
+
+        if (expectVisualChange) {
+          cy.get("@widgetElement").invoke("html").should("not.eq", initialHtml);
+        }
+      });
+    } catch (error) {
+      cy.log(`Error in testWidgetUpdatesWithSecurityLevels: ${error}`);
+      throw error;
+    }
   });
 }
 
