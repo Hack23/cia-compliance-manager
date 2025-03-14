@@ -62,7 +62,8 @@ export default defineConfig({
         provider: "v8",
         reporter: ["text", "json", "html"],
         exclude: [
-          "node_modules/",
+          "node_modules/*.*",
+          "node_modules/**/*.*",
           "dist/",
           "cypress/**",
           "scripts/",
@@ -75,6 +76,7 @@ export default defineConfig({
           "src/tests/",
           "**/*.stories.{js,jsx,ts,tsx}",
           "src/index.tsx",
+          ".dependency-cruiser.cjs",
         ],
         // Add specific thresholds for coverage requirements
         thresholds: {
