@@ -4,6 +4,7 @@ import { WIDGET_ICONS, WIDGET_TITLES } from "../constants/coreConstants";
 import { SecurityLevel } from "../types/cia";
 import {
   getSecurityLevelClass,
+  getSecurityLevelValue,
   normalizeSecurityLevel,
 } from "./securityLevelUtils";
 
@@ -241,12 +242,21 @@ export function widgetLoadingIndicator(
 ): ReactNode {
   // If two params are provided, first is message, second is testId
   // If only one param is provided, check if it looks like a testId
-  const message = testId ? messageOrTestId : "Loading...";
-  const actualTestId =
-    testId ||
-    (messageOrTestId && messageOrTestId.includes("-")
-      ? messageOrTestId
-      : "widget-loading");
+  let message = "Loading...";
+  let actualTestId = "widget-loading";
+
+  if (testId) {
+    // If testId is provided, messageOrTestId is the message
+    message = messageOrTestId || "Loading...";
+    actualTestId = testId;
+  } else if (messageOrTestId) {
+    // If only messageOrTestId is provided, check if it looks like a testId
+    if (messageOrTestId.includes("-")) {
+      actualTestId = messageOrTestId;
+    } else {
+      message = messageOrTestId;
+    }
+  }
 
   return (
     <div
@@ -343,11 +353,8 @@ export const evaluateWidgetVisibility = (
   )
     return true;
 
-  // Convert security level to number safely
-  const level =
-    typeof securityLevel === "string"
-      ? parseInt(securityLevel, 10) || 0
-      : (securityLevel as unknown as number);
+  // Convert security level to number using the utility function
+  const level = getSecurityLevelValue(securityLevel);
 
   const min =
     typeof widget.minSecurityLevel === "string"
