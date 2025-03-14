@@ -6,7 +6,7 @@
 
 # Interface: WidgetBaseProps
 
-Defined in: [src/types/widgets.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L8)
+Defined in: src/types/widgets.ts:8
 
 Base properties for all widgets
 
@@ -28,7 +28,7 @@ Base properties for all widgets
 
 > **availabilityLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L11)
+Defined in: src/types/widgets.ts:11
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [src/types/widgets.tsx:11](https://github.com/Hack23/cia-compliance-
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/widgets.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L14)
+Defined in: src/types/widgets.ts:14
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [src/types/widgets.tsx:14](https://github.com/Hack23/cia-compliance-
 
 > **confidentialityLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L13)
+Defined in: src/types/widgets.ts:13
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [src/types/widgets.tsx:13](https://github.com/Hack23/cia-compliance-
 
 > **integrityLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L12)
+Defined in: src/types/widgets.ts:12
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [src/types/widgets.tsx:12](https://github.com/Hack23/cia-compliance-
 
 > `optional` **securityLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L15)
+Defined in: src/types/widgets.ts:15
 
 ***
 
@@ -68,6 +68,6 @@ Defined in: [src/types/widgets.tsx:15](https://github.com/Hack23/cia-compliance-
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L10)
+Defined in: src/types/widgets.ts:10
 
 Test ID for component selection in tests

@@ -16,7 +16,7 @@ Get component color scheme respecting dark mode
 
 ### component
 
-`"AVAILABILITY"` | `"INTEGRITY"` | `"CONFIDENTIALITY"`
+`"CONFIDENTIALITY"` | `"INTEGRITY"` | `"AVAILABILITY"`
 
 ## Returns
 

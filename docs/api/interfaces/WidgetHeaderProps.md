@@ -6,7 +6,7 @@
 
 # Interface: WidgetHeaderProps
 
-Defined in: [src/types/componentProps.tsx:106](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L106)
+Defined in: [src/types/componentProps.tsx:105](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L105)
 
 Props for the WidgetHeader component that provides a consistent header for widgets.
 
@@ -16,7 +16,7 @@ Props for the WidgetHeader component that provides a consistent header for widge
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.tsx:110](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L110)
+Defined in: [src/types/componentProps.tsx:109](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L109)
 
 Optional CSS class name
 
@@ -26,7 +26,7 @@ Optional CSS class name
 
 > `optional` **icon**: `string`
 
-Defined in: [src/types/componentProps.tsx:114](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L114)
+Defined in: [src/types/componentProps.tsx:113](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L113)
 
 Icon to display in the header
 
@@ -36,7 +36,7 @@ Icon to display in the header
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/componentProps.tsx:112](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L112)
+Defined in: [src/types/componentProps.tsx:111](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L111)
 
 Optional test ID for component selection in tests
 
@@ -46,6 +46,6 @@ Optional test ID for component selection in tests
 
 > **title**: `string`
 
-Defined in: [src/types/componentProps.tsx:108](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L108)
+Defined in: [src/types/componentProps.tsx:107](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/componentProps.tsx#L107)
 
 Title of the widget

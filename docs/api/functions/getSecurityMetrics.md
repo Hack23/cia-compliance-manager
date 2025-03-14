@@ -8,7 +8,7 @@
 
 > **getSecurityMetrics**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `object`
 
-Defined in: [src/services/ciaContentService.ts:1378](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1378)
+Defined in: [src/services/ciaContentService.ts:1373](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1373)
 
 Get combined metrics for a security profile
 

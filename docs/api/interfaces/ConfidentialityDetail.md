@@ -6,7 +6,7 @@
 
 # Interface: ConfidentialityDetail
 
-Defined in: [src/types/widgets.tsx:116](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L116)
+Defined in: src/types/widgets.ts:116
 
 Types for Confidentiality Impact Widget
 Compatible with CIADetails for easier integration
@@ -25,7 +25,7 @@ Compatible with CIADetails for easier integration
 
 > **businessImpact**: `string`
 
-Defined in: [src/types/widgets.tsx:118](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L118)
+Defined in: src/types/widgets.ts:118
 
 #### Overrides
 
@@ -37,7 +37,7 @@ Defined in: [src/types/widgets.tsx:118](https://github.com/Hack23/cia-compliance
 
 > `optional` **complianceImplications**: `string`
 
-Defined in: [src/types/widgets.tsx:121](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L121)
+Defined in: src/types/widgets.ts:121
 
 ***
 
@@ -45,7 +45,7 @@ Defined in: [src/types/widgets.tsx:121](https://github.com/Hack23/cia-compliance
 
 > `optional` **description**: `string`
 
-Defined in: [src/types/widgets.tsx:23](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L23)
+Defined in: src/types/widgets.ts:23
 
 #### Inherited from
 
@@ -57,7 +57,7 @@ Defined in: [src/types/widgets.tsx:23](https://github.com/Hack23/cia-compliance-
 
 > **impact**: `string`
 
-Defined in: [src/types/widgets.tsx:117](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L117)
+Defined in: src/types/widgets.ts:117
 
 #### Overrides
 
@@ -69,7 +69,7 @@ Defined in: [src/types/widgets.tsx:117](https://github.com/Hack23/cia-compliance
 
 > **recommendations**: `string`[]
 
-Defined in: [src/types/widgets.tsx:119](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L119)
+Defined in: src/types/widgets.ts:119
 
 #### Overrides
 
@@ -81,7 +81,7 @@ Defined in: [src/types/widgets.tsx:119](https://github.com/Hack23/cia-compliance
 
 > `optional` **riskLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:122](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L122)
+Defined in: src/types/widgets.ts:122
 
 ***
 
@@ -89,7 +89,7 @@ Defined in: [src/types/widgets.tsx:122](https://github.com/Hack23/cia-compliance
 
 > `optional` **technical**: `string`
 
-Defined in: [src/types/widgets.tsx:26](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L26)
+Defined in: src/types/widgets.ts:26
 
 #### Inherited from
 
@@ -101,4 +101,4 @@ Defined in: [src/types/widgets.tsx:26](https://github.com/Hack23/cia-compliance-
 
 > `optional` **technicalMeasures**: `string`[]
 
-Defined in: [src/types/widgets.tsx:120](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L120)
+Defined in: src/types/widgets.ts:120

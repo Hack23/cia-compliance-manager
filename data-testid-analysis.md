@@ -236,3 +236,42 @@ Based on the test ID structure, here are recommended testing approaches:
 5. **Accessibility tests**: Ensure that the application remains accessible when security levels change
 
 The consistent naming patterns make it particularly well-suited for integration testing with tools like Cypress or Playwright that can easily target elements by data-testid attributes.
+
+# Coverage Improvement Analysis
+
+## Coverage Requirements
+
+- Functions: 75% (current: 63.29%)
+- Branches: 70% (current: 67.98%)
+
+## High-Priority Files for Coverage Improvement
+
+### Files with Low Function Coverage and High Impact
+
+| File                                                   | Functions Coverage | # Uncovered Functions | Priority |
+| ------------------------------------------------------ | ------------------ | --------------------- | -------- |
+| src/services/ciaContentService.ts                      | 70.83%             | ~14 functions         | HIGH     |
+| src/utils/typeGuards.ts                                | 40%                | ~6 functions          | HIGH     |
+| src/utils/widgetHelpers.tsx                            | 0%                 | All functions         | HIGH     |
+| src/components/widgets/AvailabilityImpactWidget.tsx    | 50%                | ~2 functions          | MEDIUM   |
+| src/components/widgets/IntegrityImpactWidget.tsx       | 50%                | ~2 functions          | MEDIUM   |
+| src/components/widgets/ConfidentialityImpactWidget.tsx | 50%                | ~2 functions          | MEDIUM   |
+| src/components/widgets/SecuritySummaryWidget.tsx       | 50%                | ~2 functions          | MEDIUM   |
+| src/CIAClassificationApp.tsx                           | 33.33%             | ~4 functions          | MEDIUM   |
+
+### Files with Low Branch Coverage and High Impact
+
+| File                                                   | Branch Coverage | # Uncovered Branches | Priority |
+| ------------------------------------------------------ | --------------- | -------------------- | -------- |
+| src/services/ciaContentService.ts                      | 37.19%          | Many conditions      | HIGH     |
+| src/components/widgets/SecuritySummaryWidget.tsx       | 10%             | Many conditions      | HIGH     |
+| src/components/widgets/ConfidentialityImpactWidget.tsx | 58.82%          | ~7 branches          | MEDIUM   |
+| src/constants/colorConstants.ts                        | 57.14%          | ~3 branches          | MEDIUM   |
+| src/types/widgets.ts                                   | 61.9%           | ~8 branches          | MEDIUM   |
+
+## Strategy for Coverage Improvement
+
+1. Focus on high-priority files first
+2. Add tests for untested functions in service files
+3. Add more conditional tests for branch coverage
+4. Delete or merge unused files

@@ -421,7 +421,7 @@ Always returns a string array, even when no recommendations are found
 
 ### getRiskBadgeVariant()
 
-> **getRiskBadgeVariant**: (`riskLevel`) => `"neutral"` \| `"success"` \| `"warning"` \| `"info"` \| `"error"`
+> **getRiskBadgeVariant**: (`riskLevel`) => `"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"`
 
 Get appropriate badge variant based on risk level
 
@@ -433,7 +433,7 @@ Get appropriate badge variant based on risk level
 
 #### Returns
 
-`"neutral"` \| `"success"` \| `"warning"` \| `"info"` \| `"error"`
+`"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"`
 
 ### getROIEstimate()
 

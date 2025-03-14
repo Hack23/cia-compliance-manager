@@ -8,7 +8,7 @@
 
 > **getImplementationConsiderations**(`level`): `string`
 
-Defined in: [src/services/ciaContentService.ts:1393](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1393)
+Defined in: [src/services/ciaContentService.ts:1388](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1388)
 
 Get implementation considerations for a security level
 

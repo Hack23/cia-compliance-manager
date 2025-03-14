@@ -8,7 +8,7 @@
 
 > `const` **BUSINESS\_IMPACT\_CATEGORIES**: `object`
 
-Defined in: [src/constants/riskConstants.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/riskConstants.ts#L17)
+Defined in: [src/constants/riskConstants.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/riskConstants.ts#L40)
 
 ## Type declaration
 

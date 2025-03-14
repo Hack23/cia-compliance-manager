@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactAnalysisWidgetProps
 
-Defined in: [src/types/widgets.tsx:184](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L184)
+Defined in: src/types/widgets.ts:184
 
 Props for the BusinessImpactAnalysisWidget component
 
@@ -16,7 +16,7 @@ Props for the BusinessImpactAnalysisWidget component
 
 > `optional` **activeComponent**: `"availability"` \| `"integrity"` \| `"confidentiality"`
 
-Defined in: [src/types/widgets.tsx:191](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L191)
+Defined in: src/types/widgets.ts:191
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/widgets.tsx:191](https://github.com/Hack23/cia-compliance
 
 > **availabilityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.tsx:185](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L185)
+Defined in: src/types/widgets.ts:185
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/widgets.tsx:185](https://github.com/Hack23/cia-compliance
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/widgets.tsx:189](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L189)
+Defined in: src/types/widgets.ts:189
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/widgets.tsx:189](https://github.com/Hack23/cia-compliance
 
 > **confidentialityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.tsx:187](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L187)
+Defined in: src/types/widgets.ts:187
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/types/widgets.tsx:187](https://github.com/Hack23/cia-compliance
 
 > **integrityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.tsx:186](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L186)
+Defined in: src/types/widgets.ts:186
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/types/widgets.tsx:186](https://github.com/Hack23/cia-compliance
 
 > `optional` **securityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.tsx:188](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L188)
+Defined in: src/types/widgets.ts:188
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [src/types/widgets.tsx:188](https://github.com/Hack23/cia-compliance
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.tsx:190](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L190)
+Defined in: src/types/widgets.ts:190

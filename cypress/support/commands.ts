@@ -310,3 +310,34 @@ Cypress.Commands.add(
 
 // Export empty object at the end
 export {};
+
+// ***********************************************
+// This example commands.ts shows you how to
+// create various custom commands and overwrite
+// existing commands.
+//
+// For more comprehensive examples of custom
+// commands please read more here:
+// https://on.cypress.io/custom-commands
+// ***********************************************
+
+// Define custom command types
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      /**
+       * Custom command to select DOM element by test ID attribute
+       * @example cy.getByTestId('my-element')
+       */
+      getByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
+    }
+  }
+}
+
+// Command to select by test ID
+Cypress.Commands.add("getByTestId", (testId: string) => {
+  return cy.get(`[data-testid="${testId}"]`);
+});
+
+// Export empty to satisfy TypeScript
+export {};

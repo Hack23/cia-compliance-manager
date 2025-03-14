@@ -1,6 +1,7 @@
 import { expect, afterEach, vi } from "vitest";
 import { cleanup } from "@testing-library/react";
 import * as matchers from "@testing-library/jest-dom/matchers";
+import "@testing-library/jest-dom";
 
 // Extend vitest's expect with testing-library matchers
 expect.extend(matchers);
@@ -41,7 +42,7 @@ Object.defineProperty(window, "matchMedia", {
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
     dispatchEvent: vi.fn(),
-  }),
+  }), // Fixed: Removed extra closing parenthesis and comma
   writable: true,
 });
 

@@ -8,7 +8,7 @@
 
 > **setupTestHelpers**(): `object`
 
-Defined in: [src/tests/setup.ts:80](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/setup.ts#L80)
+Defined in: [src/tests/setup.ts:81](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/setup.ts#L81)
 
 ## Returns
 

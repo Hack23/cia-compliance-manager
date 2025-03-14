@@ -10,15 +10,7 @@
 - [Vi](namespaces/Vi/README-1.md)
 - [Vi](namespaces/Vi/README-1.md)
 
-## Enumerations
-
-- [CIALevel](enumerations/CIALevel.md)
-
 ## Interfaces
-
-### CIA Model
-
-- [BusinessImpactDetail](interfaces/BusinessImpactDetail.md)
 
 ### Common Components
  KeyValuePairProps
@@ -68,54 +60,51 @@
 ### Other
 
 - [AvailabilityDetail](interfaces/AvailabilityDetail.md)
+- [AvailabilityImpact](interfaces/AvailabilityImpact.md)
 - [AvailabilityImpactWidgetProps](interfaces/AvailabilityImpactWidgetProps.md)
 - [AvailabilityImpactWidgetProps](interfaces/AvailabilityImpactWidgetProps.md)
+- [BaseImpact](interfaces/BaseImpact.md)
 - [BaseWidgetDetails](interfaces/BaseWidgetDetails.md)
 - [BusinessConsideration](interfaces/BusinessConsideration.md)
 - [BusinessConsiderations](interfaces/BusinessConsiderations.md)
-- [BusinessImpact](interfaces/BusinessImpact.md)
 - [BusinessImpactAnalysisWidgetProps](interfaces/BusinessImpactAnalysisWidgetProps.md)
 - [BusinessImpactAnalysisWidgetProps](interfaces/BusinessImpactAnalysisWidgetProps.md)
-- [BusinessImpactDetails](interfaces/BusinessImpactDetails.md)
+- [BusinessImpactDetail](interfaces/BusinessImpactDetail.md)
 - [BusinessImpactDetails](interfaces/BusinessImpactDetails.md)
 - [BusinessImpactIcons](interfaces/BusinessImpactIcons.md)
 - [BusinessKeyBenefits](interfaces/BusinessKeyBenefits.md)
 - [CIADataProvider](interfaces/CIADataProvider.md)
 - [CIADetails](interfaces/CIADetails.md)
+- [CIAImpact](interfaces/CIAImpact.md)
 - [CIAImpactSummaryWidgetProps](interfaces/CIAImpactSummaryWidgetProps.md)
 - [CIALevelProps](interfaces/CIALevelProps.md)
 - [CIAOptions](interfaces/CIAOptions.md)
-- [CIAProfile](interfaces/CIAProfile.md)
-- [CIAWidgetProps](interfaces/CIAWidgetProps.md)
-- [ComplianceFramework](interfaces/ComplianceFramework.md)
-- [ComplianceRequirement](interfaces/ComplianceRequirement.md)
 - [ComplianceStatusWidgetProps](interfaces/ComplianceStatusWidgetProps.md)
 - [ComplianceStatusWidgetProps](interfaces/ComplianceStatusWidgetProps.md)
 - [ComponentMetrics](interfaces/ComponentMetrics.md)
 - [ConfidentialityDetail](interfaces/ConfidentialityDetail.md)
+- [ConfidentialityImpact](interfaces/ConfidentialityImpact.md)
 - [ConfidentialityImpactWidgetProps](interfaces/ConfidentialityImpactWidgetProps.md)
 - [ConfidentialityImpactWidgetProps](interfaces/ConfidentialityImpactWidgetProps.md)
-- [CostEstimate](interfaces/CostEstimate.md)
 - [CostEstimationWidgetProps](interfaces/CostEstimationWidgetProps.md)
 - [CostEstimationWidgetProps](interfaces/CostEstimationWidgetProps.md)
 - [CustomMatchers](interfaces/CustomMatchers.md)
 - [EnhancedCIADetails](interfaces/EnhancedCIADetails.md)
 - [IntegrityDetail](interfaces/IntegrityDetail.md)
+- [IntegrityImpact](interfaces/IntegrityImpact.md)
 - [IntegrityImpactWidgetProps](interfaces/IntegrityImpactWidgetProps.md)
 - [IntegrityImpactWidgetProps](interfaces/IntegrityImpactWidgetProps.md)
 - [KeyValuePairProps](interfaces/KeyValuePairProps.md)
 - [MetricsCardProps](interfaces/MetricsCardProps.md)
 - [MockHandlers](interfaces/MockHandlers.md)
 - [MockOptions](interfaces/MockOptions.md)
+- [ROIEstimatesMap](interfaces/ROIEstimatesMap.md)
 - [ROIMetrics](interfaces/ROIMetrics.md)
-- [SecurityImplementation](interfaces/SecurityImplementation.md)
-- [SecurityLevelInfo](interfaces/SecurityLevelInfo.md)
-- [SecurityLevelOptions](interfaces/SecurityLevelOptions.md)
+- [SecurityLevels](interfaces/SecurityLevels.md)
 - [SecurityLevelSelectorProps](interfaces/SecurityLevelSelectorProps.md)
 - [SecurityLevelSummaryItemProps](interfaces/SecurityLevelSummaryItemProps.md)
 - [SecurityLevelWidgetProps](interfaces/SecurityLevelWidgetProps.md)
 - [SecurityLevelWidgetProps](interfaces/SecurityLevelWidgetProps.md)
-- [SecurityRecommendation](interfaces/SecurityRecommendation.md)
 - [SecurityResource](interfaces/SecurityResource.md)
 - [SecurityResourcesWidgetProps](interfaces/SecurityResourcesWidgetProps.md)
 - [SecurityResourcesWidgetProps](interfaces/SecurityResourcesWidgetProps.md)
@@ -133,7 +122,6 @@
 - [WidgetBaseComponentProps](interfaces/WidgetBaseComponentProps.md)
 - [WidgetBaseProps](interfaces/WidgetBaseProps.md)
 - [WidgetDefinition](interfaces/WidgetDefinition.md)
-- [WidgetProps](interfaces/WidgetProps.md)
 
 ### Widget Components
  CIAImpactSummaryWidgetProps
@@ -142,23 +130,11 @@
 
 ## Type Aliases
 
-### CIA Model
-
-- [CIAComponentType](type-aliases/CIAComponentType.md)
-- [SecurityLevel](type-aliases/SecurityLevel.md)
-
-### Other
-
-- [AvailabilityRating](type-aliases/AvailabilityRating.md)
-- [BusinessImpactCategory](type-aliases/BusinessImpactCategory.md)
 - [BusinessKeyBenefit](type-aliases/BusinessKeyBenefit.md)
 - [CIAComponentType](type-aliases/CIAComponentType.md)
 - [CIAComponentType](type-aliases/CIAComponentType.md)
-- [ConfidentialityRating](type-aliases/ConfidentialityRating.md)
-- [IntegrityRating](type-aliases/IntegrityRating.md)
-- [ROIEstimatesMap](type-aliases/ROIEstimatesMap.md)
-- [SecurityFunction](type-aliases/SecurityFunction.md)
-- [SecurityFunctionGroup](type-aliases/SecurityFunctionGroup.md)
+- [CIAComponentType](type-aliases/CIAComponentType.md)
+- [RiskLevel](type-aliases/RiskLevel.md)
 - [SecurityLevel](type-aliases/SecurityLevel.md)
 - [SecurityLevelKey](type-aliases/SecurityLevelKey.md)
 - [SecurityLevelKey](type-aliases/SecurityLevelKey.md)
@@ -336,6 +312,7 @@
 - [getRecommendations](functions/getRecommendations.md)
 - [getRiskBadgeClass](functions/getRiskBadgeClass.md)
 - [getRiskBadgeVariant](functions/getRiskBadgeVariant.md)
+- [getRiskLevelFromSecurityLevel](functions/getRiskLevelFromSecurityLevel.md)
 - [getROIEstimate](functions/getROIEstimate.md)
 - [getROIEstimates](functions/getROIEstimates.md)
 - [getSecurityIcon](functions/getSecurityIcon.md)
@@ -357,12 +334,16 @@
 - [getTextElementMatcher](functions/getTextElementMatcher.md)
 - [getValuePoints](functions/getValuePoints.md)
 - [handleWidgetError](functions/handleWidgetError.md)
+- [hasWidgetProps](functions/hasWidgetProps.md)
 - [IntegrityImpactWidget](functions/IntegrityImpactWidget.md)
 - [isAvailabilityDetail](functions/isAvailabilityDetail.md)
 - [isCIADetails](functions/isCIADetails.md)
 - [isConfidentialityDetail](functions/isConfidentialityDetail.md)
 - [isIntegrityDetail](functions/isIntegrityDetail.md)
 - [isObject](functions/isObject.md)
+- [isROIMetrics](functions/isROIMetrics.md)
+- [isSecurityResource](functions/isSecurityResource.md)
+- [isTechnicalImplementationDetails](functions/isTechnicalImplementationDetails.md)
 - [isValidCIADetail](functions/isValidCIADetail.md)
 - [KeyValuePair](functions/KeyValuePair.md)
 - [mapOptionsToConstants](functions/mapOptionsToConstants.md)

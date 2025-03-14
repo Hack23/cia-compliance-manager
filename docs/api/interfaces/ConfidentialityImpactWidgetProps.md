@@ -6,7 +6,7 @@
 
 # Interface: ConfidentialityImpactWidgetProps
 
-Defined in: [src/types/widgets.tsx:128](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L128)
+Defined in: src/types/widgets.ts:128
 
 Props for the ConfidentialityImpactWidget component
 
@@ -20,7 +20,7 @@ Props for the ConfidentialityImpactWidget component
 
 > **availabilityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.tsx:131](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L131)
+Defined in: src/types/widgets.ts:131
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/types/widgets.tsx:131](https://github.com/Hack23/cia-compliance
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/widgets.tsx:133](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L133)
+Defined in: src/types/widgets.ts:133
 
 #### Overrides
 
@@ -44,7 +44,7 @@ Defined in: [src/types/widgets.tsx:133](https://github.com/Hack23/cia-compliance
 
 > **confidentialityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.tsx:129](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L129)
+Defined in: src/types/widgets.ts:129
 
 #### Overrides
 
@@ -56,7 +56,7 @@ Defined in: [src/types/widgets.tsx:129](https://github.com/Hack23/cia-compliance
 
 > **integrityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.tsx:132](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L132)
+Defined in: src/types/widgets.ts:132
 
 #### Overrides
 
@@ -68,7 +68,7 @@ Defined in: [src/types/widgets.tsx:132](https://github.com/Hack23/cia-compliance
 
 > `optional` **securityLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L15)
+Defined in: src/types/widgets.ts:15
 
 #### Inherited from
 
@@ -80,7 +80,7 @@ Defined in: [src/types/widgets.tsx:15](https://github.com/Hack23/cia-compliance-
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.tsx:134](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L134)
+Defined in: src/types/widgets.ts:134
 
 Test ID for component selection in tests
 

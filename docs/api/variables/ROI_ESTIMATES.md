@@ -6,6 +6,6 @@
 
 # Variable: ROI\_ESTIMATES
 
-> `const` **ROI\_ESTIMATES**: [`ROIEstimatesMap`](../type-aliases/ROIEstimatesMap.md) = `_ROI_ESTIMATES`
+> `const` **ROI\_ESTIMATES**: `ROIEstimatesMap` = `_ROI_ESTIMATES`
 
-Defined in: [src/hooks/useCIAOptions.ts:663](https://github.com/Hack23/cia-compliance-manager/blob/main/src/hooks/useCIAOptions.ts#L663)
+Defined in: [src/hooks/useCIAOptions.ts:690](https://github.com/Hack23/cia-compliance-manager/blob/main/src/hooks/useCIAOptions.ts#L690)

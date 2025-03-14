@@ -8,7 +8,7 @@
 
 > `const` **defaultService**: `object`
 
-Defined in: [src/services/ciaContentService.ts:1369](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1369)
+Defined in: [src/services/ciaContentService.ts:1364](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1364)
 
 ## Type declaration
 
@@ -411,7 +411,7 @@ Always returns a string array, even when no recommendations are found
 
 ### getRiskBadgeVariant()
 
-> **getRiskBadgeVariant**: (`riskLevel`) => `"neutral"` \| `"success"` \| `"warning"` \| `"info"` \| `"error"`
+> **getRiskBadgeVariant**: (`riskLevel`) => `"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"`
 
 Get appropriate badge variant based on risk level
 
@@ -423,7 +423,7 @@ Get appropriate badge variant based on risk level
 
 #### Returns
 
-`"neutral"` \| `"success"` \| `"warning"` \| `"info"` \| `"error"`
+`"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"`
 
 ### getROIEstimate()
 

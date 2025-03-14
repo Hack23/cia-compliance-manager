@@ -1,20 +1,24 @@
-import { CIADetails, SecurityLevel } from "./cia";
-
 /**
- * Enhanced interface for ROI metrics
+ * ROI metrics interface
  */
 export interface ROIMetrics {
   returnRate: string;
   description: string;
-  potentialSavings: string;
-  breakEvenPeriod: string;
-  implementationCost?: string;
+  potentialSavings?: string; // Make this optional for compatibility
+  breakEvenPeriod?: string; // Make this optional for compatibility
+  implementationCost?: string; // Make this optional for compatibility
 }
 
 /**
- * Type for ROI estimates by security level
+ * Interface for storing ROI estimates by security level
  */
-export type ROIEstimatesMap = Record<string, ROIMetrics>;
+export interface ROIEstimatesMap {
+  NONE: ROIMetrics;
+  LOW: ROIMetrics;
+  MODERATE: ROIMetrics;
+  HIGH: ROIMetrics;
+  VERY_HIGH: ROIMetrics;
+}
 
 /**
  * Enhanced interface for technical implementation details

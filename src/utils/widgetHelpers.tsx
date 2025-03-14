@@ -1,16 +1,9 @@
 import React, { ReactNode } from "react";
-import { SECURITY_LEVELS } from "../constants/appConstants";
-import {
-  SECURITY_LEVEL_COLORS,
-  getSecurityLevelColorPair,
-  CIA_COMPONENT_COLORS,
-} from "../constants/colorConstants";
+import { getSecurityLevelColorPair } from "../constants/colorConstants";
 import { SecurityLevel } from "../types/cia";
 import {
-  normalizeSecurityLevel,
   getSecurityLevelClass,
-  getSecurityLevelValue,
-  getSecurityLevelPercentage,
+  normalizeSecurityLevel,
 } from "./securityLevelUtils";
 
 /**

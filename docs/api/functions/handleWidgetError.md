@@ -8,7 +8,7 @@
 
 > **handleWidgetError**(`error`, `testId`?): `ReactNode`
 
-Defined in: [src/utils/widgetHelpers.tsx:130](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L130)
+Defined in: [src/utils/widgetHelpers.tsx:123](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L123)
 
 Error handler for widget rendering that returns appropriate UI for error states
 

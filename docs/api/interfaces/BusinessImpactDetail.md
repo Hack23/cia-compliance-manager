@@ -6,23 +6,9 @@
 
 # Interface: BusinessImpactDetail
 
-Defined in: [src/types/cia.tsx:44](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L44)
+Defined in: src/types/cia.ts:72
 
 Business impact analysis interface for tracking security implications
-
-## Example
-
-```ts
-const financialImpact: BusinessImpactDetail = {
-  description: "Revenue loss from service interruption",
-  riskLevel: "High",
-  annualRevenueLoss: "$2.5M"
-};
-```
-
-## Indexable
-
-\[`key`: `string`\]: `unknown`
 
 ## Properties
 
@@ -30,23 +16,7 @@ const financialImpact: BusinessImpactDetail = {
 
 > `optional` **annualRevenueLoss**: `string`
 
-Defined in: [src/types/cia.tsx:47](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L47)
-
-***
-
-### competitiveAdvantage?
-
-> `optional` **competitiveAdvantage**: `object`
-
-Defined in: [src/types/cia.tsx:55](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L55)
-
-#### description
-
-> **description**: `string`
-
-#### value
-
-> **value**: `string`
+Defined in: src/types/cia.ts:75
 
 ***
 
@@ -54,23 +24,15 @@ Defined in: [src/types/cia.tsx:55](https://github.com/Hack23/cia-compliance-mana
 
 > `optional` **complianceViolations**: `string`[]
 
-Defined in: [src/types/cia.tsx:50](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L50)
+Defined in: src/types/cia.ts:77
 
 ***
 
-### customerImpact?
+### description?
 
-> `optional` **customerImpact**: `string`
+> `optional` **description**: `string`
 
-Defined in: [src/types/cia.tsx:52](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L52)
-
-***
-
-### description
-
-> **description**: `string`
-
-Defined in: [src/types/cia.tsx:45](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L45)
+Defined in: src/types/cia.ts:73
 
 ***
 
@@ -78,31 +40,7 @@ Defined in: [src/types/cia.tsx:45](https://github.com/Hack23/cia-compliance-mana
 
 > `optional` **meanTimeToRecover**: `string`
 
-Defined in: [src/types/cia.tsx:48](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L48)
-
-***
-
-### operationalImpact?
-
-> `optional` **operationalImpact**: `string`
-
-Defined in: [src/types/cia.tsx:53](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L53)
-
-***
-
-### recoveryTime?
-
-> `optional` **recoveryTime**: `string`
-
-Defined in: [src/types/cia.tsx:49](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L49)
-
-***
-
-### reputationDamage?
-
-> `optional` **reputationDamage**: `string`
-
-Defined in: [src/types/cia.tsx:51](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L51)
+Defined in: src/types/cia.ts:76
 
 ***
 
@@ -110,12 +48,4 @@ Defined in: [src/types/cia.tsx:51](https://github.com/Hack23/cia-compliance-mana
 
 > `optional` **riskLevel**: `string`
 
-Defined in: [src/types/cia.tsx:46](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L46)
-
-***
-
-### strategicImpact?
-
-> `optional` **strategicImpact**: `string`
-
-Defined in: [src/types/cia.tsx:54](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L54)
+Defined in: src/types/cia.ts:74

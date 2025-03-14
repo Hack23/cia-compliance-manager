@@ -1,33 +1,33 @@
 {
   "compilerOptions": {
-    // Modern compilation target for Node 20+
-    "target": "es2022",
-    // Modern language features for Vite, React 19, etc.
-    "lib": ["es2022", "dom", "dom.iterable"],
-    // Remove problematic vitest/globals reference
-    "types": ["node", "vite/client"],
-    // Base path for imports
+    // Update to use es2022 for the project
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    // Include ES2022 in the lib array
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    // Types setup
+    "types": ["vitest/globals", "node"], // Remove "@testing-library/jest-dom" from here
     "baseUrl": ".",
-    // Path aliases to match Vite configuration
     "paths": {
       "@/*": ["./src/*"]
     },
-    // React 19 JSX support
     "jsx": "react-jsx",
-    // Module interoperability
+    // Module settings updated to ES2022
+    "module": "ES2022",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     // Type checking strictness
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
+    "noUnusedLocals": false, // Disable unused variable checking during build
+    "noUnusedParameters": false, // Disable unused variable checking during build
     // File behavior
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
-    // Module settings optimized for Vite/Node 20
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     // No emit - Vite handles this
@@ -38,6 +38,7 @@
     "skipLibCheck": true
   },
   // Don't include Cypress files in main config
-  "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts"],
-  "exclude": ["node_modules", "cypress"]
+  "include": ["src"],
+  "exclude": ["node_modules", "cypress"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

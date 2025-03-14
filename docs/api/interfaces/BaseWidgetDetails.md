@@ -6,7 +6,7 @@
 
 # Interface: BaseWidgetDetails
 
-Defined in: [src/types/widgets.tsx:22](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L22)
+Defined in: src/types/widgets.ts:22
 
 Generic details interface that all specific detail interfaces should extend
 This ensures compatibility across different widget implementations
@@ -27,7 +27,7 @@ This ensures compatibility across different widget implementations
 
 > `optional` **businessImpact**: `string`
 
-Defined in: [src/types/widgets.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L24)
+Defined in: src/types/widgets.ts:24
 
 ***
 
@@ -35,7 +35,7 @@ Defined in: [src/types/widgets.tsx:24](https://github.com/Hack23/cia-compliance-
 
 > `optional` **description**: `string`
 
-Defined in: [src/types/widgets.tsx:23](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L23)
+Defined in: src/types/widgets.ts:23
 
 ***
 
@@ -43,7 +43,7 @@ Defined in: [src/types/widgets.tsx:23](https://github.com/Hack23/cia-compliance-
 
 > `optional` **impact**: `string`
 
-Defined in: [src/types/widgets.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L25)
+Defined in: src/types/widgets.ts:25
 
 ***
 
@@ -51,7 +51,7 @@ Defined in: [src/types/widgets.tsx:25](https://github.com/Hack23/cia-compliance-
 
 > `optional` **recommendations**: `string`[]
 
-Defined in: [src/types/widgets.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L27)
+Defined in: src/types/widgets.ts:27
 
 ***
 
@@ -59,4 +59,4 @@ Defined in: [src/types/widgets.tsx:27](https://github.com/Hack23/cia-compliance-
 
 > `optional` **technical**: `string`
 
-Defined in: [src/types/widgets.tsx:26](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L26)
+Defined in: src/types/widgets.ts:26

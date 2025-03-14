@@ -7,7 +7,6 @@
 
 import React from "react";
 import { CIADetails } from "./cia";
-import { ReactNode } from "react";
 // Don't import BusinessImpactAnalysisWidgetProps to avoid conflict
 import type {
   CostEstimationWidgetProps,

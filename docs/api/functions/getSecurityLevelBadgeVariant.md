@@ -6,7 +6,7 @@
 
 # Function: getSecurityLevelBadgeVariant()
 
-> **getSecurityLevelBadgeVariant**(`level`): `"neutral"` \| `"success"` \| `"warning"` \| `"info"` \| `"purple"` \| `"error"`
+> **getSecurityLevelBadgeVariant**(`level`): `"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"` \| `"purple"`
 
 Defined in: [src/utils/securityLevelUtils.ts:91](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/securityLevelUtils.ts#L91)
 
@@ -22,6 +22,6 @@ The security level string
 
 ## Returns
 
-`"neutral"` \| `"success"` \| `"warning"` \| `"info"` \| `"purple"` \| `"error"`
+`"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"` \| `"purple"`
 
 A status badge variant

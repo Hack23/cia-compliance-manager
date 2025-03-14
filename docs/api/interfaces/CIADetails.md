@@ -6,23 +6,70 @@
 
 # Interface: CIADetails
 
-Defined in: [src/types/cia.tsx:73](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L73)
+Defined in: src/types/cia.ts:84
+
+Detailed CIA information used across the application
+Contains rich information about impacts, technical details, and recommendations
 
 ## Extended by
 
 - [`EnhancedCIADetails`](EnhancedCIADetails.md)
 
-## Indexable
-
-\[`key`: `string`\]: `any`
-
 ## Properties
+
+### bg?
+
+> `optional` **bg**: `string`
+
+Defined in: src/types/cia.ts:101
+
+***
 
 ### businessImpact?
 
 > `optional` **businessImpact**: `string`
 
-Defined in: [src/types/cia.tsx:75](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L75)
+Defined in: src/types/cia.ts:88
+
+***
+
+### businessImpactDetails?
+
+> `optional` **businessImpactDetails**: `object`
+
+Defined in: src/types/cia.ts:103
+
+#### financialImpact?
+
+> `optional` **financialImpact**: `object`
+
+##### financialImpact.description?
+
+> `optional` **description**: `string`
+
+#### operationalImpact?
+
+> `optional` **operationalImpact**: `object`
+
+##### operationalImpact.description?
+
+> `optional` **description**: `string`
+
+#### regulatory?
+
+> `optional` **regulatory**: `object`
+
+##### regulatory.description?
+
+> `optional` **description**: `string`
+
+#### reputationalImpact?
+
+> `optional` **reputationalImpact**: `object`
+
+##### reputationalImpact.description?
+
+> `optional` **description**: `string`
 
 ***
 
@@ -30,7 +77,15 @@ Defined in: [src/types/cia.tsx:75](https://github.com/Hack23/cia-compliance-mana
 
 > `optional` **capex**: `number`
 
-Defined in: [src/types/cia.tsx:76](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L76)
+Defined in: src/types/cia.ts:99
+
+***
+
+### complianceImplications?
+
+> `optional` **complianceImplications**: `string`
+
+Defined in: src/types/cia.ts:97
 
 ***
 
@@ -38,7 +93,23 @@ Defined in: [src/types/cia.tsx:76](https://github.com/Hack23/cia-compliance-mana
 
 > `optional` **description**: `string`
 
-Defined in: [src/types/cia.tsx:74](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L74)
+Defined in: src/types/cia.ts:85
+
+***
+
+### impact?
+
+> `optional` **impact**: `string`
+
+Defined in: src/types/cia.ts:86
+
+***
+
+### mttr?
+
+> `optional` **mttr**: `string`
+
+Defined in: src/types/cia.ts:90
 
 ***
 
@@ -46,15 +117,7 @@ Defined in: [src/types/cia.tsx:74](https://github.com/Hack23/cia-compliance-mana
 
 > `optional` **opex**: `number`
 
-Defined in: [src/types/cia.tsx:77](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L77)
-
-***
-
-### protectionMethod?
-
-> `optional` **protectionMethod**: `string`
-
-Defined in: [src/types/cia.tsx:79](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L79)
+Defined in: src/types/cia.ts:100
 
 ***
 
@@ -62,7 +125,31 @@ Defined in: [src/types/cia.tsx:79](https://github.com/Hack23/cia-compliance-mana
 
 > `optional` **recommendations**: `string`[]
 
-Defined in: [src/types/cia.tsx:82](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L82)
+Defined in: src/types/cia.ts:93
+
+***
+
+### riskLevel?
+
+> `optional` **riskLevel**: `string`
+
+Defined in: src/types/cia.ts:98
+
+***
+
+### rpo?
+
+> `optional` **rpo**: `string`
+
+Defined in: src/types/cia.ts:92
+
+***
+
+### rto?
+
+> `optional` **rto**: `string`
+
+Defined in: src/types/cia.ts:91
 
 ***
 
@@ -70,7 +157,31 @@ Defined in: [src/types/cia.tsx:82](https://github.com/Hack23/cia-compliance-mana
 
 > `optional` **technical**: `string`
 
-Defined in: [src/types/cia.tsx:78](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L78)
+Defined in: src/types/cia.ts:87
+
+***
+
+### technicalControls?
+
+> `optional` **technicalControls**: `string`[]
+
+Defined in: src/types/cia.ts:95
+
+***
+
+### technicalMeasures?
+
+> `optional` **technicalMeasures**: `string`[]
+
+Defined in: src/types/cia.ts:96
+
+***
+
+### text?
+
+> `optional` **text**: `string`
+
+Defined in: src/types/cia.ts:102
 
 ***
 
@@ -78,7 +189,7 @@ Defined in: [src/types/cia.tsx:78](https://github.com/Hack23/cia-compliance-mana
 
 > `optional` **uptime**: `string`
 
-Defined in: [src/types/cia.tsx:81](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L81)
+Defined in: src/types/cia.ts:89
 
 ***
 
@@ -86,4 +197,4 @@ Defined in: [src/types/cia.tsx:81](https://github.com/Hack23/cia-compliance-mana
 
 > `optional` **validationMethod**: `string`
 
-Defined in: [src/types/cia.tsx:80](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L80)
+Defined in: src/types/cia.ts:94

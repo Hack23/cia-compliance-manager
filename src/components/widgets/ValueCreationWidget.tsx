@@ -1,14 +1,14 @@
 import React from "react";
-import { SecurityLevel } from "../../types/cia";
 import { VALUE_CREATION_TEST_IDS } from "../../constants/testIds";
 import ciaContentService, {
-  getValuePoints,
   getROIEstimate,
+  getValuePoints,
 } from "../../services/ciaContentService";
-import WidgetContainer from "../common/WidgetContainer";
-import StatusBadge from "../common/StatusBadge";
-import MetricsCard from "../common/MetricsCard";
+import { SecurityLevel } from "../../types/cia";
 import { getSecurityLevelBadgeVariant } from "../../utils/securityLevelUtils";
+import MetricsCard from "../common/MetricsCard";
+import StatusBadge from "../common/StatusBadge";
+import WidgetContainer from "../common/WidgetContainer";
 
 /**
  * Props for the ValueCreationWidget component
@@ -81,7 +81,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           />
           <MetricsCard
             title="Potential Savings"
-            value={roiData.potentialSavings}
+            value={roiData.potentialSavings ?? "N/A"}
             icon="💰"
             testId={`${testId}-savings`}
             accentColor="#2ecc71"
@@ -89,7 +89,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           />
           <MetricsCard
             title="Break-even Period"
-            value={roiData.breakEvenPeriod}
+            value={roiData.breakEvenPeriod ?? "N/A"}
             icon="⏱️"
             testId={`${testId}-breakeven`}
             accentColor="#3498db"

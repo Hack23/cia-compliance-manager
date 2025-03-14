@@ -1,9 +1,8 @@
 import { defineConfig } from "cypress";
 import vitePreprocessor from "cypress-vite";
-import { resolve } from "path";
 import * as fs from "fs";
-import junitReporter from "./cypress/support/plugins/junit-reporter";
-import { resetJunitResults } from "./cypress/tasks/junit-reset";
+import * as path from "path";
+import { resolve } from "path";
 
 // Use __dirname in a more TypeScript-friendly way
 const __dirname = resolve(process.cwd());
@@ -19,17 +18,21 @@ export default defineConfig({
     runMode: 2,
     openMode: 1,
   },
-  // Set reporter to null to disable built-in JUnit reporter
-  reporter: null,
+  reporter: "cypress-junit-reporter",
+  reporterOptions: {
+    mochaFile: "cypress/results/junit-[hash].xml",
+    toConsole: true,
+    attachments: true,
+    testCaseSwitchClassnameAndName: false,
+    rootSuiteTitle: "CIA Compliance Manager Tests",
+  },
   e2e: {
     baseUrl: "http://localhost:5173",
     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
     supportFile: "cypress/support/e2e.ts",
     testIsolation: false,
     setupNodeEvents(on, config) {
-      // Register our improved JUnit reporter
-      junitReporter(on, config);
-
+      // Register vite preprocessor
       on(
         "file:preprocessor",
         vitePreprocessor({
@@ -37,28 +40,82 @@ export default defineConfig({
         })
       );
 
-      // Register tasks for backward compatibility
+      // Simple directory and file utilities
       on("task", {
-        // New readFile task
-        readFile(filePath: string) {
-          if (fs.existsSync(filePath)) {
-            return fs.readFileSync(filePath, "utf8");
+        ensureDir(dirPath) {
+          try {
+            if (!fs.existsSync(dirPath)) {
+              fs.mkdirSync(dirPath, { recursive: true });
+              return `Created directory: ${dirPath}`;
+            }
+            return `Directory already exists: ${dirPath}`;
+          } catch (err) {
+            return `Error creating directory: ${err}`;
           }
-          throw new Error(`File not found: ${filePath}`);
         },
-        resetJunitResults: resetJunitResults,
+
+        readFile({ path }) {
+          try {
+            const content = fs.readFileSync(path, "utf8");
+            return { content };
+          } catch (err) {
+            return { error: `Error reading file: ${err}` };
+          }
+        },
+
         listJunitFiles() {
-          const resultsDir = resolve(__dirname, "cypress/results");
-          if (!fs.existsSync(resultsDir)) {
-            console.log(`Results directory does not exist: ${resultsDir}`);
+          try {
+            const resultsDir = path.join(process.cwd(), "cypress", "results");
+            if (!fs.existsSync(resultsDir)) {
+              return [];
+            }
+            return fs
+              .readdirSync(resultsDir)
+              .filter((file) => file.endsWith(".xml"));
+          } catch (err) {
             return [];
           }
+        },
 
-          const files = fs
-            .readdirSync(resultsDir)
-            .filter((file) => file.endsWith(".xml"));
+        // Add the missing resetJunitResults task
+        resetJunitResults() {
+          try {
+            const resultsDir = path.join(process.cwd(), "cypress", "results");
 
-          return files;
+            // Ensure directory exists
+            if (!fs.existsSync(resultsDir)) {
+              fs.mkdirSync(resultsDir, { recursive: true });
+              return null; // Return null instead of a string
+            }
+
+            // Find and delete all XML files in the directory
+            const xmlFiles = fs
+              .readdirSync(resultsDir)
+              .filter((file) => file.endsWith(".xml"));
+
+            // Delete each XML file
+            xmlFiles.forEach((file) => {
+              const filePath = path.join(resultsDir, file);
+              fs.unlinkSync(filePath);
+            });
+
+            return null; // Return null instead of a string
+          } catch (err) {
+            console.error("Error resetting JUnit results:", err);
+            return null; // Return null instead of a string
+          }
+        },
+
+        // You might also want to add a writeFile task for completeness
+        writeFile({ path, content }) {
+          try {
+            fs.writeFileSync(path, content);
+            return `File written successfully: ${path}`;
+          } catch (err) {
+            return `Error writing file: ${
+              err instanceof Error ? err.message : String(err)
+            }`;
+          }
         },
       });
 

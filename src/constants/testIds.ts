@@ -3,7 +3,7 @@
  */
 
 import { VALUE_CREATION_POINTS } from "./appConstants";
-import { SecurityLevel } from "../types/cia";
+import { SecurityLevel, SecurityLevels } from "../types/cia"; // Updated import from .tsx to .ts
 
 // Add this function near the top of the file to make it easier to create compound testIds
 export const createCompoundTestId = (prefix: string, suffix: string): string =>

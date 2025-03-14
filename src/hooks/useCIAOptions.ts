@@ -1,7 +1,23 @@
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react"; // Replace useState with useMemo since we're not using useState
 import { SecurityLevel, CIADetails } from "../types/cia";
-import { ROIMetrics, ROIEstimatesMap } from "../types/cia-services";
 import { getSecurityLevelColorPair } from "../constants/colorConstants";
+
+// Define ROIEstimatesMap type
+interface ROIEstimate {
+  returnRate: string;
+  description: string;
+  potentialSavings?: string;
+  breakEvenPeriod?: string;
+  implementationCost?: string;
+}
+
+type ROIEstimatesMap = {
+  NONE: ROIEstimate;
+  LOW: ROIEstimate;
+  MODERATE: ROIEstimate;
+  HIGH: ROIEstimate;
+  VERY_HIGH: ROIEstimate;
+};
 
 /**
  * Common interface for all CIA security options to ensure consistency
@@ -82,216 +98,227 @@ export interface EnhancedCIADetails extends CIADetails {
     title: string;
     code: string;
   }>;
+  // Add technical implementation details
+  technicalImplementation?: {
+    description: string;
+    implementationSteps: string[];
+    effort: {
+      development: string;
+      maintenance: string;
+      expertise: string;
+    };
+    requirements?: string[];
+    technologies?: string[];
+  };
 }
 
 // Define all options as private internal constants
-const _availabilityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
-  None: {
-    description:
-      "No availability measures are in place. The system is prone to frequent, unpredictable outages.",
-    technical:
-      "No redundancy, backup systems, monitoring, or disaster recovery procedures are implemented.",
-    businessImpact:
-      "Severe disruptions occur during outages, potentially resulting in revenue losses estimated at 5-10% annually under prolonged conditions.",
-    capex: 0,
-    opex: 0,
-    bg: getSecurityLevelColorPair("None").bg,
-    text: getSecurityLevelColorPair("None").text,
-    recommendations: [
-      "Implement basic monitoring to detect outages early",
-      "Establish a rudimentary backup process with periodic testing",
-      "Document manual recovery procedures with clear roles",
-      "Establish baseline uptime metrics to gauge current performance",
-      "Identify and prioritize critical systems for improvement",
-    ],
-    uptime: "<90%",
-    businessImpactDetails: {
-      financialImpact: {
-        description:
-          "Prolonged outages can lead to significant revenue loss, estimated at 5-10% of annual revenue.",
-        riskLevel: "Critical",
-        annualRevenueLoss: "5-10% of annual revenue",
+const _availabilityOptions: Partial<Record<SecurityLevel, EnhancedCIADetails>> =
+  {
+    None: {
+      description:
+        "No availability measures are in place. The system is prone to frequent, unpredictable outages.",
+      technical:
+        "No redundancy, backup systems, monitoring, or disaster recovery procedures are implemented.",
+      businessImpact:
+        "Severe disruptions occur during outages, potentially resulting in revenue losses estimated at 5-10% annually under prolonged conditions.",
+      capex: 0,
+      opex: 0,
+      bg: getSecurityLevelColorPair("None" as SecurityLevel).bg,
+      text: getSecurityLevelColorPair("None" as SecurityLevel).text,
+      recommendations: [
+        "Implement basic monitoring to detect outages early",
+        "Establish a rudimentary backup process with periodic testing",
+        "Document manual recovery procedures with clear roles",
+        "Establish baseline uptime metrics to gauge current performance",
+        "Identify and prioritize critical systems for improvement",
+      ],
+      uptime: "<90%",
+      businessImpactDetails: {
+        financialImpact: {
+          description:
+            "Prolonged outages can lead to significant revenue loss, estimated at 5-10% of annual revenue.",
+          riskLevel: "Critical",
+          annualRevenueLoss: "5-10% of annual revenue",
+        },
+        operationalImpact: {
+          description:
+            "Operations are severely disrupted with recovery timelines that are highly unpredictable.",
+          riskLevel: "Critical",
+          meanTimeToRecover: "Unpredictable (hours to days)",
+        },
+        regulatory: {
+          description:
+            "Likely violates basic service agreements and regulatory requirements.",
+          riskLevel: "High",
+          complianceViolations: ["SLAs", "Basic industry standards"],
+        },
       },
-      operationalImpact: {
-        description:
-          "Operations are severely disrupted with recovery timelines that are highly unpredictable.",
-        riskLevel: "Critical",
-        meanTimeToRecover: "Unpredictable (hours to days)",
-      },
-      regulatory: {
-        description:
-          "Likely violates basic service agreements and regulatory requirements.",
-        riskLevel: "High",
-        complianceViolations: ["SLAs", "Basic industry standards"],
-      },
+      securityIcon: "⚠️",
     },
-    securityIcon: "⚠️",
-  },
-  Low: {
-    description:
-      "Basic availability measures are present but have significant limitations, leading to extended downtime during disruptions.",
-    technical:
-      "Reliance on manual backup processes and limited monitoring, with basic recovery documentation.",
-    businessImpact:
-      "Moderate disruptions can lead to revenue losses estimated at 3-5% annually, heavily dependent on recovery speed.",
-    capex: 5,
-    opex: 3,
-    bg: getSecurityLevelColorPair("Low").bg,
-    text: getSecurityLevelColorPair("Low").text,
-    recommendations: [
-      "Implement scheduled backups and test recovery procedures regularly",
-      "Set up basic monitoring alerts for early detection",
-      "Document recovery processes and establish a communication protocol for outages",
-    ],
-    uptime: "95%",
-    rto: "24-48 hours",
-    rpo: "24 hours",
-    mttr: "12-24 hours",
-    businessImpactDetails: {
-      financialImpact: {
-        description:
-          "Revenue impact is estimated at around 3-5% annually due to extended downtimes.",
-        riskLevel: "High",
-        annualRevenueLoss: "3-5% of annual revenue",
+    Low: {
+      description:
+        "Basic availability measures are present but have significant limitations, leading to extended downtime during disruptions.",
+      technical:
+        "Reliance on manual backup processes and limited monitoring, with basic recovery documentation.",
+      businessImpact:
+        "Moderate disruptions can lead to revenue losses estimated at 3-5% annually, heavily dependent on recovery speed.",
+      capex: 5,
+      opex: 3,
+      bg: getSecurityLevelColorPair("Low" as SecurityLevel).bg,
+      text: getSecurityLevelColorPair("Low" as SecurityLevel).text,
+      recommendations: [
+        "Implement scheduled backups and test recovery procedures regularly",
+        "Set up basic monitoring alerts for early detection",
+        "Document recovery processes and establish a communication protocol for outages",
+      ],
+      uptime: "95%",
+      rto: "24-48 hours",
+      rpo: "24 hours",
+      mttr: "12-24 hours",
+      businessImpactDetails: {
+        financialImpact: {
+          description:
+            "Revenue impact is estimated at around 3-5% annually due to extended downtimes.",
+          riskLevel: "High",
+          annualRevenueLoss: "3-5% of annual revenue",
+        },
+        operationalImpact: {
+          description:
+            "Business disruptions are significant and require manual intervention, leading to slower recovery.",
+          riskLevel: "High",
+          meanTimeToRecover: "12-24 hours",
+        },
       },
-      operationalImpact: {
-        description:
-          "Business disruptions are significant and require manual intervention, leading to slower recovery.",
-        riskLevel: "High",
-        meanTimeToRecover: "12-24 hours",
-      },
+      securityIcon: "🔒",
     },
-    securityIcon: "🔒",
-  },
-  Moderate: {
-    description:
-      "Standard availability measures that yield acceptable uptime with planned disaster recovery processes.",
-    technical:
-      "Scheduled backups, automated monitoring with alerts, documented recovery procedures, and partial redundancy for key components.",
-    businessImpact:
-      "Occasional disruptions are generally contained, with revenue losses estimated at 1-3% annually.",
-    capex: 15,
-    opex: 10,
-    bg: getSecurityLevelColorPair("Moderate").bg,
-    text: getSecurityLevelColorPair("Moderate").text,
-    recommendations: [
-      "Enhance redundancy for mission-critical systems",
-      "Automate backup and disaster recovery testing",
-      "Integrate comprehensive monitoring with defined SLAs",
-    ],
-    uptime: "99%",
-    rto: "4-8 hours",
-    rpo: "4 hours",
-    mttr: "2-4 hours",
-    businessImpactDetails: {
-      financialImpact: {
-        description:
-          "Revenue impact is modest, estimated at approximately 1-3% annually, assuming typical outage scenarios.",
-        riskLevel: "Medium",
-        annualRevenueLoss: "1-3% of annual revenue",
+    Moderate: {
+      description:
+        "Standard availability measures that yield acceptable uptime with planned disaster recovery processes.",
+      technical:
+        "Scheduled backups, automated monitoring with alerts, documented recovery procedures, and partial redundancy for key components.",
+      businessImpact:
+        "Occasional disruptions are generally contained, with revenue losses estimated at 1-3% annually.",
+      capex: 15,
+      opex: 10,
+      bg: getSecurityLevelColorPair("Moderate" as SecurityLevel).bg,
+      text: getSecurityLevelColorPair("Moderate" as SecurityLevel).text,
+      recommendations: [
+        "Enhance redundancy for mission-critical systems",
+        "Automate backup and disaster recovery testing",
+        "Integrate comprehensive monitoring with defined SLAs",
+      ],
+      uptime: "99%",
+      rto: "4-8 hours",
+      rpo: "4 hours",
+      mttr: "2-4 hours",
+      businessImpactDetails: {
+        financialImpact: {
+          description:
+            "Revenue impact is modest, estimated at approximately 1-3% annually, assuming typical outage scenarios.",
+          riskLevel: "Medium",
+          annualRevenueLoss: "1-3% of annual revenue",
+        },
+        operationalImpact: {
+          description:
+            "Disruptions occur infrequently and recovery is relatively quick.",
+          riskLevel: "Medium",
+          meanTimeToRecover: "2-4 hours",
+        },
       },
-      operationalImpact: {
-        description:
-          "Disruptions occur infrequently and recovery is relatively quick.",
-        riskLevel: "Medium",
-        meanTimeToRecover: "2-4 hours",
-      },
+      securityIcon: "🛡️",
     },
-    securityIcon: "🛡️",
-  },
-  High: {
-    description:
-      "Robust availability measures with high redundancy and automated recovery systems ensure near-continuous operations.",
-    technical:
-      "N+1 redundancy, multi-region standby systems, automated failover, comprehensive monitoring, and regular disaster recovery testing.",
-    businessImpact:
-      "Business continuity is well-maintained with negligible revenue impact (generally under 1%).",
-    capex: 30,
-    opex: 20,
-    bg: getSecurityLevelColorPair("High").bg,
-    text: getSecurityLevelColorPair("High").text,
-    recommendations: [
-      "Deploy N+1 redundancy for all critical systems",
-      "Implement automated failover and real-time monitoring",
-      "Conduct regular disaster recovery drills and define escalation procedures",
-    ],
-    uptime: "99.9%",
-    rto: "15-60 minutes",
-    rpo: "15 minutes",
-    mttr: "10-30 minutes",
-    businessImpactDetails: {
-      financialImpact: {
-        description:
-          "Revenue impact is minimal, generally estimated at less than 1% of annual revenue.",
-        riskLevel: "Low",
-        annualRevenueLoss: "<1% of annual revenue",
+    High: {
+      description:
+        "Robust availability measures with high redundancy and automated recovery systems ensure near-continuous operations.",
+      technical:
+        "N+1 redundancy, multi-region standby systems, automated failover, comprehensive monitoring, and regular disaster recovery testing.",
+      businessImpact:
+        "Business continuity is well-maintained with negligible revenue impact (generally under 1%).",
+      capex: 30,
+      opex: 20,
+      bg: getSecurityLevelColorPair("High" as SecurityLevel).bg,
+      text: getSecurityLevelColorPair("High" as SecurityLevel).text,
+      recommendations: [
+        "Deploy N+1 redundancy for all critical systems",
+        "Implement automated failover and real-time monitoring",
+        "Conduct regular disaster recovery drills and define escalation procedures",
+      ],
+      uptime: "99.9%",
+      rto: "15-60 minutes",
+      rpo: "15 minutes",
+      mttr: "10-30 minutes",
+      businessImpactDetails: {
+        financialImpact: {
+          description:
+            "Revenue impact is minimal, generally estimated at less than 1% of annual revenue.",
+          riskLevel: "Low",
+          annualRevenueLoss: "<1% of annual revenue",
+        },
+        operationalImpact: {
+          description:
+            "Disruptions are rare and recovery is almost instantaneous due to automation.",
+          riskLevel: "Low",
+          meanTimeToRecover: "10-30 minutes",
+        },
+        strategic: {
+          description:
+            "High reliability can support market expansion and reinforces customer trust.",
+          riskLevel: "Low",
+        },
       },
-      operationalImpact: {
-        description:
-          "Disruptions are rare and recovery is almost instantaneous due to automation.",
-        riskLevel: "Low",
-        meanTimeToRecover: "10-30 minutes",
-      },
-      strategic: {
-        description:
-          "High reliability can support market expansion and reinforces customer trust.",
-        riskLevel: "Low",
-      },
+      securityIcon: "🛡️🛡️",
     },
-    securityIcon: "🛡️🛡️",
-  },
-  "Very High": {
-    description:
-      "Maximum availability with continuous operations enabled by multi-region redundancy, real-time replication, and fully automated recovery.",
-    technical:
-      "N+2 redundancy, active-active multi-region architecture, real-time replication, and automated remediation ensure near-zero downtime.",
-    businessImpact:
-      "Operational continuity is nearly uninterrupted under normal conditions, with revenue impact considered negligible—though extreme events remain a risk.",
-    capex: 60,
-    opex: 40,
-    bg: getSecurityLevelColorPair("Very High").bg,
-    text: getSecurityLevelColorPair("Very High").text,
-    recommendations: [
-      "Implement N+2 redundancy across all critical components",
-      "Deploy an active-active multi-region architecture with real-time replication",
-      "Establish fully automated remediation systems and 24/7 operations support",
-      "Conduct regular chaos engineering exercises to stress-test resilience",
-    ],
-    uptime: "99.99%",
-    rto: "<5 minutes",
-    rpo: "<1 minute",
-    mttr: "<5 minutes",
-    businessImpactDetails: {
-      financialImpact: {
-        description:
-          "Revenue losses due to availability issues are negligible under normal conditions.",
-        riskLevel: "Minimal",
+    "Very High": {
+      description:
+        "Maximum availability with continuous operations enabled by multi-region redundancy, real-time replication, and fully automated recovery.",
+      technical:
+        "N+2 redundancy, active-active multi-region architecture, real-time replication, and automated remediation ensure near-zero downtime.",
+      businessImpact:
+        "Operational continuity is nearly uninterrupted under normal conditions, with revenue impact considered negligible—though extreme events remain a risk.",
+      capex: 60,
+      opex: 40,
+      bg: getSecurityLevelColorPair("Very High" as SecurityLevel).bg,
+      text: getSecurityLevelColorPair("Very High" as SecurityLevel).text,
+      recommendations: [
+        "Implement N+2 redundancy across all critical components",
+        "Deploy an active-active multi-region architecture with real-time replication",
+        "Establish fully automated remediation systems and 24/7 operations support",
+        "Conduct regular chaos engineering exercises to stress-test resilience",
+      ],
+      uptime: "99.99%",
+      rto: "<5 minutes",
+      rpo: "<1 minute",
+      mttr: "<5 minutes",
+      businessImpactDetails: {
+        financialImpact: {
+          description:
+            "Revenue losses due to availability issues are negligible under normal conditions.",
+          riskLevel: "Minimal",
+        },
+        operationalImpact: {
+          description:
+            "Business operations are maintained nearly continuously with rapid, automated recovery.",
+          riskLevel: "Minimal",
+          meanTimeToRecover: "<5 minutes",
+        },
+        strategic: {
+          description:
+            "Superior reliability offers a competitive advantage in high-demand markets.",
+          riskLevel: "Minimal",
+        },
+        regulatory: {
+          description:
+            "Exceeds stringent regulatory and SLA requirements for availability.",
+          riskLevel: "Minimal",
+          complianceViolations: [],
+        },
       },
-      operationalImpact: {
-        description:
-          "Business operations are maintained nearly continuously with rapid, automated recovery.",
-        riskLevel: "Minimal",
-        meanTimeToRecover: "<5 minutes",
-      },
-      strategic: {
-        description:
-          "Superior reliability offers a competitive advantage in high-demand markets.",
-        riskLevel: "Minimal",
-      },
-      regulatory: {
-        description:
-          "Exceeds stringent regulatory and SLA requirements for availability.",
-        riskLevel: "Minimal",
-        complianceViolations: [],
-      },
+      securityIcon: "🛡️🛡️🛡️",
     },
-    securityIcon: "🛡️🛡️🛡️",
-  },
-};
+  };
 
-
-
-const _integrityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
+const _integrityOptions: Partial<Record<SecurityLevel, EnhancedCIADetails>> = {
   None: {
     description:
       "No integrity controls are implemented, leaving the system vulnerable to undetected data corruption.",
@@ -301,8 +328,8 @@ const _integrityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "This lack of controls poses a critical risk to decision-making and financial reporting, potentially leading to significant operational disruptions.",
     capex: 0,
     opex: 0,
-    bg: getSecurityLevelColorPair("None").bg,
-    text: getSecurityLevelColorPair("None").text,
+    bg: getSecurityLevelColorPair("None" as SecurityLevel).bg,
+    text: getSecurityLevelColorPair("None" as SecurityLevel).text,
     recommendations: [
       "Implement fundamental input validation measures",
       "Introduce basic application-level data checks",
@@ -331,8 +358,8 @@ const _integrityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Data inaccuracies may occur intermittently, potentially leading to errors in financial calculations and operational inefficiencies.",
     capex: 5,
     opex: 3,
-    bg: getSecurityLevelColorPair("Low").bg,
-    text: getSecurityLevelColorPair("Low").text,
+    bg: getSecurityLevelColorPair("Low" as SecurityLevel).bg,
+    text: getSecurityLevelColorPair("Low" as SecurityLevel).text,
     recommendations: [
       "Adopt server-side validation to minimize human error",
       "Introduce automated data verification where possible",
@@ -361,8 +388,8 @@ const _integrityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Most data corruption is detected and corrected, though sophisticated attacks or subtle errors may still occur.",
     capex: 15,
     opex: 10,
-    bg: getSecurityLevelColorPair("Moderate").bg,
-    text: getSecurityLevelColorPair("Moderate").text,
+    bg: getSecurityLevelColorPair("Moderate" as SecurityLevel).bg,
+    text: getSecurityLevelColorPair("Moderate" as SecurityLevel).text,
     recommendations: [
       "Implement end-to-end automated data validation",
       "Utilize database constraints and triggers to enforce integrity rules",
@@ -396,8 +423,8 @@ const _integrityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Data integrity is strongly maintained, reducing risks in financial and operational decision-making, but the high investment may limit broader scalability.",
     capex: 30,
     opex: 20,
-    bg: getSecurityLevelColorPair("High").bg,
-    text: getSecurityLevelColorPair("High").text,
+    bg: getSecurityLevelColorPair("High" as SecurityLevel).bg,
+    text: getSecurityLevelColorPair("High" as SecurityLevel).text,
     recommendations: [
       "Deploy digital signatures for high-risk data entries",
       "Implement cryptographic hash validations for data immutability",
@@ -431,8 +458,8 @@ const _integrityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Data integrity is virtually guaranteed, which is critical for high-stakes regulatory and financial environments, but the substantial investment and complexity may not be justifiable for all organizations.",
     capex: 60,
     opex: 40,
-    bg: getSecurityLevelColorPair("Very High").bg,
-    text: getSecurityLevelColorPair("Very High").text,
+    bg: getSecurityLevelColorPair("Very High" as SecurityLevel).bg,
+    text: getSecurityLevelColorPair("Very High" as SecurityLevel).text,
     recommendations: [
       "Explore blockchain or distributed ledger solutions for critical data",
       "Deploy multi-party verification systems to enhance auditability",
@@ -459,9 +486,10 @@ const _integrityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
   },
 };
 
-
 // Create full confidentiality options with all levels
-const _confidentialityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
+const _confidentialityOptions: Partial<
+  Record<SecurityLevel, EnhancedCIADetails>
+> = {
   None: {
     description:
       "No confidentiality controls are implemented, leaving sensitive information fully exposed to any user with system access.",
@@ -471,8 +499,8 @@ const _confidentialityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "This exposes the organization to severe reputational damage and regulatory non-compliance, with potential legal penalties if sensitive data is compromised.",
     capex: 0,
     opex: 0,
-    bg: getSecurityLevelColorPair("None").bg,
-    text: getSecurityLevelColorPair("None").text,
+    bg: getSecurityLevelColorPair("None" as SecurityLevel).bg,
+    text: getSecurityLevelColorPair("None" as SecurityLevel).text,
     recommendations: [
       "Implement basic authentication mechanisms",
       "Introduce simple authorization controls",
@@ -502,8 +530,8 @@ const _confidentialityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Sensitive data is somewhat protected, but the risk of exposure remains high, potentially leading to moderate reputational harm and regulatory challenges.",
     capex: 5,
     opex: 3,
-    bg: getSecurityLevelColorPair("Low").bg,
-    text: getSecurityLevelColorPair("Low").text,
+    bg: getSecurityLevelColorPair("Low" as SecurityLevel).bg,
+    text: getSecurityLevelColorPair("Low" as SecurityLevel).text,
     recommendations: [
       "Upgrade to a robust authentication system",
       "Implement comprehensive role-based access controls",
@@ -532,8 +560,8 @@ const _confidentialityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Most unauthorized access attempts are thwarted, reducing the risk of data breaches. However, sophisticated threats might still pose a risk, leading to moderate operational and reputational impacts.",
     capex: 15,
     opex: 10,
-    bg: getSecurityLevelColorPair("Moderate").bg,
-    text: getSecurityLevelColorPair("Moderate").text,
+    bg: getSecurityLevelColorPair("Moderate" as SecurityLevel).bg,
+    text: getSecurityLevelColorPair("Moderate" as SecurityLevel).text,
     recommendations: [
       "Implement robust encryption for data both at rest and in transit",
       "Regularly review and update access controls",
@@ -562,8 +590,8 @@ const _confidentialityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Significantly reduces the risk of data breaches, thereby minimizing reputational damage and ensuring compliance with stringent regulatory standards.",
     capex: 30,
     opex: 20,
-    bg: getSecurityLevelColorPair("High").bg,
-    text: getSecurityLevelColorPair("High").text,
+    bg: getSecurityLevelColorPair("High" as SecurityLevel).bg,
+    text: getSecurityLevelColorPair("High" as SecurityLevel).text,
     recommendations: [
       "Deploy multi-factor authentication across all user access points",
       "Implement end-to-end encryption and conduct regular security audits",
@@ -592,8 +620,8 @@ const _confidentialityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
       "Provides best-in-class protection, virtually eliminating the risk of unauthorized data access. However, the high cost and system complexity may not be justifiable for all organizations.",
     capex: 60,
     opex: 40,
-    bg: getSecurityLevelColorPair("Very High").bg,
-    text: getSecurityLevelColorPair("Very High").text,
+    bg: getSecurityLevelColorPair("Very High" as SecurityLevel).bg,
+    text: getSecurityLevelColorPair("Very High" as SecurityLevel).text,
     recommendations: [
       "Implement quantum-resistant encryption algorithms",
       "Deploy hardware security modules for critical data repositories",
@@ -614,7 +642,6 @@ const _confidentialityOptions: Record<SecurityLevel, EnhancedCIADetails> = {
     },
   },
 };
-
 
 // ROI estimates with proper typing
 const _ROI_ESTIMATES: ROIEstimatesMap = {

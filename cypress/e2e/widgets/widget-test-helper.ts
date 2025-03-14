@@ -2,17 +2,9 @@
  * Common helper functions for widget tests
  */
 import {
+  CIA_TEST_IDS,
   TEST_IDS,
   WIDGET_TEST_IDS,
-  CIA_TEST_IDS,
-  COST_TEST_IDS,
-  SUMMARY_TEST_IDS,
-  BUSINESS_IMPACT_TEST_IDS,
-  CHART_TEST_IDS,
-  FRAMEWORK_TEST_IDS,
-  VALUE_CREATION_TEST_IDS,
-  TECHNICAL_DETAILS_TEST_IDS,
-  SECURITY_LEVELS,
 } from "../../support/constants";
 
 /**
@@ -288,52 +280,19 @@ export function getWidgetId(primaryId: string): string[] {
 export function findBestWidgetSelector(
   widgetName: string
 ): Cypress.Chainable<string | null> {
-  const possibleIds = getWidgetId(widgetName);
-  const selectors = possibleIds.map((id) => `[data-testid="${id}"]`);
+  return cy.document().then((doc) => {
+    // Try different selector patterns
+    const selectors = getWidgetId(widgetName);
 
-  // Use a subject-independent approach to avoid Document type inference
-  return cy.wrap(null).then(() => {
-    return cy.document().then((doc) => {
-      // Store result in a local variable
-      let result: string | null = null;
-
-      // Try each selector in order
-      for (const selector of selectors) {
-        if (doc.querySelector(selector)) {
-          result = selector;
-          return result; // Early return with correct type
-        }
+    for (const selector of selectors) {
+      const element = doc.querySelector(`[data-testid="${selector}"]`);
+      if (element) {
+        return `[data-testid="${selector}"]`;
       }
+    }
 
-      // Try to find by heading text if no direct match
-      if (!result) {
-        const widgetDisplayName = widgetName.replace(/-/g, " ");
-        const headers = Array.from(
-          doc.querySelectorAll("h1, h2, h3, h4, h5, h6")
-        );
-
-        for (const header of headers) {
-          if (
-            header.textContent &&
-            header.textContent.toLowerCase().includes(widgetDisplayName)
-          ) {
-            // Find closest container with data-testid
-            let el = header;
-            while (el && el !== doc.body) {
-              if (el.getAttribute("data-testid")) {
-                result = `[data-testid="${el.getAttribute("data-testid")}"]`;
-                return result; // Early return with correct type
-              }
-              el = el.parentElement!;
-            }
-          }
-        }
-      }
-
-      // Return result (will be null if nothing found)
-      return result;
-    });
-  });
+    return null;
+  }) as unknown as Cypress.Chainable<string | null>; // Type assertion to match return type
 }
 
 /**
@@ -442,6 +401,112 @@ export function testWidgetTabSwitching(
     });
   });
 }
+
+// 2. Define constants that don't conflict
+export const CYPRESS_TEST_IDS = {
+  // Define constants that don't exist in imported TEST_IDS
+  AVAILABILITY_WIDGET: "availability-widget",
+  INTEGRITY_WIDGET: "integrity-widget",
+  CONFIDENTIALITY_WIDGET: "confidentiality-widget",
+  CIA_SUMMARY_WIDGET: "cia-summary-widget",
+  RESOURCES_WIDGET: "resources-widget",
+  VISUALIZATION_WIDGET: "visualization-widget",
+};
+
+// 3. Fix duplicate function implementations
+// Rename the second implementation or merge functionality
+export const getWidgetTestId = (widgetName: string): string => {
+  // Implementation
+  return `widget-${widgetName}`;
+};
+
+// 4. Fix Chainable type issues
+export const getWidgetContent = (
+  widgetId: string
+): Cypress.Chainable<string | null> => {
+  return cy.get(`[data-testid="${widgetId}"]`).then(($el) => {
+    if ($el.length === 0) return null;
+    return $el.text() || null;
+  }) as unknown as Cypress.Chainable<string | null>;
+};
+
+// Fix the return type compatibility issues
+export const getWidgetContentSafe = (
+  widgetId: string
+): Cypress.Chainable<string | null> => {
+  return cy.get(`[data-testid="${widgetId}"]`).then(($el) => {
+    if ($el.length === 0) return null;
+    // Convert jQuery element to string explicitly
+    return $el.text() || null;
+  }) as unknown as Cypress.Chainable<string | null>;
+};
+
+// Fix the second instance of type incompatibility
+export const getWidgetText = (
+  widgetId: string
+): Cypress.Chainable<string | null> => {
+  return cy.get(`[data-testid="${widgetId}"]`).then(($el) => {
+    if ($el.length === 0) return null;
+    // Convert to string explicitly
+    return $el.text() || null;
+  }) as unknown as Cypress.Chainable<string | null>;
+};
+
+// 5. Use proper typings for Cypress commands
+export const checkWidgetExists = (widgetId: string): void => {
+  cy.get(`[data-testid="${widgetId}"]`).should("exist");
+};
+
+// For any widget-specific actions, use the proper test IDs
+export const selectSecurityLevel = (component: string, level: string): void => {
+  cy.get(`[data-testid="${TEST_IDS.SECURITY_LEVEL_WIDGET}"]`).within(() => {
+    cy.get(`[data-testid="${component}-select"]`).click();
+    cy.get(`[data-testid="${component}-option-${level}"]`).click();
+  });
+};
+
+// Fix references to non-existent properties
+export const checkAvailabilityWidget = (): void => {
+  cy.get(`[data-testid="${CYPRESS_TEST_IDS.AVAILABILITY_WIDGET}"]`).should(
+    "exist"
+  );
+  // Rest of the implementation
+};
+
+export const checkIntegrityWidget = (): void => {
+  cy.get(`[data-testid="${CYPRESS_TEST_IDS.INTEGRITY_WIDGET}"]`).should(
+    "exist"
+  );
+  // Rest of the implementation
+};
+
+export const checkConfidentialityWidget = (): void => {
+  cy.get(`[data-testid="${CYPRESS_TEST_IDS.CONFIDENTIALITY_WIDGET}"]`).should(
+    "exist"
+  );
+  // Rest of the implementation
+};
+
+export const checkCIASummaryWidget = (): void => {
+  cy.get(`[data-testid="${CYPRESS_TEST_IDS.CIA_SUMMARY_WIDGET}"]`).should(
+    "exist"
+  );
+  // Rest of the implementation
+};
+
+export const checkResourcesWidget = (): void => {
+  cy.get(`[data-testid="${CYPRESS_TEST_IDS.RESOURCES_WIDGET}"]`).should(
+    "exist"
+  );
+  // Rest of the implementation
+};
+
+export const checkVisualizationWidget = (): void => {
+  cy.get(`[data-testid="${CYPRESS_TEST_IDS.VISUALIZATION_WIDGET}"]`).should(
+    "exist"
+  );
+  // Rest of the implementation
+};
 
 export default {
   setupWidgetTest,

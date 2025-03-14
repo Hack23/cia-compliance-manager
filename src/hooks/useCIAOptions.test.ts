@@ -1,7 +1,9 @@
 import { describe, it, expect, vi } from "vitest";
 import * as useCIAOptionsModule from "./useCIAOptions";
-import { CIADetails, SecurityLevel } from "../types/cia";
+import { CIADetails } from "../types/cia";
 import { ROIEstimatesMap } from "../types/cia-services";
+import { renderHook } from "@testing-library/react";
+import { useCIAOptions } from "./useCIAOptions";
 
 // Mock the React hooks
 vi.mock("react", () => ({
@@ -332,17 +334,23 @@ describe("useCIAOptions", () => {
   describe("Exported Constants", () => {
     it("exports availabilityOptions directly", () => {
       expect(useCIAOptionsModule.availabilityOptions).toBeDefined();
-      expect(Object.keys(useCIAOptionsModule.availabilityOptions)).toContain("None");
+      expect(Object.keys(useCIAOptionsModule.availabilityOptions)).toContain(
+        "None"
+      );
     });
 
     it("exports integrityOptions directly", () => {
       expect(useCIAOptionsModule.integrityOptions).toBeDefined();
-      expect(Object.keys(useCIAOptionsModule.integrityOptions)).toContain("None");
+      expect(Object.keys(useCIAOptionsModule.integrityOptions)).toContain(
+        "None"
+      );
     });
 
     it("exports confidentialityOptions directly", () => {
       expect(useCIAOptionsModule.confidentialityOptions).toBeDefined();
-      expect(Object.keys(useCIAOptionsModule.confidentialityOptions)).toContain("None");
+      expect(Object.keys(useCIAOptionsModule.confidentialityOptions)).toContain(
+        "None"
+      );
     });
 
     it("exports ROI_ESTIMATES directly", () => {

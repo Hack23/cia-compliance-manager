@@ -8,7 +8,7 @@
 
 > **formatSecurityLevel**(`level`, `withLabel`): `ReactNode`
 
-Defined in: [src/utils/widgetHelpers.tsx:107](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L107)
+Defined in: [src/utils/widgetHelpers.tsx:100](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L100)
 
 Creates formatted JSX for displaying a security level with appropriate styling
 

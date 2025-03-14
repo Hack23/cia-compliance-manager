@@ -1,30 +1,34 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import SecurityResourcesWidget from "./SecurityResourcesWidget";
-import { WIDGET_PREFIXES } from "../../constants/testIds";
 
-// Mock the security resources data
-vi.mock("../../data/securityResources", () => ({
-  securityResources: [
-    {
-      title: "NIST Cybersecurity Framework",
-      description:
-        "Guidelines, standards, and best practices to manage cybersecurity-related risk",
-      url: "https://www.nist.gov/cyberframework",
-      category: "Framework",
-      tags: ["framework", "guidelines", "risk-management"],
-      relevantLevels: ["Low", "Moderate", "High", "Very High"],
-    },
-    {
-      title: "OWASP Top Ten",
-      description: "Top 10 most critical web application security risks",
-      url: "https://owasp.org/www-project-top-ten/",
-      category: "Web Security",
-      tags: ["web-security", "vulnerabilities", "best-practices"],
-      relevantLevels: ["Low", "Moderate", "High", "Very High"],
-    },
-  ],
+// Mock the ciaContentService instead of the data file
+vi.mock("../../services/ciaContentService", () => ({
+  default: {
+    getSecurityResources: vi.fn().mockImplementation(() => [
+      {
+        title: "NIST Cybersecurity Framework",
+        description:
+          "Guidelines, standards, and best practices to manage cybersecurity-related risk",
+        url: "https://www.nist.gov/cyberframework",
+        category: "Framework",
+        tags: ["framework", "guidelines", "risk-management"],
+        relevantLevels: ["Low", "Moderate", "High", "Very High"],
+        relevanceScore: 90,
+        type: "Documentation",
+      },
+      {
+        title: "OWASP Top Ten",
+        description: "Top 10 most critical web application security risks",
+        url: "https://owasp.org/www-project-top-ten/",
+        category: "Web Security",
+        tags: ["web-security", "vulnerabilities", "best-practices"],
+        relevantLevels: ["Low", "Moderate", "High", "Very High"],
+        relevanceScore: 85,
+        type: "Standard",
+      },
+    ]),
+  },
 }));
 
 describe("SecurityResourcesWidget", () => {
@@ -54,7 +58,7 @@ describe("SecurityResourcesWidget", () => {
       />
     );
 
-    // Instead of checking for titles that don't exist, check for what we know exists
+    // Check for the titles from our mock data
     expect(
       screen.getByText("NIST Cybersecurity Framework")
     ).toBeInTheDocument();
@@ -139,12 +143,12 @@ describe("SecurityResourcesWidget", () => {
     // Search for "NIST"
     fireEvent.change(searchInput, { target: { value: "NIST" } });
 
-    // The NIST resource should be visible
-    expect(
-      screen.getByText("NIST Cybersecurity Framework")
-    ).toBeInTheDocument();
-
-    // The OWASP resource should not be visible
-    expect(screen.queryByText("OWASP Top Ten")).not.toBeInTheDocument();
+    // Since the component has a network activity simulation, we need to wait for it
+    // Add a timeout to handle the asynchronous nature of search
+    // Using findByText instead of getByText
+    return screen.findByText("NIST Cybersecurity Framework").then((element) => {
+      expect(element).toBeInTheDocument();
+      expect(screen.queryByText("OWASP Top Ten")).not.toBeInTheDocument();
+    });
   });
 });

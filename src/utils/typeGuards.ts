@@ -1,9 +1,9 @@
+import { CIADetails, SecurityLevel } from "../types/cia"; // Added SecurityLevel import
 import {
   AvailabilityDetail,
-  IntegrityDetail,
   ConfidentialityDetail,
+  IntegrityDetail,
 } from "../types/widgets";
-import { CIADetails, SecurityLevel } from "../types/cia"; // Added SecurityLevel import
 
 /**
  * Type guard to check if an object is an AvailabilityDetail
@@ -164,4 +164,66 @@ export function getSecurityLevelOption<T>(
     return options[safeKey as SecurityLevel];
   }
   return undefined;
+}
+
+/**
+ * Type guard for ROI metrics objects
+ * @param value - The value to check
+ * @returns True if the value is a valid ROI metrics object
+ */
+export function isROIMetrics(value: any): boolean {
+  return (
+    isObject(value) &&
+    typeof value.returnRate === "string" &&
+    typeof value.description === "string"
+  );
+}
+
+/**
+ * Type guard for technical implementation details
+ * @param value - The value to check
+ * @returns True if the value is a valid technical implementation details object
+ */
+export function isTechnicalImplementationDetails(value: any): boolean {
+  return (
+    isObject(value) &&
+    typeof value.description === "string" &&
+    Array.isArray(value.implementationSteps) &&
+    isObject(value.effort) &&
+    typeof value.effort.development === "string" &&
+    typeof value.effort.maintenance === "string" &&
+    typeof value.effort.expertise === "string"
+  );
+}
+
+/**
+ * Type guard for security resource objects
+ * @param value - The value to check
+ * @returns True if the value is a valid security resource object
+ */
+export function isSecurityResource(value: any): boolean {
+  return (
+    isObject(value) &&
+    typeof value.title === "string" &&
+    typeof value.description === "string" &&
+    typeof value.url === "string" &&
+    typeof value.category === "string" &&
+    Array.isArray(value.tags) &&
+    typeof value.relevanceScore === "number" &&
+    typeof value.type === "string"
+  );
+}
+
+/**
+ * Type guard for basic widget props
+ * @param value - The value to check
+ * @returns True if the value has the required widget properties
+ */
+export function hasWidgetProps(value: any): boolean {
+  return (
+    isObject(value) &&
+    typeof value.title === "string" &&
+    typeof value.description === "string" &&
+    typeof value.icon === "string"
+  );
 }

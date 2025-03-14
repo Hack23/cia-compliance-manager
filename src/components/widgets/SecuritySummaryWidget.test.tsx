@@ -1,11 +1,8 @@
-import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import SecuritySummaryWidget from "./SecuritySummaryWidget";
-import { SECURITY_LEVELS } from "../../constants/appConstants";
-import { UI_ICONS } from "../../constants/appConstants";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { vi } from "vitest";
 import { SUMMARY_TEST_IDS } from "../../constants/testIds";
 import { SecurityLevel } from "../../types/cia";
+import SecuritySummaryWidget from "./SecuritySummaryWidget";
 
 // Mock the BusinessKeyBenefits to ensure consistent test data
 vi.mock("../../types/businessImpact", async () => {
@@ -36,22 +33,24 @@ vi.mock("../../services/ciaContentService", () => {
         capexEstimate: "$225,000",
         opexEstimate: "$60,000/year",
       }),
-      getInformationSensitivity: vi.fn().mockImplementation((level: SecurityLevel) => {
-        const mapping: Record<SecurityLevel, string> = {
-          "None": "Public Information",
-          "Low": "Internal Use Only",
-          "Moderate": "Sensitive Information",
-          "High": "Confidential Information",
-          "Very High": "Restricted Information",
-        };
-        return mapping[level] || "Not Classified";
-      }),
+      getInformationSensitivity: vi
+        .fn()
+        .mockImplementation((level: SecurityLevel) => {
+          const mapping: Record<SecurityLevel, string> = {
+            None: "Public Information",
+            Low: "Internal Use Only",
+            Moderate: "Sensitive Information",
+            High: "Confidential Information",
+            "Very High": "Restricted Information",
+          };
+          return mapping[level] || "Not Classified";
+        }),
       getProtectionLevel: vi.fn().mockImplementation((level: SecurityLevel) => {
         const mapping: Record<SecurityLevel, string> = {
-          "None": "No Protection",
-          "Low": "Basic Protection", 
-          "Moderate": "Standard Protection",
-          "High": "Enhanced Protection",
+          None: "No Protection",
+          Low: "Basic Protection",
+          Moderate: "Standard Protection",
+          High: "Enhanced Protection",
           "Very High": "Maximum Protection",
         };
         return mapping[level] || "Undefined Protection";
@@ -64,10 +63,12 @@ vi.mock("../../services/ciaContentService", () => {
       getTechnicalImplementation: vi.fn().mockImplementation(() => ({
         description: "Technical implementation details",
       })),
-      getRecommendations: vi.fn().mockImplementation(() => ["Recommendation 1"]),
+      getRecommendations: vi
+        .fn()
+        .mockImplementation(() => ["Recommendation 1"]),
       getROIEstimates: vi.fn().mockImplementation(() => ({
         returnRate: "200%",
-        description: "Good ROI",
+        description: "Moderate ROI description",
       })),
     },
     // Add ALL missing exports needed by the SecuritySummaryWidget as named exports
@@ -75,7 +76,7 @@ vi.mock("../../services/ciaContentService", () => {
       .fn()
       .mockImplementation((level) => `${level} security level description`),
     getROIEstimate: vi.fn().mockImplementation((level) => ({
-      returnRate: level === "None" ? "0%" : "200%",
+      value: level === "None" ? "0%" : "200%", // Changed returnRate to value
       description: `${level} ROI description`,
       potentialSavings: "$100,000",
       breakEvenPeriod: "12 months",
@@ -88,14 +89,15 @@ vi.mock("../../services/ciaContentService", () => {
     getBusinessImpactDescription: vi
       .fn()
       .mockImplementation(
-        (component, level) => `${level} ${component} business impact description`
+        (component, level) =>
+          `${level} ${component} business impact description`
       ),
     getSecurityIcon: vi.fn().mockImplementation((level: SecurityLevel) => {
       const icons: Record<SecurityLevel, string> = {
-        "None": "🔓",
-        "Low": "🔐",
-        "Moderate": "🔒",
-        "High": "🛡️",
+        None: "🔓",
+        Low: "🔐",
+        Moderate: "🔒",
+        High: "🛡️",
         "Very High": "🔰",
       };
       return icons[level] || "🔒";
@@ -107,6 +109,23 @@ vi.mock("../../services/ciaContentService", () => {
         confidentiality: "🔒",
       };
       return icons[category] || "📊";
+    }),
+    // Add getRiskBadgeVariant to match the actual implementation
+    getRiskBadgeVariant: vi.fn().mockImplementation((riskLevel) => {
+      switch (riskLevel) {
+        case "Critical Risk":
+          return "neutral";
+        case "High Risk":
+          return "warning";
+        case "Medium Risk":
+          return "info";
+        case "Low Risk":
+          return "success";
+        case "Minimal Risk":
+          return "success";
+        default:
+          return "neutral";
+      }
     }),
   };
 });
@@ -198,11 +217,143 @@ describe("SecuritySummaryWidget", () => {
     expect(
       screen.getByRole("region", { name: /security summary/i })
     ).toBeInTheDocument();
-    
+
     // Alternatively, verify component renders by checking for specific elements within it
     expect(screen.getByTestId("security-icon")).toBeInTheDocument();
-    
+
     // Use getAllByText for elements that might appear multiple times and check the first one
     expect(screen.getAllByText(/moderate security/i)[0]).toBeInTheDocument();
+  });
+
+  it("renders with default props", () => {
+    render(<SecuritySummaryWidget {...defaultProps} />);
+    // Use role and accessible name instead of testId to avoid duplicate testId issue
+    expect(
+      screen.getByRole("region", { name: /security summary/i })
+    ).toBeInTheDocument();
+  });
+
+  it("displays security level icon and description", () => {
+    render(<SecuritySummaryWidget {...defaultProps} />);
+    expect(
+      screen.getByTestId(SUMMARY_TEST_IDS.SECURITY_ICON)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(SUMMARY_TEST_IDS.SECURITY_SUMMARY_DESCRIPTION)
+    ).toBeInTheDocument();
+    // Updated to match the actual text from our mock
+    expect(
+      screen.getByTestId(SUMMARY_TEST_IDS.SECURITY_SUMMARY_DESCRIPTION)
+    ).toHaveTextContent("Moderate security level description");
+  });
+
+  it("displays ROI estimate", () => {
+    render(<SecuritySummaryWidget {...defaultProps} />);
+    expect(
+      screen.getByTestId(SUMMARY_TEST_IDS.ROI_ESTIMATE_SUMMARY)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(SUMMARY_TEST_IDS.ROI_ESTIMATE_PAIR)
+    ).toBeInTheDocument();
+    // Updated to match the actual text from our mock
+    expect(screen.getByText("Moderate ROI description")).toBeInTheDocument();
+  });
+
+  // Test section toggles - this improves branch coverage
+  it("toggles technical details section", () => {
+    render(<SecuritySummaryWidget {...defaultProps} />);
+
+    // Technical details should be hidden initially
+    expect(
+      screen.queryByTestId(SUMMARY_TEST_IDS.TECHNICAL_DETAILS_SECTION)
+    ).not.toBeInTheDocument();
+
+    // Click the toggle button
+    fireEvent.click(
+      screen.getByTestId(SUMMARY_TEST_IDS.TECHNICAL_SECTION_TOGGLE)
+    );
+
+    // Technical details should now be visible
+    expect(
+      screen.getByTestId(SUMMARY_TEST_IDS.TECHNICAL_DETAILS_SECTION)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(SUMMARY_TEST_IDS.AVAILABILITY_TECH_DETAILS)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(SUMMARY_TEST_IDS.INTEGRITY_TECH_DETAILS)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(SUMMARY_TEST_IDS.CONFIDENTIALITY_TECH_DETAILS)
+    ).toBeInTheDocument();
+
+    // Click again to hide
+    fireEvent.click(
+      screen.getByTestId(SUMMARY_TEST_IDS.TECHNICAL_SECTION_TOGGLE)
+    );
+    expect(
+      screen.queryByTestId(SUMMARY_TEST_IDS.TECHNICAL_DETAILS_SECTION)
+    ).not.toBeInTheDocument();
+  });
+
+  // Test business impact section toggle
+  it("toggles business impact section", () => {
+    render(<SecuritySummaryWidget {...defaultProps} />);
+
+    // Business impact should be hidden initially
+    expect(
+      screen.queryByTestId(SUMMARY_TEST_IDS.BUSINESS_IMPACT_SECTION)
+    ).not.toBeInTheDocument();
+
+    // Click the toggle button
+    fireEvent.click(
+      screen.getByTestId(SUMMARY_TEST_IDS.BUSINESS_IMPACT_TOGGLE)
+    );
+
+    // Business impact should now be visible
+    expect(
+      screen.getByTestId(SUMMARY_TEST_IDS.BUSINESS_IMPACT_SECTION)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(SUMMARY_TEST_IDS.AVAILABILITY_IMPACT_DETAILS)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(SUMMARY_TEST_IDS.INTEGRITY_IMPACT_DETAILS)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(SUMMARY_TEST_IDS.CONFIDENTIALITY_IMPACT_DETAILS)
+    ).toBeInTheDocument();
+
+    // Click again to hide
+    fireEvent.click(
+      screen.getByTestId(SUMMARY_TEST_IDS.BUSINESS_IMPACT_TOGGLE)
+    );
+    expect(
+      screen.queryByTestId(SUMMARY_TEST_IDS.BUSINESS_IMPACT_SECTION)
+    ).not.toBeInTheDocument();
+  });
+
+  // Test metrics section toggle
+  it("toggles metrics section", () => {
+    render(<SecuritySummaryWidget {...defaultProps} />);
+
+    // Metrics should be hidden initially
+    expect(
+      screen.queryByTestId(SUMMARY_TEST_IDS.METRICS_SECTION)
+    ).not.toBeInTheDocument();
+
+    // Click the toggle button
+    fireEvent.click(screen.getByTestId(SUMMARY_TEST_IDS.METRICS_TOGGLE));
+
+    // Metrics should now be visible
+    expect(
+      screen.getByTestId(SUMMARY_TEST_IDS.METRICS_SECTION)
+    ).toBeInTheDocument();
+
+    // Click again to hide
+    fireEvent.click(screen.getByTestId(SUMMARY_TEST_IDS.METRICS_TOGGLE));
+    expect(
+      screen.queryByTestId(SUMMARY_TEST_IDS.METRICS_SECTION)
+    ).not.toBeInTheDocument();
   });
 });

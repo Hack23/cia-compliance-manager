@@ -6,7 +6,7 @@
 
 # Interface: SecurityLevelWidgetProps
 
-Defined in: [src/types/widgets.tsx:197](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L197)
+Defined in: src/types/widgets.ts:197
 
 Props for the SecurityLevelWidget component
 
@@ -16,7 +16,7 @@ Props for the SecurityLevelWidget component
 
 > **availabilityLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:198](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L198)
+Defined in: src/types/widgets.ts:198
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/widgets.tsx:198](https://github.com/Hack23/cia-compliance
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/widgets.tsx:211](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L211)
+Defined in: src/types/widgets.ts:211
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/widgets.tsx:211](https://github.com/Hack23/cia-compliance
 
 > **confidentialityLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:200](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L200)
+Defined in: src/types/widgets.ts:200
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/widgets.tsx:200](https://github.com/Hack23/cia-compliance
 
 > `optional` **error**: `null` \| `Error`
 
-Defined in: [src/types/widgets.tsx:215](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L215)
+Defined in: src/types/widgets.ts:215
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/types/widgets.tsx:215](https://github.com/Hack23/cia-compliance
 
 > **integrityLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:199](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L199)
+Defined in: src/types/widgets.ts:199
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/types/widgets.tsx:199](https://github.com/Hack23/cia-compliance
 
 > `optional` **loading**: `boolean`
 
-Defined in: [src/types/widgets.tsx:214](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L214)
+Defined in: src/types/widgets.ts:214
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [src/types/widgets.tsx:214](https://github.com/Hack23/cia-compliance
 
 > `optional` **onAvailabilityChange**: (`level`) => `void`
 
-Defined in: [src/types/widgets.tsx:201](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L201)
+Defined in: src/types/widgets.ts:201
 
 #### Parameters
 
@@ -82,7 +82,7 @@ Defined in: [src/types/widgets.tsx:201](https://github.com/Hack23/cia-compliance
 
 > `optional` **onConfidentialityChange**: (`level`) => `void`
 
-Defined in: [src/types/widgets.tsx:203](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L203)
+Defined in: src/types/widgets.ts:203
 
 #### Parameters
 
@@ -100,7 +100,7 @@ Defined in: [src/types/widgets.tsx:203](https://github.com/Hack23/cia-compliance
 
 > `optional` **onIntegrityChange**: (`level`) => `void`
 
-Defined in: [src/types/widgets.tsx:202](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L202)
+Defined in: src/types/widgets.ts:202
 
 #### Parameters
 
@@ -118,7 +118,7 @@ Defined in: [src/types/widgets.tsx:202](https://github.com/Hack23/cia-compliance
 
 > `optional` **setAvailability**: `Dispatch`\<`SetStateAction`\<`string`\>\> \| (`level`) => `void`
 
-Defined in: [src/types/widgets.tsx:204](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L204)
+Defined in: src/types/widgets.ts:204
 
 ***
 
@@ -126,7 +126,7 @@ Defined in: [src/types/widgets.tsx:204](https://github.com/Hack23/cia-compliance
 
 > `optional` **setConfidentiality**: `Dispatch`\<`SetStateAction`\<`string`\>\> \| (`level`) => `void`
 
-Defined in: [src/types/widgets.tsx:208](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L208)
+Defined in: src/types/widgets.ts:208
 
 ***
 
@@ -134,7 +134,7 @@ Defined in: [src/types/widgets.tsx:208](https://github.com/Hack23/cia-compliance
 
 > `optional` **setIntegrity**: `Dispatch`\<`SetStateAction`\<`string`\>\> \| (`level`) => `void`
 
-Defined in: [src/types/widgets.tsx:207](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L207)
+Defined in: src/types/widgets.ts:207
 
 ***
 
@@ -142,7 +142,7 @@ Defined in: [src/types/widgets.tsx:207](https://github.com/Hack23/cia-compliance
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.tsx:212](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L212)
+Defined in: src/types/widgets.ts:212
 
 ***
 
@@ -150,4 +150,4 @@ Defined in: [src/types/widgets.tsx:212](https://github.com/Hack23/cia-compliance
 
 > `optional` **title**: `string`
 
-Defined in: [src/types/widgets.tsx:213](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L213)
+Defined in: src/types/widgets.ts:213

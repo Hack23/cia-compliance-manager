@@ -1,10 +1,10 @@
-import {
-  safeAccess,
-  ensureArray,
-  isValidCIADetail,
-  isObject,
-} from "./typeGuards";
 import { CIA_TEST_IDS } from "../constants/testConstants";
+import {
+  ensureArray,
+  isObject,
+  isValidCIADetail,
+  safeAccess,
+} from "./typeGuards";
 
 describe("TypeGuard Functions", () => {
   describe("safeAccess function", () => {
@@ -145,6 +145,108 @@ describe("TypeGuard Functions", () => {
       expect(CIA_TEST_IDS.AVAILABILITY).toBe("availability");
       expect(CIA_TEST_IDS.INTEGRITY).toBe("integrity");
       expect(CIA_TEST_IDS.CONFIDENTIALITY).toBe("confidentiality");
+    });
+  });
+});
+
+// Add the following tests to improve function coverage:
+
+import { describe, expect, it } from "vitest";
+import {
+  hasWidgetProps,
+  isROIMetrics,
+  isSecurityResource,
+  isTechnicalImplementationDetails,
+} from "./typeGuards";
+
+describe("Additional TypeGuards Tests", () => {
+  describe("isROIMetrics", () => {
+    it("should validate valid ROI metrics objects", () => {
+      const validROI = {
+        returnRate: "200%",
+        description: "Good ROI",
+        potentialSavings: "$100,000",
+        breakEvenPeriod: "12 months",
+      };
+      expect(isROIMetrics(validROI)).toBe(true);
+    });
+
+    it("should reject invalid ROI metrics objects", () => {
+      const invalidROI1 = {};
+      const invalidROI2 = { returnRate: 200, description: "test" }; // returnRate should be string
+      const invalidROI3 = null;
+
+      expect(isROIMetrics(invalidROI1)).toBe(false);
+      expect(isROIMetrics(invalidROI2)).toBe(false);
+      expect(isROIMetrics(invalidROI3)).toBe(false);
+    });
+  });
+
+  describe("isTechnicalImplementationDetails", () => {
+    it("should validate valid technical implementation details", () => {
+      const validDetails = {
+        description: "Implementation details",
+        implementationSteps: ["Step 1", "Step 2"],
+        effort: {
+          development: "Medium",
+          maintenance: "Low",
+          expertise: "Advanced",
+        },
+      };
+      expect(isTechnicalImplementationDetails(validDetails)).toBe(true);
+    });
+
+    it("should reject invalid technical implementation details", () => {
+      const invalidDetails1 = {};
+      const invalidDetails2 = {
+        description: "test",
+        implementationSteps: "not an array",
+      };
+
+      expect(isTechnicalImplementationDetails(invalidDetails1)).toBe(false);
+      expect(isTechnicalImplementationDetails(invalidDetails2)).toBe(false);
+    });
+  });
+
+  describe("isSecurityResource", () => {
+    it("should validate valid security resource objects", () => {
+      const validResource = {
+        title: "Resource",
+        description: "Description",
+        url: "https://example.com",
+        category: "Category",
+        tags: ["tag1", "tag2"],
+        relevanceScore: 85,
+        type: "Documentation",
+      };
+      expect(isSecurityResource(validResource)).toBe(true);
+    });
+
+    it("should reject invalid security resource objects", () => {
+      const invalidResource1 = {};
+      const invalidResource2 = { title: "Test", description: "Test" }; // Missing required fields
+
+      expect(isSecurityResource(invalidResource1)).toBe(false);
+      expect(isSecurityResource(invalidResource2)).toBe(false);
+    });
+  });
+
+  describe("hasWidgetProps", () => {
+    it("should validate valid widget props", () => {
+      const validProps = {
+        title: "Widget Title",
+        description: "Widget description",
+        icon: "🔍",
+      };
+      expect(hasWidgetProps(validProps)).toBe(true);
+    });
+
+    it("should reject invalid widget props", () => {
+      const invalidProps1 = {};
+      const invalidProps2 = { title: 42 }; // title should be string
+
+      expect(hasWidgetProps(invalidProps1)).toBe(false);
+      expect(hasWidgetProps(invalidProps2)).toBe(false);
     });
   });
 });

@@ -8,7 +8,7 @@
 
 > **getComponentImplementationDetails**(`component`, `level`): `ComponentTechnicalDetails`
 
-Defined in: [src/services/ciaContentService.ts:1395](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1395)
+Defined in: [src/services/ciaContentService.ts:1390](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1390)
 
 Get technical implementation details for each component and level
 

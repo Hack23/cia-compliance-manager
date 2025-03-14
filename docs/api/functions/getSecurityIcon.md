@@ -8,7 +8,7 @@
 
 > **getSecurityIcon**(`level`): `string`
 
-Defined in: [src/services/ciaContentService.ts:1400](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1400)
+Defined in: [src/services/ciaContentService.ts:1395](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1395)
 
 Get security icon for a security level
 

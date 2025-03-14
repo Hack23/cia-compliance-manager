@@ -8,7 +8,7 @@
 
 > **getSecurityLevelDescription**(`level`): `string`
 
-Defined in: [src/services/ciaContentService.ts:1382](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1382)
+Defined in: [src/services/ciaContentService.ts:1377](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1377)
 
 Get security level description with meaningful context
 

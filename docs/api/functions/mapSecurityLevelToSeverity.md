@@ -8,7 +8,7 @@
 
 > **mapSecurityLevelToSeverity**(`level`): [`SecuritySeverity`](../type-aliases/SecuritySeverity.md)
 
-Defined in: [src/utils/widgetHelpers.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L31)
+Defined in: [src/utils/widgetHelpers.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L24)
 
 Maps a security level string to a standardized severity type for UI consistency
 

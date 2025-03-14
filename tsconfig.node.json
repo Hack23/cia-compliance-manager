@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    // Update module to ES2022
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strict": true,
+    // Update target to ES2022
+    "target": "ES2022"
+  },
+  "include": [
+    "vite.config.ts",
+    "cypress.config.ts",
+    "cypress/support/plugins/**/*.ts",
+    "cypress/tasks/**/*.ts"
+  ]
+}

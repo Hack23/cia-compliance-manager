@@ -8,7 +8,7 @@
 
 > **getRiskBadgeClass**(`risk`): `string`
 
-Defined in: [src/utils/widgetHelpers.tsx:70](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L70)
+Defined in: [src/utils/widgetHelpers.tsx:63](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L63)
 
 Gets the appropriate badge class for a security risk level
 

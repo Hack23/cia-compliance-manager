@@ -38,7 +38,7 @@ Defined in: [src/services/ciaContentService.ts:57](https://github.com/Hack23/cia
 
 ### roiEstimates
 
-> **roiEstimates**: [`ROIEstimatesMap`](../type-aliases/ROIEstimatesMap.md)
+> **roiEstimates**: [`ROIEstimatesMap`](ROIEstimatesMap.md)
 
 Defined in: [src/services/ciaContentService.ts:59](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L59)
 

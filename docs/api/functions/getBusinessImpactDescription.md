@@ -8,7 +8,7 @@
 
 > **getBusinessImpactDescription**(`component`, `level`): `string`
 
-Defined in: [src/services/ciaContentService.ts:1397](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1397)
+Defined in: [src/services/ciaContentService.ts:1392](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1392)
 
 Get business impact description for a component and level
 

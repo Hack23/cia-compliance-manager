@@ -6,7 +6,7 @@
 
 # Interface: BusinessConsiderations
 
-Defined in: [src/types/businessImpact.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/businessImpact.ts#L16)
+Defined in: [src/types/businessImpact.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/businessImpact.ts#L11)
 
 ## Indexable
 

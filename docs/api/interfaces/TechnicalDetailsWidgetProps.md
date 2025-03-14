@@ -6,7 +6,7 @@
 
 # Interface: TechnicalDetailsWidgetProps
 
-Defined in: [src/types/widgets.tsx:170](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L170)
+Defined in: src/types/widgets.ts:170
 
 Props for the TechnicalDetailsWidget component
 
@@ -20,7 +20,7 @@ Props for the TechnicalDetailsWidget component
 
 > **availabilityLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L11)
+Defined in: src/types/widgets.ts:11
 
 #### Inherited from
 
@@ -32,7 +32,7 @@ Defined in: [src/types/widgets.tsx:11](https://github.com/Hack23/cia-compliance-
 
 > `optional` **availabilityOptions**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
 
-Defined in: [src/types/widgets.tsx:172](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L172)
+Defined in: src/types/widgets.ts:172
 
 Availability options for specific technical details
 
@@ -42,7 +42,7 @@ Availability options for specific technical details
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/widgets.tsx:178](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L178)
+Defined in: src/types/widgets.ts:178
 
 Optional CSS class name
 
@@ -56,7 +56,7 @@ Optional CSS class name
 
 > **confidentialityLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L13)
+Defined in: src/types/widgets.ts:13
 
 #### Inherited from
 
@@ -68,7 +68,7 @@ Defined in: [src/types/widgets.tsx:13](https://github.com/Hack23/cia-compliance-
 
 > `optional` **confidentialityOptions**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
 
-Defined in: [src/types/widgets.tsx:176](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L176)
+Defined in: src/types/widgets.ts:176
 
 Confidentiality options for specific technical details
 
@@ -78,7 +78,7 @@ Confidentiality options for specific technical details
 
 > **integrityLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L12)
+Defined in: src/types/widgets.ts:12
 
 #### Inherited from
 
@@ -90,7 +90,7 @@ Defined in: [src/types/widgets.tsx:12](https://github.com/Hack23/cia-compliance-
 
 > `optional` **integrityOptions**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
 
-Defined in: [src/types/widgets.tsx:174](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L174)
+Defined in: src/types/widgets.ts:174
 
 Integrity options for specific technical details
 
@@ -100,7 +100,7 @@ Integrity options for specific technical details
 
 > `optional` **securityLevel**: `string`
 
-Defined in: [src/types/widgets.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L15)
+Defined in: src/types/widgets.ts:15
 
 #### Inherited from
 
@@ -112,7 +112,7 @@ Defined in: [src/types/widgets.tsx:15](https://github.com/Hack23/cia-compliance-
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L10)
+Defined in: src/types/widgets.ts:10
 
 Test ID for component selection in tests
 
