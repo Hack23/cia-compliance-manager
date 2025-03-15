@@ -53,9 +53,9 @@ jobs:
       - name: Prepare coverage directory
         run: mkdir -p docs/coverage docs/dependencies
 
-      # Copy coverage report to docs directory
-      - name: Copy coverage report to docs
-        run: cp -r coverage/lcov-report/* docs/coverage/
+      # Run tests with coverage
+      - name: Generate Coverage
+        run: npm run coverage
 
       - name: Generate API documentation
         run: npm run docs || echo "API docs generation failed - continuing"
@@ -69,12 +69,10 @@ jobs:
       - name: Generate architecture diagrams
         run: npm run docs:architecture || echo "Architecture diagram generation failed - continuing"
 
-      - name: Generate documentation coverage summary
-        run: npm run docs:coverage-summary
 
       - name: Create combined index page
         run: |
-          cat > docs/index.html << EOF
+          cat > docs/documentation.html << EOF
           <!DOCTYPE html>
           <html lang="en">
           <head>
@@ -155,43 +153,43 @@ jobs:
               <div class="card">
                 <h3>API Documentation</h3>
                 <p>Detailed API reference for all components, types, and functions used in the application.</p>
-                <a href="./api">View API Docs</a>
+                <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/api/globals.md">View API Docs</a>
               </div>
               
               <div class="card">
                 <h3>Diagrams</h3>
                 <p>UML and Mermaid diagrams showing the relationships between core types and components.</p>
-                <a href="./diagrams">View Diagrams</a>
+                <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/diagrams/modules.md">View Diagrams</a>
               </div>
               
               <div class="card">
                 <h3>Architecture</h3>
                 <p>System architecture diagrams showing module dependencies and component relationships.</p>
-                <a href="./architecture">View Architecture</a>
+                <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md">View Architecture</a>
               </div>
               
               <div class="card">
                 <h3>Code Coverage</h3>
                 <p>Test coverage reports showing how much of the codebase is covered by tests.</p>
-                <a href="./coverage">View Coverage Report</a>
+                <a href="https://hack23.github.io/cia-compliance-manager/coverage/index.html">View Coverage Report</a>
               </div>
               
               <div class="card">
                 <h3>Dependencies</h3>
                 <p>Visual representation of module dependencies throughout the codebase.</p>
-                <a href="./dependencies/module-dependencies.svg">View Dependencies</a>
+                <a href="https://hack23.github.io/cia-compliance-manager/dependencies/module-dependencies.svg">View Dependencies</a>
               </div>
               
               <div class="card">
                 <h3>Markdown Docs</h3>
                 <p>API documentation in Markdown format for easy integration with other tools.</p>
-                <a href="./markdown">View Markdown</a>
+                <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/markdown/modules.md">View Markdown</a>
               </div>
               
               <div class="card">
                 <h3>Project Architecture</h3>
                 <p>C4 model diagrams and other architectural documentation.</p>
-                <a href="./architecture/ARCHITECTURE.md">View Architecture</a>
+                <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md">View Architecture</a>
               </div>
             </div>
             
@@ -222,5 +220,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@6c2d9db40f9296374acc17b90404b6e8864128c8 # v4.7.3
         with:
           folder: docs
-          branch: gh-pages
-          clean: true
+          branch: main
+          clean: false
