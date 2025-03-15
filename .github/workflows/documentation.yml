@@ -53,22 +53,9 @@ jobs:
       - name: Prepare coverage directory
         run: mkdir -p docs/coverage docs/dependencies
 
-      # Run tests with coverage
+      # Generate documentation bundle
       - name: Generate Coverage
-        run: npm run coverage
-
-      - name: Generate API documentation
-        run: npm run docs || echo "API docs generation failed - continuing"
-
-      - name: Generate UML diagrams
-        run: npm run docs:uml || echo "UML diagram generation failed - continuing"
-
-      - name: Generate dependency diagrams
-        run: npm run docs:dependencies || echo "Dependency diagram generation failed - continuing"
-
-      - name: Generate architecture diagrams
-        run: npm run docs:architecture || echo "Architecture diagram generation failed - continuing"
-
+        run: npm run docs:bundle
 
       - name: Create combined index page
         run: |
@@ -156,15 +143,10 @@ jobs:
                 <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/api/globals.md">View API Docs</a>
               </div>
               
-              <div class="card">
-                <h3>Diagrams</h3>
-                <p>UML and Mermaid diagrams showing the relationships between core types and components.</p>
-                <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/diagrams/modules.md">View Diagrams</a>
-              </div>
               
               <div class="card">
-                <h3>Architecture</h3>
-                <p>System architecture diagrams showing module dependencies and component relationships.</p>
+                <h3>Project Architecture</h3>
+                <p>C4 model diagrams and other architectural documentation.</p>
                 <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md">View Architecture</a>
               </div>
               
@@ -175,22 +157,10 @@ jobs:
               </div>
               
               <div class="card">
-                <h3>Dependencies</h3>
-                <p>Visual representation of module dependencies throughout the codebase.</p>
-                <a href="https://hack23.github.io/cia-compliance-manager/dependencies/module-dependencies.svg">View Dependencies</a>
-              </div>
-              
-              <div class="card">
-                <h3>Markdown Docs</h3>
-                <p>API documentation in Markdown format for easy integration with other tools.</p>
-                <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/markdown/modules.md">View Markdown</a>
-              </div>
-              
-              <div class="card">
-                <h3>Project Architecture</h3>
-                <p>C4 model diagrams and other architectural documentation.</p>
-                <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md">View Architecture</a>
-              </div>
+                <h3>Test</h3>
+                <p>Visual representation of unit test and results of the codebase.</p>
+                <a href="https://hack23.github.io/cia-compliance-manager/test-results/">Test Results</a>
+              </div>                            
             </div>
             
             <h2>Documentation Overview</h2>
@@ -220,5 +190,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@6c2d9db40f9296374acc17b90404b6e8864128c8 # v4.7.3
         with:
           folder: docs
+          target-folder: docs
           branch: main
           clean: false
