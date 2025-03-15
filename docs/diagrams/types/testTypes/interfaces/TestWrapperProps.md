@@ -6,7 +6,7 @@
 
 # Interface: TestWrapperProps
 
-Defined in: [src/types/testTypes.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/types/testTypes.tsx#L24)
+Defined in: [src/types/testTypes.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/types/testTypes.tsx#L24)
 
 ## Properties
 
@@ -14,4 +14,4 @@ Defined in: [src/types/testTypes.tsx:24](https://github.com/Hack23/cia-complianc
 
 > **children**: `ReactNode`
 
-Defined in: [src/types/testTypes.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/types/testTypes.tsx#L25)
+Defined in: [src/types/testTypes.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/types/testTypes.tsx#L25)

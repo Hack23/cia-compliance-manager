@@ -8,7 +8,7 @@
 
 > **getDefaultMaintenanceEffort**(`level`): `string`
 
-Defined in: [src/utils/securityDefaults.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/utils/securityDefaults.ts#L20)
+Defined in: [src/utils/securityDefaults.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/utils/securityDefaults.ts#L20)
 
 Gets default maintenance effort based on security level
 

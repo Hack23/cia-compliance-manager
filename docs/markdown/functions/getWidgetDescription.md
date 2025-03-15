@@ -8,7 +8,7 @@
 
 > **getWidgetDescription**(`type`): `string`
 
-Defined in: [src/utils/widgetHelpers.tsx:72](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/utils/widgetHelpers.tsx#L72)
+Defined in: [src/utils/widgetHelpers.tsx:72](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/utils/widgetHelpers.tsx#L72)
 
 Get the description for a widget type
 

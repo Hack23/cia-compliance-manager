@@ -8,4 +8,4 @@
 
 > `const` **confidentialityOptions**: `Partial`\<`Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`EnhancedCIADetails`](../interfaces/EnhancedCIADetails.md)\>\> = `_confidentialityOptions`
 
-Defined in: [src/hooks/useCIAOptions.ts:700](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/hooks/useCIAOptions.ts#L700)
+Defined in: [src/hooks/useCIAOptions.ts:700](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/hooks/useCIAOptions.ts#L700)

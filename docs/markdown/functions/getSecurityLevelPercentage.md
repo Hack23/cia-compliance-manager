@@ -8,7 +8,7 @@
 
 > **getSecurityLevelPercentage**(`level`): `string`
 
-Defined in: [src/utils/securityLevelUtils.ts:57](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/utils/securityLevelUtils.ts#L57)
+Defined in: [src/utils/securityLevelUtils.ts:57](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/utils/securityLevelUtils.ts#L57)
 
 Provides a numerical representation of security levels for UI presentation
 

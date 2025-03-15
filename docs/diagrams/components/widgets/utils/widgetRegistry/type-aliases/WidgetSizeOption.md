@@ -8,4 +8,4 @@
 
 > **WidgetSizeOption**: `"small"` \| `"medium"` \| `"large"` \| `"full"`
 
-Defined in: [src/components/widgets/utils/widgetRegistry.tsx:55](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/components/widgets/utils/widgetRegistry.tsx#L55)
+Defined in: [src/components/widgets/utils/widgetRegistry.tsx:55](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/widgets/utils/widgetRegistry.tsx#L55)

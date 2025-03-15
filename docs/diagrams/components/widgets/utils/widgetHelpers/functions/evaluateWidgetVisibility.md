@@ -8,7 +8,7 @@
 
 > **evaluateWidgetVisibility**(`widget`, `securityLevel`): `boolean`
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:145](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/components/widgets/utils/widgetHelpers.tsx#L145)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:145](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/widgets/utils/widgetHelpers.tsx#L145)
 
 Check if a widget should be visible based on security level
 

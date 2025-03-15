@@ -8,7 +8,7 @@
 
 > **getCategoryIcon**(`category`): `string`
 
-Defined in: [src/services/ciaContentService.ts:1391](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/services/ciaContentService.ts#L1391)
+Defined in: [src/services/ciaContentService.ts:1391](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/services/ciaContentService.ts#L1391)
 
 Get icon for business impact category
 
