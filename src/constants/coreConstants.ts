@@ -1,4 +1,4 @@
-import { SecurityLevel } from "../types/cia";
+import { SecurityLevel } from "../types/cia"; // Remove unused CIAOptions import
 
 // Widget Icons - For consistent icon use across the application
 export const WIDGET_ICONS = {

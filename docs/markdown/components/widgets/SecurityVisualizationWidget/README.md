@@ -1,0 +1,15 @@
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
+
+***
+
+[CIA Compliance Manager API Documentation](../../../modules.md) / components/widgets/SecurityVisualizationWidget
+
+# components/widgets/SecurityVisualizationWidget
+
+## Interfaces
+
+- [SecurityVisualizationWidgetProps](interfaces/SecurityVisualizationWidgetProps.md)
+
+## Functions
+
+- [default](functions/default.md)

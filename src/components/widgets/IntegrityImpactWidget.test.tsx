@@ -1,10 +1,9 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
-import IntegrityImpactWidget from "./IntegrityImpactWidget";
+import { describe, expect, it, vi } from "vitest";
 import { INTEGRITY_IMPACT_TEST_IDS } from "../../constants/testIds";
-import { SecurityLevel } from "../../types/cia";
 import ciaContentService from "../../services/ciaContentService";
+import { SecurityLevel } from "../../types/cia";
+import IntegrityImpactWidget from "./IntegrityImpactWidget";
 
 // Mock ciaContentService
 vi.mock("../../services/ciaContentService", () => ({
@@ -62,14 +61,15 @@ describe("IntegrityImpactWidget", () => {
 
   it("renders without crashing", () => {
     render(<IntegrityImpactWidget {...defaultProps} />);
-    expect(screen.getByText("High Integrity")).toBeInTheDocument();
+
+    // Instead of looking for "High Integrity", check for badge with "High" text
+    expect(screen.getByTestId("status-badge")).toHaveTextContent("High");
+    expect(screen.getByText("Integrity Profile")).toBeInTheDocument();
   });
 
   it("displays integrity description from ciaContentService", () => {
     render(<IntegrityImpactWidget {...defaultProps} />);
-    expect(
-      screen.getByTestId(INTEGRITY_IMPACT_TEST_IDS.INTEGRITY_IMPACT_DESCRIPTION)
-    ).toHaveTextContent("High integrity description");
+    expect(screen.getByText("High integrity description")).toBeInTheDocument();
   });
 
   it("displays business impact information", () => {
@@ -94,13 +94,13 @@ describe("IntegrityImpactWidget", () => {
     render(<IntegrityImpactWidget {...defaultProps} />);
 
     // Check if the validation method label exists at all
-    const validationLabelElements = screen.queryAllByText(/Validation Method/i);
+    const validationLabelElements = screen.queryAllByText(/Validation/i);
 
     if (validationLabelElements.length > 0) {
-      // If the label exists, check for the value
+      // If the label exists, check for the value using the correct testId
       expect(
         screen.getByTestId(
-          `${INTEGRITY_IMPACT_TEST_IDS.INTEGRITY_IMPACT_PREFIX}-validation-method`
+          `${INTEGRITY_IMPACT_TEST_IDS.INTEGRITY_IMPACT_PREFIX}-validation-technique`
         )
       ).toHaveTextContent(/High validation method/i);
     } else {

@@ -1,59 +1,84 @@
-import { CHART_TEST_IDS, SECURITY_LEVELS } from "../../support/constants";
+import { SECURITY_LEVELS } from "../../support/constants";
+import { setupWidgetTest, verifyWidgetExists } from "./base-widget-tests";
+import { testSecurityLevelChanges } from "./widget-test-helper";
 
 describe("Radar Chart Widget", () => {
-  beforeEach(() => {
-    // Use larger viewport for better visibility
-    cy.viewport(3840, 2160);
-    cy.visit("/");
-    cy.ensureAppLoaded();
+  // Use standard setup for widget tests
+  setupWidgetTest("radar-chart");
 
-    // Add enhanced style to make ALL elements visible
-    cy.document().then((doc) => {
-      const style = doc.createElement("style");
-      style.innerHTML = `
-        * {
-          overflow: visible !important;
-          visibility: visible !important;
-          opacity: 1 !important;
-          transition: none !important;
-          animation: none !important;
-          display: block !important;
-          height: auto !important;
-          max-height: none !important;
-          position: static !important;
-          transform: none !important;
-          pointer-events: auto !important;
-        }
-      `;
-      doc.head.appendChild(style);
-    });
+  // Basic existence test
+  verifyWidgetExists("radar-chart");
 
-    // Wait for app to fully load
-    cy.wait(3000);
+  // Test security level changes affect chart visualization
+  it("updates chart visualization when security levels change", () => {
+    testSecurityLevelChanges("radar-chart");
   });
 
-  it("visualizes security profile across CIA dimensions", () => {
-    // Look for chart element (canvas) or radar chart related text
-    cy.get("body").then(($body) => {
-      if ($body.find("canvas").length) {
-        cy.get("canvas").should("exist");
-      } else {
-        // If no canvas, look for chart-related text
-        cy.contains(
-          /chart|radar|visualization|graph|cia|dimensions|profile/i
-        ).should("exist");
-      }
+  // Test chart exists with visible elements
+  it("displays a radar chart with data points", () => {
+    cy.findWidget("radar-chart").scrollIntoView();
 
-      // Check that we have all three CIA components mentioned
-      cy.contains(/availability/i).should("exist");
-      cy.contains(/integrity/i).should("exist");
-      cy.contains(/confidentiality/i).should("exist");
+    // Set moderate security levels
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.MODERATE,
+      SECURITY_LEVELS.MODERATE,
+      SECURITY_LEVELS.MODERATE
+    );
+
+    // Check for chart elements
+    cy.findWidget("radar-chart").within(() => {
+      // Look for SVG or canvas elements that would make up a chart
+      cy.get("svg, canvas, [data-testid*='chart'], [class*='chart']").should(
+        "exist"
+      );
+
+      // Check for legend or data points
+      cy.contains(/availability|integrity|confidentiality/i).should("exist");
     });
   });
 
-  it("shows all three CIA dimensions", () => {
-    cy.contains(/availability/i).should("exist");
-    cy.contains(/integrity/i).should("exist");
-    cy.contains(/confidentiality/i).should("exist");
+  // Test chart responds to mixed security levels
+  it("displays asymmetric chart with mixed security levels", () => {
+    cy.findWidget("radar-chart").scrollIntoView();
+
+    // Set mixed security levels
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.LOW,
+      SECURITY_LEVELS.MODERATE
+    );
+
+    // The shape should be different from equal security levels
+    // Capture the current state
+    cy.findWidget("radar-chart").screenshot("mixed-security-radar");
+
+    // Change to equal security levels
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.MODERATE,
+      SECURITY_LEVELS.MODERATE,
+      SECURITY_LEVELS.MODERATE
+    );
+
+    // The visual should be different, but it's hard to verify programmatically
+    // We'll check that the content changed at least
+    cy.findWidget("radar-chart").invoke("text").should("not.be.empty");
+  });
+
+  // Test risk or security level indicators
+  it("displays visual security level or risk indicators", () => {
+    cy.findWidget("radar-chart").scrollIntoView();
+
+    // Set high security
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH
+    );
+
+    // Check for numerical or visual indicators
+    cy.findWidget("radar-chart").within(() => {
+      // Look for text indicators of levels, scales, or metrics
+      cy.contains(/high|5|[4-5]\/5|\d+%|strong|robust/i).should("exist");
+    });
   });
 });

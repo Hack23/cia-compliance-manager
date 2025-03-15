@@ -1,7 +1,7 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import widgetRegistry, { WidgetDefinition } from "./widgetRegistry";
+import React from "react";
 import { WidgetBaseProps } from "../types/widgets";
+import widgetRegistry from "./widgetRegistry";
 
 // Create a mock component that extends WidgetBaseProps
 interface MockWidgetProps extends WidgetBaseProps {

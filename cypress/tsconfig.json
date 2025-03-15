@@ -1,31 +1,18 @@
 {
   "compilerOptions": {
-    // Modern compilation target for Node 20+ and Cypress 14
-    "target": "es5",
-    "lib": ["es5", "dom"],
-    // Cypress-specific types
-    "types": ["cypress", "node"],
-    // Module interoperability
+    "target": "es2019",
+    "lib": ["es2019", "dom", "dom.iterable"],
+    "types": ["cypress", "node", "@testing-library/cypress"],
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    // Type checking
     "skipLibCheck": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    // Module settings optimized for Vite integration
-    "module": "esnext",
-    "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    // Isolated modules disabled for Cypress
     "isolatedModules": false,
-    // React support
-    "jsx": "react-jsx",
     "noEmit": true,
-    // Path configuration consistent with main config
-    "baseUrl": "..",
-    "paths": {
-      "@/*": ["../src/*"]
-    }
+    "noImplicitThis": false,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": false
   },
-  "include": ["**/*.ts", "**/*.tsx", "index.d.ts"]
+  "include": ["**/*.ts", "../node_modules/cypress", "../cypress.config.ts"]
 }

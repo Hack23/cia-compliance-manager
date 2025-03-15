@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **APP\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:318](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/constants/testIds.ts#L318)
+Defined in: [src/constants/testIds.ts:334](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/constants/testIds.ts#L334)
 
 ## Type declaration
 
@@ -39,3 +39,11 @@ Defined in: [src/constants/testIds.ts:318](https://github.com/Hack23/cia-complia
 ### THEME\_TOGGLE
 
 > **THEME\_TOGGLE**: `string` = `"theme-toggle"`
+
+### THEME\_TOGGLE\_DARK
+
+> **THEME\_TOGGLE\_DARK**: `string` = `"theme-toggle-dark"`
+
+### THEME\_TOGGLE\_LIGHT
+
+> **THEME\_TOGGLE\_LIGHT**: `string` = `"theme-toggle-light"`

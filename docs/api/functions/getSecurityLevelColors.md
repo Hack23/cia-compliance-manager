@@ -8,9 +8,9 @@
 
 > **getSecurityLevelColors**(`level`): `object`
 
-Defined in: [src/utils/widgetHelpers.tsx:73](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L73)
+Defined in: [src/utils/widgetHelpers.tsx:193](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L193)
 
-Gets color hex values for a security level directly from constants
+Get CSS classes for a security level
 
 ## Parameters
 
@@ -18,13 +18,13 @@ Gets color hex values for a security level directly from constants
 
 [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-The security level string
+Security level
 
 ## Returns
 
 `object`
 
-Object with background and text colors
+Object with bg and text class names
 
 ### bg
 

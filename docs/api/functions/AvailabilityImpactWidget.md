@@ -14,7 +14,7 @@ Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:22](https://git
 
 ### props
 
-`AvailabilityImpactWidgetProps`
+[`AvailabilityImpactWidgetProps`](../interfaces/AvailabilityImpactWidgetProps.md)
 
 ## Returns
 

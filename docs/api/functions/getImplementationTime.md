@@ -8,7 +8,7 @@
 
 > **getImplementationTime**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `string`
 
-Defined in: [src/services/ciaContentService.ts:1321](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1321)
+Defined in: [src/services/ciaContentService.ts:1398](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1398)
 
 Get implementation time estimate based on security levels
 

@@ -1,7 +1,6 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { COMMON_COMPONENT_TEST_IDS } from "../constants/testIds";
 import Selection from "./Selection";
-import { CIA_TEST_IDS, COMMON_COMPONENT_TEST_IDS } from "../constants/testIds";
 
 describe("Selection Component", () => {
   const defaultProps = {

@@ -8,6 +8,6 @@
 
 > **SecurityLevel**: `"None"` \| `"Low"` \| `"Moderate"` \| `"High"` \| `"Very High"`
 
-Defined in: [src/types/cia.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L8)
+Defined in: [src/types/cia.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L8)
 
-Represents security levels in the CIA triad model
+Security level definitions - None, Low, Moderate, High, Very High

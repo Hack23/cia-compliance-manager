@@ -140,11 +140,21 @@ const RadarChart: React.FC<RadarChartProps> = ({
                   return levels[value as number] || "";
                 },
               },
+              beginAtZero: true,
             },
           },
           plugins: {
             legend: {
               display: false,
+              labels: {
+                color: isDarkMode ? "#00cc66" : "#006633",
+                font: {
+                  family: "'Share Tech Mono', monospace",
+                  size: 12,
+                },
+                boxWidth: 15,
+                boxHeight: 2,
+              },
             },
             tooltip: {
               callbacks: {

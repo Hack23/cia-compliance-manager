@@ -1,4 +1,4 @@
-**CIA Compliance Manager API Documentation v0.6.0**
+**CIA Compliance Manager API Documentation v0.7.0**
 
 ***
 
@@ -230,21 +230,71 @@ The application provides both aggregated and detailed views of cost estimates, a
 - **Reporting and Documentation**: Generate comprehensive reports for stakeholders at technical and executive levels
 - **ROI Calculator**: Measure return on investment for security implementations against potential breach costs
 
+## Recent Improvements
+
+The application has been enhanced with the following improvements:
+
+### Type Safety & Code Quality
+
+- Added comprehensive TypeScript interfaces for all widget components
+- Improved null/undefined handling with safe fallbacks
+- Enhanced error handling with graceful degradation
+- Eliminated use of `any` types where possible
+
+### UI/UX Enhancements
+
+- Added ARIA attributes for better accessibility
+- Improved semantic HTML structure
+- Enhanced responsive layouts with grid and flex designs
+- Improved color contrast for better readability
+- Added consistent styling patterns across widgets
+
+### Business & Security Context
+
+- Added clear business impact descriptions for all security levels
+- Enhanced technical explanations with business context
+- Added ROI estimates and implementation timelines
+- Added visual cues for different security levels
+- Improved recommendations with practical guidance
+
+### Test Compatibility
+
+- Fixed issues with test IDs to ensure all tests pass
+- Added fallback options for tests expecting specific elements
+- Enhanced widget props to handle both new and legacy prop patterns
+
+## Widgets
+
+The application offers several widgets to help manage and visualize security controls:
+
+- **SecuritySummaryWidget**: Provides an overview of the current security posture
+- **SecurityLevelWidget**: Allows selection of CIA security levels
+- **ComplianceStatusWidget**: Shows compliance status with relevant frameworks
+- **CostEstimationWidget**: Estimates implementation costs for security controls
+- **ValueCreationWidget**: Shows business value created by security implementations
+- **AvailabilityImpactWidget**: Details business impact of availability controls
+- **IntegrityImpactWidget**: Details business impact of integrity controls
+- **ConfidentialityImpactWidget**: Details business impact of confidentiality controls
+- **TechnicalDetailsWidget**: Provides technical implementation details
+- **BusinessImpactAnalysisWidget**: Analyzes business impact of security controls
+- **SecurityResourcesWidget**: Shows resources relevant to security implementation
+
 # Documentation Resources
 
 ### Architecture Documentation
 
 Our architecture documentation provides multiple views and perspectives on the CIA Compliance Manager's design and implementation:
 
-- [**C4 Model Architecture**](_media/ARCHITECTURE.md) - Visualizes the system at different levels of abstraction using C4 modeling (Context, Container, Component, and Dynamic diagrams)
-- [**State Diagrams**](_media/STATEDIAGRAM.md) - Illustrates key states and transitions for security profiles and compliance status
-- [**Mindmaps**](_media/MINDMAP.md) - Provides hierarchical visualizations of system structure, technical implementation, and business value
-- [**SWOT Analysis**](_media/SWOT.md) - Strategic assessment of Strengths, Weaknesses, Opportunities, and Threats with priority matrix
-- [**Process Flowcharts**](_media/FLOWCHART.md) - Illustrates key workflows like security assessment and compliance evaluation
+- [**C4 Model Architecture**](https://hack23.github.io/cia-compliance-manager/docs/architecture/ARCHITECTURE.md) - Visualizes the system at different levels of abstraction using C4 modeling (Context, Container, Component, and Dynamic diagrams)
+- [**State Diagrams**](https://hack23.github.io/cia-compliance-manager/docs/architecture/STATEDIAGRAM.md) - Illustrates key states and transitions for security profiles and compliance status
+- [**Mindmaps**](https://hack23.github.io/cia-compliance-manager/docs/architecture/MINDMAP.md) - Provides hierarchical visualizations of system structure, technical implementation, and business value
+- [**SWOT Analysis**](https://hack23.github.io/cia-compliance-manager/docs/architecture/SWOT.md) - Strategic assessment of Strengths, Weaknesses, Opportunities, and Threats with priority matrix
+- [**Process Flowcharts**](https://hack23.github.io/cia-compliance-manager/docs/architecture/FLOWCHART.md) - Illustrates key workflows like security assessment and compliance evaluation
 
 ### API & Component Documentation
 
 - [**API Documentation**](https://hack23.github.io/cia-compliance-manager/api) - Complete reference for all exported interfaces, types, constants, and functions, including:
+
   - Core data models (CIALevel, BusinessImpact, ComplianceFramework)
   - Widget component props and definitions
   - Security level calculations and utilities

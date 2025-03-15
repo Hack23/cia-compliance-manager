@@ -6,9 +6,9 @@
 
 # Function: getSecurityLevelFromValue()
 
-> **getSecurityLevelFromValue**(`value`): `string`
+> **getSecurityLevelFromValue**(`value`): [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/cia.tsx:268](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L268)
+Defined in: [src/types/cia.ts:169](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L169)
 
 Get a security level from a numeric value
 
@@ -18,6 +18,10 @@ Get a security level from a numeric value
 
 `number`
 
+The numeric value (0-4)
+
 ## Returns
 
-`string`
+[`SecurityLevel`](../type-aliases/SecurityLevel.md)
+
+The corresponding security level

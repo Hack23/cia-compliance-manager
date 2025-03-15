@@ -1,11 +1,4 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { vi, describe, it, expect } from "vitest";
-import SecurityLevelSelector from "./SecurityLevelSelector";
-import { CIA_TEST_IDS } from "../constants/testIds";
-import { SecurityLevel } from "../types/cia";
-
-// Mock the useCIAOptions hook
+// Define mocks at the top of the file, before imports
 vi.mock("../hooks/useCIAOptions", () => {
   // Create mock options data
   const mockOptions = {
@@ -183,108 +176,105 @@ vi.mock("../hooks/useCIAOptions", () => {
   };
 });
 
+// Import necessary modules
+import { fireEvent, render, screen } from "@testing-library/react";
+// Remove unused React import
+// import React from "react";
+import { describe, expect, it, vi } from "vitest";
+import SecurityLevelSelector from "./SecurityLevelSelector";
+
+// Import constants for test IDs to ensure consistency
+import { CIA_TEST_IDS } from "../constants/testIds";
+
+// Mock ciaContentService
+vi.mock("../services/ciaContentService", () => ({
+  __esModule: true,
+  default: {
+    getComponentDetails: vi.fn().mockImplementation(() => ({
+      description: "Mocked description",
+      technical: "Mocked technical details",
+      recommendations: ["Recommendation 1", "Recommendation 2"],
+    })),
+  },
+  getSecurityLevelDescription: vi.fn().mockReturnValue("Mocked description"),
+}));
+
 describe("SecurityLevelSelector", () => {
-  const mockOnChange = vi.fn();
-  const mockSetValue = vi.fn();
-
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it("renders with default props", () => {
+  it("renders the selector with default values", () => {
     render(
       <SecurityLevelSelector
-        initialAvailability="Low"
-        initialIntegrity="Low"
-        initialConfidentiality="Low"
-        onAvailabilityChange={mockOnChange}
-        testId={CIA_TEST_IDS.AVAILABILITY_SELECT}
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        onAvailabilityChange={vi.fn()}
+        testId="test-selector"
       />
     );
 
-    // Use a more specific selector that targets the actual select element
+    expect(screen.getByTestId("test-selector")).toBeInTheDocument();
+  });
+
+  it("renders with different security levels", () => {
+    render(
+      <SecurityLevelSelector
+        availabilityLevel="Low"
+        integrityLevel="Moderate"
+        confidentialityLevel="High"
+        onAvailabilityChange={vi.fn()}
+        testId="test-selector"
+      />
+    );
+
+    // Check for select elements with correct values
+    expect(screen.getByTestId(CIA_TEST_IDS.AVAILABILITY_SELECT)).toHaveValue(
+      "Low"
+    );
+    expect(screen.getByTestId(CIA_TEST_IDS.INTEGRITY_SELECT)).toHaveValue(
+      "Moderate"
+    );
+    expect(screen.getByTestId(CIA_TEST_IDS.CONFIDENTIALITY_SELECT)).toHaveValue(
+      "High"
+    );
+  });
+
+  it("calls callback when availability level changes", () => {
+    const handleChange = vi.fn();
+
+    render(
+      <SecurityLevelSelector
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        onAvailabilityChange={handleChange}
+        testId="test-selector"
+      />
+    );
+
+    // Find the availability select element using the correct test ID
+    const selectElement = screen.getByTestId(CIA_TEST_IDS.AVAILABILITY_SELECT);
+    fireEvent.change(selectElement, { target: { value: "High" } });
+
+    // Check if callback was called with correct value
+    expect(handleChange).toHaveBeenCalledWith("High");
+  });
+
+  it("handles disabled state", () => {
+    render(
+      <SecurityLevelSelector
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        onAvailabilityChange={vi.fn()}
+        disabled={true}
+        testId="test-selector"
+      />
+    );
+
+    // Check if selectors are disabled
+    expect(screen.getByTestId(CIA_TEST_IDS.AVAILABILITY_SELECT)).toBeDisabled();
+    expect(screen.getByTestId(CIA_TEST_IDS.INTEGRITY_SELECT)).toBeDisabled();
     expect(
-      screen.getByRole("combobox", { name: /availability/i })
-    ).toBeInTheDocument();
-
-    // Use getAllByText since "Low" appears multiple times
-    expect(screen.getAllByText("Low")[0]).toBeInTheDocument();
-  });
-
-  it("calls onChange when selection changes", () => {
-    render(
-      <SecurityLevelSelector
-        initialAvailability="Low"
-        initialIntegrity="Low"
-        initialConfidentiality="Low"
-        onAvailabilityChange={mockOnChange}
-        testId={CIA_TEST_IDS.AVAILABILITY_SELECT}
-      />
-    );
-
-    // Get the select element by its role and label
-    fireEvent.change(screen.getByRole("combobox", { name: /availability/i }), {
-      target: { value: "Moderate" },
-    });
-
-    expect(mockOnChange).toHaveBeenCalledWith("Moderate");
-  });
-
-  it("supports backward compatibility for level changes", () => {
-    render(
-      <SecurityLevelSelector
-        initialAvailability="Low"
-        initialIntegrity="Low"
-        initialConfidentiality="Low"
-        onAvailabilityChange={mockSetValue}
-        testId={CIA_TEST_IDS.AVAILABILITY_SELECT}
-      />
-    );
-
-    fireEvent.change(screen.getByRole("combobox", { name: /availability/i }), {
-      target: { value: "High" },
-    });
-
-    expect(mockSetValue).toHaveBeenCalledWith("High");
-  });
-
-  it("displays all available security levels", () => {
-    render(
-      <SecurityLevelSelector
-        initialAvailability="Low"
-        initialIntegrity="Low"
-        initialConfidentiality="Low"
-        onAvailabilityChange={mockOnChange}
-        testId={CIA_TEST_IDS.AVAILABILITY_SELECT}
-      />
-    );
-
-    // Get the select element by its role and label
-    const selectElement = screen.getByRole("combobox", {
-      name: /availability/i,
-    });
-
-    // Check if all security levels are available as options
-    // Get all options from the select element
-    const options = Array.from(selectElement.querySelectorAll("option")).map(
-      (option) => option.textContent?.trim().split(" ")[0]
-    );
-
-    // Verify the options that are actually present in the component
-    expect(options).toContain("None");
-    expect(options).toContain("Low");
-    expect(options).toContain("Moderate");
-    expect(options).toContain("High");
-
-    // If "Very High" is expected but not found, either:
-    // 1. Comment out this expectation if it's not actually in the component
-    // 2. Or add it to the component if it should be there
-    // For now, modify the expectation to match what's actually in the component:
-
-    // Option 1: Remove the "Very High" expectation if it's not in the component
-    // expect(options).toContain("Very High");  // Comment this out if not needed
-
-    // Option 2: Assert that we at least have all the common security levels
-    expect(options.length).toBeGreaterThanOrEqual(4); // None, Low, Moderate, High
+      screen.getByTestId(CIA_TEST_IDS.CONFIDENTIALITY_SELECT)
+    ).toBeDisabled();
   });
 });

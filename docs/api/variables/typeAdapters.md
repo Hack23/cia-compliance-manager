@@ -8,7 +8,7 @@
 
 > `const` **typeAdapters**: `object`
 
-Defined in: [src/types/widgets.tsx:218](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.tsx#L218)
+Defined in: [src/types/widgets.ts:221](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L221)
 
 Type adapter functions to convert between different detail types
 

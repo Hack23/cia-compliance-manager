@@ -1,43 +1,23 @@
 {
   "compilerOptions": {
-    // Modern compilation target for Node 20+
-    "target": "es2022",
-    // Modern language features for Vite, React 19, etc.
-    "lib": ["es2022", "dom", "dom.iterable"],
-    // Remove problematic vitest/globals reference
-    "types": ["node", "vite/client"],
-    // Base path for imports
-    "baseUrl": ".",
-    // Path aliases to match Vite configuration
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    // React 19 JSX support
-    "jsx": "react-jsx",
-    // Module interoperability
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    // Type checking strictness
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    // File behavior
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    // Module settings optimized for Vite/Node 20
-    "module": "esnext",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
     "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    // No emit - Vite handles this
     "noEmit": true,
-    // Type definition locations
-    "typeRoots": ["./node_modules/@types", "./src/types"],
-    // Skip type checking of declaration files in node_modules
-    "skipLibCheck": true
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   },
-  // Don't include Cypress files in main config
-  "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts"],
-  "exclude": ["node_modules", "cypress"]
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

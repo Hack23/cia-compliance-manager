@@ -16,6 +16,10 @@ Defined in: [src/constants/testIds.ts:461](https://github.com/Hack23/cia-complia
 
 > **VALUE\_CREATION\_PREFIX**: `string` = `"value-creation"`
 
+### VALUE\_CREATION\_WIDGET
+
+> **VALUE\_CREATION\_WIDGET**: `string` = `"value-creation-widget"`
+
 ### VALUE\_POINT
 
 > **VALUE\_POINT**: `string` = `"value-point"`

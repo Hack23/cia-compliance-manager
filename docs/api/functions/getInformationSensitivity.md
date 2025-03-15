@@ -8,9 +8,9 @@
 
 > **getInformationSensitivity**(`level`): `string`
 
-Defined in: [src/services/ciaContentService.ts:1302](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1302)
+Defined in: [src/utils/securityDefaults.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/securityDefaults.ts#L48)
 
-Get information sensitivity classification based on confidentiality level
+Gets information sensitivity level based on confidentiality level
 
 ## Parameters
 

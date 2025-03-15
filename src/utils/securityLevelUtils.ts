@@ -27,20 +27,26 @@ export function normalizeSecurityLevel(level?: string): SecurityLevel {
 }
 
 /**
- * Gets a numerical representation of a security level for calculations
+ * Gets a numerical value for a security level for calculations
  * @param level The security level string
- * @returns A number from 0-4 representing the security level
+ * @returns A number from 0 (None) to 4 (Very High)
  */
-export function getSecurityLevelValue(level: string): number {
-  const levels = [
-    SECURITY_LEVELS.NONE,
-    SECURITY_LEVELS.LOW,
-    SECURITY_LEVELS.MODERATE,
-    SECURITY_LEVELS.HIGH,
-    SECURITY_LEVELS.VERY_HIGH,
-  ];
+export function getSecurityLevelValue(level: SecurityLevel | string): number {
+  const normalizedLevel = normalizeSecurityLevel(level as SecurityLevel);
 
-  return Math.max(0, levels.indexOf(level as SecurityLevel));
+  switch (normalizedLevel) {
+    case "Very High":
+      return 4;
+    case "High":
+      return 3;
+    case "Moderate":
+      return 2;
+    case "Low":
+      return 1;
+    case "None":
+    default:
+      return 0;
+  }
 }
 
 /**
@@ -74,5 +80,31 @@ export function getSecurityLevelClass(level: string): string {
     case SECURITY_LEVELS.NONE:
     default:
       return "text-gray-600 dark:text-gray-400";
+  }
+}
+
+/**
+ * Map a security level to a status badge variant
+ * @param level The security level string
+ * @returns A status badge variant
+ */
+export function getSecurityLevelBadgeVariant(
+  level: string
+): "info" | "success" | "warning" | "error" | "neutral" | "purple" {
+  const normalizedLevel = normalizeSecurityLevel(level);
+
+  switch (normalizedLevel) {
+    case SECURITY_LEVELS.VERY_HIGH:
+      return "purple";
+    case SECURITY_LEVELS.HIGH:
+      return "success";
+    case SECURITY_LEVELS.MODERATE:
+      return "info";
+    case SECURITY_LEVELS.LOW:
+      return "warning";
+    case SECURITY_LEVELS.NONE:
+      return "error";
+    default:
+      return "neutral";
   }
 }

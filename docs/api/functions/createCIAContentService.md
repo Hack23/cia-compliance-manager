@@ -8,7 +8,7 @@
 
 > **createCIAContentService**(`dataProvider`): `object`
 
-Defined in: [src/services/ciaContentService.ts:115](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L115)
+Defined in: [src/services/ciaContentService.ts:116](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L116)
 
 Create a CIA content service with dependency injection
 
@@ -421,7 +421,7 @@ Always returns a string array, even when no recommendations are found
 
 ### getRiskBadgeVariant()
 
-> **getRiskBadgeVariant**: (`riskLevel`) => `"neutral"` \| `"success"` \| `"warning"` \| `"info"` \| `"error"`
+> **getRiskBadgeVariant**: (`riskLevel`) => `"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"`
 
 Get appropriate badge variant based on risk level
 
@@ -433,7 +433,7 @@ Get appropriate badge variant based on risk level
 
 #### Returns
 
-`"neutral"` \| `"success"` \| `"warning"` \| `"info"` \| `"error"`
+`"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"`
 
 ### getROIEstimate()
 
@@ -617,7 +617,7 @@ Get detailed technical implementation information
 
 ##### level
 
-[`SecurityLevel`](../type-aliases/SecurityLevel.md)
+`string`
 
 #### Returns
 

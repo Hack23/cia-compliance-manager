@@ -6,44 +6,30 @@
 
 # Interface: CIAOptions
 
-Defined in: [src/types/cia.tsx:141](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L141)
+Defined in: [src/types/cia.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L54)
+
+Available options for each CIA pillar
 
 ## Properties
 
-### High
+### availability
 
-> **High**: [`CIADetails`](CIADetails.md)
+> **availability**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)[]
 
-Defined in: [src/types/cia.tsx:145](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L145)
-
-***
-
-### Low
-
-> **Low**: [`CIADetails`](CIADetails.md)
-
-Defined in: [src/types/cia.tsx:143](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L143)
+Defined in: [src/types/cia.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L55)
 
 ***
 
-### Moderate
+### confidentiality
 
-> **Moderate**: [`CIADetails`](CIADetails.md)
+> **confidentiality**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)[]
 
-Defined in: [src/types/cia.tsx:144](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L144)
-
-***
-
-### None
-
-> **None**: [`CIADetails`](CIADetails.md)
-
-Defined in: [src/types/cia.tsx:142](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L142)
+Defined in: [src/types/cia.ts:57](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L57)
 
 ***
 
-### Very High
+### integrity
 
-> **Very High**: [`CIADetails`](CIADetails.md)
+> **integrity**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)[]
 
-Defined in: [src/types/cia.tsx:146](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L146)
+Defined in: [src/types/cia.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L56)

@@ -1,0 +1,10 @@
+{
+  "exclude": [
+    "node_modules/**",
+    "src/types/cia-services.ts",
+    "src/types/componentProps.tsx",
+    "src/types/testTypes.tsx",
+    "src/constants/appLabels.ts",
+    "coverage/**"
+  ]
+}

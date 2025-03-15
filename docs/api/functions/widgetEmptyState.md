@@ -6,28 +6,34 @@
 
 # Function: widgetEmptyState()
 
-> **widgetEmptyState**(`message`?, `testId`?): `ReactNode`
+> **widgetEmptyState**(`isEmpty`, `testId`, `children`?): `null` \| `string` \| `number` \| `bigint` \| `true` \| `Iterable`\<`ReactNode`, `any`, `any`\> \| `Promise`\<`AwaitedReactNode`\> \| `Element`
 
-Defined in: [src/utils/widgetHelpers.tsx:261](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L261)
+Defined in: [src/utils/widgetHelpers.tsx:381](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L381)
 
-Creates an empty state indicator for widgets with no data
+Render empty state message or children if not empty
 
 ## Parameters
 
-### message?
+### isEmpty
+
+`boolean`
+
+Whether the widget is empty
+
+### testId
 
 `string`
 
-Custom message for the empty state
+Test ID for the empty state
 
-### testId?
-
-`string`
-
-Optional test ID for the empty state element
-
-## Returns
+### children?
 
 `ReactNode`
 
-JSX element for displaying an empty state
+Children to render if not empty
+
+## Returns
+
+`null` \| `string` \| `number` \| `bigint` \| `true` \| `Iterable`\<`ReactNode`, `any`, `any`\> \| `Promise`\<`AwaitedReactNode`\> \| `Element`
+
+Empty state or children

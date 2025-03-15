@@ -20,15 +20,15 @@ Colors specific to CIA components - with enhanced distinctiveness
 
 #### AVAILABILITY.DARK
 
-> **DARK**: `string` = `"#2ecc71"`
+> **DARK**: `string` = `"#1976d2"`
 
 #### AVAILABILITY.PRIMARY
 
-> **PRIMARY**: `string` = `"#27ae60"`
+> **PRIMARY**: `string` = `"#2196f3"`
 
 #### AVAILABILITY.SECONDARY
 
-> **SECONDARY**: `string` = `"#d4efdf"`
+> **SECONDARY**: `string` = `"#bbdefb"`
 
 ### CONFIDENTIALITY
 
@@ -36,15 +36,15 @@ Colors specific to CIA components - with enhanced distinctiveness
 
 #### CONFIDENTIALITY.DARK
 
-> **DARK**: `string` = `"#2ecc71"`
+> **DARK**: `string` = `"#7b1fa2"`
 
 #### CONFIDENTIALITY.PRIMARY
 
-> **PRIMARY**: `string` = `"#27ae60"`
+> **PRIMARY**: `string` = `"#9c27b0"`
 
 #### CONFIDENTIALITY.SECONDARY
 
-> **SECONDARY**: `string` = `"#d4efdf"`
+> **SECONDARY**: `string` = `"#e1bee7"`
 
 ### INTEGRITY
 

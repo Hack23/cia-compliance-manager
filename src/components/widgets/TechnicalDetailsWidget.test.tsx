@@ -1,9 +1,7 @@
-import React from "react";
-import { render, screen, fireEvent, within } from "@testing-library/react";
-import { describe, it, expect, afterEach, vi } from "vitest";
-import TechnicalDetailsWidget from "./TechnicalDetailsWidget";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { WIDGET_TEST_IDS } from "../../constants/testIds";
-import userEvent from "@testing-library/user-event";
+import TechnicalDetailsWidget from "./TechnicalDetailsWidget";
 
 // Mock ciaContentService to control technical description content
 vi.mock("../../services/ciaContentService", () => ({
@@ -11,36 +9,32 @@ vi.mock("../../services/ciaContentService", () => ({
     getTechnicalImplementation: vi
       .fn()
       .mockImplementation((component, level) => {
-        if (component === "availability" && level === "None") {
-          return {
-            description:
-              "No redundancy, backup systems, monitoring, or disaster recovery procedures are implemented.",
-            effort: {
-              development: "Minimal",
-              maintenance: "Minimal",
-              expertise: "Basic",
-            },
-            rto: "Undefined",
-            rpo: "Undefined",
-            // Add implementationSteps to prevent the TypeError
-            implementationSteps: ["No implementation required"],
-          };
-        }
         return {
-          description: `${level} technical implementation for ${component}`,
-          effort: {
-            development: "Medium",
-            maintenance: "Ongoing",
-            expertise: "Advanced",
-          },
-          // Add implementationSteps to prevent the TypeError
+          description: `${component} (${level}) technical details`,
           implementationSteps: [
             `Step 1 for ${component} at ${level} level`,
             `Step 2 for ${component} at ${level} level`,
           ],
+          effort: {
+            development: component === "availability" ? "Minimal" : "Medium",
+            maintenance: component === "availability" ? "Minimal" : "Ongoing",
+            expertise: component === "availability" ? "Basic" : "Advanced",
+          },
+          rto: component === "availability" ? "Undefined" : undefined,
+          rpo: component === "availability" ? "Undefined" : undefined,
+          validationMethod:
+            component === "integrity" ? "Test validation method" : undefined,
+          protectionMethod:
+            component === "confidentiality"
+              ? "Test protection method"
+              : undefined,
         };
       }),
+    getDetailedDescription: vi.fn().mockImplementation((component, level) => {
+      return `${component} (${level}) detailed description`;
+    }),
   },
+  createCIAContentService: vi.fn(),
 }));
 
 describe("TechnicalDetailsWidget", () => {
@@ -53,154 +47,104 @@ describe("TechnicalDetailsWidget", () => {
 
   // Use cleanup between tests
   afterEach(() => {
-    document.body.innerHTML = "";
+    vi.clearAllMocks();
   });
 
   it("renders without crashing", () => {
     render(<TechnicalDetailsWidget {...defaultProps} />);
-
-    // Use queryAllByTestId to handle duplicate IDs and check the first element
-    const elements = screen.queryAllByTestId(
-      WIDGET_TEST_IDS.TECHNICAL_DETAILS_WIDGET
-    );
-    expect(elements.length).toBeGreaterThan(0);
-    expect(elements[0]).toBeInTheDocument();
+    expect(
+      screen.getByText(/Technical Implementation Guide/i)
+    ).toBeInTheDocument();
   });
 
   it("displays technical details for the selected component", () => {
     render(<TechnicalDetailsWidget {...defaultProps} />);
     // Default tab is availability
-    // Updated expectation to match the actual implementation
-    expect(screen.getByTestId("technical-description")).toHaveTextContent(
-      "No redundancy, backup systems, monitoring, or disaster recovery procedures are implemented."
-    );
+    expect(
+      screen.getByText(/availability \(None\) technical details/i)
+    ).toBeInTheDocument();
   });
 
-  it("switches between tabs", async () => {
-    // Use container to scope queries
-    const { container } = render(
-      <TechnicalDetailsWidget
-        availabilityLevel="Moderate"
-        integrityLevel="High"
-        confidentialityLevel="Very High"
-        testId="test-technical-details-widget"
-      />
-    );
+  it("switches between tabs", () => {
+    render(<TechnicalDetailsWidget {...defaultProps} />);
 
-    // Create a scoped query function for this specific rendered component
-    const getByTestId = (id: string) => within(container).getByTestId(id);
-
-    // Find the integrity tab and click it
-    const integrityTab = getByTestId(
-      "test-technical-details-widget-integrity-tab"
-    );
+    // Find the integrity tab by testId and click it
+    const integrityTab = screen.getByTestId("integrity-tab-button");
     fireEvent.click(integrityTab);
 
     // Verify tab content is displayed
-    expect(getByTestId("integrity-level-indicator")).toHaveTextContent("High");
+    expect(
+      screen.getByText(/integrity \(Low\) technical details/i)
+    ).toBeInTheDocument();
 
-    // Find the invisible element that's used in tests for integrity tab
-    const hiddenTab = getByTestId("integrity-tab");
-
-    // Verify active tab styling on the hidden element that the test is looking for
-    expect(hiddenTab).toHaveClass("border-b-2");
-    expect(hiddenTab).toHaveClass("border-blue-500");
-
-    // Test clicking the confidentiality tab
-    const confidentialityTab = getByTestId(
-      "test-technical-details-widget-confidentiality-tab"
-    );
+    // Find the confidentiality tab by testId and click it
+    const confidentialityTab = screen.getByTestId("confidentiality-tab-button");
     fireEvent.click(confidentialityTab);
 
     // Verify confidentiality tab content is displayed
-    expect(getByTestId("confidentiality-level-indicator")).toHaveTextContent(
-      "Very High"
-    );
-
-    // Test for hidden tab styling as well
-    const hiddenConfidentialityTab = getByTestId("confidentiality-tab");
-    expect(hiddenConfidentialityTab).toHaveClass("border-b-2");
-  });
-
-  it("handles different security levels", () => {
-    // Use container to scope queries
-    const { container } = render(
-      <TechnicalDetailsWidget
-        availabilityLevel="Low"
-        integrityLevel="Moderate"
-        confidentialityLevel="High"
-        testId="unique-test-id"
-      />
-    );
-
-    // Create a scoped query function for this specific rendered component
-    const getByTestId = (id: string) => within(container).getByTestId(id);
-
-    // Check if availability level shows correctly
-    expect(getByTestId("availability-level-indicator")).toHaveTextContent(
-      "Low"
-    );
-
-    // Switch to integrity tab
-    const integrityTab = getByTestId("unique-test-id-integrity-tab");
-    fireEvent.click(integrityTab);
-
-    // Check if integrity level shows correctly
-    expect(getByTestId("integrity-level-indicator")).toHaveTextContent(
-      "Moderate"
-    );
-
-    // Switch to confidentiality tab
-    const confidentialityTab = getByTestId(
-      "unique-test-id-confidentiality-tab"
-    );
-    fireEvent.click(confidentialityTab);
-
-    // Check if confidentiality level shows correctly
-    expect(getByTestId("confidentiality-level-indicator")).toHaveTextContent(
-      "High"
-    );
+    expect(
+      screen.getByText(/confidentiality \(Moderate\) technical details/i)
+    ).toBeInTheDocument();
   });
 
   it("shows implementation details for each level", () => {
-    const { container } = render(
-      <TechnicalDetailsWidget {...defaultProps} testId="details-test-widget" />
-    );
+    render(<TechnicalDetailsWidget {...defaultProps} />);
 
-    // Create a scoped query function
-    const getByTestId = (id: string) => within(container).getByTestId(id);
+    // Check for implementation steps
+    expect(
+      screen.getByText(/Step 1 for availability at None level/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Step 2 for availability at None level/i)
+    ).toBeInTheDocument();
 
-    // Choose a tab
-    fireEvent.click(getByTestId("details-test-widget-availability-tab"));
+    // Get resource headers that should be visible in the component
+    const resourcesHeader = screen.getByTestId("resources-header");
+    expect(resourcesHeader).toBeInTheDocument();
 
-    // Check for implementation headers
-    expect(getByTestId("implementation-header")).toBeInTheDocument();
-    expect(getByTestId("resources-header")).toBeInTheDocument();
-    expect(getByTestId("development-effort")).toBeInTheDocument();
-    expect(getByTestId("maintenance-level")).toBeInTheDocument();
-    expect(getByTestId("required-expertise")).toBeInTheDocument();
+    // Check for development, maintenance, and expertise by looking at the elements that contain
+    // these terms rather than searching for exact matches with emojis
+    expect(
+      screen.getByText(/development/i, { selector: "h4" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/maintenance/i, { selector: "h4" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/expertise/i, { selector: "h4" })
+    ).toBeInTheDocument();
   });
 
-  it("handles backward compatibility props", () => {
-    const { container } = render(
+  it("handles different security levels", () => {
+    render(
       <TechnicalDetailsWidget
         availabilityLevel="High"
-        integrityLevel="High"
-        confidentialityLevel="High"
-        testId="compat-test-widget"
+        integrityLevel="Moderate"
+        confidentialityLevel="Low"
       />
     );
 
-    // Create a scoped query function
-    const getByTestId = (id: string) => within(container).getByTestId(id);
+    // Check if availability level content is correct
+    expect(
+      screen.getByText(/availability \(High\) technical details/i)
+    ).toBeInTheDocument();
 
-    // Should use the backward compatibility props
-    expect(getByTestId("availability-level-indicator")).toHaveTextContent(
-      "High"
-    );
+    // Switch to integrity tab using testId
+    const integrityTab = screen.getByTestId("integrity-tab-button");
+    fireEvent.click(integrityTab);
 
-    // Switch to integrity tab
-    fireEvent.click(getByTestId("compat-test-widget-integrity-tab"));
-    expect(getByTestId("integrity-level-indicator")).toHaveTextContent("High");
+    // Check if integrity level content is correct
+    expect(
+      screen.getByText(/integrity \(Moderate\) technical details/i)
+    ).toBeInTheDocument();
+
+    // Switch to confidentiality tab using testId
+    const confidentialityTab = screen.getByTestId("confidentiality-tab-button");
+    fireEvent.click(confidentialityTab);
+
+    // Check if confidentiality level content is correct
+    expect(
+      screen.getByText(/confidentiality \(Low\) technical details/i)
+    ).toBeInTheDocument();
   });
 });

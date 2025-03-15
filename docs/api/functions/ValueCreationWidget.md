@@ -8,7 +8,10 @@
 
 > **ValueCreationWidget**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/ValueCreationWidget.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/ValueCreationWidget.tsx#L27)
+Defined in: [src/components/widgets/ValueCreationWidget.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/ValueCreationWidget.tsx#L29)
+
+ValueCreationWidget displays the business value created by security investments
+based on the selected security levels
 
 ## Parameters
 

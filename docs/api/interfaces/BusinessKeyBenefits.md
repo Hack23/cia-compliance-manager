@@ -6,7 +6,7 @@
 
 # Interface: BusinessKeyBenefits
 
-Defined in: [src/types/businessImpact.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/businessImpact.ts#L28)
+Defined in: [src/types/businessImpact.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/businessImpact.ts#L23)
 
 ## Indexable
 

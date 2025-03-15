@@ -36,6 +36,10 @@ Defined in: [src/constants/testIds.ts:171](https://github.com/Hack23/cia-complia
 
 > **BUSINESS\_IMPACT\_SUMMARY**: `string` = `"business-impact-summary"`
 
+### BUSINESS\_IMPACT\_WIDGET
+
+> **BUSINESS\_IMPACT\_WIDGET**: `string` = `"business-impact-widget"`
+
 ### CATEGORY\_ICON\_PREFIX
 
 > **CATEGORY\_ICON\_PREFIX**: `string` = `"category-icon"`
@@ -55,10 +59,6 @@ Defined in: [src/constants/testIds.ts:171](https://github.com/Hack23/cia-complia
 ### FINANCIAL\_IMPACT\_SECTION
 
 > **FINANCIAL\_IMPACT\_SECTION**: `string` = `"financial-impact-section"`
-
-### FINANCIAL\_RISK\_BADGE
-
-> **FINANCIAL\_RISK\_BADGE**: `string` = `"financial-risk-badge"`
 
 ### IMPACT\_ANALYSIS\_PREFIX
 

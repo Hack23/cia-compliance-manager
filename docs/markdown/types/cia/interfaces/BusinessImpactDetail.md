@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactDetail
 
-Defined in: [src/types/cia.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L44)
+Defined in: [src/types/cia.tsx:44](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L44)
 
 Business impact analysis interface for tracking security implications
 
@@ -22,7 +22,7 @@ const financialImpact: BusinessImpactDetail = {
 
 ## Indexable
 
-\[`key`: `string`\]: `any`
+\[`key`: `string`\]: `unknown`
 
 ## Properties
 
@@ -30,7 +30,7 @@ const financialImpact: BusinessImpactDetail = {
 
 > `optional` **annualRevenueLoss**: `string`
 
-Defined in: [src/types/cia.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L47)
+Defined in: [src/types/cia.tsx:47](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L47)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/types/cia.ts:47](https://github.com/Hack23/cia-compliance-manag
 
 > `optional` **competitiveAdvantage**: `object`
 
-Defined in: [src/types/cia.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L55)
+Defined in: [src/types/cia.tsx:55](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L55)
 
 #### description
 
@@ -54,7 +54,7 @@ Defined in: [src/types/cia.ts:55](https://github.com/Hack23/cia-compliance-manag
 
 > `optional` **complianceViolations**: `string`[]
 
-Defined in: [src/types/cia.ts:50](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L50)
+Defined in: [src/types/cia.tsx:50](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L50)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [src/types/cia.ts:50](https://github.com/Hack23/cia-compliance-manag
 
 > `optional` **customerImpact**: `string`
 
-Defined in: [src/types/cia.ts:52](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L52)
+Defined in: [src/types/cia.tsx:52](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L52)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [src/types/cia.ts:52](https://github.com/Hack23/cia-compliance-manag
 
 > **description**: `string`
 
-Defined in: [src/types/cia.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L45)
+Defined in: [src/types/cia.tsx:45](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L45)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [src/types/cia.ts:45](https://github.com/Hack23/cia-compliance-manag
 
 > `optional` **meanTimeToRecover**: `string`
 
-Defined in: [src/types/cia.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L48)
+Defined in: [src/types/cia.tsx:48](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L48)
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: [src/types/cia.ts:48](https://github.com/Hack23/cia-compliance-manag
 
 > `optional` **operationalImpact**: `string`
 
-Defined in: [src/types/cia.ts:53](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L53)
+Defined in: [src/types/cia.tsx:53](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L53)
 
 ***
 
@@ -94,7 +94,7 @@ Defined in: [src/types/cia.ts:53](https://github.com/Hack23/cia-compliance-manag
 
 > `optional` **recoveryTime**: `string`
 
-Defined in: [src/types/cia.ts:49](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L49)
+Defined in: [src/types/cia.tsx:49](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L49)
 
 ***
 
@@ -102,7 +102,7 @@ Defined in: [src/types/cia.ts:49](https://github.com/Hack23/cia-compliance-manag
 
 > `optional` **reputationDamage**: `string`
 
-Defined in: [src/types/cia.ts:51](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L51)
+Defined in: [src/types/cia.tsx:51](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L51)
 
 ***
 
@@ -110,7 +110,7 @@ Defined in: [src/types/cia.ts:51](https://github.com/Hack23/cia-compliance-manag
 
 > `optional` **riskLevel**: `string`
 
-Defined in: [src/types/cia.ts:46](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L46)
+Defined in: [src/types/cia.tsx:46](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L46)
 
 ***
 
@@ -118,4 +118,4 @@ Defined in: [src/types/cia.ts:46](https://github.com/Hack23/cia-compliance-manag
 
 > `optional` **strategicImpact**: `string`
 
-Defined in: [src/types/cia.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/cia.ts#L54)
+Defined in: [src/types/cia.tsx:54](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/cia.tsx#L54)

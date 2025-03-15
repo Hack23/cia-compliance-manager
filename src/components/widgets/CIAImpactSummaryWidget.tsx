@@ -4,7 +4,11 @@ import ciaContentService from "../../services/ciaContentService";
 import WidgetContainer from "../common/WidgetContainer";
 import StatusBadge from "../common/StatusBadge";
 import KeyValuePair from "../common/KeyValuePair";
+import SecurityLevelSummaryItem from "../common/SecurityLevelSummaryItem";
 import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
+import { CIA_COMPONENT_ICONS, CIA_LABELS } from "../../constants/appConstants";
+import { calculateOverallSecurityLevel } from "../../types/cia";
+import { getSecurityLevelBadgeVariant } from "../../utils/securityLevelUtils";
 
 /**
  * Props for CIAImpactSummaryWidget component
@@ -61,41 +65,11 @@ const CIAImpactSummaryWidget: React.FC<CIAImpactSummaryWidgetProps> = ({
   );
 
   // Calculate overall security level based on the three components
-  const calculateOverallLevel = (): SecurityLevel => {
-    const levels: Record<SecurityLevel, number> = {
-      None: 0,
-      Low: 1,
-      Moderate: 2,
-      High: 3,
-      "Very High": 4,
-    };
-
-    const confidentialityValue = levels[actualConfidentialityLevel] || 0;
-    const integrityValue = levels[actualIntegrityLevel] || 0;
-    const availabilityValue = levels[actualAvailabilityLevel] || 0;
-
-    const avgValue = Math.round(
-      (confidentialityValue + integrityValue + availabilityValue) / 3
-    );
-
-    switch (avgValue) {
-      case 0:
-        return "None";
-      case 1:
-        return "Low";
-      case 2:
-        return "Moderate";
-      case 3:
-        return "High";
-      case 4:
-        return "Very High";
-      default:
-        return "Moderate";
-    }
-  };
-
-  // Use actual levels for calculations
-  const overallSecurityLevel = calculateOverallLevel();
+  const overallSecurityLevel = calculateOverallSecurityLevel(
+    actualAvailabilityLevel,
+    actualIntegrityLevel,
+    actualConfidentialityLevel
+  );
 
   return (
     <WidgetContainer
@@ -112,7 +86,10 @@ const CIAImpactSummaryWidget: React.FC<CIAImpactSummaryWidgetProps> = ({
             Overall Security Profile
           </h3>
           <div className="flex items-center">
-            <StatusBadge status="info" className="mr-2">
+            <StatusBadge
+              status={getSecurityLevelBadgeVariant(overallSecurityLevel)}
+              className="mr-2"
+            >
               {overallSecurityLevel}
             </StatusBadge>
             <span className="text-gray-600 dark:text-gray-300">
@@ -121,7 +98,35 @@ const CIAImpactSummaryWidget: React.FC<CIAImpactSummaryWidgetProps> = ({
           </div>
         </div>
 
-        {/* CIA Pillar Summary Cards */}
+        {/* CIA Component Summary */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          <SecurityLevelSummaryItem
+            label={CIA_LABELS.CONFIDENTIALITY}
+            value={actualConfidentialityLevel}
+            icon={CIA_COMPONENT_ICONS.CONFIDENTIALITY}
+            testId={`${testId}-confidentiality-summary`}
+            color="purple"
+            borderColor={CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY}
+          />
+          <SecurityLevelSummaryItem
+            label={CIA_LABELS.INTEGRITY}
+            value={actualIntegrityLevel}
+            icon={CIA_COMPONENT_ICONS.INTEGRITY}
+            testId={`${testId}-integrity-summary`}
+            color="green"
+            borderColor={CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY}
+          />
+          <SecurityLevelSummaryItem
+            label={CIA_LABELS.AVAILABILITY}
+            value={actualAvailabilityLevel}
+            icon={CIA_COMPONENT_ICONS.AVAILABILITY}
+            testId={`${testId}-availability-summary`}
+            color="blue"
+            borderColor={CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY}
+          />
+        </div>
+
+        {/* CIA Pillar Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Confidentiality Card */}
           <div
@@ -131,13 +136,12 @@ const CIAImpactSummaryWidget: React.FC<CIAImpactSummaryWidgetProps> = ({
             }}
           >
             <h4 className="font-medium mb-2 flex items-center">
-              <span className="mr-2">🔒</span>
-              Confidentiality
+              <span className="mr-2">
+                {CIA_COMPONENT_ICONS.CONFIDENTIALITY}
+              </span>
+              {CIA_LABELS.CONFIDENTIALITY}
             </h4>
-            <StatusBadge
-              status="purple"
-              className="mb-2 bg-purple-600 text-white"
-            >
+            <StatusBadge status="purple" className="mb-2">
               {actualConfidentialityLevel}
             </StatusBadge>
             <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
@@ -158,13 +162,10 @@ const CIAImpactSummaryWidget: React.FC<CIAImpactSummaryWidgetProps> = ({
             style={{ borderLeftColor: CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY }}
           >
             <h4 className="font-medium mb-2 flex items-center">
-              <span className="mr-2">✓</span>
-              Integrity
+              <span className="mr-2">{CIA_COMPONENT_ICONS.INTEGRITY}</span>
+              {CIA_LABELS.INTEGRITY}
             </h4>
-            <StatusBadge
-              status="success"
-              className="mb-2 bg-green-500 text-white"
-            >
+            <StatusBadge status="success" className="mb-2">
               {actualIntegrityLevel}
             </StatusBadge>
             <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
@@ -185,10 +186,10 @@ const CIAImpactSummaryWidget: React.FC<CIAImpactSummaryWidgetProps> = ({
             }}
           >
             <h4 className="font-medium mb-2 flex items-center">
-              <span className="mr-2">⏱️</span>
-              Availability
+              <span className="mr-2">{CIA_COMPONENT_ICONS.AVAILABILITY}</span>
+              {CIA_LABELS.AVAILABILITY}
             </h4>
-            <StatusBadge status="info" className="mb-2 bg-blue-500 text-white">
+            <StatusBadge status="info" className="mb-2">
               {actualAvailabilityLevel}
             </StatusBadge>
             <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">

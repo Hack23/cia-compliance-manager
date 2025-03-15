@@ -6,15 +6,31 @@
 
 # Interface: SecurityLevelSelectorProps
 
-Defined in: [src/components/SecurityLevelSelector.tsx:22](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L22)
+Defined in: [src/components/SecurityLevelSelector.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L15)
 
 ## Properties
+
+### availabilityLevel?
+
+> `optional` **availabilityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
+
+Defined in: [src/components/SecurityLevelSelector.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L16)
+
+***
 
 ### availabilityOptions?
 
 > `optional` **availabilityOptions**: `Record`\<`string`, `any`\>
 
-Defined in: [src/components/SecurityLevelSelector.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L29)
+Defined in: [src/components/SecurityLevelSelector.tsx:22](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L22)
+
+***
+
+### confidentialityLevel?
+
+> `optional` **confidentialityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
+
+Defined in: [src/components/SecurityLevelSelector.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L18)
 
 ***
 
@@ -22,7 +38,7 @@ Defined in: [src/components/SecurityLevelSelector.tsx:29](https://github.com/Hac
 
 > `optional` **confidentialityOptions**: `Record`\<`string`, `any`\>
 
-Defined in: [src/components/SecurityLevelSelector.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L31)
+Defined in: [src/components/SecurityLevelSelector.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L24)
 
 ***
 
@@ -30,31 +46,15 @@ Defined in: [src/components/SecurityLevelSelector.tsx:31](https://github.com/Hac
 
 > `optional` **disabled**: `boolean`
 
-Defined in: [src/components/SecurityLevelSelector.tsx:33](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L33)
+Defined in: [src/components/SecurityLevelSelector.tsx:26](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L26)
 
 ***
 
-### initialAvailability?
+### integrityLevel?
 
-> `optional` **initialAvailability**: `string`
+> `optional` **integrityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/SecurityLevelSelector.tsx:23](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L23)
-
-***
-
-### initialConfidentiality?
-
-> `optional` **initialConfidentiality**: `string`
-
-Defined in: [src/components/SecurityLevelSelector.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L25)
-
-***
-
-### initialIntegrity?
-
-> `optional` **initialIntegrity**: `string`
-
-Defined in: [src/components/SecurityLevelSelector.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L24)
+Defined in: [src/components/SecurityLevelSelector.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L17)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [src/components/SecurityLevelSelector.tsx:24](https://github.com/Hac
 
 > `optional` **integrityOptions**: `Record`\<`string`, `any`\>
 
-Defined in: [src/components/SecurityLevelSelector.tsx:30](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L30)
+Defined in: [src/components/SecurityLevelSelector.tsx:23](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L23)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [src/components/SecurityLevelSelector.tsx:30](https://github.com/Hac
 
 > `optional` **onAvailabilityChange**: (`level`) => `void`
 
-Defined in: [src/components/SecurityLevelSelector.tsx:26](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L26)
+Defined in: [src/components/SecurityLevelSelector.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L19)
 
 #### Parameters
 
@@ -88,7 +88,7 @@ Defined in: [src/components/SecurityLevelSelector.tsx:26](https://github.com/Hac
 
 > `optional` **onConfidentialityChange**: (`level`) => `void`
 
-Defined in: [src/components/SecurityLevelSelector.tsx:28](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L28)
+Defined in: [src/components/SecurityLevelSelector.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L21)
 
 #### Parameters
 
@@ -106,7 +106,7 @@ Defined in: [src/components/SecurityLevelSelector.tsx:28](https://github.com/Hac
 
 > `optional` **onIntegrityChange**: (`level`) => `void`
 
-Defined in: [src/components/SecurityLevelSelector.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L27)
+Defined in: [src/components/SecurityLevelSelector.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L20)
 
 #### Parameters
 
@@ -124,7 +124,7 @@ Defined in: [src/components/SecurityLevelSelector.tsx:27](https://github.com/Hac
 
 > `optional` **showDescriptions**: `boolean`
 
-Defined in: [src/components/SecurityLevelSelector.tsx:35](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L35)
+Defined in: [src/components/SecurityLevelSelector.tsx:28](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L28)
 
 ***
 
@@ -132,7 +132,7 @@ Defined in: [src/components/SecurityLevelSelector.tsx:35](https://github.com/Hac
 
 > `optional` **showSelectionSummary**: `boolean`
 
-Defined in: [src/components/SecurityLevelSelector.tsx:32](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L32)
+Defined in: [src/components/SecurityLevelSelector.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L25)
 
 ***
 
@@ -140,4 +140,4 @@ Defined in: [src/components/SecurityLevelSelector.tsx:32](https://github.com/Hac
 
 > `optional` **testId**: `string`
 
-Defined in: [src/components/SecurityLevelSelector.tsx:34](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L34)
+Defined in: [src/components/SecurityLevelSelector.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/SecurityLevelSelector.tsx#L27)

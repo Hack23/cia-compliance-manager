@@ -8,7 +8,7 @@
 
 > **safeAccess**\<`T`\>(`obj`, `path`, `defaultValue`?): `T`
 
-Defined in: [src/utils/typeGuards.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/typeGuards.ts#L93)
+Defined in: [src/utils/typeGuards.ts:107](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/typeGuards.ts#L107)
 
 Safely access a nested property in an object using a dot notation path
 

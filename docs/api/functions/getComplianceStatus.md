@@ -8,7 +8,7 @@
 
 > **getComplianceStatus**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `object`
 
-Defined in: [src/services/ciaContentService.ts:1297](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1297)
+Defined in: [src/services/ciaContentService.ts:1374](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1374)
 
 Get compliance status based on CIA security levels
 

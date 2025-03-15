@@ -3,7 +3,7 @@
 
 // Import from the shared risk constants file
 import { RISK_LEVELS, BUSINESS_IMPACT_CATEGORIES } from "./riskConstants";
-import { CIADetails } from "../types/cia";
+import { CIADetails, SecurityLevel } from "../types/cia"; // Import SecurityLevel
 // Import the UI constants for backward compatibility
 import { BUSINESS_IMPACT_ICONS, SECURITY_LEVEL_COLORS } from "./uiConstants";
 
@@ -99,10 +99,7 @@ export const createValuePointMatcher = (point: string) => {
   return new RegExp(words, "i");
 };
 
-// Export type to help with TypeScript
-export type SecurityLevel = "None" | "Low" | "Moderate" | "High" | "Very High";
-
-// Update the type of SECURITY_LEVELS
+// Update the type of SECURITY_LEVELS to use the imported SecurityLevel
 export const SECURITY_LEVELS: Record<SecurityLevelKey, SecurityLevel> = {
   NONE: "None",
   LOW: "Low",
@@ -222,7 +219,7 @@ export const BUSINESS_IMPACTS = {
 };
 
 // Value Creation Points
-export const VALUE_CREATION_POINTS: Record<SecurityLevel, string[]> = {
+export const VALUE_CREATION_POINTS: Partial<Record<SecurityLevel, string[]>> = {
   None: ["Minimal security baseline"],
   Low: ["Basic security protection"],
   Moderate: ["Demonstrates security diligence"],

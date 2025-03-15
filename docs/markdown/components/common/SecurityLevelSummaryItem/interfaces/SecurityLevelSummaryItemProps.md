@@ -1,0 +1,65 @@
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../../README.md)
+
+***
+
+[CIA Compliance Manager API Documentation](../../../../modules.md) / [components/common/SecurityLevelSummaryItem](../README.md) / SecurityLevelSummaryItemProps
+
+# Interface: SecurityLevelSummaryItemProps
+
+Defined in: [src/components/common/SecurityLevelSummaryItem.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/components/common/SecurityLevelSummaryItem.tsx#L5)
+
+## Properties
+
+### borderColor?
+
+> `optional` **borderColor**: `string`
+
+Defined in: [src/components/common/SecurityLevelSummaryItem.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/components/common/SecurityLevelSummaryItem.tsx#L11)
+
+***
+
+### color?
+
+> `optional` **color**: `string`
+
+Defined in: [src/components/common/SecurityLevelSummaryItem.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/components/common/SecurityLevelSummaryItem.tsx#L10)
+
+***
+
+### compact?
+
+> `optional` **compact**: `boolean`
+
+Defined in: [src/components/common/SecurityLevelSummaryItem.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/components/common/SecurityLevelSummaryItem.tsx#L12)
+
+***
+
+### icon
+
+> **icon**: `string`
+
+Defined in: [src/components/common/SecurityLevelSummaryItem.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/components/common/SecurityLevelSummaryItem.tsx#L8)
+
+***
+
+### label
+
+> **label**: `string`
+
+Defined in: [src/components/common/SecurityLevelSummaryItem.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/components/common/SecurityLevelSummaryItem.tsx#L6)
+
+***
+
+### testId?
+
+> `optional` **testId**: `string`
+
+Defined in: [src/components/common/SecurityLevelSummaryItem.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/components/common/SecurityLevelSummaryItem.tsx#L9)
+
+***
+
+### value
+
+> **value**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
+
+Defined in: [src/components/common/SecurityLevelSummaryItem.tsx:7](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/components/common/SecurityLevelSummaryItem.tsx#L7)

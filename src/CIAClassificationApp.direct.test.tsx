@@ -1,12 +1,4 @@
-import React from "react";
-import { render, screen, act } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import CIAClassificationApp from "./CIAClassificationApp";
-import { APP_TEST_IDS, SECURITY_LEVEL_TEST_IDS } from "./constants/testIds";
-import { SECURITY_LEVELS } from "./constants/appConstants";
-
-// Mock the ROI_ESTIMATES to prevent errors
+// Define mocks at the top of the file, before imports
 vi.mock("./hooks/useCIAOptions", () => {
   return {
     __esModule: true,
@@ -120,6 +112,13 @@ vi.mock("./hooks/useCIAOptions", () => {
     },
   };
 });
+
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import CIAClassificationApp from "./CIAClassificationApp";
+import { APP_TEST_IDS } from "./constants/testIds";
+
+// Mock the ROI_ESTIMATES to prevent errors
 
 // Mock all the widget components
 vi.mock("./components/widgets/SecurityLevelWidget", () => ({

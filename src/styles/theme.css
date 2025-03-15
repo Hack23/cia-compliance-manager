@@ -16,7 +16,7 @@ body,
 * {
   transition-property: color, background-color, border-color, box-shadow;
   transition-duration: 200ms;
-  transition-timing-function: ease-in-out;
+  transition-ting-function: ease-in-out;
 }
 
 /* Theme-specific styles */
@@ -179,6 +179,76 @@ body,
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
 }
 
+/* Enhanced CIA component specific styles for dark mode */
+.dark .color-confidentiality {
+  color: var(--color-confidentiality-accent);
+  text-shadow: 0 0 6px var(--color-confidentiality-glow);
+}
+
+.dark .color-integrity {
+  color: var(--color-integrity-accent);
+  text-shadow: 0 0 6px var(--color-integrity-glow);
+}
+
+.dark .color-availability {
+  color: var(--color-availability-accent);
+  text-shadow: 0 0 6px var(--color-availability-glow);
+}
+
+/* Security level badges for dark mode - Enhanced with stronger glow */
+.dark .bg-security-very-high {
+  background-color: var(--color-very-high-dark);
+  box-shadow: 0 0 10px var(--color-very-high-dark);
+}
+
+.dark .bg-security-high {
+  background-color: var(--color-high-dark);
+  box-shadow: 0 0 10px var(--color-high-dark);
+}
+
+.dark .bg-security-moderate {
+  background-color: var(--color-moderate-dark);
+  box-shadow: 0 0 10px var(--color-moderate-dark);
+}
+
+.dark .bg-security-low {
+  background-color: var(--color-low-dark);
+  box-shadow: 0 0 10px var(--color-low-dark);
+}
+
+.dark .bg-security-none {
+  background-color: var(--color-none-dark);
+  box-shadow: 0 0 10px var(--color-none-dark);
+}
+
+/* Enhanced card and widget containers */
+.dark .security-card {
+  background: var(--card-bg);
+  border: var(--card-border);
+  box-shadow: var(--card-glow);
+  transition: all 0.3s ease;
+}
+
+.dark .security-card:hover {
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.25);
+}
+
+/* Enhanced CIA component cards */
+.dark .confidentiality-card {
+  border-left-color: var(--color-confidentiality-accent) !important;
+  box-shadow: -2px 0 8px var(--color-confidentiality-glow);
+}
+
+.dark .integrity-card {
+  border-left-color: var(--color-integrity-accent) !important;
+  box-shadow: -2px 0 8px var(--color-integrity-glow);
+}
+
+.dark .availability-card {
+  border-left-color: var(--color-availability-accent) !important;
+  box-shadow: -2px 0 8px var(--color-availability-glow);
+}
+
 /* CIA component specific styles for dark mode */
 .dark .color-confidentiality {
   color: var(--color-confidentiality);
@@ -219,4 +289,93 @@ body,
 .dark .bg-security-none {
   background-color: var(--color-none-dark);
   box-shadow: 0 0 8px var(--color-none-dark);
+}
+
+/* Add subtle scan lines for dark mode */
+.dark .app-container::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: repeating-linear-gradient(
+    transparent 0px,
+    rgba(0, 0, 0, 0.05) 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.3;
+}
+
+/* Add screen flicker animation for true retro feel */
+@keyframes flicker {
+  0% {
+    opacity: 0.99;
+  }
+  5% {
+    opacity: 0.96;
+  }
+  10% {
+    opacity: 0.97;
+  }
+  15% {
+    opacity: 0.99;
+  }
+  20% {
+    opacity: 0.94;
+  }
+  25% {
+    opacity: 0.98;
+  }
+  30% {
+    opacity: 0.97;
+  }
+  35% {
+    opacity: 0.99;
+  }
+  40% {
+    opacity: 0.98;
+  }
+  45% {
+    opacity: 0.97;
+  }
+  50% {
+    opacity: 0.99;
+  }
+  55% {
+    opacity: 0.98;
+  }
+  60% {
+    opacity: 0.97;
+  }
+  65% {
+    opacity: 0.99;
+  }
+  70% {
+    opacity: 0.96;
+  }
+  75% {
+    opacity: 0.99;
+  }
+  80% {
+    opacity: 0.98;
+  }
+  85% {
+    opacity: 0.99;
+  }
+  90% {
+    opacity: 0.96;
+  }
+  95% {
+    opacity: 0.99;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.dark .widget-container {
+  animation: flicker 10s infinite;
 }

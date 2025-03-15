@@ -1,15 +1,14 @@
-import React, { useState, useMemo } from "react";
-import { SecurityLevel } from "../../types/cia";
+import React, { useMemo, useState } from "react";
 import { CONFIDENTIALITY_IMPACT_TEST_IDS } from "../../constants/testIds";
 import ciaContentService, {
   getInformationSensitivity,
   getProtectionLevel,
 } from "../../services/ciaContentService";
-import StatusBadge from "../common/StatusBadge";
+import { SecurityLevel } from "../../types/cia";
+import { normalizeSecurityLevel } from "../../utils/securityLevelUtils";
+import CIAImpactCard from "../common/CIAImpactCard";
 import KeyValuePair from "../common/KeyValuePair";
 import WidgetContainer from "../common/WidgetContainer";
-import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
-import { normalizeSecurityLevel } from "../../utils/widgetHelpers";
 
 /**
  * Props for ConfidentialityImpactWidget component
@@ -106,69 +105,37 @@ const ConfidentialityImpactWidget: React.FC<
       testId={testId}
     >
       <div className="space-y-6">
-        <div className="mb-4">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-lg font-medium mr-2">
-              {confidentialityLevel} Confidentiality
-            </h3>
-            <StatusBadge
-              status="purple"
-              testId={`${testId}-level-badge`}
-              className="bg-purple-600 text-white"
-            >
-              {confidentialityLevel}
-            </StatusBadge>
-          </div>
-          <p
-            className="text-gray-600 dark:text-gray-300"
-            data-testid={
-              CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_DESCRIPTION
-            }
-          >
-            {confidentialityDetails.description || "No description available"}
-          </p>
-        </div>
+        <CIAImpactCard
+          title="Confidentiality Profile"
+          level={confidentialityLevel}
+          description={
+            confidentialityDetails.description || "No description available"
+          }
+          icon="🔒"
+          badgeVariant="purple"
+          cardClass="confidentiality-card"
+          testId={`${testId}-impact-card`}
+        >
+          {confidentialityDetails.protectionMethod && (
+            <div className="flex items-center mt-2 text-sm text-purple-600 dark:text-purple-400">
+              <span className="mr-2">🛡️</span>
+              <span className="font-medium">Protection Method: </span>
+              <span className="ml-1">
+                {confidentialityDetails.protectionMethod}
+              </span>
+            </div>
+          )}
+        </CIAImpactCard>
 
-        {technicalDetails && technicalDetails.description && (
-          <div
-            className="mb-4 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4"
-            style={{
-              borderLeftColor: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY,
-            }}
-          >
-            <h4 className="text-md font-medium mb-2">
-              Technical Implementation
-            </h4>
-            <p className="text-gray-600 dark:text-gray-300">
-              {technicalDetails.description}
-            </p>
-            {(() => {
-              if (
-                technicalDetails &&
-                typeof technicalDetails === "object" &&
-                "protectionMethod" in technicalDetails &&
-                technicalDetails.protectionMethod
-              ) {
-                return (
-                  <div className="mt-2">
-                    <KeyValuePair
-                      label="Protection Method"
-                      value={technicalDetails.protectionMethod as string}
-                      valueClassName="text-purple-600 dark:text-purple-400"
-                      testId={`${testId}-protection-method`}
-                    />
-                  </div>
-                );
-              }
-              return null;
-            })()}
-          </div>
-        )}
+        {/* Business Impact Section with enhanced styling */}
+        <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border shadow-sm security-card">
+          <h4 className="text-md font-medium mb-3 flex items-center">
+            <span className="mr-2">💼</span>
+            Business Impact
+          </h4>
 
-        <div className="mb-4">
-          <h4 className="text-md font-medium mb-2">Business Impact</h4>
           <p
-            className="text-gray-600 dark:text-gray-300"
+            className="text-gray-600 dark:text-gray-300 mb-4"
             data-testid={`${testId}-business-impact`}
           >
             {businessImpact.summary ||
@@ -176,59 +143,80 @@ const ConfidentialityImpactWidget: React.FC<
               "No business impact data available"}
           </p>
 
-          {businessImpact.reputational && (
-            <div
-              className="mt-2 p-3 rounded-md"
-              style={{
-                backgroundColor: `${CIA_COMPONENT_COLORS.CONFIDENTIALITY.SECONDARY}25`,
-              }}
-            >
-              <div className="flex items-center mb-1">
-                <span className="mr-1">🏆</span>
-                <span className="font-medium">Reputational Impact</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {businessImpact.reputational && (
+              <div className="p-3 rounded-md bg-opacity-10 bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20 border border-purple-200 dark:border-purple-800">
+                <div className="flex items-center mb-2">
+                  <span className="mr-2">🏆</span>
+                  <span className="font-medium text-purple-700 dark:text-purple-300">
+                    Reputational Impact
+                  </span>
+                </div>
+                <p className="text-sm text-gray-700 dark:text-gray-300">
+                  {businessImpact.reputational.description ||
+                    "No reputational impact information available"}
+                </p>
               </div>
-              <p
-                className="text-sm"
-                style={{ color: CIA_COMPONENT_COLORS.CONFIDENTIALITY.DARK }}
-              >
-                {businessImpact.reputational.description ||
-                  "No reputational impact information available"}
-              </p>
-            </div>
-          )}
+            )}
 
-          {businessImpact.regulatory && (
-            <div
-              className="mt-2 p-3 rounded-md"
-              style={{
-                backgroundColor: `${CIA_COMPONENT_COLORS.CONFIDENTIALITY.SECONDARY}25`,
-              }}
-            >
-              <div className="flex items-center mb-1">
-                <span className="mr-1">📜</span>
-                <span className="font-medium">Regulatory Impact</span>
+            {businessImpact.regulatory && (
+              <div className="p-3 rounded-md bg-opacity-10 bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20 border border-purple-200 dark:border-purple-800">
+                <div className="flex items-center mb-2">
+                  <span className="mr-2">📜</span>
+                  <span className="font-medium text-purple-700 dark:text-purple-300">
+                    Regulatory Impact
+                  </span>
+                </div>
+                <p className="text-sm text-gray-700 dark:text-gray-300">
+                  {businessImpact.regulatory.description ||
+                    "No regulatory impact information available"}
+                </p>
               </div>
-              <p
-                className="text-sm"
-                style={{ color: CIA_COMPONENT_COLORS.CONFIDENTIALITY.DARK }}
-              >
-                {businessImpact.regulatory.description ||
-                  "No regulatory impact information available"}
-              </p>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
+        {/* Technical Details with enhanced styling */}
+        {technicalDetails && technicalDetails.description && (
+          <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4 confidentiality-card security-card">
+            <h4 className="text-md font-medium mb-2 flex items-center">
+              <span className="mr-2">⚙️</span>
+              Technical Implementation
+            </h4>
+
+            <p className="text-gray-600 dark:text-gray-300 mb-3">
+              {technicalDetails.description}
+            </p>
+
+            {technicalDetails.implementationSteps &&
+              technicalDetails.implementationSteps.length > 0 && (
+                <div className="mt-3">
+                  <h5 className="text-sm font-medium mb-2 text-purple-700 dark:text-purple-300">
+                    Implementation Steps
+                  </h5>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-300">
+                    {technicalDetails.implementationSteps
+                      .slice(0, 3)
+                      .map((step, idx) => (
+                        <li key={idx}>{step}</li>
+                      ))}
+                  </ul>
+                </div>
+              )}
+          </div>
+        )}
+
+        {/* Recommendations with enhanced styling */}
         {recommendations && recommendations.length > 0 && (
-          <div className="mb-4">
-            <div className="flex items-center justify-between mb-2">
-              <h4 className="text-md font-medium">Recommendations</h4>
+          <div className="bg-purple-50 dark:bg-gray-800 p-4 rounded-lg border border-purple-200 dark:border-purple-900 shadow-sm security-card">
+            <div className="flex items-center justify-between mb-3">
+              <h4 className="text-md font-medium flex items-center">
+                <span className="mr-2">💡</span>
+                Recommendations
+              </h4>
               {recommendations.length > 3 && (
                 <button
-                  className="text-sm hover:underline focus:outline-none"
-                  style={{
-                    color: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY,
-                  }}
+                  className="text-sm px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors"
                   onClick={() =>
                     setShowAllRecommendations(!showAllRecommendations)
                   }
@@ -237,6 +225,7 @@ const ConfidentialityImpactWidget: React.FC<
                 </button>
               )}
             </div>
+
             <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
               {(showAllRecommendations
                 ? recommendations
@@ -245,6 +234,7 @@ const ConfidentialityImpactWidget: React.FC<
                 <li
                   key={index}
                   data-testid={`${testId}-recommendation-${index}`}
+                  className="text-sm"
                 >
                   {recommendation}
                 </li>
@@ -253,26 +243,31 @@ const ConfidentialityImpactWidget: React.FC<
           </div>
         )}
 
-        <div
-          className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4"
-          style={{
-            borderLeftColor: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY,
-          }}
-        >
-          <h4 className="text-md font-medium mb-2">
+        {/* Data Classification with enhanced styling */}
+        <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4 confidentiality-card security-card">
+          <h4 className="text-md font-medium mb-3 flex items-center">
+            <span className="mr-2">🏷️</span>
             Data Protection Classification
           </h4>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <KeyValuePair
-              label="Classification Level"
-              value={confidentialityLevel}
-              testId={`${testId}-classification-level`}
-            />
-            <KeyValuePair
-              label="Information Sensitivity"
-              value={sensitivity}
-              testId={`${testId}-information-sensitivity`}
-            />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-3 rounded-md bg-opacity-10 bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20">
+              <KeyValuePair
+                label="Classification Level"
+                value={confidentialityLevel}
+                testId={`${testId}-classification-level`}
+                valueClassName="text-purple-700 dark:text-purple-300 font-medium"
+              />
+            </div>
+
+            <div className="p-3 rounded-md bg-opacity-10 bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20">
+              <KeyValuePair
+                label="Information Sensitivity"
+                value={sensitivity}
+                testId={`${testId}-information-sensitivity`}
+                valueClassName="text-purple-700 dark:text-purple-300 font-medium"
+              />
+            </div>
           </div>
         </div>
       </div>

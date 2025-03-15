@@ -1,9 +1,6 @@
-import React from "react";
-import { render, screen, within } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import CIAImpactSummaryWidget from "./CIAImpactSummaryWidget";
-import { WIDGET_TEST_IDS } from "../../constants/testIds";
-import { SecurityLevel } from "../../types/cia";
 
 describe("CIAImpactSummaryWidget", () => {
   it("renders with correct security levels", () => {

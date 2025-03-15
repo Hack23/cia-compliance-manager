@@ -1,7 +1,6 @@
-import React from "react";
+import "./App.css"; // Keep the import to avoid build errors
 import CIAClassificationApp from "./CIAClassificationApp";
 import { APP_TEST_IDS } from "./constants/testIds";
-import "./App.css"; // Keep the import to avoid build errors
 
 /**
  * Main App component

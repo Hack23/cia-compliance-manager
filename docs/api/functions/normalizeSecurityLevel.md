@@ -6,11 +6,11 @@
 
 # Function: normalizeSecurityLevel()
 
-> **normalizeSecurityLevel**(`level`?): `string`
+> **normalizeSecurityLevel**(`level`?): [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/utils/widgetHelpers.tsx:114](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L114)
+Defined in: [src/utils/securityLevelUtils.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/securityLevelUtils.ts#L9)
 
-Safely normalizes a security level string to a standard format
+Normalizes a security level string to ensure it's a valid SecurityLevel value
 
 ## Parameters
 
@@ -18,10 +18,10 @@ Safely normalizes a security level string to a standard format
 
 `string`
 
-The security level string to normalize
+The input security level string
 
 ## Returns
 
-`string`
+[`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-A normalized security level string
+A valid SecurityLevel

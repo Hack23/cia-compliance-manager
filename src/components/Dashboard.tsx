@@ -1,23 +1,17 @@
 import React, { ReactNode } from "react";
 import { WIDGET_ICONS } from "../constants/appConstants";
-import widgetRegistry from "../utils/widgetRegistry";
+import { APP_TEST_IDS, createDynamicTestId } from "../constants/testIds";
 import {
   availabilityOptions,
-  integrityOptions,
   confidentialityOptions,
+  integrityOptions,
 } from "../hooks/useCIAOptions";
-import { APP_TEST_IDS, createDynamicTestId } from "../constants/testIds";
+import widgetRegistry from "../utils/widgetRegistry";
 import WidgetHeader from "./common/WidgetHeader";
 // Add import for TechnicalDetailsWidget
 import TechnicalDetailsWidget from "./widgets/TechnicalDetailsWidget";
 // Add the missing imports for grid styles
-import {
-  gridClasses,
-  widgetClasses,
-  headerClasses,
-  contentClasses,
-  gridStyle,
-} from "../styles/gridStyles";
+import { gridClasses } from "../styles/gridStyles";
 import { SecurityLevel } from "../types/cia";
 
 // Main Dashboard component props

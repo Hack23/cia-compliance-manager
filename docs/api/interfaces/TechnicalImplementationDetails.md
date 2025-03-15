@@ -6,7 +6,7 @@
 
 # Interface: TechnicalImplementationDetails
 
-Defined in: [src/types/cia-services.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L22)
+Defined in: [src/types/cia-services.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L26)
 
 Enhanced interface for technical implementation details
 
@@ -16,7 +16,7 @@ Enhanced interface for technical implementation details
 
 > **description**: `string`
 
-Defined in: [src/types/cia-services.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L23)
+Defined in: [src/types/cia-services.ts:27](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L27)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/cia-services.ts:23](https://github.com/Hack23/cia-complia
 
 > **effort**: `object`
 
-Defined in: [src/types/cia-services.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L25)
+Defined in: [src/types/cia-services.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L29)
 
 #### development
 
@@ -44,7 +44,7 @@ Defined in: [src/types/cia-services.ts:25](https://github.com/Hack23/cia-complia
 
 > **implementationSteps**: `string`[]
 
-Defined in: [src/types/cia-services.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L24)
+Defined in: [src/types/cia-services.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L28)
 
 ***
 
@@ -52,7 +52,15 @@ Defined in: [src/types/cia-services.ts:24](https://github.com/Hack23/cia-complia
 
 > `optional` **mttr**: `string`
 
-Defined in: [src/types/cia-services.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L34)
+Defined in: [src/types/cia-services.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L38)
+
+***
+
+### protectionMethod?
+
+> `optional` **protectionMethod**: `string`
+
+Defined in: [src/types/cia-services.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L40)
 
 ***
 
@@ -60,7 +68,7 @@ Defined in: [src/types/cia-services.ts:34](https://github.com/Hack23/cia-complia
 
 > `optional` **requirements**: `string`[]
 
-Defined in: [src/types/cia-services.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L30)
+Defined in: [src/types/cia-services.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L34)
 
 ***
 
@@ -68,7 +76,7 @@ Defined in: [src/types/cia-services.ts:30](https://github.com/Hack23/cia-complia
 
 > `optional` **rpo**: `string`
 
-Defined in: [src/types/cia-services.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L33)
+Defined in: [src/types/cia-services.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L37)
 
 ***
 
@@ -76,7 +84,7 @@ Defined in: [src/types/cia-services.ts:33](https://github.com/Hack23/cia-complia
 
 > `optional` **rto**: `string`
 
-Defined in: [src/types/cia-services.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L32)
+Defined in: [src/types/cia-services.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L36)
 
 ***
 
@@ -84,4 +92,20 @@ Defined in: [src/types/cia-services.ts:32](https://github.com/Hack23/cia-complia
 
 > `optional` **technologies**: `string`[]
 
-Defined in: [src/types/cia-services.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L31)
+Defined in: [src/types/cia-services.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L35)
+
+***
+
+### uptime?
+
+> `optional` **uptime**: `string`
+
+Defined in: [src/types/cia-services.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L41)
+
+***
+
+### validationMethod?
+
+> `optional` **validationMethod**: `string`
+
+Defined in: [src/types/cia-services.ts:39](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L39)

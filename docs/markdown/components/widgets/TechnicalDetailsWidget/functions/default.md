@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../../README.md)
 
 ***
 
@@ -8,13 +8,16 @@
 
 > **default**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/components/widgets/TechnicalDetailsWidget.tsx#L27)
+Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:26](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/components/widgets/TechnicalDetailsWidget.tsx#L26)
+
+TechnicalDetailsWidget displays detailed technical implementation information
+for each of the CIA components based on selected security levels
 
 ## Parameters
 
 ### props
 
-`TechnicalDetailsWidgetProps`
+[`TechnicalDetailsWidgetProps`](../interfaces/TechnicalDetailsWidgetProps.md)
 
 ## Returns
 

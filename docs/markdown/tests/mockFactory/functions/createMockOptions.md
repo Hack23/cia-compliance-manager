@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -6,11 +6,11 @@
 
 # Function: createMockOptions()
 
-> **createMockOptions**(`levels`, `customValues`): `Record`\<`string`, [`MockOptions`](../../../types/testTypes/interfaces/MockOptions.md)\>
+> **createMockOptions**(`levels`, `customValues`): `Record`\<`string`, `MockOptions`\>
 
-Defined in: [src/tests/mockFactory.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/tests/mockFactory.ts#L13)
+Defined in: [src/tests/mockFactory.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/tests/mockFactory.tsx#L31)
 
-Creates mock CIA options for testing components
+Creates mock options for test cases
 
 ## Parameters
 
@@ -18,16 +18,10 @@ Creates mock CIA options for testing components
 
 `string`[] = `...`
 
-Array of security levels to include in the mock
-
 ### customValues
 
-`Partial`\<`Record`\<`string`, `Partial`\<[`MockOptions`](../../../types/testTypes/interfaces/MockOptions.md)\>\>\> = `{}`
-
-Optional custom values for specific fields
+`Partial`\<`Record`\<`string`, `Partial`\<`MockOptions`\>\>\> = `{}`
 
 ## Returns
 
-`Record`\<`string`, [`MockOptions`](../../../types/testTypes/interfaces/MockOptions.md)\>
-
-Mocked options object
+`Record`\<`string`, `MockOptions`\>

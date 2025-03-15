@@ -1,42 +1,50 @@
 import { defineConfig } from "cypress";
 import vitePreprocessor from "cypress-vite";
-import { resolve } from "path";
 import * as fs from "fs";
-import junitReporter from "./cypress/support/plugins/junit-reporter";
-import { resetJunitResults } from "./cypress/tasks/junit-reset";
+import * as path from "path";
+import { resolve } from "path";
 
 // Use __dirname in a more TypeScript-friendly way
 const __dirname = resolve(process.cwd());
-
-// Ensure the results directory exists
-const resultsDir = resolve(__dirname, "cypress/results");
-if (!fs.existsSync(resultsDir)) {
-  fs.mkdirSync(resultsDir, { recursive: true });
-  console.log(`Created results directory: ${resultsDir}`);
-}
 
 export default defineConfig({
   experimentalMemoryManagement: true,
   video: true,
   screenshotOnRunFailure: true,
   trashAssetsBeforeRuns: true,
-  viewportWidth: 3840,
-  viewportHeight: 2160,
+  viewportWidth: 1280, // More focused viewport default
+  viewportHeight: 800, // More focused viewport default
   retries: {
-    runMode: 2,
-    openMode: 1,
+    runMode: 2, // Increase retries for CI runs
+    openMode: 1, // Allow one retry in open mode
   },
-  // Set reporter to null to disable built-in JUnit reporter
-  reporter: null,
+  reporter: "cypress-multi-reporters",
+  reporterOptions: {
+    reporterEnabled: "spec, cypress-junit-reporter, mochawesome",
+    mochaJunitReporterReporterOptions: {
+      mochaFile: "cypress/reports/junit/results-[hash].xml",
+      toConsole: false,
+      attachments: true,
+      testCaseSwitchClassnameAndName: false,
+      includePending: true,
+    },
+    mochawesomeReporterOptions: {
+      reportDir: "cypress/reports/mochawesome",
+      overwrite: false,
+      html: true,
+      json: true,
+      timestamp: "mmddyyyy_HHMMss",
+      charts: true,
+      embeddedScreenshots: true,
+    },
+  },
   e2e: {
     baseUrl: "http://localhost:5173",
     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
     supportFile: "cypress/support/e2e.ts",
-    testIsolation: false,
+    testIsolation: true, // Enable test isolation for more reliable tests
     setupNodeEvents(on, config) {
-      // Register our improved JUnit reporter
-      junitReporter(on, config);
-
+      // Register vite preprocessor
       on(
         "file:preprocessor",
         vitePreprocessor({
@@ -44,26 +52,112 @@ export default defineConfig({
         })
       );
 
-      // Register tasks for backward compatibility
+      // Define tasks properly to avoid Promise chain issues
       on("task", {
-        resetJunitResults: resetJunitResults,
+        // Basic directory tasks
+        ensureDir: (dir: string) => {
+          // Use synchronous file operations to avoid Promise issues
+          const fs = require("fs");
+          const path = require("path");
+
+          try {
+            if (!fs.existsSync(dir)) {
+              fs.mkdirSync(dir, { recursive: true });
+            }
+            return true;
+          } catch (error) {
+            console.error(`Failed to create directory: ${dir}`, error);
+            return false;
+          }
+        },
+
+        // Example of a proper task that returns a direct value (not a Promise)
+        log(message) {
+          console.log(message);
+          return null; // Tasks must return null or a serializable value
+        },
+
+        readFile({ path }) {
+          try {
+            const content = fs.readFileSync(path, "utf8");
+            return { content };
+          } catch (err) {
+            return { error: `Error reading file: ${err}` };
+          }
+        },
+
         listJunitFiles() {
-          const resultsDir = resolve(__dirname, "cypress/results");
-          if (!fs.existsSync(resultsDir)) {
-            console.log(`Results directory does not exist: ${resultsDir}`);
+          try {
+            const resultsDir = path.join(process.cwd(), "cypress", "results");
+            if (!fs.existsSync(resultsDir)) {
+              return [];
+            }
+            return fs
+              .readdirSync(resultsDir)
+              .filter((file) => file.endsWith(".xml"));
+          } catch (err) {
             return [];
           }
+        },
 
-          const files = fs
-            .readdirSync(resultsDir)
-            .filter((file) => file.endsWith(".xml"));
+        // Add the missing resetJunitResults task
+        resetJunitResults() {
+          try {
+            const resultsDir = path.join(process.cwd(), "cypress", "results");
 
-          return files;
+            // Ensure directory exists
+            if (!fs.existsSync(resultsDir)) {
+              fs.mkdirSync(resultsDir, { recursive: true });
+              return null; // Return null instead of a string
+            }
+
+            // Find and delete all XML files in the directory
+            const xmlFiles = fs
+              .readdirSync(resultsDir)
+              .filter((file) => file.endsWith(".xml"));
+
+            // Delete each XML file
+            xmlFiles.forEach((file) => {
+              const filePath = path.join(resultsDir, file);
+              fs.unlinkSync(filePath);
+            });
+
+            return null; // Return null instead of a string
+          } catch (err) {
+            console.error("Error resetting JUnit results:", err);
+            return null; // Return null instead of a string
+          }
+        },
+
+        // You might also want to add a writeFile task for completeness
+        writeFile({ path, content }) {
+          try {
+            fs.writeFileSync(path, content);
+            return `File written successfully: ${path}`;
+          } catch (err) {
+            return `Error writing file: ${
+              err instanceof Error ? err.message : String(err)
+            }`;
+          }
+        },
+
+        // Add additional error logging for better debugging
+        logTestMetrics({ test, status, duration }) {
+          console.log(
+            `Test: ${test}, Status: ${status}, Duration: ${duration}ms`
+          );
+          return null;
         },
       });
 
       return config;
     },
+    retries: {
+      runMode: 1,
+      openMode: 0,
+    },
+    defaultCommandTimeout: 8000, // Slightly reduced from 10000
+    chromeWebSecurity: false,
   },
   component: {
     devServer: {
@@ -72,7 +166,6 @@ export default defineConfig({
     },
   },
   waitForAnimations: false,
-  defaultCommandTimeout: 5000,
   pageLoadTimeout: 10000,
   requestTimeout: 5000,
 });

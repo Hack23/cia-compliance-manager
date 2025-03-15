@@ -1,50 +1,91 @@
-import React, { ReactNode } from "react";
-import { WidgetBaseProps } from "../../types/widgets";
-import { handleWidgetError } from "../../utils/widgetHelpers";
+import React from "react";
+import { WidgetSize } from "../../types/widget";
+import { getTestId } from "../../utils/widgetHelpers";
 
-export interface WidgetBaseComponentProps extends WidgetBaseProps {
-  title: string;
-  icon?: ReactNode;
-  children: ReactNode;
+interface WidgetBaseProps {
+  children: React.ReactNode;
+  title?: string;
   className?: string;
+  testId?: string;
+  titleTestId?: string;
+  contentTestId?: string;
   loading?: boolean;
   error?: Error | null;
+  size?: WidgetSize;
+  icon?: React.ReactNode;
 }
 
 /**
- * Base component for all widgets to provide consistent structure and error handling
+ * Base component for all dashboard widgets with standard layout and styling
  */
-const WidgetBase: React.FC<WidgetBaseComponentProps> = ({
-  title,
-  icon,
+const WidgetBase: React.FC<WidgetBaseProps> = ({
   children,
-  testId,
+  title,
   className = "",
+  testId,
+  titleTestId,
+  contentTestId,
   loading = false,
   error = null,
+  size,
+  icon,
 }) => {
+  // Determine test IDs for child elements
+  const baseTestId = testId || "widget-base";
+  const titleId = titleTestId || `${baseTestId}-title`;
+  const contentId = contentTestId || `${baseTestId}-content`;
+
+  // Calculate grid sizing styles if size object provided
+  const sizeStyles = size
+    ? {
+        gridColumn: `span ${size.width}`,
+        gridRow: `span ${size.height}`,
+      }
+    : {};
+
   return (
     <div
-      className={`widget-base p-4 bg-white dark:bg-gray-800 rounded-lg ${className}`}
-      data-testid={testId}
-      aria-labelledby={`widget-${testId}-title`}
+      data-testid={baseTestId}
+      className={`widget bg-white dark:bg-gray-800 rounded-lg shadow-md ${className}`}
+      style={sizeStyles}
     >
-      <div className="flex items-center mb-4">
-        {icon && <span className="text-xl mr-2">{icon}</span>}
-        <h3 id={`widget-${testId}-title`} className="text-lg font-medium">
-          {title}
-        </h3>
-      </div>
-
-      {loading ? (
-        <div className="flex justify-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-700"></div>
+      {/* Widget header with title if provided */}
+      {title && (
+        <div
+          data-testid={getTestId(baseTestId, "header")}
+          className="widget-header border-b border-gray-200 dark:border-gray-700 p-3 flex items-center"
+        >
+          {icon && <span className="mr-2">{icon}</span>}
+          <h3
+            data-testid={titleId}
+            className="text-sm font-medium text-gray-700 dark:text-gray-300"
+          >
+            {title}
+          </h3>
         </div>
-      ) : error ? (
-        handleWidgetError(error)
-      ) : (
-        <div className="widget-content">{children}</div>
       )}
+
+      {/* Widget content area */}
+      <div data-testid={contentId} className="widget-content p-4 h-full">
+        {loading ? (
+          <div className="flex justify-center items-center h-full">
+            <div
+              data-testid={`${baseTestId}-loading`}
+              className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"
+            ></div>
+          </div>
+        ) : error ? (
+          <div
+            data-testid={`${baseTestId}-error`}
+            className="text-red-500 dark:text-red-400"
+          >
+            <p className="font-bold">Error:</p>
+            <p>{error.message}</p>
+          </div>
+        ) : (
+          children
+        )}
+      </div>
     </div>
   );
 };

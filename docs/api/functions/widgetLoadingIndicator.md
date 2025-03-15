@@ -6,22 +6,22 @@
 
 # Function: widgetLoadingIndicator()
 
-> **widgetLoadingIndicator**(`testId`?): `ReactNode`
+> **widgetLoadingIndicator**(`testId`): `Element`
 
-Defined in: [src/utils/widgetHelpers.tsx:231](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L231)
+Defined in: [src/utils/widgetHelpers.tsx:318](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L318)
 
-Creates a loading indicator for widgets in loading state
+Render a loading indicator for widgets
 
 ## Parameters
 
-### testId?
+### testId
 
 `string`
 
-Optional test ID for the loading element
+Test ID for the loading indicator
 
 ## Returns
 
-`ReactNode`
+`Element`
 
-JSX element for displaying a loading state
+Loading indicator JSX element

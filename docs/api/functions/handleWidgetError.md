@@ -6,28 +6,28 @@
 
 # Function: handleWidgetError()
 
-> **handleWidgetError**(`error`, `testId`?): `ReactNode`
+> **handleWidgetError**(`error`, `testId`): `null` \| `Element`
 
-Defined in: [src/utils/widgetHelpers.tsx:198](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L198)
+Defined in: [src/utils/widgetHelpers.tsx:335](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L335)
 
-Error handler for widget rendering that returns appropriate UI for error states
+Render an error message for widgets
 
 ## Parameters
 
 ### error
 
-The error object
+Error object
 
 `null` | `Error`
 
-### testId?
+### testId
 
 `string`
 
-Optional test ID for the error element
+Test ID for the error message
 
 ## Returns
 
-`ReactNode`
+`null` \| `Element`
 
-JSX element for displaying the error
+Error message JSX element or null if no error

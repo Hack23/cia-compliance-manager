@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: KeyValuePairProps
 
-Defined in: [src/types/componentProps.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L16)
+Defined in: [src/types/componentProps.tsx:32](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/componentProps.tsx#L32)
 
 Props for the KeyValuePair component that displays a key-value combination.
 
@@ -16,7 +16,7 @@ Props for the KeyValuePair component that displays a key-value combination.
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L22)
+Defined in: [src/types/componentProps.tsx:38](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/componentProps.tsx#L38)
 
 Optional CSS class name
 
@@ -26,7 +26,7 @@ Optional CSS class name
 
 > `optional` **horizontal**: `boolean`
 
-Defined in: [src/types/componentProps.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L26)
+Defined in: [src/types/componentProps.tsx:42](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/componentProps.tsx#L42)
 
 Whether to render in a horizontal layout
 
@@ -36,7 +36,7 @@ Whether to render in a horizontal layout
 
 > **label**: `string`
 
-Defined in: [src/types/componentProps.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L18)
+Defined in: [src/types/componentProps.tsx:34](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/componentProps.tsx#L34)
 
 Label to display for the key
 
@@ -46,7 +46,7 @@ Label to display for the key
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/componentProps.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L24)
+Defined in: [src/types/componentProps.tsx:40](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/componentProps.tsx#L40)
 
 Optional test ID for component selection in tests
 
@@ -56,6 +56,6 @@ Optional test ID for component selection in tests
 
 > **value**: `ReactNode`
 
-Defined in: [src/types/componentProps.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/types/componentProps.ts#L20)
+Defined in: [src/types/componentProps.tsx:36](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/types/componentProps.tsx#L36)
 
 Value to display

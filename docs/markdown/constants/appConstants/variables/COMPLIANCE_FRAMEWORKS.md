@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **COMPLIANCE\_FRAMEWORKS**: `object`
 
-Defined in: [src/constants/appConstants.ts:285](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/constants/appConstants.ts#L285)
+Defined in: [src/constants/appConstants.ts:307](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/constants/appConstants.ts#L307)
 
 ## Type declaration
 
@@ -30,4 +30,4 @@ Defined in: [src/constants/appConstants.ts:285](https://github.com/Hack23/cia-co
 
 ### SOC2
 
-> **SOC2**: `string` = `"SOC 2 Type 1"`
+> **SOC2**: `string` = `"SOC 2"`

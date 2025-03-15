@@ -1,18 +1,4 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
-import Dashboard, { DashboardWidget } from "./Dashboard";
-import { APP_TEST_IDS } from "../constants/testIds";
-
-// Mock the widget registry
-vi.mock("../utils/widgetRegistry", () => ({
-  default: {
-    renderWidgets: vi.fn(() => [<div key="mock-widget">Mock Widget</div>]),
-  },
-  __esModule: true,
-}));
-
-// Mock the useCIAOptions hook
+// Define mocks at the top of the file, before imports
 vi.mock("../hooks/useCIAOptions", () => {
   return {
     availabilityOptions: {
@@ -93,6 +79,21 @@ vi.mock("../hooks/useCIAOptions", () => {
     },
   };
 });
+
+import { render, screen } from "@testing-library/react";
+import { vi } from "vitest";
+import { APP_TEST_IDS } from "../constants/testIds";
+import Dashboard, { DashboardWidget } from "./Dashboard";
+
+// Mock the widget registry
+vi.mock("../utils/widgetRegistry", () => ({
+  default: {
+    renderWidgets: vi.fn(() => [<div key="mock-widget">Mock Widget</div>]),
+  },
+  __esModule: true,
+}));
+
+// Mock the useCIAOptions hook
 
 describe("Dashboard Component", () => {
   const defaultProps = {

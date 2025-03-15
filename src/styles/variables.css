@@ -64,7 +64,7 @@
   /* Dark mode overrides will be handled with dark: classes via Tailwind */
 }
 
-/* Dark Mode - Ingress Inspired */
+/* Dark Mode - Enhanced Ingress Inspired Theme */
 .dark {
   /* Colors */
   --primary-color: #00cc66;
@@ -72,7 +72,7 @@
   --primary-dark: #00bb77;
   --accent-color: #33eeff;
   --background-color: #001a1a;
-  --card-background: #002233;
+  --card-background: #001c25;
   --text-color: #f0f0f0;
   --text-secondary: #aaaaaa;
   --border-color: rgba(0, 204, 102, 0.3);
@@ -88,20 +88,31 @@
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     sans-serif;
 
-  /* Security level colors - Dark mode */
+  /* Enhanced Security level colors - Cyberpunk Inspired */
   --color-none-dark: #ff5252;
   --color-low-dark: #ff9a3c;
   --color-moderate-dark: #ffeb3b;
   --color-high-dark: #00e676;
   --color-very-high-dark: #40c4ff;
 
-  /* CIA component colors - Dark mode */
+  /* Enhanced CIA component colors - More vibrant for dark mode */
   --color-confidentiality: #9b59b6;
-  --color-integrity: #2ecc71;
-  --color-availability: #3498db;
+  --color-confidentiality-glow: rgba(155, 89, 182, 0.5);
+  --color-confidentiality-accent: #bd93f9;
 
-  /* Background colors - Dark mode */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #2d2d2d;
-  --bg-tertiary: #3d3d3d;
+  --color-integrity: #2ecc71;
+  --color-integrity-glow: rgba(46, 204, 113, 0.5);
+  --color-integrity-accent: #50fa7b;
+
+  --color-availability: #3498db;
+  --color-availability-glow: rgba(52, 152, 219, 0.5);
+  --color-availability-accent: #8be9fd;
+
+  /* Depth and layering */
+  --bg-primary: #0a1a1c;
+  --bg-secondary: #0d2024;
+  --bg-tertiary: #0f262c;
+  --card-bg: #051015;
+  --card-border: 1px solid rgba(0, 255, 136, 0.2);
+  --card-glow: 0 0 10px rgba(0, 255, 136, 0.15);
 }

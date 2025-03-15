@@ -6,17 +6,17 @@
 
 # Interface: ROIMetrics
 
-Defined in: [src/types/cia-services.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L6)
+Defined in: [src/types/cia-services.ts:4](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L4)
 
-Enhanced interface for ROI metrics
+ROI metrics interface
 
 ## Properties
 
-### breakEvenPeriod
+### breakEvenPeriod?
 
-> **breakEvenPeriod**: `string`
+> `optional` **breakEvenPeriod**: `string`
 
-Defined in: [src/types/cia-services.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L10)
+Defined in: [src/types/cia-services.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L8)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/cia-services.ts:10](https://github.com/Hack23/cia-complia
 
 > **description**: `string`
 
-Defined in: [src/types/cia-services.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L8)
+Defined in: [src/types/cia-services.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L6)
 
 ***
 
@@ -32,15 +32,15 @@ Defined in: [src/types/cia-services.ts:8](https://github.com/Hack23/cia-complian
 
 > `optional` **implementationCost**: `string`
 
-Defined in: [src/types/cia-services.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L11)
+Defined in: [src/types/cia-services.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L9)
 
 ***
 
-### potentialSavings
+### potentialSavings?
 
-> **potentialSavings**: `string`
+> `optional` **potentialSavings**: `string`
 
-Defined in: [src/types/cia-services.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L9)
+Defined in: [src/types/cia-services.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L7)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/types/cia-services.ts:9](https://github.com/Hack23/cia-complian
 
 > **returnRate**: `string`
 
-Defined in: [src/types/cia-services.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L7)
+Defined in: [src/types/cia-services.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L5)

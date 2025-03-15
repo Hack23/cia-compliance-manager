@@ -1,75 +1,67 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
 import MetricsCard from "./MetricsCard";
-import { COMMON_COMPONENT_TEST_IDS } from "../../constants/testIds";
 
 describe("MetricsCard Component", () => {
   it("renders with title and value", () => {
-    render(<MetricsCard title="Test Metric" value="100%" />);
+    render(<MetricsCard title="Completion" value="0" />);
 
-    expect(
-      screen.getByTestId(COMMON_COMPONENT_TEST_IDS.METRICS_CARD)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(COMMON_COMPONENT_TEST_IDS.METRICS_CARD_TITLE)
-    ).toHaveTextContent("Test Metric");
-    expect(
-      screen.getByTestId(COMMON_COMPONENT_TEST_IDS.METRICS_CARD_VALUE)
-    ).toHaveTextContent("100%");
+    expect(screen.getByTestId("metrics-card")).toBeInTheDocument();
+    expect(screen.getByText("Completion")).toBeInTheDocument();
+    expect(screen.getByTestId("metrics-card-value")).toHaveTextContent("0");
   });
 
   it("renders with custom test ID", () => {
-    const customTestId = "custom-metrics-card";
-    render(
-      <MetricsCard title="Test Metric" value="100%" testId={customTestId} />
-    );
-
-    expect(screen.getByTestId(customTestId)).toBeInTheDocument();
-  });
-
-  it("renders with trend indicator", () => {
     render(
       <MetricsCard
-        title="Test Metric"
+        title="Completion"
         value="100%"
-        trend={{ value: "+10%", direction: "up" }}
+        testId="custom-metrics-card"
       />
     );
 
-    expect(
-      screen.getByTestId(COMMON_COMPONENT_TEST_IDS.METRICS_CARD_TREND)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(COMMON_COMPONENT_TEST_IDS.METRICS_CARD_TREND)
-    ).toHaveTextContent("+10%");
+    expect(screen.getByTestId("custom-metrics-card")).toBeInTheDocument();
   });
 
-  it("renders with trend indicator", () => {
+  it("renders with up trend indicator", () => {
     render(
       <MetricsCard
-        title="Growth Metric"
-        value="25%"
-        trend={{ value: "+5%", direction: "up" }}
+        title="Growth"
+        value="0" // Value is rendered inside the component
+        trend={{ value: "5%", direction: "up" }}
       />
     );
 
-    expect(
-      screen.getByTestId(COMMON_COMPONENT_TEST_IDS.METRICS_CARD_TREND)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(COMMON_COMPONENT_TEST_IDS.METRICS_CARD_TREND)
-    ).toHaveTextContent("+5%");
+    expect(screen.getByTestId("metrics-card")).toBeInTheDocument();
+    expect(screen.getByText("Growth")).toBeInTheDocument();
+
+    // Check for trend value instead of main value
+    expect(screen.getByTestId("metrics-card-trend")).toHaveTextContent("5%");
+  });
+
+  it("renders with down trend indicator", () => {
+    render(
+      <MetricsCard
+        title="Reduction"
+        value="0" // Value is rendered inside the component
+        trend={{ value: "5%", direction: "down" }}
+      />
+    );
+
+    expect(screen.getByTestId("metrics-card")).toBeInTheDocument();
+    expect(screen.getByText("Reduction")).toBeInTheDocument();
+
+    // Check for trend value instead of main value
+    expect(screen.getByTestId("metrics-card-trend")).toHaveTextContent("5%");
   });
 
   it("applies variant styling", () => {
-    render(
-      <MetricsCard title="Success Metric" value="100%" variant="success" />
-    );
+    render(<MetricsCard title="Status" value="Good" variant="success" />);
 
-    const metricValue = screen.getByTestId(
-      COMMON_COMPONENT_TEST_IDS.METRICS_CARD_VALUE
-    );
-    expect(metricValue.className).toContain("text-green");
+    const card = screen.getByTestId("metrics-card");
+    expect(card).toBeInTheDocument();
+
+    // Check for green color classes instead of "success" string directly
+    expect(card.className).toContain("bg-green-100");
+    expect(card.className).toContain("border-green-200");
   });
 });

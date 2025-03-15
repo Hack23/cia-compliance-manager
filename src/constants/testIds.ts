@@ -2,8 +2,8 @@
  * Centralized Test ID constants for component selection in tests
  */
 
+import { SecurityLevel } from "../types/cia"; // Updated import from .tsx to .ts
 import { VALUE_CREATION_POINTS } from "./appConstants";
-import { SecurityLevel } from "../types/cia";
 
 // Add this function near the top of the file to make it easier to create compound testIds
 export const createCompoundTestId = (prefix: string, suffix: string): string =>
@@ -32,9 +32,9 @@ export const WIDGET_PREFIXES = {
 // CIA Component TestIDs - KEEP ORIGINAL VALUES FOR BACKWARD COMPATIBILITY
 export const CIA_TEST_IDS = {
   // Select dropdown elements
-  AVAILABILITY_SELECT: "availability-select",
-  INTEGRITY_SELECT: "integrity-select",
-  CONFIDENTIALITY_SELECT: "confidentiality-select",
+  AVAILABILITY_SELECT: "availability-selector",
+  INTEGRITY_SELECT: "integrity-selector",
+  CONFIDENTIALITY_SELECT: "confidentiality-selector",
 
   // Labels and descriptions
   AVAILABILITY_LABEL: "availability-label",
@@ -174,9 +174,8 @@ export const BUSINESS_IMPACT_TEST_IDS = {
   REPUTATIONAL_IMPACT_SECTION: "reputational-impact-section",
   REGULATORY_IMPACT_SECTION: "regulatory-impact-section",
   STRATEGIC_IMPACT_SECTION: "strategic-impact-section",
-  FINANCIAL_RISK_BADGE: "financial-risk-badge",
-
-  // Business Impact Analysis Widget
+  // Add this line
+  BUSINESS_IMPACT_WIDGET: "business-impact-widget",
   BUSINESS_IMPACT_ANALYSIS_PREFIX: "business-impact-analysis",
   CATEGORY_ICON_PREFIX: "category-icon",
   IMPACT_ANALYSIS_PREFIX: "impact-analysis",
@@ -451,6 +450,7 @@ export const SECURITY_RESOURCES_TEST_IDS = {
   SECURITY_RESOURCES_PREFIX: "security-resources",
   RESOURCE_ITEM: "security-resource-item",
   RESOURCE_LIST: "security-resources-list",
+  SECURITY_RESOURCES_WIDGET: "security-resources-widget",
 };
 
 export const SECURITY_LEVEL_TEST_IDS = {
@@ -459,6 +459,7 @@ export const SECURITY_LEVEL_TEST_IDS = {
 };
 
 export const VALUE_CREATION_TEST_IDS = {
+  VALUE_CREATION_WIDGET: "value-creation-widget",
   VALUE_CREATION_PREFIX: "value-creation",
   VALUE_POINT: "value-point",
   VALUE_POINTS_LIST: "value-points-list",
@@ -494,19 +495,17 @@ export const createDynamicTestId = {
   keyBenefit: (index: number): string => `key-benefit-${index}`,
   framework: (index: number): string => `framework-${index}`,
   frameworkStatus: (framework: string): string =>
-    `framework-status-${framework.toLowerCase()}`,
+    `framework-status-${framework}`,
   categorySpecific: (prefix: string, category: string): string =>
     `${prefix}-${category.toLowerCase()}`,
   option: (level: string): string => `option-${level}`,
   widgetId: (id: string): string => `widget-${id}`,
 };
 
-/**
- * Helper to generate dynamic test IDs with consistent patterns
- */
-export const getTestId = (prefix: string, id: string): string => {
+// Helper function to get a test ID with a prefix
+export function getTestId(prefix: string, id: string): string {
   return `${prefix}-${id}`;
-};
+}
 
 /**
  * Test helpers for working with security levels and related data
@@ -518,7 +517,6 @@ export const TEST_HELPERS = {
   getValuePointsForLevel: (level: string): string[] | undefined => {
     return VALUE_CREATION_POINTS[level as keyof typeof VALUE_CREATION_POINTS];
   },
-
   /**
    * Convert string to SecurityLevel type safely
    */

@@ -6,56 +6,110 @@
 
 # Interface: BusinessImpactDetails
 
-Defined in: [src/types/cia.tsx:62](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L62)
+Defined in: [src/types/cia-services.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L47)
 
-## Indexable
-
-\[`key`: `string`\]: `undefined` \| [`BusinessImpactDetail`](BusinessImpactDetail.md)
+Enhanced interface for business impact details
 
 ## Properties
 
-### competitiveAdvantage?
+### financial
 
-> `optional` **competitiveAdvantage**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
+> **financial**: `object`
 
-Defined in: [src/types/cia.tsx:68](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L68)
+Defined in: [src/types/cia-services.ts:49](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L49)
 
-***
+#### annualRevenueLoss?
 
-### financialImpact?
+> `optional` **annualRevenueLoss**: `string`
 
-> `optional` **financialImpact**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
+#### description
 
-Defined in: [src/types/cia.tsx:63](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L63)
+> **description**: `string`
 
-***
+#### riskLevel
 
-### operationalImpact?
-
-> `optional` **operationalImpact**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
-
-Defined in: [src/types/cia.tsx:64](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L64)
+> **riskLevel**: `string`
 
 ***
 
-### regulatoryImpact?
+### operational
 
-> `optional` **regulatoryImpact**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
+> **operational**: `object`
 
-Defined in: [src/types/cia.tsx:66](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L66)
+Defined in: [src/types/cia-services.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L54)
+
+#### description
+
+> **description**: `string`
+
+#### meanTimeToRecover?
+
+> `optional` **meanTimeToRecover**: `string`
+
+#### riskLevel
+
+> **riskLevel**: `string`
 
 ***
 
-### reputationalImpact?
+### regulatory?
 
-> `optional` **reputationalImpact**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
+> `optional` **regulatory**: `object`
 
-Defined in: [src/types/cia.tsx:65](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L65)
+Defined in: [src/types/cia-services.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L68)
+
+#### complianceImpact?
+
+> `optional` **complianceImpact**: `string`
+
+#### description
+
+> **description**: `string`
+
+#### riskLevel
+
+> **riskLevel**: `string`
 
 ***
 
-### strategicImpact?
+### reputational?
 
-> `optional` **strategicImpact**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
+> `optional` **reputational**: `object`
 
-Defined in: [src/types/cia.tsx:67](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.tsx#L67)
+Defined in: [src/types/cia-services.ts:59](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L59)
+
+#### description
+
+> **description**: `string`
+
+#### riskLevel
+
+> **riskLevel**: `string`
+
+***
+
+### strategic?
+
+> `optional` **strategic**: `object`
+
+Defined in: [src/types/cia-services.ts:63](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L63)
+
+#### competitiveAdvantage?
+
+> `optional` **competitiveAdvantage**: `string`
+
+#### description
+
+> **description**: `string`
+
+#### riskLevel
+
+> **riskLevel**: `string`
+
+***
+
+### summary
+
+> **summary**: `string`
+
+Defined in: [src/types/cia-services.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia-services.ts#L48)

@@ -20,22 +20,24 @@ Defined in: [src/tests/vitest-extensions.d.ts:12](https://github.com/Hack23/cia-
 
 ### toBeChecked()
 
+#### Call Signature
+
 > **toBeChecked**(): `void`
 
 Defined in: [src/tests/vitest-extensions.d.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L34)
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Description
+##### Description
 
 Assert whether the given element is checked.
 
 It accepts an `input` of type `checkbox` or `radio` and elements with a `role` of `radio` with a valid
 `aria-checked` attribute of "true" or "false".
 
-#### Example
+##### Example
 
 ```ts
 <input
@@ -53,11 +55,25 @@ expect(inputCheckbox).toBeChecked()
 expect(inputRadio).not.toBeChecked()
 ```
 
-#### See
+##### See
 
 [testing-library/jest-dom#tobechecked](https://github.com/testing-library/jest-dom#tobechecked)
 
-#### Overrides
+##### Inherited from
+
+`TestingLibraryMatchers.toBeChecked`
+
+#### Call Signature
+
+> **toBeChecked**(): `any`
+
+Defined in: [src/types/global-extensions.d.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L10)
+
+##### Returns
+
+`any`
+
+##### Inherited from
 
 `TestingLibraryMatchers.toBeChecked`
 
@@ -65,22 +81,24 @@ expect(inputRadio).not.toBeChecked()
 
 ### toBeDisabled()
 
+#### Call Signature
+
 > **toBeDisabled**(): `void`
 
 Defined in: [src/tests/vitest-extensions.d.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L32)
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Description
+##### Description
 
 Allows you to check whether an element is disabled from the user's perspective.
 
 Matches if the element is a form control and the `disabled` attribute is specified on this element or the
 element is a descendant of a form element with a `disabled` attribute.
 
-#### Example
+##### Example
 
 ```ts
 <button
@@ -94,11 +112,25 @@ element is a descendant of a form element with a `disabled` attribute.
 expect(getByTestId('button')).toBeDisabled()
 ```
 
-#### See
+##### See
 
 [testing-library/jest-dom#tobedisabled](https://github.com/testing-library/jest-dom#tobedisabled)
 
-#### Overrides
+##### Inherited from
+
+`TestingLibraryMatchers.toBeDisabled`
+
+#### Call Signature
+
+> **toBeDisabled**(): `any`
+
+Defined in: [src/types/global-extensions.d.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L11)
+
+##### Returns
+
+`any`
+
+##### Inherited from
 
 `TestingLibraryMatchers.toBeDisabled`
 
@@ -106,15 +138,17 @@ expect(getByTestId('button')).toBeDisabled()
 
 ### toBeEnabled()
 
+#### Call Signature
+
 > **toBeEnabled**(): `void`
 
 Defined in: [src/tests/vitest-extensions.d.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L33)
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Description
+##### Description
 
 Allows you to check whether an element is not disabled from the user's perspective.
 
@@ -122,7 +156,7 @@ Works like `not.toBeDisabled()`.
 
 Use this matcher to avoid double negation in your tests.
 
-#### Example
+##### Example
 
 ```ts
 <button
@@ -135,11 +169,25 @@ Use this matcher to avoid double negation in your tests.
 expect(getByTestId('button')).toBeEnabled()
 ```
 
-#### See
+##### See
 
 [testing-library/jest-dom#tobeenabled](https://github.com/testing-library/jest-dom#tobeenabled)
 
-#### Overrides
+##### Inherited from
+
+`TestingLibraryMatchers.toBeEnabled`
+
+#### Call Signature
+
+> **toBeEnabled**(): `any`
+
+Defined in: [src/types/global-extensions.d.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L12)
+
+##### Returns
+
+`any`
+
+##### Inherited from
 
 `TestingLibraryMatchers.toBeEnabled`
 
@@ -183,19 +231,21 @@ Defined in: [src/tests/vitest-extensions.d.ts:21](https://github.com/Hack23/cia-
 
 ### toBeInTheDocument()
 
+#### Call Signature
+
 > **toBeInTheDocument**(): `void`
 
 Defined in: [src/tests/vitest-extensions.d.ts:27](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L27)
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Description
+##### Description
 
 Assert whether an element is present in the document or not.
 
-#### Example
+##### Example
 
 ```ts
 <svg data-testid="svg-element"></svg>
@@ -204,11 +254,25 @@ expect(queryByTestId('svg-element')).toBeInTheDocument()
 expect(queryByTestId('does-not-exist')).not.toBeInTheDocument()
 ```
 
-#### See
+##### See
 
 [testing-library/jest-dom#tobeinthedocument](https://github.com/testing-library/jest-dom#tobeinthedocument)
 
-#### Overrides
+##### Inherited from
+
+`TestingLibraryMatchers.toBeInTheDocument`
+
+#### Call Signature
+
+> **toBeInTheDocument**(): `any`
+
+Defined in: [src/types/global-extensions.d.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L7)
+
+##### Returns
+
+`any`
+
+##### Inherited from
 
 `TestingLibraryMatchers.toBeInTheDocument`
 
@@ -250,6 +314,22 @@ Defined in: [src/tests/vitest-extensions.d.ts:23](https://github.com/Hack23/cia-
 
 ***
 
+### toBeRequired()
+
+> **toBeRequired**(): `any`
+
+Defined in: [src/types/global-extensions.d.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L13)
+
+#### Returns
+
+`any`
+
+#### Inherited from
+
+`TestingLibraryMatchers.toBeRequired`
+
+***
+
 ### toBeTruthy()
 
 > **toBeTruthy**(): [`JestAssertion`](JestAssertion.md)\<`T`\>
@@ -274,17 +354,35 @@ Defined in: [src/tests/vitest-extensions.d.ts:19](https://github.com/Hack23/cia-
 
 ***
 
+### toBeValid()
+
+> **toBeValid**(): `any`
+
+Defined in: [src/types/global-extensions.d.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L14)
+
+#### Returns
+
+`any`
+
+#### Inherited from
+
+`TestingLibraryMatchers.toBeValid`
+
+***
+
 ### toBeVisible()
+
+#### Call Signature
 
 > **toBeVisible**(): `void`
 
 Defined in: [src/tests/vitest-extensions.d.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L28)
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Description
+##### Description
 
 This allows you to check if an element is currently visible to the user.
 
@@ -296,7 +394,7 @@ An element is visible if **all** the following conditions are met:
 * it does not have the hidden attribute
 * if `<details />` it has the open attribute
 
-#### Example
+##### Example
 
 ```ts
 <div
@@ -312,11 +410,25 @@ expect(getByTestId('zero-opacity')).not.toBeVisible()
 expect(getByTestId('visible')).toBeVisible()
 ```
 
-#### See
+##### See
 
 [testing-library/jest-dom#tobevisible](https://github.com/testing-library/jest-dom#tobevisible)
 
-#### Overrides
+##### Inherited from
+
+`TestingLibraryMatchers.toBeVisible`
+
+#### Call Signature
+
+> **toBeVisible**(): `any`
+
+Defined in: [src/types/global-extensions.d.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L15)
+
+##### Returns
+
+`any`
+
+##### Inherited from
 
 `TestingLibraryMatchers.toBeVisible`
 
@@ -324,25 +436,27 @@ expect(getByTestId('visible')).toBeVisible()
 
 ### toContainElement()
 
+#### Call Signature
+
 > **toContainElement**(`element`): `void`
 
 Defined in: [src/tests/vitest-extensions.d.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L36)
 
-#### Parameters
+##### Parameters
 
-##### element
+###### element
 
 `null` | `HTMLElement`
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Description
+##### Description
 
 Allows you to assert whether an element contains another element as a descendant or not.
 
-#### Example
+##### Example
 
 ```ts
 <span data-testid="ancestor">
@@ -357,11 +471,31 @@ expect(descendant).not.toContainElement(ancestor)
 expect(ancestor).not.toContainElement(nonExistantElement)
 ```
 
-#### See
+##### See
 
 [testing-library/jest-dom#tocontainelement](https://github.com/testing-library/jest-dom#tocontainelement)
 
-#### Overrides
+##### Inherited from
+
+`TestingLibraryMatchers.toContainElement`
+
+#### Call Signature
+
+> **toContainElement**(`element`): `any`
+
+Defined in: [src/types/global-extensions.d.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L16)
+
+##### Parameters
+
+###### element
+
+`null` | `HTMLElement`
+
+##### Returns
+
+`any`
+
+##### Inherited from
 
 `TestingLibraryMatchers.toContainElement`
 
@@ -369,25 +503,27 @@ expect(ancestor).not.toContainElement(nonExistantElement)
 
 ### toContainHTML()
 
+#### Call Signature
+
 > **toContainHTML**(`htmlText`): `void`
 
 Defined in: [src/tests/vitest-extensions.d.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L37)
 
-#### Parameters
+##### Parameters
 
-##### htmlText
+###### htmlText
 
 `string`
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Description
+##### Description
 
 Assert whether a string representing a HTML element is contained in another element.
 
-#### Example
+##### Example
 
 ```ts
 <span data-testid="parent"><span data-testid="child"></span></span>
@@ -395,11 +531,31 @@ Assert whether a string representing a HTML element is contained in another elem
 expect(getByTestId('parent')).toContainHTML('<span data-testid="child"></span>')
 ```
 
-#### See
+##### See
 
 [testing-library/jest-dom#tocontainhtml](https://github.com/testing-library/jest-dom#tocontainhtml)
 
-#### Overrides
+##### Inherited from
+
+`TestingLibraryMatchers.toContainHTML`
+
+#### Call Signature
+
+> **toContainHTML**(`htmlText`): `any`
+
+Defined in: [src/types/global-extensions.d.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L17)
+
+##### Parameters
+
+###### htmlText
+
+`string`
+
+##### Returns
+
+`any`
+
+##### Inherited from
 
 `TestingLibraryMatchers.toContainHTML`
 
@@ -425,25 +581,27 @@ Defined in: [src/tests/vitest-extensions.d.ts:25](https://github.com/Hack23/cia-
 
 ### toHaveAttribute()
 
+#### Call Signature
+
 > **toHaveAttribute**(`attr`, `value`?): `void`
 
 Defined in: [src/tests/vitest-extensions.d.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L31)
 
-#### Parameters
+##### Parameters
 
-##### attr
-
-`string`
-
-##### value?
+###### attr
 
 `string`
 
-#### Returns
+###### value?
+
+`string`
+
+##### Returns
 
 `void`
 
-#### Description
+##### Description
 
 Allows you to check if a given element has an attribute or not.
 
@@ -451,7 +609,7 @@ You can also optionally check that the attribute has a specific expected value o
 [expect.stringContaining](https://jestjs.io/docs/en/expect.html#expectnotstringcontainingstring) or
 [expect.stringMatching](https://jestjs.io/docs/en/expect.html#expectstringmatchingstring-regexp).
 
-#### Example
+##### Example
 
 ```ts
 <button
@@ -467,11 +625,35 @@ expect(button).toHaveAttribute('type', 'submit')
 expect(button).not.toHaveAttribute('type', 'button')
 ```
 
-#### See
+##### See
 
 [testing-library/jest-dom#tohaveattribute](https://github.com/testing-library/jest-dom#tohaveattribute)
 
-#### Overrides
+##### Inherited from
+
+`TestingLibraryMatchers.toHaveAttribute`
+
+#### Call Signature
+
+> **toHaveAttribute**(`name`, `value`?): `any`
+
+Defined in: [src/types/global-extensions.d.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L9)
+
+##### Parameters
+
+###### name
+
+`string`
+
+###### value?
+
+`string`
+
+##### Returns
+
+`any`
+
+##### Inherited from
 
 `TestingLibraryMatchers.toHaveAttribute`
 
@@ -527,27 +709,29 @@ Defined in: [src/tests/vitest-extensions.d.ts:17](https://github.com/Hack23/cia-
 
 ### toHaveClass()
 
+#### Call Signature
+
 > **toHaveClass**(`className`): `void`
 
 Defined in: [src/tests/vitest-extensions.d.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L29)
 
-#### Parameters
+##### Parameters
 
-##### className
+###### className
 
 `string`
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Description
+##### Description
 
 Check whether the given element has certain classes within its `class` attribute.
 
 You must provide at least one class, unless you are asserting that an element does not have any classes.
 
-#### Example
+##### Example
 
 ```ts
 <button
@@ -569,13 +753,71 @@ expect(deleteButton).not.toHaveClass('btn xs btn-danger', {exact: true})
 expect(noClasses).not.toHaveClass()
 ```
 
-#### See
+##### See
 
 [testing-library/jest-dom#tohaveclass](https://github.com/testing-library/jest-dom#tohaveclass)
 
-#### Overrides
+##### Inherited from
 
 `TestingLibraryMatchers.toHaveClass`
+
+#### Call Signature
+
+> **toHaveClass**(...`classNames`): `any`
+
+Defined in: [src/types/global-extensions.d.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L18)
+
+##### Parameters
+
+###### classNames
+
+...`string`[]
+
+##### Returns
+
+`any`
+
+##### Inherited from
+
+`TestingLibraryMatchers.toHaveClass`
+
+***
+
+### toHaveFocus()
+
+> **toHaveFocus**(): `any`
+
+Defined in: [src/types/global-extensions.d.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L19)
+
+#### Returns
+
+`any`
+
+#### Inherited from
+
+`TestingLibraryMatchers.toHaveFocus`
+
+***
+
+### toHaveFormValues()
+
+> **toHaveFormValues**(`expectedValues`): `any`
+
+Defined in: [src/types/global-extensions.d.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L20)
+
+#### Parameters
+
+##### expectedValues
+
+`Record`\<`string`, `any`\>
+
+#### Returns
+
+`any`
+
+#### Inherited from
+
+`TestingLibraryMatchers.toHaveFormValues`
 
 ***
 
@@ -599,27 +841,29 @@ Defined in: [src/tests/vitest-extensions.d.ts:39](https://github.com/Hack23/cia-
 
 ### toHaveStyle()
 
+#### Call Signature
+
 > **toHaveStyle**(`css`): `void`
 
 Defined in: [src/tests/vitest-extensions.d.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L38)
 
-#### Parameters
+##### Parameters
 
-##### css
+###### css
 
 `Record`\<`string`, `any`\>
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Description
+##### Description
 
 Check if an element has specific css properties with specific values applied.
 
 Only matches if the element has *all* the expected properties applied, not just some of them.
 
-#### Example
+##### Example
 
 ```ts
 <button
@@ -637,11 +881,31 @@ expect(button).toHaveStyle({
 })
 ```
 
-#### See
+##### See
 
 [testing-library/jest-dom#tohavestyle](https://github.com/testing-library/jest-dom#tohavestyle)
 
-#### Overrides
+##### Inherited from
+
+`TestingLibraryMatchers.toHaveStyle`
+
+#### Call Signature
+
+> **toHaveStyle**(`css`): `any`
+
+Defined in: [src/types/global-extensions.d.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L21)
+
+##### Parameters
+
+###### css
+
+`string` | `Record`\<`string`, `any`\>
+
+##### Returns
+
+`any`
+
+##### Inherited from
 
 `TestingLibraryMatchers.toHaveStyle`
 
@@ -649,21 +913,23 @@ expect(button).toHaveStyle({
 
 ### toHaveTextContent()
 
+#### Call Signature
+
 > **toHaveTextContent**(`text`): `void`
 
 Defined in: [src/tests/vitest-extensions.d.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L30)
 
-#### Parameters
+##### Parameters
 
-##### text
+###### text
 
 `string`
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Description
+##### Description
 
 Check whether the given element has a text content or not.
 
@@ -674,7 +940,7 @@ To perform a case-insensitive match, you can use a RegExp with the `/i` modifier
 
 If you want to match the whole content, you can use a RegExp to do it.
 
-#### Example
+##### Example
 
 ```ts
 <span data-testid="text-content">Text Content</span>
@@ -688,11 +954,31 @@ expect(element).toHaveTextContent(/content$/i)
 expect(element).not.toHaveTextContent('content')
 ```
 
-#### See
+##### See
 
 [testing-library/jest-dom#tohavetextcontent](https://github.com/testing-library/jest-dom#tohavetextcontent)
 
-#### Overrides
+##### Inherited from
+
+`TestingLibraryMatchers.toHaveTextContent`
+
+#### Call Signature
+
+> **toHaveTextContent**(`text`): `any`
+
+Defined in: [src/types/global-extensions.d.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L8)
+
+##### Parameters
+
+###### text
+
+`string` | `RegExp`
+
+##### Returns
+
+`any`
+
+##### Inherited from
 
 `TestingLibraryMatchers.toHaveTextContent`
 
@@ -700,21 +986,23 @@ expect(element).not.toHaveTextContent('content')
 
 ### toHaveValue()
 
+#### Call Signature
+
 > **toHaveValue**(`value`): `void`
 
 Defined in: [src/tests/vitest-extensions.d.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/vitest-extensions.d.ts#L35)
 
-#### Parameters
+##### Parameters
 
-##### value
+###### value
 
 `any`
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Description
+##### Description
 
 Check whether the given form element has the specified value.
 
@@ -723,7 +1011,7 @@ Accepts `<input>`, `<select>`, and `<textarea>` elements with the exception of `
 [toBeChecked](https://github.com/testing-library/jest-dom#tobechecked) or
 [toHaveFormValues](https://github.com/testing-library/jest-dom#tohaveformvalues).
 
-#### Example
+##### Example
 
 ```ts
 <input
@@ -735,11 +1023,31 @@ const numberInput = getByTestId('input-number')
 expect(numberInput).toHaveValue(5)
 ```
 
-#### See
+##### See
 
 [testing-library/jest-dom#tohavevalue](https://github.com/testing-library/jest-dom#tohavevalue)
 
-#### Overrides
+##### Inherited from
+
+`TestingLibraryMatchers.toHaveValue`
+
+#### Call Signature
+
+> **toHaveValue**(`value`?): `any`
+
+Defined in: [src/types/global-extensions.d.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L22)
+
+##### Parameters
+
+###### value?
+
+`string` | `number` | `string`[]
+
+##### Returns
+
+`any`
+
+##### Inherited from
 
 `TestingLibraryMatchers.toHaveValue`
 

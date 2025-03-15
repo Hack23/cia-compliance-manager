@@ -1,10 +1,10 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
-  WidgetBaseProps,
-  IntegrityImpactWidgetProps,
-  ConfidentialityImpactWidgetProps,
   AvailabilityImpactWidgetProps,
+  ConfidentialityImpactWidgetProps,
+  IntegrityImpactWidgetProps,
   SecurityResourcesWidgetProps,
+  WidgetBaseProps,
 } from "./widgets";
 
 describe("Widget Type Definitions", () => {

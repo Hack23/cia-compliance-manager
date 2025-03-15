@@ -8,7 +8,7 @@
 
 > **getDetailedDescription**(`component`, `level`): `string`
 
-Defined in: [src/services/ciaContentService.ts:1292](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1292)
+Defined in: [src/services/ciaContentService.ts:1369](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1369)
 
 Get detailed component description with enhanced type safety
 

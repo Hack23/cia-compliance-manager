@@ -1,24 +1,26 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import { vi, describe, it, expect } from "vitest";
-import ConfidentialityImpactWidget from "./ConfidentialityImpactWidget";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { vi } from "vitest";
 import { CONFIDENTIALITY_IMPACT_TEST_IDS } from "../../constants/testIds";
 import { SecurityLevel } from "../../types/cia";
-import ciaContentService from "../../services/ciaContentService";
+import ConfidentialityImpactWidget from "./ConfidentialityImpactWidget";
 
 // Mock ciaContentService
 vi.mock("../../services/ciaContentService", () => ({
   __esModule: true,
   default: {
-    getComponentDetails: vi.fn().mockImplementation((component, level) => ({
-      description: `${level} confidentiality description`,
-      businessImpact: `${level} confidentiality business impact`,
-      protectionMechanism:
-        level !== "None" ? `${level} protection mechanism` : undefined,
-      technical: `${level} technical implementation`,
-    })),
+    getComponentDetails: vi.fn().mockImplementation((component, level) => {
+      if (level === "Unknown") {
+        return undefined;
+      }
+      return {
+        description: `${level} ${component} description`,
+        businessImpact: `${level} ${component} business impact`,
+        protectionMethod:
+          level !== "None" ? `${level} protection method` : undefined,
+      };
+    }),
     getBusinessImpact: vi.fn().mockImplementation((component, level) => ({
-      summary: `${level} confidentiality business impact summary`,
+      summary: `${level} ${component} business impact summary`,
       reputational: {
         description: `${level} reputational impact`,
         riskLevel: level === "None" ? "High Risk" : "Medium Risk",
@@ -32,169 +34,206 @@ vi.mock("../../services/ciaContentService", () => ({
       .fn()
       .mockImplementation((component, level) => ({
         description: `${level} technical implementation`,
-        // Use 'protectionMethod' instead of 'protection' to match the interface
+        implementationSteps: [
+          `Step 1 for ${component} at ${level} level`,
+          `Step 2 for ${component} at ${level} level`,
+          `Step 3 for ${component} at ${level} level`,
+          `Step 4 for ${component} at ${level} level`,
+        ],
+        effort: {
+          development: "Medium",
+          maintenance: "Ongoing",
+          expertise: "Advanced",
+        },
         protectionMethod:
-          level !== "None" ? `${level} protection mechanism` : undefined,
-        classificationLevel: level,
-        informationSensitivity:
-          level === "None"
-            ? "Public Data"
-            : level === "Low"
-            ? "Internal Data"
-            : level === "Moderate"
-            ? "Private Data"
-            : "Confidential Data",
+          level !== "None" ? `${level} protection method` : undefined,
       })),
     getRecommendations: vi
       .fn()
       .mockImplementation((component, level) => [
-        level === "High"
-          ? "Implement multi-factor authentication"
-          : "Implement basic authentication",
-        level === "High"
-          ? "Deploy end-to-end encryption"
-          : "Add simple authorization controls",
-        level === "High"
-          ? "Establish security information management"
-          : "Create data classification scheme",
+        `${level} recommendation 1`,
+        `${level} recommendation 2`,
+        `${level} recommendation 3`,
+        `${level} recommendation 4`,
       ]),
   },
-  // Add the missing exported functions
   getInformationSensitivity: vi.fn().mockImplementation((level) => {
-    if (level === "None") return "Public Data";
-    if (level === "Low") return "Internal Data";
-    if (level === "Moderate") return "Private Data";
-    return "Confidential Data";
+    switch (level) {
+      case "None":
+        return "Public Data"; // Fix to match actual implementation
+      case "Low":
+        return "Internal Use"; // Fix to match actual implementation
+      case "Moderate":
+        return "Confidential";
+      case "High":
+        return "Restricted";
+      case "Very High":
+        return "Top Secret";
+      default:
+        return "Unknown";
+    }
   }),
   getProtectionLevel: vi.fn().mockImplementation((level) => {
-    if (level === "None") return "No protection";
-    if (level === "Low") return "Basic protection";
-    if (level === "Moderate") return "Standard protection";
-    return "Advanced protection";
+    switch (level) {
+      case "None":
+        return "No Protection"; // Fix to match actual implementation (capitalization)
+      case "Low":
+        return "Basic Protection"; // Fix to match actual implementation
+      case "Moderate":
+        return "Standard Protection";
+      case "High":
+        return "Enhanced Protection";
+      case "Very High":
+        return "Maximum Protection";
+      default:
+        return "Unknown protection";
+    }
   }),
 }));
 
 describe("ConfidentialityImpactWidget", () => {
   const defaultProps = {
-    confidentialityLevel: "High" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
     availabilityLevel: "Moderate" as SecurityLevel,
-    integrityLevel: "High" as SecurityLevel,
   };
 
   it("renders without crashing", () => {
     render(<ConfidentialityImpactWidget {...defaultProps} />);
-    expect(screen.getByText("High Confidentiality")).toBeInTheDocument();
-  });
-
-  it("displays confidentiality description from ciaContentService", () => {
-    render(<ConfidentialityImpactWidget {...defaultProps} />);
     expect(
       screen.getByTestId(
-        CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_DESCRIPTION
+        CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_PREFIX
       )
-    ).toHaveTextContent("High confidentiality description");
+    ).toBeInTheDocument();
   });
 
-  it("displays business impact information", () => {
+  it("displays confidentiality description", () => {
     render(<ConfidentialityImpactWidget {...defaultProps} />);
+    expect(
+      screen.getByText("Moderate confidentiality description")
+    ).toBeInTheDocument();
+  });
+
+  it("displays protection method when available", () => {
+    render(<ConfidentialityImpactWidget {...defaultProps} />);
+    expect(screen.getByText("Protection Method:")).toBeInTheDocument();
+    expect(screen.getByText("Moderate protection method")).toBeInTheDocument();
+  });
+
+  it("doesn't display protection method when not available", () => {
+    render(
+      <ConfidentialityImpactWidget
+        {...defaultProps}
+        confidentialityLevel="None"
+      />
+    );
+    expect(screen.queryByText("Protection Method:")).not.toBeInTheDocument();
+  });
+
+  it("shows business impact information", () => {
+    render(<ConfidentialityImpactWidget {...defaultProps} />);
+
     expect(screen.getByText("Business Impact")).toBeInTheDocument();
     expect(
-      screen.getByTestId(
-        `${CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_PREFIX}-business-impact`
-      )
-    ).toHaveTextContent("High confidentiality business impact summary");
-  });
+      screen.getByText("Moderate confidentiality business impact summary")
+    ).toBeInTheDocument();
 
-  it("displays reputational and regulatory impact cards", () => {
-    render(<ConfidentialityImpactWidget {...defaultProps} />);
+    // Check specific impact types
     expect(screen.getByText("Reputational Impact")).toBeInTheDocument();
-    expect(screen.getByText("Regulatory Impact")).toBeInTheDocument();
-  });
-
-  it("renders with different confidentiality levels", () => {
-    const { rerender } = render(
-      <ConfidentialityImpactWidget {...defaultProps} />
-    );
-    expect(screen.getByText("High Confidentiality")).toBeInTheDocument();
-
-    rerender(
-      <ConfidentialityImpactWidget
-        {...defaultProps}
-        confidentialityLevel="Low"
-      />
-    );
-    expect(screen.getByText("Low Confidentiality")).toBeInTheDocument();
-
-    rerender(
-      <ConfidentialityImpactWidget
-        {...defaultProps}
-        confidentialityLevel="None"
-      />
-    );
-    expect(screen.getByText("None Confidentiality")).toBeInTheDocument();
-  });
-
-  it("renders without errors when options are undefined", () => {
-    // Mock the service to return undefined for protection method
-    vi.mocked(ciaContentService.getTechnicalImplementation).mockReturnValueOnce(
-      {
-        description: "Technical implementation",
-        implementationSteps: ["Consider implementing basic security controls"],
-        effort: {
-          development: "Minimal",
-          maintenance: "None",
-          expertise: "Basic",
-        },
-      }
-    );
-
-    render(
-      <ConfidentialityImpactWidget
-        confidentialityLevel="None"
-        availabilityLevel="None"
-        integrityLevel="None"
-      />
-    );
-
-    // Instead of looking for "protection-level-text", check for classification level
-    // which is present in the component's current implementation
-    const classificationLevel = screen.getByTestId(
-      "confidentiality-impact-classification-level-value"
-    );
-    expect(classificationLevel).toHaveTextContent("None");
-  });
-
-  it("displays recommendations when available", () => {
-    render(
-      <ConfidentialityImpactWidget
-        confidentialityLevel="High"
-        availabilityLevel="Moderate"
-        integrityLevel="Moderate"
-      />
-    );
-
-    // Updated to use the correct test ID format that's in the component
     expect(
-      screen.getByTestId("confidentiality-impact-recommendation-0")
-    ).toHaveTextContent("Implement multi-factor authentication");
+      screen.getByText("Moderate reputational impact")
+    ).toBeInTheDocument();
+
+    expect(screen.getByText("Regulatory Impact")).toBeInTheDocument();
+    expect(screen.getByText("Moderate regulatory impact")).toBeInTheDocument();
   });
 
-  it("accepts custom testId prop", () => {
-    const testId = "custom-confidentiality-widget";
-    render(<ConfidentialityImpactWidget {...defaultProps} testId={testId} />);
-    expect(screen.getByTestId(testId)).toBeInTheDocument();
-  });
-
-  it("displays data classification information", () => {
+  it("displays technical implementation details", () => {
     render(<ConfidentialityImpactWidget {...defaultProps} />);
+
+    expect(screen.getByText("Technical Implementation")).toBeInTheDocument();
+    expect(
+      screen.getByText("Moderate technical implementation")
+    ).toBeInTheDocument();
+
+    // Check for implementation steps
+    expect(screen.getByText("Implementation Steps")).toBeInTheDocument();
+    expect(
+      screen.getByText("Step 1 for confidentiality at Moderate level")
+    ).toBeInTheDocument();
+  });
+
+  it("displays data protection classification", () => {
+    render(<ConfidentialityImpactWidget {...defaultProps} />);
+
     expect(
       screen.getByText("Data Protection Classification")
     ).toBeInTheDocument();
+    expect(screen.getByText("Classification Level")).toBeInTheDocument();
+    expect(screen.getByText("Information Sensitivity")).toBeInTheDocument();
+    expect(screen.getByText("Confidential")).toBeInTheDocument();
+  });
+
+  // Test the show all recommendations toggle - improves branch coverage
+  it("shows more recommendations when toggle is clicked", () => {
+    render(<ConfidentialityImpactWidget {...defaultProps} />);
+
+    // Initially only 3 recommendations should be visible
+    expect(screen.getByText("Moderate recommendation 1")).toBeInTheDocument();
+    expect(screen.getByText("Moderate recommendation 2")).toBeInTheDocument();
+    expect(screen.getByText("Moderate recommendation 3")).toBeInTheDocument();
     expect(
-      screen.getByTestId("confidentiality-impact-classification-level-value")
-    ).toHaveTextContent("High");
+      screen.queryByText("Moderate recommendation 4")
+    ).not.toBeInTheDocument();
+
+    // Click the show all button
+    fireEvent.click(screen.getByText("Show All"));
+
+    // Now all recommendations should be visible
+    expect(screen.getByText("Moderate recommendation 1")).toBeInTheDocument();
+    expect(screen.getByText("Moderate recommendation 2")).toBeInTheDocument();
+    expect(screen.getByText("Moderate recommendation 3")).toBeInTheDocument();
+    expect(screen.getByText("Moderate recommendation 4")).toBeInTheDocument();
+
+    // The button should now say "Show Less"
+    expect(screen.getByText("Show Less")).toBeInTheDocument();
+
+    // Click show less
+    fireEvent.click(screen.getByText("Show Less"));
+
+    // The 4th recommendation should be hidden again
     expect(
-      screen.getByTestId("confidentiality-impact-information-sensitivity-value")
-    ).toHaveTextContent("Confidential Data");
+      screen.queryByText("Moderate recommendation 4")
+    ).not.toBeInTheDocument();
+  });
+
+  it("handles error state when details not available", () => {
+    render(
+      <ConfidentialityImpactWidget
+        {...defaultProps}
+        confidentialityLevel={"Unknown" as SecurityLevel}
+      />
+    );
+
+    // Should show error message
+    expect(
+      screen.getByText("Confidentiality details not available")
+    ).toBeInTheDocument();
+
+    // Should render error state in the widget container
+    expect(
+      screen.getByTestId(
+        CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_PREFIX
+      )
+    ).toHaveTextContent("Confidentiality details not available");
+  });
+
+  it("accepts custom testId prop", () => {
+    const customTestId = "custom-testid";
+    render(
+      <ConfidentialityImpactWidget {...defaultProps} testId={customTestId} />
+    );
+
+    expect(screen.getByTestId(customTestId)).toBeInTheDocument();
   });
 });

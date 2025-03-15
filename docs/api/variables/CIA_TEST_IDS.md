@@ -50,7 +50,7 @@ Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-complian
 
 ### AVAILABILITY\_SELECT
 
-> **AVAILABILITY\_SELECT**: `string` = `"availability-select"`
+> **AVAILABILITY\_SELECT**: `string` = `"availability-selector"`
 
 ### AVAILABILITY\_SELECTED\_LEVEL
 
@@ -118,7 +118,7 @@ Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-complian
 
 ### CONFIDENTIALITY\_SELECT
 
-> **CONFIDENTIALITY\_SELECT**: `string` = `"confidentiality-select"`
+> **CONFIDENTIALITY\_SELECT**: `string` = `"confidentiality-selector"`
 
 ### CONFIDENTIALITY\_SELECTED\_LEVEL
 
@@ -190,7 +190,7 @@ Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-complian
 
 ### INTEGRITY\_SELECT
 
-> **INTEGRITY\_SELECT**: `string` = `"integrity-select"`
+> **INTEGRITY\_SELECT**: `string` = `"integrity-selector"`
 
 ### INTEGRITY\_SELECTED\_LEVEL
 

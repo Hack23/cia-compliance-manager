@@ -1,111 +1,161 @@
-import React, { ReactNode } from "react";
+import React, { useState, useEffect } from "react";
 import { COMMON_COMPONENT_TEST_IDS } from "../../constants/testIds";
 
-interface MetricsCardProps {
+export interface MetricsCardProps {
   title: string;
-  value: ReactNode;
+  value: string | number;
+  subtitle?: string;
+  icon?: string;
+  className?: string;
+  testId?: string;
+  accentColor?: string;
+  // Add properties needed by test files
   trend?: {
     value: string;
     direction: "up" | "down" | "neutral";
   };
-  icon?: string;
-  testId?: string;
-  className?: string;
-  variant?: "success" | "warning" | "danger" | "info" | "primary" | "default";
+  variant?: "primary" | "success" | "warning" | "danger" | "info" | "purple"; // Add "purple" here
 }
 
 /**
- * MetricsCard component for displaying important metrics consistently
+ * MetricsCard component for displaying metrics with consistent styling
+ * Used in dashboard widgets to show KPIs and important metrics
+ *
+ * @component
  */
 const MetricsCard: React.FC<MetricsCardProps> = ({
   title,
   value,
-  trend,
+  subtitle,
   icon,
-  testId,
   className = "",
-  variant,
+  testId = COMMON_COMPONENT_TEST_IDS.METRICS_CARD,
+  accentColor,
+  trend,
+  variant = "primary",
 }) => {
-  const getTrendClasses = () => {
-    if (!trend) return "";
+  const [displayValue, setDisplayValue] = useState("0");
+  // Convert value to string for processing
+  const valueString = String(value);
+  const numericValue = parseInt(valueString.replace(/\D/g, "")) || 0;
 
-    switch (trend.direction) {
-      case "up":
-        return "text-green-600 dark:text-green-400";
-      case "down":
-        return "text-red-600 dark:text-red-400";
-      case "neutral":
-      default:
-        return "text-gray-600 dark:text-gray-400";
+  useEffect(() => {
+    // Animate numeric values
+    if (numericValue > 0) {
+      const duration = 1500; // 1.5 seconds
+      const steps = 20;
+      const stepTime = duration / steps;
+      const increment = numericValue / steps;
+
+      let current = 0;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= numericValue) {
+          setDisplayValue(String(value));
+          clearInterval(timer);
+        } else {
+          // Format like original but with current value
+          let formattedValue;
+          if (valueString.includes("$")) {
+            formattedValue = `$${Math.round(current).toLocaleString()}`;
+            // Preserve suffix like "/year" if present
+            if (valueString.includes("/")) {
+              formattedValue += "/" + valueString.split("/")[1];
+            }
+          } else {
+            formattedValue = Math.round(current).toString();
+            // Add % if the original value has it
+            if (valueString.includes("%")) {
+              formattedValue += "%";
+            }
+          }
+          setDisplayValue(formattedValue);
+        }
+      }, stepTime);
+
+      return () => clearInterval(timer);
+    } else {
+      setDisplayValue(String(value));
     }
-  };
+  }, [value, numericValue, valueString]);
 
-  const getTrendIcon = () => {
-    if (!trend) return null;
-
-    switch (trend.direction) {
-      case "up":
-        return "↑";
-      case "down":
-        return "↓";
-      case "neutral":
-      default:
-        return "→";
-    }
-  };
-
-  // Add variant handling for the value display
-  const getVariantClass = () => {
+  const getVariantClasses = () => {
     switch (variant) {
       case "success":
-        return "text-green-600 dark:text-green-400";
+        return "bg-green-100 dark:bg-green-900 dark:bg-opacity-20 border-green-200 dark:border-green-800";
       case "warning":
-        return "text-yellow-600 dark:text-yellow-400";
+        return "bg-yellow-100 dark:bg-yellow-900 dark:bg-opacity-20 border-yellow-200 dark:border-yellow-800";
       case "danger":
-        return "text-red-600 dark:text-red-400";
+        return "bg-red-100 dark:bg-red-900 dark:bg-opacity-20 border-red-200 dark:border-red-800";
       case "info":
-        return "text-blue-600 dark:text-blue-400";
-      case "primary":
-        return "text-indigo-600 dark:text-indigo-400";
+        return "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20 border-blue-200 dark:border-blue-800";
+      case "purple":
+        return "bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20 border-purple-200 dark:border-purple-800";
       default:
-        return "";
+        return "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-10 border-blue-100 dark:border-blue-800";
+    }
+  };
+
+  const getValueColor = () => {
+    switch (variant) {
+      case "success":
+        return "text-green-700 dark:text-green-400";
+      case "warning":
+        return "text-yellow-700 dark:text-yellow-400";
+      case "danger":
+        return "text-red-700 dark:text-red-400";
+      case "info":
+        return "text-blue-700 dark:text-blue-400";
+      case "purple":
+        return "text-purple-700 dark:text-purple-400";
+      default:
+        return "text-blue-700 dark:text-blue-400";
     }
   };
 
   return (
     <div
-      className={`p-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg ${className}`}
-      data-testid={testId || COMMON_COMPONENT_TEST_IDS.METRICS_CARD}
+      className={`p-4 rounded-lg border ${getVariantClasses()} ${className}`}
+      data-testid={testId}
     >
-      <div className="flex items-center justify-between">
-        <span
-          className="text-xs text-gray-500 dark:text-gray-400 flex items-center"
-          data-testid={`${
-            testId || COMMON_COMPONENT_TEST_IDS.METRICS_CARD
-          }-title`}
-        >
-          {icon && <span className="mr-1">{icon}</span>}
-          {title}
-        </span>
-        {trend && (
-          <span
-            className={`text-xs flex items-center ${getTrendClasses()}`}
-            data-testid={`${
-              testId || COMMON_COMPONENT_TEST_IDS.METRICS_CARD
-            }-trend`}
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center">
+          {icon && <span className="mr-2 text-xl">{icon}</span>}
+          <h3
+            className="text-sm font-medium text-gray-600 dark:text-gray-300"
+            data-testid={COMMON_COMPONENT_TEST_IDS.METRICS_CARD_TITLE}
           >
-            <span className="mr-0.5">{getTrendIcon()}</span>
+            {title}
+          </h3>
+        </div>
+        {trend && (
+          <div
+            className={`text-xs px-1.5 py-0.5 rounded ${
+              trend.direction === "up"
+                ? "bg-green-100 text-green-700 dark:bg-green-900 dark:bg-opacity-30 dark:text-green-400"
+                : trend.direction === "down"
+                ? "bg-red-100 text-red-700 dark:bg-red-900 dark:bg-opacity-30 dark:text-red-400"
+                : "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400"
+            }`}
+            data-testid={COMMON_COMPONENT_TEST_IDS.METRICS_CARD_TREND}
+          >
             {trend.value}
-          </span>
+          </div>
         )}
       </div>
-      <div
-        className={`mt-1 font-bold text-lg ${getVariantClass()}`}
-        data-testid={`${
-          testId || COMMON_COMPONENT_TEST_IDS.METRICS_CARD
-        }-value`}
-      >
-        {value}
+      <div className="flex items-end justify-between">
+        <span
+          className={`text-2xl font-bold ${getValueColor()}`}
+          data-testid={COMMON_COMPONENT_TEST_IDS.METRICS_CARD_VALUE}
+          style={accentColor ? { color: accentColor } : undefined}
+        >
+          {displayValue}
+        </span>
+        {subtitle && (
+          <span className="text-xs text-gray-500 dark:text-gray-400">
+            {subtitle}
+          </span>
+        )}
       </div>
     </div>
   );

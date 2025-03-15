@@ -8,13 +8,16 @@
 
 > **StatusBadge**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/common/StatusBadge.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/common/StatusBadge.tsx#L13)
+Defined in: [src/components/common/StatusBadge.tsx:26](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/common/StatusBadge.tsx#L26)
+
+StatusBadge displays statuses and labels with consistent styling
+Enhanced with Ingress-style visual effects in dark mode
 
 ## Parameters
 
 ### props
 
-[`StatusBadgeProps`](../type-aliases/StatusBadgeProps.md)
+`StatusBadgeProps`
 
 ## Returns
 

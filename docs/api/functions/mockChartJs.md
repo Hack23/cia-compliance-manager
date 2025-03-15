@@ -8,15 +8,13 @@
 
 > **mockChartJs**(): `object`
 
-Defined in: [src/tests/testSetupHelpers.tsx:182](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/testSetupHelpers.tsx#L182)
+Defined in: [src/tests/testUtils/index.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/testUtils/index.ts#L36)
 
-Create a mock Chart.js factory
+Creates a standardized Chart.js mock that works with vitest hoisting
 
 ## Returns
 
 `object`
-
-A mock for Chart.js
 
 ### \_\_esModule
 
@@ -24,4 +22,4 @@ A mock for Chart.js
 
 ### default
 
-> **default**: `Mock`\<`Procedure`\>
+> **default**: `Mock`\<() => `object`\>

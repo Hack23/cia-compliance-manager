@@ -8,7 +8,7 @@
 
 > `const` **IMPACT\_DESCRIPTIONS**: `object`
 
-Defined in: [src/constants/appConstants.ts:209](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/appConstants.ts#L209)
+Defined in: [src/constants/appConstants.ts:206](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/appConstants.ts#L206)
 
 ## Type declaration
 

@@ -1,8 +1,3 @@
-import {
-  RISK_LEVELS,
-  BUSINESS_IMPACT_CATEGORIES,
-} from "../constants/riskConstants";
-
 // Type for a single business consideration item
 export interface BusinessConsideration {
   title?: string;

@@ -8,33 +8,32 @@
 
 > `const` **RISK\_LEVELS**: `object`
 
-Defined in: [src/constants/riskConstants.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/riskConstants.ts#L7)
+Defined in: [src/constants/riskConstants.ts:4](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/riskConstants.ts#L4)
 
-Shared constants that are needed by both app constants and CIA options
-Breaking these out helps prevent circular dependencies
+Constants for risk levels used throughout the application
 
 ## Type declaration
 
 ### CRITICAL
 
-> **CRITICAL**: `string` = `"Critical Risk"`
+> `readonly` **CRITICAL**: `"Critical Risk"` = `"Critical Risk"`
 
 ### HIGH
 
-> **HIGH**: `string` = `"High Risk"`
+> `readonly` **HIGH**: `"High Risk"` = `"High Risk"`
 
 ### LOW
 
-> **LOW**: `string` = `"Low Risk"`
+> `readonly` **LOW**: `"Low Risk"` = `"Low Risk"`
 
 ### MEDIUM
 
-> **MEDIUM**: `string` = `"Medium Risk"`
+> `readonly` **MEDIUM**: `"Medium Risk"` = `"Medium Risk"`
 
 ### MINIMAL
 
-> **MINIMAL**: `string` = `"Minimal Risk"`
+> `readonly` **MINIMAL**: `"Minimal Risk"` = `"Minimal Risk"`
 
 ### UNKNOWN
 
-> **UNKNOWN**: `string` = `"Unknown Risk"`
+> `readonly` **UNKNOWN**: `"Unknown Risk"` = `"Unknown Risk"`

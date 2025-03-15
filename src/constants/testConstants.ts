@@ -1,5 +1,5 @@
-import { SECURITY_DESCRIPTIONS, COMPLIANCE_FRAMEWORKS } from "./coreConstants";
-import { SECURITY_LEVEL_COLORS, CIA_LABELS, WIDGET_ICONS } from "./index";
+import { COMPLIANCE_FRAMEWORKS, SECURITY_DESCRIPTIONS } from "./coreConstants";
+import { SECURITY_LEVEL_COLORS } from "./index";
 import { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS } from "./riskConstants";
 
 // Format constants for consistent display

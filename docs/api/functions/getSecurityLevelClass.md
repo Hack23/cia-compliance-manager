@@ -8,9 +8,9 @@
 
 > **getSecurityLevelClass**(`level`): `string`
 
-Defined in: [src/utils/widgetHelpers.tsx:49](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L49)
+Defined in: [src/utils/securityLevelUtils.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/securityLevelUtils.ts#L68)
 
-Gets the appropriate CSS class for a given security level
+Determines the appropriate CSS classes for displaying a security level
 
 ## Parameters
 
@@ -24,4 +24,4 @@ The security level string
 
 `string`
 
-CSS class string for the security level
+CSS class string for styling the security level

@@ -8,7 +8,7 @@
 
 > **getROIEstimates**(`level`): [`ROIMetrics`](../interfaces/ROIMetrics.md)
 
-Defined in: [src/services/ciaContentService.ts:1295](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1295)
+Defined in: [src/services/ciaContentService.ts:1372](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1372)
 
 Get ROI information for a security level with proper type handling
 

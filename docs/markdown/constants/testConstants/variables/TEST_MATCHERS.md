@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../../../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **TEST\_MATCHERS**: `object`
 
-Defined in: [src/constants/testConstants.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/32fe683007dd7fe1aa6b244d2353e60fab4f51de/src/constants/testConstants.ts#L42)
+Defined in: [src/constants/testConstants.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/a904e43458f81faf7066f9da9fc149cc9f6e236d/src/constants/testConstants.ts#L42)
 
 ## Type declaration
 
@@ -43,6 +43,26 @@ Defined in: [src/constants/testConstants.ts:42](https://github.com/Hack23/cia-co
 #### SECURITY\_DESCRIPTIONS\_REGEX.VERY\_HIGH
 
 > **VERY\_HIGH**: `RegExp`
+
+### SECURITY\_HIGH\_PATTERN
+
+> **SECURITY\_HIGH\_PATTERN**: `RegExp`
+
+### SECURITY\_LOW\_PATTERN
+
+> **SECURITY\_LOW\_PATTERN**: `RegExp`
+
+### SECURITY\_MODERATE\_PATTERN
+
+> **SECURITY\_MODERATE\_PATTERN**: `RegExp`
+
+### SECURITY\_NONE\_PATTERN
+
+> **SECURITY\_NONE\_PATTERN**: `RegExp`
+
+### SECURITY\_VERY\_HIGH\_PATTERN
+
+> **SECURITY\_VERY\_HIGH\_PATTERN**: `RegExp`
 
 ### UPTIME\_PATTERN
 

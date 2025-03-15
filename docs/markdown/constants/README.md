@@ -1,4 +1,4 @@
-[**CIA Compliance Manager API Documentation v0.6.0**](../README.md)
+[**CIA Compliance Manager API Documentation v0.7.0**](../README.md)
 
 ***
 
@@ -17,6 +17,18 @@ Re-exports [APP_TEST_IDS](testIds/variables/APP_TEST_IDS.md)
 ### AppConstants
 
 Renames and re-exports [constants/appConstants](appConstants/README.md)
+
+***
+
+### asSecurityLevel
+
+Re-exports [asSecurityLevel](testIds/functions/asSecurityLevel.md)
+
+***
+
+### AVAILABILITY\_IMPACT\_TEST\_IDS
+
+Re-exports [AVAILABILITY_IMPACT_TEST_IDS](testIds/variables/AVAILABILITY_IMPACT_TEST_IDS.md)
 
 ***
 
@@ -92,6 +104,12 @@ Re-exports [CIA_TEST_IDS](testIds/variables/CIA_TEST_IDS.md)
 
 ***
 
+### CIAComponentType
+
+Re-exports [CIAComponentType](testIds/type-aliases/CIAComponentType.md)
+
+***
+
 ### COMMON\_COMPONENT\_TEST\_IDS
 
 Re-exports [COMMON_COMPONENT_TEST_IDS](testIds/variables/COMMON_COMPONENT_TEST_IDS.md)
@@ -110,6 +128,18 @@ Re-exports [COMPLIANCE_STATUS](coreConstants/variables/COMPLIANCE_STATUS.md)
 
 ***
 
+### COMPLIANCE\_STATUS\_TEST\_IDS
+
+Re-exports [COMPLIANCE_STATUS_TEST_IDS](testIds/variables/COMPLIANCE_STATUS_TEST_IDS.md)
+
+***
+
+### CONFIDENTIALITY\_IMPACT\_TEST\_IDS
+
+Re-exports [CONFIDENTIALITY_IMPACT_TEST_IDS](testIds/variables/CONFIDENTIALITY_IMPACT_TEST_IDS.md)
+
+***
+
 ### COST\_TEST\_IDS
 
 Re-exports [COST_TEST_IDS](testIds/variables/COST_TEST_IDS.md)
@@ -119,6 +149,12 @@ Re-exports [COST_TEST_IDS](testIds/variables/COST_TEST_IDS.md)
 ### createCompoundTestId
 
 Re-exports [createCompoundTestId](testIds/functions/createCompoundTestId.md)
+
+***
+
+### createContextualTestId
+
+Re-exports [createContextualTestId](testIds/functions/createContextualTestId.md)
 
 ***
 
@@ -146,6 +182,12 @@ Re-exports [IMPLEMENTATION_COSTS](coreConstants/variables/IMPLEMENTATION_COSTS.m
 
 ***
 
+### INTEGRITY\_IMPACT\_TEST\_IDS
+
+Re-exports [INTEGRITY_IMPACT_TEST_IDS](testIds/variables/INTEGRITY_IMPACT_TEST_IDS.md)
+
+***
+
 ### RISK\_LEVELS
 
 Re-exports [RISK_LEVELS](riskConstants/variables/RISK_LEVELS.md)
@@ -164,9 +206,27 @@ Re-exports [SECURITY_LEVEL_COLORS](coreConstants/variables/SECURITY_LEVEL_COLORS
 
 ***
 
+### SECURITY\_LEVEL\_TEST\_IDS
+
+Re-exports [SECURITY_LEVEL_TEST_IDS](testIds/variables/SECURITY_LEVEL_TEST_IDS.md)
+
+***
+
 ### SECURITY\_LEVELS
 
 Re-exports [SECURITY_LEVELS](coreConstants/variables/SECURITY_LEVELS.md)
+
+***
+
+### SECURITY\_RESOURCES\_TEST\_IDS
+
+Re-exports [SECURITY_RESOURCES_TEST_IDS](testIds/variables/SECURITY_RESOURCES_TEST_IDS.md)
+
+***
+
+### SECURITY\_SUMMARY\_TEST\_IDS
+
+Re-exports [SECURITY_SUMMARY_TEST_IDS](testIds/variables/SECURITY_SUMMARY_TEST_IDS.md)
 
 ***
 
@@ -185,6 +245,12 @@ Re-exports [SecurityLevelMap](coreConstants/type-aliases/SecurityLevelMap.md)
 ### SUMMARY\_TEST\_IDS
 
 Re-exports [SUMMARY_TEST_IDS](testIds/variables/SUMMARY_TEST_IDS.md)
+
+***
+
+### TECHNICAL\_DETAILS\_TEST\_IDS
+
+Re-exports [TECHNICAL_DETAILS_TEST_IDS](testIds/variables/TECHNICAL_DETAILS_TEST_IDS.md)
 
 ***
 
@@ -209,6 +275,12 @@ Re-exports [UI_TEXT](coreConstants/variables/UI_TEXT.md)
 ### UIConstants
 
 Renames and re-exports [constants/uiConstants](uiConstants/README.md)
+
+***
+
+### VALUE\_CREATION\_TEST\_IDS
+
+Re-exports [VALUE_CREATION_TEST_IDS](testIds/variables/VALUE_CREATION_TEST_IDS.md)
 
 ***
 

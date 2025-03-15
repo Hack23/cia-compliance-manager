@@ -1,9 +1,11 @@
 import { describe, it, expect, vi } from "vitest";
 import * as useCIAOptionsModule from "./useCIAOptions";
-import { CIADetails, SecurityLevel } from "../types/cia";
+import { CIADetails } from "../types/cia";
 import { ROIEstimatesMap } from "../types/cia-services";
+import { renderHook } from "@testing-library/react";
+import { useCIAOptions } from "./useCIAOptions";
 
-// Mock the React hooks with proper typing
+// Mock the React hooks
 vi.mock("react", () => ({
   useMemo: (fn: () => any) => fn(),
 }));
@@ -34,7 +36,6 @@ describe("useCIAOptions", () => {
         text: "#000000",
         recommendations: ["Test recommendation"],
       },
-      // Add the missing security levels
       Moderate: {
         description: "Test description",
         impact: "Test impact",
@@ -81,7 +82,6 @@ describe("useCIAOptions", () => {
         text: "#000000",
         recommendations: [],
       },
-      // Add missing security levels
       Low: {
         description: "Test description",
         impact: "Test impact",
@@ -139,7 +139,6 @@ describe("useCIAOptions", () => {
         text: "#000000",
         recommendations: [],
       },
-      // Add missing security levels
       Low: {
         description: "Test description",
         impact: "Test impact",
@@ -185,7 +184,6 @@ describe("useCIAOptions", () => {
         recommendations: ["Test recommendation"],
       },
     },
-    // Add the missing ROI_ESTIMATES property required by the interface
     ROI_ESTIMATES: {
       NONE: {
         returnRate: "0%",
@@ -226,9 +224,16 @@ describe("useCIAOptions", () => {
   // Store options at the top level scope to be accessible throughout all tests
   const options = useCIAOptionsModule.useCIAOptions();
 
-  describe("Option Structures", () => {
-    // Updated validation function to match current implementation
-    const validateOptionStructure = (option: CIADetails) => {
+  describe("Structure Tests", () => {
+    it("returns expected options structure", () => {
+      expect(options).toHaveProperty("availabilityOptions");
+      expect(options).toHaveProperty("integrityOptions");
+      expect(options).toHaveProperty("confidentialityOptions");
+      expect(options).toHaveProperty("ROI_ESTIMATES");
+    });
+
+    // Update validation function to match the enhanced EnhancedCIADetails interface
+    const validateOptionStructure = (option: any) => {
       expect(option).toHaveProperty("description");
       expect(option).toHaveProperty("impact");
       expect(option).toHaveProperty("technical");
@@ -322,6 +327,34 @@ describe("useCIAOptions", () => {
         expect(typedOption.bg).toMatch(hexColorRegex);
         expect(typedOption.text).toMatch(hexColorRegex);
       });
+    });
+  });
+
+  // Test exported constants as well
+  describe("Exported Constants", () => {
+    it("exports availabilityOptions directly", () => {
+      expect(useCIAOptionsModule.availabilityOptions).toBeDefined();
+      expect(Object.keys(useCIAOptionsModule.availabilityOptions)).toContain(
+        "None"
+      );
+    });
+
+    it("exports integrityOptions directly", () => {
+      expect(useCIAOptionsModule.integrityOptions).toBeDefined();
+      expect(Object.keys(useCIAOptionsModule.integrityOptions)).toContain(
+        "None"
+      );
+    });
+
+    it("exports confidentialityOptions directly", () => {
+      expect(useCIAOptionsModule.confidentialityOptions).toBeDefined();
+      expect(Object.keys(useCIAOptionsModule.confidentialityOptions)).toContain(
+        "None"
+      );
+    });
+
+    it("exports ROI_ESTIMATES directly", () => {
+      expect(useCIAOptionsModule.ROI_ESTIMATES).toBeDefined();
     });
   });
 });

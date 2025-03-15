@@ -8,7 +8,7 @@
 
 > **getROIEstimate**(`level`): `object`
 
-Defined in: [src/services/ciaContentService.ts:1310](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1310)
+Defined in: [src/services/ciaContentService.ts:1387](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ciaContentService.ts#L1387)
 
 Get ROI estimate data for security level
 

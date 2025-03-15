@@ -8,9 +8,9 @@
 
 > **WidgetContainer**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/common/WidgetContainer.tsx:22](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/common/WidgetContainer.tsx#L22)
+Defined in: [src/components/common/WidgetContainer.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/common/WidgetContainer.tsx#L19)
 
-WidgetContainer component for displaying widgets with consistent styling
+Container component for dashboard widgets that provides consistent styling
 
 ## Parameters
 
