@@ -82,7 +82,7 @@
     "typedoc-plugin-markdown": "^4.4.2",
     "typedoc-plugin-merge-modules": "^6.1.0",
     "typedoc-plugin-mermaid": "^1.12.0",
-    "vite": "^6.2.1",
+    "vite": "^6.2.2",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "3.0.8"
   },
