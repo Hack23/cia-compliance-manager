@@ -19,6 +19,7 @@ jobs:
   build-docs:
     permissions:
       contents: write  # for JamesIves/github-pages-deploy-action to push changes in repo
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: Harden the runner (Audit all outbound calls)
@@ -260,7 +261,6 @@ jobs:
               issue_number: prNumber,
               body: comment
             });
-
       # Only deploy on push to main, not PRs
       - name: Deploy to GitHub Pages
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
