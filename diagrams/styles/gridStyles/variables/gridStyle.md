@@ -1,0 +1,25 @@
+[**CIA Compliance Manager Diagrams v0.8.0**](../../../README.md)
+
+***
+
+[CIA Compliance Manager Diagrams](../../../modules.md) / [styles/gridStyles](../README.md) / gridStyle
+
+# Variable: gridStyle
+
+> `const` **gridStyle**: `object`
+
+Defined in: [src/styles/gridStyles.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/styles/gridStyles.ts#L54)
+
+## Type declaration
+
+### display
+
+> **display**: `string` = `"grid"`
+
+### gap
+
+> **gap**: `string` = `"1rem"`
+
+### gridTemplateColumns
+
+> **gridTemplateColumns**: `string` = `"repeat(3, 1fr)"`
