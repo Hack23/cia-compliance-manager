@@ -8,7 +8,7 @@
 
 > **default**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/application/CIAClassificationApp.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/application/CIAClassificationApp.tsx#L31)
+Defined in: [src/application/CIAClassificationApp.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/application/CIAClassificationApp.tsx#L31)
 
 Main component for the CIA Classification App
 

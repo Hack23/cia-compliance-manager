@@ -8,7 +8,7 @@
 
 > **getWidgetSize**(`widget`): [`WidgetSize`](../../../../../types/widget/interfaces/WidgetSize.md)
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:250](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/components/widgets/utils/widgetHelpers.tsx#L250)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:250](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/components/widgets/utils/widgetHelpers.tsx#L250)
 
 Get widget dimensions based on size preset
 

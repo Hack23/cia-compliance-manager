@@ -8,7 +8,7 @@
 
 > **handleWidgetError**(`error`, `testId`): `null` \| `Element`
 
-Defined in: [src/utils/widgetHelpers.tsx:336](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/utils/widgetHelpers.tsx#L336)
+Defined in: [src/utils/widgetHelpers.tsx:336](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/utils/widgetHelpers.tsx#L336)
 
 Render an error message for widgets
 

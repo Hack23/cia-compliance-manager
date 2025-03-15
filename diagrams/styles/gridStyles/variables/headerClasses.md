@@ -8,4 +8,4 @@
 
 > `const` **headerClasses**: "\n  p-4 \n  border-b \n  border-gray-100 \n  dark:border-gray-700\n  bg-gray-50\n  dark:bg-gray-800\n  font-semibold\n"
 
-Defined in: [src/styles/gridStyles.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/styles/gridStyles.ts#L36)
+Defined in: [src/styles/gridStyles.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/styles/gridStyles.ts#L36)

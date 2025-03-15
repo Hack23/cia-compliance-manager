@@ -8,4 +8,4 @@
 
 > `const` **VALUE\_CREATION\_POINTS**: `Partial`\<`Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), `string`[]\>\>
 
-Defined in: [src/constants/appConstants.ts:222](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/constants/appConstants.ts#L222)
+Defined in: [src/constants/appConstants.ts:222](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/constants/appConstants.ts#L222)

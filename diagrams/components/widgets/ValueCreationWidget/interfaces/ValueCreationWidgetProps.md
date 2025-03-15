@@ -6,7 +6,7 @@
 
 # Interface: ValueCreationWidgetProps
 
-Defined in: [src/components/widgets/ValueCreationWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/components/widgets/ValueCreationWidget.tsx#L16)
+Defined in: [src/components/widgets/ValueCreationWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/components/widgets/ValueCreationWidget.tsx#L16)
 
 Props for the ValueCreationWidget component
 
@@ -16,7 +16,7 @@ Props for the ValueCreationWidget component
 
 > `optional` **availabilityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/ValueCreationWidget.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/components/widgets/ValueCreationWidget.tsx#L18)
+Defined in: [src/components/widgets/ValueCreationWidget.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/components/widgets/ValueCreationWidget.tsx#L18)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/components/widgets/ValueCreationWidget.tsx:18](https://github.c
 
 > `optional` **className**: `string`
 
-Defined in: [src/components/widgets/ValueCreationWidget.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/components/widgets/ValueCreationWidget.tsx#L21)
+Defined in: [src/components/widgets/ValueCreationWidget.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/components/widgets/ValueCreationWidget.tsx#L21)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/components/widgets/ValueCreationWidget.tsx:21](https://github.c
 
 > `optional` **confidentialityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/ValueCreationWidget.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/components/widgets/ValueCreationWidget.tsx#L20)
+Defined in: [src/components/widgets/ValueCreationWidget.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/components/widgets/ValueCreationWidget.tsx#L20)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/components/widgets/ValueCreationWidget.tsx:20](https://github.c
 
 > `optional` **integrityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/ValueCreationWidget.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/components/widgets/ValueCreationWidget.tsx#L19)
+Defined in: [src/components/widgets/ValueCreationWidget.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/components/widgets/ValueCreationWidget.tsx#L19)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/components/widgets/ValueCreationWidget.tsx:19](https://github.c
 
 > **securityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/ValueCreationWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/components/widgets/ValueCreationWidget.tsx#L17)
+Defined in: [src/components/widgets/ValueCreationWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/components/widgets/ValueCreationWidget.tsx#L17)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [src/components/widgets/ValueCreationWidget.tsx:17](https://github.c
 
 > `optional` **testId**: `string`
 
-Defined in: [src/components/widgets/ValueCreationWidget.tsx:22](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/components/widgets/ValueCreationWidget.tsx#L22)
+Defined in: [src/components/widgets/ValueCreationWidget.tsx:22](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/components/widgets/ValueCreationWidget.tsx#L22)

@@ -6,7 +6,7 @@
 
 # Interface: ComponentTechnicalDetails
 
-Defined in: [src/services/types.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/services/types.ts#L9)
+Defined in: [src/services/types.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/services/types.ts#L9)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/services/types.ts:9](https://github.com/Hack23/cia-compliance-m
 
 > **description**: `string`
 
-Defined in: [src/services/types.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/services/types.ts#L10)
+Defined in: [src/services/types.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/services/types.ts#L10)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/services/types.ts:10](https://github.com/Hack23/cia-compliance-
 
 > **effort**: `object`
 
-Defined in: [src/services/types.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/services/types.ts#L12)
+Defined in: [src/services/types.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/services/types.ts#L12)
 
 #### development
 
@@ -42,4 +42,4 @@ Defined in: [src/services/types.ts:12](https://github.com/Hack23/cia-compliance-
 
 > **implementationSteps**: `string`[]
 
-Defined in: [src/services/types.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/services/types.ts#L11)
+Defined in: [src/services/types.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/services/types.ts#L11)

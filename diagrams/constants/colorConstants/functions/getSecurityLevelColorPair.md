@@ -8,7 +8,7 @@
 
 > **getSecurityLevelColorPair**(`level`): `object`
 
-Defined in: [src/constants/colorConstants.ts:69](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/constants/colorConstants.ts#L69)
+Defined in: [src/constants/colorConstants.ts:69](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/constants/colorConstants.ts#L69)
 
 Get background and text colors for a specific security level
 

@@ -8,4 +8,4 @@
 
 > `const` **contentClasses**: "\n  p-4 \n  flex-1 \n  overflow-auto\n"
 
-Defined in: [src/styles/gridStyles.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/styles/gridStyles.ts#L47)
+Defined in: [src/styles/gridStyles.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/styles/gridStyles.ts#L47)

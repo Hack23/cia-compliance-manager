@@ -8,7 +8,7 @@
 
 > **isSecurityProfile**(`obj`): `boolean`
 
-Defined in: [src/utils/typeGuards.ts:258](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/utils/typeGuards.ts#L258)
+Defined in: [src/utils/typeGuards.ts:258](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/utils/typeGuards.ts#L258)
 
 Checks if an object is a valid security profile
 

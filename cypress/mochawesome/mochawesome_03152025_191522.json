@@ -1,0 +1,187 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-03-15T19:14:56.032Z",
+    "end": "2025-03-15T19:15:22.684Z",
+    "duration": 26652,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "7edc5325-a459-4d6d-8082-b69b608d36a5",
+      "title": "",
+      "fullFile": "cypress/e2e/widgets/radar-chart-widget.cy.ts",
+      "file": "cypress/e2e/widgets/radar-chart-widget.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3fecb6d1-e075-432f-94c6-ec5d28135962",
+          "title": "Radar Chart Widget",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "radar-chart widget should exist",
+              "fullTitle": "Radar Chart Widget radar-chart widget should exist",
+              "timedOut": null,
+              "duration": 3476,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(widgetName).should(\"exist\").scrollIntoView();\ncy.findWidget(widgetName).then(($widget) => {\n  expect($widget.text().trim().length).to.be.greaterThan(0);\n});",
+              "err": {},
+              "uuid": "855c004e-3f60-4500-b100-21a4124c3c8d",
+              "parentUUID": "3fecb6d1-e075-432f-94c6-ec5d28135962",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "updates chart visualization when security levels change",
+              "fullTitle": "Radar Chart Widget updates chart visualization when security levels change",
+              "timedOut": null,
+              "duration": 6637,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "testSecurityLevelChanges(\"radar-chart\");",
+              "err": {},
+              "uuid": "0df2f293-2c9a-447d-a0c9-070aa161d9c6",
+              "parentUUID": "3fecb6d1-e075-432f-94c6-ec5d28135962",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "displays a radar chart with data points",
+              "fullTitle": "Radar Chart Widget displays a radar chart with data points",
+              "timedOut": null,
+              "duration": 3898,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"radar-chart\").scrollIntoView();\ncy.setSecurityLevels(\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.MODERATE\n);\ncy.findWidget(\"radar-chart\").within(() => {\n  cy.get(\"svg, canvas, [data-testid*='chart'], [class*='chart']\").should(\n    \"exist\"\n  );\n  cy.contains(/availability|integrity|confidentiality/i).should(\"exist\");\n});",
+              "err": {},
+              "uuid": "43577398-2395-479d-982f-147e3268eb8c",
+              "parentUUID": "3fecb6d1-e075-432f-94c6-ec5d28135962",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "displays asymmetric chart with mixed security levels",
+              "fullTitle": "Radar Chart Widget displays asymmetric chart with mixed security levels",
+              "timedOut": null,
+              "duration": 8271,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"radar-chart\").scrollIntoView();\ncy.setSecurityLevels(\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.LOW,\n  SECURITY_LEVELS.MODERATE\n);\ncy.findWidget(\"radar-chart\").screenshot(\"mixed-security-radar\");\ncy.setSecurityLevels(\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.MODERATE\n);\ncy.findWidget(\"radar-chart\").invoke(\"text\").should(\"not.be.empty\");",
+              "err": {},
+              "uuid": "59df9c07-a936-48c3-93c2-de488cf27266",
+              "parentUUID": "3fecb6d1-e075-432f-94c6-ec5d28135962",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "displays visual security level or risk indicators",
+              "fullTitle": "Radar Chart Widget displays visual security level or risk indicators",
+              "timedOut": null,
+              "duration": 3915,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"radar-chart\").scrollIntoView();\ncy.setSecurityLevels(\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.HIGH\n);\ncy.findWidget(\"radar-chart\").within(() => {\n  cy.contains(/high|5|[4-5]\\/5|\\d+%|strong|robust/i).should(\"exist\");\n});",
+              "err": {},
+              "uuid": "99073f22-6881-482a-9e97-93e04badc8fb",
+              "parentUUID": "3fecb6d1-e075-432f-94c6-ec5d28135962",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "855c004e-3f60-4500-b100-21a4124c3c8d",
+            "0df2f293-2c9a-447d-a0c9-070aa161d9c6",
+            "43577398-2395-479d-982f-147e3268eb8c",
+            "59df9c07-a936-48c3-93c2-de488cf27266",
+            "99073f22-6881-482a-9e97-93e04badc8fb"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 26197,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "docs/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

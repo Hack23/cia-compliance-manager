@@ -6,7 +6,7 @@
 
 # Interface: CIADataProvider
 
-Defined in: [src/services/ciaContentService.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/services/ciaContentService.ts#L55)
+Defined in: [src/services/ciaContentService.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/services/ciaContentService.ts#L55)
 
 Interface for CIA data source provider
 
@@ -16,7 +16,7 @@ Interface for CIA data source provider
 
 > **availabilityOptions**: `Record`\<`string`, [`EnhancedCIADetails`](../../../hooks/useCIAOptions/interfaces/EnhancedCIADetails.md)\>
 
-Defined in: [src/services/ciaContentService.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/services/ciaContentService.ts#L56)
+Defined in: [src/services/ciaContentService.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/services/ciaContentService.ts#L56)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/services/ciaContentService.ts:56](https://github.com/Hack23/cia
 
 > **confidentialityOptions**: `Record`\<`string`, [`EnhancedCIADetails`](../../../hooks/useCIAOptions/interfaces/EnhancedCIADetails.md)\>
 
-Defined in: [src/services/ciaContentService.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/services/ciaContentService.ts#L58)
+Defined in: [src/services/ciaContentService.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/services/ciaContentService.ts#L58)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/services/ciaContentService.ts:58](https://github.com/Hack23/cia
 
 > **integrityOptions**: `Record`\<`string`, [`EnhancedCIADetails`](../../../hooks/useCIAOptions/interfaces/EnhancedCIADetails.md)\>
 
-Defined in: [src/services/ciaContentService.ts:57](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/services/ciaContentService.ts#L57)
+Defined in: [src/services/ciaContentService.ts:57](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/services/ciaContentService.ts#L57)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/services/ciaContentService.ts:57](https://github.com/Hack23/cia
 
 > **roiEstimates**: [`ROIEstimatesMap`](../../../types/cia-services/interfaces/ROIEstimatesMap.md)
 
-Defined in: [src/services/ciaContentService.ts:59](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/services/ciaContentService.ts#L59)
+Defined in: [src/services/ciaContentService.ts:59](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/services/ciaContentService.ts#L59)
 
 ## Methods
 
@@ -48,7 +48,7 @@ Defined in: [src/services/ciaContentService.ts:59](https://github.com/Hack23/cia
 
 > **getDefaultSecurityIcon**(`level`): `string`
 
-Defined in: [src/services/ciaContentService.ts:62](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/services/ciaContentService.ts#L62)
+Defined in: [src/services/ciaContentService.ts:62](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/services/ciaContentService.ts#L62)
 
 #### Parameters
 
@@ -66,7 +66,7 @@ Defined in: [src/services/ciaContentService.ts:62](https://github.com/Hack23/cia
 
 > **getDefaultValuePoints**(`level`): `string`[]
 
-Defined in: [src/services/ciaContentService.ts:63](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/services/ciaContentService.ts#L63)
+Defined in: [src/services/ciaContentService.ts:63](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/services/ciaContentService.ts#L63)
 
 #### Parameters
 

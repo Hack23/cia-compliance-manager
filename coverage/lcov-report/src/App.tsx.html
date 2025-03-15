@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
@@ -74,60 +74,36 @@
 <a name='L9'></a><a href='#L9'>9</a>
 <a name='L10'></a><a href='#L10'>10</a>
 <a name='L11'></a><a href='#L11'>11</a>
-<a name='L12'></a><a href='#L12'>12</a>
-<a name='L13'></a><a href='#L13'>13</a>
-<a name='L14'></a><a href='#L14'>14</a>
-<a name='L15'></a><a href='#L15'>15</a>
-<a name='L16'></a><a href='#L16'>16</a>
-<a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import "./App.css"; // Keep the import to avoid build errors
-import CIAClassificationApp from "./application/CIAClassificationApp";
-import { APP_TEST_IDS } from "./constants/testIds";
-&nbsp;
-/**
- * Main App component
- * Acts as a simple wrapper around CIAClassificationApp to maintain backward compatibility
- */
-function App() {
-  return (
-    &lt;div className="app-root" data-testid={APP_TEST_IDS.APP_ROOT}&gt;
-      &lt;div data-testid={APP_TEST_IDS.CIA_CLASSIFICATION_APP}&gt;
-        &lt;CIAClassificationApp /&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-}
-&nbsp;
-export default App;
-&nbsp;</pre></td></tr></table></pre>
+<a name='L12'></a><a href='#L12'>12</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span>
+<span class="cline-any cline-no">0</span></td><td class="text"><pre class="prettyprint lang-js">Unable to lookup source: /home/runner/work/cia-compliance-manager/src/App.tsx (ENOENT: no such file or directory, open '/home/runner/work/cia-compliance-manager/src/App.tsx')
+Error: Unable to lookup source: /home/runner/work/cia-compliance-manager/src/App.tsx (ENOENT: no such file or directory, open '/home/runner/work/cia-compliance-manager/src/App.tsx')
+    at Context.defaultSourceLookup [as sourceFinder] (/home/runner/work/cia-compliance-manager/cia-compliance-manager/node_modules/istanbul-lib-report/lib/context.js:17:15)
+    at Context.getSource (/home/runner/work/cia-compliance-manager/cia-compliance-manager/node_modules/istanbul-lib-report/lib/context.js:71:21)
+    at annotateSourceCode (/home/runner/work/cia-compliance-manager/cia-compliance-manager/node_modules/istanbul-reports/lib/html/annotator.js:249:40)
+    at HtmlReport.onDetail (/home/runner/work/cia-compliance-manager/cia-compliance-manager/node_modules/istanbul-reports/lib/html/index.js:414:33)
+    at LcovReport.<computed> [as onDetail] (/home/runner/work/cia-compliance-manager/cia-compliance-manager/node_modules/istanbul-reports/lib/lcov/index.js:28:23)
+    at Visitor.value (/home/runner/work/cia-compliance-manager/cia-compliance-manager/node_modules/istanbul-lib-report/lib/tree.js:38:38)
+    at ReportNode.visit (/home/runner/work/cia-compliance-manager/cia-compliance-manager/node_modules/istanbul-lib-report/lib/tree.js:88:21)
+    at /home/runner/work/cia-compliance-manager/cia-compliance-manager/node_modules/istanbul-lib-report/lib/tree.js:92:19
+    at Array.forEach (<anonymous>)
+    at ReportNode.visit (/home/runner/work/cia-compliance-manager/cia-compliance-manager/node_modules/istanbul-lib-report/lib/tree.js:91:28)</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-15T17:45:12.605Z
+                at 2025-03-15T20:27:02.299Z
             </div>
         <script src="../prettify.js"></script>
         <script>

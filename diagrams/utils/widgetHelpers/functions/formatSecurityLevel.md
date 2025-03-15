@@ -8,7 +8,7 @@
 
 > **formatSecurityLevel**(`level`?): `string`
 
-Defined in: [src/utils/widgetHelpers.tsx:173](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/utils/widgetHelpers.tsx#L173)
+Defined in: [src/utils/widgetHelpers.tsx:173](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/utils/widgetHelpers.tsx#L173)
 
 Format security level string for display
 

@@ -6,7 +6,7 @@
 
 # Interface: ROIEstimatesMap
 
-Defined in: [src/hooks/useCIAOptions.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/hooks/useCIAOptions.ts#L20)
+Defined in: [src/hooks/useCIAOptions.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/hooks/useCIAOptions.ts#L20)
 
 Map of ROI estimates by security level
 
@@ -16,7 +16,7 @@ Map of ROI estimates by security level
 
 > **HIGH**: [`ROIEstimate`](ROIEstimate.md)
 
-Defined in: [src/hooks/useCIAOptions.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/hooks/useCIAOptions.ts#L24)
+Defined in: [src/hooks/useCIAOptions.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/hooks/useCIAOptions.ts#L24)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/hooks/useCIAOptions.ts:24](https://github.com/Hack23/cia-compli
 
 > **LOW**: [`ROIEstimate`](ROIEstimate.md)
 
-Defined in: [src/hooks/useCIAOptions.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/hooks/useCIAOptions.ts#L22)
+Defined in: [src/hooks/useCIAOptions.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/hooks/useCIAOptions.ts#L22)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/hooks/useCIAOptions.ts:22](https://github.com/Hack23/cia-compli
 
 > **MODERATE**: [`ROIEstimate`](ROIEstimate.md)
 
-Defined in: [src/hooks/useCIAOptions.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/hooks/useCIAOptions.ts#L23)
+Defined in: [src/hooks/useCIAOptions.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/hooks/useCIAOptions.ts#L23)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/hooks/useCIAOptions.ts:23](https://github.com/Hack23/cia-compli
 
 > **NONE**: [`ROIEstimate`](ROIEstimate.md)
 
-Defined in: [src/hooks/useCIAOptions.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/hooks/useCIAOptions.ts#L21)
+Defined in: [src/hooks/useCIAOptions.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/hooks/useCIAOptions.ts#L21)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/hooks/useCIAOptions.ts:21](https://github.com/Hack23/cia-compli
 
 > **VERY\_HIGH**: [`ROIEstimate`](ROIEstimate.md)
 
-Defined in: [src/hooks/useCIAOptions.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/hooks/useCIAOptions.ts#L25)
+Defined in: [src/hooks/useCIAOptions.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/hooks/useCIAOptions.ts#L25)

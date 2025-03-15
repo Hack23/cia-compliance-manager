@@ -8,7 +8,7 @@
 
 > **widgetEmptyState**(`isEmpty`, `testId`, `children`?): `null` \| `string` \| `number` \| `bigint` \| `true` \| `Iterable`\<`ReactNode`, `any`, `any`\> \| `Promise`\<`AwaitedReactNode`\> \| `Element`
 
-Defined in: [src/utils/widgetHelpers.tsx:382](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/utils/widgetHelpers.tsx#L382)
+Defined in: [src/utils/widgetHelpers.tsx:382](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/utils/widgetHelpers.tsx#L382)
 
 Render empty state message or children if not empty
 

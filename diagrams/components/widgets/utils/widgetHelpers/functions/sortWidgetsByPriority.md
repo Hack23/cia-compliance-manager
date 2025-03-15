@@ -8,7 +8,7 @@
 
 > **sortWidgetsByPriority**(`widgets`): [`WidgetConfig`](../../../../../types/widget/interfaces/WidgetConfig.md)[]
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:134](https://github.com/Hack23/cia-compliance-manager/blob/ab84d120f6a49e6faf7bc7924811e0da9b635211/src/components/widgets/utils/widgetHelpers.tsx#L134)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:134](https://github.com/Hack23/cia-compliance-manager/blob/9d71808d079d754f4b85858b6e4ea1bff990b076/src/components/widgets/utils/widgetHelpers.tsx#L134)
 
 Sort widgets by priority
 
