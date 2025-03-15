@@ -214,6 +214,53 @@ jobs:
           path: docs/
           retention-days: 7
 
+      - name: Extract PR number
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        id: pr-number
+        with:
+          script: |
+            const runDetailsResponse = await github.rest.actions.getWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: ${{ github.event.workflow_run.id }}
+            });
+
+            // Extract PR number from the workflow run
+            const prNumber = runDetailsResponse.data.pull_requests[0]?.number;
+            if (!prNumber) {
+              return null;
+            }
+
+            return prNumber;
+          result-encoding: string
+
+      - name: Comment on PR with preview link
+        if: steps.pr-number.outputs.result != 'null'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const prNumber = ${{ steps.pr-number.outputs.result }};
+            const runId = ${{ github.run_id }};
+
+            const comment = `
+            ## 📚 Documentation Preview
+
+            Documentation has been generated for this PR! You can preview it here:
+
+            - [API Documentation](https://github.com/${{ github.repository }}/actions/runs/${runId}/artifacts)
+            - [UML Diagrams](https://github.com/${{ github.repository }}/actions/runs/${runId}/artifacts)
+            - [Architecture Diagrams](https://github.com/${{ github.repository }}/actions/runs/${runId}/artifacts)
+
+            > Note: You'll need to download the artifacts to view them locally, as artifact previews aren't available directly.
+            `;
+
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: comment
+            });
+
       # Only deploy on push to main, not PRs
       - name: Deploy to GitHub Pages
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
