@@ -8,7 +8,7 @@
 
 > **normalizeSecurityLevel**(`level`?): [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/utils/securityLevelUtils.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/utils/securityLevelUtils.ts#L9)
+Defined in: [src/utils/securityLevelUtils.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/utils/securityLevelUtils.ts#L9)
 
 Normalizes a security level string to ensure it's a valid SecurityLevel value
 

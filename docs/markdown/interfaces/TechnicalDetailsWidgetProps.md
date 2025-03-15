@@ -6,7 +6,7 @@
 
 # Interface: TechnicalDetailsWidgetProps
 
-Defined in: [src/types/widgets.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/types/widgets.ts#L176)
+Defined in: [src/types/widgets.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/types/widgets.ts#L176)
 
 Props for the TechnicalDetailsWidget component
 
@@ -20,7 +20,7 @@ Props for the TechnicalDetailsWidget component
 
 > `optional` **availabilityLevel**: `string`
 
-Defined in: [src/types/widgets.ts:185](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/types/widgets.ts#L185)
+Defined in: [src/types/widgets.ts:185](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/types/widgets.ts#L185)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/types/widgets.ts:185](https://github.com/Hack23/cia-compliance-
 
 > `optional` **availabilityOptions**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
 
-Defined in: [src/types/widgets.ts:178](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/types/widgets.ts#L178)
+Defined in: [src/types/widgets.ts:178](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/types/widgets.ts#L178)
 
 Availability options for specific technical details
 
@@ -42,7 +42,7 @@ Availability options for specific technical details
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/widgets.ts:184](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/types/widgets.ts#L184)
+Defined in: [src/types/widgets.ts:184](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/types/widgets.ts#L184)
 
 Optional CSS class name
 
@@ -56,7 +56,7 @@ Optional CSS class name
 
 > `optional` **confidentialityLevel**: `string`
 
-Defined in: [src/types/widgets.ts:187](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/types/widgets.ts#L187)
+Defined in: [src/types/widgets.ts:187](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/types/widgets.ts#L187)
 
 #### Overrides
 
@@ -68,7 +68,7 @@ Defined in: [src/types/widgets.ts:187](https://github.com/Hack23/cia-compliance-
 
 > `optional` **confidentialityOptions**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
 
-Defined in: [src/types/widgets.ts:182](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/types/widgets.ts#L182)
+Defined in: [src/types/widgets.ts:182](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/types/widgets.ts#L182)
 
 Confidentiality options for specific technical details
 
@@ -78,7 +78,7 @@ Confidentiality options for specific technical details
 
 > `optional` **integrityLevel**: `string`
 
-Defined in: [src/types/widgets.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/types/widgets.ts#L186)
+Defined in: [src/types/widgets.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/types/widgets.ts#L186)
 
 #### Overrides
 
@@ -90,7 +90,7 @@ Defined in: [src/types/widgets.ts:186](https://github.com/Hack23/cia-compliance-
 
 > `optional` **integrityOptions**: `Record`\<`string`, [`CIADetails`](CIADetails.md)\>
 
-Defined in: [src/types/widgets.ts:180](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/types/widgets.ts#L180)
+Defined in: [src/types/widgets.ts:180](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/types/widgets.ts#L180)
 
 Integrity options for specific technical details
 
@@ -100,7 +100,7 @@ Integrity options for specific technical details
 
 > `optional` **securityLevel**: `string`
 
-Defined in: [src/types/widgets.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/types/widgets.ts#L15)
+Defined in: [src/types/widgets.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/types/widgets.ts#L15)
 
 #### Inherited from
 
@@ -112,7 +112,7 @@ Defined in: [src/types/widgets.ts:15](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/types/widgets.ts#L9)
+Defined in: [src/types/widgets.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/types/widgets.ts#L9)
 
 Test ID for component selection in tests
 

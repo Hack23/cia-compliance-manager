@@ -8,7 +8,7 @@
 
 > **getSecurityLevelValue**(`level`): `number`
 
-Defined in: [src/types/cia.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/types/cia.ts#L148)
+Defined in: [src/types/cia.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/types/cia.ts#L148)
 
 Gets a numerical value for a security level for calculations
 

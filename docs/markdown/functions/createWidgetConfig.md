@@ -8,7 +8,7 @@
 
 > **createWidgetConfig**(`config`): [`WidgetConfig`](../interfaces/WidgetConfig.md)
 
-Defined in: [src/utils/widgetHelpers.tsx:88](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/utils/widgetHelpers.tsx#L88)
+Defined in: [src/utils/widgetHelpers.tsx:88](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/utils/widgetHelpers.tsx#L88)
 
 Create a widget configuration object
 

@@ -8,4 +8,4 @@
 
 > **SecurityLevelKey**: `"NONE"` \| `"LOW"` \| `"MODERATE"` \| `"HIGH"` \| `"VERY_HIGH"`
 
-Defined in: [src/constants/coreConstants.ts:136](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/constants/coreConstants.ts#L136)
+Defined in: [src/constants/coreConstants.ts:136](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/constants/coreConstants.ts#L136)

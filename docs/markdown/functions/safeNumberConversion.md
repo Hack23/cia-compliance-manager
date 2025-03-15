@@ -8,7 +8,7 @@
 
 > **safeNumberConversion**(`value`, `fallback`): `number`
 
-Defined in: [src/utils/typeGuards.ts:145](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/utils/typeGuards.ts#L145)
+Defined in: [src/utils/typeGuards.ts:145](https://github.com/Hack23/cia-compliance-manager/blob/fa2f95f029cdcd192b3882a37d0d34753edcd349/src/utils/typeGuards.ts#L145)
 
 Safely converts string to number, with a fallback value if conversion fails
 
