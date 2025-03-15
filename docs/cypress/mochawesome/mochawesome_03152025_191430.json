@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-03-15T19:14:10.797Z",
+    "end": "2025-03-15T19:14:30.957Z",
+    "duration": 20160,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "f247966c-146b-476c-a827-7fe4cb9dec03",
+      "title": "",
+      "fullFile": "cypress/e2e/widgets/confidentiality-impact-widget.cy.ts",
+      "file": "cypress/e2e/widgets/confidentiality-impact-widget.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e65a549d-bac3-4321-9f9d-83ccfd91706f",
+          "title": "Confidentiality Impact Widget",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "confidentiality-impact widget should exist",
+              "fullTitle": "Confidentiality Impact Widget confidentiality-impact widget should exist",
+              "timedOut": null,
+              "duration": 3462,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(widgetName).should(\"exist\").scrollIntoView();\ncy.findWidget(widgetName).then(($widget) => {\n  expect($widget.text().trim().length).to.be.greaterThan(0);\n});",
+              "err": {},
+              "uuid": "c3fe652d-db47-4b9a-b8da-1577fe2b9b15",
+              "parentUUID": "e65a549d-bac3-4321-9f9d-83ccfd91706f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "updates content when security levels change",
+              "fullTitle": "Confidentiality Impact Widget updates content when security levels change",
+              "timedOut": null,
+              "duration": 6670,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "testSecurityLevelChanges(\"confidentiality-impact\");",
+              "err": {},
+              "uuid": "41190567-6de6-4031-b203-807b3b60d515",
+              "parentUUID": "e65a549d-bac3-4321-9f9d-83ccfd91706f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "displays detailed confidentiality impacts with high security",
+              "fullTitle": "Confidentiality Impact Widget displays detailed confidentiality impacts with high security",
+              "timedOut": null,
+              "duration": 4933,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"confidentiality-impact\").scrollIntoView();\ncy.setSecurityLevels(\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.HIGH\n  // High confidentiality\n);\ncy.wait(1e3);\ncy.findWidget(\"confidentiality-impact\").within(() => {\n  cy.contains(\n    /privacy|data protection|sensitive|confidential|encrypt/i\n  ).should(\"exist\");\n});",
+              "err": {},
+              "uuid": "3d149ad0-1edf-4715-8c6f-6439b6b16620",
+              "parentUUID": "e65a549d-bac3-4321-9f9d-83ccfd91706f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "provides appropriate confidentiality recommendations",
+              "fullTitle": "Confidentiality Impact Widget provides appropriate confidentiality recommendations",
+              "timedOut": null,
+              "duration": 4798,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"confidentiality-impact\").scrollIntoView();\ncy.setSecurityLevels(\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.HIGH\n);\ncy.wait(1e3);\ncy.findWidget(\"confidentiality-impact\").within(() => {\n  cy.contains(/recommend|suggest|practice|implement/i).should(\"exist\");\n});",
+              "err": {},
+              "uuid": "3ccbb91b-60dd-41ee-a706-c8573cd77215",
+              "parentUUID": "e65a549d-bac3-4321-9f9d-83ccfd91706f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c3fe652d-db47-4b9a-b8da-1577fe2b9b15",
+            "41190567-6de6-4031-b203-807b3b60d515",
+            "3d149ad0-1edf-4715-8c6f-6439b6b16620",
+            "3ccbb91b-60dd-41ee-a706-c8573cd77215"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 19863,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "docs/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
