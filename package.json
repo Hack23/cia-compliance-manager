@@ -30,24 +30,12 @@
     "merge-test-reports": "node --experimental-json-modules ./cypress/support/plugins/merge-reports.js",
     "docs": "typedoc --options typedoc.enhanced.json",
     "docs:uml": "typedoc --options typedoc.uml.json",
-    "docs:markdown": "typedoc --plugin typedoc-plugin-markdown --out docs/markdown src",
+    "docs:markdown": "typedoc -options typedoc.markdown.json",
     "docs:dependencies": "mkdir -p docs/dependencies && depcruise --config .dependency-cruiser.cjs --output-type dot src | dot -T svg > docs/dependencies/module-dependencies.svg || echo 'Dependency diagram generation failed - continuing' && touch docs/dependencies/module-dependencies.svg",
-    "docs:bundle": "npm run docs && npm run docs:uml && npm run docs:dependencies && npm run docs:architecture",
-    "docs:architecture": "node scripts/generate-architecture-diagrams.js",
+    "docs:diagrams": "node scripts/generate-architecture-diagrams.js",
     "docs:coverage-summary": "vitest run --coverage",
-    "fix:cypress-config": "node scripts/fix-cypress-config.js",
-    "cypress:clean": "rm -rf cypress/results/*",
-    "cleanup": "bash scripts/cleanup.sh",
-    "test:e2e:report": "npm run test:e2e",
-    "test:analyze": "tsx scripts/analyze-test-utilities.ts",
-    "test:diagnose": "tsx scripts/test-diagnostic-report.ts",
-    "test:fix-radarChart": "vitest run src/components/RadarChart.extended.test.tsx",
-    "test:fix-darkmode": "vitest run src/CIAClassificationApp.darkmode.test.tsx",
-    "test:radar": "vitest run src/components/RadarChart.extended.test.tsx",
-    "test:radar:watch": "vitest src/components/RadarChart.extended.test.tsx",
-    "test:fixhoisting": "tsx scripts/fix-vitest-hoisting.ts",
-    "test:mocks": "vitest run src/tests/testUtils --coverage",
-    "test:fix-hoisting": "tsx scripts/fix-test-hoisting.ts"
+    "docs:bundle": "npm run docs && npm run docs:uml && npm run docs:markdown && npm run docs:dependencies && npm run docs:diagrams && npm run docs:coverage-summary",
+    "test:e2e:report": "npm run test:e2e"
   },
   "browserslist": {
     "production": [

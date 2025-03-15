@@ -1,0 +1,27 @@
+[**CIA Compliance Manager Diagrams v0.8.0**](../../../../../README.md)
+
+***
+
+[CIA Compliance Manager Diagrams](../../../../../modules.md) / [components/widgets/utils/widgetHelpers](../README.md) / normalizeSecurityLevel
+
+# Function: normalizeSecurityLevel()
+
+> **normalizeSecurityLevel**(`level`): [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
+
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:434](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/components/widgets/utils/widgetHelpers.tsx#L434)
+
+Normalize security level string to SecurityLevel type
+
+## Parameters
+
+### level
+
+`string`
+
+Security level string
+
+## Returns
+
+[`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
+
+Normalized SecurityLevel value

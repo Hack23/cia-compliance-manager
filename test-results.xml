@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="7.8260000000000005" tests="4" failures="0">
+  <testsuite name="Root Suite" timestamp="2025-03-15T16:58:58" tests="0" file="cypress/e2e/widgets/technical-implementation-widget.cy.ts" failures="0" time="0">
+  </testsuite>
+  <testsuite name="Technical Implementation Widget Tests" timestamp="2025-03-15T16:58:58" tests="4" failures="0" time="7.8260000000000005">
+    <testcase name="Technical Implementation Widget Tests shows technical implementation details for security levels" time="1.687" classname="shows technical implementation details for security levels" failure="false" error="false" success="true">
+    </testcase>
+    <testcase name="Technical Implementation Widget Tests updates implementation details when security levels change" time="2.497" classname="updates implementation details when security levels change" failure="false" error="false" success="true">
+    </testcase>
+    <testcase name="Technical Implementation Widget Tests allows switching between confidentiality, integrity, and availability sections" time="2.376" classname="allows switching between confidentiality, integrity, and availability sections" failure="false" error="false" success="true">
+    </testcase>
+    <testcase name="Technical Implementation Widget Tests shows implementation requirements for different security levels" time="1.266" classname="shows implementation requirements for different security levels" failure="false" error="false" success="true">
+    </testcase>
+  </testsuite>
+</testsuites>

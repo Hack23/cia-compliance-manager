@@ -12,9 +12,10 @@ export interface KeyValuePairProps {
 
 /**
  * KeyValuePair displays a label and value pair with consistent styling
- * Used across multiple widgets for displaying metadata and metrics
  *
- * @component
+ * @category UI Components
+ * @param props - Component properties
+ * @returns Rendered component
  */
 const KeyValuePair: React.FC<KeyValuePairProps> = ({
   label,

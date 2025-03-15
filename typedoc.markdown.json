@@ -1,0 +1,25 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./src"],
+  "entryPointStrategy": "expand",
+  "out": "docs/markdown",
+  "name": "CIA Compliance Manager Documentation",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "plugin": ["typedoc-plugin-markdown", "typedoc-plugin-merge-modules"],
+  "mergeModulesMergeMode": "project",
+  "readme": "./docs/markdown-overview.md",
+  "hideGenerator": true,
+  "hideBreadcrumbs": false,
+  "hidePageTitle": false,
+  "tsconfig": "./tsconfig.json",
+  "sort": ["visibility", "alphabetical"],
+  "exclude": [
+    "**/*.test.{ts,tsx}",
+    "**/*.spec.{ts,tsx}",
+    "**/*.stories.{ts,tsx}",
+    "**/__tests__/**",
+    "**/tests/**",
+    "**/__mocks__/**"
+  ]
+}

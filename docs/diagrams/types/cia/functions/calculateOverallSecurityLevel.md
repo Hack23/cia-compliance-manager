@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.7.0**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.0**](../../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: calculateOverallSecurityLevel()
 
-> **calculateOverallSecurityLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `string`
+> **calculateOverallSecurityLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:192](https://github.com/Hack23/cia-compliance-manager/blob/5a46a25cd2e09ba091444827f045b3618a447654/src/types/cia.ts#L192)
+Defined in: [src/types/cia.ts:192](https://github.com/Hack23/cia-compliance-manager/blob/78912779fad2796d4afcf9e0a863cca80a66b25f/src/types/cia.ts#L192)
 
 Calculate the overall security level based on CIA components
 
@@ -16,24 +16,24 @@ Calculate the overall security level based on CIA components
 
 ### availabilityLevel
 
-`string`
+[`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
 The availability security level
 
 ### integrityLevel
 
-`string`
+[`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
 The integrity security level
 
 ### confidentialityLevel
 
-`string`
+[`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
 The confidentiality security level
 
 ## Returns
 
-`string`
+[`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
 The calculated overall security level

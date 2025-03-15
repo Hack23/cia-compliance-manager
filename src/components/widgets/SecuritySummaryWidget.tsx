@@ -23,14 +23,6 @@ import WidgetContainer from "../common/WidgetContainer";
 
 /**
  * Props for SecuritySummaryWidget
- *
- * @interface SecuritySummaryWidgetProps
- * @property {SecurityLevel} securityLevel - Overall security level
- * @property {SecurityLevel} availabilityLevel - Availability level selection
- * @property {SecurityLevel} integrityLevel - Integrity level selection
- * @property {SecurityLevel} confidentialityLevel - Confidentiality level selection
- * @property {string} [className] - Optional CSS class name
- * @property {string} [testId] - Optional test ID for testing
  */
 export interface SecuritySummaryWidgetProps {
   securityLevel: SecurityLevel;
@@ -42,20 +34,11 @@ export interface SecuritySummaryWidgetProps {
 }
 
 /**
- * SecuritySummaryWidget displays a comprehensive summary of the current security profile
- * including CIA levels, technical details, business impacts, and recommendations.
- * It uses ciaContentService to fetch all needed information.
+ * Security Summary Widget that displays current security posture based on CIA levels
  *
- * @component
- * @example
- * ```tsx
- * <SecuritySummaryWidget
- *   securityLevel="High"
- *   availabilityLevel="High"
- *   integrityLevel="Moderate"
- *   confidentialityLevel="High"
- * />
- * ```
+ * @category Widgets
+ * @param props - Component properties
+ * @returns Rendered component
  */
 const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
   securityLevel,

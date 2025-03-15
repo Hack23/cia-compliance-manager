@@ -1,42 +1,41 @@
 {
-  "entryPoints": ["src"],
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./src"],
   "entryPointStrategy": "expand",
   "out": "docs/api",
   "name": "CIA Compliance Manager API Documentation",
   "includeVersion": true,
-  "categorizeByGroup": true,
-  "categoryOrder": [
-    "CIA Model",
-    "Components",
-    "Common Components",
-    "Main Components",
-    "Widget Components",
-    "Utilities",
-    "*"
-  ],
-  "plugin": [
-    "typedoc-plugin-merge-modules",
-    "typedoc-plugin-mermaid",
-    "typedoc-plugin-markdown",
-    "typedoc-plugin-coverage"
-  ],
-  "exclude": ["**/*.test.ts", "**/*.test.tsx", "**/node_modules/**"],
+  "excludePrivate": true,
   "excludeExternals": true,
-  "excludePrivate": false,
-  "excludeProtected": false,
-  "excludeInternal": false,
-  "externalSymbolLinkMappings": {
-    "react": {
-      "Component": "https://react.dev/reference/react/Component",
-      "ReactNode": "https://react.dev/reference/react/ReactNode"
-    }
+  "categorizeByGroup": true,
+  "categoryOrder": ["Core", "Components", "Utils", "Types", "*"],
+  "plugin": ["typedoc-plugin-merge-modules", "typedoc-plugin-mermaid"],
+  "mergeModulesMergeMode": "project",
+  "readme": "./docs/api-overview.md",
+  "theme": "default",
+  "tsconfig": "./tsconfig.json",
+  "sort": ["visibility", "alphabetical"],
+  "visibilityFilters": {
+    "protected": false,
+    "private": false,
+    "inherited": true,
+    "external": false
   },
-  "sourceLinkTemplate": "https://github.com/Hack23/cia-compliance-manager/blob/main/{path}#L{line}",
-  "mermaidVersion": "10.6.1",
-  "titleLink": "https://github.com/Hack23/cia-compliance-manager",
+  "validation": {
+    "invalidLink": false,
+    "notExported": false
+  },
+  "searchInComments": true,
   "navigationLinks": {
     "GitHub": "https://github.com/Hack23/cia-compliance-manager",
-    "Architecture": "https://hack23.github.io/cia-compliance-manager/architecture/",
-    "Diagrams": "https://hack23.github.io/cia-compliance-manager/diagrams/"
-  }
+    "Documentation": "https://hack23.github.io/cia-compliance-manager/"
+  },
+  "exclude": [
+    "**/*.test.{ts,tsx}",
+    "**/*.spec.{ts,tsx}",
+    "**/*.stories.{ts,tsx}",
+    "**/__tests__/**",
+    "**/tests/**",
+    "**/__mocks__/**"
+  ]
 }
