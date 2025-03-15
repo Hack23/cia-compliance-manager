@@ -1,33 +1,44 @@
-// Use vi.hoisted to make the function available before imports
-const mockChartImplementation = vi.hoisted(() => {
-  // Create a mock Chart instance that can be accessed by tests
-  const mockChartInstance = {
-    destroy: vi.fn(),
-    update: vi.fn(),
-    resize: vi.fn(),
-    data: { datasets: [] },
+// Create mock objects using vi.hoisted for proper hoisting
+const mockChartInstance = vi.hoisted(() => ({
+  destroy: vi.fn(),
+  update: vi.fn(),
+  resize: vi.fn(),
+  data: { datasets: [] },
+}));
+
+// Define a type for the Chart mock constructor to include its static properties
+type ChartMockConstructor = ReturnType<typeof vi.fn> & {
+  register: ReturnType<typeof vi.fn>;
+  defaults: {
+    font: { family: string };
+    plugins: { legend: { display: boolean } };
   };
+};
 
-  // Create a constructor mock that we can spy on
-  const MockChart = vi.fn(() => mockChartInstance);
-
-  return () => ({
-    // Return a factory function that returns the mock object
-    __esModule: true,
-    default: MockChart,
-    // Export the mockChartInstance so it's globally accessible to tests
-    mockChartInstance,
-    MockChart, // Add this line to export the constructor
-  });
+const mockChartConstructor = vi.hoisted(() => {
+  const constructor = vi.fn(() => mockChartInstance);
+  return constructor as ChartMockConstructor;
 });
 
-// Apply the mock with hoisted implementation
-vi.mock("chart.js/auto", mockChartImplementation);
+// Add these properties after creating the constructor
+vi.hoisted(() => {
+  mockChartConstructor.register = vi.fn();
+  mockChartConstructor.defaults = {
+    font: { family: "Arial" },
+    plugins: { legend: { display: false } },
+  };
+});
+
+// Apply the mock with the hoisted implementation
+vi.mock("chart.js/auto", () => ({
+  __esModule: true,
+  default: mockChartConstructor,
+}));
 
 // Then import all required modules
 import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import { CHART_TEST_IDS } from "../constants/testIds";
+import { describe, expect, it, vi } from "vitest";
+import { CHART_TEST_IDS } from "../../constants/testIds";
 import RadarChart from "./RadarChart";
 
 describe("RadarChart Extended Tests", () => {
@@ -109,9 +120,7 @@ describe("RadarChart Extended Tests", () => {
       />
     );
 
-    // Access the exported mock directly with correct property
-    const mockModule = mockChartImplementation();
-    expect(mockModule.default).toHaveBeenCalled();
+    expect(mockChartConstructor).toHaveBeenCalled();
   });
 
   it("cleans up resources when unmounted", () => {
@@ -123,12 +132,8 @@ describe("RadarChart Extended Tests", () => {
       />
     );
 
-    // Get the mock instance from our implementation
-    const mockModule = mockChartImplementation();
-
     unmount();
 
-    // Verify destroy was called during cleanup
-    expect(mockModule.mockChartInstance.destroy).toHaveBeenCalled();
+    expect(mockChartInstance.destroy).toHaveBeenCalled();
   });
 });

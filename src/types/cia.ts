@@ -190,22 +190,27 @@ export function getSecurityLevelFromValue(value: number): SecurityLevel {
  * @returns The calculated overall security level
  */
 export function calculateOverallSecurityLevel(
-  availabilityLevel: string,
-  integrityLevel: string,
-  confidentialityLevel: string
-): string {
-  // Map security levels to numeric values
-  const availValue = getSecurityLevelValue(availabilityLevel);
-  const integrityValue = getSecurityLevelValue(integrityLevel);
-  const confidentialityValue = getSecurityLevelValue(confidentialityLevel);
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel
+): SecurityLevel {
+  const levels: SecurityLevel[] = [
+    "None",
+    "Low",
+    "Moderate",
+    "High",
+    "Very High",
+  ];
 
-  // Calculate average and round to nearest integer
-  const averageValue = Math.round(
-    (availValue + integrityValue + confidentialityValue) / 3
+  const availabilityIndex = levels.indexOf(availabilityLevel);
+  const integrityIndex = levels.indexOf(integrityLevel);
+  const confidentialityIndex = levels.indexOf(confidentialityLevel);
+
+  const avgIndex = Math.round(
+    (availabilityIndex + integrityIndex + confidentialityIndex) / 3
   );
 
-  // Map back to security level
-  return getSecurityLevelFromValue(averageValue);
+  return levels[avgIndex];
 }
 
 import { getRiskLevelFromSecurityLevel } from "../constants/riskConstants";

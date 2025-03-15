@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { COMMON_COMPONENT_TEST_IDS } from "../constants/testIds";
+import { COMMON_COMPONENT_TEST_IDS } from "../../constants/testIds";
 import Selection from "./Selection";
 
 describe("Selection Component", () => {

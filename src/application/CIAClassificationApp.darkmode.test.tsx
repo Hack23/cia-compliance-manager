@@ -1,6 +1,6 @@
 // Define mocks at the top of the file, before imports
 vi.mock("./hooks/useCIAOptions", () => {
-const mockOptions = {
+  const mockOptions = {
     None: { capex: 0, opex: 0 },
     Low: { capex: 5, opex: 2 },
     Moderate: { capex: 10, opex: 5 },
@@ -52,7 +52,6 @@ const mockOptions = {
 
 // Move vi.mock calls to the top, before any imports
 
-
 // Fix types for mock elements
 vi.mock("./components/Dashboard", () => ({
   __esModule: true,
@@ -85,8 +84,8 @@ vi.mock("./components/widgets/SecuritySummaryWidget", () => ({
 // Then import needed modules after all vi.mock calls
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { APP_TEST_IDS } from "../constants/testIds";
 import CIAClassificationApp from "./CIAClassificationApp";
-import { APP_TEST_IDS } from "./constants/testIds";
 
 describe("CIAClassificationApp Dark Mode Tests", () => {
   beforeEach(() => {

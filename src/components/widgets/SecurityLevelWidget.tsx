@@ -10,9 +10,9 @@ import {
   WIDGET_TEST_IDS,
 } from "../../constants/testIds";
 import { SecurityLevel } from "../../types/cia";
-import SecurityLevelSelector from "../SecurityLevelSelector";
 import SecurityLevelSummaryItem from "../common/SecurityLevelSummaryItem";
 import WidgetContainer from "../common/WidgetContainer";
+import SecurityLevelSelector from "../securitylevel/SecurityLevelSelector";
 
 /**
  * Props for the SecurityLevelWidget component

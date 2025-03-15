@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { CIA_COMPONENT_ICONS, CIA_LABELS } from "../constants/appConstants";
-import { CIA_TEST_IDS, COMMON_COMPONENT_TEST_IDS } from "../constants/testIds";
-import { useCIAOptions } from "../hooks/useCIAOptions";
+import { CIA_COMPONENT_ICONS, CIA_LABELS } from "../../constants/appConstants";
+import {
+  CIA_TEST_IDS,
+  COMMON_COMPONENT_TEST_IDS,
+} from "../../constants/testIds";
+import { useCIAOptions } from "../../hooks/useCIAOptions";
 import ciaContentService, {
   CIAComponentType, // Import the CIAComponentType
-} from "../services/ciaContentService";
-import { SecurityLevel } from "../types/cia";
+} from "../../services/ciaContentService";
+import { SecurityLevel } from "../../types/cia";
 import {
   getSecurityLevelClass,
   normalizeSecurityLevel,
-} from "../utils/securityLevelUtils";
-import SecurityLevelSummaryItem from "./common/SecurityLevelSummaryItem";
+} from "../../utils/securityLevelUtils";
+import SecurityLevelSummaryItem from "../common/SecurityLevelSummaryItem";
 
 export interface SecurityLevelSelectorProps {
   availabilityLevel?: SecurityLevel;

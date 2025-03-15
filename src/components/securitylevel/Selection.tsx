@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   COMMON_COMPONENT_TEST_IDS,
   createDynamicTestId,
-} from "../constants/testIds";
+} from "../../constants/testIds";
 
 interface SelectionProps {
   id: string;

@@ -1,18 +1,17 @@
 import React, { ReactNode } from "react";
-import { WIDGET_ICONS } from "../constants/appConstants";
-import { APP_TEST_IDS, createDynamicTestId } from "../constants/testIds";
+import { WIDGET_ICONS } from "../../constants/appConstants";
+import { APP_TEST_IDS, createDynamicTestId } from "../../constants/testIds";
 import {
   availabilityOptions,
   confidentialityOptions,
   integrityOptions,
-} from "../hooks/useCIAOptions";
-import widgetRegistry from "../utils/widgetRegistry";
-import WidgetHeader from "./common/WidgetHeader";
-// Add import for TechnicalDetailsWidget
-import TechnicalDetailsWidget from "./widgets/TechnicalDetailsWidget";
-// Add the missing imports for grid styles
-import { gridClasses } from "../styles/gridStyles";
-import { SecurityLevel } from "../types/cia";
+} from "../../hooks/useCIAOptions";
+import { gridClasses } from "../../styles/gridStyles";
+import { SecurityLevel } from "../../types/cia";
+import widgetRegistry from "../../utils/widgetRegistry";
+import WidgetHeader from "../common/WidgetHeader";
+// Keep imports for directly included widgets
+import TechnicalDetailsWidget from "../widgets/TechnicalDetailsWidget";
 
 // Main Dashboard component props
 interface DashboardProps {
@@ -97,13 +96,16 @@ const Dashboard: React.FC<DashboardProps> = ({
       data-testid={APP_TEST_IDS.DASHBOARD_GRID}
     >
       {useRegistry
-        ? widgetRegistry.renderWidgets(undefined, widgetProps)
-        : React.Children.map(children, (child) => {
+        ? // Make sure this correctly calls renderWidgets from the widget registry
+          widgetRegistry.renderWidgets(undefined, widgetProps)
+        : // Otherwise render children directly
+          React.Children.map(children, (child) => {
             if (!React.isValidElement(child)) return null;
             return child;
           })}
-      {/* Make TechnicalDetailsWidget conditional if the prop values aren't available */}
-      {availability && integrity && confidentiality && (
+
+      {/* Only include TechnicalDetailsWidget when not using registry and props are available */}
+      {!useRegistry && availability && integrity && confidentiality && (
         <TechnicalDetailsWidget
           availabilityLevel={availability}
           integrityLevel={integrity}

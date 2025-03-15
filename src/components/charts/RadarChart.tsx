@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
-import { CHART_TEST_IDS } from "../constants/testIds";
+import React, { useEffect, useRef, useState } from "react";
+import { CHART_TEST_IDS } from "../../constants/testIds";
 
 interface RadarChartProps {
   availabilityLevel: string;
@@ -23,8 +23,12 @@ const RadarChart: React.FC<RadarChartProps> = ({
   );
   // Add state to track render errors for testing
   const [renderError, setRenderError] = useState<string | null>(null);
+  // Add state to track dark mode
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(
+    document.documentElement.classList.contains("dark")
+  );
 
-  // Add visible security levels for testing - updated to use new prop names
+  // Add visible security levels for testing - this helps with debugging and state tracking
   const [securityLevels] = useState({
     availabilityLevel,
     integrityLevel,
@@ -50,6 +54,32 @@ const RadarChart: React.FC<RadarChartProps> = ({
     }
   };
 
+  // Add effect to listen for theme changes
+  useEffect(() => {
+    // Create a MutationObserver to watch for changes to the document element's class list
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (
+          mutation.attributeName === "class" &&
+          mutation.target === document.documentElement
+        ) {
+          const newDarkMode =
+            document.documentElement.classList.contains("dark");
+          // Only update state if the mode actually changed
+          if (newDarkMode !== isDarkMode) {
+            setIsDarkMode(newDarkMode);
+          }
+        }
+      });
+    });
+
+    // Start observing
+    observer.observe(document.documentElement, { attributes: true });
+
+    // Cleanup observer on unmount
+    return () => observer.disconnect();
+  }, [isDarkMode]);
+
   useEffect(() => {
     if (!chartRef.current) return;
 
@@ -70,10 +100,7 @@ const RadarChart: React.FC<RadarChartProps> = ({
       const integrityValue = mapLevelToValue(integrityLevel);
       const confidentialityValue = mapLevelToValue(confidentialityLevel);
 
-      // Determine if we're in dark mode
-      const isDarkMode = document.documentElement.classList.contains("dark");
-
-      // Set chart colors based on theme
+      // Set chart colors based on theme - now using isDarkMode state
       const backgroundColor = isDarkMode
         ? "rgba(0, 204, 102, 0.2)"
         : "rgba(0, 102, 51, 0.2)";
@@ -191,12 +218,18 @@ const RadarChart: React.FC<RadarChartProps> = ({
         }
       };
     } catch (error) {
+      // Improved error handling with proper type checking
       setRenderError(error instanceof Error ? error.message : String(error));
     }
-  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
+  }, [availabilityLevel, integrityLevel, confidentialityLevel, isDarkMode]); // Added isDarkMode as dependency
+
+  // Apply className to container element if provided
+  const containerClassName = className
+    ? `radar-chart-container ${className}`.trim()
+    : "radar-chart-container";
 
   return (
-    <div className="radar-chart-container" data-testid={`${testId}-container`}>
+    <div className={containerClassName} data-testid={`${testId}-container`}>
       {renderError ? (
         <div data-testid={`${testId}-error`} className="error-message">
           Error loading chart: {renderError}

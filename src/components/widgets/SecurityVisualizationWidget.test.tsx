@@ -4,8 +4,19 @@ import { vi } from "vitest";
 import SecurityVisualizationWidget from "./SecurityVisualizationWidget";
 
 // Mock RadarChart since it uses canvas which is difficult to test
-vi.mock("../RadarChart", () => ({
-  default: () => <div data-testid="mock-radar-chart">Mock Radar Chart</div>,
+vi.mock("../charts/RadarChart", () => ({
+  __esModule: true,
+  default: vi.fn().mockImplementation((props) => (
+    <div data-testid="mock-radar-chart">
+      <span data-testid="mock-radar-availability">
+        {props.availabilityLevel}
+      </span>
+      <span data-testid="mock-radar-integrity">{props.integrityLevel}</span>
+      <span data-testid="mock-radar-confidentiality">
+        {props.confidentialityLevel}
+      </span>
+    </div>
+  )),
 }));
 
 describe("SecurityVisualizationWidget", () => {

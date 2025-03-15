@@ -1,3 +1,30 @@
+// Add these helper functions at the top before other code
+const suppressCanvasErrors = () => {
+  return vi.spyOn(console, "error").mockImplementation((msg) => {
+    if (
+      msg?.toString().includes("canvas") ||
+      msg?.toString().includes("Canvas")
+    ) {
+      return;
+    }
+    // Let other errors through
+    console.warn("Console error:", msg);
+  });
+};
+
+const mockCanvasContext = () => {
+  HTMLCanvasElement.prototype.getContext = vi.fn().mockReturnValue({
+    canvas: { width: 100, height: 100 },
+    clearRect: vi.fn(),
+    beginPath: vi.fn(),
+    arc: vi.fn(),
+    fill: vi.fn(),
+    stroke: vi.fn(),
+    moveTo: vi.fn(),
+    lineTo: vi.fn(),
+  });
+};
+
 // Define mocks at the top of the file, before imports
 vi.mock("chart.js/auto", () => {
   const mockChart = vi.fn().mockImplementation(() => ({
@@ -24,12 +51,8 @@ vi.mock("chart.js/auto", () => {
 });
 
 import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import { CHART_TEST_IDS } from "../constants/testIds";
-import {
-  mockCanvasContext,
-  suppressCanvasErrors,
-} from "../tests/testSetupHelpers";
+import { describe, expect, it, vi } from "vitest";
+import { CHART_TEST_IDS } from "../../constants/testIds";
 import RadarChart from "./RadarChart";
 
 // Define type for the Chart mock to include register and defaults properties

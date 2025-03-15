@@ -15,7 +15,7 @@ type ChartMockConstructor = ReturnType<typeof vi.fn> & {
  * @returns utilities for testing Chart.js components
  */
 export function setupChartTest() {
-  // Store mocked elements
+  // Create a mock Chart instance
   const mockChartInstance = {
     destroy: vi.fn(),
     update: vi.fn(),
@@ -23,31 +23,40 @@ export function setupChartTest() {
     data: { datasets: [] },
   };
 
-  // Cast to the proper type that includes register and defaults
+  // Create a constructor mock with proper type
   const mockConstructor = vi.fn(
     () => mockChartInstance
   ) as ChartMockConstructor;
 
-  // Add static methods/properties that Chart might have
+  // Add static methods/properties that Chart has
   mockConstructor.register = vi.fn();
   mockConstructor.defaults = {
     font: { family: "Arial" },
-    plugins: { legend: { display: true } },
+    plugins: { legend: { display: false } },
   };
 
-  // Create the mock object that will be returned by vi.mock
+  // Create the chart mock module
   const chartMock = {
     __esModule: true,
     default: mockConstructor,
   };
 
-  // Mock Canvas API
+  // Mock canvas context
   HTMLCanvasElement.prototype.getContext = vi.fn().mockReturnValue({
     canvas: { width: 200, height: 200 },
     clearRect: vi.fn(),
     fill: vi.fn(),
     beginPath: vi.fn(),
     stroke: vi.fn(),
+    moveTo: vi.fn(),
+    lineTo: vi.fn(),
+    arc: vi.fn(),
+    fillText: vi.fn(),
+    measureText: vi.fn().mockReturnValue({ width: 10 }),
+    save: vi.fn(),
+    restore: vi.fn(),
+    translate: vi.fn(),
+    rotate: vi.fn(),
   });
 
   // Mock browser APIs

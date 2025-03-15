@@ -2,16 +2,16 @@ import { SecurityLevel } from "../types/cia"; // Remove unused CIAOptions import
 
 // Widget Icons - For consistent icon use across the application
 export const WIDGET_ICONS = {
-  SECURITY_LEVEL: "🛡️",
+  SECURITY_LEVEL: "🔐",
   SECURITY_SUMMARY: "📊",
-  SECURITY_VISUALIZATION: "📈",
-  COMPLIANCE_STATUS: "✅",
-  VALUE_CREATION: "💹",
-  COST_ESTIMATION: "💰",
+  SECURITY_VISUALIZATION: "📊",
+  COMPLIANCE_STATUS: "✓",
+  VALUE_CREATION: "💰",
+  COST_ESTIMATION: "💲",
   BUSINESS_IMPACT: "🏢",
   TECHNICAL_IMPLEMENTATION: "⚙️",
   AVAILABILITY_IMPACT: "⏱️",
-  INTEGRITY_IMPACT: "🔐",
+  INTEGRITY_IMPACT: "🛡️",
   CONFIDENTIALITY_IMPACT: "🔒",
   SECURITY_RESOURCES: "📚",
 };
@@ -51,15 +51,14 @@ export const SECURITY_LEVELS = {
 export const WIDGET_TITLES = {
   SECURITY_LEVEL: "Security Level Selection",
   SECURITY_SUMMARY: "Security Summary",
-  SECURITY_VISUALIZATION: "Security Profile Visualization",
+  SECURITY_VISUALIZATION: "Security Visualization",
   COMPLIANCE_STATUS: "Compliance Status",
   VALUE_CREATION: "Value Creation",
   COST_ESTIMATION: "Cost Estimation",
-  BUSINESS_IMPACT: "Business Impact Analysis",
+  BUSINESS_IMPACT: "Business Impact",
   TECHNICAL_IMPLEMENTATION: "Technical Implementation",
   SECURITY_PROFILE: "CIA Security Profile",
   SECURITY_RESOURCES: "Security Resources",
-  // Add these missing properties:
   AVAILABILITY_IMPACT: "Availability Impact",
   INTEGRITY_IMPACT: "Integrity Impact",
   CONFIDENTIALITY_IMPACT: "Confidentiality Impact",

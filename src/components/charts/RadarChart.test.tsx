@@ -1,6 +1,6 @@
 // Define mocks at the top of the file, before imports
 vi.mock("chart.js/auto", () => {
-return {
+  return {
     default: class Chart {
       static register() {}
       destroy() {}
@@ -11,12 +11,9 @@ return {
 });
 
 import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import { CHART_TEST_IDS } from "../constants/testIds";
+import { describe, expect, it, vi } from "vitest";
+import { CHART_TEST_IDS } from "../../constants/testIds";
 import RadarChart from "./RadarChart";
-
-// Mock Chart.js
-
 
 describe("RadarChart", () => {
   beforeEach(() => {

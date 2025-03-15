@@ -1,9 +1,13 @@
 import { ReactNode } from "react";
-import { SECURITY_LEVELS } from "../constants/appConstants";
-import { WIDGET_ICONS, WIDGET_TITLES } from "../constants/coreConstants";
-import { SecurityLevel } from "../types/cia";
-import { WidgetConfig, WidgetSize, WidgetSizePreset } from "../types/widget";
-import { getSecurityLevelValue } from "./securityLevelUtils";
+import { SECURITY_LEVELS } from "../../../constants/appConstants";
+import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/coreConstants";
+import { SecurityLevel } from "../../../types/cia";
+import {
+  WidgetConfig,
+  WidgetSize,
+  WidgetSizePreset,
+} from "../../../types/widget";
+import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
 
 // Define WidgetType for local use since it's not exported from types/widgets
 export enum WidgetType {
@@ -88,8 +92,7 @@ export const getWidgetContent = (type: WidgetType | string): string =>
 export const createWidgetConfig = (
   config: Partial<WidgetConfig> & { type: string }
 ): WidgetConfig => {
-  // Use MEDIUM instead of DEFAULT
-  const size = config.size || WidgetSizePreset.MEDIUM;
+  const size = config.size || WidgetSizePreset.MEDIUM; // Use MEDIUM instead of DEFAULT
   // Generate a unique ID if not provided
   const id =
     config.id || `${config.type}-${Math.random().toString(36).substring(2, 9)}`;
@@ -421,4 +424,29 @@ export function widgetEmptyState(
  */
 export function getTestId(widgetId: string, elementId: string): string {
   return `${widgetId}-${elementId}`;
+}
+
+/**
+ * Normalize security level string to SecurityLevel type
+ * @param level Security level string
+ * @returns Normalized SecurityLevel value
+ */
+export function normalizeSecurityLevel(level: string): SecurityLevel {
+  // Convert the provided level to the normalized form
+  const normalizedLevel = level.toLowerCase();
+  const validLevels: SecurityLevel[] = [
+    "None",
+    "Low",
+    "Moderate",
+    "High",
+    "Very High",
+  ];
+
+  for (const validLevel of validLevels) {
+    if (normalizedLevel === validLevel.toLowerCase()) {
+      return validLevel;
+    }
+  }
+
+  return "None";
 }

@@ -43,8 +43,8 @@ vi.mock("./hooks/useCIAOptions", () => ({
   ROI_ESTIMATES: mockCIAOptions.ROI_ESTIMATES,
 }));
 
-// Mock Dashboard component and include the DashboardWidget component
-vi.mock("./components/Dashboard", () => ({
+// Fix the path to Dashboard component (it should correctly match whatever is used in CIAClassificationApp.tsx)
+vi.mock("../components/dashboard/Dashboard", () => ({
   __esModule: true,
   default: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="mocked-dashboard">{children}</div>

@@ -3,8 +3,8 @@
  */
 
 export interface WidgetConfig {
+  id: string;
   type: string;
-  id: string; // Make sure id is a required property
   title?: string;
   description?: string;
   icon?: string;
@@ -15,12 +15,11 @@ export interface WidgetConfig {
   height?: number;
   order?: number;
   requiredSecurityLevels?: string[];
-  minSecurityLevel?: number | string;
-  maxSecurityLevel?: number | string;
+  minSecurityLevel?: string | number;
+  maxSecurityLevel?: string | number;
 }
 
 export enum WidgetSizePreset {
-  DEFAULT = "medium",
   SMALL = "small",
   MEDIUM = "medium",
   LARGE = "large",

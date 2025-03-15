@@ -184,7 +184,7 @@ import { describe, expect, it, vi } from "vitest";
 import SecurityLevelSelector from "./SecurityLevelSelector";
 
 // Import constants for test IDs to ensure consistency
-import { CIA_TEST_IDS } from "../constants/testIds";
+import { CIA_TEST_IDS } from "../../constants/testIds";
 
 // Mock ciaContentService
 vi.mock("../services/ciaContentService", () => ({

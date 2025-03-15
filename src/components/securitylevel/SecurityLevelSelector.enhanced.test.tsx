@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { CIA_TEST_IDS } from "../constants/testIds";
-import { SecurityLevel } from "../types/cia";
+import { CIA_TEST_IDS } from "../../constants/testIds";
+import { SecurityLevel } from "../../types/cia";
 import SecurityLevelSelector from "./SecurityLevelSelector";
 
 // Create proper mock handlers with spies
