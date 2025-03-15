@@ -1113,32 +1113,38 @@ export function createCIAContentService(
    */
   function getROIEstimate(level: SecurityLevel): {
     value: string;
+    returnRate: string; // Add returnRate to return type
     description: string;
   } {
     switch (level) {
       case "Very High":
         return {
           value: "5x+",
+          returnRate: "5x+", // Add returnRate with same value
           description: "Maximum return with comprehensive security controls",
         };
       case "High":
         return {
           value: "3-5x",
+          returnRate: "3-5x", // Add returnRate with same value
           description: "Strong return with robust security implementation",
         };
       case "Moderate":
         return {
           value: "2-3x",
+          returnRate: "2-3x", // Add returnRate with same value
           description: "Good return with balanced security approach",
         };
       case "Low":
         return {
           value: "1-2x",
+          returnRate: "1-2x", // Add returnRate with same value
           description: "Basic return with minimal security investment",
         };
       default:
         return {
           value: "Negative",
+          returnRate: "Negative", // Add returnRate with same value
           description: "No return without security investment",
         };
     }

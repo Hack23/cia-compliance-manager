@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { COMMON_COMPONENT_TEST_IDS } from "../../constants/testIds";
 
 export interface MetricsCardProps {
@@ -14,14 +14,15 @@ export interface MetricsCardProps {
     value: string;
     direction: "up" | "down" | "neutral";
   };
-  variant?: "primary" | "success" | "warning" | "danger" | "info" | "purple"; // Add "purple" here
+  variant?: "primary" | "success" | "warning" | "danger" | "info" | "purple";
 }
 
 /**
- * MetricsCard component for displaying metrics with consistent styling
- * Used in dashboard widgets to show KPIs and important metrics
+ * MetricsCard displays a metric with title, value, and optional trend indicator
  *
- * @component
+ * @category UI Components
+ * @param props - Component properties
+ * @returns Rendered component
  */
 const MetricsCard: React.FC<MetricsCardProps> = ({
   title,

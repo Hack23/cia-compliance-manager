@@ -38,7 +38,7 @@ export function ensureWidgetVisible(widgetId: string) {
  * @param widgetId The test ID of the widget or a partial ID to search for
  */
 export function setupWidgetTest(widgetId: string) {
-  cy.viewport(3840, 2160);
+  cy.viewport(1920, 1080);
   cy.visit("/");
   cy.ensureAppLoaded();
 

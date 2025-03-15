@@ -1,9 +1,7 @@
-import { describe, it, expect, vi } from "vitest";
-import * as useCIAOptionsModule from "./useCIAOptions";
+import { describe, expect, it, vi } from "vitest";
 import { CIADetails } from "../types/cia";
-import { ROIEstimatesMap } from "../types/cia-services";
-import { renderHook } from "@testing-library/react";
-import { useCIAOptions } from "./useCIAOptions";
+import * as useCIAOptionsModule from "./useCIAOptions";
+import { ROIEstimatesMap } from "./useCIAOptions"; // Import directly from the module
 
 // Mock the React hooks
 vi.mock("react", () => ({
@@ -11,8 +9,8 @@ vi.mock("react", () => ({
 }));
 
 describe("useCIAOptions", () => {
-  // Create mock options for testing
-  const mockOptions = {
+  // Create mock options for testing with properly typed ROI_ESTIMATES
+  const mockOptions: ReturnType<typeof useCIAOptionsModule.useCIAOptions> = {
     availabilityOptions: {
       None: {
         description: "Test description",
@@ -186,30 +184,35 @@ describe("useCIAOptions", () => {
     },
     ROI_ESTIMATES: {
       NONE: {
+        value: "0%",
         returnRate: "0%",
         description: "No security investment means no return",
         potentialSavings: "$0",
         breakEvenPeriod: "N/A",
       },
       LOW: {
+        value: "100%",
         returnRate: "100%",
         description: "Basic security provides minimal return",
         potentialSavings: "$10,000",
         breakEvenPeriod: "24 months",
       },
       MODERATE: {
+        value: "200%",
         returnRate: "200%",
         description: "Standard security provides good value",
         potentialSavings: "$100,000",
         breakEvenPeriod: "12 months",
       },
       HIGH: {
+        value: "300%",
         returnRate: "300%",
         description: "Advanced security provides excellent value",
         potentialSavings: "$500,000",
         breakEvenPeriod: "6 months",
       },
       VERY_HIGH: {
+        value: "400%",
         returnRate: "400%",
         description: "Comprehensive security provides optimal value",
         potentialSavings: "$1,000,000+",

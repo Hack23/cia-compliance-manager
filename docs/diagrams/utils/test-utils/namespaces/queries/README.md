@@ -1,0 +1,80 @@
+[**CIA Compliance Manager Diagrams v0.8.0**](../../../../README.md)
+
+***
+
+[CIA Compliance Manager Diagrams](../../../../modules.md) / [utils/test-utils](../../README.md) / queries
+
+# queries
+
+## Interfaces
+
+- [ByRoleOptions](interfaces/ByRoleOptions.md)
+
+## Type Aliases
+
+- [AllByBoundAttribute](type-aliases/AllByBoundAttribute.md)
+- [AllByRole](type-aliases/AllByRole.md)
+- [AllByText](type-aliases/AllByText.md)
+- [FindAllByBoundAttribute](type-aliases/FindAllByBoundAttribute.md)
+- [FindAllByRole](type-aliases/FindAllByRole.md)
+- [FindAllByText](type-aliases/FindAllByText.md)
+- [FindByBoundAttribute](type-aliases/FindByBoundAttribute.md)
+- [FindByRole](type-aliases/FindByRole.md)
+- [FindByText](type-aliases/FindByText.md)
+- [GetByBoundAttribute](type-aliases/GetByBoundAttribute.md)
+- [GetByRole](type-aliases/GetByRole.md)
+- [GetByText](type-aliases/GetByText.md)
+- [QueryByBoundAttribute](type-aliases/QueryByBoundAttribute.md)
+- [QueryByRole](type-aliases/QueryByRole.md)
+- [QueryByText](type-aliases/QueryByText.md)
+
+## Functions
+
+- [findAllByAltText](functions/findAllByAltText.md)
+- [findAllByDisplayValue](functions/findAllByDisplayValue.md)
+- [findAllByLabelText](functions/findAllByLabelText.md)
+- [findAllByPlaceholderText](functions/findAllByPlaceholderText.md)
+- [findAllByRole](functions/findAllByRole.md)
+- [findAllByTestId](functions/findAllByTestId.md)
+- [findAllByText](functions/findAllByText.md)
+- [findAllByTitle](functions/findAllByTitle.md)
+- [findByAltText](functions/findByAltText.md)
+- [findByDisplayValue](functions/findByDisplayValue.md)
+- [findByLabelText](functions/findByLabelText.md)
+- [findByPlaceholderText](functions/findByPlaceholderText.md)
+- [findByRole](functions/findByRole.md)
+- [findByTestId](functions/findByTestId.md)
+- [findByText](functions/findByText.md)
+- [findByTitle](functions/findByTitle.md)
+- [getAllByAltText](functions/getAllByAltText.md)
+- [getAllByDisplayValue](functions/getAllByDisplayValue.md)
+- [getAllByLabelText](functions/getAllByLabelText.md)
+- [getAllByPlaceholderText](functions/getAllByPlaceholderText.md)
+- [getAllByRole](functions/getAllByRole.md)
+- [getAllByTestId](functions/getAllByTestId.md)
+- [getAllByText](functions/getAllByText.md)
+- [getAllByTitle](functions/getAllByTitle.md)
+- [getByAltText](functions/getByAltText.md)
+- [getByDisplayValue](functions/getByDisplayValue.md)
+- [getByLabelText](functions/getByLabelText.md)
+- [getByPlaceholderText](functions/getByPlaceholderText.md)
+- [getByRole](functions/getByRole.md)
+- [getByTestId](functions/getByTestId.md)
+- [getByText](functions/getByText.md)
+- [getByTitle](functions/getByTitle.md)
+- [queryAllByAltText](functions/queryAllByAltText.md)
+- [queryAllByDisplayValue](functions/queryAllByDisplayValue.md)
+- [queryAllByLabelText](functions/queryAllByLabelText.md)
+- [queryAllByPlaceholderText](functions/queryAllByPlaceholderText.md)
+- [queryAllByRole](functions/queryAllByRole.md)
+- [queryAllByTestId](functions/queryAllByTestId.md)
+- [queryAllByText](functions/queryAllByText.md)
+- [queryAllByTitle](functions/queryAllByTitle.md)
+- [queryByAltText](functions/queryByAltText.md)
+- [queryByDisplayValue](functions/queryByDisplayValue.md)
+- [queryByLabelText](functions/queryByLabelText.md)
+- [queryByPlaceholderText](functions/queryByPlaceholderText.md)
+- [queryByRole](functions/queryByRole.md)
+- [queryByTestId](functions/queryByTestId.md)
+- [queryByText](functions/queryByText.md)
+- [queryByTitle](functions/queryByTitle.md)

@@ -1,6 +1,5 @@
-import { CIADetails } from "./cia";
-import { SecurityLevel } from "./cia";
 import { Dispatch, SetStateAction } from "react";
+import { CIADetails, SecurityLevel } from "./cia";
 
 /**
  * Base properties for all widgets
@@ -8,11 +7,12 @@ import { Dispatch, SetStateAction } from "react";
 export interface WidgetBaseProps {
   /** Test ID for component selection in tests */
   testId?: string;
-  availabilityLevel: string;
-  integrityLevel: string;
-  confidentialityLevel: string;
+  // Make these properties optional
+  availabilityLevel?: string;
+  integrityLevel?: string;
+  confidentialityLevel?: string;
   className?: string;
-  securityLevel?: string; // Add this property
+  securityLevel?: string;
 }
 
 /**
@@ -64,16 +64,11 @@ export interface ValueCreationWidgetProps extends WidgetBaseProps {
 /**
  * Props for the SecuritySummaryWidget component
  */
-export interface SecuritySummaryWidgetProps {
+export interface SecuritySummaryWidgetProps extends WidgetBaseProps {
   securityLevel: SecurityLevel;
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
-  className?: string;
-  testId?: string;
-  showTechnicalDetails?: boolean;
-  showBusinessImpact?: boolean;
-  showMetrics?: boolean;
 }
 
 /**
@@ -81,7 +76,10 @@ export interface SecuritySummaryWidgetProps {
  */
 export interface ComplianceStatusWidgetProps extends WidgetBaseProps {
   /** Overall security level */
-  securityLevel?: string;
+  securityLevel?: SecurityLevel;
+  availabilityLevel?: SecurityLevel;
+  integrityLevel?: SecurityLevel;
+  confidentialityLevel?: SecurityLevel;
 }
 
 /**
@@ -107,6 +105,7 @@ export interface IntegrityImpactWidgetProps extends WidgetBaseProps {
   confidentialityLevel: SecurityLevel;
   className?: string;
   testId?: string;
+  options?: Record<string, any>;
 }
 
 /**
@@ -132,6 +131,7 @@ export interface ConfidentialityImpactWidgetProps extends WidgetBaseProps {
   integrityLevel: SecurityLevel;
   className?: string;
   testId?: string;
+  options?: Record<string, any>;
 }
 
 /**
@@ -154,6 +154,9 @@ export interface AvailabilityDetail extends BaseWidgetDetails {
 export interface AvailabilityImpactWidgetProps extends WidgetBaseProps {
   /** Options for each level - optional when using ciaContentService */
   options?: Record<string, AvailabilityDetail | CIADetails>;
+  availabilityLevel: SecurityLevel;
+  integrityLevel?: SecurityLevel;
+  confidentialityLevel?: SecurityLevel;
 }
 
 /**
@@ -161,7 +164,10 @@ export interface AvailabilityImpactWidgetProps extends WidgetBaseProps {
  */
 export interface SecurityResourcesWidgetProps extends WidgetBaseProps {
   /** Overall security level */
-  securityLevel: string;
+  securityLevel: SecurityLevel;
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
 }
 
 /**
@@ -176,12 +182,15 @@ export interface TechnicalDetailsWidgetProps extends WidgetBaseProps {
   confidentialityOptions?: Record<string, CIADetails>;
   /** Optional CSS class name */
   className?: string;
+  availabilityLevel?: SecurityLevel | string;
+  integrityLevel?: SecurityLevel | string;
+  confidentialityLevel?: SecurityLevel | string;
 }
 
 /**
  * Props for the BusinessImpactAnalysisWidget component
  */
-export interface BusinessImpactAnalysisWidgetProps {
+export interface BusinessImpactAnalysisWidgetProps extends WidgetBaseProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
@@ -213,6 +222,23 @@ export interface SecurityLevelWidgetProps {
   title?: string;
   loading?: boolean;
   error?: Error | null;
+}
+
+// Add missing types
+export interface SecurityVisualizationWidgetProps extends WidgetBaseProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  className?: string;
+  testId?: string;
+}
+
+export interface CIAImpactSummaryWidgetProps extends WidgetBaseProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  className?: string;
+  testId?: string;
 }
 
 /**

@@ -1,5 +1,5 @@
 import "./App.css"; // Keep the import to avoid build errors
-import CIAClassificationApp from "./CIAClassificationApp";
+import CIAClassificationApp from "./application/CIAClassificationApp";
 import { APP_TEST_IDS } from "./constants/testIds";
 
 /**

@@ -1,7 +1,7 @@
 import React from "react";
 import { COMMON_COMPONENT_TEST_IDS } from "../../constants/testIds";
 
-interface ValueDisplayProps {
+export interface ValueDisplayProps {
   value: string | number;
   variant?: "primary" | "success" | "warning" | "danger" | "info";
   size?: "sm" | "md" | "lg";
@@ -10,9 +10,11 @@ interface ValueDisplayProps {
 }
 
 /**
- * ValueDisplay component for displaying values with consistent styling
+ * ValueDisplay shows a value with optional prefix and suffix
  *
- * @component
+ * @category UI Components
+ * @param props - Component properties
+ * @returns Rendered component
  */
 const ValueDisplay: React.FC<ValueDisplayProps> = ({
   value,

@@ -1,10 +1,10 @@
-import React, { useMemo, useState, useEffect } from "react";
-import { SecurityLevel } from "../../types/cia";
-import RadarChart from "../RadarChart";
-import WidgetContainer from "../common/WidgetContainer";
-import MetricsCard from "../common/MetricsCard";
+import React, { useEffect, useMemo, useState } from "react";
 import { CHART_TEST_IDS } from "../../constants/testIds";
+import { SecurityLevel } from "../../types/cia";
 import { getSecurityLevelValue } from "../../utils/securityLevelUtils";
+import RadarChart from "../charts/RadarChart";
+import MetricsCard from "../common/MetricsCard";
+import WidgetContainer from "../common/WidgetContainer";
 
 /**
  * Props interface for SecurityVisualizationWidget
@@ -205,33 +205,46 @@ const SecurityVisualizationWidget: React.FC<
               <div className="absolute top-0 left-1/4 h-full w-1/4 bg-gradient-to-r from-yellow-400 to-yellow-500"></div>
               <div className="absolute top-0 left-2/4 h-full w-1/4 bg-gradient-to-r from-orange-500 to-orange-600"></div>
               <div className="absolute top-0 left-3/4 h-full w-1/4 bg-gradient-to-r from-red-600 to-red-700"></div>
-              
+
               {/* Risk score indicator with glow effect */}
-              <div 
+              <div
                 className="absolute top-0 h-full w-1 bg-white dark:bg-gray-100 z-10 shadow-glow"
                 style={{
                   left: `${riskMetrics.riskScore}%`,
-                  boxShadow: '0 0 10px 2px rgba(255, 255, 255, 0.7)',
-                  transform: 'translateX(-50%)'
+                  boxShadow: "0 0 10px 2px rgba(255, 255, 255, 0.7)",
+                  transform: "translateX(-50%)",
                 }}
               ></div>
-              
+
               {/* Risk labels */}
-              <div className="absolute top-full mt-2 left-0 text-xs text-gray-600 dark:text-gray-400">Low Risk</div>
-              <div className="absolute top-full mt-2 right-0 text-xs text-gray-600 dark:text-gray-400">High Risk</div>
+              <div className="absolute top-full mt-2 left-0 text-xs text-gray-600 dark:text-gray-400">
+                Low Risk
+              </div>
+              <div className="absolute top-full mt-2 right-0 text-xs text-gray-600 dark:text-gray-400">
+                High Risk
+              </div>
             </div>
           </div>
 
           {/* Risk score details in cyberpunk style */}
           <div className="mt-4 bg-gray-50 dark:bg-gray-800 p-3 rounded-lg border border-gray-200 dark:border-gray-700 technical-text">
             <div className="flex justify-between items-center text-sm">
-              <span className="text-gray-600 dark:text-gray-400">Risk Analysis:</span>
-              <span className={`font-mono ${
-                riskMetrics.riskLevel === "Critical" ? "text-red-500 dark:text-red-400" :
-                riskMetrics.riskLevel === "High" ? "text-orange-500 dark:text-orange-400" :
-                riskMetrics.riskLevel === "Medium" ? "text-yellow-500 dark:text-yellow-400" :
-                "text-green-500 dark:text-green-400"
-              }`}>{riskMetrics.riskScore}/100 - {riskMetrics.riskLevel}</span>
+              <span className="text-gray-600 dark:text-gray-400">
+                Risk Analysis:
+              </span>
+              <span
+                className={`font-mono ${
+                  riskMetrics.riskLevel === "Critical"
+                    ? "text-red-500 dark:text-red-400"
+                    : riskMetrics.riskLevel === "High"
+                    ? "text-orange-500 dark:text-orange-400"
+                    : riskMetrics.riskLevel === "Medium"
+                    ? "text-yellow-500 dark:text-yellow-400"
+                    : "text-green-500 dark:text-green-400"
+                }`}
+              >
+                {riskMetrics.riskScore}/100 - {riskMetrics.riskLevel}
+              </span>
             </div>
           </div>
 

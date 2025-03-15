@@ -1,23 +1,29 @@
-import { useMemo } from "react"; // Replace useState with useMemo since we're not using useState
+import { useMemo } from "react";
 import { getSecurityLevelColorPair } from "../constants/colorConstants";
 import { CIADetails, SecurityLevel } from "../types/cia";
 
-// Define ROIEstimatesMap type
-interface ROIEstimate {
-  returnRate: string;
+/**
+ * Interface defining the structure of an ROI estimate for a specific security level
+ */
+export interface ROIEstimate {
+  value: string; // Primary property name
+  returnRate: string; // Alias for backward compatibility
   description: string;
   potentialSavings?: string;
   breakEvenPeriod?: string;
   implementationCost?: string;
 }
 
-type ROIEstimatesMap = {
+/**
+ * Map of ROI estimates by security level
+ */
+export interface ROIEstimatesMap {
   NONE: ROIEstimate;
   LOW: ROIEstimate;
   MODERATE: ROIEstimate;
   HIGH: ROIEstimate;
   VERY_HIGH: ROIEstimate;
-};
+}
 
 /**
  * Common interface for all CIA security options to ensure consistency
@@ -646,35 +652,40 @@ const _confidentialityOptions: Partial<
 // ROI estimates with proper typing
 const _ROI_ESTIMATES: ROIEstimatesMap = {
   NONE: {
-    returnRate: "0%",
+    value: "0%",
+    returnRate: "0%", // Added for backward compatibility
     description:
       "No security investment results in no cost avoidance or operational benefits.",
     potentialSavings: "$0",
     breakEvenPeriod: "N/A",
   },
   LOW: {
-    returnRate: "30-50%",
+    value: "30-50%",
+    returnRate: "30-50%", // Added for backward compatibility
     description:
       "Basic security measures provide fundamental protection. Returns are modest but tangible, especially in preventing common incidents.",
     potentialSavings: "$5,000-$20,000",
     breakEvenPeriod: "12-18 months",
   },
   MODERATE: {
-    returnRate: "50-100%",
+    value: "50-100%",
+    returnRate: "50-100%", // Added for backward compatibility
     description:
       "Standard security investments provide good value. The ROI is substantial as risk mitigation becomes more comprehensive.",
     potentialSavings: "$20,000-$75,000",
     breakEvenPeriod: "9-12 months",
   },
   HIGH: {
-    returnRate: "100-200%",
+    value: "100-200%",
+    returnRate: "100-200%", // Added for backward compatibility
     description:
       "Advanced security measures yield significant returns through robust protection against sophisticated threats and compliance benefits.",
     potentialSavings: "$75,000-$200,000",
     breakEvenPeriod: "6-9 months",
   },
   VERY_HIGH: {
-    returnRate: "150-300%",
+    value: "150-300%",
+    returnRate: "150-300%", // Added for backward compatibility
     description:
       "Maximum security investments offer optimal protection and compliance coverage, with highest returns for critical systems.",
     potentialSavings: "$200,000-$500,000",

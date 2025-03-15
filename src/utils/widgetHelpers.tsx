@@ -88,7 +88,8 @@ export const getWidgetContent = (type: WidgetType | string): string =>
 export const createWidgetConfig = (
   config: Partial<WidgetConfig> & { type: string }
 ): WidgetConfig => {
-  const size = config.size || WidgetSizePreset.DEFAULT;
+  // Use MEDIUM instead of DEFAULT
+  const size = config.size || WidgetSizePreset.MEDIUM;
   // Generate a unique ID if not provided
   const id =
     config.id || `${config.type}-${Math.random().toString(36).substring(2, 9)}`;

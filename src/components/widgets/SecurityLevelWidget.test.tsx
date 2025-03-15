@@ -152,7 +152,7 @@ vi.mock("../../hooks/useCIAOptions", () => {
 });
 
 // Mock SecurityLevelSelector component to capture all props properly
-vi.mock("../../components/SecurityLevelSelector", () => ({
+vi.mock("../../components/securitylevel/SecurityLevelSelector", () => ({
   __esModule: true,
   default: vi.fn().mockImplementation((props) => {
     // Store the entire props object so we can access handlers later
