@@ -53,22 +53,9 @@ jobs:
       - name: Prepare coverage directory
         run: mkdir -p docs/coverage docs/dependencies
 
-      # Run tests with coverage
+      # Generate documentation bundle
       - name: Generate Coverage
-        run: npm run coverage
-
-      - name: Generate API documentation
-        run: npm run docs || echo "API docs generation failed - continuing"
-
-      - name: Generate UML diagrams
-        run: npm run docs:uml || echo "UML diagram generation failed - continuing"
-
-      - name: Generate dependency diagrams
-        run: npm run docs:dependencies || echo "Dependency diagram generation failed - continuing"
-
-      - name: Generate architecture diagrams
-        run: npm run docs:architecture || echo "Architecture diagram generation failed - continuing"
-
+        run: npm run docs:bundle
 
       - name: Create combined index page
         run: |
