@@ -26,6 +26,51 @@ export function debugFailure(testName: string): void {
 }
 
 /**
+ * Debug test failures with comprehensive info including widget content
+ */
+export function debugFailedTest(testName: string): void {
+  cy.screenshot(`failed-test-${testName.replace(/\s+/g, "-")}`, {
+    capture: "viewport",
+  });
+
+  // Log widget content to help debug what's visible
+  cy.log("Logging content of widgets for debugging");
+  cy.get('[data-testid*="widget"], [class*="widget"]').each(
+    ($widget, index) => {
+      const testId = $widget.attr("data-testid") || `unknown-widget-${index}`;
+      const content = $widget.text().substring(0, 200); // Limit to first 200 chars
+      cy.log(
+        `Widget ${testId} content: ${content}${
+          content.length >= 200 ? "..." : ""
+        }`
+      );
+    }
+  );
+
+  // Log security levels if possible
+  cy.get("select").then(($selects) => {
+    if ($selects.length >= 3) {
+      const levels = [
+        $selects.eq(0).val(),
+        $selects.eq(1).val(),
+        $selects.eq(2).val(),
+      ];
+      cy.log(`Current security levels: ${levels.join(", ")}`);
+    }
+  });
+
+  // Check for error messages in the console or DOM
+  cy.window().then((win) => {
+    if (win.consoleErrors && win.consoleErrors.length > 0) {
+      cy.log("Console errors found:");
+      win.consoleErrors.forEach((err: string, i: number) => {
+        cy.log(`${i + 1}. ${err.substring(0, 300)}`);
+      });
+    }
+  });
+}
+
+/**
  * Logs info about currently visible elements
  */
 export function logVisibleElements(): void {
@@ -216,6 +261,16 @@ function registerDebugCommands(): void {
 
     return cy.wrap(null);
   });
+
+  // Fix: Register debugFailedTest command properly with correct typing
+  Cypress.Commands.add(
+    "debugFailedTest",
+    { prevSubject: false },
+    (testName: string) => {
+      debugFailedTest(testName);
+      return cy.wrap(null);
+    }
+  );
 }
 
 // Initialize commands
@@ -224,6 +279,7 @@ registerDebugCommands();
 // Export helpers object
 export default {
   debugFailure,
+  debugFailedTest,
   logAllTestIds,
   logVisibleElements,
   logDomStructure,

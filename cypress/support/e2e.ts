@@ -29,8 +29,8 @@ Cypress.on("uncaught:exception", (err) => {
   return false;
 });
 
-// Fix type for mount command
-Cypress.Commands.add("mount", mount as unknown as Cypress.CommandFn<"mount">);
+// Fix: Properly type mount command without type assertion
+Cypress.Commands.add("mount", mount);
 
 // Custom commands that were defined in types but not implemented
 Cypress.Commands.add("selectSecurityLevelEnhanced", (category, level) => {
@@ -209,11 +209,7 @@ before(() => {
 // Fix: Properly type overwrite for scrollIntoView with correct parameters
 Cypress.Commands.overwrite(
   "scrollIntoView",
-  function (
-    originalFn: Cypress.CommandOriginalFn<"scrollIntoView">,
-    subject: JQuery<HTMLElement>,
-    options?: Partial<Cypress.ScrollIntoViewOptions>
-  ) {
+  function (originalFn, subject, options?: ScrollIntoViewOptions) {
     // Handle subject with multiple elements
     if (subject && subject.length > 1) {
       // Get only the first element

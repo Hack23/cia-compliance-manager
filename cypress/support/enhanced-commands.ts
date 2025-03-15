@@ -219,6 +219,150 @@ Cypress.Commands.add(
   }
 );
 
+/**
+ * Enhanced widget discovery that tries multiple approaches to find widgets
+ * This makes tests more resilient to DOM structure changes
+ */
+Cypress.Commands.add(
+  "findWidgetEnhanced",
+  (
+    widgetNameOrPattern: string | RegExp
+  ): Cypress.Chainable<JQuery<HTMLElement>> => {
+    cy.log(`Looking for widget matching: ${widgetNameOrPattern}`);
+
+    return cy.document().then((doc) => {
+      // Try different strategies to find the widget
+      const strategies = [
+        // Strategy 1: Exact data-testid match
+        () => {
+          const exactMatch = doc.querySelector(
+            `[data-testid="widget-${widgetNameOrPattern}"], [data-testid="${widgetNameOrPattern}"]`
+          );
+          return exactMatch;
+        },
+
+        // Strategy 2: Partial data-testid match
+        () => {
+          const partialMatches = Array.from(
+            doc.querySelectorAll("[data-testid]")
+          ).filter((el) => {
+            const testId = el.getAttribute("data-testid") || "";
+            return typeof widgetNameOrPattern === "string"
+              ? testId.includes(widgetNameOrPattern)
+              : widgetNameOrPattern.test(testId);
+          });
+          return partialMatches[0];
+        },
+
+        // Strategy 3: Class name match
+        () => {
+          const classMatches = Array.from(
+            doc.querySelectorAll("[class]")
+          ).filter((el) => {
+            const className = el.getAttribute("class") || "";
+            return typeof widgetNameOrPattern === "string"
+              ? className.includes(widgetNameOrPattern)
+              : widgetNameOrPattern.test(className);
+          });
+          return classMatches[0];
+        },
+
+        // Strategy 4: Content text match
+        () => {
+          const allDivs = Array.from(doc.querySelectorAll("div"));
+          const contentMatches = allDivs.filter((el) => {
+            const text = el.textContent || "";
+            return typeof widgetNameOrPattern === "string"
+              ? text.toLowerCase().includes(widgetNameOrPattern.toLowerCase())
+              : widgetNameOrPattern.test(text);
+          });
+          return contentMatches[0];
+        },
+      ];
+
+      // Try each strategy until we find something
+      for (const strategy of strategies) {
+        const result = strategy();
+        if (result) {
+          cy.log(
+            `Found widget using strategy: ${strategy.name || "anonymous"}`
+          );
+          return cy.wrap(result);
+        }
+      }
+
+      // Nothing found, return an empty wrapper
+      cy.log(
+        `WARNING: Widget ${widgetNameOrPattern} not found with any strategy`
+      );
+      return cy.wrap(Cypress.$());
+    });
+  }
+);
+
+/**
+ * Safely wait for content to stabilize before assertions
+ * This helps prevent flaky tests due to asynchronous component updates
+ */
+Cypress.Commands.add(
+  "waitForStableContent",
+  (
+    selector: string,
+    options: { timeout?: number; pollInterval?: number } = {}
+  ) => {
+    // Change from const to let to allow reassignment
+    let { timeout = 5000, pollInterval = 200 } = options;
+    let lastContent = "";
+    let stableCount = 0;
+
+    cy.log(`Waiting for stable content in ${selector}`);
+
+    // Create a promise that resolves when content is stable
+    cy.wrap(null, { log: false }).then(() => {
+      return new Cypress.Promise((resolve, reject) => {
+        const checkStability = () => {
+          if (Cypress.$(selector).length === 0) {
+            // Element doesn't exist yet, keep waiting
+            if (timeout <= 0) {
+              reject(new Error(`Element ${selector} never appeared`));
+            } else {
+              setTimeout(checkStability, pollInterval);
+              timeout -= pollInterval; // Now works with 'let' variable
+            }
+            return;
+          }
+
+          const currentContent = Cypress.$(selector).text();
+
+          if (currentContent === lastContent) {
+            stableCount++;
+            if (stableCount >= 3) {
+              // Content has been stable for 3 checks
+              resolve();
+            } else {
+              // Keep checking
+              setTimeout(checkStability, pollInterval);
+            }
+          } else {
+            // Content changed, reset counter
+            lastContent = currentContent;
+            stableCount = 0;
+            if (timeout <= 0) {
+              reject(new Error(`Content in ${selector} never stabilized`));
+            } else {
+              setTimeout(checkStability, pollInterval);
+              timeout -= pollInterval; // Now works with 'let' variable
+            }
+          }
+        };
+
+        // Start the stability check
+        checkStability();
+      });
+    });
+  }
+);
+
 // Add command type definitions
 declare global {
   namespace Cypress {
@@ -289,6 +433,23 @@ declare global {
        * Find and click an element
        */
       findAndClick(selector: string): Chainable<void>;
+
+      /**
+       * Enhanced widget discovery that tries multiple approaches to find widgets
+       * This makes tests more resilient to DOM structure changes
+       */
+      findWidgetEnhanced(
+        widgetNameOrPattern: string | RegExp
+      ): Chainable<JQuery<HTMLElement>>;
+
+      /**
+       * Safely wait for content to stabilize before assertions
+       * This helps prevent flaky tests due to asynchronous component updates
+       */
+      waitForStableContent(
+        selector: string,
+        options?: { timeout?: number; pollInterval?: number }
+      ): Chainable<void>;
     }
   }
 }

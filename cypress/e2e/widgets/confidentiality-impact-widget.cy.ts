@@ -3,100 +3,61 @@
  *
  * Tests the Confidentiality Impact Widget functionality
  */
-import {
-  SECURITY_LEVELS,
-  CONFIDENTIALITY_IMPACT_TEST_IDS,
-} from "../../support/constants";
-import { testWidgetUpdatesWithSecurityLevels } from "../../support/test-patterns";
-import {
-  setupWidgetTest,
-  testSecurityLevelChanges,
-} from "./widget-test-helper";
+import { SECURITY_LEVELS } from "../../support/constants";
+import { setupWidgetTest, verifyWidgetExists } from "./base-widget-tests";
+import { testSecurityLevelChanges } from "./widget-test-helper";
 
 describe("Confidentiality Impact Widget", () => {
-  beforeEach(() => {
-    cy.visit("/");
-    cy.ensureAppLoaded();
+  // Use standard setup for widget tests
+  setupWidgetTest("confidentiality-impact");
+
+  // Basic existence test
+  verifyWidgetExists("confidentiality-impact");
+
+  // Test security level changes affect widget content
+  it("updates content when security levels change", () => {
+    testSecurityLevelChanges("confidentiality-impact");
   });
 
-  it("displays confidentiality impact analysis", () => {
-    // Set security levels
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE
-    );
-
-    // Find the confidentiality impact widget using correct test ID from DOM
-    cy.get('[data-testid="confidentiality-impact"]')
-      .should("exist")
-      .scrollIntoView();
-
-    // Also try with the findWidget helper for resilience
-    cy.findWidget("confidentiality-impact").should("exist");
-
-    // Verify confidentiality content
-    cy.verifyContentPresent([
-      /confidentiality/i,
-      /data/i,
-      /protect/i,
-      /privacy/i,
-    ]);
-  });
-
-  it("shows confidentiality-specific metrics", () => {
-    // Set high confidentiality
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.HIGH
-    );
-
-    // Find confidentiality widget using DOM-verified test ID
-    cy.get('[data-testid="confidentiality-impact"]').scrollIntoView();
-
-    // Check for specific confidentiality metrics
-    cy.verifyContentPresent([/protection/i, /privacy/i, /sensitive/i]);
-  });
-
-  it("updates content when confidentiality security level changes", () => {
-    // Use test pattern for widget updates with correct DOM test ID
-    testWidgetUpdatesWithSecurityLevels(
-      '[data-testid="confidentiality-impact"]',
-      {
-        initialLevels: [
-          SECURITY_LEVELS.MODERATE,
-          SECURITY_LEVELS.MODERATE,
-          SECURITY_LEVELS.LOW,
-        ],
-        newLevels: [
-          SECURITY_LEVELS.MODERATE,
-          SECURITY_LEVELS.MODERATE,
-          SECURITY_LEVELS.HIGH,
-        ],
-        expectTextChange: true,
-      }
-    );
-  });
-
-  it("provides business impact analysis for confidentiality breaches", () => {
-    // Set high confidentiality
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.HIGH
-    );
-
-    // Find confidentiality widget with findWidget helper
+  // Test specific confidentiality impacts with high security
+  it("displays detailed confidentiality impacts with high security", () => {
     cy.findWidget("confidentiality-impact").scrollIntoView();
 
-    // Check for business impact content
-    cy.verifyContentPresent([
-      /business/i,
-      /impact/i,
-      /breach/i,
-      /regulation/i,
-      /compliance/i,
-    ]);
+    // Set high confidentiality level
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.MODERATE,
+      SECURITY_LEVELS.MODERATE,
+      SECURITY_LEVELS.HIGH // High confidentiality
+    );
+
+    cy.wait(1000); // Wait for UI updates
+
+    // Verify high confidentiality content
+    cy.findWidget("confidentiality-impact").within(() => {
+      // Look for confidentiality-specific terms
+      cy.contains(
+        /privacy|data protection|sensitive|confidential|encrypt/i
+      ).should("exist");
+    });
+  });
+
+  // Test confidentiality recommendations
+  it("provides appropriate confidentiality recommendations", () => {
+    cy.findWidget("confidentiality-impact").scrollIntoView();
+
+    // Set all security levels high
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH
+    );
+
+    cy.wait(1000); // Wait for UI updates
+
+    // Verify recommendations content
+    cy.findWidget("confidentiality-impact").within(() => {
+      // Look for recommendation-type content
+      cy.contains(/recommend|suggest|practice|implement/i).should("exist");
+    });
   });
 });

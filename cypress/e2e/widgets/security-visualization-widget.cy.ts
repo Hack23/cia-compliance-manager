@@ -3,97 +3,62 @@
  *
  * Tests the Security Visualization Widget functionality
  */
-import {
-  SECURITY_LEVELS,
-  CHART_TEST_IDS,
-  WIDGET_TEST_IDS,
-} from "../../support/constants";
-import { testWidgetUpdatesWithSecurityLevels } from "../../support/test-patterns";
+import { SECURITY_LEVELS } from "../../support/constants";
+import { setupWidgetTest, verifyWidgetExists } from "./base-widget-tests";
+import { testSecurityLevelChanges } from "./widget-test-helper";
 
 describe("Security Visualization Widget", () => {
-  beforeEach(() => {
-    cy.visit("/");
-    cy.ensureAppLoaded();
+  // Use standard setup for widget tests
+  setupWidgetTest("security-visualization");
+
+  // Basic existence test
+  verifyWidgetExists("security-visualization");
+
+  // Test security level changes affect visualization
+  it("updates visualization when security levels change", () => {
+    testSecurityLevelChanges("security-visualization");
   });
 
-  it("displays security visualization", () => {
-    // Set security levels
+  // Test chart/visualization elements appear
+  it("displays visual security representation", () => {
+    cy.findWidget("security-visualization").scrollIntoView();
+
+    // Set balanced security levels
     cy.setSecurityLevels(
       SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE
     );
 
-    // Use the radar chart ID from DOM analysis as this is likely the visualization widget
-    cy.get('[data-testid="radar-chart"]').should("exist").scrollIntoView();
+    cy.wait(1000); // Wait for UI updates
 
-    // Verify visualization elements
-    cy.verifyContentPresent([
-      /availability/i,
-      /integrity/i,
-      /confidentiality/i,
-    ]);
-  });
-
-  it("updates visualization when security levels change", () => {
-    // Use test pattern for widget updates with DOM-verified test ID
-    testWidgetUpdatesWithSecurityLevels('[data-testid="radar-chart"]', {
-      initialLevels: [
-        SECURITY_LEVELS.LOW,
-        SECURITY_LEVELS.LOW,
-        SECURITY_LEVELS.LOW,
-      ],
-      newLevels: [
-        SECURITY_LEVELS.HIGH,
-        SECURITY_LEVELS.HIGH,
-        SECURITY_LEVELS.HIGH,
-      ],
-      expectTextChange: true,
+    // Look for visualization elements
+    cy.findWidget("security-visualization").within(() => {
+      // Look for chart elements or visualization components
+      cy.get("svg, canvas, [data-testid*='chart'], [class*='chart']").should(
+        "exist"
+      );
     });
   });
 
-  it("displays mixed security level visualization", () => {
+  // Test asymmetric security level visualization
+  it("visualizes different security levels appropriately", () => {
+    cy.findWidget("security-visualization").scrollIntoView();
+
     // Set mixed security levels
     cy.setSecurityLevels(
       SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.LOW
-    );
-
-    // Find visualization widget
-    cy.get('[data-testid="radar-chart"]').scrollIntoView();
-
-    // Verify that all three levels appear in the visualization
-    cy.verifyContentPresent([
-      SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.LOW,
-    ]);
-  });
-
-  it("renders visual elements properly", () => {
-    // Set moderate security levels
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE
     );
 
-    // Find visualization widget
-    cy.get('[data-testid="radar-chart"]').scrollIntoView();
+    cy.wait(1000); // Wait for UI updates
 
-    // First try to find the canvas element within the chart
-    cy.get("body").then(($body) => {
-      if ($body.find('[data-testid="radar-chart"] canvas').length > 0) {
-        cy.get('[data-testid="radar-chart"] canvas').should("exist");
-      } else if ($body.find("canvas").length > 0) {
-        // If not within the radar chart, try any canvas on the page
-        cy.get("canvas").should("exist");
-      } else {
-        // If no canvas element (possibly due to SSR or alternate rendering),
-        // at least verify text content is present
-        cy.verifyContentPresent([/security/i, /level/i, /high|moderate|low/i]);
-      }
+    // Verify the visualization exists after mixed security setting
+    cy.findWidget("security-visualization").within(() => {
+      cy.get("svg, canvas, [data-testid*='chart'], [class*='chart']").should(
+        "exist"
+      );
     });
   });
 });

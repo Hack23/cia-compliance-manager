@@ -287,6 +287,8 @@ declare namespace Cypress {
     debugFailure(testName: string): void;
     logVisibleElements(): void;
     logAllTestIds(): void;
+    // Add debugFailedTest type definition
+    debugFailedTest(testName: string): void;
     highlight(): Chainable<Element>;
     measureTime<T>(fn: () => Chainable<T>, label?: string): Chainable<T>;
     dumpAppState(): Chainable<void>;

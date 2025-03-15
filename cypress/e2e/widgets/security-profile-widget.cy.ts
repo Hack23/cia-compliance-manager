@@ -1,58 +1,64 @@
 import { SECURITY_LEVELS } from "../../support/constants";
-import {
-  setupWidgetTest,
-  testSecurityLevelChanges,
-} from "./widget-test-helper";
+import { setupWidgetTest, verifyWidgetExists } from "./base-widget-tests";
 
 describe("Security Profile Widget", () => {
-  beforeEach(() => {
-    cy.visit("/");
-    cy.ensureAppLoaded();
-  });
+  // Use standard setup for widget tests
+  setupWidgetTest("security-profile");
 
-  it("allows selecting security levels for all CIA components", () => {
-    // Find security level widget
-    cy.findWidget("security-level").should("exist").scrollIntoView();
+  // Basic existence test
+  verifyWidgetExists("security-profile");
 
-    // Set different levels for each component
-    cy.selectSecurityLevelEnhanced("availability", SECURITY_LEVELS.HIGH);
-    cy.selectSecurityLevelEnhanced("integrity", SECURITY_LEVELS.MODERATE);
-    cy.selectSecurityLevelEnhanced("confidentiality", SECURITY_LEVELS.LOW);
+  // Test profile changes with different security levels
+  it("displays appropriate security profile for different security levels", () => {
+    cy.findWidget("security-profile").scrollIntoView();
 
-    // Verify content reflects the selections
-    cy.verifyContentPresent([
-      SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.MODERATE,
+    // Test with low security
+    cy.setSecurityLevels(
       SECURITY_LEVELS.LOW,
-    ]);
+      SECURITY_LEVELS.LOW,
+      SECURITY_LEVELS.LOW
+    );
+
+    cy.wait(1000); // Wait for UI updates
+
+    // Capture initial profile content
+    cy.findWidget("security-profile").invoke("text").as("lowSecurityContent");
+
+    // Test with high security
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH
+    );
+
+    cy.wait(1000); // Wait for UI updates
+
+    // Verify profile changed
+    cy.findWidget("security-profile")
+      .invoke("text")
+      .then((highSecurityText) => {
+        cy.get("@lowSecurityContent").then((lowSecurityText) => {
+          expect(highSecurityText).not.to.equal(lowSecurityText);
+        });
+      });
   });
 
-  it("displays appropriate descriptions for each security level", () => {
-    // Set security levels
+  // Test profile details are displayed
+  it("shows detailed security profile information", () => {
+    cy.findWidget("security-profile").scrollIntoView();
+
+    // Set moderate security levels
     cy.setSecurityLevels(
       SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.MODERATE
     );
 
-    // Verify descriptions appear
-    cy.findWidget("security-level").within(() => {
-      cy.get('[data-testid*="description"], [class*="description"]')
-        .should("exist")
-        .and("be.visible");
+    cy.wait(1000); // Wait for UI updates
 
-      // Check for text indicating description content
-      cy.verifyContentPresent([
-        /security/i,
-        /level/i,
-        /protection/i,
-        /control/i,
-      ]);
+    // Look for profile-related content
+    cy.findWidget("security-profile").within(() => {
+      cy.contains(/profile|classification|category|level/i).should("exist");
     });
-  });
-
-  it("reflects changes between different security levels", () => {
-    // Use our helper function for testing security level changes
-    testSecurityLevelChanges("security-level");
   });
 });

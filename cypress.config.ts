@@ -12,11 +12,11 @@ export default defineConfig({
   video: true,
   screenshotOnRunFailure: true,
   trashAssetsBeforeRuns: true,
-  viewportWidth: 3840,
-  viewportHeight: 2160,
+  viewportWidth: 1280, // More focused viewport default
+  viewportHeight: 800, // More focused viewport default
   retries: {
-    runMode: 2,
-    openMode: 1,
+    runMode: 2, // Increase retries for CI runs
+    openMode: 1, // Allow one retry in open mode
   },
   reporter: "cypress-multi-reporters",
   reporterOptions: {
@@ -42,7 +42,7 @@ export default defineConfig({
     baseUrl: "http://localhost:5173",
     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
     supportFile: "cypress/support/e2e.ts",
-    testIsolation: false,
+    testIsolation: true, // Enable test isolation for more reliable tests
     setupNodeEvents(on, config) {
       // Register vite preprocessor
       on(
@@ -140,6 +140,14 @@ export default defineConfig({
             }`;
           }
         },
+
+        // Add additional error logging for better debugging
+        logTestMetrics({ test, status, duration }) {
+          console.log(
+            `Test: ${test}, Status: ${status}, Duration: ${duration}ms`
+          );
+          return null;
+        },
       });
 
       return config;
@@ -148,7 +156,7 @@ export default defineConfig({
       runMode: 1,
       openMode: 0,
     },
-    defaultCommandTimeout: 10000,
+    defaultCommandTimeout: 8000, // Slightly reduced from 10000
     chromeWebSecurity: false,
   },
   component: {

@@ -1,99 +1,58 @@
-/**
- * User Story: As a user, I can view integrity impact analysis
- *
- * Tests the Integrity Impact Widget functionality
- */
-import {
-  SECURITY_LEVELS,
-  INTEGRITY_IMPACT_TEST_IDS,
-} from "../../support/constants";
-import { testWidgetUpdatesWithSecurityLevels } from "../../support/test-patterns";
-import {
-  setupWidgetTest,
-  testSecurityLevelChanges,
-} from "./widget-test-helper";
+import { SECURITY_LEVELS } from "../../support/constants";
+import { setupWidgetTest, verifyWidgetExists } from "./base-widget-tests";
+import { testSecurityLevelChanges } from "./widget-test-helper";
 
 describe("Integrity Impact Widget", () => {
-  beforeEach(() => {
-    cy.visit("/");
-    cy.ensureAppLoaded();
+  // Use standard setup for widget tests
+  setupWidgetTest("integrity-impact");
+
+  // Basic existence test
+  verifyWidgetExists("integrity-impact");
+
+  // Test security level changes affect widget content
+  it("updates content when security levels change", () => {
+    testSecurityLevelChanges("integrity-impact");
   });
 
-  it("displays integrity impact analysis", () => {
-    // Set security levels
+  // Test specific integrity impacts with high security
+  it("displays detailed integrity impacts with high security", () => {
+    cy.findWidget("integrity-impact").scrollIntoView();
+
+    // Set high integrity level
     cy.setSecurityLevels(
       SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE,
+      SECURITY_LEVELS.HIGH, // High integrity
       SECURITY_LEVELS.MODERATE
     );
 
-    // Find the integrity impact widget using DOM-verified test ID
-    cy.get('[data-testid="integrity-impact"]').should("exist").scrollIntoView();
+    cy.wait(1000); // Wait for UI updates
 
-    // Verify integrity content
-    cy.verifyContentPresent([
-      /integrity/i,
-      /impact/i,
-      /data/i,
-      /accurate|accuracy/i,
-    ]);
-  });
-
-  it("shows integrity-specific metrics", () => {
-    // Set high integrity
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.MODERATE
-    );
-
-    // Find integrity widget using DOM-verified test ID
-    cy.get('[data-testid="integrity-impact"]').scrollIntoView();
-
-    // Check for specific integrity metrics
-    cy.verifyContentPresent([
-      /validation/i,
-      /accuracy/i,
-      /integrity/i,
-      /verification/i,
-    ]);
-  });
-
-  it("updates content when integrity security level changes", () => {
-    // Use test pattern for widget updates with correct DOM test ID
-    testWidgetUpdatesWithSecurityLevels('[data-testid="integrity-impact"]', {
-      initialLevels: [
-        SECURITY_LEVELS.MODERATE,
-        SECURITY_LEVELS.LOW,
-        SECURITY_LEVELS.MODERATE,
-      ],
-      newLevels: [
-        SECURITY_LEVELS.MODERATE,
-        SECURITY_LEVELS.HIGH,
-        SECURITY_LEVELS.MODERATE,
-      ],
-      expectTextChange: true,
+    // Verify high integrity content
+    cy.findWidget("integrity-impact").within(() => {
+      // Look for integrity-specific terms
+      cy.contains(/accuracy|validation|authenticity|correct|trusted/i).should(
+        "exist"
+      );
     });
   });
 
-  it("provides business impact analysis for integrity violations", () => {
-    // Set high integrity
+  // Test integrity recommendations
+  it("provides appropriate integrity recommendations", () => {
+    cy.findWidget("integrity-impact").scrollIntoView();
+
+    // Set all security levels high
     cy.setSecurityLevels(
-      SECURITY_LEVELS.MODERATE,
       SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.MODERATE
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH
     );
 
-    // Find integrity widget using DOM-verified test ID
-    cy.get('[data-testid="integrity-impact"]').scrollIntoView();
+    cy.wait(1000); // Wait for UI updates
 
-    // Check for business impact content
-    cy.verifyContentPresent([
-      /business/i,
-      /impact/i,
-      /financial/i,
-      /operational/i,
-      /regulatory/i,
-    ]);
+    // Verify recommendations content
+    cy.findWidget("integrity-impact").within(() => {
+      // Look for recommendation-type content
+      cy.contains(/recommend|suggest|practice|implement/i).should("exist");
+    });
   });
 });

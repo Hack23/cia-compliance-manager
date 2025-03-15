@@ -40,6 +40,8 @@ declare global {
       logAllTestIds(): Chainable<null>;
       analyzeWidgetsOnPage(): Chainable<null>;
       highlight(): Chainable<JQuery<HTMLElement>>;
+      // Add the missing debugFailedTest command
+      debugFailedTest(testName: string): Chainable<null>;
 
       // Widget commands
       findWidget(widgetName: string): Chainable<JQuery<HTMLElement>>;
