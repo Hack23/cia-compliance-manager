@@ -67,9 +67,19 @@ export default defineConfig({
       coverage: {
         provider: "v8",
         reporter: ["text", "json", "html"],
+        reportsDirectory: "./docs/coverage",
         exclude: [
-          "node_modules/*.*",
-          "node_modules/**/*.*",
+          // Comprehensive node_modules exclusion patterns that match everything
+          "node_modules/**/*",
+          "**/node_modules/**/*",
+          // Explicitly exclude problematic modules with more specific patterns
+          "**/@kurkle/color/**",
+          "**/chart.js/**",
+          "**/react/**",
+          "**/react-dom/**",
+          "**/scheduler/**",
+          "**/jsx-runtime*",
+          // Other standard exclusions
           "dist/",
           "cypress/**",
           "scripts/",
@@ -91,6 +101,23 @@ export default defineConfig({
           functions: 75,
           lines: 80,
         },
+      },
+      // Add HTML reporter for test results
+      reporters: [
+        [
+          "verbose",
+          {
+            showSummary: true,
+            showSuccesses: true,
+            showSkipped: true,
+            showFailed: true,
+            renderSuccesses: true,
+          },
+        ],
+        "html",
+      ],
+      outputFile: {
+        html: "./docs/test-results/index.html",
       },
     },
   }),

@@ -7,7 +7,19 @@ import { resolve } from "path";
 // Use __dirname in a more TypeScript-friendly way
 const __dirname = resolve(process.cwd());
 
+// Centralize report directories
+const REPORTS_BASE_DIR = "docs/cypress";
+const REPORTS = {
+  junit: `${REPORTS_BASE_DIR}/junit`,
+  mochawesome: `${REPORTS_BASE_DIR}/mochawesome`,
+  videos: `${REPORTS_BASE_DIR}/videos`,
+  screenshots: `${REPORTS_BASE_DIR}/screenshots`,
+  artifacts: `${REPORTS_BASE_DIR}/artifacts`,
+};
+
 export default defineConfig({
+  screenshotsFolder: REPORTS.screenshots,
+  videosFolder: REPORTS.videos,
   experimentalMemoryManagement: true,
   video: true,
   screenshotOnRunFailure: true,
@@ -29,7 +41,7 @@ export default defineConfig({
       includePending: true,
     },
     mochawesomeReporterOptions: {
-      reportDir: "cypress/reports/mochawesome",
+      reportDir: REPORTS.mochawesome,
       overwrite: false,
       html: true,
       json: true,
@@ -44,6 +56,25 @@ export default defineConfig({
     supportFile: "cypress/support/e2e.ts",
     testIsolation: true, // Enable test isolation for more reliable tests
     setupNodeEvents(on, config) {
+      on("before:run", () => {
+        // Clean up all report directories
+        Object.values(REPORTS).forEach((dir) => {
+          if (fs.existsSync(dir)) {
+            console.log(`Cleaning up ${dir}`);
+            const files = fs.readdirSync(dir);
+            files.forEach((file) => {
+              const filePath = path.join(dir, file);
+              if (!fs.lstatSync(filePath).isDirectory()) {
+                fs.unlinkSync(filePath);
+              }
+            });
+          } else {
+            fs.mkdirSync(dir, { recursive: true });
+            console.log(`Created directory ${dir}`);
+          }
+        });
+      });
+
       // Register vite preprocessor
       on(
         "file:preprocessor",
@@ -86,46 +117,44 @@ export default defineConfig({
           }
         },
 
+        // Update the listJunitFiles task
         listJunitFiles() {
           try {
-            const resultsDir = path.join(process.cwd(), "cypress", "results");
-            if (!fs.existsSync(resultsDir)) {
+            if (!fs.existsSync(REPORTS.junit)) {
               return [];
             }
             return fs
-              .readdirSync(resultsDir)
+              .readdirSync(REPORTS.junit)
               .filter((file) => file.endsWith(".xml"));
           } catch (err) {
             return [];
           }
         },
 
-        // Add the missing resetJunitResults task
+        // Update the resetJunitResults task
         resetJunitResults() {
           try {
-            const resultsDir = path.join(process.cwd(), "cypress", "results");
-
             // Ensure directory exists
-            if (!fs.existsSync(resultsDir)) {
-              fs.mkdirSync(resultsDir, { recursive: true });
-              return null; // Return null instead of a string
+            if (!fs.existsSync(REPORTS.junit)) {
+              fs.mkdirSync(REPORTS.junit, { recursive: true });
+              return null;
             }
 
             // Find and delete all XML files in the directory
             const xmlFiles = fs
-              .readdirSync(resultsDir)
+              .readdirSync(REPORTS.junit)
               .filter((file) => file.endsWith(".xml"));
 
             // Delete each XML file
             xmlFiles.forEach((file) => {
-              const filePath = path.join(resultsDir, file);
+              const filePath = path.join(REPORTS.junit, file);
               fs.unlinkSync(filePath);
             });
 
-            return null; // Return null instead of a string
+            return null;
           } catch (err) {
             console.error("Error resetting JUnit results:", err);
-            return null; // Return null instead of a string
+            return null;
           }
         },
 

@@ -34,7 +34,7 @@
     "docs:dependencies": "mkdir -p docs/dependencies && depcruise --config .dependency-cruiser.cjs --output-type dot src | dot -T svg > docs/dependencies/module-dependencies.svg || echo 'Dependency diagram generation failed - continuing' && touch docs/dependencies/module-dependencies.svg",
     "docs:bundle": "npm run docs && npm run docs:uml && npm run docs:dependencies && npm run docs:architecture",
     "docs:architecture": "node scripts/generate-architecture-diagrams.js",
-    "docs:coverage-summary": "echo 'Documentation coverage report is not available.' > docs/coverage-summary.txt",
+    "docs:coverage-summary": "vitest run --coverage",
     "fix:cypress-config": "node scripts/fix-cypress-config.js",
     "cypress:clean": "rm -rf cypress/results/*",
     "cleanup": "bash scripts/cleanup.sh",
