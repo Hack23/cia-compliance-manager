@@ -22,6 +22,8 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "test:e2e": "start-server-and-test 'vite --port 5173' http://localhost:5173 'cypress run'",
+    "test:e2ereportmerge": "npx mochawesome-merge docs/cypress/mochawesome/*.json > docs/cypress/mochawesome-all.json",
+    "test:e2ereporthtmlall": "npx marge -f docs/cypress/mochawesome/index.html docs/cypress/mochawesome-all.json",
     "pretest:e2e": "bash .devcontainer/init-xvfb.sh",
     "cypress:install": "cypress install",
     "cypress:verify": "cypress verify",
