@@ -6,9 +6,9 @@
 
 # Function: mapOptionsToConstants()
 
-> **mapOptionsToConstants**\<`T`, `R`\>(`options`, `key`, `transform`?): `object`
+> **mapOptionsToConstants**\<`T`, `R`\>(`options`, `key`, `transform`?): \{ `HIGH`: `undefined`; `LOW`: `undefined`; `MODERATE`: `undefined`; `NONE`: `undefined`; `VERY_HIGH`: `undefined`; \} \| \{ `HIGH`: `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]; `LOW`: `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]; `MODERATE`: `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]; `NONE`: `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]; `VERY_HIGH`: `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]; \}
 
-Defined in: [constants/appConstants.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/959ad507202d1cb78ada77cec76006b099ceca7d/src/constants/appConstants.ts#L26)
+Defined in: [constants/appConstants.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/5a46a25cd2e09ba091444827f045b3618a447654/src/constants/appConstants.ts#L26)
 
 Maps CIA option values to constants with consistent naming (NONE, LOW, etc.)
 Modified version to avoid circular dependencies
@@ -35,24 +35,4 @@ Modified version to avoid circular dependencies
 
 ## Returns
 
-`object`
-
-### HIGH
-
-> **HIGH**: `undefined` \| `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]
-
-### LOW
-
-> **LOW**: `undefined` \| `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]
-
-### MODERATE
-
-> **MODERATE**: `undefined` \| `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]
-
-### NONE
-
-> **NONE**: `undefined` \| `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]
-
-### VERY\_HIGH
-
-> **VERY\_HIGH**: `undefined` \| `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]
+\{ `HIGH`: `undefined`; `LOW`: `undefined`; `MODERATE`: `undefined`; `NONE`: `undefined`; `VERY_HIGH`: `undefined`; \} \| \{ `HIGH`: `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]; `LOW`: `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]; `MODERATE`: `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]; `NONE`: `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]; `VERY_HIGH`: `R` \| [`CIADetails`](../../../../types/cia/interfaces/CIADetails.md)\[`T`\]; \}

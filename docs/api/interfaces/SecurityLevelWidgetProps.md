@@ -6,7 +6,7 @@
 
 # Interface: SecurityLevelWidgetProps
 
-Defined in: src/types/widgets.ts:197
+Defined in: [src/types/widgets.ts:197](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L197)
 
 Props for the SecurityLevelWidget component
 
@@ -16,7 +16,7 @@ Props for the SecurityLevelWidget component
 
 > **availabilityLevel**: `string`
 
-Defined in: src/types/widgets.ts:198
+Defined in: [src/types/widgets.ts:198](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L198)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/widgets.ts:198
 
 > `optional` **className**: `string`
 
-Defined in: src/types/widgets.ts:211
+Defined in: [src/types/widgets.ts:211](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L211)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: src/types/widgets.ts:211
 
 > **confidentialityLevel**: `string`
 
-Defined in: src/types/widgets.ts:200
+Defined in: [src/types/widgets.ts:200](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L200)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: src/types/widgets.ts:200
 
 > `optional` **error**: `null` \| `Error`
 
-Defined in: src/types/widgets.ts:215
+Defined in: [src/types/widgets.ts:215](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L215)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: src/types/widgets.ts:215
 
 > **integrityLevel**: `string`
 
-Defined in: src/types/widgets.ts:199
+Defined in: [src/types/widgets.ts:199](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L199)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: src/types/widgets.ts:199
 
 > `optional` **loading**: `boolean`
 
-Defined in: src/types/widgets.ts:214
+Defined in: [src/types/widgets.ts:214](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L214)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: src/types/widgets.ts:214
 
 > `optional` **onAvailabilityChange**: (`level`) => `void`
 
-Defined in: src/types/widgets.ts:201
+Defined in: [src/types/widgets.ts:201](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L201)
 
 #### Parameters
 
@@ -82,7 +82,7 @@ Defined in: src/types/widgets.ts:201
 
 > `optional` **onConfidentialityChange**: (`level`) => `void`
 
-Defined in: src/types/widgets.ts:203
+Defined in: [src/types/widgets.ts:203](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L203)
 
 #### Parameters
 
@@ -100,7 +100,7 @@ Defined in: src/types/widgets.ts:203
 
 > `optional` **onIntegrityChange**: (`level`) => `void`
 
-Defined in: src/types/widgets.ts:202
+Defined in: [src/types/widgets.ts:202](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L202)
 
 #### Parameters
 
@@ -118,7 +118,7 @@ Defined in: src/types/widgets.ts:202
 
 > `optional` **setAvailability**: `Dispatch`\<`SetStateAction`\<`string`\>\> \| (`level`) => `void`
 
-Defined in: src/types/widgets.ts:204
+Defined in: [src/types/widgets.ts:204](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L204)
 
 ***
 
@@ -126,7 +126,7 @@ Defined in: src/types/widgets.ts:204
 
 > `optional` **setConfidentiality**: `Dispatch`\<`SetStateAction`\<`string`\>\> \| (`level`) => `void`
 
-Defined in: src/types/widgets.ts:208
+Defined in: [src/types/widgets.ts:208](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L208)
 
 ***
 
@@ -134,7 +134,7 @@ Defined in: src/types/widgets.ts:208
 
 > `optional` **setIntegrity**: `Dispatch`\<`SetStateAction`\<`string`\>\> \| (`level`) => `void`
 
-Defined in: src/types/widgets.ts:207
+Defined in: [src/types/widgets.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L207)
 
 ***
 
@@ -142,7 +142,7 @@ Defined in: src/types/widgets.ts:207
 
 > `optional` **testId**: `string`
 
-Defined in: src/types/widgets.ts:212
+Defined in: [src/types/widgets.ts:212](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L212)
 
 ***
 
@@ -150,4 +150,4 @@ Defined in: src/types/widgets.ts:212
 
 > `optional` **title**: `string`
 
-Defined in: src/types/widgets.ts:213
+Defined in: [src/types/widgets.ts:213](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L213)

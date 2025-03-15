@@ -8,7 +8,7 @@
 
 > **hasWidgetProps**(`value`): `boolean`
 
-Defined in: [src/utils/typeGuards.ts:222](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/typeGuards.ts#L222)
+Defined in: [src/utils/typeGuards.ts:246](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/typeGuards.ts#L246)
 
 Type guard for basic widget props
 

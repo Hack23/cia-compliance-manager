@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactAnalysisWidgetProps
 
-Defined in: src/types/widgets.ts:184
+Defined in: [src/types/widgets.ts:184](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L184)
 
 Props for the BusinessImpactAnalysisWidget component
 
@@ -16,7 +16,7 @@ Props for the BusinessImpactAnalysisWidget component
 
 > `optional` **activeComponent**: `"availability"` \| `"integrity"` \| `"confidentiality"`
 
-Defined in: src/types/widgets.ts:191
+Defined in: [src/types/widgets.ts:191](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L191)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/widgets.ts:191
 
 > **availabilityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:185
+Defined in: [src/types/widgets.ts:185](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L185)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: src/types/widgets.ts:185
 
 > `optional` **className**: `string`
 
-Defined in: src/types/widgets.ts:189
+Defined in: [src/types/widgets.ts:189](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L189)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: src/types/widgets.ts:189
 
 > **confidentialityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:187
+Defined in: [src/types/widgets.ts:187](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L187)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: src/types/widgets.ts:187
 
 > **integrityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:186
+Defined in: [src/types/widgets.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L186)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: src/types/widgets.ts:186
 
 > `optional` **securityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:188
+Defined in: [src/types/widgets.ts:188](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L188)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: src/types/widgets.ts:188
 
 > `optional` **testId**: `string`
 
-Defined in: src/types/widgets.ts:190
+Defined in: [src/types/widgets.ts:190](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L190)

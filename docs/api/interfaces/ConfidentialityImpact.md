@@ -6,7 +6,7 @@
 
 # Interface: ConfidentialityImpact
 
-Defined in: src/types/cia.ts:37
+Defined in: [src/types/cia.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L37)
 
 Impact associated with the confidentiality of the system
 
@@ -20,7 +20,7 @@ Impact associated with the confidentiality of the system
 
 > **accessControls**: `string`
 
-Defined in: src/types/cia.ts:39
+Defined in: [src/types/cia.ts:39](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L39)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: src/types/cia.ts:39
 
 > **dataClassification**: `string`
 
-Defined in: src/types/cia.ts:38
+Defined in: [src/types/cia.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L38)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: src/types/cia.ts:38
 
 > **description**: `string`
 
-Defined in: src/types/cia.ts:15
+Defined in: [src/types/cia.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L15)
 
 #### Inherited from
 
@@ -48,7 +48,7 @@ Defined in: src/types/cia.ts:15
 
 > **level**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/cia.ts:14
+Defined in: [src/types/cia.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L14)
 
 #### Inherited from
 

@@ -6,7 +6,7 @@
 
 # Interface: IntegrityImpactWidgetProps
 
-Defined in: src/types/widgets.ts:103
+Defined in: [src/types/widgets.ts:103](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L103)
 
 Props for the IntegrityImpactWidget component
 
@@ -20,7 +20,7 @@ Props for the IntegrityImpactWidget component
 
 > **availabilityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:106
+Defined in: [src/types/widgets.ts:106](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L106)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: src/types/widgets.ts:106
 
 > `optional` **className**: `string`
 
-Defined in: src/types/widgets.ts:108
+Defined in: [src/types/widgets.ts:108](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L108)
 
 #### Overrides
 
@@ -44,7 +44,7 @@ Defined in: src/types/widgets.ts:108
 
 > **confidentialityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:107
+Defined in: [src/types/widgets.ts:107](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L107)
 
 #### Overrides
 
@@ -56,7 +56,7 @@ Defined in: src/types/widgets.ts:107
 
 > **integrityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:104
+Defined in: [src/types/widgets.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L104)
 
 #### Overrides
 
@@ -68,7 +68,7 @@ Defined in: src/types/widgets.ts:104
 
 > `optional` **securityLevel**: `string`
 
-Defined in: src/types/widgets.ts:15
+Defined in: [src/types/widgets.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L15)
 
 #### Inherited from
 
@@ -80,7 +80,7 @@ Defined in: src/types/widgets.ts:15
 
 > `optional` **testId**: `string`
 
-Defined in: src/types/widgets.ts:109
+Defined in: [src/types/widgets.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L109)
 
 Test ID for component selection in tests
 

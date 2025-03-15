@@ -6,7 +6,7 @@
 
 # Interface: SecuritySummaryWidgetProps
 
-Defined in: src/types/widgets.ts:67
+Defined in: [src/types/widgets.ts:67](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L67)
 
 Props for the SecuritySummaryWidget component
 
@@ -16,7 +16,7 @@ Props for the SecuritySummaryWidget component
 
 > **availabilityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:69
+Defined in: [src/types/widgets.ts:69](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L69)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/widgets.ts:69
 
 > `optional` **className**: `string`
 
-Defined in: src/types/widgets.ts:72
+Defined in: [src/types/widgets.ts:72](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L72)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: src/types/widgets.ts:72
 
 > **confidentialityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:71
+Defined in: [src/types/widgets.ts:71](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L71)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: src/types/widgets.ts:71
 
 > **integrityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:70
+Defined in: [src/types/widgets.ts:70](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L70)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: src/types/widgets.ts:70
 
 > **securityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:68
+Defined in: [src/types/widgets.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L68)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: src/types/widgets.ts:68
 
 > `optional` **showBusinessImpact**: `boolean`
 
-Defined in: src/types/widgets.ts:75
+Defined in: [src/types/widgets.ts:75](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L75)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: src/types/widgets.ts:75
 
 > `optional` **showMetrics**: `boolean`
 
-Defined in: src/types/widgets.ts:76
+Defined in: [src/types/widgets.ts:76](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L76)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: src/types/widgets.ts:76
 
 > `optional` **showTechnicalDetails**: `boolean`
 
-Defined in: src/types/widgets.ts:74
+Defined in: [src/types/widgets.ts:74](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L74)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: src/types/widgets.ts:74
 
 > `optional` **testId**: `string`
 
-Defined in: src/types/widgets.ts:73
+Defined in: [src/types/widgets.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L73)

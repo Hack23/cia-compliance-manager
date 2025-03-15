@@ -208,7 +208,7 @@ Defined in: [src/hooks/useCIAOptions.ts:87](https://github.com/Hack23/cia-compli
 
 > `optional` **complianceImplications**: `string`
 
-Defined in: src/types/cia.ts:97
+Defined in: [src/types/cia.ts:97](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L97)
 
 #### Inherited from
 
@@ -260,7 +260,7 @@ Defined in: [src/hooks/useCIAOptions.ts:73](https://github.com/Hack23/cia-compli
 
 > `optional` **impact**: `string`
 
-Defined in: src/types/cia.ts:86
+Defined in: [src/types/cia.ts:86](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L86)
 
 #### Inherited from
 
@@ -372,7 +372,7 @@ Defined in: [src/hooks/useCIAOptions.ts:67](https://github.com/Hack23/cia-compli
 
 > `optional` **riskLevel**: `string`
 
-Defined in: src/types/cia.ts:98
+Defined in: [src/types/cia.ts:98](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L98)
 
 #### Inherited from
 
@@ -444,7 +444,7 @@ Defined in: [src/hooks/useCIAOptions.ts:27](https://github.com/Hack23/cia-compli
 
 > `optional` **technicalControls**: `string`[]
 
-Defined in: src/types/cia.ts:95
+Defined in: [src/types/cia.ts:95](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L95)
 
 #### Inherited from
 
@@ -496,7 +496,7 @@ Defined in: [src/hooks/useCIAOptions.ts:102](https://github.com/Hack23/cia-compl
 
 > `optional` **technicalMeasures**: `string`[]
 
-Defined in: src/types/cia.ts:96
+Defined in: [src/types/cia.ts:96](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L96)
 
 #### Inherited from
 

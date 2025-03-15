@@ -8,7 +8,7 @@
 
 > `const` **mockFactory**: `object`
 
-Defined in: [src/tests/mockFactory.tsx:117](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/mockFactory.tsx#L117)
+Defined in: [src/tests/mockFactory.tsx:116](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/mockFactory.tsx#L116)
 
 ## Type declaration
 

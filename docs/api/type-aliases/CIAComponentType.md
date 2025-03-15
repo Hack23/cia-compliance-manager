@@ -8,6 +8,6 @@
 
 > **CIAComponentType**: `"availability"` \| `"integrity"` \| `"confidentiality"`
 
-Defined in: src/types/cia.ts:114
+Defined in: [src/types/cia.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L114)
 
 CIA component type definition

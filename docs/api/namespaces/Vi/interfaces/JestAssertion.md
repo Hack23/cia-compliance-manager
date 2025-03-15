@@ -67,7 +67,7 @@ expect(inputRadio).not.toBeChecked()
 
 > **toBeChecked**(): `any`
 
-Defined in: src/types/global-extensions.d.ts:10
+Defined in: [src/types/global-extensions.d.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L10)
 
 ##### Returns
 
@@ -124,7 +124,7 @@ expect(getByTestId('button')).toBeDisabled()
 
 > **toBeDisabled**(): `any`
 
-Defined in: src/types/global-extensions.d.ts:11
+Defined in: [src/types/global-extensions.d.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L11)
 
 ##### Returns
 
@@ -181,7 +181,7 @@ expect(getByTestId('button')).toBeEnabled()
 
 > **toBeEnabled**(): `any`
 
-Defined in: src/types/global-extensions.d.ts:12
+Defined in: [src/types/global-extensions.d.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L12)
 
 ##### Returns
 
@@ -266,7 +266,7 @@ expect(queryByTestId('does-not-exist')).not.toBeInTheDocument()
 
 > **toBeInTheDocument**(): `any`
 
-Defined in: src/types/global-extensions.d.ts:7
+Defined in: [src/types/global-extensions.d.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L7)
 
 ##### Returns
 
@@ -318,7 +318,7 @@ Defined in: [src/tests/vitest-extensions.d.ts:23](https://github.com/Hack23/cia-
 
 > **toBeRequired**(): `any`
 
-Defined in: src/types/global-extensions.d.ts:13
+Defined in: [src/types/global-extensions.d.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L13)
 
 #### Returns
 
@@ -358,7 +358,7 @@ Defined in: [src/tests/vitest-extensions.d.ts:19](https://github.com/Hack23/cia-
 
 > **toBeValid**(): `any`
 
-Defined in: src/types/global-extensions.d.ts:14
+Defined in: [src/types/global-extensions.d.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L14)
 
 #### Returns
 
@@ -422,7 +422,7 @@ expect(getByTestId('visible')).toBeVisible()
 
 > **toBeVisible**(): `any`
 
-Defined in: src/types/global-extensions.d.ts:15
+Defined in: [src/types/global-extensions.d.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L15)
 
 ##### Returns
 
@@ -483,7 +483,7 @@ expect(ancestor).not.toContainElement(nonExistantElement)
 
 > **toContainElement**(`element`): `any`
 
-Defined in: src/types/global-extensions.d.ts:16
+Defined in: [src/types/global-extensions.d.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L16)
 
 ##### Parameters
 
@@ -543,7 +543,7 @@ expect(getByTestId('parent')).toContainHTML('<span data-testid="child"></span>')
 
 > **toContainHTML**(`htmlText`): `any`
 
-Defined in: src/types/global-extensions.d.ts:17
+Defined in: [src/types/global-extensions.d.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L17)
 
 ##### Parameters
 
@@ -637,7 +637,7 @@ expect(button).not.toHaveAttribute('type', 'button')
 
 > **toHaveAttribute**(`name`, `value`?): `any`
 
-Defined in: src/types/global-extensions.d.ts:9
+Defined in: [src/types/global-extensions.d.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L9)
 
 ##### Parameters
 
@@ -765,7 +765,7 @@ expect(noClasses).not.toHaveClass()
 
 > **toHaveClass**(...`classNames`): `any`
 
-Defined in: src/types/global-extensions.d.ts:18
+Defined in: [src/types/global-extensions.d.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L18)
 
 ##### Parameters
 
@@ -787,7 +787,7 @@ Defined in: src/types/global-extensions.d.ts:18
 
 > **toHaveFocus**(): `any`
 
-Defined in: src/types/global-extensions.d.ts:19
+Defined in: [src/types/global-extensions.d.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L19)
 
 #### Returns
 
@@ -803,7 +803,7 @@ Defined in: src/types/global-extensions.d.ts:19
 
 > **toHaveFormValues**(`expectedValues`): `any`
 
-Defined in: src/types/global-extensions.d.ts:20
+Defined in: [src/types/global-extensions.d.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L20)
 
 #### Parameters
 
@@ -893,7 +893,7 @@ expect(button).toHaveStyle({
 
 > **toHaveStyle**(`css`): `any`
 
-Defined in: src/types/global-extensions.d.ts:21
+Defined in: [src/types/global-extensions.d.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L21)
 
 ##### Parameters
 
@@ -966,7 +966,7 @@ expect(element).not.toHaveTextContent('content')
 
 > **toHaveTextContent**(`text`): `any`
 
-Defined in: src/types/global-extensions.d.ts:8
+Defined in: [src/types/global-extensions.d.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L8)
 
 ##### Parameters
 
@@ -1035,7 +1035,7 @@ expect(numberInput).toHaveValue(5)
 
 > **toHaveValue**(`value`?): `any`
 
-Defined in: src/types/global-extensions.d.ts:22
+Defined in: [src/types/global-extensions.d.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/global-extensions.d.ts#L22)
 
 ##### Parameters
 

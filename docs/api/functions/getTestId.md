@@ -6,20 +6,28 @@
 
 # Function: getTestId()
 
-> **getTestId**(`prefix`, `id`): `string`
+> **getTestId**(`widgetId`, `elementId`): `string`
 
-Defined in: [src/constants/testIds.ts:506](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/testIds.ts#L506)
+Defined in: [src/utils/widgetHelpers.tsx:421](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L421)
+
+Get the test ID for a widget element
 
 ## Parameters
 
-### prefix
+### widgetId
 
 `string`
 
-### id
+The widget ID
+
+### elementId
 
 `string`
+
+The element ID
 
 ## Returns
 
 `string`
+
+The test ID string

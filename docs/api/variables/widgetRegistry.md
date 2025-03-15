@@ -8,4 +8,4 @@
 
 > `const` **widgetRegistry**: `WidgetRegistry`
 
-Defined in: [src/utils/widgetRegistry.tsx:161](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L161)
+Defined in: [src/utils/widgetRegistry.tsx:185](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L185)

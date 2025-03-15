@@ -8,7 +8,7 @@
 
 > **Dashboard**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/Dashboard.tsx:38](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/Dashboard.tsx#L38)
+Defined in: [src/components/Dashboard.tsx:32](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/Dashboard.tsx#L32)
 
 ## Parameters
 

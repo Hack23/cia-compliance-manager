@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactDetail
 
-Defined in: src/types/cia.ts:72
+Defined in: [src/types/cia.ts:72](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L72)
 
 Business impact analysis interface for tracking security implications
 
@@ -16,7 +16,7 @@ Business impact analysis interface for tracking security implications
 
 > `optional` **annualRevenueLoss**: `string`
 
-Defined in: src/types/cia.ts:75
+Defined in: [src/types/cia.ts:75](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L75)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/cia.ts:75
 
 > `optional` **complianceViolations**: `string`[]
 
-Defined in: src/types/cia.ts:77
+Defined in: [src/types/cia.ts:77](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L77)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: src/types/cia.ts:77
 
 > `optional` **description**: `string`
 
-Defined in: src/types/cia.ts:73
+Defined in: [src/types/cia.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L73)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: src/types/cia.ts:73
 
 > `optional` **meanTimeToRecover**: `string`
 
-Defined in: src/types/cia.ts:76
+Defined in: [src/types/cia.ts:76](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L76)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: src/types/cia.ts:76
 
 > `optional` **riskLevel**: `string`
 
-Defined in: src/types/cia.ts:74
+Defined in: [src/types/cia.ts:74](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L74)

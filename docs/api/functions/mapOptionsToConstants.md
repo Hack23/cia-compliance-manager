@@ -6,7 +6,7 @@
 
 # Function: mapOptionsToConstants()
 
-> **mapOptionsToConstants**\<`T`, `R`\>(`options`, `key`, `transform`?): `object`
+> **mapOptionsToConstants**\<`T`, `R`\>(`options`, `key`, `transform`?): \{ `HIGH`: `undefined`; `LOW`: `undefined`; `MODERATE`: `undefined`; `NONE`: `undefined`; `VERY_HIGH`: `undefined`; \} \| \{ `HIGH`: `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]; `LOW`: `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]; `MODERATE`: `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]; `NONE`: `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]; `VERY_HIGH`: `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]; \}
 
 Defined in: [src/constants/appConstants.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/appConstants.ts#L26)
 
@@ -35,24 +35,4 @@ Modified version to avoid circular dependencies
 
 ## Returns
 
-`object`
-
-### HIGH
-
-> **HIGH**: `undefined` \| `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]
-
-### LOW
-
-> **LOW**: `undefined` \| `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]
-
-### MODERATE
-
-> **MODERATE**: `undefined` \| `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]
-
-### NONE
-
-> **NONE**: `undefined` \| `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]
-
-### VERY\_HIGH
-
-> **VERY\_HIGH**: `undefined` \| `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]
+\{ `HIGH`: `undefined`; `LOW`: `undefined`; `MODERATE`: `undefined`; `NONE`: `undefined`; `VERY_HIGH`: `undefined`; \} \| \{ `HIGH`: `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]; `LOW`: `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]; `MODERATE`: `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]; `NONE`: `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]; `VERY_HIGH`: `R` \| [`CIADetails`](../interfaces/CIADetails.md)\[`T`\]; \}

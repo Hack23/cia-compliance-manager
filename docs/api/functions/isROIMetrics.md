@@ -8,7 +8,7 @@
 
 > **isROIMetrics**(`value`): `boolean`
 
-Defined in: [src/utils/typeGuards.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/typeGuards.ts#L174)
+Defined in: [src/utils/typeGuards.ts:198](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/typeGuards.ts#L198)
 
 Type guard for ROI metrics objects
 

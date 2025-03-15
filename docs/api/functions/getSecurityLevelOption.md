@@ -8,7 +8,7 @@
 
 > **getSecurityLevelOption**\<`T`\>(`options`, `key`): `undefined` \| `T`
 
-Defined in: [src/utils/typeGuards.ts:149](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/typeGuards.ts#L149)
+Defined in: [src/utils/typeGuards.ts:163](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/typeGuards.ts#L163)
 
 Helper function to safely access CIA options with string keys
 

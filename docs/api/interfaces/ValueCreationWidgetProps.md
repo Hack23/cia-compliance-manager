@@ -6,7 +6,7 @@
 
 # Interface: ValueCreationWidgetProps
 
-Defined in: src/types/widgets.ts:60
+Defined in: [src/types/widgets.ts:60](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L60)
 
 Props for the ValueCreationWidget component
 
@@ -20,7 +20,7 @@ Props for the ValueCreationWidget component
 
 > **availabilityLevel**: `string`
 
-Defined in: src/types/widgets.ts:11
+Defined in: [src/types/widgets.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L11)
 
 #### Inherited from
 
@@ -32,7 +32,7 @@ Defined in: src/types/widgets.ts:11
 
 > `optional` **className**: `string`
 
-Defined in: src/types/widgets.ts:14
+Defined in: [src/types/widgets.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L14)
 
 #### Inherited from
 
@@ -44,7 +44,7 @@ Defined in: src/types/widgets.ts:14
 
 > **confidentialityLevel**: `string`
 
-Defined in: src/types/widgets.ts:13
+Defined in: [src/types/widgets.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L13)
 
 #### Inherited from
 
@@ -56,7 +56,7 @@ Defined in: src/types/widgets.ts:13
 
 > **integrityLevel**: `string`
 
-Defined in: src/types/widgets.ts:12
+Defined in: [src/types/widgets.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L12)
 
 #### Inherited from
 
@@ -68,7 +68,7 @@ Defined in: src/types/widgets.ts:12
 
 > **securityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:61
+Defined in: [src/types/widgets.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L61)
 
 #### Overrides
 
@@ -80,7 +80,7 @@ Defined in: src/types/widgets.ts:61
 
 > `optional` **testId**: `string`
 
-Defined in: src/types/widgets.ts:10
+Defined in: [src/types/widgets.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L10)
 
 Test ID for component selection in tests
 

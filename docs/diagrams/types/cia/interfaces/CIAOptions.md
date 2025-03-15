@@ -6,7 +6,7 @@
 
 # Interface: CIAOptions
 
-Defined in: types/cia.ts:54
+Defined in: [types/cia.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/5a46a25cd2e09ba091444827f045b3618a447654/src/types/cia.ts#L54)
 
 Available options for each CIA pillar
 
@@ -16,7 +16,7 @@ Available options for each CIA pillar
 
 > **availability**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)[]
 
-Defined in: types/cia.ts:55
+Defined in: [types/cia.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/5a46a25cd2e09ba091444827f045b3618a447654/src/types/cia.ts#L55)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: types/cia.ts:55
 
 > **confidentiality**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)[]
 
-Defined in: types/cia.ts:57
+Defined in: [types/cia.ts:57](https://github.com/Hack23/cia-compliance-manager/blob/5a46a25cd2e09ba091444827f045b3618a447654/src/types/cia.ts#L57)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: types/cia.ts:57
 
 > **integrity**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)[]
 
-Defined in: types/cia.ts:56
+Defined in: [types/cia.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/5a46a25cd2e09ba091444827f045b3618a447654/src/types/cia.ts#L56)

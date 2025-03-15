@@ -6,7 +6,7 @@
 
 # Interface: ConfidentialityImpactWidgetProps
 
-Defined in: src/types/widgets.ts:128
+Defined in: [src/types/widgets.ts:128](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L128)
 
 Props for the ConfidentialityImpactWidget component
 
@@ -20,7 +20,7 @@ Props for the ConfidentialityImpactWidget component
 
 > **availabilityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:131
+Defined in: [src/types/widgets.ts:131](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L131)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: src/types/widgets.ts:131
 
 > `optional` **className**: `string`
 
-Defined in: src/types/widgets.ts:133
+Defined in: [src/types/widgets.ts:133](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L133)
 
 #### Overrides
 
@@ -44,7 +44,7 @@ Defined in: src/types/widgets.ts:133
 
 > **confidentialityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:129
+Defined in: [src/types/widgets.ts:129](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L129)
 
 #### Overrides
 
@@ -56,7 +56,7 @@ Defined in: src/types/widgets.ts:129
 
 > **integrityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/widgets.ts:132
+Defined in: [src/types/widgets.ts:132](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L132)
 
 #### Overrides
 
@@ -68,7 +68,7 @@ Defined in: src/types/widgets.ts:132
 
 > `optional` **securityLevel**: `string`
 
-Defined in: src/types/widgets.ts:15
+Defined in: [src/types/widgets.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L15)
 
 #### Inherited from
 
@@ -80,7 +80,7 @@ Defined in: src/types/widgets.ts:15
 
 > `optional` **testId**: `string`
 
-Defined in: src/types/widgets.ts:134
+Defined in: [src/types/widgets.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L134)
 
 Test ID for component selection in tests
 

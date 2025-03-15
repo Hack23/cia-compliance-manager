@@ -8,7 +8,7 @@
 
 > **isTechnicalImplementationDetails**(`value`): `boolean`
 
-Defined in: [src/utils/typeGuards.ts:187](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/typeGuards.ts#L187)
+Defined in: [src/utils/typeGuards.ts:211](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/typeGuards.ts#L211)
 
 Type guard for technical implementation details
 

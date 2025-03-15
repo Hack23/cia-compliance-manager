@@ -6,7 +6,7 @@
 
 # Interface: AvailabilityDetail
 
-Defined in: src/types/widgets.ts:141
+Defined in: [src/types/widgets.ts:141](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L141)
 
 Types for Availability Impact Widget
 Compatible with CIADetails for easier integration
@@ -25,7 +25,7 @@ Compatible with CIADetails for easier integration
 
 > **businessImpact**: `string`
 
-Defined in: src/types/widgets.ts:143
+Defined in: [src/types/widgets.ts:143](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L143)
 
 #### Overrides
 
@@ -37,7 +37,7 @@ Defined in: src/types/widgets.ts:143
 
 > **description**: `string`
 
-Defined in: src/types/widgets.ts:142
+Defined in: [src/types/widgets.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L142)
 
 #### Overrides
 
@@ -49,7 +49,7 @@ Defined in: src/types/widgets.ts:142
 
 > `optional` **impact**: `string`
 
-Defined in: src/types/widgets.ts:25
+Defined in: [src/types/widgets.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L25)
 
 #### Inherited from
 
@@ -61,7 +61,7 @@ Defined in: src/types/widgets.ts:25
 
 > `optional` **mttr**: `string`
 
-Defined in: src/types/widgets.ts:146
+Defined in: [src/types/widgets.ts:146](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L146)
 
 ***
 
@@ -69,7 +69,7 @@ Defined in: src/types/widgets.ts:146
 
 > **recommendations**: `string`[]
 
-Defined in: src/types/widgets.ts:145
+Defined in: [src/types/widgets.ts:145](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L145)
 
 #### Overrides
 
@@ -81,7 +81,7 @@ Defined in: src/types/widgets.ts:145
 
 > `optional` **rpo**: `string`
 
-Defined in: src/types/widgets.ts:148
+Defined in: [src/types/widgets.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L148)
 
 ***
 
@@ -89,7 +89,7 @@ Defined in: src/types/widgets.ts:148
 
 > `optional` **rto**: `string`
 
-Defined in: src/types/widgets.ts:147
+Defined in: [src/types/widgets.ts:147](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L147)
 
 ***
 
@@ -97,7 +97,7 @@ Defined in: src/types/widgets.ts:147
 
 > `optional` **technical**: `string`
 
-Defined in: src/types/widgets.ts:26
+Defined in: [src/types/widgets.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L26)
 
 #### Inherited from
 
@@ -109,4 +109,4 @@ Defined in: src/types/widgets.ts:26
 
 > **uptime**: `string`
 
-Defined in: src/types/widgets.ts:144
+Defined in: [src/types/widgets.ts:144](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L144)

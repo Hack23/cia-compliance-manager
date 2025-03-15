@@ -6,28 +6,22 @@
 
 # Function: formatSecurityLevel()
 
-> **formatSecurityLevel**(`level`, `withLabel`): `ReactNode`
+> **formatSecurityLevel**(`level`?): `string`
 
-Defined in: [src/utils/widgetHelpers.tsx:100](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L100)
+Defined in: [src/utils/widgetHelpers.tsx:172](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L172)
 
-Creates formatted JSX for displaying a security level with appropriate styling
+Format security level string for display
 
 ## Parameters
 
-### level
+### level?
 
 `string`
 
-The security level to display
-
-### withLabel
-
-`boolean` = `false`
-
-Whether to include a label with the value
+Security level string that might be in any case format
 
 ## Returns
 
-`ReactNode`
+`string`
 
-JSX element with appropriate styling
+Properly formatted security level

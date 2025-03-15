@@ -6,7 +6,7 @@
 
 # Interface: WidgetDefinition\<T\>
 
-Defined in: [src/utils/widgetRegistry.tsx:60](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L60)
+Defined in: [src/utils/widgetRegistry.tsx:84](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L84)
 
 ## Type Parameters
 
@@ -18,7 +18,7 @@ Defined in: [src/utils/widgetRegistry.tsx:60](https://github.com/Hack23/cia-comp
 
 > **component**: `WidgetComponentType`\<`T`\>
 
-Defined in: [src/utils/widgetRegistry.tsx:63](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L63)
+Defined in: [src/utils/widgetRegistry.tsx:87](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L87)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [src/utils/widgetRegistry.tsx:63](https://github.com/Hack23/cia-comp
 
 > `optional` **defaultProps**: `Partial`\<`T`\>
 
-Defined in: [src/utils/widgetRegistry.tsx:64](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L64)
+Defined in: [src/utils/widgetRegistry.tsx:88](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L88)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [src/utils/widgetRegistry.tsx:64](https://github.com/Hack23/cia-comp
 
 > `optional` **description**: `string`
 
-Defined in: [src/utils/widgetRegistry.tsx:68](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L68)
+Defined in: [src/utils/widgetRegistry.tsx:92](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L92)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [src/utils/widgetRegistry.tsx:68](https://github.com/Hack23/cia-comp
 
 > `optional` **icon**: `ReactNode`
 
-Defined in: [src/utils/widgetRegistry.tsx:65](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L65)
+Defined in: [src/utils/widgetRegistry.tsx:89](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L89)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [src/utils/widgetRegistry.tsx:65](https://github.com/Hack23/cia-comp
 
 > **id**: `string`
 
-Defined in: [src/utils/widgetRegistry.tsx:61](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L61)
+Defined in: [src/utils/widgetRegistry.tsx:85](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L85)
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [src/utils/widgetRegistry.tsx:61](https://github.com/Hack23/cia-comp
 
 > `optional` **order**: `number`
 
-Defined in: [src/utils/widgetRegistry.tsx:67](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L67)
+Defined in: [src/utils/widgetRegistry.tsx:91](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L91)
 
 ***
 
@@ -66,15 +66,15 @@ Defined in: [src/utils/widgetRegistry.tsx:67](https://github.com/Hack23/cia-comp
 
 > `optional` **position**: `number`
 
-Defined in: [src/utils/widgetRegistry.tsx:69](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L69)
+Defined in: [src/utils/widgetRegistry.tsx:93](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L93)
 
 ***
 
 ### size?
 
-> `optional` **size**: `"small"` \| `"medium"` \| `"large"` \| `"full"`
+> `optional` **size**: [`WidgetSizeOption`](../type-aliases/WidgetSizeOption.md)
 
-Defined in: [src/utils/widgetRegistry.tsx:66](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L66)
+Defined in: [src/utils/widgetRegistry.tsx:90](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L90)
 
 ***
 
@@ -82,4 +82,4 @@ Defined in: [src/utils/widgetRegistry.tsx:66](https://github.com/Hack23/cia-comp
 
 > **title**: `string`
 
-Defined in: [src/utils/widgetRegistry.tsx:62](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L62)
+Defined in: [src/utils/widgetRegistry.tsx:86](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetRegistry.tsx#L86)

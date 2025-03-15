@@ -8,7 +8,7 @@
 
 > **createMockOptions**(`levels`, `customValues`): `Record`\<`string`, `MockOptions`\>
 
-Defined in: [src/tests/mockFactory.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/mockFactory.tsx#L31)
+Defined in: [src/tests/mockFactory.tsx:30](https://github.com/Hack23/cia-compliance-manager/blob/main/src/tests/mockFactory.tsx#L30)
 
 Creates mock options for test cases
 

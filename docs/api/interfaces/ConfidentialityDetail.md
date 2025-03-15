@@ -6,7 +6,7 @@
 
 # Interface: ConfidentialityDetail
 
-Defined in: src/types/widgets.ts:116
+Defined in: [src/types/widgets.ts:116](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L116)
 
 Types for Confidentiality Impact Widget
 Compatible with CIADetails for easier integration
@@ -25,7 +25,7 @@ Compatible with CIADetails for easier integration
 
 > **businessImpact**: `string`
 
-Defined in: src/types/widgets.ts:118
+Defined in: [src/types/widgets.ts:118](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L118)
 
 #### Overrides
 
@@ -37,7 +37,7 @@ Defined in: src/types/widgets.ts:118
 
 > `optional` **complianceImplications**: `string`
 
-Defined in: src/types/widgets.ts:121
+Defined in: [src/types/widgets.ts:121](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L121)
 
 ***
 
@@ -45,7 +45,7 @@ Defined in: src/types/widgets.ts:121
 
 > `optional` **description**: `string`
 
-Defined in: src/types/widgets.ts:23
+Defined in: [src/types/widgets.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L23)
 
 #### Inherited from
 
@@ -57,7 +57,7 @@ Defined in: src/types/widgets.ts:23
 
 > **impact**: `string`
 
-Defined in: src/types/widgets.ts:117
+Defined in: [src/types/widgets.ts:117](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L117)
 
 #### Overrides
 
@@ -69,7 +69,7 @@ Defined in: src/types/widgets.ts:117
 
 > **recommendations**: `string`[]
 
-Defined in: src/types/widgets.ts:119
+Defined in: [src/types/widgets.ts:119](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L119)
 
 #### Overrides
 
@@ -81,7 +81,7 @@ Defined in: src/types/widgets.ts:119
 
 > `optional` **riskLevel**: `string`
 
-Defined in: src/types/widgets.ts:122
+Defined in: [src/types/widgets.ts:122](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L122)
 
 ***
 
@@ -89,7 +89,7 @@ Defined in: src/types/widgets.ts:122
 
 > `optional` **technical**: `string`
 
-Defined in: src/types/widgets.ts:26
+Defined in: [src/types/widgets.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L26)
 
 #### Inherited from
 
@@ -101,4 +101,4 @@ Defined in: src/types/widgets.ts:26
 
 > `optional` **technicalMeasures**: `string`[]
 
-Defined in: src/types/widgets.ts:120
+Defined in: [src/types/widgets.ts:120](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/widgets.ts#L120)

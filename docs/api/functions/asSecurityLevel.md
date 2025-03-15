@@ -8,9 +8,9 @@
 
 > **asSecurityLevel**(`level`?): [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/utils/widgetHelpers.tsx:89](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L89)
+Defined in: [src/utils/widgetHelpers.tsx:233](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/widgetHelpers.tsx#L233)
 
-Convert any string to a valid SecurityLevel
+Convert string to SecurityLevel type
 
 ## Parameters
 

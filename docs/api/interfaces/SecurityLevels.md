@@ -6,7 +6,7 @@
 
 # Interface: SecurityLevels
 
-Defined in: src/types/cia.ts:63
+Defined in: [src/types/cia.ts:63](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L63)
 
 Selected security levels for each CIA pillar
 
@@ -16,7 +16,7 @@ Selected security levels for each CIA pillar
 
 > **availability**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/cia.ts:64
+Defined in: [src/types/cia.ts:64](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L64)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/types/cia.ts:64
 
 > **confidentiality**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/cia.ts:66
+Defined in: [src/types/cia.ts:66](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L66)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: src/types/cia.ts:66
 
 > **integrity**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: src/types/cia.ts:65
+Defined in: [src/types/cia.ts:65](https://github.com/Hack23/cia-compliance-manager/blob/main/src/types/cia.ts#L65)

@@ -8,7 +8,7 @@
 
 > **asSecurityLevel**(`level`): [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [constants/testIds.ts:477](https://github.com/Hack23/cia-compliance-manager/blob/959ad507202d1cb78ada77cec76006b099ceca7d/src/constants/testIds.ts#L477)
+Defined in: [constants/testIds.ts:477](https://github.com/Hack23/cia-compliance-manager/blob/5a46a25cd2e09ba091444827f045b3618a447654/src/constants/testIds.ts#L477)
 
 Helper for type-safe SecurityLevel conversion
 Use this to convert strings to SecurityLevel type when needed

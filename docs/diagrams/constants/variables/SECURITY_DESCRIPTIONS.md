@@ -8,7 +8,7 @@
 
 > `const` **SECURITY\_DESCRIPTIONS**: `object`
 
-Defined in: [constants/coreConstants.ts:163](https://github.com/Hack23/cia-compliance-manager/blob/959ad507202d1cb78ada77cec76006b099ceca7d/src/constants/coreConstants.ts#L163)
+Defined in: [constants/coreConstants.ts:163](https://github.com/Hack23/cia-compliance-manager/blob/5a46a25cd2e09ba091444827f045b3618a447654/src/constants/coreConstants.ts#L163)
 
 ## Type declaration
 

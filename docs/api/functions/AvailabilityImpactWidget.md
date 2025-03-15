@@ -8,7 +8,7 @@
 
 > **AvailabilityImpactWidget**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:23](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/AvailabilityImpactWidget.tsx#L23)
+Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:22](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/widgets/AvailabilityImpactWidget.tsx#L22)
 
 ## Parameters
 
