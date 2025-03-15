@@ -34,19 +34,22 @@ export default defineConfig({
   reporterOptions: {
     reporterEnabled: "spec, cypress-junit-reporter, mochawesome",
     mochaJunitReporterReporterOptions: {
-      mochaFile: "cypress/reports/junit/results-[hash].xml",
+      mochaFile: "docs/cypress/junit/results-[hash].xml",
       toConsole: false,
       attachments: true,
       testCaseSwitchClassnameAndName: false,
       includePending: true,
+      
     },
     mochawesomeReporterOptions: {
       reportDir: REPORTS.mochawesome,
       overwrite: false,
       html: true,
       json: true,
+      code: true,
       timestamp: "mmddyyyy_HHMMss",
       charts: true,
+      showHooks: "failed",
       embeddedScreenshots: true,
     },
   },
@@ -139,17 +142,6 @@ export default defineConfig({
               fs.mkdirSync(REPORTS.junit, { recursive: true });
               return null;
             }
-
-            // Find and delete all XML files in the directory
-            const xmlFiles = fs
-              .readdirSync(REPORTS.junit)
-              .filter((file) => file.endsWith(".xml"));
-
-            // Delete each XML file
-            xmlFiles.forEach((file) => {
-              const filePath = path.join(REPORTS.junit, file);
-              fs.unlinkSync(filePath);
-            });
 
             return null;
           } catch (err) {
