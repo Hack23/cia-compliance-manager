@@ -58,23 +58,23 @@ C4Context
 
   UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 
-  %% Colors and styles
-  UpdateRelStyle(securityOfficer, ciaCM, "#1168bd", "bold")
-  UpdateRelStyle(businessStakeholder, ciaCM, "#1168bd", "bold")
-  UpdateRelStyle(complianceManager, ciaCM, "#1168bd", "bold")
-  UpdateRelStyle(technicalImplementer, ciaCM, "#1168bd", "bold")
+  %% Cool color scheme
+  UpdateElementStyle(securityOfficer, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
+  UpdateElementStyle(businessStakeholder, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
+  UpdateElementStyle(complianceManager, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
+  UpdateElementStyle(technicalImplementer, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
 
-  UpdateRelStyle(ciaCM, complianceFrameworks, "#707070", "dashed")
-  UpdateRelStyle(ciaCM, costDatabase, "#707070", "dashed")
+  UpdateElementStyle(ciaCM, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(complianceFrameworks, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
+  UpdateElementStyle(costDatabase, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
 
-  UpdateElementStyle(securityOfficer, $fontColor="#ffffff", $bgColor="#08427b", $borderColor="#052E56")
-  UpdateElementStyle(businessStakeholder, $fontColor="#ffffff", $bgColor="#08427b", $borderColor="#052E56")
-  UpdateElementStyle(complianceManager, $fontColor="#ffffff", $bgColor="#08427b", $borderColor="#052E56")
-  UpdateElementStyle(technicalImplementer, $fontColor="#ffffff", $bgColor="#08427b", $borderColor="#052E56")
+  UpdateRelStyle(securityOfficer, ciaCM, "#a0c8e0", "bold")
+  UpdateRelStyle(businessStakeholder, ciaCM, "#a0c8e0", "bold")
+  UpdateRelStyle(complianceManager, ciaCM, "#a0c8e0", "bold")
+  UpdateRelStyle(technicalImplementer, ciaCM, "#a0c8e0", "bold")
 
-  UpdateElementStyle(ciaCM, $fontColor="#ffffff", $bgColor="#1168bd", $borderColor="#0b4884")
-  UpdateElementStyle(complianceFrameworks, $fontColor="#ffffff", $bgColor="#999999", $borderColor="#6b6b6b")
-  UpdateElementStyle(costDatabase, $fontColor="#ffffff", $bgColor="#999999", $borderColor="#6b6b6b")
+  UpdateRelStyle(ciaCM, complianceFrameworks, "#d1c4e9", "dashed")
+  UpdateRelStyle(ciaCM, costDatabase, "#d1c4e9", "dashed")
 ```
 
 ## C4 Container Diagram
@@ -122,33 +122,33 @@ C4Container
 
   UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 
-  %% Colors and styles
-  UpdateElementStyle(securityOfficer, $fontColor="#ffffff", $bgColor="#08427b", $borderColor="#052E56")
-  UpdateElementStyle(businessStakeholder, $fontColor="#ffffff", $bgColor="#08427b", $borderColor="#052E56")
+  %% Cool color scheme
+  UpdateElementStyle(securityOfficer, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
+  UpdateElementStyle(businessStakeholder, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
 
-  UpdateElementStyle(spaFrontend, $fontColor="#ffffff", $bgColor="#1168bd", $borderColor="#0b4884")
-  UpdateElementStyle(securityAssessment, $fontColor="#ffffff", $bgColor="#438dd5", $borderColor="#2e6295")
-  UpdateElementStyle(businessImpact, $fontColor="#ffffff", $bgColor="#438dd5", $borderColor="#2e6295")
-  UpdateElementStyle(costEstimation, $fontColor="#ffffff", $bgColor="#438dd5", $borderColor="#2e6295")
-  UpdateElementStyle(complianceMapping, $fontColor="#ffffff", $bgColor="#438dd5", $borderColor="#2e6295")
-  UpdateElementStyle(stateManager, $fontColor="#ffffff", $bgColor="#2a5d89", $borderColor="#1b3a54")
+  UpdateElementStyle(spaFrontend, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(securityAssessment, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(businessImpact, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(costEstimation, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(complianceMapping, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(stateManager, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
 
-  UpdateElementStyle(complianceFrameworks, $fontColor="#ffffff", $bgColor="#999999", $borderColor="#6b6b6b")
+  UpdateElementStyle(complianceFrameworks, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
 
-  UpdateRelStyle(securityOfficer, spaFrontend, "#1168bd", "bold")
-  UpdateRelStyle(businessStakeholder, spaFrontend, "#1168bd", "bold")
+  UpdateRelStyle(securityOfficer, spaFrontend, "#a0c8e0", "bold")
+  UpdateRelStyle(businessStakeholder, spaFrontend, "#a0c8e0", "bold")
 
-  UpdateRelStyle(spaFrontend, securityAssessment, "#707070", "solid")
-  UpdateRelStyle(spaFrontend, businessImpact, "#707070", "solid")
-  UpdateRelStyle(spaFrontend, costEstimation, "#707070", "solid")
-  UpdateRelStyle(spaFrontend, complianceMapping, "#707070", "solid")
+  UpdateRelStyle(spaFrontend, securityAssessment, "#c8e6c9", "solid")
+  UpdateRelStyle(spaFrontend, businessImpact, "#c8e6c9", "solid")
+  UpdateRelStyle(spaFrontend, costEstimation, "#c8e6c9", "solid")
+  UpdateRelStyle(spaFrontend, complianceMapping, "#c8e6c9", "solid")
 
-  UpdateRelStyle(securityAssessment, stateManager, "#4b6cad", "solid")
-  UpdateRelStyle(businessImpact, stateManager, "#4b6cad", "solid")
-  UpdateRelStyle(costEstimation, stateManager, "#4b6cad", "solid")
-  UpdateRelStyle(complianceMapping, stateManager, "#4b6cad", "solid")
+  UpdateRelStyle(securityAssessment, stateManager, "#d1c4e9", "solid")
+  UpdateRelStyle(businessImpact, stateManager, "#d1c4e9", "solid")
+  UpdateRelStyle(costEstimation, stateManager, "#d1c4e9", "solid")
+  UpdateRelStyle(complianceMapping, stateManager, "#d1c4e9", "solid")
 
-  UpdateRelStyle(complianceMapping, complianceFrameworks, "#707070", "dashed")
+  UpdateRelStyle(complianceMapping, complianceFrameworks, "#bbdefb", "dashed")
 ```
 
 ## C4 Component Diagram
@@ -189,25 +189,25 @@ C4Component
 
   UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 
-  %% Colors and styles
-  UpdateElementStyle(securityLevelSelector, $fontColor="#ffffff", $bgColor="#5ca8e0", $borderColor="#2e6295")
-  UpdateElementStyle(securitySummary, $fontColor="#ffffff", $bgColor="#5ca8e0", $borderColor="#2e6295")
-  UpdateElementStyle(ciaImpactAnalysis, $fontColor="#ffffff", $bgColor="#5ca8e0", $borderColor="#2e6295")
-  UpdateElementStyle(securityRadarChart, $fontColor="#ffffff", $bgColor="#5ca8e0", $borderColor="#2e6295")
-  UpdateElementStyle(securityScoreCalculator, $fontColor="#ffffff", $bgColor="#5ca8e0", $borderColor="#2e6295")
-  UpdateElementStyle(securityRecommendations, $fontColor="#ffffff", $bgColor="#5ca8e0", $borderColor="#2e6295")
-  UpdateElementStyle(securityLevels, $fontColor="#ffffff", $bgColor="#2a5d89", $borderColor="#1b3a54")
-  UpdateElementStyle(stateManager, $fontColor="#ffffff", $bgColor="#2a5d89", $borderColor="#1b3a54")
-  UpdateElementStyle(complianceFrameworks, $fontColor="#ffffff", $bgColor="#999999", $borderColor="#6b6b6b")
+  %% Cool color scheme
+  UpdateElementStyle(securityLevelSelector, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(securitySummary, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(ciaImpactAnalysis, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(securityRadarChart, $fontColor="#333333", $bgColor="#c8e6c9", $borderColor="#66bb6a")
+  UpdateElementStyle(securityScoreCalculator, $fontColor="#333333", $bgColor="#c8e6c9", $borderColor="#66bb6a")
+  UpdateElementStyle(securityRecommendations, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(securityLevels, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
+  UpdateElementStyle(stateManager, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
+  UpdateElementStyle(complianceFrameworks, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#64b5f6")
 
-  UpdateRelStyle(securityLevelSelector, securityLevels, "#707070", "solid")
-  UpdateRelStyle(securityLevelSelector, stateManager, "#4b6cad", "solid")
-  UpdateRelStyle(securitySummary, stateManager, "#4b6cad", "solid")
-  UpdateRelStyle(ciaImpactAnalysis, stateManager, "#4b6cad", "solid")
-  UpdateRelStyle(securityRadarChart, stateManager, "#4b6cad", "solid")
-  UpdateRelStyle(securityScoreCalculator, stateManager, "#4b6cad", "solid")
-  UpdateRelStyle(securityRecommendations, securityLevels, "#707070", "solid")
-  UpdateRelStyle(securityRecommendations, complianceFrameworks, "#707070", "dashed")
+  UpdateRelStyle(securityLevelSelector, securityLevels, "#d1c4e9", "solid")
+  UpdateRelStyle(securityLevelSelector, stateManager, "#d1c4e9", "solid")
+  UpdateRelStyle(securitySummary, stateManager, "#d1c4e9", "solid")
+  UpdateRelStyle(ciaImpactAnalysis, stateManager, "#d1c4e9", "solid")
+  UpdateRelStyle(securityRadarChart, stateManager, "#d1c4e9", "solid")
+  UpdateRelStyle(securityScoreCalculator, stateManager, "#d1c4e9", "solid")
+  UpdateRelStyle(securityRecommendations, securityLevels, "#d1c4e9", "solid")
+  UpdateRelStyle(securityRecommendations, complianceFrameworks, "#bbdefb", "dashed")
 ```
 
 ## C4 Dynamic Diagram
@@ -244,25 +244,25 @@ C4Dynamic
   Rel(complianceStatus, securityOfficer, "4c. Shows compliance status")
   Rel(costEstimation, securityOfficer, "4d. Shows cost implications")
 
-  %% Colors and styles
-  UpdateElementStyle(securityOfficer, $fontColor="#ffffff", $bgColor="#08427b", $borderColor="#052E56")
-  UpdateElementStyle(securityLevelSelector, $fontColor="#ffffff", $bgColor="#5ca8e0", $borderColor="#2e6295")
-  UpdateElementStyle(securitySummary, $fontColor="#ffffff", $bgColor="#5ca8e0", $borderColor="#2e6295")
-  UpdateElementStyle(ciaImpactAnalysis, $fontColor="#ffffff", $bgColor="#5ca8e0", $borderColor="#2e6295")
-  UpdateElementStyle(complianceStatus, $fontColor="#ffffff", $bgColor="#5ca8e0", $borderColor="#2e6295")
-  UpdateElementStyle(costEstimation, $fontColor="#ffffff", $bgColor="#5ca8e0", $borderColor="#2e6295")
-  UpdateElementStyle(appState, $fontColor="#ffffff", $bgColor="#2a5d89", $borderColor="#1b3a54")
+  %% Cool color scheme
+  UpdateElementStyle(securityOfficer, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
+  UpdateElementStyle(securityLevelSelector, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(securitySummary, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(ciaImpactAnalysis, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(complianceStatus, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(costEstimation, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(appState, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
 
-  UpdateRelStyle(securityOfficer, securityLevelSelector, "#1168bd", "bold")
-  UpdateRelStyle(securityLevelSelector, appState, "#4b6cad", "solid")
-  UpdateRelStyle(appState, securitySummary, "#4b6cad", "dashed")
-  UpdateRelStyle(appState, ciaImpactAnalysis, "#4b6cad", "dashed")
-  UpdateRelStyle(appState, complianceStatus, "#4b6cad", "dashed")
-  UpdateRelStyle(appState, costEstimation, "#4b6cad", "dashed")
-  UpdateRelStyle(securitySummary, securityOfficer, "#1168bd", "solid")
-  UpdateRelStyle(ciaImpactAnalysis, securityOfficer, "#1168bd", "solid")
-  UpdateRelStyle(complianceStatus, securityOfficer, "#1168bd", "solid")
-  UpdateRelStyle(costEstimation, securityOfficer, "#1168bd", "solid")
+  UpdateRelStyle(securityOfficer, securityLevelSelector, "#a0c8e0", "bold")
+  UpdateRelStyle(securityLevelSelector, appState, "#d1c4e9", "solid")
+  UpdateRelStyle(appState, securitySummary, "#c8e6c9", "dashed")
+  UpdateRelStyle(appState, ciaImpactAnalysis, "#c8e6c9", "dashed")
+  UpdateRelStyle(appState, complianceStatus, "#c8e6c9", "dashed")
+  UpdateRelStyle(appState, costEstimation, "#c8e6c9", "dashed")
+  UpdateRelStyle(securitySummary, securityOfficer, "#a0c8e0", "solid")
+  UpdateRelStyle(ciaImpactAnalysis, securityOfficer, "#a0c8e0", "solid")
+  UpdateRelStyle(complianceStatus, securityOfficer, "#a0c8e0", "solid")
+  UpdateRelStyle(costEstimation, securityOfficer, "#a0c8e0", "solid")
 ```
 
 ## Security Architecture Layers
@@ -299,19 +299,21 @@ C4Dynamic
 
 The color schemes used throughout the C4 diagrams follow these conventions:
 
-| Element Type        | Color                 | Description                                         |
-| ------------------- | --------------------- | --------------------------------------------------- |
-| Person              | #08427b (Dark Blue)   | External users or roles interacting with the system |
-| System              | #1168bd (Blue)        | The main system being described                     |
-| Container           | #438dd5 (Medium Blue) | Main application containers within the system       |
-| Component           | #5ca8e0 (Light Blue)  | Individual components within containers             |
-| Database            | #2a5d89 (Navy Blue)   | Data storage components                             |
-| External System     | #999999 (Gray)        | External systems or services                        |
-| Active Relationship | #1168bd (Blue)        | User interactions with the system                   |
-| Data Flow           | #4b6cad (Steel Blue)  | Data flows between components                       |
-| Reference           | #707070 (Dark Gray)   | References to external systems or resources         |
+| Element Type        | Color                  | Description                                         |
+| ------------------- | ---------------------- | --------------------------------------------------- |
+| Person              | #bbdefb (Light Blue)   | External users or roles interacting with the system |
+| System              | #a0c8e0 (Medium Blue)  | The main system being described                     |
+| Container           | #a0c8e0 (Medium Blue)  | Main application containers within the system       |
+| Component           | #a0c8e0 (Medium Blue)  | Individual components within containers             |
+| Database            | #d1c4e9 (Light Purple) | Data storage components                             |
+| External System     | #d1c4e9 (Light Purple) | External systems or services                        |
+| Process Component   | #c8e6c9 (Light Green)  | Processing and calculation components               |
+| Active Relationship | #a0c8e0 (Medium Blue)  | User interactions with the system                   |
+| Data Flow           | #d1c4e9 (Light Purple) | Data flows between components                       |
+| Process Flow        | #c8e6c9 (Light Green)  | Process flows between components                    |
+| Reference           | #bbdefb (Light Blue)   | References to external systems or resources         |
 
-This color scheme provides visual consistency across all architectural diagrams and helps distinguish between different types of components and their relationships.
+This cool color scheme provides visual consistency across all architectural diagrams and helps distinguish between different types of components and their relationships.
 
 ## Testing Architecture
 

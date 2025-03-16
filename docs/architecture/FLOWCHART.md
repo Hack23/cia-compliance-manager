@@ -49,76 +49,107 @@ flowchart TD
     H -->|Adjust| B
     H -->|Report Only| J[Generate Security Report]
 
-    I --> K[End Assessment]
-    J --> K
+    I --> K[Execute Plan]
+    J --> L[Export Report]
+    K --> M[Review Results]
+    L --> M
+    M --> N{Continue Improvement?}
+    N -->|Yes| B
+    N -->|No| O[End Assessment]
 
-    classDef startNode fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef endNode fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef process fill:#f9f9f9,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef domain fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef cost fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef report fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    %% Cool color scheme
+    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef process fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef decision fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef action fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef end fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
 
-    class A,K startNode
-    class B,H decision
-    class C1,C2,C3 domain
-    class D,E process
-    class F cost
-    class G,I,J report
+    class A,O start
+    class C1,C2,C3,D,E,F,G process
+    class B,H,N decision
+    class I,J,K,L,M action
 ```
 
 ## Compliance Evaluation Process
 
-**📋 Regulatory Focus:** Shows the step-by-step process of evaluating compliance status against multiple frameworks based on implemented security controls.
+**📋 Compliance Focus:** Illustrates how security levels are mapped to compliance frameworks to determine compliance status.
 
-**📊 Reporting Focus:** Illustrates how compliance findings are aggregated across frameworks to generate comprehensive compliance reports and status indicators.
+**🔄 Process Focus:** Shows the step-by-step process of evaluating compliance based on security levels and generating remediation recommendations.
 
 ```mermaid
 flowchart TD
-    Start[Start Compliance Check] --> GetLevel[Get Security Levels]
-    GetLevel --> MapControls[Map Security Controls to Frameworks]
+    A[Start Compliance Evaluation] --> B[Get Current Security Levels]
+    B --> C[Map Levels to Framework Controls]
+    C --> D[Compare with Framework Requirements]
+    D --> E{Framework Requirements Met?}
 
-    MapControls --> Frameworks{For Each Framework}
-    Frameworks --> CheckReqs[Check Requirements]
-    CheckReqs --> EvalCompStatus{Evaluate Status}
+    E -->|Yes| F1[Mark Framework as Compliant]
+    E -->|Partially| F2[Mark Framework as Partially Compliant]
+    E -->|No| F3[Mark Framework as Non-Compliant]
 
-    EvalCompStatus -->|All Requirements Met| MarkCompliant[Mark as Compliant]
-    EvalCompStatus -->|Some Requirements Met| MarkPartial[Mark as Partial]
-    EvalCompStatus -->|No Requirements Met| MarkNoncomp[Mark as Non-Compliant]
+    F1 & F2 & F3 --> G[Identify Compliance Gaps]
+    G --> H[Generate Remediation Recommendations]
+    H --> I{Multiple Frameworks?}
 
-    MarkCompliant --> NextFw{More Frameworks?}
-    MarkPartial --> NextFw
-    MarkNoncomp --> NextFw
+    I -->|Yes, Next Framework| C
+    I -->|No, Complete| J[Calculate Overall Compliance Score]
+    J --> K[Generate Compliance Report]
+    K --> L[End Compliance Evaluation]
 
-    NextFw -->|Yes| Frameworks
-    NextFw -->|No| GenReport[Generate Compliance Report]
-    GenReport --> End[End Compliance Check]
+    %% Cool color scheme
+    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef process fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef decision fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef status fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef end fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
 
-    classDef startNode fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef endNode fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef process fill:#f9f9f9,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef compliant fill:#66cc66,stroke:#333,stroke-width:1px,color:white
-    classDef partial fill:#ffcc66,stroke:#333,stroke-width:1px,color:black
-    classDef noncomp fill:#ff6666,stroke:#333,stroke-width:1px,color:white
-    classDef report fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    class A,L start,end
+    class B,C,D,G,H,J,K process
+    class E,I decision
+    class F1,F2,F3 status
+```
 
-    class Start,End startNode
-    class Frameworks,EvalCompStatus,NextFw decision
-    class GetLevel,MapControls,CheckReqs process
-    class MarkCompliant compliant
-    class MarkPartial partial
-    class MarkNoncomp noncomp
-    class GenReport report
+## Cost Estimation Workflow
+
+**💰 Financial Focus:** Illustrates the process of calculating implementation costs for security controls.
+
+**📊 ROI Focus:** Shows how costs are analyzed alongside security benefits to determine return on investment.
+
+```mermaid
+flowchart TD
+    A[Begin Cost Estimation] --> B[Get Selected Security Levels]
+    B --> C1[Calculate CAPEX]
+    B --> C2[Calculate OPEX]
+
+    C1 --> D[Apply Organization Size Multiplier]
+    C2 --> D
+    D --> E[Calculate Total Cost of Ownership]
+
+    E --> F[Estimate Expected Loss Value]
+    F --> G[Calculate Risk Reduction]
+    G --> H[Determine ROI]
+
+    H --> I{Positive ROI?}
+    I -->|Yes| J1[Flag as Recommended Investment]
+    I -->|No| J2[Flag for Cost-Benefit Review]
+
+    J1 --> K[Generate Cost Report]
+    J2 --> K
+    K --> L[End Cost Estimation]
+
+    %% Cool color scheme
+    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef calc fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef decision fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef result fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef end fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
+
+    class A,L start,end
+    class B,C1,C2,D,E,F,G,H calc
+    class I decision
+    class J1,J2,K result
 ```
 
 <div class="diagram-legend">
-These flowcharts illustrate key operational processes within the CIA Compliance Manager application. The color scheme provides visual distinction between different types of process steps:
-
-- 🔵 Blue represents start/end points and report generation
-- 🟡 Yellow/orange indicates decision points
-- 🟢 Green indicates compliance status
-- 🔴 Red indicates non-compliance
-- 🟣 Purple highlights cost-related calculations
+These flowcharts provide a visual representation of the key processes within the CIA Compliance Manager. They illustrate the decision flows and process steps that users typically follow when working with the application, from security assessment to compliance evaluation and cost estimation.
 </div>
