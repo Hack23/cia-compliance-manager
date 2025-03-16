@@ -1,6 +1,6 @@
 # CIA Compliance Manager CI/CD Workflows
 
-This document describes the CI/CD workflows implemented for the CIA Compliance Manager project, illustrating the automated processes for code quality, security checks, testing, and release management.
+This document details the continuous integration and deployment workflows used in the CIA Compliance Manager project. The workflows automate testing, security scanning, and release procedures to ensure code quality, security, and reliable deployment.
 
 ## 📚 Related Architecture Documentation
 
@@ -23,269 +23,208 @@ This document describes the CI/CD workflows implemented for the CIA Compliance M
 
 </div>
 
-## Overview of CI/CD Pipeline
+## Workflow Overview
 
-<div class="workflow-overview">
+The project uses GitHub Actions for automation with the following workflows:
 
-The project implements a comprehensive CI/CD pipeline with distinct workflows for:
+1. **Test and Report**: Run unit and E2E tests with coverage reporting
+2. **CodeQL Analysis**: Security scanning for code vulnerabilities
+3. **Dependency Review**: Scanning of dependency changes for vulnerabilities
+4. **Scorecard Analysis**: OSSF security scorecard for supply chain security
+5. **Release Process**: Build, attest, and deploy new versions
+6. **PR Labeler**: Automated labeling of pull requests
 
-1. **🔄 Continuous Integration (CI)** workflows that run on each PR and push
-2. **🔒 Security analysis** workflows for vulnerability detection
-3. **📦 Release automation** for creating verified, attested releases
+## Workflow Relationships
 
-</div>
+```mermaid
+flowchart TB
+    subgraph "Continuous Integration"
+        PR[Pull Request] --> TestReport[Test and Report]
+        PR --> DependencyReview[Dependency Review]
+        PR --> Labeler[PR Labeler]
+        TestReport --> CodeQL[CodeQL Analysis]
+        CodeQL --> Scorecard[Scorecard Analysis]
+    end
 
-## CodeQL Security Analysis Workflow
+    subgraph "Continuous Deployment"
+        Release[Release Trigger] --> BuildTest[Prepare & Test]
+        BuildTest --> Build[Build Package]
+        Build --> CreateRelease[Create GitHub Release]
+        CreateRelease --> DeployGHPages[Deploy to GitHub Pages]
+    end
 
-**🔒 Security Focus:** Automatically analyzes code for potential security vulnerabilities and coding errors using GitHub's CodeQL engine.
+    PR -.-> |"approved & merged"| main[Main Branch]
+    main --> Scorecard
+    main --> CodeQL
+    main -.-> |"tag created or manual trigger"| Release
 
-**🛡️ Risk Management Focus:** Provides early detection of security issues during development, preventing vulnerabilities from reaching production.
+    %% Cool color styling
+    classDef integration fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef deployment fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
+    classDef process fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef trigger fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+
+    class PR,TestReport,DependencyReview,Labeler,CodeQL,Scorecard integration
+    class Release,BuildTest,Build,CreateRelease,DeployGHPages deployment
+    class main process
+```
+
+## Test and Report Workflow
+
+This workflow runs on pull requests and pushes to the main branch to ensure code quality.
 
 ```mermaid
 flowchart TD
-    A[Push to main/PR] -->|Triggers| B[CodeQL Analysis]
-    B --> C{Initialize CodeQL}
-    C --> D[Autobuild Project]
-    D --> E[Analyze JavaScript/TypeScript]
-    E --> F{Security Issues?}
-    F -->|Yes| G[Report Security Vulnerabilities]
-    F -->|No| H[Clean Analysis]
+    Start[Push or PR] --> Prepare[Setup Environment]
+    Prepare --> UnitTests[Run Unit Tests]
+    Prepare --> E2ETests[Run E2E Tests]
+    UnitTests --> Coverage[Generate Coverage Report]
+    E2ETests --> TestReport[Generate Test Report]
+    Coverage --> Upload[Upload Reports]
+    TestReport --> Upload
+    Upload --> End[End]
 
-    classDef trigger fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black;
-    classDef process fill:#f9f9f9,stroke:#333,stroke-width:1px,color:black;
-    classDef security fill:#ffcdd2,stroke:#333,stroke-width:1px,color:black;
-    classDef decision fill:#ffda9e,stroke:#333,stroke-width:1px,color:black;
-    classDef good fill:#66cc66,stroke:#333,stroke-width:1px,color:white;
-    classDef bad fill:#ff6666,stroke:#333,stroke-width:1px,color:white;
+    %% Cool color styling
+    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef process fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef test fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef report fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef end fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
 
-    class A trigger;
-    class B,C,D,E process;
-    class F decision;
-    class G bad;
-    class H good;
+    class Start,End start
+    class Prepare process
+    class UnitTests,E2ETests test
+    class Coverage,TestReport,Upload report
 ```
 
 ## Release Workflow
 
-**🔗 Supply Chain Security Focus:** Implements secure build processes with attestations and provenance to ensure release integrity and verify authenticity.
-
-**📦 Release Management Focus:** Automates the versioning, building, testing, and publishing process for new releases with comprehensive artifacts.
+This workflow handles the release process for new versions, triggered by version tags or manual workflow dispatch.
 
 ```mermaid
 flowchart TD
-    A[Tag Push/Manual Trigger] --> B[Prepare Release]
-    B --> C[Set Version]
-    C --> D{Run Tests}
-    D -->|Pass| E[Build Release Package]
-    D -->|Fail| D1[Abort Release]
-    E --> F[Generate SBOM]
-    F --> G[Create Attestations]
-    G --> H[Publish Release]
-    H --> I[Notify Stakeholders]
+    Start[Release Trigger] --> Prepare[Prepare Release]
+    Prepare --> TestBuild[Test & Build]
+    TestBuild --> SBOM[Generate SBOM]
+    SBOM --> Attestation[Generate Attestations]
+    Attestation --> CreateRelease[Create GitHub Release]
+    CreateRelease --> Deploy[Deploy to GitHub Pages]
+    Deploy --> End[End]
 
-    classDef trigger fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef process fill:#f9f9f9,stroke:#333,stroke-width:1px,color:black
-    classDef test fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef security fill:#ffcdd2,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef publish fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef fail fill:#ff6666,stroke:#333,stroke-width:1px,color:white
+    %% Cool color styling
+    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef process fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef security fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef deploy fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef end fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
 
-    class A trigger
-    class B,C,E,F,G publish
-    class D decision
-    class D1 fail
-    class H,I publish
+    class Start,End start
+    class Prepare,TestBuild process
+    class SBOM,Attestation security
+    class CreateRelease,Deploy deploy
 ```
 
-## Continuous Integration Process
+## Security Scanning Workflows
 
-**🔧 DevOps Focus:** Illustrates the automated build and test process that runs on every code change to maintain quality and prevent regressions.
-
-**👷 Development Focus:** Shows how developers get immediate feedback on their code changes through automated testing and quality checks.
-
-```mermaid
-stateDiagram-v2
-    [*] --> CodeChange: Developer Push/PR
-
-    CodeChange --> BuildProcess: Trigger CI
-
-    state BuildProcess {
-        [*] --> InstallDependencies
-        InstallDependencies --> TypeCheck: npm install
-        TypeCheck --> Lint: tsc --noEmit
-        Lint --> UnitTests: eslint
-        UnitTests --> BuildAssets: vitest run
-        BuildAssets --> [*]: vite build
-    }
-
-    BuildProcess --> TestingPhase: Build Success
-
-    state TestingPhase {
-        [*] --> ComponentTests
-        ComponentTests --> IntegrationTests
-        IntegrationTests --> E2ETests: cypress run
-        E2ETests --> [*]
-    }
-
-    TestingPhase --> QualityGate: Tests Complete
-
-    QualityGate --> DeployPreview: Pass
-    QualityGate --> FailureFeedback: Fail
-
-    DeployPreview --> [*]: Preview URL Available
-    FailureFeedback --> [*]: Error Report Sent
-
-    classDef start fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef process fill:#f9f9f9,stroke:#333,stroke-width:1px,color:black
-    classDef test fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef gate fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef deploy fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef fail fill:#ff6666,stroke:#333,stroke-width:1px,color:white
-
-    class CodeChange,BuildProcess start
-    class TestingPhase test
-    class QualityGate gate
-    class DeployPreview deploy
-    class FailureFeedback fail
-```
-
-## Security Scanning Integration
-
-**🔒 Security Focus:** Shows how automated security scans are integrated throughout the development lifecycle to identify vulnerabilities early.
-
-**📋 Compliance Focus:** Illustrates the implementation of automated compliance checks and security policy enforcement via CI/CD.
+Multiple security scanning workflows validate different aspects of the codebase.
 
 ```mermaid
 flowchart TD
-    A[Code Commit] --> B{PR or Push?}
-    B -->|PR| C1[Quick Security Scans]
-    B -->|Push to Main| C2[Comprehensive Scans]
+    subgraph "Security Workflows"
+        PR[Pull Request] --> DependencyReview[Dependency Review]
+        Branch[Main Branch] --> CodeQL[CodeQL Analysis]
+        Branch --> Scorecard[Scorecard Analysis]
+    end
 
-    C1 --> D1[SAST Scan]
-    C1 --> D2[Dependency Check]
+    DependencyReview --> Report1[PR Comments]
+    CodeQL --> Report2[GitHub Security Tab]
+    Scorecard --> Report3[Security Dashboard]
 
-    C2 --> E1[Full SAST]
-    C2 --> E2[SCA Scan]
-    C2 --> E3[Secret Detection]
-    C2 --> E4[License Compliance]
-
-    D1 & D2 --> F1{Quick Issues?}
-    E1 & E2 & E3 & E4 --> F2{Major Issues?}
-
-    F1 -->|Yes| G1[Block PR]
-    F1 -->|No| G2[Approve Security]
-
-    F2 -->|Yes| H1[Create Security Issue]
-    F2 -->|No| H2[Update Security Dashboard]
-
-    G1 & G2 --> I[PR Processing]
-    H1 & H2 --> J[Main Branch Status]
-
-    I --> K[PR Merged]
-    K --> C2
-
-    J --> L{Status}
-    L -->|Clean| M[Pass Security Gate]
-    L -->|Issues| N[Fix Security Issues]
-    N --> A
-
-    M --> O[Deploy to Environments]
-
-    classDef commit fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    %% Cool color styling
+    classDef source fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
     classDef scan fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef issue fill:#ff6666,stroke:#333,stroke-width:1px,color:white
-    classDef clean fill:#66cc66,stroke:#333,stroke-width:1px,color:white
-    classDef process fill:#f9f9f9,stroke:#333,stroke-width:1px,color:black
-    classDef deploy fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef report fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
 
-    class A commit
-    class B,F1,F2,L decision
-    class C1,C2,D1,D2,E1,E2,E3,E4 scan
-    class G1,H1,N issue
-    class G2,H2,M clean
-    class I,J,K process
-    class O deploy
+    class PR,Branch source
+    class DependencyReview,CodeQL,Scorecard scan
+    class Report1,Report2,Report3 report
 ```
 
-## Key Workflow Features
+### CodeQL Analysis Workflow
 
-### 1. CodeQL Security Scanning
+Analyzes code for security vulnerabilities using GitHub's CodeQL engine. Runs on:
 
-<div class="feature-block">
+- Push to main branch
+- Pull requests to main branch
+- Weekly schedule (Mondays)
 
-The CodeQL workflow automatically scans for security vulnerabilities in:
+### Dependency Review
 
-- 🔍 JavaScript and TypeScript code
-- 🧩 React component vulnerabilities
-- 💉 Potential injection attacks
-- 🐞 Insecure coding patterns
+Scans dependency manifest changes in pull requests to identify vulnerable packages.
 
-Results are reported through GitHub Security tab with automated alerts for maintainers.
+### Scorecard Analysis
 
-</div>
+Evaluates the project against OSSF security best practices:
 
-### 2. Comprehensive Testing Integration
+- Branch protection rules
+- Dependency management
+- Code signing
+- Other supply chain security practices
 
-<div class="feature-block">
+## Continuous Integration Diagram
 
-The release workflow ensures quality through:
+The complete CI/CD pipeline integrates all workflows:
 
-- ✅ Vitest unit tests with high coverage requirements
-- 🧪 Cypress end-to-end tests for user flows
-- 👁️ Visual regression tests for UI components
-- 📊 Test reports and artifacts published for review
+```mermaid
+flowchart LR
+    subgraph "Code Changes"
+        Developer --> PR[Pull Request]
+        PR --> Review[Code Review]
+        Review --> Merge[Merge to Main]
+        Merge --> Tag[Version Tag]
+        Tag --> Release[Release]
+    end
 
-</div>
+    subgraph "Automated Checks"
+        PR --> UnitE2E[Unit & E2E Tests]
+        PR --> DependencyScan[Dependency Scan]
+        UnitE2E --> Reports[Test Reports]
+        Merge --> CodeQLScan[CodeQL Analysis]
+        Merge --> ScoreCard[Security Scorecard]
+    end
 
-### 3. Software Bill of Materials (SBOM)
+    subgraph "Release Process"
+        Release --> Build[Build & Attestation]
+        Build --> DeployGH[GitHub Release]
+        DeployGH --> DeployPages[GitHub Pages]
+    end
 
-<div class="feature-block">
+    %% Cool color styling
+    classDef dev fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef code fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef test fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef deploy fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
+    classDef report fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
 
-Every release includes:
+    class Developer,PR,Review dev
+    class Merge,Tag,Release code
+    class UnitE2E,DependencyScan,Reports,CodeQLScan,ScoreCard test
+    class Build,DeployGH,DeployPages deploy
 
-- 📋 Complete SBOM in SPDX JSON format
-- 📦 Dependency listing with versions
-- ⚖️ License compliance information
-- 🔒 Known vulnerability status
+    %% Remove previous styling that doesn't match cool color theme
+    style PR fill:#a0c8e0,stroke:#333,stroke-width:2px
+    style Release fill:#86b5d9,stroke:#333,stroke-width:2px
+    style DeployPages fill:#c8e6c9,stroke:#333,stroke-width:2px
+```
 
-</div>
+## Future CI/CD Improvements
 
-### 4. Release Attestations
+The following enhancements are planned for future CI/CD pipeline improvements:
 
-<div class="feature-block">
+1. **Automated Versioning**: Semantic versioning based on commit messages
+2. **Performance Testing**: Integrating performance benchmarks into CI pipeline
+3. **Security Scanning Enhancement**: Additional security scanners
+4. **Containerization**: Docker image building and container scanning
+5. **Environment-Specific Deployments**: Staging and production deployment pipelines
 
-The workflow creates cryptographically signed attestations certifying:
-
-- 🔗 Build provenance (who built it, when, and how)
-- 📋 SBOM verification for dependency transparency
-- 🔐 Artifact integrity through secure hashing
-
-</div>
-
-### 5. Pipeline Security Controls
-
-<div class="feature-block">
-
-Security throughout the CI/CD pipeline is maintained by:
-
-- 🛡️ Hardened CI runner environments
-- 🔒 Limited pipeline permissions
-- 📌 Pinned action versions with SHA hashes
-- 🔄 Dependency caching for build reproducibility
-- 📝 Audit logging of all CI/CD operations
-
-</div>
-
-## Benefits of the CI/CD Approach
-
-<div class="benefits-section">
-
-1. **🔄 Consistent Quality:** Automated testing ensures code quality across all changes
-2. **🔒 Security Integration:** Security scanning is built into the development process
-3. **✅ Release Confidence:** Every release has verified provenance and integrity
-4. **📋 Compliance Support:** Automated attestations help meet regulatory requirements
-5. **👩‍💻 Developer Experience:** Fast feedback on code quality and security issues
-
-</div>
+For details on the future architecture direction, see [FUTURE_ARCHITECTURE.md](./FUTURE_ARCHITECTURE.md).

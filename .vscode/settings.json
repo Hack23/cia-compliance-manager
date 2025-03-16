@@ -43,7 +43,69 @@
     "pkill",
     "xvfb",
     "Xvfb",
-    "DBUS"
+    "DBUS",
+    // Added domain-specific terms
+    "NIST",
+    "GDPR",
+    "HIPAA",
+    "SOC2",
+    "CSF",
+    "GRC",
+    "SIEM",
+    "SOAR",
+    "CMDB",
+    "ITSM",
+    "OSCAL",
+    "TAXII",
+    "STIX",
+    "triad",
+    "RBAC",
+    // Additional security and compliance terms
+    "MTTR",
+    "MTBF",
+    "MTTD",
+    "MTTF",
+    "MTTS",
+    "RPO",
+    "RTO",
+    "BCM",
+    "BCP",
+    "DRP",
+    "MFA",
+    "FIPS",
+    "ZTA",
+    "ZERO",
+    // UI/UX terms
+    "WCAG",
+    "a11y",
+    "microcopy",
+    "heatmap",
+    "wireframe",
+    "handoff",
+    "microinteraction",
+    "prototyping",
+    "affordance",
+    "usability",
+    "skeuomorphic",
+    "neumorphic",
+    // Business development terms
+    "CISO",
+    "CRO",
+    "ROI",
+    "TCO",
+    "TAM",
+    "SAM",
+    "SOM",
+    "KPI",
+    "OKR",
+    "GTM",
+    "CAC",
+    "LTV",
+    "ARR",
+    "MRR",
+    "B2B",
+    "B2G",
+    "RACI"
   ],
   "cSpell.ignorePaths": [
     "package-lock.json",
@@ -157,10 +219,10 @@
     "temperature": 0.3
   },
 
-  // Custom instructions for GitHub Copilot - enhanced with test plan details
+  // Custom instructions for GitHub Copilot - updated with v1.0 release priority
   "github.copilot.editor.customization": {
     "repositoryInstructions": {
-      "instructions": "You're working on the CIA Compliance Manager application, which helps organizations assess security controls across the Confidentiality, Integrity, and Availability (CIA) triad. Use these coding conventions for consistency:\n\n1. TYPESCRIPT STANDARDS:\n- Use TypeScript 5.x features where appropriate\n- Always use explicit types (avoid 'any', prefer unknown if necessary)\n- Use interface for public API and type for internal structures\n- Use mapped types, conditional types, and utility types (Pick, Omit) where appropriate\n- Follow strict null checking principles\n- Use type narrowing with type guards\n- Use generics to improve code reuse and type safety\n- Use readonly modifiers for immutable data\n- Leverage discriminated unions for state management\n- Prefer const assertions for literal values\n\n2. PROJECT STRUCTURE:\n- React components live in src/components/ with associated test files\n- Hooks live in src/hooks/ with associated test files\n- Constants live in dedicated files in src/constants/\n- Type definitions go in src/types/\n- Tests should use the mock utilities in src/tests/mockFactory.ts\n\n3. COMPONENTS:\n- Use function components with explicit return types\n- Props should be defined with interfaces in a types.ts file\n- Add data-testid attributes to elements that need testing\n- Use custom hooks for shared logic\n- Organize complex widgets under components/widgets/\n\n4. UNIT TESTING:\n- Follow testID structure from testIds.ts file with namespaced IDs\n- Use dynamic test ID generators for repeated components\n- Structure tests into categories: Rendering, Interaction, State Management, Data Integration\n- Mock dependencies with vitest mock functions\n- Include both happy path and edge case scenarios\n- Test accessibility concerns with axe testing utilities\n- Target coverage: 90%+ statement, 85%+ branch, 85%+ function coverage\n\n5. E2E TESTING:\n- Organize Cypress tests by function (business-outcomes, core-behaviors, widgets, user-flows)\n- Use resilient selectors with fallback strategies\n- Create custom Cypress commands for common operations\n- Use setup functions for consistent test initialization\n- Include debug helpers for test diagnosis\n- Test complete user journeys that demonstrate business value\n\n6. STATE MANAGEMENT:\n- Use React hooks for local state\n- Use useCIAOptions() hook for accessing options data\n- Use constants for string values\n- Avoid direct DOM manipulation\n\n7. STYLING:\n- Use Tailwind CSS for styling\n- Use data-testid attributes for testing, not CSS classes\n- Use CSS variables for theming where appropriate\n\nRemind me if I deviate from these practices in my code."
+      "instructions": "You're working on the CIA Compliance Manager application (version 0.8.4), which helps organizations assess security controls across the Confidentiality, Integrity, and Availability (CIA) triad. The TOP PRIORITY is to reach version 1.0 by completing and fixing existing functionality only, not adding new features. Focus on stability, correctness, and completing what's already started.\n\n1. VERSION 1.0 PRIORITY FOCUS:\n- ONLY fix and complete existing widgets - no new features\n- Fix bugs and inconsistencies in current implementation\n- Ensure data consistency between components and services\n- Complete any partially implemented functionality\n- Optimize performance of existing code\n- Increase test coverage for current features\n- Follow existing patterns exactly - don't introduce new patterns\n\n2. BUSINESS CONTEXT:\n- This application helps security officers evaluate and implement security controls\n- Security is assessed across Confidentiality, Integrity, and Availability\n- Each security component has levels: None, Low, Moderate, High, Very High\n- Availability levels measure uptime from <90% to 99.99% with corresponding RTO/RPO metrics\n- Integrity levels range from no validation to blockchain/distributed validation\n- Confidentiality levels range from no controls to military-grade encryption with zero trust\n- Business impact is evaluated across: Financial, Operational, Regulatory, Reputational, Strategic\n- Compliance is mapped to frameworks like NIST, ISO, GDPR, HIPAA, SOC2\n- Implementation costs are tracked as CAPEX (upfront) and OPEX (ongoing)\n- Target users include CISOs, security officers, compliance managers, and IT implementers\n- Value proposition includes cost optimization, risk reduction, and compliance simplification\n\n3. TYPESCRIPT STANDARDS:\n- Use TypeScript 5.8+ features including const type parameters and decorators\n- Always use explicit types (avoid 'any', prefer unknown if necessary)\n- Use interface for public API and type for internal structures\n- Use mapped types, conditional types, and utility types (Pick, Omit) where appropriate\n- Follow strict null checking principles with proper null guards\n- Use type narrowing with explicit type guards (isSecurityLevel, isWidgetConfig, etc.)\n- Use generics to improve code reuse and type safety\n- Use readonly modifiers for immutable data\n- Leverage discriminated unions for state management with exhaustive checking\n- Prefer const assertions for literal values (as const)\n\n4. UI/UX DESIGN PRINCIPLES:\n- Complete existing design patterns - don't introduce new ones\n- Follow WCAG 2.1 AA accessibility standards for all interactive elements\n- Use consistent color coding for security levels (red=critical, amber=warning, green=compliant)\n- Implement progressive disclosure for complex security information\n- Design with responsive layouts for desktop, tablet, and mobile viewports\n- Use clear microcopy that avoids technical jargon where possible\n- Create intuitive data visualizations for security metrics and compliance status\n- Add appropriate micro-interactions to improve user engagement\n- Include contextual help and tooltips for security terminology\n- Design for dark mode with appropriate contrast ratios\n\n5. BUSINESS VALUE FOCUS:\n- Ensure existing business value calculations are accurate and complete\n- Document ROI calculations and business justifications in comments\n- Verify that components correctly highlight cost savings and risk reduction\n- Complete any partially implemented executive reporting features\n- Ensure compliance mappings are complete and accurate\n- Verify calculation consistency across the application\n\n6. REACT COMPONENT DESIGN:\n- Complete and fix existing components - don't create new ones\n- Ensure all props have proper TypeScript interfaces\n- Add missing data-testid attributes matching the pattern in cypress/test-data/data-testid-analysis.md\n- Fix any inconsistent state management approaches\n- Complete error handling for all components\n- Optimize performance with useMemo/useCallback with proper dependency arrays\n- Fix any accessibility issues in existing components\n\nPlease help me complete version 1.0 by fixing and completing existing functionality only - no new features."
     }
   },
 
@@ -170,7 +232,8 @@
     "*.ts": "${capture}.test.ts, ${capture}.spec.ts, ${capture}.cy.ts",
     "*.tsx": "${capture}.test.tsx, ${capture}.spec.tsx, ${capture}.cy.tsx",
     "*.js": "${capture}.test.js, ${capture}.spec.js",
-    "*.jsx": "${capture}.test.jsx, ${capture}.spec.jsx"
+    "*.jsx": "${capture}.test.jsx, ${capture}.spec.jsx",
+    "types.ts": "${capture}.d.ts, ${capture}.schema.ts"
   },
   "terminal.integrated.defaultProfile.linux": "bash",
   "diffEditor.ignoreTrimWhitespace": false
