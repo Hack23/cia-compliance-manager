@@ -85,16 +85,16 @@ flowchart TD
     Upload --> End[End]
 
     %% Cool color styling
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef process fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef test fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef report fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef end fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
+    classDef startNode fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef testNode fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef endNode fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
 
-    class Start,End start
-    class Prepare process
-    class UnitTests,E2ETests test
-    class Coverage,TestReport,Upload report
+    class Start,End startNode
+    class Prepare processNode
+    class UnitTests,E2ETests testNode
+    class Coverage,TestReport,Upload reportNode
 ```
 
 ## Release Workflow
@@ -112,16 +112,16 @@ flowchart TD
     Deploy --> End[End]
 
     %% Cool color styling
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef process fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef security fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef deploy fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef end fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
+    classDef startNode fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef securityNode fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef deployNode fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef endNode fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
 
-    class Start,End start
-    class Prepare,TestBuild process
-    class SBOM,Attestation security
-    class CreateRelease,Deploy deploy
+    class Start,End startNode
+    class Prepare,TestBuild processNode
+    class SBOM,Attestation securityNode
+    class CreateRelease,Deploy deployNode
 ```
 
 ## Security Scanning Workflows
@@ -141,13 +141,13 @@ flowchart TD
     Scorecard --> Report3[Security Dashboard]
 
     %% Cool color styling
-    classDef source fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef scan fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef report fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef sourceNode fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef scanNode fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
 
-    class PR,Branch source
-    class DependencyReview,CodeQL,Scorecard scan
-    class Report1,Report2,Report3 report
+    class PR,Branch sourceNode
+    class DependencyReview,CodeQL,Scorecard scanNode
+    class Report1,Report2,Report3 reportNode
 ```
 
 ### CodeQL Analysis Workflow
@@ -200,18 +200,18 @@ flowchart LR
     end
 
     %% Cool color styling
-    classDef dev fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef code fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef test fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef deploy fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
-    classDef report fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef devNode fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef codeNode fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef testNode fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef deployNode fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
+    classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
 
-    class Developer,PR,Review dev
-    class Merge,Tag,Release code
-    class UnitE2E,DependencyScan,Reports,CodeQLScan,ScoreCard test
-    class Build,DeployGH,DeployPages deploy
+    class Developer,PR,Review devNode
+    class Merge,Tag,Release codeNode
+    class UnitE2E,DependencyScan,Reports,CodeQLScan,ScoreCard testNode
+    class Build,DeployGH,DeployPages deployNode
 
-    %% Remove previous styling that doesn't match cool color theme
+    %% Remove previous styling that doesn't match color theme
     style PR fill:#a0c8e0,stroke:#333,stroke-width:2px
     style Release fill:#86b5d9,stroke:#333,stroke-width:2px
     style DeployPages fill:#c8e6c9,stroke:#333,stroke-width:2px

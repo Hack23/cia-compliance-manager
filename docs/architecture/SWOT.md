@@ -25,40 +25,48 @@ This document provides a strategic analysis of the CIA Compliance Manager's curr
 
 ## SWOT Overview
 
+<!-- Quadrant charts are not well supported in GitHub Markdown, so replacing with regular mermaid diagram -->
+
 ```mermaid
-quadrantChart
-    title SWOT Analysis - CIA Compliance Manager v0.8.4
-    x-axis Negative --> Positive
-    y-axis External --> Internal
-    quadrant-1 Opportunities
-    quadrant-2 Strengths
-    quadrant-3 Threats
-    quadrant-4 Weaknesses
+graph TD
+    subgraph "Strengths (Internal, Positive)"
+        S1["Comprehensive CIA framework"]
+        S2["Strong TypeScript typing"]
+        S3["Modular widget architecture"]
+        S4["Visual security assessments"]
+    end
 
-    quadrant-1-title-backgroundColor: "#d1c4e9"
-    quadrant-2-title-backgroundColor: "#c8e6c9"
-    quadrant-3-title-backgroundColor: "#f8cecc"
-    quadrant-4-title-backgroundColor: "#fff2cc"
+    subgraph "Weaknesses (Internal, Negative)"
+        W1["Incomplete widgets"]
+        W2["Limited test coverage"]
+        W3["Performance optimization needed"]
+        W4["Data inconsistencies"]
+    end
 
-    "Comprehensive CIA framework": [0.8, 0.7]
-    "Strong TypeScript typing": [0.9, 0.8]
-    "Modular widget architecture": [0.7, 0.9]
-    "Visual security assessments": [0.8, 0.8]
+    subgraph "Opportunities (External, Positive)"
+        O1["Context-aware security"]
+        O2["Compliance framework expansion"]
+        O3["Integration ecosystem growth"]
+        O4["Business intelligence features"]
+    end
 
-    "Incomplete widgets": [0.2, 0.8]
-    "Limited test coverage": [0.3, 0.7]
-    "Performance optimization needed": [0.1, 0.9]
-    "Data inconsistencies": [0.3, 0.85]
+    subgraph "Threats (External, Negative)"
+        T1["Competing security platforms"]
+        T2["Changing compliance standards"]
+        T3["Open source maintenance"]
+        T4["Complex security landscape"]
+    end
 
-    "Context-aware security": [0.8, 0.3]
-    "Compliance framework expansion": [0.9, 0.1]
-    "Integration ecosystem growth": [0.7, 0.2]
-    "Business intelligence features": [0.8, 0.2]
+    %% Style
+    classDef strengths fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef weaknesses fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
+    classDef opportunities fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef threats fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
 
-    "Competing security platforms": [0.1, 0.3]
-    "Changing compliance standards": [0.3, 0.2]
-    "Open source maintenance": [0.2, 0.1]
-    "Complex security landscape": [0.4, 0.3]
+    class S1,S2,S3,S4 strengths
+    class W1,W2,W3,W4 weaknesses
+    class O1,O2,O3,O4 opportunities
+    class T1,T2,T3,T4 threats
 ```
 
 ## Strengths
@@ -66,29 +74,23 @@ quadrantChart
 ```mermaid
 mindmap
   root((Strengths))
-    style fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
     id1(Comprehensive CIA Security Framework)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id1.1[Complete assessment model across security triad]
       id1.2[Granular security levels with clear metrics]
       id1.3[Business impact analysis integration]
     id2(Strong TypeScript Implementation)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id2.1[Type-safe interfaces across components]
       id2.2[Strict null checking and error handling]
       id2.3[Consistent domain modeling]
     id3(Modular Widget Architecture)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id3.1[Reusable UI components]
       id3.2[Consistent component patterns]
       id3.3[Testable component structure]
     id4(Visual Security Assessment)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id4.1[Intuitive security visualizations]
       id4.2[Interactive dashboard experience]
       id4.3[Clear security metrics and KPIs]
     id5(Compliance Framework Mapping)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id5.1[Maps controls to major frameworks]
       id5.2[Identifies compliance gaps]
       id5.3[Actionable remediation steps]

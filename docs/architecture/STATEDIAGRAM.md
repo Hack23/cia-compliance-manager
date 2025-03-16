@@ -50,16 +50,16 @@ stateDiagram-v2
 
     %% Cool color scheme
     classDef baseState fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef analysis fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef action fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef end fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
+    classDef startState fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef analysisState fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef actionState fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef endState fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
 
     class Initialized,PartiallyConfigured,Configured baseState
-    class Analyzed,ComplianceMapped analysis
-    class CostEstimated,RecommendationsGenerated action
-    class Implemented end
-    class [*] start
+    class Analyzed,ComplianceMapped analysisState
+    class CostEstimated,RecommendationsGenerated actionState
+    class Implemented endState
+    class [*] startState
 ```
 
 ## Compliance Status State Diagram
@@ -92,19 +92,19 @@ stateDiagram-v2
 
     %% Cool color scheme
     classDef baseState fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef process fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef noncompliant fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
-    classDef partial fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
-    classDef compliant fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef remediation fill:#dae8fc,stroke:#333,stroke-width:1px,color:black
+    classDef startState fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef processState fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef nonCompliantState fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
+    classDef partialState fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
+    classDef compliantState fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef remediationState fill:#dae8fc,stroke:#333,stroke-width:1px,color:black
 
     class NotEvaluated,Evaluating baseState
-    class NonCompliant noncompliant
-    class PartiallyCompliant partial
-    class Compliant compliant
-    class RemediationPlanned,RemediationInProgress remediation
-    class [*] start
+    class NonCompliant nonCompliantState
+    class PartiallyCompliant partialState
+    class Compliant compliantState
+    class RemediationPlanned,RemediationInProgress remediationState
+    class [*] startState
 ```
 
 ## Widget State Diagram
@@ -141,18 +141,18 @@ stateDiagram-v2
 
     %% Cool color scheme
     classDef baseState fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef loading fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
-    classDef data fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef interaction fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef error fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
+    classDef startState fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef loadingState fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
+    classDef dataState fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef interactionState fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef errorState fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
 
     class Initialized,Rendered baseState
-    class Loading,Updating,Filtering,Expanding,Exporting loading
-    class DataReceived,Exported data
-    class Interactive,Expanded interaction
-    class Error error
-    class [*] start
+    class Loading,Updating,Filtering,Expanding,Exporting loadingState
+    class DataReceived,Exported dataState
+    class Interactive,Expanded interactionState
+    class Error errorState
+    class [*] startState
 ```
 
 <div class="diagram-legend">
