@@ -1,126 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CIA Compliance Manager Documentation</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      line-height: 1.6;
-      color: #333;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #eaeaea;
-    }
-    h1 { margin-top: 0; color: #0366d6; }
-    h2 { color: #0366d6; margin-top: 2rem; }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1rem;
-    }
-    .card {
-      border: 1px solid #e1e4e8;
-      border-radius: 6px;
-      padding: 1.5rem;
-      background: white;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    .card h3 {
-      margin-top: 0;
-      margin-bottom: 1rem;
-      color: #0366d6;
-    }
-    .card p {
-      margin-bottom: 1rem;
-      color: #586069;
-    }
-    .card a {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      background: #0366d6;
-      color: white;
-      text-decoration: none;
-    }
-    .card a:hover {
-      background: #024ea4;
-    }
-    footer {
-      margin-top: 3rem;
-      padding-top: 1rem;
-      border-top: 1px solid #eaeaea;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #586069;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>CIA Compliance Manager Documentation</h1>
-    <p>Comprehensive documentation for the CIA (Confidentiality, Integrity, Availability) Compliance Manager</p>
-  </header>
-  
-  <div class="cards">              
-    
-    <div class="card">
-      <h3>Project Architecture</h3>
-      <p>C4 model diagrams and other architectural documentation.</p>
-      <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md">View Architecture</a>
-    </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Comprehensive documentation for the CIA Compliance Manager - a security assessment tool for the CIA triad"
+    />
+    <title>CIA Compliance Manager Documentation</title>
+    <style>
+      /* Base styles with light/dark mode support */
+      :root {
+        --bg-color: #f9f9f9;
+        --text-color: #333;
+        --header-color: #0366d6;
+        --card-bg: #fff;
+        --card-border: #e1e4e8;
+        --card-shadow: rgba(0, 0, 0, 0.12);
+        --link-color: #0366d6;
+        --link-hover: #024ea4;
+        --button-bg: #0366d6;
+        --button-text: #fff;
+        --section-border: #eaeaea;
+        --badge-bg: #f5f5f5;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-color: #1a1a1a;
+          --text-color: #e0e0e0;
+          --header-color: #58a6ff;
+          --card-bg: #2d2d2d;
+          --card-border: #444;
+          --card-shadow: rgba(0, 0, 0, 0.3);
+          --link-color: #58a6ff;
+          --link-hover: #79b8ff;
+          --button-bg: #2188ff;
+          --button-text: #e0e0e0;
+          --section-border: #444;
+          --badge-bg: #333;
+        }
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--bg-color);
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--section-border);
+        position: relative;
+      }
+      h1,
+      h2,
+      h3 {
+        color: var(--header-color);
+      }
+      h1 {
+        margin-top: 0;
+      }
+      h2 {
+        margin-top: 2rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--section-border);
+      }
+      .theme-toggle {
+        background: var(--button-bg);
+        color: var(--button-text);
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        transition: background 0.2s ease;
+      }
+      .theme-toggle:hover {
+        background: var(--link-hover);
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .card {
+        border: 1px solid var(--card-border);
+        border-radius: 6px;
+        padding: 1.5rem;
+        background: var(--card-bg);
+        box-shadow: 0 1px 3px var(--card-shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 5px 15px var(--card-shadow);
+      }
+      .card h3 {
+        margin-top: 0;
+        color: var(--header-color);
+      }
+      .card p {
+        margin-bottom: 1rem;
+      }
+      .btn {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        margin-top: 0.5rem;
+        border-radius: 4px;
+        background: var(--button-bg);
+        color: var(--button-text);
+        text-decoration: none;
+        transition: background 0.2s ease;
+      }
+      .btn:hover {
+        background: var(--link-hover);
+      }
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 1.5rem 0;
+        justify-content: center;
+      }
+      .badges a {
+        text-decoration: none;
+      }
+      .badges img {
+        height: 20px;
+        vertical-align: middle;
+      }
+      .app-link a {
+        display: inline-block;
+        margin-top: 1.5rem;
+        padding: 0.7rem 1.5rem;
+        background: var(--button-bg);
+        color: var(--button-text);
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.2s ease, transform 0.2s ease;
+      }
+      .app-link a:hover {
+        background: var(--link-hover);
+        transform: translateY(-2px);
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      ul li {
+        margin-bottom: 0.5rem;
+      }
+      ul li a {
+        color: var(--link-color);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+      ul li a:hover {
+        color: var(--link-hover);
+        text-decoration: underline;
+      }
+    </style>
+    <script>
+      function toggleTheme() {
+        document.body.classList.toggle("dark-mode");
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>
+        CIA Compliance Manager Documentation
+        <span class="app-version">v0.8.4</span>
+      </h1>
+      <p>
+        Comprehensive documentation for the CIA (Confidentiality, Integrity,
+        Availability) Compliance Manager.
+      </p>
+      <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+      <div class="badges">
+        <a
+          href="https://github.com/Hack23/cia-compliance-manager/raw/master/LICENSE.md"
+        >
+          <img
+            src="https://img.shields.io/github/license/Hack23/cia-compliance-manager.svg"
+            alt="License"
+          />
+        </a>
+        <a
+          href="https://scorecard.dev/viewer/?uri=github.com/Hack23/cia-compliance-manager"
+        >
+          <img
+            src="https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compliance-manager/badge"
+            alt="OpenSSF Scorecard"
+          />
+        </a>
+        <a
+          href="https://github.com/Hack23/cia-compliance-manager/actions/workflows/scorecards.yml"
+        >
+          <img
+            src="https://github.com/Hack23/cia-compliance-manager/actions/workflows/scorecards.yml/badge.svg?branch=main"
+            alt="Scorecard supply-chain security"
+          />
+        </a>
+      </div>
+      <div class="app-link">
+        <a href="https://hack23.github.io/cia-compliance-manager/"
+          >Launch Application</a
+        >
+        <a href="https://github.com/Hack23/cia-compliance-manager" class="btn"
+          >GitHub Repository</a
+        >
+      </div>
+    </header>
+    <main>
+      <div class="cards">
+        <div class="card">
+          <h3>Project Architecture</h3>
+          <p>C4 model diagrams and other architectural documentation.</p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md"
+            >View Architecture</a
+          >
+        </div>
 
-    <div class="card">
-      <h3>API Documentation</h3>
-      <p>Detailed API reference for all components, types, and functions used in the application.</p>
-      <a href="https://hack23.github.io/cia-compliance-manager/api/">View API Docs</a>
-    </div>
+        <div class="card">
+          <h3>API Documentation</h3>
+          <p>
+            Detailed API reference for all components, types, and functions used
+            in the application.
+          </p>
+          <a href="https://hack23.github.io/cia-compliance-manager/api/"
+            >View API Docs</a
+          >
+        </div>
 
-    <div class="card">
-      <h3>Unit Test</h3>
-      <p>Visual representation of unit test and results of the codebase.</p>
-      <a href="https://hack23.github.io/cia-compliance-manager/test-results/">Test Results</a>
-      <p>Unit testing strategy ,Unit tests verify that the application works correctly from a functional perspective.</p>
-      <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md">View Unit Test Plan</a>
-    </div>                            
-    
-    <div class="card">
-      <h3>Unit Test Code Coverage</h3>
-      <p>Test coverage reports showing how much of the codebase is covered by tests.</p>
-      <a href="https://hack23.github.io/cia-compliance-manager/coverage/index.html">View Coverage Report</a>
-    </div>
+        <div class="card">
+          <h3>Unit Test</h3>
+          <p>Visual representation of unit test and results of the codebase.</p>
+          <a
+            href="https://hack23.github.io/cia-compliance-manager/test-results/"
+            >Test Results</a
+          >
+          <p>
+            Unit testing strategy ,Unit tests verify that the application works
+            correctly from a functional perspective.
+          </p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md"
+            >View Unit Test Plan</a
+          >
+        </div>
 
-    <div class="card">
-      <h3>E2E System Test</h3>
-      <p>Test reports showing result .</p>
-      <a href="https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/index.html">View Test Report</a>
-      <p>(E2E) testing strategy ,E2E tests verify that the application works correctly from a user's perspective.</p>
-      <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md">View E2E Test Plan</a>
-    </div>
+        <div class="card">
+          <h3>Unit Test Code Coverage</h3>
+          <p>
+            Test coverage reports showing how much of the codebase is covered by
+            tests.
+          </p>
+          <a
+            href="https://hack23.github.io/cia-compliance-manager/coverage/index.html"
+            >View Coverage Report</a
+          >
+        </div>
 
-  </div>
-  
-  <h2>Documentation Overview</h2>
-  <p>
-    This documentation is automatically generated from the source code and documentation files in the repository.
-    It includes API reference, type definitions, architecture diagrams, and more to help you understand the
-    CIA Compliance Manager codebase.
-  </p>
+        <div class="card">
+          <h3>E2E System Test</h3>
+          <p>Test reports showing result .</p>
+          <a
+            href="https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/index.html"
+            >View Test Report</a
+          >
+          <p>
+            (E2E) testing strategy ,E2E tests verify that the application works
+            correctly from a user's perspective.
+          </p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md"
+            >View E2E Test Plan</a
+          >
+        </div>
+      </div>
 
-  <footer>
-    <p>Generated on Sun Mar 16 03:46:16 UTC 2025 | <a href="https://github.com/Hack23/cia-compliance-manager">GitHub Repository</a></p>
-  </footer>
-</body>
+      <section id="overview">
+        <h2>Project Overview</h2>
+        <p>
+          The CIA Compliance Manager is a comprehensive web application designed
+          to help organizations assess, implement, and manage security controls
+          across the CIA triad. Evaluate your security posture, measure
+          compliance against major frameworks, and analyze the business impacts
+          of security implementations.
+        </p>
+      </section>
+      <section id="features">
+        <h2>Key Features</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Security Level Assessment</h3>
+            <p>
+              Assess and configure security levels across Confidentiality,
+              Integrity, and Availability.
+            </p>
+            <a href="#cia" class="btn">Learn More</a>
+          </div>
+          <div class="card">
+            <h3>Compliance Mapping</h3>
+            <p>
+              Map security controls to frameworks like NIST, ISO, GDPR, HIPAA,
+              SOC2, and PCI DSS.
+            </p>
+            <a href="#compliance" class="btn">Learn More</a>
+          </div>
+          <div class="card">
+            <h3>Business Impact Analysis</h3>
+            <p>
+              Analyze the financial, operational, and regulatory impacts of your
+              security measures.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Cost Estimation</h3>
+            <p>
+              Estimate CAPEX and OPEX for security implementations to support
+              ROI analysis.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Interactive Visualizations</h3>
+            <p>
+              View security data and compliance status through intuitive
+              interactive charts.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Implementation Guidance</h3>
+            <p>
+              Access detailed guidance on deploying and optimizing security
+              controls.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="architecture-docs">
+        <h2>Architecture Documentation</h2>
+        <ul>
+          <li>
+            <a
+              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Current Architecture</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/STATEDIAGRAM.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              >State Diagrams</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FLOWCHART.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Process Flowcharts</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SWOT.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              >SWOT Analysis</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/MINDMAP.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Mindmap</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Performance Testing</a
+            >
+          </li>
+        </ul>
+      </section>
+      <h2>Documentation Overview</h2>
+      <p>
+        This documentation is automatically generated from the source code and
+        documentation files in the repository. It includes API reference, type
+        definitions, architecture diagrams, and more to help you understand the
+        CIA Compliance Manager codebase.
+      </p>
+    </main>
+    <footer>
+      <p>&copy; 2025 CIA Compliance Manager. All rights reserved.</p>
+    </footer>
+  </body>
 </html>

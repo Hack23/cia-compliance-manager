@@ -1,6 +1,6 @@
 # CIA Compliance Manager Mindmap
 
-This mindmap provides a visual overview of the CIA Compliance Manager's architecture, components, and key concepts.
+This mindmap provides a visual overview of the CIA Compliance Manager components, relationships, and concepts. It serves as a mental model to understand how different parts of the system fit together.
 
 ## 📚 Related Architecture Documentation
 
@@ -25,74 +25,111 @@ This mindmap provides a visual overview of the CIA Compliance Manager's architec
 
 ## System Overview Mindmap
 
-**💼 Business Focus:** Maps the core business domains of the application, showing how the CIA triad integrates with business analysis, compliance frameworks, and architectural components.
+```mermaid
+mindmap
+  root((CIA Compliance<br>Manager))
 
-**🔒 Security Focus:** Illustrates the security progression across each CIA element (Availability, Integrity, Confidentiality) from basic to very high levels, with corresponding implementation approaches.
+    %% Core Security Domains
+    id(CIA Security Domains)
+      id1(Confidentiality)
+        id1.1[Access Controls]
+        id1.2[Encryption]
+        id1.3[Zero Trust]
+      id2(Integrity)
+        id2.1[Data Validation]
+        id2.2[Hash Verification]
+        id2.3[Blockchain]
+      id3(Availability)
+        id3.1[Uptime SLAs]
+        id3.2[RTO/RPO]
+        id3.3[Disaster Recovery]
+
+    %% Business Impact
+    id4(Business Impact Analysis)
+      id4.1[Financial Impact]
+      id4.2[Operational Impact]
+      id4.3[Reputational Impact]
+      id4.4[Regulatory Impact]
+      id4.5[Strategic Impact]
+
+    %% Compliance Mapping
+    id5(Compliance Frameworks)
+      id5.1[NIST 800-53]
+      id5.2[ISO 27001]
+      id5.3[NIST CSF]
+      id5.4[GDPR]
+      id5.5[HIPAA]
+      id5.6[SOC2]
+      id5.7[PCI DSS]
+
+    %% Implementation
+    id6(Implementation)
+      id6.1[Cost Estimation]
+        id6.1.1{{CAPEX}}
+        id6.1.2{{OPEX}}
+        id6.1.3{{ROI}}
+      id6.2[Technical Details]
+        id6.2.1{{Tools}}
+        id6.2.2{{Technologies}}
+        id6.2.3{{Controls}}
+      id6.3[Resources]
+        id6.3.1{{Personnel}}
+        id6.3.2{{Time}}
+        id6.3.3{{Training}}
+
+    %% User Interface
+    id7(UI Components)
+      id7.1[Security Widgets]
+      id7.2[Data Visualization]
+      id7.3[Forms & Controls]
+      id7.4[Assessment Reports]
+
+    %% Architecture
+    id8(Technical Architecture)
+      id8.1[React Components]
+      id8.2[State Management]
+      id8.3[Service Layer]
+      id8.4[TypeScript Types]
+```
+
+## Component Relationships Mindmap
 
 ```mermaid
 mindmap
-  root((CIA Compliance<br/>Manager))
-    CIA Triad Components
-      Availability
-        Basic["Basic (95% uptime)"]
-        Moderate["Moderate (99% uptime)"]
-        High["High (99.9% uptime)"]
-        Very High["Very High (99.99% uptime)"]
-      Integrity
-        Basic["Manual Validation"]
-        Moderate["Automated Validation"]
-        High["Blockchain Validation"]
-        Very High["Smart Contracts"]
-      Confidentiality
-        Basic["Public Data"]
-        Moderate["Restricted Data"]
-        High["Confidential Data"]
-        Very High["Secret Data"]
-    Business Analysis
-      Impact Assessment
-        Financial Impact
-        Operational Impact
-        Reputational Impact
-        Regulatory Impact
-      Cost Estimation
-        CAPEX["Capital Expenditure"]
-        OPEX["Operational Expenditure"]
-        ROI Analysis
-      Value Creation
-        Market Access
-        Risk Reduction
-        Competitive Advantage
-    Compliance
-      Frameworks
-        NIST["NIST 800-53"]
-        ISO["ISO 27001:2022"]
-        CSF["NIST CSF 2.0"]
-        GDPR
-        HIPAA
-        SOC2
-      Status Tracking
-        Compliant
-        Non-Compliant
-        Partial Compliance
-    Architecture
-      Presentation Layer((Presentation Layer))
-        React UI
-        Widget System
-        Theme Provider
-      Application Layer((Application Layer))
-        State Management
-        Widget Registry
-        Event Bus
-        Error Boundary
-      Domain Layer((Domain Layer))
-        CIA Models
-        BIA Engine
-        Cost Calculator
-        Framework Mapper
-      Security Layer((Security Layer))
-        CSP["Content Security Policy"]
-        Input Validation
-        Output Sanitization
+  root((Component<br>Relationships))
+
+    %% Dashboard Components
+    id(Dashboard)
+      id1[Security Level Widget]
+      id2[Security Summary Widget]
+      id3[CIA Impact Widgets]
+      id4[Compliance Status Widget]
+      id5[Cost Estimation Widget]
+      id6[Value Creation Widget]
+      id7[Security Visualization]
+      id8[Technical Details Widget]
+      id9[Business Impact Widget]
+
+    %% Services & Utilities
+    id10(Services)
+      id10.1[CIA Content Service]
+      id10.2[Compliance Service]
+      id10.3[Cost Calculation Service]
+      id10.4[Business Impact Service]
+
+    %% Hooks
+    id11(Custom Hooks)
+      id11.1[useCIAOptions]
+      id11.2[useSecurityLevels]
+      id11.3[useComplianceStatus]
+      id11.4[useBusinessImpact]
+
+    %% Common Components
+    id12(Common UI)
+      id12.1[StatusBadge]
+      id12.2[KeyValuePair]
+      id12.3[ValueDisplay]
+      id12.4[MetricsCard]
 ```
 
 ## Technical Implementation Mindmap
@@ -199,3 +236,18 @@ These visualizations complement the C4 diagrams by providing a different way to 
 - 🟢 Architecture - green shades
 - 🌈 Security levels - graduated colors from orange (basic) to green (very high)
 </div>
+
+## Color Legend
+
+The color scheme used in these mindmaps follows these conventions:
+
+| Element Type           | Color                  | Description                        |
+| ---------------------- | ---------------------- | ---------------------------------- |
+| Main Categories        | #a0c8e0 (Medium Blue)  | Primary classification areas       |
+| CIA Components         | #bbdefb (Light Blue)   | Core CIA triad elements            |
+| Business Impact        | #c8e6c9 (Light Green)  | Business and operational concerns  |
+| Compliance Frameworks  | #d1c4e9 (Light Purple) | Regulatory and compliance elements |
+| Implementation Details | #86b5d9 (Darker Blue)  | Technical implementation concerns  |
+| UI Components          | #bbdefb (Light Blue)   | Interface and user interaction     |
+
+This color scheme aligns with the cool color palette used throughout the architecture documentation to provide visual consistency.
