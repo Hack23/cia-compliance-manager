@@ -1,8 +1,8 @@
-[**CIA Compliance Manager Documentation v0.8.2**](README.md)
+[**CIA Compliance Manager Documentation v0.8.4**](README.md)
 
 ***
 
-# CIA Compliance Manager Documentation v0.8.2
+# CIA Compliance Manager Documentation v0.8.4
 
 ## Common Components
  KeyValuePairProps
