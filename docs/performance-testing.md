@@ -197,6 +197,6 @@ If widgets or operations fail to meet performance requirements:
 
 ## Integration with CI/CD Pipeline
 
-Performance tests are integrated into the CI/CD workflow as described in our [CI/CD Workflows](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/WORKFLOWS.md) documentation. This ensures consistent monitoring of performance metrics throughout the development process.
+Performance tests are integrated into the CI/CD workflow as described in our [CI/CD Workflows](/workspaces/cia-compliance-manager/docs/architecture/WORKFLOWS.md) documentation. This ensures consistent monitoring of performance metrics throughout the development process.
 
 For information about automated performance reporting, see the [HTML Dashboard](#analyzing-performance-reports) section above.

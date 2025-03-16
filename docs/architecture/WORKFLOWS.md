@@ -236,7 +236,7 @@ performance-tests:
       - cypress/reports/performance/
 ```
 
-For detailed information about the performance testing framework and methodology, see the [Performance Testing Documentation](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md).
+For detailed information about the performance testing framework and methodology, see the [Performance Testing Documentation](/workspaces/cia-compliance-manager/docs/performance-testing.md).
 
 ## Future CI/CD Improvements
 
@@ -248,4 +248,4 @@ The following enhancements are planned for future CI/CD pipeline improvements:
 4. **Containerization**: Docker image building and container scanning
 5. **Environment-Specific Deployments**: Staging and production deployment pipelines
 
-For details on the future architecture direction, see [FUTURE_ARCHITECTURE.md](./FUTURE_ARCHITECTURE.md).
+For details on the future architecture direction, see [FUTURE_ARCHITECTURE.md](FUTURE_ARCHITECTURE.md).
