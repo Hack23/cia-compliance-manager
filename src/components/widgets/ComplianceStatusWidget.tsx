@@ -84,6 +84,21 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
     return "error";
   };
 
+  // Handle cases where data might not be available
+  if (!complianceData) {
+    return (
+      <WidgetContainer
+        title="Compliance Status"
+        icon="📋"
+        className={className}
+        testId={testId}
+        error={new Error("Compliance data not available")}
+      >
+        <div>Compliance data not available</div>
+      </WidgetContainer>
+    );
+  }
+
   return (
     <WidgetContainer
       title="Compliance Status"

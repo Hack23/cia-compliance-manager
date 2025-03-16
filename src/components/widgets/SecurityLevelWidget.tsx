@@ -104,6 +104,20 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
     );
   }
 
+  // Handle cases where data might not be available
+  if (!availabilityLevel || !integrityLevel || !confidentialityLevel) {
+    return (
+      <WidgetContainer
+        title={title}
+        className={className}
+        testId={testId}
+        error={new Error("Security levels not available")}
+      >
+        <div>Security levels not available</div>
+      </WidgetContainer>
+    );
+  }
+
   return (
     <WidgetContainer title={title} className={className} testId={testId}>
       <div className="p-4">

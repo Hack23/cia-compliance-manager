@@ -58,6 +58,21 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
     [availabilityLevel, integrityLevel, confidentialityLevel, securityLevel]
   );
 
+  // Handle cases where data might not be available
+  if (!resources || resources.length === 0) {
+    return (
+      <WidgetContainer
+        title="Security Resources"
+        icon="📚"
+        className={className}
+        testId={testId}
+        error={new Error("Security resources not available")}
+      >
+        <div>Security resources not available</div>
+      </WidgetContainer>
+    );
+  }
+
   // Get unique categories for filtering
   const categories = useMemo(() => {
     const uniqueCategories = Array.from(

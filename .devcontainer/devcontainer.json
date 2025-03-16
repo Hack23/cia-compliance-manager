@@ -62,6 +62,7 @@
   // Fix: Use proper shutdown action instead of postStopCommand
   "shutdownAction": "none",
   "tasks": {
-    "build": "npm install && npm run build"
+    "build": "npm install && npm run build",
+    "test": "npm install && npm run test:ci"
   }
 }

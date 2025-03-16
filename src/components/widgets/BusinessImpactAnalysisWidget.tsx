@@ -124,6 +124,21 @@ const BusinessImpactAnalysisWidget: React.FC<
   const { impact, metrics, color, level, icon, badgeVariant, label } =
     getActiveImpact();
 
+  // Handle cases where data might not be available
+  if (!impact) {
+    return (
+      <WidgetContainer
+        title="Business Impact Analysis"
+        icon="📊"
+        className={className}
+        testId={testId}
+        error={new Error("Business impact details not available")}
+      >
+        <div>Business impact details not available</div>
+      </WidgetContainer>
+    );
+  }
+
   return (
     <WidgetContainer
       title="Business Impact Analysis"
