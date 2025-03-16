@@ -8,7 +8,7 @@
 
 > **IntegrityImpactWidget**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/IntegrityImpactWidget.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/IntegrityImpactWidget.tsx#L25)
+Defined in: [src/components/widgets/IntegrityImpactWidget.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/IntegrityImpactWidget.tsx#L25)
 
 IntegrityImpactWidget displays impacts and recommendations related to data integrity
 based on the selected security level. Uses common components for consistent UI/UX.

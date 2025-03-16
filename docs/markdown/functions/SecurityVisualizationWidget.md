@@ -8,7 +8,7 @@
 
 > **SecurityVisualizationWidget**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:67](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/SecurityVisualizationWidget.tsx#L67)
+Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:67](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/SecurityVisualizationWidget.tsx#L67)
 
 SecurityVisualizationWidget displays a radar chart visualization of the security profile
 and risk assessment metrics based on the selected security levels.

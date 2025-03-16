@@ -8,7 +8,7 @@
 
 > **setupChartJsMock**(): `object`
 
-Defined in: [src/utils/test-helpers.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/utils/test-helpers.ts#L82)
+Defined in: [src/utils/test-helpers.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/utils/test-helpers.ts#L82)
 
 Creates a mock for Chart.js to be used in tests
 

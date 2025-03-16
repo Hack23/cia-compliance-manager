@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactAnalysisWidgetProps
 
-Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L13)
+Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L13)
 
 Props for the BusinessImpactAnalysisWidget component
 
@@ -16,7 +16,7 @@ Props for the BusinessImpactAnalysisWidget component
 
 > `optional` **activeComponent**: `"availability"` \| `"integrity"` \| `"confidentiality"`
 
-Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L20)
+Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L20)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:20](https:/
 
 > **availabilityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L14)
+Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L14)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:14](https:/
 
 > `optional` **className**: `string`
 
-Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L18)
+Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L18)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:18](https:/
 
 > **confidentialityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L16)
+Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L16)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:16](https:/
 
 > **integrityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L15)
+Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L15)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:15](https:/
 
 > `optional` **securityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L17)
+Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L17)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:17](https:/
 
 > `optional` **testId**: `string`
 
-Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L19)
+Defined in: [src/components/widgets/BusinessImpactAnalysisWidget.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/BusinessImpactAnalysisWidget.tsx#L19)

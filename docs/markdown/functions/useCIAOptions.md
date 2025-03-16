@@ -8,7 +8,7 @@
 
 > **useCIAOptions**(): `object`
 
-Defined in: [src/hooks/useCIAOptions.ts:706](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/hooks/useCIAOptions.ts#L706)
+Defined in: [src/hooks/useCIAOptions.ts:706](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/hooks/useCIAOptions.ts#L706)
 
 Custom hook for accessing CIA security options with memoization
 

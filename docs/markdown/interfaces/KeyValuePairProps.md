@@ -6,7 +6,7 @@
 
 # Interface: KeyValuePairProps
 
-Defined in: [src/types/componentProps.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/componentProps.tsx#L29)
+Defined in: [src/types/componentProps.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/types/componentProps.tsx#L29)
 
 Props for the KeyValuePair component that displays a key-value combination.
 
@@ -16,7 +16,7 @@ Props for the KeyValuePair component that displays a key-value combination.
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.tsx:35](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/componentProps.tsx#L35)
+Defined in: [src/types/componentProps.tsx:35](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/types/componentProps.tsx#L35)
 
 Optional CSS class name
 
@@ -26,7 +26,7 @@ Optional CSS class name
 
 > `optional` **horizontal**: `boolean`
 
-Defined in: [src/types/componentProps.tsx:39](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/componentProps.tsx#L39)
+Defined in: [src/types/componentProps.tsx:39](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/types/componentProps.tsx#L39)
 
 Whether to render in a horizontal layout
 
@@ -36,7 +36,7 @@ Whether to render in a horizontal layout
 
 > **label**: `string`
 
-Defined in: [src/types/componentProps.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/componentProps.tsx#L31)
+Defined in: [src/types/componentProps.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/types/componentProps.tsx#L31)
 
 Label to display for the key
 
@@ -46,7 +46,7 @@ Label to display for the key
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/componentProps.tsx:37](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/componentProps.tsx#L37)
+Defined in: [src/types/componentProps.tsx:37](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/types/componentProps.tsx#L37)
 
 Optional test ID for component selection in tests
 
@@ -56,6 +56,6 @@ Optional test ID for component selection in tests
 
 > **value**: `ReactNode`
 
-Defined in: [src/types/componentProps.tsx:33](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/componentProps.tsx#L33)
+Defined in: [src/types/componentProps.tsx:33](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/types/componentProps.tsx#L33)
 
 Value to display

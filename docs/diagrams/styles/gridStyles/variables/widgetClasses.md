@@ -8,4 +8,4 @@
 
 > `const` **widgetClasses**: "\n  bg-white \n  dark:bg-gray-800 \n  rounded-lg \n  shadow-md \n  overflow-hidden \n  flex \n  flex-col\n  h-full\n  border \n  border-gray-200 \n  dark:border-gray-700\n  transition-all\n  duration-300\n  ease-in-out\n  hover:shadow-lg\n  hover:-translate\n"
 
-Defined in: [src/styles/gridStyles.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/styles/gridStyles.ts#L16)
+Defined in: [src/styles/gridStyles.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/styles/gridStyles.ts#L16)

@@ -6,7 +6,7 @@
 
 # Interface: TestProviderProps
 
-Defined in: [src/utils/test-utils.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/utils/test-utils.tsx#L5)
+Defined in: [src/utils/test-utils.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/utils/test-utils.tsx#L5)
 
 ## Properties
 
@@ -14,4 +14,4 @@ Defined in: [src/utils/test-utils.tsx:5](https://github.com/Hack23/cia-complianc
 
 > `optional` **theme**: `"dark"` \| `"light"`
 
-Defined in: [src/utils/test-utils.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/utils/test-utils.tsx#L6)
+Defined in: [src/utils/test-utils.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/utils/test-utils.tsx#L6)

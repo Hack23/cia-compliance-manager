@@ -8,7 +8,7 @@
 
 > **getBusinessImpact**(`component`, `level`): [`BusinessImpactDetails`](../interfaces/BusinessImpactDetails.md)
 
-Defined in: [src/services/ciaContentService.ts:1374](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/services/ciaContentService.ts#L1374)
+Defined in: [src/services/ciaContentService.ts:1374](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/services/ciaContentService.ts#L1374)
 
 Get comprehensive business impact details
 

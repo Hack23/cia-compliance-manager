@@ -8,7 +8,7 @@
 
 > **getProtectionLevel**(`level`): `string`
 
-Defined in: [src/services/ciaContentService.ts:1387](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/services/ciaContentService.ts#L1387)
+Defined in: [src/services/ciaContentService.ts:1387](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/services/ciaContentService.ts#L1387)
 
 Get protection level description based on confidentiality level
 

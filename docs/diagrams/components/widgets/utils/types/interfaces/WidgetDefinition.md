@@ -6,7 +6,7 @@
 
 # Interface: WidgetDefinition\<P\>
 
-Defined in: [src/components/widgets/utils/types.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/utils/types.ts#L18)
+Defined in: [src/components/widgets/utils/types.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/types.ts#L18)
 
 Configuration for a widget definition
 
@@ -20,7 +20,7 @@ Configuration for a widget definition
 
 > **component**: [`WidgetComponentType`](../type-aliases/WidgetComponentType.md)\<`P`\>
 
-Defined in: [src/components/widgets/utils/types.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/utils/types.ts#L21)
+Defined in: [src/components/widgets/utils/types.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/types.ts#L21)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [src/components/widgets/utils/types.ts:21](https://github.com/Hack23
 
 > `optional` **defaultProps**: `Partial`\<`P`\>
 
-Defined in: [src/components/widgets/utils/types.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/utils/types.ts#L22)
+Defined in: [src/components/widgets/utils/types.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/types.ts#L22)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [src/components/widgets/utils/types.ts:22](https://github.com/Hack23
 
 > `optional` **icon**: `string`
 
-Defined in: [src/components/widgets/utils/types.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/utils/types.ts#L23)
+Defined in: [src/components/widgets/utils/types.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/types.ts#L23)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [src/components/widgets/utils/types.ts:23](https://github.com/Hack23
 
 > **id**: `string`
 
-Defined in: [src/components/widgets/utils/types.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/utils/types.ts#L19)
+Defined in: [src/components/widgets/utils/types.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/types.ts#L19)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [src/components/widgets/utils/types.ts:19](https://github.com/Hack23
 
 > `optional` **order**: `number`
 
-Defined in: [src/components/widgets/utils/types.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/utils/types.ts#L25)
+Defined in: [src/components/widgets/utils/types.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/types.ts#L25)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [src/components/widgets/utils/types.ts:25](https://github.com/Hack23
 
 > `optional` **size**: `"small"` \| `"medium"` \| `"large"` \| `"full"`
 
-Defined in: [src/components/widgets/utils/types.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/utils/types.ts#L24)
+Defined in: [src/components/widgets/utils/types.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/types.ts#L24)
 
 ***
 
@@ -68,4 +68,4 @@ Defined in: [src/components/widgets/utils/types.ts:24](https://github.com/Hack23
 
 > **title**: `string`
 
-Defined in: [src/components/widgets/utils/types.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/utils/types.ts#L20)
+Defined in: [src/components/widgets/utils/types.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/types.ts#L20)

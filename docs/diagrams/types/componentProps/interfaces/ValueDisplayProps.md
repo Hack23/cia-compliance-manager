@@ -6,7 +6,7 @@
 
 # Interface: ValueDisplayProps
 
-Defined in: [src/types/componentProps.tsx:65](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/componentProps.tsx#L65)
+Defined in: [src/types/componentProps.tsx:65](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/types/componentProps.tsx#L65)
 
 Props for the ValueDisplay component that formats and displays values.
 
@@ -16,7 +16,7 @@ Props for the ValueDisplay component that formats and displays values.
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.tsx:73](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/componentProps.tsx#L73)
+Defined in: [src/types/componentProps.tsx:73](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/types/componentProps.tsx#L73)
 
 Optional CSS class name
 
@@ -26,7 +26,7 @@ Optional CSS class name
 
 > `optional` **prefix**: `string`
 
-Defined in: [src/types/componentProps.tsx:69](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/componentProps.tsx#L69)
+Defined in: [src/types/componentProps.tsx:69](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/types/componentProps.tsx#L69)
 
 Optional prefix (e.g. "$")
 
@@ -36,7 +36,7 @@ Optional prefix (e.g. "$")
 
 > `optional` **suffix**: `string`
 
-Defined in: [src/types/componentProps.tsx:71](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/componentProps.tsx#L71)
+Defined in: [src/types/componentProps.tsx:71](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/types/componentProps.tsx#L71)
 
 Optional suffix (e.g. "%")
 
@@ -46,7 +46,7 @@ Optional suffix (e.g. "%")
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/componentProps.tsx:75](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/componentProps.tsx#L75)
+Defined in: [src/types/componentProps.tsx:75](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/types/componentProps.tsx#L75)
 
 Optional test ID for component selection in tests
 
@@ -56,6 +56,6 @@ Optional test ID for component selection in tests
 
 > **value**: `string` \| `number`
 
-Defined in: [src/types/componentProps.tsx:67](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/componentProps.tsx#L67)
+Defined in: [src/types/componentProps.tsx:67](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/types/componentProps.tsx#L67)
 
 Value to display

@@ -8,7 +8,7 @@
 
 > **getWidgetTitle**(`type`): `string`
 
-Defined in: [src/utils/widgetHelpers.tsx:64](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/utils/widgetHelpers.tsx#L64)
+Defined in: [src/utils/widgetHelpers.tsx:64](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/utils/widgetHelpers.tsx#L64)
 
 Get the title for a widget type
 

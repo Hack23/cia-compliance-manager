@@ -8,7 +8,7 @@
 
 > `const` **WIDGET\_ICONS**: `object`
 
-Defined in: [src/constants/appConstants.ts:464](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/constants/appConstants.ts#L464)
+Defined in: [src/constants/appConstants.ts:464](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/constants/appConstants.ts#L464)
 
 ## Type declaration
 

@@ -8,7 +8,7 @@
 
 > **createMockBusinessImpact**(`overrides`): [`BusinessImpactDetails`](../interfaces/BusinessImpactDetails.md)
 
-Defined in: [src/utils/test-helpers.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/utils/test-helpers.ts#L7)
+Defined in: [src/utils/test-helpers.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/utils/test-helpers.ts#L7)
 
 Creates a mock BusinessImpactDetails object for testing
 

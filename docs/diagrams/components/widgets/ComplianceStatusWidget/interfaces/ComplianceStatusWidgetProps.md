@@ -6,7 +6,7 @@
 
 # Interface: ComplianceStatusWidgetProps
 
-Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/ComplianceStatusWidget.tsx#L21)
+Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/ComplianceStatusWidget.tsx#L21)
 
 ComplianceStatusWidgetProps interface for the compliance status widget props
 
@@ -16,7 +16,7 @@ ComplianceStatusWidgetProps interface for the compliance status widget props
 
 > `optional` **availabilityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:23](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/ComplianceStatusWidget.tsx#L23)
+Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:23](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/ComplianceStatusWidget.tsx#L23)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:23](https://githu
 
 > `optional` **className**: `string`
 
-Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:26](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/ComplianceStatusWidget.tsx#L26)
+Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:26](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/ComplianceStatusWidget.tsx#L26)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:26](https://githu
 
 > `optional` **confidentialityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/ComplianceStatusWidget.tsx#L25)
+Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/ComplianceStatusWidget.tsx#L25)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:25](https://githu
 
 > `optional` **integrityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/ComplianceStatusWidget.tsx#L24)
+Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/ComplianceStatusWidget.tsx#L24)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:24](https://githu
 
 > `optional` **securityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:22](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/ComplianceStatusWidget.tsx#L22)
+Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:22](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/ComplianceStatusWidget.tsx#L22)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:22](https://githu
 
 > `optional` **testId**: `string`
 
-Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/ComplianceStatusWidget.tsx#L27)
+Defined in: [src/components/widgets/ComplianceStatusWidget.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/ComplianceStatusWidget.tsx#L27)
