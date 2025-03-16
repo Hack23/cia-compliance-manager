@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.4**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: MockHandlers
 
-Defined in: [src/types/testTypes.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/a6d8d6a2cab2160940b9a047208c12088d7e02cf/src/types/testTypes.tsx#L17)
+Defined in: [src/types/testTypes.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/testTypes.tsx#L17)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/types/testTypes.tsx:17](https://github.com/Hack23/cia-complianc
 
 > **setAvailability**: (`level`) => `void`
 
-Defined in: [src/types/testTypes.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/a6d8d6a2cab2160940b9a047208c12088d7e02cf/src/types/testTypes.tsx#L18)
+Defined in: [src/types/testTypes.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/testTypes.tsx#L18)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [src/types/testTypes.tsx:18](https://github.com/Hack23/cia-complianc
 
 > **setConfidentiality**: (`level`) => `void`
 
-Defined in: [src/types/testTypes.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/a6d8d6a2cab2160940b9a047208c12088d7e02cf/src/types/testTypes.tsx#L20)
+Defined in: [src/types/testTypes.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/testTypes.tsx#L20)
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [src/types/testTypes.tsx:20](https://github.com/Hack23/cia-complianc
 
 > **setIntegrity**: (`level`) => `void`
 
-Defined in: [src/types/testTypes.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/a6d8d6a2cab2160940b9a047208c12088d7e02cf/src/types/testTypes.tsx#L19)
+Defined in: [src/types/testTypes.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/testTypes.tsx#L19)
 
 #### Parameters
 

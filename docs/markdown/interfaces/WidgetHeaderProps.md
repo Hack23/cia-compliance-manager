@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.4**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetHeaderProps
 
-Defined in: [src/types/componentProps.tsx:103](https://github.com/Hack23/cia-compliance-manager/blob/a6d8d6a2cab2160940b9a047208c12088d7e02cf/src/types/componentProps.tsx#L103)
+Defined in: [src/types/componentProps.tsx:103](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/componentProps.tsx#L103)
 
 Props for the WidgetHeader component that provides a consistent header for widgets.
 
@@ -16,7 +16,7 @@ Props for the WidgetHeader component that provides a consistent header for widge
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.tsx:107](https://github.com/Hack23/cia-compliance-manager/blob/a6d8d6a2cab2160940b9a047208c12088d7e02cf/src/types/componentProps.tsx#L107)
+Defined in: [src/types/componentProps.tsx:107](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/componentProps.tsx#L107)
 
 Optional CSS class name
 
@@ -26,7 +26,7 @@ Optional CSS class name
 
 > `optional` **icon**: `string`
 
-Defined in: [src/types/componentProps.tsx:111](https://github.com/Hack23/cia-compliance-manager/blob/a6d8d6a2cab2160940b9a047208c12088d7e02cf/src/types/componentProps.tsx#L111)
+Defined in: [src/types/componentProps.tsx:111](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/componentProps.tsx#L111)
 
 Icon to display in the header
 
@@ -36,7 +36,7 @@ Icon to display in the header
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/componentProps.tsx:109](https://github.com/Hack23/cia-compliance-manager/blob/a6d8d6a2cab2160940b9a047208c12088d7e02cf/src/types/componentProps.tsx#L109)
+Defined in: [src/types/componentProps.tsx:109](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/componentProps.tsx#L109)
 
 Optional test ID for component selection in tests
 
@@ -46,6 +46,6 @@ Optional test ID for component selection in tests
 
 > **title**: `string`
 
-Defined in: [src/types/componentProps.tsx:105](https://github.com/Hack23/cia-compliance-manager/blob/a6d8d6a2cab2160940b9a047208c12088d7e02cf/src/types/componentProps.tsx#L105)
+Defined in: [src/types/componentProps.tsx:105](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/componentProps.tsx#L105)
 
 Title of the widget
