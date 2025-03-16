@@ -29,6 +29,10 @@ import { typeAdapters } from "../types/widgets";
  * Main component for the CIA Classification App
  */
 const CIAClassificationApp: React.FC = () => {
+  // Get version from package.json - using hardcoded value from package.json
+  // to avoid issues with process.env in the browser context
+  const appVersion = "0.8.0";
+
   // State for security levels
   const [availability, setAvailability] = useState<string>(
     SECURITY_LEVELS.NONE
@@ -182,25 +186,78 @@ const CIAClassificationApp: React.FC = () => {
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-4 transition-colors duration-300">
         <div className="w-full mx-auto">
           {/* App title and theme toggle */}
-          <div className="app-title shadow-lg rounded-xl transition-colors duration-300">
-            <h1
-              data-testid={APP_TEST_IDS.APP_TITLE}
-              className="text-2xl font-bold text-gray-800 dark:text-gray-100 transition-colors duration-300 flex items-center"
-            >
-              <img
-                src="/icon-192.png"
-                alt="CIA Compliance Manager Logo"
-                style={{ height: "48px" }}
-                className="w-auto mr-1"
-              />
-              {UI_TEXT.APP_TITLE}
-            </h1>
+          <div className="app-title shadow-lg rounded-xl transition-colors duration-300 dark:security-card p-4 flex items-center justify-between">
+            <div>
+              <h1
+                data-testid={APP_TEST_IDS.APP_TITLE}
+                className="text-2xl font-bold text-gray-800 dark:text-gray-100 dark:widget-title transition-colors duration-300 flex items-center"
+              >
+                <img
+                  src="https://hack23.github.io/cia-compliance-manager/icon-192.png"
+                  alt="CIA Compliance Manager Logo"
+                  style={{ height: "48px" }}
+                  className="w-auto mr-1"
+                />
+                {UI_TEXT.APP_TITLE}
+              </h1>
+              <div
+                className="terminal-text text-xs flex items-center mt-1"
+                style={{ color: "#22c55e" }}
+              >
+                <span
+                  className="mr-1"
+                  data-testid="app-indicator"
+                  style={{ color: "#22c55e" }}
+                >
+                  ■
+                </span>
+                <span
+                  className="mr-2"
+                  data-testid="app-version"
+                  style={{ color: "#22c55e" }}
+                >
+                  v{appVersion}
+                </span>
+                <a
+                  href="https://github.com/Hack23/cia-compliance-manager"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline mr-2"
+                  data-testid="source-link"
+                  style={{ color: "#22c55e" }}
+                >
+                  Source
+                </a>
+                <span style={{ color: "#22c55e" }}>|</span>
+                <a
+                  href="https://hack23.github.io/cia-compliance-manager/documentation.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline mx-2"
+                  data-testid="docs-link"
+                  style={{ color: "#22c55e" }}
+                >
+                  Doc
+                </a>
+                <span style={{ color: "#22c55e" }}>|</span>
+                <a
+                  href="https://hack23.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline"
+                  data-testid="author-link"
+                  style={{ color: "#22c55e" }}
+                >
+                  Hack23
+                </a>
+              </div>
+            </div>
             <button
               data-testid={APP_TEST_IDS.THEME_TOGGLE}
               onClick={toggleDarkMode}
               className={`px-4 py-2 rounded-md flex items-center transition-all duration-300 ${
                 darkMode
-                  ? "bg-black border border-green-500 hover:border-green-400 hover:bg-gray-900"
+                  ? "bg-black border border-green-500 hover:border-green-400 hover:bg-gray-900 cyberbutton"
                   : "bg-blue-500 hover:bg-blue-600 text-white"
               }`}
             >
