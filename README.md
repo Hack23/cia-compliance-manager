@@ -83,13 +83,13 @@ For comprehensive security documentation, visit the [Security Documentation](htt
 
 The following resources are available in our [Documentation Portal](https://hack23.github.io/cia-compliance-manager/documentation.html):
 
-| Resource                  | Description                                             | Link                                                                         |
-| ------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| API Documentation         | Detailed API reference for all components               | [View](https://hack23.github.io/cia-compliance-manager/api)                  |
-| Architecture Diagrams     | C4 model diagrams and architecture documentation        | [View](https://hack23.github.io/cia-compliance-manager/architecture)         |
-| Diagrams & Visualizations | UML and Mermaid diagrams showing system relationships   | [View](https://hack23.github.io/cia-compliance-manager/diagrams)             |
-| Code Coverage             | Test coverage reports and metrics                       | [View](https://hack23.github.io/cia-compliance-manager/coverage)             |
-| Project Documentation     | C4 model diagrams and other architectural documentation | [View](/workspaces/cia-compliance-manager/docs/architecture/ARCHITECTURE.md) |
+| Resource                  | Description                                           | Link                                                                                         |
+| ------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| API Documentation         | Detailed API reference for all components             | [View](https://hack23.github.io/cia-compliance-manager/api)                                  |
+| Architecture Diagrams     | C4 model diagrams and architecture documentation      | [View](/workspaces/cia-compliance-manager/docs/architecture/ARCHITECTURE.md)                 |
+| Diagrams & Visualizations | UML and Mermaid diagrams showing system relationships | [View](https://hack23.github.io/cia-compliance-manager/diagrams)                             |
+| Code Coverage             | Test coverage reports and metrics                     | [View](https://hack23.github.io/cia-compliance-manager/coverage)                             |
+| Dependencies              | Visual representation of module dependencies          | [View](https://hack23.github.io/cia-compliance-manager/dependencies/module-dependencies.svg) |
 
 ## 📝 Key Documentation Sections
 

@@ -49,13 +49,13 @@ stateDiagram-v2
     CostEstimated --> CostEstimated: Update Cost Estimates
 
     %% Cool color scheme
-    classDef default fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef baseState fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
     classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
     classDef analysis fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
     classDef action fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
     classDef end fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
 
-    class Initialized,PartiallyConfigured,Configured default
+    class Initialized,PartiallyConfigured,Configured baseState
     class Analyzed,ComplianceMapped analysis
     class CostEstimated,RecommendationsGenerated action
     class Implemented end
@@ -91,7 +91,7 @@ stateDiagram-v2
     NonCompliant --> [*]: Generate Non-Compliance Report
 
     %% Cool color scheme
-    classDef default fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef baseState fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
     classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
     classDef process fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
     classDef noncompliant fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
@@ -99,7 +99,7 @@ stateDiagram-v2
     classDef compliant fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
     classDef remediation fill:#dae8fc,stroke:#333,stroke-width:1px,color:black
 
-    class NotEvaluated,Evaluating default
+    class NotEvaluated,Evaluating baseState
     class NonCompliant noncompliant
     class PartiallyCompliant partial
     class Compliant compliant
@@ -140,14 +140,14 @@ stateDiagram-v2
     Interactive --> [*]: Unmount
 
     %% Cool color scheme
-    classDef default fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef baseState fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
     classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
     classDef loading fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
     classDef data fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
     classDef interaction fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
     classDef error fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
 
-    class Initialized,Rendered default
+    class Initialized,Rendered baseState
     class Loading,Updating,Filtering,Expanding,Exporting loading
     class DataReceived,Exported data
     class Interactive,Expanded interaction

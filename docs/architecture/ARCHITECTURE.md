@@ -2,27 +2,27 @@
 
 This document serves as the primary entry point for the CIA Compliance Manager's architectural documentation. It provides a comprehensive view of the system's design using the C4 model approach, starting from a high-level system context and drilling down to component interactions.
 
-> **Note:** For a more interactive experience, you can also view this documentation in our [Documentation Portal](../documentation.html).
+> **Note:** For a more interactive experience, you can also view this documentation in our [Documentation Portal](https://hack23.github.io/cia-compliance-manager/documentation.html).
 
 ## 📚 Architecture Documentation Map
 
 <div class="documentation-map">
 
-| Document                                            | Type    | Focus           | Description                                                          | Documentation Link                                   |
-| --------------------------------------------------- | ------- | --------------- | -------------------------------------------------------------------- | ---------------------------------------------------- |
-| **[Current Architecture](ARCHITECTURE.md)**         | Core    | 🏛️ Architecture | C4 model showing current system containers, components, and dynamics | [View in Portal](../documentation.html#architecture) |
-| **[Future Architecture](FUTURE_ARCHITECTURE.md)**   | Future  | 🏛️ Architecture | Vision for context-aware security posture management platform        | [View in Portal](../documentation.html#architecture) |
-| **[State Diagrams](STATEDIAGRAM.md)**               | Current | 🔄 Behavior     | Security profile and compliance status state transitions             | [View in Portal](../documentation.html#diagrams)     |
-| **[Future State Diagrams](FUTURE_STATEDIAGRAM.md)** | Future  | 🔄 Behavior     | Context-aware and adaptive security state transitions                | [View in Portal](../documentation.html#diagrams)     |
-| **[Process Flowcharts](FLOWCHART.md)**              | Current | 🔄 Process      | Security assessment and compliance workflows                         | [View in Portal](../documentation.html#diagrams)     |
-| **[Future Flowcharts](FUTURE_FLOWCHART.md)**        | Future  | 🔄 Process      | ML-enhanced and context-aware workflows                              | [View in Portal](../documentation.html#diagrams)     |
-| **[Mindmaps](MINDMAP.md)**                          | Current | 🧠 Concept      | System structure and component relationships                         | [View in Portal](../documentation.html#diagrams)     |
-| **[Future Mindmaps](FUTURE_MINDMAP.md)**            | Future  | 🧠 Concept      | Evolution roadmap and capability expansion                           | [View in Portal](../documentation.html#diagrams)     |
-| **[SWOT Analysis](SWOT.md)**                        | Current | 💼 Business     | Strategic strengths, weaknesses, opportunities, and threats          | [View in Portal](../documentation.html#architecture) |
-| **[Future SWOT Analysis](FUTURE_SWOT.md)**          | Future  | 💼 Business     | Strategic analysis of context-aware security platform                | [View in Portal](../documentation.html#architecture) |
-| **[CI/CD Workflows](WORKFLOWS.md)**                 | Current | 🔧 DevOps       | Build, test, and deployment automation                               | [View in Portal](../documentation.html#architecture) |
-| **[Future Workflows](FUTURE_WORKFLOWS.md)**         | Future  | 🔧 DevOps       | Advanced CI/CD with ML and security automation                       | [View in Portal](../documentation.html#architecture) |
-| **[Future Data Model](FUTURE_DATA_MODEL.md)**       | Future  | 📊 Data         | Enhanced context-aware data architecture                             | [View in Portal](../documentation.html#architecture) |
+| Document                                            | Type    | Focus           | Description                                                          | Documentation Link                                                                                |
+| --------------------------------------------------- | ------- | --------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| **[Current Architecture](ARCHITECTURE.md)**         | Core    | 🏛️ Architecture | C4 model showing current system containers, components, and dynamics | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#architecture) |
+| **[Future Architecture](FUTURE_ARCHITECTURE.md)**   | Future  | 🏛️ Architecture | Vision for context-aware security posture management platform        | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#architecture) |
+| **[State Diagrams](STATEDIAGRAM.md)**               | Current | 🔄 Behavior     | Security profile and compliance status state transitions             | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#diagrams)     |
+| **[Future State Diagrams](FUTURE_STATEDIAGRAM.md)** | Future  | 🔄 Behavior     | Context-aware and adaptive security state transitions                | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#diagrams)     |
+| **[Process Flowcharts](FLOWCHART.md)**              | Current | 🔄 Process      | Security assessment and compliance workflows                         | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#diagrams)     |
+| **[Future Flowcharts](FUTURE_FLOWCHART.md)**        | Future  | 🔄 Process      | ML-enhanced and context-aware workflows                              | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#diagrams)     |
+| **[Mindmaps](MINDMAP.md)**                          | Current | 🧠 Concept      | System structure and component relationships                         | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#diagrams)     |
+| **[Future Mindmaps](FUTURE_MINDMAP.md)**            | Future  | 🧠 Concept      | Evolution roadmap and capability expansion                           | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#diagrams)     |
+| **[SWOT Analysis](SWOT.md)**                        | Current | 💼 Business     | Strategic strengths, weaknesses, opportunities, and threats          | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#architecture) |
+| **[Future SWOT Analysis](FUTURE_SWOT.md)**          | Future  | 💼 Business     | Strategic analysis of context-aware security platform                | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#architecture) |
+| **[CI/CD Workflows](WORKFLOWS.md)**                 | Current | 🔧 DevOps       | Build, test, and deployment automation                               | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#architecture) |
+| **[Future Workflows](FUTURE_WORKFLOWS.md)**         | Future  | 🔧 DevOps       | Advanced CI/CD with ML and security automation                       | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#architecture) |
+| **[Future Data Model](FUTURE_DATA_MODEL.md)**       | Future  | 📊 Data         | Enhanced context-aware data architecture                             | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#architecture) |
 
 </div>
 
@@ -32,7 +32,7 @@ This document serves as the primary entry point for the CIA Compliance Manager's
 
 **🔒 Security Focus:** Demonstrates clear boundaries between internal system components and external data sources, establishing the trust boundaries for security analysis.
 
-> For interactive diagrams and visualizations, visit our [Documentation Portal](../documentation.html#diagrams)
+> For interactive diagrams and visualizations, visit our [Documentation Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#diagrams)
 
 ```mermaid
 C4Context
@@ -83,7 +83,7 @@ C4Context
 
 **🔧 Technical Focus:** Highlights how the single-page application architecture leverages React and TypeScript to create a responsive, client-side experience with centralized state management.
 
-> For API documentation related to these containers, see the [API Documentation](../documentation.html#api-documentation) section in our portal.
+> For API documentation related to these containers, see the [API Documentation](https://hack23.github.io/cia-compliance-manager/documentation.html#api-documentation) section in our portal.
 
 ```mermaid
 C4Container
@@ -157,7 +157,7 @@ C4Container
 
 **🔧 Technical Focus:** Illustrates the component-based approach to security assessment, with specialized components for selection, visualization, calculation, and recommendations.
 
-> For detailed module dependencies, see the [Dependencies](../documentation.html#dependencies) section in our documentation portal.
+> For detailed module dependencies, see the [Dependencies](https://hack23.github.io/cia-compliance-manager/documentation.html#dependencies) section in our documentation portal.
 
 ```mermaid
 C4Component
@@ -216,7 +216,7 @@ C4Component
 
 **📊 Data Flow Focus:** Reveals how changes to security levels propagate through the application state to update multiple visualization components.
 
-> For comprehensive code coverage information on these flows, see our [Code Coverage](../documentation.html#code-coverage) dashboard.
+> For comprehensive code coverage information on these flows, see our [Code Coverage](https://hack23.github.io/cia-compliance-manager/documentation.html#code-coverage) dashboard.
 
 ```mermaid
 C4Dynamic
@@ -348,4 +348,4 @@ The CIA Compliance Manager implements comprehensive testing strategies to ensure
 
 These testing strategies work together to ensure the CIA Compliance Manager delivers consistent, reliable functionality while maintaining its security controls and architecture integrity.
 
-> View our [Code Coverage Reports](../documentation.html#code-coverage) in the Documentation Portal for more details on test coverage.
+> View our [Code Coverage Reports](https://hack23.github.io/cia-compliance-manager/documentation.html#code-coverage) in the Documentation Portal for more details on test coverage.

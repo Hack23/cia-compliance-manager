@@ -58,13 +58,13 @@ flowchart TD
     N -->|No| O[End Assessment]
 
     %% Cool color scheme
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef startState fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
     classDef process fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
     classDef decision fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
     classDef action fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef end fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
+    classDef endState fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
 
-    class A,O start
+    class A,O startState
     class C1,C2,C3,D,E,F,G process
     class B,H,N decision
     class I,J,K,L,M action
@@ -97,13 +97,13 @@ flowchart TD
     K --> L[End Compliance Evaluation]
 
     %% Cool color scheme
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef startState fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
     classDef process fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
     classDef decision fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
     classDef status fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef end fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
+    classDef endState fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
 
-    class A,L start,end
+    class A,L startState
     class B,C,D,G,H,J,K process
     class E,I decision
     class F1,F2,F3 status
@@ -138,13 +138,13 @@ flowchart TD
     K --> L[End Cost Estimation]
 
     %% Cool color scheme
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef startState fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
     classDef calc fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
     classDef decision fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
     classDef result fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef end fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
+    classDef endState fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
 
-    class A,L start,end
+    class A,L startState
     class B,C1,C2,D,E,F,G,H calc
     class I decision
     class J1,J2,K result
