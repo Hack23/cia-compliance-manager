@@ -337,6 +337,15 @@ The CIA Compliance Manager implements comprehensive testing strategies to ensure
 - Test patterns for business outcomes and user flows
 - Custom commands and utilities for stable tests
 
+### Performance Testing Strategy
+
+[Performance Testing Framework](../performance-testing.md) - Our performance testing approach uses Cypress with custom commands to measure and verify application performance. The framework provides:
+
+- Operation measurement methodology
+- Performance baseline configuration
+- Visualization and reporting tools
+- Performance optimization guidance
+
 These testing strategies work together to ensure the CIA Compliance Manager delivers consistent, reliable functionality while maintaining its security controls and architecture integrity.
 
 > View our [Code Coverage Reports](../documentation.html#code-coverage) in the Documentation Portal for more details on test coverage.

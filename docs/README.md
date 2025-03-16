@@ -93,6 +93,7 @@ The following resources are available in our [Documentation Portal](https://hack
 - [Compliance Frameworks](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/frameworks/README.md) - Documentation on supported compliance frameworks
 - [Current Architecture](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md) - Current architecture documentation
 - [Future Architecture](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md) - Planned architectural improvements
+- [Performance Testing](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md) - Performance testing methodology and results
 
 ## 🚀 Getting Started
 

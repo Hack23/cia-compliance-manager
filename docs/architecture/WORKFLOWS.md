@@ -217,6 +217,27 @@ flowchart LR
     style DeployPages fill:#c8e6c9,stroke:#333,stroke-width:2px
 ```
 
+## CI/CD Integration
+
+Performance tests are integrated with CI/CD pipelines to catch performance regressions:
+
+```yaml
+# Excerpt from CI configuration
+stages:
+  - test
+  - performance
+
+performance-tests:
+  stage: performance
+  script:
+    - npm run cypress:run:perf
+  artifacts:
+    paths:
+      - cypress/reports/performance/
+```
+
+For detailed information about the performance testing framework and methodology, see the [Performance Testing Documentation](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md).
+
 ## Future CI/CD Improvements
 
 The following enhancements are planned for future CI/CD pipeline improvements:
