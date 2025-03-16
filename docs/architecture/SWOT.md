@@ -156,29 +156,23 @@ The CIA Compliance Manager has established several key strengths that provide a 
 ```mermaid
 mindmap
   root((Weaknesses))
-    style fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
     id1(Incomplete Widget Implementation)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id1.1[Some widgets need completion]
       id1.2[Missing edge-case handling]
       id1.3[Inconsistencies between widgets]
     id2(Limited Test Coverage)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id2.1[Below target coverage metrics]
       id2.2[Inconsistent test approaches]
       id2.3[Gaps in critical path testing]
     id3(Performance Optimization Needed)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id3.1[Unnecessary re-renders]
       id3.2[Missing memoization]
       id3.3[Complex calculations not optimized]
     id4(Data Inconsistencies)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id4.1[Inconsistent data structures]
       id4.2[Duplicate calculation logic]
       id4.3[Varying state management approaches]
     id5(Documentation Gaps)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id5.1[Incomplete JSDoc comments]
       id5.2[Missing business context]
       id5.3[Outdated architecture documentation]
@@ -203,29 +197,23 @@ As the project approaches v1.0, several weaknesses must be addressed:
 ```mermaid
 mindmap
   root((Opportunities))
-    style fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
     id1(Context-Aware Security)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id1.1[Industry-specific security profiles]
       id1.2[Regulatory adaptation by region]
       id1.3[Organization size tailored controls]
     id2(Compliance Framework Expansion)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id2.1[Additional frameworks support]
       id2.2[Framework version tracking]
       id2.3[Custom framework definition]
     id3(Integration Ecosystem Growth)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id3.1[SIEM/SOAR integrations]
       id3.2[GRC platform connections]
       id3.3[Ticketing system integration]
     id4(Business Intelligence Features)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id4.1[Enhanced ROI calculations]
       id4.2[Security investment dashboards]
       id4.3[Scenario modeling]
     id5(Machine Learning Enhancements)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id5.1[Recommendation engine]
       id5.2[Anomaly detection]
       id5.3[Predictive security analysis]
@@ -250,29 +238,23 @@ Looking beyond v1.0, several opportunities exist for growth and expansion:
 ```mermaid
 mindmap
   root((Threats))
-    style fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
     id1(Competing Security Platforms)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id1.1[Commercial GRC solutions]
       id1.2[Enterprise security suites]
       id1.3[Cloud provider offerings]
     id2(Changing Compliance Standards)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id2.1[Framework version updates]
       id2.2[New regulatory requirements]
       id2.3[Regional compliance variations]
     id3(Open Source Maintenance Challenges)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id3.1[Contributor availability]
       id3.2[Dependency maintenance]
       id3.3[Security vulnerability response time]
     id4(Complex Security Landscape)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id4.1[Evolving security threats]
       id4.2[Industry-specific security models]
       id4.3[Technical complexity requirements]
     id5(Limited Market Differentiation)
-      style fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
       id5.1[Feature commoditization]
       id5.2[Unclear value proposition]
       id5.3[Market positioning challenges]
