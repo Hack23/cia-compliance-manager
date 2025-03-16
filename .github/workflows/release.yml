@@ -91,6 +91,12 @@ jobs:
           PLAIN_VERSION="${PLAIN_VERSION#v}"
           npm version $PLAIN_VERSION --no-git-tag-version
 
+      - uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79 # v5.1.0
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          commit_message: "chore(release): bump version to ${{ github.event.inputs.version }}"
+          tagging_message: "${{ github.event.inputs.version }}"
+
       - name: Run unit tests with coverage
         run: xvfb-run --auto-servernum npm run test:ci
 
@@ -265,12 +271,6 @@ jobs:
           target-folder: docs
           branch: main
           clean: false
-
-      - uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79 # v5.1.0
-        if: github.event_name == 'workflow_dispatch'
-        with:
-          commit_message: "chore(release): bump version to ${{ github.event.inputs.version }}"
-          tagging_message: "${{ github.event.inputs.version }}"
 
 
   build:
