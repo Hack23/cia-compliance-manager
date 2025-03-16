@@ -1,7 +1,20 @@
 import react from "@vitejs/plugin-react";
+import { readFileSync } from "fs";
+import path from "path";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig as defineVitestConfig } from "vitest/config";
+
+// Read version from package.json
+interface PackageJson {
+  version: string;
+  name: string;
+  [key: string]: any;
+}
+
+const packageJson: PackageJson = JSON.parse(
+  readFileSync(path.resolve("./package.json"), "utf8")
+);
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,11 +32,16 @@ export default defineConfig({
       "Access-Control-Allow-Origin": "*",
     },
   },
+  // Make APP_VERSION available globally
+  define: {
+    APP_VERSION: JSON.stringify(packageJson.version),
+  },
   // Ensure proper JSX handling
   esbuild: {
     target: "es2022",
     jsx: "automatic",
   },
+  base: "./",
   build: {
     outDir: "build",
     sourcemap: true,

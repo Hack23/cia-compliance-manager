@@ -53,53 +53,6 @@ jobs:
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
           echo "Version: ${VERSION}"
 
-      - name: Setup Node.js
-        uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
-        with:
-          node-version: "20"
-          cache: "npm"
-
-      - name: Cache dependencies
-        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4.2.2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Set Version for release
-        if: github.event_name == 'workflow_dispatch'
-        run: |
-          PLAIN_VERSION="${{ github.event.inputs.version }}"
-          # Remove 'v' prefix if present
-          PLAIN_VERSION="${PLAIN_VERSION#v}"
-          npm version $PLAIN_VERSION --no-git-tag-version
-
-      - uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79 # v5.1.0
-        if: github.event_name == 'workflow_dispatch'
-        with:
-          commit_message: "chore(release): bump version to ${{ github.event.inputs.version }}"
-          tagging_message: "${{ github.event.inputs.version }}"
-
-  test:
-    name: Run Tests
-    needs: prepare
-    runs-on: ubuntu-latest
-    steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
-        with:
-          egress-policy: audit
-
-      - name: Checkout repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        with:
-          # Use GITHUB_REF directly for tag events
-          ref: ${{ github.event_name == 'push' && github.ref || github.event_name == 'workflow_dispatch' && github.event.inputs.version || '' }}
-
       - name: Setup display and dependencies
         run: |
           sudo apt-get update
@@ -130,6 +83,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Set Version for release
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          PLAIN_VERSION="${{ github.event.inputs.version }}"
+          # Remove 'v' prefix if present
+          PLAIN_VERSION="${PLAIN_VERSION#v}"
+          npm version $PLAIN_VERSION --no-git-tag-version
+
       - name: Run unit tests with coverage
         run: xvfb-run --auto-servernum npm run test:ci
 
@@ -140,22 +101,181 @@ jobs:
         run: |
           xvfb-run --auto-servernum --server-args="-screen 0 1280x720x24" npm run test:e2e
         env:
-          CYPRESS_VIDEO: true
+          CYPRESS_VIDEO: false
 
-      - name: Upload test reports
-        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
+      - name: Install GraphViz
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y graphviz
+
+      # Run tests with coverage
+      - name: Run tests with coverage
+        run: npm run coverage
+
+      # Create coverage directory in docs
+      - name: Prepare coverage directory
+        run: mkdir -p docs/coverage docs/dependencies
+
+      # Generate documentation bundle
+      - name: Generate Coverage
+        run: npm run docs:bundle
+
+      - name: Create combined index page
+        run: |
+          cat > docs/documentation.html << EOF
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>CIA Compliance Manager Documentation</title>
+            <style>
+              body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                line-height: 1.6;
+                color: #333;
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 20px;
+              }
+              header {
+                text-align: center;
+                margin-bottom: 2rem;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid #eaeaea;
+              }
+              h1 { margin-top: 0; color: #0366d6; }
+              h2 { color: #0366d6; margin-top: 2rem; }
+              .cards {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 1rem;
+              }
+              .card {
+                border: 1px solid #e1e4e8;
+                border-radius: 6px;
+                padding: 1.5rem;
+                background: white;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+              }
+              .card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+              }
+              .card h3 {
+                margin-top: 0;
+                margin-bottom: 1rem;
+                color: #0366d6;
+              }
+              .card p {
+                margin-bottom: 1rem;
+                color: #586069;
+              }
+              .card a {
+                display: inline-block;
+                padding: 0.5rem 1rem;
+                border-radius: 4px;
+                background: #0366d6;
+                color: white;
+                text-decoration: none;
+              }
+              .card a:hover {
+                background: #024ea4;
+              }
+              footer {
+                margin-top: 3rem;
+                padding-top: 1rem;
+                border-top: 1px solid #eaeaea;
+                text-align: center;
+                font-size: 0.9rem;
+                color: #586069;
+              }
+            </style>
+          </head>
+          <body>
+            <header>
+              <h1>CIA Compliance Manager Documentation</h1>
+              <p>Comprehensive documentation for the CIA (Confidentiality, Integrity, Availability) Compliance Manager</p>
+            </header>
+            
+            <div class="cards">              
+              
+              <div class="card">
+                <h3>Project Architecture</h3>
+                <p>C4 model diagrams and other architectural documentation.</p>
+                <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md">View Architecture</a>
+              </div>
+
+              <div class="card">
+                <h3>API Documentation</h3>
+                <p>Detailed API reference for all components, types, and functions used in the application.</p>
+                <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/api/globals.md">View API Docs</a>
+              </div>
+
+              <div class="card">
+                <h3>Unit Test</h3>
+                <p>Visual representation of unit test and results of the codebase.</p>
+                <a href="https://hack23.github.io/cia-compliance-manager/test-results/">Test Results</a>
+                <p>Unit testing strategy ,Unit tests verify that the application works correctly from a functional perspective.</p>
+                <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md">View Unit Test Plan</a>
+              </div>                            
+              
+              <div class="card">
+                <h3>Unit Test Code Coverage</h3>
+                <p>Test coverage reports showing how much of the codebase is covered by tests.</p>
+                <a href="https://hack23.github.io/cia-compliance-manager/coverage/index.html">View Coverage Report</a>
+              </div>
+
+              <div class="card">
+                <h3>E2E System Test</h3>
+                <p>Test reports showing result .</p>
+                <a href="https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/index.html">View Test Report</a>
+                <p>(E2E) testing strategy ,E2E tests verify that the application works correctly from a user's perspective.</p>
+                <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md">View E2E Test Plan</a>
+              </div>
+
+            </div>
+            
+            <h2>Documentation Overview</h2>
+            <p>
+              This documentation is automatically generated from the source code and documentation files in the repository.
+              It includes API reference, type definitions, architecture diagrams, and more to help you understand the
+              CIA Compliance Manager codebase.
+            </p>
+
+            <footer>
+              <p>Generated on $(date) | <a href="https://github.com/Hack23/cia-compliance-manager">GitHub Repository</a></p>
+            </footer>
+          </body>
+          </html>
+          EOF
+
+      - name: Merge  e2e test report
+        run: npm test:e2ereportmerge 
+
+      - name: Generate e2e html report
+        run: npm test:e2ereporthtmlall 
+
+      # Only deploy on push to main, not PRs
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@6c2d9db40f9296374acc17b90404b6e8864128c8 # v4.7.3
         with:
-          name: test-reports
-          path: |
-            coverage
-            cypress/videos
-            cypress/screenshots
-            cypress/results
-          if-no-files-found: warn
+          folder: docs
+          target-folder: docs
+          branch: main
+          clean: false
+
+      - uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79 # v5.1.0
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          commit_message: "chore(release): bump version to ${{ github.event.inputs.version }}"
+          tagging_message: "${{ github.event.inputs.version }}"
+
 
   build:
     name: Build Release Package
-    needs: [prepare, test]
+    needs: [prepare]
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
@@ -303,3 +423,17 @@ jobs:
             artifacts/security/cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip.intoto.jsonl
             artifacts/security/cia-compliance-manager-${{ needs.prepare.outputs.version }}.spdx.json.intoto.jsonl
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Remove old version of APP
+        run: rm -rf docs/index.html.html assets 
+
+      - name: Deploy new version of APP
+        run: cp -r build/* docs/
+
+      - name: Deploy APP To GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@6c2d9db40f9296374acc17b90404b6e8864128c8 # v4.7.3
+        with:
+          folder: docs
+          target-folder: docs
+          branch: main
+          clean: false
