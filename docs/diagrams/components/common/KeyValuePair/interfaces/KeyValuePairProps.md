@@ -6,7 +6,7 @@
 
 # Interface: KeyValuePairProps
 
-Defined in: [src/components/common/KeyValuePair.tsx:4](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/common/KeyValuePair.tsx#L4)
+Defined in: [src/components/common/KeyValuePair.tsx:4](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/common/KeyValuePair.tsx#L4)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/components/common/KeyValuePair.tsx:4](https://github.com/Hack23
 
 > `optional` **className**: `string`
 
-Defined in: [src/components/common/KeyValuePair.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/common/KeyValuePair.tsx#L9)
+Defined in: [src/components/common/KeyValuePair.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/common/KeyValuePair.tsx#L9)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/components/common/KeyValuePair.tsx:9](https://github.com/Hack23
 
 > **label**: `string`
 
-Defined in: [src/components/common/KeyValuePair.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/common/KeyValuePair.tsx#L5)
+Defined in: [src/components/common/KeyValuePair.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/common/KeyValuePair.tsx#L5)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/components/common/KeyValuePair.tsx:5](https://github.com/Hack23
 
 > `optional` **labelClassName**: `string`
 
-Defined in: [src/components/common/KeyValuePair.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/common/KeyValuePair.tsx#L8)
+Defined in: [src/components/common/KeyValuePair.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/common/KeyValuePair.tsx#L8)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/components/common/KeyValuePair.tsx:8](https://github.com/Hack23
 
 > `optional` **testId**: `string`
 
-Defined in: [src/components/common/KeyValuePair.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/common/KeyValuePair.tsx#L10)
+Defined in: [src/components/common/KeyValuePair.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/common/KeyValuePair.tsx#L10)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/components/common/KeyValuePair.tsx:10](https://github.com/Hack2
 
 > **value**: `ReactNode`
 
-Defined in: [src/components/common/KeyValuePair.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/common/KeyValuePair.tsx#L6)
+Defined in: [src/components/common/KeyValuePair.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/common/KeyValuePair.tsx#L6)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [src/components/common/KeyValuePair.tsx:6](https://github.com/Hack23
 
 > `optional` **valueClassName**: `string`
 
-Defined in: [src/components/common/KeyValuePair.tsx:7](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/common/KeyValuePair.tsx#L7)
+Defined in: [src/components/common/KeyValuePair.tsx:7](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/common/KeyValuePair.tsx#L7)

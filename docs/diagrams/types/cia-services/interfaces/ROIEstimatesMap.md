@@ -6,7 +6,7 @@
 
 # Interface: ROIEstimatesMap
 
-Defined in: [src/types/cia-services.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/types/cia-services.ts#L15)
+Defined in: [src/types/cia-services.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia-services.ts#L15)
 
 Interface for storing ROI estimates by security level
 
@@ -16,7 +16,7 @@ Interface for storing ROI estimates by security level
 
 > **HIGH**: [`ROIMetrics`](ROIMetrics.md)
 
-Defined in: [src/types/cia-services.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/types/cia-services.ts#L19)
+Defined in: [src/types/cia-services.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia-services.ts#L19)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/cia-services.ts:19](https://github.com/Hack23/cia-complia
 
 > **LOW**: [`ROIMetrics`](ROIMetrics.md)
 
-Defined in: [src/types/cia-services.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/types/cia-services.ts#L17)
+Defined in: [src/types/cia-services.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia-services.ts#L17)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/cia-services.ts:17](https://github.com/Hack23/cia-complia
 
 > **MODERATE**: [`ROIMetrics`](ROIMetrics.md)
 
-Defined in: [src/types/cia-services.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/types/cia-services.ts#L18)
+Defined in: [src/types/cia-services.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia-services.ts#L18)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/cia-services.ts:18](https://github.com/Hack23/cia-complia
 
 > **NONE**: [`ROIMetrics`](ROIMetrics.md)
 
-Defined in: [src/types/cia-services.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/types/cia-services.ts#L16)
+Defined in: [src/types/cia-services.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia-services.ts#L16)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/types/cia-services.ts:16](https://github.com/Hack23/cia-complia
 
 > **VERY\_HIGH**: [`ROIMetrics`](ROIMetrics.md)
 
-Defined in: [src/types/cia-services.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/types/cia-services.ts#L20)
+Defined in: [src/types/cia-services.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia-services.ts#L20)

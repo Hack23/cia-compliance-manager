@@ -6,7 +6,7 @@
 
 # Interface: ValueDisplayProps
 
-Defined in: [src/components/common/ValueDisplay.tsx:4](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/common/ValueDisplay.tsx#L4)
+Defined in: [src/components/common/ValueDisplay.tsx:4](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/common/ValueDisplay.tsx#L4)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/components/common/ValueDisplay.tsx:4](https://github.com/Hack23
 
 > `optional` **label**: `string`
 
-Defined in: [src/components/common/ValueDisplay.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/common/ValueDisplay.tsx#L8)
+Defined in: [src/components/common/ValueDisplay.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/common/ValueDisplay.tsx#L8)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/components/common/ValueDisplay.tsx:8](https://github.com/Hack23
 
 > `optional` **size**: `"sm"` \| `"md"` \| `"lg"`
 
-Defined in: [src/components/common/ValueDisplay.tsx:7](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/common/ValueDisplay.tsx#L7)
+Defined in: [src/components/common/ValueDisplay.tsx:7](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/common/ValueDisplay.tsx#L7)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/components/common/ValueDisplay.tsx:7](https://github.com/Hack23
 
 > `optional` **testId**: `string`
 
-Defined in: [src/components/common/ValueDisplay.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/common/ValueDisplay.tsx#L9)
+Defined in: [src/components/common/ValueDisplay.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/common/ValueDisplay.tsx#L9)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/components/common/ValueDisplay.tsx:9](https://github.com/Hack23
 
 > **value**: `string` \| `number`
 
-Defined in: [src/components/common/ValueDisplay.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/common/ValueDisplay.tsx#L5)
+Defined in: [src/components/common/ValueDisplay.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/common/ValueDisplay.tsx#L5)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [src/components/common/ValueDisplay.tsx:5](https://github.com/Hack23
 
 > `optional` **variant**: `"info"` \| `"success"` \| `"warning"` \| `"primary"` \| `"danger"`
 
-Defined in: [src/components/common/ValueDisplay.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/components/common/ValueDisplay.tsx#L6)
+Defined in: [src/components/common/ValueDisplay.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/common/ValueDisplay.tsx#L6)

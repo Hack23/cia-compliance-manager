@@ -8,7 +8,7 @@
 
 > **isSecurityResource**(`value`): `boolean`
 
-Defined in: [src/utils/typeGuards.ts:228](https://github.com/Hack23/cia-compliance-manager/blob/cb6149c89796a3270553cf52dea8f2c5b402dd17/src/utils/typeGuards.ts#L228)
+Defined in: [src/utils/typeGuards.ts:228](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/utils/typeGuards.ts#L228)
 
 Type guard for security resource objects
 
