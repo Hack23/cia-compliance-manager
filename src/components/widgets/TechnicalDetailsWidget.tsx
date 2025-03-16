@@ -1,10 +1,14 @@
 import React, { useMemo, useState } from "react";
-import { CIA_COMPONENT_ICONS, CIA_LABELS } from "../../constants/appConstants";
-import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
+import {
+  CIA_COMPONENT_ICONS,
+  CIA_LABELS,
+  IMPLEMENTATION_COSTS, // Import the implementation costs mapping
+} from "../../constants/appConstants";
+import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants"; // Import from the correct file
 import { TECHNICAL_DETAILS_TEST_IDS } from "../../constants/testIds";
 import ciaContentService from "../../services/ciaContentService";
 import { SecurityLevel } from "../../types/cia";
-import StatusBadge from "../common/StatusBadge";
+import StatusBadge from "../common/StatusBadge"; // Import StatusBadge component
 import WidgetContainer from "../common/WidgetContainer";
 
 /**
@@ -206,17 +210,53 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   const implementationDetails = useMemo(() => {
     if (!activeDetails?.details) return null;
 
+    const level = activeDetails.level as SecurityLevel;
+
+    // Get default values based on the selected security level
+    const defaultEffort = {
+      development: getDefaultDevelopmentEffort(level),
+      maintenance: getDefaultMaintenanceEffort(level),
+      expertise: getDefaultExpertiseLevel(level),
+    };
+
     return {
       implementationSteps: activeDetails.details.implementationSteps || [],
-      effort: activeDetails.details.effort || {
-        development: "Not specified",
-        maintenance: "Not specified",
-        expertise: "Not specified",
+      effort: {
+        development:
+          activeDetails.details.effort?.development ||
+          defaultEffort.development,
+        maintenance:
+          activeDetails.details.effort?.maintenance ||
+          defaultEffort.maintenance,
+        expertise:
+          activeDetails.details.effort?.expertise || defaultEffort.expertise,
       },
       codeExamples: activeDetails.details.codeExamples || [],
       technicalImplementation: activeDetails.details.technicalImplementation,
     };
   }, [activeDetails]);
+
+  // Get implementation costs for the selected component and level
+  const implementationCosts = useMemo(() => {
+    let level: SecurityLevel;
+
+    if (activeTab === "availability") {
+      level = availabilityLevel as SecurityLevel;
+    } else if (activeTab === "integrity") {
+      level = integrityLevel as SecurityLevel;
+    } else {
+      level = confidentialityLevel as SecurityLevel;
+    }
+
+    // Get implementation costs for the selected level
+    return (
+      IMPLEMENTATION_COSTS[level] || {
+        developmentEffort: getDefaultDevelopmentEffort(level),
+        maintenance: getDefaultMaintenanceEffort(level),
+        expertise: getDefaultExpertiseLevel(level),
+      }
+    );
+  }, [activeTab, availabilityLevel, integrityLevel, confidentialityLevel]);
 
   // Create sample implementation code based on selected levels
   const sampleImplementationCode = useMemo(() => {
@@ -378,46 +418,47 @@ Active component: ${activeTab}`;
               className="text-gray-700 dark:text-gray-300 text-sm"
               data-testid={TECHNICAL_DETAILS_TEST_IDS.DEVELOPMENT_EFFORT}
             >
-              {implementationDetails?.effort?.development || "Not specified"}
+              {implementationDetails?.effort?.development ||
+                getDefaultDevelopmentEffort(
+                  activeDetails?.level as SecurityLevel
+                )}
             </p>
           </div>
           <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
             <h5 className="text-sm font-medium mb-2 flex items-center">
               <span className="mr-2">🔧</span>
-              Maintenance Level
+              Maintenance
             </h5>
-            <p
-              className="text-gray-700 dark:text-gray-300 text-sm"
-              data-testid={TECHNICAL_DETAILS_TEST_IDS.MAINTENANCE_LEVEL}
-            >
-              {implementationDetails?.effort?.maintenance || "Not specified"}
+            <p className="text-gray-700 dark:text-gray-300 text-sm">
+              {implementationDetails?.effort?.maintenance ||
+                getDefaultMaintenanceEffort(
+                  activeDetails?.level as SecurityLevel
+                )}
             </p>
           </div>
           <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
             <h5 className="text-sm font-medium mb-2 flex items-center">
-              <span className="mr-2">🧠</span>
+              <span className="mr-2">👨‍💻</span>
               Required Expertise
             </h5>
-            <p
-              className="text-gray-700 dark:text-gray-300 text-sm"
-              data-testid={TECHNICAL_DETAILS_TEST_IDS.REQUIRED_EXPERTISE}
-            >
-              {implementationDetails?.effort?.expertise || "Not specified"}
+            <p className="text-gray-700 dark:text-gray-300 text-sm">
+              {implementationDetails?.effort?.expertise ||
+                getDefaultExpertiseLevel(activeDetails?.level as SecurityLevel)}
             </p>
           </div>
         </div>
 
-        {/* Technical Reference */}
+        {/* Terminal Implementation Display */}
         <div className="mt-6">
-          <h4 className="text-md font-medium mb-2">Technical Reference</h4>
-          <div className="technical-terminal">
+          <h4 className="text-md font-medium mb-2">Implementation Reference</h4>
+          <div className="technical-terminal shadow-md">
             <div className="terminal-header">
-              <div className="flex">
+              <div className="flex space-x-2">
                 <div className="terminal-dot red"></div>
                 <div className="terminal-dot yellow"></div>
                 <div className="terminal-dot green"></div>
               </div>
-              <div className="terminal-title">security-implementation.sh</div>
+              <div className="terminal-title">Terminal</div>
             </div>
             <div className="terminal-content">
               <pre className="text-xs overflow-x-auto p-2">

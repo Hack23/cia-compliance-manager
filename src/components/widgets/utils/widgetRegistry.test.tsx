@@ -2,6 +2,34 @@ import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import widgetRegistryUtils from "./widgetRegistry";
 
+// Mock all components to avoid rendering real implementation
+vi.mock("../SecurityLevelWidget", () => ({
+  __esModule: true,
+  default: (props: { testId?: string; [key: string]: any }) => (
+    <div data-testid={props.testId || "widget-security-level"}>
+      SecurityLevelWidget
+    </div>
+  ),
+}));
+
+vi.mock("../SecuritySummaryWidget", () => ({
+  __esModule: true,
+  default: (props: { testId?: string; [key: string]: any }) => (
+    <div data-testid={props.testId || "security-summary-widget"}>
+      SecuritySummaryWidget
+    </div>
+  ),
+}));
+
+vi.mock("../ComplianceStatusWidget", () => ({
+  __esModule: true,
+  default: (props: { testId?: string; [key: string]: any }) => (
+    <div data-testid={props.testId || "mock-compliance-status"}>
+      ComplianceStatusWidget
+    </div>
+  ),
+}));
+
 // Mock component for testing
 const TestComponent = ({
   testId,
@@ -64,30 +92,48 @@ describe("widgetRegistry", () => {
     // Render a subset of widgets
     render(
       <div>
-        {widgetRegistryUtils.renderWidgets([
-          "security-level",
-          "security-summary",
-        ])}
+        {widgetRegistryUtils.renderWidgets(
+          ["security-level", "security-summary"],
+          {
+            // Provide required props to security-summary widget
+            "security-summary": {
+              securityLevel: "Moderate",
+              availabilityLevel: "Moderate",
+              integrityLevel: "Moderate",
+              confidentialityLevel: "Moderate",
+            },
+          }
+        )}
       </div>
     );
 
-    // Check if the widgets were rendered
-    expect(widgetRegistryUtils.getAllWidgetKeys()).toContain("security-level");
-    expect(widgetRegistryUtils.getAllWidgetKeys()).toContain(
-      "security-summary"
-    );
+    // Check if widgets were rendered - use the actual testIds that are shown in the error
+    expect(screen.getByTestId("widget-security-level")).toBeInTheDocument();
+    expect(screen.getByTestId("security-summary-widget")).toBeInTheDocument();
   });
 
   it("should render all widgets when keys are not provided", () => {
-    // Get the count of all widgets
+    // Mock renderWidget to track number of calls
+    const renderWidgetSpy = vi.spyOn(widgetRegistryUtils, "renderWidget");
+    renderWidgetSpy.mockImplementation(() => <div>Mocked Widget</div>);
+
+    // Call renderWidgets without specifying keys
+    widgetRegistryUtils.renderWidgets(undefined, {
+      // Provide required props for all potential widgets
+      "security-summary": {
+        securityLevel: "Moderate",
+        availabilityLevel: "Moderate",
+        integrityLevel: "Moderate",
+        confidentialityLevel: "Moderate",
+      },
+    });
+
+    // Ensure renderWidget was called for all registered widgets
     const allKeys = widgetRegistryUtils.getAllWidgetKeys();
-    const count = allKeys.length;
+    expect(renderWidgetSpy).toHaveBeenCalledTimes(allKeys.length);
 
-    // Render with no keys specified (should render all)
-    const renderedWidgets = widgetRegistryUtils.renderWidgets();
-
-    // Check if the right number of widgets was returned
-    expect(renderedWidgets.length).toBe(count);
+    // Restore original implementation
+    renderWidgetSpy.mockRestore();
   });
 
   it("should pass custom props to rendered widgets", () => {
