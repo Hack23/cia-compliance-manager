@@ -4,7 +4,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig as defineVitestConfig } from "vitest/config";
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig({ 
   plugins: [
     // Enable React features
     react(),
@@ -24,6 +24,7 @@ export default defineConfig({
     target: "es2022",
     jsx: "automatic",
   },
+  base: "./",
   build: {
     outDir: "build",
     sourcemap: true,
