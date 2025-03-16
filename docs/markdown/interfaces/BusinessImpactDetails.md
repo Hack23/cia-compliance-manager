@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.0**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.1**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactDetails
 
-Defined in: [src/types/cia-services.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia-services.ts#L47)
+Defined in: [src/types/cia-services.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/cia-services.ts#L47)
 
 Enhanced interface for business impact details
 
@@ -16,7 +16,7 @@ Enhanced interface for business impact details
 
 > **financial**: `object`
 
-Defined in: [src/types/cia-services.ts:49](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia-services.ts#L49)
+Defined in: [src/types/cia-services.ts:49](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/cia-services.ts#L49)
 
 #### annualRevenueLoss?
 
@@ -36,7 +36,7 @@ Defined in: [src/types/cia-services.ts:49](https://github.com/Hack23/cia-complia
 
 > **operational**: `object`
 
-Defined in: [src/types/cia-services.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia-services.ts#L54)
+Defined in: [src/types/cia-services.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/cia-services.ts#L54)
 
 #### description
 
@@ -56,7 +56,7 @@ Defined in: [src/types/cia-services.ts:54](https://github.com/Hack23/cia-complia
 
 > `optional` **regulatory**: `object`
 
-Defined in: [src/types/cia-services.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia-services.ts#L68)
+Defined in: [src/types/cia-services.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/cia-services.ts#L68)
 
 #### complianceImpact?
 
@@ -76,7 +76,7 @@ Defined in: [src/types/cia-services.ts:68](https://github.com/Hack23/cia-complia
 
 > `optional` **reputational**: `object`
 
-Defined in: [src/types/cia-services.ts:59](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia-services.ts#L59)
+Defined in: [src/types/cia-services.ts:59](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/cia-services.ts#L59)
 
 #### description
 
@@ -92,7 +92,7 @@ Defined in: [src/types/cia-services.ts:59](https://github.com/Hack23/cia-complia
 
 > `optional` **strategic**: `object`
 
-Defined in: [src/types/cia-services.ts:63](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia-services.ts#L63)
+Defined in: [src/types/cia-services.ts:63](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/cia-services.ts#L63)
 
 #### competitiveAdvantage?
 
@@ -112,4 +112,4 @@ Defined in: [src/types/cia-services.ts:63](https://github.com/Hack23/cia-complia
 
 > **summary**: `string`
 
-Defined in: [src/types/cia-services.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia-services.ts#L48)
+Defined in: [src/types/cia-services.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/cia-services.ts#L48)

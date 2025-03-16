@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.0**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.1**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: AvailabilityDetail
 
-Defined in: [src/types/widgets.ts:141](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L141)
+Defined in: [src/types/widgets.ts:141](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L141)
 
 Types for Availability Impact Widget
 Compatible with CIADetails for easier integration
@@ -25,7 +25,7 @@ Compatible with CIADetails for easier integration
 
 > **businessImpact**: `string`
 
-Defined in: [src/types/widgets.ts:143](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L143)
+Defined in: [src/types/widgets.ts:143](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L143)
 
 #### Overrides
 
@@ -37,7 +37,7 @@ Defined in: [src/types/widgets.ts:143](https://github.com/Hack23/cia-compliance-
 
 > **description**: `string`
 
-Defined in: [src/types/widgets.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L142)
+Defined in: [src/types/widgets.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L142)
 
 #### Overrides
 
@@ -49,7 +49,7 @@ Defined in: [src/types/widgets.ts:142](https://github.com/Hack23/cia-compliance-
 
 > `optional` **impact**: `string`
 
-Defined in: [src/types/widgets.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L25)
+Defined in: [src/types/widgets.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L25)
 
 #### Inherited from
 
@@ -61,7 +61,7 @@ Defined in: [src/types/widgets.ts:25](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **mttr**: `string`
 
-Defined in: [src/types/widgets.ts:146](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L146)
+Defined in: [src/types/widgets.ts:146](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L146)
 
 ***
 
@@ -69,7 +69,7 @@ Defined in: [src/types/widgets.ts:146](https://github.com/Hack23/cia-compliance-
 
 > **recommendations**: `string`[]
 
-Defined in: [src/types/widgets.ts:145](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L145)
+Defined in: [src/types/widgets.ts:145](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L145)
 
 #### Overrides
 
@@ -81,7 +81,7 @@ Defined in: [src/types/widgets.ts:145](https://github.com/Hack23/cia-compliance-
 
 > `optional` **rpo**: `string`
 
-Defined in: [src/types/widgets.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L148)
+Defined in: [src/types/widgets.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L148)
 
 ***
 
@@ -89,7 +89,7 @@ Defined in: [src/types/widgets.ts:148](https://github.com/Hack23/cia-compliance-
 
 > `optional` **rto**: `string`
 
-Defined in: [src/types/widgets.ts:147](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L147)
+Defined in: [src/types/widgets.ts:147](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L147)
 
 ***
 
@@ -97,7 +97,7 @@ Defined in: [src/types/widgets.ts:147](https://github.com/Hack23/cia-compliance-
 
 > `optional` **technical**: `string`
 
-Defined in: [src/types/widgets.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L26)
+Defined in: [src/types/widgets.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L26)
 
 #### Inherited from
 
@@ -109,4 +109,4 @@ Defined in: [src/types/widgets.ts:26](https://github.com/Hack23/cia-compliance-m
 
 > **uptime**: `string`
 
-Defined in: [src/types/widgets.ts:144](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L144)
+Defined in: [src/types/widgets.ts:144](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L144)

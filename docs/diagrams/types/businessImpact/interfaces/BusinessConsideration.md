@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.0**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.1**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessConsideration
 
-Defined in: [src/types/businessImpact.ts:2](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/businessImpact.ts#L2)
+Defined in: [src/types/businessImpact.ts:2](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/businessImpact.ts#L2)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/types/businessImpact.ts:2](https://github.com/Hack23/cia-compli
 
 > **description**: `string`
 
-Defined in: [src/types/businessImpact.ts:4](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/businessImpact.ts#L4)
+Defined in: [src/types/businessImpact.ts:4](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/businessImpact.ts#L4)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/types/businessImpact.ts:4](https://github.com/Hack23/cia-compli
 
 > `optional` **impact**: `string`
 
-Defined in: [src/types/businessImpact.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/businessImpact.ts#L5)
+Defined in: [src/types/businessImpact.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/businessImpact.ts#L5)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/types/businessImpact.ts:5](https://github.com/Hack23/cia-compli
 
 > `optional` **risk**: `string`
 
-Defined in: [src/types/businessImpact.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/businessImpact.ts#L7)
+Defined in: [src/types/businessImpact.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/businessImpact.ts#L7)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/types/businessImpact.ts:7](https://github.com/Hack23/cia-compli
 
 > `optional` **title**: `string`
 
-Defined in: [src/types/businessImpact.ts:3](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/businessImpact.ts#L3)
+Defined in: [src/types/businessImpact.ts:3](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/businessImpact.ts#L3)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [src/types/businessImpact.ts:3](https://github.com/Hack23/cia-compli
 
 > `optional` **type**: `string`
 
-Defined in: [src/types/businessImpact.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/businessImpact.ts#L6)
+Defined in: [src/types/businessImpact.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/businessImpact.ts#L6)

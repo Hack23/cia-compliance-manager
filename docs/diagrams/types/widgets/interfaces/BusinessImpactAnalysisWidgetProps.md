@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.0**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.1**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactAnalysisWidgetProps
 
-Defined in: [src/types/widgets.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L193)
+Defined in: [src/types/widgets.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L193)
 
 Props for the BusinessImpactAnalysisWidget component
 
@@ -20,7 +20,7 @@ Props for the BusinessImpactAnalysisWidget component
 
 > `optional` **activeComponent**: `"availability"` \| `"integrity"` \| `"confidentiality"`
 
-Defined in: [src/types/widgets.ts:200](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L200)
+Defined in: [src/types/widgets.ts:200](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L200)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [src/types/widgets.ts:200](https://github.com/Hack23/cia-compliance-
 
 > **availabilityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:194](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L194)
+Defined in: [src/types/widgets.ts:194](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L194)
 
 #### Overrides
 
@@ -40,7 +40,7 @@ Defined in: [src/types/widgets.ts:194](https://github.com/Hack23/cia-compliance-
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/widgets.ts:198](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L198)
+Defined in: [src/types/widgets.ts:198](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L198)
 
 #### Overrides
 
@@ -52,7 +52,7 @@ Defined in: [src/types/widgets.ts:198](https://github.com/Hack23/cia-compliance-
 
 > **confidentialityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:196](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L196)
+Defined in: [src/types/widgets.ts:196](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L196)
 
 #### Overrides
 
@@ -64,7 +64,7 @@ Defined in: [src/types/widgets.ts:196](https://github.com/Hack23/cia-compliance-
 
 > **integrityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:195](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L195)
+Defined in: [src/types/widgets.ts:195](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L195)
 
 #### Overrides
 
@@ -76,7 +76,7 @@ Defined in: [src/types/widgets.ts:195](https://github.com/Hack23/cia-compliance-
 
 > `optional` **securityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:197](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L197)
+Defined in: [src/types/widgets.ts:197](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L197)
 
 #### Overrides
 
@@ -88,7 +88,7 @@ Defined in: [src/types/widgets.ts:197](https://github.com/Hack23/cia-compliance-
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.ts:199](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/widgets.ts#L199)
+Defined in: [src/types/widgets.ts:199](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/widgets.ts#L199)
 
 Test ID for component selection in tests
 

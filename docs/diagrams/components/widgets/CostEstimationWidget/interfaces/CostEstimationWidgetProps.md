@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.0**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.1**](../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CostEstimationWidgetProps
 
-Defined in: [src/components/widgets/CostEstimationWidget.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/CostEstimationWidget.tsx#L15)
+Defined in: [src/components/widgets/CostEstimationWidget.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/CostEstimationWidget.tsx#L15)
 
 Props for the CostEstimationWidget component
 
@@ -16,7 +16,7 @@ Props for the CostEstimationWidget component
 
 > **availabilityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/CostEstimationWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/CostEstimationWidget.tsx#L16)
+Defined in: [src/components/widgets/CostEstimationWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/CostEstimationWidget.tsx#L16)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/components/widgets/CostEstimationWidget.tsx:16](https://github.
 
 > `optional` **className**: `string`
 
-Defined in: [src/components/widgets/CostEstimationWidget.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/CostEstimationWidget.tsx#L19)
+Defined in: [src/components/widgets/CostEstimationWidget.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/CostEstimationWidget.tsx#L19)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/components/widgets/CostEstimationWidget.tsx:19](https://github.
 
 > **confidentialityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/CostEstimationWidget.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/CostEstimationWidget.tsx#L18)
+Defined in: [src/components/widgets/CostEstimationWidget.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/CostEstimationWidget.tsx#L18)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/components/widgets/CostEstimationWidget.tsx:18](https://github.
 
 > **integrityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/CostEstimationWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/CostEstimationWidget.tsx#L17)
+Defined in: [src/components/widgets/CostEstimationWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/CostEstimationWidget.tsx#L17)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/components/widgets/CostEstimationWidget.tsx:17](https://github.
 
 > `optional` **testId**: `string`
 
-Defined in: [src/components/widgets/CostEstimationWidget.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/CostEstimationWidget.tsx#L20)
+Defined in: [src/components/widgets/CostEstimationWidget.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/CostEstimationWidget.tsx#L20)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.0**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.1**](../../README.md)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: node\_modules/vite/types/importMeta.d.ts:5
 
 > `readonly` **APP\_VERSION**: `string`
 
-Defined in: [src/vite-env.d.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/vite-env.d.ts#L7)
+Defined in: [src/vite-env.d.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/vite-env.d.ts#L7)
 
 ***
 
@@ -66,7 +66,7 @@ Defined in: node\_modules/vite/types/importMeta.d.ts:11
 
 > `readonly` **VITE\_API\_URL**: `string`
 
-Defined in: [src/vite-env.d.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/vite-env.d.ts#L5)
+Defined in: [src/vite-env.d.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/vite-env.d.ts#L5)
 
 ***
 
@@ -74,7 +74,7 @@ Defined in: [src/vite-env.d.ts:5](https://github.com/Hack23/cia-compliance-manag
 
 > `readonly` **VITE\_BASE\_URL**: `string`
 
-Defined in: [src/vite-env.d.ts:4](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/vite-env.d.ts#L4)
+Defined in: [src/vite-env.d.ts:4](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/vite-env.d.ts#L4)
 
 ***
 
@@ -82,4 +82,4 @@ Defined in: [src/vite-env.d.ts:4](https://github.com/Hack23/cia-compliance-manag
 
 > `readonly` **VITE\_ENABLE\_ANALYTICS**: `string`
 
-Defined in: [src/vite-env.d.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/vite-env.d.ts#L6)
+Defined in: [src/vite-env.d.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/vite-env.d.ts#L6)

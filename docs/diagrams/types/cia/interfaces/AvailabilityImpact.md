@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.0**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.1**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: AvailabilityImpact
 
-Defined in: [src/types/cia.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia.ts#L21)
+Defined in: [src/types/cia.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/cia.ts#L21)
 
 Impact associated with the availability of the system
 
@@ -20,7 +20,7 @@ Impact associated with the availability of the system
 
 > **description**: `string`
 
-Defined in: [src/types/cia.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia.ts#L15)
+Defined in: [src/types/cia.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/cia.ts#L15)
 
 #### Inherited from
 
@@ -32,7 +32,7 @@ Defined in: [src/types/cia.ts:15](https://github.com/Hack23/cia-compliance-manag
 
 > **level**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/cia.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia.ts#L14)
+Defined in: [src/types/cia.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/cia.ts#L14)
 
 #### Inherited from
 
@@ -44,7 +44,7 @@ Defined in: [src/types/cia.ts:14](https://github.com/Hack23/cia-compliance-manag
 
 > **recoveryTime**: `string`
 
-Defined in: [src/types/cia.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia.ts#L23)
+Defined in: [src/types/cia.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/cia.ts#L23)
 
 ***
 
@@ -52,4 +52,4 @@ Defined in: [src/types/cia.ts:23](https://github.com/Hack23/cia-compliance-manag
 
 > **uptime**: `string`
 
-Defined in: [src/types/cia.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/cia.ts#L22)
+Defined in: [src/types/cia.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/cia.ts#L22)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.0**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.1**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getComponentImplementationDetails**(`component`, `level`): `ComponentTechnicalDetails`
 
-Defined in: [src/services/ciaContentService.ts:1396](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/services/ciaContentService.ts#L1396)
+Defined in: [src/services/ciaContentService.ts:1396](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/services/ciaContentService.ts#L1396)
 
 Get technical implementation details for each component and level
 

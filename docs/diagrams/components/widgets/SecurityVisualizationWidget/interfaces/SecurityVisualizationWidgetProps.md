@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.0**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.1**](../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityVisualizationWidgetProps
 
-Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/SecurityVisualizationWidget.tsx#L12)
+Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/SecurityVisualizationWidget.tsx#L12)
 
 Props interface for SecurityVisualizationWidget
 
@@ -16,7 +16,7 @@ Props interface for SecurityVisualizationWidget
 
 > **availabilityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/SecurityVisualizationWidget.tsx#L13)
+Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/SecurityVisualizationWidget.tsx#L13)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:13](https://
 
 > `optional` **className**: `string`
 
-Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/SecurityVisualizationWidget.tsx#L16)
+Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/SecurityVisualizationWidget.tsx#L16)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:16](https://
 
 > **confidentialityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/SecurityVisualizationWidget.tsx#L15)
+Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/SecurityVisualizationWidget.tsx#L15)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:15](https://
 
 > **integrityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/SecurityVisualizationWidget.tsx#L14)
+Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/SecurityVisualizationWidget.tsx#L14)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:14](https://
 
 > `optional` **testId**: `string`
 
-Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/SecurityVisualizationWidget.tsx#L17)
+Defined in: [src/components/widgets/SecurityVisualizationWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/SecurityVisualizationWidget.tsx#L17)

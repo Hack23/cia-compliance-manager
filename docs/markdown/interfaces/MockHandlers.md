@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.0**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.1**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: MockHandlers
 
-Defined in: [src/types/testTypes.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/testTypes.tsx#L17)
+Defined in: [src/types/testTypes.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/testTypes.tsx#L17)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/types/testTypes.tsx:17](https://github.com/Hack23/cia-complianc
 
 > **setAvailability**: (`level`) => `void`
 
-Defined in: [src/types/testTypes.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/testTypes.tsx#L18)
+Defined in: [src/types/testTypes.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/testTypes.tsx#L18)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [src/types/testTypes.tsx:18](https://github.com/Hack23/cia-complianc
 
 > **setConfidentiality**: (`level`) => `void`
 
-Defined in: [src/types/testTypes.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/testTypes.tsx#L20)
+Defined in: [src/types/testTypes.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/testTypes.tsx#L20)
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [src/types/testTypes.tsx:20](https://github.com/Hack23/cia-complianc
 
 > **setIntegrity**: (`level`) => `void`
 
-Defined in: [src/types/testTypes.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/types/testTypes.tsx#L19)
+Defined in: [src/types/testTypes.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/types/testTypes.tsx#L19)
 
 #### Parameters
 

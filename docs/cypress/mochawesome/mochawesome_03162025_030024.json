@@ -1,0 +1,187 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-03-16T03:00:01.289Z",
+    "end": "2025-03-16T03:00:24.950Z",
+    "duration": 23661,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ca3951cf-7c8a-4354-8d76-f291f0e5b25e",
+      "title": "",
+      "fullFile": "cypress/e2e/widgets/technical-details-widget.cy.ts",
+      "file": "cypress/e2e/widgets/technical-details-widget.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8310e630-ea00-429b-85ff-63528ea66934",
+          "title": "Technical Details Widget",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "technical-details widget should exist",
+              "fullTitle": "Technical Details Widget technical-details widget should exist",
+              "timedOut": null,
+              "duration": 3598,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(widgetName).should(\"exist\").scrollIntoView();\ncy.findWidget(widgetName).then(($widget) => {\n  expect($widget.text().trim().length).to.be.greaterThan(0);\n});",
+              "err": {},
+              "uuid": "1adc3422-dfda-4c47-a55e-32bced9ebc34",
+              "parentUUID": "8310e630-ea00-429b-85ff-63528ea66934",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "updates technical details when security levels change",
+              "fullTitle": "Technical Details Widget updates technical details when security levels change",
+              "timedOut": null,
+              "duration": 6611,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "testSecurityLevelChanges(\"technical-details\");",
+              "err": {},
+              "uuid": "4c13ee6c-5a91-4bc1-9fdf-1314d9e3ce14",
+              "parentUUID": "8310e630-ea00-429b-85ff-63528ea66934",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "switches between CIA tabs if present",
+              "fullTitle": "Technical Details Widget switches between CIA tabs if present",
+              "timedOut": null,
+              "duration": 4819,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"technical-details\").scrollIntoView();\ncy.findWidget(\"technical-details\").then(($widget) => {\n  const hasTabs = $widget.find(\n    '[role=\"tab\"], button:contains(\"Availability\"), button:contains(\"Integrity\")'\n  ).length > 0;\n  if (hasTabs) {\n    testWidgetTabSwitching(\"technical-details\");\n  } else {\n    cy.log(\"No tabs found in technical details widget - skipping tab test\");\n  }\n});",
+              "err": {},
+              "uuid": "1202b157-4e7f-41a6-a3c2-4ec20e7f61a1",
+              "parentUUID": "8310e630-ea00-429b-85ff-63528ea66934",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "displays implementation steps for selected security levels",
+              "fullTitle": "Technical Details Widget displays implementation steps for selected security levels",
+              "timedOut": null,
+              "duration": 3850,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"technical-details\").scrollIntoView();\ncy.setSecurityLevels(\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.MODERATE\n);\ncy.findWidget(\"technical-details\").within(() => {\n  cy.contains(/implementation|step|instructions|how to|procedure/i).should(\n    \"exist\"\n  );\n  cy.get(\"ol li, ul li, [data-testid*='step'], [class*='step']\").should(\n    \"have.length.at.least\",\n    1\n  );\n});",
+              "err": {},
+              "uuid": "370e1369-356f-4019-9fa5-893f205d006f",
+              "parentUUID": "8310e630-ea00-429b-85ff-63528ea66934",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "provides security-appropriate technical recommendations",
+              "fullTitle": "Technical Details Widget provides security-appropriate technical recommendations",
+              "timedOut": null,
+              "duration": 4596,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"technical-details\").scrollIntoView();\ncy.setSecurityLevels(\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.HIGH\n);\ncy.findWidget(\"technical-details\").within(() => {\n  cy.contains(\n    /encryption|authentication|authorization|audit|monitoring|redundancy/i\n  ).should(\"exist\");\n});\ncy.setSecurityLevels(\n  SECURITY_LEVELS.LOW,\n  SECURITY_LEVELS.LOW,\n  SECURITY_LEVELS.LOW\n);\ncy.findWidget(\"technical-details\").within(() => {\n  cy.contains(/password|backup|update|patch|basic/i).should(\"exist\");\n});",
+              "err": {},
+              "uuid": "2535b2ca-4fdd-4b49-9ee0-3ff405be00d7",
+              "parentUUID": "8310e630-ea00-429b-85ff-63528ea66934",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "1adc3422-dfda-4c47-a55e-32bced9ebc34",
+            "4c13ee6c-5a91-4bc1-9fdf-1314d9e3ce14",
+            "1202b157-4e7f-41a6-a3c2-4ec20e7f61a1",
+            "370e1369-356f-4019-9fa5-893f205d006f",
+            "2535b2ca-4fdd-4b49-9ee0-3ff405be00d7"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 23474,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "docs/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

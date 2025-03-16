@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.0**](../../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.1**](../../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetRegistry
 
-Defined in: [src/components/widgets/utils/types.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/utils/types.ts#L31)
+Defined in: [src/components/widgets/utils/types.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/utils/types.ts#L31)
 
 Widget registry interface
 
@@ -16,7 +16,7 @@ Widget registry interface
 
 > **get**(`id`): `undefined` \| [`WidgetDefinition`](WidgetDefinition.md)\<`any`\>
 
-Defined in: [src/components/widgets/utils/types.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/utils/types.ts#L33)
+Defined in: [src/components/widgets/utils/types.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/utils/types.ts#L33)
 
 #### Parameters
 
@@ -34,7 +34,7 @@ Defined in: [src/components/widgets/utils/types.ts:33](https://github.com/Hack23
 
 > **getAll**(): [`WidgetDefinition`](WidgetDefinition.md)\<`any`\>[]
 
-Defined in: [src/components/widgets/utils/types.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/utils/types.ts#L34)
+Defined in: [src/components/widgets/utils/types.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/utils/types.ts#L34)
 
 #### Returns
 
@@ -46,7 +46,7 @@ Defined in: [src/components/widgets/utils/types.ts:34](https://github.com/Hack23
 
 > **register**\<`P`\>(`definition`): `void`
 
-Defined in: [src/components/widgets/utils/types.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/utils/types.ts#L32)
+Defined in: [src/components/widgets/utils/types.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/utils/types.ts#L32)
 
 #### Type Parameters
 
@@ -68,7 +68,7 @@ Defined in: [src/components/widgets/utils/types.ts:32](https://github.com/Hack23
 
 > **renderWidget**\<`P`\>(`id`, `props`?): `ReactNode`
 
-Defined in: [src/components/widgets/utils/types.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/utils/types.ts#L35)
+Defined in: [src/components/widgets/utils/types.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/utils/types.ts#L35)
 
 #### Type Parameters
 
@@ -94,7 +94,7 @@ Defined in: [src/components/widgets/utils/types.ts:35](https://github.com/Hack23
 
 > **renderWidgets**(`filter`?, `props`?): `ReactNode`[]
 
-Defined in: [src/components/widgets/utils/types.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/791b5a1b6e700c8b8480de209374e4cb1086330d/src/components/widgets/utils/types.ts#L36)
+Defined in: [src/components/widgets/utils/types.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/aea527f1006de96602c10bb201453301cffe7b07/src/components/widgets/utils/types.ts#L36)
 
 #### Parameters
 
