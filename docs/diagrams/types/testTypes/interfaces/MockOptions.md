@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.3**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: MockOptions
 
-Defined in: [src/types/testTypes.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/testTypes.tsx#L5)
+Defined in: [src/types/testTypes.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/testTypes.tsx#L5)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/types/testTypes.tsx:5](https://github.com/Hack23/cia-compliance
 
 > `optional` **bg**: `string`
 
-Defined in: [src/types/testTypes.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/testTypes.tsx#L11)
+Defined in: [src/types/testTypes.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/testTypes.tsx#L11)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/types/testTypes.tsx:11](https://github.com/Hack23/cia-complianc
 
 > **capex**: `number`
 
-Defined in: [src/types/testTypes.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/testTypes.tsx#L9)
+Defined in: [src/types/testTypes.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/testTypes.tsx#L9)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/types/testTypes.tsx:9](https://github.com/Hack23/cia-compliance
 
 > **description**: `string`
 
-Defined in: [src/types/testTypes.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/testTypes.tsx#L6)
+Defined in: [src/types/testTypes.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/testTypes.tsx#L6)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/types/testTypes.tsx:6](https://github.com/Hack23/cia-compliance
 
 > `optional` **impact**: `string`
 
-Defined in: [src/types/testTypes.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/testTypes.tsx#L8)
+Defined in: [src/types/testTypes.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/testTypes.tsx#L8)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/types/testTypes.tsx:8](https://github.com/Hack23/cia-compliance
 
 > **opex**: `number`
 
-Defined in: [src/types/testTypes.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/testTypes.tsx#L10)
+Defined in: [src/types/testTypes.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/testTypes.tsx#L10)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [src/types/testTypes.tsx:10](https://github.com/Hack23/cia-complianc
 
 > `optional` **recommendations**: `string`[]
 
-Defined in: [src/types/testTypes.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/testTypes.tsx#L13)
+Defined in: [src/types/testTypes.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/testTypes.tsx#L13)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [src/types/testTypes.tsx:13](https://github.com/Hack23/cia-complianc
 
 > **technical**: `string`
 
-Defined in: [src/types/testTypes.tsx:7](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/testTypes.tsx#L7)
+Defined in: [src/types/testTypes.tsx:7](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/testTypes.tsx#L7)
 
 ***
 
@@ -70,4 +70,4 @@ Defined in: [src/types/testTypes.tsx:7](https://github.com/Hack23/cia-compliance
 
 > `optional` **text**: `string`
 
-Defined in: [src/types/testTypes.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/testTypes.tsx#L12)
+Defined in: [src/types/testTypes.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/testTypes.tsx#L12)

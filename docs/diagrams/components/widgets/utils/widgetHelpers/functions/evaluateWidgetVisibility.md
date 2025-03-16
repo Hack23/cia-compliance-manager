@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.3**](../../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **evaluateWidgetVisibility**(`widget`, `securityLevel`): `boolean`
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:145](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/components/widgets/utils/widgetHelpers.tsx#L145)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:145](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/widgetHelpers.tsx#L145)
 
 Check if a widget should be visible based on security level
 
