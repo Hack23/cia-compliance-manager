@@ -29,9 +29,8 @@ import { typeAdapters } from "../types/widgets";
  * Main component for the CIA Classification App
  */
 const CIAClassificationApp: React.FC = () => {
-  // Get version from package.json - using hardcoded value from package.json
-  // to avoid issues with process.env in the browser context
-  const appVersion = "0.8.0";
+  // Get version from package.json through Vite define plugin
+  const appVersion = APP_VERSION;
 
   // State for security levels
   const [availability, setAvailability] = useState<string>(

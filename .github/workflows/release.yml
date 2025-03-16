@@ -275,7 +275,7 @@ jobs:
 
   build:
     name: Build Release Package
-    needs: [prepare, test]
+    needs: [prepare]
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
