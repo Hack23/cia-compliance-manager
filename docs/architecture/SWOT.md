@@ -25,7 +25,48 @@ This document provides a strategic analysis of the CIA Compliance Manager's curr
 
 ## SWOT Overview
 
-<!-- Quadrant charts are not well supported in GitHub Markdown, so replacing with regular mermaid diagram -->
+### Traditional SWOT Quadrant Chart
+
+**Strategic Focus:** This quadrant chart provides a visual representation of the CIA Compliance Manager's strengths, weaknesses, opportunities, and threats arranged by their internal/external nature and positive/negative impact.
+
+```mermaid
+quadrantChart
+    title CIA Compliance Manager SWOT Analysis
+    x-axis Internal --> External
+    y-axis Negative --> Positive
+    quadrant-1 Opportunities
+    quadrant-2 Strengths
+    quadrant-3 Weaknesses
+    quadrant-4 Threats
+
+    "Comprehensive CIA Framework": [0.2, 0.8]
+    "Strong TypeScript Implementation": [0.25, 0.75]
+    "Modular Widget Architecture": [0.3, 0.7]
+    "Visual Security Assessment": [0.15, 0.85]
+    "Compliance Framework Mapping": [0.1, 0.7]
+
+    "Incomplete Widgets": [0.2, 0.25]
+    "Limited Test Coverage": [0.3, 0.3]
+    "Performance Optimization Needed": [0.25, 0.2]
+    "Data Inconsistencies": [0.15, 0.25]
+    "Documentation Gaps": [0.35, 0.35]
+
+    "Context-Aware Security": [0.8, 0.9]
+    "Compliance Framework Expansion": [0.7, 0.8]
+    "Integration Ecosystem Growth": [0.85, 0.75]
+    "Business Intelligence Features": [0.75, 0.85]
+    "Machine Learning Enhancements": [0.9, 0.7]
+
+    "Competing Security Platforms": [0.8, 0.3]
+    "Changing Compliance Standards": [0.7, 0.2]
+    "Open Source Maintenance Challenges": [0.75, 0.25]
+    "Complex Security Landscape": [0.9, 0.3]
+    "Limited Market Differentiation": [0.85, 0.15]
+```
+
+### Alternative Network Visualization
+
+<!-- Quadrant charts are not well supported in GitHub Markdown, so providing an alternative mermaid diagram -->
 
 ```mermaid
 graph TD
