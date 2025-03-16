@@ -115,23 +115,26 @@ describe("CIAClassificationApp Dark Mode Tests", () => {
     });
   });
 
-  it("toggles dark mode when theme toggle button is clicked", () => {
+  it("has dark mode enabled by default", () => {
+    render(<CIAClassificationApp />);
+
+    // Check if dark mode classes were added by default
+    expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
+  });
+
+  it("toggles to light mode when theme toggle button is clicked", () => {
     render(<CIAClassificationApp />);
     const themeToggle = screen.getByTestId(APP_TEST_IDS.THEME_TOGGLE);
 
-    // Click the toggle button
+    // First click should switch to light mode (since dark is default)
     fireEvent.click(themeToggle);
-
-    // Check if dark mode classes were added
-    expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
-
-    // Click again to toggle back to light mode
-    fireEvent.click(themeToggle);
-
-    // Check if dark mode classes were removed
     expect(document.documentElement.classList.remove).toHaveBeenCalledWith(
       "dark"
     );
+
+    // Click again to toggle back to dark mode
+    fireEvent.click(themeToggle);
+    expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
   });
 
   it("handles event listeners for test events", () => {

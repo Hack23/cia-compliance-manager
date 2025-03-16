@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-03-16T18:54:53.361Z",
+    "end": "2025-03-16T18:55:18.116Z",
+    "duration": 24755,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "3c58cd2c-417d-4c91-a403-7798ec199a9d",
+      "title": "",
+      "fullFile": "cypress/e2e/widgets/cia-impact-summary-widget.cy.ts",
+      "file": "cypress/e2e/widgets/cia-impact-summary-widget.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4bb00c1e-6204-4be0-b2b4-ad956fdbc257",
+          "title": "CIA Impact Summary Widget",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "cia-impact-summary widget should exist",
+              "fullTitle": "CIA Impact Summary Widget cia-impact-summary widget should exist",
+              "timedOut": null,
+              "duration": 4158,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(widgetName).should(\"exist\").scrollIntoView();\ncy.findWidget(widgetName).then(($widget) => {\n  expect($widget.text().trim().length).to.be.greaterThan(0);\n});",
+              "err": {},
+              "uuid": "c8a0c1cb-87c1-4679-937a-60458bcf33c9",
+              "parentUUID": "4bb00c1e-6204-4be0-b2b4-ad956fdbc257",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "updates content when security levels change",
+              "fullTitle": "CIA Impact Summary Widget updates content when security levels change",
+              "timedOut": null,
+              "duration": 7564,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "testSecurityLevelChanges(\"cia-impact-summary\");",
+              "err": {},
+              "uuid": "2e569e2a-cd30-4cc5-a239-39d696d73bc2",
+              "parentUUID": "4bb00c1e-6204-4be0-b2b4-ad956fdbc257",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "shows comprehensive CIA impact summary at high security levels",
+              "fullTitle": "CIA Impact Summary Widget shows comprehensive CIA impact summary at high security levels",
+              "timedOut": null,
+              "duration": 5454,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"cia-impact-summary\").scrollIntoView();\ncy.setSecurityLevels(\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.HIGH\n);\ncy.wait(1e3);\ncy.findWidget(\"cia-impact-summary\").then(($widget) => {\n  const text = $widget.text().toLowerCase();\n  const hasAvailabilityTerms = /availability|uptime|recovery|access/i.test(\n    text\n  );\n  const hasIntegrityTerms = /integrity|accuracy|valid|correct/i.test(text);\n  const hasConfidentialTerms = /confidential|privacy|sensitive|secret/i.test(text);\n  cy.log(`Found availability terms: ${hasAvailabilityTerms}`);\n  cy.log(`Found integrity terms: ${hasIntegrityTerms}`);\n  cy.log(`Found confidentiality terms: ${hasConfidentialTerms}`);\n  expect(hasAvailabilityTerms || hasIntegrityTerms || hasConfidentialTerms).to.be.true;\n});",
+              "err": {},
+              "uuid": "c1202598-2110-4dd1-9ac8-d421878771d8",
+              "parentUUID": "4bb00c1e-6204-4be0-b2b4-ad956fdbc257",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "properly displays mixed security levels",
+              "fullTitle": "CIA Impact Summary Widget properly displays mixed security levels",
+              "timedOut": null,
+              "duration": 7203,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"cia-impact-summary\").scrollIntoView();\ncy.setSecurityLevels(\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.LOW,\n  SECURITY_LEVELS.MODERATE\n);\ncy.wait(1e3);\ncy.findWidget(\"cia-impact-summary\").then(($widgetBefore) => {\n  const textBefore = $widgetBefore.text();\n  cy.setSecurityLevels(\n    SECURITY_LEVELS.LOW,\n    SECURITY_LEVELS.HIGH,\n    SECURITY_LEVELS.LOW\n  );\n  cy.wait(1e3);\n  cy.findWidget(\"cia-impact-summary\").then(($widgetAfter) => {\n    const textAfter = $widgetAfter.text();\n    expect(textAfter).not.to.equal(textBefore);\n  });\n});",
+              "err": {},
+              "uuid": "17cfbfa9-1b62-4fa9-9544-01a330d05c46",
+              "parentUUID": "4bb00c1e-6204-4be0-b2b4-ad956fdbc257",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c8a0c1cb-87c1-4679-937a-60458bcf33c9",
+            "2e569e2a-cd30-4cc5-a239-39d696d73bc2",
+            "c1202598-2110-4dd1-9ac8-d421878771d8",
+            "17cfbfa9-1b62-4fa9-9544-01a330d05c46"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 24379,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "docs/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
