@@ -50,16 +50,20 @@ stateDiagram-v2
 
     %% Cool color scheme
     classDef baseState fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef startState fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
     classDef analysisState fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
     classDef actionState fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef endState fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
+    classDef end fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
 
-    class Initialized,PartiallyConfigured,Configured baseState
-    class Analyzed,ComplianceMapped analysisState
-    class CostEstimated,RecommendationsGenerated actionState
-    class Implemented endState
-    class [*] startState
+    class Initialized baseState
+    class PartiallyConfigured baseState
+    class Configured baseState
+    class Analyzed analysisState
+    class ComplianceMapped analysisState
+    class CostEstimated actionState
+    class RecommendationsGenerated actionState
+    class Implemented end
+    class [*] start
 ```
 
 ## Compliance Status State Diagram
@@ -92,19 +96,21 @@ stateDiagram-v2
 
     %% Cool color scheme
     classDef baseState fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef startState fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
     classDef processState fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
     classDef nonCompliantState fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
     classDef partialState fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
     classDef compliantState fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
     classDef remediationState fill:#dae8fc,stroke:#333,stroke-width:1px,color:black
 
-    class NotEvaluated,Evaluating baseState
+    class NotEvaluated baseState
+    class Evaluating baseState
     class NonCompliant nonCompliantState
     class PartiallyCompliant partialState
     class Compliant compliantState
-    class RemediationPlanned,RemediationInProgress remediationState
-    class [*] startState
+    class RemediationPlanned remediationState
+    class RemediationInProgress remediationState
+    class [*] start
 ```
 
 ## Widget State Diagram
@@ -141,18 +147,24 @@ stateDiagram-v2
 
     %% Cool color scheme
     classDef baseState fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef startState fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
     classDef loadingState fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
     classDef dataState fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
     classDef interactionState fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
     classDef errorState fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
 
-    class Initialized,Rendered baseState
-    class Loading,Updating,Filtering,Expanding,Exporting loadingState
-    class DataReceived,Exported dataState
-    class Interactive,Expanded interactionState
+    class Initialized baseState
+    class Rendered baseState
+    class Loading loadingState
+    class Updating loadingState
+    class Filtering loadingState
+    class Expanding loadingState
+    class Exporting loadingState
+    class DataReceived dataState
+    class Interactive interactionState
+    class Expanded interactionState
     class Error errorState
-    class [*] startState
+    class [*] start
 ```
 
 <div class="diagram-legend">
