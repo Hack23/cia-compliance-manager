@@ -2,6 +2,25 @@ import { getSecurityLevelColorPair } from "../constants/colorConstants";
 import { SecurityLevel } from "../types/cia";
 
 /**
+ * Utility functions for handling color-related operations based on security levels.
+ * 
+ * ## Technical Implementation
+ * This module provides functions to get CSS classes and hex color values for different security levels.
+ * 
+ * ## Future-Proofing
+ * The functions are designed to be easily extendable for additional security levels or color schemes.
+ * 
+ * ## Performance
+ * The functions use simple switch statements and lookups, ensuring minimal performance overhead.
+ * 
+ * ## Maintainability
+ * The code is structured to allow easy updates to color mappings and security level handling.
+ * 
+ * ## Integration
+ * These functions are used across the application to ensure consistent color representation for security levels.
+ */
+
+/**
  * Get the appropriate CSS color class for a security level
  * @param level The security level to get the color class for
  * @returns CSS class string for the given security level

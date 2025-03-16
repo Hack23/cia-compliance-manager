@@ -1,5 +1,22 @@
 /**
  * Core CIA types used throughout the application
+ *
+ * ## Business Perspective
+ *
+ * ### Business Impact
+ * The types defined in this file are crucial for representing the core concepts of the CIA (Confidentiality, Integrity, Availability) triad. They are used throughout the application to ensure consistent handling of security levels and impacts, which directly affects the application's ability to manage compliance and security effectively. 💼
+ *
+ * ### Compliance
+ * By defining clear and consistent types for security levels and impacts, this file helps the application meet various compliance requirements and standards. 📜
+ *
+ * ### Risk Management
+ * The types in this file play a key role in identifying and mitigating potential risks by providing a structured way to represent and analyze security impacts. ⚠️
+ *
+ * ### Value Creation
+ * The use of well-defined types enhances the application's reliability and maintainability, leading to cost savings and efficiency improvements. 💡
+ *
+ * ### Stakeholder Benefits
+ * Clear and consistent types benefit all stakeholders, including developers, security analysts, and business users, by providing a common understanding of key security concepts. 🤝
  */
 
 /**

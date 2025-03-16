@@ -2,6 +2,25 @@ import { SecurityLevel } from "../types/cia";
 import { SECURITY_LEVELS } from "../constants/appConstants";
 
 /**
+ * Utility functions for handling security levels.
+ * 
+ * ## Business Impact
+ * These functions play a crucial role in determining and normalizing security levels, which directly impacts the application's ability to manage and enforce security policies. 💼
+ * 
+ * ## Compliance
+ * By providing consistent and accurate security level calculations, these functions help ensure that the application meets various compliance requirements and standards. 📜
+ * 
+ * ## Risk Management
+ * The functions in this module contribute to risk management by providing a structured way to represent and analyze security levels, helping to identify and mitigate potential risks. ⚠️
+ * 
+ * ## Value Creation
+ * The use of well-defined utility functions enhances the application's reliability and maintainability, leading to cost savings and efficiency improvements. 💡
+ * 
+ * ## Stakeholder Benefits
+ * Clear and consistent utility functions benefit all stakeholders, including developers, security analysts, and business users, by providing a common understanding of key security concepts. 🤝
+ */
+
+/**
  * Normalizes a security level string to ensure it's a valid SecurityLevel value
  * @param level The input security level string
  * @returns A valid SecurityLevel
