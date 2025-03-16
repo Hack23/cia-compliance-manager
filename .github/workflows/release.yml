@@ -126,6 +126,7 @@ jobs:
       - name: Generate Coverage
         run: npm run docs:bundle
 
+
       - name: Create combined index page
         run: |
           cat > docs/documentation.html << EOF
@@ -428,7 +429,7 @@ jobs:
         run: rm -rf docs/index.html.html assets 
 
       - name: Deploy new version of APP
-        run: cp -r build/* docs/
+        run: unzip artifacts/build/cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip -d docs/
 
       - name: Deploy APP To GitHub Pages
         uses: JamesIves/github-pages-deploy-action@6c2d9db40f9296374acc17b90404b6e8864128c8 # v4.7.3
