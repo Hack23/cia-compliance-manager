@@ -289,7 +289,7 @@ const CIAClassificationApp: React.FC = () => {
           </div>
 
           {/* Main dashboard */}
-          <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 mb-6 transition-colors duration-300">
+          <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-3 pt-4 mt-3 transition-colors duration-300">
             <Dashboard>
               {/* Security Level Selection */}
               <DashboardWidget

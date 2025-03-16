@@ -1,80 +1,81 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import {
   CIA_COMPONENT_ICONS,
+  CIA_DESCRIPTIONS,
   CIA_LABELS,
+  SECURITY_LEVELS,
   UI_TEXT,
 } from "../../constants/appConstants";
-import {
-  COMMON_COMPONENT_TEST_IDS,
-  SECURITY_LEVEL_TEST_IDS,
-  WIDGET_TEST_IDS,
-} from "../../constants/testIds";
+import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
+import { SECURITY_LEVEL_TEST_IDS } from "../../constants/testIds";
 import { SecurityLevel } from "../../types/cia";
+import SecurityLevelSelector from "../SecurityLevelSelector";
 import SecurityLevelSummaryItem from "../common/SecurityLevelSummaryItem";
 import WidgetContainer from "../common/WidgetContainer";
-import SecurityLevelSelector from "../securitylevel/SecurityLevelSelector";
 
 /**
- * Props for the SecurityLevelWidget component
+ * Props for SecurityLevelWidget component
  */
 export interface SecurityLevelWidgetProps {
-  availabilityLevel?: string;
-  integrityLevel?: string;
-  confidentialityLevel?: string;
+  availabilityLevel: string;
+  integrityLevel: string;
+  confidentialityLevel: string;
+  setAvailability: (level: string) => void;
+  setIntegrity: (level: string) => void;
+  setConfidentiality: (level: string) => void;
+  className?: string;
+  testId?: string;
   onAvailabilityChange?: (level: string) => void;
   onIntegrityChange?: (level: string) => void;
   onConfidentialityChange?: (level: string) => void;
-  setAvailability?:
-    | ((level: string) => void)
-    | Dispatch<SetStateAction<string>>;
-  setIntegrity?: ((level: string) => void) | Dispatch<SetStateAction<string>>;
-  setConfidentiality?:
-    | ((level: string) => void)
-    | Dispatch<SetStateAction<string>>;
-  className?: string;
-  testId?: string;
-  title?: string;
   loading?: boolean;
   error?: Error | null;
+  title?: string;
 }
 
 /**
- * SecurityLevelWidget component for selecting CIA security levels
- * Enhanced with rich descriptions and visual indicators
+ * SecurityLevelWidget provides controls to set security levels for availability, integrity, and confidentiality
  *
- * @param props Component properties
- * @returns SecurityLevelWidget React component
+ * ## Business Perspective
+ *
+ * This widget is the primary control center for security officers to define
+ * their organization's security requirements across the CIA triad. The selections
+ * made here drive all other security assessments and recommendations. 🔒
+ *
+ * Setting appropriate security levels helps organizations align their security
+ * investments with actual business requirements, avoiding both under-protection
+ * and unnecessary expenditure. 💼
  */
 const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
-  availabilityLevel = "None",
-  integrityLevel = "None",
-  confidentialityLevel = "None",
-  onAvailabilityChange,
-  onIntegrityChange,
-  onConfidentialityChange,
+  availabilityLevel,
+  integrityLevel,
+  confidentialityLevel,
   setAvailability,
   setIntegrity,
   setConfidentiality,
   className = "",
-  testId = WIDGET_TEST_IDS.SECURITY_LEVEL_WIDGET,
-  title = UI_TEXT.WIDGET_TITLES.SECURITY_LEVEL,
+  testId = SECURITY_LEVEL_TEST_IDS.SECURITY_LEVEL_WIDGET,
+  onAvailabilityChange,
+  onIntegrityChange,
+  onConfidentialityChange,
   loading = false,
   error = null,
+  title = UI_TEXT.WIDGET_TITLES.SECURITY_LEVEL,
 }) => {
   // Create handlers that work with both callback styles
   const handleAvailabilityChange = (level: string) => {
     if (onAvailabilityChange) onAvailabilityChange(level);
-    if (setAvailability) setAvailability(level);
+    setAvailability(level);
   };
 
   const handleIntegrityChange = (level: string) => {
     if (onIntegrityChange) onIntegrityChange(level);
-    if (setIntegrity) setIntegrity(level);
+    setIntegrity(level);
   };
 
   const handleConfidentialityChange = (level: string) => {
     if (onConfidentialityChange) onConfidentialityChange(level);
-    if (setConfidentiality) setConfidentiality(level);
+    setConfidentiality(level);
   };
 
   // Show a loading state
@@ -105,53 +106,110 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   }
 
   return (
-    <WidgetContainer title={title} className={className} testId={testId}>
-      <div className="p-4">
-        {/* Current Security Profile - Compact summary at top */}
-        <div className="mb-4 pb-3 border-b border-gray-200 dark:border-gray-700">
-          <h4 className="font-medium mb-2 text-gray-800 dark:text-gray-200 text-sm flex items-center">
-            <span className="mr-2">📊</span>
+    <WidgetContainer
+      title={title}
+      icon="📊"
+      className={className}
+      testId={testId}
+    >
+      <div className="space-y-6">
+        {/* Current Security Profile Header */}
+        <div>
+          <h3 className="font-medium text-gray-700 dark:text-gray-300 mb-2">
             Current Security Profile
-          </h4>
-          <div className="flex flex-wrap gap-2 justify-between">
+          </h3>
+
+          {/* Summary of current selections */}
+          <div className="flex flex-wrap gap-2 mb-4">
             <SecurityLevelSummaryItem
               label={CIA_LABELS.CONFIDENTIALITY}
               value={confidentialityLevel as SecurityLevel}
               icon={CIA_COMPONENT_ICONS.CONFIDENTIALITY}
-              testId={COMMON_COMPONENT_TEST_IDS.CURRENT_CONFIDENTIALITY}
+              testId={`${testId}-confidentiality-summary`}
               color="purple"
-              compact={true}
+              borderColor={CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY}
             />
             <SecurityLevelSummaryItem
               label={CIA_LABELS.INTEGRITY}
               value={integrityLevel as SecurityLevel}
               icon={CIA_COMPONENT_ICONS.INTEGRITY}
-              testId={COMMON_COMPONENT_TEST_IDS.CURRENT_INTEGRITY}
+              testId={`${testId}-integrity-summary`}
               color="green"
-              compact={true}
+              borderColor={CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY}
             />
             <SecurityLevelSummaryItem
               label={CIA_LABELS.AVAILABILITY}
               value={availabilityLevel as SecurityLevel}
               icon={CIA_COMPONENT_ICONS.AVAILABILITY}
-              testId={COMMON_COMPONENT_TEST_IDS.CURRENT_AVAILABILITY}
+              testId={`${testId}-availability-summary`}
               color="blue"
-              compact={true}
+              borderColor={CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY}
             />
           </div>
         </div>
 
-        {/* SecurityLevelSelector */}
-        <SecurityLevelSelector
-          availabilityLevel={availabilityLevel as SecurityLevel}
-          integrityLevel={integrityLevel as SecurityLevel}
-          confidentialityLevel={confidentialityLevel as SecurityLevel}
-          onAvailabilityChange={handleAvailabilityChange}
-          onIntegrityChange={handleIntegrityChange}
-          onConfidentialityChange={handleConfidentialityChange}
-          showSelectionSummary={false}
-          testId={SECURITY_LEVEL_TEST_IDS.SECURITY_LEVEL_SELECTOR}
-        />
+        {/* Confidentiality Selector */}
+        <div className="security-level-selector">
+          <SecurityLevelSelector
+            label="Confidentiality Level"
+            value={confidentialityLevel}
+            onChange={handleConfidentialityChange}
+            options={[
+              SECURITY_LEVELS.NONE,
+              SECURITY_LEVELS.LOW,
+              SECURITY_LEVELS.MODERATE,
+              SECURITY_LEVELS.HIGH,
+              SECURITY_LEVELS.VERY_HIGH,
+            ]}
+            description={CIA_DESCRIPTIONS.CONFIDENTIALITY}
+            icon={CIA_COMPONENT_ICONS.CONFIDENTIALITY}
+            testId={SECURITY_LEVEL_TEST_IDS.CONFIDENTIALITY_SELECTOR}
+            tooltipContent="Confidentiality measures how well your data is protected from unauthorized access"
+            accentColor={CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY}
+          />
+        </div>
+
+        {/* Integrity Selector */}
+        <div className="security-level-selector">
+          <SecurityLevelSelector
+            label="Integrity Level"
+            value={integrityLevel}
+            onChange={handleIntegrityChange}
+            options={[
+              SECURITY_LEVELS.NONE,
+              SECURITY_LEVELS.LOW,
+              SECURITY_LEVELS.MODERATE,
+              SECURITY_LEVELS.HIGH,
+              SECURITY_LEVELS.VERY_HIGH,
+            ]}
+            description={CIA_DESCRIPTIONS.INTEGRITY}
+            icon={CIA_COMPONENT_ICONS.INTEGRITY}
+            testId={SECURITY_LEVEL_TEST_IDS.INTEGRITY_SELECTOR}
+            tooltipContent="Integrity measures how well your data is protected from unauthorized modification"
+            accentColor={CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY}
+          />
+        </div>
+
+        {/* Availability Selector */}
+        <div className="security-level-selector">
+          <SecurityLevelSelector
+            label="Availability Level"
+            value={availabilityLevel}
+            onChange={handleAvailabilityChange}
+            options={[
+              SECURITY_LEVELS.NONE,
+              SECURITY_LEVELS.LOW,
+              SECURITY_LEVELS.MODERATE,
+              SECURITY_LEVELS.HIGH,
+              SECURITY_LEVELS.VERY_HIGH,
+            ]}
+            description={CIA_DESCRIPTIONS.AVAILABILITY}
+            icon={CIA_COMPONENT_ICONS.AVAILABILITY}
+            testId={SECURITY_LEVEL_TEST_IDS.AVAILABILITY_SELECTOR}
+            tooltipContent="Availability measures how well your systems can maintain operations and recover from disruptions"
+            accentColor={CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY}
+          />
+        </div>
       </div>
     </WidgetContainer>
   );

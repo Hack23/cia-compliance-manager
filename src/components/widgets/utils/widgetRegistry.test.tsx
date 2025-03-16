@@ -1,390 +1,118 @@
-import { render, screen } from "@testing-library/react";
-import React from "react";
-import { describe, expect, it, vi } from "vitest";
-import { WidgetBaseProps } from "../../../types/widgets";
-import widgetRegistry from "./widgetRegistry";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import widgetRegistryUtils from "./widgetRegistry";
 
-// Create a mapping to track which testId should return which content
-const testIdToContentMap: Record<string, string> = {
-  "mock-widget": "small", // Default for the filter test
-  "test-component-value": "override", // For the props test
-};
-
-// Mock the testing library
-vi.mock("@testing-library/react", () => {
-  const originalModule = vi.importActual("@testing-library/react");
-
-  // Create mock elements with dynamic content based on testId
-  const createMockElement = (content: string) => ({
-    textContent: content,
-    getAttribute: (name: string) =>
-      name === "data-testid" ? "mock-widget" : null,
-  });
-
-  // Mock screen object with functions that respect testId
-  const mockScreen = {
-    getByTestId: vi.fn().mockImplementation((testId: string) => {
-      // Use type guard to safely access the map
-      return createMockElement(
-        Object.prototype.hasOwnProperty.call(testIdToContentMap, testId)
-          ? testIdToContentMap[testId]
-          : "default content"
-      );
-    }),
-    queryByText: vi.fn().mockImplementation(() => null),
-    getByText: vi
-      .fn()
-      .mockImplementation(() => createMockElement("Filter Test 2")),
-    getAllByTestId: vi
-      .fn()
-      .mockImplementation(() => [
-        createMockElement("custom 1"),
-        createMockElement("custom 2"),
-      ]),
-  };
-
-  // Mock render to return objects with getByTestId and container
-  return {
-    ...originalModule,
-    screen: mockScreen,
-    render: vi.fn().mockImplementation(() => ({
-      container: document.createElement("div"),
-      getByTestId: mockScreen.getByTestId,
-    })),
-  };
-});
-
-// Fix the testId property TypeScript error
-interface MockWidgetProps extends WidgetBaseProps {
-  testProp?: string;
-  testId?: string;
-}
-
-const MockWidget: React.FC<MockWidgetProps> = ({
-  testProp = "default",
+// Mock component for testing
+const TestComponent = ({
   testId,
-}) => <div data-testid={testId || "mock-widget"}>{testProp}</div>;
+  title,
+}: {
+  testId?: string;
+  title?: string;
+}) => <div data-testid={testId}>{title || "Test Widget"}</div>;
 
-// Add test matchers for DOM nodes
-expect.extend({
-  toHaveTextContent(received, expected) {
-    const content = received?.textContent || "";
-    const pass = content.includes(expected);
-
-    return {
-      pass,
-      message: () =>
-        `expected ${content} ${pass ? "not " : ""}to include ${expected}`,
-    };
-  },
-  toBeInTheDocument(received) {
-    const pass = received !== null;
-
-    return {
-      pass,
-      message: () =>
-        `expected element to ${pass ? "not " : ""}be in the document`,
-    };
-  },
+// Helper to create a mock widget registration
+const createMockWidget = (key: string, testId: string) => ({
+  key,
+  component: TestComponent,
+  testId,
 });
 
 describe("widgetRegistry", () => {
-  beforeEach(() => {
-    // Clear any existing widgets before each test
-    // This is a hack since we can't directly clear the Map in the singleton
-    // We'll register a test cleanup widget and then test with it
-    widgetRegistry.register<MockWidgetProps>({
-      id: "test-cleanup",
-      title: "Test Cleanup",
-      component: MockWidget,
-    });
-
-    // Reset the testId to content map for each test
-    Object.assign(testIdToContentMap, {
-      "mock-widget": "small",
-      "test-component-value": "override",
-    });
+  afterEach(() => {
+    cleanup();
+    vi.resetAllMocks();
   });
 
-  it("registers a widget correctly", () => {
-    // Register a test widget
-    widgetRegistry.register<MockWidgetProps>({
-      id: "test-widget",
-      title: "Test Widget",
-      component: MockWidget,
-      icon: "📊",
-      size: "medium",
-      order: 10,
-    });
-
-    // Get the registered widget
-    const widget = widgetRegistry.get("test-widget");
-
-    // Verify widget is registered with correct properties
+  it("should get a widget by key", () => {
+    // We'll use one of the existing widgets
+    const widget = widgetRegistryUtils.getWidget("security-level");
     expect(widget).toBeDefined();
-    expect(widget?.id).toBe("test-widget");
-    expect(widget?.title).toBe("Test Widget");
-    expect(widget?.size).toBe("medium");
-    expect(widget?.order).toBe(10);
+    expect(widget?.key).toBe("security-level");
   });
 
-  it("registers a widget with default values when not provided", () => {
-    // Register with minimal properties
-    widgetRegistry.register<MockWidgetProps>({
-      id: "minimal-widget",
-      title: "Minimal Widget",
-      component: MockWidget,
-    });
-
-    // Get the registered widget
-    const widget = widgetRegistry.get("minimal-widget");
-
-    // Verify default values are applied
-    expect(widget).toBeDefined();
-    expect(widget?.id).toBe("minimal-widget");
-    expect(widget?.size).toBe("medium"); // Default size
-    expect(widget?.order).toBe(999); // Default order
+  it("should return undefined for non-existent widget", () => {
+    const widget = widgetRegistryUtils.getWidget("non-existent-widget");
+    expect(widget).toBeUndefined();
   });
 
-  it("retrieves all registered widgets", () => {
-    // Register multiple test widgets
-    widgetRegistry.register<MockWidgetProps>({
-      id: "widget-1",
-      title: "Widget 1",
-      component: MockWidget,
-      order: 10,
-    });
+  it("should render a widget with props", () => {
+    // Create a custom title for testing
+    const customTitle = "Custom Widget Title";
 
-    widgetRegistry.register<MockWidgetProps>({
-      id: "widget-2",
-      title: "Widget 2",
-      component: MockWidget,
-      order: 20,
-    });
-
-    // Get all widgets
-    const widgets = widgetRegistry.getAll();
-
-    // Verify we get an array with all registered widgets
-    expect(widgets).toBeInstanceOf(Array);
-    expect(widgets.length).toBeGreaterThan(1);
-
-    // Verify widgets are ordered correctly by order property
-    const widget1 = widgets.find((w) => w.id === "widget-1");
-    const widget2 = widgets.find((w) => w.id === "widget-2");
-    expect(widget1).toBeDefined();
-    expect(widget2).toBeDefined();
-    expect(widget1?.order).toBeLessThan(widget2?.order || Infinity);
-  });
-
-  // Update the test for rendering a widget correctly
-  it("renders a widget correctly", () => {
-    // Register test widget
-    widgetRegistry.register<MockWidgetProps>({
-      id: "render-test",
-      title: "Render Test",
-      component: MockWidget,
-      defaultProps: { testProp: "custom value" },
-    });
-
-    // Important: Update the content map to match what we expect
-    testIdToContentMap["mock-widget"] = "custom value";
-
-    // Render the widget
-    const element = widgetRegistry.renderWidget("render-test");
-
-    // Verify the component is rendered correctly with the default props
-    render(<>{element}</>);
-    expect(screen.getByTestId("mock-widget")).toHaveTextContent("custom value");
-  });
-
-  it("renders all widgets that match a filter", () => {
-    // Register some widgets with different sizes
-    widgetRegistry.register<MockWidgetProps>({
-      id: "small-widget",
-      title: "Small Widget",
-      component: MockWidget,
-      size: "small",
-      defaultProps: { testProp: "small" },
-    });
-
-    widgetRegistry.register<MockWidgetProps>({
-      id: "large-widget",
-      title: "Large Widget",
-      component: MockWidget,
-      size: "large",
-      defaultProps: { testProp: "large" },
-    });
-
-    // Render only small widgets
-    const elements = widgetRegistry.renderWidgets(
-      (widget) => widget.size === "small"
-    );
-
-    // Verify the correct widget was rendered
-    render(<>{elements}</>);
-    expect(screen.getByTestId("mock-widget")).toHaveTextContent("small");
-    expect(screen.queryByText("large")).not.toBeInTheDocument();
-  });
-
-  it("renders a widget with custom props that override defaults", () => {
-    // Register test widget with default props
-    widgetRegistry.register<MockWidgetProps>({
-      id: "props-test",
-      title: "Props Test",
-      component: MockWidget,
-      defaultProps: { testProp: "default value" },
-    });
-
-    // Update the content map to expect "override value"
-    testIdToContentMap["mock-widget"] = "override value";
-
-    // Render with custom props - use proper typing for the props
+    // Render a widget that exists in the registry
     render(
       <div>
-        {widgetRegistry.renderWidget<MockWidgetProps>("props-test", {
-          testProp: "override value", // Now properly typed
+        {widgetRegistryUtils.renderWidget("security-level", {
+          title: customTitle,
+          testId: "custom-test-id",
         })}
       </div>
     );
 
-    // Check that custom props override default props
-    expect(screen.getByTestId("mock-widget")).toHaveTextContent(
-      "override value"
-    );
+    // Check if the widget rendered with custom props
+    const widget = screen.queryByTestId("custom-test-id");
+    expect(widget).toBeInTheDocument();
   });
 
-  it("renders multiple widgets with filter", () => {
-    // Register multiple widgets with different orders
-    widgetRegistry.register<MockWidgetProps>({
-      id: "filter-test-1",
-      title: "Filter Test 1",
-      component: MockWidget,
-      order: 5,
-      defaultProps: { testProp: "widget 1" },
-    });
-
-    widgetRegistry.register<MockWidgetProps>({
-      id: "filter-test-2",
-      title: "Filter Test 2",
-      component: MockWidget,
-      order: 10,
-      defaultProps: { testProp: "widget 2" },
-    });
-
-    // Update the content map for this test
-    testIdToContentMap["mock-widget"] = "widget 2";
-
-    // Render with filter to only include widget 2
-    render(
-      <div>
-        {widgetRegistry.renderWidgets(
-          (widget) => widget.id === "filter-test-2"
-        )}
-      </div>
-    );
-
-    // Check that only widget 2 is rendered
-    expect(screen.queryByText("Filter Test 1")).not.toBeInTheDocument();
-    expect(screen.getByText("Filter Test 2")).toBeInTheDocument();
-    expect(screen.getByTestId("mock-widget")).toHaveTextContent("widget 2");
-  });
-
-  it("renders multiple widgets with custom props", () => {
-    // Register test widgets
-    widgetRegistry.register<MockWidgetProps>({
-      id: "multi-props-1",
-      title: "Multi Props 1",
-      component: MockWidget,
-      defaultProps: { testProp: "default 1" },
-    });
-
-    widgetRegistry.register<MockWidgetProps>({
-      id: "multi-props-2",
-      title: "Multi Props 2",
-      component: MockWidget,
-      defaultProps: { testProp: "default 2" },
-    });
-
-    // Render with custom props for each widget
-    const props = {
-      "multi-props-1": { testProp: "custom 1" },
-      "multi-props-2": { testProp: "custom 2" },
-    };
-
-    render(
-      <div>
-        {widgetRegistry.renderWidgets(
-          (widget) => widget.id.startsWith("multi-props"),
-          props
-        )}
-      </div>
-    );
-
-    // Check that both widgets are rendered with custom props
-    const widgets = screen.getAllByTestId("mock-widget");
-    expect(widgets.length).toBe(2);
-    expect(widgets[0]).toHaveTextContent("custom 1");
-    expect(widgets[1]).toHaveTextContent("custom 2");
-  });
-
-  it("returns null when rendering a non-existent widget", () => {
-    const result = widgetRegistry.renderWidget("non-existent-widget");
+  it("should return null when rendering non-existent widget", () => {
+    const result = widgetRegistryUtils.renderWidget("non-existent-widget");
     expect(result).toBeNull();
   });
 
-  test("renderWidget returns null for non-existent widget", () => {
-    const widget = widgetRegistry.renderWidget("non-existent-widget");
-    expect(widget).toBeNull();
-  });
-
-  test("getAll returns widgets sorted by order", () => {
-    const widgets = widgetRegistry.getAll();
-
-    // Skip the test if there are fewer than 2 widgets
-    if (widgets.length < 2) {
-      return;
-    }
-
-    // Verify sorting by checking consecutive pairs
-    for (let i = 1; i < widgets.length; i++) {
-      const prevOrderValue = widgets[i - 1]?.order ?? 0;
-      const currOrderValue = widgets[i]?.order ?? 0;
-      expect(prevOrderValue).toBeLessThanOrEqual(currOrderValue);
-    }
-  });
-
-  test("registry handles props correctly when rendering widgets", () => {
-    // Register a test component with testID to verify props
-    interface TestComponentProps extends WidgetBaseProps {
-      testValue: string;
-      testId?: string;
-    }
-
-    const TestComponent = ({ testValue, testId }: TestComponentProps) => (
-      <div data-testid={testId || "test-component-value"}>{testValue}</div>
-    );
-
-    widgetRegistry.register<TestComponentProps>({
-      id: "test-props-widget",
-      title: "Test Props Widget",
-      component: TestComponent,
-      defaultProps: { testValue: "default" },
-    });
-
-    // Render with overriding props - use proper typing for the props
+  it("should render multiple widgets", () => {
+    // Render a subset of widgets
     render(
-      <>
-        <div></div>
-        {widgetRegistry.renderWidget<TestComponentProps>("test-props-widget", {
-          testValue: "override", // Now properly typed
-        })}
-      </>
+      <div>
+        {widgetRegistryUtils.renderWidgets([
+          "security-level",
+          "security-summary",
+        ])}
+      </div>
     );
 
-    // Verify the props were properly overridden
-    expect(screen.getByTestId("test-component-value")).toHaveTextContent(
-      "override"
+    // Check if the widgets were rendered
+    expect(widgetRegistryUtils.getAllWidgetKeys()).toContain("security-level");
+    expect(widgetRegistryUtils.getAllWidgetKeys()).toContain(
+      "security-summary"
     );
+  });
+
+  it("should render all widgets when keys are not provided", () => {
+    // Get the count of all widgets
+    const allKeys = widgetRegistryUtils.getAllWidgetKeys();
+    const count = allKeys.length;
+
+    // Render with no keys specified (should render all)
+    const renderedWidgets = widgetRegistryUtils.renderWidgets();
+
+    // Check if the right number of widgets was returned
+    expect(renderedWidgets.length).toBe(count);
+  });
+
+  it("should pass custom props to rendered widgets", () => {
+    const customTestId = "my-custom-test-id";
+    const props = {
+      "security-level": {
+        testId: customTestId,
+      },
+    };
+
+    // Render with custom props
+    render(
+      <div>{widgetRegistryUtils.renderWidgets(["security-level"], props)}</div>
+    );
+
+    // Check if the custom props were applied
+    const widget = screen.queryByTestId(customTestId);
+    expect(widget).toBeInTheDocument();
+  });
+
+  it("should get all widget keys", () => {
+    const keys = widgetRegistryUtils.getAllWidgetKeys();
+    expect(keys).toBeInstanceOf(Array);
+    expect(keys.length).toBeGreaterThan(0);
+    expect(keys).toContain("security-level");
+    expect(keys).toContain("security-summary");
   });
 });

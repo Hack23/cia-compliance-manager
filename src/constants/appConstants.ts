@@ -2,8 +2,8 @@
 // Centralized to avoid duplication and make tests more stable
 
 // Import from the shared risk constants file
-import { RISK_LEVELS, BUSINESS_IMPACT_CATEGORIES } from "./riskConstants";
 import { CIADetails, SecurityLevel } from "../types/cia"; // Import SecurityLevel
+import { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS } from "./riskConstants";
 // Import the UI constants for backward compatibility
 import { BUSINESS_IMPACT_ICONS, SECURITY_LEVEL_COLORS } from "./uiConstants";
 
@@ -65,7 +65,7 @@ export const mapOptionsToConstants = <
 };
 
 // Export the risk levels and business impact categories from here as well for consistency
-export { RISK_LEVELS, BUSINESS_IMPACT_CATEGORIES };
+export { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS };
 
 /**
  * Creates a matcher function for testing that checks if text appears in an element with a specific class
@@ -474,4 +474,15 @@ export const WIDGET_ICONS = {
   INTEGRITY_IMPACT: "🔐",
   CONFIDENTIALITY_IMPACT: "🔒",
   SECURITY_RESOURCES: "📚",
+};
+
+export const RISK_LEVEL_DESCRIPTIONS = {
+  CRITICAL:
+    "Significant vulnerabilities present that require immediate attention. Extremely high likelihood of security incidents with severe business impact.",
+  HIGH: "Major security deficiencies exist that should be addressed urgently. High likelihood of security incidents with substantial business impact.",
+  MEDIUM:
+    "Some security gaps exist that should be addressed as part of regular improvement cycles. Moderate likelihood of security incidents.",
+  LOW: "Minor security improvements could be beneficial. Low likelihood of security incidents with limited business impact.",
+  MINIMAL:
+    "Strong security posture with only marginal improvement opportunities. Very low likelihood of security incidents.",
 };

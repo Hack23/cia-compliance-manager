@@ -450,3 +450,93 @@ export function normalizeSecurityLevel(level: string): SecurityLevel {
 
   return "None";
 }
+
+// Helper function to calculate overall security level
+import { calculateOverallSecurityLevel } from "../../../types/cia";
+
+/**
+ * Helper to determine widget size class based on size prop
+ */
+export const getWidgetSizeClass = (size?: string): string => {
+  switch (size) {
+    case "small":
+      return "widget-col-4";
+    case "medium":
+      return "widget-col-6";
+    case "large":
+      return "widget-col-8";
+    case "full":
+      return "widget-col-12";
+    default:
+      return "widget-col-4";
+  }
+};
+
+/**
+ * Helper to create dynamic test IDs for widgets
+ */
+export const createWidgetTestId = (baseId: string, suffix?: string): string => {
+  return suffix ? `${baseId}-${suffix}` : baseId;
+};
+
+/**
+ * Interface for widget props
+ */
+export interface WidgetProps {
+  title: string;
+  icon?: keyof typeof WIDGET_ICONS | string;
+  className?: string;
+  size?: "small" | "medium" | "large" | "full";
+  children?: ReactNode;
+  testId?: string;
+  withBorder?: boolean;
+  withShadow?: boolean;
+  withPadding?: boolean;
+  headerContent?: ReactNode;
+}
+
+/**
+ * Helper to prepare security level props for widgets
+ */
+export const prepareSecurityLevelProps = (
+  availabilityLevel?: string,
+  integrityLevel?: string,
+  confidentialityLevel?: string
+) => {
+  const safeAvailability = availabilityLevel || "None";
+  const safeIntegrity = integrityLevel || "None";
+  const safeConfidentiality = confidentialityLevel || "None";
+
+  const securityLevel = calculateOverallSecurityLevel(
+    safeAvailability as SecurityLevel,
+    safeIntegrity as SecurityLevel,
+    safeConfidentiality as SecurityLevel
+  );
+
+  return {
+    securityLevel,
+    availabilityLevel: safeAvailability,
+    integrityLevel: safeIntegrity,
+    confidentialityLevel: safeConfidentiality,
+  };
+};
+
+/**
+ * Helper to resolve widget icon
+ *
+ * @param icon - Icon key or emoji string
+ * @returns The resolved icon
+ */
+export const resolveWidgetIcon = (
+  icon?: keyof typeof WIDGET_ICONS | string
+): string => {
+  if (!icon) return "📊"; // Default icon
+
+  // If it's a key in WIDGET_ICONS, return the corresponding emoji
+  if (typeof icon === "string" && icon in WIDGET_ICONS) {
+    return WIDGET_ICONS[icon as keyof typeof WIDGET_ICONS];
+  }
+
+  // If it's already an emoji or another string, return it directly
+  return icon;
+};

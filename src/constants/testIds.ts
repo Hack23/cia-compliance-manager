@@ -165,6 +165,8 @@ export const WIDGET_TEST_IDS = {
   CONFIDENTIALITY_IMPACT_WIDGET: "widget-confidentiality-impact",
   AVAILABILITY_IMPACT_WIDGET: "widget-availability-impact",
   SECURITY_RESOURCES_WIDGET: "widget-security-resources",
+  SECURITY_SUMMARY_WIDGET: "security-summary-widget",
+  SECURITY_VISUALIZATION_WIDGET: "security-visualization-widget",
 };
 
 // BusinessImpactAnalysisWidget IDs - KEEP ORIGINAL VALUES FOR BACKWARD COMPATIBILITY
@@ -433,10 +435,20 @@ export const SECURITY_SUMMARY_TEST_IDS = {
 
 export const TECHNICAL_DETAILS_TEST_IDS = {
   TECHNICAL_DETAILS_PREFIX: "technical-details",
-  TECHNICAL_DETAILS_WIDGET: "technical-details-widget", // Add this line
+  TECHNICAL_DETAILS_WIDGET: "technical-details-widget",
   AVAILABILITY_SECTION: "technical-details-availability",
   INTEGRITY_SECTION: "technical-details-integrity",
   CONFIDENTIALITY_SECTION: "technical-details-confidentiality",
+  AVAILABILITY_DETAILS_SECTION: "technical-details-availability-details",
+  INTEGRITY_DETAILS_SECTION: "technical-details-integrity-details",
+  CONFIDENTIALITY_DETAILS_SECTION: "technical-details-confidentiality-details",
+  // Add missing technical details test IDs
+  TECHNICAL_HEADER: "technical-header",
+  TECHNICAL_DETAILS_SECTION: "technical-details-section",
+  TECHNICAL_DESCRIPTION: "technical-description",
+  DEVELOPMENT_EFFORT: "development-effort",
+  MAINTENANCE_LEVEL: "maintenance-level",
+  REQUIRED_EXPERTISE: "required-expertise",
 };
 
 export const COMPLIANCE_STATUS_TEST_IDS = {
@@ -456,6 +468,19 @@ export const SECURITY_RESOURCES_TEST_IDS = {
 export const SECURITY_LEVEL_TEST_IDS = {
   SECURITY_LEVEL_PREFIX: "security-level",
   SECURITY_LEVEL_SELECTOR: "security-level-selector",
+  SECURITY_LEVEL_WIDGET: "security-level-widget",
+  CONFIDENTIALITY_SELECTOR: "confidentiality-level-selector",
+  INTEGRITY_SELECTOR: "integrity-level-selector",
+  AVAILABILITY_SELECTOR: "availability-level-selector",
+};
+
+export const RESOURCE_TEST_IDS = {
+  SECURITY_RESOURCES_WIDGET: "security-resources-widget",
+  RESOURCE_SEARCH: "resource-search",
+  RESOURCE_CATEGORY_FILTER: "resource-category-filter",
+  RESOURCE_LIST: "resource-list",
+  RESOURCE_ITEM: "resource-item",
+  RESOURCE_LINK: "resource-link",
 };
 
 export const VALUE_CREATION_TEST_IDS = {
