@@ -252,10 +252,10 @@ jobs:
           EOF
 
       - name: Merge  e2e test report
-        run: npm test:e2ereportmerge 
+        run: npm run test:e2ereportmerge 
 
       - name: Generate e2e html report
-        run: npm test:e2ereporthtmlall 
+        run: npm run test:e2ereporthtmlall 
 
       # Only deploy on push to main, not PRs
       - name: Deploy to GitHub Pages
