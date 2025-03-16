@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.3**](../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: MetricsCardProps
 
-Defined in: [src/components/common/MetricsCard.tsx:4](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/common/MetricsCard.tsx#L4)
+Defined in: [src/components/common/MetricsCard.tsx:4](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/components/common/MetricsCard.tsx#L4)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/components/common/MetricsCard.tsx:4](https://github.com/Hack23/
 
 > `optional` **accentColor**: `string`
 
-Defined in: [src/components/common/MetricsCard.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/common/MetricsCard.tsx#L11)
+Defined in: [src/components/common/MetricsCard.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/components/common/MetricsCard.tsx#L11)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/components/common/MetricsCard.tsx:11](https://github.com/Hack23
 
 > `optional` **className**: `string`
 
-Defined in: [src/components/common/MetricsCard.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/common/MetricsCard.tsx#L9)
+Defined in: [src/components/common/MetricsCard.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/components/common/MetricsCard.tsx#L9)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/components/common/MetricsCard.tsx:9](https://github.com/Hack23/
 
 > `optional` **icon**: `string`
 
-Defined in: [src/components/common/MetricsCard.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/common/MetricsCard.tsx#L8)
+Defined in: [src/components/common/MetricsCard.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/components/common/MetricsCard.tsx#L8)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/components/common/MetricsCard.tsx:8](https://github.com/Hack23/
 
 > `optional` **subtitle**: `string`
 
-Defined in: [src/components/common/MetricsCard.tsx:7](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/common/MetricsCard.tsx#L7)
+Defined in: [src/components/common/MetricsCard.tsx:7](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/components/common/MetricsCard.tsx#L7)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/components/common/MetricsCard.tsx:7](https://github.com/Hack23/
 
 > `optional` **testId**: `string`
 
-Defined in: [src/components/common/MetricsCard.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/common/MetricsCard.tsx#L10)
+Defined in: [src/components/common/MetricsCard.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/components/common/MetricsCard.tsx#L10)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [src/components/common/MetricsCard.tsx:10](https://github.com/Hack23
 
 > **title**: `string`
 
-Defined in: [src/components/common/MetricsCard.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/common/MetricsCard.tsx#L5)
+Defined in: [src/components/common/MetricsCard.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/components/common/MetricsCard.tsx#L5)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [src/components/common/MetricsCard.tsx:5](https://github.com/Hack23/
 
 > `optional` **trend**: `object`
 
-Defined in: [src/components/common/MetricsCard.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/common/MetricsCard.tsx#L13)
+Defined in: [src/components/common/MetricsCard.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/components/common/MetricsCard.tsx#L13)
 
 #### direction
 
@@ -78,7 +78,7 @@ Defined in: [src/components/common/MetricsCard.tsx:13](https://github.com/Hack23
 
 > **value**: `string` \| `number`
 
-Defined in: [src/components/common/MetricsCard.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/common/MetricsCard.tsx#L6)
+Defined in: [src/components/common/MetricsCard.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/components/common/MetricsCard.tsx#L6)
 
 ***
 
@@ -86,4 +86,4 @@ Defined in: [src/components/common/MetricsCard.tsx:6](https://github.com/Hack23/
 
 > `optional` **variant**: `"info"` \| `"success"` \| `"warning"` \| `"purple"` \| `"primary"` \| `"danger"`
 
-Defined in: [src/components/common/MetricsCard.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/common/MetricsCard.tsx#L17)
+Defined in: [src/components/common/MetricsCard.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/components/common/MetricsCard.tsx#L17)

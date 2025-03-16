@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-03-16T04:01:42.603Z",
+    "end": "2025-03-16T04:02:02.680Z",
+    "duration": 20077,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "702db3ab-4128-4e04-b73a-b9b3eadce9fe",
+      "title": "",
+      "fullFile": "cypress/e2e/widgets/integrity-impact-widget.cy.ts",
+      "file": "cypress/e2e/widgets/integrity-impact-widget.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4598a09a-dd44-4806-8164-e902df000ed0",
+          "title": "Integrity Impact Widget",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "integrity-impact widget should exist",
+              "fullTitle": "Integrity Impact Widget integrity-impact widget should exist",
+              "timedOut": null,
+              "duration": 3629,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(widgetName).should(\"exist\").scrollIntoView();\ncy.findWidget(widgetName).then(($widget) => {\n  expect($widget.text().trim().length).to.be.greaterThan(0);\n});",
+              "err": {},
+              "uuid": "84973938-876c-4d57-9f3d-119b8c67f911",
+              "parentUUID": "4598a09a-dd44-4806-8164-e902df000ed0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "updates content when security levels change",
+              "fullTitle": "Integrity Impact Widget updates content when security levels change",
+              "timedOut": null,
+              "duration": 6621,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "testSecurityLevelChanges(\"integrity-impact\");",
+              "err": {},
+              "uuid": "2a6d4cbc-c163-46eb-a80a-4e7d43858cea",
+              "parentUUID": "4598a09a-dd44-4806-8164-e902df000ed0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "displays detailed integrity impacts with high security",
+              "fullTitle": "Integrity Impact Widget displays detailed integrity impacts with high security",
+              "timedOut": null,
+              "duration": 4862,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"integrity-impact\").scrollIntoView();\ncy.setSecurityLevels(\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.HIGH,\n  // High integrity\n  SECURITY_LEVELS.MODERATE\n);\ncy.wait(1e3);\ncy.findWidget(\"integrity-impact\").within(() => {\n  cy.contains(/accuracy|validation|authenticity|correct|trusted/i).should(\n    \"exist\"\n  );\n});",
+              "err": {},
+              "uuid": "08f7e61f-cf1e-497e-9d52-d7b4a34a9f22",
+              "parentUUID": "4598a09a-dd44-4806-8164-e902df000ed0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "provides appropriate integrity recommendations",
+              "fullTitle": "Integrity Impact Widget provides appropriate integrity recommendations",
+              "timedOut": null,
+              "duration": 4817,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"integrity-impact\").scrollIntoView();\ncy.setSecurityLevels(\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.HIGH\n);\ncy.wait(1e3);\ncy.findWidget(\"integrity-impact\").within(() => {\n  cy.contains(/recommend|suggest|practice|implement/i).should(\"exist\");\n});",
+              "err": {},
+              "uuid": "d7b107f4-4fb6-4f72-8e1e-7581f0e5d00d",
+              "parentUUID": "4598a09a-dd44-4806-8164-e902df000ed0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "84973938-876c-4d57-9f3d-119b8c67f911",
+            "2a6d4cbc-c163-46eb-a80a-4e7d43858cea",
+            "08f7e61f-cf1e-497e-9d52-d7b4a34a9f22",
+            "d7b107f4-4fb6-4f72-8e1e-7581f0e5d00d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 19929,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "docs/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

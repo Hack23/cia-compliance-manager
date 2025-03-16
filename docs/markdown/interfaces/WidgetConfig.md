@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.3**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetConfig
 
-Defined in: [src/types/widget.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L5)
+Defined in: [src/types/widget.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L5)
 
 Type definitions for widget system components
 
@@ -16,7 +16,7 @@ Type definitions for widget system components
 
 > `optional` **description**: `string`
 
-Defined in: [src/types/widget.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L9)
+Defined in: [src/types/widget.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L9)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/widget.ts:9](https://github.com/Hack23/cia-compliance-man
 
 > `optional` **height**: `number`
 
-Defined in: [src/types/widget.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L15)
+Defined in: [src/types/widget.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L15)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/widget.ts:15](https://github.com/Hack23/cia-compliance-ma
 
 > `optional` **icon**: `string`
 
-Defined in: [src/types/widget.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L10)
+Defined in: [src/types/widget.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L10)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/widget.ts:10](https://github.com/Hack23/cia-compliance-ma
 
 > **id**: `string`
 
-Defined in: [src/types/widget.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L6)
+Defined in: [src/types/widget.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L6)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/types/widget.ts:6](https://github.com/Hack23/cia-compliance-man
 
 > `optional` **maxSecurityLevel**: `string` \| `number`
 
-Defined in: [src/types/widget.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L19)
+Defined in: [src/types/widget.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L19)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/types/widget.ts:19](https://github.com/Hack23/cia-compliance-ma
 
 > `optional` **minSecurityLevel**: `string` \| `number`
 
-Defined in: [src/types/widget.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L18)
+Defined in: [src/types/widget.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L18)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [src/types/widget.ts:18](https://github.com/Hack23/cia-compliance-ma
 
 > `optional` **order**: `number`
 
-Defined in: [src/types/widget.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L16)
+Defined in: [src/types/widget.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L16)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [src/types/widget.ts:16](https://github.com/Hack23/cia-compliance-ma
 
 > `optional` **priority**: `number`
 
-Defined in: [src/types/widget.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L11)
+Defined in: [src/types/widget.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L11)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [src/types/widget.ts:11](https://github.com/Hack23/cia-compliance-ma
 
 > `optional` **requiredSecurityLevels**: `string`[]
 
-Defined in: [src/types/widget.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L17)
+Defined in: [src/types/widget.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L17)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [src/types/widget.ts:17](https://github.com/Hack23/cia-compliance-ma
 
 > `optional` **size**: `string`
 
-Defined in: [src/types/widget.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L13)
+Defined in: [src/types/widget.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L13)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: [src/types/widget.ts:13](https://github.com/Hack23/cia-compliance-ma
 
 > `optional` **title**: `string`
 
-Defined in: [src/types/widget.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L8)
+Defined in: [src/types/widget.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L8)
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: [src/types/widget.ts:8](https://github.com/Hack23/cia-compliance-man
 
 > **type**: `string`
 
-Defined in: [src/types/widget.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L7)
+Defined in: [src/types/widget.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L7)
 
 ***
 
@@ -112,7 +112,7 @@ Defined in: [src/types/widget.ts:7](https://github.com/Hack23/cia-compliance-man
 
 > `optional` **visible**: `boolean`
 
-Defined in: [src/types/widget.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L12)
+Defined in: [src/types/widget.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L12)
 
 ***
 
@@ -120,4 +120,4 @@ Defined in: [src/types/widget.ts:12](https://github.com/Hack23/cia-compliance-ma
 
 > `optional` **width**: `number`
 
-Defined in: [src/types/widget.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L14)
+Defined in: [src/types/widget.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/368d5a1330a94df78d48c65d28962bd0f7cab363/src/types/widget.ts#L14)
