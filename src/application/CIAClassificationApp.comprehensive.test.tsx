@@ -111,6 +111,9 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
     // Since we're using APP_CONTAINER as APP_HEADER, we don't need to check for APP_HEADER separately
     // We need to check for the mocked dashboard which is definitely in the document
     expect(screen.getByTestId("mocked-dashboard")).toBeInTheDocument();
+
+    // Check that dark mode is applied by default
+    expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
   });
 
   it("toggles theme when theme button is clicked", () => {
@@ -118,15 +121,15 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
 
     const themeToggle = screen.getByTestId(TEST_IDS.THEME_TOGGLE);
 
-    // Click to enable dark mode
-    fireEvent.click(themeToggle);
-    expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
-
-    // Click again to disable dark mode
+    // First click should turn OFF dark mode since it's ON by default
     fireEvent.click(themeToggle);
     expect(document.documentElement.classList.remove).toHaveBeenCalledWith(
       "dark"
     );
+
+    // Click again to enable dark mode
+    fireEvent.click(themeToggle);
+    expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
   });
 
   it("handles test event to set security levels", () => {
@@ -180,6 +183,24 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
     render(<CIAClassificationApp />);
 
     // Dark mode should be applied based on system preference
+    expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
+  });
+
+  it("applies dark mode by default even without system preference", () => {
+    // Mock matchMedia to indicate light mode preference
+    Object.defineProperty(window, "matchMedia", {
+      value: vi.fn().mockImplementation((query) => ({
+        matches: query === "(prefers-color-scheme: light)",
+        media: query,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      })),
+      writable: true,
+    });
+
+    render(<CIAClassificationApp />);
+
+    // Dark mode should still be applied by default regardless of system preference
     expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
   });
 
