@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.1**](../../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Enumeration: WidgetType
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/widgetHelpers.tsx#L13)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/widgetHelpers.tsx#L13)
 
 ## Enumeration Members
 
@@ -14,7 +14,7 @@ Defined in: [src/components/widgets/utils/widgetHelpers.tsx:13](https://github.c
 
 > **AVAILABILITY\_IMPACT**: `"AVAILABILITY_IMPACT"`
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:23](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/widgetHelpers.tsx#L23)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:23](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/widgetHelpers.tsx#L23)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/components/widgets/utils/widgetHelpers.tsx:23](https://github.c
 
 > **BUSINESS\_IMPACT**: `"BUSINESS_IMPACT"`
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/widgetHelpers.tsx#L20)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/widgetHelpers.tsx#L20)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/components/widgets/utils/widgetHelpers.tsx:20](https://github.c
 
 > **COMPLIANCE\_STATUS**: `"COMPLIANCE_STATUS"`
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/widgetHelpers.tsx#L17)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/widgetHelpers.tsx#L17)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/components/widgets/utils/widgetHelpers.tsx:17](https://github.c
 
 > **CONFIDENTIALITY\_IMPACT**: `"CONFIDENTIALITY_IMPACT"`
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/widgetHelpers.tsx#L25)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/widgetHelpers.tsx#L25)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/components/widgets/utils/widgetHelpers.tsx:25](https://github.c
 
 > **COST\_ESTIMATION**: `"COST_ESTIMATION"`
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/widgetHelpers.tsx#L19)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/widgetHelpers.tsx#L19)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [src/components/widgets/utils/widgetHelpers.tsx:19](https://github.c
 
 > **INTEGRITY\_IMPACT**: `"INTEGRITY_IMPACT"`
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/widgetHelpers.tsx#L24)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/widgetHelpers.tsx#L24)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [src/components/widgets/utils/widgetHelpers.tsx:24](https://github.c
 
 > **SECURITY\_LEVEL**: `"SECURITY_LEVEL"`
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/widgetHelpers.tsx#L14)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/widgetHelpers.tsx#L14)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [src/components/widgets/utils/widgetHelpers.tsx:14](https://github.c
 
 > **SECURITY\_RESOURCES**: `"SECURITY_RESOURCES"`
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:22](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/widgetHelpers.tsx#L22)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:22](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/widgetHelpers.tsx#L22)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [src/components/widgets/utils/widgetHelpers.tsx:22](https://github.c
 
 > **SECURITY\_SUMMARY**: `"SECURITY_SUMMARY"`
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/widgetHelpers.tsx#L15)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/widgetHelpers.tsx#L15)
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: [src/components/widgets/utils/widgetHelpers.tsx:15](https://github.c
 
 > **SECURITY\_VISUALIZATION**: `"SECURITY_VISUALIZATION"`
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/widgetHelpers.tsx#L16)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/widgetHelpers.tsx#L16)
 
 ***
 
@@ -94,7 +94,7 @@ Defined in: [src/components/widgets/utils/widgetHelpers.tsx:16](https://github.c
 
 > **TECHNICAL\_DETAILS**: `"TECHNICAL_DETAILS"`
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/widgetHelpers.tsx#L21)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/widgetHelpers.tsx#L21)
 
 ***
 
@@ -102,4 +102,4 @@ Defined in: [src/components/widgets/utils/widgetHelpers.tsx:21](https://github.c
 
 > **VALUE\_CREATION**: `"VALUE_CREATION"`
 
-Defined in: [src/components/widgets/utils/widgetHelpers.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/utils/widgetHelpers.tsx#L18)
+Defined in: [src/components/widgets/utils/widgetHelpers.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/widgetHelpers.tsx#L18)

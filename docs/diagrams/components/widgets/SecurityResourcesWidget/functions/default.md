@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.1**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **default**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/SecurityResourcesWidget.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/widgets/SecurityResourcesWidget.tsx#L24)
+Defined in: [src/components/widgets/SecurityResourcesWidget.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/SecurityResourcesWidget.tsx#L24)
 
 SecurityResourcesWidget displays security resources and reference materials
 Enhanced with Ingress-style UI elements for a more immersive experience

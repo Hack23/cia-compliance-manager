@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.1**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **TEST\_MATCHERS**: `object`
 
-Defined in: [src/constants/testConstants.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/constants/testConstants.ts#L42)
+Defined in: [src/constants/testConstants.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/constants/testConstants.ts#L42)
 
 ## Type declaration
 

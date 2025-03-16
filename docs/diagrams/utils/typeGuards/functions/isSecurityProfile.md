@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.1**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isSecurityProfile**(`obj`): `boolean`
 
-Defined in: [src/utils/typeGuards.ts:258](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/utils/typeGuards.ts#L258)
+Defined in: [src/utils/typeGuards.ts:258](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/utils/typeGuards.ts#L258)
 
 Checks if an object is a valid security profile
 

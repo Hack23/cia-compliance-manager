@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.1**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **WidgetBase**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/common/WidgetBase.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/4236f4375d9cfb0505c191818eeb5443ec527132/src/components/common/WidgetBase.tsx#L21)
+Defined in: [src/components/common/WidgetBase.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/common/WidgetBase.tsx#L21)
 
 Base component for all dashboard widgets with standard layout and styling
 
