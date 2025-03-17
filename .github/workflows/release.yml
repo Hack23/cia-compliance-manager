@@ -61,7 +61,7 @@ jobs:
           sudo dbus-daemon --system --fork
 
       - name: Setup Node.js
-        uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version: "20"
           cache: "npm"
@@ -160,7 +160,7 @@ jobs:
           ref: ${{ github.event_name == 'push' && github.ref || github.event_name == 'workflow_dispatch' && github.event.inputs.version || '' }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version: "20"
           cache: "npm"
