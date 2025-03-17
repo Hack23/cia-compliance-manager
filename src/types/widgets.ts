@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { ComponentType, Dispatch, SetStateAction } from "react";
 import { CIADetails, SecurityLevel } from "./cia";
 
 /**
@@ -33,15 +33,15 @@ export interface BaseWidgetDetails {
  */
 export interface CostEstimationWidgetProps extends WidgetBaseProps {
   /** Total capital expenditure as percentage of IT budget */
-  totalCapex: number;
+  totalCapex?: number;
   /** Total operational expenditure as percentage of IT budget */
-  totalOpex: number;
+  totalOpex?: number;
   /** Formatted capital expenditure estimate */
-  capexEstimate: string;
+  capexEstimate?: string;
   /** Formatted operational expenditure estimate */
-  opexEstimate: string;
+  opexEstimate?: string;
   /** Whether this is a small solution (affects cost calculations) */
-  isSmallSolution: boolean;
+  isSmallSolution?: boolean;
   /** Return on investment estimate */
   roi?: string;
   /** Implementation time estimate */
@@ -52,6 +52,8 @@ export interface CostEstimationWidgetProps extends WidgetBaseProps {
   integrityOptions?: Record<string, CIADetails>;
   /** Confidentiality options */
   confidentialityOptions?: Record<string, CIADetails>;
+  /** Security level */
+  securityLevel?: SecurityLevel;
 }
 
 /**
@@ -302,3 +304,68 @@ export const typeAdapters = {
     };
   },
 };
+
+/**
+ * Base widget component type
+ */
+export type WidgetComponentType<T = any> = ComponentType<T>;
+
+/**
+ * Widget size configuration
+ */
+export interface WidgetSize {
+  width: number;
+  height: number;
+}
+
+/**
+ * Preset widget sizes
+ */
+export enum WidgetSizePreset {
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
+  EXTRA_LARGE = "extraLarge",
+  FULL_WIDTH = "fullWidth",
+  DEFAULT = "medium",
+}
+
+/**
+ * Widget definition structure
+ */
+export interface WidgetDefinition<T = any> {
+  id: string;
+  title: string;
+  description?: string;
+  component: WidgetComponentType<T>;
+  defaultProps?: Partial<T>;
+  icon?: string;
+  size?: string;
+  order?: number;
+  position?: number;
+  visible?: boolean;
+  minSecurityLevel?: string | number;
+  maxSecurityLevel?: string | number;
+  requiredSecurityLevels?: string[];
+}
+
+/**
+ * Widget configuration structure
+ */
+export interface WidgetConfig {
+  id: string;
+  type: string;
+  title: string;
+  description: string;
+  icon: string;
+  priority: number;
+  visible: boolean;
+  size: string;
+  width: number;
+  height: number;
+  order: number;
+  requiredSecurityLevels?: string[];
+  minSecurityLevel?: string | number;
+  maxSecurityLevel?: string | number;
+  position?: number;
+}

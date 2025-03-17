@@ -36,5 +36,12 @@ export * from "./common/CIAImpactCard";
 export { default as SimpleSecurityLevelSelector } from "./common/SecurityLevelSelector";
 export * from "./common/SecurityRiskScore";
 
+// Export single canonical SecurityLevelSelector
+export { default as SecurityLevelSelector } from "./SecurityLevelSelector";
+
 // Export widgets
 export * from "./widgets";
+
+// Export utility functions from the canonical location
+export * from "../utils/widgetHelpers";
+export { widgetRegistry, widgetRegistryUtils } from "../utils/widgetRegistry";
