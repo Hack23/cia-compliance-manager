@@ -1,0 +1,187 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-03-17T09:41:39.721Z",
+    "end": "2025-03-17T09:41:50.905Z",
+    "duration": 11184,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "827e67e9-ecdd-40b0-9b09-b5a1455380f2",
+      "title": "",
+      "fullFile": "cypress/e2e/widgets/technical-implementation-widget.cy.ts",
+      "file": "cypress/e2e/widgets/technical-implementation-widget.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b5398560-687c-49a0-894b-184a8f4e62a5",
+          "title": "Technical Implementation Widget Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "shows technical implementation details for security levels",
+              "fullTitle": "Technical Implementation Widget Tests shows technical implementation details for security levels",
+              "timedOut": null,
+              "duration": 1823,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.setSecurityLevels(\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.MODERATE\n);\ncy.get('[data-testid=\"technical-details-widget\"]').should(\"exist\").scrollIntoView();\ncy.verifyContentPresent([/technical|implementation|detail/i]);\ncy.get('[data-testid=\"technical-details-widget\"]').find(\".widget-header\").should(\"contain\", \"Technical Implementation Details\");",
+              "err": {},
+              "uuid": "aedcddf9-6012-4800-a5de-942462c3d176",
+              "parentUUID": "b5398560-687c-49a0-894b-184a8f4e62a5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "updates implementation details when security levels change",
+              "fullTitle": "Technical Implementation Widget Tests updates implementation details when security levels change",
+              "timedOut": null,
+              "duration": 2404,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "testWidgetUpdatesWithSecurityLevels(\n  '[data-testid=\"technical-details-widget\"]',\n  {\n    initialLevels: [\n      SECURITY_LEVELS.LOW,\n      SECURITY_LEVELS.LOW,\n      SECURITY_LEVELS.LOW\n    ],\n    newLevels: [\n      SECURITY_LEVELS.HIGH,\n      SECURITY_LEVELS.HIGH,\n      SECURITY_LEVELS.HIGH\n    ],\n    expectTextChange: true\n  }\n);",
+              "err": {},
+              "uuid": "6a33dd33-644e-4149-936b-3aac85934977",
+              "parentUUID": "b5398560-687c-49a0-894b-184a8f4e62a5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "allows switching between confidentiality, integrity, and availability sections",
+              "fullTitle": "Technical Implementation Widget Tests allows switching between confidentiality, integrity, and availability sections",
+              "timedOut": null,
+              "duration": 3276,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.setSecurityLevels(\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.MODERATE\n);\ncy.get('[data-testid=\"technical-details-widget\"]').should(\"exist\").scrollIntoView({ offset: { top: -100, left: 0 } });\ncy.get('[data-testid=\"technical-details-widget\"]').within(() => {\n  cy.get(\"button\").contains(/availability/i).should(\"exist\").click({ force: true }).wait(500);\n  cy.contains(/availability|uptime|recovery/i).should(\"be.visible\");\n  cy.get(\"h3, h4\").should(\"exist\");\n  cy.contains(/technical|implementation|details/i).should(\"exist\");\n  cy.get(\"button\").contains(/integrity/i).should(\"exist\").click({ force: true }).wait(500);\n  cy.contains(/integrity|consistency|accuracy/i).should(\"be.visible\");\n  cy.contains(/validation|verification|consistency|integrity/i).should(\n    \"be.visible\"\n  );\n  cy.get(\"button\").contains(/confidentiality/i).should(\"exist\").click({ force: true }).wait(500);\n  cy.contains(/confidentiality|protection|sensitive/i).should(\"be.visible\");\n  cy.contains(\n    /encryption|access control|authentication|confidentiality/i\n  ).should(\"be.visible\");\n});",
+              "err": {},
+              "uuid": "1565f704-d955-4b02-9feb-b798d58ceedb",
+              "parentUUID": "b5398560-687c-49a0-894b-184a8f4e62a5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "shows implementation requirements for different security levels",
+              "fullTitle": "Technical Implementation Widget Tests shows implementation requirements for different security levels",
+              "timedOut": null,
+              "duration": 1380,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.setSecurityLevels(\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.HIGH\n);\ncy.get('[data-testid=\"technical-details-widget\"]').scrollIntoView();\ncy.verifyContentPresent([\n  /technical|implementation|detail/i,\n  /high|security/i\n]);\ncy.get('[data-testid=\"technical-details-widget\"]').within(() => {\n  cy.contains(/technical|implementation|development|detail/i).should(\n    \"exist\"\n  );\n  cy.contains(/maintenance|effort|support|implementation/i).should(\"exist\");\n});",
+              "err": {},
+              "uuid": "7d2e3be2-39d5-4d5f-81c4-f5adac20ca60",
+              "parentUUID": "b5398560-687c-49a0-894b-184a8f4e62a5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "displays different technical requirements based on security level",
+              "fullTitle": "Technical Implementation Widget Tests displays different technical requirements based on security level",
+              "timedOut": null,
+              "duration": 2113,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.setSecurityLevels(\n  SECURITY_LEVELS.LOW,\n  SECURITY_LEVELS.LOW,\n  SECURITY_LEVELS.LOW\n);\ncy.get('[data-testid=\"technical-details-widget\"]').should(\"exist\").scrollIntoView();\ncy.get('[data-testid=\"technical-details-widget\"]').within(() => {\n  cy.contains(/low/i).should(\"exist\");\n});\ncy.setSecurityLevels(\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.HIGH,\n  SECURITY_LEVELS.HIGH\n);\ncy.get('[data-testid=\"technical-details-widget\"]').within(() => {\n  cy.contains(/high/i).should(\"exist\");\n  cy.contains(/advanced|security|protection|high/i).should(\"exist\");\n});",
+              "err": {},
+              "uuid": "73c237ff-84c5-4b04-9734-e7516a0c92ce",
+              "parentUUID": "b5398560-687c-49a0-894b-184a8f4e62a5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "aedcddf9-6012-4800-a5de-942462c3d176",
+            "6a33dd33-644e-4149-936b-3aac85934977",
+            "1565f704-d955-4b02-9feb-b798d58ceedb",
+            "7d2e3be2-39d5-4d5f-81c4-f5adac20ca60",
+            "73c237ff-84c5-4b04-9734-e7516a0c92ce"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 10996,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "docs/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

@@ -35,8 +35,7 @@
     "docs:markdown": "typedoc -options typedoc.markdown.json",
     "docs:dependencies": "mkdir -p docs/dependencies && depcruise --config .dependency-cruiser.cjs --output-type dot src | dot -T svg > docs/dependencies/module-dependencies.svg || echo 'Dependency diagram generation failed - continuing' && touch docs/dependencies/module-dependencies.svg",
     "docs:diagrams": "node scripts/generate-architecture-diagrams.js",
-    "docs:coverage-summary": "vitest run --coverage",
-    "docs:bundle": "npm run docs && npm run docs:uml && npm run docs:markdown && npm run docs:dependencies && npm run docs:diagrams && npm run docs:coverage-summary",
+    "docs:bundle": "npm run docs && npm run docs:uml && npm run docs:markdown && npm run docs:dependencies && npm run docs:diagrams",
     "test:e2e:report": "npm run test:e2e"
   },
   "browserslist": {

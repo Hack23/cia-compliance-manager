@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.5**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getWidgetContent**(`type`): `string`
 
-Defined in: [src/utils/widgetHelpers.tsx:80](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/utils/widgetHelpers.tsx#L80)
+Defined in: [src/utils/widgetHelpers.tsx:99](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/utils/widgetHelpers.tsx#L99)
 
 Get the content for a widget type
 

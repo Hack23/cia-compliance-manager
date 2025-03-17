@@ -8,7 +8,7 @@
 
 > `const` **RESOURCE\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:477](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/constants/testIds.ts#L477)
+Defined in: [src/constants/testIds.ts:477](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/testIds.ts#L477)
 
 ## Type declaration
 

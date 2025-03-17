@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityResource
 
-Defined in: [src/services/ciaContentService.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/services/ciaContentService.ts#L20)
+Defined in: [src/services/ciaContentService.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/services/ciaContentService.ts#L20)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/services/ciaContentService.ts:20](https://github.com/Hack23/cia
 
 > **category**: `string`
 
-Defined in: [src/services/ciaContentService.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/services/ciaContentService.ts#L24)
+Defined in: [src/services/ciaContentService.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/services/ciaContentService.ts#L24)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/services/ciaContentService.ts:24](https://github.com/Hack23/cia
 
 > **description**: `string`
 
-Defined in: [src/services/ciaContentService.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/services/ciaContentService.ts#L22)
+Defined in: [src/services/ciaContentService.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/services/ciaContentService.ts#L22)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/services/ciaContentService.ts:22](https://github.com/Hack23/cia
 
 > **relevanceScore**: `number`
 
-Defined in: [src/services/ciaContentService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/services/ciaContentService.ts#L26)
+Defined in: [src/services/ciaContentService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/services/ciaContentService.ts#L26)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/services/ciaContentService.ts:26](https://github.com/Hack23/cia
 
 > **tags**: `string`[]
 
-Defined in: [src/services/ciaContentService.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/services/ciaContentService.ts#L25)
+Defined in: [src/services/ciaContentService.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/services/ciaContentService.ts#L25)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/services/ciaContentService.ts:25](https://github.com/Hack23/cia
 
 > **title**: `string`
 
-Defined in: [src/services/ciaContentService.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/services/ciaContentService.ts#L21)
+Defined in: [src/services/ciaContentService.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/services/ciaContentService.ts#L21)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [src/services/ciaContentService.ts:21](https://github.com/Hack23/cia
 
 > **type**: `string`
 
-Defined in: [src/services/ciaContentService.ts:27](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/services/ciaContentService.ts#L27)
+Defined in: [src/services/ciaContentService.ts:27](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/services/ciaContentService.ts#L27)
 
 ***
 
@@ -62,4 +62,4 @@ Defined in: [src/services/ciaContentService.ts:27](https://github.com/Hack23/cia
 
 > **url**: `string`
 
-Defined in: [src/services/ciaContentService.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/services/ciaContentService.ts#L23)
+Defined in: [src/services/ciaContentService.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/services/ciaContentService.ts#L23)

@@ -6,7 +6,7 @@
 
 # Interface: WidgetSize
 
-Defined in: [src/types/widgets.ts:316](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L316)
+Defined in: [src/types/widgets.ts:316](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L316)
 
 Widget size configuration
 
@@ -16,7 +16,7 @@ Widget size configuration
 
 > **height**: `number`
 
-Defined in: [src/types/widgets.ts:318](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L318)
+Defined in: [src/types/widgets.ts:318](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L318)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [src/types/widgets.ts:318](https://github.com/Hack23/cia-compliance-
 
 > **width**: `number`
 
-Defined in: [src/types/widgets.ts:317](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L317)
+Defined in: [src/types/widgets.ts:317](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L317)

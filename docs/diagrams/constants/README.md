@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../README.md)
 
 ***
 
@@ -191,6 +191,12 @@ Re-exports [IMPLEMENTATION_COSTS](coreConstants/variables/IMPLEMENTATION_COSTS.m
 ### INTEGRITY\_IMPACT\_TEST\_IDS
 
 Re-exports [INTEGRITY_IMPACT_TEST_IDS](testIds/variables/INTEGRITY_IMPACT_TEST_IDS.md)
+
+***
+
+### RESOURCE\_TEST\_IDS
+
+Re-exports [RESOURCE_TEST_IDS](testIds/variables/RESOURCE_TEST_IDS.md)
 
 ***
 

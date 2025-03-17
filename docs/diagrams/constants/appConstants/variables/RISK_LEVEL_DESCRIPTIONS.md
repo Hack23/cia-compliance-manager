@@ -8,7 +8,7 @@
 
 > `const` **RISK\_LEVEL\_DESCRIPTIONS**: `object`
 
-Defined in: [src/constants/appConstants.ts:479](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/constants/appConstants.ts#L479)
+Defined in: [src/constants/appConstants.ts:479](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/appConstants.ts#L479)
 
 ## Type declaration
 

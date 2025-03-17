@@ -1,8 +1,8 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](README.md)
 
 ***
 
-# CIA Compliance Manager Diagrams v0.8.2
+# CIA Compliance Manager Diagrams v0.8.5
 
 ## Modules
 
@@ -17,8 +17,11 @@
 - [components/common/CIAImpactCard](components/common/CIAImpactCard/README.md)
 - [components/common/KeyValuePair](components/common/KeyValuePair/README.md)
 - [components/common/MetricsCard](components/common/MetricsCard/README.md)
+- [components/common/SecurityLevelSelector](components/common/SecurityLevelSelector/README.md)
 - [components/common/SecurityLevelSummaryItem](components/common/SecurityLevelSummaryItem/README.md)
+- [components/common/SecurityRiskScore](components/common/SecurityRiskScore/README.md)
 - [components/common/StatusBadge](components/common/StatusBadge/README.md)
+- [components/common/Tooltip](components/common/Tooltip/README.md)
 - [components/common/ValueDisplay](components/common/ValueDisplay/README.md)
 - [components/common/WidgetBase](components/common/WidgetBase/README.md)
 - [components/common/WidgetContainer](components/common/WidgetContainer/README.md)
@@ -28,6 +31,7 @@
 - [components/securitylevel](components/securitylevel/README.md)
 - [components/securitylevel/SecurityLevelSelector](components/securitylevel/SecurityLevelSelector/README.md)
 - [components/securitylevel/Selection](components/securitylevel/Selection/README.md)
+- [components/SecurityLevelSelector](components/SecurityLevelSelector/README.md)
 - [components/widgets](components/widgets/README.md)
 - [components/widgets/AvailabilityImpactWidget](components/widgets/AvailabilityImpactWidget/README.md)
 - [components/widgets/BusinessImpactAnalysisWidget](components/widgets/BusinessImpactAnalysisWidget/README.md)
@@ -41,10 +45,6 @@
 - [components/widgets/SecuritySummaryWidget](components/widgets/SecuritySummaryWidget/README.md)
 - [components/widgets/SecurityVisualizationWidget](components/widgets/SecurityVisualizationWidget/README.md)
 - [components/widgets/TechnicalDetailsWidget](components/widgets/TechnicalDetailsWidget/README.md)
-- [components/widgets/utils](components/widgets/utils/README.md)
-- [components/widgets/utils/types](components/widgets/utils/types/README.md)
-- [components/widgets/utils/widgetHelpers](components/widgets/utils/widgetHelpers/README.md)
-- [components/widgets/utils/widgetRegistry](components/widgets/utils/widgetRegistry/README.md)
 - [components/widgets/ValueCreationWidget](components/widgets/ValueCreationWidget/README.md)
 - [constants](constants/README.md)
 - [constants/appConstants](constants/appConstants/README.md)
@@ -76,6 +76,7 @@
 - [types/widgets](types/widgets/README.md)
 - [utils](utils/README.md)
 - [utils/colorUtils](utils/colorUtils/README.md)
+- [utils/errorHandlers](utils/errorHandlers/README.md)
 - [utils/securityDefaults](utils/securityDefaults/README.md)
 - [utils/securityLevelUtils](utils/securityLevelUtils/README.md)
 - [utils/test-helpers](utils/test-helpers/README.md)

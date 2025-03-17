@@ -1,0 +1,187 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-03-17T09:38:07.627Z",
+    "end": "2025-03-17T09:38:18.111Z",
+    "duration": 10484,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8d922391-7c5f-46a5-8968-8dda937768bc",
+      "title": "",
+      "fullFile": "cypress/e2e/widgets/business-impact-widget.cy.ts",
+      "file": "cypress/e2e/widgets/business-impact-widget.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ed69b2aa-b97f-4590-aa55-65e9bb9badfb",
+          "title": "Business Impact Widget",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should display the business impact widget",
+              "fullTitle": "Business Impact Widget should display the business impact widget",
+              "timedOut": null,
+              "duration": 1512,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get(\"body\").then(($body) => {\n  const selectors = [\n    '[data-testid=\"widget-business-impact-container\"]',\n    '[data-testid=\"business-impact-widget\"]',\n    '[data-testid*=\"business-impact\"]',\n    '[class*=\"business-impact\"]'\n  ];\n  let found = false;\n  for (const selector of selectors) {\n    if ($body.find(selector).length > 0) {\n      cy.get(selector).should(\"exist\").and(\"be.visible\");\n      found = true;\n      break;\n    }\n  }\n  if (!found) {\n    cy.log(\"⚠️ Business impact widget not found with standard selectors\");\n  }\n});",
+              "err": {},
+              "uuid": "76a5fd8b-605e-42d7-86fd-6fd7e91e02f3",
+              "parentUUID": "ed69b2aa-b97f-4590-aa55-65e9bb9badfb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "updates content when security levels change",
+              "fullTitle": "Business Impact Widget updates content when security levels change",
+              "timedOut": null,
+              "duration": 2892,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"business-impact\").then(($widget) => {\n  if ($widget.length === 0) {\n    cy.log(\"⚠️ Widget not found - skipping test\");\n    return;\n  }\n  cy.wrap($widget).scrollIntoView();\n  const initialContent = $widget.text();\n  cy.get(\"body\").then(($body) => {\n    if ($body.find(\"select\").length >= 3) {\n      cy.get(\"select\").eq(0).select(SECURITY_LEVELS.LOW, { force: true });\n      cy.get(\"select\").eq(1).select(SECURITY_LEVELS.LOW, { force: true });\n      cy.get(\"select\").eq(2).select(SECURITY_LEVELS.LOW, { force: true });\n    } else {\n      cy.setSecurityLevels(\n        SECURITY_LEVELS.LOW,\n        SECURITY_LEVELS.LOW,\n        SECURITY_LEVELS.LOW\n      );\n    }\n  });\n  cy.wait(500);\n  cy.get(\"body\").then(($body) => {\n    if ($body.find(\"select\").length >= 3) {\n      cy.get(\"select\").eq(0).select(SECURITY_LEVELS.HIGH, { force: true });\n      cy.get(\"select\").eq(1).select(SECURITY_LEVELS.HIGH, { force: true });\n      cy.get(\"select\").eq(2).select(SECURITY_LEVELS.HIGH, { force: true });\n    } else {\n      cy.setSecurityLevels(\n        SECURITY_LEVELS.HIGH,\n        SECURITY_LEVELS.HIGH,\n        SECURITY_LEVELS.HIGH\n      );\n    }\n  });\n  cy.wait(500);\n  cy.findWidget(\"business-impact\").invoke(\"text\").then((newContent) => {\n    if (newContent !== initialContent) {\n      cy.log(\n        \"✅ Content changed as expected after security level change\"\n      );\n    } else {\n      cy.log(\"⚠️ Content did not change after security level change\");\n    }\n  });\n});",
+              "err": {},
+              "uuid": "1cc182e1-0734-4182-9911-aef683eb86ec",
+              "parentUUID": "ed69b2aa-b97f-4590-aa55-65e9bb9badfb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "has functioning CIA tab navigation",
+              "fullTitle": "Business Impact Widget has functioning CIA tab navigation",
+              "timedOut": null,
+              "duration": 1721,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"business-impact\").then(($widget) => {\n  if ($widget.length === 0) {\n    cy.log(\"⚠️ Widget not found - skipping test\");\n    return;\n  }\n  cy.wrap($widget).scrollIntoView();\n  const tabSelectors = [\n    'button, [role=\"tab\"]',\n    'button:contains(\"Availability\"), button:contains(\"Integrity\"), button:contains(\"Confidentiality\")'\n  ];\n  let tabsFound = false;\n  for (const selector of tabSelectors) {\n    const $tabs = $widget.find(selector);\n    if ($tabs.length >= 2) {\n      tabsFound = true;\n      cy.log(`Found ${$tabs.length} tabs with selector: ${selector}`);\n      cy.wrap($widget).find(selector).each(($tab, index) => {\n        if (index > 0 && index < 3) {\n          cy.log(`Clicking tab ${index}`);\n          cy.wrap($tab).click({ force: true });\n          cy.wait(300);\n        }\n      });\n      break;\n    }\n  }\n  if (!tabsFound) {\n    cy.log(\n      \"⚠️ No tabs found in business impact widget - this might be expected if the widget doesn't use tabs\"\n    );\n  }\n});",
+              "err": {},
+              "uuid": "95f32176-f59e-467f-af7f-634bbb168a8e",
+              "parentUUID": "ed69b2aa-b97f-4590-aa55-65e9bb9badfb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "displays appropriate impact cards for high security",
+              "fullTitle": "Business Impact Widget displays appropriate impact cards for high security",
+              "timedOut": null,
+              "duration": 2197,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"business-impact\").then(($widget) => {\n  if ($widget.length === 0) {\n    cy.log(\"⚠️ Widget not found - skipping test\");\n    return;\n  }\n  cy.wrap($widget).scrollIntoView();\n  cy.get(\"body\").then(($body) => {\n    if ($body.find(\"select\").length >= 3) {\n      cy.get(\"select\").eq(0).select(SECURITY_LEVELS.HIGH, { force: true });\n      cy.get(\"select\").eq(1).select(SECURITY_LEVELS.HIGH, { force: true });\n      cy.get(\"select\").eq(2).select(SECURITY_LEVELS.HIGH, { force: true });\n    } else {\n      cy.setSecurityLevels(\n        SECURITY_LEVELS.HIGH,\n        SECURITY_LEVELS.HIGH,\n        SECURITY_LEVELS.HIGH\n      );\n    }\n  });\n  cy.wait(500);\n  cy.wrap($widget).within(() => {\n    cy.contains(/impact|effect|consequence/i).should(\"exist\");\n    cy.contains(/financial|revenue|cost/i).should(\"exist\");\n    cy.contains(/operational|process|function/i).should(\"exist\");\n  });\n});",
+              "err": {},
+              "uuid": "c4a3fb3b-1c85-4f13-a8e6-96e6d0a6f1f1",
+              "parentUUID": "ed69b2aa-b97f-4590-aa55-65e9bb9badfb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "shows different impacts for mixed security levels",
+              "fullTitle": "Business Impact Widget shows different impacts for mixed security levels",
+              "timedOut": null,
+              "duration": 2004,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.findWidget(\"business-impact\").then(($widget) => {\n  if ($widget.length === 0) {\n    cy.log(\"⚠️ Widget not found - skipping test\");\n    return;\n  }\n  cy.wrap($widget).scrollIntoView();\n  cy.get(\"body\").then(($body) => {\n    if ($body.find(\"select\").length >= 3) {\n      cy.get(\"select\").eq(0).select(SECURITY_LEVELS.HIGH, { force: true });\n      cy.get(\"select\").eq(1).select(SECURITY_LEVELS.LOW, { force: true });\n      cy.get(\"select\").eq(2).select(SECURITY_LEVELS.MODERATE, { force: true });\n    } else {\n      cy.setSecurityLevels(\n        SECURITY_LEVELS.HIGH,\n        SECURITY_LEVELS.LOW,\n        SECURITY_LEVELS.MODERATE\n      );\n    }\n  });\n  cy.wait(500);\n  cy.wrap($widget).invoke(\"text\").then((text) => {\n    const patterns = [\n      /availability|integrity|confidentiality/i,\n      /impact|effect|consequence/i,\n      /business|operation|financial/i\n    ];\n    const matchingPatterns = patterns.filter(\n      (pattern) => pattern.test(text)\n    );\n    cy.log(\n      `Found ${matchingPatterns.length} matching patterns in widget`\n    );\n    expect(matchingPatterns.length).to.be.greaterThan(0);\n  });\n});",
+              "err": {},
+              "uuid": "cddf4649-9182-4df6-8c75-249874765b0a",
+              "parentUUID": "ed69b2aa-b97f-4590-aa55-65e9bb9badfb",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "76a5fd8b-605e-42d7-86fd-6fd7e91e02f3",
+            "1cc182e1-0734-4182-9911-aef683eb86ec",
+            "95f32176-f59e-467f-af7f-634bbb168a8e",
+            "c4a3fb3b-1c85-4f13-a8e6-96e6d0a6f1f1",
+            "cddf4649-9182-4df6-8c75-249874765b0a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 10326,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "docs/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

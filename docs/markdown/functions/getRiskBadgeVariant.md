@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.5**](../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: getRiskBadgeVariant()
 
-> **getRiskBadgeVariant**(`riskLevel`): `"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"`
+> **getRiskBadgeVariant**(`riskLevel`): `"error"` \| `"info"` \| `"success"` \| `"warning"` \| `"neutral"`
 
-Defined in: [src/services/ciaContentService.ts:1390](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/services/ciaContentService.ts#L1390)
+Defined in: [src/services/ciaContentService.ts:1390](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/services/ciaContentService.ts#L1390)
 
 Get appropriate badge variant based on risk level
 
@@ -20,4 +20,4 @@ Get appropriate badge variant based on risk level
 
 ## Returns
 
-`"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"`
+`"error"` \| `"info"` \| `"success"` \| `"warning"` \| `"neutral"`

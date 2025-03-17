@@ -8,7 +8,7 @@
 
 > `const` **widgetRegistryUtils**: `object`
 
-Defined in: [src/utils/widgetRegistry.tsx:398](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/utils/widgetRegistry.tsx#L398)
+Defined in: [src/utils/widgetRegistry.tsx:398](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/utils/widgetRegistry.tsx#L398)
 
 ## Type declaration
 

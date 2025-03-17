@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.5**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:529](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/constants/testIds.ts#L529)
+Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/testIds.ts#L554)
 
 ## Type declaration
 
@@ -47,6 +47,10 @@ Defined in: [src/constants/testIds.ts:529](https://github.com/Hack23/cia-complia
 ### AVAILABILITY\_DESCRIPTION\_TEXT
 
 > **AVAILABILITY\_DESCRIPTION\_TEXT**: `string` = `"availability-description-text"`
+
+### AVAILABILITY\_DETAILS\_SECTION
+
+> **AVAILABILITY\_DETAILS\_SECTION**: `string` = `"technical-details-availability-details"`
 
 ### AVAILABILITY\_IMPACT\_BUSINESS\_IMPACT
 
@@ -135,6 +139,10 @@ Defined in: [src/constants/testIds.ts:529](https://github.com/Hack23/cia-complia
 ### AVAILABILITY\_SELECTED\_LEVEL
 
 > **AVAILABILITY\_SELECTED\_LEVEL**: `string` = `"availability-selected-level"`
+
+### AVAILABILITY\_SELECTOR
+
+> **AVAILABILITY\_SELECTOR**: `string` = `"availability-level-selector"`
 
 ### AVAILABILITY\_TAB
 
@@ -360,6 +368,10 @@ Defined in: [src/constants/testIds.ts:529](https://github.com/Hack23/cia-complia
 
 > **CONFIDENTIALITY\_DESCRIPTION\_TEXT**: `string` = `"confidentiality-description-text"`
 
+### CONFIDENTIALITY\_DETAILS\_SECTION
+
+> **CONFIDENTIALITY\_DETAILS\_SECTION**: `string` = `"technical-details-confidentiality-details"`
+
 ### CONFIDENTIALITY\_IMPACT\_DESCRIPTION
 
 > **CONFIDENTIALITY\_IMPACT\_DESCRIPTION**: `string` = `"confidentiality-impact-description"`
@@ -419,6 +431,10 @@ Defined in: [src/constants/testIds.ts:529](https://github.com/Hack23/cia-complia
 ### CONFIDENTIALITY\_SELECTED\_LEVEL
 
 > **CONFIDENTIALITY\_SELECTED\_LEVEL**: `string` = `"confidentiality-selected-level"`
+
+### CONFIDENTIALITY\_SELECTOR
+
+> **CONFIDENTIALITY\_SELECTOR**: `string` = `"confidentiality-level-selector"`
 
 ### CONFIDENTIALITY\_TAB
 
@@ -824,6 +840,10 @@ Defined in: [src/constants/testIds.ts:529](https://github.com/Hack23/cia-complia
 
 > **INTEGRITY\_DESCRIPTION\_TEXT**: `string` = `"integrity-description-text"`
 
+### INTEGRITY\_DETAILS\_SECTION
+
+> **INTEGRITY\_DETAILS\_SECTION**: `string` = `"technical-details-integrity-details"`
+
 ### INTEGRITY\_IMPACT\_DESCRIPTION
 
 > **INTEGRITY\_IMPACT\_DESCRIPTION**: `string` = `"integrity-impact-description"`
@@ -879,6 +899,10 @@ Defined in: [src/constants/testIds.ts:529](https://github.com/Hack23/cia-complia
 ### INTEGRITY\_SELECTED\_LEVEL
 
 > **INTEGRITY\_SELECTED\_LEVEL**: `string` = `"integrity-selected-level"`
+
+### INTEGRITY\_SELECTOR
+
+> **INTEGRITY\_SELECTOR**: `string` = `"integrity-level-selector"`
 
 ### INTEGRITY\_TAB
 
@@ -1146,7 +1170,7 @@ Defined in: [src/constants/testIds.ts:529](https://github.com/Hack23/cia-complia
 
 ### SECURITY\_LEVEL\_WIDGET
 
-> **SECURITY\_LEVEL\_WIDGET**: `string` = `"widget-security-level"`
+> **SECURITY\_LEVEL\_WIDGET**: `string` = `"security-level-widget"`
 
 ### SECURITY\_RECOMMENDATION
 
@@ -1179,6 +1203,14 @@ Defined in: [src/constants/testIds.ts:529](https://github.com/Hack23/cia-complia
 ### SECURITY\_SUMMARY\_TITLE
 
 > **SECURITY\_SUMMARY\_TITLE**: `string` = `"security-summary-title"`
+
+### SECURITY\_SUMMARY\_WIDGET
+
+> **SECURITY\_SUMMARY\_WIDGET**: `string` = `"security-summary-widget"`
+
+### SECURITY\_VISUALIZATION\_WIDGET
+
+> **SECURITY\_VISUALIZATION\_WIDGET**: `string` = `"security-visualization-widget"`
 
 ### STATUS\_BADGE
 

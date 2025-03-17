@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../../../README.md)
 
 ***
 
@@ -6,7 +6,9 @@
 
 # Interface: TechnicalDetailsWidgetProps
 
-Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:11](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/TechnicalDetailsWidget.tsx#L11)
+Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/widgets/TechnicalDetailsWidget.tsx#L17)
+
+Props for TechnicalDetailsWidget component
 
 ## Properties
 
@@ -14,15 +16,7 @@ Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:11](https://githu
 
 > `optional` **availabilityLevel**: `string`
 
-Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/TechnicalDetailsWidget.tsx#L12)
-
-***
-
-### availabilityOptions?
-
-> `optional` **availabilityOptions**: `Record`\<`string`, `any`\>
-
-Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/TechnicalDetailsWidget.tsx#L15)
+Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/widgets/TechnicalDetailsWidget.tsx#L18)
 
 ***
 
@@ -30,7 +24,7 @@ Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:15](https://githu
 
 > `optional` **className**: `string`
 
-Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/TechnicalDetailsWidget.tsx#L18)
+Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/widgets/TechnicalDetailsWidget.tsx#L21)
 
 ***
 
@@ -38,15 +32,7 @@ Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:18](https://githu
 
 > `optional` **confidentialityLevel**: `string`
 
-Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/TechnicalDetailsWidget.tsx#L14)
-
-***
-
-### confidentialityOptions?
-
-> `optional` **confidentialityOptions**: `Record`\<`string`, `any`\>
-
-Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/TechnicalDetailsWidget.tsx#L17)
+Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/widgets/TechnicalDetailsWidget.tsx#L20)
 
 ***
 
@@ -54,15 +40,7 @@ Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:17](https://githu
 
 > `optional` **integrityLevel**: `string`
 
-Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/TechnicalDetailsWidget.tsx#L13)
-
-***
-
-### integrityOptions?
-
-> `optional` **integrityOptions**: `Record`\<`string`, `any`\>
-
-Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/TechnicalDetailsWidget.tsx#L16)
+Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/widgets/TechnicalDetailsWidget.tsx#L19)
 
 ***
 
@@ -70,4 +48,4 @@ Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:16](https://githu
 
 > `optional` **testId**: `string`
 
-Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/TechnicalDetailsWidget.tsx#L19)
+Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:22](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/widgets/TechnicalDetailsWidget.tsx#L22)

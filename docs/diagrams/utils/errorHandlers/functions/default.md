@@ -8,7 +8,7 @@
 
 > **default**(`error`, `widgetId`): `ReactNode`
 
-Defined in: [src/utils/errorHandlers.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/utils/errorHandlers.tsx#L10)
+Defined in: [src/utils/errorHandlers.tsx:10](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/utils/errorHandlers.tsx#L10)
 
 Standard handler for widget errors
 

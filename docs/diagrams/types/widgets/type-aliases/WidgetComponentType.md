@@ -8,7 +8,7 @@
 
 > **WidgetComponentType**\<`T`\>: `ComponentType`\<`T`\>
 
-Defined in: [src/types/widgets.ts:311](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L311)
+Defined in: [src/types/widgets.ts:311](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L311)
 
 Base widget component type
 

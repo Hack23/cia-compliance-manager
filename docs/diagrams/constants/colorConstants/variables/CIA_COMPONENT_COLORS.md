@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **CIA\_COMPONENT\_COLORS**: `object`
 
-Defined in: [src/constants/colorConstants.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/constants/colorConstants.ts#L48)
+Defined in: [src/constants/colorConstants.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/colorConstants.ts#L48)
 
 Colors specific to CIA components - with enhanced distinctiveness
 

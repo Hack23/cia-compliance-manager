@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **default**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:43](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/SecuritySummaryWidget.tsx#L43)
+Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:47](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/widgets/SecuritySummaryWidget.tsx#L47)
 
 Security Summary Widget that displays current security posture based on CIA levels
 

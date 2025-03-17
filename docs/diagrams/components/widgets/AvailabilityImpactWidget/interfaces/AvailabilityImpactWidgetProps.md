@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: AvailabilityImpactWidgetProps
 
-Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/AvailabilityImpactWidget.tsx#L13)
+Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/widgets/AvailabilityImpactWidget.tsx#L13)
 
 Props for AvailabilityImpactWidget component
 
@@ -16,7 +16,7 @@ Props for AvailabilityImpactWidget component
 
 > **availabilityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/AvailabilityImpactWidget.tsx#L14)
+Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/widgets/AvailabilityImpactWidget.tsx#L14)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:14](https://git
 
 > `optional` **className**: `string`
 
-Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/AvailabilityImpactWidget.tsx#L17)
+Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/widgets/AvailabilityImpactWidget.tsx#L17)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:17](https://git
 
 > `optional` **confidentialityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/AvailabilityImpactWidget.tsx#L16)
+Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/widgets/AvailabilityImpactWidget.tsx#L16)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:16](https://git
 
 > `optional` **integrityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/AvailabilityImpactWidget.tsx#L15)
+Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:15](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/widgets/AvailabilityImpactWidget.tsx#L15)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:15](https://git
 
 > `optional` **options**: `Record`\<`string`, `any`\>
 
-Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/AvailabilityImpactWidget.tsx#L19)
+Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/widgets/AvailabilityImpactWidget.tsx#L19)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:19](https://git
 
 > `optional` **testId**: `string`
 
-Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/AvailabilityImpactWidget.tsx#L18)
+Defined in: [src/components/widgets/AvailabilityImpactWidget.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/widgets/AvailabilityImpactWidget.tsx#L18)

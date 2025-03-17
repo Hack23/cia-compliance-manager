@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > `const` **BUSINESS\_KEY\_BENEFITS**: [`BusinessKeyBenefits`](../../../types/businessImpact/interfaces/BusinessKeyBenefits.md)
 
-Defined in: [src/constants/businessConstants.ts:224](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/constants/businessConstants.ts#L224)
+Defined in: [src/constants/businessConstants.ts:224](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/businessConstants.ts#L224)

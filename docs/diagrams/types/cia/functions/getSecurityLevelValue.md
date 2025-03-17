@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelValue**(`level`): `number`
 
-Defined in: [src/types/cia.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L148)
+Defined in: [src/types/cia.ts:165](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L165)
 
 Gets a numerical value for a security level for calculations
 

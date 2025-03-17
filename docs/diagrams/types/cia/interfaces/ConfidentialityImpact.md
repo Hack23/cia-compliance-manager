@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ConfidentialityImpact
 
-Defined in: [src/types/cia.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L37)
+Defined in: [src/types/cia.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L54)
 
 Impact associated with the confidentiality of the system
 
@@ -20,7 +20,7 @@ Impact associated with the confidentiality of the system
 
 > **accessControls**: `string`
 
-Defined in: [src/types/cia.ts:39](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L39)
+Defined in: [src/types/cia.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L56)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [src/types/cia.ts:39](https://github.com/Hack23/cia-compliance-manag
 
 > **dataClassification**: `string`
 
-Defined in: [src/types/cia.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L38)
+Defined in: [src/types/cia.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L55)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [src/types/cia.ts:38](https://github.com/Hack23/cia-compliance-manag
 
 > **description**: `string`
 
-Defined in: [src/types/cia.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L15)
+Defined in: [src/types/cia.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L32)
 
 #### Inherited from
 
@@ -48,7 +48,7 @@ Defined in: [src/types/cia.ts:15](https://github.com/Hack23/cia-compliance-manag
 
 > **level**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/cia.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L14)
+Defined in: [src/types/cia.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L31)
 
 #### Inherited from
 
