@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import {
   CIA_COMPONENT_ICONS,
   CIA_LABELS,
+  SECURITY_LEVELS,
   SECURITY_RECOMMENDATIONS,
 } from "../../constants/appConstants";
 import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
@@ -15,7 +16,10 @@ import ciaContentService, {
   getTechnicalDescription,
 } from "../../services/ciaContentService";
 import { SecurityLevel } from "../../types/cia";
-import { getSecurityLevelBadgeVariant } from "../../utils/securityLevelUtils";
+import {
+  getSecurityLevelBadgeVariant,
+  getSecurityLevelValue,
+} from "../../utils/securityLevelUtils";
 import KeyValuePair from "../common/KeyValuePair";
 import SecurityLevelSummaryItem from "../common/SecurityLevelSummaryItem";
 import StatusBadge from "../common/StatusBadge";
@@ -110,6 +114,93 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
 
   // Get security icon based on security level
   const securityIcon = getSecurityIcon(securityLevel);
+
+  // Calculate security score based on level
+  const securityScore = useMemo(() => {
+    return getSecurityLevelValue(securityLevel) * 25;
+  }, [securityLevel]);
+
+  // Get security level description
+  const levelDescription = useMemo(() => {
+    return getSecurityLevelDescription(securityLevel);
+  }, [securityLevel]);
+
+  // Calculate security metrics based on selected levels
+  const securityMetrics = useMemo(() => {
+    const levels = [
+      SECURITY_LEVELS.NONE,
+      SECURITY_LEVELS.LOW,
+      SECURITY_LEVELS.MODERATE,
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.VERY_HIGH,
+    ];
+
+    const aValue = getSecurityLevelValue(availabilityLevel);
+    const iValue = getSecurityLevelValue(integrityLevel);
+    const cValue = getSecurityLevelValue(confidentialityLevel);
+
+    // Calculate highest and lowest security components
+    let highest = "Balanced";
+    let lowest = "Balanced";
+
+    if (aValue > iValue && aValue > cValue) {
+      highest = "Availability";
+    } else if (iValue > aValue && iValue > cValue) {
+      highest = "Integrity";
+    } else if (cValue > aValue && cValue > iValue) {
+      highest = "Confidentiality";
+    }
+
+    if (aValue < iValue && aValue < cValue) {
+      lowest = "Availability";
+    } else if (iValue < aValue && iValue < cValue) {
+      lowest = "Integrity";
+    } else if (cValue < aValue && cValue < iValue) {
+      lowest = "Confidentiality";
+    }
+
+    return {
+      highest,
+      lowest,
+      balanced: highest === "Balanced",
+    };
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
+
+  // Calculate risk level based on security level
+  const riskLevel = useMemo(() => {
+    switch (securityLevel) {
+      case SECURITY_LEVELS.NONE:
+        return "Critical";
+      case SECURITY_LEVELS.LOW:
+        return "High";
+      case SECURITY_LEVELS.MODERATE:
+        return "Medium";
+      case SECURITY_LEVELS.HIGH:
+        return "Low";
+      case SECURITY_LEVELS.VERY_HIGH:
+        return "Minimal";
+      default:
+        return "Unknown";
+    }
+  }, [securityLevel]);
+
+  // Generate risk assessment based on security level
+  const riskAssessment = useMemo(() => {
+    switch (securityLevel) {
+      case SECURITY_LEVELS.NONE:
+        return "Significant vulnerabilities present. Immediate action required.";
+      case SECURITY_LEVELS.LOW:
+        return "Basic protection. Substantial security improvements needed.";
+      case SECURITY_LEVELS.MODERATE:
+        return "Standard protection. Key security controls in place.";
+      case SECURITY_LEVELS.HIGH:
+        return "Strong protection. Comprehensive security controls.";
+      case SECURITY_LEVELS.VERY_HIGH:
+        return "Maximum protection. Advanced security controls with redundancy.";
+      default:
+        return "Security level not assessed.";
+    }
+  }, [securityLevel]);
 
   return (
     <WidgetContainer

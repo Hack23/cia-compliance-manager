@@ -1,68 +1,68 @@
-import React, { ReactNode } from "react";
-import AvailabilityImpactWidget from "../components/widgets/AvailabilityImpactWidget";
-import BusinessImpactAnalysisWidget from "../components/widgets/BusinessImpactAnalysisWidget";
-import ComplianceStatusWidget from "../components/widgets/ComplianceStatusWidget";
-import ConfidentialityImpactWidget from "../components/widgets/ConfidentialityImpactWidget";
-import { SECURITY_LEVELS } from "../constants/appConstants";
-import { WIDGET_ICONS, WIDGET_TITLES } from "../constants/coreConstants";
-// Remove unused imports
-import { WidgetContainer } from "../components/common";
-import CIAImpactSummaryWidget from "../components/widgets/CIAImpactSummaryWidget";
-import IntegrityImpactWidget from "../components/widgets/IntegrityImpactWidget";
-import SecurityResourcesWidget from "../components/widgets/SecurityResourcesWidget";
-import SecuritySummaryWidget from "../components/widgets/SecuritySummaryWidget";
-import SecurityVisualizationWidget from "../components/widgets/SecurityVisualizationWidget";
-import TechnicalDetailsWidget from "../components/widgets/TechnicalDetailsWidget";
-import ValueCreationWidget from "../components/widgets/ValueCreationWidget";
-import { handleWidgetError } from "./widgetHelpers";
-
-// Import all widget prop types
+import { ReactNode } from "react";
+import WidgetContainer from "../components/common/WidgetContainer";
 import {
-  AvailabilityImpactWidgetProps,
-  BusinessImpactAnalysisWidgetProps,
-  ComplianceStatusWidgetProps,
-  ConfidentialityImpactWidgetProps,
-  IntegrityImpactWidgetProps,
-  SecurityResourcesWidgetProps,
-  // Remove unused import
-  SecuritySummaryWidgetProps,
-  TechnicalDetailsWidgetProps,
-  ValueCreationWidgetProps,
-  WidgetBaseProps,
-} from "../types/widgets";
-
-// Import SecurityLevel type
+  SECURITY_LEVELS,
+  WIDGET_ICONS,
+  WIDGET_TITLES,
+} from "../constants/coreConstants";
 import { SecurityLevel } from "../types/cia";
-// Import WidgetSize type for proper size handling
-import { WidgetSize } from "../types/widget";
+import {
+  WidgetComponentType,
+  WidgetDefinition,
+  WidgetSize,
+} from "../types/widgets";
+import handleWidgetError from "./errorHandlers";
 
-// Widget component type without constraint
-type WidgetComponentType<T> = React.ComponentType<T>;
+// Import all widget components
+import AvailabilityImpactWidget, {
+  AvailabilityImpactWidgetProps,
+} from "../components/widgets/AvailabilityImpactWidget";
+import BusinessImpactAnalysisWidget, {
+  BusinessImpactAnalysisWidgetProps,
+} from "../components/widgets/BusinessImpactAnalysisWidget";
+import CIAImpactSummaryWidget, {
+  CIAImpactSummaryWidgetProps,
+} from "../components/widgets/CIAImpactSummaryWidget";
+import ComplianceStatusWidget, {
+  ComplianceStatusWidgetProps,
+} from "../components/widgets/ComplianceStatusWidget";
+import ConfidentialityImpactWidget, {
+  ConfidentialityImpactWidgetProps,
+} from "../components/widgets/ConfidentialityImpactWidget";
+import CostEstimationWidget, {
+  CostEstimationWidgetProps,
+} from "../components/widgets/CostEstimationWidget";
+import IntegrityImpactWidget, {
+  IntegrityImpactWidgetProps,
+} from "../components/widgets/IntegrityImpactWidget";
+import SecurityResourcesWidget, {
+  SecurityResourcesWidgetProps,
+} from "../components/widgets/SecurityResourcesWidget";
+import SecuritySummaryWidget, {
+  SecuritySummaryWidgetProps,
+} from "../components/widgets/SecuritySummaryWidget";
+import SecurityVisualizationWidget, {
+  SecurityVisualizationWidgetProps,
+} from "../components/widgets/SecurityVisualizationWidget";
+import TechnicalDetailsWidget, {
+  TechnicalDetailsWidgetProps,
+} from "../components/widgets/TechnicalDetailsWidget";
+import ValueCreationWidget, {
+  ValueCreationWidgetProps,
+} from "../components/widgets/ValueCreationWidget";
 
-// Standardized interface for CIAImpactProps
-interface CIAImpactSummaryWidgetProps extends WidgetBaseProps {
-  availabilityLevel: SecurityLevel;
-  integrityLevel: SecurityLevel;
-  confidentialityLevel: SecurityLevel;
-  className?: string;
-}
-
-// Add widget props interface
-interface SecurityVisualizationWidgetProps {
-  availabilityLevel: SecurityLevel;
-  integrityLevel: SecurityLevel;
-  confidentialityLevel: SecurityLevel;
-  className?: string;
-  testId?: string;
-}
-
-// Define a type for widget size options to match both string enum and WidgetSize interface
+/**
+ * Type definition for widget size options
+ */
 export type WidgetSizeOption = "small" | "medium" | "large" | "full";
 
-// Helper function to convert string size to WidgetSize object
-const convertSizeToWidgetSize = (
-  size?: WidgetSizeOption
-): WidgetSize | undefined => {
+/**
+ * Convert a size string to widget size dimensions
+ *
+ * @param size The size string to convert
+ * @returns Widget dimensions object or undefined
+ */
+const convertSizeToWidgetSize = (size?: string): WidgetSize | undefined => {
   if (!size) return undefined;
 
   // Map string sizes to appropriate width/height dimensions
@@ -80,24 +80,37 @@ const convertSizeToWidgetSize = (
   }
 };
 
-// Modified WidgetDefinition interface to make generic type constraint optional
-export interface WidgetDefinition<T> {
-  id: string;
-  title: string;
-  component: WidgetComponentType<T>;
-  defaultProps?: Partial<T>;
-  icon?: ReactNode;
-  size?: WidgetSizeOption;
-  order?: number;
-  description?: string;
-  position?: number;
+/**
+ * Widget Registry interface defining the API for working with widgets
+ */
+export interface WidgetRegistry {
+  register<T>(definition: WidgetDefinition<T>): void;
+  get<T>(id: string): WidgetDefinition<T> | undefined;
+  getAll(): WidgetDefinition<any>[];
+  renderWidget<T>(id: string, props?: Partial<T>): ReactNode | null;
+  renderWidgets(
+    filter?: (widget: WidgetDefinition<any>) => boolean,
+    props?: Record<string, any>
+  ): ReactNode[];
 }
 
-// Class to manage available widgets and their configurations
-class WidgetRegistry {
+/**
+ * Class to manage available widgets and their configurations
+ *
+ * ## Business Perspective
+ *
+ * This registry provides a central system for managing all widgets in the application,
+ * enabling consistent behavior, appearance, and dynamic layout capabilities.
+ * The singleton approach ensures all dashboard views share the same widget definitions
+ * for consistency across the application. 🔄
+ */
+class WidgetRegistryImpl implements WidgetRegistry {
   private widgets: Map<string, WidgetDefinition<any>> = new Map();
 
-  // Register a widget with the registry
+  /**
+   * Register a widget with the registry
+   * @param definition Widget definition object
+   */
   register<T>(definition: WidgetDefinition<T>): void {
     // Apply default values for missing properties
     const finalDefinition = {
@@ -109,19 +122,31 @@ class WidgetRegistry {
     this.widgets.set(finalDefinition.id, finalDefinition);
   }
 
-  // Get a widget definition by ID
+  /**
+   * Get a widget definition by ID
+   * @param id Widget identifier
+   * @returns Widget definition or undefined if not found
+   */
   get<T>(id: string): WidgetDefinition<T> | undefined {
     return this.widgets.get(id) as WidgetDefinition<T> | undefined;
   }
 
-  // Get all registered widgets as an array
+  /**
+   * Get all registered widgets as an array
+   * @returns Array of widget definitions
+   */
   getAll(): WidgetDefinition<any>[] {
     return Array.from(this.widgets.values()).sort(
       (a, b) => a.order! - b.order!
     );
   }
 
-  // Render a single widget by ID with optional props
+  /**
+   * Render a single widget by ID with optional props
+   * @param id Widget identifier
+   * @param props Optional props to pass to the widget
+   * @returns Rendered widget or null if widget not found
+   */
   renderWidget<T>(id: string, props: Partial<T> = {}): ReactNode | null {
     const widget = this.widgets.get(id);
     if (!widget) return null;
@@ -145,15 +170,18 @@ class WidgetRegistry {
         </WidgetContainer>
       );
     } catch (error) {
-      // Fix error handling by creating an Error object if it's not already one
       const errorObj =
         error instanceof Error ? error : new Error(String(error));
-      // Swap the parameter order - Error object first, then id
       return handleWidgetError(errorObj, id);
     }
   }
 
-  // Render multiple widgets filtered by a predicate function
+  /**
+   * Render multiple widgets filtered by a predicate function
+   * @param filter Optional filter function to select widgets
+   * @param props Optional props for each widget by ID
+   * @returns Array of rendered widget components
+   */
   renderWidgets(
     filter?: (widget: WidgetDefinition<any>) => boolean,
     props: Record<string, any> = {}
@@ -182,9 +210,9 @@ class WidgetRegistry {
 }
 
 // Create and export a singleton instance
-export const widgetRegistry = new WidgetRegistry();
+export const widgetRegistry = new WidgetRegistryImpl();
 
-// Pre-register core widgets
+// Register core widgets
 widgetRegistry.register<SecuritySummaryWidgetProps>({
   id: "security-summary",
   title: WIDGET_TITLES.SECURITY_SUMMARY,
@@ -197,14 +225,13 @@ widgetRegistry.register<SecuritySummaryWidgetProps>({
 widgetRegistry.register<ComplianceStatusWidgetProps>({
   id: "compliance-status",
   title: WIDGET_TITLES.COMPLIANCE_STATUS,
-  // Fix the type compatibility issue with type assertion
   component:
     ComplianceStatusWidget as unknown as WidgetComponentType<ComplianceStatusWidgetProps>,
   icon: WIDGET_ICONS.COMPLIANCE_STATUS,
   size: "medium",
   order: 20,
   defaultProps: {
-    securityLevel: SECURITY_LEVELS.NONE,
+    securityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
   },
 });
 
@@ -218,7 +245,7 @@ widgetRegistry.register<ValueCreationWidgetProps>({
   order: 25,
   description: "Business value created by security investments",
   defaultProps: {
-    securityLevel: SECURITY_LEVELS.NONE,
+    securityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
   },
 });
 
@@ -257,7 +284,6 @@ widgetRegistry.register<ConfidentialityImpactWidgetProps>({
 widgetRegistry.register<AvailabilityImpactWidgetProps>({
   id: "availability-impact",
   title: WIDGET_TITLES.AVAILABILITY_IMPACT,
-  // Fix the type compatibility issue with type assertion
   component:
     AvailabilityImpactWidget as unknown as WidgetComponentType<AvailabilityImpactWidgetProps>,
   icon: WIDGET_ICONS.AVAILABILITY_IMPACT,
@@ -275,7 +301,6 @@ widgetRegistry.register<AvailabilityImpactWidgetProps>({
 widgetRegistry.register<SecurityResourcesWidgetProps>({
   id: "security-resources",
   title: WIDGET_TITLES.SECURITY_RESOURCES,
-  // Fix the type compatibility issue with type assertion
   component:
     SecurityResourcesWidget as unknown as WidgetComponentType<SecurityResourcesWidgetProps>,
   icon: WIDGET_ICONS.SECURITY_RESOURCES,
@@ -320,7 +345,7 @@ widgetRegistry.register<BusinessImpactAnalysisWidgetProps>({
   },
 });
 
-// For CIAImpactSummaryWidget component registration
+// Register CIAImpactSummaryWidget
 widgetRegistry.register<CIAImpactSummaryWidgetProps>({
   id: "cia-impact-summary",
   title: "CIA Impact Summary",
@@ -352,5 +377,52 @@ widgetRegistry.register<SecurityVisualizationWidgetProps>({
     confidentialityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
   },
 });
+
+// Register cost estimation widget
+widgetRegistry.register<CostEstimationWidgetProps>({
+  id: "cost-estimation",
+  title: WIDGET_TITLES.COST_ESTIMATION,
+  component: CostEstimationWidget,
+  icon: WIDGET_ICONS.COST_ESTIMATION,
+  size: "medium",
+  order: 22,
+  description: "Cost estimation for security implementation",
+  defaultProps: {
+    availabilityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    integrityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+    confidentialityLevel: SECURITY_LEVELS.NONE as SecurityLevel,
+  },
+});
+
+// Create a utility object with simple methods for testing
+export const widgetRegistryUtils = {
+  getWidget: function <T>(id: string): WidgetDefinition<T> | undefined {
+    return widgetRegistry.get<T>(id);
+  },
+
+  getAllWidgetKeys: function (): string[] {
+    return widgetRegistry.getAll().map((widget) => widget.id);
+  },
+
+  renderWidget: function <T>(
+    id: string,
+    props: Partial<T> = {}
+  ): ReactNode | null {
+    return widgetRegistry.renderWidget<T>(id, props);
+  },
+
+  renderWidgets: function (
+    keys?: string[],
+    props: Record<string, any> = {}
+  ): ReactNode[] {
+    if (keys) {
+      return widgetRegistry.renderWidgets(
+        (widget) => keys.includes(widget.id),
+        props
+      );
+    }
+    return widgetRegistry.renderWidgets(undefined, props);
+  },
+};
 
 export default widgetRegistry;

@@ -22,5 +22,26 @@
 export * from "./charts";
 export * from "./common";
 export * from "./dashboard";
-export * from "./securitylevel";
+
+// Export security level components with SecurityLevelSelector explicitly
+// renamed to avoid ambiguity with the old version
+export {
+  SecurityLevelSelector as EnhancedSecurityLevelSelector,
+  Selection,
+} from "./securitylevel";
+
+// Export common components with explicit naming to avoid conflicts
+export * from "./common/BusinessImpactSection";
+export * from "./common/CIAImpactCard";
+export { default as SimpleSecurityLevelSelector } from "./common/SecurityLevelSelector";
+export * from "./common/SecurityRiskScore";
+
+// Export single canonical SecurityLevelSelector
+export { default as SecurityLevelSelector } from "./SecurityLevelSelector";
+
+// Export widgets
 export * from "./widgets";
+
+// Export utility functions from the canonical location
+export * from "../utils/widgetHelpers";
+export { widgetRegistry, widgetRegistryUtils } from "../utils/widgetRegistry";

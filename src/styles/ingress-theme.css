@@ -4,10 +4,10 @@
   height: 10px;
   background: linear-gradient(
     to right,
-    #00e676 0%,    /* Green - Low Risk */
-    #ffeb3b 25%,   /* Yellow - Medium Risk */
-    #ff9800 50%,   /* Orange - High Risk */
-    #ff5252 100%   /* Red - Critical Risk */
+    #00e676 0%,
+    /* Green - Low Risk */ #ffeb3b 25%,
+    /* Yellow - Medium Risk */ #ff9800 50%,
+    /* Orange - High Risk */ #ff5252 100% /* Red - Critical Risk */
   );
   border-radius: 5px;
   overflow: hidden;
@@ -98,20 +98,31 @@
 
 /* Add scanner line effect for technical cards */
 .dark .tech-metric-card::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 2px;
-  background: linear-gradient(to right, transparent, var(--ingress-primary), transparent);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--ingress-primary),
+    transparent
+  );
   animation: scan-line 3s ease infinite;
 }
 
 @keyframes scan-line {
-  0% { left: -100%; }
-  50% { left: 100%; }
-  100% { left: 100%; }
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 /* Shadow glow for risk indicator */
@@ -120,29 +131,34 @@
 }
 
 .dark .shadow-glow {
-  box-shadow: 0 0 10px 2px rgba(0, 255, 136, 0.7), 0 0 20px rgba(0, 255, 136, 0.3);
+  box-shadow: 0 0 10px 2px rgba(0, 255, 136, 0.7),
+    0 0 20px rgba(0, 255, 136, 0.3);
 }
 /* Ingress-inspired Dark Theme */
 
 /* Base styles for dark mode Ingress theme */
 .dark {
-  --ingress-primary: #00cc66;       /* Bright green */
-  --ingress-secondary: #33eeff;       /* Cyan */
-  --ingress-dark: #001a1a;            /* Very dark teal */
-  --ingress-light: #00ff88;           /* Light green */
-  --ingress-accent: #40c4ff;          /* Light blue */
-  --ingress-warning: #ff9800;         /* Orange */
-  --ingress-danger: #ff5252;          /* Red */
-  --ingress-bg: #001a25;              /* Dark background */
-  --ingress-card-bg: #001c25;         /* Slightly lighter background for cards */
+  --ingress-primary: #00cc66; /* Bright green */
+  --ingress-secondary: #33eeff; /* Cyan */
+  --ingress-dark: #001a1a; /* Very dark teal */
+  --ingress-light: #00ff88; /* Light green */
+  --ingress-accent: #40c4ff; /* Light blue */
+  --ingress-warning: #ff9800; /* Orange */
+  --ingress-danger: #ff5252; /* Red */
+  --ingress-bg: #001a25; /* Dark background */
+  --ingress-card-bg: #001c25; /* Slightly lighter background for cards */
   --ingress-border: rgba(0, 204, 102, 0.3); /* Semi-transparent green */
   --ingress-glow: 0 0 10px rgba(0, 204, 102, 0.3); /* Green glow */
-  --ingress-text: #e0e0e0;            /* Light text */
+  --ingress-text: #e0e0e0; /* Light text */
 }
 
 /* Widget styling */
 .dark .widget-container {
-  background: linear-gradient(135deg, rgba(0, 26, 37, 0.95) 0%, rgba(0, 20, 26, 0.98) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 26, 37, 0.95) 0%,
+    rgba(0, 20, 26, 0.98) 100%
+  );
   border: 1px solid var(--ingress-border);
   box-shadow: var(--ingress-glow);
   position: relative;
@@ -169,7 +185,11 @@
 }
 
 .dark .widget-header {
-  background: linear-gradient(to right, rgba(0, 204, 102, 0.1), rgba(0, 187, 119, 0.05));
+  background: linear-gradient(
+    to right,
+    rgba(0, 204, 102, 0.1),
+    rgba(0, 187, 119, 0.05)
+  );
   border-bottom: 1px solid var(--ingress-border);
 }
 
@@ -192,7 +212,11 @@
 
 /* Security Level Selection widget specific styles */
 .dark [data-testid="security-level-selector"] {
-  background: linear-gradient(180deg, rgba(0, 26, 37, 0.9) 0%, rgba(0, 20, 26, 0.95) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 26, 37, 0.9) 0%,
+    rgba(0, 20, 26, 0.95) 100%
+  );
   border: 1px solid var(--ingress-border);
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
 }
@@ -224,13 +248,64 @@
   box-shadow: 0 0 5px rgba(0, 204, 102, 0.2);
   padding-left: 12px;
   appearance: none;
-  background-image: 
-    linear-gradient(45deg, transparent 50%, var(--ingress-primary) 50%),
+  background-image: linear-gradient(
+      45deg,
+      transparent 50%,
+      var(--ingress-primary) 50%
+    ),
     linear-gradient(135deg, var(--ingress-primary) 50%, transparent 50%);
   background-position: calc(100% - 18px) calc(1em + 0px),
-                       calc(100% - 13px) calc(1em + 0px);
+    calc(100% - 13px) calc(1em + 0px);
   background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat;
+}
+
+/* Add these new styles for dropdown options */
+.dark .security-level-selector select option {
+  background-color: var(--ingress-bg);
+  color: var(--ingress-text);
+  border: none;
+  font-family: "Share Tech Mono", monospace;
+  padding: 8px;
+}
+
+/* Firefox specific select styling */
+@-moz-document url-prefix() {
+  .dark .security-level-selector select {
+    background-color: var(--ingress-dark);
+    color: var(--ingress-text);
+  }
+
+  .dark .security-level-selector select option {
+    background-color: var(--ingress-dark);
+    color: var(--ingress-text);
+  }
+}
+
+/* Webkit browsers specific styling */
+.dark .security-level-selector select::-webkit-listbox {
+  background-color: var(--ingress-dark);
+  color: var(--ingress-text);
+  border: 1px solid var(--ingress-border);
+}
+
+/* Style for select when open */
+.dark .security-level-selector select:focus option:checked,
+.dark .security-level-selector select option:hover,
+.dark .security-level-selector select option:focus {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 26, 37, 0.95) 0%,
+    rgba(0, 20, 26, 0.98) 100%
+  );
+  background-color: rgba(0, 204, 102, 0.2);
+  color: var(--ingress-primary);
+}
+
+.dark .security-level-selector select:focus {
+  box-shadow: 0 0 10px rgba(0, 204, 102, 0.4);
+  border-color: var(--ingress-primary);
+  outline: none;
 }
 
 .dark .security-level-selector select:focus {
@@ -312,7 +387,11 @@
 
 /* Security cards styling */
 .dark .security-card {
-  background: linear-gradient(135deg, rgba(0, 26, 37, 0.95) 0%, rgba(0, 20, 26, 0.98) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 26, 37, 0.95) 0%,
+    rgba(0, 20, 26, 0.98) 100%
+  );
   border: 1px solid var(--ingress-border);
   box-shadow: var(--ingress-glow);
   position: relative;
@@ -326,18 +405,28 @@
 
 /* Scanner animation effect for active cards */
 @keyframes scanner {
-  0%, 100% { background-position: 0% 0%; }
-  50% { background-position: 100% 100%; }
+  0%,
+  100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
 }
 
 .dark .security-card:hover::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, rgba(0, 204, 102, 0) 85%, rgba(0, 204, 102, 0.2) 90%, rgba(0, 204, 102, 0) 95%);
+  background: linear-gradient(
+    45deg,
+    rgba(0, 204, 102, 0) 85%,
+    rgba(0, 204, 102, 0.2) 90%,
+    rgba(0, 204, 102, 0) 95%
+  );
   pointer-events: none;
   background-size: 300% 300%;
   animation: scanner 3s ease infinite;
@@ -348,7 +437,7 @@
 /* Cyberpunk corner elements on cards */
 .dark .security-card::before,
 .dark .security-card::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 20px;
   height: 20px;
@@ -425,21 +514,39 @@
 
 /* Pulsating effect for security icons */
 @keyframes pulse-green {
-  0% { text-shadow: 0 0 5px rgba(0, 255, 136, 0.5); }
-  50% { text-shadow: 0 0 15px rgba(0, 255, 136, 0.8); }
-  100% { text-shadow: 0 0 5px rgba(0, 255, 136, 0.5); }
+  0% {
+    text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(0, 255, 136, 0.8);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+  }
 }
 
 @keyframes pulse-blue {
-  0% { text-shadow: 0 0 5px rgba(52, 152, 219, 0.5); }
-  50% { text-shadow: 0 0 15px rgba(52, 152, 219, 0.8); }
-  100% { text-shadow: 0 0 5px rgba(52, 152, 219, 0.5); }
+  0% {
+    text-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(52, 152, 219, 0.8);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+  }
 }
 
 @keyframes pulse-purple {
-  0% { text-shadow: 0 0 5px rgba(155, 89, 182, 0.5); }
-  50% { text-shadow: 0 0 15px rgba(155, 89, 182, 0.8); }
-  100% { text-shadow: 0 0 5px rgba(155, 89, 182, 0.5); }
+  0% {
+    text-shadow: 0 0 5px rgba(155, 89, 182, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(155, 89, 182, 0.8);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(155, 89, 182, 0.5);
+  }
 }
 
 .dark .icon-integrity:hover {
@@ -456,7 +563,11 @@
 
 /* Security Resources widget styling */
 .dark .resource-card {
-  background: linear-gradient(135deg, rgba(0, 26, 37, 0.95) 0%, rgba(0, 20, 26, 0.98) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 26, 37, 0.95) 0%,
+    rgba(0, 20, 26, 0.98) 100%
+  );
   border: 1px solid var(--ingress-border);
   box-shadow: var(--ingress-glow);
   transition: all 0.3s ease;
@@ -523,7 +634,11 @@
 
 /* Terminal text container */
 .dark .terminal-text-container {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 10, 20, 0.9));
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 10, 20, 0.9)
+  );
   box-shadow: 0 0 15px rgba(0, 204, 102, 0.2);
   border: 1px solid rgba(0, 204, 102, 0.2);
   padding: 12px;
@@ -682,7 +797,11 @@
 
 /* Enhanced button styling */
 .dark button.cyberbutton {
-  background: linear-gradient(to bottom, rgba(0, 204, 102, 0.05) 0%, rgba(0, 136, 68, 0.2) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 204, 102, 0.05) 0%,
+    rgba(0, 136, 68, 0.2) 100%
+  );
   border: 1px solid var(--ingress-border);
   color: var(--ingress-primary);
   font-family: "Share Tech Mono", monospace;
@@ -703,7 +822,12 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, transparent 0%, rgba(0, 204, 102, 0.2) 50%, transparent 100%);
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 204, 102, 0.2) 50%,
+    transparent 100%
+  );
   transition: all 0.5s ease;
 }
 
@@ -788,7 +912,11 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: repeating-linear-gradient(transparent 0px, rgba(0, 0, 0, 0.05) 1px, transparent 2px);
+  background: repeating-linear-gradient(
+    transparent 0px,
+    rgba(0, 0, 0, 0.05) 1px,
+    transparent 2px
+  );
   pointer-events: none;
   z-index: 9999;
   opacity: 0.3;
@@ -796,25 +924,67 @@
 
 /* Flicker animation for retro feel */
 @keyframes flicker {
-  0% { opacity: 0.99; }
-  5% { opacity: 0.96; }
-  10% { opacity: 0.97; }
-  15% { opacity: 0.99; }
-  20% { opacity: 0.94; }
-  25% { opacity: 0.98; }
-  30% { opacity: 0.97; }
-  35% { opacity: 0.99; }
-  40% { opacity: 0.98; }
-  45% { opacity: 0.97; }
-  50% { opacity: 0.99; }
-  55% { opacity: 0.98; }
-  60% { opacity: 0.97; }
-  65% { opacity: 0.99; }
-  70% { opacity: 0.96; }
-  75% { opacity: 0.99; }
-  80% { opacity: 0.98; }
-  85% { opacity: 0.99; }
-  90% { opacity: 0.96; }
-  95% { opacity: 0.99; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0.99;
+  }
+  5% {
+    opacity: 0.96;
+  }
+  10% {
+    opacity: 0.97;
+  }
+  15% {
+    opacity: 0.99;
+  }
+  20% {
+    opacity: 0.94;
+  }
+  25% {
+    opacity: 0.98;
+  }
+  30% {
+    opacity: 0.97;
+  }
+  35% {
+    opacity: 0.99;
+  }
+  40% {
+    opacity: 0.98;
+  }
+  45% {
+    opacity: 0.97;
+  }
+  50% {
+    opacity: 0.99;
+  }
+  55% {
+    opacity: 0.98;
+  }
+  60% {
+    opacity: 0.97;
+  }
+  65% {
+    opacity: 0.99;
+  }
+  70% {
+    opacity: 0.96;
+  }
+  75% {
+    opacity: 0.99;
+  }
+  80% {
+    opacity: 0.98;
+  }
+  85% {
+    opacity: 0.99;
+  }
+  90% {
+    opacity: 0.96;
+  }
+  95% {
+    opacity: 0.99;
+  }
+  100% {
+    opacity: 1;
+  }
 }
