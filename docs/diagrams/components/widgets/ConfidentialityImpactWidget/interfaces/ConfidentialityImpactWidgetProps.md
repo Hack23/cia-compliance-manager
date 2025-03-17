@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ConfidentialityImpactWidgetProps
 
-Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/ConfidentialityImpactWidget.tsx#L16)
+Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/ConfidentialityImpactWidget.tsx#L16)
 
 Props for ConfidentialityImpactWidget component
 
@@ -16,7 +16,7 @@ Props for ConfidentialityImpactWidget component
 
 > `optional` **availabilityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/ConfidentialityImpactWidget.tsx#L18)
+Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:18](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/ConfidentialityImpactWidget.tsx#L18)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:18](https://
 
 > `optional` **className**: `string`
 
-Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/ConfidentialityImpactWidget.tsx#L20)
+Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/ConfidentialityImpactWidget.tsx#L20)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:20](https://
 
 > **confidentialityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/ConfidentialityImpactWidget.tsx#L17)
+Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/ConfidentialityImpactWidget.tsx#L17)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:17](https://
 
 > `optional` **integrityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/ConfidentialityImpactWidget.tsx#L19)
+Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/ConfidentialityImpactWidget.tsx#L19)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:19](https://
 
 > `optional` **testId**: `string`
 
-Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/ConfidentialityImpactWidget.tsx#L21)
+Defined in: [src/components/widgets/ConfidentialityImpactWidget.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/ConfidentialityImpactWidget.tsx#L21)

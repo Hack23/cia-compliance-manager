@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecuritySummaryWidgetProps
 
-Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/SecuritySummaryWidget.tsx#L31)
+Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/SecuritySummaryWidget.tsx#L27)
 
 Props for SecuritySummaryWidget
 
@@ -16,7 +16,7 @@ Props for SecuritySummaryWidget
 
 > **availabilityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:33](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/SecuritySummaryWidget.tsx#L33)
+Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/SecuritySummaryWidget.tsx#L29)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:33](https://github
 
 > `optional` **className**: `string`
 
-Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:36](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/SecuritySummaryWidget.tsx#L36)
+Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:32](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/SecuritySummaryWidget.tsx#L32)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:36](https://github
 
 > **confidentialityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:35](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/SecuritySummaryWidget.tsx#L35)
+Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/SecuritySummaryWidget.tsx#L31)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:35](https://github
 
 > **integrityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:34](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/SecuritySummaryWidget.tsx#L34)
+Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:30](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/SecuritySummaryWidget.tsx#L30)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:34](https://github
 
 > **securityLevel**: [`SecurityLevel`](../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:32](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/SecuritySummaryWidget.tsx#L32)
+Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:28](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/SecuritySummaryWidget.tsx#L28)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:32](https://github
 
 > `optional` **testId**: `string`
 
-Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:37](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/SecuritySummaryWidget.tsx#L37)
+Defined in: [src/components/widgets/SecuritySummaryWidget.tsx:33](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/SecuritySummaryWidget.tsx#L33)

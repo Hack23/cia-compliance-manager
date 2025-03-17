@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIAImpactSummaryWidgetProps
 
-Defined in: [src/types/widgets.ts:238](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L238)
+Defined in: [src/types/widgets.ts:236](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widgets.ts#L236)
 
 Base properties for all widgets
 
@@ -20,7 +20,7 @@ Base properties for all widgets
 
 > **availabilityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:239](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L239)
+Defined in: [src/types/widgets.ts:237](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widgets.ts#L237)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/types/widgets.ts:239](https://github.com/Hack23/cia-compliance-
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/widgets.ts:242](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L242)
+Defined in: [src/types/widgets.ts:240](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widgets.ts#L240)
 
 #### Overrides
 
@@ -44,7 +44,7 @@ Defined in: [src/types/widgets.ts:242](https://github.com/Hack23/cia-compliance-
 
 > **confidentialityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:241](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L241)
+Defined in: [src/types/widgets.ts:239](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widgets.ts#L239)
 
 #### Overrides
 
@@ -56,7 +56,7 @@ Defined in: [src/types/widgets.ts:241](https://github.com/Hack23/cia-compliance-
 
 > **integrityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:240](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L240)
+Defined in: [src/types/widgets.ts:238](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widgets.ts#L238)
 
 #### Overrides
 
@@ -68,7 +68,7 @@ Defined in: [src/types/widgets.ts:240](https://github.com/Hack23/cia-compliance-
 
 > `optional` **securityLevel**: `string`
 
-Defined in: [src/types/widgets.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L15)
+Defined in: [src/types/widgets.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widgets.ts#L15)
 
 #### Inherited from
 
@@ -80,7 +80,7 @@ Defined in: [src/types/widgets.ts:15](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.ts:243](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L243)
+Defined in: [src/types/widgets.ts:241](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widgets.ts#L241)
 
 Test ID for component selection in tests
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **formatSecurityLevel**(`level`?): `string`
 
-Defined in: [src/utils/widgetHelpers.tsx:192](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/utils/widgetHelpers.tsx#L192)
+Defined in: [src/utils/widgetHelpers.tsx:173](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/utils/widgetHelpers.tsx#L173)
 
 Format security level string for display
 

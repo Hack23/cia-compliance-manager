@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.5**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
 
 ***
 
@@ -8,21 +8,10 @@
 
 > **TechnicalDetailsWidget**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:40](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/TechnicalDetailsWidget.tsx#L40)
+Defined in: [src/components/widgets/TechnicalDetailsWidget.tsx:26](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/TechnicalDetailsWidget.tsx#L26)
 
-TechnicalDetailsWidget displays technical implementation details for the selected security levels
-
-## Business Perspective
-
-This widget provides IT teams and technical stakeholders with specific
-implementation details required to meet the selected security levels.
-It translates high-level security decisions into actionable technical
-requirements, creating clear documentation for implementation teams. 🔧
-
-The technical specifications provided by this widget help organizations
-align their technical architecture with their security requirements,
-ensuring that appropriate controls are implemented across each component
-of the CIA security triad.
+TechnicalDetailsWidget displays detailed technical implementation information
+for each of the CIA components based on selected security levels
 
 ## Parameters
 

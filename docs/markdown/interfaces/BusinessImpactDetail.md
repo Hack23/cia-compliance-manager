@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.5**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactDetail
 
-Defined in: [src/types/cia.ts:89](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/cia.ts#L89)
+Defined in: [src/types/cia.ts:72](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L72)
 
 Business impact analysis interface for tracking security implications
 
@@ -16,7 +16,7 @@ Business impact analysis interface for tracking security implications
 
 > `optional` **annualRevenueLoss**: `string`
 
-Defined in: [src/types/cia.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/cia.ts#L92)
+Defined in: [src/types/cia.ts:75](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L75)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/cia.ts:92](https://github.com/Hack23/cia-compliance-manag
 
 > `optional` **complianceViolations**: `string`[]
 
-Defined in: [src/types/cia.ts:94](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/cia.ts#L94)
+Defined in: [src/types/cia.ts:77](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L77)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/types/cia.ts:94](https://github.com/Hack23/cia-compliance-manag
 
 > `optional` **description**: `string`
 
-Defined in: [src/types/cia.ts:90](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/cia.ts#L90)
+Defined in: [src/types/cia.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L73)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/types/cia.ts:90](https://github.com/Hack23/cia-compliance-manag
 
 > `optional` **meanTimeToRecover**: `string`
 
-Defined in: [src/types/cia.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/cia.ts#L93)
+Defined in: [src/types/cia.ts:76](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L76)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/types/cia.ts:93](https://github.com/Hack23/cia-compliance-manag
 
 > `optional` **riskLevel**: `string`
 
-Defined in: [src/types/cia.ts:91](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/cia.ts#L91)
+Defined in: [src/types/cia.ts:74](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L74)

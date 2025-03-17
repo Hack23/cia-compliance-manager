@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.5**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
 
 ***
 
@@ -8,19 +8,10 @@
 
 > **SecurityLevelWidget**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/SecurityLevelWidget.tsx:49](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/SecurityLevelWidget.tsx#L49)
+Defined in: [src/components/widgets/SecurityLevelWidget.tsx:48](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/SecurityLevelWidget.tsx#L48)
 
-SecurityLevelWidget provides controls to set security levels for availability, integrity, and confidentiality
-
-## Business Perspective
-
-This widget is the primary control center for security officers to define
-their organization's security requirements across the CIA triad. The selections
-made here drive all other security assessments and recommendations. 🔒
-
-Setting appropriate security levels helps organizations align their security
-investments with actual business requirements, avoiding both under-protection
-and unnecessary expenditure. 💼
+SecurityLevelWidget component for selecting CIA security levels
+Enhanced with rich descriptions and visual indicators
 
 ## Parameters
 
@@ -28,6 +19,10 @@ and unnecessary expenditure. 💼
 
 [`SecurityLevelWidgetProps`](../interfaces/SecurityLevelWidgetProps.md)
 
+Component properties
+
 ## Returns
 
 `ReactNode` \| `Promise`\<`ReactNode`\>
+
+SecurityLevelWidget React component

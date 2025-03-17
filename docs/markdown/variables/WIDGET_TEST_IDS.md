@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.5**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **WIDGET\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/constants/testIds.ts#L114)
+Defined in: [src/constants/testIds.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/constants/testIds.ts#L114)
 
 ## Type declaration
 
@@ -143,14 +143,6 @@ Defined in: [src/constants/testIds.ts:114](https://github.com/Hack23/cia-complia
 ### SECURITY\_SUMMARY\_TITLE
 
 > **SECURITY\_SUMMARY\_TITLE**: `string` = `"security-summary-title"`
-
-### SECURITY\_SUMMARY\_WIDGET
-
-> **SECURITY\_SUMMARY\_WIDGET**: `string` = `"security-summary-widget"`
-
-### SECURITY\_VISUALIZATION\_WIDGET
-
-> **SECURITY\_VISUALIZATION\_WIDGET**: `string` = `"security-visualization-widget"`
 
 ### TECHNICAL\_DESCRIPTION
 

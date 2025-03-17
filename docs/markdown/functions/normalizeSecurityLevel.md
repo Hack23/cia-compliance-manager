@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.5**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **normalizeSecurityLevel**(`level`?): [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/utils/securityLevelUtils.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/utils/securityLevelUtils.ts#L28)
+Defined in: [src/utils/securityLevelUtils.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/utils/securityLevelUtils.ts#L9)
 
 Normalizes a security level string to ensure it's a valid SecurityLevel value
 

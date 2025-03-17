@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../../README.md)
 
 ***
 
@@ -8,20 +8,10 @@
 
 > **default**(`props`): `ReactNode` \| `Promise`\<`ReactNode`\>
 
-Defined in: [src/components/widgets/SecurityResourcesWidget.tsx:44](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/widgets/SecurityResourcesWidget.tsx#L44)
+Defined in: [src/components/widgets/SecurityResourcesWidget.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/SecurityResourcesWidget.tsx#L24)
 
-SecurityResourcesWidget displays security resources, standards, and best practices
-
-## Business Perspective
-
-This widget helps organizations identify relevant security frameworks,
-standards, and tools that align with their selected security levels.
-By providing curated resources, it assists security teams in implementing
-appropriate controls and following industry best practices. 📚
-
-The categorized resources enable organizations to efficiently navigate
-complex security requirements and find the information they need for
-effective security program development. 🔍
+SecurityResourcesWidget displays security resources and reference materials
+Enhanced with Ingress-style UI elements for a more immersive experience
 
 ## Parameters
 

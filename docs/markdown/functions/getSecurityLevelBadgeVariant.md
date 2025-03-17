@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.5**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: getSecurityLevelBadgeVariant()
 
-> **getSecurityLevelBadgeVariant**(`level`): `"error"` \| `"purple"` \| `"info"` \| `"success"` \| `"warning"` \| `"neutral"`
+> **getSecurityLevelBadgeVariant**(`level`): `"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"` \| `"purple"`
 
-Defined in: [src/utils/securityLevelUtils.ts:110](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/utils/securityLevelUtils.ts#L110)
+Defined in: [src/utils/securityLevelUtils.ts:91](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/utils/securityLevelUtils.ts#L91)
 
 Map a security level to a status badge variant
 
@@ -22,6 +22,6 @@ The security level string
 
 ## Returns
 
-`"error"` \| `"purple"` \| `"info"` \| `"success"` \| `"warning"` \| `"neutral"`
+`"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"` \| `"purple"`
 
 A status badge variant

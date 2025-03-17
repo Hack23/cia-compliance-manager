@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
 
 ***
 
@@ -8,21 +8,9 @@
 
 > `const` **SECURITY\_LEVEL\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:468](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/constants/testIds.ts#L468)
+Defined in: [src/constants/testIds.ts:456](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/constants/testIds.ts#L456)
 
 ## Type declaration
-
-### AVAILABILITY\_SELECTOR
-
-> **AVAILABILITY\_SELECTOR**: `string` = `"availability-level-selector"`
-
-### CONFIDENTIALITY\_SELECTOR
-
-> **CONFIDENTIALITY\_SELECTOR**: `string` = `"confidentiality-level-selector"`
-
-### INTEGRITY\_SELECTOR
-
-> **INTEGRITY\_SELECTOR**: `string` = `"integrity-level-selector"`
 
 ### SECURITY\_LEVEL\_PREFIX
 
@@ -31,7 +19,3 @@ Defined in: [src/constants/testIds.ts:468](https://github.com/Hack23/cia-complia
 ### SECURITY\_LEVEL\_SELECTOR
 
 > **SECURITY\_LEVEL\_SELECTOR**: `string` = `"security-level-selector"`
-
-### SECURITY\_LEVEL\_WIDGET
-
-> **SECURITY\_LEVEL\_WIDGET**: `string` = `"security-level-widget"`

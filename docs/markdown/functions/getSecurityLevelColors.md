@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.5**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelColors**(`level`): `object`
 
-Defined in: [src/utils/widgetHelpers.tsx:213](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/utils/widgetHelpers.tsx#L213)
+Defined in: [src/utils/widgetHelpers.tsx:194](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/utils/widgetHelpers.tsx#L194)
 
 Get CSS classes for a security level
 

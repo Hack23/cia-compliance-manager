@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
 
 ***
 
@@ -6,6 +6,6 @@
 
 # Variable: widgetRegistry
 
-> `const` **widgetRegistry**: `WidgetRegistryImpl`
+> `const` **widgetRegistry**: `WidgetRegistry`
 
-Defined in: [src/utils/widgetRegistry.tsx:213](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/utils/widgetRegistry.tsx#L213)
+Defined in: [src/utils/widgetRegistry.tsx:185](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/utils/widgetRegistry.tsx#L185)

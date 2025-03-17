@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **default**: `object`
 
-Defined in: [src/services/ciaContentService.ts:1370](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/services/ciaContentService.ts#L1370)
+Defined in: [src/services/ciaContentService.ts:1370](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/services/ciaContentService.ts#L1370)
 
 ## Type declaration
 
@@ -411,7 +411,7 @@ Always returns a string array, even when no recommendations are found
 
 ### getRiskBadgeVariant()
 
-> **getRiskBadgeVariant**: (`riskLevel`) => `"error"` \| `"info"` \| `"success"` \| `"warning"` \| `"neutral"`
+> **getRiskBadgeVariant**: (`riskLevel`) => `"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"`
 
 Get appropriate badge variant based on risk level
 
@@ -423,7 +423,7 @@ Get appropriate badge variant based on risk level
 
 #### Returns
 
-`"error"` \| `"info"` \| `"success"` \| `"warning"` \| `"neutral"`
+`"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"`
 
 ### getROIEstimate()
 

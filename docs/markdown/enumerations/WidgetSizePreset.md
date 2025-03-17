@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.5**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
 
 ***
 
@@ -6,25 +6,15 @@
 
 # Enumeration: WidgetSizePreset
 
-Defined in: [src/types/widgets.ts:324](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L324)
-
-Preset widget sizes
+Defined in: [src/types/widget.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L22)
 
 ## Enumeration Members
-
-### DEFAULT
-
-> **DEFAULT**: `"medium"`
-
-Defined in: [src/types/widgets.ts:330](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L330)
-
-***
 
 ### EXTRA\_LARGE
 
 > **EXTRA\_LARGE**: `"extraLarge"`
 
-Defined in: [src/types/widgets.ts:328](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L328)
+Defined in: [src/types/widget.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L26)
 
 ***
 
@@ -32,7 +22,7 @@ Defined in: [src/types/widgets.ts:328](https://github.com/Hack23/cia-compliance-
 
 > **FULL\_WIDTH**: `"fullWidth"`
 
-Defined in: [src/types/widgets.ts:329](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L329)
+Defined in: [src/types/widget.ts:27](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L27)
 
 ***
 
@@ -40,7 +30,7 @@ Defined in: [src/types/widgets.ts:329](https://github.com/Hack23/cia-compliance-
 
 > **LARGE**: `"large"`
 
-Defined in: [src/types/widgets.ts:327](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L327)
+Defined in: [src/types/widget.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L25)
 
 ***
 
@@ -48,7 +38,7 @@ Defined in: [src/types/widgets.ts:327](https://github.com/Hack23/cia-compliance-
 
 > **MEDIUM**: `"medium"`
 
-Defined in: [src/types/widgets.ts:326](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L326)
+Defined in: [src/types/widget.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L24)
 
 ***
 
@@ -56,4 +46,4 @@ Defined in: [src/types/widgets.ts:326](https://github.com/Hack23/cia-compliance-
 
 > **SMALL**: `"small"`
 
-Defined in: [src/types/widgets.ts:325](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L325)
+Defined in: [src/types/widget.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/widget.ts#L23)

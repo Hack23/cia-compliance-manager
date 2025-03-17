@@ -8,7 +8,6 @@ src/application/CIAClassificationApp.enhanced.test.tsx
 src/application/CIAClassificationApp.test.tsx
 src/application/CIAClassificationApp.tsx
 src/application/index.ts
-src/components/SecurityLevelSelector.tsx
 src/components/charts/RadarChart.comprehensive.test.tsx
 src/components/charts/RadarChart.direct.test.tsx
 src/components/charts/RadarChart.enhanced.test.tsx
@@ -24,12 +23,9 @@ src/components/common/KeyValuePair.test.tsx
 src/components/common/KeyValuePair.tsx
 src/components/common/MetricsCard.test.tsx
 src/components/common/MetricsCard.tsx
-src/components/common/SecurityLevelSelector.tsx
 src/components/common/SecurityLevelSummaryItem.tsx
-src/components/common/SecurityRiskScore.tsx
 src/components/common/StatusBadge.test.tsx
 src/components/common/StatusBadge.tsx
-src/components/common/Tooltip.tsx
 src/components/common/ValueDisplay.test.tsx
 src/components/common/ValueDisplay.tsx
 src/components/common/WidgetBase.test.tsx
@@ -76,6 +72,12 @@ src/components/widgets/TechnicalDetailsWidget.tsx
 src/components/widgets/ValueCreationWidget.test.tsx
 src/components/widgets/ValueCreationWidget.tsx
 src/components/widgets/index.ts
+src/components/widgets/utils/index.ts
+src/components/widgets/utils/types.ts
+src/components/widgets/utils/widgetHelpers.test.tsx
+src/components/widgets/utils/widgetHelpers.tsx
+src/components/widgets/utils/widgetRegistry.test.tsx
+src/components/widgets/utils/widgetRegistry.tsx
 src/constants/appConstants.test.ts
 src/constants/appConstants.ts
 src/constants/businessConstants.ts
@@ -145,7 +147,6 @@ src/types/widgets.test.ts
 src/types/widgets.ts
 src/utils/colorUtils.test.ts
 src/utils/colorUtils.ts
-src/utils/errorHandlers.tsx
 src/utils/index.ts
 src/utils/securityDefaults.test.ts
 src/utils/securityDefaults.ts

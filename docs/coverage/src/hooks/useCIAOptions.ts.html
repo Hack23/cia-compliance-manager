@@ -1496,22 +1496,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">28x</span>
-<span class="cline-any cline-yes">28x</span>
-<span class="cline-any cline-yes">28x</span>
-<span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-yes">56x</span>
+<span class="cline-any cline-yes">56x</span>
+<span class="cline-any cline-yes">56x</span>
+<span class="cline-any cline-yes">56x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">28x</span>
-<span class="cline-any cline-yes">28x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">28x</span>
-<span class="cline-any cline-yes">28x</span>
-<span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-yes">56x</span>
+<span class="cline-any cline-yes">56x</span>
+<span class="cline-any cline-yes">33x</span>
+<span class="cline-any cline-yes">33x</span>
+<span class="cline-any cline-yes">33x</span>
+<span class="cline-any cline-yes">33x</span>
+<span class="cline-any cline-yes">33x</span>
+<span class="cline-any cline-yes">56x</span>
+<span class="cline-any cline-yes">56x</span>
+<span class="cline-any cline-yes">56x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2166,48 +2166,48 @@ const _confidentialityOptions: Partial&lt;
   },
 };
 &nbsp;
-// ROI estimates with refined, more pessimistic values and revised descriptions
+// ROI estimates with proper typing
 const _ROI_ESTIMATES: ROIEstimatesMap = {
   NONE: {
     value: "0%",
-    returnRate: "0%", // Retained for backward compatibility
+    returnRate: "0%", // Added for backward compatibility
     description:
-      "No security investment yields no cost avoidance, leaving the firm fully exposed.",
+      "No security investment results in no cost avoidance or operational benefits.",
     potentialSavings: "$0",
     breakEvenPeriod: "N/A",
   },
   LOW: {
-    value: "0-10%",
-    returnRate: "0-10%", // Retained for backward compatibility
+    value: "30-50%",
+    returnRate: "30-50%", // Added for backward compatibility
     description:
-      "Minimal investment yields negligible benefits; returns are marginal and highly context-dependent.",
-    potentialSavings: "$0.5K-$2K (contextual)",
-    breakEvenPeriod: "30-36 months",
+      "Basic security measures provide fundamental protection. Returns are modest but tangible, especially in preventing common incidents.",
+    potentialSavings: "$5,000-$20,000",
+    breakEvenPeriod: "12-18 months",
   },
   MODERATE: {
-    value: "10-20%",
-    returnRate: "10-20%", // Retained for backward compatibility
+    value: "50-100%",
+    returnRate: "50-100%", // Added for backward compatibility
     description:
-      "Standard investments offer modest risk reduction with benefits that vary by environment.",
-    potentialSavings: "$2K-$10K (contextual)",
-    breakEvenPeriod: "24-30 months",
+      "Standard security investments provide good value. The ROI is substantial as risk mitigation becomes more comprehensive.",
+    potentialSavings: "$20,000-$75,000",
+    breakEvenPeriod: "9-12 months",
   },
   HIGH: {
-    value: "20-30%",
-    returnRate: "20-30%", // Retained for backward compatibility
+    value: "100-200%",
+    returnRate: "100-200%", // Added for backward compatibility
     description:
-      "Advanced measures improve protection, though realized returns may be lower than expected.",
-    potentialSavings: "$10K-$30K (contextual)",
-    breakEvenPeriod: "18-24 months",
+      "Advanced security measures yield significant returns through robust protection against sophisticated threats and compliance benefits.",
+    potentialSavings: "$75,000-$200,000",
+    breakEvenPeriod: "6-9 months",
   },
   VERY_HIGH: {
-    value: "30-50%",
-    returnRate: "30-50%", // Retained for backward compatibility
+    value: "150-300%",
+    returnRate: "150-300%", // Added for backward compatibility
     description:
-      "Premium investments aim for robust risk management but may not fully justify the high cost in less favorable contexts.",
-    potentialSavings: "$30K-$70K (contextual)",
-    breakEvenPeriod: "12-18 months",
-    implementationCost: "High initial investment with variable returns",
+      "Maximum security investments offer optimal protection and compliance coverage, with highest returns for critical systems.",
+    potentialSavings: "$200,000-$500,000",
+    breakEvenPeriod: "3-6 months",
+    implementationCost: "High initial investment",
   },
 };
 &nbsp;
@@ -2248,7 +2248,7 @@ export type { CIADetails } from "../types/cia";
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-17T01:10:59.586Z
+                at 2025-03-16T03:46:16.735Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

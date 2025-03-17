@@ -1,14 +1,10 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../README.md)
 
 ***
 
 [CIA Compliance Manager Diagrams](../../modules.md) / types/widgets
 
 # types/widgets
-
-## Enumerations
-
-- [WidgetSizePreset](enumerations/WidgetSizePreset.md)
 
 ## Interfaces
 
@@ -30,13 +26,6 @@
 - [TechnicalDetailsWidgetProps](interfaces/TechnicalDetailsWidgetProps.md)
 - [ValueCreationWidgetProps](interfaces/ValueCreationWidgetProps.md)
 - [WidgetBaseProps](interfaces/WidgetBaseProps.md)
-- [WidgetConfig](interfaces/WidgetConfig.md)
-- [WidgetDefinition](interfaces/WidgetDefinition.md)
-- [WidgetSize](interfaces/WidgetSize.md)
-
-## Type Aliases
-
-- [WidgetComponentType](type-aliases/WidgetComponentType.md)
 
 ## Variables
 

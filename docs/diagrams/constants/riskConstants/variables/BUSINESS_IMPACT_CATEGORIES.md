@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **BUSINESS\_IMPACT\_CATEGORIES**: `object`
 
-Defined in: [src/constants/riskConstants.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/constants/riskConstants.ts#L40)
+Defined in: [src/constants/riskConstants.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/constants/riskConstants.ts#L40)
 
 ## Type declaration
 

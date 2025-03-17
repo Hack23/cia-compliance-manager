@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.2**](../../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > **StatusBadgeSize**: `"xs"` \| `"sm"` \| `"md"` \| `"lg"`
 
-Defined in: [src/components/common/StatusBadge.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/components/common/StatusBadge.tsx#L12)
+Defined in: [src/components/common/StatusBadge.tsx:12](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/common/StatusBadge.tsx#L12)
