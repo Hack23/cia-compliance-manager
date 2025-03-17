@@ -63,7 +63,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
 
       - name: Cache dependencies
@@ -127,10 +127,10 @@ jobs:
         run: npm run docs:bundle
 
       - name: Merge  e2e test report
-        run: npm run test:e2ereportmerge 
+        run: npm run test:e2ereportmerge
 
       - name: Generate e2e html report
-        run: npm run test:e2ereporthtmlall 
+        run: npm run test:e2ereporthtmlall
 
       # Only deploy on push to main, not PRs
       - name: Deploy to GitHub Pages
@@ -140,7 +140,6 @@ jobs:
           target-folder: docs
           branch: main
           clean: false
-
 
   build:
     name: Build Release Package
@@ -162,7 +161,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
 
       - name: Cache dependencies
@@ -294,7 +293,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Remove old version of APP
-        run: rm -rf docs/index.html.html assets 
+        run: rm -rf docs/index.html.html assets
 
       - name: Deploy new version of APP
         run: unzip -o artifacts/build/cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip -d docs/
