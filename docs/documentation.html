@@ -8,13 +8,23 @@
       content="Comprehensive documentation for the CIA Compliance Manager - a security assessment tool for the CIA triad"
     />
     <title>CIA Compliance Manager Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-      /* Base styles with light/dark mode support */
+      /* Base variables with combined light/dark mode support */
       :root {
-        --bg-color: #f9f9f9;
-        --text-color: #333;
+        /* Light Mode */
+        --primary-color: #006633;
+        --primary-light: #008844;
+        --primary-dark: #004422;
+        --accent-color: #669900;
+        --bg-color: #f0f0f0;
+        --card-bg: #ffffff;
+        --text-color: #222222;
+        --text-secondary: #444444;
         --header-color: #0366d6;
-        --card-bg: #fff;
+        --border-color: rgba(0, 102, 51, 0.2);
         --card-border: #e1e4e8;
         --card-shadow: rgba(0, 0, 0, 0.12);
         --link-color: #0366d6;
@@ -23,108 +33,187 @@
         --button-text: #fff;
         --section-border: #eaeaea;
         --badge-bg: #f5f5f5;
+        --confidentiality-color: #8e44ad;
+        --integrity-color: #27ae60;
+        --availability-color: #2980b9;
+        --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-accent: 'Inter', system-ui, -apple-system, sans-serif;
+        --font-mono: 'Share Tech Mono', monospace;
       }
+
+      /* Dark Mode - Ingress Inspired Theme */
       @media (prefers-color-scheme: dark) {
         :root {
-          --bg-color: #1a1a1a;
-          --text-color: #e0e0e0;
+          --primary-color: #00cc66;
+          --primary-light: #00ff88; 
+          --primary-dark: #00bb77;
+          --accent-color: #33eeff;
+          --bg-color: #001a1a;
+          --card-bg: #001c25;
+          --text-color: #f0f0f0;
+          --text-secondary: #aaaaaa;
           --header-color: #58a6ff;
-          --card-bg: #2d2d2d;
-          --card-border: #444;
-          --card-shadow: rgba(0, 0, 0, 0.3);
+          --border-color: rgba(0, 204, 102, 0.3);
+          --card-border: rgba(0, 204, 102, 0.3);
+          --card-shadow: rgba(0, 204, 102, 0.2);
           --link-color: #58a6ff;
           --link-hover: #79b8ff;
           --button-bg: #2188ff;
           --button-text: #e0e0e0;
           --section-border: #444;
           --badge-bg: #333;
+          --confidentiality-color: #bd93f9;
+          --integrity-color: #50fa7b;
+          --availability-color: #8be9fd;
+          --font-accent: 'Orbitron', sans-serif;
         }
       }
+
+      /* Base styles */
+      * {
+        transition-property: color, background-color, border-color, box-shadow;
+        transition-duration: 200ms;
+        transition-timing-function: ease-in-out;
+      }
+
+      html {
+        height: 100%;
+        width: 100%;
+      }
+
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        font-family: var(--font-main);
         line-height: 1.6;
         color: var(--text-color);
         background-color: var(--bg-color);
         max-width: 1200px;
         margin: 0 auto;
         padding: 20px;
-        transition: background-color 0.3s ease, color 0.3s ease;
-      }
-      header {
-        text-align: center;
-        margin-bottom: 2rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid var(--section-border);
         position: relative;
+        overflow-x: hidden;
       }
-      h1,
-      h2,
-      h3 {
+
+      /* Scan line effect for dark mode */
+      @media (prefers-color-scheme: dark) {
+        body::after {
+          content: "";
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: repeating-linear-gradient(
+            transparent 0px,
+            rgba(0, 0, 0, 0.05) 1px,
+            transparent 2px
+          );
+          pointer-events: none;
+          z-index: 9999;
+          opacity: 0.3;
+        }
+        
+        body::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill='%2300cc66' fill-opacity='0.03'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/svg%3E");
+          opacity: 0.2;
+          z-index: -1;
+          pointer-events: none;
+        }
+      }
+
+      /* Typography */
+      h1, h2, h3 {
         color: var(--header-color);
+        font-family: var(--font-accent);
       }
+
+      @media (prefers-color-scheme: dark) {
+        h1, h2, h3 {
+          font-family: 'Orbitron', sans-serif;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          text-shadow: 0 0 5px rgba(0, 204, 102, 0.5);
+        }
+      }
+
       h1 {
         margin-top: 0;
+        font-size: 2.2rem;
       }
+
       h2 {
         margin-top: 2rem;
         padding-bottom: 0.5rem;
         border-bottom: 1px solid var(--section-border);
+        font-size: 1.8rem;
       }
-      .theme-toggle {
-        background: var(--button-bg);
-        color: var(--button-text);
-        border: none;
-        padding: 8px 16px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 0.9rem;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        transition: background 0.2s ease;
+
+      h3 {
+        font-size: 1.4rem;
       }
-      .theme-toggle:hover {
-        background: var(--link-hover);
-      }
-      .cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1rem;
-        margin-bottom: 2rem;
-      }
-      .card {
-        border: 1px solid var(--card-border);
-        border-radius: 6px;
-        padding: 1.5rem;
-        background: var(--card-bg);
-        box-shadow: 0 1px 3px var(--card-shadow);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 5px 15px var(--card-shadow);
-      }
-      .card h3 {
-        margin-top: 0;
-        color: var(--header-color);
-      }
-      .card p {
-        margin-bottom: 1rem;
-      }
-      .btn {
-        display: inline-block;
-        padding: 0.5rem 1rem;
-        margin-top: 0.5rem;
-        border-radius: 4px;
-        background: var(--button-bg);
-        color: var(--button-text);
+
+      a {
+        color: var(--link-color);
         text-decoration: none;
-        transition: background 0.2s ease;
+        transition: color 0.2s ease, text-shadow 0.2s ease;
       }
-      .btn:hover {
-        background: var(--link-hover);
+
+      a:hover {
+        color: var(--link-hover);
+        text-decoration: underline;
       }
+
+      @media (prefers-color-scheme: dark) {
+        a:hover {
+          text-shadow: 0 0 8px rgba(0, 204, 102, 0.5);
+        }
+      }
+
+      /* Header and navigation */
+      header {
+        position: relative;
+        text-align: center;
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--section-border);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        header {
+          border-bottom: 1px solid rgba(0, 204, 102, 0.3);
+        }
+      }
+
+      .logo-container {
+        margin-bottom: 1.5rem;
+      }
+
+      .logo {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .logo {
+          box-shadow: 0 0 20px rgba(0, 204, 102, 0.5);
+        }
+        
+        .logo:hover {
+          transform: scale(1.05);
+          box-shadow: 0 0 30px rgba(0, 204, 102, 0.7);
+        }
+      }
+
       .badges {
         display: flex;
         flex-wrap: wrap;
@@ -132,53 +221,421 @@
         margin: 1.5rem 0;
         justify-content: center;
       }
+
       .badges a {
         text-decoration: none;
       }
+
       .badges img {
         height: 20px;
         vertical-align: middle;
       }
+
+      .app-link {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 1.5rem;
+      }
+
       .app-link a {
         display: inline-block;
-        margin-top: 1.5rem;
         padding: 0.7rem 1.5rem;
         background: var(--button-bg);
         color: var(--button-text);
         border-radius: 6px;
         text-decoration: none;
         font-weight: bold;
-        transition: background 0.2s ease, transform 0.2s ease;
+        transition: all 0.3s ease;
       }
+
       .app-link a:hover {
         background: var(--link-hover);
         transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
       }
+
+      @media (prefers-color-scheme: dark) {
+        .app-link a {
+          background: linear-gradient(
+            to bottom,
+            rgba(0, 204, 102, 0.2),
+            rgba(0, 136, 68, 0.4)
+          );
+          border: 1px solid var(--border-color);
+          position: relative;
+          overflow: hidden;
+          color: var(--primary-light);
+        }
+
+        .app-link a:hover {
+          box-shadow: 0 0 15px rgba(0, 204, 102, 0.3);
+          border-color: var(--primary-light);
+        }
+
+        .app-link a::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 204, 102, 0.2) 50%,
+            transparent 100%
+          );
+          transition: all 0.5s ease;
+        }
+
+        .app-link a:hover::before {
+          left: 100%;
+        }
+      }
+
+      /* Cards */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .card {
+        border: 1px solid var(--card-border);
+        border-radius: 10px;
+        padding: 1.5rem;
+        background: var(--card-bg);
+        box-shadow: 0 4px 6px var(--card-shadow);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card h3 {
+        margin-top: 0;
+        font-size: 1.3rem;
+        color: var(--header-color);
+        margin-bottom: 1rem;
+      }
+
+      .card p {
+        margin-bottom: 1.2rem;
+        color: var(--text-secondary);
+      }
+
+      .card a {
+        display: inline-block;
+        margin-top: 0.5rem;
+        font-weight: 500;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px var(--card-shadow);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .card {
+          background: linear-gradient(
+            135deg,
+            rgba(0, 26, 37, 0.95) 0%,
+            rgba(0, 20, 26, 0.98) 100%
+          );
+          border: 1px solid var(--border-color);
+          box-shadow: 0 0 10px rgba(0, 204, 102, 0.2);
+        }
+
+        .card:hover {
+          box-shadow: 0 0 20px rgba(0, 204, 102, 0.4);
+        }
+
+        /* Cyberpunk corner elements on cards */
+        .card::before,
+        .card::after {
+          content: '';
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          border: 2px solid var(--primary-color);
+          opacity: 0.6;
+          z-index: 1;
+          transition: all 0.3s ease;
+        }
+
+        .card::before {
+          top: -2px;
+          left: -2px;
+          border-right: none;
+          border-bottom: none;
+        }
+
+        .card::after {
+          bottom: -2px;
+          right: -2px;
+          border-left: none;
+          border-top: none;
+        }
+
+        .card:hover::before,
+        .card:hover::after {
+          width: 30px;
+          height: 30px;
+          opacity: 0.8;
+        }
+
+        /* Scanner animation effect for active cards */
+        @keyframes scanner {
+          0%, 100% { background-position: 0% 0%; }
+          50% { background-position: 100% 100%; }
+        }
+
+        .card:hover .scanner-effect {
+          opacity: 1;
+        }
+
+        .scanner-effect {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(
+            45deg,
+            rgba(0, 204, 102, 0) 85%,
+            rgba(0, 204, 102, 0.2) 90%,
+            rgba(0, 204, 102, 0) 95%
+          );
+          pointer-events: none;
+          background-size: 300% 300%;
+          animation: scanner 3s ease infinite;
+          z-index: 1;
+          border-radius: inherit;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .card h3 {
+          text-shadow: 0 0 6px rgba(0, 204, 102, 0.5);
+        }
+      }
+
+      /* CIA Themed Cards */
+      .confidentiality-card {
+        border-left: 4px solid var(--confidentiality-color);
+      }
+
+      .integrity-card {
+        border-left: 4px solid var(--integrity-color);
+      }
+
+      .availability-card {
+        border-left: 4px solid var(--availability-color);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .confidentiality-card {
+          box-shadow: -2px 0 8px rgba(155, 89, 182, 0.3);
+        }
+
+        .integrity-card {
+          box-shadow: -2px 0 8px rgba(46, 204, 113, 0.3);
+        }
+
+        .availability-card {
+          box-shadow: -2px 0 8px rgba(52, 152, 219, 0.3);
+        }
+      }
+
+      /* Links section */
       ul {
         list-style-type: none;
         padding: 0;
+        margin-left: 0;
       }
+
       ul li {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.8rem;
+        position: relative;
+        padding-left: 1.5rem;
       }
+
+      ul li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        ul li::before {
+          content: "▶";
+          font-size: 0.7rem;
+          left: 0;
+          top: 0.25rem;
+          color: var(--primary-color);
+        }
+      }
+
       ul li a {
-        color: var(--link-color);
-        text-decoration: none;
-        transition: color 0.2s ease;
+        display: inline-block;
+        padding: 0.2rem 0;
+        transition: all 0.2s ease;
       }
-      ul li a:hover {
-        color: var(--link-hover);
-        text-decoration: underline;
+
+      /* Button */
+      .btn {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        background: var(--button-bg);
+        color: var(--button-text);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        background: var(--link-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .btn {
+          background: rgba(0, 204, 102, 0.2);
+          color: var(--primary-light);
+          border: 1px solid rgba(0, 204, 102, 0.3);
+          text-transform: uppercase;
+          font-size: 0.8rem;
+          letter-spacing: 0.5px;
+          padding: 0.5rem 1.2rem;
+        }
+
+        .btn:hover {
+          background: rgba(0, 204, 102, 0.3);
+          box-shadow: 0 0 12px rgba(0, 204, 102, 0.4);
+        }
+      }
+
+      /* Footer */
+      footer {
+        margin-top: 4rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--section-border);
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        footer {
+          border-top: 1px solid rgba(0, 204, 102, 0.3);
+        }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .cards {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+        
+        header, main {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        
+        h1 {
+          font-size: 1.8rem;
+        }
+        
+        h2 {
+          font-size: 1.5rem;
+        }
+        
+        .app-version {
+          display: block;
+          margin-top: 0.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .cards {
+          grid-template-columns: 1fr;
+        }
+        
+        .app-link {
+          flex-direction: column;
+          align-items: center;
+        }
+        
+        .app-link a {
+          width: 100%;
+          text-align: center;
+        }
+        
+        .badges {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+
+      /* Animation keyframes */
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 5px rgba(0, 204, 102, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 20px rgba(0, 204, 102, 0.8);
+        }
+        100% {
+          box-shadow: 0 0 5px rgba(0, 204, 102, 0.5);
+        }
+      }
+
+      @keyframes flicker {
+        0% { opacity: 0.99; }
+        5% { opacity: 0.96; }
+        10% { opacity: 0.97; }
+        15% { opacity: 0.99; }
+        20% { opacity: 0.94; }
+        25% { opacity: 0.98; }
+        30% { opacity: 0.97; }
+        35% { opacity: 0.99; }
+        40% { opacity: 0.98; }
+        45% { opacity: 0.97; }
+        50% { opacity: 0.99; }
+        55% { opacity: 0.98; }
+        60% { opacity: 0.97; }
+        65% { opacity: 0.99; }
+        70% { opacity: 0.96; }
+        75% { opacity: 0.99; }
+        80% { opacity: 0.98; }
+        85% { opacity: 0.99; }
+        90% { opacity: 0.96; }
+        95% { opacity: 0.99; }
+        100% { opacity: 1; }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .logo {
+          animation: pulse 4s infinite;
+        }
+        
+        main {
+          animation: flicker 10s infinite;
+        }
       }
     </style>
-    <script>
-      function toggleTheme() {
-        document.body.classList.toggle("dark-mode");
-      }
-    </script>
   </head>
   <body>
     <header>
+      <div class="logo-container">
+        <img src="https://hack23.github.io/cia-compliance-manager/icon-192.png" alt="CIA Compliance Manager Logo" class="logo">
+      </div>
       <h1>
         CIA Compliance Manager Documentation
         <span class="app-version">v0.8.4</span>
@@ -187,10 +644,10 @@
         Comprehensive documentation for the CIA (Confidentiality, Integrity,
         Availability) Compliance Manager.
       </p>
-      <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
       <div class="badges">
         <a
           href="https://github.com/Hack23/cia-compliance-manager/raw/master/LICENSE.md"
+          title="License"
         >
           <img
             src="https://img.shields.io/github/license/Hack23/cia-compliance-manager.svg"
@@ -199,6 +656,7 @@
         </a>
         <a
           href="https://scorecard.dev/viewer/?uri=github.com/Hack23/cia-compliance-manager"
+          title="OpenSSF Scorecard"
         >
           <img
             src="https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compliance-manager/badge"
@@ -207,6 +665,7 @@
         </a>
         <a
           href="https://github.com/Hack23/cia-compliance-manager/actions/workflows/scorecards.yml"
+          title="Scorecard supply-chain security"
         >
           <img
             src="https://github.com/Hack23/cia-compliance-manager/actions/workflows/scorecards.yml/badge.svg?branch=main"
@@ -215,80 +674,114 @@
         </a>
       </div>
       <div class="app-link">
-        <a href="https://hack23.github.io/cia-compliance-manager/"
-          >Launch Application</a
-        >
-        <a href="https://github.com/Hack23/cia-compliance-manager" class="btn"
-          >GitHub Repository</a
-        >
+        <a href="https://hack23.github.io/cia-compliance-manager/" title="Launch the CIA Compliance Manager application">
+          Launch Application
+        </a>
+        <a href="https://github.com/Hack23/cia-compliance-manager" class="btn" title="View the GitHub repository">
+          GitHub Repository
+        </a>
       </div>
     </header>
+    
     <main>
       <div class="cards">
-        <div class="card">
+        <div class="card confidentiality-card">
+          <div class="scanner-effect"></div>
           <h3>Project Architecture</h3>
-          <p>C4 model diagrams and other architectural documentation.</p>
+          <p>C4 model diagrams and other architectural documentation for the CIA Compliance Manager system.</p>
           <a
             href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md"
-            >View Architecture</a
+            title="View Architecture Documentation"
           >
+            View Architecture
+          </a>
         </div>
 
-        <div class="card">
+        <div class="card integrity-card">
+          <div class="scanner-effect"></div>
           <h3>API Documentation</h3>
           <p>
             Detailed API reference for all components, types, and functions used
             in the application.
           </p>
           <a href="https://hack23.github.io/cia-compliance-manager/api/"
-            >View API Docs</a
+            title="View API Documentation"
           >
+            View API Docs
+          </a>
         </div>
 
-        <div class="card">
+        <div class="card availability-card">
+          <div class="scanner-effect"></div>
           <h3>Unit Test</h3>
-          <p>Visual representation of unit test and results of the codebase.</p>
+          <p>Visual representation of unit test results and coverage of the codebase.</p>
           <a
             href="https://hack23.github.io/cia-compliance-manager/test-results/"
-            >Test Results</a
+            title="View Test Results"
           >
+            Test Results
+          </a>
           <p>
-            Unit testing strategy ,Unit tests verify that the application works
+            Unit testing strategy and approach for verifying that the application works
             correctly from a functional perspective.
           </p>
           <a
             href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md"
-            >View Unit Test Plan</a
+            title="View Unit Test Plan"
           >
+            View Unit Test Plan
+          </a>
         </div>
 
-        <div class="card">
-          <h3>Unit Test Code Coverage</h3>
+        <div class="card confidentiality-card">
+          <div class="scanner-effect"></div>
+          <h3>Test Coverage</h3>
           <p>
             Test coverage reports showing how much of the codebase is covered by
-            tests.
+            unit and integration tests.
           </p>
           <a
             href="https://hack23.github.io/cia-compliance-manager/coverage/index.html"
-            >View Coverage Report</a
+            title="View Code Coverage Report"
           >
+            View Coverage Report
+          </a>
         </div>
 
-        <div class="card">
+        <div class="card integrity-card">
+          <div class="scanner-effect"></div>
           <h3>E2E System Test</h3>
-          <p>Test reports showing result .</p>
+          <p>End-to-end test reports showing full system validation results.</p>
           <a
             href="https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/index.html"
-            >View Test Report</a
+            title="View E2E Test Report"
           >
+            View Test Report
+          </a>
           <p>
-            (E2E) testing strategy ,E2E tests verify that the application works
+            End-to-end (E2E) testing strategy verifying that the application works
             correctly from a user's perspective.
           </p>
           <a
             href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md"
-            >View E2E Test Plan</a
+            title="View E2E Test Plan"
           >
+            View E2E Test Plan
+          </a>
+        </div>
+        
+        <div class="card availability-card">
+          <div class="scanner-effect"></div>
+          <h3>Performance Testing</h3>
+          <p>
+            Benchmarks and performance analysis of the application under various load conditions.
+          </p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md"
+            title="View Performance Testing Results"
+          >
+            View Performance Tests
+          </a>
         </div>
       </div>
 
@@ -297,31 +790,33 @@
         <p>
           The CIA Compliance Manager is a comprehensive web application designed
           to help organizations assess, implement, and manage security controls
-          across the CIA triad. Evaluate your security posture, measure
-          compliance against major frameworks, and analyze the business impacts
-          of security implementations.
+          across the CIA triad (Confidentiality, Integrity, Availability). The application enables users to evaluate 
+          security posture, measure compliance against major frameworks, and analyze the business 
+          impacts of security implementations.
         </p>
       </section>
+      
       <section id="features">
         <h2>Key Features</h2>
         <div class="cards">
           <div class="card">
+            <div class="scanner-effect"></div>
             <h3>Security Level Assessment</h3>
             <p>
               Assess and configure security levels across Confidentiality,
-              Integrity, and Availability.
+              Integrity, and Availability dimensions.
             </p>
-            <a href="#cia" class="btn">Learn More</a>
           </div>
           <div class="card">
+            <div class="scanner-effect"></div>
             <h3>Compliance Mapping</h3>
             <p>
               Map security controls to frameworks like NIST, ISO, GDPR, HIPAA,
               SOC2, and PCI DSS.
             </p>
-            <a href="#compliance" class="btn">Learn More</a>
           </div>
           <div class="card">
+            <div class="scanner-effect"></div>
             <h3>Business Impact Analysis</h3>
             <p>
               Analyze the financial, operational, and regulatory impacts of your
@@ -329,91 +824,30 @@
             </p>
           </div>
           <div class="card">
+            <div class="scanner-effect"></div>
             <h3>Cost Estimation</h3>
             <p>
               Estimate CAPEX and OPEX for security implementations to support
-              ROI analysis.
+              ROI analysis and budget planning.
             </p>
           </div>
           <div class="card">
+            <div class="scanner-effect"></div>
             <h3>Interactive Visualizations</h3>
             <p>
               View security data and compliance status through intuitive
-              interactive charts.
+              interactive charts and dashboards.
             </p>
           </div>
           <div class="card">
+            <div class="scanner-effect"></div>
             <h3>Implementation Guidance</h3>
             <p>
               Access detailed guidance on deploying and optimizing security
-              controls.
             </p>
           </div>
         </div>
       </section>
-      <section id="architecture-docs">
-        <h2>Architecture Documentation</h2>
-        <ul>
-          <li>
-            <a
-              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Current Architecture</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/STATEDIAGRAM.md"
-              target="_blank"
-              rel="noopener noreferrer"
-              >State Diagrams</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FLOWCHART.md"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Process Flowcharts</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SWOT.md"
-              target="_blank"
-              rel="noopener noreferrer"
-              >SWOT Analysis</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/MINDMAP.md"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Mindmap</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Performance Testing</a
-            >
-          </li>
-        </ul>
-      </section>
-      <h2>Documentation Overview</h2>
-      <p>
-        This documentation is automatically generated from the source code and
-        documentation files in the repository. It includes API reference, type
-        definitions, architecture diagrams, and more to help you understand the
-        CIA Compliance Manager codebase.
-      </p>
     </main>
-    <footer>
-      <p>&copy; 2025 CIA Compliance Manager. All rights reserved.</p>
-    </footer>
-  </body>
+</body>
 </html>
