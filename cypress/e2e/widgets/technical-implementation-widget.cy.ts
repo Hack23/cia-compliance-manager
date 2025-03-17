@@ -46,6 +46,11 @@ describe("Technical Implementation Widget Tests", () => {
 
     // Verify content
     cy.verifyContentPresent([/technical|implementation|detail/i]);
+
+    // Verify widget title is present
+    cy.get('[data-testid="technical-details-widget"]')
+      .find(".widget-header")
+      .should("contain", "Technical Implementation Details");
   });
 
   it("updates implementation details when security levels change", () => {
@@ -81,10 +86,12 @@ describe("Technical Implementation Widget Tests", () => {
       .should("exist")
       .scrollIntoView({ offset: { top: -100, left: 0 } });
 
-    // Use a more resilient approach with { force: true } to click the tab buttons
+    // Use a more resilient approach to find and click the tab buttons
     cy.get('[data-testid="technical-details-widget"]').within(() => {
-      // Click availability tab with force true and add explicit waiting
-      cy.get('[data-testid="availability-tab-button"]')
+      // First try the actual test IDs from the component
+      // Try with technical-details-* test IDs from the constants file
+      cy.get("button")
+        .contains(/availability/i)
         .should("exist")
         .click({ force: true })
         .wait(500);
@@ -92,8 +99,17 @@ describe("Technical Implementation Widget Tests", () => {
       // Verify availability content is shown
       cy.contains(/availability|uptime|recovery/i).should("be.visible");
 
+      // Verify technical implementation section exists
+      cy.get('[data-testid*="technical-description"]').should("exist");
+
+      // Verify implementation requirements section exists
+      cy.get("h3, h4")
+        .contains(/Implementation Requirements/i)
+        .should("exist");
+
       // Click integrity tab with force true
-      cy.get('[data-testid="integrity-tab-button"]')
+      cy.get("button")
+        .contains(/integrity/i)
         .should("exist")
         .click({ force: true })
         .wait(500);
@@ -101,14 +117,23 @@ describe("Technical Implementation Widget Tests", () => {
       // Verify integrity content is shown
       cy.contains(/integrity|consistency|accuracy/i).should("be.visible");
 
+      // Verify validation method is shown for integrity
+      cy.contains(/validation|verification|consistency/i).should("be.visible");
+
       // Click confidentiality tab with force true
-      cy.get('[data-testid="confidentiality-tab-button"]')
+      cy.get("button")
+        .contains(/confidentiality/i)
         .should("exist")
         .click({ force: true })
         .wait(500);
 
       // Verify confidentiality content is shown
       cy.contains(/confidentiality|protection|sensitive/i).should("be.visible");
+
+      // Verify encryption or protection method is shown for confidentiality
+      cy.contains(/encryption|access control|authentication/i).should(
+        "be.visible"
+      );
     });
   });
 
@@ -128,5 +153,58 @@ describe("Technical Implementation Widget Tests", () => {
       /requirement|implement|solution|approach/i,
       /high|advanced|enhanced/i,
     ]);
+
+    // Verify implementation details components
+    cy.get('[data-testid="technical-details-widget"]').within(() => {
+      // Check for development effort indicator
+      cy.contains(/development effort|implementation effort/i).should("exist");
+
+      // Check for maintenance level indicator
+      cy.contains(/maintenance|ongoing support/i).should("exist");
+
+      // Check for expertise level indicator
+      cy.contains(/expertise|skill level|required knowledge/i).should("exist");
+
+      // Check for implementation steps or code examples
+      cy.get("ol, ul").should("exist");
+    });
+  });
+
+  it("displays different technical requirements based on security level", () => {
+    // Set low security level first
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.LOW,
+      SECURITY_LEVELS.LOW,
+      SECURITY_LEVELS.LOW
+    );
+
+    // Find and check the technical details widget
+    cy.get('[data-testid="technical-details-widget"]')
+      .should("exist")
+      .scrollIntoView();
+
+    // Verify low-security content
+    cy.get('[data-testid="technical-details-widget"]').within(() => {
+      // Should show basic implementation details
+      cy.contains(/basic|minimal|simple/i).should("exist");
+    });
+
+    // Change to high security level
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH
+    );
+
+    // Verify high-security content is different
+    cy.get('[data-testid="technical-details-widget"]').within(() => {
+      // Should show advanced implementation details
+      cy.contains(/advanced|comprehensive|robust/i).should("exist");
+
+      // Should have more rigorous requirements
+      cy.contains(/high availability|redundancy|fault.tolerance/i).should(
+        "exist"
+      );
+    });
   });
 });
