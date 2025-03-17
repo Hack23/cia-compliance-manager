@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 ## Interfaces
 
-- [WidgetDefinition](interfaces/WidgetDefinition.md)
+- [WidgetRegistry](interfaces/WidgetRegistry.md)
 
 ## Type Aliases
 
@@ -17,6 +17,7 @@
 ## Variables
 
 - [widgetRegistry](variables/widgetRegistry.md)
+- [widgetRegistryUtils](variables/widgetRegistryUtils.md)
 
 ## References
 

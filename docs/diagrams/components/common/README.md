@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../README.md)
 
 ***
 
@@ -48,9 +48,27 @@ Renames and re-exports [default](MetricsCard/functions/default.md)
 
 ***
 
+### SecurityLevelSelector
+
+Renames and re-exports [default](SecurityLevelSelector/functions/default.md)
+
+***
+
+### SecurityRiskScore
+
+Renames and re-exports [default](SecurityRiskScore/functions/default.md)
+
+***
+
 ### StatusBadge
 
 Renames and re-exports [default](StatusBadge/functions/default.md)
+
+***
+
+### Tooltip
+
+Renames and re-exports [default](Tooltip/functions/default.md)
 
 ***
 

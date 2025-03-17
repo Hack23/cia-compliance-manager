@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../README.md)
 
 ***
 
@@ -24,6 +24,7 @@
 - [createDynamicTestId](variables/createDynamicTestId.md)
 - [FRAMEWORK\_TEST\_IDS](variables/FRAMEWORK_TEST_IDS.md)
 - [INTEGRITY\_IMPACT\_TEST\_IDS](variables/INTEGRITY_IMPACT_TEST_IDS.md)
+- [RESOURCE\_TEST\_IDS](variables/RESOURCE_TEST_IDS.md)
 - [SECURITY\_LEVEL\_TEST\_IDS](variables/SECURITY_LEVEL_TEST_IDS.md)
 - [SECURITY\_RESOURCES\_TEST\_IDS](variables/SECURITY_RESOURCES_TEST_IDS.md)
 - [SECURITY\_SUMMARY\_TEST\_IDS](variables/SECURITY_SUMMARY_TEST_IDS.md)

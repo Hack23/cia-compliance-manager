@@ -1,17 +1,17 @@
-[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.5**](../README.md)
 
 ***
 
 [CIA Compliance Manager Documentation](../globals.md) / WidgetComponentType
 
-# Type Alias: WidgetComponentType\<P\>
+# Type Alias: WidgetComponentType\<T\>
 
-> **WidgetComponentType**\<`P`\>: `ComponentType`\<`P`\>
+> **WidgetComponentType**\<`T`\>: `ComponentType`\<`T`\>
 
-Defined in: [src/components/widgets/utils/types.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/components/widgets/utils/types.ts#L13)
+Defined in: [src/types/widgets.ts:311](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/widgets.ts#L311)
 
-Type for widget components that can be registered in the registry
+Base widget component type
 
 ## Type Parameters
 
-• **P** = `any`
+• **T** = `any`

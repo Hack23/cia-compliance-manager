@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityLevels
 
-Defined in: [src/types/cia.ts:63](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L63)
+Defined in: [src/types/cia.ts:80](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/cia.ts#L80)
 
 Selected security levels for each CIA pillar
 
@@ -16,7 +16,7 @@ Selected security levels for each CIA pillar
 
 > **availability**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/cia.ts:64](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L64)
+Defined in: [src/types/cia.ts:81](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/cia.ts#L81)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/types/cia.ts:64](https://github.com/Hack23/cia-compliance-manag
 
 > **confidentiality**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/cia.ts:66](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L66)
+Defined in: [src/types/cia.ts:83](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/cia.ts#L83)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/types/cia.ts:66](https://github.com/Hack23/cia-compliance-manag
 
 > **integrity**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/cia.ts:65](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/types/cia.ts#L65)
+Defined in: [src/types/cia.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/types/cia.ts#L82)

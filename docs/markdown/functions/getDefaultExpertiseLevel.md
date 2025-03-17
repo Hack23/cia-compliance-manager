@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.2**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.5**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getDefaultExpertiseLevel**(`level`): `string`
 
-Defined in: [src/utils/securityDefaults.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/423c5d261c747ade8ca2550e176aa05168b5a31e/src/utils/securityDefaults.ts#L34)
+Defined in: [src/utils/securityDefaults.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/b799ef22d9067d09cc69eaeddf109ac9dcdce934/src/utils/securityDefaults.ts#L34)
 
 Gets default expertise level based on security level
 

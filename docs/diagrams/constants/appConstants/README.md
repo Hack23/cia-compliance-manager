@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.2**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../README.md)
 
 ***
 
@@ -25,6 +25,7 @@
 - [FRAMEWORK\_DESCRIPTIONS](variables/FRAMEWORK_DESCRIPTIONS.md)
 - [IMPACT\_DESCRIPTIONS](variables/IMPACT_DESCRIPTIONS.md)
 - [IMPLEMENTATION\_COSTS](variables/IMPLEMENTATION_COSTS.md)
+- [RISK\_LEVEL\_DESCRIPTIONS](variables/RISK_LEVEL_DESCRIPTIONS.md)
 - [ROI\_ESTIMATES](variables/ROI_ESTIMATES.md)
 - [SECURITY\_DESCRIPTIONS](variables/SECURITY_DESCRIPTIONS.md)
 - [SECURITY\_LEVELS](variables/SECURITY_LEVELS.md)
