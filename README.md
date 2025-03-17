@@ -11,7 +11,6 @@ Experience the CIA Compliance Manager in action by testing the application here:
 [![License](https://img.shields.io/github/license/Hack23/cia-compliance-manager.svg)](https://github.com/Hack23/cia-compliance-manager/raw/master/LICENSE.md) [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compliance-manager/badge)](https://scorecard.dev/viewer/?uri=github.com/Hack23/cia-compliance-manager)
 [![Scorecard supply-chain security](https://github.com/Hack23/cia-compliance-manager/actions/workflows/scorecards.yml/badge.svg?branch=main)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/scorecards.yml)
 
-
 ## Executive Summary
 
 ### Security Level Summary
@@ -295,11 +294,10 @@ The following resources are available in our [Documentation Portal](https://hack
 ## 📝 Key Documentation Sections
 
 - [API Reference]s(https://hack23.github.io/cia-compliance-manager/api/) - For developers integrating with our API
-frameworks
+  frameworks
 - [Current Architecture](/workspaces/cia-compliance-manager/docs/architecture/ARCHITECTURE.md) - Current architecture documentation
 - [Future Architecture](/workspaces/cia-compliance-manager/docs/architecture/FUTURE_ARCHITECTURE.md) - Planned architectural improvements
 - [Performance Testing](/workspaces/cia-compliance-manager/docs/performance-testing.md) - Performance testing methodology and results
-
 
 ## 👥 Contributing
 
@@ -320,7 +318,7 @@ We welcome contributions to our documentation. Please see the [Contributing Guid
 |                       | [Testing Library](https://www.npmjs.com/package/@testing-library/react)      | Active         | 16.x           | Community maintained, regular updates                                                    |
 | Development Utilities | [Cross-env](https://www.npmjs.com/package/cross-env)                         | Active         | 7.x            | Stable utility, minimal updates needed                                                   |
 |                       | [Start-server-and-test](https://www.npmjs.com/package/start-server-and-test) | Active         | 2.x            | Utility package, stable API                                                              |
-| Runtime Requirements  | Node.js                                                                      | Required       | ≥20.0.0        | [Node 20 EOL: April 2026](https://endoflife.date/nodejs)                                 |
+| Runtime Requirements  | Node.js                                                                      | Required       | ≥22.0.0        | [Node 22 EOL: April 2027](https://endoflife.date/nodejs)                                 |
 |                       | npm                                                                          | Required       | ≥10.8.2        | Follows Node.js support lifecycle                                                        |
 
 ## Widgets
