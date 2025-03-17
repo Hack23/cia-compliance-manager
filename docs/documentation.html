@@ -8,9 +8,12 @@
       content="Comprehensive documentation for the CIA Compliance Manager - a security assessment tool for the CIA triad"
     />
     <title>CIA Compliance Manager Documentation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
     <style>
       /* Base variables with combined light/dark mode support */
       :root {
@@ -36,16 +39,17 @@
         --confidentiality-color: #8e44ad;
         --integrity-color: #27ae60;
         --availability-color: #2980b9;
-        --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        --font-accent: 'Inter', system-ui, -apple-system, sans-serif;
-        --font-mono: 'Share Tech Mono', monospace;
+        --font-main: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        --font-accent: "Inter", system-ui, -apple-system, sans-serif;
+        --font-mono: "Share Tech Mono", monospace;
       }
 
       /* Dark Mode - Ingress Inspired Theme */
       @media (prefers-color-scheme: dark) {
         :root {
           --primary-color: #00cc66;
-          --primary-light: #00ff88; 
+          --primary-light: #00ff88;
           --primary-dark: #00bb77;
           --accent-color: #33eeff;
           --bg-color: #001a1a;
@@ -65,7 +69,7 @@
           --confidentiality-color: #bd93f9;
           --integrity-color: #50fa7b;
           --availability-color: #8be9fd;
-          --font-accent: 'Orbitron', sans-serif;
+          --font-accent: "Orbitron", sans-serif;
         }
       }
 
@@ -111,7 +115,7 @@
           z-index: 9999;
           opacity: 0.3;
         }
-        
+
         body::before {
           content: "";
           position: absolute;
@@ -127,14 +131,18 @@
       }
 
       /* Typography */
-      h1, h2, h3 {
+      h1,
+      h2,
+      h3 {
         color: var(--header-color);
         font-family: var(--font-accent);
       }
 
       @media (prefers-color-scheme: dark) {
-        h1, h2, h3 {
-          font-family: 'Orbitron', sans-serif;
+        h1,
+        h2,
+        h3 {
+          font-family: "Orbitron", sans-serif;
           text-transform: uppercase;
           letter-spacing: 1px;
           text-shadow: 0 0 5px rgba(0, 204, 102, 0.5);
@@ -207,7 +215,7 @@
         .logo {
           box-shadow: 0 0 20px rgba(0, 204, 102, 0.5);
         }
-        
+
         .logo:hover {
           transform: scale(1.05);
           box-shadow: 0 0 30px rgba(0, 204, 102, 0.7);
@@ -356,7 +364,7 @@
         /* Cyberpunk corner elements on cards */
         .card::before,
         .card::after {
-          content: '';
+          content: "";
           position: absolute;
           width: 20px;
           height: 20px;
@@ -389,8 +397,13 @@
 
         /* Scanner animation effect for active cards */
         @keyframes scanner {
-          0%, 100% { background-position: 0% 0%; }
-          50% { background-position: 100% 100%; }
+          0%,
+          100% {
+            background-position: 0% 0%;
+          }
+          50% {
+            background-position: 100% 100%;
+          }
         }
 
         .card:hover .scanner-effect {
@@ -542,20 +555,21 @@
         .cards {
           grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         }
-        
-        header, main {
+
+        header,
+        main {
           padding-left: 1rem;
           padding-right: 1rem;
         }
-        
+
         h1 {
           font-size: 1.8rem;
         }
-        
+
         h2 {
           font-size: 1.5rem;
         }
-        
+
         .app-version {
           display: block;
           margin-top: 0.5rem;
@@ -566,17 +580,17 @@
         .cards {
           grid-template-columns: 1fr;
         }
-        
+
         .app-link {
           flex-direction: column;
           align-items: center;
         }
-        
+
         .app-link a {
           width: 100%;
           text-align: center;
         }
-        
+
         .badges {
           flex-direction: column;
           align-items: center;
@@ -597,34 +611,76 @@
       }
 
       @keyframes flicker {
-        0% { opacity: 0.99; }
-        5% { opacity: 0.96; }
-        10% { opacity: 0.97; }
-        15% { opacity: 0.99; }
-        20% { opacity: 0.94; }
-        25% { opacity: 0.98; }
-        30% { opacity: 0.97; }
-        35% { opacity: 0.99; }
-        40% { opacity: 0.98; }
-        45% { opacity: 0.97; }
-        50% { opacity: 0.99; }
-        55% { opacity: 0.98; }
-        60% { opacity: 0.97; }
-        65% { opacity: 0.99; }
-        70% { opacity: 0.96; }
-        75% { opacity: 0.99; }
-        80% { opacity: 0.98; }
-        85% { opacity: 0.99; }
-        90% { opacity: 0.96; }
-        95% { opacity: 0.99; }
-        100% { opacity: 1; }
+        0% {
+          opacity: 0.99;
+        }
+        5% {
+          opacity: 0.96;
+        }
+        10% {
+          opacity: 0.97;
+        }
+        15% {
+          opacity: 0.99;
+        }
+        20% {
+          opacity: 0.94;
+        }
+        25% {
+          opacity: 0.98;
+        }
+        30% {
+          opacity: 0.97;
+        }
+        35% {
+          opacity: 0.99;
+        }
+        40% {
+          opacity: 0.98;
+        }
+        45% {
+          opacity: 0.97;
+        }
+        50% {
+          opacity: 0.99;
+        }
+        55% {
+          opacity: 0.98;
+        }
+        60% {
+          opacity: 0.97;
+        }
+        65% {
+          opacity: 0.99;
+        }
+        70% {
+          opacity: 0.96;
+        }
+        75% {
+          opacity: 0.99;
+        }
+        80% {
+          opacity: 0.98;
+        }
+        85% {
+          opacity: 0.99;
+        }
+        90% {
+          opacity: 0.96;
+        }
+        95% {
+          opacity: 0.99;
+        }
+        100% {
+          opacity: 1;
+        }
       }
 
       @media (prefers-color-scheme: dark) {
         .logo {
           animation: pulse 4s infinite;
         }
-        
+
         main {
           animation: flicker 10s infinite;
         }
@@ -634,7 +690,11 @@
   <body>
     <header>
       <div class="logo-container">
-        <img src="https://hack23.github.io/cia-compliance-manager/icon-192.png" alt="CIA Compliance Manager Logo" class="logo">
+        <img
+          src="https://hack23.github.io/cia-compliance-manager/icon-192.png"
+          alt="CIA Compliance Manager Logo"
+          class="logo"
+        />
       </div>
       <h1>
         CIA Compliance Manager Documentation
@@ -674,71 +734,258 @@
         </a>
       </div>
       <div class="app-link">
-        <a href="https://hack23.github.io/cia-compliance-manager/" title="Launch the CIA Compliance Manager application">
+        <a
+          href="https://hack23.github.io/cia-compliance-manager/"
+          title="Launch the CIA Compliance Manager application"
+        >
           Launch Application
         </a>
-        <a href="https://github.com/Hack23/cia-compliance-manager" class="btn" title="View the GitHub repository">
+        <a
+          href="https://github.com/Hack23/cia-compliance-manager"
+          class="btn"
+          title="View the GitHub repository"
+        >
           GitHub Repository
         </a>
       </div>
     </header>
-    
+
     <main>
+      <h2 id="diagrams">Architecture & Documentation</h2>
+      <p>
+        Explore the complete architectural and technical documentation for the
+        CIA Compliance Manager.
+      </p>
+
       <div class="cards">
         <div class="card confidentiality-card">
           <div class="scanner-effect"></div>
-          <h3>Project Architecture</h3>
-          <p>C4 model diagrams and other architectural documentation for the CIA Compliance Manager system.</p>
+          <h3>🏛️ Current Architecture</h3>
+          <p>
+            C4 model showing current system containers, components, and dynamics
+            of the CIA Compliance Manager.
+          </p>
           <a
             href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md"
-            title="View Architecture Documentation"
+            title="View Current Architecture"
           >
             View Architecture
           </a>
         </div>
 
+        <div class="card confidentiality-card">
+          <div class="scanner-effect"></div>
+          <h3>🏛️ Future Architecture</h3>
+          <p>
+            Vision for context-aware security posture management platform and
+            future system evolution.
+          </p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md"
+            title="View Future Architecture"
+          >
+            View Future Architecture
+          </a>
+        </div>
+
+        <!-- Behavior Group -->
         <div class="card integrity-card">
           <div class="scanner-effect"></div>
-          <h3>API Documentation</h3>
+          <h3>🔄 State Diagrams</h3>
           <p>
-            Detailed API reference for all components, types, and functions used
-            in the application.
+            Security profile and compliance status state transitions for the
+            current system implementation.
           </p>
-          <a href="https://hack23.github.io/cia-compliance-manager/api/"
-            title="View API Documentation"
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/STATEDIAGRAM.md"
+            title="View State Diagrams"
           >
-            View API Docs
+            View State Diagrams
+          </a>
+        </div>
+
+        <div class="card integrity-card">
+          <div class="scanner-effect"></div>
+          <h3>🔄 Future State Diagrams</h3>
+          <p>
+            Context-aware and adaptive security state transitions for future
+            platform versions.
+          </p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_STATEDIAGRAM.md"
+            title="View Future State Diagrams"
+          >
+            View Future States
+          </a>
+        </div>
+
+        <!-- Process Group -->
+        <div class="card integrity-card">
+          <div class="scanner-effect"></div>
+          <h3>🔄 Process Flowcharts</h3>
+          <p>
+            Security assessment and compliance workflows for the current
+            implementation.
+          </p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FLOWCHART.md"
+            title="View Process Flowcharts"
+          >
+            View Flowcharts
+          </a>
+        </div>
+
+        <div class="card integrity-card">
+          <div class="scanner-effect"></div>
+          <h3>🔄 Future Flowcharts</h3>
+          <p>
+            ML-enhanced and context-aware workflows planned for future releases.
+          </p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_FLOWCHART.md"
+            title="View Future Flowcharts"
+          >
+            View Future Flows
+          </a>
+        </div>
+
+        <!-- Conceptual Group -->
+        <div class="card availability-card">
+          <div class="scanner-effect"></div>
+          <h3>🧠 Concept Mindmaps</h3>
+          <p>
+            System structure and component relationships visualized through mind
+            mapping.
+          </p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/MINDMAP.md"
+            title="View Mindmaps"
+          >
+            View Mindmaps
           </a>
         </div>
 
         <div class="card availability-card">
           <div class="scanner-effect"></div>
-          <h3>Unit Test</h3>
-          <p>Visual representation of unit test results and coverage of the codebase.</p>
+          <h3>🧠 Future Concept Maps</h3>
+          <p>
+            Evolution roadmap and capability expansion plans for future
+            development.
+          </p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_MINDMAP.md"
+            title="View Future Mindmaps"
+          >
+            View Future Concepts
+          </a>
+        </div>
+
+        <!-- Business Group -->
+        <div class="card confidentiality-card">
+          <div class="scanner-effect"></div>
+          <h3>💼 SWOT Analysis</h3>
+          <p>
+            Strategic strengths, weaknesses, opportunities, and threats for the
+            current platform.
+          </p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SWOT.md"
+            title="View SWOT Analysis"
+          >
+            View SWOT Analysis
+          </a>
+        </div>
+
+        <div class="card confidentiality-card">
+          <div class="scanner-effect"></div>
+          <h3>💼 Future SWOT</h3>
+          <p>
+            Strategic analysis of context-aware security platform and market
+            positioning.
+          </p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_SWOT.md"
+            title="View Future SWOT Analysis"
+          >
+            View Future SWOT
+          </a>
+        </div>
+
+        <!-- DevOps Group -->
+        <div class="card integrity-card">
+          <div class="scanner-effect"></div>
+          <h3>🔧 CI/CD Workflows</h3>
+          <p>
+            Build, test, and deployment automation for the current application
+            architecture.
+          </p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/WORKFLOWS.md"
+            title="View CI/CD Workflows"
+          >
+            View CI/CD Workflows
+          </a>
+        </div>
+
+        <div class="card integrity-card">
+          <div class="scanner-effect"></div>
+          <h3>🔧 Future Workflows</h3>
+          <p>
+            Advanced CI/CD with ML and security automation planned for future
+            releases.
+          </p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_WORKFLOWS.md"
+            title="View Future Workflows"
+          >
+            View Future DevOps
+          </a>
+        </div>
+
+        <!-- Data Model -->
+        <div class="card availability-card">
+          <div class="scanner-effect"></div>
+          <h3>📊 Future Data Model</h3>
+          <p>
+            Enhanced context-aware data architecture to support future platform
+            capabilities.
+          </p>
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_DATA_MODEL.md"
+            title="View Future Data Model"
+          >
+            View Data Architecture
+          </a>
+        </div>
+
+        <!-- Testing Documentation -->
+        <div class="card availability-card">
+          <div class="scanner-effect"></div>
+          <h3>🧪 Unit Tests</h3>
+          <p>
+            Visual representation of unit test results and coverage of the
+            codebase.
+          </p>
           <a
             href="https://hack23.github.io/cia-compliance-manager/test-results/"
             title="View Test Results"
           >
             Test Results
           </a>
-          <p>
-            Unit testing strategy and approach for verifying that the application works
-            correctly from a functional perspective.
-          </p>
           <a
             href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md"
             title="View Unit Test Plan"
           >
-            View Unit Test Plan
+            Test Plan
           </a>
         </div>
 
         <div class="card confidentiality-card">
           <div class="scanner-effect"></div>
-          <h3>Test Coverage</h3>
+          <h3>📊 Test Coverage</h3>
           <p>
             Test coverage reports showing how much of the codebase is covered by
-            unit and integration tests.
+            tests.
           </p>
           <a
             href="https://hack23.github.io/cia-compliance-manager/coverage/index.html"
@@ -750,7 +997,7 @@
 
         <div class="card integrity-card">
           <div class="scanner-effect"></div>
-          <h3>E2E System Test</h3>
+          <h3>🔍 E2E System Tests</h3>
           <p>End-to-end test reports showing full system validation results.</p>
           <a
             href="https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/index.html"
@@ -758,29 +1005,41 @@
           >
             View Test Report
           </a>
-          <p>
-            End-to-end (E2E) testing strategy verifying that the application works
-            correctly from a user's perspective.
-          </p>
           <a
             href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md"
             title="View E2E Test Plan"
           >
-            View E2E Test Plan
+            E2E Plan
           </a>
         </div>
-        
+
         <div class="card availability-card">
           <div class="scanner-effect"></div>
-          <h3>Performance Testing</h3>
+          <h3>⚡ Performance Tests</h3>
           <p>
-            Benchmarks and performance analysis of the application under various load conditions.
+            Benchmarks and performance analysis under various load conditions.
           </p>
           <a
             href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md"
             title="View Performance Testing Results"
           >
-            View Performance Tests
+            View Performance Data
+          </a>
+        </div>
+
+        <!-- API Documentation -->
+        <div class="card confidentiality-card">
+          <div class="scanner-effect"></div>
+          <h3>📘 API Documentation</h3>
+          <p>
+            Detailed API reference for all components, types, and functions in
+            the application.
+          </p>
+          <a
+            href="https://hack23.github.io/cia-compliance-manager/api/"
+            title="View API Documentation"
+          >
+            View API Docs
           </a>
         </div>
       </div>
@@ -790,12 +1049,13 @@
         <p>
           The CIA Compliance Manager is a comprehensive web application designed
           to help organizations assess, implement, and manage security controls
-          across the CIA triad (Confidentiality, Integrity, Availability). The application enables users to evaluate 
-          security posture, measure compliance against major frameworks, and analyze the business 
-          impacts of security implementations.
+          across the CIA triad (Confidentiality, Integrity, Availability). The
+          application enables users to evaluate security posture, measure
+          compliance against major frameworks, and analyze the business impacts
+          of security implementations.
         </p>
       </section>
-      
+
       <section id="features">
         <h2>Key Features</h2>
         <div class="cards">
@@ -844,10 +1104,12 @@
             <h3>Implementation Guidance</h3>
             <p>
               Access detailed guidance on deploying and optimizing security
+              controls based on industry best practices and compliance
+              requirements.
             </p>
           </div>
         </div>
       </section>
     </main>
-</body>
+  </body>
 </html>
