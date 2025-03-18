@@ -4,6 +4,7 @@ import { SecurityLevel } from "../../types/cia";
 import { getSecurityLevelValue } from "../../utils/securityLevelUtils";
 import RadarChart from "../charts/RadarChart";
 import { SecurityRiskScore } from "../common";
+import SecurityLevelBadge from "../common/SecurityLevelBadge"; // Add this import
 
 export interface SecurityVisualizationWidgetProps {
   availabilityLevel: SecurityLevel;
@@ -89,11 +90,9 @@ const SecurityVisualizationWidget: React.FC<
 
   // Get risk description
   const riskDescription = useMemo(() => {
-    return (
-      RISK_LEVEL_DESCRIPTIONS[
-        riskLevel.toUpperCase() as keyof typeof RISK_LEVEL_DESCRIPTIONS
-      ] || "Risk level not available"
-    );
+    const riskKey = riskLevel.toUpperCase();
+    return RISK_LEVEL_DESCRIPTIONS[riskKey as keyof typeof RISK_LEVEL_DESCRIPTIONS] || 
+      "Risk level description not available";
   }, [riskLevel]);
 
   return (
@@ -124,34 +123,26 @@ const SecurityVisualizationWidget: React.FC<
             </p>
           </div>
 
-          {/* Security Metrics */}
+          {/* Security Metrics - This is the part with the best level display */}
           <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-            <div className="p-2 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-md">
-              <div className="text-xs text-gray-500 dark:text-gray-400">
-                Availability
-              </div>
-              <div className="text-sm font-medium text-blue-600 dark:text-blue-400">
-                {availabilityLevel}
-              </div>
-            </div>
-
-            <div className="p-2 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-md">
-              <div className="text-xs text-gray-500 dark:text-gray-400">
-                Integrity
-              </div>
-              <div className="text-sm font-medium text-green-600 dark:text-green-400">
-                {integrityLevel}
-              </div>
-            </div>
-
-            <div className="p-2 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-md">
-              <div className="text-xs text-gray-500 dark:text-gray-400">
-                Confidentiality
-              </div>
-              <div className="text-sm font-medium text-purple-600 dark:text-purple-400">
-                {confidentialityLevel}
-              </div>
-            </div>
+            <SecurityLevelBadge
+              category="Availability"
+              level={availabilityLevel}
+              colorClass="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
+              textClass="text-blue-600 dark:text-blue-400"
+            />
+            <SecurityLevelBadge
+              category="Integrity"
+              level={integrityLevel}
+              colorClass="bg-green-50 dark:bg-green-900 dark:bg-opacity-20"
+              textClass="text-green-600 dark:text-green-400"
+            />
+            <SecurityLevelBadge
+              category="Confidentiality"
+              level={confidentialityLevel}
+              colorClass="bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20"
+              textClass="text-purple-600 dark:text-purple-400"
+            />
           </div>
         </div>
       </div>

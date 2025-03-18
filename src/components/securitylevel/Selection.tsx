@@ -1,110 +1,154 @@
 import React, { useState } from "react";
-import {
-  COMMON_COMPONENT_TEST_IDS,
-  createDynamicTestId,
-} from "../../constants/testIds";
+
+interface SelectionOption {
+  value: string;
+  label: string;
+}
 
 interface SelectionProps {
   id: string;
-  label?: string;
+  label: string;
+  icon?: React.ReactNode;
+  description?: string;
+  options: SelectionOption[];
   value: string;
-  levels?: string[];
-  options?: Record<string, any>;
   onChange: (value: string) => void;
-  className?: string;
-  testId?: string;
+  iconClassName?: string;
+  labelClassName?: string;
   infoContent?: string;
   contextInfo?: string;
+  disabled?: boolean;
+  [key: string]: any; // For additional props like aria attributes
 }
 
-const Selection: React.FC<SelectionProps> = ({
+/**
+ * Selection component for security level selection
+ * 
+ * ## Business Perspective
+ * 
+ * This component provides a standardized selection interface across
+ * the application, allowing users to make consistent security level
+ * choices with appropriate visual cues and contextual information. 💼
+ */
+export const Selection: React.FC<SelectionProps> = ({
   id,
   label,
+  icon,
+  description,
+  options,
   value,
-  levels = [],
-  options = {},
   onChange,
-  className = "",
-  testId,
-  infoContent,
-  contextInfo,
+  iconClassName = "text-gray-600 dark:text-gray-400",
+  labelClassName = "text-gray-800 dark:text-gray-200",
+  infoContent = "",
+  contextInfo = "",
+  disabled = false,
+  ...rest
 }) => {
   const [showInfo, setShowInfo] = useState(false);
-  const [showContextInfo, setShowContextInfo] = useState(false);
+  const [showContext, setShowContext] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    onChange(e.target.value);
+  };
 
   const toggleInfo = () => {
     setShowInfo(!showInfo);
+    if (showContext) setShowContext(false);
   };
 
-  const toggleContextInfo = () => {
-    setShowContextInfo(!showContextInfo);
+  const toggleContext = () => {
+    setShowContext(!showContext);
+    if (showInfo) setShowInfo(false);
   };
 
-  // If levels are provided, use them; otherwise use the keys from options
-  const selectionLevels = levels.length > 0 ? levels : Object.keys(options);
+  const selectId = `${id}-select`;
 
   return (
-    <div className={`flex flex-col space-y-1 ${className}`}>
-      {label && (
-        <label
-          htmlFor={id}
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-        >
-          {label}
+    <div className="selection-component" data-testid={id}>
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center">
+          {icon && <span className={`mr-2 ${iconClassName}`} aria-hidden="true">{icon}</span>}
+          <label 
+            htmlFor={selectId} 
+            className={`font-medium ${labelClassName}`}
+            data-testid={`${id}-label`}
+          >
+            {label}
+          </label>
+          {description && (
+            <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">
+              {description}
+            </span>
+          )}
+        </div>
+        <div className="flex items-center space-x-2">
           {infoContent && (
             <button
               type="button"
               onClick={toggleInfo}
-              className="ml-1 text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400"
-              aria-label={`Show information about ${label}`}
+              className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none"
+              aria-label={`Toggle information about ${label}`}
+              data-testid={`${id}-info-toggle`}
             >
               ℹ️
             </button>
           )}
-        </label>
-      )}
-
+        </div>
+      </div>
+      
       <select
-        id={id}
+        id={selectId}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-        data-testid={testId || id} // Use id as fallback if testId is not provided
-        {...(label ? { "aria-label": label } : {})} // Only add aria-label if label exists
+        onChange={handleChange}
+        disabled={disabled}
+        className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        data-testid={selectId}
+        aria-describedby={showInfo ? `${id}-info-content` : undefined}
+        {...rest}
       >
-        {selectionLevels.map((level) => (
-          <option
-            key={level}
-            value={level}
-            data-testid={createDynamicTestId.option(level)}
-          >
-            {level}
+        {options.map((option) => (
+          <option key={option.value} value={option.value} data-testid={`${id}-option-${option.value}`}>
+            {option.label}
           </option>
         ))}
       </select>
-
+      
       {showInfo && infoContent && (
-        <div className="mt-1 p-2 bg-gray-100 dark:bg-gray-700 rounded text-xs text-gray-600 dark:text-gray-300">
-          {infoContent}
+        <div 
+          className="mt-2 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded text-sm text-gray-700 dark:text-gray-300"
+          id={`${id}-info-content`}
+          data-testid={`${id}-info-content`}
+        >
+          <div className="flex justify-between items-start">
+            <h4 className="font-medium text-blue-700 dark:text-blue-400 mb-1">Technical Details</h4>
+            <button
+              onClick={toggleInfo}
+              className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+              aria-label="Close information"
+              data-testid={`${id}-info-close`}
+            >
+              ✕
+            </button>
+          </div>
+          <p>{infoContent}</p>
         </div>
       )}
-
+      
       {contextInfo && (
-        <div className="mt-1 flex items-center">
-          <button
-            type="button"
-            onClick={toggleContextInfo}
-            className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            {showContextInfo ? "Hide context" : "Show context"}
-          </button>
-          {showContextInfo && (
-            <div
-              data-testid={COMMON_COMPONENT_TEST_IDS.CONTEXT_INFO}
-              className="ml-2 text-xs text-gray-500 dark:text-gray-400"
+        <div className="mt-2 flex items-center justify-between" data-testid={`${id}-context-container`}>
+          <div className="text-sm text-gray-600 dark:text-gray-400" data-testid={`${id}-context-info`}>
+            {showContext ? contextInfo : `${contextInfo.substring(0, 50)}${contextInfo.length > 50 ? '...' : ''}`}
+          </div>
+          {contextInfo.length > 50 && (
+            <button
+              onClick={toggleContext}
+              className="ml-2 text-xs text-blue-600 dark:text-blue-400 hover:underline"
+              aria-label={showContext ? "Show less" : "Show more"}
+              data-testid={`${id}-context-toggle`}
             >
-              {contextInfo}
-            </div>
+              {showContext ? "Show less" : "Show more"}
+            </button>
           )}
         </div>
       )}

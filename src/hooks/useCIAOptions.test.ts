@@ -1,7 +1,8 @@
+import { renderHook } from "@testing-library/react"; // Changed from react-hooks
 import { describe, expect, it, vi } from "vitest";
-import { CIADetails } from "../types/cia";
+import { CIADetails } from "../types/cia-services";
 import * as useCIAOptionsModule from "./useCIAOptions";
-import { ROIEstimatesMap } from "./useCIAOptions"; // Import directly from the module
+import { useCIAOptions } from "./useCIAOptions";
 
 // Mock the React hooks
 vi.mock("react", () => ({
@@ -184,41 +185,41 @@ describe("useCIAOptions", () => {
     },
     ROI_ESTIMATES: {
       NONE: {
-        value: "0%",
         returnRate: "0%",
         description: "No security investment means no return",
+        value: "0%",
         potentialSavings: "$0",
         breakEvenPeriod: "N/A",
       },
       LOW: {
-        value: "100%",
-        returnRate: "100%",
+        returnRate: "100%", 
         description: "Basic security provides minimal return",
+        value: "100%",
         potentialSavings: "$10,000",
         breakEvenPeriod: "24 months",
       },
       MODERATE: {
-        value: "200%",
         returnRate: "200%",
         description: "Standard security provides good value",
+        value: "200%",
         potentialSavings: "$100,000",
         breakEvenPeriod: "12 months",
       },
       HIGH: {
-        value: "300%",
         returnRate: "300%",
         description: "Advanced security provides excellent value",
+        value: "300%",
         potentialSavings: "$500,000",
         breakEvenPeriod: "6 months",
       },
       VERY_HIGH: {
-        value: "400%",
         returnRate: "400%",
         description: "Comprehensive security provides optimal value",
+        value: "400%",
         potentialSavings: "$1,000,000+",
         breakEvenPeriod: "3 months",
-      },
-    } as ROIEstimatesMap,
+      }
+    },
   };
 
   // Mock the useCIAOptions function
@@ -360,4 +361,15 @@ describe("useCIAOptions", () => {
       expect(useCIAOptionsModule.ROI_ESTIMATES).toBeDefined();
     });
   });
+});
+
+describe("useCIAOptions (TypeScript)", () => {
+  it("should return object structure with all properties", () => {
+    const { result } = renderHook(() => useCIAOptions());
+    expect(result.current.availabilityOptions).toBeDefined();
+    expect(result.current.integrityOptions).toBeDefined();
+    expect(result.current.confidentialityOptions).toBeDefined();
+    expect(result.current.ROI_ESTIMATES).toBeDefined();
+  });
+  // ...existing tests...
 });

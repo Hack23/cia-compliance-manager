@@ -6,7 +6,7 @@
   "name": "CIA Compliance Manager Documentation",
   "includeVersion": true,
   "excludePrivate": true,
-  "plugin": ["typedoc-plugin-markdown", "typedoc-plugin-merge-modules"],
+  "plugin": ["typedoc-plugin-markdown"],
   "mergeModulesMergeMode": "project",
   "readme": "./docs/markdown-overview.md",
   "hideGenerator": true,

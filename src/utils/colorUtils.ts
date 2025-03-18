@@ -1,35 +1,46 @@
-import { getSecurityLevelColorPair } from "../constants/colorConstants";
+import { getSecurityLevelColorPair as getColorPairFromConstants } from "../constants/colorConstants";
 import { SecurityLevel } from "../types/cia";
 
 /**
  * Utility functions for handling color-related operations based on security levels.
- * 
- * ## Technical Implementation
- * This module provides functions to get CSS classes and hex color values for different security levels.
- * 
- * ## Future-Proofing
- * The functions are designed to be easily extendable for additional security levels or color schemes.
- * 
- * ## Performance
- * The functions use simple switch statements and lookups, ensuring minimal performance overhead.
- * 
- * ## Maintainability
- * The code is structured to allow easy updates to color mappings and security level handling.
- * 
- * ## Integration
- * These functions are used across the application to ensure consistent color representation for security levels.
+ *
+ * ## Business Perspective
+ *
+ * These utility functions provide consistent color representations across the application,
+ * ensuring that security levels are visually communicated in a consistent manner to users.
+ * This visual consistency is crucial for quick risk assessment and decision making. 🎨
  */
 
 /**
- * Get the appropriate CSS color class for a security level
- * @param level The security level to get the color class for
- * @returns CSS class string for the given security level
+ * Color representation interface
+ */
+interface ColorPair {
+  bg: string;
+  text: string;
+}
+
+/**
+ * Get background and text colors for a security level
+ *
+ * @param level - Security level
+ * @returns Object with bg (background) and text colors
+ */
+export function getSecurityLevelColorPair(level: SecurityLevel): ColorPair {
+  return getColorPairFromConstants(level);
+}
+
+/**
+ * Get the CSS class for a security level (Tailwind)
+ *
+ * @param level - Security level
+ * @returns CSS class name for the security level
  */
 export function getSecurityLevelColorClass(
   level: SecurityLevel | string
 ): string {
   // Normalize the level to handle case differences and variations
-  const normalizedLevel = level.toString().toLowerCase();
+  const normalizedLevel =
+    typeof level === "string" ? level.toString().toLowerCase() : "none";
 
   // Map levels to Tailwind CSS classes
   switch (normalizedLevel) {
@@ -49,14 +60,46 @@ export function getSecurityLevelColorClass(
 }
 
 /**
+ * Get the traditional CSS class name for a security level
+ *
+ * @param level - Security level
+ * @returns Traditional CSS class name for the security level
+ */
+export function getSecurityLevelClassName(
+  level: SecurityLevel | string
+): string {
+  // Normalize the level to handle case differences and variations
+  const normalizedLevel =
+    typeof level === "string" ? level.toString().toLowerCase() : "none";
+
+  // Map levels to traditional CSS classes
+  switch (normalizedLevel) {
+    case "none":
+      return "security-level-none";
+    case "low":
+      return "security-level-low";
+    case "moderate":
+      return "security-level-moderate";
+    case "high":
+      return "security-level-high";
+    case "very high":
+      return "security-level-very-high";
+    default:
+      return "security-level-default";
+  }
+}
+
+/**
  * Get the background color class for a security level
- * @param level The security level
+ *
+ * @param level - The security level
  * @returns CSS class for the background color
  */
 export function getSecurityLevelBackgroundClass(
   level: SecurityLevel | string
 ): string {
-  const normalizedLevel = level.toString().toLowerCase();
+  const normalizedLevel =
+    typeof level === "string" ? level.toString().toLowerCase() : "none";
 
   switch (normalizedLevel) {
     case "none":
@@ -75,8 +118,25 @@ export function getSecurityLevelBackgroundClass(
 }
 
 /**
+ * Get the CSS variables for a security level
+ *
+ * @param level - Security level
+ * @returns Object with CSS variable values
+ */
+export function getSecurityLevelColorVars(
+  level: SecurityLevel
+): Record<string, string> {
+  const colors = getSecurityLevelColorPair(level);
+  return {
+    "--security-bg-color": colors.bg,
+    "--security-text-color": colors.text,
+  };
+}
+
+/**
  * Gets hex color values for a security level based on current theme
- * @param level The security level
+ *
+ * @param level - Security level
  * @returns Hex color code for the given security level
  */
 export function getSecurityLevelHexColor(

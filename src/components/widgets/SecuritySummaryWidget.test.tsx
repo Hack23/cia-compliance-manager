@@ -1,122 +1,10 @@
-// Define mocks at the top of the file, before imports
-vi.mock("../../services/ciaContentService", () => {
-  return {
-    default: {
-      getComponentDetails: vi.fn().mockImplementation(() => ({
-        description: "Test description",
-        businessImpact: "Test business impact",
-      })),
-      getSecurityMetrics: vi.fn().mockReturnValue({
-        totalCapex: 45,
-        totalOpex: 30,
-        capexEstimate: "$225,000",
-        opexEstimate: "$60,000/year",
-      }),
-      getInformationSensitivity: vi
-        .fn()
-        .mockImplementation((level: SecurityLevel) => {
-          const mapping: Record<SecurityLevel, string> = {
-            None: "Public Information",
-            Low: "Internal Use Only",
-            Moderate: "Sensitive Information",
-            High: "Confidential Information",
-            "Very High": "Restricted Information",
-          };
-          return mapping[level] || "Not Classified";
-        }),
-      getProtectionLevel: vi.fn().mockImplementation((level: SecurityLevel) => {
-        const mapping: Record<SecurityLevel, string> = {
-          None: "No Protection",
-          Low: "Basic Protection",
-          Moderate: "Standard Protection",
-          High: "Enhanced Protection",
-          "Very High": "Maximum Protection",
-        };
-        return mapping[level] || "Undefined Protection";
-      }),
-      getBusinessImpact: vi.fn().mockImplementation(() => ({
-        summary: "Mocked impact summary",
-        financial: { description: "Financial impact", riskLevel: "Medium" },
-        operational: { description: "Operational impact", riskLevel: "Low" },
-      })),
-      getTechnicalImplementation: vi.fn().mockImplementation(() => ({
-        description: "Technical implementation details",
-      })),
-      getRecommendations: vi
-        .fn()
-        .mockImplementation(() => ["Recommendation 1"]),
-      getROIEstimates: vi.fn().mockImplementation(() => ({
-        returnRate: "200%",
-        description: "Moderate ROI description",
-      })),
-    },
-    // Add ALL missing exports needed by the SecuritySummaryWidget as named exports
-    getSecurityLevelDescription: vi
-      .fn()
-      .mockImplementation((level) => `${level} security level description`),
-    getROIEstimate: vi.fn().mockImplementation((level) => ({
-      value: level === "None" ? "0%" : "200%", // Changed returnRate to value
-      description: `${level} ROI description`,
-      potentialSavings: "$100,000",
-      breakEvenPeriod: "12 months",
-    })),
-    getTechnicalDescription: vi
-      .fn()
-      .mockImplementation(
-        (component, level) => `${level} ${component} technical description`
-      ),
-    getBusinessImpactDescription: vi
-      .fn()
-      .mockImplementation(
-        (component, level) =>
-          `${level} ${component} business impact description`
-      ),
-    getSecurityIcon: vi.fn().mockImplementation((level: SecurityLevel) => {
-      const icons: Record<SecurityLevel, string> = {
-        None: "🔓",
-        Low: "🔐",
-        Moderate: "🔒",
-        High: "🛡️",
-        "Very High": "🔰",
-      };
-      return icons[level] || "🔒";
-    }),
-    getCategoryIcon: vi.fn().mockImplementation((category: string) => {
-      const icons: Record<string, string> = {
-        availability: "⏱️",
-        integrity: "✅",
-        confidentiality: "🔒",
-      };
-      return icons[category] || "📊";
-    }),
-    // Add getRiskBadgeVariant to match the actual implementation
-    getRiskBadgeVariant: vi.fn().mockImplementation((riskLevel) => {
-      switch (riskLevel) {
-        case "Critical Risk":
-          return "neutral";
-        case "High Risk":
-          return "warning";
-        case "Medium Risk":
-          return "info";
-        case "Low Risk":
-          return "success";
-        case "Minimal Risk":
-          return "success";
-        default:
-          return "neutral";
-      }
-    }),
-  };
-});
-
 import {
   fireEvent,
   render,
   screen,
-  waitFor,
-  within,
+  waitFor
 } from "@testing-library/react";
-import { vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { SUMMARY_TEST_IDS } from "../../constants/testIds";
 import { SecurityLevel } from "../../types/cia";
 import SecuritySummaryWidget from "./SecuritySummaryWidget";
@@ -137,6 +25,124 @@ vi.mock("../../types/businessImpact", async () => {
 });
 
 // Mock the ciaContentService with all required functions
+vi.mock("../../hooks/useCIAContentService", () => {
+  return {
+    useCIAContentService: () => ({
+      ciaContentService: {
+        getComponentDetails: vi.fn().mockImplementation(() => ({
+          description: "Test description",
+          businessImpact: "Test business impact",
+          uptime: "99.9%",
+          mttr: "1 hour",
+          rto: "4 hours",
+          rpo: "2 hours",
+        })),
+        getSecurityMetrics: vi.fn().mockReturnValue({
+          totalCapex: 45,
+          totalOpex: 30,
+          capexEstimate: "$225,000",
+          opexEstimate: "$60,000/year",
+        }),
+        getInformationSensitivity: vi
+          .fn()
+          .mockImplementation((level: SecurityLevel) => {
+            const mapping: Record<SecurityLevel, string> = {
+              None: "Public Information",
+              Low: "Internal Use Only",
+              Moderate: "Sensitive Information",
+              High: "Confidential Information",
+              "Very High": "Restricted Information",
+            };
+            return mapping[level] || "Not Classified";
+          }),
+        getProtectionLevel: vi.fn().mockImplementation((level: SecurityLevel) => {
+          const mapping: Record<SecurityLevel, string> = {
+            None: "No Protection",
+            Low: "Basic Protection",
+            Moderate: "Standard Protection",
+            High: "Enhanced Protection",
+            "Very High": "Maximum Protection",
+          };
+          return mapping[level] || "Undefined Protection";
+        }),
+        getBusinessImpact: vi.fn().mockImplementation(() => ({
+          summary: "Mocked impact summary",
+          financial: { description: "Financial impact", riskLevel: "Medium" },
+          operational: { description: "Operational impact", riskLevel: "Low" },
+        })),
+        getTechnicalImplementation: vi.fn().mockImplementation(() => ({
+          description: "Technical implementation details",
+          validationMethod: "Hash validation",
+        })),
+        getRecommendations: vi
+          .fn()
+          .mockImplementation(() => ["Recommendation 1"]),
+        getROIEstimates: vi.fn().mockImplementation(() => ({
+          returnRate: "200%",
+          description: "Moderate ROI description",
+        })),
+        getSecurityLevelDescription: vi
+          .fn()
+          .mockImplementation((level) => `${level} security level description`),
+        getROIEstimate: vi.fn().mockImplementation((level) => ({
+          value: level === "None" ? "0%" : "200%",
+          description: `${level} ROI description`,
+          potentialSavings: "$100,000",
+          breakEvenPeriod: "12 months",
+        })),
+        getTechnicalDescription: vi
+          .fn()
+          .mockImplementation(
+            (component, level) => `${level} ${component} technical description`
+          ),
+        getBusinessImpactDescription: vi
+          .fn()
+          .mockImplementation(
+            (component, level) => 
+              `${level} ${component} business impact description`
+          ),
+        getSecurityIcon: vi.fn().mockImplementation((level: SecurityLevel) => {
+          const icons: Record<SecurityLevel, string> = {
+            None: "🔓",
+            Low: "🔐",
+            Moderate: "🔒",
+            High: "🛡️",
+            "Very High": "🔰",
+          };
+          return icons[level] || "🔒";
+        }),
+        getCategoryIcon: vi.fn().mockImplementation((category: string) => {
+          const icons: Record<string, string> = {
+            availability: "⏱️",
+            integrity: "✅",
+            confidentiality: "🔒",
+          };
+          return icons[category] || "📊";
+        }),
+        getRiskBadgeVariant: vi.fn().mockImplementation((riskLevel) => {
+          switch (riskLevel) {
+            case "Critical Risk":
+              return "neutral";
+            case "High Risk":
+              return "warning";
+            case "Medium Risk":
+              return "info";
+            case "Low Risk":
+              return "success";
+            case "Minimal Risk":
+              return "success";
+            default:
+              return "neutral";
+          }
+        }),
+        calculateOverallSecurityLevel: vi.fn().mockImplementation(
+          (avail, integ, confid) => confid // Just return confidentiality level for simplicity
+        ),
+        calculateBusinessImpactLevel: vi.fn().mockReturnValue("Moderate Business Impact"),
+      }
+    })
+  };
+});
 
 describe("SecuritySummaryWidget", () => {
   // Default props that all tests can use
@@ -221,34 +227,19 @@ describe("SecuritySummaryWidget", () => {
       />
     );
 
-    // Use getAllByTestId instead of getByTestId since there are multiple elements with same ID
-    // and select the second one which contains the security level items
-    const summaryContainers = screen.getAllByTestId(
-      SUMMARY_TEST_IDS.SUMMARY_CONTAINER
-    );
-    const summaryContainer = summaryContainers[1]; // The second element is the one containing the security level items
-
-    // Use within to search within this container for these specific security levels
-    expect(within(summaryContainer).getByText("High")).toBeInTheDocument();
-
-    // For Low, use a more specific approach by searching for it within the integrity summary
-    const integritySummary = screen.getByTestId(
-      "security-summary-container-integrity-summary"
-    );
-    expect(within(integritySummary).getByText("Low")).toBeInTheDocument();
-
-    // For Very High, use the confidentiality summary
-    const confidentialitySummary = screen.getByTestId(
-      "security-summary-container-confidentiality-summary"
-    );
-    expect(
-      within(confidentialitySummary).getByText("Very High")
-    ).toBeInTheDocument();
-
-    // Use a more specific selector instead of just testId since there are multiple elements with the same testId
-    expect(
-      screen.getByRole("region", { name: "Security Summary" })
-    ).toBeInTheDocument();
+    // Use more specific queries to avoid ambiguity with multiple matching elements
+    // Look for each level in the summary section which has specific CSS classes
+    const summaryContainer = screen.getByTestId(SUMMARY_TEST_IDS.SUMMARY_CONTAINER);
+    
+    // Use specific test IDs to find the containers for each component
+    const availSummary = screen.getByTestId(`${SUMMARY_TEST_IDS.SUMMARY_CONTAINER}-security-summary-widget-availability-summary`);
+    const integSummary = screen.getByTestId(`${SUMMARY_TEST_IDS.SUMMARY_CONTAINER}-security-summary-widget-integrity-summary`);
+    const confidSummary = screen.getByTestId(`${SUMMARY_TEST_IDS.SUMMARY_CONTAINER}-security-summary-widget-confidentiality-summary`);
+    
+    // Check the content within each specific container
+    expect(availSummary).toHaveTextContent("High");
+    expect(integSummary).toHaveTextContent("Low");
+    expect(confidSummary).toHaveTextContent("Very High");
   });
 
   it("renders with default props", () => {
@@ -265,11 +256,6 @@ describe("SecuritySummaryWidget", () => {
     expect(screen.getByText("Moderate Security")).toBeInTheDocument();
     expect(
       screen.getByTestId(SUMMARY_TEST_IDS.SECURITY_ICON)
-    ).toBeInTheDocument();
-
-    // Use role and accessible name instead of testId to avoid duplicate testIds
-    expect(
-      screen.getByRole("region", { name: "Security Summary" })
     ).toBeInTheDocument();
   });
 

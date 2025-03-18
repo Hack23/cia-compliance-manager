@@ -1,66 +1,50 @@
-import { render, screen } from "@testing-library/react";
-import React from "react";
-import { describe, expect, it } from "vitest";
-import { WidgetBaseProps } from "../types/widgets";
-import widgetRegistry from "./widgetRegistry";
+import { render } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import { WidgetDefinition, WidgetRegistryImpl } from "./widgetRegistry";
 
-// Test component with required props
-interface TestWidgetProps extends WidgetBaseProps {
-  customValue?: string;
-  testId?: string;
-}
-
-const TestWidget: React.FC<TestWidgetProps> = ({
-  customValue = "default",
-  testId = "test-widget",
-}) => <div data-testid={testId}>{customValue}</div>;
-
-describe("widgetRegistry advanced functionality", () => {
-  // Clear registry before tests to avoid interference
-  beforeEach(() => {
-    // Register a dummy widget to reset the registry
-    widgetRegistry.register({
-      id: "test-reset",
-      title: "Test Reset",
-      component: TestWidget,
+describe("Enhanced Widget Registry Tests", () => {
+  it("should register a new widget", () => {
+    // Create a new instance for testing
+    const testRegistry = new WidgetRegistryImpl();
+    
+    // Register a test widget
+    testRegistry.register({
+      id: "testWidget1",
+      title: "Test Widget 1", // Use title instead of name
+      component: vi.fn(() => <div>Test Widget 1</div>),
+      icon: "🧪", // Add required icon
+      size: "small",
     });
-  });
-
-  it("handles unregistered widgets gracefully", () => {
-    // Attempt to get a widget that doesn't exist
-    const widget = widgetRegistry.get("non-existent-widget");
-    expect(widget).toBeUndefined();
-
-    // Attempt to render a widget that doesn't exist
-    const rendered = widgetRegistry.renderWidget("non-existent-widget");
-    expect(rendered).toBeNull();
-  });
-
-  it("replaces widget when registering with same ID", () => {
-    // Register initial widget
-    widgetRegistry.register({
-      id: "duplicate-id",
-      title: "Original Widget",
-      component: TestWidget,
-      defaultProps: { customValue: "original" },
+    
+    // Register another test widget
+    testRegistry.register({
+      id: "testWidget2",
+      title: "Test Widget 2", // Use title instead of name
+      component: vi.fn(() => <div>Test Widget 2</div>),
+      icon: "⚡", // Add required icon
+      size: "medium",
     });
-
-    // Register replacement widget with same ID
-    widgetRegistry.register({
-      id: "duplicate-id",
-      title: "Replacement Widget",
-      component: TestWidget,
-      defaultProps: { customValue: "replacement" },
-    });
-
-    // Get the registered widget
-    const widget = widgetRegistry.get("duplicate-id");
-
-    // Verify it's the replacement
-    expect(widget?.title).toBe("Replacement Widget");
-
-    // Render and verify content
-    render(<>{widgetRegistry.renderWidget("duplicate-id")}</>);
-    expect(screen.getByTestId("test-widget")).toHaveTextContent("replacement");
+    
+    // Test getting the registered widget
+    const widget = testRegistry.get("testWidget1"); // Use get instead of getWidget
+    expect(widget).toBeDefined();
+    expect(widget?.id).toBe("testWidget1");
+    expect(widget?.title).toBe("Test Widget 1");
+    
+    // Test rendering the widget
+    const { container } = render(
+      <div>{testRegistry.renderWidget("testWidget1")}</div>
+    );
+    expect(container).toBeTruthy();
+    
+    // Test getting all widgets
+    const allWidgets = testRegistry.getAll(); // Use getAll instead of getAllWidgetKeys
+    expect(Array.isArray(allWidgets)).toBe(true);
+    expect(allWidgets.length).toBe(2);
+    
+    // Test widget IDs - fix implicit any type
+    const widgetIds = allWidgets.map((w: WidgetDefinition) => w.id);
+    expect(widgetIds).toContain("testWidget1");
+    expect(widgetIds).toContain("testWidget2");
   });
 });

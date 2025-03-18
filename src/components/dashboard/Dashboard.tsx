@@ -2,9 +2,9 @@ import React, { ReactNode } from "react";
 import { WIDGET_ICONS } from "../../constants/appConstants";
 import { APP_TEST_IDS, createDynamicTestId } from "../../constants/testIds";
 import {
-  availabilityOptions,
-  confidentialityOptions,
-  integrityOptions,
+    availabilityOptions,
+    confidentialityOptions,
+    integrityOptions,
 } from "../../hooks/useCIAOptions";
 import { gridClasses } from "../../styles/gridStyles";
 import { SecurityLevel } from "../../types/cia";
@@ -107,9 +107,10 @@ const Dashboard: React.FC<DashboardProps> = ({
       {/* Only include TechnicalDetailsWidget when not using registry and props are available */}
       {!useRegistry && availability && integrity && confidentiality && (
         <TechnicalDetailsWidget
-          availabilityLevel={availability}
-          integrityLevel={integrity}
-          confidentialityLevel={confidentiality}
+          key="technical-details"
+          availabilityLevel={availability as SecurityLevel}
+          integrityLevel={integrity as SecurityLevel}
+          confidentialityLevel={confidentiality as SecurityLevel}
         />
       )}
     </div>

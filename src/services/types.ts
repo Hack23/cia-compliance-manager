@@ -5,6 +5,8 @@
  * @packageDocumentation
  */
 
+// This file aggregates service-related types. Add new types here if needed.
+
 // Re-export types from ciaContentService
 export interface ComponentTechnicalDetails {
   description: string;

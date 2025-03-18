@@ -1,76 +1,131 @@
-import React from "react";
-import { WidgetSize } from "../../types/widget";
+import React, { ReactNode } from "react";
 
-interface WidgetContainerProps {
-  children: React.ReactNode;
-  title?: string;
-  icon?: React.ReactNode;
-  testId?: string;
+export interface WidgetContainerProps {
+  /**
+   * Widget title displayed in the header
+   */
+  title: string;
+  
+  /**
+   * Optional icon to display next to the title
+   */
+  icon?: string | ReactNode;
+  
+  /**
+   * Widget content
+   */
+  children: ReactNode;
+  
+  /**
+   * Additional CSS classes
+   */
   className?: string;
-  style?: React.CSSProperties;
-  size?: WidgetSize;
+  
+  /**
+   * Test ID for testing
+   */
+  testId?: string;
+  
+  /**
+   * Optional error state
+   */
+  error?: Error;
+  
+  /**
+   * Whether to use compact layout
+   */
+  compact?: boolean;
+  
+  /**
+   * Actions to render in the widget header
+   */
+  actions?: ReactNode;
+
+  /**
+   * Whether the widget is in loading state
+   */
   loading?: boolean;
-  error?: Error | null;
 }
 
 /**
- * Container component for dashboard widgets that provides consistent styling
+ * Container component for all widgets with consistent styling
+ * 
+ * ## Business Perspective
+ * 
+ * This component provides a consistent visual framework for all widgets,
+ * enhancing user experience and ensuring that security information is
+ * presented in a clear, recognizable format across the application. 🎨
  */
 const WidgetContainer: React.FC<WidgetContainerProps> = ({
-  children,
   title,
   icon,
-  testId,
+  children,
   className = "",
-  style,
-  size,
-  loading = false,
-  error = null,
+  testId = "widget-container",
+  error,
+  compact = false,
+  actions,
+  loading = false
 }) => {
-  // Base classes for the widget container
-  const containerClasses = `widget-container bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden 
-    border border-gray-200 dark:border-gray-700 ${className}`;
-
-  // Combine standard style with size dimensions if provided
-  const containerStyle = {
-    ...style,
-    ...(size && {
-      gridColumn: `span ${size.width}`,
-      gridRow: `span ${size.height}`,
-    }),
-  };
+  // If loading, show loading indicator
+  if (loading) {
+    return (
+      <div
+        className={`widget-container border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm ${className}`}
+        data-testid={`${testId}-loading`}
+      >
+        <div className="widget-header bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-700 rounded-t-lg">
+          <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200">
+            {icon && <span className="mr-2">{icon}</span>}
+            {title}
+          </h3>
+        </div>
+        <div className="widget-body p-4 bg-white dark:bg-gray-900 rounded-b-lg flex items-center justify-center min-h-[100px]">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" data-testid="widget-container-loading"/>
+        </div>
+      </div>
+    );
+  }
+  
+  // If there's an error, show error state
+  if (error) {
+    return (
+      <div
+        className={`widget-container widget-error border border-red-300 rounded-lg shadow-sm ${className}`}
+        data-testid={`${testId}-error`}
+      >
+        <div className="widget-header bg-red-50 dark:bg-red-900 dark:bg-opacity-20 px-4 py-3 border-b border-red-200 dark:border-red-800 rounded-t-lg">
+          <h3 className="text-lg font-medium text-red-800 dark:text-red-300 flex items-center">
+            <span className="mr-2">⚠️</span>
+            {title}
+          </h3>
+        </div>
+        <div className="widget-body p-4 bg-white dark:bg-gray-900">
+          <div className="text-red-600 dark:text-red-400">{error.message}</div>
+          {children}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
+      className={`widget-container border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm ${className}`}
       data-testid={testId}
-      className={containerClasses}
-      style={containerStyle}
-      data-loading={loading ? "true" : undefined}
     >
-      {/* Optional widget header with title and icon */}
-      {title && (
-        <div className="widget-header p-3 border-b border-gray-200 dark:border-gray-700 flex items-center bg-gray-50 dark:bg-gray-900">
-          {icon && <span className="widget-icon mr-2">{icon}</span>}
-          <h2 className="text-md font-semibold text-gray-800 dark:text-gray-200">
-            {title}
-          </h2>
-        </div>
-      )}
-
-      {/* Widget content area */}
-      <div className="widget-content h-full">
-        {loading ? (
-          <div className="animate-pulse h-full w-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-            <div className="w-8 h-8 border-t-2 border-b-2 border-blue-500 rounded-full animate-spin"></div>
+      <div className={`widget-header bg-gray-50 dark:bg-gray-800 px-4 ${compact ? 'py-2' : 'py-3'} border-b border-gray-200 dark:border-gray-700 rounded-t-lg flex justify-between items-center`}>
+        <h3 className={`${compact ? 'text-base' : 'text-lg'} font-medium text-gray-800 dark:text-gray-200 flex items-center`}>
+          {icon && <span className="mr-2">{icon}</span>}
+          {title}
+        </h3>
+        {actions && (
+          <div className="widget-actions ml-auto">
+            {actions}
           </div>
-        ) : error ? (
-          <div className="p-4 text-red-500 dark:text-red-400">
-            <p className="font-bold">Error:</p>
-            <p>{error.message}</p>
-          </div>
-        ) : (
-          children
         )}
+      </div>
+      <div className="widget-body p-4 bg-white dark:bg-gray-900 rounded-b-lg">
+        {children}
       </div>
     </div>
   );

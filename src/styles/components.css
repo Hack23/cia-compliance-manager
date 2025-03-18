@@ -1,20 +1,18 @@
 /* Component-specific styles */
 
-/* Widget styles - with reduced spacing */
+/* Widget styles - with improved consistency */
 .widget {
   background-color: var(--card-background);
   border: 1px solid var(--border-color);
   box-shadow: 0 4px 8px var(--shadow-color);
-  border-radius: 0.75rem;
-  overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
-  margin-bottom: 0.5rem; /* Reduced margin */
-  height: 100%;
-  min-height: 260px; /* Reduced min-height */
-  display: flex !important;
-  flex-direction: column !important;
-  overflow: hidden !important;
-  max-height: 100% !important;
+  border-radius: var(--border-radius);
+  transition: transform 0.2s, box-shadow 0.2s; /* Prevents content from showing outside the container */
+  display: flex;
+  flex-direction: column;
+  height: auto; /* Allow height to adapt to content */
+  min-height: 300px; /* Minimum height without !important */
+  max-height: none; /* Remove maximum height restriction */
+  overflow: visible; /* Allow content to be visible */
 }
 
 .dark .widget {
@@ -31,116 +29,110 @@
   box-shadow: 0 8px 16px rgba(0, 204, 102, 0.2), 0 0 6px var(--primary-color);
 }
 
-/* Original widget header styles - keep for compatibility */
+/* Widget header styling - optimized height */
 .widget-header {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--border-color);
-  background: linear-gradient(
-    to right,
-    rgba(0, 102, 51, 0.05),
-    rgba(0, 136, 68, 0.05)
-  );
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-shrink: 0 !important;
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 10 !important;
-  background-color: var(--header-bg) !important;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
+  padding: 0.4rem 0.75rem; /* Reduced padding */
+  height: 32px; /* Fixed reduced height */
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--header-bg);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  margin-bottom: 0; /* Ensure no bottom margin */
 }
 
-/* Target actual DOM structure for widget headers - more compact */
-[data-testid$="-header"] {
-  padding: 0.5rem 0.75rem !important; /* Reduced padding */
-  border-bottom: 1px solid var(--border-color) !important;
-  background: linear-gradient(
-    to right,
-    rgba(0, 102, 51, 0.08),
-    rgba(0, 136, 68, 0.05)
-  ) !important;
-  background-color: var(--header-bg) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  flex-shrink: 0 !important;
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 10 !important;
-  border-top-left-radius: 0.75rem !important;
-  border-top-right-radius: 0.75rem !important;
-  margin-bottom: 0 !important;
-  padding-bottom: 0.5rem !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+/* Reduce header text size and make it green */
+.widget-header h3 {
+  margin: 0;
+  font-size: 0.85rem; /* Smaller font */
+  font-weight: 600;
+  color: var(--primary-color); /* Always green in both themes */
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-accent);
+  line-height: 1.1; /* Tighter line height */
 }
 
-/* Widget header title styles */
-[data-testid$="-header"] h3 {
-  margin: 0 !important;
-  color: var(--primary-color) !important;
-  font-size: 1rem !important;
-  letter-spacing: 0.03em !important;
-  text-transform: uppercase !important;
-  font-weight: 600 !important;
-  display: flex !important;
-  align-items: center !important;
-  font-family: var(--font-accent) !important;
+/* Widget size classes - consolidate sizes here */
+.widget-size-xs {
+  min-height: 180px;
 }
 
-/* Dark mode header styles */
-.dark [data-testid$="-header"] {
-  background: linear-gradient(
-    to right,
-    rgba(0, 204, 102, 0.15),
-    rgba(0, 187, 119, 0.1)
-  ) !important;
-  border-bottom: 1px solid rgba(0, 204, 102, 0.4) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 4px rgba(0, 204, 102, 0.2) !important;
+.widget-size-sm {
+  min-height: 240px;
 }
 
-.dark [data-testid$="-header"] h3 {
-  font-family: "Orbitron", sans-serif !important;
-  color: var(--primary-color) !important;
-  text-transform: uppercase !important;
-  letter-spacing: 1px !important;
-  font-size: 0.9rem !important;
-  text-shadow: 0 0 8px rgba(0, 204, 102, 0.7) !important;
+.widget-size-md {
+  min-height: 320px;
 }
 
-/* Widget body and content styles - more compact */
+.widget-size-lg {
+  min-height: 400px;
+}
+
+.widget-size-xl {
+  min-height: 480px;
+}
+
+/* Widget body with improved padding and scrolling behavior */
 .widget-body {
-  padding: 0.5rem !important; /* Reduced padding */
-  flex: 1;
-  overflow: auto;
-  flex: 1 1 auto !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  display: flex !important;
-  flex-direction: column !important;
-  max-height: calc(100% - 45px) !important; /* Adjusted for smaller header */
-  min-height: 0 !important;
-}
-
-.widget-content-wrapper {
-  flex: 1 1 auto !important;
-  min-height: 0 !important;
-  overflow-y: auto !important;
+  padding: 0.75rem; /* Consistent padding without !important */
+  flex: 1 1 auto;
+  overflow-y: auto; /* Change to auto for better scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
   display: flex;
   flex-direction: column;
+  max-height: calc(100% - 40px); /* Account for header height */
 }
 
-/* Widget icon styling */
+/* Ensure inner container uses full space */
+.widget-content-wrapper {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  overflow: visible; /* Allow content to be visible */
+  min-height: 0; /* Fix flexbox minimum height issues */
+}
+
+/* Widget content with consistent padding - adjust to compensate for smaller header */
+.widget-content {
+  padding: 0.35rem 0.5rem; /* Reduced padding */
+  margin: 0.15rem 0;
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.02); /* Subtle background */
+  border-radius: 0.25rem;
+  overflow: visible; /* Allow content to be visible */
+}
+
+/* Ensure text elements have minimum height/width */
+.technical-value,
+.metric-value,
+[class*="value"],
+.value {
+  min-height: 20px;
+  min-width: 60px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+/* Reduced widget icon size */
 .widget-icon {
+  font-size: 1rem;
+  margin-right: 0.35rem;
+  width: 20px;
+  height: 20px;
+  color: var(--primary-color);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
-  margin-right: 0.5rem;
-  width: 24px;
-  height: 24px;
-  color: var(--primary-color);
 }
 
 /* App title styling */
@@ -148,11 +140,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.25rem 1.75rem;
+  padding: 0.75rem 1.25rem; /* Reduced padding */
   background-color: var(--card-background);
   border-radius: 0.75rem;
   box-shadow: 0 4px 8px var(--shadow-color);
-  margin-bottom: 1.75rem;
+  margin-bottom: 0.75rem; /* Reduced margin */
   border-bottom: 3px solid var(--primary-color);
 }
 
@@ -294,13 +286,6 @@ td {
   vertical-align: top;
 }
 
-/* Widget content style */
-.widget-content {
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 0.75rem;
-  border-radius: 0.375rem;
-}
-
 /* Fix for specific widgets that need vertical scrolling */
 [data-testid="combined-business-impact-widget"],
 [data-testid="security-summary-container"],
@@ -316,6 +301,7 @@ td {
 .radar-chart-container {
   max-height: 100% !important;
   overflow: hidden !important;
+  height: calc(100% - 20px) !important;
 }
 
 /* Make canvas responsive */
@@ -327,81 +313,43 @@ td {
   object-fit: contain !important;
 }
 
-/* Optimize security level selector specific styles */
+/* Security level selector optimizations */
 [data-testid="security-level-selector"] select {
-  font-size: 0.85rem;
-  padding: 0.3rem 0.5rem;
-  width: 100% !important;
-  appearance: auto !important;
-  height: 30px !important; /* Force smaller height */
+  height: 28px !important; /* Reduced height */
+  padding: 0.2rem 0.4rem; /* Smaller padding */
 }
 
 [data-testid="security-level-selector"] .section-container {
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
+  padding: 0.35rem; /* Reduced padding */
+  margin-bottom: 0.35rem; /* Reduced margin */
 }
 
-/* Optimize space in the security level selector */
-[data-testid="security-level-selector"] label {
-  margin-bottom: 0.25rem !important;
+/* Spacing optimizations for all widgets */
+.mb-4 {
+  margin-bottom: 0.5rem !important; /* Reduced margin */
 }
 
-[data-testid="security-level-selector"] .mb-4 {
+.pb-4 {
+  padding-bottom: 0.5rem !important; /* Reduced padding */
+}
+
+/* Reduce card height and padding */
+.info-card,
+.tech-metric-card,
+.resource-card {
+  padding: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
+  min-height: 100px !important;
+}
+
+/* Recommendation sections minimum height */
+[class*="recommendation"],
+.recommendation {
+  min-height: 40px !important;
+  display: block !important;
+  width: 100% !important;
   margin-bottom: 0.5rem !important;
-}
-
-[data-testid="security-level-selector"] .pb-4 {
-  padding-bottom: 0.5rem !important;
-}
-
-[data-testid="security-level-selector"] .mb-2 {
-  margin-bottom: 0.5rem !important;
-}
-
-[data-testid="security-level-selector"] .pb-2 {
-  padding-bottom: 0.5rem !important;
-}
-
-/* Compact security level legend */
-[data-testid="security-level-selector"] .compact-legend {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.7rem;
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-[data-testid="security-level-selector"] .compact-summary {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-[data-testid="security-level-selector"] .compact-summary-item {
-  display: flex;
-  align-items: center;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  border: 1px solid var(--border-color);
-  font-size: 0.75rem;
-}
-
-/* More compact section spacing */
-[data-testid="security-level-selector"] .mb-4 {
-  margin-bottom: 0.5rem !important;
-}
-
-[data-testid="security-level-selector"] .pb-4 {
-  padding-bottom: 0.5rem !important;
-}
-
-/* Tighter description text in security level selectors */
-[data-testid="security-level-selector"] p.text-xs {
-  margin-bottom: 0.25rem !important;
-  line-height: 1.2 !important;
+  padding: 0.5rem !important;
 }
 
 /* Info button - smaller and consistent sizing */
@@ -432,18 +380,479 @@ td {
 
 .info-button:hover {
   transform: scale(1.1) !important;
-  background-color: rgba(0, 102, 51, 0.1) !important;
-  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 5px rgba(0, 204, 102, 0.3) !important;
   color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  background-color: rgba(0, 204, 102, 0.2) !important;
 }
 
 .dark .info-button:hover {
-  background-color: rgba(0, 204, 102, 0.2) !important;
-  border-color: var(--primary-color) !important;
   color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  background-color: rgba(0, 102, 51, 0.1) !important;
+}
+
+/* Fix for empty content */
+.empty-content-placeholder {
+  min-height: 100px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--text-secondary) !important;
+  font-style: italic !important;
+}
+
+/* Card section containers */
+.section-container {
+  padding: 0.75rem !important;
+  margin-bottom: 1rem !important;
+  border-radius: 6px !important;
+  min-height: 50px !important;
+}
+
+/* Fix for specific impact widgets that tend to be overly tall */
+[data-testid="widget-integrity-impact-container"],
+[data-testid="widget-confidentiality-impact-container"],
+[data-testid="widget-availability-impact-container"] {
+  max-height: 600px;
+}
+
+/* Ensure consistent card heights */
+.security-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 80px; /* Minimum height for cards */
+  margin-bottom: 0.75rem;
+}
+
+/* Add common styles for security level indicators */
+.security-level-indicator {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  text-align: center;
+}
+
+.security-level-indicator .level-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.security-level-indicator .level-value {
+  font-weight: 500;
+}
+
+/* Standardize CIA component colors */
+.cia-color-availability {
+  color: var(--color-availability);
+}
+
+.cia-color-integrity {
+  color: var(--color-integrity);
+}
+
+.cia-color-confidentiality {
+  color: var(--color-confidentiality);
+}
+
+/* Consistent risk assessment styling */
+.risk-assessment {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.risk-assessment-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.risk-assessment-description {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Target actual DOM structure for widget headers - more compact */
+[data-testid$="-header"] {
+  padding: 0.35rem 0.6rem !important; /* Further reduced padding */
+  min-height: 30px !important; /* Set minimum height */
+  max-height: 38px !important; /* Limit maximum height */
+  border-bottom: 1px solid var(--border-color) !important;
+  background: linear-gradient(
+    to right,
+    rgba(0, 102, 51, 0.05),
+    rgba(0, 136, 68, 0.02)
+  ) !important;
+  background-color: var(--header-bg) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-shrink: 0 !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  border-top-left-radius: 0.5rem !important;
+  border-top-right-radius: 0.5rem !important;
+  margin-bottom: 0 !important;
+}
+
+/* Card components */
+.card {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.dark .card {
+  background-color: var(--card-bg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 204, 255, 0.1);
+}
+
+.dark .card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 204, 255, 0.2);
+}
+
+/* Widget styles */
+.widget {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.widget-header {
+  padding: 0.75rem 1rem;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 102, 204, 0.05),
+    rgba(0, 102, 204, 0.01)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dark .widget-header {
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 204, 255, 0.1),
+    rgba(0, 204, 255, 0.01)
+  );
+  border-bottom: 1px solid rgba(0, 204, 255, 0.2);
+}
+
+.widget-title {
+  font-family: var(--font-accent);
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.widget-title-icon {
+  margin-right: 0.5rem;
+  opacity: 0.8;
+}
+
+/* Security level badges */
+.security-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
+}
+
+.dark .security-badge {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+/* Status indicators */
+.status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.status-success {
+  background-color: var(--color-high);
+  box-shadow: 0 0 5px var(--color-high);
+}
+
+.dark .status-success {
+  background-color: var(--color-high-dark);
+  box-shadow: 0 0 8px var(--color-high-dark);
+}
+
+.status-warning {
+  background-color: var(--color-moderate);
+  box-shadow: 0 0 5px var(--color-moderate);
+}
+
+.dark .status-warning {
+  background-color: var(--color-moderate-dark);
+  box-shadow: 0 0 8px var(--color-moderate-dark);
+}
+
+.status-danger {
+  background-color: var(--color-none);
+  box-shadow: 0 0 5px var(--color-none);
+}
+
+.dark .status-danger {
+  background-color: var(--color-none-dark);
+  box-shadow: 0 0 8px var(--color-none-dark);
+}
+
+/* Progress bars */
+.progress-bar {
+  height: 6px;
+  width: 100%;
+  background-color: var(--bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.dark .progress-bar {
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.dark .progress-bar-fill {
+  box-shadow: 0 0 6px var(--primary-color);
+}
+
+/* Button styling */
+button {
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+  transition: all 0.15s;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: var(--font-main);
+}
+
+button:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+button.primary {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+button.primary:hover {
+  background-color: var(--primary-light);
+  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+}
+
+.dark button.primary {
+  background-color: var(--primary-color);
+  box-shadow: 0 0 8px rgba(0, 204, 255, 0.3);
+  border: 1px solid rgba(0, 204, 255, 0.3);
+}
+
+.dark button.primary:hover {
+  box-shadow: 0 0 12px rgba(0, 204, 255, 0.5);
+}
+
+.theme-toggle {
+  padding: 0.5rem;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.dark .theme-toggle {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* Form controls */
+input,
+select,
+textarea {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  border-radius: var(--border-radius-sm);
+  background-color: white;
+  font-family: var(--font-main);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.dark input:focus,
+.dark select:focus,
+.dark textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 204, 255, 0.2);
+}
+
+/* Info button styling */
+.info-button {
+  width: 18px !important;
+  height: 18px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: var(--text-secondary) !important;
+  margin-left: 4px !important;
+  margin-top: 0px !important;
+  transition: all 0.2s !important;
+}
+
+.dark .info-button {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: var(--text-secondary) !important;
+}
+
+.info-button:hover {
+  transform: scale(1.1) !important;
   box-shadow: 0 0 5px rgba(0, 204, 102, 0.3) !important;
 }
 
-.info-button span {
-  font-size: 10px !important;
+/* Security cards with specialized styling */
+.security-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+}
+
+/* Unique card styling for each CIA component */
+.confidentiality-card {
+  border-left: 3px solid var(--color-confidentiality) !important;
+}
+
+.dark .confidentiality-card {
+  border: 1px solid rgba(167, 66, 255, 0.3) !important;
+  border-left: 3px solid var(--color-confidentiality) !important;
+  box-shadow: 0 0 10px rgba(167, 66, 255, 0.15) !important;
+}
+
+.integrity-card {
+  border-left: 3px solid var(--color-integrity) !important;
+}
+
+.dark .integrity-card {
+  border: 1px solid rgba(0, 230, 118, 0.3) !important;
+  border-left: 3px solid var(--color-integrity) !important;
+  box-shadow: 0 0 10px rgba(0, 230, 118, 0.15) !important;
+}
+
+.availability-card {
+  border-left: 3px solid var(--color-availability) !important;
+}
+
+.dark .availability-card {
+  border: 1px solid rgba(0, 204, 255, 0.3) !important;
+  border-left: 3px solid var(--color-availability) !important;
+  box-shadow: 0 0 10px rgba(0, 204, 255, 0.15) !important;
+}
+
+/* Widget content */
+.widget-content {
+  padding: 1rem;
+}
+
+/* Widget container styles */
+.widget-container {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dark .widget-container {
+  background-color: var(--card-bg);
+  border: var(--card-border);
+  box-shadow: var(--card-glow);
+}
+
+.widget-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.dark .widget-container:hover {
+  box-shadow: 0 0 15px rgba(0, 204, 255, 0.25);
+}
+
+/* Widget header styling */
+.widget-container-header {
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 136, 68, 0.05),
+    rgba(0, 136, 68, 0.02)
+  ) !important;
+  background-color: var(--header-bg) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-shrink: 0 !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  border-top-left-radius: var(--border-radius) !important;
+  border-top-right-radius: var(--border-radius) !important;
+  margin-bottom: 0 !important;
+}
+
+.dark .widget-container-header {
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 204, 255, 0.1),
+    rgba(0, 204, 255, 0.02)
+  ) !important;
 }

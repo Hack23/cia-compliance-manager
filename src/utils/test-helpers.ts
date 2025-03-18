@@ -23,6 +23,23 @@ export function createMockBusinessImpact(
   };
 }
 
+// Fix the BusinessImpactDetails creation to include summary
+export function createTestBusinessImpact(options = {}): BusinessImpactDetails {
+  return {
+    summary: "Test business impact summary",
+    financial: {
+      description: "Test financial impact",
+      riskLevel: "Medium"
+    },
+    operational: {
+      description: "Test operational impact",
+      riskLevel: "Low"
+    },
+    // ... other options
+    ...options
+  };
+}
+
 /**
  * Creates mock CIA options for testing
  */

@@ -1,21 +1,21 @@
-import { SecurityLevel } from "../types/cia";
 import { SECURITY_LEVELS } from "../constants/appConstants";
+import { SecurityLevel } from "../types/cia";
 
 /**
  * Utility functions for handling security levels.
- * 
+ *
  * ## Business Impact
  * These functions play a crucial role in determining and normalizing security levels, which directly impacts the application's ability to manage and enforce security policies. 💼
- * 
+ *
  * ## Compliance
  * By providing consistent and accurate security level calculations, these functions help ensure that the application meets various compliance requirements and standards. 📜
- * 
+ *
  * ## Risk Management
  * The functions in this module contribute to risk management by providing a structured way to represent and analyze security levels, helping to identify and mitigate potential risks. ⚠️
- * 
+ *
  * ## Value Creation
  * The use of well-defined utility functions enhances the application's reliability and maintainability, leading to cost savings and efficiency improvements. 💡
- * 
+ *
  * ## Stakeholder Benefits
  * Clear and consistent utility functions benefit all stakeholders, including developers, security analysts, and business users, by providing a common understanding of key security concepts. 🤝
  */
@@ -126,4 +126,41 @@ export function getSecurityLevelBadgeVariant(
     default:
       return "neutral";
   }
+}
+
+/**
+ * Calculate the overall security level based on confidentiality, integrity, and availability levels
+ *
+ * @param availabilityLevel - The availability security level
+ * @param integrityLevel - The integrity security level
+ * @param confidentialityLevel - The confidentiality security level
+ * @returns The calculated overall security level
+ */
+export function calculateOverallSecurityLevel(
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel
+): SecurityLevel {
+  const levels = [availabilityLevel, integrityLevel, confidentialityLevel];
+  const valueMap: Record<SecurityLevel, number> = {
+    None: 0,
+    Low: 1,
+    Moderate: 2,
+    High: 3,
+    "Very High": 4,
+  };
+
+  // Calculate average security level value, rounded down
+  const sum = levels.reduce((acc, level) => acc + valueMap[level], 0);
+  const avg = Math.floor(sum / 3);
+
+  // Convert back to SecurityLevel
+  const securityLevels: SecurityLevel[] = [
+    "None",
+    "Low",
+    "Moderate",
+    "High",
+    "Very High",
+  ];
+  return securityLevels[avg];
 }

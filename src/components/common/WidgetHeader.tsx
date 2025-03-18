@@ -7,14 +7,22 @@ interface WidgetHeaderProps {
   actions?: ReactNode;
   className?: string;
   testId?: string;
+  compact?: boolean; // Add compact mode option
 }
 
+/**
+ * Common header component for widgets with improved height efficiency
+ *
+ * @param props - Component properties
+ * @returns A consistent widget header
+ */
 const WidgetHeader: React.FC<WidgetHeaderProps> = ({
   title,
   iconKey,
   actions,
   className = "",
   testId,
+  compact = false, // Default to standard size
 }) => {
   // Determine the icon to display
   let iconToDisplay = "";
@@ -28,18 +36,24 @@ const WidgetHeader: React.FC<WidgetHeaderProps> = ({
     }
   }
 
+  // Use compact styling when needed
+  const heightClass = compact ? "py-1" : "py-2";
+  const fontSizeClass = compact ? "text-sm" : "text-base";
+
   return (
     <div
-      className={`flex items-center justify-between pb-2 mb-4 border-b border-gray-200 dark:border-gray-700 ${className}`}
+      className={`flex items-center justify-between ${heightClass} mb-2 border-b border-gray-200 dark:border-gray-700 ${className}`}
       data-testid={testId}
     >
-      <h3 className="flex items-center text-lg font-semibold text-gray-800 dark:text-gray-200">
+      <h3
+        className={`flex items-center ${fontSizeClass} font-semibold text-gray-800 dark:text-gray-200`}
+      >
         {iconToDisplay && (
-          <span className="mr-2" aria-hidden="true">
+          <span className="mr-2 text-base" aria-hidden="true">
             {iconToDisplay}
           </span>
         )}
-        {title}
+        <span className="truncate max-w-[280px]">{title}</span>
       </h3>
       {actions && <div className="flex items-center space-x-2">{actions}</div>}
     </div>

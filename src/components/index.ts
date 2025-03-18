@@ -1,47 +1,46 @@
 /**
- * # Component Library
- *
- * This module provides React components for building the CIA Compliance Manager UI.
- *
- * ## Business Perspective
- * These components implement the visual representation of the security compliance
- * dashboard, allowing stakeholders to make informed decisions about security investments.
- *
- * ## Architecture Perspective
- * Components are organized by functional area and follow a layered architecture pattern,
- * with common components at the base and specialized widgets building upon them.
- *
- * ## Security Perspective
- * UI components implement visual security indicators and follow secure coding practices
- * to prevent XSS and ensure proper data validation.
- *
- * @module components
+ * Component exports for the CIA Compliance Manager
  */
 
-// Re-export from subdirectories
-export * from "./charts";
-export * from "./common";
-export * from "./dashboard";
+// Common Components
+export { default as SecurityLevelBadge } from "./common/SecurityLevelBadge";
+export { default as StatusBadge } from "./common/StatusBadge";
+export { default as WidgetContainer } from "./common/WidgetContainer";
+export { default as MetricsCard } from "./common/MetricsCard";
+export { default as KeyValuePair } from "./common/KeyValuePair";
+export { default as WidgetHeader } from "./common/WidgetHeader";
+export { default as WidgetActions } from "./common/WidgetActions";
+export { default as Tooltip } from "./common/Tooltip";
+export { default as CIAImpactCard } from "./common/CIAImpactCard";
+export { default as SecurityLevelSummaryItem } from "./common/SecurityLevelSummaryItem";
+export { default as SecurityRiskScore } from "./common/SecurityRiskScore";
+export { default as RiskAssessment } from "./common/RiskAssessment";
+export { default as ThemeToggle } from "./common/ThemeToggle";
 
-// Export security level components with SecurityLevelSelector explicitly
-// renamed to avoid ambiguity with the old version
-export {
-  SecurityLevelSelector as EnhancedSecurityLevelSelector,
-  Selection,
-} from "./securitylevel";
+// Security Level Components
+export { default as SecurityLevelSelector } from "./securitylevel/SecurityLevelSelector";
 
-// Export common components with explicit naming to avoid conflicts
-export * from "./common/BusinessImpactSection";
-export * from "./common/CIAImpactCard";
-export { default as SimpleSecurityLevelSelector } from "./common/SecurityLevelSelector";
-export * from "./common/SecurityRiskScore";
+// Widget Components
+export { default as SecuritySummaryWidget } from "./widgets/SecuritySummaryWidget";
+export { default as SecurityLevelWidget } from "./widgets/SecurityLevelWidget";
+export { default as AvailabilityImpactWidget } from "./widgets/AvailabilityImpactWidget";
+export { default as IntegrityImpactWidget } from "./widgets/IntegrityImpactWidget";
+export { default as ConfidentialityImpactWidget } from "./widgets/ConfidentialityImpactWidget";
+export { default as BusinessImpactAnalysisWidget } from "./widgets/BusinessImpactAnalysisWidget";
+export { default as ComplianceStatusWidget } from "./widgets/ComplianceStatusWidget";
+export { default as CostEstimationWidget } from "./widgets/CostEstimationWidget";
+export { default as ValueCreationWidget } from "./widgets/ValueCreationWidget";
+export { default as TechnicalDetailsWidget } from "./widgets/TechnicalDetailsWidget";
+export { default as SecurityResourcesWidget } from "./widgets/SecurityResourcesWidget";
+export { default as SecurityVisualizationWidget } from "./widgets/SecurityVisualizationWidget";
+export { default as CIAImpactSummaryWidget } from "./widgets/CIAImpactSummaryWidget";
 
-// Export single canonical SecurityLevelSelector
-export { default as SecurityLevelSelector } from "./SecurityLevelSelector";
+// Dashboard
+export { default as Dashboard } from "./dashboard/Dashboard";
 
-// Export widgets
-export * from "./widgets";
+// Chart Components
+// ... existing chart component exports ...
 
-// Export utility functions from the canonical location
-export * from "../utils/widgetHelpers";
-export { widgetRegistry, widgetRegistryUtils } from "../utils/widgetRegistry";
+// Import widgetRegistry as a default import, not a named export
+import widgetRegistry from "../utils/widgetRegistry";
+export { widgetRegistry };

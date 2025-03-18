@@ -2,25 +2,27 @@ import { SecurityLevel } from "../types/cia"; // Remove unused CIAOptions import
 
 // Widget Icons - For consistent icon use across the application
 export const WIDGET_ICONS = {
-  SECURITY_LEVEL: "🔐",
-  SECURITY_SUMMARY: "📊",
+  SECURITY_LEVEL: "🛡️",
+  SECURITY_SUMMARY: "🔐",
   SECURITY_VISUALIZATION: "📊",
-  COMPLIANCE_STATUS: "✓",
+  COMPLIANCE_STATUS: "⚖️",
   VALUE_CREATION: "💰",
   COST_ESTIMATION: "💲",
-  BUSINESS_IMPACT: "🏢",
+  BUSINESS_IMPACT: "💼",
   TECHNICAL_IMPLEMENTATION: "⚙️",
   AVAILABILITY_IMPACT: "⏱️",
-  INTEGRITY_IMPACT: "🛡️",
+  INTEGRITY_IMPACT: "✓",
   CONFIDENTIALITY_IMPACT: "🔒",
   SECURITY_RESOURCES: "📚",
+  CIA_IMPACT_SUMMARY: "🧩",
+  TECHNICAL_DETAILS: "⚙️",
 };
 
 // CIA Component Icons and Labels
 export const CIA_COMPONENT_ICONS = {
   AVAILABILITY: "⏱️",
-  INTEGRITY: "🔐",
-  CONFIDENTIALITY: "🔏",
+  INTEGRITY: "✓",
+  CONFIDENTIALITY: "🔒",
 };
 
 export const CIA_LABELS = {
@@ -39,7 +41,7 @@ export const SECURITY_LEVEL_COLORS = {
 };
 
 // Security Levels
-export const SECURITY_LEVELS = {
+export const SECURITY_LEVELS: Record<string, SecurityLevel> = {
   NONE: "None",
   LOW: "Low",
   MODERATE: "Moderate",
@@ -53,15 +55,17 @@ export const WIDGET_TITLES = {
   SECURITY_SUMMARY: "Security Summary",
   SECURITY_VISUALIZATION: "Security Visualization",
   COMPLIANCE_STATUS: "Compliance Status",
-  VALUE_CREATION: "Value Creation",
+  VALUE_CREATION: "Business Value & ROI",
   COST_ESTIMATION: "Cost Estimation",
-  BUSINESS_IMPACT: "Business Impact",
+  BUSINESS_IMPACT: "Business Impact Analysis",
   TECHNICAL_IMPLEMENTATION: "Technical Implementation",
   SECURITY_PROFILE: "CIA Security Profile",
   SECURITY_RESOURCES: "Security Resources",
   AVAILABILITY_IMPACT: "Availability Impact",
   INTEGRITY_IMPACT: "Integrity Impact",
   CONFIDENTIALITY_IMPACT: "Confidentiality Impact",
+  CIA_IMPACT_SUMMARY: "CIA Impact Summary",
+  TECHNICAL_DETAILS: "Technical Details",
 };
 
 // Implementation details
@@ -167,4 +171,71 @@ export const SECURITY_DESCRIPTIONS = {
   HIGH: "Robust protection with minimal single points of failure, blockchain validation, and strong encryption.",
   VERY_HIGH:
     "Maximum protection with quantum-safe encryption, multi-site redundancy, and real-time validation.",
+};
+
+/**
+ * CIA component information
+ */
+export const CIA_COMPONENT_INFO = {
+  CONFIDENTIALITY: {
+    NAME: "Confidentiality",
+    DESCRIPTION: "Protection against unauthorized disclosure of data",
+    ICON: "🔒",
+    COLOR: "#8e44ad", // Purple
+  },
+  INTEGRITY: {
+    NAME: "Integrity",
+    DESCRIPTION: "Protection against unauthorized modification of data",
+    ICON: "✓",
+    COLOR: "#27ae60", // Green
+  },
+  AVAILABILITY: {
+    NAME: "Availability",
+    DESCRIPTION: "Accessibility and uptime of systems and data",
+    ICON: "⏱️",
+    COLOR: "#2980b9", // Blue
+  },
+};
+
+/**
+ * CIA component colors
+ */
+export const CIA_COMPONENT_COLORS = {
+  CONFIDENTIALITY: {
+    PRIMARY: CIA_COMPONENT_INFO.CONFIDENTIALITY.COLOR,
+    LIGHT: "#d6b8e8", // Light purple
+    DARK: "#6c3483", // Dark purple
+  },
+  INTEGRITY: {
+    PRIMARY: CIA_COMPONENT_INFO.INTEGRITY.COLOR,
+    LIGHT: "#a9dfbf", // Light green
+    DARK: "#1e8449", // Dark green
+  },
+  AVAILABILITY: {
+    PRIMARY: CIA_COMPONENT_INFO.AVAILABILITY.COLOR,
+    LIGHT: "#aed6f1", // Light blue
+    DARK: "#1a5276", // Dark blue
+  },
+};
+
+/**
+ * Component level mapping
+ */
+export const COMPONENT_LEVEL_MAPPING = {
+  NONE: 0,
+  LOW: 1,
+  MODERATE: 2,
+  HIGH: 3,
+  VERY_HIGH: 4,
+};
+
+/**
+ * Security level labels for display
+ */
+export const SECURITY_LEVEL_LABELS = {
+  NONE: "None",
+  LOW: "Low",
+  MODERATE: "Moderate",
+  HIGH: "High",
+  VERY_HIGH: "Very High",
 };

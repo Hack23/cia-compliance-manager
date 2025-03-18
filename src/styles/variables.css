@@ -1,29 +1,32 @@
 /* CSS Variables for the application */
 
-/* Light Mode - Slashdot Inspired */
+/* Light Mode - Professional Tech Theme */
 :root {
-  /* Colors */
-  --primary-color: #006633;
-  --primary-light: #008844;
-  --primary-dark: #004422;
-  --accent-color: #669900;
-  --background-color: #f0f0f0;
+  /* Core Colors */
+  --primary-color: #0066cc;
+  --primary-light: #2b8aff;
+  --primary-dark: #004d99;
+  --accent-color: #00ccaa;
+  --background-color: #f8f9fc;
   --card-background: #ffffff;
-  --text-color: #222222;
-  --text-secondary: #444444;
-  --border-color: rgba(0, 102, 51, 0.2);
+  --text-color: #222233;
+  --text-secondary: #444455;
+  --border-color: rgba(0, 102, 204, 0.2);
   --shadow-color: rgba(0, 0, 0, 0.1);
-  --highlight-color: #008844;
-  --header-bg: #f7fafc;
+  --highlight-color: #00ccaa;
+  --header-bg: #f0f4f9;
 
   /* Fonts */
   --font-main: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     sans-serif;
-  --font-accent: system-ui, -apple-system, sans-serif;
+  --font-accent: "Orbitron", system-ui, -apple-system, sans-serif;
   --font-mono: "Share Tech Mono", monospace;
 
   /* Sizing & Spacing */
   --border-radius: 0.5rem;
+  --border-radius-sm: 0.25rem;
+  --border-radius-lg: 0.75rem;
+  --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
@@ -31,7 +34,7 @@
 
   /* Transitions */
   --transition-speed: 0.2s;
-  --transition-function: ease-in-out;
+  --transition-function: cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Base colors */
   --color-white: #ffffff;
@@ -60,59 +63,52 @@
   --bg-primary: #ffffff;
   --bg-secondary: #f8f9fa;
   --bg-tertiary: #e9ecef;
-
-  /* Dark mode overrides will be handled with dark: classes via Tailwind */
 }
 
-/* Dark Mode - Enhanced Ingress Inspired Theme */
+/* Dark Mode - Cybersecurity Theme */
 .dark {
-  /* Colors */
-  --primary-color: #00cc66;
-  --primary-light: #00ff88;
-  --primary-dark: #00bb77;
-  --accent-color: #33eeff;
-  --background-color: #001a1a;
-  --card-background: #001c25;
-  --text-color: #f0f0f0;
-  --text-secondary: #aaaaaa;
-  --border-color: rgba(0, 204, 102, 0.3);
-  --shadow-color: rgba(0, 204, 102, 0.2);
-  --highlight-color: #00ff88;
-  --header-bg: #001a25;
+  /* Core Colors */
+  --primary-color: #00ccff;
+  --primary-light: #33e0ff;
+  --primary-dark: #00a3cc;
+  --accent-color: #00ffaa;
+  --background-color: #0a1520;
+  --card-background: #0e1c2b;
+  --text-color: #e0e6ed;
+  --text-secondary: #a0abb9;
+  --border-color: rgba(0, 204, 255, 0.2);
+  --shadow-color: rgba(0, 204, 255, 0.1);
+  --highlight-color: #00ffaa;
+  --header-bg: #0c1825;
 
-  /* Font overrides for Ingress style */
+  /* Font overrides for cybersecurity style */
   --font-accent: "Orbitron", sans-serif;
 
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    sans-serif;
-
   /* Enhanced Security level colors - Cyberpunk Inspired */
-  --color-none-dark: #ff5252;
-  --color-low-dark: #ff9a3c;
-  --color-moderate-dark: #ffeb3b;
+  --color-none-dark: #ff3b3b;
+  --color-low-dark: #ff9500;
+  --color-moderate-dark: #ffcc00;
   --color-high-dark: #00e676;
-  --color-very-high-dark: #40c4ff;
+  --color-very-high-dark: #00ccff;
 
   /* Enhanced CIA component colors - More vibrant for dark mode */
-  --color-confidentiality: #9b59b6;
-  --color-confidentiality-glow: rgba(155, 89, 182, 0.5);
-  --color-confidentiality-accent: #bd93f9;
+  --color-confidentiality: #a742ff;
+  --color-confidentiality-glow: rgba(167, 66, 255, 0.5);
+  --color-confidentiality-accent: #d4b3ff;
 
-  --color-integrity: #2ecc71;
-  --color-integrity-glow: rgba(46, 204, 113, 0.5);
-  --color-integrity-accent: #50fa7b;
+  --color-integrity: #00e676;
+  --color-integrity-glow: rgba(0, 230, 118, 0.5);
+  --color-integrity-accent: #98ffc8;
 
-  --color-availability: #3498db;
-  --color-availability-glow: rgba(52, 152, 219, 0.5);
-  --color-availability-accent: #8be9fd;
+  --color-availability: #00ccff;
+  --color-availability-glow: rgba(0, 204, 255, 0.5);
+  --color-availability-accent: #99ebff;
 
   /* Depth and layering */
-  --bg-primary: #0a1a1c;
-  --bg-secondary: #0d2024;
-  --bg-tertiary: #0f262c;
-  --card-bg: #051015;
-  --card-border: 1px solid rgba(0, 255, 136, 0.2);
-  --card-glow: 0 0 10px rgba(0, 255, 136, 0.15);
+  --bg-primary: #0c1825;
+  --bg-secondary: #0e1c2b;
+  --bg-tertiary: #12253a;
+  --card-bg: #0e1c2b;
+  --card-border: 1px solid rgba(0, 204, 255, 0.2);
+  --card-glow: 0 0 10px rgba(0, 204, 255, 0.15);
 }

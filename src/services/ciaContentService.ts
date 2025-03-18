@@ -1,1000 +1,749 @@
-import { RISK_LEVELS } from "../constants/riskConstants";
-import {
-  availabilityOptions,
-  confidentialityOptions,
-  EnhancedCIADetails,
-  integrityOptions,
-  ROI_ESTIMATES,
-} from "../hooks/useCIAOptions";
 import { SecurityLevel } from "../types/cia";
 import {
   BusinessImpactDetails,
   CIAComponentType,
+  CIADataProvider,
+  CIADetails,
+  ROIEstimate,
   ROIEstimatesMap,
-  ROIMetrics,
   TechnicalImplementationDetails,
+  isCIAComponentType,
 } from "../types/cia-services";
-import { normalizeSecurityLevel } from "../utils/securityLevelUtils";
+import { BusinessImpactService } from "./businessImpactService";
+import { ComplianceService } from "./complianceService";
+import { SecurityMetricsService } from "./securityMetricsService";
+import { SecurityResourceService } from "./securityResourceService";
+import { TechnicalImplementationService } from "./technicalImplementationService";
 
-// Interface definitions
-interface SecurityResource {
-  title: string;
-  description: string;
-  url: string;
-  category: string;
-  tags: string[];
-  relevanceScore: number;
-  type: string;
-}
-
-interface ComponentMetrics {
-  financialImpact?: string;
-  operationalImpact?: string;
-  reputationalImpact?: string;
-  regulatoryImpact?: string;
-  uptime?: string;
-  rto?: string;
-  rpo?: string;
-  mttr?: string;
-  keyImpact?: string;
-  metric?: string;
-}
-
-// Export the types - add these exports to maintain backward compatibility
-export type {
-  BusinessImpactDetails,
-  CIAComponentType,
-  ROIEstimatesMap,
-  ROIMetrics,
-  TechnicalImplementationDetails,
-} from "../types/cia-services";
-
-/**
- * Interface for CIA data source provider
- */
-export interface CIADataProvider {
-  availabilityOptions: Record<string, EnhancedCIADetails>;
-  integrityOptions: Record<string, EnhancedCIADetails>;
-  confidentialityOptions: Record<string, EnhancedCIADetails>;
-  roiEstimates: ROIEstimatesMap;
-
-  // Add additional utility function to reduce fallback logic
-  getDefaultSecurityIcon(level: SecurityLevel): string;
-  getDefaultValuePoints(level: SecurityLevel): string[];
-}
-
-/**
- * Default CIA data provider that uses imported options
- */
-const defaultDataProvider: CIADataProvider = {
+// Import default data provider
+import {
+  ROI_ESTIMATES,
   availabilityOptions,
-  integrityOptions,
   confidentialityOptions,
-  roiEstimates: ROI_ESTIMATES as unknown as ROIEstimatesMap,
-  getDefaultSecurityIcon: (level: SecurityLevel) => {
-    switch (level) {
-      case "Very High":
-        return "🛡️🛡️🛡️";
-      case "High":
-        return "🛡️🛡️";
-      case "Moderate":
-        return "🛡️";
-      case "Low":
-        return "🔒";
-      default:
-        return "⚠️";
-    }
-  },
-  getDefaultValuePoints: (level: SecurityLevel) => {
-    const defaultPoints = ["Provides basic security foundation"];
-    switch (level) {
-      case "Very High":
-        return [
-          "Maximum security value with comprehensive protection",
-          "Enables business in highly regulated industries",
-          "Provides competitive advantage through superior security posture",
-          "Minimizes risk of data breaches and associated costs",
-          "Ensures regulatory compliance across major frameworks",
-        ];
-      case "High":
-        return [
-          "Strong security value with robust protection",
-          "Supports business in moderately regulated industries",
-          "Reduces risk of security incidents significantly",
-          "Protects sensitive data and critical operations",
-          "Meets requirements for most compliance frameworks",
-        ];
-      default:
-        return defaultPoints;
-    }
-  },
-};
+  integrityOptions,
+} from "../data/security";
 
 /**
- * Create a CIA content service with dependency injection
+ * Metrics for ROI assessment
  */
-export function createCIAContentService(
-  dataProvider: CIADataProvider = defaultDataProvider
-) {
-  /**
-   * Get the base options for a CIA component
-   */
-  function getCIAOptions(
-    component: CIAComponentType
-  ): Record<string, EnhancedCIADetails> {
-    // Fix return type
-    switch (component) {
-      case "availability":
-        return dataProvider.availabilityOptions;
-      case "integrity":
-        return dataProvider.integrityOptions;
-      case "confidentiality":
-        return dataProvider.confidentialityOptions;
-      default:
-        return {};
-    }
+export interface ROIMetrics {
+  value: string;
+  percentage: string;
+  description: string;
+}
+
+/**
+ * Format a currency value as a string
+ *
+ * @param value - The value to format
+ * @returns Formatted currency string
+ */
+function formatCurrency(value: number): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(value);
+}
+
+/**
+ * Convert a security level to ROI key format
+ *
+ * @param level - The security level
+ * @returns The ROI key (NONE, LOW, etc.)
+ */
+function securityLevelToROIKey(level: SecurityLevel): keyof ROIEstimatesMap {
+  const mapping: Record<SecurityLevel, keyof ROIEstimatesMap> = {
+    None: "NONE",
+    Low: "LOW",
+    Moderate: "MODERATE",
+    High: "HIGH",
+    "Very High": "VERY_HIGH",
+  };
+  return mapping[level] || "NONE";
+}
+
+/**
+ * Get ROI description for a security level
+ *
+ * @param level - Security level
+ * @returns ROI description
+ */
+function getROIDescription(level: SecurityLevel): string {
+  const descriptions: Record<SecurityLevel, string> = {
+    None: "No return on investment without security controls",
+    Low: "Basic return on security investment",
+    Moderate: "Moderate return on security investment",
+    High: "Strong return on security investment",
+    "Very High": "Maximum return on security investment",
+  };
+  return descriptions[level] || "Unknown ROI";
+}
+
+/**
+ * Get CIA options for a specific component
+ *
+ * @param component - Component type
+ * @returns Option mapping for the component
+ */
+export function getCIAOptions(
+  component: CIAComponentType
+): Record<SecurityLevel, CIADetails> {
+  switch (component) {
+    case "availability":
+      return availabilityOptions;
+    case "integrity":
+      return integrityOptions;
+    case "confidentiality":
+      return confidentialityOptions;
+    default:
+      // Return a properly typed empty object with default values for each security level
+      return {
+        None: createEmptyCIADetails(),
+        Low: createEmptyCIADetails(),
+        Moderate: createEmptyCIADetails(),
+        High: createEmptyCIADetails(),
+        "Very High": createEmptyCIADetails(),
+      };
+  }
+}
+
+/**
+ * Creates an empty CIADetails object with required fields
+ */
+function createEmptyCIADetails(): CIADetails {
+  return {
+    description: "",
+    technical: "",
+    businessImpact: "",
+    capex: 0,
+    opex: 0,
+    bg: "#ffffff",
+    text: "#000000",
+    recommendations: [],
+  };
+}
+
+/**
+ * Main service to provide CIA content and utilities throughout the application
+ *
+ * ## Business Perspective
+ *
+ * This service acts as a central hub for accessing security-related information
+ * across the CIA triad, providing consistent data and calculations for business
+ * impact analysis, technical implementations, and compliance requirements. 🔒
+ */
+export class CIAContentService {
+  private dataProvider: CIADataProvider;
+  private businessImpactService: BusinessImpactService;
+  private complianceService: ComplianceService;
+  private securityMetricsService: SecurityMetricsService;
+  private technicalImplementationService: TechnicalImplementationService;
+  private securityResourceService: SecurityResourceService;
+
+  constructor(dataProvider?: CIADataProvider) {
+    this.dataProvider = dataProvider || {
+      availabilityOptions,
+      integrityOptions,
+      confidentialityOptions,
+      roiEstimates: ROI_ESTIMATES,
+    };
+
+    // Initialize service instances
+    this.businessImpactService = new BusinessImpactService(this.dataProvider);
+    this.complianceService = new ComplianceService(this.dataProvider);
+    this.securityMetricsService = new SecurityMetricsService(this.dataProvider);
+    this.technicalImplementationService = new TechnicalImplementationService(
+      this.dataProvider
+    );
+    this.securityResourceService = new SecurityResourceService(
+      this.dataProvider
+    );
   }
 
   /**
-   * Get component details for a specific level with strong typing
+   * Get options data for a CIA component
    */
-  function getComponentDetails(
+  public getCIAOptions(
+    component: CIAComponentType
+  ): Record<SecurityLevel, CIADetails> {
+    if (component === "availability") {
+      return this.dataProvider.availabilityOptions;
+    } else if (component === "integrity") {
+      return this.dataProvider.integrityOptions;
+    } else if (component === "confidentiality") {
+      return this.dataProvider.confidentialityOptions;
+    }
+    return {
+      None: { 
+        description: "Invalid component",
+        technical: "Invalid component",
+        businessImpact: "Invalid component",
+        capex: 0,
+        opex: 0,
+        bg: "#ffffff",
+        text: "#000000",
+        recommendations: []
+      },
+      Low: {
+        description: "Invalid component",
+        technical: "Invalid component",
+        businessImpact: "Invalid component",
+        capex: 0,
+        opex: 0,
+        bg: "#ffffff",
+        text: "#000000",
+        recommendations: []
+      },
+      Moderate: {
+        description: "Invalid component",
+        technical: "Invalid component",
+        businessImpact: "Invalid component",
+        capex: 0,
+        opex: 0,
+        bg: "#ffffff",
+        text: "#000000",
+        recommendations: []
+      },
+      High: {
+        description: "Invalid component",
+        technical: "Invalid component",
+        businessImpact: "Invalid component", 
+        capex: 0,
+        opex: 0,
+        bg: "#ffffff",
+        text: "#000000",
+        recommendations: []
+      },
+      "Very High": {
+        description: "Invalid component",
+        technical: "Invalid component",
+        businessImpact: "Invalid component",
+        capex: 0,
+        opex: 0,
+        bg: "#ffffff",
+        text: "#000000",
+        recommendations: []
+      }
+    };
+  }
+
+  /**
+   * Get details for a specific component and security level
+   */
+  public getComponentDetails(
     component: CIAComponentType,
     level: SecurityLevel
-  ): EnhancedCIADetails | undefined {
-    // Fix return type
-    // Validate input parameters
-    if (!component || !level) {
+  ): CIADetails | undefined {
+    if (!isCIAComponentType(component)) {
       return undefined;
     }
 
-    const options = getCIAOptions(component);
+    const options = this.getCIAOptions(component);
+    if (!options || !options[level]) {
+      return undefined;
+    }
+
     return options[level];
   }
 
   /**
-   * Get detailed technical implementation information
+   * Get ROI estimate for a security level
    */
-  function getTechnicalImplementation(
-    component: CIAComponentType,
-    level: SecurityLevel | string
-  ): TechnicalImplementationDetails {
-    const normalizedLevel = normalizeSecurityLevel(level) as SecurityLevel;
+  public getROIEstimate(level: SecurityLevel): ROIEstimate {
+    const levelKey = level
+      .toUpperCase()
+      .replace(" ", "_") as keyof ROIEstimatesMap;
+    const estimate = this.dataProvider.roiEstimates[levelKey];
 
-    // Get component details from appropriate options object
-    let details: TechnicalImplementationDetails | undefined;
-
-    switch (component) {
-      case "confidentiality":
-        details =
-          confidentialityOptions[normalizedLevel]?.technicalImplementation;
-        break;
-      case "integrity":
-        details = integrityOptions[normalizedLevel]?.technicalImplementation;
-        break;
-      case "availability":
-        details = availabilityOptions[normalizedLevel]?.technicalImplementation;
-        break;
-    }
-
-    // Default implementation if no details found
-    if (!details) {
+    if (!estimate) {
       return {
-        description: `No technical implementation details available for ${normalizedLevel} ${component}`,
-        implementationSteps: ["Consider implementing basic security controls"],
-        effort: {
-          development: getDefaultDevelopmentEffort(normalizedLevel),
-          maintenance: getDefaultMaintenanceEffort(normalizedLevel),
-          expertise: getDefaultExpertiseLevel(normalizedLevel),
-        },
+        value: "Negative",
+        returnRate: "0%",
+        description: "No return on investment for security controls",
       };
     }
 
-    // Ensure we always have default values for missing fields
-    return {
-      description:
-        details.description ||
-        `Standard ${component} controls for ${normalizedLevel} security level`,
-      implementationSteps: details.implementationSteps || [],
-      effort: {
-        development:
-          details.effort?.development ||
-          getDefaultDevelopmentEffort(normalizedLevel),
-        maintenance:
-          details.effort?.maintenance ||
-          getDefaultMaintenanceEffort(normalizedLevel),
-        expertise:
-          details.effort?.expertise ||
-          getDefaultExpertiseLevel(normalizedLevel),
-      },
-      requirements: details.requirements || [],
-      technologies: details.technologies || [],
-    };
+    return estimate;
   }
 
   /**
-   * Gets default development effort based on security level
+   * Get ROI estimates for a specific security level
    */
-  function getDefaultDevelopmentEffort(level: SecurityLevel): string {
-    switch (level) {
-      case "None":
-        return "None";
-      case "Low":
-        return "Days (1-5)";
-      case "Moderate":
-        return "Weeks (2-4)";
-      case "High":
-        return "Months (1-3)";
-      case "Very High":
-        return "Months (3+)";
-      default:
-        return "Not specified";
-    }
+  public getROIEstimates(level: SecurityLevel) {
+    return this.getROIEstimate(level);
   }
 
   /**
-   * Gets default maintenance effort based on security level
+   * Get overall ROI estimates map
    */
-  function getDefaultMaintenanceEffort(level: SecurityLevel): string {
-    switch (level) {
-      case "None":
-        return "None";
-      case "Low":
-        return "Minimal (quarterly review)";
-      case "Moderate":
-        return "Regular (monthly review)";
-      case "High":
-        return "Significant (biweekly monitoring)";
-      case "Very High":
-        return "Extensive (continuous monitoring)";
-      default:
-        return "Not specified";
-    }
+  public getAllROIEstimates(): ROIEstimatesMap {
+    return this.dataProvider.roiEstimates;
   }
 
   /**
-   * Gets default expertise level based on security level
+   * Get the business impact for a component and security level
    */
-  function getDefaultExpertiseLevel(level: SecurityLevel): string {
-    switch (level) {
-      case "None":
-        return "None";
-      case "Low":
-        return "Basic security knowledge";
-      case "Moderate":
-        return "Security professional";
-      case "High":
-        return "Security specialist";
-      case "Very High":
-        return "Security expert team";
-      default:
-        return "Not specified";
-    }
-  }
-
-  /**
-   * Get comprehensive business impact details
-   */
-  function getBusinessImpact(
+  public getBusinessImpact(
     component: CIAComponentType,
     level: SecurityLevel
   ): BusinessImpactDetails {
-    const details = getComponentDetails(component, level);
-
-    // Default response if no details found
-    if (!details) {
-      return {
-        summary: "No business impact details available",
-        financial: {
-          description: "Financial impact not specified",
-          riskLevel: RISK_LEVELS.UNKNOWN,
-        },
-        operational: {
-          description: "Operational impact not specified",
-          riskLevel: RISK_LEVELS.UNKNOWN,
-        },
-      };
-    }
-
-    // Extract impact details from businessImpactDetails if available
-    const impactDetails = details.businessImpactDetails || {};
-
-    // Return structured business impact
-    return {
-      summary:
-        details.businessImpact ||
-        `Standard ${level} ${component} security impact`,
-      financial: {
-        description:
-          impactDetails.financialImpact?.description ||
-          "Financial impact not specified",
-        riskLevel:
-          impactDetails.financialImpact?.riskLevel || RISK_LEVELS.UNKNOWN,
-        annualRevenueLoss: impactDetails.financialImpact?.annualRevenueLoss,
-      },
-      operational: {
-        description:
-          impactDetails.operationalImpact?.description ||
-          "Operational impact not specified",
-        riskLevel:
-          impactDetails.operationalImpact?.riskLevel || RISK_LEVELS.UNKNOWN,
-        meanTimeToRecover: impactDetails.operationalImpact?.meanTimeToRecover,
-      },
-      reputational: impactDetails.reputationalImpact && {
-        description: impactDetails.reputationalImpact.description,
-        riskLevel:
-          impactDetails.reputationalImpact.riskLevel || RISK_LEVELS.UNKNOWN,
-      },
-      strategic: impactDetails.strategic && {
-        description: impactDetails.strategic.description,
-        riskLevel: impactDetails.strategic.riskLevel || RISK_LEVELS.UNKNOWN,
-        competitiveAdvantage: undefined,
-      },
-      regulatory: impactDetails.regulatory && {
-        description: impactDetails.regulatory.description,
-        riskLevel: impactDetails.regulatory.riskLevel || RISK_LEVELS.UNKNOWN,
-        complianceImpact: undefined,
-      },
-    };
+    return this.businessImpactService.getBusinessImpact(component, level);
   }
 
   /**
-   * Get detailed component description with enhanced type safety
+   * Get technical implementation details for a component and security level
    */
-  function getDetailedDescription(
+  public getTechnicalImplementation(
     component: CIAComponentType,
     level: SecurityLevel
-  ): string {
-    // Validate input parameters
-    if (!component || !level) {
-      return "Invalid component or security level specified";
-    }
-
-    const details = getComponentDetails(component, level);
-    return details?.description || `${level} ${component} controls`;
-  }
-
-  /**
-   * Get business perspective information for a component and level
-   */
-  function getBusinessPerspective(
-    component: CIAComponentType,
-    level: SecurityLevel
-  ): string {
-    const details = getComponentDetails(component, level);
-    return (
-      details?.businessPerspective ||
-      `No business perspective available for ${level} ${component}`
+  ): TechnicalImplementationDetails {
+    return this.technicalImplementationService.getTechnicalImplementation(
+      component,
+      level
     );
   }
 
   /**
-   * Get recommendations for a specific component and level
-   * Always returns a string array, even when no recommendations are found
+   * Get component implementation details
    */
-  function getRecommendations(
+  public getComponentImplementationDetails(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): TechnicalImplementationDetails {
+    return this.technicalImplementationService.getComponentImplementationDetails(
+      component,
+      level
+    );
+  }
+
+  /**
+   * Get business impact description
+   */
+  public getBusinessImpactDescription(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): string {
+    return this.businessImpactService.getBusinessImpactDescription(
+      component,
+      level
+    );
+  }
+
+  /**
+   * Get technical description
+   */
+  public getTechnicalDescription(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): string {
+    return this.technicalImplementationService.getTechnicalDescription(
+      component,
+      level
+    );
+  }
+
+  /**
+   * Get detailed description
+   */
+  public getDetailedDescription(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): BusinessImpactDetails {
+    // Get the impact from the business impact service
+    if (this.businessImpactService) {
+      const impact = this.businessImpactService.getBusinessImpact(component, level);
+      return impact;
+    }
+    // Return an empty object that satisfies the interface if the service is not available
+    return {
+      summary: "",
+      financial: { description: "", riskLevel: "" },
+      operational: { description: "", riskLevel: "" },
+      reputational: { description: "", riskLevel: "" }
+    };
+  }
+
+  /**
+   * Get recommendations
+   */
+  public getRecommendations(
     component: CIAComponentType,
     level: SecurityLevel
   ): string[] {
-    const details = getComponentDetails(component, level);
-
-    // If we have recommendations, return them
-    if (details?.recommendations && Array.isArray(details.recommendations)) {
-      return details.recommendations;
-    }
-
-    // Final fallback - empty array
-    return [];
-  }
-
-  /**
-   * Get ROI information for a security level with proper type handling
-   */
-  function getROIEstimates(level: SecurityLevel): ROIMetrics {
-    const normalizedLevel = level.toUpperCase().replace(/\s+/g, "_");
-
-    // Create a safer default ROI metrics object
-    const defaultROI: ROIMetrics = {
-      returnRate: "0%",
-      description: "No ROI data available",
-      potentialSavings: "N/A",
-      breakEvenPeriod: "N/A",
-    };
-
-    // Use type assertion only after checking if the key exists
-    const availableKeys = Object.keys(dataProvider.roiEstimates);
-    const key = availableKeys.includes(normalizedLevel)
-      ? normalizedLevel
-      : "NONE";
-
-    // Use a type assertion here to fix the index signature error
-    return (
-      dataProvider.roiEstimates[key as keyof ROIEstimatesMap] ?? defaultROI
+    return this.technicalImplementationService.getRecommendations(
+      component,
+      level
     );
   }
 
   /**
-   * Calculate ROI based on security levels with improved type safety
+   * Calculate ROI
    */
-  function calculateRoi(
-    availabilityLevel: SecurityLevel,
-    integrityLevel: SecurityLevel,
-    confidentialityLevel: SecurityLevel
-  ): string {
-    // Define valid security levels
-    const levels: readonly SecurityLevel[] = [
-      "None",
-      "Low",
-      "Moderate",
-      "High",
-      "Very High",
-    ];
+  public calculateRoi(
+    level: SecurityLevel,
+    implementationCost: number
+  ): ROIMetrics {
+    // Get the ROI percentage from the estimate
+    const roiEstimate = this.getROIEstimates(level);
+    const roiPercentage =
+      parseInt(roiEstimate.returnRate.replace("%", ""), 10) || 0;
 
-    // Safely handle potentially invalid levels
-    const safeGetIndex = (level: SecurityLevel): number => {
-      const index = levels.indexOf(level);
-      return index >= 0 ? index : 0; // Default to 0 (None) if level is invalid
+    // Calculate the absolute ROI value
+    const roiValue =
+      implementationCost > 0 ? implementationCost * (roiPercentage / 100) : 0;
+
+    // Return the metrics object
+    return {
+      value: formatCurrency(roiValue),
+      percentage: `${roiPercentage}%`,
+      description: getROIDescription(level),
     };
-
-    const availIdx = safeGetIndex(availabilityLevel);
-    const integrityIdx = safeGetIndex(integrityLevel);
-    const confidentialityIdx = safeGetIndex(confidentialityLevel);
-
-    const avgLevel = Math.round(
-      (availIdx + integrityIdx + confidentialityIdx) / 3
-    );
-    const baseRoi = 100 + avgLevel * 75; // None: 100%, Low: 175%, Moderate: 250%, etc.
-
-    return `${baseRoi}%`;
   }
 
   /**
-   * Get combined metrics for a security profile
+   * Get security metrics
    */
-  function getSecurityMetrics(
+  public getSecurityMetrics(
     availabilityLevel: SecurityLevel,
-    integrityLevel: SecurityLevel,
-    confidentialityLevel: SecurityLevel
+    integrityLevel: SecurityLevel = availabilityLevel,
+    confidentialityLevel: SecurityLevel = availabilityLevel
   ) {
-    const availDetail = getComponentDetails("availability", availabilityLevel);
-    const integrityDetail = getComponentDetails("integrity", integrityLevel);
-    const confidentialityDetail = getComponentDetails(
-      "confidentiality",
-      confidentialityLevel
-    );
-
-    const totalCapex =
-      (availDetail?.capex || 0) +
-      (integrityDetail?.capex || 0) +
-      (confidentialityDetail?.capex || 0);
-
-    const totalOpex =
-      (availDetail?.opex || 0) +
-      (integrityDetail?.opex || 0) +
-      (confidentialityDetail?.opex || 0);
-
-    return {
-      totalCapex,
-      totalOpex,
-      capexEstimate: `$${totalCapex * 5000}`,
-      opexEstimate: `$${totalOpex * 2000}/year`,
-      isSmallSolution: totalCapex <= 60,
-      roi: calculateRoi(
-        availabilityLevel,
-        integrityLevel,
-        confidentialityLevel
-      ),
-    };
-  }
-
-  /**
-   * Get compliance status based on CIA security levels
-   */
-  function getComplianceStatus(
-    availabilityLevel: SecurityLevel,
-    integrityLevel: SecurityLevel,
-    confidentialityLevel: SecurityLevel
-  ): {
-    compliantFrameworks: string[];
-    partiallyCompliantFrameworks: string[];
-    nonCompliantFrameworks: string[];
-    requirements?: string[];
-    remediationSteps?: string[];
-  } {
-    const levelValues = {
-      None: 0,
-      Low: 1,
-      Moderate: 2,
-      High: 3,
-      "Very High": 4,
-    };
-
-    const availValue = levelValues[availabilityLevel];
-    const integValue = levelValues[integrityLevel];
-    const confidValue = levelValues[confidentialityLevel];
-
-    // Use eslint-disable for unused totalScore
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const totalScore = availValue + integValue + confidValue;
-
-    // Determine compliance status based on total score
-    let compliantFrameworks: string[] = [];
-    let partiallyCompliantFrameworks: string[] = [];
-    let nonCompliantFrameworks: string[] = [];
-
-    // SOC2 compliance - requires moderate security in all areas
-    if (availValue >= 2 && integValue >= 2 && confidValue >= 2) {
-      compliantFrameworks.push("SOC2");
-    } else if (availValue >= 1 && integValue >= 1 && confidValue >= 1) {
-      partiallyCompliantFrameworks.push("SOC2");
-    } else {
-      nonCompliantFrameworks.push("SOC2");
-    }
-
-    // ISO27001 compliance - requires high security in at least one area
-    if (availValue >= 3 || integValue >= 3 || confidValue >= 3) {
-      compliantFrameworks.push("ISO27001");
-    } else if (availValue >= 2 && integValue >= 2 && confidValue >= 2) {
-      partiallyCompliantFrameworks.push("ISO27001");
-    } else {
-      nonCompliantFrameworks.push("ISO27001");
-    }
-
-    // PCI DSS - heavily focused on confidentiality
-    if (confidValue >= 3 && integValue >= 2) {
-      compliantFrameworks.push("PCI_DSS");
-    } else if (confidValue >= 2) {
-      partiallyCompliantFrameworks.push("PCI_DSS");
-    } else {
-      nonCompliantFrameworks.push("PCI_DSS");
-    }
-
-    // HIPAA - requires high on confidentiality and moderate on others
-    if (confidValue >= 3 && availValue >= 2 && integValue >= 2) {
-      compliantFrameworks.push("HIPAA");
-    } else if (confidValue >= 2 && availValue >= 1 && integValue >= 1) {
-      partiallyCompliantFrameworks.push("HIPAA");
-    } else {
-      nonCompliantFrameworks.push("HIPAA");
-    }
-
-    // NIST 800-53 High - requires high or very high on all
-    if (availValue >= 3 && integValue >= 3 && confidValue >= 3) {
-      compliantFrameworks.push("NIST");
-    } else if (availValue >= 2 && integValue >= 2 && confidValue >= 2) {
-      partiallyCompliantFrameworks.push("NIST");
-    } else {
-      nonCompliantFrameworks.push("NIST");
-    }
-
-    // Generate requirements and remediation steps
-    const requirements = generateRequirements(compliantFrameworks);
-    const remediationSteps = generateRemediationSteps(
-      partiallyCompliantFrameworks,
-      nonCompliantFrameworks
-    );
-
-    return {
-      compliantFrameworks,
-      partiallyCompliantFrameworks,
-      nonCompliantFrameworks,
-      requirements,
-      remediationSteps,
-    };
-  }
-
-  /**
-   * Generate compliance requirements based on compliant frameworks
-   */
-  function generateRequirements(compliantFrameworks: string[]): string[] {
-    const requirements: string[] = [];
-
-    if (compliantFrameworks.includes("SOC2")) {
-      requirements.push("Logical access controls");
-      requirements.push("Change management processes");
-    }
-
-    if (compliantFrameworks.includes("ISO27001")) {
-      requirements.push("Risk assessment framework");
-      requirements.push("Security incident management");
-    }
-
-    if (compliantFrameworks.includes("PCI_DSS")) {
-      requirements.push("Data encryption");
-      requirements.push("Network monitoring");
-      requirements.push("Regular vulnerability scanning");
-    }
-
-    if (compliantFrameworks.includes("HIPAA")) {
-      requirements.push("Protected health information safeguards");
-      requirements.push("Breach notification protocols");
-    }
-
-    if (compliantFrameworks.includes("NIST")) {
-      requirements.push("Continuous monitoring");
-      requirements.push("Comprehensive documentation");
-      requirements.push("Strict access controls");
-    }
-
-    return requirements;
-  }
-
-  /**
-   * Generate remediation steps for non-compliant frameworks
-   */
-  function generateRemediationSteps(
-    partiallyCompliantFrameworks: string[],
-    nonCompliantFrameworks: string[]
-  ): string[] {
-    const steps: string[] = [];
-
-    // Add steps for partially compliant frameworks
-    if (partiallyCompliantFrameworks.includes("SOC2")) {
-      steps.push("Implement additional access controls");
-    }
-
-    if (partiallyCompliantFrameworks.includes("ISO27001")) {
-      steps.push("Develop and document risk assessment framework");
-    }
-
-    // Add steps for non-compliant frameworks
-    if (nonCompliantFrameworks.includes("PCI_DSS")) {
-      steps.push("Implement encryption for sensitive data");
-      steps.push("Establish network segmentation");
-    }
-
-    if (nonCompliantFrameworks.includes("HIPAA")) {
-      steps.push("Develop PHI handling procedures");
-      steps.push("Implement breach notification process");
-    }
-
-    if (nonCompliantFrameworks.includes("NIST")) {
-      steps.push("Implement continuous monitoring solution");
-      steps.push("Develop comprehensive security documentation");
-    }
-
-    return steps;
-  }
-
-  /**
-   * Get impact metrics for a given CIA component and security level
-   */
-  const getComponentMetrics = (
-    component: CIAComponentType,
-    level: SecurityLevel
-  ): ComponentMetrics => {
-    const details = getComponentDetails(component, level);
-
-    // Handle regulatory impact specially since the path might be different
-    let regulatoryImpactDesc = "";
-    if (
-      details?.businessImpactDetails &&
-      "regulatory" in details.businessImpactDetails
-    ) {
-      const regulatory = details.businessImpactDetails.regulatory;
-      regulatoryImpactDesc = regulatory?.description || "";
-    }
-
-    return {
-      financialImpact:
-        details?.businessImpactDetails?.financialImpact?.description,
-      operationalImpact:
-        details?.businessImpactDetails?.operationalImpact?.description,
-      reputationalImpact:
-        details?.businessImpactDetails?.reputationalImpact?.description,
-      regulatoryImpact: regulatoryImpactDesc,
-      uptime: details?.uptime,
-      rto: details?.rto,
-      rpo: details?.rpo,
-      mttr: details?.mttr,
-      keyImpact: details?.keyImpact || determineKeyImpact(component, level),
-      metric: details?.metric || determineMetric(component, level),
-    };
-  };
-
-  /**
-   * Determine a key impact message for each component and level
-   */
-  function determineKeyImpact(
-    component: CIAComponentType,
-    level: SecurityLevel
-  ): string {
-    if (component === "availability") {
-      switch (level) {
-        case "None":
-          return "No guaranteed uptime";
-        case "Low":
-          return "Basic availability";
-        case "Moderate":
-          return "Standard business hours";
-        case "High":
-          return "High availability";
-        case "Very High":
-          return "Continuous availability";
-        default:
-          return "Unknown impact";
-      }
-    } else if (component === "integrity") {
-      switch (level) {
-        case "None":
-          return "No data integrity";
-        case "Low":
-          return "Basic integrity checks";
-        case "Moderate":
-          return "Standard validation";
-        case "High":
-          return "Advanced integrity controls";
-        case "Very High":
-          return "Complete data integrity";
-        default:
-          return "Unknown impact";
-      }
-    } else if (component === "confidentiality") {
-      switch (level) {
-        case "None":
-          return "Public information only";
-        case "Low":
-          return "Limited protection";
-        case "Moderate":
-          return "Business confidential";
-        case "High":
-          return "Sensitive information";
-        case "Very High":
-          return "Highly classified";
-        default:
-          return "Unknown impact";
-      }
-    }
-    return "Unknown component";
-  }
-
-  /**
-   * Determine a metric for each component and level
-   */
-  function determineMetric(
-    component: CIAComponentType,
-    level: SecurityLevel
-  ): string {
-    if (component === "availability") {
-      switch (level) {
-        case "None":
-          return "< 90% uptime";
-        case "Low":
-          return "95% uptime";
-        case "Moderate":
-          return "99% uptime";
-        case "High":
-          return "99.9% uptime";
-        case "Very High":
-          return "99.999% uptime";
-        default:
-          return "Unknown metric";
-      }
-    } else if (component === "integrity") {
-      switch (level) {
-        case "None":
-          return "No validation";
-        case "Low":
-          return "Basic checksums";
-        case "Moderate":
-          return "Hash validation";
-        case "High":
-          return "Digital signatures";
-        case "Very High":
-          return "Blockchain verification";
-        default:
-          return "Unknown metric";
-      }
-    } else if (component === "confidentiality") {
-      switch (level) {
-        case "None":
-          return "No encryption";
-        case "Low":
-          return "Basic encryption";
-        case "Moderate":
-          return "Standard encryption";
-        case "High":
-          return "Advanced encryption";
-        case "Very High":
-          return "Quantum-safe encryption";
-        default:
-          return "Unknown metric";
-      }
-    }
-    return "Unknown component";
-  }
-
-  /**
-   * Get combined impact metrics for all CIA components
-   */
-  const getImpactMetrics = (
-    availabilityLevel: SecurityLevel,
-    integrityLevel: SecurityLevel,
-    confidentialityLevel: SecurityLevel
-  ): Record<string, ComponentMetrics> => {
-    return {
-      availability: getComponentMetrics("availability", availabilityLevel),
-      integrity: getComponentMetrics("integrity", integrityLevel),
-      confidentiality: getComponentMetrics(
-        "confidentiality",
-        confidentialityLevel
-      ),
-      // Add aggregate metrics as strings to avoid type issues
-      businessImpact: determineBusinessImpact(
-        availabilityLevel,
-        integrityLevel,
-        confidentialityLevel
-      ) as unknown as ComponentMetrics,
-      technicalImpact: determineTechnicalImpact(
-        availabilityLevel,
-        integrityLevel,
-        confidentialityLevel
-      ) as unknown as ComponentMetrics,
-      regulatoryImpact: determineRegulatoryImpact(
-        availabilityLevel,
-        integrityLevel,
-        confidentialityLevel
-      ) as unknown as ComponentMetrics,
-      securityScore: calculateSecurityScore(
-        availabilityLevel,
-        integrityLevel,
-        confidentialityLevel
-      ) as unknown as ComponentMetrics,
-      complianceScore: calculateComplianceScore(
-        availabilityLevel,
-        integrityLevel,
-        confidentialityLevel
-      ) as unknown as ComponentMetrics,
-      costEffectivenessScore: calculateCostEffectivenessScore(
-        availabilityLevel,
-        integrityLevel,
-        confidentialityLevel
-      ) as unknown as ComponentMetrics,
-    };
-  };
-
-  // Helper functions for impact metrics
-  function determineBusinessImpact(
-    a: SecurityLevel,
-    i: SecurityLevel,
-    c: SecurityLevel
-  ): string {
-    // Use parameters to show intent
-    console.log(`Calculating business impact for A=${a}, I=${i}, C=${c}`);
-    return "Business impact assessment";
-  }
-
-  function determineTechnicalImpact(
-    a: SecurityLevel,
-    i: SecurityLevel,
-    c: SecurityLevel
-  ): string {
-    // Use parameters to show intent
-    console.log(`Technical impact analysis using A=${a}, I=${i}, C=${c}`);
-    return "Technical impact assessment";
-  }
-
-  function determineRegulatoryImpact(
-    a: SecurityLevel,
-    i: SecurityLevel,
-    c: SecurityLevel
-  ): string {
-    // Use parameters to show intent
-    console.log(`Regulatory impact analysis using A=${a}, I=${i}, C=${c}`);
-    return "Regulatory impact assessment";
-  }
-
-  function calculateSecurityScore(
-    a: SecurityLevel,
-    i: SecurityLevel,
-    c: SecurityLevel
-  ): number {
-    const levelToScore = (level: SecurityLevel): number => {
-      switch (level) {
-        case "None":
-          return 0;
-        case "Low":
-          return 25;
-        case "Moderate":
-          return 50;
-        case "High":
-          return 75;
-        case "Very High":
-          return 100;
-      }
-    };
-
-    return Math.round(
-      (levelToScore(a) + levelToScore(i) + levelToScore(c)) / 3
-    );
-  }
-
-  function calculateComplianceScore(
-    a: SecurityLevel,
-    i: SecurityLevel,
-    c: SecurityLevel
-  ): number {
-    return calculateSecurityScore(a, i, c) - 10; // Just for demonstration
-  }
-
-  function calculateCostEffectivenessScore(
-    a: SecurityLevel,
-    i: SecurityLevel,
-    c: SecurityLevel
-  ): number {
-    return 100 - calculateSecurityScore(a, i, c); // Inverse correlation for demo
-  }
-
-  /**
-   * Get security resources based on security levels
-   */
-  const getSecurityResources = (
-    availabilityLevel: SecurityLevel,
-    integrityLevel: SecurityLevel,
-    confidentialityLevel: SecurityLevel,
-    securityLevel: SecurityLevel
-  ): SecurityResource[] => {
-    // Use the parameters for resource filtering
-    const securityScore = calculateSecurityScore(
+    return this.securityMetricsService.getSecurityMetrics(
       availabilityLevel,
       integrityLevel,
       confidentialityLevel
     );
+  }
 
-    // Return resources filtered by security score
-    return [
-      {
-        title: `${securityLevel} Security Resource`,
-        description: `Resource for ${availabilityLevel} availability, ${integrityLevel} integrity, and ${confidentialityLevel} confidentiality`,
-        url: "https://example.com/security-resource",
-        category: "Framework",
-        tags: ["framework", "guidelines", "risk-management"],
-        relevanceScore: securityScore,
-        type: "Documentation",
-      },
-      // ...more resources...
+  /**
+   * Get compliance status
+   */
+  public getComplianceStatus(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ) {
+    // Call the compliance service with all three parameters
+    return this.complianceService.getComplianceStatus(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
+  }
+
+  /**
+   * Get component metrics
+   */
+  public getComponentMetrics(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ) {
+    return this.securityMetricsService.getComponentMetrics(component, level);
+  }
+
+  /**
+   * Get impact metrics
+   */
+  public getImpactMetrics(component: CIAComponentType, level: SecurityLevel) {
+    return this.securityMetricsService.getImpactMetrics(component, level);
+  }
+
+  /**
+   * Get security resources
+   */
+  public getSecurityResources(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ) {
+    return this.securityResourceService.getSecurityResources(component, level);
+  }
+
+  /**
+   * Get security level description
+   */
+  public getSecurityLevelDescription(level: SecurityLevel) {
+    return this.securityMetricsService.getSecurityLevelDescription(level);
+  }
+
+  /**
+   * Get protection level
+   */
+  public getProtectionLevel(level: SecurityLevel) {
+    return this.securityMetricsService.getProtectionLevel(level);
+  }
+
+  /**
+   * Calculate business impact level based on security levels
+   * 
+   * @param availabilityLevel - Availability security level
+   * @param integrityLevel - Integrity security level (optional, defaults to availabilityLevel)
+   * @param confidentialityLevel - Confidentiality security level (optional, defaults to availabilityLevel)
+   * @returns Business impact level description
+   */
+  public calculateBusinessImpactLevel(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel = availabilityLevel,
+    confidentialityLevel: SecurityLevel = availabilityLevel
+  ): string {
+    // Call the business impact service with all three parameters
+    return this.businessImpactService.calculateBusinessImpactLevel(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
+  }
+
+  /**
+   * Get risk badge variant
+   */
+  public getRiskBadgeVariant(riskLevel: string) {
+    return this.securityMetricsService.getRiskBadgeVariant(riskLevel);
+  }
+
+  /**
+   * Get category icon
+   */
+  public getCategoryIcon(category: string) {
+    return this.businessImpactService.getCategoryIcon(category);
+  }
+
+  /**
+   * Get value points
+   */
+  public getValuePoints(level: SecurityLevel) {
+    return this.securityResourceService.getValuePoints(level);
+  }
+
+  /**
+   * Get implementation considerations for the given CIA levels.
+   * 
+   * @param levels - Tuple containing exactly three security levels in order: [availability, integrity, confidentiality]
+   * @returns String with implementation considerations
+   */
+  public getImplementationConsiderations(levels: [SecurityLevel, SecurityLevel, SecurityLevel]): string {
+    // Validate parameters
+    if (!levels || !Array.isArray(levels) || levels.length !== 3) {
+      return "Invalid security levels provided. Please provide an array with exactly three security levels.";
+    }
+    
+    // Delegate to the technical implementation service
+    return this.technicalImplementationService.getImplementationConsiderations(levels);
+  }
+
+  /**
+   * Get security icon
+   */
+  public getSecurityIcon(level: SecurityLevel) {
+    return this.securityMetricsService.getSecurityIcon(level);
+  }
+
+  /**
+   * Get compliant frameworks
+   */
+  public getCompliantFrameworks(level: SecurityLevel) {
+    return this.complianceService.getCompliantFrameworks(level);
+  }
+
+  /**
+   * Get framework description
+   */
+  public getFrameworkDescription(framework: string) {
+    return this.complianceService.getFrameworkDescription(framework);
+  }
+
+  /**
+   * Get framework required level for a component
+   */
+  public getFrameworkRequiredLevel(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): string {
+    // Use all security levels for a more comprehensive evaluation
+    const availability = level;
+    const integrity = level;
+    const confidentiality = level;
+    
+    const status = this.complianceService.getComplianceStatus(
+      availability,
+      integrity,
+      confidentiality
+    );
+
+    if (status.compliantFrameworks.length > 0 && status.nonCompliantFrameworks.length === 0) {
+      return `Current ${level} level meets requirements for most frameworks`;
+    } else if (status.partiallyCompliantFrameworks.length > 0) {
+      return `Current ${level} level partially meets requirements; consider upgrading to ${
+        level === "Low" ? "Moderate" : "High"
+      } for full compliance`;
+    } else {
+      return `Current ${level} level is insufficient; upgrade to at least ${
+        level === "None" ? "Low" : level === "Low" ? "Moderate" : "High"
+      } for basic compliance`;
+    }
+  }
+
+  /**
+   * Get implementation time
+   */
+  public getImplementationTime(level: SecurityLevel) {
+    return this.technicalImplementationService.getImplementationTime(level);
+  }
+
+  /**
+   * Get total implementation time for combined security levels
+   */
+  public getTotalImplementationTime(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): string {
+    // Convert individual implementation times to a rough time estimate
+    const timeMapping: Record<SecurityLevel, number> = {
+      None: 0,
+      Low: 2, // 2 weeks
+      Moderate: 6, // 6 weeks
+      High: 12, // 12 weeks
+      "Very High": 24, // 24 weeks
+    };
+
+    const totalWeeks =
+      timeMapping[availabilityLevel] +
+      timeMapping[integrityLevel] +
+      timeMapping[confidentialityLevel];
+
+    // Apply a reduction factor for parallel implementation (roughly 40% reduction)
+    const adjustedWeeks = Math.round(totalWeeks * 0.6);
+
+    if (adjustedWeeks <= 0) return "No implementation required";
+    if (adjustedWeeks <= 4) return `${adjustedWeeks} weeks`;
+    if (adjustedWeeks <= 12)
+      return `${Math.round(adjustedWeeks / 4)} to ${
+        Math.round(adjustedWeeks / 4) + 1
+      } months`;
+    return `${Math.round(adjustedWeeks / 4)} to ${
+      Math.round(adjustedWeeks / 4) + 2
+    } months`;
+  }
+
+  /**
+   * Get required expertise based on selected security levels
+   */
+  public getRequiredExpertise(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): string {
+    // Get maximum security level
+    const levels = [availabilityLevel, integrityLevel, confidentialityLevel];
+    const maxLevel = levels.sort((a, b) => {
+      const order = { None: 0, Low: 1, Moderate: 2, High: 3, "Very High": 4 };
+      return order[b as SecurityLevel] - order[a as SecurityLevel];
+    })[0];
+
+    // Return expertise based on maximum level
+    switch (maxLevel) {
+      case "None":
+        return "No special expertise required";
+      case "Low":
+        return "IT staff with basic security knowledge";
+      case "Moderate":
+        return "Security professional with domain expertise";
+      case "High":
+        return "Senior security engineer or architect";
+      case "Very High":
+        return "Expert security team with specialized skills";
+      default:
+        return "Unknown expertise level";
+    }
+  }
+
+  /**
+   * Get recommended implementation plan based on selected security levels
+   */
+  public getRecommendedImplementationPlan(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): string {
+    // Create a phased implementation plan based on current security levels
+    const phases = [];
+
+    // Phase 1: Implement the lowest hanging fruit
+    if (
+      availabilityLevel === "None" ||
+      integrityLevel === "None" ||
+      confidentialityLevel === "None"
+    ) {
+      phases.push(
+        "Phase 1: Implement basic security controls to eliminate 'None' security levels"
+      );
+    } else if (
+      availabilityLevel === "Low" ||
+      integrityLevel === "Low" ||
+      confidentialityLevel === "Low"
+    ) {
+      phases.push(
+        "Phase 1: Upgrade basic security controls from 'Low' to at least 'Moderate' level"
+      );
+    } else {
+      phases.push(
+        "Phase 1: Maintain current baseline security controls and perform regular security assessments"
+      );
+    }
+
+    // Phase 2: Focus on the most critical component with the lowest security level
+    const levels = [
+      { component: "Availability", level: availabilityLevel },
+      { component: "Integrity", level: integrityLevel },
+      { component: "Confidentiality", level: confidentialityLevel },
     ];
-  };
 
-  /**
-   * Helper functions and types for technical implementation details
-   */
+    // Sort to find the lowest security level
+    levels.sort((a, b) => {
+      const order = { None: 0, Low: 1, Moderate: 2, High: 3, "Very High": 4 };
+      return order[a.level as SecurityLevel] - order[b.level as SecurityLevel];
+    });
 
-  /**
-   * Technical implementation details for different security components
-   */
-  interface ComponentTechnicalDetails {
-    description: string;
-    implementationSteps: string[];
-    effort: {
-      development: string;
-      maintenance: string;
-      expertise: string;
-    };
+    const lowestComponent = levels[0];
+    if (lowestComponent.level !== "Very High") {
+      const targetLevel =
+        lowestComponent.level === "None"
+          ? "Low"
+          : lowestComponent.level === "Low"
+          ? "Moderate"
+          : lowestComponent.level === "Moderate"
+          ? "High"
+          : "Very High";
+
+      phases.push(
+        `Phase 2: Prioritize upgrading ${lowestComponent.component} controls to ${targetLevel} level`
+      );
+    }
+
+    // Phase 3: Long-term improvement plan
+    const highestNeeded = Math.min(
+      levels[levels.length - 1].level === "Very High" ? 4 : 3,
+      4
+    );
+    const highestLevel = ["None", "Low", "Moderate", "High", "Very High"][
+      highestNeeded
+    ];
+
+    phases.push(
+      `Phase 3: Develop a roadmap to systematically enhance all security controls to at least ${highestLevel} level`
+    );
+
+    return phases.join("\n\n");
   }
 
   /**
-   * Get security level description with meaningful context
+   * Get information sensitivity classification for a security level
+   *
+   * @param level Security level
+   * @returns Information sensitivity classification
    */
-  function getSecurityLevelDescription(level: SecurityLevel): string {
-    // Ideally, this would come from a shared definitions object in useCIAOptions
-    const descriptions: Record<SecurityLevel, string> = {
-      None: "No specific security controls applied. Suitable only for non-sensitive public information.",
-      Low: "Basic security controls for internal use. Minimal protection against casual threats.",
-      Moderate:
-        "Standard security controls suitable for business data. Balanced protection against common threats.",
-      High: "Enhanced security controls for sensitive data. Robust protection against sophisticated threats.",
-      "Very High":
-        "Maximum security controls for critical data. Comprehensive protection against advanced threats.",
-    };
-
-    return descriptions[level] || `${level} security level`;
-  }
-
-  /**
-   * Get information sensitivity classification based on confidentiality level
-   */
-  function getInformationSensitivity(level: SecurityLevel): string {
+  getInformationSensitivity(level: SecurityLevel): string {
     switch (level) {
       case "None":
         return "Public Data";
@@ -1010,398 +759,170 @@ export function createCIAContentService(
         return "Unknown";
     }
   }
+}
 
-  /**
-   * Get protection level description based on confidentiality level
-   */
-  function getProtectionLevel(level: SecurityLevel): string {
-    switch (level) {
-      case "None":
-        return "No Protection";
-      case "Low":
-        return "Basic Protection";
-      case "Moderate":
-        return "Standard Protection";
-      case "High":
-        return "Enhanced Protection";
-      case "Very High":
-        return "Maximum Protection";
-      default:
-        return "Unknown";
-    }
+// Create a default service instance
+const defaultService = new CIAContentService();
+
+// Export default service instance
+export default defaultService;
+
+/**
+ * Create a CIA content service with the specified data provider
+ *
+ * @param dataProvider - Optional data provider for CIA options
+ * @returns A new CIAContentService instance
+ */
+export function createCIAContentService(
+  dataProvider?: CIADataProvider
+): CIAContentService {
+  // Use provided data provider or create a default one
+  const provider: CIADataProvider = dataProvider || {
+    availabilityOptions: availabilityOptions,
+    integrityOptions: integrityOptions,
+    confidentialityOptions: confidentialityOptions,
+    roiEstimates: ROI_ESTIMATES,
+    getDefaultSecurityIcon: getDefaultSecurityIconImpl,
+    getDefaultValuePoints: getDefaultValuePointsImpl,
+  };
+
+  // Create service instance
+  const service: CIAContentService = new CIAContentService(provider);
+
+  return service;
+}
+
+// Export helper functions for direct use
+export const getInformationSensitivity = (level: SecurityLevel): string => {
+  switch (level) {
+    case "None":
+      return "Public Data";
+    case "Low":
+      return "Internal Data";
+    case "Moderate":
+      return "Sensitive Data";
+    case "High":
+      return "Confidential Data";
+    case "Very High":
+      return "Restricted Data";
+    default:
+      return "Unknown";
   }
+};
 
-  /**
-   * Calculate business impact level based on CIA security levels
-   */
-  function calculateBusinessImpactLevel(
-    availLevel: SecurityLevel,
-    integrLevel: SecurityLevel,
-    confLevel: SecurityLevel
-  ): SecurityLevel {
-    const levels: SecurityLevel[] = [
-      "None",
-      "Low",
-      "Moderate",
-      "High",
-      "Very High",
-    ];
-    const availIndex = levels.indexOf(availLevel);
-    const integrIndex = levels.indexOf(integrLevel);
-    const confIndex = levels.indexOf(confLevel);
+export const getRiskBadgeVariant = defaultService.getRiskBadgeVariant;
+export const getValuePoints = defaultService.getValuePoints;
 
-    const avgIndex = Math.round((availIndex + integrIndex + confIndex) / 3);
-    return levels[avgIndex] || "Moderate";
-  }
+// Export for use with security ROI calculations
+export function getROIEstimate(level: SecurityLevel): ROIEstimate {
+  const roiEstimatesMap: ROIEstimatesMap = {
+    NONE: { returnRate: "0%", value: "Negative", description: "Negative ROI" },
+    LOW: { returnRate: "50%", value: "50%", description: "Low ROI" },
+    MODERATE: {
+      returnRate: "150%",
+      value: "150%",
+      description: "Moderate ROI",
+    },
+    HIGH: { returnRate: "250%", value: "250%", description: "High ROI" },
+    VERY_HIGH: {
+      returnRate: "400%",
+      value: "400%",
+      description: "Very High ROI",
+    },
+  };
 
-  /**
-   * Get appropriate badge variant based on risk level
-   */
-  function getRiskBadgeVariant(
-    riskLevel: string
-  ): "info" | "success" | "warning" | "error" | "neutral" {
-    const riskMap: Record<
-      string,
-      "info" | "success" | "warning" | "error" | "neutral"
-    > = {
-      Critical: "error",
-      High: "warning",
-      Medium: "info",
-      Low: "success",
-      Minimal: "success",
-    };
+  const key = securityLevelToROIKey(level);
+  return roiEstimatesMap[key];
+}
 
-    return riskMap[riskLevel] || "neutral";
-  }
+/**
+ * Calculate ROI metrics based on security level and implementation cost
+ */
+export function calculateROI(
+  level: SecurityLevel,
+  implementationCost: number
+): ROIMetrics {
+  // Get the ROI percentage from the estimate
+  const roiEstimate = getROIEstimate(level);
+  const roiPercentage =
+    parseInt(roiEstimate.returnRate.replace("%", ""), 10) || 0;
 
-  /**
-   * Get icon for business impact category
-   */
-  function getCategoryIcon(category: string): string {
-    const icons: Record<string, string> = {
-      FINANCIAL: "💰",
-      OPERATIONAL: "⚙️",
-      REPUTATIONAL: "🏆",
-      REGULATORY: "⚖️",
-      STRATEGIC: "🎯",
-      NEUTRAL: "📊",
-    };
+  // Calculate the absolute ROI value
+  const roiValue =
+    implementationCost > 0 ? implementationCost * (roiPercentage / 100) : 0;
 
-    const normalizedCategory = category.toUpperCase();
-    // Ensure we always return a string by using nullish coalescing with a default
-    return icons[normalizedCategory] ?? icons.NEUTRAL ?? "📊";
-  }
-
-  /**
-   * Get value points for a security level
-   */
-  function getValuePoints(level: SecurityLevel): string[] {
-    // Get component details for any component (just to check if valuePoints exists)
-    const availDetails = getComponentDetails("availability", level);
-
-    // If the component has valuePoints defined, use them
-    if (availDetails?.valuePoints && availDetails.valuePoints.length > 0) {
-      return availDetails.valuePoints;
-    }
-
-    // Use the provider's default implementation
-    return dataProvider.getDefaultValuePoints(level);
-  }
-
-  /**
-   * Get ROI estimate data for security level
-   */
-  function getROIEstimate(level: SecurityLevel): {
-    value: string;
-    returnRate: string; // Add returnRate to return type
-    description: string;
-  } {
-    switch (level) {
-      case "Very High":
-        return {
-          value: "5x+",
-          returnRate: "5x+", // Add returnRate with same value
-          description: "Maximum return with comprehensive security controls",
-        };
-      case "High":
-        return {
-          value: "3-5x",
-          returnRate: "3-5x", // Add returnRate with same value
-          description: "Strong return with robust security implementation",
-        };
-      case "Moderate":
-        return {
-          value: "2-3x",
-          returnRate: "2-3x", // Add returnRate with same value
-          description: "Good return with balanced security approach",
-        };
-      case "Low":
-        return {
-          value: "1-2x",
-          returnRate: "1-2x", // Add returnRate with same value
-          description: "Basic return with minimal security investment",
-        };
-      default:
-        return {
-          value: "Negative",
-          returnRate: "Negative", // Add returnRate with same value
-          description: "No return without security investment",
-        };
-    }
-  }
-
-  /**
-   * Get implementation considerations for a security level
-   */
-  function getImplementationConsiderations(level: SecurityLevel): string {
-    switch (level) {
-      case "Very High":
-        return "Implementation requires significant upfront investment but offers maximum long-term value through comprehensive risk reduction and regulatory compliance.";
-      case "High":
-        return "Balanced approach with substantial security benefits and reasonable implementation costs for most organizations with sensitive data or operations.";
-      case "Moderate":
-        return "Cost-effective implementation that provides standard security capabilities suitable for most business applications and moderate risk environments.";
-      case "Low":
-        return "Minimal implementation effort focused on essential security controls, appropriate for non-critical systems or limited budgets.";
-      default:
-        return "No security implementation considerations. Consider baseline security controls for any business system.";
-    }
-  }
-
-  /**
-   * Get technical implementation details for each component and level
-   */
-  function getComponentImplementationDetails(
-    component: CIAComponentType,
-    level: SecurityLevel
-  ): ComponentTechnicalDetails {
-    // Get component details from appropriate options
-    const details = getComponentDetails(component, level);
-
-    // Default values for effort
-    const defaultEffort = {
-      development: getDefaultDevelopmentEffort(level),
-      maintenance: getDefaultMaintenanceEffort(level),
-      expertise: getDefaultExpertiseLevel(level),
-    };
-
-    // Default implementation steps
-    const defaultSteps = ["Implement basic controls", "Document procedures"];
-
-    if (component === "availability") {
-      return {
-        description: details?.technical || "",
-        implementationSteps:
-          details?.technicalImplementation?.implementationSteps || defaultSteps,
-        effort: details?.technicalImplementation?.effort || defaultEffort,
-      };
-    }
-
-    if (component === "integrity") {
-      return {
-        description: details?.technical || "",
-        implementationSteps:
-          details?.technicalImplementation?.implementationSteps || defaultSteps,
-        effort: details?.technicalImplementation?.effort || defaultEffort,
-      };
-    }
-
-    if (component === "confidentiality") {
-      return {
-        description: details?.technical || "",
-        implementationSteps:
-          details?.technicalImplementation?.implementationSteps || defaultSteps,
-        effort: details?.technicalImplementation?.effort || defaultEffort,
-      };
-    }
-
-    // Default case
-    return {
-      description: `Technical implementation for ${level} ${component}`,
-      implementationSteps: defaultSteps,
-      effort: defaultEffort,
-    };
-  }
-
-  /**
-   * Get business impact description for a component and level
-   */
-  function getBusinessImpactDescription(
-    component: CIAComponentType,
-    level: SecurityLevel
-  ): string {
-    const details = getComponentDetails(component, level);
-    return (
-      details?.businessImpact ||
-      `${level} ${component} impact on business operations`
-    );
-  }
-
-  /**
-   * Get technical description for a component and level
-   */
-  function getTechnicalDescription(
-    component: CIAComponentType,
-    level: SecurityLevel
-  ): string {
-    const details = getComponentDetails(component, level);
-    return (
-      details?.technical || `${level} ${component} technical implementation`
-    );
-  }
-
-  /**
-   * Get security icon for a security level
-   */
-  function getSecurityIcon(level: SecurityLevel): string {
-    // Check if any component for this level has a securityIcon
-    const availDetails = getComponentDetails("availability", level);
-
-    if (availDetails?.securityIcon) {
-      return availDetails.securityIcon;
-    }
-
-    // Use the provider's default implementation
-    return dataProvider.getDefaultSecurityIcon(level);
-  }
-
-  /**
-   * Get compliant frameworks based on security levels
-   */
-  function getCompliantFrameworks(
-    availabilityLevel: SecurityLevel,
-    integrityLevel: SecurityLevel,
-    confidentialityLevel: SecurityLevel
-  ): string[] {
-    const complianceStatus = getComplianceStatus(
-      availabilityLevel,
-      integrityLevel,
-      confidentialityLevel
-    );
-
-    return complianceStatus.compliantFrameworks;
-  }
-
-  /**
-   * Get framework description for a specific compliance framework
-   */
-  function getFrameworkDescription(framework: string): string {
-    const frameworkDescriptions: Record<string, string> = {
-      SOC2: "System and Organization Controls 2 - Focuses on security, availability, processing integrity, confidentiality, and privacy",
-      ISO27001: "International standard for information security management",
-      PCI_DSS:
-        "Payment Card Industry Data Security Standard - Security standard for organizations handling credit cards",
-      HIPAA:
-        "Health Insurance Portability and Accountability Act - Standards for sensitive patient data protection",
-      NIST: "National Institute of Standards and Technology - Framework for improving critical infrastructure cybersecurity",
-      GDPR: "General Data Protection Regulation - EU data protection and privacy regulation",
-      CCPA: "California Consumer Privacy Act - Enhances privacy rights and consumer protection",
-    };
-
-    return (
-      frameworkDescriptions[framework] || `${framework} compliance framework`
-    );
-  }
-
-  /**
-   * Get implementation time estimate based on security levels
-   */
-  function getImplementationTime(
-    availabilityLevel: SecurityLevel,
-    integrityLevel: SecurityLevel,
-    confidentialityLevel: SecurityLevel
-  ): string {
-    const levelValues = {
-      None: 0,
-      Low: 1,
-      Moderate: 2,
-      High: 3,
-      "Very High": 4,
-    };
-
-    const availValue = levelValues[availabilityLevel];
-    const integValue = levelValues[integrityLevel];
-    const confidValue = levelValues[confidentialityLevel];
-
-    const totalScore = availValue + integValue + confidValue;
-
-    if (totalScore <= 2) return "1-2 weeks";
-    if (totalScore <= 5) return "2-4 weeks";
-    if (totalScore <= 8) return "1-3 months";
-    if (totalScore <= 10) return "3-6 months";
-    return "6+ months";
-  }
-
-  // Return the public service API
+  // Return the metrics object
   return {
-    getCIAOptions,
-    getComponentDetails,
-    getBusinessImpact,
-    getDetailedDescription,
-    getBusinessPerspective,
-    getRecommendations,
-    getROIEstimates,
-    getSecurityMetrics,
-    getComplianceStatus,
-    getComponentMetrics,
-    getImpactMetrics,
-    getSecurityResources,
-    getTechnicalImplementation,
-    getSecurityLevelDescription,
-    getInformationSensitivity,
-    getProtectionLevel,
-    calculateBusinessImpactLevel,
-    getRiskBadgeVariant,
-    getCategoryIcon,
-    getValuePoints,
-    getROIEstimate,
-    getImplementationConsiderations,
-    getComponentImplementationDetails,
-    getBusinessImpactDescription,
-    getTechnicalDescription,
-    getSecurityIcon,
-    getCompliantFrameworks,
-    getFrameworkDescription,
-    getImplementationTime,
+    value: formatCurrency(roiValue),
+    percentage: `${roiPercentage}%`,
+    description: getROIDescription(level),
   };
 }
 
-// Create a default instance of the service for backward compatibility
-const defaultService = createCIAContentService();
+/**
+ * Default implementation for getting security icon
+ */
+function getDefaultSecurityIconImpl(level: SecurityLevel): string {
+  switch (level) {
+    case "None":
+      return "⚠️";
+    case "Low":
+      return "🔑";
+    case "Moderate":
+      return "🔓";
+    case "High":
+      return "🔒";
+    case "Very High":
+      return "🔐";
+    default:
+      return "ℹ️";
+  }
+}
 
-// Export the default instance
-export default defaultService;
-export const getBusinessImpact = defaultService.getBusinessImpact;
-export const getDetailedDescription = defaultService.getDetailedDescription;
-export const getBusinessPerspective = defaultService.getBusinessPerspective;
-export const getRecommendations = defaultService.getRecommendations;
-export const getROIEstimates = defaultService.getROIEstimates;
-export const getSecurityMetrics = defaultService.getSecurityMetrics;
-export const getComplianceStatus = defaultService.getComplianceStatus;
+/**
+ * Default implementation for getting value points
+ */
+function getDefaultValuePointsImpl(level: SecurityLevel): string[] {
+  const valuePoints = {
+    None: [
+      "No security value creation",
+      "Maximum exposure to security risks",
+      "No protection for business assets or data",
+      "Non-compliance with regulatory requirements",
+      "Significant business risk with no mitigation",
+    ],
+    Low: [
+      "Basic security foundation established",
+      "Minimal protection against common threats",
+      "Some risk reduction for non-critical systems",
+      "First step toward regulatory compliance",
+      "Limited business enablement for non-sensitive operations",
+    ],
+    Moderate: [
+      "Standard security posture established",
+      "Balanced protection for business operations",
+      "Meets basic requirements for most business activities",
+      "Enables operations in moderately regulated environments",
+      "Reasonable risk management for business continuity",
+    ],
+    High: [
+      "Strong security posture that enables business confidence",
+      "Robust protection for sensitive data and operations",
+      "Supports expansion into regulated industries",
+      "Enhances reputation with security-conscious customers",
+      "Significant risk reduction with measurable business value",
+    ],
+    "Very High": [
+      "Maximum security enabling operations in highly regulated environments",
+      "Comprehensive protection for critical business assets",
+      "Competitive advantage through superior security capabilities",
+      "Strategic enabler for high-value and high-risk business activities",
+      "Meets the most stringent customer and regulatory requirements",
+    ],
+  };
 
-// Add new exports for these functions
-export const getSecurityLevelDescription =
-  defaultService.getSecurityLevelDescription;
-export const getInformationSensitivity =
-  defaultService.getInformationSensitivity;
-export const getProtectionLevel = defaultService.getProtectionLevel;
-export const calculateBusinessImpactLevel =
-  defaultService.calculateBusinessImpactLevel;
-export const getRiskBadgeVariant = defaultService.getRiskBadgeVariant;
-export const getCategoryIcon = defaultService.getCategoryIcon;
-export const getValuePoints = defaultService.getValuePoints;
-export const getROIEstimate = defaultService.getROIEstimate;
-export const getImplementationConsiderations =
-  defaultService.getImplementationConsiderations;
-export const getComponentImplementationDetails =
-  defaultService.getComponentImplementationDetails;
-export const getBusinessImpactDescription =
-  defaultService.getBusinessImpactDescription;
-export const getTechnicalDescription = defaultService.getTechnicalDescription;
-export const getSecurityIcon = defaultService.getSecurityIcon;
-export const getCompliantFrameworks = defaultService.getCompliantFrameworks;
-export const getFrameworkDescription = defaultService.getFrameworkDescription;
-export const getImplementationTime = defaultService.getImplementationTime;
+  return valuePoints[level] || [];
+}
 
-// Export the types
-export type { ComponentMetrics, SecurityResource };
+// Export types
+export type { BusinessImpactDetails, TechnicalImplementationDetails };

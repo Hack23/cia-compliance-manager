@@ -2,8 +2,10 @@
 // Centralized to avoid duplication and make tests more stable
 
 // Import from the shared risk constants file
-import { CIADetails, SecurityLevel } from "../types/cia"; // Import SecurityLevel
+import { SecurityLevel } from "../types/cia"; // Import SecurityLevel only
 import { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS } from "./riskConstants";
+// Import CIADetails from the correct module
+import { CIADetails } from "../types/cia-services";
 // Import the UI constants for backward compatibility
 import { BUSINESS_IMPACT_ICONS, SECURITY_LEVEL_COLORS } from "./uiConstants";
 
@@ -461,19 +463,25 @@ export const IMPLEMENTATION_COSTS: {
   },
 };
 
+/**
+ * Widget icons for consistent visual representation
+ */
 export const WIDGET_ICONS = {
   SECURITY_LEVEL: "🛡️",
   SECURITY_SUMMARY: "📊",
   SECURITY_VISUALIZATION: "📈",
   COMPLIANCE_STATUS: "✅",
-  VALUE_CREATION: "💹",
-  COST_ESTIMATION: "💰",
+  VALUE_CREATION: "💰",
+  COST_ESTIMATION: "💲",
   BUSINESS_IMPACT: "🏢",
-  TECHNICAL_IMPLEMENTATION: "⚙️",
   AVAILABILITY_IMPACT: "⏱️",
-  INTEGRITY_IMPACT: "🔐",
+  INTEGRITY_IMPACT: "✓",
   CONFIDENTIALITY_IMPACT: "🔒",
+  CIA_IMPACT_SUMMARY: "🔐",
+  TECHNICAL_DETAILS: "⚙️",
   SECURITY_RESOURCES: "📚",
+  // Add any missing keys that are referenced in the codebase
+  TECHNICAL_IMPLEMENTATION: "⚙️",  // Alias for TECHNICAL_DETAILS
 };
 
 export const RISK_LEVEL_DESCRIPTIONS = {
@@ -485,4 +493,132 @@ export const RISK_LEVEL_DESCRIPTIONS = {
   LOW: "Minor security improvements could be beneficial. Low likelihood of security incidents with limited business impact.",
   MINIMAL:
     "Strong security posture with only marginal improvement opportunities. Very low likelihood of security incidents.",
+};
+
+/**
+ * Constants used throughout the application
+ */
+
+/**
+ * Default CIA Details when none are provided
+ */
+export const DEFAULT_CIA_DETAILS: CIADetails = {
+  description: "Not specified",
+  technical: "Not specified",
+  businessImpact: "Not specified",
+  capex: 0,
+  opex: 0,
+  bg: "#f0f0f0",
+  text: "#333333",
+  recommendations: [],
+};
+
+/**
+ * Default security level
+ */
+export const DEFAULT_SECURITY_LEVEL: SecurityLevel = "None";
+
+/**
+ * Widget sizes for layout
+ */
+export const WIDGET_SIZES = {
+  SMALL: "small", // 1/3 width
+  MEDIUM: "medium", // 1/2 width
+  LARGE: "large", // 2/3 width
+  FULL: "full", // Full width
+};
+
+/**
+ * Widget categories
+ */
+export const WIDGET_CATEGORIES = {
+  SECURITY: "security",
+  IMPACT: "impact",
+  COMPLIANCE: "compliance",
+  COST: "cost",
+  TECHNICAL: "technical",
+  RESOURCES: "resources",
+};
+
+/**
+ * Application routes
+ */
+export const ROUTES = {
+  HOME: "/",
+  DASHBOARD: "/dashboard",
+  SETTINGS: "/settings",
+  REPORTS: "/reports",
+};
+
+/**
+ * Local storage keys
+ */
+export const STORAGE_KEYS = {
+  THEME: "cia-theme",
+  SECURITY_LEVELS: "cia-security-levels",
+  DASHBOARD_LAYOUT: "cia-dashboard-layout",
+  USER_PREFERENCES: "cia-user-preferences",
+};
+
+/**
+ * Refresh intervals (in milliseconds)
+ */
+export const REFRESH_INTERVALS = {
+  FAST: 5000, // 5 seconds
+  MEDIUM: 30000, // 30 seconds
+  SLOW: 60000, // 1 minute
+};
+
+/**
+ * Theme options
+ */
+export const THEMES = {
+  LIGHT: "light",
+  DARK: "dark",
+  SYSTEM: "system",
+};
+
+/**
+ * Default transition duration in milliseconds
+ */
+export const DEFAULT_TRANSITION_DURATION = 300;
+
+/**
+ * Chart colors
+ */
+export const CHART_COLORS = {
+  AVAILABILITY: "#2196F3", // Blue
+  INTEGRITY: "#4CAF50", // Green
+  CONFIDENTIALITY: "#9C27B0", // Purple
+  SECURITY_LEVEL_COLORS: {
+    None: "#F44336", // Red
+    Low: "#FF9800", // Orange
+    Moderate: "#FFEB3B", // Yellow
+    High: "#4CAF50", // Green
+    "Very High": "#2196F3", // Blue
+  },
+};
+
+/**
+ * Maximum column count for grid layout
+ */
+export const GRID_MAX_COLUMNS = 12;
+
+/**
+ * Widget titles for consistent labeling across the application
+ */
+export const WIDGET_TITLES = {
+  SECURITY_LEVEL: "Security Level",
+  SECURITY_SUMMARY: "Security Summary",
+  SECURITY_VISUALIZATION: "Security Visualization",
+  COMPLIANCE_STATUS: "Compliance Status",
+  VALUE_CREATION: "Value Creation & ROI",
+  COST_ESTIMATION: "Cost Estimation",
+  BUSINESS_IMPACT: "Business Impact Analysis",
+  AVAILABILITY_IMPACT: "Availability Impact",
+  INTEGRITY_IMPACT: "Integrity Impact",
+  CONFIDENTIALITY_IMPACT: "Confidentiality Impact",
+  CIA_IMPACT_SUMMARY: "CIA Impact Summary",
+  TECHNICAL_DETAILS: "Technical Details",
+  SECURITY_RESOURCES: "Security Resources",
 };

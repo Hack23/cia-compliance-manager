@@ -23,5 +23,5 @@
   "excludePrivate": false,
   "excludeInternal": false,
   "excludeExternals": false,
-  "plugin": ["typedoc-plugin-merge-modules"]
+  "plugin": ["typedoc-plugin-mermaid", "typedoc-plugin-markdown"]
 }

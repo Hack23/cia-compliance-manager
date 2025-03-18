@@ -187,10 +187,18 @@
 .dark .widget-header {
   background: linear-gradient(
     to right,
-    rgba(0, 204, 102, 0.1),
-    rgba(0, 187, 119, 0.05)
+    rgba(0, 204, 102, 0.12),
+    rgba(0, 170, 85, 0.05)
   );
-  border-bottom: 1px solid var(--ingress-border);
+  box-shadow: inset 0 -1px 0 rgba(0, 204, 102, 0.3);
+}
+
+.dark .widget-header h3 {
+  color: var(--ingress-primary);
+  text-shadow: 0 0 4px rgba(0, 204, 102, 0.4);
+  font-family: "Orbitron", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .dark .widget-title,
@@ -278,7 +286,7 @@
 
   .dark .security-level-selector select option {
     background-color: var(--ingress-dark);
-    color: var(--ingress-text);
+    color: var (--ingress-text);
   }
 }
 
@@ -987,4 +995,27 @@
   100% {
     opacity: 1;
   }
+}
+
+/* Enhanced widget with subtle glow but improved performance */
+.dark .widget {
+  border: 1px solid rgba(0, 204, 102, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 2px var(--primary-color);
+  background-color: rgba(0, 20, 25, 0.95);
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+/* Optimize hover effect for better performance */
+.dark .widget:hover {
+  box-shadow: 0 4px 12px rgba(0, 204, 102, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Optimized security level indicators */
+.dark .level-none,
+.dark .level-low,
+.dark .level-moderate,
+.dark .level-high,
+.dark .level-very-high {
+  box-shadow: 0 0 4px currentColor; /* Reduced intensity */
 }

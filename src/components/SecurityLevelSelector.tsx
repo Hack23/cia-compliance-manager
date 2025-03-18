@@ -3,6 +3,19 @@ import { SecurityLevel } from "../types/cia";
 import SimpleSelector from "./common/SecurityLevelSelector";
 import EnhancedSelector from "./securitylevel/SecurityLevelSelector";
 
+// Import the interface for the enhanced selector props
+interface EnhancedSelectorProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  onAvailabilityChange?: (level: SecurityLevel) => void;
+  onIntegrityChange?: (level: SecurityLevel) => void;
+  onConfidentialityChange?: (level: SecurityLevel) => void;
+  disabled?: boolean;
+  compact?: boolean;
+  testId?: string;
+}
+
 /**
  * Unified SecurityLevelSelector that supports both simple and enhanced usage patterns
  *
@@ -60,14 +73,26 @@ const SecurityLevelSelector: React.FC<UnifiedSecurityLevelSelectorProps> = (
 
   // Use either the enhanced or simple version based on props provided
   if (isEnhancedVersion) {
-    // For enhanced selector, ensure we properly set defaults for required props
-    const enhancedProps = {
-      availabilityLevel: props.availabilityLevel || ("None" as SecurityLevel),
-      integrityLevel: props.integrityLevel || ("None" as SecurityLevel),
-      confidentialityLevel:
-        props.confidentialityLevel || ("None" as SecurityLevel),
-      ...props,
+    // For enhanced selector, ensure we have all the required props
+    if (!props.availabilityLevel || !props.integrityLevel || !props.confidentialityLevel) {
+      console.warn(
+        "SecurityLevelSelector: Enhanced mode requires availabilityLevel, integrityLevel, and confidentialityLevel props"
+      );
+      return null;
+    }
+
+    // Create the enhanced props
+    const enhancedProps: EnhancedSelectorProps = {
+      availabilityLevel: props.availabilityLevel,
+      integrityLevel: props.integrityLevel,
+      confidentialityLevel: props.confidentialityLevel,
+      onAvailabilityChange: props.onAvailabilityChange as (level: SecurityLevel) => void,
+      onIntegrityChange: props.onIntegrityChange as (level: SecurityLevel) => void,
+      onConfidentialityChange: props.onConfidentialityChange as (level: SecurityLevel) => void,
+      disabled: props.disabled,
+      testId: props.testId,
     };
+    
     return <EnhancedSelector {...enhancedProps} />;
   } else {
     // For simple selector, ensure we provide the required props
@@ -78,11 +103,11 @@ const SecurityLevelSelector: React.FC<UnifiedSecurityLevelSelectorProps> = (
       return null;
     }
 
-    // Extract only the props that SimpleSelector needs, ensuring they're non-optional
+    // Extract only the props that SimpleSelector needs, ensuring they're properly typed
     const simpleProps = {
       label: props.label,
-      value: props.value,
-      onChange: props.onChange,
+      value: props.value as SecurityLevel, // Cast to SecurityLevel
+      onChange: props.onChange as (value: SecurityLevel) => void, // Cast the change handler
       options: props.options,
       // Optional props can be passed as is
       description: props.description,

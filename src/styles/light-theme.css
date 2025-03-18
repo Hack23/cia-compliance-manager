@@ -1,0 +1,317 @@
+/* ========== LIGHT THEME STYLING ========== */
+
+/* Base styles for light mode theme */
+:root {
+  --light-primary: #006633;
+  --light-secondary: #008844;
+  --light-accent: #669900;
+  --light-background: #f0f0f0;
+  --light-card-bg: #ffffff;
+  --light-border: rgba(0, 102, 51, 0.2);
+  --light-glow: 0 0 10px rgba(0, 102, 51, 0.1);
+  --light-text: #222222;
+}
+
+/* Widget styling for light theme */
+.widget-container {
+  background: #ffffff;
+  border: 1px solid var(--light-border);
+  box-shadow: var(--light-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.widget-header {
+  background: linear-gradient(
+    to right,
+    rgba(0, 102, 51, 0.05) 0%,
+    rgba(0, 136, 68, 0.02) 100%
+  );
+  border-bottom: 1px solid var(--light-border);
+}
+
+.widget-title,
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-accent);
+  color: var(--light-primary);
+}
+
+.widget-icon {
+  color: var(--light-primary);
+}
+
+/* Security level visual indicators for light theme */
+.security-level-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+  box-shadow: 0 0 3px currentColor;
+}
+
+.level-none {
+  background-color: #e74c3c;
+  box-shadow: 0 0 3px #e74c3c;
+}
+
+.level-low {
+  background-color: #e67e22;
+  box-shadow: 0 0 3px #e67e22;
+}
+
+.level-moderate {
+  background-color: #f1c40f;
+  box-shadow: 0 0 3px #f1c40f;
+}
+
+.level-high {
+  background-color: #27ae60;
+  box-shadow: 0 0 3px #27ae60;
+}
+
+.level-very-high {
+  background-color: #3498db;
+  box-shadow: 0 0 3px #3498db;
+}
+
+/* Light theme security visualization styling */
+.security-gauge {
+  position: relative;
+  height: 8px;
+  background: linear-gradient(
+    to right,
+    #27ae60 0%,
+    /* Green - Low Risk */ #f1c40f 25%,
+    /* Yellow - Medium Risk */ #e67e22 50%,
+    /* Orange - High Risk */ #e74c3c 100% /* Red - Critical Risk */
+  );
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.security-gauge-indicator {
+  position: absolute;
+  top: -2px;
+  width: 2px;
+  height: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-radius: 1px;
+  z-index: 2;
+  transform: translateX(-50%);
+}
+
+.risk-score-value {
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+/* Critical risk styling for light theme */
+.critical-risk {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+.high-risk {
+  color: #e67e22;
+  font-weight: 600;
+}
+
+.medium-risk {
+  color: #f1c40f;
+  font-weight: 600;
+}
+
+.low-risk {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+/* Enhanced technical details styling */
+.tech-metric-card {
+  background: #ffffff;
+  border: 1px solid var(--light-border);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.tech-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tech-metric-value {
+  font-family: var(--font-mono);
+  color: var(--light-primary);
+  font-weight: 600;
+}
+
+.tech-metric-label {
+  font-family: var(--font-accent);
+  font-size: 0.8rem;
+  color: var(--light-text);
+}
+
+/* Shadow for risk indicator */
+.shadow-glow {
+  box-shadow: 0 0 5px 1px rgba(0, 102, 51, 0.3);
+}
+
+/* Enhanced security level selector styling */
+.security-level-selector select {
+  border: 1px solid var(--light-border);
+  background-color: #ffffff;
+  color: var(--light-text);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.security-level-selector select:focus {
+  border-color: var(--light-primary);
+  box-shadow: 0 0 0 2px rgba(0, 102, 51, 0.2);
+  outline: none;
+}
+
+/* Enhanced security level pill styling */
+.security-level-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  transition: all 0.2s ease;
+}
+
+.security-level-pill:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.security-level-pill.none {
+  border-color: rgba(231, 76, 60, 0.3);
+  color: #e74c3c;
+}
+
+.security-level-pill.low {
+  border-color: rgba(230, 126, 34, 0.3);
+  color: #e67e22;
+}
+
+.security-level-pill.moderate {
+  border-color: rgba(241, 196, 15, 0.3);
+  color: #f1c40f;
+}
+
+.security-level-pill.high {
+  border-color: rgba(39, 174, 96, 0.3);
+  color: #27ae60;
+}
+
+.security-level-pill.very-high {
+  border-color: rgba(52, 152, 219, 0.3);
+  color: #3498db;
+}
+
+/* Enhanced button styling */
+button.lightbutton {
+  background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+  border: 1px solid var(--light-border);
+  color: var(--light-primary);
+  font-family: var(--font-mono);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+button.lightbutton:hover {
+  background: linear-gradient(to bottom, #e9ecef 0%, #dee2e6 100%);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-color: var(--light-primary);
+}
+
+/* CIA component specific styling */
+.color-confidentiality {
+  color: #8e44ad;
+  font-weight: 600;
+}
+
+.color-integrity {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.color-availability {
+  color: #2980b9;
+  font-weight: 600;
+}
+
+/* Enhanced card styling */
+.security-card {
+  background: #ffffff;
+  border: 1px solid var(--light-border);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.security-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* CIA component cards */
+.confidentiality-card {
+  border-left: 3px solid #8e44ad !important;
+}
+
+.integrity-card {
+  border-left: 3px solid #27ae60 !important;
+}
+
+.availability-card {
+  border-left: 3px solid #2980b9 !important;
+}
+
+/* Terminal-like text styling */
+.terminal-text {
+  font-family: var(--font-mono);
+  color: var(--light-primary);
+}
+
+/* Code display styling */
+.code-block {
+  background: #f5f5f5;
+  border-left: 3px solid var(--light-primary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.code-block .comment {
+  color: #6b7280;
+}
+
+.code-block .keyword {
+  color: #8e44ad;
+}
+
+.code-block .string {
+  color: #27ae60;
+}
+
+.code-block .variable {
+  color: #2980b9;
+}

@@ -29,6 +29,39 @@ export interface BusinessImpactIcons {
   [key: string]: string;
 }
 
+/**
+ * Business Impact Types
+ *
+ * ## Business Perspective
+ *
+ * These types define the structure of business impact data for security analyses.
+ */
+export interface BusinessImpactDetails {
+  summary: string;
+  financial?: {
+    description: string;
+    riskLevel: string;
+    annualRevenueLoss?: string;
+  };
+  operational?: {
+    description: string;
+    riskLevel: string;
+    meanTimeToRecover?: string;
+  };
+  reputational?: {
+    description: string;
+    riskLevel: string;
+  };
+  strategic?: {
+    description: string;
+    riskLevel: string;
+  };
+  regulatory?: {
+    description: string;
+    riskLevel: string;
+  };
+}
+
 // Export the actual data
 export const BUSINESS_CONSIDERATIONS: BusinessConsiderations = {
   AVAILABILITY: {

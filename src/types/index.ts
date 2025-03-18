@@ -16,14 +16,11 @@ export * from "./componentProps";
 
 // Export widget-specific types - avoid ambiguity with named imports
 // (excludes any types that would conflict with componentProps exports)
-export type {
-  WidgetBaseProps,
-  SecuritySummaryWidgetProps,
-  IntegrityImpactWidgetProps,
-  ConfidentialityImpactWidgetProps,
-  AvailabilityImpactWidgetProps,
+import type {
   SecurityResourcesWidgetProps,
-  // Add any other non-conflicting types from widgets.ts here
+  WidgetProps // Use this instead of WidgetBaseProps
 } from "./widgets";
+
+export type { SecurityResourcesWidgetProps, WidgetProps };
 
 // Add any new type exports below

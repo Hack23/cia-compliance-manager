@@ -21,13 +21,14 @@
 .widget-content {
   background-color: rgba(255, 255, 255, 0.05);
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius-sm);
   margin-bottom: 0.75rem;
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .dark .widget-content {
   border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* Sizing utilities */
@@ -185,7 +186,7 @@
   font-style: italic;
 }
 .font-mono {
-  font-family: monospace;
+  font-family: var(--font-mono);
 }
 
 /* Layout utilities */
@@ -274,6 +275,16 @@
 .shadow-lg {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+.shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.shadow {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
 /* Background color utilities */
@@ -573,4 +584,161 @@
 
 .dark .hover-lift:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Futuristic effects */
+.cyber-border {
+  position: relative;
+  border: 1px solid rgba(0, 204, 255, 0.3);
+  box-shadow: 0 0 8px rgba(0, 204, 255, 0.2);
+}
+
+.cyber-border::before,
+.cyber-border::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  opacity: 0.7;
+}
+
+.cyber-border::before {
+  top: -2px;
+  left: -2px;
+  border-top: 2px solid var(--primary-color);
+  border-left: 2px solid var(--primary-color);
+}
+
+.cyber-border::after {
+  bottom: -2px;
+  right: -2px;
+  border-bottom: 2px solid var(--primary-color);
+  border-right: 2px solid var(--primary-color);
+}
+
+/* Glow effects */
+.text-glow {
+  text-shadow: 0 0 5px var(--primary-color);
+}
+
+.dark .text-glow {
+  text-shadow: 0 0 8px var(--primary-color);
+}
+
+.box-glow {
+  box-shadow: 0 0 10px var(--primary-color);
+}
+
+.dark .box-glow {
+  box-shadow: 0 0 15px var(--primary-color);
+}
+
+/* Neon text effects */
+.neon-text {
+  color: var(--accent-color);
+  text-shadow: 0 0 5px var(--accent-color), 0 0 10px var(--accent-color),
+    0 0 20px var(--accent-color);
+}
+
+.dark .neon-text {
+  color: var(--accent-color);
+  text-shadow: 0 0 5px var(--accent-color), 0 0 10px var(--accent-color),
+    0 0 20px var(--accent-color), 0 0 30px var(--accent-color);
+}
+
+/* Terminal text */
+.terminal-text {
+  font-family: var(--font-mono);
+  color: #33ff33;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 1rem;
+  border-radius: 0.25rem;
+  border-left: 3px solid #33ff33;
+}
+
+.dark .terminal-text {
+  color: #33ff33;
+  text-shadow: 0 0 5px rgba(51, 255, 51, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Scanner animation */
+@keyframes scan {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+.scanner-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanner-effect::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--accent-color),
+    transparent
+  );
+  z-index: 2;
+  opacity: 0.5;
+  animation: scan 2s linear infinite;
+}
+
+/* Grid background */
+.cyber-grid-bg {
+  background-image: linear-gradient(
+      rgba(0, 204, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(0, 204, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center center;
+}
+
+.dark .cyber-grid-bg {
+  background-image: linear-gradient(rgba(0, 204, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 204, 255, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Pulse animation for interactive elements */
+@keyframes pulse-border {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 204, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(0, 204, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 204, 255, 0);
+  }
+}
+
+.pulse-effect {
+  animation: pulse-border 2s infinite;
+}
+
+/* Typewriter effect base class (JS required for full animation) */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid var(--primary-color);
+  white-space: nowrap;
+  margin: 0;
+  letter-spacing: 0.1em;
+}
+
+.dark .typewriter {
+  border-right: 2px solid var(--accent-color);
+  text-shadow: 0 0 5px var(--accent-color);
 }

@@ -429,6 +429,66 @@ Cypress.Commands.add("ensureAppLoaded", () => {
   cy.screenshot("app-loaded-state");
 });
 
+/**
+ * Helper command to ensure app is fully loaded before continuing
+ */
+Cypress.Commands.add("ensureAppLoaded", (timeout = 10000) => {
+  // Wait for key app elements to appear
+  cy.get("body", { timeout }).should("exist");
+
+  // Check for dashboard or widgets
+  cy.get('[data-testid="dashboard-grid"], [data-testid^="widget-"]', {
+    timeout,
+  })
+    .should("exist")
+    .then(() => {
+      cy.log("✅ Application loaded successfully");
+    });
+
+  // Check if select elements are present for setting security levels
+  cy.get("select").then(($selects) => {
+    if ($selects.length < 3) {
+      cy.log("⚠️ Warning: Not all security level selects found");
+    }
+  });
+});
+
+/**
+ * Helper command to set security levels
+ */
+Cypress.Commands.add(
+  "setSecurityLevels",
+  (availability, integrity, confidentiality) => {
+    cy.get("body").then(($body) => {
+      const selectCount = $body.find("select").length;
+
+      if (selectCount >= 3) {
+        // Set levels using dropdowns
+        cy.get("select").eq(0).select(availability, { force: true });
+        cy.get("select").eq(1).select(integrity, { force: true });
+        cy.get("select").eq(2).select(confidentiality, { force: true });
+      } else {
+        // Try another method - dispatch a custom event which the app listens for
+        cy.window().then((win) => {
+          win.document.dispatchEvent(
+            new CustomEvent("test:set-values", {
+              detail: {
+                availability,
+                integrity,
+                confidentiality,
+              },
+            })
+          );
+        });
+
+        cy.log(
+          `Set security levels via event: ${availability}, ${integrity}, ${confidentiality}`
+        );
+      }
+    });
+  }
+);
+
 // Define custom command types
 declare global {
   namespace Cypress {

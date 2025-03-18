@@ -18,4 +18,7 @@
  * @module hooks
  */
 
+export * from "./useCIAOptions";
 export { useCIAOptions } from "./useCIAOptions";
+export * from "./useLocalStorage";
+

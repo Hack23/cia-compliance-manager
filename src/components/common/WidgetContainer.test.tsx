@@ -1,181 +1,141 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
-import WidgetContainer from "./WidgetContainer";
+import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import WidgetContainer, { WidgetContainerProps } from './WidgetContainer';
 
-describe("WidgetContainer Component", () => {
-  const defaultProps = {
-    title: "Test Widget",
-    children: <div>Widget Content</div>,
-  };
+describe('WidgetContainer', () => {
+  it('renders with title and content', () => {
+    // Arrange
+    const props: WidgetContainerProps = {
+      title: 'Test Widget',
+      children: <div>Test content</div>,
+      testId: 'test-widget'
+    };
 
-  it("renders with title and content", () => {
-    render(<WidgetContainer {...defaultProps} />);
+    // Act
+    render(<WidgetContainer {...props} />);
 
-    expect(screen.getByText("Test Widget")).toBeInTheDocument();
-    expect(screen.getByText("Widget Content")).toBeInTheDocument();
+    // Assert
+    expect(screen.getByTestId('test-widget')).toBeInTheDocument();
+    expect(screen.getByText('Test Widget')).toBeInTheDocument();
+    expect(screen.getByText('Test content')).toBeInTheDocument();
   });
 
-  it("renders with loading state", () => {
-    const { container } = render(
-      <WidgetContainer {...defaultProps} loading={true} />
-    );
-
-    // Instead of looking for a specific testId, check for the loading spinner element
-    const loadingSpinner = container.querySelector(".animate-spin");
-    expect(loadingSpinner).toBeInTheDocument();
-    expect(screen.queryByText("Widget Content")).not.toBeInTheDocument();
-  });
-
-  it("renders with error state", () => {
+  it('renders with loading state', () => {
     render(
-      <WidgetContainer
-        {...defaultProps}
-        error={new Error("Test error message")}
-      />
-    );
-
-    expect(screen.getByText("Test error message")).toBeInTheDocument();
-    expect(screen.queryByText("Widget Content")).not.toBeInTheDocument();
-  });
-
-  it("renders with custom header content", () => {
-    // Pass the headerContent to the test component in a way that works
-    render(
-      <WidgetContainer
-        title="Test Widget"
-        children={<div>Widget Content</div>}
-        icon={<button data-testid="custom-action">Custom Action</button>}
-      />
-    );
-
-    // Look for the custom action in the rendered output
-    expect(screen.getByTestId("custom-action")).toBeInTheDocument();
-  });
-
-  it("applies custom className", () => {
-    const customClass = "custom-class";
-    const { container } = render(
-      <WidgetContainer
-        title="Test Widget"
-        className={customClass}
-        testId="test-widget"
-      >
-        <div>Widget content</div>
+      <WidgetContainer title="Test Widget" loading={true}>
+        <div>Widget Content</div>
       </WidgetContainer>
     );
-
-    // Instead of directly checking the root element, find the widget container within
-    // Use container.querySelector to find an element with the custom class
-    const widgetWithCustomClass = container.querySelector(`.${customClass}`);
-    expect(widgetWithCustomClass).not.toBeNull();
-
-    // Alternative: Check if any element within the container has the custom class
-    expect(container.innerHTML).toContain(customClass);
+    
+    // Loading spinner should be rendered
+    expect(screen.queryByText('Widget Content')).not.toBeInTheDocument();
+    expect(screen.getByTestId('widget-container-loading')).toBeInTheDocument();
   });
 
-  it("renders children", () => {
+  it('renders with error state', () => {
     render(
-      <WidgetContainer>
-        <div data-testid="test-child">Test Child</div>
+      <WidgetContainer title="Test Widget" error={new Error('Test error')}>
+        <div>Error Content</div>
       </WidgetContainer>
     );
-
-    expect(screen.getByTestId("test-child")).toBeInTheDocument();
+    
+    expect(screen.getByText('Test error')).toBeInTheDocument();
+    expect(screen.getByTestId('test-widget-error')).toBeInTheDocument();
   });
 
-  it("applies custom className", () => {
+  // Remove or update test for headerContent since it's not in the props interface
+  // it('renders with header content', () => {
+  //   render(
+  //     <WidgetContainer title="Test Widget" headerContent={<div>Header Content</div>}>
+  //       <div>Widget Content</div>
+  //     </WidgetContainer>
+  //   );
+  //   
+  //   expect(screen.getByText('Header Content')).toBeInTheDocument();
+  // });
+
+  it('renders with icon', () => {
+    const iconTestId = 'test-icon';
+    render(
+      <WidgetContainer title="Test Widget" icon={<span data-testid={iconTestId}>🔒</span>}>
+        <div>Widget Content</div>
+      </WidgetContainer>
+    );
+    
+    expect(screen.getByTestId(iconTestId)).toBeInTheDocument();
+  });
+
+  it('applies custom className', () => {
     const { container } = render(
-      <WidgetContainer className="custom-class">
-        <div>Test Content</div>
+      <WidgetContainer title="Test Widget" className="custom-class">
+        <div>Widget Content</div>
       </WidgetContainer>
     );
-
-    expect(container.firstChild).toHaveClass("custom-class");
-    expect(container.firstChild).toHaveClass("widget-container"); // Base class
+    
+    const widgetElement = container.firstChild as HTMLElement;
+    expect(widgetElement.classList.contains('custom-class')).toBe(true);
   });
 
-  it("renders with title", () => {
+  it('renders children', () => {
+    render(
+      <WidgetContainer title="Test Widget">
+        <div data-testid="child-element">Child Content</div>
+      </WidgetContainer>
+    );
+    
+    expect(screen.getByTestId('child-element')).toBeInTheDocument();
+    expect(screen.getByText('Child Content')).toBeInTheDocument();
+  });
+
+  it('applies custom className', () => {
+    const { container } = render(
+      <WidgetContainer title="Test Widget" className="test-class">
+        <div>Content</div>
+      </WidgetContainer>
+    );
+    
+    expect(container.firstChild).toHaveClass('test-class');
+  });
+
+  it('renders with title', () => {
     render(
       <WidgetContainer title="Widget Title">
-        <div>Test Content</div>
+        <div>Content</div>
       </WidgetContainer>
     );
-
-    expect(screen.getByText("Widget Title")).toBeInTheDocument();
+    
+    expect(screen.getByText('Widget Title')).toBeInTheDocument();
   });
 
-  it("renders with icon", () => {
+  it('renders loading state', () => {
     render(
-      <WidgetContainer title="Widget Title" icon={<span>📊</span>}>
-        <div>Test Content</div>
+      <WidgetContainer title="Test Widget" loading={true}>
+        <div>Content</div>
       </WidgetContainer>
     );
-
-    expect(screen.getByText("📊")).toBeInTheDocument();
+    
+    expect(screen.getByTestId('widget-container-loading')).toBeInTheDocument();
   });
 
-  it("handles loading state", () => {
-    const { container } = render(
-      <WidgetContainer loading={true}>
-        <div>This should not be visible</div>
-      </WidgetContainer>
-    );
-
-    // Should show loading state and not render children
-    expect(container.querySelector(".animate-pulse")).toBeInTheDocument();
-    expect(
-      screen.queryByText("This should not be visible")
-    ).not.toBeInTheDocument();
-  });
-
-  it("handles error state", () => {
-    const testError = new Error("Test error message");
-
+  it('renders with test ID', () => {
     render(
-      <WidgetContainer error={testError}>
-        <div>This should not be visible</div>
+      <WidgetContainer title="Test Widget" testId="custom-test-id">
+        <div>Content</div>
       </WidgetContainer>
     );
-
-    // Should show error message and not render children
-    expect(screen.getByText("Error:")).toBeInTheDocument();
-    expect(screen.getByText("Test error message")).toBeInTheDocument();
-    expect(
-      screen.queryByText("This should not be visible")
-    ).not.toBeInTheDocument();
+    
+    expect(screen.getByTestId('custom-test-id')).toBeInTheDocument();
   });
 
-  it("applies custom testId", () => {
-    render(
-      <WidgetContainer testId="custom-widget-container">
-        <div>Test Content</div>
-      </WidgetContainer>
-    );
-
-    expect(screen.getByTestId("custom-widget-container")).toBeInTheDocument();
-  });
-
-  // Remove the contentTitle prop test since the component doesn't support it
-  it("renders with title and content correctly", () => {
-    render(
-      <WidgetContainer title="Widget Header">
-        <div data-testid="content-area">Content Area</div>
-      </WidgetContainer>
-    );
-
-    expect(screen.getByText("Widget Header")).toBeInTheDocument();
-    expect(screen.getByTestId("content-area")).toBeInTheDocument();
-  });
-
-  it("applies size styles", () => {
-    const { container } = render(
-      <WidgetContainer size={{ width: 2, height: 3 }}>
-        <div>Test Content</div>
-      </WidgetContainer>
-    );
-
-    const widgetContainer = container.firstChild as HTMLElement;
-    expect(widgetContainer.style.gridColumn).toBe("span 2");
-    expect(widgetContainer.style.gridRow).toBe("span 3");
-  });
+  // Remove or update this test since style is not in the props interface
+  // it('applies custom style', () => {
+  //   const { container } = render(
+  //     <WidgetContainer title="Test Widget" style={{ backgroundColor: 'red' }}>
+  //       <div>Content</div>
+  //     </WidgetContainer>
+  //   );
+  //   
+  //   const widgetElement = container.firstChild as HTMLElement;
+  //   expect(widgetElement).toHaveStyle('background-color: red');
+  // });
 });

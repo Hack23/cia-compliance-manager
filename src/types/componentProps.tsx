@@ -6,7 +6,7 @@
  */
 
 import React from "react";
-// Don't import BusinessImpactAnalysisWidgetProps to avoid conflict
+// Import types properly to avoid duplicates
 import type {
   AvailabilityImpactWidgetProps,
   BusinessImpactAnalysisWidgetProps,
@@ -16,9 +16,9 @@ import type {
   IntegrityImpactWidgetProps,
   SecurityLevelWidgetProps,
   SecurityResourcesWidgetProps,
-  SecuritySummaryWidgetProps,
   TechnicalDetailsWidgetProps,
   ValueCreationWidgetProps,
+  WidgetProps
 } from "./widgets";
 
 /**
@@ -90,9 +90,17 @@ export interface WidgetContainerProps {
   /** Optional test ID for component selection in tests */
   testId?: string;
   /** Icon to display in the header */
-  icon?: string;
+  icon?: string | React.ReactNode;
+  /** Whether the widget is in loading state */
   loading?: boolean;
+  /** Error state, if any */
   error?: Error | null;
+  /** Widget size for layout purposes */
+  size?: "small" | "medium" | "large" | "full";
+  /** Optional compact mode for smaller displays */
+  compact?: boolean;
+  /** Optional actions to display in widget header */
+  actions?: React.ReactNode;
 }
 
 /**
@@ -217,7 +225,7 @@ export interface CIAImpactSummaryWidgetProps {
   testId?: string;
 }
 
-// Re-export all widget props for backward compatibility
+// Export types correctly - use export type for all widget props
 export type {
   AvailabilityImpactWidgetProps,
   BusinessImpactAnalysisWidgetProps,
@@ -227,7 +235,8 @@ export type {
   IntegrityImpactWidgetProps,
   SecurityLevelWidgetProps,
   SecurityResourcesWidgetProps,
-  SecuritySummaryWidgetProps,
   TechnicalDetailsWidgetProps,
   ValueCreationWidgetProps,
+  WidgetProps
 };
+

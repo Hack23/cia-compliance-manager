@@ -1,90 +1,60 @@
 import React, { ReactNode } from "react";
-import { COMMON_COMPONENT_TEST_IDS } from "../../constants/testIds";
 
 export type StatusBadgeVariant =
-  | "neutral"
   | "success"
   | "warning"
   | "error"
   | "info"
-  | "purple";
-
-export type StatusBadgeSize = "xs" | "sm" | "md" | "lg";
+  | "purple"
+  | "neutral";
 
 interface StatusBadgeProps {
   status: StatusBadgeVariant;
   children: ReactNode;
   className?: string;
-  size?: StatusBadgeSize;
   testId?: string;
+  size?: "xs" | "sm" | "md" | "lg";
 }
 
 /**
- * StatusBadge displays statuses and labels with consistent styling
- * Enhanced with Ingress-style visual effects in dark mode
+ * Consistent status badge component for displaying status indicators
+ *
+ * Used for showing security levels, compliance status, risk levels, etc.
  */
 const StatusBadge: React.FC<StatusBadgeProps> = ({
-  status = "neutral",
+  status,
   children,
   className = "",
+  testId,
   size = "md",
-  testId = COMMON_COMPONENT_TEST_IDS.STATUS_BADGE,
 }) => {
-  // Get base classes for the badge
-  const getBaseClasses = () => {
-    const baseClasses = [
-      "inline-flex",
-      "items-center",
-      "justify-center",
-      "rounded-full",
-      "font-medium",
-      "status-badge",
-    ];
-
-    // Add size-specific classes
-    switch (size) {
-      case "xs":
-        baseClasses.push("text-xs", "py-0.5", "px-2");
-        break;
-      case "sm":
-        baseClasses.push("text-xs", "py-1", "px-2");
-        break;
-      case "lg":
-        baseClasses.push("text-sm", "py-2", "px-4", "font-bold");
-        break;
-      case "md":
-      default:
-        baseClasses.push("text-sm", "py-1", "px-3");
-    }
-
-    return baseClasses.join(" ");
+  // Status variant styling
+  const variants = {
+    success:
+      "bg-green-100 text-green-800 border-green-300 dark:bg-green-900 dark:bg-opacity-40 dark:text-green-300 dark:border-green-700",
+    warning:
+      "bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-yellow-900 dark:bg-opacity-40 dark:text-yellow-300 dark:border-yellow-700",
+    error:
+      "bg-red-100 text-red-800 border-red-300 dark:bg-red-900 dark:bg-opacity-40 dark:text-red-300 dark:border-red-700",
+    info: "bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-900 dark:bg-opacity-40 dark:text-blue-300 dark:border-blue-700",
+    purple:
+      "bg-purple-100 text-purple-800 border-purple-300 dark:bg-purple-900 dark:bg-opacity-40 dark:text-purple-300 dark:border-purple-700",
+    neutral:
+      "bg-gray-100 text-gray-800 border-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600",
   };
 
-  // Get variant-specific styling
-  const getVariantClasses = () => {
-    // Define the classes for each variant
-    const variantMap: Record<StatusBadgeVariant, string> = {
-      success:
-        "bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-20 dark:text-green-300 success",
-      warning:
-        "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:bg-opacity-20 dark:text-yellow-300 warning",
-      error:
-        "bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-20 dark:text-red-300 error",
-      info: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-20 dark:text-blue-300 info",
-      purple:
-        "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:bg-opacity-20 dark:text-purple-300 purple",
-      neutral:
-        "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:bg-opacity-50 dark:text-gray-300 neutral",
-    };
-
-    return variantMap[status] || variantMap.neutral;
+  // Size classes
+  const sizeClasses = {
+    xs: "text-xs px-1.5 py-0.5 rounded",
+    sm: "text-xs px-2 py-1 rounded-md",
+    md: "text-sm px-2.5 py-1 rounded-md",
+    lg: "text-sm px-3 py-1.5 rounded-md",
   };
 
   return (
     <span
+      className={`inline-flex items-center font-medium border ${variants[status]} ${sizeClasses[size]} ${className}`}
       data-testid={testId}
-      data-status={status}
-      className={`${getBaseClasses()} ${getVariantClasses()} ${className}`}
     >
       {children}
     </span>

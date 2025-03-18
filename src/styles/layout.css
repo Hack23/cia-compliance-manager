@@ -9,39 +9,51 @@
   padding-left: 0.25rem;
 }
 
-/* Dashboard grid with improved spacing */
+/* Improved dashboard grid with better spacing */
 .dashboard-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 0.4rem !important; /* Reduced gap further for more content */
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0.75rem; /* Reduced gap */
   width: 100%;
-  max-width: 100% !important;
-  padding: 0.25rem !important;
+  padding: 0.25rem; /* Reduced padding */
+  overflow: visible; /* Ensure grid doesn't clip content */
 }
 
 /* Widget column sizing */
 .widget-col-4 {
-  grid-column: span 1 !important; /* Force span 1 column */
+  grid-column: span 4;
 }
 
 .widget-col-6 {
-  grid-column: span 1 !important; /* Force span 1 column */
+  grid-column: span 6;
 }
 
 .widget-col-12 {
-  grid-column: span 3 !important; /* Force span all 3 columns */
+  grid-column: span 12;
+}
+
+/* Fix widget size consistency */
+[data-testid^="widget-"] {
+  width: 100%; /* Keep width at 100% */
+  min-height: auto; /* Let content determine height */ /* Forces minimum height regardless of content */
+  overflow: visible; /* Ensure visibility */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+  height: auto; /* Allow natural height */
 }
 
 /* Make all widget sizes consistent at 1/3 width */
 .widget-col-2,
 .widget-col-4,
 .widget-col-6 {
-  grid-column: span 1 !important; /* Force all widgets to take exactly 1/3 of space */
+  grid-column: span 1; /* Force all widgets to take exactly 1/3 of space */
 }
 
 /* Full width widgets should still be full width */
 .widget-col-12 {
-  grid-column: span 3 !important;
+  grid-column: span 3;
 }
 
 /* Override Tailwind responsive classes */
@@ -53,17 +65,17 @@
 
 /* Content height distribution */
 .full-height-container {
-  height: calc(
-    100vh - 150px
-  ); /* Adjustable height that fills most of viewport */
+  height: auto; /* Let content determine height */
   min-height: 600px; /* Minimum height */
-  overflow: hidden;
+  overflow: visible; /* Allow content to be visible */
 }
 
-/* Widget sizing consistency - more compact */
+/* Optimize widget height */
 .widget {
-  min-height: 300px !important; /* Reduced minimum height */
-  width: 100% !important;
+  min-height: 300px; /* Minimum height without !important */
+  width: 100%;
+  height: auto; /* Allow natural height */
+  max-height: none; /* Remove maximum height restriction */
 }
 
 /* Each widget takes 1/3 of the grid space */
@@ -81,6 +93,12 @@
   min-height: 400px !important;
 }
 
+/* Reduced app title padding */
+.app-title {
+  padding: 0.75rem 1.25rem; /* Reduced padding */
+  margin-bottom: 0.75rem; /* Reduced margin */
+}
+
 /* Responsive adjustments */
 @media (max-width: 1400px) {
   .dashboard-grid {
@@ -90,6 +108,10 @@
   .widget {
     min-height: 320px !important;
   }
+
+  .widget-col-3 {
+    grid-column: span 4;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -97,6 +119,22 @@
   .widget-col-4,
   .widget-col-6 {
     grid-column: span 1; /* Still 3 per row on medium-large screens */
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+  .widget-col-3 {
+    grid-column: span 4;
+  }
+
+  .widget-col-4 {
+    grid-column: span 4;
+  }
+
+  .widget-col-6 {
+    grid-column: span 6;
   }
 }
 
@@ -121,7 +159,8 @@
 
 @media (max-width: 768px) {
   .dashboard-grid {
-    grid-template-columns: 1fr !important; /* Single column on small screens */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
   }
 
   .widget-col-2,
@@ -129,6 +168,12 @@
   .widget-col-6,
   .widget-col-12 {
     grid-column: span 1 !important; /* 1 per row on small screens */
+  }
+
+  .widget-col-3,
+  .widget-col-4,
+  .widget-col-6 {
+    grid-column: span 4;
   }
 }
 
@@ -143,22 +188,45 @@
   }
 }
 
-/* Test Environment Fixes */
-@media (max-width: 1024px) {
-  /* Force visibility of widgets in testing environments */
-  [data-testid^="widget-"] {
-    overflow: visible !important;
-    position: relative !important;
-    height: auto !important;
-    min-height: 50px !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    visibility: visible !important;
-  }
-
-  /* Ensure the dashboard grid doesn't clip content */
+@media (max-width: 480px) {
   .dashboard-grid {
-    overflow: visible !important;
-    height: auto !important;
+    grid-template-columns: 1fr;
   }
+}
+
+/* Test Environment Fixes - Make these adjustments standard */
+/* Force visibility of widgets */
+[data-testid^="widget-"] {
+  overflow: visible !important;
+  position: relative !important;
+  height: auto !important; /* Allow natural height */
+  min-height: 200px !important; /* Reduced minimum height */
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+  max-height: none !important; /* Remove maximum height restriction */
+}
+
+/* Ensure tab visibility */
+[role="tab"] {
+  visibility: visible !important;
+  display: inline-block !important;
+  position: relative !important;
+  z-index: 1000 !important;
+}
+
+/* Ensure the dashboard grid doesn't clip content */
+.dashboard-grid {
+  overflow: visible !important;
+  height: auto !important;
+}
+
+/* Fix for content within tab panels */
+[role="tabpanel"] {
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: -1px;
+  min-height: 0; /* Remove minimum height restriction */
+  overflow: visible; /* Allow content to be visible */
+  height: auto; /* Allow natural height */
 }

@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { CIAComponentType, SecurityLevel } from "../../types/cia";
+import { SecurityLevel } from "../../types/cia";
+import { CIAComponentType } from "../../types/cia-services";
 import BusinessImpactAnalysisWidget from "./BusinessImpactAnalysisWidget";
 
 // Mock ciaContentService with all required functions

@@ -9,75 +9,63 @@ interface TooltipProps {
 }
 
 /**
- * Tooltip component that shows content on hover
+ * Reusable tooltip component for displaying help text and additional information
  *
- * @param content - Content to display in the tooltip
- * @param children - Element that triggers the tooltip on hover
- * @param position - Position of tooltip relative to children
- * @param className - Additional CSS classes
- * @param testId - Test ID for component
+ * Provides consistent tooltip styling and behavior across the application
  */
 const Tooltip: React.FC<TooltipProps> = ({
   content,
   children,
   position = "top",
   className = "",
-  testId,
+  testId = "tooltip",
 }) => {
-  const [showTooltip, setShowTooltip] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-  // Calculate position classes
-  const getPositionClasses = () => {
-    switch (position) {
-      case "bottom":
-        return "top-full mt-1";
-      case "left":
-        return "right-full mr-1";
-      case "right":
-        return "left-full ml-1";
-      case "top":
-      default:
-        return "bottom-full mb-1";
-    }
+  // Position classes
+  const positionClasses = {
+    top: "bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 mb-1",
+    bottom: "top-full left-1/2 transform -translate-x-1/2 translate-y-2 mt-1",
+    left: "right-full top-1/2 transform -translate-x-2 -translate-y-1/2 mr-1",
+    right: "left-full top-1/2 transform translate-x-2 -translate-y-1/2 ml-1",
+  };
+
+  // Arrow position classes
+  const arrowClasses = {
+    top: "bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full border-t-gray-800 dark:border-t-gray-600 border-l-transparent border-r-transparent border-b-transparent",
+    bottom:
+      "top-0 left-1/2 transform -translate-x-1/2 -translate-y-full border-b-gray-800 dark:border-b-gray-600 border-l-transparent border-r-transparent border-t-transparent",
+    left: "right-0 top-1/2 transform translate-x-full -translate-y-1/2 border-l-gray-800 dark:border-l-gray-600 border-t-transparent border-b-transparent border-r-transparent",
+    right:
+      "left-0 top-1/2 transform -translate-x-full -translate-y-1/2 border-r-gray-800 dark:border-r-gray-600 border-t-transparent border-b-transparent border-l-transparent",
   };
 
   return (
-    <div className={`relative inline-block ${className}`} data-testid={testId}>
-      <div
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
-        onFocus={() => setShowTooltip(true)}
-        onBlur={() => setShowTooltip(false)}
-        className="inline-block"
-      >
-        {children}
-      </div>
+    <div
+      className={`inline-block relative ${className}`}
+      onMouseEnter={() => setIsVisible(true)}
+      onMouseLeave={() => setIsVisible(false)}
+      data-testid={testId}
+    >
+      {/* Tooltip trigger */}
+      <div className="cursor-help">{children}</div>
 
-      {showTooltip && (
+      {/* Tooltip content */}
+      <div
+        className={`absolute z-50 whitespace-nowrap max-w-xs ${
+          positionClasses[position]
+        } px-3 py-2 bg-gray-800 dark:bg-gray-600 text-white rounded shadow-lg text-sm ${
+          isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+        } transition-opacity duration-200`}
+        data-testid={`${testId}-content`}
+      >
+        {content}
+
+        {/* Arrow */}
         <div
-          className={`absolute z-50 bg-gray-800 dark:bg-gray-700 text-white text-xs rounded py-1 px-2 left-1/2 transform -translate-x-1/2 w-max max-w-xs shadow-md ${getPositionClasses()}`}
-          role="tooltip"
-        >
-          {content}
-          <div
-            className={`tooltip-arrow absolute ${
-              position === "bottom"
-                ? "bottom-full"
-                : position === "top"
-                ? "top-full"
-                : "top-1/2 -translate-y-1/2"
-            } left-1/2 transform -translate-x-1/2 border-4 border-transparent ${
-              position === "bottom"
-                ? "border-b-gray-800 dark:border-b-gray-700"
-                : position === "top"
-                ? "border-t-gray-800 dark:border-t-gray-700"
-                : position === "left"
-                ? "border-l-gray-800 dark:border-l-gray-700 left-auto right-0"
-                : "border-r-gray-800 dark:border-r-gray-700 left-0 right-auto"
-            }`}
-          ></div>
-        </div>
-      )}
+          className={`absolute w-0 h-0 border-4 ${arrowClasses[position]}`}
+        ></div>
+      </div>
     </div>
   );
 };

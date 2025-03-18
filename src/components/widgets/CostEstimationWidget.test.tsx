@@ -87,12 +87,20 @@ describe("CostEstimationWidget", () => {
   it("uses correct cost analysis message for large solution", () => {
     vi.mocked(ciaContentService.getSecurityMetrics).mockReturnValueOnce({
       totalCapex: 120,
-      totalOpex: 80,
-      capexEstimate: "$600000",
-      opexEstimate: "$160000/year",
-      isSmallSolution: false,
-      roi: "275%",
-    });
+      totalOpex: 48,
+      totalCost: 168,
+      score: 3,
+      maxScore: 4,
+      percentage: "75%",
+      availabilityCapex: 40,
+      availabilityOpex: 16,
+      integrityCapex: 40,
+      integrityOpex: 16,
+      confidentialityCapex: 40,
+      confidentialityOpex: 16,
+      riskReduction: "85%",
+      roi: "275%"  // Properly include the roi property
+    } as any); // Use type assertion to avoid TypeScript errors
 
     render(<CostEstimationWidget {...defaultProps} />);
     expect(

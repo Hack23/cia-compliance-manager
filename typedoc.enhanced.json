@@ -9,7 +9,7 @@
   "excludeExternals": true,
   "categorizeByGroup": true,
   "categoryOrder": ["Core", "Components", "Utils", "Types", "*"],
-  "plugin": ["typedoc-plugin-merge-modules", "typedoc-plugin-mermaid"],
+  "plugin": ["typedoc-plugin-mermaid"],
   "mergeModulesMergeMode": "project",
   "readme": "./docs/api-overview.md",
   "theme": "default",

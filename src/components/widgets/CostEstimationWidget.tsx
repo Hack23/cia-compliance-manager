@@ -1,16 +1,12 @@
 import React, { useMemo } from "react";
-import { COST_ANALYSIS } from "../../constants/appConstants";
-import { COST_TEST_IDS } from "../../constants/testIds";
-import ciaContentService, {
-  getImplementationTime,
-} from "../../services/ciaContentService";
 import { SecurityLevel } from "../../types/cia";
-import MetricsCard from "../common/MetricsCard";
+import { getSecurityLevelValue } from "../../utils/securityLevelUtils";
 import StatusBadge from "../common/StatusBadge";
+import WidgetActions, { WidgetActionButton } from "../common/WidgetActions";
 import WidgetContainer from "../common/WidgetContainer";
 
 /**
- * Props for the CostEstimationWidget component
+ * Props for CostEstimationWidget
  */
 export interface CostEstimationWidgetProps {
   availabilityLevel: SecurityLevel;
@@ -20,245 +16,337 @@ export interface CostEstimationWidgetProps {
   testId?: string;
 }
 
-// Define a proper interface for security metrics
-interface SecurityMetricsType {
-  totalCapex: number;
-  totalOpex: number;
-  capexEstimate: string;
-  opexEstimate: string;
-  isSmallSolution: boolean;
-  roi: string;
-  implementationTime?: string; // Make this optional
-}
-
 /**
- * CostEstimationWidget displays cost estimates for implementing security measures
- * based on the selected CIA levels.
+ * Widget that displays cost estimations for implementing security measures
+ *
+ * ## Business Perspective
+ *
+ * This widget provides financial impact analysis for implementing security controls,
+ * helping stakeholders understand the investment required to achieve the desired
+ * security levels. The estimation includes both capital and operational expenses,
+ * allowing for budget planning and ROI calculations. 💰
+ *
+ * @param props - Component properties
+ * @returns The rendered component
  */
 const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
   availabilityLevel,
   integrityLevel,
   confidentialityLevel,
   className = "",
-  testId = COST_TEST_IDS.COST_ESTIMATION_WIDGET,
+  testId = "cost-estimation-widget",
 }) => {
-  // Get security metrics from ciaContentService
-  const securityMetrics = useMemo<SecurityMetricsType>(
-    () =>
-      ciaContentService.getSecurityMetrics(
-        availabilityLevel,
-        integrityLevel,
-        confidentialityLevel
-      ) as SecurityMetricsType, // Cast to our interface
-    [availabilityLevel, integrityLevel, confidentialityLevel]
-  );
+  // Get numeric values for security levels
+  const availabilityValue = getSecurityLevelValue(availabilityLevel);
+  const integrityValue = getSecurityLevelValue(integrityLevel);
+  const confidentialityValue = getSecurityLevelValue(confidentialityLevel);
 
-  const implementationTime = getImplementationTime(
-    availabilityLevel as SecurityLevel,
-    integrityLevel as SecurityLevel,
-    confidentialityLevel as SecurityLevel
-  );
+  // Calculate cost estimations
+  const costEstimates = useMemo(() => {
+    // Base CAPEX (Capital Expenditure) cost per security level
+    const baseCAPEX = 50000; // $50,000 per level
+    const baseOPEX = 15000; // $15,000 per level annually
 
-  // Calculate 3-year total cost (CAPEX + 3 years of OPEX)
-  const threeYearTotal = useMemo(() => {
-    const capex = parseInt(
-      securityMetrics.capexEstimate.replace(/[^0-9]/g, "")
-    );
-    const opex = parseInt(securityMetrics.opexEstimate.replace(/[^0-9]/g, ""));
-    return `$${(capex + opex * 3).toLocaleString()}`;
-  }, [securityMetrics.capexEstimate, securityMetrics.opexEstimate]);
+    // Calculate weighted costs
+    const availabilityCAPEX = baseCAPEX * (availabilityValue + 1) * 0.8;
+    const integrityCAPEX = baseCAPEX * (integrityValue + 1) * 1.0;
+    const confidentialityCAPEX = baseCAPEX * (confidentialityValue + 1) * 1.2;
 
-  const formatCurrency = (value: string) => {
-    // Convert "$X" or "$X/year" to "$X,XXX" or "$X,XXX/year"
-    const match = value.match(/\$(\d+)(.*)$/);
-    if (match && match[1]) {
-      const amount = parseInt(match[1]);
-      const suffix = match[2] || "";
-      return `$${amount.toLocaleString()}${suffix}`;
-    }
-    return value;
+    const availabilityOPEX = baseOPEX * (availabilityValue + 1) * 0.8;
+    const integrityOPEX = baseOPEX * (integrityValue + 1) * 1.0;
+    const confidentialityOPEX = baseOPEX * (confidentialityValue + 1) * 1.2;
+
+    // Total costs
+    const totalCAPEX =
+      availabilityCAPEX + integrityCAPEX + confidentialityCAPEX;
+    const totalOPEX = availabilityOPEX + integrityOPEX + confidentialityOPEX;
+
+    return {
+      availability: {
+        capex: availabilityCAPEX,
+        opex: availabilityOPEX,
+      },
+      integrity: {
+        capex: integrityCAPEX,
+        opex: integrityOPEX,
+      },
+      confidentiality: {
+        capex: confidentialityCAPEX,
+        opex: confidentialityOPEX,
+      },
+      total: {
+        capex: totalCAPEX,
+        opex: totalOPEX,
+        annual: totalOPEX + totalCAPEX * 0.2, // Annual cost including CAPEX amortization
+      },
+    };
+  }, [availabilityValue, integrityValue, confidentialityValue]);
+
+  // Format currency values
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value);
   };
+
+  // Calculate ROI metrics
+  const roi = useMemo(() => {
+    // Calculate risk reduction value
+    const avgSecurityValue =
+      (availabilityValue + integrityValue + confidentialityValue) / 3;
+    const riskReductionPercent = avgSecurityValue * 25;
+
+    // Estimate potential breach cost saved
+    const potentialBreachCost = 500000;
+    const breachCostSaved = (potentialBreachCost * riskReductionPercent) / 100;
+
+    // Calculate ROI percentage
+    const totalAnnualCost = costEstimates.total.annual;
+    const roiPercent = (breachCostSaved / totalAnnualCost) * 100;
+
+    return {
+      percentage: roiPercent.toFixed(0),
+      riskReduction: riskReductionPercent.toFixed(0),
+      breachCostSaved: formatCurrency(breachCostSaved),
+    };
+  }, [
+    availabilityValue,
+    integrityValue,
+    confidentialityValue,
+    costEstimates.total.annual,
+  ]);
+
+  // Create action buttons for the widget header
+  const actionsElement = (
+    <WidgetActions>
+      <WidgetActionButton
+        onClick={() => console.log("Export cost estimation")}
+        icon={<span>📋</span>}
+        ariaLabel="Export cost estimation"
+        testId="export-cost-button"
+      />
+      <WidgetActionButton
+        onClick={() => window.print()}
+        icon={<span>🖨️</span>}
+        ariaLabel="Print cost estimation"
+        testId="print-cost-button"
+      />
+    </WidgetActions>
+  );
 
   return (
     <WidgetContainer
-      title="Estimated Implementation Cost"
+      title="Cost Estimation"
       icon="💰"
-      testId={testId}
       className={className}
+      testId={testId}
+      actions={actionsElement}
     >
-      <div className="space-y-6">
-        {/* Cost Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <MetricsCard
-            title="Capital Expenditure"
-            value={formatCurrency(securityMetrics.capexEstimate || "")} // Add default empty string
-            icon="💼"
-            testId={COST_TEST_IDS.CAPEX_ESTIMATE_VALUE}
-            accentColor="#3498db"
-            variant="info"
-          />
-          <MetricsCard
-            title="Operational Expenditure"
-            value={formatCurrency(securityMetrics.opexEstimate)}
-            icon="⚙️"
-            testId={COST_TEST_IDS.OPEX_ESTIMATE_VALUE}
-            accentColor="#2ecc71"
-            variant="success"
-          />
-          <MetricsCard
-            title="3-Year TCO"
-            value={threeYearTotal}
-            icon="🔄"
-            testId={COST_TEST_IDS.THREE_YEAR_TOTAL}
-            accentColor="#9b59b6"
-            variant="purple"
-          />
-        </div>
-
-        {/* Budget Allocation */}
-        <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border shadow-sm">
-          <h3 className="text-lg font-medium mb-3 flex items-center">
-            <span className="mr-2">💰</span>
-            Budget Allocation
-          </h3>
-
-          <div className="space-y-4">
-            {/* CAPEX Budget Impact */}
-            <div className="space-y-1">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600 dark:text-gray-300">
-                  Capital Expenditure
-                </span>
-                <span
-                  className="text-sm font-medium text-blue-700 dark:text-blue-300"
-                  data-testid={COST_TEST_IDS.CAPEX_PERCENTAGE}
-                >
-                  {securityMetrics.totalCapex}% of IT budget
-                </span>
+      <div className="max-h-[550px] overflow-y-auto pr-1">
+        <div className="space-y-4 p-2">
+          {/* Total Implementation Costs */}
+          <div className="p-4 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+            <h3 className="text-lg font-medium mb-3">
+              Total Implementation Costs
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="p-3 bg-white dark:bg-gray-800 rounded-lg text-center">
+                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                  Initial Investment
+                </div>
+                <div className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                  {formatCurrency(costEstimates.total.capex)}
+                </div>
               </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                <div
-                  className="bg-blue-600 h-2.5 rounded-full"
-                  style={{ width: `${securityMetrics.totalCapex}%` }}
-                ></div>
+              <div className="p-3 bg-white dark:bg-gray-800 rounded-lg text-center">
+                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                  Annual Operations
+                </div>
+                <div className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                  {formatCurrency(costEstimates.total.opex)}
+                </div>
               </div>
-            </div>
-
-            {/* OPEX Budget Impact */}
-            <div className="space-y-1">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600 dark:text-gray-300">
-                  Operational Expenditure
-                </span>
-                <span
-                  className="text-sm font-medium text-green-700 dark:text-green-300"
-                  data-testid={COST_TEST_IDS.OPEX_PERCENTAGE}
-                >
-                  {securityMetrics.totalOpex}% of IT budget
-                </span>
-              </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                <div
-                  className="bg-green-600 h-2.5 rounded-full"
-                  style={{ width: `${securityMetrics.totalOpex}%` }}
-                ></div>
+              <div className="p-3 bg-white dark:bg-gray-800 rounded-lg text-center">
+                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                  Total Annual Cost
+                </div>
+                <div className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                  {formatCurrency(costEstimates.total.annual)}
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* ROI and Implementation */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* ROI Card */}
-          <div className="bg-green-50 dark:bg-green-900 dark:bg-opacity-20 p-4 rounded-lg border border-green-200 dark:border-green-800">
-            <h3 className="text-lg font-medium mb-2 flex items-center">
-              <span className="mr-2">📈</span>
-              Return on Investment
-            </h3>
-            <div className="flex items-center mb-2">
-              <StatusBadge
-                status="success"
-                size="lg"
-                testId={COST_TEST_IDS.ROI_ESTIMATE}
-              >
-                {securityMetrics.roi}
-              </StatusBadge>
-              <span className="ml-2 text-sm text-gray-600 dark:text-gray-300">
-                Estimated ROI
-              </span>
+          {/* Component Costs */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Availability Cost */}
+            <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-l-4 border-blue-500">
+              <div className="flex justify-between items-center mb-2">
+                <h4 className="font-medium flex items-center">
+                  <span className="mr-2">⏱️</span>Availability
+                </h4>
+                <StatusBadge status="info">{availabilityLevel}</StatusBadge>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-center">
+                <div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                    CAPEX
+                  </div>
+                  <div className="text-sm font-bold text-blue-600 dark:text-blue-400">
+                    {formatCurrency(costEstimates.availability.capex)}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                    OPEX
+                  </div>
+                  <div className="text-sm font-bold text-blue-600 dark:text-blue-400">
+                    {formatCurrency(costEstimates.availability.opex)}
+                  </div>
+                </div>
+              </div>
             </div>
-            <p className="text-sm text-gray-600 dark:text-gray-300">
-              Based on prevented breaches, operational efficiencies, and
-              compliance cost reduction.
-            </p>
+
+            {/* Integrity Cost */}
+            <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-l-4 border-green-500">
+              <div className="flex justify-between items-center mb-2">
+                <h4 className="font-medium flex items-center">
+                  <span className="mr-2">✓</span>Integrity
+                </h4>
+                <StatusBadge status="success">{integrityLevel}</StatusBadge>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-center">
+                <div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                    CAPEX
+                  </div>
+                  <div className="text-sm font-bold text-green-600 dark:text-green-400">
+                    {formatCurrency(costEstimates.integrity.capex)}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                    OPEX
+                  </div>
+                  <div className="text-sm font-bold text-green-600 dark:text-green-400">
+                    {formatCurrency(costEstimates.integrity.opex)}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Confidentiality Cost */}
+            <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-l-4 border-purple-500">
+              <div className="flex justify-between items-center mb-2">
+                <h4 className="font-medium flex items-center">
+                  <span className="mr-2">🔒</span>Confidentiality
+                </h4>
+                <StatusBadge status="purple">
+                  {confidentialityLevel}
+                </StatusBadge>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-center">
+                <div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                    CAPEX
+                  </div>
+                  <div className="text-sm font-bold text-purple-600 dark:text-purple-400">
+                    {formatCurrency(costEstimates.confidentiality.capex)}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                    OPEX
+                  </div>
+                  <div className="text-sm font-bold text-purple-600 dark:text-purple-400">
+                    {formatCurrency(costEstimates.confidentiality.opex)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ROI Analysis */}
+          <div className="p-4 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
+            <h3 className="text-lg font-medium mb-3">ROI Analysis</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="p-3 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm">
+                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                  Estimated ROI
+                </div>
+                <div className="text-xl font-bold text-green-600 dark:text-green-400">
+                  {roi.percentage}%
+                </div>
+              </div>
+              <div className="p-3 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm">
+                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                  Risk Reduction
+                </div>
+                <div className="text-xl font-bold text-green-600 dark:text-green-400">
+                  {roi.riskReduction}%
+                </div>
+              </div>
+              <div className="p-3 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm">
+                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                  Estimated Savings
+                </div>
+                <div className="text-xl font-bold text-green-600 dark:text-green-400">
+                  {roi.breachCostSaved}
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Implementation Timeline */}
-          <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
-            <h3 className="text-lg font-medium mb-2 flex items-center">
-              <span className="mr-2">⏱️</span>
+          <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border shadow-sm">
+            <h3 className="text-lg font-medium mb-3">
               Implementation Timeline
             </h3>
-            <div className="flex items-center mb-2">
-              <StatusBadge status="info" size="lg">
-                {implementationTime}
-              </StatusBadge>
+            <div className="space-y-3">
+              <div className="flex items-center">
+                <div className="w-1/4 text-sm font-medium">Planning</div>
+                <div className="w-3/4 bg-gray-200 dark:bg-gray-700 rounded-full h-4">
+                  <div
+                    className="bg-blue-500 h-4 rounded-full"
+                    style={{ width: "15%" }}
+                  ></div>
+                </div>
+                <div className="ml-2 text-sm">2-4 weeks</div>
+              </div>
+              <div className="flex items-center">
+                <div className="w-1/4 text-sm font-medium">Development</div>
+                <div className="w-3/4 bg-gray-200 dark:bg-gray-700 rounded-full h-4">
+                  <div
+                    className="bg-blue-500 h-4 rounded-full"
+                    style={{ width: "40%" }}
+                  ></div>
+                </div>
+                <div className="ml-2 text-sm">2-3 months</div>
+              </div>
+              <div className="flex items-center">
+                <div className="w-1/4 text-sm font-medium">Testing</div>
+                <div className="w-3/4 bg-gray-200 dark:bg-gray-700 rounded-full h-4">
+                  <div
+                    className="bg-blue-500 h-4 rounded-full"
+                    style={{ width: "20%" }}
+                  ></div>
+                </div>
+                <div className="ml-2 text-sm">3-4 weeks</div>
+              </div>
+              <div className="flex items-center">
+                <div className="w-1/4 text-sm font-medium">Deployment</div>
+                <div className="w-3/4 bg-gray-200 dark:bg-gray-700 rounded-full h-4">
+                  <div
+                    className="bg-blue-500 h-4 rounded-full"
+                    style={{ width: "25%" }}
+                  ></div>
+                </div>
+                <div className="ml-2 text-sm">1-2 weeks</div>
+              </div>
             </div>
-            <p className="text-sm text-gray-600 dark:text-gray-300">
-              Estimated time to fully implement and operationalize these
-              security controls.
-            </p>
-          </div>
-        </div>
-
-        {/* Cost Analysis & Recommendation */}
-        <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border shadow-sm">
-          <h3 className="text-lg font-medium mb-3">Cost Analysis</h3>
-
-          <p
-            className="text-sm text-gray-700 dark:text-gray-300 mb-3"
-            data-testid={COST_TEST_IDS.COST_ANALYSIS_TEXT}
-          >
-            {securityMetrics.isSmallSolution
-              ? COST_ANALYSIS.SMALL_SOLUTION
-              : COST_ANALYSIS.LARGE_SOLUTION}
-          </p>
-
-          <div className="flex flex-wrap gap-2 mt-2">
-            <StatusBadge status="info">Capital Investment</StatusBadge>
-            <StatusBadge status="success">Recurring Costs</StatusBadge>
-            <StatusBadge status="purple">Long-term Value</StatusBadge>
-          </div>
-        </div>
-
-        {/* Cost Breakdown */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* CAPEX Components */}
-          <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-10 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
-            <h4 className="text-md font-medium mb-3 flex items-center">
-              <span className="mr-2">⚙️</span>
-              CAPEX Components
-            </h4>
-            <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
-              <li>Security hardware and infrastructure</li>
-              <li>Software licenses and tools</li>
-              <li>Initial implementation services</li>
-              <li>Training and certification</li>
-            </ul>
-          </div>
-
-          {/* OPEX Components */}
-          <div className="bg-green-50 dark:bg-green-900 dark:bg-opacity-10 p-4 rounded-lg border border-green-200 dark:border-green-800">
-            <h4 className="text-md font-medium mb-3 flex items-center">
-              <span className="mr-2">⚙️</span>
-              OPEX Components
-            </h4>
-            <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
-              <li>Personnel costs and staffing</li>
-              <li>Maintenance and support contracts</li>
-              <li>Subscription services</li>
-              <li>Ongoing training and awareness</li>
-            </ul>
           </div>
         </div>
       </div>

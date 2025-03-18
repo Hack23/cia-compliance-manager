@@ -144,7 +144,7 @@ describe("CIAClassificationApp", () => {
 
   it("listens for test events to set security levels", () => {
     render(<CIAClassificationApp />);
-    // Verify event listener was registered
+    // Verify event listener registration without checking exact function
     expect(document.addEventListener).toHaveBeenCalledWith(
       "test:set-values",
       expect.any(Function)
@@ -160,7 +160,8 @@ describe("CIAClassificationApp", () => {
   it("removes event listeners on unmount", () => {
     const { unmount } = render(<CIAClassificationApp />);
     unmount();
-    // Verify listener removal was called
+    
+    // Just verify removeEventListener was called with first parameter matching
     expect(document.removeEventListener).toHaveBeenCalledWith(
       "test:set-values",
       expect.any(Function)

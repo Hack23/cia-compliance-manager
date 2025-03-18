@@ -5,6 +5,37 @@ import { SecurityLevel } from "../types/cia";
 import { WidgetConfig, WidgetSize, WidgetSizePreset } from "../types/widget";
 import { getSecurityLevelValue } from "./securityLevelUtils";
 
+/**
+ * Widget error handling utility
+ * Creates an error display component
+ */
+export function handleWidgetError(
+  error: Error | null | undefined,
+  testId?: string
+): React.ReactElement | null {
+  // Return null when error is null or undefined
+  if (!error) {
+    return null;
+  }
+
+  return (
+    <div
+      className="w-full h-full flex flex-col items-center justify-center p-4 text-center"
+      data-testid={testId}
+    >
+      <div className="text-red-500 dark:text-red-400 text-xl mb-2">
+        {/* Replace ExclamationTriangleIcon with simple SVG or emoji */}
+        <span role="img" aria-label="Warning" className="inline h-5 w-5 mr-2">⚠️</span>
+        <span>Error</span>
+      </div>
+      <p className="text-gray-700 dark:text-gray-300">{error.message}</p>
+      <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">
+        Please try refreshing the page or contact support if the problem persists.
+      </p>
+    </div>
+  );
+}
+
 // Define WidgetType for local use since it's not exported from types/widgets
 export enum WidgetType {
   SECURITY_LEVEL = "SECURITY_LEVEL",
@@ -342,51 +373,6 @@ export function widgetLoadingIndicator(testId: string) {
       className="flex items-center justify-center p-4 h-full w-full"
     >
       <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500"></div>
-    </div>
-  );
-}
-
-/**
- * Render an error message for widgets
- * @param error Error object
- * @param testId Test ID for the error message
- * @returns Error message JSX element or null if no error
- */
-export function handleWidgetError(error: Error | null, testId: string) {
-  if (!error) return null;
-
-  return (
-    <div
-      data-testid={testId}
-      className="bg-red-50 dark:bg-red-900 dark:bg-opacity-20 border-l-4 border-red-500 p-4"
-    >
-      <div className="flex items-center">
-        <div className="flex-shrink-0">
-          <svg
-            className="h-5 w-5 text-red-500"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </div>
-        <div className="ml-3">
-          <h3
-            className="text-sm font-medium text-red-800 dark:text-red-200"
-            role="alert"
-          >
-            Widget Error
-          </h3>
-          <div className="mt-2 text-sm text-red-700 dark:text-red-300">
-            <p>{error.message}</p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 /**
  * Centralized grid styles for dashboard layout
  */
+import { WidgetConfig, WidgetSize } from "../types/widget";
 
 // Base grid container styles
 export const gridClasses = `
@@ -64,10 +65,45 @@ export const gridConfig = {
   lg: 3, // 3 columns on large screens
 };
 
-// Sizing constants for widgets
+// Update widget size presets to use consistent 12-column grid
+export enum WidgetSizePreset {
+  SMALL = "small", // 3 columns
+  MEDIUM = "medium", // 4 columns
+  LARGE = "large", // 6 columns
+  EXTRA_LARGE = "extraLarge", // 8 columns
+  FULL_WIDTH = "fullWidth", // 12 columns
+  DEFAULT = "medium",
+}
+
+// Update widget size spans
 export const widgetSizes = {
-  small: "col-span-1",
-  medium: "col-span-2",
-  large: "col-span-3",
-  full: "col-span-full",
+  small: "col-span-3",
+  medium: "col-span-4",
+  large: "col-span-6",
+  extraLarge: "col-span-8",
+  full: "col-span-12",
 };
+
+// Update getWidgetSize function (if applicable)
+export function getWidgetSize(widget: Partial<WidgetConfig>): WidgetSize {
+  // Use explicit width and height if provided
+  if (widget.width !== undefined && widget.height !== undefined) {
+    return { width: widget.width, height: widget.height };
+  }
+
+  // Get dimensions based on size preset
+  switch (widget.size) {
+    case WidgetSizePreset.SMALL:
+      return { width: 3, height: 1 };
+    case WidgetSizePreset.MEDIUM:
+      return { width: 4, height: 1 };
+    case WidgetSizePreset.LARGE:
+      return { width: 6, height: 2 };
+    case WidgetSizePreset.EXTRA_LARGE:
+      return { width: 8, height: 2 };
+    case WidgetSizePreset.FULL_WIDTH:
+      return { width: 12, height: 1 };
+    default:
+      return { width: 4, height: 1 };
+  }
+}

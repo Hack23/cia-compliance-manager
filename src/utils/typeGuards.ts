@@ -1,9 +1,24 @@
-import { CIADetails, SecurityLevel } from "../types/cia"; // Added SecurityLevel import
+import { SecurityLevel } from "../types/cia";
+import {
+  BusinessImpactDetails,
+  CIAComponentType,
+  CIADetails,
+  ROIEstimate
+} from "../types/cia-services";
 import {
   AvailabilityDetail,
+  CIAImpactSummaryWidgetProps,
   ConfidentialityDetail,
   IntegrityDetail,
+  SecurityLevelWidgetProps,
+  WidgetProps
 } from "../types/widgets";
+
+/**
+ * Type guard utilities for the CIA compliance manager
+ *
+ * These utilities ensure type safety when working with domain-specific types.
+ */
 
 /**
  * Type guard to check if an object is an AvailabilityDetail
@@ -57,21 +72,6 @@ export function isValidCIADetail(
   detail: CIADetails | undefined | null
 ): detail is CIADetails {
   return detail !== undefined && detail !== null;
-}
-
-/**
- * New alias for backward compatibility
- */
-export function isCIADetails(obj: unknown): obj is CIADetails {
-  if (!obj || typeof obj !== "object") return false;
-
-  const details = obj as Partial<CIADetails>;
-  return (
-    (typeof details.description === "string" ||
-      details.description === undefined) &&
-    (typeof details.businessImpact === "string" ||
-      details.businessImpact === undefined)
-  );
 }
 
 /**
@@ -381,4 +381,142 @@ export function getImplementationCost(costObj: any): number {
     total += costObj.fte * 100000; // Assuming $100k per FTE
   }
   return total;
+}
+
+/**
+ * Type guard utilities for the CIA compliance manager
+ *
+ * These utilities ensure type safety when working with domain-specific types.
+ */
+
+/**
+ * Type guard for SecurityLevel
+ *
+ * @param value - Value to check
+ * @returns True if the value is a valid SecurityLevel
+ */
+export function isSecurityLevel(value: unknown): value is SecurityLevel {
+  return (
+    typeof value === "string" &&
+    ["None", "Low", "Moderate", "High", "Very High"].includes(value)
+  );
+}
+
+/**
+ * Type guard for CIAComponentType
+ *
+ * @param value - Value to check
+ * @returns True if the value is a valid CIAComponentType
+ */
+export function isCIAComponentType(value: unknown): value is CIAComponentType {
+  return (
+    typeof value === "string" &&
+    ["confidentiality", "integrity", "availability"].includes(value)
+  );
+}
+
+/**
+ * Type guard for CIADetails
+ *
+ * @param value - Value to check
+ * @returns True if the value has the required properties of CIADetails
+ */
+export function isCIADetails(value: unknown): value is CIADetails {
+  if (!value || typeof value !== "object") return false;
+
+  const obj = value as Record<string, unknown>;
+
+  // Check for required fields
+  return (
+    typeof obj.description === "string" &&
+    typeof obj.technical === "string" &&
+    typeof obj.businessImpact === "string" &&
+    typeof obj.capex === "number" &&
+    typeof obj.opex === "number" &&
+    typeof obj.bg === "string" &&
+    typeof obj.text === "string" &&
+    Array.isArray(obj.recommendations)
+  );
+}
+
+/**
+ * Type guard for checking if a value is a valid widget props object
+ * @param value - The value to check
+ * @returns True if the value is a valid widget props object
+ */
+export function isWidgetProps(value: unknown): value is WidgetProps {
+  return (
+    isObject(value) &&
+    (typeof value.className === "undefined" || typeof value.className === "string") &&
+    (typeof value.testId === "undefined" || typeof value.testId === "string")
+  );
+}
+
+/**
+ * Type guard for checking if a value is a SecurityLevelWidgetProps
+ * @param value - The value to check
+ * @returns True if the value is a valid SecurityLevelWidgetProps
+ */
+export function isSecurityLevelWidgetProps(value: unknown): value is SecurityLevelWidgetProps {
+  if (!isWidgetProps(value)) return false;
+  
+  const val = value as any; // Use any temporarily for property checking
+  
+  // Check for the additional required properties
+  return (
+    hasProperty(val, "availabilityLevel") && isSecurityLevel(val.availabilityLevel) &&
+    hasProperty(val, "integrityLevel") && isSecurityLevel(val.integrityLevel) &&
+    hasProperty(val, "confidentialityLevel") && isSecurityLevel(val.confidentialityLevel)
+  );
+}
+
+/**
+ * Type guard for CIAImpactSummaryWidgetProps
+ * @param value - The value to check
+ * @returns True if the value is a valid CIAImpactSummaryWidgetProps
+ */
+export function isCIAImpactSummaryWidgetProps(value: unknown): value is CIAImpactSummaryWidgetProps {
+  if (!isWidgetProps(value)) return false;
+  
+  const val = value as any; // Use any temporarily for property checking
+  
+  // Check for the additional required properties
+  return (
+    hasProperty(val, "availabilityLevel") && isSecurityLevel(val.availabilityLevel) &&
+    hasProperty(val, "integrityLevel") && isSecurityLevel(val.integrityLevel) &&
+    hasProperty(val, "confidentialityLevel") && isSecurityLevel(val.confidentialityLevel)
+  );
+}
+
+/**
+ * Type guard for BusinessImpactDetails
+ * @param value - The value to check
+ * @returns True if the value is a valid BusinessImpactDetails
+ */
+export function isBusinessImpactDetails(value: unknown): value is BusinessImpactDetails {
+  if (!isObject(value)) return false;
+  
+  // Check for required summary property
+  if (typeof value.summary !== "string") return false;
+  
+  // Check for at least one impact category
+  const hasAnyImpact = [
+    'financial', 'operational', 'reputational', 'strategic', 'regulatory',
+    'financialImpact', 'operationalImpact', 'reputationalImpact'
+  ].some(prop => hasProperty(value, prop) && isObject(value[prop]));
+  
+  return hasAnyImpact;
+}
+
+/**
+ * Type guard for ROI estimate
+ * @param value - The value to check
+ * @returns True if the value is a valid ROI estimate
+ */
+export function isROIEstimate(value: unknown): value is ROIEstimate {
+  return (
+    isObject(value) &&
+    typeof value.returnRate === "string" &&
+    typeof value.description === "string"
+  );
 }

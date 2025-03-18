@@ -1,371 +1,191 @@
-import { ComponentType, Dispatch, SetStateAction } from "react";
-import { CIADetails, SecurityLevel } from "./cia";
+import { SecurityLevel } from "./cia";
+import { BusinessImpactDetails, CIADetails, ROIEstimate, TechnicalImplementationDetails } from "./cia-services";
 
 /**
- * Base properties for all widgets
+ * Widget-specific interfaces that extend or use the core CIA types
+ * 
+ * ## Business Perspective
+ * 
+ * These interfaces support the visual representation of security controls,
+ * providing stakeholders with an intuitive way to understand security impact. 📊
  */
-export interface WidgetBaseProps {
-  /** Test ID for component selection in tests */
-  testId?: string;
-  // Make these properties optional
-  availabilityLevel?: string;
-  integrityLevel?: string;
-  confidentialityLevel?: string;
+
+// Common widget props interface
+export interface WidgetProps {
   className?: string;
-  securityLevel?: string;
+  testId?: string;
 }
 
-/**
- * Generic details interface that all specific detail interfaces should extend
- * This ensures compatibility across different widget implementations
- */
-export interface BaseWidgetDetails {
-  description?: string;
-  businessImpact?: string;
-  impact?: string;
-  technical?: string;
-  recommendations?: string[];
-  [key: string]: unknown; // Allow additional properties with stricter type
-}
-
-/**
- * Props for the CostEstimationWidget component
- */
-export interface CostEstimationWidgetProps extends WidgetBaseProps {
-  /** Total capital expenditure as percentage of IT budget */
-  totalCapex?: number;
-  /** Total operational expenditure as percentage of IT budget */
-  totalOpex?: number;
-  /** Formatted capital expenditure estimate */
-  capexEstimate?: string;
-  /** Formatted operational expenditure estimate */
-  opexEstimate?: string;
-  /** Whether this is a small solution (affects cost calculations) */
-  isSmallSolution?: boolean;
-  /** Return on investment estimate */
-  roi?: string;
-  /** Implementation time estimate */
-  implementationTime?: string;
-  /** Availability options */
-  availabilityOptions?: Record<string, CIADetails>;
-  /** Integrity options */
-  integrityOptions?: Record<string, CIADetails>;
-  /** Confidentiality options */
-  confidentialityOptions?: Record<string, CIADetails>;
-  /** Security level */
-  securityLevel?: SecurityLevel;
-}
-
-/**
- * Props for the ValueCreationWidget component
- */
-export interface ValueCreationWidgetProps extends WidgetBaseProps {
-  securityLevel: SecurityLevel;
-}
-
-/**
- * Props for the SecuritySummaryWidget component
- */
-export interface SecuritySummaryWidgetProps extends WidgetBaseProps {
-  securityLevel: SecurityLevel;
+// Security level widget props
+export interface SecurityLevelWidgetProps extends WidgetProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
+  onLevelChange?: (component: "availability" | "integrity" | "confidentiality", level: SecurityLevel) => void;
+  disabled?: boolean;
 }
 
-/**
- * Props for ComplianceStatusWidget component
- */
-export interface ComplianceStatusWidgetProps extends WidgetBaseProps {
-  /** Overall security level */
-  securityLevel?: SecurityLevel;
-  availabilityLevel?: SecurityLevel;
-  integrityLevel?: SecurityLevel;
-  confidentialityLevel?: SecurityLevel;
-}
-
-/**
- * Types for Integrity Impact Widget
- * Compatible with CIADetails for easier integration
- */
-export interface IntegrityDetail extends BaseWidgetDetails {
-  description: string;
-  businessImpact: string;
-  validationMethod?: string;
-  recommendations: string[];
-  technicalControls?: string[];
-  complianceImplications?: string;
-}
-
-/**
- * Props for the IntegrityImpactWidget component
- */
-export interface IntegrityImpactWidgetProps extends WidgetBaseProps {
-  integrityLevel: SecurityLevel;
-  // Change the optional fields to align with WidgetBaseProps constraint
-  availabilityLevel: SecurityLevel;
-  confidentialityLevel: SecurityLevel;
-  className?: string;
-  testId?: string;
-  options?: Record<string, any>;
-}
-
-/**
- * Types for Confidentiality Impact Widget
- * Compatible with CIADetails for easier integration
- */
-export interface ConfidentialityDetail extends BaseWidgetDetails {
-  impact: string;
-  businessImpact: string;
-  recommendations: string[];
-  technicalMeasures?: string[];
-  complianceImplications?: string;
-  riskLevel?: string;
-}
-
-/**
- * Props for the ConfidentialityImpactWidget component
- */
-export interface ConfidentialityImpactWidgetProps extends WidgetBaseProps {
-  confidentialityLevel: SecurityLevel;
-  // Change the optional fields to align with WidgetBaseProps constraint
-  availabilityLevel: SecurityLevel;
-  integrityLevel: SecurityLevel;
-  className?: string;
-  testId?: string;
-  options?: Record<string, any>;
-}
-
-/**
- * Types for Availability Impact Widget
- * Compatible with CIADetails for easier integration
- */
-export interface AvailabilityDetail extends BaseWidgetDetails {
-  description: string;
-  businessImpact: string;
+// Component detail interfaces
+export interface AvailabilityDetail extends CIADetails {
   uptime: string;
-  recommendations: string[];
-  mttr?: string;
-  rto?: string;
-  rpo?: string;
+  rto: string;
+  rpo: string;
+  mttr: string;
 }
 
-/**
- * Props for the AvailabilityImpactWidget component
- */
-export interface AvailabilityImpactWidgetProps extends WidgetBaseProps {
-  /** Options for each level - optional when using ciaContentService */
-  options?: Record<string, AvailabilityDetail | CIADetails>;
+export interface IntegrityDetail extends CIADetails {
+  validationMethod: string;
+}
+
+export interface ConfidentialityDetail extends CIADetails {
+  protectionMethod: string;
+}
+
+// Business impact widget props
+export interface BusinessImpactAnalysisWidgetProps extends WidgetProps {
   availabilityLevel: SecurityLevel;
-  integrityLevel?: SecurityLevel;
-  confidentialityLevel?: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  businessImpact?: BusinessImpactDetails;
 }
 
-/**
- * Props for the SecurityResourcesWidget component
- */
-export interface SecurityResourcesWidgetProps extends WidgetBaseProps {
-  /** Overall security level */
+// Compliance status widget props
+export interface ComplianceStatusWidgetProps extends WidgetProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  showRequirements?: boolean;
+}
+
+// Value creation widget props
+export interface ValueCreationWidgetProps extends WidgetProps {
   securityLevel: SecurityLevel;
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
+  roi?: ROIEstimate;
 }
 
-/**
- * Props for the TechnicalDetailsWidget component
- */
-export interface TechnicalDetailsWidgetProps extends WidgetBaseProps {
-  /** Availability options for specific technical details */
-  availabilityOptions?: Record<string, CIADetails>;
-  /** Integrity options for specific technical details */
-  integrityOptions?: Record<string, CIADetails>;
-  /** Confidentiality options for specific technical details */
-  confidentialityOptions?: Record<string, CIADetails>;
-  /** Optional CSS class name */
-  className?: string;
-  availabilityLevel?: SecurityLevel | string;
-  integrityLevel?: SecurityLevel | string;
-  confidentialityLevel?: SecurityLevel | string;
-}
-
-/**
- * Props for the BusinessImpactAnalysisWidget component
- */
-export interface BusinessImpactAnalysisWidgetProps extends WidgetBaseProps {
+// Cost estimation widget props
+export interface CostEstimationWidgetProps extends WidgetProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
-  securityLevel?: SecurityLevel; // Add securityLevel property to match component
-  className?: string;
-  testId?: string;
-  activeComponent?: "availability" | "integrity" | "confidentiality";
 }
 
-/**
- * Props for the SecurityLevelWidget component
- */
-export interface SecurityLevelWidgetProps {
-  availabilityLevel: string;
-  integrityLevel: string;
-  confidentialityLevel: string;
-  onAvailabilityChange?: (level: string) => void;
-  onIntegrityChange?: (level: string) => void;
-  onConfidentialityChange?: (level: string) => void;
-  setAvailability?:
-    | ((level: string) => void)
-    | Dispatch<SetStateAction<string>>;
-  setIntegrity?: ((level: string) => void) | Dispatch<SetStateAction<string>>;
-  setConfidentiality?:
-    | ((level: string) => void)
-    | Dispatch<SetStateAction<string>>;
-  className?: string;
-  testId?: string;
-  title?: string;
-  loading?: boolean;
-  error?: Error | null;
-}
-
-// Add missing types
-export interface SecurityVisualizationWidgetProps extends WidgetBaseProps {
+// Technical details widget props
+export interface TechnicalDetailsWidgetProps extends WidgetProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
-  className?: string;
-  testId?: string;
+  implementationDetails?: TechnicalImplementationDetails;
 }
 
-export interface CIAImpactSummaryWidgetProps extends WidgetBaseProps {
+// CIA Impact summary widget props
+export interface CIAImpactSummaryWidgetProps extends WidgetProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
-  className?: string;
-  testId?: string;
+}
+
+// Security visualization widget props
+export interface SecurityVisualizationWidgetProps extends WidgetProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  chartType?: 'radar' | 'bar' | 'gauge';
+}
+
+// Security resources widget props
+export interface SecurityResourcesWidgetProps extends WidgetProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  filter?: string;
+  maxItems?: number;
+}
+
+// Security components
+export interface SecurityComponentProps extends WidgetProps {
+  component: "availability" | "integrity" | "confidentiality";
+  level: SecurityLevel;
+}
+
+// Security level selector props
+export interface SecurityLevelSelectorProps extends WidgetProps {
+  selectedLevel: SecurityLevel;
+  onLevelChange: (level: SecurityLevel) => void;
+  component: "availability" | "integrity" | "confidentiality";
+  mode?: "horizontal" | "vertical";
+  highlight?: boolean;
+  compact?: boolean;
+  disabled?: boolean;
+}
+
+// Component impact props
+export interface ComponentImpactWidgetProps extends WidgetProps {
+  level: SecurityLevel;
+  componentType: "availability" | "integrity" | "confidentiality";
 }
 
 /**
- * Type adapter functions to convert between different detail types
+ * Props for the CIA Impact Summary Widget
  */
-export const typeAdapters = {
-  /**
-   * Converts CIADetails to IntegrityDetail
-   */
-  toIntegrityDetail(details: CIADetails): IntegrityDetail {
-    return {
-      description: details.description || "",
-      businessImpact: details.businessImpact || "",
-      validationMethod: details.validationMethod,
-      recommendations: details.recommendations || [],
-      // Force casting to specific type instead of using 'as'
-      technicalControls: Array.isArray(details.technicalControls)
-        ? details.technicalControls
-        : undefined,
-      complianceImplications:
-        typeof details.complianceImplications === "string"
-          ? details.complianceImplications
-          : undefined,
-    };
-  },
-
-  /**
-   * Converts CIADetails to ConfidentialityDetail
-   */
-  toConfidentialityDetail(details: CIADetails): ConfidentialityDetail {
-    return {
-      impact: details.impact || details.description || "",
-      businessImpact: details.businessImpact || "",
-      recommendations: details.recommendations || [],
-      // Force casting to specific type instead of using 'as'
-      technicalMeasures: Array.isArray(details.technicalMeasures)
-        ? details.technicalMeasures
-        : undefined,
-      complianceImplications:
-        typeof details.complianceImplications === "string"
-          ? details.complianceImplications
-          : undefined,
-      riskLevel:
-        typeof details.riskLevel === "string" ? details.riskLevel : undefined,
-    };
-  },
-
-  /**
-   * Converts CIADetails to AvailabilityDetail
-   */
-  toAvailabilityDetail(details: CIADetails): AvailabilityDetail {
-    return {
-      description: details.description || "",
-      businessImpact: details.businessImpact || "",
-      uptime: details.uptime || "Unknown",
-      recommendations: details.recommendations || [],
-      // Force casting to specific type instead of using 'as'
-      mttr: typeof details.mttr === "string" ? details.mttr : undefined,
-      rto: typeof details.rto === "string" ? details.rto : undefined,
-      rpo: typeof details.rpo === "string" ? details.rpo : undefined,
-    };
-  },
-};
-
-/**
- * Base widget component type
- */
-export type WidgetComponentType<T = any> = ComponentType<T>;
-
-/**
- * Widget size configuration
- */
-export interface WidgetSize {
-  width: number;
-  height: number;
+export interface CIAImpactSummaryWidgetProps extends SecurityLevelWidgetProps {
+  showDetails?: boolean;
 }
 
 /**
- * Preset widget sizes
+ * Props for the Availability Impact Widget
  */
-export enum WidgetSizePreset {
-  SMALL = "small",
-  MEDIUM = "medium",
-  LARGE = "large",
-  EXTRA_LARGE = "extraLarge",
-  FULL_WIDTH = "fullWidth",
-  DEFAULT = "medium",
+export interface AvailabilityImpactWidgetProps extends WidgetProps {
+  // Keep level for backward compatibility
+  level?: SecurityLevel;
+  
+  // New unified properties
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  
+  onLevelChange?: (level: SecurityLevel) => void;
 }
 
 /**
- * Widget definition structure
+ * Props for the Integrity Impact Widget
  */
-export interface WidgetDefinition<T = any> {
-  id: string;
-  title: string;
-  description?: string;
-  component: WidgetComponentType<T>;
-  defaultProps?: Partial<T>;
-  icon?: string;
-  size?: string;
-  order?: number;
-  position?: number;
-  visible?: boolean;
-  minSecurityLevel?: string | number;
-  maxSecurityLevel?: string | number;
-  requiredSecurityLevels?: string[];
+export interface IntegrityImpactWidgetProps extends WidgetProps {
+  // Keep level for backward compatibility
+  level?: SecurityLevel;
+  
+  // New unified properties
+  integrityLevel: SecurityLevel;
+  availabilityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  
+  onLevelChange?: (level: SecurityLevel) => void;
 }
 
 /**
- * Widget configuration structure
+ * Props for the Confidentiality Impact Widget
  */
-export interface WidgetConfig {
-  id: string;
-  type: string;
-  title: string;
-  description: string;
-  icon: string;
-  priority: number;
-  visible: boolean;
-  size: string;
-  width: number;
-  height: number;
-  order: number;
-  requiredSecurityLevels?: string[];
-  minSecurityLevel?: string | number;
-  maxSecurityLevel?: string | number;
-  position?: number;
+export interface ConfidentialityImpactWidgetProps extends WidgetProps {
+  // Keep level for backward compatibility
+  level?: SecurityLevel;
+  
+  // New unified properties
+  confidentialityLevel: SecurityLevel;
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  
+  onLevelChange?: (level: SecurityLevel) => void;
+}
+
+/**
+ * Props for the Security Summary Widget
+ */
+export interface SecuritySummaryWidgetProps extends WidgetProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  securityLevel?: SecurityLevel;
 }
