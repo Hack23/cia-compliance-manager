@@ -592,11 +592,8 @@ describe("CIAContentService", () => {
       const description = service.getTechnicalDescription("availability", "High");
       vi.spyOn(ciaContentService, "getDetailedDescription").mockReturnValue("Mocked detailed description");
       // Change the test to validate that description is a string with content
-      expect(typeof description).toBe("string");scription("availability", "High");
-      expect(description).toBeTruthy(); // Check it's not empty instead of using .length
-    });/ Change the test to validate that description is a string with content
       expect(typeof description).toBe("string");
-      expect(description).toBeTruthy(); // Check it's not empty instead of using .length
+      expect(description).toBeTruthy();
     });
 
     it("getImplementationTime should return string value", () => {
@@ -641,8 +638,8 @@ describe("CIAContentService", () => {
     it("getSecurityIcon should return string value", () => {
       const icon = service.getSecurityIcon("High");
       
-      expect(typeof icon).to be("string");
-      expect(icon).not to be("");
+      expect(typeof icon).toBe("string");
+      expect(icon).not.toBe("");
     });
   });
 
@@ -995,68 +992,73 @@ describe("ciaContentService", () => {
 
       expect(result).toHaveProperty("summary");
       expect(result).toHaveProperty("financial");
-      expect(result).toHaveProperty("operational");aContentService.getBusinessImpact(
-      expect(result.financial).toHaveProperty("description");ity",
-      expect(result.financial).toHaveProperty("riskLevel");"Moderate"
+      expect(result).toHaveProperty("operational");
+      expect(result.financial).toHaveProperty("description");
+      expect(result.financial).toHaveProperty("riskLevel");
     });
 
     it("should return business impact when details are available", () => {
       const result = ciaContentService.getBusinessImpact(
         "availability",
         "Moderate"
-      );xpect(result.financial).toHaveProperty("description");
-      expect(result).toBeDefined(););
-      // Add null check for possibly undefined options  });
+      );
+      expect(result).toBeDefined();
+      // Add null check for possibly undefined options
       const moderateOptions = useCIAOptions.availabilityOptions.Moderate;
       expect(result.summary).toBe(moderateOptions?.businessImpact ?? "");
-      // Check the property exists without asserting specific contentility", () =>:
-      expect(result.financial).toHaveProperty("description");properly mock the function with the expected return values
-      expect(result.financial).toHaveProperty("riskLevel");"Moderate"
-    });ility",
-  });"None"
-      );
+      // Check the property exists without asserting specific content
+      expect(result.financial).toHaveProperty("description");
+      expect(result.financial).toHaveProperty("riskLevel");
+    });
+  });
+
   describe("getTechnicalImplementation", () => {
     it("should return technical implementation details for availability", () => {
-      const result = ciaContentService.getTechnicalImplementation(ationSteps");
-        "availability",xpect(result).toHaveProperty("effort");
-        "None"    });
+      const result = ciaContentService.getTechnicalImplementation(
+        "availability",
+        "None"
       );
-onent", () =>:
-      expect(result).toHaveProperty("description");properly mock the function with the expected return values
+      expect(result).toHaveProperty("description");
       expect(result).toHaveProperty("implementationSteps");
       expect(result).toHaveProperty("effort");
-    });tation"
+    });
 
     it("should include availability-specific fields for availability component", () => {
-      // First properly mock the function with the expected return valuesationSteps: ["Step 1", "Step 2"],
+      // First properly mock the function with the expected return values
       vi.spyOn(
         ciaContentService,
-        "getTechnicalImplementation"ce",
-      ).mockReturnValueOnce({expertise: "Test expertise",
+        "getTechnicalImplementation"
+      ).mockReturnValueOnce({
         description: "Test description",
         implementationSteps: ["Step 1", "Step 2"],
         effort: {
-          development: "Test development",ttr: "Test MTTR",
-          maintenance: "Test maintenance",      });
+          development: "Test development",
+          maintenance: "Test maintenance",
           expertise: "Test expertise",
-        },aContentService.getTechnicalImplementation(
-        rto: "Test RTO",ity",
-        rpo: "Test RPO","Moderate"
-        mttr: "Test MTTR",      );
+        },
+        rto: "Test RTO",
+        rpo: "Test RPO",
+        mttr: "Test MTTR",
       });
 
       const result = ciaContentService.getTechnicalImplementation(
-        "availability",xpect(result.mttr).toBeDefined();
-        "Moderate"    });
+        "availability",
+        "Moderate"
       );
-erent components", () =>:
+
       expect(result.rto).toBeDefined();
-      expect(result.rpo).toBeDefined(); = ciaContentService.getTechnicalImplementation(
-      expect(result.mttr).toBeDefined();ability",
-    });"High"
-      );
+      expect(result.rpo).toBeDefined();
+      expect(result.mttr).toBeDefined();
+    });
+
     it("returns implementation for different components", () => {
-      // Test all three component typesyResult = ciaContentService.getTechnicalImplementation(
+      // Test all three component types
+      const availResult = ciaContentService.getTechnicalImplementation(
+        "availability",
+        "High"
+      );
+
+      const integrityResult = ciaContentService.getTechnicalImplementation(
         "integrity",
         "High"
       );
@@ -1502,8 +1504,8 @@ describe("getValuePoints", () => {
 it("getSecurityIcon should return string value", () => {
   const icon = service.getSecurityIcon("High");
   
-  expect(typeof icon).to be("string");
-  expect(icon).not to be("");
+  expect(typeof icon).toBe("string");
+  expect(icon).not.toBe("");
 });
 
 // Fix the duplicate mock declaration
@@ -1552,9 +1554,6 @@ vi.mock("./securityMetricsService", () => ({
   // Other exports remain the same
 }));
 
-import { describe, expect, it, vi } from 'vitest';
-import { CIAContentService, createCIAContentService } from './ciaContentService';
-import { SecurityLevel } from '../types/cia';
 
 // Mock the options data
 vi.mock('../hooks/useCIAOptions', () => {
