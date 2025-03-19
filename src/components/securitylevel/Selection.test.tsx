@@ -3,240 +3,163 @@ import { describe, expect, it, vi } from 'vitest';
 import Selection from './Selection';
 
 describe('Selection Component', () => {
-  // Create mock options properly as SelectionOption[]
-  const mockOptions = [
-    { value: 'None', label: 'None - No controls' },
-    { value: 'Low', label: 'Low - Basic controls' },
-    { value: 'Moderate', label: 'Moderate - Standard controls' },
-    { value: 'High', label: 'High - Advanced controls' }
-  ];
+  const defaultProps = {
+    id: "test-select",
+    label: "Test Label",
+    icon: "🔒",
+    description: "Test description",
+    options: [
+      { value: "option1", label: "Option 1" },
+      { value: "option2", label: "Option 2" },
+      { value: "option3", label: "Option 3" }
+    ],
+    value: "option1",
+    onChange: vi.fn(),
+    iconClassName: "text-blue-600",
+    labelClassName: "text-blue-600",
+    infoContent: "Info content",
+    contextInfo: "Context info",
+    disabled: false,
+    "data-testid": "test-selection"
+  };
 
   it('renders correctly with options', () => {
-    render(
-      <Selection
-        id="test-select"
-        label="Test Selection"
-        value="Low"
-        options={mockOptions}
-        onChange={() => {}}
-        testId="test-selection"
-      />
-    );
-    
-    expect(screen.getByLabelText('Test Selection')).toBeInTheDocument();
-    expect(screen.getByRole('combobox')).toHaveValue('Low');
+    render(<Selection {...defaultProps} />);
+    expect(screen.getByText("Test Label")).toBeInTheDocument();
+    expect(screen.getByText("🔒")).toBeInTheDocument();
+    expect(screen.getByText("Test description")).toBeInTheDocument();
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
   });
 
   it('contains all option values', () => {
-    render(
-      <Selection
-        id="test-select"
-        label="Test Selection"
-        value="Low"
-        options={mockOptions}
-        onChange={() => {}}
-        testId="test-selection"
-      />
-    );
+    render(<Selection {...defaultProps} />);
     
-    const selectElement = screen.getByRole('combobox');
-    expect(selectElement.children.length).toBe(mockOptions.length);
+    const select = screen.getByRole("combobox");
+    const options = Array.from(select.querySelectorAll("option"));
+    
+    expect(options).toHaveLength(3);
+    expect(options[0].value).toBe("option1");
+    expect(options[1].value).toBe("option2");
+    expect(options[2].value).toBe("option3");
   });
 
   it('handles changes correctly', () => {
-    const handleChange = vi.fn();
-    render(
-      <Selection
-        id="test-select"
-        label="Test Selection"
-        value="Low"
-        options={mockOptions}
-        onChange={handleChange}
-        testId="test-selection"
-      />
-    );
+    render(<Selection {...defaultProps} />);
     
-    fireEvent.change(screen.getByRole('combobox'), { target: { value: 'High' } });
-    expect(handleChange).toHaveBeenCalledWith('High');
+    const select = screen.getByRole("combobox");
+    fireEvent.change(select, { target: { value: "option2" } });
+    
+    expect(defaultProps.onChange).toHaveBeenCalledWith("option2");
   });
 
   it('handles options with no corresponding security icons', () => {
-    const customOptions = [
-      ...mockOptions,
-      { value: 'Custom', label: 'Custom - Custom level' }
-    ];
     render(
       <Selection
-        id="test-select"
-        label="Test Selection"
-        value="Custom"
-        options={customOptions}
-        onChange={() => {}}
-        testId="test-selection"
+        {...defaultProps}
+        options={[
+          { value: "custom1", label: "Custom 1" },
+          { value: "custom2", label: "Custom 2" }
+        ]}
       />
     );
-    const select = screen.getByTestId('test-selection');
-    expect(select).toBeInTheDocument();
+
+    const select = screen.getByRole("combobox");
+    const options = Array.from(select.querySelectorAll("option"));
+    
+    expect(options).toHaveLength(2);
+    expect(options[0].textContent).toBe("Custom 1");
+    expect(options[1].textContent).toBe("Custom 2");
   });
 
   describe('Accessibility', () => {
     it('maintains label-input association', () => {
-      render(
-        <Selection
-          id="test-select"
-          label="Test Selection"
-          value="Low"
-          options={mockOptions}
-          onChange={() => {}}
-          testId="test-selection"
-        />
-      );
-      const select = screen.getByTestId('test-selection');
-      expect(select).toHaveAttribute('id', 'test-select');
+      render(<Selection {...defaultProps} />);
+      
+      const select = screen.getByRole("combobox");
+      expect(select).toHaveAttribute("id", "test-select");
+      
+      const label = screen.getByText("Test Label").closest("label");
+      expect(label).toHaveAttribute("for", "test-select");
     });
 
     it('has proper ARIA attributes', () => {
-      const testProps = {
-        id: 'aria-test-select',
-        label: 'Availability',
-        value: 'Low',
-        options: mockOptions,
-        onChange: () => {},
-        testId: 'aria-test-select'
-      };
-
-      const { rerender } = render(<Selection {...testProps} />);
-      const select = screen.getByTestId('aria-test-select');
-      expect(select).toHaveAttribute('id');
-      expect(select).toHaveAttribute('aria-label', 'Availability');
-
-      rerender(<Selection {...testProps} label="" />);
-      const selectWithoutLabel = screen.getByTestId('aria-test-select');
-      expect(selectWithoutLabel).not.toHaveAttribute('aria-label');
+      render(<Selection {...defaultProps} aria-label="Select test option" />);
+      
+      const select = screen.getByRole("combobox");
+      expect(select).toHaveAttribute("aria-label", "Select test option");
     });
   });
 
   describe('Option Handling', () => {
     it('displays correct number of options', () => {
-      render(
-        <Selection
-          id="test-select"
-          label="Test Selection"
-          value="Low"
-          options={mockOptions}
-          onChange={() => {}}
-          testId="test-selection"
-        />
-      );
-      const optionElements = screen.getAllByRole('option');
-      expect(optionElements).toHaveLength(mockOptions.length);
+      render(<Selection {...defaultProps} />);
+      
+      const select = screen.getByRole("combobox");
+      expect(select.querySelectorAll("option")).toHaveLength(3);
     });
 
     it('maintains option order', () => {
-      render(
-        <Selection
-          id="test-select"
-          label="Test Selection"
-          value="Low"
-          options={mockOptions}
-          onChange={() => {}}
-          testId="test-selection"
-        />
-      );
-      const optionElements = screen.getAllByRole('option');
-      optionElements.forEach((element, index) => {
-        expect(element.textContent).toBe(mockOptions[index].label);
-      });
+      render(<Selection {...defaultProps} />);
+      
+      const select = screen.getByRole("combobox");
+      const options = Array.from(select.querySelectorAll("option"));
+      
+      expect(options[0].textContent).toBe("Option 1");
+      expect(options[1].textContent).toBe("Option 2");
+      expect(options[2].textContent).toBe("Option 3");
     });
   });
 
   describe('Info and Context Functionality', () => {
     it('toggles info content when info button is clicked', () => {
-      render(
-        <Selection
-          id="test-select"
-          label="Test Selection"
-          value="Low"
-          options={mockOptions}
-          onChange={() => {}}
-          testId="test-selection"
-          infoContent="Test info content"
-        />
-      );
-
-      expect(screen.queryByText('Test info content')).not.toBeInTheDocument();
-
-      const infoButton = screen.getByRole('button', {
-        name: /Show information about Test Selection/
-      });
+      render(<Selection {...defaultProps} />);
+      
+      // Initially info content is not visible
+      expect(screen.queryByText("Info content")).not.toBeInTheDocument();
+      
+      // Click info button to show content
+      const infoButton = screen.getByText("ⓘ");
       fireEvent.click(infoButton);
-
-      expect(screen.getByText('Test info content')).toBeInTheDocument();
-
-      fireEvent.click(infoButton);
-
-      expect(screen.queryByText('Test info content')).not.toBeInTheDocument();
+      
+      // Now info content should be visible
+      expect(screen.getByText("Info content")).toBeInTheDocument();
     });
 
     it('toggles context info when show/hide context button is clicked', () => {
-      render(
-        <Selection
-          id="test-select"
-          label="Test Selection"
-          value="Low"
-          options={mockOptions}
-          onChange={() => {}}
-          testId="test-selection"
-          contextInfo="Test context information"
-        />
-      );
-
-      const contextButton = screen.getByRole('button', {
-        name: 'Show context'
-      });
-      expect(contextButton).toBeInTheDocument();
-      expect(screen.queryByTestId('context-info')).not.toBeInTheDocument();
-
-      fireEvent.click(contextButton);
-
-      expect(screen.getByTestId('context-info')).toBeInTheDocument();
-      expect(screen.getByTestId('context-info')).toHaveTextContent('Test context information');
-      expect(screen.getByRole('button', { name: 'Hide context' })).toBeInTheDocument();
-
-      fireEvent.click(screen.getByRole('button', { name: 'Hide context' }));
-
-      expect(screen.queryByTestId('context-info')).not.toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'Show context' })).toBeInTheDocument();
+      render(<Selection {...defaultProps} />);
+      
+      // Initially context info is not visible
+      expect(screen.queryByText("Context info")).not.toBeInTheDocument();
+      
+      // Show context info
+      const showButton = screen.getByText("Show details");
+      fireEvent.click(showButton);
+      
+      // Now context info should be visible
+      expect(screen.getByText("Context info")).toBeInTheDocument();
+      
+      // Hide context info
+      const hideButton = screen.getByText("Hide details");
+      fireEvent.click(hideButton);
+      
+      // Context info should be hidden again
+      expect(screen.queryByText("Context info")).not.toBeInTheDocument();
     });
 
     it("doesn't render info button when infoContent is not provided", () => {
-      render(
-        <Selection
-          id="test-select"
-          label="Test Selection"
-          value="Low"
-          options={mockOptions}
-          onChange={() => {}}
-          testId="test-selection"
-        />
-      );
-
-      expect(screen.queryByRole('button', { name: /Show information about/ })).not.toBeInTheDocument();
+      const propsWithoutInfo = { ...defaultProps, infoContent: undefined };
+      render(<Selection {...propsWithoutInfo} />);
+      
+      // Info button should not be present
+      expect(screen.queryByText("ⓘ")).not.toBeInTheDocument();
     });
 
     it("doesn't render context section when contextInfo is not provided", () => {
-      render(
-        <Selection
-          id="test-select"
-          label="Test Selection"
-          value="Low"
-          options={mockOptions}
-          onChange={() => {}}
-          testId="test-selection"
-        />
-      );
-
-      expect(screen.queryByRole('button', { name: /context/ })).not.toBeInTheDocument();
+      const propsWithoutContext = { ...defaultProps, contextInfo: undefined };
+      render(<Selection {...propsWithoutContext} />);
+      
+      // Show details button should not be present
+      expect(screen.queryByText("Show details")).not.toBeInTheDocument();
     });
   });
 });

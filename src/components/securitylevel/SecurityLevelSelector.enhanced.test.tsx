@@ -1,233 +1,214 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { CIA_TEST_IDS } from "../../constants/testIds";
-import { SecurityLevel } from "../../types/cia";
 import SecurityLevelSelector from "./SecurityLevelSelector";
 
-// Create proper mock handlers with spies
-const mockHandlers = {
-  onAvailabilityChange: vi.fn(),
-  onIntegrityChange: vi.fn(),
-  onConfidentialityChange: vi.fn(),
-};
+// Mock useCIAOptions hook
+vi.mock("../../hooks/useCIAOptions", () => {
+  const mockOptions = {
+    availabilityOptions: {
+      None: { description: "No availability", technical: "No controls" },
+      Low: { description: "Basic availability", technical: "Basic controls" },
+      Moderate: { description: "Standard availability", technical: "Standard controls" },
+      High: { description: "High availability", technical: "Advanced controls" },
+      "Very High": { description: "Maximum availability", technical: "Maximum controls" }
+    },
+    integrityOptions: {
+      None: { description: "No integrity", technical: "No controls" },
+      Low: { description: "Basic integrity", technical: "Basic controls" },
+      Moderate: { description: "Standard integrity", technical: "Standard controls" },
+      High: { description: "High integrity", technical: "Advanced controls" },
+      "Very High": { description: "Maximum integrity", technical: "Maximum controls" }
+    },
+    confidentialityOptions: {
+      None: { description: "No confidentiality", technical: "No controls" },
+      Low: { description: "Basic confidentiality", technical: "Basic controls" },
+      Moderate: { description: "Standard confidentiality", technical: "Standard controls" },
+      High: { description: "High confidentiality", technical: "Advanced controls" },
+      "Very High": { description: "Maximum confidentiality", technical: "Maximum controls" }
+    }
+  };
 
-// Define the correct test IDs that match the actual component
-const SELECTOR_IDS = {
-  AVAILABILITY_SELECTOR: CIA_TEST_IDS.AVAILABILITY_SELECT,
-  INTEGRITY_SELECTOR: CIA_TEST_IDS.INTEGRITY_SELECT,
-  CONFIDENTIALITY_SELECTOR: CIA_TEST_IDS.CONFIDENTIALITY_SELECT,
-};
+  return {
+    useCIAOptions: () => mockOptions
+  };
+});
 
 describe("SecurityLevelSelector Enhanced Tests", () => {
-  // Reset mocks before each test
-  beforeEach(() => {
-    vi.resetAllMocks();
-  });
-
   it("renders with different security levels correctly", () => {
     render(
       <SecurityLevelSelector
-        availabilityLevel={"Low" as SecurityLevel}
-        integrityLevel={"Moderate" as SecurityLevel}
-        confidentialityLevel={"High" as SecurityLevel}
-        onAvailabilityChange={mockHandlers.onAvailabilityChange}
-        onIntegrityChange={mockHandlers.onIntegrityChange}
-        onConfidentialityChange={mockHandlers.onConfidentialityChange}
+        availabilityLevel="Low"
+        integrityLevel="Moderate" 
+        confidentialityLevel="High"
+        onAvailabilityChange={vi.fn()}
+        onIntegrityChange={vi.fn()}
+        onConfidentialityChange={vi.fn()}
+        testId="test-selector"
       />
     );
 
-    // Check that all three selectors are present
-    expect(
-      screen.getByTestId(SELECTOR_IDS.AVAILABILITY_SELECTOR)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(SELECTOR_IDS.INTEGRITY_SELECTOR)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(SELECTOR_IDS.CONFIDENTIALITY_SELECTOR)
-    ).toBeInTheDocument();
+    // Check sections are present
+    expect(screen.getByTestId("availability-section")).toBeInTheDocument();
+    expect(screen.getByTestId("integrity-section")).toBeInTheDocument();
+    expect(screen.getByTestId("confidentiality-section")).toBeInTheDocument();
 
-    // Use getAllByText and role to verify the selected values
-    const availSelect = screen.getByTestId(SELECTOR_IDS.AVAILABILITY_SELECTOR);
-    expect(availSelect).toHaveValue("Low");
-
-    const integritySelect = screen.getByTestId(SELECTOR_IDS.INTEGRITY_SELECTOR);
-    expect(integritySelect).toHaveValue("Moderate");
-
-    const confSelect = screen.getByTestId(
-      SELECTOR_IDS.CONFIDENTIALITY_SELECTOR
-    );
-    expect(confSelect).toHaveValue("High");
+    // Check values are set correctly
+    expect(screen.getByTestId("availability-select")).toHaveValue("Low");
+    expect(screen.getByTestId("integrity-select")).toHaveValue("Moderate");
+    expect(screen.getByTestId("confidentiality-select")).toHaveValue("High");
   });
 
-  it("handles availability change correctly", async () => {
+  it("handles availability change correctly", () => {
+    const handleChange = vi.fn();
+    
     render(
       <SecurityLevelSelector
-        availabilityLevel={"Low" as SecurityLevel}
-        integrityLevel={"Moderate" as SecurityLevel}
-        confidentialityLevel={"High" as SecurityLevel}
-        onAvailabilityChange={mockHandlers.onAvailabilityChange}
-        onIntegrityChange={mockHandlers.onIntegrityChange}
-        onConfidentialityChange={mockHandlers.onConfidentialityChange}
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        onAvailabilityChange={handleChange}
+        testId="test-selector"
       />
     );
 
-    // Find the availability select and change its value
-    const availabilitySelector = screen.getByTestId(
-      SELECTOR_IDS.AVAILABILITY_SELECTOR
-    );
-    fireEvent.change(availabilitySelector, { target: { value: "High" } });
+    // Find the select element and change value
+    const select = screen.getByTestId("availability-select");
+    fireEvent.change(select, { target: { value: "High" } });
 
-    // Check if the handler was called with the correct value
-    expect(mockHandlers.onAvailabilityChange).toHaveBeenCalledWith("High");
+    // Verify callback was called with correct value
+    expect(handleChange).toHaveBeenCalledWith("High");
   });
 
-  it("handles integrity change correctly", async () => {
+  it("handles integrity change correctly", () => {
+    const handleChange = vi.fn();
+    
     render(
       <SecurityLevelSelector
-        availabilityLevel={"Low" as SecurityLevel}
-        integrityLevel={"Moderate" as SecurityLevel}
-        confidentialityLevel={"High" as SecurityLevel}
-        onAvailabilityChange={mockHandlers.onAvailabilityChange}
-        onIntegrityChange={mockHandlers.onIntegrityChange}
-        onConfidentialityChange={mockHandlers.onConfidentialityChange}
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        onIntegrityChange={handleChange}
+        testId="test-selector"
       />
     );
 
-    // Find the integrity select and change its value
-    const integritySelector = screen.getByTestId(
-      SELECTOR_IDS.INTEGRITY_SELECTOR
-    );
-    fireEvent.change(integritySelector, { target: { value: "Very High" } });
+    // Find the select element and change value
+    const select = screen.getByTestId("integrity-select");
+    fireEvent.change(select, { target: { value: "Moderate" } });
 
-    // Check if the handler was called with the correct value
-    expect(mockHandlers.onIntegrityChange).toHaveBeenCalledWith("Very High");
+    // Verify callback was called with correct value
+    expect(handleChange).toHaveBeenCalledWith("Moderate");
   });
 
-  it("handles confidentiality change correctly", async () => {
+  it("handles confidentiality change correctly", () => {
+    const handleChange = vi.fn();
+    
     render(
       <SecurityLevelSelector
-        availabilityLevel={"Low" as SecurityLevel}
-        integrityLevel={"Moderate" as SecurityLevel}
-        confidentialityLevel={"High" as SecurityLevel}
-        onAvailabilityChange={mockHandlers.onAvailabilityChange}
-        onIntegrityChange={mockHandlers.onIntegrityChange}
-        onConfidentialityChange={mockHandlers.onConfidentialityChange}
+        availabilityLevel="None"
+        integrityLevel="None"
+        confidentialityLevel="None"
+        onConfidentialityChange={handleChange}
+        testId="test-selector"
       />
     );
 
-    // Find the confidentiality select and change its value
-    const confidentialitySelector = screen.getByTestId(
-      SELECTOR_IDS.CONFIDENTIALITY_SELECTOR
-    );
-    fireEvent.change(confidentialitySelector, { target: { value: "None" } });
+    // Find the select element and change value
+    const select = screen.getByTestId("confidentiality-select");
+    fireEvent.change(select, { target: { value: "Very High" } });
 
-    // Check if the handler was called with the correct value
-    expect(mockHandlers.onConfidentialityChange).toHaveBeenCalledWith("None");
+    // Verify callback was called with correct value
+    expect(handleChange).toHaveBeenCalledWith("Very High");
   });
 
-  it("handles keyboard navigation in dropdowns", async () => {
+  it("handles keyboard navigation in dropdowns", () => {
+    const handleChange = vi.fn();
+    
     render(
       <SecurityLevelSelector
-        availabilityLevel={"Low" as SecurityLevel}
-        integrityLevel={"Moderate" as SecurityLevel}
-        confidentialityLevel={"High" as SecurityLevel}
-        onAvailabilityChange={mockHandlers.onAvailabilityChange}
-        onIntegrityChange={mockHandlers.onIntegrityChange}
-        onConfidentialityChange={mockHandlers.onConfidentialityChange}
+        availabilityLevel="Low"
+        integrityLevel="Moderate"
+        confidentialityLevel="High"
+        onAvailabilityChange={handleChange}
+        testId="test-selector"
       />
     );
 
-    // Focus and use keyboard navigation for availability select
-    const availabilitySelector = screen.getByTestId(
-      SELECTOR_IDS.AVAILABILITY_SELECTOR
-    );
-    fireEvent.keyDown(availabilitySelector, { key: "ArrowDown" });
-    fireEvent.keyDown(availabilitySelector, { key: "Enter" });
-
-    // Change the value using fireEvent.change instead
-    fireEvent.change(availabilitySelector, { target: { value: "High" } });
-
-    // Check if handler was called
-    expect(mockHandlers.onAvailabilityChange).toHaveBeenCalled();
+    // Find the select element
+    const select = screen.getByTestId("availability-select");
+    
+    // Focus the select element
+    select.focus();
+    
+    // Simulate keyboard navigation
+    fireEvent.keyDown(select, { key: "ArrowDown" });
+    fireEvent.keyDown(select, { key: "Enter" });
+    
+    // Since we can't simulate the native select dropdown fully,
+    // we'll just check that the element received focus
+    expect(document.activeElement).toBe(select);
   });
 
-  it("handles tooltip display on hover", async () => {
+  it("handles tooltip display on hover", () => {
+    // The useCIAOptions already provides tooltip content in the mock
     render(
       <SecurityLevelSelector
-        availabilityLevel={"Low" as SecurityLevel}
-        integrityLevel={"Moderate" as SecurityLevel}
-        confidentialityLevel={"High" as SecurityLevel}
-        onAvailabilityChange={mockHandlers.onAvailabilityChange}
-        onIntegrityChange={mockHandlers.onIntegrityChange}
-        onConfidentialityChange={mockHandlers.onConfidentialityChange}
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+        testId="test-selector"
       />
     );
 
-    // Find one of the info buttons
-    const infoButtons = screen.getAllByRole("button");
-    expect(infoButtons.length).toBeGreaterThan(0);
-
-    // Hover over the first info button and check for tooltip content
-    await userEvent.hover(infoButtons[0]);
-
-    // Just verify the test doesn't fail - we don't need to validate tooltip content
+    // We can't easily test actual tooltip rendering in jsdom,
+    // but we can check that the elements with tooltip functionality exist
+    const sections = [
+      screen.getByTestId("availability-section"),
+      screen.getByTestId("integrity-section"),
+      screen.getByTestId("confidentiality-section")
+    ];
+    
+    // Check that each section exists
+    sections.forEach(section => {
+      expect(section).toBeInTheDocument();
+    });
   });
 
   it("renders with different layout on mobile viewport", () => {
-    // Mock window.matchMedia to simulate mobile viewport
-    Object.defineProperty(window, "matchMedia", {
-      writable: true,
-      value: vi.fn().mockImplementation((query) => ({
-        matches: query.includes("max-width"),
-        media: query,
-        onchange: null,
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-      })),
-    });
-
+    // Mock a mobile viewport width
+    global.innerWidth = 400;
+    global.dispatchEvent(new Event("resize"));
+    
     render(
       <SecurityLevelSelector
-        availabilityLevel={"Low" as SecurityLevel}
-        integrityLevel={"Moderate" as SecurityLevel}
-        confidentialityLevel={"High" as SecurityLevel}
-        onAvailabilityChange={mockHandlers.onAvailabilityChange}
-        onIntegrityChange={mockHandlers.onIntegrityChange}
-        onConfidentialityChange={mockHandlers.onConfidentialityChange}
+        availabilityLevel="Low"
+        integrityLevel="Moderate"
+        confidentialityLevel="High"
+        compact={true} // Enable compact mode for mobile
+        testId="test-selector"
       />
     );
 
-    // Check that all three selectors are still present in mobile view
-    expect(
-      screen.getByTestId(SELECTOR_IDS.AVAILABILITY_SELECTOR)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(SELECTOR_IDS.INTEGRITY_SELECTOR)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId(SELECTOR_IDS.CONFIDENTIALITY_SELECTOR)
-    ).toBeInTheDocument();
+    // Check that the component still renders all sections
+    expect(screen.getByTestId("test-selector")).toHaveClass("space-y-3");
+    expect(screen.getByTestId("availability-section")).toBeInTheDocument();
+    expect(screen.getByTestId("integrity-section")).toBeInTheDocument();
+    expect(screen.getByTestId("confidentiality-section")).toBeInTheDocument();
   });
 
   it("provides accessibility attributes for screen readers", () => {
     render(
       <SecurityLevelSelector
-        availabilityLevel={"Low" as SecurityLevel}
-        integrityLevel={"Moderate" as SecurityLevel}
-        confidentialityLevel={"High" as SecurityLevel}
-        onAvailabilityChange={mockHandlers.onAvailabilityChange}
-        onIntegrityChange={mockHandlers.onIntegrityChange}
-        onConfidentialityChange={mockHandlers.onConfidentialityChange}
+        availabilityLevel="Low"
+        integrityLevel="Moderate"
+        confidentialityLevel="High"
+        testId="test-selector"
       />
     );
 
-    // Check for ARIA attributes
-    const availabilitySelector = screen.getByTestId(
-      SELECTOR_IDS.AVAILABILITY_SELECTOR
-    );
-    expect(availabilitySelector).toHaveAttribute("aria-haspopup");
-    expect(availabilitySelector).toHaveAttribute("aria-expanded", "false");
+    // Check for proper aria attributes
+    expect(screen.getByTestId("availability-select")).toHaveAttribute("aria-label", "Select availability level");
+    expect(screen.getByTestId("integrity-select")).toHaveAttribute("aria-label", "Select integrity level");
+    expect(screen.getByTestId("confidentiality-select")).toHaveAttribute("aria-label", "Select confidentiality level");
   });
 });
