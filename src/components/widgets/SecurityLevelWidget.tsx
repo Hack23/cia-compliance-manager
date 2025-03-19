@@ -6,10 +6,10 @@ import {
 } from "../../constants/appConstants";
 import { SECURITY_LEVEL_TEST_IDS } from "../../constants/testIds";
 import { SecurityLevel } from "../../types/cia";
-// Use the unified selector - this now determines which implementation to use
-import SecurityLevelSelector from "../SecurityLevelSelector";
+// Import directly from the enhanced implementation
 import SecurityLevelSummaryItem from "../common/SecurityLevelSummaryItem";
 import WidgetContainer from "../common/WidgetContainer";
+import SecurityLevelSelector from "../securitylevel/SecurityLevelSelector";
 
 /**
  * Props for SecurityLevelWidget component
@@ -159,7 +159,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           </div>
         </div>
 
-        {/* Use the enhanced version of SecurityLevelSelector */}
+        {/* Use the enhanced selector directly */}
         <SecurityLevelSelector
           availabilityLevel={availabilityLevel}
           integrityLevel={integrityLevel}
@@ -168,7 +168,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           onIntegrityChange={handleIntegrityChange}
           onConfidentialityChange={handleConfidentialityChange}
           testId={`${testId}-selector`}
-          useEnhancedVersion={true} // Force the use of enhanced version
         />
       </div>
     </WidgetContainer>

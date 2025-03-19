@@ -4,8 +4,8 @@ import { SECURITY_LEVEL_TEST_IDS } from "../../constants/testIds";
 import { SecurityLevel } from "../../types/cia";
 import SecurityLevelWidget from "./SecurityLevelWidget";
 
-// Mock the unified SecurityLevelSelector
-vi.mock("../SecurityLevelSelector", () => ({
+// Mock the enhanced security level selector directly
+vi.mock("../securitylevel/SecurityLevelSelector", () => ({
   __esModule: true,
   default: vi.fn().mockImplementation((props) => (
     <div data-testid={props.testId || "mock-security-level-selector"}>
