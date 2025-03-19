@@ -89,7 +89,7 @@ describe("CIA Utility Functions", () => {
     });
 
     it("handles mixed security levels", () => {
-      expect(calculateOverallSecurityLevel("Low", "High", "Low")).toBe("Low"); // Average 1.67 rounds to 2 (Moderate)
+      expect(calculateOverallSecurityLevel("Low", "High", "Low")).toBe("Moderate"); // Average 1.67 rounds to 2 (Moderate)
       expect(calculateOverallSecurityLevel("Very High", "None", "Moderate")).toBe("Moderate"); // Average 2
     });
   });
