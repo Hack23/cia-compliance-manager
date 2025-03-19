@@ -24,3 +24,10 @@ export * from "./securityLevelUtils";
 export * from "./typeGuards";
 export * from "./widgetHelpers";
 export { default as widgetRegistry } from "./widgetRegistry";
+
+// Export risk utilities
+export {
+    getRiskBadgeVariant, getRiskLevelFromSecurityLevel,
+    getRiskScoreFromSecurityLevel, parseRiskLevel
+} from './riskUtils';
+
