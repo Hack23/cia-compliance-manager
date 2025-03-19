@@ -74,13 +74,10 @@ export function calculateOverallSecurityLevel(
   const integValue = getSecurityLevelValue(integrityLevel);
   const confidValue = getSecurityLevelValue(confidentialityLevel);
   
-  // Calculate average
-  const avgValue = (availValue + integValue + confidValue) / 3;
+  // Calculate average - floor the value instead of rounding to follow test expectations
+  const avgValue = Math.floor((availValue + integValue + confidValue) / 3);
   
-  // Round to nearest integer for security level determination
-  const roundedValue = Math.round(avgValue);
-  
-  return getSecurityLevelFromValue(roundedValue);
+  return getSecurityLevelFromValue(avgValue);
 }
 
 /**

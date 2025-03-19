@@ -1,139 +1,123 @@
-import { riskLevelMappings } from "../constants/securityLevels";
 import { SecurityLevel } from "../types/cia";
+import { BusinessImpactDetail } from "../types/cia-services";
 
 /**
- * Risk impact data for different security levels
- *
- * ## Business Perspective
- *
- * This data helps organizations understand how different security levels
- * affect business risk in terms of financial, operational, and reputational
- * dimensions. ⚠️
+ * Maps security levels to risk levels
  */
-
-/**
- * Financial impact estimations by security level
- */
-export const financialImpactByLevel: Record<
-  SecurityLevel,
-  {
-    description: string;
-    riskLevel: string;
-    annualRevenueLoss: string;
-  }
-> = {
-  None: {
-    description:
-      "Critical financial vulnerability with maximum exposure to losses",
-    riskLevel: riskLevelMappings.None,
-    annualRevenueLoss: ">20% of annual revenue",
-  },
-  Low: {
-    description: "High financial risk with significant potential for losses",
-    riskLevel: riskLevelMappings.Low,
-    annualRevenueLoss: "5-15% of annual revenue",
-  },
-  Moderate: {
-    description: "Moderate financial risk with reasonable loss potential",
-    riskLevel: riskLevelMappings.Moderate,
-    annualRevenueLoss: "2-5% of annual revenue",
-  },
-  High: {
-    description: "Low financial risk with minimal potential for losses",
-    riskLevel: riskLevelMappings.High,
-    annualRevenueLoss: "0.5-2% of annual revenue",
-  },
-  "Very High": {
-    description: "Minimal financial risk with negligible potential for losses",
-    riskLevel: riskLevelMappings["Very High"],
-    annualRevenueLoss: "<0.5% of annual revenue",
-  },
+const securityToRiskMap: Record<SecurityLevel, string> = {
+  "None": "Critical",
+  "Low": "High",
+  "Moderate": "Medium",
+  "High": "Low",
+  "Very High": "Minimal"
 };
 
 /**
- * Operational impact estimations by security level
- */
-export const operationalImpactByLevel: Record<
-  SecurityLevel,
-  {
-    description: string;
-    riskLevel: string;
-    meanTimeToRecover: string;
-  }
-> = {
-  None: {
-    description:
-      "Critical operational disruption with extended recovery periods",
-    riskLevel: riskLevelMappings.None,
-    meanTimeToRecover: "Unpredictable (days to weeks)",
-  },
-  Low: {
-    description: "Significant operational disruption with lengthy recovery",
-    riskLevel: riskLevelMappings.Low,
-    meanTimeToRecover: "24-48 hours",
-  },
-  Moderate: {
-    description:
-      "Moderate operational disruption with reasonable recovery time",
-    riskLevel: riskLevelMappings.Moderate,
-    meanTimeToRecover: "4-8 hours",
-  },
-  High: {
-    description: "Minor operational disruption with quick recovery",
-    riskLevel: riskLevelMappings.High,
-    meanTimeToRecover: "15-60 minutes",
-  },
-  "Very High": {
-    description: "Minimal operational disruption with near-immediate recovery",
-    riskLevel: riskLevelMappings["Very High"],
-    meanTimeToRecover: "<5 minutes",
-  },
-};
-
-/**
- * Reputational impact estimations by security level
- */
-export const reputationalImpactByLevel: Record<
-  SecurityLevel,
-  {
-    description: string;
-    riskLevel: string;
-  }
-> = {
-  None: {
-    description: "Catastrophic damage to reputation and customer trust",
-    riskLevel: riskLevelMappings.None,
-  },
-  Low: {
-    description:
-      "Significant damage to reputation requiring extensive remediation",
-    riskLevel: riskLevelMappings.Low,
-  },
-  Moderate: {
-    description: "Moderate damage to reputation requiring targeted response",
-    riskLevel: riskLevelMappings.Moderate,
-  },
-  High: {
-    description:
-      "Limited damage to reputation with straightforward remediation",
-    riskLevel: riskLevelMappings.High,
-  },
-  "Very High": {
-    description: "Minimal or no impact to reputation with robust controls",
-    riskLevel: riskLevelMappings["Very High"],
-  },
-};
-
-/**
- * Get risk level based on security level
+ * Get risk level from security level
  */
 export function getRiskLevelFromSecurityLevel(level: SecurityLevel): string {
-  return riskLevelMappings[level] || "Unknown";
+  return securityToRiskMap[level] || "Unknown";
 }
 
 /**
- * Get impact level label for security level
+ * Financial impact data by security level
  */
-export function getImpactLevelLabel(level: SecurityLevel): string {
-  return getRiskLevelFromSecurityLevel(level);
+export const financialImpactByLevel: Record<SecurityLevel, BusinessImpactDetail> = {
+  "None": {
+    description: "Extreme financial impact with potential for business failure",
+    riskLevel: "Critical",
+    annualRevenueLoss: "15% or more of annual revenue",
+  },
+  "Low": {
+    description: "Significant financial impact requiring major budget adjustments",
+    riskLevel: "High",
+    annualRevenueLoss: "5-15% of annual revenue",
+  },
+  "Moderate": {
+    description: "Moderate financial impact affecting department budgets",
+    riskLevel: "Medium",
+    annualRevenueLoss: "1-5% of annual revenue",
+  },
+  "High": {
+    description: "Limited financial impact within planned security budget",
+    riskLevel: "Low",
+    annualRevenueLoss: "Less than 1% of annual revenue",
+  },
+  "Very High": {
+    description: "Minimal financial impact with negligible business disruption",
+    riskLevel: "Minimal",
+    annualRevenueLoss: "Negligible",
+  }
+};
+
+/**
+ * Operational impact data by security level
+ */
+export const operationalImpactByLevel: Record<SecurityLevel, BusinessImpactDetail> = {
+  "None": {
+    description: "Complete operational shutdown for extended periods",
+    riskLevel: "Critical",
+    meanTimeToRecover: "Weeks or longer",
+  },
+  "Low": {
+    description: "Major operational disruption affecting multiple departments",
+    riskLevel: "High",
+    meanTimeToRecover: "Days",
+  },
+  "Moderate": {
+    description: "Significant operational disruption with limited duration",
+    riskLevel: "Medium",
+    meanTimeToRecover: "Hours",
+  },
+  "High": {
+    description: "Minor operational disruption with quick recovery",
+    riskLevel: "Low",
+    meanTimeToRecover: "Minutes to hours",
+  },
+  "Very High": {
+    description: "Minimal operational impact with immediate failover",
+    riskLevel: "Minimal",
+    meanTimeToRecover: "Seconds to minutes",
+  }
+};
+
+/**
+ * Reputational impact data by security level
+ */
+export const reputationalImpactByLevel: Record<SecurityLevel, BusinessImpactDetail> = {
+  "None": {
+    description: "Severe brand damage with long-term customer trust erosion",
+    riskLevel: "Critical",
+  },
+  "Low": {
+    description: "Significant negative press and public relations challenges",
+    riskLevel: "High",
+  },
+  "Moderate": {
+    description: "Moderate reputation damage requiring active management",
+    riskLevel: "Medium",
+  },
+  "High": {
+    description: "Limited reputational impact with minimal public awareness",
+    riskLevel: "Low",
+  },
+  "Very High": {
+    description: "Negligible reputational impact with potential positive perception",
+    riskLevel: "Minimal",
+  }
+};
+
+/**
+ * Get risk impact level label
+ */
+export function getRiskImpactLabel(level: string): string {
+  const levelMap: Record<string, string> = {
+    "Critical": "Severe business impact requiring immediate action",
+    "High": "Major business impact requiring prioritized remediation",
+    "Medium": "Moderate business impact warranting planned action",
+    "Low": "Minor business impact to be addressed in normal operations",
+    "Minimal": "Negligible business impact requiring routine monitoring",
+  };
+  
+  return levelMap[level] || "Impact level not defined";
 }

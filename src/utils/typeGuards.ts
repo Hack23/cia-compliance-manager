@@ -313,11 +313,15 @@ export function isComplianceFramework(obj: any): boolean {
     return false;
   }
 
-  // Check for required properties
-  if (typeof obj.name !== 'string') return false;
+  // Check for required properties - name must be a string
+  if (!hasProperty(obj, "name") || typeof obj.name !== 'string') {
+    return false;
+  }
   
   // If it has description and security level requirements, check those properties
-  if (hasProperty(obj, "description") && typeof obj.description !== 'string') return false;
+  if (hasProperty(obj, "description") && typeof obj.description !== 'string') {
+    return false;
+  }
   
   if (hasProperty(obj, "requiredAvailabilityLevel")) {
     if (!isSecurityLevel(obj.requiredAvailabilityLevel)) return false;

@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { SecurityLevel } from "../types/cia";
+import {
+    SecurityLevel,
+} from "../types/cia";
 import {
     financialImpactByLevel,
-    getImpactLevelLabel,
+    getRiskImpactLabel,
     getRiskLevelFromSecurityLevel,
     operationalImpactByLevel,
-    reputationalImpactByLevel,
+    reputationalImpactByLevel
 } from "./riskImpactData";
 
 describe("Risk Impact Data", () => {
@@ -76,8 +78,11 @@ describe("Risk Impact Data", () => {
     });
 
     it("should return appropriate impact level label", () => {
-      expect(getImpactLevelLabel("None")).toBe("Critical");
-      expect(getImpactLevelLabel("Very High")).toBe("Minimal");
+      expect(getRiskImpactLabel("Critical")).toContain("Severe");
+      expect(getRiskImpactLabel("High")).toContain("Major");
+      expect(getRiskImpactLabel("Medium")).toContain("Moderate");
+      expect(getRiskImpactLabel("Low")).toContain("Minor");
+      expect(getRiskImpactLabel("Minimal")).toContain("Negligible");
     });
   });
 

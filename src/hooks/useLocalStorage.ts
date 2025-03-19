@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 /**
  * Custom hook for managing localStorage values with React state
@@ -13,16 +13,20 @@ export function useLocalStorage<T>(
 ): [T, (value: T | ((prevValue: T) => T)) => void] {
   // Get value from localStorage or use initial value
   const [storedValue, setStoredValue] = useState<T>(() => {
+    if (typeof window === 'undefined') {
+      return initialValue;
+    }
+    
     try {
-      const item = localStorage.getItem(key);
+      const item = window.localStorage.getItem(key);
       
       // Return initialValue if no item found
       if (item === null) return initialValue;
       
-      // Handle boolean values stored as strings
+      // Handle special case for boolean values
       if (typeof initialValue === 'boolean') {
-        if (item === 'true') return true as T;
-        if (item === 'false') return false as T;
+        if (item === 'true') return true as unknown as T;
+        if (item === 'false') return false as unknown as T;
       }
 
       // Handle string values when expecting a string
@@ -35,7 +39,7 @@ export function useLocalStorage<T>(
         return JSON.parse(item);
       } catch (parseError) {
         // If parsing fails, return the raw string or initialValue
-        return typeof initialValue === 'string' ? item as unknown as T : initialValue;
+        return item as unknown as T;
       }
     } catch (error) {
       // If error (like invalid JSON), return initialValue
@@ -44,29 +48,32 @@ export function useLocalStorage<T>(
     }
   });
 
-  // Update localStorage when storedValue changes
-  useEffect(() => {
+  // Function to update localStorage and state
+  const setValue = (value: T | ((prevValue: T) => T)) => {
     try {
-      if (storedValue === null) {
-        localStorage.removeItem(key);
+      // Allow value to be a function to match useState
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
+      
+      // Update state
+      setStoredValue(valueToStore);
+      
+      // Update localStorage
+      if (valueToStore === null) {
+        window.localStorage.removeItem(key);
+      } else if (typeof valueToStore === 'boolean') {
+        window.localStorage.setItem(key, valueToStore ? 'true' : 'false');
+      } else if (typeof valueToStore === 'string') {
+        window.localStorage.setItem(key, valueToStore);
       } else {
-        // Handle special case for boolean values
-        if (typeof storedValue === 'boolean') {
-          localStorage.setItem(key, storedValue ? 'true' : 'false');
-        } else if (typeof storedValue === 'string') {
-          // Store strings directly
-          localStorage.setItem(key, storedValue);
-        } else {
-          // Store objects and arrays as JSON
-          localStorage.setItem(key, JSON.stringify(storedValue));
-        }
+        window.localStorage.setItem(key, JSON.stringify(valueToStore));
       }
     } catch (error) {
       console.error(`Error writing to localStorage key "${key}":`, error);
     }
-  }, [key, storedValue]);
+  };
 
-  return [storedValue, setStoredValue];
+  return [storedValue, setValue];
 }
 
 export default useLocalStorage;

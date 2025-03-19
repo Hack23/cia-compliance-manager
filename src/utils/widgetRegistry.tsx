@@ -105,10 +105,24 @@ export class WidgetRegistryImpl implements WidgetRegistry {
     widgetsToRender = widgetsToRender
       .sort((a, b) => (a.order || 0) - (b.order || 0))
       .sort((a, b) => (a.position || 0) - (b.position || 0));
+    
+    // Extract security levels from the first widget's props to ensure consistency
+    const commonSecurityLevels = {
+      availabilityLevel: "Moderate" as SecurityLevel,
+      integrityLevel: "Moderate" as SecurityLevel,
+      confidentialityLevel: "Moderate" as SecurityLevel,
+      ...props
+    };
 
     return widgetsToRender.map((widget) => {
       const widgetProps = props[widget.id] || {};
-      const combinedProps = { ...widget.defaultProps, ...widgetProps };
+      
+      // Ensure each widget gets the same security level props for consistency
+      const combinedProps = { 
+        ...widget.defaultProps,
+        ...commonSecurityLevels, // Apply consistent security levels
+        ...widgetProps,          // Allow per-widget customization
+      };
 
       return (
         <WidgetContainer
