@@ -1,3 +1,6 @@
+import { SecurityLevel } from "../types/cia";
+import { getRiskLevelFromSecurityLevel as getUtilsRiskLevel } from "../utils";
+
 /**
  * Constants for risk levels used throughout the application
  */
@@ -13,6 +16,19 @@ export const RISK_LEVELS = {
 export type RiskLevel = (typeof RISK_LEVELS)[keyof typeof RISK_LEVELS];
 
 /**
+ * Business impact categories for risk assessments
+ */
+export const BUSINESS_IMPACT_CATEGORIES = {
+  FINANCIAL: "financial",
+  OPERATIONAL: "operational",
+  REPUTATIONAL: "reputational",
+  STRATEGIC: "strategic",
+  REGULATORY: "regulatory",
+} as const;
+
+export type BusinessImpactCategory = (typeof BUSINESS_IMPACT_CATEGORIES)[keyof typeof BUSINESS_IMPACT_CATEGORIES];
+
+/**
  * Gets risk level based on security level
  * @param securityLevel - The security level
  * @returns The corresponding risk level
@@ -20,27 +36,16 @@ export type RiskLevel = (typeof RISK_LEVELS)[keyof typeof RISK_LEVELS];
 export function getRiskLevelFromSecurityLevel(
   securityLevel: string
 ): RiskLevel {
-  switch (securityLevel) {
-    case "None":
-      return RISK_LEVELS.CRITICAL;
-    case "Low":
-      return RISK_LEVELS.HIGH;
-    case "Moderate":
-      return RISK_LEVELS.MEDIUM;
-    case "High":
-      return RISK_LEVELS.LOW;
-    case "Very High":
-      return RISK_LEVELS.MINIMAL;
-    default:
-      return RISK_LEVELS.UNKNOWN;
+  // Import from riskUtils instead of duplicating logic
+  const riskLevel = getUtilsRiskLevel(securityLevel as SecurityLevel);
+  
+  // Map the basic risk level to the formatted risk level with "Risk" suffix
+  switch (riskLevel) {
+    case "Critical": return RISK_LEVELS.CRITICAL;
+    case "High": return RISK_LEVELS.HIGH;
+    case "Medium": return RISK_LEVELS.MEDIUM;
+    case "Low": return RISK_LEVELS.LOW;
+    case "Minimal": return RISK_LEVELS.MINIMAL;
+    default: return RISK_LEVELS.UNKNOWN;
   }
 }
-
-// Business impact categories
-export const BUSINESS_IMPACT_CATEGORIES = {
-  FINANCIAL: "financial",
-  OPERATIONAL: "operational",
-  REPUTATIONAL: "reputational",
-  REGULATORY: "regulatory",
-  STRATEGIC: "strategic",
-};

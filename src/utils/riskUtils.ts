@@ -1,5 +1,8 @@
 import { SecurityLevel } from "../types/cia";
 
+// Make sure we're only returning the expected variants
+type ValidStatusBadgeVariant = "error" | "warning" | "info" | "success" | "neutral";
+
 /**
  * Get badge variant based on risk level
  * 
@@ -14,7 +17,7 @@ import { SecurityLevel } from "../types/cia";
  */
 export function getRiskBadgeVariant(
   riskLevel: string | undefined
-): "error" | "warning" | "info" | "success" | "neutral" {
+): ValidStatusBadgeVariant {
   if (!riskLevel) return "neutral";
   
   const normalized = riskLevel.toLowerCase();
@@ -46,6 +49,16 @@ const SECURITY_TO_RISK: Record<SecurityLevel, string> = {
 /**
  * Convert security level to risk level
  * 
+ * ## Business Perspective
+ * 
+ * This function maps security levels to their inverse risk levels,
+ * supporting consistent risk communication. Higher security levels
+ * correspond to lower risk levels, which helps stakeholders understand
+ * how security investments reduce risk exposure. 🔒
+ * 
+ * @see getRiskScoreFromSecurityLevel - For numeric representation
+ * @see parseRiskLevel - For converting risk levels to numeric values
+ * 
  * @param securityLevel - Security level
  * @returns Risk level as a string
  */
@@ -62,6 +75,8 @@ export function getRiskLevelFromSecurityLevel(securityLevel: SecurityLevel): str
  * which is useful for risk assessment visualizations and calculations. Higher
  * numbers represent higher risk, allowing business stakeholders to quantify
  * the potential impact of different security postures. 📊
+ * 
+ * @see getRiskLevelFromSecurityLevel - For string representation
  * 
  * @param level - Security level to convert
  * @returns Risk score (0-100, with higher values indicating higher risk)
@@ -85,7 +100,7 @@ export function getRiskScoreFromSecurityLevel(level: SecurityLevel): number {
 
 /**
  * Parses risk level string to numeric value for calculations
- * 
+ *
  * ## Business Perspective
  *
  * This function standardizes risk levels into quantifiable values that
@@ -97,10 +112,10 @@ export function getRiskScoreFromSecurityLevel(level: SecurityLevel): number {
  */
 export function parseRiskLevel(level: string | null | undefined): number {
   if (!level) return 0;
-
+  
   const numValue = parseInt(level, 10);
   if (!isNaN(numValue)) return numValue;
-
+  
   // Map common risk level strings to numbers
   const levelLower = level.toLowerCase();
   if (levelLower.includes("critical")) return 4;
@@ -108,6 +123,6 @@ export function parseRiskLevel(level: string | null | undefined): number {
   if (levelLower.includes("medium") || levelLower.includes("moderate")) return 2;
   if (levelLower.includes("low")) return 1;
   if (levelLower.includes("minimal")) return 0;
+  
   return 0;
 }
-

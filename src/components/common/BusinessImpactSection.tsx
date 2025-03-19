@@ -1,5 +1,6 @@
 import React from 'react';
 import { BusinessImpactDetails } from '../../types/cia-services';
+import { getRiskBadgeVariant } from "../../utils";
 
 interface BusinessImpactSectionProps {
   impact: BusinessImpactDetails;
@@ -16,20 +17,13 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
   color,
   testId = "business-impact-section"
 }) => {
+  // Extract risk level from the impact financial or operational data
+  const riskLevel = impact.financial?.riskLevel || 
+                   impact.operational?.riskLevel || 
+                   "Unknown";
+  
   // Get appropriate badge variant for risk level
-  const getRiskBadgeVariant = (riskLevel?: string) => {
-    if (!riskLevel) return "neutral";
-    
-    if (riskLevel.toLowerCase().includes("high")) {
-      return "error";
-    } else if (riskLevel.toLowerCase().includes("medium")) {
-      return "warning";
-    } else if (riskLevel.toLowerCase().includes("low")) {
-      return "success";
-    }
-    
-    return "info";
-  };
+  const badgeVariant = getRiskBadgeVariant(riskLevel);
 
   return (
     <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border shadow-sm security-card" data-testid={testId}>

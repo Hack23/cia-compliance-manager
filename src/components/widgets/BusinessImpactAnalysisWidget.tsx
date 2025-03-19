@@ -4,6 +4,7 @@ import { useCIAOptions } from "../../hooks/useCIAOptions";
 import { BusinessImpactService } from "../../services/businessImpactService";
 import { SecurityLevel } from "../../types/cia";
 import { CIAComponentType } from "../../types/cia-services";
+import { getRiskBadgeVariant } from "../../utils";
 import StatusBadge from "../common/StatusBadge";
 import WidgetContainer from "../common/WidgetContainer"; // Add this import
 
@@ -364,17 +365,17 @@ const BusinessImpactAnalysisWidget: React.FC<
 function getRiskVariant(
   riskLevel: string | undefined
 ): "error" | "warning" | "info" | "success" | "neutral" {
-  if (!riskLevel) return "neutral";
-
-  const level = riskLevel.toLowerCase();
-
-  if (level.includes("critical")) return "error";
-  if (level.includes("high")) return "warning";
-  if (level.includes("medium") || level.includes("moderate")) return "info";
-  if (level.includes("low")) return "success";
-  if (level.includes("minimal")) return "success";
-
-  return "neutral";
+  // Use the imported utility but ensure the return type matches what's expected
+  const variant = getRiskBadgeVariant(riskLevel);
+  
+  // Make sure the returned variant is one of the expected values
+  switch (variant) {
+    case "error": return "error";
+    case "warning": return "warning";
+    case "info": return "info";
+    case "success": return "success";
+    default: return "neutral";
+  }
 }
 
 export default BusinessImpactAnalysisWidget;

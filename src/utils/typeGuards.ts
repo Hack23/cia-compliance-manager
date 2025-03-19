@@ -13,6 +13,7 @@ import {
   SecurityLevelWidgetProps,
   WidgetProps
 } from "../types/widgets";
+import { parseRiskLevel as parseRiskLevelFromUtils } from "./riskUtils";
 
 /**
  * Type guard utilities for the CIA compliance manager
@@ -347,20 +348,13 @@ export function hasTagValue(obj: any, tagValue: string): boolean {
 
 /**
  * Parses a risk level string to a number
+ * @deprecated Use parseRiskLevel from riskUtils instead for consistent behavior
+ * @param level - Risk level string to parse
+ * @returns Numeric value of the risk level (0-4)
  */
 export function parseRiskLevel(level: string | null | undefined): number {
-  if (!level) return 0;
-
-  const numValue = parseInt(level, 10);
-  if (!isNaN(numValue)) return numValue;
-
-  // Map common risk level strings to numbers
-  const levelLower = level.toLowerCase();
-  if (levelLower.includes("high")) return 3;
-  if (levelLower.includes("medium") || levelLower.includes("moderate"))
-    return 2;
-  if (levelLower.includes("low")) return 1;
-  return 0;
+  // Import the implementation from riskUtils for consistency
+  return parseRiskLevelFromUtils(level);
 }
 
 /**

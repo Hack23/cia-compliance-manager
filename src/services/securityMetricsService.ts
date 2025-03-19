@@ -6,6 +6,7 @@ import {
   ROIEstimatesMap,
   ROIMetrics,
 } from "../types/cia-services";
+import { getRiskBadgeVariant } from "../utils";
 import { getSecurityLevelValue } from "../utils/levelValuesUtils"; // Corrected import
 import logger from "../utils/logger"; // Use the default export
 
@@ -371,19 +372,8 @@ export class SecurityMetricsService {
    * @returns Badge variant name
    */
   public getRiskBadgeVariant(riskLevel: string): string {
-    const normalized = riskLevel.toLowerCase();
-
-    if (normalized.includes("critical")) {
-      return "error";
-    } else if (normalized.includes("high")) {
-      return "warning";
-    } else if (normalized.includes("medium")) {
-      return "info";
-    } else if (normalized.includes("low") || normalized.includes("minimal")) {
-      return "success";
-    } else {
-      return "neutral";
-    }
+    // Remove duplicate implementation and import from utils
+    return getRiskBadgeVariant(riskLevel);
   }
 
   /**
