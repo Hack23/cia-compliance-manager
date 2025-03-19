@@ -83,12 +83,28 @@ export function calculateOverallSecurityLevel(
   const hasNone = availabilityLevel === "None" || integrityLevel === "None" || confidentialityLevel === "None";
   
   if (hasNone) {
-    // If any component is "None", calculate the average of the other values
-    // If the average would be higher than Low, cap at Low
-    const nonZeroAvg = (availValue + integValue + confidValue) / 
-                        ((availValue > 0 ? 1 : 0) + (integValue > 0 ? 1 : 0) + (confidValue > 0 ? 1 : 0));
+    // Count how many "None" values we have
+    const noneCount = [availabilityLevel, integrityLevel, confidentialityLevel]
+      .filter(level => level === "None").length;
     
-    if (nonZeroAvg > 1) {
+    // If all are "None", return "None"
+    if (noneCount === 3) {
+      return "None";
+    }
+    
+    // If majority are "None", return "None"
+    if (noneCount >= 2) {
+      return "None";
+    }
+    
+    // If only one is "None", check the other two
+    // If both remaining levels are High or above, return Low (cap at Low)
+    // Otherwise, calculate the average of non-None values
+    const nonNoneValues = [availValue, integValue, confidValue].filter(val => val > 0);
+    const avgNonNoneValue = nonNoneValues.reduce((sum, val) => sum + val, 0) / nonNoneValues.length;
+    
+    // Cap at Low if the average would be higher
+    if (avgNonNoneValue > 1) {
       return "Low";
     }
     
