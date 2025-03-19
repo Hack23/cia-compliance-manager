@@ -181,21 +181,23 @@ widgetRegistry.register({
 });
 
 widgetRegistry.register({
-  id: "security-level",
+  id: "security-levels",
   title: WIDGET_TITLES.SECURITY_LEVEL,
   component: SecurityLevelWidget,
   icon: WIDGET_ICONS.SECURITY_LEVEL,
   size: "medium",
-  order: 5,
+  order: 1,
   defaultProps: {
     availabilityLevel: "None" as SecurityLevel,
     integrityLevel: "None" as SecurityLevel,
     confidentialityLevel: "None" as SecurityLevel,
-    securityLevel: "None" as SecurityLevel,
-    onAvailabilityLevelChange: () => {},
-    onIntegrityLevelChange: () => {},
-    onConfidentialityLevelChange: () => {},
-    onSecurityLevelChange: () => {},
+    setAvailability: () => {},
+    setIntegrity: () => {},
+    setConfidentiality: () => {},
+    onAvailabilityChange: () => {},
+    onIntegrityChange: () => {},
+    onConfidentialityChange: () => {},
+    // Remove securityLevel property as it doesn't exist in SecurityLevelWidgetProps
   },
 });
 

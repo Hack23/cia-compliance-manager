@@ -53,11 +53,20 @@ export interface UnifiedSecurityLevelSelectorProps {
   confidentialityOptions?: Record<string, any>;
   showSelectionSummary?: boolean;
   showDescriptions?: boolean;
+  compact?: boolean; // Add compact mode support
 
   // Control prop to force a specific version
   useEnhancedVersion?: boolean;
 }
 
+/**
+ * A unified selector component that can operate in two modes:
+ * 1. Simple mode: A single selector for one security level
+ * 2. Enhanced mode: A comprehensive selector for all three CIA components
+ * 
+ * The component handles type conversion between string values (from UI) and
+ * SecurityLevel type (for type safety) when passing values to parent components.
+ */
 const SecurityLevelSelector: React.FC<UnifiedSecurityLevelSelectorProps> = (
   props
 ) => {
@@ -81,21 +90,35 @@ const SecurityLevelSelector: React.FC<UnifiedSecurityLevelSelectorProps> = (
       return null;
     }
 
-    // Create the enhanced props
+    // Create adapters for callback functions to handle typing correctly
+    // These adapters convert string values from Selection component to SecurityLevel
+    const handleAvailabilityChange = props.onAvailabilityChange 
+      ? (value: string) => props.onAvailabilityChange!(value)
+      : undefined;
+      
+    const handleIntegrityChange = props.onIntegrityChange
+      ? (value: string) => props.onIntegrityChange!(value)
+      : undefined;
+      
+    const handleConfidentialityChange = props.onConfidentialityChange
+      ? (value: string) => props.onConfidentialityChange!(value)
+      : undefined;
+
+    // Create the enhanced props with proper type conversion handlers
     const enhancedProps: EnhancedSelectorProps = {
       availabilityLevel: props.availabilityLevel,
       integrityLevel: props.integrityLevel,
       confidentialityLevel: props.confidentialityLevel,
-      onAvailabilityChange: props.onAvailabilityChange as (level: SecurityLevel) => void,
-      onIntegrityChange: props.onIntegrityChange as (level: SecurityLevel) => void,
-      onConfidentialityChange: props.onConfidentialityChange as (level: SecurityLevel) => void,
+      onAvailabilityChange: handleAvailabilityChange as unknown as (level: SecurityLevel) => void,
+      onIntegrityChange: handleIntegrityChange as unknown as (level: SecurityLevel) => void,
+      onConfidentialityChange: handleConfidentialityChange as unknown as (level: SecurityLevel) => void,
       disabled: props.disabled,
       testId: props.testId,
     };
     
     return <EnhancedSelector {...enhancedProps} />;
   } else {
-    // For simple selector, ensure we provide the required props
+    // For simple selector, ensure we have required props
     if (!props.label || !props.value || !props.onChange || !props.options) {
       console.warn(
         "SecurityLevelSelector: Missing required props for simple selector"
@@ -103,11 +126,17 @@ const SecurityLevelSelector: React.FC<UnifiedSecurityLevelSelectorProps> = (
       return null;
     }
 
-    // Extract only the props that SimpleSelector needs, ensuring they're properly typed
+    // Create an adapter for the onChange handler to safely convert between types
+    const handleChange = (securityLevel: SecurityLevel) => {
+      // Call the provided onChange with the string value
+      props.onChange?.(securityLevel);
+    };
+
+    // Extract only the props that SimpleSelector needs, with correct type handling
     const simpleProps = {
       label: props.label,
-      value: props.value as SecurityLevel, // Cast to SecurityLevel
-      onChange: props.onChange as (value: SecurityLevel) => void, // Cast the change handler
+      value: props.value as SecurityLevel, // Cast to SecurityLevel safely
+      onChange: handleChange, // Use the adapter function
       options: props.options,
       // Optional props can be passed as is
       description: props.description,

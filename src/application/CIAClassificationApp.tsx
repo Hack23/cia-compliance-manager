@@ -125,11 +125,12 @@ const CIAClassificationApp: React.FC = () => {
             availabilityLevel={availabilityLevel}
             integrityLevel={integrityLevel}
             confidentialityLevel={confidentialityLevel}
-            securityLevel={securityLevel}
-            onAvailabilityLevelChange={handleAvailabilityChange}
-            onIntegrityLevelChange={handleIntegrityChange}
-            onConfidentialityLevelChange={handleConfidentialityChange}
-            onSecurityLevelChange={handleSecurityLevelChange}
+            setAvailability={setAvailabilityLevel}
+            setIntegrity={setIntegrityLevel}
+            setConfidentiality={setConfidentialityLevel}
+            onAvailabilityChange={handleAvailabilityChange}
+            onIntegrityChange={handleIntegrityChange}
+            onConfidentialityChange={handleConfidentialityChange}
           />
         </Dashboard>
       </main>

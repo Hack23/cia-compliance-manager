@@ -4,31 +4,29 @@ import { SECURITY_LEVEL_TEST_IDS } from "../../constants/testIds";
 import { SecurityLevel } from "../../types/cia";
 import SecurityLevelWidget from "./SecurityLevelWidget";
 
-// Update the mock function to handle props better
-vi.mock("../../components/common/SecurityLevelSelector", () => ({
+// Mock the unified SecurityLevelSelector
+vi.mock("../SecurityLevelSelector", () => ({
   __esModule: true,
   default: vi.fn().mockImplementation((props) => (
     <div data-testid={props.testId || "mock-security-level-selector"}>
-      <div>Mock Security Level Selector</div>
-      <div>
-        {props.label}: {props.value}
-      </div>
+      <div>Enhanced Security Level Selector</div>
       <button
-        data-testid={`mock-change-${props.label
-          ?.toLowerCase()
-          .replace(/\s/g, "-")}`}
-        onClick={() =>
-          props.onChange &&
-          props.onChange(
-            props.label?.includes("Confidentiality")
-              ? "High"
-              : props.label?.includes("Integrity")
-              ? "Moderate"
-              : "Low"
-          )
-        }
+        data-testid="mock-change-availability-level"
+        onClick={() => props.onAvailabilityChange?.("Low")}
       >
-        Change {props.label}
+        Change Availability
+      </button>
+      <button
+        data-testid="mock-change-integrity-level"
+        onClick={() => props.onIntegrityChange?.("Moderate")}
+      >
+        Change Integrity
+      </button>
+      <button
+        data-testid="mock-change-confidentiality-level"
+        onClick={() => props.onConfidentialityChange?.("High")}
+      >
+        Change Confidentiality
       </button>
     </div>
   )),
@@ -56,11 +54,12 @@ function getRequiredProps() {
     availabilityLevel: "None" as SecurityLevel,
     integrityLevel: "None" as SecurityLevel,
     confidentialityLevel: "None" as SecurityLevel,
-    securityLevel: "None" as SecurityLevel,
-    onAvailabilityLevelChange: vi.fn(),
-    onIntegrityLevelChange: vi.fn(),
-    onConfidentialityLevelChange: vi.fn(),
-    onSecurityLevelChange: vi.fn(),
+    setAvailability: vi.fn(),
+    setIntegrity: vi.fn(),
+    setConfidentiality: vi.fn(),
+    onAvailabilityChange: vi.fn(),
+    onIntegrityChange: vi.fn(),
+    onConfidentialityChange: vi.fn(),
   };
 }
 
@@ -78,8 +77,8 @@ describe("SecurityLevelWidget", () => {
         {...getRequiredProps()}
       />
     );
-    // Use getAllByText to find all elements containing this text
-    expect(screen.getAllByText(/Mock Security Level Selector/)[0]).toBeInTheDocument();
+    // Verify the enhanced selector renders
+    expect(screen.getByText("Enhanced Security Level Selector")).toBeInTheDocument();
   });
 
   it("uses custom testId if provided", () => {
@@ -90,51 +89,64 @@ describe("SecurityLevelWidget", () => {
     expect(screen.getByTestId(customTestId)).toBeInTheDocument();
   });
 
-  // Replace calls to setAvailability with onAvailabilityLevelChange
   it("handles availability level change", () => {
-    const onAvailabilityLevelChange = vi.fn();
+    const onAvailabilityChange = vi.fn();
+    const setAvailability = vi.fn();
     render(
       <SecurityLevelWidget
         {...getRequiredProps()}
-        onAvailabilityLevelChange={onAvailabilityLevelChange}
+        onAvailabilityChange={onAvailabilityChange}
+        setAvailability={setAvailability}
       />
     );
 
     // Test assertions
     fireEvent.click(screen.getByTestId("mock-change-availability-level"));
-    expect(onAvailabilityLevelChange).toHaveBeenCalledWith("Low");
+    expect(onAvailabilityChange).toHaveBeenCalledWith("Low");
+    expect(setAvailability).toHaveBeenCalledWith("Low");
   });
 
-  it("calls onIntegrityLevelChange when integrity changes", () => {
-    const onIntegrityLevelChange = vi.fn();
+  it("calls onIntegrityChange when integrity changes", () => {
+    const onIntegrityChange = vi.fn();
+    const setIntegrity = vi.fn();
     render(
       <SecurityLevelWidget
         {...getRequiredProps()}
-        onIntegrityLevelChange={onIntegrityLevelChange}
+        onIntegrityChange={onIntegrityChange}
+        setIntegrity={setIntegrity}
       />
     );
 
     fireEvent.click(screen.getByTestId("mock-change-integrity-level"));
-    expect(onIntegrityLevelChange).toHaveBeenCalledWith("Moderate");
+    expect(onIntegrityChange).toHaveBeenCalledWith("Moderate");
+    expect(setIntegrity).toHaveBeenCalledWith("Moderate");
   });
 
-  it("calls onConfidentialityLevelChange when confidentiality changes", () => {
-    const onConfidentialityLevelChange = vi.fn();
+  it("calls onConfidentialityChange when confidentiality changes", () => {
+    const onConfidentialityChange = vi.fn();
+    const setConfidentiality = vi.fn();
     render(
       <SecurityLevelWidget
         {...getRequiredProps()}
-        onConfidentialityLevelChange={onConfidentialityLevelChange}
+        onConfidentialityChange={onConfidentialityChange}
+        setConfidentiality={setConfidentiality}
       />
     );
 
     fireEvent.click(screen.getByTestId("mock-change-confidentiality-level"));
-    expect(onConfidentialityLevelChange).toHaveBeenCalledWith("High");
+    expect(onConfidentialityChange).toHaveBeenCalledWith("High");
+    expect(setConfidentiality).toHaveBeenCalledWith("High");
   });
 
-  it("renders without crashing", () => {
-    // Simplify the test to just check component renders
-    render(<SecurityLevelWidget {...getRequiredProps()} />);
-    // Use getAllByText since there might be multiple elements with this text
-    expect(screen.getAllByText(/Mock Security Level Selector/)[0]).toBeInTheDocument();
+  it("renders loading state correctly", () => {
+    render(<SecurityLevelWidget {...getRequiredProps()} loading={true} />);
+    expect(screen.getByTestId(SECURITY_LEVEL_TEST_IDS.SECURITY_LEVEL_WIDGET)).toHaveAttribute('data-loading', 'true');
+  });
+
+  it("renders error state correctly", () => {
+    const error = new Error("Test error message");
+    render(<SecurityLevelWidget {...getRequiredProps()} error={error} />);
+    expect(screen.getByText("Error Loading Security Levels")).toBeInTheDocument();
+    expect(screen.getByText("Test error message")).toBeInTheDocument();
   });
 });
