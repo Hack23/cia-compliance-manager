@@ -1,6 +1,7 @@
 import { SecurityLevel } from "../types/cia";
 import { CIADataProvider } from "../types/cia-services";
 
+
 /**
  * Type definition for framework compliance status
  */
@@ -252,10 +253,10 @@ export class ComplianceService {
     ];
 
     frameworks.forEach((framework) => {
-      // Check all three components
-      const availStatus = this.getFrameworkStatus(framework, availabilityLevel, integrityLevel, confidentialityLevel);
-      const intStatus = this.getFrameworkStatus(framework, availabilityLevel, integrityLevel, confidentialityLevel);
-      const confStatus = this.getFrameworkStatus(framework, availabilityLevel, integrityLevel, confidentialityLevel);
+      // Properly evaluate each component's compliance status
+      const availStatus = this.getComponentFrameworkStatus(framework, "availability", availabilityLevel);
+      const intStatus = this.getComponentFrameworkStatus(framework, "integrity", integrityLevel);
+      const confStatus = this.getComponentFrameworkStatus(framework, "confidentiality", confidentialityLevel);
 
       // If any component is partial and none are non-compliant, framework is partial
       if (
@@ -299,6 +300,32 @@ export class ComplianceService {
   }
 
   /**
+   * Evaluate compliance status for a specific component of a framework
+   * 
+   * @param framework - The framework to evaluate
+   * @param component - The CIA component to evaluate
+   * @param level - The security level for this component
+   * @returns The compliance status for this component
+   */
+  private getComponentFrameworkStatus(
+    framework: string,
+    component: "availability" | "integrity" | "confidentiality",
+    level: SecurityLevel
+  ): FrameworkComplianceStatus {
+    const requiredLevel = this.getFrameworkRequiredLevel(framework, component);
+    const actualValue = this.getSecurityLevelValue(level);
+    const requiredValue = this.getSecurityLevelValue(requiredLevel);
+    
+    if (actualValue >= requiredValue) {
+      return "compliant";
+    } else if (actualValue >= requiredValue - 1) {
+      return "partial";
+    } else {
+      return "non-compliant";
+    }
+  }
+
+  /**
    * Get frameworks that are non-compliant based on component security levels
    */
   private getNonCompliantFrameworks(
@@ -308,7 +335,6 @@ export class ComplianceService {
     options?: { industry?: string; region?: string }
   ): string[] {
     const nonCompliant: string[] = [];
-
     // For simplicity, we'll check major frameworks against minimum requirements
     const frameworkRequirements = {
       HIPAA: {
@@ -400,7 +426,6 @@ export class ComplianceService {
       confidentialityLevel,
       options
     );
-
     return [...new Set(nonCompliant)].filter(
       (f) =>
         !compliantFrameworks.includes(f) &&
@@ -410,7 +435,7 @@ export class ComplianceService {
 
   /**
    * Get framework compliance status for a security level
-   *
+   * 
    * @param framework - Compliance framework name
    * @param availabilityLevel - Availability security level
    * @param integrityLevel - Integrity security level
@@ -456,17 +481,15 @@ export class ComplianceService {
       return "compliant";
     }
     
-    // Calculate a compliance score based on actual vs required values
+    // Calculate compliance ratio to determine partial vs non-compliant
     const totalRequired = reqAvailValue + reqIntegValue + reqConfidValue;
-    
     // Use the actual value up to the required value (don't count exceeding requirements)
     const totalActual = Math.min(availValue, reqAvailValue) +
                         Math.min(integValue, reqIntegValue) +
                         Math.min(confidValue, reqConfidValue);
     
-    // Check if at least 50% of requirements are met for partial compliance
-    // For mixed security levels, this provides a more accurate assessment
-    if (totalActual >= totalRequired * 0.5) {
+    // More precise partial compliance threshold - 65% of requirements
+    if (totalActual / totalRequired >= 0.65) {
       return "partial";
     }
     
@@ -662,14 +685,14 @@ export class ComplianceService {
     if (descriptions[normalizedFramework]) {
       return descriptions[normalizedFramework];
     }
-    
+
     // Then try partial matches
     for (const [key, description] of Object.entries(descriptions)) {
       if (normalizedFramework.includes(key) || key.includes(normalizedFramework)) {
         return description;
       }
     }
-    
+
     // Default description for unknown frameworks
     return `Security framework that establishes compliance requirements for organizations.`;
   }
@@ -741,12 +764,12 @@ export class ComplianceService {
     regionCode?: string
   ): boolean {
     if (!framework) return false;
-    
+
     // Normalize inputs to handle case insensitivity
     const normalizedFramework = framework.toUpperCase().trim();
     const normalizedIndustry = industryType?.toUpperCase().trim() || "";
     const normalizedRegion = regionCode?.toUpperCase().trim() || "";
-    
+
     // If no industry/region specified, all frameworks are applicable
     if (!normalizedIndustry && !normalizedRegion) return true;
     
@@ -760,7 +783,7 @@ export class ComplianceService {
       "CIS CONTROLS", 
       "BASIC SECURITY GUIDELINES"
     ];
-    
+
     if (generalFrameworks.some(f => 
       normalizedFramework === f || 
       normalizedFramework.includes(f) || 
@@ -768,7 +791,7 @@ export class ComplianceService {
     )) {
       return true;
     }
-    
+
     // Industry-specific frameworks
     if (normalizedIndustry) {
       // Healthcare specific
@@ -776,7 +799,7 @@ export class ComplianceService {
           (normalizedIndustry.includes("HEALTH") || normalizedIndustry.includes("MEDICAL") || normalizedIndustry.includes("CARE"))) {
         return true;
       }
-      
+
       // Finance specific
       if ((normalizedFramework.includes("PCI") || normalizedFramework.includes("DSS")) && 
           (normalizedIndustry.includes("FINANC") || normalizedIndustry.includes("BANK") || 
@@ -784,7 +807,7 @@ export class ComplianceService {
         return true;
       }
     }
-    
+
     // Region-specific frameworks
     if (normalizedRegion) {
       // EU specific
@@ -792,13 +815,13 @@ export class ComplianceService {
           (normalizedRegion.includes("EU") || normalizedRegion.includes("EUROPE"))) {
         return true;
       }
-      
+
       // US specific
       if (normalizedFramework.includes("NIST") &&
           normalizedRegion.includes("US")) {
         return true;
       }
-      
+
       // Combined industry and region specificity
       if (normalizedIndustry && normalizedRegion) {
         if (normalizedFramework.includes("GDPR") && 
@@ -808,7 +831,7 @@ export class ComplianceService {
         }
       }
     }
-    
+
     // Default to false for frameworks that don't match specific criteria
     return false;
   }
@@ -826,7 +849,7 @@ export class ComplianceService {
   /**
    * Normalize security level string to handle case insensitivity
    * 
-   * @private
+   * @private 
    * @param level - Security level to normalize
    * @returns Normalized security level
    */

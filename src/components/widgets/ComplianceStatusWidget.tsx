@@ -94,7 +94,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
       // Transform string arrays to ComplianceFramework arrays if needed
       return {
         status: rawStatus.status,
-        label: rawStatus.status, // Default label to status if not provided
+        label: rawStatus.label || rawStatus.status, // Default label to status if not provided
         complianceScore: rawStatus.complianceScore,
         remediationSteps: rawStatus.remediationSteps || [],
         requirements: rawStatus.requirements || [],
@@ -102,19 +102,19 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         compliantFrameworks: rawStatus.compliantFrameworks.map((f) => {
           return typeof f === "string"
             ? { id: f, name: f, status: "compliant" }
-            : f as ComplianceFramework;
+            : f;
         }),
         partiallyCompliantFrameworks: rawStatus.partiallyCompliantFrameworks.map((f) => {
           return typeof f === "string"
             ? { id: f, name: f, status: "partial" }
-            : f as ComplianceFramework;
+            : f;
         }),
         nonCompliantFrameworks: rawStatus.nonCompliantFrameworks.map((f) => {
           return typeof f === "string"
             ? { id: f, name: f, status: "non-compliant" }
-            : f as ComplianceFramework;
+            : f;
         }),
-      } as ComplianceStatusResponse;
+      };
     },
     [complianceService, availabilityLevel, integrityLevel, confidentialityLevel]
   );
