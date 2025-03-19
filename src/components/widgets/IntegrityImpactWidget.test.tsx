@@ -1,98 +1,127 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { WIDGET_TITLES } from "../../constants/appConstants";
 import { SecurityLevel } from "../../types/cia";
 import IntegrityImpactWidget from "./IntegrityImpactWidget";
 
-// Mock useCIAContentService to provide consistent test data
+// Mock the CIAContentService
 vi.mock("../../hooks/useCIAContentService", () => ({
   useCIAContentService: () => ({
     ciaContentService: {
-      getComponentDetails: vi.fn().mockImplementation((component, level) => ({
-        description: `${level} ${component} description`,
-        technical: `${level} ${component} technical details`,
-        businessImpact: `${level} ${component} business impact`
-      })),
-      getSecurityLevelDescription: vi.fn().mockImplementation((level) => 
-        `${level} integrity description`
-      ),
-      getBusinessImpact: vi.fn().mockImplementation((component, level) => ({
-        summary: `${level} ${component} business impact summary`,
-        financial: { description: `${level} financial impact`, riskLevel: "Medium" },
-        operational: { description: `${level} operational impact`, riskLevel: "Low" },
-        reputational: { description: `${level} reputational impact`, riskLevel: "High" }
-      })),
-      getTechnicalImplementation: vi.fn().mockImplementation((component, level) => ({
-        description: `${level} technical implementation`,
-        implementationSteps: [`${level} step 1`, `${level} step 2`],
-        effort: {
-          development: "Medium",
-          maintenance: "Low",
-          expertise: "Advanced"
-        }
-      })),
-      getRecommendations: vi.fn().mockImplementation((component, level) => [
-        `${level} recommendation 1`,
-        `${level} recommendation 2`,
-        `${level} recommendation 3`
-      ]),
-      getProtectionLevel: vi.fn().mockReturnValue("Enhanced Protection"),
-      getValidationMethod: vi.fn().mockImplementation((level) => `${level} validation method`)
-    }
-  })
+      getComponentDetails: (component: string, level: string) => ({
+        description: `Mock description for ${component} at ${level} level`,
+        technical: `Mock technical details for ${component} at ${level} level`,
+        recommendations: [
+          `Mock recommendation 1 for ${level}`,
+          `Mock recommendation 2 for ${level}`,
+        ],
+        capex: 10,
+        opex: 5,
+        bg: "green",
+        text: "white",
+      }),
+      getBusinessImpact: (component: string, level: string) => ({
+        summary: `Mock business impact for ${component} at ${level} level`,
+        financial: {
+          description: `Mock financial impact for ${level}`,
+          riskLevel: "Medium",
+        },
+        operational: {
+          description: `Mock operational impact for ${level}`,
+          riskLevel: "Low",
+        },
+      }),
+      getTechnicalImplementation: (component: string, level: string) => ({
+        validationMethod: `Mock validation method for ${level}`,
+      }),
+      calculateBusinessImpactLevel: (a: string, i: string, c: string) => "Moderate",
+    },
+  }),
 }));
 
 describe("IntegrityImpactWidget", () => {
-  const defaultProps = {
-    integrityLevel: "High" as SecurityLevel
+  const createComponent = (props = {}) => {
+    const defaultProps = {
+      integrityLevel: "Moderate" as SecurityLevel,
+      availabilityLevel: "Moderate" as SecurityLevel,
+      confidentialityLevel: "Moderate" as SecurityLevel,
+      testId: "test-integrity-widget",
+    };
+    
+    return render(
+      <IntegrityImpactWidget {...defaultProps} {...props} />
+    );
   };
 
-  it("renders without crashing", () => {
-    render(<IntegrityImpactWidget {...defaultProps} />);
-
-    // Use a more specific test ID that actually exists in the component
-    expect(screen.getByTestId("integrity-impact")).toBeInTheDocument();
-    
-    // Instead of looking for "High Integrity", check for badge with "High" text
-    // Use the specific test ID for the integrity badge that contains the level
-    const integrityBadge = screen.getByTestId("integrity-impact-integrity-badge");
-    expect(integrityBadge).toBeInTheDocument();
-    expect(integrityBadge).toHaveTextContent("High");
-    
-    expect(screen.getByText("Integrity Profile")).toBeInTheDocument();
+  it("renders with default props", () => {
+    const component = createComponent();
+    expect(screen.getByTestId("test-integrity-widget")).toBeInTheDocument();
+    expect(screen.getByText(WIDGET_TITLES.INTEGRITY_IMPACT)).toBeInTheDocument();
   });
 
-  it("displays integrity description from ciaContentService", () => {
-    render(<IntegrityImpactWidget {...defaultProps} />);
-    
-    // Use getAllByText since there are multiple elements with the same text
-    // and check that at least one exists
-    const descriptions = screen.getAllByText("High integrity description");
-    expect(descriptions.length).toBeGreaterThan(0);
+  it("displays integrity level badge", () => {
+    const component = createComponent();
+    expect(screen.getByTestId("test-integrity-widget-integrity-badge")).toBeInTheDocument();
+    expect(screen.getByText("Moderate")).toBeInTheDocument();
   });
 
-  it("displays business impact summary", () => {
-    render(<IntegrityImpactWidget {...defaultProps} />);
-    
-    expect(screen.getByText("Business Impact")).toBeInTheDocument();
-    expect(screen.getByTestId("integrity-impact-business-impact")).toHaveTextContent(
-      "High integrity business impact summary"
-    );
+  it("renders description section", () => {
+    createComponent();
+    expect(screen.getByText(/Mock description for integrity at Moderate level/)).toBeInTheDocument();
   });
 
-  it("displays recommendations", () => {
-    render(<IntegrityImpactWidget {...defaultProps} />);
-    
-    expect(screen.getByText("Recommendations")).toBeInTheDocument();
-    expect(screen.getByTestId("integrity-impact-recommendation-0")).toHaveTextContent(
-      "High recommendation 1"
-    );
+  it("renders technical implementation section", () => {
+    createComponent();
+    expect(screen.getByText(/Mock technical details for integrity at Moderate level/)).toBeInTheDocument();
+    expect(screen.getByText(/Mock validation method for Moderate/)).toBeInTheDocument();
   });
 
-  it("shows validation technique", () => {
-    render(<IntegrityImpactWidget {...defaultProps} />);
-    
-    const validationElement = screen.getByTestId("integrity-impact-validation-technique");
-    expect(validationElement).toBeInTheDocument();
-    expect(validationElement).toHaveTextContent("High validation method");
+  it("renders business impact section", () => {
+    createComponent();
+    expect(screen.getByText(/Mock business impact for integrity at Moderate level/)).toBeInTheDocument();
+    expect(screen.getByText(/Mock financial impact for Moderate/)).toBeInTheDocument();
+    expect(screen.getByText(/Mock operational impact for Moderate/)).toBeInTheDocument();
+  });
+
+  it("renders recommendations section", () => {
+    createComponent();
+    expect(screen.getByText(/Mock recommendation 1 for Moderate/)).toBeInTheDocument();
+    expect(screen.getByText(/Mock recommendation 2 for Moderate/)).toBeInTheDocument();
+  });
+
+  it("displays the none level correctly", () => {
+    createComponent({
+      integrityLevel: "None" as SecurityLevel,
+      availabilityLevel: "None" as SecurityLevel,
+      confidentialityLevel: "None" as SecurityLevel
+    });
+    expect(screen.getByText("None")).toBeInTheDocument();
+  });
+
+  it("displays the low level correctly", () => {
+    createComponent({
+      integrityLevel: "Low" as SecurityLevel,
+      availabilityLevel: "Low" as SecurityLevel,
+      confidentialityLevel: "Low" as SecurityLevel
+    });
+    expect(screen.getByText("Low")).toBeInTheDocument();
+  });
+
+  it("displays the high level correctly", () => {
+    createComponent({
+      integrityLevel: "High" as SecurityLevel,
+      availabilityLevel: "High" as SecurityLevel,
+      confidentialityLevel: "High" as SecurityLevel
+    });
+    expect(screen.getByText("High")).toBeInTheDocument();
+  });
+
+  it("displays the very high level correctly", () => {
+    createComponent({
+      integrityLevel: "Very High" as SecurityLevel,
+      availabilityLevel: "Very High" as SecurityLevel,
+      confidentialityLevel: "Very High" as SecurityLevel
+    });
+    expect(screen.getByText("Very High")).toBeInTheDocument();
   });
 });

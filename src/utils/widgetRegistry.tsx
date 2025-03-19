@@ -127,42 +127,59 @@ export class WidgetRegistryImpl implements WidgetRegistry {
 // Create and export a singleton instance
 const widgetRegistry = new WidgetRegistryImpl();
 
-// Register core widgets
+// Register widgets in the desired order (order property determines display order)
+
+// Group 1: Core Security Configuration and Overview (order 10-29)
+widgetRegistry.register({
+  id: "security-level",
+  title: WIDGET_TITLES.SECURITY_LEVEL,
+  component: SecurityLevelWidget,
+  icon: WIDGET_ICONS.SECURITY_LEVEL,
+  size: "medium",
+  order: 10, // First widget - security configuration
+  defaultProps: {
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
+  },
+});
+
+widgetRegistry.register({
+  id: "business-impact",
+  title: WIDGET_TITLES.BUSINESS_IMPACT,
+  component: BusinessImpactAnalysisWidget,
+  icon: WIDGET_ICONS.BUSINESS_IMPACT,
+  size: "medium",
+  order: 20, // Second widget - business impact
+  defaultProps: {
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
+  },
+});
+
 widgetRegistry.register<SecuritySummaryWidgetProps>({
   id: "security-summary",
   title: WIDGET_TITLES.SECURITY_SUMMARY,
   component: SecuritySummaryWidget,
   icon: WIDGET_ICONS.SECURITY_SUMMARY,
   size: "medium",
-  order: 10,
+  order: 25, // Third widget - security summary
 });
 
-widgetRegistry.register({
-  id: "compliance-status",
-  title: WIDGET_TITLES.COMPLIANCE_STATUS,
-  component: ComplianceStatusWidget,
-  icon: WIDGET_ICONS.COMPLIANCE_STATUS,
-  size: "medium",
-  order: 20,
-  defaultProps: {
-    availabilityLevel: "None" as SecurityLevel,
-    integrityLevel: "None" as SecurityLevel,
-    confidentialityLevel: "None" as SecurityLevel,
-  },
-});
-
+// Group 2: Business Value and Compliance Widgets (order 30-49)
 widgetRegistry.register({
   id: "value-creation",
   title: WIDGET_TITLES.VALUE_CREATION,
   component: ValueCreationWidget,
   icon: WIDGET_ICONS.VALUE_CREATION,
   size: "medium",
-  order: 30,
+  order: 30, // Business value comes first in Group 2
   defaultProps: {
-    securityLevel: "None" as SecurityLevel,
-    availabilityLevel: "None" as SecurityLevel,
-    integrityLevel: "None" as SecurityLevel,
-    confidentialityLevel: "None" as SecurityLevel,
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
+    securityLevel: "Moderate" as SecurityLevel, // Add explicit securityLevel
   },
 });
 
@@ -172,76 +189,54 @@ widgetRegistry.register({
   component: CostEstimationWidget,
   icon: WIDGET_ICONS.COST_ESTIMATION,
   size: "medium",
-  order: 40,
+  order: 35, // Cost is part of business value
   defaultProps: {
-    availabilityLevel: "None" as SecurityLevel,
-    integrityLevel: "None" as SecurityLevel,
-    confidentialityLevel: "None" as SecurityLevel,
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
   },
 });
 
 widgetRegistry.register({
-  id: "security-levels",
-  title: WIDGET_TITLES.SECURITY_LEVEL,
-  component: SecurityLevelWidget,
-  icon: WIDGET_ICONS.SECURITY_LEVEL,
+  id: "compliance-status",
+  title: WIDGET_TITLES.COMPLIANCE_STATUS,
+  component: ComplianceStatusWidget,
+  icon: WIDGET_ICONS.COMPLIANCE_STATUS,
   size: "medium",
-  order: 1,
+  order: 40, // Compliance is a business driver
   defaultProps: {
-    availabilityLevel: "None" as SecurityLevel,
-    integrityLevel: "None" as SecurityLevel,
-    confidentialityLevel: "None" as SecurityLevel,
-    setAvailability: () => {},
-    setIntegrity: () => {},
-    setConfidentiality: () => {},
-    onAvailabilityChange: () => {},
-    onIntegrityChange: () => {},
-    onConfidentialityChange: () => {},
-    // Remove securityLevel property as it doesn't exist in SecurityLevelWidgetProps
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
   },
 });
 
+// Group 3: CIA Component Impact Widgets (order 50-69)
 widgetRegistry.register({
   id: "cia-impact-summary",
   title: WIDGET_TITLES.CIA_IMPACT_SUMMARY,
   component: CIAImpactSummaryWidget,
   icon: WIDGET_ICONS.CIA_IMPACT_SUMMARY,
-  size: "small",
-  order: 12,
-  defaultProps: {
-    availabilityLevel: "None" as SecurityLevel,
-    integrityLevel: "None" as SecurityLevel,
-    confidentialityLevel: "None" as SecurityLevel,
-  },
-});
-
-// Register security visualization widget
-widgetRegistry.register({
-  id: "security-visualization",
-  title: WIDGET_TITLES.SECURITY_VISUALIZATION,
-  component: SecurityVisualizationWidget,
-  icon: WIDGET_ICONS.SECURITY_VISUALIZATION,
   size: "medium",
-  order: 15,
+  order: 50, // CIA summary before individual components
   defaultProps: {
-    availabilityLevel: "None" as SecurityLevel,
-    integrityLevel: "None" as SecurityLevel,
-    confidentialityLevel: "None" as SecurityLevel,
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
   },
 });
 
-// Register CIA triad component widgets
 widgetRegistry.register({
   id: "availability-impact",
   title: WIDGET_TITLES.AVAILABILITY_IMPACT,
   component: AvailabilityImpactWidget,
   icon: WIDGET_ICONS.AVAILABILITY_IMPACT,
   size: "medium",
-  order: 50,
+  order: 55, // Availability comes first in CIA
   defaultProps: {
-    availabilityLevel: "None" as SecurityLevel,
-    integrityLevel: "None" as SecurityLevel,
-    confidentialityLevel: "None" as SecurityLevel,
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
   },
 });
 
@@ -251,11 +246,11 @@ widgetRegistry.register({
   component: IntegrityImpactWidget,
   icon: WIDGET_ICONS.INTEGRITY_IMPACT,
   size: "medium",
-  order: 60,
+  order: 60, // Integrity comes second in CIA
   defaultProps: {
-    integrityLevel: "None" as SecurityLevel,
-    availabilityLevel: "None" as SecurityLevel,
-    confidentialityLevel: "None" as SecurityLevel,
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
   },
 });
 
@@ -265,39 +260,26 @@ widgetRegistry.register({
   component: ConfidentialityImpactWidget,
   icon: WIDGET_ICONS.CONFIDENTIALITY_IMPACT,
   size: "medium",
-  order: 70,
+  order: 65, // Confidentiality comes third in CIA
   defaultProps: {
-    confidentialityLevel: "None" as SecurityLevel,
-    availabilityLevel: "None" as SecurityLevel,
-    integrityLevel: "None" as SecurityLevel,
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
   },
 });
 
+// Group 4: Technical and Visualization Widgets (order 70-89)
 widgetRegistry.register({
-  id: "technical-details",
-  title: WIDGET_TITLES.TECHNICAL_DETAILS,
-  component: TechnicalDetailsWidget,
-  icon: WIDGET_ICONS.TECHNICAL_DETAILS,
-  size: "large",
-  order: 80,
+  id: "security-visualization",
+  title: WIDGET_TITLES.SECURITY_VISUALIZATION,
+  component: SecurityVisualizationWidget,
+  icon: WIDGET_ICONS.SECURITY_VISUALIZATION,
+  size: "medium",
+  order: 70, // Visualization is useful for technical overview
   defaultProps: {
-    availabilityLevel: "None" as SecurityLevel,
-    integrityLevel: "None" as SecurityLevel,
-    confidentialityLevel: "None" as SecurityLevel,
-  },
-});
-
-widgetRegistry.register({
-  id: "business-impact",
-  title: WIDGET_TITLES.BUSINESS_IMPACT,
-  component: BusinessImpactAnalysisWidget,
-  icon: WIDGET_ICONS.BUSINESS_IMPACT,
-  size: "full",
-  order: 90,
-  defaultProps: {
-    availabilityLevel: "None" as SecurityLevel,
-    integrityLevel: "None" as SecurityLevel,
-    confidentialityLevel: "None" as SecurityLevel,
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
   },
 });
 
@@ -306,13 +288,26 @@ widgetRegistry.register({
   title: WIDGET_TITLES.SECURITY_RESOURCES,
   component: SecurityResourcesWidget,
   icon: WIDGET_ICONS.SECURITY_RESOURCES,
-  size: "large",
-  order: 100,
+  size: "medium",
+  order: 75, // Resources support implementation
   defaultProps: {
-    availabilityLevel: "None" as SecurityLevel,
-    integrityLevel: "None" as SecurityLevel,
-    confidentialityLevel: "None" as SecurityLevel,
-    securityLevel: "None" as SecurityLevel,
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
+  },
+});
+
+widgetRegistry.register({
+  id: "technical-details",
+  title: WIDGET_TITLES.TECHNICAL_DETAILS,
+  component: TechnicalDetailsWidget,
+  icon: WIDGET_ICONS.TECHNICAL_DETAILS,
+  size: "medium", // Changed from "large" to "medium" for consistency
+  order: 80, // Technical details come last in the hierarchy
+  defaultProps: {
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
   },
 });
 

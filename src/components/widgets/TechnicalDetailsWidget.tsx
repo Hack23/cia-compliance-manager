@@ -1,17 +1,28 @@
 import React, { useMemo, useState } from "react";
+import withSecurityLevelState from '../../hoc/withSecurityLevelState';
 import { useCIAContentService } from "../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../types/cia";
+import { TechnicalImplementationDetails } from "../../types/cia-services";
 import { CodeBlock } from "../common/CodeBlock";
 import { KeyValuePair } from "../common/KeyValuePair";
 import { Tab } from "../common/Tab";
 import WidgetContainer from "../common/WidgetContainer"; // Changed to default import
 
+// Define props interface for the component
 interface TechnicalDetailsWidgetProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
   className?: string;
   testId?: string;
-  availabilityLevel?: SecurityLevel;
-  integrityLevel?: SecurityLevel;
-  confidentialityLevel?: SecurityLevel;
+}
+
+// Define interface for requirement items
+interface RequirementItem {
+  description: string;
+  importance: string;
+  category?: string;
+  [key: string]: any; // Allow other properties
 }
 
 /**
@@ -24,13 +35,13 @@ interface TechnicalDetailsWidgetProps {
  * Clear implementation details reduce implementation time and costs while ensuring
  * proper security standards are followed. 🔒
  */
-export function TechnicalDetailsWidget({
+const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   className = "",
   testId = "technical-details-widget",
   availabilityLevel = "Moderate",
   integrityLevel = "Moderate",
   confidentialityLevel = "Moderate",
-}: TechnicalDetailsWidgetProps): React.ReactElement {
+}: TechnicalDetailsWidgetProps): React.ReactElement => {
   const [activeTab, setActiveTab] = useState<"availability" | "integrity" | "confidentiality">("availability");
   const { ciaContentService } = useCIAContentService();
   
@@ -152,6 +163,52 @@ export function TechnicalDetailsWidget({
   const getTechnicalDescription = (component: "availability" | "integrity" | "confidentiality", level: SecurityLevel): string => {
     const details = ciaContentService.getComponentDetails(component, level);
     return details?.technical || `No technical description available for ${level} ${component}`;
+  };
+
+  // Fix the typed parameters
+  const renderRequirements = (requirements: RequirementItem[], title: string) => {
+    return (
+      <div className="mb-4">
+        <h4 className="text-md font-medium mb-2">{title}</h4>
+        <div className="space-y-2">
+          {requirements.map((req: RequirementItem, index: number) => (
+            <div
+              key={`req-${index}`}
+              className="p-2 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700"
+            >
+              <div className="flex justify-between">
+                <div className="text-sm">{req.description}</div>
+                <div className="text-xs font-medium px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300 rounded">
+                  {req.importance}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  // Fix the typed parameters
+  const renderTechnologies = (technologies: TechnicalImplementationDetails[], title: string) => {
+    return (
+      <div className="mb-4">
+        <h4 className="text-md font-medium mb-2">{title}</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {technologies.map((tech: TechnicalImplementationDetails, index: number) => (
+            <div
+              key={`tech-${index}`}
+              className="p-3 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700"
+            >
+              <div className="font-medium mb-1">{tech.description}</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">
+                {tech.effort?.expertise}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -327,7 +384,7 @@ export function TechnicalDetailsWidget({
           <div className="mt-6">
             <h4 className="text-md font-medium mb-3">Requirements</h4>
             <ul className="list-disc list-inside space-y-1 pl-4">
-              {implementationDetails.requirements.map((req, index) => (
+              {implementationDetails.requirements.map((req: string, index: number) => (
                 <li key={`requirement-${index}`} data-testid={`requirement-${index}`}>
                   {req}
                 </li>
@@ -341,7 +398,7 @@ export function TechnicalDetailsWidget({
           <div className="mt-6">
             <h4 className="text-md font-medium mb-3">Technologies</h4>
             <div className="flex flex-wrap gap-2">
-              {implementationDetails.technologies.map((tech, index) => (
+              {implementationDetails.technologies.map((tech: string, index: number) => (
                 <span 
                   key={`tech-${index}`} 
                   className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300 rounded-md"
@@ -356,6 +413,7 @@ export function TechnicalDetailsWidget({
       </div>
     </WidgetContainer>
   );
-}
+};
 
-export default TechnicalDetailsWidget;
+// Export the component with security level state management
+export default withSecurityLevelState(TechnicalDetailsWidget);

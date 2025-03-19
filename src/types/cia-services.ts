@@ -94,13 +94,16 @@ export interface ImplementationEffort {
 export interface TechnicalImplementationDetails {
   description: string;
   implementationSteps: string[];
-  effort: ImplementationEffort;
-  requirements?: string[];
-  technologies?: string[];
-  // Availability-specific metrics
-  rto?: string;
-  rpo?: string;
-  mttr?: string;
+  effort: {
+    development: string;
+    maintenance: string;
+    expertise: string;
+  };
+  // Add the component-specific properties
+  validationMethod?: string; // For integrity
+  protectionMethod?: string; // For confidentiality
+  recoveryMethod?: string;   // For availability
+  [key: string]: any;        // Allow additional properties
 }
 
 /**

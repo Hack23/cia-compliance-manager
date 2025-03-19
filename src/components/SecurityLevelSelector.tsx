@@ -33,15 +33,24 @@ export interface SecurityLevelSelectorProps {
 const SecurityLevelSelector: React.FC<SecurityLevelSelectorProps> = (props) => {
   // Create adapters for callback functions to handle typing correctly
   const handleAvailabilityChange = props.onAvailabilityChange 
-    ? (value: SecurityLevel) => props.onAvailabilityChange!(value) 
+    ? (value: SecurityLevel) => {
+        console.log("Availability change in facade:", value);
+        props.onAvailabilityChange!(value);
+      }
     : undefined;
     
   const handleIntegrityChange = props.onIntegrityChange
-    ? (value: SecurityLevel) => props.onIntegrityChange!(value)
+    ? (value: SecurityLevel) => {
+        console.log("Integrity change in facade:", value);
+        props.onIntegrityChange!(value);
+      }
     : undefined;
     
   const handleConfidentialityChange = props.onConfidentialityChange
-    ? (value: SecurityLevel) => props.onConfidentialityChange!(value)
+    ? (value: SecurityLevel) => {
+        console.log("Confidentiality change in facade:", value);
+        props.onConfidentialityChange!(value);
+      }
     : undefined;
 
   // Pass through to the enhanced selector with proper typing

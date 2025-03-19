@@ -67,8 +67,18 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   error = null,
   title = UI_TEXT?.WIDGET_TITLES?.SECURITY_LEVEL || "Security Levels",
 }) => {
+  // Add debugging for prop values
+  React.useEffect(() => {
+    console.log("SecurityLevelWidget props:", {
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    });
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
+
   // Create handlers that adapt between string and SecurityLevel types
   const handleConfidentialityChange = (value: string) => {
+    console.log("Confidentiality changed to:", value);
     // Cast the string to SecurityLevel since we know it comes from a valid set of options
     const level = value as SecurityLevel;
     if (onConfidentialityChange) onConfidentialityChange(level);
@@ -76,6 +86,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   };
 
   const handleIntegrityChange = (value: string) => {
+    console.log("Integrity changed to:", value);
     // Cast the string to SecurityLevel since we know it comes from a valid set of options
     const level = value as SecurityLevel;
     if (onIntegrityChange) onIntegrityChange(level);
@@ -83,6 +94,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   };
 
   const handleAvailabilityChange = (value: string) => {
+    console.log("Availability changed to:", value);
     // Cast the string to SecurityLevel since we know it comes from a valid set of options
     const level = value as SecurityLevel;
     if (onAvailabilityChange) onAvailabilityChange(level);

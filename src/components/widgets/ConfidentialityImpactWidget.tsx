@@ -1,18 +1,12 @@
-import React, { useMemo, useState } from "react";
-import { CONFIDENTIALITY_IMPACT_TEST_IDS } from "../../constants/testIds";
-import ciaContentService from "../../services/ciaContentService";
+import React, { useMemo } from "react";
+import { WIDGET_ICONS, WIDGET_TITLES } from "../../constants/appConstants";
+import withSecurityLevelState from '../../hoc/withSecurityLevelState';
+import { useCIAContentService } from "../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../types/cia";
-import CIAImpactCard from "../common/CIAImpactCard";
-import { KeyValuePair } from "../common/KeyValuePair";
+import { getSecurityLevelValue } from "../../utils/securityLevelUtils";
+import BusinessImpactSection from "../common/BusinessImpactSection";
 import SecurityLevelBadge from "../common/SecurityLevelBadge";
-import WidgetActions, { WidgetActionButton } from "../common/WidgetActions";
 import WidgetContainer from "../common/WidgetContainer";
-
-// Add missing test IDs
-export const WIDGET_TEST_IDS = {
-  CONFIDENTIALITY_IMPACT_WIDGET: "confidentiality-impact-widget",
-  RECOMMENDATION: "recommendation"
-};
 
 /**
  * Props for the ConfidentialityImpactWidget
@@ -44,118 +38,101 @@ export interface ConfidentialityImpactWidgetProps {
    * Optional test ID for testing
    */
   testId?: string;
+  
+  /**
+   * For legacy support
+   */
+  level?: SecurityLevel;
+  
+  /**
+   * Optional level change handler
+   */
+  onLevelChange?: (level: SecurityLevel) => void;
+}
+
+// Update the TechnicalImplementation type definition
+interface TechnicalImplementationDetails {
+  protectionMethod?: string;
+  [key: string]: any;
 }
 
 /**
- * Widget that displays confidentiality impact analysis
+ * Displays confidentiality impact details for the selected security level
  *
  * ## Business Perspective
- * 
- * This widget shows how the selected confidentiality level
- * impacts business operations, data protection, and compliance.
- * It provides security officers and executives with insights on 
- * data confidentiality controls and their business implications. 🔒
+ *
+ * This widget helps stakeholders understand how confidentiality levels
+ * affect data protection and access controls, with visualizations of
+ * business impacts and recommended controls. It supports decision-making
+ * about data classification and protection mechanisms. 🔒
  */
-const ConfidentialityImpactWidget: React.FC<
-  ConfidentialityImpactWidgetProps
-> = ({
+const ConfidentialityImpactWidget: React.FC<ConfidentialityImpactWidgetProps> = ({
   confidentialityLevel,
   availabilityLevel,
   integrityLevel,
+  level, // For backward compatibility
   className = "",
-  testId = CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_PREFIX || "confidentiality-impact-widget",
+  testId = "widget-confidentiality-impact",
 }) => {
-  // State for showing all recommendations
-  const [showAllRecommendations, setShowAllRecommendations] = useState(false);
+  // Use the content service to get component details
+  const { ciaContentService } = useCIAContentService();
 
-  // Get confidentiality details from the service
-  const confidentialityDetails = useMemo(() => 
-    ciaContentService.getComponentDetails(
-      "confidentiality",
-      confidentialityLevel
-    ),
-    [confidentialityLevel]
-  );
+  // Use the passed level or fallback to confidentialityLevel for backward compatibility
+  const effectiveLevel = level || confidentialityLevel;
+  
+  // Get component-specific details
+  const details = useMemo(() => {
+    return ciaContentService.getComponentDetails("confidentiality", effectiveLevel);
+  }, [ciaContentService, effectiveLevel]);
 
-  // Get recommendations for this confidentiality level
-  const recommendations = useMemo(() => 
-    ciaContentService.getRecommendations(
-      "confidentiality",
-      confidentialityLevel
-    ),
-    [confidentialityLevel]
-  );
+  // Get business impact details
+  const businessImpact = useMemo(() => {
+    return ciaContentService.getBusinessImpact?.("confidentiality", effectiveLevel) || null;
+  }, [ciaContentService, effectiveLevel]);
 
-  // Get overall security impact using all three dimensions
-  const overallImpact = useMemo(() => 
-    ciaContentService.calculateBusinessImpactLevel(
-      availabilityLevel, 
+  // Get technical implementation
+  const technicalImplementation = useMemo<TechnicalImplementationDetails | null>(() => {
+    return ciaContentService.getTechnicalImplementation?.("confidentiality", effectiveLevel) || null;
+  }, [ciaContentService, effectiveLevel]);
+
+  // Get recommended controls
+  const recommendations = useMemo(() => {
+    return (
+      ciaContentService.getRecommendations?.("confidentiality", effectiveLevel) ||
+      details?.recommendations ||
+      []
+    );
+  }, [ciaContentService, effectiveLevel, details]);
+
+  // Calculate overall impact with the current confidentiality level
+  const overallImpact = useMemo(() => {
+    return ciaContentService.calculateBusinessImpactLevel?.(
+      availabilityLevel,
       integrityLevel,
-      confidentialityLevel
-    ),
-    [availabilityLevel, integrityLevel, confidentialityLevel]
-  );
+      effectiveLevel
+    ) || effectiveLevel;
+  }, [ciaContentService, availabilityLevel, integrityLevel, effectiveLevel]);
 
-  // Actions for the widget
-  const actionsElement = (
-    <WidgetActions>
-      <WidgetActionButton
-        onClick={() => setShowAllRecommendations(!showAllRecommendations)}
-        icon={<span>{showAllRecommendations ? "−" : "+"}</span>}
-        ariaLabel={showAllRecommendations ? "Show fewer recommendations" : "Show all recommendations"}
-        testId={`${testId}-toggle-recommendations-button`}
-      />
-    </WidgetActions>
-  );
-
-  // If no details, show placeholder
-  if (!confidentialityDetails) {
+  // If details aren't available, show an error state
+  if (!details) {
     return (
       <WidgetContainer
-        title="Confidentiality Impact"
-        icon="🔒"
-        className={`confidentiality-impact-widget ${className}`}
+        title={WIDGET_TITLES.CONFIDENTIALITY_IMPACT}
+        icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT}
+        className={className}
         testId={testId}
+        error={new Error("Confidentiality details not available")}
       >
-        <p>No details available for the selected confidentiality level.</p>
+        <div>Confidentiality details not available</div>
       </WidgetContainer>
     );
   }
 
-  // Get business impact details
-  const businessImpact = useMemo(() => 
-    ciaContentService.getBusinessImpact(
-      "confidentiality",
-      confidentialityLevel
-    ),
-    [confidentialityLevel]
-  );
-
-  // Get implementation details
-  const technicalDetails = useMemo(() => 
-    ciaContentService.getTechnicalImplementation(
-      "confidentiality",
-      confidentialityLevel
-    ),
-    [confidentialityLevel]
-  );
-
-  // Handle technical details properties safely
-  const getProtectionMethod = () => {
-    if (!technicalDetails) return "Not specified";
-    if (typeof technicalDetails !== 'object') return "Not specified";
-    
-    // Use optional chaining and access using bracket notation for property that may not exist
-    return (technicalDetails as any)?.protectionMethod || 
-           confidentialityDetails?.protectionMethod || 
-           "Not specified";
-  };
-
   return (
     <WidgetContainer
-      title="Confidentiality Impact"
-      icon="🔒"
-      className={`confidentiality-impact-widget ${className}`}
+      title={WIDGET_TITLES.CONFIDENTIALITY_IMPACT}
+      icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT}
+      className={`${className} overflow-visible`}
       testId={testId}
     >
       <div className="max-h-[550px] overflow-y-auto pr-1">
@@ -167,7 +144,7 @@ const ConfidentialityImpactWidget: React.FC<
           <div className="mb-4">
             <SecurityLevelBadge
               category="Confidentiality"
-              level={confidentialityLevel}
+              level={effectiveLevel}
               colorClass="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
               textClass="text-purple-800 dark:text-purple-300"
               testId={`${testId}-confidentiality-badge`}
@@ -177,149 +154,70 @@ const ConfidentialityImpactWidget: React.FC<
             {availabilityLevel && integrityLevel && (
               <div className="mt-2 text-sm">
                 <span className="font-medium">Overall Security Impact: </span>
-                <span className={`${getImpactColor(overallImpact)} font-medium`}>
+                <span className={`text-purple-600 dark:text-purple-400 font-medium`}>
                   {overallImpact}
                 </span>
               </div>
             )}
+            
+            <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              <span className="font-medium">Security Score: </span>
+              <span className="font-bold">{getSecurityLevelValue(effectiveLevel) * 25}%</span>
+            </div>
           </div>
 
           <div className="space-y-6">
             {/* Impact Description */}
             <div>
-              <p className="text-sm text-gray-700 dark:text-gray-300">
-                {confidentialityDetails?.description ||
-                  "No impact description available."}
-              </p>
-            </div>
-
-            <CIAImpactCard
-              title="Confidentiality Profile"
-              level={confidentialityLevel}
-              description={
-                confidentialityDetails.description || "No description available"
-              }
-              icon="🔒"
-              badgeVariant="purple"
-              cardClass="confidentiality-card"
-              testId={`${testId}-impact-card`}
-            >
-              {technicalDetails && getProtectionMethod() && (
-                <div className="flex items-center mt-2 text-sm text-purple-600 dark:text-purple-400">
-                  <span className="mr-2">🔒</span>
-                  <span className="font-medium">Protection Method: </span>
-                  <span className="ml-1">
-                    {getProtectionMethod()}
-                  </span>
-                </div>
-              )}
-            </CIAImpactCard>
-
-            {/* Business Impact Section */}
-            <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border shadow-sm security-card">
-              <h4 className="text-md font-medium mb-3 flex items-center">
-                <span className="mr-2">💼</span>
-                Business Impact
+              <h4 className="text-md font-medium mb-2 flex items-center">
+                <span className="mr-2">📝</span>Description
               </h4>
-
-              <p
-                className="text-gray-600 dark:text-gray-300 mb-4"
-                data-testid={`${testId}-business-impact`}
-              >
-                {businessImpact?.summary ||
-                  confidentialityDetails?.businessImpact ||
-                  "No business impact data available"}
+              <p className="text-gray-600 dark:text-gray-300">
+                {details.description || "No description available"}
               </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {businessImpact?.regulatory && (
-                  <div className="p-3 rounded-md bg-opacity-10 bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20 border border-purple-200 dark:border-purple-800">
-                    <KeyValuePair
-                      label="Regulatory Impact"
-                      value={businessImpact.regulatory?.description || 'Not specified'}
-                      testId={`${testId}-regulatory-impact`}
-                      valueClassName="text-purple-700 dark:text-purple-300"
-                    />
-                  </div>
-                )}
-
-                {businessImpact?.financial && (
-                  <div className="p-3 rounded-md bg-opacity-10 bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20 border border-purple-200 dark:border-purple-800">
-                    <KeyValuePair
-                      label="Financial Impact"
-                      value={businessImpact.financial?.description || 'Not specified'}
-                      testId={`${testId}-financial-impact`}
-                      valueClassName="text-purple-700 dark:text-purple-300"
-                    />
-                  </div>
-                )}
-              </div>
             </div>
 
-            {/* Technical Details */}
-            {technicalDetails && technicalDetails.description && (
-              <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4 confidentiality-card security-card">
-                <h4 className="text-md font-medium mb-2 flex items-center">
-                  <span className="mr-2">⚙️</span>
-                  Technical Implementation
-                </h4>
-
-                <p className="text-gray-600 dark:text-gray-300 mb-3">
-                  {technicalDetails.description}
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
-                  <div className="p-3 rounded-md bg-opacity-10 bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20">
-                    <KeyValuePair
-                      label="Protection Method"
-                      value={getProtectionMethod()} // Removed incorrect type assertion
-                      testId={`${testId}-protection-method`}
-                      valueClassName="text-purple-700 dark:text-purple-300 font-medium"
-                    />
-                  </div>
-
-                  <div className="p-3 rounded-md bg-opacity-10 bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20">
-                    <KeyValuePair
-                      label="Protection Level"
-                      value={confidentialityLevel}
-                      testId={`${testId}-protection-level`}
-                      valueClassName="text-purple-700 dark:text-purple-300 font-medium"
-                    />
-                  </div>
-                </div>
-              </div>
+            {/* Business Impact */}
+            {businessImpact && (
+              <BusinessImpactSection 
+                impact={businessImpact}
+                color="purple"
+                testId={`${testId}-business-impact`}
+              />
             )}
 
-            {/* Recommendations */}
-            {recommendations && recommendations.length > 0 && (
-              <div className="bg-purple-50 dark:bg-gray-800 p-4 rounded-lg border border-purple-200 dark:border-purple-900 shadow-sm security-card">
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="text-md font-medium flex items-center">
-                    <span className="mr-2">💡</span>
-                    Recommendations
-                  </h4>
-                  {recommendations.length > 3 && (
-                    <button
-                      onClick={() =>
-                        setShowAllRecommendations(!showAllRecommendations)
-                      }
-                      className="text-sm text-purple-600 dark:text-purple-400 hover:underline"
-                      aria-expanded={showAllRecommendations}
-                      data-testid={`${testId}-toggle-recommendations`}
-                    >
-                      {showAllRecommendations ? "Show Less" : "Show All"}
-                    </button>
-                  )}
+            {/* Technical Implementation */}
+            <div>
+              <h4 className="text-md font-medium mb-2 flex items-center">
+                <span className="mr-2">🔧</span>Technical Implementation
+              </h4>
+              <p className="text-gray-600 dark:text-gray-300">
+                {details.technical || "No technical details available"}
+              </p>
+              
+              {/* Protection method */}
+              {technicalImplementation && technicalImplementation.protectionMethod && (
+                <div className="mt-3 p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg">
+                  <h5 className="text-sm font-medium text-purple-800 dark:text-purple-300 mb-1">
+                    Protection Method
+                  </h5>
+                  <p className="text-purple-700 dark:text-purple-400">
+                    {technicalImplementation.protectionMethod}
+                  </p>
                 </div>
+              )}
+            </div>
 
-                <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
-                  {(showAllRecommendations
-                    ? recommendations
-                    : recommendations.slice(0, 3)
-                  ).map((recommendation: string, index: number) => (
+            {/* Recommended Controls */}
+            {recommendations && recommendations.length > 0 && (
+              <div>
+                <h4 className="text-md font-medium mb-2 flex items-center">
+                  <span className="mr-2">✅</span>Recommended Controls
+                </h4>
+                <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
+                  {recommendations.map((recommendation, index) => (
                     <li
                       key={`recommendation-${index}`}
-                      className="mb-2"
                       data-testid={`recommendation-${index}`}
                     >
                       {recommendation}
@@ -353,4 +251,5 @@ function getImpactColor(impact: SecurityLevel | string): string {
   }
 }
 
-export default ConfidentialityImpactWidget;
+// Export the component wrapped with security level state management
+export default withSecurityLevelState(ConfidentialityImpactWidget);

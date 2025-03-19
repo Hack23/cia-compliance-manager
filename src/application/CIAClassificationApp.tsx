@@ -26,30 +26,42 @@ const CIAClassificationApp: React.FC = () => {
   // Security level state management for CIA triad
   const [availabilityLevel, setAvailabilityLevel] = useLocalStorage<SecurityLevel>(
     "availabilityLevel",
-    "None"
+    "Moderate" // Change default value from "None" to "Moderate"
   );
   const [integrityLevel, setIntegrityLevel] = useLocalStorage<SecurityLevel>(
     "integrityLevel",
-    "None"
+    "Moderate" // Change default value from "None" to "Moderate"
   );
   const [confidentialityLevel, setConfidentialityLevel] = useLocalStorage<SecurityLevel>(
     "confidentialityLevel",
-    "None"
+    "Moderate" // Change default value from "None" to "Moderate"
   );
 
   // Set overall security level based on CIA components
-  const [securityLevel, setSecurityLevel] = useState<SecurityLevel>("None");
+  const [securityLevel, setSecurityLevel] = useState<SecurityLevel>("Moderate");
+
+  // Add debugging for security level state
+  useEffect(() => {
+    console.log("CIA App Security Levels:", { 
+      availabilityLevel, 
+      integrityLevel, 
+      confidentialityLevel 
+    });
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
   // Handlers for level changes
   const handleAvailabilityChange = useCallback((level: SecurityLevel) => {
+    console.log("App handling availability change:", level);
     setAvailabilityLevel(level);
   }, [setAvailabilityLevel]);
 
   const handleIntegrityChange = useCallback((level: SecurityLevel) => {
+    console.log("App handling integrity change:", level);
     setIntegrityLevel(level);
   }, [setIntegrityLevel]);
 
   const handleConfidentialityChange = useCallback((level: SecurityLevel) => {
+    console.log("App handling confidentiality change:", level);
     setConfidentialityLevel(level);
   }, [setConfidentialityLevel]);
 

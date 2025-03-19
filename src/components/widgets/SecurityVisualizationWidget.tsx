@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { RISK_LEVEL_DESCRIPTIONS } from "../../constants/appConstants";
+import withSecurityLevelState from '../../hoc/withSecurityLevelState';
 import { SecurityLevel } from "../../types/cia";
 import { getSecurityLevelValue } from "../../utils/securityLevelUtils";
 import RadarChart from "../charts/RadarChart";
@@ -150,4 +151,5 @@ const SecurityVisualizationWidget: React.FC<
   );
 };
 
-export default SecurityVisualizationWidget;
+// Export the enhanced component
+export default withSecurityLevelState(SecurityVisualizationWidget);

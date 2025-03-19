@@ -77,9 +77,15 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   }, [ciaOptions]);
 
   // Get ROI estimate
-  const roiEstimate = useMemo(() => {
-    return ciaService.getROIEstimate(securityLevel);
-  }, [ciaService, securityLevel]);
+  const roiData = useMemo(() => {
+    // Ensure we have a valid securityLevel before calling getROIEstimate
+    const effectiveLevel = securityLevel || availabilityLevel || "Moderate";
+    return ciaService.getROIEstimate?.(effectiveLevel) || {
+      returnRate: "0%",
+      value: "0%",
+      description: "ROI information not available"
+    };
+  }, [ciaService, securityLevel, availabilityLevel]);
 
   // Get value creation points
   const valuePoints = useMemo(() => {
@@ -137,7 +143,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <MetricsCard
               title="ROI Estimate"
-              value={roiEstimate.value || "N/A"} 
+              value={roiData.value || "N/A"} 
               testId="value-creation-widget-roi"
             />
             <MetricsCard

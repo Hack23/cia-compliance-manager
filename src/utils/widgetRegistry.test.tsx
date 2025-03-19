@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from "vitest";
 import widgetRegistry, { WidgetDefinition } from "./widgetRegistry";
 
@@ -45,7 +45,53 @@ vi.mock("../components/widgets/SecuritySummaryWidget", () => ({
 // Other component mocks as needed
 // ...
 
-describe("Widget Registry", () => {
+describe('Widget Registry', () => {
+  it('should properly register widgets', () => {
+    // Check that widgets are properly registered
+    const allWidgets = widgetRegistry.getAll();
+    expect(allWidgets.length).toBeGreaterThan(0);
+    
+    // Check for specific widgets
+    const securitySummaryWidget = widgetRegistry.get('security-summary');
+    expect(securitySummaryWidget).toBeDefined();
+    expect(securitySummaryWidget?.title).toBe('Security Summary');
+  });
+
+  it('should include standardized security levels in default props', () => {
+    // Get a widget with security level props
+    const securityVisualizationWidget = widgetRegistry.get('security-visualization');
+    
+    // Check that the default security levels are set to "Moderate"
+    expect(securityVisualizationWidget?.defaultProps?.availabilityLevel).toBe('Moderate');
+    expect(securityVisualizationWidget?.defaultProps?.integrityLevel).toBe('Moderate');
+    expect(securityVisualizationWidget?.defaultProps?.confidentialityLevel).toBe('Moderate');
+  });
+
+  it('should render widgets with standardized security levels', () => {
+    // Render a widget through the registry
+    const widgetElement = widgetRegistry.renderWidget('security-summary');
+    
+    // Render to test environment
+    render(<div data-testid="widget-container">{widgetElement}</div>);
+    
+    // Verify the widget was rendered with the test ID
+    expect(screen.getByTestId('widget-security-summary')).toBeInTheDocument();
+  });
+
+  it('should render multiple widgets with consistent security levels', () => {
+    // Render multiple widgets
+    const widgetElements = widgetRegistry.renderWidgets();
+    
+    // Render to test environment
+    render(<div data-testid="widgets-container">{widgetElements}</div>);
+    
+    // Check that some key widgets are present
+    expect(screen.getByTestId('widget-security-summary')).toBeInTheDocument();
+    
+    // More specific assertions could be added for each widget's content
+    // when rendered with the standard security levels
+  });
+
   it("should export the required methods", () => {
     // Update to use the current interface methods
     expect(typeof widgetRegistry.get).toBe("function");

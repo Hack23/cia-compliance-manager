@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { SUMMARY_TEST_IDS } from "../../constants/testIds";
+import withSecurityLevelState from '../../hoc/withSecurityLevelState';
 import { useCIAContentService } from "../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../types/cia";
 import { getRiskLevelFromSecurityLevel } from "../../utils";
@@ -625,4 +626,5 @@ export function SecuritySummaryWidget({
   );
 }
 
-export default SecuritySummaryWidget;
+// Export the component wrapped with security level state management
+export default withSecurityLevelState(SecuritySummaryWidget);

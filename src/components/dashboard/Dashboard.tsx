@@ -1,10 +1,10 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { WIDGET_ICONS } from "../../constants/appConstants";
 import { APP_TEST_IDS, createDynamicTestId } from "../../constants/testIds";
 import {
-    availabilityOptions,
-    confidentialityOptions,
-    integrityOptions,
+  availabilityOptions,
+  confidentialityOptions,
+  integrityOptions,
 } from "../../hooks/useCIAOptions";
 import { gridClasses } from "../../styles/gridStyles";
 import { SecurityLevel } from "../../types/cia";
@@ -17,9 +17,9 @@ import TechnicalDetailsWidget from "../widgets/TechnicalDetailsWidget";
 interface DashboardProps {
   children?: ReactNode;
   useRegistry?: boolean;
-  availability?: string;
-  integrity?: string;
-  confidentiality?: string;
+  availability: SecurityLevel;
+  integrity: SecurityLevel;
+  confidentiality: SecurityLevel;
   columnsSmall?: number;
   columnsMedium?: number;
   columnsLarge?: number;
@@ -41,6 +41,11 @@ const Dashboard: React.FC<DashboardProps> = ({
   compact = false,
   showBorders = true,
 }) => {
+  // Add debug logging for security levels
+  useEffect(() => {
+    console.log("Dashboard security levels:", { availability, integrity, confidentiality });
+  }, [availability, integrity, confidentiality]);
+
   // Prepare props for business impact widgets
   const impactWidgetProps = {
     "availability-impact": {
@@ -97,11 +102,27 @@ const Dashboard: React.FC<DashboardProps> = ({
     >
       {useRegistry
         ? // Make sure this correctly calls renderWidgets from the widget registry
-          widgetRegistry.renderWidgets(undefined, widgetProps)
+          widgetRegistry.renderWidgets(
+            widget => true, 
+            {
+              'security-summary': widgetProps,
+              'security-visualization': widgetProps,
+              'compliance-status': widgetProps,
+              'value-creation': widgetProps,
+              'cost-estimation': widgetProps,
+              'cia-impact-summary': widgetProps,
+              'availability-impact': widgetProps,
+              'integrity-impact': widgetProps,
+              'confidentiality-impact': widgetProps,
+              'technical-details': widgetProps,
+              'business-impact': widgetProps,
+              'security-resources': widgetProps,
+            }
+          )
         : // Otherwise render children directly
           React.Children.map(children, (child) => {
             if (!React.isValidElement(child)) return null;
-            return child;
+            return React.cloneElement(child, widgetProps);
           })}
 
       {/* Only include TechnicalDetailsWidget when not using registry and props are available */}

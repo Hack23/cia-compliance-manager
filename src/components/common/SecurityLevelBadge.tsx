@@ -10,31 +10,36 @@ interface SecurityLevelBadgeProps {
 }
 
 /**
- * Displays a security level badge for a specific category
+ * Displays a security level badge with consistent styling
  * 
- * @param props Component props
- * @returns React Element
+ * ## Business Perspective
+ * 
+ * This component visualizes security levels for various CIA components with 
+ * consistent styling, helping stakeholders quickly understand the security 
+ * posture across different dimensions. 🔒
  */
-export function SecurityLevelBadge({
+const SecurityLevelBadge: React.FC<SecurityLevelBadgeProps> = ({
   category,
   level,
-  colorClass = "bg-gray-100",
-  textClass = "text-gray-800",
+  colorClass = "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20",
+  textClass = "text-blue-600 dark:text-blue-400",
   testId,
-}: SecurityLevelBadgeProps): React.ReactElement {
+}) => {
   return (
     <div 
-      className={`p-2 rounded-md flex flex-col items-center justify-center text-center ${colorClass}`}
-      data-testid={testId}
+      className={`py-2 px-3 rounded-md ${colorClass}`}
+      data-testid={testId || `${category.toLowerCase()}-level-badge`}
     >
-      <span className="text-xs uppercase font-medium text-gray-600 dark:text-gray-400">
-        {category}
-      </span>
-      <span className={`font-bold ${textClass}`}>
-        {level}
-      </span>
+      <div className="flex flex-col">
+        <div className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+          {category}
+        </div>
+        <div className={`text-sm font-bold ${textClass}`}>
+          {level}
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default SecurityLevelBadge;

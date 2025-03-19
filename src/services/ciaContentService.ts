@@ -53,14 +53,19 @@ function formatCurrency(value: number): string {
  * @returns The ROI key (NONE, LOW, etc.)
  */
 function securityLevelToROIKey(level: SecurityLevel): keyof ROIEstimatesMap {
-  const mapping: Record<SecurityLevel, keyof ROIEstimatesMap> = {
-    None: "NONE",
-    Low: "LOW",
-    Moderate: "MODERATE",
-    High: "HIGH",
-    "Very High": "VERY_HIGH",
-  };
-  return mapping[level] || "NONE";
+  // Handle the case properly with defensive coding
+  if (!level) return "NONE";
+  
+  // Convert to uppercase and replace space with underscore
+  const mappedLevel = level.toUpperCase().replace(/\s+/g, "_");
+  
+  // Check if the mapped level is a valid key
+  if (["NONE", "LOW", "MODERATE", "HIGH", "VERY_HIGH"].includes(mappedLevel)) {
+    return mappedLevel as keyof ROIEstimatesMap;
+  }
+  
+  // Default fallback
+  return "NONE";
 }
 
 /**
@@ -816,24 +821,29 @@ export const getValuePoints = defaultService.getValuePoints;
 
 // Export for use with security ROI calculations
 export function getROIEstimate(level: SecurityLevel): ROIEstimate {
-  const roiEstimatesMap: ROIEstimatesMap = {
-    NONE: { returnRate: "0%", value: "Negative", description: "Negative ROI" },
+  // Ensure level is defined and a string before calling toUpperCase()
+  if (!level) {
+    // Default to "None" if level is undefined or null
+    level = "None";
+  }
+  
+  // Guard against non-string values just in case
+  const securityLevel = typeof level === 'string' ? level : 'None';
+  
+  // Now safely convert to ROI key format
+  const key = securityLevelToROIKey(securityLevel);
+  
+  // Define default ROI estimates if needed
+  const defaultROIEstimates: ROIEstimatesMap = {
+    NONE: { returnRate: "0%", value: "0%", description: "No ROI without security investment" },
     LOW: { returnRate: "50%", value: "50%", description: "Low ROI" },
-    MODERATE: {
-      returnRate: "150%",
-      value: "150%",
-      description: "Moderate ROI",
-    },
+    MODERATE: { returnRate: "150%", value: "150%", description: "Moderate ROI" },
     HIGH: { returnRate: "250%", value: "250%", description: "High ROI" },
-    VERY_HIGH: {
-      returnRate: "400%",
-      value: "400%",
-      description: "Very High ROI",
-    },
+    VERY_HIGH: { returnRate: "400%", value: "400%", description: "Very High ROI" },
   };
-
-  const key = securityLevelToROIKey(level);
-  return roiEstimatesMap[key];
+  
+  // Return the ROI estimate for the key, or a default if not found
+  return defaultROIEstimates[key] || defaultROIEstimates.NONE;
 }
 
 /**

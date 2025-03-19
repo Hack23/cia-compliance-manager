@@ -1,62 +1,119 @@
-import React from 'react';
-import { SecurityLevel } from '../../types/cia';
+import React from "react";
+import { SecurityLevel } from "../../types/cia";
+import { getSecurityLevelValue } from "../../utils/levelValuesUtils";
 
+/**
+ * Props for the SecurityLevelSummaryItem component
+ */
 interface SecurityLevelSummaryItemProps {
+  /**
+   * The label to display for this security level item
+   */
   label: string;
+  
+  /**
+   * The security level value to display
+   */
   value: SecurityLevel;
-  icon: string;
-  color: string;
-  borderColor?: string;
+  
+  /**
+   * Optional icon to display
+   */
+  icon?: string;
+  
+  /**
+   * Optional test ID for testing
+   */
   testId?: string;
+  
+  /**
+   * Optional color to use for styling
+   */
+  color?: string;
+  
+  /**
+   * Optional border color
+   */
+  borderColor?: string;
+  
+  /**
+   * Whether to display in compact mode
+   */
   compact?: boolean;
 }
 
 /**
- * Displays a summary item for a security level component
+ * Displays a summary item for a security level with standardized styling
  * 
- * @param props Component props
- * @returns React Element
+ * ## Business Perspective
+ * 
+ * This component ensures consistent display of security levels across the application,
+ * providing stakeholders with a uniform visual language for understanding security controls. 🔒
  */
-export function SecurityLevelSummaryItem({
+export const SecurityLevelSummaryItem: React.FC<SecurityLevelSummaryItemProps> = ({
   label,
   value,
   icon,
-  color,
-  borderColor,
   testId,
+  color = "blue",
+  borderColor,
   compact = false,
-}: SecurityLevelSummaryItemProps): React.ReactElement {
-  const baseClassNames = "p-3 rounded-md border";
-  const colorClassNames = {
-    blue: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-10 border-blue-100 dark:border-blue-800",
-    green: "bg-green-50 dark:bg-green-900 dark:bg-opacity-10 border-green-100 dark:border-green-800",
-    purple: "bg-purple-50 dark:bg-purple-900 dark:bg-opacity-10 border-purple-100 dark:border-purple-800",
-    red: "bg-red-50 dark:bg-red-900 dark:bg-opacity-10 border-red-100 dark:border-red-800",
-    yellow: "bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-10 border-yellow-100 dark:border-yellow-800",
-    gray: "bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700",
-  };
+}) => {
+  // Calculate security strength as a percentage based on level
+  const securityStrength = getSecurityLevelValue(value) * 25;
   
-  const selectedColor = colorClassNames[color as keyof typeof colorClassNames] || colorClassNames.gray;
-  
-  const borderStyle = borderColor ? { borderLeftColor: borderColor } : {};
-  
-  return (
-    <div
-      className={`${baseClassNames} ${selectedColor} ${compact ? '' : 'border-l-4'}`}
-      style={compact ? {} : borderStyle}
-      data-testid={`security-summary-container-${testId}`}
-    >
-      <div className="flex items-center justify-between">
-        <h4 className="font-medium text-sm flex items-center">
-          <span className="mr-1">{icon}</span>
-          {label}
-        </h4>
-        <span className="font-semibold">
+  // Get border style based on props or color
+  const borderStyle = borderColor 
+    ? { borderColor: borderColor }
+    : {};
+    
+  if (compact) {
+    return (
+      <div
+        className={`px-3 py-2 bg-${color}-50 dark:bg-${color}-900 dark:bg-opacity-20 rounded border border-${color}-100 dark:border-${color}-800 flex items-center justify-between`}
+        style={borderStyle}
+        data-testid={testId}
+      >
+        <div className="flex items-center">
+          {icon && <span className="mr-2">{icon}</span>}
+          <span className={`text-${color}-700 dark:text-${color}-300 font-medium`}>
+            {label}
+          </span>
+        </div>
+        <span className={`text-${color}-800 dark:text-${color}-200 font-bold`}>
           {value}
         </span>
       </div>
+    );
+  }
+  
+  return (
+    <div 
+      className={`p-3 bg-${color}-50 dark:bg-${color}-900 dark:bg-opacity-20 rounded border-l-4`}
+      style={{ borderLeftColor: borderColor || `var(--${color}-500)` }}
+      data-testid={testId}
+    >
+      <div className="flex justify-between items-center mb-1">
+        <div className="flex items-center">
+          {icon && <span className="mr-2">{icon}</span>}
+          <span className={`text-${color}-700 dark:text-${color}-300 font-medium`}>
+            {label}
+          </span>
+        </div>
+        <span className={`text-${color}-800 dark:text-${color}-200 font-bold`}>
+          {value}
+        </span>
+      </div>
+      
+      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
+        <div
+          className={`h-1.5 rounded-full bg-${color}-500 dark:bg-${color}-400`}
+          style={{ width: `${securityStrength}%` }}
+          aria-label={`Security level: ${value} (${securityStrength}%)`}
+        ></div>
+      </div>
     </div>
   );
-}
+};
 
 export default SecurityLevelSummaryItem;
