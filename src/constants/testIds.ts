@@ -727,16 +727,10 @@ export const COMMON_TEST_IDS = {
 // ---------------------------------------------------------------
 
 export const COMPLIANCE_TEST_IDS = {
-  COMPLIANCE_STATUS_WIDGET: "compliance-status-widget",
-  COMPLIANCE_STATUS_TITLE: "compliance-status-title",
-  COMPLIANCE_STATUS_DESCRIPTION: "compliance-status-description",
-  COMPLIANCE_SCORE: "compliance-score",
-  COMPLIANCE_COMPLIANT_FRAMEWORKS: "compliance-compliant-frameworks",
-  COMPLIANCE_PARTIAL_FRAMEWORKS: "compliance-partial-frameworks",
-  COMPLIANCE_NONCOMPLIANT_FRAMEWORKS: "compliance-noncompliant-frameworks",
-  COMPLIANCE_FRAMEWORK_ITEM: "compliance-framework-item",
-  COMPLIANCE_REMEDIATION: "compliance-remediation",
-  COMPLIANCE_REQUIREMENTS: "compliance-requirements",
+  COMPLIANCE_STATUS_WIDGET: 'compliance-status',
+  COMPLIANCE_STATUS_BADGE: 'compliance-status-badge',
+  COMPLIANCE_FRAMEWORK_ITEM: 'compliance-framework-item',
+  COMPLIANCE_REQUIREMENTS_LIST: 'compliance-requirements-list',
 };
 
 // ---------------------------------------------------------------
