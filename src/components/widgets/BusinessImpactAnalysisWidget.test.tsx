@@ -25,7 +25,6 @@ vi.mock("../../services/ciaContentService", () => ({
         `${level} ${component} recommendation 1`,
         `${level} ${component} recommendation 2`,
       ]),
-    // Add this missing method
     getComponentMetrics: vi.fn().mockImplementation((component, level) => ({
       rto: component === "availability" ? `${level} RTO` : undefined,
       rpo: component === "availability" ? `${level} RPO` : undefined,
@@ -37,45 +36,40 @@ vi.mock("../../services/ciaContentService", () => ({
       protectionMethod:
         component === "confidentiality" ? `${level} Protection` : undefined,
     })),
-  },
-  // Add the missing getCategoryIcon function with proper typing
-  getCategoryIcon: vi.fn().mockImplementation((category: CIAComponentType) => {
-    // Define icons with proper typing to prevent the TypeScript error
-    const icons: Record<CIAComponentType, string> = {
-      availability: "⏱️",
-      integrity: "✅",
-      confidentiality: "🔒",
-    };
-    return icons[category] || "📊";
-  }),
-  // Add other necessary functions
-  getComponentDescription: vi
-    .fn()
-    .mockImplementation(
-      (component: CIAComponentType, level: SecurityLevel) =>
-        `${level} ${component} description`
-    ),
-  getBusinessPerspective: vi
-    .fn()
-    .mockImplementation(
-      (component: CIAComponentType, level: SecurityLevel) =>
-        `${level} ${component} business perspective`
-    ),
-  // Add the missing getRiskBadgeVariant function that's causing the errors
-  getRiskBadgeVariant: vi.fn().mockImplementation((riskLevel: string) => {
-    switch (riskLevel) {
-      case "High Risk":
-        return "danger";
-      case "Medium Risk":
-        return "warning";
-      case "Low Risk":
-        return "success";
-      default:
-        return "info";
-    }
-  }),
-  // Add calculateBusinessImpactLevel function if it's used
-  calculateBusinessImpactLevel: vi.fn().mockReturnValue("Medium"),
+    getComponentDescription: vi
+      .fn()
+      .mockImplementation(
+        (component: CIAComponentType, level: SecurityLevel) =>
+          `${level} ${component} description`
+      ),
+    getBusinessPerspective: vi
+      .fn()
+      .mockImplementation(
+        (component: CIAComponentType, level: SecurityLevel) =>
+          `${level} ${component} business perspective`
+      ),
+    getRiskBadgeVariant: vi.fn().mockImplementation((riskLevel: string) => {
+      switch (riskLevel) {
+        case "High Risk":
+          return "danger";
+        case "Medium Risk":
+          return "warning";
+        case "Low Risk":
+          return "success";
+        default:
+          return "info";
+      }
+    }),
+    calculateBusinessImpactLevel: vi.fn().mockReturnValue("Medium"),
+    getCategoryIcon: vi.fn().mockImplementation((category: CIAComponentType) => {
+      const icons: Record<CIAComponentType, string> = {
+        availability: "⏱️",
+        integrity: "✅",
+        confidentiality: "🔒",
+      };
+      return icons[category] || "📊";
+    }),
+  }
 }));
 
 describe("BusinessImpactAnalysisWidget", () => {
@@ -95,9 +89,9 @@ describe("BusinessImpactAnalysisWidget", () => {
   it("displays summary and security level", () => {
     render(
       <BusinessImpactAnalysisWidget 
-        availabilityLevel="Moderate"
-        integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
+        availabilityLevel={"Moderate" as SecurityLevel}
+        integrityLevel={"Moderate" as SecurityLevel}
+        confidentialityLevel={"Moderate" as SecurityLevel}
       />
     );
     
@@ -108,9 +102,9 @@ describe("BusinessImpactAnalysisWidget", () => {
   it("allows switching between CIA components", () => {
     render(
       <BusinessImpactAnalysisWidget 
-        availabilityLevel="Moderate"
-        integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
+        availabilityLevel={"Moderate" as SecurityLevel}
+        integrityLevel={"Moderate" as SecurityLevel}
+        confidentialityLevel={"Moderate" as SecurityLevel}
       />
     );
     
@@ -123,9 +117,9 @@ describe("BusinessImpactAnalysisWidget", () => {
   it("displays different impact categories", () => {
     render(
       <BusinessImpactAnalysisWidget 
-        availabilityLevel="Moderate"
-        integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
+        availabilityLevel={"Moderate" as SecurityLevel}
+        integrityLevel={"Moderate" as SecurityLevel}
+        confidentialityLevel={"Moderate" as SecurityLevel}
       />
     );
     
@@ -136,9 +130,9 @@ describe("BusinessImpactAnalysisWidget", () => {
   it("renders financial metrics for impact analysis", () => {
     render(
       <BusinessImpactAnalysisWidget 
-        availabilityLevel="High"
-        integrityLevel="High"
-        confidentialityLevel="High"
+        availabilityLevel={"High" as SecurityLevel}
+        integrityLevel={"High" as SecurityLevel}
+        confidentialityLevel={"High" as SecurityLevel}
       />
     );
     
@@ -149,9 +143,9 @@ describe("BusinessImpactAnalysisWidget", () => {
   it("renders operational metrics for impact analysis", () => {
     render(
       <BusinessImpactAnalysisWidget 
-        availabilityLevel="High"
-        integrityLevel="High"
-        confidentialityLevel="High"
+        availabilityLevel={"High" as SecurityLevel}
+        integrityLevel={"High" as SecurityLevel}
+        confidentialityLevel={"High" as SecurityLevel}
       />
     );
     

@@ -1,6 +1,11 @@
+import { render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { APP_TEST_IDS } from "../constants/testIds";
+import CIAClassificationApp from "./CIAClassificationApp";
+
 // Mock the useLocalStorage hook
 vi.mock('../hooks/useLocalStorage', () => ({
-  useLocalStorage: (key: string, defaultValue: any) => [true, vi.fn()]
+  useLocalStorage: () => [true, vi.fn()]
 }));
 
 // Mock useCIAOptions to avoid dependencies
@@ -77,11 +82,6 @@ vi.mock("../components/widgets/SecuritySummaryWidget", () => ({
   __esModule: true,
   default: () => <div data-testid="mock-security-summary-widget">SecuritySummaryWidget</div>,
 }));
-
-import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import { APP_TEST_IDS } from "../constants/testIds";
-import CIAClassificationApp from "./CIAClassificationApp";
 
 describe("CIAClassificationApp Dark Mode Tests", () => {
   beforeEach(() => {

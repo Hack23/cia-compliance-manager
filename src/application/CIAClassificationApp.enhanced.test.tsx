@@ -1,5 +1,10 @@
-// Define mocks at the top of the file, before imports
-vi.mock("./hooks/useCIAOptions", () => {
+import { render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { APP_TEST_IDS } from "../constants/testIds";
+import CIAClassificationApp from "./CIAClassificationApp";
+
+// Mock useCIAOptions hook
+vi.mock("../hooks/useCIAOptions", () => {
   // Create mock data objects that can be shared between exports
   const availabilityOptions = {
     None: { capex: 0, opex: 0 },
@@ -58,13 +63,6 @@ vi.mock("./hooks/useCIAOptions", () => {
   };
 });
 
-import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import { APP_TEST_IDS } from "../constants/testIds";
-import CIAClassificationApp from "./CIAClassificationApp";
-
-// Mock the imports we need
-
 // Fix the path to Dashboard component (match the import path in CIAClassificationApp)
 vi.mock("../components/dashboard/Dashboard", () => ({
   __esModule: true,
@@ -81,7 +79,7 @@ vi.mock("../components/dashboard/Dashboard", () => ({
 }));
 
 // Mock all widget components to avoid DOM complexity
-vi.mock("./components/widgets/SecurityLevelWidget", () => ({
+vi.mock("../components/widgets/SecurityLevelWidget", () => ({
   __esModule: true,
   default: () => (
     <div data-testid="mock-security-level-widget">Security Level Widget</div>
@@ -89,14 +87,12 @@ vi.mock("./components/widgets/SecurityLevelWidget", () => ({
 }));
 
 // Add mocks for other used widgets
-vi.mock("./components/widgets/SecuritySummaryWidget", () => ({
+vi.mock("../components/widgets/SecuritySummaryWidget", () => ({
   __esModule: true,
   default: () => (
     <div data-testid="mock-security-summary">Security Summary Widget</div>
   ),
 }));
-
-// Add additional mock imports as needed...
 
 describe("CIAClassificationApp", () => {
   // Setup before each test
