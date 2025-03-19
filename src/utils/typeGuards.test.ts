@@ -1,20 +1,20 @@
 import { CIA_TEST_IDS } from "../constants/testConstants";
-// Import from the proper location
+// Import the missing functions
 import {
-  ensureArray,
-  hasWidgetProps,
-  isObject,
-  isROIMetrics,
-  isSecurityResource,
-  isTechnicalImplementationDetails,
-  isValidCIADetail,
-  safeAccess,
+    ensureArray,
+    hasProperty,
+    hasWidgetProps,
+    isComplianceFramework,
+    isComplianceStatus,
+    isObject,
+    isROIMetrics,
+    isSecurityResource,
+    isTechnicalImplementationDetails,
+    isValidCIADetail,
+    safeAccess,
 } from "./typeGuards";
 
-// Fix the hasProperty implementation to ensure it returns a boolean
-const hasProperty = (obj: any, prop: string): boolean =>
-  Boolean(obj && Object.prototype.hasOwnProperty.call(obj, prop));
-
+// Remove duplicate hasProperty implementation since we're importing it
 const isArray = Array.isArray;
 const isBoolean = (value: unknown): value is boolean =>
   typeof value === "boolean";
@@ -394,5 +394,39 @@ describe("Object property type guards", () => {
       expect(isFullWidgetConfig(null)).toBe(false);
       expect(isFullWidgetConfig(undefined)).toBe(false);
     });
+  });
+});
+
+describe("Compliance Type Guards", () => {
+  it("validates isComplianceStatus function", () => {
+    const validStatus = {
+      status: "Partially Compliant",
+      compliantFrameworks: ["ISO 27001"],
+      partiallyCompliantFrameworks: ["NIST CSF"],
+      nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
+      complianceScore: 50
+    };
+    
+    expect(isComplianceStatus(validStatus)).toBe(true);
+    expect(isComplianceStatus(null)).toBe(false);
+    expect(isComplianceStatus({})).toBe(false);
+    expect(isComplianceStatus({ status: "test" })).toBe(false);
+  });
+  
+  it("validates isComplianceFramework function", () => {
+    // Simple string framework
+    expect(isComplianceFramework("ISO 27001")).toBe(true);
+    
+    // Complex framework object
+    const validFramework = {
+      name: "HIPAA",
+      status: "compliant"
+    };
+    expect(isComplianceFramework(validFramework)).toBe(true);
+    
+    // Invalid inputs
+    expect(isComplianceFramework(null)).toBe(false);
+    expect(isComplianceFramework({})).toBe(false);
+    expect(isComplianceFramework({ name: "Test" })).toBe(false);
   });
 });

@@ -684,45 +684,35 @@ export class ComplianceService {
     framework: string,
     component: "availability" | "integrity" | "confidentiality"
   ): SecurityLevel {
-    // Normalize framework name for case-insensitive matching
+    // Normalize framework name to handle case insensitivity
     const normalizedFramework = framework.toUpperCase();
     
-    // Define minimum security levels for each framework by component
-    const frameworkRequirements: Record<string, Record<string, SecurityLevel>> = {
-      "NIST 800-53": {
-        availability: "High",
-        integrity: "High",
-        confidentiality: "High",
-      },
-      "ISO 27001": {
-        availability: "Moderate",
-        integrity: "Moderate",
-        confidentiality: "Moderate",
-      },
+    // Define minimum security level requirements for each framework by component
+    const frameworkRequirements = {
       "GDPR": {
-        availability: "Moderate",
-        integrity: "Moderate",
-        confidentiality: "High",
+        availability: "Moderate" as SecurityLevel,
+        integrity: "Moderate" as SecurityLevel,
+        confidentiality: "High" as SecurityLevel,
       },
       "HIPAA": {
-        availability: "High",
-        integrity: "High",
-        confidentiality: "High",
+        availability: "High" as SecurityLevel,
+        integrity: "High" as SecurityLevel,
+        confidentiality: "High" as SecurityLevel,
       },
       "PCI DSS": {
-        availability: "High",
-        integrity: "High",
-        confidentiality: "Very High",
+        availability: "High" as SecurityLevel,
+        integrity: "High" as SecurityLevel,
+        confidentiality: "Very High" as SecurityLevel,
       },
       "SOC2": {
-        availability: "Moderate",
-        integrity: "High",
-        confidentiality: "High",
+        availability: "Moderate" as SecurityLevel,
+        integrity: "High" as SecurityLevel,
+        confidentiality: "High" as SecurityLevel,
       },
       "NIST CSF": {
-        availability: "Low",
-        integrity: "Low",
-        confidentiality: "Moderate",
+        availability: "Low" as SecurityLevel,
+        integrity: "Low" as SecurityLevel,
+        confidentiality: "Moderate" as SecurityLevel,
       },
     };
 
@@ -830,61 +820,6 @@ export class ComplianceService {
    */
   public static create(dataProvider: CIADataProvider): ComplianceService {
     return new ComplianceService(dataProvider);
-  }
-
-  /**
-   * Evaluates compliance status based on current security levels.
-   *
-   * @param availabilityLevel - Availability security level.
-   * @param integrityLevel - Integrity security level.
-   * @param confidentialityLevel - Confidentiality security level.
-   * @returns Compliance status details.
-   */
-  public static getComplianceStatus(
-    availabilityLevel: string,
-    integrityLevel: string,
-    confidentialityLevel: string
-  ): {
-    status: string;
-    compliantFrameworks: string[];
-    partiallyCompliantFrameworks: string[];
-    nonCompliantFrameworks: string[];
-    remediationSteps: string[];
-    complianceScore: number;
-  } {
-    // ...existing code...
-    return {
-      status: "compliant",
-      compliantFrameworks: ["GDPR", "NIST CSF"],
-      partiallyCompliantFrameworks: [],
-      nonCompliantFrameworks: [],
-      remediationSteps: [],
-      complianceScore: 100,
-    };
-  }
-
-  /**
-   * Calculates overall business impact level based on security levels.
-   *
-   * @param availabilityLevel - Availability security level.
-   * @param integrityLevel - Integrity security level.
-   * @param confidentialityLevel - Confidentiality security level.
-   * @returns Overall business impact level.
-   */
-  public static calculateBusinessImpactLevel(
-    availabilityLevel: string,
-    integrityLevel: string,
-    confidentialityLevel: string
-  ): string {
-    // ...existing code...
-    // Minimal implementation: return "High" when any level is High or above.
-    if ([availabilityLevel, integrityLevel, confidentialityLevel].includes("Very High")) {
-      return "Very High";
-    }
-    if ([availabilityLevel, integrityLevel, confidentialityLevel].includes("High")) {
-      return "High";
-    }
-    return "Moderate";
   }
 
   /**

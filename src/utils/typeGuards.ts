@@ -1,17 +1,17 @@
 import { SecurityLevel } from "../types/cia";
 import {
-  BusinessImpactDetails,
-  CIAComponentType,
-  CIADetails,
-  ROIEstimate
+    BusinessImpactDetails,
+    CIAComponentType,
+    CIADetails,
+    ROIEstimate
 } from "../types/cia-services";
 import {
-  AvailabilityDetail,
-  CIAImpactSummaryWidgetProps,
-  ConfidentialityDetail,
-  IntegrityDetail,
-  SecurityLevelWidgetProps,
-  WidgetProps
+    AvailabilityDetail,
+    CIAImpactSummaryWidgetProps,
+    ConfidentialityDetail,
+    IntegrityDetail,
+    SecurityLevelWidgetProps,
+    WidgetProps
 } from "../types/widgets";
 
 /**
@@ -269,11 +269,18 @@ export function isSecurityProfile(obj: any): boolean {
  * Checks if an object is a valid compliance status
  */
 export function isComplianceStatus(obj: any): boolean {
-  if (!isObject(obj)) return false;
+  if (!obj || typeof obj !== "object") {
+    return false;
+  }
+
   return (
-    hasProperty(obj, "framework") &&
     hasProperty(obj, "status") &&
-    hasProperty(obj, "details")
+    hasProperty(obj, "compliantFrameworks") &&
+    hasProperty(obj, "partiallyCompliantFrameworks") &&
+    hasProperty(obj, "nonCompliantFrameworks") &&
+    Array.isArray(obj.compliantFrameworks) &&
+    Array.isArray(obj.partiallyCompliantFrameworks) &&
+    Array.isArray(obj.nonCompliantFrameworks)
   );
 }
 
@@ -281,12 +288,21 @@ export function isComplianceStatus(obj: any): boolean {
  * Checks if an object is a valid compliance framework
  */
 export function isComplianceFramework(obj: any): boolean {
-  if (!isObject(obj)) return false;
+  if (!obj || typeof obj !== "object") {
+    return false;
+  }
+
+  // If it's a string, it's a simple framework name
+  if (typeof obj === "string") {
+    return true;
+  }
+
+  // If it's an object, it should have name and status properties
   return (
-    hasProperty(obj, "id") &&
     hasProperty(obj, "name") &&
-    hasProperty(obj, "version") &&
-    hasProperty(obj, "controls")
+    hasProperty(obj, "status") &&
+    typeof obj.name === "string" &&
+    typeof obj.status === "string"
   );
 }
 
