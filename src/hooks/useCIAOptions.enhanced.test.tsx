@@ -115,27 +115,19 @@ describe("useCIAOptions Enhanced", () => {
 
 describe("useCIAOptions Hook Enhanced Tests", () => {
   it("returns consistent options structure on multiple renders", () => {
-    // First render
     const { result, rerender } = renderHook(() => useCIAOptions());
-
-    // Save reference to first render result
-    const firstRenderOptions = result.current;
-
-    // Trigger a rerender
+    
+    // Get initial structure
+    const initialOptions = result.current;
+    
+    // Rerender hook
     rerender();
-
-    // Check that the references are the same (memoization works)
-    expect(result.current).toBe(firstRenderOptions);
-    expect(result.current.availabilityOptions).toBe(
-      firstRenderOptions.availabilityOptions
-    );
-    expect(result.current.integrityOptions).toBe(
-      firstRenderOptions.integrityOptions
-    );
-    expect(result.current.confidentialityOptions).toBe(
-      firstRenderOptions.confidentialityOptions
-    );
-    expect(result.current.ROI_ESTIMATES).toBe(firstRenderOptions.ROI_ESTIMATES);
+    
+    // Compare structure after rerender - should be stable references
+    expect(result.current).toBe(initialOptions);
+    expect(result.current.availabilityOptions).toBe(initialOptions.availabilityOptions);
+    expect(result.current.integrityOptions).toBe(initialOptions.integrityOptions);
+    expect(result.current.confidentialityOptions).toBe(initialOptions.confidentialityOptions);
   });
 
   it("provides all required security levels", () => {

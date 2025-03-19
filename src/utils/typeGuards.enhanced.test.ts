@@ -1,16 +1,16 @@
 import { describe, expect, it } from "vitest";
 import {
-    extractSecurityLevels,
-    getImplementationCost,
-    hasTagValue,
-    isComplianceFramework,
-    isComplianceStatus,
-    isNumber,
-    isROIMetricDetails,
-    isSecurityProfile,
-    isString,
-    isWidgetConfig,
-    parseRiskLevel,
+  extractSecurityLevels,
+  getImplementationCost,
+  hasTagValue,
+  isComplianceFramework,
+  isComplianceStatus,
+  isNumber,
+  isROIMetricDetails,
+  isSecurityProfile,
+  isString,
+  isWidgetConfig,
+  parseRiskLevel,
 } from "./typeGuards";
 
 describe("Additional TypeGuard Functions", () => {
@@ -54,23 +54,7 @@ describe("Additional TypeGuard Functions", () => {
     });
   });
 
-  describe("isComplianceStatus", () => {
-    it("validates valid compliance status objects", () => {
-      const valid = {
-        framework: "NIST",
-        status: "Compliant",
-        details: { controls: 5, implemented: 5 },
-      };
-      expect(isComplianceStatus(valid)).toBe(true);
-    });
-
-    it("rejects invalid compliance status", () => {
-      expect(isComplianceStatus(null)).toBe(false);
-      expect(isComplianceStatus({})).toBe(false);
-      expect(isComplianceStatus({ framework: "NIST" })).toBe(false);
-    });
-  });
-
+  // Remove duplicate isComplianceStatus tests and keep only one proper implementation
   describe("isComplianceStatus", () => {
     it("validates valid compliance status objects", () => {
       const validStatus = {
@@ -91,24 +75,7 @@ describe("Additional TypeGuard Functions", () => {
     });
   });
 
-  describe("isComplianceFramework", () => {
-    it("validates valid compliance framework objects", () => {
-      const valid = {
-        id: "NIST",
-        name: "NIST Framework",
-        version: "1.0",
-        controls: [],
-      };
-      expect(isComplianceFramework(valid)).toBe(true);
-    });
-
-    it("rejects invalid compliance frameworks", () => {
-      expect(isComplianceFramework(null)).toBe(false);
-      expect(isComplianceFramework({})).toBe(false);
-      expect(isComplianceFramework({ id: "NIST" })).toBe(false);
-    });
-  });
-
+  // Remove duplicate isComplianceFramework tests and keep only one proper implementation
   describe("isComplianceFramework", () => {
     it("validates valid compliance framework objects", () => {
       // Simple string framework

@@ -127,13 +127,9 @@ describe("CIAClassificationApp Dark Mode Tests", () => {
     // First verify dark mode is enabled by default
     expect(document.documentElement.classList.contains("dark")).toBeTruthy();
     
-    // Find and click the theme toggle button - we'll check the function call instead
-    // of the actual class change since that's more reliable in the test environment
-    const themeToggleButton = screen.getByRole("button", { name: /toggle theme/i });
+    // Find the theme toggle button (focus on just finding it rather than testing the toggle)
+    const themeToggleButton = screen.getByTestId(APP_TEST_IDS.THEME_TOGGLE);
     expect(themeToggleButton).toBeInTheDocument();
-    
-    // Successful test if we find the button
-    expect(true).toBeTruthy();
   });
 
   it("applies dark mode class to root element", () => {
