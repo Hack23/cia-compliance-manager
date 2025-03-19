@@ -10,14 +10,33 @@ import { BusinessImpactDetails, CIADetails, ROIEstimate, TechnicalImplementation
  * providing stakeholders with an intuitive way to understand security impact. 📊
  */
 
-// Common widget props interface
-export interface WidgetProps {
+/**
+ * Base props for all widgets
+ */
+export interface WidgetBaseProps {
+  /**
+   * Optional CSS class name
+   */
   className?: string;
+  
+  /**
+   * Optional test ID for testing
+   */
   testId?: string;
+  
+  /**
+   * Optional security level for widgets that only need one level
+   */
+  securityLevel?: SecurityLevel;
 }
 
+/**
+ * Alias type for WidgetBaseProps to maintain backward compatibility
+ */
+export type WidgetProps = WidgetBaseProps;
+
 // Security level widget props
-export interface SecurityLevelWidgetProps extends WidgetProps {
+export interface SecurityLevelWidgetProps extends WidgetBaseProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
@@ -42,23 +61,35 @@ export interface ConfidentialityDetail extends CIADetails {
 }
 
 // Business impact widget props
-export interface BusinessImpactAnalysisWidgetProps extends WidgetProps {
+export interface BusinessImpactAnalysisWidgetProps extends WidgetBaseProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
   businessImpact?: BusinessImpactDetails;
 }
 
-// Compliance status widget props
-export interface ComplianceStatusWidgetProps extends WidgetProps {
-  availabilityLevel: SecurityLevel;
-  integrityLevel: SecurityLevel;
-  confidentialityLevel: SecurityLevel;
-  showRequirements?: boolean;
+/**
+ * Props for ComplianceStatusWidget component
+ */
+export interface ComplianceStatusWidgetProps extends WidgetBaseProps {
+  /**
+   * Availability security level
+   */
+  availabilityLevel?: SecurityLevel;
+  
+  /**
+   * Integrity security level
+   */
+  integrityLevel?: SecurityLevel;
+  
+  /**
+   * Confidentiality security level
+   */
+  confidentialityLevel?: SecurityLevel;
 }
 
 // Value creation widget props
-export interface ValueCreationWidgetProps extends WidgetProps {
+export interface ValueCreationWidgetProps extends WidgetBaseProps {
   securityLevel: SecurityLevel;
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
@@ -67,14 +98,14 @@ export interface ValueCreationWidgetProps extends WidgetProps {
 }
 
 // Cost estimation widget props
-export interface CostEstimationWidgetProps extends WidgetProps {
+export interface CostEstimationWidgetProps extends WidgetBaseProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
 }
 
 // Technical details widget props
-export interface TechnicalDetailsWidgetProps extends WidgetProps {
+export interface TechnicalDetailsWidgetProps extends WidgetBaseProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
@@ -82,14 +113,14 @@ export interface TechnicalDetailsWidgetProps extends WidgetProps {
 }
 
 // CIA Impact summary widget props
-export interface CIAImpactSummaryWidgetProps extends WidgetProps {
+export interface CIAImpactSummaryWidgetProps extends WidgetBaseProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
 }
 
 // Security visualization widget props
-export interface SecurityVisualizationWidgetProps extends WidgetProps {
+export interface SecurityVisualizationWidgetProps extends WidgetBaseProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
@@ -97,7 +128,7 @@ export interface SecurityVisualizationWidgetProps extends WidgetProps {
 }
 
 // Security resources widget props
-export interface SecurityResourcesWidgetProps extends WidgetProps {
+export interface SecurityResourcesWidgetProps extends WidgetBaseProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
@@ -106,13 +137,13 @@ export interface SecurityResourcesWidgetProps extends WidgetProps {
 }
 
 // Security components
-export interface SecurityComponentProps extends WidgetProps {
+export interface SecurityComponentProps extends WidgetBaseProps {
   component: "availability" | "integrity" | "confidentiality";
   level: SecurityLevel;
 }
 
 // Security level selector props
-export interface SecurityLevelSelectorProps extends WidgetProps {
+export interface SecurityLevelSelectorProps extends WidgetBaseProps {
   selectedLevel: SecurityLevel;
   onLevelChange: (level: SecurityLevel) => void;
   component: "availability" | "integrity" | "confidentiality";
@@ -123,7 +154,7 @@ export interface SecurityLevelSelectorProps extends WidgetProps {
 }
 
 // Component impact props
-export interface ComponentImpactWidgetProps extends WidgetProps {
+export interface ComponentImpactWidgetProps extends WidgetBaseProps {
   level: SecurityLevel;
   componentType: "availability" | "integrity" | "confidentiality";
 }
@@ -138,7 +169,7 @@ export interface CIAImpactSummaryWidgetProps extends SecurityLevelWidgetProps {
 /**
  * Props for the Availability Impact Widget
  */
-export interface AvailabilityImpactWidgetProps extends WidgetProps {
+export interface AvailabilityImpactWidgetProps extends WidgetBaseProps {
   // Keep level for backward compatibility
   level?: SecurityLevel;
   
@@ -153,7 +184,7 @@ export interface AvailabilityImpactWidgetProps extends WidgetProps {
 /**
  * Props for the Integrity Impact Widget
  */
-export interface IntegrityImpactWidgetProps extends WidgetProps {
+export interface IntegrityImpactWidgetProps extends WidgetBaseProps {
   // Keep level for backward compatibility
   level?: SecurityLevel;
   
@@ -168,7 +199,7 @@ export interface IntegrityImpactWidgetProps extends WidgetProps {
 /**
  * Props for the Confidentiality Impact Widget
  */
-export interface ConfidentialityImpactWidgetProps extends WidgetProps {
+export interface ConfidentialityImpactWidgetProps extends WidgetBaseProps {
   // Keep level for backward compatibility
   level?: SecurityLevel;
   
@@ -183,7 +214,7 @@ export interface ConfidentialityImpactWidgetProps extends WidgetProps {
 /**
  * Props for the Security Summary Widget
  */
-export interface SecuritySummaryWidgetProps extends WidgetProps {
+export interface SecuritySummaryWidgetProps extends WidgetBaseProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;

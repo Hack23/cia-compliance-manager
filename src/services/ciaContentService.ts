@@ -10,7 +10,7 @@ import {
   isCIAComponentType,
 } from "../types/cia-services";
 import { BusinessImpactService } from "./businessImpactService";
-import { ComplianceService } from "./complianceService";
+import { ComplianceServiceAdapter } from './ComplianceServiceAdapter';
 import { SecurityMetricsService } from "./securityMetricsService";
 import { SecurityResourceService } from "./securityResourceService";
 import { TechnicalImplementationService } from "./technicalImplementationService";
@@ -141,7 +141,7 @@ function createEmptyCIADetails(): CIADetails {
 export class CIAContentService {
   private dataProvider: CIADataProvider;
   private businessImpactService: BusinessImpactService;
-  private complianceService: ComplianceService;
+  private complianceService: ComplianceServiceAdapter; // Updated type
   private securityMetricsService: SecurityMetricsService;
   private technicalImplementationService: TechnicalImplementationService;
   private securityResourceService: SecurityResourceService;
@@ -156,7 +156,7 @@ export class CIAContentService {
 
     // Initialize service instances
     this.businessImpactService = new BusinessImpactService(this.dataProvider);
-    this.complianceService = new ComplianceService(this.dataProvider);
+    this.complianceService = new ComplianceServiceAdapter(this.dataProvider);
     this.securityMetricsService = new SecurityMetricsService(this.dataProvider);
     this.technicalImplementationService = new TechnicalImplementationService(
       this.dataProvider

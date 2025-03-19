@@ -1,31 +1,57 @@
 import { SecurityLevel } from "./cia";
 
 /**
- * Status of a framework's compliance
+ * Core compliance types used throughout the application
+ * 
+ * ## Business Perspective
+ * 
+ * ### Compliance Impact
+ * These types define how compliance status is represented in the application,
+ * helping organizations understand their compliance posture. They capture the
+ * key aspects of regulatory compliance that matter to businesses. 📋
+ * 
+ * ### Risk Management
+ * By clearly defining compliance status and framework requirements, these types
+ * help organizations identify and mitigate compliance-related risks. ⚠️
  */
-export type FrameworkComplianceStatus = "compliant" | "partial" | "non-compliant";
 
 /**
- * Compliance framework object structure
+ * Represents a compliance framework definition
  */
 export interface ComplianceFramework {
-  id?: string;
   name: string;
-  status: FrameworkComplianceStatus | string;
-  description?: string;
-  requiredLevel?: Record<string, SecurityLevel>;
+  description: string;
+  requiredAvailabilityLevel: SecurityLevel;
+  requiredIntegrityLevel: SecurityLevel;
+  requiredConfidentialityLevel: SecurityLevel;
+  applicableIndustries?: string[];
+  applicableRegions?: string[];
 }
 
 /**
- * Compliance status response interface
+ * Represents the overall compliance status
  */
 export interface ComplianceStatus {
-  status: string;
-  label?: string;
-  complianceScore: number;
-  compliantFrameworks: Array<string | ComplianceFramework>;
-  partiallyCompliantFrameworks: Array<string | ComplianceFramework>;
-  nonCompliantFrameworks: Array<string | ComplianceFramework>;
+  // Required properties
+  compliantFrameworks: string[];
+  partiallyCompliantFrameworks: string[];
+  nonCompliantFrameworks: string[];
+  
+  // Optional properties
   remediationSteps?: string[];
   requirements?: string[];
+  
+  // Adding these properties to match expected interface in tests and services
+  status?: string;
+  complianceScore?: number;
+  score?: number; // Alias for complianceScore for backward compatibility
+}
+
+/**
+ * Compliance status type constants
+ */
+export enum ComplianceStatusType {
+  COMPLIANT = 'compliant',
+  PARTIAL = 'partial',
+  NON_COMPLIANT = 'non-compliant'
 }

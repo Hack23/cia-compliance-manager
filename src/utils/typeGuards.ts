@@ -11,7 +11,7 @@ import {
   ConfidentialityDetail,
   IntegrityDetail,
   SecurityLevelWidgetProps,
-  WidgetProps
+  WidgetBaseProps
 } from "../types/widgets";
 import { parseRiskLevel as parseRiskLevelFromUtils } from "./riskUtils";
 
@@ -268,27 +268,35 @@ export function isSecurityProfile(obj: any): boolean {
 
 /**
  * Checks if an object is a valid compliance status
+ * 
+ * @param obj - Object to check
+ * @returns True if the object is a valid compliance status
  */
 export function isComplianceStatus(obj: any): boolean {
-  if (!obj || typeof obj !== "object") {
-    return false;
-  }
-
-  return (
-    hasProperty(obj, "status") &&
-    hasProperty(obj, "compliantFrameworks") &&
-    hasProperty(obj, "partiallyCompliantFrameworks") &&
-    hasProperty(obj, "nonCompliantFrameworks") &&
-    hasProperty(obj, "complianceScore") &&
-    Array.isArray(obj.compliantFrameworks) &&
-    Array.isArray(obj.partiallyCompliantFrameworks) &&
-    Array.isArray(obj.nonCompliantFrameworks) &&
-    typeof obj.complianceScore === "number"
-  );
+  if (!obj || typeof obj !== 'object') return false;
+  
+  // Check for required array properties
+  if (!Array.isArray(obj.compliantFrameworks)) return false;
+  if (!Array.isArray(obj.partiallyCompliantFrameworks)) return false;
+  if (!Array.isArray(obj.nonCompliantFrameworks)) return false;
+  
+  // Optional properties can be undefined but must be arrays if present
+  if (obj.remediationSteps !== undefined && !Array.isArray(obj.remediationSteps)) return false;
+  if (obj.requirements !== undefined && !Array.isArray(obj.requirements)) return false;
+  
+  // Status and complianceScore/score are also acceptable properties
+  if (obj.status !== undefined && typeof obj.status !== 'string') return false;
+  if (obj.complianceScore !== undefined && typeof obj.complianceScore !== 'number') return false;
+  if (obj.score !== undefined && typeof obj.score !== 'number') return false;
+  
+  return true;
 }
 
 /**
  * Checks if an object is a valid compliance framework
+ * 
+ * @param obj - Object to check
+ * @returns True if the object is a valid compliance framework
  */
 export function isComplianceFramework(obj: any): boolean {
   if (!obj) {
@@ -300,17 +308,33 @@ export function isComplianceFramework(obj: any): boolean {
     return true;
   }
 
-  // If it's an object, it should have name and status properties
+  // If it's an object, it should have the required properties
   if (typeof obj !== "object") {
     return false;
   }
 
-  return (
-    hasProperty(obj, "name") &&
-    hasProperty(obj, "status") &&
-    typeof obj.name === "string" &&
-    typeof obj.status === "string"
-  );
+  // Check for required properties
+  if (typeof obj.name !== 'string') return false;
+  
+  // If it has description and security level requirements, check those properties
+  if (hasProperty(obj, "description") && typeof obj.description !== 'string') return false;
+  
+  if (hasProperty(obj, "requiredAvailabilityLevel")) {
+    if (!isSecurityLevel(obj.requiredAvailabilityLevel)) return false;
+  }
+  
+  if (hasProperty(obj, "requiredIntegrityLevel")) {
+    if (!isSecurityLevel(obj.requiredIntegrityLevel)) return false;
+  }
+  
+  if (hasProperty(obj, "requiredConfidentialityLevel")) {
+    if (!isSecurityLevel(obj.requiredConfidentialityLevel)) return false;
+  }
+  
+  // If it has status property (for test compatibility)
+  if (hasProperty(obj, "status") && typeof obj.status !== 'string') return false;
+  
+  return true;
 }
 
 /**
@@ -326,77 +350,6 @@ export function isROIMetricDetails(obj: any): boolean {
     hasProperty(obj, "timeframe") &&
     isString(obj.timeframe)
   );
-}
-
-/**
- * Checks if an object is a valid widget config
- */
-export function isWidgetConfig(obj: any): boolean {
-  if (!isObject(obj)) return false;
-  return hasProperty(obj, "type") && isString(obj.type);
-}
-
-/**
- * Checks if an object has a specific tag value
- */
-export function hasTagValue(obj: any, tagValue: string): boolean {
-  if (!isObject(obj) || !hasProperty(obj, "tags") || !Array.isArray(obj.tags)) {
-    return false;
-  }
-  return obj.tags.includes(tagValue);
-}
-
-/**
- * Parses a risk level string to a number
- * @deprecated Use parseRiskLevel from riskUtils instead for consistent behavior
- * @param level - Risk level string to parse
- * @returns Numeric value of the risk level (0-4)
- */
-export function parseRiskLevel(level: string | null | undefined): number {
-  // Import the implementation from riskUtils for consistency
-  return parseRiskLevelFromUtils(level);
-}
-
-/**
- * Extracts CIA security levels from an object
- */
-export function extractSecurityLevels(obj: any): {
-  availability: string;
-  integrity: string;
-  confidentiality: string;
-} {
-  if (!isObject(obj)) {
-    return {
-      availability: "None",
-      integrity: "None",
-      confidentiality: "None",
-    };
-  }
-
-  return {
-    availability: String(obj.availability || "None"),
-    integrity: String(obj.integrity || "None"),
-    confidentiality: String(obj.confidentiality || "None"),
-  };
-}
-
-/**
- * Calculates the implementation cost from a cost object
- */
-export function getImplementationCost(costObj: any): number {
-  if (!isObject(costObj)) return 0;
-
-  let total = 0;
-  if (hasProperty(costObj, "capex") && isNumber(costObj.capex)) {
-    total += costObj.capex;
-  }
-  if (hasProperty(costObj, "opex") && isNumber(costObj.opex)) {
-    total += costObj.opex;
-  }
-  if (hasProperty(costObj, "fte") && isNumber(costObj.fte)) {
-    total += costObj.fte * 100000; // Assuming $100k per FTE
-  }
-  return total;
 }
 
 /**
@@ -460,7 +413,7 @@ export function isCIADetails(value: unknown): value is CIADetails {
  * @param value - The value to check
  * @returns True if the value is a valid widget props object
  */
-export function isWidgetProps(value: unknown): value is WidgetProps {
+export function isWidgetProps(value: unknown): value is WidgetBaseProps {
   return (
     isObject(value) &&
     (typeof value.className === "undefined" || typeof value.className === "string") &&
@@ -535,4 +488,75 @@ export function isROIEstimate(value: unknown): value is ROIEstimate {
     typeof value.returnRate === "string" &&
     typeof value.description === "string"
   );
+}
+
+/**
+ * Checks if an object is a valid widget config
+ */
+export function isWidgetConfig(obj: any): boolean {
+  if (!isObject(obj)) return false;
+  return hasProperty(obj, "type") && isString(obj.type);
+}
+
+/**
+ * Checks if an object has a specific tag value
+ */
+export function hasTagValue(obj: any, tagValue: string): boolean {
+  if (!isObject(obj) || !hasProperty(obj, "tags") || !Array.isArray(obj.tags)) {
+    return false;
+  }
+  return obj.tags.includes(tagValue);
+}
+
+/**
+ * Parses a risk level string to a number
+ * @deprecated Use parseRiskLevel from riskUtils instead for consistent behavior
+ * @param level - Risk level string to parse
+ * @returns Numeric value of the risk level (0-4)
+ */
+export function parseRiskLevel(level: string | null | undefined): number {
+  // Import the implementation from riskUtils for consistency
+  return parseRiskLevelFromUtils(level);
+}
+
+/**
+ * Extracts CIA security levels from an object
+ */
+export function extractSecurityLevels(obj: any): {
+  availability: string;
+  integrity: string;
+  confidentiality: string;
+} {
+  if (!isObject(obj)) {
+    return {
+      availability: "None",
+      integrity: "None",
+      confidentiality: "None",
+    };
+  }
+
+  return {
+    availability: String(obj.availability || "None"),
+    integrity: String(obj.integrity || "None"),
+    confidentiality: String(obj.confidentiality || "None"),
+  };
+}
+
+/**
+ * Calculates the implementation cost from a cost object
+ */
+export function getImplementationCost(costObj: any): number {
+  if (!isObject(costObj)) return 0;
+
+  let total = 0;
+  if (hasProperty(costObj, "capex") && isNumber(costObj.capex)) {
+    total += costObj.capex;
+  }
+  if (hasProperty(costObj, "opex") && isNumber(costObj.opex)) {
+    total += costObj.opex;
+  }
+  if (hasProperty(costObj, "fte") && isNumber(costObj.fte)) {
+    total += costObj.fte * 100000; // Assuming $100k per FTE
+  }
+  return total;
 }
