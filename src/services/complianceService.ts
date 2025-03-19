@@ -18,6 +18,8 @@ export type FrameworkComplianceStatus = "compliant" | "partial" | "non-compliant
 export interface ComplianceStatusResponse {
   /** Overall compliance status description */
   status: string;
+  /** Optional display label for UI presentation */
+  label?: string;
   /** List of frameworks that are fully compliant */
   compliantFrameworks: string[];
   /** List of frameworks that are partially compliant */
@@ -130,25 +132,20 @@ export class ComplianceService {
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
   ): SecurityLevel {
-    const levelValues = {
-      None: 0,
-      Low: 1,
-      Moderate: 2,
-      High: 3,
-      "Very High": 4,
-    };
-
-    const averageValue =
-      (levelValues[availabilityLevel] +
-        levelValues[integrityLevel] +
-        levelValues[confidentialityLevel]) /
-      3;
-
-    if (averageValue <= 0.5) return "None";
-    if (averageValue <= 1.5) return "Low";
-    if (averageValue <= 2.5) return "Moderate";
-    if (averageValue <= 3.5) return "High";
-    return "Very High";
+    // Get numeric values for each level
+    const availValue = this.getSecurityLevelValue(availabilityLevel);
+    const integValue = this.getSecurityLevelValue(integrityLevel);
+    const confidValue = this.getSecurityLevelValue(confidentialityLevel);
+    
+    // Calculate average level (weighted slightly toward confidentiality for mixed levels)
+    const avgValue = (availValue + integValue + confidValue * 1.2) / 3.2;
+    
+    // Map back to security level with proper rounding
+    if (avgValue >= 3.5) return "Very High";
+    if (avgValue >= 2.5) return "High";
+    if (avgValue >= 1.5) return "Moderate";
+    if (avgValue >= 0.5) return "Low";
+    return "None";
   }
 
   /**
@@ -459,13 +456,17 @@ export class ComplianceService {
       return "compliant";
     }
     
-    // Check if at least 50% of requirements are met for partial compliance
+    // Calculate a compliance score based on actual vs required values
     const totalRequired = reqAvailValue + reqIntegValue + reqConfidValue;
-    const totalActual = Math.min(availValue, reqAvailValue) +
-                       Math.min(integValue, reqIntegValue) +
-                       Math.min(confidValue, reqConfidValue);
     
-    if (totalActual >= totalRequired / 2) {
+    // Use the actual value up to the required value (don't count exceeding requirements)
+    const totalActual = Math.min(availValue, reqAvailValue) +
+                        Math.min(integValue, reqIntegValue) +
+                        Math.min(confidValue, reqConfidValue);
+    
+    // Check if at least 50% of requirements are met for partial compliance
+    // For mixed security levels, this provides a more accurate assessment
+    if (totalActual >= totalRequired * 0.5) {
       return "partial";
     }
     

@@ -86,23 +86,34 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
   const complianceStatus = useMemo(
     () => {
       const rawStatus = complianceService.getComplianceStatus(
-        availabilityLevel,
-        integrityLevel,
-        confidentialityLevel
+        availabilityLevel || "Moderate",
+        integrityLevel || "Moderate",
+        confidentialityLevel || "Moderate"
       );
       
       // Transform string arrays to ComplianceFramework arrays if needed
       return {
-        ...rawStatus,
-        compliantFrameworks: Array.isArray(rawStatus.compliantFrameworks) 
-          ? rawStatus.compliantFrameworks.map(f => typeof f === 'string' ? { id: f, name: f, status: 'compliant' } : f)
-          : [],
-        partiallyCompliantFrameworks: Array.isArray(rawStatus.partiallyCompliantFrameworks)
-          ? rawStatus.partiallyCompliantFrameworks.map(f => typeof f === 'string' ? { id: f, name: f, status: 'partially compliant' } : f)
-          : [],
-        nonCompliantFrameworks: Array.isArray(rawStatus.nonCompliantFrameworks)
-          ? rawStatus.nonCompliantFrameworks.map(f => typeof f === 'string' ? { id: f, name: f, status: 'non-compliant' } : f)
-          : []
+        status: rawStatus.status,
+        label: rawStatus.status, // Default label to status if not provided
+        complianceScore: rawStatus.complianceScore,
+        remediationSteps: rawStatus.remediationSteps || [],
+        requirements: rawStatus.requirements || [],
+        // Convert string arrays to ComplianceFramework objects
+        compliantFrameworks: rawStatus.compliantFrameworks.map((f) => {
+          return typeof f === "string"
+            ? { id: f, name: f, status: "compliant" }
+            : f as ComplianceFramework;
+        }),
+        partiallyCompliantFrameworks: rawStatus.partiallyCompliantFrameworks.map((f) => {
+          return typeof f === "string"
+            ? { id: f, name: f, status: "partial" }
+            : f as ComplianceFramework;
+        }),
+        nonCompliantFrameworks: rawStatus.nonCompliantFrameworks.map((f) => {
+          return typeof f === "string"
+            ? { id: f, name: f, status: "non-compliant" }
+            : f as ComplianceFramework;
+        }),
       } as ComplianceStatusResponse;
     },
     [complianceService, availabilityLevel, integrityLevel, confidentialityLevel]

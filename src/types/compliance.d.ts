@@ -9,7 +9,7 @@ export type FrameworkComplianceStatus = "compliant" | "partial" | "non-compliant
  * Structure for compliance framework
  */
 export interface ComplianceFramework {
-  id?: string;
+  id: string;
   name: string;
   status: string | FrameworkComplianceStatus;
   description?: string;
@@ -29,15 +29,15 @@ export interface ComplianceStatus {
   /** Optional display label (for UI purposes) */
   label?: string;
   /** List of frameworks that are fully compliant */
-  compliantFrameworks: Array<string | ComplianceFramework>;
+  compliantFrameworks: ComplianceFramework[];
   /** List of frameworks that are partially compliant */
-  partiallyCompliantFrameworks: Array<string | ComplianceFramework>;
+  partiallyCompliantFrameworks: ComplianceFramework[];
   /** List of frameworks that are non-compliant */
-  nonCompliantFrameworks: Array<string | ComplianceFramework>;
+  nonCompliantFrameworks: ComplianceFramework[];
   /** Actionable steps to remediate compliance gaps */
-  remediationSteps?: string[];
+  remediationSteps: string[];
   /** Requirements from relevant compliance frameworks */
-  requirements?: string[];
+  requirements: string[];
   /** Compliance score as a percentage (0-100) */
   complianceScore: number;
 }
