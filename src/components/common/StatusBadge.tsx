@@ -1,59 +1,72 @@
-import React, { ReactNode } from "react";
+import React from "react";
 
-export type StatusBadgeVariant =
-  | "success"
-  | "warning"
-  | "error"
-  | "info"
-  | "purple"
-  | "neutral";
+// Define the allowed badge variants explicitly
+export type StatusBadgeVariant = "error" | "warning" | "info" | "success" | "neutral" | "purple";
+
+// Define the allowed sizes
+export type StatusBadgeSize = "xs" | "sm" | "md" | "lg";
 
 interface StatusBadgeProps {
   status: StatusBadgeVariant;
-  children: ReactNode;
-  className?: string;
+  children: React.ReactNode;
   testId?: string;
-  size?: "xs" | "sm" | "md" | "lg";
+  className?: string;
+  size?: StatusBadgeSize; // Add size prop
 }
 
 /**
- * Consistent status badge component for displaying status indicators
- *
- * Used for showing security levels, compliance status, risk levels, etc.
+ * Status badge component for displaying various status indicators
+ * 
+ * ## Business Perspective
+ * 
+ * This component provides visual risk indicators that help business stakeholders
+ * quickly identify and prioritize security issues based on their severity. 🎯
+ * 
+ * @param props Component props
+ * @returns React component
  */
 const StatusBadge: React.FC<StatusBadgeProps> = ({
   status,
   children,
-  className = "",
   testId,
-  size = "md",
+  className = "",
+  size = "sm", // Default to "sm"
 }) => {
-  // Status variant styling
-  const variants = {
-    success:
-      "bg-green-100 text-green-800 border-green-300 dark:bg-green-900 dark:bg-opacity-40 dark:text-green-300 dark:border-green-700",
-    warning:
-      "bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-yellow-900 dark:bg-opacity-40 dark:text-yellow-300 dark:border-yellow-700",
-    error:
-      "bg-red-100 text-red-800 border-red-300 dark:bg-red-900 dark:bg-opacity-40 dark:text-red-300 dark:border-red-700",
-    info: "bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-900 dark:bg-opacity-40 dark:text-blue-300 dark:border-blue-700",
-    purple:
-      "bg-purple-100 text-purple-800 border-purple-300 dark:bg-purple-900 dark:bg-opacity-40 dark:text-purple-300 dark:border-purple-700",
-    neutral:
-      "bg-gray-100 text-gray-800 border-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600",
+  // Map size to text size classes
+  const getSizeClasses = (): string => {
+    switch (size) {
+      case "xs": return "text-xs";
+      case "sm": return "text-sm";
+      case "md": return "text-md";
+      case "lg": return "text-base";
+      default: return "text-sm";
+    }
+  };
+  
+  // Map status to appropriate color classes
+  const getStatusClasses = (): string => {
+    switch (status) {
+      case "error":
+        return "bg-red-100 text-red-800 border-red-300 dark:bg-red-900 dark:bg-opacity-30 dark:text-red-300 dark:border-red-800";
+      case "warning":
+        return "bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-yellow-900 dark:bg-opacity-30 dark:text-yellow-300 dark:border-yellow-800";
+      case "info":
+        return "bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300 dark:border-blue-800";
+      case "success":
+        return "bg-green-100 text-green-800 border-green-300 dark:bg-green-900 dark:bg-opacity-30 dark:text-green-300 dark:border-green-800";
+      case "purple":
+        return "bg-purple-100 text-purple-800 border-purple-300 dark:bg-purple-900 dark:bg-opacity-30 dark:text-purple-300 dark:border-purple-800";
+      case "neutral":
+      default:
+        return "bg-gray-100 text-gray-800 border-gray-300 dark:bg-gray-800 dark:bg-opacity-50 dark:text-gray-300 dark:border-gray-700";
+    }
   };
 
-  // Size classes
-  const sizeClasses = {
-    xs: "text-xs px-1.5 py-0.5 rounded",
-    sm: "text-xs px-2 py-1 rounded-md",
-    md: "text-sm px-2.5 py-1 rounded-md",
-    lg: "text-sm px-3 py-1.5 rounded-md",
-  };
+  const baseClasses = "px-2 py-1 font-medium rounded border";
 
   return (
     <span
-      className={`inline-flex items-center font-medium border ${variants[status]} ${sizeClasses[size]} ${className}`}
+      className={`${baseClasses} ${getSizeClasses()} ${getStatusClasses()} ${className}`}
       data-testid={testId}
     >
       {children}

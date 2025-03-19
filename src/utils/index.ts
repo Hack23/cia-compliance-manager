@@ -18,16 +18,34 @@
  * @module utils
  */
 
+// Core utilities
 export * from "./colorUtils";
+// Export levelValuesUtils which has the primary implementation of getSecurityLevelValue
+export * from "./levelValuesUtils";
+// Export everything from securityDefaults
 export * from "./securityDefaults";
-export * from "./securityLevelUtils";
+// Export specific items from securityLevelUtils to avoid the name collision
+export {
+  getSecurityLevelValue // Corrected from getSecurityLevelFromValue
+  , normalizeSecurityLevel
+} from "./securityLevelUtils";
+// Export typeGuards which includes isSecurityLevel (removed separate export)
 export * from "./typeGuards";
+// Export calculateRiskLevel from cia.utility
+export { calculateRiskLevel } from "../types/cia.utility";
+
+// Widget registration
 export * from "./widgetHelpers";
 export { default as widgetRegistry } from "./widgetRegistry";
 
-// Export risk utilities
+// Risk utilities
 export {
-    getRiskBadgeVariant, getRiskLevelFromSecurityLevel,
-    getRiskScoreFromSecurityLevel, parseRiskLevel
+  getRiskBadgeVariant,
+  getRiskLevelFromSecurityLevel,
+  getRiskScoreFromSecurityLevel,
+  parseRiskLevel
 } from './riskUtils';
+
+// Re-export constants for convenience
+export { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS } from '../constants/riskConstants';
 

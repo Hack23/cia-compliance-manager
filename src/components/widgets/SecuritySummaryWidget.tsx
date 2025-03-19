@@ -5,7 +5,7 @@ import { SecurityLevel } from "../../types/cia";
 import { getRiskLevelFromSecurityLevel } from "../../utils";
 import { getSecurityLevelValue } from "../../utils/levelValuesUtils";
 import { KeyValuePair } from "../common/KeyValuePair";
-import { RiskAssessment } from "../common/RiskAssessment";
+import RiskAssessment from "../common/RiskAssessment";
 import { SecurityLevelSummaryItem } from "../common/SecurityLevelSummaryItem";
 import { SecurityRiskScore } from "../common/SecurityRiskScore";
 import StatusBadge from "../common/StatusBadge";

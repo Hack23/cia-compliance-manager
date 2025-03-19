@@ -5,8 +5,8 @@ import { BusinessImpactService } from "../../services/businessImpactService";
 import { SecurityLevel } from "../../types/cia";
 import { CIAComponentType } from "../../types/cia-services";
 import { getRiskBadgeVariant } from "../../utils";
-import StatusBadge from "../common/StatusBadge";
-import WidgetContainer from "../common/WidgetContainer"; // Add this import
+import BusinessRiskDisplay from "../common/BusinessRiskDisplay";
+import WidgetContainer from "../common/WidgetContainer";
 
 /**
  * Interface for business impact data
@@ -180,21 +180,6 @@ const BusinessImpactAnalysisWidget: React.FC<
     confidentialityImpact,
   ]);
 
-  // Convert risk level to badge variant
-  const getRiskBadgeVariant = (riskLevel: string | undefined): "success" | "warning" | "error" | "info" | "neutral" => {
-    if (!riskLevel) return "neutral";
-    
-    const level = riskLevel.toLowerCase();
-    
-    if (level.includes("critical")) return "error";
-    if (level.includes("high")) return "warning";
-    if (level.includes("medium") || level.includes("moderate")) return "info";
-    if (level.includes("low")) return "success";
-    if (level.includes("minimal")) return "success";
-    
-    return "neutral";
-  };
-
   return (
     <WidgetContainer title="Business Impact Analysis" testId={testId}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -206,49 +191,17 @@ const BusinessImpactAnalysisWidget: React.FC<
           <h3 className="text-lg font-semibold mb-4">Operational Impact</h3>
           <div className="space-y-4">
             {impactData.map((impact) => (
-              <div
+              <BusinessRiskDisplay
                 key={`operational-${impact.component}`}
-                className="border-l-4 border-blue-500 pl-3"
-                data-testid={BUSINESS_IMPACT_TEST_IDS.IMPACT_CATEGORY}
-              >
-                <h4 className="text-md font-medium capitalize">
-                  {impact.component}: {impact.level}
-                </h4>
-                <p
-                  className="text-sm text-gray-600 dark:text-gray-400 mb-2"
-                  data-testid={BUSINESS_IMPACT_TEST_IDS.IMPACT_DESCRIPTION}
-                >
-                  {impact.operationalImpact?.description ||
-                    "No operational impact data available"}
-                </p>
-                {impact.component === "availability" && (
-                  <div className="grid grid-cols-2 gap-2 mt-2">
-                    {impact.uptime && (
-                      <div>
-                        <span className="text-xs font-semibold">Uptime:</span>
-                        <p className="text-sm">{impact.uptime}</p>
-                      </div>
-                    )}
-                    {impact.operationalImpact?.meanTimeToRecover && (
-                      <div>
-                        <span className="text-xs font-semibold">MTTR:</span>
-                        <p className="text-sm">
-                          {impact.operationalImpact.meanTimeToRecover}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
-                <div className="mt-2">
-                  <span className="text-xs font-semibold">Risk Level:</span>
-                  <StatusBadge
-                    status={getRiskBadgeVariant(impact.operationalImpact?.riskLevel)}
-                    testId={BUSINESS_IMPACT_TEST_IDS.RISK_LEVEL}
-                  >
-                    {impact.operationalImpact?.riskLevel || "Unknown"}
-                  </StatusBadge>
-                </div>
-              </div>
+                impactCategory={impact.component}
+                riskLevel={impact.operationalImpact?.riskLevel || "Unknown"}
+                description={impact.operationalImpact?.description || "No operational impact data available"}
+                metric={impact.component === "availability" && impact.operationalImpact?.meanTimeToRecover ? {
+                  label: "MTTR",
+                  value: impact.operationalImpact.meanTimeToRecover
+                } : undefined}
+                testId={`${testId}-${impact.component}-operational`}
+              />
             ))}
           </div>
         </div>
@@ -261,41 +214,17 @@ const BusinessImpactAnalysisWidget: React.FC<
           <h3 className="text-lg font-semibold mb-4">Financial Impact</h3>
           <div className="space-y-4">
             {impactData.map((impact) => (
-              <div
+              <BusinessRiskDisplay
                 key={`financial-${impact.component}`}
-                className="border-l-4 border-green-500 pl-3"
-                data-testid={BUSINESS_IMPACT_TEST_IDS.IMPACT_CATEGORY}
-              >
-                <h4 className="text-md font-medium capitalize">
-                  {impact.component}: {impact.level}
-                </h4>
-                <p
-                  className="text-sm text-gray-600 dark:text-gray-400 mb-2"
-                  data-testid={BUSINESS_IMPACT_TEST_IDS.IMPACT_DESCRIPTION}
-                >
-                  {impact.financialImpact?.description ||
-                    "No financial impact data available"}
-                </p>
-                {impact.financialImpact?.annualRevenueLoss && (
-                  <div className="mt-2">
-                    <span className="text-xs font-semibold">
-                      Potential Loss:
-                    </span>
-                    <p className="text-sm">
-                      {impact.financialImpact.annualRevenueLoss}
-                    </p>
-                  </div>
-                )}
-                <div className="mt-2">
-                  <span className="text-xs font-semibold">Risk Level:</span>
-                  <StatusBadge
-                    status={getRiskBadgeVariant(impact.financialImpact?.riskLevel)}
-                    testId={BUSINESS_IMPACT_TEST_IDS.RISK_LEVEL}
-                  >
-                    {impact.financialImpact?.riskLevel || "Unknown"}
-                  </StatusBadge>
-                </div>
-              </div>
+                impactCategory={impact.component}
+                riskLevel={impact.financialImpact?.riskLevel || "Unknown"}
+                description={impact.financialImpact?.description || "No financial impact data available"}
+                metric={impact.financialImpact?.annualRevenueLoss ? {
+                  label: "Potential Loss",
+                  value: impact.financialImpact.annualRevenueLoss
+                } : undefined}
+                testId={`${testId}-${impact.component}-financial`}
+              />
             ))}
           </div>
         </div>
@@ -364,7 +293,7 @@ const BusinessImpactAnalysisWidget: React.FC<
  */
 function getRiskVariant(
   riskLevel: string | undefined
-): "error" | "warning" | "info" | "success" | "neutral" {
+): "error" | "warning" | "info" | "success" | "neutral" | "purple" {
   // Use the imported utility but ensure the return type matches what's expected
   const variant = getRiskBadgeVariant(riskLevel);
   
@@ -374,6 +303,7 @@ function getRiskVariant(
     case "warning": return "warning";
     case "info": return "info";
     case "success": return "success";
+    case "purple": return "purple"; // Add support for purple
     default: return "neutral";
   }
 }

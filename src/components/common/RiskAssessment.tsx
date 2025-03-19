@@ -1,115 +1,98 @@
 import React, { useMemo } from "react";
 import { SecurityLevel } from "../../types/cia";
+import { getRiskLevelFromSecurityLevel, getRiskScoreFromSecurityLevel } from "../../utils";
+import RiskLevelBadge from "./RiskLevelBadge";
 
 interface RiskAssessmentProps {
   securityLevel: SecurityLevel;
-  className?: string;
   testId?: string;
+  compact?: boolean;
 }
 
 /**
- * Displays a visual risk assessment based on the security level
+ * Displays a risk assessment based on security level
  * 
  * ## Business Perspective
  * 
- * This component translates technical security levels into business risk indicators,
- * making it easy for executives to quickly understand their risk exposure without
- * needing to interpret technical security metrics. The color-coding reinforces
- * awareness of critical security gaps that require investment. 🔒
- * 
- * @param props Component props
- * @returns React Element
+ * This component provides a visual representation of risk levels derived from
+ * security levels, helping business stakeholders understand the relationship
+ * between security investments and risk reduction. ⚠️
  */
-function RiskAssessment({
+const RiskAssessment: React.FC<RiskAssessmentProps> = ({
   securityLevel,
-  className = "",
-  testId,
-}: RiskAssessmentProps): React.ReactElement {
-  // Calculate risk level based on security level
-  const riskLevel = useMemo(() => {
-    switch (securityLevel) {
-      case "None":
-        return "Critical";
-      case "Low":
-        return "High";
-      case "Moderate":
-        return "Medium";
-      case "High":
-        return "Low";
-      case "Very High":
-        return "Minimal";
-      default:
-        return "Unknown";
-    }
-  }, [securityLevel]);
+  testId = "risk-assessment",
+  compact = false
+}) => {
+  // Calculate risk level from security level
+  const riskLevel = useMemo(() => 
+    getRiskLevelFromSecurityLevel(securityLevel), 
+    [securityLevel]
+  );
+  
+  // Calculate risk score from security level
+  const riskScore = useMemo(() => 
+    getRiskScoreFromSecurityLevel(securityLevel), 
+    [securityLevel]
+  );
 
-  // Determine colors and styles based on risk level
-  const { backgroundColor, textColor, progressValue, label } = useMemo(() => {
-    switch (riskLevel) {
-      case "Critical":
-        return {
-          backgroundColor: "bg-red-500",
-          textColor: "text-red-600 dark:text-red-400",
-          progressValue: 10,
-          label: "Critical Risk",
-        };
-      case "High":
-        return {
-          backgroundColor: "bg-orange-500",
-          textColor: "text-orange-600 dark:text-orange-400",
-          progressValue: 30,
-          label: "High Risk",
-        };
-      case "Medium":
-        return {
-          backgroundColor: "bg-yellow-400",
-          textColor: "text-yellow-600 dark:text-yellow-400",
-          progressValue: 50,
-          label: "Medium Risk",
-        };
-      case "Low":
-        return {
-          backgroundColor: "bg-green-500",
-          textColor: "text-green-600 dark:text-green-400",
-          progressValue: 75,
-          label: "Low Risk",
-        };
-      case "Minimal":
-        return {
-          backgroundColor: "bg-blue-500",
-          textColor: "text-blue-600 dark:text-blue-400",
-          progressValue: 95,
-          label: "Minimal Risk",
-        };
-      default:
-        return {
-          backgroundColor: "bg-gray-500",
-          textColor: "text-gray-600 dark:text-gray-400",
-          progressValue: 0,
-          label: "Unknown Risk",
-        };
-    }
-  }, [riskLevel]);
+  if (compact) {
+    return (
+      <div className="flex items-center space-x-2" data-testid={testId}>
+        <span className="text-sm text-gray-600 dark:text-gray-400">Risk:</span>
+        <RiskLevelBadge riskLevel={riskLevel} testId={`${testId}-level`} />
+      </div>
+    );
+  }
 
   return (
-    <div className={`mt-4 ${className}`} data-testid={testId}>
-      <div className="flex justify-between mb-1">
-        <span className="text-xs font-medium">Risk Assessment</span>
-        <span className={`text-xs font-medium ${textColor}`}>{label}</span>
+    <div className="mt-4" data-testid={testId}>
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center">
+          <span className="mr-2">⚠️</span>
+          <h4 className="text-md font-medium">Risk Assessment</h4>
+        </div>
+        <RiskLevelBadge
+          riskLevel={riskLevel}
+          testId={`${testId}-level`}
+        />
       </div>
-      <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mb-2">
         <div
-          className={`h-2.5 rounded-full ${backgroundColor}`}
-          style={{ width: `${progressValue}%` }}
+          className={`h-2.5 rounded-full ${
+            riskScore > 70 ? "bg-red-500" : 
+            riskScore > 40 ? "bg-yellow-500" : 
+            "bg-green-500"
+          }`}
+          style={{ width: `${riskScore}%` }}
+          data-testid={`${testId}-score`}
         ></div>
       </div>
-      <div className="flex justify-between mt-1 text-xs text-gray-500 dark:text-gray-400">
-        <span>Higher Risk</span>
-        <span>Lower Risk</span>
-      </div>
+      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        {getRiskDescription(riskLevel)}
+      </p>
     </div>
   );
+};
+
+/**
+ * Helper function to get risk description based on risk level
+ */
+function getRiskDescription(riskLevel: string): string {
+  const normalized = riskLevel.toLowerCase();
+  
+  if (normalized.includes("critical")) {
+    return "Critical risk requires immediate action to prevent significant harm.";
+  } else if (normalized.includes("high")) {
+    return "High risk should be addressed with priority to reduce potential impact.";
+  } else if (normalized.includes("medium") || normalized.includes("moderate")) {
+    return "Moderate risk that should be managed with appropriate controls.";
+  } else if (normalized.includes("low")) {
+    return "Low risk with limited potential for harm. Standard controls are adequate.";
+  } else if (normalized.includes("minimal")) {
+    return "Minimal risk with negligible potential for harm. Baseline controls are sufficient.";
+  }
+  
+  return "Risk level assessment helps prioritize security investments.";
 }
 
-export { RiskAssessment };
 export default RiskAssessment;

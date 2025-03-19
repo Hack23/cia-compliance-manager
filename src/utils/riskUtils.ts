@@ -1,7 +1,6 @@
+import { StatusBadgeVariant } from "../components/common/StatusBadge";
 import { SecurityLevel } from "../types/cia";
-
-// Make sure we're only returning the expected variants
-type ValidStatusBadgeVariant = "error" | "warning" | "info" | "success" | "neutral";
+import { RiskLevelLiteral } from "../types/risk";
 
 /**
  * Get badge variant based on risk level
@@ -17,7 +16,7 @@ type ValidStatusBadgeVariant = "error" | "warning" | "info" | "success" | "neutr
  */
 export function getRiskBadgeVariant(
   riskLevel: string | undefined
-): ValidStatusBadgeVariant {
+): StatusBadgeVariant {
   if (!riskLevel) return "neutral";
   
   const normalized = riskLevel.toLowerCase();
@@ -38,7 +37,7 @@ export function getRiskBadgeVariant(
 /**
  * Maps security level to corresponding risk level
  */
-const SECURITY_TO_RISK: Record<SecurityLevel, string> = {
+const SECURITY_TO_RISK: Record<SecurityLevel, RiskLevelLiteral> = {
   "None": "Critical",
   "Low": "High",
   "Moderate": "Medium",
@@ -62,7 +61,7 @@ const SECURITY_TO_RISK: Record<SecurityLevel, string> = {
  * @param securityLevel - Security level
  * @returns Risk level as a string
  */
-export function getRiskLevelFromSecurityLevel(securityLevel: SecurityLevel): string {
+export function getRiskLevelFromSecurityLevel(securityLevel: SecurityLevel): RiskLevelLiteral {
   return SECURITY_TO_RISK[securityLevel] || "Unknown";
 }
 

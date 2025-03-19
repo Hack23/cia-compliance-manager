@@ -1,4 +1,5 @@
 import { SecurityLevel } from "../types/cia";
+import { RiskLevelLiteral } from "../types/risk";
 import { getRiskLevelFromSecurityLevel as getUtilsRiskLevel } from "../utils";
 
 /**
@@ -14,6 +15,9 @@ export const RISK_LEVELS = {
 } as const;
 
 export type RiskLevel = (typeof RISK_LEVELS)[keyof typeof RISK_LEVELS];
+
+// Export the risk level literal type for reuse
+export type { RiskLevelLiteral };
 
 /**
  * Business impact categories for risk assessments

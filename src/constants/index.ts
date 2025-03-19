@@ -1,38 +1,39 @@
 // Central export file for all constants
 
-// Export core constants - these are our base constants
-export * from "./coreConstants";
-
-// Export risk constants directly (no conflicts with other files)
-export * from "./riskConstants";
-
-// Export test IDs (no conflicts)
-export * from "./testIds";
-
-// Named exports to avoid ambiguity
+// Named imports to avoid ambiguity
 import * as AppConstants from "./appConstants";
 import * as BusinessConstants from "./businessConstants";
+import * as RiskConstants from "./riskConstants";
 import * as UIConstants from "./uiConstants";
 
-// Re-export specific constants with namespaces to prevent conflicts
-export { AppConstants, BusinessConstants, UIConstants };
+// Export namespaced constants to prevent conflicts
+export {
+  AppConstants,
+  BusinessConstants,
+  RiskConstants,
+  UIConstants
+};
 
-// Export business impact types (removing BusinessKeyBenefits from here to avoid duplication)
+// Export test IDs directly as they don't have conflicts
+  export * from "./testIds";
+
+// Export business impact types
 export type {
   BusinessConsideration,
-  BusinessConsiderations,
+  BusinessConsiderations
 } from "../types/businessImpact";
 
-// Re-export specific constants from businessImpact.ts
-// BusinessKeyBenefits is exported as both a value and its type will be inferred
+// Export specific constants that are frequently used
 export {
   BUSINESS_CONSIDERATIONS,
-  BusinessKeyBenefits,
+  BusinessKeyBenefits
 } from "../types/businessImpact";
 
-// Export the BUSINESS_IMPACT_CATEGORIES and RISK_LEVELS directly from riskConstants
-// to make them available at the top level since they're frequently used
+// Export these specific constants directly as they are frequently used
 export { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS } from "./riskConstants";
-
-// Export BUSINESS_IMPACT_ICONS directly from uiConstants
 export { BUSINESS_IMPACT_ICONS } from "./uiConstants";
+
+// Re-export additional constants needed by components
+export { CIA_COMPONENT_ICONS, WIDGET_ICONS, WIDGET_TITLES } from "./appConstants";
+export { SECURITY_LEVEL_COLORS } from "./uiConstants";
+
