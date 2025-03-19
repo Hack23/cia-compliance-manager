@@ -541,8 +541,9 @@ export class CIAContentService {
   /**
    * Get compliant frameworks
    */
-  public getCompliantFrameworks(level: SecurityLevel) {
-    return this.complianceService.getCompliantFrameworks(level);
+  public getCompliantFrameworks(level: SecurityLevel): string[] {
+    // Fix: Pass the same level to all three parameters
+    return this.complianceService.getCompliantFrameworks(level, level, level);
   }
 
   /**

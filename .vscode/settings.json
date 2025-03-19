@@ -118,7 +118,6 @@
 
   // Editor settings
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit"
@@ -145,8 +144,7 @@
   "typescript.inlayHints.parameterTypes.enabled": true,
   "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
   "typescript.preferences.renameMatchingJsxTags": true,
-  "javascript.preferences.renameMatchingJsxTags": true,
-
+ 
   // Tailwind settings
   "tailwindCSS.experimental.classRegex": [
     ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
@@ -215,9 +213,8 @@
     },
     "indentationMode": "keep",
     "inlineSuggestCount": 3,
-    "listCount": 5,
-    "temperature": 0.3
-  },
+    "listCount": 5
+    },
 
   // Custom instructions for GitHub Copilot - updated with v1.0 release priority
   "github.copilot.editor.customization": {

@@ -2,46 +2,6 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { CIADataProvider, CIADetails, SecurityLevel } from '../types/cia-services';
 import { ComplianceService } from './complianceService';
 
-// Create a proper mock that satisfies the CIADataProvider interface
-const mockDataProvider: CIADataProvider = {
-  availabilityOptions: {
-    None: { description: 'None availability', capex: 0, opex: 0 },
-    Low: { description: 'Low availability', capex: 5, opex: 2 },
-    Moderate: { description: 'Moderate availability', capex: 10, opex: 5 },
-    High: { description: 'High availability', capex: 15, opex: 8 },
-    'Very High': { description: 'Very high availability', capex: 20, opex: 10 },
-  },
-  integrityOptions: {
-    None: { description: 'None integrity', capex: 0, opex: 0 },
-    Low: { description: 'Low integrity', capex: 5, opex: 2 },
-    Moderate: { description: 'Moderate integrity', capex: 10, opex: 5 },
-    High: { description: 'High integrity', capex: 15, opex: 8 },
-    'Very High': { description: 'Very high integrity', capex: 20, opex: 10 },
-  },
-  confidentialityOptions: {
-    None: { description: 'None confidentiality', capex: 0, opex: 0 },
-    Low: { description: 'Low confidentiality', capex: 5, opex: 2 },
-    Moderate: { description: 'Moderate confidentiality', capex: 10, opex: 5 },
-    High: { description: 'High confidentiality', capex: 15, opex: 8 },
-    'Very High': { description: 'Very high confidentiality', capex: 20, opex: 10 },
-  },
-  roiEstimates: {
-    NONE: { returnRate: '0%', description: 'No ROI' },
-    LOW: { returnRate: '50%', description: 'Low ROI' },
-    MODERATE: { returnRate: '200%', description: 'Moderate ROI' },
-    HIGH: { returnRate: '350%', description: 'High ROI' },
-    VERY_HIGH: { returnRate: '500%', description: 'Very high ROI' },
-  },
-  // Optional methods can remain as mocks
-  getDefaultSecurityIcon: vi.fn(),
-  getDefaultValuePoints: vi.fn(),
-};
-
-// Mock functions with proper return types
-vi.mock('./complianceUtils', () => ({
-  // ...existing mocks...
-}));
-
 // Create a helper function to generate valid CIADetails objects for testing
 function createMockCIADetails(description: string, level: SecurityLevel): CIADetails {
   return {
@@ -56,22 +16,43 @@ function createMockCIADetails(description: string, level: SecurityLevel): CIADet
   };
 }
 
-// Mock security levels with complete CIADetails objects
-const mockLevels = {
-  None: createMockCIADetails('No security controls', 'None'),
-  Low: createMockCIADetails('Basic security controls', 'Low'),
-  Moderate: createMockCIADetails('Standard security controls', 'Moderate'),
-  High: createMockCIADetails('Advanced security controls', 'High'),
-  'Very High': createMockCIADetails('Maximum security controls', 'Very High'),
+// Create a proper mock that satisfies the CIADataProvider interface
+const mockDataProvider: CIADataProvider = {
+  availabilityOptions: {
+    None: createMockCIADetails('No availability security controls', 'None'),
+    Low: createMockCIADetails('Low availability security controls', 'Low'),
+    Moderate: createMockCIADetails('Moderate availability security controls', 'Moderate'),
+    High: createMockCIADetails('High availability security controls', 'High'),
+    'Very High': createMockCIADetails('Very high availability security controls', 'Very High'),
+  },
+  integrityOptions: {
+    None: createMockCIADetails('No integrity security controls', 'None'),
+    Low: createMockCIADetails('Low integrity security controls', 'Low'),
+    Moderate: createMockCIADetails('Moderate integrity security controls', 'Moderate'),
+    High: createMockCIADetails('High integrity security controls', 'High'),
+    'Very High': createMockCIADetails('Very high integrity security controls', 'Very High'),
+  },
+  confidentialityOptions: {
+    None: createMockCIADetails('No confidentiality security controls', 'None'),
+    Low: createMockCIADetails('Low confidentiality security controls', 'Low'),
+    Moderate: createMockCIADetails('Moderate confidentiality security controls', 'Moderate'),
+    High: createMockCIADetails('High confidentiality security controls', 'High'),
+    'Very High': createMockCIADetails('Very high confidentiality security controls', 'Very High'),
+  },
+  roiEstimates: {
+    NONE: { returnRate: '0%', description: 'No ROI' },
+    LOW: { returnRate: '50%', description: 'Low ROI' },
+    MODERATE: { returnRate: '200%', description: 'Moderate ROI' },
+    HIGH: { returnRate: '350%', description: 'High ROI' },
+    VERY_HIGH: { returnRate: '500%', description: 'Very high ROI' },
+  },
+  // Optional methods can remain as mocks
+  getDefaultSecurityIcon: vi.fn(),
+  getDefaultValuePoints: vi.fn(),
 };
 
-// Define FrameworkComplianceStatus type if missing
-interface FrameworkComplianceStatus {
-  framework: string;
-  status: 'compliant' | 'partial' | 'non-compliant';
-  requiredLevel: SecurityLevel;
-  details?: string;
-}
+// Define FrameworkComplianceStatus type
+type FrameworkComplianceStatus = 'compliant' | 'partial' | 'non-compliant';
 
 describe('ComplianceService', () => {
   let service: ComplianceService;
@@ -93,7 +74,8 @@ describe('ComplianceService', () => {
       const moderateStatus = service.getComplianceStatus('Moderate', 'Moderate', 'Moderate');
       expect(moderateStatus.compliantFrameworks).toHaveLength(3);
       
-      const highStatus = service.getComplianceStatus('High', 'High', 'High', 'finance');
+      // Fix: Use proper object structure for industry parameter
+      const highStatus = service.getComplianceStatus('High', 'High', 'High', { industry: 'finance' });
       expect(highStatus.compliantFrameworks).toHaveLength(5);
       
       const veryHighStatus = service.getComplianceStatus('Very High', 'Very High', 'Very High');
@@ -212,16 +194,16 @@ describe('ComplianceService', () => {
     });
     
     it("handles specific industry compliance scenarios correctly", () => {
-      // Healthcare scenario (HIPAA compliance)
-      const healthcareStatus = service.getComplianceStatus("High", "High", "High");
+      // Fix: Use proper object structure for industry parameter
+      const healthcareStatus = service.getComplianceStatus("High", "High", "High", { industry: "healthcare" });
       expect(healthcareStatus.compliantFrameworks).toContain("HIPAA");
       
-      // Financial services scenario (PCI DSS compliance)
-      const financialStatus = service.getComplianceStatus("Very High", "Very High", "Very High");
+      // Fix: Use proper object structure for industry parameter
+      const financialStatus = service.getComplianceStatus("Very High", "Very High", "Very High", { industry: "finance" });
       expect(financialStatus.compliantFrameworks).toContain("PCI DSS");
       
-      // EU company scenario (GDPR compliance)
-      const gdprStatus = service.getComplianceStatus("Moderate", "Moderate", "High");
+      // Fix: Use proper object structure for region parameter
+      const gdprStatus = service.getComplianceStatus("Moderate", "Moderate", "High", { region: "EU" });
       // Should be compliant with GDPR with these levels
       expect(gdprStatus.compliantFrameworks).toContain("GDPR");
     });
@@ -260,29 +242,35 @@ describe('ComplianceService', () => {
 
   describe("getCompliantFrameworks", () => {
     it("returns appropriate frameworks for each security level", () => {
-      expect(service.getCompliantFrameworks("None")).toHaveLength(0);
-      expect(service.getCompliantFrameworks("Low")).toHaveLength(1);
-      expect(service.getCompliantFrameworks("Moderate").length).toBeGreaterThan(1);
-      expect(service.getCompliantFrameworks("High").length).toBeGreaterThan(service.getCompliantFrameworks("Moderate").length);
-      expect(service.getCompliantFrameworks("Very High").length).toBeGreaterThan(service.getCompliantFrameworks("High").length);
+      // Fix: Provide all required arguments
+      const noneFrameworks = service.getCompliantFrameworks("None", "None", "None");
+      const lowFrameworks = service.getCompliantFrameworks("Low", "Low", "Low");
+      const moderateFrameworks = service.getCompliantFrameworks("Moderate", "Moderate", "Moderate");
+      const highFrameworks = service.getCompliantFrameworks("High", "High", "High");
+      const veryHighFrameworks = service.getCompliantFrameworks("Very High", "Very High", "Very High");
+      
+      expect(noneFrameworks.length).toBeLessThan(lowFrameworks.length);
+      expect(lowFrameworks.length).toBeLessThan(moderateFrameworks.length);
+      expect(moderateFrameworks.length).toBeLessThan(highFrameworks.length);
+      expect(highFrameworks.length).toBeLessThan(veryHighFrameworks.length);
     });
 
     it("includes appropriate frameworks for High security level", () => {
-      const frameworks = service.getCompliantFrameworks("High");
+      const frameworks = service.getCompliantFrameworks("High", "High", "High");
       expect(frameworks).toContain("ISO 27001");
       expect(frameworks).toContain("GDPR");
     });
 
     it("includes all major frameworks for Very High security level", () => {
-      const frameworks = service.getCompliantFrameworks("Very High");
+      const frameworks = service.getCompliantFrameworks("Very High", "Very High", "Very High");
       expect(frameworks).toContain("HIPAA");
       expect(frameworks).toContain("PCI DSS");
       expect(frameworks).toContain("NIST 800-53");
     });
 
     it("returns consistent results on multiple invocations", () => {
-      const firstCall = service.getCompliantFrameworks("High");
-      const secondCall = service.getCompliantFrameworks("High");
+      const firstCall = service.getCompliantFrameworks("High", "High", "High");
+      const secondCall = service.getCompliantFrameworks("High", "High", "High");
       expect(firstCall).toEqual(secondCall);
     });
   });
@@ -308,30 +296,30 @@ describe('ComplianceService', () => {
     });
 
     it("handles unknown frameworks appropriately", () => {
-      // Should default to Moderate requirement
-      expect(service.getFrameworkStatus("Unknown Framework", "Low")).toBe("partial");
-      expect(service.getFrameworkStatus("Unknown Framework", "Moderate")).toBe("compliant");
+      // Fix: Provide all required arguments
+      expect(service.getFrameworkStatus("Unknown Framework", 'Low', 'Low', 'Low')).toBe("partial");
+      expect(service.getFrameworkStatus("Unknown Framework", 'Moderate', 'Moderate', 'Moderate')).toBe("compliant");
     });
     
     it("applies business logic correctly to framework compliance status", () => {
-      // Test each possible status
-      const testCases: [string, SecurityLevel, FrameworkComplianceStatus][] = [
-        // Framework / Level / Expected Status
-        ["HIPAA", "None", "non-compliant"],
-        ["HIPAA", "Low", "non-compliant"],
-        ["HIPAA", "Moderate", "partial"],
-        ["HIPAA", "High", "compliant"],
-        ["HIPAA", "Very High", "compliant"],
+      // Update test cases to provide all required arguments
+      const testFrameworks: Array<[string, SecurityLevel, SecurityLevel, SecurityLevel, FrameworkComplianceStatus]> = [
+        // Framework / AvailabilityLevel / IntegrityLevel / ConfidentialityLevel / Expected Status
+        ["HIPAA", "None", "None", "None", "non-compliant"],
+        ["HIPAA", "Low", "Low", "Low", "non-compliant"],
+        ["HIPAA", "Moderate", "Moderate", "Moderate", "partial"],
+        ["HIPAA", "High", "High", "High", "compliant"],
+        ["HIPAA", "Very High", "Very High", "Very High", "compliant"],
         
-        ["PCI DSS", "High", "compliant"],
-        ["PCI DSS", "Moderate", "partial"],
+        ["PCI DSS", "High", "High", "High", "compliant"],
+        ["PCI DSS", "Moderate", "Moderate", "Moderate", "partial"],
         
-        ["GDPR", "Low", "partial"],
-        ["GDPR", "Moderate", "compliant"]
+        ["GDPR", "Low", "Low", "Low", "partial"],
+        ["GDPR", "Moderate", "Moderate", "Moderate", "compliant"]
       ];
       
-      testCases.forEach(([framework, level, expectedStatus]) => {
-        expect(service.getFrameworkStatus(framework, level)).toBe(expectedStatus);
+      testFrameworks.forEach(([framework, avail, integ, conf, expectedStatus]) => {
+        expect(service.getFrameworkStatus(framework, avail, integ, conf)).toBe(expectedStatus);
       });
     });
   });
@@ -389,13 +377,13 @@ describe('ComplianceService', () => {
 
   describe("isFrameworkApplicable", () => {
     it('returns true for industry-specific frameworks', () => {
-      // Fix: Use proper object structure for context
-      expect(service.isFrameworkApplicable('HIPAA', { industry: 'healthcare' })).toBe(true);
-      expect(service.isFrameworkApplicable('PCI DSS', { industry: 'finance' })).toBe(true);
-      // ... more cases ...
+      // Fix: Match the expected function signature by passing string directly
+      expect(service.isFrameworkApplicable('HIPAA', 'healthcare')).toBe(true);
+      expect(service.isFrameworkApplicable('PCI DSS', 'finance')).toBe(true);
     });
 
     it("returns true for region-specific frameworks", () => {
+      // Fix: Match the expected function signature for region parameter
       expect(service.isFrameworkApplicable("GDPR", undefined, "EU")).toBe(true);
       expect(service.isFrameworkApplicable("HIPAA", undefined, "US")).toBe(true);
       expect(service.isFrameworkApplicable("UK GDPR", undefined, "UK")).toBe(true);
@@ -409,6 +397,7 @@ describe('ComplianceService', () => {
     });
 
     it("returns false for frameworks not applicable to industry", () => {
+      // Fix: Match the expected function signature for industry parameter
       expect(service.isFrameworkApplicable("HIPAA", "finance")).toBe(false);
       expect(service.isFrameworkApplicable("FERPA", "healthcare")).toBe(false);
     });

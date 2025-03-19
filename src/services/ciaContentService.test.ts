@@ -590,7 +590,13 @@ describe("CIAContentService", () => {
 
     it("getTechnicalDescription should return string value", () => {
       const description = service.getTechnicalDescription("availability", "High");
-      vi.spyOn(ciaContentService, "getDetailedDescription").mockReturnValue("Mocked detailed description");
+      // Fix: Use mockImplementation instead of mockReturnValue for function that returns a BusinessImpactDetails object
+      vi.spyOn(ciaContentService, "getDetailedDescription").mockImplementation(() => ({
+        summary: "Mocked detailed description",
+        financial: { description: "Mock financial impact", riskLevel: "Medium" },
+        operational: { description: "Mock operational impact", riskLevel: "Medium" },
+        reputational: { description: "Mock reputational impact", riskLevel: "Medium" }
+      }));
       // Change the test to validate that description is a string with content
       expect(typeof description).toBe("string");
       expect(description).toBeTruthy();
@@ -610,15 +616,20 @@ describe("CIAContentService", () => {
       expect(description.length).toBeGreaterThan(0);
     });
 
-    it("getDetailedDescription should return string value", () => {
-      // Mock the function to return a string
-      vi.spyOn(ciaContentService, "getDetailedDescription").mockReturnValue("Mocked detailed description");
+    it("getDetailedDescription should return BusinessImpactDetails object", () => {
+      // Fix: Use mockImplementation instead of mockReturnValue for function that returns a BusinessImpactDetails object
+      vi.spyOn(ciaContentService, "getDetailedDescription").mockImplementation(() => ({
+        summary: "Mocked detailed description",
+        financial: { description: "Mock financial impact", riskLevel: "Medium" },
+        operational: { description: "Mock operational impact", riskLevel: "Medium" },
+        reputational: { description: "Mock reputational impact", riskLevel: "Medium" }
+      }));
       
-      const description = ciaContentService.getDetailedDescription("confidentiality", "High");
+      const details = ciaContentService.getDetailedDescription("confidentiality", "High");
       
-      // Fix: Check for string type rather than length
-      expect(typeof description).toBe("string");
-      expect(description).toBeTruthy();
+      // Fix: Check for object structure rather than string type
+      expect(details).toHaveProperty("summary");
+      expect(details).toHaveProperty("financial");
     });
 
     it("getSecurityLevelDescription should return string value", () => {
@@ -708,220 +719,6 @@ describe("CIAContentService", () => {
     });
   });
 });
-
-// Mock the imported service modules
-vi.mock("./businessImpactService", () => ({
-  BusinessImpactService: vi.fn().mockImplementation(() => ({
-    getBusinessImpact: vi.fn().mockReturnValue({
-      summary: "Mock business impact",
-      financial: { description: "Mock financial impact", riskLevel: "Medium" },
-      operational: { description: "Mock operational impact", riskLevel: "Medium" },
-      reputational: { description: "Mock reputational impact", riskLevel: "Medium" }
-    }),
-    getBusinessImpactDescription: vi.fn().mockReturnValue("Mock business impact description"),
-    getDetailedDescription: vi.fn().mockReturnValue("Mock detailed description"),
-    calculateBusinessImpactLevel: vi.fn().mockReturnValue("Moderate"),
-    getCategoryIcon: vi.fn().mockReturnValue("💰")
-  })),
-  createBusinessImpactService: vi.fn().mockImplementation((dataProvider) => ({
-    getBusinessImpact: vi.fn().mockReturnValue({
-      summary: "Mock business impact",
-      financial: { description: "Mock financial impact", riskLevel: "Medium" },
-      operational: { description: "Mock operational impact", riskLevel: "Medium" },
-      reputational: { description: "Mock reputational impact", riskLevel: "Medium" }
-    }),
-    getBusinessImpactDescription: vi.fn().mockReturnValue("Mock business impact description"),
-    getDetailedDescription: vi.fn().mockReturnValue("Mock detailed description"),
-    calculateBusinessImpactLevel: vi.fn().mockReturnValue("Moderate"),
-    getCategoryIcon: vi.fn().mockReturnValue("💰")
-  }))
-}));
-
-vi.mock("./complianceService", () => ({
-  ComplianceService: vi.fn().mockImplementation(() => ({
-    getComplianceStatus: vi.fn().mockReturnValue({
-      status: "Meets basic compliance only",
-      compliantFrameworks: ["GDPR", "NIST CSF", "Basic ISO 27001"],
-      partiallyCompliantFrameworks: ["SOC2"],
-      nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
-      remediationSteps: ["Implement data protection"],
-      requirements: ["Data protection by design"],
-      complianceScore: 65
-    }),
-    getCompliantFrameworks: vi.fn().mockReturnValue(["GDPR", "NIST CSF"]),
-    getFrameworkDescription: vi.fn().mockReturnValue("Mock framework description"),
-    getFrameworkStatus: vi.fn().mockReturnValue("compliant")
-  })),
-  createComplianceService: vi.fn().mockImplementation((dataProvider) => ({
-    getComplianceStatus: vi.fn().mockReturnValue({
-      status: "Meets basic compliance only",
-      compliantFrameworks: ["GDPR", "NIST CSF"],
-      partiallyCompliantFrameworks: ["SOC2"],
-      nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
-      remediationSteps: ["Implement data protection"],
-      requirements: ["Data protection by design"],
-      complianceScore: 65
-    }),
-    getCompliantFrameworks: vi.fn().mockReturnValue(["GDPR", "NIST CSF"]),
-    getFrameworkDescription: vi.fn().mockReturnValue("Mock framework description"),
-    getFrameworkStatus: vi.fn().mockReturnValue("compliant")
-  }))
-}));
-
-vi.mock("./securityMetricsService", () => ({
-  SecurityMetricsService: vi.fn().mockImplementation(() => ({
-    getSecurityMetrics: vi.fn().mockReturnValue({
-      score: 6,
-      maxScore: 12,
-      percentage: "50%",
-      totalCapex: 53000,
-      totalOpex: 10600
-    }),
-    getComponentMetrics: vi.fn().mockReturnValue({
-      component: "availability",
-      level: "Moderate",
-      value: 2,
-      percentage: "50%",
-      capex: 15000,
-      opex: 3000
-    }),
-    getImpactMetrics: vi.fn().mockReturnValue({
-      securityLevel: "Moderate",
-      riskReduction: "50%",
-      uptime: "99%",
-      rto: "4 hours"
-    }),
-    getSecurityLevelDescription: vi.fn().mockReturnValue("Standard security controls"),
-    getProtectionLevel: vi.fn().mockReturnValue("Balanced Protection"),
-    calculateRoi: vi.fn().mockReturnValue({
-      value: "$150,000",
-      percentage: "150%",
-      description: "Moderate return on security investment"
-    }),
-    getRiskBadgeVariant: vi.fn().mockReturnValue("info"),
-    getSecurityIcon: vi.fn().mockReturnValue("🔓"),
-    calculateSecurityScore: vi.fn().mockReturnValue(50)
-  })),
-  createSecurityMetricsService: vi.fn().mockImplementation((dataProvider) => ({
-    getSecurityMetrics: vi.fn().mockReturnValue({
-      score: 6,
-      maxScore: 12,
-      percentage: "50%",
-      totalCapex: 53000,
-      totalOpex: 10600
-    }),
-    getComponentMetrics: vi.fn().mockReturnValue({
-      component: "availability",
-      level: "Moderate",
-      value: 2,
-      percentage: "50%",
-      capex: 15000,
-      opex: 3000
-    }),
-    getImpactMetrics: vi.fn().mockReturnValue({
-      securityLevel: "Moderate",
-      riskReduction: "50%",
-      uptime: "99%",
-      rto: "4 hours"
-    }),
-    getSecurityLevelDescription: vi.fn().mockReturnValue("Standard security controls"),
-    getProtectionLevel: vi.fn().mockReturnValue("Balanced Protection"),
-    calculateRoi: vi.fn().mockReturnValue({
-      value: "$150,000",
-      percentage: "150%",
-      description: "Moderate return on security investment"
-    }),
-    getRiskBadgeVariant: vi.fn().mockReturnValue("info"),
-    getSecurityIcon: vi.fn().mockReturnValue("🔓"),
-    calculateSecurityScore: vi.fn().mockReturnValue(50)
-  }))
-}));
-
-vi.mock("./technicalImplementationService", () => ({
-  TechnicalImplementationService: vi.fn().mockImplementation(() => ({
-    getTechnicalImplementation: vi.fn().mockReturnValue({
-      description: "Mock technical implementation",
-      implementationSteps: ["Step 1", "Step 2"],
-      effort: {
-        development: "Weeks (2-4)",
-        maintenance: "Regular (monthly review)",
-        expertise: "Security professional"
-      }
-    }),
-    getComponentImplementationDetails: vi.fn().mockReturnValue({
-      description: "Mock component implementation",
-      implementationSteps: ["Step 1", "Step 2"],
-      effort: {
-        development: "Weeks (2-4)",
-        maintenance: "Regular",
-        expertise: "Security professional"
-      }
-    }),
-    getTechnicalDescription: vi.fn().mockReturnValue("Mock technical description"),
-    getRecommendations: vi.fn().mockReturnValue(["Recommendation 1", "Recommendation 2"]),
-    getImplementationConsiderations: vi.fn().mockReturnValue("Mock implementation considerations"),
-    getImplementationTime: vi.fn().mockReturnValue("1-2 months")
-  })),
-  createTechnicalImplementationService: vi.fn().mockImplementation((dataProvider) => ({
-    getTechnicalImplementation: vi.fn().mockReturnValue({
-      description: "Mock technical implementation",
-      implementationSteps: ["Step 1", "Step 2"],
-      effort: {
-        development: "Weeks (2-4)",
-        maintenance: "Regular (monthly review)",
-        expertise: "Security professional"
-      }
-    }),
-    getComponentImplementationDetails: vi.fn().mockReturnValue({
-      description: "Mock component implementation",
-      implementationSteps: ["Step 1", "Step 2"],
-      effort: {
-        development: "Weeks (2-4)",
-        maintenance: "Regular",
-        expertise: "Security professional"
-      }
-    }),
-    getTechnicalDescription: vi.fn().mockReturnValue("Mock technical description"),
-    getRecommendations: vi.fn().mockReturnValue(["Recommendation 1", "Recommendation 2"]),
-    getImplementationConsiderations: vi.fn().mockReturnValue("Mock implementation considerations"),
-    getImplementationTime: vi.fn().mockReturnValue("1-2 months")
-  }))
-}));
-
-vi.mock("./securityResourceService", () => ({
-  SecurityResourceService: vi.fn().mockImplementation(() => ({
-    getValuePoints: vi.fn().mockReturnValue([
-      "Value point 1",
-      "Value point 2"
-    ]),
-    getSecurityResources: vi.fn().mockReturnValue([
-      {
-        id: "resource-1",
-        title: "Resource 1",
-        description: "Description 1",
-        url: "https://example.com/resource1",
-        type: "general",
-        relevance: 90
-      }
-    ])
-  })),
-  createSecurityResourceService: vi.fn().mockImplementation((dataProvider) => ({
-    getValuePoints: vi.fn().mockReturnValue([
-      "Value point 1",
-      "Value point 2"
-    ]),
-    getSecurityResources: vi.fn().mockReturnValue([
-      {
-        id: "resource-1",
-        title: "Resource 1",
-        description: "Description 1",
-        url: "https://example.com/resource1",
-        type: "general",
-        relevance: 90
-      }
-    ])
-  }))
-}));
 
 // Mock only when absolutely necessary, preserving real implementation
 vi.mock("../hooks/useCIAOptions", async () => {
@@ -1492,21 +1289,25 @@ describe("CIAContentService", () => {
 
 // Fix the getValuePoints test that has a syntax error
 describe("getValuePoints", () => {
+  const dataProvider = createTestDataProvider();
+  const service = createCIAContentService(dataProvider);
+
   it("returns an array of value points for security levels", () => {
     const points = service.getValuePoints("High");
     
     expect(Array.isArray(points)).toBe(true);
     expect(points.length).toBeGreaterThan(0);
   });
-});
-
-// Fix the getSecurityIcon test that has a syntax error
+  // Fix the getSecurityIcon test that has a syntax error
 it("getSecurityIcon should return string value", () => {
   const icon = service.getSecurityIcon("High");
   
   expect(typeof icon).toBe("string");
   expect(icon).not.toBe("");
 });
+
+});
+
 
 // Fix the duplicate mock declaration
 // Remove the duplicated mock declarations for:
@@ -1714,4 +1515,60 @@ describe('CIAContentService', () => {
       expect(newService).toBeInstanceOf(CIAContentService);
     });
   });
+});
+
+// ...existing code...
+
+it("getTechnicalDescription should return string value", () => {
+  const description = ciaContentService.getTechnicalDescription("availability", "High");
+  // Fix: Use mockImplementation instead of mockReturnValue for function that returns a BusinessImpactDetails object
+  vi.spyOn(ciaContentService, "getDetailedDescription").mockImplementation(() => ({
+    summary: "Mocked detailed description",
+    financial: { description: "Mock financial impact", riskLevel: "Medium" },
+    operational: { description: "Mock operational impact", riskLevel: "Medium" },
+    reputational: { description: "Mock reputational impact", riskLevel: "Medium" }
+  }));
+  // Change the test to validate that description is a string with content
+  expect(typeof description).toBe("string");
+  expect(description).toBeTruthy();
+});
+
+// ...existing code...
+
+it("getDetailedDescription should return BusinessImpactDetails object", () => {
+  // Fix: Use mockImplementation instead of mockReturnValue for function that returns a BusinessImpactDetails object
+  vi.spyOn(ciaContentService, "getDetailedDescription").mockImplementation(() => ({
+    summary: "Mocked detailed description",
+    financial: { description: "Mock financial impact", riskLevel: "Medium" },
+    operational: { description: "Mock operational impact", riskLevel: "Medium" },
+    reputational: { description: "Mock reputational impact", riskLevel: "Medium" }
+  }));
+  
+  const details = ciaContentService.getDetailedDescription("confidentiality", "High");
+  
+  // Fix: Check for object structure rather than string type
+  expect(details).toHaveProperty("summary");
+  expect(details).toHaveProperty("financial");
+});
+
+// ...existing code...
+
+// Fix getValuePoints test - use proper service instance
+describe("getValuePoints", () => {
+  it("returns an array of value points for security levels", () => {
+    const testService = createCIAContentService(mockDataProvider);
+    const points = testService.getValuePoints("High");
+    
+    expect(Array.isArray(points)).toBe(true);
+    expect(points.length).toBeGreaterThan(0);
+  });
+});
+
+// Fix getSecurityIcon test - use proper service instance 
+it("getSecurityIcon should return string value", () => {
+  const testService = createCIAContentService(mockDataProvider);
+  const icon = testService.getSecurityIcon("High");
+  
+  expect(typeof icon).toBe("string");
+  expect(icon).not.toBe("");
 });

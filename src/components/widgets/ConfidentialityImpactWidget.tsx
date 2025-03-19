@@ -336,7 +336,7 @@ const ConfidentialityImpactWidget: React.FC<
 };
 
 // Helper function to determine text color based on impact level
-function getImpactColor(impact: SecurityLevel): string {
+function getImpactColor(impact: SecurityLevel | string): string {
   switch (impact) {
     case "None":
       return "text-red-600 dark:text-red-400";
