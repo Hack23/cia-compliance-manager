@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from "vitest";
-import widgetRegistry, { WidgetDefinition } from "./widgetRegistry";
+import { SecurityLevel } from "../types/cia";
+import widgetRegistry, { WidgetDefinition, WidgetRegistryImpl } from "./widgetRegistry";
 
 // Mock the app constants
 vi.mock("../constants/appConstants", () => ({
@@ -79,17 +80,55 @@ describe('Widget Registry', () => {
   });
 
   it('should render multiple widgets with consistent security levels', () => {
-    // Render multiple widgets
-    const widgetElements = widgetRegistry.renderWidgets();
+    // Create a new instance for isolation
+    const testRegistry = new WidgetRegistryImpl();
     
-    // Render to test environment
-    render(<div data-testid="widgets-container">{widgetElements}</div>);
+    // Register test widgets
+    testRegistry.register({
+      id: 'test-widget-1',
+      title: 'Test Widget 1',
+      component: (props: Record<string, any>) => <div data-testid="test-widget-1-props">{JSON.stringify(props)}</div>,
+      icon: '🧪',
+      defaultProps: {
+        availabilityLevel: 'Low' as SecurityLevel,
+        integrityLevel: 'Low' as SecurityLevel,
+        confidentialityLevel: 'Low' as SecurityLevel
+      }
+    });
     
-    // Check that some key widgets are present
-    expect(screen.getByTestId('widget-security-summary')).toBeInTheDocument();
+    testRegistry.register({
+      id: 'test-widget-2',
+      title: 'Test Widget 2',
+      component: (props: Record<string, any>) => <div data-testid="test-widget-2-props">{JSON.stringify(props)}</div>,
+      icon: '📊',
+      defaultProps: {
+        availabilityLevel: 'High' as SecurityLevel,
+        integrityLevel: 'High' as SecurityLevel,
+        confidentialityLevel: 'High' as SecurityLevel
+      }
+    });
     
-    // More specific assertions could be added for each widget's content
-    // when rendered with the standard security levels
+    // Render widgets with global security levels
+    const globalProps = {
+      availabilityLevel: 'Moderate' as SecurityLevel,
+      integrityLevel: 'Moderate' as SecurityLevel,
+      confidentialityLevel: 'Moderate' as SecurityLevel
+    };
+    
+    const result = render(<>{testRegistry.renderWidgets(undefined, globalProps)}</>);
+    
+    // Check that both widgets have the global security levels
+    const widget1Props = JSON.parse(result.getByTestId('test-widget-1-props').textContent || '{}');
+    const widget2Props = JSON.parse(result.getByTestId('test-widget-2-props').textContent || '{}');
+    
+    // Both widgets should have the same security levels from globalProps
+    expect(widget1Props.availabilityLevel).toBe('Moderate');
+    expect(widget1Props.integrityLevel).toBe('Moderate');
+    expect(widget1Props.confidentialityLevel).toBe('Moderate');
+    
+    expect(widget2Props.availabilityLevel).toBe('Moderate');
+    expect(widget2Props.integrityLevel).toBe('Moderate');
+    expect(widget2Props.confidentialityLevel).toBe('Moderate');
   });
 
   it("should export the required methods", () => {

@@ -106,12 +106,11 @@ export class WidgetRegistryImpl implements WidgetRegistry {
       .sort((a, b) => (a.order || 0) - (b.order || 0))
       .sort((a, b) => (a.position || 0) - (b.position || 0));
     
-    // Extract security levels from the first widget's props to ensure consistency
-    const commonSecurityLevels = {
-      availabilityLevel: "Moderate" as SecurityLevel,
-      integrityLevel: "Moderate" as SecurityLevel,
-      confidentialityLevel: "Moderate" as SecurityLevel,
-      ...props
+    // Extract global security levels from props
+    const securityLevels = {
+      availabilityLevel: props.availabilityLevel || "Moderate" as SecurityLevel,
+      integrityLevel: props.integrityLevel || "Moderate" as SecurityLevel,
+      confidentialityLevel: props.confidentialityLevel || "Moderate" as SecurityLevel,
     };
 
     return widgetsToRender.map((widget) => {
@@ -120,8 +119,12 @@ export class WidgetRegistryImpl implements WidgetRegistry {
       // Ensure each widget gets the same security level props for consistency
       const combinedProps = { 
         ...widget.defaultProps,
-        ...commonSecurityLevels, // Apply consistent security levels
-        ...widgetProps,          // Allow per-widget customization
+        ...securityLevels,         // Apply consistent security levels
+        ...widgetProps,            // Allow other widget customization
+        // Force the security levels again to ensure consistency
+        availabilityLevel: securityLevels.availabilityLevel,
+        integrityLevel: securityLevels.integrityLevel,
+        confidentialityLevel: securityLevels.confidentialityLevel,
       };
 
       return (

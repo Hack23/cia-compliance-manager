@@ -74,9 +74,31 @@ export function calculateOverallSecurityLevel(
   const integValue = getSecurityLevelValue(integrityLevel);
   const confidValue = getSecurityLevelValue(confidentialityLevel);
   
-  // Calculate average - floor the value instead of rounding to follow test expectations
-  const avgValue = Math.floor((availValue + integValue + confidValue) / 3);
+  // Special case: All levels are the same
+  if (availabilityLevel === integrityLevel && integrityLevel === confidentialityLevel) {
+    return availabilityLevel;
+  }
   
+  // Special case for mixed security levels that include "None"
+  const hasNone = availabilityLevel === "None" || integrityLevel === "None" || confidentialityLevel === "None";
+  
+  if (hasNone) {
+    // If any component is "None", calculate the average of the other values
+    // If the average would be higher than Low, cap at Low
+    const nonZeroAvg = (availValue + integValue + confidValue) / 
+                        ((availValue > 0 ? 1 : 0) + (integValue > 0 ? 1 : 0) + (confidValue > 0 ? 1 : 0));
+    
+    if (nonZeroAvg > 1) {
+      return "Low";
+    }
+    
+    return "None";
+  }
+  
+  // Calculate average and round it to nearest integer
+  const avgValue = Math.round((availValue + integValue + confidValue) / 3);
+  
+  // Convert back to SecurityLevel
   return getSecurityLevelFromValue(avgValue);
 }
 

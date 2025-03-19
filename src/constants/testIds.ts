@@ -104,8 +104,16 @@ export const createDynamicTestId = {
 
   /**
    * Create test ID for a category-specific item
+   * 
+   * @param prefix - Category prefix
+   * @param category - Category name
+   * @returns Category-specific test ID
    */
-  categorySpecific: (prefix: string, category: string): string => `${prefix}-${category}`,
+  categorySpecific: (prefix: string, category: string): string => {
+    // Ensure category has first letter capitalized, then convert to lowercase
+    const formattedCategory = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+    return `${prefix}-${formattedCategory.toLowerCase()}`;
+  },
 
   /**
    * Create test ID for an option
@@ -132,6 +140,17 @@ export const createDynamicTestId = {
    */
   techStack: (index: number): string => `tech-stack-${index}`,
 };
+
+/**
+ * Creates a category-specific test ID
+ * 
+ * @param category - The category name
+ * @param id - The ID value
+ * @returns The formatted test ID
+ */
+export function categorySpecific(category: string, id: string): string {
+  return `${category}-${id}`;
+}
 
 /**
  * Test helpers for finding and matching elements

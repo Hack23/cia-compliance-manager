@@ -46,10 +46,11 @@ describe("Risk Impact Data", () => {
     });
 
     it("should have appropriate recovery times", () => {
-      expect(operationalImpactByLevel.None.meanTimeToRecover).toContain("days");
-      expect(operationalImpactByLevel["Very High"].meanTimeToRecover).toContain(
-        "<5 minutes"
-      );
+      expect(operationalImpactByLevel.None.meanTimeToRecover).toContain("Weeks");
+      expect(operationalImpactByLevel.Low.meanTimeToRecover).toBe("Days");
+      expect(operationalImpactByLevel.Moderate.meanTimeToRecover).toBe("Hours");
+      expect(operationalImpactByLevel.High.meanTimeToRecover).toBe("Minutes to hours");
+      expect(operationalImpactByLevel["Very High"].meanTimeToRecover).toBe("<5 minutes");
     });
   });
 

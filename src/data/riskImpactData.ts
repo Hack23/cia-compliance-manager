@@ -77,7 +77,7 @@ export const operationalImpactByLevel: Record<SecurityLevel, BusinessImpactDetai
   "Very High": {
     description: "Minimal operational impact with immediate failover",
     riskLevel: "Minimal",
-    meanTimeToRecover: "Seconds to minutes",
+    meanTimeToRecover: "<5 minutes",
   }
 };
 

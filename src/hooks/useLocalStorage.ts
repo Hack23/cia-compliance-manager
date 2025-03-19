@@ -23,24 +23,8 @@ export function useLocalStorage<T>(
       // Return initialValue if no item found
       if (item === null) return initialValue;
       
-      // Handle special case for boolean values
-      if (typeof initialValue === 'boolean') {
-        if (item === 'true') return true as unknown as T;
-        if (item === 'false') return false as unknown as T;
-      }
-
-      // Handle string values when expecting a string
-      if (typeof initialValue === 'string') {
-        return item as unknown as T;
-      }
-      
-      // Try to parse as JSON
-      try {
-        return JSON.parse(item);
-      } catch (parseError) {
-        // If parsing fails, return the raw string or initialValue
-        return item as unknown as T;
-      }
+      // Parse stored json
+      return JSON.parse(item);
     } catch (error) {
       // If error (like invalid JSON), return initialValue
       console.error(`Error reading localStorage key "${key}":`, error);
@@ -61,10 +45,6 @@ export function useLocalStorage<T>(
       // Update localStorage
       if (valueToStore === null) {
         window.localStorage.removeItem(key);
-      } else if (typeof valueToStore === 'boolean') {
-        window.localStorage.setItem(key, valueToStore ? 'true' : 'false');
-      } else if (typeof valueToStore === 'string') {
-        window.localStorage.setItem(key, valueToStore);
       } else {
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
       }
