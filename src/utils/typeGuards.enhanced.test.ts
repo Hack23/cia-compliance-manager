@@ -1,16 +1,16 @@
 import { describe, expect, it } from "vitest";
 import {
-  extractSecurityLevels,
-  getImplementationCost,
-  hasTagValue,
-  isComplianceFramework,
-  isComplianceStatus,
-  isNumber,
-  isROIMetricDetails,
-  isSecurityProfile,
-  isString,
-  isWidgetConfig,
-  parseRiskLevel,
+    extractSecurityLevels,
+    getImplementationCost,
+    hasTagValue,
+    isComplianceFramework,
+    isComplianceStatus,
+    isNumber,
+    isROIMetricDetails,
+    isSecurityProfile,
+    isString,
+    isWidgetConfig,
+    parseRiskLevel,
 } from "./typeGuards";
 
 describe("Additional TypeGuard Functions", () => {
@@ -71,6 +71,26 @@ describe("Additional TypeGuard Functions", () => {
     });
   });
 
+  describe("isComplianceStatus", () => {
+    it("validates valid compliance status objects", () => {
+      const validStatus = {
+        status: "Partially Compliant",
+        compliantFrameworks: ["ISO 27001"],
+        partiallyCompliantFrameworks: ["NIST CSF"],
+        nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
+        complianceScore: 50
+      };
+      
+      expect(isComplianceStatus(validStatus)).toBe(true);
+    });
+    
+    it("rejects invalid compliance status", () => {
+      expect(isComplianceStatus(null)).toBe(false);
+      expect(isComplianceStatus({})).toBe(false);
+      expect(isComplianceStatus({ status: "test" })).toBe(false);
+    });
+  });
+
   describe("isComplianceFramework", () => {
     it("validates valid compliance framework objects", () => {
       const valid = {
@@ -86,6 +106,26 @@ describe("Additional TypeGuard Functions", () => {
       expect(isComplianceFramework(null)).toBe(false);
       expect(isComplianceFramework({})).toBe(false);
       expect(isComplianceFramework({ id: "NIST" })).toBe(false);
+    });
+  });
+
+  describe("isComplianceFramework", () => {
+    it("validates valid compliance framework objects", () => {
+      // Simple string framework
+      expect(isComplianceFramework("ISO 27001")).toBe(true);
+      
+      // Complex framework object
+      const validFramework = {
+        name: "HIPAA",
+        status: "compliant"
+      };
+      expect(isComplianceFramework(validFramework)).toBe(true);
+    });
+    
+    it("rejects invalid compliance frameworks", () => {
+      expect(isComplianceFramework(null)).toBe(false);
+      expect(isComplianceFramework({})).toBe(false);
+      expect(isComplianceFramework({ name: "Test" })).toBe(false);
     });
   });
 

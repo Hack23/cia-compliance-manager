@@ -1,17 +1,17 @@
 import { SecurityLevel } from "../types/cia";
 import {
-    BusinessImpactDetails,
-    CIAComponentType,
-    CIADetails,
-    ROIEstimate
+  BusinessImpactDetails,
+  CIAComponentType,
+  CIADetails,
+  ROIEstimate
 } from "../types/cia-services";
 import {
-    AvailabilityDetail,
-    CIAImpactSummaryWidgetProps,
-    ConfidentialityDetail,
-    IntegrityDetail,
-    SecurityLevelWidgetProps,
-    WidgetProps
+  AvailabilityDetail,
+  CIAImpactSummaryWidgetProps,
+  ConfidentialityDetail,
+  IntegrityDetail,
+  SecurityLevelWidgetProps,
+  WidgetProps
 } from "../types/widgets";
 
 /**
@@ -278,9 +278,11 @@ export function isComplianceStatus(obj: any): boolean {
     hasProperty(obj, "compliantFrameworks") &&
     hasProperty(obj, "partiallyCompliantFrameworks") &&
     hasProperty(obj, "nonCompliantFrameworks") &&
+    hasProperty(obj, "complianceScore") &&
     Array.isArray(obj.compliantFrameworks) &&
     Array.isArray(obj.partiallyCompliantFrameworks) &&
-    Array.isArray(obj.nonCompliantFrameworks)
+    Array.isArray(obj.nonCompliantFrameworks) &&
+    typeof obj.complianceScore === "number"
   );
 }
 
@@ -288,7 +290,7 @@ export function isComplianceStatus(obj: any): boolean {
  * Checks if an object is a valid compliance framework
  */
 export function isComplianceFramework(obj: any): boolean {
-  if (!obj || typeof obj !== "object") {
+  if (!obj) {
     return false;
   }
 
@@ -298,6 +300,10 @@ export function isComplianceFramework(obj: any): boolean {
   }
 
   // If it's an object, it should have name and status properties
+  if (typeof obj !== "object") {
+    return false;
+  }
+
   return (
     hasProperty(obj, "name") &&
     hasProperty(obj, "status") &&
