@@ -1,14 +1,16 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import { SecurityLevel } from "../../types/cia";
+import { CIAComponentType } from "../../types/cia-services"; // Import the CIAComponentType
 import ConfidentialityImpactWidget from "./ConfidentialityImpactWidget";
 
 // Mock ciaContentService
 vi.mock("../../services/ciaContentService", () => ({
   __esModule: true,
   default: {
-    getComponentDetails: vi.fn().mockImplementation((component, level) => {
-      if (level === "Unknown") {
+    getComponentDetails: vi.fn().mockImplementation((component: CIAComponentType, level: SecurityLevel) => {
+      // Fix comparison by checking if level is equal to a string value rather than comparing types
+      if (level === "Unknown" as SecurityLevel) {
         return undefined;
       }
       return {
@@ -18,7 +20,7 @@ vi.mock("../../services/ciaContentService", () => ({
           level !== "None" ? `${level} protection method` : undefined,
       };
     }),
-    getBusinessImpact: vi.fn().mockImplementation((component, level) => ({
+    getBusinessImpact: vi.fn().mockImplementation((component: CIAComponentType, level: SecurityLevel) => ({
       summary: `${level} ${component} business impact summary`,
       reputational: {
         description: `${level} reputational impact`,
@@ -31,7 +33,7 @@ vi.mock("../../services/ciaContentService", () => ({
     })),
     getTechnicalImplementation: vi
       .fn()
-      .mockImplementation((component, level) => ({
+      .mockImplementation((component: CIAComponentType, level: SecurityLevel) => ({
         description: `${level} technical implementation`,
         implementationSteps: [
           `Step 1 for ${component} at ${level} level`,
@@ -49,7 +51,7 @@ vi.mock("../../services/ciaContentService", () => ({
       })),
     getRecommendations: vi
       .fn()
-      .mockImplementation((component, level) => [
+      .mockImplementation((component: CIAComponentType, level: SecurityLevel) => [
         `${level} recommendation 1`,
         `${level} recommendation 2`,
         `${level} recommendation 3`,
@@ -57,12 +59,13 @@ vi.mock("../../services/ciaContentService", () => ({
       ]),
     calculateBusinessImpactLevel: vi.fn().mockReturnValue("Moderate"),
   },
-  getInformationSensitivity: vi.fn().mockImplementation((level) => {
+  // Fix: Export these as named exports instead of method calls
+  getInformationSensitivity: vi.fn().mockImplementation((level: SecurityLevel) => {
     switch (level) {
       case "None":
-        return "Public Data"; // Fix to match actual implementation
+        return "Public Data";
       case "Low":
-        return "Internal Use"; // Fix to match actual implementation
+        return "Internal Use";
       case "Moderate":
         return "Confidential";
       case "High":
@@ -73,12 +76,12 @@ vi.mock("../../services/ciaContentService", () => ({
         return "Unknown";
     }
   }),
-  getProtectionLevel: vi.fn().mockImplementation((level) => {
+  getProtectionLevel: vi.fn().mockImplementation((level: SecurityLevel) => {
     switch (level) {
       case "None":
-        return "No Protection"; // Fix to match actual implementation (capitalization)
+        return "No Protection";
       case "Low":
-        return "Basic Protection"; // Fix to match actual implementation
+        return "Basic Protection";
       case "Moderate":
         return "Standard Protection";
       case "High":
@@ -99,68 +102,62 @@ describe("ConfidentialityImpactWidget", () => {
   };
 
   it("renders without crashing", () => {
-    render(<ConfidentialityImpactWidget 
-      confidentialityLevel="Moderate" 
-      availabilityLevel="Moderate" 
-      integrityLevel="Moderate" 
-    />);
+    render(<ConfidentialityImpactWidget {...defaultProps} />);
     expect(screen.getByText(/confidentiality/i, { exact: false })).toBeInTheDocument();
   });
 
   it("displays confidentiality description", () => {
     render(<ConfidentialityImpactWidget 
+      {...defaultProps} 
       confidentialityLevel="High" 
-      availabilityLevel="Moderate" 
-      integrityLevel="Moderate" 
     />);
     expect(screen.getByText(/confidentiality/i, { exact: false })).toBeInTheDocument();
   });
 
   it("displays protection method when available", () => {
     render(<ConfidentialityImpactWidget 
+      {...defaultProps}
       confidentialityLevel="High" 
-      availabilityLevel="Moderate" 
-      integrityLevel="Moderate" 
     />);
     // Check for protection-related text
     expect(screen.getByText(/protection/i, { exact: false })).toBeInTheDocument();
   });
 
   it("doesn't display protection method when not available", () => {
-    // Mock the service to return incomplete data
-    vi.mock("../../services/ciaContentService", () => ({
-      default: {
-        getConfidentialityDetail: () => ({
-          description: "Test description",
-          impact: "Test impact",
-          recommendations: []
-        })
-      }
+    // Fix: Use a different mock implementation that doesn't redefine the entire module
+    const originalGetComponentDetails = vi.mocked(
+      require("../../services/ciaContentService").default.getComponentDetails
+    );
+    const mockImplementation = originalGetComponentDetails.getMockImplementation();
+    
+    // Override for just this test - fix by adding proper type annotations
+    originalGetComponentDetails.mockImplementation((component: CIAComponentType, level: SecurityLevel) => ({
+      description: "Test description",
+      impact: "Test impact",
+      recommendations: []
     }));
     
     render(<ConfidentialityImpactWidget 
+      {...defaultProps}
       confidentialityLevel="None" 
-      availabilityLevel="None" 
-      integrityLevel="None" 
     />);
+    
     // Should still render without crashing
     expect(screen.getByText(/confidentiality/i, { exact: false })).toBeInTheDocument();
+    
+    // Restore the original implementation
+    originalGetComponentDetails.mockImplementation(mockImplementation);
   });
 
   it("shows business impact information", () => {
-    render(<ConfidentialityImpactWidget 
-      confidentialityLevel="Moderate" 
-      availabilityLevel="Moderate" 
-      integrityLevel="Moderate" 
-    />);
+    render(<ConfidentialityImpactWidget {...defaultProps} />);
     expect(screen.getByText(/impact/i, { exact: false })).toBeInTheDocument();
   });
 
   it("displays technical implementation details", () => {
     render(<ConfidentialityImpactWidget 
+      {...defaultProps}
       confidentialityLevel="High" 
-      availabilityLevel="Moderate" 
-      integrityLevel="Moderate" 
     />);
     // Check for technical-related text
     expect(screen.getByText(/technical/i, { exact: false })).toBeInTheDocument();
@@ -168,9 +165,8 @@ describe("ConfidentialityImpactWidget", () => {
 
   it("displays data protection classification", () => {
     render(<ConfidentialityImpactWidget 
+      {...defaultProps}
       confidentialityLevel="Very High" 
-      availabilityLevel="High" 
-      integrityLevel="High" 
     />);
     // Check for data protection text
     expect(screen.getByText(/protection/i, { exact: false })).toBeInTheDocument();
@@ -178,9 +174,8 @@ describe("ConfidentialityImpactWidget", () => {
 
   it("shows more recommendations when toggle is clicked", async () => {
     render(<ConfidentialityImpactWidget 
+      {...defaultProps}
       confidentialityLevel="High" 
-      availabilityLevel="Moderate" 
-      integrityLevel="Moderate" 
     />);
     
     // Find recommendations section
@@ -189,27 +184,27 @@ describe("ConfidentialityImpactWidget", () => {
   });
 
   it("handles error state when details not available", () => {
-    // Mock service to return null details
-    vi.mock("../../services/ciaContentService", () => ({
-      default: {
-        getConfidentialityDetail: () => null
-      }
-    }));
+    // Fix: Use a different approach to mock the return value for this specific test
+    const originalGetComponentDetails = vi.mocked(
+      require("../../services/ciaContentService").default.getComponentDetails
+    );
+    const mockImplementation = originalGetComponentDetails.getMockImplementation();
     
-    render(<ConfidentialityImpactWidget 
-      confidentialityLevel="Moderate" 
-      availabilityLevel="Moderate" 
-      integrityLevel="Moderate" 
-    />);
+    // Override to return null for this test
+    originalGetComponentDetails.mockReturnValueOnce(null);
+    
+    render(<ConfidentialityImpactWidget {...defaultProps} />);
+    
     // Should render without crashing
     expect(screen.getByText(/confidentiality/i, { exact: false })).toBeInTheDocument();
+    
+    // Restore the original mock implementation
+    originalGetComponentDetails.mockImplementation(mockImplementation);
   });
 
   it("accepts custom testId prop", () => {
     render(<ConfidentialityImpactWidget 
-      confidentialityLevel="Moderate" 
-      availabilityLevel="Moderate" 
-      integrityLevel="Moderate" 
+      {...defaultProps}
       testId="custom-test-id" 
     />);
     expect(screen.getByTestId("custom-test-id")).toBeInTheDocument();

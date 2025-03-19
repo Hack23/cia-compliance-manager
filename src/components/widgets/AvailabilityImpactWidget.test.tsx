@@ -88,8 +88,8 @@ describe("AvailabilityImpactWidget", () => {
   };
 
   it("renders without crashing", () => {
-    render(<AvailabilityImpactWidget availabilityLevel="Moderate" />);
-    expect(screen.getByText(/availability/i)).toBeInTheDocument();
+    render(<AvailabilityImpactWidget {...defaultProps} />);
+    expect(screen.getByText(/availability/i, { exact: false })).toBeInTheDocument();
   });
 
   it("displays availability description from ciaContentService", () => {
@@ -129,17 +129,29 @@ describe("AvailabilityImpactWidget", () => {
   });
 
   it("renders with different availability levels", () => {
-    const { rerender } = render(<AvailabilityImpactWidget availabilityLevel="Low" />);
+    const { rerender } = render(<AvailabilityImpactWidget 
+      availabilityLevel="Low"
+      integrityLevel="Moderate"
+      confidentialityLevel="Moderate"
+    />);
     expect(screen.getByText(/low/i, { exact: false })).toBeInTheDocument();
     
     // Rerender with different level
-    rerender(<AvailabilityImpactWidget availabilityLevel="High" />);
+    rerender(<AvailabilityImpactWidget 
+      availabilityLevel="High"
+      integrityLevel="Moderate"
+      confidentialityLevel="Moderate"
+    />);
     expect(screen.getByText(/high/i, { exact: false })).toBeInTheDocument();
   });
 
   it("handles unknown level gracefully", () => {
-    // @ts-ignore - Testing invalid prop
-    render(<AvailabilityImpactWidget availabilityLevel="Invalid" />);
+    // Instead of using an invalid string directly with @ts-ignore, use Unknown as SecurityLevel
+    render(<AvailabilityImpactWidget 
+      availabilityLevel={"Unknown" as SecurityLevel}
+      integrityLevel="Moderate"
+      confidentialityLevel="Moderate"
+    />);
     // Should not crash - verify something renders
     expect(screen.getByText(/availability/i)).toBeInTheDocument();
   });

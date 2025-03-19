@@ -65,6 +65,8 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
         integrityLevel="None"
         confidentialityLevel="None"
         onAvailabilityChange={handleChange}
+        onIntegrityChange={vi.fn()}
+        onConfidentialityChange={vi.fn()}
         testId="test-selector"
       />
     );
@@ -85,7 +87,9 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
         availabilityLevel="None"
         integrityLevel="None"
         confidentialityLevel="None"
+        onAvailabilityChange={vi.fn()}
         onIntegrityChange={handleChange}
+        onConfidentialityChange={vi.fn()}
         testId="test-selector"
       />
     );
@@ -106,6 +110,8 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
         availabilityLevel="None"
         integrityLevel="None"
         confidentialityLevel="None"
+        onAvailabilityChange={vi.fn()}
+        onIntegrityChange={vi.fn()}
         onConfidentialityChange={handleChange}
         testId="test-selector"
       />
@@ -126,6 +132,8 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
         integrityLevel="Moderate"
         confidentialityLevel="High"
         onAvailabilityChange={vi.fn()}
+        onIntegrityChange={vi.fn()}
+        onConfidentialityChange={vi.fn()}
         testId="test-selector"
       />
     );
@@ -147,6 +155,9 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
         availabilityLevel="Moderate"
         integrityLevel="Moderate"
         confidentialityLevel="Moderate"
+        onAvailabilityChange={vi.fn()}
+        onIntegrityChange={vi.fn()}
+        onConfidentialityChange={vi.fn()}
         testId="test-selector"
       />
     );
@@ -167,6 +178,9 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
         availabilityLevel="Low"
         integrityLevel="Moderate"
         confidentialityLevel="High"
+        onAvailabilityChange={vi.fn()}
+        onIntegrityChange={vi.fn()}
+        onConfidentialityChange={vi.fn()}
         compact={true} // Enable compact mode for mobile
         testId="test-selector"
       />
@@ -182,6 +196,9 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
         availabilityLevel="Low"
         integrityLevel="Moderate"
         confidentialityLevel="High"
+        onAvailabilityChange={vi.fn()}
+        onIntegrityChange={vi.fn()}
+        onConfidentialityChange={vi.fn()}
         testId="test-selector"
       />
     );
