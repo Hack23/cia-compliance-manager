@@ -25,6 +25,11 @@ interface WithSecurityLevelProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
+  
+  // Optional handlers for changes
+  onAvailabilityChange?: (level: SecurityLevel) => void;
+  onIntegrityChange?: (level: SecurityLevel) => void;
+  onConfidentialityChange?: (level: SecurityLevel) => void;
 }
 ```
 
@@ -54,7 +59,8 @@ This standardization provides:
 
 When creating new widgets that deal with security levels:
 
-1. Use the `WithSecurityLevelProps` interface for props
-2. Apply the `withSecurityLevelState` HOC for state management
+1. Use the `SecurityWidgetProps` type from `types/widget-props.ts` for props
+2. Apply the `withSecurityLevelState` HOC for state management or use the `useSecurityLevelSync` hook
 3. Use the standardized components like `SecurityLevelBadge` for UI representation
 4. Ensure proper prop drilling of all security levels, not just the primary one for the widget
+5. Always handle prop changes correctly by synchronizing local state
