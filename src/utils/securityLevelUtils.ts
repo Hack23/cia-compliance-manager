@@ -21,51 +21,111 @@ import { SecurityLevel } from "../types/cia";
  */
 
 /**
- * Normalizes a security level string to ensure it's a valid SecurityLevel value
- * @param level The input security level string
+ * Default security level used throughout the application
+ */
+export const DEFAULT_SECURITY_LEVEL: SecurityLevel = "Moderate";
+
+/**
+ * Maps security levels to numeric values
+ * 
+ * @param level - Security level
+ * @returns Numeric value from 0 (None) to 4 (Very High)
+ */
+export function getSecurityLevelValue(level: SecurityLevel | string): number {
+  // Handle both SecurityLevel type and string type
+  const securityLevel = typeof level === 'string' ? level as SecurityLevel : level;
+
+  switch (securityLevel) {
+    case 'None':
+      return 0;
+    case 'Low':
+      return 1;
+    case 'Moderate':
+      return 2;
+    case 'High':
+      return 3;
+    case 'Very High':
+      return 4;
+    default:
+      console.warn(`Invalid security level: ${level}, defaulting to Moderate (2)`);
+      return 2; // Default to Moderate if invalid
+  }
+}
+
+/**
+ * Maps numeric values to security levels
+ * 
+ * @param value - Numeric value (0-4)
+ * @returns The corresponding security level
+ */
+export function getSecurityLevelFromValue(value: number): SecurityLevel {
+  const levels: SecurityLevel[] = ["None", "Low", "Moderate", "High", "Very High"];
+  return levels[value] || "None";
+}
+
+/**
+ * Converts a security level to a risk level
+ * 
+ * @param level - Security level
+ * @returns Risk level string
+ */
+export function getRiskLevelFromSecurityLevel(level: SecurityLevel): string {
+  const mapping: Record<SecurityLevel, string> = {
+    "None": "Critical",
+    "Low": "High",
+    "Moderate": "Medium",
+    "High": "Low",
+    "Very High": "Minimal"
+  };
+  return mapping[level] || "Unknown";
+}
+
+/**
+ * Calculates the overall security level based on individual CIA components
+ * 
+ * @param availabilityLevel - Availability level
+ * @param integrityLevel - Integrity level
+ * @param confidentialityLevel - Confidentiality level 
+ * @returns The overall security level
+ */
+export function calculateOverallSecurityLevel(
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel
+): SecurityLevel {
+  const aValue = getSecurityLevelValue(availabilityLevel);
+  const iValue = getSecurityLevelValue(integrityLevel);
+  const cValue = getSecurityLevelValue(confidentialityLevel);
+
+  const avgValue = Math.round((aValue + iValue + cValue) / 3);
+
+  return getSecurityLevelFromValue(avgValue);
+}
+
+/**
+ * Normalize a string value to a valid SecurityLevel
+ * 
+ * @param level - A string that might be a security level
  * @returns A valid SecurityLevel
  */
 export function normalizeSecurityLevel(level?: string): SecurityLevel {
-  if (!level) return SECURITY_LEVELS.NONE as SecurityLevel;
+  if (!level) return DEFAULT_SECURITY_LEVEL;
 
-  // Check direct match first
-  if (Object.values(SECURITY_LEVELS).includes(level as any)) {
+  const validLevels: SecurityLevel[] = ["None", "Low", "Moderate", "High", "Very High"];
+
+  // Try direct match
+  if (validLevels.includes(level as SecurityLevel)) {
     return level as SecurityLevel;
   }
 
   // Try case-insensitive match
-  const normalizedLevel = level.toLowerCase();
-  for (const validLevel of Object.values(SECURITY_LEVELS)) {
-    if (normalizedLevel === validLevel.toLowerCase()) {
-      return validLevel as SecurityLevel;
-    }
+  const normalized = level.charAt(0).toUpperCase() + level.slice(1).toLowerCase();
+  if (validLevels.includes(normalized as SecurityLevel)) {
+    return normalized as SecurityLevel;
   }
 
-  // Default fallback
-  return SECURITY_LEVELS.NONE as SecurityLevel;
-}
-
-/**
- * Gets a numerical value for a security level for calculations
- * @param level The security level string
- * @returns A number from 0 (None) to 4 (Very High)
- */
-export function getSecurityLevelValue(level: SecurityLevel | string): number {
-  const normalizedLevel = normalizeSecurityLevel(level as SecurityLevel);
-
-  switch (normalizedLevel) {
-    case "Very High":
-      return 4;
-    case "High":
-      return 3;
-    case "Moderate":
-      return 2;
-    case "Low":
-      return 1;
-    case "None":
-    default:
-      return 0;
-  }
+  // Default to moderate if no match
+  return DEFAULT_SECURITY_LEVEL;
 }
 
 /**
@@ -126,43 +186,6 @@ export function getSecurityLevelBadgeVariant(
     default:
       return "neutral";
   }
-}
-
-/**
- * Calculate the overall security level based on confidentiality, integrity, and availability levels
- *
- * @param availabilityLevel - The availability security level
- * @param integrityLevel - The integrity security level
- * @param confidentialityLevel - The confidentiality security level
- * @returns The calculated overall security level
- */
-export function calculateOverallSecurityLevel(
-  availabilityLevel: SecurityLevel,
-  integrityLevel: SecurityLevel,
-  confidentialityLevel: SecurityLevel
-): SecurityLevel {
-  const levels = [availabilityLevel, integrityLevel, confidentialityLevel];
-  const valueMap: Record<SecurityLevel, number> = {
-    None: 0,
-    Low: 1,
-    Moderate: 2,
-    High: 3,
-    "Very High": 4,
-  };
-
-  // Calculate average security level value, rounded down
-  const sum = levels.reduce((acc, level) => acc + valueMap[level], 0);
-  const avg = Math.floor(sum / 3);
-
-  // Convert back to SecurityLevel
-  const securityLevels: SecurityLevel[] = [
-    "None",
-    "Low",
-    "Moderate",
-    "High",
-    "Very High",
-  ];
-  return securityLevels[avg];
 }
 
 /**

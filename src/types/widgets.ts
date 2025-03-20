@@ -1,5 +1,7 @@
+import { ReactNode } from "react";
 import { SecurityLevel } from "./cia";
 import { BusinessImpactDetails, CIADetails, ROIEstimate, TechnicalImplementationDetails } from "./cia-services";
+import { CommonWidgetProps, WithSecurityLevelProps } from "./widget-props";
 
 /**
  * Widget-specific interfaces that extend or use the core CIA types
@@ -11,6 +13,64 @@ import { BusinessImpactDetails, CIADetails, ROIEstimate, TechnicalImplementation
  */
 
 /**
+ * Base widget props shared by all widgets
+ */
+export interface BaseWidgetProps extends CommonWidgetProps {
+  /**
+   * Optional children elements
+   */
+  children?: ReactNode;
+}
+
+/**
+ * Props for security-related widgets
+ */
+export interface SecurityWidgetBaseProps extends WithSecurityLevelProps, BaseWidgetProps { }
+
+/**
+ * Props for widgets that display security summaries
+ */
+export interface SecuritySummaryWidgetProps extends SecurityWidgetBaseProps {
+  /**
+   * Optional overall security level
+   */
+  securityLevel?: SecurityLevel;
+}
+
+/**
+ * Props for widgets that display security impacts
+ */
+export interface SecurityImpactWidgetProps extends SecurityWidgetBaseProps {
+  /**
+   * Optional level (for backward compatibility)
+   */
+  level?: SecurityLevel;
+}
+
+/**
+ * Props for widgets that display business impacts
+ */
+export interface BusinessImpactWidgetProps extends SecurityWidgetBaseProps {
+  /**
+   * Optional ROI information
+   */
+  roi?: {
+    value: string;
+    description: string;
+  };
+}
+
+/**
+ * Props for widgets that display compliance status
+ */
+export interface ComplianceWidgetProps extends SecurityWidgetBaseProps {
+  /**
+   * Optional refresh trigger to reload data
+   */
+  refreshTrigger?: number;
+}
+
+/**
  * Base props for all widgets
  */
 export interface WidgetBaseProps {
@@ -18,12 +78,12 @@ export interface WidgetBaseProps {
    * Optional CSS class name
    */
   className?: string;
-  
+
   /**
    * Optional test ID for testing
    */
   testId?: string;
-  
+
   /**
    * Optional security level for widgets that only need one level
    */
@@ -76,12 +136,12 @@ export interface ComplianceStatusWidgetProps extends WidgetBaseProps {
    * Availability security level
    */
   availabilityLevel?: SecurityLevel;
-  
+
   /**
    * Integrity security level
    */
   integrityLevel?: SecurityLevel;
-  
+
   /**
    * Confidentiality security level
    */
@@ -172,12 +232,12 @@ export interface CIAImpactSummaryWidgetProps extends SecurityLevelWidgetProps {
 export interface AvailabilityImpactWidgetProps extends WidgetBaseProps {
   // Keep level for backward compatibility
   level?: SecurityLevel;
-  
+
   // New unified properties
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
-  
+
   onLevelChange?: (level: SecurityLevel) => void;
 }
 
@@ -187,12 +247,12 @@ export interface AvailabilityImpactWidgetProps extends WidgetBaseProps {
 export interface IntegrityImpactWidgetProps extends WidgetBaseProps {
   // Keep level for backward compatibility
   level?: SecurityLevel;
-  
+
   // New unified properties
   integrityLevel: SecurityLevel;
   availabilityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
-  
+
   onLevelChange?: (level: SecurityLevel) => void;
 }
 
@@ -202,12 +262,12 @@ export interface IntegrityImpactWidgetProps extends WidgetBaseProps {
 export interface ConfidentialityImpactWidgetProps extends WidgetBaseProps {
   // Keep level for backward compatibility
   level?: SecurityLevel;
-  
+
   // New unified properties
   confidentialityLevel: SecurityLevel;
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
-  
+
   onLevelChange?: (level: SecurityLevel) => void;
 }
 

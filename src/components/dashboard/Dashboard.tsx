@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { WIDGET_ICONS } from "../../constants/appConstants";
 import { APP_TEST_IDS, createDynamicTestId } from "../../constants/testIds";
 import {
@@ -26,6 +26,9 @@ interface DashboardProps {
   className?: string;
   compact?: boolean;
   showBorders?: boolean;
+  onAvailabilityChange?: (level: SecurityLevel) => void;
+  onIntegrityChange?: (level: SecurityLevel) => void;
+  onConfidentialityChange?: (level: SecurityLevel) => void;
 }
 
 const Dashboard: React.FC<DashboardProps> = ({
@@ -40,7 +43,28 @@ const Dashboard: React.FC<DashboardProps> = ({
   className = "",
   compact = false,
   showBorders = true,
+  onAvailabilityChange,
+  onIntegrityChange,
+  onConfidentialityChange,
 }) => {
+  // Add state for security levels
+  const [availabilityLevel, setAvailabilityLevel] = useState<SecurityLevel>(availability);
+  const [integrityLevel, setIntegrityLevel] = useState<SecurityLevel>(integrity);
+  const [confidentialityLevel, setConfidentialityLevel] = useState<SecurityLevel>(confidentiality);
+
+  // Sync state with props
+  useEffect(() => {
+    setAvailabilityLevel(availability);
+  }, [availability]);
+
+  useEffect(() => {
+    setIntegrityLevel(integrity);
+  }, [integrity]);
+
+  useEffect(() => {
+    setConfidentialityLevel(confidentiality);
+  }, [confidentiality]);
+
   // Add debug logging for security levels
   useEffect(() => {
     console.log("Dashboard security levels:", { availability, integrity, confidentiality });
@@ -72,6 +96,22 @@ const Dashboard: React.FC<DashboardProps> = ({
     availabilityLevel: availability,
     integrityLevel: integrity,
     confidentialityLevel: confidentiality,
+    // Add handlers that propagate through the registry
+    onAvailabilityChange: (level: SecurityLevel) => {
+      console.log("Dashboard: availability changed to", level);
+      setAvailabilityLevel(level);
+      onAvailabilityChange?.(level);
+    },
+    onIntegrityChange: (level: SecurityLevel) => {
+      console.log("Dashboard: integrity changed to", level);
+      setIntegrityLevel(level);
+      onIntegrityChange?.(level);
+    },
+    onConfidentialityChange: (level: SecurityLevel) => {
+      console.log("Dashboard: confidentiality changed to", level);
+      setConfidentialityLevel(level);
+      onConfidentialityChange?.(level);
+    }
   };
 
   // Props for each registered widget
@@ -95,14 +135,37 @@ const Dashboard: React.FC<DashboardProps> = ({
     ...impactWidgetProps,
   };
 
+  // Create handlers for level changes
+  const handleAvailabilityChange = (level: SecurityLevel) => {
+    setAvailabilityLevel(level);
+    onAvailabilityChange?.(level);
+  };
+
+  const handleIntegrityChange = (level: SecurityLevel) => {
+    setIntegrityLevel(level);
+    onIntegrityChange?.(level);
+  };
+
+  const handleConfidentialityChange = (level: SecurityLevel) => {
+    setConfidentialityLevel(level);
+    onConfidentialityChange?.(level);
+  };
+
+  // Create security level change handlers
+  const securityLevelHandlers = {
+    onAvailabilityChange: handleAvailabilityChange,
+    onIntegrityChange: handleIntegrityChange,
+    onConfidentialityChange: handleConfidentialityChange
+  };
+
   return (
     <div
       className={`dashboard-grid ${gridClasses} ${className}`}
       data-testid={APP_TEST_IDS.DASHBOARD_GRID}
     >
       {useRegistry
-        ? // Make sure this correctly calls renderWidgets from the widget registry
-          widgetRegistry.renderWidgets(
+        ? // Use the new method with handlers
+          widgetRegistry.renderWidgetsWithHandlers(
             widget => true, 
             {
               'security-summary': widgetProps,
@@ -117,12 +180,16 @@ const Dashboard: React.FC<DashboardProps> = ({
               'technical-details': widgetProps,
               'business-impact': widgetProps,
               'security-resources': widgetProps,
-            }
+            },
+            securityLevelHandlers
           )
-        : // Otherwise render children directly
+        : // Otherwise clone children with props and handlers
           React.Children.map(children, (child) => {
             if (!React.isValidElement(child)) return null;
-            return React.cloneElement(child, widgetProps);
+            return React.cloneElement(child, {
+              ...widgetProps,
+              ...securityLevelHandlers
+            });
           })}
 
       {/* Only include TechnicalDetailsWidget when not using registry and props are available */}

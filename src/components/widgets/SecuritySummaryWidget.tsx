@@ -1,630 +1,383 @@
-import React, { useMemo, useState } from "react";
-import { SUMMARY_TEST_IDS } from "../../constants/testIds";
-import withSecurityLevelState from '../../hoc/withSecurityLevelState';
+import React, { useMemo } from "react";
+import { WIDGET_ICONS, WIDGET_TITLES } from "../../constants/appConstants";
+import withSecurityLevelState from "../../hoc/withSecurityLevelState";
 import { useCIAContentService } from "../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../types/cia";
-import { getRiskLevelFromSecurityLevel } from "../../utils";
-import { getSecurityLevelValue } from "../../utils/levelValuesUtils";
-import { KeyValuePair } from "../common/KeyValuePair";
-import RiskAssessment from "../common/RiskAssessment";
-import { SecurityLevelSummaryItem } from "../common/SecurityLevelSummaryItem";
-import { SecurityRiskScore } from "../common/SecurityRiskScore";
+import { SecurityWidgetProps } from "../../types/widget-props";
+import { calculateOverallSecurityLevel, getSecurityLevelValue } from "../../utils/securityLevelUtils";
+import SecurityLevelBadge from "../common/SecurityLevelBadge";
 import StatusBadge from "../common/StatusBadge";
 import WidgetContainer from "../common/WidgetContainer";
 
-// Constants for colors, icons and labels
-const CIA_COMPONENT_COLORS = {
-  AVAILABILITY: { PRIMARY: "#3498db" },
-  INTEGRITY: { PRIMARY: "#2ecc71" },
-  CONFIDENTIALITY: { PRIMARY: "#9b59b6" }
-};
-
-const CIA_COMPONENT_ICONS = {
-  AVAILABILITY: "⏱️",
-  INTEGRITY: "✅",
-  CONFIDENTIALITY: "🔒"
-};
-
-const CIA_LABELS = {
-  AVAILABILITY: "Availability",
-  INTEGRITY: "Integrity",
-  CONFIDENTIALITY: "Confidentiality"
-};
-
-// Security recommendations by level
-const SECURITY_RECOMMENDATIONS = {
-  NONE: "Immediate Security Upgrade Required",
-  LOW: "Basic Security Enhancement Recommended",
-  MODERATE: "Standard Security Maintenance",
-  HIGH: "Advanced Security Optimization",
-  VERY_HIGH: "Maximum Security Maintained",
-  BASIC: "Basic Security Controls Recommended"
-};
-
-interface SecuritySummaryWidgetProps {
-  className?: string;
-  testId?: string;
-  availabilityLevel?: SecurityLevel;
-  integrityLevel?: SecurityLevel;
-  confidentialityLevel?: SecurityLevel;
+/**
+ * SecuritySummaryWidget props extend SecurityWidgetProps
+ */
+export interface SecuritySummaryWidgetProps extends SecurityWidgetProps {
+  /**
+   * Optional overall security level
+   */
   securityLevel?: SecurityLevel;
 }
 
 /**
- * Displays a summary of the selected security levels and their impacts
+ * Displays a summary of all security levels and overall security posture
  * 
  * ## Business Perspective
  * 
- * This widget provides executives and security officers with a consolidated view
- * of the organization's security posture across the CIA triad. The high-level metrics
- * support quick assessment and reporting for stakeholder communications. 📊
+ * This widget provides an at-a-glance view of the organization's security posture 
+ * across the CIA triad, helping security officers and executives quickly understand
+ * their current security stance and identify areas that need attention. 📊
+ * 
+ * The calculated compliance and risk metrics help align technical security controls
+ * with business and regulatory requirements. 💼
  */
-export function SecuritySummaryWidget({
+const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
+  availabilityLevel,
+  integrityLevel,
+  confidentialityLevel,
   className = "",
   testId = "security-summary-widget",
-  availabilityLevel = "Moderate" as SecurityLevel,
-  integrityLevel = "Moderate" as SecurityLevel,
-  confidentialityLevel = "Moderate" as SecurityLevel,
-  securityLevel,
-}: SecuritySummaryWidgetProps): React.ReactElement {
+}) => {
+  // Use the content service for CIA security details
   const { ciaContentService } = useCIAContentService();
-  const [showMetrics, setShowMetrics] = useState(false);
-  const [showTechnicalDetails, setShowTechnicalDetails] = useState(false);
-  const [showBusinessImpact, setShowBusinessImpact] = useState(false);
   
-  // Get details for availability only
-  const availabilityDetails = useMemo(
-    () => ciaContentService.getComponentDetails("availability", availabilityLevel),
-    [availabilityLevel, ciaContentService]
-  );
+  // Calculate overall security level
+  const overallSecurityLevel = useMemo(() => {
+    return calculateOverallSecurityLevel(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Calculate overall security level if not provided
-  const overallSecurityLevel = useMemo((): SecurityLevel => {
-    if (securityLevel) return securityLevel;
-    // Use a default implementation if the method doesn't exist
-    if (!ciaContentService.calculateBusinessImpactLevel) {
-      // Simple implementation matching what's in businessImpactService
-      const levels = [availabilityLevel, integrityLevel, confidentialityLevel];
-      const values = levels.map(level => {
-        switch (level) {
-          case "None": return 0;
-          case "Low": return 1;
-          case "Moderate": return 2;
-          case "High": return 3;
-          case "Very High": return 4;
-          default: return 0;
-        }
-      });
-      const avg = values.reduce((a: number, b: number) => a + b, 0) / values.length;
-      const roundedAvg = Math.round(avg);
+  // Calculate a normalized security score (0-100)
+  const securityScore = useMemo(() => {
+    const availabilityValue = getSecurityLevelValue(availabilityLevel);
+    const integrityValue = getSecurityLevelValue(integrityLevel);
+    const confidentialityValue = getSecurityLevelValue(confidentialityLevel);
+    
+    const totalValue = availabilityValue + integrityValue + confidentialityValue;
+    const maxPossibleValue = 12; // 3 components × max value of 4
+    return Math.round((totalValue / maxPossibleValue) * 100);
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
+
+  // Get compliance status based on security levels
+  const complianceStatus = useMemo(() => {
+    try {
+      // Get compliance status from the service if available
+      const service = ciaContentService?.getComplianceStatus?.(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      );
       
-      switch (roundedAvg) {
-        case 0: return "None";
-        case 1: return "Low";
-        case 2: return "Moderate";
-        case 3: return "High";
-        case 4: return "Very High";
-        default: return "Moderate";
+      if (service) {
+        return service;
       }
+
+      // Fallback logic if service isn't available
+      if (securityScore >= 75) {
+        return "Compliant with major frameworks";
+      } else if (securityScore >= 50) {
+        return "Partially compliant";
+      } else {
+        return "Non-compliant with most frameworks";
+      }
+    } catch (error) {
+      console.error("Error determining compliance status:", error);
+      return "Compliance status unavailable";
     }
-    // Cast the returned string to SecurityLevel type
-    return ciaContentService.calculateBusinessImpactLevel(
-      availabilityLevel,
-      integrityLevel,
-      confidentialityLevel
-    ) as SecurityLevel;
-  }, [availabilityLevel, integrityLevel, confidentialityLevel, ciaContentService, securityLevel]);
+  }, [ciaContentService, availabilityLevel, integrityLevel, confidentialityLevel, securityScore]);
 
-  // Calculate the overall business impact
-  const businessImpactLevel = useMemo(() => {
-    // Get the minimum security level across all three components
-    // as it represents the weakest link in the security chain
-    const securityLevels = [availabilityLevel, integrityLevel, confidentialityLevel];
-    const levelValues = { None: 0, Low: 1, Moderate: 2, High: 3, "Very High": 4 };
-    
-    // Find the minimum level
-    const minLevelValue = Math.min(
-      levelValues[availabilityLevel], 
-      levelValues[integrityLevel], 
-      levelValues[confidentialityLevel]
-    );
-    
-    // Map back to a SecurityLevel
-    const minLevel = Object.keys(levelValues).find(
-      key => levelValues[key as SecurityLevel] === minLevelValue
-    ) as SecurityLevel;
-    
-    // Calculate business impact based on this minimum level
-    return ciaContentService.calculateBusinessImpactLevel(
-      availabilityLevel,
-      integrityLevel,
-      confidentialityLevel
-    );
-  }, [availabilityLevel, integrityLevel, confidentialityLevel, ciaContentService]);
+  // Determine risk status based on security score
+  const riskStatus = useMemo(() => {
+    if (securityScore >= 80) return "Low Risk";
+    if (securityScore >= 60) return "Moderate Risk";
+    if (securityScore >= 40) return "Elevated Risk";
+    if (securityScore >= 20) return "High Risk";
+    return "Critical Risk";
+  }, [securityScore]);
 
-  // Get security description
-  const securityDescription = useMemo(() => {
-    return ciaContentService.getSecurityLevelDescription(overallSecurityLevel);
-  }, [overallSecurityLevel, ciaContentService]);
+  // Determine compliance badge status
+  const complianceBadgeStatus = useMemo(() => {
+    if (securityScore >= 75) return "success";
+    if (securityScore >= 50) return "warning";
+    return "error";
+  }, [securityScore]);
 
-  // Get ROI estimates
-  const roiData = useMemo(() => {
-    return ciaContentService.getROIEstimates(overallSecurityLevel);
-  }, [overallSecurityLevel, ciaContentService]);
-
-  // Return Rate - handle missing property with default
-  const roiValue = useMemo(() => {
-    return roiData?.returnRate || roiData?.value || "N/A";
-  }, [roiData]);
-
-  // Technical descriptions for each component
-  const availabilityTechDescription = useMemo(() => 
-    ciaContentService.getTechnicalDescription("availability", availabilityLevel),
-    [availabilityLevel, ciaContentService]
-  );
-
-  const integrityTechDescription = useMemo(() => 
-    ciaContentService.getTechnicalDescription("integrity", integrityLevel),
-    [integrityLevel, ciaContentService]
-  );
-
-  const confidentialityTechDescription = useMemo(() => 
-    ciaContentService.getTechnicalDescription("confidentiality", confidentialityLevel),
-    [confidentialityLevel, ciaContentService]
-  );
-
-  // Business impact descriptions for each component
-  const availabilityBusinessImpact = useMemo(() => 
-    ciaContentService.getBusinessImpactDescription("availability", availabilityLevel),
-    [availabilityLevel, ciaContentService]
-  );
-
-  const integrityBusinessImpact = useMemo(() => 
-    ciaContentService.getBusinessImpactDescription("integrity", integrityLevel),
-    [integrityLevel, ciaContentService]
-  );
-
-  const confidentialityBusinessImpact = useMemo(() => 
-    ciaContentService.getBusinessImpactDescription("confidentiality", confidentialityLevel),
-    [confidentialityLevel, ciaContentService]
-  );
-
-  // Get security icon
-  const securityIcon = useMemo(() => 
-    ciaContentService.getSecurityIcon?.(overallSecurityLevel) || "🔒",
-    [overallSecurityLevel, ciaContentService]
-  );
-  
-  // Get badge variant for security level
-  const getSecurityLevelBadgeVariant = (level: SecurityLevel): "success" | "warning" | "error" | "info" | "neutral" => {
-    switch (level) {
-      case "None":
-        return "error";
-      case "Low":
-        return "warning";
-      case "Moderate":
-        return "info";
-      case "High":
-        return "success";
-      case "Very High":
-        return "success";
-      default:
-        return "neutral";
-    }
-  };
-
-  // Get recommendations for the security level
-  const recommendations = useMemo(() => {
-    if (!ciaContentService.getRecommendations) return [];
-    return ciaContentService.getRecommendations("confidentiality", overallSecurityLevel) || [];
-  }, [overallSecurityLevel, ciaContentService]);
-
-  // Calculate security score
-  const securityScore = useMemo(() => 
-    getSecurityLevelValue(overallSecurityLevel) * 25,
-    [overallSecurityLevel]
-  );
-
-  // Calculate risk level
-  const riskLevel = useMemo(() => {
-    return getRiskLevelFromSecurityLevel(overallSecurityLevel);
-  }, [overallSecurityLevel]);
+  // Determine risk badge status
+  const riskBadgeStatus = useMemo(() => {
+    if (securityScore >= 80) return "success";
+    if (securityScore >= 60) return "info";
+    if (securityScore >= 40) return "warning";
+    return "error";
+  }, [securityScore]);
 
   return (
     <WidgetContainer
-      title="Security Summary"
-      icon="🔒"
+      title={WIDGET_TITLES.SECURITY_SUMMARY}
+      icon={WIDGET_ICONS.SECURITY_SUMMARY}
       className={className}
       testId={testId}
     >
-      <div className="p-4">
-        <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg shadow-sm border">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center space-x-4">
-              <div className="flex-shrink-0">
-                <span
-                  className="text-3xl"
-                  data-testid={SUMMARY_TEST_IDS.SECURITY_ICON}
-                  role="img"
-                  aria-label={`Security level: ${overallSecurityLevel}`}
-                >
-                  {securityIcon}
-                </span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold">{overallSecurityLevel} Security</h3>
-                <p
-                  className="text-sm text-gray-600 dark:text-gray-400 mt-1"
-                  data-testid={SUMMARY_TEST_IDS.SECURITY_SUMMARY_DESCRIPTION}
-                >
-                  {securityDescription}
-                </p>
-              </div>
-            </div>
-            <SecurityRiskScore
-              score={securityScore}
-              label={riskLevel}
-              testId={`${testId}-risk-score`}
-            />
-          </div>
-
-          <RiskAssessment
-            securityLevel={overallSecurityLevel}
-            testId={`${testId}-risk-assessment`}
-          />
-          
-          <div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4"
-            data-testid={SUMMARY_TEST_IDS.SUMMARY_CONTAINER}
-          >
-            <SecurityLevelSummaryItem
-              label={CIA_LABELS.AVAILABILITY}
-              value={availabilityLevel}
-              icon={CIA_COMPONENT_ICONS.AVAILABILITY}
-              testId={`${testId}-availability-summary`}
-              color="blue"
-              borderColor={CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY}
-              compact={true}
-            />
-            <SecurityLevelSummaryItem
-              label={CIA_LABELS.INTEGRITY}
-              value={integrityLevel}
-              icon={CIA_COMPONENT_ICONS.INTEGRITY}
-              testId={`${testId}-integrity-summary`}
-              color="green"
-              borderColor={CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY}
-              compact={true}
-            />
-            <SecurityLevelSummaryItem
-              label={CIA_LABELS.CONFIDENTIALITY}
-              value={confidentialityLevel}
-              icon={CIA_COMPONENT_ICONS.CONFIDENTIALITY}
-              testId={`${testId}-confidentiality-summary`}
-              color="purple"
-              borderColor={CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY}
-              compact={true}
-            />
-          </div>
-        </div>
-        
-        {/* ROI Estimate */}
-        <div 
-          className="mt-4 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 p-3 rounded-lg"
-          data-testid={SUMMARY_TEST_IDS.ROI_ESTIMATE_SUMMARY}
-        >
-          <KeyValuePair
-            label="Estimated ROI"
-            value={roiValue}
-            testId={SUMMARY_TEST_IDS.ROI_ESTIMATE_PAIR}
-            valueClassName="text-green-600 dark:text-green-400 text-lg"
-          />
-          {roiData?.description && (
-            <p className="text-sm text-green-700 dark:text-green-400 mt-1">
-              {roiData.description}
+      <div className="p-4 space-y-6">
+        {/* Overall security level display */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div>
+            <h3 className="text-lg font-medium" data-testid="security-summary-title">
+              Overall Security Level
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Based on CIA triad components
             </p>
-          )}
-        </div>
-
-        {/* Toggleable Technical Details Section */}
-        <div className="mt-4">
-          <button
-            onClick={() => setShowTechnicalDetails(!showTechnicalDetails)}
-            className="flex items-center justify-between w-full text-left font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            data-testid={SUMMARY_TEST_IDS.TECHNICAL_SECTION_TOGGLE}
-            aria-expanded={showTechnicalDetails}
-          >
-            <span>Technical Implementation</span>
-            <span
-              className="transition-transform duration-200"
-              style={{
-                transform: showTechnicalDetails ? "rotate(180deg)" : "none",
-              }}
-            >
-              {showTechnicalDetails ? "▲" : "▼"}
-            </span>
-          </button>
-
-          {showTechnicalDetails && (
+          </div>
+          <div className="mt-2 md:mt-0">
             <div
-              className="mt-3 space-y-4 pl-3 border-l-2 border-gray-200 dark:border-gray-700"
-              data-testid={SUMMARY_TEST_IDS.TECHNICAL_DETAILS_SECTION}
+              className={`text-2xl font-bold ${getSecurityLevelColorClass(
+                overallSecurityLevel
+              )}`}
+              data-testid="security-summary-overall-level"
             >
-              <div>
-                <h4
-                  className="text-sm font-medium mb-1"
-                  style={{ color: CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY }}
-                  data-testid={SUMMARY_TEST_IDS.AVAILABILITY_TECH_HEADING}
-                >
-                  Availability Implementation
-                </h4>
-                <p
-                  className="text-sm text-gray-600 dark:text-gray-400"
-                  data-testid={SUMMARY_TEST_IDS.AVAILABILITY_TECH_DETAILS}
-                >
-                  {availabilityTechDescription}
-                </p>
-              </div>
-
-              <div>
-                <h4
-                  className="text-sm font-medium mb-1"
-                  style={{ color: CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY }}
-                  data-testid={SUMMARY_TEST_IDS.INTEGRITY_TECH_HEADING}
-                >
-                  Integrity Implementation
-                </h4>
-                <p
-                  className="text-sm text-gray-600 dark:text-gray-400"
-                  data-testid={SUMMARY_TEST_IDS.INTEGRITY_TECH_DETAILS}
-                >
-                  {integrityTechDescription}
-                </p>
-              </div>
-
-              <div>
-                <h4
-                  className="text-sm font-medium mb-1"
-                  style={{ color: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY }}
-                  data-testid={SUMMARY_TEST_IDS.CONFIDENTIALITY_TECH_HEADING}
-                >
-                  Confidentiality Implementation
-                </h4>
-                <p
-                  className="text-sm text-gray-600 dark:text-gray-400"
-                  data-testid={SUMMARY_TEST_IDS.CONFIDENTIALITY_TECH_DETAILS}
-                >
-                  {confidentialityTechDescription}
-                </p>
-              </div>
+              {overallSecurityLevel}
             </div>
-          )}
+          </div>
         </div>
 
-        {/* Toggleable Business Impact Section */}
-        <div className="mt-4">
-          <button
-            onClick={() => setShowBusinessImpact(!showBusinessImpact)}
-            className="flex items-center justify-between w-full text-left font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            data-testid={SUMMARY_TEST_IDS.BUSINESS_IMPACT_TOGGLE}
-            aria-expanded={showBusinessImpact}
+        {/* CIA triad components summary */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Availability */}
+          <div 
+            className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+            data-testid="security-summary-availability"
           >
-            <span>Business Impact</span>
-            <span
-              className="transition-transform duration-200"
-              style={{
-                transform: showBusinessImpact ? "rotate(180deg)" : "none",
-              }}
-            >
-              {showBusinessImpact ? "▲" : "▼"}
-            </span>
-          </button>
-
-          {showBusinessImpact && (
-            <div
-              className="mt-3 space-y-4 pl-3 border-l-2 border-gray-200 dark:border-gray-700"
-              data-testid={SUMMARY_TEST_IDS.BUSINESS_IMPACT_SECTION}
-            >
-              <div>
-                <h4
-                  className="text-sm font-medium mb-1"
-                  style={{ color: CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY }}
-                  data-testid={SUMMARY_TEST_IDS.AVAILABILITY_IMPACT_HEADING}
-                >
-                  Availability Impact
-                </h4>
-                <p
-                  className="text-sm text-gray-600 dark:text-gray-400"
-                  data-testid={SUMMARY_TEST_IDS.AVAILABILITY_IMPACT_DETAILS}
-                >
-                  {availabilityBusinessImpact}
-                </p>
+            <div className="flex justify-between items-center mb-2">
+              <div className="text-sm font-medium flex items-center">
+                <span className="text-blue-500 dark:text-blue-400 mr-2">⏱️</span>
+                Availability
               </div>
-
-              <div>
-                <h4
-                  className="text-sm font-medium mb-1"
-                  style={{ color: CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY }}
-                  data-testid={SUMMARY_TEST_IDS.INTEGRITY_IMPACT_HEADING}
-                >
-                  Integrity Impact
-                </h4>
-                <p
-                  className="text-sm text-gray-600 dark:text-gray-400"
-                  data-testid={SUMMARY_TEST_IDS.INTEGRITY_IMPACT_DETAILS}
-                >
-                  {integrityBusinessImpact}
-                </p>
-              </div>
-
-              <div>
-                <h4
-                  className="text-sm font-medium mb-1"
-                  style={{ color: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY }}
-                  data-testid={SUMMARY_TEST_IDS.CONFIDENTIALITY_IMPACT_HEADING}
-                >
-                  Confidentiality Impact
-                </h4>
-                <p
-                  className="text-sm text-gray-600 dark:text-gray-400"
-                  data-testid={SUMMARY_TEST_IDS.CONFIDENTIALITY_IMPACT_DETAILS}
-                >
-                  {confidentialityBusinessImpact}
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Key Recommendations */}
-        <div className="mt-4">
-          <h4
-            className="font-medium mb-2"
-            data-testid={SUMMARY_TEST_IDS.RECOMMENDATION_HEADING}
-          >
-            Security Recommendation
-          </h4>
-          
-          <StatusBadge
-            status={getSecurityLevelBadgeVariant(overallSecurityLevel)}
-            testId={SUMMARY_TEST_IDS.SECURITY_RECOMMENDATION}
-          >
-            {SECURITY_RECOMMENDATIONS[
-              overallSecurityLevel
-                .toUpperCase()
-                .replace(" ", "_") as keyof typeof SECURITY_RECOMMENDATIONS
-            ] || SECURITY_RECOMMENDATIONS.BASIC}
-          </StatusBadge>
-
-          {recommendations.length > 0 && (
-            <ul className="mt-3 space-y-1 list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
-              {recommendations.slice(0, 3).map((rec, index) => (
-                <li key={index}>{rec}</li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        {/* Toggleable Metrics Section */}
-        <div className="mt-4">
-          <button
-            onClick={() => setShowMetrics(!showMetrics)}
-            className="flex items-center justify-between w-full text-left font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-2"
-            data-testid={SUMMARY_TEST_IDS.METRICS_TOGGLE}
-            aria-expanded={showMetrics}
-          >
-            <span>Availability Metrics</span>
-            <span
-              className="transition-transform duration-200"
-              style={{ transform: showMetrics ? "rotate(180deg)" : "none" }}
-            >
-              {showMetrics ? "▲" : "▼"}
-            </span>
-          </button>
-
-          {showMetrics && (
-            <div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
-              data-testid={SUMMARY_TEST_IDS.METRICS_SECTION}
-            >
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
-                <h5 className="text-sm font-medium mb-2">Uptime</h5>
-                <p className="text-lg font-bold">
-                  {availabilityDetails?.uptime || "N/A"}
-                </p>
-              </div>
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
-                <h5 className="text-sm font-medium mb-2">
-                  Mean Time To Recovery (MTTR)
-                </h5>
-                <p className="text-lg font-bold">
-                  {availabilityDetails?.mttr || "N/A"}
-                </p>
-              </div>
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
-                <h5 className="flex items-center justify-center text-sm font-medium mb-2">
-                  <span className="mr-1">⏱️</span>Recovery Time Objective (RTO)
-                </h5>
-                <p className="text-lg font-bold">
-                  {availabilityDetails?.rto || "N/A"}
-                </p>
-              </div>
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
-                <h5 className="flex items-center justify-center text-sm font-medium mb-2">
-                  <span className="mr-1">💾</span>Recovery Point Objective (RPO)
-                </h5>
-                <p className="text-lg font-bold">
-                  {availabilityDetails?.rpo || "N/A"}
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Data Classifications */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-          <div
-            className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4"
-            style={{
-              borderLeftColor: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY,
-            }}
-          >
-            <h4 className="text-md font-medium mb-2">
-              Data Protection Classification
-            </h4>
-            <div className="grid grid-cols-1 gap-2">
-              <KeyValuePair
-                label="Classification Level"
-                value={confidentialityLevel}
-                testId={`${testId}-classification-level`}
+              <SecurityLevelBadge
+                category=""
+                level={availabilityLevel}
+                colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+                textClass="text-blue-800 dark:text-blue-300"
+                testId="security-summary-availability-badge"
               />
-              <KeyValuePair
-                label="Information Sensitivity"
-                value={ciaContentService.getInformationSensitivity?.(
-                  confidentialityLevel
-                ) || "Not specified"}
-                testId={`${testId}-information-sensitivity`}
+            </div>
+            <p className="text-xs text-gray-600 dark:text-gray-400">
+              {getLevelDescription("availability", availabilityLevel)}
+            </p>
+          </div>
+
+          {/* Integrity */}
+          <div 
+            className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+            data-testid="security-summary-integrity"
+          >
+            <div className="flex justify-between items-center mb-2">
+              <div className="text-sm font-medium flex items-center">
+                <span className="text-green-500 dark:text-green-400 mr-2">✓</span>
+                Integrity
+              </div>
+              <SecurityLevelBadge
+                category=""
+                level={integrityLevel}
+                colorClass="bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
+                textClass="text-green-800 dark:text-green-300"
+                testId="security-summary-integrity-badge"
               />
+            </div>
+            <p className="text-xs text-gray-600 dark:text-gray-400">
+              {getLevelDescription("integrity", integrityLevel)}
+            </p>
+          </div>
+
+          {/* Confidentiality */}
+          <div 
+            className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+            data-testid="security-summary-confidentiality"
+          >
+            <div className="flex justify-between items-center mb-2">
+              <div className="text-sm font-medium flex items-center">
+                <span className="text-purple-500 dark:text-purple-400 mr-2">🔒</span>
+                Confidentiality
+              </div>
+              <SecurityLevelBadge
+                category=""
+                level={confidentialityLevel}
+                colorClass="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
+                textClass="text-purple-800 dark:text-purple-300"
+                testId="security-summary-confidentiality-badge"
+              />
+            </div>
+            <p className="text-xs text-gray-600 dark:text-gray-400">
+              {getLevelDescription("confidentiality", confidentialityLevel)}
+            </p>
+          </div>
+        </div>
+
+        {/* Security score and compliance status */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Security Score */}
+          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="text-sm font-medium mb-1 flex items-center">
+              <span className="text-blue-500 dark:text-blue-400 mr-2">📊</span>
+              Security Score
+            </div>
+            <div className="flex items-center">
+              <div 
+                className="text-2xl font-bold"
+                data-testid="security-summary-score"
+              >
+                {securityScore}%
+              </div>
             </div>
           </div>
 
-          <div
-            className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4"
-            style={{
-              borderLeftColor: CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY,
-            }}
-          >
-            <h4 className="text-md font-medium mb-2">
-              Data Integrity Classification
-            </h4>
-            <div className="grid grid-cols-1 gap-2">
-              <KeyValuePair
-                label="Protection Level"
-                value={integrityLevel}
-                testId={`${testId}-protection-level`}
-              />
-              {(() => {
-                const details = ciaContentService.getTechnicalImplementation?.(
-                  "integrity",
-                  integrityLevel
-                );
-                return details &&
-                  typeof details === 'object' &&
-                  "validationMethod" in details &&
-                  details.validationMethod ? (
-                  <KeyValuePair
-                    label="Validation Technique"
-                    value={details.validationMethod as string}
-                    testId={`${testId}-validation-technique`}
-                  />
-                ) : null;
-              })()}
+          {/* Compliance Status */}
+          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="text-sm font-medium mb-1 flex items-center">
+              <span className="text-green-500 dark:text-green-400 mr-2">📋</span>
+              Compliance Status
+            </div>
+            <div className="flex items-center">
+              <StatusBadge 
+                status={complianceBadgeStatus}
+                testId="security-summary-compliance-status"
+              >
+                {typeof complianceStatus === 'string' ? complianceStatus : 'Compliance status available'}
+              </StatusBadge>
             </div>
           </div>
+
+          {/* Risk Level */}
+          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="text-sm font-medium mb-1 flex items-center">
+              <span className="text-red-500 dark:text-red-400 mr-2">⚠️</span>
+              Risk Level
+            </div>
+            <div className="flex items-center">
+              <StatusBadge 
+                status={riskBadgeStatus}
+                testId="security-summary-risk-level"
+              >
+                {riskStatus}
+              </StatusBadge>
+            </div>
+          </div>
+        </div>
+
+        {/* Recommendations */}
+        <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-200 dark:border-blue-800">
+          <div className="flex items-center mb-2">
+            <span className="text-blue-500 dark:text-blue-400 mr-2">💡</span>
+            <h3 className="font-medium">Recommendations</h3>
+          </div>
+          <ul className="text-sm space-y-1 list-disc list-inside text-gray-600 dark:text-gray-300">
+            {getRecommendations(availabilityLevel, integrityLevel, confidentialityLevel).map((recommendation, index) => (
+              <li key={index} data-testid={`security-summary-recommendation-${index}`}>
+                {recommendation}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </WidgetContainer>
   );
+};
+
+// Helper function to get security level color classes
+function getSecurityLevelColorClass(level: SecurityLevel): string {
+  switch (level) {
+    case "Very High":
+      return "text-purple-600 dark:text-purple-400";
+    case "High":
+      return "text-green-600 dark:text-green-400";
+    case "Moderate":
+      return "text-blue-600 dark:text-blue-400";
+    case "Low":
+      return "text-yellow-600 dark:text-yellow-400";
+    case "None":
+    default:
+      return "text-red-600 dark:text-red-400";
+  }
 }
 
-// Export the component wrapped with security level state management
+// Helper function to get level descriptions
+function getLevelDescription(component: string, level: SecurityLevel): string {
+  const availabilityDescriptions: Record<SecurityLevel, string> = {
+    "None": "No uptime guarantees or recovery procedures",
+    "Low": "Basic uptime (95%) with manual recovery processes", 
+    "Moderate": "Standard uptime (99%) with documented recovery", 
+    "High": "Enhanced uptime (99.9%) with rapid recovery capabilities",
+    "Very High": "Maximum uptime (99.99%) with near-instantaneous recovery"
+  };
+
+  const integrityDescriptions: Record<SecurityLevel, string> = {
+    "None": "No data validation or protection against unauthorized changes",
+    "Low": "Basic data validation with limited audit trails", 
+    "Moderate": "Automated integrity checks with comprehensive auditing", 
+    "High": "Cryptographic verification with secure hash validation",
+    "Very High": "Advanced integrity protection with blockchain validation"
+  };
+
+  const confidentialityDescriptions: Record<SecurityLevel, string> = {
+    "None": "No access controls or data protection measures",
+    "Low": "Basic access control with minimal encryption", 
+    "Moderate": "Role-based access control with standard encryption", 
+    "High": "Multi-factor authentication with advanced encryption",
+    "Very High": "Zero-trust architecture with military-grade protection"
+  };
+
+  if (component === "availability") return availabilityDescriptions[level] || "Description not available";
+  if (component === "integrity") return integrityDescriptions[level] || "Description not available";
+  if (component === "confidentiality") return confidentialityDescriptions[level] || "Description not available";
+  return "Description not available";
+}
+
+// Helper function to generate recommendations based on security levels
+function getRecommendations(
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel
+): string[] {
+  const recommendations: string[] = [];
+  
+  // Add recommendations based on availability level
+  if (getSecurityLevelValue(availabilityLevel) < 2) {
+    recommendations.push("Improve availability controls by implementing robust backup and recovery procedures");
+  }
+  
+  // Add recommendations based on integrity level
+  if (getSecurityLevelValue(integrityLevel) < 2) {
+    recommendations.push("Enhance data integrity through automated validation and cryptographic verification");
+  }
+  
+  // Add recommendations based on confidentiality level
+  if (getSecurityLevelValue(confidentialityLevel) < 2) {
+    recommendations.push("Strengthen confidentiality by implementing role-based access controls and encryption");
+  }
+  
+  // Add balanced approach recommendation if levels are very uneven
+  const levels = [
+    getSecurityLevelValue(availabilityLevel),
+    getSecurityLevelValue(integrityLevel),
+    getSecurityLevelValue(confidentialityLevel)
+  ];
+  
+  const maxLevel = Math.max(...levels);
+  const minLevel = Math.min(...levels);
+  
+  if (maxLevel - minLevel >= 2) {
+    recommendations.push("Consider a more balanced security approach across all CIA triad components");
+  }
+  
+  // If no specific recommendations, add general one
+  if (recommendations.length === 0) {
+    recommendations.push("Continue maintaining your current security posture with regular reviews");
+  }
+  
+  return recommendations;
+}
+
+// Export the enhanced component with security level state management
 export default withSecurityLevelState(SecuritySummaryWidget);

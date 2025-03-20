@@ -150,14 +150,45 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
     }
   }, [activeTab, availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Get code examples with null safety
-  const codeExamples = useMemo(() => activeDetails?.codeExamples || [], [activeDetails]);
+  // Get code examples with null safety and better default handling
+  const codeExamples = useMemo(() => {
+    const examples = activeDetails?.codeExamples || [];
+    // Provide default example if none exist but should based on level
+    if (examples.length === 0 && activeLevel !== "None") {
+      return [{
+        title: `Example ${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Implementation`,
+        language: "typescript",
+        code: `// Sample code would be shown here for ${activeTab} at ${activeLevel} level`
+      }];
+    }
+    return examples;
+  }, [activeDetails, activeTab, activeLevel]);
 
-  // Get implementation steps with null safety
-  const implementationSteps = useMemo(() => 
-    implementationDetails?.implementationSteps || [],
-    [implementationDetails]
-  );
+  // Implementation steps with better defaults
+  const implementationSteps = useMemo(() => {
+    const steps = implementationDetails?.implementationSteps || [];
+    if (steps.length === 0 && activeLevel !== "None") {
+      const defaultSteps = {
+        "availability": [
+          `Configure system for ${activeLevel} availability`,
+          "Implement monitoring and alerting",
+          "Create disaster recovery plan"
+        ],
+        "integrity": [
+          `Implement ${activeLevel} data validation controls`,
+          "Configure checksum verification",
+          "Set up data integrity monitoring"
+        ],
+        "confidentiality": [
+          `Apply ${activeLevel} encryption to sensitive data`,
+          "Implement access control mechanisms",
+          "Configure data loss prevention"
+        ]
+      };
+      return defaultSteps[activeTab] || [];
+    }
+    return steps;
+  }, [implementationDetails, activeTab, activeLevel]);
 
   // Function to get technical description with null safety
   const getTechnicalDescription = (component: "availability" | "integrity" | "confidentiality", level: SecurityLevel): string => {

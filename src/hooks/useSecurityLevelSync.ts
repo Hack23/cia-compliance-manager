@@ -1,59 +1,74 @@
 import { useEffect, useState } from 'react';
+import { WithSecurityLevelProps } from '../hoc/withSecurityLevelState';
 import { SecurityLevel } from '../types/cia';
 
 /**
- * Hook for synchronizing security level props with local state
+ * Hook for synchronizing security level state with props
  * 
- * @param props Security level props from parent component
- * @returns Object containing local state that stays in sync with props
+ * This hook provides a way for components to maintain local state
+ * of security levels while keeping in sync with parent props.
+ * 
+ * @param propsOrAvailability - Either props object or availability level
+ * @param integrityOrCallbacks - Either integrity level or callbacks object
+ * @param confidentiality - Confidentiality level (only used in direct mode)
+ * @returns Object containing local state and setters
  */
-export function useSecurityLevelSync(props: {
-  availabilityLevel: SecurityLevel;
-  integrityLevel: SecurityLevel;
-  confidentialityLevel: SecurityLevel;
-  componentName?: string;
-}) {
-  const { 
-    availabilityLevel: propAvailability,
-    integrityLevel: propIntegrity,
-    confidentialityLevel: propConfidentiality,
-    componentName = 'Component'
-  } = props;
-  
+export function useSecurityLevelSync(
+  propsOrAvailability: WithSecurityLevelProps | SecurityLevel = "Moderate",
+  integrityOrCallbacks: SecurityLevel | {
+    onAvailabilityChange?: (level: SecurityLevel) => void;
+    onIntegrityChange?: (level: SecurityLevel) => void;
+    onConfidentialityChange?: (level: SecurityLevel) => void;
+  } = "Moderate",
+  confidentiality: SecurityLevel = "Moderate"
+) {
+  // Determine if we're using the object props format or direct params
+  const isObjectProps = typeof propsOrAvailability === 'object';
+
+  // Extract values based on the calling pattern
+  const availability = isObjectProps
+    ? propsOrAvailability.availabilityLevel || "Moderate"
+    : propsOrAvailability;
+
+  const integrity = isObjectProps
+    ? propsOrAvailability.integrityLevel || "Moderate"
+    : integrityOrCallbacks as SecurityLevel;
+
+  const confidentialityLevel = isObjectProps
+    ? propsOrAvailability.confidentialityLevel || "Moderate"
+    : confidentiality;
+
   // Create local state for each security level
-  const [availabilityLevel, setAvailabilityLevel] = useState<SecurityLevel>(propAvailability);
-  const [integrityLevel, setIntegrityLevel] = useState<SecurityLevel>(propIntegrity);
-  const [confidentialityLevel, setConfidentialityLevel] = useState<SecurityLevel>(propConfidentiality);
-  
+  const [localAvailabilityLevel, setAvailabilityLevel] = useState<SecurityLevel>(availability);
+  const [localIntegrityLevel, setIntegrityLevel] = useState<SecurityLevel>(integrity);
+  const [localConfidentialityLevel, setConfidentialityLevel] = useState<SecurityLevel>(confidentialityLevel);
+
   // Sync local state with props
   useEffect(() => {
-    setAvailabilityLevel(propAvailability);
-  }, [propAvailability]);
-  
+    if (availability !== localAvailabilityLevel) {
+      setAvailabilityLevel(availability);
+    }
+  }, [availability]);
+
   useEffect(() => {
-    setIntegrityLevel(propIntegrity);
-  }, [propIntegrity]);
-  
+    if (integrity !== localIntegrityLevel) {
+      setIntegrityLevel(integrity);
+    }
+  }, [integrity]);
+
   useEffect(() => {
-    setConfidentialityLevel(propConfidentiality);
-  }, [propConfidentiality]);
-  
-  // Debug logging
-  useEffect(() => {
-    console.log(`[${componentName}] Security levels:`, {
-      props: { propAvailability, propIntegrity, propConfidentiality },
-      state: { availabilityLevel, integrityLevel, confidentialityLevel }
-    });
-  }, [
-    componentName,
-    propAvailability, propIntegrity, propConfidentiality,
-    availabilityLevel, integrityLevel, confidentialityLevel
-  ]);
-  
+    if (confidentialityLevel !== localConfidentialityLevel) {
+      setConfidentialityLevel(confidentialityLevel);
+    }
+  }, [confidentialityLevel]);
+
   return {
-    availabilityLevel,
-    integrityLevel,
-    confidentialityLevel
+    availabilityLevel: localAvailabilityLevel,
+    integrityLevel: localIntegrityLevel,
+    confidentialityLevel: localConfidentialityLevel,
+    setAvailabilityLevel,
+    setIntegrityLevel,
+    setConfidentialityLevel
   };
 }
 

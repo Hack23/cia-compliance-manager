@@ -1,42 +1,104 @@
 import React from 'react';
 import { SecurityLevel } from '../../types/cia';
+import { getSecurityLevelBadgeVariant } from '../../utils/securityLevelUtils';
 
+/**
+ * Props for the SecurityLevelBadge component
+ */
 interface SecurityLevelBadgeProps {
+  /**
+   * The category label for the badge (e.g., "Availability", "Integrity", "Confidentiality")
+   */
   category: string;
+  
+  /**
+   * The security level to display
+   */
   level: SecurityLevel;
+  
+  /**
+   * Optional CSS class for the badge background
+   */
   colorClass?: string;
+  
+  /**
+   * Optional CSS class for the badge text
+   */
   textClass?: string;
+  
+  /**
+   * Optional CSS class for the badge container
+   */
+  className?: string;
+  
+  /**
+   * Optional test ID for automated testing
+   */
   testId?: string;
 }
 
 /**
- * Displays a security level badge with consistent styling
+ * A standardized badge for displaying security levels
  * 
- * ## Business Perspective
- * 
- * This component visualizes security levels for various CIA components with 
- * consistent styling, helping stakeholders quickly understand the security 
- * posture across different dimensions. 🔒
+ * This component provides a consistent visual representation of security levels
+ * across all widgets and components in the application.
  */
 const SecurityLevelBadge: React.FC<SecurityLevelBadgeProps> = ({
   category,
   level,
-  colorClass = "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20",
-  textClass = "text-blue-600 dark:text-blue-400",
+  colorClass,
+  textClass,
+  className = '',
   testId,
 }) => {
+  // Determine color classes based on level or use provided classes
+  const getDefaultColorClass = () => {
+    const variant = getSecurityLevelBadgeVariant(level);
+    
+    switch (variant) {
+      case 'success':
+        return 'bg-green-100 dark:bg-green-900 dark:bg-opacity-20';
+      case 'warning':
+        return 'bg-yellow-100 dark:bg-yellow-900 dark:bg-opacity-20';
+      case 'error':
+        return 'bg-red-100 dark:bg-red-900 dark:bg-opacity-20';
+      case 'info':
+        return 'bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20';
+      case 'purple':
+        return 'bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20';
+      default:
+        return 'bg-gray-100 dark:bg-gray-800';
+    }
+  };
+  
+  const getDefaultTextClass = () => {
+    const variant = getSecurityLevelBadgeVariant(level);
+    
+    switch (variant) {
+      case 'success':
+        return 'text-green-800 dark:text-green-300';
+      case 'warning':
+        return 'text-yellow-800 dark:text-yellow-300';
+      case 'error':
+        return 'text-red-800 dark:text-red-300';
+      case 'info':
+        return 'text-blue-800 dark:text-blue-300';
+      case 'purple':
+        return 'text-purple-800 dark:text-purple-300';
+      default:
+        return 'text-gray-800 dark:text-gray-300';
+    }
+  };
+  
   return (
     <div 
-      className={`py-2 px-3 rounded-md ${colorClass}`}
-      data-testid={testId || `${category.toLowerCase()}-level-badge`}
+      className={`inline-flex items-center ${className}`}
+      data-testid={testId}
     >
-      <div className="flex flex-col">
-        <div className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-          {category}
-        </div>
-        <div className={`text-sm font-bold ${textClass}`}>
-          {level}
-        </div>
+      <div className={`px-2.5 py-1 rounded-md flex items-center ${colorClass || getDefaultColorClass()}`}>
+        <span className={`text-sm font-medium ${textClass || getDefaultTextClass()}`}>
+          {category}: {level}
+        </span>
       </div>
     </div>
   );

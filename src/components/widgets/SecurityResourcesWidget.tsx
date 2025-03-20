@@ -51,7 +51,8 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   const [resources, setResources] = useState<SecurityResource[]>([]);
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const { showBoundary } = useErrorBoundary();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
 
   // Use the service with the data provider
   const resourceService = useMemo(() => {
@@ -76,6 +77,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
   // Load resources based on security levels
   useEffect(() => {
+    setLoading(true);
     try {
       // Get resources for each component
       const availabilityResources = resourceService.getSecurityResources(
@@ -112,9 +114,12 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       );
 
       setResources(sortedResources);
-    } catch (error) {
-      console.error("Error loading security resources:", error);
-      showBoundary(error as Error);
+      setError(null);
+    } catch (err) {
+      console.error("Error loading security resources:", err);
+      setError(err instanceof Error ? err : new Error("Failed to load resources"));
+    } finally {
+      setLoading(false);
     }
   }, [
     availabilityLevel,
@@ -122,7 +127,6 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
     confidentialityLevel,
     securityLevel,
     resourceService,
-    showBoundary,
   ]);
 
   // Filter resources based on type and search query
@@ -166,6 +170,8 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       icon={WIDGET_ICONS.SECURITY_RESOURCES}
       testId={testId}
       className={className}
+      loading={loading}
+      error={error}
     >
       <div className="mb-4 flex flex-wrap gap-4">
         <div className="w-full md:w-auto flex-grow">

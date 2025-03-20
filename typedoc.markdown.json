@@ -7,13 +7,16 @@
   "includeVersion": true,
   "excludePrivate": true,
   "plugin": ["typedoc-plugin-markdown"],
-  "mergeModulesMergeMode": "project",
   "readme": "./docs/markdown-overview.md",
   "hideGenerator": true,
   "hideBreadcrumbs": false,
   "hidePageTitle": false,
   "tsconfig": "./tsconfig.json",
   "sort": ["visibility", "alphabetical"],
+  "navigationLinks": {
+    "GitHub": "https://github.com/Hack23/cia-compliance-manager",
+    "Documentation": "https://hack23.github.io/cia-compliance-manager/documentation.html"
+  },
   "exclude": [
     "**/*.test.{ts,tsx}",
     "**/*.spec.{ts,tsx}",

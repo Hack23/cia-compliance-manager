@@ -111,98 +111,100 @@ export const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
   );
   
   return (
-    <div className={`border rounded-lg shadow-sm h-100 ${className}`} data-testid={testId}>
-      <div className="p-3 border-bottom bg-light">
-        <h3 data-testid={COMPLIANCE_STATUS_TEST_IDS.TITLE} className="mb-0">
+    <div className={`border rounded-lg shadow-sm h-full ${className}`} data-testid={testId}>
+      <div className="p-3 border-b bg-gray-50 dark:bg-gray-800">
+        <h3 data-testid={COMPLIANCE_STATUS_TEST_IDS.TITLE} className="text-lg font-medium">
           Compliance Status
         </h3>
       </div>
-      <div className="p-3">
-        <div className="mb-3">
-          <p className="font-medium">Overall Status:</p>
-          <p className={`${getStatusColorClass(statusText)} font-medium`}>{statusText}</p>
+      
+      {/* Loading state */}
+      {!complianceStatus ? (
+        <div className="p-4 flex justify-center items-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
         </div>
-        
-        {/* Compliant Frameworks */}
-        {complianceStatus.compliantFrameworks.length > 0 && (
-          <div className="mb-4" data-testid={COMPLIANCE_STATUS_TEST_IDS.COMPLIANT}>
-            <h4 className="font-medium text-green-700 mb-1">Compliant Frameworks</h4>
-            <ul className="list-group mb-3">
-              {complianceStatus.compliantFrameworks.map((framework: string, index: number) => (
-                <li 
-                  key={`compliant-${index}`}
-                  className="list-group-item list-group-item-success d-flex justify-content-between align-items-center"
-                  data-testid={`compliant-framework-${index}`}
-                >
-                  <div>
-                    <strong>{framework}</strong>
-                    <div className="text-muted small">
+      ) : (
+        <div className="p-4">
+          <div className="mb-4">
+            <p className="font-medium">Overall Status:</p>
+            <p className={`${getStatusTailwindClass(statusText)} font-medium`}>{statusText}</p>
+          </div>
+          
+          {/* Compliant Frameworks */}
+          {complianceStatus.compliantFrameworks.length > 0 && (
+            <div className="mb-4" data-testid={COMPLIANCE_STATUS_TEST_IDS.COMPLIANT}>
+              <h4 className="font-medium text-green-700 dark:text-green-400 mb-2">Compliant Frameworks</h4>
+              <div className="space-y-2">
+                {complianceStatus.compliantFrameworks.map((framework: string, index: number) => (
+                  <div 
+                    key={`compliant-${index}`}
+                    className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-200 dark:border-green-800"
+                    data-testid={`compliant-framework-${index}`}
+                  >
+                    <div className="font-medium">{framework}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
                       {ComplianceService.getFrameworkDescription(String(framework))}
                     </div>
                   </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        
-        {/* Partially Compliant Frameworks */}
-        {complianceStatus.partiallyCompliantFrameworks.length > 0 && (
-          <div className="mb-4" data-testid={COMPLIANCE_STATUS_TEST_IDS.PARTIAL}>
-            <h4 className="font-medium text-yellow-700 mb-1">Partially Compliant Frameworks</h4>
-            <ul className="list-group mb-3">
-              {complianceStatus.partiallyCompliantFrameworks.map((framework: string, index: number) => (
-                <li 
-                  key={`partial-${index}`}
-                  className="list-group-item list-group-item-warning d-flex justify-content-between align-items-center"
-                  data-testid={`partial-framework-${index}`}
-                >
-                  <div>
-                    <strong>{framework}</strong>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {/* Partially Compliant Frameworks */}
+          {complianceStatus.partiallyCompliantFrameworks.length > 0 && (
+            <div className="mb-4" data-testid={COMPLIANCE_STATUS_TEST_IDS.PARTIAL}>
+              <h4 className="font-medium text-yellow-700 dark:text-yellow-400 mb-2">Partially Compliant Frameworks</h4>
+              <div className="space-y-2">
+                {complianceStatus.partiallyCompliantFrameworks.map((framework: string, index: number) => (
+                  <div 
+                    key={`partial-${index}`}
+                    className="p-3 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg border border-yellow-200 dark:border-yellow-800"
+                    data-testid={`partial-framework-${index}`}
+                  >
+                    <div className="font-medium">{framework}</div>
                   </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        
-        {/* Non-Compliant Frameworks */}
-        {complianceStatus.nonCompliantFrameworks.length > 0 && (
-          <div className="mb-4" data-testid={COMPLIANCE_STATUS_TEST_IDS.NON_COMPLIANT}>
-            <h4 className="font-medium text-red-700 mb-1">Non-Compliant Frameworks</h4>
-            <ul className="list-group mb-3">
-              {complianceStatus.nonCompliantFrameworks.map((framework: string, index: number) => (
-                <li 
-                  key={`non-compliant-${index}`}
-                  className="list-group-item list-group-item-danger d-flex justify-content-between align-items-center"
-                  data-testid={`non-compliant-framework-${index}`}
-                >
-                  <div>
-                    <strong>{framework}</strong>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {/* Non-Compliant Frameworks */}
+          {complianceStatus.nonCompliantFrameworks.length > 0 && (
+            <div className="mb-4" data-testid={COMPLIANCE_STATUS_TEST_IDS.NON_COMPLIANT}>
+              <h4 className="font-medium text-red-700 dark:text-red-400 mb-2">Non-Compliant Frameworks</h4>
+              <div className="space-y-2">
+                {complianceStatus.nonCompliantFrameworks.map((framework: string, index: number) => (
+                  <div 
+                    key={`non-compliant-${index}`}
+                    className="p-3 bg-red-50 dark:bg-red-900 dark:bg-opacity-20 rounded-lg border border-red-200 dark:border-red-800"
+                    data-testid={`non-compliant-framework-${index}`}
+                  >
+                    <div className="font-medium">{framework}</div>
                   </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        
-        {/* Remediation Steps */}
-        {complianceStatus.remediationSteps && complianceStatus.remediationSteps.length > 0 && (
-          <div data-testid={COMPLIANCE_STATUS_TEST_IDS.REMEDIATION}>
-            <h4 className="font-medium text-blue-700 mb-1">Recommended Actions</h4>
-            <ul className="list-group">
-              {complianceStatus.remediationSteps?.map((step: string, index: number) => (
-                <li 
-                  key={`step-${index}`}
-                  className="list-group-item text-sm mb-1"
-                >
-                  {step}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {/* Remediation Steps */}
+          {complianceStatus.remediationSteps && complianceStatus.remediationSteps.length > 0 && (
+            <div data-testid={COMPLIANCE_STATUS_TEST_IDS.REMEDIATION}>
+              <h4 className="font-medium text-blue-700 dark:text-blue-400 mb-2">Recommended Actions</h4>
+              <div className="space-y-2">
+                {complianceStatus.remediationSteps?.map((step: string, index: number) => (
+                  <div 
+                    key={`step-${index}`}
+                    className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+                  >
+                    {step}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
@@ -213,16 +215,16 @@ export const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
  * @param statusText - Compliance status text
  * @returns CSS class for text color
  */
-function getStatusColorClass(statusText: string): string {
+function getStatusTailwindClass(statusText: string): string {
   switch (statusText) {
     case COMPLIANCE_STATUS.FULL_COMPLIANCE:
-      return 'text-green-700';
+      return 'text-green-700 dark:text-green-400';
     case COMPLIANCE_STATUS.STANDARD_COMPLIANCE:
-      return 'text-blue-700';
+      return 'text-blue-700 dark:text-blue-400';
     case COMPLIANCE_STATUS.BASIC_COMPLIANCE:
-      return 'text-yellow-700';
+      return 'text-yellow-700 dark:text-yellow-400';
     default:
-      return 'text-red-700';
+      return 'text-red-700 dark:text-red-400';
   }
 }
 

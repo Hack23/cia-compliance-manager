@@ -233,23 +233,5 @@ const ConfidentialityImpactWidget: React.FC<ConfidentialityImpactWidgetProps> = 
   );
 };
 
-// Helper function to determine text color based on impact level
-function getImpactColor(impact: SecurityLevel | string): string {
-  switch (impact) {
-    case "None":
-      return "text-red-600 dark:text-red-400";
-    case "Low":
-      return "text-orange-600 dark:text-orange-400";
-    case "Moderate":
-      return "text-yellow-600 dark:text-yellow-400";
-    case "High":
-      return "text-green-600 dark:text-green-400";
-    case "Very High":
-      return "text-blue-600 dark:text-blue-400";
-    default:
-      return "text-gray-600 dark:text-gray-400";
-  }
-}
-
 // Export the component wrapped with security level state management
 export default withSecurityLevelState(ConfidentialityImpactWidget);

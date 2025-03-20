@@ -5,6 +5,7 @@ import { useCIAContentService } from "../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../types/cia";
 import { getSecurityLevelValue } from "../../utils/securityLevelUtils";
 import BusinessImpactSection from "../common/BusinessImpactSection";
+import SecurityLevelBadge from "../common/SecurityLevelBadge";
 import WidgetContainer from "../common/WidgetContainer";
 
 // Define component props
@@ -63,6 +64,15 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
     );
   }, [ciaContentService, effectiveLevel, details]);
 
+  // Calculate overall impact with the current availability level
+  const overallImpact = useMemo(() => {
+    return ciaContentService.calculateBusinessImpactLevel?.(
+      effectiveLevel,
+      integrityLevel,
+      confidentialityLevel
+    ) || effectiveLevel;
+  }, [ciaContentService, effectiveLevel, integrityLevel, confidentialityLevel]);
+
   // If details aren't available, show an error state
   if (!details) {
     return (
@@ -95,12 +105,25 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
           role="region"
           aria-labelledby="availability-impact-heading"
         >
-          {/* Security Level Badge */}
+          {/* Replace custom badge with SecurityLevelBadge */}
           <div className="mb-4">
-            <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-20 dark:text-blue-300">
-              <span className="mr-1">⏱️</span>
-              Availability Level: {effectiveLevel}
-            </div>
+            <SecurityLevelBadge
+              category="Availability"
+              level={effectiveLevel}
+              colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+              textClass="text-blue-800 dark:text-blue-300"
+              testId={`${testId}-availability-badge`}
+            />
+            
+            {/* Add overall impact indicator when all levels are available */}
+            {integrityLevel && confidentialityLevel && (
+              <div className="mt-2 text-sm">
+                <span className="font-medium">Overall Security Impact: </span>
+                <span className="text-blue-600 dark:text-blue-400 font-medium">
+                  {overallImpact}
+                </span>
+              </div>
+            )}
             
             <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
               <span className="font-medium">Security Score: </span>

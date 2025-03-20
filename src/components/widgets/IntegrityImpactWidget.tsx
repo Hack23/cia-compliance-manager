@@ -10,14 +10,41 @@ import WidgetContainer from "../common/WidgetContainer";
 
 // Define component props
 export interface IntegrityImpactWidgetProps {
-  // Use consistent naming pattern for levels
+  /**
+   * The selected integrity level
+   */
   integrityLevel: SecurityLevel;
+
+  /**
+   * The selected availability level
+   * (for combined impact analysis)
+   */
   availabilityLevel: SecurityLevel;
+
+  /**
+   * The selected confidentiality level
+   * (for combined impact analysis)
+   */
   confidentialityLevel: SecurityLevel;
-  // Legacy support for older implementations
+
+  /**
+   * For legacy support
+   */
   level?: SecurityLevel;
+
+  /**
+   * Optional CSS class name
+   */
   className?: string;
+
+  /**
+   * Optional test ID for testing
+   */
   testId?: string;
+  
+  /**
+   * Optional level change handler
+   */
   onLevelChange?: (level: SecurityLevel) => void;
 }
 
@@ -33,9 +60,9 @@ interface TechnicalImplementationDetails {
  * ## Business Perspective
  *
  * This widget helps stakeholders understand how integrity security levels
- * affect data trustworthiness and protect against unauthorized modifications.
- * The visualization of these impacts supports better decision-making about
- * data validation controls and integrity verification mechanisms. 📊
+ * affect data validation and protection against unauthorized changes.
+ * It provides clear explanations of the business impacts and technical
+ * implementations for different integrity levels. 🔒
  */
 const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
   integrityLevel,
@@ -61,6 +88,11 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
     return ciaContentService.getBusinessImpact?.("integrity", effectiveLevel) || null;
   }, [ciaContentService, effectiveLevel]);
 
+  // Get technical implementation
+  const technicalImplementation = useMemo<TechnicalImplementationDetails | null>(() => {
+    return ciaContentService.getTechnicalImplementation?.("integrity", effectiveLevel) || null;
+  }, [ciaContentService, effectiveLevel]);
+
   // Get recommended controls
   const recommendations = useMemo(() => {
     return (
@@ -70,12 +102,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
     );
   }, [ciaContentService, effectiveLevel, details]);
 
-  // Get technical implementation
-  const technicalImplementation = useMemo<TechnicalImplementationDetails | null>(() => {
-    return ciaContentService.getTechnicalImplementation?.("integrity", effectiveLevel) || null;
-  }, [ciaContentService, effectiveLevel]);
-
-  // Calculate impact for other components with the current integrity level
+  // Calculate overall impact with the current integrity level
   const overallImpact = useMemo(() => {
     return ciaContentService.calculateBusinessImpactLevel?.(
       availabilityLevel,
@@ -104,7 +131,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
       title={WIDGET_TITLES.INTEGRITY_IMPACT}
       icon={WIDGET_ICONS.INTEGRITY_IMPACT}
       className={`${className} overflow-visible`}
-      testId={testId || "widget-integrity-impact"}
+      testId={testId}
     >
       <div className="max-h-[550px] overflow-y-auto pr-1">
         <div
@@ -112,7 +139,6 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
           role="region"
           aria-labelledby="integrity-impact-heading"
         >
-          {/* Use SecurityLevelBadge for consistent display */}
           <div className="mb-4">
             <SecurityLevelBadge
               category="Integrity"
@@ -126,7 +152,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
             {availabilityLevel && confidentialityLevel && (
               <div className="mt-2 text-sm">
                 <span className="font-medium">Overall Security Impact: </span>
-                <span className="text-green-600 dark:text-green-400 font-medium">
+                <span className={`text-green-600 dark:text-green-400 font-medium`}>
                   {overallImpact}
                 </span>
               </div>

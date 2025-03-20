@@ -40,6 +40,15 @@ export interface WidgetRegistry {
   getAll(): WidgetDefinition<any>[];
   renderWidget(id: string, props?: any): React.ReactNode;
   renderWidgets(filter?: (widget: WidgetDefinition<any>) => boolean, props?: WidgetProps): React.ReactNode[];
+  renderWidgetsWithHandlers(
+    filter?: (widget: WidgetDefinition<any>) => boolean,
+    props?: WidgetProps,
+    handlers?: {
+      onAvailabilityChange?: (level: SecurityLevel) => void;
+      onIntegrityChange?: (level: SecurityLevel) => void;
+      onConfidentialityChange?: (level: SecurityLevel) => void;
+    }
+  ): React.ReactNode[];
 }
 
 // Define widget definition interface
@@ -121,6 +130,66 @@ export class WidgetRegistryImpl implements WidgetRegistry {
         ...widget.defaultProps,
         ...securityLevels,         // Apply consistent security levels
         ...widgetProps,            // Allow other widget customization
+        // Force the security levels again to ensure consistency
+        availabilityLevel: securityLevels.availabilityLevel,
+        integrityLevel: securityLevels.integrityLevel,
+        confidentialityLevel: securityLevels.confidentialityLevel,
+      };
+
+      return (
+        <WidgetContainer
+          key={widget.id}
+          title={widget.title}
+          icon={widget.icon}
+          testId={`${WIDGET_REGISTRY_TEST_IDS.WIDGET_PREFIX}${widget.id}`}
+        >
+          <widget.component {...combinedProps} />
+        </WidgetContainer>
+      );
+    });
+  }
+
+  renderWidgetsWithHandlers(
+    filter?: (widget: WidgetDefinition<any>) => boolean,
+    props: WidgetProps = {},
+    handlers?: {
+      onAvailabilityChange?: (level: SecurityLevel) => void;
+      onIntegrityChange?: (level: SecurityLevel) => void;
+      onConfidentialityChange?: (level: SecurityLevel) => void;
+    }
+  ): React.ReactNode[] {
+    let widgetsToRender = Array.from(this.widgets.values());
+
+    if (filter) {
+      widgetsToRender = widgetsToRender.filter(filter);
+    }
+
+    // Sort widgets by order, then position
+    widgetsToRender = widgetsToRender
+      .sort((a, b) => (a.order || 0) - (b.order || 0))
+      .sort((a, b) => (a.position || 0) - (b.position || 0));
+    
+    // Extract global security levels from props
+    const securityLevels = {
+      availabilityLevel: props.availabilityLevel || "Moderate" as SecurityLevel,
+      integrityLevel: props.integrityLevel || "Moderate" as SecurityLevel,
+      confidentialityLevel: props.confidentialityLevel || "Moderate" as SecurityLevel,
+    };
+
+    return widgetsToRender.map((widget) => {
+      const widgetProps = props[widget.id] || {};
+      
+      // Ensure each widget gets the same security level props for consistency
+      const combinedProps = { 
+        ...widget.defaultProps,
+        ...securityLevels,         // Apply consistent security levels
+        ...widgetProps,            // Allow other widget customization
+        // Add handlers so widgets can propagate changes back to the parent
+        ...(handlers && {
+          onAvailabilityChange: handlers.onAvailabilityChange,
+          onIntegrityChange: handlers.onIntegrityChange,
+          onConfidentialityChange: handlers.onConfidentialityChange,
+        }),
         // Force the security levels again to ensure consistency
         availabilityLevel: securityLevels.availabilityLevel,
         integrityLevel: securityLevels.integrityLevel,
@@ -327,5 +396,38 @@ widgetRegistry.register({
     confidentialityLevel: "Moderate" as SecurityLevel,
   },
 });
+
+const renderWidget = (
+  widgetId: string, 
+  widgetProps: Record<string, any> = {},
+  onSecurityLevelChange?: {
+    onAvailabilityChange?: (level: SecurityLevel) => void;
+    onIntegrityChange?: (level: SecurityLevel) => void;
+    onConfidentialityChange?: (level: SecurityLevel) => void;
+  }
+) => {
+  const widgetConfig = getWidgetConfig(widgetId);
+  if (!widgetConfig) return null;
+
+  const { component: Component } = widgetConfig;
+  
+  // Merge security level change handlers if provided
+  const mergedProps = {
+    ...widgetProps,
+    ...(onSecurityLevelChange && {
+      onAvailabilityChange: onSecurityLevelChange.onAvailabilityChange,
+      onIntegrityChange: onSecurityLevelChange.onIntegrityChange,
+      onConfidentialityChange: onSecurityLevelChange.onConfidentialityChange
+    })
+  };
+
+  return <Component key={widgetId} {...mergedProps} />;
+};
+
+// Define a function to get the widget config
+function getWidgetConfig(widgetId: string) {
+  // Implement logic to get the widget config from the registry instance
+  return widgetRegistry.get(widgetId);
+}
 
 export default widgetRegistry;
