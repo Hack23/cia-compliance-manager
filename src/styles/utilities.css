@@ -731,3 +731,93 @@
   border-right: 2px solid var(--accent-color);
   text-shadow: 0 0 5px var(--accent-color);
 }
+
+/* Consistent content density utilities */
+.content-dense {
+  line-height: 1.4 !important;
+  font-size: 0.875rem !important;
+}
+
+.content-sparse {
+  line-height: 1.7 !important;
+  font-size: 0.9rem !important;
+}
+
+/* Consistent card and section styling */
+.card, 
+.info-card, 
+.metric-card {
+  padding: 1rem !important;
+  border-radius: 0.5rem !important;
+  margin-bottom: 1rem !important;
+  border: 1px solid var(--border-color) !important;
+  background: var(--card-background) !important;
+  transition: all 0.2s !important;
+}
+
+.card:hover, 
+.info-card:hover, 
+.metric-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 8px var(--shadow-color) !important;
+}
+
+/* Improved typography for better readability */
+.metric-label, 
+.label-text, 
+[class*="label"] {
+  font-size: 0.75rem !important;
+  color: var(--text-secondary) !important;
+  margin-bottom: 0.25rem !important;
+  font-weight: 500 !important;
+}
+
+.metric-value, 
+.value-text, 
+[class*="value"] {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  color: var(--text-color) !important;
+  font-family: var(--font-mono) !important;
+}
+
+/* Ensure content lists have consistent styling */
+.widget-list {
+  margin: 0 !important;
+  padding-left: 1.5rem !important;
+  list-style-type: disc !important;
+}
+
+.widget-list li {
+  margin-bottom: 0.5rem !important;
+  line-height: 1.4 !important;
+  font-size: 0.875rem !important;
+}
+
+/* Ensure test ID targeting is consistent */
+[data-testid] {
+  position: relative !important;
+}
+
+/* Style for making test ID visible during development (activate with JS) */
+[data-testid].show-testid::after {
+  content: attr(data-testid);
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  background: rgba(0, 102, 204, 0.9);
+  color: white;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 10px;
+  z-index: 1000;
+  pointer-events: none;
+  font-family: monospace;
+}
+
+/* Test ID patterns for common widget sections */
+.section-header[data-testid$="-header"],
+.section-content[data-testid$="-content"],
+.section-footer[data-testid$="-footer"] {
+  width: 100%;
+}

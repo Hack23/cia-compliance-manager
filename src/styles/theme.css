@@ -630,3 +630,78 @@ h6 {
   height: auto !important;
   margin: 0 auto !important;
 }
+
+/* Consistent widget header styling */
+.widget-header, 
+[data-testid^="widget-"] > div:first-child {
+  height: 40px !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 1rem !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  background: linear-gradient(to right, 
+    rgba(0, 102, 204, 0.05) 0%, 
+    rgba(0, 102, 204, 0.01) 100%) !important;
+}
+
+.dark .widget-header,
+.dark [data-testid^="widget-"] > div:first-child {
+  background: linear-gradient(to right, 
+    rgba(0, 204, 255, 0.1) 0%, 
+    rgba(0, 204, 255, 0.02) 100%) !important;
+  border-bottom: 1px solid rgba(0, 204, 255, 0.2) !important;
+}
+
+/* Consistent widget title styling */
+.widget-title, 
+[data-testid^="widget-"] > div:first-child h3 {
+  font-family: var(--font-accent) !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  color: var(--primary-color) !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+}
+
+.dark .widget-title,
+.dark [data-testid^="widget-"] > div:first-child h3 {
+  color: var(--primary-color) !important;
+  text-shadow: 0 0 4px rgba(0, 204, 255, 0.3) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-size: 0.85rem !important;
+}
+
+/* Consistent widget icon styling */
+.widget-icon, 
+[data-testid^="widget-"] span.mr-2 {
+  margin-right: 0.5rem !important;
+  opacity: 0.8 !important;
+  font-size: 1rem !important;
+}
+
+.dark .widget-icon,
+.dark [data-testid^="widget-"] span.mr-2 {
+  color: var(--primary-color) !important;
+  text-shadow: 0 0 4px rgba(0, 204, 255, 0.4) !important;
+}
+
+/* Ensure consistent heading styles within widgets */
+[data-testid^="widget-"] h4 {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  margin: 0 0 0.75rem 0 !important;
+  color: var(--text-color) !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.dark [data-testid^="widget-"] h4 {
+  color: var(--primary-color) !important;
+  font-family: var(--font-accent) !important;
+  letter-spacing: 0.03em !important;
+}

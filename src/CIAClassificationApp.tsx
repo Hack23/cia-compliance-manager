@@ -110,28 +110,6 @@ const CIAClassificationApp: React.FC = () => {
     </div>
   );
 
-  // Create a simple widget wrapper
-  const Widget = ({ 
-    title, 
-    icon, 
-    testId, 
-    children 
-  }: { 
-    title: string, 
-    icon: string, 
-    testId: string, 
-    children: React.ReactNode 
-  }) => (
-    <div 
-      className="widget bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden"
-      data-testid={testId}
-    >
-      <WidgetHeader title={title} icon={icon} />
-      <div className="widget-body p-4">
-        {children}
-      </div>
-    </div>
-  );
 
   return (
     <div className="app-container">
@@ -151,12 +129,6 @@ const CIAClassificationApp: React.FC = () => {
         <div className="dashboard-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4"
              data-testid="dashboard-grid">
           
-          {/* Security Level Widget */}
-          <Widget 
-            title={WIDGET_TITLES.SECURITY_LEVEL}
-            icon={WIDGET_ICONS.SECURITY_LEVEL}
-            testId="widget-security-level"
-          >
             <SecurityLevelWidget
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
@@ -165,150 +137,74 @@ const CIAClassificationApp: React.FC = () => {
               onIntegrityChange={handleIntegrityChange}
               onConfidentialityChange={handleConfidentialityChange}
             />
-          </Widget>
-          
-          {/* Business Impact Analysis Widget */}
-          <Widget 
-            title={WIDGET_TITLES.BUSINESS_IMPACT}
-            icon={WIDGET_ICONS.BUSINESS_IMPACT}
-            testId="widget-business-impact"
-          >
+
+
             <BusinessImpactAnalysisWidget
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
               confidentialityLevel={confidentialityLevel}
             />
-          </Widget>
-          
-          {/* Security Summary Widget */}
-          <Widget 
-            title={WIDGET_TITLES.SECURITY_SUMMARY}
-            icon={WIDGET_ICONS.SECURITY_SUMMARY}
-            testId="widget-security-summary"
-          >
             <SecuritySummaryWidget
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
               confidentialityLevel={confidentialityLevel}
             />
-          </Widget>
           
-          {/* Value Creation Widget */}
-          <Widget 
-            title={WIDGET_TITLES.VALUE_CREATION}
-            icon={WIDGET_ICONS.VALUE_CREATION}
-            testId="widget-value-creation"
-          >
             <ValueCreationWidget
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
               confidentialityLevel={confidentialityLevel}
             />
-          </Widget>
           
-          {/* Cost Estimation Widget */}
-          <Widget 
-            title={WIDGET_TITLES.COST_ESTIMATION}
-            icon={WIDGET_ICONS.COST_ESTIMATION}
-            testId="widget-cost-estimation"
-          >
             <CostEstimationWidget
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
               confidentialityLevel={confidentialityLevel}
             />
-          </Widget>
           
-          {/* Compliance Status Widget */}
-          <Widget 
-            title={WIDGET_TITLES.COMPLIANCE_STATUS}
-            icon={WIDGET_ICONS.COMPLIANCE_STATUS}
-            testId="widget-compliance-status"
-          >
             <ComplianceStatusWidget
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
               confidentialityLevel={confidentialityLevel}
             />
-          </Widget>
-                    
-          {/* Availability Impact Widget */}
-          <Widget 
-            title={WIDGET_TITLES.AVAILABILITY_IMPACT}
-            icon={WIDGET_ICONS.AVAILABILITY_IMPACT}
-            testId="widget-availability-impact"
-          >
-            <AvailabilityImpactWidget
+
+
+           <ConfidentialityImpactWidget
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
               confidentialityLevel={confidentialityLevel}
             />
-          </Widget>
-          
-          {/* Integrity Impact Widget */}
-          <Widget 
-            title={WIDGET_TITLES.INTEGRITY_IMPACT}
-            icon={WIDGET_ICONS.INTEGRITY_IMPACT}
-            testId="widget-integrity-impact"
-          >
+
             <IntegrityImpactWidget
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
               confidentialityLevel={confidentialityLevel}
             />
-          </Widget>
-          
-          {/* Confidentiality Impact Widget */}
-          <Widget 
-            title={WIDGET_TITLES.CONFIDENTIALITY_IMPACT}
-            icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT}
-            testId="widget-confidentiality-impact"
-          >
-            <ConfidentialityImpactWidget
+
+           <AvailabilityImpactWidget
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
               confidentialityLevel={confidentialityLevel}
             />
-          </Widget>
+
           
-          {/* Security Visualization Widget */}
-          <Widget 
-            title={WIDGET_TITLES.SECURITY_VISUALIZATION}
-            icon={WIDGET_ICONS.SECURITY_VISUALIZATION}
-            testId="widget-security-visualization"
-          >
             <SecurityVisualizationWidget
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
               confidentialityLevel={confidentialityLevel}
             />
-          </Widget>
           
-          {/* Security Resources Widget */}
-          <Widget 
-            title={WIDGET_TITLES.SECURITY_RESOURCES}
-            icon={WIDGET_ICONS.SECURITY_RESOURCES}
-            testId="widget-security-resources"
-          >
             <SecurityResourcesWidget
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
               confidentialityLevel={confidentialityLevel}
             />
-          </Widget>
           
-          {/* Technical Details Widget */}
-          <Widget 
-            title={WIDGET_TITLES.TECHNICAL_DETAILS}
-            icon={WIDGET_ICONS.TECHNICAL_DETAILS}
-            testId="widget-technical-details"
-          >
             <TechnicalDetailsWidget
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
               confidentialityLevel={confidentialityLevel}
             />
-          </Widget>
         </div>
       </div>
     </div>

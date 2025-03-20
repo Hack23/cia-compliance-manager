@@ -253,3 +253,46 @@
   overflow: visible; /* Allow content to be visible */
   height: auto; /* Allow natural height */
 }
+
+/* Standardize all widget sizes to ensure consistent grid layout */
+[data-testid^="widget-"] {
+  width: 100% !important;
+  min-height: 900px !important; /* Doubled from 450px to 900px */
+  max-height: 900px !important; /* Doubled from 450px to 900px */
+  overflow-y: auto !important; /* Enable scrolling for content that exceeds height */
+  display: flex !important;
+  flex-direction: column !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Adjust grid to ensure consistent columns regardless of screen size */
+.dashboard-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important; /* Force 3 columns */
+  gap: 1rem !important;
+  width: 100% !important;
+  padding: 0.5rem !important;
+}
+
+/* Responsive adjustments to maintain consistent layout */
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr) !important; /* 2 columns on medium screens */
+  }
+  
+  [data-testid^="widget-"] {
+    min-height: 800px !important; /* Doubled from 400px to 800px */
+    max-height: 800px !important; /* Doubled from 400px to 800px */
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr !important; /* Single column on small screens */
+  }
+  
+  [data-testid^="widget-"] {
+    min-height: 700px !important; /* Doubled from 350px to 700px */
+    max-height: none !important; /* Remove max height on mobile for better content display */
+  }
+}

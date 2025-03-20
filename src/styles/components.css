@@ -998,3 +998,291 @@ textarea:focus {
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* Standardize widget content overflow handling */
+[data-testid^="widget-"] > div.p-4, 
+.widget-body {
+  overflow-y: auto !important; /* Enable vertical scrolling */
+  overflow-x: hidden !important; /* Prevent horizontal scrolling */
+  scrollbar-width: thin; /* Firefox */
+  height: calc(100% - 40px) !important; /* Account for header */
+  padding: 1.25rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Optimize scrollbars */
+[data-testid^="widget-"] > div.p-4::-webkit-scrollbar,
+.widget-body::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+[data-testid^="widget-"] > div.p-4::-webkit-scrollbar-thumb,
+.widget-body::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 3px;
+}
+
+.dark [data-testid^="widget-"] > div.p-4::-webkit-scrollbar-thumb,
+.dark .widget-body::-webkit-scrollbar-thumb {
+  background: rgba(0, 204, 255, 0.5);
+}
+
+/* Add show more/less button styling */
+.show-more-button {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--primary-color);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.show-more-button:hover {
+  background: rgba(0, 102, 204, 0.1);
+}
+
+.dark .show-more-button:hover {
+  background: rgba(0, 204, 255, 0.1);
+}
+
+.show-more-button svg {
+  margin-left: 0.25rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  transition: transform 0.2s;
+}
+
+.show-more-button.expanded svg {
+  transform: rotate(180deg);
+}
+
+/* Section container to make content areas more distinct */
+.content-section {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dark .content-section {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Improve information hierarchy within widgets */
+.primary-info {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 1rem !important;
+  padding: 0.75rem !important;
+  background: rgba(0, 102, 204, 0.05) !important;
+  border-radius: 0.5rem !important;
+  border-left: 3px solid var(--primary-color) !important;
+}
+
+.dark .primary-info {
+  background: rgba(0, 204, 255, 0.05) !important;
+  border-left: 3px solid var(--primary-color) !important;
+}
+
+.secondary-info {
+  font-size: 0.875rem !important;
+  margin-bottom: 0.75rem !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Consistent metric display for KPIs */
+.metrics-container {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+  gap: 0.75rem !important;
+  margin: 1rem 0 !important;
+}
+
+.metric-card {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 0.75rem !important;
+  background: rgba(0, 0, 0, 0.02) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  border-radius: 0.5rem !important;
+  text-align: center !important;
+}
+
+.dark .metric-card {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.metric-label {
+  font-size: 0.75rem !important;
+  color: var(--text-secondary) !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.metric-value {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  font-family: var(--font-mono) !important;
+}
+
+/* Better alerts and notices */
+.alert {
+  padding: 0.75rem 1rem !important;
+  border-radius: 0.5rem !important;
+  margin-bottom: 1rem !important;
+  font-size: 0.875rem !important;
+  position: relative !important;
+  padding-left: 2.5rem !important;
+}
+
+.alert::before {
+  position: absolute !important;
+  left: 0.75rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  font-size: 1rem !important;
+}
+
+.alert-info {
+  background: rgba(0, 102, 204, 0.05) !important;
+  border-left: 3px solid var(--primary-color) !important;
+}
+
+.alert-info::before {
+  content: "ℹ️" !important;
+}
+
+.alert-warning {
+  background: rgba(241, 196, 15, 0.1) !important;
+  border-left: 3px solid #f1c40f !important;
+}
+
+.alert-warning::before {
+  content: "⚠️" !important;
+}
+
+.alert-danger {
+  background: rgba(231, 76, 60, 0.1) !important;
+  border-left: 3px solid #e74c3c !important;
+}
+
+.alert-danger::before {
+  content: "🛑" !important;
+}
+
+/* Enhanced CIA component styling for dark mode */
+.dark [data-testid="widget-availability-impact"] .section-container,
+.dark [data-testid="widget-availability-impact"] .metric-card {
+  border-color: rgba(0, 204, 255, 0.3) !important;
+  background-color: rgba(0, 204, 255, 0.05) !important;
+}
+
+.dark [data-testid="widget-integrity-impact"] .section-container,
+.dark [data-testid="widget-integrity-impact"] .metric-card {
+  border-color: rgba(0, 230, 118, 0.3) !important;
+  background-color: rgba(0, 230, 118, 0.05) !important;
+}
+
+.dark [data-testid="widget-confidentiality-impact"] .section-container,
+.dark [data-testid="widget-confidentiality-impact"] .metric-card {
+  border-color: rgba(167, 66, 255, 0.3) !important;
+  background-color: rgba(167, 66, 255, 0.05) !important;
+}
+
+/* Better security level indicator contrast */
+.dark .security-level-indicator.none {
+  background-color: #ff5252 !important;
+  box-shadow: 0 0 8px rgba(255, 82, 82, 0.5) !important;
+}
+
+.dark .security-level-indicator.low {
+  background-color: #ff9800 !important;
+  box-shadow: 0 0 8px rgba(255, 152, 0, 0.5) !important;
+}
+
+.dark .security-level-indicator.moderate {
+  background-color: #ffeb3b !important;
+  box-shadow: 0 0 8px rgba(255, 235, 59, 0.5) !important;
+}
+
+.dark .security-level-indicator.high {
+  background-color: #00e676 !important;
+  box-shadow: 0 0 8px rgba(0, 230, 118, 0.5) !important;
+}
+
+.dark .security-level-indicator.very-high {
+  background-color: #00ccff !important;
+  box-shadow: 0 0 8px rgba(0, 204, 255, 0.5) !important;
+}
+
+/* Ensure optimal text visibility in dark mode */
+.dark {
+  --text-color: #e0e6ed; /* Lighter text for dark backgrounds */
+  --text-secondary: #a0abb9; /* Lighter secondary text */
+}
+
+/* Enhanced text visibility for all text elements */
+.dark p, 
+.dark li, 
+.dark span:not([class*="icon"]),
+.dark div:not([class*="background"]):not([class*="gradient"]),
+.dark label,
+.dark td, 
+.dark th,
+.dark input, 
+.dark select, 
+.dark textarea,
+.dark [data-testid^="widget-"] p,
+.dark [data-testid^="widget-"] div,
+.dark [data-testid^="widget-"] span:not([class*="icon"]) {
+  color: var(--text-color) !important;
+}
+
+/* Stronger contrast for section headings */
+.dark h4, 
+.dark h5, 
+.dark h6,
+.dark [data-testid^="widget-"] h4,
+.dark [data-testid^="widget-"] h5,
+.dark [data-testid^="widget-"] h6 {
+  color: #ffffff !important;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5) !important;
+  font-weight: 600 !important;
+}
+
+/* Enhance badge visibility in dark mode */
+.dark .status-badge {
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3) !important;
+  color: #e0e6ed !important;
+  padding: 0.35rem 0.75rem !important;
+}
+
+/* Better contrast for links in dark mode */
+.dark a {
+  color: var(--primary-light) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+}
+
+.dark a:hover {
+  text-decoration: none !important;
+  color: var(--accent-color) !important;
+}
+
+/* Ensure visibility in recommendation sections */
+.dark [data-testid^="widget-"] [data-testid$="-recommendation-0"],
+.dark [data-testid^="widget-"] [data-testid$="-recommendation-1"],
+.dark [data-testid^="widget-"] [data-testid$="-recommendation-2"] {
+  color: var(--text-color) !important;
+}
