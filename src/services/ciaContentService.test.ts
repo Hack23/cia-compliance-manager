@@ -2,12 +2,8 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../types/cia";
 import { BusinessImpactDetails } from "../types/impact";
 import { createTestCIAContentService } from "../utils/serviceTestUtils";
-import {
-  CIAContentService, createCIAContentService, getInformationSensitivity,
-  getRiskBadgeVariant, getROIEstimate, getValuePoints
-} from "./ciaContentService";
 
-// Mock the service dependencies
+// Properly format the vi.mock() calls with return objects
 vi.mock("./businessImpactService", () => ({
   BusinessImpactService: vi.fn().mockImplementation(() => ({
     getBusinessImpact: vi.fn().mockReturnValue({
@@ -266,6 +262,11 @@ vi.mock("./securityResourceService", () => ({
     ])
   }))
 }));
+
+import {
+  CIAContentService, createCIAContentService, getInformationSensitivity,
+  getRiskBadgeVariant, getROIEstimate, getValuePoints
+} from "./ciaContentService";
 
 // Mock data provider
 const mockDataProvider = vi.hoisted(() => {
