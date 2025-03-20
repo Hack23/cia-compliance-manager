@@ -1,4 +1,3 @@
-import { DISPLAY_FORMAT } from "../constants/testConstants";
 import { SecurityLevel } from "../types/cia";
 
 /**
@@ -28,59 +27,67 @@ export function toTitleCase(str: string): string {
 }
 
 /**
- * Format a percentage value with consistent display
+ * Formats a decimal as a percentage
  * 
- * @param value - Numeric value to format as percentage
- * @param decimalPlaces - Number of decimal places (default: 2)
+ * @param value - Decimal value (0.75 = 75%)
+ * @param decimalPlaces - Number of decimal places to show
  * @returns Formatted percentage string
  */
-export function formatPercentage(
-  value: number,
-  decimalPlaces: number = DISPLAY_FORMAT.DECIMAL_PLACES
-): string {
-  return `${value.toFixed(decimalPlaces)}${DISPLAY_FORMAT.PERCENTAGE_SUFFIX}`;
+export function formatPercentage(value: number, decimalPlaces: number = 0): string {
+  // Multiply by 100 to convert decimal to percentage
+  const percentage = value * 100;
+
+  // Format with specified decimal places
+  return `${percentage.toFixed(decimalPlaces)}%`;
 }
 
 /**
- * Format a currency value with consistent display
+ * Formats a number as currency with proper thousands separators
  * 
- * @param value - Numeric value to format as currency
- * @param currencyCodeOrDecimals - Either decimal places or currency code
- * @param locale - Optional locale for formatting
+ * @param value - The number to format as currency
+ * @param options - Formatting options or currency code string for backward compatibility
+ * @param locale - Optional locale for backward compatibility
  * @returns Formatted currency string
  */
 export function formatCurrency(
   value: number,
-  currencyCodeOrDecimals: number | string = DISPLAY_FORMAT.DECIMAL_PLACES,
+  options?: {
+    locale?: string;
+    currency?: string;
+    minimumFractionDigits?: number;
+    maximumFractionDigits?: number;
+  } | string,
   locale?: string
 ): string {
-  // If the second parameter is a string, assume it's a currency code
-  if (typeof currencyCodeOrDecimals === 'string') {
-    return formatCurrencyWithOptions(value, currencyCodeOrDecimals, locale || 'en-US');
+  // Handle backward compatibility with old function signature
+  if (typeof options === 'string') {
+    return new Intl.NumberFormat(locale || 'en-US', {
+      style: 'currency',
+      currency: options,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(value);
   }
 
-  // Otherwise, treat it as decimal places
-  return `${DISPLAY_FORMAT.CURRENCY_PREFIX}${value.toFixed(currencyCodeOrDecimals)}`;
-}
+  // New signature with options object
+  const {
+    locale: optLocale = 'en-US',
+    currency = 'USD',
+    minimumFractionDigits = 2,
+    maximumFractionDigits = 2
+  } = options || {};
 
-/**
- * Format a currency value with currency code and locale
- * 
- * @param value - Numeric value to format
- * @param currencyCode - Currency code (e.g., 'USD', 'EUR')
- * @param locale - Locale for formatting (e.g., 'en-US')
- * @returns Formatted currency string
- */
-export function formatCurrencyWithOptions(
-  value: number,
-  currencyCode: string = 'USD',
-  locale: string = 'en-US'
-): string {
-  return new Intl.NumberFormat(locale, {
+  // Use Intl.NumberFormat to ensure proper thousands separators
+  return new Intl.NumberFormat(optLocale, {
     style: 'currency',
-    currency: currencyCode
+    currency,
+    minimumFractionDigits,
+    maximumFractionDigits
   }).format(value);
 }
+
+// For backward compatibility, re-export this function
+export const formatCurrencyWithOptions = formatCurrency;
 
 /**
  * Format security level for display (capitalize first letter)
@@ -93,13 +100,38 @@ export function formatSecurityLevel(level: SecurityLevel): string {
 }
 
 /**
- * Format risk level for display
+ * Risk level icons for different risk levels
+ */
+const RISK_LEVEL_ICONS: Record<string, string> = {
+  "Critical Risk": "⚠️",
+  "High Risk": "🔴",
+  "Medium Risk": "🟠",
+  "Low Risk": "🟡",
+  "Minimal Risk": "🟢",
+  "No Risk": "✅",
+  "Unknown Risk": "❓"
+};
+
+/**
+ * Formats a risk level by adding an appropriate icon
  * 
- * @param riskLevel - Risk level string
- * @returns Formatted risk level string
+ * @param riskLevel - The risk level text to format
+ * @returns Risk level with icon prefix
  */
 export function formatRiskLevel(riskLevel: string): string {
-  return riskLevel;
+  // Handle case insensitivity by checking against lowercase values
+  let icon = "❓"; // Default icon for unknown risk levels
+
+  // Look up the icon based on the risk level
+  const riskLowerCase = riskLevel.toLowerCase();
+  Object.entries(RISK_LEVEL_ICONS).forEach(([level, levelIcon]) => {
+    if (level.toLowerCase() === riskLowerCase) {
+      icon = levelIcon;
+    }
+  });
+
+  // Return risk level with the icon
+  return `${icon} ${riskLevel}`;
 }
 
 /**

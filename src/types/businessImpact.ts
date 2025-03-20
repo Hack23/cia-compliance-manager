@@ -1,10 +1,18 @@
+/**
+ * Business Impact Types
+ * 
+ * ## Business Perspective
+ * 
+ * These types define the structure of business impact data for security analyses.
+ * They help organizations understand the consequences of different security
+ * choices across various dimensions of business operation. 💼
+ */
+
 // Type for a single business consideration item
 export interface BusinessConsideration {
-  title?: string;
+  type: string;
+  risk: string;
   description: string;
-  impact?: string;
-  type?: string;
-  risk?: string;
 }
 
 // Type for business considerations structure
@@ -14,7 +22,7 @@ export interface BusinessConsiderations {
   };
 }
 
-// Ensure both singular and plural forms are exported
+// Type for business key benefit items
 export type BusinessKeyBenefit =
   | string
   | { title: string; description: string };
@@ -30,11 +38,13 @@ export interface BusinessImpactIcons {
 }
 
 /**
- * Business Impact Types
- *
+ * Detailed business impact structure
+ * 
  * ## Business Perspective
- *
- * These types define the structure of business impact data for security analyses.
+ * 
+ * This structure represents comprehensive business impact analysis
+ * across multiple dimensions such as financial, operational, and regulatory
+ * concerns, enabling CISOs to present security impacts in business terms. 💼
  */
 export interface BusinessImpactDetails {
   summary: string;
@@ -62,51 +72,33 @@ export interface BusinessImpactDetails {
   };
 }
 
-// Export the actual data
-export const BUSINESS_CONSIDERATIONS: BusinessConsiderations = {
-  AVAILABILITY: {
-    NONE: [],
-    LOW: [],
-    MODERATE: [],
-    HIGH: [],
-    VERY_HIGH: [],
-  },
-  INTEGRITY: {
-    NONE: [],
-    LOW: [],
-    MODERATE: [],
-    HIGH: [],
-    VERY_HIGH: [],
-  },
-  CONFIDENTIALITY: {
-    NONE: [],
-    LOW: [],
-    MODERATE: [],
-    HIGH: [],
-    VERY_HIGH: [],
-  },
-};
+// Types for business value structures
+export interface BusinessValueMetric {
+  value: string;
+  icon: string;
+  description: string;
+}
 
-// Export the actual business key benefits
-export const BusinessKeyBenefits: BusinessKeyBenefits = {
-  NONE: [],
-  LOW: [
-    "Cost-effective solution for non-critical systems",
-    "Minimal maintenance overhead",
-  ],
-  MODERATE: [
-    "Good balance of security vs. cost",
-    "Meets regulatory requirements",
-    "Suitable for most business applications",
-  ],
-  HIGH: [
-    "Robust protection for sensitive data",
-    "Compliance with stringent requirements",
-    "Minimizes risk of security incidents",
-  ],
-  VERY_HIGH: [
-    "Maximum protection for critical systems",
-    "Suitable for highly regulated environments",
-    "Comprehensive security guarantees",
-  ],
-};
+export interface BusinessROIEstimates {
+  [level: string]: BusinessValueMetric;
+}
+
+export interface BusinessTimeToValue {
+  [level: string]: string;
+}
+
+export interface BusinessValueMetrics {
+  ROI_ESTIMATES: BusinessROIEstimates;
+  TIME_TO_VALUE: BusinessTimeToValue;
+}
+
+// Import and re-export the actual data from constants
+// This resolves the circular dependency
+import {
+  BUSINESS_CONSIDERATIONS as BC,
+  BUSINESS_KEY_BENEFITS as BKB
+} from "../constants/businessConstants";
+
+export const BUSINESS_CONSIDERATIONS = BC;
+export const BUSINESS_KEY_BENEFITS = BKB;
+

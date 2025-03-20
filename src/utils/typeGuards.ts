@@ -533,22 +533,31 @@ export function hasTagValue(obj: any, tagValue: string): boolean {
 }
 
 /**
- * Parses a risk level string to a number
- * @deprecated Use parseRiskLevel from riskUtils instead for consistent behavior
- * @param level - Risk level string to parse
- * @returns Numeric value of the risk level (0-4)
+ * Parses a risk level from a string, returning a numeric value
+ * 
+ * @param riskLevel - Risk level string to parse
+ * @returns Numeric risk level (0-4)
  */
-export function parseRiskLevel(level: unknown): number {
-  if (level === null || level === undefined) return 0;
-  if (typeof level === "number") return level;
-  if (typeof level === "string") {
-    const trimmed = level.trim();
-    // If the string does not strictly match a numeric format, return default 0
-    if (!/^-?\d+(\.\d+)?$/.test(trimmed)) {
-      return 0;
-    }
-    return Number(trimmed);
+export function parseRiskLevel(riskLevel: string | null | undefined): number {
+  // Handle null and undefined
+  if (riskLevel === null || riskLevel === undefined) {
+    return 0;
   }
+
+  // If it's a number, parse it directly
+  if (!isNaN(Number(riskLevel))) {
+    return Number(riskLevel);
+  }
+
+  // Handle common risk level strings
+  const lowerRisk = riskLevel.toLowerCase();
+  if (lowerRisk.includes('critical')) return 4;
+  if (lowerRisk.includes('high')) return 3;
+  if (lowerRisk.includes('medium') || lowerRisk.includes('moderate')) return 2;
+  if (lowerRisk.includes('low')) return 1;
+  if (lowerRisk.includes('minimal') || lowerRisk.includes('none')) return 0;
+
+  // Default to 0 if no match
   return 0;
 }
 
