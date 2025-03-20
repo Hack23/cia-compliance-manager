@@ -5,20 +5,12 @@
  *
  * ## Business Perspective
  * Hooks encapsulate reusable business logic that can be shared across components,
- * ensuring consistent security assessment and presentation.
- *
- * ## Architecture Perspective
- * Hooks follow React's composition model to provide reusable stateful logic
- * without class components or complex patterns.
- *
- * ## Security Perspective
- * Hooks properly manage and validate security-related data, ensuring consistent
- * application of security controls.
- *
- * @module hooks
+ * ensuring consistent security assessment and presentation. 🔒
  */
 
+// CIA Options is the main hook used in our simplified app
 export * from "./useCIAOptions";
-export { useCIAOptions } from "./useCIAOptions";
-export * from "./useLocalStorage";
+
+// Any other hooks that are actually present in the codebase and used
+// can be added here as needed
 
