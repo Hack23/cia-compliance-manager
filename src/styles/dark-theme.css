@@ -1019,3 +1019,91 @@
 .dark .level-very-high {
   box-shadow: 0 0 4px currentColor; /* Reduced intensity */
 }
+
+/* Apply dark theme styles to match the DOM structure */
+.dark [data-testid^="widget-"] {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 26, 37, 0.95) 0%,
+    rgba(0, 20, 26, 0.98) 100%
+  );
+  border: 1px solid var(--ingress-border);
+  box-shadow: var(--ingress-glow);
+  position: relative;
+  overflow: hidden;
+  animation: flicker 10s infinite;
+}
+
+.dark [data-testid^="widget-"] > div:first-child {
+  background: linear-gradient(
+    to right,
+    rgba(0, 204, 102, 0.12),
+    rgba(0, 170, 85, 0.05)
+  );
+  box-shadow: inset 0 -1px 0 rgba(0, 204, 102, 0.3);
+}
+
+.dark [data-testid^="widget-"] > div:first-child h3 {
+  color: var(--ingress-primary);
+  text-shadow: 0 0 4px rgba(0, 204, 102, 0.4);
+  font-family: "Orbitron", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Enhanced impact section visibility */
+.dark .impact-section {
+  background-color: rgba(0, 20, 40, 0.6);
+  border: 1px solid var(--ingress-border);
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.dark .impact-title {
+  color: var(--ingress-primary);
+  font-family: var(--font-accent);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dark .impact-content {
+  color: var(--ingress-text);
+}
+
+.dark .metric-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+  color: var(--ingress-text);
+}
+
+.dark .metric-label {
+  color: var(--ingress-secondary);
+  font-size: 0.8rem;
+}
+
+.dark .metric-value {
+  color: var(--ingress-text);
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+/* Ensure all text is visible */
+.dark p, 
+.dark div, 
+.dark span, 
+.dark h1, 
+.dark h2, 
+.dark h3, 
+.dark h4, 
+.dark h5, 
+.dark h6,
+.dark li,
+.dark label,
+.dark td,
+.dark th {
+  color: var(--ingress-text);
+}

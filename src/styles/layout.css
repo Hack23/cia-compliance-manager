@@ -9,6 +9,29 @@
   padding-left: 0.25rem;
 }
 
+/* Align with the grid structure in CIAClassificationApp.tsx */
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3.gap-4.p-4[data-testid="dashboard-grid"] {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  overflow: visible; /* Ensure grid doesn't clip content */
+}
+
+/* Apply responsive grid based on CIAClassificationApp.tsx */
+@media (min-width: 640px) {
+  .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3.gap-4.p-4[data-testid="dashboard-grid"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3.gap-4.p-4[data-testid="dashboard-grid"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 /* Improved dashboard grid with better spacing */
 .dashboard-grid {
   display: grid;

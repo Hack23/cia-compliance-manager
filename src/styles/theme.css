@@ -19,6 +19,34 @@ body,
   transition-timing-function: var(--transition-function);
 }
 
+/* App container aligned with CIAClassificationApp structure */
+.app-container {
+  min-height: 100vh;
+}
+
+/* Ensure dark mode class applies correctly */
+.min-h-screen.dark.bg-gray-900,
+.min-h-screen.bg-gray-100 {
+  background-color: var(--background-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Match the app title structure */
+.text-2xl.font-bold {
+  font-family: var(--font-accent);
+  letter-spacing: 0.5px;
+}
+
+.dark .text-2xl.font-bold {
+  font-family: var(--font-accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px var(--primary-color);
+}
+
 /* Theme-specific styles */
 .app-container {
   background-color: var(--background-color);

@@ -8,7 +8,6 @@
 
 export { default as AvailabilityImpactWidget } from "./AvailabilityImpactWidget";
 export { default as BusinessImpactAnalysisWidget } from "./BusinessImpactAnalysisWidget";
-export { default as CIAImpactSummaryWidget } from "./CIAImpactSummaryWidget";
 export { ComplianceStatusWidget } from "./ComplianceStatusWidget";
 export { default as ConfidentialityImpactWidget } from "./ConfidentialityImpactWidget";
 export { default as CostEstimationWidget } from "./CostEstimationWidget";

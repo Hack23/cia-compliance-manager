@@ -74,8 +74,8 @@
   --accent-color: #00ffaa;
   --background-color: #0a1520;
   --card-background: #0e1c2b;
-  --text-color: #e0e6ed;
-  --text-secondary: #a0abb9;
+  --text-color: #e0e6ed; /* Make sure this is light enough for dark backgrounds */
+  --text-secondary: #a0abb9; /* Make sure this is light enough for dark backgrounds */
   --border-color: rgba(0, 204, 255, 0.2);
   --shadow-color: rgba(0, 204, 255, 0.1);
   --highlight-color: #00ffaa;

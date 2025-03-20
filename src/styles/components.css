@@ -1,5 +1,118 @@
 /* Component-specific styles */
 
+/* Widget styles aligned with actual DOM structure */
+[data-testid^="widget-"] {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 8px var(--shadow-color);
+  border-radius: var(--border-radius);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  height: auto; /* Allow height to adapt to content */
+  min-height: 300px; /* Minimum height without !important */
+  max-height: none; /* Remove maximum height restriction */
+  overflow: visible; /* Allow content to be visible */
+}
+
+.dark [data-testid^="widget-"] {
+  border-color: rgba(0, 204, 102, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 204, 102, 0.15), 0 0 2px var(--primary-color);
+}
+
+[data-testid^="widget-"]:hover {
+  box-shadow: 0 6px 12px var(--shadow-color);
+  transform: translateY(-2px);
+}
+
+.dark [data-testid^="widget-"]:hover {
+  box-shadow: 0 8px 16px rgba(0, 204, 102, 0.2), 0 0 6px var(--primary-color);
+}
+
+/* Widget header styling aligned with CIAClassificationApp structure */
+.border-b.border-gray-200.dark\:border-gray-700.px-4.py-3.flex.justify-between.items-center,
+[data-testid^="widget-"] > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.75rem; /* Reduced padding */
+  height: 32px; /* Fixed reduced height */
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--header-bg);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  margin-bottom: 0; /* Ensure no bottom margin */
+}
+
+/* Reduce header text size and make it green */
+[data-testid^="widget-"] > div:first-child h3,
+.border-b.border-gray-200.dark\:border-gray-700.px-4.py-3.flex.justify-between.items-center h3 {
+  margin: 0;
+  font-size: 0.85rem; /* Smaller font */
+  font-weight: 600;
+  color: var(--primary-color); /* Always green in both themes */
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-accent);
+  line-height: 1.1; /* Tighter line height */
+}
+
+/* Widget content area aligned with CIAClassificationApp structure */
+[data-testid^="widget-"] > div.p-4 {
+  padding: 0.75rem; /* Consistent padding without !important */
+  flex: 1 1 auto;
+  overflow-y: auto; /* Change to auto for better scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100% - 40px); /* Account for header height */
+}
+
+/* App title styling aligned with CIAClassificationApp structure */
+.mb-6.p-4.bg-white.dark\:bg-gray-800.rounded-lg.shadow-md.flex.justify-between.items-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem; /* Reduced padding */
+  background-color: var(--card-background);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  margin-bottom: 0.75rem; /* Reduced margin */
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.mb-6.p-4.bg-white.dark\:bg-gray-800.rounded-lg.shadow-md.flex.justify-between.items-center h1 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-family: var(--font-accent);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Dark mode toggle button styled correctly */
+.px-4.py-2.bg-blue-500.dark\:bg-blue-600.text-white.rounded-md {
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.15s;
+  color: white;
+  padding: 0.5rem 1rem;
+}
+
+.dark .px-4.py-2.bg-blue-500.dark\:bg-blue-600.text-white.rounded-md {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+}
+
 /* Widget styles - with improved consistency */
 .widget {
   background-color: var(--card-background);
@@ -855,4 +968,33 @@ textarea:focus {
     rgba(0, 204, 255, 0.1),
     rgba(0, 204, 255, 0.02)
   ) !important;
+}
+
+/* Ensure widget content text is visible in dark mode */
+.dark [data-testid^="widget-"] .widget-body {
+  color: var(--text-color);
+}
+
+/* Fix impact widget text visibility */
+.dark .impact-detail,
+.dark .impact-label,
+.dark .impact-value,
+.dark .metric-label,
+.dark .metric-value,
+.dark .impact-description {
+  color: var(--text-color) !important;
+}
+
+/* Fix Business Impact content visibility */
+.dark [data-testid="widget-business-impact"] .section-container,
+.dark [data-testid="widget-availability-impact"] .section-container,
+.dark [data-testid="widget-integrity-impact"] .section-container,
+.dark [data-testid="widget-confidentiality-impact"] .section-container {
+  color: var(--text-color);
+}
+
+/* Add a lighter background to impact sections for better contrast */
+.dark .section-container {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }

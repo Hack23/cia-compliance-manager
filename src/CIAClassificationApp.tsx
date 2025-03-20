@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import AvailabilityImpactWidget from "./components/widgets/AvailabilityImpactWidget";
 import BusinessImpactAnalysisWidget from "./components/widgets/BusinessImpactAnalysisWidget";
-import CIAImpactSummaryWidget from "./components/widgets/CIAImpactSummaryWidget";
 import ComplianceStatusWidget from "./components/widgets/ComplianceStatusWidget";
 import ConfidentialityImpactWidget from "./components/widgets/ConfidentialityImpactWidget";
 import CostEstimationWidget from "./components/widgets/CostEstimationWidget";
@@ -103,9 +102,9 @@ const CIAClassificationApp: React.FC = () => {
 
   // Create a widget header component
   const WidgetHeader = ({ title, icon }: { title: string, icon: string }) => (
-    <div className="border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex justify-between items-center">
-      <h3 className="font-medium text-gray-700 dark:text-gray-300 flex items-center">
-        {icon && <span className="mr-2">{icon}</span>}
+    <div className="widget-header border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex justify-between items-center">
+      <h3 className="widget-title font-medium text-gray-700 dark:text-gray-300 flex items-center">
+        {icon && <span className="widget-icon mr-2">{icon}</span>}
         {title}
       </h3>
     </div>
@@ -124,11 +123,11 @@ const CIAClassificationApp: React.FC = () => {
     children: React.ReactNode 
   }) => (
     <div 
-      className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden"
+      className="widget bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden"
       data-testid={testId}
     >
       <WidgetHeader title={title} icon={icon} />
-      <div className="p-4">
+      <div className="widget-body p-4">
         {children}
       </div>
     </div>
@@ -138,18 +137,18 @@ const CIAClassificationApp: React.FC = () => {
     <div className="app-container">
       <div className={`min-h-screen ${darkMode ? 'dark bg-gray-900' : 'bg-gray-100'} p-4 transition-colors duration-300`}>
         {/* App header with theme toggle */}
-        <div className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center">
+        <div className="app-title mb-6 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center">
           <h1 className="text-2xl font-bold">CIA Compliance Manager</h1>
           <button 
             onClick={toggleDarkMode}
-            className="px-4 py-2 bg-blue-500 dark:bg-blue-600 text-white rounded-md"
+            className="theme-toggle px-4 py-2 bg-blue-500 dark:bg-blue-600 text-white rounded-md"
           >
             {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
           </button>
         </div>
         
         {/* Simple grid layout to replace Dashboard */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4"
+        <div className="dashboard-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4"
              data-testid="dashboard-grid">
           
           {/* Security Level Widget */}
@@ -232,20 +231,7 @@ const CIAClassificationApp: React.FC = () => {
               confidentialityLevel={confidentialityLevel}
             />
           </Widget>
-          
-          {/* CIA Impact Summary Widget */}
-          <Widget 
-            title={WIDGET_TITLES.CIA_IMPACT_SUMMARY}
-            icon={WIDGET_ICONS.CIA_IMPACT_SUMMARY}
-            testId="widget-cia-impact-summary"
-          >
-            <CIAImpactSummaryWidget
-              availabilityLevel={availabilityLevel}
-              integrityLevel={integrityLevel}
-              confidentialityLevel={confidentialityLevel}
-            />
-          </Widget>
-          
+                    
           {/* Availability Impact Widget */}
           <Widget 
             title={WIDGET_TITLES.AVAILABILITY_IMPACT}
