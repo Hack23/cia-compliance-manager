@@ -1,4 +1,496 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { ComplianceService } from "./complianceService";
+
+// Convert from hoisted to a regular object
+const mockComplianceData = {
+  frameworks: {
+    "ISO 27001": {
+      name: "ISO 27001",
+      description: "Information Security Management",
+      requirements: {
+        availability: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        integrity: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        confidentiality: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        }
+      }
+    },
+    "NIST CSF": {
+      name: "NIST CSF",
+      description: "Cybersecurity Framework",
+      requirements: {
+        availability: {
+          None: false,
+          Low: true,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        integrity: {
+          None: false,
+          Low: true,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        confidentiality: {
+          None: false,
+          Low: true,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        }
+      }
+    },
+    "GDPR": {
+      name: "GDPR",
+      description: "General Data Protection Regulation",
+      requirements: {
+        availability: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        integrity: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        confidentiality: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        }
+      }
+    },
+    "HIPAA": {
+      name: "HIPAA",
+      description: "Health Insurance Portability and Accountability Act",
+      requirements: {
+        availability: {
+          None: false,
+          Low: false,
+          Moderate: false,
+          High: true,
+          "Very High": true
+        },
+        integrity: {
+          None: false,
+          Low: false,
+          Moderate: false,
+          High: true,
+          "Very High": true
+        },
+        confidentiality: {
+          None: false,
+          Low: false,
+          Moderate: false,
+          High: true,
+          "Very High": true
+        }
+      }
+    },
+    "PCI DSS": {
+      name: "PCI DSS",
+      description: "Payment Card Industry Data Security Standard",
+      requirements: {
+        availability: {
+          None: false,
+          Low: false,
+          Moderate: false,
+          High: true,
+          "Very High": true
+        },
+        integrity: {
+          None: false,
+          Low: false,
+          Moderate: false,
+          High: true,
+          "Very High": true
+        },
+        confidentiality: {
+          None: false,
+          Low: false,
+          Moderate: false,
+          High: true,
+          "Very High": true
+        }
+      }
+    },
+    "SOC2": {
+      name: "SOC2",
+      description: "Service Organization Control 2",
+      requirements: {
+        availability: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        integrity: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        confidentiality: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        }
+      }
+    }
+  },
+  remediationSteps: {
+    availability: {
+      None: ["Implement basic monitoring", "Define SLAs", "Create backup strategy"],
+      Low: ["Improve monitoring", "Enhance backup frequency", "Implement disaster recovery"],
+      Moderate: ["Setup automatic failover", "Implement load balancing", "Improve recovery time"]
+    },
+    integrity: {
+      None: ["Implement data validation", "Add checksums", "Setup integrity monitoring"],
+      Low: ["Enhance validation rules", "Implement audit logging", "Add non-repudiation controls"],
+      Moderate: ["Implement cryptographic verification", "Add secure hash functions", "Enhance audit trails"]
+    },
+    confidentiality: {
+      None: ["Implement basic access controls", "Add data classification", "Setup encryption"],
+      Low: ["Enhance access controls with MFA", "Improve data classification", "Implement more robust encryption"],
+      Moderate: ["Implement fine-grained access controls", "Add data loss prevention", "Enhance encryption standards"]
+    }
+  }
+};
+
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { SecurityLevel } from "../types/cia";
+import { CIADataProvider, CIADetails } from "../types/cia-services";
+import { createTestComplianceService } from "../utils/serviceTestUtils";
+import { ComplianceService } from "./complianceService";
+import { ComplianceServiceAdapter, ComplianceService as ComplianceServiceStatic } from "./ComplianceServiceAdapter";
+
+// Create a proper mock data provider that matches CIADataProvider interface
+const createMockDetail = (description: string, technical: string): CIADetails => ({
+  description,
+  technical,
+  businessImpact: "Business impact",
+  capex: 100,
+  opex: 50,
+  bg: "#ffffff",
+  text: "#000000",
+  recommendations: ["Recommendation 1", "Recommendation 2"]
+});
+
+const mockDataProvider: CIADataProvider = {
+  availabilityOptions: {
+    None: createMockDetail('None availability', 'No controls'),
+    Low: createMockDetail('Low availability', 'Basic controls'),
+    Moderate: createMockDetail('Medium availability', 'Standard controls'),
+    High: createMockDetail('High availability', 'Advanced controls'),
+    "Very High": createMockDetail('Maximum availability', 'Maximum controls')
+  },
+  integrityOptions: {
+    None: createMockDetail('None integrity', 'No controls'),
+    Low: createMockDetail('Low integrity', 'Basic controls'),
+    Moderate: createMockDetail('Medium integrity', 'Standard controls'),
+    High: createMockDetail('High integrity', 'Advanced controls'),
+    "Very High": createMockDetail('Maximum integrity', 'Maximum controls')
+  },
+  confidentialityOptions: {
+    None: createMockDetail('None confidentiality', 'No controls'),
+    Low: createMockDetail('Low confidentiality', 'Basic controls'),
+    Moderate: createMockDetail('Medium confidentiality', 'Standard controls'),
+    High: createMockDetail('High confidentiality', 'Advanced controls'),
+    "Very High": createMockDetail('Maximum confidentiality', 'Maximum controls')
+  },
+  roiEstimates: {
+    NONE: { returnRate: '0%', description: 'No return' },
+    LOW: { returnRate: '50%', description: 'Low return' },
+    MODERATE: { returnRate: '150%', description: 'Moderate return' },
+    HIGH: { returnRate: '300%', description: 'High return' },
+    VERY_HIGH: { returnRate: '500%', description: 'Very high return' },
+  },
+  // Mock methods
+  getDefaultSecurityIcon: vi.fn(),
+  getDefaultValuePoints: vi.fn(),
+};
+
+// The test needs FrameworkComplianceStatus type but should import from the service
+type FrameworkComplianceStatus = "compliant" | "partial" | "non-compliant";
+
+// Helper function to get security level value (since it's protected in BaseService)
+const getSecurityLevelValue = (level: SecurityLevel): number => {
+  const levelMap: Record<SecurityLevel, number> = {
+    "None": 0,
+    "Low": 1,
+    "Moderate": 2,
+    "High": 3,
+    "Very High": 4
+  };
+  return levelMap[level] || 0;
+};
+
+describe('ComplianceService', () => {
+  let service: ComplianceServiceAdapter;
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    // Use the adapter instead of the service directly
+    service = new ComplianceServiceAdapter(mockDataProvider);
+  });
+
+  describe('getComplianceStatus', () => {
+    it('should return compliance status for different security levels', () => {
+      // Fix function calls to include all required parameters (availability, integrity, confidentiality)
+      const noneStatus = service.getComplianceStatus('None', 'None', 'None');
+      expect(noneStatus.compliantFrameworks).toEqual([]);
+
+      const lowStatus = service.getComplianceStatus('Low', 'Low', 'Low');
+      expect(lowStatus.compliantFrameworks.length).toBeGreaterThanOrEqual(1);
+
+      const moderateStatus = service.getComplianceStatus('Moderate', 'Moderate', 'Moderate');
+      expect(moderateStatus.compliantFrameworks.length).toBeGreaterThanOrEqual(1);
+
+      // Fix: Use proper object structure for industry parameter
+      const highStatus = service.getComplianceStatus('High', 'High', 'High', { industry: 'finance' });
+      expect(highStatus.compliantFrameworks.length).toBeGreaterThan(1);
+
+      const veryHighStatus = service.getComplianceStatus('Very High', 'Very High', 'Very High');
+      expect(veryHighStatus.compliantFrameworks.length).toBeGreaterThan(2);
+    });
+
+    it('returns compliance status with all required properties', () => {
+      const status = service.getComplianceStatus("Moderate", "Moderate", "Moderate");
+
+      expect(status).toHaveProperty("compliantFrameworks");
+      expect(status).toHaveProperty("partiallyCompliantFrameworks");
+      expect(status).toHaveProperty("nonCompliantFrameworks");
+      expect(status).toHaveProperty("remediationSteps");
+      expect(status).toHaveProperty("requirements");
+      expect(status).toHaveProperty("score");
+    });
+
+    // ... existing tests ...
+  });
+
+  // ... existing test groups ...
+});
+
+// ... rest of the test file ...
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { ComplianceService } from "./complianceService";
+
+// Convert from hoisted to a regular object
+const mockComplianceData = {
+  frameworks: {
+    "ISO 27001": {
+      name: "ISO 27001",
+      description: "Information Security Management",
+      requirements: {
+        availability: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        integrity: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        confidentiality: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        }
+      }
+    },
+    "NIST CSF": {
+      name: "NIST CSF",
+      description: "Cybersecurity Framework",
+      requirements: {
+        availability: {
+          None: false,
+          Low: true,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        integrity: {
+          None: false,
+          Low: true,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        confidentiality: {
+          None: false,
+          Low: true,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        }
+      }
+    },
+    "GDPR": {
+      name: "GDPR",
+      description: "General Data Protection Regulation",
+      requirements: {
+        availability: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        integrity: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        confidentiality: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        }
+      }
+    },
+    "HIPAA": {
+      name: "HIPAA",
+      description: "Health Insurance Portability and Accountability Act",
+      requirements: {
+        availability: {
+          None: false,
+          Low: false,
+          Moderate: false,
+          High: true,
+          "Very High": true
+        },
+        integrity: {
+          None: false,
+          Low: false,
+          Moderate: false,
+          High: true,
+          "Very High": true
+        },
+        confidentiality: {
+          None: false,
+          Low: false,
+          Moderate: false,
+          High: true,
+          "Very High": true
+        }
+      }
+    },
+    "PCI DSS": {
+      name: "PCI DSS",
+      description: "Payment Card Industry Data Security Standard",
+      requirements: {
+        availability: {
+          None: false,
+          Low: false,
+          Moderate: false,
+          High: true,
+          "Very High": true
+        },
+        integrity: {
+          None: false,
+          Low: false,
+          Moderate: false,
+          High: true,
+          "Very High": true
+        },
+        confidentiality: {
+          None: false,
+          Low: false,
+          Moderate: false,
+          High: true,
+          "Very High": true
+        }
+      }
+    },
+    "SOC2": {
+      name: "SOC2",
+      description: "Service Organization Control 2",
+      requirements: {
+        availability: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        integrity: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        },
+        confidentiality: {
+          None: false,
+          Low: false,
+          Moderate: true,
+          High: true,
+          "Very High": true
+        }
+      }
+    }
+  },
+  remediationSteps: {
+    availability: {
+      None: ["Implement basic monitoring", "Define SLAs", "Create backup strategy"],
+      Low: ["Improve monitoring", "Enhance backup frequency", "Implement disaster recovery"],
+      Moderate: ["Setup automatic failover", "Implement load balancing", "Improve recovery time"]
+    },
+    integrity: {
+      None: ["Implement data validation", "Add checksums", "Setup integrity monitoring"],
+      Low: ["Enhance validation rules", "Implement audit logging", "Add non-repudiation controls"],
+      Moderate: ["Implement cryptographic verification", "Add secure hash functions", "Enhance audit trails"]
+    },
+    confidentiality: {
+      None: ["Implement basic access controls", "Add data classification", "Setup encryption"],
+      Low: ["Enhance access controls with MFA", "Improve data classification", "Implement more robust encryption"],
+      Moderate: ["Implement fine-grained access controls", "Add data loss prevention", "Enhance encryption standards"]
+    }
+  }
+};
+
+// ... existing test code ...
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../types/cia";
 import { CIADataProvider, CIADetails } from "../types/cia-services";
 import { createTestComplianceService } from "../utils/serviceTestUtils";

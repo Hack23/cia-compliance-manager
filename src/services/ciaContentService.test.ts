@@ -9,36 +9,64 @@ vi.mock("./businessImpactService", () => ({
     getBusinessImpact: vi.fn().mockReturnValue({
       summary: "Mock business impact",
       financial: { description: "Mock financial impact", riskLevel: "Medium" },
-      operational: { description: "Mock operational impact", riskLevel: "Medium" },
-      reputational: { description: "Mock reputational impact", riskLevel: "Medium" }
+      operational: {
+        description: "Mock operational impact",
+        riskLevel: "Medium",
+      },
+      reputational: {
+        description: "Mock reputational impact",
+        riskLevel: "Medium",
+      },
     }),
-    getBusinessImpactDescription: vi.fn().mockReturnValue("Mock business impact description"),
+    getBusinessImpactDescription: vi
+      .fn()
+      .mockReturnValue("Mock business impact description"),
     getDetailedDescription: vi.fn().mockReturnValue({
       summary: "Mock detailed description",
       financial: { description: "Mock financial impact", riskLevel: "Medium" },
-      operational: { description: "Mock operational impact", riskLevel: "Medium" },
-      reputational: { description: "Mock reputational impact", riskLevel: "Medium" }
+      operational: {
+        description: "Mock operational impact",
+        riskLevel: "Medium",
+      },
+      reputational: {
+        description: "Mock reputational impact",
+        riskLevel: "Medium",
+      },
     }),
     calculateBusinessImpactLevel: vi.fn().mockReturnValue("Moderate"),
-    getCategoryIcon: vi.fn().mockReturnValue("💰")
+    getCategoryIcon: vi.fn().mockReturnValue("💰"),
   })),
   createBusinessImpactService: vi.fn().mockImplementation(() => ({
     getBusinessImpact: vi.fn().mockReturnValue({
       summary: "Mock business impact",
       financial: { description: "Mock financial impact", riskLevel: "Medium" },
-      operational: { description: "Mock operational impact", riskLevel: "Medium" },
-      reputational: { description: "Mock reputational impact", riskLevel: "Medium" }
+      operational: {
+        description: "Mock operational impact",
+        riskLevel: "Medium",
+      },
+      reputational: {
+        description: "Mock reputational impact",
+        riskLevel: "Medium",
+      },
     }),
-    getBusinessImpactDescription: vi.fn().mockReturnValue("Mock business impact description"),
+    getBusinessImpactDescription: vi
+      .fn()
+      .mockReturnValue("Mock business impact description"),
     getDetailedDescription: vi.fn().mockReturnValue({
       summary: "Mock detailed description",
       financial: { description: "Mock financial impact", riskLevel: "Medium" },
-      operational: { description: "Mock operational impact", riskLevel: "Medium" },
-      reputational: { description: "Mock reputational impact", riskLevel: "Medium" }
+      operational: {
+        description: "Mock operational impact",
+        riskLevel: "Medium",
+      },
+      reputational: {
+        description: "Mock reputational impact",
+        riskLevel: "Medium",
+      },
     }),
     calculateBusinessImpactLevel: vi.fn().mockReturnValue("Moderate"),
-    getCategoryIcon: vi.fn().mockReturnValue("💰")
-  }))
+    getCategoryIcon: vi.fn().mockReturnValue("💰"),
+  })),
 }));
 
 vi.mock("./complianceService", () => ({
@@ -50,11 +78,13 @@ vi.mock("./complianceService", () => ({
       nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
       remediationSteps: ["Implement data protection"],
       requirements: ["Data protection by design"],
-      complianceScore: 65
+      complianceScore: 65,
     }),
     getCompliantFrameworks: vi.fn().mockReturnValue(["GDPR", "NIST CSF"]),
-    getFrameworkDescription: vi.fn().mockReturnValue("Mock framework description"),
-    getFrameworkStatus: vi.fn().mockReturnValue("compliant")
+    getFrameworkDescription: vi
+      .fn()
+      .mockReturnValue("Mock framework description"),
+    getFrameworkStatus: vi.fn().mockReturnValue("compliant"),
   })),
   createComplianceService: vi.fn().mockImplementation(() => ({
     getComplianceStatus: vi.fn().mockReturnValue({
@@ -64,12 +94,14 @@ vi.mock("./complianceService", () => ({
       nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
       remediationSteps: ["Implement data protection"],
       requirements: ["Data protection by design"],
-      complianceScore: 65
+      complianceScore: 65,
     }),
     getCompliantFrameworks: vi.fn().mockReturnValue(["GDPR", "NIST CSF"]),
-    getFrameworkDescription: vi.fn().mockReturnValue("Mock framework description"),
-    getFrameworkStatus: vi.fn().mockReturnValue("compliant")
-  }))
+    getFrameworkDescription: vi
+      .fn()
+      .mockReturnValue("Mock framework description"),
+    getFrameworkStatus: vi.fn().mockReturnValue("compliant"),
+  })),
 }));
 
 vi.mock("./ComplianceServiceAdapter", () => ({
@@ -81,11 +113,13 @@ vi.mock("./ComplianceServiceAdapter", () => ({
       nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
       remediationSteps: ["Implement data protection"],
       requirements: ["Data protection by design"],
-      complianceScore: 65
+      complianceScore: 65,
     }),
     getCompliantFrameworks: vi.fn().mockReturnValue(["GDPR", "NIST CSF"]),
-    getFrameworkDescription: vi.fn().mockReturnValue("Mock framework description")
-  }))
+    getFrameworkDescription: vi
+      .fn()
+      .mockReturnValue("Mock framework description"),
+  })),
 }));
 
 vi.mock("./securityMetricsService", () => ({
@@ -97,7 +131,7 @@ vi.mock("./securityMetricsService", () => ({
       totalCapex: 53000,
       totalOpex: 10600,
       totalCost: 63600,
-      riskReduction: "50%"
+      riskReduction: "50%",
     }),
     getComponentMetrics: vi.fn().mockReturnValue({
       component: "availability",
@@ -106,7 +140,7 @@ vi.mock("./securityMetricsService", () => ({
       percentage: "50%",
       capex: 15000,
       opex: 3000,
-      description: "Standard security controls"
+      description: "Standard security controls",
     }),
     getImpactMetrics: vi.fn().mockReturnValue({
       securityLevel: "Moderate",
@@ -115,14 +149,16 @@ vi.mock("./securityMetricsService", () => ({
       rto: "4 hours",
       description: "Standard controls",
       technical: "Standard technical implementation",
-      businessImpact: "Medium business impact"
+      businessImpact: "Medium business impact",
     }),
-    getSecurityLevelDescription: vi.fn().mockReturnValue("Standard security controls"),
+    getSecurityLevelDescription: vi
+      .fn()
+      .mockReturnValue("Standard security controls"),
     getProtectionLevel: vi.fn().mockReturnValue("Balanced Protection"),
     calculateRoi: vi.fn().mockReturnValue({
       value: "$150,000",
       percentage: "150%",
-      description: "Moderate return on security investment"
+      description: "Moderate return on security investment",
     }),
     getRiskBadgeVariant: vi.fn().mockReturnValue("info"),
     getSecurityIcon: vi.fn().mockReturnValue("🔓"),
@@ -130,7 +166,7 @@ vi.mock("./securityMetricsService", () => ({
     getSecurityLevelFromValue: vi.fn().mockImplementation((value) => {
       const levels = ["None", "Low", "Moderate", "High", "Very High"];
       return levels[value] || "None";
-    })
+    }),
   })),
   createSecurityMetricsService: vi.fn().mockImplementation(() => ({
     getSecurityMetrics: vi.fn().mockReturnValue({
@@ -140,7 +176,7 @@ vi.mock("./securityMetricsService", () => ({
       totalCapex: 53000,
       totalOpex: 10600,
       totalCost: 63600,
-      riskReduction: "50%"
+      riskReduction: "50%",
     }),
     getComponentMetrics: vi.fn().mockReturnValue({
       component: "availability",
@@ -149,7 +185,7 @@ vi.mock("./securityMetricsService", () => ({
       percentage: "50%",
       capex: 15000,
       opex: 3000,
-      description: "Standard security controls"
+      description: "Standard security controls",
     }),
     getImpactMetrics: vi.fn().mockReturnValue({
       securityLevel: "Moderate",
@@ -158,14 +194,16 @@ vi.mock("./securityMetricsService", () => ({
       rto: "4 hours",
       description: "Standard controls",
       technical: "Standard technical implementation",
-      businessImpact: "Medium business impact"
+      businessImpact: "Medium business impact",
     }),
-    getSecurityLevelDescription: vi.fn().mockReturnValue("Standard security controls"),
+    getSecurityLevelDescription: vi
+      .fn()
+      .mockReturnValue("Standard security controls"),
     getProtectionLevel: vi.fn().mockReturnValue("Balanced Protection"),
     calculateRoi: vi.fn().mockReturnValue({
       value: "$150,000",
       percentage: "150%",
-      description: "Moderate return on security investment"
+      description: "Moderate return on security investment",
     }),
     getRiskBadgeVariant: vi.fn().mockReturnValue("info"),
     getSecurityIcon: vi.fn().mockReturnValue("🔓"),
@@ -173,8 +211,8 @@ vi.mock("./securityMetricsService", () => ({
     getSecurityLevelFromValue: vi.fn().mockImplementation((value) => {
       const levels = ["None", "Low", "Moderate", "High", "Very High"];
       return levels[value] || "None";
-    })
-  }))
+    }),
+  })),
 }));
 
 vi.mock("./technicalImplementationService", () => ({
@@ -185,8 +223,8 @@ vi.mock("./technicalImplementationService", () => ({
       effort: {
         development: "Weeks (2-4)",
         maintenance: "Regular (monthly review)",
-        expertise: "Security professional"
-      }
+        expertise: "Security professional",
+      },
     }),
     getComponentImplementationDetails: vi.fn().mockReturnValue({
       description: "Mock component implementation",
@@ -194,13 +232,19 @@ vi.mock("./technicalImplementationService", () => ({
       effort: {
         development: "Weeks (2-4)",
         maintenance: "Regular",
-        expertise: "Security professional"
-      }
+        expertise: "Security professional",
+      },
     }),
-    getTechnicalDescription: vi.fn().mockReturnValue("Mock technical description"),
-    getRecommendations: vi.fn().mockReturnValue(["Recommendation 1", "Recommendation 2"]),
-    getImplementationConsiderations: vi.fn().mockReturnValue("Mock implementation considerations"),
-    getImplementationTime: vi.fn().mockReturnValue("1-2 months")
+    getTechnicalDescription: vi
+      .fn()
+      .mockReturnValue("Mock technical description"),
+    getRecommendations: vi
+      .fn()
+      .mockReturnValue(["Recommendation 1", "Recommendation 2"]),
+    getImplementationConsiderations: vi
+      .fn()
+      .mockReturnValue("Mock implementation considerations"),
+    getImplementationTime: vi.fn().mockReturnValue("1-2 months"),
   })),
   createTechnicalImplementationService: vi.fn().mockImplementation(() => ({
     getTechnicalImplementation: vi.fn().mockReturnValue({
@@ -209,8 +253,8 @@ vi.mock("./technicalImplementationService", () => ({
       effort: {
         development: "Weeks (2-4)",
         maintenance: "Regular (monthly review)",
-        expertise: "Security professional"
-      }
+        expertise: "Security professional",
+      },
     }),
     getComponentImplementationDetails: vi.fn().mockReturnValue({
       description: "Mock component implementation",
@@ -218,22 +262,25 @@ vi.mock("./technicalImplementationService", () => ({
       effort: {
         development: "Weeks (2-4)",
         maintenance: "Regular",
-        expertise: "Security professional"
-      }
+        expertise: "Security professional",
+      },
     }),
-    getTechnicalDescription: vi.fn().mockReturnValue("Mock technical description"),
-    getRecommendations: vi.fn().mockReturnValue(["Recommendation 1", "Recommendation 2"]),
-    getImplementationConsiderations: vi.fn().mockReturnValue("Mock implementation considerations"),
-    getImplementationTime: vi.fn().mockReturnValue("1-2 months")
-  }))
+    getTechnicalDescription: vi
+      .fn()
+      .mockReturnValue("Mock technical description"),
+    getRecommendations: vi
+      .fn()
+      .mockReturnValue(["Recommendation 1", "Recommendation 2"]),
+    getImplementationConsiderations: vi
+      .fn()
+      .mockReturnValue("Mock implementation considerations"),
+    getImplementationTime: vi.fn().mockReturnValue("1-2 months"),
+  })),
 }));
 
 vi.mock("./securityResourceService", () => ({
   SecurityResourceService: vi.fn().mockImplementation(() => ({
-    getValuePoints: vi.fn().mockReturnValue([
-      "Value point 1",
-      "Value point 2"
-    ]),
+    getValuePoints: vi.fn().mockReturnValue(["Value point 1", "Value point 2"]),
     getSecurityResources: vi.fn().mockReturnValue([
       {
         id: "resource-1",
@@ -241,15 +288,12 @@ vi.mock("./securityResourceService", () => ({
         description: "Description 1",
         url: "https://example.com/resource1",
         type: "general",
-        relevance: 90
-      }
-    ])
+        relevance: 90,
+      },
+    ]),
   })),
   createSecurityResourceService: vi.fn().mockImplementation(() => ({
-    getValuePoints: vi.fn().mockReturnValue([
-      "Value point 1",
-      "Value point 2"
-    ]),
+    getValuePoints: vi.fn().mockReturnValue(["Value point 1", "Value point 2"]),
     getSecurityResources: vi.fn().mockReturnValue([
       {
         id: "resource-1",
@@ -257,79 +301,257 @@ vi.mock("./securityResourceService", () => ({
         description: "Description 1",
         url: "https://example.com/resource1",
         type: "general",
-        relevance: 90
-      }
-    ])
-  }))
+        relevance: 90,
+      },
+    ]),
+  })),
 }));
 
 import {
-  CIAContentService, createCIAContentService, getInformationSensitivity,
-  getRiskBadgeVariant, getROIEstimate, getValuePoints
+  CIAContentService,
+  createCIAContentService,
+  getInformationSensitivity,
+  getRiskBadgeVariant,
+  getROIEstimate,
+  getValuePoints,
 } from "./ciaContentService";
 
-// Mock data provider
-const mockDataProvider = vi.hoisted(() => {
+// Convert to regular object instead of using vi.hoisted
+const mockDataProvider = {
   // Create default mock data for security levels
-  const createLevelData = (level: string, prefix: string) => ({
-    description: `${prefix} ${level.toLowerCase()}`,
-    technical: `${prefix} technical controls`,
-    businessImpact: `${level === 'None' ? 'Critical' : level === 'Low' ? 'High' : level === 'Moderate' ? 'Medium' : level === 'High' ? 'Low' : 'Minimal'} business impact`,
-    capex: level === 'None' ? 0 : level === 'Low' ? 5000 : level === 'Moderate' ? 15000 : level === 'High' ? 30000 : 60000,
-    opex: level === 'None' ? 0 : level === 'Low' ? 1000 : level === 'Moderate' ? 3000 : level === 'High' ? 6000 : 12000,
-    bg: level === 'None' ? '#ffffff' : level === 'Low' ? '#f8d7da' : level === 'Moderate' ? '#fff3cd' : level === 'High' ? '#d4edda' : '#cce5ff',
-    text: level === 'None' ? '#000000' : level === 'Low' ? '#721c24' : level === 'Moderate' ? '#856404' : level === 'High' ? '#155724' : '#004085',
-    recommendations: level === 'None' ? [] : [`${prefix} recommendation for ${level}`]
-  });
+  availabilityOptions: (() => {
+    const levels = ["None", "Low", "Moderate", "High", "Very High"];
+    const result = {};
 
-  // Generate options for all components and levels
-  const levels = ['None', 'Low', 'Moderate', 'High', 'Very High'];
+    levels.forEach((level) => {
+      result[level] = {
+        description: `Availability ${level.toLowerCase()}`,
+        technical: `Availability technical controls`,
+        businessImpact: `${
+          level === "None"
+            ? "Critical"
+            : level === "Low"
+            ? "High"
+            : level === "Moderate"
+            ? "Medium"
+            : level === "High"
+            ? "Low"
+            : "Minimal"
+        } business impact`,
+        capex:
+          level === "None"
+            ? 0
+            : level === "Low"
+            ? 5000
+            : level === "Moderate"
+            ? 15000
+            : level === "High"
+            ? 30000
+            : 60000,
+        opex:
+          level === "None"
+            ? 0
+            : level === "Low"
+            ? 1000
+            : level === "Moderate"
+            ? 3000
+            : level === "High"
+            ? 6000
+            : 12000,
+        bg:
+          level === "None"
+            ? "#ffffff"
+            : level === "Low"
+            ? "#f8d7da"
+            : level === "Moderate"
+            ? "#fff3cd"
+            : level === "High"
+            ? "#d4edda"
+            : "#cce5ff",
+        text:
+          level === "None"
+            ? "#000000"
+            : level === "Low"
+            ? "#721c24"
+            : level === "Moderate"
+            ? "#856404"
+            : level === "High"
+            ? "#155724"
+            : "#004085",
+        recommendations:
+          level === "None" ? [] : [`Availability recommendation for ${level}`],
+      };
+    });
 
-  const availabilityOptions: Record<string, any> = {};
-  const integrityOptions: Record<string, any> = {};
-  const confidentialityOptions: Record<string, any> = {};
+    return result;
+  })(),
 
-  levels.forEach(level => {
-    availabilityOptions[level] = createLevelData(level, 'Availability');
-    integrityOptions[level] = createLevelData(level, 'Integrity');
-    confidentialityOptions[level] = createLevelData(level, 'Confidentiality');
-  });
+  integrityOptions: (() => {
+    const levels = ["None", "Low", "Moderate", "High", "Very High"];
+    const result = {};
 
-  return {
-    availabilityOptions,
-    integrityOptions,
-    confidentialityOptions,
-    roiEstimates: {
-      NONE: {
-        returnRate: "0%",
-        value: "Negative",
-        description: "No ROI"
-      },
-      LOW: {
-        returnRate: "50%",
-        value: "Low",
-        description: "Low ROI"
-      },
-      MODERATE: {
-        returnRate: "150%",
-        value: "Moderate",
-        description: "Moderate ROI"
-      },
-      HIGH: {
-        returnRate: "250%",
-        value: "High",
-        description: "High ROI"
-      },
-      VERY_HIGH: {
-        returnRate: "400%",
-        value: "Very High",
-        description: "Very high ROI"
-      }
+    levels.forEach((level) => {
+      result[level] = {
+        description: `Integrity ${level.toLowerCase()}`,
+        technical: `Integrity technical controls`,
+        businessImpact: `${
+          level === "None"
+            ? "Critical"
+            : level === "Low"
+            ? "High"
+            : level === "Moderate"
+            ? "Medium"
+            : level === "High"
+            ? "Low"
+            : "Minimal"
+        } business impact`,
+        capex:
+          level === "None"
+            ? 0
+            : level === "Low"
+            ? 5000
+            : level === "Moderate"
+            ? 15000
+            : level === "High"
+            ? 30000
+            : 60000,
+        opex:
+          level === "None"
+            ? 0
+            : level === "Low"
+            ? 1000
+            : level === "Moderate"
+            ? 3000
+            : level === "High"
+            ? 6000
+            : 12000,
+        bg:
+          level === "None"
+            ? "#ffffff"
+            : level === "Low"
+            ? "#f8d7da"
+            : level === "Moderate"
+            ? "#fff3cd"
+            : level === "High"
+            ? "#d4edda"
+            : "#cce5ff",
+        text:
+          level === "None"
+            ? "#000000"
+            : level === "Low"
+            ? "#721c24"
+            : level === "Moderate"
+            ? "#856404"
+            : level === "High"
+            ? "#155724"
+            : "#004085",
+        recommendations:
+          level === "None" ? [] : [`Integrity recommendation for ${level}`],
+      };
+    });
+
+    return result;
+  })(),
+
+  confidentialityOptions: (() => {
+    const levels = ["None", "Low", "Moderate", "High", "Very High"];
+    const result = {};
+
+    levels.forEach((level) => {
+      result[level] = {
+        description: `Confidentiality ${level.toLowerCase()}`,
+        technical: `Confidentiality technical controls`,
+        businessImpact: `${
+          level === "None"
+            ? "Critical"
+            : level === "Low"
+            ? "High"
+            : level === "Moderate"
+            ? "Medium"
+            : level === "High"
+            ? "Low"
+            : "Minimal"
+        } business impact`,
+        capex:
+          level === "None"
+            ? 0
+            : level === "Low"
+            ? 5000
+            : level === "Moderate"
+            ? 15000
+            : level === "High"
+            ? 30000
+            : 60000,
+        opex:
+          level === "None"
+            ? 0
+            : level === "Low"
+            ? 1000
+            : level === "Moderate"
+            ? 3000
+            : level === "High"
+            ? 6000
+            : 12000,
+        bg:
+          level === "None"
+            ? "#ffffff"
+            : level === "Low"
+            ? "#f8d7da"
+            : level === "Moderate"
+            ? "#fff3cd"
+            : level === "High"
+            ? "#d4edda"
+            : "#cce5ff",
+        text:
+          level === "None"
+            ? "#000000"
+            : level === "Low"
+            ? "#721c24"
+            : level === "Moderate"
+            ? "#856404"
+            : level === "High"
+            ? "#155724"
+            : "#004085",
+        recommendations:
+          level === "None"
+            ? []
+            : [`Confidentiality recommendation for ${level}`],
+      };
+    });
+
+    return result;
+  })(),
+
+  roiEstimates: {
+    NONE: {
+      returnRate: "0%",
+      value: "Negative",
+      description: "No ROI",
     },
-    getDefaultSecurityIcon: vi.fn().mockReturnValue("🔒"),
-    getDefaultValuePoints: vi.fn().mockReturnValue(["Default value point"])
-  };
-});
+    LOW: {
+      returnRate: "50%",
+      value: "Low",
+      description: "Low ROI",
+    },
+    MODERATE: {
+      returnRate: "150%",
+      value: "Moderate",
+      description: "Moderate ROI",
+    },
+    HIGH: {
+      returnRate: "250%",
+      value: "High",
+      description: "High ROI",
+    },
+    VERY_HIGH: {
+      returnRate: "400%",
+      value: "Very High",
+      description: "Very high ROI",
+    },
+  },
+  getDefaultSecurityIcon: vi.fn().mockReturnValue("🔒"),
+  getDefaultValuePoints: vi.fn().mockReturnValue(["Default value point"]),
+};
 
 describe("CIAContentService", () => {
   let service: CIAContentService;
@@ -432,23 +654,67 @@ describe("CIAContentService", () => {
   describe("Delegated Methods", () => {
     it("should delegate to specialized services correctly", () => {
       const tests = [
-        { method: "getBusinessImpact", args: ["confidentiality", "High"], properties: ["summary", "financial", "operational"] },
-        { method: "getTechnicalImplementation", args: ["integrity", "Moderate"], properties: ["description", "implementationSteps", "effort"] },
-        { method: "getComplianceStatus", args: ["High", "High", "High"], properties: ["status", "compliantFrameworks"] },
-        { method: "getSecurityMetrics", args: ["High"], properties: ["score", "maxScore", "percentage"] },
-        { method: "getComponentMetrics", args: ["availability", "Moderate"], properties: ["component", "value", "percentage"] },
-        { method: "getImpactMetrics", args: ["availability", "Moderate"], properties: ["securityLevel", "riskReduction"] },
-        { method: "getSecurityResources", args: ["confidentiality", "High"], expectArray: true },
-        { method: "getRecommendations", args: ["availability", "Moderate"], expectArray: true },
-        { method: "getImplementationConsiderations", args: [["Moderate", "Moderate", "Moderate"]], expectString: true },
+        {
+          method: "getBusinessImpact",
+          args: ["confidentiality", "High"],
+          properties: ["summary", "financial", "operational"],
+        },
+        {
+          method: "getTechnicalImplementation",
+          args: ["integrity", "Moderate"],
+          properties: ["description", "implementationSteps", "effort"],
+        },
+        {
+          method: "getComplianceStatus",
+          args: ["High", "High", "High"],
+          properties: ["status", "compliantFrameworks"],
+        },
+        {
+          method: "getSecurityMetrics",
+          args: ["High"],
+          properties: ["score", "maxScore", "percentage"],
+        },
+        {
+          method: "getComponentMetrics",
+          args: ["availability", "Moderate"],
+          properties: ["component", "value", "percentage"],
+        },
+        {
+          method: "getImpactMetrics",
+          args: ["availability", "Moderate"],
+          properties: ["securityLevel", "riskReduction"],
+        },
+        {
+          method: "getSecurityResources",
+          args: ["confidentiality", "High"],
+          expectArray: true,
+        },
+        {
+          method: "getRecommendations",
+          args: ["availability", "Moderate"],
+          expectArray: true,
+        },
+        {
+          method: "getImplementationConsiderations",
+          args: [["Moderate", "Moderate", "Moderate"]],
+          expectString: true,
+        },
         { method: "getImplementationTime", args: ["High"], expectString: true },
-        { method: "getBusinessImpactDescription", args: ["integrity", "Low"], expectString: true },
-        { method: "getSecurityLevelDescription", args: ["Moderate"], expectString: true },
+        {
+          method: "getBusinessImpactDescription",
+          args: ["integrity", "Low"],
+          expectString: true,
+        },
+        {
+          method: "getSecurityLevelDescription",
+          args: ["Moderate"],
+          expectString: true,
+        },
         { method: "getRiskBadgeVariant", args: ["Medium"], expectString: true },
-        { method: "getSecurityIcon", args: ["High"], expectString: true }
+        { method: "getSecurityIcon", args: ["High"], expectString: true },
       ];
 
-      tests.forEach(test => {
+      tests.forEach((test) => {
         // @ts-expect-error - Dynamic method call
         const result = service[test.method](...test.args);
 
@@ -459,7 +725,7 @@ describe("CIAContentService", () => {
           expect(typeof result).toBe("string");
           expect(result.length).toBeGreaterThan(0);
         } else if (test.properties) {
-          test.properties.forEach(prop => {
+          test.properties.forEach((prop) => {
             expect(result).toHaveProperty(prop);
           });
         }
@@ -470,13 +736,24 @@ describe("CIAContentService", () => {
       // Define expected mock result
       const expectedResult: BusinessImpactDetails = {
         summary: "Mocked detailed description",
-        financial: { description: "Mock financial impact", riskLevel: "Medium" },
-        operational: { description: "Mock operational impact", riskLevel: "Medium" },
-        reputational: { description: "Mock reputational impact", riskLevel: "Medium" }
+        financial: {
+          description: "Mock financial impact",
+          riskLevel: "Medium",
+        },
+        operational: {
+          description: "Mock operational impact",
+          riskLevel: "Medium",
+        },
+        reputational: {
+          description: "Mock reputational impact",
+          riskLevel: "Medium",
+        },
       };
 
       // Mock the method to return the expected result
-      vi.spyOn(service, "getDetailedDescription").mockReturnValueOnce(expectedResult);
+      vi.spyOn(service, "getDetailedDescription").mockReturnValueOnce(
+        expectedResult
+      );
 
       const details = service.getDetailedDescription("confidentiality", "High");
 
@@ -486,7 +763,10 @@ describe("CIAContentService", () => {
     });
 
     it("getTechnicalDescription should return string value", () => {
-      const description = service.getTechnicalDescription("availability", "High");
+      const description = service.getTechnicalDescription(
+        "availability",
+        "High"
+      );
       expect(typeof description).toBe("string");
       expect(description.length).toBeGreaterThan(0);
     });
@@ -494,9 +774,15 @@ describe("CIAContentService", () => {
 
   describe("Complex Integration Methods", () => {
     const complexMethods = [
-      { method: "getTotalImplementationTime", args: ["Low", "Moderate", "High"] },
+      {
+        method: "getTotalImplementationTime",
+        args: ["Low", "Moderate", "High"],
+      },
       { method: "getRequiredExpertise", args: ["Low", "Low", "High"] },
-      { method: "getRecommendedImplementationPlan", args: ["Low", "Moderate", "High"] }
+      {
+        method: "getRecommendedImplementationPlan",
+        args: ["Low", "Moderate", "High"],
+      },
     ];
 
     complexMethods.forEach(({ method, args }) => {
@@ -509,20 +795,46 @@ describe("CIAContentService", () => {
     });
 
     it("getInformationSensitivity returns correct classification", () => {
-      const levels: SecurityLevel[] = ["None", "Low", "Moderate", "High", "Very High"];
-      const expectedLabels = ["Public Data", "Internal Data", "Sensitive Data", "Confidential Data", "Restricted Data"];
+      const levels: SecurityLevel[] = [
+        "None",
+        "Low",
+        "Moderate",
+        "High",
+        "Very High",
+      ];
+      const expectedLabels = [
+        "Public Data",
+        "Internal Data",
+        "Sensitive Data",
+        "Confidential Data",
+        "Restricted Data",
+      ];
 
       levels.forEach((level, index) => {
-        expect(service.getInformationSensitivity(level)).toBe(expectedLabels[index]);
+        expect(service.getInformationSensitivity(level)).toBe(
+          expectedLabels[index]
+        );
       });
     });
   });
 
   describe("Helper Functions", () => {
     it("getImplementationConsiderations handles different security level combinations", () => {
-      const uniformLevels = service.getImplementationConsiderations(["Moderate", "Moderate", "Moderate"] as [SecurityLevel, SecurityLevel, SecurityLevel]);
-      const mixedLevels = service.getImplementationConsiderations(["Low", "Moderate", "High"] as [SecurityLevel, SecurityLevel, SecurityLevel]);
-      const highSecurityLevels = service.getImplementationConsiderations(["High", "High", "Very High"] as [SecurityLevel, SecurityLevel, SecurityLevel]);
+      const uniformLevels = service.getImplementationConsiderations([
+        "Moderate",
+        "Moderate",
+        "Moderate",
+      ] as [SecurityLevel, SecurityLevel, SecurityLevel]);
+      const mixedLevels = service.getImplementationConsiderations([
+        "Low",
+        "Moderate",
+        "High",
+      ] as [SecurityLevel, SecurityLevel, SecurityLevel]);
+      const highSecurityLevels = service.getImplementationConsiderations([
+        "High",
+        "High",
+        "Very High",
+      ] as [SecurityLevel, SecurityLevel, SecurityLevel]);
 
       expect(uniformLevels).toBeDefined();
       expect(mixedLevels).toBeDefined();
@@ -542,7 +854,9 @@ describe("Integration with test utilities", () => {
     const service = createTestCIAContentService();
 
     expect(service).toBeDefined();
-    expect(service.getComponentDetails("availability", "Moderate")).toBeDefined();
+    expect(
+      service.getComponentDetails("availability", "Moderate")
+    ).toBeDefined();
     expect(service.getROIEstimate("High")).toBeDefined();
     expect(service.getBusinessImpact("availability", "High")).toBeDefined();
   });
@@ -568,14 +882,21 @@ describe("Extended CIAContentService functionality", () => {
   });
 
   it("getBusinessImpactContent should return business impact content", () => {
-    const content = service.getBusinessImpactContent("availability", "Moderate");
+    const content = service.getBusinessImpactContent(
+      "availability",
+      "Moderate"
+    );
 
     expect(typeof content).toBe("string");
     expect(content).toContain("Business Impact Summary");
   });
 
   it("getSummaryContent should return summary for security levels", () => {
-    const content = service.getSummaryContent("Moderate", "Moderate", "Moderate");
+    const content = service.getSummaryContent(
+      "Moderate",
+      "Moderate",
+      "Moderate"
+    );
 
     expect(typeof content).toBe("string");
     expect(content).toContain("Security Profile Summary");

@@ -1,7 +1,136 @@
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../types/cia";
 import { createTestSecurityMetricsService } from "../utils/serviceTestUtils";
 import { SecurityMetricsService } from "./securityMetricsService";
+
+// Convert from hoisted to a regular object
+const mockCIAOptions = {
+  availabilityOptions: {
+    None: {
+      description: "No availability controls",
+      impact: "Critical business impact",
+      capex: 0,
+      opex: 0,
+    },
+    Low: {
+      description: "Basic availability controls",
+      impact: "High business impact",
+      capex: 5000,
+      opex: 1000,
+    },
+    Moderate: {
+      description: "Standard availability controls",
+      impact: "Medium business impact",
+      capex: 15000,
+      opex: 3000,
+    },
+    High: {
+      description: "Advanced availability controls",
+      impact: "Low business impact",
+      capex: 30000,
+      opex: 6000,
+    },
+    "Very High": {
+      description: "Maximum availability controls",
+      impact: "Minimal business impact",
+      capex: 60000,
+      opex: 12000,
+    },
+  },
+  integrityOptions: {
+    None: {
+      description: "No integrity controls",
+      impact: "Critical business impact",
+      capex: 0,
+      opex: 0,
+    },
+    Low: {
+      description: "Basic integrity controls",
+      impact: "High business impact",
+      capex: 5000,
+      opex: 1000,
+    },
+    Moderate: {
+      description: "Standard integrity controls",
+      impact: "Medium business impact",
+      capex: 15000,
+      opex: 3000,
+    },
+    High: {
+      description: "Advanced integrity controls",
+      impact: "Low business impact",
+      capex: 30000,
+      opex: 6000,
+    },
+    "Very High": {
+      description: "Maximum integrity controls",
+      impact: "Minimal business impact",
+      capex: 60000,
+      opex: 12000,
+    },
+  },
+  confidentialityOptions: {
+    None: {
+      description: "No confidentiality controls",
+      impact: "Critical business impact",
+      capex: 0,
+      opex: 0,
+    },
+    Low: {
+      description: "Basic confidentiality controls",
+      impact: "High business impact",
+      capex: 7000,
+      opex: 1400,
+    },
+    Moderate: {
+      description: "Standard confidentiality controls",
+      impact: "Medium business impact",
+      capex: 20000,
+      opex: 4000,
+    },
+    High: {
+      description: "Advanced confidentiality controls",
+      impact: "Low business impact",
+      capex: 40000,
+      opex: 8000,
+    },
+    "Very High": {
+      description: "Maximum confidentiality controls",
+      impact: "Minimal business impact",
+      capex: 80000,
+      opex: 16000,
+    },
+  },
+  ROI_ESTIMATES: {
+    NONE: {
+      returnRate: "0%",
+      description: "No return on investment",
+    },
+    LOW: {
+      returnRate: "50%",
+      description: "Low return on investment",
+    },
+    MODERATE: {
+      returnRate: "200%",
+      description: "Moderate return on investment",
+    },
+    HIGH: {
+      returnRate: "350%",
+      description: "High return on investment",
+    },
+    VERY_HIGH: {
+      returnRate: "500%",
+      description: "Very high return on investment",
+    },
+  },
+};
+
+// Add mocked security levels for testing
+const mockSecurityLevels = {
+  availabilityLevel: "Moderate" as SecurityLevel,
+  integrityLevel: "Moderate" as SecurityLevel,
+  confidentialityLevel: "Moderate" as SecurityLevel,
+};
 
 describe("SecurityMetricsService", () => {
   let service: SecurityMetricsService;
@@ -44,7 +173,10 @@ describe("SecurityMetricsService", () => {
 
     it("should calculate higher ROI for higher security levels", () => {
       const lowRoi = service.calculateRoi("Low" as SecurityLevel, 10000);
-      const moderateRoi = service.calculateRoi("Moderate" as SecurityLevel, 10000);
+      const moderateRoi = service.calculateRoi(
+        "Moderate" as SecurityLevel,
+        10000
+      );
       const highRoi = service.calculateRoi("High" as SecurityLevel, 10000);
 
       // Extract numeric values from the ROI percentages
@@ -68,7 +200,7 @@ describe("SecurityMetricsService", () => {
       expect(estimates).toHaveProperty("VERY_HIGH");
 
       // Each estimate should have return rate and description
-      Object.values(estimates).forEach(estimate => {
+      Object.values(estimates).forEach((estimate) => {
         expect(estimate).toHaveProperty("returnRate");
         expect(estimate).toHaveProperty("description");
       });
@@ -137,12 +269,14 @@ describe("SecurityMetricsService", () => {
 
     it("should calculate correct total cost based on component costs", () => {
       // Mock getComponentDetails to return known values
-      vi.spyOn(service as any, "getComponentDetails").mockImplementation((component, level) => {
-        return {
-          capex: 100,
-          opex: 50
-        };
-      });
+      vi.spyOn(service as any, "getComponentDetails").mockImplementation(
+        (component, level) => {
+          return {
+            capex: 100,
+            opex: 50,
+          };
+        }
+      );
 
       const metrics = service.getSecurityMetrics(
         "Moderate" as SecurityLevel,
@@ -151,14 +285,17 @@ describe("SecurityMetricsService", () => {
       );
 
       expect(metrics.totalCapex).toBe(300); // 100 * 3 components
-      expect(metrics.totalOpex).toBe(150);  // 50 * 3 components
-      expect(metrics.totalCost).toBe(450);  // 300 + 150
+      expect(metrics.totalOpex).toBe(150); // 50 * 3 components
+      expect(metrics.totalCost).toBe(450); // 300 + 150
     });
   });
 
   describe("getComponentMetrics", () => {
     it("should return metrics for a specific component and security level", () => {
-      const metrics = service.getComponentMetrics("availability", "Moderate" as SecurityLevel);
+      const metrics = service.getComponentMetrics(
+        "availability",
+        "Moderate" as SecurityLevel
+      );
 
       expect(metrics).toHaveProperty("component", "availability");
       expect(metrics).toHaveProperty("level", "Moderate");
@@ -175,9 +312,14 @@ describe("SecurityMetricsService", () => {
 
     it("should handle missing component details", () => {
       // Mock getComponentDetails to return undefined
-      vi.spyOn(service as any, "getComponentDetails").mockReturnValueOnce(undefined);
+      vi.spyOn(service as any, "getComponentDetails").mockReturnValueOnce(
+        undefined
+      );
 
-      const metrics = service.getComponentMetrics("availability", "Moderate" as SecurityLevel);
+      const metrics = service.getComponentMetrics(
+        "availability",
+        "Moderate" as SecurityLevel
+      );
 
       // Should still return metrics with default values
       expect(metrics).toHaveProperty("component", "availability");
@@ -191,14 +333,17 @@ describe("SecurityMetricsService", () => {
 
   describe("getComponentTechnicalMetrics", () => {
     it("should return technical metrics for a component", () => {
-      const metrics = service.getComponentTechnicalMetrics("availability", "Moderate" as SecurityLevel);
+      const metrics = service.getComponentTechnicalMetrics(
+        "availability",
+        "Moderate" as SecurityLevel
+      );
 
       expect(typeof metrics).toBe("object");
       expect(metrics).toHaveProperty("component", "availability");
       expect(metrics).toHaveProperty("level", "Moderate");
 
       // All values should be strings
-      Object.values(metrics).forEach(value => {
+      Object.values(metrics).forEach((value) => {
         expect(typeof value).toBe("string");
       });
     });
@@ -206,7 +351,10 @@ describe("SecurityMetricsService", () => {
 
   describe("getImpactMetrics", () => {
     it("should return impact metrics for a component", () => {
-      const metrics = service.getImpactMetrics("availability", "Moderate" as SecurityLevel);
+      const metrics = service.getImpactMetrics(
+        "availability",
+        "Moderate" as SecurityLevel
+      );
 
       expect(metrics).toHaveProperty("securityLevel", "Moderate");
       expect(metrics).toHaveProperty("riskReduction");
@@ -222,22 +370,33 @@ describe("SecurityMetricsService", () => {
     });
 
     it("should return integrity-specific metrics", () => {
-      const metrics = service.getImpactMetrics("integrity", "Moderate" as SecurityLevel);
+      const metrics = service.getImpactMetrics(
+        "integrity",
+        "Moderate" as SecurityLevel
+      );
 
       expect(metrics).toHaveProperty("validationMethod");
     });
 
     it("should return confidentiality-specific metrics", () => {
-      const metrics = service.getImpactMetrics("confidentiality", "Moderate" as SecurityLevel);
+      const metrics = service.getImpactMetrics(
+        "confidentiality",
+        "Moderate" as SecurityLevel
+      );
 
       expect(metrics).toHaveProperty("protectionMethod");
     });
 
     it("should handle missing component details", () => {
       // Mock getComponentDetails to return undefined
-      vi.spyOn(service as any, "getComponentDetails").mockReturnValueOnce(undefined);
+      vi.spyOn(service as any, "getComponentDetails").mockReturnValueOnce(
+        undefined
+      );
 
-      const metrics = service.getImpactMetrics("availability", "Moderate" as SecurityLevel);
+      const metrics = service.getImpactMetrics(
+        "availability",
+        "Moderate" as SecurityLevel
+      );
 
       // Should still return metrics with default values
       expect(metrics).toHaveProperty("securityLevel", "Moderate");
@@ -250,30 +409,45 @@ describe("SecurityMetricsService", () => {
 
   describe("getSecurityLevelDescription", () => {
     it("should return appropriate descriptions for each security level", () => {
-      expect(service.getSecurityLevelDescription("None" as SecurityLevel))
-        .toContain("No security controls");
+      expect(
+        service.getSecurityLevelDescription("None" as SecurityLevel)
+      ).toContain("No security controls");
 
-      expect(service.getSecurityLevelDescription("Low" as SecurityLevel))
-        .toContain("Basic security controls");
+      expect(
+        service.getSecurityLevelDescription("Low" as SecurityLevel)
+      ).toContain("Basic security controls");
 
-      expect(service.getSecurityLevelDescription("Moderate" as SecurityLevel))
-        .toContain("Standard security controls");
+      expect(
+        service.getSecurityLevelDescription("Moderate" as SecurityLevel)
+      ).toContain("Standard security controls");
 
-      expect(service.getSecurityLevelDescription("High" as SecurityLevel))
-        .toContain("Robust security controls");
+      expect(
+        service.getSecurityLevelDescription("High" as SecurityLevel)
+      ).toContain("Robust security controls");
 
-      expect(service.getSecurityLevelDescription("Very High" as SecurityLevel))
-        .toContain("Maximum security controls");
+      expect(
+        service.getSecurityLevelDescription("Very High" as SecurityLevel)
+      ).toContain("Maximum security controls");
     });
   });
 
   describe("getProtectionLevel", () => {
     it("should return appropriate protection levels for each security level", () => {
-      expect(service.getProtectionLevel("None" as SecurityLevel)).toBe("No Protection");
-      expect(service.getProtectionLevel("Low" as SecurityLevel)).toBe("Basic Protection");
-      expect(service.getProtectionLevel("Moderate" as SecurityLevel)).toBe("Balanced Protection");
-      expect(service.getProtectionLevel("High" as SecurityLevel)).toBe("Strong Protection");
-      expect(service.getProtectionLevel("Very High" as SecurityLevel)).toBe("Maximum Protection");
+      expect(service.getProtectionLevel("None" as SecurityLevel)).toBe(
+        "No Protection"
+      );
+      expect(service.getProtectionLevel("Low" as SecurityLevel)).toBe(
+        "Basic Protection"
+      );
+      expect(service.getProtectionLevel("Moderate" as SecurityLevel)).toBe(
+        "Balanced Protection"
+      );
+      expect(service.getProtectionLevel("High" as SecurityLevel)).toBe(
+        "Strong Protection"
+      );
+      expect(service.getProtectionLevel("Very High" as SecurityLevel)).toBe(
+        "Maximum Protection"
+      );
     });
   });
 
@@ -306,45 +480,55 @@ describe("SecurityMetricsService", () => {
     it("should calculate security score based on security levels", () => {
       // For Low security levels (value = 1)
       // Score = (1 + 1 + 1) / 12 * 100 = 25
-      expect(service.calculateSecurityScore(
-        "Low" as SecurityLevel,
-        "Low" as SecurityLevel,
-        "Low" as SecurityLevel
-      )).toBe(25);
+      expect(
+        service.calculateSecurityScore(
+          "Low" as SecurityLevel,
+          "Low" as SecurityLevel,
+          "Low" as SecurityLevel
+        )
+      ).toBe(25);
 
       // For Moderate security levels (value = 2)
       // Score = (2 + 2 + 2) / 12 * 100 = 50
-      expect(service.calculateSecurityScore(
-        "Moderate" as SecurityLevel,
-        "Moderate" as SecurityLevel,
-        "Moderate" as SecurityLevel
-      )).toBe(50);
+      expect(
+        service.calculateSecurityScore(
+          "Moderate" as SecurityLevel,
+          "Moderate" as SecurityLevel,
+          "Moderate" as SecurityLevel
+        )
+      ).toBe(50);
 
       // For High security levels (value = 3)
       // Score = (3 + 3 + 3) / 12 * 100 = 75
-      expect(service.calculateSecurityScore(
-        "High" as SecurityLevel,
-        "High" as SecurityLevel,
-        "High" as SecurityLevel
-      )).toBe(75);
+      expect(
+        service.calculateSecurityScore(
+          "High" as SecurityLevel,
+          "High" as SecurityLevel,
+          "High" as SecurityLevel
+        )
+      ).toBe(75);
 
       // For Very High security levels (value = 4)
       // Score = (4 + 4 + 4) / 12 * 100 = 100
-      expect(service.calculateSecurityScore(
-        "Very High" as SecurityLevel,
-        "Very High" as SecurityLevel,
-        "Very High" as SecurityLevel
-      )).toBe(100);
+      expect(
+        service.calculateSecurityScore(
+          "Very High" as SecurityLevel,
+          "Very High" as SecurityLevel,
+          "Very High" as SecurityLevel
+        )
+      ).toBe(100);
     });
 
     it("should calculate security score for mixed security levels", () => {
       // For mixed security levels (values = 0, 2, 4)
       // Score = (0 + 2 + 4) / 12 * 100 = 50
-      expect(service.calculateSecurityScore(
-        "None" as SecurityLevel,
-        "Moderate" as SecurityLevel,
-        "Very High" as SecurityLevel
-      )).toBe(50);
+      expect(
+        service.calculateSecurityScore(
+          "None" as SecurityLevel,
+          "Moderate" as SecurityLevel,
+          "Very High" as SecurityLevel
+        )
+      ).toBe(50);
     });
   });
 });

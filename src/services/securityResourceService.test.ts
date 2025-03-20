@@ -9,12 +9,12 @@ const mockDataProvider = vi.hoisted(() => ({
     None: {
       description: "No availability",
       technical: "No controls",
-      businessImpact: "Critical impact",  // Add missing properties
+      businessImpact: "Critical impact", // Add missing properties
       capex: 0,
       opex: 0,
       bg: "#ffffff",
       text: "#000000",
-      recommendations: []
+      recommendations: [],
     },
     Low: {
       description: "Low availability",
@@ -24,7 +24,7 @@ const mockDataProvider = vi.hoisted(() => ({
       opex: 500,
       bg: "#f8d7da",
       text: "#721c24",
-      recommendations: ["Implement basic redundancy"]
+      recommendations: ["Implement basic redundancy"],
     },
     Moderate: {
       description: "Medium availability",
@@ -34,7 +34,7 @@ const mockDataProvider = vi.hoisted(() => ({
       opex: 1000,
       bg: "#fff3cd",
       text: "#856404",
-      recommendations: ["Implement load balancing"]
+      recommendations: ["Implement load balancing"],
     },
     High: {
       description: "High availability",
@@ -44,7 +44,7 @@ const mockDataProvider = vi.hoisted(() => ({
       opex: 1500,
       bg: "#d4edda",
       text: "#155724",
-      recommendations: ["Implement geographic redundancy"]
+      recommendations: ["Implement geographic redundancy"],
     },
     "Very High": {
       description: "Maximum availability",
@@ -54,22 +54,37 @@ const mockDataProvider = vi.hoisted(() => ({
       opex: 2500,
       bg: "#cce5ff",
       text: "#004085",
-      recommendations: ["Implement multi-region failover"]
-    }
+      recommendations: ["Implement multi-region failover"],
+    },
   },
   integrityOptions: {
     None: { description: "No integrity", technical: "No controls" },
     Low: { description: "Low integrity", technical: "Basic controls" },
-    Moderate: { description: "Medium integrity", technical: "Standard controls" },
+    Moderate: {
+      description: "Medium integrity",
+      technical: "Standard controls",
+    },
     High: { description: "High integrity", technical: "Advanced controls" },
-    "Very High": { description: "Maximum integrity", technical: "Maximum controls" }
+    "Very High": {
+      description: "Maximum integrity",
+      technical: "Maximum controls",
+    },
   },
   confidentialityOptions: {
     None: { description: "No confidentiality", technical: "No controls" },
     Low: { description: "Low confidentiality", technical: "Basic controls" },
-    Moderate: { description: "Medium confidentiality", technical: "Standard controls" },
-    High: { description: "High confidentiality", technical: "Advanced controls" },
-    "Very High": { description: "Maximum confidentiality", technical: "Maximum controls" }
+    Moderate: {
+      description: "Medium confidentiality",
+      technical: "Standard controls",
+    },
+    High: {
+      description: "High confidentiality",
+      technical: "Advanced controls",
+    },
+    "Very High": {
+      description: "Maximum confidentiality",
+      technical: "Maximum controls",
+    },
   },
   // Add a custom implementation for testing
   getDefaultValuePoints: (level: SecurityLevel) => {
@@ -77,11 +92,11 @@ const mockDataProvider = vi.hoisted(() => ({
       return [
         "Custom high value point 1",
         "Custom high value point 2",
-        "Custom high value point 3"
+        "Custom high value point 3",
       ];
     }
     return [];
-  }
+  },
 }));
 
 describe("SecurityResourceService", () => {
@@ -89,7 +104,10 @@ describe("SecurityResourceService", () => {
   const resourceService = new SecurityResourceService(dataProvider);
 
   it("should return a non-empty array of security resources for a given component and level", () => {
-    const resources = resourceService.getSecurityResources("availability", "High");
+    const resources = resourceService.getSecurityResources(
+      "availability",
+      "High"
+    );
     expect(Array.isArray(resources)).toBe(true);
     expect(resources.length).toBeGreaterThan(0);
   });
@@ -105,7 +123,7 @@ describe("SecurityResourceService", () => {
         LOW: { returnRate: "50%", description: "Low ROI" },
         MODERATE: { returnRate: "200%", description: "Moderate ROI" },
         HIGH: { returnRate: "350%", description: "High ROI" },
-        VERY_HIGH: { returnRate: "500%", description: "Very High ROI" }
+        VERY_HIGH: { returnRate: "500%", description: "Very High ROI" },
       },
       // Ensure all security levels are present in availabilityOptions
       availabilityOptions: {
@@ -117,7 +135,7 @@ describe("SecurityResourceService", () => {
           opex: 0,
           bg: "#ffffff",
           text: "#000000",
-          recommendations: []
+          recommendations: [],
         },
         Low: {
           description: "Low availability",
@@ -127,7 +145,7 @@ describe("SecurityResourceService", () => {
           opex: 500,
           bg: "#f8d7da",
           text: "#721c24",
-          recommendations: ["Implement basic redundancy"]
+          recommendations: ["Implement basic redundancy"],
         },
         Moderate: {
           description: "Medium availability",
@@ -137,7 +155,7 @@ describe("SecurityResourceService", () => {
           opex: 1000,
           bg: "#fff3cd",
           text: "#856404",
-          recommendations: ["Implement load balancing"]
+          recommendations: ["Implement load balancing"],
         },
         High: {
           description: "High availability",
@@ -147,7 +165,7 @@ describe("SecurityResourceService", () => {
           opex: 1500,
           bg: "#d4edda",
           text: "#155724",
-          recommendations: ["Implement geographic redundancy"]
+          recommendations: ["Implement geographic redundancy"],
         },
         "Very High": {
           description: "Maximum availability",
@@ -157,8 +175,8 @@ describe("SecurityResourceService", () => {
           opex: 2500,
           bg: "#cce5ff",
           text: "#004085",
-          recommendations: ["Implement multi-region failover"]
-        }
+          recommendations: ["Implement multi-region failover"],
+        },
       },
       // Similarly update integrityOptions and confidentialityOptions
       integrityOptions: {
@@ -170,7 +188,7 @@ describe("SecurityResourceService", () => {
           opex: 0,
           bg: "#ffffff",
           text: "#000000",
-          recommendations: []
+          recommendations: [],
         },
         // Add similar properties for other levels...
         Low: {
@@ -181,7 +199,7 @@ describe("SecurityResourceService", () => {
           opex: 500,
           bg: "#f8d7da",
           text: "#721c24",
-          recommendations: ["Implement basic validation"]
+          recommendations: ["Implement basic validation"],
         },
         Moderate: {
           description: "Medium integrity",
@@ -191,7 +209,7 @@ describe("SecurityResourceService", () => {
           opex: 1000,
           bg: "#fff3cd",
           text: "#856404",
-          recommendations: ["Implement checksums"]
+          recommendations: ["Implement checksums"],
         },
         High: {
           description: "High integrity",
@@ -201,7 +219,7 @@ describe("SecurityResourceService", () => {
           opex: 1500,
           bg: "#d4edda",
           text: "#155724",
-          recommendations: ["Implement digital signatures"]
+          recommendations: ["Implement digital signatures"],
         },
         "Very High": {
           description: "Maximum integrity",
@@ -211,8 +229,8 @@ describe("SecurityResourceService", () => {
           opex: 2500,
           bg: "#cce5ff",
           text: "#004085",
-          recommendations: ["Implement blockchain verification"]
-        }
+          recommendations: ["Implement blockchain verification"],
+        },
       },
       confidentialityOptions: {
         None: {
@@ -223,7 +241,7 @@ describe("SecurityResourceService", () => {
           opex: 0,
           bg: "#ffffff",
           text: "#000000",
-          recommendations: []
+          recommendations: [],
         },
         // Add similar properties for other levels...
         Low: {
@@ -234,7 +252,7 @@ describe("SecurityResourceService", () => {
           opex: 500,
           bg: "#f8d7da",
           text: "#721c24",
-          recommendations: ["Implement basic access control"]
+          recommendations: ["Implement basic access control"],
         },
         Moderate: {
           description: "Medium confidentiality",
@@ -244,7 +262,7 @@ describe("SecurityResourceService", () => {
           opex: 1000,
           bg: "#fff3cd",
           text: "#856404",
-          recommendations: ["Implement encryption"]
+          recommendations: ["Implement encryption"],
         },
         High: {
           description: "High confidentiality",
@@ -254,7 +272,7 @@ describe("SecurityResourceService", () => {
           opex: 1500,
           bg: "#d4edda",
           text: "#155724",
-          recommendations: ["Implement end-to-end encryption"]
+          recommendations: ["Implement end-to-end encryption"],
         },
         "Very High": {
           description: "Maximum confidentiality",
@@ -264,8 +282,8 @@ describe("SecurityResourceService", () => {
           opex: 2500,
           bg: "#cce5ff",
           text: "#004085",
-          recommendations: ["Implement zero trust architecture"]
-        }
+          recommendations: ["Implement zero trust architecture"],
+        },
       },
     };
 
@@ -313,9 +331,18 @@ describe("SecurityResourceService", () => {
 
   describe("getSecurityResources", () => {
     it("returns resources for all component types", () => {
-      const availResources = testService.getSecurityResources("availability", "Moderate");
-      const intResources = testService.getSecurityResources("integrity", "Moderate");
-      const confResources = testService.getSecurityResources("confidentiality", "Moderate");
+      const availResources = testService.getSecurityResources(
+        "availability",
+        "Moderate"
+      );
+      const intResources = testService.getSecurityResources(
+        "integrity",
+        "Moderate"
+      );
+      const confResources = testService.getSecurityResources(
+        "confidentiality",
+        "Moderate"
+      );
 
       expect(availResources.length).toBeGreaterThan(0);
       expect(intResources.length).toBeGreaterThan(0);
@@ -323,9 +350,18 @@ describe("SecurityResourceService", () => {
     });
 
     it("returns more specific resources for higher security levels", () => {
-      const lowResources = testService.getSecurityResources("availability", "Low");
-      const highResources = testService.getSecurityResources("availability", "High");
-      const veryHighResources = testService.getSecurityResources("availability", "Very High");
+      const lowResources = testService.getSecurityResources(
+        "availability",
+        "Low"
+      );
+      const highResources = testService.getSecurityResources(
+        "availability",
+        "High"
+      );
+      const veryHighResources = testService.getSecurityResources(
+        "availability",
+        "Very High"
+      );
 
       // All levels should include at least the general resources
       expect(lowResources.length).toBeGreaterThan(0);
@@ -333,9 +369,15 @@ describe("SecurityResourceService", () => {
       expect(veryHighResources.length).toBeGreaterThan(0);
 
       // Check specific details of resources
-      const lowLevelResource = lowResources.find(r => r.id === "availability-low");
-      const highLevelResource = highResources.find(r => r.id === "availability-high");
-      const veryHighLevelResource = veryHighResources.find(r => r.id === "availability-very-high");
+      const lowLevelResource = lowResources.find(
+        (r) => r.id === "availability-low"
+      );
+      const highLevelResource = highResources.find(
+        (r) => r.id === "availability-high"
+      );
+      const veryHighLevelResource = veryHighResources.find(
+        (r) => r.id === "availability-very-high"
+      );
 
       expect(lowLevelResource).toBeDefined();
       expect(lowLevelResource?.title).toContain("Basic");
@@ -346,13 +388,28 @@ describe("SecurityResourceService", () => {
     });
 
     it("includes component-specific resources", () => {
-      const availResources = testService.getSecurityResources("availability", "Moderate");
-      const intResources = testService.getSecurityResources("integrity", "Moderate");
-      const confResources = testService.getSecurityResources("confidentiality", "Moderate");
+      const availResources = testService.getSecurityResources(
+        "availability",
+        "Moderate"
+      );
+      const intResources = testService.getSecurityResources(
+        "integrity",
+        "Moderate"
+      );
+      const confResources = testService.getSecurityResources(
+        "confidentiality",
+        "Moderate"
+      );
 
-      const availSpecificResource = availResources.find(r => r.id === "availability-resources");
-      const intSpecificResource = intResources.find(r => r.id === "integrity-resources");
-      const confSpecificResource = confResources.find(r => r.id === "confidentiality-resources");
+      const availSpecificResource = availResources.find(
+        (r) => r.id === "availability-resources"
+      );
+      const intSpecificResource = intResources.find(
+        (r) => r.id === "integrity-resources"
+      );
+      const confSpecificResource = confResources.find(
+        (r) => r.id === "confidentiality-resources"
+      );
 
       expect(availSpecificResource).toBeDefined();
       expect(availSpecificResource?.title).toContain("Availability");
@@ -363,9 +420,12 @@ describe("SecurityResourceService", () => {
     });
 
     it("includes relevance scores and tags for resources", () => {
-      const resources = testService.getSecurityResources("availability", "High");
+      const resources = testService.getSecurityResources(
+        "availability",
+        "High"
+      );
 
-      resources.forEach(resource => {
+      resources.forEach((resource) => {
         expect(resource).toHaveProperty("relevance");
         expect(resource.relevance).toBeGreaterThan(0);
         expect(resource.relevance).toBeLessThanOrEqual(100);
@@ -378,9 +438,12 @@ describe("SecurityResourceService", () => {
     });
 
     it("includes URLs for all resources", () => {
-      const resources = testService.getSecurityResources("integrity", "Moderate");
+      const resources = testService.getSecurityResources(
+        "integrity",
+        "Moderate"
+      );
 
-      resources.forEach(resource => {
+      resources.forEach((resource) => {
         expect(resource).toHaveProperty("url");
         expect(resource.url).toMatch(/^https?:\/\//);
       });
@@ -391,11 +454,14 @@ describe("SecurityResourceService", () => {
     it("capitalizeFirstLetter correctly capitalizes strings", () => {
       // We can't directly test private methods, so we test it through getSecurityResources
       // which uses capitalizeFirstLetter internally
-      const resources = testService.getSecurityResources("availability", "Moderate");
+      const resources = testService.getSecurityResources(
+        "availability",
+        "Moderate"
+      );
 
       // Find a resource with a capitalized component name in the title
-      const componentResource = resources.find(r =>
-        r.title && r.title.includes("Availability")
+      const componentResource = resources.find(
+        (r) => r.title && r.title.includes("Availability")
       );
 
       expect(componentResource).toBeDefined();
@@ -414,9 +480,15 @@ describe("SecurityResourceService", () => {
 
   describe("getValuePoints", () => {
     it("should return value points for each security level", () => {
-      const levels: SecurityLevel[] = ["None", "Low", "Moderate", "High", "Very High"];
+      const levels: SecurityLevel[] = [
+        "None",
+        "Low",
+        "Moderate",
+        "High",
+        "Very High",
+      ];
 
-      levels.forEach(level => {
+      levels.forEach((level) => {
         const valuePoints = service.getValuePoints(level);
         expect(Array.isArray(valuePoints)).toBe(true);
         expect(valuePoints.length).toBeGreaterThan(0);
@@ -427,31 +499,40 @@ describe("SecurityResourceService", () => {
       const valuePoints = service.getValuePoints("Very High");
 
       // Check that value points match expected content for Very High
-      expect(valuePoints.some(point =>
-        point.toLowerCase().includes("maximum") ||
-        point.toLowerCase().includes("comprehensive")
-      )).toBe(true);
+      expect(
+        valuePoints.some(
+          (point) =>
+            point.toLowerCase().includes("maximum") ||
+            point.toLowerCase().includes("comprehensive")
+        )
+      ).toBe(true);
     });
 
     it("should return appropriate value points for low security level", () => {
       const valuePoints = service.getValuePoints("Low");
 
       // Check that value points match expected content for Low
-      expect(valuePoints.some(point =>
-        point.toLowerCase().includes("basic") ||
-        point.toLowerCase().includes("minimal")
-      )).toBe(true);
+      expect(
+        valuePoints.some(
+          (point) =>
+            point.toLowerCase().includes("basic") ||
+            point.toLowerCase().includes("minimal")
+        )
+      ).toBe(true);
     });
   });
 
   describe("getSecurityResources", () => {
     it("should return security resources for availability", () => {
-      const resources = service.getSecurityResources("availability", "Moderate" as SecurityLevel);
+      const resources = service.getSecurityResources(
+        "availability",
+        "Moderate" as SecurityLevel
+      );
 
       expect(Array.isArray(resources)).toBe(true);
       expect(resources.length).toBeGreaterThan(0);
 
-      resources.forEach(resource => {
+      resources.forEach((resource) => {
         expect(resource).toHaveProperty("id");
         expect(resource).toHaveProperty("title");
         expect(resource).toHaveProperty("description");
@@ -463,14 +544,20 @@ describe("SecurityResourceService", () => {
     });
 
     it("should return security resources for integrity", () => {
-      const resources = service.getSecurityResources("integrity", "Moderate" as SecurityLevel);
+      const resources = service.getSecurityResources(
+        "integrity",
+        "Moderate" as SecurityLevel
+      );
 
       expect(Array.isArray(resources)).toBe(true);
       expect(resources.length).toBeGreaterThan(0);
     });
 
     it("should return security resources for confidentiality", () => {
-      const resources = service.getSecurityResources("confidentiality", "Moderate" as SecurityLevel);
+      const resources = service.getSecurityResources(
+        "confidentiality",
+        "Moderate" as SecurityLevel
+      );
 
       expect(Array.isArray(resources)).toBe(true);
       expect(resources.length).toBeGreaterThan(0);
@@ -488,8 +575,8 @@ describe("SecurityResourceService", () => {
       );
 
       // At least one resource should be different
-      const lowTitles = lowResources.map(r => r.title);
-      const highTitles = highResources.map(r => r.title);
+      const lowTitles = lowResources.map((r) => r.title);
+      const highTitles = highResources.map((r) => r.title);
 
       expect(lowTitles).not.toEqual(highTitles);
     });
@@ -511,56 +598,92 @@ describe("SecurityResourceService", () => {
       );
 
       // Each component should have at least one unique resource
-      const availabilityTitles = availabilityResources.map(r => r.title);
-      const integrityTitles = integrityResources.map(r => r.title);
-      const confidentialityTitles = confidentialityResources.map(r => r.title);
+      const availabilityTitles = availabilityResources.map((r) => r.title);
+      const integrityTitles = integrityResources.map((r) => r.title);
+      const confidentialityTitles = confidentialityResources.map(
+        (r) => r.title
+      );
 
-      expect(availabilityTitles.some(title =>
-        !integrityTitles.includes(title) && !confidentialityTitles.includes(title)
-      )).toBe(true);
+      expect(
+        availabilityTitles.some(
+          (title) =>
+            !integrityTitles.includes(title) &&
+            !confidentialityTitles.includes(title)
+        )
+      ).toBe(true);
 
-      expect(integrityTitles.some(title =>
-        !availabilityTitles.includes(title) && !confidentialityTitles.includes(title)
-      )).toBe(true);
+      expect(
+        integrityTitles.some(
+          (title) =>
+            !availabilityTitles.includes(title) &&
+            !confidentialityTitles.includes(title)
+        )
+      ).toBe(true);
 
-      expect(confidentialityTitles.some(title =>
-        !availabilityTitles.includes(title) && !integrityTitles.includes(title)
-      )).toBe(true);
+      expect(
+        confidentialityTitles.some(
+          (title) =>
+            !availabilityTitles.includes(title) &&
+            !integrityTitles.includes(title)
+        )
+      ).toBe(true);
     });
 
     it("should include component name in resource titles", () => {
-      const resources = service.getSecurityResources("availability", "High" as SecurityLevel);
+      const resources = service.getSecurityResources(
+        "availability",
+        "High" as SecurityLevel
+      );
 
       // At least one resource should contain the component name in its title
-      expect(resources.some(r =>
-        r.title.toLowerCase().includes("availability")
-      )).toBe(true);
+      expect(
+        resources.some((r) => r.title.toLowerCase().includes("availability"))
+      ).toBe(true);
     });
 
     it("should include appropriate tags for resources", () => {
-      const lowResources = service.getSecurityResources("availability", "Low" as SecurityLevel);
-      const highResources = service.getSecurityResources("availability", "High" as SecurityLevel);
+      const lowResources = service.getSecurityResources(
+        "availability",
+        "Low" as SecurityLevel
+      );
+      const highResources = service.getSecurityResources(
+        "availability",
+        "High" as SecurityLevel
+      );
 
       // Low level should have tags like "basic" or "minimal"
-      expect(lowResources.some(r =>
-        r.tags?.some(tag => tag === "basic" || tag === "minimal")
-      )).toBe(true);
+      expect(
+        lowResources.some((r) =>
+          r.tags?.some((tag) => tag === "basic" || tag === "minimal")
+        )
+      ).toBe(true);
 
       // High level should have tags like "robust" or "sensitive"
-      expect(highResources.some(r =>
-        r.tags?.some(tag => tag === "robust" || tag === "sensitive")
-      )).toBe(true);
+      expect(
+        highResources.some((r) =>
+          r.tags?.some((tag) => tag === "robust" || tag === "sensitive")
+        )
+      ).toBe(true);
     });
 
     it("should return a general security guideline for any component and level", () => {
-      const noneResources = service.getSecurityResources("availability", "None" as SecurityLevel);
-      const moderateResources = service.getSecurityResources("integrity", "Moderate" as SecurityLevel);
-      const highResources = service.getSecurityResources("confidentiality", "High" as SecurityLevel);
+      const noneResources = service.getSecurityResources(
+        "availability",
+        "None" as SecurityLevel
+      );
+      const moderateResources = service.getSecurityResources(
+        "integrity",
+        "Moderate" as SecurityLevel
+      );
+      const highResources = service.getSecurityResources(
+        "confidentiality",
+        "High" as SecurityLevel
+      );
 
       // There should be at least one general guideline in each result
-      expect(noneResources.some(r => r.type === "general")).toBe(true);
-      expect(moderateResources.some(r => r.type === "general")).toBe(true);
-      expect(highResources.some(r => r.type === "general")).toBe(true);
+      expect(noneResources.some((r) => r.type === "general")).toBe(true);
+      expect(moderateResources.some((r) => r.type === "general")).toBe(true);
+      expect(highResources.some((r) => r.type === "general")).toBe(true);
     });
   });
 });
@@ -577,16 +700,22 @@ describe("SecurityResourceService", () => {
 
   describe("getValuePoints", () => {
     it("returns value points for each security level", () => {
-      const levels: SecurityLevel[] = ["None", "Low", "Moderate", "High", "Very High"];
+      const levels: SecurityLevel[] = [
+        "None",
+        "Low",
+        "Moderate",
+        "High",
+        "Very High",
+      ];
 
-      levels.forEach(level => {
+      levels.forEach((level) => {
         const points = service.getValuePoints(level);
 
         expect(Array.isArray(points)).toBe(true);
         expect(points.length).toBeGreaterThan(0);
 
         // Each value point should be a meaningful string
-        points.forEach(point => {
+        points.forEach((point) => {
           expect(typeof point).toBe("string");
           expect(point.length).toBeGreaterThan(10);
         });
@@ -598,17 +727,19 @@ describe("SecurityResourceService", () => {
       const highPoints = service.getValuePoints("High");
 
       // "None" points should mention risks or lack of security
-      const nonePointsHaveRisks = nonePoints.some(point =>
-        point.toLowerCase().includes("risk") ||
-        point.toLowerCase().includes("no ") ||
-        point.toLowerCase().includes("lack")
+      const nonePointsHaveRisks = nonePoints.some(
+        (point) =>
+          point.toLowerCase().includes("risk") ||
+          point.toLowerCase().includes("no ") ||
+          point.toLowerCase().includes("lack")
       );
 
       // "High" points should mention benefits or strong security
-      const highPointsHaveStrengths = highPoints.some(point =>
-        point.toLowerCase().includes("strong") ||
-        point.toLowerCase().includes("robust") ||
-        point.toLowerCase().includes("significant")
+      const highPointsHaveStrengths = highPoints.some(
+        (point) =>
+          point.toLowerCase().includes("strong") ||
+          point.toLowerCase().includes("robust") ||
+          point.toLowerCase().includes("significant")
       );
 
       expect(nonePointsHaveRisks).toBe(true);
@@ -619,10 +750,16 @@ describe("SecurityResourceService", () => {
   describe("getSecurityResources", () => {
     it("returns resources for each CIA component and security level", () => {
       const components = ["availability", "integrity", "confidentiality"];
-      const levels: SecurityLevel[] = ["None", "Low", "Moderate", "High", "Very High"];
+      const levels: SecurityLevel[] = [
+        "None",
+        "Low",
+        "Moderate",
+        "High",
+        "Very High",
+      ];
 
-      components.forEach(component => {
-        levels.forEach(level => {
+      components.forEach((component) => {
+        levels.forEach((level) => {
           // @ts-expect-error - Type needs refinement but works for testing
           const resources = service.getSecurityResources(component, level);
 
@@ -630,7 +767,7 @@ describe("SecurityResourceService", () => {
           expect(resources.length).toBeGreaterThan(0);
 
           // Verify resources have required properties
-          resources.forEach(resource => {
+          resources.forEach((resource) => {
             expect(resource).toHaveProperty("id");
             expect(resource).toHaveProperty("title");
             expect(resource).toHaveProperty("description");
@@ -650,27 +787,39 @@ describe("SecurityResourceService", () => {
     });
 
     it("returns resources specific to the CIA component", () => {
-      const availabilityResources = service.getSecurityResources("availability", "Moderate");
-      const integrityResources = service.getSecurityResources("integrity", "Moderate");
-      const confidentialityResources = service.getSecurityResources("confidentiality", "Moderate");
+      const availabilityResources = service.getSecurityResources(
+        "availability",
+        "Moderate"
+      );
+      const integrityResources = service.getSecurityResources(
+        "integrity",
+        "Moderate"
+      );
+      const confidentialityResources = service.getSecurityResources(
+        "confidentiality",
+        "Moderate"
+      );
 
       // Each component should have some component-specific resources
-      const hasAvailabilitySpecific = availabilityResources.some(r =>
-        r.type === "availability" ||
-        r.title.toLowerCase().includes("availability") ||
-        r.description.toLowerCase().includes("availability")
+      const hasAvailabilitySpecific = availabilityResources.some(
+        (r) =>
+          r.type === "availability" ||
+          r.title.toLowerCase().includes("availability") ||
+          r.description.toLowerCase().includes("availability")
       );
 
-      const hasIntegritySpecific = integrityResources.some(r =>
-        r.type === "integrity" ||
-        r.title.toLowerCase().includes("integrity") ||
-        r.description.toLowerCase().includes("integrity")
+      const hasIntegritySpecific = integrityResources.some(
+        (r) =>
+          r.type === "integrity" ||
+          r.title.toLowerCase().includes("integrity") ||
+          r.description.toLowerCase().includes("integrity")
       );
 
-      const hasConfidentialitySpecific = confidentialityResources.some(r =>
-        r.type === "confidentiality" ||
-        r.title.toLowerCase().includes("confidentiality") ||
-        r.description.toLowerCase().includes("confidentiality")
+      const hasConfidentialitySpecific = confidentialityResources.some(
+        (r) =>
+          r.type === "confidentiality" ||
+          r.title.toLowerCase().includes("confidentiality") ||
+          r.description.toLowerCase().includes("confidentiality")
       );
 
       expect(hasAvailabilitySpecific).toBe(true);
@@ -679,21 +828,29 @@ describe("SecurityResourceService", () => {
     });
 
     it("returns resources specific to the security level", () => {
-      const lowResources = service.getSecurityResources("confidentiality", "Low");
-      const highResources = service.getSecurityResources("confidentiality", "High");
+      const lowResources = service.getSecurityResources(
+        "confidentiality",
+        "Low"
+      );
+      const highResources = service.getSecurityResources(
+        "confidentiality",
+        "High"
+      );
 
       // Low level resources should mention basic or minimal controls
-      const hasBasicControls = lowResources.some(r =>
-        r.title.toLowerCase().includes("basic") ||
-        r.description.toLowerCase().includes("basic") ||
-        r.description.toLowerCase().includes("minimal")
+      const hasBasicControls = lowResources.some(
+        (r) =>
+          r.title.toLowerCase().includes("basic") ||
+          r.description.toLowerCase().includes("basic") ||
+          r.description.toLowerCase().includes("minimal")
       );
 
       // High level resources should mention robust or sensitive security
-      const hasAdvancedControls = highResources.some(r =>
-        r.title.toLowerCase().includes("sensitive") ||
-        r.description.toLowerCase().includes("sensitive") ||
-        r.description.toLowerCase().includes("strong")
+      const hasAdvancedControls = highResources.some(
+        (r) =>
+          r.title.toLowerCase().includes("sensitive") ||
+          r.description.toLowerCase().includes("sensitive") ||
+          r.description.toLowerCase().includes("strong")
       );
 
       expect(hasBasicControls).toBe(true);
@@ -701,14 +858,29 @@ describe("SecurityResourceService", () => {
     });
 
     it("includes general resources regardless of component", () => {
-      const availabilityResources = service.getSecurityResources("availability", "Moderate");
-      const integrityResources = service.getSecurityResources("integrity", "Moderate");
-      const confidentialityResources = service.getSecurityResources("confidentiality", "Moderate");
+      const availabilityResources = service.getSecurityResources(
+        "availability",
+        "Moderate"
+      );
+      const integrityResources = service.getSecurityResources(
+        "integrity",
+        "Moderate"
+      );
+      const confidentialityResources = service.getSecurityResources(
+        "confidentiality",
+        "Moderate"
+      );
 
       // Each component should have some general resources
-      const availabilityHasGeneral = availabilityResources.some(r => r.type === "general");
-      const integrityHasGeneral = integrityResources.some(r => r.type === "general");
-      const confidentialityHasGeneral = confidentialityResources.some(r => r.type === "general");
+      const availabilityHasGeneral = availabilityResources.some(
+        (r) => r.type === "general"
+      );
+      const integrityHasGeneral = integrityResources.some(
+        (r) => r.type === "general"
+      );
+      const confidentialityHasGeneral = confidentialityResources.some(
+        (r) => r.type === "general"
+      );
 
       expect(availabilityHasGeneral).toBe(true);
       expect(integrityHasGeneral).toBe(true);
@@ -731,3 +903,113 @@ describe("SecurityResourceService", () => {
     });
   });
 });
+
+// Convert from hoisted to a regular object
+const mockSecurityResources = {
+  resources: [
+    {
+      id: "resource-1",
+      title: "Security Best Practices Guide",
+      description:
+        "Comprehensive guide for implementing security best practices",
+      url: "https://example.com/resource1",
+      category: "general",
+      relevanceScore: 85,
+      tags: ["best practices", "general security"],
+      type: "guide",
+      applicableLevels: {
+        availability: ["Moderate", "High", "Very High"],
+        integrity: ["Moderate", "High", "Very High"],
+        confidentiality: ["Moderate", "High", "Very High"],
+      },
+    },
+    {
+      id: "resource-2",
+      title: "Advanced Encryption Implementation",
+      description:
+        "Guide for implementing advanced encryption for data protection",
+      url: "https://example.com/resource2",
+      category: "confidentiality",
+      relevanceScore: 90,
+      tags: ["encryption", "confidentiality", "data protection"],
+      type: "technical",
+      applicableLevels: {
+        confidentiality: ["High", "Very High"],
+      },
+    },
+    {
+      id: "resource-3",
+      title: "Basic Security Controls",
+      description: "Introduction to implementing basic security controls",
+      url: "https://example.com/resource3",
+      category: "general",
+      relevanceScore: 70,
+      tags: ["basics", "security controls"],
+      type: "guide",
+      applicableLevels: {
+        availability: ["Low", "Moderate"],
+        integrity: ["Low", "Moderate"],
+        confidentiality: ["Low", "Moderate"],
+      },
+    },
+    {
+      id: "resource-4",
+      title: "High Availability Architecture",
+      description:
+        "Designing high availability systems for critical applications",
+      url: "https://example.com/resource4",
+      category: "availability",
+      relevanceScore: 95,
+      tags: ["high availability", "architecture", "resilience"],
+      type: "technical",
+      applicableLevels: {
+        availability: ["High", "Very High"],
+      },
+    },
+    {
+      id: "resource-5",
+      title: "Data Integrity Controls",
+      description: "Implementation guide for data integrity controls",
+      url: "https://example.com/resource5",
+      category: "integrity",
+      relevanceScore: 85,
+      tags: ["integrity", "data validation", "hash verification"],
+      type: "technical",
+      applicableLevels: {
+        integrity: ["High", "Very High"],
+      },
+    },
+  ],
+  valuePoints: {
+    availability: {
+      None: [
+        "No business continuity measures",
+        "High risk of service disruption",
+      ],
+      Low: ["Basic business continuity measures", "Reduced downtime risk"],
+      Moderate: [
+        "Standard availability controls",
+        "Improved business continuity",
+      ],
+      High: ["Advanced availability architecture", "Minimal downtime"],
+      "Very High": ["Maximum resilience", "Near-zero downtime"],
+    },
+    integrity: {
+      None: ["No data integrity assurance", "High risk of data corruption"],
+      Low: ["Basic data validation", "Reduced corruption risk"],
+      Moderate: ["Standard integrity controls", "Data consistency assurance"],
+      High: ["Advanced integrity verification", "Strong data validation"],
+      "Very High": [
+        "Maximum integrity guarantees",
+        "Cryptographic verification",
+      ],
+    },
+    confidentiality: {
+      None: ["No confidentiality controls", "High risk of data exposure"],
+      Low: ["Basic access controls", "Reduced exposure risk"],
+      Moderate: ["Standard encryption", "Data protection measures"],
+      High: ["Advanced encryption", "Strong access controls"],
+      "Very High": ["Maximum confidentiality", "Military-grade protection"],
+    },
+  },
+};
