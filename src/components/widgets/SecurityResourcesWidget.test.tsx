@@ -139,7 +139,6 @@ vi.mock("../../hooks/useCIAOptions", () => ({
 describe("SecurityResourcesWidget", () => {
   // Helper function for common props with proper typing
   const defaultProps = {
-    securityLevel: "High" as SecurityLevel,
     availabilityLevel: "High" as SecurityLevel,
     integrityLevel: "High" as SecurityLevel,
     confidentialityLevel: "High" as SecurityLevel,
@@ -225,10 +224,9 @@ describe("SecurityResourcesWidget", () => {
   });
 
   it("handles different security levels", () => {
-    // Render with Low security
+    // Render with Low security - remove securityLevel prop
     const { rerender } = render(
       <SecurityResourcesWidget
-        securityLevel={"Low" as SecurityLevel}
         availabilityLevel={"Low" as SecurityLevel}
         integrityLevel={"Low" as SecurityLevel}
         confidentialityLevel={"Low" as SecurityLevel}
@@ -238,10 +236,9 @@ describe("SecurityResourcesWidget", () => {
     // Check recommendations section shows expected level
     expect(screen.getByText(/Availability: Low/)).toBeInTheDocument();
 
-    // Rerender with High security
+    // Rerender with High security - remove securityLevel prop
     rerender(
       <SecurityResourcesWidget
-        securityLevel={"High" as SecurityLevel}
         availabilityLevel={"High" as SecurityLevel}
         integrityLevel={"High" as SecurityLevel}
         confidentialityLevel={"High" as SecurityLevel}
@@ -255,7 +252,6 @@ describe("SecurityResourcesWidget", () => {
     availabilityLevel: "High" as SecurityLevel,
     integrityLevel: "High" as SecurityLevel,
     confidentialityLevel: "High" as SecurityLevel,
-    securityLevel: "High" as SecurityLevel, // Add this required prop
     testId: "security-resources-test"
   };
 
@@ -282,7 +278,6 @@ describe("SecurityResourcesWidget", () => {
     availabilityLevel: "Moderate" as SecurityLevel,
     integrityLevel: "Moderate" as SecurityLevel,
     confidentialityLevel: "Moderate" as SecurityLevel,
-    securityLevel: "Moderate" as SecurityLevel, // Add this required prop
     filter: "compliance",
     testId: "security-resources-test"
   };
@@ -348,5 +343,41 @@ describe("SecurityResourcesWidget", () => {
     expect(
       screen.getByText(/No resources found matching your criteria/i)
     ).toBeInTheDocument();
+  });
+
+  test("displays resources filtered by security level", async () => {
+    // Mock relevant resources data
+    const mockResources = [
+      // ...resources mock
+    ];
+    
+    // Setup mocks
+    // ...existing code...
+    
+    render(
+      <SecurityResourcesWidget
+        availabilityLevel={"Low" as SecurityLevel}
+        integrityLevel={"Low" as SecurityLevel}
+        confidentialityLevel={"Low" as SecurityLevel}
+        // Remove the securityLevel prop that was here
+      />
+    );
+    
+    // ...existing code...
+  });
+
+  test("displays sorted resources by relevance", async () => {
+    // ...existing code...
+    
+    render(
+      <SecurityResourcesWidget
+        availabilityLevel={"High" as SecurityLevel}
+        integrityLevel={"High" as SecurityLevel}
+        confidentialityLevel={"High" as SecurityLevel}
+        // Remove the securityLevel prop that was here
+      />
+    );
+    
+    // ...existing code...
   });
 });

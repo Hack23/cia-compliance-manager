@@ -169,32 +169,66 @@ export class WidgetRegistryImpl implements WidgetRegistry {
       .sort((a, b) => (a.order || 0) - (b.order || 0))
       .sort((a, b) => (a.position || 0) - (b.position || 0));
     
-    // Extract global security levels from props
+    // CRITICAL FIX: Add explicit validation to ensure we have proper security levels 
+    // and don't accidentally pick up invalid values
     const securityLevels = {
-      availabilityLevel: props.availabilityLevel || "Moderate" as SecurityLevel,
-      integrityLevel: props.integrityLevel || "Moderate" as SecurityLevel,
-      confidentialityLevel: props.confidentialityLevel || "Moderate" as SecurityLevel,
+      availabilityLevel: 
+        typeof props === 'object' && 
+        props.availabilityLevel && 
+        typeof props.availabilityLevel === 'string' && 
+        ["None", "Low", "Moderate", "High", "Very High"].includes(props.availabilityLevel)
+          ? props.availabilityLevel as SecurityLevel 
+          : "Moderate" as SecurityLevel,
+          
+      integrityLevel: 
+        typeof props === 'object' && 
+        props.integrityLevel && 
+        typeof props.integrityLevel === 'string' && 
+        ["None", "Low", "Moderate", "High", "Very High"].includes(props.integrityLevel)
+          ? props.integrityLevel as SecurityLevel 
+          : "Moderate" as SecurityLevel,
+          
+      confidentialityLevel: 
+        typeof props === 'object' && 
+        props.confidentialityLevel && 
+        typeof props.confidentialityLevel === 'string' && 
+        ["None", "Low", "Moderate", "High", "Very High"].includes(props.confidentialityLevel)
+          ? props.confidentialityLevel as SecurityLevel 
+          : "Moderate" as SecurityLevel,
     };
 
+    // Add detailed debug logging
+    console.log('WidgetRegistry: Received props directly:', props);
+    console.log('WidgetRegistry: Final security levels that will be applied:', securityLevels);
+
     return widgetsToRender.map((widget) => {
-      const widgetProps = props[widget.id] || {};
+      // Get any widget-specific props
+      const widgetProps = typeof props === 'object' && props[widget.id] 
+        ? props[widget.id] 
+        : {};
       
-      // Ensure each widget gets the same security level props for consistency
+      // CRITICAL FIX: Apply security levels last to override any stale values from other sources
       const combinedProps = { 
         ...widget.defaultProps,
-        ...securityLevels,         // Apply consistent security levels
-        ...widgetProps,            // Allow other widget customization
-        // Add handlers so widgets can propagate changes back to the parent
+        ...widgetProps,
         ...(handlers && {
           onAvailabilityChange: handlers.onAvailabilityChange,
           onIntegrityChange: handlers.onIntegrityChange,
           onConfidentialityChange: handlers.onConfidentialityChange,
         }),
-        // Force the security levels again to ensure consistency
+        // Always override with our validated security levels
         availabilityLevel: securityLevels.availabilityLevel,
         integrityLevel: securityLevels.integrityLevel,
         confidentialityLevel: securityLevels.confidentialityLevel,
       };
+
+      if (['security-level', 'business-impact', 'value-creation'].includes(widget.id)) {
+        console.log(`WidgetRegistry: Widget ${widget.id} final applied security levels:`, {
+          availability: combinedProps.availabilityLevel,
+          integrity: combinedProps.integrityLevel,
+          confidentiality: combinedProps.confidentialityLevel,
+        });
+      }
 
       return (
         <WidgetContainer
@@ -265,7 +299,6 @@ widgetRegistry.register({
     availabilityLevel: "Moderate" as SecurityLevel,
     integrityLevel: "Moderate" as SecurityLevel,
     confidentialityLevel: "Moderate" as SecurityLevel,
-    securityLevel: "Moderate" as SecurityLevel, // Add explicit securityLevel
   },
 });
 

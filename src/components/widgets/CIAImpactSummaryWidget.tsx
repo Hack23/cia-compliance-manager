@@ -1,5 +1,6 @@
 import React from "react";
 import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
+import withSecurityLevelState from "../../hoc/withSecurityLevelState";
 import { SecurityLevel } from "../../types/cia";
 import { toTitleCase } from "../../utils/formatUtils";
 import SecurityLevelBadge from "../common/SecurityLevelBadge";
@@ -146,4 +147,5 @@ function getImpactSummary(component: string, level: SecurityLevel): string {
   }
 }
 
-export default CIAImpactSummaryWidget;
+// Export with security level state management
+export default withSecurityLevelState(CIAImpactSummaryWidget);

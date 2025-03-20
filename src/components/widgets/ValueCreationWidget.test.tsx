@@ -58,7 +58,6 @@ describe("ValueCreationWidget", () => {
   it("renders without crashing", () => {
     render(
       <ValueCreationWidget
-        securityLevel="None"
         availabilityLevel="None"
         integrityLevel="None"
         confidentialityLevel="None"
@@ -71,7 +70,6 @@ describe("ValueCreationWidget", () => {
   it("renders the widget with None level", () => {
     render(
       <ValueCreationWidget
-        securityLevel="None"
         availabilityLevel="None"
         integrityLevel="None"
         confidentialityLevel="None"
@@ -85,7 +83,6 @@ describe("ValueCreationWidget", () => {
   it("renders the widget with High level", () => {
     render(
       <ValueCreationWidget
-        securityLevel="High"
         availabilityLevel="High"
         integrityLevel="High"
         confidentialityLevel="High"
@@ -104,7 +101,6 @@ describe("ValueCreationWidget", () => {
   it("displays ROI information", () => {
     render(
       <ValueCreationWidget
-        securityLevel="Moderate"
         availabilityLevel="Moderate"
         integrityLevel="Moderate"
         confidentialityLevel="Moderate"
@@ -122,7 +118,6 @@ describe("ValueCreationWidget", () => {
   it("displays different value points for different security levels", () => {
     const { rerender } = render(
       <ValueCreationWidget
-        securityLevel="Low"
         availabilityLevel="Low"
         integrityLevel="Low"
         confidentialityLevel="Low"
@@ -137,7 +132,6 @@ describe("ValueCreationWidget", () => {
     // Rerender with High level
     rerender(
       <ValueCreationWidget
-        securityLevel="High"
         availabilityLevel="High"
         integrityLevel="High"
         confidentialityLevel="High"
@@ -154,7 +148,6 @@ describe("ValueCreationWidget", () => {
     const customTestId = "custom-value-creation-widget";
     render(
       <ValueCreationWidget
-        securityLevel="Moderate"
         availabilityLevel="Moderate"
         integrityLevel="Moderate"
         confidentialityLevel="Moderate"

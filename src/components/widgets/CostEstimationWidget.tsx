@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import withSecurityLevelState from "../../hoc/withSecurityLevelState";
 import { SecurityLevel } from "../../types/cia";
 import { getSecurityLevelValue } from "../../utils/securityLevelUtils";
 import StatusBadge from "../common/StatusBadge";
@@ -354,4 +355,5 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
   );
 };
 
-export default CostEstimationWidget;
+// Export with security level state management
+export default withSecurityLevelState(CostEstimationWidget);

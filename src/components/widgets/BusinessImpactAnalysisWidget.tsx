@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { BUSINESS_IMPACT_TEST_IDS } from "../../constants/testIds";
 import { useCIAOptions } from "../../hooks/useCIAOptions";
 import { BusinessImpactService } from "../../services/businessImpactService";
@@ -74,34 +74,13 @@ const BusinessImpactAnalysisWidget: React.FC<
   const { availabilityOptions, integrityOptions, confidentialityOptions } =
     useCIAOptions();
     
-  // Add local state to sync with props
-  const [localAvailabilityLevel, setLocalAvailabilityLevel] = useState<SecurityLevel>(availabilityLevel);
-  const [localIntegrityLevel, setLocalIntegrityLevel] = useState<SecurityLevel>(integrityLevel);
-  const [localConfidentialityLevel, setLocalConfidentialityLevel] = useState<SecurityLevel>(confidentialityLevel);
-  
-  // Sync local state with props
-  useEffect(() => {
-    setLocalAvailabilityLevel(availabilityLevel);
-  }, [availabilityLevel]);
-  
-  useEffect(() => {
-    setLocalIntegrityLevel(integrityLevel);
-  }, [integrityLevel]);
-  
-  useEffect(() => {
-    setLocalConfidentialityLevel(confidentialityLevel);
-  }, [confidentialityLevel]);
-  
-  // Debug logging
-  useEffect(() => {
-    console.log("BusinessImpactAnalysisWidget levels:", {
-      props: { availabilityLevel, integrityLevel, confidentialityLevel },
-      local: { localAvailabilityLevel, localIntegrityLevel, localConfidentialityLevel }
-    });
-  }, [
-    availabilityLevel, integrityLevel, confidentialityLevel,
-    localAvailabilityLevel, localIntegrityLevel, localConfidentialityLevel
-  ]);
+  // Remove local state management and directly use props
+  // This ensures changes in SecurityLevelWidget are immediately reflected here
+
+  // Debug logging to verify props are received correctly
+  console.log("BusinessImpactAnalysisWidget levels:", {
+    props: { availabilityLevel, integrityLevel, confidentialityLevel }
+  });
 
   const businessImpactService = useMemo(() => {
     return new BusinessImpactService({
@@ -118,63 +97,63 @@ const BusinessImpactAnalysisWidget: React.FC<
     });
   }, [availabilityOptions, integrityOptions, confidentialityOptions]);
 
-  // Get business impact details for each component - using local state values
+  // Get business impact details for each component - use props directly
   const availabilityImpact = useMemo(
     () =>
       businessImpactService.getBusinessImpact(
         "availability",
-        localAvailabilityLevel  // Changed from availabilityLevel to localAvailabilityLevel
+        availabilityLevel  // Using props directly
       ),
-    [businessImpactService, localAvailabilityLevel]
+    [businessImpactService, availabilityLevel]
   );
 
   const integrityImpact = useMemo(
-    () => businessImpactService.getBusinessImpact("integrity", localIntegrityLevel),  // Using local state
-    [businessImpactService, localIntegrityLevel]
+    () => businessImpactService.getBusinessImpact("integrity", integrityLevel),  // Using props directly
+    [businessImpactService, integrityLevel]
   );
 
   const confidentialityImpact = useMemo(
     () =>
       businessImpactService.getBusinessImpact(
         "confidentiality",
-        localConfidentialityLevel  // Using local state
+        confidentialityLevel  // Using props directly
       ),
-    [businessImpactService, localConfidentialityLevel]
+    [businessImpactService, confidentialityLevel]
   );
 
-  // Prepare impact data for each component for rendering - use local state
+  // Prepare impact data for each component for rendering - use props directly
   const impactData = useMemo((): BusinessImpactData[] => {
     // Create data for availability component
     const availData: BusinessImpactData = {
       component: "availability",
-      level: localAvailabilityLevel,  // Using local state
-      value: availabilityOptions[localAvailabilityLevel]?.opex || 0,
+      level: availabilityLevel,  // Using props directly
+      value: availabilityOptions[availabilityLevel]?.opex || 0,
       percentage: `${
-        ((availabilityOptions[localAvailabilityLevel]?.opex || 0) * 100) / 40
+        ((availabilityOptions[availabilityLevel]?.opex || 0) * 100) / 40
       }%`,
       description: availabilityImpact.summary,
-      capex: availabilityOptions[localAvailabilityLevel]?.capex || 0,
-      opex: availabilityOptions[localAvailabilityLevel]?.opex || 0,
+      capex: availabilityOptions[availabilityLevel]?.capex || 0,
+      opex: availabilityOptions[availabilityLevel]?.opex || 0,
       // Add these properties from the impact details
       financialImpact: availabilityImpact.financial,
       operationalImpact: availabilityImpact.operational,
-      uptime: availabilityOptions[localAvailabilityLevel]?.uptime,
-      rto: availabilityOptions[localAvailabilityLevel]?.rto,
-      rpo: availabilityOptions[localAvailabilityLevel]?.rpo,
-      mttr: availabilityOptions[localAvailabilityLevel]?.mttr,
+      uptime: availabilityOptions[availabilityLevel]?.uptime,
+      rto: availabilityOptions[availabilityLevel]?.rto,
+      rpo: availabilityOptions[availabilityLevel]?.rpo,
+      mttr: availabilityOptions[availabilityLevel]?.mttr,
     };
 
     // Create data for integrity component
     const integrityData: BusinessImpactData = {
       component: "integrity",
-      level: localIntegrityLevel,
-      value: integrityOptions[localIntegrityLevel]?.opex || 0,
+      level: integrityLevel,
+      value: integrityOptions[integrityLevel]?.opex || 0,
       percentage: `${
-        ((integrityOptions[localIntegrityLevel]?.opex || 0) * 100) / 40
+        ((integrityOptions[integrityLevel]?.opex || 0) * 100) / 40
       }%`,
       description: integrityImpact.summary,
-      capex: integrityOptions[localIntegrityLevel]?.capex || 0,
-      opex: integrityOptions[localIntegrityLevel]?.opex || 0,
+      capex: integrityOptions[integrityLevel]?.capex || 0,
+      opex: integrityOptions[integrityLevel]?.opex || 0,
       // Add these properties from the impact details
       financialImpact: integrityImpact.financial,
       operationalImpact: integrityImpact.operational,
@@ -183,14 +162,14 @@ const BusinessImpactAnalysisWidget: React.FC<
     // Create data for confidentiality component
     const confidentialityData: BusinessImpactData = {
       component: "confidentiality",
-      level: localConfidentialityLevel,
-      value: confidentialityOptions[localConfidentialityLevel]?.opex || 0,
+      level: confidentialityLevel,
+      value: confidentialityOptions[confidentialityLevel]?.opex || 0,
       percentage: `${
-        ((confidentialityOptions[localConfidentialityLevel]?.opex || 0) * 100) / 40
+        ((confidentialityOptions[confidentialityLevel]?.opex || 0) * 100) / 40
       }%`,
       description: confidentialityImpact.summary,
-      capex: confidentialityOptions[localConfidentialityLevel]?.capex || 0,
-      opex: confidentialityOptions[localConfidentialityLevel]?.opex || 0,
+      capex: confidentialityOptions[confidentialityLevel]?.capex || 0,
+      opex: confidentialityOptions[confidentialityLevel]?.opex || 0,
       // Add these properties from the impact details
       financialImpact: confidentialityImpact.financial,
       operationalImpact: confidentialityImpact.operational,
@@ -198,9 +177,9 @@ const BusinessImpactAnalysisWidget: React.FC<
 
     return [availData, integrityData, confidentialityData];
   }, [
-    localAvailabilityLevel,
-    localIntegrityLevel,
-    localConfidentialityLevel,
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel,
     availabilityOptions,
     integrityOptions,
     confidentialityOptions,

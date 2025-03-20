@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import withSecurityLevelState from "../../hoc/withSecurityLevelState";
 import { ComplianceStatus } from "../../services/complianceService";
 import { ComplianceService } from "../../services/ComplianceServiceAdapter";
 import { SecurityLevel } from "../../types/cia";
@@ -228,5 +229,5 @@ function getStatusTailwindClass(statusText: string): string {
   }
 }
 
-// Add a default export to maintain backward compatibility
-export default ComplianceStatusWidget;
+// Add a default export wrapped with security level state management
+export default withSecurityLevelState(ComplianceStatusWidget);

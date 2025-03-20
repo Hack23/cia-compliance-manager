@@ -1,9 +1,11 @@
 import React, { useMemo } from "react";
 import { VALUE_CREATION_TEST_IDS } from "../../constants/testIds";
+import withSecurityLevelState from "../../hoc/withSecurityLevelState";
 import { useCIAOptions } from "../../hooks/useCIAOptions";
 import { createBusinessImpactService } from "../../services/businessImpactService";
 import { createCIAContentService } from "../../services/ciaContentService";
 import { SecurityLevel } from "../../types/cia";
+import { calculateOverallSecurityLevel } from "../../utils/securityLevelUtils";
 import MetricsCard from "../common/MetricsCard";
 import WidgetContainer from "../common/WidgetContainer";
 
@@ -11,11 +13,6 @@ import WidgetContainer from "../common/WidgetContainer";
  * Props for ValueCreationWidget component
  */
 interface ValueCreationWidgetProps {
-  /**
-   * Selected security level
-   */
-  securityLevel: SecurityLevel;
-  
   /**
    * Selected availability level
    */
@@ -40,6 +37,8 @@ interface ValueCreationWidgetProps {
    * Optional test ID for automated testing
    */
   testId?: string;
+  
+  // Removed redundant securityLevel prop
 }
 
 /**
@@ -55,13 +54,25 @@ interface ValueCreationWidgetProps {
  * benefits and quantifiable returns on investment. 💰
  */
 const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
-  securityLevel,
   availabilityLevel,
   integrityLevel,
   confidentialityLevel,
   className = "",
   testId = VALUE_CREATION_TEST_IDS.VALUE_CREATION_WIDGET,
 }) => {
+  console.log("ValueCreationWidget rendering with levels:", { 
+    availabilityLevel, integrityLevel, confidentialityLevel 
+  });
+
+  // Calculate overall security level from individual components
+  const securityLevel = useMemo(() => {
+    return calculateOverallSecurityLevel(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
+
   // Create services
   const ciaService = useMemo(() => createCIAContentService(), []);
   const ciaOptions = useCIAOptions(); // Add this line to get ciaOptions
@@ -78,14 +89,13 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
   // Get ROI estimate
   const roiData = useMemo(() => {
-    // Ensure we have a valid securityLevel before calling getROIEstimate
-    const effectiveLevel = securityLevel || availabilityLevel || "Moderate";
-    return ciaService.getROIEstimate?.(effectiveLevel) || {
+    // Now we can use the calculated securityLevel
+    return ciaService.getROIEstimate?.(securityLevel) || {
       returnRate: "0%",
       value: "0%",
       description: "ROI information not available"
     };
-  }, [ciaService, securityLevel, availabilityLevel]);
+  }, [ciaService, securityLevel]);
 
   // Get value creation points
   const valuePoints = useMemo(() => {
@@ -206,4 +216,5 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   );
 };
 
-export default ValueCreationWidget;
+// Export with security level state management
+export default withSecurityLevelState(ValueCreationWidget);

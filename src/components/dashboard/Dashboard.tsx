@@ -158,6 +158,34 @@ const Dashboard: React.FC<DashboardProps> = ({
     onConfidentialityChange: handleConfidentialityChange
   };
 
+  // Add a type definition for the widget component props
+  interface WidgetProps {
+    availabilityLevel?: SecurityLevel;
+    integrityLevel?: SecurityLevel;
+    confidentialityLevel?: SecurityLevel;
+    // Add other common props as needed
+    [key: string]: any; // This allows for dynamic props
+  }
+
+  // Apply security level props to all childrens as object) // Add type assertion to fix spread errors as object) // Add type assertion to fix spread error
+  const childrenWithProps = React.Children.map(children, (child) => {
+    // Make sure it's a valid element before trying to clone
+    if (React.isValidElement(child)) {
+      return React.cloneElement(
+        child,
+        {
+          // Forward the security levels to each child
+          availabilityLevel: availability,
+          integrityLevel: integrity,
+          confidentialityLevel: confidentiality,
+          // Instead of spreading props directly, copy them individually
+          ...(child.props as Record<string, unknown>)
+        } as WidgetProps // Cast to the defined type
+      );
+    }
+    return child;
+  });
+
   return (
     <div
       className={`dashboard-grid ${gridClasses} ${className}`}
@@ -184,13 +212,7 @@ const Dashboard: React.FC<DashboardProps> = ({
             securityLevelHandlers
           )
         : // Otherwise clone children with props and handlers
-          React.Children.map(children, (child) => {
-            if (!React.isValidElement(child)) return null;
-            return React.cloneElement(child, {
-              ...widgetProps,
-              ...securityLevelHandlers
-            });
-          })}
+          childrenWithProps}
 
       {/* Only include TechnicalDetailsWidget when not using registry and props are available */}
       {!useRegistry && availability && integrity && confidentiality && (

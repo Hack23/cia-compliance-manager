@@ -2,16 +2,18 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 // Replace the react-error-boundary import
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../constants/coreConstants";
 import {
-  SECURITY_RESOURCES_TEST_IDS,
-  WIDGET_TEST_IDS,
+    SECURITY_RESOURCES_TEST_IDS,
+    WIDGET_TEST_IDS,
 } from "../../constants/testIds";
 import { createCIAContentService } from "../../services/ciaContentService";
 import {
-  SecurityResource,
-  SecurityResourceService,
+    SecurityResource,
+    SecurityResourceService,
 } from "../../services/securityResourceService";
 import { SecurityLevel } from "../../types/cia";
+import { calculateOverallSecurityLevel } from "../../utils/securityLevelUtils";
 import WidgetContainer from "../common/WidgetContainer";
+
 // If ErrorBoundary is not available, create a local implementation:
 const useErrorBoundary = () => {
   return {
@@ -25,7 +27,6 @@ export interface SecurityResourcesWidgetProps {
   availabilityLevel: SecurityLevel;
   integrityLevel: SecurityLevel;
   confidentialityLevel: SecurityLevel;
-  securityLevel: SecurityLevel;
   className?: string;
   testId?: string;
 }
@@ -44,7 +45,6 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   availabilityLevel,
   integrityLevel,
   confidentialityLevel,
-  securityLevel,
   className = "",
   testId = WIDGET_TEST_IDS.SECURITY_RESOURCES_WIDGET,
 }) => {
@@ -74,6 +74,15 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
     };
     return new SecurityResourceService(dataProvider);
   }, []);
+
+  // Calculate overall security level from individual components
+  const securityLevel = useMemo(() => {
+    return calculateOverallSecurityLevel(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
   // Load resources based on security levels
   useEffect(() => {
@@ -125,7 +134,6 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
     availabilityLevel,
     integrityLevel,
     confidentialityLevel,
-    securityLevel,
     resourceService,
   ]);
 

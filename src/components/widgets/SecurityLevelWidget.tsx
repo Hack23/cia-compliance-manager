@@ -3,7 +3,6 @@ import { SECURITY_LEVELS, WIDGET_ICONS, WIDGET_TITLES } from "../../constants/ap
 import withSecurityLevelState from "../../hoc/withSecurityLevelState";
 import { useCIAContentService } from "../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../types/cia";
-import { getSecurityLevelValue } from "../../utils/securityLevelUtils";
 import SecurityLevelBadge from "../common/SecurityLevelBadge";
 import WidgetContainer from "../common/WidgetContainer";
 
@@ -110,18 +109,21 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   // Create combined handler functions that call both new and legacy handlers
   const handleAvailabilityChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLevel = event.target.value as SecurityLevel;
+    console.log('SecurityLevelWidget: Setting availability to', newLevel);
     if (onAvailabilityChange) onAvailabilityChange(newLevel);
     if (setAvailability) setAvailability(newLevel);
   }, [onAvailabilityChange, setAvailability]);
 
   const handleIntegrityChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLevel = event.target.value as SecurityLevel;
+    console.log('SecurityLevelWidget: Setting integrity to', newLevel);
     if (onIntegrityChange) onIntegrityChange(newLevel);
     if (setIntegrity) setIntegrity(newLevel);
   }, [onIntegrityChange, setIntegrity]);
 
   const handleConfidentialityChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLevel = event.target.value as SecurityLevel;
+    console.log('SecurityLevelWidget: Setting confidentiality to', newLevel);
     if (onConfidentialityChange) onConfidentialityChange(newLevel);
     if (setConfidentiality) setConfidentiality(newLevel);
   }, [onConfidentialityChange, setConfidentiality]);
@@ -180,6 +182,13 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         return "text-gray-600 dark:text-gray-400";
     }
   };
+
+  // Add debugging to the component render
+  console.log('SecurityLevelWidget rendering with levels:', {
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel
+  });
 
   return (
     <WidgetContainer
