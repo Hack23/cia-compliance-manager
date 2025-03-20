@@ -22,9 +22,9 @@ interface SelectionProps {
 
 /**
  * Component for selecting security levels with consistent styling
- * 
+ *
  * ## Business Perspective
- * 
+ *
  * This component provides a standardized interface for selecting security levels,
  * with additional context information to help users understand the implications
  * of their choices. 🔒
@@ -47,22 +47,26 @@ export const Selection: React.FC<SelectionProps> = ({
 }) => {
   // State for showing/hiding info content
   const [showInfo, setShowInfo] = useState(false);
-  
+
   // Handle selection change
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onChange(e.target.value);
   };
-  
+
   // Toggle info panel
   const toggleInfo = () => {
     setShowInfo(!showInfo);
   };
-  
+
   return (
     <div className="selection-component" data-testid={testId}>
       <div className="flex items-center mb-2">
         {icon && (
-          <span className={`text-xl mr-2 ${iconClassName}`} role="img" aria-hidden="true">
+          <span
+            className={`text-xl mr-2 ${iconClassName}`}
+            role="img"
+            aria-hidden="true"
+          >
             {icon}
           </span>
         )}
@@ -81,13 +85,13 @@ export const Selection: React.FC<SelectionProps> = ({
           </button>
         )}
       </div>
-      
+
       {description && (
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
           {description}
         </p>
       )}
-      
+
       <div className="relative">
         <select
           id={id}
@@ -120,17 +124,19 @@ export const Selection: React.FC<SelectionProps> = ({
           </svg>
         </div>
       </div>
-      
+
       {contextInfo && (
         <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
           {contextInfo}
         </div>
       )}
-      
+
       {showInfo && infoContent && (
         <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md">
           <h4 className="text-sm font-medium mb-1">Implementation Details</h4>
-          <p className="text-sm text-gray-600 dark:text-gray-300">{infoContent}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            {infoContent}
+          </p>
         </div>
       )}
     </div>

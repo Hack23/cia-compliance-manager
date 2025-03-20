@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { APP_TEST_IDS } from "../constants/testIds";
 import CIAClassificationApp from "./CIAClassificationApp";
 
 // Mock useCIAOptions hook
@@ -116,59 +115,63 @@ describe("CIAClassificationApp", () => {
   // Basic tests that don't depend on DOM complexity
   it("renders without crashing", () => {
     render(<CIAClassificationApp />);
-    expect(screen.getByTestId(APP_TEST_IDS.APP_CONTAINER)).toBeInTheDocument();
+    expect(screen.getByText(/CIA Compliance Manager/i)).toBeInTheDocument();
+    // Find dashboard grid by its actual test id
+    expect(screen.getByTestId("dashboard-grid")).toBeInTheDocument();
   });
 
   it("renders app title", () => {
     render(<CIAClassificationApp />);
-    expect(screen.getByTestId(APP_TEST_IDS.APP_TITLE)).toBeInTheDocument();
+    const titleElement = screen.getByText(/CIA Compliance Manager/i);
+    expect(titleElement).toBeInTheDocument();
   });
 
   it("renders theme toggle button", () => {
     render(<CIAClassificationApp />);
-    expect(screen.getByTestId(APP_TEST_IDS.THEME_TOGGLE)).toBeInTheDocument();
+    const themeButton = screen.getByText(/🌙 Dark Mode/);
+    expect(themeButton).toBeInTheDocument();
   });
 
   // For the failing tests, simplify them to check just the basics
   it("updates security levels when widget changes values", () => {
     // Create a custom event that the component listens for
     const { container } = render(<CIAClassificationApp />);
-    
+
     // Ensure the component is rendered
     expect(container).toBeInTheDocument();
-    
+
     // Simply check if the component renders without testing the event
     // since this is difficult to test without more complex setup
     expect(true).toBeTruthy();
   });
 
-  it('listens for test events to set security levels', () => {
+  it("listens for test events to set security levels", () => {
     // Setup test
     vi.useFakeTimers();
     render(<CIAClassificationApp />);
-    
+
     // Create a custom event with security levels
-    const testEvent = new CustomEvent('cia-test-set-levels', {
+    const testEvent = new CustomEvent("cia-test-set-levels", {
       detail: {
-        availabilityLevel: 'High',
-        integrityLevel: 'Low',
-        confidentialityLevel: 'Very High'
-      }
+        availabilityLevel: "High",
+        integrityLevel: "Low",
+        confidentialityLevel: "Very High",
+      },
     });
-    
+
     // Dispatch the event
     window.dispatchEvent(testEvent);
-    
+
     // Advance timers to allow for async state updates
     vi.advanceTimersByTime(100);
-    
+
     // Find elements that should reflect the new security levels
     // Since we can't easily check internal state, we'll need to look for
     // elements that display these values or mock internal functions
-    
+
     // Restore real timers
     vi.useRealTimers();
-    
+
     // If event listeners are properly registered, this test will pass
     // The actual verification depends on the component implementation
     expect(true).toBe(true);
@@ -176,17 +179,17 @@ describe("CIAClassificationApp", () => {
 
   it("calculates overall security level correctly", () => {
     render(<CIAClassificationApp />);
-    // Simply verify the component renders
-    expect(screen.getByTestId("mocked-dashboard")).toBeInTheDocument();
+    // Look for dashboard-grid instead of mocked-dashboard
+    expect(screen.getByTestId("dashboard-grid")).toBeInTheDocument();
   });
 
   it("removes event listeners on unmount", () => {
     // This is also difficult to test thoroughly without mocking the global
     // addEventListener and removeEventListener methods
-    
+
     const { unmount } = render(<CIAClassificationApp />);
     unmount();
-    
+
     // If the test gets here without errors, it passed
     expect(true).toBeTruthy();
   });

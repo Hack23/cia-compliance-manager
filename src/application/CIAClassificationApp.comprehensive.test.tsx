@@ -30,13 +30,11 @@ const mockCIAOptions = vi.hoisted(() => ({
   },
 }));
 
-// Mock useCIAOptions hook
-vi.mock("./hooks/useCIAOptions", () => ({
+// Fix mocks for testing implementation
+vi.mock("../hooks/useCIAOptions", () => ({
   __esModule: true,
-  // Return the mockCIAOptions object directly from the function
   useCIAOptions: () => mockCIAOptions,
   default: () => mockCIAOptions,
-  // Export constants
   availabilityOptions: mockCIAOptions.availabilityOptions,
   integrityOptions: mockCIAOptions.integrityOptions,
   confidentialityOptions: mockCIAOptions.confidentialityOptions,
@@ -65,11 +63,10 @@ import CIAClassificationApp from "./CIAClassificationApp";
 
 // Define proper test IDs that match the actual component
 const TEST_IDS = {
-  APP_CONTAINER: "app-container",
+  APP_CONTAINER: "app-container", // The class name, not the test ID
   APP_TITLE: "app-title",
   THEME_TOGGLE: "theme-toggle",
-  // Update: The component might use the app-container as header or a different test ID
-  APP_HEADER: "app-container", // Using app-container instead of app-header
+  DASHBOARD_GRID: "dashboard-grid",
 };
 
 describe("CIAClassificationApp Comprehensive Tests", () => {
@@ -94,49 +91,54 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
       writable: true,
     });
 
-    // Set up document handler spies
-    vi.spyOn(document, "addEventListener");
-    vi.spyOn(document, "removeEventListener");
-    vi.spyOn(document.documentElement.classList, "add");
-    vi.spyOn(document.documentElement.classList, "remove");
+    // Correctly mock the classList methods instead of replacing the entire object
+    // This fixes the TypeScript error
+    document.documentElement.classList.add = vi.fn();
+    document.documentElement.classList.remove = vi.fn();
+    document.documentElement.classList.contains = vi
+      .fn()
+      .mockReturnValue(false);
+    document.documentElement.classList.toggle = vi.fn();
   });
 
   it("renders application structure with header and dashboard", () => {
-    render(<CIAClassificationApp />);
+    const { container } = render(<CIAClassificationApp />);
 
-    // Check basic structure elements with fixed test IDs
-    expect(screen.getByTestId(TEST_IDS.APP_CONTAINER)).toBeInTheDocument();
-    expect(screen.getByTestId(TEST_IDS.APP_TITLE)).toBeInTheDocument();
+    // Instead of looking for test IDs that may not exist, check for elements by content and class
+    const appTitle = screen.getByText(/CIA Compliance Manager/i);
+    expect(appTitle).toBeInTheDocument();
 
-    // Since we're using APP_CONTAINER as APP_HEADER, we don't need to check for APP_HEADER separately
-    // We need to check for the mocked dashboard which is definitely in the document
-    expect(screen.getByTestId("mocked-dashboard")).toBeInTheDocument();
+    // Check for dashboard element
+    const dashboardElement = screen.getByTestId("dashboard-grid");
+    expect(dashboardElement).toBeInTheDocument();
 
-    // Check that dark mode is applied by default
+    // Check dark mode was applied to document root
     expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
   });
 
   it("toggles theme when theme button is clicked", () => {
     render(<CIAClassificationApp />);
 
-    const themeToggle = screen.getByTestId(TEST_IDS.THEME_TOGGLE);
+    // Find the theme toggle button by its text content
+    const themeToggleButton = screen.getByText(/Light Mode|Dark Mode/i);
+    expect(themeToggleButton).toBeInTheDocument();
 
     // First click should turn OFF dark mode since it's ON by default
-    fireEvent.click(themeToggle);
+    fireEvent.click(themeToggleButton);
     expect(document.documentElement.classList.remove).toHaveBeenCalledWith(
       "dark"
     );
 
     // Click again to enable dark mode
-    fireEvent.click(themeToggle);
+    fireEvent.click(themeToggleButton);
     expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
   });
 
   it("handles test event to set security levels", () => {
     render(<CIAClassificationApp />);
-  
-    // Basic structure check instead of event testing
-    expect(screen.getByTestId(TEST_IDS.APP_CONTAINER)).toBeInTheDocument();
+
+    // Look for the dashboard grid instead of app container
+    expect(screen.getByTestId(TEST_IDS.DASHBOARD_GRID)).toBeInTheDocument();
   });
 
   it("loads theme preference from localStorage", () => {
@@ -167,11 +169,12 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
     expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
   });
 
+  // Replace the problematic test with a simpler version that doesn't use setTimeout
   it("applies dark mode by default even without system preference", () => {
-    // Mock matchMedia to indicate light mode preference
+    // Mock window.matchMedia to return false for dark mode preference
     Object.defineProperty(window, "matchMedia", {
       value: vi.fn().mockImplementation((query) => ({
-        matches: query === "(prefers-color-scheme: light)",
+        matches: false, // Not preferring dark mode
         media: query,
         addEventListener: vi.fn(),
         removeEventListener: vi.fn(),
@@ -179,15 +182,18 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
       writable: true,
     });
 
+    // Reset localStorage mock to have no stored preference
+    vi.spyOn(window.localStorage, "getItem").mockReturnValue(null);
+
     render(<CIAClassificationApp />);
 
-    // Dark mode should still be applied by default regardless of system preference
+    // Dark mode should be applied directly, avoiding the Promise with setTimeout
     expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
   });
 
   it("cleans up event listeners on unmount", () => {
     const { unmount } = render(<CIAClassificationApp />);
-  
+
     // Just verify unmount doesn't throw an error
     unmount();
     expect(true).toBeTruthy();

@@ -10,10 +10,8 @@ export const DEFAULT_SECURITY_LEVELS = {
   confidentialityLevel: "Moderate" as SecurityLevel,
 };
 
-/**
- * Mock CIA options for testing
- * Usage: import { mockCIAOptions } from '../tests/mockData';
- */
+// Define a regular object that can be exported
+// Do NOT use vi.hoisted() for objects that need to be exported
 export const mockCIAOptions = {
   None: {
     capex: 0,
@@ -53,19 +51,21 @@ export const mockROIEstimates = {
   VERY_HIGH: { returnRate: "500%", description: "Very high ROI" },
 };
 
+// Create mock instance properly with hoisted function
+const createMockChartInstance = () => ({
+  destroy: vi.fn(),
+  update: vi.fn(),
+  resize: vi.fn(),
+  data: { datasets: [] },
+});
+
 /**
  * Creates a properly hoisted mock chart constructor for testing
  */
 export function createMockChartConstructor() {
-  const mockChartInstance = {
-    destroy: vi.fn(),
-    update: vi.fn(),
-    resize: vi.fn(),
-    data: { datasets: [] },
-  };
+  const mockChartInstance = createMockChartInstance();
 
   // Create the constructor function with proper typings
-  // Fix: Use unknown as intermediate type
   const constructor = vi.fn(
     () => mockChartInstance
   ) as unknown as typeof vi.fn & {

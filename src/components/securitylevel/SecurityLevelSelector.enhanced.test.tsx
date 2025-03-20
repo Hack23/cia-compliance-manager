@@ -67,41 +67,63 @@ vi.mock("../../hooks/useCIAOptions", () => {
   };
 });
 
-// Mock the Selection component correctly with proper type annotations
-vi.mock("./Selection", () => ({
-  __esModule: true,
-  default: ({
+// Fix the Selection mock to match the actual component's prop types
+vi.mock("./Selection", () => {
+  const SelectionMock = ({
     id,
     label,
     value,
     options,
     onChange,
     testId,
+    disabled,
+    infoContent,
+    contextInfo,
   }: {
     id: string;
     label: string;
     value: string;
-    options: string[];
+    options: Array<{ value: string; label: string } | string>;
     onChange: (value: string) => void;
     testId?: string;
+    disabled?: boolean;
+    infoContent?: string;
+    contextInfo?: string;
   }) => (
     <div data-testid={testId || `mock-selection-${id}`}>
       <label htmlFor={id}>{label}</label>
       <select
         id={id}
         value={value}
-        onChange={(e) => onChange(e.target.value as SecurityLevel)}
+        onChange={(e) => onChange(e.target.value)}
         data-testid={`${id}-select`}
+        disabled={disabled}
       >
-        {options.map((opt: string) => (
-          <option key={opt} value={opt}>
-            {opt}
-          </option>
-        ))}
+        {Array.isArray(options) &&
+          options.map((opt) => {
+            // Fix: Check if option is a string or an object
+            const optValue = typeof opt === "string" ? opt : opt.value;
+            const optLabel = typeof opt === "string" ? opt : opt.label;
+
+            return (
+              <option key={optValue} value={optValue}>
+                {optLabel}
+              </option>
+            );
+          })}
       </select>
+      {infoContent && <div className="info-content">{infoContent}</div>}
+      {contextInfo && <div className="context-info">{contextInfo}</div>}
     </div>
-  ),
-}));
+  );
+
+  return {
+    __esModule: true,
+    default: SelectionMock,
+    // Add the Selection named export
+    Selection: SelectionMock,
+  };
+});
 
 describe("SecurityLevelSelector Enhanced Tests", () => {
   const defaultProps = {
@@ -144,8 +166,8 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
       />
     );
 
-    // Find the select element - use the ID directly
-    expect(getByTestId("availability-select")).toBeInTheDocument();
+    // Find the select element - use the *-select test ID format
+    expect(getByTestId("availabilitySelect-select")).toBeInTheDocument();
   });
 
   it("handles integrity change correctly", () => {
@@ -158,8 +180,8 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
       />
     );
 
-    // Find the select element - use the ID directly
-    expect(getByTestId("integrity-select")).toBeInTheDocument();
+    // Find the select element - use the *-select test ID format
+    expect(getByTestId("integritySelect-select")).toBeInTheDocument();
   });
 
   it("handles confidentiality change correctly", () => {
@@ -172,8 +194,8 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
       />
     );
 
-    // Find the select element - use the ID directly
-    expect(getByTestId("confidentiality-select")).toBeInTheDocument();
+    // Find the select element - use the *-select test ID format
+    expect(getByTestId("confidentialitySelect-select")).toBeInTheDocument();
   });
 
   it("handles keyboard navigation in dropdowns", () => {

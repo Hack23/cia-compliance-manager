@@ -4,40 +4,63 @@ import { SecurityLevel } from "../../types/cia";
 import SecurityLevelSelector from "./SecurityLevelSelector";
 
 // Set up mocks properly with explicit type annotations
-vi.mock("./Selection", () => ({
-  __esModule: true,
-  default: ({
+vi.mock("./Selection", () => {
+  const SelectionMock = ({
     id,
     label,
     value,
     options,
     onChange,
     testId,
+    disabled,
+    infoContent,
+    contextInfo,
   }: {
     id: string;
     label: string;
     value: string;
-    options: string[];
+    options: Array<{ value: string; label: string } | string>;
     onChange: (value: string) => void;
     testId?: string;
+    disabled?: boolean;
+    infoContent?: string;
+    contextInfo?: string;
   }) => (
     <div data-testid={testId || `mock-selection-${id}`}>
       <label htmlFor={id}>{label}</label>
       <select
         id={id}
         value={value}
-        onChange={(e) => onChange(e.target.value as SecurityLevel)}
+        onChange={(e) => onChange(e.target.value)}
         data-testid={`${id}-select`}
+        disabled={disabled}
       >
-        {options.map((opt: string) => (
-          <option key={opt} value={opt}>
-            {opt}
-          </option>
-        ))}
+        {Array.isArray(options) &&
+          options.map((opt) => {
+            // Fix: Check if option is a string or an object
+            const optValue = typeof opt === "string" ? opt : opt.value;
+            const optLabel = typeof opt === "string" ? opt : opt.label;
+
+            return (
+              <option key={optValue} value={optValue}>
+                {optLabel}
+              </option>
+            );
+          })}
       </select>
+      {infoContent && <div className="info-content">{infoContent}</div>}
+      {contextInfo && <div className="context-info">{contextInfo}</div>}
     </div>
-  ),
-}));
+  );
+
+  // Need to return an object with __esModule and default
+  return {
+    __esModule: true,
+    default: SelectionMock,
+    // Add the missing named export - this is critical
+    Selection: SelectionMock,
+  };
+});
 
 describe("SecurityLevelSelector", () => {
   // Create proper callbacks for each CIA component

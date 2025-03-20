@@ -115,7 +115,6 @@ vi.mock("./hooks/useCIAOptions", () => {
 
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { APP_TEST_IDS } from "../constants/testIds";
 import CIAClassificationApp from "./CIAClassificationApp";
 
 // Mock the ROI_ESTIMATES to prevent errors
@@ -134,17 +133,26 @@ vi.mock("./components/widgets/SecurityLevelWidget", () => ({
 describe("CIAClassificationApp Component Direct Tests", () => {
   it("renders basic structure correctly", () => {
     render(<CIAClassificationApp />);
-    expect(screen.getByTestId(APP_TEST_IDS.APP_CONTAINER)).toBeInTheDocument();
-    expect(screen.getByTestId(APP_TEST_IDS.APP_TITLE)).toBeInTheDocument();
-    expect(screen.getByTestId(APP_TEST_IDS.THEME_TOGGLE)).toBeInTheDocument();
+
+    // Check for elements by class or text content rather than test ID
+    const appContainer = screen
+      .getByText(/CIA Compliance Manager/i)
+      .closest("div");
+    expect(appContainer).toBeInTheDocument();
+
+    // Check for app title
+    expect(screen.getByText(/CIA Compliance Manager/i)).toBeInTheDocument();
+
+    // Check for theme toggle button
+    expect(screen.getByText(/🌙 Dark Mode|☀️ Light Mode/)).toBeInTheDocument();
   });
 
   it("shows security level section", () => {
     render(<CIAClassificationApp />);
 
-    // Look for the widget container instead if mock-security-level isn't available
+    // Look for the widget container
     const securityLevelWidget = screen.getByTestId(
-      "widget-security-level-selection"
+      "widget-container-widget-security-level"
     );
     expect(securityLevelWidget).toBeInTheDocument();
   });
