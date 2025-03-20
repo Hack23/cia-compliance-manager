@@ -2,31 +2,238 @@
 
 /* Widget styles aligned with actual DOM structure */
 [data-testid^="widget-"] {
-  background-color: var(--card-background);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 8px var(--shadow-color);
-  border-radius: var(--border-radius);
-  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  height: 100% !important; /* Ensure widgets fill their containers */
+  max-height: none !important; /* Remove max-height restrictions */
+  min-height: 0 !important; /* Remove min-height restrictions */
   display: flex;
   flex-direction: column;
-  height: auto; /* Allow height to adapt to content */
-  min-height: 300px; /* Minimum height without !important */
-  max-height: none; /* Remove maximum height restriction */
-  overflow: visible; /* Allow content to be visible */
+  overflow: hidden;
+  transition: all 0.2s;
 }
 
 .dark [data-testid^="widget-"] {
-  border-color: rgba(0, 204, 102, 0.2);
-  box-shadow: 0 4px 12px rgba(0, 204, 102, 0.15), 0 0 2px var(--primary-color);
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
 }
 
 [data-testid^="widget-"]:hover {
-  box-shadow: 0 6px 12px var(--shadow-color);
-  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .dark [data-testid^="widget-"]:hover {
-  box-shadow: 0 8px 16px rgba(0, 204, 102, 0.2), 0 0 6px var(--primary-color);
+  box-shadow: 0 0 15px rgba(0, 204, 102, 0.2);
+}
+
+/* Fix widget header styling based on actual DOM structure */
+.widget-header,
+.widget-container > div:first-child,
+[data-testid^="widget-container"] > div:first-child {
+  background: linear-gradient(
+    to right,
+    rgba(0, 102, 51, 0.08),
+    rgba(0, 136, 68, 0.05)
+  );
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: auto !important;
+  min-height: auto !important;
+}
+
+.dark .widget-header,
+.dark .widget-container > div:first-child,
+.dark [data-testid^="widget-container"] > div:first-child {
+  background: linear-gradient(
+    to right,
+    rgba(0, 204, 102, 0.15),
+    rgba(0, 187, 119, 0.1)
+  );
+  border-bottom: 1px solid rgba(0, 204, 102, 0.3);
+}
+
+/* Improve widget title styling */
+.widget-header h3,
+.widget-container > div:first-child h3,
+[data-testid^="widget-container"] > div:first-child h3 {
+  font-size: 1rem;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.dark .widget-header h3,
+.dark .widget-container > div:first-child h3,
+.dark [data-testid^="widget-container"] > div:first-child h3 {
+  color: var(--primary-color);
+  text-shadow: 0 0 4px rgba(0, 204, 102, 0.4);
+}
+
+/* Fix widget body styling */
+.widget-body,
+.widget-container > div:nth-child(2),
+[data-testid^="widget-container"] > div:nth-child(2) {
+  padding: 1rem;
+  overflow-y: auto;
+  flex: 1;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.dark .widget-body,
+.dark .widget-container > div:nth-child(2),
+.dark [data-testid^="widget-container"] > div:nth-child(2) {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+/* Ensure widget heights are consistent */
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3.gap-4.p-4 > div {
+  min-height: auto !important;
+  max-height: none !important;
+  height: auto !important;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure content scrolls properly */
+.max-h-\[550px\],
+.max-h-\[500px\] {
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+/* Fix dark mode text visibility issues */
+.dark p,
+.dark li,
+.dark div:not(.widget-header):not([class*="bg-"]) {
+  color: var(--text-color) !important;
+}
+
+/* Fix section containers */
+.section-container {
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dark .section-container {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Fix badge styling */
+.px-2.py-1.rounded-md.text-xs.font-medium {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+/* Fix for CIA component colors */
+.color-confidentiality,
+.text-purple-600,
+.text-purple-700,
+.text-purple-800,
+span[class*="text-purple"] {
+  color: var(--color-confidentiality) !important;
+}
+
+.color-integrity,
+.text-green-600,
+.text-green-700,
+.text-green-800,
+span[class*="text-green"] {
+  color: var(--color-integrity) !important;
+}
+
+.color-availability,
+.text-blue-600,
+.text-blue-700,
+.text-blue-800,
+span[class*="text-blue"] {
+  color: var(--color-availability) !important;
+}
+
+.dark .color-confidentiality,
+.dark .text-purple-600,
+.dark .text-purple-700,
+.dark .text-purple-800,
+.dark span[class*="text-purple"] {
+  color: var(--color-confidentiality-accent) !important;
+  text-shadow: 0 0 4px var(--color-confidentiality-glow);
+}
+
+.dark .color-integrity,
+.dark .text-green-600,
+.dark .text-green-700,
+.dark .text-green-800,
+.dark span[class*="text-green"] {
+  color: var(--color-integrity-accent) !important;
+  text-shadow: 0 0 4px var(--color-integrity-glow);
+}
+
+.dark .color-availability,
+.dark .text-blue-600,
+.dark .text-blue-700,
+.dark .text-blue-800,
+.dark span[class*="text-blue"] {
+  color: var(--color-availability-accent) !important;
+  text-shadow: 0 0 4px var(--color-availability-glow);
+}
+
+/* Improve security level badge styling */
+.dark [data-testid$="-badge"] {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Add these new styles for better overflow handling in widgets */
+.widget-body > div,
+[data-testid^="widget-container"] > div:nth-child(2) > div {
+  max-height: 100%;
+}
+
+/* Fix for tables and data layout within widgets */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dark th,
+.dark td {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Fix focus styles for interactive elements */
+button:focus,
+select:focus,
+input:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.dark button:focus,
+.dark select:focus,
+.dark input:focus {
+  outline-color: var(--primary-light);
 }
 
 /* Widget header styling aligned with CIAClassificationApp structure */
@@ -49,7 +256,8 @@
 
 /* Reduce header text size and make it green */
 [data-testid^="widget-"] > div:first-child h3,
-.border-b.border-gray-200.dark\:border-gray-700.px-4.py-3.flex.justify-between.items-center h3 {
+.border-b.border-gray-200.dark\:border-gray-700.px-4.py-3.flex.justify-between.items-center
+  h3 {
   margin: 0;
   font-size: 0.85rem; /* Smaller font */
   font-weight: 600;
@@ -69,7 +277,7 @@
   overflow-x: hidden; /* Prevent horizontal scrolling */
   display: flex;
   flex-direction: column;
-  max-height: calc(100% - 40px); /* Account for header height */
+  height: auto !important; /* Don't force a specific height */
 }
 
 /* App title styling aligned with CIAClassificationApp structure */
@@ -85,7 +293,8 @@
   border-bottom: 3px solid var(--primary-color);
 }
 
-.mb-6.p-4.bg-white.dark\:bg-gray-800.rounded-lg.shadow-md.flex.justify-between.items-center h1 {
+.mb-6.p-4.bg-white.dark\:bg-gray-800.rounded-lg.shadow-md.flex.justify-between.items-center
+  h1 {
   margin: 0;
   font-weight: 700;
   font-size: 1.5rem;
@@ -174,23 +383,33 @@
 
 /* Widget size classes - consolidate sizes here */
 .widget-size-xs {
-  min-height: 180px;
+  min-height: auto !important;
+  max-height: none !important;
+  height: auto !important;
 }
 
 .widget-size-sm {
-  min-height: 240px;
+  min-height: auto !important;
+  max-height: none !important;
+  height: auto !important;
 }
 
 .widget-size-md {
-  min-height: 320px;
+  min-height: auto !important;
+  max-height: none !important;
+  height: auto !important;
 }
 
 .widget-size-lg {
-  min-height: 400px;
+  min-height: auto !important;
+  max-height: none !important;
+  height: auto !important;
 }
 
 .widget-size-xl {
-  min-height: 480px;
+  min-height: auto !important;
+  max-height: none !important;
+  height: auto !important;
 }
 
 /* Widget body with improved padding and scrolling behavior */
@@ -412,7 +631,7 @@ td {
 
 /* Fix for radar chart container to prevent overflow */
 .radar-chart-container {
-  max-height: 100% !important;
+  max-height: none !important; /* Remove height constraints */
   overflow: hidden !important;
   height: calc(100% - 20px) !important;
 }
@@ -1000,12 +1219,12 @@ textarea:focus {
 }
 
 /* Standardize widget content overflow handling */
-[data-testid^="widget-"] > div.p-4, 
+[data-testid^="widget-"] > div.p-4,
 .widget-body {
   overflow-y: auto !important; /* Enable vertical scrolling */
   overflow-x: hidden !important; /* Prevent horizontal scrolling */
   scrollbar-width: thin; /* Firefox */
-  height: calc(100% - 40px) !important; /* Account for header */
+  height: auto !important; /* Don't force a specific height */
   padding: 1.25rem !important;
   display: flex !important;
   flex-direction: column !important;
@@ -1231,15 +1450,15 @@ textarea:focus {
 }
 
 /* Enhanced text visibility for all text elements */
-.dark p, 
-.dark li, 
+.dark p,
+.dark li,
 .dark span:not([class*="icon"]),
 .dark div:not([class*="background"]):not([class*="gradient"]),
 .dark label,
-.dark td, 
+.dark td,
 .dark th,
-.dark input, 
-.dark select, 
+.dark input,
+.dark select,
 .dark textarea,
 .dark [data-testid^="widget-"] p,
 .dark [data-testid^="widget-"] div,
@@ -1248,8 +1467,8 @@ textarea:focus {
 }
 
 /* Stronger contrast for section headings */
-.dark h4, 
-.dark h5, 
+.dark h4,
+.dark h5,
 .dark h6,
 .dark [data-testid^="widget-"] h4,
 .dark [data-testid^="widget-"] h5,

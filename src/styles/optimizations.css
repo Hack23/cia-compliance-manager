@@ -38,3 +38,34 @@
   );
   opacity: 0.2;
 }
+
+/* Final optimizations and fixes */
+
+/* Force the grid to use grid-auto-rows */
+[data-testid="dashboard-grid"] {
+  grid-auto-rows: minmax(300px, auto) !important;
+  grid-auto-flow: row !important; /* Ensure items flow into rows */
+}
+
+/* Ensure grid items have proper height */
+[data-testid="dashboard-grid"] > div {
+  min-height: 300px !important;
+  height: 100% !important;
+}
+
+/* Fix any issues with widgets that might have fixed heights */
+[data-testid^="widget-"] {
+  height: 100% !important;
+  max-height: none !important; /* Remove any max-height constraints */
+}
+
+/* Add debugging outline in development (comment out in production) */
+/*
+[data-testid="dashboard-grid"] {
+  outline: 2px solid red;
+}
+
+[data-testid="dashboard-grid"] > div {
+  outline: 2px solid blue;
+}
+*/

@@ -744,8 +744,8 @@
 }
 
 /* Consistent card and section styling */
-.card, 
-.info-card, 
+.card,
+.info-card,
 .metric-card {
   padding: 1rem !important;
   border-radius: 0.5rem !important;
@@ -755,16 +755,16 @@
   transition: all 0.2s !important;
 }
 
-.card:hover, 
-.info-card:hover, 
+.card:hover,
+.info-card:hover,
 .metric-card:hover {
   transform: translateY(-2px) !important;
   box-shadow: 0 4px 8px var(--shadow-color) !important;
 }
 
 /* Improved typography for better readability */
-.metric-label, 
-.label-text, 
+.metric-label,
+.label-text,
 [class*="label"] {
   font-size: 0.75rem !important;
   color: var(--text-secondary) !important;
@@ -772,8 +772,8 @@
   font-weight: 500 !important;
 }
 
-.metric-value, 
-.value-text, 
+.metric-value,
+.value-text,
 [class*="value"] {
   font-size: 1.125rem !important;
   font-weight: 600 !important;
@@ -820,4 +820,127 @@
 .section-content[data-testid$="-content"],
 .section-footer[data-testid$="-footer"] {
   width: 100%;
+}
+
+/* Utility classes for layout fixes */
+
+/* Full height containers */
+.h-full {
+  height: 100%;
+}
+
+/* Flex utilities */
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Overflow utilities */
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-visible {
+  overflow: visible;
+}
+
+/* Flex grow for content areas */
+.flex-grow {
+  flex-grow: 1;
+}
+
+/* Min-height utility for widgets that need it */
+.min-h-widget {
+  min-height: 300px;
+}
+
+/* Grid gap utilities */
+.gap-sm {
+  gap: 0.5rem;
+}
+
+.gap-md {
+  gap: 0.75rem;
+}
+
+.gap-lg {
+  gap: 1rem;
+}
+
+/* Preserve aspect ratio for charts and visualizations */
+.aspect-square {
+  aspect-ratio: 1/1;
+}
+
+.aspect-video {
+  aspect-ratio: 16/9;
+}
+
+/* Fix for widgets in grid layout */
+.grid-widget {
+  height: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fix for nested scrolling areas */
+.scroll-container {
+  overflow: auto;
+  height: 100%;
+}
+
+/* Fix for content that should not scroll */
+.no-scroll {
+  overflow: hidden;
+}
+
+/* Fix for content that should be visible beyond bounds */
+.overflow-visible {
+  overflow: visible;
+}
+
+/* Grid container specific utilities */
+.dashboard-grid-container {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  grid-auto-rows: minmax(300px, auto);
+}
+
+/* Media queries to make the grid responsive */
+@media (min-width: 640px) {
+  .dashboard-grid-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-grid-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Grid widget container utility to ensure consistent styling */
+.grid-widget-container {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  height: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dark mode styles for grid widget containers */
+.dark .grid-widget-container {
+  background-color: #1f2937; /* dark:bg-gray-800 */
 }

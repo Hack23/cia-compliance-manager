@@ -632,7 +632,7 @@ h6 {
 }
 
 /* Consistent widget header styling */
-.widget-header, 
+.widget-header,
 [data-testid^="widget-"] > div:first-child {
   height: 40px !important;
   min-height: 40px !important;
@@ -641,21 +641,25 @@ h6 {
   align-items: center !important;
   padding: 0 1rem !important;
   border-bottom: 1px solid var(--border-color) !important;
-  background: linear-gradient(to right, 
-    rgba(0, 102, 204, 0.05) 0%, 
-    rgba(0, 102, 204, 0.01) 100%) !important;
+  background: linear-gradient(
+    to right,
+    rgba(0, 102, 204, 0.05) 0%,
+    rgba(0, 102, 204, 0.01) 100%
+  ) !important;
 }
 
 .dark .widget-header,
 .dark [data-testid^="widget-"] > div:first-child {
-  background: linear-gradient(to right, 
-    rgba(0, 204, 255, 0.1) 0%, 
-    rgba(0, 204, 255, 0.02) 100%) !important;
+  background: linear-gradient(
+    to right,
+    rgba(0, 204, 255, 0.1) 0%,
+    rgba(0, 204, 255, 0.02) 100%
+  ) !important;
   border-bottom: 1px solid rgba(0, 204, 255, 0.2) !important;
 }
 
 /* Consistent widget title styling */
-.widget-title, 
+.widget-title,
 [data-testid^="widget-"] > div:first-child h3 {
   font-family: var(--font-accent) !important;
   font-size: 0.9rem !important;
@@ -677,7 +681,7 @@ h6 {
 }
 
 /* Consistent widget icon styling */
-.widget-icon, 
+.widget-icon,
 [data-testid^="widget-"] span.mr-2 {
   margin-right: 0.5rem !important;
   opacity: 0.8 !important;
@@ -704,4 +708,179 @@ h6 {
   color: var(--primary-color) !important;
   font-family: var(--font-accent) !important;
   letter-spacing: 0.03em !important;
+}
+
+/* Apply theme correctly to direct widget structure */
+.bg-white.dark\:bg-gray-800.shadow-md.rounded-lg.overflow-hidden {
+  background-color: var(--bg-primary);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.dark .bg-white.dark\:bg-gray-800.shadow-md.rounded-lg.overflow-hidden {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-glow);
+}
+
+/* Add hover effects to direct widgets */
+.bg-white.dark\:bg-gray-800.shadow-md.rounded-lg.overflow-hidden:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.dark .bg-white.dark\:bg-gray-800.shadow-md.rounded-lg.overflow-hidden:hover {
+  box-shadow: 0 0 15px rgba(0, 204, 102, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Fix widget header for the actual DOM structure */
+.widget-header,
+.widget-container > div:first-child,
+[data-testid^="widget-container"] > div:first-child {
+  font-family: var(--font-accent);
+  letter-spacing: 0.5px;
+}
+
+.dark .widget-header,
+.dark .widget-container > div:first-child,
+.dark [data-testid^="widget-container"] > div:first-child {
+  background: linear-gradient(
+    to right,
+    rgba(0, 204, 102, 0.15),
+    rgba(0, 187, 119, 0.1)
+  ) !important;
+  border-bottom: 1px solid rgba(0, 204, 102, 0.3) !important;
+}
+
+/* Fix text color in dark mode for all text content */
+.dark .widget-body p,
+.dark .widget-body div:not([class*="bg-"]),
+.dark .widget-body span:not([class*="bg-"]),
+.dark .widget-body li,
+.dark .widget-body h4,
+.dark .widget-body h5,
+.dark .widget-body h6 {
+  color: var(--text-color) !important;
+}
+
+/* Fix icon colors in dark mode */
+.dark .widget-icon,
+.dark .mr-2 {
+  color: var(--primary-color) !important;
+}
+
+/* Ensure dark mode background colors are applied */
+.dark [class*="bg-gray-50"],
+.dark [class*="bg-white"] {
+  background-color: var(--bg-secondary) !important;
+}
+
+.dark [class*="bg-gray-800"],
+.dark [class*="bg-gray-900"] {
+  background-color: var(--bg-primary) !important;
+}
+
+/* Fix border colors in dark mode */
+.dark [class*="border-gray-200"],
+.dark [class*="border-gray-300"],
+.dark [class*="border-gray-700"] {
+  border-color: var(--border-color) !important;
+}
+
+/* Fix badge styling in dark mode */
+.dark [class*="bg-blue-100"],
+.dark [class*="bg-purple-100"],
+.dark [class*="bg-green-100"],
+.dark [class*="bg-yellow-100"],
+.dark [class*="bg-red-100"] {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ensure text in badges is visible */
+.dark [class*="text-blue-800"],
+.dark [class*="text-purple-800"],
+.dark [class*="text-green-800"],
+.dark [class*="text-yellow-800"],
+.dark [class*="text-red-800"] {
+  color: var(--text-color) !important;
+}
+
+/* Fix inputs and selects in dark mode */
+.dark input,
+.dark select,
+.dark textarea {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Fix button styling in dark mode */
+.dark button.px-4.py-2.bg-blue-500.dark\:bg-blue-600.text-white.rounded-md {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  border: none;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
+}
+
+.dark
+  button.px-4.py-2.bg-blue-500.dark\:bg-blue-600.text-white.rounded-md:hover {
+  background-color: var(--primary-light) !important;
+  box-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
+}
+
+/* Ensure card backgrounds in dark mode */
+.dark
+  .bg-gray-50.dark\:bg-gray-800.rounded-lg.border.border-gray-200.dark\:border-gray-700,
+.dark
+  .p-3.bg-gray-50.dark\:bg-gray-800.rounded-lg.border.border-gray-200.dark\:border-gray-700 {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Add better styling for code blocks */
+pre,
+code {
+  font-family: var(--font-mono);
+  border-radius: 0.25rem;
+}
+
+.dark pre,
+.dark code {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  color: var(--primary-light) !important;
+  border: 1px solid var(--border-color);
+}
+
+/* Fix scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(0, 204, 102, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 204, 102, 0.5);
 }
