@@ -3,8 +3,10 @@ import {
   CIAComponentType,
   CIADataProvider,
   CIADetails,
-  TechnicalImplementationDetails,
+  TechnicalImplementationDetails
 } from "../types/cia-services";
+import { getDefaultDevelopmentEffort, getDefaultExpertiseLevel, getDefaultMaintenanceEffort } from "../utils/securityDefaults";
+import { BaseService } from "./BaseService";
 
 /**
  * Technical implementation details for different security components
@@ -38,100 +40,9 @@ interface TechnicalImplementationEffort {
  * It transforms security requirements into actionable technical specifications
  * and implementation plans that development teams can execute. 🔧
  */
-export class TechnicalImplementationService {
-  private dataProvider: CIADataProvider;
-
+export class TechnicalImplementationService extends BaseService {
   constructor(dataProvider: CIADataProvider) {
-    this.dataProvider = dataProvider;
-  }
-
-  /**
-   * Get component details from data provider
-   */
-  private getComponentDetails(
-    component: CIAComponentType,
-    level: SecurityLevel
-  ): CIADetails | undefined {
-    const options = this.getComponentOptions(component);
-    return options[level];
-  }
-
-  /**
-   * Get options for a CIA component
-   */
-  private getComponentOptions(
-    component: CIAComponentType
-  ): Record<string, CIADetails> {
-    switch (component) {
-      case "availability":
-        return this.dataProvider.availabilityOptions;
-      case "integrity":
-        return this.dataProvider.integrityOptions;
-      case "confidentiality":
-        return this.dataProvider.confidentialityOptions;
-      default:
-        return {};
-    }
-  }
-
-  /**
-   * Gets default development effort based on security level
-   */
-  private getDefaultDevelopmentEffort(level: SecurityLevel): string {
-    switch (level) {
-      case "None":
-        return "None";
-      case "Low":
-        return "Days (1-5)";
-      case "Moderate":
-        return "Weeks (2-4)";
-      case "High":
-        return "Months (1-3)";
-      case "Very High":
-        return "Months (3+)";
-      default:
-        return "Not specified";
-    }
-  }
-
-  /**
-   * Gets default maintenance effort based on security level
-   */
-  private getDefaultMaintenanceEffort(level: SecurityLevel): string {
-    switch (level) {
-      case "None":
-        return "None";
-      case "Low":
-        return "Minimal (quarterly review)";
-      case "Moderate":
-        return "Regular (monthly review)";
-      case "High":
-        return "Significant (biweekly monitoring)";
-      case "Very High":
-        return "Extensive (continuous monitoring)";
-      default:
-        return "Not specified";
-    }
-  }
-
-  /**
-   * Gets default expertise level based on security level
-   */
-  private getDefaultExpertiseLevel(level: SecurityLevel): string {
-    switch (level) {
-      case "None":
-        return "None";
-      case "Low":
-        return "Basic security knowledge";
-      case "Moderate":
-        return "Security professional";
-      case "High":
-        return "Security specialist";
-      case "Very High":
-        return "Security expert team";
-      default:
-        return "Not specified";
-    }
+    super(dataProvider);
   }
 
   /**
@@ -144,11 +55,11 @@ export class TechnicalImplementationService {
   private getDefaultEffortLevel(level: SecurityLevel, area: string): string {
     switch (area) {
       case "development":
-        return this.getDefaultDevelopmentEffort(level);
+        return getDefaultDevelopmentEffort(level);
       case "maintenance":
-        return this.getDefaultMaintenanceEffort(level);
+        return getDefaultMaintenanceEffort(level);
       case "expertise":
-        return this.getDefaultExpertiseLevel(level);
+        return getDefaultExpertiseLevel(level);
       default:
         return "Not specified";
     }
@@ -169,7 +80,7 @@ export class TechnicalImplementationService {
         expertise: this.getDefaultEffortLevel(level, "expertise")
       };
     }
-    
+
     return {
       development: technicalImpl.effort?.development || this.getDefaultEffortLevel(level, "development"),
       maintenance: technicalImpl.effort?.maintenance || this.getDefaultEffortLevel(level, "maintenance"),
@@ -186,14 +97,14 @@ export class TechnicalImplementationService {
   ): TechnicalImplementationDetails {
     const normalizedLevel = level || "None";
     const componentName = component || "component";
-    
+
     return {
       description: `No technical implementation details available for ${normalizedLevel} ${componentName}`,
       implementationSteps: ["Consider implementing basic security controls"],
       effort: {
-        development: this.getDefaultDevelopmentEffort(normalizedLevel),
-        maintenance: this.getDefaultMaintenanceEffort(normalizedLevel),
-        expertise: this.getDefaultExpertiseLevel(normalizedLevel)
+        development: getDefaultDevelopmentEffort(normalizedLevel),
+        maintenance: getDefaultMaintenanceEffort(normalizedLevel),
+        expertise: getDefaultExpertiseLevel(normalizedLevel)
       },
       requirements: [],
       technologies: []
@@ -209,7 +120,7 @@ export class TechnicalImplementationService {
   ): TechnicalImplementationDetails {
     // Normalize security level input by trimming whitespace and capitalizing appropriately
     const normalizedLevel = this.normalizeSecurityLevel(level);
-    
+
     // Get the component options for this security component
     const componentOptions = this.getComponentOptions(component);
     if (!componentOptions) {
@@ -227,9 +138,9 @@ export class TechnicalImplementationService {
       description: details.description || `No technical implementation details available for ${normalizedLevel} ${component}`,
       implementationSteps: details.implementationSteps || [],
       effort: {
-        development: details.effort?.development || this.getDefaultDevelopmentEffort(normalizedLevel),
-        maintenance: details.effort?.maintenance || this.getDefaultMaintenanceEffort(normalizedLevel),
-        expertise: details.effort?.expertise || this.getDefaultExpertiseLevel(normalizedLevel),
+        development: details.effort?.development || getDefaultDevelopmentEffort(normalizedLevel),
+        maintenance: details.effort?.maintenance || getDefaultMaintenanceEffort(normalizedLevel),
+        expertise: details.effort?.expertise || getDefaultExpertiseLevel(normalizedLevel),
       },
       requirements: details.requirements || [],
       technologies: details.technologies || [],
@@ -244,13 +155,13 @@ export class TechnicalImplementationService {
    */
   private normalizeSecurityLevel(level: string): SecurityLevel {
     if (!level) return "None";
-    
+
     // Trim whitespace and convert to lowercase
     const trimmedLevel = level.trim().toLowerCase();
-    
+
     // Handle "Very High" as special case
     if (trimmedLevel === "very high") return "Very High";
-    
+
     // Capitalize first letter
     return (trimmedLevel.charAt(0).toUpperCase() + trimmedLevel.slice(1)) as SecurityLevel;
   }
@@ -264,7 +175,7 @@ export class TechnicalImplementationService {
     level: SecurityLevel
   ): string[] {
     // Get the component options for this security component
-    const componentOptions = this.getComponentOptions(component);
+    const componentOptions = this.getCIAOptions(component);
     if (!componentOptions) {
       return [];
     }
@@ -283,18 +194,18 @@ export class TechnicalImplementationService {
     if (!levels || !Array.isArray(levels) || levels.length !== 3) {
       return "Invalid security levels provided. Please provide an array with exactly three security levels.";
     }
-    
+
     // Unpack levels for clarity
     const [availabilityLevel, integrityLevel, confidentialityLevel] = levels;
-    
+
     // Validate each level is a valid SecurityLevel
     const validSecurityLevels = ["None", "Low", "Moderate", "High", "Very High"];
-    if (!validSecurityLevels.includes(availabilityLevel) || 
-        !validSecurityLevels.includes(integrityLevel) || 
-        !validSecurityLevels.includes(confidentialityLevel)) {
+    if (!validSecurityLevels.includes(availabilityLevel) ||
+      !validSecurityLevels.includes(integrityLevel) ||
+      !validSecurityLevels.includes(confidentialityLevel)) {
       return "Invalid security level detected. Please use valid security levels: None, Low, Moderate, High, Very High.";
     }
-    
+
     // If all levels are the same, provide a simplified message
     if (availabilityLevel === integrityLevel && integrityLevel === confidentialityLevel) {
       return `Implementation considerations for uniform ${availabilityLevel} security level across all components`;
@@ -365,7 +276,7 @@ export class TechnicalImplementationService {
   private getTechnicalIcon(component: CIAComponentType, level: SecurityLevel): string {
     // Get appropriate icon based on component and level
     if (level === "None") return "⚠️";
-    
+
     switch (component) {
       case "availability":
         return "⏱️";
@@ -390,7 +301,7 @@ export class TechnicalImplementationService {
   ): { text: string; icon: string } {
     const text = this.getTechnicalDescription(component, level);
     const icon = this.getTechnicalIcon(component, level);
-    
+
     return { text, icon };
   }
 
@@ -414,6 +325,15 @@ export class TechnicalImplementationService {
       default:
         return "Unknown";
     }
+  }
+
+  /**
+   * Get the component options for this security component
+   */
+  private getComponentOptions(
+    component: CIAComponentType
+  ): Record<string, CIADetails> {
+    return this.getCIAOptions(component);
   }
 }
 

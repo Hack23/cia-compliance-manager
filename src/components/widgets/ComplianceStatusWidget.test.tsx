@@ -1,9 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { COMPLIANCE_TEST_IDS } from "../../constants/testIds";
-import { ComplianceService } from "../../services/complianceService";
+import { ComplianceService } from "../../services/ComplianceServiceAdapter";
 import { SecurityLevel } from "../../types/cia";
-import ComplianceStatusWidget from "./ComplianceStatusWidget";
+import { ComplianceStatusWidget } from "./ComplianceStatusWidget";
 
 // Mock the useCIAOptions hook
 vi.mock("../../hooks/useCIAOptions", () => ({
@@ -32,39 +31,61 @@ vi.mock("../../hooks/useCIAOptions", () => ({
   }),
 }));
 
-// Mock the ComplianceService
-vi.mock("../../services/complianceService", () => ({
-  ComplianceService: {
-    getComplianceStatus: vi.fn().mockReturnValue({
-      compliantFrameworks: ['ISO 27001 (Tier 1)', 'NIST CSF (Basic)'],
-      partiallyCompliantFrameworks: ['ISO 27001 (Tier 2)', 'GDPR (Basic)'],
-      nonCompliantFrameworks: ['NIST 800-53', 'PCI DSS', 'HIPAA'],
-      remediationSteps: [
-        'Implement an Information Security Management System (ISMS)',
-        'Develop data protection impact assessments'
-      ],
-      requirements: [
-        'Maintain compliance through regular assessments and audits',
-        'Address gaps in partially compliant frameworks'
-      ],
-      score: 45
-    }),
-    getComplianceStatusText: vi.fn().mockReturnValue('Meets basic compliance only')
-  }
-}));
+// Create a simple mock for COMPLIANCE_TEST_IDS
+const COMPLIANCE_TEST_IDS = {
+  COMPLIANCE_STATUS_WIDGET: 'compliance-status-widget',
+  COMPLIANCE_STATUS_BADGE: 'compliance-status-badge',
+  COMPLIANCE_FRAMEWORK_ITEM: 'framework-item',
+};
+
+// Remove react-bootstrap mock since we're not using it anymore
+vi.mock("react-bootstrap", () => {
+  return {}; // Empty mock since we don't use it anymore
+});
 
 describe("ComplianceStatusWidget", () => {
   const defaultProps = {
     availabilityLevel: "Moderate" as SecurityLevel,
     integrityLevel: "Moderate" as SecurityLevel,
     confidentialityLevel: "Moderate" as SecurityLevel,
-    securityLevel: "Moderate" as SecurityLevel,
     className: "custom-class",
     testId: "custom-test-id"
   };
 
   beforeEach(() => {
     vi.clearAllMocks();
+    // Store original function for restoration after tests
+    const originalGetComplianceStatus = ComplianceService.getComplianceStatus;
+    
+    // Mock ComplianceService.getComplianceStatus to return predictable data
+    const getComplianceStatusMock = vi.spyOn(ComplianceService, 'getComplianceStatus');
+    
+    // Mock implementation
+    getComplianceStatusMock.mockImplementation((a: SecurityLevel, i: SecurityLevel, c: SecurityLevel) => {
+      return {
+        compliantFrameworks: ["ISO 27001", "NIST CSF"],
+        partiallyCompliantFrameworks: ["PCI DSS"],
+        nonCompliantFrameworks: ["HIPAA", "GDPR"],
+        remediationSteps: [
+          "Implement data protection impact assessments",
+          "Establish data subject rights procedures"
+        ],
+        requirements: [
+          "Address critical compliance gaps",
+          "Implement remaining controls"
+        ],
+        score: 60,
+        status: "Partially Compliant"
+      };
+    });
+
+    // Mock ComplianceService.getComplianceStatusText
+    vi.spyOn(ComplianceService, 'getComplianceStatusText')
+      .mockReturnValue('Compliant with all major frameworks');
+      
+    // Mock ComplianceService.getFrameworkDescription
+    vi.spyOn(ComplianceService, 'getFrameworkDescription')
+      .mockReturnValue('Framework description');
   });
 
   it("renders without crashing", () => {
@@ -109,7 +130,13 @@ describe("ComplianceStatusWidget", () => {
   });
 
   it('renders with default props', () => {
-    render(<ComplianceStatusWidget />);
+    const minimalProps = {
+      availabilityLevel: "Moderate" as SecurityLevel,
+      integrityLevel: "Moderate" as SecurityLevel,
+      confidentialityLevel: "Moderate" as SecurityLevel
+    };
+    
+    render(<ComplianceStatusWidget {...minimalProps} />);
     
     // Check the widget container is rendered with correct test ID
     expect(screen.getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_WIDGET)).toBeInTheDocument();
@@ -132,7 +159,7 @@ describe("ComplianceStatusWidget", () => {
   });
 
   it('displays compliant frameworks correctly', () => {
-    render(<ComplianceStatusWidget />);
+    render(<ComplianceStatusWidget {...defaultProps} />);
     
     // Check compliant frameworks section exists and has correct frameworks
     const frameworks = screen.getAllByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_FRAMEWORK_ITEM);
@@ -194,7 +221,7 @@ describe("ComplianceStatusWidget", () => {
   });
 
   it('displays the widget title', () => {
-    render(<ComplianceStatusWidget />);
+    render(<ComplianceStatusWidget {...defaultProps} />);
     
     // Look for the title heading
     expect(screen.getByText('Compliance Status')).toBeInTheDocument();

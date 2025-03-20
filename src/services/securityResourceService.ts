@@ -1,9 +1,6 @@
 import { SecurityLevel } from "../types/cia";
-import {
-    CIAComponentType,
-    CIADataProvider,
-    CIADetails,
-} from "../types/cia-services";
+import { CIAComponentType, CIADataProvider } from "../types/cia-services";
+import { BaseService } from "./BaseService";
 
 /**
  * Security resource model
@@ -28,110 +25,16 @@ export interface SecurityResource {
  * controls effectively. It curates relevant documentation and learning
  * resources based on selected security levels. 📚
  */
-export class SecurityResourceService {
-  private dataProvider: CIADataProvider;
-
+export class SecurityResourceService extends BaseService {
   constructor(dataProvider: CIADataProvider) {
-    this.dataProvider = dataProvider;
-  }
-
-  /**
-   * Get the component details for a specific level
-   */
-  private getComponentDetails(
-    component: CIAComponentType,
-    level: SecurityLevel
-  ): CIADetails | undefined {
-    const options = this.getCIAOptions(component);
-    return options[level];
-  }
-
-  /**
-   * Get options for a CIA component
-   */
-  private getCIAOptions(
-    component: CIAComponentType
-  ): Record<string, CIADetails> {
-    switch (component) {
-      case "availability":
-        return this.dataProvider.availabilityOptions;
-      case "integrity":
-        return this.dataProvider.integrityOptions;
-      case "confidentiality":
-        return this.dataProvider.confidentialityOptions;
-      default:
-        return {};
-    }
+    super(dataProvider);
   }
 
   /**
    * Get value points for a security level
    */
   public getValuePoints(level: SecurityLevel): string[] {
-    const defaultValuePoints = this.getDefaultValuePoints(level);
-
-    // If data provider has a custom function, use that
-    if (typeof this.dataProvider.getDefaultValuePoints === "function") {
-      try {
-        const customPoints = this.dataProvider.getDefaultValuePoints(level);
-        if (customPoints && customPoints.length > 0) {
-          return customPoints;
-        }
-      } catch (error) {
-        console.error("Error fetching custom value points:", error);
-      }
-    }
-
-    return defaultValuePoints;
-  }
-
-  /**
-   * Default implementation of value points
-   */
-  private getDefaultValuePoints(level: SecurityLevel): string[] {
-    switch (level) {
-      case "Very High":
-        return [
-          "Maximum security value with comprehensive protection",
-          "Enables business in highly regulated industries",
-          "Provides competitive advantage through superior security posture",
-          "Minimizes risk of data breaches and associated costs",
-          "Ensures regulatory compliance across major frameworks",
-        ];
-      case "High":
-        return [
-          "Strong security value with robust protection",
-          "Supports business in moderately regulated industries",
-          "Reduces risk of security incidents significantly",
-          "Protects sensitive data and critical operations",
-          "Meets requirements for most compliance frameworks",
-        ];
-      case "Moderate":
-        return [
-          "Balanced security value with standard protection",
-          "Suitable for most business applications",
-          "Reduces common security risks",
-          "Protects important business data",
-          "Meets basic compliance requirements",
-        ];
-      case "Low":
-        return [
-          "Basic security value with minimal protection",
-          "Suitable for non-critical systems",
-          "Addresses obvious security vulnerabilities",
-          "Provides foundation for security program",
-          "May not meet regulatory requirements",
-        ];
-      case "None":
-      default:
-        return [
-          "No security value",
-          "Suitable only for non-sensitive public information",
-          "High vulnerability to security incidents",
-          "No protection against threats",
-          "Does not meet any compliance requirements",
-        ];
-    }
+    return super.getValuePoints(level);
   }
 
   /**
@@ -255,11 +158,49 @@ export class SecurityResourceService {
 
     return resources;
   }
+}
 
-  /**
-   * Helper function to capitalize first letter
-   */
-  private capitalizeFirstLetter(string: string): string {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+/**
+ * Creates a security resource service instance
+ * 
+ * @param dataProvider - Data provider for the service
+ * @returns A new SecurityResourceService instance
+ */
+export function createSecurityResourceService(dataProvider?: CIADataProvider) {
+  // Create a properly typed default data provider if none is provided
+  if (!dataProvider) {
+    const defaultDataProvider: CIADataProvider = {
+      availabilityOptions: {
+        "None": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
+        "Low": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
+        "Moderate": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
+        "High": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
+        "Very High": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] }
+      },
+      integrityOptions: {
+        "None": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
+        "Low": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
+        "Moderate": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
+        "High": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
+        "Very High": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] }
+      },
+      confidentialityOptions: {
+        "None": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
+        "Low": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
+        "Moderate": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
+        "High": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
+        "Very High": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] }
+      },
+      roiEstimates: {
+        "NONE": { returnRate: "0%", value: "0%", description: "No ROI" },
+        "LOW": { returnRate: "50%", value: "50%", description: "Low ROI" },
+        "MODERATE": { returnRate: "150%", value: "150%", description: "Moderate ROI" },
+        "HIGH": { returnRate: "250%", value: "250%", description: "High ROI" },
+        "VERY_HIGH": { returnRate: "400%", value: "400%", description: "Very High ROI" }
+      }
+    };
+    return new SecurityResourceService(defaultDataProvider);
   }
+
+  return new SecurityResourceService(dataProvider);
 }

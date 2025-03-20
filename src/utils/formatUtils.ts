@@ -59,30 +59,33 @@ export function formatCurrency(
   } | string,
   locale?: string
 ): string {
-  // Handle backward compatibility with old function signature
+  // Default values
+  let currencyCode = 'USD';
+  let localeValue = 'en-US';
+  let minFractionDigits = 0;
+  let maxFractionDigits = 0;
+
+  // Handle backward compatibility with string options
   if (typeof options === 'string') {
-    return new Intl.NumberFormat(locale || 'en-US', {
-      style: 'currency',
-      currency: options,
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(value);
+    currencyCode = options;
+    if (locale) {
+      localeValue = locale;
+    }
+  }
+  // Handle object options
+  else if (options && typeof options === 'object') {
+    if (options.currency) currencyCode = options.currency;
+    if (options.locale) localeValue = options.locale;
+    if (options.minimumFractionDigits !== undefined) minFractionDigits = options.minimumFractionDigits;
+    if (options.maximumFractionDigits !== undefined) maxFractionDigits = options.maximumFractionDigits;
   }
 
-  // New signature with options object
-  const {
-    locale: optLocale = 'en-US',
-    currency = 'USD',
-    minimumFractionDigits = 2,
-    maximumFractionDigits = 2
-  } = options || {};
-
-  // Use Intl.NumberFormat to ensure proper thousands separators
-  return new Intl.NumberFormat(optLocale, {
+  // Use Intl.NumberFormat for consistent currency formatting
+  return new Intl.NumberFormat(localeValue, {
     style: 'currency',
-    currency,
-    minimumFractionDigits,
-    maximumFractionDigits
+    currency: currencyCode,
+    minimumFractionDigits: minFractionDigits,
+    maximumFractionDigits: maxFractionDigits
   }).format(value);
 }
 

@@ -1,14 +1,48 @@
 import { SecurityLevel } from "../types/cia";
-import {
-  CIAComponentType,
-  CIADataProvider,
-  CIADetails,
-  ROIEstimatesMap,
-  ROIMetrics,
-} from "../types/cia-services";
-import { getRiskBadgeVariant } from "../utils";
-import { getSecurityLevelValue } from "../utils/levelValuesUtils"; // Corrected import
-import logger from "../utils/logger"; // Use the default export
+import { CIAComponentType, CIADataProvider, ROIMetrics } from "../types/cia-services";
+import logger from "../utils/logger";
+import { BaseService } from "./BaseService";
+
+/**
+ * Interface for ROI estimates map
+ */
+export interface ROIEstimatesMap {
+  NONE: {
+    returnRate: string;
+    value?: string;
+    description: string;
+    potentialSavings?: string;
+    breakEvenPeriod?: string;
+  };
+  LOW: {
+    returnRate: string;
+    value?: string;
+    description: string;
+    potentialSavings?: string;
+    breakEvenPeriod?: string;
+  };
+  MODERATE: {
+    returnRate: string;
+    value?: string;
+    description: string;
+    potentialSavings?: string;
+    breakEvenPeriod?: string;
+  };
+  HIGH: {
+    returnRate: string;
+    value?: string;
+    description: string;
+    potentialSavings?: string;
+    breakEvenPeriod?: string;
+  };
+  VERY_HIGH: {
+    returnRate: string;
+    value?: string;
+    description: string;
+    potentialSavings?: string;
+    breakEvenPeriod?: string;
+  };
+}
 
 /**
  * Service for security metrics related functionality
@@ -20,11 +54,9 @@ import logger from "../utils/logger"; // Use the default export
  * controls and justify security spending through ROI calculations and
  * risk reduction metrics. 📊
  */
-export class SecurityMetricsService {
-  private dataProvider: CIADataProvider;
-
+export class SecurityMetricsService extends BaseService {
   constructor(dataProvider: CIADataProvider) {
-    this.dataProvider = dataProvider;
+    super(dataProvider);
   }
 
   /**
@@ -116,9 +148,9 @@ export class SecurityMetricsService {
     const totalOpex = availabilityOpex + integrityOpex + confidentialityOpex;
 
     // Calculate security score
-    const availValue = getSecurityLevelValue(availabilityLevel);
-    const intValue = getSecurityLevelValue(integrityLevel);
-    const confValue = getSecurityLevelValue(confidentialityLevel);
+    const availValue = this.getSecurityLevelValue(availabilityLevel);
+    const intValue = this.getSecurityLevelValue(integrityLevel);
+    const confValue = this.getSecurityLevelValue(confidentialityLevel);
 
     const score = availValue + intValue + confValue;
     const maxScore = 12; // Max 4 points per component, 3 components
@@ -149,42 +181,6 @@ export class SecurityMetricsService {
   }
 
   /**
-   * Get component-specific details based on component type and security level
-   *
-   * @param component - CIA component type
-   * @param level - Security level
-   * @returns Component details if found, undefined otherwise
-   */
-  private getComponentDetails(
-    component: CIAComponentType,
-    level: SecurityLevel
-  ): CIADetails | undefined {
-    const options = this.getCIAOptions(component);
-    return options[level];
-  }
-
-  /**
-   * Get CIA options for a specific component
-   *
-   * @param component - CIA component type
-   * @returns Record of component options by security level
-   */
-  private getCIAOptions(
-    component: CIAComponentType
-  ): Record<string, CIADetails> {
-    switch (component) {
-      case "availability":
-        return this.dataProvider.availabilityOptions;
-      case "integrity":
-        return this.dataProvider.integrityOptions;
-      case "confidentiality":
-        return this.dataProvider.confidentialityOptions;
-      default:
-        return {};
-    }
-  }
-
-  /**
    * Get metrics for a specific component and security level
    *
    * @param component - CIA component type
@@ -196,7 +192,7 @@ export class SecurityMetricsService {
     level: SecurityLevel
   ) {
     const details = this.getComponentDetails(component, level);
-    const value = getSecurityLevelValue(level);
+    const value = this.getSecurityLevelValue(level);
     const percentage = `${Math.round((value / 4) * 100)}%`;
 
     return {
@@ -223,14 +219,14 @@ export class SecurityMetricsService {
   ): Record<string, string> {
     // Get the base metrics
     const metrics = this.getComponentMetrics(component, level);
-    
+
     // Convert all values to strings to match the return type
     const result: Record<string, string> = {};
-    
+
     Object.entries(metrics).forEach(([key, value]) => {
       result[key] = typeof value === 'number' ? value.toString() : value as string;
     });
-    
+
     return result;
   }
 
@@ -312,7 +308,7 @@ export class SecurityMetricsService {
    */
   private calculateSingleComponentRiskReduction(level: SecurityLevel): number {
     try {
-      return getSecurityLevelValue(level) || 0;
+      return this.getSecurityLevelValue(level) || 0;
     } catch (error) {
       logger.warn(`Failed to calculate risk reduction for level: ${level}`);
       return 0;
@@ -366,50 +362,43 @@ export class SecurityMetricsService {
   }
 
   /**
-   * Get badge variant for risk level
-   *
+   * Get risk badge variant based on risk level
+   * 
    * @param riskLevel - Risk level
-   * @returns Badge variant name
+   * @returns CSS variant for risk badge
    */
   public getRiskBadgeVariant(riskLevel: string): string {
-    // Remove duplicate implementation and import from utils
-    return getRiskBadgeVariant(riskLevel);
+    switch (riskLevel.toLowerCase()) {
+      case "critical":
+        return "danger";
+      case "high":
+        return "warning";
+      case "medium":
+        return "primary";
+      case "low":
+        return "info";
+      case "minimal":
+        return "success";
+      default:
+        return "secondary";
+    }
   }
 
   /**
-   * Get security icon based on security level
-   *
+   * Get security icon for a security level
+   * 
    * @param level - Security level
-   * @returns Icon character
+   * @returns Security icon for the level
    */
   public getSecurityIcon(level: SecurityLevel): string {
-    // Use data provider's icon function if available
-    if (typeof this.dataProvider.getDefaultSecurityIcon === "function") {
-      return this.dataProvider.getDefaultSecurityIcon(level);
-    }
-
-    // Default icons
-    switch (level) {
-      case "None":
-        return "⚠️";
-      case "Low":
-        return "🔑";
-      case "Moderate":
-        return "🔓";
-      case "High":
-        return "🔒";
-      case "Very High":
-        return "🔐";
-      default:
-        return "❓";
-    }
+    return this.getDefaultSecurityIcon(level);
   }
 
   /**
-   * Get security level from numeric value
-   *
+   * Get security level from a numeric value
+   * 
    * @param value - Numeric security level value (0-4)
-   * @returns Security level
+   * @returns Security level string representation
    */
   public getSecurityLevelFromValue(value: number): SecurityLevel {
     switch (value) {
@@ -429,21 +418,21 @@ export class SecurityMetricsService {
   }
 
   /**
-   * Calculate overall security score as a percentage
-   *
+   * Calculate security score based on security levels
+   * 
    * @param availabilityLevel - Availability security level
    * @param integrityLevel - Integrity security level
    * @param confidentialityLevel - Confidentiality security level
-   * @returns Security score as 0-100 percentage
+   * @returns Security score (0-100)
    */
   public calculateSecurityScore(
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
   ): number {
-    const availValue = getSecurityLevelValue(availabilityLevel);
-    const intValue = getSecurityLevelValue(integrityLevel);
-    const confValue = getSecurityLevelValue(confidentialityLevel);
+    const availValue = this.getSecurityLevelValue(availabilityLevel);
+    const intValue = this.getSecurityLevelValue(integrityLevel);
+    const confValue = this.getSecurityLevelValue(confidentialityLevel);
 
     const score = availValue + intValue + confValue;
     const maxScore = 12; // Max 4 points per component, 3 components

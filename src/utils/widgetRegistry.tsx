@@ -13,7 +13,7 @@ import WidgetContainer from "../components/common/WidgetContainer";
 import AvailabilityImpactWidget from "../components/widgets/AvailabilityImpactWidget";
 import BusinessImpactAnalysisWidget from "../components/widgets/BusinessImpactAnalysisWidget";
 import CIAImpactSummaryWidget from "../components/widgets/CIAImpactSummaryWidget";
-import ComplianceStatusWidget from "../components/widgets/ComplianceStatusWidget";
+import { ComplianceStatusWidget } from "../components/widgets/ComplianceStatusWidget";
 import ConfidentialityImpactWidget from "../components/widgets/ConfidentialityImpactWidget";
 import CostEstimationWidget from "../components/widgets/CostEstimationWidget";
 import IntegrityImpactWidget from "../components/widgets/IntegrityImpactWidget";

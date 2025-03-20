@@ -1,9 +1,29 @@
-import React, { useMemo } from 'react';
-import { COMPLIANCE_STATUS } from '../../constants/coreConstants';
-import { ComplianceService } from '../../services/complianceService';
-import { SecurityLevel } from '../../types/cia';
-import { ComplianceStatusWidgetProps } from '../../types/widgets';
-import { isComplianceStatus } from '../../utils/typeGuards';
+import React, { useEffect, useState } from "react";
+import { ComplianceStatus } from "../../services/complianceService";
+import { ComplianceService } from "../../services/ComplianceServiceAdapter";
+import { SecurityLevel } from "../../types/cia";
+
+/**
+ * Props for ComplianceStatusWidget
+ */
+export interface ComplianceStatusWidgetProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  refreshTrigger?: number;
+  className?: string;
+  testId?: string;
+}
+
+/**
+ * Compliance status constants
+ */
+const COMPLIANCE_STATUS = {
+  FULL_COMPLIANCE: 'Compliant with all major frameworks',
+  STANDARD_COMPLIANCE: 'Compliant with standard frameworks',
+  BASIC_COMPLIANCE: 'Meets basic compliance only',
+  NON_COMPLIANT: 'Non-Compliant'
+};
 
 /**
  * Test IDs for compliance status widget components
@@ -31,38 +51,44 @@ export const COMPLIANCE_STATUS_TEST_IDS = {
  * The remediation steps provide actionable guidance for improving compliance
  * posture, helping organizations prioritize security investments. 💼
  */
-export default function ComplianceStatusWidget({
+export const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
+  availabilityLevel,
+  integrityLevel,
+  confidentialityLevel,
+  refreshTrigger = 0,
   className = '',
-  testId = COMPLIANCE_STATUS_TEST_IDS.WIDGET,
-  availabilityLevel = 'Moderate',
-  integrityLevel = 'Moderate',
-  confidentialityLevel = 'Moderate',
-  securityLevel
-}: ComplianceStatusWidgetProps): React.ReactElement {
-  // If a single security level is provided, use it for all dimensions
-  const availability = useMemo<SecurityLevel>(() => 
-    availabilityLevel || securityLevel || 'Moderate'
-  , [availabilityLevel, securityLevel]);
-  
-  const integrity = useMemo<SecurityLevel>(() => 
-    integrityLevel || securityLevel || 'Moderate'
-  , [integrityLevel, securityLevel]);
-  
-  const confidentiality = useMemo<SecurityLevel>(() => 
-    confidentialityLevel || securityLevel || 'Moderate'
-  , [confidentialityLevel, securityLevel]);
-  
-  // Get compliance status based on security levels
-  const complianceStatus = useMemo(() => {
-    return ComplianceService.getComplianceStatus(
-      availability,
-      integrity,
-      confidentiality
+  testId = 'compliance-status-widget'
+}) => {
+  const [complianceStatus, setComplianceStatus] = useState<ComplianceStatus & { score?: number; requirements?: string[] }>({
+    compliantFrameworks: [],
+    partiallyCompliantFrameworks: [],
+    nonCompliantFrameworks: [],
+    remediationSteps: [],
+    score: 0,
+    requirements: [],
+  });
+
+  useEffect(() => {
+    // Get compliance status from service
+    const status = ComplianceService.getComplianceStatus(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
     );
-  }, [availability, integrity, confidentiality]);
-  
+
+    setComplianceStatus(status);
+  }, [availabilityLevel, integrityLevel, confidentialityLevel, refreshTrigger]);
+
+  // Type guard function to validate compliance status
+  const isValidComplianceStatus = (status: any): status is ComplianceStatus => {
+    return status && 
+      Array.isArray(status.compliantFrameworks) && 
+      Array.isArray(status.partiallyCompliantFrameworks) && 
+      Array.isArray(status.nonCompliantFrameworks);
+  };
+
   // Validate compliance status using type guard
-  if (!isComplianceStatus(complianceStatus)) {
+  if (!isValidComplianceStatus(complianceStatus)) {
     console.error('Invalid compliance status received from service');
     return (
       <div 
@@ -79,96 +105,107 @@ export default function ComplianceStatusWidget({
   
   // Get overall compliance status text
   const statusText = ComplianceService.getComplianceStatusText(
-    availability,
-    integrity,
-    confidentiality
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel
   );
   
   return (
-    <div 
-      className={`p-4 border rounded shadow-sm ${className}`}
-      data-testid={testId}
-    >
-      <h3 data-testid={COMPLIANCE_STATUS_TEST_IDS.TITLE} className="text-lg font-medium mb-2">
-        Compliance Status
-      </h3>
-      
-      <div className="mb-3">
-        <p className="font-medium">Overall Status:</p>
-        <p className={`${getStatusColorClass(statusText)} font-medium`}>{statusText}</p>
+    <div className={`border rounded-lg shadow-sm h-100 ${className}`} data-testid={testId}>
+      <div className="p-3 border-bottom bg-light">
+        <h3 data-testid={COMPLIANCE_STATUS_TEST_IDS.TITLE} className="mb-0">
+          Compliance Status
+        </h3>
       </div>
-      
-      {/* Compliant Frameworks */}
-      {complianceStatus.compliantFrameworks.length > 0 && (
-        <div className="mb-4" data-testid={COMPLIANCE_STATUS_TEST_IDS.COMPLIANT}>
-          <h4 className="font-medium text-green-700 mb-1">Compliant Frameworks</h4>
-          <ul className="list-disc pl-5">
-            {complianceStatus.compliantFrameworks.map((framework, index) => (
-              <li 
-                key={`compliant-${index}`} 
-                className="text-sm" 
-                data-testid={`${COMPLIANCE_STATUS_TEST_IDS.FRAMEWORK_ITEM}-compliant-${index}`}
-              >
-                {String(framework)}
-                <span className="block text-xs text-gray-600 mt-1">
-                  {ComplianceService.getFrameworkDescription(String(framework))}
-                </span>
-              </li>
-            ))}
-          </ul>
+      <div className="p-3">
+        <div className="mb-3">
+          <p className="font-medium">Overall Status:</p>
+          <p className={`${getStatusColorClass(statusText)} font-medium`}>{statusText}</p>
         </div>
-      )}
-      
-      {/* Partially Compliant Frameworks */}
-      {complianceStatus.partiallyCompliantFrameworks.length > 0 && (
-        <div className="mb-4" data-testid={COMPLIANCE_STATUS_TEST_IDS.PARTIAL}>
-          <h4 className="font-medium text-yellow-700 mb-1">Partially Compliant Frameworks</h4>
-          <ul className="list-disc pl-5">
-            {complianceStatus.partiallyCompliantFrameworks.map((framework, index) => (
-              <li 
-                key={`partial-${index}`} 
-                className="text-sm" 
-                data-testid={`${COMPLIANCE_STATUS_TEST_IDS.FRAMEWORK_ITEM}-partial-${index}`}
-              >
-                {String(framework)}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      
-      {/* Non-Compliant Frameworks */}
-      {complianceStatus.nonCompliantFrameworks.length > 0 && (
-        <div className="mb-4" data-testid={COMPLIANCE_STATUS_TEST_IDS.NON_COMPLIANT}>
-          <h4 className="font-medium text-red-700 mb-1">Non-Compliant Frameworks</h4>
-          <ul className="list-disc pl-5">
-            {complianceStatus.nonCompliantFrameworks.map((framework, index) => (
-              <li 
-                key={`non-compliant-${index}`} 
-                className="text-sm" 
-                data-testid={`${COMPLIANCE_STATUS_TEST_IDS.FRAMEWORK_ITEM}-non-compliant-${index}`}
-              >
-                {String(framework)}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      
-      {/* Remediation Steps */}
-      {complianceStatus.remediationSteps && complianceStatus.remediationSteps.length > 0 && (
-        <div data-testid={COMPLIANCE_STATUS_TEST_IDS.REMEDIATION}>
-          <h4 className="font-medium text-blue-700 mb-1">Recommended Actions</h4>
-          <ul className="list-disc pl-5">
-            {complianceStatus.remediationSteps.map((step, index) => (
-              <li key={`step-${index}`} className="text-sm mb-1">{step}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+        
+        {/* Compliant Frameworks */}
+        {complianceStatus.compliantFrameworks.length > 0 && (
+          <div className="mb-4" data-testid={COMPLIANCE_STATUS_TEST_IDS.COMPLIANT}>
+            <h4 className="font-medium text-green-700 mb-1">Compliant Frameworks</h4>
+            <ul className="list-group mb-3">
+              {complianceStatus.compliantFrameworks.map((framework: string, index: number) => (
+                <li 
+                  key={`compliant-${index}`}
+                  className="list-group-item list-group-item-success d-flex justify-content-between align-items-center"
+                  data-testid={`compliant-framework-${index}`}
+                >
+                  <div>
+                    <strong>{framework}</strong>
+                    <div className="text-muted small">
+                      {ComplianceService.getFrameworkDescription(String(framework))}
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        
+        {/* Partially Compliant Frameworks */}
+        {complianceStatus.partiallyCompliantFrameworks.length > 0 && (
+          <div className="mb-4" data-testid={COMPLIANCE_STATUS_TEST_IDS.PARTIAL}>
+            <h4 className="font-medium text-yellow-700 mb-1">Partially Compliant Frameworks</h4>
+            <ul className="list-group mb-3">
+              {complianceStatus.partiallyCompliantFrameworks.map((framework: string, index: number) => (
+                <li 
+                  key={`partial-${index}`}
+                  className="list-group-item list-group-item-warning d-flex justify-content-between align-items-center"
+                  data-testid={`partial-framework-${index}`}
+                >
+                  <div>
+                    <strong>{framework}</strong>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        
+        {/* Non-Compliant Frameworks */}
+        {complianceStatus.nonCompliantFrameworks.length > 0 && (
+          <div className="mb-4" data-testid={COMPLIANCE_STATUS_TEST_IDS.NON_COMPLIANT}>
+            <h4 className="font-medium text-red-700 mb-1">Non-Compliant Frameworks</h4>
+            <ul className="list-group mb-3">
+              {complianceStatus.nonCompliantFrameworks.map((framework: string, index: number) => (
+                <li 
+                  key={`non-compliant-${index}`}
+                  className="list-group-item list-group-item-danger d-flex justify-content-between align-items-center"
+                  data-testid={`non-compliant-framework-${index}`}
+                >
+                  <div>
+                    <strong>{framework}</strong>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        
+        {/* Remediation Steps */}
+        {complianceStatus.remediationSteps && complianceStatus.remediationSteps.length > 0 && (
+          <div data-testid={COMPLIANCE_STATUS_TEST_IDS.REMEDIATION}>
+            <h4 className="font-medium text-blue-700 mb-1">Recommended Actions</h4>
+            <ul className="list-group">
+              {complianceStatus.remediationSteps?.map((step: string, index: number) => (
+                <li 
+                  key={`step-${index}`}
+                  className="list-group-item text-sm mb-1"
+                >
+                  {step}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
-}
+};
 
 /**
  * Get the appropriate color class based on compliance status text
@@ -188,3 +225,6 @@ function getStatusColorClass(statusText: string): string {
       return 'text-red-700';
   }
 }
+
+// Add a default export to maintain backward compatibility
+export default ComplianceStatusWidget;

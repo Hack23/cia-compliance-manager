@@ -1,165 +1,294 @@
-import { SecurityLevel } from '../types/cia';
-import { ComplianceStatus } from '../types/compliance';
-import ComplianceService from './complianceService';
+import { SecurityLevel } from "../types/cia";
+import { CIADataProvider } from "../types/cia-services";
+import { ComplianceService as ComplianceServiceClass, ComplianceStatus } from "./complianceService";
 
 /**
- * Adapter class for ComplianceService that provides instance methods
- * wrapping the static methods of ComplianceService
+ * Adapter class for ComplianceService that maintains backward compatibility
+ * with the static methods in the previous implementation
  * 
- * This is provided for backward compatibility with existing tests
- * and components that expect an instance-based API.
+ * ## Business Perspective
+ * 
+ * This adapter ensures backward compatibility with existing code while allowing
+ * the ComplianceService to follow the new service pattern. It allows gradual
+ * migration of dependent components without breaking changes. 🔄
  */
 export class ComplianceServiceAdapter {
+  private complianceService: ComplianceServiceClass;
+
+  constructor(dataProvider: CIADataProvider) {
+    this.complianceService = new ComplianceServiceClass(dataProvider);
+  }
+
   /**
-   * Create a new ComplianceServiceAdapter
-   * 
-   * @param dataProvider - Optional data provider (not used in implementation)
-   */
-  constructor(private dataProvider?: any) {}
-  
-  /**
-   * Get compliance status based on CIA security levels
-   * 
-   * @param availabilityLevel - Current availability security level
-   * @param integrityLevel - Current integrity security level
-   * @param confidentialityLevel - Current confidentiality security level
-   * @param options - Optional configuration options
-   * @returns Compliance status with framework mapping and remediation steps
+   * Get compliance status for selected security levels
    */
   public getComplianceStatus(
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel,
     options?: { industry?: string; region?: string }
-  ): ComplianceStatus {
-    return ComplianceService.getComplianceStatus(
+  ): ComplianceStatus & { score?: number; requirements?: string[] } {
+    const status = this.complianceService.getComplianceStatus(
       availabilityLevel,
       integrityLevel,
-      confidentialityLevel,
-      options
+      confidentialityLevel
     );
+
+    // Add backward compatibility properties
+    return {
+      ...status,
+      score: status.complianceScore,
+      requirements: this.getRequirements(status)
+    };
   }
-  
+
   /**
-   * Get compliant frameworks based on security levels and compliance type
-   * 
-   * @param availabilityLevel - Availability security level
-   * @param integrityLevel - Integrity security level
-   * @param confidentialityLevel - Confidentiality security level
-   * @param complianceType - Type of compliance to check (compliant, partial, non-compliant)
-   * @returns Array of framework names
+   * Get compliant frameworks based on security levels
    */
   public getCompliantFrameworks(
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel,
-    confidentialityLevel: SecurityLevel,
-    complianceType?: 'compliant' | 'partial' | 'non-compliant'
+    confidentialityLevel: SecurityLevel
   ): string[] {
-    return ComplianceService.getCompliantFrameworks(
+    const status = this.complianceService.getComplianceStatus(
       availabilityLevel,
       integrityLevel,
-      confidentialityLevel,
-      complianceType || 'compliant'
+      confidentialityLevel
     );
+    return status.compliantFrameworks;
   }
-  
+
   /**
-   * Get compliance status text based on security levels
-   * 
-   * @param availabilityLevel - Availability security level
-   * @param integrityLevel - Integrity security level
-   * @param confidentialityLevel - Confidentiality security level
-   * @returns Compliance status text
+   * Get compliance status text
    */
   public getComplianceStatusText(
     availabilityLevel: SecurityLevel,
     integrityLevel?: SecurityLevel,
     confidentialityLevel?: SecurityLevel
   ): string {
-    return ComplianceService.getComplianceStatusText(
-      availabilityLevel,
-      integrityLevel || availabilityLevel,
-      confidentialityLevel || availabilityLevel
-    );
+    // Use provided levels or default to the first level
+    const intLevel = integrityLevel || availabilityLevel;
+    const confLevel = confidentialityLevel || availabilityLevel;
+
+    // Simple scoring for compliance status text
+    const availValue = this.getSecurityLevelValue(availabilityLevel);
+    const intValue = this.getSecurityLevelValue(intLevel);
+    const confValue = this.getSecurityLevelValue(confLevel);
+
+    const totalScore = availValue + intValue + confValue;
+
+    if (totalScore >= 10) {
+      return "Compliant with all major frameworks";
+    } else if (totalScore >= 7) {
+      return "Compliant with standard frameworks";
+    } else if (totalScore >= 4) {
+      return "Meets basic compliance only";
+    } else {
+      return "Non-Compliant";
+    }
   }
-  
+
   /**
-   * Determine compliance status for a specific framework based on security levels
-   * 
-   * @param framework - Framework name
-   * @param availabilityLevel - Availability security level
-   * @param integrityLevel - Integrity security level
-   * @param confidentialityLevel - Confidentiality security level
-   * @returns Framework compliance status (compliant, partial, non-compliant)
+   * Get framework compliance status
    */
   public getFrameworkStatus(
     framework: string,
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
-  ): string {
-    return ComplianceService.getFrameworkStatus(
-      framework,
+  ): "compliant" | "partial" | "non-compliant" {
+    // Get full compliance status
+    const status = this.complianceService.getComplianceStatus(
       availabilityLevel,
       integrityLevel,
       confidentialityLevel
     );
+
+    // Determine framework status
+    if (status.compliantFrameworks.includes(framework)) {
+      return "compliant";
+    } else if (status.partiallyCompliantFrameworks.includes(framework)) {
+      return "partial";
+    } else {
+      return "non-compliant";
+    }
   }
-  
+
   /**
-   * Get a description of a compliance framework
-   * 
-   * @param framework - Framework name
-   * @returns Framework description
+   * Get framework description
    */
   public getFrameworkDescription(framework: string): string {
-    return ComplianceService.getFrameworkDescription(framework);
+    const descriptions: Record<string, string> = {
+      "NIST 800-53": "National Institute of Standards and Technology Special Publication 800-53 - comprehensive catalog of security and privacy controls",
+      "ISO 27001": "International Standard for information security management systems (ISMS)",
+      "GDPR": "General Data Protection Regulation - EU regulation on data protection and privacy",
+      "HIPAA": "Health Insurance Portability and Accountability Act - safeguards for protected health information",
+      "PCI DSS": "Payment Card Industry Data Security Standard - information security standard for payment card processing",
+      "SOC2": "Service Organization Control 2 - controls for security, availability, processing integrity, confidentiality, and privacy",
+      "NIST CSF": "NIST Cybersecurity Framework - guidelines for managing and reducing cybersecurity risk"
+    };
+
+    return descriptions[framework] || `Security framework with various compliance requirements`;
   }
-  
+
   /**
-   * Get the required security level for a framework component
-   * 
-   * @param framework - Framework name
-   * @param component - CIA component (availability, integrity, confidentiality)
-   * @returns Required security level for the component
+   * Get framework required security level
    */
   public getFrameworkRequiredLevel(
     framework: string,
-    component: 'availability' | 'integrity' | 'confidentiality'
+    component: "availability" | "integrity" | "confidentiality"
   ): SecurityLevel {
-    return ComplianceService.getFrameworkRequiredLevel(framework, component);
+    // Normalize framework name to handle case insensitivity
+    const normalizedFramework = framework.toUpperCase();
+
+    // Framework-specific requirements
+    if (normalizedFramework.includes("HIPAA")) {
+      // HIPAA requires high security for all components
+      return "High";
+    } else if (normalizedFramework.includes("PCI")) {
+      // PCI DSS requires high security for most components
+      return component === "confidentiality" ? "Very High" : "High";
+    } else if (normalizedFramework.includes("GDPR")) {
+      // GDPR has different requirements per component
+      switch (component) {
+        case "confidentiality": return "High";
+        case "integrity": return "Moderate";
+        case "availability": return "Moderate";
+      }
+    } else if (normalizedFramework.includes("CSF")) {
+      // NIST CSF has lower baseline requirements
+      return "Low";
+    }
+
+    // Default to moderate for unknown frameworks
+    return "Moderate";
   }
-  
+
   /**
-   * Check if a framework is applicable to a specific industry or region
-   * 
-   * @param framework - Framework name
-   * @param industry - Industry name
-   * @param region - Region name
-   * @returns True if the framework is applicable
+   * Check if a framework is applicable to a specific industry/region
    */
   public isFrameworkApplicable(
     framework: string,
     industry?: string,
     region?: string
   ): boolean {
-    return ComplianceService.isFrameworkApplicable(framework, industry, region);
+    // Normalize inputs to handle case insensitivity
+    const normalizedFramework = framework.toLowerCase();
+    const normalizedIndustry = industry?.toLowerCase() || "";
+    const normalizedRegion = region?.toLowerCase() || "";
+
+    // Industry-specific frameworks
+    if (normalizedFramework.includes("hipaa") || normalizedFramework.includes("hitech")) {
+      return !industry || normalizedIndustry.includes("health") || normalizedRegion.includes("us");
+    }
+
+    if (normalizedFramework.includes("pci")) {
+      return !industry || normalizedIndustry.includes("finance") ||
+        normalizedIndustry.includes("retail") || normalizedIndustry.includes("banking");
+    }
+
+    // Region-specific frameworks
+    if (normalizedFramework.includes("gdpr")) {
+      return !region || normalizedRegion.includes("eu") || normalizedRegion.includes("europe");
+    }
+
+    if (normalizedFramework.includes("nist")) {
+      return !region || normalizedRegion.includes("us") || normalizedRegion.includes("united states");
+    }
+
+    // General frameworks that apply everywhere
+    return true;
+  }
+
+  /**
+   * Generate requirements based on compliance status
+   */
+  private getRequirements(status: ComplianceStatus): string[] {
+    const requirements: string[] = [];
+
+    // Generate requirements based on compliance status
+    if (status.nonCompliantFrameworks.length > 0) {
+      requirements.push("Address critical compliance gaps in non-compliant frameworks");
+    }
+
+    if (status.partiallyCompliantFrameworks.length > 0) {
+      requirements.push("Implement remaining controls for partially compliant frameworks");
+    }
+
+    // Add framework-specific requirements
+    if (status.nonCompliantFrameworks.includes("GDPR") ||
+      status.partiallyCompliantFrameworks.includes("GDPR")) {
+      requirements.push("Implement data protection impact assessments");
+      requirements.push("Establish data subject rights procedures");
+    }
+
+    if (status.nonCompliantFrameworks.includes("HIPAA") ||
+      status.partiallyCompliantFrameworks.includes("HIPAA")) {
+      requirements.push("Develop PHI handling procedures");
+      requirements.push("Implement breach notification process");
+    }
+
+    return requirements;
+  }
+
+  /**
+   * Convert security level to numeric value
+   */
+  private getSecurityLevelValue(level: SecurityLevel): number {
+    switch (level) {
+      case "None": return 0;
+      case "Low": return 1;
+      case "Moderate": return 2;
+      case "High": return 3;
+      case "Very High": return 4;
+      default: return 0;
+    }
   }
 }
 
 /**
- * Factory function for ComplianceServiceAdapter
- * This is included for compatibility with the factory pattern used elsewhere
- * 
- * @param dataProvider - Optional data provider
- * @returns A new ComplianceServiceAdapter instance
+ * Static compatibility methods for ComplianceService
+ * These are used to maintain backward compatibility with existing code
  */
-export function createComplianceServiceAdapter(dataProvider?: any): ComplianceServiceAdapter {
-  return new ComplianceServiceAdapter(dataProvider);
+export class ComplianceService {
+  /**
+   * Get compliance status for a given configuration
+   */
+  public static getComplianceStatus(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel,
+    options?: { industry?: string; region?: string }
+  ): ComplianceStatus & { requirements?: string[]; score?: number } {
+    // Create a temporary adapter with default data provider
+    const adapter = new ComplianceServiceAdapter({} as any);
+    return adapter.getComplianceStatus(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel,
+      options
+    );
+  }
+
+  /**
+   * Get compliance status text
+   */
+  public static getComplianceStatusText(
+    availabilityLevel: SecurityLevel,
+    integrityLevel?: SecurityLevel,
+    confidentialityLevel?: SecurityLevel
+  ): string {
+    // Create a temporary adapter with default data provider
+    const adapter = new ComplianceServiceAdapter({} as any);
+    return adapter.getComplianceStatusText(availabilityLevel, integrityLevel, confidentialityLevel);
+  }
+
+  /**
+   * Get framework description
+   */
+  public static getFrameworkDescription(framework: string): string {
+    // Create a temporary adapter with default data provider
+    const adapter = new ComplianceServiceAdapter({} as any);
+    return adapter.getFrameworkDescription(framework);
+  }
 }
-
-// Add the create method to ComplianceService for backward compatibility with tests
-// Use function property assignment to avoid TypeScript error
-(ComplianceService as any).create = (dataProvider?: any) => new ComplianceServiceAdapter(dataProvider);
-
-export default ComplianceServiceAdapter;
