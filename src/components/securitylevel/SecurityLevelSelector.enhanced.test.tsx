@@ -9,24 +9,51 @@ vi.mock("../../hooks/useCIAOptions", () => {
     availabilityOptions: {
       None: { description: "No availability", technical: "No controls" },
       Low: { description: "Basic availability", technical: "Basic controls" },
-      Moderate: { description: "Standard availability", technical: "Standard controls" },
-      High: { description: "High availability", technical: "Advanced controls" },
-      "Very High": { description: "Maximum availability", technical: "Maximum controls" }
+      Moderate: {
+        description: "Standard availability",
+        technical: "Standard controls",
+      },
+      High: {
+        description: "High availability",
+        technical: "Advanced controls",
+      },
+      "Very High": {
+        description: "Maximum availability",
+        technical: "Maximum controls",
+      },
     },
     integrityOptions: {
       None: { description: "No integrity", technical: "No controls" },
       Low: { description: "Basic integrity", technical: "Basic controls" },
-      Moderate: { description: "Standard integrity", technical: "Standard controls" },
+      Moderate: {
+        description: "Standard integrity",
+        technical: "Standard controls",
+      },
       High: { description: "High integrity", technical: "Advanced controls" },
-      "Very High": { description: "Maximum integrity", technical: "Maximum controls" }
+      "Very High": {
+        description: "Maximum integrity",
+        technical: "Maximum controls",
+      },
     },
     confidentialityOptions: {
       None: { description: "No confidentiality", technical: "No controls" },
-      Low: { description: "Basic confidentiality", technical: "Basic controls" },
-      Moderate: { description: "Standard confidentiality", technical: "Standard controls" },
-      High: { description: "High confidentiality", technical: "Advanced controls" },
-      "Very High": { description: "Maximum confidentiality", technical: "Maximum controls" }
-    }
+      Low: {
+        description: "Basic confidentiality",
+        technical: "Basic controls",
+      },
+      Moderate: {
+        description: "Standard confidentiality",
+        technical: "Standard controls",
+      },
+      High: {
+        description: "High confidentiality",
+        technical: "Advanced controls",
+      },
+      "Very High": {
+        description: "Maximum confidentiality",
+        technical: "Maximum controls",
+      },
+    },
   };
 
   return {
@@ -40,35 +67,35 @@ vi.mock("../../hooks/useCIAOptions", () => {
   };
 });
 
-// Mock Selection component
+// Mock the Selection component correctly with proper type annotations
 vi.mock("./Selection", () => ({
   __esModule: true,
   default: ({
     id,
     label,
     value,
-    onChange,
     options,
-    "data-testid": testId,
+    onChange,
+    testId,
   }: {
     id: string;
     label: string;
     value: string;
+    options: string[];
     onChange: (value: string) => void;
-    options: Array<{ value: string; label: string }>;
-    "data-testid"?: string;
+    testId?: string;
   }) => (
-    <div>
+    <div data-testid={testId || `mock-selection-${id}`}>
       <label htmlFor={id}>{label}</label>
       <select
         id={id}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
-        data-testid={testId || id}
+        onChange={(e) => onChange(e.target.value as SecurityLevel)}
+        data-testid={`${id}-select`}
       >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
+        {options.map((opt: string) => (
+          <option key={opt} value={opt}>
+            {opt}
           </option>
         ))}
       </select>
@@ -106,7 +133,7 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
 
   it("handles availability change correctly", () => {
     const handleChange = vi.fn();
-    
+
     const { getByTestId } = render(
       <SecurityLevelSelector
         {...defaultProps}
@@ -123,7 +150,7 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
 
   it("handles integrity change correctly", () => {
     const handleChange = vi.fn();
-    
+
     const { getByTestId } = render(
       <SecurityLevelSelector
         {...defaultProps}
@@ -137,7 +164,7 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
 
   it("handles confidentiality change correctly", () => {
     const handleChange = vi.fn();
-    
+
     const { getByTestId } = render(
       <SecurityLevelSelector
         {...defaultProps}
@@ -150,11 +177,7 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
   });
 
   it("handles keyboard navigation in dropdowns", () => {
-    const { getByTestId } = render(
-      <SecurityLevelSelector
-        {...defaultProps}
-      />
-    );
+    const { getByTestId } = render(<SecurityLevelSelector {...defaultProps} />);
 
     // Just check that the component renders
     expect(getByTestId("test-selector")).toBeInTheDocument();
@@ -184,7 +207,7 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
     // Mock a mobile viewport width
     global.innerWidth = 400;
     global.dispatchEvent(new Event("resize"));
-    
+
     const { getByTestId } = render(
       <SecurityLevelSelector
         availabilityLevel="Low"
@@ -219,7 +242,7 @@ describe("SecurityLevelSelector Enhanced Tests", () => {
     const availabilitySelect = getByLabelText(/availability/i);
     const integritySelect = getByLabelText(/integrity/i);
     const confidentialitySelect = getByLabelText(/confidentiality/i);
-    
+
     expect(availabilitySelect).toBeInTheDocument();
     expect(integritySelect).toBeInTheDocument();
     expect(confidentialitySelect).toBeInTheDocument();

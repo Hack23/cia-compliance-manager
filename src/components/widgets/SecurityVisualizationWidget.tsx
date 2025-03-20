@@ -1,4 +1,14 @@
-import { ArcElement, Chart, ChartConfiguration, Legend, LineElement, PointElement, RadarController, RadialLinearScale, Tooltip } from "chart.js";
+import {
+  ArcElement,
+  Chart,
+  ChartConfiguration,
+  Legend,
+  LineElement,
+  PointElement,
+  RadarController,
+  RadialLinearScale,
+  Tooltip,
+} from "chart.js";
 import React, { useEffect, useMemo, useRef } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../constants/appConstants";
 import { CHART_TEST_IDS } from "../../constants/testIds";
@@ -10,19 +20,28 @@ import { SecurityRiskScore } from "../charts/SecurityRiskScore";
 import WidgetContainer from "../common/WidgetContainer";
 
 // Register the required chart.js components - fix: add RadialLinearScale and remove LinearScale
-Chart.register(RadarController, ArcElement, PointElement, RadialLinearScale, LineElement, Tooltip, Legend);
+Chart.register(
+  RadarController,
+  ArcElement,
+  PointElement,
+  RadialLinearScale,
+  LineElement,
+  Tooltip,
+  Legend
+);
 
-export interface SecurityVisualizationWidgetProps extends WithSecurityLevelProps {
+export interface SecurityVisualizationWidgetProps
+  extends WithSecurityLevelProps {
   /**
    * Optional CSS class name
    */
   className?: string;
-  
+
   /**
    * Optional test ID for automated testing
    */
   testId?: string;
-  
+
   /**
    * Optional security level override
    */
@@ -31,14 +50,16 @@ export interface SecurityVisualizationWidgetProps extends WithSecurityLevelProps
 
 /**
  * Security Visualization Widget provides visual representation of security posture
- * 
+ *
  * ## Business Perspective
- * 
+ *
  * This widget visualizes the organization's security posture across the CIA triad,
  * helping security professionals and executives identify gaps and balance security
  * investments across confidentiality, integrity, and availability domains. 📊
  */
-const SecurityVisualizationWidget: React.FC<SecurityVisualizationWidgetProps> = ({
+const SecurityVisualizationWidget: React.FC<
+  SecurityVisualizationWidgetProps
+> = ({
   availabilityLevel,
   integrityLevel,
   confidentialityLevel,
@@ -57,7 +78,8 @@ const SecurityVisualizationWidget: React.FC<SecurityVisualizationWidgetProps> = 
 
   // Calculate the overall security score (0-100)
   const securityScore = useMemo(() => {
-    const totalValue = availabilityValue + integrityValue + confidentialityValue;
+    const totalValue =
+      availabilityValue + integrityValue + confidentialityValue;
     const maxPossibleValue = 12; // 3 components x maximum value of 4
     return Math.round((totalValue / maxPossibleValue) * 100);
   }, [availabilityValue, integrityValue, confidentialityValue]);
@@ -73,6 +95,20 @@ const SecurityVisualizationWidget: React.FC<SecurityVisualizationWidgetProps> = 
 
   // Create or update the chart when security levels change - add proper cleanup
   useEffect(() => {
+    // Initialize Chart.js - fix: remove registerables which is undefined
+    // Instead of Chart.register(...registerables);
+    // The registration is already done at the top of the file
+
+    // Handle test environment - this conditional prevents errors in test environment
+    if (typeof window !== "undefined" && !window.ResizeObserver) {
+      window.ResizeObserver = class MockResizeObserver {
+        constructor(callback: ResizeObserverCallback) {}
+        observe() {}
+        unobserve() {}
+        disconnect() {}
+      };
+    }
+
     if (!chartRef.current) return;
 
     // Clean up previous chart instance
@@ -135,7 +171,13 @@ const SecurityVisualizationWidget: React.FC<SecurityVisualizationWidgetProps> = 
             callbacks: {
               label: function (context) {
                 const value = context.raw as number;
-                const securityLevels = ["None", "Low", "Moderate", "High", "Very High"];
+                const securityLevels = [
+                  "None",
+                  "Low",
+                  "Moderate",
+                  "High",
+                  "Very High",
+                ];
                 const levelIndex = Math.round((value / 100) * 4);
                 return `${context.dataset.label}: ${securityLevels[levelIndex]} (${value}%)`;
               },
@@ -174,34 +216,28 @@ const SecurityVisualizationWidget: React.FC<SecurityVisualizationWidgetProps> = 
             />
 
             <div className="mt-4 grid grid-cols-3 w-full text-center">
-              <div 
+              <div
                 className="text-blue-600 dark:text-blue-400"
                 data-testid={CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE}
               >
                 <div className="text-sm mb-1">Availability</div>
-                <div className="font-medium">
-                  {availabilityLevel}
-                </div>
+                <div className="font-medium">{availabilityLevel}</div>
               </div>
 
-              <div 
+              <div
                 className="text-green-600 dark:text-green-400"
                 data-testid={CHART_TEST_IDS.RADAR_INTEGRITY_VALUE}
               >
                 <div className="text-sm mb-1">Integrity</div>
-                <div className="font-medium">
-                  {integrityLevel}
-                </div>
+                <div className="font-medium">{integrityLevel}</div>
               </div>
 
-              <div 
+              <div
                 className="text-purple-600 dark:text-purple-400"
                 data-testid={CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE}
               >
                 <div className="text-sm mb-1">Confidentiality</div>
-                <div className="font-medium">
-                  {confidentialityLevel}
-                </div>
+                <div className="font-medium">{confidentialityLevel}</div>
               </div>
             </div>
           </div>
@@ -217,19 +253,26 @@ const SecurityVisualizationWidget: React.FC<SecurityVisualizationWidgetProps> = 
         </div>
 
         <div className="mt-6 bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
-          <h3 className="text-lg font-medium mb-3">Security Posture Analysis</h3>
+          <h3 className="text-lg font-medium mb-3">
+            Security Posture Analysis
+          </h3>
           <div className="text-sm text-gray-600 dark:text-gray-400 space-y-2">
             <p>
-              This visualization shows your current security posture across the CIA triad
-              (Confidentiality, Integrity, Availability) compared to a target "High" security
-              level recommended for most business applications.
+              This visualization shows your current security posture across the
+              CIA triad (Confidentiality, Integrity, Availability) compared to a
+              target "High" security level recommended for most business
+              applications.
             </p>
             <p>
-              Your overall security score is <span className="font-medium">{securityScore}%</span>,
-              which indicates a <span className="font-medium">{riskLevel}</span> posture.
+              Your overall security score is{" "}
+              <span className="font-medium">{securityScore}%</span>, which
+              indicates a <span className="font-medium">{riskLevel}</span>{" "}
+              posture.
               {securityScore < 60 && (
                 <span className="text-red-600 dark:text-red-400 font-medium">
-                  {" "}Consider improving the areas with lower scores to enhance your overall security posture.
+                  {" "}
+                  Consider improving the areas with lower scores to enhance your
+                  overall security posture.
                 </span>
               )}
             </p>
