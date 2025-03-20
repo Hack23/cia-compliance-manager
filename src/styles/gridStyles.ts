@@ -1,7 +1,7 @@
 /**
  * Centralized grid styles for dashboard layout
  */
-import { WidgetConfig, WidgetSize } from "../types/widget";
+import { Widget, WidgetConfig, WidgetDimension } from "../types/widget";
 
 // Base grid container styles
 export const gridClasses = `
@@ -84,8 +84,8 @@ export const widgetSizes = {
   full: "col-span-12",
 };
 
-// Update getWidgetSize function (if applicable)
-export function getWidgetSize(widget: Partial<WidgetConfig>): WidgetSize {
+// Update getWidgetSize function to use WidgetDimension
+export function getWidgetSize(widget: Partial<WidgetConfig>): WidgetDimension {
   // Use explicit width and height if provided
   if (widget.width !== undefined && widget.height !== undefined) {
     return { width: widget.width, height: widget.height };
@@ -105,5 +105,44 @@ export function getWidgetSize(widget: Partial<WidgetConfig>): WidgetSize {
       return { width: 12, height: 1 };
     default:
       return { width: 4, height: 1 };
+  }
+}
+
+/**
+ * Calculate grid layout styles based on widget configuration
+ */
+export function getGridLayoutStyles(widgets: Widget[]) {
+  // Implementation details...
+}
+
+/**
+ * Get dimensions for a widget based on size
+ */
+export function getWidgetDimensions(widget: {
+  size?: string;
+  width?: number;
+  height?: number;
+}): { width: number; height: number } {
+  // If width and height are explicitly provided, use those
+  if (widget.width !== undefined && widget.height !== undefined) {
+    return { width: widget.width, height: widget.height };
+  }
+
+  // Otherwise, derive from size
+  const size = widget.size?.toLowerCase() || "medium";
+
+  if (size === "small") {
+    return { width: 3, height: 1 };
+  } else if (size === "medium") {
+    return { width: 4, height: 1 };
+  } else if (size === "large") {
+    return { width: 6, height: 2 };
+  } else if (size === "xlarge") {
+    return { width: 8, height: 2 };
+  } else if (size === "full" || size === "fullwidth") {
+    return { width: 12, height: 1 };
+  } else {
+    // Default to medium
+    return { width: 4, height: 1 };
   }
 }

@@ -20,31 +20,95 @@
 
 // Core utilities
 export * from "./colorUtils";
-// Export levelValuesUtils which has the primary implementation of getSecurityLevelValue
-export * from "./levelValuesUtils";
-// Export everything from securityDefaults
-export * from "./securityDefaults";
-// Export specific items from securityLevelUtils to avoid the name collision
-export {
-  getSecurityLevelValue // Corrected from getSecurityLevelFromValue
-  , normalizeSecurityLevel
-} from "./securityLevelUtils";
-// Export typeGuards which includes isSecurityLevel (removed separate export)
-export * from "./typeGuards";
-// Export calculateRiskLevel from cia.utility
-export { calculateRiskLevel } from "../types/cia.utility";
 
-// Widget registration
-export * from "./widgetHelpers";
-export { default as widgetRegistry } from "./widgetRegistry";
+// Format utility exports
+export {
+  formatBudgetPercentage,
+  formatCurrency,
+  formatCurrencyWithOptions,
+  formatDate,
+  formatLargeNumber,
+  formatNumber,
+  formatNumberWithDecimals,
+  formatPercentage,
+  formatRiskLevel,
+  formatTimeframe,
+  formatUptime,
+  toTitleCase
+} from "./formatUtils";
+
+// Level value utilities
+export {
+  calculateOverallSecurityLevel as calculateOverallSecurityLevelFromValues,
+  compareSecurityLevels,
+  getNormalizedSecurityValue, getSecurityLevelValue as getNumericSecurityLevelValue, getSecurityLevelFromValue, SECURITY_LEVEL_VALUES
+} from "./levelValuesUtils";
 
 // Risk utilities
+export * from "./riskUtils";
+
+// Security level utilities with renamed exports to avoid conflicts
 export {
-  getRiskBadgeVariant,
-  getRiskLevelFromSecurityLevel,
-  getRiskScoreFromSecurityLevel,
-  parseRiskLevel
-} from './riskUtils';
+  calculateOverallSecurityLevel, asSecurityLevel as convertToSecurityLevel, formatSecurityLevel as formatSecurityLevelString,
+  getRecommendedSecurityLevel,
+  getSecurityIcon,
+  getSecurityLevelBadgeVariant,
+  getSecurityLevelClass,
+  getSecurityLevelDescription,
+  getSecurityLevelPercentage,
+  getSecurityLevelValue,
+  isSecurityLevel as isValidSecurityLevel,
+  meetsComplianceRequirements,
+  normalizeSecurityLevel
+} from "./securityLevelUtils";
+
+// Widget helpers
+export {
+  formatSecurityLevel as formatSecurityLevelFromUnknown,
+  getRiskLevelColorClass,
+  getWidgetColumnSpan,
+  getWidgetRowSpan,
+  handleWidgetError,
+  KeyValuePair,
+  RiskLevelKeyValue,
+  sanitizeWidgetId,
+  SecurityLevelBadge,
+  WidgetEmptyState,
+  WidgetError,
+  WidgetLoading
+} from "./widgetHelpers";
+
+// Limited type guards to avoid conflicts
+export {
+  ensureArray,
+  extractSecurityLevels,
+  hasProperty,
+  hasTagValue,
+  isBusinessImpactCategory,
+  isBusinessImpactDetails,
+  isComplianceFramework,
+  isComplianceFrameworkName,
+  isComplianceFrameworkObject,
+  isComplianceStatus,
+  isNumber,
+  isObject,
+  isRiskLevel,
+  isROIEstimate,
+  isROIMetricDetails,
+  isROIMetrics,
+  isSecurityProfile,
+  isSecurityResource,
+  isString,
+  isWidget,
+  isWidgetConfig,
+  isWidgetProps,
+  isWidgetType,
+  safeAccess,
+  safeNumberConversion
+} from "./typeGuards";
+
+// Export calculateRiskLevel from cia.utility
+export { calculateRiskLevel } from "../types/cia.utility";
 
 // Re-export constants for convenience
 export { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS } from '../constants/riskConstants';

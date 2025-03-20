@@ -2,6 +2,8 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
 import {
+  createMockSecurityLevels,
+  customRender,
   renderWithContext,
   renderWithProviders,
   renderWithRouter,
@@ -169,6 +171,41 @@ describe("test-utils", () => {
 
       // Restore original
       window.matchMedia = originalMatchMedia;
+    });
+  });
+
+  it("customRender should render a component with security context", () => {
+    const TestComponent = () => <div data-testid="test-component">Test</div>;
+    
+    customRender(<TestComponent />);
+    
+    // Verify the component was rendered
+    expect(screen.getByTestId("test-component")).toBeInTheDocument();
+    
+    // Verify the security context provider was used
+    expect(screen.getByTestId("test-security-provider")).toBeInTheDocument();
+  });
+  
+  it("createMockSecurityLevels creates default security levels", () => {
+    const levels = createMockSecurityLevels();
+    
+    expect(levels).toEqual({
+      availabilityLevel: "Moderate",
+      integrityLevel: "Moderate",
+      confidentialityLevel: "Moderate",
+    });
+  });
+  
+  it("createMockSecurityLevels accepts overrides", () => {
+    const levels = createMockSecurityLevels({
+      availabilityLevel: "High",
+      confidentialityLevel: "Very High",
+    });
+    
+    expect(levels).toEqual({
+      availabilityLevel: "Moderate", // Default value
+      integrityLevel: "Moderate",    // Default value
+      confidentialityLevel: "Very High", // Overridden value
     });
   });
 });

@@ -1,39 +1,52 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { SECURITY_LEVELS } from "../constants/appConstants";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../constants/coreConstants";
 import { SecurityLevel } from "../types/cia";
-import { WidgetConfig, WidgetSize, WidgetSizePreset } from "../types/widget";
+// Import using different names to avoid conflicts
+import { WidgetSizeString } from "../types/widget";
 import { getSecurityLevelValue } from "./securityLevelUtils";
+import { isSecurityLevel } from "./typeGuards";
 
-/**
- * Widget error handling utility
- * Creates an error display component
- */
-export function handleWidgetError(
-  error: Error | null | undefined,
-  testId?: string
-): React.ReactElement | null {
-  // Return null when error is null or undefined
-  if (!error) {
-    return null;
-  }
+// Interface for local use
+interface WidgetDimension {
+  width: number;
+  height: number;
+}
 
-  return (
-    <div
-      className="w-full h-full flex flex-col items-center justify-center p-4 text-center"
-      data-testid={testId}
-    >
-      <div className="text-red-500 dark:text-red-400 text-xl mb-2">
-        {/* Replace ExclamationTriangleIcon with simple SVG or emoji */}
-        <span role="img" aria-label="Warning" className="inline h-5 w-5 mr-2">⚠️</span>
-        <span>Error</span>
-      </div>
-      <p className="text-gray-700 dark:text-gray-300">{error.message}</p>
-      <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">
-        Please try refreshing the page or contact support if the problem persists.
-      </p>
-    </div>
-  );
+// Define widget config interface for local use
+interface WidgetConfig {
+  id: string;
+  type: string;
+  title: string;
+  description?: string;
+  icon?: string;
+  priority?: number;
+  visible?: boolean;
+  size?: string;
+  width?: number;
+  height?: number;
+  order?: number;
+  requiredSecurityLevels?: string[];
+  minSecurityLevel?: string | number;
+  maxSecurityLevel?: string | number;
+}
+
+// Define a temporary Widget interface for local use
+interface Widget {
+  id: string;
+  type: string;
+  title: string;
+  size?: WidgetSizeString;
+  initialProps?: Record<string, unknown>;
+}
+
+// Define widget size presets
+enum WidgetSizePreset {
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
+  EXTRA_LARGE = "extraLarge",
+  FULL_WIDTH = "fullWidth"
 }
 
 // Define WidgetType for local use since it's not exported from types/widgets
@@ -220,7 +233,7 @@ export const evaluateWidgetVisibility = (
  * @param level Security level string that might be in any case format
  * @returns Properly formatted security level
  */
-export function formatSecurityLevel(level?: string): string {
+export function formatSecurityLevelString(level?: string): string {
   if (!level) return "None";
 
   // Check if the level matches any valid security level (case insensitive)
@@ -294,25 +307,27 @@ export function asSecurityLevel(level?: string): SecurityLevel {
  * @param widget Widget configuration
  * @returns Width and height values for the widget
  */
-export function getWidgetSize(widget: Partial<WidgetConfig>): WidgetSize {
+export function getWidgetSize(widget: Partial<WidgetConfig>): WidgetDimension {
   // Use explicit width and height if provided
   if (widget.width !== undefined && widget.height !== undefined) {
     return { width: widget.width, height: widget.height };
   }
 
   // Get dimensions based on size preset
-  switch (widget.size) {
-    case WidgetSizePreset.SMALL:
+  const size = widget.size?.toLowerCase();
+  
+  switch (size) {
+    case "small":
       return { width: 1, height: 1 };
-    case WidgetSizePreset.LARGE:
+    case "large":
       return { width: 2, height: 2 };
-    case "extraLarge":
-    case WidgetSizePreset.EXTRA_LARGE:
+    case "extralarge":
+    case "extra-large":
       return { width: 4, height: 2 };
-    case "fullWidth":
-    case WidgetSizePreset.FULL_WIDTH:
+    case "fullwidth":
+    case "full-width":
       return { width: 4, height: 1 };
-    case WidgetSizePreset.MEDIUM:
+    case "medium":
     default:
       return { width: 2, height: 1 };
   }
@@ -426,4 +441,309 @@ export function widgetEmptyState(
  */
 export function getTestId(widgetId: string, elementId: string): string {
   return `${widgetId}-${elementId}`;
+}
+
+/**
+ * Helper utilities for widget components
+ * 
+ * ## Business Perspective
+ * 
+ * These utilities ensure consistent widget behavior across the dashboard,
+ * supporting a unified user experience and reliable security information
+ * presentation. The helper functions improve widget maintainability and
+ * reduce duplication of business logic. 📊
+ * 
+ * Consistent widget handling improves the overall quality of the security
+ * assessment dashboard and makes it more intuitive for users.
+ */
+
+/**
+ * Get widget grid column span based on widget size
+ * 
+ * @param size - Widget size (small, medium, large, full)
+ * @returns CSS grid column span class
+ */
+export function getWidgetColumnSpan(size: WidgetSizeString): string {
+  switch (size) {
+    case "small":
+      return "col-span-1";
+    case "medium":
+      return "col-span-2";
+    case "large":
+      return "col-span-3";
+    case "full":
+      return "col-span-4";
+    default:
+      return "col-span-2"; // Default to medium
+  }
+}
+
+/**
+ * Get widget grid row span based on widget height
+ * 
+ * @param height - Widget height (small, medium, large, auto)
+ * @returns CSS grid row span class
+ */
+export function getWidgetRowSpan(height: "small" | "medium" | "large" | "auto" = "auto"): string {
+  switch (height) {
+    case "small":
+      return "row-span-1";
+    case "medium":
+      return "row-span-2";
+    case "large":
+      return "row-span-3";
+    case "auto":
+    default:
+      return ""; // No specific row span
+  }
+}
+
+/**
+ * Create a widget configuration
+ * 
+ * @param id - Widget ID
+ * @param type - Widget type
+ * @param title - Widget title
+ * @param size - Widget size
+ * @param initialProps - Initial widget props
+ * @returns Widget configuration object
+ */
+export function createWidget(
+  id: string,
+  type: string,
+  title: string,
+  size: WidgetSizeString = "medium",
+  initialProps: Record<string, unknown> = {}
+): Widget {
+  return {
+    id,
+    type,
+    title,
+    size,
+    initialProps,
+  };
+}
+
+/**
+ * Get widget error display component
+ * 
+ * @param message - Error message to display
+ * @returns Error component for widget
+ */
+export function WidgetError({ message = "An error occurred in this widget" }: { message?: string }): React.ReactElement {
+  return (
+    <div className="p-4 bg-red-50 border border-red-200 rounded-md">
+      <h3 className="text-red-800 font-medium mb-2">Widget Error</h3>
+      <p className="text-red-600">{message}</p>
+    </div>
+  );
+}
+
+/**
+ * Get widget loading display component
+ * 
+ * @returns Loading component for widget
+ */
+export function WidgetLoading(): React.ReactElement {
+  return (
+    <div className="flex justify-center items-center h-full min-h-32 p-4">
+      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
+    </div>
+  );
+}
+
+/**
+ * Get widget empty state display component
+ * 
+ * @param message - Message to display in empty state
+ * @returns Empty state component for widget
+ */
+export function WidgetEmptyState({ message = "No data available" }: { message?: string }): React.ReactElement {
+  return (
+    <div className="flex flex-col items-center justify-center h-full min-h-32 p-4 text-gray-500">
+      <svg className="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <p className="text-center">{message}</p>
+    </div>
+  );
+}
+
+/**
+ * Get security level badge component
+ * 
+ * @param level - Security level to display
+ * @returns Security level badge component
+ */
+export function SecurityLevelBadge({ level }: { level: SecurityLevel }): React.ReactElement {
+  // Get color class based on security level
+  const getColorClass = (level: SecurityLevel): string => {
+    switch (level) {
+      case "None":
+        return "bg-red-100 text-red-800";
+      case "Low":
+        return "bg-yellow-100 text-yellow-800";
+      case "Moderate":
+        return "bg-blue-100 text-blue-800";
+      case "High":
+        return "bg-green-100 text-green-800";
+      case "Very High":
+        return "bg-purple-100 text-purple-800";
+      default:
+        return "bg-gray-100 text-gray-800";
+    }
+  };
+
+  const colorClass = getColorClass(level);
+  
+  return (
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${colorClass}`}>
+      {level}
+    </span>
+  );
+}
+
+/**
+ * Format security level from any input
+ * 
+ * @param level - Input level that may need normalization
+ * @returns Normalized SecurityLevel or default
+ */
+export function formatSecurityLevel(level: unknown): SecurityLevel {
+  if (isSecurityLevel(level)) {
+    return level;
+  }
+  
+  if (typeof level === "string") {
+    const normalizedLevel = level.trim();
+    
+    if (/^none$/i.test(normalizedLevel)) return "None";
+    if (/^low$/i.test(normalizedLevel)) return "Low";
+    if (/^(moderate|medium)$/i.test(normalizedLevel)) return "Moderate";
+    if (/^high$/i.test(normalizedLevel)) return "High";
+    if (/^very\s*high$/i.test(normalizedLevel)) return "Very High";
+  }
+  
+  return "None";
+}
+
+/**
+ * Get risk level color class
+ * 
+ * @param riskLevel - Risk level string
+ * @returns CSS color class for the risk level
+ */
+export function getRiskLevelColorClass(riskLevel: string): string {
+  if (riskLevel.includes("Critical")) {
+    return "text-red-600";
+  } else if (riskLevel.includes("High")) {
+    return "text-orange-600";
+  } else if (riskLevel.includes("Medium")) {
+    return "text-yellow-600";
+  } else if (riskLevel.includes("Low")) {
+    return "text-green-600";
+  } else if (riskLevel.includes("Minimal")) {
+    return "text-blue-600";
+  } else {
+    return "text-gray-600";
+  }
+}
+
+/**
+ * Parse and sanitize widget ID
+ * 
+ * @param id - Raw widget ID
+ * @returns Sanitized widget ID
+ */
+export function sanitizeWidgetId(id: string): string {
+  return id.toLowerCase().replace(/[^a-z0-9-]/g, "-");
+}
+
+/**
+ * Creates a consistent key-value display component
+ * 
+ * @param label - Label text
+ * @param value - Value to display
+ * @param testId - Optional test ID
+ * @returns Key-value component
+ */
+export function KeyValuePair({ 
+  label, 
+  value, 
+  testId 
+}: { 
+  label: string; 
+  value: React.ReactNode; 
+  testId?: string;
+}): React.ReactElement {
+  return (
+    <div className="flex flex-col mb-2" data-testid={testId}>
+      <span className="text-sm text-gray-500">{label}</span>
+      <span className="font-medium">{value}</span>
+    </div>
+  );
+}
+
+/**
+ * Create a key-value pair with risk level styling
+ * 
+ * @param label - Label text
+ * @param value - Risk level value
+ * @param testId - Optional test ID
+ * @returns Styled risk level component
+ */
+export function RiskLevelKeyValue({
+  label,
+  value,
+  testId,
+}: {
+  label: string;
+  value: string;
+  testId?: string;
+}): React.ReactElement {
+  const colorClass = getRiskLevelColorClass(value);
+  
+  return (
+    <div className="flex flex-col mb-2" data-testid={testId}>
+      <span className="text-sm text-gray-500">{label}</span>
+      <span className={`font-medium ${colorClass}`}>{value}</span>
+    </div>
+  );
+}
+
+/**
+ * Handle widget errors and display error message
+ * 
+ * @param error - Error to display
+ * @param testId - Test ID for error component
+ * @returns Error component or null if no error
+ */
+export function handleWidgetError(error: Error | null | undefined, testId: string): React.ReactNode {
+  if (!error) return null;
+  
+  return (
+    <div 
+      data-testid={testId} 
+      className="p-4 bg-red-50 border border-red-200 rounded-md text-red-800"
+    >
+      <div className="flex items-start">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          className="h-5 w-5 text-red-600 mr-2 mt-0.5" 
+          viewBox="0 0 20 20" 
+          fill="currentColor"
+        >
+          <path 
+            fillRule="evenodd" 
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" 
+            clipRule="evenodd" 
+          />
+        </svg>
+        <div>
+          <h3 className="text-sm font-medium mb-1">Widget Error</h3>
+          <p className="text-sm">{error.message}</p>
+        </div>
+      </div>
+    </div>
+  );
 }

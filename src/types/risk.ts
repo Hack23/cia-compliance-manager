@@ -1,12 +1,86 @@
+import { SecurityLevel } from "./cia";
+
 /**
- * Risk level types for the application
+ * Risk-related type definitions
  * 
  * ## Business Perspective
  * 
- * These type definitions ensure consistent representation of risk across
- * the application, supporting reliable risk assessment, visualization,
- * and business impact analysis. 📊
+ * These types provide a structured way to represent and evaluate security risks,
+ * supporting consistent risk assessment and communication across the application. ⚠️
+ * 
+ * Well-defined risk types enable organizations to make informed security decisions
+ * based on standardized risk criteria.
  */
+
+/**
+ * Risk level identifiers
+ */
+export type RiskLevel =
+  | "Critical"
+  | "Critical Risk"
+  | "High"
+  | "High Risk"
+  | "Medium"
+  | "Medium Risk"
+  | "Low"
+  | "Low Risk"
+  | "Minimal"
+  | "Minimal Risk"
+  | "Unknown"
+  | "Unknown Risk";
+
+/**
+ * Risk assessment details
+ */
+export interface RiskAssessment {
+  level: RiskLevel;
+  score?: number;
+  description: string;
+  mitigationRecommendations?: string[];
+  businessImpact?: string;
+  likelihoodScore?: number;
+  impactScore?: number;
+}
+
+/**
+ * Risk matrix cell
+ */
+export interface RiskMatrixCell {
+  likelihood: number;
+  impact: number;
+  level: RiskLevel;
+  color: string;
+}
+
+/**
+ * Risk matrix configuration
+ */
+export interface RiskMatrix {
+  rows: number;
+  columns: number;
+  cells: RiskMatrixCell[];
+}
+
+/**
+ * Risk treatment action
+ */
+export type RiskTreatmentAction =
+  | "Accept"
+  | "Mitigate"
+  | "Transfer"
+  | "Avoid"
+  | "Monitor";
+
+/**
+ * Risk treatment plan
+ */
+export interface RiskTreatmentPlan {
+  action: RiskTreatmentAction;
+  description: string;
+  responsibleParty?: string;
+  dueDate?: Date;
+  status?: "Not Started" | "In Progress" | "Completed" | "Overdue";
+}
 
 /**
  * Risk level string literals
@@ -32,10 +106,7 @@ export interface RiskLevelValue {
 export const SECURITY_TO_RISK_MAPPING: Record<SecurityLevel, RiskLevelLiteral> = {
   "None": "Critical",
   "Low": "High",
-  "Moderate": "Medium", 
+  "Moderate": "Medium",
   "High": "Low",
   "Very High": "Minimal"
 };
-
-// Add this import at the top
-import { SecurityLevel } from "./cia";

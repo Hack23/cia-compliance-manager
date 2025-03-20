@@ -593,3 +593,140 @@ export function getImplementationCost(costObj: any): number {
   }
   return total;
 }
+
+/**
+ * Domain-specific type guards for consistent type checking
+ *
+ * ## Business Perspective
+ *
+ * These type guards ensure reliable runtime validation of critical
+ * security and compliance data types, reducing bugs and improving
+ * the stability of security assessments and compliance mappings. 🛡️
+ *
+ * Consistent type validation is essential for maintaining data integrity
+ * across the application's security models and calculations.
+ */
+
+/**
+ * Type guard for business impact category
+ * 
+ * @param value - Value to check
+ * @returns Whether the value is a valid business impact category
+ */
+export function isBusinessImpactCategory(value: unknown): boolean {
+  if (typeof value !== "string") return false;
+
+  return [
+    "financial",
+    "operational",
+    "regulatory",
+    "reputational",
+    "strategic"
+  ].includes(value.toLowerCase());
+}
+
+/**
+ * Type guard for compliance framework name
+ * 
+ * @param value - Value to check
+ * @returns Whether the value is a valid compliance framework name
+ */
+export function isComplianceFrameworkName(value: unknown): boolean {
+  if (typeof value !== "string") return false;
+
+  return [
+    "ISO 27001",
+    "NIST CSF",
+    "NIST 800-53",
+    "GDPR",
+    "HIPAA",
+    "PCI DSS",
+    "SOC2"
+  ].includes(value);
+}
+
+/**
+ * Type guard for compliance framework object
+ * 
+ * @param value - Value to check
+ * @returns Whether the value is a valid compliance framework object
+ */
+export function isComplianceFrameworkObject(value: unknown): boolean {
+  if (!value || typeof value !== "object") return false;
+
+  const obj = value as Record<string, unknown>;
+
+  return (
+    typeof obj.name === "string" &&
+    typeof obj.description === "string" &&
+    (Array.isArray(obj.requirements) || obj.requirements === undefined)
+  );
+}
+
+/**
+ * Type guard for risk level
+ * 
+ * @param value - Value to check
+ * @returns Whether the value is a valid risk level
+ */
+export function isRiskLevel(value: unknown): boolean {
+  if (typeof value !== "string") return false;
+
+  return [
+    "Critical",
+    "Critical Risk",
+    "High",
+    "High Risk",
+    "Medium",
+    "Medium Risk",
+    "Low",
+    "Low Risk",
+    "Minimal",
+    "Minimal Risk",
+    "Unknown",
+    "Unknown Risk"
+  ].includes(value);
+}
+
+/**
+ * Type guard for widget
+ * 
+ * @param value - Value to check
+ * @returns Whether the value is a valid widget
+ */
+export function isWidget(value: unknown): boolean {
+  if (!value || typeof value !== "object") return false;
+
+  const obj = value as Record<string, unknown>;
+
+  return (
+    typeof obj.id === "string" &&
+    typeof obj.type === "string" &&
+    typeof obj.title === "string"
+  );
+}
+
+/**
+ * Type guard for widget type
+ * 
+ * @param value - Value to check
+ * @returns Whether the value is a valid widget type
+ */
+export function isWidgetType(value: unknown): boolean {
+  if (typeof value !== "string") return false;
+
+  return [
+    "security-level",
+    "security-summary",
+    "security-visualization",
+    "compliance-status",
+    "value-creation",
+    "cost-estimation",
+    "business-impact",
+    "technical-details",
+    "availability-impact",
+    "integrity-impact",
+    "confidentiality-impact",
+    "security-resources"
+  ].includes(value);
+}

@@ -164,3 +164,126 @@ export function calculateOverallSecurityLevel(
   ];
   return securityLevels[avg];
 }
+
+/**
+ * Check if a string is a valid security level
+ * 
+ * @param value - Value to check
+ * @returns Type guard for SecurityLevel
+ */
+export function isSecurityLevel(value: unknown): value is SecurityLevel {
+  if (typeof value !== "string") return false;
+
+  return ["None", "Low", "Moderate", "High", "Very High"].includes(value as string);
+}
+
+/**
+ * Convert string to security level, with fallback
+ * 
+ * @param value - Value to convert
+ * @param fallback - Fallback level if invalid
+ * @returns Valid security level
+ */
+export function asSecurityLevel(value: string, fallback: SecurityLevel = "None"): SecurityLevel {
+  return isSecurityLevel(value) ? value : fallback;
+}
+
+/**
+ * Get security level description
+ * 
+ * @param level - Security level
+ * @returns Description of the security level
+ */
+export function getSecurityLevelDescription(level: SecurityLevel): string {
+  const descriptions: Record<SecurityLevel, string> = {
+    "None": "No security controls implemented",
+    "Low": "Basic security controls with minimal protection",
+    "Moderate": "Standard security controls with adequate protection",
+    "High": "Advanced security controls with strong protection",
+    "Very High": "Maximum security controls with comprehensive protection"
+  };
+
+  return descriptions[level] || "Unknown security level";
+}
+
+/**
+ * Determine if a security level meets compliance requirements
+ * 
+ * @param level - Security level to check
+ * @param framework - Compliance framework to check against
+ * @returns Whether the level meets requirements
+ */
+export function meetsComplianceRequirements(
+  level: SecurityLevel,
+  framework: string
+): boolean {
+  const minLevelsByFramework: Record<string, SecurityLevel> = {
+    "SOC2": "Moderate",
+    "ISO27001": "Moderate",
+    "PCI-DSS": "High",
+    "HIPAA": "High",
+    "NIST": "High",
+    "GDPR": "Moderate",
+    "CCPA": "Moderate"
+  };
+
+  const requiredLevel = minLevelsByFramework[framework] || "Low";
+
+  // Compare security level values
+  return getSecurityLevelValue(level) >= getSecurityLevelValue(requiredLevel);
+}
+
+/**
+ * Get security icon for a security level
+ * 
+ * @param level - Security level
+ * @returns Icon representing the security level
+ */
+export function getSecurityIcon(level: SecurityLevel): string {
+  const icons: Record<SecurityLevel, string> = {
+    "None": "⚠️",
+    "Low": "🔑",
+    "Moderate": "🔒",
+    "High": "🛡️",
+    "Very High": "🔐"
+  };
+
+  return icons[level] || "❓";
+}
+
+/**
+ * Get recommended security level based on data sensitivity
+ * 
+ * @param dataSensitivity - Data sensitivity level (1-5)
+ * @returns Recommended security level
+ */
+export function getRecommendedSecurityLevel(dataSensitivity: number): SecurityLevel {
+  if (dataSensitivity <= 1) return "None";
+  if (dataSensitivity === 2) return "Low";
+  if (dataSensitivity === 3) return "Moderate";
+  if (dataSensitivity === 4) return "High";
+  return "Very High";
+}
+
+/**
+ * Format a security level string consistently
+ * 
+ * @param level - Level string to format
+ * @returns Formatted security level or original string
+ */
+export function formatSecurityLevel(level?: string): SecurityLevel | string {
+  if (!level) return "Not Specified";
+
+  // Check for case-insensitive variations and normalize
+  const normalizedLevel = level.trim();
+
+  // Check for common value variations
+  if (/^none$/i.test(normalizedLevel)) return "None";
+  if (/^low$/i.test(normalizedLevel)) return "Low";
+  if (/^(moderate|medium)$/i.test(normalizedLevel)) return "Moderate";
+  if (/^high$/i.test(normalizedLevel)) return "High";
+  if (/^(very.?high|maximum)$/i.test(normalizedLevel)) return "Very High";
+
+  // If no match found, return original
+  return level;
+}

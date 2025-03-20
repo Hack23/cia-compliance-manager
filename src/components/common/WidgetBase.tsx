@@ -1,86 +1,76 @@
 import React from "react";
-import { WidgetSize } from "../../types/widget";
-import { getTestId } from "../../utils/widgetHelpers";
+import { WidgetSizeString } from "../../types/widget";
+import { getWidgetColumnSpan } from "../../utils/widgetHelpers";
 
-interface WidgetBaseProps {
-  children: React.ReactNode;
-  title?: string;
-  className?: string;
+/**
+ * Base props for all widgets
+ */
+export interface WidgetBaseProps {
+  id?: string;
   testId?: string;
-  titleTestId?: string;
-  contentTestId?: string;
-  loading?: boolean;
+  title?: string;
+  description?: string;
+  className?: string;
+  children?: React.ReactNode;
+  size?: WidgetSizeString;
+  isLoading?: boolean;
   error?: Error | null;
-  size?: WidgetSize;
-  icon?: React.ReactNode;
 }
 
 /**
- * Base component for all dashboard widgets with standard layout and styling
+ * Base component for all widgets
+ * 
+ * Provides consistent styling and structure for widgets
  */
-const WidgetBase: React.FC<WidgetBaseProps> = ({
-  children,
-  title,
-  className = "",
+export const WidgetBase: React.FC<WidgetBaseProps> = ({
+  id,
   testId,
-  titleTestId,
-  contentTestId,
-  loading = false,
+  title,
+  description,
+  className = "",
+  children,
+  size = "medium",
+  isLoading = false,
   error = null,
-  size,
-  icon,
 }) => {
-  // Determine test IDs for child elements
-  const baseTestId = testId || "widget-base";
-  const titleId = titleTestId || `${baseTestId}-title`;
-  const contentId = contentTestId || `${baseTestId}-content`;
+  // CSS class for the size
+  const sizeClass = getWidgetColumnSpan(size);
 
-  // Calculate grid sizing styles if size object provided
-  const sizeStyles = size
-    ? {
-        gridColumn: `span ${size.width}`,
-        gridRow: `span ${size.height}`,
-      }
-    : {};
+  // Determine grid span based on size
+  const gridStyle = {
+    gridColumn: `span ${size === "small" ? 1 : size === "medium" ? 2 : size === "large" ? 3 : 4}`,
+    gridRow: `span ${size === "small" ? 1 : size === "large" ? 2 : 1}`,
+  };
 
   return (
     <div
-      data-testid={baseTestId}
-      className={`widget bg-white dark:bg-gray-800 rounded-lg shadow-md ${className}`}
-      style={sizeStyles}
+      id={id}
+      data-testid={testId}
+      className={`widget bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 overflow-hidden ${sizeClass} ${className}`}
+      style={gridStyle}
     >
-      {/* Widget header with title if provided */}
       {title && (
-        <div
-          data-testid={getTestId(baseTestId, "header")}
-          className="widget-header border-b border-gray-200 dark:border-gray-700 p-3 flex items-center"
-        >
-          {icon && <span className="mr-2">{icon}</span>}
-          <h3
-            data-testid={titleId}
-            className="text-sm font-medium text-gray-700 dark:text-gray-300"
-          >
+        <div className="widget-header mb-4">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white">
             {title}
           </h3>
+          {description && (
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              {description}
+            </p>
+          )}
         </div>
       )}
-
-      {/* Widget content area */}
-      <div data-testid={contentId} className="widget-content p-4 h-full">
-        {loading ? (
-          <div className="flex justify-center items-center h-full">
-            <div
-              data-testid={`${baseTestId}-loading`}
-              className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"
-            ></div>
+      
+      <div className="widget-content">
+        {isLoading ? (
+          <div className="flex justify-center items-center h-full py-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary-500"></div>
           </div>
         ) : error ? (
-          <div
-            data-testid={`${baseTestId}-error`}
-            className="text-red-500 dark:text-red-400"
-          >
-            <p className="font-bold">Error:</p>
-            <p>{error.message}</p>
+          <div className="text-red-500 dark:text-red-400 p-4 text-center">
+            <p className="font-medium">Error</p>
+            <p className="text-sm">{error.message}</p>
           </div>
         ) : (
           children
@@ -89,5 +79,3 @@ const WidgetBase: React.FC<WidgetBaseProps> = ({
     </div>
   );
 };
-
-export default WidgetBase;

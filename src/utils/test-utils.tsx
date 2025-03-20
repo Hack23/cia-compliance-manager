@@ -1,91 +1,164 @@
 import { render, RenderOptions } from "@testing-library/react";
-import React, { ComponentType, ReactElement } from "react";
+import React, { FC, ReactElement } from "react";
+import { createTestDataProvider } from "../data/testDataProvider";
+import { SecurityLevel } from "../types/cia";
 
-// Add the TestProviderProps interface
+/**
+ * Test utilities for rendering components in tests
+ * 
+ * ## Business Perspective
+ * 
+ * These utilities ensure consistent test coverage for business-critical
+ * components, helping maintain the reliability of security assessment
+ * features across application updates. 🧪
+ * 
+ * Reliable tests help prevent regressions in security calculations
+ * and compliance mapping that could impact business decisions.
+ */
+
+/**
+ * Interface for custom render options
+ */
+interface CustomRenderOptions extends Omit<RenderOptions, "wrapper"> {
+  securityLevels?: {
+    availabilityLevel?: SecurityLevel;
+    integrityLevel?: SecurityLevel;
+    confidentialityLevel?: SecurityLevel;
+  };
+  testDataProvider?: boolean;
+}
+
+/**
+ * Interface for test provider props
+ */
 export interface TestProviderProps {
-  theme?: "light" | "dark";
-  // Add other context options as needed
+  theme?: 'light' | 'dark';
+  children?: React.ReactNode;
+  // Add any other provider props needed for tests
 }
 
-// Custom wrapper with theme provider
-const TestProvider: React.FC<{
+/**
+ * Security context provider for tests
+ */
+const TestSecurityProvider: FC<{
   children: React.ReactNode;
-  options?: TestProviderProps;
-}> = ({ children, options = { theme: "light" } }) => {
-  return <div data-theme={options.theme}>{children}</div>;
+  securityLevels?: {
+    availabilityLevel?: SecurityLevel;
+    integrityLevel?: SecurityLevel;
+    confidentialityLevel?: SecurityLevel;
+  };
+}> = ({ children, securityLevels = {} }) => {
+  const {
+    availabilityLevel = "Moderate",
+    integrityLevel = "Moderate",
+    confidentialityLevel = "Moderate",
+  } = securityLevels;
+
+  // Simple context wrapper for test rendering
+  return (
+    <div data-testid="test-security-provider" data-security-context="true">
+      <div data-availability={availabilityLevel} />
+      <div data-integrity={integrityLevel} />
+      <div data-confidentiality={confidentialityLevel} />
+      {children}
+    </div>
+  );
 };
 
-// Custom wrapper if needed in the future
-const AllTheProviders: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  return <>{children}</>;
-};
-
-const customRender = (
+/**
+ * Custom render with test security provider
+ * 
+ * @param ui - Component to render
+ * @param options - Custom render options
+ * @returns Rendered component with testing library utilities
+ */
+export function customRender(
   ui: ReactElement,
-  options?: Omit<RenderOptions, "wrapper">
-) => render(ui, { wrapper: AllTheProviders, ...options });
-
-// Add the renderWithContext function
-export function renderWithContext(
-  ui: ReactElement,
-  options?: TestProviderProps,
-  renderOptions?: Omit<RenderOptions, "wrapper">
+  options: CustomRenderOptions = {}
 ) {
-  return render(ui, {
-    wrapper: (props) => <TestProvider options={options} {...props} />,
-    ...renderOptions,
-  });
-}
+  const { securityLevels, testDataProvider = false, ...renderOptions } = options;
 
-// Add the renderWithProviders function
-export function renderWithProviders(
-  ui: ReactElement,
-  providers: Array<React.FC<{ children: React.ReactNode }>>,
-  renderOptions?: Omit<RenderOptions, "wrapper">
-) {
-  const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    return providers.reduce(
-      (acc, Provider) => <Provider>{acc}</Provider>,
-      <>{children}</>
+  // Set up any required test data or providers
+  const Wrapper: FC<{ children: React.ReactNode }> = ({ children }) => {
+    // Initialize test data if needed
+    if (testDataProvider) {
+      // This is just a marker for testing
+      React.useEffect(() => {
+        // For testing purposes - creates a global marker
+        (window as any).__TEST_DATA_PROVIDER__ = createTestDataProvider();
+      }, []);
+    }
+    
+    return (
+      <TestSecurityProvider securityLevels={securityLevels}>
+        {children}
+      </TestSecurityProvider>
     );
   };
 
   return render(ui, { wrapper: Wrapper, ...renderOptions });
 }
 
-// Add the renderWithRouter function
-export function renderWithRouter(ui: ReactElement, route: string = "/") {
-  // Simple mock for router context
-  window.history.pushState({}, "Test page", route);
-  return render(ui);
+/**
+ * Create a mock security level state for testing
+ * 
+ * @param overrides - Any specific security levels to override
+ * @returns Security level state for testing
+ */
+export function createMockSecurityLevels(overrides: Partial<{
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+}> = {}) {
+  return {
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
+    ...overrides
+  };
 }
 
-// Fix the withTestId HOC implementation
-export function withTestId<P extends object>(
-  Component: ComponentType<P>,
-  testId: string
-): ComponentType<P & { "data-testid"?: string }> {
-  const WithTestId = (props: P & { "data-testid"?: string }) => {
-    const { "data-testid": dataTestId, ...restProps } = props;
-    return (
-      <Component data-testid={dataTestId || testId} {...(restProps as P)} />
+/**
+ * Render with context for testing (legacy)
+ */
+export function renderWithContext(
+  ui: React.ReactElement, 
+  options: TestProviderProps = {}
+) {
+  const Wrapper: FC<{ children: React.ReactNode }> = ({ children }) => (
+    <div data-testid="test-provider" {...options}>
+      {children}
+    </div>
+  );
+  
+  return render(ui, { wrapper: Wrapper });
+}
+
+/**
+ * Render with multiple providers
+ */
+export function renderWithProviders(
+  ui: React.ReactElement,
+  providers: Array<(props: { children: React.ReactNode }) => React.ReactElement>
+) {
+  const Wrapper: FC<{ children: React.ReactNode }> = ({ children }) => {
+    return providers.reduceRight(
+      (acc, Provider) => <Provider>{acc}</Provider>,
+      <>{children}</>
     );
   };
-
-  WithTestId.displayName = `WithTestId(${
-    Component.displayName || Component.name || "Component"
-  })`;
-  return WithTestId;
+  
+  return render(ui, { wrapper: Wrapper });
 }
 
-// Fix setupTestEnvironment function to ensure it uses window.matchMedia
+/**
+ * Setup test environment
+ */
 export function setupTestEnvironment() {
-  // Mock window.matchMedia with implementation that will be detected
-  window.matchMedia =
-    window.matchMedia ||
-    vi.fn().mockImplementation((query) => ({
+  // Configure window.matchMedia for tests
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: vi.fn().mockImplementation(query => ({
       matches: false,
       media: query,
       onchange: null,
@@ -94,16 +167,36 @@ export function setupTestEnvironment() {
       addEventListener: vi.fn(),
       removeEventListener: vi.fn(),
       dispatchEvent: vi.fn(),
-    }));
-
-  // Add more environment setup as needed
-  return {
-    cleanup: () => {
-      // Clean up any mocks if needed
-    },
-  };
+    })),
+  });
 }
 
-// Re-export everything
+/**
+ * Render with router
+ */
+export function renderWithRouter(
+  ui: React.ReactElement,
+  route: string = '/'
+) {
+  // Mock router context
+  window.history.pushState({}, 'Test page', route);
+  
+  return render(ui);
+}
+
+/**
+ * Add testId to component
+ */
+export function withTestId<P extends object>(
+  Component: React.ComponentType<P>,
+  testId: string
+): React.FC<P> {
+  return (props: P) => (
+    <Component data-testid={testId} {...props} />
+  );
+}
+
+// Export testing library utilities for convenience
 export * from "@testing-library/react";
 export { customRender as render };
+

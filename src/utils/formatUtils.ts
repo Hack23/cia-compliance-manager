@@ -1,3 +1,19 @@
+import { DISPLAY_FORMAT } from "../constants/testConstants";
+import { SecurityLevel } from "../types/cia";
+
+/**
+ * Utility functions for formatting values consistently across the application
+ * 
+ * ## Business Perspective
+ * 
+ * Consistent formatting ensures that business metrics, costs, and security levels 
+ * are displayed uniformly across the application, improving comprehension and 
+ * professionalism in security reports and dashboards. 📊
+ * 
+ * These utilities support clear communication of risk and investment data to
+ * both technical and business stakeholders.
+ */
+
 /**
  * Converts a string to title case
  *
@@ -12,64 +28,141 @@ export function toTitleCase(str: string): string {
 }
 
 /**
- * Format number as currency
+ * Format a percentage value with consistent display
  * 
- * @param value - Number to format
- * @param currency - Currency code (default: USD)
- * @param locale - Locale for formatting (default: en-US)
- * @returns Formatted currency string
+ * @param value - Numeric value to format as percentage
+ * @param decimalPlaces - Number of decimal places (default: 2)
+ * @returns Formatted percentage string
  */
-export function formatCurrency(
-  value: number, 
-  currency = 'USD', 
-  locale = 'en-US'
+export function formatPercentage(
+  value: number,
+  decimalPlaces: number = DISPLAY_FORMAT.DECIMAL_PLACES
 ): string {
-  // Default fallback format
-  let formattedValue = `${currency} ${value.toLocaleString()}`;
-  
-  try {
-    // Try to use Intl.NumberFormat with the provided locale and currency
-    const formatter = new Intl.NumberFormat(locale, {
-      style: 'currency',
-      currency,
-      maximumFractionDigits: 0,
-    });
-    formattedValue = formatter.format(value);
-  } catch (error) {
-    // If that fails, try with just the default locale
-    try {
-      const formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency,
-        maximumFractionDigits: 0,
-      });
-      formattedValue = formatter.format(value);
-    } catch {
-      // Keep using the fallback format defined above
-    }
-  }
-  
-  return formattedValue;
+  return `${value.toFixed(decimalPlaces)}${DISPLAY_FORMAT.PERCENTAGE_SUFFIX}`;
 }
 
 /**
- * Formats a percentage value
- *
- * ## Business Perspective
- *
- * Consistent percentage formatting enhances readability of ROI calculations,
- * risk assessments, and other metrics that inform business decisions. 📊
- *
- * @param value - The percentage value (e.g. 0.75 for 75%)
- * @param decimalPlaces - Number of decimal places to include
- * @returns Formatted percentage string
+ * Format a currency value with consistent display
+ * 
+ * @param value - Numeric value to format as currency
+ * @param currencyCodeOrDecimals - Either decimal places or currency code
+ * @param locale - Optional locale for formatting
+ * @returns Formatted currency string
  */
-export function formatPercentage(value: number, decimalPlaces = 0): string {
-  return new Intl.NumberFormat(undefined, {
-    style: "percent",
-    minimumFractionDigits: decimalPlaces,
-    maximumFractionDigits: decimalPlaces,
+export function formatCurrency(
+  value: number,
+  currencyCodeOrDecimals: number | string = DISPLAY_FORMAT.DECIMAL_PLACES,
+  locale?: string
+): string {
+  // If the second parameter is a string, assume it's a currency code
+  if (typeof currencyCodeOrDecimals === 'string') {
+    return formatCurrencyWithOptions(value, currencyCodeOrDecimals, locale || 'en-US');
+  }
+
+  // Otherwise, treat it as decimal places
+  return `${DISPLAY_FORMAT.CURRENCY_PREFIX}${value.toFixed(currencyCodeOrDecimals)}`;
+}
+
+/**
+ * Format a currency value with currency code and locale
+ * 
+ * @param value - Numeric value to format
+ * @param currencyCode - Currency code (e.g., 'USD', 'EUR')
+ * @param locale - Locale for formatting (e.g., 'en-US')
+ * @returns Formatted currency string
+ */
+export function formatCurrencyWithOptions(
+  value: number,
+  currencyCode: string = 'USD',
+  locale: string = 'en-US'
+): string {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currencyCode
   }).format(value);
+}
+
+/**
+ * Format security level for display (capitalize first letter)
+ * 
+ * @param level - Security level
+ * @returns Formatted security level string
+ */
+export function formatSecurityLevel(level: SecurityLevel): string {
+  return level;
+}
+
+/**
+ * Format risk level for display
+ * 
+ * @param riskLevel - Risk level string
+ * @returns Formatted risk level string
+ */
+export function formatRiskLevel(riskLevel: string): string {
+  return riskLevel;
+}
+
+/**
+ * Format a number with thousands separators and optional decimal places
+ * 
+ * @param value - Number to format
+ * @param decimalPlaces - Optional decimal places
+ * @returns Formatted number with thousand separators
+ */
+export function formatNumber(value: number, decimalPlaces?: number): string {
+  if (decimalPlaces !== undefined) {
+    return value.toFixed(decimalPlaces);
+  }
+  return value.toLocaleString();
+}
+
+/**
+ * Format a number with specified decimal places
+ * 
+ * @param value - Number to format
+ * @param decimalPlaces - Number of decimal places
+ * @returns Formatted number string
+ */
+export function formatNumberWithDecimals(value: number, decimalPlaces: number): string {
+  return value.toFixed(decimalPlaces);
+}
+
+/**
+ * Format a cost value for budget display (adds "% of IT budget" text)
+ * 
+ * @param value - Cost percentage value
+ * @param isCapex - Whether this is capital expenditure (vs operational)
+ * @returns Formatted budget string
+ */
+export function formatBudgetPercentage(value: number, isCapex: boolean): string {
+  const percentValue = formatPercentage(value);
+  const budgetType = isCapex
+    ? "of IT budget as one-time capital expenditure"
+    : "of IT budget as annual operational expenses";
+
+  return `${percentValue} ${budgetType}`;
+}
+
+/**
+ * Format uptime percentage for availability display
+ * 
+ * @param uptime - Uptime value (e.g., "99.9%")
+ * @returns Formatted uptime string
+ */
+export function formatUptime(uptime: string): string {
+  // If uptime is already formatted, return as is
+  if (uptime.includes('%')) {
+    return uptime;
+  }
+
+  // Try to convert to a percentage if it's a number
+  const uptimeValue = parseFloat(uptime);
+  if (!isNaN(uptimeValue)) {
+    return formatPercentage(uptimeValue);
+  }
+
+  // If not a percentage, return as is
+  return uptime;
 }
 
 /**
@@ -94,22 +187,6 @@ export function formatDate(
 ): string {
   const dateObj = typeof date === "string" ? new Date(date) : date;
   return new Intl.DateTimeFormat(undefined, options).format(dateObj);
-}
-
-/**
- * Formats a number with a specified number of decimal places
- *
- * ## Business Perspective
- *
- * Consistent number formatting enhances readability of security metrics,
- * risk assessments, and cost calculations throughout the application. 📈
- *
- * @param value - The number to format
- * @param decimalPlaces - Number of decimal places (default: 2)
- * @returns Formatted number string
- */
-export function formatNumber(value: number, decimalPlaces = 2): string {
-  return value.toFixed(decimalPlaces);
 }
 
 /**
@@ -170,36 +247,4 @@ export function formatTimeframe(minutes: number): string {
       ? `${days} days, ${remainingHours} hours`
       : `${days} days`;
   }
-}
-
-/**
- * Formats a risk level with appropriate styling indicator
- *
- * ## Business Perspective
- *
- * Consistent risk level presentation helps decision-makers quickly
- * understand the severity of different risks across the application. ⚠️
- *
- * @param riskLevel - The risk level string
- * @returns Formatted risk level with indicator
- */
-export function formatRiskLevel(riskLevel: string): string {
-  const normalizedRisk = riskLevel.toLowerCase();
-
-  if (normalizedRisk.includes("critical")) {
-    return `⚠️ ${riskLevel}`;
-  } else if (normalizedRisk.includes("high")) {
-    return `🔴 ${riskLevel}`;
-  } else if (
-    normalizedRisk.includes("medium") ||
-    normalizedRisk.includes("moderate")
-  ) {
-    return `🟠 ${riskLevel}`;
-  } else if (normalizedRisk.includes("low")) {
-    return `🟡 ${riskLevel}`;
-  } else if (normalizedRisk.includes("minimal")) {
-    return `🟢 ${riskLevel}`;
-  }
-
-  return `ℹ️ ${riskLevel}`;
 }
