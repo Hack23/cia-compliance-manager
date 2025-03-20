@@ -5,21 +5,38 @@ import { SecurityLevel } from "../types/cia";
 type RiskLevel = string;
 
 /**
- * Utility functions for risk assessment and calculations
- * 
+ * Define risk level constants for consistent usage
+ *
  * ## Business Perspective
- * 
+ *
+ * These constants ensure consistent risk classification across the application,
+ * supporting standardized risk communication and reporting. 📊
+ */
+export const RISK_LEVELS = {
+  CRITICAL: "Critical Risk",
+  HIGH: "High Risk",
+  MEDIUM: "Medium Risk",
+  LOW: "Low Risk",
+  MINIMAL: "Minimal Risk",
+  UNKNOWN: "Unknown Risk",
+};
+
+/**
+ * Utility functions for risk assessment and calculations
+ *
+ * ## Business Perspective
+ *
  * These utilities translate security levels into business risk terminology,
  * supporting consistent risk communication and assessment across different
  * security contexts. ⚠️
- * 
+ *
  * Risk calculations help organizations understand the business implications
  * of their security posture and prioritize remediation efforts.
  */
 
 /**
  * Get badge variant based on risk level
- * 
+ *
  * ## Business Perspective
  *
  * This utility helps visualize risk levels consistently across the application,
@@ -51,17 +68,19 @@ export function getRiskBadgeVariant(
 
 /**
  * Determines the risk level based on a security level
- * 
+ *
  * @param securityLevel - The security level to evaluate
  * @returns The corresponding risk level
  */
-export function getRiskLevelFromSecurityLevel(securityLevel: SecurityLevel): string {
+export function getRiskLevelFromSecurityLevel(
+  securityLevel: SecurityLevel
+): string {
   const riskLevels: Record<SecurityLevel, string> = {
-    "None": "Critical Risk",
-    "Low": "High Risk",
-    "Moderate": "Medium Risk",
-    "High": "Low Risk",
-    "Very High": "Minimal Risk"
+    None: "Critical Risk",
+    Low: "High Risk",
+    Moderate: "Medium Risk",
+    High: "Low Risk",
+    "Very High": "Minimal Risk",
   };
 
   return riskLevels[securityLevel] || "Unknown Risk";
@@ -69,11 +88,13 @@ export function getRiskLevelFromSecurityLevel(securityLevel: SecurityLevel): str
 
 /**
  * Determines the status badge variant for a risk level
- * 
+ *
  * @param riskLevel - The risk level to evaluate
  * @returns The appropriate status badge variant
  */
-export function getStatusBadgeForRiskLevel(riskLevel: string): StatusBadgeVariant {
+export function getStatusBadgeForRiskLevel(
+  riskLevel: string
+): StatusBadgeVariant {
   if (riskLevel.includes("Critical")) return "error";
   if (riskLevel.includes("High")) return "warning";
   if (riskLevel.includes("Medium")) return "info";
@@ -84,17 +105,17 @@ export function getStatusBadgeForRiskLevel(riskLevel: string): StatusBadgeVarian
 
 /**
  * Determines the proper color class for a security level
- * 
+ *
  * @param level - The security level to evaluate
  * @returns The appropriate CSS color class
  */
 export function getSecurityLevelColorClass(level: SecurityLevel): string {
   const colorClasses: Record<SecurityLevel, string> = {
-    "None": "text-red-600 dark:text-red-400",
-    "Low": "text-orange-600 dark:text-orange-400",
-    "Moderate": "text-blue-600 dark:text-blue-400",
-    "High": "text-green-600 dark:text-green-400",
-    "Very High": "text-purple-600 dark:text-purple-400"
+    None: "text-red-600 dark:text-red-400",
+    Low: "text-orange-600 dark:text-orange-400",
+    Moderate: "text-blue-600 dark:text-blue-400",
+    High: "text-green-600 dark:text-green-400",
+    "Very High": "text-purple-600 dark:text-purple-400",
   };
 
   return colorClasses[level] || "text-gray-600 dark:text-gray-400";
@@ -102,7 +123,7 @@ export function getSecurityLevelColorClass(level: SecurityLevel): string {
 
 /**
  * Calculate the risk score from security levels
- * 
+ *
  * @param availabilityLevel - The availability security level
  * @param integrityLevel - The integrity security level
  * @param confidentialityLevel - The confidentiality security level
@@ -115,11 +136,11 @@ export function calculateRiskScore(
 ): number {
   // Convert security levels to numeric values (0-4)
   const securityLevelValues: Record<SecurityLevel, number> = {
-    "None": 0,
-    "Low": 1,
-    "Moderate": 2,
-    "High": 3,
-    "Very High": 4
+    None: 0,
+    Low: 1,
+    Moderate: 2,
+    High: 3,
+    "Very High": 4,
   };
 
   const availValue = securityLevelValues[availabilityLevel] || 0;
@@ -135,7 +156,7 @@ export function calculateRiskScore(
 
 /**
  * Get formatted risk level with "Risk" suffix from security level
- * 
+ *
  * @param securityLevel - Security level
  * @returns Risk level constant
  */
@@ -143,48 +164,36 @@ export function getFormattedRiskLevel(securityLevel: SecurityLevel): RiskLevel {
   const basicRiskLevel = getRiskLevelFromSecurityLevel(securityLevel);
 
   switch (basicRiskLevel) {
-    case "Critical": return RISK_LEVELS.CRITICAL;
-    case "High": return RISK_LEVELS.HIGH;
-    case "Medium": return RISK_LEVELS.MEDIUM;
-    case "Low": return RISK_LEVELS.LOW;
-    case "Minimal": return RISK_LEVELS.MINIMAL;
-    default: return RISK_LEVELS.UNKNOWN;
+    case "Critical Risk":
+      return RISK_LEVELS.CRITICAL;
+    case "High Risk":
+      return RISK_LEVELS.HIGH;
+    case "Medium Risk":
+      return RISK_LEVELS.MEDIUM;
+    case "Low Risk":
+      return RISK_LEVELS.LOW;
+    case "Minimal Risk":
+      return RISK_LEVELS.MINIMAL;
+    default:
+      return RISK_LEVELS.UNKNOWN;
   }
 }
 
 /**
- * Calculate risk score (0-100) from security level
- * Higher scores mean lower risk (more secure)
- * 
- * @param securityLevel - Security level
- * @returns Risk score (0-100)
- */
-export function calculateRiskScore(securityLevel: SecurityLevel): number {
-  const levelValues: Record<SecurityLevel, number> = {
-    "None": 0,
-    "Low": 25,
-    "Moderate": 50,
-    "High": 75,
-    "Very High": 100
-  };
-
-  return levelValues[securityLevel] || 0;
-}
-
-/**
  * Get risk severity description
- * 
+ *
  * @param riskLevel - Risk level
  * @returns Description of risk severity
  */
 export function getRiskSeverityDescription(riskLevel: string): string {
   const descriptions: Record<string, string> = {
-    "Critical": "Immediate action required. Severe business impact likely.",
-    "High": "Urgent remediation needed. Significant business impact possible.",
-    "Medium": "Planned remediation recommended. Moderate business impact possible.",
-    "Low": "Address during normal operations. Limited business impact.",
-    "Minimal": "Acceptable risk level. Negligible business impact.",
-    "Unknown": "Unable to determine risk level. Further assessment needed."
+    Critical: "Immediate action required. Severe business impact likely.",
+    High: "Urgent remediation needed. Significant business impact possible.",
+    Medium:
+      "Planned remediation recommended. Moderate business impact possible.",
+    Low: "Address during normal operations. Limited business impact.",
+    Minimal: "Acceptable risk level. Negligible business impact.",
+    Unknown: "Unable to determine risk level. Further assessment needed.",
   };
 
   return descriptions[riskLevel] || descriptions["Unknown"];
@@ -192,11 +201,13 @@ export function getRiskSeverityDescription(riskLevel: string): string {
 
 /**
  * Calculate combined risk level from multiple security levels
- * 
+ *
  * @param securityLevels - Array of security levels
  * @returns Combined risk level
  */
-export function calculateCombinedRiskLevel(securityLevels: SecurityLevel[]): string {
+export function calculateCombinedRiskLevel(
+  securityLevels: SecurityLevel[]
+): string {
   if (securityLevels.length === 0) return "Unknown";
 
   // Convert security levels to risk levels
@@ -223,16 +234,16 @@ export function calculateCombinedRiskLevel(securityLevels: SecurityLevel[]): str
 
 /**
  * Convert security level to a risk score
- * 
+ *
  * ## Business Perspective
- * 
+ *
  * This utility provides a numeric representation of risk based on security level,
  * which is useful for risk assessment visualizations and calculations. Higher
  * numbers represent higher risk, allowing business stakeholders to quantify
  * the potential impact of different security postures. 📊
- * 
+ *
  * @see getRiskLevelFromSecurityLevel - For string representation
- * 
+ *
  * @param level - Security level to convert
  * @returns Risk score (0-100, with higher values indicating higher risk)
  */
@@ -275,7 +286,8 @@ export function parseRiskLevel(level: string | null | undefined): number {
   const levelLower = level.toLowerCase();
   if (levelLower.includes("critical")) return 4;
   if (levelLower.includes("high")) return 3;
-  if (levelLower.includes("medium") || levelLower.includes("moderate")) return 2;
+  if (levelLower.includes("medium") || levelLower.includes("moderate"))
+    return 2;
   if (levelLower.includes("low")) return 1;
   if (levelLower.includes("minimal")) return 0;
 

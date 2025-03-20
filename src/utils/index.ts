@@ -21,6 +21,20 @@
 // Core utilities
 export * from "./colorUtils";
 
+// Selectively re-export from riskUtils to avoid name collision
+export {
+  calculateCombinedRiskLevel,
+  // Not re-exporting getSecurityLevelColorClass since it's already exported from colorUtils
+  calculateRiskScore,
+  getFormattedRiskLevel,
+  getRiskBadgeVariant,
+  getRiskLevelFromSecurityLevel,
+  getRiskScoreFromSecurityLevel,
+  getRiskSeverityDescription,
+  getStatusBadgeForRiskLevel,
+  parseRiskLevel,
+} from "./riskUtils";
+
 // Format utility exports
 export {
   formatBudgetPercentage,
@@ -34,22 +48,24 @@ export {
   formatRiskLevel,
   formatTimeframe,
   formatUptime,
-  toTitleCase
+  toTitleCase,
 } from "./formatUtils";
 
 // Level value utilities
 export {
   calculateOverallSecurityLevel as calculateOverallSecurityLevelFromValues,
   compareSecurityLevels,
-  getNormalizedSecurityValue, getSecurityLevelValue as getNumericSecurityLevelValue, getSecurityLevelFromValue, SECURITY_LEVEL_VALUES
+  getNormalizedSecurityValue,
+  getSecurityLevelValue as getNumericSecurityLevelValue,
+  getSecurityLevelFromValue,
+  SECURITY_LEVEL_VALUES,
 } from "./levelValuesUtils";
-
-// Risk utilities
-export * from "./riskUtils";
 
 // Security level utilities with renamed exports to avoid conflicts
 export {
-  calculateOverallSecurityLevel, asSecurityLevel as convertToSecurityLevel, formatSecurityLevel as formatSecurityLevelString,
+  calculateOverallSecurityLevel,
+  asSecurityLevel as convertToSecurityLevel,
+  formatSecurityLevel as formatSecurityLevelString,
   getRecommendedSecurityLevel,
   getSecurityIcon,
   getSecurityLevelBadgeVariant,
@@ -59,7 +75,7 @@ export {
   getSecurityLevelValue,
   isSecurityLevel as isValidSecurityLevel,
   meetsComplianceRequirements,
-  normalizeSecurityLevel
+  normalizeSecurityLevel,
 } from "./securityLevelUtils";
 
 // Widget helpers
@@ -75,7 +91,7 @@ export {
   SecurityLevelBadge,
   WidgetEmptyState,
   WidgetError,
-  WidgetLoading
+  WidgetLoading,
 } from "./widgetHelpers";
 
 // Limited type guards to avoid conflicts
@@ -104,12 +120,14 @@ export {
   isWidgetProps,
   isWidgetType,
   safeAccess,
-  safeNumberConversion
+  safeNumberConversion,
 } from "./typeGuards";
 
 // Export calculateRiskLevel from cia.utility
 export { calculateRiskLevel } from "../types/cia.utility";
 
 // Re-export constants for convenience
-export { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS } from '../constants/riskConstants';
-
+export {
+  BUSINESS_IMPACT_CATEGORIES,
+  RISK_LEVELS,
+} from "../constants/riskConstants";

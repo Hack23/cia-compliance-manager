@@ -245,7 +245,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 <h4 className="font-medium flex items-center">
                   <span className="mr-2">🔒</span>Confidentiality
                 </h4>
-                <StatusBadge status="purple" as any>
+                <StatusBadge status="purple">
                   {confidentialityLevel}
                 </StatusBadge>
               </div>
