@@ -1,5 +1,4 @@
 import { StatusBadgeVariant } from "../components/common/StatusBadge";
-import { RISK_LEVELS } from "../constants/riskConstants";
 import { SecurityLevel } from "../types/cia";
 
 // Define RiskLevel type if it's missing from risk.ts
@@ -51,24 +50,87 @@ export function getRiskBadgeVariant(
 }
 
 /**
- * Map security levels to risk levels
- */
-const SECURITY_TO_RISK_MAP: Record<SecurityLevel, string> = {
-  "None": "Critical",
-  "Low": "High",
-  "Moderate": "Medium",
-  "High": "Low",
-  "Very High": "Minimal"
-};
-
-/**
- * Get risk level from security level
+ * Determines the risk level based on a security level
  * 
- * @param securityLevel - Security level
- * @returns Corresponding risk level
+ * @param securityLevel - The security level to evaluate
+ * @returns The corresponding risk level
  */
 export function getRiskLevelFromSecurityLevel(securityLevel: SecurityLevel): string {
-  return SECURITY_TO_RISK_MAP[securityLevel] || "Unknown";
+  const riskLevels: Record<SecurityLevel, string> = {
+    "None": "Critical Risk",
+    "Low": "High Risk",
+    "Moderate": "Medium Risk",
+    "High": "Low Risk",
+    "Very High": "Minimal Risk"
+  };
+
+  return riskLevels[securityLevel] || "Unknown Risk";
+}
+
+/**
+ * Determines the status badge variant for a risk level
+ * 
+ * @param riskLevel - The risk level to evaluate
+ * @returns The appropriate status badge variant
+ */
+export function getStatusBadgeForRiskLevel(riskLevel: string): StatusBadgeVariant {
+  if (riskLevel.includes("Critical")) return "error";
+  if (riskLevel.includes("High")) return "warning";
+  if (riskLevel.includes("Medium")) return "info";
+  if (riskLevel.includes("Low")) return "success";
+  if (riskLevel.includes("Minimal")) return "success";
+  return "neutral";
+}
+
+/**
+ * Determines the proper color class for a security level
+ * 
+ * @param level - The security level to evaluate
+ * @returns The appropriate CSS color class
+ */
+export function getSecurityLevelColorClass(level: SecurityLevel): string {
+  const colorClasses: Record<SecurityLevel, string> = {
+    "None": "text-red-600 dark:text-red-400",
+    "Low": "text-orange-600 dark:text-orange-400",
+    "Moderate": "text-blue-600 dark:text-blue-400",
+    "High": "text-green-600 dark:text-green-400",
+    "Very High": "text-purple-600 dark:text-purple-400"
+  };
+
+  return colorClasses[level] || "text-gray-600 dark:text-gray-400";
+}
+
+/**
+ * Calculate the risk score from security levels
+ * 
+ * @param availabilityLevel - The availability security level
+ * @param integrityLevel - The integrity security level
+ * @param confidentialityLevel - The confidentiality security level
+ * @returns A risk score from 0-100
+ */
+export function calculateRiskScore(
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel
+): number {
+  // Convert security levels to numeric values (0-4)
+  const securityLevelValues: Record<SecurityLevel, number> = {
+    "None": 0,
+    "Low": 1,
+    "Moderate": 2,
+    "High": 3,
+    "Very High": 4
+  };
+
+  const availValue = securityLevelValues[availabilityLevel] || 0;
+  const integValue = securityLevelValues[integrityLevel] || 0;
+  const confidValue = securityLevelValues[confidentialityLevel] || 0;
+
+  // Calculate average security value
+  const avgSecurityValue = (availValue + integValue + confidValue) / 3;
+
+  // Convert to a 0-100 scale
+  return Math.round((avgSecurityValue / 4) * 100);
 }
 
 /**

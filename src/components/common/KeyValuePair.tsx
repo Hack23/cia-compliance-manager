@@ -2,24 +2,40 @@ import React from "react";
 import { COMMON_COMPONENT_TEST_IDS } from "../../constants/testIds";
 
 interface KeyValuePairProps {
+  /**
+   * Label or key text
+   */
   label: string;
+  
+  /**
+   * Value text
+   */
   value: React.ReactNode;
+  
+  /**
+   * Additional CSS classes
+   */
   className?: string;
+  
+  /**
+   * Test ID for automated testing
+   */
+  testId?: string;
+  
   keyClassName?: string;
   valueClassName?: string;
   labelClassName?: string; // Add this missing property
-  testId?: string;
   iconPrefix?: React.ReactNode;
 }
 
 /**
- * Displays a key-value pair with configurable styling
+ * Displays a label-value pair for metrics and properties
  * 
  * ## Business Perspective
  * 
- * This component provides a consistent format for displaying labeled information
- * throughout the application, improving readability and making it easier for
- * business stakeholders to quickly find and interpret security metrics. 📊
+ * Standardizes the presentation of key metrics and properties across
+ * the application, making technical information more digestible for
+ * business stakeholders and decision-makers. 📊
  * 
  * @param props Component props
  * @returns React Element
@@ -36,14 +52,14 @@ function KeyValuePair({
 }: KeyValuePairProps): React.ReactElement {
   return (
     <div
-      className={`flex flex-col sm:flex-row sm:justify-between sm:items-center ${className}`}
+      className={`p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 ${className}`}
       data-testid={testId || COMMON_COMPONENT_TEST_IDS.KEY_VALUE_PAIR}
     >
-      <div className={`flex items-center text-sm text-gray-500 dark:text-gray-400 font-medium ${keyClassName} ${labelClassName}`} data-testid={COMMON_COMPONENT_TEST_IDS.KEY_VALUE_KEY}>
+      <div className={`text-xs font-medium mb-1 text-gray-600 dark:text-gray-400 ${keyClassName} ${labelClassName}`} data-testid={COMMON_COMPONENT_TEST_IDS.KEY_VALUE_KEY}>
         {iconPrefix && <span className="mr-1">{iconPrefix}</span>}
         {label}
       </div>
-      <div className={`font-medium ${valueClassName}`} data-testid={COMMON_COMPONENT_TEST_IDS.KEY_VALUE_VALUE}>
+      <div className={`text-sm font-medium ${valueClassName}`} data-testid={COMMON_COMPONENT_TEST_IDS.KEY_VALUE_VALUE}>
         {value || "N/A"}
       </div>
     </div>

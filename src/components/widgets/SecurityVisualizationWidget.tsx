@@ -30,17 +30,13 @@ export interface SecurityVisualizationWidgetProps extends WithSecurityLevelProps
 }
 
 /**
- * SecurityVisualizationWidget provides visual representations of security posture
- *
+ * Security Visualization Widget provides visual representation of security posture
+ * 
  * ## Business Perspective
- *
- * This widget translates complex security concepts into intuitive visualizations,
- * helping stakeholders at all levels understand the organization's security posture. 📊
- *
- * The radar chart enables quick identification of imbalances between CIA components,
- * while the risk score provides a concrete metric for security program effectiveness.
- * These visualizations are particularly valuable for security reporting to executives
- * and board members. 💼
+ * 
+ * This widget visualizes the organization's security posture across the CIA triad,
+ * helping security professionals and executives identify gaps and balance security
+ * investments across confidentiality, integrity, and availability domains. 📊
  */
 const SecurityVisualizationWidget: React.FC<SecurityVisualizationWidgetProps> = ({
   availabilityLevel,

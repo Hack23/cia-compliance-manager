@@ -1,4 +1,5 @@
-import React from "react";
+import React, { ReactNode } from 'react';
+import { COMMON_COMPONENT_TEST_IDS } from '../../constants/testIds';
 
 export type MetricsCardVariant =
   | "default"
@@ -9,30 +10,82 @@ export type MetricsCardVariant =
   | "purple";
 
 interface MetricsCardProps {
+  /**
+   * Card title
+   */
   title: string;
-  value: string | number;
-  icon?: string;
-  variant?: MetricsCardVariant;
-  accentColor?: string;
+  
+  /**
+   * Card value (main metric)
+   */
+  value: ReactNode;
+  
+  /**
+   * Optional icon to display
+   */
+  icon?: ReactNode;
+  
+  /**
+   * Optional label to display below the value
+   */
+  label?: string;
+  
+  /**
+   * Optional trend indicator (+10%, -5%, etc.)
+   */
+  trend?: string;
+  
+  /**
+   * Direction of the trend (up, down, neutral)
+   */
+  trendDirection?: 'up' | 'down' | 'neutral';
+  
+  /**
+   * Optional CSS class for the card
+   */
   className?: string;
+  
+  /**
+   * Optional test ID for automated testing
+   */
   testId?: string;
+  
+  /**
+   * Optional variant for the card
+   */
+  variant?: MetricsCardVariant;
+  
+  /**
+   * Optional accent color for the card
+   */
+  accentColor?: string;
+  
+  /**
+   * Optional compact mode for the card
+   */
   compact?: boolean;
 }
 
 /**
- * Consistent metrics card component for displaying key metrics and values
- *
- * @param props Component properties
- * @returns Rendered component
+ * Displays a metric card with a title, value, and optional trend
+ * 
+ * ## Business Perspective
+ * 
+ * This component provides a standardized way to display key metrics
+ * across security dashboards, helping executives and security teams
+ * quickly identify important information and trends. 📊
  */
 const MetricsCard: React.FC<MetricsCardProps> = ({
   title,
   value,
   icon,
+  label,
+  trend,
+  trendDirection = 'neutral',
+  className = '',
+  testId = COMMON_COMPONENT_TEST_IDS.METRICS_CARD,
   variant = "default",
   accentColor,
-  className = "",
-  testId,
   compact = false,
 }) => {
   // Color variants
@@ -72,6 +125,19 @@ const MetricsCard: React.FC<MetricsCardProps> = ({
   const { bg, text, border } = variants[variant];
   const padding = compact ? "p-3" : "p-4";
 
+  // Determine trend color and icon
+  const getTrendColor = () => {
+    if (trendDirection === 'up') return 'text-green-500 dark:text-green-400';
+    if (trendDirection === 'down') return 'text-red-500 dark:text-red-400';
+    return 'text-gray-500 dark:text-gray-400';
+  };
+  
+  const getTrendIcon = () => {
+    if (trendDirection === 'up') return '↑';
+    if (trendDirection === 'down') return '↓';
+    return '→';
+  };
+
   return (
     <div
       className={`${bg} rounded-lg border ${border} ${padding} shadow-sm ${className}`}
@@ -89,6 +155,26 @@ const MetricsCard: React.FC<MetricsCardProps> = ({
         {icon && <div className="text-xl">{icon}</div>}
       </div>
       <div className={`text-xl font-bold mt-2 ${text}`}>{value}</div>
+      <div className="flex items-center">
+        {label && (
+          <div 
+            className="text-sm text-gray-500 dark:text-gray-400"
+            data-testid={`${testId}-label`}
+          >
+            {label}
+          </div>
+        )}
+        
+        {trend && (
+          <div 
+            className={`ml-auto text-sm ${getTrendColor()}`}
+            data-testid={`${testId}-trend`}
+          >
+            <span className="mr-1">{getTrendIcon()}</span>
+            {trend}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

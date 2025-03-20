@@ -1,60 +1,94 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-type StatusType = 'success' | 'warning' | 'error' | 'info' | 'neutral' | 'purple';
-type SizeType = 'sm' | 'md' | 'lg';
+// Expand the type to include all required variants
+export type StatusType = 'success' | 'info' | 'warning' | 'error' | 'neutral' | 'purple';
+
+// Export this type for other components to use
+export type StatusBadgeVariant = StatusType;
 
 interface StatusBadgeProps {
+  /**
+   * The status type (determines color)
+   */
   status: StatusType;
-  size?: SizeType;
-  children: React.ReactNode;
+  
+  /**
+   * The content to display inside the badge
+   */
+  children: ReactNode;
+  
+  /**
+   * Additional CSS classes
+   */
+  className?: string;
+  
+  /**
+   * Test ID for automated testing
+   */
   testId?: string;
-  className?: string; // Add className prop
+
+  /**
+   * Optional size variant
+   */
+  size?: 'sm' | 'md' | 'lg';
 }
 
 /**
- * Status badge component for displaying status indicators
+ * Displays a status badge with appropriate colors
  * 
- * ## Business Perspective
+ * ## UX Perspective
  * 
- * This component provides visual indicators for statuses, helping
- * users quickly identify compliance states, risk levels, and security
- * postures across the application. 🔒
+ * Provides consistent visual indicators of status throughout the
+ * application, using color psychology to communicate severity and
+ * importance at a glance. 🎨
  */
-export const StatusBadge: React.FC<StatusBadgeProps> = ({
+const StatusBadge: React.FC<StatusBadgeProps> = ({
   status,
-  size = 'md',
   children,
-  testId = 'badge',
-  className = ''
+  className = '',
+  testId,
+  size = 'md' // Default to medium size
 }) => {
-  // Define status-specific styles
-  const statusStyles = {
-    success: 'bg-green-100 text-green-800 border-green-300 dark:bg-green-900 dark:bg-opacity-30 dark:text-green-300 dark:border-green-800',
-    warning: 'bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-yellow-900 dark:bg-opacity-30 dark:text-yellow-300 dark:border-yellow-800',
-    error: 'bg-red-100 text-red-800 border-red-300 dark:bg-red-900 dark:bg-opacity-30 dark:text-red-300 dark:border-red-800',
-    info: 'bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300 dark:border-blue-800',
-    neutral: 'bg-gray-100 text-gray-800 border-gray-300 dark:bg-gray-800 dark:bg-opacity-30 dark:text-gray-300 dark:border-gray-700',
-    purple: 'bg-purple-100 text-purple-800 border-purple-300 dark:bg-purple-900 dark:bg-opacity-30 dark:text-purple-300 dark:border-purple-800'
+  // Determine color classes based on status
+  const getStatusClasses = () => {
+    switch (status) {
+      case 'success':
+        return 'bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-30 dark:text-green-300';
+      case 'info':
+        return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300';
+      case 'warning':
+        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:bg-opacity-30 dark:text-yellow-300';
+      case 'error':
+        return 'bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-30 dark:text-red-300';
+      case 'neutral':
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+      case 'purple':
+        return 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:bg-opacity-30 dark:text-purple-300';
+      default:
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+    }
   };
 
-  // Define size-specific styles
-  const sizeStyles = {
-    sm: 'text-xs',
-    md: 'text-sm',
-    lg: 'text-base'
+  // Determine size classes
+  const getSizeClasses = () => {
+    switch (size) {
+      case 'sm':
+        return 'px-1.5 py-0.5 text-xs';
+      case 'lg':
+        return 'px-3 py-1.5 text-sm';
+      default: // md
+        return 'px-2 py-1 text-xs';
+    }
   };
-
-  // Combine classes with status and size-specific classes explicitly included
-  const classes = `px-2 py-1 font-medium rounded border ${sizeStyles[size]} ${statusStyles[status]} ${status} ${size} ${className}`;
 
   return (
-    <span className={classes} data-testid={testId}>
+    <span
+      className={`font-medium rounded-md ${getStatusClasses()} ${getSizeClasses()} ${className}`}
+      data-testid={testId}
+    >
       {children}
     </span>
   );
 };
-
-// Export the StatusType for use in other components
-export type { StatusType as StatusBadgeVariant };
 
 export default StatusBadge;

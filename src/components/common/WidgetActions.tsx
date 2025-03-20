@@ -1,59 +1,103 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode } from 'react';
 
-interface WidgetActionButtonProps {
-  onClick: () => void;
-  icon?: ReactNode;
-  label?: string;
-  ariaLabel: string;
-  testId?: string;
+interface WidgetActionsProps {
+  /**
+   * The action buttons or other elements
+   */
+  children: ReactNode;
+  
+  /**
+   * Additional CSS classes to apply
+   */
   className?: string;
+  
+  /**
+   * Test ID for automated testing
+   */
+  testId?: string;
 }
 
 /**
- * Reusable action button component for widget headers
+ * Container for widget action buttons in widget headers
+ * 
+ * ## UX Perspective
+ * 
+ * Provides a consistent layout for widget actions, ensuring good spacing
+ * and alignment between action buttons in widget headers. 🎛️
+ */
+const WidgetActions: React.FC<WidgetActionsProps> = ({ 
+  children, 
+  className = '',
+  testId = 'widget-actions'
+}) => {
+  return (
+    <div 
+      className={`flex items-center space-x-2 ${className}`}
+      data-testid={testId}
+    >
+      {children}
+    </div>
+  );
+};
+
+interface WidgetActionButtonProps {
+  /**
+   * Click handler for the button
+   */
+  onClick: () => void;
+  
+  /**
+   * Icon to display in the button
+   */
+  icon: ReactNode;
+  
+  /**
+   * Accessible label for the button
+   */
+  ariaLabel: string;
+  
+  /**
+   * Additional CSS classes to apply
+   */
+  className?: string;
+  
+  /**
+   * Test ID for automated testing
+   */
+  testId?: string;
+  
+  /**
+   * Whether the button is disabled
+   */
+  disabled?: boolean;
+}
+
+/**
+ * Standard action button for widget headers
+ * 
+ * ## UX Perspective
+ * 
+ * Provides a consistent, accessible button style for widget actions,
+ * with appropriate hover and focus states for good user feedback. 🔘
  */
 export const WidgetActionButton: React.FC<WidgetActionButtonProps> = ({
   onClick,
   icon,
-  label,
   ariaLabel,
+  className = '',
   testId,
-  className = "",
+  disabled = false
 }) => {
   return (
     <button
       onClick={onClick}
       aria-label={ariaLabel}
+      className={`p-1 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}
       data-testid={testId}
-      className={`inline-flex items-center justify-center p-1 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${className}`}
+      disabled={disabled}
     >
-      {icon && <span className="w-4 h-4">{icon}</span>}
-      {label && <span className="ml-1 text-xs">{label}</span>}
+      {icon}
     </button>
-  );
-};
-
-interface WidgetActionsProps {
-  children: ReactNode;
-  className?: string;
-  testId?: string;
-}
-
-/**
- * Container for widget action buttons
- */
-const WidgetActions: React.FC<WidgetActionsProps> = ({
-  children,
-  className = "",
-  testId = "widget-actions",
-}) => {
-  return (
-    <div
-      className={`flex items-center space-x-1 ${className}`}
-      data-testid={testId}
-    >
-      {children}
-    </div>
   );
 };
 

@@ -1,61 +1,58 @@
-import React, { ReactNode } from "react";
-import { WIDGET_ICONS } from "../../constants/appConstants";
+import React, { ReactNode } from 'react';
 
 interface WidgetHeaderProps {
+  /**
+   * The title text to display
+   */
   title: string;
-  iconKey?: keyof typeof WIDGET_ICONS | string;
+  
+  /**
+   * Optional icon to display next to the title
+   */
+  icon?: ReactNode;
+  
+  /**
+   * Optional actions to display in the header
+   */
   actions?: ReactNode;
+  
+  /**
+   * Optional CSS classes to add
+   */
   className?: string;
+  
+  /**
+   * Optional test ID for automated testing
+   */
   testId?: string;
-  compact?: boolean; // Add compact mode option
 }
 
 /**
- * Common header component for widgets with improved height efficiency
- *
- * @param props - Component properties
- * @returns A consistent widget header
+ * Header component for widget containers
+ * 
+ * ## UX Perspective
+ * 
+ * Provides a consistent header style for all widgets, with
+ * support for icons and action buttons. The consistent design
+ * helps users navigate the dashboard more efficiently. 🎨
  */
 const WidgetHeader: React.FC<WidgetHeaderProps> = ({
   title,
-  iconKey,
+  icon,
   actions,
-  className = "",
-  testId,
-  compact = false, // Default to standard size
+  className = '',
+  testId = 'widget-header'
 }) => {
-  // Determine the icon to display
-  let iconToDisplay = "";
-  if (iconKey) {
-    // If iconKey is a key in WIDGET_ICONS, use the corresponding value
-    if (iconKey in WIDGET_ICONS) {
-      iconToDisplay = WIDGET_ICONS[iconKey as keyof typeof WIDGET_ICONS];
-    } else {
-      // Otherwise, assume iconKey is already an emoji string
-      iconToDisplay = iconKey;
-    }
-  }
-
-  // Use compact styling when needed
-  const heightClass = compact ? "py-1" : "py-2";
-  const fontSizeClass = compact ? "text-sm" : "text-base";
-
   return (
-    <div
-      className={`flex items-center justify-between ${heightClass} mb-2 border-b border-gray-200 dark:border-gray-700 ${className}`}
+    <div 
+      className={`widget-header bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-700 rounded-t-lg flex justify-between items-center ${className}`}
       data-testid={testId}
     >
-      <h3
-        className={`flex items-center ${fontSizeClass} font-semibold text-gray-800 dark:text-gray-200`}
-      >
-        {iconToDisplay && (
-          <span className="mr-2 text-base" aria-hidden="true">
-            {iconToDisplay}
-          </span>
-        )}
-        <span className="truncate max-w-[280px]">{title}</span>
+      <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200 flex items-center">
+        {icon && <span className="mr-2">{icon}</span>}
+        {title}
       </h3>
-      {actions && <div className="flex items-center space-x-2">{actions}</div>}
+      {actions && <div className="widget-actions">{actions}</div>}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { WIDGET_ICONS, WIDGET_TITLES } from '../../constants/appConstants';
 import withSecurityLevelState from '../../hoc/withSecurityLevelState';
 import { useCIAContentService } from "../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../types/cia";
@@ -26,14 +27,13 @@ interface RequirementItem {
 }
 
 /**
- * Displays technical implementation details for security levels
+ * Technical Details Widget provides implementation guidance
  * 
  * ## Business Perspective
  * 
- * This widget bridges the gap between security policy and technical implementation,
- * helping IT teams understand how to implement the selected security controls.
- * Clear implementation details reduce implementation time and costs while ensuring
- * proper security standards are followed. 🔒
+ * This widget delivers technical implementation details and resource requirements
+ * for IT teams to effectively deploy and maintain security controls at the selected
+ * security levels, bridging policy decisions with practical implementation. 🛠️
  */
 const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   className = "",
@@ -244,13 +244,17 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
 
   return (
     <WidgetContainer
-      title="Technical Implementation Details"
-      icon="🛠️"
+      title={WIDGET_TITLES.TECHNICAL_DETAILS}
+      icon={WIDGET_ICONS.TECHNICAL_DETAILS}
       className={className}
       testId={testId}
     >
       <div className="p-4">
-        {/* Tab navigation */}
+        <p className="mb-4">
+          This widget provides technical implementation details and resource requirements
+          for deploying security controls at your selected security levels.
+        </p>
+        
         <div className="border-b mb-4">
           <nav className="flex space-x-4" aria-label="Security Components">
             <Tab
@@ -275,6 +279,31 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
               label="Confidentiality"
             />
           </nav>
+        </div>
+
+        <div className="mb-6">
+          <h3 className="text-lg font-medium mb-3">
+            <span className="mr-2">⏱️</span>Availability
+          </h3>
+          <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded border border-blue-100 dark:border-blue-800">
+            <h4 className="font-medium mb-1">Availability Implementation: {availabilityLevel}</h4>
+            <p className="text-sm mb-3">{availabilityDetails?.description || 'No description available'}</p>
+            
+            <div className="grid grid-cols-3 gap-4 mb-3">
+              <div>
+                <div className="text-xs font-medium mb-1">Development Effort</div>
+                <div className="text-sm font-bold">{getDefaultDevelopmentEffort(availabilityLevel)}</div>
+              </div>
+              <div>
+                <div className="text-xs font-medium mb-1">Maintenance</div>
+                <div className="text-sm font-bold">{getDefaultMaintenanceEffort(availabilityLevel)}</div>
+              </div>
+              <div>
+                <div className="text-xs font-medium mb-1">Required Expertise</div>
+                <div className="text-sm font-bold">{getDefaultExpertiseLevel(availabilityLevel)}</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Component details */}

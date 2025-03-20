@@ -1,54 +1,62 @@
-import React from "react";
+import React from 'react';
 
 interface TabProps {
+  /**
+   * Whether the tab is currently active
+   */
   active: boolean;
+  
+  /**
+   * Click handler for the tab
+   */
   onClick: () => void;
+  
+  /**
+   * Icon to display in the tab (emoji or character)
+   */
+  icon?: string;
+  
+  /**
+   * Label text for the tab
+   */
   label: string;
-  icon?: React.ReactNode;
-  className?: string;
+  
+  /**
+   * Test ID for automated testing
+   */
   testId?: string;
 }
 
 /**
- * Displays a tab for navigation within a tabbed interface
+ * Tab component for tabbed interfaces
  * 
- * ## Business Perspective
+ * ## UX Perspective
  * 
- * This component enables efficient organization of complex security information
- * into logical categories, reducing cognitive load and improving the usability 
- * of security dashboards. The contextual tabs help users quickly access specific
- * aspects of security information without overwhelming them with all details at once. 🧩
- * 
- * @param props Component props
- * @returns React Element
+ * Provides an accessible, consistent tabbed navigation pattern
+ * throughout the application, allowing users to switch between
+ * different views of related content. 🧩
  */
-function Tab({
+export const Tab: React.FC<TabProps> = ({
   active,
   onClick,
-  label,
   icon,
-  className = "",
-  testId,
-}: TabProps): React.ReactElement {
-  const activeClass = active
-    ? "border-blue-500 text-blue-600 dark:border-blue-400 dark:text-blue-400"
-    : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600";
+  label,
+  testId
+}) => {
+  const activeClass = active 
+    ? 'border-b-2 border-blue-500 dark:border-blue-400 text-blue-600 dark:text-blue-400 font-medium' 
+    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300';
 
   return (
     <button
+      className={`py-2 px-3 ${activeClass} focus:outline-none`}
       onClick={onClick}
-      className={`py-2 px-4 border-b-2 font-medium text-sm focus:outline-none ${activeClass} ${className}`}
-      data-testid={testId}
       role="tab"
       aria-selected={active}
+      data-testid={testId}
     >
-      <div className="flex items-center">
-        {icon && <span className="mr-2">{icon}</span>}
-        {label}
-      </div>
+      {icon && <span className="mr-1">{icon}</span>}
+      {label}
     </button>
   );
-}
-
-export { Tab };
-export default Tab;
+};

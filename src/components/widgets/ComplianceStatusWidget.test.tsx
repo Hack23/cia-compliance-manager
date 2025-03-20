@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ComplianceService } from "../../services/ComplianceServiceAdapter";
 import { SecurityLevel } from "../../types/cia";
-import { ComplianceStatusWidget } from "./ComplianceStatusWidget";
+import ComplianceStatusWidget from "./ComplianceStatusWidget";
 
 // Mock the useCIAOptions hook
 vi.mock("../../hooks/useCIAOptions", () => ({

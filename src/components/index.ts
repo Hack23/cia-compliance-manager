@@ -9,7 +9,7 @@
 // Widget Components - Keep these since they are used in the simplified app
 export { default as AvailabilityImpactWidget } from "./widgets/AvailabilityImpactWidget";
 export { default as BusinessImpactAnalysisWidget } from "./widgets/BusinessImpactAnalysisWidget";
-export { ComplianceStatusWidget } from "./widgets/ComplianceStatusWidget";
+export { default as ComplianceStatusWidget } from "./widgets/ComplianceStatusWidget";
 export { default as ConfidentialityImpactWidget } from "./widgets/ConfidentialityImpactWidget";
 export { default as CostEstimationWidget } from "./widgets/CostEstimationWidget";
 export { default as IntegrityImpactWidget } from "./widgets/IntegrityImpactWidget";
