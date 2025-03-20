@@ -1,7 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { createCIAOptionsMock } from "../tests/testMocks/ciaOptionsMocks";
 import { SecurityLevel } from "../types/cia";
+import { CIADetails } from "../types/cia-services";
 import { BusinessImpactDetails } from "../types/impact";
 import { createTestCIAContentService } from "../utils/serviceTestUtils";
+
+// Set up mocks using the project's standardized approach
+vi.mock("../hooks/useCIAOptions", () => createCIAOptionsMock());
 
 // Properly format the vi.mock() calls with return objects
 vi.mock("./businessImpactService", () => ({
@@ -321,10 +326,13 @@ const mockDataProvider = {
   // Create default mock data for security levels
   availabilityOptions: (() => {
     const levels = ["None", "Low", "Moderate", "High", "Very High"];
-    const result = {};
+    const result: Record<SecurityLevel, CIADetails> = {} as Record<
+      SecurityLevel,
+      CIADetails
+    >;
 
     levels.forEach((level) => {
-      result[level] = {
+      result[level as SecurityLevel] = {
         description: `Availability ${level.toLowerCase()}`,
         technical: `Availability technical controls`,
         businessImpact: `${
@@ -388,10 +396,13 @@ const mockDataProvider = {
 
   integrityOptions: (() => {
     const levels = ["None", "Low", "Moderate", "High", "Very High"];
-    const result = {};
+    const result: Record<SecurityLevel, CIADetails> = {} as Record<
+      SecurityLevel,
+      CIADetails
+    >;
 
     levels.forEach((level) => {
-      result[level] = {
+      result[level as SecurityLevel] = {
         description: `Integrity ${level.toLowerCase()}`,
         technical: `Integrity technical controls`,
         businessImpact: `${
@@ -455,10 +466,13 @@ const mockDataProvider = {
 
   confidentialityOptions: (() => {
     const levels = ["None", "Low", "Moderate", "High", "Very High"];
-    const result = {};
+    const result: Record<SecurityLevel, CIADetails> = {} as Record<
+      SecurityLevel,
+      CIADetails
+    >;
 
     levels.forEach((level) => {
-      result[level] = {
+      result[level as SecurityLevel] = {
         description: `Confidentiality ${level.toLowerCase()}`,
         technical: `Confidentiality technical controls`,
         businessImpact: `${
@@ -620,7 +634,6 @@ describe("CIAContentService", () => {
   describe("ROI Functions", () => {
     it("getROIEstimate returns expected structure", () => {
       const roiEstimate = service.getROIEstimate("Moderate");
-
       expect(roiEstimate).toHaveProperty("returnRate");
       expect(roiEstimate).toHaveProperty("description");
     });
@@ -644,7 +657,6 @@ describe("CIAContentService", () => {
 
     it("calculateRoi calculates ROI metrics correctly", () => {
       const roi = service.calculateRoi("Moderate", 100000);
-
       expect(roi).toHaveProperty("value");
       expect(roi).toHaveProperty("percentage");
       expect(roi).toHaveProperty("description");

@@ -904,112 +904,58 @@ describe("SecurityResourceService", () => {
   });
 });
 
-// Convert from hoisted to a regular object
-const mockSecurityResources = {
-  resources: [
-    {
-      id: "resource-1",
-      title: "Security Best Practices Guide",
-      description:
-        "Comprehensive guide for implementing security best practices",
-      url: "https://example.com/resource1",
-      category: "general",
-      relevanceScore: 85,
-      tags: ["best practices", "general security"],
-      type: "guide",
-      applicableLevels: {
-        availability: ["Moderate", "High", "Very High"],
-        integrity: ["Moderate", "High", "Very High"],
-        confidentiality: ["Moderate", "High", "Very High"],
-      },
-    },
-    {
-      id: "resource-2",
-      title: "Advanced Encryption Implementation",
-      description:
-        "Guide for implementing advanced encryption for data protection",
-      url: "https://example.com/resource2",
-      category: "confidentiality",
-      relevanceScore: 90,
-      tags: ["encryption", "confidentiality", "data protection"],
-      type: "technical",
-      applicableLevels: {
-        confidentiality: ["High", "Very High"],
-      },
-    },
-    {
-      id: "resource-3",
-      title: "Basic Security Controls",
-      description: "Introduction to implementing basic security controls",
-      url: "https://example.com/resource3",
-      category: "general",
-      relevanceScore: 70,
-      tags: ["basics", "security controls"],
-      type: "guide",
-      applicableLevels: {
-        availability: ["Low", "Moderate"],
-        integrity: ["Low", "Moderate"],
-        confidentiality: ["Low", "Moderate"],
-      },
-    },
-    {
-      id: "resource-4",
-      title: "High Availability Architecture",
-      description:
-        "Designing high availability systems for critical applications",
-      url: "https://example.com/resource4",
-      category: "availability",
-      relevanceScore: 95,
-      tags: ["high availability", "architecture", "resilience"],
-      type: "technical",
-      applicableLevels: {
-        availability: ["High", "Very High"],
-      },
-    },
-    {
-      id: "resource-5",
-      title: "Data Integrity Controls",
-      description: "Implementation guide for data integrity controls",
-      url: "https://example.com/resource5",
-      category: "integrity",
-      relevanceScore: 85,
-      tags: ["integrity", "data validation", "hash verification"],
-      type: "technical",
-      applicableLevels: {
-        integrity: ["High", "Very High"],
-      },
-    },
-  ],
-  valuePoints: {
-    availability: {
-      None: [
-        "No business continuity measures",
-        "High risk of service disruption",
-      ],
-      Low: ["Basic business continuity measures", "Reduced downtime risk"],
-      Moderate: [
-        "Standard availability controls",
-        "Improved business continuity",
-      ],
-      High: ["Advanced availability architecture", "Minimal downtime"],
-      "Very High": ["Maximum resilience", "Near-zero downtime"],
-    },
-    integrity: {
-      None: ["No data integrity assurance", "High risk of data corruption"],
-      Low: ["Basic data validation", "Reduced corruption risk"],
-      Moderate: ["Standard integrity controls", "Data consistency assurance"],
-      High: ["Advanced integrity verification", "Strong data validation"],
-      "Very High": [
-        "Maximum integrity guarantees",
-        "Cryptographic verification",
-      ],
-    },
-    confidentiality: {
-      None: ["No confidentiality controls", "High risk of data exposure"],
-      Low: ["Basic access controls", "Reduced exposure risk"],
-      Moderate: ["Standard encryption", "Data protection measures"],
-      High: ["Advanced encryption", "Strong access controls"],
-      "Very High": ["Maximum confidentiality", "Military-grade protection"],
-    },
+// Create regular variables instead of hoisted exports
+const mockSecurityResources = [
+  {
+    id: "resource-1",
+    title: "NIST Cybersecurity Framework",
+    description: "Guidelines for improving cybersecurity",
+    url: "https://www.nist.gov/cyberframework",
+    type: "general",
+    relevance: 90,
   },
+  {
+    id: "resource-2",
+    title: "OWASP Top 10",
+    description: "Top 10 web application security risks",
+    url: "https://owasp.org/www-project-top-ten/",
+    type: "integrity",
+    relevance: 85,
+  },
+  {
+    id: "resource-3",
+    title: "GDPR Documentation",
+    description: "Guidelines for GDPR compliance",
+    url: "https://gdpr.eu/",
+    type: "confidentiality",
+    relevance: 80,
+  },
+  {
+    id: "resource-4",
+    title: "Site Reliability Engineering Book",
+    description: "Google's approach to service management",
+    url: "https://sre.google/sre-book/table-of-contents/",
+    type: "availability",
+    relevance: 75,
+  },
+];
+
+const mockValuePoints = {
+  None: ["No value points"],
+  Low: ["Basic value point 1", "Basic value point 2"],
+  Moderate: ["Moderate value point 1", "Moderate value point 2"],
+  High: ["High value point 1", "High value point 2"],
+  "Very High": ["Very high value point 1", "Very high value point 2"],
 };
+
+vi.mock("../data/securityResources", () => ({
+  __esModule: true,
+  default: mockSecurityResources,
+  getResourcesByType: vi
+    .fn()
+    .mockImplementation((type) =>
+      mockSecurityResources.filter((r) => r.type === type)
+    ),
+}));
+
+// ... existing code ...
