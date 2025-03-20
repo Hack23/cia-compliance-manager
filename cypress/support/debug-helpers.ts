@@ -40,8 +40,7 @@ export function debugFailedTest(testName: string): void {
       const testId = $widget.attr("data-testid") || `unknown-widget-${index}`;
       const content = $widget.text().substring(0, 200); // Limit to first 200 chars
       cy.log(
-        `Widget ${testId} content: ${content}${
-          content.length >= 200 ? "..." : ""
+        `Widget ${testId} content: ${content}${content.length >= 200 ? "..." : ""
         }`
       );
     }
@@ -156,8 +155,7 @@ export function logDomStructure(selector = "body > *"): void {
         // Limit to first 10 elements
         const $el = Cypress.$(el);
         cy.log(
-          `${i + 1}: ${el.tagName.toLowerCase()}${
-            el.id ? "#" + el.id : ""
+          `${i + 1}: ${el.tagName.toLowerCase()}${el.id ? "#" + el.id : ""
           } - classes: ${el.className}`
         );
       }
@@ -186,19 +184,19 @@ function registerDebugCommands(): void {
   // Register debug helpers with proper options
   Cypress.Commands.add(
     "debugFailure",
-    { prevSubject: false },
+    { prevSubject: true }, // Fix: Use boolean value
     (testName: string) => {
       debugFailure(testName);
       return cy.wrap(null);
     }
   );
 
-  Cypress.Commands.add("logVisibleElements", { prevSubject: false }, () => {
+  Cypress.Commands.add("logVisibleElements", { prevSubject: "optional" }, () => {
     logVisibleElements();
     return cy.wrap(null);
   });
 
-  Cypress.Commands.add("logAllTestIds", { prevSubject: false }, () => {
+  Cypress.Commands.add("logAllTestIds", { prevSubject: "optional" }, () => {
     logAllTestIds();
     return cy.wrap(null);
   });
@@ -224,7 +222,7 @@ function registerDebugCommands(): void {
     });
   });
 
-  Cypress.Commands.add("analyzeWidgetsOnPage", { prevSubject: false }, () => {
+  Cypress.Commands.add("analyzeWidgetsOnPage", { prevSubject: "optional" }, () => {
     cy.log("Analyzing widgets on page...");
 
     // Common widget test IDs from the DOM analysis
@@ -265,7 +263,7 @@ function registerDebugCommands(): void {
   // Fix: Register debugFailedTest command properly with correct typing
   Cypress.Commands.add(
     "debugFailedTest",
-    { prevSubject: false },
+    { prevSubject: true }, // Fix: Use boolean value
     (testName: string) => {
       debugFailedTest(testName);
       return cy.wrap(null);

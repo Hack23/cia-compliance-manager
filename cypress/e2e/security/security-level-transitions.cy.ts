@@ -114,7 +114,12 @@ describe("Security Level Transitions", () => {
         .invoke("text")
         .then((newBodyText) => {
           cy.get("@initialBodyText").then((initialBodyText) => {
-            if (newBodyText !== initialBodyText) {
+            // Fix: Convert initialBodyText to string if it's a JQuery object
+            const initialText = typeof initialBodyText === 'string'
+              ? initialBodyText
+              : String(initialBodyText);
+
+            if (newBodyText !== initialText) {
               cy.log("✓ Page content changed after security level transition");
             } else {
               cy.log("⚠️ Page content did not change after transition");

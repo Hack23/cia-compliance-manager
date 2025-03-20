@@ -1,19 +1,32 @@
 {
   "compilerOptions": {
     "target": "es2019",
-    "lib": ["es2019", "dom", "dom.iterable"],
-    "types": ["cypress", "node", "@testing-library/cypress"],
+    "lib": [
+      "es2019",
+      "dom",
+      "dom.iterable"
+    ],
+    "types": [
+      "cypress",
+      "node",
+      "@testing-library/cypress"
+    ],
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": false,
     "noEmit": true,
     "noImplicitThis": false,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "strict": false
+    "strict": false,
+    "moduleResolution": "node",
+    "jsx": "react-jsx"
   },
-  "include": ["**/*.ts", "../node_modules/cypress", "../cypress.config.ts"]
+  "include": [
+    "**/*.ts",
+    "../node_modules/cypress",
+    "../cypress.config.ts"
+  ]
 }

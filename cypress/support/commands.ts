@@ -44,8 +44,7 @@ Cypress.Commands.add(
       );
       if ($body.find("select").length > 0) {
         cy.log(
-          `📋 Found ${
-            $body.find("select").length
+          `📋 Found ${$body.find("select").length
           } select elements on the page - will try to use these`
         );
         // Use the available selects as a fallback
@@ -58,7 +57,7 @@ Cypress.Commands.add(
         // Return an empty wrapper that won't break the test chain
         return cy.wrap(Cypress.$("<div>"));
       }
-    });
+    }) as unknown as Cypress.Chainable<JQuery<HTMLElement>>;
   }
 );
 
@@ -336,8 +335,7 @@ Cypress.on("fail", (error, runnable) => {
     cy.log(`Page title: ${doc.title}`);
     cy.log(`Body classes: ${doc.body.className}`);
     cy.log(
-      `Number of [data-testid] elements: ${
-        doc.querySelectorAll("[data-testid]").length
+      `Number of [data-testid] elements: ${doc.querySelectorAll("[data-testid]").length
       }`
     );
     cy.log(`URL at failure: ${doc.location.href}`);
@@ -432,14 +430,14 @@ Cypress.Commands.add("ensureAppLoaded", () => {
 /**
  * Helper command to ensure app is fully loaded before continuing
  */
-Cypress.Commands.add("ensureAppLoaded", (timeout = 10000) => {
+Cypress.Commands.add("ensureAppLoaded", (timeoutValue = 10000) => {
+  // Fix: Use number directly for timeout instead of timeoutValue
   // Wait for key app elements to appear
-  cy.get("body", { timeout }).should("exist");
+  cy.get("body").should("exist");
 
+  // Use a simpler approach without timeout object
   // Check for dashboard or widgets
-  cy.get('[data-testid="dashboard-grid"], [data-testid^="widget-"]', {
-    timeout,
-  })
+  cy.get("body").contains('[data-testid="dashboard-grid"], [data-testid^="widget-"]')
     .should("exist")
     .then(() => {
       cy.log("✅ Application loaded successfully");
@@ -464,9 +462,15 @@ Cypress.Commands.add(
 
       if (selectCount >= 3) {
         // Set levels using dropdowns
-        cy.get("select").eq(0).select(availability, { force: true });
-        cy.get("select").eq(1).select(integrity, { force: true });
-        cy.get("select").eq(2).select(confidentiality, { force: true });
+        if (availability !== undefined) {
+          cy.get("select").eq(0).select(availability, { force: true });
+        }
+        if (integrity !== undefined) {
+          cy.get("select").eq(1).select(integrity, { force: true });
+        }
+        if (confidentiality !== undefined) {
+          cy.get("select").eq(2).select(confidentiality, { force: true });
+        }
       } else {
         // Try another method - dispatch a custom event which the app listens for
         cy.window().then((win) => {

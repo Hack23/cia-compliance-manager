@@ -363,6 +363,12 @@ Cypress.Commands.add(
   }
 );
 
+// Remove the problematic standalone example command
+// Instead, define a properly working version with correct typing
+Cypress.Commands.add("findElementBySelector", (selector: string) => {
+  return cy.get(selector) as Cypress.Chainable<JQuery<HTMLElement>>;
+});
+
 // Add command type definitions
 declare global {
   namespace Cypress {
@@ -450,9 +456,15 @@ declare global {
         selector: string,
         options?: { timeout?: number; pollInterval?: number }
       ): Chainable<void>;
+
+      /**
+       * Find element by selector with proper typing
+       */
+      findElementBySelector(selector: string): Chainable<JQuery<HTMLElement>>;
     }
   }
 }
 
 // Export empty to satisfy TypeScript
-export {};
+export { };
+

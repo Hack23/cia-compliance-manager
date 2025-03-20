@@ -40,8 +40,7 @@ describe("Compliance Status Validation", () => {
     // Test each scenario with better error handling
     complianceScenarios.forEach((scenario, index) => {
       cy.log(
-        `Testing compliance scenario ${
-          index + 1
+        `Testing compliance scenario ${index + 1
         } with levels: ${scenario.levels.join(", ")}`
       );
 
@@ -85,8 +84,8 @@ describe("Compliance Status Validation", () => {
         if (foundSelector) {
           cy.log(`Found compliance widget with selector: ${foundSelector}`);
 
-          // Verify compliance status with more flexible assertions
-          cy.get(foundSelector).within(() => {
+          // FIX: Use .first() to ensure we're only operating on a single element
+          cy.get(foundSelector).first().within(() => {
             // Check for status text
             cy.contains(scenario.expectedStatus).should("exist");
 

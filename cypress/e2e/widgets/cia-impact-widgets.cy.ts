@@ -2,22 +2,25 @@ import { SECURITY_LEVELS } from "../../support/constants";
 import { setupWidgetTest, verifyWidgetExists } from "./base-widget-tests";
 import { testSecurityLevelChanges } from "./widget-test-helper";
 
+// Define a proper type for widget pattern to support RegExp
+type WidgetPattern = RegExp[] | RegExp;
+
 // Test all three CIA impact widgets with similar patterns
 [
   {
     name: "Availability Impact",
     id: "availability-impact",
-    pattern: [/availability/i, /uptime|access|recovery/i],
+    pattern: [/availability/i, /uptime|access|recovery/i] as WidgetPattern,
   },
   {
     name: "Integrity Impact",
     id: "integrity-impact",
-    pattern: [/integrity/i, /accuracy|valid|correct/i],
+    pattern: [/integrity/i, /accuracy|valid|correct/i] as WidgetPattern,
   },
   {
     name: "Confidentiality Impact",
     id: "confidentiality-impact",
-    pattern: [/confidentiality/i, /privacy|sensitive|secret/i],
+    pattern: [/confidentiality/i, /privacy|sensitive|secret/i] as WidgetPattern,
   },
 ].forEach((widget) => {
   describe(`${widget.name} Widget`, () => {
@@ -76,8 +79,12 @@ import { testSecurityLevelChanges } from "./widget-test-helper";
             hasSpecificTerms = widget.pattern.some((pattern) =>
               pattern.test(widgetText)
             );
-          } else if (widget.pattern instanceof RegExp) {
-            hasSpecificTerms = widget.pattern.test(widgetText);
+          } else if (typeof widget.pattern === 'object') {
+            // Safe check for RegExp without using instanceof
+            const patternObj = widget.pattern as RegExp;
+            if (typeof patternObj.test === 'function') {
+              hasSpecificTerms = patternObj.test(widgetText);
+            }
           }
 
           // Log what was found for debugging
