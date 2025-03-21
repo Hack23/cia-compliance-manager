@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createTestDataProvider } from "../data/testDataProvider";
 import { createCIAOptionsMock } from "../tests/testMocks/ciaOptionsMocks";
+import { DEFAULT_SECURITY_ICONS } from "../tests/testMocks/mockTypes";
 import { SecurityLevel } from "../types/cia";
 import {
   createTechnicalImplementationService,
@@ -1728,17 +1729,8 @@ describe("TechnicalImplementationService", () => {
         },
       },
       // Add required interface methods
-      getDefaultSecurityIcon: (level: SecurityLevel) => {
-        return (
-          {
-            None: "⚠️",
-            Low: "🔑",
-            Moderate: "🔓",
-            High: "🔒",
-            "Very High": "🔐",
-          }[level] || "❓"
-        );
-      },
+      getDefaultSecurityIcon: (level: SecurityLevel) =>
+        DEFAULT_SECURITY_ICONS[level] || "❓",
       getDefaultValuePoints: (level: SecurityLevel) => {
         return ["Test value point for " + level];
       },

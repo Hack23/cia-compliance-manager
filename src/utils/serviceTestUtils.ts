@@ -10,18 +10,66 @@
 
 import { vi } from "vitest";
 import { createTestDataProvider } from "../data/testDataProvider";
-import { BusinessImpactService, createBusinessImpactService } from "../services/businessImpactService";
-import { CIAContentService, createCIAContentService } from "../services/ciaContentService";
+import { BusinessImpactService } from "../services/businessImpactService";
+import { CIAContentService } from "../services/ciaContentService";
 import { ComplianceService } from "../services/complianceService";
-import { SecurityMetricsService, createSecurityMetricsService } from "../services/securityMetricsService";
+import { SecurityMetricsService } from "../services/securityMetricsService";
 import { SecurityResourceService } from "../services/securityResourceService";
-import { TechnicalImplementationService, createTechnicalImplementationService } from "../services/technicalImplementationService";
+import { TechnicalImplementationService } from "../services/technicalImplementationService";
 import { SecurityLevel } from "../types/cia";
 import { CIADataProvider } from "../types/cia-services";
 
+// Default test security levels - not exported as a hoisted variable
+const defaultSecurityLevels: Record<string, SecurityLevel> = {
+  availabilityLevel: "Moderate" as SecurityLevel,
+  integrityLevel: "Moderate" as SecurityLevel,
+  confidentialityLevel: "Moderate" as SecurityLevel,
+};
+
+/**
+ * Create a mock security level options for testing (not using hoisted)
+ */
+const createMockCIAOptions = () => ({
+  None: {
+    capex: 0,
+    opex: 0,
+    description: "No security controls implemented",
+    technical: "No controls",
+    businessImpact: "Critical",
+  },
+  Low: {
+    capex: 5,
+    opex: 2,
+    description: "Basic security controls",
+    technical: "Basic controls",
+    businessImpact: "High",
+  },
+  Moderate: {
+    capex: 10,
+    opex: 5,
+    description: "Standard security controls",
+    technical: "Standard controls",
+    businessImpact: "Medium",
+  },
+  High: {
+    capex: 15,
+    opex: 8,
+    description: "Advanced security controls",
+    technical: "Advanced controls",
+    businessImpact: "Low",
+  },
+  "Very High": {
+    capex: 20,
+    opex: 10,
+    description: "Maximum security controls",
+    technical: "Maximum controls",
+    businessImpact: "Minimal",
+  },
+});
+
 /**
  * Create a mock data provider with specific overrides
- * 
+ *
  * @param overrides - Properties to override in the test data provider
  * @returns Test data provider with overrides
  */
@@ -30,13 +78,13 @@ export function createMockDataProvider(
 ): CIADataProvider {
   return {
     ...createTestDataProvider(),
-    ...overrides
+    ...overrides,
   };
 }
 
 /**
  * Create a test instance of SecurityMetricsService
- * 
+ *
  * @param overrides - Optional data provider overrides
  * @returns Test SecurityMetricsService instance
  */
@@ -44,12 +92,12 @@ export function createTestSecurityMetricsService(
   overrides: Partial<CIADataProvider> = {}
 ): SecurityMetricsService {
   const dataProvider = createMockDataProvider(overrides);
-  return createSecurityMetricsService(dataProvider);
+  return new SecurityMetricsService(dataProvider);
 }
 
 /**
  * Create a test instance of BusinessImpactService
- * 
+ *
  * @param overrides - Optional data provider overrides
  * @returns Test BusinessImpactService instance
  */
@@ -57,12 +105,12 @@ export function createTestBusinessImpactService(
   overrides: Partial<CIADataProvider> = {}
 ): BusinessImpactService {
   const dataProvider = createMockDataProvider(overrides);
-  return createBusinessImpactService(dataProvider);
+  return new BusinessImpactService(dataProvider);
 }
 
 /**
  * Create a test instance of SecurityResourceService
- * 
+ *
  * @param overrides - Optional data provider overrides
  * @returns Test SecurityResourceService instance
  */
@@ -75,7 +123,7 @@ export function createTestSecurityResourceService(
 
 /**
  * Create a test instance of TechnicalImplementationService
- * 
+ *
  * @param overrides - Optional data provider overrides
  * @returns Test TechnicalImplementationService instance
  */
@@ -83,12 +131,12 @@ export function createTestTechnicalImplementationService(
   overrides: Partial<CIADataProvider> = {}
 ): TechnicalImplementationService {
   const dataProvider = createMockDataProvider(overrides);
-  return createTechnicalImplementationService(dataProvider);
+  return new TechnicalImplementationService(dataProvider);
 }
 
 /**
  * Create a test instance of ComplianceService
- * 
+ *
  * @param overrides - Optional data provider overrides
  * @returns Test ComplianceService instance
  */
@@ -105,7 +153,7 @@ export function createTestComplianceService(
 export const mockSecurityLevels = {
   availabilityLevel: "Moderate" as SecurityLevel,
   integrityLevel: "Moderate" as SecurityLevel,
-  confidentialityLevel: "Moderate" as SecurityLevel
+  confidentialityLevel: "Moderate" as SecurityLevel,
 };
 
 /**
@@ -115,28 +163,28 @@ export const mockCIAOptions = vi.hoisted(() => ({
   None: {
     capex: 0,
     opex: 0,
-    description: "No security controls implemented"
+    description: "No security controls implemented",
   },
   Low: {
     capex: 5,
     opex: 2,
-    description: "Basic security controls"
+    description: "Basic security controls",
   },
   Moderate: {
     capex: 10,
     opex: 5,
-    description: "Standard security controls"
+    description: "Standard security controls",
   },
   High: {
     capex: 15,
     opex: 8,
-    description: "Advanced security controls"
+    description: "Advanced security controls",
   },
   "Very High": {
     capex: 20,
     opex: 10,
-    description: "Maximum security controls"
-  }
+    description: "Maximum security controls",
+  },
 }));
 
 /**
@@ -154,13 +202,13 @@ export function mockCIAOptionsHook() {
         LOW: { returnRate: "50%", description: "Low ROI" },
         MODERATE: { returnRate: "200%", description: "Moderate ROI" },
         HIGH: { returnRate: "350%", description: "High ROI" },
-        VERY_HIGH: { returnRate: "500%", description: "Very high ROI" }
-      }
+        VERY_HIGH: { returnRate: "500%", description: "Very high ROI" },
+      },
     }),
     // Export constants directly as well
     availabilityOptions: mockCIAOptions,
     integrityOptions: mockCIAOptions,
-    confidentialityOptions: mockCIAOptions
+    confidentialityOptions: mockCIAOptions,
   }));
 }
 
@@ -181,5 +229,5 @@ export function createTestCIAContentService(
   customDataProvider?: CIADataProvider
 ): CIAContentService {
   const dataProvider = customDataProvider || createTestServiceDataProvider();
-  return createCIAContentService(dataProvider);
+  return new CIAContentService(dataProvider);
 }
