@@ -46,7 +46,7 @@ enum WidgetSizePreset {
   MEDIUM = "medium",
   LARGE = "large",
   EXTRA_LARGE = "extraLarge",
-  FULL_WIDTH = "fullWidth"
+  FULL_WIDTH = "fullWidth",
 }
 
 // Define WidgetType for local use since it's not exported from types/widgets
@@ -94,19 +94,19 @@ export const WIDGET_CONTENT: Record<string, string> = {
 
 /**
  * Widget Helpers
- * 
+ *
  * ## Technical Implementation
  * This module provides utility functions for managing and rendering widgets in the application. It includes functions for creating widget configurations, filtering and sorting widgets, and determining widget visibility based on security levels.
- * 
+ *
  * ## Future-Proofing
  * The functions in this module are designed to be flexible and extensible, allowing for easy addition of new widget types and configurations. The use of enums and constants ensures that the code remains maintainable and easy to update.
- * 
+ *
  * ## Performance
  * The functions are optimized for performance, with efficient filtering and sorting algorithms. The use of memoization and caching techniques can be considered for further performance improvements.
- * 
+ *
  * ## Maintainability
  * The code is structured in a modular and reusable manner, with clear separation of concerns. Each function is well-documented and follows consistent naming conventions, making it easy to understand and maintain.
- * 
+ *
  * ## Integration
  * This module integrates with other components in the application by providing a consistent API for managing widgets. It ensures that widgets are displayed correctly based on the current security levels and other configuration settings.
  */
@@ -315,7 +315,7 @@ export function getWidgetSize(widget: Partial<WidgetConfig>): WidgetDimension {
 
   // Get dimensions based on size preset
   const size = widget.size?.toLowerCase();
-  
+
   switch (size) {
     case "small":
       return { width: 1, height: 1 };
@@ -445,21 +445,21 @@ export function getTestId(widgetId: string, elementId: string): string {
 
 /**
  * Helper utilities for widget components
- * 
+ *
  * ## Business Perspective
- * 
+ *
  * These utilities ensure consistent widget behavior across the dashboard,
  * supporting a unified user experience and reliable security information
  * presentation. The helper functions improve widget maintainability and
  * reduce duplication of business logic. 📊
- * 
+ *
  * Consistent widget handling improves the overall quality of the security
  * assessment dashboard and makes it more intuitive for users.
  */
 
 /**
  * Get widget grid column span based on widget size
- * 
+ *
  * @param size - Widget size (small, medium, large, full)
  * @returns CSS grid column span class
  */
@@ -480,11 +480,13 @@ export function getWidgetColumnSpan(size: WidgetSizeString): string {
 
 /**
  * Get widget grid row span based on widget height
- * 
+ *
  * @param height - Widget height (small, medium, large, auto)
  * @returns CSS grid row span class
  */
-export function getWidgetRowSpan(height: "small" | "medium" | "large" | "auto" = "auto"): string {
+export function getWidgetRowSpan(
+  height: "small" | "medium" | "large" | "auto" = "auto"
+): string {
   switch (height) {
     case "small":
       return "row-span-1";
@@ -500,7 +502,7 @@ export function getWidgetRowSpan(height: "small" | "medium" | "large" | "auto" =
 
 /**
  * Create a widget configuration
- * 
+ *
  * @param id - Widget ID
  * @param type - Widget type
  * @param title - Widget title
@@ -526,11 +528,15 @@ export function createWidget(
 
 /**
  * Get widget error display component
- * 
+ *
  * @param message - Error message to display
  * @returns Error component for widget
  */
-export function WidgetError({ message = "An error occurred in this widget" }: { message?: string }): React.ReactElement {
+export function WidgetError({
+  message = "An error occurred in this widget",
+}: {
+  message?: string;
+}): React.ReactElement {
   return (
     <div className="p-4 bg-red-50 border border-red-200 rounded-md">
       <h3 className="text-red-800 font-medium mb-2">Widget Error</h3>
@@ -541,7 +547,7 @@ export function WidgetError({ message = "An error occurred in this widget" }: { 
 
 /**
  * Get widget loading display component
- * 
+ *
  * @returns Loading component for widget
  */
 export function WidgetLoading(): React.ReactElement {
@@ -554,15 +560,30 @@ export function WidgetLoading(): React.ReactElement {
 
 /**
  * Get widget empty state display component
- * 
+ *
  * @param message - Message to display in empty state
  * @returns Empty state component for widget
  */
-export function WidgetEmptyState({ message = "No data available" }: { message?: string }): React.ReactElement {
+export function WidgetEmptyState({
+  message = "No data available",
+}: {
+  message?: string;
+}): React.ReactElement {
   return (
     <div className="flex flex-col items-center justify-center h-full min-h-32 p-4 text-gray-500">
-      <svg className="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      <svg
+        className="w-8 h-8 mb-2"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
       </svg>
       <p className="text-center">{message}</p>
     </div>
@@ -571,11 +592,15 @@ export function WidgetEmptyState({ message = "No data available" }: { message?: 
 
 /**
  * Get security level badge component
- * 
+ *
  * @param level - Security level to display
  * @returns Security level badge component
  */
-export function SecurityLevelBadge({ level }: { level: SecurityLevel }): React.ReactElement {
+export function SecurityLevelBadge({
+  level,
+}: {
+  level: SecurityLevel;
+}): React.ReactElement {
   // Get color class based on security level
   const getColorClass = (level: SecurityLevel): string => {
     switch (level) {
@@ -595,9 +620,11 @@ export function SecurityLevelBadge({ level }: { level: SecurityLevel }): React.R
   };
 
   const colorClass = getColorClass(level);
-  
+
   return (
-    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${colorClass}`}>
+    <span
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${colorClass}`}
+    >
       {level}
     </span>
   );
@@ -605,7 +632,7 @@ export function SecurityLevelBadge({ level }: { level: SecurityLevel }): React.R
 
 /**
  * Format security level from any input
- * 
+ *
  * @param level - Input level that may need normalization
  * @returns Normalized SecurityLevel or default
  */
@@ -613,23 +640,23 @@ export function formatSecurityLevel(level: unknown): SecurityLevel {
   if (isSecurityLevel(level)) {
     return level;
   }
-  
+
   if (typeof level === "string") {
     const normalizedLevel = level.trim();
-    
+
     if (/^none$/i.test(normalizedLevel)) return "None";
     if (/^low$/i.test(normalizedLevel)) return "Low";
     if (/^(moderate|medium)$/i.test(normalizedLevel)) return "Moderate";
     if (/^high$/i.test(normalizedLevel)) return "High";
     if (/^very\s*high$/i.test(normalizedLevel)) return "Very High";
   }
-  
+
   return "None";
 }
 
 /**
  * Get risk level color class
- * 
+ *
  * @param riskLevel - Risk level string
  * @returns CSS color class for the risk level
  */
@@ -651,7 +678,7 @@ export function getRiskLevelColorClass(riskLevel: string): string {
 
 /**
  * Parse and sanitize widget ID
- * 
+ *
  * @param id - Raw widget ID
  * @returns Sanitized widget ID
  */
@@ -661,19 +688,19 @@ export function sanitizeWidgetId(id: string): string {
 
 /**
  * Creates a consistent key-value display component
- * 
+ *
  * @param label - Label text
  * @param value - Value to display
  * @param testId - Optional test ID
  * @returns Key-value component
  */
-export function KeyValuePair({ 
-  label, 
-  value, 
-  testId 
-}: { 
-  label: string; 
-  value: React.ReactNode; 
+export function KeyValuePair({
+  label,
+  value,
+  testId,
+}: {
+  label: string;
+  value: React.ReactNode;
   testId?: string;
 }): React.ReactElement {
   return (
@@ -686,7 +713,7 @@ export function KeyValuePair({
 
 /**
  * Create a key-value pair with risk level styling
- * 
+ *
  * @param label - Label text
  * @param value - Risk level value
  * @param testId - Optional test ID
@@ -702,7 +729,7 @@ export function RiskLevelKeyValue({
   testId?: string;
 }): React.ReactElement {
   const colorClass = getRiskLevelColorClass(value);
-  
+
   return (
     <div className="flex flex-col mb-2" data-testid={testId}>
       <span className="text-sm text-gray-500">{label}</span>
@@ -713,30 +740,33 @@ export function RiskLevelKeyValue({
 
 /**
  * Handle widget errors and display error message
- * 
+ *
  * @param error - Error to display
  * @param testId - Test ID for error component
  * @returns Error component or null if no error
  */
-export function handleWidgetError(error: Error | null | undefined, testId: string): React.ReactNode {
+export function handleWidgetError(
+  error: Error | null | undefined,
+  testId: string
+): React.ReactNode {
   if (!error) return null;
-  
+
   return (
-    <div 
-      data-testid={testId} 
+    <div
+      data-testid={testId}
       className="p-4 bg-red-50 border border-red-200 rounded-md text-red-800"
     >
       <div className="flex items-start">
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          className="h-5 w-5 text-red-600 mr-2 mt-0.5" 
-          viewBox="0 0 20 20" 
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5 text-red-600 mr-2 mt-0.5"
+          viewBox="0 0 20 20"
           fill="currentColor"
         >
-          <path 
-            fillRule="evenodd" 
-            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" 
-            clipRule="evenodd" 
+          <path
+            fillRule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+            clipRule="evenodd"
           />
         </svg>
         <div>
@@ -746,4 +776,168 @@ export function handleWidgetError(error: Error | null | undefined, testId: strin
       </div>
     </div>
   );
+}
+
+/**
+ * Widget Helper Utilities
+ *
+ * This module provides essential helper functions for widget components in the CIA Compliance Manager.
+ * These utilities provide consistent formatting, validation, and data transformation for security widgets.
+ *
+ * ## Business Perspective
+ *
+ * These utilities ensure consistent treatment of security levels and business metrics
+ * across all widgets, maintaining integrity of security data representation. 🔒
+ *
+ * @packageDocumentation
+ */
+
+import { getSecurityLevelColorClass } from "./colorUtils";
+
+/**
+ * Format security level string for display
+ *
+ * @param level Security level string that might be in any case format
+ * @returns Properly formatted security level
+ */
+export function formatSecurityLevel(level?: string): string {
+  if (!level) return "None";
+
+  // Handle special case for "Very High"
+  if (level.toLowerCase() === "very high") return "Very High";
+
+  // First letter uppercase, rest lowercase
+  return level.charAt(0).toUpperCase() + level.slice(1).toLowerCase();
+}
+
+/**
+ * Creates a styled security level component with proper color-coding
+ *
+ * @param level Security level to display
+ * @returns Styled React element with proper security level color
+ */
+export function SecurityLevelDisplay({
+  level,
+}: {
+  level: SecurityLevel;
+}): JSX.Element {
+  const colorClass = getSecurityLevelColorClass(level);
+
+  return (
+    <span
+      className={`font-medium ${colorClass}`}
+      data-testid={`security-level-${level.toLowerCase().replace(" ", "-")}`}
+    >
+      {level}
+    </span>
+  );
+}
+
+/**
+ * Convert string to SecurityLevel type
+ *
+ * @param level String to convert to SecurityLevel
+ * @returns Valid SecurityLevel value
+ */
+export function asSecurityLevel(level?: string): SecurityLevel {
+  if (!level) return "None";
+
+  // Normalize the input
+  const normalizedLevel = level.trim().toLowerCase();
+
+  // Map to proper SecurityLevel values
+  if (normalizedLevel === "none") return "None";
+  if (normalizedLevel === "low") return "Low";
+  if (normalizedLevel === "moderate" || normalizedLevel === "medium")
+    return "Moderate";
+  if (normalizedLevel === "high") return "High";
+  if (normalizedLevel === "very high") return "Very High";
+
+  // Default fallback
+  return "Moderate";
+}
+
+/**
+ * Get recommended next security level based on current level
+ *
+ * @param currentLevel Current security level
+ * @returns Recommended next level or undefined if already at maximum
+ */
+export function getRecommendedNextLevel(
+  currentLevel: SecurityLevel
+): SecurityLevel | undefined {
+  const levels: SecurityLevel[] = [
+    "None",
+    "Low",
+    "Moderate",
+    "High",
+    "Very High",
+  ];
+  const currentIndex = levels.indexOf(currentLevel);
+
+  if (currentIndex < levels.length - 1) {
+    return levels[currentIndex + 1];
+  }
+
+  return undefined; // Already at maximum level
+}
+
+/**
+ * Format numeric values with proper formatting for security metrics
+ *
+ * @param value Numeric value to format
+ * @param prefix Optional prefix to add (e.g., '$')
+ * @param suffix Optional suffix to add (e.g., '%')
+ * @returns Formatted string
+ */
+export function formatSecurityMetric(
+  value: number,
+  prefix = "",
+  suffix = ""
+): string {
+  // Format the number with commas for thousands
+  const formattedValue = new Intl.NumberFormat().format(value);
+  return `${prefix}${formattedValue}${suffix}`;
+}
+
+/**
+ * Calculate widget risk level from security levels
+ *
+ * ## Business Perspective
+ *
+ * This calculation translates security levels to risk categories
+ * which helps organizations understand potential business impacts. 💼
+ *
+ * @param availabilityLevel Availability security level
+ * @param integrityLevel Integrity security level
+ * @param confidentialityLevel Confidentiality security level
+ * @returns Risk level string
+ */
+export function calculateWidgetRiskLevel(
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel
+): string {
+  // Convert security levels to numeric values
+  const levels = {
+    None: 0,
+    Low: 1,
+    Moderate: 2,
+    High: 3,
+    "Very High": 4,
+  };
+
+  // Calculate average security level
+  const avgLevel =
+    (levels[availabilityLevel] +
+      levels[integrityLevel] +
+      levels[confidentialityLevel]) /
+    3;
+
+  // Map to risk level
+  if (avgLevel < 1) return "Critical";
+  if (avgLevel < 2) return "High";
+  if (avgLevel < 3) return "Medium";
+  if (avgLevel < 4) return "Low";
+  return "Minimal";
 }
