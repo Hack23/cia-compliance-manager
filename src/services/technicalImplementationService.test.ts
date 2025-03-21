@@ -1,10 +1,14 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createTestDataProvider } from "../data/testDataProvider";
+import { createCIAOptionsMock } from "../tests/testMocks/ciaOptionsMocks";
 import { SecurityLevel } from "../types/cia";
 import {
   createTechnicalImplementationService,
   TechnicalImplementationService,
 } from "./technicalImplementationService";
+
+// Use the mock helper properly
+vi.mock("../hooks/useCIAOptions", () => createCIAOptionsMock());
 
 // Mock data provider - convert from hoisted to regular object
 const mockDataProvider = {
@@ -1530,8 +1534,6 @@ describe("TechnicalImplementationService", () => {
     });
   });
 });
-
-import { createCIAOptionsMock } from "../tests/testMocks/ciaOptionsMocks";
 
 // Use the mock helper properly
 vi.mock("../hooks/useCIAOptions", () => createCIAOptionsMock());

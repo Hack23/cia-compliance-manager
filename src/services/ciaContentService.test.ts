@@ -4,6 +4,14 @@ import { SecurityLevel } from "../types/cia";
 import { CIADetails } from "../types/cia-services";
 import { BusinessImpactDetails } from "../types/impact";
 import { createTestCIAContentService } from "../utils/serviceTestUtils";
+import {
+  CIAContentService,
+  createCIAContentService,
+  getInformationSensitivity,
+  getRiskBadgeVariant,
+  getROIEstimate,
+  getValuePoints,
+} from "./ciaContentService";
 
 // Set up mocks using the project's standardized approach
 vi.mock("../hooks/useCIAOptions", () => createCIAOptionsMock());
@@ -311,15 +319,6 @@ vi.mock("./securityResourceService", () => ({
     ]),
   })),
 }));
-
-import {
-  CIAContentService,
-  createCIAContentService,
-  getInformationSensitivity,
-  getRiskBadgeVariant,
-  getROIEstimate,
-  getValuePoints,
-} from "./ciaContentService";
 
 // Convert to regular object instead of using vi.hoisted
 const mockDataProvider = {
