@@ -1,31 +1,15 @@
 /**
  * Security-specific test utilities for CIA Compliance Manager.
  *
- * Consolidates utilities from:
- * - src/test/securityLevelTestUtils.ts
- * - src/utils/test-helpers.ts (security functions)
- * - src/tests/testUtils/testData.ts (security data)
- *
  * @packageDocumentation
  */
 
+import { vi } from "vitest";
 import { SecurityLevel } from "../../types/cia";
 import { TEST_CIA_OPTIONS } from "../testUtils/testData";
 
 /**
- * Standard test data for security levels
- */
-export const TEST_SECURITY_LEVELS: SecurityLevel[] = [
-  "None",
-  "Low",
-  "Moderate",
-  "High",
-  "Very High",
-];
-
-/**
  * Creates mock security level state with standard values
- * @returns Security level state with "Moderate" as default for all levels
  */
 export function createMockSecurityLevelState() {
   return {
@@ -37,6 +21,17 @@ export function createMockSecurityLevelState() {
     setConfidentialityLevel: vi.fn(),
   };
 }
+
+/**
+ * Standard test data for security levels
+ */
+export const TEST_SECURITY_LEVELS: SecurityLevel[] = [
+  "None",
+  "Low",
+  "Moderate",
+  "High",
+  "Very High",
+];
 
 /**
  * Converts a string value to SecurityLevel type

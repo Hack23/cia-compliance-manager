@@ -7,7 +7,13 @@
  * @packageDocumentation
  */
 
-import { render, RenderOptions } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  RenderOptions,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import React from "react";
 import { vi } from "vitest";
 import { SecurityLevel } from "../../types/cia";
@@ -89,3 +95,15 @@ export function renderWithTheme(
 
   return render(ui, options);
 }
+
+/**
+ * Renders a component with basic test configuration
+ */
+export function renderWithTestConfig(ui: React.ReactElement) {
+  return render(ui, {
+    // Add any global test configuration here
+  });
+}
+
+// Re-export from @testing-library/react for convenience
+export { fireEvent, render, screen, waitFor };

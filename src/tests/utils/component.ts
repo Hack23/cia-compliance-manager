@@ -73,3 +73,5 @@ export function createTestClickHandlers() {
     onAction: vi.fn(),
   };
 }
+
+// Note: Removed duplicate declarations and incorrect imports
