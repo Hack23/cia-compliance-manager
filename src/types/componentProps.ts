@@ -6,6 +6,7 @@
  */
 
 import React from "react";
+import { CIAComponent, SecurityLevel } from "./cia";
 // Import types properly to avoid duplicates
 import type {
   AvailabilityImpactWidgetProps,
@@ -18,8 +19,49 @@ import type {
   SecurityResourcesWidgetProps,
   TechnicalDetailsWidgetProps,
   ValueCreationWidgetProps,
-  WidgetProps
+  WidgetProps,
 } from "./widgets";
+
+/**
+ * Common props shared by multiple components
+ */
+export interface CommonComponentProps {
+  className?: string;
+  testId?: string;
+  disabled?: boolean;
+}
+
+/**
+ * Props for components that display security levels
+ */
+export interface SecurityLevelDisplayProps extends CommonComponentProps {
+  level: SecurityLevel;
+  showIcon?: boolean;
+  showDescription?: boolean;
+  component?: CIAComponent;
+}
+
+/**
+ * Props for components that select security levels
+ */
+export interface SecurityLevelSelectProps extends CommonComponentProps {
+  value?: SecurityLevel;
+  onChange?: (level: SecurityLevel) => void;
+  component?: CIAComponent;
+  showDescription?: boolean;
+  required?: boolean;
+}
+
+/**
+ * Props for components that display risk assessment
+ */
+export interface RiskAssessmentProps extends CommonComponentProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  showDetails?: boolean;
+  showRecommendations?: boolean;
+}
 
 /**
  * Props for the KeyValuePair component that displays a key-value combination.
@@ -237,6 +279,5 @@ export type {
   SecurityResourcesWidgetProps,
   TechnicalDetailsWidgetProps,
   ValueCreationWidgetProps,
-  WidgetProps
+  WidgetProps,
 };
-
