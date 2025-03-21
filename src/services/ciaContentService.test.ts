@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createCIAOptionsMock } from "../tests/testMocks/ciaOptionsMocks";
+import { createTestCIAContentService } from "../tests/utils/mock";
 import { SecurityLevel } from "../types/cia";
 import { CIADetails } from "../types/cia-services";
 import { BusinessImpactDetails } from "../types/impact";
-import { createTestCIAContentService } from "../utils/serviceTestUtils";
 import {
   CIAContentService,
   createCIAContentService,

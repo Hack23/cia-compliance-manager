@@ -1,6 +1,6 @@
 /**
- * @deprecated Use the utilities from 'src/tests/utils' instead.
- * This file will be removed in v1.1.0.
+ * Compatibility re-export point for test utilities.
+ * Please migrate to using imports from 'src/tests/utils' directly.
  */
 
 export * from "../tests/utils";

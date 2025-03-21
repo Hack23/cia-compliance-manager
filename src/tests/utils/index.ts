@@ -19,7 +19,7 @@ export * from "./component";
 export * from "./mock";
 
 // Re-export from render utilities
-export * from "./render"; // Note: This will work with either .ts or .tsx extension
+export * from "./render";
 
 // Re-export from security utilities
 export * from "./security";
@@ -29,20 +29,3 @@ export * from "./dom";
 
 // Re-export from chart utilities
 export * from "./chart";
-
-// Legacy re-exports for backward compatibility
-import * as securityLevelTestUtils from "../../test/securityLevelTestUtils";
-import * as legacyTestHelpers from "../../utils/test-helpers";
-import * as legacyTestUtils from "../../utils/test-utils";
-import * as legacyTestMocks from "../testMocks";
-
-/**
- * @deprecated Use specific imports from test utils instead.
- * This will be removed in v1.1.0.
- */
-export const legacy = {
-  ...legacyTestUtils,
-  ...legacyTestHelpers,
-  ...legacyTestMocks,
-  ...securityLevelTestUtils,
-};

@@ -222,9 +222,9 @@ const mockComplianceData = {
   },
 };
 
+import { createTestComplianceService } from "../tests/utils/mock";
 import { SecurityLevel } from "../types/cia";
 import { CIADataProvider, CIADetails } from "../types/cia-services";
-import { createTestComplianceService } from "../utils/serviceTestUtils";
 import {
   ComplianceServiceAdapter,
   ComplianceService as ComplianceServiceStatic,
