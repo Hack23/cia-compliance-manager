@@ -27,43 +27,33 @@ const defaultSecurityLevels: Record<string, SecurityLevel> = {
 };
 
 /**
- * Create a mock security level options for testing (not using hoisted)
+ * Create a mock CIA options object (regular object instead of hoisted)
  */
-const createMockCIAOptions = () => ({
+const createMockCIAOptionsObject = () => ({
   None: {
     capex: 0,
     opex: 0,
     description: "No security controls implemented",
-    technical: "No controls",
-    businessImpact: "Critical",
   },
   Low: {
     capex: 5,
     opex: 2,
     description: "Basic security controls",
-    technical: "Basic controls",
-    businessImpact: "High",
   },
   Moderate: {
     capex: 10,
     opex: 5,
     description: "Standard security controls",
-    technical: "Standard controls",
-    businessImpact: "Medium",
   },
   High: {
     capex: 15,
     opex: 8,
     description: "Advanced security controls",
-    technical: "Advanced controls",
-    businessImpact: "Low",
   },
   "Very High": {
     capex: 20,
     opex: 10,
     description: "Maximum security controls",
-    technical: "Maximum controls",
-    businessImpact: "Minimal",
   },
 });
 
@@ -157,46 +147,17 @@ export const mockSecurityLevels = {
 };
 
 /**
- * Create hoisted Vitest mock for security level options
- */
-export const mockCIAOptions = vi.hoisted(() => ({
-  None: {
-    capex: 0,
-    opex: 0,
-    description: "No security controls implemented",
-  },
-  Low: {
-    capex: 5,
-    opex: 2,
-    description: "Basic security controls",
-  },
-  Moderate: {
-    capex: 10,
-    opex: 5,
-    description: "Standard security controls",
-  },
-  High: {
-    capex: 15,
-    opex: 8,
-    description: "Advanced security controls",
-  },
-  "Very High": {
-    capex: 20,
-    opex: 10,
-    description: "Maximum security controls",
-  },
-}));
-
-/**
  * Mock service response for common CIA options
  */
 export function mockCIAOptionsHook() {
-  return vi.mock("../hooks/useCIAOptions", () => ({
+  const mockOptions = createMockCIAOptionsObject();
+
+  const mockConfig = {
     __esModule: true,
     useCIAOptions: () => ({
-      availabilityOptions: mockCIAOptions,
-      integrityOptions: mockCIAOptions,
-      confidentialityOptions: mockCIAOptions,
+      availabilityOptions: mockOptions,
+      integrityOptions: mockOptions,
+      confidentialityOptions: mockOptions,
       ROI_ESTIMATES: {
         NONE: { returnRate: "0%", description: "No ROI" },
         LOW: { returnRate: "50%", description: "Low ROI" },
@@ -206,10 +167,15 @@ export function mockCIAOptionsHook() {
       },
     }),
     // Export constants directly as well
-    availabilityOptions: mockCIAOptions,
-    integrityOptions: mockCIAOptions,
-    confidentialityOptions: mockCIAOptions,
-  }));
+    availabilityOptions: mockOptions,
+    integrityOptions: mockOptions,
+    confidentialityOptions: mockOptions,
+  };
+
+  vi.mock("../hooks/useCIAOptions", () => mockConfig);
+
+  // Return the mock configuration so it can be tested
+  return mockConfig;
 }
 
 /**

@@ -1,12 +1,12 @@
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createCIAOptionsMock } from "../tests/testMocks/ciaOptionsMocks";
 import { SecurityLevel } from "../types/cia";
 import {
-  createSecurityMetricsService,
   SecurityMetricsService,
+  createSecurityMetricsService,
 } from "./securityMetricsService";
 
-// Use the mock helper properly - this replaces the exported hoisted variable
+// Use the mock helper properly
 vi.mock("../hooks/useCIAOptions", () => createCIAOptionsMock());
 
 // Regular test constants (not hoisted or exported)

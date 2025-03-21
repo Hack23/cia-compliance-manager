@@ -10,7 +10,7 @@ import {
   isCIAComponentType,
 } from "../types/cia-services";
 import { BusinessImpactService } from "./businessImpactService";
-import { ComplianceServiceAdapter } from './ComplianceServiceAdapter';
+import { ComplianceServiceAdapter } from "./ComplianceServiceAdapter";
 import { SecurityMetricsService } from "./securityMetricsService";
 import { SecurityResourceService } from "./securityResourceService";
 import { TechnicalImplementationService } from "./technicalImplementationService";
@@ -141,32 +141,37 @@ const logger = {
   },
   info: (message: string) => {
     console.info(message);
-  }
+  },
 };
 
 /**
  * Capitalizes the first letter of each word in a string
  */
 function capitalize(str: string): string {
-  if (!str) return '';
+  if (!str) return "";
   return str
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(' ');
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
 }
 
 /**
  * Get description based on security score
  */
 function getSecurityScoreDescription(score: number): string {
-  if (score >= 90) return "Exceptional security posture meeting highest standards";
-  if (score >= 80) return "Very strong security posture exceeding most requirements";
+  if (score >= 90)
+    return "Exceptional security posture meeting highest standards";
+  if (score >= 80)
+    return "Very strong security posture exceeding most requirements";
   if (score >= 70) return "Strong security posture meeting most requirements";
-  if (score >= 60) return "Adequate security posture with some improvements needed";
-  if (score >= 50) return "Moderate security posture with significant improvements needed";
+  if (score >= 60)
+    return "Adequate security posture with some improvements needed";
+  if (score >= 50)
+    return "Moderate security posture with significant improvements needed";
   if (score >= 40) return "Weak security posture with many vulnerabilities";
   if (score >= 30) return "Poor security posture requiring immediate attention";
-  if (score >= 20) return "Very poor security posture with critical vulnerabilities";
+  if (score >= 20)
+    return "Very poor security posture with critical vulnerabilities";
   return "Critical security posture requiring complete overhaul";
 }
 
@@ -229,7 +234,7 @@ export class CIAContentService {
         opex: 0,
         bg: "#ffffff",
         text: "#000000",
-        recommendations: []
+        recommendations: [],
       },
       Low: {
         description: "Invalid component",
@@ -239,7 +244,7 @@ export class CIAContentService {
         opex: 0,
         bg: "#ffffff",
         text: "#000000",
-        recommendations: []
+        recommendations: [],
       },
       Moderate: {
         description: "Invalid component",
@@ -249,7 +254,7 @@ export class CIAContentService {
         opex: 0,
         bg: "#ffffff",
         text: "#000000",
-        recommendations: []
+        recommendations: [],
       },
       High: {
         description: "Invalid component",
@@ -259,7 +264,7 @@ export class CIAContentService {
         opex: 0,
         bg: "#ffffff",
         text: "#000000",
-        recommendations: []
+        recommendations: [],
       },
       "Very High": {
         description: "Invalid component",
@@ -269,8 +274,8 @@ export class CIAContentService {
         opex: 0,
         bg: "#ffffff",
         text: "#000000",
-        recommendations: []
-      }
+        recommendations: [],
+      },
     };
   }
 
@@ -398,7 +403,10 @@ export class CIAContentService {
   ): BusinessImpactDetails {
     // Get the impact from the business impact service
     if (this.businessImpactService) {
-      const impact = this.businessImpactService.getBusinessImpact(component, level);
+      const impact = this.businessImpactService.getBusinessImpact(
+        component,
+        level
+      );
       return impact;
     }
     // Return an empty object that satisfies the interface if the service is not available
@@ -406,7 +414,7 @@ export class CIAContentService {
       summary: "",
       financial: { description: "", riskLevel: "" },
       operational: { description: "", riskLevel: "" },
-      reputational: { description: "", riskLevel: "" }
+      reputational: { description: "", riskLevel: "" },
     };
   }
 
@@ -521,7 +529,7 @@ export class CIAContentService {
 
   /**
    * Calculate business impact level based on security levels
-   * 
+   *
    * @param availabilityLevel - Availability security level
    * @param integrityLevel - Integrity security level (optional, defaults to availabilityLevel)
    * @param confidentialityLevel - Confidentiality security level (optional, defaults to availabilityLevel)
@@ -563,18 +571,22 @@ export class CIAContentService {
 
   /**
    * Get implementation considerations for the given CIA levels.
-   * 
+   *
    * @param levels - Tuple containing exactly three security levels in order: [availability, integrity, confidentiality]
    * @returns String with implementation considerations
    */
-  public getImplementationConsiderations(levels: [SecurityLevel, SecurityLevel, SecurityLevel]): string {
+  public getImplementationConsiderations(
+    levels: [SecurityLevel, SecurityLevel, SecurityLevel]
+  ): string {
     // Validate parameters
     if (!levels || !Array.isArray(levels) || levels.length !== 3) {
       return "Invalid security levels provided. Please provide an array with exactly three security levels.";
     }
 
     // Delegate to the technical implementation service
-    return this.technicalImplementationService.getImplementationConsiderations(levels);
+    return this.technicalImplementationService.getImplementationConsiderations(
+      levels
+    );
   }
 
   /**
@@ -617,14 +629,19 @@ export class CIAContentService {
       confidentiality
     );
 
-    if (status.compliantFrameworks.length > 0 && status.nonCompliantFrameworks.length === 0) {
+    if (
+      status.compliantFrameworks.length > 0 &&
+      status.nonCompliantFrameworks.length === 0
+    ) {
       return `Current ${level} level meets requirements for most frameworks`;
     } else if (status.partiallyCompliantFrameworks.length > 0) {
-      return `Current ${level} level partially meets requirements; consider upgrading to ${level === "Low" ? "Moderate" : "High"
-        } for full compliance`;
+      return `Current ${level} level partially meets requirements; consider upgrading to ${
+        level === "Low" ? "Moderate" : "High"
+      } for full compliance`;
     } else {
-      return `Current ${level} level is insufficient; upgrade to at least ${level === "None" ? "Low" : level === "Low" ? "Moderate" : "High"
-        } for basic compliance`;
+      return `Current ${level} level is insufficient; upgrade to at least ${
+        level === "None" ? "Low" : level === "Low" ? "Moderate" : "High"
+      } for basic compliance`;
     }
   }
 
@@ -663,10 +680,12 @@ export class CIAContentService {
     if (adjustedWeeks <= 0) return "No implementation required";
     if (adjustedWeeks <= 4) return `${adjustedWeeks} weeks`;
     if (adjustedWeeks <= 12)
-      return `${Math.round(adjustedWeeks / 4)} to ${Math.round(adjustedWeeks / 4) + 1
-        } months`;
-    return `${Math.round(adjustedWeeks / 4)} to ${Math.round(adjustedWeeks / 4) + 2
+      return `${Math.round(adjustedWeeks / 4)} to ${
+        Math.round(adjustedWeeks / 4) + 1
       } months`;
+    return `${Math.round(adjustedWeeks / 4)} to ${
+      Math.round(adjustedWeeks / 4) + 2
+    } months`;
   }
 
   /**
@@ -754,10 +773,10 @@ export class CIAContentService {
         lowestComponent.level === "None"
           ? "Low"
           : lowestComponent.level === "Low"
-            ? "Moderate"
-            : lowestComponent.level === "Moderate"
-              ? "High"
-              : "Very High";
+          ? "Moderate"
+          : lowestComponent.level === "Moderate"
+          ? "High"
+          : "Very High";
 
       phases.push(
         `Phase 2: Prioritize upgrading ${lowestComponent.component} controls to ${targetLevel} level`
@@ -805,12 +824,15 @@ export class CIAContentService {
 
   /**
    * Get component content details for a specific component and security level
-   * 
+   *
    * @param component - CIA component type (availability, integrity, confidentiality)
    * @param level - Security level
    * @returns Component content details
    */
-  public getComponentContent(component: CIAComponentType, level: string): {
+  public getComponentContent(
+    component: CIAComponentType,
+    level: string
+  ): {
     description: string;
     technical: string;
     businessImpact: string;
@@ -819,32 +841,45 @@ export class CIAContentService {
     const details = this.getComponentDetails(component, level as SecurityLevel);
 
     if (!details) {
-      logger.warn(`Component details not found for ${component} at level ${level}`);
+      logger.warn(
+        `Component details not found for ${component} at level ${level}`
+      );
       return {
         description: `${component} ${level} description not available`,
         technical: `${component} ${level} technical details not available`,
         businessImpact: `${component} ${level} business impact not available`,
-        recommendations: [`Implement basic ${component} controls for ${level} level`]
+        recommendations: [
+          `Implement basic ${component} controls for ${level} level`,
+        ],
       };
     }
 
     return {
       description: details.description || `${component} ${level} description`,
       technical: details.technical || `${component} ${level} technical details`,
-      businessImpact: details.businessImpact || `${component} ${level} business impact`,
-      recommendations: details.recommendations || [`${component} ${level} recommendation`]
+      businessImpact:
+        details.businessImpact || `${component} ${level} business impact`,
+      recommendations: details.recommendations || [
+        `${component} ${level} recommendation`,
+      ],
     };
   }
 
   /**
    * Get business impact content for a specific component and security level
-   * 
+   *
    * @param component - CIA component type
    * @param level - Security level
    * @returns Business impact content as formatted string
    */
-  public getBusinessImpactContent(component: CIAComponentType, level: SecurityLevel): string {
-    const impactDetails = this.businessImpactService.getBusinessImpact(component, level);
+  public getBusinessImpactContent(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): string {
+    const impactDetails = this.businessImpactService.getBusinessImpact(
+      component,
+      level
+    );
 
     if (!impactDetails) {
       return `Business impact information for ${component} at ${level} level is not available.`;
@@ -856,22 +891,31 @@ export class CIAContentService {
       ${impactDetails.summary}
       
       ### Financial Impact
-      ${impactDetails.financial?.description || "Financial impact information not available."} 
+      ${
+        impactDetails.financial?.description ||
+        "Financial impact information not available."
+      } 
       Risk level: ${impactDetails.financial?.riskLevel || "Unknown"}
       
       ### Operational Impact
-      ${impactDetails.operational?.description || "Operational impact information not available."}
+      ${
+        impactDetails.operational?.description ||
+        "Operational impact information not available."
+      }
       Risk level: ${impactDetails.operational?.riskLevel || "Unknown"}
       
       ### Reputational Impact
-      ${impactDetails.reputational?.description || "Reputational impact information not available."}
+      ${
+        impactDetails.reputational?.description ||
+        "Reputational impact information not available."
+      }
       Risk level: ${impactDetails.reputational?.riskLevel || "Unknown"}
     `;
   }
 
   /**
    * Get summary content for all three CIA components
-   * 
+   *
    * @param availabilityLevel - Availability security level
    * @param integrityLevel - Integrity security level
    * @param confidentialityLevel - Confidentiality security level
@@ -883,9 +927,15 @@ export class CIAContentService {
     confidentialityLevel: SecurityLevel
   ): string {
     // Get impact level descriptions
-    const availabilityDesc = this.getComponentDetails("availability", availabilityLevel)?.description || `${availabilityLevel} availability`;
-    const integrityDesc = this.getComponentDetails("integrity", integrityLevel)?.description || `${integrityLevel} integrity`;
-    const confidentialityDesc = this.getComponentDetails("confidentiality", confidentialityLevel)?.description || `${confidentialityLevel} confidentiality`;
+    const availabilityDesc =
+      this.getComponentDetails("availability", availabilityLevel)
+        ?.description || `${availabilityLevel} availability`;
+    const integrityDesc =
+      this.getComponentDetails("integrity", integrityLevel)?.description ||
+      `${integrityLevel} integrity`;
+    const confidentialityDesc =
+      this.getComponentDetails("confidentiality", confidentialityLevel)
+        ?.description || `${confidentialityLevel} confidentiality`;
 
     // Get compliance status
     const complianceStatus = this.complianceService.getComplianceStatus(
@@ -902,9 +952,21 @@ export class CIAContentService {
     );
 
     // Get business impact details
-    const availabilityImpact = this.businessImpactService.getBusinessImpactDescription("availability", availabilityLevel);
-    const integrityImpact = this.businessImpactService.getBusinessImpactDescription("integrity", integrityLevel);
-    const confidentialityImpact = this.businessImpactService.getBusinessImpactDescription("confidentiality", confidentialityLevel);
+    const availabilityImpact =
+      this.businessImpactService.getBusinessImpactDescription(
+        "availability",
+        availabilityLevel
+      );
+    const integrityImpact =
+      this.businessImpactService.getBusinessImpactDescription(
+        "integrity",
+        integrityLevel
+      );
+    const confidentialityImpact =
+      this.businessImpactService.getBusinessImpactDescription(
+        "confidentiality",
+        confidentialityLevel
+      );
 
     // Generate content
     return `
@@ -926,16 +988,28 @@ export class CIAContentService {
       ## Compliance Status
       ${complianceStatus.status || ""}
       - Compliant with ${complianceStatus.compliantFrameworks.length} frameworks
-      - Partially compliant with ${complianceStatus.partiallyCompliantFrameworks.length} frameworks
-      - Non-compliant with ${complianceStatus.nonCompliantFrameworks.length} frameworks
+      - Partially compliant with ${
+        complianceStatus.partiallyCompliantFrameworks.length
+      } frameworks
+      - Non-compliant with ${
+        complianceStatus.nonCompliantFrameworks.length
+      } frameworks
       
-      ${complianceStatus.remediationSteps && complianceStatus.remediationSteps.length > 0 ? "## Remediation Steps\n" + complianceStatus.remediationSteps.map(step => `- ${step}`).join("\n") : ""}
+      ${
+        complianceStatus.remediationSteps &&
+        complianceStatus.remediationSteps.length > 0
+          ? "## Remediation Steps\n" +
+            complianceStatus.remediationSteps
+              .map((step) => `- ${step}`)
+              .join("\n")
+          : ""
+      }
     `;
   }
 
   /**
    * Get compliance description for a specific security level
-   * 
+   *
    * @param level - Security level
    * @returns Compliance description
    */
@@ -958,12 +1032,15 @@ export class CIAContentService {
 
   /**
    * Get key value points for a specific component and security level
-   * 
+   *
    * @param component - CIA component type
    * @param level - Security level
    * @returns Array of value points
    */
-  public getKeyValuePoints(component: CIAComponentType, level: SecurityLevel): string[] {
+  public getKeyValuePoints(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): string[] {
     return this.getValuePoints(level);
   }
 }
@@ -973,6 +1050,33 @@ const defaultService = new CIAContentService();
 
 // Export default service instance
 export default defaultService;
+
+/**
+ * Default implementation of security icon getter
+ * 
+ * @param level - Security level
+ * @returns Icon representing the security level
+ */
+function getDefaultSecurityIconImpl(level: SecurityLevel): string {
+  const icons: Record<SecurityLevel, string> = {
+    None: "⚠️",
+    Low: "🔑",
+    Moderate: "🔓",
+    High: "🔒",
+    "Very High": "🔐"
+  };
+  return icons[level] || "❓";
+}
+
+/**
+ * Default implementation of value points getter
+ * 
+ * @param level - Security level
+ * @returns Array of value points for the security level
+ */
+function getDefaultValuePointsImpl(level: SecurityLevel): string[] {
+  return getValuePoints(level);
+}
 
 /**
  * Create a CIA content service with the specified data provider
@@ -1001,140 +1105,91 @@ export function createCIAContentService(
 
 // Export helper functions for direct use
 export const getInformationSensitivity = (level: SecurityLevel): string => {
-  switch (level) {
-    case "None":
-      return "Public Data";
-    case "Low":
-      return "Internal Data";
-    case "Moderate":
-      return "Sensitive Data";
-    case "High":
-      return "Confidential Data";
-    case "Very High":
-      return "Restricted Data";
-    default:
-      return "Unknown";
-  }
+  const sensitivityMap: Record<SecurityLevel, string> = {
+    None: "Public Data",
+    Low: "Internal Data",
+    Moderate: "Sensitive Data",
+    High: "Confidential Data",
+    "Very High": "Restricted Data",
+  };
+
+  return sensitivityMap[level] || "Unknown Classification";
 };
 
-export const getRiskBadgeVariant = defaultService.getRiskBadgeVariant;
-export const getValuePoints = defaultService.getValuePoints;
+export const getRiskBadgeVariant = (
+  riskLevel: string
+): "error" | "warning" | "info" | "success" | "neutral" => {
+  const lowercaseRisk = riskLevel.toLowerCase();
 
-// Export for use with security ROI calculations
-export function getROIEstimate(level: SecurityLevel): ROIEstimate {
-  // Ensure level is defined and a string before calling toUpperCase()
-  if (!level) {
-    // Default to "None" if level is undefined or null
-    level = "None";
+  if (lowercaseRisk.includes("critical") || lowercaseRisk.includes("high")) {
+    return "error";
+  } else if (
+    lowercaseRisk.includes("medium") ||
+    lowercaseRisk.includes("moderate")
+  ) {
+    return "warning";
+  } else if (lowercaseRisk.includes("low")) {
+    return "info";
+  } else if (
+    lowercaseRisk.includes("minimal") ||
+    lowercaseRisk.includes("none")
+  ) {
+    return "success";
   }
 
-  // Guard against non-string values just in case
-  const securityLevel = typeof level === 'string' ? level : 'None';
+  return "neutral";
+};
 
-  // Now safely convert to ROI key format
-  const key = securityLevelToROIKey(securityLevel);
-
-  // Define default ROI estimates if needed
-  const defaultROIEstimates: ROIEstimatesMap = {
-    NONE: { returnRate: "0%", value: "0%", description: "No ROI without security investment" },
-    LOW: { returnRate: "50%", value: "50%", description: "Low ROI" },
-    MODERATE: { returnRate: "150%", value: "150%", description: "Moderate ROI" },
-    HIGH: { returnRate: "250%", value: "250%", description: "High ROI" },
-    VERY_HIGH: { returnRate: "400%", value: "400%", description: "Very High ROI" },
+export const getROIEstimate = (level: SecurityLevel): ROIEstimate => {
+  const estimates = {
+    None: { returnRate: "0%", description: "No ROI", value: "0%" },
+    Low: { returnRate: "50%", description: "Low ROI", value: "50%" },
+    Moderate: {
+      returnRate: "150%",
+      description: "Moderate ROI",
+      value: "150%",
+    },
+    High: { returnRate: "300%", description: "High ROI", value: "300%" },
+    "Very High": {
+      returnRate: "500%",
+      description: "Very high ROI",
+      value: "500%",
+    },
   };
 
-  // Return the ROI estimate for the key, or a default if not found
-  return defaultROIEstimates[key] || defaultROIEstimates.NONE;
-}
+  return estimates[level] || estimates.Moderate;
+};
 
-/**
- * Calculate ROI metrics based on security level and implementation cost
- */
-export function calculateROI(
-  level: SecurityLevel,
-  implementationCost: number
-): ROIMetrics {
-  // Get the ROI percentage from the estimate
-  const roiEstimate = getROIEstimate(level);
-  const roiPercentage =
-    parseInt(roiEstimate.returnRate.replace("%", ""), 10) || 0;
+export const getValuePoints = (level: SecurityLevel): string[] => {
+  if (level === "None") return [];
 
-  // Calculate the absolute ROI value
-  const roiValue =
-    implementationCost > 0 ? implementationCost * (roiPercentage / 100) : 0;
+  const basePoints = [
+    `Provides ${level.toLowerCase()} level of protection`,
+    `Meets ${
+      level === "High" || level === "Very High" ? "advanced" : "basic"
+    } security requirements`,
+  ];
 
-  // Return the metrics object
-  return {
-    value: formatCurrency(roiValue),
-    percentage: `${roiPercentage}%`,
-    description: getROIDescription(level),
-  };
-}
-
-/**
- * Default implementation for getting security icon
- */
-function getDefaultSecurityIconImpl(level: SecurityLevel): string {
-  switch (level) {
-    case "None":
-      return "⚠️";
-    case "Low":
-      return "🔑";
-    case "Moderate":
-      return "🔓";
-    case "High":
-      return "🔒";
-    case "Very High":
-      return "🔐";
-    default:
-      return "ℹ️";
-  }
-}
-
-/**
- * Default implementation for getting value points
- */
-function getDefaultValuePointsImpl(level: SecurityLevel): string[] {
-  const valuePoints = {
-    None: [
-      "No security value creation",
-      "Maximum exposure to security risks",
-      "No protection for business assets or data",
-      "Non-compliance with regulatory requirements",
-      "Significant business risk with no mitigation",
-    ],
-    Low: [
-      "Basic security foundation established",
-      "Minimal protection against common threats",
-      "Some risk reduction for non-critical systems",
-      "First step toward regulatory compliance",
-      "Limited business enablement for non-sensitive operations",
-    ],
+  const levelSpecificPoints: Record<SecurityLevel, string[]> = {
+    None: [],
+    Low: ["Cost-effective basic security measures"],
     Moderate: [
-      "Standard security posture established",
-      "Balanced protection for business operations",
-      "Meets basic requirements for most business activities",
-      "Enables operations in moderately regulated environments",
-      "Reasonable risk management for business continuity",
+      "Balanced security and cost",
+      "Suitable for standard business operations",
     ],
     High: [
-      "Strong security posture that enables business confidence",
-      "Robust protection for sensitive data and operations",
-      "Supports expansion into regulated industries",
-      "Enhances reputation with security-conscious customers",
-      "Significant risk reduction with measurable business value",
+      "Strong protection for sensitive data",
+      "Complies with most regulatory frameworks",
     ],
     "Very High": [
-      "Maximum security enabling operations in highly regulated environments",
-      "Comprehensive protection for critical business assets",
-      "Competitive advantage through superior security capabilities",
-      "Strategic enabler for high-value and high-risk business activities",
-      "Meets the most stringent customer and regulatory requirements",
+      "Maximum protection for critical assets",
+      "Exceeds regulatory requirements",
+      "Enterprise-grade security",
     ],
   };
 
-  return valuePoints[level] || [];
-}
+  return [...basePoints, ...(levelSpecificPoints[level] || [])];
+};
 
 // Export types
 export type { BusinessImpactDetails, TechnicalImplementationDetails };

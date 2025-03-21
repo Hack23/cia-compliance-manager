@@ -519,6 +519,24 @@ describe("TechnicalImplementationService", () => {
       expect(recommendations).toBeInstanceOf(Array);
       expect(recommendations).toHaveLength(0);
     });
+
+    it("returns empty array for None security level", () => {
+      // We need to mock the getComponentOptions method to return a valid object
+      // but with no recommendations for the specified level
+      vi.spyOn(service as any, "getComponentOptions").mockReturnValueOnce({
+        None: {
+          recommendations: [],
+        },
+      });
+
+      const recommendations = service.getRecommendations(
+        "confidentiality",
+        "None"
+      );
+
+      expect(Array.isArray(recommendations)).toBe(true);
+      expect(recommendations.length).toBe(0);
+    });
   });
 
   describe("getImplementationConsiderations", () => {
@@ -1739,4 +1757,199 @@ describe("TechnicalImplementationService", () => {
   });
 
   // ... existing test cases ...
+});
+
+import { describe, expect, it, vi } from "vitest";
+import { createCIAOptionsMock } from "../tests/testMocks/ciaOptionsMocks";
+import { SecurityLevel } from "../types/cia";
+import { CIAComponentType } from "../types/cia-services";
+import { TechnicalImplementationService } from "./technicalImplementationService";
+
+// Use the mock helper properly
+vi.mock("../hooks/useCIAOptions", () => createCIAOptionsMock());
+
+// Mock data provider - convert from hoisted to regular object
+const mockDataProvider = {
+  availabilityOptions: {
+    None: {
+      description: "No availability controls",
+      technical: "No technical controls for availability",
+      businessImpact: "Critical business impact",
+      recommendations: ["Implement basic availability controls"],
+      technicalImplementation: {
+        description: "No implementation required",
+        implementationSteps: [],
+        effort: {
+          development: "None",
+          maintenance: "None",
+          expertise: "None",
+        },
+      },
+    },
+    Moderate: {
+      description: "Standard availability",
+      technical: "Standard redundancy and failover",
+      businessImpact: "Medium business impact",
+      recommendations: ["Implement load balancing", "Setup automated backups"],
+      technicalImplementation: {
+        description: "Standard high availability setup",
+        implementationSteps: [
+          "Configure load balancer",
+          "Setup backup schedule",
+        ],
+        effort: {
+          development: "Weeks (2-4)",
+          maintenance: "Regular (monthly review)",
+          expertise: "Security professional",
+        },
+        requirements: ["Load balancer", "Backup solution"],
+        technologies: ["AWS ELB", "Automated backup tools"],
+      },
+    },
+  },
+  integrityOptions: {
+    None: {
+      description: "No integrity controls",
+      technical: "No validation or verification",
+      businessImpact: "Critical business impact",
+      recommendations: ["Implement basic data validation"],
+    },
+    High: {
+      description: "Advanced integrity controls",
+      technical: "Cryptographic verification",
+      businessImpact: "Low business impact",
+      recommendations: [
+        "Implement digital signatures",
+        "Use hash verification",
+      ],
+      technicalImplementation: {
+        description: "Cryptographic integrity verification",
+        implementationSteps: [
+          "Implement signature verification",
+          "Add hash validation",
+        ],
+        effort: {
+          development: "Months (1-3)",
+          maintenance: "Significant (biweekly monitoring)",
+          expertise: "Security specialist",
+        },
+      },
+    },
+  },
+  confidentialityOptions: {
+    Low: {
+      description: "Basic confidentiality",
+      technical: "Simple access controls",
+      businessImpact: "High business impact",
+      technicalImplementation: {
+        description: "Basic access control implementation",
+        implementationSteps: [
+          "Implement authentication",
+          "Setup basic authorization",
+        ],
+        requirements: ["Authentication system"],
+      },
+    },
+  },
+  // Add all required security levels for each component
+  // Add the roiEstimates property
+  roiEstimates: {
+    NONE: { returnRate: "0%", description: "No ROI", value: "0%" },
+    LOW: { returnRate: "50%", description: "Low ROI", value: "50%" },
+    MODERATE: { returnRate: "150%", description: "Moderate ROI", value: "150%" },
+    HIGH: { returnRate: "300%", description: "High ROI", value: "300%" },
+    VERY_HIGH: { returnRate: "500%", description: "Very high ROI", value: "500%" },
+  },
+  // Add required methods
+  getDefaultSecurityIcon: vi.fn().mockReturnValue("🔒"),
+  getDefaultValuePoints: vi.fn().mockReturnValue(["Value point"]),
+};
+
+describe("TechnicalImplementationService", () => {
+  let service: TechnicalImplementationService;
+
+  beforeEach(() => {
+    service = new TechnicalImplementationService(mockDataProvider);
+  });
+
+  describe("getTechnicalImplementation", () => {
+    it("returns technical implementation details for component and security level", () => {
+      // Test with valid component and level
+      const details = service.getTechnicalImplementation("availability", "Moderate");
+      
+      expect(details).toBeDefined();
+      expect(details.description).toBe("Standard high availability setup");
+      expect(details.implementationSteps).toHaveLength(2);
+      expect(details.effort).toHaveProperty("development", "Weeks (2-4)");
+    });
+
+    it("handles unknown component and security level gracefully", () => {
+      // @ts-expect-error - Testing with invalid component type
+      const details = service.getTechnicalImplementation("unknown", "Unknown");
+      
+      expect(details).toBeDefined();
+      expect(details.description).toContain("No technical implementation details available");
+      expect(details.implementationSteps).toBeInstanceOf(Array);
+    });
+  });
+
+  describe("getRecommendations", () => {
+    it("returns recommendations for a component and security level", () => {
+      const recommendations = service.getRecommendations("availability", "Moderate");
+      
+      expect(recommendations).toBeInstanceOf(Array);
+      expect(recommendations.length).toBeGreaterThan(0);
+    });
+
+    it("returns empty array for None security level", () => {
+      const recommendations = service.getRecommendations("integrity", "None");
+      
+      expect(recommendations).toBeInstanceOf(Array);
+      expect(recommendations).toHaveLength(0);
+    });
+  });
+
+  describe("getImplementationConsiderations", () => {
+    it("returns implementation considerations for security levels", () => {
+      const considerations = service.getImplementationConsiderations([
+        "Moderate",
+        "Moderate",
+        "Moderate",
+      ] as [SecurityLevel, SecurityLevel, SecurityLevel]);
+      
+      expect(typeof considerations).toBe("string");
+      expect(considerations.length).toBeGreaterThan(0);
+      expect(considerations).toContain("Implementation for a uniform");
+    });
+
+    it("returns different considerations for mixed security levels", () => {
+      const mixedConsiderations = service.getImplementationConsiderations([
+        "Low",
+        "Moderate",
+        "High",
+      ] as [SecurityLevel, SecurityLevel, SecurityLevel]);
+      
+      expect(typeof mixedConsiderations).toBe("string");
+      expect(mixedConsiderations).toContain("mixed");
+    });
+  });
+
+  describe("getImplementationTime", () => {
+    it("returns appropriate time estimates for each security level", () => {
+      expect(service.getImplementationTime("None")).toBe("No implementation required");
+      expect(service.getImplementationTime("Low")).toBe("1-2 weeks");
+      expect(service.getImplementationTime("Moderate")).toBe("1-2 months");
+      expect(service.getImplementationTime("High")).toBe("2-4 months");
+      expect(service.getImplementationTime("Very High")).toBe("4-6+ months");
+    });
+  });
+
+  describe("getTechnicalDescription", () => {
+    it("returns technical description for a component and security level", () => {
+      const description = service.getTechnicalDescription("availability", "Moderate");
+      
+      expect(typeof description).toBe("string");
+      expect(description.length).toBeGreaterThan(0);
+    });
+  });
 });

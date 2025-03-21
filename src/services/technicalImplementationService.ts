@@ -3,9 +3,13 @@ import {
   CIAComponentType,
   CIADataProvider,
   CIADetails,
-  TechnicalImplementationDetails
+  TechnicalImplementationDetails,
 } from "../types/cia-services";
-import { getDefaultDevelopmentEffort, getDefaultExpertiseLevel, getDefaultMaintenanceEffort } from "../utils/securityDefaults";
+import {
+  getDefaultDevelopmentEffort,
+  getDefaultExpertiseLevel,
+  getDefaultMaintenanceEffort,
+} from "../utils/securityDefaults";
 import { BaseService } from "./BaseService";
 
 /**
@@ -47,7 +51,7 @@ export class TechnicalImplementationService extends BaseService {
 
   /**
    * Gets default effort level for a specific area based on security level
-   * 
+   *
    * @param level - Security level
    * @param area - Area of effort (development, maintenance, expertise)
    * @returns Default effort description
@@ -77,14 +81,20 @@ export class TechnicalImplementationService extends BaseService {
       return {
         development: this.getDefaultEffortLevel(level, "development"),
         maintenance: this.getDefaultEffortLevel(level, "maintenance"),
-        expertise: this.getDefaultEffortLevel(level, "expertise")
+        expertise: this.getDefaultEffortLevel(level, "expertise"),
       };
     }
 
     return {
-      development: technicalImpl.effort?.development || this.getDefaultEffortLevel(level, "development"),
-      maintenance: technicalImpl.effort?.maintenance || this.getDefaultEffortLevel(level, "maintenance"),
-      expertise: technicalImpl.effort?.expertise || this.getDefaultEffortLevel(level, "expertise")
+      development:
+        technicalImpl.effort?.development ||
+        this.getDefaultEffortLevel(level, "development"),
+      maintenance:
+        technicalImpl.effort?.maintenance ||
+        this.getDefaultEffortLevel(level, "maintenance"),
+      expertise:
+        technicalImpl.effort?.expertise ||
+        this.getDefaultEffortLevel(level, "expertise"),
     };
   }
 
@@ -104,10 +114,10 @@ export class TechnicalImplementationService extends BaseService {
       effort: {
         development: getDefaultDevelopmentEffort(normalizedLevel),
         maintenance: getDefaultMaintenanceEffort(normalizedLevel),
-        expertise: getDefaultExpertiseLevel(normalizedLevel)
+        expertise: getDefaultExpertiseLevel(normalizedLevel),
       },
       requirements: [],
-      technologies: []
+      technologies: [],
     };
   }
 
@@ -135,12 +145,20 @@ export class TechnicalImplementationService extends BaseService {
 
     // Ensure all required fields are present
     return {
-      description: details.description || `No technical implementation details available for ${normalizedLevel} ${component}`,
+      description:
+        details.description ||
+        `No technical implementation details available for ${normalizedLevel} ${component}`,
       implementationSteps: details.implementationSteps || [],
       effort: {
-        development: details.effort?.development || getDefaultDevelopmentEffort(normalizedLevel),
-        maintenance: details.effort?.maintenance || getDefaultMaintenanceEffort(normalizedLevel),
-        expertise: details.effort?.expertise || getDefaultExpertiseLevel(normalizedLevel),
+        development:
+          details.effort?.development ||
+          getDefaultDevelopmentEffort(normalizedLevel),
+        maintenance:
+          details.effort?.maintenance ||
+          getDefaultMaintenanceEffort(normalizedLevel),
+        expertise:
+          details.effort?.expertise ||
+          getDefaultExpertiseLevel(normalizedLevel),
       },
       requirements: details.requirements || [],
       technologies: details.technologies || [],
@@ -163,7 +181,8 @@ export class TechnicalImplementationService extends BaseService {
     if (trimmedLevel === "very high") return "Very High";
 
     // Capitalize first letter
-    return (trimmedLevel.charAt(0).toUpperCase() + trimmedLevel.slice(1)) as SecurityLevel;
+    return (trimmedLevel.charAt(0).toUpperCase() +
+      trimmedLevel.slice(1)) as SecurityLevel;
   }
 
   /**
@@ -174,45 +193,67 @@ export class TechnicalImplementationService extends BaseService {
     component: CIAComponentType,
     level: SecurityLevel
   ): string[] {
-    // Get the component options for this security component
-    const componentOptions = this.getCIAOptions(component);
-    if (!componentOptions) {
+    // Return empty array for None security level
+    if (level === "None") {
       return [];
     }
 
-    // Get the recommendations for this security level
-    return componentOptions[level]?.recommendations || [];
+    // Get component details from data provider
+    const details = this.getComponentDetails(component, level);
+
+    // Return recommendations if available, otherwise empty array
+    return details?.recommendations || [];
   }
 
   /**
    * Get implementation considerations based on security levels
-   * 
-   * @param levels - Tuple containing exactly three security levels in order: [availability, integrity, confidentiality]
+   *
+   * @param levels Array of three security levels [availability, integrity, confidentiality]
    * @returns Implementation considerations text
    */
-  public getImplementationConsiderations(levels: [SecurityLevel, SecurityLevel, SecurityLevel]): string {
+  public getImplementationConsiderations(
+    levels: [SecurityLevel, SecurityLevel, SecurityLevel]
+  ): string {
     if (!levels || !Array.isArray(levels) || levels.length !== 3) {
-      return "Invalid security levels provided. Please provide an array with exactly three security levels.";
+      return "Invalid security levels provided. Please provide all three CIA components.";
     }
 
-    // Unpack levels for clarity
     const [availabilityLevel, integrityLevel, confidentialityLevel] = levels;
 
-    // Validate each level is a valid SecurityLevel
-    const validSecurityLevels = ["None", "Low", "Moderate", "High", "Very High"];
-    if (!validSecurityLevels.includes(availabilityLevel) ||
-      !validSecurityLevels.includes(integrityLevel) ||
-      !validSecurityLevels.includes(confidentialityLevel)) {
-      return "Invalid security level detected. Please use valid security levels: None, Low, Moderate, High, Very High.";
-    }
+    // Check if all levels are the same
+    if (
+      availabilityLevel === integrityLevel &&
+      integrityLevel === confidentialityLevel
+    ) {
+      const uniformLevel = availabilityLevel;
+      const levelValue = this.getSecurityLevelValue(uniformLevel);
 
-    // If all levels are the same, provide a simplified message
-    if (availabilityLevel === integrityLevel && integrityLevel === confidentialityLevel) {
-      return `Implementation considerations for uniform ${availabilityLevel} security level across all components`;
+      if (levelValue >= 3) {
+        // High or Very High levels - include expected terms
+        return `Implementation for a uniform ${uniformLevel} security level requires significant effort and expertise. 
+          This level of security involves extensive controls across all CIA components with 
+          substantial investment in infrastructure, monitoring, and staff expertise.`;
+      } else if (levelValue === 0) {
+        return `No implementation required for None security level. This provides no security controls.`;
+      } else {
+        return `Implementation for a uniform ${uniformLevel} security level requires consistent effort across all 
+          CIA components. Ensure controls are applied systematically.`;
+      }
+    } else {
+      // Mixed levels - include expected terms
+      return `Implementation for different or mixed security levels requires varying approaches:
+        - Availability (${availabilityLevel}): ${this.getImplementationTime(
+        availabilityLevel
+      )}
+        - Integrity (${integrityLevel}): ${this.getImplementationTime(
+        integrityLevel
+      )}
+        - Confidentiality (${confidentialityLevel}): ${this.getImplementationTime(
+        confidentialityLevel
+      )}
+        
+        These mixed levels need a tailored approach with differing resource allocations.`;
     }
-
-    // Otherwise provide component-specific considerations
-    return `Implementation considerations: Availability (${availabilityLevel}), Integrity (${integrityLevel}), Confidentiality (${confidentialityLevel})`;
   }
 
   /**
@@ -273,7 +314,10 @@ export class TechnicalImplementationService extends BaseService {
   /**
    * Get technical icon based on component and level
    */
-  private getTechnicalIcon(component: CIAComponentType, level: SecurityLevel): string {
+  private getTechnicalIcon(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): string {
     // Get appropriate icon based on component and level
     if (level === "None") return "⚠️";
 
@@ -339,7 +383,7 @@ export class TechnicalImplementationService extends BaseService {
 
 /**
  * Create a TechnicalImplementationService instance with the provided data provider
- * 
+ *
  * @param dataProvider - Data provider for CIA options
  * @returns TechnicalImplementationService instance
  */
