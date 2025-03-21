@@ -6,26 +6,51 @@ This Business Continuity Plan (BCP) outlines strategies to ensure the CIA Compli
 
 ```mermaid
 mindmap
-  root((Business<br>Continuity<br>Plan))
+  root((🔁 Business<br>Continuity<br>Plan))
     🔍 Business Impact Analysis
       💰 Financial Impact
-      🏭 Operational Impact
+        💸 Direct Revenue Loss
+        💵 Recovery Costs
+        ⚖️ Regulatory Penalties
+      🏢 Operational Impact
+        ⏱️ Process Disruption
+        📉 Productivity Loss
+        🚧 Workflow Interruption
       🌐 Reputational Impact
+        🤝 Customer Trust
+        🏆 Brand Perception
+        📱 Community Sentiment
       📜 Regulatory Impact
+        📝 Compliance Violations
+        🔍 Audit Failures
+        ⚠️ Legal Consequences
     🎯 Recovery Objectives
       ⏱️ RTO - Recovery Time
+        🚨 Critical Services
+        🔔 Important Services
+        📊 Standard Services
       📊 RPO - Recovery Point
+        💾 User Data
+        ⚙️ Configuration
+        🗄️ Historical Records
       🔄 MTTR - Mean Time To Recover
       ⬆️ Uptime Requirements
     🛡️ GitHub Infrastructure
       📂 GitHub Pages Hosting
+        🌐 Primary Deployment
+        🔄 Backup Deployment
       🗄️ GitHub Repository Storage
+        🔐 Main Repository
+        📚 Repository Mirrors
       🔄 GitHub Actions Workflows
-      🧪 GitHub Test Infrastructure
+        ⚙️ CI/CD Pipelines
+        🧪 Automated Testing
+        🔍 Security Scanning
     🚀 Recovery Strategies
       💾 Data Backup & Recovery
       📱 Application Recovery
       🧩 Component Restoration
+      🔄 Service Continuity
 ```
 
 ## 🏢 Related Architecture Documentation
@@ -155,6 +180,63 @@ quadrantChart
 
 ### 💰 Impact Quantification
 
+```mermaid
+mindmap
+  root((Impact<br>Assessment))
+    💰 Financial
+      💸 Direct Revenue Impact
+        Estimated loss: $1K-5K per day
+        Premium feature usage reduction
+        Subscription cancellations
+      💼 Recovery Costs
+        Technical team overtime
+        Emergency response
+        Third-party assistance
+      💲 Implementation Expenses
+        Recovery automation
+        Redundancy implementation
+        Training and preparation
+    🏢 Operational
+      ⏱️ Decision Delays
+        Security assessment delays
+        Implementation postponement
+        Compliance verification pauses
+      📉 Efficiency Loss
+        Manual workarounds
+        Process fragmentation
+        Documentation challenges
+      🚧 Workflow Disruption
+        Integration failures
+        Data synchronization issues
+        Process interdependency gaps
+    📊 Reputational
+      🤝 Trust Erosion
+        Security tool reliability questions
+        Customer confidence reduction
+        Partner relationship strain
+      👥 Community Impact
+        Negative user feedback
+        Social media discussion
+        Forum commentary
+      📉 Adoption Concerns
+        New user hesitation
+        Competitive disadvantage
+        Reference losses
+    📜 Regulatory
+      ⚖️ Compliance Gaps
+        Evidence collection failure
+        Control demonstration issues
+        Audit trail disruption
+      📋 Documentation Failures
+        Incomplete records
+        Audit preparation challenges
+        Demonstration capability loss
+      🧾 Reporting Challenges
+        Missed deadlines
+        Incomplete submissions
+        Data quality issues
+```
+
 #### Financial Impact
 
 ```mermaid
@@ -250,12 +332,12 @@ graph TB
     class D1,D2,D3 consequence;
 ```
 
-| Impact Category          | Description                                 | Affected Regulations   | Risk Level  |
-| ------------------------ | ------------------------------------------- | ---------------------- | ----------- |
-| 📝 Compliance Violations | Inability to demonstrate controls efficacy  | GDPR, HIPAA, SOC2      | High        |
-| ⚖️ Legal Consequences    | Potential penalties for compliance failures | Varies by jurisdiction | Medium-High |
-| 🔍 Evidence Collection   | Gaps in compliance documentation            | All frameworks         | Medium      |
-| 🧮 Framework Alignment   | Temporary misalignment with requirements    | NIST, ISO, PCI DSS     | Medium      |
+| Impact Category          | Description                                 | Affected Regulations                                                                                                                                                                   | Risk Level  |
+| ------------------------ | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| 📝 Compliance Violations | Inability to demonstrate controls efficacy  | [GDPR](https://gdpr.eu/), [HIPAA](https://www.hhs.gov/hipaa/), [SOC2](https://www.aicpa.org/interestareas/frc/assuranceadvisoryservices/aicpasoc2report.html)                          | High        |
+| ⚖️ Legal Consequences    | Potential penalties for compliance failures | Varies by jurisdiction                                                                                                                                                                 | Medium-High |
+| 🔍 Evidence Collection   | Gaps in compliance documentation            | All frameworks                                                                                                                                                                         | Medium      |
+| 🧮 Framework Alignment   | Temporary misalignment with requirements    | [NIST 800-53](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final), [ISO 27001](https://www.iso.org/standard/54534.html), [PCI DSS](https://www.pcisecuritystandards.org/) | Medium      |
 
 ### ⏱️ Recovery Objectives
 
@@ -273,6 +355,61 @@ timeline
         User Settings : < 30 minutes
         Compliance Data : < 2 hours
         Historical Reports : < 4 hours
+```
+
+```mermaid
+mindmap
+  root((Recovery<br>Objectives))
+    ⏱️ RTO Targets
+      User Authentication
+        🚨 Critical: < 2 hours
+        🔔 Enhanced: < 1 hour
+        ✨ Gold Standard: < 30 minutes
+      Security Assessment Engine
+        🚨 Critical: < 4 hours
+        🔔 Enhanced: < 2 hours
+        ✨ Gold Standard: < 1 hour
+      Dashboard & Visualizations
+        🚨 Critical: < 8 hours
+        🔔 Enhanced: < 4 hours
+        ✨ Gold Standard: < 2 hours
+      User Data Access
+        🚨 Critical: < 4 hours
+        🔔 Enhanced: < 2 hours
+        ✨ Gold Standard: < 1 hour
+    📊 RPO Targets
+      User Assessments
+        🚨 Critical: < 4 hours
+        🔔 Enhanced: < 1 hour
+        ✨ Gold Standard: < 15 minutes
+      User Settings
+        🚨 Critical: < 8 hours
+        🔔 Enhanced: < 2 hours
+        ✨ Gold Standard: < 30 minutes
+      Compliance Data
+        🚨 Critical: < 24 hours
+        🔔 Enhanced: < 8 hours
+        ✨ Gold Standard: < 2 hours
+    🔄 MTTR Targets
+      GitHub Pages
+        🎯 Current: 1.5 hours
+        🎯 Target: < 1 hour
+      GitHub Repository
+        🎯 Current: 1 hour
+        🎯 Target: < 30 minutes
+      Local Storage
+        🎯 Current: 2 hours
+        🎯 Target: < 1 hour
+    ⬆️ Uptime Requirements
+      GitHub Pages Frontend
+        🎯 Minimum: 99.5%
+        🎯 Target: 99.9%
+      GitHub OAuth Auth
+        🎯 Minimum: 99.9%
+        🎯 Target: 99.95%
+      Application Core
+        🎯 Minimum: 99%
+        🎯 Target: 99.5%
 ```
 
 #### Recovery Time Objectives (RTO)
@@ -398,6 +535,50 @@ flowchart TB
     style C fill:#f8bbd0,stroke:#333,stroke-width:2px
     style I fill:#c8e6c9,stroke:#333,stroke-width:2px
     style A fill:#bbdefb,stroke:#333,stroke-width:2px
+```
+
+```mermaid
+mindmap
+  root((🛡️ Resilience<br>Strategy))
+    🔒 Confidentiality Protection
+      🔐 Encryption At Rest
+        Repository data encryption
+        Local storage encryption
+        Exported data encryption
+      🔑 Secure Authentication
+        GitHub OAuth security
+        Session management
+        Token protection
+      🔏 Access Control
+        Repository permissions
+        Branch protections
+        Role-based access
+    ✅ Integrity Assurance
+      🔍 Data Validation
+        Checksum verification
+        Data format validation
+        Repository integrity checks
+      📝 Audit Logging
+        Repository event logging
+        Actions workflow logging
+        User activity tracking
+      🧪 Testing Frameworks
+        Automated integrity tests
+        Build validation
+        Deployment verification
+    🔌 Availability Enhancement
+      🌐 Multi-Region Deployment
+        GitHub Pages redundancy
+        CDN distribution
+        Geographic load balancing
+      🔄 Automated Recovery
+        Self-healing workflows
+        Automated failover
+        Health-based routing
+      📊 Continuous Monitoring
+        Uptime checking
+        Performance metrics
+        Proactive alerts
 ```
 
 ### 🔄 GitHub Pages Redundancy
@@ -526,6 +707,48 @@ journey
       Transparent User Data Protection: 9
 ```
 
+```mermaid
+mindmap
+  root((📈 Maturity<br>Roadmap))
+    🏆 Current State Assessment
+      GitHub Pages Resilience: ⭐⭐⭐☆☆
+      Repository Redundancy: ⭐⭐⭐⭐☆
+      GitHub Actions Reliability: ⭐⭐⭐☆☆
+      User Data Protection: ⭐⭐☆☆☆
+      Monitoring Capabilities: ⭐⭐☆☆☆
+    🎯 3-Month Targets (Q2 2024)
+      Enhanced Pages Deployment
+        Multi-branch strategy
+        Health monitoring
+        Automatic rebuilds
+      Repository Mirror Strategy
+        Automated syncing
+        Integrity checking
+        Multiple locations
+      Workflow Enhancements
+        Error handling
+        Retry mechanisms
+        Notifications
+    🚀 6-Month Goals (Q3 2024)
+      Automated Failover
+        Health-based routing
+        Zero manual intervention
+        Sub-minute detection
+      Comprehensive Monitoring
+        Custom dashboard
+        Predictive alerts
+        Trend analysis
+      Data Integrity Framework
+        Automated validation
+        Cross-reference checking
+        Corruption detection
+    🔮 12-Month Vision (Q1 2025)
+      Zero-Downtime Architecture
+      AI-Enhanced Monitoring
+      Seamless Data Protection
+      Full Regulatory Compliance
+```
+
 | Maturity Area                | Current State            | 3-Month Goal                    | 6-Month Goal                | 12-Month Vision                       |
 | ---------------------------- | ------------------------ | ------------------------------- | --------------------------- | ------------------------------------- |
 | 🌐 GitHub Pages Deployment   | Single branch deployment | Multi-branch with manual switch | Automated health monitoring | Zero-downtime deployment              |
@@ -572,6 +795,61 @@ flowchart TD
     style E,F,G fill:#ffccff,stroke:#333,stroke-width:1px
 ```
 
+```mermaid
+mindmap
+  root((📱 Communication<br>Plan))
+    🚨 Incident Classification
+      🔴 Critical (Complete Outage)
+        Initial notification: <15 min
+        Update frequency: Every 30 min
+        All channels enabled
+      🟠 Major (Partial Outage)
+        Initial notification: <30 min
+        Update frequency: Every 60 min
+        Primary channels
+      🟡 Moderate (Performance Issues)
+        Initial notification: <60 min
+        Update frequency: Every 4 hours
+        Status page + email
+      🔵 Minor (Isolated Issues)
+        Initial notification: <4 hours
+        Update frequency: Daily
+        Status page only
+    📢 Communication Channels
+      🌐 Public Channels
+        GitHub Status Page
+        Repository README
+        GitHub Issues
+        GitHub Discussions
+      🔒 Internal Channels
+        Team Chat
+        Email Notifications
+        Video Conferences
+        Direct Messaging
+      🔔 Automated Alerts
+        GitHub Actions Notifications
+        Monitoring System Alerts
+        Scheduled Status Reports
+    👥 Stakeholder Groups
+      End Users
+        General public
+        Active users
+        Organizations
+      Contributors
+        Active contributors
+        Pull request authors
+        Issue reporters
+      Maintainers
+        Core team members
+        Repository admins
+        Technical leads
+    📝 Message Templates
+      Initial Notification
+      Status Update
+      Resolution Notice
+      Post-Incident Summary
+```
+
 | Stakeholder      | Communication Channel                   | Response Time     | Message Content                                     |
 | ---------------- | --------------------------------------- | ----------------- | --------------------------------------------------- |
 | 👥 End Users     | GitHub Issues, Repository README        | Within 30 minutes | Incident summary, estimated resolution, workarounds |
@@ -612,14 +890,58 @@ flowchart TB
     style R fill:#ff9999,stroke:#333,stroke-width:2px
 ```
 
-| Security Consideration | Implementation in GitHub          | Verification Method                   |
-| ---------------------- | --------------------------------- | ------------------------------------- |
-| 🔐 Access Control      | GitHub Repository Permissions     | Permission audit before recovery      |
-| 🔏 Data Encryption     | HTTPS for all GitHub interactions | Connection security verification      |
-| 📝 Audit Logging       | GitHub Audit Log                  | Review logs during/after recovery     |
-| 🛡️ Branch Protection   | Protected Branches                | Verify protection rules before merge  |
-| 🧪 Code Validation     | Required CI Checks                | All tests must pass before deployment |
-| 🔍 Security Scanning   | GitHub Code Scanning              | Scan recovery code before activation  |
+```mermaid
+mindmap
+  root((🔒 Security<br>Considerations))
+    👤 Access Control
+      Multi-Factor Authentication
+        Required for recovery operations
+        Hardware key support
+        Temporary access expirations
+      Permission Boundaries
+        Principle of least privilege
+        Recovery-specific roles
+        Time-limited access
+      Audit Logging
+        Comprehensive logging
+        Tamper-evident logs
+        Real-time monitoring
+    🛡️ Data Protection
+      Encryption Requirements
+        In-transit encryption
+        At-rest encryption
+        End-to-end protection
+      Data Validation
+        Integrity checking
+        Format validation
+        Source verification
+      Secure Transfer
+        Authorized channels only
+        Encrypted connections
+        Transfer validation
+    📝 Process Security
+      Documented Procedures
+        Step-by-step guides
+        Security checkpoints
+        Verification steps
+      Dual Control
+        Two-person rule for critical actions
+        Independent verification
+        Segregation of duties
+      Post-Recovery Verification
+        Security scanning
+        Compliance validation
+        Vulnerability assessment
+```
+
+| Security Consideration | Implementation in GitHub          | Verification Method                   | Reference Standard                                                                                                                                                                                     |
+| ---------------------- | --------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 🔐 Access Control      | GitHub Repository Permissions     | Permission audit before recovery      | [NIST 800-53 AC-2](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=AC-2), [ISO 27001 A.9.2](https://www.iso.org/standard/54534.html)      |
+| 🔏 Data Encryption     | HTTPS for all GitHub interactions | Connection security verification      | [NIST 800-53 SC-8](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=SC-8), [ISO 27001 A.10.1.1](https://www.iso.org/standard/54534.html)   |
+| 📝 Audit Logging       | GitHub Audit Log                  | Review logs during/after recovery     | [NIST 800-53 AU-2](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=AU-2), [ISO 27001 A.12.4](https://www.iso.org/standard/54534.html)     |
+| 🛡️ Branch Protection   | Protected Branches                | Verify protection rules before merge  | [NIST 800-53 CM-5](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=CM-5), [ISO 27001 A.12.1.2](https://www.iso.org/standard/54534.html)   |
+| 🧪 Code Validation     | Required CI Checks                | All tests must pass before deployment | [NIST 800-53 SA-11](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=SA-11), [ISO 27001 A.14.2.8](https://www.iso.org/standard/54534.html) |
+| 🔍 Security Scanning   | GitHub Code Scanning              | Scan recovery code before activation  | [NIST 800-53 RA-5](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=RA-5), [ISO 27001 A.12.6.1](https://www.iso.org/standard/54534.html)   |
 
 ## 📋 Plan Maintenance
 
@@ -648,6 +970,59 @@ timeline
         October 2024 : Regular Review
         November 2024 : Annual BCP Exercise
         December 2024 : 2025 Planning Updates
+```
+
+```mermaid
+mindmap
+  root((📋 Plan<br>Maintenance))
+    📅 Scheduled Reviews
+      Quarterly Assessments
+        April, July, October, January
+        Documentation updates
+        Component verification
+      Semi-Annual Deep Reviews
+        June, December
+        Gap analysis
+        Compliance verification
+      Annual Full Exercise
+        November
+        Simulation scenario
+        Full team participation
+    📊 Review Components
+      Infrastructure
+        GitHub architecture
+        Repository structure
+        Pages deployment
+      Procedures
+        Recovery steps
+        Communication flows
+        Security protocols
+      Documentation
+        Technical guides
+        User instructions
+        Compliance mappings
+    🛠️ Maintenance Process
+      Gap Assessment
+        Identify weaknesses
+        Log improvement needs
+        Prioritize updates
+      Document Revision
+        Version control
+        Change tracking
+        Approvals workflow
+      Capability Testing
+        Validate changes
+        Confirm procedures
+        Measure performance
+    📝 Version Control
+      GitHub Repository
+        Branch strategy
+        Pull request reviews
+        Commit signing
+      Change Record
+        Detailed changelog
+        Contributor tracking
+        Approval documentation
 ```
 
 ## 🔬 Testing and Validation Strategy
@@ -689,16 +1064,68 @@ gantt
         Security Scanning (RA-5)               :c3, 2024-01-01, 365d
 ```
 
+```mermaid
+mindmap
+  root((🧪 Testing<br>Strategy))
+    📊 Test Categories
+      Repository Recovery
+        Previous commit restoration
+        Mirror repository failover
+        Branch protection verification
+      GitHub Pages Resilience
+        Backup branch activation
+        DNS failover testing
+        CDN cache validation
+      GitHub Actions Continuity
+        Workflow interruption recovery
+        Error handling validation
+        Dependency failure simulation
+      User Data Protection
+        Export/import validation
+        Corruption recovery
+        Historic data access
+    ⏱️ Test Frequency
+      Daily Checks
+        Health probe monitoring
+        Build verification
+        Deployment success
+      Weekly Tests
+        Limited component tests
+        Integration verification
+        Security scanning
+      Monthly Tests
+        Function recovery tests
+        Cross-component validation
+        Extended disruption tests
+      Quarterly Exercises
+        Full component recovery
+        Business impact assessment
+        Major incident simulation
+    📝 Documentation Requirements
+      Test Plans
+        Test scenarios
+        Success criteria
+        Resource requirements
+      Execution Records
+        Test results
+        Issues encountered
+        Resolution steps
+      Analysis Reports
+        Performance metrics
+        Gap identification
+        Improvement recommendations
+```
+
 ### 🧪 Test Scenarios with Regulatory Mapping
 
-| Test Scenario                 | Description                                       | Frequency | Success Criteria                       | Regulatory Controls                               |
-| ----------------------------- | ------------------------------------------------- | --------- | -------------------------------------- | ------------------------------------------------- |
-| 📊 GitHub Repository Recovery | Test restoration from backup repository           | Quarterly | Complete in < 15 minutes               | NIST 800-53 (CP-4, CP-9(1)), ISO 27001 (A.17.1.3) |
-| 🌐 GitHub Pages Failover      | Simulate primary host failure and verify failover | Quarterly | Auto-detection and routing < 5 minutes | NIST 800-53 (CP-4(2)), ISO 27001 (A.17.1.3)       |
-| 🔄 GitHub Actions Recovery    | Validate workflow resilience after disruption     | Quarterly | Resume workflows < 10 minutes          | NIST 800-53 (CP-4), ISO 27001 (A.17.1.3)          |
-| 🔍 Integrity Verification     | Cryptographic verification of data integrity      | Quarterly | 100% data consistency                  | NIST 800-53 (SI-7), ISO 27001 (A.12.2.1)          |
-| 🚨 Full Recovery Simulation   | Comprehensive outage and recovery exercise        | Annual    | Complete recovery within RTO           | NIST 800-53 (CP-4(1)), ISO 27001 (A.17.1.3)       |
-| 📝 Audit Review               | Independent assessment of recovery capabilities   | Annual    | No critical findings                   | NIST 800-53 (CA-2, CA-7), ISO 27001 (A.18.2)      |
+| Test Scenario                 | Description                                       | Frequency | Success Criteria                       | Regulatory Controls                                                                                                                                             |
+| ----------------------------- | ------------------------------------------------- | --------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 📊 GitHub Repository Recovery | Test restoration from backup repository           | Quarterly | Complete in < 15 minutes               | [NIST 800-53 (CP-4, CP-9(1))](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final), [ISO 27001 (A.17.1.3)](https://www.iso.org/standard/54534.html) |
+| 🌐 GitHub Pages Failover      | Simulate primary host failure and verify failover | Quarterly | Auto-detection and routing < 5 minutes | [NIST 800-53 (CP-4(2))](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final), [ISO 27001 (A.17.1.3)](https://www.iso.org/standard/54534.html)       |
+| 🔄 GitHub Actions Recovery    | Validate workflow resilience after disruption     | Quarterly | Resume workflows < 10 minutes          | [NIST 800-53 (CP-4)](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final), [ISO 27001 (A.17.1.3)](https://www.iso.org/standard/54534.html)          |
+| 🔍 Integrity Verification     | Cryptographic verification of data integrity      | Quarterly | 100% data consistency                  | [NIST 800-53 (SI-7)](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final), [ISO 27001 (A.12.2.1)](https://www.iso.org/standard/54534.html)          |
+| 🚨 Full Recovery Simulation   | Comprehensive outage and recovery exercise        | Annual    | Complete recovery within RTO           | [NIST 800-53 (CP-4(1))](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final), [ISO 27001 (A.17.1.3)](https://www.iso.org/standard/54534.html)       |
+| 📝 Audit Review               | Independent assessment of recovery capabilities   | Annual    | No critical findings                   | [NIST 800-53 (CA-2, CA-7)](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final), [ISO 27001 (A.18.2)](https://www.iso.org/standard/54534.html)      |
 
 ### 📋 Test Documentation Requirements
 
@@ -864,12 +1291,12 @@ flowchart TD
 
 ### 📞 Communication Matrix with GitHub-Specific Channels
 
-| Stakeholder Group    | Communication Channels                               | Initial Notification                       | Follow-up Frequency                 | Regulatory Requirements                      |
-| -------------------- | ---------------------------------------------------- | ------------------------------------------ | ----------------------------------- | -------------------------------------------- |
-| 👤 End Users         | GitHub Status Page, Repository Issues, README Notice | Based on severity                          | Based on severity                   | NIST 800-53 (IR-6), ISO 27001 (A.16.1.2)     |
-| 👥 Contributors      | Direct Email, Discussion Forum, GitHub Pull Requests | < 15 minutes for critical                  | Every 30-60 minutes until resolved  | NIST 800-53 (IR-6), ISO 27001 (A.16.1.2)     |
-| 🏢 Service Providers | GitHub Support Channels, Direct Contact              | < 15 minutes for critical                  | Every 30 minutes until resolved     | NIST 800-53 (IR-4(10)), ISO 27001 (A.16.1.2) |
-| ⚖️ Regulatory Bodies | Formal Notification (if applicable)                  | Within timeframes specified by regulations | As required by specific regulations | NIST 800-53 (IR-6(1)), ISO 27001 (A.16.1.2)  |
+| Stakeholder Group    | Communication Channels                               | Initial Notification                       | Follow-up Frequency                 | Regulatory Requirements                                                                                                                                    |
+| -------------------- | ---------------------------------------------------- | ------------------------------------------ | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 👤 End Users         | GitHub Status Page, Repository Issues, README Notice | Based on severity                          | Based on severity                   | [NIST 800-53 (IR-6)](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final), [ISO 27001 (A.16.1.2)](https://www.iso.org/standard/54534.html)     |
+| 👥 Contributors      | Direct Email, Discussion Forum, GitHub Pull Requests | < 15 minutes for critical                  | Every 30-60 minutes until resolved  | [NIST 800-53 (IR-6)](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final), [ISO 27001 (A.16.1.2)](https://www.iso.org/standard/54534.html)     |
+| 🏢 Service Providers | GitHub Support Channels, Direct Contact              | < 15 minutes for critical                  | Every 30 minutes until resolved     | [NIST 800-53 (IR-4(10))](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final), [ISO 27001 (A.16.1.2)](https://www.iso.org/standard/54534.html) |
+| ⚖️ Regulatory Bodies | Formal Notification (if applicable)                  | Within timeframes specified by regulations | As required by specific regulations | [NIST 800-53 (IR-6(1))](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final), [ISO 27001 (A.16.1.2)](https://www.iso.org/standard/54534.html)  |
 
 ### 🔔 Notification Templates and Guidelines
 
