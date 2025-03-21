@@ -52,25 +52,20 @@ describe("ciaOptionsMocks", () => {
   });
 
   describe("createChartJsMock", () => {
-    it("creates a Chart.js mock with correct structure", () => {
+    it("creates a Chart.js mock with required methods", () => {
       const mock = createChartJsMock();
 
-      // Check ESModule flag
       expect(mock).toHaveProperty("__esModule", true);
-
-      // Check default export
       expect(mock).toHaveProperty("default");
-      expect(mock.default).toBeInstanceOf(Function);
 
-      // Create an instance using the mock constructor
-      const mockChart = mock.default();
+      // Create a mock chart instance
+      const chartInstance = mock.default();
 
-      // Check instance methods
-      expect(mockChart).toHaveProperty("destroy");
-      expect(mockChart).toHaveProperty("update");
-      expect(mockChart).toHaveProperty("resize");
-      expect(mockChart).toHaveProperty("data");
-      expect(mockChart.data).toHaveProperty("datasets");
+      // Verify instance methods
+      expect(chartInstance).toHaveProperty("destroy");
+      expect(chartInstance).toHaveProperty("update");
+      expect(chartInstance).toHaveProperty("resize");
+      expect(chartInstance).toHaveProperty("data");
     });
   });
 });

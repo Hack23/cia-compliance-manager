@@ -1,142 +1,229 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { createCIAOptionsMock } from "../tests/testMocks/ciaOptionsMocks";
 import { SecurityLevel } from "../types/cia";
-import { createTestSecurityMetricsService } from "../utils/serviceTestUtils";
-import { SecurityMetricsService } from "./securityMetricsService";
+import {
+  createSecurityMetricsService,
+  SecurityMetricsService,
+} from "./securityMetricsService";
 
-// Convert from hoisted to a regular object
-const mockCIAOptions = {
-  availabilityOptions: {
-    None: {
-      description: "No availability controls",
-      impact: "Critical business impact",
-      capex: 0,
-      opex: 0,
-    },
-    Low: {
-      description: "Basic availability controls",
-      impact: "High business impact",
-      capex: 5000,
-      opex: 1000,
-    },
-    Moderate: {
-      description: "Standard availability controls",
-      impact: "Medium business impact",
-      capex: 15000,
-      opex: 3000,
-    },
-    High: {
-      description: "Advanced availability controls",
-      impact: "Low business impact",
-      capex: 30000,
-      opex: 6000,
-    },
-    "Very High": {
-      description: "Maximum availability controls",
-      impact: "Minimal business impact",
-      capex: 60000,
-      opex: 12000,
-    },
-  },
-  integrityOptions: {
-    None: {
-      description: "No integrity controls",
-      impact: "Critical business impact",
-      capex: 0,
-      opex: 0,
-    },
-    Low: {
-      description: "Basic integrity controls",
-      impact: "High business impact",
-      capex: 5000,
-      opex: 1000,
-    },
-    Moderate: {
-      description: "Standard integrity controls",
-      impact: "Medium business impact",
-      capex: 15000,
-      opex: 3000,
-    },
-    High: {
-      description: "Advanced integrity controls",
-      impact: "Low business impact",
-      capex: 30000,
-      opex: 6000,
-    },
-    "Very High": {
-      description: "Maximum integrity controls",
-      impact: "Minimal business impact",
-      capex: 60000,
-      opex: 12000,
-    },
-  },
-  confidentialityOptions: {
-    None: {
-      description: "No confidentiality controls",
-      impact: "Critical business impact",
-      capex: 0,
-      opex: 0,
-    },
-    Low: {
-      description: "Basic confidentiality controls",
-      impact: "High business impact",
-      capex: 7000,
-      opex: 1400,
-    },
-    Moderate: {
-      description: "Standard confidentiality controls",
-      impact: "Medium business impact",
-      capex: 20000,
-      opex: 4000,
-    },
-    High: {
-      description: "Advanced confidentiality controls",
-      impact: "Low business impact",
-      capex: 40000,
-      opex: 8000,
-    },
-    "Very High": {
-      description: "Maximum confidentiality controls",
-      impact: "Minimal business impact",
-      capex: 80000,
-      opex: 16000,
-    },
-  },
-  ROI_ESTIMATES: {
-    NONE: {
-      returnRate: "0%",
-      description: "No return on investment",
-    },
-    LOW: {
-      returnRate: "50%",
-      description: "Low return on investment",
-    },
-    MODERATE: {
-      returnRate: "200%",
-      description: "Moderate return on investment",
-    },
-    HIGH: {
-      returnRate: "350%",
-      description: "High return on investment",
-    },
-    VERY_HIGH: {
-      returnRate: "500%",
-      description: "Very high return on investment",
-    },
-  },
-};
+// Use the mock helper properly - this replaces the exported hoisted variable
+vi.mock("../hooks/useCIAOptions", () => createCIAOptionsMock());
 
-// Add mocked security levels for testing
-const mockSecurityLevels = {
-  availabilityLevel: "Moderate" as SecurityLevel,
-  integrityLevel: "Moderate" as SecurityLevel,
-  confidentialityLevel: "Moderate" as SecurityLevel,
-};
+// Regular test constants (not hoisted or exported)
+const testLevels: SecurityLevel[] = [
+  "None",
+  "Low",
+  "Moderate",
+  "High",
+  "Very High",
+];
 
 describe("SecurityMetricsService", () => {
   let service: SecurityMetricsService;
 
   beforeEach(() => {
-    service = createTestSecurityMetricsService();
+    // Create a new service instance for each test
+    const mockDataProvider = {
+      availabilityOptions: {
+        None: {
+          description: "No availability",
+          technical: "No technical controls",
+          businessImpact: "Critical business impact",
+          capex: 0,
+          opex: 0,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: [],
+        },
+        Low: {
+          description: "Low availability",
+          technical: "Basic technical controls",
+          businessImpact: "High business impact",
+          capex: 5,
+          opex: 2,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: ["Basic recommendation"],
+        },
+        Moderate: {
+          description: "Moderate availability",
+          technical: "Standard technical controls",
+          businessImpact: "Medium business impact",
+          capex: 10,
+          opex: 5,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: ["Standard recommendation"],
+        },
+        High: {
+          description: "High availability",
+          technical: "Advanced technical controls",
+          businessImpact: "Low business impact",
+          capex: 15,
+          opex: 8,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: ["Advanced recommendation"],
+        },
+        "Very High": {
+          description: "Very high availability",
+          technical: "Maximum technical controls",
+          businessImpact: "Minimal business impact",
+          capex: 20,
+          opex: 10,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: ["Maximum recommendation"],
+        },
+      },
+      integrityOptions: {
+        None: {
+          description: "No integrity",
+          technical: "No technical controls",
+          businessImpact: "Critical business impact",
+          capex: 0,
+          opex: 0,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: [],
+        },
+        Low: {
+          description: "Low integrity",
+          technical: "Basic technical controls",
+          businessImpact: "High business impact",
+          capex: 5,
+          opex: 2,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: ["Basic recommendation"],
+        },
+        Moderate: {
+          description: "Moderate integrity",
+          technical: "Standard technical controls",
+          businessImpact: "Medium business impact",
+          capex: 10,
+          opex: 5,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: ["Standard recommendation"],
+        },
+        High: {
+          description: "High integrity",
+          technical: "Advanced technical controls",
+          businessImpact: "Low business impact",
+          capex: 15,
+          opex: 8,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: ["Advanced recommendation"],
+        },
+        "Very High": {
+          description: "Very high integrity",
+          technical: "Maximum technical controls",
+          businessImpact: "Minimal business impact",
+          capex: 20,
+          opex: 10,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: ["Maximum recommendation"],
+        },
+      },
+      confidentialityOptions: {
+        None: {
+          description: "No confidentiality",
+          technical: "No technical controls",
+          businessImpact: "Critical business impact",
+          capex: 0,
+          opex: 0,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: [],
+        },
+        Low: {
+          description: "Low confidentiality",
+          technical: "Basic technical controls",
+          businessImpact: "High business impact",
+          capex: 5,
+          opex: 2,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: ["Basic recommendation"],
+        },
+        Moderate: {
+          description: "Moderate confidentiality",
+          technical: "Standard technical controls",
+          businessImpact: "Medium business impact",
+          capex: 10,
+          opex: 5,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: ["Standard recommendation"],
+        },
+        High: {
+          description: "High confidentiality",
+          technical: "Advanced technical controls",
+          businessImpact: "Low business impact",
+          capex: 15,
+          opex: 8,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: ["Advanced recommendation"],
+        },
+        "Very High": {
+          description: "Very high confidentiality",
+          technical: "Maximum technical controls",
+          businessImpact: "Minimal business impact",
+          capex: 20,
+          opex: 10,
+          bg: "#ffffff",
+          text: "#000000",
+          recommendations: ["Maximum recommendation"],
+        },
+      },
+      roiEstimates: {
+        NONE: {
+          returnRate: "0%",
+          description: "No ROI",
+          value: "0%",
+        },
+        LOW: {
+          returnRate: "50%",
+          description: "Low ROI",
+          value: "50%",
+        },
+        MODERATE: {
+          returnRate: "150%",
+          description: "Moderate ROI",
+          value: "150%",
+        },
+        HIGH: {
+          returnRate: "300%",
+          description: "High ROI",
+          value: "300%",
+        },
+        VERY_HIGH: {
+          returnRate: "500%",
+          description: "Very high ROI",
+          value: "500%",
+        },
+      },
+      // Add required interface methods
+      getDefaultSecurityIcon: (level: SecurityLevel) => {
+        return (
+          {
+            None: "⚠️",
+            Low: "🔑",
+            Moderate: "🔓",
+            High: "🔒",
+            "Very High": "🔐",
+          }[level] || "❓"
+        );
+      },
+      getDefaultValuePoints: (level: SecurityLevel) => {
+        return ["Test value point for " + level];
+      },
+    };
+    service = createSecurityMetricsService(mockDataProvider);
   });
 
   describe("calculateRoi", () => {
