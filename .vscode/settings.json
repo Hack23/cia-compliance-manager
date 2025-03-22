@@ -144,7 +144,8 @@
   "typescript.inlayHints.parameterTypes.enabled": true,
   "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
   "typescript.preferences.renameMatchingJsxTags": true,
- 
+  "typescript.tsserver.maxTsServerMemory": 4096,
+
   // Tailwind settings
   "tailwindCSS.experimental.classRegex": [
     ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
@@ -178,7 +179,7 @@
   "errorLens.exclude": ["never used"],
   "problems.showCurrentInStatus": true,
 
-  // Eslint settings - enhanced
+  // Eslint settings - updated with absolute path to configuration file
   "eslint.validate": [
     "typescript",
     "typescriptreact",
@@ -186,14 +187,33 @@
     "javascriptreact"
   ],
   "eslint.enable": true,
-  "eslint.format.enable": true,
+  "eslint.format.enable": false,
   "eslint.run": "onType",
-  "eslint.workingDirectories": [{ "mode": "auto" }, "./src", "./cypress"],
+  "eslint.workingDirectories": [
+    { "mode": "auto" },
+    { "directory": "./src", "changeProcessCWD": true },
+    { "directory": "./cypress", "changeProcessCWD": true }
+  ],
+  "eslint.options": {
+    "overrideConfigFile": "/workspaces/cia-compliance-manager/.eslintrc.cjs"
+  },
   "eslint.codeActionsOnSave.rules": [
     "@typescript-eslint/no-unused-vars",
     "@typescript-eslint/no-explicit-any",
     "react-hooks/rules-of-hooks",
     "react-hooks/exhaustive-deps"
+  ],
+
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "vue",
+    "markdown",
+    "json",
+    "jsonc"
   ],
 
   // Copilot settings
@@ -209,17 +229,26 @@
   "github.copilot.advanced": {
     "language.enableAutoCompletions": {
       "typescript": true,
-      "typescriptreact": true
+      "typescriptreact": true,
+      "javascript": true,
+      "javascriptreact": true,
+      "json": true,
+      "jsonc": true
     },
     "indentationMode": "keep",
     "inlineSuggestCount": 3,
     "listCount": 5
-    },
+  },
+  // Ensure Copilot prefers TypeScript file extensions
+  "github.copilot.fileTypes": {
+    "javascript": "typescript",
+    "javascriptreact": "typescriptreact"
+  },
 
-  // Custom instructions for GitHub Copilot - updated with v1.0 release priority
+  // Custom instructions for GitHub Copilot - updated with TypeScript-first approach
   "github.copilot.editor.customization": {
     "repositoryInstructions": {
-      "instructions": "You're working on the CIA Compliance Manager application (version 0.8.4), which helps organizations assess security controls across the Confidentiality, Integrity, and Availability (CIA) triad. The TOP PRIORITY is to reach version 1.0 by completing and fixing existing functionality only, not adding new features. Focus on stability, correctness, and completing what's already started.\n\n1. VERSION 1.0 PRIORITY FOCUS:\n- ONLY fix and complete existing widgets - no new features\n- Fix bugs and inconsistencies in current implementation\n- Ensure data consistency between components and services\n- Complete any partially implemented functionality\n- Optimize performance of existing code\n- Increase test coverage for current features\n- Follow existing patterns exactly - don't introduce new patterns\n\n2. BUSINESS CONTEXT:\n- This application helps security officers evaluate and implement security controls\n- Security is assessed across Confidentiality, Integrity, and Availability\n- Each security component has levels: None, Low, Moderate, High, Very High\n- Availability levels measure uptime from <90% to 99.99% with corresponding RTO/RPO metrics\n- Integrity levels range from no validation to blockchain/distributed validation\n- Confidentiality levels range from no controls to military-grade encryption with zero trust\n- Business impact is evaluated across: Financial, Operational, Regulatory, Reputational, Strategic\n- Compliance is mapped to frameworks like NIST, ISO, GDPR, HIPAA, SOC2\n- Implementation costs are tracked as CAPEX (upfront) and OPEX (ongoing)\n- Target users include CISOs, security officers, compliance managers, and IT implementers\n- Value proposition includes cost optimization, risk reduction, and compliance simplification\n\n3. TYPESCRIPT STANDARDS:\n- Use TypeScript 5.8+ features including const type parameters and decorators\n- Always use explicit types (avoid 'any', prefer unknown if necessary)\n- Use interface for public API and type for internal structures\n- Use mapped types, conditional types, and utility types (Pick, Omit) where appropriate\n- Follow strict null checking principles with proper null guards\n- Use type narrowing with explicit type guards (isSecurityLevel, isWidgetConfig, etc.)\n- Use generics to improve code reuse and type safety\n- Use readonly modifiers for immutable data\n- Leverage discriminated unions for state management with exhaustive checking\n- Prefer const assertions for literal values (as const)\n\n4. UI/UX DESIGN PRINCIPLES:\n- Complete existing design patterns - don't introduce new ones\n- Follow WCAG 2.1 AA accessibility standards for all interactive elements\n- Use consistent color coding for security levels (red=critical, amber=warning, green=compliant)\n- Implement progressive disclosure for complex security information\n- Design with responsive layouts for desktop, tablet, and mobile viewports\n- Use clear microcopy that avoids technical jargon where possible\n- Create intuitive data visualizations for security metrics and compliance status\n- Add appropriate micro-interactions to improve user engagement\n- Include contextual help and tooltips for security terminology\n- Design for dark mode with appropriate contrast ratios\n\n5. BUSINESS VALUE FOCUS:\n- Ensure existing business value calculations are accurate and complete\n- Document ROI calculations and business justifications in comments\n- Verify that components correctly highlight cost savings and risk reduction\n- Complete any partially implemented executive reporting features\n- Ensure compliance mappings are complete and accurate\n- Verify calculation consistency across the application\n\n6. REACT COMPONENT DESIGN:\n- Complete and fix existing components - don't create new ones\n- Ensure all props have proper TypeScript interfaces\n- Add missing data-testid attributes matching the pattern in cypress/test-data/data-testid-analysis.md\n- Fix any inconsistent state management approaches\n- Complete error handling for all components\n- Optimize performance with useMemo/useCallback with proper dependency arrays\n- Fix any accessibility issues in existing components\n\nPlease help me complete version 1.0 by fixing and completing existing functionality only - no new features."
+      "instructions": "You're working on the CIA Compliance Manager application (version 0.8.4), which helps organizations assess security controls across the Confidentiality, Integrity, and Availability (CIA) triad. The TOP PRIORITY is to reach version 1.0 by completing and fixing existing functionality only, not adding new features. Focus on stability, correctness, and completing what's already started.\n\n1. VERSION 1.0 PRIORITY FOCUS:\n- ONLY fix and complete existing widgets - no new features\n- Fix bugs and inconsistencies in current implementation\n- Ensure data consistency between components and services\n- Complete any partially implemented functionality\n- Optimize performance of existing code\n- Increase test coverage for current features\n- Follow existing patterns exactly - don't introduce new patterns\n\n2. TYPESCRIPT-FIRST APPROACH:\n- ALWAYS use TypeScript (.ts, .tsx) for all new files, NEVER use JavaScript (.js, .jsx)\n- All components should be written as .tsx files\n- All utilities, services, and other non-component code should be .ts files\n- Tests should use .test.ts or .test.tsx extensions\n- Prefer TypeScript's strictest type checking features\n\n3. BUSINESS CONTEXT:\n- This application helps security officers evaluate and implement security controls\n- Security is assessed across Confidentiality, Integrity, and Availability\n- Each security component has levels: None, Low, Moderate, High, Very High\n- Availability levels measure uptime from <90% to 99.99% with corresponding RTO/RPO metrics\n- Integrity levels range from no validation to blockchain/distributed validation\n- Confidentiality levels range from no controls to military-grade encryption with zero trust\n- Business impact is evaluated across: Financial, Operational, Regulatory, Reputational, Strategic\n- Compliance is mapped to frameworks like NIST, ISO, GDPR, HIPAA, SOC2\n- Implementation costs are tracked as CAPEX (upfront) and OPEX (ongoing)\n- Target users include CISOs, security officers, compliance managers, and IT implementers\n- Value proposition includes cost optimization, risk reduction, and compliance simplification\n\n4. TYPESCRIPT STANDARDS:\n- Use TypeScript 5.8+ features including const type parameters and decorators\n- Always use explicit types (avoid 'any', prefer unknown if necessary)\n- Use interface for public API and type for internal structures\n- Use mapped types, conditional types, and utility types (Pick, Omit) where appropriate\n- Follow strict null checking principles with proper null guards\n- Use type narrowing with explicit type guards (isSecurityLevel, isWidgetConfig, etc.)\n- Use generics to improve code reuse and type safety\n- Use readonly modifiers for immutable data\n- Leverage discriminated unions for state management with exhaustive checking\n- Prefer const assertions for literal values (as const)\n\n5. UI/UX DESIGN PRINCIPLES:\n- Complete existing design patterns - don't introduce new ones\n- Follow WCAG 2.1 AA accessibility standards for all interactive elements\n- Use consistent color coding for security levels (red=critical, amber=warning, green=compliant)\n- Implement progressive disclosure for complex security information\n- Design with responsive layouts for desktop, tablet, and mobile viewports\n- Use clear microcopy that avoids technical jargon where possible\n- Create intuitive data visualizations for security metrics and compliance status\n- Add appropriate micro-interactions to improve user engagement\n- Include contextual help and tooltips for security terminology\n- Design for dark mode with appropriate contrast ratios\n\n6. BUSINESS VALUE FOCUS:\n- Ensure existing business value calculations are accurate and complete\n- Document ROI calculations and business justifications in comments\n- Verify that components correctly highlight cost savings and risk reduction\n- Complete any partially implemented executive reporting features\n- Ensure compliance mappings are complete and accurate\n- Verify calculation consistency across the application\n\n7. REACT COMPONENT DESIGN:\n- Complete and fix existing components - don't create new ones\n- Ensure all props have proper TypeScript interfaces\n- Add missing data-testid attributes matching the pattern in cypress/test-data/data-testid-analysis.md\n- Fix any inconsistent state management approaches\n- Complete error handling for all components\n- Optimize performance with useMemo/useCallback with proper dependency arrays\n- Fix any accessibility issues in existing components\n\nPlease help me complete version 1.0 by fixing and completing existing functionality only - no new features."
     }
   },
 
@@ -233,5 +262,6 @@
     "types.ts": "${capture}.d.ts, ${capture}.schema.ts"
   },
   "terminal.integrated.defaultProfile.linux": "bash",
-  "diffEditor.ignoreTrimWhitespace": false
+  "diffEditor.ignoreTrimWhitespace": false,
+  "security.workspace.trust.enabled": true
 }

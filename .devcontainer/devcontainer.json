@@ -28,6 +28,7 @@
         // TypeScript/Node support
         "ms-vscode.vscode-typescript-next",
         "christian-kohler.npm-intellisense",
+        "ritwickdey.LiveServer",
 
         // Keep minimal formatting support
         "esbenp.prettier-vscode"
@@ -36,7 +37,16 @@
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.codeActionsOnSave": {
-          "source.fixAll.eslint": true
+          "source.fixAll.eslint": "explicit"
+        },
+        // Updated ESLint options with absolute path to configuration file
+        "eslint.workingDirectories": [
+          { "mode": "auto" },
+          { "directory": "./src", "changeProcessCWD": true },
+          { "directory": "./cypress", "changeProcessCWD": true }
+        ],
+        "eslint.options": {
+          "overrideConfigFile": "/workspaces/cia-compliance-manager/.eslintrc.cjs"
         },
         "typescript.updateImportsOnFileMove.enabled": "always",
         "javascript.updateImportsOnFileMove.enabled": "always",
@@ -44,12 +54,36 @@
 
         // Better import organization
         "typescript.preferences.importModuleSpecifier": "shortest",
-        "javascript.preferences.importModuleSpecifier": "shortest"
+        "javascript.preferences.importModuleSpecifier": "shortest",
+
+        // Ensure Copilot prefers TypeScript file extensions
+        "github.copilot.fileTypes": {
+          "javascript": "typescript",
+          "javascriptreact": "typescriptreact"
+        }
+      },
+      // Add VS Code tasks properly in the customizations section
+      "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+          {
+            "label": "build",
+            "type": "npm",
+            "script": "build",
+            "problemMatcher": ["$tsc"],
+            "group": {
+              "kind": "build",
+              "isDefault": true
+            }
+          }
+        ]
       }
     }
   },
-  // Update post-create commands
-  "postCreateCommand": "chmod +x .devcontainer/init-xvfb.sh && sudo mkdir -p /var/run/dbus && sudo dbus-daemon --system --fork && npm install -g npm@latest && npm install && npx cypress verify",
+  // Update post-create commands to include ESLint installation and build
+  "postCreateCommand": "chmod +x .devcontainer/init-xvfb.sh && sudo mkdir -p /var/run/dbus && sudo dbus-daemon --system --fork && npm install -g npm@latest eslint && npm install && npx cypress verify",
+  // Add post-start command to ensure build is run when container starts
+  "postStartCommand": "npm run build",
   "remoteUser": "node",
   // Expand environment variables
   "containerEnv": {
@@ -60,8 +94,5 @@
   // Use privileged mode for X11 and Cypress
   "runArgs": ["--privileged"],
   // Fix: Use proper shutdown action instead of postStopCommand
-  "shutdownAction": "none",
-  "tasks": {
-    "build": "npm install && npm run build"
-  }
+  "shutdownAction": "none"
 }

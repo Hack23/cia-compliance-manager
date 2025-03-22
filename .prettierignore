@@ -1,0 +1,22 @@
+# Build artifacts
+build/
+dist/
+coverage/
+
+# Generated files
+docs/
+
+# Lock files
+package-lock.json
+yarn.lock
+
+# Dependencies
+node_modules/
+
+# Cypress screenshots and videos
+cypress/screenshots/
+cypress/videos/
+
+# Environment files
+.env
+.env.*
