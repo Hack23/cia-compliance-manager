@@ -16,7 +16,7 @@
     "preview": "vite preview",
     "find:unused": "npm run knip",
     "test": "vitest run --reporter=verbose -coverage --coverage.reportOnFailure",
-    "test:core": "vitest run --coverage --coverage.reportOnFailure --reporter=verbose  --exclude \"src/components/widgets/*.test.{ts,tsx}\"",
+    "test:core": "vitest run --coverage --coverage.reportOnFailure --reporter=verbose  --exclude \"src/components/widgets/**/*.test.{ts,tsx}\"",
     "test:detailed": "vitest run --reporter=verbose --reporter=json --outputFile=docs/test-results/test-results.json",
     "test:failed": "vitest run --run --reporter=verbose --mode=development",
     "test:watch": "vitest",
