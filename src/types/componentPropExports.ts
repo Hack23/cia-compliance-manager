@@ -112,7 +112,7 @@ export interface SecurityRiskScoreProps {
 
 export interface StatusBadgeProps {
   status: string;
-  variant?: "success" | "warning" | "error" | "info" | "neutral";
+  variant?: "success" | "warning" | "error" | "info" | "neutral" | "purple";
   className?: string;
   testId?: string;
 }

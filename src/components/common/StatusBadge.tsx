@@ -1,18 +1,19 @@
 import * as React from "react";
 
-// Expand the type to include all required variants
+// Define a complete StatusType that includes all used values
 export type StatusType =
   | "success"
-  | "info"
   | "warning"
   | "error"
+  | "info"
   | "neutral"
   | "purple";
 
 // Export this type for other components to use
 export type StatusBadgeVariant = StatusType;
 
-interface StatusBadgeProps {
+// Single, unified interface definition to fix the "merged declaration" error
+export interface StatusBadgeProps {
   /**
    * The status type (determines color)
    */

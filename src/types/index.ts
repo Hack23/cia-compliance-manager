@@ -44,6 +44,8 @@ export type {
   ComplianceStatus,
   ImplementationEffort,
   ROIEstimate,
+  ROIEstimatesMap,
+  ROIMetrics,
   TechnicalImplementationDetails,
 } from "./cia-services";
 
@@ -55,10 +57,23 @@ export type {
   FrameworkComplianceStatus,
 } from "./compliance";
 
-// Widget Types
-export * from "./widget";
-export * from "./widget-props";
-export * from "./widgets";
+// Widget Types - more selective exports to avoid ambiguity
+export type {
+  AvailabilityImpactWidgetProps,
+  BusinessImpactAnalysisWidgetProps,
+  ComplianceStatusWidgetProps,
+  ConfidentialityImpactWidgetProps,
+  CostEstimationWidgetProps,
+  IntegrityImpactWidgetProps,
+  SecurityLevelWidgetProps,
+  SecurityResourcesWidgetProps,
+  TechnicalDetailsWidgetProps,
+  ValueCreationWidgetProps,
+  WidgetProps,
+} from "./widgets";
+
+export type { CommonWidgetProps, WithSecurityLevelProps } from "./widget-props";
+export type { BaseWidgetProps, CIABaseWidgetProps } from "./widgets";
 
 // Selective export from businessImpact to avoid conflicts
 export type {
@@ -71,8 +86,17 @@ export type {
   BusinessValueMetric,
 } from "./businessImpact";
 
-// Selective export from componentProps to avoid conflicts
-export type { SecurityLevelDisplayProps } from "./componentProps";
+// Component Props - use more specific exports to avoid conflicts
+export type {
+  BusinessImpactSectionProps,
+  BusinessRiskDisplayProps,
+  CIAImpactCardProps,
+  MetricsCardProps,
+  RadarChartProps,
+  RiskAssessmentProps,
+  StatusBadgeProps,
+  WidgetHeaderProps,
+} from "./componentPropExports";
 
 // Helper functions from cia
 export {

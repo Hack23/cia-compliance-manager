@@ -421,9 +421,15 @@ describe("SecurityMetricsService", () => {
         "Moderate" as SecurityLevel
       );
 
+      // Fix type safety issue by using nullish coalescing operator
+      // to provide default values for potentially undefined properties
+      const totalCapex = metrics.totalCapex ?? 0;
+      const totalOpex = metrics.totalOpex ?? 0;
+
+      expect(parseInt(metrics.riskReduction ?? "0")).toBeGreaterThanOrEqual(0);
       expect(metrics.totalCapex).toBe(300); // 100 * 3 components
       expect(metrics.totalOpex).toBe(150); // 50 * 3 components
-      expect(metrics.totalCost).toBe(450); // 300 + 150
+      expect(metrics.totalCost).toBe(totalCapex + totalOpex); // Use the safe variables
     });
 
     TEST_SECURITY_LEVELS.forEach((level) => {
