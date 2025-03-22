@@ -1,7 +1,46 @@
 import { SecurityLevel } from "../types/cia";
-import { CIAComponentType, CIADataProvider, ROIMetrics } from "../types/cia-services";
+import {
+  CIAComponentType,
+  CIADataProvider,
+  ROIMetrics,
+} from "../types/cia-services";
 import logger from "../utils/logger";
 import { BaseService } from "./BaseService";
+
+// Add missing interface definitions
+interface ComponentMetrics {
+  component: CIAComponentType;
+  level: SecurityLevel;
+  value: number;
+  percentage: string;
+  description: string;
+  capex: number;
+  opex: number;
+}
+
+interface ImpactMetrics {
+  securityLevel: SecurityLevel;
+  riskReduction: string;
+  description: string;
+  technical: string;
+  businessImpact: string;
+  uptime?: string;
+  rto?: string;
+  rpo?: string;
+  mttr?: string;
+  validationMethod?: string;
+  protectionMethod?: string;
+}
+
+interface SecurityMetrics {
+  score: number;
+  maxScore: number;
+  percentage: string;
+  totalCapex: number;
+  totalOpex: number;
+  totalCost: number;
+  riskReduction: string;
+}
 
 /**
  * Interface for ROI estimates map
@@ -45,14 +84,14 @@ export interface ROIEstimatesMap {
 }
 
 /**
- * Service for security metrics related functionality
+ * Service for security metrics and measurements
  *
- * ## Business Perspective
+ * ## Analytics Perspective
  *
- * This service provides quantifiable metrics for security investments,
- * enabling organizations to measure the effectiveness of their security
- * controls and justify security spending through ROI calculations and
- * risk reduction metrics. 📊
+ * This service provides quantitative metrics for security levels, enabling
+ * organizations to measure their security posture, track improvements over time,
+ * and quantify the impact of security investments through cost-benefit analysis
+ * and risk reduction calculations. 📊
  */
 export class SecurityMetricsService extends BaseService {
   constructor(dataProvider: CIADataProvider) {
@@ -108,18 +147,18 @@ export class SecurityMetricsService extends BaseService {
   }
 
   /**
-   * Get security metrics based on selected security levels
+   * Get comprehensive security metrics for security levels
    *
-   * @param availabilityLevel - Selected availability level
-   * @param integrityLevel - Optional integrity level (defaults to availability level)
-   * @param confidentialityLevel - Optional confidentiality level (defaults to availability level)
-   * @returns Security metrics including costs, score, and risk reduction
+   * @param availabilityLevel - Availability security level
+   * @param integrityLevel - Integrity security level (optional, defaults to availabilityLevel)
+   * @param confidentialityLevel - Confidentiality security level (optional, defaults to availabilityLevel)
+   * @returns Security metrics including score, costs, and risk reduction
    */
   public getSecurityMetrics(
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel = availabilityLevel,
     confidentialityLevel: SecurityLevel = availabilityLevel
-  ) {
+  ): SecurityMetrics {
     // Get component details
     const availabilityDetails = this.getComponentDetails(
       "availability",
@@ -134,29 +173,28 @@ export class SecurityMetricsService extends BaseService {
       confidentialityLevel
     );
 
-    // Calculate capital expenditure
+    // Calculate security score (0-100)
+    const score = this.calculateSecurityScore(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
+
+    // Calculate costs
     const availabilityCapex = availabilityDetails?.capex || 0;
     const integrityCapex = integrityDetails?.capex || 0;
     const confidentialityCapex = confidentialityDetails?.capex || 0;
-    const totalCapex =
-      availabilityCapex + integrityCapex + confidentialityCapex;
 
-    // Calculate operational expenditure
     const availabilityOpex = availabilityDetails?.opex || 0;
     const integrityOpex = integrityDetails?.opex || 0;
     const confidentialityOpex = confidentialityDetails?.opex || 0;
+
+    const totalCapex =
+      availabilityCapex + integrityCapex + confidentialityCapex;
     const totalOpex = availabilityOpex + integrityOpex + confidentialityOpex;
+    const totalCost = totalCapex + totalOpex;
 
-    // Calculate security score
-    const availValue = this.getSecurityLevelValue(availabilityLevel);
-    const intValue = this.getSecurityLevelValue(integrityLevel);
-    const confValue = this.getSecurityLevelValue(confidentialityLevel);
-
-    const score = availValue + intValue + confValue;
-    const maxScore = 12; // Max 4 points per component, 3 components
-    const percentage = `${Math.round((score / maxScore) * 100)}%`;
-
-    // Calculate risk reduction
+    // Calculate risk reduction percentage
     const riskReduction = this.calculateRiskReduction(
       availabilityLevel,
       integrityLevel,
@@ -165,42 +203,36 @@ export class SecurityMetricsService extends BaseService {
 
     return {
       score,
-      maxScore,
-      percentage,
+      maxScore: 100,
+      percentage: `${score}%`,
       totalCapex,
       totalOpex,
-      totalCost: totalCapex + totalOpex,
-      availabilityCapex,
-      availabilityOpex,
-      integrityCapex,
-      integrityOpex,
-      confidentialityCapex,
-      confidentialityOpex,
-      riskReduction,
+      totalCost,
+      riskReduction: `${riskReduction}%`,
     };
   }
 
   /**
-   * Get metrics for a specific component and security level
+   * Get component-specific metrics
    *
    * @param component - CIA component type
    * @param level - Security level
-   * @returns Component metrics including level, value, and description
+   * @returns Component metrics
    */
   public getComponentMetrics(
     component: CIAComponentType,
     level: SecurityLevel
-  ) {
+  ): ComponentMetrics {
     const details = this.getComponentDetails(component, level);
     const value = this.getSecurityLevelValue(level);
-    const percentage = `${Math.round((value / 4) * 100)}%`;
 
     return {
       component,
       level,
       value,
-      percentage,
-      description: details?.description || `${level} ${component}`,
+      percentage: `${(value / 4) * 100}%`,
+      description:
+        details?.description || this.getSecurityLevelDescription(level),
       capex: details?.capex || 0,
       opex: details?.opex || 0,
     };
@@ -208,7 +240,7 @@ export class SecurityMetricsService extends BaseService {
 
   /**
    * Get technical metrics for a component
-   * 
+   *
    * @param component The CIA component
    * @param level The security level
    * @returns Component technical metrics
@@ -224,52 +256,37 @@ export class SecurityMetricsService extends BaseService {
     const result: Record<string, string> = {};
 
     Object.entries(metrics).forEach(([key, value]) => {
-      result[key] = typeof value === 'number' ? value.toString() : value as string;
+      result[key] =
+        typeof value === "number" ? value.toString() : (value as string);
     });
 
     return result;
   }
 
   /**
-   * Get impact metrics for a component and security level
+   * Get impact metrics for a component and level
    *
    * @param component - CIA component type
    * @param level - Security level
-   * @returns Impact metrics including security level, risk reduction, and component-specific metrics
+   * @returns Impact metrics
    */
-  public getImpactMetrics(component: CIAComponentType, level: SecurityLevel) {
+  public getImpactMetrics(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): ImpactMetrics {
     const details = this.getComponentDetails(component, level);
+
+    // Calculate risk reduction for this specific component
     const riskReduction = this.calculateSingleComponentRiskReduction(level);
 
-    // Base metrics that apply to all components
-    const baseMetrics = {
+    return {
       securityLevel: level,
-      riskReduction,
-      description: details?.description || `${level} ${component}`,
-      technical: details?.technical || `Standard ${level} implementation`,
-      businessImpact: details?.businessImpact || "Business impact not provided",
+      riskReduction: `${riskReduction}%`,
+      description:
+        details?.description || this.getSecurityLevelDescription(level),
+      technical: details?.technical || "",
+      businessImpact: details?.businessImpact || "",
     };
-
-    // Component-specific metrics
-    if (component === "availability") {
-      return {
-        ...baseMetrics,
-        uptime: details?.uptime || "Not specified",
-        rto: details?.rto || "Not specified",
-        rpo: details?.rpo || "Not specified",
-        mttr: details?.mttr || "Not specified",
-      };
-    } else if (component === "integrity") {
-      return {
-        ...baseMetrics,
-        validationMethod: details?.validationMethod || "Not specified",
-      };
-    } else {
-      return {
-        ...baseMetrics,
-        protectionMethod: details?.protectionMethod || "Not specified",
-      };
-    }
   }
 
   /**
@@ -282,8 +299,8 @@ export class SecurityMetricsService extends BaseService {
    */
   private calculateRiskReduction(
     availabilityLevel: SecurityLevel,
-    integrityLevel: SecurityLevel,
-    confidentialityLevel: SecurityLevel
+    integrityLevel: SecurityLevel = availabilityLevel,
+    confidentialityLevel: SecurityLevel = availabilityLevel
   ): string {
     // Get individual component risk reductions
     const availReduction =
@@ -308,7 +325,16 @@ export class SecurityMetricsService extends BaseService {
    */
   private calculateSingleComponentRiskReduction(level: SecurityLevel): number {
     try {
-      return this.getSecurityLevelValue(level) || 0;
+      // Map security levels to approximate risk reduction percentages
+      const reductionMap: Record<SecurityLevel, number> = {
+        None: 0,
+        Low: 25,
+        Moderate: 50,
+        High: 75,
+        "Very High": 90,
+      };
+
+      return reductionMap[level] || 0;
     } catch (error) {
       logger.warn(`Failed to calculate risk reduction for level: ${level}`);
       return 0;
@@ -324,13 +350,13 @@ export class SecurityMetricsService extends BaseService {
   public getSecurityLevelDescription(level: SecurityLevel): string {
     switch (level) {
       case "None":
-        return "No security controls or protection measures";
+        return "No security controls implemented";
       case "Low":
-        return "Basic security controls with limited protection";
+        return "Basic security controls with minimal protection";
       case "Moderate":
-        return "Standard security controls with reasonable protection";
+        return "Standard security controls with adequate protection";
       case "High":
-        return "Robust security controls with strong protection";
+        return "Advanced security controls with strong protection";
       case "Very High":
         return "Maximum security controls with comprehensive protection";
       default:
@@ -345,15 +371,25 @@ export class SecurityMetricsService extends BaseService {
    * @returns Protection level description
    */
   public getProtectionLevel(level: SecurityLevel): string {
+    // Try to use the data provider's function if available
+    if (typeof this.dataProvider.getProtectionLevel === "function") {
+      try {
+        return this.dataProvider.getProtectionLevel(level);
+      } catch (error) {
+        // Continue with default implementation
+      }
+    }
+
+    // Default implementation
     switch (level) {
       case "None":
         return "No Protection";
       case "Low":
         return "Basic Protection";
       case "Moderate":
-        return "Balanced Protection";
+        return "Standard Protection";
       case "High":
-        return "Strong Protection";
+        return "Advanced Protection";
       case "Very High":
         return "Maximum Protection";
       default:
@@ -362,33 +398,40 @@ export class SecurityMetricsService extends BaseService {
   }
 
   /**
-   * Get risk badge variant based on risk level
-   * 
-   * @param riskLevel - Risk level
-   * @returns CSS variant for risk badge
+   * Get appropriate UI badge variant for a risk level
+   *
+   * @param riskLevel - Risk level string (High, Medium, Low, etc.)
+   * @returns Badge variant name
    */
-  public getRiskBadgeVariant(riskLevel: string): string {
-    switch (riskLevel.toLowerCase()) {
-      case "critical":
-        return "danger";
-      case "high":
-        return "warning";
-      case "medium":
-        return "primary";
-      case "low":
-        return "info";
-      case "minimal":
-        return "success";
-      default:
-        return "secondary";
+  public getRiskBadgeVariant(
+    riskLevel: string
+  ): "error" | "warning" | "info" | "success" | "neutral" {
+    const lowercaseRisk = riskLevel.toLowerCase();
+
+    if (lowercaseRisk.includes("critical") || lowercaseRisk.includes("high")) {
+      return "error";
+    } else if (
+      lowercaseRisk.includes("medium") ||
+      lowercaseRisk.includes("moderate")
+    ) {
+      return "warning";
+    } else if (lowercaseRisk.includes("low")) {
+      return "info";
+    } else if (
+      lowercaseRisk.includes("minimal") ||
+      lowercaseRisk.includes("none")
+    ) {
+      return "success";
     }
+
+    return "neutral";
   }
 
   /**
    * Get security icon for a security level
-   * 
+   *
    * @param level - Security level
-   * @returns Security icon for the level
+   * @returns Security icon (emoji)
    */
   public getSecurityIcon(level: SecurityLevel): string {
     return this.getDefaultSecurityIcon(level);
@@ -396,7 +439,7 @@ export class SecurityMetricsService extends BaseService {
 
   /**
    * Get security level from a numeric value
-   * 
+   *
    * @param value - Numeric security level value (0-4)
    * @returns Security level string representation
    */
@@ -419,7 +462,7 @@ export class SecurityMetricsService extends BaseService {
 
   /**
    * Calculate security score based on security levels
-   * 
+   *
    * @param availabilityLevel - Availability security level
    * @param integrityLevel - Integrity security level
    * @param confidentialityLevel - Confidentiality security level
@@ -427,28 +470,234 @@ export class SecurityMetricsService extends BaseService {
    */
   public calculateSecurityScore(
     availabilityLevel: SecurityLevel,
-    integrityLevel: SecurityLevel,
-    confidentialityLevel: SecurityLevel
+    integrityLevel: SecurityLevel = availabilityLevel,
+    confidentialityLevel: SecurityLevel = availabilityLevel
   ): number {
+    // Get numerical values for each level
     const availValue = this.getSecurityLevelValue(availabilityLevel);
-    const intValue = this.getSecurityLevelValue(integrityLevel);
+    const integValue = this.getSecurityLevelValue(integrityLevel);
     const confValue = this.getSecurityLevelValue(confidentialityLevel);
 
-    const score = availValue + intValue + confValue;
-    const maxScore = 12; // Max 4 points per component, 3 components
+    // Calculate average value (all components weighted equally)
+    const avgValue = (availValue + integValue + confValue) / 3;
 
-    return Math.round((score / maxScore) * 100);
+    // Convert to score (0-100)
+    // Max security level value is 4 (Very High)
+    return Math.round((avgValue / 4) * 100);
+  }
+
+  /**
+   * Get default security icon for a security level
+   *
+   * @param level - Security level
+   * @returns Security icon (emoji)
+   */
+  protected getDefaultSecurityIcon(level: SecurityLevel): string {
+    // Try to use the data provider's function if available
+    if (typeof this.dataProvider.getDefaultSecurityIcon === "function") {
+      try {
+        return this.dataProvider.getDefaultSecurityIcon(level);
+      } catch (error) {
+        // Continue with default implementation
+      }
+    }
+
+    // Default implementation
+    switch (level) {
+      case "None":
+        return "⚠️";
+      case "Low":
+        return "🔑";
+      case "Moderate":
+        return "🔓";
+      case "High":
+        return "🔒";
+      case "Very High":
+        return "🔐";
+      default:
+        return "❓";
+    }
   }
 }
 
 /**
- * Create a SecurityMetricsService with the provided data provider
+ * Create a SecurityMetricsService instance
  *
- * @param dataProvider - Data provider with CIA options
- * @returns SecurityMetricsService instance
+ * @param dataProvider - Optional data provider for the service
+ * @returns A new SecurityMetricsService instance
  */
 export function createSecurityMetricsService(
-  dataProvider: CIADataProvider
+  dataProvider?: CIADataProvider
 ): SecurityMetricsService {
+  // Create a properly typed default data provider if none is provided
+  if (!dataProvider) {
+    const defaultDataProvider: CIADataProvider = {
+      availabilityOptions: {
+        None: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        Low: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        Moderate: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        High: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        "Very High": {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+      },
+      integrityOptions: {
+        None: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        Low: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        Moderate: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        High: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        "Very High": {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+      },
+      confidentialityOptions: {
+        None: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        Low: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        Moderate: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        High: {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+        "Very High": {
+          description: "",
+          technical: "",
+          businessImpact: "",
+          capex: 0,
+          opex: 0,
+          bg: "",
+          text: "",
+          recommendations: [],
+        },
+      },
+      roiEstimates: {
+        NONE: { returnRate: "0%", description: "No ROI" },
+        LOW: { returnRate: "50%", description: "Low ROI" },
+        MODERATE: { returnRate: "150%", description: "Moderate ROI" },
+        HIGH: { returnRate: "250%", description: "High ROI" },
+        VERY_HIGH: { returnRate: "400%", description: "Very High ROI" },
+      },
+    };
+    return new SecurityMetricsService(defaultDataProvider);
+  }
+
   return new SecurityMetricsService(dataProvider);
 }

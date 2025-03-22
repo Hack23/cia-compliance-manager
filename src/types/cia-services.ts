@@ -63,15 +63,15 @@ export interface BusinessImpactDetail {
  */
 export interface BusinessImpactDetails {
   summary: string; // Required summary property
-  
+
   // Either use the new names or the legacy names
-  financial?: BusinessImpactDetail; 
+  financial?: BusinessImpactDetail;
   operational?: BusinessImpactDetail;
-  
+
   // Legacy property names kept for backward compatibility
-  financialImpact?: BusinessImpactDetail; 
+  financialImpact?: BusinessImpactDetail;
   operationalImpact?: BusinessImpactDetail;
-  
+
   // Optional detail types
   reputational?: BusinessImpactDetail;
   reputationalImpact?: BusinessImpactDetail;
@@ -102,8 +102,8 @@ export interface TechnicalImplementationDetails {
   // Add the component-specific properties
   validationMethod?: string; // For integrity
   protectionMethod?: string; // For confidentiality
-  recoveryMethod?: string;   // For availability
-  [key: string]: any;        // Allow additional properties
+  recoveryMethod?: string; // For availability
+  [key: string]: any; // Allow additional properties
 }
 
 /**
@@ -238,7 +238,25 @@ export interface CIADataProvider {
   integrityOptions: Record<SecurityLevel, CIADetails>;
   confidentialityOptions: Record<SecurityLevel, CIADetails>;
   roiEstimates: ROIEstimatesMap;
+
+  /**
+   * Get default security icon for a security level
+   */
   getDefaultSecurityIcon?: (level: SecurityLevel) => string;
+
+  /**
+   * Get default expertise level for a security level
+   */
+  getDefaultExpertiseLevel?: (level: SecurityLevel) => string;
+
+  /**
+   * Get protection level for a security level
+   */
+  getProtectionLevel?: (level: SecurityLevel) => string;
+
+  /**
+   * Get default value points for a security level
+   */
   getDefaultValuePoints?: (level: SecurityLevel) => string[];
 }
 
@@ -252,12 +270,6 @@ export interface ComplianceStatus {
   remediationSteps?: string[];
   complianceScore: number;
   // ...other properties...
-}
-
-export interface ROIEstimate {
-  returnRate: string;
-  value?: string;
-  description: string;
 }
 
 // ...existing types if any...

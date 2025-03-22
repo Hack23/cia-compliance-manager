@@ -1,35 +1,53 @@
 /**
- * Service exports for CIA Compliance Manager
+ * Services index file
  *
- * ## Business Perspective
- *
- * The services module provides the core business logic for assessing security levels,
- * determining compliance status, and evaluating business impact. These services
- * encapsulate domain knowledge and calculations that drive the application. 💼
+ * This file exports all the services used in the application for easier imports.
  */
 
-// Base Service
+// Export base service
 export { BaseService } from "./BaseService";
 
-// CIA Content Service
-export { CIAContentService, createCIAContentService } from "./ciaContentService";
-
-// Business Impact Service
-export { BusinessImpactService, createBusinessImpactService } from "./businessImpactService";
-
-// Compliance Service
-export { ComplianceService, createComplianceService } from "./complianceService";
-export type { ComplianceStatus } from "./complianceService";
-export { ComplianceServiceAdapter, ComplianceService as ComplianceServiceStatic } from "./ComplianceServiceAdapter";
-
-// Security Metrics Service
-export { createSecurityMetricsService, SecurityMetricsService } from "./securityMetricsService";
-
-// Security Resource Service
+// Export business impact service
 export {
-  createSecurityResourceService, SecurityResourceService
+  BusinessImpactService,
+  createBusinessImpactService,
+} from "./businessImpactService";
+
+// Export CIA content service
+export {
+  CIAContentService,
+  createCIAContentService,
+  default as defaultCIAContentService,
+  getInformationSensitivity,
+  getROIEstimate,
+  getRiskBadgeVariant,
+  getValuePoints,
+} from "./ciaContentService";
+
+// Export compliance service
+export {
+  ComplianceService,
+  createComplianceService,
+} from "./complianceService";
+
+// Export compliance service adapter
+export { ComplianceServiceAdapter } from "./ComplianceServiceAdapter";
+
+// Export security metrics service
+export {
+  SecurityMetricsService,
+  createSecurityMetricsService,
+} from "./securityMetricsService";
+
+// Export security resource service
+export {
+  SecurityResourceService,
+  createSecurityResourceService,
+  type SecurityResource,
 } from "./securityResourceService";
 
-// Technical Implementation Service
-export { createTechnicalImplementationService, TechnicalImplementationService } from "./technicalImplementationService";
-
+// Export technical implementation service
+export {
+  TechnicalImplementationService,
+  createTechnicalImplementationService,
+} from "./technicalImplementationService";

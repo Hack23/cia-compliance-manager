@@ -2,9 +2,9 @@
 
 // This file augments the Vitest types to include Jest DOM matchers
 
-import { expect } from "vitest";
-import type { TestingLibraryMatchers } from "@testing-library/jest-dom/matchers";
 import "@testing-library/jest-dom";
+import type { TestingLibraryMatchers } from "@testing-library/jest-dom/matchers";
+import "vitest";
 
 // Extend the Expect interface
 declare global {
@@ -137,4 +137,108 @@ export function suppressCanvasErrors(): ReturnType<typeof vi.spyOn> {
     // Call the original console.error for other messages
     console.info("Filtered console error:", message);
   });
+}
+
+/**
+ * TypeScript declarations for vitest extensions
+ *
+ * This file adds TypeScript type definitions for custom matchers and global extensions
+ * used in the test environment.
+ */
+
+// Import base types from vitest
+import "vitest";
+
+// Add type definitions for jest-axe
+interface AxeMatchers<R = unknown> {
+  /**
+   * Checks if the HTML element has no accessibility violations
+   */
+  toHaveNoViolations(): R;
+}
+
+// Extend the existing expect interface
+interface CustomMatchers<R = unknown>
+  extends AxeMatchers<R>,
+    TestingLibraryMatchers<R, void> {}
+
+// Add custom matchers to vitest's Assertion interface
+declare module "vitest" {
+  interface Assertion<T = any> extends CustomMatchers<T> {}
+  interface AsymmetricMatchersContaining extends CustomMatchers {}
+
+  // Add our global mocks
+  interface ImportMeta {
+    vitest: {
+      resetModules: () => void;
+      mock: (path: string, factory?: () => unknown) => void;
+      unmock: (path: string) => void;
+      stubEnv: (key: string, value: string) => void;
+      unstubEnv: (key: string) => void;
+      stubGlobal: (key: string, value: unknown) => void;
+      unstubGlobal: (key: string) => void;
+    };
+  }
+}
+
+// Declare global (window) mocks
+interface MockElementSize {
+  width: number;
+  height: number;
+  top: number;
+  left: number;
+  x: number;
+  y: number;
+  right: number;
+  bottom: number;
+}
+
+interface ResizeObserverCallback {
+  (entries: ResizeObserverEntry[], observer: ResizeObserver): void;
+}
+
+interface ResizeObserverEntry {
+  readonly target: Element;
+  readonly contentRect: DOMRectReadOnly;
+  readonly borderBoxSize: ReadonlyArray<ResizeObserverSize>;
+  readonly contentBoxSize: ReadonlyArray<ResizeObserverSize>;
+  readonly devicePixelContentBoxSize: ReadonlyArray<ResizeObserverSize>;
+}
+
+interface ResizeObserverSize {
+  readonly inlineSize: number;
+  readonly blockSize: number;
+}
+
+declare class ResizeObserver {
+  constructor(callback: ResizeObserverCallback);
+  observe(target: Element, options?: ResizeObserverOptions): void;
+  unobserve(target: Element): void;
+  disconnect(): void;
+}
+
+interface IntersectionObserverInit {
+  root?: Element | Document | null;
+  rootMargin?: string;
+  threshold?: number | number[];
+}
+
+interface IntersectionObserverCallback {
+  (entries: IntersectionObserverEntry[], observer: IntersectionObserver): void;
+}
+
+declare class IntersectionObserver {
+  readonly root: Element | null;
+  readonly rootMargin: string;
+  readonly thresholds: ReadonlyArray<number>;
+
+  constructor(
+    callback: IntersectionObserverCallback,
+    options?: IntersectionObserverInit
+  );
+
+  observe(target: Element): void;
+  unobserve(target: Element): void;
+  disconnect(): void;
+  takeRecords(): IntersectionObserverEntry[];
 }

@@ -3,22 +3,21 @@ import CIAClassificationApp from "../../application/CIAClassificationApp";
 
 describe("Security Level Propagation Integration Tests", () => {
   beforeEach(() => {
-    // Mock localStorage to avoid warnings
+    // Create a proper localStorage mock that doesn't try to override the read-only property
     const localStorageMock = {
-      getItem: vi.fn((key) => {
-        if (key === "availabilityLevel") return '"Moderate"';
-        if (key === "integrityLevel") return '"Moderate"';
-        if (key === "confidentialityLevel") return '"Moderate"';
-        if (key === "darkMode") return "true";
-        return null;
-      }),
+      getItem: vi.fn(),
       setItem: vi.fn(),
-      clear: vi.fn(),
       removeItem: vi.fn(),
-      length: 4,
+      clear: vi.fn(),
+      length: 0,
       key: vi.fn(),
     };
-    global.localStorage = localStorageMock;
+
+    // Use Object.defineProperty instead of direct assignment
+    Object.defineProperty(window, "localStorage", {
+      value: localStorageMock,
+      writable: true,
+    });
   });
 
   test("changing security levels in Security Level Widget updates other widgets", async () => {
