@@ -1,14 +1,28 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "entryPoints": ["./src"],
+  "entryPoints": [
+    "./src/index.ts",
+    "./src/typedoc-entry.ts",
+    "./src/types/index.ts",
+    "./src/services/index.ts",
+    "./src/hooks/index.ts",
+    "./src/components/index.ts",
+    "./src/utils/index.ts",
+    "./src/contexts/SecurityLevelContext.tsx",
+    "./src/types/compliance.ts",
+    "./src/types/componentPropExports.ts",
+    "./src/services/securityMetricsService.ts"
+  ],
   "entryPointStrategy": "expand",
-  "out": "docs/api",
+  "out": "./docs/api",
   "name": "CIA Compliance Manager API Documentation",
   "includeVersion": true,
   "excludePrivate": true,
+  "excludeProtected": true,
   "excludeExternals": true,
   "plugin": ["typedoc-plugin-mermaid"],
   "readme": "./docs/api-overview.md",
+
   "theme": "default",
   "tsconfig": "./tsconfig.json",
   "sort": ["visibility", "alphabetical"],
@@ -34,5 +48,14 @@
     "**/__tests__/**",
     "**/tests/**",
     "**/__mocks__/**"
+  ],
+  "categorizeByGroup": true,
+  "categoryOrder": [
+    "Types",
+    "Services",
+    "Hooks",
+    "Components",
+    "Utilities",
+    "*"
   ]
 }

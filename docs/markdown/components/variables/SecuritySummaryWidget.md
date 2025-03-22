@@ -1,0 +1,11 @@
+[**CIA Compliance Manager Documentation v0.8.5**](../../README.md)
+
+***
+
+[CIA Compliance Manager Documentation](../../modules.md) / [components](../README.md) / SecuritySummaryWidget
+
+# Variable: SecuritySummaryWidget
+
+> **SecuritySummaryWidget**: `FC`\<`SecuritySummaryWidgetProps` & [`WithSecurityLevelProps`](../../typedoc-entry/interfaces/WithSecurityLevelProps.md)\>
+
+Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:426](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L426)

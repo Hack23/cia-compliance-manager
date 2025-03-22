@@ -8,7 +8,7 @@
 
 > **createSecurityMetricsService**(`dataProvider`?): [`SecurityMetricsService`](../classes/SecurityMetricsService.md)
 
-Defined in: [src/services/securityMetricsService.ts:529](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/services/securityMetricsService.ts#L529)
+Defined in: [services/securityMetricsService.ts:586](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/securityMetricsService.ts#L586)
 
 Create a SecurityMetricsService instance
 
@@ -16,7 +16,7 @@ Create a SecurityMetricsService instance
 
 ### dataProvider?
 
-[`CIADataProvider`](../../../types/cia-services/interfaces/CIADataProvider.md)
+[`CIADataProvider`](../../../types/interfaces/CIADataProvider.md)
 
 Optional data provider for the service
 

@@ -6,11 +6,12 @@
 
 # types/compliance
 
-## Enumerations
-
-- [ComplianceStatusType](enumerations/ComplianceStatusType.md)
-
 ## Interfaces
 
 - [ComplianceFramework](interfaces/ComplianceFramework.md)
-- [ComplianceStatus](interfaces/ComplianceStatus.md)
+- [ComplianceStatusDetails](interfaces/ComplianceStatusDetails.md)
+- [FrameworkApplicabilityOptions](interfaces/FrameworkApplicabilityOptions.md)
+
+## Type Aliases
+
+- [FrameworkComplianceStatus](type-aliases/FrameworkComplianceStatus.md)

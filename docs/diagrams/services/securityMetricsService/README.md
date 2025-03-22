@@ -12,7 +12,10 @@
 
 ## Interfaces
 
+- [ComponentMetrics](interfaces/ComponentMetrics.md)
+- [ImpactMetrics](interfaces/ImpactMetrics.md)
 - [ROIEstimatesMap](interfaces/ROIEstimatesMap.md)
+- [SecurityMetrics](interfaces/SecurityMetrics.md)
 
 ## Functions
 

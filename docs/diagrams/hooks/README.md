@@ -6,44 +6,25 @@
 
 # hooks
 
+# React Hooks Module
+
+This module exports all custom hooks used throughout the CIA Compliance Manager.
+
+## Business Perspective
+Custom hooks encapsulate business logic and security assessment functionality,
+enabling consistent behavior across the application. 🔄
+
+## Technical Perspective
+Centralized hook exports simplify imports and promote hook reuse.
+
+## Functions
+
+- [useCIAContentService](functions/useCIAContentService.md)
+- [useCIAOptions](functions/useCIAOptions.md)
+- [useSecurityLevelState](functions/useSecurityLevelState.md)
+
 ## References
 
-### availabilityOptions
+### useSecurityLevelContext
 
-Re-exports [availabilityOptions](../data/ciaOptionsData/variables/availabilityOptions.md)
-
-***
-
-### CIADetails
-
-Re-exports [CIADetails](../types/cia-services/interfaces/CIADetails.md)
-
-***
-
-### confidentialityOptions
-
-Re-exports [confidentialityOptions](../data/ciaOptionsData/variables/confidentialityOptions.md)
-
-***
-
-### integrityOptions
-
-Re-exports [integrityOptions](../data/ciaOptionsData/variables/integrityOptions.md)
-
-***
-
-### ROI\_ESTIMATES
-
-Re-exports [ROI_ESTIMATES](../data/ciaOptionsData/variables/ROI_ESTIMATES.md)
-
-***
-
-### ROIEstimate
-
-Re-exports [ROIEstimate](../types/cia-services/interfaces/ROIEstimate.md)
-
-***
-
-### useCIAOptions
-
-Re-exports [useCIAOptions](useCIAOptions/functions/useCIAOptions.md)
+Re-exports [useSecurityLevelContext](../contexts/SecurityLevelContext/functions/useSecurityLevelContext.md)

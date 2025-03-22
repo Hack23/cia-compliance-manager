@@ -6,79 +6,137 @@
 
 # components
 
+# Component Exports Module
+
+This module exports all components and their prop types used in the CIA Compliance Manager.
+
+## Business Perspective
+Components are the building blocks of the UI, providing security professionals
+with intuitive interfaces for managing security compliance. 🎨
+
+## Technical Perspective
+Centralized component exports simplify imports and promote component reuse.
+
+## Interfaces
+
+- [CodeBlockProps](interfaces/CodeBlockProps.md)
+- [KeyValuePairProps](interfaces/KeyValuePairProps.md)
+- [RiskLevelBadgeProps](interfaces/RiskLevelBadgeProps.md)
+- [SecurityLevelBadgeProps](interfaces/SecurityLevelBadgeProps.md)
+- [SecurityLevelProviderProps](interfaces/SecurityLevelProviderProps.md)
+- [SecurityLevelSelectorProps](interfaces/SecurityLevelSelectorProps.md)
+- [SecurityLevelSummaryItemProps](interfaces/SecurityLevelSummaryItemProps.md)
+- [SecurityRiskScoreProps](interfaces/SecurityRiskScoreProps.md)
+- [SelectionProps](interfaces/SelectionProps.md)
+- [TabProps](interfaces/TabProps.md)
+- [ThemeToggleProps](interfaces/ThemeToggleProps.md)
+- [TooltipProps](interfaces/TooltipProps.md)
+- [WidgetActionButtonProps](interfaces/WidgetActionButtonProps.md)
+- [WidgetActionsProps](interfaces/WidgetActionsProps.md)
+
 ## Variables
 
+- [AvailabilityImpactWidget](variables/AvailabilityImpactWidget.md)
 - [BusinessImpactAnalysisWidget](variables/BusinessImpactAnalysisWidget.md)
+- [BusinessImpactSection](variables/BusinessImpactSection.md)
+- [BusinessRiskDisplay](variables/BusinessRiskDisplay.md)
+- [ChartSecurityRiskScore](variables/ChartSecurityRiskScore.md)
+- [CIAImpactCard](variables/CIAImpactCard.md)
+- [COMPLIANCE\_STATUS](variables/COMPLIANCE_STATUS.md)
+- [COMPLIANCE\_STATUS\_TEST\_IDS](variables/COMPLIANCE_STATUS_TEST_IDS.md)
+- [ConfidentialityImpactWidget](variables/ConfidentialityImpactWidget.md)
+- [IntegrityImpactWidget](variables/IntegrityImpactWidget.md)
+- [MetricsCard](variables/MetricsCard.md)
+- [RadarChart](variables/RadarChart.md)
+- [RiskAssessment](variables/RiskAssessment.md)
+- [RiskLevelBadge](variables/RiskLevelBadge.md)
+- [SecurityLevelBadge](variables/SecurityLevelBadge.md)
+- [SecurityLevelSelector](variables/SecurityLevelSelector.md)
+- [SecurityLevelWidget](variables/SecurityLevelWidget.md)
 - [SecurityResourcesWidget](variables/SecurityResourcesWidget.md)
+- [SecuritySummaryWidget](variables/SecuritySummaryWidget.md)
+- [SecurityVisualizationWidget](variables/SecurityVisualizationWidget.md)
+- [Selection](variables/Selection.md)
+- [StatusBadge](variables/StatusBadge.md)
+- [Tab](variables/Tab.md)
+- [TechnicalDetailsWidget](variables/TechnicalDetailsWidget.md)
+- [ThemeToggle](variables/ThemeToggle.md)
+- [Tooltip](variables/Tooltip.md)
+- [ValueCreationWidget](variables/ValueCreationWidget.md)
+- [WidgetActions](variables/WidgetActions.md)
+- [WidgetContainer](variables/WidgetContainer.md)
+- [WidgetHeader](variables/WidgetHeader.md)
+
+## Functions
+
+- [ComplianceStatusWidget](functions/ComplianceStatusWidget.md)
+- [CostEstimationWidget](functions/CostEstimationWidget.md)
+- [KeyValuePair](functions/KeyValuePair.md)
+- [SecurityLevelChangeTracker](functions/SecurityLevelChangeTracker.md)
+- [SecurityRiskScore](functions/SecurityRiskScore.md)
 
 ## References
 
-### AvailabilityImpactWidget
+### BusinessImpactSectionProps
 
-Renames and re-exports [default](widgets/impactanalysis/AvailabilityImpactWidget/variables/default.md)
-
-***
-
-### ComplianceStatusWidget
-
-Renames and re-exports [default](widgets/businessvalue/ComplianceStatusWidget/functions/default.md)
+Re-exports [BusinessImpactSectionProps](../types/interfaces/BusinessImpactSectionProps.md)
 
 ***
 
-### ConfidentialityImpactWidget
+### BusinessRiskDisplayProps
 
-Renames and re-exports [default](widgets/impactanalysis/ConfidentialityImpactWidget/variables/default.md)
-
-***
-
-### CostEstimationWidget
-
-Re-exports [CostEstimationWidget](widgets/businessvalue/CostEstimationWidget/functions/CostEstimationWidget.md)
+Re-exports [BusinessRiskDisplayProps](../types/interfaces/BusinessRiskDisplayProps.md)
 
 ***
 
-### IntegrityImpactWidget
+### CIAImpactCardProps
 
-Renames and re-exports [default](widgets/impactanalysis/IntegrityImpactWidget/variables/default.md)
-
-***
-
-### SecurityLevelWidget
-
-Renames and re-exports [default](widgets/assessmentcenter/SecurityLevelWidget/variables/default.md)
+Re-exports [CIAImpactCardProps](../types/interfaces/CIAImpactCardProps.md)
 
 ***
 
-### SecuritySummaryWidget
+### MetricsCardProps
 
-Renames and re-exports [default](widgets/assessmentcenter/SecuritySummaryWidget/variables/default.md)
-
-***
-
-### SecurityVisualizationWidget
-
-Renames and re-exports [default](widgets/implementationguide/SecurityVisualizationWidget/variables/default.md)
+Re-exports [MetricsCardProps](../types/interfaces/MetricsCardProps.md)
 
 ***
 
-### TechnicalDetailsWidget
+### RadarChartProps
 
-Renames and re-exports [default](widgets/implementationguide/TechnicalDetailsWidget/variables/default.md)
-
-***
-
-### Tooltip
-
-Re-exports [Tooltip](common/variables/Tooltip.md)
+Re-exports [RadarChartProps](../types/interfaces/RadarChartProps.md)
 
 ***
 
-### ValueCreationWidget
+### RiskAssessmentProps
 
-Renames and re-exports [default](widgets/businessvalue/ValueCreationWidget/variables/default.md)
+Re-exports [RiskAssessmentProps](../types/interfaces/RiskAssessmentProps.md)
 
 ***
 
-### WidgetHeader
+### SecurityLevelChangeTrackerProps
 
-Re-exports [WidgetHeader](common/variables/WidgetHeader.md)
+Re-exports [SecurityLevelChangeTrackerProps](../typedoc-entry/interfaces/SecurityLevelChangeTrackerProps.md)
+
+***
+
+### SecurityLevelContextType
+
+Re-exports [SecurityLevelContextType](../typedoc-entry/interfaces/SecurityLevelContextType.md)
+
+***
+
+### StatusBadgeProps
+
+Re-exports [StatusBadgeProps](../types/interfaces/StatusBadgeProps.md)
+
+***
+
+### UseSecurityLevelStateOptions
+
+Re-exports [UseSecurityLevelStateOptions](../typedoc-entry/interfaces/UseSecurityLevelStateOptions.md)
+
+***
+
+### WidgetHeaderProps
+
+Re-exports [WidgetHeaderProps](../types/interfaces/WidgetHeaderProps.md)

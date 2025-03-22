@@ -8,7 +8,7 @@
 
 > `const` **SecurityResourcesWidget**: `React.FC`\<`SecurityResourcesWidgetProps`\>
 
-Defined in: [src/components/widgets/implementationguide/SecurityResourcesWidget.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L24)
+Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L24)
 
 Security Resources Widget provides relevant documentation and guidance
 

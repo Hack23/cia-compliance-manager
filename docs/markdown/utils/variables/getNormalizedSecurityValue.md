@@ -8,7 +8,7 @@
 
 > **getNormalizedSecurityValue**: (`level`) => `number`
 
-Defined in: [src/utils/index.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/utils/index.ts#L78)
+Defined in: [utils/index.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/utils/index.ts#L78)
 
 Get normalized value (0-100) for a security level
 Used for visualization and progress indicators
@@ -17,7 +17,7 @@ Used for visualization and progress indicators
 
 ### level
 
-[`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md)
+[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
 Security level
 

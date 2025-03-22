@@ -1,18 +1,32 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "entryPoints": ["./src"],
+  "entryPoints": [
+    "./src/index.ts",
+    "./src/typedoc-entry.ts",
+    "./src/types/index.ts",
+    "./src/services/index.ts",
+    "./src/hooks/index.ts",
+    "./src/components/index.ts",
+    "./src/utils/index.ts",
+    "./src/contexts/SecurityLevelContext.tsx",
+    "./src/types/compliance.ts",
+    "./src/services/securityMetricsService.ts"
+  ],
   "entryPointStrategy": "expand",
-  "out": "docs/diagrams",
+  "out": "./docs/diagrams",
   "name": "CIA Compliance Manager Diagrams",
   "includeVersion": true,
-  "plugin": ["typedoc-plugin-mermaid", "typedoc-plugin-markdown"],
-  "excludeExternals": false,
-  "mermaidVersion": "10.6.1",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "plugin": ["typedoc-plugin-markdown", "typedoc-plugin-mermaid"],
+  "theme": "markdown",
   "readme": "./docs/diagrams-overview.md",
-  "navigationLinks": {
-    "GitHub": "https://github.com/Hack23/cia-compliance-manager",
-    "Documentation": "https://hack23.github.io/cia-compliance-manager/documentation.html"
-  },
+  "sort": ["visibility", "alphabetical"],
+  "excludeInternal": true,
+  "excludeExternals": true,
+  "githubPages": false,
+  "cname": false,
+  "excludeTags": ["@internal"],
   "exclude": [
     "**/*.test.{ts,tsx}",
     "**/*.spec.{ts,tsx}",
@@ -20,5 +34,15 @@
     "**/__tests__/**",
     "**/tests/**",
     "**/__mocks__/**"
-  ]
+  ],
+  "categorizeByGroup": true,
+  "categoryOrder": [
+    "Types",
+    "Services",
+    "Hooks",
+    "Components",
+    "Utilities",
+    "*"
+  ],
+  "tsconfig": "./tsconfig.json"
 }

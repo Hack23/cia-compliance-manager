@@ -6,6 +6,6 @@
 
 # Variable: SECURITY\_LEVEL\_VALUES
 
-> **SECURITY\_LEVEL\_VALUES**: `Record`\<[`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md), `number`\>
+> **SECURITY\_LEVEL\_VALUES**: `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), `number`\>
 
-Defined in: [src/utils/index.ts:81](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/utils/index.ts#L81)
+Defined in: [utils/index.ts:81](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/utils/index.ts#L81)

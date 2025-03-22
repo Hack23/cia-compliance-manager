@@ -25,19 +25,19 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>1/1</span>
             </div>
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
@@ -120,7 +120,8 @@
 <a name='L55'></a><a href='#L55'>55</a>
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -172,27 +173,33 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { SecurityLevel } from "./cia";
 &nbsp;
 /**
- * Core compliance types used throughout the application
- * 
+ * Compliance types used throughout the application
+ *
  * ## Business Perspective
- * 
- * ### Compliance Impact
- * These types define how compliance status is represented in the application,
- * helping organizations understand their compliance posture. They capture the
- * key aspects of regulatory compliance that matter to businesses. 📋
- * 
- * ### Risk Management
- * By clearly defining compliance status and framework requirements, these types
- * help organizations identify and mitigate compliance-related risks. ⚠️
+ *
+ * These types define the core compliance structures used to assess
+ * and report on regulatory alignment. They support compliance officers
+ * in understanding gaps and remediation requirements. 📋
+ *
+ * @packageDocumentation
  */
+&nbsp;
+/**
+ * Status of framework compliance
+ */
+export type FrameworkComplianceStatus =
+  | "compliant"
+  | "partially-compliant"
+  | "non-compliant";
 &nbsp;
 /**
  * Represents a compliance framework definition
@@ -210,29 +217,25 @@ export interface ComplianceFramework {
 /**
  * Represents the overall compliance status
  */
-export interface ComplianceStatus {
+export interface ComplianceStatusDetails {
   // Required properties
+  status: string;
   compliantFrameworks: string[];
   partiallyCompliantFrameworks: string[];
   nonCompliantFrameworks: string[];
-  
+&nbsp;
   // Optional properties
   remediationSteps?: string[];
   requirements?: string[];
-  
-  // Adding these properties to match expected interface in tests and services
-  status?: string;
-  complianceScore?: number;
-  score?: number; // Alias for complianceScore for backward compatibility
+  complianceScore: number;
 }
 &nbsp;
 /**
- * Compliance status type constants
+ * Industry or region specific applicability options
  */
-<span class="cstat-no" title="statement not covered" >export enum ComplianceStatusType {</span>
-<span class="cstat-no" title="statement not covered" >  COMPLIANT = 'compliant',</span>
-<span class="cstat-no" title="statement not covered" >  PARTIAL = 'partial',</span>
-<span class="cstat-no" title="statement not covered" >  NON_COMPLIANT = 'non-compliant'</span>
+export interface FrameworkApplicabilityOptions {
+  industries?: string[];
+  regions?: string[];
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -241,7 +244,7 @@ export interface ComplianceStatus {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-22T16:47:56.762Z
+                at 2025-03-22T19:23:47.526Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

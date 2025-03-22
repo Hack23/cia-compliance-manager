@@ -129,6 +129,7 @@ src/hooks/useSecurityLevelState.ts
 src/hooks/useSecurityLevelSync.test.tsx
 src/hooks/useSecurityLevelSync.ts
 src/index.css
+src/index.ts
 src/index.tsx
 src/integration/ciaInterface.integration.test.ts
 src/performance/SecurityLevelChangeTracker.tsx
@@ -192,6 +193,7 @@ src/tests/utils/render.tsx
 src/tests/utils/security.ts
 src/tests/vitest-extensions.d.ts
 src/tests/vitest-setup.ts
+src/typedoc-entry.ts
 src/types/businessImpact.test.ts
 src/types/businessImpact.ts
 src/types/cia-services.test.ts
@@ -203,6 +205,7 @@ src/types/cia.utility.ts
 src/types/compliance.d.ts
 src/types/compliance-service.d.ts
 src/types/compliance.ts
+src/types/componentPropExports.ts
 src/types/componentProps.ts
 src/types/global.d.ts
 src/types/global-extensions.d.ts

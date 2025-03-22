@@ -12,6 +12,7 @@
  */
 
 // Import common component prop interfaces
+import type { ReactNode } from "react";
 import { CIAComponent, SecurityLevel } from "./cia";
 
 // Re-export from components/common
@@ -223,4 +224,11 @@ export interface UseSecurityLevelStateOptions {
   onAvailabilityChange?: (level: SecurityLevel) => void;
   onIntegrityChange?: (level: SecurityLevel) => void;
   onConfidentialityChange?: (level: SecurityLevel) => void;
+}
+
+// Export WidgetContainerProps which was missing
+export interface WidgetContainerProps {
+  children: ReactNode;
+  className?: string;
+  testId?: string;
 }

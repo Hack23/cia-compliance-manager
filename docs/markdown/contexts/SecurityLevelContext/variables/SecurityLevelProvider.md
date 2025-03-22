@@ -8,7 +8,7 @@
 
 > `const` **SecurityLevelProvider**: `React.FC`\<`SecurityLevelProviderProps`\>
 
-Defined in: [src/contexts/SecurityLevelContext.tsx:42](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/contexts/SecurityLevelContext.tsx#L42)
+Defined in: [contexts/SecurityLevelContext.tsx:48](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/contexts/SecurityLevelContext.tsx#L48)
 
 Provider component that manages global security level state
 

@@ -8,7 +8,7 @@
 
 > **isComplianceFrameworkObject**: (`value`) => `boolean`
 
-Defined in: [src/utils/index.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/utils/index.ts#L176)
+Defined in: [utils/index.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/utils/index.ts#L176)
 
 Type guard for compliance framework object
 
