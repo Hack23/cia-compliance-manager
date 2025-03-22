@@ -79,7 +79,7 @@ export function isValidCIADetail(
 export function isObject(
   value: unknown
 ): value is Record<string | number | symbol, unknown> {
-  return typeof value === "object" && value !== null;
+  return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 /**
@@ -93,7 +93,7 @@ export function isString(value: unknown): value is string {
  * Type guard to check if a value is a number
  */
 export function isNumber(value: unknown): value is number {
-  return typeof value === "number";
+  return typeof value === "number" && !isNaN(value);
 }
 
 /**
@@ -780,4 +780,95 @@ export function isWidgetType(value: unknown): boolean {
     "confidentiality-impact",
     "security-resources",
   ].includes(value);
+}
+
+/**
+ * Type guard to check if a value is a boolean
+ * @param value - Value to check
+ * @returns True if the value is a boolean
+ */
+export function isBoolean(value: unknown): value is boolean {
+  return typeof value === "boolean";
+}
+
+/**
+ * Type guard to check if a value is an array
+ * @param value - Value to check
+ * @returns True if the value is an array
+ */
+export function isArray(value: unknown): value is unknown[] {
+  return Array.isArray(value);
+}
+
+/**
+ * Type guard to check if a value is a function
+ * @param value - Value to check
+ * @returns True if the value is a function
+ */
+export function isFunction(value: unknown): value is Function {
+  return typeof value === "function";
+}
+
+/**
+ * Type guard to check if a value is null
+ * @param value - Value to check
+ * @returns True if the value is null
+ */
+export function isNull(value: unknown): value is null {
+  return value === null;
+}
+
+/**
+ * Type guard to check if a value is undefined
+ * @param value - Value to check
+ * @returns True if the value is undefined
+ */
+export function isUndefined(value: unknown): value is undefined {
+  return value === undefined;
+}
+
+/**
+ * Type guard to check if a value is nullish (null or undefined)
+ * @param value - Value to check
+ * @returns True if the value is null or undefined
+ */
+export function isNullish(value: unknown): value is null | undefined {
+  return value === null || value === undefined;
+}
+
+/**
+ * Type guard to check if a value is a Date object
+ * @param value - Value to check
+ * @returns True if the value is a Date object
+ */
+export function isDate(value: unknown): value is Date {
+  return value instanceof Date;
+}
+
+/**
+ * Type guard to check if a value is an Error object
+ * @param value - Value to check
+ * @returns True if the value is an Error object
+ */
+export function isError(value: unknown): value is Error {
+  return value instanceof Error;
+}
+
+/**
+ * Check if a value can be used as an object key
+ * @param value - Value to check
+ * @returns True if the value can be used as an object key
+ */
+export function isValidKey(value: unknown): value is string | number | symbol {
+  return isString(value) || isNumber(value) || typeof value === "symbol";
+}
+
+/**
+ * Type guard to check if a value is a valid CIA component
+ * Alias for isCIAComponentType for backward compatibility
+ * @param value - Value to check
+ * @returns True if the value is a valid CIA component
+ */
+export function isCIAComponent(value: unknown): value is CIAComponentType {
+  return isCIAComponentType(value);
 }

@@ -585,7 +585,7 @@ export class CIAContentService {
 
     // Delegate to the technical implementation service
     return this.technicalImplementationService.getImplementationConsiderations(
-      levels
+      levels[0]
     );
   }
 
@@ -1053,7 +1053,7 @@ export default defaultService;
 
 /**
  * Default implementation of security icon getter
- * 
+ *
  * @param level - Security level
  * @returns Icon representing the security level
  */
@@ -1063,14 +1063,14 @@ function getDefaultSecurityIconImpl(level: SecurityLevel): string {
     Low: "🔑",
     Moderate: "🔓",
     High: "🔒",
-    "Very High": "🔐"
+    "Very High": "🔐",
   };
   return icons[level] || "❓";
 }
 
 /**
  * Default implementation of value points getter
- * 
+ *
  * @param level - Security level
  * @returns Array of value points for the security level
  */

@@ -1,4 +1,4 @@
-import { SecurityLevel } from '../../types/cia';
+import { SecurityLevel } from '../types/cia';
 import {
   calculateOverallSecurityLevel,
   DEFAULT_SECURITY_LEVEL,
@@ -11,7 +11,7 @@ import {
   isSecurityLevel,
   meetsComplianceRequirements,
   normalizeSecurityLevel
-} from '../securityLevelUtils';
+} from './securityLevelUtils';
 
 describe('securityLevelUtils', () => {
   describe('getSecurityLevelValue', () => {
