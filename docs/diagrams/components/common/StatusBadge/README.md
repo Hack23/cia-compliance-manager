@@ -8,9 +8,11 @@
 
 ## Type Aliases
 
-- [StatusBadgeSize](type-aliases/StatusBadgeSize.md)
 - [StatusBadgeVariant](type-aliases/StatusBadgeVariant.md)
+- [StatusType](type-aliases/StatusType.md)
 
-## Functions
+## References
 
-- [default](functions/default.md)
+### default
+
+Renames and re-exports [StatusBadge](../variables/StatusBadge.md)

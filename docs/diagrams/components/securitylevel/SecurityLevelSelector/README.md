@@ -6,10 +6,12 @@
 
 # components/securitylevel/SecurityLevelSelector
 
-## Interfaces
+## Variables
 
-- [SecurityLevelSelectorProps](interfaces/SecurityLevelSelectorProps.md)
+- [SecurityLevelSelector](variables/SecurityLevelSelector.md)
 
-## Functions
+## References
 
-- [default](functions/default.md)
+### default
+
+Renames and re-exports [SecurityLevelSelector](variables/SecurityLevelSelector.md)

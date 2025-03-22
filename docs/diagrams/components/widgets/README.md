@@ -14,76 +14,82 @@ This module exports specialized dashboard widgets for security compliance visual
 
 ### AvailabilityImpactWidget
 
-Renames and re-exports [default](AvailabilityImpactWidget/functions/default.md)
+Renames and re-exports [default](impactanalysis/AvailabilityImpactWidget/variables/default.md)
 
 ***
 
 ### BusinessImpactAnalysisWidget
 
-Renames and re-exports [default](BusinessImpactAnalysisWidget/functions/default.md)
+Re-exports [BusinessImpactAnalysisWidget](../variables/BusinessImpactAnalysisWidget.md)
 
 ***
 
-### CIAImpactSummaryWidget
+### COMPLIANCE\_STATUS
 
-Renames and re-exports [default](CIAImpactSummaryWidget/functions/default.md)
+Re-exports [COMPLIANCE_STATUS](constants/variables/COMPLIANCE_STATUS.md)
+
+***
+
+### COMPLIANCE\_STATUS\_TEST\_IDS
+
+Re-exports [COMPLIANCE_STATUS_TEST_IDS](constants/variables/COMPLIANCE_STATUS_TEST_IDS.md)
 
 ***
 
 ### ComplianceStatusWidget
 
-Renames and re-exports [default](ComplianceStatusWidget/functions/default.md)
+Renames and re-exports [default](businessvalue/ComplianceStatusWidget/functions/default.md)
 
 ***
 
 ### ConfidentialityImpactWidget
 
-Renames and re-exports [default](ConfidentialityImpactWidget/functions/default.md)
+Renames and re-exports [default](impactanalysis/ConfidentialityImpactWidget/variables/default.md)
 
 ***
 
 ### CostEstimationWidget
 
-Renames and re-exports [default](CostEstimationWidget/functions/default.md)
+Re-exports [CostEstimationWidget](businessvalue/CostEstimationWidget/functions/CostEstimationWidget.md)
 
 ***
 
 ### IntegrityImpactWidget
 
-Renames and re-exports [default](IntegrityImpactWidget/functions/default.md)
+Renames and re-exports [default](impactanalysis/IntegrityImpactWidget/variables/default.md)
 
 ***
 
 ### SecurityLevelWidget
 
-Renames and re-exports [default](SecurityLevelWidget/functions/default.md)
+Renames and re-exports [default](assessmentcenter/SecurityLevelWidget/variables/default.md)
 
 ***
 
 ### SecurityResourcesWidget
 
-Renames and re-exports [default](SecurityResourcesWidget/functions/default.md)
+Re-exports [SecurityResourcesWidget](../variables/SecurityResourcesWidget.md)
 
 ***
 
 ### SecuritySummaryWidget
 
-Renames and re-exports [default](SecuritySummaryWidget/functions/default.md)
+Renames and re-exports [default](assessmentcenter/SecuritySummaryWidget/variables/default.md)
 
 ***
 
 ### SecurityVisualizationWidget
 
-Renames and re-exports [default](SecurityVisualizationWidget/functions/default.md)
+Renames and re-exports [default](implementationguide/SecurityVisualizationWidget/variables/default.md)
 
 ***
 
 ### TechnicalDetailsWidget
 
-Renames and re-exports [default](TechnicalDetailsWidget/functions/default.md)
+Renames and re-exports [default](implementationguide/TechnicalDetailsWidget/variables/default.md)
 
 ***
 
 ### ValueCreationWidget
 
-Renames and re-exports [default](ValueCreationWidget/functions/default.md)
+Renames and re-exports [default](businessvalue/ValueCreationWidget/variables/default.md)

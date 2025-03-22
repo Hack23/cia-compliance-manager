@@ -10,8 +10,6 @@
 
 This module exports visualization components for security metrics.
 
-## References
+## Variables
 
-### RadarChart
-
-Renames and re-exports [default](RadarChart/functions/default.md)
+- [RadarChart](variables/RadarChart.md)

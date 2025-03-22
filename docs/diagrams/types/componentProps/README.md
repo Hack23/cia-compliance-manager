@@ -104,12 +104,6 @@ Re-exports [SecurityResourcesWidgetProps](../widgets/interfaces/SecurityResource
 
 ***
 
-### SecuritySummaryWidgetProps
-
-Re-exports [SecuritySummaryWidgetProps](../widgets/interfaces/SecuritySummaryWidgetProps.md)
-
-***
-
 ### TechnicalDetailsWidgetProps
 
 Re-exports [TechnicalDetailsWidgetProps](../widgets/interfaces/TechnicalDetailsWidgetProps.md)
@@ -119,6 +113,12 @@ Re-exports [TechnicalDetailsWidgetProps](../widgets/interfaces/TechnicalDetailsW
 ### ValueCreationWidgetProps
 
 Re-exports [ValueCreationWidgetProps](../widgets/interfaces/ValueCreationWidgetProps.md)
+
+***
+
+### WidgetProps
+
+Re-exports [WidgetProps](../widgets/type-aliases/WidgetProps.md)
 
 ## Widget Components
  CIAImpactSummaryWidgetProps

@@ -6,7 +6,15 @@
 
 # Interface: BusinessConsideration
 
-Defined in: [src/types/businessImpact.ts:2](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/businessImpact.ts#L2)
+Defined in: [src/types/businessImpact.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/businessImpact.ts#L12)
+
+Business Impact Types
+
+## Business Perspective
+
+These types define the structure of business impact data for security analyses.
+They help organizations understand the consequences of different security
+choices across various dimensions of business operation. 💼
 
 ## Properties
 
@@ -14,36 +22,20 @@ Defined in: [src/types/businessImpact.ts:2](https://github.com/Hack23/cia-compli
 
 > **description**: `string`
 
-Defined in: [src/types/businessImpact.ts:4](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/businessImpact.ts#L4)
+Defined in: [src/types/businessImpact.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/businessImpact.ts#L15)
 
 ***
 
-### impact?
+### risk
 
-> `optional` **impact**: `string`
+> **risk**: `string`
 
-Defined in: [src/types/businessImpact.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/businessImpact.ts#L5)
-
-***
-
-### risk?
-
-> `optional` **risk**: `string`
-
-Defined in: [src/types/businessImpact.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/businessImpact.ts#L7)
+Defined in: [src/types/businessImpact.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/businessImpact.ts#L14)
 
 ***
 
-### title?
+### type
 
-> `optional` **title**: `string`
+> **type**: `string`
 
-Defined in: [src/types/businessImpact.ts:3](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/businessImpact.ts#L3)
-
-***
-
-### type?
-
-> `optional` **type**: `string`
-
-Defined in: [src/types/businessImpact.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/businessImpact.ts#L6)
+Defined in: [src/types/businessImpact.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/businessImpact.ts#L13)

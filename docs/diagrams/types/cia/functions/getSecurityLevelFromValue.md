@@ -8,9 +8,9 @@
 
 > **getSecurityLevelFromValue**(`value`): [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/cia.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L186)
+Defined in: [src/types/cia.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/cia.ts#L109)
 
-Get a security level from a numeric value
+Convert a numeric value to a security level
 
 ## Parameters
 
@@ -18,10 +18,10 @@ Get a security level from a numeric value
 
 `number`
 
-The numeric value (0-4)
+Numeric value (0-4)
 
 ## Returns
 
 [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-The corresponding security level
+Security level

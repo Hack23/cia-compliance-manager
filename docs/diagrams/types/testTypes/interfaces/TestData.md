@@ -6,7 +6,7 @@
 
 # Interface: TestData
 
-Defined in: [src/types/testTypes.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/testTypes.tsx#L29)
+Defined in: [src/types/testTypes.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/testTypes.ts#L29)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/types/testTypes.tsx:29](https://github.com/Hack23/cia-complianc
 
 > **descriptions**: `Record`\<`string`, `string`\>
 
-Defined in: [src/types/testTypes.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/testTypes.tsx#L31)
+Defined in: [src/types/testTypes.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/testTypes.ts#L31)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/types/testTypes.tsx:31](https://github.com/Hack23/cia-complianc
 
 > **options**: `Record`\<`string`, `any`\>
 
-Defined in: [src/types/testTypes.tsx:32](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/testTypes.tsx#L32)
+Defined in: [src/types/testTypes.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/testTypes.ts#L32)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [src/types/testTypes.tsx:32](https://github.com/Hack23/cia-complianc
 
 > **securityLevels**: `Record`\<`string`, `string`\>
 
-Defined in: [src/types/testTypes.tsx:30](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/testTypes.tsx#L30)
+Defined in: [src/types/testTypes.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/testTypes.ts#L30)

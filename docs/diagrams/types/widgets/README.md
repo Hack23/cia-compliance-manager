@@ -6,38 +6,34 @@
 
 # types/widgets
 
-## Enumerations
-
-- [WidgetSizePreset](enumerations/WidgetSizePreset.md)
-
 ## Interfaces
 
 - [AvailabilityDetail](interfaces/AvailabilityDetail.md)
 - [AvailabilityImpactWidgetProps](interfaces/AvailabilityImpactWidgetProps.md)
-- [BaseWidgetDetails](interfaces/BaseWidgetDetails.md)
+- [BaseWidgetProps](interfaces/BaseWidgetProps.md)
 - [BusinessImpactAnalysisWidgetProps](interfaces/BusinessImpactAnalysisWidgetProps.md)
+- [BusinessImpactWidgetProps](interfaces/BusinessImpactWidgetProps.md)
 - [CIAImpactSummaryWidgetProps](interfaces/CIAImpactSummaryWidgetProps.md)
 - [ComplianceStatusWidgetProps](interfaces/ComplianceStatusWidgetProps.md)
+- [ComplianceWidgetProps](interfaces/ComplianceWidgetProps.md)
+- [ComponentImpactWidgetProps](interfaces/ComponentImpactWidgetProps.md)
 - [ConfidentialityDetail](interfaces/ConfidentialityDetail.md)
 - [ConfidentialityImpactWidgetProps](interfaces/ConfidentialityImpactWidgetProps.md)
 - [CostEstimationWidgetProps](interfaces/CostEstimationWidgetProps.md)
 - [IntegrityDetail](interfaces/IntegrityDetail.md)
 - [IntegrityImpactWidgetProps](interfaces/IntegrityImpactWidgetProps.md)
+- [SecurityComponentProps](interfaces/SecurityComponentProps.md)
+- [SecurityImpactWidgetProps](interfaces/SecurityImpactWidgetProps.md)
+- [SecurityLevelSelectorProps](interfaces/SecurityLevelSelectorProps.md)
 - [SecurityLevelWidgetProps](interfaces/SecurityLevelWidgetProps.md)
 - [SecurityResourcesWidgetProps](interfaces/SecurityResourcesWidgetProps.md)
 - [SecuritySummaryWidgetProps](interfaces/SecuritySummaryWidgetProps.md)
 - [SecurityVisualizationWidgetProps](interfaces/SecurityVisualizationWidgetProps.md)
+- [SecurityWidgetBaseProps](interfaces/SecurityWidgetBaseProps.md)
 - [TechnicalDetailsWidgetProps](interfaces/TechnicalDetailsWidgetProps.md)
 - [ValueCreationWidgetProps](interfaces/ValueCreationWidgetProps.md)
 - [WidgetBaseProps](interfaces/WidgetBaseProps.md)
-- [WidgetConfig](interfaces/WidgetConfig.md)
-- [WidgetDefinition](interfaces/WidgetDefinition.md)
-- [WidgetSize](interfaces/WidgetSize.md)
 
 ## Type Aliases
 
-- [WidgetComponentType](type-aliases/WidgetComponentType.md)
-
-## Variables
-
-- [typeAdapters](variables/typeAdapters.md)
+- [WidgetProps](type-aliases/WidgetProps.md)

@@ -6,10 +6,14 @@
 
 # components/SecurityLevelSelector
 
-## Interfaces
+## References
 
-- [UnifiedSecurityLevelSelectorProps](interfaces/UnifiedSecurityLevelSelectorProps.md)
+### default
 
-## Functions
+Renames and re-exports [SecurityLevelSelector](../securitylevel/SecurityLevelSelector/variables/SecurityLevelSelector.md)
 
-- [default](functions/default.md)
+***
+
+### SecurityLevelSelector
+
+Re-exports [SecurityLevelSelector](../securitylevel/SecurityLevelSelector/variables/SecurityLevelSelector.md)

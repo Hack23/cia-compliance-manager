@@ -6,7 +6,7 @@
 
 # Interface: DashboardProps
 
-Defined in: [src/types/componentProps.tsx:119](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L119)
+Defined in: [src/types/componentProps.ts:169](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L169)
 
 Props for the Dashboard component that serves as the main application interface.
 
@@ -16,7 +16,7 @@ Props for the Dashboard component that serves as the main application interface.
 
 > `optional` **availability**: `string`
 
-Defined in: [src/types/componentProps.tsx:125](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L125)
+Defined in: [src/types/componentProps.ts:175](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L175)
 
 Availability security level
 
@@ -26,7 +26,7 @@ Availability security level
 
 > `optional` **children**: `ReactNode`
 
-Defined in: [src/types/componentProps.tsx:121](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L121)
+Defined in: [src/types/componentProps.ts:171](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L171)
 
 Dashboard content
 
@@ -36,7 +36,7 @@ Dashboard content
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.tsx:137](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L137)
+Defined in: [src/types/componentProps.ts:187](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L187)
 
 Optional CSS class name
 
@@ -46,7 +46,7 @@ Optional CSS class name
 
 > `optional` **columnsLarge**: `number`
 
-Defined in: [src/types/componentProps.tsx:135](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L135)
+Defined in: [src/types/componentProps.ts:185](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L185)
 
 Number of columns for large widgets
 
@@ -56,7 +56,7 @@ Number of columns for large widgets
 
 > `optional` **columnsMedium**: `number`
 
-Defined in: [src/types/componentProps.tsx:133](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L133)
+Defined in: [src/types/componentProps.ts:183](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L183)
 
 Number of columns for medium widgets
 
@@ -66,7 +66,7 @@ Number of columns for medium widgets
 
 > `optional` **columnsSmall**: `number`
 
-Defined in: [src/types/componentProps.tsx:131](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L131)
+Defined in: [src/types/componentProps.ts:181](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L181)
 
 Number of columns for small widgets
 
@@ -76,7 +76,7 @@ Number of columns for small widgets
 
 > `optional` **compact**: `boolean`
 
-Defined in: [src/types/componentProps.tsx:139](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L139)
+Defined in: [src/types/componentProps.ts:189](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L189)
 
 Whether to use compact mode
 
@@ -86,7 +86,7 @@ Whether to use compact mode
 
 > `optional` **confidentiality**: `string`
 
-Defined in: [src/types/componentProps.tsx:129](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L129)
+Defined in: [src/types/componentProps.ts:179](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L179)
 
 Confidentiality security level
 
@@ -96,7 +96,7 @@ Confidentiality security level
 
 > `optional` **integrity**: `string`
 
-Defined in: [src/types/componentProps.tsx:127](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L127)
+Defined in: [src/types/componentProps.ts:177](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L177)
 
 Integrity security level
 
@@ -106,7 +106,7 @@ Integrity security level
 
 > `optional` **showBorders**: `boolean`
 
-Defined in: [src/types/componentProps.tsx:141](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L141)
+Defined in: [src/types/componentProps.ts:191](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L191)
 
 Whether to show borders
 
@@ -116,6 +116,6 @@ Whether to show borders
 
 > `optional` **useRegistry**: `boolean`
 
-Defined in: [src/types/componentProps.tsx:123](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L123)
+Defined in: [src/types/componentProps.ts:173](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L173)
 
 Whether to use widget registry

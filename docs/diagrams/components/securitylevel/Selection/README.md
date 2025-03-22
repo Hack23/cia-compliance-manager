@@ -6,6 +6,12 @@
 
 # components/securitylevel/Selection
 
-## Functions
+## Variables
 
-- [default](functions/default.md)
+- [Selection](variables/Selection.md)
+
+## References
+
+### default
+
+Renames and re-exports [Selection](variables/Selection.md)

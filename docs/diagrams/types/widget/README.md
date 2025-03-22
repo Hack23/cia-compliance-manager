@@ -12,5 +12,13 @@
 
 ## Interfaces
 
+- [Widget](interfaces/Widget.md)
+- [WidgetComponentProps](interfaces/WidgetComponentProps.md)
 - [WidgetConfig](interfaces/WidgetConfig.md)
-- [WidgetSize](interfaces/WidgetSize.md)
+- [WidgetDimension](interfaces/WidgetDimension.md)
+
+## Type Aliases
+
+- [WidgetSize](type-aliases/WidgetSize.md)
+- [WidgetSizeString](type-aliases/WidgetSizeString.md)
+- [WidgetType](type-aliases/WidgetType.md)

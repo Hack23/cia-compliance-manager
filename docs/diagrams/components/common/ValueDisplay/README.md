@@ -6,10 +6,12 @@
 
 # components/common/ValueDisplay
 
-## Other
+## Interfaces
 
 - [ValueDisplayProps](interfaces/ValueDisplayProps.md)
 
-## UI Components
+## References
 
-- [default](functions/default.md)
+### default
+
+Renames and re-exports [ValueDisplay](../variables/ValueDisplay.md)

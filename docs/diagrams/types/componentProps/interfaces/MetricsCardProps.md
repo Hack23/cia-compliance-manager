@@ -6,7 +6,7 @@
 
 # Interface: MetricsCardProps
 
-Defined in: [src/types/componentProps.tsx:47](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L47)
+Defined in: [src/types/componentProps.ts:89](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L89)
 
 Props for the MetricsCard component that displays numerical metrics.
 
@@ -16,7 +16,7 @@ Props for the MetricsCard component that displays numerical metrics.
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.tsx:55](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L55)
+Defined in: [src/types/componentProps.ts:97](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L97)
 
 Optional CSS class name
 
@@ -26,7 +26,7 @@ Optional CSS class name
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/componentProps.tsx:57](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L57)
+Defined in: [src/types/componentProps.ts:99](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L99)
 
 Optional test ID for component selection in tests
 
@@ -36,7 +36,7 @@ Optional test ID for component selection in tests
 
 > **title**: `string`
 
-Defined in: [src/types/componentProps.tsx:49](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L49)
+Defined in: [src/types/componentProps.ts:91](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L91)
 
 Title of the metrics card
 
@@ -46,7 +46,7 @@ Title of the metrics card
 
 > `optional` **trend**: `"neutral"` \| `"up"` \| `"down"`
 
-Defined in: [src/types/componentProps.tsx:53](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L53)
+Defined in: [src/types/componentProps.ts:95](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L95)
 
 Optional trend indicator (up/down)
 
@@ -56,6 +56,6 @@ Optional trend indicator (up/down)
 
 > **value**: `ReactNode`
 
-Defined in: [src/types/componentProps.tsx:51](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L51)
+Defined in: [src/types/componentProps.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L93)
 
 Main value to display

@@ -1,0 +1,33 @@
+[**CIA Compliance Manager Diagrams v0.8.5**](../../../README.md)
+
+***
+
+[CIA Compliance Manager Diagrams](../../../modules.md) / [utils/riskUtils](../README.md) / parseRiskLevel
+
+# Function: parseRiskLevel()
+
+> **parseRiskLevel**(`level`): `number`
+
+Defined in: [src/utils/riskUtils.ts:286](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/utils/riskUtils.ts#L286)
+
+Parses risk level string to numeric value for calculations
+
+## Business Perspective
+
+This function standardizes risk levels into quantifiable values that
+can be used for risk calculations, comparison, and aggregation in
+business impact analysis and reporting. ⚠️
+
+## Parameters
+
+### level
+
+Risk level as string
+
+`undefined` | `null` | `string`
+
+## Returns
+
+`number`
+
+Risk level as number (0-4, where 4 is highest risk)

@@ -6,9 +6,9 @@
 
 # Function: getRiskLevelFromSecurityLevel()
 
-> **getRiskLevelFromSecurityLevel**(`securityLevel`): [`RiskLevel`](../type-aliases/RiskLevel.md)
+> **getRiskLevelFromSecurityLevel**(`securityLevel`): `string`
 
-Defined in: [src/constants/riskConstants.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/riskConstants.ts#L20)
+Defined in: [src/constants/riskConstants.ts:62](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/constants/riskConstants.ts#L62)
 
 Gets risk level based on security level
 
@@ -22,6 +22,6 @@ The security level
 
 ## Returns
 
-[`RiskLevel`](../type-aliases/RiskLevel.md)
+`string`
 
 The corresponding risk level

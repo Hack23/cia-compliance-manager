@@ -6,6 +6,10 @@
 
 # styles/gridStyles
 
+## Enumerations
+
+- [WidgetSizePreset](enumerations/WidgetSizePreset.md)
+
 ## Variables
 
 - [contentClasses](variables/contentClasses.md)
@@ -15,3 +19,9 @@
 - [headerClasses](variables/headerClasses.md)
 - [widgetClasses](variables/widgetClasses.md)
 - [widgetSizes](variables/widgetSizes.md)
+
+## Functions
+
+- [getGridLayoutStyles](functions/getGridLayoutStyles.md)
+- [getWidgetDimensions](functions/getWidgetDimensions.md)
+- [getWidgetSize](functions/getWidgetSize.md)

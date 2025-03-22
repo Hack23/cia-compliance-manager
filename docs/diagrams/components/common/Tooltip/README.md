@@ -6,6 +6,8 @@
 
 # components/common/Tooltip
 
-## Functions
+## References
 
-- [default](functions/default.md)
+### default
+
+Renames and re-exports [Tooltip](../variables/Tooltip.md)

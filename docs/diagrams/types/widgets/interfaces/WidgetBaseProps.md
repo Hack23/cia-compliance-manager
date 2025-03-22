@@ -6,64 +6,48 @@
 
 # Interface: WidgetBaseProps
 
-Defined in: [src/types/widgets.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L7)
+Defined in: [src/types/widgets.ts:83](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/widgets.ts#L83)
 
-Base properties for all widgets
+Base props for all widgets
 
 ## Extended by
 
-- [`CostEstimationWidgetProps`](CostEstimationWidgetProps.md)
-- [`ValueCreationWidgetProps`](ValueCreationWidgetProps.md)
 - [`SecuritySummaryWidgetProps`](SecuritySummaryWidgetProps.md)
+- [`SecurityLevelWidgetProps`](SecurityLevelWidgetProps.md)
+- [`BusinessImpactAnalysisWidgetProps`](BusinessImpactAnalysisWidgetProps.md)
 - [`ComplianceStatusWidgetProps`](ComplianceStatusWidgetProps.md)
+- [`ValueCreationWidgetProps`](ValueCreationWidgetProps.md)
+- [`CostEstimationWidgetProps`](CostEstimationWidgetProps.md)
+- [`TechnicalDetailsWidgetProps`](TechnicalDetailsWidgetProps.md)
+- [`CIAImpactSummaryWidgetProps`](CIAImpactSummaryWidgetProps.md)
+- [`SecurityVisualizationWidgetProps`](SecurityVisualizationWidgetProps.md)
+- [`SecurityResourcesWidgetProps`](SecurityResourcesWidgetProps.md)
+- [`SecurityComponentProps`](SecurityComponentProps.md)
+- [`SecurityLevelSelectorProps`](SecurityLevelSelectorProps.md)
+- [`ComponentImpactWidgetProps`](ComponentImpactWidgetProps.md)
+- [`AvailabilityImpactWidgetProps`](AvailabilityImpactWidgetProps.md)
 - [`IntegrityImpactWidgetProps`](IntegrityImpactWidgetProps.md)
 - [`ConfidentialityImpactWidgetProps`](ConfidentialityImpactWidgetProps.md)
-- [`AvailabilityImpactWidgetProps`](AvailabilityImpactWidgetProps.md)
-- [`SecurityResourcesWidgetProps`](SecurityResourcesWidgetProps.md)
-- [`TechnicalDetailsWidgetProps`](TechnicalDetailsWidgetProps.md)
-- [`BusinessImpactAnalysisWidgetProps`](BusinessImpactAnalysisWidgetProps.md)
-- [`SecurityVisualizationWidgetProps`](SecurityVisualizationWidgetProps.md)
-- [`CIAImpactSummaryWidgetProps`](CIAImpactSummaryWidgetProps.md)
 
 ## Properties
-
-### availabilityLevel?
-
-> `optional` **availabilityLevel**: `string`
-
-Defined in: [src/types/widgets.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L11)
-
-***
 
 ### className?
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/widgets.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L14)
+Defined in: [src/types/widgets.ts:87](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/widgets.ts#L87)
 
-***
-
-### confidentialityLevel?
-
-> `optional` **confidentialityLevel**: `string`
-
-Defined in: [src/types/widgets.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L13)
-
-***
-
-### integrityLevel?
-
-> `optional` **integrityLevel**: `string`
-
-Defined in: [src/types/widgets.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L12)
+Optional CSS class name
 
 ***
 
 ### securityLevel?
 
-> `optional` **securityLevel**: `string`
+> `optional` **securityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L15)
+Defined in: [src/types/widgets.ts:97](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/widgets.ts#L97)
+
+Optional security level for widgets that only need one level
 
 ***
 
@@ -71,6 +55,6 @@ Defined in: [src/types/widgets.ts:15](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L9)
+Defined in: [src/types/widgets.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/widgets.ts#L92)
 
-Test ID for component selection in tests
+Optional test ID for testing

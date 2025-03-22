@@ -1,16 +1,22 @@
 /**
- * # React Hooks
+ * # React Hooks Module
  *
- * This module provides custom React hooks for the CIA Compliance Manager.
+ * This module exports all custom hooks used throughout the CIA Compliance Manager.
  *
  * ## Business Perspective
- * Hooks encapsulate reusable business logic that can be shared across components,
- * ensuring consistent security assessment and presentation. 🔒
+ * Custom hooks encapsulate business logic and security assessment functionality,
+ * enabling consistent behavior across the application. 🔄
+ *
+ * ## Technical Perspective
+ * Centralized hook exports simplify imports and promote hook reuse.
+ *
+ * @packageDocumentation
  */
 
-// CIA Options is the main hook used in our simplified app
-export * from "./useCIAOptions";
+// Security Level Hooks
+export { useSecurityLevelContext } from "../contexts/SecurityLevelContext";
+export { useCIAContentService } from "./useCIAContentService";
+export { useCIAOptions } from "./useCIAOptions";
+export { useSecurityLevelState } from "./useSecurityLevelState";
 
-// Any other hooks that are actually present in the codebase and used
-// can be added here as needed
-
+// Add other hooks as they're created

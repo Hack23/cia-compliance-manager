@@ -6,6 +6,10 @@
 
 # constants/colorConstants
 
+## Interfaces
+
+- [SecurityLevelColorPair](interfaces/SecurityLevelColorPair.md)
+
 ## Variables
 
 - [CIA\_COMPONENT\_COLORS](variables/CIA_COMPONENT_COLORS.md)

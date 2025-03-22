@@ -8,9 +8,13 @@
 
 > `const` **WIDGET\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/testIds.ts#L114)
+Defined in: [src/constants/testIds.ts:286](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/constants/testIds.ts#L286)
 
 ## Type declaration
+
+### AVAILABILITY\_IMPACT
+
+> **AVAILABILITY\_IMPACT**: `string` = `"availability-impact-widget"`
 
 ### AVAILABILITY\_IMPACT\_WIDGET
 
@@ -23,6 +27,10 @@ Defined in: [src/constants/testIds.ts:114](https://github.com/Hack23/cia-complia
 ### BENEFITS\_SECTION
 
 > **BENEFITS\_SECTION**: `string` = `"benefits-section"`
+
+### BUSINESS\_IMPACT\_ANALYSIS
+
+> **BUSINESS\_IMPACT\_ANALYSIS**: `string` = `"business-impact-analysis-widget"`
 
 ### BUSINESS\_IMPACT\_WIDGET
 
@@ -56,9 +64,21 @@ Defined in: [src/constants/testIds.ts:114](https://github.com/Hack23/cia-complia
 
 > **CIA\_IMPACT\_SUMMARY**: `string` = `"cia-impact-summary"`
 
+### CIA\_IMPACT\_SUMMARY\_WIDGET
+
+> **CIA\_IMPACT\_SUMMARY\_WIDGET**: `string` = `"cia-impact-summary-widget"`
+
+### COMPLIANCE\_STATUS
+
+> **COMPLIANCE\_STATUS**: `string` = `"compliance-status-widget"`
+
 ### COMPLIANCE\_STATUS\_WIDGET
 
 > **COMPLIANCE\_STATUS\_WIDGET**: `string` = `"widget-compliance-status"`
+
+### CONFIDENTIALITY\_IMPACT
+
+> **CONFIDENTIALITY\_IMPACT**: `string` = `"confidentiality-impact-widget"`
 
 ### CONFIDENTIALITY\_IMPACT\_WIDGET
 
@@ -71,6 +91,10 @@ Defined in: [src/constants/testIds.ts:114](https://github.com/Hack23/cia-complia
 ### CONTENT\_TITLE
 
 > **CONTENT\_TITLE**: `string` = `"content-title"`
+
+### COST\_ESTIMATION
+
+> **COST\_ESTIMATION**: `string` = `"cost-estimation-widget"`
 
 ### COST\_ESTIMATION\_WIDGET
 
@@ -87,6 +111,10 @@ Defined in: [src/constants/testIds.ts:114](https://github.com/Hack23/cia-complia
 ### IMPLEMENTATION\_HEADER
 
 > **IMPLEMENTATION\_HEADER**: `string` = `"implementation-header"`
+
+### INTEGRITY\_IMPACT
+
+> **INTEGRITY\_IMPACT**: `string` = `"integrity-impact-widget"`
 
 ### INTEGRITY\_IMPACT\_WIDGET
 
@@ -124,6 +152,10 @@ Defined in: [src/constants/testIds.ts:114](https://github.com/Hack23/cia-complia
 
 > **ROI\_VALUE**: `string` = `"roi-value"`
 
+### SECURITY\_LEVEL
+
+> **SECURITY\_LEVEL**: `string` = `"security-level-widget"`
+
 ### SECURITY\_LEVEL\_CONTROLS
 
 > **SECURITY\_LEVEL\_CONTROLS**: `string` = `"security-level-controls"`
@@ -136,9 +168,17 @@ Defined in: [src/constants/testIds.ts:114](https://github.com/Hack23/cia-complia
 
 > **SECURITY\_LEVEL\_WIDGET**: `string` = `"widget-security-level"`
 
+### SECURITY\_RESOURCES
+
+> **SECURITY\_RESOURCES**: `string` = `"security-resources-widget"`
+
 ### SECURITY\_RESOURCES\_WIDGET
 
 > **SECURITY\_RESOURCES\_WIDGET**: `string` = `"widget-security-resources"`
+
+### SECURITY\_SUMMARY
+
+> **SECURITY\_SUMMARY**: `string` = `"security-summary-widget"`
 
 ### SECURITY\_SUMMARY\_TITLE
 
@@ -148,6 +188,10 @@ Defined in: [src/constants/testIds.ts:114](https://github.com/Hack23/cia-complia
 
 > **SECURITY\_SUMMARY\_WIDGET**: `string` = `"security-summary-widget"`
 
+### SECURITY\_VISUALIZATION
+
+> **SECURITY\_VISUALIZATION**: `string` = `"security-visualization-widget"`
+
 ### SECURITY\_VISUALIZATION\_WIDGET
 
 > **SECURITY\_VISUALIZATION\_WIDGET**: `string` = `"security-visualization-widget"`
@@ -156,6 +200,10 @@ Defined in: [src/constants/testIds.ts:114](https://github.com/Hack23/cia-complia
 
 > **TECHNICAL\_DESCRIPTION**: `string` = `"technical-description"`
 
+### TECHNICAL\_DETAILS
+
+> **TECHNICAL\_DETAILS**: `string` = `"technical-details-widget"`
+
 ### TECHNICAL\_DETAILS\_WIDGET
 
 > **TECHNICAL\_DETAILS\_WIDGET**: `string` = `"technical-details-widget"`
@@ -163,6 +211,10 @@ Defined in: [src/constants/testIds.ts:114](https://github.com/Hack23/cia-complia
 ### TECHNICAL\_HEADER
 
 > **TECHNICAL\_HEADER**: `string` = `"technical-header"`
+
+### VALUE\_CREATION
+
+> **VALUE\_CREATION**: `string` = `"value-creation-widget"`
 
 ### VALUE\_CREATION\_CONTENT
 

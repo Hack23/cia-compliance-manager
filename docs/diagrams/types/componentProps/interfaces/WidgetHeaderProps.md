@@ -6,7 +6,7 @@
 
 # Interface: WidgetHeaderProps
 
-Defined in: [src/types/componentProps.tsx:103](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L103)
+Defined in: [src/types/componentProps.ts:153](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L153)
 
 Props for the WidgetHeader component that provides a consistent header for widgets.
 
@@ -16,7 +16,7 @@ Props for the WidgetHeader component that provides a consistent header for widge
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/componentProps.tsx:107](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L107)
+Defined in: [src/types/componentProps.ts:157](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L157)
 
 Optional CSS class name
 
@@ -26,7 +26,7 @@ Optional CSS class name
 
 > `optional` **icon**: `string`
 
-Defined in: [src/types/componentProps.tsx:111](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L111)
+Defined in: [src/types/componentProps.ts:161](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L161)
 
 Icon to display in the header
 
@@ -36,7 +36,7 @@ Icon to display in the header
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/componentProps.tsx:109](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L109)
+Defined in: [src/types/componentProps.ts:159](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L159)
 
 Optional test ID for component selection in tests
 
@@ -46,6 +46,6 @@ Optional test ID for component selection in tests
 
 > **title**: `string`
 
-Defined in: [src/types/componentProps.tsx:105](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L105)
+Defined in: [src/types/componentProps.ts:155](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L155)
 
 Title of the widget

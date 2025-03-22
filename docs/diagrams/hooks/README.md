@@ -6,23 +6,43 @@
 
 # hooks
 
-# React Hooks
-
-This module provides custom React hooks for the CIA Compliance Manager.
-
-## Business Perspective
-Hooks encapsulate reusable business logic that can be shared across components,
-ensuring consistent security assessment and presentation.
-
-## Architecture Perspective
-Hooks follow React's composition model to provide reusable stateful logic
-without class components or complex patterns.
-
-## Security Perspective
-Hooks properly manage and validate security-related data, ensuring consistent
-application of security controls.
-
 ## References
+
+### availabilityOptions
+
+Re-exports [availabilityOptions](../data/ciaOptionsData/variables/availabilityOptions.md)
+
+***
+
+### CIADetails
+
+Re-exports [CIADetails](../types/cia-services/interfaces/CIADetails.md)
+
+***
+
+### confidentialityOptions
+
+Re-exports [confidentialityOptions](../data/ciaOptionsData/variables/confidentialityOptions.md)
+
+***
+
+### integrityOptions
+
+Re-exports [integrityOptions](../data/ciaOptionsData/variables/integrityOptions.md)
+
+***
+
+### ROI\_ESTIMATES
+
+Re-exports [ROI_ESTIMATES](../data/ciaOptionsData/variables/ROI_ESTIMATES.md)
+
+***
+
+### ROIEstimate
+
+Re-exports [ROIEstimate](../types/cia-services/interfaces/ROIEstimate.md)
+
+***
 
 ### useCIAOptions
 

@@ -6,10 +6,12 @@
 
 # components/common/KeyValuePair
 
-## Other
+## Functions
 
-- [KeyValuePairProps](interfaces/KeyValuePairProps.md)
+- [KeyValuePair](functions/KeyValuePair.md)
 
-## UI Components
+## References
 
-- [default](functions/default.md)
+### default
+
+Renames and re-exports [KeyValuePair](functions/KeyValuePair.md)

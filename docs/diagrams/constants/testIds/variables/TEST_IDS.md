@@ -8,7 +8,9 @@
 
 > `const` **TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/testIds.ts#L554)
+Defined in: [src/constants/testIds.ts:762](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/constants/testIds.ts#L762)
+
+Consolidated export of all test IDs for easier imports
 
 ## Type declaration
 
@@ -28,13 +30,13 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **APP\_TITLE**: `string` = `"app-title"`
 
+### AUTO\_CALCULATE\_BUTTON
+
+> **AUTO\_CALCULATE\_BUTTON**: `string` = `"auto-calculate-button"`
+
 ### AVAILABILITY
 
 > **AVAILABILITY**: `string` = `"availability"`
-
-### AVAILABILITY\_BUSINESS\_IMPACT
-
-> **AVAILABILITY\_BUSINESS\_IMPACT**: `string` = `"availability-business-impact"`
 
 ### AVAILABILITY\_COLOR\_INDICATOR
 
@@ -52,6 +54,14 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **AVAILABILITY\_DETAILS\_SECTION**: `string` = `"technical-details-availability-details"`
 
+### AVAILABILITY\_ICON
+
+> **AVAILABILITY\_ICON**: `string` = `"availability-icon"`
+
+### AVAILABILITY\_IMPACT
+
+> **AVAILABILITY\_IMPACT**: `string` = `"availability-impact"`
+
 ### AVAILABILITY\_IMPACT\_BUSINESS\_IMPACT
 
 > **AVAILABILITY\_IMPACT\_BUSINESS\_IMPACT**: `string` = `"availability-impact-business-impact"`
@@ -66,11 +76,11 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 ### AVAILABILITY\_IMPACT\_DETAILS
 
-> **AVAILABILITY\_IMPACT\_DETAILS**: `string` = `"availability-impact-details"`
+> **AVAILABILITY\_IMPACT\_DETAILS**: `string` = `"security-summary-availability-impact-details"`
 
 ### AVAILABILITY\_IMPACT\_HEADING
 
-> **AVAILABILITY\_IMPACT\_HEADING**: `string` = `"availability-impact-heading"`
+> **AVAILABILITY\_IMPACT\_HEADING**: `string` = `"security-summary-availability-impact-heading"`
 
 ### AVAILABILITY\_IMPACT\_MTTR
 
@@ -116,18 +126,6 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **AVAILABILITY\_LABEL**: `string` = `"availability-label"`
 
-### AVAILABILITY\_LEVEL
-
-> **AVAILABILITY\_LEVEL**: `string` = `"availability-level"`
-
-### AVAILABILITY\_LEVEL\_INDICATOR
-
-> **AVAILABILITY\_LEVEL\_INDICATOR**: `string` = `"availability-level-indicator"`
-
-### AVAILABILITY\_LEVEL\_PILL
-
-> **AVAILABILITY\_LEVEL\_PILL**: `string` = `"availability-level-pill"`
-
 ### AVAILABILITY\_SECTION
 
 > **AVAILABILITY\_SECTION**: `string` = `"technical-details-availability"`
@@ -136,13 +134,9 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **AVAILABILITY\_SELECT**: `string` = `"availability-selector"`
 
-### AVAILABILITY\_SELECTED\_LEVEL
-
-> **AVAILABILITY\_SELECTED\_LEVEL**: `string` = `"availability-selected-level"`
-
 ### AVAILABILITY\_SELECTOR
 
-> **AVAILABILITY\_SELECTOR**: `string` = `"availability-level-selector"`
+> **AVAILABILITY\_SELECTOR**: `string` = `"availability-selector"`
 
 ### AVAILABILITY\_TAB
 
@@ -150,71 +144,11 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 ### AVAILABILITY\_TECH\_DETAILS
 
-> **AVAILABILITY\_TECH\_DETAILS**: `string` = `"availability-tech-details"`
+> **AVAILABILITY\_TECH\_DETAILS**: `string` = `"security-summary-availability-tech-details"`
 
 ### AVAILABILITY\_TECH\_HEADING
 
-> **AVAILABILITY\_TECH\_HEADING**: `string` = `"availability-tech-heading"`
-
-### AVAILABILITY\_TECHNICAL\_DETAILS
-
-> **AVAILABILITY\_TECHNICAL\_DETAILS**: `string` = `"availability-technical-details"`
-
-### AVAILABILITY\_TECHNICAL\_INFO
-
-> **AVAILABILITY\_TECHNICAL\_INFO**: `string` = `"availability-technical-info"`
-
-### AVAILABILITY\_TECHNICAL\_INFO\_BUTTON
-
-> **AVAILABILITY\_TECHNICAL\_INFO\_BUTTON**: `string` = `"availability-technical-info-button"`
-
-### AVAILABILITY\_TECHNICAL\_POPOVER
-
-> **AVAILABILITY\_TECHNICAL\_POPOVER**: `string` = `"availability-technical-popover"`
-
-### AVAILABILITY\_UPTIME\_BADGE
-
-> **AVAILABILITY\_UPTIME\_BADGE**: `string` = `"availability-uptime-badge"`
-
-### BADGE\_COMPLIANCE\_READY
-
-> **BADGE\_COMPLIANCE\_READY**: `string` = `"badge-compliance-ready"`
-
-### BADGE\_GOOD\_BALANCE
-
-> **BADGE\_GOOD\_BALANCE**: `string` = `"badge-good-balance"`
-
-### BADGE\_HIGH\_RISK
-
-> **BADGE\_HIGH\_RISK**: `string` = `"badge-high-risk"`
-
-### BADGE\_LIMITED\_PROTECTION
-
-> **BADGE\_LIMITED\_PROTECTION**: `string` = `"badge-limited-protection"`
-
-### BADGE\_MAXIMUM\_SECURITY
-
-> **BADGE\_MAXIMUM\_SECURITY**: `string` = `"badge-maximum-security"`
-
-### BADGE\_MISSION\_CRITICAL
-
-> **BADGE\_MISSION\_CRITICAL**: `string` = `"badge-mission-critical"`
-
-### BADGE\_NOT\_RECOMMENDED
-
-> **BADGE\_NOT\_RECOMMENDED**: `string` = `"badge-not-recommended"`
-
-### BADGE\_PUBLIC\_DATA\_ONLY
-
-> **BADGE\_PUBLIC\_DATA\_ONLY**: `string` = `"badge-public-data-only"`
-
-### BADGE\_SENSITIVE\_DATA\_READY
-
-> **BADGE\_SENSITIVE\_DATA\_READY**: `string` = `"badge-sensitive-data-ready"`
-
-### BADGE\_STRONG\_PROTECTION
-
-> **BADGE\_STRONG\_PROTECTION**: `string` = `"badge-strong-protection"`
+> **AVAILABILITY\_TECH\_HEADING**: `string` = `"security-summary-availability-tech-heading"`
 
 ### BENEFITS\_SECTION
 
@@ -228,9 +162,17 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **BUSINESS\_CONSIDERATIONS**: `string` = `"business-considerations"`
 
+### BUSINESS\_IMPACT\_ANALYSIS
+
+> **BUSINESS\_IMPACT\_ANALYSIS**: `string` = `"business-impact-analysis-widget"`
+
 ### BUSINESS\_IMPACT\_ANALYSIS\_PREFIX
 
 > **BUSINESS\_IMPACT\_ANALYSIS\_PREFIX**: `string` = `"business-impact-analysis"`
+
+### BUSINESS\_IMPACT\_ANALYSIS\_WIDGET
+
+> **BUSINESS\_IMPACT\_ANALYSIS\_WIDGET**: `string` = `"business-impact-analysis-widget"`
 
 ### BUSINESS\_IMPACT\_PREFIX
 
@@ -238,7 +180,7 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 ### BUSINESS\_IMPACT\_SECTION
 
-> **BUSINESS\_IMPACT\_SECTION**: `string` = `"business-impact-section"`
+> **BUSINESS\_IMPACT\_SECTION**: `string` = `"security-summary-business-impact"`
 
 ### BUSINESS\_IMPACT\_SUMMARY
 
@@ -246,11 +188,15 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 ### BUSINESS\_IMPACT\_TOGGLE
 
-> **BUSINESS\_IMPACT\_TOGGLE**: `string` = `"business-impact-toggle"`
+> **BUSINESS\_IMPACT\_TOGGLE**: `string` = `"security-summary-business-toggle"`
 
 ### BUSINESS\_IMPACT\_WIDGET
 
 > **BUSINESS\_IMPACT\_WIDGET**: `string` = `"business-impact-widget"`
+
+### CALCULATED\_LEVEL
+
+> **CALCULATED\_LEVEL**: `string` = `"calculated-level"`
 
 ### CAPEX\_ESTIMATE\_VALUE
 
@@ -312,9 +258,13 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **CIA\_IMPACT\_SUMMARY**: `string` = `"cia-impact-summary"`
 
+### CIA\_IMPACT\_SUMMARY\_WIDGET
+
+> **CIA\_IMPACT\_SUMMARY\_WIDGET**: `string` = `"cia-impact-summary-widget"`
+
 ### CIA\_RATINGS
 
-> **CIA\_RATINGS**: `string` = `"cia-ratings"`
+> **CIA\_RATINGS**: `string` = `"security-summary-cia-ratings"`
 
 ### COMBINED\_BUSINESS\_IMPACT\_WIDGET
 
@@ -322,7 +272,7 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 ### COMPLIANCE\_FRAMEWORK\_ITEM
 
-> **COMPLIANCE\_FRAMEWORK\_ITEM**: `string` = `"compliance-framework-item"`
+> **COMPLIANCE\_FRAMEWORK\_ITEM**: `string` = `'compliance-framework-item'`
 
 ### COMPLIANCE\_FRAMEWORKS\_CONTAINER
 
@@ -330,19 +280,19 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 ### COMPLIANCE\_REQUIREMENTS\_LIST
 
-> **COMPLIANCE\_REQUIREMENTS\_LIST**: `string` = `"compliance-requirements-list"`
+> **COMPLIANCE\_REQUIREMENTS\_LIST**: `string` = `'compliance-requirements-list'`
+
+### COMPLIANCE\_STATUS
+
+> **COMPLIANCE\_STATUS**: `string` = `"compliance-status-widget"`
 
 ### COMPLIANCE\_STATUS\_BADGE
 
-> **COMPLIANCE\_STATUS\_BADGE**: `string` = `"compliance-status-badge"`
-
-### COMPLIANCE\_STATUS\_PREFIX
-
-> **COMPLIANCE\_STATUS\_PREFIX**: `string` = `"compliance-status"`
+> **COMPLIANCE\_STATUS\_BADGE**: `string` = `'compliance-status-badge'`
 
 ### COMPLIANCE\_STATUS\_WIDGET
 
-> **COMPLIANCE\_STATUS\_WIDGET**: `string` = `"compliance-status-widget"`
+> **COMPLIANCE\_STATUS\_WIDGET**: `string` = `'compliance-status'`
 
 ### COMPLIANT\_FRAMEWORKS\_LIST
 
@@ -351,10 +301,6 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 ### CONFIDENTIALITY
 
 > **CONFIDENTIALITY**: `string` = `"confidentiality"`
-
-### CONFIDENTIALITY\_BUSINESS\_IMPACT
-
-> **CONFIDENTIALITY\_BUSINESS\_IMPACT**: `string` = `"confidentiality-business-impact"`
 
 ### CONFIDENTIALITY\_COLOR\_INDICATOR
 
@@ -372,17 +318,25 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **CONFIDENTIALITY\_DETAILS\_SECTION**: `string` = `"technical-details-confidentiality-details"`
 
+### CONFIDENTIALITY\_ICON
+
+> **CONFIDENTIALITY\_ICON**: `string` = `"confidentiality-icon"`
+
+### CONFIDENTIALITY\_IMPACT
+
+> **CONFIDENTIALITY\_IMPACT**: `string` = `"confidentiality-impact"`
+
 ### CONFIDENTIALITY\_IMPACT\_DESCRIPTION
 
 > **CONFIDENTIALITY\_IMPACT\_DESCRIPTION**: `string` = `"confidentiality-impact-description"`
 
 ### CONFIDENTIALITY\_IMPACT\_DETAILS
 
-> **CONFIDENTIALITY\_IMPACT\_DETAILS**: `string` = `"confidentiality-impact-details"`
+> **CONFIDENTIALITY\_IMPACT\_DETAILS**: `string` = `"security-summary-confidentiality-impact-details"`
 
 ### CONFIDENTIALITY\_IMPACT\_HEADING
 
-> **CONFIDENTIALITY\_IMPACT\_HEADING**: `string` = `"confidentiality-impact-heading"`
+> **CONFIDENTIALITY\_IMPACT\_HEADING**: `string` = `"security-summary-confidentiality-impact-heading"`
 
 ### CONFIDENTIALITY\_IMPACT\_PREFIX
 
@@ -404,22 +358,6 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **CONFIDENTIALITY\_LABEL**: `string` = `"confidentiality-label"`
 
-### CONFIDENTIALITY\_LEVEL
-
-> **CONFIDENTIALITY\_LEVEL**: `string` = `"confidentiality-level"`
-
-### CONFIDENTIALITY\_LEVEL\_INDICATOR
-
-> **CONFIDENTIALITY\_LEVEL\_INDICATOR**: `string` = `"confidentiality-level-indicator"`
-
-### CONFIDENTIALITY\_LEVEL\_PILL
-
-> **CONFIDENTIALITY\_LEVEL\_PILL**: `string` = `"confidentiality-level-pill"`
-
-### CONFIDENTIALITY\_PROTECTION\_BADGE
-
-> **CONFIDENTIALITY\_PROTECTION\_BADGE**: `string` = `"confidentiality-protection-badge"`
-
 ### CONFIDENTIALITY\_SECTION
 
 > **CONFIDENTIALITY\_SECTION**: `string` = `"technical-details-confidentiality"`
@@ -428,13 +366,9 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **CONFIDENTIALITY\_SELECT**: `string` = `"confidentiality-selector"`
 
-### CONFIDENTIALITY\_SELECTED\_LEVEL
-
-> **CONFIDENTIALITY\_SELECTED\_LEVEL**: `string` = `"confidentiality-selected-level"`
-
 ### CONFIDENTIALITY\_SELECTOR
 
-> **CONFIDENTIALITY\_SELECTOR**: `string` = `"confidentiality-level-selector"`
+> **CONFIDENTIALITY\_SELECTOR**: `string` = `"confidentiality-selector"`
 
 ### CONFIDENTIALITY\_TAB
 
@@ -442,27 +376,11 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 ### CONFIDENTIALITY\_TECH\_DETAILS
 
-> **CONFIDENTIALITY\_TECH\_DETAILS**: `string` = `"confidentiality-tech-details"`
+> **CONFIDENTIALITY\_TECH\_DETAILS**: `string` = `"security-summary-confidentiality-tech-details"`
 
 ### CONFIDENTIALITY\_TECH\_HEADING
 
-> **CONFIDENTIALITY\_TECH\_HEADING**: `string` = `"confidentiality-tech-heading"`
-
-### CONFIDENTIALITY\_TECHNICAL\_DETAILS
-
-> **CONFIDENTIALITY\_TECHNICAL\_DETAILS**: `string` = `"confidentiality-technical-details"`
-
-### CONFIDENTIALITY\_TECHNICAL\_INFO
-
-> **CONFIDENTIALITY\_TECHNICAL\_INFO**: `string` = `"confidentiality-technical-info"`
-
-### CONFIDENTIALITY\_TECHNICAL\_INFO\_BUTTON
-
-> **CONFIDENTIALITY\_TECHNICAL\_INFO\_BUTTON**: `string` = `"confidentiality-technical-info-button"`
-
-### CONFIDENTIALITY\_TECHNICAL\_POPOVER
-
-> **CONFIDENTIALITY\_TECHNICAL\_POPOVER**: `string` = `"confidentiality-technical-popover"`
+> **CONFIDENTIALITY\_TECH\_HEADING**: `string` = `"security-summary-confidentiality-tech-heading"`
 
 ### CONTENT\_TITLE
 
@@ -488,6 +406,10 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **COST\_CONTAINER**: `string` = `"cost-container"`
 
+### COST\_ESTIMATION
+
+> **COST\_ESTIMATION**: `string` = `"cost-estimation-widget"`
+
 ### COST\_ESTIMATION\_CONTENT
 
 > **COST\_ESTIMATION\_CONTENT**: `string` = `"cost-estimation-content"`
@@ -508,6 +430,8 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **benefitItem**: (`index`) => `string`
 
+Create test ID for a benefit item
+
 ##### Parameters
 
 ###### index
@@ -522,13 +446,53 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **categorySpecific**: (`prefix`, `category`) => `string`
 
+Create test ID for a category-specific item
+
 ##### Parameters
 
 ###### prefix
 
 `string`
 
+Category prefix
+
 ###### category
+
+`string`
+
+Category name
+
+##### Returns
+
+`string`
+
+Category-specific test ID
+
+#### createDynamicTestId.complianceControl()
+
+> **complianceControl**: (`id`) => `string`
+
+Create test ID for a compliance control
+
+##### Parameters
+
+###### id
+
+`string`
+
+##### Returns
+
+`string`
+
+#### createDynamicTestId.complianceFramework()
+
+> **complianceFramework**: (`name`) => `string`
+
+Create test ID for a compliance framework
+
+##### Parameters
+
+###### name
 
 `string`
 
@@ -539,6 +503,8 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 #### createDynamicTestId.considerationDescription()
 
 > **considerationDescription**: (`index`) => `string`
+
+Create test ID for a consideration description
 
 ##### Parameters
 
@@ -554,6 +520,8 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **considerationItem**: (`index`) => `string`
 
+Create test ID for a consideration item
+
 ##### Parameters
 
 ###### index
@@ -567,6 +535,8 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 #### createDynamicTestId.framework()
 
 > **framework**: (`index`) => `string`
+
+Create test ID for a framework
 
 ##### Parameters
 
@@ -582,6 +552,8 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **frameworkStatus**: (`framework`) => `string`
 
+Create test ID for a framework status
+
 ##### Parameters
 
 ###### framework
@@ -592,9 +564,27 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 `string`
 
+#### createDynamicTestId.impactItem()
+
+> **impactItem**: (`index`) => `string`
+
+Create test ID for an impact item
+
+##### Parameters
+
+###### index
+
+`number`
+
+##### Returns
+
+`string`
+
 #### createDynamicTestId.impactType()
 
 > **impactType**: (`index`) => `string`
+
+Create test ID for an impact type
 
 ##### Parameters
 
@@ -610,6 +600,8 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **impactTypeKv**: (`index`) => `string`
 
+Create test ID for an impact type key-value pair
+
 ##### Parameters
 
 ###### index
@@ -623,6 +615,8 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 #### createDynamicTestId.implementationStep()
 
 > **implementationStep**: (`index`) => `string`
+
+Create test ID for an implementation step
 
 ##### Parameters
 
@@ -638,6 +632,24 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **keyBenefit**: (`index`) => `string`
 
+Create test ID for a key benefit
+
+##### Parameters
+
+###### index
+
+`number`
+
+##### Returns
+
+`string`
+
+#### createDynamicTestId.menuItem()
+
+> **menuItem**: (`index`) => `string`
+
+Create test ID for a menu item
+
 ##### Parameters
 
 ###### index
@@ -651,6 +663,8 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 #### createDynamicTestId.option()
 
 > **option**: (`level`) => `string`
+
+Create test ID for an option
 
 ##### Parameters
 
@@ -666,6 +680,40 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **riskBadge**: (`index`) => `string`
 
+Create test ID for a risk badge
+
+##### Parameters
+
+###### index
+
+`number`
+
+##### Returns
+
+`string`
+
+#### createDynamicTestId.securityLevel()
+
+> **securityLevel**: (`level`) => `string`
+
+Create test ID for a security level
+
+##### Parameters
+
+###### level
+
+`string`
+
+##### Returns
+
+`string`
+
+#### createDynamicTestId.securityResource()
+
+> **securityResource**: (`index`) => `string`
+
+Create test ID for a security resource
+
 ##### Parameters
 
 ###### index
@@ -679,6 +727,8 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 #### createDynamicTestId.techStack()
 
 > **techStack**: (`index`) => `string`
+
+Create test ID for a tech stack
 
 ##### Parameters
 
@@ -694,6 +744,8 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **valuePoint**: (`index`) => `string`
 
+Create test ID for a value point
+
 ##### Parameters
 
 ###### index
@@ -707,6 +759,8 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 #### createDynamicTestId.widgetId()
 
 > **widgetId**: (`id`) => `string`
+
+Create test ID for a widget
 
 ##### Parameters
 
@@ -730,9 +784,9 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **CURRENT\_INTEGRITY**: `string` = `"current-integrity"`
 
-### DASHBOARD\_CONTAINER
+### DARK\_MODE\_BUTTON
 
-> **DASHBOARD\_CONTAINER**: `string` = `"dashboard-container"`
+> **DARK\_MODE\_BUTTON**: `string` = `"dark-mode-button"`
 
 ### DASHBOARD\_GRID
 
@@ -750,9 +804,41 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **DISPLAYED\_VALUE**: `string` = `"displayed-value"`
 
+### EMPTY\_STATE
+
+> **EMPTY\_STATE**: `string` = `"empty-state"`
+
+### ERROR
+
+> **ERROR**: `string` = `"error-message"`
+
+### ERROR\_BOUNDARY
+
+> **ERROR\_BOUNDARY**: `string` = `"error-boundary"`
+
+### ERROR\_DETAILS
+
+> **ERROR\_DETAILS**: `string` = `"error-details"`
+
+### ERROR\_MESSAGE
+
+> **ERROR\_MESSAGE**: `string` = `"error-message"`
+
+### ERROR\_RESET
+
+> **ERROR\_RESET**: `string` = `"error-reset"`
+
+### ERROR\_STACK
+
+> **ERROR\_STACK**: `string` = `"error-stack"`
+
 ### ESTIMATED\_COST\_HEADING
 
 > **ESTIMATED\_COST\_HEADING**: `string` = `"estimated-cost-heading"`
+
+### EXPERTISE\_LEVEL
+
+> **EXPERTISE\_LEVEL**: `string` = `"expertise-level"`
 
 ### FINANCIAL\_IMPACT\_CARD
 
@@ -774,6 +860,8 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **getTestId**: (`prefix`, `id`) => `string`
 
+Helper to create a test ID with a prefix
+
 #### Parameters
 
 ##### prefix
@@ -792,6 +880,14 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **IMPACT\_ANALYSIS\_PREFIX**: `string` = `"impact-analysis"`
 
+### IMPACT\_CATEGORY
+
+> **IMPACT\_CATEGORY**: `string` = `"impact-category"`
+
+### IMPACT\_DESCRIPTION
+
+> **IMPACT\_DESCRIPTION**: `string` = `"impact-description"`
+
 ### IMPACT\_DESCRIPTION\_PREFIX
 
 > **IMPACT\_DESCRIPTION\_PREFIX**: `string` = `"impact-description"`
@@ -808,25 +904,37 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **IMPACT\_METRICS\_SECTION**: `string` = `"impact-metrics-section"`
 
+### IMPACT\_SUMMARY
+
+> **IMPACT\_SUMMARY**: `string` = `"impact-summary"`
+
+### IMPLEMENTATION\_COMPLEXITY
+
+> **IMPLEMENTATION\_COMPLEXITY**: `string` = `"implementation-complexity"`
+
+### IMPLEMENTATION\_EFFORT
+
+> **IMPLEMENTATION\_EFFORT**: `string` = `"implementation-effort"`
+
 ### IMPLEMENTATION\_HEADER
 
 > **IMPLEMENTATION\_HEADER**: `string` = `"implementation-header"`
+
+### IMPLEMENTATION\_STEPS
+
+> **IMPLEMENTATION\_STEPS**: `string` = `"implementation-steps"`
 
 ### IMPLEMENTATION\_TIME
 
 > **IMPLEMENTATION\_TIME**: `string` = `"implementation-time"`
 
-### IMPLICATIONS
+### INFO
 
-> **IMPLICATIONS**: `string` = `"implications"`
+> **INFO**: `string` = `"info-message"`
 
 ### INTEGRITY
 
 > **INTEGRITY**: `string` = `"integrity"`
-
-### INTEGRITY\_BUSINESS\_IMPACT
-
-> **INTEGRITY\_BUSINESS\_IMPACT**: `string` = `"integrity-business-impact"`
 
 ### INTEGRITY\_COLOR\_INDICATOR
 
@@ -844,17 +952,25 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **INTEGRITY\_DETAILS\_SECTION**: `string` = `"technical-details-integrity-details"`
 
+### INTEGRITY\_ICON
+
+> **INTEGRITY\_ICON**: `string` = `"integrity-icon"`
+
+### INTEGRITY\_IMPACT
+
+> **INTEGRITY\_IMPACT**: `string` = `"integrity-impact"`
+
 ### INTEGRITY\_IMPACT\_DESCRIPTION
 
 > **INTEGRITY\_IMPACT\_DESCRIPTION**: `string` = `"integrity-impact-description"`
 
 ### INTEGRITY\_IMPACT\_DETAILS
 
-> **INTEGRITY\_IMPACT\_DETAILS**: `string` = `"integrity-impact-details"`
+> **INTEGRITY\_IMPACT\_DETAILS**: `string` = `"security-summary-integrity-impact-details"`
 
 ### INTEGRITY\_IMPACT\_HEADING
 
-> **INTEGRITY\_IMPACT\_HEADING**: `string` = `"integrity-impact-heading"`
+> **INTEGRITY\_IMPACT\_HEADING**: `string` = `"security-summary-integrity-impact-heading"`
 
 ### INTEGRITY\_IMPACT\_PREFIX
 
@@ -876,18 +992,6 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **INTEGRITY\_LABEL**: `string` = `"integrity-label"`
 
-### INTEGRITY\_LEVEL
-
-> **INTEGRITY\_LEVEL**: `string` = `"integrity-level"`
-
-### INTEGRITY\_LEVEL\_INDICATOR
-
-> **INTEGRITY\_LEVEL\_INDICATOR**: `string` = `"integrity-level-indicator"`
-
-### INTEGRITY\_LEVEL\_PILL
-
-> **INTEGRITY\_LEVEL\_PILL**: `string` = `"integrity-level-pill"`
-
 ### INTEGRITY\_SECTION
 
 > **INTEGRITY\_SECTION**: `string` = `"technical-details-integrity"`
@@ -896,13 +1000,9 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **INTEGRITY\_SELECT**: `string` = `"integrity-selector"`
 
-### INTEGRITY\_SELECTED\_LEVEL
-
-> **INTEGRITY\_SELECTED\_LEVEL**: `string` = `"integrity-selected-level"`
-
 ### INTEGRITY\_SELECTOR
 
-> **INTEGRITY\_SELECTOR**: `string` = `"integrity-level-selector"`
+> **INTEGRITY\_SELECTOR**: `string` = `"integrity-selector"`
 
 ### INTEGRITY\_TAB
 
@@ -910,59 +1010,51 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 ### INTEGRITY\_TECH\_DETAILS
 
-> **INTEGRITY\_TECH\_DETAILS**: `string` = `"integrity-tech-details"`
+> **INTEGRITY\_TECH\_DETAILS**: `string` = `"security-summary-integrity-tech-details"`
 
 ### INTEGRITY\_TECH\_HEADING
 
-> **INTEGRITY\_TECH\_HEADING**: `string` = `"integrity-tech-heading"`
+> **INTEGRITY\_TECH\_HEADING**: `string` = `"security-summary-integrity-tech-heading"`
 
-### INTEGRITY\_TECHNICAL\_DETAILS
+### KEY\_VALUE\_GROUP
 
-> **INTEGRITY\_TECHNICAL\_DETAILS**: `string` = `"integrity-technical-details"`
+> **KEY\_VALUE\_GROUP**: `string` = `"key-value-group"`
 
-### INTEGRITY\_TECHNICAL\_INFO
+### KEY\_VALUE\_KEY
 
-> **INTEGRITY\_TECHNICAL\_INFO**: `string` = `"integrity-technical-info"`
-
-### INTEGRITY\_TECHNICAL\_INFO\_BUTTON
-
-> **INTEGRITY\_TECHNICAL\_INFO\_BUTTON**: `string` = `"integrity-technical-info-button"`
-
-### INTEGRITY\_TECHNICAL\_POPOVER
-
-> **INTEGRITY\_TECHNICAL\_POPOVER**: `string` = `"integrity-technical-popover"`
-
-### INTEGRITY\_VALIDATION\_BADGE
-
-> **INTEGRITY\_VALIDATION\_BADGE**: `string` = `"integrity-validation-badge"`
-
-### KEY\_BENEFITS\_HEADING
-
-> **KEY\_BENEFITS\_HEADING**: `string` = `"key-benefits-heading"`
-
-### KEY\_BENEFITS\_LIST
-
-> **KEY\_BENEFITS\_LIST**: `string` = `"key-benefits-list"`
+> **KEY\_VALUE\_KEY**: `string` = `"key-value-key"`
 
 ### KEY\_VALUE\_PAIR
 
 > **KEY\_VALUE\_PAIR**: `string` = `"key-value-pair"`
 
-### KV\_LABEL
+### KEY\_VALUE\_VALUE
 
-> **KV\_LABEL**: `string` = `"kv-label"`
+> **KEY\_VALUE\_VALUE**: `string` = `"key-value-value"`
 
-### KV\_VALUE
+### LIGHT\_MODE\_BUTTON
 
-> **KV\_VALUE**: `string` = `"kv-value"`
+> **LIGHT\_MODE\_BUTTON**: `string` = `"light-mode-button"`
+
+### LOADING
+
+> **LOADING**: `string` = `"loading-indicator"`
 
 ### LOADING\_INDICATOR
 
 > **LOADING\_INDICATOR**: `string` = `"loading-indicator"`
 
+### MAINTENANCE\_EFFORT
+
+> **MAINTENANCE\_EFFORT**: `string` = `"maintenance-effort"`
+
 ### MAINTENANCE\_LEVEL
 
 > **MAINTENANCE\_LEVEL**: `string` = `"maintenance-level"`
+
+### MANUAL\_LEVEL\_SELECTOR
+
+> **MANUAL\_LEVEL\_SELECTOR**: `string` = `"manual-level-selector"`
 
 ### MEAN\_RECOVERY\_TIME
 
@@ -972,13 +1064,17 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **METRICS\_CARD**: `string` = `"metrics-card"`
 
+### METRICS\_CARD\_ICON
+
+> **METRICS\_CARD\_ICON**: `string` = `"metrics-card-icon"`
+
+### METRICS\_CARD\_LABEL
+
+> **METRICS\_CARD\_LABEL**: `string` = `"metrics-card-label"`
+
 ### METRICS\_CARD\_TITLE
 
 > **METRICS\_CARD\_TITLE**: `string` = `"metrics-card-title"`
-
-### METRICS\_CARD\_TREND
-
-> **METRICS\_CARD\_TREND**: `string` = `"metrics-card-trend"`
 
 ### METRICS\_CARD\_VALUE
 
@@ -986,11 +1082,11 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 ### METRICS\_SECTION
 
-> **METRICS\_SECTION**: `string` = `"metrics-section"`
+> **METRICS\_SECTION**: `string` = `"security-summary-metrics-section"`
 
 ### METRICS\_TOGGLE
 
-> **METRICS\_TOGGLE**: `string` = `"metrics-toggle"`
+> **METRICS\_TOGGLE**: `string` = `"security-summary-metrics-toggle"`
 
 ### MONTHLY\_OPEX
 
@@ -1040,13 +1136,9 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **OPEX\_VALUE**: `string` = `"opex-value"`
 
-### OVERALL\_LEVEL
-
-> **OVERALL\_LEVEL**: `string` = `"overall-level"`
-
 ### OVERALL\_RATING
 
-> **OVERALL\_RATING**: `string` = `"overall-rating"`
+> **OVERALL\_RATING**: `string` = `"security-summary-overall-rating"`
 
 ### RADAR\_AVAILABILITY\_VALUE
 
@@ -1082,7 +1174,11 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 ### RECOMMENDATION\_HEADING
 
-> **RECOMMENDATION\_HEADING**: `string` = `"recommendation-heading"`
+> **RECOMMENDATION\_HEADING**: `string` = `"security-summary-recommendation-heading"`
+
+### RECOVERY\_METRICS
+
+> **RECOVERY\_METRICS**: `string` = `"recovery-metrics"`
 
 ### RECOVERY\_TIME\_KV
 
@@ -1100,13 +1196,45 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **REQUIRED\_EXPERTISE**: `string` = `"required-expertise"`
 
+### RESOURCE\_CATEGORY
+
+> **RESOURCE\_CATEGORY**: `string` = `"resource-category"`
+
+### RESOURCE\_CATEGORY\_FILTER
+
+> **RESOURCE\_CATEGORY\_FILTER**: `string` = `"resource-category-filter"`
+
+### RESOURCE\_DESCRIPTION
+
+> **RESOURCE\_DESCRIPTION**: `string` = `"resource-description"`
+
 ### RESOURCE\_ITEM
 
-> **RESOURCE\_ITEM**: `string` = `"security-resource-item"`
+> **RESOURCE\_ITEM**: `string` = `"resource-item"`
+
+### RESOURCE\_LINK
+
+> **RESOURCE\_LINK**: `string` = `"resource-link"`
 
 ### RESOURCE\_LIST
 
-> **RESOURCE\_LIST**: `string` = `"security-resources-list"`
+> **RESOURCE\_LIST**: `string` = `"resource-list"`
+
+### RESOURCE\_SEARCH
+
+> **RESOURCE\_SEARCH**: `string` = `"resource-search"`
+
+### RESOURCE\_TAGS
+
+> **RESOURCE\_TAGS**: `string` = `"resource-tags"`
+
+### RESOURCE\_TITLE
+
+> **RESOURCE\_TITLE**: `string` = `"resource-title"`
+
+### RESOURCE\_TYPE
+
+> **RESOURCE\_TYPE**: `string` = `"resource-type"`
 
 ### RESOURCES\_HEADER
 
@@ -1116,29 +1244,53 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **REVENUE\_LOSS\_KV**: `string` = `"revenue-loss-kv"`
 
+### RISK\_LEVEL
+
+> **RISK\_LEVEL**: `string` = `"risk-level"`
+
+### RISK\_REDUCTION
+
+> **RISK\_REDUCTION**: `string` = `"risk-reduction"`
+
+### ROI\_DESCRIPTION
+
+> **ROI\_DESCRIPTION**: `string` = `"roi-description"`
+
 ### ROI\_ESTIMATE
 
 > **ROI\_ESTIMATE**: `string` = `"roi-estimate"`
 
 ### ROI\_ESTIMATE\_PAIR
 
-> **ROI\_ESTIMATE\_PAIR**: `string` = `"roi-estimate-pair"`
+> **ROI\_ESTIMATE\_PAIR**: `string` = `"security-summary-roi-estimate-pair"`
 
 ### ROI\_ESTIMATE\_SUMMARY
 
-> **ROI\_ESTIMATE\_SUMMARY**: `string` = `"roi-estimate-summary"`
+> **ROI\_ESTIMATE\_SUMMARY**: `string` = `"security-summary-roi-estimate-summary"`
 
 ### ROI\_SECTION
 
 > **ROI\_SECTION**: `string` = `"roi-section"`
 
+### ROI\_TITLE
+
+> **ROI\_TITLE**: `string` = `"roi-title"`
+
 ### ROI\_VALUE
 
-> **ROI\_VALUE**: `string` = `"roi-value"`
+> **ROI\_VALUE**: `string` = `"value-creation-widget-roi"`
 
 ### SECURITY\_ICON
 
-> **SECURITY\_ICON**: `string` = `"security-icon"`
+> **SECURITY\_ICON**: `string` = `"security-summary-icon"`
+
+### SECURITY\_LEVEL
+
+> **SECURITY\_LEVEL**: `string` = `"security-level"`
+
+### SECURITY\_LEVEL\_BADGE
+
+> **SECURITY\_LEVEL\_BADGE**: `string` = `"security-level-badge"`
 
 ### SECURITY\_LEVEL\_CONTROLS
 
@@ -1148,17 +1300,29 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **SECURITY\_LEVEL\_DESCRIPTION**: `string` = `"security-level-description"`
 
+### SECURITY\_LEVEL\_DISPLAY
+
+> **SECURITY\_LEVEL\_DISPLAY**: `string` = `"security-level-display"`
+
+### SECURITY\_LEVEL\_HEADING
+
+> **SECURITY\_LEVEL\_HEADING**: `string` = `"security-level-heading"`
+
+### SECURITY\_LEVEL\_ICON
+
+> **SECURITY\_LEVEL\_ICON**: `string` = `"security-level-icon"`
+
 ### SECURITY\_LEVEL\_INDICATOR
 
-> **SECURITY\_LEVEL\_INDICATOR**: `string` = `"security-level-indicator"`
+> **SECURITY\_LEVEL\_INDICATOR**: `string` = `"security-summary-level-indicator"`
 
-### SECURITY\_LEVEL\_PREFIX
+### SECURITY\_LEVEL\_KV
 
-> **SECURITY\_LEVEL\_PREFIX**: `string` = `"security-level"`
+> **SECURITY\_LEVEL\_KV**: `string` = `"security-level-kv"`
 
-### SECURITY\_LEVEL\_PROGRESS\_BAR
+### SECURITY\_LEVEL\_LABEL
 
-> **SECURITY\_LEVEL\_PROGRESS\_BAR**: `string` = `"security-level-progress-bar"`
+> **SECURITY\_LEVEL\_LABEL**: `string` = `"security-level-label"`
 
 ### SECURITY\_LEVEL\_SELECTION
 
@@ -1167,6 +1331,14 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 ### SECURITY\_LEVEL\_SELECTOR
 
 > **SECURITY\_LEVEL\_SELECTOR**: `string` = `"security-level-selector"`
+
+### SECURITY\_LEVEL\_SELECTOR\_ITEM
+
+> **SECURITY\_LEVEL\_SELECTOR\_ITEM**: `string` = `"security-level-selector-item"`
+
+### SECURITY\_LEVEL\_VALUE
+
+> **SECURITY\_LEVEL\_VALUE**: `string` = `"security-level-value"`
 
 ### SECURITY\_LEVEL\_WIDGET
 
@@ -1178,7 +1350,11 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 ### SECURITY\_RECOMMENDATIONS
 
-> **SECURITY\_RECOMMENDATIONS**: `string` = `"security-recommendations"`
+> **SECURITY\_RECOMMENDATIONS**: `string` = `"security-summary-recommendations"`
+
+### SECURITY\_RESOURCES
+
+> **SECURITY\_RESOURCES**: `string` = `"security-resources-widget"`
 
 ### SECURITY\_RESOURCES\_PREFIX
 
@@ -1188,6 +1364,10 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **SECURITY\_RESOURCES\_WIDGET**: `string` = `"security-resources-widget"`
 
+### SECURITY\_SUMMARY
+
+> **SECURITY\_SUMMARY**: `string` = `"security-summary-widget"`
+
 ### SECURITY\_SUMMARY\_CONTAINER
 
 > **SECURITY\_SUMMARY\_CONTAINER**: `string` = `"security-summary-container"`
@@ -1196,10 +1376,6 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **SECURITY\_SUMMARY\_DESCRIPTION**: `string` = `"security-summary-description"`
 
-### SECURITY\_SUMMARY\_PREFIX
-
-> **SECURITY\_SUMMARY\_PREFIX**: `string` = `"security-summary"`
-
 ### SECURITY\_SUMMARY\_TITLE
 
 > **SECURITY\_SUMMARY\_TITLE**: `string` = `"security-summary-title"`
@@ -1207,6 +1383,10 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 ### SECURITY\_SUMMARY\_WIDGET
 
 > **SECURITY\_SUMMARY\_WIDGET**: `string` = `"security-summary-widget"`
+
+### SECURITY\_VISUALIZATION
+
+> **SECURITY\_VISUALIZATION**: `string` = `"security-visualization-widget"`
 
 ### SECURITY\_VISUALIZATION\_WIDGET
 
@@ -1220,21 +1400,45 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **STRATEGIC\_IMPACT\_SECTION**: `string` = `"strategic-impact-section"`
 
+### SUCCESS
+
+> **SUCCESS**: `string` = `"success-message"`
+
 ### SUMMARY\_CONTAINER
 
 > **SUMMARY\_CONTAINER**: `string` = `"security-summary-container"`
+
+### SYSTEM\_MODE\_BUTTON
+
+> **SYSTEM\_MODE\_BUTTON**: `string` = `"system-mode-button"`
+
+### TAB\_AVAILABILITY
+
+> **TAB\_AVAILABILITY**: `string` = `"tab-availability"`
 
 ### TAB\_BENEFITS
 
 > **TAB\_BENEFITS**: `string` = `"tab-benefits"`
 
+### TAB\_CONFIDENTIALITY
+
+> **TAB\_CONFIDENTIALITY**: `string` = `"tab-confidentiality"`
+
 ### TAB\_CONSIDERATIONS
 
 > **TAB\_CONSIDERATIONS**: `string` = `"tab-considerations"`
 
+### TAB\_INTEGRITY
+
+> **TAB\_INTEGRITY**: `string` = `"tab-integrity"`
+
 ### TECHNICAL\_DESCRIPTION
 
 > **TECHNICAL\_DESCRIPTION**: `string` = `"technical-description"`
+
+### TECHNICAL\_DETAILS
+
+> **TECHNICAL\_DETAILS**: `string` = `"technical-details-widget"`
 
 ### TECHNICAL\_DETAILS\_PREFIX
 
@@ -1252,33 +1456,79 @@ Defined in: [src/constants/testIds.ts:554](https://github.com/Hack23/cia-complia
 
 > **TECHNICAL\_HEADER**: `string` = `"technical-header"`
 
-### TECHNICAL\_IMPLEMENTATION\_DETAILS
-
-> **TECHNICAL\_IMPLEMENTATION\_DETAILS**: `string` = `"technical-implementation-details"`
-
 ### TECHNICAL\_SECTION\_TOGGLE
 
-> **TECHNICAL\_SECTION\_TOGGLE**: `string` = `"technical-section-toggle"`
+> **TECHNICAL\_SECTION\_TOGGLE**: `string` = `"security-summary-technical-toggle"`
 
 ### TEST\_HELPERS
 
 > **TEST\_HELPERS**: `object`
 
-#### TEST\_HELPERS.getValuePointsForLevel()
+#### TEST\_HELPERS.findByText()
 
-> **getValuePointsForLevel**: (`level`) => `undefined` \| `string`[]
+> **findByText**: (`text`) => `null` \| `Node`
 
-Type-safe way to get value points for a security level
+Find an element by text
 
 ##### Parameters
 
-###### level
+###### text
 
 `string`
 
 ##### Returns
 
-`undefined` \| `string`[]
+`null` \| `Node`
+
+#### TEST\_HELPERS.getValuePointsForLevel()
+
+> **getValuePointsForLevel**: (`level`) => `string`[]
+
+Get value points for a security level
+
+##### Parameters
+
+###### level
+
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
+
+##### Returns
+
+`string`[]
+
+#### TEST\_HELPERS.matchTextAndClass()
+
+> **matchTextAndClass**: (`text`, `className`) => (`content`, `element`) => `boolean`
+
+Match an element by text and class
+
+##### Parameters
+
+###### text
+
+`string`
+
+###### className
+
+`string`
+
+##### Returns
+
+`Function`
+
+###### Parameters
+
+###### content
+
+`string`
+
+###### element
+
+`Element`
+
+###### Returns
+
+`boolean`
 
 #### TEST\_HELPERS.toSecurityLevel()
 
@@ -1300,14 +1550,6 @@ Convert string to SecurityLevel type safely
 
 > **THEME\_TOGGLE**: `string` = `"theme-toggle"`
 
-### THEME\_TOGGLE\_DARK
-
-> **THEME\_TOGGLE\_DARK**: `string` = `"theme-toggle-dark"`
-
-### THEME\_TOGGLE\_LIGHT
-
-> **THEME\_TOGGLE\_LIGHT**: `string` = `"theme-toggle-light"`
-
 ### THREE\_YEAR\_TOTAL
 
 > **THREE\_YEAR\_TOTAL**: `string` = `"three-year-total"`
@@ -1319,6 +1561,10 @@ Convert string to SecurityLevel type safely
 ### TOTAL\_COST\_SUMMARY
 
 > **TOTAL\_COST\_SUMMARY**: `string` = `"total-cost-summary"`
+
+### VALUE\_CREATION
+
+> **VALUE\_CREATION**: `string` = `"value-creation-widget"`
 
 ### VALUE\_CREATION\_CONTENT
 
@@ -1348,10 +1594,38 @@ Convert string to SecurityLevel type safely
 
 > **VALUE\_POINT**: `string` = `"value-point"`
 
+### VALUE\_POINTS
+
+> **VALUE\_POINTS**: `string` = `"value-points"`
+
 ### VALUE\_POINTS\_LIST
 
 > **VALUE\_POINTS\_LIST**: `string` = `"value-points-list"`
 
+### VALUE\_TITLE
+
+> **VALUE\_TITLE**: `string` = `"value-title"`
+
+### WARNING
+
+> **WARNING**: `string` = `"warning-message"`
+
+### WIDGET\_CONTAINER
+
+> **WIDGET\_CONTAINER**: `string` = `"widget-container"`
+
+### WIDGET\_CONTENT
+
+> **WIDGET\_CONTENT**: `string` = `"widget-content"`
+
+### WIDGET\_HEADER
+
+> **WIDGET\_HEADER**: `string` = `"widget-header"`
+
 ### WIDGET\_PREFIX
 
 > **WIDGET\_PREFIX**: `string` = `"widget-"`
+
+### WIDGET\_TITLE
+
+> **WIDGET\_TITLE**: `string` = `"widget-title"`

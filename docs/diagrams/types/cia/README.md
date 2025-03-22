@@ -17,10 +17,12 @@
 - [ConfidentialityImpact](interfaces/ConfidentialityImpact.md)
 - [IntegrityImpact](interfaces/IntegrityImpact.md)
 - [SecurityLevels](interfaces/SecurityLevels.md)
+- [SecurityProfile](interfaces/SecurityProfile.md)
 
 ## Type Aliases
 
-- [CIAComponentType](type-aliases/CIAComponentType.md)
+- [CIAComponent](type-aliases/CIAComponent.md)
+- [RiskLevel](type-aliases/RiskLevel.md)
 - [SecurityLevel](type-aliases/SecurityLevel.md)
 
 ## Functions
@@ -30,3 +32,4 @@
 - [formatSecurityLevel](functions/formatSecurityLevel.md)
 - [getSecurityLevelFromValue](functions/getSecurityLevelFromValue.md)
 - [getSecurityLevelValue](functions/getSecurityLevelValue.md)
+- [isSecurityLevel](functions/isSecurityLevel.md)

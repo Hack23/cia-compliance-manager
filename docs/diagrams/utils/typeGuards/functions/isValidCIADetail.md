@@ -8,7 +8,7 @@
 
 > **isValidCIADetail**(`detail`): `detail is CIADetails`
 
-Defined in: [src/utils/typeGuards.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/utils/typeGuards.ts#L56)
+Defined in: [src/utils/typeGuards.ts:70](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/utils/typeGuards.ts#L70)
 
 Type guard to check if a CIA detail object exists
 
@@ -16,7 +16,7 @@ Type guard to check if a CIA detail object exists
 
 ### detail
 
-`undefined` | `null` | [`CIADetails`](../../../types/cia/interfaces/CIADetails.md)
+`undefined` | `null` | [`CIADetails`](../../../types/cia-services/interfaces/CIADetails.md)
 
 ## Returns
 

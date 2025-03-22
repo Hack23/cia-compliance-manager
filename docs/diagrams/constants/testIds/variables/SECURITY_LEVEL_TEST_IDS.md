@@ -8,29 +8,61 @@
 
 > `const` **SECURITY\_LEVEL\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:468](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/testIds.ts#L468)
+Defined in: [src/constants/testIds.ts:572](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/constants/testIds.ts#L572)
 
 ## Type declaration
 
+### AUTO\_CALCULATE\_BUTTON
+
+> **AUTO\_CALCULATE\_BUTTON**: `string` = `"auto-calculate-button"`
+
 ### AVAILABILITY\_SELECTOR
 
-> **AVAILABILITY\_SELECTOR**: `string` = `"availability-level-selector"`
+> **AVAILABILITY\_SELECTOR**: `string` = `"availability-selector"`
+
+### CALCULATED\_LEVEL
+
+> **CALCULATED\_LEVEL**: `string` = `"calculated-level"`
 
 ### CONFIDENTIALITY\_SELECTOR
 
-> **CONFIDENTIALITY\_SELECTOR**: `string` = `"confidentiality-level-selector"`
+> **CONFIDENTIALITY\_SELECTOR**: `string` = `"confidentiality-selector"`
 
 ### INTEGRITY\_SELECTOR
 
-> **INTEGRITY\_SELECTOR**: `string` = `"integrity-level-selector"`
+> **INTEGRITY\_SELECTOR**: `string` = `"integrity-selector"`
 
-### SECURITY\_LEVEL\_PREFIX
+### MANUAL\_LEVEL\_SELECTOR
 
-> **SECURITY\_LEVEL\_PREFIX**: `string` = `"security-level"`
+> **MANUAL\_LEVEL\_SELECTOR**: `string` = `"manual-level-selector"`
+
+### SECURITY\_LEVEL\_BADGE
+
+> **SECURITY\_LEVEL\_BADGE**: `string` = `"security-level-badge"`
+
+### SECURITY\_LEVEL\_DESCRIPTION
+
+> **SECURITY\_LEVEL\_DESCRIPTION**: `string` = `"security-level-description"`
+
+### SECURITY\_LEVEL\_ICON
+
+> **SECURITY\_LEVEL\_ICON**: `string` = `"security-level-icon"`
+
+### SECURITY\_LEVEL\_LABEL
+
+> **SECURITY\_LEVEL\_LABEL**: `string` = `"security-level-label"`
 
 ### SECURITY\_LEVEL\_SELECTOR
 
 > **SECURITY\_LEVEL\_SELECTOR**: `string` = `"security-level-selector"`
+
+### SECURITY\_LEVEL\_SELECTOR\_ITEM
+
+> **SECURITY\_LEVEL\_SELECTOR\_ITEM**: `string` = `"security-level-selector-item"`
+
+### SECURITY\_LEVEL\_VALUE
+
+> **SECURITY\_LEVEL\_VALUE**: `string` = `"security-level-value"`
 
 ### SECURITY\_LEVEL\_WIDGET
 

@@ -8,15 +8,17 @@
 
 > `const` **createDynamicTestId**: `object`
 
-Defined in: [src/constants/testIds.ts:509](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/testIds.ts#L509)
+Defined in: [src/constants/testIds.ts:27](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/constants/testIds.ts#L27)
 
-Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
+Dynamic test ID creation functions for various component types
 
 ## Type declaration
 
 ### benefitItem()
 
 > **benefitItem**: (`index`) => `string`
+
+Create test ID for a benefit item
 
 #### Parameters
 
@@ -32,13 +34,53 @@ Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
 
 > **categorySpecific**: (`prefix`, `category`) => `string`
 
+Create test ID for a category-specific item
+
 #### Parameters
 
 ##### prefix
 
 `string`
 
+Category prefix
+
 ##### category
+
+`string`
+
+Category name
+
+#### Returns
+
+`string`
+
+Category-specific test ID
+
+### complianceControl()
+
+> **complianceControl**: (`id`) => `string`
+
+Create test ID for a compliance control
+
+#### Parameters
+
+##### id
+
+`string`
+
+#### Returns
+
+`string`
+
+### complianceFramework()
+
+> **complianceFramework**: (`name`) => `string`
+
+Create test ID for a compliance framework
+
+#### Parameters
+
+##### name
 
 `string`
 
@@ -49,6 +91,8 @@ Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
 ### considerationDescription()
 
 > **considerationDescription**: (`index`) => `string`
+
+Create test ID for a consideration description
 
 #### Parameters
 
@@ -64,6 +108,8 @@ Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
 
 > **considerationItem**: (`index`) => `string`
 
+Create test ID for a consideration item
+
 #### Parameters
 
 ##### index
@@ -77,6 +123,8 @@ Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
 ### framework()
 
 > **framework**: (`index`) => `string`
+
+Create test ID for a framework
 
 #### Parameters
 
@@ -92,6 +140,8 @@ Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
 
 > **frameworkStatus**: (`framework`) => `string`
 
+Create test ID for a framework status
+
 #### Parameters
 
 ##### framework
@@ -102,9 +152,27 @@ Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
 
 `string`
 
+### impactItem()
+
+> **impactItem**: (`index`) => `string`
+
+Create test ID for an impact item
+
+#### Parameters
+
+##### index
+
+`number`
+
+#### Returns
+
+`string`
+
 ### impactType()
 
 > **impactType**: (`index`) => `string`
+
+Create test ID for an impact type
 
 #### Parameters
 
@@ -120,6 +188,8 @@ Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
 
 > **impactTypeKv**: (`index`) => `string`
 
+Create test ID for an impact type key-value pair
+
 #### Parameters
 
 ##### index
@@ -133,6 +203,8 @@ Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
 ### implementationStep()
 
 > **implementationStep**: (`index`) => `string`
+
+Create test ID for an implementation step
 
 #### Parameters
 
@@ -148,6 +220,24 @@ Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
 
 > **keyBenefit**: (`index`) => `string`
 
+Create test ID for a key benefit
+
+#### Parameters
+
+##### index
+
+`number`
+
+#### Returns
+
+`string`
+
+### menuItem()
+
+> **menuItem**: (`index`) => `string`
+
+Create test ID for a menu item
+
 #### Parameters
 
 ##### index
@@ -161,6 +251,8 @@ Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
 ### option()
 
 > **option**: (`level`) => `string`
+
+Create test ID for an option
 
 #### Parameters
 
@@ -176,6 +268,40 @@ Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
 
 > **riskBadge**: (`index`) => `string`
 
+Create test ID for a risk badge
+
+#### Parameters
+
+##### index
+
+`number`
+
+#### Returns
+
+`string`
+
+### securityLevel()
+
+> **securityLevel**: (`level`) => `string`
+
+Create test ID for a security level
+
+#### Parameters
+
+##### level
+
+`string`
+
+#### Returns
+
+`string`
+
+### securityResource()
+
+> **securityResource**: (`index`) => `string`
+
+Create test ID for a security resource
+
 #### Parameters
 
 ##### index
@@ -189,6 +315,8 @@ Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
 ### techStack()
 
 > **techStack**: (`index`) => `string`
+
+Create test ID for a tech stack
 
 #### Parameters
 
@@ -204,6 +332,8 @@ Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
 
 > **valuePoint**: (`index`) => `string`
 
+Create test ID for a value point
+
 #### Parameters
 
 ##### index
@@ -217,6 +347,8 @@ Helper functions for dynamic test ID generation - KEEP ORIGINAL FUNCTIONS
 ### widgetId()
 
 > **widgetId**: (`id`) => `string`
+
+Create test ID for a widget
 
 #### Parameters
 

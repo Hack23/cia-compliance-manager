@@ -8,7 +8,9 @@
 
 > `const` **WIDGET\_ICONS**: `object`
 
-Defined in: [src/constants/appConstants.ts:464](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/appConstants.ts#L464)
+Defined in: [src/constants/appConstants.ts:469](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/constants/appConstants.ts#L469)
+
+Widget icons for consistent visual representation
 
 ## Type declaration
 
@@ -20,6 +22,10 @@ Defined in: [src/constants/appConstants.ts:464](https://github.com/Hack23/cia-co
 
 > **BUSINESS\_IMPACT**: `string` = `"🏢"`
 
+### CIA\_IMPACT\_SUMMARY
+
+> **CIA\_IMPACT\_SUMMARY**: `string` = `"🔐"`
+
 ### COMPLIANCE\_STATUS
 
 > **COMPLIANCE\_STATUS**: `string` = `"✅"`
@@ -30,11 +36,11 @@ Defined in: [src/constants/appConstants.ts:464](https://github.com/Hack23/cia-co
 
 ### COST\_ESTIMATION
 
-> **COST\_ESTIMATION**: `string` = `"💰"`
+> **COST\_ESTIMATION**: `string` = `"💲"`
 
 ### INTEGRITY\_IMPACT
 
-> **INTEGRITY\_IMPACT**: `string` = `"🔐"`
+> **INTEGRITY\_IMPACT**: `string` = `"✓"`
 
 ### SECURITY\_LEVEL
 
@@ -52,10 +58,14 @@ Defined in: [src/constants/appConstants.ts:464](https://github.com/Hack23/cia-co
 
 > **SECURITY\_VISUALIZATION**: `string` = `"📈"`
 
+### TECHNICAL\_DETAILS
+
+> **TECHNICAL\_DETAILS**: `string` = `"⚙️"`
+
 ### TECHNICAL\_IMPLEMENTATION
 
 > **TECHNICAL\_IMPLEMENTATION**: `string` = `"⚙️"`
 
 ### VALUE\_CREATION
 
-> **VALUE\_CREATION**: `string` = `"💹"`
+> **VALUE\_CREATION**: `string` = `"💰"`

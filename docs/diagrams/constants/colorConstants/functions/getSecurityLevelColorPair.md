@@ -6,11 +6,11 @@
 
 # Function: getSecurityLevelColorPair()
 
-> **getSecurityLevelColorPair**(`level`): `object`
+> **getSecurityLevelColorPair**(`level`): [`SecurityLevelColorPair`](../interfaces/SecurityLevelColorPair.md)
 
-Defined in: [src/constants/colorConstants.ts:69](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/colorConstants.ts#L69)
+Defined in: [src/constants/colorConstants.ts:52](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/constants/colorConstants.ts#L52)
 
-Get background and text colors for a specific security level
+Get security level color pair
 
 ## Parameters
 
@@ -18,14 +18,10 @@ Get background and text colors for a specific security level
 
 [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
+Security level
+
 ## Returns
 
-`object`
+[`SecurityLevelColorPair`](../interfaces/SecurityLevelColorPair.md)
 
-### bg
-
-> **bg**: `string`
-
-### text
-
-> **text**: `string`
+Color pair object with background and text colors

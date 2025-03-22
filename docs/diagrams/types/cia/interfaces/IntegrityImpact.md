@@ -6,7 +6,7 @@
 
 # Interface: IntegrityImpact
 
-Defined in: [src/types/cia.ts:46](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L46)
+Defined in: [src/types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/cia.ts#L251)
 
 Impact associated with the integrity of the system
 
@@ -20,7 +20,7 @@ Impact associated with the integrity of the system
 
 > **dataAccuracy**: `string`
 
-Defined in: [src/types/cia.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L47)
+Defined in: [src/types/cia.ts:252](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/cia.ts#L252)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [src/types/cia.ts:47](https://github.com/Hack23/cia-compliance-manag
 
 > **description**: `string`
 
-Defined in: [src/types/cia.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L32)
+Defined in: [src/types/cia.ts:237](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/cia.ts#L237)
 
 #### Inherited from
 
@@ -40,7 +40,7 @@ Defined in: [src/types/cia.ts:32](https://github.com/Hack23/cia-compliance-manag
 
 > **level**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/cia.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L31)
+Defined in: [src/types/cia.ts:236](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/cia.ts#L236)
 
 #### Inherited from
 
@@ -52,4 +52,4 @@ Defined in: [src/types/cia.ts:31](https://github.com/Hack23/cia-compliance-manag
 
 > **verificationSteps**: `string`
 
-Defined in: [src/types/cia.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L48)
+Defined in: [src/types/cia.ts:253](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/cia.ts#L253)

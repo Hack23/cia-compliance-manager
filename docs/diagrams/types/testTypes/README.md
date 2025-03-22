@@ -10,5 +10,8 @@
 
 - [MockHandlers](interfaces/MockHandlers.md)
 - [MockOptions](interfaces/MockOptions.md)
+- [TestAssessmentResult](interfaces/TestAssessmentResult.md)
 - [TestData](interfaces/TestData.md)
+- [TestDataOptions](interfaces/TestDataOptions.md)
+- [TestSecurityData](interfaces/TestSecurityData.md)
 - [TestWrapperProps](interfaces/TestWrapperProps.md)

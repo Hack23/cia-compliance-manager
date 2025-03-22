@@ -8,9 +8,9 @@
 
 > **getSecurityLevelValue**(`level`): `number`
 
-Defined in: [src/types/cia.ts:165](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L165)
+Defined in: [src/types/cia.ts:87](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/cia.ts#L87)
 
-Gets a numerical value for a security level for calculations
+Get a numeric value for a security level
 
 ## Parameters
 
@@ -18,10 +18,10 @@ Gets a numerical value for a security level for calculations
 
 `string`
 
-The security level string
+Security level to convert
 
 ## Returns
 
 `number`
 
-A number from 0 (None) to 4 (Very High)
+Numeric value (0-4)

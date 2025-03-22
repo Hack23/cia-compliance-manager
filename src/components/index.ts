@@ -1,9 +1,16 @@
 /**
- * Component exports for the CIA Compliance Manager
+ * # Component Exports Module
+ *
+ * This module exports all components and their prop types used in the CIA Compliance Manager.
  *
  * ## Business Perspective
- * This file exports all available components for easy access throughout the application,
- * promoting consistent interface design and component reuse across security interfaces.
+ * Components are the building blocks of the UI, providing security professionals
+ * with intuitive interfaces for managing security compliance. 🎨
+ *
+ * ## Technical Perspective
+ * Centralized component exports simplify imports and promote component reuse.
+ *
+ * @packageDocumentation
  */
 
 // Widget Components - Keep these since they are used in the simplified app
@@ -22,5 +29,62 @@ export { default as TechnicalDetailsWidget } from "./widgets/implementationguide
 
 // Common Components
 // Only include components that exist and are actively used
+export { default as BusinessImpactSection } from "./common/BusinessImpactSection";
+export { default as BusinessRiskDisplay } from "./common/BusinessRiskDisplay";
+export { default as CIAImpactCard } from "./common/CIAImpactCard";
+export { KeyValuePair } from "./common/KeyValuePair";
+export { default as MetricsCard } from "./common/MetricsCard";
+export { default as RiskAssessment } from "./common/RiskAssessment";
+export { default as RiskLevelBadge } from "./common/RiskLevelBadge";
+export { default as SecurityLevelBadge } from "./common/SecurityLevelBadge";
+export { SecurityRiskScore } from "./common/SecurityRiskScore";
+export { default as StatusBadge } from "./common/StatusBadge";
+export { Tab } from "./common/Tab";
+export { default as ThemeToggle } from "./common/ThemeToggle";
 export { default as Tooltip } from "./common/Tooltip";
+export { default as WidgetActions } from "./common/WidgetActions";
+export { default as WidgetContainer } from "./common/WidgetContainer";
 export { default as WidgetHeader } from "./common/WidgetHeader";
+
+// Charts
+export { default as RadarChart } from "./charts/RadarChart";
+export { SecurityRiskScore as ChartSecurityRiskScore } from "./charts/SecurityRiskScore";
+
+// Security level components
+export { SecurityLevelSelector } from "./securitylevel/SecurityLevelSelector";
+export { Selection } from "./securitylevel/Selection";
+
+// Performance components
+export { SecurityLevelChangeTracker } from "../performance/SecurityLevelChangeTracker";
+
+// Export widget components
+export * from "./widgets";
+
+// Import and re-export component prop types
+export type {
+  BusinessImpactSectionProps,
+  BusinessRiskDisplayProps,
+  CIAImpactCardProps,
+  CodeBlockProps,
+  KeyValuePairProps,
+  MetricsCardProps,
+  RadarChartProps,
+  RiskAssessmentProps,
+  RiskLevelBadgeProps,
+  SecurityLevelBadgeProps,
+  SecurityLevelChangeTrackerProps,
+  SecurityLevelContextType,
+  SecurityLevelProviderProps,
+  SecurityLevelSelectorProps,
+  SecurityLevelSummaryItemProps,
+  SecurityRiskScoreProps,
+  SelectionProps,
+  StatusBadgeProps,
+  TabProps,
+  ThemeToggleProps,
+  TooltipProps,
+  UseSecurityLevelStateOptions,
+  WidgetActionButtonProps,
+  WidgetActionsProps,
+  WidgetHeaderProps,
+} from "../types/componentPropExports";

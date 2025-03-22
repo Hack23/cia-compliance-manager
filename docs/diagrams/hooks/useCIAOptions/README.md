@@ -6,25 +6,42 @@
 
 # hooks/useCIAOptions
 
-## Interfaces
-
-- [EnhancedCIADetails](interfaces/EnhancedCIADetails.md)
-- [ROIEstimate](interfaces/ROIEstimate.md)
-- [ROIEstimatesMap](interfaces/ROIEstimatesMap.md)
-
-## Variables
-
-- [availabilityOptions](variables/availabilityOptions.md)
-- [confidentialityOptions](variables/confidentialityOptions.md)
-- [integrityOptions](variables/integrityOptions.md)
-- [ROI\_ESTIMATES](variables/ROI_ESTIMATES.md)
-
 ## Functions
 
 - [useCIAOptions](functions/useCIAOptions.md)
 
 ## References
 
+### availabilityOptions
+
+Re-exports [availabilityOptions](../../data/ciaOptionsData/variables/availabilityOptions.md)
+
+***
+
 ### CIADetails
 
-Re-exports [CIADetails](../../types/cia/interfaces/CIADetails.md)
+Re-exports [CIADetails](../../types/cia-services/interfaces/CIADetails.md)
+
+***
+
+### confidentialityOptions
+
+Re-exports [confidentialityOptions](../../data/ciaOptionsData/variables/confidentialityOptions.md)
+
+***
+
+### integrityOptions
+
+Re-exports [integrityOptions](../../data/ciaOptionsData/variables/integrityOptions.md)
+
+***
+
+### ROI\_ESTIMATES
+
+Re-exports [ROI_ESTIMATES](../../data/ciaOptionsData/variables/ROI_ESTIMATES.md)
+
+***
+
+### ROIEstimate
+
+Re-exports [ROIEstimate](../../types/cia-services/interfaces/ROIEstimate.md)

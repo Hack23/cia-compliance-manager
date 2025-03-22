@@ -8,7 +8,7 @@
 
 > `const` **WIDGET\_TITLES**: `object`
 
-Defined in: [src/constants/coreConstants.ts:51](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/coreConstants.ts#L51)
+Defined in: [src/constants/coreConstants.ts:53](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/constants/coreConstants.ts#L53)
 
 ## Type declaration
 
@@ -18,7 +18,11 @@ Defined in: [src/constants/coreConstants.ts:51](https://github.com/Hack23/cia-co
 
 ### BUSINESS\_IMPACT
 
-> **BUSINESS\_IMPACT**: `string` = `"Business Impact"`
+> **BUSINESS\_IMPACT**: `string` = `"Business Impact Analysis"`
+
+### CIA\_IMPACT\_SUMMARY
+
+> **CIA\_IMPACT\_SUMMARY**: `string` = `"CIA Impact Summary"`
 
 ### COMPLIANCE\_STATUS
 
@@ -56,10 +60,14 @@ Defined in: [src/constants/coreConstants.ts:51](https://github.com/Hack23/cia-co
 
 > **SECURITY\_VISUALIZATION**: `string` = `"Security Visualization"`
 
+### TECHNICAL\_DETAILS
+
+> **TECHNICAL\_DETAILS**: `string` = `"Technical Details"`
+
 ### TECHNICAL\_IMPLEMENTATION
 
 > **TECHNICAL\_IMPLEMENTATION**: `string` = `"Technical Implementation"`
 
 ### VALUE\_CREATION
 
-> **VALUE\_CREATION**: `string` = `"Value Creation"`
+> **VALUE\_CREATION**: `string` = `"Business Value & ROI"`

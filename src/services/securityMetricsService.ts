@@ -7,39 +7,55 @@ import {
 import logger from "../utils/logger";
 import { BaseService } from "./BaseService";
 
-// Add missing interface definitions
-interface ComponentMetrics {
-  component: CIAComponentType;
+/**
+ * Represents security metrics for a component
+ */
+export interface ComponentMetrics {
   level: SecurityLevel;
-  value: number;
-  percentage: string;
-  description: string;
-  capex: number;
-  opex: number;
-}
-
-interface ImpactMetrics {
-  securityLevel: SecurityLevel;
-  riskReduction: string;
-  description: string;
-  technical: string;
-  businessImpact: string;
-  uptime?: string;
-  rto?: string;
-  rpo?: string;
-  mttr?: string;
-  validationMethod?: string;
-  protectionMethod?: string;
-}
-
-interface SecurityMetrics {
   score: number;
-  maxScore: number;
-  percentage: string;
-  totalCapex: number;
-  totalOpex: number;
-  totalCost: number;
-  riskReduction: string;
+  description: string;
+  recommendations: string[];
+  // Additional properties
+  component?: CIAComponentType;
+  value?: number;
+  percentage?: string;
+  capex?: number;
+  opex?: number;
+}
+
+/**
+ * Represents impact metrics for analysis
+ */
+export interface ImpactMetrics {
+  financialImpact: string;
+  operationalImpact: string;
+  reputationalImpact: string;
+  complianceImpact: string;
+  // Additional properties
+  securityLevel?: SecurityLevel;
+  riskReduction?: string;
+  description?: string;
+  technical?: string;
+  businessImpact?: string;
+}
+
+/**
+ * Represents comprehensive security metrics
+ */
+export interface SecurityMetrics {
+  overallScore: number;
+  score: number; // Backwards compatibility alias for overallScore
+  availability: ComponentMetrics;
+  integrity: ComponentMetrics;
+  confidentiality: ComponentMetrics;
+  impactMetrics: ImpactMetrics;
+  // Additional properties returned by getSecurityMetrics
+  maxScore?: number;
+  percentage?: string;
+  totalCapex?: number;
+  totalOpex?: number;
+  totalCost?: number;
+  riskReduction?: string;
 }
 
 /**
@@ -202,13 +218,39 @@ export class SecurityMetricsService extends BaseService {
     );
 
     return {
-      score,
+      overallScore: score,
+      score, // Alias for backward compatibility
       maxScore: 100,
       percentage: `${score}%`,
       totalCapex,
       totalOpex,
       totalCost,
       riskReduction: `${riskReduction}%`,
+      // Add dummy values for required properties
+      availability: {
+        level: availabilityLevel,
+        score: this.getSecurityLevelValue(availabilityLevel) * 25,
+        description: this.getSecurityLevelDescription(availabilityLevel),
+        recommendations: [],
+      },
+      integrity: {
+        level: integrityLevel,
+        score: this.getSecurityLevelValue(integrityLevel) * 25,
+        description: this.getSecurityLevelDescription(integrityLevel),
+        recommendations: [],
+      },
+      confidentiality: {
+        level: confidentialityLevel,
+        score: this.getSecurityLevelValue(confidentialityLevel) * 25,
+        description: this.getSecurityLevelDescription(confidentialityLevel),
+        recommendations: [],
+      },
+      impactMetrics: {
+        financialImpact: "Not calculated",
+        operationalImpact: "Not calculated",
+        reputationalImpact: "Not calculated",
+        complianceImpact: "Not calculated",
+      },
     };
   }
 
@@ -235,6 +277,9 @@ export class SecurityMetricsService extends BaseService {
         details?.description || this.getSecurityLevelDescription(level),
       capex: details?.capex || 0,
       opex: details?.opex || 0,
+      // Add missing required properties
+      score: value * 25, // Convert to score out of 100
+      recommendations: details?.recommendations || [],
     };
   }
 
@@ -256,8 +301,15 @@ export class SecurityMetricsService extends BaseService {
     const result: Record<string, string> = {};
 
     Object.entries(metrics).forEach(([key, value]) => {
-      result[key] =
-        typeof value === "number" ? value.toString() : (value as string);
+      if (value === null || value === undefined) {
+        result[key] = "";
+      } else if (typeof value === "object") {
+        // Handle arrays and objects by JSON stringifying them
+        result[key] = JSON.stringify(value);
+      } else {
+        result[key] =
+          typeof value === "number" ? value.toString() : (value as string);
+      }
     });
 
     return result;
@@ -286,6 +338,11 @@ export class SecurityMetricsService extends BaseService {
         details?.description || this.getSecurityLevelDescription(level),
       technical: details?.technical || "",
       businessImpact: details?.businessImpact || "",
+      // Add missing required properties
+      financialImpact: "Impact not calculated",
+      operationalImpact: "Impact not calculated",
+      reputationalImpact: "Impact not calculated",
+      complianceImpact: "Impact not calculated",
     };
   }
 

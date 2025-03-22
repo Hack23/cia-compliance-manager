@@ -8,78 +8,34 @@
 
 > `const` **SECURITY\_SUMMARY\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:415](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/testIds.ts#L415)
+Defined in: [src/constants/testIds.ts:594](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/constants/testIds.ts#L594)
 
 ## Type declaration
 
-### AVAILABILITY\_LEVEL
+### AVAILABILITY\_IMPACT
 
-> **AVAILABILITY\_LEVEL**: `string` = `"availability-level"`
+> **AVAILABILITY\_IMPACT**: `string` = `"availability-impact"`
 
-### AVAILABILITY\_TECH\_HEADING
+### CONFIDENTIALITY\_IMPACT
 
-> **AVAILABILITY\_TECH\_HEADING**: `string` = `"availability-tech-heading"`
+> **CONFIDENTIALITY\_IMPACT**: `string` = `"confidentiality-impact"`
 
-### BUSINESS\_IMPACT\_SECTION
+### INTEGRITY\_IMPACT
 
-> **BUSINESS\_IMPACT\_SECTION**: `string` = `"business-impact-section"`
+> **INTEGRITY\_IMPACT**: `string` = `"integrity-impact"`
 
-### BUSINESS\_IMPACT\_TOGGLE
+### RISK\_LEVEL
 
-> **BUSINESS\_IMPACT\_TOGGLE**: `string` = `"business-impact-toggle"`
+> **RISK\_LEVEL**: `string` = `"risk-level"`
 
-### CONFIDENTIALITY\_LEVEL
+### SECURITY\_LEVEL\_BADGE
 
-> **CONFIDENTIALITY\_LEVEL**: `string` = `"confidentiality-level"`
+> **SECURITY\_LEVEL\_BADGE**: `string` = `"security-level-badge"`
 
-### CONFIDENTIALITY\_TECH\_HEADING
+### SECURITY\_LEVEL\_HEADING
 
-> **CONFIDENTIALITY\_TECH\_HEADING**: `string` = `"confidentiality-tech-heading"`
+> **SECURITY\_LEVEL\_HEADING**: `string` = `"security-level-heading"`
 
-### IMPLICATIONS
+### SECURITY\_SUMMARY\_WIDGET
 
-> **IMPLICATIONS**: `string` = `"implications"`
-
-### INTEGRITY\_LEVEL
-
-> **INTEGRITY\_LEVEL**: `string` = `"integrity-level"`
-
-### INTEGRITY\_TECH\_HEADING
-
-> **INTEGRITY\_TECH\_HEADING**: `string` = `"integrity-tech-heading"`
-
-### METRICS\_SECTION
-
-> **METRICS\_SECTION**: `string` = `"metrics-section"`
-
-### METRICS\_TOGGLE
-
-> **METRICS\_TOGGLE**: `string` = `"metrics-toggle"`
-
-### OVERALL\_LEVEL
-
-> **OVERALL\_LEVEL**: `string` = `"overall-level"`
-
-### SECURITY\_ICON
-
-> **SECURITY\_ICON**: `string` = `"security-icon"`
-
-### SECURITY\_RECOMMENDATION
-
-> **SECURITY\_RECOMMENDATION**: `string` = `"security-recommendation"`
-
-### SECURITY\_SUMMARY\_PREFIX
-
-> **SECURITY\_SUMMARY\_PREFIX**: `string` = `"security-summary"`
-
-### TECHNICAL\_DETAILS\_SECTION
-
-> **TECHNICAL\_DETAILS\_SECTION**: `string` = `"technical-details-section"`
-
-### TECHNICAL\_IMPLEMENTATION\_DETAILS
-
-> **TECHNICAL\_IMPLEMENTATION\_DETAILS**: `string` = `"technical-implementation-details"`
-
-### TECHNICAL\_SECTION\_TOGGLE
-
-> **TECHNICAL\_SECTION\_TOGGLE**: `string` = `"technical-section-toggle"`
+> **SECURITY\_SUMMARY\_WIDGET**: `string` = `"security-summary-widget"`

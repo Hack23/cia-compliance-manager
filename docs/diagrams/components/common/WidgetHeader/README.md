@@ -6,6 +6,8 @@
 
 # components/common/WidgetHeader
 
-## Functions
+## References
 
-- [default](functions/default.md)
+### default
+
+Renames and re-exports [WidgetHeader](../variables/WidgetHeader.md)

@@ -6,46 +6,30 @@
 
 # Interface: ROIMetrics
 
-Defined in: [src/types/cia-services.ts:4](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia-services.ts#L4)
+Defined in: [src/types/cia-services.ts:145](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/cia-services.ts#L145)
 
-ROI metrics interface
+Return on investment metrics
 
 ## Properties
-
-### breakEvenPeriod?
-
-> `optional` **breakEvenPeriod**: `string`
-
-Defined in: [src/types/cia-services.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia-services.ts#L8)
-
-***
 
 ### description
 
 > **description**: `string`
 
-Defined in: [src/types/cia-services.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia-services.ts#L6)
+Defined in: [src/types/cia-services.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/cia-services.ts#L148)
 
 ***
 
-### implementationCost?
+### percentage
 
-> `optional` **implementationCost**: `string`
+> **percentage**: `string`
 
-Defined in: [src/types/cia-services.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia-services.ts#L9)
-
-***
-
-### potentialSavings?
-
-> `optional` **potentialSavings**: `string`
-
-Defined in: [src/types/cia-services.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia-services.ts#L7)
+Defined in: [src/types/cia-services.ts:147](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/cia-services.ts#L147)
 
 ***
 
-### returnRate
+### value
 
-> **returnRate**: `string`
+> **value**: `string`
 
-Defined in: [src/types/cia-services.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia-services.ts#L5)
+Defined in: [src/types/cia-services.ts:146](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/cia-services.ts#L146)

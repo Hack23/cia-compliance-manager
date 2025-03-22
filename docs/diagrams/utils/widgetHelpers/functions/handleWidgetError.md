@@ -6,28 +6,16 @@
 
 # Function: handleWidgetError()
 
-> **handleWidgetError**(`error`, `testId`): `null` \| `Element`
+> **handleWidgetError**(`error`): `string`
 
-Defined in: [src/utils/widgetHelpers.tsx:355](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/utils/widgetHelpers.tsx#L355)
-
-Render an error message for widgets
+Defined in: [src/utils/widgetHelpers.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/utils/widgetHelpers.ts#L47)
 
 ## Parameters
 
 ### error
 
-Error object
-
-`null` | `Error`
-
-### testId
-
-`string`
-
-Test ID for the error message
+`undefined` | `null` | `Error`
 
 ## Returns
 
-`null` \| `Element`
-
-Error message JSX element or null if no error
+`string`

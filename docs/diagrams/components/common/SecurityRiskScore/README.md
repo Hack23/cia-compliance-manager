@@ -8,4 +8,10 @@
 
 ## Functions
 
-- [default](functions/default.md)
+- [SecurityRiskScore](functions/SecurityRiskScore.md)
+
+## References
+
+### default
+
+Renames and re-exports [SecurityRiskScore](functions/SecurityRiskScore.md)

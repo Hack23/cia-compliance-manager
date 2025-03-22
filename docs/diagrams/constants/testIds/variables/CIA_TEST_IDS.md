@@ -8,17 +8,13 @@
 
 > `const` **CIA\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/testIds.ts#L33)
+Defined in: [src/constants/testIds.ts:210](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/constants/testIds.ts#L210)
 
 ## Type declaration
 
 ### AVAILABILITY
 
 > **AVAILABILITY**: `string` = `"availability"`
-
-### AVAILABILITY\_BUSINESS\_IMPACT
-
-> **AVAILABILITY\_BUSINESS\_IMPACT**: `string` = `"availability-business-impact"`
 
 ### AVAILABILITY\_COLOR\_INDICATOR
 
@@ -32,6 +28,14 @@ Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-complian
 
 > **AVAILABILITY\_DESCRIPTION\_TEXT**: `string` = `"availability-description-text"`
 
+### AVAILABILITY\_DETAILS\_SECTION
+
+> **AVAILABILITY\_DETAILS\_SECTION**: `string` = `"availability-details-section"`
+
+### AVAILABILITY\_ICON
+
+> **AVAILABILITY\_ICON**: `string` = `"availability-icon"`
+
 ### AVAILABILITY\_KV
 
 > **AVAILABILITY\_KV**: `string` = `"availability-kv"`
@@ -39,10 +43,6 @@ Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-complian
 ### AVAILABILITY\_LABEL
 
 > **AVAILABILITY\_LABEL**: `string` = `"availability-label"`
-
-### AVAILABILITY\_LEVEL\_INDICATOR
-
-> **AVAILABILITY\_LEVEL\_INDICATOR**: `string` = `"availability-level-indicator"`
 
 ### AVAILABILITY\_SECTION
 
@@ -52,37 +52,9 @@ Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-complian
 
 > **AVAILABILITY\_SELECT**: `string` = `"availability-selector"`
 
-### AVAILABILITY\_SELECTED\_LEVEL
-
-> **AVAILABILITY\_SELECTED\_LEVEL**: `string` = `"availability-selected-level"`
-
-### AVAILABILITY\_TECHNICAL\_DETAILS
-
-> **AVAILABILITY\_TECHNICAL\_DETAILS**: `string` = `"availability-technical-details"`
-
-### AVAILABILITY\_TECHNICAL\_INFO
-
-> **AVAILABILITY\_TECHNICAL\_INFO**: `string` = `"availability-technical-info"`
-
-### AVAILABILITY\_TECHNICAL\_INFO\_BUTTON
-
-> **AVAILABILITY\_TECHNICAL\_INFO\_BUTTON**: `string` = `"availability-technical-info-button"`
-
-### AVAILABILITY\_TECHNICAL\_POPOVER
-
-> **AVAILABILITY\_TECHNICAL\_POPOVER**: `string` = `"availability-technical-popover"`
-
-### AVAILABILITY\_UPTIME\_BADGE
-
-> **AVAILABILITY\_UPTIME\_BADGE**: `string` = `"availability-uptime-badge"`
-
 ### CONFIDENTIALITY
 
 > **CONFIDENTIALITY**: `string` = `"confidentiality"`
-
-### CONFIDENTIALITY\_BUSINESS\_IMPACT
-
-> **CONFIDENTIALITY\_BUSINESS\_IMPACT**: `string` = `"confidentiality-business-impact"`
 
 ### CONFIDENTIALITY\_COLOR\_INDICATOR
 
@@ -96,6 +68,14 @@ Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-complian
 
 > **CONFIDENTIALITY\_DESCRIPTION\_TEXT**: `string` = `"confidentiality-description-text"`
 
+### CONFIDENTIALITY\_DETAILS\_SECTION
+
+> **CONFIDENTIALITY\_DETAILS\_SECTION**: `string` = `"confidentiality-details-section"`
+
+### CONFIDENTIALITY\_ICON
+
+> **CONFIDENTIALITY\_ICON**: `string` = `"confidentiality-icon"`
+
 ### CONFIDENTIALITY\_KV
 
 > **CONFIDENTIALITY\_KV**: `string` = `"confidentiality-kv"`
@@ -103,14 +83,6 @@ Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-complian
 ### CONFIDENTIALITY\_LABEL
 
 > **CONFIDENTIALITY\_LABEL**: `string` = `"confidentiality-label"`
-
-### CONFIDENTIALITY\_LEVEL\_INDICATOR
-
-> **CONFIDENTIALITY\_LEVEL\_INDICATOR**: `string` = `"confidentiality-level-indicator"`
-
-### CONFIDENTIALITY\_PROTECTION\_BADGE
-
-> **CONFIDENTIALITY\_PROTECTION\_BADGE**: `string` = `"confidentiality-protection-badge"`
 
 ### CONFIDENTIALITY\_SECTION
 
@@ -120,25 +92,9 @@ Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-complian
 
 > **CONFIDENTIALITY\_SELECT**: `string` = `"confidentiality-selector"`
 
-### CONFIDENTIALITY\_SELECTED\_LEVEL
+### CONTEXT\_INFO
 
-> **CONFIDENTIALITY\_SELECTED\_LEVEL**: `string` = `"confidentiality-selected-level"`
-
-### CONFIDENTIALITY\_TECHNICAL\_DETAILS
-
-> **CONFIDENTIALITY\_TECHNICAL\_DETAILS**: `string` = `"confidentiality-technical-details"`
-
-### CONFIDENTIALITY\_TECHNICAL\_INFO
-
-> **CONFIDENTIALITY\_TECHNICAL\_INFO**: `string` = `"confidentiality-technical-info"`
-
-### CONFIDENTIALITY\_TECHNICAL\_INFO\_BUTTON
-
-> **CONFIDENTIALITY\_TECHNICAL\_INFO\_BUTTON**: `string` = `"confidentiality-technical-info-button"`
-
-### CONFIDENTIALITY\_TECHNICAL\_POPOVER
-
-> **CONFIDENTIALITY\_TECHNICAL\_POPOVER**: `string` = `"confidentiality-technical-popover"`
+> **CONTEXT\_INFO**: `string` = `"context-info"`
 
 ### CURRENT\_AVAILABILITY
 
@@ -152,13 +108,13 @@ Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-complian
 
 > **CURRENT\_INTEGRITY**: `string` = `"current-integrity"`
 
+### DISPLAYED\_VALUE
+
+> **DISPLAYED\_VALUE**: `string` = `"displayed-value"`
+
 ### INTEGRITY
 
 > **INTEGRITY**: `string` = `"integrity"`
-
-### INTEGRITY\_BUSINESS\_IMPACT
-
-> **INTEGRITY\_BUSINESS\_IMPACT**: `string` = `"integrity-business-impact"`
 
 ### INTEGRITY\_COLOR\_INDICATOR
 
@@ -172,6 +128,14 @@ Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-complian
 
 > **INTEGRITY\_DESCRIPTION\_TEXT**: `string` = `"integrity-description-text"`
 
+### INTEGRITY\_DETAILS\_SECTION
+
+> **INTEGRITY\_DETAILS\_SECTION**: `string` = `"integrity-details-section"`
+
+### INTEGRITY\_ICON
+
+> **INTEGRITY\_ICON**: `string` = `"integrity-icon"`
+
 ### INTEGRITY\_KV
 
 > **INTEGRITY\_KV**: `string` = `"integrity-kv"`
@@ -179,10 +143,6 @@ Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-complian
 ### INTEGRITY\_LABEL
 
 > **INTEGRITY\_LABEL**: `string` = `"integrity-label"`
-
-### INTEGRITY\_LEVEL\_INDICATOR
-
-> **INTEGRITY\_LEVEL\_INDICATOR**: `string` = `"integrity-level-indicator"`
 
 ### INTEGRITY\_SECTION
 
@@ -192,34 +152,38 @@ Defined in: [src/constants/testIds.ts:33](https://github.com/Hack23/cia-complian
 
 > **INTEGRITY\_SELECT**: `string` = `"integrity-selector"`
 
-### INTEGRITY\_SELECTED\_LEVEL
+### SECURITY\_ICON
 
-> **INTEGRITY\_SELECTED\_LEVEL**: `string` = `"integrity-selected-level"`
-
-### INTEGRITY\_TECHNICAL\_DETAILS
-
-> **INTEGRITY\_TECHNICAL\_DETAILS**: `string` = `"integrity-technical-details"`
-
-### INTEGRITY\_TECHNICAL\_INFO
-
-> **INTEGRITY\_TECHNICAL\_INFO**: `string` = `"integrity-technical-info"`
-
-### INTEGRITY\_TECHNICAL\_INFO\_BUTTON
-
-> **INTEGRITY\_TECHNICAL\_INFO\_BUTTON**: `string` = `"integrity-technical-info-button"`
-
-### INTEGRITY\_TECHNICAL\_POPOVER
-
-> **INTEGRITY\_TECHNICAL\_POPOVER**: `string` = `"integrity-technical-popover"`
-
-### INTEGRITY\_VALIDATION\_BADGE
-
-> **INTEGRITY\_VALIDATION\_BADGE**: `string` = `"integrity-validation-badge"`
+> **SECURITY\_ICON**: `string` = `"security-icon"`
 
 ### SECURITY\_LEVEL\_CONTROLS
 
 > **SECURITY\_LEVEL\_CONTROLS**: `string` = `"security-level-controls"`
 
+### SECURITY\_LEVEL\_DISPLAY
+
+> **SECURITY\_LEVEL\_DISPLAY**: `string` = `"security-level-display"`
+
+### SECURITY\_LEVEL\_ICON
+
+> **SECURITY\_LEVEL\_ICON**: `string` = `"security-level-icon"`
+
+### SECURITY\_LEVEL\_KV
+
+> **SECURITY\_LEVEL\_KV**: `string` = `"security-level-kv"`
+
 ### SECURITY\_LEVEL\_SELECTOR
 
 > **SECURITY\_LEVEL\_SELECTOR**: `string` = `"security-level-selector"`
+
+### TAB\_AVAILABILITY
+
+> **TAB\_AVAILABILITY**: `string` = `"tab-availability"`
+
+### TAB\_CONFIDENTIALITY
+
+> **TAB\_CONFIDENTIALITY**: `string` = `"tab-confidentiality"`
+
+### TAB\_INTEGRITY
+
+> **TAB\_INTEGRITY**: `string` = `"tab-integrity"`

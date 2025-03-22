@@ -8,65 +8,61 @@
 
 > `const` **COMMON\_COMPONENT\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:350](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/testIds.ts#L350)
+Defined in: [src/constants/testIds.ts:543](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/constants/testIds.ts#L543)
 
 ## Type declaration
-
-### AVAILABILITY\_KV
-
-> **AVAILABILITY\_KV**: `string` = `"availability-kv"`
-
-### CONFIDENTIALITY\_KV
-
-> **CONFIDENTIALITY\_KV**: `string` = `"confidentiality-kv"`
 
 ### CONTEXT\_INFO
 
 > **CONTEXT\_INFO**: `string` = `"context-info"`
 
-### CURRENT\_AVAILABILITY
+### EMPTY\_STATE
 
-> **CURRENT\_AVAILABILITY**: `string` = `"current-availability"`
+> **EMPTY\_STATE**: `string` = `"empty-state"`
 
-### CURRENT\_CONFIDENTIALITY
+### ERROR
 
-> **CURRENT\_CONFIDENTIALITY**: `string` = `"current-confidentiality"`
+> **ERROR**: `string` = `"error-message"`
 
-### CURRENT\_INTEGRITY
+### INFO
 
-> **CURRENT\_INTEGRITY**: `string` = `"current-integrity"`
+> **INFO**: `string` = `"info-message"`
 
-### DISPLAYED\_VALUE
+### KEY\_VALUE\_GROUP
 
-> **DISPLAYED\_VALUE**: `string` = `"displayed-value"`
+> **KEY\_VALUE\_GROUP**: `string` = `"key-value-group"`
 
-### INTEGRITY\_KV
+### KEY\_VALUE\_KEY
 
-> **INTEGRITY\_KV**: `string` = `"integrity-kv"`
+> **KEY\_VALUE\_KEY**: `string` = `"key-value-key"`
 
 ### KEY\_VALUE\_PAIR
 
 > **KEY\_VALUE\_PAIR**: `string` = `"key-value-pair"`
 
-### KV\_LABEL
+### KEY\_VALUE\_VALUE
 
-> **KV\_LABEL**: `string` = `"kv-label"`
+> **KEY\_VALUE\_VALUE**: `string` = `"key-value-value"`
 
-### KV\_VALUE
+### LOADING
 
-> **KV\_VALUE**: `string` = `"kv-value"`
+> **LOADING**: `string` = `"loading-indicator"`
 
 ### METRICS\_CARD
 
 > **METRICS\_CARD**: `string` = `"metrics-card"`
 
+### METRICS\_CARD\_ICON
+
+> **METRICS\_CARD\_ICON**: `string` = `"metrics-card-icon"`
+
+### METRICS\_CARD\_LABEL
+
+> **METRICS\_CARD\_LABEL**: `string` = `"metrics-card-label"`
+
 ### METRICS\_CARD\_TITLE
 
 > **METRICS\_CARD\_TITLE**: `string` = `"metrics-card-title"`
-
-### METRICS\_CARD\_TREND
-
-> **METRICS\_CARD\_TREND**: `string` = `"metrics-card-trend"`
 
 ### METRICS\_CARD\_VALUE
 
@@ -76,6 +72,30 @@ Defined in: [src/constants/testIds.ts:350](https://github.com/Hack23/cia-complia
 
 > **STATUS\_BADGE**: `string` = `"status-badge"`
 
+### SUCCESS
+
+> **SUCCESS**: `string` = `"success-message"`
+
 ### VALUE\_DISPLAY
 
 > **VALUE\_DISPLAY**: `string` = `"value-display"`
+
+### WARNING
+
+> **WARNING**: `string` = `"warning-message"`
+
+### WIDGET\_CONTAINER
+
+> **WIDGET\_CONTAINER**: `string` = `"widget-container"`
+
+### WIDGET\_CONTENT
+
+> **WIDGET\_CONTENT**: `string` = `"widget-content"`
+
+### WIDGET\_HEADER
+
+> **WIDGET\_HEADER**: `string` = `"widget-header"`
+
+### WIDGET\_TITLE
+
+> **WIDGET\_TITLE**: `string` = `"widget-title"`

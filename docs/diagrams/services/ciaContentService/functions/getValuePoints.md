@@ -8,9 +8,7 @@
 
 > **getValuePoints**(`level`): `string`[]
 
-Defined in: [src/services/ciaContentService.ts:1392](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/services/ciaContentService.ts#L1392)
-
-Get value points for a security level
+Defined in: [src/services/ciaContentService.ts:1163](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/services/ciaContentService.ts#L1163)
 
 ## Parameters
 

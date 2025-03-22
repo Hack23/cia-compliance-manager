@@ -6,13 +6,13 @@
 
 # Interface: CIAImpactSummaryWidgetProps
 
-Defined in: [src/types/widgets.ts:238](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L238)
+Defined in: [src/types/widgets.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/widgets.ts#L186)
 
-Base properties for all widgets
+Props for the CIA Impact Summary Widget
 
 ## Extends
 
-- [`WidgetBaseProps`](WidgetBaseProps.md)
+- [`WidgetBaseProps`](WidgetBaseProps.md).[`SecurityLevelWidgetProps`](SecurityLevelWidgetProps.md)
 
 ## Properties
 
@@ -20,11 +20,11 @@ Base properties for all widgets
 
 > **availabilityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:239](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L239)
+Defined in: [src/types/widgets.ts:187](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/widgets.ts#L187)
 
-#### Overrides
+#### Inherited from
 
-[`WidgetBaseProps`](WidgetBaseProps.md).[`availabilityLevel`](WidgetBaseProps.md#availabilitylevel)
+[`SecurityLevelWidgetProps`](SecurityLevelWidgetProps.md).[`availabilityLevel`](SecurityLevelWidgetProps.md#availabilitylevel)
 
 ***
 
@@ -32,11 +32,13 @@ Defined in: [src/types/widgets.ts:239](https://github.com/Hack23/cia-compliance-
 
 > `optional` **className**: `string`
 
-Defined in: [src/types/widgets.ts:242](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L242)
+Defined in: [src/types/widgets.ts:87](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/widgets.ts#L87)
 
-#### Overrides
+Optional CSS class name
 
-[`WidgetBaseProps`](WidgetBaseProps.md).[`className`](WidgetBaseProps.md#classname)
+#### Inherited from
+
+[`SecurityLevelWidgetProps`](SecurityLevelWidgetProps.md).[`className`](SecurityLevelWidgetProps.md#classname)
 
 ***
 
@@ -44,11 +46,23 @@ Defined in: [src/types/widgets.ts:242](https://github.com/Hack23/cia-compliance-
 
 > **confidentialityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:241](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L241)
+Defined in: [src/types/widgets.ts:189](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/widgets.ts#L189)
 
-#### Overrides
+#### Inherited from
 
-[`WidgetBaseProps`](WidgetBaseProps.md).[`confidentialityLevel`](WidgetBaseProps.md#confidentialitylevel)
+[`SecurityLevelWidgetProps`](SecurityLevelWidgetProps.md).[`confidentialityLevel`](SecurityLevelWidgetProps.md#confidentialitylevel)
+
+***
+
+### disabled?
+
+> `optional` **disabled**: `boolean`
+
+Defined in: [src/types/widgets.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/widgets.ts#L114)
+
+#### Inherited from
+
+[`SecurityLevelWidgetProps`](SecurityLevelWidgetProps.md).[`disabled`](SecurityLevelWidgetProps.md#disabled)
 
 ***
 
@@ -56,23 +70,59 @@ Defined in: [src/types/widgets.ts:241](https://github.com/Hack23/cia-compliance-
 
 > **integrityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:240](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L240)
+Defined in: [src/types/widgets.ts:188](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/widgets.ts#L188)
 
-#### Overrides
+#### Inherited from
 
-[`WidgetBaseProps`](WidgetBaseProps.md).[`integrityLevel`](WidgetBaseProps.md#integritylevel)
+[`SecurityLevelWidgetProps`](SecurityLevelWidgetProps.md).[`integrityLevel`](SecurityLevelWidgetProps.md#integritylevel)
+
+***
+
+### onLevelChange()?
+
+> `optional` **onLevelChange**: (`component`, `level`) => `void`
+
+Defined in: [src/types/widgets.ts:110](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/widgets.ts#L110)
+
+#### Parameters
+
+##### component
+
+`"confidentiality"` | `"integrity"` | `"availability"`
+
+##### level
+
+[`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+[`SecurityLevelWidgetProps`](SecurityLevelWidgetProps.md).[`onLevelChange`](SecurityLevelWidgetProps.md#onlevelchange)
 
 ***
 
 ### securityLevel?
 
-> `optional` **securityLevel**: `string`
+> `optional` **securityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/widgets.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L15)
+Defined in: [src/types/widgets.ts:97](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/widgets.ts#L97)
+
+Optional security level for widgets that only need one level
 
 #### Inherited from
 
-[`WidgetBaseProps`](WidgetBaseProps.md).[`securityLevel`](WidgetBaseProps.md#securitylevel)
+[`SecurityLevelWidgetProps`](SecurityLevelWidgetProps.md).[`securityLevel`](SecurityLevelWidgetProps.md#securitylevel)
+
+***
+
+### showDetails?
+
+> `optional` **showDetails**: `boolean`
+
+Defined in: [src/types/widgets.ts:236](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/widgets.ts#L236)
 
 ***
 
@@ -80,10 +130,10 @@ Defined in: [src/types/widgets.ts:15](https://github.com/Hack23/cia-compliance-m
 
 > `optional` **testId**: `string`
 
-Defined in: [src/types/widgets.ts:243](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/widgets.ts#L243)
+Defined in: [src/types/widgets.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/widgets.ts#L92)
 
-Test ID for component selection in tests
+Optional test ID for testing
 
-#### Overrides
+#### Inherited from
 
-[`WidgetBaseProps`](WidgetBaseProps.md).[`testId`](WidgetBaseProps.md#testid)
+[`SecurityLevelWidgetProps`](SecurityLevelWidgetProps.md).[`testId`](SecurityLevelWidgetProps.md#testid)

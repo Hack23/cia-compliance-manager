@@ -6,6 +6,8 @@
 
 # components/charts/RadarChart
 
-## Functions
+## References
 
-- [default](functions/default.md)
+### default
+
+Renames and re-exports [RadarChart](../variables/RadarChart.md)

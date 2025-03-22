@@ -6,6 +6,8 @@
 
 # application/CIAClassificationApp
 
-## Functions
+## References
 
-- [default](functions/default.md)
+### default
+
+Renames and re-exports [CIAClassificationApp](../variables/CIAClassificationApp.md)

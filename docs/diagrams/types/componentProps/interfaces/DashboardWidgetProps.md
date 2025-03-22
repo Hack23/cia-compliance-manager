@@ -6,7 +6,7 @@
 
 # Interface: DashboardWidgetProps
 
-Defined in: [src/types/componentProps.tsx:149](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L149)
+Defined in: [src/types/componentProps.ts:199](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L199)
 
 Props for the DashboardWidget component that displays widgets within the dashboard.
 
@@ -16,7 +16,7 @@ Props for the DashboardWidget component that displays widgets within the dashboa
 
 > **component**: `ComponentType`\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [src/types/componentProps.tsx:155](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L155)
+Defined in: [src/types/componentProps.ts:205](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L205)
 
 Widget component
 
@@ -26,7 +26,7 @@ Widget component
 
 > **id**: `string`
 
-Defined in: [src/types/componentProps.tsx:151](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L151)
+Defined in: [src/types/componentProps.ts:201](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L201)
 
 Widget ID
 
@@ -36,7 +36,7 @@ Widget ID
 
 > `optional` **position**: `number`
 
-Defined in: [src/types/componentProps.tsx:159](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L159)
+Defined in: [src/types/componentProps.ts:209](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L209)
 
 Optional position
 
@@ -46,7 +46,7 @@ Optional position
 
 > `optional` **props**: `Record`\<`string`, `unknown`\>
 
-Defined in: [src/types/componentProps.tsx:157](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L157)
+Defined in: [src/types/componentProps.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L207)
 
 Widget props
 
@@ -56,7 +56,7 @@ Widget props
 
 > `optional` **size**: `"small"` \| `"medium"` \| `"large"` \| `"full"`
 
-Defined in: [src/types/componentProps.tsx:161](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L161)
+Defined in: [src/types/componentProps.ts:211](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L211)
 
 Widget size
 
@@ -66,6 +66,6 @@ Widget size
 
 > **title**: `string`
 
-Defined in: [src/types/componentProps.tsx:153](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/componentProps.tsx#L153)
+Defined in: [src/types/componentProps.ts:203](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/componentProps.ts#L203)
 
 Widget title

@@ -6,10 +6,12 @@
 
 # components/common/SecurityLevelSummaryItem
 
-## Interfaces
+## Variables
 
-- [SecurityLevelSummaryItemProps](interfaces/SecurityLevelSummaryItemProps.md)
+- [SecurityLevelSummaryItem](variables/SecurityLevelSummaryItem.md)
 
-## Functions
+## References
 
-- [default](functions/default.md)
+### default
+
+Renames and re-exports [SecurityLevelSummaryItem](variables/SecurityLevelSummaryItem.md)

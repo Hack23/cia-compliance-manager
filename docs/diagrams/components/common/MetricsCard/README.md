@@ -6,10 +6,12 @@
 
 # components/common/MetricsCard
 
-## Other
+## Type Aliases
 
-- [MetricsCardProps](interfaces/MetricsCardProps.md)
+- [MetricsCardVariant](type-aliases/MetricsCardVariant.md)
 
-## UI Components
+## References
 
-- [default](functions/default.md)
+### default
+
+Renames and re-exports [MetricsCard](../variables/MetricsCard.md)

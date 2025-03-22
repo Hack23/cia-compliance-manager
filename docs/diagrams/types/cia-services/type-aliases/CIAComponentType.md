@@ -6,8 +6,8 @@
 
 # Type Alias: CIAComponentType
 
-> **CIAComponentType**: `"availability"` \| `"integrity"` \| `"confidentiality"`
+> **CIAComponentType** = `"confidentiality"` \| `"integrity"` \| `"availability"`
 
-Defined in: [src/types/cia-services.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia-services.ts#L78)
+Defined in: [src/types/cia-services.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/cia-services.ts#L20)
 
-Component type for CIA triad
+Type representing CIA component types

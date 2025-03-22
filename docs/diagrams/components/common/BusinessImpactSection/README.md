@@ -6,6 +6,8 @@
 
 # components/common/BusinessImpactSection
 
-## Functions
+## References
 
-- [default](functions/default.md)
+### default
+
+Renames and re-exports [BusinessImpactSection](../variables/BusinessImpactSection.md)

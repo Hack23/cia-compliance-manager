@@ -8,9 +8,9 @@
 
 > **getSecurityLevelHexColor**(`level`): `string`
 
-Defined in: [src/utils/colorUtils.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/utils/colorUtils.ts#L82)
+Defined in: [src/utils/colorUtils.ts:118](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/utils/colorUtils.ts#L118)
 
-Gets hex color values for a security level based on current theme
+Get hex color for a security level based on current theme
 
 ## Parameters
 

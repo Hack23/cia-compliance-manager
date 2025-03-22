@@ -6,22 +6,22 @@
 
 # Function: formatSecurityLevel()
 
-> **formatSecurityLevel**(`level`): `string`
+> **formatSecurityLevel**(`level`?): `string`
 
-Defined in: [src/types/cia.ts:138](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L138)
+Defined in: [src/types/cia.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/cia.ts#L58)
 
-Format security level for display
+Format a security level string to ensure proper capitalization
 
 ## Parameters
 
-### level
+### level?
 
-The security level to format
+`string`
 
-`undefined` | `string`
+Security level string to format
 
 ## Returns
 
 `string`
 
-The formatted security level string
+Formatted security level string

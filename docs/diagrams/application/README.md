@@ -22,8 +22,6 @@ managing state and coordinating between UI components and services.
 The application implements proper state management for security levels and ensures
 consistent application of security controls across the CIA triad.
 
-## References
+## Variables
 
-### CIAClassificationApp
-
-Renames and re-exports [default](CIAClassificationApp/functions/default.md)
+- [CIAClassificationApp](variables/CIAClassificationApp.md)

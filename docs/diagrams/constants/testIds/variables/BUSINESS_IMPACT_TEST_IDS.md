@@ -8,7 +8,7 @@
 
 > `const` **BUSINESS\_IMPACT\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:173](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/testIds.ts#L173)
+Defined in: [src/constants/testIds.ts:362](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/constants/testIds.ts#L362)
 
 ## Type declaration
 
@@ -27,6 +27,10 @@ Defined in: [src/constants/testIds.ts:173](https://github.com/Hack23/cia-complia
 ### BUSINESS\_IMPACT\_ANALYSIS\_PREFIX
 
 > **BUSINESS\_IMPACT\_ANALYSIS\_PREFIX**: `string` = `"business-impact-analysis"`
+
+### BUSINESS\_IMPACT\_ANALYSIS\_WIDGET
+
+> **BUSINESS\_IMPACT\_ANALYSIS\_WIDGET**: `string` = `"business-impact-analysis-widget"`
 
 ### BUSINESS\_IMPACT\_PREFIX
 
@@ -64,6 +68,14 @@ Defined in: [src/constants/testIds.ts:173](https://github.com/Hack23/cia-complia
 
 > **IMPACT\_ANALYSIS\_PREFIX**: `string` = `"impact-analysis"`
 
+### IMPACT\_CATEGORY
+
+> **IMPACT\_CATEGORY**: `string` = `"impact-category"`
+
+### IMPACT\_DESCRIPTION
+
+> **IMPACT\_DESCRIPTION**: `string` = `"impact-description"`
+
 ### IMPACT\_DESCRIPTION\_PREFIX
 
 > **IMPACT\_DESCRIPTION\_PREFIX**: `string` = `"impact-description"`
@@ -79,6 +91,10 @@ Defined in: [src/constants/testIds.ts:173](https://github.com/Hack23/cia-complia
 ### IMPACT\_METRICS\_SECTION
 
 > **IMPACT\_METRICS\_SECTION**: `string` = `"impact-metrics-section"`
+
+### IMPACT\_SUMMARY
+
+> **IMPACT\_SUMMARY**: `string` = `"impact-summary"`
 
 ### MEAN\_RECOVERY\_TIME
 
@@ -119,6 +135,10 @@ Defined in: [src/constants/testIds.ts:173](https://github.com/Hack23/cia-complia
 ### REVENUE\_LOSS\_KV
 
 > **REVENUE\_LOSS\_KV**: `string` = `"revenue-loss-kv"`
+
+### RISK\_LEVEL
+
+> **RISK\_LEVEL**: `string` = `"risk-level"`
 
 ### STRATEGIC\_IMPACT\_SECTION
 

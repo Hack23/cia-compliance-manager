@@ -14,10 +14,10 @@ This module exports components for selecting and displaying security levels.
 
 ### SecurityLevelSelector
 
-Renames and re-exports [default](SecurityLevelSelector/functions/default.md)
+Re-exports [SecurityLevelSelector](SecurityLevelSelector/variables/SecurityLevelSelector.md)
 
 ***
 
 ### Selection
 
-Renames and re-exports [default](Selection/functions/default.md)
+Re-exports [Selection](Selection/variables/Selection.md)

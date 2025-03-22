@@ -10,8 +10,13 @@
 
 - [BusinessConsideration](interfaces/BusinessConsideration.md)
 - [BusinessConsiderations](interfaces/BusinessConsiderations.md)
+- [BusinessImpactDetails](interfaces/BusinessImpactDetails.md)
 - [BusinessImpactIcons](interfaces/BusinessImpactIcons.md)
 - [BusinessKeyBenefits](interfaces/BusinessKeyBenefits.md)
+- [BusinessROIEstimates](interfaces/BusinessROIEstimates.md)
+- [BusinessTimeToValue](interfaces/BusinessTimeToValue.md)
+- [BusinessValueMetric](interfaces/BusinessValueMetric.md)
+- [BusinessValueMetrics](interfaces/BusinessValueMetrics.md)
 
 ## Type Aliases
 
@@ -20,4 +25,4 @@
 ## Variables
 
 - [BUSINESS\_CONSIDERATIONS](variables/BUSINESS_CONSIDERATIONS.md)
-- [BusinessKeyBenefits](variables/BusinessKeyBenefits.md)
+- [BUSINESS\_KEY\_BENEFITS](variables/BUSINESS_KEY_BENEFITS.md)

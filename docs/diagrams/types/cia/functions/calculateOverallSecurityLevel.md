@@ -8,9 +8,9 @@
 
 > **calculateOverallSecurityLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [src/types/cia.ts:209](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/types/cia.ts#L209)
+Defined in: [src/types/cia.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/types/cia.ts#L134)
 
-Calculate the overall security level based on CIA components
+Calculate overall security level from individual component levels
 
 ## Parameters
 
@@ -18,22 +18,22 @@ Calculate the overall security level based on CIA components
 
 [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-The availability security level
+Availability security level
 
 ### integrityLevel
 
 [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-The integrity security level
+Integrity security level
 
 ### confidentialityLevel
 
 [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-The confidentiality security level
+Confidentiality security level
 
 ## Returns
 
 [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-The calculated overall security level
+Overall security level

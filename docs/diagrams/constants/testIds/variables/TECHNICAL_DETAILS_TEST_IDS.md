@@ -8,7 +8,7 @@
 
 > `const` **TECHNICAL\_DETAILS\_TEST\_IDS**: `object`
 
-Defined in: [src/constants/testIds.ts:436](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/testIds.ts#L436)
+Defined in: [src/constants/testIds.ts:664](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/constants/testIds.ts#L664)
 
 ## Type declaration
 
@@ -32,6 +32,26 @@ Defined in: [src/constants/testIds.ts:436](https://github.com/Hack23/cia-complia
 
 > **DEVELOPMENT\_EFFORT**: `string` = `"development-effort"`
 
+### EXPERTISE\_LEVEL
+
+> **EXPERTISE\_LEVEL**: `string` = `"expertise-level"`
+
+### IMPLEMENTATION\_COMPLEXITY
+
+> **IMPLEMENTATION\_COMPLEXITY**: `string` = `"implementation-complexity"`
+
+### IMPLEMENTATION\_EFFORT
+
+> **IMPLEMENTATION\_EFFORT**: `string` = `"implementation-effort"`
+
+### IMPLEMENTATION\_STEPS
+
+> **IMPLEMENTATION\_STEPS**: `string` = `"implementation-steps"`
+
+### IMPLEMENTATION\_TIME
+
+> **IMPLEMENTATION\_TIME**: `string` = `"implementation-time"`
+
 ### INTEGRITY\_DETAILS\_SECTION
 
 > **INTEGRITY\_DETAILS\_SECTION**: `string` = `"technical-details-integrity-details"`
@@ -40,9 +60,17 @@ Defined in: [src/constants/testIds.ts:436](https://github.com/Hack23/cia-complia
 
 > **INTEGRITY\_SECTION**: `string` = `"technical-details-integrity"`
 
+### MAINTENANCE\_EFFORT
+
+> **MAINTENANCE\_EFFORT**: `string` = `"maintenance-effort"`
+
 ### MAINTENANCE\_LEVEL
 
 > **MAINTENANCE\_LEVEL**: `string` = `"maintenance-level"`
+
+### RECOVERY\_METRICS
+
+> **RECOVERY\_METRICS**: `string` = `"recovery-metrics"`
 
 ### REQUIRED\_EXPERTISE
 

@@ -6,6 +6,6 @@
 
 # Type Alias: StatusBadgeVariant
 
-> **StatusBadgeVariant**: `"neutral"` \| `"success"` \| `"warning"` \| `"error"` \| `"info"` \| `"purple"`
+> **StatusBadgeVariant** = [`StatusType`](StatusType.md)
 
-Defined in: [src/components/common/StatusBadge.tsx:4](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/components/common/StatusBadge.tsx#L4)
+Defined in: [src/components/common/StatusBadge.tsx:13](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/components/common/StatusBadge.tsx#L13)

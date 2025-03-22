@@ -6,22 +6,22 @@
 
 # Function: formatSecurityLevel()
 
-> **formatSecurityLevel**(`level`?): `string`
+> **formatSecurityLevel**(`level`): `string`
 
-Defined in: [src/utils/widgetHelpers.tsx:192](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/utils/widgetHelpers.tsx#L192)
+Defined in: [src/utils/widgetHelpers.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/utils/widgetHelpers.ts#L11)
 
-Format security level string for display
+Format security level string to the standardized format
 
 ## Parameters
 
-### level?
+### level
 
-`string`
+Security level string to format
 
-Security level string that might be in any case format
+`undefined` | `null` | `string`
 
 ## Returns
 
 `string`
 
-Properly formatted security level
+Formatted security level

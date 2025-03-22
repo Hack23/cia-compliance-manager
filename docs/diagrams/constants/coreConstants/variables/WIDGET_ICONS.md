@@ -8,7 +8,7 @@
 
 > `const` **WIDGET\_ICONS**: `object`
 
-Defined in: [src/constants/coreConstants.ts:4](https://github.com/Hack23/cia-compliance-manager/blob/eca22610f41e5f6b6c0cece88769b1ffbe9db4bd/src/constants/coreConstants.ts#L4)
+Defined in: [src/constants/coreConstants.ts:4](https://github.com/Hack23/cia-compliance-manager/blob/3ae0301247f765ba03c8c0fe645db4718bb8af76/src/constants/coreConstants.ts#L4)
 
 ## Type declaration
 
@@ -18,11 +18,15 @@ Defined in: [src/constants/coreConstants.ts:4](https://github.com/Hack23/cia-com
 
 ### BUSINESS\_IMPACT
 
-> **BUSINESS\_IMPACT**: `string` = `"🏢"`
+> **BUSINESS\_IMPACT**: `string` = `"💼"`
+
+### CIA\_IMPACT\_SUMMARY
+
+> **CIA\_IMPACT\_SUMMARY**: `string` = `"🧩"`
 
 ### COMPLIANCE\_STATUS
 
-> **COMPLIANCE\_STATUS**: `string` = `"✓"`
+> **COMPLIANCE\_STATUS**: `string` = `"⚖️"`
 
 ### CONFIDENTIALITY\_IMPACT
 
@@ -34,11 +38,11 @@ Defined in: [src/constants/coreConstants.ts:4](https://github.com/Hack23/cia-com
 
 ### INTEGRITY\_IMPACT
 
-> **INTEGRITY\_IMPACT**: `string` = `"🛡️"`
+> **INTEGRITY\_IMPACT**: `string` = `"✓"`
 
 ### SECURITY\_LEVEL
 
-> **SECURITY\_LEVEL**: `string` = `"🔐"`
+> **SECURITY\_LEVEL**: `string` = `"🛡️"`
 
 ### SECURITY\_RESOURCES
 
@@ -46,11 +50,15 @@ Defined in: [src/constants/coreConstants.ts:4](https://github.com/Hack23/cia-com
 
 ### SECURITY\_SUMMARY
 
-> **SECURITY\_SUMMARY**: `string` = `"📊"`
+> **SECURITY\_SUMMARY**: `string` = `"🔐"`
 
 ### SECURITY\_VISUALIZATION
 
 > **SECURITY\_VISUALIZATION**: `string` = `"📊"`
+
+### TECHNICAL\_DETAILS
+
+> **TECHNICAL\_DETAILS**: `string` = `"⚙️"`
 
 ### TECHNICAL\_IMPLEMENTATION
 

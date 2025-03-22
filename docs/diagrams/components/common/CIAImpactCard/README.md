@@ -6,6 +6,8 @@
 
 # components/common/CIAImpactCard
 
-## Functions
+## References
 
-- [default](functions/default.md)
+### default
+
+Renames and re-exports [CIAImpactCard](../variables/CIAImpactCard.md)
