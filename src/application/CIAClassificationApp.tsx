@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 // Import widgets directly instead of Dashboard
+import BusinessImpactAnalysisWidget from "../components/widgets/assessmentcenter/BusinessImpactAnalysisWidget";
 import SecurityLevelWidget from "../components/widgets/assessmentcenter/SecurityLevelWidget";
 import SecuritySummaryWidget from "../components/widgets/assessmentcenter/SecuritySummaryWidget";
-import BusinessImpactAnalysisWidget from "../components/widgets/businessvalue/BusinessImpactAnalysisWidget";
 import ComplianceStatusWidget from "../components/widgets/businessvalue/ComplianceStatusWidget";
 import CostEstimationWidget from "../components/widgets/businessvalue/CostEstimationWidget";
 import ValueCreationWidget from "../components/widgets/businessvalue/ValueCreationWidget";

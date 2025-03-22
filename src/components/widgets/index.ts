@@ -11,7 +11,7 @@ export { default as SecurityLevelWidget } from "./assessmentcenter/SecurityLevel
 export { default as SecuritySummaryWidget } from "./assessmentcenter/SecuritySummaryWidget";
 
 // Business Value Widgets
-export { default as BusinessImpactAnalysisWidget } from "./businessvalue/BusinessImpactAnalysisWidget";
+export { default as BusinessImpactAnalysisWidget } from "./assessmentcenter/BusinessImpactAnalysisWidget";
 export { default as ComplianceStatusWidget } from "./businessvalue/ComplianceStatusWidget";
 export { default as CostEstimationWidget } from "./businessvalue/CostEstimationWidget";
 export { default as ValueCreationWidget } from "./businessvalue/ValueCreationWidget";

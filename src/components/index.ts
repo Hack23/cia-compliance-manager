@@ -7,9 +7,9 @@
  */
 
 // Widget Components - Keep these since they are used in the simplified app
+export { default as BusinessImpactAnalysisWidget } from "./widgets/assessmentcenter/BusinessImpactAnalysisWidget";
 export { default as SecurityLevelWidget } from "./widgets/assessmentcenter/SecurityLevelWidget";
 export { default as SecuritySummaryWidget } from "./widgets/assessmentcenter/SecuritySummaryWidget";
-export { default as BusinessImpactAnalysisWidget } from "./widgets/businessvalue/BusinessImpactAnalysisWidget";
 export { default as ComplianceStatusWidget } from "./widgets/businessvalue/ComplianceStatusWidget";
 export { default as CostEstimationWidget } from "./widgets/businessvalue/CostEstimationWidget";
 export { default as ValueCreationWidget } from "./widgets/businessvalue/ValueCreationWidget";

@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
 import { CIAComponentType } from "../../../types/cia-services";
-import BusinessImpactAnalysisWidget from "../businessvalue/BusinessImpactAnalysisWidget";
+import BusinessImpactAnalysisWidget from "./BusinessImpactAnalysisWidget";
 
 // Mock ciaContentService with all required functions
 vi.mock("../../services/ciaContentService", () => ({
