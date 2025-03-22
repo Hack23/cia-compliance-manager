@@ -1,10 +1,10 @@
 import React from "react";
-import { SecurityLevel } from "../../types/cia";
+import { SecurityLevel } from "../../../types/cia";
 import {
   calculateSecurityROI,
   calculateTotalSecurityCost,
-} from "../../utils/costCalculationUtils";
-import WidgetContainer from "../common/WidgetContainer";
+} from "../../../utils/costCalculationUtils";
+import WidgetContainer from "../../common/WidgetContainer";
 
 /**
  * Props for the Cost Estimation Widget

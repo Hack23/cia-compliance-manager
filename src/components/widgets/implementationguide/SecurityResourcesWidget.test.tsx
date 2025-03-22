@@ -1,8 +1,8 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { SECURITY_RESOURCES_TEST_IDS } from "../../constants/testIds";
-import { SecurityResource } from "../../services/securityResourceService";
-import { SecurityLevel } from "../../types/cia"; // Import SecurityLevel type
+import { SECURITY_RESOURCES_TEST_IDS } from "../../../constants/testIds";
+import { SecurityResource } from "../../../services/securityResourceService";
+import { SecurityLevel } from "../../../types/cia"; // Import SecurityLevel type
 import SecurityResourcesWidget from "./SecurityResourcesWidget";
 
 // Mock the ErrorBoundary

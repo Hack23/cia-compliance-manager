@@ -1,12 +1,7 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor
-} from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { SUMMARY_TEST_IDS } from "../../constants/testIds";
-import { SecurityLevel } from "../../types/cia";
+import { SUMMARY_TEST_IDS } from "../../../constants/testIds";
+import { SecurityLevel } from "../../../types/cia";
 import SecuritySummaryWidget from "./SecuritySummaryWidget";
 
 // Mock the BusinessKeyBenefits to ensure consistent test data
@@ -55,16 +50,18 @@ vi.mock("../../hooks/useCIAContentService", () => {
             };
             return mapping[level] || "Not Classified";
           }),
-        getProtectionLevel: vi.fn().mockImplementation((level: SecurityLevel) => {
-          const mapping: Record<SecurityLevel, string> = {
-            None: "No Protection",
-            Low: "Basic Protection",
-            Moderate: "Standard Protection",
-            High: "Enhanced Protection",
-            "Very High": "Maximum Protection",
-          };
-          return mapping[level] || "Undefined Protection";
-        }),
+        getProtectionLevel: vi
+          .fn()
+          .mockImplementation((level: SecurityLevel) => {
+            const mapping: Record<SecurityLevel, string> = {
+              None: "No Protection",
+              Low: "Basic Protection",
+              Moderate: "Standard Protection",
+              High: "Enhanced Protection",
+              "Very High": "Maximum Protection",
+            };
+            return mapping[level] || "Undefined Protection";
+          }),
         getBusinessImpact: vi.fn().mockImplementation(() => ({
           summary: "Mocked impact summary",
           financial: { description: "Financial impact", riskLevel: "Medium" },
@@ -98,7 +95,7 @@ vi.mock("../../hooks/useCIAContentService", () => {
         getBusinessImpactDescription: vi
           .fn()
           .mockImplementation(
-            (component, level) => 
+            (component, level) =>
               `${level} ${component} business impact description`
           ),
         getSecurityIcon: vi.fn().mockImplementation((level: SecurityLevel) => {
@@ -138,9 +135,11 @@ vi.mock("../../hooks/useCIAContentService", () => {
         calculateOverallSecurityLevel: vi.fn().mockImplementation(
           (avail, integ, confid) => confid // Just return confidentiality level for simplicity
         ),
-        calculateBusinessImpactLevel: vi.fn().mockReturnValue("Moderate Business Impact"),
-      }
-    })
+        calculateBusinessImpactLevel: vi
+          .fn()
+          .mockReturnValue("Moderate Business Impact"),
+      },
+    }),
   };
 });
 
@@ -229,13 +228,21 @@ describe("SecuritySummaryWidget", () => {
 
     // Use more specific queries to avoid ambiguity with multiple matching elements
     // Look for each level in the summary section which has specific CSS classes
-    const summaryContainer = screen.getByTestId(SUMMARY_TEST_IDS.SUMMARY_CONTAINER);
-    
+    const summaryContainer = screen.getByTestId(
+      SUMMARY_TEST_IDS.SUMMARY_CONTAINER
+    );
+
     // Use specific test IDs to find the containers for each component
-    const availSummary = screen.getByTestId(`${SUMMARY_TEST_IDS.SUMMARY_CONTAINER}-security-summary-widget-availability-summary`);
-    const integSummary = screen.getByTestId(`${SUMMARY_TEST_IDS.SUMMARY_CONTAINER}-security-summary-widget-integrity-summary`);
-    const confidSummary = screen.getByTestId(`${SUMMARY_TEST_IDS.SUMMARY_CONTAINER}-security-summary-widget-confidentiality-summary`);
-    
+    const availSummary = screen.getByTestId(
+      `${SUMMARY_TEST_IDS.SUMMARY_CONTAINER}-security-summary-widget-availability-summary`
+    );
+    const integSummary = screen.getByTestId(
+      `${SUMMARY_TEST_IDS.SUMMARY_CONTAINER}-security-summary-widget-integrity-summary`
+    );
+    const confidSummary = screen.getByTestId(
+      `${SUMMARY_TEST_IDS.SUMMARY_CONTAINER}-security-summary-widget-confidentiality-summary`
+    );
+
     // Check the content within each specific container
     expect(availSummary).toHaveTextContent("High");
     expect(integSummary).toHaveTextContent("Low");

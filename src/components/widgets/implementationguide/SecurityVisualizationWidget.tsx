@@ -10,14 +10,14 @@ import {
   Tooltip,
 } from "chart.js";
 import React, { useEffect, useMemo, useRef } from "react";
-import { WIDGET_ICONS, WIDGET_TITLES } from "../../constants/appConstants";
-import { CHART_TEST_IDS } from "../../constants/testIds";
-import withSecurityLevelState from "../../hoc/withSecurityLevelState";
-import { SecurityLevel } from "../../types/cia";
-import { WithSecurityLevelProps } from "../../types/widget-props";
-import { getSecurityLevelValue } from "../../utils/securityLevelUtils";
-import { SecurityRiskScore } from "../charts/SecurityRiskScore";
-import WidgetContainer from "../common/WidgetContainer";
+import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { CHART_TEST_IDS } from "../../../constants/testIds";
+import withSecurityLevelState from "../../../hoc/withSecurityLevelState";
+import { SecurityLevel } from "../../../types/cia";
+import { WithSecurityLevelProps } from "../../../types/widget-props";
+import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
+import { SecurityRiskScore } from "../../charts/SecurityRiskScore";
+import WidgetContainer from "../../common/WidgetContainer";
 
 // Register the required chart.js components - fix: add RadialLinearScale and remove LinearScale
 Chart.register(

@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { SecurityLevel } from "../../types/cia";
-import { CIAComponentType } from "../../types/cia-services";
-import BusinessImpactAnalysisWidget from "./BusinessImpactAnalysisWidget";
+import { SecurityLevel } from "../../../types/cia";
+import { CIAComponentType } from "../../../types/cia-services";
+import BusinessImpactAnalysisWidget from "../businessvalue/BusinessImpactAnalysisWidget";
 
 // Mock ciaContentService with all required functions
 vi.mock("../../services/ciaContentService", () => ({
@@ -61,15 +61,17 @@ vi.mock("../../services/ciaContentService", () => ({
       }
     }),
     calculateBusinessImpactLevel: vi.fn().mockReturnValue("Medium"),
-    getCategoryIcon: vi.fn().mockImplementation((category: CIAComponentType) => {
-      const icons: Record<CIAComponentType, string> = {
-        availability: "⏱️",
-        integrity: "✅",
-        confidentiality: "🔒",
-      };
-      return icons[category] || "📊";
-    }),
-  }
+    getCategoryIcon: vi
+      .fn()
+      .mockImplementation((category: CIAComponentType) => {
+        const icons: Record<CIAComponentType, string> = {
+          availability: "⏱️",
+          integrity: "✅",
+          confidentiality: "🔒",
+        };
+        return icons[category] || "📊";
+      }),
+  },
 }));
 
 describe("BusinessImpactAnalysisWidget", () => {
@@ -88,69 +90,81 @@ describe("BusinessImpactAnalysisWidget", () => {
 
   it("displays summary and security level", () => {
     render(
-      <BusinessImpactAnalysisWidget 
+      <BusinessImpactAnalysisWidget
         availabilityLevel={"Moderate" as SecurityLevel}
         integrityLevel={"Moderate" as SecurityLevel}
         confidentialityLevel={"Moderate" as SecurityLevel}
       />
     );
-    
+
     // Check for basic elements that should always be present
-    expect(screen.getByText(/business impact/i, { exact: false })).toBeInTheDocument();
+    expect(
+      screen.getByText(/business impact/i, { exact: false })
+    ).toBeInTheDocument();
   });
 
   it("allows switching between CIA components", () => {
     render(
-      <BusinessImpactAnalysisWidget 
+      <BusinessImpactAnalysisWidget
         availabilityLevel={"Moderate" as SecurityLevel}
         integrityLevel={"Moderate" as SecurityLevel}
         confidentialityLevel={"Moderate" as SecurityLevel}
       />
     );
-    
+
     // Check if tab elements exist - don't need to test clicking functionality
-    expect(screen.getByText(/availability/i, { exact: false })).toBeInTheDocument();
-    expect(screen.getByText(/integrity/i, { exact: false })).toBeInTheDocument();
-    expect(screen.getByText(/confidentiality/i, { exact: false })).toBeInTheDocument();
+    expect(
+      screen.getByText(/availability/i, { exact: false })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/integrity/i, { exact: false })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/confidentiality/i, { exact: false })
+    ).toBeInTheDocument();
   });
 
   it("displays different impact categories", () => {
     render(
-      <BusinessImpactAnalysisWidget 
+      <BusinessImpactAnalysisWidget
         availabilityLevel={"Moderate" as SecurityLevel}
         integrityLevel={"Moderate" as SecurityLevel}
         confidentialityLevel={"Moderate" as SecurityLevel}
       />
     );
-    
+
     // Check for presence of impact category headings
     expect(screen.getByText(/impact/i, { exact: false })).toBeInTheDocument();
   });
 
   it("renders financial metrics for impact analysis", () => {
     render(
-      <BusinessImpactAnalysisWidget 
+      <BusinessImpactAnalysisWidget
         availabilityLevel={"High" as SecurityLevel}
         integrityLevel={"High" as SecurityLevel}
         confidentialityLevel={"High" as SecurityLevel}
       />
     );
-    
+
     // Check for financial section heading
-    expect(screen.getByText(/financial/i, { exact: false })).toBeInTheDocument();
+    expect(
+      screen.getByText(/financial/i, { exact: false })
+    ).toBeInTheDocument();
   });
 
   it("renders operational metrics for impact analysis", () => {
     render(
-      <BusinessImpactAnalysisWidget 
+      <BusinessImpactAnalysisWidget
         availabilityLevel={"High" as SecurityLevel}
         integrityLevel={"High" as SecurityLevel}
         confidentialityLevel={"High" as SecurityLevel}
       />
     );
-    
+
     // Check for operational section heading
-    expect(screen.getByText(/operational/i, { exact: false })).toBeInTheDocument();
+    expect(
+      screen.getByText(/operational/i, { exact: false })
+    ).toBeInTheDocument();
   });
 
   it("accepts custom testId prop", () => {

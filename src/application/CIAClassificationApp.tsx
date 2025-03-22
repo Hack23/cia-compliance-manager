@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useState } from "react";
 // Import widgets directly instead of Dashboard
-import AvailabilityImpactWidget from "../components/widgets/AvailabilityImpactWidget";
-import BusinessImpactAnalysisWidget from "../components/widgets/BusinessImpactAnalysisWidget";
-import ComplianceStatusWidget from "../components/widgets/ComplianceStatusWidget";
-import ConfidentialityImpactWidget from "../components/widgets/ConfidentialityImpactWidget";
-import CostEstimationWidget from "../components/widgets/CostEstimationWidget";
-import IntegrityImpactWidget from "../components/widgets/IntegrityImpactWidget";
-import SecurityLevelWidget from "../components/widgets/SecurityLevelWidget";
-import SecurityResourcesWidget from "../components/widgets/SecurityResourcesWidget";
-import SecuritySummaryWidget from "../components/widgets/SecuritySummaryWidget";
-import SecurityVisualizationWidget from "../components/widgets/SecurityVisualizationWidget";
-import TechnicalDetailsWidget from "../components/widgets/TechnicalDetailsWidget";
-import ValueCreationWidget from "../components/widgets/ValueCreationWidget";
+import SecurityLevelWidget from "../components/widgets/assessmentcenter/SecurityLevelWidget";
+import SecuritySummaryWidget from "../components/widgets/assessmentcenter/SecuritySummaryWidget";
+import BusinessImpactAnalysisWidget from "../components/widgets/businessvalue/BusinessImpactAnalysisWidget";
+import ComplianceStatusWidget from "../components/widgets/businessvalue/ComplianceStatusWidget";
+import CostEstimationWidget from "../components/widgets/businessvalue/CostEstimationWidget";
+import ValueCreationWidget from "../components/widgets/businessvalue/ValueCreationWidget";
+import AvailabilityImpactWidget from "../components/widgets/impactanalysis/AvailabilityImpactWidget";
+import ConfidentialityImpactWidget from "../components/widgets/impactanalysis/ConfidentialityImpactWidget";
+import IntegrityImpactWidget from "../components/widgets/impactanalysis/IntegrityImpactWidget";
+import SecurityResourcesWidget from "../components/widgets/implementationguide/SecurityResourcesWidget";
+import SecurityVisualizationWidget from "../components/widgets/implementationguide/SecurityVisualizationWidget";
+import TechnicalDetailsWidget from "../components/widgets/implementationguide/TechnicalDetailsWidget";
 import { SecurityLevel } from "../types/cia";
 
 /**

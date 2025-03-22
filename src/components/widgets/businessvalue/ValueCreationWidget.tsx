@@ -1,14 +1,14 @@
 import React, { useMemo } from "react";
-import { WIDGET_ICONS, WIDGET_TITLES } from '../../constants/appConstants';
-import { VALUE_CREATION_TEST_IDS } from "../../constants/testIds";
-import withSecurityLevelState from "../../hoc/withSecurityLevelState";
-import { useCIAOptions } from "../../hooks/useCIAOptions";
-import { createBusinessImpactService } from "../../services/businessImpactService";
-import { createCIAContentService } from "../../services/ciaContentService";
-import { SecurityLevel } from "../../types/cia";
-import { calculateOverallSecurityLevel } from "../../utils/securityLevelUtils";
-import MetricsCard from "../common/MetricsCard";
-import WidgetContainer from "../common/WidgetContainer";
+import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { VALUE_CREATION_TEST_IDS } from "../../../constants/testIds";
+import withSecurityLevelState from "../../../hoc/withSecurityLevelState";
+import { useCIAOptions } from "../../../hooks/useCIAOptions";
+import { createBusinessImpactService } from "../../../services/businessImpactService";
+import { createCIAContentService } from "../../../services/ciaContentService";
+import { SecurityLevel } from "../../../types/cia";
+import { calculateOverallSecurityLevel } from "../../../utils/securityLevelUtils";
+import MetricsCard from "../../common/MetricsCard";
+import WidgetContainer from "../../common/WidgetContainer";
 
 /**
  * Props for ValueCreationWidget component
@@ -18,35 +18,35 @@ interface ValueCreationWidgetProps {
    * Selected availability level
    */
   availabilityLevel: SecurityLevel;
-  
+
   /**
    * Selected integrity level
    */
   integrityLevel: SecurityLevel;
-  
+
   /**
    * Selected confidentiality level
    */
   confidentialityLevel: SecurityLevel;
-  
+
   /**
    * Optional CSS class name
    */
   className?: string;
-  
+
   /**
    * Optional test ID for automated testing
    */
   testId?: string;
-  
+
   // Removed redundant securityLevel prop
 }
 
 /**
  * Value Creation Widget demonstrates business value of security investments
- * 
+ *
  * ## Business Perspective
- * 
+ *
  * This widget quantifies the business value and return on investment from
  * security controls, providing executives with financial justification for
  * security investments and demonstrating the risk reduction benefits. 💰
@@ -55,11 +55,13 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   availabilityLevel,
   integrityLevel,
   confidentialityLevel,
-  className = '',
-  testId = 'widget-value-creation'
+  className = "",
+  testId = "widget-value-creation",
 }) => {
-  console.log("ValueCreationWidget rendering with levels:", { 
-    availabilityLevel, integrityLevel, confidentialityLevel 
+  console.log("ValueCreationWidget rendering with levels:", {
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel,
   });
 
   // Calculate overall security level from individual components
@@ -88,11 +90,13 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   // Get ROI estimate
   const roiData = useMemo(() => {
     // Now we can use the calculated securityLevel
-    return ciaService.getROIEstimate?.(securityLevel) || {
-      returnRate: "0%",
-      value: "0%",
-      description: "ROI information not available"
-    };
+    return (
+      ciaService.getROIEstimate?.(securityLevel) || {
+        returnRate: "0%",
+        value: "0%",
+        description: "ROI information not available",
+      }
+    );
   }, [ciaService, securityLevel]);
 
   // Get value creation points
@@ -140,7 +144,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
     // Implementation logic
     return "100-200%"; // Example value
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
-  
+
   // Calculate risk reduction
   const riskReduction = useMemo(() => {
     // Implementation logic
@@ -159,7 +163,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           This analysis demonstrates the business value and return on investment
           from implementing security controls at your selected security levels.
         </p>
-        
+
         <div className="mb-6">
           <h3 className="text-lg font-medium mb-2">Return on Investment</h3>
           <div className="grid grid-cols-3 gap-4">
@@ -177,7 +181,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
             </div>
           </div>
         </div>
-        
+
         {/* ROI Section */}
         <div className="bg-blue-50 dark:bg-blue-950 p-3 rounded-md">
           <h3 className="text-lg font-medium text-blue-700 dark:text-blue-300 mb-2">
@@ -186,7 +190,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <MetricsCard
               title="ROI Estimate"
-              value={roiData.value || "N/A"} 
+              value={roiData.value || "N/A"}
               testId="value-creation-widget-roi"
             />
             <MetricsCard
@@ -210,7 +214,10 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               <h4 className="font-medium text-blue-600 dark:text-blue-400">
                 Availability Value
               </h4>
-              <p className="text-sm" data-testid={VALUE_CREATION_TEST_IDS.AVAILABILITY_IMPACT}>
+              <p
+                className="text-sm"
+                data-testid={VALUE_CREATION_TEST_IDS.AVAILABILITY_IMPACT}
+              >
                 {availabilityBusinessImpact}
               </p>
             </div>
@@ -218,7 +225,10 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               <h4 className="font-medium text-emerald-600 dark:text-emerald-400">
                 Integrity Value
               </h4>
-              <p className="text-sm" data-testid={VALUE_CREATION_TEST_IDS.INTEGRITY_IMPACT}>
+              <p
+                className="text-sm"
+                data-testid={VALUE_CREATION_TEST_IDS.INTEGRITY_IMPACT}
+              >
                 {integrityBusinessImpact}
               </p>
             </div>
@@ -226,7 +236,10 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               <h4 className="font-medium text-purple-600 dark:text-purple-400">
                 Confidentiality Value
               </h4>
-              <p className="text-sm" data-testid={VALUE_CREATION_TEST_IDS.CONFIDENTIALITY_IMPACT}>
+              <p
+                className="text-sm"
+                data-testid={VALUE_CREATION_TEST_IDS.CONFIDENTIALITY_IMPACT}
+              >
                 {confidentialityBusinessImpact}
               </p>
             </div>
@@ -236,9 +249,16 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         {/* Value Creation Points */}
         <div>
           <h3 className="text-lg font-medium mb-2">Key Value Points</h3>
-          <ul className="list-disc list-inside space-y-2" data-testid={VALUE_CREATION_TEST_IDS.VALUE_POINTS}>
+          <ul
+            className="list-disc list-inside space-y-2"
+            data-testid={VALUE_CREATION_TEST_IDS.VALUE_POINTS}
+          >
             {valuePoints.map((point, index) => (
-              <li key={index} className="text-sm" data-testid={`${VALUE_CREATION_TEST_IDS.VALUE_POINT}-${index}`}>
+              <li
+                key={index}
+                className="text-sm"
+                data-testid={`${VALUE_CREATION_TEST_IDS.VALUE_POINT}-${index}`}
+              >
                 {point}
               </li>
             ))}

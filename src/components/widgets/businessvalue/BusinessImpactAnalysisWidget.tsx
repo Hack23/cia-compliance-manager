@@ -1,17 +1,15 @@
 import React, { useMemo } from "react";
-import { CIA_COMPONENT_COLORS } from "../../constants/colorConstants";
-import { BUSINESS_IMPACT_TEST_IDS } from "../../constants/testIds";
-import { useCIAOptions } from "../../hooks/useCIAOptions";
-import { BusinessImpactService } from "../../services/businessImpactService";
-import { SecurityLevel } from "../../types/cia";
-import { CIAComponentType } from "../../types/cia-services";
-import { getRiskBadgeVariant } from "../../utils";
-import { toTitleCase } from "../../utils/formatUtils";
-import BusinessRiskDisplay from "../common/BusinessRiskDisplay";
-import SecurityLevelBadge from "../common/SecurityLevelBadge";
-import WidgetContainer from "../common/WidgetContainer";
-
-
+import { CIA_COMPONENT_COLORS } from "../../../constants/colorConstants";
+import { BUSINESS_IMPACT_TEST_IDS } from "../../../constants/testIds";
+import { useCIAOptions } from "../../../hooks/useCIAOptions";
+import { BusinessImpactService } from "../../../services/businessImpactService";
+import { SecurityLevel } from "../../../types/cia";
+import { CIAComponentType } from "../../../types/cia-services";
+import { getRiskBadgeVariant } from "../../../utils";
+import { toTitleCase } from "../../../utils/formatUtils";
+import BusinessRiskDisplay from "../../common/BusinessRiskDisplay";
+import SecurityLevelBadge from "../../common/SecurityLevelBadge";
+import WidgetContainer from "../../common/WidgetContainer";
 
 /**
  * Interface for business impact data
@@ -78,13 +76,13 @@ const BusinessImpactAnalysisWidget: React.FC<
 }) => {
   const { availabilityOptions, integrityOptions, confidentialityOptions } =
     useCIAOptions();
-    
+
   // Remove local state management and directly use props
   // This ensures changes in SecurityLevelWidget are immediately reflected here
 
   // Debug logging to verify props are received correctly
   console.log("BusinessImpactAnalysisWidget levels:", {
-    props: { availabilityLevel, integrityLevel, confidentialityLevel }
+    props: { availabilityLevel, integrityLevel, confidentialityLevel },
   });
 
   const businessImpactService = useMemo(() => {
@@ -107,13 +105,13 @@ const BusinessImpactAnalysisWidget: React.FC<
     () =>
       businessImpactService.getBusinessImpact(
         "availability",
-        availabilityLevel  // Using props directly
+        availabilityLevel // Using props directly
       ),
     [businessImpactService, availabilityLevel]
   );
 
   const integrityImpact = useMemo(
-    () => businessImpactService.getBusinessImpact("integrity", integrityLevel),  // Using props directly
+    () => businessImpactService.getBusinessImpact("integrity", integrityLevel), // Using props directly
     [businessImpactService, integrityLevel]
   );
 
@@ -121,7 +119,7 @@ const BusinessImpactAnalysisWidget: React.FC<
     () =>
       businessImpactService.getBusinessImpact(
         "confidentiality",
-        confidentialityLevel  // Using props directly
+        confidentialityLevel // Using props directly
       ),
     [businessImpactService, confidentialityLevel]
   );
@@ -131,7 +129,7 @@ const BusinessImpactAnalysisWidget: React.FC<
     // Create data for availability component
     const availData: BusinessImpactData = {
       component: "availability",
-      level: availabilityLevel,  // Using props directly
+      level: availabilityLevel, // Using props directly
       value: availabilityOptions[availabilityLevel]?.opex || 0,
       percentage: `${
         ((availabilityOptions[availabilityLevel]?.opex || 0) * 100) / 40
@@ -195,8 +193,7 @@ const BusinessImpactAnalysisWidget: React.FC<
 
   return (
     <WidgetContainer title="Business Impact Analysis" testId={testId}>
-
-<div className="space-y-4">
+      <div className="space-y-4">
         <div className="grid grid-cols-3 gap-3 text-center">
           {/* Use SecurityLevelBadge components for consistent display */}
           <SecurityLevelBadge
@@ -278,7 +275,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           </div>
         </div>
       </div>
- 
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Operational Impact Section */}
         <div
@@ -292,11 +289,19 @@ const BusinessImpactAnalysisWidget: React.FC<
                 key={`operational-${impact.component}`}
                 impactCategory={impact.component}
                 riskLevel={impact.operationalImpact?.riskLevel || "Unknown"}
-                description={impact.operationalImpact?.description || "No operational impact data available"}
-                metric={impact.component === "availability" && impact.operationalImpact?.meanTimeToRecover ? {
-                  label: "MTTR",
-                  value: impact.operationalImpact.meanTimeToRecover
-                } : undefined}
+                description={
+                  impact.operationalImpact?.description ||
+                  "No operational impact data available"
+                }
+                metric={
+                  impact.component === "availability" &&
+                  impact.operationalImpact?.meanTimeToRecover
+                    ? {
+                        label: "MTTR",
+                        value: impact.operationalImpact.meanTimeToRecover,
+                      }
+                    : undefined
+                }
                 testId={`${testId}-${impact.component}-operational`}
               />
             ))}
@@ -315,11 +320,18 @@ const BusinessImpactAnalysisWidget: React.FC<
                 key={`financial-${impact.component}`}
                 impactCategory={impact.component}
                 riskLevel={impact.financialImpact?.riskLevel || "Unknown"}
-                description={impact.financialImpact?.description || "No financial impact data available"}
-                metric={impact.financialImpact?.annualRevenueLoss ? {
-                  label: "Potential Loss",
-                  value: impact.financialImpact.annualRevenueLoss
-                } : undefined}
+                description={
+                  impact.financialImpact?.description ||
+                  "No financial impact data available"
+                }
+                metric={
+                  impact.financialImpact?.annualRevenueLoss
+                    ? {
+                        label: "Potential Loss",
+                        value: impact.financialImpact.annualRevenueLoss,
+                      }
+                    : undefined
+                }
                 testId={`${testId}-${impact.component}-financial`}
               />
             ))}
@@ -382,8 +394,6 @@ const BusinessImpactAnalysisWidget: React.FC<
   );
 };
 
-
-
 // Helper function to generate impact summary based on component and level
 function getImpactSummary(component: string, level: SecurityLevel): string {
   const componentName = toTitleCase(component);
@@ -406,7 +416,7 @@ function getImpactSummary(component: string, level: SecurityLevel): string {
 
 /**
  * Helper function to get the appropriate badge variant for a risk level
- * 
+ *
  * @param riskLevel - The risk level string
  * @returns The badge variant for UI styling
  */
@@ -415,15 +425,21 @@ function getRiskVariant(
 ): "error" | "warning" | "info" | "success" | "neutral" | "purple" {
   // Use the imported utility but ensure the return type matches what's expected
   const variant = getRiskBadgeVariant(riskLevel);
-  
+
   // Make sure the returned variant is one of the expected values
   switch (variant) {
-    case "error": return "error";
-    case "warning": return "warning";
-    case "info": return "info";
-    case "success": return "success";
-    case "purple": return "purple"; // Add support for purple
-    default: return "neutral";
+    case "error":
+      return "error";
+    case "warning":
+      return "warning";
+    case "info":
+      return "info";
+    case "success":
+      return "success";
+    case "purple":
+      return "purple"; // Add support for purple
+    default:
+      return "neutral";
   }
 }
 

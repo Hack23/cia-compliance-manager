@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
-import { SecurityLevel } from "../../types/cia";
+import { SecurityLevel } from "../../../types/cia";
 import AvailabilityImpactWidget from "./AvailabilityImpactWidget";
 
 // Mock ciaContentService with more complete implementation
@@ -77,7 +77,7 @@ vi.mock("../../services/ciaContentService", () => ({
         `Implement ${level} failover mechanisms`,
         `Set up ${level} monitoring`,
       ]),
-    // Add missing mocked functions 
+    // Add missing mocked functions
     getSecurityLevel: vi.fn().mockReturnValue("High"),
     getRiskBadgeVariant: vi.fn().mockReturnValue("success"),
     getInformationSensitivity: vi.fn().mockReturnValue("Sensitive"),
@@ -90,20 +90,29 @@ vi.mock("../../services/ciaContentService", () => ({
 // Mock StatusBadge component
 vi.mock("../../components/common/StatusBadge", () => ({
   __esModule: true,
-  default: ({ children, status, size }: { 
-    children: React.ReactNode; 
-    status: string; 
+  default: ({
+    children,
+    status,
+    size,
+  }: {
+    children: React.ReactNode;
+    status: string;
     size?: string;
   }) => (
-    <span data-testid="status-badge" className={`status-badge-${status}`}>{children}</span>
+    <span data-testid="status-badge" className={`status-badge-${status}`}>
+      {children}
+    </span>
   ),
 }));
 
 // Mock BusinessImpactSection component
 vi.mock("../../components/common/BusinessImpactSection", () => ({
   __esModule: true,
-  default: ({ impact, testId }: { 
-    impact: { summary: string; } | undefined; 
+  default: ({
+    impact,
+    testId,
+  }: {
+    impact: { summary: string } | undefined;
     testId?: string;
   }) => (
     <div data-testid={testId || "business-impact-section"}>
@@ -116,9 +125,13 @@ vi.mock("../../components/common/BusinessImpactSection", () => ({
 // Add missing mock for WidgetContainer
 vi.mock("../../components/common/WidgetContainer", () => ({
   __esModule: true,
-  default: ({ children, title, testId }: { 
-    children: React.ReactNode; 
-    title: string; 
+  default: ({
+    children,
+    title,
+    testId,
+  }: {
+    children: React.ReactNode;
+    title: string;
     testId?: string;
   }) => (
     <div data-testid={testId || "widget-container"}>
@@ -138,7 +151,9 @@ describe("AvailabilityImpactWidget", () => {
 
   it("renders without crashing", () => {
     render(<AvailabilityImpactWidget {...defaultProps} />);
-    expect(screen.getByTestId("widget-availability-impact")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("widget-availability-impact")
+    ).toBeInTheDocument();
   });
 
   it("displays availability description from ciaContentService", () => {
@@ -178,32 +193,38 @@ describe("AvailabilityImpactWidget", () => {
   });
 
   it("renders with different availability levels", () => {
-    const { rerender } = render(<AvailabilityImpactWidget 
-      {...defaultProps}
-      availabilityLevel="Low"
-    />);
-    
+    const { rerender } = render(
+      <AvailabilityImpactWidget {...defaultProps} availabilityLevel="Low" />
+    );
+
     // Use testId to check if component rendered
-    expect(screen.getByTestId("widget-availability-impact")).toBeInTheDocument();
-    
+    expect(
+      screen.getByTestId("widget-availability-impact")
+    ).toBeInTheDocument();
+
     // Rerender with different level
-    rerender(<AvailabilityImpactWidget 
-      {...defaultProps}
-      availabilityLevel="High"
-    />);
-    
+    rerender(
+      <AvailabilityImpactWidget {...defaultProps} availabilityLevel="High" />
+    );
+
     // Use testId to check if component rendered
-    expect(screen.getByTestId("widget-availability-impact")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("widget-availability-impact")
+    ).toBeInTheDocument();
   });
 
   it("handles unknown level gracefully", () => {
-    render(<AvailabilityImpactWidget 
-      {...defaultProps}
-      availabilityLevel={"Unknown" as SecurityLevel}
-    />);
+    render(
+      <AvailabilityImpactWidget
+        {...defaultProps}
+        availabilityLevel={"Unknown" as SecurityLevel}
+      />
+    );
 
     // Use testId to check if component rendered with Unknown level
-    expect(screen.getByTestId("widget-availability-impact")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("widget-availability-impact")
+    ).toBeInTheDocument();
   });
 
   // The other test for unknown level can be simplified to avoid duplication
@@ -216,7 +237,9 @@ describe("AvailabilityImpactWidget", () => {
     );
 
     // Check that the widget still renders
-    expect(screen.getByTestId("widget-availability-impact")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("widget-availability-impact")
+    ).toBeInTheDocument();
   });
 
   it("has proper ARIA attributes for accessibility", () => {

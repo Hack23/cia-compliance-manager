@@ -1,13 +1,16 @@
 import React, { useMemo } from "react";
-import { WIDGET_ICONS, WIDGET_TITLES } from "../../constants/appConstants";
-import withSecurityLevelState from "../../hoc/withSecurityLevelState";
-import { useCIAContentService } from "../../hooks/useCIAContentService";
-import { SecurityLevel } from "../../types/cia";
-import { SecurityWidgetProps } from "../../types/widget-props";
-import { calculateOverallSecurityLevel, getSecurityLevelValue } from "../../utils/securityLevelUtils";
-import SecurityLevelBadge from "../common/SecurityLevelBadge";
-import StatusBadge from "../common/StatusBadge";
-import WidgetContainer from "../common/WidgetContainer";
+import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import withSecurityLevelState from "../../../hoc/withSecurityLevelState";
+import { useCIAContentService } from "../../../hooks/useCIAContentService";
+import { SecurityLevel } from "../../../types/cia";
+import { SecurityWidgetProps } from "../../../types/widget-props";
+import {
+  calculateOverallSecurityLevel,
+  getSecurityLevelValue,
+} from "../../../utils/securityLevelUtils";
+import SecurityLevelBadge from "../../common/SecurityLevelBadge";
+import StatusBadge from "../../common/StatusBadge";
+import WidgetContainer from "../../common/WidgetContainer";
 
 /**
  * SecuritySummaryWidget props extend SecurityWidgetProps
@@ -21,13 +24,13 @@ export interface SecuritySummaryWidgetProps extends SecurityWidgetProps {
 
 /**
  * Displays a summary of all security levels and overall security posture
- * 
+ *
  * ## Business Perspective
- * 
- * This widget provides an at-a-glance view of the organization's security posture 
+ *
+ * This widget provides an at-a-glance view of the organization's security posture
  * across the CIA triad, helping security officers and executives quickly understand
  * their current security stance and identify areas that need attention. 📊
- * 
+ *
  * The calculated compliance and risk metrics help align technical security controls
  * with business and regulatory requirements. 💼
  */
@@ -40,7 +43,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
 }) => {
   // Use the content service for CIA security details
   const { ciaContentService } = useCIAContentService();
-  
+
   // Calculate overall security level
   const overallSecurityLevel = useMemo(() => {
     return calculateOverallSecurityLevel(
@@ -55,8 +58,9 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     const availabilityValue = getSecurityLevelValue(availabilityLevel);
     const integrityValue = getSecurityLevelValue(integrityLevel);
     const confidentialityValue = getSecurityLevelValue(confidentialityLevel);
-    
-    const totalValue = availabilityValue + integrityValue + confidentialityValue;
+
+    const totalValue =
+      availabilityValue + integrityValue + confidentialityValue;
     const maxPossibleValue = 12; // 3 components × max value of 4
     return Math.round((totalValue / maxPossibleValue) * 100);
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
@@ -70,7 +74,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
         integrityLevel,
         confidentialityLevel
       );
-      
+
       if (service) {
         return service;
       }
@@ -87,7 +91,13 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
       console.error("Error determining compliance status:", error);
       return "Compliance status unavailable";
     }
-  }, [ciaContentService, availabilityLevel, integrityLevel, confidentialityLevel, securityScore]);
+  }, [
+    ciaContentService,
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel,
+    securityScore,
+  ]);
 
   // Determine risk status based on security score
   const riskStatus = useMemo(() => {
@@ -124,7 +134,10 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
         {/* Overall security level display */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div>
-            <h3 className="text-lg font-medium" data-testid="security-summary-title">
+            <h3
+              className="text-lg font-medium"
+              data-testid="security-summary-title"
+            >
               Overall Security Level
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -146,13 +159,15 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
         {/* CIA triad components summary */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Availability */}
-          <div 
+          <div
             className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
             data-testid="security-summary-availability"
           >
             <div className="flex justify-between items-center mb-2">
               <div className="text-sm font-medium flex items-center">
-                <span className="text-blue-500 dark:text-blue-400 mr-2">⏱️</span>
+                <span className="text-blue-500 dark:text-blue-400 mr-2">
+                  ⏱️
+                </span>
                 Availability
               </div>
               <SecurityLevelBadge
@@ -169,13 +184,15 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
           </div>
 
           {/* Integrity */}
-          <div 
+          <div
             className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
             data-testid="security-summary-integrity"
           >
             <div className="flex justify-between items-center mb-2">
               <div className="text-sm font-medium flex items-center">
-                <span className="text-green-500 dark:text-green-400 mr-2">✓</span>
+                <span className="text-green-500 dark:text-green-400 mr-2">
+                  ✓
+                </span>
                 Integrity
               </div>
               <SecurityLevelBadge
@@ -192,13 +209,15 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
           </div>
 
           {/* Confidentiality */}
-          <div 
+          <div
             className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
             data-testid="security-summary-confidentiality"
           >
             <div className="flex justify-between items-center mb-2">
               <div className="text-sm font-medium flex items-center">
-                <span className="text-purple-500 dark:text-purple-400 mr-2">🔒</span>
+                <span className="text-purple-500 dark:text-purple-400 mr-2">
+                  🔒
+                </span>
                 Confidentiality
               </div>
               <SecurityLevelBadge
@@ -224,7 +243,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               Security Score
             </div>
             <div className="flex items-center">
-              <div 
+              <div
                 className="text-2xl font-bold"
                 data-testid="security-summary-score"
               >
@@ -236,15 +255,19 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
           {/* Compliance Status */}
           <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
             <div className="text-sm font-medium mb-1 flex items-center">
-              <span className="text-green-500 dark:text-green-400 mr-2">📋</span>
+              <span className="text-green-500 dark:text-green-400 mr-2">
+                📋
+              </span>
               Compliance Status
             </div>
             <div className="flex items-center">
-              <StatusBadge 
+              <StatusBadge
                 status={complianceBadgeStatus}
                 testId="security-summary-compliance-status"
               >
-                {typeof complianceStatus === 'string' ? complianceStatus : 'Compliance status available'}
+                {typeof complianceStatus === "string"
+                  ? complianceStatus
+                  : "Compliance status available"}
               </StatusBadge>
             </div>
           </div>
@@ -256,7 +279,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               Risk Level
             </div>
             <div className="flex items-center">
-              <StatusBadge 
+              <StatusBadge
                 status={riskBadgeStatus}
                 testId="security-summary-risk-level"
               >
@@ -273,8 +296,15 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
             <h3 className="font-medium">Recommendations</h3>
           </div>
           <ul className="text-sm space-y-1 list-disc list-inside text-gray-600 dark:text-gray-300">
-            {getRecommendations(availabilityLevel, integrityLevel, confidentialityLevel).map((recommendation, index) => (
-              <li key={index} data-testid={`security-summary-recommendation-${index}`}>
+            {getRecommendations(
+              availabilityLevel,
+              integrityLevel,
+              confidentialityLevel
+            ).map((recommendation, index) => (
+              <li
+                key={index}
+                data-testid={`security-summary-recommendation-${index}`}
+              >
                 {recommendation}
               </li>
             ))}
@@ -305,32 +335,35 @@ function getSecurityLevelColorClass(level: SecurityLevel): string {
 // Helper function to get level descriptions
 function getLevelDescription(component: string, level: SecurityLevel): string {
   const availabilityDescriptions: Record<SecurityLevel, string> = {
-    "None": "No uptime guarantees or recovery procedures",
-    "Low": "Basic uptime (95%) with manual recovery processes", 
-    "Moderate": "Standard uptime (99%) with documented recovery", 
-    "High": "Enhanced uptime (99.9%) with rapid recovery capabilities",
-    "Very High": "Maximum uptime (99.99%) with near-instantaneous recovery"
+    None: "No uptime guarantees or recovery procedures",
+    Low: "Basic uptime (95%) with manual recovery processes",
+    Moderate: "Standard uptime (99%) with documented recovery",
+    High: "Enhanced uptime (99.9%) with rapid recovery capabilities",
+    "Very High": "Maximum uptime (99.99%) with near-instantaneous recovery",
   };
 
   const integrityDescriptions: Record<SecurityLevel, string> = {
-    "None": "No data validation or protection against unauthorized changes",
-    "Low": "Basic data validation with limited audit trails", 
-    "Moderate": "Automated integrity checks with comprehensive auditing", 
-    "High": "Cryptographic verification with secure hash validation",
-    "Very High": "Advanced integrity protection with blockchain validation"
+    None: "No data validation or protection against unauthorized changes",
+    Low: "Basic data validation with limited audit trails",
+    Moderate: "Automated integrity checks with comprehensive auditing",
+    High: "Cryptographic verification with secure hash validation",
+    "Very High": "Advanced integrity protection with blockchain validation",
   };
 
   const confidentialityDescriptions: Record<SecurityLevel, string> = {
-    "None": "No access controls or data protection measures",
-    "Low": "Basic access control with minimal encryption", 
-    "Moderate": "Role-based access control with standard encryption", 
-    "High": "Multi-factor authentication with advanced encryption",
-    "Very High": "Zero-trust architecture with military-grade protection"
+    None: "No access controls or data protection measures",
+    Low: "Basic access control with minimal encryption",
+    Moderate: "Role-based access control with standard encryption",
+    High: "Multi-factor authentication with advanced encryption",
+    "Very High": "Zero-trust architecture with military-grade protection",
   };
 
-  if (component === "availability") return availabilityDescriptions[level] || "Description not available";
-  if (component === "integrity") return integrityDescriptions[level] || "Description not available";
-  if (component === "confidentiality") return confidentialityDescriptions[level] || "Description not available";
+  if (component === "availability")
+    return availabilityDescriptions[level] || "Description not available";
+  if (component === "integrity")
+    return integrityDescriptions[level] || "Description not available";
+  if (component === "confidentiality")
+    return confidentialityDescriptions[level] || "Description not available";
   return "Description not available";
 }
 
@@ -341,41 +374,51 @@ function getRecommendations(
   confidentialityLevel: SecurityLevel
 ): string[] {
   const recommendations: string[] = [];
-  
+
   // Add recommendations based on availability level
   if (getSecurityLevelValue(availabilityLevel) < 2) {
-    recommendations.push("Improve availability controls by implementing robust backup and recovery procedures");
+    recommendations.push(
+      "Improve availability controls by implementing robust backup and recovery procedures"
+    );
   }
-  
+
   // Add recommendations based on integrity level
   if (getSecurityLevelValue(integrityLevel) < 2) {
-    recommendations.push("Enhance data integrity through automated validation and cryptographic verification");
+    recommendations.push(
+      "Enhance data integrity through automated validation and cryptographic verification"
+    );
   }
-  
+
   // Add recommendations based on confidentiality level
   if (getSecurityLevelValue(confidentialityLevel) < 2) {
-    recommendations.push("Strengthen confidentiality by implementing role-based access controls and encryption");
+    recommendations.push(
+      "Strengthen confidentiality by implementing role-based access controls and encryption"
+    );
   }
-  
+
   // Add balanced approach recommendation if levels are very uneven
   const levels = [
     getSecurityLevelValue(availabilityLevel),
     getSecurityLevelValue(integrityLevel),
-    getSecurityLevelValue(confidentialityLevel)
+    getSecurityLevelValue(confidentialityLevel),
   ];
-  
+
   const maxLevel = Math.max(...levels);
   const minLevel = Math.min(...levels);
-  
+
   if (maxLevel - minLevel >= 2) {
-    recommendations.push("Consider a more balanced security approach across all CIA triad components");
+    recommendations.push(
+      "Consider a more balanced security approach across all CIA triad components"
+    );
   }
-  
+
   // If no specific recommendations, add general one
   if (recommendations.length === 0) {
-    recommendations.push("Continue maintaining your current security posture with regular reviews");
+    recommendations.push(
+      "Continue maintaining your current security posture with regular reviews"
+    );
   }
-  
+
   return recommendations;
 }
 

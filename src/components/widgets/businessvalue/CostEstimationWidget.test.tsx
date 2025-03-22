@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { COST_TEST_IDS } from "../../constants/testIds";
-import ciaContentService from "../../services/ciaContentService";
-import { SecurityLevel } from "../../types/cia";
+import { COST_TEST_IDS } from "../../../constants/testIds";
+import ciaContentService from "../../../services/ciaContentService";
+import { SecurityLevel } from "../../../types/cia";
 import CostEstimationWidget from "./CostEstimationWidget";
 
 // Mock ciaContentService with proper typing
@@ -99,7 +99,7 @@ describe("CostEstimationWidget", () => {
       confidentialityCapex: 40,
       confidentialityOpex: 16,
       riskReduction: "85%",
-      roi: "275%"  // Properly include the roi property
+      roi: "275%", // Properly include the roi property
     } as any); // Use type assertion to avoid TypeScript errors
 
     render(<CostEstimationWidget {...defaultProps} />);

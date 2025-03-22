@@ -1,12 +1,12 @@
 import React, { useMemo } from "react";
-import { WIDGET_ICONS, WIDGET_TITLES } from "../../constants/appConstants";
-import withSecurityLevelState from '../../hoc/withSecurityLevelState';
-import { useCIAContentService } from "../../hooks/useCIAContentService";
-import { SecurityLevel } from "../../types/cia";
-import { getSecurityLevelValue } from "../../utils/securityLevelUtils";
-import BusinessImpactSection from "../common/BusinessImpactSection";
-import SecurityLevelBadge from "../common/SecurityLevelBadge";
-import WidgetContainer from "../common/WidgetContainer";
+import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import withSecurityLevelState from "../../../hoc/withSecurityLevelState";
+import { useCIAContentService } from "../../../hooks/useCIAContentService";
+import { SecurityLevel } from "../../../types/cia";
+import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
+import BusinessImpactSection from "../../common/BusinessImpactSection";
+import SecurityLevelBadge from "../../common/SecurityLevelBadge";
+import WidgetContainer from "../../common/WidgetContainer";
 
 // Define component props
 export interface AvailabilityImpactWidgetProps {
@@ -44,15 +44,21 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
 
   // Use the passed level or fallback to availabilityLevel for backward compatibility
   const effectiveLevel = level || availabilityLevel;
-  
+
   // Get component-specific details
   const details = useMemo(() => {
-    return ciaContentService.getComponentDetails("availability", effectiveLevel);
+    return ciaContentService.getComponentDetails(
+      "availability",
+      effectiveLevel
+    );
   }, [ciaContentService, effectiveLevel]);
 
   // Get business impact details
   const businessImpact = useMemo(() => {
-    return ciaContentService.getBusinessImpact?.("availability", effectiveLevel) || null;
+    return (
+      ciaContentService.getBusinessImpact?.("availability", effectiveLevel) ||
+      null
+    );
   }, [ciaContentService, effectiveLevel]);
 
   // Get recommended controls
@@ -66,11 +72,13 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
 
   // Calculate overall impact with the current availability level
   const overallImpact = useMemo(() => {
-    return ciaContentService.calculateBusinessImpactLevel?.(
-      effectiveLevel,
-      integrityLevel,
-      confidentialityLevel
-    ) || effectiveLevel;
+    return (
+      ciaContentService.calculateBusinessImpactLevel?.(
+        effectiveLevel,
+        integrityLevel,
+        confidentialityLevel
+      ) || effectiveLevel
+    );
   }, [ciaContentService, effectiveLevel, integrityLevel, confidentialityLevel]);
 
   // If details aren't available, show an error state
@@ -114,7 +122,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
               textClass="text-blue-800 dark:text-blue-300"
               testId={`${testId}-availability-badge`}
             />
-            
+
             {/* Add overall impact indicator when all levels are available */}
             {integrityLevel && confidentialityLevel && (
               <div className="mt-2 text-sm">
@@ -124,7 +132,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
                 </span>
               </div>
             )}
-            
+
             <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
               <span className="font-medium">Security Score: </span>
               <span className="font-bold">{securityScore}%</span>
@@ -171,16 +179,14 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
                 <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
                   Mean Time To Recover
                 </div>
-                <div className="text-lg font-bold">
-                  {details.mttr || "N/A"}
-                </div>
+                <div className="text-lg font-bold">{details.mttr || "N/A"}</div>
               </div>
             </div>
           </div>
 
           {/* Business Impact */}
           {businessImpact && (
-            <BusinessImpactSection 
+            <BusinessImpactSection
               impact={businessImpact}
               color="blue"
               testId={`${testId}-business-impact`}

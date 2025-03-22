@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { ComplianceService } from "../../services/ComplianceServiceAdapter";
-import { SecurityLevel } from "../../types/cia";
+import { ComplianceService } from "../../../services/ComplianceServiceAdapter";
+import { SecurityLevel } from "../../../types/cia";
 import ComplianceStatusWidget from "./ComplianceStatusWidget";
 
 // Mock the useCIAOptions hook
-vi.mock("../../hooks/useCIAOptions", () => ({
+vi.mock("../../../hooks/useCIAOptions", () => ({
   useCIAOptions: () => ({
     availabilityOptions: {
       None: { description: "None level" },
@@ -255,5 +255,62 @@ describe("ComplianceStatusWidget", () => {
 
     // Look for the title heading
     expect(screen.getByText("Compliance Status")).toBeInTheDocument();
+  });
+
+  it("renders with default props", () => {
+    render(<ComplianceStatusWidget />);
+    expect(screen.getByTestId("compliance-status-widget")).toBeInTheDocument();
+    expect(screen.getByText("Compliance Status")).toBeInTheDocument();
+  });
+
+  it("renders with custom test ID", () => {
+    render(<ComplianceStatusWidget testId="custom-test-id" />);
+    expect(screen.getByTestId("custom-test-id")).toBeInTheDocument();
+  });
+
+  it("displays compliant frameworks based on security levels", () => {
+    const securityLevel: SecurityLevel = "High";
+    render(<ComplianceStatusWidget securityLevel={securityLevel} />);
+
+    // Check section headers
+    expect(screen.getByText("Compliant")).toBeInTheDocument();
+    expect(screen.getByText("Partially Compliant")).toBeInTheDocument();
+    expect(screen.getByText("Non-Compliant")).toBeInTheDocument();
+
+    // For High security level, we expect certain frameworks to be compliant
+    expect(screen.getByText("NIST 800-53 Rev. 5")).toBeInTheDocument();
+    expect(screen.getByText("ISO 27001:2022")).toBeInTheDocument();
+  });
+
+  it("displays different frameworks for different CIA levels", () => {
+    render(
+      <ComplianceStatusWidget
+        availabilityLevel="High"
+        integrityLevel="High"
+        confidentialityLevel="High"
+      />
+    );
+
+    // For High availability, integrity, and confidentiality, we expect certain frameworks to be compliant
+    const compliantItems = screen.getAllByText(
+      /NIST 800-53 Rev. 5|ISO 27001:2022|NIST CSF 2.0|PCI DSS/
+    );
+    expect(compliantItems.length).toBeGreaterThan(0);
+  });
+
+  it("shows non-compliant frameworks for low security levels", () => {
+    render(
+      <ComplianceStatusWidget
+        availabilityLevel="None"
+        integrityLevel="Low"
+        confidentialityLevel="Low"
+      />
+    );
+
+    // For None/Low security levels, we expect certain frameworks to be non-compliant
+    const nonCompliantItems = screen.getAllByText(
+      /NIST 800-53 Rev. 5|ISO 27001:2022|NIST CSF 2.0|PCI DSS|HIPAA/
+    );
+    expect(nonCompliantItems.length).toBeGreaterThan(0);
   });
 });

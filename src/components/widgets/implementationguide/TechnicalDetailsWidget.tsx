@@ -1,13 +1,13 @@
 import React, { useMemo, useState } from "react";
-import { WIDGET_ICONS, WIDGET_TITLES } from '../../constants/appConstants';
-import withSecurityLevelState from '../../hoc/withSecurityLevelState';
-import { useCIAContentService } from "../../hooks/useCIAContentService";
-import { SecurityLevel } from "../../types/cia";
-import { TechnicalImplementationDetails } from "../../types/cia-services";
-import { CodeBlock } from "../common/CodeBlock";
-import { KeyValuePair } from "../common/KeyValuePair";
-import { Tab } from "../common/Tab";
-import WidgetContainer from "../common/WidgetContainer"; // Changed to default import
+import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import withSecurityLevelState from "../../../hoc/withSecurityLevelState";
+import { useCIAContentService } from "../../../hooks/useCIAContentService";
+import { SecurityLevel } from "../../../types/cia";
+import { TechnicalImplementationDetails } from "../../../types/cia-services";
+import { CodeBlock } from "../../common/CodeBlock";
+import { KeyValuePair } from "../../common/KeyValuePair";
+import { Tab } from "../../common/Tab";
+import WidgetContainer from "../../common/WidgetContainer"; // Changed to default import
 
 // Define props interface for the component
 interface TechnicalDetailsWidgetProps {
@@ -28,9 +28,9 @@ interface RequirementItem {
 
 /**
  * Technical Details Widget provides implementation guidance
- * 
+ *
  * ## Business Perspective
- * 
+ *
  * This widget delivers technical implementation details and resource requirements
  * for IT teams to effectively deploy and maintain security controls at the selected
  * security levels, bridging policy decisions with practical implementation. 🛠️
@@ -42,32 +42,53 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   integrityLevel = "Moderate",
   confidentialityLevel = "Moderate",
 }: TechnicalDetailsWidgetProps): React.ReactElement => {
-  const [activeTab, setActiveTab] = useState<"availability" | "integrity" | "confidentiality">("availability");
+  const [activeTab, setActiveTab] = useState<
+    "availability" | "integrity" | "confidentiality"
+  >("availability");
   const { ciaContentService } = useCIAContentService();
-  
+
   // Memoize active details to prevent unnecessary re-renders
   const activeDetails = useMemo(() => {
     const getDetailsForComponent = () => {
       switch (activeTab) {
         case "availability":
-          return ciaContentService.getComponentDetails("availability", availabilityLevel);
+          return ciaContentService.getComponentDetails(
+            "availability",
+            availabilityLevel
+          );
         case "integrity":
-          return ciaContentService.getComponentDetails("integrity", integrityLevel);
+          return ciaContentService.getComponentDetails(
+            "integrity",
+            integrityLevel
+          );
         case "confidentiality":
-          return ciaContentService.getComponentDetails("confidentiality", confidentialityLevel);
+          return ciaContentService.getComponentDetails(
+            "confidentiality",
+            confidentialityLevel
+          );
         default:
-          return ciaContentService.getComponentDetails("availability", availabilityLevel);
+          return ciaContentService.getComponentDetails(
+            "availability",
+            availabilityLevel
+          );
       }
     };
-    
+
     return getDetailsForComponent();
-  }, [activeTab, availabilityLevel, integrityLevel, confidentialityLevel, ciaContentService]);
+  }, [
+    activeTab,
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel,
+    ciaContentService,
+  ]);
 
   // Get implementation details with null safety
-  const implementationDetails = useMemo(() => 
-    activeDetails?.technicalImplementation || null
-  , [activeDetails]);
-  
+  const implementationDetails = useMemo(
+    () => activeDetails?.technicalImplementation || null,
+    [activeDetails]
+  );
+
   // Helper functions to get default values when data is missing
   const getDefaultDevelopmentEffort = (level: SecurityLevel): string => {
     switch (level) {
@@ -122,7 +143,8 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
 
   // Get technical details for each CIA component with proper null safety
   const availabilityDetails = useMemo(
-    () => ciaContentService.getComponentDetails("availability", availabilityLevel),
+    () =>
+      ciaContentService.getComponentDetails("availability", availabilityLevel),
     [availabilityLevel, ciaContentService]
   );
 
@@ -132,7 +154,11 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   );
 
   const confidentialityDetails = useMemo(
-    () => ciaContentService.getComponentDetails("confidentiality", confidentialityLevel),
+    () =>
+      ciaContentService.getComponentDetails(
+        "confidentiality",
+        confidentialityLevel
+      ),
     [confidentialityLevel, ciaContentService]
   );
 
@@ -155,11 +181,15 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
     const examples = activeDetails?.codeExamples || [];
     // Provide default example if none exist but should based on level
     if (examples.length === 0 && activeLevel !== "None") {
-      return [{
-        title: `Example ${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Implementation`,
-        language: "typescript",
-        code: `// Sample code would be shown here for ${activeTab} at ${activeLevel} level`
-      }];
+      return [
+        {
+          title: `Example ${
+            activeTab.charAt(0).toUpperCase() + activeTab.slice(1)
+          } Implementation`,
+          language: "typescript",
+          code: `// Sample code would be shown here for ${activeTab} at ${activeLevel} level`,
+        },
+      ];
     }
     return examples;
   }, [activeDetails, activeTab, activeLevel]);
@@ -169,21 +199,21 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
     const steps = implementationDetails?.implementationSteps || [];
     if (steps.length === 0 && activeLevel !== "None") {
       const defaultSteps = {
-        "availability": [
+        availability: [
           `Configure system for ${activeLevel} availability`,
           "Implement monitoring and alerting",
-          "Create disaster recovery plan"
+          "Create disaster recovery plan",
         ],
-        "integrity": [
+        integrity: [
           `Implement ${activeLevel} data validation controls`,
           "Configure checksum verification",
-          "Set up data integrity monitoring"
+          "Set up data integrity monitoring",
         ],
-        "confidentiality": [
+        confidentiality: [
           `Apply ${activeLevel} encryption to sensitive data`,
           "Implement access control mechanisms",
-          "Configure data loss prevention"
-        ]
+          "Configure data loss prevention",
+        ],
       };
       return defaultSteps[activeTab] || [];
     }
@@ -191,13 +221,22 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   }, [implementationDetails, activeTab, activeLevel]);
 
   // Function to get technical description with null safety
-  const getTechnicalDescription = (component: "availability" | "integrity" | "confidentiality", level: SecurityLevel): string => {
+  const getTechnicalDescription = (
+    component: "availability" | "integrity" | "confidentiality",
+    level: SecurityLevel
+  ): string => {
     const details = ciaContentService.getComponentDetails(component, level);
-    return details?.technical || `No technical description available for ${level} ${component}`;
+    return (
+      details?.technical ||
+      `No technical description available for ${level} ${component}`
+    );
   };
 
   // Fix the typed parameters
-  const renderRequirements = (requirements: RequirementItem[], title: string) => {
+  const renderRequirements = (
+    requirements: RequirementItem[],
+    title: string
+  ) => {
     return (
       <div className="mb-4">
         <h4 className="text-md font-medium mb-2">{title}</h4>
@@ -221,22 +260,27 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   };
 
   // Fix the typed parameters
-  const renderTechnologies = (technologies: TechnicalImplementationDetails[], title: string) => {
+  const renderTechnologies = (
+    technologies: TechnicalImplementationDetails[],
+    title: string
+  ) => {
     return (
       <div className="mb-4">
         <h4 className="text-md font-medium mb-2">{title}</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {technologies.map((tech: TechnicalImplementationDetails, index: number) => (
-            <div
-              key={`tech-${index}`}
-              className="p-3 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700"
-            >
-              <div className="font-medium mb-1">{tech.description}</div>
-              <div className="text-xs text-gray-600 dark:text-gray-400">
-                {tech.effort?.expertise}
+          {technologies.map(
+            (tech: TechnicalImplementationDetails, index: number) => (
+              <div
+                key={`tech-${index}`}
+                className="p-3 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700"
+              >
+                <div className="font-medium mb-1">{tech.description}</div>
+                <div className="text-xs text-gray-600 dark:text-gray-400">
+                  {tech.effort?.expertise}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
         </div>
       </div>
     );
@@ -251,10 +295,11 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
     >
       <div className="p-4">
         <p className="mb-4">
-          This widget provides technical implementation details and resource requirements
-          for deploying security controls at your selected security levels.
+          This widget provides technical implementation details and resource
+          requirements for deploying security controls at your selected security
+          levels.
         </p>
-        
+
         <div className="border-b mb-4">
           <nav className="flex space-x-4" aria-label="Security Components">
             <Tab
@@ -286,21 +331,35 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
             <span className="mr-2">⏱️</span>Availability
           </h3>
           <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded border border-blue-100 dark:border-blue-800">
-            <h4 className="font-medium mb-1">Availability Implementation: {availabilityLevel}</h4>
-            <p className="text-sm mb-3">{availabilityDetails?.description || 'No description available'}</p>
-            
+            <h4 className="font-medium mb-1">
+              Availability Implementation: {availabilityLevel}
+            </h4>
+            <p className="text-sm mb-3">
+              {availabilityDetails?.description || "No description available"}
+            </p>
+
             <div className="grid grid-cols-3 gap-4 mb-3">
               <div>
-                <div className="text-xs font-medium mb-1">Development Effort</div>
-                <div className="text-sm font-bold">{getDefaultDevelopmentEffort(availabilityLevel)}</div>
+                <div className="text-xs font-medium mb-1">
+                  Development Effort
+                </div>
+                <div className="text-sm font-bold">
+                  {getDefaultDevelopmentEffort(availabilityLevel)}
+                </div>
               </div>
               <div>
                 <div className="text-xs font-medium mb-1">Maintenance</div>
-                <div className="text-sm font-bold">{getDefaultMaintenanceEffort(availabilityLevel)}</div>
+                <div className="text-sm font-bold">
+                  {getDefaultMaintenanceEffort(availabilityLevel)}
+                </div>
               </div>
               <div>
-                <div className="text-xs font-medium mb-1">Required Expertise</div>
-                <div className="text-sm font-bold">{getDefaultExpertiseLevel(availabilityLevel)}</div>
+                <div className="text-xs font-medium mb-1">
+                  Required Expertise
+                </div>
+                <div className="text-sm font-bold">
+                  {getDefaultExpertiseLevel(availabilityLevel)}
+                </div>
               </div>
             </div>
           </div>
@@ -309,7 +368,8 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         {/* Component details */}
         <div className="mb-6">
           <h3 className="text-lg font-medium mb-2">
-            {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Implementation: {activeLevel}
+            {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}{" "}
+            Implementation: {activeLevel}
           </h3>
           <p className="mb-4 text-gray-700 dark:text-gray-300">
             {getTechnicalDescription(activeTab, activeLevel)}
@@ -324,7 +384,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
               Development Effort
             </h5>
             <p className="text-gray-700 dark:text-gray-300 text-sm">
-              {implementationDetails?.effort?.development || 
+              {implementationDetails?.effort?.development ||
                 getDefaultDevelopmentEffort(activeLevel)}
             </p>
           </div>
@@ -334,7 +394,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
               Maintenance
             </h5>
             <p className="text-gray-700 dark:text-gray-300 text-sm">
-              {implementationDetails?.effort?.maintenance || 
+              {implementationDetails?.effort?.maintenance ||
                 getDefaultMaintenanceEffort(activeLevel)}
             </p>
           </div>
@@ -344,7 +404,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
               Required Expertise
             </h5>
             <p className="text-gray-700 dark:text-gray-300 text-sm">
-              {implementationDetails?.effort?.expertise || 
+              {implementationDetails?.effort?.expertise ||
                 getDefaultExpertiseLevel(activeLevel)}
             </p>
           </div>
@@ -360,12 +420,18 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
             <ol className="list-decimal list-inside space-y-2">
               {implementationSteps.length > 0 ? (
                 implementationSteps.map((step, index) => (
-                  <li key={`step-${index}`} data-testid={`implementation-step-${index}`}>
+                  <li
+                    key={`step-${index}`}
+                    data-testid={`implementation-step-${index}`}
+                  >
                     {step}
                   </li>
                 ))
               ) : (
-                <li>No specific implementation steps provided for this security level.</li>
+                <li>
+                  No specific implementation steps provided for this security
+                  level.
+                </li>
               )}
             </ol>
           </div>
@@ -377,12 +443,17 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
             <h4 className="text-md font-medium mb-3">Code Examples</h4>
             <div className="space-y-4">
               {codeExamples.map((example, index) => (
-                <div key={`code-example-${index}`} className="border border-gray-200 dark:border-gray-700 rounded-md">
+                <div
+                  key={`code-example-${index}`}
+                  className="border border-gray-200 dark:border-gray-700 rounded-md"
+                >
                   <div className="bg-gray-50 dark:bg-gray-800 p-2 border-b border-gray-200 dark:border-gray-700">
                     <h5 className="font-medium">{example.title}</h5>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">{example.language}</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      {example.language}
+                    </div>
                   </div>
-                  <CodeBlock 
+                  <CodeBlock
                     code={example.code}
                     language={example.language}
                     testId={`code-example-${index}`}
@@ -433,43 +504,54 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
           <div className="mt-6">
             <KeyValuePair
               label="Protection Method"
-              value={confidentialityDetails?.protectionMethod || "Not specified"}
+              value={
+                confidentialityDetails?.protectionMethod || "Not specified"
+              }
               testId={`${testId}-protection-method`}
             />
           </div>
         )}
 
         {/* Requirements section */}
-        {implementationDetails?.requirements && implementationDetails.requirements.length > 0 && (
-          <div className="mt-6">
-            <h4 className="text-md font-medium mb-3">Requirements</h4>
-            <ul className="list-disc list-inside space-y-1 pl-4">
-              {implementationDetails.requirements.map((req: string, index: number) => (
-                <li key={`requirement-${index}`} data-testid={`requirement-${index}`}>
-                  {req}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {implementationDetails?.requirements &&
+          implementationDetails.requirements.length > 0 && (
+            <div className="mt-6">
+              <h4 className="text-md font-medium mb-3">Requirements</h4>
+              <ul className="list-disc list-inside space-y-1 pl-4">
+                {implementationDetails.requirements.map(
+                  (req: string, index: number) => (
+                    <li
+                      key={`requirement-${index}`}
+                      data-testid={`requirement-${index}`}
+                    >
+                      {req}
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+          )}
 
         {/* Technologies section */}
-        {implementationDetails?.technologies && implementationDetails.technologies.length > 0 && (
-          <div className="mt-6">
-            <h4 className="text-md font-medium mb-3">Technologies</h4>
-            <div className="flex flex-wrap gap-2">
-              {implementationDetails.technologies.map((tech: string, index: number) => (
-                <span 
-                  key={`tech-${index}`} 
-                  className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300 rounded-md"
-                  data-testid={`technology-${index}`}
-                >
-                  {tech}
-                </span>
-              ))}
+        {implementationDetails?.technologies &&
+          implementationDetails.technologies.length > 0 && (
+            <div className="mt-6">
+              <h4 className="text-md font-medium mb-3">Technologies</h4>
+              <div className="flex flex-wrap gap-2">
+                {implementationDetails.technologies.map(
+                  (tech: string, index: number) => (
+                    <span
+                      key={`tech-${index}`}
+                      className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300 rounded-md"
+                      data-testid={`technology-${index}`}
+                    >
+                      {tech}
+                    </span>
+                  )
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     </WidgetContainer>
   );
