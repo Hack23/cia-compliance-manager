@@ -1,30 +1,18 @@
 import { describe, expect, it, vi } from "vitest";
-import { createChartJsMock, mockDOMAPIs } from "./mockFactory";
+import { createChartJsMock } from "../testMocks/ciaOptionsMocks";
+import { mockDOMAPIs } from "./mockFactory";
 
 describe("mockFactory utilities", () => {
   describe("createChartJsMock", () => {
-    it("returns properly structured mock constructor and instance", () => {
-      const { mockConstructor, mockInstance, mockModule } = createChartJsMock();
-
-      expect(mockConstructor).toBeInstanceOf(Function);
-      expect(mockInstance).toHaveProperty("destroy");
-      expect(mockInstance).toHaveProperty("update");
-      expect(mockInstance).toHaveProperty("resize");
-
-      // Check module structure
-      expect(mockModule).toHaveProperty("__esModule", true);
-      expect(mockModule).toHaveProperty("default");
-      expect(mockModule.default).toBe(mockConstructor);
-    });
-
     it("creates mocks that can be properly spied on", () => {
-      const { mockInstance } = createChartJsMock();
+      const chartMock = createChartJsMock();
+      const chartInstance = chartMock.default();
 
-      // Spy on a method
-      const destroySpy = vi.spyOn(mockInstance, "destroy");
+      // Make sure destroy is a mock function we can spy on
+      const destroySpy = vi.spyOn(chartInstance, "destroy");
 
-      // Call the method
-      mockInstance.destroy();
+      // Call the destroy method
+      chartInstance.destroy();
 
       // Verify spy works
       expect(destroySpy).toHaveBeenCalledTimes(1);

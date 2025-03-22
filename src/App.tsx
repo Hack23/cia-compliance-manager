@@ -24,10 +24,8 @@ import { APP_TEST_IDS } from "./constants/testIds";
  */
 function App() {
   return (
-    <div className="app-root" data-testid={APP_TEST_IDS.APP_ROOT}>
-      <div data-testid={APP_TEST_IDS.CIA_CLASSIFICATION_APP}>
-        <CIAClassificationApp />
-      </div>
+    <div className="app-container" data-testid={APP_TEST_IDS.APP_CONTAINER}>
+      <CIAClassificationApp />
     </div>
   );
 }

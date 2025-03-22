@@ -6,16 +6,25 @@
  * @module components/widgets
  */
 
-export { default as AvailabilityImpactWidget } from "./AvailabilityImpactWidget";
-export { default as BusinessImpactAnalysisWidget } from "./BusinessImpactAnalysisWidget";
-export { default as CIAImpactSummaryWidget } from "./CIAImpactSummaryWidget";
-export { default as ComplianceStatusWidget } from "./ComplianceStatusWidget";
-export { default as ConfidentialityImpactWidget } from "./ConfidentialityImpactWidget";
-export { default as CostEstimationWidget } from "./CostEstimationWidget";
-export { default as IntegrityImpactWidget } from "./IntegrityImpactWidget";
-export { default as SecurityLevelWidget } from "./SecurityLevelWidget";
-export { default as SecurityResourcesWidget } from "./SecurityResourcesWidget";
-export { default as SecuritySummaryWidget } from "./SecuritySummaryWidget";
-export { default as SecurityVisualizationWidget } from "./SecurityVisualizationWidget";
-export { default as TechnicalDetailsWidget } from "./TechnicalDetailsWidget";
-export { default as ValueCreationWidget } from "./ValueCreationWidget";
+// Assessment Center Widgets
+export { default as SecurityLevelWidget } from "./assessmentcenter/SecurityLevelWidget";
+export { default as SecuritySummaryWidget } from "./assessmentcenter/SecuritySummaryWidget";
+
+// Business Value Widgets
+export { default as BusinessImpactAnalysisWidget } from "./assessmentcenter/BusinessImpactAnalysisWidget";
+export { default as ComplianceStatusWidget } from "./businessvalue/ComplianceStatusWidget";
+export { default as CostEstimationWidget } from "./businessvalue/CostEstimationWidget";
+export { default as ValueCreationWidget } from "./businessvalue/ValueCreationWidget";
+
+// Implementation Guide Widgets
+export { default as SecurityResourcesWidget } from "./implementationguide/SecurityResourcesWidget";
+export { default as SecurityVisualizationWidget } from "./implementationguide/SecurityVisualizationWidget";
+export { default as TechnicalDetailsWidget } from "./implementationguide/TechnicalDetailsWidget";
+
+// Impact Analysis Widgets
+export { default as AvailabilityImpactWidget } from "./impactanalysis/AvailabilityImpactWidget";
+export { default as ConfidentialityImpactWidget } from "./impactanalysis/ConfidentialityImpactWidget";
+export { default as IntegrityImpactWidget } from "./impactanalysis/IntegrityImpactWidget";
+
+// Constants
+export * from "./constants";

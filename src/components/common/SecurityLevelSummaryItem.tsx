@@ -1,22 +1,56 @@
 import React from "react";
 import { SecurityLevel } from "../../types/cia";
-import { getSecurityLevelClass } from "../../utils/securityLevelUtils";
+import { getSecurityLevelValue } from "../../utils/levelValuesUtils";
 
-export interface SecurityLevelSummaryItemProps {
+/**
+ * Props for the SecurityLevelSummaryItem component
+ */
+interface SecurityLevelSummaryItemProps {
+  /**
+   * The label to display for this security level item
+   */
   label: string;
+  
+  /**
+   * The security level value to display
+   */
   value: SecurityLevel;
-  icon: string;
+  
+  /**
+   * Optional icon to display
+   */
+  icon?: string;
+  
+  /**
+   * Optional test ID for testing
+   */
   testId?: string;
+  
+  /**
+   * Optional color to use for styling
+   */
   color?: string;
+  
+  /**
+   * Optional border color
+   */
   borderColor?: string;
+  
+  /**
+   * Whether to display in compact mode
+   */
   compact?: boolean;
 }
 
 /**
- * Security level summary item with enhanced Ingress styling
- * Used to display security level information in a compact, consistent format
+ * Displays a summary item for a security level with standardized styling
+ * 
+ * ## Business Perspective
+ * 
+ * This component ensures consistent display of security levels across the application,
+ * providing stakeholders with a uniform visual language for understanding security controls. 🔒
  */
-const SecurityLevelSummaryItem: React.FC<SecurityLevelSummaryItemProps> = ({
+export const SecurityLevelSummaryItem: React.FC<SecurityLevelSummaryItemProps> = ({
   label,
   value,
   icon,
@@ -25,73 +59,58 @@ const SecurityLevelSummaryItem: React.FC<SecurityLevelSummaryItemProps> = ({
   borderColor,
   compact = false,
 }) => {
-  // Get the icon class based on the label (for consistent styling)
-  const getIconClass = () => {
-    if (label.toLowerCase().includes("confidentiality"))
-      return "icon-confidentiality";
-    if (label.toLowerCase().includes("integrity")) return "icon-integrity";
-    if (label.toLowerCase().includes("availability"))
-      return "icon-availability";
-    return "";
-  };
-
-  // Get the security level indicator class
-  const getLevelClass = () => {
-    const levelMap: Record<string, string> = {
-      None: "level-none",
-      Low: "level-low",
-      Moderate: "level-moderate",
-      High: "level-high",
-      "Very High": "level-very-high",
-    };
-
-    return levelMap[value] || "level-none";
-  };
-
+  // Calculate security strength as a percentage based on level
+  const securityStrength = getSecurityLevelValue(value) * 25;
+  
+  // Get border style based on props or color
+  const borderStyle = borderColor 
+    ? { borderColor: borderColor }
+    : {};
+    
   if (compact) {
     return (
       <div
+        className={`px-3 py-2 bg-${color}-50 dark:bg-${color}-900 dark:bg-opacity-20 rounded border border-${color}-100 dark:border-${color}-800 flex items-center justify-between`}
+        style={borderStyle}
         data-testid={testId}
-        className="flex items-center bg-gray-50 dark:bg-gray-800 px-2 py-1 rounded-md text-xs"
-        style={{
-          borderLeft: borderColor ? `3px solid ${borderColor}` : undefined,
-        }}
       >
-        <span className={`mr-1 ${getIconClass()}`}>{icon}</span>
-        <div>
-          <div className="text-gray-500 dark:text-gray-400 text-xxs">
+        <div className="flex items-center">
+          {icon && <span className="mr-2">{icon}</span>}
+          <span className={`text-${color}-700 dark:text-${color}-300 font-medium`}>
             {label}
-          </div>
-          <div className="font-medium flex items-center">
-            <span
-              className={`security-level-indicator ${getLevelClass()} mr-1`}
-            ></span>
-            {value}
-          </div>
+          </span>
         </div>
+        <span className={`text-${color}-800 dark:text-${color}-200 font-bold`}>
+          {value}
+        </span>
       </div>
     );
   }
-
+  
   return (
-    <div
-      className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md flex items-center security-card"
-      style={{
-        borderLeft: borderColor ? `3px solid ${borderColor}` : undefined,
-      }}
+    <div 
+      className={`p-3 bg-${color}-50 dark:bg-${color}-900 dark:bg-opacity-20 rounded border-l-4`}
+      style={{ borderLeftColor: borderColor || `var(--${color}-500)` }}
       data-testid={testId}
     >
-      <div className="icon-container mr-3">
-        <span className={getIconClass()}>{icon}</span>
-      </div>
-      <div className="flex-grow">
-        <div className="text-xs text-gray-500 dark:text-gray-400">{label}</div>
-        <div className="font-medium flex items-center">
-          <span
-            className={`security-level-indicator ${getLevelClass()} mr-1`}
-          ></span>
-          {value}
+      <div className="flex justify-between items-center mb-1">
+        <div className="flex items-center">
+          {icon && <span className="mr-2">{icon}</span>}
+          <span className={`text-${color}-700 dark:text-${color}-300 font-medium`}>
+            {label}
+          </span>
         </div>
+        <span className={`text-${color}-800 dark:text-${color}-200 font-bold`}>
+          {value}
+        </span>
+      </div>
+      
+      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
+        <div
+          className={`h-1.5 rounded-full bg-${color}-500 dark:bg-${color}-400`}
+          style={{ width: `${securityStrength}%` }}
+          aria-label={`Security level: ${value} (${securityStrength}%)`}
+        ></div>
       </div>
     </div>
   );

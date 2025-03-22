@@ -1,371 +1,581 @@
-import { ComponentType, Dispatch, SetStateAction } from "react";
-import { CIADetails, SecurityLevel } from "./cia";
+import { ReactNode } from "react";
+import { SecurityLevel } from "./cia";
+import {
+  BusinessImpactDetails,
+  CIADetails,
+  ROIEstimate,
+  TechnicalImplementationDetails,
+} from "./cia-services";
+import { CommonWidgetProps, WithSecurityLevelProps } from "./widget-props";
 
 /**
- * Base properties for all widgets
+ * Widget-specific interfaces that extend or use the core CIA types
+ *
+ * ## Business Perspective
+ *
+ * These interfaces support the visual representation of security controls,
+ * providing stakeholders with an intuitive way to understand security impact. 📊
+ *
+ * The widget type system is designed to ensure consistency across the application
+ * while supporting the specific business needs of different security assessment areas.
+ *
+ * @category Widgets
+ * @packageDocumentation
+ */
+
+/**
+ * Base widget props shared by all widgets
+ *
+ * @category Base Types
+ */
+export interface BaseWidgetProps extends CommonWidgetProps {
+  /**
+   * Optional children elements
+   */
+  children?: ReactNode;
+}
+
+/**
+ * Props for security-related widgets
+ *
+ * ## Business Perspective
+ *
+ * These widgets form the foundation of security assessment in the application,
+ * allowing organizations to visualize and manage their security posture
+ * across the CIA triad. 🔒
+ *
+ * @category Base Types
+ */
+export interface SecurityWidgetBaseProps
+  extends WithSecurityLevelProps,
+    BaseWidgetProps {}
+
+/**
+ * Base props for all widgets
+ *
+ * ## Business Perspective
+ *
+ * All widgets in the application share these core properties, enabling
+ * consistent styling, testing, and interactive capabilities. This creates
+ * a unified dashboard experience for security officers and executives. 🎨
+ *
+ * @category Base Types
  */
 export interface WidgetBaseProps {
-  /** Test ID for component selection in tests */
-  testId?: string;
-  // Make these properties optional
-  availabilityLevel?: string;
-  integrityLevel?: string;
-  confidentialityLevel?: string;
+  /**
+   * Optional CSS class name
+   */
   className?: string;
-  securityLevel?: string;
-}
 
-/**
- * Generic details interface that all specific detail interfaces should extend
- * This ensures compatibility across different widget implementations
- */
-export interface BaseWidgetDetails {
-  description?: string;
-  businessImpact?: string;
-  impact?: string;
-  technical?: string;
-  recommendations?: string[];
-  [key: string]: unknown; // Allow additional properties with stricter type
-}
+  /**
+   * Optional test ID for testing
+   */
+  testId?: string;
 
-/**
- * Props for the CostEstimationWidget component
- */
-export interface CostEstimationWidgetProps extends WidgetBaseProps {
-  /** Total capital expenditure as percentage of IT budget */
-  totalCapex?: number;
-  /** Total operational expenditure as percentage of IT budget */
-  totalOpex?: number;
-  /** Formatted capital expenditure estimate */
-  capexEstimate?: string;
-  /** Formatted operational expenditure estimate */
-  opexEstimate?: string;
-  /** Whether this is a small solution (affects cost calculations) */
-  isSmallSolution?: boolean;
-  /** Return on investment estimate */
-  roi?: string;
-  /** Implementation time estimate */
-  implementationTime?: string;
-  /** Availability options */
-  availabilityOptions?: Record<string, CIADetails>;
-  /** Integrity options */
-  integrityOptions?: Record<string, CIADetails>;
-  /** Confidentiality options */
-  confidentialityOptions?: Record<string, CIADetails>;
-  /** Security level */
+  /**
+   * Optional security level for widgets that only need one level
+   */
   securityLevel?: SecurityLevel;
 }
 
 /**
- * Props for the ValueCreationWidget component
+ * Base props shared by all CIA-related widgets
+ *
+ * This provides a common foundation for all widgets that display
+ * information based on CIA security levels.
+ *
+ * ## Business Perspective
+ *
+ * CIA-related widgets help organizations understand their security posture
+ * from different angles (availability, integrity, confidentiality),
+ * providing consistent assessment and reporting capabilities. 📋
+ *
+ * @category Base Types
  */
-export interface ValueCreationWidgetProps extends WidgetBaseProps {
-  securityLevel: SecurityLevel;
+export interface CIABaseWidgetProps extends WidgetBaseProps {
+  /**
+   * Availability security level
+   */
+  availabilityLevel: SecurityLevel;
+
+  /**
+   * Integrity security level
+   */
+  integrityLevel: SecurityLevel;
+
+  /**
+   * Confidentiality security level
+   */
+  confidentialityLevel: SecurityLevel;
 }
 
 /**
- * Props for the SecuritySummaryWidget component
+ * Alias type for WidgetBaseProps to maintain backward compatibility
+ *
+ * @category Base Types
  */
-export interface SecuritySummaryWidgetProps extends WidgetBaseProps {
-  securityLevel: SecurityLevel;
-  availabilityLevel: SecurityLevel;
-  integrityLevel: SecurityLevel;
-  confidentialityLevel: SecurityLevel;
+export type WidgetProps = WidgetBaseProps;
+
+/**
+ * Props for widgets that display security summaries
+ *
+ * This widget displays a summary of the current security posture based on
+ * confidentiality, integrity, and availability security levels. It provides
+ * a consolidated view of the organization's security stance.
+ *
+ * ## Business Perspective
+ *
+ * This component helps security officers quickly visualize the current
+ * security posture across the CIA triad. The security level information
+ * is critical for compliance reporting and risk assessment. 🔒
+ *
+ * @category Assessment Widgets
+ */
+export interface SecuritySummaryWidgetProps extends SecurityWidgetBaseProps {
+  /**
+   * Optional overall security level
+   */
+  securityLevel?: SecurityLevel;
+}
+
+/**
+ * Props for widgets that display security impacts
+ *
+ * ## Business Perspective
+ *
+ * Impact widgets help stakeholders understand the consequences of their
+ * security choices, highlighting how each security level affects the
+ * organization from technical, operational, and business perspectives. 💼
+ *
+ * @category Impact Widgets
+ */
+export interface SecurityImpactWidgetProps extends SecurityWidgetBaseProps {
+  /**
+   * Optional level (for backward compatibility)
+   */
+  level?: SecurityLevel;
+}
+
+/**
+ * Props for widgets that display business impacts
+ *
+ * ## Business Perspective
+ *
+ * Business impact widgets translate technical security concepts into
+ * business terms, helping executives understand ROI, cost-benefit analysis,
+ * and business value of security investments. 📊
+ *
+ * @category Business Widgets
+ */
+export interface BusinessImpactWidgetProps extends SecurityWidgetBaseProps {
+  /**
+   * Optional ROI information
+   */
+  roi?: {
+    value: string;
+    description: string;
+  };
+}
+
+/**
+ * Props for widgets that display compliance status
+ *
+ * ## Business Perspective
+ *
+ * Compliance widgets help organizations understand how their security settings
+ * align with regulatory requirements, enabling them to identify gaps and
+ * satisfy audit requirements. 📋
+ *
+ * @category Compliance Widgets
+ */
+export interface ComplianceWidgetProps extends SecurityWidgetBaseProps {
+  /**
+   * Optional refresh trigger to reload data
+   */
+  refreshTrigger?: number;
+}
+
+/**
+ * Security level widget props for selecting and displaying security levels
+ *
+ * ## Business Perspective
+ *
+ * These widgets provide interactive controls for security professionals to
+ * adjust security levels and immediately see the impact of their choices. 🔄
+ *
+ * @category Security Level Widgets
+ */
+export interface SecurityLevelWidgetProps extends CIABaseWidgetProps {
+  /**
+   * Callback for when security levels change
+   */
+  onLevelChange?: (
+    component: "availability" | "integrity" | "confidentiality",
+    level: SecurityLevel
+  ) => void;
+
+  /**
+   * Whether the widget is disabled
+   */
+  disabled?: boolean;
+}
+
+/**
+ * Detail interface for availability component information
+ *
+ * @category Component Details
+ */
+export interface AvailabilityDetail extends CIADetails {
+  uptime: string;
+  rto: string;
+  rpo: string;
+  mttr: string;
+}
+
+/**
+ * Detail interface for integrity component information
+ *
+ * @category Component Details
+ */
+export interface IntegrityDetail extends CIADetails {
+  validationMethod: string;
+}
+
+/**
+ * Detail interface for confidentiality component information
+ *
+ * @category Component Details
+ */
+export interface ConfidentialityDetail extends CIADetails {
+  protectionMethod: string;
+}
+
+/**
+ * Props for business impact analysis widgets
+ *
+ * ## Business Perspective
+ *
+ * These widgets translate security settings into clear business impacts,
+ * helping executives understand how security affects operations, finances,
+ * and reputation. 💼
+ *
+ * @category Business Widgets
+ */
+export interface BusinessImpactAnalysisWidgetProps extends CIABaseWidgetProps {
+  /**
+   * Business impact details
+   */
+  businessImpact?: BusinessImpactDetails;
 }
 
 /**
  * Props for ComplianceStatusWidget component
+ *
+ * ## Business Perspective
+ *
+ * This widget helps compliance officers understand how current security
+ * settings align with major regulatory frameworks, providing actionable
+ * insights into compliance gaps and requirements. 📋
+ *
+ * @category Compliance Widgets
  */
 export interface ComplianceStatusWidgetProps extends WidgetBaseProps {
-  /** Overall security level */
-  securityLevel?: SecurityLevel;
+  /**
+   * Availability security level (optional when securityLevel is provided)
+   */
   availabilityLevel?: SecurityLevel;
+
+  /**
+   * Integrity security level (optional when securityLevel is provided)
+   */
   integrityLevel?: SecurityLevel;
+
+  /**
+   * Confidentiality security level (optional when securityLevel is provided)
+   */
   confidentialityLevel?: SecurityLevel;
-}
-
-/**
- * Types for Integrity Impact Widget
- * Compatible with CIADetails for easier integration
- */
-export interface IntegrityDetail extends BaseWidgetDetails {
-  description: string;
-  businessImpact: string;
-  validationMethod?: string;
-  recommendations: string[];
-  technicalControls?: string[];
-  complianceImplications?: string;
-}
-
-/**
- * Props for the IntegrityImpactWidget component
- */
-export interface IntegrityImpactWidgetProps extends WidgetBaseProps {
-  integrityLevel: SecurityLevel;
-  // Change the optional fields to align with WidgetBaseProps constraint
-  availabilityLevel: SecurityLevel;
-  confidentialityLevel: SecurityLevel;
-  className?: string;
-  testId?: string;
-  options?: Record<string, any>;
-}
-
-/**
- * Types for Confidentiality Impact Widget
- * Compatible with CIADetails for easier integration
- */
-export interface ConfidentialityDetail extends BaseWidgetDetails {
-  impact: string;
-  businessImpact: string;
-  recommendations: string[];
-  technicalMeasures?: string[];
-  complianceImplications?: string;
-  riskLevel?: string;
-}
-
-/**
- * Props for the ConfidentialityImpactWidget component
- */
-export interface ConfidentialityImpactWidgetProps extends WidgetBaseProps {
-  confidentialityLevel: SecurityLevel;
-  // Change the optional fields to align with WidgetBaseProps constraint
-  availabilityLevel: SecurityLevel;
-  integrityLevel: SecurityLevel;
-  className?: string;
-  testId?: string;
-  options?: Record<string, any>;
-}
-
-/**
- * Types for Availability Impact Widget
- * Compatible with CIADetails for easier integration
- */
-export interface AvailabilityDetail extends BaseWidgetDetails {
-  description: string;
-  businessImpact: string;
-  uptime: string;
-  recommendations: string[];
-  mttr?: string;
-  rto?: string;
-  rpo?: string;
-}
-
-/**
- * Props for the AvailabilityImpactWidget component
- */
-export interface AvailabilityImpactWidgetProps extends WidgetBaseProps {
-  /** Options for each level - optional when using ciaContentService */
-  options?: Record<string, AvailabilityDetail | CIADetails>;
-  availabilityLevel: SecurityLevel;
-  integrityLevel?: SecurityLevel;
-  confidentialityLevel?: SecurityLevel;
-}
-
-/**
- * Props for the SecurityResourcesWidget component
- */
-export interface SecurityResourcesWidgetProps extends WidgetBaseProps {
-  /** Overall security level */
-  securityLevel: SecurityLevel;
-  availabilityLevel: SecurityLevel;
-  integrityLevel: SecurityLevel;
-  confidentialityLevel: SecurityLevel;
-}
-
-/**
- * Props for the TechnicalDetailsWidget component
- */
-export interface TechnicalDetailsWidgetProps extends WidgetBaseProps {
-  /** Availability options for specific technical details */
-  availabilityOptions?: Record<string, CIADetails>;
-  /** Integrity options for specific technical details */
-  integrityOptions?: Record<string, CIADetails>;
-  /** Confidentiality options for specific technical details */
-  confidentialityOptions?: Record<string, CIADetails>;
-  /** Optional CSS class name */
-  className?: string;
-  availabilityLevel?: SecurityLevel | string;
-  integrityLevel?: SecurityLevel | string;
-  confidentialityLevel?: SecurityLevel | string;
-}
-
-/**
- * Props for the BusinessImpactAnalysisWidget component
- */
-export interface BusinessImpactAnalysisWidgetProps extends WidgetBaseProps {
-  availabilityLevel: SecurityLevel;
-  integrityLevel: SecurityLevel;
-  confidentialityLevel: SecurityLevel;
-  securityLevel?: SecurityLevel; // Add securityLevel property to match component
-  className?: string;
-  testId?: string;
-  activeComponent?: "availability" | "integrity" | "confidentiality";
-}
-
-/**
- * Props for the SecurityLevelWidget component
- */
-export interface SecurityLevelWidgetProps {
-  availabilityLevel: string;
-  integrityLevel: string;
-  confidentialityLevel: string;
-  onAvailabilityChange?: (level: string) => void;
-  onIntegrityChange?: (level: string) => void;
-  onConfidentialityChange?: (level: string) => void;
-  setAvailability?:
-    | ((level: string) => void)
-    | Dispatch<SetStateAction<string>>;
-  setIntegrity?: ((level: string) => void) | Dispatch<SetStateAction<string>>;
-  setConfidentiality?:
-    | ((level: string) => void)
-    | Dispatch<SetStateAction<string>>;
-  className?: string;
-  testId?: string;
-  title?: string;
-  loading?: boolean;
-  error?: Error | null;
-}
-
-// Add missing types
-export interface SecurityVisualizationWidgetProps extends WidgetBaseProps {
-  availabilityLevel: SecurityLevel;
-  integrityLevel: SecurityLevel;
-  confidentialityLevel: SecurityLevel;
-  className?: string;
-  testId?: string;
-}
-
-export interface CIAImpactSummaryWidgetProps extends WidgetBaseProps {
-  availabilityLevel: SecurityLevel;
-  integrityLevel: SecurityLevel;
-  confidentialityLevel: SecurityLevel;
-  className?: string;
-  testId?: string;
-}
-
-/**
- * Type adapter functions to convert between different detail types
- */
-export const typeAdapters = {
-  /**
-   * Converts CIADetails to IntegrityDetail
-   */
-  toIntegrityDetail(details: CIADetails): IntegrityDetail {
-    return {
-      description: details.description || "",
-      businessImpact: details.businessImpact || "",
-      validationMethod: details.validationMethod,
-      recommendations: details.recommendations || [],
-      // Force casting to specific type instead of using 'as'
-      technicalControls: Array.isArray(details.technicalControls)
-        ? details.technicalControls
-        : undefined,
-      complianceImplications:
-        typeof details.complianceImplications === "string"
-          ? details.complianceImplications
-          : undefined,
-    };
-  },
 
   /**
-   * Converts CIADetails to ConfidentialityDetail
+   * Optional overall security level, used as fallback when individual levels aren't provided
    */
-  toConfidentialityDetail(details: CIADetails): ConfidentialityDetail {
-    return {
-      impact: details.impact || details.description || "",
-      businessImpact: details.businessImpact || "",
-      recommendations: details.recommendations || [],
-      // Force casting to specific type instead of using 'as'
-      technicalMeasures: Array.isArray(details.technicalMeasures)
-        ? details.technicalMeasures
-        : undefined,
-      complianceImplications:
-        typeof details.complianceImplications === "string"
-          ? details.complianceImplications
-          : undefined,
-      riskLevel:
-        typeof details.riskLevel === "string" ? details.riskLevel : undefined,
-    };
-  },
+  securityLevel?: SecurityLevel;
 
   /**
-   * Converts CIADetails to AvailabilityDetail
+   * Optional refresh trigger to reload data
    */
-  toAvailabilityDetail(details: CIADetails): AvailabilityDetail {
-    return {
-      description: details.description || "",
-      businessImpact: details.businessImpact || "",
-      uptime: details.uptime || "Unknown",
-      recommendations: details.recommendations || [],
-      // Force casting to specific type instead of using 'as'
-      mttr: typeof details.mttr === "string" ? details.mttr : undefined,
-      rto: typeof details.rto === "string" ? details.rto : undefined,
-      rpo: typeof details.rpo === "string" ? details.rpo : undefined,
-    };
-  },
-};
-
-/**
- * Base widget component type
- */
-export type WidgetComponentType<T = any> = ComponentType<T>;
-
-/**
- * Widget size configuration
- */
-export interface WidgetSize {
-  width: number;
-  height: number;
+  refreshTrigger?: number;
 }
 
 /**
- * Preset widget sizes
+ * Props for value creation widgets
+ *
+ * ## Business Perspective
+ *
+ * These widgets help executives understand the business value and ROI of
+ * security investments, supporting budget justification and strategic
+ * planning discussions. 💰
+ *
+ * @category Business Widgets
  */
-export enum WidgetSizePreset {
-  SMALL = "small",
-  MEDIUM = "medium",
-  LARGE = "large",
-  EXTRA_LARGE = "extraLarge",
-  FULL_WIDTH = "fullWidth",
-  DEFAULT = "medium",
+export interface ValueCreationWidgetProps extends CIABaseWidgetProps {
+  /**
+   * Overall security level
+   */
+  securityLevel?: SecurityLevel;
+
+  /**
+   * Return on investment estimate
+   */
+  roi?: ROIEstimate;
 }
 
 /**
- * Widget definition structure
+ * Props for cost estimation widgets
+ *
+ * ## Business Perspective
+ *
+ * Cost estimation widgets help organizations understand the financial
+ * implications of security choices, supporting budget planning and
+ * investment prioritization. 💰
+ *
+ * @category Business Widgets
  */
-export interface WidgetDefinition<T = any> {
-  id: string;
-  title: string;
-  description?: string;
-  component: WidgetComponentType<T>;
-  defaultProps?: Partial<T>;
-  icon?: string;
-  size?: string;
-  order?: number;
-  position?: number;
-  visible?: boolean;
-  minSecurityLevel?: string | number;
-  maxSecurityLevel?: string | number;
-  requiredSecurityLevels?: string[];
+export interface CostEstimationWidgetProps extends CIABaseWidgetProps {
+  // No additional props needed beyond CIABaseWidgetProps
 }
 
 /**
- * Widget configuration structure
+ * Props for technical details widgets
+ *
+ * ## Business Perspective
+ *
+ * These widgets provide technical teams with implementation details and
+ * guidance for meeting security requirements, translating policy into
+ * actionable technical controls. 🔧
+ *
+ * @category Implementation Widgets
  */
-export interface WidgetConfig {
-  id: string;
-  type: string;
-  title: string;
-  description: string;
-  icon: string;
-  priority: number;
-  visible: boolean;
-  size: string;
-  width: number;
-  height: number;
-  order: number;
-  requiredSecurityLevels?: string[];
-  minSecurityLevel?: string | number;
-  maxSecurityLevel?: string | number;
-  position?: number;
+export interface TechnicalDetailsWidgetProps extends CIABaseWidgetProps {
+  /**
+   * Implementation details for technical guidance
+   */
+  implementationDetails?: TechnicalImplementationDetails;
+}
+
+/**
+ * Props for the CIA Impact Summary Widget
+ *
+ * ## Business Perspective
+ *
+ * This widget provides a consolidated view of security impacts across the
+ * CIA triad, helping security officers understand the overall security
+ * posture at a glance. 📊
+ *
+ * @category Assessment Widgets
+ */
+export interface CIAImpactSummaryWidgetProps extends SecurityLevelWidgetProps {
+  /**
+   * Whether to show detailed information
+   */
+  showDetails?: boolean;
+}
+
+/**
+ * Props for security visualization widgets
+ *
+ * ## Business Perspective
+ *
+ * Visualization widgets help stakeholders understand complex security
+ * concepts through intuitive charts and graphs, making security posture
+ * more accessible to non-technical audiences. 📈
+ *
+ * @category Visualization Widgets
+ */
+export interface SecurityVisualizationWidgetProps extends CIABaseWidgetProps {
+  /**
+   * Type of chart to display
+   */
+  chartType?: "radar" | "bar" | "gauge";
+}
+
+/**
+ * Props for security resources widgets
+ *
+ * ## Business Perspective
+ *
+ * These widgets provide resources and guidance for implementing security
+ * controls, supporting security practitioners with practical implementation
+ * advice and best practices. 📚
+ *
+ * @category Implementation Widgets
+ */
+export interface SecurityResourcesWidgetProps extends CIABaseWidgetProps {
+  /**
+   * Optional filter for resources
+   */
+  filter?: string;
+
+  /**
+   * Maximum number of items to display
+   */
+  maxItems?: number;
+}
+
+/**
+ * Props for security component widgets
+ *
+ * ## Business Perspective
+ *
+ * These widgets represent individual CIA components, allowing detailed
+ * analysis and adjustment of specific security aspects (availability,
+ * integrity, or confidentiality). 🔍
+ *
+ * @category Component Widgets
+ */
+export interface SecurityComponentProps extends WidgetBaseProps {
+  /**
+   * The CIA component this widget represents
+   */
+  component: "availability" | "integrity" | "confidentiality";
+
+  /**
+   * Security level for this component
+   */
+  level: SecurityLevel;
+}
+
+/**
+ * Props for security level selector components
+ *
+ * ## Business Perspective
+ *
+ * These interactive controls allow users to adjust security levels,
+ * providing immediate feedback on the impact of their choices. 🎚️
+ *
+ * @category Control Widgets
+ */
+export interface SecurityLevelSelectorProps extends WidgetBaseProps {
+  /**
+   * Currently selected security level
+   */
+  selectedLevel: SecurityLevel;
+
+  /**
+   * Callback when level changes
+   */
+  onLevelChange: (level: SecurityLevel) => void;
+
+  /**
+   * The CIA component this selector controls
+   */
+  component: "availability" | "integrity" | "confidentiality";
+
+  /**
+   * Layout orientation
+   */
+  mode?: "horizontal" | "vertical";
+
+  /**
+   * Whether to highlight the selector
+   */
+  highlight?: boolean;
+
+  /**
+   * Whether to use compact layout
+   */
+  compact?: boolean;
+
+  /**
+   * Whether the selector is disabled
+   */
+  disabled?: boolean;
+}
+
+/**
+ * Props for component impact widgets
+ *
+ * ## Business Perspective
+ *
+ * These widgets help analyze the impact of security levels on specific
+ * CIA components, allowing focused assessment of individual security aspects. 🔍
+ *
+ * @category Component Widgets
+ */
+export interface ComponentImpactWidgetProps extends WidgetBaseProps {
+  /**
+   * Security level for this component
+   */
+  level: SecurityLevel;
+
+  /**
+   * The CIA component type to display
+   */
+  componentType: "availability" | "integrity" | "confidentiality";
+}
+
+/**
+ * Base interface for component-specific impact widgets
+ *
+ * ## Business Perspective
+ *
+ * This provides a foundation for specialized CIA component widgets that
+ * help organizations understand the business impact of specific security
+ * aspects (availability, integrity, confidentiality). 🔍
+ *
+ * @category Component Widgets
+ */
+export interface ComponentImpactBaseProps extends CIABaseWidgetProps {
+  /**
+   * Security level (for backward compatibility)
+   */
+  level?: SecurityLevel;
+
+  /**
+   * Callback when level changes
+   */
+  onLevelChange?: (level: SecurityLevel) => void;
+}
+
+/**
+ * Props for the Availability Impact Widget
+ *
+ * ## Business Perspective
+ *
+ * This widget helps stakeholders understand how availability settings
+ * affect uptime, recovery capabilities, and business continuity. ⏱️
+ *
+ * @category Impact Widgets
+ */
+export interface AvailabilityImpactWidgetProps
+  extends ComponentImpactBaseProps {
+  // All required props are inherited from ComponentImpactBaseProps
+}
+
+/**
+ * Props for the Integrity Impact Widget
+ *
+ * ## Business Perspective
+ *
+ * This widget helps stakeholders understand how integrity settings
+ * affect data accuracy, validation processes, and information trustworthiness. 🔐
+ *
+ * @category Impact Widgets
+ */
+export interface IntegrityImpactWidgetProps extends ComponentImpactBaseProps {
+  // All required props are inherited from ComponentImpactBaseProps
+}
+
+/**
+ * Props for the Confidentiality Impact Widget
+ *
+ * ## Business Perspective
+ *
+ * This widget helps stakeholders understand how confidentiality settings
+ * affect data protection, access controls, and privacy safeguards. 🔒
+ *
+ * @category Impact Widgets
+ */
+export interface ConfidentialityImpactWidgetProps
+  extends ComponentImpactBaseProps {
+  // All required props are inherited from ComponentImpactBaseProps
 }

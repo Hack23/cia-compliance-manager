@@ -12,6 +12,35 @@ import "./enhanced-commands"; // Add this import to include enhanced commands
  * - Proper registration of custom commands
  */
 
+// Polyfill for Node.js process in browser environment
+if (typeof window !== 'undefined' && !window.process) {
+  const processPolyfill = {
+    env: {},
+    nextTick: (callback: Function, ...args: any[]) => {
+      setTimeout(() => callback(...args), 0);
+    },
+    cwd: () => '/',
+    platform: 'browser' as NodeJS.Platform,
+    version: '',
+    versions: { node: '0.0.0', v8: '0.0.0' } as NodeJS.ProcessVersions,
+  };
+
+  // Use Object.defineProperty to avoid TypeScript errors about missing properties
+  Object.defineProperty(window, 'process', {
+    value: processPolyfill,
+    writable: true,
+    configurable: true
+  });
+}
+
+// Alternatively, if you're using react-scripts or other tools that rely on process.env.NODE_ENV
+if (typeof window !== 'undefined' && window.process && !window.process.env) {
+  window.process.env = {
+    NODE_ENV: 'test',
+    // Add any other environment variables needed by your tests
+  };
+}
+
 // Handle uncaught exceptions to make tests more stable
 Cypress.on("uncaught:exception", (err) => {
   console.log("Uncaught exception:", err);
@@ -41,8 +70,8 @@ Cypress.Commands.add("selectSecurityLevelEnhanced", (category, level) => {
         category === "availability"
           ? TEST_IDS.AVAILABILITY_SELECT
           : category === "integrity"
-          ? TEST_IDS.INTEGRITY_SELECT
-          : TEST_IDS.CONFIDENTIALITY_SELECT;
+            ? TEST_IDS.INTEGRITY_SELECT
+            : TEST_IDS.CONFIDENTIALITY_SELECT;
 
       cy.get(`[data-testid="${selectId}"]`).select(level);
     });
@@ -206,18 +235,21 @@ before(() => {
   });
 });
 
-// Fix: Properly type overwrite for scrollIntoView with correct parameters
+// Fix: Properly type overwrite for scrollIntoView with correct subject typing
 Cypress.Commands.overwrite(
   "scrollIntoView",
-  function (originalFn, subject, options?: ScrollIntoViewOptions) {
+  function (originalFn, subject: any) {
+    // Use any for the subject parameter to avoid typing conflicts
     // Handle subject with multiple elements
-    if (subject && subject.length > 1) {
-      // Get only the first element
-      subject = subject.first();
+    if (subject && typeof subject.length === 'number' && subject.length > 1) {
+      // Get only the first element if it's a jQuery collection
+      if (typeof subject.first === 'function') {
+        subject = subject.first();
+      }
     }
 
-    // Call original function with proper argument order
-    return originalFn(subject, options);
+    // Call original function with the subject
+    return originalFn(subject);
   }
 );
 
@@ -285,4 +317,5 @@ declare global {
 }
 
 // Export empty object to satisfy TypeScript module requirements
-export {};
+export { };
+

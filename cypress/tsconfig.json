@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2019",
-    "lib": ["es2019", "dom", "dom.iterable"],
+    "target": "ES2022",
+    "lib": ["ES2022", "dom", "dom.iterable"],
     "types": ["cypress", "node", "@testing-library/cypress"],
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -12,7 +12,9 @@
     "noImplicitThis": false,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "strict": false
+    "strict": false,
+    "moduleResolution": "node",
+    "jsx": "react-jsx"
   },
   "include": ["**/*.ts", "../node_modules/cypress", "../cypress.config.ts"]
 }

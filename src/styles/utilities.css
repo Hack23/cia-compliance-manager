@@ -21,13 +21,14 @@
 .widget-content {
   background-color: rgba(255, 255, 255, 0.05);
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius-sm);
   margin-bottom: 0.75rem;
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .dark .widget-content {
   border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* Sizing utilities */
@@ -185,7 +186,7 @@
   font-style: italic;
 }
 .font-mono {
-  font-family: monospace;
+  font-family: var(--font-mono);
 }
 
 /* Layout utilities */
@@ -274,6 +275,16 @@
 .shadow-lg {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+.shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.shadow {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
 /* Background color utilities */
@@ -499,52 +510,41 @@
   color: #374151;
 }
 .dark .text-gray-700 {
-  color: #d1d5db;
+  color: #d1d5db; /* Ensure visibility in dark mode */
 }
 .text-gray-800 {
   color: var(--text-color);
 }
 .dark .text-gray-800 {
-  color: #e5e7eb;
+  color: #e5e7eb; /* Ensure visibility in dark mode */
 }
 .text-gray-900 {
   color: var(--text-color);
 }
 .dark .text-gray-900 {
-  color: #f3f4f6;
+  color: #f3f4f6; /* Ensure visibility in dark mode */
 }
-.text-white {
-  color: #fff;
+
+/* Ensure proper base text colors for dark mode */
+.dark {
+  color-scheme: dark;
+  color: var(--text-color); /* Apply base text color to all text in dark mode */
 }
-.text-blue-500 {
-  color: #3b82f6;
-}
-.text-blue-600 {
-  color: #2563eb;
-}
-.text-blue-400 {
-  color: #60a5fa;
-}
-.dark .text-blue-400 {
-  color: #60a5fa;
-}
-.text-green-300 {
-  color: #86efac;
-}
-.text-green-400 {
-  color: #4ade80;
-}
-.text-green-600 {
-  color: #16a34a;
-}
-.dark .text-green-600 {
-  color: #4ade80;
-}
-.text-purple-300 {
-  color: #d8b4fe;
-}
-.text-purple-800 {
-  color: #6b21a8;
+
+/* Add explicit dark mode color override for business impact sections */
+.dark [data-testid="business-impact-widget"] p,
+.dark [data-testid="business-impact-widget"] div,
+.dark [data-testid="business-impact-widget"] span,
+.dark [data-testid="availability-impact-widget"] p,
+.dark [data-testid="availability-impact-widget"] div,
+.dark [data-testid="availability-impact-widget"] span,
+.dark [data-testid="integrity-impact-widget"] p,
+.dark [data-testid="integrity-impact-widget"] div,
+.dark [data-testid="integrity-impact-widget"] span,
+.dark [data-testid="confidentiality-impact-widget"] p,
+.dark [data-testid="confidentiality-impact-widget"] div,
+.dark [data-testid="confidentiality-impact-widget"] span {
+  color: var(--text-color);
 }
 
 /* Special container for widget sections */
@@ -573,4 +573,374 @@
 
 .dark .hover-lift:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Futuristic effects */
+.cyber-border {
+  position: relative;
+  border: 1px solid rgba(0, 204, 255, 0.3);
+  box-shadow: 0 0 8px rgba(0, 204, 255, 0.2);
+}
+
+.cyber-border::before,
+.cyber-border::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  opacity: 0.7;
+}
+
+.cyber-border::before {
+  top: -2px;
+  left: -2px;
+  border-top: 2px solid var(--primary-color);
+  border-left: 2px solid var(--primary-color);
+}
+
+.cyber-border::after {
+  bottom: -2px;
+  right: -2px;
+  border-bottom: 2px solid var(--primary-color);
+  border-right: 2px solid var(--primary-color);
+}
+
+/* Glow effects */
+.text-glow {
+  text-shadow: 0 0 5px var(--primary-color);
+}
+
+.dark .text-glow {
+  text-shadow: 0 0 8px var(--primary-color);
+}
+
+.box-glow {
+  box-shadow: 0 0 10px var(--primary-color);
+}
+
+.dark .box-glow {
+  box-shadow: 0 0 15px var(--primary-color);
+}
+
+/* Neon text effects */
+.neon-text {
+  color: var(--accent-color);
+  text-shadow: 0 0 5px var(--accent-color), 0 0 10px var(--accent-color),
+    0 0 20px var(--accent-color);
+}
+
+.dark .neon-text {
+  color: var(--accent-color);
+  text-shadow: 0 0 5px var(--accent-color), 0 0 10px var(--accent-color),
+    0 0 20px var(--accent-color), 0 0 30px var(--accent-color);
+}
+
+/* Terminal text */
+.terminal-text {
+  font-family: var(--font-mono);
+  color: #33ff33;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 1rem;
+  border-radius: 0.25rem;
+  border-left: 3px solid #33ff33;
+}
+
+.dark .terminal-text {
+  color: #33ff33;
+  text-shadow: 0 0 5px rgba(51, 255, 51, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Scanner animation */
+@keyframes scan {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+.scanner-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanner-effect::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--accent-color),
+    transparent
+  );
+  z-index: 2;
+  opacity: 0.5;
+  animation: scan 2s linear infinite;
+}
+
+/* Grid background */
+.cyber-grid-bg {
+  background-image: linear-gradient(
+      rgba(0, 204, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(0, 204, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center center;
+}
+
+.dark .cyber-grid-bg {
+  background-image: linear-gradient(rgba(0, 204, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 204, 255, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Pulse animation for interactive elements */
+@keyframes pulse-border {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 204, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(0, 204, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 204, 255, 0);
+  }
+}
+
+.pulse-effect {
+  animation: pulse-border 2s infinite;
+}
+
+/* Typewriter effect base class (JS required for full animation) */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid var(--primary-color);
+  white-space: nowrap;
+  margin: 0;
+  letter-spacing: 0.1em;
+}
+
+.dark .typewriter {
+  border-right: 2px solid var(--accent-color);
+  text-shadow: 0 0 5px var(--accent-color);
+}
+
+/* Consistent content density utilities */
+.content-dense {
+  line-height: 1.4 !important;
+  font-size: 0.875rem !important;
+}
+
+.content-sparse {
+  line-height: 1.7 !important;
+  font-size: 0.9rem !important;
+}
+
+/* Consistent card and section styling */
+.card,
+.info-card,
+.metric-card {
+  padding: 1rem !important;
+  border-radius: 0.5rem !important;
+  margin-bottom: 1rem !important;
+  border: 1px solid var(--border-color) !important;
+  background: var(--card-background) !important;
+  transition: all 0.2s !important;
+}
+
+.card:hover,
+.info-card:hover,
+.metric-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 8px var(--shadow-color) !important;
+}
+
+/* Improved typography for better readability */
+.metric-label,
+.label-text,
+[class*="label"] {
+  font-size: 0.75rem !important;
+  color: var(--text-secondary) !important;
+  margin-bottom: 0.25rem !important;
+  font-weight: 500 !important;
+}
+
+.metric-value,
+.value-text,
+[class*="value"] {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  color: var(--text-color) !important;
+  font-family: var(--font-mono) !important;
+}
+
+/* Ensure content lists have consistent styling */
+.widget-list {
+  margin: 0 !important;
+  padding-left: 1.5rem !important;
+  list-style-type: disc !important;
+}
+
+.widget-list li {
+  margin-bottom: 0.5rem !important;
+  line-height: 1.4 !important;
+  font-size: 0.875rem !important;
+}
+
+/* Ensure test ID targeting is consistent */
+[data-testid] {
+  position: relative !important;
+}
+
+/* Style for making test ID visible during development (activate with JS) */
+[data-testid].show-testid::after {
+  content: attr(data-testid);
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  background: rgba(0, 102, 204, 0.9);
+  color: white;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 10px;
+  z-index: 1000;
+  pointer-events: none;
+  font-family: monospace;
+}
+
+/* Test ID patterns for common widget sections */
+.section-header[data-testid$="-header"],
+.section-content[data-testid$="-content"],
+.section-footer[data-testid$="-footer"] {
+  width: 100%;
+}
+
+/* Utility classes for layout fixes */
+
+/* Full height containers */
+.h-full {
+  height: 100%;
+}
+
+/* Flex utilities */
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Overflow utilities */
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-visible {
+  overflow: visible;
+}
+
+/* Flex grow for content areas */
+.flex-grow {
+  flex-grow: 1;
+}
+
+/* Min-height utility for widgets that need it */
+.min-h-widget {
+  min-height: 300px;
+}
+
+/* Grid gap utilities */
+.gap-sm {
+  gap: 0.5rem;
+}
+
+.gap-md {
+  gap: 0.75rem;
+}
+
+.gap-lg {
+  gap: 1rem;
+}
+
+/* Preserve aspect ratio for charts and visualizations */
+.aspect-square {
+  aspect-ratio: 1/1;
+}
+
+.aspect-video {
+  aspect-ratio: 16/9;
+}
+
+/* Fix for widgets in grid layout */
+.grid-widget {
+  height: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fix for nested scrolling areas */
+.scroll-container {
+  overflow: auto;
+  height: 100%;
+}
+
+/* Fix for content that should not scroll */
+.no-scroll {
+  overflow: hidden;
+}
+
+/* Fix for content that should be visible beyond bounds */
+.overflow-visible {
+  overflow: visible;
+}
+
+/* Grid container specific utilities */
+.dashboard-grid-container {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  grid-auto-rows: minmax(300px, auto);
+}
+
+/* Media queries to make the grid responsive */
+@media (min-width: 640px) {
+  .dashboard-grid-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-grid-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Grid widget container utility to ensure consistent styling */
+.grid-widget-container {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  height: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dark mode styles for grid widget containers */
+.dark .grid-widget-container {
+  background-color: #1f2937; /* dark:bg-gray-800 */
 }

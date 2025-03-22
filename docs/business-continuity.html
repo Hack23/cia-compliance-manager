@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Business Continuity Plan for CIA Compliance Manager"
+    />
+    <title>CIA Compliance Manager - Business Continuity Plan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Base variables with combined light/dark mode support */
+      :root {
+        /* Light Mode */
+        --primary-color: #006633;
+        --primary-light: #008844;
+        --primary-dark: #004422;
+        --secondary-color: #0066cc;
+        --accent-color: #cc3366;
+        --background-color: #ffffff;
+        --card-bg: #f8f9fa;
+        --text-color: #333333;
+        --text-light: #666666;
+        --border-color: #dddddd;
+        --code-bg: #f5f5f5;
+        --table-header-bg: #e9ecef;
+        --table-border: #dee2e6;
+        --table-stripe: #f2f2f2;
+        --link-color: #0066cc;
+        --link-hover: #004499;
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        --scanner-color: rgba(0, 102, 51, 0.3);
+
+        /* Cards */
+        --card-confidentiality: #f8d7da;
+        --card-integrity: #fff3cd;
+        --card-availability: #d1ecf1;
+
+        /* Component specific */
+        --header-gradient-start: #006633;
+        --header-gradient-end: #004422;
+      }
+
+      /* Dark Mode */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --primary-color: #008844;
+          --primary-light: #00aa55;
+          --primary-dark: #006633;
+          --secondary-color: #4488ee;
+          --accent-color: #ff4488;
+          --background-color: #121212;
+          --card-bg: #1e1e1e;
+          --text-color: #e0e0e0;
+          --text-light: #b0b0b0;
+          --border-color: #444444;
+          --code-bg: #2d2d2d;
+          --table-header-bg: #2c3237;
+          --table-border: #444444;
+          --table-stripe: #1a1a1a;
+          --link-color: #4488ee;
+          --link-hover: #66aaff;
+          --shadow-color: rgba(0, 0, 0, 0.3);
+          --scanner-color: rgba(0, 136, 68, 0.3);
+
+          /* Cards */
+          --card-confidentiality: #331a1d;
+          --card-integrity: #332e1a;
+          --card-availability: #1a2c30;
+
+          /* Component specific */
+          --header-gradient-start: #008844;
+          --header-gradient-end: #006633;
+        }
+      }
+
+      /* Base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--background-color);
+        padding: 0;
+        margin: 0;
+      }
+
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--header-gradient-start),
+          var(--header-gradient-end)
+        );
+        color: white;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      header h1 {
+        font-family: "Orbitron", sans-serif;
+        margin-bottom: 1rem;
+        font-size: 2.5rem;
+      }
+
+      header p {
+        font-size: 1.25rem;
+        max-width: 800px;
+        margin: 0 auto 1.5rem;
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      h2 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 2rem;
+        margin: 2rem 0 1rem;
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 0.5rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin: 1.5rem 0 1rem;
+        color: var(--secondary-color);
+      }
+
+      h4 {
+        font-size: 1.25rem;
+        margin: 1.25rem 0 0.75rem;
+        color: var(--accent-color);
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      a {
+        color: var(--link-color);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      a:hover {
+        color: var(--link-hover);
+        text-decoration: underline;
+      }
+
+      /* Table styles */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0 2rem;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 0 20px var(--shadow-color);
+      }
+
+      th,
+      td {
+        padding: 0.75rem;
+        text-align: left;
+        border: 1px solid var(--table-border);
+      }
+
+      th {
+        background-color: var(--table-header-bg);
+        font-weight: 600;
+      }
+
+      tr:nth-child(even) {
+        background-color: var(--table-stripe);
+      }
+
+      /* Card styles */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .card {
+        background-color: var(--card-bg);
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 8px var(--shadow-color);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px var(--shadow-color);
+      }
+
+      .scanner-effect {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--scanner-color),
+          transparent
+        );
+        animation: scan 3s infinite linear;
+        pointer-events: none;
+      }
+
+      @keyframes scan {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 200%;
+        }
+      }
+
+      .confidentiality-card {
+        background-color: var(--card-confidentiality);
+      }
+
+      .integrity-card {
+        background-color: var(--card-integrity);
+      }
+
+      .availability-card {
+        background-color: var(--card-availability);
+      }
+
+      /* Utility classes */
+      .btn {
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        margin-right: 1rem;
+        font-weight: 500;
+        transition: background-color 0.3s;
+      }
+
+      .btn:hover {
+        background-color: var(--primary-dark);
+        text-decoration: none;
+      }
+
+      .btn-secondary {
+        background-color: var(--secondary-color);
+      }
+
+      .btn-secondary:hover {
+        background-color: var(--link-hover);
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        header {
+          padding: 1.5rem;
+        }
+
+        header h1 {
+          font-size: 2rem;
+        }
+
+        main {
+          padding: 1rem;
+        }
+
+        .cards {
+          grid-template-columns: 1fr;
+        }
+
+        table {
+          display: block;
+          overflow-x: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Business Continuity Plan</h1>
+      <p>
+        Ensuring operational resilience and security for the CIA Compliance
+        Manager
+      </p>
+      <div>
+        <a
+          href="https://hack23.github.io/cia-compliance-manager/"
+          class="btn"
+          title="Launch the CIA Compliance Manager application"
+        >
+          Launch Application
+        </a>
+        <a
+          href="https://github.com/Hack23/cia-compliance-manager"
+          class="btn btn-secondary"
+          title="View the GitHub repository"
+        >
+          GitHub Repository
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section id="overview">
+        <h2>Executive Summary</h2>
+        <p>
+          This Business Continuity Plan (BCP) outlines strategies to ensure the
+          CIA Compliance Manager application and its data remain available
+          during disruptions while maintaining the confidentiality and integrity
+          of security assessments. The plan aligns with the application's core
+          focus on the CIA triad (Confidentiality, Integrity, Availability).
+        </p>
+      </section>
+
+      <section id="architecture-links">
+        <h2>Related Architecture Documentation</h2>
+        <div class="cards">
+          <div class="card confidentiality-card">
+            <div class="scanner-effect"></div>
+            <h3>🏛️ Current Architecture</h3>
+            <p>
+              Reference architecture and system components for the current
+              implementation.
+            </p>
+            <a
+              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md"
+              title="View Current Architecture"
+            >
+              View Architecture
+            </a>
+          </div>
+
+          <div class="card integrity-card">
+            <div class="scanner-effect"></div>
+            <h3>🔄 Process Flowcharts</h3>
+            <p>
+              Critical business processes and workflows for the CIA Compliance
+              Manager.
+            </p>
+            <a
+              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FLOWCHART.md"
+              title="View Process Flowcharts"
+            >
+              View Flowcharts
+            </a>
+          </div>
+
+          <div class="card availability-card">
+            <div class="scanner-effect"></div>
+            <h3>⚙️ CI/CD Workflows</h3>
+            <p>
+              Deployment and automation processes that support business
+              continuity.
+            </p>
+            <a
+              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/WORKFLOWS.md"
+              title="View CI/CD Workflows"
+            >
+              View Workflows
+            </a>
+          </div>
+
+          <div class="card confidentiality-card">
+            <div class="scanner-effect"></div>
+            <h3>🔮 Future Architecture</h3>
+            <p>
+              Planned architectural evolution that will enhance resilience and
+              continuity.
+            </p>
+            <a
+              href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md"
+              title="View Future Architecture"
+            >
+              View Future Vision
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="business-impact">
+        <h2>Business Impact Analysis</h2>
+        <h3>Critical Functions</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Function</th>
+              <th>Description</th>
+              <th>Maximum Tolerable Downtime</th>
+              <th>Recovery Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Security Assessment Engine</td>
+              <td>Core assessment calculations and algorithms</td>
+              <td>4 hours</td>
+              <td>Very High</td>
+            </tr>
+            <tr>
+              <td>User Authentication</td>
+              <td>Identity verification and access control</td>
+              <td>2 hours</td>
+              <td>Critical</td>
+            </tr>
+            <tr>
+              <td>Security Dashboard</td>
+              <td>Primary interface for security monitoring</td>
+              <td>8 hours</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td>Compliance Mapping</td>
+              <td>Framework requirements mapping</td>
+              <td>24 hours</td>
+              <td>Medium</td>
+            </tr>
+            <tr>
+              <td>Reporting & Export</td>
+              <td>Report generation and data export</td>
+              <td>12 hours</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td>User Data & Settings</td>
+              <td>User configurations and saved assessments</td>
+              <td>8 hours</td>
+              <td>High</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Impact Categories</h3>
+
+        <div class="cards">
+          <div class="card confidentiality-card">
+            <div class="scanner-effect"></div>
+            <h4>Financial Impact</h4>
+            <ul>
+              <li>Minimal direct revenue impact as a free/open-source tool</li>
+              <li>
+                Organizations may seek alternative solutions if unavailable for
+                >24 hours
+              </li>
+              <li>
+                Extended outages require additional support and recovery
+                resources
+              </li>
+            </ul>
+          </div>
+
+          <div class="card integrity-card">
+            <div class="scanner-effect"></div>
+            <h4>Operational Impact</h4>
+            <ul>
+              <li>Organizations depend on the tool for security planning</li>
+              <li>Disruptions may delay regulatory compliance activities</li>
+              <li>Technical teams rely on implementation guidance</li>
+            </ul>
+          </div>
+
+          <div class="card availability-card">
+            <div class="scanner-effect"></div>
+            <h4>Regulatory and Compliance Impact</h4>
+            <ul>
+              <li>
+                Organizations need continuous access to maintain compliance
+                posture
+              </li>
+              <li>Historical assessment data serves as compliance evidence</li>
+              <li>Tool outputs are used during security audits</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="recovery-strategies">
+        <h2>Recovery Strategies</h2>
+
+        <h3>Data Backup and Recovery</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Data Type</th>
+              <th>Backup Frequency</th>
+              <th>Retention Period</th>
+              <th>Storage Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>User Assessments</td>
+              <td>Continuous</td>
+              <td>90 days</td>
+              <td>Primary and redundant storage</td>
+            </tr>
+            <tr>
+              <td>User Settings</td>
+              <td>On change</td>
+              <td>90 days</td>
+              <td>Primary and redundant storage</td>
+            </tr>
+            <tr>
+              <td>Application Code</td>
+              <td>On commit</td>
+              <td>Indefinite</td>
+              <td>GitHub + redundant repositories</td>
+            </tr>
+            <tr>
+              <td>Static Content</td>
+              <td>On release</td>
+              <td>Current + previous 3 versions</td>
+              <td>CDN with fallback</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Technical Recovery Procedures</h3>
+        <div class="cards">
+          <div class="card">
+            <div class="scanner-effect"></div>
+            <h4>Infrastructure Recovery</h4>
+            <ul>
+              <li>Deploy from infrastructure-as-code templates</li>
+              <li>Activate standby environment if primary is unavailable</li>
+              <li>Restore from latest verified backup snapshots</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="scanner-effect"></div>
+            <h4>Application Recovery</h4>
+            <ul>
+              <li>
+                Deploy latest stable release from redundant code repositories
+              </li>
+              <li>Verify application health via automated test suite</li>
+              <li>
+                Validate core functionality through predefined recovery checks
+              </li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="scanner-effect"></div>
+            <h4>Data Recovery</h4>
+            <ul>
+              <li>Restore user data from most recent verified backup</li>
+              <li>Verify data integrity through validation procedures</li>
+              <li>Implement data reconciliation for any lost transactions</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Communication Plan</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Stakeholder</th>
+              <th>Communication Method</th>
+              <th>Timing</th>
+              <th>Responsibility</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>End Users</td>
+              <td>Status Page, GitHub Issues</td>
+              <td>Within 30 minutes of incident</td>
+              <td>Project Maintainer</td>
+            </tr>
+            <tr>
+              <td>Contributors</td>
+              <td>Direct notification, Slack</td>
+              <td>Within 15 minutes of incident</td>
+              <td>Project Lead</td>
+            </tr>
+            <tr>
+              <td>Hosting Providers</td>
+              <td>Support channels</td>
+              <td>Immediately</td>
+              <td>Infrastructure Lead</td>
+            </tr>
+            <tr>
+              <td>Regulatory Bodies</td>
+              <td>Email (if applicable)</td>
+              <td>Within 24 hours (if applicable)</td>
+              <td>Compliance Lead</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="security">
+        <h2>Security Considerations</h2>
+
+        <h3>Data Protection During Recovery</h3>
+        <div class="cards">
+          <div class="card confidentiality-card">
+            <div class="scanner-effect"></div>
+            <h4>Encryption</h4>
+            <p>All backup data remains encrypted at rest and in transit</p>
+          </div>
+
+          <div class="card integrity-card">
+            <div class="scanner-effect"></div>
+            <h4>Access Control</h4>
+            <p>Recovery procedures require multi-factor authentication</p>
+          </div>
+
+          <div class="card availability-card">
+            <div class="scanner-effect"></div>
+            <h4>Integrity Verification</h4>
+            <p>Cryptographic verification of all restored data</p>
+          </div>
+
+          <div class="card">
+            <div class="scanner-effect"></div>
+            <h4>Audit Logs</h4>
+            <p>Comprehensive logging of all recovery actions</p>
+          </div>
+        </div>
+
+        <h3>Security Controls Mapping</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Recovery Activity</th>
+              <th>Security Control</th>
+              <th>Compliance Framework</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Data Backup</td>
+              <td>
+                <a
+                  href="https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=CP-9"
+                  >CP-9 System Backup</a
+                >
+              </td>
+              <td>NIST 800-53, ISO 27001 (A.12.3.1)</td>
+            </tr>
+            <tr>
+              <td>System Recovery</td>
+              <td>
+                <a
+                  href="https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=CP-10"
+                  >CP-10 System Recovery and Reconstitution</a
+                >
+              </td>
+              <td>NIST 800-53, ISO 27001 (A.17.1.2)</td>
+            </tr>
+            <tr>
+              <td>Alternate Storage</td>
+              <td>
+                <a
+                  href="https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=CP-6"
+                  >CP-6 Alternate Storage Site</a
+                >
+              </td>
+              <td>NIST 800-53, ISO 27001 (A.17.2.1)</td>
+            </tr>
+            <tr>
+              <td>Testing</td>
+              <td>
+                <a
+                  href="https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=CP-4"
+                  >CP-4 Contingency Plan Testing</a
+                >
+              </td>
+              <td>NIST 800-53, ISO 27001 (A.17.1.3)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="recovery-objectives">
+        <h2>Recovery Objectives</h2>
+
+        <h3>Recovery Time Objectives (RTOs)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Basic Level</th>
+              <th>Standard Level</th>
+              <th>Enhanced Level</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Web Application</td>
+              <td>< 24 hours</td>
+              <td>< 8 hours</td>
+              <td>< 2 hours</td>
+            </tr>
+            <tr>
+              <td>API Services</td>
+              <td>< 12 hours</td>
+              <td>< 4 hours</td>
+              <td>< 1 hour</td>
+            </tr>
+            <tr>
+              <td>Authentication</td>
+              <td>< 6 hours</td>
+              <td>< 2 hours</td>
+              <td>< 30 minutes</td>
+            </tr>
+            <tr>
+              <td>Database</td>
+              <td>< 12 hours</td>
+              <td>< 4 hours</td>
+              <td>< 1 hour</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Recovery Point Objectives (RPOs)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Basic Level</th>
+              <th>Standard Level</th>
+              <th>Enhanced Level</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>User Assessments</td>
+              <td>< 24 hours</td>
+              <td>< 4 hours</td>
+              <td>< 15 minutes</td>
+            </tr>
+            <tr>
+              <td>Configuration Data</td>
+              <td>< 24 hours</td>
+              <td>< 4 hours</td>
+              <td>< 15 minutes</td>
+            </tr>
+            <tr>
+              <td>User Settings</td>
+              <td>< 24 hours</td>
+              <td>< 4 hours</td>
+              <td>< 15 minutes</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="architectural-resilience">
+        <h2>Architectural Resilience Strategy</h2>
+        <p>
+          The CIA Compliance Manager employs a layered resilience approach that
+          aligns with its core function of assessing CIA controls:
+        </p>
+
+        <div class="cards">
+          <div class="card confidentiality-card">
+            <div class="scanner-effect"></div>
+            <h3>Confidentiality Layer</h3>
+            <p>
+              <strong>Principle:</strong> Maintain data confidentiality even
+              during recovery scenarios
+            </p>
+            <p>
+              <strong>Implementation:</strong> Encryption at rest and in transit
+              for all backup data
+            </p>
+            <p>
+              <strong>Verification:</strong> Access control validation before
+              recovery processes
+            </p>
+          </div>
+
+          <div class="card integrity-card">
+            <div class="scanner-effect"></div>
+            <h3>Integrity Layer</h3>
+            <p>
+              <strong>Principle:</strong> Ensure data accuracy and consistency
+              through recovery
+            </p>
+            <p>
+              <strong>Implementation:</strong> Cryptographic verification of
+              backup integrity
+            </p>
+            <p>
+              <strong>Verification:</strong> Post-recovery data validation
+              procedures
+            </p>
+          </div>
+
+          <div class="card availability-card">
+            <div class="scanner-effect"></div>
+            <h3>Availability Layer</h3>
+            <p>
+              <strong>Principle:</strong> Minimize downtime through redundant
+              systems
+            </p>
+            <p>
+              <strong>Implementation:</strong> Distributed deployment
+              architecture
+            </p>
+            <p>
+              <strong>Verification:</strong> Regular failover testing and
+              recovery drills
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="testing">
+        <h2>Testing and Exercises</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Exercise Type</th>
+              <th>Frequency</th>
+              <th>Participants</th>
+              <th>Success Criteria</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tabletop Exercise</td>
+              <td>Quarterly</td>
+              <td>Core maintainers</td>
+              <td>Complete walkthrough of recovery steps</td>
+            </tr>
+            <tr>
+              <td>Technical Recovery Test</td>
+              <td>Semi-annually</td>
+              <td>DevOps team</td>
+              <td>Successful restoration in test environment</td>
+            </tr>
+            <tr>
+              <td>Full Recovery Simulation</td>
+              <td>Annually</td>
+              <td>All key stakeholders</td>
+              <td>Complete recovery within defined RTO</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="maturity-roadmap">
+        <h2>Business Continuity Maturity Roadmap</h2>
+
+        <div class="cards">
+          <div class="card">
+            <div class="scanner-effect"></div>
+            <h3>Current State</h3>
+            <ul>
+              <li>Basic backup and recovery procedures</li>
+              <li>Manual recovery processes</li>
+              <li>Limited redundancy</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="scanner-effect"></div>
+            <h3>Near-Term Improvements (0-6 months)</h3>
+            <ul>
+              <li>Automate backup verification</li>
+              <li>Implement recovery readiness monitoring</li>
+              <li>Create detailed recovery runbooks</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="scanner-effect"></div>
+            <h3>Mid-Term Strategy (6-12 months)</h3>
+            <ul>
+              <li>Deploy active/passive redundancy</li>
+              <li>Implement automated recovery testing</li>
+              <li>Establish recovery metrics dashboard</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="scanner-effect"></div>
+            <h3>Long-Term Vision (12+ months)</h3>
+            <ul>
+              <li>Active/active deployment architecture</li>
+              <li>Self-healing infrastructure components</li>
+              <li>Real-time recovery capability monitoring</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="plan-maintenance">
+        <h2>Plan Maintenance</h2>
+        <p>This business continuity plan should be reviewed and updated:</p>
+        <ul>
+          <li>After any significant architectural change</li>
+          <li>Following any recovery event (incorporating lessons learned)</li>
+          <li>At least every six months</li>
+          <li>When new critical functionality is added</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <div
+        style="
+          text-align: center;
+          padding: 2rem;
+          background-color: var(--card-bg);
+          margin-top: 2rem;
+        "
+      >
+        <p>
+          <a href="https://github.com/Hack23/cia-compliance-manager"
+            >CIA Compliance Manager</a
+          >
+          |
+          <a
+            href="https://hack23.github.io/cia-compliance-manager/documentation.html"
+            >Documentation</a
+          >
+          |
+          <a
+            href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/BusinessContinuityPlan.md"
+            >Markdown Version</a
+          >
+        </p>
+        <p style="font-size: 0.8rem; color: var(--text-light)">
+          © 2023 CIA Compliance Manager. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

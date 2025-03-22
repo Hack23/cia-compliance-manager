@@ -1,29 +1,109 @@
 /**
- * Central export file for all types used in the CIA Compliance Manager
+ * # Type Definitions Module
+ *
+ * This module exports all type definitions used across the CIA Compliance Manager.
+ *
+ * ## Business Perspective
+ * Type definitions ensure consistent data structures throughout the application,
+ * supporting reliable security assessments and business impact analysis.
+ *
+ * ## Technical Perspective
+ * Centralized type exports simplify imports and enforce type consistency.
  *
  * @packageDocumentation
- * @group Types
  */
 
-// Export primary CIA types
-export * from "./cia";
-
-// Export business impact types
-export * from "./businessImpact";
-
-// Export component prop types - these are the primary interfaces for components
-export * from "./componentProps";
-
-// Export widget-specific types - avoid ambiguity with named imports
-// (excludes any types that would conflict with componentProps exports)
+// Core CIA Types - use explicit exports to avoid conflicts
 export type {
-  WidgetBaseProps,
-  SecuritySummaryWidgetProps,
-  IntegrityImpactWidgetProps,
-  ConfidentialityImpactWidgetProps,
+  AvailabilityImpact,
+  BaseImpact,
+  CIAComponent,
+  CIAImpact,
+  CIAOptions,
+  ConfidentialityImpact,
+  IntegrityImpact,
+  SecurityLevel,
+  SecurityLevels,
+  SecurityProfile,
+} from "./cia";
+export { CIAUtilities };
+
+// Re-export utilities with namespacing to prevent conflicts
+import * as CIAUtilities from "./cia.utility";
+
+// Selective exports from cia-services to avoid conflicts
+export type {
+  // Use BusinessImpactDetail and CIADetails from here as the canonical source
+  BusinessImpactDetail,
+  BusinessImpactDetails,
+  CIAComponentType,
+  CIADataProvider,
+  CIADetails,
+  CodeExample,
+  ComplianceImpact,
+  ComplianceStatus,
+  ImplementationEffort,
+  ROIEstimate,
+  ROIEstimatesMap,
+  ROIMetrics,
+  TechnicalImplementationDetails,
+} from "./cia-services";
+
+// Compliance types
+export type {
+  ComplianceFramework,
+  ComplianceStatusDetails,
+  FrameworkApplicabilityOptions,
+  FrameworkComplianceStatus,
+} from "./compliance";
+
+// Widget Types - more selective exports to avoid ambiguity
+export type {
   AvailabilityImpactWidgetProps,
+  BusinessImpactAnalysisWidgetProps,
+  ComplianceStatusWidgetProps,
+  ConfidentialityImpactWidgetProps,
+  CostEstimationWidgetProps,
+  IntegrityImpactWidgetProps,
+  SecurityLevelWidgetProps,
   SecurityResourcesWidgetProps,
-  // Add any other non-conflicting types from widgets.ts here
+  TechnicalDetailsWidgetProps,
+  ValueCreationWidgetProps,
+  WidgetProps,
 } from "./widgets";
 
-// Add any new type exports below
+export type { CommonWidgetProps, WithSecurityLevelProps } from "./widget-props";
+export type { BaseWidgetProps, CIABaseWidgetProps } from "./widgets";
+
+// Selective export from businessImpact to avoid conflicts
+export type {
+  BusinessConsideration,
+  BusinessConsiderations,
+  BusinessImpactIcons,
+  BusinessKeyBenefit,
+  BusinessKeyBenefits,
+  BusinessROIEstimates,
+  BusinessValueMetric,
+} from "./businessImpact";
+
+// Component Props - use more specific exports to avoid conflicts
+export type {
+  BusinessImpactSectionProps,
+  BusinessRiskDisplayProps,
+  CIAImpactCardProps,
+  MetricsCardProps,
+  RadarChartProps,
+  RiskAssessmentProps,
+  StatusBadgeProps,
+  WidgetHeaderProps,
+} from "./componentPropExports";
+
+// Helper functions from cia
+export {
+  calculateOverallSecurityLevel,
+  calculateRiskLevel,
+  getSecurityLevelFromValue,
+} from "./cia";
+
+// Type guards for better type safety
+export { isCIAComponentType } from "./cia-services";

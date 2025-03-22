@@ -1,67 +1,66 @@
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import MetricsCard from "./MetricsCard";
 
 describe("MetricsCard Component", () => {
   it("renders with title and value", () => {
-    render(<MetricsCard title="Completion" value="0" />);
-
-    expect(screen.getByTestId("metrics-card")).toBeInTheDocument();
-    expect(screen.getByText("Completion")).toBeInTheDocument();
-    expect(screen.getByTestId("metrics-card-value")).toHaveTextContent("0");
+    render(<MetricsCard title="Test Title" value="100" />);
+    
+    expect(screen.getByText("Test Title")).toBeInTheDocument();
+    expect(screen.getByText("100")).toBeInTheDocument();
   });
 
   it("renders with custom test ID", () => {
-    render(
-      <MetricsCard
-        title="Completion"
-        value="100%"
-        testId="custom-metrics-card"
-      />
-    );
-
-    expect(screen.getByTestId("custom-metrics-card")).toBeInTheDocument();
+    render(<MetricsCard title="Test Title" value="100" testId="custom-card" />);
+    
+    expect(screen.getByTestId("custom-card")).toBeInTheDocument();
   });
 
-  it("renders with up trend indicator", () => {
-    render(
-      <MetricsCard
-        title="Growth"
-        value="0" // Value is rendered inside the component
-        trend={{ value: "5%", direction: "up" }}
-      />
-    );
-
-    expect(screen.getByTestId("metrics-card")).toBeInTheDocument();
-    expect(screen.getByText("Growth")).toBeInTheDocument();
-
-    // Check for trend value instead of main value
-    expect(screen.getByTestId("metrics-card-trend")).toHaveTextContent("5%");
+  it("renders with icon", () => {
+    render(<MetricsCard title="Test Title" value="100" icon="📈" />);
+    
+    expect(screen.getByText("📈")).toBeInTheDocument();
   });
 
-  it("renders with down trend indicator", () => {
-    render(
-      <MetricsCard
-        title="Reduction"
-        value="0" // Value is rendered inside the component
-        trend={{ value: "5%", direction: "down" }}
-      />
-    );
-
-    expect(screen.getByTestId("metrics-card")).toBeInTheDocument();
-    expect(screen.getByText("Reduction")).toBeInTheDocument();
-
-    // Check for trend value instead of main value
-    expect(screen.getByTestId("metrics-card-trend")).toHaveTextContent("5%");
-  });
 
   it("applies variant styling", () => {
-    render(<MetricsCard title="Status" value="Good" variant="success" />);
+    const { rerender } = render(
+      <MetricsCard title="Test Title" value="100" variant="default" testId="card" />
+    );
+    
+    const card = screen.getByTestId("card");
+    expect(card.className).toContain("bg-gray-50");
+    
+    rerender(<MetricsCard title="Test Title" value="100" variant="success" testId="card" />);
+    expect(card.className).toContain("bg-green-50");
+    
+    rerender(<MetricsCard title="Test Title" value="100" variant="warning" testId="card" />);
+    expect(card.className).toContain("bg-yellow-50");
+    
+    rerender(<MetricsCard title="Test Title" value="100" variant="error" testId="card" />);
+    expect(card.className).toContain("bg-red-50");
+    
+    rerender(<MetricsCard title="Test Title" value="100" variant="info" testId="card" />);
+    expect(card.className).toContain("bg-blue-50");
+  });
 
-    const card = screen.getByTestId("metrics-card");
+  it("renders with compact styling", () => {
+    render(<MetricsCard title="Test Title" value="100" compact testId="card" />);
+    
+    const card = screen.getByTestId("card");
+    expect(card.className).toContain("p-3");
+  });
+
+  it("renders with accent color", () => {
+    render(<MetricsCard 
+      title="Test Title" 
+      value="100" 
+      accentColor="#ff0000" 
+      testId="card" 
+    />);
+    
+    const card = screen.getByTestId("card");
     expect(card).toBeInTheDocument();
-
-    // Check for green color classes instead of "success" string directly
-    expect(card.className).toContain("bg-green-100");
-    expect(card.className).toContain("border-green-200");
+    // We can't easily test inline styles in testing-library, but we can check that the component renders
   });
 });

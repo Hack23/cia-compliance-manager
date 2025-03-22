@@ -64,21 +64,8 @@ declare const mount: (
   options?: any
 ) => Cypress.Chainable;
 
-// Extend Window to include our custom properties
-interface Window {
-  store?: {
-    getState(): unknown;
-  };
-  consoleErrors?: string[];
-  __REACT_APP_STATE__?: any;
-  cypressPerformanceMetrics?: {
-    records: PerformanceRecord[];
-    startTime: number;
-  };
-}
-
-// Enhanced scroll options
-interface ScrollIntoViewOptions extends ScrollIntoViewOptionsBase {
+// Enhanced scroll options - FIX: Use ScrollIntoViewOptions directly instead of extending non-existent base
+interface EnhancedScrollIntoViewOptions extends ScrollIntoViewOptions {
   /**
    * Whether to force the action even if element is hidden, disabled etc.
    * @default false
@@ -93,10 +80,14 @@ interface ScrollIntoViewOptions extends ScrollIntoViewOptionsBase {
 
 // Consolidated Cypress namespace extensions
 declare namespace Cypress {
-  // Extend AUTWindow for consistent typing
-  interface AUTWindow extends Window {
-    consoleErrors: string[]; // Defined as non-optional to avoid null checks
+  // FIX: Extend existing AUTWindow instead of redefining it
+  interface AUTWindow {
+    consoleErrors?: string[]; // Add our custom properties
     __REACT_APP_STATE__?: any;
+    cypressPerformanceMetrics?: {
+      records: PerformanceRecord[];
+      startTime: number;
+    };
   }
 
   // Consolidated interface for all custom commands
@@ -118,7 +109,7 @@ declare namespace Cypress {
      * Custom command to ensure the app has loaded
      * @example cy.ensureAppLoaded()
      */
-    ensureAppLoaded(): Chainable<JQuery<HTMLElement>>;
+    ensureAppLoaded(timeout?: number): Chainable<JQuery<HTMLElement>>;
 
     /**
      * Custom command to get element by test ID
@@ -218,7 +209,7 @@ declare namespace Cypress {
      * @example cy.get('.element').safeScrollIntoView()
      */
     safeScrollIntoView(
-      options?: ScrollIntoViewOptions
+      options?: EnhancedScrollIntoViewOptions
     ): Chainable<JQuery<HTMLElement>>;
 
     /**

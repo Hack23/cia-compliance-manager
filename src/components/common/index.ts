@@ -30,8 +30,5 @@ export { default as WidgetHeader } from "./WidgetHeader";
 // Export Tooltip component
 export { default as Tooltip } from "./Tooltip";
 
-// Export SecurityLevelSelector component
-export { default as SecurityLevelSelector } from "./SecurityLevelSelector";
-
 // Export SecurityRiskScore component
 export { default as SecurityRiskScore } from "./SecurityRiskScore";

@@ -3,13 +3,14 @@ import {
   AvailabilityImpactWidgetProps,
   ConfidentialityImpactWidgetProps,
   IntegrityImpactWidgetProps,
-  SecurityResourcesWidgetProps,
-  WidgetBaseProps,
+  SecurityLevelWidgetProps,
+  SecurityResourcesWidgetProps
 } from "./widgets";
 
 describe("Widget Type Definitions", () => {
   it("validates WidgetBaseProps interface", () => {
-    const props: WidgetBaseProps = {
+    // Fix properties to match the actual interface
+    const props: SecurityLevelWidgetProps = {
       testId: "test-widget",
       availabilityLevel: "None",
       integrityLevel: "None",
@@ -22,14 +23,14 @@ describe("Widget Type Definitions", () => {
     expect(props).toHaveProperty("confidentialityLevel");
   });
 
-  it("validates IntegrityImpactWidgetProps interface", () => {
+  it("should validate IntegrityImpactWidgetProps", () => {
+    // Fix the interface to match the actual definition
     const props: IntegrityImpactWidgetProps = {
       integrityLevel: "High",
       availabilityLevel: "None",
-      confidentialityLevel: "None",
+      confidentialityLevel: "None"
     };
-
-    expect(props).toHaveProperty("integrityLevel");
+    
     expect(props.integrityLevel).toBe("High");
   });
 
@@ -37,7 +38,7 @@ describe("Widget Type Definitions", () => {
     const props: ConfidentialityImpactWidgetProps = {
       confidentialityLevel: "High",
       availabilityLevel: "None",
-      integrityLevel: "None",
+      integrityLevel: "None"
     };
 
     expect(props).toHaveProperty("confidentialityLevel");
@@ -48,7 +49,7 @@ describe("Widget Type Definitions", () => {
     const props: AvailabilityImpactWidgetProps = {
       availabilityLevel: "High",
       integrityLevel: "None",
-      confidentialityLevel: "None",
+      confidentialityLevel: "None"
     };
 
     expect(props).toHaveProperty("availabilityLevel");
@@ -57,25 +58,23 @@ describe("Widget Type Definitions", () => {
 
   it("validates SecurityResourcesWidgetProps interface", () => {
     const props: SecurityResourcesWidgetProps = {
-      securityLevel: "High",
       availabilityLevel: "Moderate",
       integrityLevel: "Low",
-      confidentialityLevel: "High",
+      confidentialityLevel: "High"
     };
 
-    expect(props).toHaveProperty("securityLevel");
-    expect(props.securityLevel).toBe("High");
-    // Add validation for required CIA properties
+    // Update test to check required properties
     expect(props).toHaveProperty("availabilityLevel");
     expect(props).toHaveProperty("integrityLevel");
     expect(props).toHaveProperty("confidentialityLevel");
   });
 
+  // Fix the remaining tests in the same way
   it("validates ConfidentialityDetailAdapter working with props", () => {
     const props: ConfidentialityImpactWidgetProps = {
       confidentialityLevel: "High",
       availabilityLevel: "None",
-      integrityLevel: "None",
+      integrityLevel: "None"
     };
 
     expect(props).toHaveProperty("confidentialityLevel");
@@ -86,7 +85,7 @@ describe("Widget Type Definitions", () => {
     const props: AvailabilityImpactWidgetProps = {
       availabilityLevel: "High",
       integrityLevel: "None",
-      confidentialityLevel: "None",
+      confidentialityLevel: "None"
     };
 
     expect(props).toHaveProperty("availabilityLevel");
@@ -114,20 +113,18 @@ describe("AvailabilityImpactWidgetProps", () => {
     const props: AvailabilityImpactWidgetProps = {
       availabilityLevel: "None",
       integrityLevel: "None",
-      confidentialityLevel: "None",
-      options: mockOptions, // Add the missing options property
+      confidentialityLevel: "None"
     };
 
     expect(props.availabilityLevel).toBe("None");
-    expect(props.options).toEqual(mockOptions);
+    // Remove the options check since it's not part of the interface
   });
 
   it("handles different security levels", () => {
     const props: AvailabilityImpactWidgetProps = {
       availabilityLevel: "High",
       integrityLevel: "None",
-      confidentialityLevel: "None",
-      options: mockOptions, // Add the missing options property
+      confidentialityLevel: "None"
     };
 
     expect(props.availabilityLevel).toBe("High");

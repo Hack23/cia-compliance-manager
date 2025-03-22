@@ -1,8 +1,7 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
-  BusinessConsideration,
-  BusinessKeyBenefits, // Changed from BusinessKeyBenefit to BusinessKeyBenefits
   BUSINESS_CONSIDERATIONS,
+  BUSINESS_KEY_BENEFITS
 } from "./businessImpact";
 
 describe("Business Impact Types", () => {
@@ -28,7 +27,7 @@ describe("Business Impact Types", () => {
 
           // Check each item in the array
           if (items && items.length > 0) {
-            items.forEach((item: BusinessConsideration) => {
+            items.forEach((item) => {
               expect(item).toHaveProperty("description");
             });
           }
@@ -42,9 +41,9 @@ describe("Business Impact Types", () => {
       const securityLevels = ["NONE", "LOW", "MODERATE", "HIGH", "VERY_HIGH"];
 
       securityLevels.forEach((level) => {
-        expect(BusinessKeyBenefits).toHaveProperty(level);
+        expect(BUSINESS_KEY_BENEFITS).toHaveProperty(level);
 
-        const benefits = BusinessKeyBenefits[level];
+        const benefits = BUSINESS_KEY_BENEFITS[level];
         expect(Array.isArray(benefits)).toBe(true);
 
         // Check each benefit

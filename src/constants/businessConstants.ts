@@ -1,8 +1,8 @@
-import { RISK_LEVELS, BUSINESS_IMPACT_CATEGORIES } from "./riskConstants";
 import {
   BusinessConsiderations,
-  BusinessKeyBenefits, // Changed from BusinessKeyBenefit to BusinessKeyBenefits
+  BusinessKeyBenefits,
 } from "../types/businessImpact";
+import { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS } from "./riskConstants";
 
 // Business impact considerations - these will populate our enhanced widget
 export const BUSINESS_CONSIDERATIONS: BusinessConsiderations = {

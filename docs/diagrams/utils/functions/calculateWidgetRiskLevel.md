@@ -1,0 +1,29 @@
+[**CIA Compliance Manager Diagrams v0.8.5**](../../README.md)
+
+***
+
+[CIA Compliance Manager Diagrams](../../modules.md) / [utils](../README.md) / calculateWidgetRiskLevel
+
+# Function: calculateWidgetRiskLevel()
+
+> **calculateWidgetRiskLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `"Critical"` \| `"High"` \| `"Medium"` \| `"Low"` \| `"Minimal"`
+
+Defined in: [utils/index.ts:130](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/utils/index.ts#L130)
+
+## Parameters
+
+### availabilityLevel
+
+`any`
+
+### integrityLevel
+
+`any`
+
+### confidentialityLevel
+
+`any`
+
+## Returns
+
+`"Critical"` \| `"High"` \| `"Medium"` \| `"Low"` \| `"Minimal"`

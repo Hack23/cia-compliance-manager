@@ -142,4 +142,11 @@ describe("useCIAOptions Hook Tests", () => {
       }
     }
   });
+
+  it("should memoize options data", () => {
+    const { result, rerender } = renderHook(() => useCIAOptions());
+    const firstResult = result.current;
+    rerender();
+    expect(result.current).toBe(firstResult);
+  });
 });

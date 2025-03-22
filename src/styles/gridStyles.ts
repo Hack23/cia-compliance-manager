@@ -1,6 +1,7 @@
 /**
  * Centralized grid styles for dashboard layout
  */
+import { Widget, WidgetConfig, WidgetDimension } from "../types/widget";
 
 // Base grid container styles
 export const gridClasses = `
@@ -64,10 +65,84 @@ export const gridConfig = {
   lg: 3, // 3 columns on large screens
 };
 
-// Sizing constants for widgets
+// Update widget size presets to use consistent 12-column grid
+export enum WidgetSizePreset {
+  SMALL = "small", // 3 columns
+  MEDIUM = "medium", // 4 columns
+  LARGE = "large", // 6 columns
+  EXTRA_LARGE = "extraLarge", // 8 columns
+  FULL_WIDTH = "fullWidth", // 12 columns
+  DEFAULT = "medium",
+}
+
+// Update widget size spans
 export const widgetSizes = {
-  small: "col-span-1",
-  medium: "col-span-2",
-  large: "col-span-3",
-  full: "col-span-full",
+  small: "col-span-3",
+  medium: "col-span-4",
+  large: "col-span-6",
+  extraLarge: "col-span-8",
+  full: "col-span-12",
 };
+
+// Update getWidgetSize function to use WidgetDimension
+export function getWidgetSize(widget: Partial<WidgetConfig>): WidgetDimension {
+  // Use explicit width and height if provided
+  if (widget.width !== undefined && widget.height !== undefined) {
+    return { width: widget.width, height: widget.height };
+  }
+
+  // Get dimensions based on size preset
+  switch (widget.size) {
+    case WidgetSizePreset.SMALL:
+      return { width: 3, height: 1 };
+    case WidgetSizePreset.MEDIUM:
+      return { width: 4, height: 1 };
+    case WidgetSizePreset.LARGE:
+      return { width: 6, height: 2 };
+    case WidgetSizePreset.EXTRA_LARGE:
+      return { width: 8, height: 2 };
+    case WidgetSizePreset.FULL_WIDTH:
+      return { width: 12, height: 1 };
+    default:
+      return { width: 4, height: 1 };
+  }
+}
+
+/**
+ * Calculate grid layout styles based on widget configuration
+ */
+export function getGridLayoutStyles(widgets: Widget[]) {
+  // Implementation details...
+}
+
+/**
+ * Get dimensions for a widget based on size
+ */
+export function getWidgetDimensions(widget: {
+  size?: string;
+  width?: number;
+  height?: number;
+}): { width: number; height: number } {
+  // If width and height are explicitly provided, use those
+  if (widget.width !== undefined && widget.height !== undefined) {
+    return { width: widget.width, height: widget.height };
+  }
+
+  // Otherwise, derive from size
+  const size = widget.size?.toLowerCase() || "medium";
+
+  if (size === "small") {
+    return { width: 3, height: 1 };
+  } else if (size === "medium") {
+    return { width: 4, height: 1 };
+  } else if (size === "large") {
+    return { width: 6, height: 2 };
+  } else if (size === "xlarge") {
+    return { width: 8, height: 2 };
+  } else if (size === "full" || size === "fullwidth") {
+    return { width: 12, height: 1 };
+  } else {
+    // Default to medium
+    return { width: 4, height: 1 };
+  }
+}

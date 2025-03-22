@@ -1,39 +1,32 @@
-import { act, render } from "@testing-library/react";
 import React from "react";
+import { act, render } from "@testing-library/react";
 
 /**
- * Renders a hook with the specified props and returns the result
- * @param useHookFn The hook function to test
- * @param initialProps Initial props to pass to the hook
- * @returns An object with the hook result and methods to rerender or unmount
+ * Simple hook testing utility for components
  */
 export function renderHook<TProps, TResult>(
   useHookFn: (props?: TProps) => TResult,
   initialProps?: TProps
 ) {
-  // Create a container to store the result value
   let result: TResult;
 
-  // Create a component that will call the hook with the props
-  const TestComponent: React.FC<{ hookProps?: TProps }> = ({ hookProps }) => {
+  // TestComponent to use the hook and capture the result
+  const TestComponent = ({ hookProps }: { hookProps?: TProps }) => {
     result = useHookFn(hookProps);
     return null;
   };
 
-  // Render the test component
+  // Render the test component with the provider
   const renderResult = render(<TestComponent hookProps={initialProps} />);
 
   return {
-    // Current result of the hook
     result: {
       get current() {
         return result as TResult;
       },
     },
-    // Method to rerender with new props
     rerender: (newProps?: TProps) =>
       renderResult.rerender(<TestComponent hookProps={newProps} />),
-    // Method to unmount the component
     unmount: renderResult.unmount,
   };
 }

@@ -1,73 +1,90 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 interface SecurityRiskScoreProps {
   score: number;
+  maxScore?: number;
   label: string;
+  className?: string;
   testId?: string;
 }
 
 /**
- * Displays a security risk score with visual indicators
+ * Displays a visual security score indicator
+ * 
+ * ## Business Perspective
+ * 
+ * This component provides a quantitative measure of security posture in an
+ * easy-to-understand format. The numerical score and color-coding help
+ * business stakeholders quickly gauge security maturity and track improvements
+ * over time, supporting data-driven security investment decisions. 📈
+ * 
+ * @param props Component props
+ * @returns React Element
  */
-const SecurityRiskScore: React.FC<SecurityRiskScoreProps> = ({
+function SecurityRiskScore({
   score,
+  maxScore = 100,
   label,
+  className = "",
   testId,
-}) => {
-  // Determine color and class based on risk score
-  const getScoreColor = () => {
-    if (score >= 80) return { color: "#ff5252", className: "critical-risk" };
-    if (score >= 60) return { color: "#ff9800", className: "high-risk" };
-    if (score >= 40) return { color: "#ffeb3b", className: "medium-risk" };
-    if (score >= 20) return { color: "#00e676", className: "low-risk" };
-    return { color: "#00e676", className: "low-risk" };
-  };
+}: SecurityRiskScoreProps): React.ReactElement {
+  // Normalize score as a percentage
+  const normalizedScore = useMemo(() => {
+    if (score <= 0) return 0;
+    if (score >= maxScore) return 100;
+    return (score / maxScore) * 100;
+  }, [score, maxScore]);
 
-  const { color, className } = getScoreColor();
-
-  // Calculate gauge position (0-100%)
-  const gaugePosition = `${score}%`;
+  // Determine color based on score range
+  const scoreColor = useMemo(() => {
+    if (normalizedScore >= 75) return "text-green-500 dark:text-green-400";
+    if (normalizedScore >= 50) return "text-yellow-500 dark:text-yellow-400";
+    return "text-red-500 dark:text-red-400";
+  }, [normalizedScore]);
 
   return (
     <div
-      className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border shadow-sm"
+      className={`flex flex-col items-center ${className}`}
       data-testid={testId}
     >
-      <h4 className="text-sm font-medium mb-2">Risk Assessment Score</h4>
-
-      {/* Risk Score Display */}
-      <div className="flex justify-center mb-3">
-        <div className={`text-2xl font-bold ${className} risk-score-value`}>
-          {score}/100
+      <div className="relative">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          {/* Background circle */}
+          <circle
+            cx="32"
+            cy="32"
+            r="28"
+            fill="none"
+            stroke="#e5e7eb"
+            strokeWidth="8"
+            className="dark:stroke-gray-700"
+          />
+          {/* Score indicator */}
+          <circle
+            cx="32"
+            cy="32"
+            r="28"
+            fill="none"
+            strokeLinecap="round"
+            stroke="currentColor"
+            strokeWidth="8"
+            strokeDasharray={`${normalizedScore * 1.76} 176`}
+            transform="rotate(-90 32 32)"
+            className={scoreColor}
+          />
+        </svg>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className={`text-lg font-bold ${scoreColor}`}>
+            {Math.round(normalizedScore)}
+          </span>
         </div>
       </div>
-
-      {/* Risk Label */}
-      <div className="text-center mb-3">
-        <span
-          className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${className}`}
-        >
-          {label} Risk
-        </span>
-      </div>
-
-      {/* Risk Gauge */}
-      <div className="mt-2">
-        <div className="security-gauge">
-          <div
-            className="security-gauge-indicator"
-            style={{ left: gaugePosition }}
-          ></div>
-        </div>
-        <div className="flex justify-between text-xs mt-1 text-gray-500 dark:text-gray-400">
-          <span>Low</span>
-          <span>Medium</span>
-          <span>High</span>
-          <span>Critical</span>
-        </div>
-      </div>
+      <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+        {label}
+      </span>
     </div>
   );
-};
+}
 
+export { SecurityRiskScore };
 export default SecurityRiskScore;
