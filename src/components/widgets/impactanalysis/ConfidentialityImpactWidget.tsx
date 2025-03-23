@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import withSecurityLevelState from "../../../hoc/withSecurityLevelState";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
@@ -47,7 +46,7 @@ export interface ConfidentialityImpactWidgetProps {
   /**
    * Optional level change handler
    */
-  onLevelChange?: (level: SecurityLevel) => void;
+  onConfidentialityChange?: (level: SecurityLevel) => void;
 }
 
 // Update the TechnicalImplementation type definition
@@ -259,5 +258,5 @@ const ConfidentialityImpactWidget: React.FC<
   );
 };
 
-// Export the component wrapped with security level state management
-export default withSecurityLevelState(ConfidentialityImpactWidget);
+// Export the component directly without HOC
+export default ConfidentialityImpactWidget;

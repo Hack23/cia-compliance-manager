@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import withSecurityLevelState from "../../../hoc/withSecurityLevelState";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
@@ -10,15 +9,40 @@ import WidgetContainer from "../../common/WidgetContainer";
 
 // Define component props
 export interface AvailabilityImpactWidgetProps {
-  // Use consistent naming pattern for levels
+  /**
+   * The selected availability level
+   */
   availabilityLevel: SecurityLevel;
+
+  /**
+   * The selected integrity level
+   */
   integrityLevel: SecurityLevel;
+
+  /**
+   * The selected confidentiality level
+   */
   confidentialityLevel: SecurityLevel;
-  // Legacy support for older implementations
+
+  /**
+   * Legacy support for older implementations
+   */
   level?: SecurityLevel;
+
+  /**
+   * Optional CSS class name
+   */
   className?: string;
+
+  /**
+   * Optional test ID for testing
+   */
   testId?: string;
-  onLevelChange?: (level: SecurityLevel) => void;
+
+  /**
+   * Optional handler for availability level changes
+   */
+  onAvailabilityChange?: (level: SecurityLevel) => void;
 }
 
 /**
@@ -227,5 +251,5 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   );
 };
 
-// Export the component wrapped with security level state management
-export default withSecurityLevelState(AvailabilityImpactWidget);
+// Export the component directly without HOC
+export default AvailabilityImpactWidget;

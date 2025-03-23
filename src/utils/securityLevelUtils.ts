@@ -186,20 +186,21 @@ export function getSecurityLevelPercentage(
  * @returns CSS class string for styling the security level
  */
 export function getSecurityLevelClass(level: string): string {
-  const normalizedLevel = normalizeSecurityLevel(level);
+  const normalizedLevel = level.toLowerCase().trim();
 
   switch (normalizedLevel) {
-    case SECURITY_LEVELS.VERY_HIGH:
-      return "text-purple-600 dark:text-purple-400 font-bold";
-    case SECURITY_LEVELS.HIGH:
-      return "text-green-600 dark:text-green-400 font-bold";
-    case SECURITY_LEVELS.MODERATE:
-      return "text-blue-600 dark:text-blue-400";
-    case SECURITY_LEVELS.LOW:
-      return "text-yellow-600 dark:text-yellow-400";
-    case SECURITY_LEVELS.NONE:
+    case "none":
+      return "text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900 dark:bg-opacity-20";
+    case "low":
+      return "text-yellow-600 dark:text-yellow-400 bg-yellow-100 dark:bg-yellow-900 dark:bg-opacity-20";
+    case "moderate":
+      return "text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20";
+    case "high":
+      return "text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900 dark:bg-opacity-20";
+    case "very high":
+      return "text-purple-600 dark:text-purple-400 bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20";
     default:
-      return "text-gray-600 dark:text-gray-400";
+      return "text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-900 dark:bg-opacity-20";
   }
 }
 

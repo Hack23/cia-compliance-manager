@@ -52,9 +52,6 @@ export type {
   WidgetBaseProps,
 } from "./types/widgets";
 
-// Re-export from hoc
-export type { WithSecurityLevelProps } from "./hoc/withSecurityLevelState";
-
 // Re-export service classes
 export { ComplianceService } from "./services/complianceService";
 export { TechnicalImplementationService } from "./services/technicalImplementationService";

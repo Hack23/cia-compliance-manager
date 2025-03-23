@@ -157,6 +157,7 @@ export interface ROIEstimatesMap {
   MODERATE: ROIEstimate;
   HIGH: ROIEstimate;
   VERY_HIGH: ROIEstimate;
+  // Remove duplicate index signature, keep only one
   [key: string]: ROIEstimate; // Add string index signature for easier access
 }
 

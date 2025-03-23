@@ -1,310 +1,269 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { COST_TEST_IDS } from "../../../constants/testIds";
+import { useCIAOptions } from "../../../hooks/useCIAOptions";
 import { SecurityLevel } from "../../../types/cia";
 import {
-  calculateSecurityROI,
-  calculateTotalSecurityCost,
-} from "../../../utils/costCalculationUtils";
+  calculateOverallSecurityLevel,
+  getSecurityLevelValue,
+} from "../../../utils/securityLevelUtils";
+import ProgressBar from "../../common/ProgressBar";
 import WidgetContainer from "../../common/WidgetContainer";
 
 /**
- * Props for the Cost Estimation Widget
+ * Props for CostEstimationWidget component
  */
-export interface CostEstimationWidgetProps {
-  // CIA security levels
+interface CostEstimationWidgetProps {
+  /**
+   * Selected availability level
+   */
   availabilityLevel: SecurityLevel;
+
+  /**
+   * Selected integrity level
+   */
   integrityLevel: SecurityLevel;
+
+  /**
+   * Selected confidentiality level
+   */
   confidentialityLevel: SecurityLevel;
 
-  // Organizational context
-  organizationSize?: "small" | "medium" | "large" | "enterprise";
-  industry?:
-    | "general"
-    | "financial"
-    | "healthcare"
-    | "government"
-    | "retail"
-    | "technology"
-    | "manufacturing";
-
-  // Optional props
-  estimatedAnnualLoss?: number;
-  showROI?: boolean;
-  timeframeYears?: number;
+  /**
+   * Optional CSS class name
+   */
   className?: string;
+
+  /**
+   * Optional test ID for automated testing
+   */
   testId?: string;
 }
 
 /**
- * Format numeric values with proper formatting for security metrics
- *
- * @param value Numeric value to format
- * @param prefix Optional prefix to add (e.g., '$')
- * @param suffix Optional suffix to add (e.g., '%')
- * @returns Formatted string
- */
-function formatSecurityMetric(value: number, prefix = "", suffix = ""): string {
-  // Format the number with commas for thousands
-  const formattedValue = new Intl.NumberFormat().format(value);
-  return `${prefix}${formattedValue}${suffix}`;
-}
-
-/**
- * Widget for cost estimation of security implementations
+ * Cost Estimation Widget provides financial calculations for security implementations
  *
  * ## Business Perspective
  *
- * This widget helps organizations understand the financial implications of their security choices.
- * It provides cost estimates for implementing security controls based on selected security levels,
- * which is essential for budget planning and resource allocation. 💰
- *
- * The ROI calculations help justify security investments to business stakeholders by
- * demonstrating the financial benefits of appropriate security controls. 📊
+ * This widget helps CFOs and security executives understand the financial
+ * implications of security controls, providing cost estimations for both
+ * implementation (CAPEX) and ongoing maintenance (OPEX). It supports
+ * budgeting, ROI calculations, and financial planning for security projects. 💰
  */
-export function CostEstimationWidget({
+const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
   availabilityLevel,
   integrityLevel,
   confidentialityLevel,
-  organizationSize = "medium",
-  industry = "general",
-  estimatedAnnualLoss = 1000000, // Default $1M annual loss for ROI calculation
-  showROI = true,
-  timeframeYears = 3,
-  className,
-  testId = "cost-estimation-widget",
-}: CostEstimationWidgetProps): React.ReactElement {
-  // Calculate cost estimates using the utility function
-  const costEstimates = React.useMemo(() => {
-    return calculateTotalSecurityCost(
+  className = "",
+  testId = "widget-cost-estimation",
+}) => {
+  // Use the CIA options hook to get cost data
+  const {
+    availabilityOptions,
+    integrityOptions,
+    confidentialityOptions,
+    ROI_ESTIMATES,
+  } = useCIAOptions();
+
+  // Calculate overall security level
+  const overallSecurityLevel = useMemo(() => {
+    return calculateOverallSecurityLevel(
       availabilityLevel,
       integrityLevel,
-      confidentialityLevel,
-      organizationSize,
-      industry
+      confidentialityLevel
     );
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
+
+  // Calculate CAPEX (capital expenditure) for implementation
+  const capexEstimate = useMemo(() => {
+    const availCapex = availabilityOptions[availabilityLevel]?.capex || 0;
+    const integCapex = integrityOptions[integrityLevel]?.capex || 0;
+    const confCapex = confidentialityOptions[confidentialityLevel]?.capex || 0;
+
+    return availCapex + integCapex + confCapex;
   }, [
+    availabilityOptions,
+    integrityOptions,
+    confidentialityOptions,
     availabilityLevel,
     integrityLevel,
     confidentialityLevel,
-    organizationSize,
-    industry,
   ]);
 
-  // Calculate ROI metrics if enabled
-  const roiMetrics = React.useMemo(() => {
-    if (!showROI) return null;
+  // Calculate OPEX (operational expenditure) for maintenance
+  const opexEstimate = useMemo(() => {
+    const availOpex = availabilityOptions[availabilityLevel]?.opex || 0;
+    const integOpex = integrityOptions[integrityLevel]?.opex || 0;
+    const confOpex = confidentialityOptions[confidentialityLevel]?.opex || 0;
 
-    // Calculate risk reduction based on security levels (simplified)
-    const securityLevels = {
-      None: 0,
-      Low: 1,
-      Moderate: 2,
-      High: 3,
-      "Very High": 4,
-    };
-    const avgLevel =
-      (securityLevels[availabilityLevel] +
-        securityLevels[integrityLevel] +
-        securityLevels[confidentialityLevel]) /
-      3;
-
-    // Risk reduction percentage (0-80% scale based on security level)
-    const riskReduction = Math.min(80, avgLevel * 20);
-
-    return calculateSecurityROI(
-      costEstimates.totalCost,
-      riskReduction,
-      estimatedAnnualLoss,
-      timeframeYears
-    );
+    return availOpex + integOpex + confOpex;
   }, [
-    showROI,
+    availabilityOptions,
+    integrityOptions,
+    confidentialityOptions,
     availabilityLevel,
     integrityLevel,
     confidentialityLevel,
-    costEstimates.totalCost,
-    estimatedAnnualLoss,
-    timeframeYears,
   ]);
+
+  // Calculate total cost (implementation + 3 years maintenance)
+  const totalCost = useMemo(() => {
+    const implementation = capexEstimate;
+    const maintenance = opexEstimate * 12 * 3; // Monthly OPEX for 3 years
+    return implementation + maintenance;
+  }, [capexEstimate, opexEstimate]);
+
+  // Calculate implementation time (in months)
+  const implementationTime = useMemo(() => {
+    // Base implementation time is 1 month, plus 0.5 months for each security level
+    const availTime = getSecurityLevelValue(availabilityLevel) * 0.5;
+    const integTime = getSecurityLevelValue(integrityLevel) * 0.5;
+    const confTime = getSecurityLevelValue(confidentialityLevel) * 0.5;
+
+    return 1 + availTime + integTime + confTime;
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
+
+  // Format costs as currency
+  const formatCurrency = (amount: number): string => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    }).format(amount * 5000); // Multiply by 5000 to get a realistic estimate
+  };
+
+  // Format implementation time
+  const formatImplementationTime = (months: number): string => {
+    const wholeMonths = Math.floor(months);
+    const days = Math.round((months - wholeMonths) * 30);
+
+    if (days === 0) {
+      return `${wholeMonths} month${wholeMonths !== 1 ? "s" : ""}`;
+    } else {
+      return `${wholeMonths} month${
+        wholeMonths !== 1 ? "s" : ""
+      } and ${days} day${days !== 1 ? "s" : ""}`;
+    }
+  };
+
+  // Calculate ROI estimate based on security level
+  const roiEstimate = useMemo(() => {
+    const levelKey = overallSecurityLevel.toUpperCase().replace(" ", "_");
+    return ROI_ESTIMATES[levelKey as keyof typeof ROI_ESTIMATES];
+  }, [ROI_ESTIMATES, overallSecurityLevel]);
+
+  // Calculate progress percentages for visualization
+  const capexPercentage = useMemo(() => {
+    // Maximum possible CAPEX is 60 (20 for each component at Very High)
+    return Math.min(100, (capexEstimate / 60) * 100);
+  }, [capexEstimate]);
+
+  const opexPercentage = useMemo(() => {
+    // Maximum possible OPEX is 30 (10 for each component at Very High)
+    return Math.min(100, (opexEstimate / 30) * 100);
+  }, [opexEstimate]);
 
   return (
     <WidgetContainer
-      title="Security Implementation Cost Estimation"
+      title={WIDGET_TITLES.COST_ESTIMATION}
+      icon={WIDGET_ICONS.COST_ESTIMATION}
       className={className}
       testId={testId}
-      icon="💰"
     >
-      <div className="space-y-6" data-testid={`${testId}-content`}>
-        {/* Summary section */}
-        <div className="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
-          <h3 className="text-lg font-medium mb-2">Cost Summary</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                Total Implementation Cost:
-              </p>
-              <p
-                className="text-2xl font-bold"
-                data-testid={`${testId}-total-cost`}
-              >
-                {formatSecurityMetric(costEstimates.totalCost, "$")}
-              </p>
+      <div className="p-4" data-testid={COST_TEST_IDS.COST_ESTIMATION_CONTENT}>
+        {/* Implementation Time */}
+        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+          <h3 className="text-lg font-medium">Estimated Implementation Time</h3>
+          <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">
+            {formatImplementationTime(implementationTime)}
+          </div>
+        </div>
+
+        {/* CAPEX - Capital Expenditure */}
+        <div className="mb-6" data-testid={COST_TEST_IDS.CAPEX_SECTION}>
+          <h3 className="text-md font-medium mb-2">
+            Implementation Cost (CAPEX)
+          </h3>
+          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+            <div
+              className="text-xl font-bold mb-2"
+              data-testid={COST_TEST_IDS.CAPEX_ESTIMATE_VALUE}
+            >
+              {formatCurrency(capexEstimate)}
             </div>
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                Annual Operational Cost:
-              </p>
-              <p
-                className="text-2xl font-bold"
-                data-testid={`${testId}-annual-opex`}
-              >
-                {formatSecurityMetric(costEstimates.totalOpex, "$")}
-              </p>
+            <ProgressBar
+              percentage={capexPercentage}
+              bgColorClass="bg-blue-500"
+              testId={COST_TEST_IDS.CAPEX_PROGRESS_BAR}
+            />
+            <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              One-time implementation cost
             </div>
           </div>
         </div>
 
-        {/* Cost breakdown section */}
-        <div>
-          <h3 className="text-lg font-medium mb-2">Cost Breakdown</h3>
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead>
-                <tr>
-                  <th className="px-4 py-2 text-left">Component</th>
-                  <th className="px-4 py-2 text-right">Capital Expense</th>
-                  <th className="px-4 py-2 text-right">Operational Expense</th>
-                  <th className="px-4 py-2 text-right">Total</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td className="px-4 py-2">
-                    Availability ({availabilityLevel})
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {formatSecurityMetric(
-                      costEstimates.availabilityCost.capex,
-                      "$"
-                    )}
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {formatSecurityMetric(
-                      costEstimates.availabilityCost.opex,
-                      "$"
-                    )}
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {formatSecurityMetric(
-                      costEstimates.availabilityCost.capex +
-                        costEstimates.availabilityCost.opex,
-                      "$"
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2">Integrity ({integrityLevel})</td>
-                  <td className="px-4 py-2 text-right">
-                    {formatSecurityMetric(
-                      costEstimates.integrityCost.capex,
-                      "$"
-                    )}
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {formatSecurityMetric(
-                      costEstimates.integrityCost.opex,
-                      "$"
-                    )}
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {formatSecurityMetric(
-                      costEstimates.integrityCost.capex +
-                        costEstimates.integrityCost.opex,
-                      "$"
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2">
-                    Confidentiality ({confidentialityLevel})
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {formatSecurityMetric(
-                      costEstimates.confidentialityCost.capex,
-                      "$"
-                    )}
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {formatSecurityMetric(
-                      costEstimates.confidentialityCost.opex,
-                      "$"
-                    )}
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {formatSecurityMetric(
-                      costEstimates.confidentialityCost.capex +
-                        costEstimates.confidentialityCost.opex,
-                      "$"
-                    )}
-                  </td>
-                </tr>
-                <tr className="font-medium bg-gray-50 dark:bg-gray-800">
-                  <td className="px-4 py-2">Total</td>
-                  <td className="px-4 py-2 text-right">
-                    {formatSecurityMetric(costEstimates.totalCapex, "$")}
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {formatSecurityMetric(costEstimates.totalOpex, "$")}
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {formatSecurityMetric(costEstimates.totalCost, "$")}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        {/* OPEX - Operational Expenditure */}
+        <div className="mb-6" data-testid={COST_TEST_IDS.OPEX_SECTION}>
+          <h3 className="text-md font-medium mb-2">Maintenance Cost (OPEX)</h3>
+          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+            <div
+              className="text-xl font-bold mb-2"
+              data-testid={COST_TEST_IDS.OPEX_ESTIMATE_VALUE}
+            >
+              {formatCurrency(opexEstimate)} / month
+            </div>
+            <ProgressBar
+              percentage={opexPercentage}
+              bgColorClass="bg-green-500"
+              testId={COST_TEST_IDS.OPEX_PROGRESS_BAR}
+            />
+            <div
+              className="text-sm text-gray-600 dark:text-gray-400 mt-1"
+              data-testid={COST_TEST_IDS.MONTHLY_OPEX}
+            >
+              Monthly operational costs
+            </div>
           </div>
         </div>
 
-        {/* ROI section */}
-        {showROI && roiMetrics && (
-          <div className="mt-6">
-            <h3 className="text-lg font-medium mb-2">Return on Investment</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-green-50 dark:bg-green-900 p-4 rounded-lg">
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  ROI ({timeframeYears} years):
-                </p>
-                <p className="text-2xl font-bold" data-testid={`${testId}-roi`}>
-                  {roiMetrics.roiPercentage}
-                </p>
-              </div>
-              <div className="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Payback Period:
-                </p>
-                <p
-                  className="text-2xl font-bold"
-                  data-testid={`${testId}-payback`}
-                >
-                  {roiMetrics.paybackPeriodMonths.toFixed(1)} months
-                </p>
-              </div>
-              <div className="bg-purple-50 dark:bg-purple-900 p-4 rounded-lg">
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Cost Avoidance:
-                </p>
-                <p
-                  className="text-2xl font-bold"
-                  data-testid={`${testId}-cost-avoidance`}
-                >
-                  {formatSecurityMetric(roiMetrics.costAvoidance, "$")}
-                </p>
-              </div>
+        {/* Total Cost */}
+        <div className="mb-6" data-testid={COST_TEST_IDS.TOTAL_COST_SUMMARY}>
+          <h3 className="text-md font-medium mb-2">Total 3-Year Cost</h3>
+          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+            <div
+              className="text-xl font-bold"
+              data-testid={COST_TEST_IDS.TOTAL_COST}
+            >
+              {formatCurrency(totalCost)}
+            </div>
+            <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              Implementation + 3 years maintenance
             </div>
           </div>
-        )}
+        </div>
+
+        {/* ROI Estimate */}
+        <div
+          className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+          data-testid={COST_TEST_IDS.ROI_SECTION}
+        >
+          <h3 className="text-md font-medium mb-2">Return on Investment</h3>
+          <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+            <div
+              className="text-lg font-bold text-blue-700 dark:text-blue-300"
+              data-testid={COST_TEST_IDS.ROI_ESTIMATE}
+            >
+              {roiEstimate.returnRate}
+            </div>
+            <div className="text-sm text-blue-600 dark:text-blue-400 mt-1">
+              {roiEstimate.description}
+            </div>
+          </div>
+        </div>
       </div>
     </WidgetContainer>
   );
-}
+};
 
+// Export the component directly without HOC
 export default CostEstimationWidget;

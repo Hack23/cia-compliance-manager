@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { ReactNode } from "react"; // Import ReactNode for typing
-import { vi } from "vitest";
+import React, { ReactNode } from "react";
+import { describe, expect, test, vi } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
 import SecurityLevelWidget from "./SecurityLevelWidget";
 
@@ -10,9 +10,6 @@ const getRequiredProps = () => {
     availabilityLevel: "Moderate" as SecurityLevel,
     integrityLevel: "Moderate" as SecurityLevel,
     confidentialityLevel: "Moderate" as SecurityLevel,
-    setAvailability: vi.fn(),
-    setIntegrity: vi.fn(),
-    setConfidentiality: vi.fn(),
     onAvailabilityChange: vi.fn(),
     onIntegrityChange: vi.fn(),
     onConfidentialityChange: vi.fn(),
@@ -67,17 +64,14 @@ describe("SecurityLevelWidget", () => {
     // Change availability level
     fireEvent.change(availabilitySelect, { target: { value: "High" } });
     expect(props.onAvailabilityChange).toHaveBeenCalledWith("High");
-    expect(props.setAvailability).toHaveBeenCalledWith("High");
 
     // Change integrity level
     fireEvent.change(integritySelect, { target: { value: "Low" } });
     expect(props.onIntegrityChange).toHaveBeenCalledWith("Low");
-    expect(props.setIntegrity).toHaveBeenCalledWith("Low");
 
     // Change confidentiality level
     fireEvent.change(confidentialitySelect, { target: { value: "Very High" } });
     expect(props.onConfidentialityChange).toHaveBeenCalledWith("Very High");
-    expect(props.setConfidentiality).toHaveBeenCalledWith("Very High");
   });
 
   // View details button tests

@@ -1,70 +1,52 @@
-import React, { useMemo } from "react";
-import { CIA_COMPONENT_COLORS } from "../../../constants/colorConstants";
+import React, { useMemo, useState } from "react";
 import { BUSINESS_IMPACT_TEST_IDS } from "../../../constants/testIds";
 import { useCIAOptions } from "../../../hooks/useCIAOptions";
-import { BusinessImpactService } from "../../../services/businessImpactService";
-import { SecurityLevel } from "../../../types/cia";
-import { CIAComponentType } from "../../../types/cia-services";
-import { getRiskBadgeVariant } from "../../../utils";
-import { toTitleCase } from "../../../utils/formatUtils";
-import BusinessRiskDisplay from "../../common/BusinessRiskDisplay";
-import SecurityLevelBadge from "../../common/SecurityLevelBadge";
-import WidgetContainer from "../../common/WidgetContainer";
+import { createBusinessImpactService } from "../../../services/businessImpactService";
+import { BusinessImpactDetail, SecurityLevel } from "../../../types/cia";
+// Import BusinessItem from businessImpact.ts instead of cia.ts
+import { BusinessItem } from "../../../types/businessImpact";
+// Change from import type to regular import
+import { StatusBadge, WidgetContainer } from "../../common";
 
 /**
- * Interface for business impact data
- */
-interface BusinessImpactData {
-  component: CIAComponentType;
-  level: SecurityLevel;
-  value: number;
-  percentage: string;
-  description: string;
-  capex: number;
-  opex: number;
-  // Add missing properties that are used in the component
-  financialImpact?: {
-    description: string;
-    riskLevel: string;
-    annualRevenueLoss?: string;
-  };
-  operationalImpact?: {
-    description: string;
-    riskLevel: string;
-    meanTimeToRecover?: string;
-  };
-  uptime?: string;
-  rto?: string;
-  rpo?: string;
-  mttr?: string;
-}
-
-/**
- * Interface for component props
+ * Props for BusinessImpactAnalysisWidget component
  */
 interface BusinessImpactAnalysisWidgetProps {
+  /**
+   * Selected availability level
+   */
   availabilityLevel: SecurityLevel;
+
+  /**
+   * Selected integrity level
+   */
   integrityLevel: SecurityLevel;
+
+  /**
+   * Selected confidentiality level
+   */
   confidentialityLevel: SecurityLevel;
-  securityLevel?: SecurityLevel;
+
+  /**
+   * Optional CSS class name
+   */
+  className?: string;
+
+  /**
+   * Optional test ID for automated testing
+   */
   testId?: string;
 }
 
 /**
- * Business Impact Analysis Widget Component
- *
- * Displays an analysis of business impacts across the CIA triad components,
- * including financial, operational, and reputational impacts, with metrics
- * for each component.
+ * Business Impact Analysis Widget provides insights on security impacts
  *
  * ## Business Perspective
  *
- * This widget translates technical security levels into business outcomes,
- * helping stakeholders understand the operational and financial implications
- * of their security choices across availability, integrity, and confidentiality. 💼
- *
- * @param props - Component props
- * @returns React component
+ * This widget helps executives understand the business implications of
+ * security measures across financial, operational, reputational and
+ * regulatory dimensions, supporting risk-based decision making and
+ * providing justification for security investments. 📊
  */
 const BusinessImpactAnalysisWidget: React.FC<
   BusinessImpactAnalysisWidgetProps
@@ -72,321 +54,351 @@ const BusinessImpactAnalysisWidget: React.FC<
   availabilityLevel,
   integrityLevel,
   confidentialityLevel,
-  testId = BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_WIDGET,
+  className = "",
+  testId = "widget-business-impact",
 }) => {
-  const { availabilityOptions, integrityOptions, confidentialityOptions } =
-    useCIAOptions();
+  // Get CIA options to use as the data provider
+  const ciaOptions = useCIAOptions();
 
-  // Remove local state management and directly use props
-  // This ensures changes in SecurityLevelWidget are immediately reflected here
-
-  // Debug logging to verify props are received correctly
-  console.log("BusinessImpactAnalysisWidget levels:", {
-    props: { availabilityLevel, integrityLevel, confidentialityLevel },
-  });
-
-  const businessImpactService = useMemo(() => {
-    return new BusinessImpactService({
-      availabilityOptions,
-      integrityOptions,
-      confidentialityOptions,
-      roiEstimates: {
-        NONE: { returnRate: "0%", description: "No return" },
-        LOW: { returnRate: "50%", description: "Low return" },
-        MODERATE: { returnRate: "150%", description: "Moderate return" },
-        HIGH: { returnRate: "300%", description: "High return" },
-        VERY_HIGH: { returnRate: "500%", description: "Maximum return" },
-      },
-    });
-  }, [availabilityOptions, integrityOptions, confidentialityOptions]);
-
-  // Get business impact details for each component - use props directly
-  const availabilityImpact = useMemo(
+  // Create business impact service with data provider
+  const businessImpactService = useMemo(
     () =>
-      businessImpactService.getBusinessImpact(
-        "availability",
-        availabilityLevel // Using props directly
-      ),
-    [businessImpactService, availabilityLevel]
+      createBusinessImpactService({
+        availabilityOptions: ciaOptions.availabilityOptions,
+        integrityOptions: ciaOptions.integrityOptions,
+        confidentialityOptions: ciaOptions.confidentialityOptions,
+        // Add required roiEstimates property
+        roiEstimates: ciaOptions.ROI_ESTIMATES || {},
+      }),
+    [ciaOptions]
   );
 
-  const integrityImpact = useMemo(
-    () => businessImpactService.getBusinessImpact("integrity", integrityLevel), // Using props directly
-    [businessImpactService, integrityLevel]
+  // State for active tab
+  const [activeTab, setActiveTab] = useState<"considerations" | "benefits">(
+    "considerations"
   );
 
-  const confidentialityImpact = useMemo(
-    () =>
-      businessImpactService.getBusinessImpact(
-        "confidentiality",
-        confidentialityLevel // Using props directly
-      ),
-    [businessImpactService, confidentialityLevel]
-  );
-
-  // Prepare impact data for each component for rendering - use props directly
-  const impactData = useMemo((): BusinessImpactData[] => {
-    // Create data for availability component
-    const availData: BusinessImpactData = {
-      component: "availability",
-      level: availabilityLevel, // Using props directly
-      value: availabilityOptions[availabilityLevel]?.opex || 0,
-      percentage: `${
-        ((availabilityOptions[availabilityLevel]?.opex || 0) * 100) / 40
-      }%`,
-      description: availabilityImpact.summary,
-      capex: availabilityOptions[availabilityLevel]?.capex || 0,
-      opex: availabilityOptions[availabilityLevel]?.opex || 0,
-      // Add these properties from the impact details
-      financialImpact: availabilityImpact.financial,
-      operationalImpact: availabilityImpact.operational,
-      uptime: availabilityOptions[availabilityLevel]?.uptime,
-      rto: availabilityOptions[availabilityLevel]?.rto,
-      rpo: availabilityOptions[availabilityLevel]?.rpo,
-      mttr: availabilityOptions[availabilityLevel]?.mttr,
-    };
-
-    // Create data for integrity component
-    const integrityData: BusinessImpactData = {
-      component: "integrity",
-      level: integrityLevel,
-      value: integrityOptions[integrityLevel]?.opex || 0,
-      percentage: `${
-        ((integrityOptions[integrityLevel]?.opex || 0) * 100) / 40
-      }%`,
-      description: integrityImpact.summary,
-      capex: integrityOptions[integrityLevel]?.capex || 0,
-      opex: integrityOptions[integrityLevel]?.opex || 0,
-      // Add these properties from the impact details
-      financialImpact: integrityImpact.financial,
-      operationalImpact: integrityImpact.operational,
-    };
-
-    // Create data for confidentiality component
-    const confidentialityData: BusinessImpactData = {
-      component: "confidentiality",
-      level: confidentialityLevel,
-      value: confidentialityOptions[confidentialityLevel]?.opex || 0,
-      percentage: `${
-        ((confidentialityOptions[confidentialityLevel]?.opex || 0) * 100) / 40
-      }%`,
-      description: confidentialityImpact.summary,
-      capex: confidentialityOptions[confidentialityLevel]?.capex || 0,
-      opex: confidentialityOptions[confidentialityLevel]?.opex || 0,
-      // Add these properties from the impact details
-      financialImpact: confidentialityImpact.financial,
-      operationalImpact: confidentialityImpact.operational,
-    };
-
-    return [availData, integrityData, confidentialityData];
+  // Calculate impact level
+  const impactLevel = useMemo(() => {
+    return businessImpactService.calculateBusinessImpactLevel(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
   }, [
+    businessImpactService,
     availabilityLevel,
     integrityLevel,
     confidentialityLevel,
-    availabilityOptions,
-    integrityOptions,
-    confidentialityOptions,
-    availabilityImpact,
-    integrityImpact,
-    confidentialityImpact,
   ]);
 
-  return (
-    <WidgetContainer title="Business Impact Analysis" testId={testId}>
-      <div className="space-y-4">
-        <div className="grid grid-cols-3 gap-3 text-center">
-          {/* Use SecurityLevelBadge components for consistent display */}
-          <SecurityLevelBadge
-            category="Availability"
-            level={availabilityLevel}
-            colorClass="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
-            textClass="text-blue-600 dark:text-blue-400"
-            testId={`${testId}-availability`}
-          />
+  // Get impact details for each component
+  const availabilityImpact = useMemo(() => {
+    return businessImpactService.getBusinessImpact(
+      "availability",
+      availabilityLevel
+    );
+  }, [businessImpactService, availabilityLevel]);
 
-          <SecurityLevelBadge
-            category="Integrity"
-            level={integrityLevel}
-            colorClass="bg-green-50 dark:bg-green-900 dark:bg-opacity-20"
-            textClass="text-green-600 dark:text-green-400"
-            testId={`${testId}-integrity`}
-          />
+  const integrityImpact = useMemo(() => {
+    return businessImpactService.getBusinessImpact("integrity", integrityLevel);
+  }, [businessImpactService, integrityLevel]);
 
-          <SecurityLevelBadge
-            category="Confidentiality"
-            level={confidentialityLevel}
-            colorClass="bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20"
-            textClass="text-purple-600 dark:text-purple-400"
-            testId={`${testId}-confidentiality`}
-          />
-        </div>
+  const confidentialityImpact = useMemo(() => {
+    return businessImpactService.getBusinessImpact(
+      "confidentiality",
+      confidentialityLevel
+    );
+  }, [businessImpactService, confidentialityLevel]);
 
-        <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3">
-          {/* Availability Impact */}
+  // Get status badge color based on impact level
+  const getStatusBadgeVariant = (
+    level: string
+  ): "info" | "success" | "warning" | "error" | "neutral" => {
+    switch (level) {
+      case "Minimal":
+        return "success";
+      case "Low":
+        return "info";
+      case "Medium":
+        return "warning";
+      case "High":
+      case "Critical":
+        return "error";
+      default:
+        return "neutral";
+    }
+  };
+
+  // Helper to render an impact category
+  const renderImpactCategory = (
+    category: string,
+    impact: BusinessImpactDetail
+  ) => {
+    if (!impact) return null;
+
+    const icon = businessImpactService.getCategoryIcon(category);
+
+    return (
+      <div
+        className="mb-4"
+        data-testid={`${BUSINESS_IMPACT_TEST_IDS.IMPACT_CATEGORY}-${category}`}
+      >
+        <h4 className="text-md font-medium mb-2 flex items-center">
+          <span className="mr-2">{icon}</span>
+          {category.charAt(0).toUpperCase() + category.slice(1)} Impact
+        </h4>
+        <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
           <div
-            className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800 border-l-4"
-            style={{
-              borderLeftColor: CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY,
-            }}
+            className="mb-2"
+            data-testid={`${BUSINESS_IMPACT_TEST_IDS.IMPACT_DESCRIPTION}-${category}`}
           >
-            <h4
-              className="font-medium text-sm mb-1"
-              style={{ color: CIA_COMPONENT_COLORS.AVAILABILITY.PRIMARY }}
-            >
-              Availability Impact
-            </h4>
-            <p className="text-xs text-gray-600 dark:text-gray-300">
-              {getImpactSummary("availability", availabilityLevel)}
-            </p>
+            {impact.description}
           </div>
-
-          {/* Integrity Impact */}
-          <div
-            className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800 border-l-4"
-            style={{ borderLeftColor: CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY }}
-          >
-            <h4
-              className="font-medium text-sm mb-1"
-              style={{ color: CIA_COMPONENT_COLORS.INTEGRITY.PRIMARY }}
+          <div className="flex items-center">
+            <span className="mr-2 text-sm">Risk Level:</span>
+            <StatusBadge
+              status={getStatusBadgeVariant(impact.riskLevel || "Medium")}
+              testId={`${BUSINESS_IMPACT_TEST_IDS.RISK_LEVEL}-${category}`}
             >
-              Integrity Impact
-            </h4>
-            <p className="text-xs text-gray-600 dark:text-gray-300">
-              {getImpactSummary("integrity", integrityLevel)}
-            </p>
+              {impact.riskLevel || "Medium Risk"}
+            </StatusBadge>
           </div>
-
-          {/* Confidentiality Impact */}
-          <div
-            className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800 border-l-4"
-            style={{
-              borderLeftColor: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY,
-            }}
-          >
-            <h4
-              className="font-medium text-sm mb-1"
-              style={{ color: CIA_COMPONENT_COLORS.CONFIDENTIALITY.PRIMARY }}
-            >
-              Confidentiality Impact
-            </h4>
-            <p className="text-xs text-gray-600 dark:text-gray-300">
-              {getImpactSummary("confidentiality", confidentialityLevel)}
-            </p>
-          </div>
+          {category === "financial" && impact.annualRevenueLoss && (
+            <div className="mt-2 text-sm">
+              <span className="font-medium">Potential Revenue Loss:</span>{" "}
+              {impact.annualRevenueLoss}
+            </div>
+          )}
+          {category === "operational" && impact.meanTimeToRecover && (
+            <div className="mt-2 text-sm">
+              <span className="font-medium">Mean Recovery Time:</span>{" "}
+              {impact.meanTimeToRecover}
+            </div>
+          )}
         </div>
       </div>
+    );
+  };
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Operational Impact Section */}
-        <div
-          className="bg-white dark:bg-gray-800 p-4 rounded shadow"
-          data-testid={BUSINESS_IMPACT_TEST_IDS.OPERATIONAL_IMPACT_SECTION}
-        >
-          <h3 className="text-lg font-semibold mb-4">Operational Impact</h3>
-          <div className="space-y-4">
-            {impactData.map((impact) => (
-              <BusinessRiskDisplay
-                key={`operational-${impact.component}`}
-                impactCategory={impact.component}
-                riskLevel={impact.operationalImpact?.riskLevel || "Unknown"}
-                description={
-                  impact.operationalImpact?.description ||
-                  "No operational impact data available"
-                }
-                metric={
-                  impact.component === "availability" &&
-                  impact.operationalImpact?.meanTimeToRecover
-                    ? {
-                        label: "MTTR",
-                        value: impact.operationalImpact.meanTimeToRecover,
-                      }
-                    : undefined
-                }
-                testId={`${testId}-${impact.component}-operational`}
-              />
-            ))}
-          </div>
-        </div>
+  // Generate sample considerations and benefits since they're not implemented in the service
+  const considerations = useMemo((): BusinessItem[] => {
+    return [
+      {
+        title: "Financial Investment",
+        description: `Consider the financial impact of implementing ${availabilityLevel} availability, ${integrityLevel} integrity, and ${confidentialityLevel} confidentiality controls.`,
+      },
+      {
+        title: "Operational Changes",
+        description:
+          "Evaluate the operational changes needed to support the selected security levels.",
+      },
+      {
+        title: "Training Requirements",
+        description:
+          "Identify training needs for staff to support the implementation of these security controls.",
+      },
+    ];
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-        {/* Financial Impact Section */}
-        <div
-          className="bg-white dark:bg-gray-800 p-4 rounded shadow"
-          data-testid={BUSINESS_IMPACT_TEST_IDS.FINANCIAL_IMPACT_SECTION}
-        >
-          <h3 className="text-lg font-semibold mb-4">Financial Impact</h3>
-          <div className="space-y-4">
-            {impactData.map((impact) => (
-              <BusinessRiskDisplay
-                key={`financial-${impact.component}`}
-                impactCategory={impact.component}
-                riskLevel={impact.financialImpact?.riskLevel || "Unknown"}
-                description={
-                  impact.financialImpact?.description ||
-                  "No financial impact data available"
-                }
-                metric={
-                  impact.financialImpact?.annualRevenueLoss
-                    ? {
-                        label: "Potential Loss",
-                        value: impact.financialImpact.annualRevenueLoss,
-                      }
-                    : undefined
-                }
-                testId={`${testId}-${impact.component}-financial`}
-              />
-            ))}
-          </div>
-        </div>
+  const benefits = useMemo((): BusinessItem[] => {
+    return [
+      {
+        title: "Risk Reduction",
+        description: `Implementing these controls reduces business risk related to ${availabilityLevel} availability, ${integrityLevel} integrity, and ${confidentialityLevel} confidentiality breaches.`,
+      },
+      {
+        title: "Compliance Improvement",
+        description:
+          "Enhanced compliance with industry standards and regulatory requirements.",
+      },
+      {
+        title: "Competitive Advantage",
+        description:
+          "Improved security posture can be a differentiator when dealing with security-conscious customers.",
+      },
+    ];
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-        {/* Availability Metrics Section */}
-        <div
-          className="bg-white dark:bg-gray-800 p-4 rounded shadow"
-          data-testid={BUSINESS_IMPACT_TEST_IDS.REPUTATIONAL_IMPACT_SECTION}
-        >
-          <h3 className="text-lg font-semibold mb-4">Availability Metrics</h3>
-          <div className="space-y-4">
-            <div
-              className="border-l-4 border-purple-500 pl-3"
-              data-testid={BUSINESS_IMPACT_TEST_IDS.IMPACT_CATEGORY}
-            >
-              <h4 className="text-md font-medium">Uptime Target</h4>
-              {impactData[0].uptime && (
-                <div className="p-2 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded mt-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">Uptime:</span>
-                    <span className="text-sm">{impactData[0].uptime}</span>
-                  </div>
-                </div>
-              )}
-
-              <h4 className="text-md font-medium mt-4">Recovery Objectives</h4>
-              {impactData[0].rto && (
-                <div className="p-2 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded mt-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">RTO:</span>
-                    <span className="text-sm">{impactData[0].rto}</span>
-                  </div>
-                </div>
-              )}
-
-              {impactData[0].rpo && (
-                <div className="p-2 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded mt-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">RPO:</span>
-                    <span className="text-sm">{impactData[0].rpo}</span>
-                  </div>
-                </div>
-              )}
-
-              {impactData[0].mttr && (
-                <div className="p-2 bg-orange-50 dark:bg-orange-900 dark:bg-opacity-20 rounded mt-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">MTTR:</span>
-                    <span className="text-sm">{impactData[0].mttr}</span>
-                  </div>
-                </div>
-              )}
+  return (
+    <WidgetContainer
+      title="Business Impact Analysis"
+      icon="📊"
+      className={className}
+      testId={testId}
+    >
+      <div className="p-4">
+        {/* Impact Summary */}
+        <div className="mb-6">
+          <h3 className="text-lg font-medium mb-2">Business Impact Summary</h3>
+          <div
+            className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+            data-testid={BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_SUMMARY}
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="text-gray-600 dark:text-gray-400">
+                Overall Business Impact
+              </div>
+              <StatusBadge
+                status={getStatusBadgeVariant(impactLevel)}
+                testId={BUSINESS_IMPACT_TEST_IDS.IMPACT_LEVEL_INDICATOR_PREFIX}
+              >
+                {impactLevel} Impact
+              </StatusBadge>
             </div>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {impactLevel === "Critical"
+                ? "Severe business impact with significant financial, operational, and reputational consequences."
+                : impactLevel === "High"
+                ? "Major business impact with substantial financial and operational consequences."
+                : impactLevel === "Medium"
+                ? "Moderate business impact with manageable but noticeable consequences."
+                : impactLevel === "Low"
+                ? "Minor business impact with limited financial and operational consequences."
+                : "Minimal business impact with negligible consequences."}
+            </p>
+          </div>
+        </div>
+
+        {/* Tab navigation */}
+        <div className="flex border-b border-gray-200 dark:border-gray-700 mb-4">
+          <button
+            className={`px-4 py-2 text-sm font-medium ${
+              activeTab === "considerations"
+                ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
+                : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            }`}
+            onClick={() => setActiveTab("considerations")}
+            data-testid={BUSINESS_IMPACT_TEST_IDS.TAB_CONSIDERATIONS}
+          >
+            Business Considerations
+          </button>
+          <button
+            className={`px-4 py-2 text-sm font-medium ${
+              activeTab === "benefits"
+                ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
+                : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            }`}
+            onClick={() => setActiveTab("benefits")}
+            data-testid={BUSINESS_IMPACT_TEST_IDS.TAB_BENEFITS}
+          >
+            Key Benefits
+          </button>
+        </div>
+
+        {/* Tab content */}
+        {activeTab === "considerations" ? (
+          <div data-testid={BUSINESS_IMPACT_TEST_IDS.BUSINESS_CONSIDERATIONS}>
+            {considerations.length > 0 ? (
+              <ul className="space-y-3">
+                {considerations.map(
+                  (consideration: BusinessItem, index: number) => (
+                    <li
+                      key={index}
+                      className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                      data-testid={`${BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_PREFIX}-consideration-${index}`}
+                    >
+                      <div className="font-medium">
+                        {consideration.title || `Consideration ${index + 1}`}
+                      </div>
+                      <div
+                        className="text-sm text-gray-600 dark:text-gray-400 mt-1"
+                        data-testid={`consideration-description-${index}`}
+                      >
+                        {consideration.description}
+                      </div>
+                    </li>
+                  )
+                )}
+              </ul>
+            ) : (
+              <div
+                className="text-center text-gray-500 dark:text-gray-400 p-6"
+                data-testid={BUSINESS_IMPACT_TEST_IDS.NO_CONSIDERATIONS_MESSAGE}
+              >
+                No specific business considerations for the current security
+                levels.
+              </div>
+            )}
+          </div>
+        ) : (
+          <div data-testid={BUSINESS_IMPACT_TEST_IDS.BUSINESS_BENEFITS}>
+            {benefits.length > 0 ? (
+              <ul className="space-y-3">
+                {benefits.map((benefit: BusinessItem, index: number) => (
+                  <li
+                    key={index}
+                    className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                    data-testid={`${BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_PREFIX}-benefit-${index}`}
+                  >
+                    <div className="font-medium">
+                      {benefit.title || `Benefit ${index + 1}`}
+                    </div>
+                    <div
+                      className="text-sm text-gray-600 dark:text-gray-400 mt-1"
+                      data-testid={`benefit-description-${index}`}
+                    >
+                      {benefit.description}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div
+                className="text-center text-gray-500 dark:text-gray-400 p-6"
+                data-testid={BUSINESS_IMPACT_TEST_IDS.NO_BENEFITS_MESSAGE}
+              >
+                No specific business benefits for the current security levels.
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Impact Metrics */}
+        <div
+          className="mt-6"
+          data-testid={BUSINESS_IMPACT_TEST_IDS.IMPACT_METRICS_SECTION}
+        >
+          <h3 className="text-lg font-medium mb-3">Impact Metrics</h3>
+          <div className="space-y-4">
+            {/* Financial Impact */}
+            {availabilityImpact?.financial && (
+              <div data-testid={BUSINESS_IMPACT_TEST_IDS.FINANCIAL_IMPACT_CARD}>
+                {renderImpactCategory(
+                  "financial",
+                  availabilityImpact.financial
+                )}
+              </div>
+            )}
+
+            {/* Operational Impact */}
+            {availabilityImpact?.operational && (
+              <div
+                data-testid={BUSINESS_IMPACT_TEST_IDS.OPERATIONAL_IMPACT_CARD}
+              >
+                {renderImpactCategory(
+                  "operational",
+                  availabilityImpact.operational
+                )}
+              </div>
+            )}
+
+            {/* Reputational Impact */}
+            {confidentialityImpact?.reputational && (
+              <div>
+                {renderImpactCategory(
+                  "reputational",
+                  confidentialityImpact.reputational
+                )}
+              </div>
+            )}
+
+            {/* Regulatory Impact */}
+            {integrityImpact?.regulatory && (
+              <div>
+                {renderImpactCategory("regulatory", integrityImpact.regulatory)}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -394,53 +406,5 @@ const BusinessImpactAnalysisWidget: React.FC<
   );
 };
 
-// Helper function to generate impact summary based on component and level
-function getImpactSummary(component: string, level: SecurityLevel): string {
-  const componentName = toTitleCase(component);
-
-  switch (level) {
-    case "None":
-      return `No ${componentName.toLowerCase()} controls. High business risk with significant potential for disruption, data corruption, or unauthorized access.`;
-    case "Low":
-      return `Basic ${componentName.toLowerCase()} controls. Moderate business risk with potential for service disruptions, data integrity issues, or information leakage.`;
-    case "Moderate":
-      return `Standard ${componentName.toLowerCase()} controls. Reduced business risk with reasonable protection against most common threats.`;
-    case "High":
-      return `Advanced ${componentName.toLowerCase()} controls. Low business risk with strong protection against most threats.`;
-    case "Very High":
-      return `Comprehensive ${componentName.toLowerCase()} controls. Minimal business risk with robust protection against sophisticated threats.`;
-    default:
-      return `${componentName} impact not determined.`;
-  }
-}
-
-/**
- * Helper function to get the appropriate badge variant for a risk level
- *
- * @param riskLevel - The risk level string
- * @returns The badge variant for UI styling
- */
-function getRiskVariant(
-  riskLevel: string | undefined
-): "error" | "warning" | "info" | "success" | "neutral" | "purple" {
-  // Use the imported utility but ensure the return type matches what's expected
-  const variant = getRiskBadgeVariant(riskLevel);
-
-  // Make sure the returned variant is one of the expected values
-  switch (variant) {
-    case "error":
-      return "error";
-    case "warning":
-      return "warning";
-    case "info":
-      return "info";
-    case "success":
-      return "success";
-    case "purple":
-      return "purple"; // Add support for purple
-    default:
-      return "neutral";
-  }
-}
-
+// Export the component directly without HOC
 export default BusinessImpactAnalysisWidget;

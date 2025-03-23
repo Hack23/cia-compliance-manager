@@ -1,29 +1,33 @@
 import { SecurityLevel } from "../types/cia";
-import { CIAComponentType, CIADataProvider } from "../types/cia-services";
+import { CIADataProvider } from "../types/cia-services";
 import { BaseService } from "./BaseService";
 
 /**
- * Security resource model
+ * Security resource interface
  */
 export interface SecurityResource {
-  id: string;
   title: string;
   description: string;
   url: string;
-  type: string;
-  relevance: number; // 0-100 scale
+  category?: string;
+  source?: string;
   tags?: string[];
+  securityLevels?: {
+    availability?: SecurityLevel[];
+    integrity?: SecurityLevel[];
+    confidentiality?: SecurityLevel[];
+  };
 }
 
 /**
- * Service for security resources related functionality
+ * Service for managing security resources
  *
- * ## Educational Perspective
+ * ## Business Perspective
  *
- * This service provides educational resources and implementation guides
- * that help security teams build their knowledge and implement security
- * controls effectively. It curates relevant documentation and learning
- * resources based on selected security levels. 📚
+ * This service provides access to curated security resources that help
+ * organizations implement appropriate security controls based on their
+ * selected security levels across the CIA triad. It saves time in research
+ * and ensures alignment with industry best practices. 📚
  */
 export class SecurityResourceService extends BaseService {
   constructor(dataProvider: CIADataProvider) {
@@ -31,176 +35,305 @@ export class SecurityResourceService extends BaseService {
   }
 
   /**
-   * Get value points for a security level
+   * Get resources relevant to the selected security levels
+   *
+   * @param availabilityLevel - Availability security level
+   * @param integrityLevel - Integrity security level
+   * @param confidentialityLevel - Confidentiality security level
+   * @returns Filtered security resources
    */
-  public getValuePoints(level: SecurityLevel): string[] {
-    return super.getValuePoints(level);
+  getResourcesForSecurityLevels(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): SecurityResource[] {
+    // For now, return some mock resources
+    // In a real implementation, this would filter from a larger set
+    return [
+      {
+        title: "NIST SP 800-53 Security Controls",
+        description: "Comprehensive guide to security controls by NIST",
+        url: "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
+        category: "standards",
+        source: "NIST",
+        tags: ["compliance", "controls", "government"],
+      },
+      {
+        title: "OWASP Top 10",
+        description: "Top 10 web application security risks",
+        url: "https://owasp.org/www-project-top-ten/",
+        category: "best_practices",
+        source: "OWASP",
+        tags: ["web", "application security", "risks"],
+      },
+      {
+        title: "CIS Benchmarks",
+        description: "Consensus-developed secure configuration guidelines",
+        url: "https://www.cisecurity.org/cis-benchmarks/",
+        category: "standards",
+        source: "Center for Internet Security",
+        tags: ["configuration", "hardening", "compliance"],
+      },
+      {
+        title: "AWS Well-Architected Framework",
+        description: "Best practices for cloud architecture",
+        url: "https://aws.amazon.com/architecture/well-architected/",
+        category: "frameworks",
+        source: "Amazon Web Services",
+        tags: ["cloud", "architecture", "security"],
+      },
+      {
+        title: "ISO 27001 Implementation Guide",
+        description:
+          "Guide to implementing ISO 27001 information security standard",
+        url: "https://www.iso.org/isoiec-27001-information-security.html",
+        category: "documentation",
+        source: "ISO",
+        tags: ["compliance", "management", "certification"],
+      },
+    ];
   }
 
   /**
-   * Get security resources for a specific level
+   * Get security resources for a specific component and level
+   *
+   * @param component - CIA component type
+   * @param level - Security level
+   * @returns List of security resources
    */
-  public getSecurityResources(
-    component: CIAComponentType,
+  getSecurityResources(
+    component: string,
     level: SecurityLevel
   ): SecurityResource[] {
-    // Basic starting set of resources
-    const resources: SecurityResource[] = [
-      {
-        id: "general-security-guidelines",
-        title: "General Security Guidelines",
-        description: `General security guidelines for ${level} security level`,
-        url: "https://www.nist.gov/cyberframework",
-        type: "general",
-        relevance: 100,
-        tags: ["guidelines", "best practices"],
-      },
-    ];
+    // Simplified implementation - filter resources by component and level
+    const allResources = this.getResourcesForSecurityLevels(
+      component === "availability" ? level : "Moderate",
+      component === "integrity" ? level : "Moderate",
+      component === "confidentiality" ? level : "Moderate"
+    );
 
-    // Add level-specific resources
-    switch (level) {
-      case "Very High":
-        resources.push({
-          id: `${component}-very-high`,
-          title: `${this.capitalizeFirstLetter(
-            component
-          )} Security for Critical Systems`,
-          description: `Comprehensive ${component} controls for mission-critical systems`,
-          url: "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final",
-          type: component,
-          relevance: 90,
-          tags: ["critical", "comprehensive"],
-        });
-        break;
-      case "High":
-        resources.push({
-          id: `${component}-high`,
-          title: `${this.capitalizeFirstLetter(
-            component
-          )} Protection for Sensitive Data`,
-          description: `Strong ${component} controls for sensitive information`,
-          url: "https://www.iso.org/isoiec-27001-information-security.html",
-          type: component,
-          relevance: 80,
-          tags: ["sensitive", "robust"],
-        });
-        break;
-      case "Moderate":
-        resources.push({
-          id: `${component}-moderate`,
-          title: `${this.capitalizeFirstLetter(
-            component
-          )} Controls for Business Systems`,
-          description: `Standard ${component} controls for business applications`,
-          url: "https://www.cisecurity.org/controls",
-          type: component,
-          relevance: 70,
-          tags: ["standard", "balanced"],
-        });
-        break;
-      case "Low":
-        resources.push({
-          id: `${component}-low`,
-          title: `Basic ${this.capitalizeFirstLetter(component)} Controls`,
-          description: `Minimal ${component} controls for non-critical systems`,
-          url: "https://www.sans.org/security-resources",
-          type: component,
-          relevance: 60,
-          tags: ["basic", "minimal"],
-        });
-        break;
-      default:
-        resources.push({
-          id: `${component}-none`,
-          title: `${this.capitalizeFirstLetter(
-            component
-          )} Security Fundamentals`,
-          description: "Basic understanding of security concepts",
-          url: "https://www.cybrary.it/course/introduction-cyber-security",
-          type: component,
-          relevance: 50,
-          tags: ["fundamentals", "introduction"],
-        });
-    }
+    // Return all resources for now - in a real implementation, we'd filter by component
+    return allResources;
+  }
 
-    // Component-specific resources
-    if (component === "availability") {
-      resources.push({
-        id: "availability-resources",
-        title: "Availability Best Practices",
-        description: "Guidelines for ensuring system availability",
-        url: "https://docs.microsoft.com/en-us/azure/architecture/framework/resiliency/overview",
-        type: "availability",
-        relevance: 85,
-        tags: ["resiliency", "high-availability"],
-      });
-    } else if (component === "integrity") {
-      resources.push({
-        id: "integrity-resources",
-        title: "Data Integrity Controls",
-        description: "Guidelines for ensuring data integrity",
-        url: "https://csrc.nist.gov/publications/detail/sp/800-162/final",
-        type: "integrity",
-        relevance: 85,
-        tags: ["data integrity", "validation"],
-      });
-    } else if (component === "confidentiality") {
-      resources.push({
-        id: "confidentiality-resources",
-        title: "Data Protection Guidelines",
-        description: "Guidelines for ensuring data confidentiality",
-        url: "https://www.ncsc.gov.uk/collection/protecting-bulk-personal-data",
-        type: "confidentiality",
-        relevance: 85,
-        tags: ["encryption", "access control"],
-      });
-    }
+  /**
+   * Get value points based on security level
+   * This method needs to be public to be accessed by ciaContentService
+   *
+   * @param level - Security level
+   * @returns Array of value points
+   */
+  public getValuePoints(level: SecurityLevel): string[] {
+    // Basic implementation with placeholder values
+    const valuePoints: Record<SecurityLevel, string[]> = {
+      None: ["No significant value points"],
+      Low: ["Basic security protection", "Minimal compliance coverage"],
+      Moderate: [
+        "Standard security coverage",
+        "Meets common compliance requirements",
+      ],
+      High: [
+        "Advanced security protection",
+        "Comprehensive compliance coverage",
+      ],
+      "Very High": [
+        "Maximum security assurance",
+        "Exceeds most compliance requirements",
+      ],
+    };
 
-    return resources;
+    return valuePoints[level] || [];
   }
 }
 
 /**
- * Creates a security resource service instance
- * 
- * @param dataProvider - Data provider for the service
- * @returns A new SecurityResourceService instance
+ * Create a SecurityResourceService instance
+ *
+ * @param dataProvider - Optional data provider
+ * @returns SecurityResourceService instance
  */
-export function createSecurityResourceService(dataProvider?: CIADataProvider) {
-  // Create a properly typed default data provider if none is provided
-  if (!dataProvider) {
-    const defaultDataProvider: CIADataProvider = {
-      availabilityOptions: {
-        "None": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
-        "Low": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
-        "Moderate": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
-        "High": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
-        "Very High": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] }
+export function createSecurityResourceService(
+  dataProvider?: CIADataProvider
+): SecurityResourceService {
+  // Use default data provider if none provided
+  const defaultProvider: CIADataProvider = {
+    availabilityOptions: {
+      None: {
+        description: "No availability controls",
+        technical: "No technical implementation",
+        businessImpact: "No business impact details",
+        capex: 0,
+        opex: 0,
+        bg: "#ffffff",
+        text: "#000000",
+        recommendations: [],
       },
-      integrityOptions: {
-        "None": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
-        "Low": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
-        "Moderate": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
-        "High": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
-        "Very High": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] }
+      Low: {
+        description: "Basic availability controls",
+        technical: "Basic technical implementation",
+        businessImpact: "Low business impact details",
+        capex: 5,
+        opex: 2,
+        bg: "#fffaf0",
+        text: "#000000",
+        recommendations: [],
       },
-      confidentialityOptions: {
-        "None": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
-        "Low": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
-        "Moderate": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
-        "High": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] },
-        "Very High": { description: "", technical: "", businessImpact: "", capex: 0, opex: 0, bg: "", text: "", recommendations: [] }
+      Moderate: {
+        description: "Standard availability controls",
+        technical: "Standard technical implementation",
+        businessImpact: "Moderate business impact details",
+        capex: 15,
+        opex: 5,
+        bg: "#f0f8ff",
+        text: "#000000",
+        recommendations: [],
       },
-      roiEstimates: {
-        "NONE": { returnRate: "0%", value: "0%", description: "No ROI" },
-        "LOW": { returnRate: "50%", value: "50%", description: "Low ROI" },
-        "MODERATE": { returnRate: "150%", value: "150%", description: "Moderate ROI" },
-        "HIGH": { returnRate: "250%", value: "250%", description: "High ROI" },
-        "VERY_HIGH": { returnRate: "400%", value: "400%", description: "Very High ROI" }
-      }
-    };
-    return new SecurityResourceService(defaultDataProvider);
-  }
+      High: {
+        description: "Advanced availability controls",
+        technical: "Advanced technical implementation",
+        businessImpact: "High business impact details",
+        capex: 30,
+        opex: 10,
+        bg: "#f0fff0",
+        text: "#000000",
+        recommendations: [],
+      },
+      "Very High": {
+        description: "Maximum availability controls",
+        technical: "Maximum technical implementation",
+        businessImpact: "Very high business impact details",
+        capex: 50,
+        opex: 20,
+        bg: "#fff0f5",
+        text: "#000000",
+        recommendations: [],
+      },
+    },
+    integrityOptions: {
+      None: {
+        description: "No integrity controls",
+        technical: "No technical implementation",
+        businessImpact: "No business impact details",
+        capex: 0,
+        opex: 0,
+        bg: "#ffffff",
+        text: "#000000",
+        recommendations: [],
+      },
+      Low: {
+        description: "Basic integrity controls",
+        technical: "Basic technical implementation",
+        businessImpact: "Low business impact details",
+        capex: 5,
+        opex: 2,
+        bg: "#fffaf0",
+        text: "#000000",
+        recommendations: [],
+      },
+      Moderate: {
+        description: "Standard integrity controls",
+        technical: "Standard technical implementation",
+        businessImpact: "Moderate business impact details",
+        capex: 15,
+        opex: 5,
+        bg: "#f0f8ff",
+        text: "#000000",
+        recommendations: [],
+      },
+      High: {
+        description: "Advanced integrity controls",
+        technical: "Advanced technical implementation",
+        businessImpact: "High business impact details",
+        capex: 30,
+        opex: 10,
+        bg: "#f0fff0",
+        text: "#000000",
+        recommendations: [],
+      },
+      "Very High": {
+        description: "Maximum integrity controls",
+        technical: "Maximum technical implementation",
+        businessImpact: "Very high business impact details",
+        capex: 50,
+        opex: 20,
+        bg: "#fff0f5",
+        text: "#000000",
+        recommendations: [],
+      },
+    },
+    confidentialityOptions: {
+      None: {
+        description: "No confidentiality controls",
+        technical: "No technical implementation",
+        businessImpact: "No business impact details",
+        capex: 0,
+        opex: 0,
+        bg: "#ffffff",
+        text: "#000000",
+        recommendations: [],
+      },
+      Low: {
+        description: "Basic confidentiality controls",
+        technical: "Basic technical implementation",
+        businessImpact: "Low business impact details",
+        capex: 5,
+        opex: 2,
+        bg: "#fffaf0",
+        text: "#000000",
+        recommendations: [],
+      },
+      Moderate: {
+        description: "Standard confidentiality controls",
+        technical: "Standard technical implementation",
+        businessImpact: "Moderate business impact details",
+        capex: 15,
+        opex: 5,
+        bg: "#f0f8ff",
+        text: "#000000",
+        recommendations: [],
+      },
+      High: {
+        description: "Advanced confidentiality controls",
+        technical: "Advanced technical implementation",
+        businessImpact: "High business impact details",
+        capex: 30,
+        opex: 10,
+        bg: "#f0fff0",
+        text: "#000000",
+        recommendations: [],
+      },
+      "Very High": {
+        description: "Maximum confidentiality controls",
+        technical: "Maximum technical implementation",
+        businessImpact: "Very high business impact details",
+        capex: 50,
+        opex: 20,
+        bg: "#fff0f5",
+        text: "#000000",
+        recommendations: [],
+      },
+    },
+    roiEstimates: {
+      NONE: { returnRate: "0%", description: "No investment, no return" },
+      LOW: {
+        returnRate: "120%",
+        description: "Basic security measures provide minimal protection",
+      },
+      MODERATE: {
+        returnRate: "200%",
+        description: "Standard security provides good cost-benefit balance",
+      },
+      HIGH: {
+        returnRate: "350%",
+        description: "Advanced security provides significant protection",
+      },
+      VERY_HIGH: {
+        returnRate: "450%",
+        description: "Maximum security provides optimal protection",
+      },
+    },
+  };
 
-  return new SecurityResourceService(dataProvider);
+  const provider = dataProvider || defaultProvider;
+  return new SecurityResourceService(provider);
 }

@@ -100,18 +100,20 @@ export const createDynamicTestId = {
   /**
    * Create test ID for a framework status
    */
-  frameworkStatus: (framework: string): string => `framework-status-${framework}`,
+  frameworkStatus: (framework: string): string =>
+    `framework-status-${framework}`,
 
   /**
    * Create test ID for a category-specific item
-   * 
+   *
    * @param prefix - Category prefix
    * @param category - Category name
    * @returns Category-specific test ID
    */
   categorySpecific: (prefix: string, category: string): string => {
     // Ensure category has first letter capitalized, then convert to lowercase
-    const formattedCategory = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+    const formattedCategory =
+      category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
     return `${prefix}-${formattedCategory.toLowerCase()}`;
   },
 
@@ -143,7 +145,7 @@ export const createDynamicTestId = {
 
 /**
  * Creates a category-specific test ID
- * 
+ *
  * @param category - The category name
  * @param id - The ID value
  * @returns The formatted test ID
@@ -192,7 +194,7 @@ export const TEST_HELPERS = {
     // Default implementation returns empty array
     // This is just for type checking in tests
     return [];
-  }
+  },
 };
 
 // ---------------------------------------------------------------
@@ -367,19 +369,19 @@ export const BUSINESS_IMPACT_TEST_IDS = {
   REGULATORY_IMPACT_SECTION: "regulatory-impact-section",
   STRATEGIC_IMPACT_SECTION: "strategic-impact-section",
   BUSINESS_IMPACT_WIDGET: "business-impact-widget",
-  
+
   // Prefixes for dynamic IDs
   BUSINESS_IMPACT_ANALYSIS_PREFIX: "business-impact-analysis",
   CATEGORY_ICON_PREFIX: "category-icon",
   IMPACT_ANALYSIS_PREFIX: "impact-analysis",
   IMPACT_LEVEL_INDICATOR_PREFIX: "impact-level-indicator",
-  IMPACT_LEVEL_TEXT_PREFIX: "impact-level-text", 
+  IMPACT_LEVEL_TEXT_PREFIX: "impact-level-text",
   IMPACT_DESCRIPTION_PREFIX: "impact-description",
   BUSINESS_IMPACT_PREFIX: "business-impact",
 
   // Tabs and sections
   TAB_CONSIDERATIONS: "tab-considerations",
-  TAB_BENEFITS: "tab-benefits", 
+  TAB_BENEFITS: "tab-benefits",
   BUSINESS_IMPACT_SUMMARY: "business-impact-summary",
   BUSINESS_CONSIDERATIONS: "business-considerations",
   BUSINESS_BENEFITS: "business-benefits",
@@ -484,7 +486,7 @@ export const SUMMARY_TEST_IDS = {
   SECURITY_LEVEL_DESCRIPTION: "security-summary-level-description",
   SECURITY_RECOMMENDATIONS: "security-summary-recommendations",
   CIA_RATINGS: "security-summary-cia-ratings",
-  SECURITY_SUMMARY_CONTAINER: "security-summary-container", 
+  SECURITY_SUMMARY_CONTAINER: "security-summary-container",
   SECURITY_LEVEL_INDICATOR: "security-summary-level-indicator",
   SECURITY_SUMMARY_DESCRIPTION: "security-summary-description",
   SECURITY_ICON: "security-summary-icon",
@@ -503,10 +505,12 @@ export const SUMMARY_TEST_IDS = {
   BUSINESS_IMPACT_SECTION: "security-summary-business-impact",
   AVAILABILITY_IMPACT_HEADING: "security-summary-availability-impact-heading",
   INTEGRITY_IMPACT_HEADING: "security-summary-integrity-impact-heading",
-  CONFIDENTIALITY_IMPACT_HEADING: "security-summary-confidentiality-impact-heading",
+  CONFIDENTIALITY_IMPACT_HEADING:
+    "security-summary-confidentiality-impact-heading",
   AVAILABILITY_IMPACT_DETAILS: "security-summary-availability-impact-details",
   INTEGRITY_IMPACT_DETAILS: "security-summary-integrity-impact-details",
-  CONFIDENTIALITY_IMPACT_DETAILS: "security-summary-confidentiality-impact-details",
+  CONFIDENTIALITY_IMPACT_DETAILS:
+    "security-summary-confidentiality-impact-details",
   METRICS_TOGGLE: "security-summary-metrics-toggle",
   METRICS_SECTION: "security-summary-metrics-section",
   ROI_ESTIMATE_SUMMARY: "security-summary-roi-estimate-summary",
@@ -526,7 +530,7 @@ export const APP_TEST_IDS = {
   LIGHT_MODE_BUTTON: "light-mode-button",
   DARK_MODE_BUTTON: "dark-mode-button",
   SYSTEM_MODE_BUTTON: "system-mode-button",
-  CIA_CLASSIFICATION_APP: "cia-classification-app", // Added this line
+  CIA_CLASSIFICATION_APP: "cia-classification-app",
 
   // Additional app-level constants
   ERROR_BOUNDARY: "error-boundary",
@@ -561,8 +565,8 @@ export const COMMON_COMPONENT_TEST_IDS = {
   WARNING: "warning-message",
   INFO: "info-message",
   EMPTY_STATE: "empty-state",
-  VALUE_DISPLAY: "value-display", // Added this property
-  CONTEXT_INFO: "context-info", // Added this property
+  VALUE_DISPLAY: "value-display",
+  CONTEXT_INFO: "context-info",
 };
 
 // ---------------------------------------------------------------
@@ -638,7 +642,8 @@ export const AVAILABILITY_IMPACT_TEST_IDS = {
   AVAILABILITY_IMPACT_RTO: "availability-impact-rto",
   AVAILABILITY_IMPACT_RPO: "availability-impact-rpo",
   AVAILABILITY_IMPACT_RECOMMENDATIONS: "availability-impact-recommendations",
-  AVAILABILITY_IMPACT_BUSINESS_PERSPECTIVE: "availability-impact-business-perspective",
+  AVAILABILITY_IMPACT_BUSINESS_PERSPECTIVE:
+    "availability-impact-business-perspective",
 };
 
 // ---------------------------------------------------------------
@@ -683,26 +688,35 @@ export const TECHNICAL_DETAILS_TEST_IDS = {
   TECHNICAL_DESCRIPTION: "technical-description",
   MAINTENANCE_LEVEL: "maintenance-level",
   RECOVERY_METRICS: "recovery-metrics",
+  AVAILABILITY_TAB: "availability-tab",
+  INTEGRITY_TAB: "integrity-tab",
+  CONFIDENTIALITY_TAB: "confidentiality-tab",
+  IMPLEMENTATION_HEADER: "implementation-header",
 };
 
 // ---------------------------------------------------------------
 // SECTION 18: SECURITY RESOURCES WIDGET TEST IDs
 // ---------------------------------------------------------------
 
-export const SECURITY_RESOURCES_TEST_IDS = {
+export const RESOURCE_TEST_IDS = {
   SECURITY_RESOURCES_WIDGET: "security-resources-widget",
   RESOURCE_LIST: "resource-list",
   RESOURCE_ITEM: "resource-item",
   RESOURCE_TITLE: "resource-title",
-  RESOURCE_DESCRIPTION: "resource-description", 
+  RESOURCE_DESCRIPTION: "resource-description",
   RESOURCE_LINK: "resource-link",
   RESOURCE_TYPE: "resource-type",
   RESOURCE_CATEGORY: "resource-category",
   RESOURCE_TAGS: "resource-tags",
   SECURITY_RESOURCES_PREFIX: "security-resources",
-  // Add missing test IDs
   RESOURCE_SEARCH: "resource-search",
   RESOURCE_CATEGORY_FILTER: "resource-category-filter",
+  RESOURCE_ITEM_PREFIX: "resource-item",
+  RESOURCE_LINK_PREFIX: "resource-link",
+  RESOURCE_TAG_PREFIX: "resource-tag",
+  CATEGORY_FILTER_PREFIX: "category-filter",
+  RESOURCES_CONTAINER: "resources-container",
+  NO_RESOURCES_MESSAGE: "no-resources-message",
 };
 
 // ---------------------------------------------------------------
@@ -746,10 +760,12 @@ export const COMMON_TEST_IDS = {
 // ---------------------------------------------------------------
 
 export const COMPLIANCE_TEST_IDS = {
-  COMPLIANCE_STATUS_WIDGET: 'compliance-status',
-  COMPLIANCE_STATUS_BADGE: 'compliance-status-badge',
-  COMPLIANCE_FRAMEWORK_ITEM: 'compliance-framework-item',
-  COMPLIANCE_REQUIREMENTS_LIST: 'compliance-requirements-list',
+  COMPLIANCE_STATUS_WIDGET: "compliance-status",
+  COMPLIANCE_STATUS_BADGE: "compliance-status-badge",
+  COMPLIANCE_FRAMEWORK_ITEM: "compliance-framework-item",
+  COMPLIANCE_REQUIREMENTS_LIST: "compliance-requirements-list",
+  COMPLIANCE_FRAMEWORKS_CONTAINER: "compliance-frameworks-container",
+  FRAMEWORK_ITEM_PREFIX: "framework-item",
 };
 
 // ---------------------------------------------------------------
@@ -775,10 +791,10 @@ export const TEST_IDS = {
   ...INTEGRITY_IMPACT_TEST_IDS,
   ...SECURITY_SUMMARY_TEST_IDS,
   ...TECHNICAL_DETAILS_TEST_IDS,
-  ...SECURITY_RESOURCES_TEST_IDS,
+  ...RESOURCE_TEST_IDS,
   ...SECURITY_LEVEL_TEST_IDS,
   ...VALUE_CREATION_TEST_IDS,
-  ...COMPLIANCE_TEST_IDS, // Add this line
+  ...COMPLIANCE_TEST_IDS,
   createDynamicTestId,
   getTestId,
   TEST_HELPERS,

@@ -1,8 +1,8 @@
 /**
  * Business Impact Types
- * 
+ *
  * ## Business Perspective
- * 
+ *
  * These types define the structure of business impact data for security analyses.
  * They help organizations understand the consequences of different security
  * choices across various dimensions of business operation. 💼
@@ -38,38 +38,93 @@ export interface BusinessImpactIcons {
 }
 
 /**
- * Detailed business impact structure
- * 
- * ## Business Perspective
- * 
- * This structure represents comprehensive business impact analysis
- * across multiple dimensions such as financial, operational, and regulatory
- * concerns, enabling CISOs to present security impacts in business terms. 💼
+ * Business impact detail structure
+ */
+export interface BusinessImpactDetail {
+  /**
+   * Description of the impact
+   */
+  description?: string;
+
+  /**
+   * Risk level (e.g., "Low", "Medium", "High", "Critical")
+   */
+  riskLevel?: string;
+
+  /**
+   * Annual revenue loss estimate (for financial impact)
+   */
+  annualRevenueLoss?: string;
+
+  /**
+   * Mean time to recover (for operational impact)
+   */
+  meanTimeToRecover?: string;
+
+  /**
+   * List of compliance violations (for regulatory impact)
+   */
+  complianceViolations?: string[];
+}
+
+/**
+ * Business impact details structure containing impact categories
  */
 export interface BusinessImpactDetails {
-  summary: string;
-  financial?: {
-    description: string;
-    riskLevel: string;
-    annualRevenueLoss?: string;
-  };
-  operational?: {
-    description: string;
-    riskLevel: string;
-    meanTimeToRecover?: string;
-  };
-  reputational?: {
-    description: string;
-    riskLevel: string;
-  };
-  strategic?: {
-    description: string;
-    riskLevel: string;
-  };
-  regulatory?: {
-    description: string;
-    riskLevel: string;
-  };
+  /**
+   * Summary of the overall business impact
+   */
+  summary?: string;
+
+  /**
+   * Financial impact details
+   */
+  financial?: BusinessImpactDetail;
+
+  /**
+   * Operational impact details
+   */
+  operational?: BusinessImpactDetail;
+
+  /**
+   * Reputational impact details
+   */
+  reputational?: BusinessImpactDetail;
+
+  /**
+   * Regulatory impact details
+   */
+  regulatory?: BusinessImpactDetail;
+
+  /**
+   * Strategic impact details
+   */
+  strategic?: BusinessImpactDetail;
+}
+
+/**
+ * Business consideration or benefit item
+ */
+export interface BusinessItem {
+  /**
+   * Title of the consideration or benefit
+   */
+  title?: string;
+
+  /**
+   * Description of the consideration or benefit
+   */
+  description: string;
+
+  /**
+   * Category of the consideration or benefit (e.g., "financial", "operational")
+   */
+  category?: string;
+
+  /**
+   * Priority or importance (1-5)
+   */
+  priority?: number;
 }
 
 // Types for business value structures
@@ -96,9 +151,8 @@ export interface BusinessValueMetrics {
 // This resolves the circular dependency
 import {
   BUSINESS_CONSIDERATIONS as BC,
-  BUSINESS_KEY_BENEFITS as BKB
+  BUSINESS_KEY_BENEFITS as BKB,
 } from "../constants/businessConstants";
 
 export const BUSINESS_CONSIDERATIONS = BC;
 export const BUSINESS_KEY_BENEFITS = BKB;
-

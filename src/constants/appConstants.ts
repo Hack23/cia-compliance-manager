@@ -481,7 +481,8 @@ export const WIDGET_ICONS = {
   TECHNICAL_DETAILS: "⚙️",
   SECURITY_RESOURCES: "📚",
   // Add any missing keys that are referenced in the codebase
-  TECHNICAL_IMPLEMENTATION: "⚙️",  // Alias for TECHNICAL_DETAILS
+  TECHNICAL_IMPLEMENTATION: "⚙️", // Alias for TECHNICAL_DETAILS
+  BUSINESS_IMPACT_ANALYSIS: "📊",
 };
 
 export const RISK_LEVEL_DESCRIPTIONS = {
@@ -621,4 +622,5 @@ export const WIDGET_TITLES = {
   CIA_IMPACT_SUMMARY: "CIA Impact Summary",
   TECHNICAL_DETAILS: "Technical Details",
   SECURITY_RESOURCES: "Security Resources",
+  BUSINESS_IMPACT_ANALYSIS: "Business Impact Analysis",
 };

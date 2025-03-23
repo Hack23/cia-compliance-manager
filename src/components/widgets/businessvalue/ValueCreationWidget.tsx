@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { VALUE_CREATION_TEST_IDS } from "../../../constants/testIds";
-import withSecurityLevelState from "../../../hoc/withSecurityLevelState";
 import { useCIAOptions } from "../../../hooks/useCIAOptions";
 import { createBusinessImpactService } from "../../../services/businessImpactService";
 import { createCIAContentService } from "../../../services/ciaContentService";
@@ -38,8 +37,6 @@ interface ValueCreationWidgetProps {
    * Optional test ID for automated testing
    */
   testId?: string;
-
-  // Removed redundant securityLevel prop
 }
 
 /**
@@ -269,5 +266,5 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   );
 };
 
-// Export with security level state management
-export default withSecurityLevelState(ValueCreationWidget);
+// Export the component directly without HOC
+export default ValueCreationWidget;

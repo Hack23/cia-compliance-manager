@@ -1,295 +1,293 @@
-import { useMemo } from "react";
-import { ComplianceService } from "../../../services/ComplianceServiceAdapter";
-import { ComplianceStatusWidgetProps } from "../../../types/widgets";
+import React, { useMemo } from "react";
+import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { COMPLIANCE_TEST_IDS } from "../../../constants/testIds";
+import { useComplianceService } from "../../../hooks/useComplianceService";
+import { ComplianceStatusDetails } from "../../../services/complianceService";
+import { SecurityLevel } from "../../../types/cia";
+import StatusBadge from "../../common/StatusBadge";
+import WidgetContainer from "../../common/WidgetContainer";
 
 /**
- * ComplianceStatusWidget displays the compliance status based on selected security levels
- * It shows compliant, partially compliant, and non-compliant frameworks
+ * Framework interface
+ */
+interface ComplianceFramework {
+  id: string;
+  name: string;
+  description?: string;
+  version?: string;
+}
+
+/**
+ * Framework status interface
+ */
+interface FrameworkStatus {
+  complianceLevel: string;
+  description: string;
+  gaps?: string[];
+}
+
+/**
+ * Props for ComplianceStatusWidget component
+ */
+interface ComplianceStatusWidgetProps {
+  /**
+   * Selected availability level
+   */
+  availabilityLevel: SecurityLevel;
+
+  /**
+   * Selected integrity level
+   */
+  integrityLevel: SecurityLevel;
+
+  /**
+   * Selected confidentiality level
+   */
+  confidentialityLevel: SecurityLevel;
+
+  /**
+   * Optional CSS class name
+   */
+  className?: string;
+
+  /**
+   * Optional test ID for automated testing
+   */
+  testId?: string;
+}
+
+/**
+ * Displays compliance status against various regulatory frameworks
  *
  * ## Business Perspective
  *
- * This widget helps organizations understand their compliance posture based on
- * selected security levels across the CIA triad. It provides actionable insights
- * for compliance officers to identify gaps that need addressing. 📋
- *
- * The clear visualization of compliance status supports regulatory reporting
- * requirements and helps prioritize security investments. 💼
- *
- * @param props - Component properties
- * @returns JSX element
+ * This widget shows organizations how their selected security controls align
+ * with regulatory requirements, helping compliance officers identify gaps
+ * and demonstrate adherence to key frameworks during audits. 📋
  */
-export default function ComplianceStatusWidget({
+const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
   availabilityLevel,
   integrityLevel,
   confidentialityLevel,
-  securityLevel,
   className = "",
-  testId = "compliance-status-widget",
-}: ComplianceStatusWidgetProps) {
-  // Use ComplianceService to get compliance status data
-  const complianceData = useMemo(() => {
-    // If we have individual CIA levels, use those for more precise compliance analysis
-    if (availabilityLevel && integrityLevel && confidentialityLevel) {
-      return ComplianceService.getComplianceStatus(
+  testId = "compliance-status",
+}) => {
+  // Get compliance service
+  const complianceService = useComplianceService();
+
+  // Get compliance frameworks
+  const frameworks = useMemo<ComplianceFramework[]>(() => {
+    // Add type assertion until the service interface is updated
+    return (complianceService as any).getComplianceFrameworks?.() || [];
+  }, [complianceService]);
+
+  // Calculate framework statuses
+  const frameworkStatuses = useMemo(() => {
+    return frameworks.map((framework: ComplianceFramework) => {
+      // Add type assertion until the service interface is updated
+      const status = (complianceService as any).getFrameworkStatus?.(
+        framework.id,
         availabilityLevel,
         integrityLevel,
         confidentialityLevel
-      );
-    }
-    // Otherwise use the overall security level as a fallback
-    else if (securityLevel) {
-      return ComplianceService.getComplianceStatus(
-        securityLevel,
-        securityLevel,
-        securityLevel
-      );
-    }
-    // Default to moderate if nothing is provided
-    return ComplianceService.getComplianceStatus(
-      "Moderate",
-      "Moderate",
-      "Moderate"
-    );
-  }, [availabilityLevel, integrityLevel, confidentialityLevel, securityLevel]);
-
-  // Determine status style based on compliance status
-  const statusStyle = useMemo(() => {
-    if (!complianceData.status)
-      return {
-        bgColor: "bg-gray-100",
-        textColor: "text-gray-800",
-        borderColor: "border-gray-500",
+      ) || {
+        complianceLevel: "non-compliant",
+        description: "Unable to determine compliance status",
       };
 
-    switch (complianceData.status) {
-      case "Fully Compliant":
-        return {
-          bgColor: "bg-green-100",
-          textColor: "text-green-800",
-          borderColor: "border-green-500",
-        };
-      case "Partially Compliant":
-        return {
-          bgColor: "bg-yellow-100",
-          textColor: "text-yellow-800",
-          borderColor: "border-yellow-500",
-        };
-      case "Non-Compliant":
-        return {
-          bgColor: "bg-red-100",
-          textColor: "text-red-800",
-          borderColor: "border-red-500",
-        };
-      default:
-        return {
-          bgColor: "bg-gray-100",
-          textColor: "text-gray-800",
-          borderColor: "border-gray-500",
-        };
-    }
-  }, [complianceData.status]);
-
-  // Fallback to default implementation for testing
-  const {
-    compliantFrameworks,
-    partiallyCompliantFrameworks,
-    nonCompliantFrameworks,
-  } = useMemo(() => {
-    if (!complianceData.compliantFrameworks) {
       return {
-        compliantFrameworks: getCompliantFrameworks(),
-        partiallyCompliantFrameworks: getPartiallyCompliantFrameworks(),
-        nonCompliantFrameworks: getNonCompliantFrameworks(),
+        framework,
+        status,
       };
-    }
-    return {
-      compliantFrameworks: complianceData.compliantFrameworks,
-      partiallyCompliantFrameworks: complianceData.partiallyCompliantFrameworks,
-      nonCompliantFrameworks: complianceData.nonCompliantFrameworks,
-    };
-  }, [complianceData]);
+    });
+  }, [
+    complianceService,
+    frameworks,
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel,
+  ]);
 
-  // Fallback functions for testing
-  function getCompliantFrameworks() {
-    // This is a placeholder - would be replaced with actual logic
-    if (
-      securityLevel === "Very High" ||
-      (availabilityLevel === "High" &&
-        integrityLevel === "High" &&
-        confidentialityLevel === "High")
-    ) {
-      return [
-        "NIST 800-53 Rev. 5",
-        "ISO 27001:2022",
-        "NIST CSF 2.0",
-        "PCI DSS",
-      ];
-    } else if (
-      securityLevel === "High" ||
-      (availabilityLevel === "Moderate" &&
-        integrityLevel === "High" &&
-        confidentialityLevel === "High")
-    ) {
-      return ["NIST 800-53 Rev. 5", "ISO 27001:2022"];
-    } else if (
-      securityLevel === "Moderate" ||
-      (availabilityLevel === "Moderate" && integrityLevel === "Moderate")
-    ) {
-      return ["ISO 27001:2022"];
-    }
-    return [];
-  }
+  // Calculate overall compliance status
+  const overallStatus = useMemo(() => {
+    // Try to get the overall status directly if available
+    try {
+      const statusDetails = (complianceService as any).getComplianceStatus?.(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      ) as ComplianceStatusDetails;
 
-  function getPartiallyCompliantFrameworks() {
-    // This is a placeholder - would be replaced with actual logic
-    if (
-      securityLevel === "High" ||
-      (availabilityLevel === "Moderate" &&
-        integrityLevel === "Moderate" &&
-        confidentialityLevel === "High")
-    ) {
-      return ["NIST CSF 2.0", "GDPR", "SOC2"];
-    } else if (
-      securityLevel === "Moderate" ||
-      (availabilityLevel === "Low" &&
-        integrityLevel === "Moderate" &&
-        confidentialityLevel === "Moderate")
-    ) {
-      return ["NIST 800-53 Rev. 5", "GDPR", "SOC2"];
-    } else if (
-      securityLevel === "Low" ||
-      (availabilityLevel === "Low" && integrityLevel === "Low")
-    ) {
-      return ["ISO 27001:2022"];
+      if (statusDetails) {
+        return (
+          statusDetails.status ||
+          (statusDetails.compliantFrameworks.length === 0
+            ? "Non-Compliant"
+            : statusDetails.compliantFrameworks.length ===
+              frameworkStatuses.length
+            ? "Fully Compliant"
+            : "Partially Compliant")
+        );
+      }
+    } catch (error) {
+      console.error("Error getting compliance status:", error);
     }
-    return ["GDPR", "SOC2"];
-  }
 
-  function getNonCompliantFrameworks() {
-    // This is a placeholder - would be replaced with actual logic
-    if (
-      securityLevel === "None" ||
-      availabilityLevel === "None" ||
-      integrityLevel === "None" ||
-      confidentialityLevel === "None"
-    ) {
-      return [
-        "NIST 800-53 Rev. 5",
-        "ISO 27001:2022",
-        "NIST CSF 2.0",
-        "PCI DSS",
-        "HIPAA",
-      ];
-    } else if (
-      securityLevel === "Low" ||
-      (availabilityLevel === "Low" &&
-        integrityLevel === "Low" &&
-        confidentialityLevel === "Low")
-    ) {
-      return ["NIST 800-53 Rev. 5", "NIST CSF 2.0", "PCI DSS", "HIPAA"];
+    // Fallback to calculating from framework statuses
+    const compliantCount = frameworkStatuses.filter(
+      (fs: { status: FrameworkStatus }) =>
+        fs.status.complianceLevel === "compliant"
+    ).length;
+    const partialCount = frameworkStatuses.filter(
+      (fs: { status: FrameworkStatus }) =>
+        fs.status.complianceLevel === "partially-compliant"
+    ).length;
+
+    if (compliantCount === frameworkStatuses.length) {
+      return "Fully Compliant";
+    } else if (compliantCount + partialCount === frameworkStatuses.length) {
+      return "Partially Compliant";
+    } else {
+      return "Non-Compliant";
     }
-    return ["PCI DSS", "HIPAA"];
-  }
+  }, [
+    complianceService,
+    frameworkStatuses,
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel,
+  ]);
+
+  // Get badge status for overall compliance
+  const getOverallBadgeStatus = useMemo(() => {
+    if (overallStatus === "Fully Compliant") return "success";
+    if (overallStatus === "Partially Compliant") return "warning";
+    return "error";
+  }, [overallStatus]);
+
+  // Get badge status for a specific framework
+  const getFrameworkBadgeStatus = (complianceLevel: string) => {
+    if (complianceLevel === "compliant") return "success";
+    if (complianceLevel === "partially-compliant") return "warning";
+    return "error";
+  };
 
   return (
-    <div
-      className={`p-4 border rounded-lg shadow-sm ${className}`}
-      data-testid={testId}
+    <WidgetContainer
+      title={WIDGET_TITLES.COMPLIANCE_STATUS}
+      icon={WIDGET_ICONS.COMPLIANCE_STATUS}
+      className={className}
+      testId={testId}
     >
-      <h3 className="text-lg font-semibold mb-4">Compliance Status</h3>
-
-      {/* Compliance Status Badge */}
-      <div
-        className={`px-3 py-2 mb-4 rounded-md inline-flex ${statusStyle.bgColor} ${statusStyle.textColor} ${statusStyle.borderColor} border-l-4`}
-        data-testid="compliance-status-badge"
-      >
-        <span className="font-medium">
-          {complianceData.status || "Meets basic compliance only"}
-        </span>
-      </div>
-
-      <div className="space-y-4">
-        {/* Compliant Frameworks */}
-        <div>
-          <h4 className="font-medium text-green-700 mb-2">Compliant</h4>
-          {compliantFrameworks.length > 0 ? (
-            <ul className="pl-5 list-disc">
-              {compliantFrameworks.map((framework) => (
-                <li
-                  key={framework}
-                  className="text-green-600"
-                  data-testid="framework-item"
-                >
-                  {framework}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-gray-500 italic">No compliant frameworks</p>
-          )}
-        </div>
-
-        {/* Partially Compliant Frameworks */}
-        <div>
-          <h4 className="font-medium text-yellow-700 mb-2">
-            Partially Compliant
-          </h4>
-          {partiallyCompliantFrameworks.length > 0 ? (
-            <ul className="pl-5 list-disc">
-              {partiallyCompliantFrameworks.map((framework) => (
-                <li
-                  key={framework}
-                  className="text-yellow-600"
-                  data-testid="framework-item"
-                >
-                  {framework}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-gray-500 italic">
-              No partially compliant frameworks
+      <div className="p-4 space-y-4">
+        {/* Overall compliance status */}
+        <div className="mb-6">
+          <h3 className="text-lg font-medium mb-2">
+            Overall Compliance Status
+          </h3>
+          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <StatusBadge
+              status={getOverallBadgeStatus}
+              testId={COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_BADGE}
+            >
+              {overallStatus}
+            </StatusBadge>
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              {overallStatus === "Fully Compliant"
+                ? "Your current security levels satisfy all major compliance frameworks."
+                : overallStatus === "Partially Compliant"
+                ? "Your security levels partially satisfy compliance requirements. Review gaps below."
+                : "Your security levels do not meet minimum requirements for some frameworks."}
             </p>
-          )}
+          </div>
         </div>
 
-        {/* Non-Compliant Frameworks */}
-        <div>
-          <h4 className="font-medium text-red-700 mb-2">Non-Compliant</h4>
-          {nonCompliantFrameworks.length > 0 ? (
-            <ul className="pl-5 list-disc">
-              {nonCompliantFrameworks.map((framework) => (
-                <li
-                  key={framework}
-                  className="text-red-600"
-                  data-testid="framework-item"
+        {/* Framework-specific compliance */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-medium">Framework Compliance</h3>
+          <div
+            className="space-y-3"
+            data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_FRAMEWORKS_CONTAINER}
+          >
+            {frameworkStatuses.map(
+              ({
+                framework,
+                status,
+              }: {
+                framework: ComplianceFramework;
+                status: FrameworkStatus;
+              }) => (
+                <div
+                  key={framework.id}
+                  className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                  data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-${framework.id}`}
                 >
-                  {framework}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-gray-500 italic">No non-compliant frameworks</p>
-          )}
+                  <div className="flex justify-between items-center">
+                    <h4 className="font-medium">{framework.name}</h4>
+                    <StatusBadge
+                      status={getFrameworkBadgeStatus(status.complianceLevel)}
+                    >
+                      {status.complianceLevel === "compliant"
+                        ? "Compliant"
+                        : status.complianceLevel === "partially-compliant"
+                        ? "Partially Compliant"
+                        : "Non-Compliant"}
+                    </StatusBadge>
+                  </div>
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    {status.description}
+                  </p>
+                  {status.gaps && status.gaps.length > 0 && (
+                    <div className="mt-3">
+                      <h5 className="text-sm font-medium text-red-600 dark:text-red-400">
+                        Compliance Gaps:
+                      </h5>
+                      <ul className="list-disc list-inside text-xs text-gray-600 dark:text-gray-400 mt-1">
+                        {status.gaps.map((gap: string, index: number) => (
+                          <li key={index}>{gap}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )
+            )}
+          </div>
         </div>
 
-        {/* Remediation Steps */}
-        {complianceData.remediationSteps &&
-          complianceData.remediationSteps.length > 0 && (
-            <div className="mt-4">
-              <h4 className="font-medium text-blue-700 mb-2">
-                Remediation Steps
-              </h4>
-              <ul className="pl-5 list-disc">
-                {complianceData.remediationSteps.map((step, index) => (
-                  <li key={index} className="text-blue-600">
-                    {step}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+        {/* Compliance recommendations */}
+        <div className="mt-6 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-200 dark:border-blue-800">
+          <div className="flex items-center mb-2">
+            <span className="text-blue-500 dark:text-blue-400 mr-2">💡</span>
+            <h3 className="font-medium">Recommendations</h3>
+          </div>
+          <ul className="text-sm space-y-1 list-disc list-inside text-gray-600 dark:text-gray-400">
+            {overallStatus !== "Fully Compliant" ? (
+              <>
+                <li>
+                  Consider improving security levels to meet compliance
+                  requirements
+                </li>
+                <li>
+                  Focus on addressing specific gaps identified in each framework
+                </li>
+                <li>
+                  Consult with a compliance specialist for detailed remediation
+                  steps
+                </li>
+              </>
+            ) : (
+              <li>
+                Maintain current security posture and regularly review for any
+                updates to compliance frameworks
+              </li>
+            )}
+          </ul>
+        </div>
       </div>
-    </div>
+    </WidgetContainer>
   );
-}
+};
+
+// Export the component directly without HOC
+export default ComplianceStatusWidget;

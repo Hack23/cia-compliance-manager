@@ -1,288 +1,178 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import withSecurityLevelState from "../../../hoc/withSecurityLevelState";
+import { TECHNICAL_DETAILS_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
-import { TechnicalImplementationDetails } from "../../../types/cia-services";
-import { CodeBlock } from "../../common/CodeBlock";
-import { KeyValuePair } from "../../common/KeyValuePair";
-import { Tab } from "../../common/Tab";
-import WidgetContainer from "../../common/WidgetContainer"; // Changed to default import
+import SecurityLevelBadge from "../../common/SecurityLevelBadge";
+import WidgetContainer from "../../common/WidgetContainer";
 
-// Define props interface for the component
+/**
+ * Props for TechnicalDetailsWidget
+ */
 interface TechnicalDetailsWidgetProps {
+  /**
+   * Selected availability level
+   */
   availabilityLevel: SecurityLevel;
+
+  /**
+   * Selected integrity level
+   */
   integrityLevel: SecurityLevel;
+
+  /**
+   * Selected confidentiality level
+   */
   confidentialityLevel: SecurityLevel;
+
+  /**
+   * Optional CSS class name
+   */
   className?: string;
+
+  /**
+   * Optional test ID for automated testing
+   */
   testId?: string;
 }
 
-// Define interface for requirement items
-interface RequirementItem {
-  description: string;
-  importance: string;
-  category?: string;
-  [key: string]: any; // Allow other properties
-}
-
 /**
- * Technical Details Widget provides implementation guidance
+ * Technical Details Widget provides implementation specifics for security levels
  *
  * ## Business Perspective
  *
- * This widget delivers technical implementation details and resource requirements
- * for IT teams to effectively deploy and maintain security controls at the selected
- * security levels, bridging policy decisions with practical implementation. 🛠️
+ * This widget helps technical teams understand the specific implementation
+ * requirements for the selected security levels, providing detailed technical
+ * guidance, expertise requirements, and implementation considerations to support
+ * successful security control deployment. 🔧
  */
 const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
+  availabilityLevel,
+  integrityLevel,
+  confidentialityLevel,
   className = "",
-  testId = "technical-details-widget",
-  availabilityLevel = "Moderate",
-  integrityLevel = "Moderate",
-  confidentialityLevel = "Moderate",
-}: TechnicalDetailsWidgetProps): React.ReactElement => {
+  testId = "widget-technical-details",
+}) => {
+  // State for active tab
   const [activeTab, setActiveTab] = useState<
     "availability" | "integrity" | "confidentiality"
   >("availability");
+
+  // Get the content service
   const { ciaContentService } = useCIAContentService();
 
-  // Memoize active details to prevent unnecessary re-renders
-  const activeDetails = useMemo(() => {
-    const getDetailsForComponent = () => {
-      switch (activeTab) {
-        case "availability":
-          return ciaContentService.getComponentDetails(
-            "availability",
-            availabilityLevel
-          );
-        case "integrity":
-          return ciaContentService.getComponentDetails(
-            "integrity",
-            integrityLevel
-          );
-        case "confidentiality":
-          return ciaContentService.getComponentDetails(
-            "confidentiality",
-            confidentialityLevel
-          );
-        default:
-          return ciaContentService.getComponentDetails(
-            "availability",
-            availabilityLevel
-          );
-      }
-    };
-
-    return getDetailsForComponent();
-  }, [
-    activeTab,
-    availabilityLevel,
-    integrityLevel,
-    confidentialityLevel,
-    ciaContentService,
-  ]);
-
-  // Get implementation details with null safety
-  const implementationDetails = useMemo(
-    () => activeDetails?.technicalImplementation || null,
-    [activeDetails]
-  );
-
-  // Helper functions to get default values when data is missing
-  const getDefaultDevelopmentEffort = (level: SecurityLevel): string => {
-    switch (level) {
-      case "None":
-        return "Minimal";
-      case "Low":
-        return "Low (hours)";
-      case "Moderate":
-        return "Medium (days)";
-      case "High":
-        return "High (weeks)";
-      case "Very High":
-        return "Very High (months)";
-      default:
-        return "Not specified";
-    }
-  };
-
-  const getDefaultMaintenanceEffort = (level: SecurityLevel): string => {
-    switch (level) {
-      case "None":
-        return "None";
-      case "Low":
-        return "Minimal";
-      case "Moderate":
-        return "Regular";
-      case "High":
-        return "Substantial";
-      case "Very High":
-        return "Continuous";
-      default:
-        return "Not specified";
-    }
-  };
-
-  const getDefaultExpertiseLevel = (level: SecurityLevel): string => {
-    switch (level) {
-      case "None":
-        return "None";
-      case "Low":
-        return "Basic security knowledge";
-      case "Moderate":
-        return "Security professional";
-      case "High":
-        return "Security specialist";
-      case "Very High":
-        return "Security expert team";
-      default:
-        return "Not specified";
-    }
-  };
-
-  // Get technical details for each CIA component with proper null safety
-  const availabilityDetails = useMemo(
-    () =>
-      ciaContentService.getComponentDetails("availability", availabilityLevel),
-    [availabilityLevel, ciaContentService]
-  );
-
-  const integrityDetails = useMemo(
-    () => ciaContentService.getComponentDetails("integrity", integrityLevel),
-    [integrityLevel, ciaContentService]
-  );
-
-  const confidentialityDetails = useMemo(
-    () =>
-      ciaContentService.getComponentDetails(
-        "confidentiality",
-        confidentialityLevel
-      ),
-    [confidentialityLevel, ciaContentService]
-  );
-
-  // Get the level from the active details with null safety
-  const activeLevel = useMemo(() => {
-    switch (activeTab) {
-      case "availability":
-        return availabilityLevel;
-      case "integrity":
-        return integrityLevel;
-      case "confidentiality":
-        return confidentialityLevel;
-      default:
-        return "Moderate" as SecurityLevel;
-    }
-  }, [activeTab, availabilityLevel, integrityLevel, confidentialityLevel]);
-
-  // Get code examples with null safety and better default handling
-  const codeExamples = useMemo(() => {
-    const examples = activeDetails?.codeExamples || [];
-    // Provide default example if none exist but should based on level
-    if (examples.length === 0 && activeLevel !== "None") {
-      return [
-        {
-          title: `Example ${
-            activeTab.charAt(0).toUpperCase() + activeTab.slice(1)
-          } Implementation`,
-          language: "typescript",
-          code: `// Sample code would be shown here for ${activeTab} at ${activeLevel} level`,
-        },
-      ];
-    }
-    return examples;
-  }, [activeDetails, activeTab, activeLevel]);
-
-  // Implementation steps with better defaults
-  const implementationSteps = useMemo(() => {
-    const steps = implementationDetails?.implementationSteps || [];
-    if (steps.length === 0 && activeLevel !== "None") {
-      const defaultSteps = {
-        availability: [
-          `Configure system for ${activeLevel} availability`,
-          "Implement monitoring and alerting",
-          "Create disaster recovery plan",
-        ],
-        integrity: [
-          `Implement ${activeLevel} data validation controls`,
-          "Configure checksum verification",
-          "Set up data integrity monitoring",
-        ],
-        confidentiality: [
-          `Apply ${activeLevel} encryption to sensitive data`,
-          "Implement access control mechanisms",
-          "Configure data loss prevention",
-        ],
-      };
-      return defaultSteps[activeTab] || [];
-    }
-    return steps;
-  }, [implementationDetails, activeTab, activeLevel]);
-
-  // Function to get technical description with null safety
-  const getTechnicalDescription = (
+  // Helper function to get component-specific technical details
+  const getTechnicalDetails = (
     component: "availability" | "integrity" | "confidentiality",
     level: SecurityLevel
-  ): string => {
-    const details = ciaContentService.getComponentDetails(component, level);
+  ) => {
     return (
-      details?.technical ||
-      `No technical description available for ${level} ${component}`
+      ciaContentService.getTechnicalImplementation?.(component, level) || {
+        description: "No technical details available",
+        expertiseLevel: "Standard",
+        implementationSteps: [],
+        developmentEffort: "Medium",
+        maintenanceLevel: "Medium",
+      }
     );
   };
 
-  // Fix the typed parameters
-  const renderRequirements = (
-    requirements: RequirementItem[],
-    title: string
-  ) => {
+  // Get details for each component
+  const availabilityDetails = getTechnicalDetails(
+    "availability",
+    availabilityLevel
+  );
+  const integrityDetails = getTechnicalDetails("integrity", integrityLevel);
+  const confidentialityDetails = getTechnicalDetails(
+    "confidentiality",
+    confidentialityLevel
+  );
+
+  // Get the active details based on the active tab
+  const activeDetails =
+    activeTab === "availability"
+      ? availabilityDetails
+      : activeTab === "integrity"
+      ? integrityDetails
+      : confidentialityDetails;
+
+  // Get the active level based on the active tab
+  const activeLevel =
+    activeTab === "availability"
+      ? availabilityLevel
+      : activeTab === "integrity"
+      ? integrityLevel
+      : confidentialityLevel;
+
+  // Helper function to render expertise level badge
+  const renderExpertiseBadge = (level: string) => {
+    const levelMap: Record<string, { color: string; icon: string }> = {
+      Basic: {
+        color:
+          "bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-20 dark:text-green-300",
+        icon: "👨‍💻",
+      },
+      Standard: {
+        color:
+          "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-20 dark:text-blue-300",
+        icon: "👨‍💻👨‍💻",
+      },
+      Advanced: {
+        color:
+          "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:bg-opacity-20 dark:text-purple-300",
+        icon: "👨‍💻👨‍💻👨‍💻",
+      },
+      Expert: {
+        color:
+          "bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-20 dark:text-red-300",
+        icon: "👨‍💻👨‍💻👨‍💻👨‍💻",
+      },
+    };
+
+    const { color, icon } = levelMap[level] || levelMap["Standard"];
+
     return (
-      <div className="mb-4">
-        <h4 className="text-md font-medium mb-2">{title}</h4>
-        <div className="space-y-2">
-          {requirements.map((req: RequirementItem, index: number) => (
-            <div
-              key={`req-${index}`}
-              className="p-2 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700"
-            >
-              <div className="flex justify-between">
-                <div className="text-sm">{req.description}</div>
-                <div className="text-xs font-medium px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300 rounded">
-                  {req.importance}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <span
+        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${color}`}
+      >
+        {icon} {level}
+      </span>
     );
   };
 
-  // Fix the typed parameters
-  const renderTechnologies = (
-    technologies: TechnicalImplementationDetails[],
-    title: string
-  ) => {
+  // Helper function to render effort level badge
+  const renderEffortBadge = (level: string) => {
+    const levelMap: Record<string, { color: string; icon: string }> = {
+      Low: {
+        color:
+          "bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-20 dark:text-green-300",
+        icon: "⏱️",
+      },
+      Medium: {
+        color:
+          "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-20 dark:text-blue-300",
+        icon: "⏱️⏱️",
+      },
+      High: {
+        color:
+          "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:bg-opacity-20 dark:text-yellow-300",
+        icon: "⏱️⏱️⏱️",
+      },
+      "Very High": {
+        color:
+          "bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-20 dark:text-red-300",
+        icon: "⏱️⏱️⏱️⏱️",
+      },
+    };
+
+    const { color, icon } = levelMap[level] || levelMap["Medium"];
+
     return (
-      <div className="mb-4">
-        <h4 className="text-md font-medium mb-2">{title}</h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {technologies.map(
-            (tech: TechnicalImplementationDetails, index: number) => (
-              <div
-                key={`tech-${index}`}
-                className="p-3 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700"
-              >
-                <div className="font-medium mb-1">{tech.description}</div>
-                <div className="text-xs text-gray-600 dark:text-gray-400">
-                  {tech.effort?.expertise}
-                </div>
-              </div>
-            )
-          )}
-        </div>
-      </div>
+      <span
+        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${color}`}
+      >
+        {icon} {level}
+      </span>
     );
   };
 
@@ -294,268 +184,180 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
       testId={testId}
     >
       <div className="p-4">
-        <p className="mb-4">
-          This widget provides technical implementation details and resource
-          requirements for deploying security controls at your selected security
-          levels.
-        </p>
-
-        <div className="border-b mb-4">
-          <nav className="flex space-x-4" aria-label="Security Components">
-            <Tab
-              active={activeTab === "availability"}
-              onClick={() => setActiveTab("availability")}
-              testId="availability-tab"
-              icon="⏱️"
-              label="Availability"
-            />
-            <Tab
-              active={activeTab === "integrity"}
-              onClick={() => setActiveTab("integrity")}
-              testId="integrity-tab"
-              icon="✅"
-              label="Integrity"
-            />
-            <Tab
-              active={activeTab === "confidentiality"}
-              onClick={() => setActiveTab("confidentiality")}
-              testId="confidentiality-tab"
-              icon="🔒"
-              label="Confidentiality"
-            />
-          </nav>
-        </div>
-
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-3">
-            <span className="mr-2">⏱️</span>Availability
-          </h3>
-          <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded border border-blue-100 dark:border-blue-800">
-            <h4 className="font-medium mb-1">
-              Availability Implementation: {availabilityLevel}
-            </h4>
-            <p className="text-sm mb-3">
-              {availabilityDetails?.description || "No description available"}
-            </p>
-
-            <div className="grid grid-cols-3 gap-4 mb-3">
-              <div>
-                <div className="text-xs font-medium mb-1">
-                  Development Effort
-                </div>
-                <div className="text-sm font-bold">
-                  {getDefaultDevelopmentEffort(availabilityLevel)}
-                </div>
-              </div>
-              <div>
-                <div className="text-xs font-medium mb-1">Maintenance</div>
-                <div className="text-sm font-bold">
-                  {getDefaultMaintenanceEffort(availabilityLevel)}
-                </div>
-              </div>
-              <div>
-                <div className="text-xs font-medium mb-1">
-                  Required Expertise
-                </div>
-                <div className="text-sm font-bold">
-                  {getDefaultExpertiseLevel(availabilityLevel)}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Component details */}
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-2">
-            {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}{" "}
-            Implementation: {activeLevel}
-          </h3>
-          <p className="mb-4 text-gray-700 dark:text-gray-300">
-            {getTechnicalDescription(activeTab, activeLevel)}
-          </p>
-        </div>
-
-        {/* Implementation details */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-            <h5 className="text-sm font-medium mb-2 flex items-center">
+        {/* Tabs navigation */}
+        <div className="flex border-b border-gray-200 dark:border-gray-700 mb-4">
+          <button
+            className={`px-4 py-2 text-sm font-medium ${
+              activeTab === "availability"
+                ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
+                : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            }`}
+            onClick={() => setActiveTab("availability")}
+            data-testid={TECHNICAL_DETAILS_TEST_IDS.AVAILABILITY_TAB}
+          >
+            <span className="flex items-center">
               <span className="mr-2">⏱️</span>
-              Development Effort
-            </h5>
-            <p className="text-gray-700 dark:text-gray-300 text-sm">
-              {implementationDetails?.effort?.development ||
-                getDefaultDevelopmentEffort(activeLevel)}
-            </p>
-          </div>
-          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-            <h5 className="text-sm font-medium mb-2 flex items-center">
-              <span className="mr-2">🔧</span>
-              Maintenance
-            </h5>
-            <p className="text-gray-700 dark:text-gray-300 text-sm">
-              {implementationDetails?.effort?.maintenance ||
-                getDefaultMaintenanceEffort(activeLevel)}
-            </p>
-          </div>
-          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-            <h5 className="text-sm font-medium mb-2 flex items-center">
-              <span className="mr-2">👨‍💻</span>
-              Required Expertise
-            </h5>
-            <p className="text-gray-700 dark:text-gray-300 text-sm">
-              {implementationDetails?.effort?.expertise ||
-                getDefaultExpertiseLevel(activeLevel)}
-            </p>
-          </div>
+              Availability
+            </span>
+          </button>
+          <button
+            className={`px-4 py-2 text-sm font-medium ${
+              activeTab === "integrity"
+                ? "border-b-2 border-green-500 text-green-600 dark:text-green-400"
+                : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            }`}
+            onClick={() => setActiveTab("integrity")}
+            data-testid={TECHNICAL_DETAILS_TEST_IDS.INTEGRITY_TAB}
+          >
+            <span className="flex items-center">
+              <span className="mr-2">✓</span>
+              Integrity
+            </span>
+          </button>
+          <button
+            className={`px-4 py-2 text-sm font-medium ${
+              activeTab === "confidentiality"
+                ? "border-b-2 border-purple-500 text-purple-600 dark:text-purple-400"
+                : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            }`}
+            onClick={() => setActiveTab("confidentiality")}
+            data-testid={TECHNICAL_DETAILS_TEST_IDS.CONFIDENTIALITY_TAB}
+          >
+            <span className="flex items-center">
+              <span className="mr-2">🔒</span>
+              Confidentiality
+            </span>
+          </button>
         </div>
 
-        {/* Terminal Implementation Display */}
-        <div className="mt-6">
-          <h4 className="text-md font-medium mb-3 flex items-center">
-            <span className="mr-2">📋</span>
-            Implementation Steps
-          </h4>
-          <div className="bg-gray-900 text-white p-4 rounded-md mb-4">
-            <ol className="list-decimal list-inside space-y-2">
-              {implementationSteps.length > 0 ? (
-                implementationSteps.map((step, index) => (
-                  <li
-                    key={`step-${index}`}
-                    data-testid={`implementation-step-${index}`}
-                  >
-                    {step}
-                  </li>
-                ))
-              ) : (
-                <li>
-                  No specific implementation steps provided for this security
-                  level.
-                </li>
-              )}
-            </ol>
-          </div>
+        {/* Security level badge */}
+        <div className="mb-4">
+          <SecurityLevelBadge
+            category={activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+            level={activeLevel}
+            colorClass={
+              activeTab === "availability"
+                ? "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+                : activeTab === "integrity"
+                ? "bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
+                : "bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
+            }
+            textClass={
+              activeTab === "availability"
+                ? "text-blue-800 dark:text-blue-300"
+                : activeTab === "integrity"
+                ? "text-green-800 dark:text-green-300"
+                : "text-purple-800 dark:text-purple-300"
+            }
+          />
         </div>
 
-        {/* Code examples section */}
-        {codeExamples.length > 0 && (
-          <div className="mt-6">
-            <h4 className="text-md font-medium mb-3">Code Examples</h4>
-            <div className="space-y-4">
-              {codeExamples.map((example, index) => (
-                <div
-                  key={`code-example-${index}`}
-                  className="border border-gray-200 dark:border-gray-700 rounded-md"
+        {/* Technical details content */}
+        <div className="space-y-6">
+          {/* Technical Description */}
+          <div>
+            <h3
+              className="text-lg font-medium mb-2"
+              data-testid={TECHNICAL_DETAILS_TEST_IDS.TECHNICAL_HEADER}
+            >
+              Technical Implementation
+            </h3>
+            <p
+              className="text-gray-600 dark:text-gray-300"
+              data-testid={TECHNICAL_DETAILS_TEST_IDS.TECHNICAL_DESCRIPTION}
+            >
+              {activeDetails.description}
+            </p>
+          </div>
+
+          {/* Implementation Requirements */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <div className="text-sm font-medium mb-1">Development Effort</div>
+              <div
+                className="font-medium"
+                data-testid={TECHNICAL_DETAILS_TEST_IDS.DEVELOPMENT_EFFORT}
+              >
+                {renderEffortBadge(activeDetails.developmentEffort)}
+              </div>
+            </div>
+            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <div className="text-sm font-medium mb-1">Maintenance Level</div>
+              <div
+                className="font-medium"
+                data-testid={TECHNICAL_DETAILS_TEST_IDS.MAINTENANCE_LEVEL}
+              >
+                {renderEffortBadge(activeDetails.maintenanceLevel)}
+              </div>
+            </div>
+            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <div className="text-sm font-medium mb-1">Required Expertise</div>
+              <div
+                className="font-medium"
+                data-testid={TECHNICAL_DETAILS_TEST_IDS.REQUIRED_EXPERTISE}
+              >
+                {renderExpertiseBadge(activeDetails.expertiseLevel)}
+              </div>
+            </div>
+          </div>
+
+          {/* Implementation Steps */}
+          {activeDetails.implementationSteps &&
+            activeDetails.implementationSteps.length > 0 && (
+              <div>
+                <h3
+                  className="text-lg font-medium mb-2"
+                  data-testid={TECHNICAL_DETAILS_TEST_IDS.IMPLEMENTATION_HEADER}
                 >
-                  <div className="bg-gray-50 dark:bg-gray-800 p-2 border-b border-gray-200 dark:border-gray-700">
-                    <h5 className="font-medium">{example.title}</h5>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">
-                      {example.language}
-                    </div>
-                  </div>
-                  <CodeBlock
-                    code={example.code}
-                    language={example.language}
-                    testId={`code-example-${index}`}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Component specific metrics */}
-        {activeTab === "availability" && (
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <KeyValuePair
-              label="Uptime"
-              value={availabilityDetails?.uptime || "Not specified"}
-              testId={`${testId}-uptime`}
-            />
-            <KeyValuePair
-              label="Recovery Time Objective (RTO)"
-              value={availabilityDetails?.rto || "Not specified"}
-              testId={`${testId}-rto`}
-            />
-            <KeyValuePair
-              label="Recovery Point Objective (RPO)"
-              value={availabilityDetails?.rpo || "Not specified"}
-              testId={`${testId}-rpo`}
-            />
-            <KeyValuePair
-              label="Mean Time To Recover (MTTR)"
-              value={availabilityDetails?.mttr || "Not specified"}
-              testId={`${testId}-mttr`}
-            />
-          </div>
-        )}
-
-        {activeTab === "integrity" && (
-          <div className="mt-6">
-            <KeyValuePair
-              label="Validation Method"
-              value={integrityDetails?.validationMethod || "Not specified"}
-              testId={`${testId}-validation-method`}
-            />
-          </div>
-        )}
-
-        {activeTab === "confidentiality" && (
-          <div className="mt-6">
-            <KeyValuePair
-              label="Protection Method"
-              value={
-                confidentialityDetails?.protectionMethod || "Not specified"
-              }
-              testId={`${testId}-protection-method`}
-            />
-          </div>
-        )}
-
-        {/* Requirements section */}
-        {implementationDetails?.requirements &&
-          implementationDetails.requirements.length > 0 && (
-            <div className="mt-6">
-              <h4 className="text-md font-medium mb-3">Requirements</h4>
-              <ul className="list-disc list-inside space-y-1 pl-4">
-                {implementationDetails.requirements.map(
-                  (req: string, index: number) => (
+                  Implementation Steps
+                </h3>
+                <ol
+                  className="list-decimal list-inside space-y-2 text-gray-600 dark:text-gray-300"
+                  data-testid={TECHNICAL_DETAILS_TEST_IDS.IMPLEMENTATION_STEPS}
+                >
+                  {activeDetails.implementationSteps.map((step, index) => (
                     <li
-                      key={`requirement-${index}`}
-                      data-testid={`requirement-${index}`}
+                      key={index}
+                      data-testid={`implementation-step-${index}`}
+                      className="pl-1"
                     >
-                      {req}
+                      {step}
                     </li>
-                  )
-                )}
-              </ul>
-            </div>
-          )}
+                  ))}
+                </ol>
+              </div>
+            )}
 
-        {/* Technologies section */}
-        {implementationDetails?.technologies &&
-          implementationDetails.technologies.length > 0 && (
-            <div className="mt-6">
-              <h4 className="text-md font-medium mb-3">Technologies</h4>
-              <div className="flex flex-wrap gap-2">
-                {implementationDetails.technologies.map(
-                  (tech: string, index: number) => (
-                    <span
-                      key={`tech-${index}`}
-                      className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300 rounded-md"
-                      data-testid={`technology-${index}`}
+          {/* Technology Stack Recommendations */}
+          {activeDetails.recommendedTechStack && (
+            <div>
+              <h3 className="text-lg font-medium mb-2">
+                Recommended Technology Stack
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {Object.entries(activeDetails.recommendedTechStack).map(
+                  ([category, technologies], index) => (
+                    <div
+                      key={index}
+                      className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
                     >
-                      {tech}
-                    </span>
+                      <div className="text-sm font-medium mb-1">{category}</div>
+                      <div className="text-gray-600 dark:text-gray-300">
+                        {Array.isArray(technologies)
+                          ? technologies.join(", ")
+                          : String(technologies || "")}
+                      </div>
+                    </div>
                   )
                 )}
               </div>
             </div>
           )}
+        </div>
       </div>
     </WidgetContainer>
   );
 };
 
-// Export the component with security level state management
-export default withSecurityLevelState(TechnicalDetailsWidget);
+// Export the component directly without HOC
+export default TechnicalDetailsWidget;

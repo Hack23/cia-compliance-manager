@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import withSecurityLevelState from "../../../hoc/withSecurityLevelState";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
@@ -45,7 +44,7 @@ export interface IntegrityImpactWidgetProps {
   /**
    * Optional level change handler
    */
-  onLevelChange?: (level: SecurityLevel) => void;
+  onIntegrityChange?: (level: SecurityLevel) => void;
 }
 
 // Add the interface for technical implementation
@@ -251,5 +250,5 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
   );
 };
 
-// Export the component wrapped with security level state management
-export default withSecurityLevelState(IntegrityImpactWidget);
+// Export the component directly without HOC
+export default IntegrityImpactWidget;

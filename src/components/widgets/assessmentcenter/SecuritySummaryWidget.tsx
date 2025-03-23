@@ -1,9 +1,7 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import withSecurityLevelState from "../../../hoc/withSecurityLevelState";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
-import { SecurityWidgetProps } from "../../../types/widget-props";
 import {
   calculateOverallSecurityLevel,
   getSecurityLevelValue,
@@ -13,13 +11,38 @@ import StatusBadge from "../../common/StatusBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 
 /**
- * SecuritySummaryWidget props extend SecurityWidgetProps
+ * SecuritySummaryWidget props
  */
-export interface SecuritySummaryWidgetProps extends SecurityWidgetProps {
+export interface SecuritySummaryWidgetProps {
+  /**
+   * Selected availability level
+   */
+  availabilityLevel: SecurityLevel;
+
+  /**
+   * Selected integrity level
+   */
+  integrityLevel: SecurityLevel;
+
+  /**
+   * Selected confidentiality level
+   */
+  confidentialityLevel: SecurityLevel;
+
   /**
    * Optional overall security level
    */
   securityLevel?: SecurityLevel;
+
+  /**
+   * Optional CSS class name
+   */
+  className?: string;
+
+  /**
+   * Optional test ID
+   */
+  testId?: string;
 }
 
 /**
@@ -38,6 +61,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
   availabilityLevel,
   integrityLevel,
   confidentialityLevel,
+  securityLevel,
   className = "",
   testId = "security-summary-widget",
 }) => {
@@ -422,5 +446,5 @@ function getRecommendations(
   return recommendations;
 }
 
-// Export the enhanced component with security level state management
-export default withSecurityLevelState(SecuritySummaryWidget);
+// Export the component directly without HOC
+export default SecuritySummaryWidget;

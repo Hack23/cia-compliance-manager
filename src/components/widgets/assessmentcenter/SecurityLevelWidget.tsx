@@ -4,7 +4,6 @@ import {
   WIDGET_ICONS,
   WIDGET_TITLES,
 } from "../../../constants/appConstants";
-import withSecurityLevelState from "../../../hoc/withSecurityLevelState";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
@@ -45,21 +44,6 @@ export interface SecurityLevelWidgetProps {
   onConfidentialityChange?: (level: SecurityLevel) => void;
 
   /**
-   * Legacy handler for setting availability level
-   */
-  setAvailability?: (level: SecurityLevel) => void;
-
-  /**
-   * Legacy handler for setting integrity level
-   */
-  setIntegrity?: (level: SecurityLevel) => void;
-
-  /**
-   * Legacy handler for setting confidentiality level
-   */
-  setConfidentiality?: (level: SecurityLevel) => void;
-
-  /**
    * Optional CSS class name
    */
   className?: string;
@@ -90,9 +74,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   onAvailabilityChange,
   onIntegrityChange,
   onConfidentialityChange,
-  setAvailability, // For backward compatibility
-  setIntegrity, // For backward compatibility
-  setConfidentiality, // For backward compatibility
   className = "",
   testId = "security-level-widget",
 }) => {
@@ -114,15 +95,14 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       : confidentialityLevel
   );
 
-  // Create combined handler functions that call both new and legacy handlers
+  // Create handler functions that call the prop handlers
   const handleAvailabilityChange = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const newLevel = event.target.value as SecurityLevel;
       console.log("SecurityLevelWidget: Setting availability to", newLevel);
       if (onAvailabilityChange) onAvailabilityChange(newLevel);
-      if (setAvailability) setAvailability(newLevel);
     },
-    [onAvailabilityChange, setAvailability]
+    [onAvailabilityChange]
   );
 
   const handleIntegrityChange = useCallback(
@@ -130,9 +110,8 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       const newLevel = event.target.value as SecurityLevel;
       console.log("SecurityLevelWidget: Setting integrity to", newLevel);
       if (onIntegrityChange) onIntegrityChange(newLevel);
-      if (setIntegrity) setIntegrity(newLevel);
     },
-    [onIntegrityChange, setIntegrity]
+    [onIntegrityChange]
   );
 
   const handleConfidentialityChange = useCallback(
@@ -140,9 +119,8 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       const newLevel = event.target.value as SecurityLevel;
       console.log("SecurityLevelWidget: Setting confidentiality to", newLevel);
       if (onConfidentialityChange) onConfidentialityChange(newLevel);
-      if (setConfidentiality) setConfidentiality(newLevel);
     },
-    [onConfidentialityChange, setConfidentiality]
+    [onConfidentialityChange]
   );
 
   // Get security level options
@@ -562,5 +540,5 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   );
 };
 
-// Export with security level state management
-export default withSecurityLevelState(SecurityLevelWidget);
+// Export the component directly without HOC
+export default SecurityLevelWidget;

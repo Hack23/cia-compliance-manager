@@ -12,9 +12,7 @@ import {
 import React, { useEffect, useMemo, useRef } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { CHART_TEST_IDS } from "../../../constants/testIds";
-import withSecurityLevelState from "../../../hoc/withSecurityLevelState";
 import { SecurityLevel } from "../../../types/cia";
-import { WithSecurityLevelProps } from "../../../types/widget-props";
 import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
 import { SecurityRiskScore } from "../../charts/SecurityRiskScore";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -30,8 +28,22 @@ Chart.register(
   Legend
 );
 
-export interface SecurityVisualizationWidgetProps
-  extends WithSecurityLevelProps {
+export interface SecurityVisualizationWidgetProps {
+  /**
+   * Selected availability level
+   */
+  availabilityLevel: SecurityLevel;
+
+  /**
+   * Selected integrity level
+   */
+  integrityLevel: SecurityLevel;
+
+  /**
+   * Selected confidentiality level
+   */
+  confidentialityLevel: SecurityLevel;
+
   /**
    * Optional CSS class name
    */
@@ -41,11 +53,6 @@ export interface SecurityVisualizationWidgetProps
    * Optional test ID for automated testing
    */
   testId?: string;
-
-  /**
-   * Optional security level override
-   */
-  securityLevel?: SecurityLevel;
 }
 
 /**
@@ -283,5 +290,5 @@ const SecurityVisualizationWidget: React.FC<
   );
 };
 
-// Export the enhanced component with security level state management
-export default withSecurityLevelState(SecurityVisualizationWidget);
+// Export the component directly without HOC
+export default SecurityVisualizationWidget;

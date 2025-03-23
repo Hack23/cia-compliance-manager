@@ -54,9 +54,6 @@ export { SecurityRiskScore as ChartSecurityRiskScore } from "./charts/SecurityRi
 export { SecurityLevelSelector } from "./securitylevel/SecurityLevelSelector";
 export { Selection } from "./securitylevel/Selection";
 
-// Performance components
-export { SecurityLevelChangeTracker } from "../performance/SecurityLevelChangeTracker";
-
 // Export widget components
 export * from "./widgets";
 

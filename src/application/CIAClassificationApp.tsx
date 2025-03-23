@@ -135,10 +135,6 @@ const CIAClassificationApp: React.FC = () => {
 
         {/* Container with defined width to ensure grid fits properly */}
         <div className="w-full max-w-[1600px] mx-auto">
-          {/* 
-            Replace Tailwind grid classes with data-testid only.
-            Our CSS in layout.css will handle the actual grid properties.
-          */}
           <div
             data-testid="dashboard-grid"
             className="dashboard-grid-container"
