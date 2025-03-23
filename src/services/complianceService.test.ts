@@ -7,6 +7,7 @@ import {
   createComplianceService,
 } from "./complianceService";
 import { ComplianceServiceAdapter } from "./ComplianceServiceAdapter";
+import { ComplianceServiceStatic } from "./complianceTestHelpers";
 
 // Convert from hoisted to a regular object
 const mockComplianceData = {
@@ -228,8 +229,6 @@ const mockComplianceData = {
     },
   },
 };
-
-import { ComplianceService as ComplianceServiceStatic } from "./ComplianceServiceAdapter";
 
 // Create a proper mock data provider that matches CIADataProvider interface
 const createMockDetail = (
