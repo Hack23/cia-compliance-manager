@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import SecurityLevelBadge from "../SecurityLevelBadge";
+import SecurityLevelBadge from "./SecurityLevelBadge";
 
 describe("SecurityLevelBadge", () => {
   it("renders with default props", () => {
