@@ -8,10 +8,41 @@
 import "@testing-library/jest-dom";
 import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
-import { expect, vi } from "vitest";
+import { expect, vi, type JestAssertion } from "vitest";
 
 // Configure global jest matchers
 expect.extend(matchers);
+
+// Properly extend TypeScript types for Vitest
+declare module "vitest" {
+  // Using the JestAssertion interface which is the public-facing interface for assertions
+  interface Assertion extends JestAssertion<any> {
+    toBeInTheDocument(): Assertion;
+    toHaveTextContent(text: string | RegExp): Assertion;
+    toBeVisible(): Assertion;
+    toHaveClass(className: string): Assertion;
+    toHaveAttribute(attr: string, value?: string): Assertion;
+    toHaveStyle(css: Record<string, string | number>): Assertion;
+    toBeDisabled(): Assertion;
+    toBeEnabled(): Assertion;
+    toBeChecked(): Assertion;
+    toBePartiallyChecked(): Assertion;
+    toBeEmpty(): Assertion;
+    toBeEmptyDOMElement(): Assertion;
+    toBeInvalid(): Assertion;
+    toBeRequired(): Assertion;
+    toBeValid(): Assertion;
+    toContainElement(element: HTMLElement | null): Assertion;
+    toContainHTML(htmlText: string): Assertion;
+    toHaveFocus(): Assertion;
+    toHaveFormValues(expectedValues: Record<string, unknown>): Assertion;
+    toHaveValue(value?: string | string[] | number): Assertion;
+    toBeInTheDOM(): Assertion;
+    toHaveDisplayValue(
+      value: string | RegExp | Array<string | RegExp>
+    ): Assertion;
+  }
+}
 
 // Mock toHaveNoViolations function since jest-axe is not available
 expect.extend({
