@@ -77,42 +77,54 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
   // Use the passed level or fallback to integrityLevel for backward compatibility
   const effectiveLevel = level || integrityLevel;
 
-  // Get component-specific details
+  // Add proper null checks
   const details = useMemo(() => {
-    return ciaContentService.getComponentDetails("integrity", effectiveLevel);
+    if (!ciaContentService) {
+      return {
+        description: "Service not available",
+        technical: "Technical details not available",
+        businessImpact: "Business impact not available",
+        recommendations: [],
+      };
+    }
+
+    return (
+      ciaContentService.getComponentDetails("integrity", effectiveLevel) || {
+        description: "Details not available",
+        technical: "Technical details not available",
+        businessImpact: "Business impact not available",
+        recommendations: [],
+      }
+    );
   }, [ciaContentService, effectiveLevel]);
 
-  // Get business impact details
+  // Add null checks to all service calls
   const businessImpact = useMemo(() => {
     return (
-      ciaContentService.getBusinessImpact?.("integrity", effectiveLevel) || null
+      ciaContentService?.getBusinessImpact?.("integrity", effectiveLevel) ||
+      null
     );
   }, [ciaContentService, effectiveLevel]);
 
-  // Get technical implementation
-  const technicalImplementation =
-    useMemo<TechnicalImplementationDetails | null>(() => {
-      return (
-        ciaContentService.getTechnicalImplementation?.(
-          "integrity",
-          effectiveLevel
-        ) || null
-      );
-    }, [ciaContentService, effectiveLevel]);
+  const technicalImplementation = useMemo(() => {
+    return (
+      ciaContentService?.getTechnicalImplementation?.(
+        "integrity",
+        effectiveLevel
+      ) || null
+    );
+  }, [ciaContentService, effectiveLevel]);
 
-  // Get recommended controls
   const recommendations = useMemo(() => {
     return (
-      ciaContentService.getRecommendations?.("integrity", effectiveLevel) ||
-      details?.recommendations ||
-      []
+      ciaContentService?.getRecommendations?.("integrity", effectiveLevel) || []
     );
-  }, [ciaContentService, effectiveLevel, details]);
+  }, [ciaContentService, effectiveLevel]);
 
-  // Calculate overall impact with the current integrity level
+  // Update overall impact calculation
   const overallImpact = useMemo(() => {
     return (
-      ciaContentService.calculateBusinessImpactLevel?.(
+      ciaContentService?.calculateBusinessImpactLevel?.(
         availabilityLevel,
         effectiveLevel,
         confidentialityLevel

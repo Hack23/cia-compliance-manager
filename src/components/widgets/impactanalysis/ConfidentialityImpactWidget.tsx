@@ -81,51 +81,62 @@ const ConfidentialityImpactWidget: React.FC<
   // Use the passed level or fallback to confidentialityLevel for backward compatibility
   const effectiveLevel = level || confidentialityLevel;
 
-  // Get component-specific details
+  // Add proper null checks
   const details = useMemo(() => {
-    return ciaContentService.getComponentDetails(
-      "confidentiality",
-      effectiveLevel
+    if (!ciaContentService) {
+      return {
+        description: "Service not available",
+        technical: "Technical details not available",
+        businessImpact: "Business impact not available",
+        recommendations: [],
+      };
+    }
+
+    return (
+      ciaContentService.getComponentDetails(
+        "confidentiality",
+        effectiveLevel
+      ) || {
+        description: "Details not available",
+        technical: "Technical details not available",
+        businessImpact: "Business impact not available",
+        recommendations: [],
+      }
     );
   }, [ciaContentService, effectiveLevel]);
 
-  // Get business impact details
+  // Update other service calls with null checks
   const businessImpact = useMemo(() => {
     return (
-      ciaContentService.getBusinessImpact?.(
+      ciaContentService?.getBusinessImpact?.(
         "confidentiality",
         effectiveLevel
       ) || null
     );
   }, [ciaContentService, effectiveLevel]);
 
-  // Get technical implementation
-  const technicalImplementation =
-    useMemo<TechnicalImplementationDetails | null>(() => {
-      return (
-        ciaContentService.getTechnicalImplementation?.(
-          "confidentiality",
-          effectiveLevel
-        ) || null
-      );
-    }, [ciaContentService, effectiveLevel]);
-
-  // Get recommended controls
-  const recommendations = useMemo(() => {
+  const technicalImplementation = useMemo(() => {
     return (
-      ciaContentService.getRecommendations?.(
+      ciaContentService?.getTechnicalImplementation?.(
         "confidentiality",
         effectiveLevel
-      ) ||
-      details?.recommendations ||
-      []
+      ) || null
+    );
+  }, [ciaContentService, effectiveLevel]);
+
+  const recommendations = useMemo(() => {
+    return (
+      ciaContentService?.getRecommendations?.(
+        "confidentiality",
+        effectiveLevel
+      ) || []
     );
   }, [ciaContentService, effectiveLevel, details]);
 
-  // Calculate overall impact with the current confidentiality level
+  // Calculate overall impact
   const overallImpact = useMemo(() => {
     return (
-      ciaContentService.calculateBusinessImpactLevel?.(
+      ciaContentService?.calculateBusinessImpactLevel?.(
         availabilityLevel,
         integrityLevel,
         effectiveLevel

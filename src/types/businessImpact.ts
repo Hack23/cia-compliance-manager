@@ -1,3 +1,5 @@
+import { RiskLevel } from "../constants/riskConstants";
+
 /**
  * Business Impact Types
  *
@@ -8,28 +10,100 @@
  * choices across various dimensions of business operation. 💼
  */
 
-// Type for a single business consideration item
+/**
+ * Business consideration structure
+ */
 export interface BusinessConsideration {
-  type: string;
-  risk: string;
+  /**
+   * Title of the consideration
+   */
+  title: string;
+
+  /**
+   * Description of the consideration
+   */
   description: string;
 }
 
-// Type for business considerations structure
+/**
+ * Business considerations by category
+ */
 export interface BusinessConsiderations {
-  [categoryKey: string]: {
-    [levelKey: string]: BusinessConsideration[];
-  };
+  /**
+   * Financial considerations
+   */
+  financial: BusinessConsideration[];
+
+  /**
+   * Operational considerations
+   */
+  operational: BusinessConsideration[];
+
+  /**
+   * Strategic considerations
+   */
+  strategic: BusinessConsideration[];
+
+  /**
+   * Reputational considerations
+   */
+  reputational: BusinessConsideration[];
+
+  /**
+   * Regulatory considerations
+   */
+  regulatory: BusinessConsideration[];
 }
 
-// Type for business key benefit items
-export type BusinessKeyBenefit =
-  | string
-  | { title: string; description: string };
+/**
+ * Impact consideration with risk level
+ */
+export interface ImpactConsideration {
+  /**
+   * Type of impact
+   */
+  type: string;
 
-// Type for business key benefits structure
+  /**
+   * Risk level
+   */
+  risk: RiskLevel;
+
+  /**
+   * Description of the impact
+   */
+  description: string;
+}
+
+/**
+ * Business considerations by security level and component
+ */
+export interface ComponentBusinessConsiderations {
+  AVAILABILITY: Record<string, ImpactConsideration[]>;
+  INTEGRITY: Record<string, ImpactConsideration[]>;
+  CONFIDENTIALITY: Record<string, ImpactConsideration[]>;
+}
+
+/**
+ * Key business benefit
+ */
+export interface BusinessKeyBenefit {
+  /**
+   * Title of the benefit
+   */
+  title: string;
+
+  /**
+   * Description of the benefit
+   */
+  description: string;
+}
+
+/**
+ * Business benefits by security level
+ */
 export interface BusinessKeyBenefits {
-  [levelKey: string]: BusinessKeyBenefit[];
+  [key: string]: BusinessKeyBenefit[];
 }
 
 // Type for business impact icons
@@ -65,6 +139,11 @@ export interface BusinessImpactDetail {
    * List of compliance violations (for regulatory impact)
    */
   complianceViolations?: string[];
+
+  /**
+   * Competitive advantage implications
+   */
+  competitiveAdvantage?: string;
 }
 
 /**
@@ -129,9 +208,25 @@ export interface BusinessItem {
 
 // Types for business value structures
 export interface BusinessValueMetric {
-  value: string;
-  icon: string;
+  /**
+   * Name of the metric
+   */
+  name: string;
+
+  /**
+   * Description of the metric
+   */
   description: string;
+
+  /**
+   * How the metric is measured
+   */
+  measurementMethod: string;
+
+  /**
+   * How security impacts this metric
+   */
+  securityImpact: string;
 }
 
 export interface BusinessROIEstimates {
@@ -154,5 +249,42 @@ import {
   BUSINESS_KEY_BENEFITS as BKB,
 } from "../constants/businessConstants";
 
-export const BUSINESS_CONSIDERATIONS = BC;
-export const BUSINESS_KEY_BENEFITS = BKB;
+// Fix the format to match the expected structure in tests
+export const BUSINESS_CONSIDERATIONS = {
+  // Use spread operator to copy all properties from BC
+  ...BC,
+  // Add these properties with a safer approach to access potential properties
+  AVAILABILITY: {
+    NONE: [],
+    LOW: [],
+    MODERATE: [],
+    HIGH: [],
+    VERY_HIGH: [],
+    ...((BC as any)?.availability || (BC as any)?.AVAILABILITY || {}),
+  },
+  INTEGRITY: {
+    NONE: [],
+    LOW: [],
+    MODERATE: [],
+    HIGH: [],
+    VERY_HIGH: [],
+    ...((BC as any)?.integrity || (BC as any)?.INTEGRITY || {}),
+  },
+  CONFIDENTIALITY: {
+    NONE: [],
+    LOW: [],
+    MODERATE: [],
+    HIGH: [],
+    VERY_HIGH: [],
+    ...((BC as any)?.confidentiality || (BC as any)?.CONFIDENTIALITY || {}),
+  },
+};
+
+export const BUSINESS_KEY_BENEFITS = {
+  NONE: BKB?.None || [],
+  LOW: BKB?.Low || [],
+  MODERATE: BKB?.Moderate || [],
+  HIGH: BKB?.High || [],
+  VERY_HIGH: BKB?.["Very High"] || [],
+  ...BKB,
+};

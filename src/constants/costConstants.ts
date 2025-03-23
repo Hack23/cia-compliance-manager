@@ -1,8 +1,10 @@
+import { SecurityLevel } from "../types/cia";
+
 /**
  * Cost-related constants for CIA Compliance Management
- * 
+ *
  * ## Business Perspective
- * 
+ *
  * These constants help standardize cost calculations across the application,
  * ensuring that security investments can be properly estimated and budgeted. 💰
  */
@@ -138,3 +140,160 @@ export const ROI_CALCULATION_FACTORS = {
     enterprise: 15000000,
   },
 };
+
+/**
+ * Budget scale for cost calculations
+ * Higher numbers mean higher cost multiplier
+ */
+export const BUDGET_SCALE = {
+  SMALL: 1,
+  MEDIUM: 5,
+  LARGE: 10,
+  ENTERPRISE: 25,
+};
+
+/**
+ * Cost categories
+ */
+export const COST_CATEGORIES = {
+  CAPEX: "Capital Expenditure",
+  OPEX: "Operational Expenditure",
+  TOTAL: "Total Cost of Ownership",
+  ROI: "Return on Investment",
+};
+
+/**
+ * Typical cost components for security implementations
+ */
+export const COST_COMPONENTS = {
+  HARDWARE: "Hardware",
+  SOFTWARE: "Software",
+  SERVICES: "Professional Services",
+  LICENSING: "Licensing",
+  TRAINING: "Training",
+  MAINTENANCE: "Maintenance",
+  SUPPORT: "Support",
+  STAFFING: "Staffing",
+  OVERHEAD: "Overhead",
+};
+
+/**
+ * CAPEX cost ratio for each security level
+ * Used for calculating implementation costs
+ */
+export const SECURITY_LEVEL_CAPEX: Record<SecurityLevel, number> = {
+  None: 0,
+  Low: 5,
+  Moderate: 10,
+  High: 15,
+  "Very High": 20,
+};
+
+/**
+ * OPEX cost ratio for each security level
+ * Used for calculating ongoing maintenance costs
+ */
+export const SECURITY_LEVEL_OPEX: Record<SecurityLevel, number> = {
+  None: 0,
+  Low: 2,
+  Moderate: 5,
+  High: 8,
+  "Very High": 10,
+};
+
+/**
+ * Implementation time (in months) for each security level
+ */
+export const IMPLEMENTATION_TIME: Record<SecurityLevel, number> = {
+  None: 0,
+  Low: 1,
+  Moderate: 2.5,
+  High: 4,
+  "Very High": 6,
+};
+
+/**
+ * Resource requirement scaling factor for each security level
+ */
+export const RESOURCE_SCALE: Record<SecurityLevel, number> = {
+  None: 0,
+  Low: 1,
+  Moderate: 2,
+  High: 3,
+  "Very High": 4,
+};
+
+/**
+ * Calculation constants
+ */
+export const CALCULATION_CONSTANTS = {
+  MONTHS_PER_YEAR: 12,
+  STANDARD_TCO_YEARS: 3,
+  BASE_COST_UNIT: 5000, // Base cost unit for calculations in currency units
+  ROI_TIMEFRAME_YEARS: 5, // Years to calculate ROI over
+};
+
+/**
+ * Format currency for display
+ *
+ * @param amount - Amount to format
+ * @param currency - Currency code
+ * @returns Formatted currency string
+ */
+export function formatCurrency(amount: number, currency = "USD"): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
+/**
+ * Format percentage for display
+ *
+ * @param value - Value to format
+ * @returns Formatted percentage string
+ */
+export function formatPercentage(value: number): string {
+  return `${value.toFixed(0)}%`;
+}
+
+/**
+ * Calculate total CAPEX for all components
+ *
+ * @param availabilityLevel - Availability security level
+ * @param integrityLevel - Integrity security level
+ * @param confidentialityLevel - Confidentiality security level
+ * @returns Total CAPEX value
+ */
+export function calculateTotalCapex(
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel
+): number {
+  return (
+    SECURITY_LEVEL_CAPEX[availabilityLevel] +
+    SECURITY_LEVEL_CAPEX[integrityLevel] +
+    SECURITY_LEVEL_CAPEX[confidentialityLevel]
+  );
+}
+
+/**
+ * Calculate total OPEX for all components
+ *
+ * @param availabilityLevel - Availability security level
+ * @param integrityLevel - Integrity security level
+ * @param confidentialityLevel - Confidentiality security level
+ * @returns Total OPEX value
+ */
+export function calculateTotalOpex(
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel
+): number {
+  return (
+    SECURITY_LEVEL_OPEX[availabilityLevel] +
+    SECURITY_LEVEL_OPEX[integrityLevel] +
+    SECURITY_LEVEL_OPEX[confidentialityLevel]
+  );
+}

@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   SECURITY_LEVELS,
   WIDGET_ICONS,
   WIDGET_TITLES,
 } from "../../../constants/appConstants";
+import { CIA_COMPONENT_ICONS } from "../../../constants/uiConstants";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
@@ -64,8 +65,17 @@ export interface SecurityLevelWidgetProps {
  * provides clear descriptions of each security level to help users make
  * informed decisions about their security requirements. 🔒
  *
- * The immediate visual feedback helps users understand the impact of their
- * security level choices, supporting better risk management decisions. 📊
+ * ## Security Perspective
+ *
+ * Enables fine-grained control over each CIA component, with detailed
+ * explanations of security implications for each level. Helps security
+ * teams implement appropriate controls based on organizational needs.
+ *
+ * ## Architecture Perspective
+ *
+ * Provides technical implementation details for each security level,
+ * helping system architects understand what controls and mechanisms
+ * need to be implemented to achieve the selected security levels.
  */
 const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   availabilityLevel,
@@ -80,20 +90,62 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   // Use the content service for security level details
   const { ciaContentService } = useCIAContentService();
 
+  // Define local state for error and loading
+  const [serviceError, setServiceError] = useState<Error | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   // Track which component is active for details display
   const [activeComponent, setActiveComponent] = useState<
     "availability" | "integrity" | "confidentiality"
   >("availability");
 
-  // Get details for the active component
-  const activeDetails = ciaContentService.getComponentDetails(
+  // Add error state
+  const [error, setError] = useState<Error | null>(null);
+  const [activeDetails, setActiveDetails] = useState<any>(null);
+
+  // Track the last changed component for visual feedback
+  const [lastChangedComponent, setLastChangedComponent] = useState<
+    "availability" | "integrity" | "confidentiality" | null
+  >(null);
+
+  // Get details for the active component with error handling
+  useEffect(() => {
+    setIsLoading(true);
+    try {
+      const details = ciaContentService?.getComponentDetails(
+        activeComponent,
+        activeComponent === "availability"
+          ? availabilityLevel
+          : activeComponent === "integrity"
+          ? integrityLevel
+          : confidentialityLevel
+      ) || {
+        description: "No details available",
+        technical: "No technical information available",
+        businessImpact: "No business impact information available",
+        recommendations: []
+      };
+      setActiveDetails(details);
+      setError(null);
+      setServiceError(null);
+    } catch (err) {
+      console.error("Error loading component details:", err);
+      setError(
+        err instanceof Error
+          ? err
+          : new Error("Failed to load component details")
+      );
+      setServiceError(err instanceof Error ? err : new Error("Service error"));
+    } finally {
+      setIsLoading(false);
+    }
+  }, [
+    ciaContentService,
     activeComponent,
-    activeComponent === "availability"
-      ? availabilityLevel
-      : activeComponent === "integrity"
-      ? integrityLevel
-      : confidentialityLevel
-  );
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel,
+  ]);
 
   // Create handler functions that call the prop handlers
   const handleAvailabilityChange = useCallback(
@@ -101,6 +153,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       const newLevel = event.target.value as SecurityLevel;
       console.log("SecurityLevelWidget: Setting availability to", newLevel);
       if (onAvailabilityChange) onAvailabilityChange(newLevel);
+      setLastChangedComponent("availability");
     },
     [onAvailabilityChange]
   );
@@ -110,6 +163,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       const newLevel = event.target.value as SecurityLevel;
       console.log("SecurityLevelWidget: Setting integrity to", newLevel);
       if (onIntegrityChange) onIntegrityChange(newLevel);
+      setLastChangedComponent("integrity");
     },
     [onIntegrityChange]
   );
@@ -119,6 +173,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       const newLevel = event.target.value as SecurityLevel;
       console.log("SecurityLevelWidget: Setting confidentiality to", newLevel);
       if (onConfidentialityChange) onConfidentialityChange(newLevel);
+      setLastChangedComponent("confidentiality");
     },
     [onConfidentialityChange]
   );
@@ -167,7 +222,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
     }
   };
 
-  // Get color class for component
+  // Get color class for component - Use standardized utility
   const getComponentColor = (component: string): string => {
     switch (component) {
       case "availability":
@@ -196,6 +251,31 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       testId={testId}
     >
       <div className="p-4">
+        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+          <p className="text-sm">
+            Configure security levels for each CIA component to set your
+            organization's security posture. Higher levels provide stronger
+            protection but may require more resources to implement.
+          </p>
+        </div>
+
+        {/* Display error message if there's an error */}
+        {(error || serviceError) && (
+          <div className="p-3 mb-4 bg-red-100 dark:bg-red-900 dark:bg-opacity-20 text-red-800 dark:text-red-200 rounded-lg">
+            <h4 className="font-medium">Error</h4>
+            <p className="text-sm">
+              Unable to load component details. Please try again later.
+            </p>
+          </div>
+        )}
+
+        {/* Display loading state */}
+        {isLoading && (
+          <div className="p-3 mb-4 bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20 text-blue-800 dark:text-blue-200 rounded-lg">
+            <p className="text-sm">Loading security level details...</p>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Security level selectors */}
           <div>
@@ -215,7 +295,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                     className="text-sm font-medium flex items-center"
                   >
                     <span className="text-blue-500 dark:text-blue-400 mr-2">
-                      ⏱️
+                      {CIA_COMPONENT_ICONS.availability}
                     </span>
                     Availability
                   </label>
@@ -230,7 +310,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 <select
                   id="availability-select"
-                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600"
+                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-blue-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                   value={availabilityLevel}
                   onChange={handleAvailabilityChange}
                   data-testid="availability-select"
@@ -257,6 +337,15 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 >
                   View details
                 </button>
+
+                {lastChangedComponent === "availability" && (
+                  <div
+                    className="mt-2 text-xs text-green-600 dark:text-green-400 animate-pulse"
+                    data-testid="availability-changed-indicator"
+                  >
+                    ✓ Security level updated
+                  </div>
+                )}
               </div>
 
               {/* Integrity selector */}
@@ -270,7 +359,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                     className="text-sm font-medium flex items-center"
                   >
                     <span className="text-green-500 dark:text-green-400 mr-2">
-                      ✓
+                      {CIA_COMPONENT_ICONS.integrity}
                     </span>
                     Integrity
                   </label>
@@ -285,7 +374,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 <select
                   id="integrity-select"
-                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600"
+                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-green-400 focus:border-green-500 focus:ring-2 focus:ring-green-200"
                   value={integrityLevel}
                   onChange={handleIntegrityChange}
                   data-testid="integrity-select"
@@ -312,6 +401,15 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 >
                   View details
                 </button>
+
+                {lastChangedComponent === "integrity" && (
+                  <div
+                    className="mt-2 text-xs text-green-600 dark:text-green-400 animate-pulse"
+                    data-testid="integrity-changed-indicator"
+                  >
+                    ✓ Security level updated
+                  </div>
+                )}
               </div>
 
               {/* Confidentiality selector */}
@@ -325,7 +423,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                     className="text-sm font-medium flex items-center"
                   >
                     <span className="text-purple-500 dark:text-purple-400 mr-2">
-                      🔒
+                      {CIA_COMPONENT_ICONS.confidentiality}
                     </span>
                     Confidentiality
                   </label>
@@ -340,7 +438,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 <select
                   id="confidentiality-select"
-                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600"
+                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-purple-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
                   value={confidentialityLevel}
                   onChange={handleConfidentialityChange}
                   data-testid="confidentiality-select"
@@ -367,6 +465,15 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 >
                   View details
                 </button>
+
+                {lastChangedComponent === "confidentiality" && (
+                  <div
+                    className="mt-2 text-xs text-green-600 dark:text-green-400 animate-pulse"
+                    data-testid="confidentiality-changed-indicator"
+                  >
+                    ✓ Security level updated
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -379,7 +486,10 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
               Details
             </h3>
 
-            <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 h-full">
+            <div
+              className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 h-full"
+              data-testid={`${activeComponent}-details-content`}
+            >
               {activeDetails ? (
                 <div className="space-y-4">
                   <h4

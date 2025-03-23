@@ -1,5 +1,157 @@
 import { SecurityLevel } from "../types/cia";
 
+/**
+ * Resource type constants for security resources
+ */
+
+/**
+ * Types of security resources
+ */
+export const RESOURCE_TYPES = {
+  ARTICLE: "article",
+  TOOL: "tool",
+  VIDEO: "video",
+  DOCUMENTATION: "documentation",
+  WHITEPAPER: "whitepaper",
+  STANDARD: "standard",
+  FRAMEWORK: "framework",
+  TEMPLATE: "template",
+  CHECKLIST: "checklist",
+  TRAINING: "training",
+  WEBINAR: "webinar",
+  BOOK: "book",
+  GUIDE: "guide",
+};
+
+/**
+ * Display names for resource types
+ */
+export const RESOURCE_TYPE_NAMES: Record<string, string> = {
+  [RESOURCE_TYPES.ARTICLE]: "Article",
+  [RESOURCE_TYPES.TOOL]: "Tool",
+  [RESOURCE_TYPES.VIDEO]: "Video",
+  [RESOURCE_TYPES.DOCUMENTATION]: "Documentation",
+  [RESOURCE_TYPES.WHITEPAPER]: "Whitepaper",
+  [RESOURCE_TYPES.STANDARD]: "Standard",
+  [RESOURCE_TYPES.FRAMEWORK]: "Framework",
+  [RESOURCE_TYPES.TEMPLATE]: "Template",
+  [RESOURCE_TYPES.CHECKLIST]: "Checklist",
+  [RESOURCE_TYPES.TRAINING]: "Training",
+  [RESOURCE_TYPES.WEBINAR]: "Webinar",
+  [RESOURCE_TYPES.BOOK]: "Book",
+  [RESOURCE_TYPES.GUIDE]: "Guide",
+};
+
+/**
+ * Icons for resource types
+ */
+export const RESOURCE_TYPE_ICONS: Record<string, string> = {
+  [RESOURCE_TYPES.ARTICLE]: "📄",
+  [RESOURCE_TYPES.TOOL]: "🔧",
+  [RESOURCE_TYPES.VIDEO]: "🎥",
+  [RESOURCE_TYPES.DOCUMENTATION]: "📚",
+  [RESOURCE_TYPES.WHITEPAPER]: "📑",
+  [RESOURCE_TYPES.STANDARD]: "📏",
+  [RESOURCE_TYPES.FRAMEWORK]: "🏗️",
+  [RESOURCE_TYPES.TEMPLATE]: "📝",
+  [RESOURCE_TYPES.CHECKLIST]: "✅",
+  [RESOURCE_TYPES.TRAINING]: "🎓",
+  [RESOURCE_TYPES.WEBINAR]: "💻",
+  [RESOURCE_TYPES.BOOK]: "📕",
+  [RESOURCE_TYPES.GUIDE]: "📋",
+};
+
+/**
+ * Resource categories
+ */
+export const RESOURCE_CATEGORIES = {
+  IMPLEMENTATION: "implementation",
+  COMPLIANCE: "compliance",
+  EDUCATION: "education",
+  REFERENCE: "reference",
+  ASSESSMENT: "assessment",
+  BEST_PRACTICE: "best-practice",
+};
+
+/**
+ * Display names for resource categories
+ */
+export const RESOURCE_CATEGORY_NAMES: Record<string, string> = {
+  [RESOURCE_CATEGORIES.IMPLEMENTATION]: "Implementation",
+  [RESOURCE_CATEGORIES.COMPLIANCE]: "Compliance",
+  [RESOURCE_CATEGORIES.EDUCATION]: "Education",
+  [RESOURCE_CATEGORIES.REFERENCE]: "Reference",
+  [RESOURCE_CATEGORIES.ASSESSMENT]: "Assessment",
+  [RESOURCE_CATEGORIES.BEST_PRACTICE]: "Best Practice",
+};
+
+/**
+ * Common resource tags
+ */
+export const COMMON_RESOURCE_TAGS = [
+  "availability",
+  "integrity",
+  "confidentiality",
+  "disaster recovery",
+  "backup",
+  "encryption",
+  "authentication",
+  "authorization",
+  "monitoring",
+  "logging",
+  "auditing",
+  "risk assessment",
+  "compliance",
+  "governance",
+  "security policy",
+  "security control",
+  "security framework",
+  "security standard",
+  "business continuity",
+  "incident response",
+  "penetration testing",
+  "vulnerability assessment",
+  "security awareness",
+  "security training",
+  "security architecture",
+  "security design",
+  "security implementation",
+  "security operations",
+  "cloud security",
+  "network security",
+  "application security",
+  "data security",
+  "physical security",
+  "identity management",
+  "access control",
+];
+
+/**
+ * Resource filter options for UI display
+ */
+export const RESOURCE_FILTER_OPTIONS = {
+  COMPONENT: [
+    { value: "availability", label: "Availability" },
+    { value: "integrity", label: "Integrity" },
+    { value: "confidentiality", label: "Confidentiality" },
+  ],
+  SECURITY_LEVEL: [
+    { value: "None", label: "None" },
+    { value: "Low", label: "Low" },
+    { value: "Moderate", label: "Moderate" },
+    { value: "High", label: "High" },
+    { value: "Very High", label: "Very High" },
+  ],
+  TYPE: Object.entries(RESOURCE_TYPE_NAMES).map(([value, label]) => ({
+    value,
+    label,
+  })),
+  CATEGORY: Object.entries(RESOURCE_CATEGORY_NAMES).map(([value, label]) => ({
+    value,
+    label,
+  })),
+};
+
 export interface SecurityResource {
   id: string;
   title: string;

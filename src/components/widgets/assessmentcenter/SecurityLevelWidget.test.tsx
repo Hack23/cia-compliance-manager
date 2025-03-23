@@ -124,4 +124,89 @@ describe("SecurityLevelWidget", () => {
     // Instead of checking for error display directly, check component integrity
     expect(screen.getByTestId("security-level-widget")).toBeInTheDocument();
   });
+
+  // Add new tests for error handling
+  test("handles error states when content service fails", () => {
+    // Mock the content service hook to simulate an error
+    vi.mock("../../../hooks/useCIAContentService", () => ({
+      useCIAContentService: () => ({
+        ciaContentService: {
+          getComponentDetails: vi.fn().mockImplementation(() => {
+            throw new Error("Service error");
+          }),
+        },
+        error: new Error("Failed to fetch component details"),
+        isLoading: false,
+      }),
+    }));
+
+    // Render with a spy console.error to prevent test output noise
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+
+    // Render should not throw despite the error
+    render(<SecurityLevelWidget {...getRequiredProps()} />);
+
+    // Widget should still render its container even with the error
+    expect(screen.getByTestId("security-level-widget")).toBeInTheDocument();
+
+    // Error message should be displayed somewhere in the component
+    expect(
+      screen.getByText(/unable to load component details/i, { exact: false })
+    ).toBeInTheDocument();
+
+    // Cleanup
+    consoleErrorSpy.mockRestore();
+    vi.restoreAllMocks();
+  });
+
+  // Test component switching behavior
+  test("correctly updates active component when switching between tabs", () => {
+    render(<SecurityLevelWidget {...getRequiredProps()} />);
+
+    // Initially availability should be active (based on widget implementation)
+    expect(
+      screen.getByTestId("availability-details-content")
+    ).toBeInTheDocument();
+
+    // Click integrity tab
+    fireEvent.click(screen.getByTestId("integrity-details-button"));
+
+    // Now integrity details should be visible and availability hidden
+    expect(screen.getByTestId("integrity-details-content")).toBeInTheDocument();
+    expect(
+      screen.queryByTestId("availability-details-content")
+    ).not.toBeInTheDocument();
+
+    // Click confidentiality tab
+    fireEvent.click(screen.getByTestId("confidentiality-details-button"));
+
+    // Now confidentiality details should be visible
+    expect(
+      screen.getByTestId("confidentiality-details-content")
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByTestId("integrity-details-content")
+    ).not.toBeInTheDocument();
+  });
+
+  // Test security level selection feedback
+  test("provides visual feedback when security level changes", () => {
+    const props = getRequiredProps();
+    render(<SecurityLevelWidget {...props} />);
+
+    // Change availability level
+    fireEvent.change(screen.getByTestId("availability-select"), {
+      target: { value: "High" },
+    });
+
+    // Handler should be called
+    expect(props.onAvailabilityChange).toHaveBeenCalledWith("High");
+
+    // Visual feedback should be present (check for badge or summary update)
+    expect(
+      screen.getByTestId("security-level-widget-availability-summary")
+    ).toHaveTextContent(/High/);
+  });
 });

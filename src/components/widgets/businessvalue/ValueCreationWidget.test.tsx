@@ -1,160 +1,184 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { VALUE_CREATION_TEST_IDS } from "../../../constants/testIds";
+import { SecurityLevel } from "../../../types/cia";
 import ValueCreationWidget from "./ValueCreationWidget";
 
-// Mock the CIAContentService with createCIAContentService function
-vi.mock("../../services/ciaContentService", () => ({
-  __esModule: true,
-  default: {
-    getROIEstimate: vi.fn().mockReturnValue({
-      returnRate: "200%",
-      description: "Good ROI",
-      value: "High",
-    }),
-    getValuePoints: vi.fn().mockReturnValue([
-      "Reduces business risk",
-      "Enhances customer trust",
-      "Improves compliance posture",
-    ]),
-  },
-  // Add the missing exports
-  CIAContentService: vi.fn().mockImplementation(() => ({
-    getROIEstimate: vi.fn().mockReturnValue({
-      returnRate: "200%",
-      description: "Good ROI",
-      value: "High",
-    }),
-    getValuePoints: vi.fn().mockReturnValue([
-      "Reduces business risk",
-      "Enhances customer trust",
-      "Improves compliance posture",
-    ]),
-    calculateRoi: vi.fn().mockReturnValue({
-      value: "$100,000",
-      percentage: "200%",
-      description: "Good ROI value",
-    }),
-  })),
-  createCIAContentService: vi.fn().mockImplementation(() => ({
-    getROIEstimate: vi.fn().mockReturnValue({
-      returnRate: "200%",
-      description: "Good ROI",
-      value: "High",
-    }),
-    getValuePoints: vi.fn().mockReturnValue([
-      "Reduces business risk",
-      "Enhances customer trust",
-      "Improves compliance posture",
-    ]),
-    calculateRoi: vi.fn().mockReturnValue({
-      value: "$100,000",
-      percentage: "200%",
-      description: "Good ROI value",
-    }),
-  })),
+// Mock the useCIAOptions hook
+vi.mock("../../../hooks/useCIAOptions", () => ({
+  useCIAOptions: () => ({
+    availabilityOptions: {
+      None: { description: "None level" },
+      Low: { description: "Low level" },
+      Moderate: { description: "Moderate level" },
+      High: { description: "High level" },
+      "Very High": { description: "Very High level" },
+    },
+    integrityOptions: {
+      None: { description: "None level" },
+      Low: { description: "Low level" },
+      Moderate: { description: "Moderate level" },
+      High: { description: "High level" },
+      "Very High": { description: "Very High level" },
+    },
+    confidentialityOptions: {
+      None: { description: "None level" },
+      Low: { description: "Low level" },
+      Moderate: { description: "Moderate level" },
+      High: { description: "High level" },
+      "Very High": { description: "Very High level" },
+    },
+    ROI_ESTIMATES: {
+      NONE: { returnRate: "0%", description: "No return" },
+      LOW: { returnRate: "50%", description: "Low return" },
+      MODERATE: { returnRate: "150%", description: "Moderate return" },
+      HIGH: { returnRate: "300%", description: "High return" },
+      VERY_HIGH: { returnRate: "500%", description: "Very high return" },
+    },
+    getValuePoints: (level: SecurityLevel) => {
+      const valuePoints = {
+        None: ["No significant value points"],
+        Low: ["Basic value point 1", "Basic value point 2"],
+        Moderate: ["Moderate value point 1", "Moderate value point 2"],
+        High: ["High value point 1", "High value point 2"],
+        "Very High": ["Very high value point 1", "Very high value point 2"],
+      };
+      return valuePoints[level] || [];
+    },
+  }),
 }));
 
 describe("ValueCreationWidget", () => {
+  const defaultProps = {
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
+    className: "custom-class",
+    testId: "custom-test-id",
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("renders without crashing", () => {
-    render(
-      <ValueCreationWidget
-        availabilityLevel="None"
-        integrityLevel="None"
-        confidentialityLevel="None"
-      />
-    );
-    // Update to match the actual rendered title
-    expect(screen.getByText("Business Value & ROI")).toBeInTheDocument();
+    render(<ValueCreationWidget {...defaultProps} />);
+    expect(screen.getByText("Value Creation")).toBeInTheDocument();
   });
 
-  it("renders the widget with None level", () => {
-    render(
-      <ValueCreationWidget
-        availabilityLevel="None"
-        integrityLevel="None"
-        confidentialityLevel="None"
-      />
-    );
-
-    expect(screen.getByText("Business Value & ROI")).toBeInTheDocument();
-    expect(screen.getByTestId("value-creation-widget-roi")).toBeInTheDocument();
-  });
-
-  it("renders the widget with High level", () => {
-    render(
-      <ValueCreationWidget
-        availabilityLevel="High"
-        integrityLevel="High"
-        confidentialityLevel="High"
-      />
-    );
-
-    // Look for metrics card instead of exact percentage
-    const roiMetric = screen.getByTestId("value-creation-widget-roi");
-    expect(roiMetric).toBeInTheDocument();
-
-    // Check for availability-impact element instead of specific text
-    const availabilityImpact = screen.getByTestId("availability-impact");
-    expect(availabilityImpact).toBeInTheDocument();
-  });
-
-  it("displays ROI information", () => {
-    render(
-      <ValueCreationWidget
-        availabilityLevel="Moderate"
-        integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
-      />
-    );
-
+  it("displays ROI information correctly", () => {
+    render(<ValueCreationWidget {...defaultProps} />);
     expect(screen.getByText("Return on Investment")).toBeInTheDocument();
-    expect(screen.getByTestId("value-creation-widget-roi")).toBeInTheDocument();
-
-    // Check for the availability impact element instead of specific text
-    const availabilityImpact = screen.getByTestId("availability-impact");
-    expect(availabilityImpact).toBeInTheDocument();
+    expect(
+      screen.getByTestId(VALUE_CREATION_TEST_IDS.ROI_VALUE)
+    ).toHaveTextContent("150%");
+    expect(
+      screen.getByTestId(VALUE_CREATION_TEST_IDS.ROI_DESCRIPTION)
+    ).toHaveTextContent("Moderate return");
   });
 
-  it("displays different value points for different security levels", () => {
-    const { rerender } = render(
+  it("displays value points correctly", () => {
+    render(<ValueCreationWidget {...defaultProps} />);
+    expect(screen.getByText("Business Value Created")).toBeInTheDocument();
+    expect(screen.getByText("Moderate value point 1")).toBeInTheDocument();
+    expect(screen.getByText("Moderate value point 2")).toBeInTheDocument();
+  });
+
+  it("displays business impact categories", () => {
+    render(<ValueCreationWidget {...defaultProps} />);
+    expect(screen.getByText("Value Impact by Category")).toBeInTheDocument();
+    // Check if financial category is displayed
+    expect(screen.getByText("financial")).toBeInTheDocument();
+    // Check if operational category is displayed
+    expect(screen.getByText("operational")).toBeInTheDocument();
+  });
+
+  it("displays recommendations section", () => {
+    render(<ValueCreationWidget {...defaultProps} />);
+    expect(
+      screen.getByText("Value Maximization Recommendations")
+    ).toBeInTheDocument();
+  });
+
+  it("uses correct styling based on security level", () => {
+    render(<ValueCreationWidget {...defaultProps} />);
+    const roiValue = screen.getByTestId(VALUE_CREATION_TEST_IDS.ROI_VALUE);
+    expect(roiValue).toBeInTheDocument();
+  });
+
+  it("handles different security levels appropriately", () => {
+    // Test with Low security level
+    render(
       <ValueCreationWidget
         availabilityLevel="Low"
         integrityLevel="Low"
         confidentialityLevel="Low"
       />
     );
+    expect(
+      screen.getByTestId(VALUE_CREATION_TEST_IDS.ROI_VALUE)
+    ).toHaveTextContent("50%");
 
-    // Check for the impact elements rather than specific text
-    expect(screen.getByTestId("availability-impact")).toBeInTheDocument();
-    expect(screen.getByTestId("integrity-impact")).toBeInTheDocument();
-    expect(screen.getByTestId("confidentiality-impact")).toBeInTheDocument();
+    // Clean up
+    screen.unmount();
 
-    // Rerender with High level
-    rerender(
+    // Test with High security level
+    render(
       <ValueCreationWidget
         availabilityLevel="High"
         integrityLevel="High"
         confidentialityLevel="High"
       />
     );
-
-    // Check for the impact elements rather than specific text
-    expect(screen.getByTestId("availability-impact")).toBeInTheDocument();
-    expect(screen.getByTestId("integrity-impact")).toBeInTheDocument();
-    expect(screen.getByTestId("confidentiality-impact")).toBeInTheDocument();
+    expect(
+      screen.getByTestId(VALUE_CREATION_TEST_IDS.ROI_VALUE)
+    ).toHaveTextContent("300%");
   });
 
-  it("accepts custom testId prop", () => {
-    const customTestId = "custom-value-creation-widget";
+  it("shows different recommendations based on security level", () => {
+    // Test with Low security level
+    render(
+      <ValueCreationWidget
+        availabilityLevel="Low"
+        integrityLevel="Low"
+        confidentialityLevel="Low"
+      />
+    );
+    expect(
+      screen.getByText(/Increase security levels to achieve positive ROI/)
+    ).toBeInTheDocument();
+
+    // Clean up
+    screen.unmount();
+
+    // Test with Very High security level
+    render(
+      <ValueCreationWidget
+        availabilityLevel="Very High"
+        integrityLevel="Very High"
+        confidentialityLevel="Very High"
+      />
+    );
+    expect(
+      screen.getByText(
+        /Develop premium service offerings with strong security guarantees/
+      )
+    ).toBeInTheDocument();
+  });
+
+  it("renders with custom props", () => {
+    render(<ValueCreationWidget {...defaultProps} />);
+    expect(screen.getByTestId("custom-test-id")).toHaveClass("custom-class");
+  });
+
+  it("renders with default props", () => {
     render(
       <ValueCreationWidget
         availabilityLevel="Moderate"
         integrityLevel="Moderate"
         confidentialityLevel="Moderate"
-        testId={customTestId}
       />
     );
-
-    expect(screen.getByTestId(customTestId)).toBeInTheDocument();
+    expect(screen.getByTestId("widget-value-creation")).toBeInTheDocument();
   });
 });

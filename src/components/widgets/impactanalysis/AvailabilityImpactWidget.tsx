@@ -71,16 +71,28 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
 
   // Get component-specific details
   const details = useMemo(() => {
-    return ciaContentService.getComponentDetails(
-      "availability",
-      effectiveLevel
+    return (
+      ciaContentService?.getComponentDetails(
+        "availability",
+        effectiveLevel
+      ) || {
+        description: "Details not available",
+        technical: "Technical details not available",
+        businessImpact: "Business impact details not available",
+        recommendations: [],
+        // Add missing properties to avoid errors
+        uptime: "N/A",
+        rto: "N/A",
+        rpo: "N/A",
+        mttr: "N/A",
+      }
     );
   }, [ciaContentService, effectiveLevel]);
 
   // Get business impact details
   const businessImpact = useMemo(() => {
     return (
-      ciaContentService.getBusinessImpact?.("availability", effectiveLevel) ||
+      ciaContentService?.getBusinessImpact?.("availability", effectiveLevel) ||
       null
     );
   }, [ciaContentService, effectiveLevel]);
@@ -88,8 +100,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   // Get recommended controls
   const recommendations = useMemo(() => {
     return (
-      ciaContentService.getRecommendations?.("availability", effectiveLevel) ||
-      details?.recommendations ||
+      ciaContentService?.getRecommendations?.("availability", effectiveLevel) ||
       []
     );
   }, [ciaContentService, effectiveLevel, details]);
@@ -97,7 +108,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   // Calculate overall impact with the current availability level
   const overallImpact = useMemo(() => {
     return (
-      ciaContentService.calculateBusinessImpactLevel?.(
+      ciaContentService?.calculateBusinessImpactLevel?.(
         effectiveLevel,
         integrityLevel,
         confidentialityLevel

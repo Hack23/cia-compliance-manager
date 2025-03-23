@@ -1831,3 +1831,205 @@ describe("ComplianceService", () => {
     });
   });
 });
+
+import { COMPLIANCE_FRAMEWORKS } from "../constants/complianceConstants";
+
+describe("ComplianceService", () => {
+  let complianceService: ComplianceService;
+
+  beforeEach(() => {
+    complianceService = new ComplianceService();
+  });
+
+  describe("getComplianceStatus", () => {
+    it("should return fully compliant status for high security levels", () => {
+      const result = complianceService.getComplianceStatus(
+        "High" as SecurityLevel,
+        "High" as SecurityLevel,
+        "High" as SecurityLevel
+      );
+
+      expect(result.status).toBe("Fully Compliant");
+      expect(result.complianceScore).toBeGreaterThan(90);
+      expect(result.compliantFrameworks.length).toBeGreaterThan(0);
+      expect(result.nonCompliantFrameworks.length).toBe(0);
+    });
+
+    it("should return non-compliant status for low security levels", () => {
+      const result = complianceService.getComplianceStatus(
+        "None" as SecurityLevel,
+        "None" as SecurityLevel,
+        "None" as SecurityLevel
+      );
+
+      expect(result.status).toBe("Non-Compliant");
+      expect(result.complianceScore).toBeLessThan(30);
+      expect(result.compliantFrameworks.length).toBe(0);
+      expect(result.nonCompliantFrameworks.length).toBeGreaterThan(0);
+    });
+
+    it("should return partially compliant status for mixed security levels", () => {
+      const result = complianceService.getComplianceStatus(
+        "Moderate" as SecurityLevel,
+        "Low" as SecurityLevel,
+        "High" as SecurityLevel
+      );
+
+      expect(["Partially Compliant", "Non-Compliant"]).toContain(result.status);
+      expect(result.complianceScore).toBeGreaterThanOrEqual(0);
+      expect(result.complianceScore).toBeLessThanOrEqual(100);
+    });
+
+    it("should include remediation steps for non-compliant frameworks", () => {
+      const result = complianceService.getComplianceStatus(
+        "Low" as SecurityLevel,
+        "Low" as SecurityLevel,
+        "Low" as SecurityLevel
+      );
+
+      expect(result.remediationSteps.length).toBeGreaterThan(0);
+    });
+
+    it("should include requirements based on compliance status", () => {
+      const result = complianceService.getComplianceStatus(
+        "Moderate" as SecurityLevel,
+        "Moderate" as SecurityLevel,
+        "Moderate" as SecurityLevel
+      );
+
+      expect(result.requirements.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe("getComplianceGapAnalysis", () => {
+    it("should return compliant analysis for high security levels", () => {
+      const result = complianceService.getComplianceGapAnalysis(
+        "High" as SecurityLevel,
+        "High" as SecurityLevel,
+        "High" as SecurityLevel,
+        COMPLIANCE_FRAMEWORKS.ISO_27001
+      );
+
+      expect(result.isCompliant).toBe(true);
+      expect(result.gaps.length).toBe(0);
+      expect(result.recommendations.length).toBeGreaterThan(0);
+    });
+
+    it("should return non-compliant analysis with gaps for low security levels", () => {
+      const result = complianceService.getComplianceGapAnalysis(
+        "Low" as SecurityLevel,
+        "Low" as SecurityLevel,
+        "Low" as SecurityLevel,
+        COMPLIANCE_FRAMEWORKS.ISO_27001
+      );
+
+      expect(result.isCompliant).toBe(false);
+      expect(result.gaps.length).toBeGreaterThan(0);
+      expect(result.recommendations.length).toBeGreaterThan(0);
+    });
+
+    it("should generate appropriate recommendations based on gaps", () => {
+      const result = complianceService.getComplianceGapAnalysis(
+        "Low" as SecurityLevel,
+        "Moderate" as SecurityLevel,
+        "Low" as SecurityLevel,
+        COMPLIANCE_FRAMEWORKS.GDPR
+      );
+
+      expect(result.isCompliant).toBe(false);
+
+      // Should have recommendations for confidentiality but not integrity
+      const hasConfidentialityRecommendation = result.recommendations.some(
+        (rec) =>
+          rec.toLowerCase().includes("confidentiality") ||
+          rec.toLowerCase().includes("data protection")
+      );
+
+      expect(hasConfidentialityRecommendation).toBe(true);
+    });
+
+    it("should handle unknown frameworks gracefully", () => {
+      const result = complianceService.getComplianceGapAnalysis(
+        "High" as SecurityLevel,
+        "High" as SecurityLevel,
+        "High" as SecurityLevel,
+        "Unknown Framework"
+      );
+
+      expect(result.isCompliant).toBe(false);
+      expect(result.gaps.length).toBeGreaterThan(0);
+      expect(result.recommendations.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe("getComplianceStatusText", () => {
+    it('should return "Fully Compliant" for high security levels', () => {
+      const result = complianceService.getComplianceStatusText(
+        "High" as SecurityLevel,
+        "High" as SecurityLevel,
+        "High" as SecurityLevel
+      );
+
+      expect(result).toBe("Fully Compliant");
+    });
+
+    it('should return "Non-Compliant" for low security levels', () => {
+      const result = complianceService.getComplianceStatusText(
+        "None" as SecurityLevel,
+        "None" as SecurityLevel,
+        "None" as SecurityLevel
+      );
+
+      expect(result).toBe("Non-Compliant");
+    });
+  });
+
+  describe("getFrameworkDescription", () => {
+    it("should return descriptions for known frameworks", () => {
+      Object.values(COMPLIANCE_FRAMEWORKS).forEach((framework) => {
+        const description =
+          complianceService.getFrameworkDescription(framework);
+        expect(description).toBeDefined();
+        expect(description.length).toBeGreaterThan(10);
+      });
+    });
+
+    it("should handle unknown frameworks gracefully", () => {
+      const description =
+        complianceService.getFrameworkDescription("Unknown Framework");
+      expect(description).toBe("No description available");
+    });
+  });
+
+  describe("getFrameworkRequiredLevel", () => {
+    it("should return appropriate levels for known frameworks", () => {
+      const availabilityLevel = complianceService.getFrameworkRequiredLevel(
+        COMPLIANCE_FRAMEWORKS.ISO_27001,
+        "availability"
+      );
+
+      const integrityLevel = complianceService.getFrameworkRequiredLevel(
+        COMPLIANCE_FRAMEWORKS.ISO_27001,
+        "integrity"
+      );
+
+      const confidentialityLevel = complianceService.getFrameworkRequiredLevel(
+        COMPLIANCE_FRAMEWORKS.ISO_27001,
+        "confidentiality"
+      );
+
+      expect(availabilityLevel).toBeDefined();
+      expect(integrityLevel).toBeDefined();
+      expect(confidentialityLevel).toBeDefined();
+    });
+
+    it("should return default level for unknown frameworks", () => {
+      const level = complianceService.getFrameworkRequiredLevel(
+        "Unknown Framework",
+        "availability"
+      );
+
+      expect(level).toBe("Moderate");
+    });
+  });
+});

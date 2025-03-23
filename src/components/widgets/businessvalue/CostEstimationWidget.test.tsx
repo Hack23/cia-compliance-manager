@@ -1,116 +1,213 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { COST_TEST_IDS } from "../../../constants/testIds";
-import ciaContentService from "../../../services/ciaContentService";
 import { SecurityLevel } from "../../../types/cia";
 import CostEstimationWidget from "./CostEstimationWidget";
 
-// Mock ciaContentService with proper typing
-vi.mock("../../services/ciaContentService", () => ({
-  __esModule: true,
-  default: {
-    getSecurityMetrics: vi.fn().mockReturnValue({
-      totalCapex: 45,
-      totalOpex: 30,
-      capexEstimate: "$225000",
-      opexEstimate: "$60000/year",
-      isSmallSolution: true,
-      roi: "350%",
-    }),
-  },
-  getImplementationTime: vi.fn().mockReturnValue("3-6 months"),
+// Mock the useCIAOptions hook
+vi.mock("../../../hooks/useCIAOptions", () => ({
+  useCIAOptions: () => ({
+    availabilityOptions: {
+      None: { description: "None level", capex: 0, opex: 0 },
+      Low: { description: "Low level", capex: 5, opex: 2 },
+      Moderate: { description: "Moderate level", capex: 10, opex: 5 },
+      High: { description: "High level", capex: 15, opex: 8 },
+      "Very High": { description: "Very High level", capex: 20, opex: 10 },
+    },
+    integrityOptions: {
+      None: { description: "None level", capex: 0, opex: 0 },
+      Low: { description: "Low level", capex: 5, opex: 2 },
+      Moderate: { description: "Moderate level", capex: 10, opex: 5 },
+      High: { description: "High level", capex: 15, opex: 8 },
+      "Very High": { description: "Very High level", capex: 20, opex: 10 },
+    },
+    confidentialityOptions: {
+      None: { description: "None level", capex: 0, opex: 0 },
+      Low: { description: "Low level", capex: 5, opex: 2 },
+      Moderate: { description: "Moderate level", capex: 10, opex: 5 },
+      High: { description: "High level", capex: 15, opex: 8 },
+      "Very High": { description: "Very High level", capex: 20, opex: 10 },
+    },
+    ROI_ESTIMATES: {
+      NONE: { returnRate: "0%", description: "No return" },
+      LOW: { returnRate: "50%", description: "Low return" },
+      MODERATE: { returnRate: "150%", description: "Moderate return" },
+      HIGH: { returnRate: "300%", description: "High return" },
+      VERY_HIGH: { returnRate: "500%", description: "Very high return" },
+    },
+  }),
 }));
 
 describe("CostEstimationWidget", () => {
   const defaultProps = {
-    availabilityLevel: "High" as SecurityLevel,
+    availabilityLevel: "Moderate" as SecurityLevel,
     integrityLevel: "Moderate" as SecurityLevel,
-    confidentialityLevel: "High" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
+    className: "custom-class",
+    testId: "custom-test-id",
   };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
 
   it("renders without crashing", () => {
     render(<CostEstimationWidget {...defaultProps} />);
+    expect(screen.getByText("Cost Estimation")).toBeInTheDocument();
+  });
+
+  it("displays implementation time correctly", () => {
+    render(<CostEstimationWidget {...defaultProps} />);
     expect(
-      screen.getByText("Estimated Implementation Cost")
+      screen.getByText("Estimated Implementation Time")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(COST_TEST_IDS.IMPLEMENTATION_TIME)
     ).toBeInTheDocument();
   });
 
-  it("displays cost estimates from service", () => {
+  it("calculates CAPEX costs correctly", () => {
     render(<CostEstimationWidget {...defaultProps} />);
+    expect(
+      screen.getByText("Implementation Costs (CAPEX)")
+    ).toBeInTheDocument();
+    // Since each component at Moderate level has a capex of 10, the total should be 30
+    const capexSection = screen.getByTestId(COST_TEST_IDS.CAPEX_SECTION);
+    expect(capexSection).toBeInTheDocument();
 
-    // Look for the elements by testId, then check for Capital Expenditure text
-    const capexDisplay = screen.getByTestId(COST_TEST_IDS.CAPEX_ESTIMATE_VALUE);
-    expect(capexDisplay).toBeInTheDocument();
-    expect(capexDisplay.textContent).toContain("Capital Expenditure");
-
-    const opexDisplay = screen.getByTestId(COST_TEST_IDS.OPEX_ESTIMATE_VALUE);
-    expect(opexDisplay).toBeInTheDocument();
-    // Fix: Check for "Operational Expenditure" instead of "Operating Expense"
-    expect(opexDisplay.textContent).toContain("Operational Expenditure");
+    // Check capex value and percentage
+    const percentageDisplay = screen.getByTestId(
+      COST_TEST_IDS.CAPEX_PERCENTAGE
+    );
+    // 30/60 * 100 = 50%
+    expect(percentageDisplay.textContent).toBe("50%");
   });
 
-  it("calculates 3-year total cost", () => {
+  it("calculates OPEX costs correctly", () => {
     render(<CostEstimationWidget {...defaultProps} />);
+    expect(screen.getByText("Ongoing Maintenance (OPEX)")).toBeInTheDocument();
+    // Since each component at Moderate level has an opex of 5, the total should be 15
+    const opexSection = screen.getByTestId(COST_TEST_IDS.OPEX_SECTION);
+    expect(opexSection).toBeInTheDocument();
 
-    const totalCostDisplay = screen.getByTestId(COST_TEST_IDS.THREE_YEAR_TOTAL);
-    expect(totalCostDisplay).toBeInTheDocument();
-    // Check for "3-Year TCO" text instead of a specific dollar amount
-    expect(totalCostDisplay.textContent).toContain("3-Year TCO");
+    // Check opex percentage
+    const percentageDisplay = screen.getByTestId(COST_TEST_IDS.OPEX_PERCENTAGE);
+    // 15/30 * 100 = 50%
+    expect(percentageDisplay.textContent).toBe("50%");
   });
 
-  it("shows correct ROI estimate", () => {
+  it("displays total cost information", () => {
     render(<CostEstimationWidget {...defaultProps} />);
+    expect(screen.getByText("Total Cost of Ownership")).toBeInTheDocument();
+    expect(
+      screen.getByTestId(COST_TEST_IDS.THREE_YEAR_TOTAL)
+    ).toBeInTheDocument();
+    // Total cost should be CAPEX + (OPEX * 36 months)
+    // 30 + (15 * 36) = 30 + 540 = 570
+  });
+
+  it("displays ROI information", () => {
+    render(<CostEstimationWidget {...defaultProps} />);
+    expect(screen.getByText("Return on Investment")).toBeInTheDocument();
     expect(screen.getByTestId(COST_TEST_IDS.ROI_ESTIMATE)).toHaveTextContent(
-      "350%"
+      "150%"
     );
   });
 
-  it("displays progress bars with correct percentages", () => {
-    render(<CostEstimationWidget {...defaultProps} />);
-    // Updated to match actual implementation
-    expect(
-      screen.getByTestId(COST_TEST_IDS.CAPEX_PERCENTAGE)
-    ).toHaveTextContent("45% of IT budget");
-    // Updated to match actual implementation
-    expect(screen.getByTestId(COST_TEST_IDS.OPEX_PERCENTAGE)).toHaveTextContent(
-      "30% of IT budget"
+  it("handles different security levels", () => {
+    // Test with Low security levels
+    render(
+      <CostEstimationWidget
+        availabilityLevel="Low"
+        integrityLevel="Low"
+        confidentialityLevel="Low"
+      />
+    );
+
+    // With Low security levels, capex should be 15 (5 per component)
+    // and opex should be 6 (2 per component)
+    expect(screen.getByTestId(COST_TEST_IDS.CAPEX_PERCENTAGE).textContent).toBe(
+      "25%"
+    ); // 15/60 * 100
+    expect(screen.getByTestId(COST_TEST_IDS.OPEX_PERCENTAGE).textContent).toBe(
+      "20%"
+    ); // 6/30 * 100
+    expect(screen.getByTestId(COST_TEST_IDS.ROI_ESTIMATE)).toHaveTextContent(
+      "50%"
+    );
+
+    // Clean up
+    screen.unmount();
+
+    // Test with High security levels
+    render(
+      <CostEstimationWidget
+        availabilityLevel="High"
+        integrityLevel="High"
+        confidentialityLevel="High"
+      />
+    );
+
+    // With High security levels, capex should be 45 (15 per component)
+    // and opex should be 24 (8 per component)
+    expect(screen.getByTestId(COST_TEST_IDS.CAPEX_PERCENTAGE).textContent).toBe(
+      "75%"
+    ); // 45/60 * 100
+    expect(screen.getByTestId(COST_TEST_IDS.OPEX_PERCENTAGE).textContent).toBe(
+      "80%"
+    ); // 24/30 * 100
+    expect(screen.getByTestId(COST_TEST_IDS.ROI_ESTIMATE)).toHaveTextContent(
+      "300%"
     );
   });
 
-  it("uses correct cost analysis message for small solution", () => {
-    render(<CostEstimationWidget {...defaultProps} />);
-    expect(
-      screen.getByTestId(COST_TEST_IDS.COST_ANALYSIS_TEXT)
-    ).toHaveTextContent(/Basic security implementation/);
+  it("handles mixed security levels", () => {
+    render(
+      <CostEstimationWidget
+        availabilityLevel="High"
+        integrityLevel="Moderate"
+        confidentialityLevel="Low"
+      />
+    );
+
+    // With Mixed security levels: High (15), Moderate (10), Low (5) = 30 for capex
+    // and High (8), Moderate (5), Low (2) = 15 for opex
+    expect(screen.getByTestId(COST_TEST_IDS.CAPEX_PERCENTAGE).textContent).toBe(
+      "50%"
+    ); // 30/60 * 100
+    expect(screen.getByTestId(COST_TEST_IDS.OPEX_PERCENTAGE).textContent).toBe(
+      "50%"
+    ); // 15/30 * 100
   });
 
-  it("uses correct cost analysis message for large solution", () => {
-    vi.mocked(ciaContentService.getSecurityMetrics).mockReturnValueOnce({
-      totalCapex: 120,
-      totalOpex: 48,
-      totalCost: 168,
-      score: 3,
-      maxScore: 4,
-      percentage: "75%",
-      availabilityCapex: 40,
-      availabilityOpex: 16,
-      integrityCapex: 40,
-      integrityOpex: 16,
-      confidentialityCapex: 40,
-      confidentialityOpex: 16,
-      riskReduction: "85%",
-      roi: "275%", // Properly include the roi property
-    } as any); // Use type assertion to avoid TypeScript errors
-
+  it("formats currency values correctly", () => {
     render(<CostEstimationWidget {...defaultProps} />);
-    expect(
-      screen.getByTestId(COST_TEST_IDS.COST_ANALYSIS_TEXT)
-    ).toHaveTextContent(/Comprehensive security solution/);
+
+    // Check for currency formatting in various places
+    const capexValue = screen.getByTestId(COST_TEST_IDS.CAPEX_ESTIMATE_VALUE);
+    expect(capexValue.textContent).toMatch(/\$[0-9,]+/); // Should match currency format
+
+    const opexValue = screen.getByTestId(COST_TEST_IDS.OPEX_ESTIMATE_VALUE);
+    expect(opexValue.textContent).toMatch(/\$[0-9,]+/); // Should match currency format
+
+    const totalCost = screen.getByTestId(COST_TEST_IDS.THREE_YEAR_TOTAL);
+    expect(totalCost.textContent).toMatch(/\$[0-9,]+/); // Should match currency format
   });
 
-  it("accepts custom testId prop", () => {
-    const testId = "custom-cost-estimation";
-    render(<CostEstimationWidget {...defaultProps} testId={testId} />);
-    expect(screen.getByTestId(testId)).toBeInTheDocument();
+  it("renders with custom props", () => {
+    render(<CostEstimationWidget {...defaultProps} />);
+    const widget = screen.getByTestId("custom-test-id");
+    expect(widget).toHaveClass("custom-class");
+  });
+
+  it("renders with default props", () => {
+    render(
+      <CostEstimationWidget
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
+    expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
   });
 });

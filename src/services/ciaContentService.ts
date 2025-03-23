@@ -22,6 +22,7 @@ import {
   confidentialityOptions,
   integrityOptions,
 } from "../data/security";
+import { BaseService } from "./BaseService";
 
 /**
  * Metrics for ROI assessment
@@ -184,21 +185,29 @@ function getSecurityScoreDescription(score: number): string {
  * across the CIA triad, providing consistent data and calculations for business
  * impact analysis, technical implementations, and compliance requirements. 🔒
  */
-export class CIAContentService {
-  private dataProvider: CIADataProvider;
+export class CIAContentService extends BaseService {
+  // Change from private to protected to match BaseService
+  protected dataProvider: CIADataProvider;
   private businessImpactService: BusinessImpactService;
-  private complianceService: ComplianceServiceAdapter; // Updated type
+  private complianceService: ComplianceServiceAdapter;
   private securityMetricsService: SecurityMetricsService;
   private technicalImplementationService: TechnicalImplementationService;
   private securityResourceService: SecurityResourceService;
 
   constructor(dataProvider?: CIADataProvider) {
-    this.dataProvider = dataProvider || {
+    // Create a default dataProvider if none is provided
+    const effectiveDataProvider = dataProvider || {
       availabilityOptions,
       integrityOptions,
       confidentialityOptions,
       roiEstimates: ROI_ESTIMATES,
     };
+
+    // Call super with the data provider
+    super(effectiveDataProvider);
+
+    // Store the data provider again due to the protected vs private visibility
+    this.dataProvider = effectiveDataProvider;
 
     // Initialize service instances
     this.businessImpactService = new BusinessImpactService(this.dataProvider);
@@ -210,6 +219,15 @@ export class CIAContentService {
     this.securityResourceService = new SecurityResourceService(
       this.dataProvider
     );
+  }
+
+  /**
+   * Initialize the service
+   * This is a placeholder for any async initialization that might be needed
+   */
+  public async initialize(): Promise<void> {
+    // Placeholder for future initialization logic
+    return Promise.resolve();
   }
 
   /**
@@ -629,6 +647,7 @@ export class CIAContentService {
       confidentiality
     );
 
+    // Access status properties correctly based on the type
     if (
       status.compliantFrameworks.length > 0 &&
       status.nonCompliantFrameworks.length === 0

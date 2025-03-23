@@ -1,5 +1,11 @@
 import { SecurityLevel } from "../types/cia";
-import { BusinessImpactDetail, BusinessImpactDetails, CIAComponentType, CIADataProvider, CIADetails } from "../types/cia-services";
+import {
+  BusinessImpactDetail,
+  BusinessImpactDetails,
+  CIAComponentType,
+  CIADataProvider,
+  CIADetails,
+} from "../types/cia-services";
 import { normalizeSecurityLevel } from "../utils/securityLevelUtils";
 
 /**
@@ -11,7 +17,7 @@ const CATEGORY_ICONS: Record<string, string> = {
   reputational: "🏆",
   strategic: "🎯",
   regulatory: "📜",
-  summary: "📊"
+  summary: "📊",
 };
 
 /**
@@ -44,9 +50,11 @@ export class BusinessImpactService {
   ): BusinessImpactDetails {
     const normalizedLevel = normalizeSecurityLevel(level);
     const options = this.getCIAOptions(component);
-    
+
     // Fix the type by adding a more specific return type for getCIAOptions
-    const componentDetails = options ? options[normalizedLevel] as CIADetails | undefined : undefined;
+    const componentDetails = options
+      ? (options[normalizedLevel] as CIADetails | undefined)
+      : undefined;
 
     // If we have detailed business impact details, use them
     if (componentDetails?.businessImpactDetails) {
@@ -59,7 +67,7 @@ export class BusinessImpactService {
 
   /**
    * Get impact category icon
-   * 
+   *
    * @param category - Impact category
    * @returns Emoji icon representing the category
    */
@@ -80,14 +88,19 @@ export class BusinessImpactService {
   ): string {
     const options = this.getCIAOptions(component);
     // Fix the type by adding a more specific return type for getCIAOptions
-    const componentDetails = options ? options[level] as CIADetails | undefined : undefined;
+    const componentDetails = options
+      ? (options[level] as CIADetails | undefined)
+      : undefined;
     // Use nullish coalescing for null/undefined handling
-    return componentDetails?.businessImpact ?? this.getDefaultBusinessImpactDescription(component, level);
+    return (
+      componentDetails?.businessImpact ??
+      this.getDefaultBusinessImpactDescription(component, level)
+    );
   }
 
   /**
    * Get detailed description of business impact
-   * 
+   *
    * @param category - Impact category
    * @param detail - Business impact detail
    * @returns Formatted detailed description
@@ -99,14 +112,14 @@ export class BusinessImpactService {
     if (!detail) {
       return `No ${category} impact details available`;
     }
-    
+
     const icon = this.getCategoryIcon(category);
     return this.formatImpactDetail(detail, category, icon);
   }
 
   /**
    * Format impact detail
-   * 
+   *
    * @param detail - Business impact detail
    * @param category - Impact category
    * @param icon - Category icon
@@ -117,20 +130,44 @@ export class BusinessImpactService {
     category: string,
     icon: string
   ): string {
-    let description = `${icon} **${this.capitalizeFirstLetter(category)} Impact**: ${detail.description}`;
-    
+    let description = `${icon} **${this.capitalizeFirstLetter(
+      category
+    )} Impact**: ${detail.description}`;
+
     if (detail.riskLevel) {
       description += `\n- Risk Level: ${detail.riskLevel}`;
     }
-    
-    if (category === 'financial' && detail.annualRevenueLoss) {
+
+    if (category === "financial" && detail.annualRevenueLoss) {
       description += `\n- Potential Revenue Loss: ${detail.annualRevenueLoss}`;
     }
-    
-    if (category === 'operational' && detail.meanTimeToRecover) {
+
+    if (category === "operational" && detail.meanTimeToRecover) {
       description += `\n- Mean Time to Recover: ${detail.meanTimeToRecover}`;
     }
-    
+
+    if (
+      category === "regulatory" &&
+      detail.complianceViolations &&
+      detail.complianceViolations.length > 0
+    ) {
+      description += `\n- Compliance Violations: ${detail.complianceViolations.join(
+        ", "
+      )}`;
+    }
+
+    if (category === "strategic" && detail.competitiveAdvantage) {
+      description += `\n- Competitive Advantage: ${detail.competitiveAdvantage}`;
+    }
+
+    if (detail.complianceImpact) {
+      description += `\n- Compliance Impact: ${detail.complianceImpact}`;
+    }
+
+    if (detail.reputationalImpact) {
+      description += `\n- Reputational Impact: ${detail.reputationalImpact}`;
+    }
+
     return description;
   }
 
@@ -156,19 +193,19 @@ export class BusinessImpactService {
       High: 3,
       "Very High": 4,
     };
-    
+
     // Find the minimum level value
     const minLevelValue = Math.min(
-      levelValues[availabilityLevel], 
-      levelValues[integrityLevel], 
+      levelValues[availabilityLevel],
+      levelValues[integrityLevel],
       levelValues[confidentialityLevel]
     );
-    
+
     // Map back to a SecurityLevel
     const minLevel = Object.keys(levelValues).find(
-      key => levelValues[key as SecurityLevel] === minLevelValue
+      (key) => levelValues[key as SecurityLevel] === minLevelValue
     ) as SecurityLevel;
-    
+
     // Calculate impact based on the minimum security level
     switch (minLevel) {
       case "None":
@@ -193,7 +230,10 @@ export class BusinessImpactService {
    * @param level - Security level
    * @returns Default business impact description
    */
-  private getDefaultBusinessImpactDescription(component: CIAComponentType, level: SecurityLevel): string {
+  private getDefaultBusinessImpactDescription(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): string {
     const impact = this.calculateBusinessImpactLevel(level);
     return `${impact} business impact due to ${level.toLowerCase()} ${component} security level`;
   }
@@ -205,26 +245,29 @@ export class BusinessImpactService {
    * @param level - Security level
    * @returns Default business impact details
    */
-  private createDefaultBusinessImpact(component: CIAComponentType, level: SecurityLevel): BusinessImpactDetails {
+  private createDefaultBusinessImpact(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): BusinessImpactDetails {
     const impact = this.calculateBusinessImpactLevel(level);
     const riskLevel = this.getRiskLevelForSecurityLevel(level);
-    
+
     return {
       summary: `${impact} impact for ${level} ${component}`,
       financial: {
         description: `${impact} financial impact due to ${level.toLowerCase()} ${component} controls`,
         riskLevel: `${impact} Risk`,
-        annualRevenueLoss: this.getDefaultRevenueLoss(level)
+        annualRevenueLoss: this.getDefaultRevenueLoss(level),
       },
       operational: {
         description: `${impact} operational impact due to ${level.toLowerCase()} ${component} controls`,
         riskLevel: `${impact} Risk`,
-        meanTimeToRecover: this.getDefaultRecoveryTime(level)
+        meanTimeToRecover: this.getDefaultRecoveryTime(level),
       },
       reputational: {
         description: `${impact} reputational impact due to ${level.toLowerCase()} ${component} controls`,
-        riskLevel: `${impact} Risk`
-      }
+        riskLevel: `${impact} Risk`,
+      },
     };
   }
 
@@ -327,11 +370,21 @@ export function createBusinessImpactService(
 }
 
 const impactMapping: Record<SecurityLevel, any> = {
-  None: { /* values */ },
-  Low: { /* values */ },
-  Moderate: { /* values */ },
-  High: { /* values */ },
-  "Very High": { /* values */ },
+  None: {
+    /* values */
+  },
+  Low: {
+    /* values */
+  },
+  Moderate: {
+    /* values */
+  },
+  High: {
+    /* values */
+  },
+  "Very High": {
+    /* values */
+  },
 };
 
 function getImpactForLevel(level: SecurityLevel): any {

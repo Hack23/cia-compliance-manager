@@ -1,80 +1,72 @@
-import { useMemo } from "react";
-import {
-  ComplianceStatusDetails,
-  createComplianceService,
-} from "../services/complianceService";
-import { ComplianceService } from "../services/ComplianceServiceAdapter";
-import { SecurityLevel } from "../types/cia";
+import { useEffect, useMemo, useState } from "react";
+import { ComplianceServiceAdapter } from "../services/ComplianceServiceAdapter";
+import { createEmptyCIADetails } from "../utils/serviceUtils";
 
 /**
- * Hook to access the compliance service
- *
- * ## Business Perspective
- *
- * This hook provides access to compliance mapping functionality,
- * helping organizations understand how their security controls
- * relate to regulatory frameworks and standards. 📋
- *
- * @returns The compliance service instance
+ * Hook to access compliance service functionality
  */
-export const useComplianceService = (): ComplianceService => {
-  // Create the base compliance service
-  const baseComplianceService = useMemo(() => createComplianceService(), []);
+export function useComplianceService() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
-  // Create a wrapper that implements the ComplianceService interface
   const complianceService = useMemo(() => {
-    return {
-      getComplianceFrameworks: () => [
-        {
-          id: "soc2",
-          name: "SOC 2",
-          description: "Service Organization Control 2",
-        },
-        {
-          id: "iso27001",
-          name: "ISO 27001",
-          description: "Information Security Management",
-        },
-        {
-          id: "pci-dss",
-          name: "PCI DSS",
-          description: "Payment Card Industry Data Security Standard",
-        },
-      ],
-      getFrameworkStatus: (
-        frameworkId: string,
-        availabilityLevel: SecurityLevel,
-        integrityLevel: SecurityLevel,
-        confidentialityLevel: SecurityLevel
-      ) => {
-        // Get the compliance status from the base service
-        const status = baseComplianceService.getFrameworkStatus(
-          frameworkId,
-          availabilityLevel,
-          integrityLevel,
-          confidentialityLevel
-        );
+    // Create default empty options that satisfy the type requirements
+    const emptySecurityLevelRecord = {
+      None: createEmptyCIADetails(),
+      Low: createEmptyCIADetails(),
+      Moderate: createEmptyCIADetails(),
+      High: createEmptyCIADetails(),
+      "Very High": createEmptyCIADetails(),
+    };
 
-        // Convert to FrameworkStatus format
-        return {
-          complianceLevel: status,
-          description: `Compliance status for ${frameworkId} is ${status}`,
-        };
+    // Create minimal valid data provider for the service
+    return new ComplianceServiceAdapter({
+      availabilityOptions: emptySecurityLevelRecord,
+      integrityOptions: emptySecurityLevelRecord,
+      confidentialityOptions: emptySecurityLevelRecord,
+      roiEstimates: {
+        NONE: { returnRate: "0%", description: "No ROI" },
+        LOW: { returnRate: "50%", description: "Low ROI" },
+        MODERATE: { returnRate: "150%", description: "Moderate ROI" },
+        HIGH: { returnRate: "300%", description: "High ROI" },
+        VERY_HIGH: { returnRate: "500%", description: "Very high ROI" },
       },
-      // Return the full ComplianceStatusDetails object
-      getComplianceStatus: (
-        availabilityLevel: SecurityLevel,
-        integrityLevel: SecurityLevel,
-        confidentialityLevel: SecurityLevel
-      ): ComplianceStatusDetails => {
-        return baseComplianceService.getComplianceStatus(
-          availabilityLevel,
-          integrityLevel,
-          confidentialityLevel
-        );
-      },
-    } as ComplianceService;
-  }, [baseComplianceService]);
+    });
+  }, []);
 
-  return complianceService;
-};
+  useEffect(() => {
+    let isMounted = true;
+
+    const initializeService = async () => {
+      try {
+        // Check if service exists first
+        if (complianceService) {
+          // No need to call initialize as it doesn't exist
+          if (isMounted) {
+            setIsLoading(false);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to initialize compliance service:", err);
+        if (isMounted) {
+          setError(err instanceof Error ? err : new Error("An error occurred"));
+          setIsLoading(false);
+        }
+      }
+    };
+
+    initializeService();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [complianceService]);
+
+  return {
+    isLoading,
+    complianceService,
+    error,
+  };
+}
+
+export default useComplianceService;

@@ -370,6 +370,10 @@ export const BUSINESS_IMPACT_TEST_IDS = {
   STRATEGIC_IMPACT_SECTION: "strategic-impact-section",
   BUSINESS_IMPACT_WIDGET: "business-impact-widget",
 
+  // Add the missing constants
+  IMPACT_HEATMAP: "business-impact-heatmap",
+  EXECUTIVE_SUMMARY: "business-impact-executive-summary",
+
   // Prefixes for dynamic IDs
   BUSINESS_IMPACT_ANALYSIS_PREFIX: "business-impact-analysis",
   CATEGORY_ICON_PREFIX: "category-icon",
@@ -398,6 +402,9 @@ export const BUSINESS_IMPACT_TEST_IDS = {
   OPERATIONAL_IMPACT_METRICS: "operational-impact-metrics",
   MEAN_RECOVERY_TIME: "mean-recovery-time",
   RECOVERY_TIME_KV: "recovery-time-kv",
+  // Add missing constants
+  REPUTATIONAL_IMPACT_CARD: "reputational-impact-card",
+  REGULATORY_IMPACT_CARD: "regulatory-impact-card",
 
   // Analysis widget specific IDs
   BUSINESS_IMPACT_ANALYSIS_WIDGET: "business-impact-analysis-widget",
@@ -603,6 +610,19 @@ export const SECURITY_SUMMARY_TEST_IDS = {
   AVAILABILITY_IMPACT: "availability-impact",
   INTEGRITY_IMPACT: "integrity-impact",
   CONFIDENTIALITY_IMPACT: "confidentiality-impact",
+  // Add missing test IDs
+  WIDGET: "security-summary-widget",
+  OVERALL_LEVEL: "overall-security-level",
+  SUMMARY_DESCRIPTION: "summary-description",
+  AVAILABILITY_CARD: "availability-card",
+  AVAILABILITY_LEVEL: "availability-level",
+  AVAILABILITY_RISK: "availability-risk",
+  INTEGRITY_CARD: "integrity-card",
+  INTEGRITY_LEVEL: "integrity-level",
+  INTEGRITY_RISK: "integrity-risk",
+  CONFIDENTIALITY_CARD: "confidentiality-card",
+  CONFIDENTIALITY_LEVEL: "confidentiality-level",
+  CONFIDENTIALITY_RISK: "confidentiality-risk",
 };
 
 // ---------------------------------------------------------------
@@ -611,7 +631,7 @@ export const SECURITY_SUMMARY_TEST_IDS = {
 
 export const VALUE_CREATION_TEST_IDS = {
   VALUE_CREATION_WIDGET: "value-creation-widget",
-  ROI_VALUE: "value-creation-widget-roi",
+  ROI_VALUE: "roi-value",
   RISK_REDUCTION: "risk-reduction",
   SECURITY_LEVEL: "security-level",
   AVAILABILITY_IMPACT: "availability-impact",
@@ -625,6 +645,15 @@ export const VALUE_CREATION_TEST_IDS = {
   TOTAL_COST: "total-cost",
   ROI_DESCRIPTION: "roi-description",
   VALUE_TITLE: "value-title",
+  // Add missing test ID
+  ROI_SECTION: "roi-section",
+  VALUE_BENEFITS: "value-benefits",
+  VALUE_METRIC: "value-metric",
+  SECURITY_SCORE: "security-score",
+  IMPACT_SUMMARY: "impact-summary",
+  ROI_PERCENTAGE: "roi-percentage",
+  POTENTIAL_SAVINGS: "potential-savings",
+  BREAKEVEN_PERIOD: "breakeven-period",
 };
 
 // ---------------------------------------------------------------
@@ -760,12 +789,37 @@ export const COMMON_TEST_IDS = {
 // ---------------------------------------------------------------
 
 export const COMPLIANCE_TEST_IDS = {
-  COMPLIANCE_STATUS_WIDGET: "compliance-status",
+  COMPLIANCE_STATUS_WIDGET: "compliance-status-widget",
   COMPLIANCE_STATUS_BADGE: "compliance-status-badge",
   COMPLIANCE_FRAMEWORK_ITEM: "compliance-framework-item",
   COMPLIANCE_REQUIREMENTS_LIST: "compliance-requirements-list",
   COMPLIANCE_FRAMEWORKS_CONTAINER: "compliance-frameworks-container",
+  COMPLIANT_FRAMEWORKS_LIST: "compliant-frameworks-list",
+  // Add missing test IDs
+  WIDGET: "compliance-status-widget", // Alias for backward compatibility
+  COMPLIANCE_ERROR: "compliance-error",
+  COMPLIANCE_LOADING: "compliance-loading",
+  COMPLIANCE_STATUS_SUMMARY: "compliance-status-summary",
+  COMPLIANCE_SCORE: "compliance-score",
+  COMPLIANCE_SCORE_BAR: "compliance-score-bar",
   FRAMEWORK_ITEM_PREFIX: "framework-item",
+  FRAMEWORK_STATUS: "framework-status",
+  PARTIALLY_COMPLIANT_FRAMEWORKS_LIST: "partially-compliant-frameworks-list",
+  NON_COMPLIANT_FRAMEWORKS_LIST: "non-compliant-frameworks-list",
+  FRAMEWORK_GAP_ANALYSIS: "framework-gap-analysis",
+  SELECTED_FRAMEWORK_STATUS: "selected-framework-status",
+  AVAILABILITY_REQUIREMENT: "availability-requirement",
+  AVAILABILITY_REQUIRED_LEVEL: "availability-required-level",
+  INTEGRITY_REQUIREMENT: "integrity-requirement",
+  INTEGRITY_REQUIRED_LEVEL: "integrity-required-level",
+  CONFIDENTIALITY_REQUIREMENT: "confidentiality-requirement",
+  CONFIDENTIALITY_REQUIRED_LEVEL: "confidentiality-required-level",
+  COMPLIANCE_GAPS_LIST: "compliance-gaps-list",
+  COMPLIANCE_GAP_ITEM: "compliance-gap-item",
+  COMPLIANCE_RECOMMENDATIONS_LIST: "compliance-recommendations-list",
+  COMPLIANCE_RECOMMENDATION_ITEM: "compliance-recommendation-item",
+  NO_GAP_ANALYSIS: "no-gap-analysis",
+  COMPLIANCE_TIPS_LIST: "compliance-tips-list",
 };
 
 // ---------------------------------------------------------------

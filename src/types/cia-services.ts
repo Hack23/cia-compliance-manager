@@ -49,13 +49,45 @@ export interface ImpactCategoryDetails {
  * Business impact detail for specific impact categories
  */
 export interface BusinessImpactDetail {
+  /**
+   * Description of the impact
+   */
   description: string;
+
+  /**
+   * Risk level associated with this impact
+   */
   riskLevel: string;
+
+  /**
+   * Annual revenue loss estimate
+   */
   annualRevenueLoss?: string;
+
+  /**
+   * Mean time to recover from incidents
+   */
   meanTimeToRecover?: string;
+
+  /**
+   * List of potential compliance violations
+   */
   complianceViolations?: string[];
+
+  /**
+   * Competitive advantage implications
+   */
   competitiveAdvantage?: string;
+
+  /**
+   * Compliance impact description
+   */
   complianceImpact?: string;
+
+  /**
+   * Reputational impact description
+   */
+  reputationalImpact?: string;
 }
 
 /**
@@ -224,6 +256,10 @@ export interface CIADetails {
   // Implementation guidance
   codeExamples?: CodeExample[];
   technicalImplementation?: TechnicalImplementationDetails;
+
+  // Add missing properties
+  expertise?: string;
+  timeframe?: string;
 }
 
 /**
@@ -259,6 +295,12 @@ export interface CIADataProvider {
    * Get default value points for a security level
    */
   getDefaultValuePoints?: (level: SecurityLevel) => string[];
+
+  /**
+   * Get value points for a security level
+   * @deprecated Use getDefaultValuePoints instead
+   */
+  getValuePoints?: (level: SecurityLevel) => string[];
 }
 
 // Types used by CIA service modules

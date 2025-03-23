@@ -7,7 +7,6 @@ import {
   calculateOverallSecurityLevel,
   getSecurityLevelValue,
 } from "../../../utils/securityLevelUtils";
-import ProgressBar from "../../common/ProgressBar";
 import WidgetContainer from "../../common/WidgetContainer";
 
 /**
@@ -174,91 +173,186 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         {/* Implementation Time */}
         <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
           <h3 className="text-lg font-medium">Estimated Implementation Time</h3>
-          <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">
-            {formatImplementationTime(implementationTime)}
+          <div className="flex items-center mt-2">
+            <span className="text-3xl text-blue-600 dark:text-blue-400 mr-3">
+              ⏱️
+            </span>
+            <div>
+              <p
+                className="text-xl font-bold text-blue-800 dark:text-blue-300"
+                data-testid={COST_TEST_IDS.IMPLEMENTATION_TIME}
+              >
+                {formatImplementationTime(implementationTime)}
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                From project kickoff to full implementation
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* CAPEX - Capital Expenditure */}
+        {/* CAPEX Section */}
         <div className="mb-6" data-testid={COST_TEST_IDS.CAPEX_SECTION}>
-          <h3 className="text-md font-medium mb-2">
-            Implementation Cost (CAPEX)
+          <h3 className="text-lg font-medium mb-2">
+            Implementation Costs (CAPEX)
           </h3>
-          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-            <div
-              className="text-xl font-bold mb-2"
-              data-testid={COST_TEST_IDS.CAPEX_ESTIMATE_VALUE}
-            >
-              {formatCurrency(capexEstimate)}
+          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="flex justify-between items-center mb-2">
+              <div className="flex items-center">
+                <span
+                  className="text-2xl mr-2 text-orange-500"
+                  data-testid={COST_TEST_IDS.CAPEX_SEVERITY_ICON}
+                >
+                  {capexEstimate > 40
+                    ? "💰💰💰"
+                    : capexEstimate > 20
+                    ? "💰💰"
+                    : "💰"}
+                </span>
+                <span className="font-medium">One-time Investment</span>
+              </div>
+              <span
+                className="text-xl font-bold text-orange-600 dark:text-orange-400"
+                data-testid={COST_TEST_IDS.CAPEX_ESTIMATE_VALUE}
+              >
+                {formatCurrency(capexEstimate)}
+              </span>
             </div>
-            <ProgressBar
-              percentage={capexPercentage}
-              bgColorClass="bg-blue-500"
-              testId={COST_TEST_IDS.CAPEX_PROGRESS_BAR}
-            />
-            <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              One-time implementation cost
+            <div className="mt-3">
+              <div className="relative pt-1">
+                <div className="flex mb-2 items-center justify-between">
+                  <div>
+                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-orange-600 bg-orange-200 dark:text-orange-200 dark:bg-orange-800">
+                      Implementation Cost
+                    </span>
+                  </div>
+                  <div className="text-right">
+                    <span
+                      className="text-xs font-semibold inline-block text-orange-600 dark:text-orange-400"
+                      data-testid={COST_TEST_IDS.CAPEX_PERCENTAGE}
+                    >
+                      {Math.round(capexPercentage)}%
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-orange-200 dark:bg-orange-900"
+                  data-testid={COST_TEST_IDS.CAPEX_PROGRESS_BAR}
+                >
+                  <div
+                    style={{ width: `${capexPercentage}%` }}
+                    className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500 dark:bg-orange-600"
+                  ></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* OPEX - Operational Expenditure */}
+        {/* OPEX Section */}
         <div className="mb-6" data-testid={COST_TEST_IDS.OPEX_SECTION}>
-          <h3 className="text-md font-medium mb-2">Maintenance Cost (OPEX)</h3>
-          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-            <div
-              className="text-xl font-bold mb-2"
-              data-testid={COST_TEST_IDS.OPEX_ESTIMATE_VALUE}
-            >
-              {formatCurrency(opexEstimate)} / month
+          <h3 className="text-lg font-medium mb-2">
+            Ongoing Maintenance (OPEX)
+          </h3>
+          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="flex justify-between items-center mb-2">
+              <div className="flex items-center">
+                <span
+                  className="text-2xl mr-2 text-blue-500"
+                  data-testid={COST_TEST_IDS.OPEX_SEVERITY_ICON}
+                >
+                  {opexEstimate > 20
+                    ? "⚙️⚙️⚙️"
+                    : opexEstimate > 10
+                    ? "⚙️⚙️"
+                    : "⚙️"}
+                </span>
+                <span className="font-medium">Monthly Maintenance</span>
+              </div>
+              <span
+                className="text-xl font-bold text-blue-600 dark:text-blue-400"
+                data-testid={COST_TEST_IDS.OPEX_ESTIMATE_VALUE}
+              >
+                {formatCurrency(opexEstimate / 12)}{" "}
+                <span className="text-sm font-normal">/ month</span>
+              </span>
             </div>
-            <ProgressBar
-              percentage={opexPercentage}
-              bgColorClass="bg-green-500"
-              testId={COST_TEST_IDS.OPEX_PROGRESS_BAR}
-            />
             <div
-              className="text-sm text-gray-600 dark:text-gray-400 mt-1"
+              className="text-sm text-gray-600 dark:text-gray-400 text-right mb-2"
               data-testid={COST_TEST_IDS.MONTHLY_OPEX}
             >
-              Monthly operational costs
+              ({formatCurrency(opexEstimate)} annually)
+            </div>
+            <div className="mt-3">
+              <div className="relative pt-1">
+                <div className="flex mb-2 items-center justify-between">
+                  <div>
+                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200 dark:text-blue-200 dark:bg-blue-800">
+                      Maintenance Cost
+                    </span>
+                  </div>
+                  <div className="text-right">
+                    <span
+                      className="text-xs font-semibold inline-block text-blue-600 dark:text-blue-400"
+                      data-testid={COST_TEST_IDS.OPEX_PERCENTAGE}
+                    >
+                      {Math.round(opexPercentage)}%
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200 dark:bg-blue-900"
+                  data-testid={COST_TEST_IDS.OPEX_PROGRESS_BAR}
+                >
+                  <div
+                    style={{ width: `${opexPercentage}%` }}
+                    className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 dark:bg-blue-600"
+                  ></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Total Cost */}
+        {/* Total Cost Section */}
         <div className="mb-6" data-testid={COST_TEST_IDS.TOTAL_COST_SUMMARY}>
-          <h3 className="text-md font-medium mb-2">Total 3-Year Cost</h3>
-          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-            <div
-              className="text-xl font-bold"
-              data-testid={COST_TEST_IDS.TOTAL_COST}
-            >
-              {formatCurrency(totalCost)}
+          <h3 className="text-lg font-medium mb-2">Total Cost of Ownership</h3>
+          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="flex justify-between items-center">
+              <span className="font-medium">3-Year Total Cost</span>
+              <span
+                className="text-xl font-bold text-purple-600 dark:text-purple-400"
+                data-testid={COST_TEST_IDS.THREE_YEAR_TOTAL}
+              >
+                {formatCurrency(totalCost)}
+              </span>
             </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              Implementation + 3 years maintenance
+            <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              <p>Includes implementation and 3 years of maintenance costs</p>
             </div>
           </div>
         </div>
 
-        {/* ROI Estimate */}
+        {/* ROI Section */}
         <div
           className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
           data-testid={COST_TEST_IDS.ROI_SECTION}
         >
-          <h3 className="text-md font-medium mb-2">Return on Investment</h3>
-          <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
-            <div
-              className="text-lg font-bold text-blue-700 dark:text-blue-300"
+          <h3 className="text-lg font-medium mb-2">Return on Investment</h3>
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-gray-700 dark:text-gray-300">
+              Estimated ROI:
+            </span>
+            <span
+              className="font-bold text-green-600 dark:text-green-400"
               data-testid={COST_TEST_IDS.ROI_ESTIMATE}
             >
               {roiEstimate.returnRate}
-            </div>
-            <div className="text-sm text-blue-600 dark:text-blue-400 mt-1">
-              {roiEstimate.description}
-            </div>
+            </span>
           </div>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            {roiEstimate.description}
+          </p>
         </div>
       </div>
     </WidgetContainer>

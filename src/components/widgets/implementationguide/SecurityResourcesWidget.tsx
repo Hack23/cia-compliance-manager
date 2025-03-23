@@ -1,11 +1,9 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { RESOURCE_TEST_IDS } from "../../../constants/testIds";
-import {
-  SecurityResource,
-  useSecurityResources,
-} from "../../../hooks/useSecurityResources";
+import { useSecurityResources } from "../../../hooks/useSecurityResources";
 import { SecurityLevel } from "../../../types/cia";
+import { SecurityResource } from "../../../types/securityResources";
 import WidgetContainer from "../../common/WidgetContainer";
 
 /**
@@ -57,9 +55,9 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 }) => {
   // Get security resources based on levels
   const { resources, isLoading, error } = useSecurityResources({
-    availabilityLevel,
-    integrityLevel,
-    confidentialityLevel,
+    component: "all", // Use a valid component value
+    securityLevel: availabilityLevel,
+    searchQuery: "",
   });
 
   // State for active filter

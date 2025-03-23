@@ -15,11 +15,11 @@ export const SECURITY_LEVEL_COLORS: Record<
   SecurityLevel,
   SecurityLevelColorPair
 > = {
-  None: { bg: "#f5f5f5", text: "#a0a0a0" },
-  Low: { bg: "#e3f2fd", text: "#1976d2" },
-  Moderate: { bg: "#e8f5e9", text: "#2e7d32" },
-  High: { bg: "#fff8e1", text: "#ff8f00" },
-  "Very High": { bg: "#fbe9e7", text: "#d84315" },
+  None: { bg: "#e74c3c", text: "#ff3b3b" }, // Red
+  Low: { bg: "#e67e22", text: "#ff9500" }, // Orange/Yellow
+  Moderate: { bg: "#f1c40f", text: "#ffcc00" }, // Yellow/Blue
+  High: { bg: "#27ae60", text: "#00e676" }, // Green
+  "Very High": { bg: "#3498db", text: "#00ccff" }, // Blue/Purple
 };
 
 /**
@@ -27,19 +27,19 @@ export const SECURITY_LEVEL_COLORS: Record<
  */
 export const CIA_COMPONENT_COLORS = {
   CONFIDENTIALITY: {
-    PRIMARY: "#9c27b0", // Purple
+    PRIMARY: "#8e44ad", // Purple
     SECONDARY: "#e1bee7", // Light purple
-    DARK: "#7b1fa2", // Dark purple
+    DARK: "#a742ff", // Dark purple
   },
   INTEGRITY: {
     PRIMARY: "#27ae60", // Green
     SECONDARY: "#d4efdf", // Light green
-    DARK: "#2ecc71", // Vibrant green
+    DARK: "#00e676", // Vibrant green
   },
   AVAILABILITY: {
-    PRIMARY: "#2196f3", // Blue
+    PRIMARY: "#2980b9", // Blue
     SECONDARY: "#bbdefb", // Light blue
-    DARK: "#1976d2", // Dark blue
+    DARK: "#00ccff", // Dark blue
   },
 };
 

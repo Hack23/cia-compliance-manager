@@ -1,5 +1,7 @@
 import { vi } from "vitest";
-import { createTestDataProvider } from "../../data/testDataProvider";
+import { CIADataProvider } from "../../types/cia-services";
+// Import the function with a different name to avoid conflict
+import { createTestDataProvider as importedCreateTestDataProvider } from "../../data/testDataProvider";
 import { BusinessImpactService } from "../../services/businessImpactService";
 import { CIAContentService } from "../../services/ciaContentService";
 import { ComplianceService } from "../../services/complianceService";
@@ -7,6 +9,14 @@ import { SecurityMetricsService } from "../../services/securityMetricsService";
 import { SecurityResourceService } from "../../services/securityResourceService";
 import { TechnicalImplementationService } from "../../services/technicalImplementationService";
 import { SecurityLevel } from "../../types/cia";
+
+/**
+ * Create a test data provider with minimal required properties
+ */
+export function createTestDataProvider(): CIADataProvider {
+  // Use the imported function instead of redefining
+  return importedCreateTestDataProvider();
+}
 
 /**
  * Creates a test BusinessImpactService for unit testing

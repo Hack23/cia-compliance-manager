@@ -1,458 +1,472 @@
 import { SecurityLevel } from "../types/cia";
 import {
-    CIADataProvider,
-    CIADetails,
-    ROIEstimatesMap,
+  CIADataProvider,
+  CIADetails,
+  ROIEstimatesMap,
 } from "../types/cia-services";
-import { getSecurityLevelColorPair } from "../utils/colorUtils";
+import {
+  availabilityOptions,
+  confidentialityOptions,
+  integrityOptions,
+} from "./ciaOptionsData";
 
 /**
- * Create a test data provider for unit testing
- *
- * This function creates a minimal test data provider with simplified mock data
- * that can be used in unit tests without requiring the full data set.
- *
- * @returns A test implementation of CIADataProvider
+ * Create a test data provider for testing
+ * This provides minimum viable data for unit testing
  */
 export function createTestDataProvider(): CIADataProvider {
-  // Create minimal test data for all security levels
-  const securityLevels: SecurityLevel[] = [
-    "None",
-    "Low",
-    "Moderate",
-    "High",
-    "Very High",
+  // Create a minimal data provider with required properties
+  const dataProvider: CIADataProvider = {
+    availabilityOptions: enhanceAvailabilityOptions(availabilityOptions),
+    integrityOptions: enhanceIntegrityOptions(integrityOptions),
+    confidentialityOptions: enhanceConfidentialityOptions(
+      confidentialityOptions
+    ),
+    roiEstimates: createTestROIEstimates(),
+
+    // Add required functions
+    getDefaultSecurityIcon: getDefaultSecurityIcon,
+    getDefaultValuePoints: getDefaultValuePoints,
+    getDefaultExpertiseLevel: getDefaultExpertiseLevel,
+    getProtectionLevel: getProtectionLevel,
+  };
+
+  return dataProvider;
+}
+
+/**
+ * Default implementation of security icon getter for tests
+ */
+function getDefaultSecurityIcon(level: SecurityLevel): string {
+  const icons: Record<SecurityLevel, string> = {
+    None: "⚠️",
+    Low: "🔑",
+    Moderate: "🔓",
+    High: "🔒",
+    "Very High": "🔐",
+  };
+  return icons[level] || "❓";
+}
+
+/**
+ * Default implementation of value points getter for tests
+ */
+function getDefaultValuePoints(level: SecurityLevel): string[] {
+  if (level === "None") {
+    return ["No security controls", "Maximum risk exposure"];
+  }
+
+  const basePoints = [
+    `Provides ${level.toLowerCase()} level of protection`,
+    `Meets ${
+      level === "High" || level === "Very High" ? "advanced" : "basic"
+    } security requirements`,
   ];
 
-  // Create test availability options with minimal required properties
-  const availabilityOptions = securityLevels.reduce((acc, level) => {
-    acc[level] = {
-      description: `${level} availability description`,
-      technical: `${level} availability technical details`,
-      businessImpact: `${level} availability business impact`,
-      capex: getCapexForLevel(level),
-      opex: getOpexForLevel(level),
-      bg: getSecurityLevelColorPair(level).bg,
-      text: getSecurityLevelColorPair(level).text,
-      recommendations: [
-        `${level} availability recommendation 1`,
-        `${level} availability recommendation 2`,
-      ],
-      uptime: getUptimeForLevel(level),
-      rto: getRtoForLevel(level),
-      rpo: getRpoForLevel(level),
-      mttr: getMttrForLevel(level),
+  return basePoints;
+}
+
+/**
+ * Default implementation of expertise level getter for tests
+ */
+function getDefaultExpertiseLevel(level: SecurityLevel): string {
+  const expertise: Record<SecurityLevel, string> = {
+    None: "No expertise required",
+    Low: "Basic IT knowledge",
+    Moderate: "Security professional",
+    High: "Senior security specialist",
+    "Very High": "Security architect/expert",
+  };
+  return expertise[level] || "Unknown";
+}
+
+/**
+ * Default implementation of protection level getter for tests
+ */
+function getProtectionLevel(level: SecurityLevel): string {
+  const protection: Record<SecurityLevel, string> = {
+    None: "No protection",
+    Low: "Basic protection",
+    Moderate: "Standard protection",
+    High: "Advanced protection",
+    "Very High": "Maximum protection",
+  };
+  return protection[level] || "Unknown";
+}
+
+/**
+ * Enhance availability options with required test properties
+ */
+function enhanceAvailabilityOptions(
+  options: Record<SecurityLevel, CIADetails>
+): Record<SecurityLevel, CIADetails> {
+  const result: Record<SecurityLevel, CIADetails> = { ...options };
+
+  // Add required properties to each security level
+  Object.keys(result).forEach((level) => {
+    const securityLevel = level as SecurityLevel;
+    // Add availability-specific metrics
+    result[securityLevel] = {
+      ...result[securityLevel],
+      uptime: getUptimeForLevel(securityLevel),
+      rto: getRtoForLevel(securityLevel),
+      rpo: getRpoForLevel(securityLevel),
+      mttr: getMttrForLevel(securityLevel),
+      // Add business impact details
       businessImpactDetails: {
-        financialImpact: {
-          description: `${level} financial impact`,
-          riskLevel: getRiskLevelFromSecurityLevel(level),
-          annualRevenueLoss: getRevenueImpactForLevel(level),
+        summary: `Business impact summary for ${securityLevel} availability`,
+        financial: {
+          description: `Financial impact for ${securityLevel} availability`,
+          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
         },
-        operationalImpact: {
-          description: `${level} operational impact`,
-          riskLevel: getRiskLevelFromSecurityLevel(level),
-          meanTimeToRecover: getMttrForLevel(level),
+        operational: {
+          description: `Operational impact for ${securityLevel} availability`,
+          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
+        },
+        reputational: {
+          description: `Reputational impact for ${securityLevel} availability`,
+          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
         },
       },
-      securityIcon: getSecurityIconForLevel(level),
-      valuePoints: [`${level} value point 1`, `${level} value point 2`],
+      // Add technical implementation details
       technicalImplementation: {
-        description: `${level} availability implementation`,
+        description: `Technical implementation for ${securityLevel} availability`,
         implementationSteps: [
-          `${level} availability step 1`,
-          `${level} availability step 2`,
+          `Step 1 for ${securityLevel} availability`,
+          `Step 2 for ${securityLevel} availability`,
         ],
         effort: {
-          development: `${level} development effort`,
-          maintenance: `${level} maintenance effort`,
-          expertise: `${level} expertise required`,
+          development: getDevelopmentEffortForLevel(securityLevel),
+          maintenance: getMaintenanceEffortForLevel(securityLevel),
+          expertise: getExpertiseForLevel(securityLevel),
         },
+        recoveryMethod: `Recovery method for ${securityLevel} availability`,
       },
-    } as CIADetails; // Use explicit type cast to CIADetails
-    return acc;
-  }, {} as Record<SecurityLevel, CIADetails>);
+    };
+  });
 
-  // Create test integrity options with minimal required properties
-  const integrityOptions = securityLevels.reduce((acc, level) => {
-    acc[level] = {
-      description: `${level} integrity description`,
-      technical: `${level} integrity technical details`,
-      businessImpact: `${level} integrity business impact`,
-      capex: getCapexForLevel(level),
-      opex: getOpexForLevel(level),
-      bg: getSecurityLevelColorPair(level).bg,
-      text: getSecurityLevelColorPair(level).text,
-      recommendations: [
-        `${level} integrity recommendation 1`,
-        `${level} integrity recommendation 2`,
-      ],
-      validationMethod: getValidationMethodForLevel(level),
+  return result;
+}
+
+/**
+ * Enhance integrity options with required test properties
+ */
+function enhanceIntegrityOptions(
+  options: Record<SecurityLevel, CIADetails>
+): Record<SecurityLevel, CIADetails> {
+  const result: Record<SecurityLevel, CIADetails> = { ...options };
+
+  // Add required properties to each security level
+  Object.keys(result).forEach((level) => {
+    const securityLevel = level as SecurityLevel;
+    // Add integrity-specific properties
+    result[securityLevel] = {
+      ...result[securityLevel],
+      validationMethod: getValidationMethodForLevel(securityLevel),
+      // Add business impact details
       businessImpactDetails: {
-        financialImpact: {
-          description: `${level} financial impact`,
-          riskLevel: getRiskLevelFromSecurityLevel(level),
+        summary: `Business impact summary for ${securityLevel} integrity`,
+        financial: {
+          description: `Financial impact for ${securityLevel} integrity`,
+          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
         },
-        operationalImpact: {
-          description: `${level} operational impact`,
-          riskLevel: getRiskLevelFromSecurityLevel(level),
+        operational: {
+          description: `Operational impact for ${securityLevel} integrity`,
+          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
+        },
+        reputational: {
+          description: `Reputational impact for ${securityLevel} integrity`,
+          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
         },
       },
-      securityIcon: getSecurityIconForLevel(level),
-      valuePoints: [`${level} value point 1`, `${level} value point 2`],
+      // Add technical implementation details
       technicalImplementation: {
-        description: `${level} integrity implementation`,
+        description: `Technical implementation for ${securityLevel} integrity`,
         implementationSteps: [
-          `${level} integrity step 1`,
-          `${level} integrity step 2`,
+          `Step 1 for ${securityLevel} integrity`,
+          `Step 2 for ${securityLevel} integrity`,
         ],
         effort: {
-          development: `${level} development effort`,
-          maintenance: `${level} maintenance effort`,
-          expertise: `${level} expertise required`,
+          development: getDevelopmentEffortForLevel(securityLevel),
+          maintenance: getMaintenanceEffortForLevel(securityLevel),
+          expertise: getExpertiseForLevel(securityLevel),
         },
+        validationMethod: getValidationMethodForLevel(securityLevel),
       },
-    } as CIADetails; // Use explicit type cast to CIADetails
-    return acc;
-  }, {} as Record<SecurityLevel, CIADetails>);
+    };
+  });
 
-  // Create test confidentiality options with minimal required properties
-  const confidentialityOptions = securityLevels.reduce((acc, level) => {
-    acc[level] = {
-      description: `${level} confidentiality description`,
-      technical: `${level} confidentiality technical details`,
-      businessImpact: `${level} confidentiality business impact`,
-      capex: getCapexForLevel(level),
-      opex: getOpexForLevel(level),
-      bg: getSecurityLevelColorPair(level).bg,
-      text: getSecurityLevelColorPair(level).text,
-      recommendations: [
-        `${level} confidentiality recommendation 1`,
-        `${level} confidentiality recommendation 2`,
-      ],
-      protectionMethod: getProtectionMethodForLevel(level),
+  return result;
+}
+
+/**
+ * Enhance confidentiality options with required test properties
+ */
+function enhanceConfidentialityOptions(
+  options: Record<SecurityLevel, CIADetails>
+): Record<SecurityLevel, CIADetails> {
+  const result: Record<SecurityLevel, CIADetails> = { ...options };
+
+  // Add required properties to each security level
+  Object.keys(result).forEach((level) => {
+    const securityLevel = level as SecurityLevel;
+    // Add confidentiality-specific properties
+    result[securityLevel] = {
+      ...result[securityLevel],
+      protectionMethod: getProtectionMethodForLevel(securityLevel),
+      // Add business impact details
       businessImpactDetails: {
-        reputationalImpact: {
-          description: `${level} reputational impact`,
-          riskLevel: getRiskLevelFromSecurityLevel(level),
+        summary: `Business impact summary for ${securityLevel} confidentiality`,
+        financial: {
+          description: `Financial impact for ${securityLevel} confidentiality`,
+          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
         },
-        regulatory: {
-          description: `${level} regulatory impact`,
-          riskLevel: getRiskLevelFromSecurityLevel(level),
-          complianceViolations: level === "None" ? ["GDPR", "HIPAA"] : [],
+        operational: {
+          description: `Operational impact for ${securityLevel} confidentiality`,
+          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
+        },
+        reputational: {
+          description: `Reputational impact for ${securityLevel} confidentiality`,
+          riskLevel: getRiskLevelForSecurityLevel(securityLevel),
+          reputationalImpact: `Reputational impact details for ${securityLevel} confidentiality`,
         },
       },
-      securityIcon: getSecurityIconForLevel(level),
-      valuePoints: [`${level} value point 1`, `${level} value point 2`],
+      // Add technical implementation details
       technicalImplementation: {
-        description: `${level} confidentiality implementation`,
+        description: `Technical implementation for ${securityLevel} confidentiality`,
         implementationSteps: [
-          `${level} confidentiality step 1`,
-          `${level} confidentiality step 2`,
+          `Step 1 for ${securityLevel} confidentiality`,
+          `Step 2 for ${securityLevel} confidentiality`,
         ],
         effort: {
-          development: `${level} development effort`,
-          maintenance: `${level} maintenance effort`,
-          expertise: `${level} expertise required`,
+          development: getDevelopmentEffortForLevel(securityLevel),
+          maintenance: getMaintenanceEffortForLevel(securityLevel),
+          expertise: getExpertiseForLevel(securityLevel),
         },
+        protectionMethod: getProtectionMethodForLevel(securityLevel),
       },
-    } as CIADetails; // Use explicit type cast to CIADetails
-    return acc;
-  }, {} as Record<SecurityLevel, CIADetails>);
+    };
+  });
 
-  // Fix ROI estimates to include returnRate property
-  const roiEstimates: ROIEstimatesMap = {
+  return result;
+}
+
+/**
+ * Create test ROI estimates with required properties
+ */
+function createTestROIEstimates(): ROIEstimatesMap {
+  return {
     NONE: {
       returnRate: "0%",
+      description: "No ROI without security investment",
       value: "0%",
-      description: "No return on investment",
-      potentialSavings: "None",
+      potentialSavings: "$0",
       breakEvenPeriod: "N/A",
     },
     LOW: {
-      returnRate: "50%",
-      value: "50%",
-      description: "Low return on investment",
-      potentialSavings: "$5,000 annually",
-      breakEvenPeriod: "18 months",
+      returnRate: "50-100%",
+      description:
+        "Basic security measures provide minimal protection with moderate return",
+      value: "50-100%",
+      potentialSavings: "$5K-$10K annually",
+      breakEvenPeriod: "12-18 months",
     },
     MODERATE: {
-      returnRate: "150%",
-      value: "150%",
-      description: "Moderate return on investment",
-      potentialSavings: "$15,000 annually",
-      breakEvenPeriod: "12 months",
+      returnRate: "150-200%",
+      description:
+        "Standard security measures provide good protection with solid return",
+      value: "150-200%",
+      potentialSavings: "$10K-$50K annually",
+      breakEvenPeriod: "9-12 months",
     },
     HIGH: {
-      returnRate: "300%",
-      value: "300%",
-      description: "High return on investment",
-      potentialSavings: "$30,000 annually",
-      breakEvenPeriod: "6 months",
+      returnRate: "250-350%",
+      description:
+        "Advanced security measures provide strong protection with excellent return",
+      value: "250-350%",
+      potentialSavings: "$50K-$100K annually",
+      breakEvenPeriod: "6-9 months",
     },
     VERY_HIGH: {
-      returnRate: "500%",
-      value: "500%",
-      description: "Maximum return on investment",
-      potentialSavings: "$50,000 annually",
-      breakEvenPeriod: "3 months",
+      returnRate: "400-500%",
+      description:
+        "Maximum security measures provide comprehensive protection with highest return",
+      value: "400-500%",
+      potentialSavings: "$100K+ annually",
+      breakEvenPeriod: "3-6 months",
     },
   };
-
-  // Make sure these optional functions are defined with proper return types
-  const getDefaultSecurityIcon = (level: SecurityLevel): string => {
-    switch (level) {
-      case "None":
-        return "⚠️";
-      case "Low":
-        return "🔑";
-      case "Moderate":
-        return "🔓";
-      case "High":
-        return "🔒";
-      case "Very High":
-        return "🔐";
-      default:
-        return "❓"; // Default case returns a fallback value
-    }
-  };
-
-  const getDefaultValuePoints = (level: SecurityLevel): string[] => {
-    switch (level) {
-      case "None":
-        return [
-          "No security value",
-          "Maximum exposure to security risks",
-          "Non-compliance with regulatory requirements",
-          "High risk of business disruption",
-        ];
-      case "Low":
-        return [
-          "Basic security value",
-          "Minimal protection against common threats",
-          "Some risk reduction for non-critical systems",
-          "First steps toward regulatory compliance",
-        ];
-      case "Moderate":
-        return [
-          "Standard security value",
-          "Balanced protection for most business operations",
-          "Meets basic requirements for many regulatory frameworks",
-          "Reasonable risk management for business continuity",
-        ];
-      case "High":
-        return [
-          "High value point 1",
-          "High value point 2",
-          "Strong security value with robust protection",
-          "Significant risk reduction with measurable business value",
-        ];
-      case "Very High":
-        return [
-          "Very high value point 1",
-          "Very high value point 2",
-          "Maximum security value with comprehensive protection",
-          "Strategic enabler for high-value and high-risk business activities",
-        ];
-      default:
-        return ["Unknown value"]; // Default case returns a fallback value
-    }
-  };
-
-  return {
-    availabilityOptions,
-    integrityOptions,
-    confidentialityOptions,
-    roiEstimates,
-    getDefaultSecurityIcon,
-    getDefaultValuePoints,
-  };
 }
 
-// Helper functions to generate appropriate test values
-
-function getCapexForLevel(level: SecurityLevel): number {
-  switch (level) {
-    case "None":
-      return 0;
-    case "Low":
-      return 5;
-    case "Moderate":
-      return 15;
-    case "High":
-      return 30;
-    case "Very High":
-      return 60;
-    default:
-      return 0; // Default case returns a fallback value
-  }
-}
-
-function getOpexForLevel(level: SecurityLevel): number {
-  switch (level) {
-    case "None":
-      return 0;
-    case "Low":
-      return 3;
-    case "Moderate":
-      return 10;
-    case "High":
-      return 20;
-    case "Very High":
-      return 40;
-    default:
-      return 0; // Default case returns a fallback value
-  }
-}
-
+/**
+ * Helper function to get uptime for a security level
+ */
 function getUptimeForLevel(level: SecurityLevel): string {
-  switch (level) {
-    case "None":
-      return "<90%";
-    case "Low":
-      return "95%";
-    case "Moderate":
-      return "99%";
-    case "High":
-      return "99.9%";
-    case "Very High":
-      return "99.99%";
-    default:
-      return "Unknown"; // Default case returns a fallback value
-  }
+  const uptimes: Record<SecurityLevel, string> = {
+    None: "<90%",
+    Low: "95%",
+    Moderate: "99%",
+    High: "99.9%",
+    "Very High": "99.999%",
+  };
+  return uptimes[level] || "Unknown";
 }
 
+/**
+ * Helper function to get RTO for a security level
+ */
 function getRtoForLevel(level: SecurityLevel): string {
-  switch (level) {
-    case "None":
-      return "Unpredictable";
-    case "Low":
-      return "24-48 hours";
-    case "Moderate":
-      return "4-8 hours";
-    case "High":
-      return "15-60 minutes";
-    case "Very High":
-      return "<5 minutes";
-    default:
-      return "Unknown"; // Default case returns a fallback value
-  }
+  const rtos: Record<SecurityLevel, string> = {
+    None: "Days",
+    Low: "24 hours",
+    Moderate: "4 hours",
+    High: "1 hour",
+    "Very High": "15 minutes",
+  };
+  return rtos[level] || "Unknown";
 }
 
+/**
+ * Helper function to get RPO for a security level
+ */
 function getRpoForLevel(level: SecurityLevel): string {
-  switch (level) {
-    case "None":
-      return "Unpredictable";
-    case "Low":
-      return "24 hours";
-    case "Moderate":
-      return "4 hours";
-    case "High":
-      return "15 minutes";
-    case "Very High":
-      return "<1 minute";
-    default:
-      return "Unknown"; // Default case returns a fallback value
-  }
+  const rpos: Record<SecurityLevel, string> = {
+    None: "No backup",
+    Low: "24 hours",
+    Moderate: "4 hours",
+    High: "1 hour",
+    "Very High": "Near-zero",
+  };
+  return rpos[level] || "Unknown";
 }
 
+/**
+ * Helper function to get MTTR for a security level
+ */
 function getMttrForLevel(level: SecurityLevel): string {
-  switch (level) {
-    case "None":
-      return "Unpredictable (hours to days)";
-    case "Low":
-      return "12-24 hours";
-    case "Moderate":
-      return "2-4 hours";
-    case "High":
-      return "10-30 minutes";
-    case "Very High":
-      return "<5 minutes";
-    default:
-      return "Unknown"; // Default case returns a fallback value
-  }
+  const mttrs: Record<SecurityLevel, string> = {
+    None: "Undefined",
+    Low: "12+ hours",
+    Moderate: "4-8 hours",
+    High: "1-2 hours",
+    "Very High": "<1 hour",
+  };
+  return mttrs[level] || "Unknown";
 }
 
-function getRiskLevelFromSecurityLevel(level: SecurityLevel): string {
-  switch (level) {
-    case "None":
-      return "Critical";
-    case "Low":
-      return "High";
-    case "Moderate":
-      return "Medium";
-    case "High":
-      return "Low";
-    case "Very High":
-      return "Minimal";
-    default:
-      return "Unknown"; // Default case returns a fallback value
-  }
+/**
+ * Helper function to get risk level for a security level
+ */
+function getRiskLevelForSecurityLevel(level: SecurityLevel): string {
+  const riskLevels: Record<SecurityLevel, string> = {
+    None: "Critical",
+    Low: "High",
+    Moderate: "Medium",
+    High: "Low",
+    "Very High": "Minimal",
+  };
+  return riskLevels[level] || "Unknown";
 }
 
-function getRevenueImpactForLevel(level: SecurityLevel): string {
-  switch (level) {
-    case "None":
-      return ">20% of annual revenue";
-    case "Low":
-      return "5-15% of annual revenue";
-    case "Moderate":
-      return "2-5% of annual revenue";
-    case "High":
-      return "0.5-2% of annual revenue";
-    case "Very High":
-      return "<0.5% of annual revenue";
-    default:
-      return "Unknown"; // Default case returns a fallback value
-  }
-}
-
-function getSecurityIconForLevel(level: SecurityLevel): string {
-  switch (level) {
-    case "None":
-      return "⚠️";
-    case "Low":
-      return "🔑";
-    case "Moderate":
-      return "🔓";
-    case "High":
-      return "🔒";
-    case "Very High":
-      return "🔐";
-    default:
-      return "❓"; // Default case returns a fallback value
-  }
-}
-
+/**
+ * Helper function to get validation method for a security level
+ */
 function getValidationMethodForLevel(level: SecurityLevel): string {
-  switch (level) {
-    case "None":
-      return "None";
-    case "Low":
-      return "Manual checks";
-    case "Moderate":
-      return "Automated validation";
-    case "High":
-      return "Cryptographic verification";
-    case "Very High":
-      return "Blockchain/distributed ledger";
-    default:
-      return "Unknown"; // Default case returns a fallback value
-  }
+  const methods: Record<SecurityLevel, string> = {
+    None: "No validation",
+    Low: "Basic validation",
+    Moderate: "Standard validation",
+    High: "Advanced validation",
+    "Very High": "Comprehensive validation",
+  };
+  return methods[level] || "Unknown";
 }
 
+/**
+ * Helper function to get protection method for a security level
+ */
 function getProtectionMethodForLevel(level: SecurityLevel): string {
-  switch (level) {
-    case "None":
-      return "None";
-    case "Low":
-      return "Basic access control";
-    case "Moderate":
-      return "Standard encryption";
-    case "High":
-      return "E2E encryption";
-    case "Very High":
-      return "Military-grade encryption with zero-trust";
-    default:
-      return "Unknown"; // Default case returns a fallback value
+  const methods: Record<SecurityLevel, string> = {
+    None: "No protection",
+    Low: "Basic encryption",
+    Moderate: "Standard encryption",
+    High: "Advanced encryption",
+    "Very High": "Multi-layer encryption",
+  };
+  return methods[level] || "Unknown";
+}
+
+/**
+ * Helper function to get development effort for a security level
+ */
+function getDevelopmentEffortForLevel(level: SecurityLevel): string {
+  const efforts: Record<SecurityLevel, string> = {
+    None: "None",
+    Low: "Low",
+    Moderate: "Medium",
+    High: "High",
+    "Very High": "Very High",
+  };
+  return efforts[level] || "Unknown";
+}
+
+/**
+ * Helper function to get maintenance effort for a security level
+ */
+function getMaintenanceEffortForLevel(level: SecurityLevel): string {
+  const efforts: Record<SecurityLevel, string> = {
+    None: "None",
+    Low: "Low",
+    Moderate: "Medium",
+    High: "High",
+    "Very High": "Very High",
+  };
+  return efforts[level] || "Unknown";
+}
+
+/**
+ * Helper function to get expertise for a security level
+ */
+function getExpertiseForLevel(level: SecurityLevel): string {
+  const expertise: Record<SecurityLevel, string> = {
+    None: "None",
+    Low: "Basic",
+    Moderate: "Intermediate",
+    High: "Advanced",
+    "Very High": "Expert",
+  };
+  return expertise[level] || "Unknown";
+}
+
+// Named export for the class
+export class TestDataProvider implements CIADataProvider {
+  // Implementation of the CIADataProvider interface
+  availabilityOptions: Record<SecurityLevel, CIADetails>;
+  integrityOptions: Record<SecurityLevel, CIADetails>;
+  confidentialityOptions: Record<SecurityLevel, CIADetails>;
+  roiEstimates: ROIEstimatesMap;
+
+  // Add required functions with explicit types
+  getDefaultSecurityIcon: (level: SecurityLevel) => string;
+  getDefaultValuePoints: (level: SecurityLevel) => string[];
+  getDefaultExpertiseLevel: (level: SecurityLevel) => string;
+  getProtectionLevel: (level: SecurityLevel) => string;
+
+  constructor() {
+    // Initialize using the createTestDataProvider function
+    const provider = createTestDataProvider();
+    this.availabilityOptions = provider.availabilityOptions;
+    this.integrityOptions = provider.integrityOptions;
+    this.confidentialityOptions = provider.confidentialityOptions;
+    this.roiEstimates = provider.roiEstimates;
+
+    // Initialize the required functions with fallbacks if not provided
+    this.getDefaultSecurityIcon =
+      provider.getDefaultSecurityIcon || getDefaultSecurityIcon;
+    this.getDefaultValuePoints =
+      provider.getDefaultValuePoints || getDefaultValuePoints;
+    this.getDefaultExpertiseLevel =
+      provider.getDefaultExpertiseLevel || getDefaultExpertiseLevel;
+    this.getProtectionLevel = provider.getProtectionLevel || getProtectionLevel;
   }
 }

@@ -1,5 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { BUSINESS_IMPACT_TEST_IDS } from "../../../constants/testIds";
 import { SecurityLevel } from "../../../types/cia";
 import { CIAComponentType } from "../../../types/cia-services";
 import BusinessImpactAnalysisWidget from "./BusinessImpactAnalysisWidget";
@@ -173,5 +174,125 @@ describe("BusinessImpactAnalysisWidget", () => {
       <BusinessImpactAnalysisWidget {...defaultProps} testId={customTestId} />
     );
     expect(screen.getByTestId(customTestId)).toBeInTheDocument();
+  });
+
+  // Add test for tab switching
+  it("switches between considerations and benefits tabs", () => {
+    render(
+      <BusinessImpactAnalysisWidget
+        availabilityLevel={"Moderate" as SecurityLevel}
+        integrityLevel={"Moderate" as SecurityLevel}
+        confidentialityLevel={"Moderate" as SecurityLevel}
+      />
+    );
+
+    // Business considerations should be shown by default
+    expect(
+      screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.BUSINESS_CONSIDERATIONS)
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByTestId(BUSINESS_IMPACT_TEST_IDS.BUSINESS_BENEFITS)
+    ).not.toBeInTheDocument();
+
+    // Click benefits tab
+    fireEvent.click(screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.TAB_BENEFITS));
+
+    // Business benefits should now be shown
+    expect(
+      screen.queryByTestId(BUSINESS_IMPACT_TEST_IDS.BUSINESS_CONSIDERATIONS)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.BUSINESS_BENEFITS)
+    ).toBeInTheDocument();
+
+    // Click considerations tab again
+    fireEvent.click(
+      screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.TAB_CONSIDERATIONS)
+    );
+
+    // Back to considerations
+    expect(
+      screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.BUSINESS_CONSIDERATIONS)
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByTestId(BUSINESS_IMPACT_TEST_IDS.BUSINESS_BENEFITS)
+    ).not.toBeInTheDocument();
+  });
+
+  // Test impact level calculation
+  it("calculates correct impact level based on security levels", () => {
+    // Test with High security levels
+    render(
+      <BusinessImpactAnalysisWidget
+        availabilityLevel={"High" as SecurityLevel}
+        integrityLevel={"High" as SecurityLevel}
+        confidentialityLevel={"High" as SecurityLevel}
+      />
+    );
+
+    // Should indicate high impact
+    expect(
+      screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.IMPACT_LEVEL_INDICATOR_PREFIX)
+    ).toHaveTextContent(/High Impact/i);
+
+    // Re-render with Low security levels
+    const { unmount } = render(
+      <BusinessImpactAnalysisWidget
+        availabilityLevel={"Low" as SecurityLevel}
+        integrityLevel={"Low" as SecurityLevel}
+        confidentialityLevel={"Low" as SecurityLevel}
+      />
+    );
+
+    unmount();
+
+    // Re-render with mixed levels
+    render(
+      <BusinessImpactAnalysisWidget
+        availabilityLevel={"High" as SecurityLevel}
+        integrityLevel={"Low" as SecurityLevel}
+        confidentialityLevel={"Moderate" as SecurityLevel}
+      />
+    );
+
+    // Should indicate medium impact for mixed levels
+    expect(
+      screen.getByTestId(BUSINESS_IMPACT_TEST_IDS.IMPACT_LEVEL_INDICATOR_PREFIX)
+    ).toHaveTextContent(/Medium Impact/i);
+  });
+
+  // Test error state rendering
+  it("handles error states gracefully", () => {
+    // Mock business impact service to throw an error
+    vi.mock("../../../services/businessImpactService", () => ({
+      createBusinessImpactService: () => ({
+        getBusinessImpact: () => {
+          throw new Error("Service error");
+        },
+        calculateBusinessImpactLevel: () => {
+          throw new Error("Calculation error");
+        },
+      }),
+    }));
+
+    // Suppress console errors for cleaner test output
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    render(
+      <BusinessImpactAnalysisWidget
+        availabilityLevel={"Moderate" as SecurityLevel}
+        integrityLevel={"Moderate" as SecurityLevel}
+        confidentialityLevel={"Moderate" as SecurityLevel}
+      />
+    );
+
+    // Should render an error message
+    expect(
+      screen.getByText(/Unable to calculate business impact/i)
+    ).toBeInTheDocument();
+
+    // Clean up
+    consoleSpy.mockRestore();
+    vi.restoreAllMocks();
   });
 });

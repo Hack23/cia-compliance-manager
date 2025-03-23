@@ -1,11 +1,14 @@
 import React, { useMemo, useState } from "react";
+import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { BUSINESS_IMPACT_TEST_IDS } from "../../../constants/testIds";
+import {
+  getBusinessImpactIcon,
+  SECURITY_ICONS,
+} from "../../../constants/uiConstants";
 import { useCIAOptions } from "../../../hooks/useCIAOptions";
 import { createBusinessImpactService } from "../../../services/businessImpactService";
-import { BusinessImpactDetail, SecurityLevel } from "../../../types/cia";
-// Import BusinessItem from businessImpact.ts instead of cia.ts
 import { BusinessItem } from "../../../types/businessImpact";
-// Change from import type to regular import
+import { BusinessImpactDetail, SecurityLevel } from "../../../types/cia";
 import { StatusBadge, WidgetContainer } from "../../common";
 
 /**
@@ -111,34 +114,42 @@ const BusinessImpactAnalysisWidget: React.FC<
     );
   }, [businessImpactService, confidentialityLevel]);
 
-  // Get status badge color based on impact level
-  const getStatusBadgeVariant = (
-    level: string
-  ): "info" | "success" | "warning" | "error" | "neutral" => {
-    switch (level) {
-      case "Minimal":
-        return "success";
-      case "Low":
-        return "info";
-      case "Medium":
-        return "warning";
-      case "High":
-      case "Critical":
-        return "error";
-      default:
-        return "neutral";
-    }
+  // Add state for loading and error handling
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  // Helper function to determine implementation complexity
+  const getImplementationComplexity = (
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): string => {
+    const levelValues: Record<SecurityLevel, number> = {
+      None: 0,
+      Low: 1,
+      Moderate: 2,
+      High: 3,
+      "Very High": 4,
+    };
+
+    const totalValue =
+      levelValues[availabilityLevel] +
+      levelValues[integrityLevel] +
+      levelValues[confidentialityLevel];
+
+    if (totalValue <= 3) return "minimal";
+    if (totalValue <= 6) return "moderate";
+    if (totalValue <= 9) return "significant";
+    return "extensive";
   };
 
-  // Helper to render an impact category
+  // Helper to render an impact category with standardized icons
   const renderImpactCategory = (
     category: string,
     impact: BusinessImpactDetail
   ) => {
     if (!impact) return null;
-
-    const icon = businessImpactService.getCategoryIcon(category);
-
+    const icon = getBusinessImpactIcon(category);
     return (
       <div
         className="mb-4"
@@ -220,14 +231,200 @@ const BusinessImpactAnalysisWidget: React.FC<
     ];
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
+  // Add visual impact heat map component
+  const renderImpactHeatMap = () => {
+    const getHeatMapColor = (level: string): string => {
+      switch (level) {
+        case "Minimal":
+          return "bg-green-100 dark:bg-green-900 dark:bg-opacity-20";
+        case "Low":
+          return "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20";
+        case "Medium":
+          return "bg-yellow-100 dark:bg-yellow-900 dark:bg-opacity-20";
+        case "High":
+          return "bg-orange-100 dark:bg-orange-900 dark:bg-opacity-20";
+        case "Critical":
+          return "bg-red-100 dark:bg-red-900 dark:bg-opacity-20";
+        default:
+          return "bg-gray-100 dark:bg-gray-800";
+      }
+    };
+
+    return (
+      <div
+        className="mt-4 p-3 rounded-lg border border-gray-200 dark:border-gray-700"
+        data-testid={BUSINESS_IMPACT_TEST_IDS.IMPACT_HEATMAP}
+      >
+        <h4 className="text-md font-medium mb-3">Impact Heat Map</h4>
+        <div className="grid grid-cols-3 gap-2">
+          <div
+            className={`p-3 rounded-lg text-center ${getHeatMapColor(
+              availabilityImpact?.financial?.riskLevel || "Medium"
+            )}`}
+          >
+            <div className="text-xs font-medium mb-1">Financial</div>
+            <div className="text-sm font-bold">
+              {availabilityImpact?.financial?.riskLevel || "Medium"}
+            </div>
+          </div>
+          <div
+            className={`p-3 rounded-lg text-center ${getHeatMapColor(
+              availabilityImpact?.operational?.riskLevel || "Medium"
+            )}`}
+          >
+            <div className="text-xs font-medium mb-1">Operational</div>
+            <div className="text-sm font-bold">
+              {availabilityImpact?.operational?.riskLevel || "Medium"}
+            </div>
+          </div>
+          <div
+            className={`p-3 rounded-lg text-center ${getHeatMapColor(
+              confidentialityImpact?.reputational?.riskLevel || "Medium"
+            )}`}
+          >
+            <div className="text-xs font-medium mb-1">Reputational</div>
+            <div className="text-sm font-bold">
+              {confidentialityImpact?.reputational?.riskLevel || "Medium"}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Add a "Summary at a glance" section for executives
+  const renderExecutiveSummary = () => {
+    return (
+      <div
+        className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+        data-testid={BUSINESS_IMPACT_TEST_IDS.EXECUTIVE_SUMMARY}
+      >
+        <h4 className="text-md font-medium mb-2">Executive Summary</h4>
+        <p className="text-sm">
+          With
+          <span className="font-medium"> {availabilityLevel} </span>
+          availability,
+          <span className="font-medium"> {integrityLevel} </span>
+          integrity, and
+          <span className="font-medium"> {confidentialityLevel} </span>
+          confidentiality, your organization faces a
+          <span className="font-bold"> {impactLevel} </span>
+          overall business impact.
+        </p>
+        <div className="mt-2 text-sm flex items-center">
+          <span className="font-medium mr-2">Recommended action:</span>
+          <span className="mr-1">{SECURITY_ICONS.recommendation}</span>
+          {impactLevel === "Critical" || impactLevel === "High"
+            ? "Immediate attention required to mitigate risks"
+            : impactLevel === "Medium"
+            ? "Review and address key risk areas"
+            : "Monitor and maintain current controls"}
+        </div>
+      </div>
+    );
+  };
+
+  // Get status badge color based on impact level
+  const getStatusBadgeVariant = (
+    level: string
+  ): "info" | "success" | "warning" | "error" | "neutral" => {
+    switch (level) {
+      case "Minimal":
+        return "success";
+      case "Low":
+        return "info";
+      case "Medium":
+        return "warning";
+      case "High":
+        return "error";
+      case "Critical":
+        return "error";
+      default:
+        return "neutral";
+    }
+  };
+
   return (
     <WidgetContainer
-      title="Business Impact Analysis"
-      icon="📊"
+      title={WIDGET_TITLES.BUSINESS_IMPACT_ANALYSIS}
+      icon={WIDGET_ICONS.BUSINESS_IMPACT_ANALYSIS}
       className={className}
       testId={testId}
     >
       <div className="p-4">
+        {/* Error and loading states */}
+        {error && (
+          <div className="p-3 mb-4 bg-red-100 dark:bg-red-900 dark:bg-opacity-20 text-red-800 dark:text-red-200 rounded-lg">
+            <h4 className="font-medium">Error</h4>
+            <p className="text-sm">
+              {error.message ||
+                "Unable to calculate business impact. Please try again."}
+            </p>
+          </div>
+        )}
+
+        {isLoading && (
+          <div className="p-3 mb-4 bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20 text-blue-800 dark:text-blue-200 rounded-lg">
+            <p className="text-sm">Loading business impact analysis...</p>
+          </div>
+        )}
+
+        {/* Add high-level description */}
+        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+          <p className="text-sm">
+            This analysis shows the business impact of your selected security
+            levels across different perspectives, helping you understand the
+            implications of your security decisions on your organization.
+          </p>
+        </div>
+
+        {/* Add Executive Summary at the top */}
+        {renderExecutiveSummary()}
+
+        {/* Three-Perspective Framework */}
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Business Perspective */}
+          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border-l-4 border-blue-500">
+            <h4 className="text-sm font-medium text-blue-700 dark:text-blue-300">
+              Business Impact
+            </h4>
+            <p className="text-xs text-gray-600 dark:text-gray-400">
+              {impactLevel === "Critical"
+                ? "Critical business impact requiring immediate attention"
+                : impactLevel === "High"
+                ? "Significant business impact affecting operations"
+                : "Moderate business impact with manageable consequences"}
+            </p>
+          </div>
+
+          {/* Security Perspective */}
+          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border-l-4 border-green-500">
+            <h4 className="text-sm font-medium text-green-700 dark:text-green-300">
+              Security Implications
+            </h4>
+            <p className="text-xs text-gray-600 dark:text-gray-400">
+              Security controls align with {availabilityLevel}/{integrityLevel}/
+              {confidentialityLevel} protection levels
+            </p>
+          </div>
+
+          {/* Architecture Perspective */}
+          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border-l-4 border-purple-500">
+            <h4 className="text-sm font-medium text-purple-700 dark:text-purple-300">
+              Implementation
+            </h4>
+            <p className="text-xs text-gray-600 dark:text-gray-400">
+              Requires{" "}
+              {getImplementationComplexity(
+                availabilityLevel,
+                integrityLevel,
+                confidentialityLevel
+              )}
+              implementation effort
+            </p>
+          </div>
+        </div>
+
         {/* Impact Summary */}
         <div className="mb-6">
           <h3 className="text-lg font-medium mb-2">Business Impact Summary</h3>
@@ -259,6 +456,9 @@ const BusinessImpactAnalysisWidget: React.FC<
             </p>
           </div>
         </div>
+
+        {/* Add Heat Map visualization */}
+        {renderImpactHeatMap()}
 
         {/* Tab navigation */}
         <div className="flex border-b border-gray-200 dark:border-gray-700 mb-4">
@@ -370,7 +570,6 @@ const BusinessImpactAnalysisWidget: React.FC<
                 )}
               </div>
             )}
-
             {/* Operational Impact */}
             {availabilityImpact?.operational && (
               <div
@@ -382,20 +581,22 @@ const BusinessImpactAnalysisWidget: React.FC<
                 )}
               </div>
             )}
-
             {/* Reputational Impact */}
             {confidentialityImpact?.reputational && (
-              <div>
+              <div
+                data-testid={BUSINESS_IMPACT_TEST_IDS.REPUTATIONAL_IMPACT_CARD}
+              >
                 {renderImpactCategory(
                   "reputational",
                   confidentialityImpact.reputational
                 )}
               </div>
             )}
-
             {/* Regulatory Impact */}
             {integrityImpact?.regulatory && (
-              <div>
+              <div
+                data-testid={BUSINESS_IMPACT_TEST_IDS.REGULATORY_IMPACT_CARD}
+              >
                 {renderImpactCategory("regulatory", integrityImpact.regulatory)}
               </div>
             )}
@@ -406,5 +607,4 @@ const BusinessImpactAnalysisWidget: React.FC<
   );
 };
 
-// Export the component directly without HOC
 export default BusinessImpactAnalysisWidget;

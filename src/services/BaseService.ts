@@ -1,22 +1,28 @@
 import { SecurityLevel } from "../types/cia";
-import { CIAComponentType, CIADataProvider, CIADetails } from "../types/cia-services";
+import {
+  CIAComponentType,
+  CIADataProvider,
+  CIADetails,
+} from "../types/cia-services";
 import { getSecurityLevelValue } from "../utils/levelValuesUtils";
 import logger from "../utils/logger";
 import { getRiskLevelFromSecurityLevel } from "../utils/riskUtils";
 
 /**
- * Base service class that provides common functionality for all services
- *
- * ## Business Perspective
- *
- * The BaseService establishes a consistent foundation for all services,
- * ensuring uniform data access patterns, error handling, and security level 
- * processing. This improves maintainability and reduces duplication across
- * security-related services. 🛠️
+ * Base service class that provides common functionality
+ * for security-related services
  */
-export abstract class BaseService {
+export class BaseService {
+  /**
+   * Data provider used by the service
+   */
   protected dataProvider: CIADataProvider;
 
+  /**
+   * Create a new service instance
+   *
+   * @param dataProvider - Data provider for security information
+   */
   constructor(dataProvider: CIADataProvider) {
     this.dataProvider = dataProvider;
   }
@@ -32,7 +38,10 @@ export abstract class BaseService {
       const options = this.getCIAOptions(component);
       return options[level];
     } catch (error) {
-      logger.warn(`Failed to get component details for ${component} at level ${level}`, error);
+      logger.warn(
+        `Failed to get component details for ${component} at level ${level}`,
+        error
+      );
       return undefined;
     }
   }
@@ -86,12 +95,18 @@ export abstract class BaseService {
 
     // Default icons
     switch (level) {
-      case "None": return "⚠️";
-      case "Low": return "🔑";
-      case "Moderate": return "🔓";
-      case "High": return "🔒";
-      case "Very High": return "🔐";
-      default: return "❓";
+      case "None":
+        return "⚠️";
+      case "Low":
+        return "🔑";
+      case "Moderate":
+        return "🔓";
+      case "High":
+        return "🔒";
+      case "Very High":
+        return "🔐";
+      default:
+        return "❓";
     }
   }
 

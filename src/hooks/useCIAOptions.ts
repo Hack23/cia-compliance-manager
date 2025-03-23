@@ -1,49 +1,110 @@
 import { useMemo } from "react";
-import {
-    availabilityOptions,
-    confidentialityOptions,
-    integrityOptions,
-    ROI_ESTIMATES,
-} from "../data/ciaOptionsData";
-import { CIADetails, ROIEstimate } from "../types/cia-services";
+import defaultCIADataProvider from "../data/ciaOptionsData";
+import { SecurityLevel } from "../types/cia";
+import { CIADataProvider } from "../types/cia-services";
 
-// Export constants for external use
-// These reference the imported data from security modules
+// Import the options from the data source
+import {
+  availabilityOptions as defaultAvailabilityOptions,
+  confidentialityOptions as defaultConfidentialityOptions,
+  integrityOptions as defaultIntegrityOptions,
+  ROI_ESTIMATES as defaultRoiEstimates,
+} from "../data/security";
+
+// Re-export the options for direct usage
 export {
-    availabilityOptions,
-    confidentialityOptions,
-    integrityOptions,
-    ROI_ESTIMATES
+  defaultAvailabilityOptions as availabilityOptions,
+  defaultConfidentialityOptions as confidentialityOptions,
+  defaultIntegrityOptions as integrityOptions,
+  defaultRoiEstimates as ROI_ESTIMATES,
 };
 
 /**
- * Custom hook for accessing CIA security options with memoization
+ * Custom hook to access CIA options throughout the application
  *
- * @returns Memoized references to CIA options data
+ * @param customProvider - Optional custom data provider
+ * @returns CIA options for all components
  */
-export function useCIAOptions() {
-  // Memoize individual objects to prevent unnecessary re-renders
-  const availabilityOpts = useMemo(() => availabilityOptions, []);
-  const integrityOpts = useMemo(() => integrityOptions, []);
-  const confidentialityOpts = useMemo(() => confidentialityOptions, []);
-  const roiEstimates = useMemo(() => ROI_ESTIMATES, []);
+export function useCIAOptions(customProvider?: Partial<CIADataProvider>) {
+  const dataProvider = useMemo(() => {
+    return { ...defaultCIADataProvider, ...customProvider };
+  }, [customProvider]);
 
-  if (!availabilityOpts || !integrityOpts || !confidentialityOpts || !roiEstimates) {
-    throw new Error("CIA options data is not loaded");
-  }
+  // Enhanced API with helper methods
+  const enhancedAPI = useMemo(() => {
+    return {
+      // Base options
+      availabilityOptions: dataProvider.availabilityOptions,
+      integrityOptions: dataProvider.integrityOptions,
+      confidentialityOptions: dataProvider.confidentialityOptions,
+      ROI_ESTIMATES: dataProvider.roiEstimates, // Fixed: ROI_ESTIMATES -> roiEstimates
 
-  return {
-    availabilityOptions: availabilityOpts,
-    integrityOptions: integrityOpts,
-    confidentialityOptions: confidentialityOpts,
-    ROI_ESTIMATES: roiEstimates,
-  } as {
-    availabilityOptions: typeof availabilityOptions;
-    integrityOptions: typeof integrityOptions;
-    confidentialityOptions: typeof confidentialityOptions;
-    ROI_ESTIMATES: typeof ROI_ESTIMATES;
-  };
+      // Helper methods
+      getROIEstimate: (level: SecurityLevel) => {
+        const key = level.toUpperCase().replace(" ", "_");
+        return (
+          dataProvider.roiEstimates[
+            key as keyof typeof dataProvider.roiEstimates
+          ] || dataProvider.roiEstimates.NONE
+        );
+      },
+
+      // Get value points
+      getValuePoints: (level: SecurityLevel) => {
+        // Use getDefaultValuePoints or fall back to getValuePoints for backward compatibility
+        if (dataProvider) {
+          return typeof dataProvider.getDefaultValuePoints === "function"
+            ? dataProvider.getDefaultValuePoints(level)
+            : typeof dataProvider.getValuePoints === "function"
+            ? dataProvider.getValuePoints(level)
+            : [];
+        }
+        return [];
+      },
+
+      // Get component details including properties
+      getComponentDetails: (
+        component: "availability" | "integrity" | "confidentiality",
+        level: SecurityLevel
+      ) => {
+        const options =
+          component === "availability"
+            ? dataProvider.availabilityOptions
+            : component === "integrity"
+            ? dataProvider.integrityOptions
+            : dataProvider.confidentialityOptions;
+
+        return options[level];
+      },
+
+      // Formats description for a component level
+      getComponentDescription: (
+        component: "availability" | "integrity" | "confidentiality",
+        level: SecurityLevel
+      ) => {
+        return (
+          enhancedAPI.getComponentDetails(component, level)?.description ||
+          `No description available for ${component} at ${level} level`
+        );
+      },
+
+      // Get implementation details
+      getImplementationDetails: (
+        component: "availability" | "integrity" | "confidentiality",
+        level: SecurityLevel
+      ) => {
+        const details = enhancedAPI.getComponentDetails(component, level);
+        return {
+          effort: details?.effort || "Unknown",
+          expertise: details?.expertise || "Unknown",
+          timeframe: details?.timeframe || "Unknown",
+          recommendations: details?.recommendations || [],
+        };
+      },
+    };
+  }, [dataProvider]);
+
+  return enhancedAPI;
 }
 
-// Export types for documentation and clarity
-export type { CIADetails, ROIEstimate };
+export default useCIAOptions;

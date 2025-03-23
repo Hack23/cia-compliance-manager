@@ -73,4 +73,89 @@ describe("StatusBadge Component", () => {
     );
     expect(badge.className).toContain("text-sm");
   });
+
+  it("renders with success status", () => {
+    render(
+      <StatusBadge status="success" testId="success-badge">
+        Success
+      </StatusBadge>
+    );
+
+    const badge = screen.getByTestId("success-badge");
+    expect(badge).toBeInTheDocument();
+    expect(badge).toHaveTextContent("Success");
+    expect(badge).toHaveClass("bg-green-100");
+    expect(badge).toHaveClass("text-green-800");
+  });
+
+  it("renders with warning status", () => {
+    render(
+      <StatusBadge status="warning" testId="warning-badge">
+        Warning
+      </StatusBadge>
+    );
+
+    const badge = screen.getByTestId("warning-badge");
+    expect(badge).toBeInTheDocument();
+    expect(badge).toHaveTextContent("Warning");
+    expect(badge).toHaveClass("bg-yellow-100");
+    expect(badge).toHaveClass("text-yellow-800");
+  });
+
+  it("renders with error status", () => {
+    render(
+      <StatusBadge status="error" testId="error-badge">
+        Error
+      </StatusBadge>
+    );
+
+    const badge = screen.getByTestId("error-badge");
+    expect(badge).toBeInTheDocument();
+    expect(badge).toHaveTextContent("Error");
+    expect(badge).toHaveClass("bg-red-100");
+    expect(badge).toHaveClass("text-red-800");
+  });
+
+  it("renders with info status", () => {
+    render(
+      <StatusBadge status="info" testId="info-badge">
+        Info
+      </StatusBadge>
+    );
+
+    const badge = screen.getByTestId("info-badge");
+    expect(badge).toBeInTheDocument();
+    expect(badge).toHaveTextContent("Info");
+    expect(badge).toHaveClass("bg-blue-100");
+    expect(badge).toHaveClass("text-blue-800");
+  });
+
+  it("renders with neutral status", () => {
+    render(
+      <StatusBadge status="neutral" testId="neutral-badge">
+        Neutral
+      </StatusBadge>
+    );
+
+    const badge = screen.getByTestId("neutral-badge");
+    expect(badge).toBeInTheDocument();
+    expect(badge).toHaveTextContent("Neutral");
+    expect(badge).toHaveClass("bg-gray-100");
+    expect(badge).toHaveClass("text-gray-800");
+  });
+
+  it("applies custom className", () => {
+    render(
+      <StatusBadge
+        status="success"
+        className="custom-class"
+        testId="custom-badge"
+      >
+        With Custom Class
+      </StatusBadge>
+    );
+
+    const badge = screen.getByTestId("custom-badge");
+    expect(badge).toHaveClass("custom-class");
+  });
 });

@@ -131,7 +131,7 @@ export class ComplianceService extends BaseService {
       ) {
         status = "Fully compliant with all frameworks";
       } else {
-        status = `Compliant with ${compliantFrameworks.length} frameworks, partially compliant with ${partiallyCompliantFrameworks.length}`;
+        status = "Partially compliant with some frameworks";
       }
     } else if (partiallyCompliantFrameworks.length > 0) {
       status = `Partially compliant with ${partiallyCompliantFrameworks.length} frameworks`;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { TECHNICAL_DETAILS_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
@@ -66,15 +66,22 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
     component: "availability" | "integrity" | "confidentiality",
     level: SecurityLevel
   ) => {
-    return (
-      ciaContentService.getTechnicalImplementation?.(component, level) || {
-        description: "No technical details available",
-        expertiseLevel: "Standard",
-        implementationSteps: [],
-        developmentEffort: "Medium",
-        maintenanceLevel: "Medium",
-      }
-    );
+    // Add null check to service call
+    const technicalImplementation = useMemo(() => {
+      return (
+        ciaContentService?.getTechnicalImplementation?.(component, level) || {
+          description: "Technical details not available",
+          implementationSteps: [],
+          effort: {
+            development: "Unknown",
+            maintenance: "Unknown",
+            expertise: "Unknown",
+          },
+        }
+      );
+    }, [ciaContentService, component, level]);
+
+    return technicalImplementation;
   };
 
   // Get details for each component

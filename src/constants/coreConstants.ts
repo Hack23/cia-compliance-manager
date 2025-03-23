@@ -239,3 +239,118 @@ export const SECURITY_LEVEL_LABELS = {
   HIGH: "High",
   VERY_HIGH: "Very High",
 };
+
+/**
+ * Core constants used across the application
+ */
+
+/**
+ * Application metadata
+ */
+export const APP_INFO = {
+  NAME: "CIA Compliance Manager",
+  VERSION: "1.0.0",
+  DESCRIPTION:
+    "Security assessment and compliance management tool for CIA triad analysis",
+  AUTHOR: "Security Team",
+};
+
+/**
+ * Default language for the application
+ */
+export const DEFAULT_LANGUAGE = "en-US";
+
+/**
+ * Application features configuration
+ */
+export const FEATURES = {
+  DARK_MODE: true,
+  MULTI_LANGUAGE: false,
+  ANALYTICS: false,
+  EXPORT_TO_PDF: false,
+  EXPORT_TO_CSV: false,
+  PRINT_REPORTS: false,
+  LOCAL_STORAGE: true,
+};
+
+/**
+ * Default settings for the application
+ */
+export const DEFAULT_SETTINGS = {
+  THEME: "light",
+  LANGUAGE: DEFAULT_LANGUAGE,
+  SHOW_DETAILED_DESCRIPTIONS: true,
+  SHOW_TECHNICAL_DETAILS: true,
+  SHOW_BUSINESS_IMPACT: true,
+  SAVE_STATE_LOCALLY: true,
+};
+
+/**
+ * Local storage keys
+ */
+export const STORAGE_KEYS = {
+  SETTINGS: "cia-manager-settings",
+  SELECTED_LEVELS: "cia-manager-levels",
+  LAST_VISIT: "cia-manager-last-visit",
+};
+
+/**
+ * Routes configuration
+ */
+export const ROUTES = {
+  HOME: "/",
+  DASHBOARD: "/dashboard",
+  SETTINGS: "/settings",
+  ASSESSMENT: "/assessment",
+  COMPLIANCE: "/compliance",
+  TECHNICAL: "/technical",
+  BUSINESS: "/business",
+};
+
+/**
+ * Application events
+ */
+export const EVENTS = {
+  LEVEL_CHANGED: "cia-level-changed",
+  SETTINGS_CHANGED: "cia-settings-changed",
+  DATA_LOADED: "cia-data-loaded",
+  ERROR_OCCURRED: "cia-error-occurred",
+};
+
+/**
+ * API configuration for external services
+ */
+export const API_CONFIG = {
+  BASE_URL: "/api",
+  TIMEOUT: 5000,
+  RETRY_ATTEMPTS: 2,
+  CACHE_DURATION: 3600, // 1 hour
+};
+
+/**
+ * Component names used for debugging and logging
+ */
+export const COMPONENT_NAMES = {
+  SECURITY_LEVEL_WIDGET: "SecurityLevelWidget",
+  BUSINESS_IMPACT_WIDGET: "BusinessImpactWidget",
+  COMPLIANCE_STATUS_WIDGET: "ComplianceStatusWidget",
+  COST_ESTIMATION_WIDGET: "CostEstimationWidget",
+  VALUE_CREATION_WIDGET: "ValueCreationWidget",
+  TECHNICAL_DETAILS_WIDGET: "TechnicalDetailsWidget",
+  SECURITY_SUMMARY_WIDGET: "SecuritySummaryWidget",
+};
+
+/**
+ * Logging levels
+ */
+export const LOG_LEVELS = {
+  DEBUG: "debug",
+  INFO: "info",
+  WARN: "warn",
+  ERROR: "error",
+};
+
+/**
+ * Default data refresh interval in milliseconds
+ */
+export const DEFAULT_REFRESH_INTERVAL = 60000; // 1 minute

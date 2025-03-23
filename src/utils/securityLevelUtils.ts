@@ -1,4 +1,8 @@
 import { SECURITY_LEVELS } from "../constants/appConstants";
+import {
+  SECURITY_LEVEL_FROM_VALUE,
+  SECURITY_LEVEL_VALUES,
+} from "../constants/securityLevels";
 import { SecurityLevel } from "../types/cia";
 
 /**
@@ -123,13 +127,114 @@ export function calculateOverallSecurityLevel(
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel
 ): SecurityLevel {
-  const aValue = getSecurityLevelValue(availabilityLevel);
-  const iValue = getSecurityLevelValue(integrityLevel);
-  const cValue = getSecurityLevelValue(confidentialityLevel);
+  // Get numerical values for each level
+  const availabilityValue = SECURITY_LEVEL_VALUES[availabilityLevel] || 0;
+  const integrityValue = SECURITY_LEVEL_VALUES[integrityLevel] || 0;
+  const confidentialityValue = SECURITY_LEVEL_VALUES[confidentialityLevel] || 0;
 
-  const avgValue = Math.round((aValue + iValue + cValue) / 3);
+  // Calculate average level with higher weight on confidentiality
+  const avgValue =
+    (availabilityValue + integrityValue + confidentialityValue) / 3;
 
-  return getSecurityLevelFromValue(avgValue);
+  // Round to nearest level
+  const roundedValue = Math.round(avgValue);
+
+  // Return the security level corresponding to the calculated value
+  return SECURITY_LEVEL_FROM_VALUE[roundedValue] || "None";
+}
+
+/**
+ * Determine if a given set of security levels meets minimum requirements
+ *
+ * @param availabilityLevel - Current availability level
+ * @param integrityLevel - Current integrity level
+ * @param confidentialityLevel - Current confidentiality level
+ * @param minAvailability - Minimum required availability level
+ * @param minIntegrity - Minimum required integrity level
+ * @param minConfidentiality - Minimum required confidentiality level
+ * @returns Whether all requirements are met
+ */
+export function meetsSecurityRequirements(
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel,
+  minAvailability: SecurityLevel,
+  minIntegrity: SecurityLevel,
+  minConfidentiality: SecurityLevel
+): boolean {
+  const availabilityMet =
+    SECURITY_LEVEL_VALUES[availabilityLevel] >=
+    SECURITY_LEVEL_VALUES[minAvailability];
+  const integrityMet =
+    SECURITY_LEVEL_VALUES[integrityLevel] >=
+    SECURITY_LEVEL_VALUES[minIntegrity];
+  const confidentialityMet =
+    SECURITY_LEVEL_VALUES[confidentialityLevel] >=
+    SECURITY_LEVEL_VALUES[minConfidentiality];
+
+  return availabilityMet && integrityMet && confidentialityMet;
+}
+
+/**
+ * Get the gap between current and required security levels
+ *
+ * @param currentLevel - Current security level
+ * @param requiredLevel - Required security level
+ * @returns Number of levels gap (negative if current is lower than required)
+ */
+export function getSecurityLevelGap(
+  currentLevel: SecurityLevel,
+  requiredLevel: SecurityLevel
+): number {
+  return (
+    SECURITY_LEVEL_VALUES[currentLevel] - SECURITY_LEVEL_VALUES[requiredLevel]
+  );
+}
+
+/**
+ * Get a set of recommended security levels that would meet compliance requirements
+ *
+ * @param currentAvailability - Current availability level
+ * @param currentIntegrity - Current integrity level
+ * @param currentConfidentiality - Current confidentiality level
+ * @param minAvailability - Minimum required availability level
+ * @param minIntegrity - Minimum required integrity level
+ * @param minConfidentiality - Minimum required confidentiality level
+ * @returns Recommended security levels
+ */
+export function getRecommendedSecurityLevels(
+  currentAvailability: SecurityLevel,
+  currentIntegrity: SecurityLevel,
+  currentConfidentiality: SecurityLevel,
+  minAvailability: SecurityLevel,
+  minIntegrity: SecurityLevel,
+  minConfidentiality: SecurityLevel
+): {
+  availability: SecurityLevel;
+  integrity: SecurityLevel;
+  confidentiality: SecurityLevel;
+} {
+  // Use the higher of current or required level for each component
+  const availabilityValue = Math.max(
+    SECURITY_LEVEL_VALUES[currentAvailability],
+    SECURITY_LEVEL_VALUES[minAvailability]
+  );
+
+  const integrityValue = Math.max(
+    SECURITY_LEVEL_VALUES[currentIntegrity],
+    SECURITY_LEVEL_VALUES[minIntegrity]
+  );
+
+  const confidentialityValue = Math.max(
+    SECURITY_LEVEL_VALUES[currentConfidentiality],
+    SECURITY_LEVEL_VALUES[minConfidentiality]
+  );
+
+  return {
+    availability: SECURITY_LEVEL_FROM_VALUE[availabilityValue] || "None",
+    integrity: SECURITY_LEVEL_FROM_VALUE[integrityValue] || "None",
+    confidentiality: SECURITY_LEVEL_FROM_VALUE[confidentialityValue] || "None",
+  };
 }
 
 /**

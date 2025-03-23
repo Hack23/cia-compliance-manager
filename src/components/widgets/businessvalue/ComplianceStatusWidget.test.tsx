@@ -1,316 +1,192 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
+import React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { ComplianceService } from "../../../services/ComplianceServiceAdapter";
+import { COMPLIANCE_TEST_IDS } from "../../../constants/testIds";
+import useComplianceService from "../../../hooks/useComplianceService";
 import { SecurityLevel } from "../../../types/cia";
 import ComplianceStatusWidget from "./ComplianceStatusWidget";
 
-// Mock the useCIAOptions hook
-vi.mock("../../../hooks/useCIAOptions", () => ({
-  useCIAOptions: () => ({
-    availabilityOptions: {
-      None: { description: "None level" },
-      Low: { description: "Low level" },
-      Moderate: { description: "Moderate level" },
-      High: { description: "High level" },
-      "Very High": { description: "Very High level" },
+// Mock the useComplianceService hook
+vi.mock("../../../hooks/useComplianceService", () => ({
+  useComplianceService: () => ({
+    complianceService: {
+      getComplianceStatus: vi.fn((a, i, c) => ({
+        compliantFrameworks: ["ISO 27001", "NIST CSF"],
+        partiallyCompliantFrameworks: ["GDPR"],
+        nonCompliantFrameworks: ["PCI DSS", "HIPAA"],
+        remediationSteps: ["Improve security controls", "Document processes"],
+        requirements: ["Data protection", "Access control"],
+        status: "Partially Compliant",
+        complianceScore: 65,
+      })),
+      getComplianceStatusText: vi.fn(() => "Partially Compliant"),
+      getFrameworkDescription: vi.fn(
+        (framework) => `Description for ${framework}`
+      ),
+      getComplianceGapAnalysis: vi.fn((a, i, c, framework) => ({
+        isCompliant: framework === "ISO 27001",
+        gaps: framework === "ISO 27001" ? [] : ["Gap 1", "Gap 2"],
+        recommendations:
+          framework === "ISO 27001"
+            ? ["Maintain controls"]
+            : ["Recommendation 1", "Recommendation 2"],
+      })),
+      getFrameworkRequiredLevel: vi.fn((framework, component) =>
+        component === "confidentiality" && framework === "GDPR"
+          ? "High"
+          : "Moderate"
+      ),
     },
-    integrityOptions: {
-      None: { description: "None level" },
-      Low: { description: "Low level" },
-      Moderate: { description: "Moderate level" },
-      High: { description: "High level" },
-      "Very High": { description: "Very High level" },
-    },
-    confidentialityOptions: {
-      None: { description: "None level" },
-      Low: { description: "Low level" },
-      Moderate: { description: "Moderate level" },
-      High: { description: "High level" },
-      "Very High": { description: "Very High level" },
-    },
+    isLoading: false,
+    error: null,
   }),
 }));
-
-// Create a simple mock for COMPLIANCE_TEST_IDS
-const COMPLIANCE_TEST_IDS = {
-  COMPLIANCE_STATUS_WIDGET: "compliance-status-widget",
-  COMPLIANCE_STATUS_BADGE: "compliance-status-badge",
-  COMPLIANCE_FRAMEWORK_ITEM: "framework-item",
-};
-
-// Remove react-bootstrap mock since we're not using it anymore
-vi.mock("react-bootstrap", () => {
-  return {}; // Empty mock since we don't use it anymore
-});
 
 describe("ComplianceStatusWidget", () => {
   const defaultProps = {
     availabilityLevel: "Moderate" as SecurityLevel,
     integrityLevel: "Moderate" as SecurityLevel,
     confidentialityLevel: "Moderate" as SecurityLevel,
-    className: "custom-class",
-    testId: "custom-test-id",
+    industry: "Technology",
+    testId: "test-compliance-widget",
   };
 
   beforeEach(() => {
     vi.clearAllMocks();
-    // Store original function for restoration after tests
-    const originalGetComplianceStatus = ComplianceService.getComplianceStatus;
-
-    // Mock ComplianceService.getComplianceStatus to return predictable data
-    const getComplianceStatusMock = vi.spyOn(
-      ComplianceService,
-      "getComplianceStatus"
-    );
-
-    // Mock implementation
-    getComplianceStatusMock.mockImplementation(
-      (a: SecurityLevel, i: SecurityLevel, c: SecurityLevel) => {
-        return {
-          compliantFrameworks: ["ISO 27001", "NIST CSF"],
-          partiallyCompliantFrameworks: ["GDPR"],
-          nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
-          remediationSteps: [
-            "Improve security controls",
-            "Implement encryption",
-          ],
-          requirements: ["Data protection", "Access control"],
-          status: "Partially Compliant",
-          complianceScore: 75, // Add the missing complianceScore property
-        };
-      }
-    );
-
-    // Mock ComplianceService.getComplianceStatusText
-    vi.spyOn(ComplianceService, "getComplianceStatusText").mockReturnValue(
-      "Compliant with all major frameworks"
-    );
-
-    // Mock ComplianceService.getFrameworkDescription
-    vi.spyOn(ComplianceService, "getFrameworkDescription").mockReturnValue(
-      "Framework description"
-    );
   });
 
   it("renders without crashing", () => {
     render(<ComplianceStatusWidget {...defaultProps} />);
-    expect(screen.getByText("Compliance Status")).toBeInTheDocument();
+    expect(screen.getByTestId("test-compliance-widget")).toBeInTheDocument();
   });
 
-  it("displays framework compliance information correctly", () => {
+  it("displays compliance status summary", () => {
     render(<ComplianceStatusWidget {...defaultProps} />);
-
-    // Check the status badge is displayed
+    expect(
+      screen.getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_SUMMARY)
+    ).toBeInTheDocument();
     expect(
       screen.getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_BADGE)
-    ).toBeInTheDocument();
-    expect(screen.getByText("Meets basic compliance only")).toBeInTheDocument();
-
-    // Check framework sections
-    expect(screen.getByText("Compliant")).toBeInTheDocument();
-    expect(screen.getByText("ISO 27001 (Tier 1)")).toBeInTheDocument();
-
-    expect(screen.getByText("Partially Compliant")).toBeInTheDocument();
-    expect(screen.getByText("ISO 27001 (Tier 2)")).toBeInTheDocument();
-
-    expect(screen.getByText("Non-Compliant")).toBeInTheDocument();
-    expect(screen.getByText("NIST 800-53")).toBeInTheDocument();
+    ).toHaveTextContent("Partially Compliant");
+    expect(
+      screen.getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_SCORE)
+    ).toHaveTextContent("65%");
   });
 
-  it("displays remediation steps when available", () => {
+  it("displays compliant frameworks", () => {
     render(<ComplianceStatusWidget {...defaultProps} />);
-
-    expect(screen.getByText("Remediation Steps")).toBeInTheDocument();
     expect(
-      screen.getByText(
-        "Implement an Information Security Management System (ISMS)"
+      screen.getByTestId(COMPLIANCE_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST)
+    ).toBeInTheDocument();
+    expect(screen.getByText("ISO 27001")).toBeInTheDocument();
+    expect(screen.getByText("NIST CSF")).toBeInTheDocument();
+  });
+
+  it("displays partially compliant frameworks", () => {
+    render(<ComplianceStatusWidget {...defaultProps} />);
+    expect(
+      screen.getByTestId(
+        COMPLIANCE_TEST_IDS.PARTIALLY_COMPLIANT_FRAMEWORKS_LIST
       )
     ).toBeInTheDocument();
+    expect(screen.getByText("GDPR")).toBeInTheDocument();
+  });
+
+  it("displays non-compliant frameworks", () => {
+    render(<ComplianceStatusWidget {...defaultProps} />);
     expect(
-      screen.getByText("Develop data protection impact assessments")
+      screen.getByTestId(COMPLIANCE_TEST_IDS.NON_COMPLIANT_FRAMEWORKS_LIST)
+    ).toBeInTheDocument();
+    expect(screen.getByText("PCI DSS")).toBeInTheDocument();
+    expect(screen.getByText("HIPAA")).toBeInTheDocument();
+  });
+
+  it("shows framework gap analysis when framework is clicked", () => {
+    render(<ComplianceStatusWidget {...defaultProps} />);
+
+    // Initially no gap analysis
+    expect(
+      screen.queryByTestId(COMPLIANCE_TEST_IDS.FRAMEWORK_GAP_ANALYSIS)
+    ).not.toBeInTheDocument();
+
+    // Click on a non-compliant framework
+    const pciDss = screen.getByText("PCI DSS");
+    fireEvent.click(pciDss);
+
+    // Gap analysis should now be visible
+    expect(
+      screen.getByTestId(COMPLIANCE_TEST_IDS.FRAMEWORK_GAP_ANALYSIS)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(COMPLIANCE_TEST_IDS.SELECTED_FRAMEWORK_STATUS)
+    ).toHaveTextContent("Non-Compliant");
+    expect(
+      screen.getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_GAPS_LIST)
+    ).toBeInTheDocument();
+    expect(screen.getByText("Gap 1")).toBeInTheDocument();
+    expect(screen.getByText("Gap 2")).toBeInTheDocument();
+  });
+
+  it("shows compliance tips", () => {
+    render(<ComplianceStatusWidget {...defaultProps} />);
+    expect(
+      screen.getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_TIPS_LIST)
     ).toBeInTheDocument();
   });
 
-  it("uses correct styling based on compliance status", () => {
+  it("shows component requirements in gap analysis", () => {
     render(<ComplianceStatusWidget {...defaultProps} />);
 
-    // Check the badge has appropriate styling
-    const badge = screen.getByTestId(
-      COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_BADGE
-    );
-    expect(badge).toHaveClass("bg-yellow-100");
-    expect(badge).toHaveClass("text-yellow-800");
-    expect(badge).toHaveClass("border-yellow-500");
-  });
+    // Click on a framework to show gap analysis
+    const gdpr = screen.getByText("GDPR");
+    fireEvent.click(gdpr);
 
-  it("renders with default props", () => {
-    const minimalProps = {
-      availabilityLevel: "Moderate" as SecurityLevel,
-      integrityLevel: "Moderate" as SecurityLevel,
-      confidentialityLevel: "Moderate" as SecurityLevel,
-    };
-
-    render(<ComplianceStatusWidget {...minimalProps} />);
-
-    // Check the widget container is rendered with correct test ID
+    // Check component requirements
     expect(
-      screen.getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_WIDGET)
+      screen.getByTestId(COMPLIANCE_TEST_IDS.AVAILABILITY_REQUIREMENT)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(COMPLIANCE_TEST_IDS.INTEGRITY_REQUIREMENT)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(COMPLIANCE_TEST_IDS.CONFIDENTIALITY_REQUIREMENT)
     ).toBeInTheDocument();
 
-    // Check compliance badge is displayed
+    // Check confidentiality required level for GDPR is "High"
     expect(
-      screen.getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_BADGE)
+      screen.getByTestId(COMPLIANCE_TEST_IDS.CONFIDENTIALITY_REQUIRED_LEVEL)
+    ).toHaveTextContent("High");
+  });
+
+  it("handles loading state", () => {
+    // Override the mock to simulate loading
+    vi.mocked(useComplianceService).mockImplementationOnce(() => ({
+      complianceService: null,
+      isLoading: true,
+      error: null,
+    }));
+
+    render(<ComplianceStatusWidget {...defaultProps} />);
+    expect(
+      screen.getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_LOADING)
     ).toBeInTheDocument();
-
-    // Check compliance framework items are displayed
     expect(
-      screen.getAllByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_FRAMEWORK_ITEM)
-        .length
-    ).toBeGreaterThan(0);
+      screen.queryByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_SUMMARY)
+    ).toBeInTheDocument();
   });
 
-  it("renders with custom props", () => {
+  it("handles error state", () => {
+    // Override the mock to simulate error
+    vi.mocked(useComplianceService).mockImplementationOnce(() => ({
+      complianceService: null,
+      isLoading: false,
+      error: new Error("Test error message"),
+    }));
+
     render(<ComplianceStatusWidget {...defaultProps} />);
-
-    // Check it renders with custom test ID
-    expect(screen.getByTestId("custom-test-id")).toBeInTheDocument();
-
-    // Check custom class name is applied
-    expect(screen.getByTestId("custom-test-id")).toHaveClass("custom-class");
-  });
-
-  it("displays compliant frameworks correctly", () => {
-    render(<ComplianceStatusWidget {...defaultProps} />);
-
-    // Check compliant frameworks section exists and has correct frameworks
-    const frameworks = screen.getAllByTestId(
-      COMPLIANCE_TEST_IDS.COMPLIANCE_FRAMEWORK_ITEM
-    );
-    expect(frameworks.length).toBeGreaterThan(0);
-
-    // Verify at least one of the mocked frameworks is displayed
-    const frameworkTexts = frameworks.map((item) => item.textContent);
-    expect(frameworkTexts.some((text) => text?.includes("ISO 27001"))).toBe(
-      true
-    );
-  });
-
-  it("handles different security levels", () => {
-    // Set up the mock to return different values based on input
-    const getComplianceStatusMock = vi.spyOn(
-      ComplianceService,
-      "getComplianceStatus"
-    );
-
-    // Then override with our mock implementation
-    getComplianceStatusMock.mockImplementation(
-      (a: SecurityLevel, i: SecurityLevel, c: SecurityLevel) => {
-        if (a === "High" && i === "High" && c === "High") {
-          return {
-            compliantFrameworks: ["ALL_FRAMEWORKS"],
-            partiallyCompliantFrameworks: [],
-            nonCompliantFrameworks: [],
-            remediationSteps: [],
-            requirements: ["Maintain compliance"],
-            status: "Fully Compliant",
-            complianceScore: 100, // Add the missing property
-          };
-        }
-        // Return default mock data for other inputs
-        return {
-          compliantFrameworks: [],
-          partiallyCompliantFrameworks: [],
-          nonCompliantFrameworks: ["ALL_FRAMEWORKS"],
-          remediationSteps: ["Implement everything"],
-          requirements: ["Implement basic security controls"],
-          status: "Non-Compliant",
-          complianceScore: 0,
-        };
-      }
-    );
-
-    // Mock the status text function as well
-    vi.spyOn(ComplianceService, "getComplianceStatusText").mockReturnValue(
-      "Compliant with all major frameworks"
-    );
-
-    // Render with high security levels
-    render(
-      <ComplianceStatusWidget
-        availabilityLevel="High"
-        integrityLevel="High"
-        confidentialityLevel="High"
-      />
-    );
-
-    // Check the displayed frameworks reflect the high security level
-    expect(screen.getByText("ALL_FRAMEWORKS")).toBeInTheDocument();
-
-    // Restore the original mock for other tests
-    getComplianceStatusMock.mockRestore();
-  });
-
-  it("displays the widget title", () => {
-    render(<ComplianceStatusWidget {...defaultProps} />);
-
-    // Look for the title heading
-    expect(screen.getByText("Compliance Status")).toBeInTheDocument();
-  });
-
-  it("renders with default props", () => {
-    render(<ComplianceStatusWidget />);
-    expect(screen.getByTestId("compliance-status-widget")).toBeInTheDocument();
-    expect(screen.getByText("Compliance Status")).toBeInTheDocument();
-  });
-
-  it("renders with custom test ID", () => {
-    render(<ComplianceStatusWidget testId="custom-test-id" />);
-    expect(screen.getByTestId("custom-test-id")).toBeInTheDocument();
-  });
-
-  it("displays compliant frameworks based on security levels", () => {
-    const securityLevel: SecurityLevel = "High";
-    render(<ComplianceStatusWidget securityLevel={securityLevel} />);
-
-    // Check section headers
-    expect(screen.getByText("Compliant")).toBeInTheDocument();
-    expect(screen.getByText("Partially Compliant")).toBeInTheDocument();
-    expect(screen.getByText("Non-Compliant")).toBeInTheDocument();
-
-    // For High security level, we expect certain frameworks to be compliant
-    expect(screen.getByText("NIST 800-53 Rev. 5")).toBeInTheDocument();
-    expect(screen.getByText("ISO 27001:2022")).toBeInTheDocument();
-  });
-
-  it("displays different frameworks for different CIA levels", () => {
-    render(
-      <ComplianceStatusWidget
-        availabilityLevel="High"
-        integrityLevel="High"
-        confidentialityLevel="High"
-      />
-    );
-
-    // For High availability, integrity, and confidentiality, we expect certain frameworks to be compliant
-    const compliantItems = screen.getAllByText(
-      /NIST 800-53 Rev. 5|ISO 27001:2022|NIST CSF 2.0|PCI DSS/
-    );
-    expect(compliantItems.length).toBeGreaterThan(0);
-  });
-
-  it("shows non-compliant frameworks for low security levels", () => {
-    render(
-      <ComplianceStatusWidget
-        availabilityLevel="None"
-        integrityLevel="Low"
-        confidentialityLevel="Low"
-      />
-    );
-
-    // For None/Low security levels, we expect certain frameworks to be non-compliant
-    const nonCompliantItems = screen.getAllByText(
-      /NIST 800-53 Rev. 5|ISO 27001:2022|NIST CSF 2.0|PCI DSS|HIPAA/
-    );
-    expect(nonCompliantItems.length).toBeGreaterThan(0);
+    expect(
+      screen.getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_ERROR)
+    ).toBeInTheDocument();
+    expect(screen.getByText("Test error message")).toBeInTheDocument();
   });
 });

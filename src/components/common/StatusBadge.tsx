@@ -1,16 +1,5 @@
 import * as React from "react";
-
-// Define a complete StatusType that includes all used values
-export type StatusType =
-  | "success"
-  | "warning"
-  | "error"
-  | "info"
-  | "neutral"
-  | "purple";
-
-// Export this type for other components to use
-export type StatusBadgeVariant = StatusType;
+import { StatusBadgeVariant, StatusType } from "../../types/common/StatusTypes";
 
 // Single, unified interface definition to fix the "merged declaration" error
 export interface StatusBadgeProps {
@@ -99,3 +88,5 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({
 };
 
 export default StatusBadge;
+// Remove conflicting export and just reference the imported types
+export type { StatusBadgeVariant, StatusType };

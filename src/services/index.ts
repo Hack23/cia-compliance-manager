@@ -46,5 +46,10 @@ export {
 export {
   createSecurityResourceService,
   SecurityResourceService,
-  type SecurityResource,
 } from "./securityResourceService";
+
+// Update to import SecurityResource from the correct location
+import { SecurityResource } from "../types/securityResources";
+
+// Export SecurityResource type
+export type { SecurityResource };
