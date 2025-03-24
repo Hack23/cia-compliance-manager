@@ -1,5 +1,5 @@
-import { StatusBadgeVariant } from "../components/common/StatusBadge";
 import { SecurityLevel } from "../types/cia";
+import { StatusType } from "../types/common/StatusTypes";
 import { getSecurityLevelValue } from "./securityLevelUtils";
 
 // Define RiskLevel type if it's missing from risk.ts
@@ -47,9 +47,7 @@ export const RISK_LEVELS = {
  * @param riskLevel - String representing the risk level
  * @returns Badge variant name for styling
  */
-export function getRiskBadgeVariant(
-  riskLevel: string | undefined
-): StatusBadgeVariant {
+export function getRiskBadgeVariant(riskLevel: string | undefined): StatusType {
   if (!riskLevel) return "neutral";
 
   const normalized = riskLevel.toLowerCase();
@@ -93,9 +91,7 @@ export function getRiskLevelFromSecurityLevel(
  * @param riskLevel - The risk level to evaluate
  * @returns The appropriate status badge variant
  */
-export function getStatusBadgeForRiskLevel(
-  riskLevel: string
-): StatusBadgeVariant {
+export function getStatusBadgeForRiskLevel(riskLevel: string): StatusType {
   if (riskLevel.includes("Critical")) return "error";
   if (riskLevel.includes("High")) return "warning";
   if (riskLevel.includes("Medium")) return "info";
@@ -299,4 +295,21 @@ export function parseRiskLevel(level: string | null | undefined): number {
   if (levelLower.includes("minimal")) return 0;
 
   return 0;
+}
+
+/**
+ * Converts a risk level to a status badge variant
+ * @param riskLevel Risk level (e.g. "Critical", "High", "Medium", "Low")
+ * @returns Appropriate status badge variant for UI display
+ */
+export function getRiskLevelStatusBadge(riskLevel: string): StatusType {
+  const normalizedLevel = riskLevel.toLowerCase();
+
+  if (normalizedLevel.includes("critical")) return "error";
+  if (normalizedLevel.includes("high")) return "error";
+  if (normalizedLevel.includes("medium")) return "warning";
+  if (normalizedLevel.includes("low")) return "info";
+  if (normalizedLevel.includes("minimal")) return "success";
+
+  return "neutral";
 }

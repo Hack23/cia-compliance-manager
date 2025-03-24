@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StatusBadgeVariant, StatusType } from "../../types/common/StatusTypes";
+import { StatusType } from "../../types/common/StatusTypes";
 
 // Single, unified interface definition to fix the "merged declaration" error
 export interface StatusBadgeProps {
@@ -88,5 +88,5 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({
 };
 
 export default StatusBadge;
-// Remove conflicting export and just reference the imported types
-export type { StatusBadgeVariant, StatusType };
+// Use imported types rather than redefining them
+export type { StatusType };

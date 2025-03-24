@@ -1,35 +1,21 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { INTEGRITY_IMPACT_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
-import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
+import { getRiskLevelFromSecurityLevel } from "../../../utils/riskUtils";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 
-// Define component props
-export interface IntegrityImpactWidgetProps {
+/**
+ * Base props shared by all CIA component impact widgets
+ */
+interface ComponentImpactBaseProps {
   /**
-   * The selected integrity level
+   * Security level to display impact for
    */
-  integrityLevel: SecurityLevel;
-
-  /**
-   * The selected availability level
-   * (for combined impact analysis)
-   */
-  availabilityLevel: SecurityLevel;
-
-  /**
-   * The selected confidentiality level
-   * (for combined impact analysis)
-   */
-  confidentialityLevel: SecurityLevel;
-
-  /**
-   * For legacy support
-   */
-  level?: SecurityLevel;
+  level: SecurityLevel;
 
   /**
    * Optional CSS class name
@@ -37,224 +23,232 @@ export interface IntegrityImpactWidgetProps {
   className?: string;
 
   /**
-   * Optional test ID for testing
+   * Optional test ID for automated testing
    */
   testId?: string;
-
-  /**
-   * Optional level change handler
-   */
-  onIntegrityChange?: (level: SecurityLevel) => void;
 }
 
 /**
- * Displays integrity impact details for the selected security level
+ * Props for IntegrityImpactWidget component
+ */
+export interface IntegrityImpactWidgetProps extends ComponentImpactBaseProps {
+  /**
+   * Flag to show extended details (optional)
+   */
+  showExtendedDetails?: boolean;
+}
+
+/**
+ * Widget that displays the impact of selected integrity level
  *
  * ## Business Perspective
  *
- * This widget helps stakeholders understand how integrity security levels
- * affect data validation and protection against unauthorized changes.
- * It provides clear explanations of the business impacts and technical
- * implementations for different integrity levels. 🔒
+ * This widget helps stakeholders understand the business impact of
+ * integrity controls, including how data accuracy and validation
+ * mechanisms protect business operations and decision-making. 📊
  */
 const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
-  integrityLevel,
-  availabilityLevel,
-  confidentialityLevel,
-  level, // For backward compatibility
+  level,
   className = "",
-  testId = "widget-integrity-impact",
+  testId = INTEGRITY_IMPACT_TEST_IDS.INTEGRITY_IMPACT_PREFIX,
+  showExtendedDetails = false,
 }) => {
-  // Use the content service to get component details
-  const { ciaContentService } = useCIAContentService();
+  // Get CIA content service
+  const { ciaContentService, error, isLoading } = useCIAContentService();
 
-  // Use the passed level or fallback to integrityLevel for backward compatibility
-  const effectiveLevel = level || integrityLevel;
+  // Calculate risk level based on security level
+  const riskLevel = useMemo(
+    () => getRiskLevelFromSecurityLevel(level),
+    [level]
+  );
 
-  // Add proper null checks
-  const details = useMemo(() => {
-    if (!ciaContentService) {
-      return {
-        description: "Service not available",
-        technical: "Technical details not available",
-        businessImpact: "Business impact not available",
-        recommendations: [],
+  // Get integrity details from service if available
+  const integrityDetails = useMemo(() => {
+    if (!ciaContentService) return null;
+
+    try {
+      // Safely check if the method exists before calling it
+      // Using type assertion with unknown first for better type safety
+      const service = ciaContentService as unknown as {
+        getIntegrityDetails?: (level: SecurityLevel) => any;
       };
-    }
 
-    return (
-      ciaContentService.getComponentDetails("integrity", effectiveLevel) || {
-        description: "Details not available",
-        technical: "Technical details not available",
-        businessImpact: "Business impact not available",
-        recommendations: [],
+      if (typeof service.getIntegrityDetails === "function") {
+        return service.getIntegrityDetails(level);
       }
-    );
-  }, [ciaContentService, effectiveLevel]);
+      return null;
+    } catch (err) {
+      console.error("Error getting integrity details:", err);
+      return null;
+    }
+  }, [ciaContentService, level]);
 
-  // Add null checks to all service calls
+  // Get business impact data from service if available
   const businessImpact = useMemo(() => {
-    return (
-      ciaContentService?.getBusinessImpact?.("integrity", effectiveLevel) ||
-      null
-    );
-  }, [ciaContentService, effectiveLevel]);
+    if (!ciaContentService) return null;
 
-  const technicalImplementation = useMemo(() => {
-    return (
-      ciaContentService?.getTechnicalImplementation?.(
-        "integrity",
-        effectiveLevel
-      ) || null
-    );
-  }, [ciaContentService, effectiveLevel]);
+    try {
+      if (typeof ciaContentService.getBusinessImpact === "function") {
+        return ciaContentService.getBusinessImpact("integrity", level);
+      }
+      return null;
+    } catch (err) {
+      console.error("Error getting integrity business impact:", err);
+      return null;
+    }
+  }, [ciaContentService, level]);
 
-  const recommendations = useMemo(() => {
-    return (
-      ciaContentService?.getRecommendations?.("integrity", effectiveLevel) || []
-    );
-  }, [ciaContentService, effectiveLevel]);
+  // Format risk description
+  const formatBusinessRisk = (risk: string, component: string): string => {
+    const riskDescriptions: Record<string, string> = {
+      "Critical Risk": `Critical risk to ${component} means data may be completely unusable or unreliable, potentially causing severe business impact.`,
+      "High Risk": `High risk to ${component} means data accuracy is significantly compromised, likely leading to harmful business decisions.`,
+      "Medium Risk": `Medium risk to ${component} means some data validation controls are in place, but gaps may allow errors to occur occasionally.`,
+      "Low Risk": `Low risk to ${component} means good data validation controls are in place, with occasional minor errors possible.`,
+      "Minimal Risk": `Minimal risk to ${component} means comprehensive data validation and protection mechanisms are in place.`,
+    };
 
-  // Update overall impact calculation
-  const overallImpact = useMemo(() => {
     return (
-      ciaContentService?.calculateBusinessImpactLevel?.(
-        availabilityLevel,
-        effectiveLevel,
-        confidentialityLevel
-      ) || effectiveLevel
+      riskDescriptions[risk] || `Unknown risk level for ${component} integrity.`
     );
-  }, [
-    ciaContentService,
-    availabilityLevel,
-    effectiveLevel,
-    confidentialityLevel,
-  ]);
-
-  // If details aren't available, show an error state
-  if (!details) {
-    return (
-      <WidgetContainer
-        title={WIDGET_TITLES.INTEGRITY_IMPACT}
-        icon={WIDGET_ICONS.INTEGRITY_IMPACT}
-        className={className}
-        testId={testId}
-        error={new Error("Integrity details not available")}
-      >
-        <div>Integrity details not available</div>
-      </WidgetContainer>
-    );
-  }
+  };
 
   return (
     <WidgetContainer
-      title={WIDGET_TITLES.INTEGRITY_IMPACT}
-      icon={WIDGET_ICONS.INTEGRITY_IMPACT}
-      className={`${className} overflow-visible`}
+      title={WIDGET_TITLES.INTEGRITY_IMPACT || "Integrity Impact Analysis"}
+      icon={WIDGET_ICONS.INTEGRITY_IMPACT || "✓"}
+      className={className}
       testId={testId}
+      isLoading={isLoading}
+      error={error}
     >
-      <div className="max-h-[550px] overflow-y-auto pr-1">
+      <div className="p-4">
+        {/* Integrity impact summary */}
+        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+          <p className="text-sm">
+            This widget analyzes the business impact of your chosen integrity
+            level, including data accuracy requirements, validation controls,
+            and potential consequences of data corruption.
+          </p>
+        </div>
+
+        {/* Security level indicator */}
+        <div className="mb-4">
+          <SecurityLevelBadge
+            category="Integrity"
+            level={level}
+            colorClass="bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
+            textClass="text-green-800 dark:text-green-300"
+            testId={`${testId}-level`}
+          />
+        </div>
+
+        {/* Integrity risk level */}
         <div
-          className="p-4"
-          role="region"
-          aria-labelledby="integrity-impact-heading"
+          className="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+          data-testid={`${testId}-risk-level`}
         >
-          <div className="mb-4">
-            <SecurityLevelBadge
-              category="Integrity"
-              level={effectiveLevel}
-              colorClass="bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
-              textClass="text-green-800 dark:text-green-300"
-              testId={`${testId}-integrity-badge`}
-            />
-
-            {/* Add overall impact indicator when all levels are available */}
-            {availabilityLevel && confidentialityLevel && (
-              <div className="mt-2 text-sm">
-                <span className="font-medium">Overall Security Impact: </span>
-                <span
-                  className={`text-green-600 dark:text-green-400 font-medium`}
-                >
-                  {overallImpact}
-                </span>
-              </div>
-            )}
-
-            <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              <span className="font-medium">Security Score: </span>
-              <span className="font-bold">
-                {getSecurityLevelValue(effectiveLevel) * 25}%
-              </span>
-            </div>
+          <h3 className="text-lg font-medium mb-2">Risk Assessment</h3>
+          <div className="flex items-center justify-between">
+            <span className="text-gray-600 dark:text-gray-400">
+              Risk Level:
+            </span>
+            <span
+              className={`${
+                riskLevel.includes("Critical") || riskLevel.includes("High")
+                  ? "text-red-600 dark:text-red-400"
+                  : riskLevel.includes("Medium")
+                  ? "text-yellow-600 dark:text-yellow-400"
+                  : "text-green-600 dark:text-green-400"
+              } font-medium`}
+            >
+              {riskLevel}
+            </span>
           </div>
-
-          <div className="space-y-6">
-            {/* Impact Description */}
-            <div>
-              <h4 className="text-md font-medium mb-2 flex items-center">
-                <span className="mr-2">📝</span>Description
-              </h4>
-              <p className="text-gray-600 dark:text-gray-300">
-                {details.description || "No description available"}
-              </p>
-            </div>
-
-            {/* Business Impact */}
-            {businessImpact && (
-              <BusinessImpactSection
-                impact={businessImpact}
-                color="green"
-                testId={`${testId}-business-impact`}
-              />
-            )}
-
-            {/* Technical Implementation */}
-            <div>
-              <h4 className="text-md font-medium mb-2 flex items-center">
-                <span className="mr-2">🔧</span>Technical Implementation
-              </h4>
-              <p className="text-gray-600 dark:text-gray-300">
-                {details.technical || "No technical details available"}
-              </p>
-
-              {/* Validation method */}
-              {technicalImplementation &&
-                technicalImplementation.validationMethod && (
-                  <div className="mt-3 p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
-                    <h5 className="text-sm font-medium text-green-800 dark:text-green-300 mb-1">
-                      Validation Method
-                    </h5>
-                    <p className="text-green-700 dark:text-green-400">
-                      {technicalImplementation.validationMethod}
-                    </p>
-                  </div>
-                )}
-            </div>
-
-            {/* Recommended Controls */}
-            {recommendations && recommendations.length > 0 && (
-              <div>
-                <h4 className="text-md font-medium mb-2 flex items-center">
-                  <span className="mr-2">✅</span>Recommended Controls
-                </h4>
-                <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
-                  {recommendations.map((recommendation, index) => (
-                    <li
-                      key={`recommendation-${index}`}
-                      data-testid={`recommendation-${index}`}
-                    >
-                      {recommendation}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+          <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            {formatBusinessRisk(riskLevel, "integrity")}
           </div>
         </div>
+
+        {/* Technical Details */}
+        <div
+          className="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+          data-testid={`${testId}-description`}
+        >
+          <h3 className="text-lg font-medium mb-2">Technical Description</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            {integrityDetails?.description ||
+              `${level} integrity level focuses on ensuring data is accurate, reliable, and protected from unauthorized modification. This involves implementing controls to validate data inputs, detect unauthorized changes, and maintain data consistency across systems.`}
+          </p>
+        </div>
+
+        {/* Recovery metrics */}
+        {integrityDetails && (
+          <div
+            className="mb-4 p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
+            data-testid={`${testId}-metrics`}
+          >
+            <h3 className="text-lg font-medium mb-2 text-green-800 dark:text-green-300">
+              Data Integrity Metrics
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
+                <div className="text-sm font-medium mb-1">
+                  Data Validation Controls:
+                </div>
+                <div className="text-lg font-bold text-green-600 dark:text-green-400">
+                  {integrityDetails.validationLevel || "Standard"}
+                </div>
+              </div>
+              <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
+                <div className="text-sm font-medium mb-1">
+                  Acceptable Error Rate:
+                </div>
+                <div className="text-lg font-bold text-green-600 dark:text-green-400">
+                  {integrityDetails.errorRate || "< 0.1%"}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Business impact */}
+        <div className="mt-4" data-testid={`${testId}-business-impact`}>
+          {businessImpact && (
+            <BusinessImpactSection
+              impact={businessImpact}
+              color="green"
+              testId={`${testId}-business-impact`}
+            />
+          )}
+        </div>
+
+        {/* Recommendations */}
+        {integrityDetails?.recommendations && (
+          <div
+            className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+            data-testid={`${testId}-recommendations`}
+          >
+            <h3 className="text-lg font-medium mb-2">Recommendations</h3>
+            <ul className="space-y-2 text-sm">
+              {integrityDetails.recommendations.map(
+                (recommendation: string, index: number) => (
+                  <li
+                    key={index}
+                    className="flex items-start"
+                    data-testid={`${testId}-recommendation-${index}`}
+                  >
+                    <span className="mr-2 text-green-500">✓</span>
+                    <span>{recommendation}</span>
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+        )}
       </div>
     </WidgetContainer>
   );
 };
 
-// Export the component directly without HOC
 export default IntegrityImpactWidget;

@@ -3,16 +3,15 @@
  */
 
 /**
- * Status badge variant type
- * Used for consistent color coding of status indicators
+ * Available status types for badges and indicators
  */
 export type StatusType =
   | "success"
+  | "info"
   | "warning"
   | "error"
-  | "info"
   | "neutral"
-  | "purple";
+  | "purple"; // Added for Very High security levels
 
 /**
  * Alias for StatusType for backwards compatibility

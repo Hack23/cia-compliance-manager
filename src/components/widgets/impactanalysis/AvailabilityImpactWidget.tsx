@@ -1,33 +1,34 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { AVAILABILITY_IMPACT_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
-import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
+import { CIADetails } from "../../../types/cia-services";
+import { getRiskLevelFromSecurityLevel } from "../../../utils/riskUtils";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 
-// Define component props
-export interface AvailabilityImpactWidgetProps {
+interface AvailabilityImpactWidgetProps {
   /**
-   * The selected availability level
+   * Selected availability level
    */
   availabilityLevel: SecurityLevel;
 
   /**
-   * The selected integrity level
+   * Current integrity level (optional)
    */
-  integrityLevel: SecurityLevel;
+  integrityLevel?: SecurityLevel;
 
   /**
-   * The selected confidentiality level
+   * Current confidentiality level (optional)
    */
-  confidentialityLevel: SecurityLevel;
+  confidentialityLevel?: SecurityLevel;
 
   /**
-   * Legacy support for older implementations
+   * Flag to show extended details (optional)
    */
-  level?: SecurityLevel;
+  showExtendedDetails?: boolean;
 
   /**
    * Optional CSS class name
@@ -38,188 +39,368 @@ export interface AvailabilityImpactWidgetProps {
    * Optional test ID for testing
    */
   testId?: string;
-
-  /**
-   * Optional handler for availability level changes
-   */
-  onAvailabilityChange?: (level: SecurityLevel) => void;
 }
 
 /**
- * Displays availability impact details for the selected security level
+ * Widget that displays the impact of selected availability level
  *
  * ## Business Perspective
  *
- * This widget helps stakeholders understand how availability security levels
- * affect business operations through metrics like uptime, recovery time, and
- * business impact. The visualization of these metrics supports better decision-making
- * about availability requirements and resilience investments. 📊
+ * This widget helps stakeholders understand the business impact of
+ * availability controls, including uptime targets, recovery metrics,
+ * and resilience requirements for business continuity. ⏱️
  */
 const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   availabilityLevel,
   integrityLevel,
   confidentialityLevel,
-  level, // For backward compatibility
+  showExtendedDetails = false,
   className = "",
-  testId = "widget-availability-impact",
+  testId = AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_PREFIX,
 }) => {
-  // Use the content service to get component details
-  const { ciaContentService } = useCIAContentService();
+  // Get CIA content service
+  const { ciaContentService, error, isLoading } = useCIAContentService();
 
-  // Use the passed level or fallback to availabilityLevel for backward compatibility
-  const effectiveLevel = level || availabilityLevel;
+  // Calculate risk level based on security level
+  const riskLevel = useMemo(
+    () => getRiskLevelFromSecurityLevel(availabilityLevel),
+    [availabilityLevel]
+  );
 
-  // Get component-specific details
-  const details = useMemo(() => {
-    return (
-      ciaContentService?.getComponentDetails(
-        "availability",
-        effectiveLevel
-      ) || {
-        description: "Details not available",
-        technical: "Technical details not available",
-        businessImpact: "Business impact details not available",
-        recommendations: [],
-        // Add missing properties to avoid errors
-        uptime: "N/A",
-        rto: "N/A",
-        rpo: "N/A",
-        mttr: "N/A",
+  // Get availability details from service if available
+  const details = useMemo((): CIADetails | null => {
+    if (!ciaContentService) return null;
+
+    try {
+      // Safely check if the method exists before calling it
+      if (
+        typeof (ciaContentService as any).getAvailabilityDetails === "function"
+      ) {
+        return (ciaContentService as any).getAvailabilityDetails(
+          availabilityLevel
+        );
       }
-    );
-  }, [ciaContentService, effectiveLevel]);
+      return null;
+    } catch (err) {
+      console.error("Error getting availability details:", err);
+      return null;
+    }
+  }, [ciaContentService, availabilityLevel]);
 
-  // Get business impact details
+  // Get business impact data from service if available
   const businessImpact = useMemo(() => {
-    return (
-      ciaContentService?.getBusinessImpact?.("availability", effectiveLevel) ||
-      null
-    );
-  }, [ciaContentService, effectiveLevel]);
+    if (!ciaContentService) return null;
 
-  // Get recommended controls
-  const recommendations = useMemo(() => {
-    return (
-      ciaContentService?.getRecommendations?.("availability", effectiveLevel) ||
-      []
-    );
-  }, [ciaContentService, effectiveLevel, details]);
+    try {
+      if (typeof ciaContentService.getBusinessImpact === "function") {
+        return ciaContentService.getBusinessImpact(
+          "availability",
+          availabilityLevel
+        );
+      }
+      return null;
+    } catch (err) {
+      console.error("Error getting availability business impact:", err);
+      return null;
+    }
+  }, [ciaContentService, availabilityLevel]);
 
-  // Calculate overall impact with the current availability level
-  const overallImpact = useMemo(() => {
-    return (
-      ciaContentService?.calculateBusinessImpactLevel?.(
-        effectiveLevel,
-        integrityLevel,
-        confidentialityLevel
-      ) || effectiveLevel
-    );
-  }, [ciaContentService, effectiveLevel, integrityLevel, confidentialityLevel]);
+  // Default/fallback SLA metrics based on availability level
+  const slaMetrics = useMemo(() => {
+    const metrics = {
+      uptime: "",
+      rto: "",
+      rpo: "",
+      mttr: "",
+      sla: "",
+    };
 
-  // If details aren't available, show an error state
-  if (!details) {
-    return (
-      <WidgetContainer
-        title={WIDGET_TITLES.AVAILABILITY_IMPACT}
-        icon={WIDGET_ICONS.AVAILABILITY_IMPACT}
-        className={className}
-        testId={testId}
-        error={new Error("Availability details not available")}
-      >
-        <div>Availability details not available</div>
-      </WidgetContainer>
-    );
-  }
+    switch (availabilityLevel) {
+      case "None":
+        metrics.uptime = "< 90%";
+        metrics.rto = "Undefined";
+        metrics.rpo = "Undefined";
+        metrics.mttr = "Undefined";
+        metrics.sla = "No SLA";
+        break;
+      case "Low":
+        metrics.uptime = "90-95%";
+        metrics.rto = "< 24 hours";
+        metrics.rpo = "< 24 hours";
+        metrics.mttr = "< 12 hours";
+        metrics.sla = "Best effort";
+        break;
+      case "Moderate":
+        metrics.uptime = "95-99%";
+        metrics.rto = "< 8 hours";
+        metrics.rpo = "< 8 hours";
+        metrics.mttr = "< 4 hours";
+        metrics.sla = "Business hours";
+        break;
+      case "High":
+        metrics.uptime = "99-99.9%";
+        metrics.rto = "< 4 hours";
+        metrics.rpo = "< 4 hours";
+        metrics.mttr = "< 2 hours";
+        metrics.sla = "24/7 with exceptions";
+        break;
+      case "Very High":
+        metrics.uptime = "99.9-99.999%";
+        metrics.rto = "< 1 hour";
+        metrics.rpo = "< 15 minutes";
+        metrics.mttr = "< 30 minutes";
+        metrics.sla = "24/7/365";
+        break;
+      default:
+        metrics.uptime = "Unknown";
+        metrics.rto = "Unknown";
+        metrics.rpo = "Unknown";
+        metrics.mttr = "Unknown";
+        metrics.sla = "Unknown";
+    }
 
-  // Calculate security score as a percentage (0-100)
-  const securityScore = getSecurityLevelValue(effectiveLevel) * 25;
+    return metrics;
+  }, [availabilityLevel]);
 
-  // Render the widget with available details
+  // Default/fallback infrastructure details based on availability level
+  const infrastructureDetails = useMemo(() => {
+    const details = {
+      availabilityZones: "",
+      redundancyLevel: "",
+      failoverStrategy: "",
+    };
+
+    switch (availabilityLevel) {
+      case "None":
+        details.availabilityZones = "Single zone";
+        details.redundancyLevel = "No redundancy";
+        details.failoverStrategy = "Manual recovery";
+        break;
+      case "Low":
+        details.availabilityZones = "Single zone";
+        details.redundancyLevel = "Limited redundancy";
+        details.failoverStrategy = "Manual failover";
+        break;
+      case "Moderate":
+        details.availabilityZones = "Dual zone";
+        details.redundancyLevel = "N+1 redundancy";
+        details.failoverStrategy = "Semi-automated failover";
+        break;
+      case "High":
+        details.availabilityZones = "Multi-zone";
+        details.redundancyLevel = "N+1 redundancy";
+        details.failoverStrategy = "Automated failover";
+        break;
+      case "Very High":
+        details.availabilityZones = "Multi-region";
+        details.redundancyLevel = "N+2 redundancy";
+        details.failoverStrategy = "Active-active with automated failover";
+        break;
+      default:
+        details.availabilityZones = "Unknown";
+        details.redundancyLevel = "Unknown";
+        details.failoverStrategy = "Unknown";
+    }
+
+    return details;
+  }, [availabilityLevel]);
+
   return (
     <WidgetContainer
-      title={WIDGET_TITLES.AVAILABILITY_IMPACT}
-      icon={WIDGET_ICONS.AVAILABILITY_IMPACT}
-      className={`${className} overflow-visible`}
+      title={
+        WIDGET_TITLES.AVAILABILITY_IMPACT || "Availability Impact Analysis"
+      }
+      icon={WIDGET_ICONS.AVAILABILITY_IMPACT || "⏱️"}
+      className={className}
       testId={testId}
+      isLoading={isLoading}
+      error={error}
     >
-      <div className="max-h-[550px] overflow-y-auto pr-1">
+      <div className="p-4">
+        {/* Availability impact summary */}
+        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+          <p className="text-sm">
+            This widget analyzes the business impact of your chosen availability
+            level, including uptime requirements, recovery objectives, and
+            resilience requirements.
+          </p>
+        </div>
+
+        {/* Security level indicator */}
+        <div className="mb-4">
+          <SecurityLevelBadge
+            category="Availability"
+            level={availabilityLevel}
+            colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+            textClass="text-blue-800 dark:text-blue-300"
+            testId={`${testId}-level`}
+          />
+        </div>
+
+        {/* Availability risk level */}
         <div
-          className="p-4"
-          role="region"
-          aria-labelledby="availability-impact-heading"
+          className="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+          data-testid={`${testId}-risk-level`}
         >
-          {/* Replace custom badge with SecurityLevelBadge */}
-          <div className="mb-4">
-            <SecurityLevelBadge
-              category="Availability"
-              level={effectiveLevel}
-              colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
-              textClass="text-blue-800 dark:text-blue-300"
-              testId={`${testId}-availability-badge`}
-            />
+          <h3 className="text-lg font-medium mb-2">Risk Assessment</h3>
+          <div className="flex items-center justify-between">
+            <span className="text-gray-600 dark:text-gray-400">
+              Risk Level:
+            </span>
+            <span
+              className={`${
+                riskLevel.includes("Critical") || riskLevel.includes("High")
+                  ? "text-red-600 dark:text-red-400"
+                  : riskLevel.includes("Medium")
+                  ? "text-yellow-600 dark:text-yellow-400"
+                  : "text-green-600 dark:text-green-400"
+              } font-medium`}
+            >
+              {riskLevel}
+            </span>
+          </div>
+          <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            {details?.businessImpact ||
+              `${availabilityLevel} availability provides ${
+                availabilityLevel === "None"
+                  ? "minimal protection against"
+                  : availabilityLevel === "Low"
+                  ? "basic protection against"
+                  : availabilityLevel === "Moderate"
+                  ? "standard protection against"
+                  : availabilityLevel === "High"
+                  ? "strong protection against"
+                  : "very strong protection against"
+              } system downtime and service disruptions. Business operations ${
+                availabilityLevel === "None"
+                  ? "are at significant risk"
+                  : availabilityLevel === "Low"
+                  ? "may experience frequent disruptions"
+                  : availabilityLevel === "Moderate"
+                  ? "will experience occasional disruptions"
+                  : availabilityLevel === "High"
+                  ? "will rarely experience disruptions"
+                  : "will almost never experience disruptions"
+              }.`}
+          </div>
+        </div>
 
-            {/* Add overall impact indicator when all levels are available */}
-            {integrityLevel && confidentialityLevel && (
-              <div className="mt-2 text-sm">
-                <span className="font-medium">Overall Security Impact: </span>
-                <span className="text-blue-600 dark:text-blue-400 font-medium">
-                  {overallImpact}
-                </span>
+        {/* Technical Description */}
+        <div
+          className="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+          data-testid={`${testId}-description`}
+        >
+          <h3 className="text-lg font-medium mb-2">Technical Description</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            {details?.description ||
+              `${availabilityLevel} availability level focuses on ensuring systems and data are accessible when needed. This involves implementing controls for high uptime, quick recovery from disruptions, and resilient infrastructure to maintain business continuity.`}
+          </p>
+        </div>
+
+        {/* SLA metrics */}
+        <div
+          className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+          data-testid={`${testId}-metrics`}
+        >
+          <h3 className="text-lg font-medium mb-2 text-blue-800 dark:text-blue-300">
+            Availability Metrics
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
+              <div className="text-sm font-medium mb-1">Target Uptime:</div>
+              <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                {details?.uptime || slaMetrics.uptime}
               </div>
-            )}
-
-            <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              <span className="font-medium">Security Score: </span>
-              <span className="font-bold">{securityScore}%</span>
+            </div>
+            <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
+              <div className="text-sm font-medium mb-1">
+                Recovery Time Objective (RTO):
+              </div>
+              <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                {details?.rto || slaMetrics.rto}
+              </div>
+            </div>
+            <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
+              <div className="text-sm font-medium mb-1">
+                Recovery Point Objective (RPO):
+              </div>
+              <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                {details?.rpo || slaMetrics.rpo}
+              </div>
             </div>
           </div>
+        </div>
 
-          {/* Impact Description */}
-          <div className="mb-6">
-            <h4 className="text-md font-medium mb-2 flex items-center">
-              <span className="mr-2">📝</span>Description
-            </h4>
-            <p className="text-gray-600 dark:text-gray-300">
-              {details.description || "No description available"}
-            </p>
-          </div>
-
-          {/* Availability Metrics */}
-          <div className="mb-6">
+        {/* More metrics */}
+        <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div
+            className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+            data-testid={`${testId}-mttr`}
+          >
             <h4 className="text-md font-medium mb-3 flex items-center">
-              <span className="mr-2">📊</span>Availability Metrics
+              <span className="mr-2">⚡</span>
+              Response Metrics
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
-                <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
-                  Uptime
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <div className="text-sm font-medium mb-1">
+                  Mean Time to Repair:
                 </div>
-                <div className="text-lg font-bold">
-                  {details.uptime || "N/A"}
+                <div className="text-blue-600 dark:text-blue-400">
+                  {details?.mttr || slaMetrics.mttr}
                 </div>
               </div>
-              <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
-                <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
-                  Recovery Time Objective
+              <div>
+                <div className="text-sm font-medium mb-1">
+                  Service Level Agreement:
                 </div>
-                <div className="text-lg font-bold">{details.rto || "N/A"}</div>
-              </div>
-              <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
-                <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
-                  Recovery Point Objective
+                <div className="text-blue-600 dark:text-blue-400">
+                  {(details as any)?.sla || slaMetrics.sla}
                 </div>
-                <div className="text-lg font-bold">{details.rpo || "N/A"}</div>
-              </div>
-              <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
-                <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
-                  Mean Time To Recover
-                </div>
-                <div className="text-lg font-bold">{details.mttr || "N/A"}</div>
               </div>
             </div>
           </div>
 
-          {/* Business Impact */}
+          <div
+            className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+            data-testid={`${testId}-infrastructure`}
+          >
+            <h4 className="text-md font-medium mb-3 flex items-center">
+              <span className="mr-2">🏗️</span>
+              Infrastructure Requirements
+            </h4>
+            <div className="grid grid-cols-1 gap-2">
+              <div>
+                <div className="text-sm font-medium mb-1">
+                  Geographic Distribution:
+                </div>
+                <div className="text-blue-600 dark:text-blue-400">
+                  {(details as any)?.availabilityZones ||
+                    infrastructureDetails.availabilityZones}
+                </div>
+              </div>
+              <div>
+                <div className="text-sm font-medium mb-1">Redundancy:</div>
+                <div className="text-blue-600 dark:text-blue-400">
+                  {(details as any)?.redundancyLevel ||
+                    infrastructureDetails.redundancyLevel}
+                </div>
+              </div>
+              <div>
+                <div className="text-sm font-medium mb-1">
+                  Failover Approach:
+                </div>
+                <div className="text-blue-600 dark:text-blue-400">
+                  {(details as any)?.failoverStrategy ||
+                    infrastructureDetails.failoverStrategy}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Business Impact */}
+        <div className="mt-4" data-testid={`${testId}-business-impact`}>
           {businessImpact && (
             <BusinessImpactSection
               impact={businessImpact}
@@ -227,40 +408,34 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
               testId={`${testId}-business-impact`}
             />
           )}
-
-          {/* Technical Implementation */}
-          <div className="mb-6">
-            <h4 className="text-md font-medium mb-2 flex items-center">
-              <span className="mr-2">🔧</span>Technical Implementation
-            </h4>
-            <p className="text-gray-600 dark:text-gray-300">
-              {details.technical || "No technical details available"}
-            </p>
-          </div>
-
-          {/* Recommended Controls */}
-          {recommendations && recommendations.length > 0 && (
-            <div className="mb-4">
-              <h4 className="text-md font-medium mb-2 flex items-center">
-                <span className="mr-2">✅</span>Recommended Controls
-              </h4>
-              <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
-                {recommendations.map((recommendation, index) => (
-                  <li
-                    key={`recommendation-${index}`}
-                    data-testid={`recommendation-${index}`}
-                  >
-                    {recommendation}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
         </div>
+
+        {/* Recommendations */}
+        {details?.recommendations && details.recommendations.length > 0 && (
+          <div
+            className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+            data-testid={`${testId}-recommendations`}
+          >
+            <h3 className="text-lg font-medium mb-2">Recommendations</h3>
+            <ul className="space-y-2 text-sm">
+              {details.recommendations.map(
+                (recommendation: string, index: number) => (
+                  <li
+                    key={index}
+                    className="flex items-start"
+                    data-testid={`${testId}-recommendation-${index}`}
+                  >
+                    <span className="mr-2 text-blue-500">✓</span>
+                    <span>{recommendation}</span>
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+        )}
       </div>
     </WidgetContainer>
   );
 };
 
-// Export the component directly without HOC
 export default AvailabilityImpactWidget;

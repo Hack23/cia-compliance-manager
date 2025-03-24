@@ -68,15 +68,26 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   ) => {
     // Add null check to service call
     const technicalImplementation = useMemo(() => {
+      if (!ciaContentService) {
+        return {
+          description: "Service unavailable",
+          implementationSteps: [],
+          expertiseLevel: "Unknown",
+          developmentEffort: "Medium",
+          maintenanceLevel: "Medium",
+          recommendedTechStack: {},
+        };
+      }
+
+      // Return result from service or fallback to defaults
       return (
-        ciaContentService?.getTechnicalImplementation?.(component, level) || {
+        ciaContentService.getTechnicalImplementation?.(component, level) || {
           description: "Technical details not available",
           implementationSteps: [],
-          effort: {
-            development: "Unknown",
-            maintenance: "Unknown",
-            expertise: "Unknown",
-          },
+          expertiseLevel: "Standard",
+          developmentEffort: "Medium",
+          maintenanceLevel: "Medium",
+          recommendedTechStack: {},
         }
       );
     }, [ciaContentService, component, level]);

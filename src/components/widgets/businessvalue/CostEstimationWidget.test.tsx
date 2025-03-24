@@ -1,6 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { COST_TEST_IDS } from "../../../constants/testIds";
+import { CIAContentServiceProvider } from "../../../contexts/CIAContentServiceContext";
+import { getCIAContentServiceMock } from "../../../mocks/ciaContentServiceMock";
 import { SecurityLevel } from "../../../types/cia";
 import CostEstimationWidget from "./CostEstimationWidget";
 
@@ -209,5 +211,147 @@ describe("CostEstimationWidget", () => {
       />
     );
     expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+  });
+
+  // Mock service with implementation for cost methods
+  const mockService = {
+    ...getCIAContentServiceMock(),
+    calculateImplementationCost: vi.fn().mockReturnValue({
+      total: 75000,
+      personnel: "1.5 FTE",
+      factors: [
+        {
+          name: "Technology & Infrastructure",
+          description:
+            "Hardware, software licenses, cloud services, and specialized tools.",
+        },
+        {
+          name: "Personnel & Training",
+          description:
+            "Staff time for implementation, operation, and ongoing training.",
+        },
+      ],
+    }),
+    calculateOperationalCost: vi.fn().mockReturnValue({
+      annual: 30000,
+    }),
+    getComponentCost: vi.fn().mockReturnValue({
+      implementation: "$25,000",
+      operational: "$10,000 / year",
+      personnel: "0.5 FTE",
+    }),
+    getImplementationTimeline: vi.fn().mockReturnValue({
+      total: "12 weeks",
+      phases: [
+        { name: "Planning", duration: "3 weeks" },
+        { name: "Implementation", duration: "6 weeks" },
+        { name: "Testing & Adoption", duration: "3 weeks" },
+      ],
+    }),
+  };
+
+  const renderWidget = (props = {}) => {
+    const defaultProps = {
+      availabilityLevel: "Moderate" as SecurityLevel,
+      integrityLevel: "Moderate" as SecurityLevel,
+      confidentialityLevel: "Moderate" as SecurityLevel,
+      testId: "cost-estimation-widget",
+    };
+
+    return render(
+      <CIAContentServiceProvider value={mockService}>
+        <CostEstimationWidget {...defaultProps} {...props} />
+      </CIAContentServiceProvider>
+    );
+  };
+
+  it("renders the widget with title", () => {
+    renderWidget();
+    expect(screen.getByText("Security Cost Estimation")).toBeInTheDocument();
+  });
+
+  it("displays implementation cost from service", () => {
+    renderWidget();
+    expect(screen.getByTestId("implementation-cost")).toBeInTheDocument();
+    expect(screen.getByTestId("implementation-cost")).toHaveTextContent(
+      "$75,000"
+    );
+  });
+
+  it("displays operational cost from service", () => {
+    renderWidget();
+    expect(screen.getByTestId("operational-cost")).toBeInTheDocument();
+    expect(screen.getByTestId("operational-cost")).toHaveTextContent("$30,000");
+  });
+
+  it("displays personnel needs from service", () => {
+    renderWidget();
+    expect(screen.getByTestId("personnel-cost")).toBeInTheDocument();
+    expect(screen.getByTestId("personnel-cost")).toHaveTextContent("1.5 FTE");
+  });
+
+  it("displays component breakdowns", () => {
+    renderWidget();
+    expect(screen.getByTestId("availability-cost")).toBeInTheDocument();
+    expect(screen.getByTestId("integrity-cost")).toBeInTheDocument();
+    expect(screen.getByTestId("confidentiality-cost")).toBeInTheDocument();
+  });
+
+  it("displays implementation timeline", () => {
+    renderWidget();
+    expect(screen.getByTestId("implementation-timeline")).toBeInTheDocument();
+    expect(screen.getByTestId("implementation-timeline")).toHaveTextContent(
+      "12 weeks"
+    );
+  });
+
+  it("handles different security levels properly", () => {
+    renderWidget({
+      availabilityLevel: "High" as SecurityLevel,
+      integrityLevel: "High" as SecurityLevel,
+      confidentialityLevel: "High" as SecurityLevel,
+    });
+
+    // Service methods should have been called with the new security levels
+    expect(mockService.calculateImplementationCost).toHaveBeenCalledWith(
+      "High",
+      "High",
+      "High"
+    );
+    expect(mockService.calculateOperationalCost).toHaveBeenCalledWith(
+      "High",
+      "High",
+      "High"
+    );
+  });
+
+  it("handles service errors gracefully", () => {
+    // Mock implementation that throws errors
+    const errorMockService = {
+      ...getCIAContentServiceMock(),
+      calculateImplementationCost: vi.fn().mockImplementation(() => {
+        throw new Error("Service error");
+      }),
+      calculateOperationalCost: vi.fn().mockImplementation(() => {
+        throw new Error("Service error");
+      }),
+    };
+
+    render(
+      <CIAContentServiceProvider value={errorMockService}>
+        <CostEstimationWidget
+          availabilityLevel="Moderate"
+          integrityLevel="Moderate"
+          confidentialityLevel="Moderate"
+        />
+      </CIAContentServiceProvider>
+    );
+
+    // Should still render the widget without crashing
+    expect(screen.getByText("Security Cost Estimation")).toBeInTheDocument();
+
+    // Should fallback to calculated values based on security levels
+    const values = screen.getAllByText(/\$\d+,\d+/);
+    expect(values.length).toBeGreaterThan(0);
   });
 });

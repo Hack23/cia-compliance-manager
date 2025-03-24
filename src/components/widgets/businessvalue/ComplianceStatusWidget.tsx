@@ -267,6 +267,59 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
     error,
   ]);
 
+  // Create a type-safe implementation of getFrameworkRequiredLevel
+  const getFrameworkRequiredLevel = useCallback(
+    (framework: string, component: CIAComponentType): SecurityLevel => {
+      // If the service is available, use it
+      if (complianceService?.getFrameworkRequiredLevel) {
+        try {
+          return complianceService.getFrameworkRequiredLevel(
+            framework,
+            component
+          );
+        } catch (err) {
+          console.error(`Error getting required level for ${framework}:`, err);
+        }
+      }
+
+      // Default fallback levels based on typical requirements
+      const defaultLevels: Record<
+        string,
+        Record<CIAComponentType, SecurityLevel>
+      > = {
+        "PCI DSS": {
+          availability: "High",
+          integrity: "High",
+          confidentiality: "High",
+        },
+        HIPAA: {
+          availability: "High",
+          integrity: "High",
+          confidentiality: "High",
+        },
+        GDPR: {
+          availability: "Moderate",
+          integrity: "High",
+          confidentiality: "High",
+        },
+        "ISO 27001": {
+          availability: "Moderate",
+          integrity: "Moderate",
+          confidentiality: "Moderate",
+        },
+        "SOC 2": {
+          availability: "Moderate",
+          integrity: "Moderate",
+          confidentiality: "Moderate",
+        },
+      };
+
+      // Return the default if available, otherwise return Moderate as a safe fallback
+      return defaultLevels[framework]?.[component] || "Moderate";
+    },
+    [complianceService]
+  );
+
   return (
     <WidgetContainer
       title={WIDGET_TITLES.COMPLIANCE_STATUS}
@@ -548,7 +601,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                               COMPLIANCE_TEST_IDS.AVAILABILITY_REQUIRED_LEVEL
                             }
                           >
-                            {complianceService?.getFrameworkRequiredLevel(
+                            {getFrameworkRequiredLevel(
                               activeFramework,
                               "availability" as CIAComponentType
                             )}
@@ -578,7 +631,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                               COMPLIANCE_TEST_IDS.INTEGRITY_REQUIRED_LEVEL
                             }
                           >
-                            {complianceService?.getFrameworkRequiredLevel(
+                            {getFrameworkRequiredLevel(
                               activeFramework,
                               "integrity" as CIAComponentType
                             )}
@@ -610,7 +663,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                               COMPLIANCE_TEST_IDS.CONFIDENTIALITY_REQUIRED_LEVEL
                             }
                           >
-                            {complianceService?.getFrameworkRequiredLevel(
+                            {getFrameworkRequiredLevel(
                               activeFramework,
                               "confidentiality" as CIAComponentType
                             )}

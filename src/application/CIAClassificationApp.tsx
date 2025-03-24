@@ -215,10 +215,8 @@ const CIAClassificationApp: React.FC = () => {
             {/* Integrity Impact Widget */}
             <div className="grid-widget-container">
               <IntegrityImpactWidget
-                availabilityLevel={availabilityLevel}
-                integrityLevel={integrityLevel}
-                confidentialityLevel={confidentialityLevel}
-                testId="widget-integrity-impact"
+                level={integrityLevel}
+                testId="integrity-impact-widget"
               />
             </div>
 
@@ -255,11 +253,10 @@ const CIAClassificationApp: React.FC = () => {
             {/* Security Resources Widget */}
             <div className="grid-widget-container">
               <SecurityResourcesWidget
-                component="availability"
-                securityLevel={availabilityLevel}
+                availabilityLevel={availabilityLevel}
                 integrityLevel={integrityLevel}
                 confidentialityLevel={confidentialityLevel}
-                testId="security-resources-test"
+                testId="security-resources-widget"
               />
             </div>
           </div>

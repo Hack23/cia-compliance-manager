@@ -5,6 +5,7 @@ import {
   CIADetails,
   ROIEstimate,
 } from "../types/cia-services";
+import { StatusType } from "../types/common/StatusTypes";
 import {
   AvailabilityDetail,
   CIAImpactSummaryWidgetProps,
@@ -456,7 +457,7 @@ export function isCIADetails(value: unknown): value is CIADetails {
 //  if (hasProperty(value, "testId") && !isString(value.testId)) return false;
 //
 //  return true;
-// }
+// };
 
 /**
  * Type guard for checking if a value is a SecurityLevelWidgetProps
@@ -872,3 +873,71 @@ export function isValidKey(value: unknown): value is string | number | symbol {
 export function isCIAComponent(value: unknown): value is CIAComponentType {
   return isCIAComponentType(value);
 }
+
+/**
+ * Type guard to check if a value is a valid SecurityLevel
+ * @param value The value to check
+ * @returns Whether the value is a valid SecurityLevel
+ */
+// Remove this duplicate implementation
+// export const isSecurityLevel = (value: unknown): value is SecurityLevel => {
+//   if (typeof value !== "string") return false;
+//
+//   const validLevels: SecurityLevel[] = [
+//     "None",
+//     "Low",
+//     "Moderate",
+//     "High",
+//     "Very High",
+//   ];
+//
+//   return validLevels.includes(value as SecurityLevel);
+// };
+
+/**
+ * Safely converts a string to a SecurityLevel, with fallback
+ * @param value The value to convert
+ * @param fallback The fallback value (defaults to "Moderate")
+ * @returns A valid SecurityLevel
+ */
+export const toSecurityLevel = (
+  value: unknown,
+  fallback: SecurityLevel = "Moderate"
+): SecurityLevel => {
+  if (isSecurityLevel(value)) return value;
+  return fallback;
+};
+
+/**
+ * Type guard to check if a value is a valid StatusType
+ * @param value The value to check
+ * @returns Whether the value is a valid StatusType
+ */
+export function isStatusType(value: unknown): value is StatusType {
+  if (typeof value !== "string") return false;
+
+  const validStatusTypes: StatusType[] = [
+    "success",
+    "info",
+    "warning",
+    "error",
+    "neutral",
+    "purple",
+  ];
+
+  return validStatusTypes.includes(value as StatusType);
+}
+
+/**
+ * Safely converts a string to a StatusType, with fallback
+ * @param value The value to convert
+ * @param fallback The fallback value (defaults to "neutral")
+ * @returns A valid StatusType
+ */
+export const toStatusType = (
+  value: unknown,
+  fallback: StatusType = "neutral"
+): StatusType => {
+  if (isStatusType(value)) return value;
+  return fallback;
+};

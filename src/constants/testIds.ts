@@ -483,6 +483,23 @@ export const COST_TEST_IDS = {
   COST_ESTIMATION_ROOT: "widget-cost-estimation-root",
 };
 
+/**
+ * Test IDs for cost estimation widget
+ */
+export const COST_ESTIMATION_TEST_IDS = {
+  IMPLEMENTATION_COST: "implementation-cost",
+  OPERATIONAL_COST: "operational-cost",
+  PERSONNEL_COST: "personnel-cost",
+  AVAILABILITY_COST: "availability-cost",
+  INTEGRITY_COST: "integrity-cost",
+  CONFIDENTIALITY_COST: "confidentiality-cost",
+  IMPLEMENTATION_TIMELINE: "implementation-timeline",
+  ROI_ESTIMATE: "roi-estimate",
+  TOTAL_COST: "total-cost",
+  THREE_YEAR_TOTAL: "three-year-total",
+  WIDGET: "widget-cost-estimation",
+};
+
 // ---------------------------------------------------------------
 // SECTION 9: SECURITY SUMMARY WIDGET TEST IDs
 // ---------------------------------------------------------------
@@ -654,6 +671,14 @@ export const VALUE_CREATION_TEST_IDS = {
   ROI_PERCENTAGE: "roi-percentage",
   POTENTIAL_SAVINGS: "potential-savings",
   BREAKEVEN_PERIOD: "breakeven-period",
+  VALUE_SCORE: "value-score",
+  ROI_ESTIMATE: "roi-estimate",
+  COST_SAVINGS: "cost-savings",
+  PRODUCTIVITY: "productivity",
+  AVAILABILITY_VALUE: "availability-value",
+  INTEGRITY_VALUE: "integrity-value",
+  CONFIDENTIALITY_VALUE: "confidentiality-value",
+  STRATEGIC_VALUE: "strategic-value",
 };
 
 // ---------------------------------------------------------------

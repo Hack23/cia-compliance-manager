@@ -112,19 +112,27 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   useEffect(() => {
     setIsLoading(true);
     try {
-      const details = ciaContentService?.getComponentDetails(
-        activeComponent,
+      if (!ciaContentService) {
+        throw new Error("Content service unavailable");
+      }
+
+      const selectedLevel =
         activeComponent === "availability"
           ? availabilityLevel
           : activeComponent === "integrity"
           ? integrityLevel
-          : confidentialityLevel
+          : confidentialityLevel;
+
+      const details = ciaContentService.getComponentDetails(
+        activeComponent,
+        selectedLevel
       ) || {
         description: "No details available",
         technical: "No technical information available",
         businessImpact: "No business impact information available",
-        recommendations: []
+        recommendations: [],
       };
+
       setActiveDetails(details);
       setError(null);
       setServiceError(null);

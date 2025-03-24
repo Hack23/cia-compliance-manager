@@ -1,12 +1,9 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import { COST_TEST_IDS } from "../../../constants/testIds";
-import { useCIAOptions } from "../../../hooks/useCIAOptions";
+import { COST_ESTIMATION_TEST_IDS } from "../../../constants/testIds";
+import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
-import {
-  calculateOverallSecurityLevel,
-  getSecurityLevelValue,
-} from "../../../utils/securityLevelUtils";
+import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
 import WidgetContainer from "../../common/WidgetContainer";
 
 /**
@@ -34,330 +31,645 @@ interface CostEstimationWidgetProps {
   className?: string;
 
   /**
-   * Optional test ID for automated testing
+   * Optional test ID for testing
    */
   testId?: string;
 }
 
 /**
- * Cost Estimation Widget provides financial calculations for security implementations
+ * Widget for estimating implementation and operational costs
  *
  * ## Business Perspective
  *
- * This widget helps CFOs and security executives understand the financial
- * implications of security controls, providing cost estimations for both
- * implementation (CAPEX) and ongoing maintenance (OPEX). It supports
- * budgeting, ROI calculations, and financial planning for security projects. 💰
+ * This widget provides financial stakeholders with cost estimates
+ * for implementing and maintaining the selected security levels,
+ * helping with budget planning and investment decisions related
+ * to security initiatives. 💲
  */
 const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
   availabilityLevel,
   integrityLevel,
   confidentialityLevel,
   className = "",
-  testId = "widget-cost-estimation",
+  testId = "cost-estimation-widget",
 }) => {
-  // Use the CIA options hook to get cost data
-  const {
-    availabilityOptions,
-    integrityOptions,
-    confidentialityOptions,
-    ROI_ESTIMATES,
-  } = useCIAOptions();
+  // Get CIA content service
+  const { ciaContentService, error, isLoading } = useCIAContentService();
 
-  // Calculate overall security level
-  const overallSecurityLevel = useMemo(() => {
-    return calculateOverallSecurityLevel(
-      availabilityLevel,
-      integrityLevel,
-      confidentialityLevel
-    );
-  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
+  // Get security level values
+  const availabilityValue = getSecurityLevelValue(availabilityLevel);
+  const integrityValue = getSecurityLevelValue(integrityLevel);
+  const confidentialityValue = getSecurityLevelValue(confidentialityLevel);
 
-  // Calculate CAPEX (capital expenditure) for implementation
-  const capexEstimate = useMemo(() => {
-    const availCapex = availabilityOptions[availabilityLevel]?.capex || 0;
-    const integCapex = integrityOptions[integrityLevel]?.capex || 0;
-    const confCapex = confidentialityOptions[confidentialityLevel]?.capex || 0;
+  // Define necessary interfaces for fallback implementations
+  interface ImplementationCost {
+    total: number;
+    personnel: string;
+    factors?: Array<{ name: string; description: string }>;
+  }
 
-    return availCapex + integCapex + confCapex;
+  interface OperationalCost {
+    annual: number;
+  }
+
+  interface ComponentCost {
+    implementation: string;
+    operational: string;
+    personnel: string;
+  }
+
+  interface TimelinePhase {
+    name: string;
+    duration: string;
+  }
+
+  interface ImplementationTimeline {
+    total: string;
+    phases?: TimelinePhase[];
+  }
+
+  // Calculate total implementation cost
+  const implementationCost = useMemo((): ImplementationCost | null => {
+    if (!ciaContentService) return null;
+
+    try {
+      // Check if method exists by checking its type before calling
+      // Use type assertion with 'any' only inside the condition
+      if (
+        typeof (ciaContentService as any).calculateImplementationCost ===
+        "function"
+      ) {
+        return (ciaContentService as any).calculateImplementationCost(
+          availabilityLevel,
+          integrityLevel,
+          confidentialityLevel
+        );
+      }
+
+      // Fallback calculation
+      const total =
+        (availabilityValue + integrityValue + confidentialityValue) * 25000;
+      return {
+        total,
+        personnel: `${
+          (availabilityValue + integrityValue + confidentialityValue) * 0.5
+        } FTE`,
+        factors: [
+          {
+            name: "Technology & Infrastructure",
+            description:
+              "Hardware, software licenses, cloud services, and specialized tools.",
+          },
+          {
+            name: "Personnel & Training",
+            description:
+              "Staff time for implementation, operation, and ongoing training.",
+          },
+          {
+            name: "Integration & Testing",
+            description:
+              "Costs for integrating controls with existing systems and testing.",
+          },
+          {
+            name: "Maintenance & Updates",
+            description:
+              "Ongoing operational costs for maintenance and updates.",
+          },
+        ],
+      };
+    } catch (err) {
+      console.error("Error calculating implementation cost:", err);
+      return null;
+    }
   }, [
-    availabilityOptions,
-    integrityOptions,
-    confidentialityOptions,
+    ciaContentService,
     availabilityLevel,
     integrityLevel,
     confidentialityLevel,
+    availabilityValue,
+    integrityValue,
+    confidentialityValue,
   ]);
 
-  // Calculate OPEX (operational expenditure) for maintenance
-  const opexEstimate = useMemo(() => {
-    const availOpex = availabilityOptions[availabilityLevel]?.opex || 0;
-    const integOpex = integrityOptions[integrityLevel]?.opex || 0;
-    const confOpex = confidentialityOptions[confidentialityLevel]?.opex || 0;
+  // Calculate annual operational cost
+  const operationalCost = useMemo((): OperationalCost | null => {
+    if (!ciaContentService) return null;
 
-    return availOpex + integOpex + confOpex;
+    try {
+      // Check if method exists by checking its type before calling
+      if (
+        typeof (ciaContentService as any).calculateOperationalCost ===
+        "function"
+      ) {
+        return (ciaContentService as any).calculateOperationalCost(
+          availabilityLevel,
+          integrityLevel,
+          confidentialityLevel
+        );
+      }
+
+      // Fallback calculation
+      return {
+        annual:
+          (availabilityValue + integrityValue + confidentialityValue) * 10000,
+      };
+    } catch (err) {
+      console.error("Error calculating operational cost:", err);
+      return null;
+    }
   }, [
-    availabilityOptions,
-    integrityOptions,
-    confidentialityOptions,
+    ciaContentService,
     availabilityLevel,
     integrityLevel,
     confidentialityLevel,
+    availabilityValue,
+    integrityValue,
+    confidentialityValue,
   ]);
 
-  // Calculate total cost (implementation + 3 years maintenance)
-  const totalCost = useMemo(() => {
-    const implementation = capexEstimate;
-    const maintenance = opexEstimate * 12 * 3; // Monthly OPEX for 3 years
-    return implementation + maintenance;
-  }, [capexEstimate, opexEstimate]);
+  // Get component costs
+  const getComponentCost = (
+    component: "availability" | "integrity" | "confidentiality",
+    level: SecurityLevel
+  ): ComponentCost => {
+    if (!ciaContentService) {
+      // Default component cost
+      return {
+        implementation: formatCurrency(getSecurityLevelValue(level) * 25000),
+        operational: `${formatCurrency(
+          getSecurityLevelValue(level) * 10000
+        )} / year`,
+        personnel: `${getSecurityLevelValue(level) * 0.5} FTE`,
+      };
+    }
 
-  // Calculate implementation time (in months)
-  const implementationTime = useMemo(() => {
-    // Base implementation time is 1 month, plus 0.5 months for each security level
-    const availTime = getSecurityLevelValue(availabilityLevel) * 0.5;
-    const integTime = getSecurityLevelValue(integrityLevel) * 0.5;
-    const confTime = getSecurityLevelValue(confidentialityLevel) * 0.5;
+    try {
+      // Check if method exists by checking its type before calling
+      if (typeof (ciaContentService as any).getComponentCost === "function") {
+        const cost = (ciaContentService as any).getComponentCost(
+          component,
+          level
+        );
+        if (cost) return cost;
+      }
 
-    return 1 + availTime + integTime + confTime;
-  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
+      // If method doesn't exist or returns null, use the fallback
+      return {
+        implementation: formatCurrency(getSecurityLevelValue(level) * 25000),
+        operational: `${formatCurrency(
+          getSecurityLevelValue(level) * 10000
+        )} / year`,
+        personnel: `${getSecurityLevelValue(level) * 0.5} FTE`,
+      };
+    } catch (err) {
+      console.error(`Error getting ${component} cost:`, err);
+      return {
+        implementation: formatCurrency(getSecurityLevelValue(level) * 25000),
+        operational: `${formatCurrency(
+          getSecurityLevelValue(level) * 10000
+        )} / year`,
+        personnel: `${getSecurityLevelValue(level) * 0.5} FTE`,
+      };
+    }
+  };
 
-  // Format costs as currency
-  const formatCurrency = (amount: number): string => {
+  // Get implementation timeline
+  const implementationTimeline = useMemo((): ImplementationTimeline | null => {
+    if (!ciaContentService) return null;
+
+    try {
+      // Check if method exists by checking its type before calling
+      if (
+        typeof (ciaContentService as any).getImplementationTimeline ===
+        "function"
+      ) {
+        return (ciaContentService as any).getImplementationTimeline(
+          availabilityLevel,
+          integrityLevel,
+          confidentialityLevel
+        );
+      }
+
+      // Fallback calculation
+      const totalWeeks = Math.round(
+        (availabilityValue + integrityValue + confidentialityValue) * 1.5
+      );
+
+      return {
+        total: `${totalWeeks} weeks`,
+        phases: [
+          {
+            name: "Planning",
+            duration: `${Math.round(
+              (availabilityValue + integrityValue + confidentialityValue) * 0.3
+            )} weeks`,
+          },
+          {
+            name: "Implementation",
+            duration: `${Math.round(
+              (availabilityValue + integrityValue + confidentialityValue) * 0.8
+            )} weeks`,
+          },
+          {
+            name: "Testing & Adoption",
+            duration: `${Math.round(
+              (availabilityValue + integrityValue + confidentialityValue) * 0.4
+            )} weeks`,
+          },
+        ],
+      };
+    } catch (err) {
+      console.error("Error getting implementation timeline:", err);
+      return null;
+    }
+  }, [
+    ciaContentService,
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel,
+    availabilityValue,
+    integrityValue,
+    confidentialityValue,
+  ]);
+
+  // Format currency for display
+  const formatCurrency = (
+    amount: number | string | null | undefined
+  ): string => {
+    if (amount == null) return "$0";
+
+    if (typeof amount === "string") {
+      if (amount.startsWith("$")) return amount;
+      return `$${amount}`;
+    }
+
     return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
       maximumFractionDigits: 0,
-    }).format(amount * 5000); // Multiply by 5000 to get a realistic estimate
+    }).format(amount);
   };
 
-  // Format implementation time
-  const formatImplementationTime = (months: number): string => {
-    const wholeMonths = Math.floor(months);
-    const days = Math.round((months - wholeMonths) * 30);
+  // Calculate totals as fallbacks
+  const totalImplementationCost =
+    implementationCost?.total ||
+    (availabilityValue + integrityValue + confidentialityValue) * 25000;
 
-    if (days === 0) {
-      return `${wholeMonths} month${wholeMonths !== 1 ? "s" : ""}`;
-    } else {
-      return `${wholeMonths} month${
-        wholeMonths !== 1 ? "s" : ""
-      } and ${days} day${days !== 1 ? "s" : ""}`;
-    }
-  };
+  const totalOperationalCost =
+    operationalCost?.annual ||
+    (availabilityValue + integrityValue + confidentialityValue) * 10000;
 
-  // Calculate ROI estimate based on security level
-  const roiEstimate = useMemo(() => {
-    const levelKey = overallSecurityLevel.toUpperCase().replace(" ", "_");
-    return ROI_ESTIMATES[levelKey as keyof typeof ROI_ESTIMATES];
-  }, [ROI_ESTIMATES, overallSecurityLevel]);
-
-  // Calculate progress percentages for visualization
-  const capexPercentage = useMemo(() => {
-    // Maximum possible CAPEX is 60 (20 for each component at Very High)
-    return Math.min(100, (capexEstimate / 60) * 100);
-  }, [capexEstimate]);
-
-  const opexPercentage = useMemo(() => {
-    // Maximum possible OPEX is 30 (10 for each component at Very High)
-    return Math.min(100, (opexEstimate / 30) * 100);
-  }, [opexEstimate]);
+  // Get component costs
+  const availabilityCost = getComponentCost("availability", availabilityLevel);
+  const integrityCost = getComponentCost("integrity", integrityLevel);
+  const confidentialityCost = getComponentCost(
+    "confidentiality",
+    confidentialityLevel
+  );
 
   return (
     <WidgetContainer
-      title={WIDGET_TITLES.COST_ESTIMATION}
-      icon={WIDGET_ICONS.COST_ESTIMATION}
+      title={WIDGET_TITLES.COST_ESTIMATION || "Security Cost Estimation"}
+      icon={WIDGET_ICONS.COST_ESTIMATION || "💰"}
       className={className}
       testId={testId}
+      isLoading={isLoading}
+      error={error}
     >
-      <div className="p-4" data-testid={COST_TEST_IDS.COST_ESTIMATION_CONTENT}>
-        {/* Implementation Time */}
+      <div className="p-4">
+        {/* Cost estimation summary */}
         <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
-          <h3 className="text-lg font-medium">Estimated Implementation Time</h3>
-          <div className="flex items-center mt-2">
-            <span className="text-3xl text-blue-600 dark:text-blue-400 mr-3">
-              ⏱️
-            </span>
-            <div>
-              <p
-                className="text-xl font-bold text-blue-800 dark:text-blue-300"
-                data-testid={COST_TEST_IDS.IMPLEMENTATION_TIME}
-              >
-                {formatImplementationTime(implementationTime)}
-              </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                From project kickoff to full implementation
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* CAPEX Section */}
-        <div className="mb-6" data-testid={COST_TEST_IDS.CAPEX_SECTION}>
-          <h3 className="text-lg font-medium mb-2">
-            Implementation Costs (CAPEX)
-          </h3>
-          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-            <div className="flex justify-between items-center mb-2">
-              <div className="flex items-center">
-                <span
-                  className="text-2xl mr-2 text-orange-500"
-                  data-testid={COST_TEST_IDS.CAPEX_SEVERITY_ICON}
-                >
-                  {capexEstimate > 40
-                    ? "💰💰💰"
-                    : capexEstimate > 20
-                    ? "💰💰"
-                    : "💰"}
-                </span>
-                <span className="font-medium">One-time Investment</span>
-              </div>
-              <span
-                className="text-xl font-bold text-orange-600 dark:text-orange-400"
-                data-testid={COST_TEST_IDS.CAPEX_ESTIMATE_VALUE}
-              >
-                {formatCurrency(capexEstimate)}
-              </span>
-            </div>
-            <div className="mt-3">
-              <div className="relative pt-1">
-                <div className="flex mb-2 items-center justify-between">
-                  <div>
-                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-orange-600 bg-orange-200 dark:text-orange-200 dark:bg-orange-800">
-                      Implementation Cost
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span
-                      className="text-xs font-semibold inline-block text-orange-600 dark:text-orange-400"
-                      data-testid={COST_TEST_IDS.CAPEX_PERCENTAGE}
-                    >
-                      {Math.round(capexPercentage)}%
-                    </span>
-                  </div>
-                </div>
-                <div
-                  className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-orange-200 dark:bg-orange-900"
-                  data-testid={COST_TEST_IDS.CAPEX_PROGRESS_BAR}
-                >
-                  <div
-                    style={{ width: `${capexPercentage}%` }}
-                    className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500 dark:bg-orange-600"
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* OPEX Section */}
-        <div className="mb-6" data-testid={COST_TEST_IDS.OPEX_SECTION}>
-          <h3 className="text-lg font-medium mb-2">
-            Ongoing Maintenance (OPEX)
-          </h3>
-          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-            <div className="flex justify-between items-center mb-2">
-              <div className="flex items-center">
-                <span
-                  className="text-2xl mr-2 text-blue-500"
-                  data-testid={COST_TEST_IDS.OPEX_SEVERITY_ICON}
-                >
-                  {opexEstimate > 20
-                    ? "⚙️⚙️⚙️"
-                    : opexEstimate > 10
-                    ? "⚙️⚙️"
-                    : "⚙️"}
-                </span>
-                <span className="font-medium">Monthly Maintenance</span>
-              </div>
-              <span
-                className="text-xl font-bold text-blue-600 dark:text-blue-400"
-                data-testid={COST_TEST_IDS.OPEX_ESTIMATE_VALUE}
-              >
-                {formatCurrency(opexEstimate / 12)}{" "}
-                <span className="text-sm font-normal">/ month</span>
-              </span>
-            </div>
-            <div
-              className="text-sm text-gray-600 dark:text-gray-400 text-right mb-2"
-              data-testid={COST_TEST_IDS.MONTHLY_OPEX}
-            >
-              ({formatCurrency(opexEstimate)} annually)
-            </div>
-            <div className="mt-3">
-              <div className="relative pt-1">
-                <div className="flex mb-2 items-center justify-between">
-                  <div>
-                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200 dark:text-blue-200 dark:bg-blue-800">
-                      Maintenance Cost
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span
-                      className="text-xs font-semibold inline-block text-blue-600 dark:text-blue-400"
-                      data-testid={COST_TEST_IDS.OPEX_PERCENTAGE}
-                    >
-                      {Math.round(opexPercentage)}%
-                    </span>
-                  </div>
-                </div>
-                <div
-                  className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200 dark:bg-blue-900"
-                  data-testid={COST_TEST_IDS.OPEX_PROGRESS_BAR}
-                >
-                  <div
-                    style={{ width: `${opexPercentage}%` }}
-                    className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 dark:bg-blue-600"
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Total Cost Section */}
-        <div className="mb-6" data-testid={COST_TEST_IDS.TOTAL_COST_SUMMARY}>
-          <h3 className="text-lg font-medium mb-2">Total Cost of Ownership</h3>
-          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-            <div className="flex justify-between items-center">
-              <span className="font-medium">3-Year Total Cost</span>
-              <span
-                className="text-xl font-bold text-purple-600 dark:text-purple-400"
-                data-testid={COST_TEST_IDS.THREE_YEAR_TOTAL}
-              >
-                {formatCurrency(totalCost)}
-              </span>
-            </div>
-            <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              <p>Includes implementation and 3 years of maintenance costs</p>
-            </div>
-          </div>
-        </div>
-
-        {/* ROI Section */}
-        <div
-          className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
-          data-testid={COST_TEST_IDS.ROI_SECTION}
-        >
-          <h3 className="text-lg font-medium mb-2">Return on Investment</h3>
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-700 dark:text-gray-300">
-              Estimated ROI:
-            </span>
-            <span
-              className="font-bold text-green-600 dark:text-green-400"
-              data-testid={COST_TEST_IDS.ROI_ESTIMATE}
-            >
-              {roiEstimate.returnRate}
-            </span>
-          </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            {roiEstimate.description}
+          <p className="text-sm">
+            This widget provides estimated costs for implementing and
+            maintaining your selected security levels across the CIA triad,
+            helping with budget planning for security initiatives.
           </p>
+        </div>
+
+        {/* Cost Summary */}
+        <div className="mb-6">
+          <h3 className="text-lg font-medium mb-3">Cost Summary</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div
+              className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+              data-testid={
+                COST_ESTIMATION_TEST_IDS?.IMPLEMENTATION_COST ||
+                "implementation-cost"
+              }
+            >
+              <div className="text-sm font-medium mb-1">
+                Implementation Cost
+              </div>
+              <div className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                {formatCurrency(
+                  implementationCost?.total || totalImplementationCost
+                )}
+              </div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">
+                One-time cost
+              </div>
+            </div>
+
+            <div
+              className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+              data-testid={
+                COST_ESTIMATION_TEST_IDS?.OPERATIONAL_COST || "operational-cost"
+              }
+            >
+              <div className="text-sm font-medium mb-1">Operational Cost</div>
+              <div className="text-xl font-bold text-green-600 dark:text-green-400">
+                {formatCurrency(
+                  operationalCost?.annual || totalOperationalCost
+                )}
+              </div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">
+                Annual cost
+              </div>
+            </div>
+
+            <div
+              className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+              data-testid={
+                COST_ESTIMATION_TEST_IDS?.PERSONNEL_COST || "personnel-cost"
+              }
+            >
+              <div className="text-sm font-medium mb-1">Personnel Needs</div>
+              <div className="text-xl font-bold text-purple-600 dark:text-purple-400">
+                {implementationCost?.personnel ||
+                  `${
+                    (availabilityValue +
+                      integrityValue +
+                      confidentialityValue) *
+                    0.5
+                  } FTE`}
+              </div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">
+                Full-time equivalents
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Component Cost Breakdown */}
+        <div className="mb-6">
+          <h3 className="text-lg font-medium mb-3">Component Cost Breakdown</h3>
+          <div className="space-y-4">
+            {/* Availability Costs */}
+            <div
+              className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+              data-testid={
+                COST_ESTIMATION_TEST_IDS?.AVAILABILITY_COST ||
+                "availability-cost"
+              }
+            >
+              <h4 className="text-md font-medium flex items-center text-blue-700 dark:text-blue-300">
+                <span className="mr-2">⏱️</span>
+                Availability Costs ({availabilityLevel})
+              </h4>
+              <div className="mt-2 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                <div>
+                  <div className="font-medium">Implementation</div>
+                  <div>
+                    {availabilityCost?.implementation ||
+                      formatCurrency(availabilityValue * 25000)}
+                  </div>
+                </div>
+                <div>
+                  <div className="font-medium">Operational</div>
+                  <div>
+                    {availabilityCost?.operational ||
+                      `${formatCurrency(availabilityValue * 10000)} / year`}
+                  </div>
+                </div>
+                <div>
+                  <div className="font-medium">Personnel</div>
+                  <div>
+                    {availabilityCost?.personnel ||
+                      `${availabilityValue * 0.5} FTE`}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Integrity Costs */}
+            <div
+              className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
+              data-testid={
+                COST_ESTIMATION_TEST_IDS?.INTEGRITY_COST || "integrity-cost"
+              }
+            >
+              <h4 className="text-md font-medium flex items-center text-green-700 dark:text-green-300">
+                <span className="mr-2">✓</span>
+                Integrity Costs ({integrityLevel})
+              </h4>
+              <div className="mt-2 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                <div>
+                  <div className="font-medium">Implementation</div>
+                  <div>
+                    {integrityCost?.implementation ||
+                      formatCurrency(integrityValue * 25000)}
+                  </div>
+                </div>
+                <div>
+                  <div className="font-medium">Operational</div>
+                  <div>
+                    {integrityCost?.operational ||
+                      `${formatCurrency(integrityValue * 10000)} / year`}
+                  </div>
+                </div>
+                <div>
+                  <div className="font-medium">Personnel</div>
+                  <div>
+                    {integrityCost?.personnel || `${integrityValue * 0.5} FTE`}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Confidentiality Costs */}
+            <div
+              className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg"
+              data-testid={
+                COST_ESTIMATION_TEST_IDS?.CONFIDENTIALITY_COST ||
+                "confidentiality-cost"
+              }
+            >
+              <h4 className="text-md font-medium flex items-center text-purple-700 dark:text-purple-300">
+                <span className="mr-2">🔒</span>
+                Confidentiality Costs ({confidentialityLevel})
+              </h4>
+              <div className="mt-2 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                <div>
+                  <div className="font-medium">Implementation</div>
+                  <div>
+                    {confidentialityCost?.implementation ||
+                      formatCurrency(confidentialityValue * 25000)}
+                  </div>
+                </div>
+                <div>
+                  <div className="font-medium">Operational</div>
+                  <div>
+                    {confidentialityCost?.operational ||
+                      `${formatCurrency(confidentialityValue * 10000)} / year`}
+                  </div>
+                </div>
+                <div>
+                  <div className="font-medium">Personnel</div>
+                  <div>
+                    {confidentialityCost?.personnel ||
+                      `${confidentialityValue * 0.5} FTE`}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Implementation Timeline */}
+        <div className="mb-6">
+          <h3 className="text-lg font-medium mb-3">Implementation Timeline</h3>
+          <div
+            className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+            data-testid={
+              COST_ESTIMATION_TEST_IDS?.IMPLEMENTATION_TIMELINE ||
+              "implementation-timeline"
+            }
+          >
+            <div className="flex justify-between items-center mb-3">
+              <div className="font-medium">Estimated Timeline</div>
+              <div className="text-blue-600 dark:text-blue-400 font-medium">
+                {implementationTimeline?.total ||
+                  `${Math.round(
+                    (availabilityValue +
+                      integrityValue +
+                      confidentialityValue) *
+                      1.5
+                  )} weeks`}
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-blue-500 rounded-full"
+                  style={{ width: "100%" }}
+                ></div>
+              </div>
+
+              <div className="mt-2 grid grid-cols-3 text-xs text-gray-600 dark:text-gray-400">
+                {implementationTimeline?.phases ? (
+                  <>
+                    {implementationTimeline.phases.map(
+                      (phase: TimelinePhase, index: number) => (
+                        <div key={index} className="text-center">
+                          <div>{phase.name}</div>
+                          <div>{phase.duration}</div>
+                        </div>
+                      )
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <div className="text-center">
+                      <div>Planning</div>
+                      <div>
+                        {Math.round(
+                          (availabilityValue +
+                            integrityValue +
+                            confidentialityValue) *
+                            0.3
+                        )}{" "}
+                        weeks
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <div>Implementation</div>
+                      <div>
+                        {Math.round(
+                          (availabilityValue +
+                            integrityValue +
+                            confidentialityValue) *
+                            0.8
+                        )}{" "}
+                        weeks
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <div>Testing & Adoption</div>
+                      <div>
+                        {Math.round(
+                          (availabilityValue +
+                            integrityValue +
+                            confidentialityValue) *
+                            0.4
+                        )}{" "}
+                        weeks
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Cost Factors */}
+        <div>
+          <h3 className="text-lg font-medium mb-3">Cost Factors</h3>
+          <ul className="space-y-2 text-sm">
+            {implementationCost?.factors?.map(
+              (
+                factor: { name: string; description: string },
+                index: number
+              ) => (
+                <li
+                  key={index}
+                  className="p-2 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                  data-testid={`cost-factor-${index}`}
+                >
+                  <div className="font-medium">{factor.name}</div>
+                  <div className="text-gray-600 dark:text-gray-400">
+                    {factor.description}
+                  </div>
+                </li>
+              )
+            ) || (
+              <>
+                <li className="p-2 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="font-medium">Technology & Infrastructure</div>
+                  <div className="text-gray-600 dark:text-gray-400">
+                    Hardware, software licenses, cloud services, and specialized
+                    tools required for implementation.
+                  </div>
+                </li>
+                <li className="p-2 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="font-medium">Personnel & Training</div>
+                  <div className="text-gray-600 dark:text-gray-400">
+                    Staff time for implementation, operation, and ongoing
+                    training requirements.
+                  </div>
+                </li>
+                <li className="p-2 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="font-medium">Integration & Testing</div>
+                  <div className="text-gray-600 dark:text-gray-400">
+                    Costs associated with integrating security controls with
+                    existing systems and testing.
+                  </div>
+                </li>
+                <li className="p-2 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="font-medium">Maintenance & Updates</div>
+                  <div className="text-gray-600 dark:text-gray-400">
+                    Ongoing operational costs for maintenance, updates, and
+                    periodic reassessments.
+                  </div>
+                </li>
+              </>
+            )}
+          </ul>
         </div>
       </div>
     </WidgetContainer>
   );
 };
 
-// Export the component directly without HOC
 export default CostEstimationWidget;
