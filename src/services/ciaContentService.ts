@@ -1019,7 +1019,7 @@ export class CIAContentService extends BaseService {
         complianceStatus.remediationSteps.length > 0
           ? "## Remediation Steps\n" +
             complianceStatus.remediationSteps
-              .map((step) => `- ${step}`)
+              .map((step: string) => `- ${step}`)
               .join("\n")
           : ""
       }
