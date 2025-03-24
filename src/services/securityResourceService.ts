@@ -172,6 +172,23 @@ export class SecurityResourceService extends BaseService {
    * Get value points for a security level
    */
   public getValuePoints(level: SecurityLevel): string[] {
+    // Add null/undefined check to prevent runtime errors
+    if (!level) {
+      return ["No value points available for undefined security level"];
+    }
+
+    // Call the data provider's method if available
+    if (this.dataProvider.getDefaultValuePoints) {
+      try {
+        const valuePoints = this.dataProvider.getDefaultValuePoints(level);
+        if (valuePoints && valuePoints.length > 0) {
+          return valuePoints;
+        }
+      } catch (error) {
+        console.warn("Error fetching custom value points:", error);
+      }
+    }
+
     // For None level, return basic value points to satisfy tests
     if (level === "None") {
       return [
@@ -181,11 +198,6 @@ export class SecurityResourceService extends BaseService {
         "No protection against threats",
         "Does not meet any compliance requirements",
       ];
-    }
-
-    // Use the default implementation from the data provider if available
-    if (this.dataProvider.getDefaultValuePoints) {
-      return this.dataProvider.getDefaultValuePoints(level);
     }
 
     // Fallback implementation

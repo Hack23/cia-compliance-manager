@@ -320,6 +320,15 @@ export class CIAContentService extends BaseService {
    * Get ROI estimate for a security level
    */
   public getROIEstimate(level: SecurityLevel): ROIEstimate {
+    if (!level) {
+      // Handle undefined/null case explicitly
+      return {
+        value: "0%",
+        returnRate: "0%",
+        description: "No return on investment for security controls",
+      };
+    }
+
     const levelKey = level
       .toUpperCase()
       .replace(" ", "_") as keyof ROIEstimatesMap;
