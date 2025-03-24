@@ -537,6 +537,93 @@ export const COMPONENT_BUSINESS_CONSIDERATIONS: ComponentBusinessConsiderations 
   };
 
 /**
+ * Enhanced business impact metrics with specific values
+ */
+export const BUSINESS_IMPACT_METRICS = {
+  AVAILABILITY: {
+    NONE: {
+      downtime: "Unpredictable (potentially >168 hours/year)",
+      financialImpact: "15-20% of annual revenue",
+      customerImpact: "Severe disruption, likely customer loss",
+    },
+    LOW: {
+      downtime: "Up to 48 hours/year (99.45% uptime)",
+      financialImpact: "5-15% of annual revenue",
+      customerImpact: "Significant disruption, some customer loss",
+    },
+    MODERATE: {
+      downtime: "Up to 8.8 hours/year (99.9% uptime)",
+      financialImpact: "1-5% of annual revenue",
+      customerImpact: "Noticeable disruption, minimal customer loss",
+    },
+    HIGH: {
+      downtime: "Up to 44 minutes/year (99.99% uptime)",
+      financialImpact: "0.1-1% of annual revenue",
+      customerImpact: "Minor disruption, negligible customer impact",
+    },
+    VERY_HIGH: {
+      downtime: "Up to 5 minutes/year (99.999% uptime)",
+      financialImpact: "<0.1% of annual revenue",
+      customerImpact: "Minimal to no disruption or customer impact",
+    },
+  },
+  INTEGRITY: {
+    NONE: {
+      dataCorruption: "High probability of undetected corruption",
+      financialImpact: "10-15% of annual revenue",
+      regulatoryRisk: "Severe violations and penalties",
+    },
+    LOW: {
+      dataCorruption: "Moderate probability of detected corruption",
+      financialImpact: "5-10% of annual revenue",
+      regulatoryRisk: "Significant violations and penalties",
+    },
+    MODERATE: {
+      dataCorruption: "Low probability, usually detected",
+      financialImpact: "1-5% of annual revenue",
+      regulatoryRisk: "Moderate violations and penalties",
+    },
+    HIGH: {
+      dataCorruption: "Very low probability, always detected",
+      financialImpact: "0.1-1% of annual revenue",
+      regulatoryRisk: "Minor violations, limited penalties",
+    },
+    VERY_HIGH: {
+      dataCorruption: "Negligible probability, immediately detected",
+      financialImpact: "<0.1% of annual revenue",
+      regulatoryRisk: "Minimal to no violations or penalties",
+    },
+  },
+  CONFIDENTIALITY: {
+    NONE: {
+      dataBreachRisk: "Extremely high probability",
+      financialImpact: "20-30% of annual revenue",
+      reputationalDamage: "Severe, potentially business-ending",
+    },
+    LOW: {
+      dataBreachRisk: "High probability",
+      financialImpact: "10-20% of annual revenue",
+      reputationalDamage: "Significant, long-term damage",
+    },
+    MODERATE: {
+      dataBreachRisk: "Moderate probability",
+      financialImpact: "5-10% of annual revenue",
+      reputationalDamage: "Moderate, recoverable damage",
+    },
+    HIGH: {
+      dataBreachRisk: "Low probability",
+      financialImpact: "1-5% of annual revenue",
+      reputationalDamage: "Minor, short-term damage",
+    },
+    VERY_HIGH: {
+      dataBreachRisk: "Very low probability",
+      financialImpact: "<1% of annual revenue",
+      reputationalDamage: "Minimal to no damage",
+    },
+  },
+};
+
+/**
  * Value creation metrics by security level
  */
 export const SECURITY_VALUE_METRICS = {

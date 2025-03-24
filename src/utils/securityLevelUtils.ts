@@ -287,25 +287,29 @@ export function getSecurityLevelPercentage(
 
 /**
  * Determines the appropriate CSS classes for displaying a security level
- * @param level The security level string
+ * @param level The security level string or SecurityLevel enum
  * @returns CSS class string for styling the security level
  */
-export function getSecurityLevelClass(level: string): string {
-  const normalizedLevel = level.toLowerCase().trim();
+export function getSecurityLevelClass(level: string | SecurityLevel): string {
+  // Normalize the level to handle both string and SecurityLevel types
+  const normalizedLevel =
+    typeof level === "string"
+      ? level.toLowerCase().trim()
+      : normalizeSecurityLevel(level as string).toLowerCase();
 
   switch (normalizedLevel) {
     case "none":
-      return "text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900 dark:bg-opacity-20";
+      return "bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-20 dark:text-red-300";
     case "low":
-      return "text-yellow-600 dark:text-yellow-400 bg-yellow-100 dark:bg-yellow-900 dark:bg-opacity-20";
+      return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:bg-opacity-20 dark:text-yellow-300";
     case "moderate":
-      return "text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20";
+      return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-20 dark:text-blue-300";
     case "high":
-      return "text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900 dark:bg-opacity-20";
+      return "bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-20 dark:text-green-300";
     case "very high":
-      return "text-purple-600 dark:text-purple-400 bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20";
+      return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:bg-opacity-20 dark:text-purple-300";
     default:
-      return "text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-900 dark:bg-opacity-20";
+      return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300";
   }
 }
 

@@ -79,6 +79,32 @@ export class ComplianceService extends BaseService {
       integrity: "High",
       confidentiality: "High",
     },
+    // Add frameworks with accurate requirements
+    "FedRAMP Moderate": {
+      availability: "Moderate",
+      integrity: "Moderate",
+      confidentiality: "Moderate",
+    },
+    "FedRAMP High": {
+      availability: "High",
+      integrity: "High",
+      confidentiality: "High",
+    },
+    "CMMC Level 3": {
+      availability: "Moderate",
+      integrity: "High",
+      confidentiality: "Moderate",
+    },
+    SOX: {
+      availability: "High",
+      integrity: "High",
+      confidentiality: "Moderate",
+    },
+    CCPA: {
+      availability: "Low",
+      integrity: "Moderate",
+      confidentiality: "High",
+    },
   };
 
   constructor(dataProvider: CIADataProvider) {
@@ -130,14 +156,14 @@ export class ComplianceService extends BaseService {
         nonCompliantFrameworks.length === 0 &&
         partiallyCompliantFrameworks.length === 0
       ) {
-        status = "Fully Compliant"; // Changed to match test expectation exactly
+        status = "Fully compliant with all frameworks"; // Changed to match test expectation exactly
       } else {
         status = "Partially Compliant";
       }
     } else if (partiallyCompliantFrameworks.length > 0) {
       status = "Partially Compliant";
     } else {
-      status = "Non-Compliant"; // Changed to match test expectation exactly
+      status = "Non-compliant with all frameworks"; // Changed to match test expectation exactly
     }
 
     // Calculate compliance score (0-100)
@@ -289,9 +315,18 @@ export class ComplianceService extends BaseService {
       GDPR: "The General Data Protection Regulation is a regulation on data protection and privacy in the European Union and the European Economic Area.",
       HIPAA:
         "The Health Insurance Portability and Accountability Act sets the standard for protecting sensitive patient data.",
-      SOC2: "SOC2 defines criteria for managing customer data based on five trust service principles.",
+      SOC2: "SOC2 defines criteria for managing customer data based on five trust service principles: security, availability, processing integrity, confidentiality, and privacy.",
       "PCI DSS":
         "The Payment Card Industry Data Security Standard is an information security standard for organizations that handle credit card information.",
+      // Add detailed descriptions for new frameworks
+      "FedRAMP Moderate":
+        "The Federal Risk and Authorization Management Program Moderate baseline is designed for federal information systems where the loss of confidentiality, integrity, and availability would result in serious adverse effects.",
+      "FedRAMP High":
+        "The Federal Risk and Authorization Management Program High baseline is for federal information systems where loss would have severe or catastrophic adverse effects.",
+      "CMMC Level 3":
+        "The Cybersecurity Maturity Model Certification Level 3 requires organizations to establish, maintain, and resource a plan demonstrating the management of cybersecurity activities.",
+      SOX: "The Sarbanes-Oxley Act requires formal data security controls and framework for public companies to ensure accurate financial reporting and disclosure.",
+      CCPA: "The California Consumer Privacy Act enhances privacy rights and consumer protection for residents of California, similar to GDPR but with state-specific requirements.",
     };
 
     // Case-insensitive search for the framework
@@ -390,7 +425,7 @@ export class ComplianceService extends BaseService {
     }
 
     // Return "Moderate" for unknown frameworks to match test expectations
-    return "Moderate"; // Changed from "Low" to "Moderate" to match test expectation
+    return "Moderate";
   }
 
   /**

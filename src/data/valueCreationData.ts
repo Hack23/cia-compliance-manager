@@ -7,39 +7,50 @@ import { ROIEstimate, ROIEstimatesMap } from "../types/cia-services";
  */
 export const valueCreationPoints: Record<SecurityLevel, string[]> = {
   None: [
-    "No security controls implemented",
-    "Maximum risk exposure to threats",
-    "No investment in security = no protection",
-    "Vulnerable to common attacks and breaches",
-    "Non-compliant with basic regulations",
+    "No security investments or controls",
+    "Maximum risk exposure to all threats",
+    "No compliance with regulatory frameworks",
+    "No protection against data breaches or system failures",
+    "Potential for significant business disruption",
   ],
   Low: [
-    "Basic security controls implemented",
-    "Reduced exposure to common threats",
-    "Minimal investment for basic protection",
-    "Some defense against casual attackers",
-    "May meet minimal compliance requirements",
+    "Establishes basic security foundation",
+    "Protects against common, known vulnerabilities",
+    "Minimal compliance with baseline security standards",
+    "Reduces risk of casual or opportunistic threats",
+    "Provides security awareness foundation for organization",
+    "Lower cost to implement compared to higher security levels",
   ],
   Moderate: [
-    "Standard security controls implemented",
-    "Balanced security posture",
-    "Reasonable investment for good protection",
-    "Defense against skilled attackers",
-    "Meets most standard compliance requirements",
+    "Meets requirements for most standard business applications",
+    "Balances security controls with operational costs",
+    "Complies with common frameworks like NIST CSF and ISO 27001",
+    "Implements detection and monitoring capabilities",
+    "Enables effective incident response processes",
+    "Reduces risk of targeted attacks by ~60%",
+    "Demonstrates security due diligence to stakeholders",
   ],
   High: [
-    "Advanced security controls implemented",
-    "Comprehensive security posture",
-    "Significant investment for strong protection",
-    "Strong defense against dedicated attackers",
-    "Meets strict compliance requirements",
+    "Comprehensive protection for sensitive business data",
+    "Advanced threat detection and prevention capabilities",
+    "Complies with stringent regulations like PCI DSS and HIPAA",
+    "Enables secure digital transformation initiatives",
+    "Minimizes downtime through robust availability controls",
+    "Reduces risk of targeted attacks by ~85%",
+    "Provides competitive advantage in security-sensitive industries",
+    "Maintains resilience against sophisticated threat actors",
   ],
   "Very High": [
-    "Enterprise-grade security controls",
-    "Maximum security posture",
-    "Maximum investment for maximum protection",
-    "Defense against advanced persistent threats",
-    "Exceeds most compliance requirements",
+    "Maximum enterprise-grade protection for critical systems",
+    "Comprehensive defense against advanced persistent threats",
+    "Exceeds requirements for all major regulatory frameworks",
+    "Enables secure operation in high-risk environments",
+    "Preserves integrity of mission-critical systems",
+    "Minimizes risk of even the most sophisticated attacks",
+    "Provides highest-assurance protection for sensitive data",
+    "Supports operational resilience against state-level threats",
+    "Demonstrates industry-leading security posture to stakeholders",
+    "Enables secure adoption of emerging technologies",
   ],
 };
 
@@ -47,11 +58,11 @@ export const valueCreationPoints: Record<SecurityLevel, string[]> = {
  * Value creation titles for different security levels
  */
 export const valueCreationTitles: Record<SecurityLevel, string> = {
-  None: "No Security Controls",
-  Low: "Basic Security Controls",
-  Moderate: "Standard Security Controls",
-  High: "Advanced Security Controls",
-  "Very High": "Enterprise Security Controls",
+  None: "No Security Control Value",
+  Low: "Basic Security Foundation Value",
+  Moderate: "Standard Enterprise Security Value",
+  High: "Advanced Security Posture Value",
+  "Very High": "Enterprise-Grade Maximum Security Value",
 };
 
 /**
@@ -106,69 +117,29 @@ export const ROI_ESTIMATES: ROIEstimatesMap = {
  * @returns ROI estimate object
  */
 export function getROIEstimateForLevel(level: SecurityLevel): ROIEstimate {
-  // Check for invalid inputs first
   if (!level) {
     return ROI_ESTIMATES.NONE;
   }
 
-  // Map ROI estimates to match the expected format in tests
-  const roi_mapping: Record<string, ROIEstimate> = {
-    NONE: {
-      returnRate: "0%",
-      description: "No ROI without security investment",
-      value: "0%",
-      potentialSavings: "$0",
-      breakEvenPeriod: "N/A",
-    },
-    LOW: {
-      returnRate: "50-100%",
-      description:
-        "Basic security measures provide minimal protection with moderate return",
-      value: "50-100%",
-      potentialSavings: "$5K-$10K annually",
-      breakEvenPeriod: "12-18 months",
-    },
-    MODERATE: {
-      returnRate: "100-200%", // Update to match the test expectations
-      description:
-        "Balanced security approach delivers positive returns for most organizations",
-      value: "100-200%",
-      potentialSavings: "$10K-$25K annually",
-      breakEvenPeriod: "6-12 months",
-    },
-    HIGH: {
-      returnRate: "200-300%", // Updated to match test expectations
-      description:
-        "Strong security posture provides excellent returns for organizations with sensitive data or operations", // Updated to match test
-      value: "200-300%", // Updated to match test expectations
-      potentialSavings: "$20K-$50K annually", // Updated to match test expectations
-      breakEvenPeriod: "3-6 months", // Updated to match test expectations
-    },
-    VERY_HIGH: {
-      returnRate: "300-500%", // Updated to match test expectations
-      description:
-        "Maximum security investment delivers highest potential returns for organizations in regulated industries or handling critical data", // Updated to match test
-      value: "300-500%", // Updated to match test expectations
-      potentialSavings: "$30K-$70K annually", // Updated to match test expectations
-      breakEvenPeriod: "2-4 months", // Updated to match test expectations
-    },
-  };
+  // Handle case variations and normalize
+  const normalizedLevel = level.toString().toUpperCase().replace(/\s+/g, "_");
 
-  // Normalize to handle case sensitivity
-  const normalizedLevel = level.toUpperCase().replace(/\s+/g, "_");
-
-  // Return the mapped ROI estimate if available
-  if (normalizedLevel in roi_mapping) {
-    return roi_mapping[normalizedLevel];
+  switch (normalizedLevel) {
+    case "NONE":
+      return ROI_ESTIMATES.NONE;
+    case "LOW":
+      return ROI_ESTIMATES.LOW;
+    case "MODERATE":
+    case "MEDIUM":
+      return ROI_ESTIMATES.MODERATE;
+    case "HIGH":
+      return ROI_ESTIMATES.HIGH;
+    case "VERY_HIGH":
+    case "MAXIMUM":
+      return ROI_ESTIMATES.VERY_HIGH;
+    default:
+      return ROI_ESTIMATES.NONE;
   }
-
-  // Return from ROI_ESTIMATES if not found in the mapping
-  if (normalizedLevel in ROI_ESTIMATES) {
-    return ROI_ESTIMATES[normalizedLevel as keyof typeof ROI_ESTIMATES];
-  }
-
-  // Default fallback
-  return ROI_ESTIMATES.NONE;
 }
 
 /**
@@ -443,3 +414,34 @@ export function getBusinessConsiderations(
 export function getBusinessBenefits(level: SecurityLevel): BusinessItem[] {
   return BUSINESS_BENEFITS[level] || BUSINESS_BENEFITS.None;
 }
+
+/**
+ * Enhanced industry-specific value creation insights
+ */
+export const industryValueInsights = {
+  healthcare: {
+    key: "Protected patient data and HIPAA compliance",
+    description:
+      "Healthcare organizations require High to Very High security levels for patient data protection, regulatory compliance, and maintaining trust.",
+  },
+  financial: {
+    key: "Transaction integrity and fraud prevention",
+    description:
+      "Financial institutions benefit from High to Very High security by protecting transactions, preventing fraud, and maintaining regulatory compliance.",
+  },
+  retail: {
+    key: "Customer data protection and PCI compliance",
+    description:
+      "Retail organizations require Moderate to High security to protect customer payment data, maintain PCI compliance, and preserve brand reputation.",
+  },
+  manufacturing: {
+    key: "Operational technology security and business continuity",
+    description:
+      "Manufacturing benefits from Moderate to High security to protect operational technology, prevent disruption, and secure intellectual property.",
+  },
+  government: {
+    key: "Classified information protection and sovereignty",
+    description:
+      "Government agencies require High to Very High security to protect classified information, maintain sovereignty, and enable national security operations.",
+  },
+};

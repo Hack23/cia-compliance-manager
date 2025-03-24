@@ -1,7 +1,7 @@
 import { SecurityResource } from "../types/securityResources";
 
 /**
- * Sample security resources for development and testing
+ * Enhanced security resources for development and production use
  */
 const securityResources: SecurityResource[] = [
   {
@@ -68,6 +68,144 @@ const securityResources: SecurityResource[] = [
     tags: ["configuration", "benchmarks", "hardening"],
     category: "standards",
     source: "CIS",
+  },
+  {
+    id: "resource-6",
+    title: "AWS Security Hub",
+    description:
+      "Centralized security tool to manage security alerts and automate compliance checks across AWS accounts",
+    url: "https://aws.amazon.com/security-hub/",
+    type: "general",
+    relevantLevels: ["High", "Very High"],
+    components: ["availability", "integrity", "confidentiality"],
+    tags: ["cloud", "monitoring", "automation"],
+    category: "tools",
+    source: "AWS",
+    priority: 3,
+  },
+  {
+    id: "resource-7",
+    title: "Zero Trust Architecture Guide",
+    description:
+      "NIST guide for implementing a zero trust architecture in enterprise environments",
+    url: "https://www.nist.gov/publications/zero-trust-architecture",
+    type: "confidentiality",
+    relevantLevels: ["High", "Very High"],
+    components: ["confidentiality"],
+    tags: ["zero_trust", "architecture", "access_control"],
+    category: "documentation",
+    source: "NIST",
+    priority: 2,
+  },
+  {
+    id: "resource-8",
+    title: "SANS CIS Controls Implementation Guide",
+    description:
+      "Practical guide to implementing the top 20 Critical Security Controls",
+    url: "https://www.sans.org/blog/cis-controls-v8/",
+    type: "general",
+    relevantLevels: ["Low", "Moderate", "High"],
+    components: ["availability", "integrity", "confidentiality"],
+    tags: ["implementation", "baseline", "best_practices"],
+    category: "documentation",
+    source: "SANS Institute",
+    priority: 4,
+  },
+  {
+    id: "resource-9",
+    title: "HashiCorp Vault",
+    description:
+      "Secrets management and data protection with identity-based access",
+    url: "https://www.vaultproject.io/",
+    type: "confidentiality",
+    relevantLevels: ["Moderate", "High", "Very High"],
+    components: ["confidentiality", "integrity"],
+    tags: ["secrets_management", "encryption", "access_control"],
+    category: "tools",
+    source: "HashiCorp",
+    priority: 3,
+  },
+  {
+    id: "resource-10",
+    title: "DDoS Protection Best Practices",
+    description:
+      "Guidelines for protecting systems against distributed denial-of-service attacks",
+    url: "https://www.cisa.gov/sites/default/files/publications/DDoS%20Quick%20Guide.pdf",
+    type: "availability",
+    relevantLevels: ["Moderate", "High"],
+    components: ["availability"],
+    tags: ["ddos", "resilience", "mitigation"],
+    category: "best_practices",
+    source: "CISA",
+    priority: 2,
+  },
+  {
+    id: "resource-11",
+    title: "OWASP API Security Top 10",
+    description: "Top 10 API security vulnerabilities and how to mitigate them",
+    url: "https://owasp.org/www-project-api-security/",
+    type: "integrity",
+    relevantLevels: ["Moderate", "High"],
+    components: ["integrity", "confidentiality"],
+    tags: ["api", "web_security", "vulnerabilities"],
+    category: "best_practices",
+    source: "OWASP",
+    priority: 3,
+  },
+  {
+    id: "resource-12",
+    title: "Microsoft Security Development Lifecycle",
+    description: "Industry-leading software security assurance process",
+    url: "https://www.microsoft.com/en-us/securityengineering/sdl/",
+    type: "integrity",
+    relevantLevels: ["Moderate", "High", "Very High"],
+    components: ["integrity"],
+    tags: ["sdlc", "secure_coding", "development"],
+    category: "documentation",
+    source: "Microsoft",
+    priority: 2,
+  },
+  {
+    id: "resource-13",
+    title: "Google SRE Book",
+    description:
+      "Site Reliability Engineering: How Google Runs Production Systems",
+    url: "https://sre.google/sre-book/table-of-contents/",
+    type: "availability",
+    relevantLevels: ["High", "Very High"],
+    components: ["availability"],
+    tags: ["sre", "reliability", "operations"],
+    category: "documentation",
+    source: "Google",
+    priority: 3,
+  },
+  {
+    id: "resource-14",
+    title: "ENISA Threat Landscape",
+    description:
+      "European Union Agency for Cybersecurity's comprehensive threat landscape report",
+    url: "https://www.enisa.europa.eu/topics/threat-risk-management/threats-and-trends",
+    type: "general",
+    relevantLevels: ["Moderate", "High", "Very High"],
+    components: ["availability", "integrity", "confidentiality"],
+    tags: ["threat_intelligence", "risk_assessment", "planning"],
+    category: "documentation",
+    source: "ENISA",
+    priority: 2,
+  },
+  {
+    id: "resource-15",
+    title: "Snyk",
+    description:
+      "Developer security platform to find and fix vulnerabilities in code, dependencies, containers, and IaC",
+    url: "https://snyk.io/",
+    type: "integrity",
+    relevantLevels: ["Moderate", "High"],
+    components: ["integrity"],
+    tags: ["dependency_scanning", "vulnerability_management", "devops"],
+    category: "tools",
+    source: "Snyk",
+    priority: 4,
   },
 ];
 
