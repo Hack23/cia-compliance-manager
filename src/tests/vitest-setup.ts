@@ -80,7 +80,7 @@ class MockIntersectionObserver {
   readonly thresholds: ReadonlyArray<number> = [];
 
   constructor(
-    callback: IntersectionObserverCallback,
+    _callback: IntersectionObserverCallback,
     options?: IntersectionObserverInit
   ) {
     // Just initialize properties if options are provided
@@ -106,7 +106,7 @@ global.IntersectionObserver = MockIntersectionObserver;
 
 // Mock ResizeObserver
 class MockResizeObserver {
-  constructor(callback: ResizeObserverCallback) {}
+  constructor(_callback: ResizeObserverCallback) {}
   observe = vi.fn();
   unobserve = vi.fn();
   disconnect = vi.fn();

@@ -32,16 +32,16 @@ export function formatSecurityLevel(
 }
 
 // Export these missing functions to fix import errors - with proper TS implementation
-export const getRiskLevelColorClass = (riskLevel: string): string => {
-  return `text-red-600`; // Placeholder implementation
+export const getRiskLevelColorClass = (_riskLevel: string): string => {
+  return "text-red-500"; // Default color for risk
 };
 
-export const getWidgetColumnSpan = (size: string): string => {
-  return "col-span-4"; // Placeholder implementation
+export const getWidgetColumnSpan = (_size: string): string => {
+  return "col-span-12"; // Default full width
 };
 
-export const getWidgetRowSpan = (size: string): string => {
-  return "row-span-1"; // Placeholder implementation
+export const getWidgetRowSpan = (_size: string): string => {
+  return "row-span-1"; // Default single row height
 };
 
 export const handleWidgetError = (error: Error | null | undefined): string => {

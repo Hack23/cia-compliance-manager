@@ -187,4 +187,41 @@ describe("BusinessImpactService", () => {
       expect(serviceInstance).toBeInstanceOf(BusinessImpactService);
     });
   });
+
+  // Add tests for the previously unused methods
+  describe("getImpactForLevel", () => {
+    it("returns impact mapping for a given security level", () => {
+      // Using TypeScript's private method access pattern for testing
+      const result = (service as any).getImpactForLevel("Moderate");
+
+      expect(result).toBeDefined();
+      expect(result.financialImpact).toBe("Significant");
+      expect(result.operationalImpact).toBe("Substantial");
+      expect(result.reputationalImpact).toBe("Moderate");
+    });
+
+    it("defaults to Moderate level when invalid level provided", () => {
+      // Using TypeScript's private method access pattern for testing
+      const result = (service as any).getImpactForLevel(
+        "Invalid" as SecurityLevel
+      );
+
+      expect(result).toBeDefined();
+      expect(result.financialImpact).toBe("Significant");
+    });
+  });
+
+  describe("impactMapping", () => {
+    it("contains proper impact descriptions for all security levels", () => {
+      // Access the private property for testing
+      const mapping = (service as any).impactMapping;
+
+      expect(mapping).toBeDefined();
+      expect(mapping.None).toBeDefined();
+      expect(mapping.Low).toBeDefined();
+      expect(mapping.Moderate).toBeDefined();
+      expect(mapping.High).toBeDefined();
+      expect(mapping["Very High"]).toBeDefined();
+    });
+  });
 });

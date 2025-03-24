@@ -255,10 +255,11 @@ const CIAClassificationApp: React.FC = () => {
             {/* Security Resources Widget */}
             <div className="grid-widget-container">
               <SecurityResourcesWidget
-                availabilityLevel={availabilityLevel}
+                component="availability"
+                securityLevel={availabilityLevel}
                 integrityLevel={integrityLevel}
                 confidentialityLevel={confidentialityLevel}
-                testId="widget-security-resources"
+                testId="security-resources-test"
               />
             </div>
           </div>

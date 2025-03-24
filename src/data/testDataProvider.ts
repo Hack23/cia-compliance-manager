@@ -419,34 +419,6 @@ function getRiskLevelForSecurityLevel(level: SecurityLevel): string {
 }
 
 /**
- * Helper function to get validation method for a security level
- */
-function getValidationMethodForLevel(level: SecurityLevel): string {
-  const methods: Record<SecurityLevel, string> = {
-    None: "No validation",
-    Low: "Basic validation",
-    Moderate: "Standard validation",
-    High: "Advanced validation",
-    "Very High": "Comprehensive validation",
-  };
-  return methods[level] || "Unknown";
-}
-
-/**
- * Helper function to get protection method for a security level
- */
-function getProtectionMethodForLevel(level: SecurityLevel): string {
-  const methods: Record<SecurityLevel, string> = {
-    None: "No protection",
-    Low: "Basic encryption",
-    Moderate: "Standard encryption",
-    High: "Advanced encryption",
-    "Very High": "Multi-layer encryption",
-  };
-  return methods[level] || "Unknown";
-}
-
-/**
  * Helper function to get development effort for a security level
  */
 function getDevelopmentEffortForLevel(level: SecurityLevel): string {

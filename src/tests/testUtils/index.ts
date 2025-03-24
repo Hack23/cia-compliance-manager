@@ -74,7 +74,7 @@ export function mockBrowserAPIs() {
 
   // Fix: Use ResizeObserverCallback type for correct type signature
   global.ResizeObserver = class ResizeObserver {
-    constructor(callback: ResizeObserverCallback) {}
+    constructor(_callback: ResizeObserverCallback) {}
     observe() {}
     unobserve() {}
     disconnect() {}

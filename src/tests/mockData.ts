@@ -102,7 +102,7 @@ export function createMockChartConstructor() {
 export function setupDomMocks() {
   // Mock ResizeObserver globally
   global.ResizeObserver = class ResizeObserver {
-    constructor(callback: ResizeObserverCallback) {}
+    constructor(_callback: ResizeObserverCallback) {}
     observe() {}
     unobserve() {}
     disconnect() {}

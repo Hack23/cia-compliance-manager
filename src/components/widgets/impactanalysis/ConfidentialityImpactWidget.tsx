@@ -49,12 +49,6 @@ export interface ConfidentialityImpactWidgetProps {
   onConfidentialityChange?: (level: SecurityLevel) => void;
 }
 
-// Update the TechnicalImplementation type definition
-interface TechnicalImplementationDetails {
-  protectionMethod?: string;
-  [key: string]: any;
-}
-
 /**
  * Displays confidentiality impact details for the selected security level
  *

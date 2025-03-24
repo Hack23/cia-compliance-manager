@@ -47,12 +47,6 @@ export interface IntegrityImpactWidgetProps {
   onIntegrityChange?: (level: SecurityLevel) => void;
 }
 
-// Add the interface for technical implementation
-interface TechnicalImplementationDetails {
-  validationMethod?: string;
-  [key: string]: any;
-}
-
 /**
  * Displays integrity impact details for the selected security level
  *

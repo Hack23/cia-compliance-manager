@@ -96,7 +96,7 @@ export function setupDOMAPIMocks() {
  */
 export function setupResizeObserverMock() {
   global.ResizeObserver = class ResizeObserver {
-    constructor(callback: any) {}
+    constructor(_callback: any) {}
     observe() {}
     unobserve() {}
     disconnect() {}

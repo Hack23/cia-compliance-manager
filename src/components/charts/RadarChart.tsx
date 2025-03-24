@@ -28,8 +28,8 @@ const RadarChart: React.FC<RadarChartProps> = ({
     document.documentElement.classList.contains("dark")
   );
 
-  // Add visible security levels for testing - this helps with debugging and state tracking
-  const [securityLevels] = useState({
+  // Remove unused state or rename to indicate it's unused
+  const [_securityLevels] = useState({
     availabilityLevel,
     integrityLevel,
     confidentialityLevel,
@@ -221,6 +221,7 @@ const RadarChart: React.FC<RadarChartProps> = ({
       // Improved error handling with proper type checking
       setRenderError(error instanceof Error ? error.message : String(error));
     }
+    return undefined; // Add explicit return
   }, [availabilityLevel, integrityLevel, confidentialityLevel, isDarkMode]); // Added isDarkMode as dependency
 
   // Apply className to container element if provided

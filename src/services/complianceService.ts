@@ -129,9 +129,7 @@ export class ComplianceService extends BaseService {
     const nonCompliantFrameworks: string[] = [];
 
     // Check each framework
-    for (const [framework, requirements] of Object.entries(
-      this.frameworkRequirements
-    )) {
+    for (const framework of Object.keys(this.frameworkRequirements)) {
       const status = this.getFrameworkStatus(
         framework,
         availabilityLevel,
@@ -280,9 +278,7 @@ export class ComplianceService extends BaseService {
   ): string[] {
     const compliantFrameworks: string[] = [];
 
-    for (const [framework, requirements] of Object.entries(
-      this.frameworkRequirements
-    )) {
+    for (const framework of Object.keys(this.frameworkRequirements)) {
       const status = this.getFrameworkStatus(
         framework,
         availabilityLevel,

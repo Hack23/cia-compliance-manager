@@ -1,42 +1,8 @@
 import { SecurityLevel } from "./cia";
+import { CIAComponentType } from "./cia-services";
 
 /**
- * Filter options for security resources
- */
-export interface SecurityResourceFilter {
-  /**
-   * Filter by CIA component
-   */
-  component?:
-    | "availability"
-    | "integrity"
-    | "confidentiality"
-    | "general"
-    | "all";
-
-  /**
-   * Filter by security level
-   */
-  securityLevel?: SecurityLevel;
-
-  /**
-   * Filter by resource type
-   */
-  type?: string;
-
-  /**
-   * Search query text
-   */
-  searchQuery?: string;
-
-  /**
-   * Filter by tags
-   */
-  tags?: string[];
-}
-
-/**
- * A security resource with metadata
+ * Type for a security resource
  */
 export interface SecurityResource {
   /**
@@ -50,57 +16,152 @@ export interface SecurityResource {
   title: string;
 
   /**
-   * Description of the resource
+   * Resource description
    */
   description: string;
 
   /**
-   * URL to the resource
+   * URL to access the resource
    */
-  url: string;
+  url?: string;
 
   /**
-   * Resource type (component or general)
+   * Resource type (e.g., Documentation, Tool, Template)
    */
-  type: "availability" | "integrity" | "confidentiality" | "general";
+  type?: string;
 
   /**
-   * Security levels this resource is relevant for
+   * Source of the resource
    */
-  relevantLevels?: SecurityLevel[];
+  source?: string;
 
   /**
-   * Components this resource is relevant for
-   */
-  components?: string[];
-
-  /**
-   * Security levels in string format (needed for backward compatibility)
-   */
-  securityLevels?: string[];
-
-  /**
-   * Tags for categorization
+   * Tags associated with the resource
    */
   tags?: string[];
 
   /**
-   * Priority for sorting (higher numbers show first)
+   * CIA components this resource applies to
    */
-  priority?: number;
+  components?: string[];
 
   /**
-   * Score for internal sorting (used by getRecommendedResources)
+   * Security levels this resource applies to
    */
-  score?: number;
+  securityLevels?: string[];
 
+  /**
+   * Format of the resource (e.g., PDF, Website, Video)
+   */
+  format?: string;
+
+  /**
+   * License information
+   */
+  license?: string;
+
+  /**
+   * Rating (0-5)
+   */
+  rating?: number;
+
+  /**
+   * Date added
+   */
+  dateAdded?: string;
+
+  /**
+   * Implementation complexity (1-5)
+   */
+  complexity?: number;
+
+  /**
+   * Whether the resource is premium/paid
+   */
+  isPremium?: boolean;
+  
+  /**
+   * Resource priority (1-5)
+   */
+  priority?: number;
+  
   /**
    * Resource category for grouping
    */
   category?: string;
+  
+  /**
+   * Relevant security levels (legacy field)
+   */
+  relevantLevels?: string[];
+}
+
+/**
+ * Filter options for security resources
+ */
+export interface SecurityResourceFilter {
+  /**
+   * Filter by CIA component
+   */
+  component?: CIAComponentType | string;
 
   /**
-   * Source of the resource (e.g., organization, author)
+   * Filter by security level
    */
-  source?: string;
+  securityLevel?: SecurityLevel | string;
+
+  /**
+   * Filter by resource type (Documentation, Tool, etc.)
+   */
+  type?: string;
+
+  /**
+   * Text search query
+   */
+  searchQuery?: string;
+
+  /**
+   * Filter by tags
+   */
+  tags?: string[];
+
+  /**
+   * Whether to include premium resources
+   */
+  includePremium?: boolean;
+
+  /**
+   * Maximum complexity level (1-5)
+   */
+  maxComplexity?: number;
+
+  /**
+   * Minimum rating (0-5)
+   */
+  minRating?: number;
+}
+
+/**
+ * Type for a security resource category
+ */
+export interface ResourceCategory {
+  /**
+   * Category identifier
+   */
+  id: string;
+
+  /**
+   * Category name
+   */
+  name: string;
+
+  /**
+   * Category description
+   */
+  description: string;
+
+  /**
+   * Category icon
+   */
+  icon?: string;
 }

@@ -68,8 +68,12 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
   className = "",
   testId = SECURITY_SUMMARY_TEST_IDS.WIDGET,
 }) => {
-  const { availabilityOptions, integrityOptions, confidentialityOptions } =
-    useCIAOptions();
+  // Mark the entire destructured object with the same underscore-prefixed name to indicate it's unused
+  const {
+    availabilityOptions: _availabilityOptions,
+    integrityOptions: _integrityOptions,
+    confidentialityOptions: _confidentialityOptions,
+  } = useCIAOptions();
 
   // Calculate overall security level
   const overallSecurityLevel = useMemo(

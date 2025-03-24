@@ -1,6 +1,5 @@
 import React from "react";
 import { BusinessImpactDetails } from "../../types/cia-services";
-import { getRiskBadgeVariant } from "../../utils";
 
 interface BusinessImpactSectionProps {
   impact: BusinessImpactDetails;
@@ -18,11 +17,9 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
   testId = "business-impact-section",
 }) => {
   // Extract risk level from the impact financial or operational data
-  const riskLevel =
+  // Using the risk level in the UI
+  const riskLevelForDisplay =
     impact.financial?.riskLevel || impact.operational?.riskLevel || "Unknown";
-
-  // Get appropriate badge variant for risk level
-  const badgeVariant = getRiskBadgeVariant(riskLevel);
 
   return (
     <div
@@ -32,6 +29,9 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
       <h4 className="text-md font-medium mb-3 flex items-center">
         <span className="mr-2">💼</span>
         Business Impact
+        <span className="ml-2 text-sm text-gray-500">
+          Risk: {riskLevelForDisplay}
+        </span>
       </h4>
 
       <p

@@ -33,7 +33,7 @@ export function mockDOMAPIs() {
 
   // Mock ResizeObserver
   global.ResizeObserver = class ResizeObserver {
-    constructor(callback: ResizeObserverCallback) {}
+    constructor(_callback: ResizeObserverCallback) {}
     observe() {}
     unobserve() {}
     disconnect() {}

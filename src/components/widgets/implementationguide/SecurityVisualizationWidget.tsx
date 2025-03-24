@@ -109,7 +109,7 @@ const SecurityVisualizationWidget: React.FC<
     // Handle test environment - this conditional prevents errors in test environment
     if (typeof window !== "undefined" && !window.ResizeObserver) {
       window.ResizeObserver = class MockResizeObserver {
-        constructor(callback: ResizeObserverCallback) {}
+        constructor(_callback: ResizeObserverCallback) {}
         observe() {}
         unobserve() {}
         disconnect() {}

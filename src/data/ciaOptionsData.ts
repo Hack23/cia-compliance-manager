@@ -363,25 +363,18 @@ export function getImplementationDetails(
   };
 
   // Adjust based on component
-  let effortModifier = 1;
-  let expertiseModifier = "";
-  let timeframeModifier = 1;
+  // Mark these variables as explicitly unused with underscore prefix
+  let _expertiseModifier = "";
 
   switch (component) {
     case "availability":
-      effortModifier = 1.2; // Availability typically requires more infrastructure
-      expertiseModifier = " with infrastructure focus";
-      timeframeModifier = 1.1;
+      _expertiseModifier = " with infrastructure focus";
       break;
     case "integrity":
-      effortModifier = 1;
-      expertiseModifier = " with data management focus";
-      timeframeModifier = 1;
+      _expertiseModifier = " with data management focus";
       break;
     case "confidentiality":
-      effortModifier = 0.9; // Confidentiality can often be implemented more quickly
-      expertiseModifier = " with security focus";
-      timeframeModifier = 0.9;
+      _expertiseModifier = " with security focus";
       break;
   }
 
@@ -389,7 +382,7 @@ export function getImplementationDetails(
   const effort = baseEffort[level];
 
   // Combine expertise with modifier
-  const expertise = baseExpertise[level] + expertiseModifier;
+  const expertise = baseExpertise[level] + _expertiseModifier;
 
   // Adjust timeframe based on modifier
   const timeframe = baseTimeframe[level];

@@ -259,7 +259,7 @@ export class MockComplianceService {
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel,
-    framework: string
+    _framework: string
   ): ComplianceGapAnalysis {
     const levelValues: Record<SecurityLevel, number> = {
       None: 0,

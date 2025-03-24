@@ -250,22 +250,26 @@ export class BusinessImpactService {
     level: SecurityLevel
   ): BusinessImpactDetails {
     const impact = this.calculateBusinessImpactLevel(level);
+    // Use the riskLevel in the description to make it consistent
     const riskLevel = this.getRiskLevelForSecurityLevel(level);
-
+    
+    // Use the impact mapping to get detailed impact descriptions
+    const impactDetails = this.getImpactForLevel(level);
+    
     return {
       summary: `${impact} impact for ${level} ${component}`,
       financial: {
-        description: `${impact} financial impact due to ${level.toLowerCase()} ${component} controls`,
-        riskLevel: `${impact} Risk`,
+        description: `${impactDetails.financialImpact} financial impact with ${riskLevel} risk due to ${level.toLowerCase()} ${component} controls`,
+        riskLevel: riskLevel,
         annualRevenueLoss: this.getDefaultRevenueLoss(level),
       },
       operational: {
-        description: `${impact} operational impact due to ${level.toLowerCase()} ${component} controls`,
+        description: `${impactDetails.operationalImpact} operational impact due to ${level.toLowerCase()} ${component} controls`,
         riskLevel: `${impact} Risk`,
         meanTimeToRecover: this.getDefaultRecoveryTime(level),
       },
       reputational: {
-        description: `${impact} reputational impact due to ${level.toLowerCase()} ${component} controls`,
+        description: `${impactDetails.reputationalImpact} reputational impact due to ${level.toLowerCase()} ${component} controls`,
         riskLevel: `${impact} Risk`,
       },
     };
@@ -355,6 +359,56 @@ export class BusinessImpactService {
   private capitalizeFirstLetter(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+
+  // Convert unused constants and functions to proper implementation
+  // We're properly marking mapping as a utility type with clearer usage intent
+  private readonly impactMapping: Record<
+    SecurityLevel,
+    {
+      financialImpact: string;
+      operationalImpact: string;
+      reputationalImpact: string;
+    }
+  > = {
+    None: {
+      financialImpact: "Negligible",
+      operationalImpact: "Minimal",
+      reputationalImpact: "Insignificant",
+    },
+    Low: {
+      financialImpact: "Minor",
+      operationalImpact: "Limited",
+      reputationalImpact: "Localized",
+    },
+    Moderate: {
+      financialImpact: "Significant",
+      operationalImpact: "Substantial",
+      reputationalImpact: "Moderate",
+    },
+    High: {
+      financialImpact: "Major",
+      operationalImpact: "Severe",
+      reputationalImpact: "Extensive",
+    },
+    "Very High": {
+      financialImpact: "Critical",
+      operationalImpact: "Catastrophic",
+      reputationalImpact: "Global",
+    },
+  };
+
+  /**
+   * Gets impact details for a security level from the mapping
+   * @param level - Security level to look up
+   * @returns Impact details for the specified level
+   */
+  private getImpactForLevel(level: SecurityLevel): {
+    financialImpact: string;
+    operationalImpact: string;
+    reputationalImpact: string;
+  } {
+    return this.impactMapping[level] || this.impactMapping.Moderate;
+  }
 }
 
 /**
@@ -367,26 +421,4 @@ export function createBusinessImpactService(
   dataProvider: CIADataProvider
 ): BusinessImpactService {
   return new BusinessImpactService(dataProvider);
-}
-
-const impactMapping: Record<SecurityLevel, any> = {
-  None: {
-    /* values */
-  },
-  Low: {
-    /* values */
-  },
-  Moderate: {
-    /* values */
-  },
-  High: {
-    /* values */
-  },
-  "Very High": {
-    /* values */
-  },
-};
-
-function getImpactForLevel(level: SecurityLevel): any {
-  return impactMapping[level];
 }

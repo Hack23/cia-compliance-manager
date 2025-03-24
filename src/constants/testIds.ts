@@ -190,7 +190,7 @@ export const TEST_HELPERS = {
   /**
    * Get value points for a security level
    */
-  getValuePointsForLevel: (level: SecurityLevel): string[] => {
+  getValuePointsForLevel: (_level: SecurityLevel): string[] => {
     // Default implementation returns empty array
     // This is just for type checking in tests
     return [];
@@ -746,6 +746,27 @@ export const RESOURCE_TEST_IDS = {
   CATEGORY_FILTER_PREFIX: "category-filter",
   RESOURCES_CONTAINER: "resources-container",
   NO_RESOURCES_MESSAGE: "no-resources-message",
+};
+
+/**
+ * Test IDs for the Security Resources Widget
+ */
+export const SECURITY_RESOURCES_TEST_IDS = {
+  WIDGET: "security-resources-widget",
+  DESCRIPTION: "security-resources-description",
+  LOADING: "security-resources-loading",
+  ERROR: "security-resources-error",
+  OVERVIEW: "security-resources-overview",
+  SECURITY_LEVEL: "security-resources-security-level",
+  VALUE_POINT: "security-resources-value-point",
+  NO_RESOURCES: "security-resources-no-resources",
+  RESOURCE_GROUP: "security-resources-group",
+  RESOURCE_ITEM: "security-resources-item",
+  IMPLEMENTATION_STEPS: "security-resources-implementation-steps",
+  IMPLEMENTATION_STEP: "security-resources-implementation-step",
+  IMPLEMENTATION_EFFORT: "security-resources-implementation-effort",
+  REQUIRED_EXPERTISE: "security-resources-required-expertise",
+  VIEW_ALL_BUTTON: "security-resources-view-all-button",
 };
 
 // ---------------------------------------------------------------

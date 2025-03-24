@@ -21,7 +21,7 @@ import * as Utils from "./utils";
 // Export namespaces to avoid naming conflicts
 export { Components, Hooks, Services, Types, Utils };
 
-// Re-export component props that were missing in documentation
+// Essential component and utility type exports
 export type { StatusType } from "./components/common/StatusBadge";
 export type { ROIMetrics } from "./types/cia-services";
 export type {
@@ -29,14 +29,14 @@ export type {
   FrameworkComplianceStatus,
 } from "./types/compliance";
 
-// Re-export from componentPropExports to get the correct types
+// Component prop types
 export type {
   SecurityLevelChangeTrackerProps,
   SecurityLevelContextType,
   UseSecurityLevelStateOptions,
 } from "./types/componentPropExports";
 
-// Re-export from widget types
+// Widget props
 export type {
   AvailabilityImpactWidgetProps,
   BusinessImpactAnalysisWidgetProps,
@@ -52,6 +52,6 @@ export type {
   WidgetBaseProps,
 } from "./types/widgets";
 
-// Re-export service classes
+// Core services
 export { ComplianceService } from "./services/complianceService";
 export { TechnicalImplementationService } from "./services/technicalImplementationService";

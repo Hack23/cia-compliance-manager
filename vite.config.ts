@@ -71,7 +71,6 @@ export default defineConfig({
           }
         },
       },
-      // Instead of putting this at the output level, move it up to the rollupOptions level
       external: (id) => id.includes(".test.") || id.includes("__mocks__"),
     },
   },
@@ -87,17 +86,14 @@ export default defineConfig({
         reporter: ["text", "json", "html", "lcov"],
         reportsDirectory: "./docs/coverage",
         exclude: [
-          // Comprehensive node_modules exclusion patterns that match everything
           "node_modules/**/*",
           "**/node_modules/**/*",
-          // Explicitly exclude problematic modules with more specific patterns
           "**/@kurkle/color/**",
           "**/chart.js/**",
           "**/react/**",
           "**/react-dom/**",
           "**/scheduler/**",
           "**/jsx-runtime*",
-          // Other standard exclusions
           "dist/",
           "cypress/**",
           "scripts/",
@@ -112,15 +108,14 @@ export default defineConfig({
           "src/index.tsx",
           ".dependency-cruiser.cjs",
         ],
-        // Maintain existing thresholds
+        // Increase thresholds for v1.0 release
         thresholds: {
-          statements: 80,
-          branches: 70,
-          functions: 75,
-          lines: 80,
+          statements: 85,
+          branches: 75,
+          functions: 80,
+          lines: 85,
         },
       },
-      // Add HTML reporter for test results
       reporters: [
         [
           "verbose",

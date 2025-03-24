@@ -115,8 +115,8 @@ const BusinessImpactAnalysisWidget: React.FC<
   }, [businessImpactService, confidentialityLevel]);
 
   // Add state for loading and error handling
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [isLoading, _setIsLoading] = useState(false);
+  const [error, _setError] = useState<Error | null>(null);
 
   // Helper function to determine implementation complexity
   const getImplementationComplexity = (

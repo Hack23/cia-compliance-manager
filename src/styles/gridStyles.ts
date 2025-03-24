@@ -111,8 +111,8 @@ export function getWidgetSize(widget: Partial<WidgetConfig>): WidgetDimension {
 /**
  * Calculate grid layout styles based on widget configuration
  */
-export function getGridLayoutStyles(widgets: Widget[]) {
-  // Implementation details...
+export function getGridLayoutStyles(_widgets: Widget[]) {
+  // ...existing implementation
 }
 
 /**

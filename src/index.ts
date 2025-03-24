@@ -40,3 +40,6 @@ export { default as CIAClassificationApp } from "./application/CIAClassification
 // Selectively export commonly used types without ambiguity
 export type { SecurityLevel, SecurityProfile } from "./types/cia";
 export type { ComplianceStatus } from "./types/cia-services";
+
+// Export interfaces for documentation purposes - will help TypeDoc
+export type { ComponentTechnicalDetails } from "./services/technicalImplementationService";

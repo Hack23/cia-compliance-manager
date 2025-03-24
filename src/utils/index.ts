@@ -28,10 +28,11 @@ export const { getSecurityLevelColorClass } = colorUtils;
 
 // Add missing color utilities with appropriate fallbacks
 export const getColorForRiskLevel =
-  colorUtils.getSecurityLevelColorClass || ((level: string) => `text-gray-600`);
+  colorUtils.getSecurityLevelColorClass ||
+  ((_level: string) => `text-gray-600`);
 export const getComplianceStatusColor =
   colorUtils.getSecurityLevelColorClass ||
-  ((status: string) => `text-gray-600`);
+  ((_status: string) => `text-gray-600`);
 export const getProgressColor = (progress: number) =>
   progress > 75
     ? "text-green-500"
