@@ -37,6 +37,19 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
     if (savedPreference) {
       setDarkMode(savedPreference === "true");
     }
+    
+    // Add an event listener for external theme changes (for testing)
+    const handleThemeChange = (event: CustomEvent) => {
+      if (event.detail && typeof event.detail.theme === 'string') {
+        setDarkMode(event.detail.theme === 'dark');
+      }
+    };
+    
+    window.addEventListener('themeChange' as any, handleThemeChange as EventListener);
+    
+    return () => {
+      window.removeEventListener('themeChange' as any, handleThemeChange as EventListener);
+    };
   }, []);
 
   // Toggle theme function
@@ -48,11 +61,12 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
     <button
       data-testid={testId}
       onClick={toggleDarkMode}
-      className={`px-4 py-2 rounded-md flex items-center transition-all duration-300 ${
+      className={`px-4 py-2 rounded-md flex items-center transition-all duration-300 theme-toggle ${
         darkMode
           ? "bg-black border border-green-500 hover:border-green-400 hover:bg-gray-900 cyberbutton"
           : "bg-blue-500 hover:bg-blue-600 text-white"
       }`}
+      aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
     >
       {darkMode ? (
         <>

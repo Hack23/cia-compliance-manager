@@ -1,20 +1,24 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2022", "dom", "dom.iterable"],
+    "target": "es6",
+    "lib": ["es6", "dom", "dom.iterable"],
     "types": ["cypress", "node", "@testing-library/cypress"],
-    "esModuleInterop": true,
+    "module": "ESNext",
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "isolatedModules": false,
-    "noEmit": true,
-    "noImplicitThis": false,
-    "allowJs": true,
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
-    "strict": false,
-    "moduleResolution": "node",
-    "jsx": "react-jsx"
+    "esModuleInterop": true,
+    "noEmit": true,
+    "strict": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "resolveJsonModule": true
   },
-  "include": ["**/*.ts", "../node_modules/cypress", "../cypress.config.ts"]
+  "include": [
+    "**/*.ts",
+    "support/**/*.ts",
+    "e2e/**/*.ts",
+    "plugins/**/*.ts",
+    "node_modules/cypress"
+  ]
 }

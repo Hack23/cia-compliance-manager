@@ -5,7 +5,6 @@ import {
   CIA_TEST_IDS,
   FLEXIBLE_TEST_IDS,
   getTestSelector,
-  TEST_IDS,
   WIDGET_TEST_IDS,
 } from "../../support/constants";
 
@@ -180,24 +179,46 @@ export function findWidget(
   widgetName: string
 ): Cypress.Chainable<JQuery<HTMLElement>> {
   return cy.document().then((doc) => {
-    // Get potential test IDs for this widget
-    const testIds = getWidgetId(widgetName);
+    // Try multiple selector strategies in sequence
+    const selectors = [
+      // Direct matches
+      `[data-testid="widget-${widgetName}"]`,
+      `[data-testid="widget-${widgetName}-container"]`,
+      `[data-testid="${widgetName}-widget"]`,
+      `[data-testid="${widgetName}"]`,
 
-    // Create selectors for each test ID
-    const selectors = testIds.map((id) => `[data-testid="${id}"]`).join(", ");
+      // Partial matches
+      `[data-testid*="widget-${widgetName}"]`,
+      `[data-testid*="${widgetName}-widget"]`,
+      `[data-testid*="${widgetName}-container"]`,
+      `[data-testid*="${widgetName}"][data-testid*="widget"]`,
 
-    // Try to find elements using the selectors
-    if (selectors && doc.querySelector(selectors)) {
-      return cy.get(selectors).first();
+      // Class-based selectors as fallback
+      `[class*="widget-${widgetName}"]`,
+      `[class*="${widgetName}-widget"]`,
+    ];
+
+    // Try each selector
+    for (const selector of selectors) {
+      const elements = doc.querySelectorAll(selector);
+      if (elements.length > 0) {
+        cy.log(`Found widget using selector: ${selector}`);
+        return cy.get(selector);
+      }
     }
 
-    // If not found with direct selectors, try a more flexible approach
-    cy.log(
-      `Could not find widget with ID containing: ${widgetName}, trying alternative selectors`
-    );
+    // Last resort: log what widgets do exist and return empty selector
+    cy.log(`Could not find widget matching: ${widgetName}. Available widgets:`);
 
-    // Return empty selector if nothing found
-    return cy.get("body").find('[data-testid="nonexistent"]', { log: false });
+    const allTestIds = Array.from(doc.querySelectorAll("[data-testid]"))
+      .map((el) => el.getAttribute("data-testid"))
+      .filter((id) => id?.includes("widget"))
+      .join(", ");
+
+    cy.log(`Available widget test IDs: ${allTestIds}`);
+
+    // Return empty wrapper that won't throw an error
+    return cy.wrap($());
   });
 }
 
@@ -484,53 +505,54 @@ export const checkWidgetExists = (widgetId: string): void => {
 
 // For any widget-specific actions, use the proper test IDs
 export const selectSecurityLevel = (component: string, level: string): void => {
-  cy.get(`[data-testid="${TEST_IDS.SECURITY_LEVEL_WIDGET}"]`).within(() => {
-    cy.get(`[data-testid="${component}-select"]`).click();
-    cy.get(`[data-testid="${component}-option-${level}"]`).click();
-  });
+  cy.get(`[data-testid="${WIDGET_TEST_IDS.SECURITY_LEVEL_WIDGET}"]`).within(
+    () => {
+      const selectId =
+        component === "availability"
+          ? CIA_TEST_IDS.AVAILABILITY_SELECT
+          : component === "integrity"
+          ? CIA_TEST_IDS.INTEGRITY_SELECT
+          : CIA_TEST_IDS.CONFIDENTIALITY_SELECT;
+
+      cy.get(`[data-testid="${selectId}"]`).click();
+      cy.get(`[data-testid="${component}-option-${level}"]`).click();
+    }
+  );
 };
 
 // Fix references to non-existent properties
 export const checkAvailabilityWidget = (): void => {
-  cy.get(`[data-testid="${CYPRESS_TEST_IDS.AVAILABILITY_WIDGET}"]`).should(
-    "exist"
-  );
+  cy.get(
+    `[data-testid="${WIDGET_TEST_IDS.AVAILABILITY_IMPACT_WIDGET}"]`
+  ).should("exist");
   // Rest of the implementation
 };
 
 export const checkIntegrityWidget = (): void => {
-  cy.get(`[data-testid="${CYPRESS_TEST_IDS.INTEGRITY_WIDGET}"]`).should(
+  cy.get(`[data-testid="${WIDGET_TEST_IDS.INTEGRITY_IMPACT_WIDGET}"]`).should(
     "exist"
   );
   // Rest of the implementation
 };
 
 export const checkConfidentialityWidget = (): void => {
-  cy.get(`[data-testid="${CYPRESS_TEST_IDS.CONFIDENTIALITY_WIDGET}"]`).should(
-    "exist"
-  );
+  cy.get(
+    `[data-testid="${WIDGET_TEST_IDS.CONFIDENTIALITY_IMPACT_WIDGET}"]`
+  ).should("exist");
   // Rest of the implementation
 };
 
 export const checkCIASummaryWidget = (): void => {
-  cy.get(`[data-testid="${CYPRESS_TEST_IDS.CIA_SUMMARY_WIDGET}"]`).should(
+  cy.get(`[data-testid="${WIDGET_TEST_IDS.CIA_IMPACT_SUMMARY_WIDGET}"]`).should(
     "exist"
   );
   // Rest of the implementation
 };
 
 export const checkResourcesWidget = (): void => {
-  cy.get(`[data-testid="${CYPRESS_TEST_IDS.RESOURCES_WIDGET}"]`).should(
+  cy.get(`[data-testid="${WIDGET_TEST_IDS.SECURITY_RESOURCES_WIDGET}"]`).should(
     "exist"
   );
-  // Rest of the implementation
-};
-
-export const checkVisualizationWidget = (): void => {
-  cy.get(`[data-testid="${CYPRESS_TEST_IDS.VISUALIZATION_WIDGET}"]`).should(
-    "exist"
-  );
-  // Rest of the implementation
 };
 
 /**

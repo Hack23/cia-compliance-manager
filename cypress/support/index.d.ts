@@ -354,5 +354,71 @@ declare namespace Cypress {
      * Create a visual performance report in the browser
      */
     createVisualPerformanceReport(): Chainable<null>;
+
+    /**
+     * Custom command to ensure app is loaded before continuing
+     * @example cy.ensureAppLoaded()
+     */
+    ensureAppLoaded(timeoutValue?: number): Chainable<void>;
+
+    /**
+     * Set security levels for each component
+     * @example cy.setSecurityLevels('High', 'Moderate', 'Low')
+     */
+    setSecurityLevels(
+      availability: string,
+      integrity: string,
+      confidentiality: string
+    ): Chainable<void>;
+
+    /**
+     * Find widget by name using flexible selectors
+     * @example cy.findWidget('business-impact')
+     */
+    findWidget(widgetName: string): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * Verify expected content is present in the page
+     * @example cy.verifyContentPresent(['Success', /Error/])
+     */
+    verifyContentPresent(
+      contentPatterns: Array<string | RegExp>
+    ): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * Check that text content exists in the page
+     * @example cy.containsText('Hello, world')
+     */
+    containsText(text: string): Chainable<void>;
+
+    /**
+     * Debug a failed test with screenshots and logging
+     * @example cy.debugFailedTest('widget-test')
+     */
+    debugFailedTest(testName: string): Chainable<void>;
+
+    /**
+     * Analyze widgets on the page for debugging
+     * @example cy.analyzeWidgets()
+     */
+    analyzeWidgets(): Chainable<void>;
+
+    /**
+     * Apply test styles for better screenshots
+     * @example cy.applyTestStyles()
+     */
+    applyTestStyles(): Chainable<null>;
+
+    /**
+     * Force dark mode theme
+     * @example cy.forceDarkMode()
+     */
+    forceDarkMode(): Chainable<void>;
+
+    /**
+     * Force light mode theme
+     * @example cy.forceLightMode()
+     */
+    forceLightMode(): Chainable<void>;
   }
 }

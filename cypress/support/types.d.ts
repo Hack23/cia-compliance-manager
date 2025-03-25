@@ -5,20 +5,50 @@
 
 // Define widget name type for better intellisense and type checking
 type WidgetName =
+  // Main widget container IDs from updated analysis
+  | "widget-container-widget-security-level"
+  | "widget-container-widget-business-impact"
+  | "widget-container-widget-security-summary"
+  | "widget-container-widget-cost-estimation"
+  | "widget-container-widget-value-creation"
+  | "widget-container-widget-compliance-status"
+  | "widget-container-widget-technical-details"
+  | "widget-container-widget-availability-impact"
+  | "widget-container-widget-integrity-impact"
+  | "widget-container-widget-confidentiality-impact"
+  | "widget-container-widget-security-resources"
+  | "widget-container-widget-security-visualization"
+  | "widget-container-cia-impact-summary"
+
+  // Widget root elements (without the container prefix)
+  | "widget-security-level-selection"
+  | "widget-security-summary"
+  | "widget-business-impact"
+  | "widget-technical-details"
+  | "widget-cost-estimation"
+  | "widget-value-creation"
+  | "widget-compliance-status"
+  | "widget-radar-chart"
+  | "widget-availability-impact-container"
+  | "widget-integrity-impact-container"
+  | "widget-confidentiality-impact-container"
+  | "widget-security-resources-container"
+  | "cia-impact-summary-widget"
+
+  // Simplified search terms (for search flexibility)
   | "security-level"
   | "security-summary"
   | "business-impact"
+  | "technical-details"
   | "cost-estimation"
   | "value-creation"
   | "compliance-status"
   | "radar-chart"
-  | "technical-details"
   | "availability-impact"
   | "integrity-impact"
   | "confidentiality-impact"
   | "security-resources"
   | "cia-impact-summary"
-  | "visualization"
   | string; // Allow for other widget names too
 
 // Performance record interface for metrics tracking
@@ -264,5 +294,65 @@ declare namespace Cypress {
       category?: string
     ): Chainable<Subject>;
     setAppState(stateChanges: Record<string, any>): Chainable<null>;
+  }
+}
+
+// Cypress type augmentation for custom commands
+/// <reference types="cypress" />
+
+// We keep all type declarations here to avoid duplicates
+declare namespace Cypress {
+  interface Chainable {
+    // Core test helpers
+    ensureAppLoaded(timeout?: number): Chainable<void>;
+    setSecurityLevels(
+      availability?: string,
+      integrity?: string,
+      confidentiality?: string
+    ): Chainable<void>;
+
+    // Widget finding and verification
+    findWidget(widgetName: string): Chainable<JQuery<HTMLElement>>;
+    findWidgetFlexibly(widgetId: string): Chainable<JQuery<HTMLElement>>;
+    verifyContentPresent(
+      contentPatterns: Array<string | RegExp>
+    ): Chainable<JQuery<HTMLElement>>;
+    containsText(text: string): Chainable<void>;
+
+    // Debug helpers
+    debugFailedTest(testName: string): Chainable<void>;
+    analyzeWidgets(): Chainable<void>;
+    logVisibleElements(): Chainable<void>;
+    logAllTestIds(): Chainable<void>;
+
+    // UI helpers
+    applyTestStyles(): Chainable<null>;
+    forceDarkMode(): Chainable<void>;
+    forceLightMode(): Chainable<void>;
+    toggleTheme(): Chainable<void>;
+
+    // Enhanced widget testing
+    findWidgetEnhanced(
+      widgetNameOrPattern: string | RegExp
+    ): Chainable<JQuery<HTMLElement>>;
+    waitForStableContent(
+      selector: string,
+      options?: { timeout?: number; pollInterval?: number }
+    ): Chainable<void>;
+    optimizeForScreenshot(): Chainable<JQuery<HTMLElement>>;
+    screenshotWidget(name: string): Chainable<JQuery<HTMLElement>>;
+    analyzeWidget(widgetName: string): Chainable<JQuery<HTMLElement>>;
+    fixVisualIssues(): Chainable<JQuery<HTMLElement>>;
+
+    // Template system commands
+    checkForDeprecatedTests(): Chainable<void>;
+    findUnconvertedWidgetTests(): Chainable<void>;
+    analyzeWidgetTestIds(): Chainable<void>;
+  }
+
+  // Add window augmentation for our debug properties
+  interface AUTWindow {
+    consoleErrors?: string[];
+    __REACT_APP_STATE__?: unknown;
   }
 }

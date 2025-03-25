@@ -9,4 +9,5 @@
 @import "./styles/utilities.css"; /* Utilities may override components */
 @import "./styles/light-theme.css"; /* Theme variants come afterward */
 @import "./styles/dark-theme.css";
+@import "./styles/widget-improvements.css"; /* Widget-specific improvements */
 @import "./styles/optimizations.css"; /* Final overrides and fixes */

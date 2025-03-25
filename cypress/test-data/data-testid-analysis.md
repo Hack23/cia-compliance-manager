@@ -2,396 +2,450 @@
 
 ## App Structure
 
-- `app-root` - Main application container
-- `app-container` - Container for the entire application
-- `cia-classification-app` - Main CIA classification application
-- `app-title` - Application title element
-- `theme-toggle` - Theme toggle button (light/dark mode)
-- `dashboard-grid` - Main dashboard grid container
+- `app-container` - Main application container that wraps the entire dashboard application
+- `dashboard-grid` - Container for the dashboard grid layout that organizes all widgets
+- `theme-toggle` - Button to toggle between light and dark mode
 
-## Dashboard Layout
+## Widget Pattern Analysis
 
-- `widget-container` - Generic container for widgets
-- `widget-header` - Header element for widgets
-- `widget-body` - Body element for widgets
-- `widget-content-wrapper` - Content wrapper inside widgets
-- `data-container` - General data container across multiple widgets
-- `terminal-text-container` - Container for terminal-style text
-- `pulse-dot` - Animated dot indicator in various areas
-- `metrics-card-title` - Title for metrics cards (used in multiple widgets)
-- `metrics-card-value` - Value display for metrics cards
-- `key-value-pair` - Generic key-value pair component used across widgets
-- `status-badge` - Status indicator badge used throughout the application
+Each widget follows a consistent container pattern:
 
-## Security Level Selection Widget
+```html
+<div class="widget-container" data-testid="widget-container-[widget-name]">
+  <div class="widget-header">
+    <h3>Widget Title</h3>
+  </div>
+  <div class="widget-body">
+    <div class="p-4">
+      <!-- Widget content -->
+    </div>
+  </div>
+</div>
+```
 
-- `widget-security-level-selection` - Main widget container
-- `widget-security-level-selection-header` - Widget header
-- `security-level-selector` - Security level selector component
-- `security-level-controls` - Controls for security level selection
-- `confidentiality-section` - Section for confidentiality settings
-- `integrity-section` - Section for integrity settings
-- `availability-section` - Section for availability settings
-- `confidentiality-select` - Dropdown for confidentiality level
-- `integrity-select` - Dropdown for integrity level
-- `availability-select` - Dropdown for availability level
-- `confidentiality-color-indicator` - Color indicator for confidentiality level
-- `integrity-color-indicator` - Color indicator for integrity level
-- `availability-color-indicator` - Color indicator for availability level
-- `confidentiality-description` - Description of confidentiality level
-- `integrity-description` - Description of integrity level
-- `availability-description` - Description of availability level
-- `confidentiality-technical-info-button` - Info button for confidentiality
-- `integrity-technical-info-button` - Info button for integrity
-- `availability-technical-info-button` - Info button for availability
-- `current-confidentiality` - Current confidentiality level indicator
-- `current-integrity` - Current integrity level indicator
-- `current-availability` - Current availability level indicator
-- `context-info` - Contextual information display
+## Detailed Widget Breakdown
 
-## Security Summary Widget
+### 1. Security Level Configuration Widget
 
-- `widget-security-summary` - Main widget container
-- `widget-security-summary-header` - Widget header
-- `security-summary-container` - Container for security summary
-- `security-icon` - Security level icon
-- `security-summary-description` - Security summary description
-- `security-summary-container-confidentiality-summary` - Confidentiality summary container
-- `security-summary-container-integrity-summary` - Integrity summary container
-- `security-summary-container-availability-summary` - Availability summary container
-- `roi-estimate-summary` - ROI estimate summary
-- `roi-estimate-pair` - ROI estimate key-value pair
-- `technical-section-toggle` - Toggle for technical section
-- `technical-details-section` - Technical details section (expanded state)
-- `availability-tech-details` - Availability technical details
-- `integrity-tech-details` - Integrity technical details
-- `confidentiality-tech-details` - Confidentiality technical details
-- `business-impact-toggle` - Toggle for business impact section
-- `business-impact-section` - Business impact section (expanded state)
-- `availability-impact-details` - Availability impact details
-- `integrity-impact-details` - Integrity impact details
-- `confidentiality-impact-details` - Confidentiality impact details
-- `recommendation-heading` - Recommendation heading
-- `security-recommendation` - Security recommendation text
-- `security-summary-container-classification-level` - Classification level information
-- `security-summary-container-information-sensitivity` - Information sensitivity details
-- `security-summary-container-protection-level` - Protection level information
-- `metrics-toggle` - Toggle for metrics section
-- `metrics-section` - Metrics section (expanded state)
+**Purpose**: Allows users to configure security levels for availability, integrity, and confidentiality.
 
-## Business Impact Analysis Widget
+**Main Container**: `widget-container-widget-security-level`
 
-- `widget-business-impact-container` - Main widget container
-- `widget-business-impact-container-header` - Widget header
-- `business-impact-widget` - Business impact widget content
-- `business-impact-widget-availability-tab` - Availability tab content
-- `business-impact-widget-integrity-tab` - Integrity tab content
-- `business-impact-widget-confidentiality-tab` - Confidentiality tab content
-- `business-impact-widget-summary` - Business impact summary
-- `business-impact-availability-tab` - Availability tab identifier
-- `business-impact-integrity-tab` - Integrity tab identifier
-- `business-impact-confidentiality-tab` - Confidentiality tab identifier
-- `financial-impact-card` - Financial impact information card
-- `operational-impact-card` - Operational impact information card
-- `reputational-impact-card` - Reputational impact information card
-- `regulatory-impact-card` - Regulatory impact information card
-- `strategic-impact-card` - Strategic impact information card
-- `business-impact-impact-card` - Generic impact card
-- `business-impact-risk-level` - Risk level indicator
+**Key Components**:
 
-## Technical Implementation Widget
+- `security-level-availability` - Container for availability configuration controls
+- `security-level-integrity` - Container for integrity configuration controls
+- `security-level-confidentiality` - Container for confidentiality configuration controls
+- `availability-details-content` - Panel displaying details about the selected availability level
 
-- `widget-technical-details-container` - Main widget container
-- `widget-technical-details-container-header` - Widget header
-- `technical-details-widget` - Technical details widget content
-- `technical-details` - Technical details section
-- `technical-description` - Technical implementation description
-- `implementation-header` - Implementation steps header
-- `implementation-step-0` - First implementation step
-- `implementation-step-1` - Second implementation step
-- `implementation-step-2` - Third implementation step
-- `resources-header` - Resources header
-- `development-effort` - Development effort information
-- `maintenance-level` - Maintenance level information
-- `required-expertise` - Required expertise information
-- `implementation-considerations` - Implementation considerations section
-- `technical-code-example` - Technical code example
-- `technical-requirements` - Technical requirements section
-- `availability-tab-button` - Availability tab button
-- `integrity-tab-button` - Integrity tab button
-- `confidentiality-tab-button` - Confidentiality tab button
+**Content Type**:
 
-## Cost Estimation Widget
+- Selection controls (dropdowns, radio buttons) for each CIA component
+- Informational text describing security levels
+- Color indicators for the security level selected
 
-- `widget-cost-estimation` - Main widget container
-- `widget-cost-estimation-header` - Widget header
-- `capex-estimate-value` - Capital expenditure estimate
-- `opex-estimate-value` - Operational expenditure estimate
-- `three-year-total` - Three-year total cost
-- `roi-estimate` - Return on investment estimate
-- `cost-analysis-text` - Cost analysis text
-- `capex-percentage` - Capital expenditure percentage
-- `opex-percentage` - Operational expenditure percentage
-- `implementation-time` - Implementation time estimation
-- `total-cost-card` - Total cost information card
-- `cost-breakdown-section` - Cost breakdown section
-- `cost-chart` - Cost visualization chart
+### 2. Business Impact Analysis Widget
 
-## Value Creation Widget
+**Purpose**: Analyzes business impact of selected security levels across different dimensions.
 
-- `widget-value-creation` - Main widget container
-- `widget-value-creation-header` - Widget header
-- `value-creation-widget` - Value creation widget content
-- `value-creation-widget-roi` - ROI section
-- `value-creation-widget-savings` - Savings section
-- `value-creation-widget-breakeven` - Breakeven section
-- `value-creation-widget-value-point-0` - First value point
-- `value-creation-widget-value-point-1` - Second value point
-- `value-creation-widget-value-point-2` - Third value point
-- `value-creation-widget-value-point-3` - Fourth value point
-- `value-creation-widget-value-point-4` - Fifth value point
-- `roi-chart` - ROI visualization chart
-- `benefits-list` - List of benefits
-- `value-metrics-section` - Value metrics section
+**Main Container**: `widget-container-widget-business-impact`
 
-## Compliance Status Widget
+**Key Components**:
 
-- `widget-compliance-status` - Main widget container
-- `widget-compliance-status-header` - Widget header
-- `compliance-status-widget` - Compliance status widget content
-- `compliance-status-badge` - Compliance status badge displaying percentage
-- `compliance-requirements-list` - List of compliance requirements
-- `compliant-frameworks-list` - List of compliant frameworks
-- `partially-compliant-frameworks` - Partially compliant frameworks section
-- `non-compliant-frameworks` - Non-compliant frameworks section
-- `compliance-score` - Overall compliance score
-- `remediation-steps` - Remediation steps section
-- `framework-item` - Individual framework item
+- `widget-business-impact-executive-summary` - High-level summary of business impacts
+- `widget-business-impact-overall-impact` - Overall impact assessment card
+- `widget-business-impact-implementation-complexity` - Implementation complexity assessment card
+- `widget-business-impact-security-profile` - Security profile assessment card
+- `widget-business-impact-availability-badge` - Badge showing availability level
+- `widget-business-impact-integrity-badge` - Badge showing integrity level
+- `widget-business-impact-confidentiality-badge` - Badge showing confidentiality level
+- `widget-business-impact-heatmap-availability` - Heat map cell for availability impact
+- `widget-business-impact-heatmap-integrity` - Heat map cell for integrity impact
+- `widget-business-impact-heatmap-confidentiality` - Heat map cell for confidentiality impact
+- `widget-business-impact-impact-financial` - Financial impact assessment card
+- `widget-business-impact-impact-operational` - Operational impact assessment card
+- `widget-business-impact-impact-reputational` - Reputational impact assessment card
+- `widget-business-impact-impact-regulatory` - Regulatory impact assessment card
+- `widget-business-impact-tab-considerations` - Tab for implementation considerations
+- `widget-business-impact-tab-benefits` - Tab for benefits
+- `widget-business-impact-considerations` - Container for implementation considerations
+- `widget-business-impact-consideration-0` through `widget-business-impact-consideration-3` - Individual consideration items
 
-## Security Profile Visualization Widget (Radar Chart)
+**Content Type**:
 
-- `widget-radar-chart` - Main widget container
-- `widget-radar-chart-header` - Widget header
-- `radar-chart` - Radar chart component
-- `radar-chart-container` - Radar chart container
-- `radar-chart-value-at-risk` - Value at risk section
-- `radar-chart-probability` - Probability section
-- `radar-chart-risk-score` - Risk score section
-- `radar-availability-value` - Availability value in radar chart
-- `radar-integrity-value` - Integrity value in radar chart
-- `radar-confidentiality-value` - Confidentiality value in radar chart
-- `chart-legend` - Chart legend
-- `risk-assessment-section` - Risk assessment section
-- `current-security-posture` - Current security posture indicator
-- `mock-radar-chart` - Used in tests as a placeholder for the actual chart
+- Text descriptions of business impact by category
+- Risk level indicators (Low, Medium, High)
+- Impact metrics with quantitative and qualitative assessments
+- Tab-based navigation between different views
+- Consideration items with headings and descriptive text
 
-## Confidentiality Impact Widget
+### 3. Security Summary Widget
 
-- `widget-confidentiality-impact-container` - Main widget container
-- `widget-confidentiality-impact-container-header` - Widget header
-- `confidentiality-impact` - Confidentiality impact component
-- `confidentiality-impact-impact-card` - Impact card
-- `confidentiality-impact-business-impact` - Business impact description
-- `confidentiality-impact-recommendation-0` - First recommendation
-- `confidentiality-impact-recommendation-1` - Second recommendation
-- `confidentiality-impact-recommendation-2` - Third recommendation
-- `confidentiality-impact-recommendation-3` - Fourth recommendation (shown when expanded)
-- `confidentiality-impact-classification-level` - Classification level
-- `confidentiality-impact-information-sensitivity` - Information sensitivity
-- `data-protection-classification` - Data protection classification section
-- `protection-method` - Protection method information
-- `confidentiality-impact-validation-technique` - Validation technique information
-- `show-all-recommendations-button` - Button to toggle showing all recommendations
+**Purpose**: Provides an overview of the security posture based on selected security levels.
 
-## Integrity Impact Widget
+**Main Container**: `widget-container-widget-security-summary`
 
-- `widget-integrity-impact-container` - Main widget container
-- `widget-integrity-impact-container-header` - Widget header
-- `integrity-impact` - Integrity impact component
-- `integrity-impact-impact-card` - Impact card
-- `integrity-impact-business-impact` - Business impact description
-- `integrity-impact-recommendation-0` - First recommendation
-- `integrity-impact-recommendation-1` - Second recommendation
-- `integrity-impact-recommendation-2` - Third recommendation
-- `integrity-impact-recommendation-3` - Fourth recommendation (shown when expanded)
-- `integrity-impact-protection-level` - Protection level
-- `validation-method` - Validation method information
-- `data-quality-metrics` - Data quality metrics section
-- `integrity-impact-validation-technique` - Validation technique information
-- `show-all-recommendations-button` - Button to toggle showing all recommendations
+**Key Components**:
 
-## Availability Impact Widget
+- `overall-security-level` - Overall security level assessment
+- `summary-description` - Description of the security summary
+- `availability-card` - Card showing availability security details
+- `availability-risk` - Risk level for availability
+- `integrity-card` - Card showing integrity security details
+- `integrity-risk` - Risk level for integrity
+- `confidentiality-card` - Card showing confidentiality security details
+- `confidentiality-risk` - Risk level for confidentiality
 
-- `widget-availability-impact-container` - Main widget container
-- `widget-availability-impact-container-header` - Widget header
-- `widget-availability-impact` - Availability impact component
-- `widget-availability-impact-impact-card` - Impact card
-- `widget-availability-impact-business-impact` - Business impact description
-- `widget-availability-impact-recommendation-0` - First recommendation
-- `widget-availability-impact-recommendation-1` - Second recommendation
-- `widget-availability-impact-recommendation-2` - Third recommendation
-- `widget-availability-impact-recommendation-3` - Fourth recommendation (shown when expanded)
-- `widget-availability-impact-uptime-target` - Uptime target
-- `widget-availability-impact-rto-value` - Recovery time objective value
-- `widget-availability-impact-rpo-value` - Recovery point objective value
-- `widget-availability-impact-mttr-value` - Mean time to recovery value
-- `availability-metrics` - Availability metrics section
-- `show-all-recommendations-button` - Button to toggle showing all recommendations
+**Content Type**:
 
-## CIA Impact Summary Widget
+- Text description of overall security level
+- Component-specific security level details
+- Risk indicators with text labels (Low, Medium, High)
+- Security level badges with colors corresponding to security levels
 
-- `cia-impact-summary-widget` - Main widget container
-- `cia-impact-summary-widget-header` - Widget header
-- `cia-impact-summary-confidentiality-summary` - Confidentiality summary
-- `cia-impact-summary-integrity-summary` - Integrity summary
-- `cia-impact-summary-availability-summary` - Availability summary
-- `overall-security-profile` - Overall security profile section
-- `security-profile-summary` - Security profile summary text
-- `security-posture-indicator` - Security posture indicator
-- `status-badge` - Security level badge used within the summaries
+### 4. Value Creation Widget
 
-## Security Resources Widget
+**Purpose**: Shows the business value created by implementing the selected security levels.
 
-- `widget-security-resources-container` - Main widget container
-- `widget-security-resources-container-header` - Widget header
-- `security-resources-widget` - Security resources widget
-- `security-resources-widget-category-select` - Category select dropdown
-- `security-resources-widget-search-input` - Search input for resources filtering
-- `security-resources-widget-resource-0` - First resource
-- `security-resources-widget-resource-1` - Second resource
-- `security-resources-widget-resource-2` - Third resource
-- `security-resources-widget-resource-3` - Fourth resource
-- `security-resources-widget-resource-4` - Fifth resource
-- `resource-type-filter` - Resource type filter
-- `resource-detail-modal` - Resource detail modal
-- `resource-links-section` - Resource links section
+**Main Container**: `widget-container-widget-value-creation`
 
-## Test ID Patterns for Widget States and Interactions
+**Key Components**:
 
-### Tab Navigation Patterns
+- `value-creation-summary` - Summary of value creation
+- `roi-value` - Return on investment value
+- `value-metrics-grid` - Grid of value metrics
+- `value-metric-0` through `value-metric-5` - Individual value metric cards
+- `availability-value-section` - Value creation for availability component
+- `availability-value-item-0` through `availability-value-item-3` - Value items for availability
+- `integrity-value-section` - Value creation for integrity component
+- `integrity-value-item-0` through `integrity-value-item-1` - Value items for integrity
+- `confidentiality-value-section` - Value creation for confidentiality component
+- `confidentiality-value-item-0` through `confidentiality-value-item-1` - Value items for confidentiality
 
-- `[widget-name]-[component]-tab` - Tab content container (e.g., `business-impact-widget-availability-tab`)
-- `[component]-tab-button` - Tab navigation button (e.g., `availability-tab-button`)
+**Content Type**:
 
-### Expandable Sections Patterns
+- Numerical ROI indicators and percentages
+- Value metrics with labels and numeric values
+- Bulleted lists of value creation points
+- Color-coded sections for each CIA component
+- Business value statements for executive communications
 
-- `[section]-toggle` - Toggle button for expandable sections (e.g., `technical-section-toggle`)
-- `[section]-section` - Expanded section content container (e.g., `metrics-section`)
-- `show-all-[item-type]-button` - Button to expand list items (e.g., `show-all-recommendations-button`)
+### 5. Cost Estimation Widget
 
-### Recommendation Patterns
+**Purpose**: Estimates implementation and operational costs for the selected security levels.
 
-- `[widget]-recommendation-[index]` - Indexed recommendations (e.g., `confidentiality-impact-recommendation-0`)
-- Additional recommendations (index 3+) appear when expanded
+**Main Container**: `widget-container-widget-cost-estimation`
 
-### Interactive Elements
+**Key Components**:
 
-- `[filter-type]-filter` - Filter components (e.g., `resource-type-filter`)
-- `[resource-type]-search-input` - Search inputs (e.g., `security-resources-widget-search-input`)
-- `[category]-select` - Dropdown selectors (e.g., `security-resources-widget-category-select`)
+- `implementation-cost` - Implementation cost metrics
+- `operational-cost` - Operational cost metrics
+- `personnel-cost` - Personnel cost metrics
+- `availability-cost` - Cost breakdown for availability component
+- `integrity-cost` - Cost breakdown for integrity component
+- `confidentiality-cost` - Cost breakdown for confidentiality component
+- `implementation-timeline` - Timeline for implementation
 
-### State Indicators
+**Content Type**:
 
-- `status-badge` - Badge showing status across multiple widgets
-- `[metric-name]-value` - Value display for metrics (e.g., `widget-availability-impact-rto-value`)
-- `[component]-color-indicator` - Color indicators for security levels
+- Monetary values with currency symbols
+- Time estimates (weeks, months)
+- Cost breakdown by category
+- Graphical timeline representation
+- Cost factors with descriptions
 
-## Test ID Patterns and Observations
+### 6. Compliance Status Widget
 
-1. **Widget container pattern**: Each widget uses `widget-[name]` for the container and `widget-[name]-header` for its header
-2. **Data container pattern**: Most widgets contain a `data-container` element that holds the content
-3. **Section pattern**: Discrete sections within widgets use `[name]-section` pattern
-4. **Component pattern**: UI components follow `[name]-[component-type]` pattern (e.g., `confidentiality-select`)
-5. **Status indicators**: Use `status-badge` consistently across different widgets
-6. **Recommendation patterns**: Use `[section]-recommendation-[index]` for recommendations in various sections
-7. **Tab navigation patterns**: Uses `[name]-tab` for tab content and `[name]-tab-button` for tab controls
-8. **Resource items pattern**: Use sequential numbering `[widget]-resource-[index]`
-9. **Metrics pattern**: Most metric displays use `[metric-name]-value` pattern
-10. **Common reusable components**: Several elements like `data-container`, `metrics-card-title`, `metrics-card-value`, and `status-badge` are reused throughout the UI
-11. **Expandable content pattern**: Toggle buttons use `[section]-toggle` and expanded content uses `[section]-section`
-12. **Show more pattern**: Uses `show-all-recommendations-button` to expand content sections
+**Purpose**: Shows compliance status with various frameworks based on selected security levels.
 
-## Testing Hierarchy
+**Main Container**: `widget-container-widget-compliance-status`
 
-The test IDs create a clear hierarchy for component testing:
+**Key Components**:
 
-1. **App-level components**: Core structure of the application
-2. **Widget containers**: Individual dashboard modules
-3. **Widget headers**: Title sections of each widget
-4. **Widget content sections**: Functional areas within widgets
-5. **Interactive elements**: Buttons, selectors, toggles, tabs
-6. **Content elements**: Text descriptions, values, summaries
-7. **Status and value indicators**: Badges, metrics, levels
-8. **Tab-based navigation**: Tabs within widgets for different views
-9. **Expandable sections**: Sections that can be toggled open/closed
-10. **Show more content**: Expandable lists with limited initial view
+- `compliance-status-summary` - Summary of compliance status
+- `partially-compliant-frameworks-list` - List of partially compliant frameworks
+- `framework-item-partial-0` through `framework-item-partial-11` - Individual framework items
+- `compliance-tips-list` - List of compliance tips
 
-## Test ID Purposes
+**Content Type**:
 
-The test IDs serve several distinct purposes:
+- Compliance status indicators (Compliant, Partially Compliant, Non-Compliant)
+- Framework names and descriptions
+- Compliance percentage scores
+- Progress bars
+- Tips and recommendations for improving compliance
 
-1. **Structural testing**: App layout and component hierarchy validation
-2. **Interactive testing**: User interactions with controls and forms
-3. **Data display testing**: Verification of correct data rendering
-4. **State change testing**: Testing UI updates in response to state changes
-5. **Value validation**: Testing numerical and textual content
-6. **Navigation testing**: Tabs, toggles, and navigation elements
-7. **Conditional content testing**: Testing expandable content and "show more" functionality
-8. **Responsive behavior testing**: Testing how components adapt to different screen sizes
-9. **Custom component testing**: Testing specialized UI components like radar charts
-10. **Content filtering testing**: Testing search and filter functionality
+### 7. Confidentiality Impact Widget
 
-## Testing Strategy Recommendations
+**Purpose**: Details the business impact of the selected confidentiality level.
 
-Based on the test ID structure, here are recommended testing approaches:
+**Main Container**: `widget-container-widget-confidentiality-impact`
 
-1. **Component isolation tests**: Test each widget in isolation using its container test ID
-2. **Interactive flow tests**: Test user journeys that span multiple widgets
-3. **State transition tests**: Verify that changing security levels properly updates all dependent components
-4. **Tab navigation tests**: Verify that tab interfaces correctly display different content
-5. **Expandable content tests**: Verify that toggle buttons correctly expand and collapse content sections
-6. **Limited content tests**: Verify that "show more" buttons correctly reveal additional content
-7. **Filter functionality tests**: Test that filters and search inputs correctly filter content
-8. **Responsive tests**: Check that components adapt appropriately across different screen sizes
-9. **Accessibility tests**: Ensure that the application remains accessible when security levels change
+**Key Components**:
 
-The consistent naming patterns make it particularly well-suited for integration testing with tools like Cypress or Playwright that can easily target elements by data-testid attributes.
+- `widget-confidentiality-impact-confidentiality-badge` - Badge showing confidentiality level
+- `widget-confidentiality-impact-security-score` - Security score for confidentiality
+- `widget-confidentiality-impact-business-impact` - Business impact of confidentiality settings
+- `widget-confidentiality-impact-business-impact-summary` - Summary of business impact
+- `recommendation-0` through `recommendation-2` - Individual recommendations
 
-# Coverage Improvement Analysis
+**Content Type**:
 
-## Coverage Requirements
+- Security level badge with text label
+- Security score with percentage or numeric value
+- Business impact descriptions
+- Risk level indicators
+- Recommendations as bulleted items
 
-- Functions: 75% (current: 63.29%)
-- Branches: 70% (current: 67.98%)
+### 8. Integrity Impact Widget
 
-## High-Priority Files for Coverage Improvement
+**Purpose**: Details the business impact of the selected integrity level.
 
-### Files with Low Function Coverage and High Impact
+**Main Container**: `widget-container-integrity-impact-widget`
 
-| File                                                   | Functions Coverage | # Uncovered Functions | Priority |
-| ------------------------------------------------------ | ------------------ | --------------------- | -------- |
-| src/services/ciaContentService.ts                      | 70.83%             | ~14 functions         | HIGH     |
-| src/utils/typeGuards.ts                                | 40%                | ~6 functions          | HIGH     |
-| src/utils/widgetHelpers.tsx                            | 0%                 | All functions         | HIGH     |
-| src/components/widgets/AvailabilityImpactWidget.tsx    | 50%                | ~2 functions          | MEDIUM   |
-| src/components/widgets/IntegrityImpactWidget.tsx       | 50%                | ~2 functions          | MEDIUM   |
-| src/components/widgets/ConfidentialityImpactWidget.tsx | 50%                | ~2 functions          | MEDIUM   |
-| src/components/widgets/SecuritySummaryWidget.tsx       | 50%                | ~2 functions          | MEDIUM   |
-| src/CIAClassificationApp.tsx                           | 33.33%             | ~4 functions          | MEDIUM   |
+**Key Components**:
 
-### Files with Low Branch Coverage and High Impact
+- `integrity-impact-widget-integrity-badge` - Badge showing integrity level
+- `integrity-impact-widget-risk-level` - Risk level assessment for integrity
+- `integrity-impact-widget-description` - Description of integrity impact
+- `integrity-impact-widget-metrics` - Metrics for integrity impact
+- `integrity-impact-widget-business-impact` - Business impact of integrity settings
+- `integrity-impact-widget-business-impact-summary` - Summary of business impact
+- `integrity-impact-widget-recommendations` - Recommendations section
+- `integrity-impact-widget-recommendation-0` through `integrity-impact-widget-recommendation-2` - Individual recommendations
 
-| File                                                   | Branch Coverage | # Uncovered Branches | Priority |
-| ------------------------------------------------------ | --------------- | -------------------- | -------- |
-| src/services/ciaContentService.ts                      | 37.19%          | Many conditions      | HIGH     |
-| src/components/widgets/SecuritySummaryWidget.tsx       | 10%             | Many conditions      | HIGH     |
-| src/components/widgets/ConfidentialityImpactWidget.tsx | 58.82%          | ~7 branches          | MEDIUM   |
-| src/constants/colorConstants.ts                        | 57.14%          | ~3 branches          | MEDIUM   |
-| src/types/widgets.ts                                   | 61.9%           | ~8 branches          | MEDIUM   |
+**Content Type**:
 
-## Strategy for Coverage Improvement
+- Security level badge with text label
+- Risk level assessment with color indicator
+- Technical description text
+- Metrics with labels and values
+- Business impact cards with descriptions
+- Recommendations as bulleted items
 
-1. Focus on high-priority files first
-2. Add tests for untested functions in service files
-3. Add more conditional tests for branch coverage
-4. Delete or merge unused files
+### 9. Availability Impact Widget
+
+**Purpose**: Details the business impact of the selected availability level.
+
+**Main Container**: `widget-container-widget-availability-impact`
+
+**Key Components**:
+
+- `widget-availability-impact-level` - Badge showing availability level
+- `widget-availability-impact-risk-level` - Risk level assessment for availability
+- `widget-availability-impact-description` - Description of availability impact
+- `widget-availability-impact-metrics` - Metrics for availability impact
+- `widget-availability-impact-mttr` - Mean time to recover metrics
+- `widget-availability-impact-infrastructure` - Infrastructure requirements
+- `widget-availability-impact-business-impact` - Business impact of availability settings
+- `widget-availability-impact-business-impact-summary` - Summary of business impact
+
+**Content Type**:
+
+- Security level badge with text label
+- Risk level assessment with color indicator
+- Technical description text
+- Availability metrics (uptime percentages, RTO, RPO, MTTR)
+- Infrastructure requirement descriptions
+- Business impact cards with descriptions
+
+### 10. Technical Implementation Details Widget
+
+**Purpose**: Provides technical implementation guidance for the selected security levels.
+
+**Main Container**: `widget-container-widget-technical-details`
+
+**Key Components**:
+
+- `availability-tab` - Tab for availability implementation details
+- `integrity-tab` - Tab for integrity implementation details
+- `confidentiality-tab` - Tab for confidentiality implementation details
+- `technical-header` - Header for technical implementation
+- `technical-description` - Description of technical implementation
+- `development-effort` - Development effort metrics
+- `maintenance-level` - Maintenance level metrics
+- `required-expertise` - Required expertise metrics
+- `implementation-header` - Header for implementation steps
+- `implementation-step-0` through `implementation-step-4` - Individual implementation steps
+
+**Content Type**:
+
+- Tab navigation controls for each CIA component
+- Technical description text
+- Implementation effort metrics (time, cost, resources)
+- Expertise level indicators
+- Ordered list of implementation steps
+- Technical requirements
+
+### 11. Security Visualization Widget
+
+**Purpose**: Provides visual representation of security posture using charts and diagrams.
+
+**Main Container**: `widget-container-widget-security-visualization`
+
+**Key Components**:
+
+- `widget-security-visualization-risk-score` - Risk score visualization
+
+**Content Type**:
+
+- Chart/graph elements (typically radar charts)
+- Risk score indicators
+- Visual representations of security balance
+- Comparison between current state and target state
+- Security posture analysis text
+
+### 12. Security Resources Widget
+
+**Purpose**: Provides resources and recommendations for implementing security controls.
+
+**Main Container**: `widget-container-security-resources-widget`
+
+**Key Components**:
+
+- Resource filter controls
+- Resource list items
+- Resource descriptions and links
+
+**Content Type**:
+
+- Categorized resources
+- Resource titles and descriptions
+- Links to external resources
+- Implementation guidance
+- Filtering and search controls
+
+## Test ID Patterns and Best Practices
+
+### 1. Container Pattern
+
+All widgets follow a consistent container pattern with `widget-container-widget-[name]` for the main container.
+
+### 2. Component-Specific Prefixes
+
+Each component type uses consistent prefixes:
+
+- `widget-` for widget containers
+- `[component]-card` for card components
+- `[component]-badge` for badges
+- `[component]-section` for sections
+- `[component]-item-[index]` for list items
+
+### 3. Hierarchical Organization
+
+Test IDs follow a hierarchical structure:
+
+- Container level (widget container)
+- Section level (business impact, technical details)
+- Component level (cards, badges, metrics)
+- Item level (individual items in lists)
+
+### 4. Numerical Suffixes
+
+List items use numerical suffixes (0-based indexing):
+
+- `recommendation-0`, `recommendation-1`, etc.
+- `implementation-step-0`, `implementation-step-1`, etc.
+- `widget-business-impact-consideration-0`, etc.
+
+### 5. Tab Controls Pattern
+
+Tab-based interfaces use a consistent pattern:
+
+- `[component]-tab` for tab controls
+- `[component]-[tab-name]` for tab content
+
+### 6. Common Repeated Elements
+
+Several element types appear across multiple widgets:
+
+- Badges showing security levels
+- Risk level indicators
+- Business impact assessments
+- Recommendation lists
+- Metric displays
+
+## Tips for Test Automation
+
+1. **Widget Container Selection**: Use `data-testid^="widget-container-"` to select all widget containers.
+
+2. **Widget-Specific Elements**: Use `within()` to scope queries within a specific widget:
+
+   ```typescript
+   cy.findByTestId("widget-container-widget-security-level").within(() => {
+     cy.findByTestId("security-level-availability").should("exist");
+   });
+   ```
+
+3. **Dynamic Content**: For items with numerical suffixes, use a loop to verify all items:
+
+   ```typescript
+   for (let i = 0; i < 3; i++) {
+     cy.findByTestId(`recommendation-${i}`).should("exist");
+   }
+   ```
+
+4. **Tab Navigation**: For testing tabbed interfaces, select the tab first, then verify content:
+
+   ```typescript
+   cy.findByTestId("integrity-tab").click();
+   cy.findByTestId("technical-description").should(
+     "contain",
+     "Integrity controls"
+   );
+   ```
+
+5. **Metrics Verification**: For metrics, check both the label and value:
+   ```typescript
+   cy.findByTestId("implementation-cost").within(() => {
+     cy.contains("Implementation Cost").should("exist");
+     cy.contains("$").should("exist");
+   });
+   ```
+
+## Coverage Improvement Analysis
+
+From analyzing the current HTML, we can identify which test IDs are actually being used in the application. The following tables show the coverage of test IDs across widgets:
+
+### High-Priority Widgets for Test Coverage Improvement
+
+| Widget                 | Test IDs Used | Test IDs Missing/Unused       | Priority |
+| ---------------------- | ------------- | ----------------------------- | -------- |
+| Security Visualization | 1             | ~10 (charts, metrics)         | HIGH     |
+| Security Resources     | 0             | ~15 (filters, items, details) | HIGH     |
+| Confidentiality Impact | 5             | ~10 (detailed metrics)        | MEDIUM   |
+| Value Creation         | 15            | ~5 (interaction elements)     | MEDIUM   |
+| Technical Details      | 12            | ~5 (interaction elements)     | MEDIUM   |
+
+### Component-Level Test ID Coverage
+
+| Component Type | Coverage % | Missing Tests                          | Priority |
+| -------------- | ---------- | -------------------------------------- | -------- |
+| Badges         | 90%        | Text verification                      | LOW      |
+| Cards          | 85%        | Interaction testing                    | LOW      |
+| Tabs           | 70%        | Content verification after tab change  | MEDIUM   |
+| Charts         | 20%        | Data verification, interaction testing | HIGH     |
+| Metrics        | 75%        | Value validation                       | MEDIUM   |
+
+## Recommended Testing Strategy
+
+1. **Widget-Level Tests**: Test each widget in isolation with proper mocks for services
+2. **Component Interaction Tests**: Test tab navigation and expandable sections
+3. **Data Flow Tests**: Verify that changing security levels updates all dependent widgets
+4. **Visual Tests**: Verify correct rendering of charts and visual elements
+5. **Dark Mode Tests**: Verify widgets render correctly in dark mode
+
+## Naming Convention Guide for New Test IDs
+
+When adding new test IDs, follow these conventions:
+
+1. Widget containers: `widget-container-widget-[name]`
+2. Widget content sections: `widget-[name]-[section]`
+3. Cards and panels: `[component]-card` or `[component]-panel`
+4. List items: `[component]-item-[index]`
+5. Metrics: `[component]-[metric-name]`
+6. Status indicators: `[component]-status` or `[component]-level`
+7. Tabs: `[component]-tab-[tab-name]`
+8. Buttons and controls: `[component]-[action]-button`
+
+Following these consistent naming patterns will ensure that new components integrate seamlessly into the existing test automation framework.

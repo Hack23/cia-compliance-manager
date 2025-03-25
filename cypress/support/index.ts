@@ -6,7 +6,7 @@
 // Export debug helpers
 export * from "./debug-helpers";
 
-// Export widget test helpers
+// First export the smart widget testing
 export * from "./smart-widget-testing";
 
 // Export constants (if needed by tests)
@@ -16,8 +16,21 @@ export {
   WIDGET_TEST_IDS,
 } from "./constants";
 
-// Export test patterns for reuse
-export * from "./test-patterns";
+// Export test pattern utilities - make sure these exist in test-patterns.ts
+// If they don't exist, either create them or comment these out
+// export {
+//   generateTests,
+//   generateSecurityTests,
+// } from "./test-patterns";
+
+// Instead, export the functions that we know exist
+export {
+  createWidgetTests,
+  findWidgetFlexibly,
+} from "./widget-testing-template";
+
+// Export widget test utilities
+export { safelyCheckMatches } from "../e2e/widgets/common-widget-fix";
 
 // DON'T export types directly, as they should be imported separately when needed
 // This resolves the "is not a module" error

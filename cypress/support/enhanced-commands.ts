@@ -369,6 +369,109 @@ Cypress.Commands.add("findElementBySelector", (selector: string) => {
   return cy.get(selector) as Cypress.Chainable<JQuery<HTMLElement>>;
 });
 
+/**
+ * Enhanced Cypress commands for widget testing
+ */
+import {
+  applyVisualFixes,
+  detectWidgetIssues,
+  screenshotWithIssues,
+} from "./screenshot-analysis";
+import {
+  applyTestStyles,
+  forceDarkMode,
+  forceLightMode,
+  optimizeWidgetForScreenshot,
+} from "./test-styles";
+
+/**
+ * Command to apply test styles for better widget screenshots
+ */
+Cypress.Commands.add("applyTestStyles", () => {
+  applyTestStyles();
+});
+
+/**
+ * Command to make a widget visible and properly sized for screenshots
+ */
+Cypress.Commands.add(
+  "optimizeForScreenshot",
+  { prevSubject: true },
+  (subject) => {
+    optimizeWidgetForScreenshot(subject);
+    return subject;
+  }
+);
+
+/**
+ * Command to toggle dark mode without relying on theme toggle button
+ */
+Cypress.Commands.add("toggleDarkMode", (enableDark: boolean = true) => {
+  if (enableDark) {
+    forceDarkMode();
+  } else {
+    forceLightMode();
+  }
+});
+
+/**
+ * Command to analyze a widget for common issues
+ */
+Cypress.Commands.add(
+  "analyzeWidget",
+  { prevSubject: true },
+  (subject, widgetName: string) => {
+    return detectWidgetIssues(widgetName, subject).then((result) => {
+      if (result.hasIssues) {
+        cy.log(`Found ${result.issues.length} issues in widget ${widgetName}`);
+        result.issues.forEach((issue, i) => {
+          cy.log(`Issue ${i + 1}: ${issue}`);
+        });
+        screenshotWithIssues(widgetName, subject, result.issues);
+      }
+      return subject;
+    });
+  }
+);
+
+/**
+ * Command to fix visual issues in a widget
+ */
+Cypress.Commands.add("fixVisualIssues", { prevSubject: true }, (subject) => {
+  applyVisualFixes(subject);
+  return subject;
+});
+
+/**
+ * Enhanced widget screenshot command that handles all optimizations
+ */
+Cypress.Commands.add(
+  "screenshotWidget",
+  { prevSubject: true },
+  (subject, name: string) => {
+    // First optimize the widget
+    optimizeWidgetForScreenshot(subject);
+
+    // Apply visual fixes
+    applyVisualFixes(subject);
+
+    // Take standard screenshot
+    cy.wrap(subject).screenshot(`widget-${name}`, {
+      padding: 20,
+      scale: true,
+      overwrite: true,
+    });
+
+    // Analyze for issues
+    return detectWidgetIssues(name, subject).then((result) => {
+      if (result.hasIssues) {
+        screenshotWithIssues(name, subject, result.issues);
+      }
+      return subject;
+    });
+  }
+);
+
 // Add command type definitions
 declare global {
   namespace Cypress {
@@ -461,10 +564,39 @@ declare global {
        * Find element by selector with proper typing
        */
       findElementBySelector(selector: string): Chainable<JQuery<HTMLElement>>;
+
+      /**
+       * Apply test styles for better screenshots
+       */
+      applyTestStyles(): Chainable<null>;
+
+      /**
+       * Optimize widget for screenshot
+       */
+      optimizeForScreenshot(): Chainable<JQuery<HTMLElement>>;
+
+      /**
+       * Toggle dark mode
+       */
+      toggleDarkMode(enableDark?: boolean): Chainable<null>;
+
+      /**
+       * Analyze widget for issues
+       */
+      analyzeWidget(widgetName: string): Chainable<JQuery<HTMLElement>>;
+
+      /**
+       * Fix visual issues in a widget
+       */
+      fixVisualIssues(): Chainable<JQuery<HTMLElement>>;
+
+      /**
+       * Take a widget screenshot with all optimizations
+       */
+      screenshotWidget(name: string): Chainable<JQuery<HTMLElement>>;
     }
   }
 }
 
 // Export empty to satisfy TypeScript
-export { };
-
+export {};

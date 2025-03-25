@@ -25,9 +25,17 @@
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
     "useUnknownInCatchVariables": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "types": ["cypress", "node", "@testing-library/cypress"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.jsx"],
+  "include": [
+    "src",
+    "cypress",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.jsx"
+  ],
   "exclude": [
     "node_modules",
     "dist",
