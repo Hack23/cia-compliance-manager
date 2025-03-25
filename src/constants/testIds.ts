@@ -934,6 +934,21 @@ export const TEST_IDS = {
   createDynamicTestId,
   getTestId,
   TEST_HELPERS,
+  costEstimation: {
+    container: "cost-estimation-container",
+    title: "cost-estimation-title",
+    summary: "cost-estimation-summary",
+    details: "cost-estimation-details",
+    chart: "cost-estimation-chart",
+    // Adding the missing test IDs
+    implementationCost: "implementation-cost",
+    operationalCost: "operational-cost",
+    personnelCost: "personnel-cost",
+    availabilityCost: "availability-cost",
+    integrityCost: "integrity-cost",
+    confidentialityCost: "confidentiality-cost",
+    implementationTimeline: "implementation-timeline",
+  },
 };
 
 /**

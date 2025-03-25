@@ -3,48 +3,24 @@ import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { COMPLIANCE_TEST_IDS } from "../../../constants/testIds";
 import { SECURITY_ICONS } from "../../../constants/uiConstants";
 import { useComplianceService } from "../../../hooks/useComplianceService";
-import type { CIAComponentType } from "../../../types";
-import { SecurityLevel } from "../../../types/cia";
+import { CIAComponent, SecurityLevel } from "../../../types/cia";
+import { StatusType } from "../../../types/common/StatusTypes";
 import { ComplianceStatusDetails } from "../../../types/compliance";
+import { isNullish } from "../../../utils/typeGuards";
+import StatusBadge from "../../common/StatusBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 
-// Add missing imports and components
+/**
+ * Props for StatusBadge subcomponent
+ */
 interface StatusBadgeProps {
-  status: "success" | "warning" | "error" | "info" | "neutral";
+  status: StatusType;
   children: React.ReactNode;
   testId?: string;
 }
 
-const StatusBadge: React.FC<StatusBadgeProps> = ({
-  status,
-  children,
-  testId,
-}) => {
-  const statusClasses = {
-    success:
-      "bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-20 dark:text-green-300",
-    warning:
-      "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:bg-opacity-20 dark:text-yellow-300",
-    error:
-      "bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-20 dark:text-red-300",
-    info: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-20 dark:text-blue-300",
-    neutral: "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300",
-  };
-
-  return (
-    <span
-      className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClasses[status]}`}
-      data-testid={testId}
-    >
-      {children}
-    </span>
-  );
-};
-
-// Add function to determine badge status
-const getBadgeStatus = (
-  complianceScore: number
-): "success" | "warning" | "error" | "info" | "neutral" => {
+// Add function to determine badge status with proper typing
+const getBadgeStatus = (complianceScore: number): StatusType => {
   if (complianceScore >= 80) return "success";
   if (complianceScore >= 50) return "warning";
   return "error";
@@ -134,15 +110,19 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
   testId = COMPLIANCE_TEST_IDS.WIDGET,
 }) => {
   // Use the compliance service
-  const { complianceService, error, isLoading } = useComplianceService();
+  const {
+    complianceService,
+    error: serviceError,
+    isLoading,
+  } = useComplianceService();
 
   // Active framework for detailed view
   const [activeFramework, setActiveFramework] = useState<string | null>(null);
 
-  // Calculate overall security level - implement instead of removing
+  // Calculate overall security level with proper type safety
   const overallSecurityLevel = useMemo(() => {
     // Convert security levels to numeric values
-    const levelValues = {
+    const levelValues: Record<SecurityLevel, number> = {
       None: 0,
       Low: 1,
       Moderate: 2,
@@ -157,24 +137,27 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
       levelValues[confidentialityLevel]
     );
 
-    // Map numeric value back to SecurityLevel
-    return Object.keys(levelValues).find(
-      (key) => levelValues[key as SecurityLevel] === minValue
-    ) as SecurityLevel;
+    // Map numeric value back to SecurityLevel using a type-safe approach
+    const levels: SecurityLevel[] = [
+      "None",
+      "Low",
+      "Moderate",
+      "High",
+      "Very High",
+    ];
+    return levels.find((_, index) => index === minValue) || "Moderate";
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Get compliance status
+  // Get compliance status with proper error handling
   const complianceStatus = useMemo((): ComplianceStatusDetails | null => {
-    if (isLoading || error || !complianceService) return null;
+    if (isLoading || serviceError || !complianceService) return null;
 
     try {
       // Use industry and region context when appropriate
-      // Note: We check getComplianceStatus parameters to ensure proper arguments are passed
       return complianceService.getComplianceStatus(
         availabilityLevel,
         integrityLevel,
         confidentialityLevel
-        // Remove the options parameter as it's causing the error
       );
     } catch (err) {
       console.error("Error getting compliance status:", err);
@@ -188,22 +171,39 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
     industry, // Keep this dependency for potential future implementation
     region, // Keep this dependency for potential future implementation
     isLoading,
-    error,
+    serviceError,
   ]);
 
-  // Get status text for display - properly implemented instead of removed
-  const getComplianceStatusText = useCallback(() => {
+  // Get status text for display with proper error handling
+  const getComplianceStatusText = useCallback((): string => {
     if (isLoading) return "Loading compliance status...";
-    if (error) return "Error loading compliance status";
+    if (serviceError) return "Error loading compliance status";
     if (!complianceStatus) return "Unable to determine compliance status";
 
-    return (
-      complianceService?.getComplianceStatusText(
-        availabilityLevel,
-        integrityLevel,
-        confidentialityLevel
-      ) || `Based on ${overallSecurityLevel} security level`
-    );
+    try {
+      if (complianceService?.getComplianceStatusText) {
+        const statusText = complianceService.getComplianceStatusText(
+          availabilityLevel,
+          integrityLevel,
+          confidentialityLevel
+        );
+
+        if (!isNullish(statusText)) {
+          return statusText;
+        }
+      }
+
+      // Fallback if service doesn't provide status text
+      if (complianceStatus.status) {
+        return complianceStatus.status;
+      }
+
+      // Final fallback
+      return `Based on ${overallSecurityLevel} security level`;
+    } catch (err) {
+      console.error("Error getting compliance status text:", err);
+      return "Unable to determine compliance status";
+    }
   }, [
     complianceService,
     complianceStatus,
@@ -212,14 +212,12 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
     confidentialityLevel,
     overallSecurityLevel,
     isLoading,
-    error,
+    serviceError,
   ]);
 
   // Define a single helper function for framework status badges
   const getFrameworkStatusBadge = useCallback(
-    (
-      framework: string
-    ): "success" | "warning" | "error" | "info" | "neutral" => {
+    (framework: string): StatusType => {
       if (!complianceStatus) return "neutral";
 
       if (complianceStatus.compliantFrameworks.includes(framework)) {
@@ -243,7 +241,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
 
   // Define gapAnalysis variable
   const gapAnalysis = useMemo(() => {
-    if (isLoading || error || !complianceService || !activeFramework)
+    if (isLoading || serviceError || !complianceService || !activeFramework)
       return null;
 
     try {
@@ -264,12 +262,12 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
     integrityLevel,
     confidentialityLevel,
     isLoading,
-    error,
+    serviceError,
   ]);
 
   // Create a type-safe implementation of getFrameworkRequiredLevel
   const getFrameworkRequiredLevel = useCallback(
-    (framework: string, component: CIAComponentType): SecurityLevel => {
+    (framework: string, component: CIAComponent): SecurityLevel => {
       // If the service is available, use it
       if (complianceService?.getFrameworkRequiredLevel) {
         try {
@@ -285,7 +283,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
       // Default fallback levels based on typical requirements
       const defaultLevels: Record<
         string,
-        Record<CIAComponentType, SecurityLevel>
+        Record<CIAComponent, SecurityLevel>
       > = {
         "PCI DSS": {
           availability: "High",
@@ -320,12 +318,34 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
     [complianceService]
   );
 
+  // Get framework description with error handling
+  const getFrameworkDescription = useCallback(
+    (framework: string): string => {
+      if (!complianceService) return `${framework} requirements`;
+
+      try {
+        if (typeof complianceService.getFrameworkDescription === "function") {
+          const description =
+            complianceService.getFrameworkDescription(framework);
+          return description || `${framework} requirements`;
+        }
+        return `${framework} requirements`;
+      } catch (err) {
+        console.error(`Error getting description for ${framework}:`, err);
+        return `${framework} requirements`;
+      }
+    },
+    [complianceService]
+  );
+
   return (
     <WidgetContainer
-      title={WIDGET_TITLES.COMPLIANCE_STATUS}
-      icon={WIDGET_ICONS.COMPLIANCE_STATUS}
+      title={WIDGET_TITLES.COMPLIANCE_STATUS || "Compliance Status"}
+      icon={WIDGET_ICONS.COMPLIANCE_STATUS || "📋"}
       className={className}
       testId={testId}
+      isLoading={isLoading}
+      error={serviceError}
     >
       <div className="p-4">
         {/* Add high-level description */}
@@ -336,29 +356,6 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
             levels.
           </p>
         </div>
-
-        {/* Error state */}
-        {error && (
-          <div
-            className="p-3 mb-4 bg-red-100 dark:bg-red-900 dark:bg-opacity-20 text-red-800 dark:text-red-200 rounded-lg"
-            data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_ERROR}
-          >
-            <h4 className="font-medium">Error</h4>
-            <p className="text-sm">
-              {error.message || "An error occurred loading compliance data."}
-            </p>
-          </div>
-        )}
-
-        {/* Loading state */}
-        {isLoading && (
-          <div
-            className="p-3 mb-4 bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20 text-blue-800 dark:text-blue-200 rounded-lg"
-            data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_LOADING}
-          >
-            <p className="text-sm">Loading compliance status...</p>
-          </div>
-        )}
 
         {/* Overall Compliance Status */}
         <div className="mb-6">
@@ -372,7 +369,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
             <div className="flex justify-between items-center">
               <div className="flex items-center">
                 <span className="text-2xl mr-2 text-blue-500">
-                  {SECURITY_ICONS.compliance}
+                  {SECURITY_ICONS.compliance || "📋"}
                 </span>
                 <span className="font-medium">Compliance Status</span>
               </div>
@@ -444,7 +441,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                         </StatusBadge>
                       </div>
                       <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                        {complianceService?.getFrameworkDescription(framework)}
+                        {getFrameworkDescription(framework)}
                       </p>
                     </div>
                   )
@@ -481,14 +478,14 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                       <div className="flex justify-between items-center mb-1">
                         <span className="font-medium">{framework}</span>
                         <StatusBadge
-                          status="warning"
-                          testId={`${COMPLIANCE_TEST_IDS.FRAMEWORK_STATUS}-partial-${index}`}
+                          status={getFrameworkStatusBadge(framework)}
+                          testId={`framework-partial-status-badge-${index}`}
                         >
                           Partially Compliant
                         </StatusBadge>
                       </div>
                       <p className="text-xs text-gray-600 dark:text-gray-400">
-                        {complianceService?.getFrameworkDescription(framework)}
+                        {getFrameworkDescription(framework)}
                       </p>
                     </div>
                   )
@@ -523,14 +520,14 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                       <div className="flex justify-between items-center mb-1">
                         <span className="font-medium">{framework}</span>
                         <StatusBadge
-                          status="error"
-                          testId={`${COMPLIANCE_TEST_IDS.FRAMEWORK_STATUS}-non-${index}`}
+                          status={getFrameworkStatusBadge(framework)}
+                          testId={`framework-non-status-badge-${index}`}
                         >
                           Non-Compliant
                         </StatusBadge>
                       </div>
                       <p className="text-xs text-gray-600 dark:text-gray-400">
-                        {complianceService?.getFrameworkDescription(framework)}
+                        {getFrameworkDescription(framework)}
                       </p>
                     </div>
                   )
@@ -552,175 +549,107 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
               {gapAnalysis ? (
                 <div>
                   <div className="mb-3">
-                    <h4 className="text-md font-medium">
-                      Current Compliance Status
-                    </h4>
-                    <StatusBadge
-                      status={
-                        gapAnalysis.overallStatus ===
-                        "Fully compliant with all frameworks"
-                          ? "success"
-                          : "error"
-                      }
-                      testId={COMPLIANCE_TEST_IDS.SELECTED_FRAMEWORK_STATUS}
-                    >
-                      {gapAnalysis.overallStatus ===
-                      "Fully compliant with all frameworks"
-                        ? "Compliant"
-                        : "Non-Compliant"}
-                    </StatusBadge>
+                    <h4 className="font-medium mb-1">Status</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {gapAnalysis.isCompliant
+                        ? `Your security controls meet the requirements for ${activeFramework}.`
+                        : `Your security controls do not fully meet the requirements for ${activeFramework}.`}
+                    </p>
                   </div>
 
                   {/* CIA Component Analysis */}
                   <div className="mb-3">
-                    <h4 className="text-md font-medium mb-2">
-                      Component Requirements
-                    </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                      {/* Availability */}
-                      <div
-                        className="p-2 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
-                        data-testid={
-                          COMPLIANCE_TEST_IDS.AVAILABILITY_REQUIREMENT
-                        }
-                      >
-                        <div className="text-sm font-medium mb-1">
-                          Availability
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-xs">Current:</span>
-                          <span className="text-xs font-medium">
-                            {availabilityLevel}
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-xs">Required:</span>
-                          <span
-                            className="text-xs font-medium"
-                            data-testid={
-                              COMPLIANCE_TEST_IDS.AVAILABILITY_REQUIRED_LEVEL
-                            }
-                          >
-                            {getFrameworkRequiredLevel(
-                              activeFramework,
-                              "availability" as CIAComponentType
-                            )}
-                          </span>
-                        </div>
-                      </div>
+                    <h4 className="font-medium mb-1">Component Requirements</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+                      {["availability", "integrity", "confidentiality"].map(
+                        (comp) => {
+                          const componentType = comp as CIAComponent;
+                          const currentLevel =
+                            componentType === "availability"
+                              ? availabilityLevel
+                              : componentType === "integrity"
+                              ? integrityLevel
+                              : confidentialityLevel;
+                          const requiredLevel = getFrameworkRequiredLevel(
+                            activeFramework,
+                            componentType
+                          );
+                          const isMeeting =
+                            getSecurityLevelValue(currentLevel) >=
+                            getSecurityLevelValue(requiredLevel);
 
-                      {/* Integrity */}
-                      <div
-                        className="p-2 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
-                        data-testid={COMPLIANCE_TEST_IDS.INTEGRITY_REQUIREMENT}
-                      >
-                        <div className="text-sm font-medium mb-1">
-                          Integrity
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-xs">Current:</span>
-                          <span className="text-xs font-medium">
-                            {integrityLevel}
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-xs">Required:</span>
-                          <span
-                            className="text-xs font-medium"
-                            data-testid={
-                              COMPLIANCE_TEST_IDS.INTEGRITY_REQUIRED_LEVEL
-                            }
-                          >
-                            {getFrameworkRequiredLevel(
-                              activeFramework,
-                              "integrity" as CIAComponentType
-                            )}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Confidentiality */}
-                      <div
-                        className="p-2 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg"
-                        data-testid={
-                          COMPLIANCE_TEST_IDS.CONFIDENTIALITY_REQUIREMENT
+                          return (
+                            <div
+                              key={comp}
+                              className={`p-2 rounded-lg ${
+                                isMeeting
+                                  ? "bg-green-50 dark:bg-green-900 dark:bg-opacity-20"
+                                  : "bg-red-50 dark:bg-red-900 dark:bg-opacity-20"
+                              }`}
+                            >
+                              <div className="text-xs font-medium mb-1">
+                                {componentType.charAt(0).toUpperCase() +
+                                  componentType.slice(1)}
+                              </div>
+                              <div className="flex justify-between text-sm">
+                                <span>
+                                  Current:{" "}
+                                  <span className="font-medium">
+                                    {currentLevel}
+                                  </span>
+                                </span>
+                                <span>
+                                  Required:{" "}
+                                  <span className="font-medium">
+                                    {requiredLevel}
+                                  </span>
+                                </span>
+                              </div>
+                              <div className="mt-1 text-xs text-right">
+                                <StatusBadge
+                                  status={isMeeting ? "success" : "error"}
+                                  testId={`${comp}-requirement-status`}
+                                >
+                                  {isMeeting ? "Meeting" : "Not Meeting"}
+                                </StatusBadge>
+                              </div>
+                            </div>
+                          );
                         }
-                      >
-                        <div className="text-sm font-medium mb-1">
-                          Confidentiality
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-xs">Current:</span>
-                          <span className="text-xs font-medium">
-                            {confidentialityLevel}
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-xs">Required:</span>
-                          <span
-                            className="text-xs font-medium"
-                            data-testid={
-                              COMPLIANCE_TEST_IDS.CONFIDENTIALITY_REQUIRED_LEVEL
-                            }
-                          >
-                            {getFrameworkRequiredLevel(
-                              activeFramework,
-                              "confidentiality" as CIAComponentType
-                            )}
-                          </span>
-                        </div>
-                      </div>
+                      )}
                     </div>
                   </div>
 
                   {/* Gap Analysis */}
-                  {gapAnalysis.gaps.length > 0 && (
-                    <>
-                      <div className="mb-3">
-                        <h4 className="text-md font-medium mb-2">
-                          Compliance Gaps
-                        </h4>
-                        <ul
-                          className="list-disc list-inside text-sm space-y-1 text-gray-600 dark:text-gray-400"
-                          data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_GAPS_LIST}
-                        >
-                          {gapAnalysis.gaps.map(
-                            (gap: ComplianceGap, index: number) => (
-                              <li
-                                key={index}
-                                data-testid={`${COMPLIANCE_TEST_IDS.COMPLIANCE_GAP_ITEM}-${index}`}
-                              >
-                                {`${gap.framework}: ${gap.components.confidentiality.required} level required (current: ${gap.components.confidentiality.current})`}
-                              </li>
-                            )
-                          )}
-                        </ul>
-                      </div>
-
-                      <div>
-                        <h4 className="text-md font-medium mb-2">
-                          Recommendations
-                        </h4>
-                        <ul
-                          className="list-disc list-inside text-sm space-y-1 text-gray-600 dark:text-gray-400"
-                          data-testid={
-                            COMPLIANCE_TEST_IDS.COMPLIANCE_RECOMMENDATIONS_LIST
-                          }
-                        >
-                          {gapAnalysis.recommendations.map(
-                            (recommendation: string, index: number) => (
-                              <li
-                                key={index}
-                                data-testid={`${COMPLIANCE_TEST_IDS.COMPLIANCE_RECOMMENDATION_ITEM}-${index}`}
-                              >
-                                {recommendation}
-                              </li>
-                            )
-                          )}
-                        </ul>
-                      </div>
-                    </>
+                  {gapAnalysis.gaps && gapAnalysis.gaps.length > 0 && (
+                    <div className="mb-3">
+                      <h4 className="font-medium mb-1">Compliance Gaps</h4>
+                      <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
+                        {gapAnalysis.gaps.map((gap, index) => (
+                          <li key={index}>
+                            {typeof gap === "string"
+                              ? gap
+                              : gap.framework ||
+                                gap.frameworkDescription ||
+                                "Undefined compliance gap"}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
+
+                  {/* Recommendations */}
+                  {gapAnalysis.recommendations &&
+                    gapAnalysis.recommendations.length > 0 && (
+                      <div>
+                        <h4 className="font-medium mb-1">Recommendations</h4>
+                        <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
+                          {gapAnalysis.recommendations.map((rec, index) => (
+                            <li key={index}>{rec}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                 </div>
               ) : (
                 <div
@@ -801,5 +730,17 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
     </WidgetContainer>
   );
 };
+
+// Helper function to convert security level to numeric value
+function getSecurityLevelValue(level: SecurityLevel): number {
+  const levelValues: Record<SecurityLevel, number> = {
+    None: 0,
+    Low: 1,
+    Moderate: 2,
+    High: 3,
+    "Very High": 4,
+  };
+  return levelValues[level] || 0;
+}
 
 export default ComplianceStatusWidget;

@@ -324,6 +324,11 @@ export interface BusinessItem {
    * Priority or importance (1-5)
    */
   priority?: number;
+
+  /**
+   * Icon representation
+   */
+  icon?: string;
 }
 
 /**

@@ -1,12 +1,16 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import { VALUE_CREATION_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
-import { SecurityRiskScore } from "../../charts/SecurityRiskScore";
+import { isNullish } from "../../../utils/typeGuards";
+import { calculateOverallSecurityLevel } from "../../../utils/securityLevelUtils";
+import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
 
-interface ValueCreationWidgetProps {
+/**
+ * Props for ValueCreationWidget component
+ */
+export interface ValueCreationWidgetProps {
   /**
    * Selected availability level
    */
@@ -34,6 +38,16 @@ interface ValueCreationWidgetProps {
 }
 
 /**
+ * Interface for business value metric
+ */
+interface BusinessValueMetric {
+  category: string;
+  value: string;
+  description: string;
+  icon?: string;
+}
+
+/**
  * Display value creation information for chosen security levels
  *
  * ## Business Perspective
@@ -55,117 +69,232 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
   // Calculate overall security level
   const securityScore = useMemo(() => {
-    const levelValues: Record<SecurityLevel, number> = {
-      None: 0,
-      Low: 1,
-      Moderate: 2,
-      High: 3,
-      "Very High": 4,
-    };
-
-    const totalValue =
-      levelValues[availabilityLevel] +
-      levelValues[integrityLevel] +
-      levelValues[confidentialityLevel];
-    return Math.round((totalValue / 12) * 100); // 12 is max possible (3 × Very High)
+    return calculateOverallSecurityLevel(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Get business value metrics
-  const valueMetrics = useMemo(() => {
-    if (!ciaContentService) return null;
-
+  // Get business value metrics with fallback implementation
+  const valueMetrics = useMemo((): BusinessValueMetric[] => {
     try {
-      // Use type assertion with 'any' inside the condition
-      if (typeof (ciaContentService as any).getValueCreation === "function") {
-        return (
-          (ciaContentService as any).getValueCreation(
+      if (!isNullish(ciaContentService)) {
+        // Check if the service has getBusinessValueMetrics method
+        if (typeof (ciaContentService as any).getBusinessValueMetrics === "function") {
+          const metrics = (ciaContentService as any).getBusinessValueMetrics(
             availabilityLevel,
             integrityLevel,
             confidentialityLevel
-          ) || null
-        );
+          );
+          
+          if (Array.isArray(metrics) && metrics.length > 0) {
+            return metrics;
+          }
+        }
       }
-      return null;
+
+      // Fallback metrics if service doesn't provide them
+      return generateFallbackValueMetrics(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel,
+        securityScore
+      );
     } catch (err) {
-      console.error("Error getting value creation data:", err);
-      return null;
+      console.error("Error retrieving business value metrics:", err);
+      return generateFallbackValueMetrics(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel,
+        securityScore
+      );
     }
   }, [
     ciaContentService,
     availabilityLevel,
     integrityLevel,
     confidentialityLevel,
+    securityScore,
   ]);
 
   // Get component-specific value statements
-  const availabilityValue = useMemo(() => {
-    if (!ciaContentService) return null;
-
+  const getComponentValueStatements = (component: "availability" | "integrity" | "confidentiality", level: SecurityLevel): string[] => {
     try {
-      // Use type assertion with 'any' inside the condition
-      if (
-        typeof (ciaContentService as any).getComponentBusinessValue ===
-        "function"
-      ) {
-        return (
-          (ciaContentService as any).getComponentBusinessValue(
-            "availability",
-            availabilityLevel
-          ) || null
-        );
+      if (!isNullish(ciaContentService)) {
+        // Check if the service has getComponentValueStatements method
+        if (typeof (ciaContentService as any).getComponentValueStatements === "function") {
+          const statements = (ciaContentService as any).getComponentValueStatements(
+            component,
+            level
+          );
+          
+          if (Array.isArray(statements) && statements.length > 0) {
+            return statements;
+          }
+        }
       }
-      return null;
-    } catch (err) {
-      console.error("Error getting availability value data:", err);
-      return null;
-    }
-  }, [ciaContentService, availabilityLevel]);
 
-  const integrityValue = useMemo(() => {
-    if (!ciaContentService) return null;
-
-    try {
-      // Use type assertion with 'any' inside the condition
-      if (
-        typeof (ciaContentService as any).getComponentBusinessValue ===
-        "function"
-      ) {
-        return (
-          (ciaContentService as any).getComponentBusinessValue(
-            "integrity",
-            integrityLevel
-          ) || null
-        );
+      // Fallback value statements
+      switch (component) {
+        case "availability":
+          if (level === "None" || level === "Low") {
+            return [
+              "Basic operational continuity",
+              "Minimal protection against service disruptions",
+            ];
+          } else if (level === "Moderate") {
+            return [
+              "Predictable system access and reliable operations",
+              "Improved user satisfaction through consistent service delivery",
+              "Enhanced operational efficiency with reduced downtime",
+            ];
+          } else {
+            return [
+              "Near-continuous operations even during adverse events",
+              "Competitive advantage through superior service reliability",
+              "Protected revenue streams with minimal service interruptions",
+              "Maintained customer trust through consistent service delivery",
+            ];
+          }
+        
+        case "integrity":
+          if (level === "None" || level === "Low") {
+            return [
+              "Basic data consistency",
+              "Minimal protection against data errors",
+            ];
+          } else if (level === "Moderate") {
+            return [
+              "Trustworthy data for operational and strategic decisions",
+              "Reduced costs from data errors and reconciliation efforts",
+              "Improved compliance posture with accurate record-keeping",
+            ];
+          } else {
+            return [
+              "Data you can stake your business reputation on",
+              "Enhanced business intelligence through high-quality data",
+              "Reduced fraud risk with validated transactions",
+              "Defensible audit trail for regulatory scrutiny",
+            ];
+          }
+        
+        case "confidentiality":
+          if (level === "None" || level === "Low") {
+            return [
+              "Basic information protection",
+              "Minimal safeguards for sensitive data",
+            ];
+          } else if (level === "Moderate") {
+            return [
+              "Protected intellectual property and business secrets",
+              "Reduced risk of data breaches and associated costs",
+              "Enhanced customer and partner trust in data handling",
+            ];
+          } else {
+            return [
+              "Secured competitive advantage through protected innovations",
+              "Strengthened customer trust with demonstrable privacy controls",
+              "Reputation as a secure business partner",
+              "Reduced breach-related costs and regulatory penalties",
+            ];
+          }
+        
+        default:
+          return ["No value statements available"];
       }
-      return null;
     } catch (err) {
-      console.error("Error getting integrity value data:", err);
-      return null;
+      console.error(`Error retrieving ${component} value statements:`, err);
+      return [`Unable to retrieve ${component} value statements`];
     }
-  }, [ciaContentService, integrityLevel]);
+  };
 
-  const confidentialityValue = useMemo(() => {
-    if (!ciaContentService) return null;
-
+  // Get ROI estimates based on security levels
+  const getROIEstimate = (): { value: string; description: string } => {
     try {
-      // Use type assertion with 'any' inside the condition
-      if (
-        typeof (ciaContentService as any).getComponentBusinessValue ===
-        "function"
-      ) {
-        return (
-          (ciaContentService as any).getComponentBusinessValue(
-            "confidentiality",
+      if (!isNullish(ciaContentService)) {
+        // Check if the service has getROIEstimate method
+        if (typeof (ciaContentService as any).getROIEstimate === "function") {
+          const roi = (ciaContentService as any).getROIEstimate(
+            availabilityLevel,
+            integrityLevel,
             confidentialityLevel
-          ) || null
-        );
+          );
+          
+          if (!isNullish(roi)) {
+            return roi;
+          }
+        }
       }
-      return null;
+
+      // Fallback ROI based on security score
+      switch (securityScore) {
+        case "None":
+          return { value: "0%", description: "No measurable return on investment" };
+        case "Low":
+          return { value: "50-100%", description: "Basic return, primarily through risk avoidance" };
+        case "Moderate":
+          return { value: "150-200%", description: "Balanced return through operational improvements and risk reduction" };
+        case "High":
+          return { value: "200-300%", description: "Strong return through business enablement and risk management" };
+        case "Very High":
+          return { value: "300-500%", description: "Premium return through competitive advantage and comprehensive protection" };
+        default:
+          return { value: "Unknown", description: "Unable to calculate ROI" };
+      }
     } catch (err) {
-      console.error("Error getting confidentiality value data:", err);
-      return null;
+      console.error("Error calculating ROI estimate:", err);
+      return { value: "Unable to calculate", description: "ROI estimation error" };
     }
-  }, [ciaContentService, confidentialityLevel]);
+  };
+
+  // Get the business value summary text
+  const getBusinessValueSummary = (): string => {
+    try {
+      if (!isNullish(ciaContentService)) {
+        // Check if the service has getBusinessValueSummary method
+        if (typeof (ciaContentService as any).getBusinessValueSummary === "function") {
+          const summary = (ciaContentService as any).getBusinessValueSummary(
+            availabilityLevel,
+            integrityLevel,
+            confidentialityLevel
+          );
+          
+          if (typeof summary === "string" && summary) {
+            return summary;
+          }
+        }
+      }
+
+      // Fallback summary based on security score
+      switch (securityScore) {
+        case "None":
+          return "Minimal security investments provide basic operational capabilities but limited business value.";
+        case "Low":
+          return "Basic security controls enable fundamental business operations with modest protection against common threats.";
+        case "Moderate":
+          return "Balanced security investments deliver operational stability, data reliability, and reasonable protection that enable business growth.";
+        case "High":
+          return "Strategic security investments create significant business value through enhanced reliability, data integrity, and protected information assets.";
+        case "Very High":
+          return "Premium security investments establish market-leading capabilities and competitive advantages through exceptional reliability, data quality, and information protection.";
+        default:
+          return "Security investments can deliver business value through improved operations, enhanced decision-making, and protected information assets.";
+      }
+    } catch (err) {
+      console.error("Error generating business value summary:", err);
+      return "Security investments can deliver business value beyond just risk reduction.";
+    }
+  };
+
+  // Get the ROI estimate
+  const roiEstimate = useMemo(() => getROIEstimate(), [
+    ciaContentService,
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel,
+    securityScore,
+  ]);
 
   return (
     <WidgetContainer
@@ -177,206 +306,142 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
       error={error}
     >
       <div className="p-4">
-        {/* Value creation summary */}
-        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
-          <p className="text-sm">
-            This widget shows the business value created by implementing your
-            selected security levels, including financial benefits, operational
-            improvements, and competitive advantages.
-          </p>
-        </div>
+        {/* Overview section */}
+        <div className="mb-6">
+          <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4">
+            <p className="text-sm" data-testid="value-creation-summary">
+              {getBusinessValueSummary()}
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Value Creation Metrics */}
-          <div>
-            <h3 className="text-lg font-medium mb-3">Value Metrics</h3>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div
-                className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center"
-                data-testid={
-                  VALUE_CREATION_TEST_IDS?.VALUE_SCORE || "value-score"
-                }
-              >
-                <SecurityRiskScore score={securityScore} label="Value Score" />
-              </div>
-
-              <div
-                className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
-                data-testid={
-                  VALUE_CREATION_TEST_IDS?.ROI_ESTIMATE || "roi-estimate"
-                }
-              >
-                <div className="text-sm font-medium mb-1">Estimated ROI</div>
-                <div className="text-xl font-bold text-green-600 dark:text-green-400">
-                  {valueMetrics?.roi || "15-25%"}
-                </div>
-                <div className="text-xs text-gray-600 dark:text-gray-400">
-                  {valueMetrics?.roiTimeframe || "Over 2 years"}
-                </div>
-              </div>
-
-              <div
-                className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
-                data-testid={
-                  VALUE_CREATION_TEST_IDS?.COST_SAVINGS || "cost-savings"
-                }
-              >
-                <div className="text-sm font-medium mb-1">Cost Savings</div>
-                <div className="text-xl font-bold text-green-600 dark:text-green-400">
-                  {valueMetrics?.costSavings || "$50K-100K"}
-                </div>
-                <div className="text-xs text-gray-600 dark:text-gray-400">
-                  {valueMetrics?.savingsTimeframe || "Annual"}
-                </div>
-              </div>
-
-              <div
-                className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
-                data-testid={
-                  VALUE_CREATION_TEST_IDS?.PRODUCTIVITY || "productivity"
-                }
-              >
-                <div className="text-sm font-medium mb-1">
-                  Productivity Gain
-                </div>
-                <div className="text-xl font-bold text-blue-600 dark:text-blue-400">
-                  {valueMetrics?.productivityGain || "10-15%"}
-                </div>
-                <div className="text-xs text-gray-600 dark:text-gray-400">
-                  {valueMetrics?.productivityDetails || "Reduced downtime"}
-                </div>
-              </div>
-            </div>
-
-            {/* Business Benefits */}
-            <div className="mt-4">
-              <h3 className="text-lg font-medium mb-3">Business Benefits</h3>
-              <ul className="space-y-2">
-                {valueMetrics?.benefits?.map(
-                  (benefit: string, index: number) => (
-                    <li
-                      key={index}
-                      className="p-2 bg-gray-50 dark:bg-gray-800 rounded-lg flex items-start"
-                      data-testid={`value-benefit-${index}`}
-                    >
-                      <span className="mr-2 text-green-500">✓</span>
-                      <span>{benefit}</span>
-                    </li>
-                  )
-                ) || (
-                  <>
-                    <li className="p-2 bg-gray-50 dark:bg-gray-800 rounded-lg flex items-start">
-                      <span className="mr-2 text-green-500">✓</span>
-                      <span>Improved customer trust and retention</span>
-                    </li>
-                    <li className="p-2 bg-gray-50 dark:bg-gray-800 rounded-lg flex items-start">
-                      <span className="mr-2 text-green-500">✓</span>
-                      <span>
-                        Reduced risk of security incidents and data breaches
-                      </span>
-                    </li>
-                    <li className="p-2 bg-gray-50 dark:bg-gray-800 rounded-lg flex items-start">
-                      <span className="mr-2 text-green-500">✓</span>
-                      <span>
-                        Enhanced compliance with regulatory requirements
-                      </span>
-                    </li>
-                  </>
-                )}
-              </ul>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-lg font-medium">Overall Value Profile</h3>
+            <div className="flex items-center">
+              <span className="mr-2 text-sm text-gray-600 dark:text-gray-400">
+                Security Level:
+              </span>
+              <SecurityLevelIndicator level={securityScore} size="md" />
             </div>
           </div>
 
-          {/* Component-specific Value */}
-          <div>
-            <h3 className="text-lg font-medium mb-3">
-              Component Value Creation
-            </h3>
-
-            {/* Availability Value */}
-            <div
-              className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border-l-4 border-blue-500"
-              data-testid={
-                VALUE_CREATION_TEST_IDS?.AVAILABILITY_VALUE ||
-                "availability-value"
-              }
-            >
-              <h4 className="text-md font-medium flex items-center text-blue-700 dark:text-blue-300">
-                <span className="mr-2">⏱️</span>
-                Availability Value ({availabilityLevel})
-              </h4>
-              <p className="text-sm mt-1">
-                {availabilityValue?.summary ||
-                  `${availabilityLevel} availability helps your business by reducing downtime and ensuring systems are accessible when needed.`}
-              </p>
-              {availabilityValue?.financialImpact && (
-                <div className="mt-2 text-sm">
-                  <span className="font-medium">Financial Impact: </span>
-                  {availabilityValue.financialImpact}
-                </div>
-              )}
+          {/* ROI estimate */}
+          <div className="p-4 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg mb-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="font-medium text-green-700 dark:text-green-300">
+                  Estimated Return on Investment
+                </h4>
+                <p className="text-sm text-green-600 dark:text-green-400 mt-1">
+                  {roiEstimate.description}
+                </p>
+              </div>
+              <div className="text-2xl font-bold text-green-600 dark:text-green-400" data-testid="roi-value">
+                {roiEstimate.value}
+              </div>
             </div>
+          </div>
 
-            {/* Integrity Value */}
-            <div
-              className="mb-4 p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border-l-4 border-green-500"
-              data-testid={
-                VALUE_CREATION_TEST_IDS?.INTEGRITY_VALUE || "integrity-value"
-              }
-            >
-              <h4 className="text-md font-medium flex items-center text-green-700 dark:text-green-300">
-                <span className="mr-2">✓</span>
-                Integrity Value ({integrityLevel})
-              </h4>
-              <p className="text-sm mt-1">
-                {integrityValue?.summary ||
-                  `${integrityLevel} integrity ensures your data is accurate and trustworthy, preventing costly errors and maintaining stakeholder confidence.`}
-              </p>
-              {integrityValue?.businessAdvantage && (
-                <div className="mt-2 text-sm">
-                  <span className="font-medium">Business Advantage: </span>
-                  {integrityValue.businessAdvantage}
+          {/* Business value metrics grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" data-testid="value-metrics-grid">
+            {valueMetrics.map((metric, index) => (
+              <div
+                key={index}
+                className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                data-testid={`value-metric-${index}`}
+              >
+                <div className="flex items-center mb-2">
+                  <span className="text-xl mr-2 text-blue-500">
+                    {metric.icon || "📈"}
+                  </span>
+                  <h4 className="font-medium">{metric.category}</h4>
                 </div>
-              )}
-            </div>
-
-            {/* Confidentiality Value */}
-            <div
-              className="mb-4 p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border-l-4 border-purple-500"
-              data-testid={
-                VALUE_CREATION_TEST_IDS?.CONFIDENTIALITY_VALUE ||
-                "confidentiality-value"
-              }
-            >
-              <h4 className="text-md font-medium flex items-center text-purple-700 dark:text-purple-300">
-                <span className="mr-2">🔒</span>
-                Confidentiality Value ({confidentialityLevel})
-              </h4>
-              <p className="text-sm mt-1">
-                {confidentialityValue?.summary ||
-                  `${confidentialityLevel} confidentiality protects your sensitive data, maintaining customer trust and reducing the risk of regulatory penalties.`}
-              </p>
-              {confidentialityValue?.competitiveAdvantage && (
-                <div className="mt-2 text-sm">
-                  <span className="font-medium">Competitive Advantage: </span>
-                  {confidentialityValue.competitiveAdvantage}
+                <div className="text-lg font-bold text-blue-600 dark:text-blue-400 mb-1">
+                  {metric.value}
                 </div>
-              )}
-            </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {metric.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
 
-            {/* Strategic Value */}
-            <div
-              className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
-              data-testid={
-                VALUE_CREATION_TEST_IDS?.STRATEGIC_VALUE || "strategic-value"
-              }
-            >
-              <h4 className="text-md font-medium mb-1">Strategic Value</h4>
-              <p className="text-sm">
-                {valueMetrics?.strategicValue ||
-                  "Your security posture aligns with industry standards and provides a foundation for sustainable growth. Organizations with mature security practices typically outperform peers in both customer acquisition and retention."}
-              </p>
+        {/* Component-specific value sections */}
+        <div className="mb-6">
+          <h3 className="text-lg font-medium mb-4">Component Business Value</h3>
+          
+          {/* Availability value */}
+          <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg" data-testid="availability-value-section">
+            <div className="flex items-center mb-2">
+              <span className="text-xl mr-2">⏱️</span>
+              <h4 className="font-medium">Availability Value ({availabilityLevel})</h4>
+            </div>
+            <ul className="list-disc list-inside pl-2 text-sm text-gray-600 dark:text-gray-400">
+              {getComponentValueStatements("availability", availabilityLevel).map((statement, index) => (
+                <li key={index} className="mb-1" data-testid={`availability-value-item-${index}`}>
+                  {statement}
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          {/* Integrity value */}
+          <div className="mb-4 p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg" data-testid="integrity-value-section">
+            <div className="flex items-center mb-2">
+              <span className="text-xl mr-2">✓</span>
+              <h4 className="font-medium">Integrity Value ({integrityLevel})</h4>
+            </div>
+            <ul className="list-disc list-inside pl-2 text-sm text-gray-600 dark:text-gray-400">
+              {getComponentValueStatements("integrity", integrityLevel).map((statement, index) => (
+                <li key={index} className="mb-1" data-testid={`integrity-value-item-${index}`}>
+                  {statement}
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          {/* Confidentiality value */}
+          <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg" data-testid="confidentiality-value-section">
+            <div className="flex items-center mb-2">
+              <span className="text-xl mr-2">🔒</span>
+              <h4 className="font-medium">Confidentiality Value ({confidentialityLevel})</h4>
+            </div>
+            <ul className="list-disc list-inside pl-2 text-sm text-gray-600 dark:text-gray-400">
+              {getComponentValueStatements("confidentiality", confidentialityLevel).map((statement, index) => (
+                <li key={index} className="mb-1" data-testid={`confidentiality-value-item-${index}`}>
+                  {statement}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Business case section */}
+        <div>
+          <h3 className="text-lg font-medium mb-3">Security Investment Business Case</h3>
+          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              Use these value statements to build your business case for security investments:
+            </p>
+            <div className="space-y-3">
+              <div className="p-2 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded">
+                <h5 className="text-sm font-medium mb-1">Executive Summary</h5>
+                <p className="text-sm">
+                  Our {securityScore.toLowerCase()} security investment strategy delivers business value through improved operational reliability, data integrity, and information protection.
+                </p>
+              </div>
+              <div className="p-2 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded">
+                <h5 className="text-sm font-medium mb-1">Financial Value</h5>
+                <p className="text-sm">
+                  With an estimated ROI of {roiEstimate.value}, our security investments provide strong financial returns through risk reduction, operational improvements, and business enablement.
+                </p>
+              </div>
+              <div className="p-2 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
+                <h5 className="text-sm font-medium mb-1">Strategic Value</h5>
+                <p className="text-sm">
+                  Beyond direct financial returns, our security program creates strategic value by enabling digital initiatives, protecting our brand, and building customer trust.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -384,5 +449,77 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
     </WidgetContainer>
   );
 };
+
+// Helper function to generate fallback value metrics
+function generateFallbackValueMetrics(
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel,
+  overallLevel: SecurityLevel
+): BusinessValueMetric[] {
+  // Map security levels to numeric scores
+  const levelScores: Record<SecurityLevel, number> = {
+    None: 0,
+    Low: 1,
+    Moderate: 2,
+    High: 3,
+    "Very High": 4,
+  };
+
+  // Calculate average score
+  const avgScore = 
+    (levelScores[availabilityLevel] + 
+     levelScores[integrityLevel] + 
+     levelScores[confidentialityLevel]) / 3;
+
+  // Generate appropriate metrics based on the average score
+  return [
+    {
+      category: "Trust Enhancement",
+      value: getPercentageValue(avgScore, 95),
+      description: "Increased customer and partner trust in your business",
+      icon: "🤝",
+    },
+    {
+      category: "Operational Efficiency",
+      value: getPercentageValue(avgScore, 40),
+      description: "Improved operational efficiency through reliable systems",
+      icon: "⚙️",
+    },
+    {
+      category: "Innovation Enablement",
+      value: getPercentageValue(avgScore, 70),
+      description: "Enhanced ability to launch new digital initiatives",
+      icon: "💡",
+    },
+    {
+      category: "Decision Quality",
+      value: getPercentageValue(avgScore, 60),
+      description: "Better business decisions through reliable data",
+      icon: "📊",
+    },
+    {
+      category: "Competitive Advantage",
+      value: getPercentageValue(avgScore, 50),
+      description: "Market differentiation through security capabilities",
+      icon: "🏆",
+    },
+    {
+      category: "Risk Reduction",
+      value: getPercentageValue(avgScore, 80),
+      description: "Reduced likelihood of business disruptions",
+      icon: "🛡️",
+    },
+  ];
+}
+
+// Helper to generate a reasonable percentage based on security score
+function getPercentageValue(score: number, baseValue: number): string {
+  const percentage = Math.min(
+    95,
+    Math.max(5, Math.round(baseValue * (0.3 + score * 0.2)))
+  );
+  return `${percentage}%`;
+}
 
 export default ValueCreationWidget;

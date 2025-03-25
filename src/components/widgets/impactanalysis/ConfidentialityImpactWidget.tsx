@@ -52,13 +52,13 @@ const ConfidentialityImpactWidget: React.FC<
   } = useCIAContentService();
 
   // Use the passed level or fallback to confidentialityLevel for backward compatibility
-  const effectiveLevel = level || confidentialityLevel;
+  const effectiveLevel = level || confidentialityLevel || "Moderate";
 
   // Get component-specific details with proper error handling
   const details = useMemo(() => {
     try {
       if (isNullish(ciaContentService)) {
-        throw new Error("Content service unavailable");
+        return getDefaultConfidentialityDetails(effectiveLevel);
       }
 
       const componentDetails = ciaContentService.getComponentDetails?.(
@@ -67,46 +67,37 @@ const ConfidentialityImpactWidget: React.FC<
       );
 
       if (isNullish(componentDetails)) {
-        throw new Error("Unable to fetch confidentiality details");
+        return getDefaultConfidentialityDetails(effectiveLevel);
       }
 
       return componentDetails;
     } catch (err) {
       console.error("Error fetching confidentiality details:", err);
       // Return default values instead of null to prevent UI errors
-      return {
-        description: "Details not available",
-        technical: "Technical details not available",
-        businessImpact: "Business impact details not available",
-        recommendations: [],
-        // Add confidentiality-specific properties with defaults
-        encryptionMethod: "N/A",
-        dataClassification: "N/A",
-        accessControl: "N/A",
-        authenticationMethod: "N/A",
-        privacyImpact: "N/A",
-        dataMinimization: "N/A",
-        protectionMethod: "N/A",
-      };
+      return getDefaultConfidentialityDetails(effectiveLevel);
     }
   }, [ciaContentService, effectiveLevel]);
-
-  const detailsAsAny = details as any;
 
   // Get business impact details with proper error handling
   const businessImpact = useMemo(() => {
     try {
       if (isNullish(ciaContentService)) {
-        return null;
+        return getDefaultBusinessImpact(effectiveLevel);
       }
 
-      return ciaContentService.getBusinessImpact?.(
+      const impact = ciaContentService.getBusinessImpact?.(
         "confidentiality",
         effectiveLevel
       );
+
+      if (isNullish(impact)) {
+        return getDefaultBusinessImpact(effectiveLevel);
+      }
+
+      return impact;
     } catch (err) {
       console.error("Error fetching business impact details:", err);
-      return null;
+      return getDefaultBusinessImpact(effectiveLevel);
     }
   }, [ciaContentService, effectiveLevel]);
 
@@ -114,35 +105,47 @@ const ConfidentialityImpactWidget: React.FC<
   const recommendations = useMemo(() => {
     try {
       if (isNullish(ciaContentService)) {
-        return [];
+        return getDefaultRecommendations(effectiveLevel);
       }
 
-      return (
-        ciaContentService.getRecommendations?.(
-          "confidentiality",
-          effectiveLevel
-        ) || []
+      const recs = ciaContentService.getRecommendations?.(
+        "confidentiality",
+        effectiveLevel
       );
+
+      if (isNullish(recs) || recs.length === 0) {
+        return getDefaultRecommendations(effectiveLevel);
+      }
+
+      return recs;
     } catch (err) {
       console.error("Error fetching recommendations:", err);
-      return [];
+      return getDefaultRecommendations(effectiveLevel);
     }
   }, [ciaContentService, effectiveLevel]);
 
   // Calculate overall impact with the current confidentiality level
   const overallImpact = useMemo(() => {
     try {
-      if (isNullish(ciaContentService)) {
+      if (
+        isNullish(ciaContentService) ||
+        isNullish(availabilityLevel) ||
+        isNullish(integrityLevel)
+      ) {
         return effectiveLevel;
       }
 
-      return (
-        ciaContentService.calculateBusinessImpactLevel?.(
-          availabilityLevel,
-          integrityLevel,
-          effectiveLevel
-        ) || effectiveLevel
+      const impact = ciaContentService.calculateBusinessImpactLevel?.(
+        availabilityLevel,
+        integrityLevel,
+        effectiveLevel
       );
+
+      if (isNullish(impact)) {
+        return effectiveLevel;
+      }
+
+      return impact;
     } catch (err) {
       console.error("Error calculating overall impact:", err);
       return effectiveLevel;
@@ -161,89 +164,53 @@ const ConfidentialityImpactWidget: React.FC<
 
   // Get encryption method based on level
   const encryptionMethod = useMemo(() => {
-    if (!details) return "No encryption requirements";
+    if (isNullish(details)) return getDefaultEncryptionMethod(effectiveLevel);
 
     // Use type assertion to access the property
     const detailsAny = details as any;
-    if (detailsAny.encryptionMethod !== "N/A") {
+    if (detailsAny.encryptionMethod && detailsAny.encryptionMethod !== "N/A") {
       return detailsAny.encryptionMethod;
     }
 
-    // Fallback values based on level
-    switch (effectiveLevel) {
-      case "None":
-        return "No encryption required";
-      case "Low":
-        return "Basic encryption (e.g., password protection)";
-      case "Moderate":
-        return "Standard encryption (e.g., AES-128)";
-      case "High":
-        return "Strong encryption (e.g., AES-256)";
-      case "Very High":
-        return "Multi-layered encryption with hardware security";
-      default:
-        return "Standard encryption";
-    }
+    return getDefaultEncryptionMethod(effectiveLevel);
   }, [details, effectiveLevel]);
 
   // Get access control requirements based on level
   const accessControl = useMemo(() => {
-    if (!details) return "No access control requirements";
+    if (isNullish(details)) return getDefaultAccessControl(effectiveLevel);
 
     // Use type assertion to access the property
     const detailsAny = details as any;
-    if (detailsAny.accessControl !== "N/A") {
+    if (detailsAny.accessControl && detailsAny.accessControl !== "N/A") {
       return detailsAny.accessControl;
     }
 
-    // Fallback values based on level
-    switch (effectiveLevel) {
-      case "None":
-        return "No specific access controls";
-      case "Low":
-        return "Basic authentication";
-      case "Moderate":
-        return "Role-based access control";
-      case "High":
-        return "Multi-factor authentication & fine-grained access control";
-      case "Very High":
-        return "Zero trust architecture & continuous authorization";
-      default:
-        return "Role-based access control";
-    }
+    return getDefaultAccessControl(effectiveLevel);
   }, [details, effectiveLevel]);
 
   // Get data classification requirements
   const dataClassification = useMemo(() => {
-    if (!details) return "Unclassified";
+    if (isNullish(details)) return getDefaultDataClassification(effectiveLevel);
 
     // Use type assertion to access the property
     const detailsAny = details as any;
-    if (detailsAny.dataClassification !== "N/A") {
+    if (
+      detailsAny.dataClassification &&
+      detailsAny.dataClassification !== "N/A"
+    ) {
       return detailsAny.dataClassification;
     }
 
-    // Fallback values based on level
-    switch (effectiveLevel) {
-      case "None":
-        return "Public data";
-      case "Low":
-        return "Internal use only";
-      case "Moderate":
-        return "Sensitive";
-      case "High":
-        return "Confidential";
-      case "Very High":
-        return "Restricted";
-      default:
-        return "Sensitive";
-    }
+    return getDefaultDataClassification(effectiveLevel);
   }, [details, effectiveLevel]);
 
   return (
     <WidgetContainer
-      title={WIDGET_TITLES.CONFIDENTIALITY_IMPACT}
-      icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT}
+      title={
+        WIDGET_TITLES.CONFIDENTIALITY_IMPACT ||
+        "Confidentiality Impact Analysis"
+      }
+      icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT || "🔒"}
       className={`${className} overflow-visible`}
       testId={testId}
       isLoading={isLoading}
@@ -296,7 +263,7 @@ const ConfidentialityImpactWidget: React.FC<
               <span className="mr-2">📝</span>Description
             </h4>
             <p className="text-gray-600 dark:text-gray-300">
-              {details.description || "No description available"}
+              {details?.description || getDefaultDescription(effectiveLevel)}
             </p>
           </div>
 
@@ -339,15 +306,7 @@ const ConfidentialityImpactWidget: React.FC<
                 <div className="text-sm font-medium mb-1">Authentication:</div>
                 <div className="text-lg font-bold text-purple-600 dark:text-purple-400">
                   {(details as any)?.authenticationMethod ||
-                  effectiveLevel === "None"
-                    ? "No specific requirements"
-                    : effectiveLevel === "Low"
-                    ? "Password authentication"
-                    : effectiveLevel === "Moderate"
-                    ? "Strong password policy"
-                    : effectiveLevel === "High"
-                    ? "Multi-factor authentication"
-                    : "Advanced MFA with biometrics"}
+                    getDefaultAuthenticationMethod(effectiveLevel)}
                 </div>
               </div>
             </div>
@@ -362,15 +321,8 @@ const ConfidentialityImpactWidget: React.FC<
               <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
                 <div className="text-sm font-medium mb-1">Privacy Impact:</div>
                 <div className="text-lg font-bold text-purple-600 dark:text-purple-400">
-                  {(details as any)?.privacyImpact || effectiveLevel === "None"
-                    ? "Minimal"
-                    : effectiveLevel === "Low"
-                    ? "Low"
-                    : effectiveLevel === "Moderate"
-                    ? "Moderate"
-                    : effectiveLevel === "High"
-                    ? "Significant"
-                    : "Very High"}
+                  {(details as any)?.privacyImpact ||
+                    getDefaultPrivacyImpact(effectiveLevel)}
                 </div>
               </div>
               <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
@@ -379,15 +331,7 @@ const ConfidentialityImpactWidget: React.FC<
                 </div>
                 <div className="text-lg font-bold text-purple-600 dark:text-purple-400">
                   {(details as any)?.dataMinimization ||
-                  effectiveLevel === "None"
-                    ? "Not required"
-                    : effectiveLevel === "Low"
-                    ? "Basic"
-                    : effectiveLevel === "Moderate"
-                    ? "Standard"
-                    : effectiveLevel === "High"
-                    ? "Advanced"
-                    : "Comprehensive"}
+                    getDefaultDataMinimization(effectiveLevel)}
                 </div>
               </div>
             </div>
@@ -408,7 +352,7 @@ const ConfidentialityImpactWidget: React.FC<
               <span className="mr-2">🔧</span>Technical Implementation
             </h4>
             <p className="text-gray-600 dark:text-gray-300">
-              {details.technical || "No technical details available"}
+              {details?.technical || getDefaultTechnicalDetails(effectiveLevel)}
             </p>
           </div>
 
@@ -464,5 +408,277 @@ const ConfidentialityImpactWidget: React.FC<
     </WidgetContainer>
   );
 };
+
+// Helper functions to provide default values based on security level
+function getDefaultConfidentialityDetails(level: SecurityLevel) {
+  return {
+    description: getDefaultDescription(level),
+    technical: getDefaultTechnicalDetails(level),
+    businessImpact: "Impact details not available",
+    recommendations: getDefaultRecommendations(level),
+    encryptionMethod: getDefaultEncryptionMethod(level),
+    dataClassification: getDefaultDataClassification(level),
+    accessControl: getDefaultAccessControl(level),
+    authenticationMethod: getDefaultAuthenticationMethod(level),
+    privacyImpact: getDefaultPrivacyImpact(level),
+    dataMinimization: getDefaultDataMinimization(level),
+    protectionMethod: getDefaultProtectionMethod(level),
+  };
+}
+
+function getDefaultDescription(level: SecurityLevel): string {
+  switch (level) {
+    case "None":
+      return "No confidentiality controls. Data is not protected from unauthorized disclosure.";
+    case "Low":
+      return "Basic confidentiality controls to protect against casual or inadvertent disclosure.";
+    case "Moderate":
+      return "Standard confidentiality controls to protect sensitive information from unauthorized disclosure.";
+    case "High":
+      return "Enhanced confidentiality controls to protect highly sensitive information from unauthorized disclosure with strong access controls.";
+    case "Very High":
+      return "Comprehensive confidentiality controls to protect critical information with strict access controls and advanced encryption.";
+    default:
+      return "Standard confidentiality controls to protect sensitive information.";
+  }
+}
+
+function getDefaultTechnicalDetails(level: SecurityLevel): string {
+  switch (level) {
+    case "None":
+      return "No specific technical controls for confidentiality are implemented.";
+    case "Low":
+      return "Basic access controls and simple encryption for data at rest.";
+    case "Moderate":
+      return "Role-based access control, standard encryption for data at rest and in transit.";
+    case "High":
+      return "Fine-grained access control, strong encryption, data loss prevention controls.";
+    case "Very High":
+      return "Advanced encryption with hardware security modules, zero trust architecture, comprehensive DLP.";
+    default:
+      return "Standard confidentiality controls including encryption and access controls.";
+  }
+}
+
+function getDefaultBusinessImpact(level: SecurityLevel) {
+  return {
+    summary: `${level} confidentiality provides ${
+      level === "None"
+        ? "no protection"
+        : level === "Low"
+        ? "minimal protection"
+        : level === "Moderate"
+        ? "adequate protection"
+        : level === "High"
+        ? "strong protection"
+        : "extensive protection"
+    } against unauthorized data disclosure.`,
+    reputational: {
+      description: `${
+        level === "None"
+          ? "High risk of data breaches leading to significant reputational damage."
+          : level === "Low"
+          ? "Moderate risk of data breaches that could affect reputation."
+          : level === "Moderate"
+          ? "Protected against common threats that could impact reputation."
+          : level === "High"
+          ? "Well protected against most threats that could damage reputation."
+          : "Comprehensive protection against reputational risks from data breaches."
+      }`,
+      riskLevel:
+        level === "None"
+          ? "High Risk"
+          : level === "Low"
+          ? "Medium Risk"
+          : "Low Risk",
+    },
+    regulatory: {
+      description: `${
+        level === "None"
+          ? "Non-compliant with most data protection regulations."
+          : level === "Low"
+          ? "May not meet requirements for regulated data."
+          : level === "Moderate"
+          ? "Meets basic regulatory requirements for most data types."
+          : level === "High"
+          ? "Compliant with most regulatory frameworks for sensitive data."
+          : "Exceeds regulatory requirements for highly sensitive data."
+      }`,
+      riskLevel:
+        level === "None"
+          ? "High Risk"
+          : level === "Low"
+          ? "Medium Risk"
+          : "Low Risk",
+    },
+  };
+}
+
+function getDefaultRecommendations(level: SecurityLevel): string[] {
+  switch (level) {
+    case "None":
+      return [
+        "Implement basic access controls",
+        "Add encryption for sensitive data",
+        "Develop a data classification policy",
+        "Train staff on data handling procedures",
+      ];
+    case "Low":
+      return [
+        "Enhance access controls with role-based permissions",
+        "Implement standard encryption for all sensitive data",
+        "Develop formal data handling procedures",
+        "Conduct regular security awareness training",
+      ];
+    case "Moderate":
+      return [
+        "Implement data loss prevention controls",
+        "Use strong encryption for all sensitive data",
+        "Enforce comprehensive access management",
+        "Conduct regular security assessments",
+      ];
+    case "High":
+      return [
+        "Implement advanced data protection mechanisms",
+        "Deploy multi-factor authentication for all sensitive access",
+        "Conduct regular penetration testing of security controls",
+        "Implement comprehensive data loss prevention",
+      ];
+    case "Very High":
+      return [
+        "Deploy hardware security modules for key management",
+        "Implement zero trust architecture",
+        "Use advanced encryption with proper key rotation",
+        "Conduct frequent security validation of controls",
+        "Implement rigorous access reviews and monitoring",
+      ];
+    default:
+      return [
+        "Implement appropriate access controls",
+        "Use encryption for sensitive data",
+        "Develop data handling procedures",
+        "Conduct security awareness training",
+      ];
+  }
+}
+
+function getDefaultEncryptionMethod(level: SecurityLevel): string {
+  switch (level) {
+    case "None":
+      return "No encryption required";
+    case "Low":
+      return "Basic encryption (e.g., password protection)";
+    case "Moderate":
+      return "Standard encryption (e.g., AES-128)";
+    case "High":
+      return "Strong encryption (e.g., AES-256)";
+    case "Very High":
+      return "Multi-layered encryption with hardware security";
+    default:
+      return "Standard encryption";
+  }
+}
+
+function getDefaultAccessControl(level: SecurityLevel): string {
+  switch (level) {
+    case "None":
+      return "No specific access controls";
+    case "Low":
+      return "Basic authentication";
+    case "Moderate":
+      return "Role-based access control";
+    case "High":
+      return "Fine-grained access control";
+    case "Very High":
+      return "Zero trust architecture";
+    default:
+      return "Role-based access control";
+  }
+}
+
+function getDefaultDataClassification(level: SecurityLevel): string {
+  switch (level) {
+    case "None":
+      return "Public data";
+    case "Low":
+      return "Internal use only";
+    case "Moderate":
+      return "Sensitive";
+    case "High":
+      return "Confidential";
+    case "Very High":
+      return "Restricted";
+    default:
+      return "Sensitive";
+  }
+}
+
+function getDefaultAuthenticationMethod(level: SecurityLevel): string {
+  switch (level) {
+    case "None":
+      return "No specific requirements";
+    case "Low":
+      return "Password authentication";
+    case "Moderate":
+      return "Strong password policy";
+    case "High":
+      return "Multi-factor authentication";
+    case "Very High":
+      return "Advanced MFA with biometrics";
+    default:
+      return "Strong password policy";
+  }
+}
+
+function getDefaultPrivacyImpact(level: SecurityLevel): string {
+  switch (level) {
+    case "None":
+      return "Minimal";
+    case "Low":
+      return "Low";
+    case "Moderate":
+      return "Moderate";
+    case "High":
+      return "Significant";
+    case "Very High":
+      return "Very High";
+    default:
+      return "Moderate";
+  }
+}
+
+function getDefaultDataMinimization(level: SecurityLevel): string {
+  switch (level) {
+    case "None":
+      return "Not required";
+    case "Low":
+      return "Basic";
+    case "Moderate":
+      return "Standard";
+    case "High":
+      return "Advanced";
+    case "Very High":
+      return "Comprehensive";
+    default:
+      return "Standard";
+  }
+}
+
+function getDefaultProtectionMethod(level: SecurityLevel): string {
+  switch (level) {
+    case "None":
+      return "None";
+    case "Low":
+      return "Basic controls";
+    case "Moderate":
+      return "Standard controls";
+    case "High":
+      return "Enhanced controls";
+    case "Very High":
+      return "Comprehensive controls";
+    default:
+      return "Standard controls";
+  }
+}
 
 export default ConfidentialityImpactWidget;
