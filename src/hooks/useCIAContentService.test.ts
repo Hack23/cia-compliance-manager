@@ -21,14 +21,15 @@ vi.mock("../services/ciaContentService", () => ({
 // Import the mocks directly to be able to modify their behavior
 const mockedModule = vi.mocked(await import("../services/ciaContentService"));
 
-// Mock error utility
-vi.mock("../utils/errorUtils", () => ({
-  __esModule: true,
-  toErrorObject: vi
-    .fn()
-    .mockImplementation((err) =>
-      err instanceof Error ? err : new Error(String(err))
-    ),
+// Update to mock the utils module instead of errorUtils directly
+vi.mock("../utils", () => ({
+  // Provide both functions used from the utils module
+  toErrorObject: vi.fn((err) =>
+    err instanceof Error ? err : new Error(String(err))
+  ),
+  formatError: vi.fn((err, prefix) =>
+    prefix ? `${prefix}: ${String(err)}` : String(err)
+  ),
 }));
 
 describe("useCIAContentService", () => {

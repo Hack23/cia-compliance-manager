@@ -3,6 +3,7 @@ import {
   CIAContentService,
   createCIAContentService,
 } from "../services/ciaContentService";
+import { toErrorObject } from "../utils";
 
 /**
  * Hook to access the CIA content service with loading and error states
@@ -25,6 +26,7 @@ export const useCIAContentService = () => {
       setError(null);
     } catch (err) {
       setCIAContentService(null);
+      setError(toErrorObject(err));
     } finally {
       setIsLoading(false);
     }

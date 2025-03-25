@@ -15,6 +15,7 @@ import {
 import { calculateRiskLevel } from "../types/cia.utility";
 import * as colorUtils from "./colorUtils";
 import * as costUtils from "./costCalculationUtils";
+import * as errorUtils from "./errorUtils";
 import * as formatUtils from "./formatUtils";
 import * as levelUtils from "./levelValuesUtils";
 import * as riskUtils from "./riskUtils";
@@ -193,6 +194,9 @@ export const {
   safeNumberConversion,
   hasWidgetProps,
 } = typeGuards;
+
+// Error utilities
+export const { toErrorObject, formatError } = errorUtils;
 
 // Other exports
 export { BUSINESS_IMPACT_CATEGORIES, calculateRiskLevel, RISK_LEVELS };
