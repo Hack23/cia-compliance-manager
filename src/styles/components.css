@@ -1505,3 +1505,44 @@ textarea:focus {
 .dark [data-testid^="widget-"] [data-testid$="-recommendation-2"] {
   color: var(--text-color) !important;
 }
+
+/* App header styling consistency */
+.mb-4.p-3.bg-white.dark\:bg-gray-800.rounded-lg.shadow-md.flex.justify-between.items-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  background-color: var(--bg-primary);
+}
+
+/* App logo consistency */
+.h-8.w-8.mr-2 {
+  height: 28px;
+  width: 28px;
+  border-radius: 4px;
+}
+
+/* App title consistency */
+.text-xl.font-semibold.text-gray-800.dark\:text-gray-100.transition-colors.duration-300 {
+  font-family: var(--font-accent);
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Theme toggle button styling for better visibility */
+button.px-3.py-1.bg-blue-500.dark\:bg-blue-600.text-white.rounded-md.text-sm {
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.dark
+  button.px-3.py-1.bg-blue-500.dark\:bg-blue-600.text-white.rounded-md.text-sm {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  border: none;
+  box-shadow: 0 0 6px rgba(0, 204, 255, 0.2);
+}

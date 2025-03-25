@@ -34,17 +34,87 @@ body,
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Match the app title structure */
-.text-2xl.font-bold {
-  font-family: var(--font-accent);
-  letter-spacing: 0.5px;
+/* Improve app header and title styling */
+.app-header,
+.mb-6.p-4.bg-white.dark\:bg-gray-800.rounded-lg.shadow-md.flex.justify-between.items-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px var(--shadow-color);
+  margin-bottom: 0.75rem;
+  border-bottom: 3px solid var(--primary-color);
+  padding: 0.75rem 1.25rem;
 }
 
-.dark .text-2xl.font-bold {
+/* App header and title styling - more compact and proper colors */
+.mb-6.p-4.bg-white.dark\:bg-gray-800.rounded-lg.shadow-md.flex.justify-between.items-center,
+.mb-4.p-3.bg-white.dark\:bg-gray-800.rounded-lg.shadow-md.flex.justify-between.items-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-primary);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px var(--shadow-color);
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.dark
+  .mb-6.p-4.bg-white.dark\:bg-gray-800.rounded-lg.shadow-md.flex.justify-between.items-center,
+.dark
+  .mb-4.p-3.bg-white.dark\:bg-gray-800.rounded-lg.shadow-md.flex.justify-between.items-center {
+  background-color: var(--bg-primary);
+  border-color: var(--primary-color);
+}
+
+/* Match the app title structure */
+.text-2xl.font-bold.text-gray-800.dark\:text-gray-100.dark\:widget-title.transition-colors.duration-300.flex.items-center {
+  font-family: var(--font-accent);
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  color: var(--primary-color);
+  gap: 0.75rem;
+}
+
+.text-2xl.font-bold.text-gray-800.dark\:text-gray-100.dark\:widget-title.transition-colors.duration-300.flex.items-center
+  img {
+  height: 42px;
+  width: auto;
+  transition: transform 0.2s ease;
+  margin-right: 0.25rem;
+}
+
+.text-2xl.font-bold.text-gray-800.dark\:text-gray-100.dark\:widget-title.transition-colors.duration-300.flex.items-center
+  img:hover {
+  transform: scale(1.05);
+}
+
+.dark
+  .text-2xl.font-bold.text-gray-800.dark\:text-gray-100.dark\:widget-title.transition-colors.duration-300.flex.items-center {
   font-family: var(--font-accent);
   letter-spacing: 1px;
   text-transform: uppercase;
   text-shadow: 0 0 8px var(--primary-color);
+  color: var(--text-color);
+}
+
+/* Improved text-xl for app title */
+.text-xl.font-semibold {
+  font-family: var(--font-accent);
+  color: var(--primary-color);
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.dark .text-xl.font-semibold {
+  color: var(--primary-color);
+  text-shadow: 0 0 5px var(--primary-color);
 }
 
 /* Theme-specific styles */
@@ -883,4 +953,185 @@ code {
 
 .dark ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 204, 102, 0.5);
+}
+
+/* Terminal text info bar styling */
+.terminal-text.text-xs.flex.items-center.mt-1 {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  margin-top: 0.35rem;
+  flex-wrap: wrap;
+}
+
+/* Terminal text bar styling */
+.terminal-text.text-xs {
+  font-family: var(--font-mono);
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  opacity: 0.9;
+}
+
+/* App version indicator styling */
+.terminal-text [data-testid="app-indicator"] {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+  background-color: #22c55e;
+  box-shadow: 0 0 4px #22c55e;
+}
+
+/* App version number styling */
+.terminal-text [data-testid="app-version"] {
+  font-family: var(--font-mono);
+  margin-right: 0.5rem;
+  color: #22c55e;
+}
+
+/* Terminal links styling */
+.terminal-text a {
+  color: #22c55e;
+  margin: 0 0.25rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.terminal-text a:hover {
+  text-decoration: underline;
+  color: #15803d;
+}
+
+/* Separator styling */
+.terminal-text
+  [style*="color: #22c55e"]:not(a):not([data-testid="app-indicator"]):not(
+    [data-testid="app-version"]
+  ) {
+  margin: 0 0.25rem;
+  color: #22c55e;
+  opacity: 0.7;
+}
+
+/* Dark mode enhancements */
+.dark .terminal-text [data-testid="app-indicator"],
+.dark .terminal-text [data-testid="app-version"],
+.dark .terminal-text a,
+.dark .terminal-text [style*="color: #22c55e"] {
+  text-shadow: 0 0 4px rgba(34, 197, 94, 0.6);
+}
+
+.dark .terminal-text a:hover {
+  color: #4ade80;
+  text-shadow: 0 0 6px rgba(34, 197, 94, 0.8);
+}
+
+/* Terminal links in dark mode */
+.dark .terminal-text [data-testid="app-indicator"],
+.dark .terminal-text [data-testid="app-version"],
+.dark .terminal-text a,
+.dark .terminal-text [style*="color: #22c55e"] {
+  color: #22c55e !important; /* Force color to ensure visibility */
+}
+
+/* Improve dark mode theme toggle button */
+.dark button.px-3.py-1.bg-blue-500.dark\:bg-blue-600.text-white.rounded-md {
+  background-color: var(--primary-color) !important;
+  border: 1px solid var(--primary-light);
+}
+
+/* Fix app logo size and styling */
+[data-testid="app-logo"] {
+  height: 28px !important;
+  width: 28px !important;
+  border-radius: 4px;
+  object-fit: contain;
+  margin-right: 0.5rem;
+}
+
+/* Fix app logo size and styling */
+[data-testid="app-logo"],
+.h-10.w-10.mr-3 {
+  height: 40px !important;
+  width: 40px !important;
+  border-radius: 6px;
+  object-fit: contain;
+  margin-right: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.dark [data-testid="app-logo"],
+.dark .h-10.w-10.mr-3 {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 6px rgba(34, 197, 94, 0.3);
+}
+
+/* Improve terminal text styling - make it more compact */
+.terminal-text.text-xs {
+  font-family: var(--font-mono);
+  font-size: 0.65rem !important;
+  line-height: 1.2 !important;
+  margin-top: 0.15rem !important;
+  opacity: 0.9;
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+}
+
+/* Add extra small text size */
+.text-xxs {
+  font-size: 0.65rem !important;
+  line-height: 1.2 !important;
+}
+
+/* Improve app title styling for better hierarchy */
+.text-xl.font-semibold.text-gray-800.dark\:text-gray-100.transition-colors.duration-300 {
+  font-family: var(--font-accent) !important;
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.1rem !important;
+  line-height: 1.25 !important;
+  color: var(--primary-color) !important;
+}
+
+.dark
+  .text-xl.font-semibold.text-gray-800.dark\:text-gray-100.transition-colors.duration-300 {
+  color: var(--primary-color) !important;
+  text-shadow: 0 0 5px rgba(0, 204, 102, 0.4) !important;
+}
+
+/* Fix app logo size and styling */
+[data-testid="app-logo"] {
+  height: 28px !important;
+  width: 28px !important;
+  border-radius: 4px;
+  object-fit: contain;
+  margin-right: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .text-2xl.font-bold.text-gray-800.dark\:text-gray-100.dark\:widget-title.transition-colors.duration-300.flex.items-center {
+    font-size: 1.25rem;
+  }
+
+  .text-2xl.font-bold.text-gray-800.dark\:text-gray-100.dark\:widget-title.transition-colors.duration-300.flex.items-center
+    img {
+    height: 36px;
+  }
+
+  .terminal-text.text-xs.flex.items-center.mt-1 {
+    font-size: 0.7rem;
+  }
+
+  .terminal-text a,
+  .terminal-text
+    [style*="color: #22c55e"]:not(a):not([data-testid="app-indicator"]):not(
+      [data-testid="app-version"]
+    ),
+  .terminal-text [data-testid="app-version"] {
+    margin-bottom: 0.25rem;
+  }
 }
