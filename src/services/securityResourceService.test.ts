@@ -10,7 +10,7 @@ import {
 } from "./securityResourceService";
 
 // Create a proper mock for the data provider
-const createTestDataProvider = () => {
+const mockTestDataProvider = () => {
   const baseProvider = createMockDataProvider();
 
   // Add specialized mock for value points
@@ -28,11 +28,11 @@ const createTestDataProvider = () => {
 
 describe("SecurityResourceService", () => {
   let service: SecurityResourceService;
-  let dataProvider: ReturnType<typeof createTestDataProvider>;
+  let dataProvider: ReturnType<typeof mockTestDataProvider>;
 
   beforeEach(() => {
     // Create a fresh data provider for each test
-    dataProvider = createTestDataProvider();
+    dataProvider = mockTestDataProvider();
     service = new SecurityResourceService(dataProvider);
   });
 
@@ -102,21 +102,21 @@ describe("SecurityResourceService", () => {
           if (component === "availability") {
             const availabilityResource = resources.find(
               (r) =>
-                r.description.toLowerCase().includes("availability") ||
+                r.description?.toLowerCase().includes("availability") ||
                 r.title.toLowerCase().includes("availability")
             );
             expect(availabilityResource).toBeDefined();
           } else if (component === "integrity") {
             const integrityResource = resources.find(
               (r) =>
-                r.description.toLowerCase().includes("integrity") ||
+                r.description?.toLowerCase().includes("integrity") ||
                 r.title.toLowerCase().includes("integrity")
             );
             expect(integrityResource).toBeDefined();
           } else if (component === "confidentiality") {
             const confidentialityResource = resources.find(
               (r) =>
-                r.description.toLowerCase().includes("confidentiality") ||
+                r.description?.toLowerCase().includes("confidentiality") ||
                 r.title.toLowerCase().includes("confidentiality")
             );
             expect(confidentialityResource).toBeDefined();
@@ -128,7 +128,9 @@ describe("SecurityResourceService", () => {
 
   describe("Factory function", () => {
     it("creates a service instance with default data provider when none provided", () => {
-      const defaultService = createSecurityResourceService();
+      const defaultService = createSecurityResourceService(
+        mockTestDataProvider()
+      );
       expect(defaultService).toBeInstanceOf(SecurityResourceService);
 
       // Test methods work with default provider
@@ -141,7 +143,7 @@ describe("SecurityResourceService", () => {
     });
 
     it("creates a service instance with custom data provider", () => {
-      const customProvider = createTestDataProvider();
+      const customProvider = mockTestDataProvider();
       const customService = createSecurityResourceService(customProvider);
 
       expect(customService).toBeInstanceOf(SecurityResourceService);

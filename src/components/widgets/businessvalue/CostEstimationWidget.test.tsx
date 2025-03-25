@@ -83,10 +83,10 @@ describe("CostEstimationWidget", () => {
 
   it("calculates and displays costs based on security levels", () => {
     render(<CostEstimationWidget {...defaultProps} />);
-    
+
     // Get the content and check for cost indicators
     const content = screen.getByTestId("test-cost-estimation").textContent;
-    
+
     // Check for standard cost terms that should be present
     expect(content).toMatch(/capex|capital|investment|initial cost/i);
     expect(content).toMatch(/opex|operational|maintenance|ongoing cost/i);
@@ -96,27 +96,27 @@ describe("CostEstimationWidget", () => {
     // Render with low security levels
     const { rerender } = render(
       <CostEstimationWidget
-        availabilityLevel="Low" as SecurityLevel
-        integrityLevel="Low" as SecurityLevel
-        confidentialityLevel="Low" as SecurityLevel
+        availabilityLevel={"Low" as SecurityLevel}
+        integrityLevel={"Low" as SecurityLevel}
+        confidentialityLevel={"Low" as SecurityLevel}
         testId="test-cost-estimation"
       />
     );
-    
+
     const lowContent = screen.getByTestId("test-cost-estimation").textContent;
-    
+
     // Rerender with high security levels
     rerender(
       <CostEstimationWidget
-        availabilityLevel="High" as SecurityLevel
-        integrityLevel="High" as SecurityLevel
-        confidentialityLevel="High" as SecurityLevel
+        availabilityLevel={"High" as SecurityLevel}
+        integrityLevel={"High" as SecurityLevel}
+        confidentialityLevel={"High" as SecurityLevel}
         testId="test-cost-estimation"
       />
     );
-    
+
     const highContent = screen.getByTestId("test-cost-estimation").textContent;
-    
+
     // Costs should be different between low and high
     expect(lowContent).not.toEqual(highContent);
   });
@@ -124,13 +124,13 @@ describe("CostEstimationWidget", () => {
   it("handles mixed security levels", () => {
     render(
       <CostEstimationWidget
-        availabilityLevel="Low" as SecurityLevel
-        integrityLevel="Moderate" as SecurityLevel
-        confidentialityLevel="High" as SecurityLevel
+        availabilityLevel={"Low" as SecurityLevel}
+        integrityLevel={"Moderate" as SecurityLevel}
+        confidentialityLevel={"High" as SecurityLevel}
         testId="test-cost-estimation"
       />
     );
-    
+
     // Content should exist - we're just checking it renders here
     expect(screen.getByTestId("test-cost-estimation").textContent).not.toBe("");
   });
@@ -144,7 +144,7 @@ describe("CostEstimationWidget", () => {
   // Test breakdown of costs
   it("shows breakdown of costs", () => {
     render(<CostEstimationWidget {...defaultProps} />);
-    
+
     // Test for presence of cost breakdowns
     const content = screen.getByTestId("test-cost-estimation").textContent;
     expect(content).toMatch(/availability|integrity|confidentiality/i);
@@ -154,7 +154,7 @@ describe("CostEstimationWidget", () => {
   it("handles empty security levels gracefully", () => {
     // @ts-ignore - intentionally testing incorrect props
     render(<CostEstimationWidget testId="test-cost-estimation" />);
-    
+
     // Should not crash, component should render something
     expect(screen.getByTestId("test-cost-estimation")).toBeInTheDocument();
   });

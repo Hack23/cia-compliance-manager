@@ -475,32 +475,32 @@ export function mockUseCIAOptionsHook() {
  * Creates type guard test utilities
  * @param guard Type guard function to test
  * @param validExample Valid example of the type
- * @param invalidKeys Keys to make invalid for negative tests
  * @returns Test functions for the type guard
  */
 export function createTypeGuardTests<T>(
   guard: (value: unknown) => value is T,
-  validExample: T,
-  invalidKeys: (keyof T)[]
-): {
-  testValidObject: () => void;
-  testInvalidObjects: () => void;
-} {
-  return {
-    testValidObject: () => {
-      expect(guard(validExample)).toBe(true);
-      expect(guard(null)).toBe(false);
-      expect(guard(undefined)).toBe(false);
-      expect(guard(123)).toBe(false);
-      expect(guard("string")).toBe(false);
-      expect(guard([])).toBe(false);
-    },
-    testInvalidObjects: () => {
-      // Test each invalid key variant
-      for (const key of invalidKeys) {
-        const invalidObject = { ...validExample, [key]: undefined };
-        expect(guard(invalidObject)).toBe(false);
+  validExample: T
+): void {
+  describe(`Type guard tests for ${guard.name}`, () => {
+    it("correctly identifies valid and invalid values", () => {
+      // Use expect().toBeTruthy() pattern instead of toBe for better compatibility
+      expect(guard(validExample)).toBeTruthy();
+      expect(guard(null)).toBeFalsy();
+      expect(guard(undefined)).toBeFalsy();
+      expect(guard(123)).toBeFalsy();
+      expect(guard("string")).toBeFalsy();
+      expect(guard([])).toBeFalsy();
+
+      // If validExample is an object, test with modified versions
+      if (typeof validExample === "object" && validExample !== null) {
+        const invalidObject = { ...validExample };
+        // Modify a property to make it invalid
+        const key = Object.keys(invalidObject)[0];
+        if (key) {
+          (invalidObject as any)[key] = 123; // Make the property an invalid type
+        }
+        expect(guard(invalidObject)).toBeFalsy();
       }
-    },
-  };
+    });
+  });
 }

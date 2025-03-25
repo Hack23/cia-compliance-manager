@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import securityResources from "../data/securityResources";
 import { CIAContentService } from "../services/ciaContentService";
 import { SecurityLevel } from "../types/cia";
 import { CIAComponentType } from "../types/cia-services";
 import { SecurityResource } from "../types/securityResources";
-import securityResources from "../data/securityResources";
 
 /**
  * Hook for accessing CIA content service
@@ -64,9 +64,10 @@ export function useCIAContent() {
             // Filter resources based on component and level
             return securityResources.filter(
               (resource) =>
-                (resource.components?.includes(component) ||
-                  resource.type === component) &&
-                resource.securityLevels?.includes(level)
+                (resource.component === component ||
+                  resource.component === "general") &&
+                (resource.securityLevels?.includes(level) ||
+                  !resource.securityLevels)
             );
           },
         };

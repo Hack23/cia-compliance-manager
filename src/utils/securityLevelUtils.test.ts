@@ -1,4 +1,4 @@
-import type { describe, expect, it, test } from "vitest";
+import { describe, expect, it, test } from "vitest";
 import { SecurityLevel } from "../types/cia";
 import {
   calculateOverallSecurityLevel,

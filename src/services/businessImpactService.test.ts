@@ -3,7 +3,7 @@ import {
   createMockDataProvider,
   TEST_SECURITY_LEVELS,
 } from "../tests/testMocks/mockTypes";
-import { CIAComponentType } from "../types/cia-services";
+import { CIAComponentType, SecurityLevel } from "../types/cia-services";
 import {
   BusinessImpactService,
   createBusinessImpactService,
@@ -203,7 +203,7 @@ describe("BusinessImpactService", () => {
     it("defaults to Moderate level when invalid level provided", () => {
       // Using TypeScript's private method access pattern for testing
       const result = (service as any).getImpactForLevel(
-        "Invalid" as SecurityLevel
+        "Invalid" as unknown as SecurityLevel
       );
 
       expect(result).toBeDefined();

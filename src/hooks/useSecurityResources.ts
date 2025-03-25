@@ -132,9 +132,8 @@ export function useSecurityResources(
         // Apply initial filtering based on the component and security level
         let filtered = allResources.filter(
           (resource) =>
-            (resource.type === component ||
-              (resource.components &&
-                resource.components.includes(component))) &&
+            (resource.component === component ||
+              resource.component === "general") &&
             resource.securityLevels?.includes(level)
         );
 
@@ -190,7 +189,7 @@ export function useSecurityResources(
         result = result.filter(
           (resource) =>
             resource.title.toLowerCase().includes(query) ||
-            resource.description.toLowerCase().includes(query) ||
+            resource.description?.toLowerCase().includes(query) ||
             resource.tags?.some((tag: string) =>
               tag.toLowerCase().includes(query)
             )

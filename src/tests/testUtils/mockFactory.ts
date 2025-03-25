@@ -1,4 +1,9 @@
 import { vi } from "vitest";
+import {
+  CIADataProvider,
+  CIADetails,
+  SecurityLevel,
+} from "../../types/cia-services";
 
 /**
  * Mock the DOM APIs that are commonly needed in tests
@@ -85,4 +90,49 @@ export function createChartMock() {
     __esModule: true,
     default: ChartMock,
   };
+}
+
+/**
+ * Creates a test data provider with mock data for testing
+ *
+ * @returns A mocked CIADataProvider instance
+ */
+export function createTestDataProvider(): CIADataProvider {
+  return {
+    // Remove the getSecurityLevelDetails method that's not in the interface
+    // getSecurityLevelRecommendations: vi.fn().mockResolvedValue([]),
+    availabilityOptions: {} as Record<SecurityLevel, CIADetails>,
+    integrityOptions: {} as Record<SecurityLevel, CIADetails>,
+    confidentialityOptions: {} as Record<SecurityLevel, CIADetails>,
+    roiEstimates: {} as any,
+    getDefaultSecurityIcon: vi.fn(),
+    getDefaultValuePoints: vi.fn(),
+    getComplianceFrameworks: vi.fn().mockResolvedValue([]),
+    getComplianceRequirements: vi.fn().mockResolvedValue({}),
+    getBusinessImpact: vi.fn().mockResolvedValue({}),
+    getSecurityMetrics: vi.fn().mockResolvedValue({}),
+    getSecurityResources: vi.fn().mockResolvedValue([]),
+    getSLAMetrics: vi.fn().mockResolvedValue({}),
+    getCostEstimates: vi.fn().mockResolvedValue({}),
+    getValueCreationMetrics: vi.fn().mockResolvedValue({}),
+    getImplementationDetails: vi.fn().mockResolvedValue({}),
+    getRemediationSteps: vi.fn().mockResolvedValue([]),
+  };
+}
+
+/**
+ * Creates a typed mock object with all methods mocked
+ */
+export function createMock<T extends object>(
+  implementation: Partial<T> = {}
+): T {
+  return {
+    ...Object.fromEntries(
+      Object.getOwnPropertyNames(Object.getPrototypeOf({})).map((key) => [
+        key,
+        vi.fn(),
+      ])
+    ),
+    ...implementation,
+  } as T;
 }

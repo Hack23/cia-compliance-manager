@@ -401,7 +401,7 @@ describe("SecurityMetricsService", () => {
         "High" as SecurityLevel
       );
 
-      expect(highMetrics.score).toBeGreaterThan(lowMetrics.score);
+      expect(highMetrics.score || 0).toBeGreaterThan(lowMetrics.score || 0);
     });
 
     it("should calculate correct total cost based on component costs", () => {
@@ -458,8 +458,10 @@ describe("SecurityMetricsService", () => {
         // Logical validation
         expect(metrics.score).toBeGreaterThanOrEqual(0);
         expect(metrics.maxScore).toBeGreaterThan(0);
-        expect(metrics.score).toBeLessThanOrEqual(metrics.maxScore);
-        expect(metrics.totalCost).toBe(metrics.totalCapex + metrics.totalOpex);
+        expect(metrics.score || 0).toBeLessThanOrEqual(metrics.maxScore || 0);
+        expect(metrics.totalCost).toBe(
+          (metrics.totalCapex || 0) + (metrics.totalOpex || 0)
+        );
       });
     });
 

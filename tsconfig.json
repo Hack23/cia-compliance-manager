@@ -26,7 +26,13 @@
     "strictPropertyInitialization": true,
     "useUnknownInCatchVariables": true,
     "noImplicitReturns": true,
-    "types": ["cypress", "node", "@testing-library/cypress", "vitest/globals"]
+    "types": [
+      "cypress",
+      "node",
+      "@testing-library/cypress",
+      "vitest/globals",
+      "@testing-library/jest-dom"
+    ]
   },
   "include": [
     "src",

@@ -1,27 +1,34 @@
 import { act, renderHook } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { CIAContentService } from "../services/ciaContentService";
 import { useCIAContentService } from "./useCIAContentService";
 
-// Create mocked implementations
+// Mock the CIAContentService methods we need
 const mockCIAService = {
+  // Core methods that the tests rely on
   getComponentDetails: vi.fn().mockReturnValue({ description: "mock details" }),
   getSecurityMetrics: vi.fn().mockReturnValue({ score: 50 }),
   getBusinessImpact: vi.fn().mockReturnValue({ summary: "mock impact" }),
   calculateBusinessImpactLevel: vi.fn().mockReturnValue("Moderate"),
   initialize: vi.fn().mockResolvedValue(undefined),
-};
+  // Additional methods needed for the tests
+  getComponentContent: vi.fn(),
+  getCIAOptions: vi.fn(),
+  getRecommendations: vi.fn(),
+  getSecurityLevelDescription: vi.fn(),
+  // Add more methods as needed for specific tests
+} as unknown as CIAContentService; // Type assertion to CIAContentService
 
 // Mock the imports needed by the hook
 vi.mock("../services/ciaContentService", () => ({
-  __esModule: true,
-  CIAContentService: vi.fn().mockImplementation(() => mockCIAService),
-  createCIAContentService: vi.fn().mockImplementation(() => mockCIAService),
+  // Use the function directly instead of mocking the class
+  createCIAContentService: vi.fn().mockReturnValue(mockCIAService),
 }));
 
 // Import the mocks directly to be able to modify their behavior
 const mockedModule = vi.mocked(await import("../services/ciaContentService"));
 
-// Update to mock the utils module instead of errorUtils directly
+// Mock the utils module
 vi.mock("../utils", () => ({
   // Provide both functions used from the utils module
   toErrorObject: vi.fn((err) =>
@@ -37,9 +44,7 @@ describe("useCIAContentService", () => {
     vi.clearAllMocks();
 
     // Reset the createCIAContentService implementation to default
-    mockedModule.createCIAContentService.mockImplementation(
-      () => mockCIAService
-    );
+    mockedModule.createCIAContentService.mockReturnValue(mockCIAService);
   });
 
   it("should return a CIAContentService instance", async () => {

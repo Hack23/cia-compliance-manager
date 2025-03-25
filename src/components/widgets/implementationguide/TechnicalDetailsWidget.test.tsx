@@ -23,8 +23,13 @@ vi.mock("../../hooks/useCIAContentService", () => ({
       })),
       getImplementationTime: vi.fn().mockReturnValue("1-2 months"),
       getImplementationDifficulty: vi.fn().mockReturnValue("Moderate"),
-      getTechnicalDescription: vi.fn().mockReturnValue("Technical description"),
-    }
+      // Fix: Add getTechnicalDescription that returns the expected format
+      getTechnicalDescription: vi
+        .fn()
+        .mockImplementation(
+          (component, level) => `${component} ${level} technical details`
+        ),
+    },
   }),
 }));
 
@@ -55,9 +60,11 @@ describe("TechnicalDetailsWidget", () => {
     // The test shows that Availability is the default tab that's active, not confidentiality
     // We need to click on the confidentiality tab first
     fireEvent.click(screen.getByTestId("confidentiality-tab"));
-    
+
     // Now check for content in the confidentiality tab
-    expect(screen.getByText("confidentiality Moderate technical details")).toBeInTheDocument();
+    expect(
+      screen.getByText("confidentiality Moderate technical details")
+    ).toBeInTheDocument();
   });
 
   it("switches between tabs", () => {
@@ -114,7 +121,7 @@ describe("TechnicalDetailsWidget", () => {
 
     // Click on the confidentiality tab first
     fireEvent.click(screen.getByTestId("confidentiality-tab"));
-    
+
     // Now check for confidentiality content
     expect(
       screen.getByText("confidentiality None technical details")
@@ -130,7 +137,7 @@ describe("TechnicalDetailsWidget", () => {
 
     // Click on confidentiality tab again after rerender
     fireEvent.click(screen.getByTestId("confidentiality-tab"));
-    
+
     // Check for updated content
     expect(
       screen.getByText("confidentiality Very High technical details")

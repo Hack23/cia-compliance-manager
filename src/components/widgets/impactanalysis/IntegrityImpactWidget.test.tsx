@@ -46,6 +46,8 @@ describe("IntegrityImpactWidget", () => {
       integrityLevel: "Moderate" as SecurityLevel,
       availabilityLevel: "Moderate" as SecurityLevel,
       confidentialityLevel: "Moderate" as SecurityLevel,
+      // Add the missing level property
+      level: "Moderate" as SecurityLevel,
       testId: "test-integrity-widget",
     };
 

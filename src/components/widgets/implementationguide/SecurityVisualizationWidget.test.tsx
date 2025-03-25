@@ -110,9 +110,7 @@ describe("SecurityVisualizationWidget", () => {
     expect(riskScore).toBeInTheDocument();
 
     // Check for risk level which should be present
-    expect(screen.getByTestId("risk-score-value")).toHaveTextContent(
-      /\d+\/100/
-    );
+    expect(screen.getByTestId("risk-score-value")).toHaveTextContent("75/100");
     expect(screen.getByTestId("risk-level")).toBeInTheDocument();
   });
 

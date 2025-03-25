@@ -2,94 +2,78 @@ import React from "react";
 import { SecurityResource } from "../../types/securityResources";
 
 interface ResourceCardProps {
-  /**
-   * Security resource to display
-   */
   resource: SecurityResource;
-
-  /**
-   * Optional color theme for the card
-   */
-  color?: string;
-
-  /**
-   * Optional test ID for automated testing
-   */
+  onClick?: (resource: SecurityResource) => void;
+  className?: string;
   testId?: string;
 }
 
-/**
- * Component for displaying a security resource card
- */
+// Helper function to truncate text with ellipsis
+const truncateText = (text: string | undefined, maxLength: number): string => {
+  if (!text) return "";
+  return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
+};
+
 const ResourceCard: React.FC<ResourceCardProps> = ({
   resource,
-  color = "blue",
+  onClick,
+  className = "",
   testId,
 }) => {
-  /**
-   * Truncate text to specified length and add ellipsis
-   */
-  const truncateText = (text: string, maxLength: number): string => {
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength) + "...";
+  const handleClick = () => {
+    if (onClick) {
+      onClick(resource);
+    } else {
+      window.open(resource.url, "_blank", "noopener,noreferrer");
+    }
   };
 
   return (
     <div
-      className={`p-3 bg-white dark:bg-gray-900 rounded-lg border border-${color}-200 dark:border-${color}-800 shadow-sm hover:shadow-md transition-shadow`}
-      data-testid={testId}
+      className={`bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mb-4 hover:shadow-lg transition-shadow ${className}`}
+      onClick={handleClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          handleClick();
+        }
+      }}
+      data-testid={testId || "resource-item"}
     >
       <div className="flex justify-between items-start mb-2">
-        <h4 className="font-medium text-gray-900 dark:text-gray-100">
-          {truncateText(resource.title, 40)}
-        </h4>
-        {resource.type && (
-          <span
-            className={`inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-${color}-100 text-${color}-800 dark:bg-${color}-900 dark:bg-opacity-50 dark:text-${color}-300`}
-          >
-            {resource.type}
-          </span>
-        )}
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+          {resource.title}
+        </h3>
+        <div className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 px-2 py-1 rounded">
+          {resource.type || "General"}
+        </div>
       </div>
 
-      <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-        {truncateText(resource.description, 100)}
+      <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+        {truncateText(resource.description || "", 100)}
       </p>
 
-      <div className="flex justify-between items-center">
-        {/* Resource source */}
+      <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+        {resource.component && (
+          <span className="mr-2">Component: {resource.component}</span>
+        )}
         {resource.source && (
-          <span className="text-xs text-gray-500 dark:text-gray-500">
-            Source: {resource.source}
-          </span>
+          <span className="mr-2">Source: {resource.source}</span>
         )}
-
-        {/* Resource link */}
-        {resource.url && (
-          <a
-            href={resource.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`text-sm font-medium text-${color}-600 hover:text-${color}-700 dark:text-${color}-400 dark:hover:text-${color}-300`}
-          >
-            View Resource →
-          </a>
-        )}
+        {resource.level && <span>Level: {resource.level}</span>}
       </div>
 
-      {/* Tags */}
-      {resource.tags && resource.tags.length > 0 && (
-        <div className="mt-2 flex flex-wrap gap-1">
-          {resource.tags.map((tag, index) => (
-            <span
-              key={index}
-              className={`px-2 py-0.5 text-xs rounded-full bg-${color}-50 text-${color}-700 dark:bg-${color}-900 dark:bg-opacity-20 dark:text-${color}-300`}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
+      <div className="mt-2 flex flex-wrap">
+        {resource.tags?.map((tag, index) => (
+          <span
+            key={index}
+            className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2 py-1 rounded mr-1 mb-1"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
     </div>
   );
 };

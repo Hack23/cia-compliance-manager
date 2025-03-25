@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { BUSINESS_IMPACT_TEST_IDS } from "../../../constants/testIds";
+import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { CIAComponentType } from "../../../types/cia-services";
 import BusinessImpactAnalysisWidget from "./BusinessImpactAnalysisWidget";
@@ -30,7 +31,8 @@ vi.mock("../../../hooks/useCIAContentService", () => ({
         rto: component === "availability" ? `${level} RTO` : undefined,
         rpo: component === "availability" ? `${level} RPO` : undefined,
         mttr: component === "availability" ? `${level} MTTR` : undefined,
-        annualRevenueLoss: component === "availability" ? "$100,000" : undefined,
+        annualRevenueLoss:
+          component === "availability" ? "$100,000" : undefined,
         uptime: component === "availability" ? "99.9%" : undefined,
         validationMethod:
           component === "integrity" ? `${level} Validation` : undefined,
@@ -43,7 +45,9 @@ vi.mock("../../../hooks/useCIAContentService", () => ({
           (component: CIAComponentType, level: SecurityLevel) =>
             `${level} ${component} description`
         ),
-      calculateBusinessImpactLevel: vi.fn().mockImplementation(() => "Medium Impact"),
+      calculateBusinessImpactLevel: vi
+        .fn()
+        .mockImplementation(() => "Medium Impact"),
     },
     error: null,
     isLoading: false,
@@ -162,9 +166,13 @@ describe("BusinessImpactAnalysisWidget", () => {
     );
 
     // Check if the tabs exist before trying to interact with them
-    const considerationsTab = screen.queryByTestId(BUSINESS_IMPACT_TEST_IDS.TAB_CONSIDERATIONS);
-    const benefitsTab = screen.queryByTestId(BUSINESS_IMPACT_TEST_IDS.TAB_BENEFITS);
-    
+    const considerationsTab = screen.queryByTestId(
+      BUSINESS_IMPACT_TEST_IDS.TAB_CONSIDERATIONS
+    );
+    const benefitsTab = screen.queryByTestId(
+      BUSINESS_IMPACT_TEST_IDS.TAB_BENEFITS
+    );
+
     // If the tabs don't exist, skip the test with a soft pass
     if (!considerationsTab || !benefitsTab) {
       console.log("Tabs not found - skipping test");
@@ -217,8 +225,10 @@ describe("BusinessImpactAnalysisWidget", () => {
     );
 
     // Should indicate high impact - using a more resilient approach with optional chaining
-    const impactIndicator = screen.queryByTestId(BUSINESS_IMPACT_TEST_IDS.IMPACT_LEVEL_INDICATOR_PREFIX);
-    
+    const impactIndicator = screen.queryByTestId(
+      BUSINESS_IMPACT_TEST_IDS.IMPACT_LEVEL_INDICATOR_PREFIX
+    );
+
     if (impactIndicator) {
       expect(impactIndicator.textContent).toMatch(/High Impact|Medium Impact/i);
     } else {
@@ -234,6 +244,7 @@ describe("BusinessImpactAnalysisWidget", () => {
       ciaContentService: null,
       error: new Error("Test error"),
       isLoading: false,
+      refresh: vi.fn(), // Add the missing refresh method
     });
 
     render(
@@ -245,7 +256,9 @@ describe("BusinessImpactAnalysisWidget", () => {
     );
 
     // Should render an error message or gracefully handle the error
-    const content = screen.getByTestId("business-impact-analysis-widget").textContent;
+    const content = screen.getByTestId(
+      "business-impact-analysis-widget"
+    ).textContent;
     expect(content).toMatch(/error|unable|failed|unavailable/i);
   });
 });

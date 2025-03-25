@@ -1,56 +1,55 @@
 /**
- * Vitest setup file
- *
- * This file runs before any tests are executed and configures the testing environment.
+ * Global Vitest setup file
+ * This file runs before all tests to set up the testing environment
  */
+import "@testing-library/jest-dom"; // This adds the matchers to Vitest's expect
+import * as matchers from "@testing-library/jest-dom/matchers";
+import { expect, vi } from "vitest";
+
+// Add all jest-dom matchers to Vitest
+// No need for typecasting here, just directly extend
+expect.extend(matchers);
+
+// Set up common mocks that all tests might need
+global.ResizeObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));
+
+// Mock canvas
+HTMLCanvasElement.prototype.getContext = vi.fn().mockReturnValue({
+  canvas: { width: 800, height: 600 },
+  clearRect: vi.fn(),
+  fillRect: vi.fn(),
+  fill: vi.fn(),
+  beginPath: vi.fn(),
+  arc: vi.fn(),
+  stroke: vi.fn(),
+  moveTo: vi.fn(),
+  lineTo: vi.fn(),
+  setLineDash: vi.fn(),
+  measureText: vi.fn().mockReturnValue({ width: 50 }),
+  fillText: vi.fn(),
+  save: vi.fn(),
+  restore: vi.fn(),
+  translate: vi.fn(),
+  rotate: vi.fn(),
+});
+
+// Mock intersection observer
+global.IntersectionObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));
+
+// Vitest specific globals
+(window as any).VITEST_COVERAGE = true;
 
 // Import necessary setup utilities
 import "@testing-library/jest-dom";
-import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
-import { expect, vi, type JestAssertion } from "vitest";
-
-// Configure global jest matchers
-expect.extend(matchers);
-
-// Properly extend TypeScript types for Vitest
-declare module "vitest" {
-  // Using the JestAssertion interface which is the public-facing interface for assertions
-  interface Assertion extends JestAssertion<any> {
-    toBeInTheDocument(): Assertion;
-    toHaveTextContent(text: string | RegExp): Assertion;
-    toBeVisible(): Assertion;
-    toHaveClass(className: string): Assertion;
-    toHaveAttribute(attr: string, value?: string): Assertion;
-    toHaveStyle(css: Record<string, string | number>): Assertion;
-    toBeDisabled(): Assertion;
-    toBeEnabled(): Assertion;
-    toBeChecked(): Assertion;
-    toBePartiallyChecked(): Assertion;
-    toBeEmpty(): Assertion;
-    toBeEmptyDOMElement(): Assertion;
-    toBeInvalid(): Assertion;
-    toBeRequired(): Assertion;
-    toBeValid(): Assertion;
-    toContainElement(element: HTMLElement | null): Assertion;
-    toContainHTML(htmlText: string): Assertion;
-    toHaveFocus(): Assertion;
-    toHaveFormValues(expectedValues: Record<string, unknown>): Assertion;
-    toHaveValue(value?: string | string[] | number): Assertion;
-    toBeInTheDOM(): Assertion;
-    toHaveDisplayValue(
-      value: string | RegExp | Array<string | RegExp>
-    ): Assertion;
-  }
-}
-
-// Mock toHaveNoViolations function since jest-axe is not available
-expect.extend({
-  toHaveNoViolations: () => ({
-    pass: true,
-    message: () => "",
-  }),
-});
 
 // Setup mock for window.matchMedia
 Object.defineProperty(window, "matchMedia", {
@@ -72,48 +71,6 @@ Object.defineProperty(window, "scrollTo", {
   writable: true,
   value: vi.fn(),
 });
-
-// Mock IntersectionObserver
-class MockIntersectionObserver {
-  readonly root: Element | null = null;
-  readonly rootMargin: string = "";
-  readonly thresholds: ReadonlyArray<number> = [];
-
-  constructor(
-    _callback: IntersectionObserverCallback,
-    options?: IntersectionObserverInit
-  ) {
-    // Just initialize properties if options are provided
-    if (options) {
-      if (options.root instanceof Element) this.root = options.root;
-      if (options.rootMargin) this.rootMargin = options.rootMargin;
-      if (options.threshold) {
-        this.thresholds = Array.isArray(options.threshold)
-          ? options.threshold
-          : [options.threshold];
-      }
-    }
-  }
-
-  observe = vi.fn();
-  unobserve = vi.fn();
-  disconnect = vi.fn();
-  takeRecords = vi.fn(() => []);
-}
-
-// Add IntersectionObserver mock to global
-global.IntersectionObserver = MockIntersectionObserver;
-
-// Mock ResizeObserver
-class MockResizeObserver {
-  constructor(_callback: ResizeObserverCallback) {}
-  observe = vi.fn();
-  unobserve = vi.fn();
-  disconnect = vi.fn();
-}
-
-// Add ResizeObserver mock to global
-global.ResizeObserver = MockResizeObserver;
 
 // Configure console to prevent errors during tests
 // This prevents test output from being cluttered with expected console errors

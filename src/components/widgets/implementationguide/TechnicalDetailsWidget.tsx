@@ -79,17 +79,22 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         };
       }
 
+      // Use getTechnicalDescription for the description field
+      const technicalDescription =
+        ciaContentService.getTechnicalDescription?.(component, level) ||
+        "Technical details not available";
+
       // Return result from service or fallback to defaults
-      return (
-        ciaContentService.getTechnicalImplementation?.(component, level) || {
-          description: "Technical details not available",
-          implementationSteps: [],
-          expertiseLevel: "Standard",
-          developmentEffort: "Medium",
-          maintenanceLevel: "Medium",
-          recommendedTechStack: {},
-        }
-      );
+      return {
+        description: technicalDescription,
+        implementationSteps:
+          ciaContentService.getTechnicalImplementation?.(component, level)
+            ?.implementationSteps || [],
+        expertiseLevel: "Standard",
+        developmentEffort: "Medium",
+        maintenanceLevel: "Medium",
+        recommendedTechStack: {},
+      };
     }, [ciaContentService, component, level]);
 
     return technicalImplementation;

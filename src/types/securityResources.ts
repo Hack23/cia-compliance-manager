@@ -2,11 +2,15 @@ import { SecurityLevel } from "./cia";
 import { CIAComponentType } from "./cia-services";
 
 /**
- * Type for a security resource
+ * Security resource type definitions
+ */
+
+/**
+ * Security resource interface
  */
 export interface SecurityResource {
   /**
-   * Unique identifier for the resource
+   * Resource ID
    */
   id: string;
 
@@ -16,34 +20,49 @@ export interface SecurityResource {
   title: string;
 
   /**
+   * Resource URL
+   */
+  url: string;
+
+  /**
    * Resource description
    */
-  description: string;
+  description?: string;
 
   /**
-   * URL to access the resource
-   */
-  url?: string;
-
-  /**
-   * Resource type (e.g., Documentation, Tool, Template)
+   * Resource type or category
    */
   type?: string;
 
   /**
-   * Source of the resource
-   */
-  source?: string;
-
-  /**
-   * Tags associated with the resource
+   * Resource tags
    */
   tags?: string[];
 
   /**
-   * CIA components this resource applies to
+   * CIA component relevance
    */
-  components?: string[];
+  component?: "availability" | "integrity" | "confidentiality" | "general";
+
+  /**
+   * Security level relevance
+   */
+  level?: string;
+
+  /**
+   * Resource source/provider
+   */
+  source?: string;
+
+  /**
+   * Resource category
+   */
+  category?: string;
+
+  /**
+   * Resource priority/relevance score (0-100)
+   */
+  priority?: number;
 
   /**
    * Security levels this resource applies to
@@ -51,24 +70,24 @@ export interface SecurityResource {
   securityLevels?: string[];
 
   /**
+   * Components this resource applies to (multiple possible)
+   */
+  components?: string[];
+
+  /**
+   * Levels this resource is relevant for
+   */
+  relevantLevels?: string[];
+
+  /**
    * Format of the resource (e.g., PDF, Website, Video)
    */
   format?: string;
 
   /**
-   * License information
+   * Resource relevance score
    */
-  license?: string;
-
-  /**
-   * Rating (0-5)
-   */
-  rating?: number;
-
-  /**
-   * Date added
-   */
-  dateAdded?: string;
+  relevance?: number;
 
   /**
    * Implementation complexity (1-5)
@@ -79,21 +98,6 @@ export interface SecurityResource {
    * Whether the resource is premium/paid
    */
   isPremium?: boolean;
-  
-  /**
-   * Resource priority (1-5)
-   */
-  priority?: number;
-  
-  /**
-   * Resource category for grouping
-   */
-  category?: string;
-  
-  /**
-   * Relevant security levels (legacy field)
-   */
-  relevantLevels?: string[];
 }
 
 /**
@@ -164,4 +168,19 @@ export interface ResourceCategory {
    * Category icon
    */
   icon?: string;
+}
+
+/**
+ * Enhanced security resource with additional properties for internal use
+ */
+export interface EnhancedSecurityResource extends SecurityResource {
+  /**
+   * Relevance score for sorting purposes (0-100)
+   */
+  relevance?: number;
+
+  /**
+   * Computed score based on match criteria
+   */
+  score?: number;
 }

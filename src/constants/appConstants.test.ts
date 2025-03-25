@@ -97,14 +97,22 @@ describe("Application Constants", () => {
   it("should have consistent naming conventions across constants", () => {
     // Check widget titles match expected format
     Object.keys(WIDGET_TITLES).forEach((key) => {
-      expect(typeof WIDGET_TITLES[key]).toBe("string");
-      expect(WIDGET_TITLES[key].length).toBeGreaterThan(0);
+      expect(typeof WIDGET_TITLES[key as keyof typeof WIDGET_TITLES]).toBe(
+        "string"
+      );
+      expect(
+        WIDGET_TITLES[key as keyof typeof WIDGET_TITLES].length
+      ).toBeGreaterThan(0);
     });
 
     // Check widget icons match expected format
     Object.keys(WIDGET_ICONS).forEach((key) => {
-      expect(typeof WIDGET_ICONS[key]).toBe("string");
-      expect(WIDGET_ICONS[key].length).toBeGreaterThan(0);
+      expect(typeof WIDGET_ICONS[key as keyof typeof WIDGET_ICONS]).toBe(
+        "string"
+      );
+      expect(
+        WIDGET_ICONS[key as keyof typeof WIDGET_ICONS].length
+      ).toBeGreaterThan(0);
     });
   });
 });

@@ -1,16 +1,20 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockDataProvider } from "../tests/testMocks/mockTypes";
+import { createTestDataProvider } from "../tests/testUtils/mockFactory";
 import { createTestComplianceService } from "../tests/testUtils/serviceTestUtils";
-import { SecurityLevel } from "../types/cia";
+import { getSecurityLevelValue, SecurityLevel } from "../types/cia";
 import { CIADataProvider, CIADetails } from "../types/cia-services";
 import {
   ComplianceService,
   createComplianceService,
 } from "./complianceService";
-import { ComplianceServiceAdapter } from "./ComplianceServiceAdapter";
+import {
+  ComplianceServiceAdapter,
+  FrameworkComplianceStatus,
+} from "./ComplianceServiceAdapter";
 import { ComplianceServiceStatic } from "./complianceTestHelpers";
 
-// Convert from hoisted to a regular object
+// Define mock compliance data as a regular object
 const mockComplianceData = {
   frameworks: {
     "ISO 27001": {
@@ -231,7 +235,7 @@ const mockComplianceData = {
   },
 };
 
-// Create a proper mock data provider that matches CIADataProvider interface
+// Create a proper mock detail function
 const createMockDetail = (
   description: string,
   technical: string
@@ -281,24 +285,6 @@ const mockDataProvider: CIADataProvider = {
   // Mock methods
   getDefaultSecurityIcon: vi.fn(),
   getDefaultValuePoints: vi.fn(),
-};
-
-// The test needs FrameworkComplianceStatus type but should import from the service
-type FrameworkComplianceStatus =
-  | "compliant"
-  | "partially-compliant"
-  | "non-compliant";
-
-// Helper function to get security level value (since it's protected in BaseService)
-const getSecurityLevelValue = (level: SecurityLevel): number => {
-  const levelMap: Record<SecurityLevel, number> = {
-    None: 0,
-    Low: 1,
-    Moderate: 2,
-    High: 3,
-    "Very High": 4,
-  };
-  return levelMap[level] || 0;
 };
 
 // Define the interface for our extended test service with the methods the tests expect
@@ -1355,8 +1341,6 @@ describe("ComplianceService", () => {
   });
 });
 
-import { createTestDataProvider } from "../data/testDataProvider";
-
 describe("ComplianceService", () => {
   let service: ExtendedComplianceService;
 
@@ -1862,7 +1846,9 @@ describe("ComplianceService", () => {
   let complianceService: ComplianceService;
 
   beforeEach(() => {
-    complianceService = new ComplianceService();
+    // Before the test that's failing:
+    const dataProvider = createTestDataProvider();
+    complianceService = new ComplianceService(dataProvider);
   });
 
   describe("getComplianceStatus", () => {
@@ -1910,7 +1896,7 @@ describe("ComplianceService", () => {
         "Low" as SecurityLevel
       );
 
-      expect(result.remediationSteps.length).toBeGreaterThan(0);
+      expect(result.remediationSteps?.length || 0).toBeGreaterThan(0);
     });
 
     it("should include requirements based on compliance status", () => {
@@ -1920,7 +1906,7 @@ describe("ComplianceService", () => {
         "Moderate" as SecurityLevel
       );
 
-      expect(result.requirements.length).toBeGreaterThan(0);
+      expect(result.requirements?.length || 0).toBeGreaterThan(0);
     });
   });
 
@@ -2051,7 +2037,6 @@ describe("ComplianceService", () => {
         "Unknown Framework",
         "availability"
       );
-
       expect(level).toBe("Moderate");
     });
   });
@@ -2060,7 +2045,6 @@ describe("ComplianceService", () => {
 describe("getComplianceStatus", () => {
   // Create service instance before each test
   let service: ComplianceService;
-
   beforeEach(() => {
     service = createTestComplianceService();
   });
@@ -2071,7 +2055,6 @@ describe("getComplianceStatus", () => {
       "High" as SecurityLevel,
       "High" as SecurityLevel
     );
-
     expect(result.status).toBe("Fully compliant with all frameworks");
     expect(result.complianceScore).toBeGreaterThan(90);
     expect(result.compliantFrameworks.length).toBeGreaterThan(0);
@@ -2083,7 +2066,6 @@ describe("getComplianceStatus", () => {
       "None" as SecurityLevel,
       "None" as SecurityLevel
     );
-
     expect(result.status).toBe("Non-compliant with all frameworks");
     expect(result.complianceScore).toBeLessThan(30);
     expect(result.compliantFrameworks.length).toBe(0);
@@ -2093,29 +2075,23 @@ describe("getComplianceStatus", () => {
 describe("getFrameworkRequiredLevel", () => {
   // Create service instance before the test
   let service: ComplianceService;
-
   beforeEach(() => {
     service = createTestComplianceService();
   });
 
   it("should return 'Moderate' for unknown frameworks", () => {
-    const service = createComplianceService();
     const level = service.getFrameworkRequiredLevel(
       "Unknown Framework",
       "availability"
     );
-
     expect(level).toBe("Moderate");
   });
 
   it("should return the correct level for known frameworks", () => {
-    const service = createComplianceService();
-
     // Check NIST CSF requirement for availability (should be Low)
     expect(service.getFrameworkRequiredLevel("NIST CSF", "availability")).toBe(
       "Low"
     );
-
     // Check HIPAA requirement for confidentiality (should be High)
     expect(service.getFrameworkRequiredLevel("HIPAA", "confidentiality")).toBe(
       "High"

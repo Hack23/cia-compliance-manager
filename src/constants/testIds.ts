@@ -818,16 +818,19 @@ export const SECURITY_RESOURCES_TEST_IDS = {
   LOADING: "security-resources-loading",
   ERROR: "security-resources-error",
   OVERVIEW: "security-resources-overview",
-  SECURITY_LEVEL: "security-resources-security-level",
+  SECURITY_LEVEL: "security-resources-level",
   VALUE_POINT: "security-resources-value-point",
   NO_RESOURCES: "security-resources-no-resources",
   RESOURCE_GROUP: "security-resources-group",
   RESOURCE_ITEM: "security-resources-item",
-  IMPLEMENTATION_STEPS: "security-resources-implementation-steps",
-  IMPLEMENTATION_STEP: "security-resources-implementation-step",
-  IMPLEMENTATION_EFFORT: "security-resources-implementation-effort",
-  REQUIRED_EXPERTISE: "security-resources-required-expertise",
-  VIEW_ALL_BUTTON: "security-resources-view-all-button",
+  RESOURCE_COUNT: "security-resources-count",
+  RESOURCE_TITLE: "security-resources-title",
+  RESOURCE_DESCRIPTION: "security-resources-description",
+  VIEW_ALL_BUTTON: "security-resources-view-all",
+  // Add missing properties
+  SECURITY_RESOURCES_WIDGET: "security-resources-widget",
+  RESOURCE_CATEGORY_FILTER: "resource-category-filter",
+  RESOURCE_SEARCH: "resource-search",
 };
 
 // ---------------------------------------------------------------

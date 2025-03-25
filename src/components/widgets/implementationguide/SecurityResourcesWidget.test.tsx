@@ -1,12 +1,12 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { SECURITY_RESOURCES_TEST_IDS } from "../../../constants/testIds";
-import { SecurityResource } from "../../../services/securityResourceService";
 import { SecurityLevel } from "../../../types/cia"; // Import SecurityLevel type
+import { SecurityResource } from "../../../types/securityResources";
 import SecurityResourcesWidget from "./SecurityResourcesWidget";
 
 // Mock the ErrorBoundary
-vi.mock('react-error-boundary', () => ({
+vi.mock("react-error-boundary", () => ({
   useErrorBoundary: () => ({ showBoundary: vi.fn() }),
 }));
 
@@ -110,7 +110,7 @@ vi.mock("../../services/ciaContentService", () => {
         LOW: { returnRate: "50%", description: "Low ROI" },
         MODERATE: { returnRate: "200%", description: "Moderate ROI" },
         HIGH: { returnRate: "350%", description: "High ROI" },
-        VERY_HIGH: { returnRate: "500%", description: "Very High ROI" }
+        VERY_HIGH: { returnRate: "500%", description: "Very High ROI" },
       }),
     })),
   };
@@ -252,7 +252,7 @@ describe("SecurityResourcesWidget", () => {
     availabilityLevel: "High" as SecurityLevel,
     integrityLevel: "High" as SecurityLevel,
     confidentialityLevel: "High" as SecurityLevel,
-    testId: "security-resources-test"
+    testId: "security-resources-test",
   };
 
   it("renders the widget with resources", () => {
@@ -279,7 +279,7 @@ describe("SecurityResourcesWidget", () => {
     integrityLevel: "Moderate" as SecurityLevel,
     confidentialityLevel: "Moderate" as SecurityLevel,
     filter: "compliance",
-    testId: "security-resources-test"
+    testId: "security-resources-test",
   };
 
   it("filters resources by category", () => {
@@ -350,10 +350,10 @@ describe("SecurityResourcesWidget", () => {
     const mockResources = [
       // ...resources mock
     ];
-    
+
     // Setup mocks
     // ...existing code...
-    
+
     render(
       <SecurityResourcesWidget
         availabilityLevel={"Low" as SecurityLevel}
@@ -362,13 +362,13 @@ describe("SecurityResourcesWidget", () => {
         // Remove the securityLevel prop that was here
       />
     );
-    
+
     // ...existing code...
   });
 
   test("displays sorted resources by relevance", async () => {
     // ...existing code...
-    
+
     render(
       <SecurityResourcesWidget
         availabilityLevel={"High" as SecurityLevel}
@@ -377,7 +377,7 @@ describe("SecurityResourcesWidget", () => {
         // Remove the securityLevel prop that was here
       />
     );
-    
+
     // ...existing code...
   });
 });

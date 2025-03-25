@@ -79,7 +79,7 @@ export default defineConfig({
     test: {
       globals: true,
       environment: "jsdom",
-      setupFiles: ["./src/tests/vitest-setup.ts"],
+      setupFiles: ["./src/tests/vitest-setup.ts", "./src/tests/setup-tests.ts"],
       include: ["src/**/*.test.{ts,tsx}"],
       coverage: {
         provider: "v8",
@@ -93,7 +93,7 @@ export default defineConfig({
           "**/react/**",
           "**/react-dom/**",
           "**/scheduler/**",
-          "**/jsx-runtime*",
+          "**/*jsx-runtime*",
           "dist/",
           "cypress/**",
           "scripts/",
@@ -131,6 +131,11 @@ export default defineConfig({
       ],
       outputFile: {
         html: "./docs/test-results/index.html",
+      },
+      // Configure types to ensure testing library matchers are recognized
+      typecheck: {
+        include: ["**/*.{test,spec}.{ts,tsx}"],
+        tsconfig: "./tsconfig.json",
       },
     },
   }),

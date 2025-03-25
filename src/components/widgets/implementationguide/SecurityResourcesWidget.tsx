@@ -171,7 +171,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       filtered = filtered.filter(
         (resource) =>
           resource.title.toLowerCase().includes(normalizedSearch) ||
-          resource.description.toLowerCase().includes(normalizedSearch) ||
+          resource.description?.toLowerCase().includes(normalizedSearch) ||
           (resource.tags &&
             resource.tags.some((tag) =>
               tag.toLowerCase().includes(normalizedSearch)

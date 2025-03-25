@@ -58,7 +58,9 @@ describe("ValueCreationWidget", () => {
   it("displays value creation title", () => {
     render(<ValueCreationWidget {...defaultProps} />);
     expect(
-      screen.getByText(/value creation|value|roi|return on investment/i, { exact: false })
+      screen.getByText(/value creation|value|roi|return on investment/i, {
+        exact: false,
+      })
     ).toBeInTheDocument();
   });
 
@@ -66,27 +68,27 @@ describe("ValueCreationWidget", () => {
     // Render with low security levels
     const { rerender } = render(
       <ValueCreationWidget
-        availabilityLevel="Low" as SecurityLevel
-        integrityLevel="Low" as SecurityLevel
-        confidentialityLevel="Low" as SecurityLevel
+        availabilityLevel={"Low" as SecurityLevel}
+        integrityLevel={"Low" as SecurityLevel}
+        confidentialityLevel={"Low" as SecurityLevel}
         testId="test-value-creation"
       />
     );
-    
+
     const lowContent = screen.getByTestId("test-value-creation").textContent;
-    
+
     // Rerender with high security levels
     rerender(
       <ValueCreationWidget
-        availabilityLevel="High" as SecurityLevel
-        integrityLevel="High" as SecurityLevel
-        confidentialityLevel="High" as SecurityLevel
+        availabilityLevel={"High" as SecurityLevel}
+        integrityLevel={"High" as SecurityLevel}
+        confidentialityLevel={"High" as SecurityLevel}
         testId="test-value-creation"
       />
     );
-    
+
     const highContent = screen.getByTestId("test-value-creation").textContent;
-    
+
     // ROI information should be different between low and high
     expect(lowContent).not.toEqual(highContent);
   });
@@ -94,13 +96,13 @@ describe("ValueCreationWidget", () => {
   it("handles mixed security levels", () => {
     render(
       <ValueCreationWidget
-        availabilityLevel="Low" as SecurityLevel
-        integrityLevel="Moderate" as SecurityLevel
-        confidentialityLevel="High" as SecurityLevel
+        availabilityLevel={"Low" as SecurityLevel}
+        integrityLevel={"Moderate" as SecurityLevel}
+        confidentialityLevel={"High" as SecurityLevel}
         testId="test-value-creation"
       />
     );
-    
+
     // Content should exist - we're just checking it renders here
     expect(screen.getByTestId("test-value-creation").textContent).not.toBe("");
   });
@@ -114,7 +116,7 @@ describe("ValueCreationWidget", () => {
   // Test for ROI metrics display
   it("displays ROI metrics", () => {
     render(<ValueCreationWidget {...defaultProps} />);
-    
+
     // Test for presence of ROI metrics
     const content = screen.getByTestId("test-value-creation").textContent;
     expect(content).toMatch(/return|roi|value|benefit|saving/i);
@@ -124,7 +126,7 @@ describe("ValueCreationWidget", () => {
   it("handles empty security levels gracefully", () => {
     // @ts-ignore - intentionally testing incorrect props
     render(<ValueCreationWidget testId="test-value-creation" />);
-    
+
     // Should not crash, component should render something
     expect(screen.getByTestId("test-value-creation")).toBeInTheDocument();
   });

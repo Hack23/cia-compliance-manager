@@ -161,7 +161,18 @@ describe("ComplianceStatusWidget", () => {
   it("handles loading state", () => {
     // Override the mock to simulate loading
     vi.mocked(useComplianceService).mockImplementationOnce(() => ({
-      complianceService: null,
+      complianceService: {
+        getComplianceStatus: vi.fn().mockReturnValue({
+          status: "Unknown",
+          compliantFrameworks: [],
+          partiallyCompliantFrameworks: [],
+          nonCompliantFrameworks: [],
+          remediationSteps: [],
+          requirements: [],
+          complianceScore: 0,
+        }),
+        // Add other necessary methods with mock implementations
+      } as any, // Use type assertion to satisfy TypeScript
       isLoading: true,
       error: null,
     }));
@@ -178,7 +189,18 @@ describe("ComplianceStatusWidget", () => {
   it("handles error state", () => {
     // Override the mock to simulate error
     vi.mocked(useComplianceService).mockImplementationOnce(() => ({
-      complianceService: null,
+      complianceService: {
+        getComplianceStatus: vi.fn().mockReturnValue({
+          status: "Unknown",
+          compliantFrameworks: [],
+          partiallyCompliantFrameworks: [],
+          nonCompliantFrameworks: [],
+          remediationSteps: [],
+          requirements: [],
+          complianceScore: 0,
+        }),
+        // Add other necessary methods with mock implementations
+      } as any, // Use type assertion to satisfy TypeScript
       isLoading: false,
       error: new Error("Test error message"),
     }));

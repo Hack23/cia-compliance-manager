@@ -271,6 +271,11 @@ export type EnhancedCIADetails = CIADetails;
  * Data provider for CIA security information
  */
 export interface CIADataProvider {
+  /**
+   * Initialize the data provider
+   */
+  initialize?: () => Promise<boolean>;
+
   availabilityOptions: Record<SecurityLevel, CIADetails>;
   integrityOptions: Record<SecurityLevel, CIADetails>;
   confidentialityOptions: Record<SecurityLevel, CIADetails>;
@@ -301,6 +306,61 @@ export interface CIADataProvider {
    * @deprecated Use getDefaultValuePoints instead
    */
   getValuePoints?: (level: SecurityLevel) => string[];
+
+  /**
+   * Get security level recommendations
+   */
+  getSecurityLevelRecommendations?: (level: SecurityLevel) => Promise<string[]>;
+
+  /**
+   * Get compliance frameworks
+   */
+  getComplianceFrameworks?: () => Promise<any[]>;
+
+  /**
+   * Get compliance requirements
+   */
+  getComplianceRequirements?: () => Promise<any>;
+
+  /**
+   * Get business impact
+   */
+  getBusinessImpact?: () => Promise<any>;
+
+  /**
+   * Get security metrics
+   */
+  getSecurityMetrics?: () => Promise<any>;
+
+  /**
+   * Get security resources
+   */
+  getSecurityResources?: () => Promise<any[]>;
+
+  /**
+   * Get SLA metrics
+   */
+  getSLAMetrics?: () => Promise<any>;
+
+  /**
+   * Get cost estimates
+   */
+  getCostEstimates?: () => Promise<any>;
+
+  /**
+   * Get value creation metrics
+   */
+  getValueCreationMetrics?: () => Promise<any>;
+
+  /**
+   * Get implementation details
+   */
+  getImplementationDetails?: () => Promise<any>;
+
+  /**
+   * Get remediation steps
+   */
+  getRemediationSteps?: () => Promise<any[]>;
 }
 
 // Types used by CIA service modules

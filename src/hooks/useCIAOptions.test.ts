@@ -192,7 +192,7 @@ describe("useCIAOptions", () => {
         breakEvenPeriod: "N/A",
       },
       LOW: {
-        returnRate: "100%", 
+        returnRate: "100%",
         description: "Basic security provides minimal return",
         value: "100%",
         potentialSavings: "$10,000",
@@ -218,8 +218,24 @@ describe("useCIAOptions", () => {
         value: "400%",
         potentialSavings: "$1,000,000+",
         breakEvenPeriod: "3 months",
-      }
+      },
     },
+    // Add the missing methods:
+    getROIEstimate: vi.fn().mockReturnValue({
+      returnRate: "150%",
+      description: "Test ROI description",
+    }),
+    getValuePoints: vi.fn().mockReturnValue(["Value point 1", "Value point 2"]),
+    getComponentDetails: vi.fn().mockReturnValue({
+      description: "Component description",
+      technical: "Technical details",
+    }),
+    getComponentDescription: vi.fn().mockReturnValue("Component description"),
+    getImplementationDetails: vi.fn().mockReturnValue({
+      steps: ["Step 1", "Step 2"],
+      time: "2-4 weeks",
+      cost: "medium",
+    }),
   };
 
   // Mock the useCIAOptions function
