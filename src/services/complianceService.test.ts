@@ -869,40 +869,73 @@ describe("ComplianceServiceAdapter", () => {
 
   describe("getFrameworkStatus", () => {
     it("correctly determines compliance status for major frameworks", () => {
-      // Fix: Provide all required arguments (availability, integrity, confidentiality)
-      expect(
-        service.getFrameworkStatus("NIST 800-53", "High", "High", "High")
-      ).toBe("compliant");
-      expect(
-        service.getFrameworkStatus("GDPR", "Moderate", "High", "High")
-      ).toBe("compliant");
-      expect(
-        service.getFrameworkStatus("SOC2", "Low", "Moderate", "Moderate")
-      ).toBe("partially-compliant");
-      expect(service.getFrameworkStatus("PCI DSS", "Low", "Low", "Low")).toBe(
-        "non-compliant"
+      // Fix: Check the status property of the returned object instead of expecting a string
+      const result = service.getFrameworkStatus(
+        "NIST 800-53",
+        "High",
+        "High",
+        "High"
       );
-      expect(service.getFrameworkStatus("HIPAA", "None", "None", "None")).toBe(
-        "non-compliant"
+      expect(result.status).toBe("Compliant");
+
+      const gdprResult = service.getFrameworkStatus(
+        "GDPR",
+        "Moderate",
+        "High",
+        "High"
       );
+      expect(gdprResult.status).toBe("Compliant");
+
+      const soc2Result = service.getFrameworkStatus(
+        "SOC2",
+        "Low",
+        "Moderate",
+        "Moderate"
+      );
+      expect(soc2Result.status).toBe("Partially Compliant");
+
+      const pciResult = service.getFrameworkStatus(
+        "PCI DSS",
+        "Low",
+        "Low",
+        "Low"
+      );
+      expect(pciResult.status).toBe("Non-Compliant");
+
+      const hipaaResult = service.getFrameworkStatus(
+        "HIPAA",
+        "None",
+        "None",
+        "None"
+      );
+      expect(hipaaResult.status).toBe("Non-Compliant");
     });
 
     it("handles unknown frameworks appropriately", () => {
-      // Fix: Provide all required arguments
-      expect(
-        service.getFrameworkStatus("Unknown Framework", "Low", "Low", "Low")
-      ).toBe("non-compliant");
-      expect(
-        service.getFrameworkStatus(
-          "Unknown Framework",
-          "Moderate",
-          "Moderate",
-          "Moderate"
-        )
-      ).toBe("non-compliant");
-      expect(
-        service.getFrameworkStatus("Unknown Framework", "None", "None", "None")
-      ).toBe("non-compliant");
+      // Fix: Check the status property of the returned object instead of expecting a string
+      const unknownResult = service.getFrameworkStatus(
+        "Unknown Framework",
+        "Low",
+        "Low",
+        "Low"
+      );
+      expect(unknownResult.status).toBe("Non-Compliant");
+
+      const unknownResult2 = service.getFrameworkStatus(
+        "Unknown Framework",
+        "Moderate",
+        "Moderate",
+        "Moderate"
+      );
+      expect(unknownResult2.status).toBe("Non-Compliant");
+
+      const unknownResult3 = service.getFrameworkStatus(
+        "Unknown Framework",
+        "None",
+        "None",
+        "None"
+      );
+      expect(unknownResult3.status).toBe("Non-Compliant");
     });
 
     it("applies business logic correctly to framework compliance status", () => {
@@ -933,7 +966,13 @@ describe("ComplianceServiceAdapter", () => {
       // Test each case
       testCases.forEach(([framework, a, i, c, expected]) => {
         const result = service.getFrameworkStatus(framework, a, i, c);
-        expect(result).toBe(expected);
+        expect(result.status).toBe(
+          expected === "compliant"
+            ? "Compliant"
+            : expected === "partially-compliant"
+            ? "Partially Compliant"
+            : "Non-Compliant"
+        );
       });
     });
 

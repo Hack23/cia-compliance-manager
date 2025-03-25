@@ -228,6 +228,11 @@ export function createLevelBasedComplianceStatus(
     requirements,
     status,
     complianceScore: avgScore,
+    frameworkName: "Test Framework",
+    findings: ["Test finding"],
+    metRequirements: ["Met requirement"],
+    unmetRequirements: ["Unmet requirement"],
+    recommendations: ["Test recommendation"],
   };
 }
 

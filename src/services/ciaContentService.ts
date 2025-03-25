@@ -1264,3 +1264,217 @@ export const getValuePoints = (level: SecurityLevel): string[] => {
 
 // Export types
 export type { BusinessImpactDetails, TechnicalImplementationDetails };
+
+/**
+ * Get security summary based on security levels
+ *
+ * @param availabilityLevel - Availability security level
+ * @param integrityLevel - Integrity security level
+ * @param confidentialityLevel - Confidentiality security level
+ * @returns Security summary details
+ */
+export const getSecuritySummary = async (
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel
+): Promise<any> => {
+  // This would normally fetch from an API, but for now we'll return mock data
+  return {
+    overallLevel: Math.max(
+      securityLevelToValue(availabilityLevel),
+      securityLevelToValue(integrityLevel),
+      securityLevelToValue(confidentialityLevel)
+    ),
+    summary: `Security assessment based on A:${availabilityLevel}, I:${integrityLevel}, C:${confidentialityLevel}`,
+    recommendations: [
+      "Implement regular security audits",
+      "Update security policies",
+      "Conduct employee security training",
+    ],
+    domains: {
+      confidentiality: {
+        level: confidentialityLevel,
+        description: `Confidentiality level: ${confidentialityLevel}`,
+      },
+      integrity: {
+        level: integrityLevel,
+        description: `Integrity level: ${integrityLevel}`,
+      },
+      availability: {
+        level: availabilityLevel,
+        description: `Availability level: ${availabilityLevel}`,
+      },
+    },
+  };
+};
+
+/**
+ * Get availability details based on security level
+ *
+ * @param level - Security level
+ * @returns Availability details
+ */
+export const getAvailabilityDetails = async (
+  level: SecurityLevel
+): Promise<CIADetails> => {
+  // This would normally fetch from an API, but for now we'll return mock data
+  return {
+    description: `Availability at ${level} level ensures system uptime meets business requirements.`,
+    impact: `Impact on business operations at ${level} level is manageable.`,
+    technical: `Technical considerations for ${level} availability include redundancy and failover systems.`,
+    businessImpact: `Business impact at ${level} availability level involves potential downtime costs.`,
+    uptime: getUptimeForLevel(level),
+    mttr: getMttrForLevel(level),
+    rto: getRtoForLevel(level),
+    rpo: getRpoForLevel(level),
+    recommendations: [
+      "Implement load balancing",
+      "Set up automated monitoring",
+      "Create disaster recovery plan",
+      "Test backup systems regularly",
+    ],
+    // Add missing required properties
+    capex: 0,
+    opex: 0,
+    bg: "#ffffff",
+    text: "#000000",
+  };
+};
+
+/**
+ * Get integrity details based on security level
+ *
+ * @param level - Security level
+ * @returns Integrity details
+ */
+export const getIntegrityDetails = async (
+  level: SecurityLevel
+): Promise<CIADetails> => {
+  // This would normally fetch from an API, but for now we'll return mock data
+  return {
+    description: `Integrity at ${level} level ensures data accuracy and trustworthiness.`,
+    impact: `Impact on data quality at ${level} level is within acceptable parameters.`,
+    technical: `Technical considerations for ${level} integrity include access controls and validation mechanisms.`,
+    businessImpact: `Business impact at ${level} integrity level involves data quality assurance.`,
+    recommendations: [
+      "Implement data validation checks",
+      "Use digital signatures for critical data",
+      "Maintain audit logs for all data changes",
+      "Perform regular data integrity checks",
+    ],
+    // Add missing required properties
+    capex: 0,
+    opex: 0,
+    bg: "#ffffff",
+    text: "#000000",
+  };
+};
+
+export const getConfidentialityDetails = async (
+  level: SecurityLevel
+): Promise<CIADetails> => {
+  // This would normally fetch from an API, but for now we'll return mock data
+  return {
+    description: `Confidentiality at ${level} level ensures sensitive information is protected from unauthorized access.`,
+    impact: `Impact on data protection at ${level} level provides appropriate safeguards.`,
+    technical: `Technical considerations for ${level} confidentiality include encryption and access controls.`,
+    businessImpact: `Business impact at ${level} confidentiality level involves privacy compliance and data protection.`,
+    recommendations: [
+      "Implement encryption for sensitive data",
+      "Use role-based access control",
+      "Conduct regular security awareness training",
+      "Monitor for unauthorized access attempts",
+    ],
+    // Add missing required properties
+    capex: 0,
+    opex: 0,
+    bg: "#ffffff",
+    text: "#000000",
+  };
+};
+
+// Helper functions
+function securityLevelToValue(level: SecurityLevel): number {
+  switch (level) {
+    case "None":
+      return 0;
+    case "Low":
+      return 1;
+    case "Moderate":
+      return 2;
+    case "High":
+      return 3;
+    case "Very High":
+      return 4;
+    default:
+      return 0;
+  }
+}
+
+function getUptimeForLevel(level: SecurityLevel): string {
+  switch (level) {
+    case "None":
+      return "Best effort";
+    case "Low":
+      return "95% (18 days downtime/year)";
+    case "Moderate":
+      return "99% (3.7 days downtime/year)";
+    case "High":
+      return "99.9% (8.8 hours downtime/year)";
+    case "Very High":
+      return "99.999% (5 minutes downtime/year)";
+    default:
+      return "Unknown";
+  }
+}
+
+function getMttrForLevel(level: SecurityLevel): string {
+  switch (level) {
+    case "None":
+      return "Best effort";
+    case "Low":
+      return "24 hours";
+    case "Moderate":
+      return "8 hours";
+    case "High":
+      return "4 hours";
+    case "Very High":
+      return "1 hour";
+    default:
+      return "Unknown";
+  }
+}
+
+function getRtoForLevel(level: SecurityLevel): string {
+  switch (level) {
+    case "None":
+      return "Best effort";
+    case "Low":
+      return "24 hours";
+    case "Moderate":
+      return "12 hours";
+    case "High":
+      return "6 hours";
+    case "Very High":
+      return "1 hour";
+    default:
+      return "Unknown";
+  }
+}
+
+function getRpoForLevel(level: SecurityLevel): string {
+  switch (level) {
+    case "None":
+      return "Best effort";
+    case "Low":
+      return "24 hours";
+    case "Moderate":
+      return "12 hours";
+    case "High":
+      return "4 hours";
+    case "Very High":
+      return "15 minutes";
+    default:
+      return "Unknown";
+  }
+}

@@ -355,6 +355,7 @@ export const WIDGET_TEST_IDS = {
   SECURITY_VISUALIZATION: "security-visualization-widget",
   TECHNICAL_DETAILS: "technical-details-widget",
   VALUE_CREATION: "value-creation-widget",
+  BUSINESS_IMPACT: "business-impact-widget",
 };
 
 // ---------------------------------------------------------------
@@ -435,10 +436,31 @@ export const FRAMEWORK_TEST_IDS = {
 // ---------------------------------------------------------------
 
 export const CHART_TEST_IDS = {
+  // Radar chart
   RADAR_CHART: "radar-chart",
-  RADAR_CHART_CONTAINER: "radar-chart-container",
   RADAR_CHART_CANVAS: "radar-chart-canvas",
-  RADAR_CHART_ERROR: "radar-chart-error",
+  SECURITY_SCORE_OVERLAY: "security-score-overlay",
+  SECURITY_SCORE_SUMMARY: "security-score-summary",
+
+  // Chart components
+  CHART_CONTAINER: "chart-container",
+  CHART_LEGEND: "chart-legend",
+  CHART_TOOLTIP: "chart-tooltip",
+
+  // Chart annotations
+  CHART_ANNOTATION: "chart-annotation",
+  CHART_THRESHOLD_LINE: "chart-threshold-line",
+
+  // Chart controls
+  CHART_ZOOM_CONTROL: "chart-zoom-control",
+  CHART_RESET_BUTTON: "chart-reset-button",
+  CHART_DOWNLOAD_BUTTON: "chart-download-button",
+
+  // Chart labels
+  CHART_AXIS_LABEL: "chart-axis-label",
+  CHART_TITLE: "chart-title",
+  CHART_SUBTITLE: "chart-subtitle",
+  RADAR_CHART_CONTAINER: "radar-chart-container",
   RADAR_AVAILABILITY_VALUE: "radar-availability-value",
   RADAR_INTEGRITY_VALUE: "radar-integrity-value",
   RADAR_CONFIDENTIALITY_VALUE: "radar-confidentiality-value",
@@ -731,12 +753,26 @@ export const TECHNICAL_DETAILS_TEST_IDS = {
   IMPLEMENTATION_TIME: "implementation-time",
   IMPLEMENTATION_COMPLEXITY: "implementation-complexity",
   REQUIRED_EXPERTISE: "required-expertise",
+
+  // Add missing test IDs
+  COMPONENT_SELECTOR: "technical-details-component-selector",
+  COMPONENT_DESCRIPTION: "technical-details-component-description",
+  IMPLEMENTATION_TABS: "technical-details-implementation-tabs",
+  GUIDELINES_CONTENT: "technical-details-guidelines-content",
+  GUIDELINES_TAB: "technical-details-guidelines-tab",
+  CODE_TAB: "technical-details-code-tab",
+  CODE_CONTENT: "technical-details-code-content",
+  CONFIGURATIONS_TAB: "technical-details-configurations-tab",
+  CONFIGURATIONS_CONTENT: "technical-details-configurations-content",
+  CODE_BLOCK_PREFIX: "technical-details-code-block",
+  CONFIDENTIALITY_BUTTON: "technical-details-confidentiality-button",
+  INTEGRITY_BUTTON: "technical-details-integrity-button",
+  AVAILABILITY_BUTTON: "technical-details-availability-button",
+
+  // Keep existing IDs
   AVAILABILITY_SECTION: "technical-details-availability",
   INTEGRITY_SECTION: "technical-details-integrity",
   CONFIDENTIALITY_SECTION: "technical-details-confidentiality",
-  AVAILABILITY_DETAILS_SECTION: "technical-details-availability-details",
-  INTEGRITY_DETAILS_SECTION: "technical-details-integrity-details",
-  CONFIDENTIALITY_DETAILS_SECTION: "technical-details-confidentiality-details",
   TECHNICAL_HEADER: "technical-header",
   TECHNICAL_DETAILS_SECTION: "technical-details-section",
   TECHNICAL_DESCRIPTION: "technical-description",

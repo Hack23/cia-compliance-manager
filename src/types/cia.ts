@@ -136,10 +136,24 @@ export function calculateOverallSecurityLevel(
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel
 ): SecurityLevel {
-  if ([availabilityLevel, integrityLevel, confidentialityLevel].includes("Very High")) return "Very High";
-  if ([availabilityLevel, integrityLevel, confidentialityLevel].includes("High")) return "High";
-  if ([availabilityLevel, integrityLevel, confidentialityLevel].includes("Moderate")) return "Moderate";
-  if ([availabilityLevel, integrityLevel, confidentialityLevel].includes("Low")) return "Low";
+  if (
+    [availabilityLevel, integrityLevel, confidentialityLevel].includes(
+      "Very High"
+    )
+  )
+    return "Very High";
+  if (
+    [availabilityLevel, integrityLevel, confidentialityLevel].includes("High")
+  )
+    return "High";
+  if (
+    [availabilityLevel, integrityLevel, confidentialityLevel].includes(
+      "Moderate"
+    )
+  )
+    return "Moderate";
+  if ([availabilityLevel, integrityLevel, confidentialityLevel].includes("Low"))
+    return "Low";
   return "None";
 }
 

@@ -1,5 +1,3 @@
-import { RiskLevel } from "../constants/riskConstants";
-
 /**
  * Business Impact Types
  *
@@ -11,68 +9,230 @@ import { RiskLevel } from "../constants/riskConstants";
  */
 
 /**
+ * Business impact detail structure
+ */
+export interface BusinessImpactDetail {
+  /** Description of the impact */
+  description: string;
+
+  /** Risk level: "Critical", "High", "Medium", "Low", or "Minimal" */
+  riskLevel: string;
+
+  /** Estimated annual revenue loss */
+  annualRevenueLoss?: string;
+
+  /** Mean time to recover from incidents */
+  meanTimeToRecover?: string;
+
+  /** Potential compliance violations */
+  complianceViolations?: string[];
+
+  /** Operational impact description */
+  operationalImpact?: string;
+
+  /** Reputational impact description */
+  reputationalImpact?: string;
+
+  /** Compliance impact description */
+  complianceImpact?: string;
+
+  /** Value for competitiveAdvantage */
+  competitiveAdvantage?: string;
+
+  /** Financial impact details */
+  financial?: {
+    /** Description of financial impact */
+    description: string;
+
+    /** Severity of impact */
+    impact: string;
+
+    /** Estimated annual loss */
+    annualLoss?: string;
+  };
+
+  /** Operational impact details */
+  operational?: {
+    /** Description of operational impact */
+    description: string;
+
+    /** Severity of impact */
+    impact: string;
+
+    /** Expected recovery time */
+    recoveryTime?: string;
+  };
+
+  /** Reputational impact details */
+  reputational?: {
+    /** Description of reputational impact */
+    description: string;
+
+    /** Severity of impact */
+    impact: string;
+  };
+
+  /** Regulatory impact details */
+  regulatory?: {
+    /** Description of regulatory impact */
+    description: string;
+
+    /** Severity of impact */
+    impact: string;
+
+    /** Affected compliance frameworks */
+    frameworks?: string[];
+  };
+
+  /** Summary of overall impact */
+  summary?: string;
+}
+
+/**
  * Business consideration structure
  */
 export interface BusinessConsideration {
-  /**
-   * Title of the consideration
-   */
+  /** Type of consideration */
+  type: "risk" | "opportunity" | "requirement";
+
+  /** Title of the consideration */
   title: string;
 
-  /**
-   * Description of the consideration
-   */
+  /** Description of the consideration */
   description: string;
+
+  /** Impact level or importance */
+  importance: "low" | "medium" | "high" | "critical";
+
+  /** Related business area */
+  businessArea: string;
+
+  /** Estimated financial impact */
+  financialImpact?: string;
 }
 
 /**
- * Business considerations by category
+ * Collection of business considerations by category
  */
 export interface BusinessConsiderations {
-  /**
-   * Financial considerations
-   */
+  /** Financial considerations */
   financial: BusinessConsideration[];
 
-  /**
-   * Operational considerations
-   */
+  /** Operational considerations */
   operational: BusinessConsideration[];
 
-  /**
-   * Strategic considerations
-   */
+  /** Strategic considerations */
   strategic: BusinessConsideration[];
 
-  /**
-   * Reputational considerations
-   */
-  reputational: BusinessConsideration[];
+  /** Compliance considerations */
+  compliance?: BusinessConsideration[];
 
-  /**
-   * Regulatory considerations
-   */
-  regulatory: BusinessConsideration[];
+  /** Reputational considerations */
+  reputational?: BusinessConsideration[];
+
+  /** Regulatory considerations */
+  regulatory?: BusinessConsideration[];
 }
 
 /**
- * Impact consideration with risk level
+ * Icon mappings for business impact categories
+ */
+export interface BusinessImpactIcons {
+  /** Financial impact icon */
+  financial: string;
+
+  /** Operational impact icon */
+  operational: string;
+
+  /** Strategic impact icon */
+  strategic: string;
+
+  /** Compliance/regulatory impact icon */
+  compliance: string;
+
+  /** Reputational impact icon */
+  reputational: string;
+}
+
+/**
+ * Service level agreement metrics
+ */
+export interface SLAMetrics {
+  /** Uptime target (e.g., "99.9%") */
+  uptime: string;
+
+  /** Recovery Time Objective */
+  rto?: string;
+
+  /** Recovery Point Objective */
+  rpo?: string;
+
+  /** Mean Time to Recover */
+  mttr?: string;
+}
+
+/**
+ * Business impact structure
+ */
+export interface BusinessImpact {
+  /** Financial impact details */
+  financial: {
+    /** Description of impact */
+    description: string;
+
+    /** Risk level */
+    riskLevel: string;
+  };
+
+  /** Operational impact details */
+  operational: {
+    /** Description of impact */
+    description: string;
+
+    /** Risk level */
+    riskLevel: string;
+  };
+
+  /** Reputational impact details */
+  reputation: {
+    /** Description of impact */
+    description: string;
+
+    /** Risk level */
+    riskLevel: string;
+  };
+
+  /** Legal/regulatory impact details */
+  legal: {
+    /** Description of impact */
+    description: string;
+
+    /** Risk level */
+    riskLevel: string;
+  };
+}
+
+/**
+ * Impact consideration type used in component business considerations
  */
 export interface ImpactConsideration {
-  /**
-   * Type of impact
-   */
-  type: string;
+  /** Title of the consideration */
+  title: string;
 
-  /**
-   * Risk level
-   */
-  risk: RiskLevel;
-
-  /**
-   * Description of the impact
-   */
+  /** Description of the consideration */
   description: string;
+
+  /** Type of the consideration */
+  type?: string;
+
+  /** Business area affected */
+  businessArea?: string;
+
+  /** Impact level */
+  importance?: string;
+
+  /** Risk level - added to match usage in businessConstants */
+  risk?: string;
 }
 
 /**
@@ -104,46 +264,6 @@ export interface BusinessKeyBenefit {
  */
 export interface BusinessKeyBenefits {
   [key: string]: BusinessKeyBenefit[];
-}
-
-// Type for business impact icons
-export interface BusinessImpactIcons {
-  [key: string]: string;
-}
-
-/**
- * Business impact detail structure
- */
-export interface BusinessImpactDetail {
-  /**
-   * Description of the impact
-   */
-  description?: string;
-
-  /**
-   * Risk level (e.g., "Low", "Medium", "High", "Critical")
-   */
-  riskLevel?: string;
-
-  /**
-   * Annual revenue loss estimate (for financial impact)
-   */
-  annualRevenueLoss?: string;
-
-  /**
-   * Mean time to recover (for operational impact)
-   */
-  meanTimeToRecover?: string;
-
-  /**
-   * List of compliance violations (for regulatory impact)
-   */
-  complianceViolations?: string[];
-
-  /**
-   * Competitive advantage implications
-   */
-  competitiveAdvantage?: string;
 }
 
 /**
@@ -206,7 +326,9 @@ export interface BusinessItem {
   priority?: number;
 }
 
-// Types for business value structures
+/**
+ * Business value metric
+ */
 export interface BusinessValueMetric {
   /**
    * Name of the metric

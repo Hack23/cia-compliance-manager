@@ -28,18 +28,30 @@ export const BUSINESS_CONSIDERATIONS: BusinessConsiderations = {
       title: "Implementation Cost",
       description:
         "Initial investment required for implementing security controls",
+      type: "risk",
+      importance: "high",
+      businessArea: "Finance",
     },
     {
       title: "Operational Cost",
       description: "Ongoing maintenance and operational costs",
+      type: "risk",
+      importance: "medium",
+      businessArea: "Finance",
     },
     {
       title: "Return on Investment",
       description: "Expected financial return from security investments",
+      type: "opportunity",
+      importance: "high",
+      businessArea: "Finance",
     },
     {
       title: "Cost Avoidance",
       description: "Potential costs avoided by preventing security incidents",
+      type: "opportunity",
+      importance: "high",
+      businessArea: "Finance",
     },
   ],
   operational: [
@@ -47,74 +59,122 @@ export const BUSINESS_CONSIDERATIONS: BusinessConsiderations = {
       title: "Resource Requirements",
       description:
         "Staff and resources needed for implementation and maintenance",
+      type: "requirement",
+      importance: "high",
+      businessArea: "Operations",
     },
     {
       title: "Process Changes",
       description:
         "Changes to operational processes required for security implementation",
+      type: "risk",
+      importance: "medium",
+      businessArea: "Operations",
     },
     {
       title: "Training Needs",
       description:
         "Staff training required for security awareness and implementation",
+      type: "requirement",
+      importance: "medium",
+      businessArea: "Operations",
     },
     {
       title: "Performance Impact",
       description: "Potential impact on system performance and efficiency",
+      type: "risk",
+      importance: "medium",
+      businessArea: "Operations",
     },
   ],
   strategic: [
     {
       title: "Competitive Advantage",
       description: "How security posture provides competitive differentiation",
+      type: "opportunity",
+      importance: "high",
+      businessArea: "Strategy",
     },
     {
       title: "Market Positioning",
       description: "Impact on market positioning and customer perception",
+      type: "opportunity",
+      importance: "medium",
+      businessArea: "Strategy",
     },
     {
       title: "Long-term Sustainability",
       description: "Alignment with long-term strategic objectives",
+      type: "opportunity",
+      importance: "high",
+      businessArea: "Strategy",
     },
     {
       title: "Growth Enablement",
       description: "How security enables or constrains business growth",
+      type: "opportunity",
+      importance: "high",
+      businessArea: "Strategy",
     },
   ],
   reputational: [
     {
       title: "Customer Trust",
       description: "Impact on customer trust and loyalty",
+      type: "opportunity",
+      importance: "high",
+      businessArea: "Marketing",
     },
     {
       title: "Brand Protection",
       description: "Protection of brand value and reputation",
+      type: "risk",
+      importance: "high",
+      businessArea: "Marketing",
     },
     {
       title: "Public Perception",
       description: "How the organization is perceived by the public",
+      type: "opportunity",
+      importance: "medium",
+      businessArea: "Public Relations",
     },
     {
       title: "Partner Confidence",
       description: "Trust from business partners and supply chain",
+      type: "opportunity",
+      importance: "high",
+      businessArea: "Business Development",
     },
   ],
   regulatory: [
     {
       title: "Compliance Requirements",
       description: "Regulatory obligations the organization must meet",
+      type: "requirement",
+      importance: "critical",
+      businessArea: "Legal",
     },
     {
       title: "Audit Readiness",
       description: "Preparation for regulatory audits and assessments",
+      type: "requirement",
+      importance: "high",
+      businessArea: "Compliance",
     },
     {
       title: "Penalty Avoidance",
       description: "Prevention of fines and sanctions from non-compliance",
+      type: "risk",
+      importance: "critical",
+      businessArea: "Finance",
     },
     {
       title: "Regulatory Change Management",
       description: "Adaptation to evolving regulatory requirements",
+      type: "requirement",
+      importance: "medium",
+      businessArea: "Compliance",
     },
   ],
 };
@@ -322,52 +382,61 @@ export const COMPONENT_BUSINESS_CONSIDERATIONS: ComponentBusinessConsiderations 
     AVAILABILITY: {
       NONE: [
         {
+          title: "Business Continuity Impact",
           type: "operational",
           risk: RISK_LEVELS.CRITICAL,
           description: "Complete business stoppage during system outages",
         },
         {
+          title: "Revenue Impact",
           type: "financial",
-          risk: RISK_LEVELS.HIGH,
+          risk: RISK_LEVELS.CRITICAL,
           description: "Revenue loss of up to 100% during downtime",
         },
         {
+          title: "Reputation Impact",
           type: "reputational",
-          risk: RISK_LEVELS.HIGH,
+          risk: RISK_LEVELS.CRITICAL,
           description:
             "Customer trust severely impacted by unreliable services",
         },
       ],
       LOW: [
         {
+          title: "Business Continuity Impact",
           type: "operational",
           risk: RISK_LEVELS.HIGH,
           description: "Frequent business disruptions with extended recovery",
         },
         {
+          title: "Revenue Impact",
           type: "financial",
-          risk: RISK_LEVELS.MEDIUM,
+          risk: RISK_LEVELS.HIGH,
           description: "Revenue impact of 5-10% annually due to outages",
         },
         {
+          title: "Reputation Impact",
           type: "reputational",
-          risk: RISK_LEVELS.MEDIUM,
+          risk: RISK_LEVELS.HIGH,
           description: "Customer frustration due to inconsistent availability",
         },
       ],
       MODERATE: [
         {
+          title: "Business Continuity Impact",
           type: "operational",
           risk: RISK_LEVELS.MEDIUM,
           description: "Occasional disruptions with quick recovery",
         },
         {
+          title: "Revenue Impact",
           type: "financial",
           risk: RISK_LEVELS.LOW,
           description:
             "Revenue impact of 1-5% annually due to planned downtime",
         },
         {
+          title: "Reputation Impact",
           type: "reputational",
           risk: RISK_LEVELS.LOW,
           description: "Customer expectations managed through SLAs",
@@ -375,16 +444,19 @@ export const COMPONENT_BUSINESS_CONSIDERATIONS: ComponentBusinessConsiderations 
       ],
       HIGH: [
         {
+          title: "Business Continuity Impact",
           type: "operational",
           risk: RISK_LEVELS.LOW,
           description: "Minimal disruptions with automated recovery",
         },
         {
+          title: "Revenue Impact",
           type: "financial",
           risk: RISK_LEVELS.LOW,
           description: "Revenue impact under 1% annually",
         },
         {
+          title: "Strategic Impact",
           type: "strategic",
           risk: RISK_LEVELS.LOW,
           description:
@@ -393,16 +465,19 @@ export const COMPONENT_BUSINESS_CONSIDERATIONS: ComponentBusinessConsiderations 
       ],
       VERY_HIGH: [
         {
+          title: "Business Continuity Impact",
           type: "operational",
           risk: RISK_LEVELS.LOW,
           description: "Continuous business operations with no disruption",
         },
         {
+          title: "Strategic Impact",
           type: "strategic",
           risk: RISK_LEVELS.LOW,
           description: "Competitive advantage through superior reliability",
         },
         {
+          title: "Regulatory Impact",
           type: "regulatory",
           risk: RISK_LEVELS.LOW,
           description: "Complies with most stringent availability requirements",
@@ -412,11 +487,13 @@ export const COMPONENT_BUSINESS_CONSIDERATIONS: ComponentBusinessConsiderations 
     INTEGRITY: {
       NONE: [
         {
+          title: "Operational Impact",
           type: BUSINESS_IMPACT_CATEGORIES.OPERATIONAL,
           risk: RISK_LEVELS.CRITICAL,
           description: "Decisions based on potentially corrupted data",
         },
         {
+          title: "Financial Impact",
           type: BUSINESS_IMPACT_CATEGORIES.FINANCIAL,
           risk: RISK_LEVELS.HIGH,
           description: "Financial reporting cannot be trusted",
@@ -424,11 +501,13 @@ export const COMPONENT_BUSINESS_CONSIDERATIONS: ComponentBusinessConsiderations 
       ],
       LOW: [
         {
+          title: "Operational Impact",
           type: BUSINESS_IMPACT_CATEGORIES.OPERATIONAL,
           risk: RISK_LEVELS.HIGH,
           description: "Data corruption may be detected but not prevented",
         },
         {
+          title: "Financial Impact",
           type: BUSINESS_IMPACT_CATEGORIES.FINANCIAL,
           risk: RISK_LEVELS.MEDIUM,
           description: "Financial calculations may have errors",
@@ -436,11 +515,13 @@ export const COMPONENT_BUSINESS_CONSIDERATIONS: ComponentBusinessConsiderations 
       ],
       MODERATE: [
         {
+          title: "Operational Impact",
           type: BUSINESS_IMPACT_CATEGORIES.OPERATIONAL,
           risk: RISK_LEVELS.MEDIUM,
           description: "Most data corruption detected and correctable",
         },
         {
+          title: "Regulatory Impact",
           type: BUSINESS_IMPACT_CATEGORIES.REGULATORY,
           risk: RISK_LEVELS.MEDIUM,
           description: "Meets basic regulatory requirements for data integrity",
@@ -448,11 +529,13 @@ export const COMPONENT_BUSINESS_CONSIDERATIONS: ComponentBusinessConsiderations 
       ],
       HIGH: [
         {
+          title: "Operational Impact",
           type: BUSINESS_IMPACT_CATEGORIES.OPERATIONAL,
           risk: RISK_LEVELS.LOW,
           description: "All changes tracked and validated",
         },
         {
+          title: "Regulatory Impact",
           type: BUSINESS_IMPACT_CATEGORIES.REGULATORY,
           risk: RISK_LEVELS.LOW,
           description: "Meets stringent compliance requirements",
@@ -460,11 +543,13 @@ export const COMPONENT_BUSINESS_CONSIDERATIONS: ComponentBusinessConsiderations 
       ],
       VERY_HIGH: [
         {
+          title: "Operational Impact",
           type: BUSINESS_IMPACT_CATEGORIES.OPERATIONAL,
           risk: RISK_LEVELS.LOW,
           description: "Data integrity guaranteed with cryptographic certainty",
         },
         {
+          title: "Strategic Impact",
           type: BUSINESS_IMPACT_CATEGORIES.STRATEGIC,
           risk: RISK_LEVELS.LOW,
           description: "Enables business in highly-regulated industries",
@@ -474,11 +559,13 @@ export const COMPONENT_BUSINESS_CONSIDERATIONS: ComponentBusinessConsiderations 
     CONFIDENTIALITY: {
       NONE: [
         {
+          title: "Reputational Impact",
           type: BUSINESS_IMPACT_CATEGORIES.REPUTATIONAL,
           risk: RISK_LEVELS.CRITICAL,
           description: "All data accessible to unauthorized parties",
         },
         {
+          title: "Regulatory Impact",
           type: BUSINESS_IMPACT_CATEGORIES.REGULATORY,
           risk: RISK_LEVELS.CRITICAL,
           description: "Non-compliant with all data protection regulations",
@@ -486,11 +573,13 @@ export const COMPONENT_BUSINESS_CONSIDERATIONS: ComponentBusinessConsiderations 
       ],
       LOW: [
         {
+          title: "Reputational Impact",
           type: BUSINESS_IMPACT_CATEGORIES.REPUTATIONAL,
           risk: RISK_LEVELS.HIGH,
           description: "Sensitive data may be exposed",
         },
         {
+          title: "Regulatory Impact",
           type: BUSINESS_IMPACT_CATEGORIES.REGULATORY,
           risk: RISK_LEVELS.HIGH,
           description: "May violate basic privacy requirements",
@@ -498,11 +587,13 @@ export const COMPONENT_BUSINESS_CONSIDERATIONS: ComponentBusinessConsiderations 
       ],
       MODERATE: [
         {
+          title: "Reputational Impact",
           type: BUSINESS_IMPACT_CATEGORIES.REPUTATIONAL,
           risk: RISK_LEVELS.MEDIUM,
           description: "Most sensitive data protected",
         },
         {
+          title: "Regulatory Impact",
           type: BUSINESS_IMPACT_CATEGORIES.REGULATORY,
           risk: RISK_LEVELS.MEDIUM,
           description: "Complies with standard data protection regulations",
@@ -510,11 +601,13 @@ export const COMPONENT_BUSINESS_CONSIDERATIONS: ComponentBusinessConsiderations 
       ],
       HIGH: [
         {
+          title: "Reputational Impact",
           type: BUSINESS_IMPACT_CATEGORIES.REPUTATIONAL,
           risk: RISK_LEVELS.LOW,
           description: "Strong protection for sensitive data",
         },
         {
+          title: "Regulatory Impact",
           type: BUSINESS_IMPACT_CATEGORIES.REGULATORY,
           risk: RISK_LEVELS.LOW,
           description: "Meets stringent privacy requirements",
@@ -522,11 +615,13 @@ export const COMPONENT_BUSINESS_CONSIDERATIONS: ComponentBusinessConsiderations 
       ],
       VERY_HIGH: [
         {
+          title: "Reputational Impact",
           type: BUSINESS_IMPACT_CATEGORIES.REPUTATIONAL,
           risk: RISK_LEVELS.LOW,
           description: "Maximum protection for sensitive information",
         },
         {
+          title: "Strategic Impact",
           type: BUSINESS_IMPACT_CATEGORIES.STRATEGIC,
           risk: RISK_LEVELS.LOW,
           description:
@@ -676,7 +771,7 @@ export function getBusinessConsiderationsForCategory(
   if (normalizedCategory in BUSINESS_CONSIDERATIONS) {
     return BUSINESS_CONSIDERATIONS[
       normalizedCategory as keyof BusinessConsiderations
-    ];
+    ] as BusinessConsideration[];
   }
   return [];
 }

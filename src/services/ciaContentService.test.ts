@@ -956,3 +956,22 @@ describe("Exported utility functions", () => {
     expect(Array.isArray(points)).toBe(true);
   });
 });
+
+// Add this test to the existing file after the "CIAContentService" describe block
+
+describe("CIAContentService initialization", () => {
+  it("should initialize successfully", async () => {
+    const service = new CIAContentService();
+    await expect(service.initialize()).resolves.toBeUndefined();
+  });
+
+  it("should handle getCIAOptions with invalid component gracefully", () => {
+    const service = new CIAContentService();
+    // @ts-expect-error - Testing with invalid component type
+    const result = service.getCIAOptions("invalid");
+    expect(result).toBeDefined();
+    expect(result).toHaveProperty("None");
+    expect(result.None).toHaveProperty("description");
+    expect(result.None).toHaveProperty("technical");
+  });
+});

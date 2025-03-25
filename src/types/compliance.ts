@@ -15,7 +15,7 @@ import { SecurityLevel } from "./cia";
 /**
  * Status of framework compliance
  */
-export type FrameworkComplianceStatus =
+export type FrameworkComplianceStatusType =
   | "compliant"
   | "partially-compliant"
   | "non-compliant";
@@ -24,13 +24,16 @@ export type FrameworkComplianceStatus =
  * Represents a compliance framework definition
  */
 export interface ComplianceFramework {
+  id: string;
   name: string;
   description: string;
+  status: string;
   requiredAvailabilityLevel: SecurityLevel;
   requiredIntegrityLevel: SecurityLevel;
   requiredConfidentialityLevel: SecurityLevel;
   applicableIndustries?: string[];
   applicableRegions?: string[];
+  requirements?: string[];
 }
 
 /**
@@ -42,6 +45,7 @@ export interface ComplianceStatusDetails {
   compliantFrameworks: string[];
   partiallyCompliantFrameworks: string[];
   nonCompliantFrameworks: string[];
+  frameworks?: ComplianceFramework[];
 
   // Optional properties
   remediationSteps?: string[];
@@ -50,6 +54,13 @@ export interface ComplianceStatusDetails {
 
   // Optional status text for display
   statusText?: string;
+
+  // For interface compatibility
+  frameworkName?: string;
+  findings?: string[];
+  metRequirements?: string[];
+  unmetRequirements?: string[];
+  recommendations?: string[];
 }
 
 // Alias ComplianceStatus to ComplianceStatusDetails for backward compatibility
@@ -61,6 +72,10 @@ export type ComplianceStatus = ComplianceStatusDetails;
 export interface FrameworkApplicabilityOptions {
   industries?: string[];
   regions?: string[];
+  processesPersonalData: boolean;
+  industry: string;
+  companySize: "small" | "medium" | "large";
+  dataTypes: string[];
 }
 
 /**
@@ -68,14 +83,9 @@ export interface FrameworkApplicabilityOptions {
  */
 export interface ComplianceGapAnalysis {
   /**
-   * Overall compliance status
+   * Whether the organization is compliant with the framework
    */
-  overallStatus: string;
-
-  /**
-   * Compliance score (0-100)
-   */
-  complianceScore: number;
+  isCompliant: boolean;
 
   /**
    * List of compliance gaps by framework
@@ -88,9 +98,14 @@ export interface ComplianceGapAnalysis {
   recommendations: string[];
 
   /**
-   * Flag indicating if the configuration is compliant
+   * Overall compliance status text
    */
-  isCompliant?: boolean;
+  overallStatus?: string;
+
+  /**
+   * Compliance score (0-100)
+   */
+  complianceScore?: number;
 }
 
 /**
@@ -132,4 +147,82 @@ export interface ComplianceGap {
    * Recommendations for addressing this gap
    */
   recommendations: string[];
+}
+
+/**
+ * Details about compliance status for a specific framework
+ */
+export interface ComplianceFrameworkStatusDetails {
+  /** Name of the framework */
+  frameworkName: string;
+
+  /** Current compliance status */
+  status: string;
+
+  /** List of findings or gaps */
+  findings: string[];
+
+  /** List of requirements that are met */
+  metRequirements: string[];
+
+  /** List of requirements that are not met */
+  unmetRequirements: string[];
+
+  /** Recommendations for achieving compliance */
+  recommendations: string[];
+}
+
+/**
+ * Status of compliance with a specific framework
+ */
+export interface FrameworkComplianceStatus {
+  /** Name of the framework */
+  name: string;
+
+  /** Whether the framework applies */
+  applicable: boolean;
+
+  /** Current compliance status */
+  status: "Compliant" | "Partially Compliant" | "Non-Compliant";
+
+  /** Percentage of requirements met */
+  compliancePercentage: number;
+
+  /** Key gaps in compliance */
+  complianceGaps: string[];
+
+  /** Required security level to satisfy the framework */
+  requiredSecurityLevel: SecurityLevel;
+}
+
+/**
+ * Security metrics for visualization from compliance perspective
+ */
+export interface ComplianceSecurityMetrics {
+  /** Confidentiality score (0-100) */
+  confidentiality: number;
+
+  /** Integrity score (0-100) */
+  integrity: number;
+
+  /** Availability score (0-100) */
+  availability: number;
+
+  /** Monitoring capabilities score (0-100) */
+  monitoring: number;
+
+  /** Resilience score (0-100) */
+  resilience: number;
+
+  /** Compliance score (0-100) */
+  compliance: number;
+
+  /** Overall security score (0-100) */
+  overallScore: number;
+
+  /** Industry benchmark score for comparison */
+  benchmarkScore: number;
+
+  /** Security maturity level */
+  securityMaturity: string;
 }

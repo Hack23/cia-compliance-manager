@@ -1,12 +1,12 @@
 import { SecurityLevel } from "../types/cia";
 import { CIAComponentType, CIADataProvider } from "../types/cia-services";
-import { ComplianceGapAnalysis as IComplianceGapAnalysis } from "../types/compliance";
-import { BaseService } from "./BaseService";
 import {
   ComplianceStatus,
   ComplianceStatusDetails,
-  createComplianceService,
-} from "./complianceService";
+  ComplianceGapAnalysis as IComplianceGapAnalysis,
+} from "../types/compliance";
+import { BaseService } from "./BaseService";
+import { createComplianceService } from "./complianceService";
 
 /**
  * Type for framework compliance status
@@ -216,11 +216,17 @@ export class ComplianceServiceAdapter extends BaseService {
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
-  ): ComplianceStatus {
+  ): ComplianceStatusDetails {
     const requirements = this.frameworkRequirements[framework];
 
     if (!requirements) {
-      return "non-compliant";
+      return {
+        status: "Non-Compliant",
+        compliantFrameworks: [],
+        partiallyCompliantFrameworks: [],
+        nonCompliantFrameworks: [framework],
+        complianceScore: 0,
+      };
     }
 
     const availValue = this.getSecurityLevelValue(availabilityLevel);
@@ -239,7 +245,13 @@ export class ComplianceServiceAdapter extends BaseService {
       integValue >= reqIntegValue &&
       confValue >= reqConfValue
     ) {
-      return "compliant";
+      return {
+        status: "Compliant",
+        compliantFrameworks: [framework],
+        partiallyCompliantFrameworks: [],
+        nonCompliantFrameworks: [],
+        complianceScore: 100,
+      };
     }
 
     // Partially compliant if at least one level meets requirements
@@ -248,11 +260,23 @@ export class ComplianceServiceAdapter extends BaseService {
       integValue >= reqIntegValue ||
       confValue >= reqConfValue
     ) {
-      return "partially-compliant";
+      return {
+        status: "Partially Compliant",
+        compliantFrameworks: [],
+        partiallyCompliantFrameworks: [framework],
+        nonCompliantFrameworks: [],
+        complianceScore: 50,
+      };
     }
 
     // Otherwise non-compliant
-    return "non-compliant";
+    return {
+      status: "Non-Compliant",
+      compliantFrameworks: [],
+      partiallyCompliantFrameworks: [],
+      nonCompliantFrameworks: [framework],
+      complianceScore: 0,
+    };
   }
 
   /**
@@ -308,7 +332,7 @@ export class ComplianceServiceAdapter extends BaseService {
         integrityLevel,
         confidentialityLevel
       );
-      return status === "compliant";
+      return status.status === "Compliant";
     });
   }
 
@@ -657,21 +681,122 @@ export const ComplianceServiceStatic = LegacyComplianceService;
  * Static implementation of compliance service for testing and mocking
  */
 export class StaticComplianceService extends BaseService {
-  private mockStatus: ComplianceStatus = "compliant";
-  private frameworkData: Record<string, ComplianceStatus> = {};
+  // Change from string to proper object
+  private mockStatus: ComplianceStatusDetails = {
+    status: "Compliant",
+    compliantFrameworks: [],
+    partiallyCompliantFrameworks: [],
+    nonCompliantFrameworks: [],
+    complianceScore: 100,
+  };
+
+  // Fix framework data to use complete objects instead of strings
+  private frameworkData: Record<string, ComplianceStatusDetails> = {
+    "NIST 800-53": {
+      status: "Compliant",
+      compliantFrameworks: ["NIST 800-53"],
+      partiallyCompliantFrameworks: [],
+      nonCompliantFrameworks: [],
+      complianceScore: 100,
+    },
+    "ISO 27001": {
+      status: "Partially Compliant",
+      compliantFrameworks: [],
+      partiallyCompliantFrameworks: ["ISO 27001"],
+      nonCompliantFrameworks: [],
+      complianceScore: 50,
+    },
+    "NIST CSF": {
+      status: "Compliant",
+      compliantFrameworks: ["NIST CSF"],
+      partiallyCompliantFrameworks: [],
+      nonCompliantFrameworks: [],
+      complianceScore: 100,
+    },
+    GDPR: {
+      status: "Non-Compliant",
+      compliantFrameworks: [],
+      partiallyCompliantFrameworks: [],
+      nonCompliantFrameworks: ["GDPR"],
+      complianceScore: 0,
+    },
+    HIPAA: {
+      status: "Non-Compliant",
+      compliantFrameworks: [],
+      partiallyCompliantFrameworks: [],
+      nonCompliantFrameworks: ["HIPAA"],
+      complianceScore: 0,
+    },
+    SOC2: {
+      status: "Partially Compliant",
+      compliantFrameworks: [],
+      partiallyCompliantFrameworks: ["SOC2"],
+      nonCompliantFrameworks: [],
+      complianceScore: 50,
+    },
+    "PCI DSS": {
+      status: "Non-Compliant",
+      compliantFrameworks: [],
+      partiallyCompliantFrameworks: [],
+      nonCompliantFrameworks: ["PCI DSS"],
+      complianceScore: 0,
+    },
+  };
 
   constructor(dataProvider: CIADataProvider) {
     super(dataProvider);
 
-    // Initialize with some default framework statuses
+    // Initialize with properly typed objects instead of strings
     this.frameworkData = {
-      "NIST 800-53": "compliant",
-      "ISO 27001": "partially-compliant",
-      "NIST CSF": "compliant",
-      GDPR: "non-compliant",
-      HIPAA: "non-compliant",
-      SOC2: "partially-compliant",
-      "PCI DSS": "non-compliant",
+      "NIST 800-53": {
+        status: "Compliant",
+        compliantFrameworks: ["NIST 800-53"],
+        partiallyCompliantFrameworks: [],
+        nonCompliantFrameworks: [],
+        complianceScore: 100,
+      },
+      "ISO 27001": {
+        status: "Partially Compliant",
+        compliantFrameworks: [],
+        partiallyCompliantFrameworks: ["ISO 27001"],
+        nonCompliantFrameworks: [],
+        complianceScore: 50,
+      },
+      "NIST CSF": {
+        status: "Compliant",
+        compliantFrameworks: ["NIST CSF"],
+        partiallyCompliantFrameworks: [],
+        nonCompliantFrameworks: [],
+        complianceScore: 100,
+      },
+      GDPR: {
+        status: "Non-Compliant",
+        compliantFrameworks: [],
+        partiallyCompliantFrameworks: [],
+        nonCompliantFrameworks: ["GDPR"],
+        complianceScore: 0,
+      },
+      HIPAA: {
+        status: "Non-Compliant",
+        compliantFrameworks: [],
+        partiallyCompliantFrameworks: [],
+        nonCompliantFrameworks: ["HIPAA"],
+        complianceScore: 0,
+      },
+      SOC2: {
+        status: "Partially Compliant",
+        compliantFrameworks: [],
+        partiallyCompliantFrameworks: ["SOC2"],
+        nonCompliantFrameworks: [],
+        complianceScore: 50,
+      },
+      "PCI DSS": {
+        status: "Non-Compliant",
+        compliantFrameworks: [],
+        partiallyCompliantFrameworks: [],
+        nonCompliantFrameworks: ["PCI DSS"],
+        complianceScore: 0,
+      },
     };
   }
 
@@ -690,7 +815,7 @@ export class StaticComplianceService extends BaseService {
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
-  ): ComplianceStatus {
+  ): ComplianceStatusDetails {
     // Return the pre-defined framework status if available
     if (this.frameworkData[frameworkId]) {
       return this.frameworkData[frameworkId];

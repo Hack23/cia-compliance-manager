@@ -1,12 +1,16 @@
 import { SecurityLevel } from "../types/cia";
 import { CIAComponentType, CIADataProvider } from "../types/cia-services";
-import { ComplianceGap, ComplianceGapAnalysis } from "../types/compliance";
+import {
+  ComplianceGap,
+  ComplianceGapAnalysis,
+  ComplianceStatus,
+} from "../types/compliance";
 import { BaseService } from "./BaseService";
 
 /**
  * Status of compliance with a framework
  */
-export type ComplianceStatus =
+export type ComplianceStatusType =
   | "compliant"
   | "partially-compliant"
   | "non-compliant";
@@ -352,7 +356,7 @@ export class ComplianceService extends BaseService {
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
-  ): ComplianceStatus {
+  ): ComplianceStatusType {
     const requirements = this.frameworkRequirements[framework];
 
     if (!requirements) {
@@ -999,4 +1003,228 @@ export function createComplianceService(
     return new ComplianceService(defaultProvider);
   }
   return new ComplianceService(dataProvider);
+}
+
+/**
+ * Get compliance status based on security levels
+ *
+ * @param availabilityLevel - Availability security level
+ * @param integrityLevel - Integrity security level
+ * @param confidentialityLevel - Confidentiality security level
+ * @returns Compliance status details
+ */
+export const getComplianceStatus = async (
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel
+): Promise<ComplianceStatus> => {
+  // This would normally fetch from an API, but for now we'll return mock data
+  const status = calculateOverallStatus(
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel
+  );
+
+  return {
+    status, // Use status instead of overallStatus
+    compliantFrameworks: [],
+    partiallyCompliantFrameworks: [],
+    nonCompliantFrameworks: [],
+    complianceScore: 0,
+    frameworks: [
+      {
+        id: "gdpr",
+        name: "GDPR",
+        description: "General Data Protection Regulation",
+        status: getFrameworkStatus(confidentialityLevel, "GDPR"),
+        requirements: [
+          "Data subject rights",
+          "Secure data processing",
+          "Breach notification",
+          "Data protection impact assessment",
+        ],
+        // Add required properties
+        requiredAvailabilityLevel: "Moderate",
+        requiredIntegrityLevel: "Moderate",
+        requiredConfidentialityLevel: "High",
+      },
+      // Fix other framework objects similarly
+      {
+        id: "pci",
+        name: "PCI DSS",
+        description: "Payment Card Industry Data Security Standard",
+        status: getFrameworkStatus(
+          calculateOverallSecurityLevel(
+            availabilityLevel,
+            integrityLevel,
+            confidentialityLevel
+          ),
+          "PCI DSS"
+        ),
+        requirements: [
+          "Secure network architecture",
+          "Cardholder data protection",
+          "Vulnerability management",
+          "Access control measures",
+        ],
+        // Add required properties
+        requiredAvailabilityLevel: "High",
+        requiredIntegrityLevel: "High",
+        requiredConfidentialityLevel: "High",
+      },
+      {
+        id: "hipaa",
+        name: "HIPAA",
+        description: "Health Insurance Portability and Accountability Act",
+        status: getFrameworkStatus(
+          calculateMinSecurityLevel(availabilityLevel, confidentialityLevel),
+          "HIPAA"
+        ),
+        requirements: [
+          "Privacy Rule compliance",
+          "Security Rule implementation",
+          "Breach Notification Rule",
+          "Patient rights protection",
+        ],
+        // Add required properties
+        requiredAvailabilityLevel: "High",
+        requiredIntegrityLevel: "High",
+        requiredConfidentialityLevel: "High",
+      },
+      {
+        id: "iso27001",
+        name: "ISO 27001",
+        description: "Information Security Management Standard",
+        status: getFrameworkStatus(
+          calculateOverallSecurityLevel(
+            availabilityLevel,
+            integrityLevel,
+            confidentialityLevel
+          ),
+          "ISO 27001"
+        ),
+        requirements: [
+          "Information security policies",
+          "Risk assessment and treatment",
+          "Security controls implementation",
+          "Ongoing monitoring and improvement",
+        ],
+        // Add required properties
+        requiredAvailabilityLevel: "Moderate",
+        requiredIntegrityLevel: "Moderate",
+        requiredConfidentialityLevel: "Moderate",
+      },
+    ],
+  };
+};
+
+// Helper functions
+function calculateOverallStatus(
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel
+): string {
+  const overallLevel = calculateOverallSecurityLevel(
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel
+  );
+
+  switch (overallLevel) {
+    case "None":
+    case "Low":
+      return "Non-Compliant";
+    case "Moderate":
+      return "Partially Compliant";
+    case "High":
+    case "Very High":
+      return "Compliant";
+    default:
+      return "Unknown";
+  }
+}
+
+function getFrameworkStatus(
+  securityLevel: SecurityLevel,
+  framework: string
+): string {
+  // Different frameworks have different minimum requirements
+  const minimumRequirements: Record<string, SecurityLevel> = {
+    GDPR: "Moderate",
+    "PCI DSS": "High",
+    HIPAA: "Moderate",
+    "ISO 27001": "Moderate",
+  };
+
+  const requiredLevel = minimumRequirements[framework] || "Moderate";
+  const securityValue = securityLevelToValue(securityLevel);
+  const requiredValue = securityLevelToValue(requiredLevel);
+
+  if (securityValue >= requiredValue + 1) {
+    return "Compliant";
+  } else if (securityValue >= requiredValue) {
+    return "Partially Compliant";
+  } else {
+    return "Non-Compliant";
+  }
+}
+
+function calculateOverallSecurityLevel(
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel
+): SecurityLevel {
+  const levels = [
+    securityLevelToValue(availabilityLevel),
+    securityLevelToValue(integrityLevel),
+    securityLevelToValue(confidentialityLevel),
+  ];
+
+  // Calculate average level
+  const avgLevel = levels.reduce((a, b) => a + b, 0) / levels.length;
+  return valueToSecurityLevel(avgLevel);
+}
+
+function calculateMinSecurityLevel(
+  level1: SecurityLevel,
+  level2: SecurityLevel
+): SecurityLevel {
+  const value1 = securityLevelToValue(level1);
+  const value2 = securityLevelToValue(level2);
+  return valueToSecurityLevel(Math.min(value1, value2));
+}
+
+function securityLevelToValue(level: SecurityLevel): number {
+  switch (level) {
+    case "None":
+      return 0;
+    case "Low":
+      return 1;
+    case "Moderate":
+      return 2;
+    case "High":
+      return 3;
+    case "Very High":
+      return 4;
+    default:
+      return 0;
+  }
+}
+
+function valueToSecurityLevel(value: number): SecurityLevel {
+  const roundedValue = Math.round(value);
+  switch (roundedValue) {
+    case 0:
+      return "None";
+    case 1:
+      return "Low";
+    case 2:
+      return "Moderate";
+    case 3:
+      return "High";
+    case 4:
+      return "Very High";
+    default:
+      return "None";
+  }
 }

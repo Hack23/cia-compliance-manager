@@ -1,91 +1,53 @@
-import { useEffect, useMemo, useState } from "react";
-import { CIAContentService } from "../services/ciaContentService";
-import { useCIAOptions } from "./useCIAOptions";
+import { useEffect, useState } from "react";
+import {
+  CIAContentService,
+  createCIAContentService,
+} from "../services/ciaContentService";
 
 /**
- * Hook for accessing CIA content service with error handling and loading state
- *
- * @returns CIA content service and status
+ * Hook to access the CIA content service with loading and error states
+ * @returns Object containing the CIA content service, loading state, and error state
  */
-export function useCIAContentService() {
-  // Status states
-  const [isLoading, setIsLoading] = useState(true);
+export const useCIAContentService = () => {
+  const [ciaContentService, setCIAContentService] =
+    useState<CIAContentService | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
-  const ciaOptions = useCIAOptions();
-
-  // Create CIAContentService instance
-  const ciaContentService = useMemo(() => {
+  const initService = async () => {
     try {
-      // Map the ciaOptions to match the CIADataProvider interface
-      const dataProvider = {
-        availabilityOptions: ciaOptions.availabilityOptions,
-        integrityOptions: ciaOptions.integrityOptions,
-        confidentialityOptions: ciaOptions.confidentialityOptions,
-        roiEstimates: ciaOptions.ROI_ESTIMATES, // Keep using ROI_ESTIMATES for compatibility
-      };
-
-      // Only add optional properties if they exist in ciaOptions
-      if (typeof ciaOptions === "object") {
-        // Optional properties - using safer property access and type casting
-        if (
-          "getDefaultSecurityIcon" in ciaOptions &&
-          typeof ciaOptions.getDefaultSecurityIcon === "function"
-        ) {
-          (dataProvider as any).getDefaultSecurityIcon =
-            ciaOptions.getDefaultSecurityIcon;
-        }
-
-        if (
-          "getDefaultValuePoints" in ciaOptions &&
-          typeof ciaOptions.getDefaultValuePoints === "function"
-        ) {
-          (dataProvider as any).getDefaultValuePoints =
-            ciaOptions.getDefaultValuePoints;
-        }
-      }
-
-      return new CIAContentService(dataProvider);
-    } catch (err) {
-      setError(
-        err instanceof Error
-          ? err
-          : new Error("Failed to initialize CIA content service")
-      );
-      return null;
-    }
-  }, [ciaOptions]);
-
-  // Initialize service
-  useEffect(() => {
-    const initService = async () => {
       setIsLoading(true);
-      try {
-        // Initialize any async data needed by the service
-        if (ciaContentService) {
-          await ciaContentService.initialize?.();
-        }
-        setError(null);
-      } catch (err) {
-        console.error("Error initializing CIA content service:", err);
-        setError(
-          err instanceof Error
-            ? err
-            : new Error("Failed to initialize CIA content service")
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    };
+      // Create the service using the createCIAContentService factory function
+      const service = createCIAContentService();
+      // Wait for any async initialization to complete
+      await service.initialize();
+      setCIAContentService(service);
+      setError(null);
+    } catch (err) {
+      setCIAContentService(null);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
+  // Refresh function to retry initialization if needed
+  const refresh = () => {
+    // Make sure we set isLoading immediately, not after the async part
+    setIsLoading(true);
     initService();
-  }, [ciaContentService]);
+  };
+
+  useEffect(() => {
+    initService();
+  }, []);
 
   return {
     ciaContentService,
     isLoading,
     error,
+    refresh,
   };
-}
+};
 
+// Keep the default export for backward compatibility
 export default useCIAContentService;
