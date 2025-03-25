@@ -242,3 +242,17 @@ declare class IntersectionObserver {
   disconnect(): void;
   takeRecords(): IntersectionObserverEntry[];
 }
+
+import 'vitest';
+
+// Augment the Assertion interface from Vitest
+declare module 'vitest' {
+  interface Assertion {
+    // Ensure these assertion methods are properly recognized
+    toBe(expected: any): void;
+    toEqual(expected: any): void;
+    toContain(expected: any): void;
+    toHaveLength(expected: number): void;
+    toBeGreaterThan(expected: number): void;
+  }
+}

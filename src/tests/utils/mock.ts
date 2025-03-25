@@ -482,7 +482,10 @@ export function createTypeGuardTests<T>(
   guard: (value: unknown) => value is T,
   validExample: T,
   invalidKeys: (keyof T)[]
-) {
+): {
+  testValidObject: () => void;
+  testInvalidObjects: () => void;
+} {
   return {
     testValidObject: () => {
       expect(guard(validExample)).toBe(true);
