@@ -234,13 +234,21 @@ describe("AvailabilityImpactWidget", () => {
     ).toBeInTheDocument();
   });
 
-  it("displays metrics like uptime, RTO, RPO", async () => {
-    await act(async () => {
-      render(<AvailabilityImpactWidget {...defaultProps} />);
-    });
+  it("displays metrics like uptime, RTO, RPO", () => {
+    render(
+      <AvailabilityImpactWidget
+        availabilityLevel="High"
+        testId="widget-availability-impact"
+      />
+    );
 
-    // Check for uptime target
-    expect(screen.getByText(/Uptime Target/i)).toBeInTheDocument();
+    // Check for availability metrics section
+    expect(
+      screen.getByTestId("widget-availability-impact-metrics")
+    ).toBeInTheDocument();
+
+    // Check for uptime target - use the correct text that's in the component
+    expect(screen.getByText("Target Uptime:")).toBeInTheDocument();
     expect(screen.getByText(/99\.9%/)).toBeInTheDocument();
 
     // Check for RTO
