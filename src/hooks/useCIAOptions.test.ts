@@ -14,6 +14,7 @@ describe("useCIAOptions", () => {
   const mockOptions: ReturnType<typeof useCIAOptionsModule.useCIAOptions> = {
     availabilityOptions: {
       None: {
+        value: 0, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -25,6 +26,7 @@ describe("useCIAOptions", () => {
         recommendations: [],
       },
       Low: {
+        value: 1, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -36,6 +38,7 @@ describe("useCIAOptions", () => {
         recommendations: ["Test recommendation"],
       },
       Moderate: {
+        value: 2, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -47,6 +50,7 @@ describe("useCIAOptions", () => {
         recommendations: ["Test recommendation"],
       },
       High: {
+        value: 3, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -58,6 +62,7 @@ describe("useCIAOptions", () => {
         recommendations: ["Test recommendation"],
       },
       "Very High": {
+        value: 4, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -71,6 +76,7 @@ describe("useCIAOptions", () => {
     },
     integrityOptions: {
       None: {
+        value: 0, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -82,6 +88,7 @@ describe("useCIAOptions", () => {
         recommendations: [],
       },
       Low: {
+        value: 1, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -93,6 +100,7 @@ describe("useCIAOptions", () => {
         recommendations: ["Test recommendation"],
       },
       Moderate: {
+        value: 2, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -104,6 +112,7 @@ describe("useCIAOptions", () => {
         recommendations: ["Test recommendation"],
       },
       High: {
+        value: 3, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -115,6 +124,7 @@ describe("useCIAOptions", () => {
         recommendations: ["Test recommendation"],
       },
       "Very High": {
+        value: 4, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -128,6 +138,7 @@ describe("useCIAOptions", () => {
     },
     confidentialityOptions: {
       None: {
+        value: 0, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -139,6 +150,7 @@ describe("useCIAOptions", () => {
         recommendations: [],
       },
       Low: {
+        value: 1, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -150,6 +162,7 @@ describe("useCIAOptions", () => {
         recommendations: ["Test recommendation"],
       },
       Moderate: {
+        value: 2, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -161,6 +174,7 @@ describe("useCIAOptions", () => {
         recommendations: ["Test recommendation"],
       },
       High: {
+        value: 3, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -172,6 +186,7 @@ describe("useCIAOptions", () => {
         recommendations: ["Test recommendation"],
       },
       "Very High": {
+        value: 4, // Add required value property
         description: "Test description",
         impact: "Test impact",
         technical: "Test technical",
@@ -187,6 +202,7 @@ describe("useCIAOptions", () => {
       NONE: {
         returnRate: "0%",
         description: "No security investment means no return",
+        recommendation: "No investment recommended", // Add missing required property
         value: "0%",
         potentialSavings: "$0",
         breakEvenPeriod: "N/A",
@@ -194,6 +210,7 @@ describe("useCIAOptions", () => {
       LOW: {
         returnRate: "100%",
         description: "Basic security provides minimal return",
+        recommendation: "Minimal investment recommended", // Add missing required property
         value: "100%",
         potentialSavings: "$10,000",
         breakEvenPeriod: "24 months",
@@ -201,6 +218,7 @@ describe("useCIAOptions", () => {
       MODERATE: {
         returnRate: "200%",
         description: "Standard security provides good value",
+        recommendation: "Standard investment recommended", // Add missing required property
         value: "200%",
         potentialSavings: "$100,000",
         breakEvenPeriod: "12 months",
@@ -208,6 +226,7 @@ describe("useCIAOptions", () => {
       HIGH: {
         returnRate: "300%",
         description: "Advanced security provides excellent value",
+        recommendation: "High investment recommended", // Add missing required property
         value: "300%",
         potentialSavings: "$500,000",
         breakEvenPeriod: "6 months",
@@ -215,26 +234,27 @@ describe("useCIAOptions", () => {
       VERY_HIGH: {
         returnRate: "400%",
         description: "Comprehensive security provides optimal value",
+        recommendation: "Maximum investment recommended", // Add missing required property
         value: "400%",
         potentialSavings: "$1,000,000+",
         breakEvenPeriod: "3 months",
       },
     },
-    // Add the missing methods:
-    getROIEstimate: vi.fn().mockReturnValue({
+    // Fix method name to match the actual interface (getROIEstimates instead of getROIEstimate)
+    getROIEstimates: vi.fn().mockReturnValue({
       returnRate: "150%",
       description: "Test ROI description",
+      recommendation: "Test recommendation", // Add recommendation property to match interface
     }),
-    getValuePoints: vi.fn().mockReturnValue(["Value point 1", "Value point 2"]),
-    getComponentDetails: vi.fn().mockReturnValue({
-      description: "Component description",
-      technical: "Technical details",
-    }),
-    getComponentDescription: vi.fn().mockReturnValue("Component description"),
-    getImplementationDetails: vi.fn().mockReturnValue({
-      steps: ["Step 1", "Step 2"],
-      time: "2-4 weeks",
-      cost: "medium",
+    getAvailabilityOptions: vi.fn().mockReturnValue({}),
+    getIntegrityOptions: vi.fn().mockReturnValue({}),
+    getConfidentialityOptions: vi.fn().mockReturnValue({}),
+    getROIEstimateForSecurityLevel: vi.fn().mockReturnValue("MODERATE"),
+    getCombinedROIKey: vi.fn().mockReturnValue("MODERATE"),
+    getROIDataForCombinedKey: vi.fn().mockReturnValue({
+      returnRate: "150%",
+      description: "Test ROI description",
+      recommendation: "Test recommendation",
     }),
   };
 
@@ -387,5 +407,43 @@ describe("useCIAOptions (TypeScript)", () => {
     expect(result.current.confidentialityOptions).toBeDefined();
     expect(result.current.ROI_ESTIMATES).toBeDefined();
   });
-  // ...existing tests...
+
+  // Replace problematic type assertions with proper handling
+  function validateOptionStructure(
+    option: useCIAOptionsModule.CIAOptionDetails
+  ): void {
+    // Test without unsafe type assertion
+    expect(option).toHaveProperty("description");
+    expect(typeof option.description).toBe("string");
+
+    // Only check these if they exist
+    if (option.recommendations) {
+      expect(Array.isArray(option.recommendations)).toBe(true);
+    }
+  }
+
+  // Update other parts where there are type assertions
+  it("checks the option structure", () => {
+    const { result } = renderHook(() => useCIAOptions());
+
+    // Use type-safe assertions
+    Object.values(result.current.availabilityOptions).forEach((option) => {
+      validateOptionStructure(option);
+    });
+
+    Object.values(result.current.integrityOptions).forEach((option) => {
+      validateOptionStructure(option);
+    });
+
+    Object.values(result.current.confidentialityOptions).forEach((option) => {
+      validateOptionStructure(option);
+    });
+
+    // Use more type-safe assertions for checking recommendations
+    Object.values(result.current.availabilityOptions).forEach((option) => {
+      if (option.recommendations) {
+        expect(Array.isArray(option.recommendations)).toBe(true);
+      }
+    });
+  });
 });

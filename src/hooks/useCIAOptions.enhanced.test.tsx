@@ -160,17 +160,34 @@ vi.mock("./useCIAOptions", () => {
       },
     },
     ROI_ESTIMATES: {
-      NONE: { returnRate: "0%", description: "Test NONE", value: "0%" },
-      LOW: { returnRate: "50%", description: "Test LOW", value: "50%" },
+      NONE: {
+        returnRate: "0%",
+        description: "Test NONE",
+        recommendation: "None recommended", // Add missing required property
+        value: "0%",
+      },
+      LOW: {
+        returnRate: "50%",
+        description: "Test LOW",
+        recommendation: "Low recommended", // Add missing required property
+        value: "50%",
+      },
       MODERATE: {
         returnRate: "100%",
         description: "Test MODERATE",
+        recommendation: "Moderate recommended", // Add missing required property
         value: "100%",
       },
-      HIGH: { returnRate: "200%", description: "Test HIGH", value: "200%" },
+      HIGH: {
+        returnRate: "200%",
+        description: "Test HIGH",
+        recommendation: "High recommended", // Add missing required property
+        value: "200%",
+      },
       VERY_HIGH: {
         returnRate: "500%",
         description: "Test VERY_HIGH",
+        recommendation: "Very High recommended", // Add missing required property
         value: "500%",
       },
     },

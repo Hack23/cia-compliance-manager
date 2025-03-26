@@ -6,9 +6,9 @@
 
 # Function: getProgressColor()
 
-> **getProgressColor**(`progress`): `"text-green-500"` \| `"text-blue-500"` \| `"text-yellow-500"` \| `"text-red-500"`
+> **getProgressColor**(`progress`): `"text-red-500"` \| `"text-green-500"` \| `"text-blue-500"` \| `"text-yellow-500"`
 
-Defined in: [utils/index.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/utils/index.ts#L35)
+Defined in: [utils/index.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/utils/index.ts#L37)
 
 ## Parameters
 
@@ -18,4 +18,4 @@ Defined in: [utils/index.ts:35](https://github.com/Hack23/cia-compliance-manager
 
 ## Returns
 
-`"text-green-500"` \| `"text-blue-500"` \| `"text-yellow-500"` \| `"text-red-500"`
+`"text-red-500"` \| `"text-green-500"` \| `"text-blue-500"` \| `"text-yellow-500"`

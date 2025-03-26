@@ -20,3 +20,8 @@
 ## Functions
 
 - [createSecurityMetricsService](functions/createSecurityMetricsService.md)
+- [getCostEstimation](functions/getCostEstimation.md)
+- [getSecurityMetrics](functions/getSecurityMetrics.md)
+- [getSecurityResources](functions/getSecurityResources.md)
+- [getTechnicalDetails](functions/getTechnicalDetails.md)
+- [getValueCreationMetrics](functions/getValueCreationMetrics.md)

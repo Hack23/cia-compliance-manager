@@ -6,6 +6,8 @@
 
 # Type Alias: StatusType
 
-> **StatusType** = `"success"` \| `"warning"` \| `"error"` \| `"info"` \| `"neutral"` \| `"purple"`
+> **StatusType** = `"success"` \| `"info"` \| `"warning"` \| `"error"` \| `"neutral"` \| `"purple"`
 
-Defined in: [components/common/StatusBadge.tsx:4](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/components/common/StatusBadge.tsx#L4)
+Defined in: [types/common/StatusTypes.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/common/StatusTypes.ts#L8)
+
+Available status types for badges and indicators

@@ -6,6 +6,14 @@
 
 # Variable: AvailabilityImpactWidget
 
-> **AvailabilityImpactWidget**: `FC`\<`AvailabilityImpactWidgetProps` & [`WithSecurityLevelProps`](../../typedoc-entry/interfaces/WithSecurityLevelProps.md)\>
+> `const` **AvailabilityImpactWidget**: `React.FC`\<`AvailabilityImpactWidgetProps`\>
 
-Defined in: [components/widgets/impactanalysis/AvailabilityImpactWidget.tsx:231](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/components/widgets/impactanalysis/AvailabilityImpactWidget.tsx#L231)
+Defined in: [components/widgets/impactanalysis/AvailabilityImpactWidget.tsx:53](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/components/widgets/impactanalysis/AvailabilityImpactWidget.tsx#L53)
+
+Widget that displays the impact of selected availability level
+
+## Business Perspective
+
+This widget helps stakeholders understand the business impact of
+availability controls, including uptime targets, recovery metrics,
+and resilience requirements for business continuity. ⏱️

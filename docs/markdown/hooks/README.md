@@ -21,10 +21,3 @@ Centralized hook exports simplify imports and promote hook reuse.
 
 - [useCIAContentService](functions/useCIAContentService.md)
 - [useCIAOptions](functions/useCIAOptions.md)
-- [useSecurityLevelState](functions/useSecurityLevelState.md)
-
-## References
-
-### useSecurityLevelContext
-
-Re-exports [useSecurityLevelContext](../contexts/SecurityLevelContext/functions/useSecurityLevelContext.md)

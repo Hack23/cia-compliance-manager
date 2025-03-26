@@ -8,26 +8,32 @@
 
 > **useCIAContentService**(): `object`
 
-Defined in: [hooks/useCIAContentService.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/hooks/useCIAContentService.ts#L20)
+Defined in: [hooks/useCIAContentService.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/hooks/useCIAContentService.ts#L12)
 
-Hook that provides access to the CIA content service
-
-## Business Perspective
-
-This hook centralizes access to CIA security content throughout the application,
-ensuring consistent security descriptions, technical details, and business
-impact information are presented to users across all widgets. 🔒
-
-The service handles security level calculations, risk assessments, and technical
-recommendations to provide a cohesive security narrative that aligns with
-business objectives. 💼
+Hook to access the CIA content service with loading and error states
 
 ## Returns
 
 `object`
 
-The CIA content service instance
+Object containing the CIA content service, loading state, and error state
 
 ### ciaContentService
 
-> **ciaContentService**: [`CIAContentService`](../../services/classes/CIAContentService.md)
+> **ciaContentService**: `null` \| [`CIAContentService`](../../services/classes/CIAContentService.md)
+
+### error
+
+> **error**: `null` \| `Error`
+
+### isLoading
+
+> **isLoading**: `boolean`
+
+### refresh()
+
+> **refresh**: () => `void`
+
+#### Returns
+
+`void`

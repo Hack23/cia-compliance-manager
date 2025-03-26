@@ -6,16 +6,9 @@
 
 # Class: SecurityResourceService
 
-Defined in: [services/securityResourceService.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/securityResourceService.ts#L28)
+Defined in: [services/securityResourceService.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityResourceService.ts#L16)
 
-Service for security resources related functionality
-
-## Educational Perspective
-
-This service provides educational resources and implementation guides
-that help security teams build their knowledge and implement security
-controls effectively. It curates relevant documentation and learning
-resources based on selected security levels. 📚
+Service for security resource recommendations
 
 ## Extends
 
@@ -23,11 +16,11 @@ resources based on selected security levels. 📚
 
 ## Constructors
 
-### new SecurityResourceService()
+### Constructor
 
 > **new SecurityResourceService**(`dataProvider`): `SecurityResourceService`
 
-Defined in: [services/securityResourceService.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/securityResourceService.ts#L29)
+Defined in: [services/securityResourceService.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityResourceService.ts#L19)
 
 #### Parameters
 
@@ -47,17 +40,17 @@ Defined in: [services/securityResourceService.ts:29](https://github.com/Hack23/c
 
 ### getSecurityResources()
 
-> **getSecurityResources**(`component`, `level`): [`SecurityResource`](../interfaces/SecurityResource.md)[]
+> **getSecurityResources**(`component`, `level`): `EnhancedSecurityResource`[]
 
-Defined in: [services/securityResourceService.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/securityResourceService.ts#L43)
+Defined in: [services/securityResourceService.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityResourceService.ts#L44)
 
-Get security resources for a specific level
+Get security resources based on component and level
 
 #### Parameters
 
 ##### component
 
-[`CIAComponentType`](../../types/type-aliases/CIAComponentType.md)
+[`CIAComponentType`](../../types/type-aliases/CIAComponentType.md) | `"general"` | `"all"`
 
 ##### level
 
@@ -65,7 +58,7 @@ Get security resources for a specific level
 
 #### Returns
 
-[`SecurityResource`](../interfaces/SecurityResource.md)[]
+`EnhancedSecurityResource`[]
 
 ***
 
@@ -73,7 +66,7 @@ Get security resources for a specific level
 
 > **getValuePoints**(`level`): `string`[]
 
-Defined in: [services/securityResourceService.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/securityResourceService.ts#L36)
+Defined in: [services/securityResourceService.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityResourceService.ts#L174)
 
 Get value points for a security level
 

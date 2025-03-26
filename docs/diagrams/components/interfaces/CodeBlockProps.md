@@ -6,7 +6,7 @@
 
 # Interface: CodeBlockProps
 
-Defined in: [types/componentPropExports.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/componentPropExports.ts#L45)
+Defined in: [types/componentPropExports.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/componentPropExports.ts#L45)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:45](https://github.com/Hack23/cia-com
 
 > **code**: `string`
 
-Defined in: [types/componentPropExports.ts:46](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/componentPropExports.ts#L46)
+Defined in: [types/componentPropExports.ts:46](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/componentPropExports.ts#L46)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types/componentPropExports.ts:46](https://github.com/Hack23/cia-com
 
 > `optional` **language**: `string`
 
-Defined in: [types/componentPropExports.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/componentPropExports.ts#L47)
+Defined in: [types/componentPropExports.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/componentPropExports.ts#L47)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [types/componentPropExports.ts:47](https://github.com/Hack23/cia-com
 
 > `optional` **showLineNumbers**: `boolean`
 
-Defined in: [types/componentPropExports.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/componentPropExports.ts#L48)
+Defined in: [types/componentPropExports.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/componentPropExports.ts#L48)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [types/componentPropExports.ts:48](https://github.com/Hack23/cia-com
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:49](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/componentPropExports.ts#L49)
+Defined in: [types/componentPropExports.ts:49](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/componentPropExports.ts#L49)

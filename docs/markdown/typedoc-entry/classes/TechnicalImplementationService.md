@@ -6,7 +6,7 @@
 
 # Class: TechnicalImplementationService
 
-Defined in: [services/technicalImplementationService.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/technicalImplementationService.ts#L33)
+Defined in: [services/technicalImplementationService.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/technicalImplementationService.ts#L33)
 
 Service for technical implementation details and guidance
 
@@ -23,11 +23,11 @@ security requirements and implement controls effectively. 🔧
 
 ## Constructors
 
-### new TechnicalImplementationService()
+### Constructor
 
 > **new TechnicalImplementationService**(`dataProvider`): `TechnicalImplementationService`
 
-Defined in: [services/technicalImplementationService.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/technicalImplementationService.ts#L34)
+Defined in: [services/technicalImplementationService.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/technicalImplementationService.ts#L34)
 
 #### Parameters
 
@@ -47,31 +47,25 @@ Defined in: [services/technicalImplementationService.ts:34](https://github.com/H
 
 ### getComponentImplementationDetails()
 
-> **getComponentImplementationDetails**(`component`, `level`): [`TechnicalImplementationDetails`](../../types/interfaces/TechnicalImplementationDetails.md)
+> **getComponentImplementationDetails**(`_component`, `level`): [`TechnicalImplementationDetails`](../../types/interfaces/TechnicalImplementationDetails.md)
 
-Defined in: [services/technicalImplementationService.ts:95](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/technicalImplementationService.ts#L95)
+Defined in: [services/technicalImplementationService.ts:91](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/technicalImplementationService.ts#L91)
 
-Get component-specific implementation details
+Get component implementation details
 
 #### Parameters
 
-##### component
+##### \_component
 
 [`CIAComponentType`](../../types/type-aliases/CIAComponentType.md)
-
-CIA component type
 
 ##### level
 
 [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
-Security level
-
 #### Returns
 
 [`TechnicalImplementationDetails`](../../types/interfaces/TechnicalImplementationDetails.md)
-
-Component-specific implementation details
 
 ***
 
@@ -79,7 +73,7 @@ Component-specific implementation details
 
 > **getImplementationConsiderations**(`level`): `string`
 
-Defined in: [services/technicalImplementationService.ts:182](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/technicalImplementationService.ts#L182)
+Defined in: [services/technicalImplementationService.ts:178](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/technicalImplementationService.ts#L178)
 
 Get implementation considerations based on security levels
 
@@ -103,7 +97,7 @@ Implementation considerations text
 
 > **getImplementationEffort**(`component`, `level`): [`ImplementationEffort`](../../types/interfaces/ImplementationEffort.md)
 
-Defined in: [services/technicalImplementationService.ts:205](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/technicalImplementationService.ts#L205)
+Defined in: [services/technicalImplementationService.ts:201](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/technicalImplementationService.ts#L201)
 
 Get implementation effort for a component's security level
 
@@ -133,7 +127,7 @@ Implementation effort details or default effort
 
 > **getImplementationSteps**(`component`, `level`): `string`[]
 
-Defined in: [services/technicalImplementationService.ts:219](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/technicalImplementationService.ts#L219)
+Defined in: [services/technicalImplementationService.ts:215](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/technicalImplementationService.ts#L215)
 
 Get implementation steps for a component's security level
 
@@ -163,7 +157,7 @@ Array of implementation steps
 
 > **getImplementationTime**(`level`): `string`
 
-Defined in: [services/technicalImplementationService.ts:159](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/technicalImplementationService.ts#L159)
+Defined in: [services/technicalImplementationService.ts:155](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/technicalImplementationService.ts#L155)
 
 Get implementation time estimate based on security level
 
@@ -187,7 +181,7 @@ Implementation time estimate
 
 > **getRecommendations**(`component`, `level`): `string`[]
 
-Defined in: [services/technicalImplementationService.ts:129](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/technicalImplementationService.ts#L129)
+Defined in: [services/technicalImplementationService.ts:125](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/technicalImplementationService.ts#L125)
 
 Get recommendations for a component and security level
 
@@ -217,7 +211,7 @@ Array of recommendations
 
 > **getTechnicalDescription**(`component`, `level`): `string`
 
-Defined in: [services/technicalImplementationService.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/technicalImplementationService.ts#L109)
+Defined in: [services/technicalImplementationService.ts:105](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/technicalImplementationService.ts#L105)
 
 Get technical description for a component and security level
 
@@ -247,7 +241,7 @@ Technical description
 
 > **getTechnicalImplementation**(`component`, `level`): [`TechnicalImplementationDetails`](../../types/interfaces/TechnicalImplementationDetails.md)
 
-Defined in: [services/technicalImplementationService.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/technicalImplementationService.ts#L45)
+Defined in: [services/technicalImplementationService.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/technicalImplementationService.ts#L45)
 
 Get technical implementation details for a component and security level
 

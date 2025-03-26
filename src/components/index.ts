@@ -54,34 +54,26 @@ export { SecurityRiskScore as ChartSecurityRiskScore } from "./charts/SecurityRi
 export { SecurityLevelSelector } from "./securitylevel/SecurityLevelSelector";
 export { Selection } from "./securitylevel/Selection";
 
-// Export widget components
+// Export widget components that are actively used
 export * from "./widgets";
 
-// Import and re-export component prop types
+// Import and re-export only the component prop types that are actually used
 export type {
   BusinessImpactSectionProps,
   BusinessRiskDisplayProps,
   CIAImpactCardProps,
-  CodeBlockProps,
   KeyValuePairProps,
   MetricsCardProps,
   RadarChartProps,
   RiskAssessmentProps,
   RiskLevelBadgeProps,
   SecurityLevelBadgeProps,
-  SecurityLevelChangeTrackerProps,
-  SecurityLevelContextType,
-  SecurityLevelProviderProps,
-  SecurityLevelSelectorProps,
-  SecurityLevelSummaryItemProps,
   SecurityRiskScoreProps,
-  SelectionProps,
   StatusBadgeProps,
   TabProps,
   ThemeToggleProps,
   TooltipProps,
-  UseSecurityLevelStateOptions,
-  WidgetActionButtonProps,
   WidgetActionsProps,
+  WidgetContainerProps,
   WidgetHeaderProps,
 } from "../types/componentPropExports";

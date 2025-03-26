@@ -15,8 +15,9 @@
 
 import { SecurityLevel } from "../types/cia";
 
-type OrganizationSize = "small" | "medium" | "large" | "enterprise";
-type Industry =
+// Export the types so they can be imported elsewhere
+export type OrganizationSize = "small" | "medium" | "large" | "enterprise";
+export type Industry =
   | "general"
   | "financial"
   | "healthcare"
@@ -63,8 +64,8 @@ const INDUSTRY_COST_FACTORS = {
  * @param level Security level to normalize
  * @returns Normalized security level that matches BASE_IMPLEMENTATION_COSTS keys
  */
-function normalizeLevel(
-  level: SecurityLevel | string | undefined
+function normalizeSecurityLevel(
+  level: string | SecurityLevel | undefined
 ): SecurityLevel {
   if (!level) return "None";
 
@@ -85,40 +86,21 @@ function normalizeLevel(
  * Calculate implementation cost based on security level
  */
 export function calculateImplementationCost(
-  securityLevel: SecurityLevel,
+  securityLevel: SecurityLevel | string, // Allow string for more flexible inputs
   orgSize: OrganizationSize = "medium",
   industry: Industry = "general"
 ): CostResult {
-  // Default costs by security level
-  let baseCosts: CostResult;
-
   // Normalize the security level and handle case variations
   const normalizedLevel = normalizeSecurityLevel(securityLevel);
 
-  switch (normalizedLevel) {
-    case "None":
-      baseCosts = { capex: 0, opex: 0 };
-      break;
-    case "Low":
-      baseCosts = { capex: 5000, opex: 2000 };
-      break;
-    case "Moderate":
-      baseCosts = { capex: 15000, opex: 5000 };
-      break;
-    case "High":
-      baseCosts = { capex: 50000, opex: 15000 };
-      break;
-    case "Very High":
-      baseCosts = { capex: 200000, opex: 50000 };
-      break;
-    default:
-      baseCosts = { capex: 0, opex: 0 }; // Default to None if invalid
-  }
+  // Get base costs for the normalized level
+  const baseCosts = BASE_IMPLEMENTATION_COSTS[normalizedLevel] || {
+    capex: 0,
+    opex: 0,
+  };
 
-  // Organization size factor
+  // Get scaling factors
   const sizeFactor = getSizeFactor(orgSize);
-
-  // Industry factor
   const industryFactor = getIndustryFactor(industry);
 
   // Apply factors to base costs
@@ -278,17 +260,17 @@ export function getRecommendedBudgetAllocation(
 
 // Helper functions
 
-function normalizeSecurityLevel(level: string): SecurityLevel {
-  const normalized = String(level || "").trim();
+function getSizeFactor(size?: OrganizationSize): number {
+  return (
+    ORG_SIZE_MULTIPLIERS[size as OrganizationSize] ||
+    ORG_SIZE_MULTIPLIERS.medium
+  );
+}
 
-  // Handle case variations
-  if (/^none$/i.test(normalized)) return "None";
-  if (/^low$/i.test(normalized)) return "Low";
-  if (/^moderate$/i.test(normalized)) return "Moderate";
-  if (/^high$/i.test(normalized)) return "High";
-  if (/^very\s*high$/i.test(normalized)) return "Very High";
-
-  return "None"; // Default
+function getIndustryFactor(industry?: Industry): number {
+  return (
+    INDUSTRY_COST_FACTORS[industry as Industry] || INDUSTRY_COST_FACTORS.general
+  );
 }
 
 function getSecurityLevelValue(level: SecurityLevel): number {
@@ -305,41 +287,5 @@ function getSecurityLevelValue(level: SecurityLevel): number {
       return 4;
     default:
       return 0;
-  }
-}
-
-function getSizeFactor(size?: OrganizationSize): number {
-  switch (size) {
-    case "small":
-      return 0.5;
-    case "medium":
-      return 1.0;
-    case "large":
-      return 2.5;
-    case "enterprise":
-      return 5.0;
-    default:
-      return 1.0; // Default to medium
-  }
-}
-
-function getIndustryFactor(industry?: Industry): number {
-  switch (industry) {
-    case "financial":
-      return 1.5;
-    case "healthcare":
-      return 1.7;
-    case "government":
-      return 1.3;
-    case "retail":
-      return 1.2;
-    case "technology":
-      return 1.4;
-    case "manufacturing":
-      return 1.1;
-    case "general":
-      return 1.0;
-    default:
-      return 1.0; // Default to general
   }
 }

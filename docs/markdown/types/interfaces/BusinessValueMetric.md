@@ -6,7 +6,9 @@
 
 # Interface: BusinessValueMetric
 
-Defined in: [types/businessImpact.ts:76](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/businessImpact.ts#L76)
+Defined in: [types/businessImpact.ts:337](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/businessImpact.ts#L337)
+
+Business value metric
 
 ## Properties
 
@@ -14,20 +16,36 @@ Defined in: [types/businessImpact.ts:76](https://github.com/Hack23/cia-complianc
 
 > **description**: `string`
 
-Defined in: [types/businessImpact.ts:79](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/businessImpact.ts#L79)
+Defined in: [types/businessImpact.ts:346](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/businessImpact.ts#L346)
+
+Description of the metric
 
 ***
 
-### icon
+### measurementMethod
 
-> **icon**: `string`
+> **measurementMethod**: `string`
 
-Defined in: [types/businessImpact.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/businessImpact.ts#L78)
+Defined in: [types/businessImpact.ts:351](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/businessImpact.ts#L351)
+
+How the metric is measured
 
 ***
 
-### value
+### name
 
-> **value**: `string`
+> **name**: `string`
 
-Defined in: [types/businessImpact.ts:77](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/businessImpact.ts#L77)
+Defined in: [types/businessImpact.ts:341](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/businessImpact.ts#L341)
+
+Name of the metric
+
+***
+
+### securityImpact
+
+> **securityImpact**: `string`
+
+Defined in: [types/businessImpact.ts:356](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/businessImpact.ts#L356)
+
+How security impacts this metric

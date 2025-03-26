@@ -6,7 +6,7 @@
 
 # Interface: SecurityLevelSelectorProps
 
-Defined in: [types/componentPropExports.ts:175](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/componentPropExports.ts#L175)
+Defined in: [types/componentPropExports.ts:175](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/componentPropExports.ts#L175)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:175](https://github.com/Hack23/cia-co
 
 > `optional` **compact**: `boolean`
 
-Defined in: [types/componentPropExports.ts:181](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/componentPropExports.ts#L181)
+Defined in: [types/componentPropExports.ts:181](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/componentPropExports.ts#L181)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types/componentPropExports.ts:181](https://github.com/Hack23/cia-co
 
 > **component**: `"confidentiality"` \| `"integrity"` \| `"availability"`
 
-Defined in: [types/componentPropExports.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/componentPropExports.ts#L176)
+Defined in: [types/componentPropExports.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/componentPropExports.ts#L176)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [types/componentPropExports.ts:176](https://github.com/Hack23/cia-co
 
 > `optional` **disabled**: `boolean`
 
-Defined in: [types/componentPropExports.ts:182](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/componentPropExports.ts#L182)
+Defined in: [types/componentPropExports.ts:182](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/componentPropExports.ts#L182)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [types/componentPropExports.ts:182](https://github.com/Hack23/cia-co
 
 > `optional` **highlight**: `boolean`
 
-Defined in: [types/componentPropExports.ts:180](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/componentPropExports.ts#L180)
+Defined in: [types/componentPropExports.ts:180](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/componentPropExports.ts#L180)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [types/componentPropExports.ts:180](https://github.com/Hack23/cia-co
 
 > `optional` **mode**: `"horizontal"` \| `"vertical"`
 
-Defined in: [types/componentPropExports.ts:179](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/componentPropExports.ts#L179)
+Defined in: [types/componentPropExports.ts:179](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/componentPropExports.ts#L179)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [types/componentPropExports.ts:179](https://github.com/Hack23/cia-co
 
 > **onLevelChange**: (`level`) => `void`
 
-Defined in: [types/componentPropExports.ts:178](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/componentPropExports.ts#L178)
+Defined in: [types/componentPropExports.ts:178](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/componentPropExports.ts#L178)
 
 #### Parameters
 
@@ -72,7 +72,7 @@ Defined in: [types/componentPropExports.ts:178](https://github.com/Hack23/cia-co
 
 > **selectedLevel**: [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
-Defined in: [types/componentPropExports.ts:177](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/componentPropExports.ts#L177)
+Defined in: [types/componentPropExports.ts:177](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/componentPropExports.ts#L177)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: [types/componentPropExports.ts:177](https://github.com/Hack23/cia-co
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:183](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/componentPropExports.ts#L183)
+Defined in: [types/componentPropExports.ts:183](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/componentPropExports.ts#L183)

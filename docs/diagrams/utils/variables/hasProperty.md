@@ -8,7 +8,7 @@
 
 > **hasProperty**: (`obj`, `prop`) => `boolean`
 
-Defined in: [utils/index.ts:170](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/utils/index.ts#L170)
+Defined in: [utils/index.ts:172](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/utils/index.ts#L172)
 
 Helper function to check if an object has a property
 

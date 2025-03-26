@@ -8,6 +8,6 @@
 
 > **WidgetProps** = [`WidgetBaseProps`](../../typedoc-entry/interfaces/WidgetBaseProps.md)
 
-Defined in: [types/widgets.ts:117](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/widgets.ts#L117)
+Defined in: [types/widgets.ts:117](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/widgets.ts#L117)
 
 Alias type for WidgetBaseProps to maintain backward compatibility

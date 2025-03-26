@@ -8,7 +8,7 @@
 
 > **createBusinessImpactService**(`dataProvider`): [`BusinessImpactService`](../classes/BusinessImpactService.md)
 
-Defined in: [services/businessImpactService.ts:323](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/businessImpactService.ts#L323)
+Defined in: [services/businessImpactService.ts:426](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/businessImpactService.ts#L426)
 
 Create a BusinessImpactService with the provided data provider
 

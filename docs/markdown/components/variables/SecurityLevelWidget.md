@@ -6,6 +6,27 @@
 
 # Variable: SecurityLevelWidget
 
-> **SecurityLevelWidget**: `FC`\<`SecurityLevelWidgetProps` & [`WithSecurityLevelProps`](../../typedoc-entry/interfaces/WithSecurityLevelProps.md)\>
+> `const` **SecurityLevelWidget**: `React.FC`\<`SecurityLevelWidgetProps`\>
 
-Defined in: [components/widgets/assessmentcenter/SecurityLevelWidget.tsx:566](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/components/widgets/assessmentcenter/SecurityLevelWidget.tsx#L566)
+Defined in: [components/widgets/assessmentcenter/SecurityLevelWidget.tsx:80](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/components/widgets/assessmentcenter/SecurityLevelWidget.tsx#L80)
+
+Widget for configuring CIA triad security levels
+
+## Business Perspective
+
+This widget serves as the primary control center for security officers to
+configure their organization's security posture across the CIA triad. It
+provides clear descriptions of each security level to help users make
+informed decisions about their security requirements. 🔒
+
+## Security Perspective
+
+Enables fine-grained control over each CIA component, with detailed
+explanations of security implications for each level. Helps security
+teams implement appropriate controls based on organizational needs.
+
+## Architecture Perspective
+
+Provides technical implementation details for each security level,
+helping system architects understand what controls and mechanisms
+need to be implemented to achieve the selected security levels.

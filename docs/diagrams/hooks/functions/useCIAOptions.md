@@ -6,30 +6,136 @@
 
 # Function: useCIAOptions()
 
-> **useCIAOptions**(): `object`
+> **useCIAOptions**(`customProvider`?): `object`
 
-Defined in: [hooks/useCIAOptions.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/hooks/useCIAOptions.ts#L24)
+Defined in: [hooks/useCIAOptions.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/hooks/useCIAOptions.ts#L28)
 
-Custom hook for accessing CIA security options with memoization
+Custom hook to access CIA options throughout the application
+
+## Parameters
+
+### customProvider?
+
+`Partial`\<[`CIADataProvider`](../../types/interfaces/CIADataProvider.md)\>
+
+Optional custom data provider
 
 ## Returns
 
 `object`
 
-Memoized references to CIA options data
+CIA options for all components
 
 ### availabilityOptions
 
-> **availabilityOptions**: `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), [`CIADetails`](../../types/interfaces/CIADetails.md)\>
+> **availabilityOptions**: `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), [`CIADetails`](../../types/interfaces/CIADetails.md)\> = `dataProvider.availabilityOptions`
 
 ### confidentialityOptions
 
-> **confidentialityOptions**: `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), [`CIADetails`](../../types/interfaces/CIADetails.md)\>
+> **confidentialityOptions**: `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), [`CIADetails`](../../types/interfaces/CIADetails.md)\> = `dataProvider.confidentialityOptions`
+
+### getComponentDescription()
+
+> **getComponentDescription**: (`component`, `level`) => `string`
+
+#### Parameters
+
+##### component
+
+`"confidentiality"` | `"integrity"` | `"availability"`
+
+##### level
+
+[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
+
+#### Returns
+
+`string`
+
+### getComponentDetails()
+
+> **getComponentDetails**: (`component`, `level`) => [`CIADetails`](../../types/interfaces/CIADetails.md)
+
+#### Parameters
+
+##### component
+
+`"confidentiality"` | `"integrity"` | `"availability"`
+
+##### level
+
+[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
+
+#### Returns
+
+[`CIADetails`](../../types/interfaces/CIADetails.md)
+
+### getImplementationDetails()
+
+> **getImplementationDetails**: (`component`, `level`) => `object`
+
+#### Parameters
+
+##### component
+
+`"confidentiality"` | `"integrity"` | `"availability"`
+
+##### level
+
+[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
+
+#### Returns
+
+`object`
+
+##### effort
+
+> **effort**: `string` \| [`ImplementationEffort`](../../types/interfaces/ImplementationEffort.md)
+
+##### expertise
+
+> **expertise**: `string`
+
+##### recommendations
+
+> **recommendations**: `string`[]
+
+##### timeframe
+
+> **timeframe**: `string`
+
+### getROIEstimate()
+
+> **getROIEstimate**: (`level`) => [`ROIEstimate`](../../types/interfaces/ROIEstimate.md)
+
+#### Parameters
+
+##### level
+
+[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
+
+#### Returns
+
+[`ROIEstimate`](../../types/interfaces/ROIEstimate.md)
+
+### getValuePoints()
+
+> **getValuePoints**: (`level`) => `string`[]
+
+#### Parameters
+
+##### level
+
+[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
+
+#### Returns
+
+`string`[]
 
 ### integrityOptions
 
-> **integrityOptions**: `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), [`CIADetails`](../../types/interfaces/CIADetails.md)\>
+> **integrityOptions**: `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), [`CIADetails`](../../types/interfaces/CIADetails.md)\> = `dataProvider.integrityOptions`
 
 ### ROI\_ESTIMATES
 
-> **ROI\_ESTIMATES**: [`ROIEstimatesMap`](../../types/interfaces/ROIEstimatesMap.md)
+> **ROI\_ESTIMATES**: [`ROIEstimatesMap`](../../types/interfaces/ROIEstimatesMap.md) = `dataProvider.roiEstimates`

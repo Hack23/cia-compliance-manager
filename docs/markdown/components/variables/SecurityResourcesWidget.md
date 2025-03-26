@@ -8,12 +8,13 @@
 
 > `const` **SecurityResourcesWidget**: `React.FC`\<`SecurityResourcesWidgetProps`\>
 
-Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L24)
+Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:61](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L61)
 
-Security Resources Widget provides relevant documentation and guidance
+Widget that displays security resources and implementation guides
 
 ## Business Perspective
 
-This widget offers security professionals access to implementation guides,
-best practices, and reference materials tailored to the organization's
-specific security level selections, supporting effective security implementation. 📚
+This widget provides security practitioners with relevant resources,
+implementation guides, and best practices to help implement appropriate
+security controls for the selected security levels. It bridges the gap
+between security requirements and practical implementation. 📚

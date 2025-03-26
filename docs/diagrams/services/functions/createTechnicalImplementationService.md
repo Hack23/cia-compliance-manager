@@ -8,7 +8,7 @@
 
 > **createTechnicalImplementationService**(`dataProvider`?): [`TechnicalImplementationService`](../../typedoc-entry/classes/TechnicalImplementationService.md)
 
-Defined in: [services/technicalImplementationService.ts:664](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/technicalImplementationService.ts#L664)
+Defined in: [services/technicalImplementationService.ts:331](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/technicalImplementationService.ts#L331)
 
 Create a TechnicalImplementationService instance
 

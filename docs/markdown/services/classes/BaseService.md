@@ -4,39 +4,39 @@
 
 [CIA Compliance Manager Documentation](../../modules.md) / [services](../README.md) / BaseService
 
-# Class: `abstract` BaseService
+# Class: BaseService
 
-Defined in: [services/BaseService.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/BaseService.ts#L17)
+Defined in: [services/BaseService.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/BaseService.ts#L15)
 
-Base service class that provides common functionality for all services
-
-## Business Perspective
-
-The BaseService establishes a consistent foundation for all services,
-ensuring uniform data access patterns, error handling, and security level 
-processing. This improves maintainability and reduces duplication across
-security-related services. 🛠️
+Base service class that provides common functionality
+for security-related services
 
 ## Extended by
 
 - [`SecurityMetricsService`](../securityMetricsService/classes/SecurityMetricsService.md)
 - [`ComplianceService`](../../typedoc-entry/classes/ComplianceService.md)
 - [`TechnicalImplementationService`](../../typedoc-entry/classes/TechnicalImplementationService.md)
+- [`CIAContentService`](CIAContentService.md)
+- [`ComplianceServiceAdapter`](ComplianceServiceAdapter.md)
 - [`SecurityResourceService`](SecurityResourceService.md)
 
 ## Constructors
 
-### new BaseService()
+### Constructor
 
 > **new BaseService**(`dataProvider`): `BaseService`
 
-Defined in: [services/BaseService.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/BaseService.ts#L20)
+Defined in: [services/BaseService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/BaseService.ts#L26)
+
+Create a new service instance
 
 #### Parameters
 
 ##### dataProvider
 
 [`CIADataProvider`](../../types/interfaces/CIADataProvider.md)
+
+Data provider for security information
 
 #### Returns
 

@@ -40,11 +40,12 @@ Centralized component exports simplify imports and promote component reuse.
 - [BusinessImpactAnalysisWidget](variables/BusinessImpactAnalysisWidget.md)
 - [BusinessImpactSection](variables/BusinessImpactSection.md)
 - [BusinessRiskDisplay](variables/BusinessRiskDisplay.md)
-- [ChartSecurityRiskScore](variables/ChartSecurityRiskScore.md)
 - [CIAImpactCard](variables/CIAImpactCard.md)
 - [COMPLIANCE\_STATUS](variables/COMPLIANCE_STATUS.md)
 - [COMPLIANCE\_STATUS\_TEST\_IDS](variables/COMPLIANCE_STATUS_TEST_IDS.md)
+- [ComplianceStatusWidget](variables/ComplianceStatusWidget.md)
 - [ConfidentialityImpactWidget](variables/ConfidentialityImpactWidget.md)
+- [CostEstimationWidget](variables/CostEstimationWidget.md)
 - [IntegrityImpactWidget](variables/IntegrityImpactWidget.md)
 - [MetricsCard](variables/MetricsCard.md)
 - [RadarChart](variables/RadarChart.md)
@@ -69,10 +70,8 @@ Centralized component exports simplify imports and promote component reuse.
 
 ## Functions
 
-- [ComplianceStatusWidget](functions/ComplianceStatusWidget.md)
-- [CostEstimationWidget](functions/CostEstimationWidget.md)
+- [ChartSecurityRiskScore](functions/ChartSecurityRiskScore.md)
 - [KeyValuePair](functions/KeyValuePair.md)
-- [SecurityLevelChangeTracker](functions/SecurityLevelChangeTracker.md)
 - [SecurityRiskScore](functions/SecurityRiskScore.md)
 
 ## References

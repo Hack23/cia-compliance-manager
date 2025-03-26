@@ -8,42 +8,32 @@
 
 > `const` **RISK\_LEVELS**: `object`
 
-Defined in: [constants/riskConstants.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/constants/riskConstants.ts#L14)
+Defined in: [constants/riskConstants.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/constants/riskConstants.ts#L7)
 
-Risk levels used throughout the application
-
-## Business Perspective
-
-These levels provide a standardized way to communicate risk severity
-across the organization, helping business stakeholders understand
-security implications in business terms. ⚠️
+Risk levels with consistent naming
 
 ## Type declaration
 
 ### CRITICAL
 
-> **CRITICAL**: `string` = `"Critical Risk"`
+> **CRITICAL**: `string` = `"Critical"`
 
 ### HIGH
 
-> **HIGH**: `string` = `"High Risk"`
+> **HIGH**: `string` = `"High"`
 
 ### LOW
 
-> **LOW**: `string` = `"Low Risk"`
+> **LOW**: `string` = `"Low"`
 
 ### MEDIUM
 
-> **MEDIUM**: `string` = `"Medium Risk"`
+> **MEDIUM**: `string` = `"Medium"`
 
 ### MINIMAL
 
-> **MINIMAL**: `string` = `"Minimal Risk"`
-
-### NONE
-
-> **NONE**: `string` = `"No Risk"`
+> **MINIMAL**: `string` = `"Minimal"`
 
 ### UNKNOWN
 
-> **UNKNOWN**: `string` = `"Unknown Risk"`
+> **UNKNOWN**: `string` = `"Unknown"`

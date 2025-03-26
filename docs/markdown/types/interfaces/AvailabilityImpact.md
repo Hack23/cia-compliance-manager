@@ -6,7 +6,7 @@
 
 # Interface: AvailabilityImpact
 
-Defined in: [types/cia.ts:243](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia.ts#L243)
+Defined in: [types/cia.ts:257](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia.ts#L257)
 
 Impact associated with the availability of the system
 
@@ -20,7 +20,7 @@ Impact associated with the availability of the system
 
 > **description**: `string`
 
-Defined in: [types/cia.ts:237](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia.ts#L237)
+Defined in: [types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia.ts#L251)
 
 #### Inherited from
 
@@ -32,7 +32,7 @@ Defined in: [types/cia.ts:237](https://github.com/Hack23/cia-compliance-manager/
 
 > **level**: [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:236](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia.ts#L236)
+Defined in: [types/cia.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia.ts#L250)
 
 #### Inherited from
 
@@ -44,7 +44,7 @@ Defined in: [types/cia.ts:236](https://github.com/Hack23/cia-compliance-manager/
 
 > **recoveryTime**: `string`
 
-Defined in: [types/cia.ts:245](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia.ts#L245)
+Defined in: [types/cia.ts:259](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia.ts#L259)
 
 ***
 
@@ -52,4 +52,4 @@ Defined in: [types/cia.ts:245](https://github.com/Hack23/cia-compliance-manager/
 
 > **uptime**: `string`
 
-Defined in: [types/cia.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia.ts#L244)
+Defined in: [types/cia.ts:258](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia.ts#L258)

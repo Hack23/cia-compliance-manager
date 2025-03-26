@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactDetails
 
-Defined in: [types/cia-services.ts:64](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia-services.ts#L64)
+Defined in: [types/cia-services.ts:96](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia-services.ts#L96)
 
 Business impact details
 
@@ -16,7 +16,7 @@ Business impact details
 
 > `optional` **financial**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
 
-Defined in: [types/cia-services.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia-services.ts#L68)
+Defined in: [types/cia-services.ts:100](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia-services.ts#L100)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [types/cia-services.ts:68](https://github.com/Hack23/cia-compliance-
 
 > `optional` **financialImpact**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
 
-Defined in: [types/cia-services.ts:72](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia-services.ts#L72)
+Defined in: [types/cia-services.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia-services.ts#L104)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [types/cia-services.ts:72](https://github.com/Hack23/cia-compliance-
 
 > `optional` **operational**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
 
-Defined in: [types/cia-services.ts:69](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia-services.ts#L69)
+Defined in: [types/cia-services.ts:101](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia-services.ts#L101)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [types/cia-services.ts:69](https://github.com/Hack23/cia-compliance-
 
 > `optional` **operationalImpact**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
 
-Defined in: [types/cia-services.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia-services.ts#L73)
+Defined in: [types/cia-services.ts:105](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia-services.ts#L105)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [types/cia-services.ts:73](https://github.com/Hack23/cia-compliance-
 
 > `optional` **regulatory**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
 
-Defined in: [types/cia-services.ts:79](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia-services.ts#L79)
+Defined in: [types/cia-services.ts:111](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia-services.ts#L111)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [types/cia-services.ts:79](https://github.com/Hack23/cia-compliance-
 
 > `optional` **reputational**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
 
-Defined in: [types/cia-services.ts:76](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia-services.ts#L76)
+Defined in: [types/cia-services.ts:108](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia-services.ts#L108)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [types/cia-services.ts:76](https://github.com/Hack23/cia-compliance-
 
 > `optional` **reputationalImpact**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
 
-Defined in: [types/cia-services.ts:77](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia-services.ts#L77)
+Defined in: [types/cia-services.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia-services.ts#L109)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [types/cia-services.ts:77](https://github.com/Hack23/cia-compliance-
 
 > `optional` **strategic**: [`BusinessImpactDetail`](BusinessImpactDetail.md)
 
-Defined in: [types/cia-services.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia-services.ts#L78)
+Defined in: [types/cia-services.ts:110](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia-services.ts#L110)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: [types/cia-services.ts:78](https://github.com/Hack23/cia-compliance-
 
 > **summary**: `string`
 
-Defined in: [types/cia-services.ts:65](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/types/cia-services.ts#L65)
+Defined in: [types/cia-services.ts:97](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/cia-services.ts#L97)

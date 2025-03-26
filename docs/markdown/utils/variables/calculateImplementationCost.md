@@ -8,7 +8,7 @@
 
 > **calculateImplementationCost**: (`level`, `orgSize`, `industry`) => `object`
 
-Defined in: [utils/index.ts:52](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/utils/index.ts#L52)
+Defined in: [utils/index.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/utils/index.ts#L54)
 
 Calculate implementation costs for a given security level
 
@@ -30,7 +30,7 @@ Organization size
 
 Industry type
 
-`"general"` | `"financial"` | `"healthcare"` | `"government"` | `"retail"` | `"technology"` | `"manufacturing"`
+`"financial"` | `"general"` | `"healthcare"` | `"government"` | `"retail"` | `"technology"` | `"manufacturing"`
 
 ## Returns
 

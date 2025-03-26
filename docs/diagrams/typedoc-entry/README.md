@@ -53,7 +53,6 @@ imported in application code.
 - [SecurityLevelChangeTrackerProps](interfaces/SecurityLevelChangeTrackerProps.md)
 - [SecurityLevelContextType](interfaces/SecurityLevelContextType.md)
 - [UseSecurityLevelStateOptions](interfaces/UseSecurityLevelStateOptions.md)
-- [WithSecurityLevelProps](interfaces/WithSecurityLevelProps.md)
 
 ### Security Level Widgets
 
@@ -83,7 +82,7 @@ Renames and re-exports [components](../components/README.md)
 
 ### FrameworkComplianceStatus
 
-Re-exports [FrameworkComplianceStatus](../types/compliance/type-aliases/FrameworkComplianceStatus.md)
+Re-exports [FrameworkComplianceStatus](../types/compliance/interfaces/FrameworkComplianceStatus.md)
 
 ***
 

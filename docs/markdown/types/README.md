@@ -42,6 +42,7 @@ Centralized type exports simplify imports and enforce type consistency.
 - [BusinessImpactDetails](interfaces/BusinessImpactDetails.md)
 - [BusinessImpactIcons](interfaces/BusinessImpactIcons.md)
 - [BusinessImpactSectionProps](interfaces/BusinessImpactSectionProps.md)
+- [BusinessKeyBenefit](interfaces/BusinessKeyBenefit.md)
 - [BusinessKeyBenefits](interfaces/BusinessKeyBenefits.md)
 - [BusinessRiskDisplayProps](interfaces/BusinessRiskDisplayProps.md)
 - [BusinessROIEstimates](interfaces/BusinessROIEstimates.md)
@@ -76,7 +77,6 @@ Centralized type exports simplify imports and enforce type consistency.
 
 ### Other
 
-- [BusinessKeyBenefit](type-aliases/BusinessKeyBenefit.md)
 - [CIAComponent](type-aliases/CIAComponent.md)
 - [CIAComponentType](type-aliases/CIAComponentType.md)
 
@@ -139,7 +139,7 @@ Re-exports [FrameworkApplicabilityOptions](compliance/interfaces/FrameworkApplic
 
 ### FrameworkComplianceStatus
 
-Re-exports [FrameworkComplianceStatus](compliance/type-aliases/FrameworkComplianceStatus.md)
+Re-exports [FrameworkComplianceStatus](compliance/interfaces/FrameworkComplianceStatus.md)
 
 ***
 

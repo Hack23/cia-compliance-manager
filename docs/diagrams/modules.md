@@ -7,7 +7,6 @@
 ## Modules
 
 - [components](components/README.md)
-- [contexts/SecurityLevelContext](contexts/SecurityLevelContext/README.md)
 - [hooks](hooks/README.md)
 - [index](index/README.md)
 - [services](services/README.md)

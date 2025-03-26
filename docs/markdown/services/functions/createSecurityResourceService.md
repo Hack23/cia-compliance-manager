@@ -6,22 +6,18 @@
 
 # Function: createSecurityResourceService()
 
-> **createSecurityResourceService**(`dataProvider`?): [`SecurityResourceService`](../classes/SecurityResourceService.md)
+> **createSecurityResourceService**(`dataProvider`): [`SecurityResourceService`](../classes/SecurityResourceService.md)
 
-Defined in: [services/securityResourceService.ts:169](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/services/securityResourceService.ts#L169)
+Defined in: [services/securityResourceService.ts:216](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityResourceService.ts#L216)
 
-Creates a security resource service instance
+Create SecurityResourceService with the provided data provider
 
 ## Parameters
 
-### dataProvider?
+### dataProvider
 
 [`CIADataProvider`](../../types/interfaces/CIADataProvider.md)
-
-Data provider for the service
 
 ## Returns
 
 [`SecurityResourceService`](../classes/SecurityResourceService.md)
-
-A new SecurityResourceService instance

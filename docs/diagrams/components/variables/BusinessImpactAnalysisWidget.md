@@ -8,24 +8,13 @@
 
 > `const` **BusinessImpactAnalysisWidget**: `React.FC`\<`BusinessImpactAnalysisWidgetProps`\>
 
-Defined in: [components/widgets/assessmentcenter/BusinessImpactAnalysisWidget.tsx:69](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/components/widgets/assessmentcenter/BusinessImpactAnalysisWidget.tsx#L69)
+Defined in: [components/widgets/assessmentcenter/BusinessImpactAnalysisWidget.tsx:56](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/components/widgets/assessmentcenter/BusinessImpactAnalysisWidget.tsx#L56)
 
-Business Impact Analysis Widget Component
-
-Displays an analysis of business impacts across the CIA triad components,
-including financial, operational, and reputational impacts, with metrics
-for each component.
+Business Impact Analysis Widget provides insights on security impacts
 
 ## Business Perspective
 
-This widget translates technical security levels into business outcomes,
-helping stakeholders understand the operational and financial implications
-of their security choices across availability, integrity, and confidentiality. 💼
-
-## Param
-
-Component props
-
-## Returns
-
-React component
+This widget helps executives understand the business implications of
+security measures across financial, operational, reputational and
+regulatory dimensions, supporting risk-based decision making and
+providing justification for security investments. 📊

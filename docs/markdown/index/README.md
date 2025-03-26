@@ -21,6 +21,7 @@ security compliance dashboards. 🔒
 ## Interfaces
 
 - [ComplianceStatus](interfaces/ComplianceStatus.md)
+- [ComponentTechnicalDetails](interfaces/ComponentTechnicalDetails.md)
 - [SecurityProfile](interfaces/SecurityProfile.md)
 
 ## Type Aliases

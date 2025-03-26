@@ -13,6 +13,16 @@ import {
   getRecommendedBudgetAllocation,
 } from "./costCalculationUtils";
 
+// Add missing Industry type import or definition
+type Industry =
+  | "general"
+  | "financial"
+  | "healthcare"
+  | "government"
+  | "retail"
+  | "technology"
+  | "manufacturing";
+
 describe("Cost Calculation Utilities", () => {
   describe("calculateImplementationCost", () => {
     it("should return correct costs for each security level", () => {
@@ -92,11 +102,11 @@ describe("Cost Calculation Utilities", () => {
       const invalidLevelCost = calculateImplementationCost("Invalid");
       // @ts-ignore - Testing invalid input
       const invalidOrgSize = calculateImplementationCost("Moderate", "invalid");
-      // @ts-ignore - Testing invalid input
+      // @ts-ignore was not working, use type assertion instead
       const invalidIndustry = calculateImplementationCost(
         "Moderate",
         "medium",
-        "invalid"
+        "invalid" as any // Cast to any to bypass type checking for testing
       );
 
       // All should default gracefully
@@ -108,22 +118,22 @@ describe("Cost Calculation Utilities", () => {
     });
 
     it("should normalize security level case variations", () => {
-      // Test case insensitivity
-      expect(calculateImplementationCost("low")).toEqual(
+      // Type assertion to string to test case insensitivity features
+      expect(calculateImplementationCost("low" as SecurityLevel)).toEqual(
         calculateImplementationCost("Low")
       );
-      expect(calculateImplementationCost("MODERATE")).toEqual(
+      expect(calculateImplementationCost("MODERATE" as SecurityLevel)).toEqual(
         calculateImplementationCost("Moderate")
       );
-      expect(calculateImplementationCost("high")).toEqual(
+      expect(calculateImplementationCost("high" as SecurityLevel)).toEqual(
         calculateImplementationCost("High")
       );
-      expect(calculateImplementationCost("very high")).toEqual(
+      expect(calculateImplementationCost("very high" as SecurityLevel)).toEqual(
         calculateImplementationCost("Very High")
       );
-      expect(calculateImplementationCost("very   high")).toEqual(
-        calculateImplementationCost("Very High")
-      );
+      expect(
+        calculateImplementationCost("very   high" as SecurityLevel)
+      ).toEqual(calculateImplementationCost("Very High"));
     });
 
     // Replace invalid security levels with proper ones
@@ -147,13 +157,13 @@ describe("Cost Calculation Utilities", () => {
       expect(veryHighResult).toHaveProperty("opex");
     });
 
-    // For the invalid industry test, use type assertion
+    // For the invalid industry test, use proper type handling
     it("falls back to default industry for invalid inputs", () => {
-      // Use calculateImplementationCost instead of calculateImplementationCostByIndustry
+      // Use type assertion to any to test invalid inputs
       const result = calculateImplementationCost(
         "Moderate",
         "medium",
-        "general" as any
+        "invalid" as any // Cast to any to bypass type checking for testing
       );
 
       // Test with properties that actually exist

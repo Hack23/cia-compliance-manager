@@ -9,9 +9,15 @@
 ## Interfaces
 
 - [ComplianceFramework](interfaces/ComplianceFramework.md)
+- [ComplianceFrameworkStatusDetails](interfaces/ComplianceFrameworkStatusDetails.md)
+- [ComplianceGap](interfaces/ComplianceGap.md)
+- [ComplianceGapAnalysis](interfaces/ComplianceGapAnalysis.md)
+- [ComplianceSecurityMetrics](interfaces/ComplianceSecurityMetrics.md)
 - [ComplianceStatusDetails](interfaces/ComplianceStatusDetails.md)
 - [FrameworkApplicabilityOptions](interfaces/FrameworkApplicabilityOptions.md)
+- [FrameworkComplianceStatus](interfaces/FrameworkComplianceStatus.md)
 
 ## Type Aliases
 
-- [FrameworkComplianceStatus](type-aliases/FrameworkComplianceStatus.md)
+- [ComplianceStatus](type-aliases/ComplianceStatus.md)
+- [FrameworkComplianceStatusType](type-aliases/FrameworkComplianceStatusType.md)

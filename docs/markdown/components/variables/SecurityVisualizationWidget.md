@@ -6,6 +6,14 @@
 
 # Variable: SecurityVisualizationWidget
 
-> **SecurityVisualizationWidget**: `FC`\<`SecurityVisualizationWidgetProps` & [`WithSecurityLevelProps`](../../typedoc-entry/interfaces/WithSecurityLevelProps.md)\>
+> `const` **SecurityVisualizationWidget**: `React.FC`\<`SecurityVisualizationWidgetProps`\>
 
-Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:287](https://github.com/Hack23/cia-compliance-manager/blob/b7c3bc9644fb5b9d82b5b184ba290206da25104b/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L287)
+Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:67](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L67)
+
+Security Visualization Widget provides visual representation of security posture
+
+## Business Perspective
+
+This widget visualizes the organization's security posture across the CIA triad,
+helping security professionals and executives identify gaps and balance security
+investments across confidentiality, integrity, and availability domains. 📊

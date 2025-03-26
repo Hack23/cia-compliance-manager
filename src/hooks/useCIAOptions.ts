@@ -6,6 +6,9 @@ export interface ROIData {
   returnRate: string;
   recommendation: string;
   description: string;
+  value?: string; // Make value optional since it's used in tests
+  potentialSavings?: string; // Add optional property used in tests
+  breakEvenPeriod?: string; // Add optional property used in tests
 }
 
 export interface CIAOptionDetails {
@@ -18,6 +21,8 @@ export interface CIAOptionDetails {
   recommendations?: string[];
   impact?: string;
   fte?: number;
+  bg?: string; // Add optional bg property used in tests
+  text?: string; // Add optional text property used in tests
 }
 
 // Export these constants directly so they can be imported without calling the hook

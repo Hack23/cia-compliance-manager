@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-interface TabProps {
+export interface TabProps {
   id: string;
   label: string;
   active?: boolean;
@@ -9,6 +9,12 @@ interface TabProps {
   children?: ReactNode;
 }
 
+/**
+ * Tab component for tab navigation in the application
+ *
+ * ## Business Perspective
+ * Provides standard UI elements for navigating between different views within a section. 📑
+ */
 const Tab: React.FC<TabProps> = ({
   id,
   label,
