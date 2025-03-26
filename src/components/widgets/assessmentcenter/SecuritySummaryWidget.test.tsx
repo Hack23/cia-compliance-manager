@@ -66,7 +66,10 @@ describe("SecuritySummaryWidget", () => {
     render(<SecuritySummaryWidget {...defaultProps} />);
 
     expect(screen.getByText("Security Summary")).toBeInTheDocument();
-    expect(screen.getByTestId("custom-test-id")).toBeInTheDocument();
+    // Update to use the correct testId with the widget-container prefix
+    expect(
+      screen.getByTestId("widget-container-custom-test-id")
+    ).toBeInTheDocument();
   });
 
   it("displays the overall security level", () => {
@@ -155,7 +158,10 @@ describe("SecuritySummaryWidget", () => {
   it("applies custom class name when provided", () => {
     render(<SecuritySummaryWidget {...defaultProps} />);
 
-    expect(screen.getByTestId("custom-test-id")).toHaveClass("custom-class");
+    // Update to use the correct testId with the widget-container prefix
+    expect(screen.getByTestId("widget-container-custom-test-id")).toHaveClass(
+      "custom-class"
+    );
   });
 
   it("uses default test ID when not provided", () => {
@@ -167,8 +173,9 @@ describe("SecuritySummaryWidget", () => {
       />
     );
 
+    // Update to use the correct testId with the widget-container prefix
     expect(
-      screen.getByTestId(SECURITY_SUMMARY_TEST_IDS.WIDGET)
+      screen.getByTestId("widget-container-security-summary-widget")
     ).toBeInTheDocument();
   });
 });
