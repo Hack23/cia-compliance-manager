@@ -39,7 +39,7 @@ export { default as RiskLevelBadge } from "./common/RiskLevelBadge";
 export { default as SecurityLevelBadge } from "./common/SecurityLevelBadge";
 export { SecurityRiskScore } from "./common/SecurityRiskScore";
 export { default as StatusBadge } from "./common/StatusBadge";
-export { Tab } from "./common/Tab";
+export { default as Tab } from "./common/Tab";
 export { default as ThemeToggle } from "./common/ThemeToggle";
 export { default as Tooltip } from "./common/Tooltip";
 export { default as WidgetActions } from "./common/WidgetActions";

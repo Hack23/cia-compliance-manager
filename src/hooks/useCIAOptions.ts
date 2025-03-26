@@ -1,110 +1,225 @@
-import { useMemo } from "react";
-import defaultCIADataProvider from "../data/ciaOptionsData";
 import { SecurityLevel } from "../types/cia";
-import { CIADataProvider } from "../types/cia-services";
 
-// Import the options from the data source
-import {
-  availabilityOptions as defaultAvailabilityOptions,
-  confidentialityOptions as defaultConfidentialityOptions,
-  integrityOptions as defaultIntegrityOptions,
-  ROI_ESTIMATES as defaultRoiEstimates,
-} from "../data/security";
+export type ROIType = "NONE" | "LOW" | "MODERATE" | "HIGH" | "VERY_HIGH";
 
-// Re-export the options for direct usage
-export {
-  defaultAvailabilityOptions as availabilityOptions,
-  defaultConfidentialityOptions as confidentialityOptions,
-  defaultIntegrityOptions as integrityOptions,
-  defaultRoiEstimates as ROI_ESTIMATES,
+export interface ROIData {
+  returnRate: string;
+  recommendation: string;
+  description: string;
+}
+
+export interface CIAOptionDetails {
+  value: number;
+  description: string;
+  technical?: string;
+  businessImpact?: string;
+  capex?: number;
+  opex?: number;
+  recommendations?: string[];
+  impact?: string;
+  fte?: number;
+}
+
+// Export these constants directly so they can be imported without calling the hook
+export const availabilityOptions: Record<SecurityLevel, CIAOptionDetails> = {
+  None: {
+    value: 0,
+    description: "No availability requirements",
+    technical: "",
+    capex: 0,
+    opex: 0,
+  },
+  Low: {
+    value: 1,
+    description: "Minimal availability requirements",
+    technical: "",
+    capex: 25000,
+    opex: 10000,
+  },
+  Moderate: {
+    value: 2,
+    description: "Standard availability requirements",
+    technical: "",
+    capex: 50000,
+    opex: 20000,
+  },
+  High: {
+    value: 3,
+    description: "High availability requirements",
+    technical: "",
+    capex: 75000,
+    opex: 30000,
+  },
+  "Very High": {
+    value: 4,
+    description: "Maximum availability requirements",
+    technical: "",
+    capex: 100000,
+    opex: 40000,
+  },
 };
 
-/**
- * Custom hook to access CIA options throughout the application
- *
- * @param customProvider - Optional custom data provider
- * @returns CIA options for all components
- */
-export function useCIAOptions(customProvider?: Partial<CIADataProvider>) {
-  const dataProvider = useMemo(() => {
-    return { ...defaultCIADataProvider, ...customProvider };
-  }, [customProvider]);
+export const integrityOptions: Record<SecurityLevel, CIAOptionDetails> = {
+  None: {
+    value: 0,
+    description: "No integrity requirements",
+    technical: "",
+    capex: 0,
+    opex: 0,
+  },
+  Low: {
+    value: 1,
+    description: "Minimal integrity requirements",
+    technical: "",
+    capex: 25000,
+    opex: 10000,
+  },
+  Moderate: {
+    value: 2,
+    description: "Standard integrity requirements",
+    technical: "",
+    capex: 50000,
+    opex: 20000,
+  },
+  High: {
+    value: 3,
+    description: "High integrity requirements",
+    technical: "",
+    capex: 75000,
+    opex: 30000,
+  },
+  "Very High": {
+    value: 4,
+    description: "Maximum integrity requirements",
+    technical: "",
+    capex: 100000,
+    opex: 40000,
+  },
+};
 
-  // Enhanced API with helper methods
-  const enhancedAPI = useMemo(() => {
-    return {
-      // Base options
-      availabilityOptions: dataProvider.availabilityOptions,
-      integrityOptions: dataProvider.integrityOptions,
-      confidentialityOptions: dataProvider.confidentialityOptions,
-      ROI_ESTIMATES: dataProvider.roiEstimates, // Fixed: ROI_ESTIMATES -> roiEstimates
+export const confidentialityOptions: Record<SecurityLevel, CIAOptionDetails> = {
+  None: {
+    value: 0,
+    description: "No confidentiality requirements",
+    technical: "",
+    capex: 0,
+    opex: 0,
+  },
+  Low: {
+    value: 1,
+    description: "Minimal confidentiality requirements",
+    technical: "",
+    capex: 25000,
+    opex: 10000,
+  },
+  Moderate: {
+    value: 2,
+    description: "Standard confidentiality requirements",
+    technical: "",
+    capex: 50000,
+    opex: 20000,
+  },
+  High: {
+    value: 3,
+    description: "High confidentiality requirements",
+    technical: "",
+    capex: 75000,
+    opex: 30000,
+  },
+  "Very High": {
+    value: 4,
+    description: "Maximum confidentiality requirements",
+    technical: "",
+    capex: 100000,
+    opex: 40000,
+  },
+};
 
-      // Helper methods
-      getROIEstimate: (level: SecurityLevel) => {
-        const key = level.toUpperCase().replace(" ", "_");
-        return (
-          dataProvider.roiEstimates[
-            key as keyof typeof dataProvider.roiEstimates
-          ] || dataProvider.roiEstimates.NONE
-        );
-      },
+export const ROI_ESTIMATES: Record<ROIType, ROIData> = {
+  NONE: {
+    returnRate: "0%",
+    recommendation: "No investment recommended",
+    description: "Investment in security measures is not necessary.",
+  },
+  LOW: {
+    returnRate: "25%",
+    recommendation: "Minimal investment recommended",
+    description: "Basic security measures should be implemented.",
+  },
+  MODERATE: {
+    returnRate: "50%",
+    recommendation: "Moderate investment recommended",
+    description: "Standard security measures should be implemented.",
+  },
+  HIGH: {
+    returnRate: "75%",
+    recommendation: "High investment recommended",
+    description: "Advanced security measures should be implemented.",
+  },
+  VERY_HIGH: {
+    returnRate: "100%",
+    recommendation: "Maximum investment recommended",
+    description: "Comprehensive security measures should be implemented.",
+  },
+};
 
-      // Get value points
-      getValuePoints: (level: SecurityLevel) => {
-        // Use getDefaultValuePoints or fall back to getValuePoints for backward compatibility
-        if (dataProvider) {
-          return typeof dataProvider.getDefaultValuePoints === "function"
-            ? dataProvider.getDefaultValuePoints(level)
-            : typeof dataProvider.getValuePoints === "function"
-            ? dataProvider.getValuePoints(level)
-            : [];
-        }
-        return [];
-      },
+export const useCIAOptions = () => {
+  // Use the exported constants directly
+  const getAvailabilityOptions = () => availabilityOptions;
+  const getIntegrityOptions = () => integrityOptions;
+  const getConfidentialityOptions = () => confidentialityOptions;
+  const getROIEstimates = () => ROI_ESTIMATES;
 
-      // Get component details including properties
-      getComponentDetails: (
-        component: "availability" | "integrity" | "confidentiality",
-        level: SecurityLevel
-      ) => {
-        const options =
-          component === "availability"
-            ? dataProvider.availabilityOptions
-            : component === "integrity"
-            ? dataProvider.integrityOptions
-            : dataProvider.confidentialityOptions;
+  const getROIEstimateForSecurityLevel = (level: SecurityLevel): ROIType => {
+    switch (level) {
+      case "None":
+        return "NONE";
+      case "Low":
+        return "LOW";
+      case "Moderate":
+        return "MODERATE";
+      case "High":
+        return "HIGH";
+      case "Very High":
+        return "VERY_HIGH";
+      default:
+        return "NONE";
+    }
+  };
 
-        return options[level];
-      },
+  const getCombinedROIKey = (
+    confidentiality: SecurityLevel,
+    integrity: SecurityLevel,
+    availability: SecurityLevel
+  ): ROIType => {
+    // Simple algorithm to determine combined ROI level based on CIA levels
+    const levels = [confidentiality, integrity, availability];
+    const highestLevel = levels.reduce((highest, current) => {
+      const currentValue = confidentialityOptions[current]?.value || 0;
+      const highestValue = confidentialityOptions[highest]?.value || 0;
+      return currentValue > highestValue ? current : highest;
+    }, "None" as SecurityLevel);
 
-      // Formats description for a component level
-      getComponentDescription: (
-        component: "availability" | "integrity" | "confidentiality",
-        level: SecurityLevel
-      ) => {
-        return (
-          enhancedAPI.getComponentDetails(component, level)?.description ||
-          `No description available for ${component} at ${level} level`
-        );
-      },
+    return getROIEstimateForSecurityLevel(highestLevel);
+  };
 
-      // Get implementation details
-      getImplementationDetails: (
-        component: "availability" | "integrity" | "confidentiality",
-        level: SecurityLevel
-      ) => {
-        const details = enhancedAPI.getComponentDetails(component, level);
-        return {
-          effort: details?.effort || "Unknown",
-          expertise: details?.expertise || "Unknown",
-          timeframe: details?.timeframe || "Unknown",
-          recommendations: details?.recommendations || [],
-        };
-      },
-    };
-  }, [dataProvider]);
+  const getROIDataForCombinedKey = (key: ROIType): ROIData => {
+    return ROI_ESTIMATES[key] || ROI_ESTIMATES.NONE;
+  };
 
-  return enhancedAPI;
-}
+  return {
+    availabilityOptions,
+    integrityOptions,
+    confidentialityOptions,
+    ROI_ESTIMATES,
+    getAvailabilityOptions,
+    getIntegrityOptions,
+    getConfidentialityOptions,
+    getROIEstimates,
+    getROIEstimateForSecurityLevel,
+    getCombinedROIKey,
+    getROIDataForCombinedKey,
+  };
+};
 
 export default useCIAOptions;

@@ -1,62 +1,40 @@
-import React from 'react';
+import React, { ReactNode } from "react";
 
 interface TabProps {
-  /**
-   * Whether the tab is currently active
-   */
-  active: boolean;
-  
-  /**
-   * Click handler for the tab
-   */
-  onClick: () => void;
-  
-  /**
-   * Icon to display in the tab (emoji or character)
-   */
-  icon?: string;
-  
-  /**
-   * Label text for the tab
-   */
+  id: string;
   label: string;
-  
-  /**
-   * Test ID for automated testing
-   */
-  testId?: string;
+  active?: boolean;
+  onClick?: () => void;
+  className?: string;
+  children?: ReactNode;
 }
 
-/**
- * Tab component for tabbed interfaces
- * 
- * ## UX Perspective
- * 
- * Provides an accessible, consistent tabbed navigation pattern
- * throughout the application, allowing users to switch between
- * different views of related content. 🧩
- */
-export const Tab: React.FC<TabProps> = ({
-  active,
-  onClick,
-  icon,
+const Tab: React.FC<TabProps> = ({
+  id,
   label,
-  testId
+  active = false,
+  onClick,
+  className = "",
+  children,
 }) => {
-  const activeClass = active 
-    ? 'border-b-2 border-blue-500 dark:border-blue-400 text-blue-600 dark:text-blue-400 font-medium' 
-    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300';
-
   return (
     <button
-      className={`py-2 px-3 ${activeClass} focus:outline-none`}
-      onClick={onClick}
       role="tab"
+      id={id}
       aria-selected={active}
-      data-testid={testId}
+      className={`px-4 py-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 
+        ${
+          active
+            ? "bg-primary-50 text-primary-700"
+            : "text-gray-600 hover:text-gray-800 hover:bg-gray-100"
+        } 
+        ${className}`}
+      onClick={onClick}
     >
-      {icon && <span className="mr-1">{icon}</span>}
       {label}
+      {children}
     </button>
   );
 };
+
+export default Tab;

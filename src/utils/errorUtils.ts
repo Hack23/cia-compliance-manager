@@ -33,3 +33,53 @@ export function formatError(err: unknown, prefix?: string): string {
   const error = toErrorObject(err);
   return prefix ? `${prefix}: ${error.message}` : error.message;
 }
+
+/**
+ * Type guard to check if an error has a message property
+ */
+export const isErrorWithMessage = (
+  error: unknown
+): error is { message: string } => {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "message" in error &&
+    typeof (error as Record<string, unknown>).message === "string"
+  );
+};
+
+/**
+ * Format an error message from various error types
+ */
+export const formatErrorMessage = (error: unknown): string => {
+  if (isErrorWithMessage(error)) {
+    return error.message;
+  }
+
+  if (error === null || error === undefined) {
+    return "An unknown error occurred";
+  }
+
+  if (typeof error === "object" && !("message" in error)) {
+    return "An unknown error occurred";
+  }
+
+  return String(error);
+};
+
+/**
+ * Display an error message in the console
+ */
+export const displayErrorMessage = (error: unknown): void => {
+  const message = formatErrorMessage(error);
+  console.error("Error:", message);
+};
+
+/**
+ * Handle an API error with operation context
+ */
+export const handleApiError = (error: unknown, operation: string): string => {
+  const message = formatErrorMessage(error);
+  console.error(`API Error (${operation}):`, message);
+  return message;
+};
