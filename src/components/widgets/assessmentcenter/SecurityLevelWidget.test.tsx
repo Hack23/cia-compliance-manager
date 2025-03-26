@@ -27,8 +27,10 @@ describe("SecurityLevelWidget", () => {
 
   it("renders without crashing", () => {
     render(<SecurityLevelWidget {...defaultProps} />);
-    // Test basic rendering without assertions that depend on internals
-    expect(screen.getByTestId("test-security-level")).toBeInTheDocument();
+    // Update to use the correct testId with the widget-container prefix
+    expect(
+      screen.getByTestId("widget-container-test-security-level")
+    ).toBeInTheDocument();
   });
 
   it("displays the component title", () => {
@@ -43,7 +45,10 @@ describe("SecurityLevelWidget", () => {
     render(<SecurityLevelWidget {...defaultProps} />);
 
     // Check for flexible content patterns rather than exact elements
-    const content = screen.getByTestId("test-security-level").textContent || "";
+    // Update to use the correct testId with the widget-container prefix
+    const content =
+      screen.getByTestId("widget-container-test-security-level").textContent ||
+      "";
 
     // Look for key terms using regular expressions for resilience
     expect(content).toMatch(/availability|uptime|continuity/i);
@@ -114,7 +119,10 @@ describe("SecurityLevelWidget", () => {
     render(<SecurityLevelWidget {...defaultProps} {...levels} />);
 
     // Check the displayed values in a way that doesn't depend on implementation details
-    const content = screen.getByTestId("test-security-level").textContent || "";
+    // Update to use the correct testId with the widget-container prefix
+    const content =
+      screen.getByTestId("widget-container-test-security-level").textContent ||
+      "";
 
     // Check for the specific security levels in the content
     expect(content).toContain("High");
@@ -125,7 +133,10 @@ describe("SecurityLevelWidget", () => {
   it("accepts custom testId", () => {
     const customTestId = "custom-security-level";
     render(<SecurityLevelWidget {...defaultProps} testId={customTestId} />);
-    expect(screen.getByTestId(customTestId)).toBeInTheDocument();
+    // Update to use the correct testId with the widget-container prefix
+    expect(
+      screen.getByTestId("widget-container-custom-security-level")
+    ).toBeInTheDocument();
   });
 
   // Add a test for handling different security level options
@@ -147,8 +158,10 @@ describe("SecurityLevelWidget", () => {
       );
 
       // Simple check - the level should be in the content
+      // Update to use the correct testId with the widget-container prefix
       const content =
-        screen.getByTestId("test-security-level").textContent || "";
+        screen.getByTestId("widget-container-test-security-level")
+          .textContent || "";
       expect(content).toContain(level);
 
       // Clean up between iterations
