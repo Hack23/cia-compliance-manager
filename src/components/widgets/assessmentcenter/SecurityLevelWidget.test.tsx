@@ -35,9 +35,10 @@ describe("SecurityLevelWidget", () => {
 
   it("displays the component title", () => {
     render(<SecurityLevelWidget {...defaultProps} />);
-    // Look for title with flexible matching to be more resilient
+
+    // Fix: Be more specific with the text pattern to match only the header
     expect(
-      screen.getByText(/security level/i, { exact: false })
+      screen.getByText("Security Level Configuration")
     ).toBeInTheDocument();
   });
 

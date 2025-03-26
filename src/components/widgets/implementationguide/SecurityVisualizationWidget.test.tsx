@@ -1,28 +1,43 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import SecurityVisualizationWidget from "./SecurityVisualizationWidget";
 
-// Mock Chart.js to avoid canvas rendering issues in test environment
-vi.mock("chart.js", () => ({
-  Chart: class MockChart {
+// Mock Chart.js with all required components and a working register function
+vi.mock("chart.js", () => {
+  // Define a type for the MockChart class to include the static register method
+  type ChartConstructor = {
+    new (): { destroy(): void };
+    register: typeof vi.fn;
+  };
+
+  // Create the MockChart class with the proper typing
+  const MockChart = class {
     constructor() {
       // Mock constructor
     }
     destroy() {
       // Mock destroy method
     }
-    // Add any other methods needed for testing
-  },
-  RadialLinearScale: {},
-  PointElement: {},
-  LineElement: {},
-  Filler: {},
-  Tooltip: {},
-  Legend: {},
-  registry: {
-    register: vi.fn(),
-  },
-}));
+  } as unknown as ChartConstructor;
+
+  // Add the static register method
+  MockChart.register = vi.fn();
+
+  return {
+    Chart: MockChart,
+    RadarController: {},
+    ArcElement: {},
+    RadialLinearScale: {},
+    PointElement: {},
+    LineElement: {},
+    Filler: {},
+    Tooltip: {},
+    Legend: {},
+    registry: {
+      register: vi.fn(),
+    },
+  };
+});
 
 describe("SecurityVisualizationWidget", () => {
   it("renders with security levels", () => {

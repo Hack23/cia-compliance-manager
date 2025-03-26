@@ -128,7 +128,8 @@ describe("CIAClassificationApp", () => {
 
   it("renders theme toggle button", () => {
     render(<CIAClassificationApp />);
-    const themeButton = screen.getByText(/🌙 Dark Mode/);
+    // Fix the selector to match actual text
+    const themeButton = screen.getByText(/🌙 Dark|☀️ Light/);
     expect(themeButton).toBeInTheDocument();
   });
 

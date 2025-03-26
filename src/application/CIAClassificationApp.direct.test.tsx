@@ -134,17 +134,17 @@ describe("CIAClassificationApp Component Direct Tests", () => {
   it("renders basic structure correctly", () => {
     render(<CIAClassificationApp />);
 
-    // Check for elements by class or text content rather than test ID
-    const appContainer = screen
-      .getByText(/CIA Compliance Manager/i)
-      .closest("div");
-    expect(appContainer).toBeInTheDocument();
-
     // Check for app title
-    expect(screen.getByText(/CIA Compliance Manager/i)).toBeInTheDocument();
+    expect(screen.getByTestId("app-title")).toBeInTheDocument();
+    expect(screen.getByTestId("app-title")).toHaveTextContent(
+      "CIA Compliance Manager Dashboard"
+    );
 
-    // Check for theme toggle button
-    expect(screen.getByText(/🌙 Dark Mode|☀️ Light Mode/)).toBeInTheDocument();
+    // Check for dashboard grid
+    expect(screen.getByTestId("dashboard-grid")).toBeInTheDocument();
+
+    // Check for theme toggle button - fix the selector to match actual text
+    expect(screen.getByText(/🌙 Dark|☀️ Light/)).toBeInTheDocument();
   });
 
   it("shows security level section", () => {

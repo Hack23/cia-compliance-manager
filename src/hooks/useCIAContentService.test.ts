@@ -3,8 +3,8 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { CIAContentService } from "../services/ciaContentService";
 import { useCIAContentService } from "./useCIAContentService";
 
-// Mock the CIAContentService methods we need
-const mockCIAService = {
+// Hoist mock definition to the top to avoid reference errors
+const mockCIAService = vi.hoisted(() => ({
   // Core methods that the tests rely on
   getComponentDetails: vi.fn().mockReturnValue({ description: "mock details" }),
   getSecurityMetrics: vi.fn().mockReturnValue({ score: 50 }),
@@ -16,12 +16,17 @@ const mockCIAService = {
   getCIAOptions: vi.fn(),
   getRecommendations: vi.fn(),
   getSecurityLevelDescription: vi.fn(),
-  // Add more methods as needed for specific tests
-} as unknown as CIAContentService; // Type assertion to CIAContentService
+  // Include any required properties from CIAContentService to satisfy TypeScript
+  dataProvider: {},
+  businessImpactService: {},
+  complianceService: {},
+  securityMetricsService: {},
+  technicalImplementationService: {},
+  securityResourceService: {},
+})) as unknown as CIAContentService;
 
 // Mock the imports needed by the hook
 vi.mock("../services/ciaContentService", () => ({
-  // Use the function directly instead of mocking the class
   createCIAContentService: vi.fn().mockReturnValue(mockCIAService),
 }));
 
