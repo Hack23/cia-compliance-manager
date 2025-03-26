@@ -58,7 +58,7 @@
     ]
   },
   "devDependencies": {
-    "@cypress/webpack-preprocessor": "6.0.3",
+    "@cypress/webpack-preprocessor": "6.0.4",
     "@eslint/js": "9.23.0",
     "@tailwindcss/postcss": "4.0.17",
     "@testing-library/cypress": "^10.0.3",
