@@ -1,47 +1,30 @@
 import React, { ReactNode } from "react";
-import { WIDGET_ICONS } from "../../constants/appConstants";
 
 interface WidgetHeaderProps {
   title: string;
-  iconKey?: keyof typeof WIDGET_ICONS | string;
+  icon?: ReactNode;
   actions?: ReactNode;
   className?: string;
-  testId?: string;
+  [x: string]: any; // For spreading additional props like data-testid
 }
 
 const WidgetHeader: React.FC<WidgetHeaderProps> = ({
   title,
-  iconKey,
+  icon,
   actions,
   className = "",
-  testId,
+  ...rest
 }) => {
-  // Determine the icon to display
-  let iconToDisplay = "";
-  if (iconKey) {
-    // If iconKey is a key in WIDGET_ICONS, use the corresponding value
-    if (iconKey in WIDGET_ICONS) {
-      iconToDisplay = WIDGET_ICONS[iconKey as keyof typeof WIDGET_ICONS];
-    } else {
-      // Otherwise, assume iconKey is already an emoji string
-      iconToDisplay = iconKey;
-    }
-  }
-
   return (
     <div
-      className={`flex items-center justify-between pb-2 mb-4 border-b border-gray-200 dark:border-gray-700 ${className}`}
-      data-testid={testId}
+      className={`widget-header bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-700 rounded-t-lg flex justify-between items-center ${className}`}
+      {...rest}
     >
-      <h3 className="flex items-center text-lg font-semibold text-gray-800 dark:text-gray-200">
-        {iconToDisplay && (
-          <span className="mr-2" aria-hidden="true">
-            {iconToDisplay}
-          </span>
-        )}
+      <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200 flex items-center">
+        {icon && <span className="mr-2">{icon}</span>}
         {title}
       </h3>
-      {actions && <div className="flex items-center space-x-2">{actions}</div>}
+      {actions && <div className="flex items-center">{actions}</div>}
     </div>
   );
 };

@@ -13,11 +13,18 @@ describe("ciaOptionsMocks", () => {
       expect(mock).toHaveProperty("availabilityOptions");
       expect(mock).toHaveProperty("integrityOptions");
       expect(mock).toHaveProperty("confidentialityOptions");
-      expect(mock).toHaveProperty("ROI_ESTIMATES");
+      expect(mock).toHaveProperty("roiEstimates");
 
       // Check hook export
       expect(mock).toHaveProperty("useCIAOptions");
       expect(mock.useCIAOptions).toBeInstanceOf(Function);
+
+      // Check mock hook implementation
+      const hookResult = mock.useCIAOptions();
+      expect(hookResult).toHaveProperty("availabilityOptions");
+      expect(hookResult).toHaveProperty("integrityOptions");
+      expect(hookResult).toHaveProperty("confidentialityOptions");
+      expect(hookResult).toHaveProperty("ROI_ESTIMATES");
 
       // Check data structure
       const options = mock.availabilityOptions;
@@ -27,12 +34,12 @@ describe("ciaOptionsMocks", () => {
       expect(options).toHaveProperty("High");
       expect(options).toHaveProperty("Very High");
 
-      // Check ROI_ESTIMATES
-      expect(mock.ROI_ESTIMATES).toHaveProperty("NONE");
-      expect(mock.ROI_ESTIMATES).toHaveProperty("LOW");
-      expect(mock.ROI_ESTIMATES).toHaveProperty("MODERATE");
-      expect(mock.ROI_ESTIMATES).toHaveProperty("HIGH");
-      expect(mock.ROI_ESTIMATES).toHaveProperty("VERY_HIGH");
+      // Check ROI_ESTIMATES from the hook result
+      expect(hookResult.ROI_ESTIMATES).toHaveProperty("NONE");
+      expect(hookResult.ROI_ESTIMATES).toHaveProperty("LOW");
+      expect(hookResult.ROI_ESTIMATES).toHaveProperty("MODERATE");
+      expect(hookResult.ROI_ESTIMATES).toHaveProperty("HIGH");
+      expect(hookResult.ROI_ESTIMATES).toHaveProperty("VERY_HIGH");
     });
 
     it("allows customization of mock options", () => {
@@ -52,25 +59,29 @@ describe("ciaOptionsMocks", () => {
   });
 
   describe("createChartJsMock", () => {
-    it("creates a Chart.js mock with correct structure", () => {
+    it("creates a Chart.js mock with required methods", () => {
       const mock = createChartJsMock();
 
-      // Check ESModule flag
       expect(mock).toHaveProperty("__esModule", true);
-
-      // Check default export
       expect(mock).toHaveProperty("default");
-      expect(mock.default).toBeInstanceOf(Function);
 
-      // Create an instance using the mock constructor
-      const mockChart = mock.default();
+      // Create a mock chart instance
+      const chartInstance = mock.default();
 
-      // Check instance methods
-      expect(mockChart).toHaveProperty("destroy");
-      expect(mockChart).toHaveProperty("update");
-      expect(mockChart).toHaveProperty("resize");
-      expect(mockChart).toHaveProperty("data");
-      expect(mockChart.data).toHaveProperty("datasets");
+      // Verify instance methods
+      expect(chartInstance).toHaveProperty("destroy");
+      expect(chartInstance).toHaveProperty("update");
+      expect(chartInstance).toHaveProperty("resize");
+      expect(chartInstance).toHaveProperty("data");
+
+      // Verify methods are mocked functions
+      expect(chartInstance.destroy).toBeInstanceOf(Function);
+      expect(chartInstance.update).toBeInstanceOf(Function);
+      expect(chartInstance.resize).toBeInstanceOf(Function);
+
+      // Test calling the mock methods
+      chartInstance.destroy();
+      expect(chartInstance.destroy).toHaveBeenCalled();
     });
   });
 });

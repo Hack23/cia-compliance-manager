@@ -1,8 +1,8 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
-  BusinessConsideration,
-  BusinessKeyBenefits, // Changed from BusinessKeyBenefit to BusinessKeyBenefits
   BUSINESS_CONSIDERATIONS,
+  BUSINESS_KEY_BENEFITS,
+  BusinessKeyBenefit,
 } from "./businessImpact";
 
 describe("Business Impact Types", () => {
@@ -11,10 +11,14 @@ describe("Business Impact Types", () => {
       // CIA categories
       const ciaCategories = ["AVAILABILITY", "INTEGRITY", "CONFIDENTIALITY"];
       ciaCategories.forEach((category) => {
+        // Use type assertion to tell TypeScript the index is valid
         expect(BUSINESS_CONSIDERATIONS).toHaveProperty(category);
 
-        // Security levels
-        const categoryObj = BUSINESS_CONSIDERATIONS[category];
+        // Use type assertion for the indexed access
+        const categoryObj =
+          BUSINESS_CONSIDERATIONS[
+            category as keyof typeof BUSINESS_CONSIDERATIONS
+          ];
         expect(categoryObj).toBeDefined();
 
         const securityLevels = ["NONE", "LOW", "MODERATE", "HIGH", "VERY_HIGH"];
@@ -22,46 +26,37 @@ describe("Business Impact Types", () => {
         securityLevels.forEach((level) => {
           expect(categoryObj).toHaveProperty(level);
 
-          // Check items array
-          const items = categoryObj?.[level] || []; // Use optional chaining and default to empty array
+          // Check items array with proper type assertions
+          const items = categoryObj?.[level as keyof typeof categoryObj] || [];
           expect(Array.isArray(items)).toBe(true);
 
-          // Check each item in the array
-          if (items && items.length > 0) {
-            items.forEach((item: BusinessConsideration) => {
-              expect(item).toHaveProperty("description");
-            });
-          }
+          // Add explicit type to item parameter
+          items.forEach((item: any) => {
+            if (item) {
+              expect(typeof item.title).toBe("string");
+              expect(typeof item.description).toBe("string");
+            }
+          });
         });
       });
     });
   });
 
   describe("BUSINESS_KEY_BENEFITS constant", () => {
-    it("has entries for all security levels", () => {
-      const securityLevels = ["NONE", "LOW", "MODERATE", "HIGH", "VERY_HIGH"];
+    it("has correct structure for all security levels", () => {
+      const levels = ["NONE", "LOW", "MODERATE", "HIGH", "VERY_HIGH"];
 
-      securityLevels.forEach((level) => {
-        expect(BusinessKeyBenefits).toHaveProperty(level);
-
-        const benefits = BusinessKeyBenefits[level];
+      levels.forEach((level) => {
+        // Use type assertion for the indexed access
+        const benefits =
+          BUSINESS_KEY_BENEFITS[level as keyof typeof BUSINESS_KEY_BENEFITS];
         expect(Array.isArray(benefits)).toBe(true);
 
-        // Check each benefit
-        if (benefits && benefits.length > 0) {
-          benefits.forEach((benefit: any) => {
-            // Check if benefit is either a string or an object with title and description
-            expect(
-              typeof benefit === "string" || typeof benefit === "object"
-            ).toBe(true);
-            if (typeof benefit === "string") {
-              expect(benefit.length).toBeGreaterThan(0);
-            } else if (typeof benefit === "object") {
-              expect(benefit).toHaveProperty("title");
-              expect(benefit).toHaveProperty("description");
-            }
-          });
-        }
+        // Check each benefit item has required properties
+        benefits.forEach((benefit: BusinessKeyBenefit) => {
+          expect(typeof benefit.title).toBe("string");
+          expect(typeof benefit.description).toBe("string");
+        });
       });
     });
   });

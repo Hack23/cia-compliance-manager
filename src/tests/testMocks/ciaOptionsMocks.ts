@@ -1,161 +1,129 @@
+// Use vi.hoisted to create mocks that can be used at the top level
 import { vi } from "vitest";
+import { SecurityLevel } from "../../types/cia";
+
+// Define types for Chart.js mock
+interface ChartMock {
+  destroy: ReturnType<typeof vi.fn>;
+  update: ReturnType<typeof vi.fn>;
+  resize: ReturnType<typeof vi.fn>;
+  data: { datasets: any[] };
+}
+
+interface ChartConstructor extends ReturnType<typeof vi.fn> {
+  register: ReturnType<typeof vi.fn>;
+  defaults: {
+    font: { family: string };
+    plugins: { legend: { display: boolean } };
+  };
+}
+
+// Proper hoisted mock for chart.js
+const mockChartInstance = vi.hoisted(
+  (): ChartMock => ({
+    destroy: vi.fn(),
+    update: vi.fn(),
+    resize: vi.fn(),
+    data: { datasets: [] },
+  })
+);
+
+const mockChartConstructor = vi.hoisted((): ChartConstructor => {
+  const constructor = vi.fn(() => mockChartInstance) as ChartConstructor;
+  constructor.register = vi.fn();
+  constructor.defaults = {
+    font: { family: "Arial" },
+    plugins: { legend: { display: false } },
+  };
+  return constructor;
+});
+
+// Properly hoisted CIA options mock
+const mockCIAOptionsData = vi.hoisted(() => ({
+  None: {
+    capex: 0,
+    opex: 0,
+    description: "No security controls implemented",
+    technical: "No technical controls",
+    businessImpact: "Critical business impact",
+    bg: "#ffffff",
+    text: "#000000",
+    recommendations: [],
+  },
+  Low: {
+    capex: 5,
+    opex: 2,
+    description: "Basic security controls",
+    technical: "Basic technical controls",
+    businessImpact: "High business impact",
+    bg: "#f8d7da",
+    text: "#721c24",
+    recommendations: ["Basic recommendation"],
+  },
+  Moderate: {
+    capex: 10,
+    opex: 5,
+    description: "Standard security controls",
+    technical: "Standard technical controls",
+    businessImpact: "Medium business impact",
+    bg: "#fff3cd",
+    text: "#856404",
+    recommendations: ["Standard recommendation"],
+  },
+  High: {
+    capex: 15,
+    opex: 8,
+    description: "Advanced security controls",
+    technical: "Advanced technical controls",
+    businessImpact: "Low business impact",
+    bg: "#d4edda",
+    text: "#155724",
+    recommendations: ["Advanced recommendation"],
+  },
+  "Very High": {
+    capex: 20,
+    opex: 10,
+    description: "Maximum security controls",
+    technical: "Maximum technical controls",
+    businessImpact: "Minimal business impact",
+    bg: "#cce5ff",
+    text: "#004085",
+    recommendations: ["Maximum recommendation"],
+  },
+}));
+
+const mockROIEstimates = vi.hoisted(() => ({
+  NONE: { returnRate: "0%", description: "No ROI", value: "0%" },
+  LOW: { returnRate: "50%", description: "Low ROI", value: "50%" },
+  MODERATE: { returnRate: "150%", description: "Moderate ROI", value: "150%" },
+  HIGH: { returnRate: "300%", description: "High ROI", value: "300%" },
+  VERY_HIGH: {
+    returnRate: "500%",
+    description: "Very high ROI",
+    value: "500%",
+  },
+}));
 
 /**
- * Creates standardized CIA options mock that works with vi.mock hoisting
- * Set to match the expected values in tests
+ * Creates a standard Chart.js mock for testing
  */
-export function createCIAOptionsMock(customization = {}) {
+export function createChartJsMock() {
+  return {
+    __esModule: true,
+    default: mockChartConstructor,
+  };
+}
+
+/**
+ * Creates a standard CIA options mock for testing
+ * @param customization Optional customizations to apply to the mock
+ */
+export function createCIAOptionsMock(customization: Record<string, any> = {}) {
   const baseMockOptions = {
-    availabilityOptions: {
-      None: {
-        description: "Test availability None",
-        technical: "Test technical None",
-        businessImpact: "Test business impact None",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 0,
-        opex: 0,
-        bg: "#ffffff",
-        text: "#000000",
-      },
-      Low: {
-        description: "Test availability Low",
-        technical: "Test technical Low",
-        businessImpact: "Test business impact Low",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 5,
-        opex: 2,
-      },
-      Moderate: {
-        description: "Test availability Moderate",
-        technical: "Test technical Moderate",
-        businessImpact: "Test business impact Moderate",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 10,
-        opex: 5,
-      },
-      High: {
-        description: "Test availability High",
-        technical: "Test technical High",
-        businessImpact: "Test business impact High",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 15,
-        opex: 8,
-      },
-      "Very High": {
-        description: "Test availability Very High",
-        technical: "Test technical Very High",
-        businessImpact: "Test business impact Very High",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 20,
-        opex: 10,
-      },
-    },
-    integrityOptions: {
-      None: {
-        description: "Test integrity None",
-        technical: "Test technical None",
-        businessImpact: "Test business impact None",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 0,
-        opex: 0,
-      },
-      Low: {
-        description: "Test integrity Low",
-        technical: "Test technical Low",
-        businessImpact: "Test business impact Low",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 5,
-        opex: 2,
-      },
-      Moderate: {
-        description: "Test integrity Moderate",
-        technical: "Test technical Moderate",
-        businessImpact: "Test business impact Moderate",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 10,
-        opex: 5,
-      },
-      High: {
-        description: "Test integrity High",
-        technical: "Test technical High",
-        businessImpact: "Test business impact High",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 15,
-        opex: 8,
-      },
-      "Very High": {
-        description: "Test integrity Very High",
-        technical: "Test technical Very High",
-        businessImpact: "Test business impact Very High",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 20,
-        opex: 10,
-      },
-    },
-    confidentialityOptions: {
-      None: {
-        description: "Test confidentiality None",
-        technical: "Test technical None",
-        businessImpact: "Test business impact None",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 0,
-        opex: 0,
-      },
-      Low: {
-        description: "Test confidentiality Low",
-        technical: "Test technical Low",
-        businessImpact: "Test business impact Low",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 5,
-        opex: 2,
-      },
-      Moderate: {
-        description: "Test confidentiality Moderate",
-        technical: "Test technical Moderate",
-        businessImpact: "Test business impact Moderate",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 10,
-        opex: 5,
-      },
-      High: {
-        description: "Test confidentiality High",
-        technical: "Test technical High",
-        businessImpact: "Test business impact High",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 15,
-        opex: 8,
-      },
-      "Very High": {
-        description: "Test confidentiality Very High",
-        technical: "Test technical Very High",
-        businessImpact: "Test business impact Very High",
-        recommendations: ["Rec 1", "Rec 2"],
-        capex: 20,
-        opex: 10,
-      },
-    },
-    ROI_ESTIMATES: {
-      NONE: {
-        returnRate: "0%",
-        description: "No ROI",
-      },
-      LOW: {
-        returnRate: "50%",
-        description: "Low ROI",
-      },
-      MODERATE: {
-        returnRate: "200%",
-        description: "Standard security provides good value",
-      },
-      HIGH: {
-        returnRate: "350%",
-        description: "High ROI",
-      },
-      VERY_HIGH: {
-        returnRate: "500%",
-        description: "Very high ROI",
-      },
-    },
+    availabilityOptions: mockCIAOptionsData,
+    integrityOptions: mockCIAOptionsData,
+    confidentialityOptions: mockCIAOptionsData,
+    roiEstimates: mockROIEstimates,
   };
 
   // Apply any customizations
@@ -166,25 +134,31 @@ export function createCIAOptionsMock(customization = {}) {
     availabilityOptions: mockOptions.availabilityOptions,
     integrityOptions: mockOptions.integrityOptions,
     confidentialityOptions: mockOptions.confidentialityOptions,
-    ROI_ESTIMATES: mockOptions.ROI_ESTIMATES,
-    useCIAOptions: vi.fn().mockReturnValue(mockOptions),
-    default: mockOptions,
+    roiEstimates: mockOptions.roiEstimates,
+    useCIAOptions: vi.fn().mockReturnValue({
+      availabilityOptions: mockOptions.availabilityOptions,
+      integrityOptions: mockOptions.integrityOptions,
+      confidentialityOptions: mockOptions.confidentialityOptions,
+      ROI_ESTIMATES: mockOptions.roiEstimates, // Upper case in hook return
+    }),
   };
 }
 
 /**
- * Creates standardized Chart.js mock that works with vi.mock hoisting
+ * Creates a mock security level provider for testing
  */
-export function createChartJsMock() {
-  const mockInstance = {
-    destroy: vi.fn(),
-    update: vi.fn(),
-    resize: vi.fn(),
-    data: { datasets: [] },
-  };
-
+export function createMockSecurityLevelProvider(customLevels?: {
+  availabilityLevel?: SecurityLevel;
+  integrityLevel?: SecurityLevel;
+  confidentialityLevel?: SecurityLevel;
+}) {
   return {
-    __esModule: true,
-    default: vi.fn().mockReturnValue(mockInstance),
+    availabilityLevel: customLevels?.availabilityLevel || "Moderate",
+    integrityLevel: customLevels?.integrityLevel || "Moderate",
+    confidentialityLevel: customLevels?.confidentialityLevel || "Moderate",
+    setAvailabilityLevel: vi.fn(),
+    setIntegrityLevel: vi.fn(),
+    setConfidentialityLevel: vi.fn(),
+    resetLevels: vi.fn(),
   };
 }

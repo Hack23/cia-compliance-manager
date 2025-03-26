@@ -73,10 +73,10 @@ vi.mock("./hooks/useCIAOptions", () => ({
 vi.mock("./components/Dashboard", () => ({
   __esModule: true,
   default: vi.fn().mockImplementation(({ children, className }) => (
-    // Include the dashboard-grid class and testId in the mock implementation
+    // Update the class to match what's in the actual component
     <div
       data-testid="dashboard-grid"
-      className={`dashboard-grid ${className || ""}`}
+      className={`dashboard-grid-container ${className || ""}`}
     >
       {children}
     </div>
@@ -122,13 +122,11 @@ describe("CIAClassificationApp", () => {
     render(<CIAClassificationApp />);
 
     // Check for the main title
-    expect(
-      screen.getByText(/CIA Compliance Manager Dashboard/i)
-    ).toBeInTheDocument();
+    expect(screen.getByText(/CIA Compliance Manager/i)).toBeInTheDocument();
 
-    // Check for the dashboard grid container
+    // Check for the dashboard grid container with correct class
     const dashboardContainer = screen.getByTestId("dashboard-grid");
     expect(dashboardContainer).toBeInTheDocument();
-    expect(dashboardContainer).toHaveClass("dashboard-grid");
+    expect(dashboardContainer).toHaveClass("dashboard-grid-container");
   });
 });

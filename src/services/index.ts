@@ -1,21 +1,55 @@
 /**
- * # Application Services
+ * # Services Module
  *
- * This module provides services that implement core business logic and data access.
+ * This module exports all service classes and functions used in the CIA Compliance Manager.
  *
  * ## Business Perspective
- * Services encapsulate the domain logic for compliance management and security
- * assessment, providing a reusable API for UI components.
+ * Services implement core business logic for security assessment, compliance mapping,
+ * and business impact analysis, centralizing critical functionality. 💼
  *
- * ## Architecture Perspective
- * The service layer follows a domain-driven design approach, separating business
- * logic from presentation concerns.
+ * ## Technical Perspective
+ * Centralized service exports simplify imports and promote service reuse.
  *
- * ## Security Perspective
- * Services implement consistent security assessment logic and maintain the integrity
- * of security control recommendations across the application.
- *
- * @module services
+ * @packageDocumentation
  */
 
-export { default as ciaContentService } from "./ciaContentService";
+// Service Factories
+export { createBusinessImpactService } from "./businessImpactService";
+export { createCIAContentService } from "./ciaContentService";
+export { createComplianceService } from "./complianceService";
+export { createTechnicalImplementationService } from "./technicalImplementationService";
+
+// Service Classes
+export { BaseService } from "./BaseService";
+export { BusinessImpactService } from "./businessImpactService";
+
+// Export CIA content service
+export {
+  CIAContentService,
+  default as defaultCIAContentService,
+  getInformationSensitivity,
+  getRiskBadgeVariant,
+  getROIEstimate,
+  getValuePoints,
+} from "./ciaContentService";
+
+// Export compliance service adapter
+export { ComplianceServiceAdapter } from "./ComplianceServiceAdapter";
+
+// Export security metrics service
+export {
+  createSecurityMetricsService,
+  SecurityMetricsService,
+} from "./securityMetricsService";
+
+// Export security resource service
+export {
+  createSecurityResourceService,
+  SecurityResourceService,
+} from "./securityResourceService";
+
+// Update to import SecurityResource from the correct location
+import { SecurityResource } from "../types/securityResources";
+
+// Export SecurityResource type
+export type { SecurityResource };

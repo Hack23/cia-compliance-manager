@@ -6,330 +6,136 @@
 
 # components
 
-# Component Library
+# Component Exports Module
 
-This module provides React components for building the CIA Compliance Manager UI.
+This module exports all components and their prop types used in the CIA Compliance Manager.
 
 ## Business Perspective
-These components implement the visual representation of the security compliance
-dashboard, allowing stakeholders to make informed decisions about security investments.
+Components are the building blocks of the UI, providing security professionals
+with intuitive interfaces for managing security compliance. 🎨
 
-## Architecture Perspective
-Components are organized by functional area and follow a layered architecture pattern,
-with common components at the base and specialized widgets building upon them.
+## Technical Perspective
+Centralized component exports simplify imports and promote component reuse.
 
-## Security Perspective
-UI components implement visual security indicators and follow secure coding practices
-to prevent XSS and ensure proper data validation.
+## Interfaces
+
+- [CodeBlockProps](interfaces/CodeBlockProps.md)
+- [KeyValuePairProps](interfaces/KeyValuePairProps.md)
+- [RiskLevelBadgeProps](interfaces/RiskLevelBadgeProps.md)
+- [SecurityLevelBadgeProps](interfaces/SecurityLevelBadgeProps.md)
+- [SecurityLevelProviderProps](interfaces/SecurityLevelProviderProps.md)
+- [SecurityLevelSelectorProps](interfaces/SecurityLevelSelectorProps.md)
+- [SecurityLevelSummaryItemProps](interfaces/SecurityLevelSummaryItemProps.md)
+- [SecurityRiskScoreProps](interfaces/SecurityRiskScoreProps.md)
+- [SelectionProps](interfaces/SelectionProps.md)
+- [TabProps](interfaces/TabProps.md)
+- [ThemeToggleProps](interfaces/ThemeToggleProps.md)
+- [TooltipProps](interfaces/TooltipProps.md)
+- [WidgetActionButtonProps](interfaces/WidgetActionButtonProps.md)
+- [WidgetActionsProps](interfaces/WidgetActionsProps.md)
+
+## Variables
+
+- [AvailabilityImpactWidget](variables/AvailabilityImpactWidget.md)
+- [BusinessImpactAnalysisWidget](variables/BusinessImpactAnalysisWidget.md)
+- [BusinessImpactSection](variables/BusinessImpactSection.md)
+- [BusinessRiskDisplay](variables/BusinessRiskDisplay.md)
+- [CIAImpactCard](variables/CIAImpactCard.md)
+- [COMPLIANCE\_STATUS](variables/COMPLIANCE_STATUS.md)
+- [COMPLIANCE\_STATUS\_TEST\_IDS](variables/COMPLIANCE_STATUS_TEST_IDS.md)
+- [ComplianceStatusWidget](variables/ComplianceStatusWidget.md)
+- [ConfidentialityImpactWidget](variables/ConfidentialityImpactWidget.md)
+- [CostEstimationWidget](variables/CostEstimationWidget.md)
+- [IntegrityImpactWidget](variables/IntegrityImpactWidget.md)
+- [MetricsCard](variables/MetricsCard.md)
+- [RadarChart](variables/RadarChart.md)
+- [RiskAssessment](variables/RiskAssessment.md)
+- [RiskLevelBadge](variables/RiskLevelBadge.md)
+- [SecurityLevelBadge](variables/SecurityLevelBadge.md)
+- [SecurityLevelSelector](variables/SecurityLevelSelector.md)
+- [SecurityLevelWidget](variables/SecurityLevelWidget.md)
+- [SecurityResourcesWidget](variables/SecurityResourcesWidget.md)
+- [SecuritySummaryWidget](variables/SecuritySummaryWidget.md)
+- [SecurityVisualizationWidget](variables/SecurityVisualizationWidget.md)
+- [Selection](variables/Selection.md)
+- [StatusBadge](variables/StatusBadge.md)
+- [Tab](variables/Tab.md)
+- [TechnicalDetailsWidget](variables/TechnicalDetailsWidget.md)
+- [ThemeToggle](variables/ThemeToggle.md)
+- [Tooltip](variables/Tooltip.md)
+- [ValueCreationWidget](variables/ValueCreationWidget.md)
+- [WidgetActions](variables/WidgetActions.md)
+- [WidgetContainer](variables/WidgetContainer.md)
+- [WidgetHeader](variables/WidgetHeader.md)
+
+## Functions
+
+- [ChartSecurityRiskScore](functions/ChartSecurityRiskScore.md)
+- [KeyValuePair](functions/KeyValuePair.md)
+- [SecurityRiskScore](functions/SecurityRiskScore.md)
 
 ## References
 
-### asSecurityLevel
+### BusinessImpactSectionProps
 
-Re-exports [asSecurityLevel](../utils/widgetHelpers/functions/asSecurityLevel.md)
-
-***
-
-### AvailabilityImpactWidget
-
-Renames and re-exports [default](widgets/AvailabilityImpactWidget/functions/default.md)
+Re-exports [BusinessImpactSectionProps](../types/interfaces/BusinessImpactSectionProps.md)
 
 ***
 
-### BusinessImpactAnalysisWidget
+### BusinessRiskDisplayProps
 
-Renames and re-exports [default](widgets/BusinessImpactAnalysisWidget/functions/default.md)
-
-***
-
-### BusinessImpactSection
-
-Renames and re-exports [default](common/BusinessImpactSection/functions/default.md)
+Re-exports [BusinessRiskDisplayProps](../types/interfaces/BusinessRiskDisplayProps.md)
 
 ***
 
-### checkRequiredSecurityLevels
+### CIAImpactCardProps
 
-Re-exports [checkRequiredSecurityLevels](../utils/widgetHelpers/functions/checkRequiredSecurityLevels.md)
-
-***
-
-### CIAImpactCard
-
-Renames and re-exports [default](common/CIAImpactCard/functions/default.md)
+Re-exports [CIAImpactCardProps](../types/interfaces/CIAImpactCardProps.md)
 
 ***
 
-### CIAImpactSummaryWidget
+### MetricsCardProps
 
-Renames and re-exports [default](widgets/CIAImpactSummaryWidget/functions/default.md)
-
-***
-
-### ComplianceStatusWidget
-
-Renames and re-exports [default](widgets/ComplianceStatusWidget/functions/default.md)
+Re-exports [MetricsCardProps](../types/interfaces/MetricsCardProps.md)
 
 ***
 
-### ConfidentialityImpactWidget
+### RadarChartProps
 
-Renames and re-exports [default](widgets/ConfidentialityImpactWidget/functions/default.md)
-
-***
-
-### CostEstimationWidget
-
-Renames and re-exports [default](widgets/CostEstimationWidget/functions/default.md)
+Re-exports [RadarChartProps](../types/interfaces/RadarChartProps.md)
 
 ***
 
-### createWidgetConfig
+### RiskAssessmentProps
 
-Re-exports [createWidgetConfig](../utils/widgetHelpers/functions/createWidgetConfig.md)
-
-***
-
-### DashboardWidget
-
-Re-exports [DashboardWidget](dashboard/Dashboard/functions/DashboardWidget.md)
+Re-exports [RiskAssessmentProps](../types/interfaces/RiskAssessmentProps.md)
 
 ***
 
-### EnhancedSecurityLevelSelector
+### SecurityLevelChangeTrackerProps
 
-Renames and re-exports [default](securitylevel/SecurityLevelSelector/functions/default.md)
-
-***
-
-### evaluateWidgetVisibility
-
-Re-exports [evaluateWidgetVisibility](../utils/widgetHelpers/functions/evaluateWidgetVisibility.md)
+Re-exports [SecurityLevelChangeTrackerProps](../typedoc-entry/interfaces/SecurityLevelChangeTrackerProps.md)
 
 ***
 
-### filterWidgets
+### SecurityLevelContextType
 
-Re-exports [filterWidgets](../utils/widgetHelpers/functions/filterWidgets.md)
-
-***
-
-### formatSecurityLevel
-
-Re-exports [formatSecurityLevel](../utils/widgetHelpers/functions/formatSecurityLevel.md)
+Re-exports [SecurityLevelContextType](../typedoc-entry/interfaces/SecurityLevelContextType.md)
 
 ***
 
-### getSecurityLevelColors
+### StatusBadgeProps
 
-Re-exports [getSecurityLevelColors](../utils/widgetHelpers/functions/getSecurityLevelColors.md)
-
-***
-
-### getTestId
-
-Re-exports [getTestId](../utils/widgetHelpers/functions/getTestId.md)
+Re-exports [StatusBadgeProps](../types/interfaces/StatusBadgeProps.md)
 
 ***
 
-### getWidgetContent
+### UseSecurityLevelStateOptions
 
-Re-exports [getWidgetContent](../utils/widgetHelpers/functions/getWidgetContent.md)
-
-***
-
-### getWidgetDescription
-
-Re-exports [getWidgetDescription](../utils/widgetHelpers/functions/getWidgetDescription.md)
+Re-exports [UseSecurityLevelStateOptions](../typedoc-entry/interfaces/UseSecurityLevelStateOptions.md)
 
 ***
 
-### getWidgetIcon
+### WidgetHeaderProps
 
-Re-exports [getWidgetIcon](../utils/widgetHelpers/functions/getWidgetIcon.md)
-
-***
-
-### getWidgetSize
-
-Re-exports [getWidgetSize](../utils/widgetHelpers/functions/getWidgetSize.md)
-
-***
-
-### getWidgetTitle
-
-Re-exports [getWidgetTitle](../utils/widgetHelpers/functions/getWidgetTitle.md)
-
-***
-
-### handleWidgetError
-
-Re-exports [handleWidgetError](../utils/widgetHelpers/functions/handleWidgetError.md)
-
-***
-
-### IntegrityImpactWidget
-
-Renames and re-exports [default](widgets/IntegrityImpactWidget/functions/default.md)
-
-***
-
-### KeyValuePair
-
-Renames and re-exports [default](common/KeyValuePair/functions/default.md)
-
-***
-
-### MetricsCard
-
-Renames and re-exports [default](common/MetricsCard/functions/default.md)
-
-***
-
-### RadarChart
-
-Renames and re-exports [default](charts/RadarChart/functions/default.md)
-
-***
-
-### SecurityLevelSelector
-
-Renames and re-exports [default](SecurityLevelSelector/functions/default.md)
-
-***
-
-### SecurityLevelWidget
-
-Renames and re-exports [default](widgets/SecurityLevelWidget/functions/default.md)
-
-***
-
-### SecurityResourcesWidget
-
-Renames and re-exports [default](widgets/SecurityResourcesWidget/functions/default.md)
-
-***
-
-### SecurityRiskScore
-
-Renames and re-exports [default](common/SecurityRiskScore/functions/default.md)
-
-***
-
-### SecuritySummaryWidget
-
-Renames and re-exports [default](widgets/SecuritySummaryWidget/functions/default.md)
-
-***
-
-### SecurityVisualizationWidget
-
-Renames and re-exports [default](widgets/SecurityVisualizationWidget/functions/default.md)
-
-***
-
-### Selection
-
-Renames and re-exports [default](securitylevel/Selection/functions/default.md)
-
-***
-
-### shouldShowWidget
-
-Re-exports [shouldShowWidget](../utils/widgetHelpers/functions/shouldShowWidget.md)
-
-***
-
-### SimpleSecurityLevelSelector
-
-Renames and re-exports [default](common/SecurityLevelSelector/functions/default.md)
-
-***
-
-### sortWidgetsByPriority
-
-Re-exports [sortWidgetsByPriority](../utils/widgetHelpers/functions/sortWidgetsByPriority.md)
-
-***
-
-### StatusBadge
-
-Renames and re-exports [default](common/StatusBadge/functions/default.md)
-
-***
-
-### TechnicalDetailsWidget
-
-Renames and re-exports [default](widgets/TechnicalDetailsWidget/functions/default.md)
-
-***
-
-### Tooltip
-
-Renames and re-exports [default](common/Tooltip/functions/default.md)
-
-***
-
-### ValueCreationWidget
-
-Renames and re-exports [default](widgets/ValueCreationWidget/functions/default.md)
-
-***
-
-### ValueDisplay
-
-Renames and re-exports [default](common/ValueDisplay/functions/default.md)
-
-***
-
-### WIDGET\_CONTENT
-
-Re-exports [WIDGET_CONTENT](../utils/widgetHelpers/variables/WIDGET_CONTENT.md)
-
-***
-
-### WIDGET\_DESCRIPTIONS
-
-Re-exports [WIDGET_DESCRIPTIONS](../utils/widgetHelpers/variables/WIDGET_DESCRIPTIONS.md)
-
-***
-
-### WidgetContainer
-
-Renames and re-exports [default](common/WidgetContainer/functions/default.md)
-
-***
-
-### widgetEmptyState
-
-Re-exports [widgetEmptyState](../utils/widgetHelpers/functions/widgetEmptyState.md)
-
-***
-
-### WidgetHeader
-
-Renames and re-exports [default](common/WidgetHeader/functions/default.md)
-
-***
-
-### widgetLoadingIndicator
-
-Re-exports [widgetLoadingIndicator](../utils/widgetHelpers/functions/widgetLoadingIndicator.md)
-
-***
-
-### widgetRegistry
-
-Re-exports [widgetRegistry](../utils/widgetRegistry/variables/widgetRegistry.md)
-
-***
-
-### widgetRegistryUtils
-
-Re-exports [widgetRegistryUtils](../utils/widgetRegistry/variables/widgetRegistryUtils.md)
-
-***
-
-### WidgetType
-
-Re-exports [WidgetType](../utils/widgetHelpers/enumerations/WidgetType.md)
+Re-exports [WidgetHeaderProps](../types/interfaces/WidgetHeaderProps.md)

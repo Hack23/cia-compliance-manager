@@ -1,262 +1,198 @@
-import React, { useEffect, useMemo, useState } from "react";
-import {
-  availabilityOptions,
-  confidentialityOptions,
-  integrityOptions,
-} from "../hooks/useCIAOptions";
-
-import Dashboard, { DashboardWidget } from "../components/dashboard/Dashboard";
-import ComplianceStatusWidget from "../components/widgets/ComplianceStatusWidget";
-import CostEstimationWidget from "../components/widgets/CostEstimationWidget";
-import SecurityLevelWidget from "../components/widgets/SecurityLevelWidget";
-import SecuritySummaryWidget from "../components/widgets/SecuritySummaryWidget";
-import ValueCreationWidget from "../components/widgets/ValueCreationWidget";
-import { SECURITY_LEVELS, UI_TEXT } from "../constants/appConstants";
-import { WIDGET_TITLES } from "../constants/coreConstants";
-import { APP_TEST_IDS } from "../constants/testIds";
-// Import the new widgets
-import AvailabilityImpactWidget from "../components/widgets/AvailabilityImpactWidget";
-import BusinessImpactAnalysisWidget from "../components/widgets/BusinessImpactAnalysisWidget";
-import ConfidentialityImpactWidget from "../components/widgets/ConfidentialityImpactWidget";
-import IntegrityImpactWidget from "../components/widgets/IntegrityImpactWidget";
-import SecurityResourcesWidget from "../components/widgets/SecurityResourcesWidget";
-import SecurityVisualizationWidget from "../components/widgets/SecurityVisualizationWidget";
-import TechnicalDetailsWidget from "../components/widgets/TechnicalDetailsWidget";
+import React, { useCallback, useEffect, useState } from "react";
+// Import widgets directly instead of Dashboard
+import BusinessImpactAnalysisWidget from "../components/widgets/assessmentcenter/BusinessImpactAnalysisWidget";
+import SecurityLevelWidget from "../components/widgets/assessmentcenter/SecurityLevelWidget";
+import SecuritySummaryWidget from "../components/widgets/assessmentcenter/SecuritySummaryWidget";
+import ComplianceStatusWidget from "../components/widgets/businessvalue/ComplianceStatusWidget";
+import CostEstimationWidget from "../components/widgets/businessvalue/CostEstimationWidget";
+import ValueCreationWidget from "../components/widgets/businessvalue/ValueCreationWidget";
+import AvailabilityImpactWidget from "../components/widgets/impactanalysis/AvailabilityImpactWidget";
+import ConfidentialityImpactWidget from "../components/widgets/impactanalysis/ConfidentialityImpactWidget";
+import IntegrityImpactWidget from "../components/widgets/impactanalysis/IntegrityImpactWidget";
+import SecurityResourcesWidget from "../components/widgets/implementationguide/SecurityResourcesWidget";
+import SecurityVisualizationWidget from "../components/widgets/implementationguide/SecurityVisualizationWidget";
+import TechnicalDetailsWidget from "../components/widgets/implementationguide/TechnicalDetailsWidget";
+import { APP_TEST_IDS, UI_TEXT } from "../constants";
 import { SecurityLevel } from "../types/cia";
-import { typeAdapters } from "../types/widgets";
 
 /**
- * Main component for the CIA Classification App
+ * Main application component for CIA Classification
  *
  * ## Business Perspective
  *
- * ### Purpose
- * The `CIAClassificationApp` component serves as the main component for the CIA Classification App, orchestrating various widgets and functionalities to deliver a comprehensive compliance management solution. 🛡️
- *
- * ### User Experience
- * By providing a cohesive and user-friendly interface, the `CIAClassificationApp` component enhances the overall user experience, making it easier for users to navigate and utilize the compliance management tools. 🌟
- *
- * ### Business Continuity
- * The `CIAClassificationApp` component ensures business continuity by maintaining a consistent and reliable application structure, minimizing disruptions during updates or migrations. 🔄
- *
- * ### Scalability
- * The `CIAClassificationApp` component's modular design allows for easy scalability and future enhancements, enabling the application to grow and adapt to changing business needs. 📈
- *
- * ### Security
- * The `CIAClassificationApp` component implements proper state management for security levels and ensures consistent application of security controls across the CIA triad, enhancing the overall security posture of the application. 🔒
+ * This component serves as the central state manager for security levels
+ * across the application, ensuring consistent security posture visualization
+ * and providing a unified user experience for security professionals. 🔒
  */
 const CIAClassificationApp: React.FC = () => {
-  // Get version from package.json through Vite define plugin
   const appVersion = APP_VERSION;
 
-  // State for security levels
-  const [availability, setAvailability] = useState<string>(
-    SECURITY_LEVELS.NONE
-  );
-  const [integrity, setIntegrity] = useState<string>(SECURITY_LEVELS.NONE);
-  const [confidentiality, setConfidentiality] = useState<string>(
-    SECURITY_LEVELS.NONE
-  );
+  // Use local state with persisted values from localStorage
+  const defaultAvailabilityLevel =
+    (localStorage.getItem("availabilityLevel") as SecurityLevel) || "Moderate";
+  const defaultIntegrityLevel =
+    (localStorage.getItem("integrityLevel") as SecurityLevel) || "Moderate";
+  const defaultConfidentialityLevel =
+    (localStorage.getItem("confidentialityLevel") as SecurityLevel) ||
+    "Moderate";
+  const defaultDarkMode =
+    localStorage.getItem("darkMode") === "true" ||
+    (window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-  // Dark mode state - updated to default to true
-  const [darkMode, setDarkMode] = useState<boolean>(true);
+  // Use state with manual localStorage handling
+  const [availabilityLevel, setAvailabilityLevelState] =
+    useState<SecurityLevel>(defaultAvailabilityLevel);
+  const [integrityLevel, setIntegrityLevelState] = useState<SecurityLevel>(
+    defaultIntegrityLevel
+  );
+  const [confidentialityLevel, setConfidentialityLevelState] =
+    useState<SecurityLevel>(defaultConfidentialityLevel);
+  const [darkMode, setDarkModeState] = useState<boolean>(defaultDarkMode);
 
+  // Custom setters that also persist values to localStorage
+  const setAvailabilityLevel = (level: SecurityLevel) => {
+    localStorage.setItem("availabilityLevel", level);
+    setAvailabilityLevelState(level);
+  };
+
+  const setIntegrityLevel = (level: SecurityLevel) => {
+    localStorage.setItem("integrityLevel", level);
+    setIntegrityLevelState(level);
+  };
+
+  const setConfidentialityLevel = (level: SecurityLevel) => {
+    localStorage.setItem("confidentialityLevel", level);
+    setConfidentialityLevelState(level);
+  };
+
+  const setDarkMode = (
+    value: boolean | ((prevDarkMode: boolean) => boolean)
+  ) => {
+    const newValue = typeof value === "function" ? value(darkMode) : value;
+    localStorage.setItem("darkMode", String(newValue));
+    setDarkModeState(newValue);
+  };
+
+  // Log initial values for debugging
   useEffect(() => {
-    const testEventHandler = (e: Event) => {
-      if (
-        e instanceof CustomEvent &&
-        e.type === "test:set-values" &&
-        e.detail
-      ) {
-        const { availability: a, integrity: i, confidentiality: c } = e.detail;
-        if (a) setAvailability(a);
-        if (i) setIntegrity(i);
-        if (c) setConfidentiality(c);
-      }
-    };
+    console.log("CIA App Security Levels:", {
+      availability: availabilityLevel,
+      integrity: integrityLevel,
+      confidentiality: confidentialityLevel,
+    });
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-    document.addEventListener(
-      "test:set-values",
-      testEventHandler as EventListener
-    );
-
-    return () => {
-      document.removeEventListener(
-        "test:set-values",
-        testEventHandler as EventListener
-      );
-    };
+  // Create handler functions
+  const handleAvailabilityChange = useCallback((level: SecurityLevel) => {
+    console.log("CIAClassificationApp: Setting availability level to:", level);
+    setAvailabilityLevel(level);
   }, []);
 
-  useEffect(() => {
-    if (
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      typeof window.matchMedia === "function"
-    ) {
-      try {
-        // Apply dark mode by default (no need to check system preference)
-        if (darkMode) {
-          document.documentElement.classList.add("dark");
-          document.getElementById("root")?.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-          document.getElementById("root")?.classList.remove("dark");
-        }
-      } catch (error) {
-        if (process.env.NODE_ENV !== "test") {
-          console.error("Error applying dark mode:", error);
-        }
-      }
-    }
-  }, [darkMode]);
+  const handleIntegrityChange = useCallback((level: SecurityLevel) => {
+    console.log("CIAClassificationApp: Setting integrity level to:", level);
+    setIntegrityLevel(level);
+  }, []);
 
-  // Calculate total costs
-  const totalCapex =
-    (availabilityOptions[availability as SecurityLevel]?.capex || 0) +
-    (integrityOptions[integrity as SecurityLevel]?.capex || 0) +
-    (confidentialityOptions[confidentiality as SecurityLevel]?.capex || 0);
-
-  const totalOpex =
-    (availabilityOptions[availability as SecurityLevel]?.opex || 0) +
-    (integrityOptions[integrity as SecurityLevel]?.opex || 0) +
-    (confidentialityOptions[confidentiality as SecurityLevel]?.opex || 0);
-
-  // Calculate overall security level
-  const overallSecurityLevel = useMemo(() => {
-    const levels = [
-      SECURITY_LEVELS.NONE,
-      SECURITY_LEVELS.LOW,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.HIGH,
-      SECURITY_LEVELS.VERY_HIGH,
-    ];
-    const availabilityIndex = levels.indexOf(availability as SecurityLevel);
-    const integrityIndex = levels.indexOf(integrity as SecurityLevel);
-    const confidentialityIndex = levels.indexOf(
-      confidentiality as SecurityLevel
+  const handleConfidentialityChange = useCallback((level: SecurityLevel) => {
+    console.log(
+      "CIAClassificationApp: Setting confidentiality level to:",
+      level
     );
-
-    const avgIndex = Math.round(
-      (availabilityIndex + integrityIndex + confidentialityIndex) / 3
-    );
-    return levels[avgIndex] || SECURITY_LEVELS.NONE;
-  }, [availability, integrity, confidentiality]);
+    setConfidentialityLevel(level);
+  }, []);
 
   // Toggle dark mode
   const toggleDarkMode = () => {
-    setDarkMode((prev) => {
-      const newMode = !prev;
-      // Apply dark mode class to HTML element (more standard approach)
-      if (newMode) {
-        document.documentElement.classList.add("dark");
-        document.getElementById("root")?.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-        document.getElementById("root")?.classList.remove("dark");
-      }
-      return newMode;
-    });
+    setDarkMode((prev) => !prev);
   };
 
-  // Determine if we're dealing with a small solution for UI adaptation
-  const isSmallSolution = totalCapex <= 60;
-
-  // Prepare dynamic cost estimates based on solution size
-  const capexEstimate = isSmallSolution ? "$5,000" : "$50,000";
-  const opexEstimate = isSmallSolution ? "$500" : "$50,000";
-
-  // Prepare adapter functions for options
-  const adaptedIntegrityOptions = Object.entries(integrityOptions).reduce(
-    (acc, [key, value]) => {
-      acc[key] = typeAdapters.toIntegrityDetail(value);
-      return acc;
-    },
-    {} as Record<string, any>
-  );
-
-  const adaptedConfidentialityOptions = Object.entries(
-    confidentialityOptions
-  ).reduce((acc, [key, value]) => {
-    acc[key] = typeAdapters.toConfidentialityDetail(value);
-    return acc;
-  }, {} as Record<string, any>);
-
-  const adaptedAvailabilityOptions = Object.entries(availabilityOptions).reduce(
-    (acc, [key, value]) => {
-      acc[key] = typeAdapters.toAvailabilityDetail(value);
-      return acc;
-    },
-    {} as Record<string, any>
-  );
+  // Apply dark mode class
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.body.classList.remove("dark");
+    }
+  }, [darkMode]);
 
   return (
-    <div
-      className={`app-container ${darkMode ? "dark bg-pattern" : ""}`}
-      data-testid={APP_TEST_IDS.APP_CONTAINER}
-    >
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-4 transition-colors duration-300">
-        <div className="w-full mx-auto">
-          {/* App title and theme toggle */}
-          <div className="app-title shadow-lg rounded-xl transition-colors duration-300 dark:security-card p-4 flex items-center justify-between">
+    <div className="app-container">
+      <div
+        className={`min-h-screen ${
+          darkMode ? "dark bg-gray-900" : "bg-gray-100"
+        } p-4 transition-colors duration-300`}
+      >
+        {/* App header with theme toggle */}
+        <div className="mb-4 p-3 bg-white dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center">
+          <div className="flex items-center">
+            <img
+              src="https://hack23.github.io/cia-compliance-manager/icon-192.png"
+              alt="CIA Compliance Manager Logo"
+              className="h-10 w-10 mr-3"
+              data-testid="app-logo"
+            />
             <div>
               <h1
                 data-testid={APP_TEST_IDS.APP_TITLE}
-                className="text-2xl font-bold text-gray-800 dark:text-gray-100 dark:widget-title transition-colors duration-300 flex items-center"
+                className="text-xl font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300"
               >
-                <img
-                  src="https://hack23.github.io/cia-compliance-manager/icon-192.png"
-                  alt="CIA Compliance Manager Logo"
-                  style={{ height: "48px" }}
-                  className="w-auto mr-1"
-                />
                 {UI_TEXT.APP_TITLE}
               </h1>
               <div
-                className="terminal-text text-xs flex items-center mt-1"
+                className="terminal-text text-xs flex items-center flex-wrap"
                 style={{ color: "#22c55e" }}
               >
                 <span
-                  className="mr-1"
+                  className="inline-block mr-1"
                   data-testid="app-indicator"
-                  style={{ color: "#22c55e" }}
+                  style={{ color: "#22c55e", fontSize: "8px" }}
                 >
                   ■
                 </span>
                 <span
-                  className="mr-2"
+                  className="mr-1 text-xxs"
                   data-testid="app-version"
                   style={{ color: "#22c55e" }}
                 >
                   v{appVersion}
                 </span>
+                <span className="mx-1 text-xxs" style={{ color: "#22c55e" }}>
+                  •
+                </span>
                 <a
                   href="https://github.com/Hack23/cia-compliance-manager"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline mr-2"
+                  className="text-xxs hover:underline mr-1"
                   data-testid="source-link"
                   style={{ color: "#22c55e" }}
                 >
                   Source
                 </a>
-                <span style={{ color: "#22c55e" }}>|</span>
+                <span className="mx-1 text-xxs" style={{ color: "#22c55e" }}>
+                  •
+                </span>
                 <a
                   href="https://hack23.github.io/cia-compliance-manager/documentation.html"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline mx-2"
+                  className="text-xxs hover:underline mr-1"
                   data-testid="docs-link"
                   style={{ color: "#22c55e" }}
                 >
                   Doc
                 </a>
-                <span style={{ color: "#22c55e" }}>|</span>
+                <span className="mx-1 text-xxs" style={{ color: "#22c55e" }}>
+                  •
+                </span>
                 <a
                   href="https://hack23.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline"
+                  className="text-xxs hover:underline"
                   data-testid="author-link"
                   style={{ color: "#22c55e" }}
                 >
@@ -264,197 +200,142 @@ const CIAClassificationApp: React.FC = () => {
                 </a>
               </div>
             </div>
-            <button
-              data-testid={APP_TEST_IDS.THEME_TOGGLE}
-              onClick={toggleDarkMode}
-              className={`px-4 py-2 rounded-md flex items-center transition-all duration-300 ${
-                darkMode
-                  ? "bg-black border border-green-500 hover:border-green-400 hover:bg-gray-900 cyberbutton"
-                  : "bg-blue-500 hover:bg-blue-600 text-white"
-              }`}
-            >
-              {darkMode ? (
-                <>
-                  <span className="mr-2 text-green-400">☀️</span>
-                  <span className="text-green-400 font-mono tracking-wide text-sm uppercase">
-                    Light Mode
-                  </span>
-                </>
-              ) : (
-                <>
-                  <span className="mr-2">🌙</span> Dark Mode
-                </>
-              )}
-            </button>
           </div>
 
-          {/* Main dashboard */}
-          <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-3 pt-4 mt-3 transition-colors duration-300">
-            <Dashboard>
-              {/* Security Level Selection */}
-              <DashboardWidget
-                title={WIDGET_TITLES.SECURITY_LEVEL}
-                icon="SECURITY_LEVEL"
-                testId="widget-security-level-selection"
-              >
-                <SecurityLevelWidget
-                  availabilityLevel={availability}
-                  integrityLevel={integrity}
-                  confidentialityLevel={confidentiality}
-                  setAvailability={setAvailability}
-                  setIntegrity={setIntegrity}
-                  setConfidentiality={setConfidentiality}
-                />
-              </DashboardWidget>
+          <button
+            onClick={toggleDarkMode}
+            className="px-3 py-1 bg-blue-500 dark:bg-blue-600 text-white rounded-md text-sm"
+          >
+            {darkMode ? "☀️ Light" : "🌙 Dark"}
+          </button>
+        </div>
 
-              {/* Security Summary */}
-              <DashboardWidget
-                title={WIDGET_TITLES.SECURITY_SUMMARY}
-                icon="SECURITY_SUMMARY"
+        {/* Container with defined width to ensure grid fits properly */}
+        <div className="w-full max-w-[1600px] mx-auto">
+          <div
+            data-testid="dashboard-grid"
+            className="dashboard-grid-container"
+          >
+            {/* Security Level Widget */}
+            <div className="grid-widget-container">
+              <SecurityLevelWidget
+                availabilityLevel={availabilityLevel}
+                integrityLevel={integrityLevel}
+                confidentialityLevel={confidentialityLevel}
+                onAvailabilityChange={handleAvailabilityChange}
+                onIntegrityChange={handleIntegrityChange}
+                onConfidentialityChange={handleConfidentialityChange}
+                testId="widget-security-level"
+              />
+            </div>
+
+            {/* Business Impact Analysis Widget */}
+            <div className="grid-widget-container">
+              <BusinessImpactAnalysisWidget
+                availabilityLevel={availabilityLevel}
+                integrityLevel={integrityLevel}
+                confidentialityLevel={confidentialityLevel}
+                testId="widget-business-impact"
+              />
+            </div>
+
+            {/* Security Summary Widget */}
+            <div className="grid-widget-container">
+              <SecuritySummaryWidget
+                availabilityLevel={availabilityLevel}
+                integrityLevel={integrityLevel}
+                confidentialityLevel={confidentialityLevel}
                 testId="widget-security-summary"
-              >
-                <SecuritySummaryWidget
-                  securityLevel={overallSecurityLevel as SecurityLevel}
-                  availabilityLevel={availability as SecurityLevel}
-                  integrityLevel={integrity as SecurityLevel}
-                  confidentialityLevel={confidentiality as SecurityLevel}
-                />
-              </DashboardWidget>
+              />
+            </div>
 
-              {/* Business Impact Analysis - New Widget */}
-              <DashboardWidget
-                title={WIDGET_TITLES.BUSINESS_IMPACT}
-                icon="BUSINESS_IMPACT"
-                testId="widget-business-impact-container"
-              >
-                <BusinessImpactAnalysisWidget
-                  availabilityLevel={availability as SecurityLevel}
-                  integrityLevel={integrity as SecurityLevel}
-                  confidentialityLevel={confidentiality as SecurityLevel}
-                  securityLevel={overallSecurityLevel}
-                />
-              </DashboardWidget>
-
-              {/* Technical Details - New Widget */}
-              <DashboardWidget
-                title={WIDGET_TITLES.TECHNICAL_IMPLEMENTATION}
-                icon="TECHNICAL_IMPLEMENTATION"
-                testId="widget-technical-details-container"
-              >
-                <TechnicalDetailsWidget
-                  availabilityLevel={availability}
-                  integrityLevel={integrity}
-                  confidentialityLevel={confidentiality}
-                />
-              </DashboardWidget>
-
-              {/* Cost Estimation */}
-              <DashboardWidget
-                title={WIDGET_TITLES.COST_ESTIMATION}
-                icon="COST_ESTIMATION"
-                testId="widget-cost-estimation"
-              >
-                <CostEstimationWidget
-                  availabilityLevel={availability as SecurityLevel}
-                  integrityLevel={integrity as SecurityLevel}
-                  confidentialityLevel={confidentiality as SecurityLevel}
-                />
-              </DashboardWidget>
-
-              {/* Value Creation */}
-              <DashboardWidget
-                title={WIDGET_TITLES.VALUE_CREATION}
-                icon="VALUE_CREATION"
+            {/* Value Creation Widget */}
+            <div className="grid-widget-container">
+              <ValueCreationWidget
+                availabilityLevel={availabilityLevel}
+                integrityLevel={integrityLevel}
+                confidentialityLevel={confidentialityLevel}
                 testId="widget-value-creation"
-              >
-                <ValueCreationWidget
-                  securityLevel={overallSecurityLevel as SecurityLevel}
-                  availabilityLevel={availability as SecurityLevel}
-                  integrityLevel={integrity as SecurityLevel}
-                  confidentialityLevel={confidentiality as SecurityLevel}
-                />
-              </DashboardWidget>
+              />
+            </div>
 
-              {/* Compliance Status */}
-              <DashboardWidget
-                title={WIDGET_TITLES.COMPLIANCE_STATUS}
-                icon="COMPLIANCE_STATUS"
+            {/* Cost Estimation Widget */}
+            <div className="grid-widget-container">
+              <CostEstimationWidget
+                availabilityLevel={availabilityLevel}
+                integrityLevel={integrityLevel}
+                confidentialityLevel={confidentialityLevel}
+                testId="widget-cost-estimation"
+              />
+            </div>
+
+            {/* Compliance Status Widget */}
+            <div className="grid-widget-container">
+              <ComplianceStatusWidget
+                availabilityLevel={availabilityLevel}
+                integrityLevel={integrityLevel}
+                confidentialityLevel={confidentialityLevel}
                 testId="widget-compliance-status"
-              >
-                <ComplianceStatusWidget
-                  availabilityLevel={availability as SecurityLevel}
-                  integrityLevel={integrity as SecurityLevel}
-                  confidentialityLevel={confidentiality as SecurityLevel}
-                />
-              </DashboardWidget>
+              />
+            </div>
 
-              {/* Security Visualization */}
-              <DashboardWidget
-                title={WIDGET_TITLES.SECURITY_VISUALIZATION}
-                icon="SECURITY_VISUALIZATION"
-                testId="widget-radar-chart"
-              >
-                <SecurityVisualizationWidget
-                  availabilityLevel={availability as SecurityLevel}
-                  integrityLevel={integrity as SecurityLevel}
-                  confidentialityLevel={confidentiality as SecurityLevel}
-                />
-              </DashboardWidget>
+            {/* Confidentiality Impact Widget */}
+            <div className="grid-widget-container">
+              <ConfidentialityImpactWidget
+                availabilityLevel={availabilityLevel}
+                integrityLevel={integrityLevel}
+                confidentialityLevel={confidentialityLevel}
+                testId="widget-confidentiality-impact"
+              />
+            </div>
 
-              {/* Confidentiality Impact - New Widget */}
-              <DashboardWidget
-                title={WIDGET_TITLES.CONFIDENTIALITY_IMPACT}
-                icon="CONFIDENTIALITY_IMPACT"
-                testId="widget-confidentiality-impact-container"
-              >
-                <ConfidentialityImpactWidget
-                  confidentialityLevel={confidentiality as SecurityLevel}
-                  integrityLevel={integrity as SecurityLevel}
-                  availabilityLevel={availability as SecurityLevel}
-                />
-              </DashboardWidget>
+            {/* Integrity Impact Widget */}
+            <div className="grid-widget-container">
+              <IntegrityImpactWidget
+                level={integrityLevel}
+                testId="integrity-impact-widget"
+              />
+            </div>
 
-              {/* Integrity Impact - New Widget */}
-              <DashboardWidget
-                title={WIDGET_TITLES.INTEGRITY_IMPACT}
-                icon="INTEGRITY_IMPACT"
-                testId="widget-integrity-impact-container"
-              >
-                <IntegrityImpactWidget
-                  integrityLevel={integrity as SecurityLevel}
-                  availabilityLevel={availability as SecurityLevel}
-                  confidentialityLevel={confidentiality as SecurityLevel}
-                />
-              </DashboardWidget>
+            {/* Availability Impact Widget */}
+            <div className="grid-widget-container">
+              <AvailabilityImpactWidget
+                availabilityLevel={availabilityLevel}
+                integrityLevel={integrityLevel}
+                confidentialityLevel={confidentialityLevel}
+                testId="widget-availability-impact"
+              />
+            </div>
 
-              {/* Availability Impact - New Widget */}
-              <DashboardWidget
-                title={WIDGET_TITLES.AVAILABILITY_IMPACT}
-                icon="AVAILABILITY_IMPACT"
-                testId="widget-availability-impact-container"
-              >
-                <AvailabilityImpactWidget
-                  availabilityLevel={availability as SecurityLevel}
-                  integrityLevel={integrity as SecurityLevel}
-                  confidentialityLevel={confidentiality as SecurityLevel}
-                  options={adaptedAvailabilityOptions}
-                />
-              </DashboardWidget>
+            {/* Technical Details Widget */}
+            <div className="grid-widget-container">
+              <TechnicalDetailsWidget
+                availabilityLevel={availabilityLevel}
+                integrityLevel={integrityLevel}
+                confidentialityLevel={confidentialityLevel}
+                testId="widget-technical-details"
+              />
+            </div>
 
-              {/* Security Resources - New Widget */}
-              <DashboardWidget
-                title={WIDGET_TITLES.SECURITY_RESOURCES}
-                icon="SECURITY_RESOURCES"
-                testId="widget-security-resources-container"
-              >
-                <SecurityResourcesWidget
-                  securityLevel={overallSecurityLevel as SecurityLevel}
-                  availabilityLevel={availability as SecurityLevel}
-                  integrityLevel={integrity as SecurityLevel}
-                  confidentialityLevel={confidentiality as SecurityLevel}
-                />
-              </DashboardWidget>
-            </Dashboard>
+            {/* Security Visualization Widget */}
+            <div className="grid-widget-container">
+              <SecurityVisualizationWidget
+                availabilityLevel={availabilityLevel}
+                integrityLevel={integrityLevel}
+                confidentialityLevel={confidentialityLevel}
+                testId="widget-security-visualization"
+              />
+            </div>
+
+            {/* Security Resources Widget */}
+            <div className="grid-widget-container">
+              <SecurityResourcesWidget
+                availabilityLevel={availabilityLevel}
+                integrityLevel={integrityLevel}
+                confidentialityLevel={confidentialityLevel}
+                testId="security-resources-widget"
+              />
+            </div>
           </div>
         </div>
       </div>

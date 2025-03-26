@@ -6,268 +6,185 @@
 
 # types
 
-Central export file for all types used in the CIA Compliance Manager
+# Type Definitions Module
+
+This module exports all type definitions used across the CIA Compliance Manager.
+
+## Business Perspective
+Type definitions ensure consistent data structures throughout the application,
+supporting reliable security assessments and business impact analysis.
+
+## Technical Perspective
+Centralized type exports simplify imports and enforce type consistency.
+
+## Namespaces
+
+- [CIAUtilities](namespaces/CIAUtilities/README.md)
+
+## Interfaces
+
+### Base Types
+
+- [BaseWidgetProps](interfaces/BaseWidgetProps.md)
+- [CIABaseWidgetProps](interfaces/CIABaseWidgetProps.md)
+
+### Compliance Widgets
+
+- [ComplianceStatusWidgetProps](interfaces/ComplianceStatusWidgetProps.md)
+
+### Other
+
+- [AvailabilityImpact](interfaces/AvailabilityImpact.md)
+- [BaseImpact](interfaces/BaseImpact.md)
+- [BusinessConsideration](interfaces/BusinessConsideration.md)
+- [BusinessConsiderations](interfaces/BusinessConsiderations.md)
+- [BusinessImpactDetail](interfaces/BusinessImpactDetail.md)
+- [BusinessImpactDetails](interfaces/BusinessImpactDetails.md)
+- [BusinessImpactIcons](interfaces/BusinessImpactIcons.md)
+- [BusinessImpactSectionProps](interfaces/BusinessImpactSectionProps.md)
+- [BusinessKeyBenefit](interfaces/BusinessKeyBenefit.md)
+- [BusinessKeyBenefits](interfaces/BusinessKeyBenefits.md)
+- [BusinessRiskDisplayProps](interfaces/BusinessRiskDisplayProps.md)
+- [BusinessROIEstimates](interfaces/BusinessROIEstimates.md)
+- [BusinessValueMetric](interfaces/BusinessValueMetric.md)
+- [CIADataProvider](interfaces/CIADataProvider.md)
+- [CIADetails](interfaces/CIADetails.md)
+- [CIAImpact](interfaces/CIAImpact.md)
+- [CIAImpactCardProps](interfaces/CIAImpactCardProps.md)
+- [CIAOptions](interfaces/CIAOptions.md)
+- [CodeExample](interfaces/CodeExample.md)
+- [CommonWidgetProps](interfaces/CommonWidgetProps.md)
+- [ComplianceImpact](interfaces/ComplianceImpact.md)
+- [ConfidentialityImpact](interfaces/ConfidentialityImpact.md)
+- [ImplementationEffort](interfaces/ImplementationEffort.md)
+- [IntegrityImpact](interfaces/IntegrityImpact.md)
+- [MetricsCardProps](interfaces/MetricsCardProps.md)
+- [RadarChartProps](interfaces/RadarChartProps.md)
+- [RiskAssessmentProps](interfaces/RiskAssessmentProps.md)
+- [ROIEstimate](interfaces/ROIEstimate.md)
+- [ROIEstimatesMap](interfaces/ROIEstimatesMap.md)
+- [SecurityLevels](interfaces/SecurityLevels.md)
+- [StatusBadgeProps](interfaces/StatusBadgeProps.md)
+- [TechnicalImplementationDetails](interfaces/TechnicalImplementationDetails.md)
+- [WidgetHeaderProps](interfaces/WidgetHeaderProps.md)
+- [WithSecurityLevelProps](interfaces/WithSecurityLevelProps.md)
+
+## Type Aliases
+
+### Base Types
+
+- [WidgetProps](type-aliases/WidgetProps.md)
+
+### Other
+
+- [CIAComponent](type-aliases/CIAComponent.md)
+- [CIAComponentType](type-aliases/CIAComponentType.md)
+
+## Functions
+
+- [calculateOverallSecurityLevel](functions/calculateOverallSecurityLevel.md)
+- [calculateRiskLevel](functions/calculateRiskLevel.md)
+- [getSecurityLevelFromValue](functions/getSecurityLevelFromValue.md)
+- [isCIAComponentType](functions/isCIAComponentType.md)
 
 ## References
 
-### AvailabilityImpact
-
-Re-exports [AvailabilityImpact](cia/interfaces/AvailabilityImpact.md)
-
-***
-
 ### AvailabilityImpactWidgetProps
 
-Re-exports [AvailabilityImpactWidgetProps](widgets/interfaces/AvailabilityImpactWidgetProps.md)
-
-***
-
-### BaseImpact
-
-Re-exports [BaseImpact](cia/interfaces/BaseImpact.md)
-
-***
-
-### BUSINESS\_CONSIDERATIONS
-
-Re-exports [BUSINESS_CONSIDERATIONS](businessImpact/variables/BUSINESS_CONSIDERATIONS.md)
-
-***
-
-### BusinessConsideration
-
-Re-exports [BusinessConsideration](businessImpact/interfaces/BusinessConsideration.md)
-
-***
-
-### BusinessConsiderations
-
-Re-exports [BusinessConsiderations](businessImpact/interfaces/BusinessConsiderations.md)
+Re-exports [AvailabilityImpactWidgetProps](../typedoc-entry/interfaces/AvailabilityImpactWidgetProps.md)
 
 ***
 
 ### BusinessImpactAnalysisWidgetProps
 
-Re-exports [BusinessImpactAnalysisWidgetProps](widgets/interfaces/BusinessImpactAnalysisWidgetProps.md)
+Re-exports [BusinessImpactAnalysisWidgetProps](../typedoc-entry/interfaces/BusinessImpactAnalysisWidgetProps.md)
 
 ***
 
-### BusinessImpactDetail
+### ComplianceFramework
 
-Re-exports [BusinessImpactDetail](cia/interfaces/BusinessImpactDetail.md)
-
-***
-
-### BusinessImpactIcons
-
-Re-exports [BusinessImpactIcons](businessImpact/interfaces/BusinessImpactIcons.md)
+Re-exports [ComplianceFramework](compliance/interfaces/ComplianceFramework.md)
 
 ***
 
-### BusinessKeyBenefit
+### ComplianceStatus
 
-Re-exports [BusinessKeyBenefit](businessImpact/type-aliases/BusinessKeyBenefit.md)
-
-***
-
-### BusinessKeyBenefits
-
-Re-exports [BusinessKeyBenefits](businessImpact/variables/BusinessKeyBenefits.md)
+Re-exports [ComplianceStatus](../index/interfaces/ComplianceStatus.md)
 
 ***
 
-### calculateOverallSecurityLevel
+### ComplianceStatusDetails
 
-Re-exports [calculateOverallSecurityLevel](cia/functions/calculateOverallSecurityLevel.md)
-
-***
-
-### calculateRiskLevel
-
-Re-exports [calculateRiskLevel](cia/functions/calculateRiskLevel.md)
-
-***
-
-### CIAComponentType
-
-Re-exports [CIAComponentType](cia/type-aliases/CIAComponentType.md)
-
-***
-
-### CIADetails
-
-Re-exports [CIADetails](cia/interfaces/CIADetails.md)
-
-***
-
-### CIAImpact
-
-Re-exports [CIAImpact](cia/interfaces/CIAImpact.md)
-
-***
-
-### CIAImpactSummaryWidgetProps
-
-Re-exports [CIAImpactSummaryWidgetProps](componentProps/interfaces/CIAImpactSummaryWidgetProps.md)
-
-***
-
-### CIAOptions
-
-Re-exports [CIAOptions](cia/interfaces/CIAOptions.md)
-
-***
-
-### ComplianceStatusWidgetProps
-
-Re-exports [ComplianceStatusWidgetProps](widgets/interfaces/ComplianceStatusWidgetProps.md)
-
-***
-
-### ConfidentialityImpact
-
-Re-exports [ConfidentialityImpact](cia/interfaces/ConfidentialityImpact.md)
+Re-exports [ComplianceStatusDetails](compliance/interfaces/ComplianceStatusDetails.md)
 
 ***
 
 ### ConfidentialityImpactWidgetProps
 
-Re-exports [ConfidentialityImpactWidgetProps](widgets/interfaces/ConfidentialityImpactWidgetProps.md)
+Re-exports [ConfidentialityImpactWidgetProps](../typedoc-entry/interfaces/ConfidentialityImpactWidgetProps.md)
 
 ***
 
 ### CostEstimationWidgetProps
 
-Re-exports [CostEstimationWidgetProps](widgets/interfaces/CostEstimationWidgetProps.md)
+Re-exports [CostEstimationWidgetProps](../typedoc-entry/interfaces/CostEstimationWidgetProps.md)
 
 ***
 
-### DashboardProps
+### FrameworkApplicabilityOptions
 
-Re-exports [DashboardProps](componentProps/interfaces/DashboardProps.md)
-
-***
-
-### DashboardWidgetProps
-
-Re-exports [DashboardWidgetProps](componentProps/interfaces/DashboardWidgetProps.md)
+Re-exports [FrameworkApplicabilityOptions](compliance/interfaces/FrameworkApplicabilityOptions.md)
 
 ***
 
-### formatSecurityLevel
+### FrameworkComplianceStatus
 
-Re-exports [formatSecurityLevel](cia/functions/formatSecurityLevel.md)
-
-***
-
-### getSecurityLevelFromValue
-
-Re-exports [getSecurityLevelFromValue](cia/functions/getSecurityLevelFromValue.md)
-
-***
-
-### getSecurityLevelValue
-
-Re-exports [getSecurityLevelValue](cia/functions/getSecurityLevelValue.md)
-
-***
-
-### IntegrityImpact
-
-Re-exports [IntegrityImpact](cia/interfaces/IntegrityImpact.md)
+Re-exports [FrameworkComplianceStatus](compliance/interfaces/FrameworkComplianceStatus.md)
 
 ***
 
 ### IntegrityImpactWidgetProps
 
-Re-exports [IntegrityImpactWidgetProps](widgets/interfaces/IntegrityImpactWidgetProps.md)
+Re-exports [IntegrityImpactWidgetProps](../typedoc-entry/interfaces/IntegrityImpactWidgetProps.md)
 
 ***
 
-### KeyValuePairProps
+### ROIMetrics
 
-Re-exports [KeyValuePairProps](componentProps/interfaces/KeyValuePairProps.md)
-
-***
-
-### MetricsCardProps
-
-Re-exports [MetricsCardProps](componentProps/interfaces/MetricsCardProps.md)
-
-***
-
-### RadarChartProps
-
-Re-exports [RadarChartProps](componentProps/interfaces/RadarChartProps.md)
+Re-exports [ROIMetrics](../typedoc-entry/interfaces/ROIMetrics.md)
 
 ***
 
 ### SecurityLevel
 
-Re-exports [SecurityLevel](cia/type-aliases/SecurityLevel.md)
-
-***
-
-### SecurityLevels
-
-Re-exports [SecurityLevels](cia/interfaces/SecurityLevels.md)
+Re-exports [SecurityLevel](../index/type-aliases/SecurityLevel.md)
 
 ***
 
 ### SecurityLevelWidgetProps
 
-Re-exports [SecurityLevelWidgetProps](widgets/interfaces/SecurityLevelWidgetProps.md)
+Re-exports [SecurityLevelWidgetProps](../typedoc-entry/interfaces/SecurityLevelWidgetProps.md)
+
+***
+
+### SecurityProfile
+
+Re-exports [SecurityProfile](../index/interfaces/SecurityProfile.md)
 
 ***
 
 ### SecurityResourcesWidgetProps
 
-Re-exports [SecurityResourcesWidgetProps](widgets/interfaces/SecurityResourcesWidgetProps.md)
-
-***
-
-### SecuritySummaryWidgetProps
-
-Re-exports [SecuritySummaryWidgetProps](widgets/interfaces/SecuritySummaryWidgetProps.md)
-
-***
-
-### SelectionProps
-
-Re-exports [SelectionProps](componentProps/interfaces/SelectionProps.md)
+Re-exports [SecurityResourcesWidgetProps](../typedoc-entry/interfaces/SecurityResourcesWidgetProps.md)
 
 ***
 
 ### TechnicalDetailsWidgetProps
 
-Re-exports [TechnicalDetailsWidgetProps](widgets/interfaces/TechnicalDetailsWidgetProps.md)
+Re-exports [TechnicalDetailsWidgetProps](../typedoc-entry/interfaces/TechnicalDetailsWidgetProps.md)
 
 ***
 
 ### ValueCreationWidgetProps
 
-Re-exports [ValueCreationWidgetProps](widgets/interfaces/ValueCreationWidgetProps.md)
-
-***
-
-### ValueDisplayProps
-
-Re-exports [ValueDisplayProps](componentProps/interfaces/ValueDisplayProps.md)
-
-***
-
-### WidgetBaseProps
-
-Re-exports [WidgetBaseProps](widgets/interfaces/WidgetBaseProps.md)
-
-***
-
-### WidgetContainerProps
-
-Re-exports [WidgetContainerProps](componentProps/interfaces/WidgetContainerProps.md)
-
-***
-
-### WidgetHeaderProps
-
-Re-exports [WidgetHeaderProps](componentProps/interfaces/WidgetHeaderProps.md)
+Re-exports [ValueCreationWidgetProps](../typedoc-entry/interfaces/ValueCreationWidgetProps.md)

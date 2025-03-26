@@ -2,13 +2,15 @@
 // Centralized to avoid duplication and make tests more stable
 
 // Import from the shared risk constants file
-import { CIADetails, SecurityLevel } from "../types/cia"; // Import SecurityLevel
+import { SecurityLevel } from "../types/cia"; // Import SecurityLevel only
 import { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS } from "./riskConstants";
-// Import the UI constants for backward compatibility
-import { BUSINESS_IMPACT_ICONS, SECURITY_LEVEL_COLORS } from "./uiConstants";
+// Import CIADetails from the correct module
+import { CIADetails } from "../types/cia-services";
+// Import the UI constants for clean references
+import { getComponentIcon } from "./uiConstants";
 
-// Re-export UI constants for backward compatibility, except WIDGET_ICONS
-export { BUSINESS_IMPACT_ICONS, SECURITY_LEVEL_COLORS };
+// Export the risk levels and business impact categories from here as well for consistency
+export { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS };
 
 // SecurityLevelMap type for cleaner lookups
 export type SecurityLevelKey =
@@ -64,41 +66,6 @@ export const mapOptionsToConstants = <
   };
 };
 
-// Export the risk levels and business impact categories from here as well for consistency
-export { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS };
-
-/**
- * Creates a matcher function for testing that checks if text appears in an element with a specific class
- *
- * @param text Text to look for
- * @param className CSS class the element should have
- * @returns A function that returns true if the element matches both conditions
- */
-export const getTextElementMatcher = (text: string, className: string) => {
-  return (content: string, element: Element) =>
-    element.className.includes(className) &&
-    content.includes(getPartialTextMatcher(text));
-};
-
-// Exported test helpers - making it easy to do partial matches in tests
-export const getPartialTextMatcher = (text: string, length = 15) => {
-  return text.substring(0, Math.min(text.length, length));
-};
-
-// Helper to create a RegExp from a constant for more robust test matching
-export const createRegexMatcher = (text: string) => {
-  // Escape special regex characters and return a case-insensitive regex
-  const escaped = text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  return new RegExp(escaped, "i");
-};
-
-// Helper for matching partial content in value descriptions
-export const createValuePointMatcher = (point: string) => {
-  // Split the point into words and take first 2-3 to make a more robust matcher
-  const words = point.split(" ").slice(0, 3).join("\\s+");
-  return new RegExp(words, "i");
-};
-
 // Update the type of SECURITY_LEVELS to use the imported SecurityLevel
 export const SECURITY_LEVELS: Record<SecurityLevelKey, SecurityLevel> = {
   NONE: "None",
@@ -113,13 +80,6 @@ export const CIA_LABELS = {
   AVAILABILITY: "Availability",
   INTEGRITY: "Integrity",
   CONFIDENTIALITY: "Confidentiality",
-};
-
-// CIA component icons
-export const CIA_COMPONENT_ICONS = {
-  CONFIDENTIALITY: "🔒",
-  INTEGRITY: "🔐",
-  AVAILABILITY: "⏱️",
 };
 
 // CIA tooltip descriptions for better user understanding
@@ -461,28 +421,159 @@ export const IMPLEMENTATION_COSTS: {
   },
 };
 
+/**
+ * Widget icons for consistent UI representation
+ */
 export const WIDGET_ICONS = {
-  SECURITY_LEVEL: "🛡️",
+  SECURITY_LEVEL: "🔐",
   SECURITY_SUMMARY: "📊",
-  SECURITY_VISUALIZATION: "📈",
-  COMPLIANCE_STATUS: "✅",
-  VALUE_CREATION: "💹",
-  COST_ESTIMATION: "💰",
-  BUSINESS_IMPACT: "🏢",
-  TECHNICAL_IMPLEMENTATION: "⚙️",
-  AVAILABILITY_IMPACT: "⏱️",
-  INTEGRITY_IMPACT: "🔐",
-  CONFIDENTIALITY_IMPACT: "🔒",
+  BUSINESS_IMPACT_ANALYSIS: "📈",
+  COMPLIANCE_STATUS: "📋",
   SECURITY_RESOURCES: "📚",
+  COST_ESTIMATION: "💰",
+  VALUE_CREATION: "💎",
+  TECHNICAL_DETAILS: "⚙️",
+  SECURITY_VISUALIZATION: "📈",
+  // Use getComponentIcon function from uiConstants to avoid duplication
+  AVAILABILITY_IMPACT: getComponentIcon("availability"),
+  INTEGRITY_IMPACT: getComponentIcon("integrity"),
+  CONFIDENTIALITY_IMPACT: getComponentIcon("confidentiality"),
 };
 
-export const RISK_LEVEL_DESCRIPTIONS = {
-  CRITICAL:
-    "Significant vulnerabilities present that require immediate attention. Extremely high likelihood of security incidents with severe business impact.",
-  HIGH: "Major security deficiencies exist that should be addressed urgently. High likelihood of security incidents with substantial business impact.",
-  MEDIUM:
-    "Some security gaps exist that should be addressed as part of regular improvement cycles. Moderate likelihood of security incidents.",
-  LOW: "Minor security improvements could be beneficial. Low likelihood of security incidents with limited business impact.",
-  MINIMAL:
-    "Strong security posture with only marginal improvement opportunities. Very low likelihood of security incidents.",
+/**
+ * Widget titles for consistent naming
+ */
+export const WIDGET_TITLES = {
+  SECURITY_LEVEL: "Security Level Configuration",
+  SECURITY_SUMMARY: "Security Summary",
+  BUSINESS_IMPACT_ANALYSIS: "Business Impact Analysis",
+  COMPLIANCE_STATUS: "Compliance Status",
+  SECURITY_RESOURCES: "Security Resources",
+  COST_ESTIMATION: "Cost Estimation",
+  VALUE_CREATION: "Value Creation",
+  TECHNICAL_DETAILS: "Technical Implementation Details",
+  SECURITY_VISUALIZATION: "Security Visualization",
+  AVAILABILITY_IMPACT: "Availability Impact",
+  INTEGRITY_IMPACT: "Integrity Impact",
+  CONFIDENTIALITY_IMPACT: "Confidentiality Impact",
 };
+
+/**
+ * Colors for different security levels
+ */
+export const SECURITY_LEVEL_COLORS = {
+  NONE: "red",
+  LOW: "yellow",
+  MODERATE: "blue",
+  HIGH: "green",
+  VERY_HIGH: "purple",
+};
+
+/**
+ * Constants used throughout the application
+ */
+
+/**
+ * Default CIA Details when none are provided
+ */
+export const DEFAULT_CIA_DETAILS: CIADetails = {
+  description: "Not specified",
+  technical: "Not specified",
+  businessImpact: "Not specified",
+  capex: 0,
+  opex: 0,
+  bg: "#f0f0f0",
+  text: "#333333",
+  recommendations: [],
+};
+
+/**
+ * Default security level
+ */
+export const DEFAULT_SECURITY_LEVEL: SecurityLevel = "None";
+
+/**
+ * Widget sizes for layout
+ */
+export const WIDGET_SIZES = {
+  SMALL: "small", // 1/3 width
+  MEDIUM: "medium", // 1/2 width
+  LARGE: "large", // 2/3 width
+  FULL: "full", // Full width
+};
+
+/**
+ * Widget categories
+ */
+export const WIDGET_CATEGORIES = {
+  SECURITY: "security",
+  IMPACT: "impact",
+  COMPLIANCE: "compliance",
+  COST: "cost",
+  TECHNICAL: "technical",
+  RESOURCES: "resources",
+};
+
+/**
+ * Application routes
+ */
+export const ROUTES = {
+  HOME: "/",
+  DASHBOARD: "/dashboard",
+  SETTINGS: "/settings",
+  REPORTS: "/reports",
+};
+
+/**
+ * Local storage keys
+ */
+export const STORAGE_KEYS = {
+  THEME: "cia-theme",
+  SECURITY_LEVELS: "cia-security-levels",
+  DASHBOARD_LAYOUT: "cia-dashboard-layout",
+  USER_PREFERENCES: "cia-user-preferences",
+};
+
+/**
+ * Refresh intervals (in milliseconds)
+ */
+export const REFRESH_INTERVALS = {
+  FAST: 5000, // 5 seconds
+  MEDIUM: 30000, // 30 seconds
+  SLOW: 60000, // 1 minute
+};
+
+/**
+ * Theme options
+ */
+export const THEMES = {
+  LIGHT: "light",
+  DARK: "dark",
+  SYSTEM: "system",
+};
+
+/**
+ * Default transition duration in milliseconds
+ */
+export const DEFAULT_TRANSITION_DURATION = 300;
+
+/**
+ * Chart colors
+ */
+export const CHART_COLORS = {
+  AVAILABILITY: "#2196F3", // Blue
+  INTEGRITY: "#4CAF50", // Green
+  CONFIDENTIALITY: "#9C27B0", // Purple
+  SECURITY_LEVEL_COLORS: {
+    None: "#F44336", // Red
+    Low: "#FF9800", // Orange
+    Moderate: "#FFEB3B", // Yellow
+    High: "#4CAF50", // Green
+    "Very High": "#2196F3", // Blue
+  },
+};
+
+/**
+ * Maximum column count for grid layout
+ */
+export const GRID_MAX_COLUMNS = 12;

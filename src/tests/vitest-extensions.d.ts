@@ -1,107 +1,96 @@
 /// <reference types="vitest/globals" />
-
-// This file augments the Vitest types to include Jest DOM matchers
-
-import { expect } from "vitest";
-import type { TestingLibraryMatchers } from "@testing-library/jest-dom/matchers";
 import "@testing-library/jest-dom";
+import type { TestingLibraryMatchers } from "@testing-library/jest-dom/matchers";
 
-// Extend the Expect interface
-declare global {
-  namespace Vi {
-    interface JestAssertion<T = any>
-      extends TestingLibraryMatchers<T, JestAssertion<T>> {
-      // Additional matchers that aren't included in TestingLibraryMatchers
-      toHaveBeenCalled(): JestAssertion<T>;
-      toHaveBeenCalledTimes(times: number): JestAssertion<T>;
-      toHaveBeenCalledWith(...args: any[]): JestAssertion<T>;
-      toBeTruthy(): JestAssertion<T>;
-      toBeUndefined(): JestAssertion<T>;
-      toBeGreaterThan(number: number): JestAssertion<T>;
-      toBeGreaterThanOrEqual(number: number): JestAssertion<T>;
-      toBeLessThan(number: number): JestAssertion<T>;
-      toBeLessThanOrEqual(number: number): JestAssertion<T>;
-      toMatch(pattern: RegExp | string): JestAssertion<T>;
-      toEqual(value: any): JestAssertion<T>;
-      // Add testing-library matchers
-      toBeInTheDocument(): void;
-      toBeVisible(): void;
-      toHaveClass(className: string): void;
-      toHaveTextContent(text: string): void;
-      toHaveAttribute(attr: string, value?: string): void;
-      toBeDisabled(): void;
-      toBeEnabled(): void;
-      toBeChecked(): void;
-      toHaveValue(value: any): void;
-      toContainElement(element: HTMLElement | null): void;
-      toContainHTML(htmlText: string): void;
-      toHaveStyle(css: Record<string, any>): void;
-      toHaveLength(length: number): void;
-    }
+// Important: Extend the Vitest module directly with the testing-library matchers
+declare module "vitest" {
+  interface Assertion<T = any> extends TestingLibraryMatchers<T, void> {
+    // Core Vitest matchers (explicitly defined to ensure TypeScript recognizes them)
+    toBe(expected: any): Assertion<T>;
+    toBeCloseTo(expected: number, precision?: number): Assertion<T>;
+    toBeDefined(): Assertion<T>;
+    toBeFalsy(): Assertion<T>;
+    toBeGreaterThan(expected: number): Assertion<T>;
+    toBeGreaterThanOrEqual(expected: number): Assertion<T>;
+    toBeLessThan(expected: number): Assertion<T>;
+    toBeLessThanOrEqual(expected: number): Assertion<T>;
+    toBeInstanceOf(expected: any): Assertion<T>;
+    toBeNull(): Assertion<T>;
+    toBeTruthy(): Assertion<T>;
+    toBeUndefined(): Assertion<T>;
+    toContain(expected: any): Assertion<T>;
+    toContainEqual(expected: any): Assertion<T>;
+    toEqual(expected: any): Assertion<T>;
+    toHaveLength(expected: number): Assertion<T>;
+    toHaveProperty(
+      keyPath: string | (string | number)[],
+      value?: any
+    ): Assertion<T>;
+    toMatch(expected: string | RegExp): Assertion<T>;
+    toMatchObject(expected: Record<string, any>): Assertion<T>;
+    toStrictEqual(expected: any): Assertion<T>;
+    toThrow(expected?: string | RegExp | Error): Assertion<T>;
+    toThrowError(expected?: string | RegExp | Error): Assertion<T>;
   }
 
+  interface AsymmetricMatchersContaining
+    extends TestingLibraryMatchers<any, void> {}
+
+  interface ExpectStatic {
+    extend(matchers: Record<string, unknown>): void;
+  }
+}
+
+// Add DOM testing mock types
+declare global {
+  // Add VITEST_COVERAGE property to window
   interface Window {
     VITEST_COVERAGE?: boolean;
   }
-}
 
-// Extend the Vi namespace with testing-library matchers
-declare namespace Vi {
-  interface Assertion {
-    // DOM testing library matchers
-    toBeInTheDocument(): void;
-    toHaveTextContent(text: string | RegExp): void;
-    toBeVisible(): void;
-    toBeChecked(): void;
-    toHaveFocus(): void;
-    toHaveAttribute(attr: string, value?: string): void;
-    toContainElement(element: HTMLElement | null): void;
-    toContainHTML(html: string): void;
-    toBeEnabled(): void;
-    toBeDisabled(): void;
-    toBeInvalid(): void;
-    toBeRequired(): void;
-    toHaveClass(...classNames: string[]): void;
-    toHaveStyle(css: Record<string, any>): void;
-    toHaveValue(value: any): void;
-    toBeEmptyDOMElement(): void;
+  // Add ResizeObserver mock
+  class ResizeObserver {
+    constructor(callback: ResizeObserverCallback);
+    observe(target: Element, options?: ResizeObserverOptions): void;
+    unobserve(target: Element): void;
+    disconnect(): void;
+  }
 
-    // Additional matchers for testing
-    toMatchSnapshot(): void;
-    toBeCalledWith(...args: any[]): void;
-    toHaveBeenCalledTimes(count: number): void;
-    toHaveBeenCalled(): void;
-    toBeGreaterThan(expected: number): void;
-    toBeGreaterThanOrEqual(expected: number): void;
-    toBeLessThan(expected: number): void;
-    toBeLessThanOrEqual(expected: number): void;
+  interface ResizeObserverCallback {
+    (entries: ResizeObserverEntry[], observer: ResizeObserver): void;
+  }
+
+  interface ResizeObserverSize {
+    readonly inlineSize: number;
+    readonly blockSize: number;
+  }
+
+  // IntersectionObserver types
+  class IntersectionObserver {
+    readonly root: Element | null;
+    readonly rootMargin: string;
+    readonly thresholds: ReadonlyArray<number>;
+
+    constructor(
+      callback: IntersectionObserverCallback,
+      options?: IntersectionObserverInit
+    );
+
+    observe(target: Element): void;
+    unobserve(target: Element): void;
+    disconnect(): void;
+    takeRecords(): IntersectionObserverEntry[];
+  }
+
+  interface IntersectionObserverCallback {
+    (
+      entries: IntersectionObserverEntry[],
+      observer: IntersectionObserver
+    ): void;
   }
 }
 
-// Extend global Jest expect
-interface CustomMatchers<R = unknown> {
-  toBeInTheDocument(): R;
-  toHaveTextContent(text: string | RegExp): R;
-}
-
-declare global {
-  namespace jest {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
-    interface Matchers<R> extends CustomMatchers<R> {}
-  }
-}
-
-// Define vi namespace explicitly
-declare namespace vi {
-  const fn: typeof import("vitest").vi.fn;
-  const mock: typeof import("vitest").vi.mock;
-  const spyOn: typeof import("vitest").vi.spyOn;
-  const clearAllMocks: typeof import("vitest").vi.clearAllMocks;
-  const resetAllMocks: typeof import("vitest").vi.resetAllMocks;
-  const restoreAllMocks: typeof import("vitest").vi.restoreAllMocks;
-}
-
-// Mock helper functions for testing
+// Helper utility functions for testing
 export function mockCanvasContext(): void {
   HTMLCanvasElement.prototype.getContext = vi.fn().mockReturnValue({
     canvas: { width: 800, height: 600 },
@@ -125,7 +114,6 @@ export function mockCanvasContext(): void {
 
 export function suppressCanvasErrors(): ReturnType<typeof vi.spyOn> {
   return vi.spyOn(console, "error").mockImplementation((message) => {
-    // Filter out canvas-related errors but allow other errors to pass through
     if (
       typeof message === "string" &&
       (message.includes("canvas") ||
@@ -134,7 +122,6 @@ export function suppressCanvasErrors(): ReturnType<typeof vi.spyOn> {
     ) {
       return;
     }
-    // Call the original console.error for other messages
     console.info("Filtered console error:", message);
   });
 }

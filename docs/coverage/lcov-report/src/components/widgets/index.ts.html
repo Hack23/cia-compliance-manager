@@ -84,7 +84,16 @@
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -92,18 +101,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * # Security Widget Components
@@ -113,19 +131,28 @@
  * @module components/widgets
  */
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export { default as AvailabilityImpactWidget } from "./AvailabilityImpactWidget";</span>
-<span class="cstat-no" title="statement not covered" >export { default as BusinessImpactAnalysisWidget } from "./BusinessImpactAnalysisWidget";</span>
-<span class="cstat-no" title="statement not covered" >export { default as CIAImpactSummaryWidget } from "./CIAImpactSummaryWidget";</span>
-<span class="cstat-no" title="statement not covered" >export { default as ComplianceStatusWidget } from "./ComplianceStatusWidget";</span>
-<span class="cstat-no" title="statement not covered" >export { default as ConfidentialityImpactWidget } from "./ConfidentialityImpactWidget";</span>
-<span class="cstat-no" title="statement not covered" >export { default as CostEstimationWidget } from "./CostEstimationWidget";</span>
-<span class="cstat-no" title="statement not covered" >export { default as IntegrityImpactWidget } from "./IntegrityImpactWidget";</span>
-<span class="cstat-no" title="statement not covered" >export { default as SecurityLevelWidget } from "./SecurityLevelWidget";</span>
-<span class="cstat-no" title="statement not covered" >export { default as SecurityResourcesWidget } from "./SecurityResourcesWidget";</span>
-<span class="cstat-no" title="statement not covered" >export { default as SecuritySummaryWidget } from "./SecuritySummaryWidget";</span>
-<span class="cstat-no" title="statement not covered" >export { default as SecurityVisualizationWidget } from "./SecurityVisualizationWidget";</span>
-<span class="cstat-no" title="statement not covered" >export { default as TechnicalDetailsWidget } from "./TechnicalDetailsWidget";</span>
-<span class="cstat-no" title="statement not covered" >export { default as ValueCreationWidget } from "./ValueCreationWidget";</span>
+// Assessment Center Widgets
+<span class="cstat-no" title="statement not covered" >export { default as SecurityLevelWidget } from "./assessmentcenter/SecurityLevelWidget";</span>
+<span class="cstat-no" title="statement not covered" >export { default as SecuritySummaryWidget } from "./assessmentcenter/SecuritySummaryWidget";</span>
+&nbsp;
+// Business Value Widgets
+<span class="cstat-no" title="statement not covered" >export { default as BusinessImpactAnalysisWidget } from "./assessmentcenter/BusinessImpactAnalysisWidget";</span>
+<span class="cstat-no" title="statement not covered" >export { default as ComplianceStatusWidget } from "./businessvalue/ComplianceStatusWidget";</span>
+<span class="cstat-no" title="statement not covered" >export { default as CostEstimationWidget } from "./businessvalue/CostEstimationWidget";</span>
+<span class="cstat-no" title="statement not covered" >export { default as ValueCreationWidget } from "./businessvalue/ValueCreationWidget";</span>
+&nbsp;
+// Implementation Guide Widgets
+<span class="cstat-no" title="statement not covered" >export { default as SecurityResourcesWidget } from "./implementationguide/SecurityResourcesWidget";</span>
+<span class="cstat-no" title="statement not covered" >export { default as SecurityVisualizationWidget } from "./implementationguide/SecurityVisualizationWidget";</span>
+<span class="cstat-no" title="statement not covered" >export { default as TechnicalDetailsWidget } from "./implementationguide/TechnicalDetailsWidget";</span>
+&nbsp;
+// Impact Analysis Widgets
+<span class="cstat-no" title="statement not covered" >export { default as AvailabilityImpactWidget } from "./impactanalysis/AvailabilityImpactWidget";</span>
+<span class="cstat-no" title="statement not covered" >export { default as ConfidentialityImpactWidget } from "./impactanalysis/ConfidentialityImpactWidget";</span>
+<span class="cstat-no" title="statement not covered" >export { default as IntegrityImpactWidget } from "./impactanalysis/IntegrityImpactWidget";</span>
+&nbsp;
+// Constants
+<span class="cstat-no" title="statement not covered" >export * from "./constants";</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -133,7 +160,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-17T09:36:09.213Z
+                at 2025-03-26T15:34:19.783Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -6,384 +6,113 @@
 
 # utils
 
-# Utility Functions
+Central export of utility functions for CIA Compliance Manager
 
-This module provides utility functions used throughout the application.
+This index file provides organized exports of all utility functions
+to ensure they're properly accessible throughout the application.
 
-## Business Perspective
-Utilities support business logic implementation by providing reusable
-calculations for security metrics and compliance assessments.
+## Variables
 
-## Architecture Perspective
-These functions follow functional programming principles to maximize
-code reuse and testability.
+- [asSecurityLevel](variables/asSecurityLevel.md)
+- [BUSINESS\_IMPACT\_CATEGORIES](variables/BUSINESS_IMPACT_CATEGORIES.md)
+- [calculateCombinedRiskLevel](variables/calculateCombinedRiskLevel.md)
+- [calculateImplementationCost](variables/calculateImplementationCost.md)
+- [calculateOverallSecurityLevel](variables/calculateOverallSecurityLevel.md)
+- [calculateOverallSecurityLevelFromValues](variables/calculateOverallSecurityLevelFromValues.md)
+- [calculateRiskScore](variables/calculateRiskScore.md)
+- [calculateSecurityROI](variables/calculateSecurityROI.md)
+- [calculateTotalSecurityCost](variables/calculateTotalSecurityCost.md)
+- [compareSecurityLevels](variables/compareSecurityLevels.md)
+- [ensureArray](variables/ensureArray.md)
+- [extractSecurityLevels](variables/extractSecurityLevels.md)
+- [formatBudgetPercentage](variables/formatBudgetPercentage.md)
+- [formatCurrency](variables/formatCurrency.md)
+- [formatCurrencyWithOptions](variables/formatCurrencyWithOptions.md)
+- [formatDate](variables/formatDate.md)
+- [formatError](variables/formatError.md)
+- [formatLargeNumber](variables/formatLargeNumber.md)
+- [formatNumber](variables/formatNumber.md)
+- [formatNumberWithDecimals](variables/formatNumberWithDecimals.md)
+- [formatPercentage](variables/formatPercentage.md)
+- [formatRiskLevel](variables/formatRiskLevel.md)
+- [~~formatSecurityLevel~~](variables/formatSecurityLevel.md)
+- [formatSecurityLevelFromWidget](variables/formatSecurityLevelFromWidget.md)
+- [formatSecurityLevelString](variables/formatSecurityLevelString.md)
+- [formatTimeframe](variables/formatTimeframe.md)
+- [formatUptime](variables/formatUptime.md)
+- [getColorForRiskLevel](variables/getColorForRiskLevel.md)
+- [getComplianceStatusColor](variables/getComplianceStatusColor.md)
+- [getFormattedRiskLevel](variables/getFormattedRiskLevel.md)
+- [getNormalizedSecurityValue](variables/getNormalizedSecurityValue.md)
+- [getNumericSecurityLevelValue](variables/getNumericSecurityLevelValue.md)
+- [getRecommendedBudgetAllocation](variables/getRecommendedBudgetAllocation.md)
+- [getRecommendedSecurityLevel](variables/getRecommendedSecurityLevel.md)
+- [getRiskBadgeVariant](variables/getRiskBadgeVariant.md)
+- [getRiskLevelFromSecurityLevel](variables/getRiskLevelFromSecurityLevel.md)
+- [getRiskScoreFromSecurityLevel](variables/getRiskScoreFromSecurityLevel.md)
+- [getRiskSeverityDescription](variables/getRiskSeverityDescription.md)
+- [getSecurityIcon](variables/getSecurityIcon.md)
+- [getSecurityLevelBadgeVariant](variables/getSecurityLevelBadgeVariant.md)
+- [getSecurityLevelClass](variables/getSecurityLevelClass.md)
+- [getSecurityLevelColorClass](variables/getSecurityLevelColorClass.md)
+- [getSecurityLevelDescription](variables/getSecurityLevelDescription.md)
+- [getSecurityLevelFromValue](variables/getSecurityLevelFromValue.md)
+- [getSecurityLevelPercentage](variables/getSecurityLevelPercentage.md)
+- [getSecurityLevelValue](variables/getSecurityLevelValue.md)
+- [getStatusBadgeForRiskLevel](variables/getStatusBadgeForRiskLevel.md)
+- [getWidgetColumnSpan](variables/getWidgetColumnSpan.md)
+- [getWidgetRowSpan](variables/getWidgetRowSpan.md)
+- [handleWidgetError](variables/handleWidgetError.md)
+- [hasProperty](variables/hasProperty.md)
+- [hasTagValue](variables/hasTagValue.md)
+- [hasWidgetProps](variables/hasWidgetProps.md)
+- [isBusinessImpactCategory](variables/isBusinessImpactCategory.md)
+- [isBusinessImpactDetails](variables/isBusinessImpactDetails.md)
+- [isComplianceFramework](variables/isComplianceFramework.md)
+- [isComplianceFrameworkName](variables/isComplianceFrameworkName.md)
+- [isComplianceFrameworkObject](variables/isComplianceFrameworkObject.md)
+- [isComplianceStatus](variables/isComplianceStatus.md)
+- [isNumber](variables/isNumber.md)
+- [isObject](variables/isObject.md)
+- [isRiskLevel](variables/isRiskLevel.md)
+- [isROIEstimate](variables/isROIEstimate.md)
+- [isROIMetricDetails](variables/isROIMetricDetails.md)
+- [isROIMetrics](variables/isROIMetrics.md)
+- [isSecurityLevel](variables/isSecurityLevel.md)
+- [isSecurityProfile](variables/isSecurityProfile.md)
+- [isSecurityResource](variables/isSecurityResource.md)
+- [isString](variables/isString.md)
+- [isWidget](variables/isWidget.md)
+- [isWidgetConfig](variables/isWidgetConfig.md)
+- [isWidgetProps](variables/isWidgetProps.md)
+- [isWidgetType](variables/isWidgetType.md)
+- [KeyValuePair](variables/KeyValuePair.md)
+- [meetsComplianceRequirements](variables/meetsComplianceRequirements.md)
+- [normalizeSecurityLevel](variables/normalizeSecurityLevel.md)
+- [parseRiskLevel](variables/parseRiskLevel.md)
+- [RISK\_LEVELS](variables/RISK_LEVELS.md)
+- [RiskLevelKeyValue](variables/RiskLevelKeyValue.md)
+- [safeAccess](variables/safeAccess.md)
+- [safeNumberConversion](variables/safeNumberConversion.md)
+- [sanitizeWidgetId](variables/sanitizeWidgetId.md)
+- [SECURITY\_LEVEL\_VALUES](variables/SECURITY_LEVEL_VALUES.md)
+- [SecurityLevelBadge](variables/SecurityLevelBadge.md)
+- [toErrorObject](variables/toErrorObject.md)
+- [toTitleCase](variables/toTitleCase.md)
+- [WidgetEmptyState](variables/WidgetEmptyState.md)
+- [WidgetError](variables/WidgetError.md)
+- [WidgetLoading](variables/WidgetLoading.md)
 
-## Security Perspective
-Utility functions implement security calculations like risk scoring
-and security level assessments essential for compliance evaluation.
+## Functions
+
+- [calculateWidgetRiskLevel](functions/calculateWidgetRiskLevel.md)
+- [formatSecurityMetric](functions/formatSecurityMetric.md)
+- [getProgressColor](functions/getProgressColor.md)
+- [getSeverityColor](functions/getSeverityColor.md)
+- [~~SecurityLevelDisplay~~](functions/SecurityLevelDisplay.md)
 
 ## References
 
-### asSecurityLevel
+### calculateRiskLevel
 
-Re-exports [asSecurityLevel](widgetHelpers/functions/asSecurityLevel.md)
-
-***
-
-### checkRequiredSecurityLevels
-
-Re-exports [checkRequiredSecurityLevels](widgetHelpers/functions/checkRequiredSecurityLevels.md)
-
-***
-
-### createWidgetConfig
-
-Re-exports [createWidgetConfig](widgetHelpers/functions/createWidgetConfig.md)
-
-***
-
-### ensureArray
-
-Re-exports [ensureArray](typeGuards/functions/ensureArray.md)
-
-***
-
-### evaluateWidgetVisibility
-
-Re-exports [evaluateWidgetVisibility](widgetHelpers/functions/evaluateWidgetVisibility.md)
-
-***
-
-### extractSecurityLevels
-
-Re-exports [extractSecurityLevels](typeGuards/functions/extractSecurityLevels.md)
-
-***
-
-### filterWidgets
-
-Re-exports [filterWidgets](widgetHelpers/functions/filterWidgets.md)
-
-***
-
-### formatSecurityLevel
-
-Re-exports [formatSecurityLevel](widgetHelpers/functions/formatSecurityLevel.md)
-
-***
-
-### getDefaultDevelopmentEffort
-
-Re-exports [getDefaultDevelopmentEffort](securityDefaults/functions/getDefaultDevelopmentEffort.md)
-
-***
-
-### getDefaultExpertiseLevel
-
-Re-exports [getDefaultExpertiseLevel](securityDefaults/functions/getDefaultExpertiseLevel.md)
-
-***
-
-### getDefaultMaintenanceEffort
-
-Re-exports [getDefaultMaintenanceEffort](securityDefaults/functions/getDefaultMaintenanceEffort.md)
-
-***
-
-### getImplementationCost
-
-Re-exports [getImplementationCost](typeGuards/functions/getImplementationCost.md)
-
-***
-
-### getInformationSensitivity
-
-Re-exports [getInformationSensitivity](securityDefaults/functions/getInformationSensitivity.md)
-
-***
-
-### getProtectionLevel
-
-Re-exports [getProtectionLevel](securityDefaults/functions/getProtectionLevel.md)
-
-***
-
-### getSecurityLevelBackgroundClass
-
-Re-exports [getSecurityLevelBackgroundClass](colorUtils/functions/getSecurityLevelBackgroundClass.md)
-
-***
-
-### getSecurityLevelBadgeVariant
-
-Re-exports [getSecurityLevelBadgeVariant](securityLevelUtils/functions/getSecurityLevelBadgeVariant.md)
-
-***
-
-### getSecurityLevelClass
-
-Re-exports [getSecurityLevelClass](securityLevelUtils/functions/getSecurityLevelClass.md)
-
-***
-
-### getSecurityLevelColorClass
-
-Re-exports [getSecurityLevelColorClass](colorUtils/functions/getSecurityLevelColorClass.md)
-
-***
-
-### getSecurityLevelColors
-
-Re-exports [getSecurityLevelColors](widgetHelpers/functions/getSecurityLevelColors.md)
-
-***
-
-### getSecurityLevelHexColor
-
-Re-exports [getSecurityLevelHexColor](colorUtils/functions/getSecurityLevelHexColor.md)
-
-***
-
-### getSecurityLevelOption
-
-Re-exports [getSecurityLevelOption](typeGuards/functions/getSecurityLevelOption.md)
-
-***
-
-### getSecurityLevelPercentage
-
-Re-exports [getSecurityLevelPercentage](securityLevelUtils/functions/getSecurityLevelPercentage.md)
-
-***
-
-### getSecurityLevelValue
-
-Re-exports [getSecurityLevelValue](securityLevelUtils/functions/getSecurityLevelValue.md)
-
-***
-
-### getTestId
-
-Re-exports [getTestId](widgetHelpers/functions/getTestId.md)
-
-***
-
-### getWidgetContent
-
-Re-exports [getWidgetContent](widgetHelpers/functions/getWidgetContent.md)
-
-***
-
-### getWidgetDescription
-
-Re-exports [getWidgetDescription](widgetHelpers/functions/getWidgetDescription.md)
-
-***
-
-### getWidgetIcon
-
-Re-exports [getWidgetIcon](widgetHelpers/functions/getWidgetIcon.md)
-
-***
-
-### getWidgetSize
-
-Re-exports [getWidgetSize](widgetHelpers/functions/getWidgetSize.md)
-
-***
-
-### getWidgetTitle
-
-Re-exports [getWidgetTitle](widgetHelpers/functions/getWidgetTitle.md)
-
-***
-
-### handleWidgetError
-
-Re-exports [handleWidgetError](widgetHelpers/functions/handleWidgetError.md)
-
-***
-
-### hasProperty
-
-Re-exports [hasProperty](typeGuards/functions/hasProperty.md)
-
-***
-
-### hasTagValue
-
-Re-exports [hasTagValue](typeGuards/functions/hasTagValue.md)
-
-***
-
-### hasWidgetProps
-
-Re-exports [hasWidgetProps](typeGuards/functions/hasWidgetProps.md)
-
-***
-
-### isAvailabilityDetail
-
-Re-exports [isAvailabilityDetail](typeGuards/functions/isAvailabilityDetail.md)
-
-***
-
-### isCIADetails
-
-Re-exports [isCIADetails](typeGuards/functions/isCIADetails.md)
-
-***
-
-### isComplianceFramework
-
-Re-exports [isComplianceFramework](typeGuards/functions/isComplianceFramework.md)
-
-***
-
-### isComplianceStatus
-
-Re-exports [isComplianceStatus](typeGuards/functions/isComplianceStatus.md)
-
-***
-
-### isConfidentialityDetail
-
-Re-exports [isConfidentialityDetail](typeGuards/functions/isConfidentialityDetail.md)
-
-***
-
-### isIntegrityDetail
-
-Re-exports [isIntegrityDetail](typeGuards/functions/isIntegrityDetail.md)
-
-***
-
-### isNumber
-
-Re-exports [isNumber](typeGuards/functions/isNumber.md)
-
-***
-
-### isObject
-
-Re-exports [isObject](typeGuards/functions/isObject.md)
-
-***
-
-### isROIMetricDetails
-
-Re-exports [isROIMetricDetails](typeGuards/functions/isROIMetricDetails.md)
-
-***
-
-### isROIMetrics
-
-Re-exports [isROIMetrics](typeGuards/functions/isROIMetrics.md)
-
-***
-
-### isSecurityProfile
-
-Re-exports [isSecurityProfile](typeGuards/functions/isSecurityProfile.md)
-
-***
-
-### isSecurityResource
-
-Re-exports [isSecurityResource](typeGuards/functions/isSecurityResource.md)
-
-***
-
-### isString
-
-Re-exports [isString](typeGuards/functions/isString.md)
-
-***
-
-### isTechnicalImplementationDetails
-
-Re-exports [isTechnicalImplementationDetails](typeGuards/functions/isTechnicalImplementationDetails.md)
-
-***
-
-### isValidCIADetail
-
-Re-exports [isValidCIADetail](typeGuards/functions/isValidCIADetail.md)
-
-***
-
-### isWidgetConfig
-
-Re-exports [isWidgetConfig](typeGuards/functions/isWidgetConfig.md)
-
-***
-
-### normalizeSecurityLevel
-
-Re-exports [normalizeSecurityLevel](securityLevelUtils/functions/normalizeSecurityLevel.md)
-
-***
-
-### parseRiskLevel
-
-Re-exports [parseRiskLevel](typeGuards/functions/parseRiskLevel.md)
-
-***
-
-### safeAccess
-
-Re-exports [safeAccess](typeGuards/functions/safeAccess.md)
-
-***
-
-### safeNumberConversion
-
-Re-exports [safeNumberConversion](typeGuards/functions/safeNumberConversion.md)
-
-***
-
-### shouldShowWidget
-
-Re-exports [shouldShowWidget](widgetHelpers/functions/shouldShowWidget.md)
-
-***
-
-### sortWidgetsByPriority
-
-Re-exports [sortWidgetsByPriority](widgetHelpers/functions/sortWidgetsByPriority.md)
-
-***
-
-### WIDGET\_CONTENT
-
-Re-exports [WIDGET_CONTENT](widgetHelpers/variables/WIDGET_CONTENT.md)
-
-***
-
-### WIDGET\_DESCRIPTIONS
-
-Re-exports [WIDGET_DESCRIPTIONS](widgetHelpers/variables/WIDGET_DESCRIPTIONS.md)
-
-***
-
-### widgetEmptyState
-
-Re-exports [widgetEmptyState](widgetHelpers/functions/widgetEmptyState.md)
-
-***
-
-### widgetLoadingIndicator
-
-Re-exports [widgetLoadingIndicator](widgetHelpers/functions/widgetLoadingIndicator.md)
-
-***
-
-### widgetRegistry
-
-Re-exports [widgetRegistry](widgetRegistry/variables/widgetRegistry.md)
-
-***
-
-### WidgetType
-
-Re-exports [WidgetType](widgetHelpers/enumerations/WidgetType.md)
+Re-exports [calculateRiskLevel](../types/namespaces/CIAUtilities/functions/calculateRiskLevel.md)

@@ -1,3 +1,5 @@
+import { CIAComponentType } from "../types/cia-services";
+
 /**
  * UI-related constants for the application
  */
@@ -18,25 +20,87 @@ export const WIDGET_ICONS = {
   SECURITY_RESOURCES: "📚",
 };
 
-// Business impact icons
+/**
+ * Icons for business impact categories
+ */
 export const BUSINESS_IMPACT_ICONS = {
-  FINANCIAL: "💰",
-  OPERATIONAL: "⚙️",
-  REPUTATIONAL: "🏆",
-  REGULATORY: "⚖️",
-  STRATEGIC: "🎯",
-  CUSTOMER: "👥",
-  NEUTRAL: "ℹ️", // Added missing icon
+  financial: "💰",
+  operational: "⚙️",
+  reputational: "👥",
+  regulatory: "📜",
+  strategic: "🎯",
 };
 
-// CIA component icons
-export const CIA_COMPONENT_ICONS = {
-  CONFIDENTIALITY: "🔒",
-  INTEGRITY: "🔐",
-  AVAILABILITY: "⏱️",
+/**
+ * Icons for CIA components
+ */
+export const CIA_COMPONENT_ICONS: Record<CIAComponentType, string> = {
+  availability: "⏱️",
+  integrity: "✓",
+  confidentiality: "🔒",
 };
 
-// Color mapping for security levels
+/**
+ * Icons for security-related concepts
+ */
+export const SECURITY_ICONS = {
+  risk: "⚠️",
+  recommendation: "💡",
+  compliance: "📋",
+  riskLevel: "🔍",
+  security: "🔐",
+  score: "📊",
+  details: "ℹ️",
+  implementation: "🛠️",
+  value: "💎",
+  cost: "💲",
+  time: "⏰",
+  effort: "📈",
+};
+
+/**
+ * Get icon for a specific CIA component
+ *
+ * @param component - The CIA component
+ * @returns The appropriate icon
+ */
+export function getComponentIcon(component: CIAComponentType): string {
+  return CIA_COMPONENT_ICONS[component] || "🔵";
+}
+
+/**
+ * Get icon for a business impact category
+ *
+ * @param category - The business impact category
+ * @returns The appropriate icon
+ */
+export function getBusinessImpactIcon(category: string): string {
+  const normalizedCategory = category.toLowerCase();
+
+  // Type assertion to access the object with string index
+  const icons = BUSINESS_IMPACT_ICONS as Record<string, string>;
+
+  return icons[normalizedCategory] || "📊";
+}
+
+/**
+ * Get icon for a security concept
+ *
+ * @param concept - The security concept
+ * @returns The appropriate icon
+ */
+export function getSecurityIcon(concept: string): string {
+  const normalizedConcept = concept.toLowerCase();
+
+  // Type assertion to access the object with string index
+  const icons = SECURITY_ICONS as Record<string, string>;
+
+  return icons[normalizedConcept] || "🔷";
+}
+
+/**
+ * Color mapping for security levels
+ */
 export const SECURITY_LEVEL_COLORS = {
   NONE: "#e74c3c", // Red
   LOW: "#f39c12", // Orange

@@ -54,38 +54,45 @@ describe("Additional TypeGuard Functions", () => {
     });
   });
 
+  // Remove duplicate isComplianceStatus tests and keep only one proper implementation
   describe("isComplianceStatus", () => {
     it("validates valid compliance status objects", () => {
-      const valid = {
-        framework: "NIST",
-        status: "Compliant",
-        details: { controls: 5, implemented: 5 },
+      const validStatus = {
+        status: "Partially Compliant",
+        compliantFrameworks: ["ISO 27001"],
+        partiallyCompliantFrameworks: ["NIST CSF"],
+        nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
+        complianceScore: 50
       };
-      expect(isComplianceStatus(valid)).toBe(true);
+      
+      expect(isComplianceStatus(validStatus)).toBe(true);
     });
-
+    
     it("rejects invalid compliance status", () => {
       expect(isComplianceStatus(null)).toBe(false);
       expect(isComplianceStatus({})).toBe(false);
-      expect(isComplianceStatus({ framework: "NIST" })).toBe(false);
+      expect(isComplianceStatus({ status: "test" })).toBe(false);
     });
   });
 
+  // Remove duplicate isComplianceFramework tests and keep only one proper implementation
   describe("isComplianceFramework", () => {
     it("validates valid compliance framework objects", () => {
-      const valid = {
-        id: "NIST",
-        name: "NIST Framework",
-        version: "1.0",
-        controls: [],
+      // Simple string framework
+      expect(isComplianceFramework("ISO 27001")).toBe(true);
+      
+      // Complex framework object
+      const validFramework = {
+        name: "HIPAA",
+        status: "compliant"
       };
-      expect(isComplianceFramework(valid)).toBe(true);
+      expect(isComplianceFramework(validFramework)).toBe(true);
     });
-
+    
     it("rejects invalid compliance frameworks", () => {
       expect(isComplianceFramework(null)).toBe(false);
       expect(isComplianceFramework({})).toBe(false);
-      expect(isComplianceFramework({ id: "NIST" })).toBe(false);
+      expect(isComplianceFramework({ name: "Test" })).toBe(false);
     });
   });
 

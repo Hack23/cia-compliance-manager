@@ -1,164 +1,198 @@
 /* Layout-related styles */
 
-/* Container and Grid */
+/* Container basic styling */
 .container {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  padding-right: 0.25rem; /* Reduced padding to use more space */
-  padding-left: 0.25rem;
+  padding-right: 0.75rem; /* Reduced from 1rem */
+  padding-left: 0.75rem; /* Reduced from 1rem */
 }
 
-/* Dashboard grid with improved spacing */
-.dashboard-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 0.4rem !important; /* Reduced gap further for more content */
+/* Grid layout fixes - use CSS Grid properties directly */
+[data-testid="dashboard-grid"] {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 0.75rem; /* Reduced from 1rem */
   width: 100%;
-  max-width: 100% !important;
-  padding: 0.25rem !important;
+  margin: 0 auto;
+  padding: 0.75rem; /* Reduced from 1rem */
+  /* Add explicit grid-auto-rows property to ensure rows are created */
+  grid-auto-rows: minmax(250px, auto); /* Reduced from 300px */
 }
 
-/* Widget column sizing */
-.widget-col-4 {
-  grid-column: span 1 !important; /* Force span 1 column */
+/* Apply responsive grid columns - these override the base definition at breakpoints */
+@media (min-width: 640px) {
+  [data-testid="dashboard-grid"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem; /* Reduced from default */
+  }
 }
 
-.widget-col-6 {
-  grid-column: span 1 !important; /* Force span 1 column */
+@media (min-width: 1024px) {
+  [data-testid="dashboard-grid"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem; /* Moderate gap for larger screens */
+  }
 }
 
-.widget-col-12 {
-  grid-column: span 3 !important; /* Force span all 3 columns */
-}
-
-/* Make all widget sizes consistent at 1/3 width */
-.widget-col-2,
-.widget-col-4,
-.widget-col-6 {
-  grid-column: span 1 !important; /* Force all widgets to take exactly 1/3 of space */
-}
-
-/* Full width widgets should still be full width */
-.widget-col-12 {
-  grid-column: span 3 !important;
-}
-
-/* Override Tailwind responsive classes */
-.grid-cols-1,
-.sm\:grid-cols-2,
-.lg\:grid-cols-3 {
-  grid-template-columns: repeat(3, 1fr) !important;
-}
-
-/* Content height distribution */
-.full-height-container {
-  height: calc(
-    100vh - 150px
-  ); /* Adjustable height that fills most of viewport */
-  min-height: 600px; /* Minimum height */
+/* Fix the direct children of the grid (the widget containers) */
+[data-testid="dashboard-grid"] > div {
+  height: 100%; /* Fill the grid cell */
+  min-height: 250px; /* Reduced from 300px */
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+  margin-bottom: 0; /* Remove margin that could cause spacing issues */
 }
 
-/* Widget sizing consistency - more compact */
-.widget {
-  min-height: 300px !important; /* Reduced minimum height */
-  width: 100% !important;
+/* Fix individual widgets inside their containers */
+.bg-white.dark\:bg-gray-800.shadow-md.rounded-lg.overflow-hidden {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-/* Each widget takes 1/3 of the grid space */
-[data-testid^="widget-"] {
-  width: 100% !important;
+/* Widget body should scroll if content overflows - with less padding */
+[data-testid^="widget-container"] > div:nth-child(2) {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.5rem; /* Added reduced padding */
 }
 
-/* Smaller widgets for specific components */
-.compact-widget {
-  min-height: 250px !important;
+/* App header styling - more compact */
+.mb-6.p-4.bg-white.dark\:bg-gray-800.rounded-lg.shadow-md.flex.justify-between.items-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem; /* Reduced from 1rem */
+  margin-bottom: 1rem; /* Reduced from 1.5rem */
+  border-radius: 0.5rem;
 }
 
-/* Larger widgets for data-heavy components */
-.expanded-widget {
-  min-height: 400px !important;
-}
+/* IMPORTANT: DO NOT add any styling that would override grid-cols-* classes */
 
-/* Responsive adjustments */
-@media (max-width: 1400px) {
-  .dashboard-grid {
-    gap: 1rem !important;
-  }
-
-  .widget {
-    min-height: 320px !important;
-  }
-}
-
-@media (max-width: 1200px) {
-  .widget-col-2,
-  .widget-col-4,
-  .widget-col-6 {
-    grid-column: span 1; /* Still 3 per row on medium-large screens */
-  }
-}
-
-@media (max-width: 992px) {
-  .dashboard-grid {
-    grid-template-columns: repeat(
-      2,
-      1fr
-    ) !important; /* 2 columns on medium screens */
-  }
-
-  .widget-col-2,
-  .widget-col-4,
-  .widget-col-6 {
-    grid-column: span 1; /* 2 per row on medium screens */
-  }
-
-  .widget-col-12 {
-    grid-column: span 2 !important; /* Full width on medium screens */
-  }
-}
-
-@media (max-width: 768px) {
-  .dashboard-grid {
-    grid-template-columns: 1fr !important; /* Single column on small screens */
-  }
-
-  .widget-col-2,
-  .widget-col-4,
-  .widget-col-6,
-  .widget-col-12 {
-    grid-column: span 1 !important; /* 1 per row on small screens */
-  }
-}
-
+/* Responsive adjustments - enhance but don't override Tailwind's responsive classes */
 @media (max-width: 640px) {
-  .dashboard-grid {
-    grid-template-columns: 1fr; /* Single column on very small screens */
-    gap: 0.75rem;
-  }
-
-  .widget {
-    min-height: 200px;
+  [data-testid="dashboard-grid"] > div {
+    margin-bottom: 0.5rem; /* Reduced spacing on mobile */
   }
 }
 
-/* Test Environment Fixes */
-@media (max-width: 1024px) {
-  /* Force visibility of widgets in testing environments */
-  [data-testid^="widget-"] {
-    overflow: visible !important;
-    position: relative !important;
-    height: auto !important;
-    min-height: 50px !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    visibility: visible !important;
+/* Fix widget container height issues */
+.widget-container {
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  height: auto;
+  min-height: 200px; /* Reduced from original */
+  max-height: 700px; /* Reduced from 800px */
+}
+
+/* Fix widget content scrolling */
+.widget-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.75rem; /* Reduced from 1rem */
+}
+
+/* Fix scroll behavior - thinner and more subtle */
+.widget-body::-webkit-scrollbar {
+  width: 4px; /* Reduced from 8px */
+  background-color: transparent;
+}
+
+.widget-body::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 116, 139, 0.4); /* More transparent */
+  border-radius: 2px; /* Reduced from 4px */
+}
+
+/* Fix widget header spacing */
+.widget-header {
+  padding: 0.5rem 0.75rem; /* Reduced from 0.75rem 1rem */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+/* Fixed height for charts to prevent layout shifts - more compact */
+canvas.chart {
+  height: 250px !important; /* Reduced from 300px */
+  width: 100% !important;
+  max-height: 250px !important; /* Reduced from 300px */
+}
+
+/* Consistent widget padding - reduced */
+.widget-content {
+  padding: 0.75rem; /* Reduced from 1rem */
+}
+
+/* Fix content overflow in lists - more compact */
+.widget-container ul,
+.widget-container ol {
+  padding-left: 1.25rem; /* Reduced from 1.5rem */
+  margin-bottom: 0.75rem; /* Reduced from 1rem */
+}
+
+.widget-container li {
+  margin-bottom: 0.35rem; /* Reduced from 0.5rem */
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Fix images and icons sizing */
+.widget-container img,
+.widget-container svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fix theme toggle spacing */
+.theme-toggle {
+  margin-left: 0.75rem; /* Reduced from 1rem */
+}
+
+/* Dark mode improvements */
+.dark .widget-container {
+  background-color: rgba(30, 41, 59, 0.95);
+  border-color: rgba(71, 85, 105, 0.5);
+}
+
+.dark .widget-body::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.3);
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+  .widget-container {
+    max-height: none;
   }
 
-  /* Ensure the dashboard grid doesn't clip content */
-  .dashboard-grid {
-    overflow: visible !important;
-    height: auto !important;
+  canvas.chart {
+    height: 180px !important; /* Reduced from 200px */
+  }
+
+  /* Further compact elements on small screens */
+  .widget-header {
+    padding: 0.4rem 0.6rem;
+    min-height: 40px;
+  }
+
+  .widget-body {
+    padding: 0.4rem 0.6rem;
+  }
+
+  p,
+  li,
+  .widget-content {
+    font-size: 0.85rem; /* Smaller font on mobile */
+    line-height: 1.3; /* Tighter line height */
   }
 }

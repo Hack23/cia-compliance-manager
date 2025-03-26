@@ -2,10 +2,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&display=swap");
 
 /* Import our separate CSS files */
-@import "./styles/variables.css";
-@import "./styles/theme.css";
-@import "./styles/layout.css";
-@import "./styles/components.css";
-@import "./styles/utilities.css";
-@import "./styles/ingress-theme.css";
-
+@import "./styles/variables.css"; /* Variables must come first */
+@import "./styles/theme.css"; /* Base theme uses variables */
+@import "./styles/layout.css"; /* Layout comes before components */
+@import "./styles/components.css"; /* Component styles may override layout */
+@import "./styles/utilities.css"; /* Utilities may override components */
+@import "./styles/light-theme.css"; /* Theme variants come afterward */
+@import "./styles/dark-theme.css";
+@import "./styles/widget-improvements.css"; /* Widget-specific improvements */
+@import "./styles/optimizations.css"; /* Final overrides and fixes */

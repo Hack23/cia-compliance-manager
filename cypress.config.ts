@@ -169,6 +169,27 @@ export default defineConfig({
           );
           return null;
         },
+
+        // Simple implementation for the checkFilesExist task
+        checkFilesExist({ basePath, fileList }) {
+          const existingFiles = fileList.filter((file) =>
+            fs.existsSync(path.join(basePath, file))
+          );
+          return existingFiles;
+        },
+
+        // Simple implementation for finding unconverted tests
+        findUnconvertedTests({ testDir, templatePattern }) {
+          const files = fs.readdirSync(testDir);
+
+          const unconverted = files.filter((file) => {
+            if (!file.endsWith(".cy.ts")) return false;
+            const content = fs.readFileSync(path.join(testDir, file), "utf8");
+            return !content.includes(templatePattern);
+          });
+
+          return unconverted;
+        },
       });
 
       return config;

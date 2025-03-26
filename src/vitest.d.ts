@@ -1,7 +1,29 @@
+/// <reference types="vitest" />
+/// <reference types="@testing-library/jest-dom" />
+
 import "@testing-library/jest-dom";
 
-// This will add types for Jest DOM matchers to the global scope
+interface CustomMatchers<R = unknown> {
+  toBeInTheDocument(): R;
+  toHaveTextContent(text: string | RegExp): R;
+  toHaveAttribute(attr: string, value?: string): R;
+  toBeDisabled(): R;
+  toBeEnabled(): R;
+  toBeRequired(): R;
+  toBeValid(): R;
+  toBeInvalid(): R;
+  toBeChecked(): R;
+  toBeVisible(): R;
+}
 
-/// <reference types="vitest" />
+declare global {
+  namespace Vi {
+    interface Assertion extends CustomMatchers {}
+    interface AsymmetricMatchersInterface extends CustomMatchers {}
+  }
 
-// This allows test files to use Vitest globals without importing them
+  namespace Chai {
+    interface Assertion extends CustomMatchers {}
+    interface AsymmetricMatcherInterface extends CustomMatchers {}
+  }
+}

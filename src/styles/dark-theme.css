@@ -1,0 +1,589 @@
+/* ========== SECURITY VISUALIZATION STYLING ========== */
+.dark .security-gauge {
+  position: relative;
+  height: 10px;
+  background: linear-gradient(
+    to right,
+    #00e676 0%,
+    /* Green - Low Risk */ #ffeb3b 25%,
+    /* Yellow - Medium Risk */ #ff9800 50%,
+    /* Orange - High Risk */ #ff5252 100% /* Red - Critical Risk */
+  );
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.dark .security-gauge-indicator {
+  position: absolute;
+  top: -3px;
+  width: 3px;
+  height: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 5px #ffffff;
+  border-radius: 2px;
+  z-index: 2;
+  transform: translateX(-50%);
+}
+
+.dark .risk-score-value {
+  font-family: "Share Tech Mono", monospace;
+  text-shadow: 0 0 5px currentColor;
+  letter-spacing: 1px;
+}
+
+/* Critical risk glow animation */
+@keyframes pulse-risk {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 82, 82, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(255, 82, 82, 1), 0 0 15px rgba(255, 82, 82, 0.6);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(255, 82, 82, 0.8);
+  }
+}
+
+.dark .critical-risk {
+  animation: pulse-risk 2s infinite;
+  color: #ff5252;
+}
+
+.dark .high-risk {
+  color: #ff9800;
+  text-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
+}
+
+.dark .medium-risk {
+  color: #ffeb3b;
+  text-shadow: 0 0 8px rgba(255, 235, 59, 0.6);
+}
+
+.dark .low-risk {
+  color: #00e676;
+  text-shadow: 0 0 8px rgba(0, 230, 118, 0.6);
+}
+
+/* Enhanced technical details styling */
+.dark .tech-metric-card {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 26, 37, 0.95) 0%,
+    rgba(0, 20, 26, 0.98) 100%
+  );
+  border: 1px solid var(--ingress-border);
+  box-shadow: var(--ingress-glow);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.dark .tech-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(0, 204, 102, 0.4);
+}
+
+.dark .tech-metric-value {
+  font-family: var(--font-mono);
+  color: var(--ingress-primary);
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px rgba(0, 204, 102, 0.5);
+}
+
+.dark .tech-metric-label {
+  font-family: var(--font-accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+/* Add scanner line effect for technical cards */
+.dark .tech-metric-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--ingress-primary),
+    transparent
+  );
+  animation: scan-line 3s ease infinite;
+}
+
+@keyframes scan-line {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Shadow glow for risk indicator */
+.shadow-glow {
+  box-shadow: 0 0 10px 2px rgba(0, 204, 102, 0.7);
+}
+
+.dark .shadow-glow {
+  box-shadow: 0 0 10px 2px rgba(0, 255, 136, 0.7),
+    0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+/* Ingress-inspired Dark Theme base styles */
+.dark {
+  --ingress-primary: #00cc66; /* Bright green */
+  --ingress-secondary: #33eeff; /* Cyan */
+  --ingress-dark: #001a1a; /* Very dark teal */
+  --ingress-light: #00ff88; /* Light green */
+  --ingress-accent: #40c4ff; /* Light blue */
+  --ingress-warning: #ff9800; /* Orange */
+  --ingress-danger: #ff5252; /* Red */
+  --ingress-bg: #001a25; /* Dark background */
+  --ingress-card-bg: #001c25; /* Slightly lighter background for cards */
+  --ingress-border: rgba(0, 204, 102, 0.3); /* Semi-transparent green */
+  --ingress-glow: 0 0 10px rgba(0, 204, 102, 0.3); /* Green glow */
+  --ingress-text: #e0e0e0; /* Light text */
+  --text-color: #e0e6ed; /* Lighter text for dark backgrounds */
+  --text-secondary: #a0abb9; /* Lighter secondary text */
+}
+
+/* Widget styling */
+.dark .widget-container {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 26, 37, 0.95) 0%,
+    rgba(0, 20, 26, 0.98) 100%
+  );
+  border: 1px solid var(--ingress-border);
+  box-shadow: var(--ingress-glow);
+  position: relative;
+  overflow: hidden;
+  animation: flicker 10s infinite;
+}
+
+.dark .widget-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill='%2300cc66' fill-opacity='0.03'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.dark .widget-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+.dark .widget-header {
+  background: linear-gradient(
+    to right,
+    rgba(0, 204, 102, 0.12),
+    rgba(0, 170, 85, 0.05)
+  );
+  box-shadow: inset 0 -1px 0 rgba(0, 204, 102, 0.3);
+}
+
+.dark .widget-header h3 {
+  color: var(--ingress-primary);
+  text-shadow: 0 0 4px rgba(0, 204, 102, 0.4);
+  font-family: "Orbitron", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dark .widget-title,
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4 {
+  font-family: "Orbitron", sans-serif;
+  color: var(--ingress-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px rgba(0, 204, 102, 0.5);
+}
+
+.dark .widget-icon {
+  color: var(--ingress-primary);
+  text-shadow: 0 0 5px rgba(0, 204, 102, 0.5);
+}
+
+/* Security Level Selection widget specific styles */
+.dark [data-testid="security-level-selector"] {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 26, 37, 0.9) 0%,
+    rgba(0, 20, 26, 0.95) 100%
+  );
+  border: 1px solid var(--ingress-border);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.dark [data-testid="security-level-selector"] select {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--ingress-primary);
+  color: var(--ingress-text);
+  box-shadow: 0 0 5px rgba(0, 204, 102, 0.2);
+}
+
+.dark [data-testid="security-level-selector"] select:focus {
+  box-shadow: 0 0 8px rgba(0, 204, 102, 0.5);
+  border-color: var(--ingress-light);
+}
+
+.dark [data-testid="security-level-selector"] label {
+  color: var(--ingress-primary);
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 0.5px;
+}
+
+/* Enhanced security level selector styling */
+.dark .security-level-selector select {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 204, 102, 0.3);
+  color: var (--ingress-text);
+  font-family: "Share Tech Mono", monospace;
+  box-shadow: 0 0 5px rgba(0, 204, 102, 0.2);
+  padding-left: 12px;
+  appearance: none;
+  background-image: linear-gradient(
+      45deg,
+      transparent 50%,
+      var(--ingress-primary) 50%
+    ),
+    linear-gradient(135deg, var(--ingress-primary) 50%, transparent 50%);
+  background-position: calc(100% - 18px) calc(1em + 0px),
+    calc(100% - 13px) calc(1em + 0px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+/* Add these new styles for dropdown options */
+.dark .security-level-selector select option {
+  background-color: var(--ingress-bg);
+  color: var(--ingress-text);
+  border: none;
+  font-family: "Share Tech Mono", monospace;
+  padding: 8px;
+}
+
+/* Firefox specific select styling */
+@-moz-document url-prefix() {
+  .dark .security-level-selector select {
+    background-color: var(--ingress-dark);
+    color: var(--ingress-text);
+  }
+  .dark .security-level-selector select option {
+    background-color: var(--ingress-dark);
+    color: var(--ingress-text);
+  }
+}
+
+/* Webkit browsers specific styling */
+.dark .security-level-selector select::-webkit-listbox {
+  background-color: var(--ingress-dark);
+  color: var(--ingress-text);
+  border: 1px solid var(--ingress-border);
+}
+
+/* Style for select when open */
+.dark .security-level-selector select:focus option:checked,
+.dark .security-level-selector select option:hover,
+.dark .security-level-selector select option:focus {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 26, 37, 0.95) 0%,
+    rgba(0, 20, 26, 0.98) 100%
+  );
+  background-color: rgba(0, 204, 102, 0.2);
+  color: var(--ingress-primary);
+}
+
+.dark .security-level-selector select:focus {
+  box-shadow: 0 0 10px rgba(0, 204, 102, 0.4);
+  border-color: var(--ingress-primary);
+  outline: none;
+}
+
+.dark .security-level-selector .info-button {
+  transition: all 0.3s ease;
+}
+
+.dark .security-level-selector .info-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 8px rgba(0, 204, 102, 0.6);
+}
+
+/* Enhanced CIA component specific styles */
+.dark .color-confidentiality {
+  color: #bd93f9; /* Bright purple */
+  text-shadow: 0 0 6px rgba(155, 89, 182, 0.6);
+}
+
+.dark .color-integrity {
+  color: #50fa7b; /* Bright green */
+  text-shadow: 0 0 6px rgba(46, 204, 113, 0.6);
+}
+
+.dark .color-availability {
+  color: #8be9fd; /* Bright cyan */
+  text-shadow: 0 0 6px rgba(52, 152, 219, 0.6);
+}
+
+/* Security level badges */
+.dark .status-badge {
+  font-family: "Share Tech Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(0, 204, 102, 0.3);
+  box-shadow: 0 0 5px rgba(0, 204, 102, 0.2);
+  padding: 2px 6px;
+}
+
+.dark .status-badge.purple {
+  background: rgba(155, 89, 182, 0.2);
+  border-color: rgba(155, 89, 182, 0.5);
+  color: #bd93f9;
+  box-shadow: 0 0 5px rgba(155, 89, 182, 0.3);
+}
+
+.dark .status-badge.success {
+  background: rgba(46, 204, 113, 0.2);
+  border-color: rgba(46, 204, 113, 0.5);
+  color: #50fa7b;
+  box-shadow: 0 0 5px rgba(46, 204, 113, 0.3);
+}
+
+.dark .status-badge.info {
+  background: rgba(52, 152, 219, 0.2);
+  border-color: rgba(52, 152, 219, 0.5);
+  color: #8be9fd;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+.dark .status-badge.warning {
+  background: rgba(241, 196, 15, 0.2);
+  border-color: rgba(241, 196, 15, 0.5);
+  color: #f1c40f;
+  box-shadow: 0 0 5px rgba(241, 196, 15, 0.3);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.dark .status-badge.error {
+  background: rgba(231, 76, 60, 0.2);
+  border-color: rgba(231, 76, 60, 0.5);
+  color: #ff5555;
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.3);
+}
+
+/* Security cards styling */
+.dark .security-card {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 26, 37, 0.95) 0%,
+    rgba(0, 20, 26, 0.98) 100%
+  );
+  border: 1px solid var(--ingress-border);
+  box-shadow: var(--ingress-glow);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.dark .security-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 204, 102, 0.4);
+}
+
+/* Scanner animation effect for active cards */
+@keyframes scanner {
+  0%,
+  100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+}
+
+.dark .security-card:hover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(0, 204, 102, 0) 85%,
+    rgba(0, 204, 102, 0.2) 90%,
+    rgba(0, 204, 102, 0) 95%
+  );
+  pointer-events: none;
+  background-size: 300% 300%;
+  animation: scanner 3s ease infinite;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* Cyberpunk corner elements on cards */
+.dark .security-card::before,
+.dark .security-card::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--ingress-primary);
+  opacity: 0.6;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.dark .security-card::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.dark .security-card::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+.dark .security-card:hover::before,
+.dark .security-card:hover::after {
+  width: 30px;
+  height: 30px;
+  opacity: 0.8;
+}
+
+/* Enhanced CIA component cards */
+.dark .confidentiality-card {
+  border-left: 3px solid #bd93f9 !important;
+  box-shadow: -2px 0 8px rgba(155, 89, 182, 0.3);
+}
+
+.dark .integrity-card {
+  border-left: 3px solid #50fa7b !important;
+  box-shadow: -2px 0 8px rgba(46, 204, 113, 0.3);
+}
+
+.dark .availability-card {
+  border-left: 3px solid #8be9fd !important;
+  box-shadow: -2px 0 8px rgba(52, 152, 219, 0.3);
+}
+
+/* Better security level indicator contrast */
+.dark .security-level-indicator.none {
+  background-color: #ff5252 !important;
+  box-shadow: 0 0 8px rgba(255, 82, 82, 0.5) !important;
+}
+
+.dark .security-level-indicator.low {
+  background-color: #ff9800 !important;
+  box-shadow: 0 0 8px rgba(255, 152, 0, 0.5) !important;
+}
+
+.dark .security-level-indicator.moderate {
+  background-color: #ffeb3b !important;
+  box-shadow: 0 0 8px rgba(255, 235, 59, 0.5) !important;
+}
+
+.dark .security-level-indicator.high {
+  background-color: #00e676 !important;
+  box-shadow: 0 0 8px rgba(0, 230, 118, 0.5) !important;
+}
+
+.dark .security-level-indicator.very-high {
+  background-color: #00ccff !important;
+  box-shadow: 0 0 8px rgba(0, 204, 255, 0.5) !important;
+}
+
+/* Enhanced CIA component styling for dark mode */
+.dark [data-testid="widget-availability-impact"] .section-container,
+.dark [data-testid="widget-availability-impact"] .metric-card {
+  border-color: rgba(0, 204, 255, 0.3) !important;
+  background-color: rgba(0, 204, 255, 0.05) !important;
+}
+
+.dark [data-testid="widget-integrity-impact"] .section-container,
+.dark [data-testid="widget-integrity-impact"] .metric-card {
+  border-color: rgba(0, 230, 118, 0.3) !important;
+  background-color: rgba(0, 230, 118, 0.05) !important;
+}
+
+.dark [data-testid="widget-confidentiality-impact"] .section-container,
+.dark [data-testid="widget-confidentiality-impact"] .metric-card {
+  border-color: rgba(167, 66, 255, 0.3) !important;
+  background-color: rgba(167, 66, 255, 0.05) !important;
+}
+
+/* Ensure optimal text visibility in dark mode */
+.dark p, 
+.dark li, 
+.dark span:not([class*="icon"]),
+.dark div:not([class*="background"]):not([class*="gradient"]),
+.dark label,
+.dark td, 
+.dark th,
+.dark input, 
+.dark select, 
+.dark textarea,
+.dark [data-testid^="widget-"] p,
+.dark [data-testid^="widget-"] div,
+.dark [data-testid^="widget-"] span:not([class*="icon"]) {
+  color: var(--text-color) !important;
+}
+
+/* Stronger contrast for section headings */
+.dark h4, 
+.dark h5, 
+.dark h6,
+.dark [data-testid^="widget-"] h4,
+.dark [data-testid^="widget-"] h5,
+.dark [data-testid^="widget-"] h6 {
+  color: #ffffff !important;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5) !important;
+  font-weight: 600 !important;
+}
+
+/* Enhance badge visibility in dark mode */
+.dark .status-badge {
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3) !important;
+  color: #e0e6ed !important;
+  padding: 0.35rem 0.75rem !important;
+}
+
+/* Better contrast for links in dark mode */
+.dark a {
+  color: var(--primary-light) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+}
+
+.dark a:hover {
+  text-decoration: none !important;
+  color: var(--accent-color) !important;
+}
+
+/* Ensure visibility in recommendation sections */
+.dark [data-testid^="widget-"] [data-testid$="-recommendation-0"],
+.dark [data-testid^="widget-"] [data-testid$="-recommendation-1"],
+.dark [data-testid^="widget-"] [data-testid$="-recommendation-2"] {
+  color: var(--text-color) !important;
+}

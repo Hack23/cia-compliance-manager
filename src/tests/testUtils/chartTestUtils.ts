@@ -61,7 +61,7 @@ export function setupChartTest() {
 
   // Mock browser APIs
   global.ResizeObserver = class ResizeObserver {
-    constructor(callback: ResizeObserverCallback) {}
+    constructor(_callback: ResizeObserverCallback) {}
     observe() {}
     unobserve() {}
     disconnect() {}

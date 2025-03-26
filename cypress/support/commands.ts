@@ -58,7 +58,7 @@ Cypress.Commands.add(
         // Return an empty wrapper that won't break the test chain
         return cy.wrap(Cypress.$("<div>"));
       }
-    });
+    }) as unknown as Cypress.Chainable<JQuery<HTMLElement>>;
   }
 );
 
@@ -429,6 +429,201 @@ Cypress.Commands.add("ensureAppLoaded", () => {
   cy.screenshot("app-loaded-state");
 });
 
+/**
+ * Helper command to ensure app is fully loaded before continuing
+ */
+Cypress.Commands.add("ensureAppLoaded", (timeoutValue = 10000) => {
+  // Fix: Use number directly for timeout instead of timeoutValue
+  // Wait for key app elements to appear
+  cy.get("body").should("exist");
+
+  // Use a simpler approach without timeout object
+  // Check for dashboard or widgets
+  cy.get("body")
+    .contains('[data-testid="dashboard-grid"], [data-testid^="widget-"]')
+    .should("exist")
+    .then(() => {
+      cy.log("✅ Application loaded successfully");
+    });
+
+  // Check if select elements are present for setting security levels
+  cy.get("select").then(($selects) => {
+    if ($selects.length < 3) {
+      cy.log("⚠️ Warning: Not all security level selects found");
+    }
+  });
+});
+
+/**
+ * Helper command to set security levels
+ */
+Cypress.Commands.add(
+  "setSecurityLevels",
+  (availability, integrity, confidentiality) => {
+    cy.get("body").then(($body) => {
+      const selectCount = $body.find("select").length;
+
+      if (selectCount >= 3) {
+        // Set levels using dropdowns
+        if (availability !== undefined) {
+          cy.get("select").eq(0).select(availability, { force: true });
+        }
+        if (integrity !== undefined) {
+          cy.get("select").eq(1).select(integrity, { force: true });
+        }
+        if (confidentiality !== undefined) {
+          cy.get("select").eq(2).select(confidentiality, { force: true });
+        }
+      } else {
+        // Try another method - dispatch a custom event which the app listens for
+        cy.window().then((win) => {
+          win.document.dispatchEvent(
+            new CustomEvent("test:set-values", {
+              detail: {
+                availability,
+                integrity,
+                confidentiality,
+              },
+            })
+          );
+        });
+
+        cy.log(
+          `Set security levels via event: ${availability}, ${integrity}, ${confidentiality}`
+        );
+      }
+    });
+  }
+);
+
+/**
+ * Custom command to select security levels with improved reliability
+ */
+Cypress.Commands.add(
+  "setSecurityLevelsReliable" as any,
+  (availability, integrity, confidentiality) => {
+    // Try multiple strategies to find and set security levels
+
+    // Strategy 1: Using data-testid selectors
+    cy.get("body").then(($body) => {
+      const hasTestIdSelectors =
+        $body.find('[data-testid="availability-select"]').length > 0 &&
+        $body.find('[data-testid="integrity-select"]').length > 0 &&
+        $body.find('[data-testid="confidentiality-select"]').length > 0;
+
+      if (hasTestIdSelectors) {
+        cy.get('[data-testid="availability-select"]').select(
+          String(availability),
+          { force: true }
+        );
+        cy.wait(300);
+        cy.get('[data-testid="integrity-select"]').select(String(integrity), {
+          force: true,
+        });
+        cy.wait(300);
+        cy.get('[data-testid="confidentiality-select"]').select(
+          String(confidentiality),
+          { force: true }
+        );
+        return;
+      }
+
+      // Strategy 2: Using the first three selects in order
+      const hasThreeSelects = $body.find("select").length >= 3;
+
+      if (hasThreeSelects) {
+        cy.get("select").eq(0).select(String(availability), { force: true });
+        cy.wait(300);
+        cy.get("select").eq(1).select(String(integrity), { force: true });
+        cy.wait(300);
+        cy.get("select").eq(2).select(String(confidentiality), { force: true });
+        return;
+      }
+
+      // Strategy 3: Using selects with specific labels
+      cy.contains("label", /availability|avail/i)
+        .siblings("select")
+        .select(String(availability), { force: true });
+      cy.wait(300);
+
+      cy.contains("label", /integrity|integ/i)
+        .siblings("select")
+        .select(String(integrity), { force: true });
+      cy.wait(300);
+
+      cy.contains("label", /confidentiality|confid|privacy/i)
+        .siblings("select")
+        .select(String(confidentiality), { force: true });
+    });
+
+    // Wait for updates to apply
+    cy.wait(1000);
+  }
+);
+
+/**
+ * Command to force dark mode instead of relying on theme toggle button
+ */
+Cypress.Commands.add("forceDarkMode", () => {
+  cy.document().then((doc) => {
+    // Add dark mode class to HTML element
+    doc.documentElement.classList.add("dark");
+    doc.body.classList.add("dark");
+
+    // Set localStorage to persist the setting
+    localStorage.setItem("darkMode", "true");
+
+    // Create a custom event that the app might listen to
+    const themeChangeEvent = new CustomEvent("themeChange", {
+      detail: { theme: "dark" },
+    });
+    window.dispatchEvent(themeChangeEvent);
+
+    cy.log("Forced dark mode via DOM and localStorage");
+  });
+});
+
+/**
+ * Command to force light mode
+ */
+Cypress.Commands.add("forceLightMode", () => {
+  cy.document().then((doc) => {
+    // Remove dark mode class from HTML element
+    doc.documentElement.classList.remove("dark");
+    doc.body.classList.remove("dark");
+
+    // Set localStorage to persist the setting
+    localStorage.setItem("darkMode", "false");
+
+    // Create a custom event that the app might listen to
+    const themeChangeEvent = new CustomEvent("themeChange", {
+      detail: { theme: "light" },
+    });
+    window.dispatchEvent(themeChangeEvent);
+
+    cy.log("Forced light mode via DOM and localStorage");
+  });
+});
+
+/**
+ * Command to toggle theme regardless of button presence
+ */
+Cypress.Commands.add("toggleTheme", () => {
+  cy.document().then((doc) => {
+    // Check current theme
+    const isDarkMode = doc.documentElement.classList.contains("dark");
+
+    if (isDarkMode) {
+      cy.forceLightMode();
+    } else {
+      cy.forceDarkMode();
+    }
+
+    // Wait for theme change to take effect
+    cy.wait(300);
+  });
+});
+
 // Define custom command types
 declare global {
   namespace Cypress {
@@ -462,6 +657,21 @@ declare global {
         widgetId: string,
         elementSelector: string
       ): Chainable<JQuery<HTMLElement>>;
+
+      /**
+       * Force dark mode regardless of theme toggle presence
+       */
+      forceDarkMode(): Chainable<void>;
+
+      /**
+       * Force light mode regardless of theme toggle presence
+       */
+      forceLightMode(): Chainable<void>;
+
+      /**
+       * Toggle theme regardless of button presence
+       */
+      toggleTheme(): Chainable<void>;
     }
   }
 }

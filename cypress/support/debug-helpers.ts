@@ -181,24 +181,59 @@ export function screenshotAllWidgets(): void {
   });
 }
 
+/**
+ * Analyzes available widgets on the page for debugging test failures
+ */
+export function analyzeWidgets(): void {
+  cy.document().then((doc) => {
+    const widgetElements = doc.querySelectorAll(
+      '[data-testid*="widget"], [class*="widget"]'
+    );
+    cy.log(`Found ${widgetElements.length} potential widget elements`);
+
+    // Log details about each widget
+    Array.from(widgetElements)
+      .slice(0, 10)
+      .forEach((el, i) => {
+        const testId = el.getAttribute("data-testid") || "no-test-id";
+        const className = el.className;
+        const visible = el.getBoundingClientRect().height > 0;
+        const textLength = el.textContent?.length || 0;
+
+        cy.log(
+          `Widget ${
+            i + 1
+          }: testId="${testId}", visible=${visible}, textLength=${textLength}, class="${className}"`
+        );
+      });
+
+    // Capture screenshot of page state
+    cy.screenshot("widget-analysis-debug");
+  });
+}
+
 // Register commands once
 function registerDebugCommands(): void {
   // Register debug helpers with proper options
   Cypress.Commands.add(
     "debugFailure",
-    { prevSubject: false },
+    { prevSubject: true }, // Fix: Use boolean value
     (testName: string) => {
       debugFailure(testName);
       return cy.wrap(null);
     }
   );
 
-  Cypress.Commands.add("logVisibleElements", { prevSubject: false }, () => {
-    logVisibleElements();
-    return cy.wrap(null);
-  });
+  Cypress.Commands.add(
+    "logVisibleElements",
+    { prevSubject: "optional" },
+    () => {
+      logVisibleElements();
+      return cy.wrap(null);
+    }
+  );
 
-  Cypress.Commands.add("logAllTestIds", { prevSubject: false }, () => {
+  Cypress.Commands.add("logAllTestIds", { prevSubject: "optional" }, () => {
     logAllTestIds();
     return cy.wrap(null);
   });
@@ -224,57 +259,128 @@ function registerDebugCommands(): void {
     });
   });
 
-  Cypress.Commands.add("analyzeWidgetsOnPage", { prevSubject: false }, () => {
-    cy.log("Analyzing widgets on page...");
+  Cypress.Commands.add(
+    "analyzeWidgetsOnPage",
+    { prevSubject: "optional" },
+    () => {
+      cy.log("Analyzing widgets on page...");
 
-    // Common widget test IDs from the DOM analysis
-    const widgetIds = [
-      "widget-security-level-selection",
-      "widget-security-summary",
-      "widget-business-impact-container",
-      "widget-technical-details-container",
-      "widget-cost-estimation",
-      "widget-value-creation",
-      "widget-compliance-status",
-      "widget-radar-chart",
-      "widget-availability-impact-container",
-      "widget-integrity-impact-container",
-      "widget-confidentiality-impact-container",
-      "widget-security-resources-container",
-      "widget-cia-impact-summary",
-    ];
+      // Common widget test IDs from the DOM analysis
+      const widgetIds = [
+        "widget-security-level-selection",
+        "widget-security-summary",
+        "widget-business-impact-container",
+        "widget-technical-details-container",
+        "widget-cost-estimation",
+        "widget-value-creation",
+        "widget-compliance-status",
+        "widget-radar-chart",
+        "widget-availability-impact-container",
+        "widget-integrity-impact-container",
+        "widget-confidentiality-impact-container",
+        "widget-security-resources-container",
+        "widget-cia-impact-summary",
+      ];
 
-    // Check for each widget
-    widgetIds.forEach((widgetId) => {
-      cy.get(`[data-testid="${widgetId}"]`).then(($widget) => {
-        if ($widget.length) {
-          cy.log(`✅ Found widget: ${widgetId}`);
-          // Log additional details about the widget
-          cy.log(`  - Visible: ${$widget.is(":visible")}`);
-          cy.log(`  - Children: ${$widget.children().length}`);
-          cy.log(`  - Text: ${$widget.text().substring(0, 50)}...`);
-        } else {
-          cy.log(`❌ Widget not found: ${widgetId}`);
-        }
+      // Check for each widget
+      widgetIds.forEach((widgetId) => {
+        cy.get(`[data-testid="${widgetId}"]`).then(($widget) => {
+          if ($widget.length) {
+            cy.log(`✅ Found widget: ${widgetId}`);
+            // Log additional details about the widget
+            cy.log(`  - Visible: ${$widget.is(":visible")}`);
+            cy.log(`  - Children: ${$widget.children().length}`);
+            cy.log(`  - Text: ${$widget.text().substring(0, 50)}...`);
+          } else {
+            cy.log(`❌ Widget not found: ${widgetId}`);
+          }
+        });
       });
-    });
 
-    return cy.wrap(null);
-  });
+      return cy.wrap(null);
+    }
+  );
 
   // Fix: Register debugFailedTest command properly with correct typing
   Cypress.Commands.add(
     "debugFailedTest",
-    { prevSubject: false },
+    { prevSubject: true }, // Fix: Use boolean value
     (testName: string) => {
       debugFailedTest(testName);
       return cy.wrap(null);
     }
   );
+
+  Cypress.Commands.add("analyzeWidgets", analyzeWidgets);
 }
 
 // Initialize commands
 registerDebugCommands();
+
+/**
+ * Debug a failed test with enhanced logging and screenshots
+ * This should be used in a test context, not directly in afterEach
+ */
+Cypress.Commands.add("debugFailedTest", (testName: string) => {
+  cy.log(`Debugging failed test: ${testName}`);
+
+  // Take a screenshot of the current state
+  cy.screenshot(`debug-${testName.replace(/\s+/g, "-")}`);
+
+  // Log DOM structure
+  cy.document().then((doc) => {
+    cy.log(`Page title: ${doc.title}`);
+
+    // Log testids
+    const testIdElements = doc.querySelectorAll("[data-testid]");
+    cy.log(`Found ${testIdElements.length} elements with data-testid`);
+
+    Array.from(testIdElements)
+      .slice(0, 10)
+      .forEach((el) => {
+        cy.log(`Element with data-testid="${el.getAttribute("data-testid")}"`);
+      });
+
+    // Check for error messages
+    const errorElements = doc.querySelectorAll('.error, [role="alert"]');
+    if (errorElements.length > 0) {
+      cy.log(`Found ${errorElements.length} error elements`);
+      Array.from(errorElements).forEach((el) => {
+        cy.log(`Error element content: ${el.textContent}`);
+      });
+    }
+  });
+});
+
+/**
+ * Fix for the debug helper to work in afterEach
+ * Use this pattern in afterEach hooks
+ */
+export function debugFailedTestInAfterEach(testName: string): void {
+  cy.log(`Debugging failed test: ${testName}`);
+
+  // Take a screenshot only
+  cy.screenshot(`afterhook-debug-${testName.replace(/\s+/g, "-")}`);
+}
+
+// Add more debug helpers as needed
+
+// Make sure to declare the types
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      /**
+       * Debug a failed test with enhanced logging
+       */
+      debugFailedTest(testName: string): Chainable<void>;
+
+      /**
+       * Analyze widgets on the page for debugging
+       */
+      analyzeWidgets(): Chainable<void>;
+    }
+  }
+}
 
 // Export helpers object
 export default {

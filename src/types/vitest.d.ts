@@ -1,13 +1,6 @@
-/// <reference types="vitest" />
-import type { TestingLibraryMatchers } from "@testing-library/jest-dom/matchers";
+/// <reference types="vitest/globals" />
+import "@testing-library/jest-dom";
 
-// Extend Vitest's expect with Jest-DOM matchers
-interface CustomMatchers<R = unknown>
-  extends TestingLibraryMatchers<typeof expect.stringContaining, R> {}
-
-declare module "vitest" {
-  interface Assertion<T = any> extends CustomMatchers<T> {}
-  interface AsymmetricMatchersContaining extends CustomMatchers {}
-}
-
+// This file is a simple reference to ensure TypeScript picks up the types
+// The main type definitions are now in src/tests/vitest-extensions.d.ts
 export {};

@@ -1,38 +1,53 @@
-// Central export file for all constants
+/**
+ * Re-exports all constants for easier imports
+ *
+ * ## Business Perspective
+ *
+ * This file centralizes access to all business constants,
+ * ensuring consistency across the application. 💼
+ */
 
-// Export core constants - these are our base constants
-export * from "./coreConstants";
+// Re-export app constants
+export * from "./appConstants";
 
-// Export risk constants directly (no conflicts with other files)
+// Selectively re-export business constants to avoid conflicts
+export {
+  BUSINESS_CONSIDERATIONS,
+  BUSINESS_KEY_BENEFITS,
+  BUSINESS_VALUE_METRICS,
+} from "./businessConstants";
+
+// Selectively re-export compliance constants to avoid conflicts
+// Remove missing exports that are causing errors
+export {} from "./complianceConstants";
+
+// Re-export risk constants
 export * from "./riskConstants";
 
-// Export test IDs (no conflicts)
+// Re-export cost constants
+export * from "./costConstants";
+
+// Export test IDs directly as they don't have conflicts
 export * from "./testIds";
 
-// Named exports to avoid ambiguity
-import * as AppConstants from "./appConstants";
-import * as BusinessConstants from "./businessConstants";
-import * as UIConstants from "./uiConstants";
-
-// Re-export specific constants with namespaces to prevent conflicts
-export { AppConstants, BusinessConstants, UIConstants };
-
-// Export business impact types (removing BusinessKeyBenefits from here to avoid duplication)
+// Export business impact types properly
 export type {
   BusinessConsideration,
   BusinessConsiderations,
-} from "../types/businessImpact";
-
-// Re-export specific constants from businessImpact.ts
-// BusinessKeyBenefits is exported as both a value and its type will be inferred
-export {
-  BUSINESS_CONSIDERATIONS,
+  BusinessKeyBenefit,
   BusinessKeyBenefits,
 } from "../types/businessImpact";
 
-// Export the BUSINESS_IMPACT_CATEGORIES and RISK_LEVELS directly from riskConstants
-// to make them available at the top level since they're frequently used
+// Re-export these specific constants directly as they are frequently used
 export { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS } from "./riskConstants";
 
-// Export BUSINESS_IMPACT_ICONS directly from uiConstants
-export { BUSINESS_IMPACT_ICONS } from "./uiConstants";
+// Re-export UI constants from their correct location
+export {
+  BUSINESS_IMPACT_ICONS,
+  CIA_COMPONENT_ICONS,
+  SECURITY_ICONS,
+  SECURITY_LEVEL_COLORS,
+} from "./uiConstants";
+
+// Re-export specific constants from app constants that should remain there
+export { WIDGET_ICONS, WIDGET_TITLES } from "./appConstants";
