@@ -289,12 +289,12 @@ gantt
 #### 🌐 Reputational Impact
 
 ```mermaid
-xychart-beta
-    title "Reputational Impact Over Time"
-    x-axis [1, 2, 4, 8, 12, 24, 48, 72]
-    y-axis "Impact Severity" 1 -> 10
-    bar [1, 2, 4, 6, 8, 9, 8, 6]
-    title "Hours of Downtime"
+pie title Reputational Impact By Hours of Downtime
+    "1 hour (Low Impact)" : 1
+    "2-4 hours (Moderate Impact)" : 3
+    "8-12 hours (High Impact)" : 7
+    "24+ hours (Severe Impact)" : 9
+    "48+ hours (Critical Impact)" : 8
 ```
 
 | Impact Category     | Description                            | Recovery Timeline | Mitigation Strategy                                  |
@@ -426,11 +426,25 @@ mindmap
 #### Recovery Point Objectives (RPO)
 
 ```mermaid
-xychart-beta
-    title "Data Loss Tolerance by Component (Minutes)"
-    x-axis "User Assessments" "Settings" "Compliance Data" "Historical Reports" "Session Data"
-    y-axis 0 -> 240
-    bar [15, 30, 120, 240, 60]
+graph LR
+    subgraph "Data Loss Tolerance in Minutes"
+        UA["User Assessments: 15"]
+        US["User Settings: 30"]
+        CD["Compliance Data: 120"]
+        HR["Historical Reports: 240"]
+        SD["Session Data: 60"]
+    end
+
+    classDef critical fill:#ff6666,stroke:#333,stroke-width:1px,color:white;
+    classDef high fill:#ffaa66,stroke:#333,stroke-width:1px;
+    classDef medium fill:#ffff66,stroke:#333,stroke-width:1px;
+    classDef standard fill:#66ccff,stroke:#333,stroke-width:1px;
+    
+    class UA critical
+    class US high
+    class SD medium
+    class CD medium
+    class HR standard
 ```
 
 | Data Type          | Basic RPO  | Enhanced RPO | Critical RPO | Storage Mechanism                     |
@@ -1334,3 +1348,5 @@ sequenceDiagram
 ```
 
 #### 📝 Critical Incident Template
+````
+<copilot-edited-file>````
