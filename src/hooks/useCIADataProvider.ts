@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { SecurityLevel } from "../types/cia";
 import { CIAData } from "../types/cia-services";
+import { fetchCIAData } from "../utils/api"; // Import from API utils
 import logger from "../utils/logger";
 
 /**
@@ -18,13 +19,13 @@ export function useCIADataProvider() {
     const loadData = async () => {
       try {
         setIsLoading(true);
-        // Implementation would depend on your data source
-        // This is a placeholder
+        setError(null); // Clear any previous errors
+        // Use the imported fetchCIAData function
         const data = await fetchCIAData();
         setCIAData(data);
-        setError(null);
       } catch (err) {
         logger.error("Failed to load CIA data", err);
+        setCIAData(null); // Explicitly set to null on error
         setError(
           err instanceof Error
             ? err
@@ -74,20 +75,6 @@ export function useCIADataProvider() {
     },
     [ciaData]
   );
-
-  // Placeholder for data fetching
-  const fetchCIAData = async (): Promise<CIAData> => {
-    // Implementation would depend on your data source
-    // This is just a placeholder with proper types
-    return {
-      securityLevels: {
-        availability: "Low", // Match the SecurityLevel enum exactly
-        integrity: "Low", // Match the SecurityLevel enum exactly
-        confidentiality: "Low", // Match the SecurityLevel enum exactly
-      },
-      // Add other required fields based on your CIAData type
-    } as CIAData;
-  };
 
   return {
     ciaData,

@@ -27,11 +27,13 @@ export interface ComponentMetrics {
  * Represents impact metrics for analysis
  */
 export interface ImpactMetrics {
+  // Required properties
   financialImpact: string;
   operationalImpact: string;
   reputationalImpact: string;
   complianceImpact: string;
-  // Additional properties
+
+  // Optional properties (marked explicitly)
   securityLevel?: SecurityLevel;
   riskReduction?: string;
   description?: string;
@@ -237,6 +239,47 @@ export class SecurityMetricsService extends BaseService {
       confidentialityLevel
     );
 
+    // Calculate monitoring, resilience, and compliance scores
+    const monitoring = this.calculateMonitoringScore(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
+    const resilience = this.calculateResilienceScore(availabilityLevel);
+    const compliance = this.calculateComplianceScore(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
+
+    // Calculate security maturity
+    const securityMaturity = this.calculateSecurityMaturity(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
+
+    // Get impact metrics
+    const impactMetrics = this.calculateImpactMetrics(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
+
+    // Create component metrics
+    const availabilityMetrics = this.getComponentMetrics(
+      "availability",
+      availabilityLevel
+    );
+    const integrityMetrics = this.getComponentMetrics(
+      "integrity",
+      integrityLevel
+    );
+    const confidentialityMetrics = this.getComponentMetrics(
+      "confidentiality",
+      confidentialityLevel
+    );
+
     return {
       overallScore: score,
       score, // Alias for backward compatibility
@@ -246,36 +289,15 @@ export class SecurityMetricsService extends BaseService {
       totalOpex,
       totalCost,
       riskReduction: `${riskReduction}%`,
-      // Add dummy values for required properties
-      availability: {
-        level: availabilityLevel,
-        score: this.getSecurityLevelValue(availabilityLevel) * 25,
-        description: this.getSecurityLevelDescription(availabilityLevel),
-        recommendations: [],
-      },
-      integrity: {
-        level: integrityLevel,
-        score: this.getSecurityLevelValue(integrityLevel) * 25,
-        description: this.getSecurityLevelDescription(integrityLevel),
-        recommendations: [],
-      },
-      confidentiality: {
-        level: confidentialityLevel,
-        score: this.getSecurityLevelValue(confidentialityLevel) * 25,
-        description: this.getSecurityLevelDescription(confidentialityLevel),
-        recommendations: [],
-      },
-      impactMetrics: {
-        financialImpact: "Not calculated",
-        operationalImpact: "Not calculated",
-        reputationalImpact: "Not calculated",
-        complianceImpact: "Not calculated",
-      },
-      monitoring: 0,
-      resilience: 0,
-      compliance: 0,
-      benchmarkScore: 0,
-      securityMaturity: "",
+      availability: availabilityMetrics,
+      integrity: integrityMetrics,
+      confidentiality: confidentialityMetrics,
+      impactMetrics,
+      monitoring,
+      resilience,
+      compliance,
+      benchmarkScore: 75, // Industry benchmark (default)
+      securityMaturity,
     };
   }
 
@@ -369,6 +391,137 @@ export class SecurityMetricsService extends BaseService {
       reputationalImpact: "Impact not calculated",
       complianceImpact: "Impact not calculated",
     };
+  }
+
+  /**
+   * Calculate impact metrics based on security levels
+   *
+   * @param availabilityLevel - Availability security level
+   * @param integrityLevel - Integrity security level
+   * @param confidentialityLevel - Confidentiality security level
+   * @returns Impact metrics
+   */
+  private calculateImpactMetrics(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): ImpactMetrics {
+    // Calculate financial impact based on security levels
+    const financialImpactLevel = this.calculateFinancialImpactLevel(
+      availabilityLevel,
+      confidentialityLevel
+    );
+
+    // Calculate operational impact based on availability and integrity
+    const operationalImpactLevel = this.calculateOperationalImpactLevel(
+      availabilityLevel,
+      integrityLevel
+    );
+
+    // Calculate reputational impact primarily based on confidentiality
+    const reputationalImpactLevel = this.calculateReputationalImpactLevel(
+      confidentialityLevel,
+      integrityLevel
+    );
+
+    // Calculate compliance impact based on all components
+    const complianceImpactLevel = this.calculateComplianceImpactLevel(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
+
+    return {
+      financialImpact: financialImpactLevel,
+      operationalImpact: operationalImpactLevel,
+      reputationalImpact: reputationalImpactLevel,
+      complianceImpact: complianceImpactLevel,
+      securityLevel: this.calculateAverageSecurityLevel([
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel,
+      ]),
+      riskReduction: `${this.calculateRiskReduction(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      )}%`,
+    };
+  }
+
+  /**
+   * Calculate financial impact level
+   */
+  private calculateFinancialImpactLevel(
+    availabilityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): string {
+    const availValue = this.getSecurityLevelValue(availabilityLevel);
+    const confValue = this.getSecurityLevelValue(confidentialityLevel);
+    const avgValue = (availValue + confValue) / 2;
+
+    if (avgValue < 1) return "Severe financial impact risk";
+    if (avgValue < 2) return "High financial impact risk";
+    if (avgValue < 3) return "Moderate financial impact risk";
+    if (avgValue < 4) return "Low financial impact risk";
+    return "Minimal financial impact risk";
+  }
+
+  /**
+   * Calculate operational impact level
+   */
+  private calculateOperationalImpactLevel(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel
+  ): string {
+    const availValue = this.getSecurityLevelValue(availabilityLevel);
+    const integValue = this.getSecurityLevelValue(integrityLevel);
+    const avgValue = (availValue + integValue) / 2;
+
+    if (avgValue < 1) return "Severe operational disruption risk";
+    if (avgValue < 2) return "High operational disruption risk";
+    if (avgValue < 3) return "Moderate operational disruption risk";
+    if (avgValue < 4) return "Low operational disruption risk";
+    return "Minimal operational disruption risk";
+  }
+
+  /**
+   * Calculate reputational impact level
+   */
+  private calculateReputationalImpactLevel(
+    confidentialityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel
+  ): string {
+    const confValue = this.getSecurityLevelValue(confidentialityLevel);
+    const integValue = this.getSecurityLevelValue(integrityLevel);
+    // Confidentiality weighted more heavily for reputation
+    const avgValue = confValue * 0.7 + integValue * 0.3;
+
+    if (avgValue < 1) return "Severe reputational damage risk";
+    if (avgValue < 2) return "High reputational damage risk";
+    if (avgValue < 3) return "Moderate reputational damage risk";
+    if (avgValue < 4) return "Low reputational damage risk";
+    return "Minimal reputational damage risk";
+  }
+
+  /**
+   * Calculate compliance impact level
+   */
+  private calculateComplianceImpactLevel(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): string {
+    const availValue = this.getSecurityLevelValue(availabilityLevel);
+    const integValue = this.getSecurityLevelValue(integrityLevel);
+    const confValue = this.getSecurityLevelValue(confidentialityLevel);
+    const avgValue = (availValue + integValue + confValue) / 3;
+
+    if (avgValue < 1) return "Severe compliance violation risk";
+    if (avgValue < 2) return "High compliance violation risk";
+    if (avgValue < 3) return "Moderate compliance violation risk";
+    if (avgValue < 4) return "Low compliance violation risk";
+    return "Minimal compliance violation risk";
   }
 
   /**
@@ -566,6 +719,153 @@ export class SecurityMetricsService extends BaseService {
     // Convert to score (0-100)
     // Max security level value is 4 (Very High)
     return Math.round((avgValue / 4) * 100);
+  }
+
+  /**
+   * Calculate monitoring score based on security levels
+   */
+  private calculateMonitoringScore(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): number {
+    const baseScore =
+      (this.securityLevelToPercentage(availabilityLevel) +
+        this.securityLevelToPercentage(integrityLevel) +
+        this.securityLevelToPercentage(confidentialityLevel)) /
+      3;
+
+    // Adjust based on level combinations
+    if (this.getSecurityLevelValue(confidentialityLevel) > 2) {
+      return Math.min(95, baseScore + 10);
+    }
+
+    return baseScore;
+  }
+
+  /**
+   * Calculate resilience score based on availability level
+   */
+  private calculateResilienceScore(availabilityLevel: SecurityLevel): number {
+    return Math.min(95, this.securityLevelToPercentage(availabilityLevel) + 5);
+  }
+
+  /**
+   * Calculate compliance score based on security levels
+   */
+  private calculateComplianceScore(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): number {
+    const baseScore =
+      this.securityLevelToPercentage(availabilityLevel) * 0.3 +
+      this.securityLevelToPercentage(integrityLevel) * 0.3 +
+      this.securityLevelToPercentage(confidentialityLevel) * 0.4;
+
+    // Adjust for compliance requirements
+    if (this.getSecurityLevelValue(confidentialityLevel) < 2) {
+      return Math.max(10, baseScore - 15);
+    }
+
+    return baseScore;
+  }
+
+  /**
+   * Calculate security maturity based on security levels
+   */
+  private calculateSecurityMaturity(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): string {
+    const overallScore = this.calculateOverallScore(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
+
+    if (overallScore < 20) return "Initial";
+    if (overallScore < 40) return "Developing";
+    if (overallScore < 60) return "Defined";
+    if (overallScore < 80) return "Managed";
+    return "Optimized";
+  }
+
+  /**
+   * Calculate overall score based on security levels and other metrics
+   */
+  private calculateOverallScore(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): number {
+    const scores = [
+      this.securityLevelToPercentage(availabilityLevel),
+      this.securityLevelToPercentage(integrityLevel),
+      this.securityLevelToPercentage(confidentialityLevel),
+      this.calculateMonitoringScore(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      ),
+      this.calculateResilienceScore(availabilityLevel),
+      this.calculateComplianceScore(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      ),
+    ];
+
+    return Math.round(
+      scores.reduce((sum, score) => sum + score, 0) / scores.length
+    );
+  }
+
+  /**
+   * Calculate average security level from an array of security levels
+   */
+  private calculateAverageSecurityLevel(
+    levels: SecurityLevel[]
+  ): SecurityLevel {
+    const sum = levels.reduce(
+      (total, level) => total + this.getSecurityLevelValue(level),
+      0
+    );
+    const avg = sum / levels.length;
+
+    if (avg < 0.5) return "None";
+    if (avg < 1.5) return "Low";
+    if (avg < 2.5) return "Moderate";
+    if (avg < 3.5) return "High";
+    return "Very High";
+  }
+
+  /**
+   * Convert security level to percentage value (0-100)
+   */
+  private securityLevelToPercentage(level: SecurityLevel): number {
+    switch (level) {
+      case "None":
+        return 10;
+      case "Low":
+        return 30;
+      case "Moderate":
+        return 50;
+      case "High":
+        return 75;
+      case "Very High":
+        return 95;
+      default:
+        return 0;
+    }
+  }
+
+  /**
+   * Get security level value (0-4)
+   */
+  protected getSecurityLevelValue(level: SecurityLevel): number {
+    return securityLevelToValue(level);
   }
 
   /**
@@ -982,60 +1282,15 @@ export const getSecurityMetrics = async (
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel
 ): Promise<SecurityMetrics> => {
-  // This would normally fetch from an API, but for now we'll return mock data
-  const availScore = securityLevelToPercentage(availabilityLevel);
-  const integScore = securityLevelToPercentage(integrityLevel);
-  const confScore = securityLevelToPercentage(confidentialityLevel);
+  // Create a service instance to leverage its calculations
+  const service = createSecurityMetricsService();
 
-  return {
-    // Create ComponentMetrics objects instead of just numbers
-    confidentiality: {
-      level: confidentialityLevel,
-      score: confScore,
-      description: `Confidentiality level: ${confidentialityLevel}`,
-      recommendations: [],
-    },
-    integrity: {
-      level: integrityLevel,
-      score: integScore,
-      description: `Integrity level: ${integrityLevel}`,
-      recommendations: [],
-    },
-    availability: {
-      level: availabilityLevel,
-      score: availScore,
-      description: `Availability level: ${availabilityLevel}`,
-      recommendations: [],
-    },
-    monitoring: calculateMonitoringScore(
-      availabilityLevel,
-      integrityLevel,
-      confidentialityLevel
-    ),
-    resilience: calculateResilienceScore(availabilityLevel),
-    compliance: calculateComplianceScore(
-      availabilityLevel,
-      integrityLevel,
-      confidentialityLevel
-    ),
-    overallScore: calculateOverallScore(
-      availabilityLevel,
-      integrityLevel,
-      confidentialityLevel
-    ),
-    benchmarkScore: 75, // Industry benchmark (fixed for now)
-    securityMaturity: calculateSecurityMaturity(
-      availabilityLevel,
-      integrityLevel,
-      confidentialityLevel
-    ),
-    impactMetrics: {
-      financialImpact: "Impact not calculated",
-      operationalImpact: "Impact not calculated",
-      reputationalImpact: "Impact not calculated",
-      complianceImpact: "Impact not calculated",
-    },
-  };
+  // Use the service to calculate comprehensive metrics
+  return service.getSecurityMetrics(
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel
+  );
 };
 
 /**

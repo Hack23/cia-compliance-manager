@@ -906,4 +906,227 @@ describe("SecurityMetricsService", () => {
       }
     });
   });
+
+  // Add new test suite for global API functions
+  describe("Global API functions", () => {
+    describe("getCostEstimation", () => {
+      it("returns cost estimation data based on security levels", async () => {
+        const { getCostEstimation } = await import("./securityMetricsService");
+        const costEstimation = await getCostEstimation(
+          "Moderate",
+          "Moderate",
+          "Moderate"
+        );
+
+        // Verify structure
+        expect(costEstimation).toBeDefined();
+        expect(costEstimation.totalImplementationCost).toBeDefined();
+        expect(costEstimation.annualMaintenanceCost).toBeDefined();
+        expect(costEstimation.costBreakdown).toBeDefined();
+
+        // Verify cost breakdown components
+        expect(costEstimation.costBreakdown.availability).toBeDefined();
+        expect(costEstimation.costBreakdown.integrity).toBeDefined();
+        expect(costEstimation.costBreakdown.confidentiality).toBeDefined();
+
+        // Verify ROI data
+        expect(costEstimation.roi).toBeDefined();
+        expect(costEstimation.roi.paybackPeriod).toBeDefined();
+        expect(costEstimation.roi.riskReduction).toBeDefined();
+        expect(Array.isArray(costEstimation.roi.businessBenefits)).toBe(true);
+      });
+
+      TEST_SECURITY_LEVELS.forEach((level) => {
+        it(`returns valid cost estimation for uniform ${level} security level`, async () => {
+          const { getCostEstimation } = await import(
+            "./securityMetricsService"
+          );
+          const costEstimation = await getCostEstimation(level, level, level);
+
+          // Verify basic structure is consistent across all levels
+          expect(costEstimation).toHaveProperty("totalImplementationCost");
+          expect(costEstimation).toHaveProperty("annualMaintenanceCost");
+          expect(costEstimation).toHaveProperty("costBreakdown");
+          expect(costEstimation).toHaveProperty("roi");
+        });
+      });
+    });
+
+    describe("getValueCreationMetrics", () => {
+      it("returns value creation metrics based on security levels", async () => {
+        const { getValueCreationMetrics } = await import(
+          "./securityMetricsService"
+        );
+        const valueMetrics = await getValueCreationMetrics(
+          "Moderate",
+          "Moderate",
+          "Moderate"
+        );
+
+        // Verify structure
+        expect(valueMetrics).toBeDefined();
+        expect(valueMetrics.roi).toBeDefined();
+        expect(valueMetrics.riskReduction).toBeDefined();
+        expect(Array.isArray(valueMetrics.valuePoints)).toBe(true);
+        expect(valueMetrics.businessImpacts).toBeDefined();
+
+        // Verify value points structure
+        if (valueMetrics.valuePoints.length > 0) {
+          expect(valueMetrics.valuePoints[0]).toHaveProperty("title");
+          expect(valueMetrics.valuePoints[0]).toHaveProperty("score");
+          expect(valueMetrics.valuePoints[0]).toHaveProperty("description");
+        }
+
+        // Verify business impacts
+        expect(valueMetrics.businessImpacts).toHaveProperty(
+          "revenueProtection"
+        );
+        expect(valueMetrics.businessImpacts).toHaveProperty("costAvoidance");
+        expect(valueMetrics.businessImpacts).toHaveProperty(
+          "productivityImprovement"
+        );
+      });
+
+      TEST_SECURITY_LEVELS.forEach((level) => {
+        it(`returns valid value metrics for uniform ${level} security level`, async () => {
+          const { getValueCreationMetrics } = await import(
+            "./securityMetricsService"
+          );
+          const valueMetrics = await getValueCreationMetrics(
+            level,
+            level,
+            level
+          );
+
+          // Verify basic structure is consistent across all levels
+          expect(valueMetrics).toHaveProperty("roi");
+          expect(valueMetrics).toHaveProperty("riskReduction");
+          expect(valueMetrics).toHaveProperty("valuePoints");
+          expect(valueMetrics).toHaveProperty("businessImpacts");
+        });
+      });
+    });
+
+    describe("getTechnicalDetails", () => {
+      it("returns technical details based on security levels", async () => {
+        const { getTechnicalDetails } = await import(
+          "./securityMetricsService"
+        );
+        const technicalDetails = await getTechnicalDetails(
+          "Moderate",
+          "Moderate",
+          "Moderate"
+        );
+
+        // Verify structure
+        expect(technicalDetails).toBeDefined();
+        expect(technicalDetails.architecture).toBeDefined();
+        expect(technicalDetails.technologies).toBeDefined();
+        expect(technicalDetails.implementation).toBeDefined();
+
+        // Verify architecture components
+        expect(technicalDetails.architecture).toHaveProperty("description");
+        expect(Array.isArray(technicalDetails.architecture.components)).toBe(
+          true
+        );
+        expect(Array.isArray(technicalDetails.architecture.diagrams)).toBe(
+          true
+        );
+
+        // Verify technologies
+        expect(technicalDetails.technologies).toHaveProperty("availability");
+        expect(technicalDetails.technologies).toHaveProperty("integrity");
+        expect(technicalDetails.technologies).toHaveProperty("confidentiality");
+
+        // Verify implementation details
+        expect(technicalDetails.implementation).toHaveProperty("complexity");
+        expect(technicalDetails.implementation).toHaveProperty("timeline");
+        expect(
+          Array.isArray(technicalDetails.implementation.keyMilestones)
+        ).toBe(true);
+        expect(Array.isArray(technicalDetails.implementation.resources)).toBe(
+          true
+        );
+      });
+
+      it("returns different technical details for different security levels", async () => {
+        const { getTechnicalDetails } = await import(
+          "./securityMetricsService"
+        );
+        const lowDetails = await getTechnicalDetails("Low", "Low", "Low");
+        const highDetails = await getTechnicalDetails("High", "High", "High");
+
+        // Compare implementation complexity
+        expect(lowDetails.implementation.complexity).not.toBe(
+          highDetails.implementation.complexity
+        );
+        // Compare timelines
+        expect(lowDetails.implementation.timeline).not.toBe(
+          highDetails.implementation.timeline
+        );
+      });
+    });
+
+    describe("getSecurityResources", () => {
+      it("returns security resources based on security levels", async () => {
+        const { getSecurityResources } = await import(
+          "./securityMetricsService"
+        );
+        const resources = await getSecurityResources(
+          "Moderate",
+          "Moderate",
+          "Moderate"
+        );
+
+        // Verify structure
+        expect(resources).toBeDefined();
+        expect(Array.isArray(resources.standards)).toBe(true);
+        expect(Array.isArray(resources.tools)).toBe(true);
+        expect(Array.isArray(resources.guidance)).toBe(true);
+        expect(Array.isArray(resources.training)).toBe(true);
+
+        // Verify standards structure
+        if (resources.standards.length > 0) {
+          expect(resources.standards[0]).toHaveProperty("name");
+          expect(resources.standards[0]).toHaveProperty("relevance");
+          expect(resources.standards[0]).toHaveProperty("link");
+        }
+
+        // Verify tools structure
+        if (resources.tools.length > 0) {
+          expect(resources.tools[0]).toHaveProperty("category");
+          expect(Array.isArray(resources.tools[0].items)).toBe(true);
+        }
+
+        // Verify guidance structure
+        if (resources.guidance.length > 0) {
+          expect(resources.guidance[0]).toHaveProperty("title");
+          expect(resources.guidance[0]).toHaveProperty("type");
+          expect(resources.guidance[0]).toHaveProperty("link");
+        }
+
+        // Verify training structure
+        if (resources.training.length > 0) {
+          expect(resources.training[0]).toHaveProperty("title");
+          expect(resources.training[0]).toHaveProperty("audience");
+          expect(resources.training[0]).toHaveProperty("duration");
+        }
+      });
+
+      TEST_SECURITY_LEVELS.forEach((level) => {
+        it(`returns valid security resources for uniform ${level} security level`, async () => {
+          const { getSecurityResources } = await import(
+            "./securityMetricsService"
+          );
+          const resources = await getSecurityResources(level, level, level);
+
+          // Verify basic structure is consistent across all levels
+          expect(resources).toHaveProperty("standards");
+          expect(resources).toHaveProperty("tools");
+          expect(resources).toHaveProperty("guidance");
+          expect(resources).toHaveProperty("training");
+        });
+      });
+    });
+  });
 });
