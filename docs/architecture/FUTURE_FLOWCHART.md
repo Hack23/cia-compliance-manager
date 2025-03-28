@@ -1,6 +1,6 @@
-# CIA Compliance Manager Future Flowcharts
+# 🔄 Future CIA Compliance Manager Process Flows
 
-This document illustrates key process flows and decision trees planned for the future evolution of the CIA Compliance Manager, focusing on context-aware assessment, machine learning enhancements, and integration capabilities.
+This document outlines the future process flows for the CIA Compliance Manager as it evolves into a context-aware security posture management platform. These enhanced workflows incorporate organizational context, machine learning, and continuous adaptation to provide more tailored and effective security recommendations.
 
 ## 📚 Related Architecture Documentation
 
@@ -23,260 +23,549 @@ This document illustrates key process flows and decision trees planned for the f
 
 </div>
 
-## Context-Aware Security Assessment Flow
+## 🧠 Context-Aware Security Assessment Flow
 
-**💼 Business Focus:** Maps the enhanced decision process that incorporates organizational context parameters to deliver tailored security recommendations.
+**💼 Business Focus:** Shows how organizational context influences security assessments to produce more tailored, implementable security guidance.
 
-**👤 User Experience Focus:** Shows how the assessment experience will evolve to collect contextual data and use it to generate organization-specific guidance.
+**🔒 Security Focus:** Illustrates how security assessments adapt to specific organizational contexts to deliver more effective security controls.
 
 ```mermaid
 flowchart TD
-    A[Start Assessment] --> B[Collect Organization Context]
-    B --> C{Context Type}
+    A[Start Assessment] --> B[Context Collection]
+    
+    B --> C1[Industry Identification]
+    B --> C2[Organization Size]
+    B --> C3[Geographic Locations]
+    B --> C4[Business Functions]
+    B --> C5[Data Classifications]
+    B --> C6[Technology Stack]
+    
+    C1 & C2 & C3 & C4 & C5 & C6 --> D[Context Analysis Engine]
+    D --> E[Baseline Security Profile]
+    
+    E --> F1[Context-Calibrated Confidentiality]
+    E --> F2[Context-Calibrated Integrity]
+    E --> F3[Context-Calibrated Availability]
+    
+    F1 & F2 & F3 --> G[ML-Enhanced Security Evaluation]
+    
+    G --> H1[Industry-Specific Risks]
+    G --> H2[Size-Appropriate Controls]
+    G --> H3[Geography-Based Requirements]
+    G --> H4[Function-Optimized Protection]
+    
+    H1 & H2 & H3 & H4 --> I[Adaptive Security Profile]
+    
+    I --> J[Business-Aligned Security Recommendations]
+    J --> K[Prioritized Implementation Roadmap]
+    K --> L[Continuous Monitoring & Feedback]
+    L --> M{Context Change?}
+    
+    M -->|Yes| D
+    M -->|No| N[Optimization Refinement]
+    N --> L
 
-    C -->|Industry| D1[Determine Industry-Specific Requirements]
-    C -->|Size & Maturity| D2[Calculate Organizational Capacity]
-    C -->|Data Classification| D3[Determine Data Protection Needs]
-    C -->|Regulatory Environment| D4[Map Compliance Requirements]
-    C -->|Business Processes| D5[Analyze Process Criticality]
-    C -->|Technology Stack| D6[Evaluate Technical Environment]
+    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef context fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef params fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    classDef engine fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef security fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef ml fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+    classDef output fill:#f9e4b7,stroke:#333,stroke-width:1px,color:black
+    classDef decision fill:#ff9966,stroke:#333,stroke-width:1px,color:black
+    classDef monitoring fill:#66cccc,stroke:#333,stroke-width:1px,color:black
 
-    D1 & D2 & D3 & D4 & D5 & D6 --> E[Create Context-Aware Profile]
-
-    E --> F[Calculate Context-Adapted Security Levels]
-    F --> G[Generate Tailored Security Recommendations]
-    G --> H[Determine Business-Specific Impact]
-    H --> I[Create Implementation Roadmap]
-
-    I --> J{Implementation Decision}
-    J -->|Execute| K[Generate Implementation Plan]
-    J -->|Adjust| E
-    J -->|Report Only| L[Generate Security Report]
-
-    K & L --> M[End Assessment]
-
-    classDef start fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef context fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef profile fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
-    classDef implementation fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef report fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef end fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-
-    class A,M start,end
-    class B,C,D1,D2,D3,D4,D5,D6 context
-    class E,F,G,H profile
-    class J decision
-    class I,K implementation
-    class L report
+    class A start
+    class B,D,E context
+    class C1,C2,C3,C4,C5,C6 params
+    class F1,F2,F3,I security
+    class G,H1,H2,H3,H4 ml
+    class J,K output
+    class M decision
+    class L,N monitoring
 ```
 
-## Machine Learning-Enhanced Recommendation Flow
+## 🤖 ML-Enhanced Recommendation Process
 
-**🧠 Intelligence Focus:** Illustrates how the recommendation engine will be enhanced with machine learning to deliver increasingly accurate and relevant recommendations over time.
+**🧠 ML Focus:** Shows how machine learning enhances the recommendation process by incorporating historical data, implementation outcomes, and patterns across organizations.
 
-**🔄 Learning Focus:** Shows the continuous learning loop that improves recommendations based on implementation outcomes and user feedback.
+**📈 Learning Focus:** Illustrates the feedback loops and continuous improvement mechanisms that power the recommendation engine.
 
 ```mermaid
 flowchart TD
-    A[Assessment Data] --> B[Context Parameters]
-    A --> C[Historical Patterns]
-    B & C --> D[ML Recommendation Engine]
+    A[Security Assessment Request] --> B[Context Parameters]
+    
+    subgraph "Context Processing"
+        B --> C[Context Analysis Engine]
+        C --> D[Pattern Matching Algorithm]
+        D --> E[Similar Organization Identification]
+    end
+    
+    subgraph "ML Recommendation Engine"
+        E --> F[Historical Success Pattern Analysis]
+        F --> G[Control Effectiveness Prediction]
+        G --> H[Implementation Difficulty Assessment]
+        H --> I[Resource Requirement Estimation]
+        I --> J[ML-Enhanced Recommendations]
+    end
+    
+    J --> K[Personalized Security Controls]
+    K --> L[Prioritized Implementation Plan]
+    L --> M[Business Case Generation]
+    
+    M --> N[Implementation Process]
+    N --> O[Implementation Outcome Tracking]
+    O --> P[Effectiveness Measurement]
+    
+    P --> Q{Effective Implementation?}
+    
+    Q -->|Yes| R1[Positive Feedback Loop]
+    Q -->|Partial| R2[Adjustment Feedback]
+    Q -->|No| R3[Negative Feedback Loop]
+    
+    R1 --> S[Training Data Enhancement]
+    R2 --> S
+    R3 --> S
+    
+    S --> T[Model Retraining]
+    T --> U[Model Performance Evaluation]
+    U --> V{Performance Improved?}
+    
+    V -->|Yes| W[Deploy Updated Model]
+    V -->|No| X[Model Refinement]
+    X --> T
+    
+    W --> F
 
-    D --> E{Generate Recommendations}
-
-    E -->|Primary Recommendations| F[Critical Controls]
-    E -->|Secondary Recommendations| G[Supporting Controls]
-    E -->|Contextual Guidance| H[Implementation Guidance]
-    E -->|Cost-Benefit Analysis| I[ROI Projections]
-
-    F & G & H & I --> J[Present to User]
-
-    J --> K{User Action}
-    K -->|Implementation| L[Capture Implementation Details]
-    K -->|Feedback| M[Collect User Feedback]
-    K -->|Rejection| N[Record Rejection Reason]
-
-    L & M & N --> O[Update Training Data]
-    O --> P[Retrain Models]
-    P --> D
-
-    classDef data fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef context fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
     classDef ml fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef recommend fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef user fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef feedback fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
-    classDef training fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-
-    class A,B,C data
-    class D,P ml
-    class E,F,G,H,I recommend
-    class J,K user
-    class L,M,N feedback
-    class O training
+    classDef output fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef implement fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    classDef feedback fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+    classDef retrain fill:#f9e4b7,stroke:#333,stroke-width:1px,color:black
+    classDef decision fill:#ff9966,stroke:#333,stroke-width:1px,color:black
+    
+    class A,B start
+    class C,D,E context
+    class F,G,H,I,J ml
+    class K,L,M output
+    class N,O,P implement
+    class Q,V decision
+    class R1,R2,R3,S feedback
+    class T,U,W,X retrain
 ```
 
-## Integration Ecosystem Workflow
+## 🔄 Continuous Security Posture Management Flow
 
-**🔌 Integration Focus:** Shows how the CIA Compliance Manager will interact with external tools and systems to create a comprehensive security management ecosystem.
+**🔄 Process Focus:** Demonstrates the shift from point-in-time assessments to continuous, adaptive security posture management.
 
-**📊 Data Flow Focus:** Illustrates the bidirectional data flows between the CIA Compliance Manager and other enterprise systems.
+**📊 Monitoring Focus:** Shows how ongoing monitoring, context changes, and feedback create a dynamic security approach.
 
 ```mermaid
 flowchart TD
-    A[CIA Compliance Manager] --> B{Integration Hub}
+    A[Initial Security Assessment] --> B[Baseline Security Profile]
+    B --> C[Context-Aware Security Implementation]
+    
+    C --> D[Control Implementation]
+    D --> E[Continuous Monitoring]
+    
+    subgraph "Monitoring Components"
+        E --> F1[Context Change Detection]
+        E --> F2[Threat Intelligence Integration]
+        E --> F3[Implementation Effectiveness]
+        E --> F4[Compliance Status Tracking]
+    end
+    
+    F1 --> G{Significant Context Change?}
+    G -->|Yes| H1[Context Re-evaluation]
+    G -->|No| E
+    
+    F2 --> I{New Threat Identified?}
+    I -->|Yes| H2[Threat Impact Analysis]
+    I -->|No| E
+    
+    F3 --> J{Control Effectiveness Issue?}
+    J -->|Yes| H3[Control Refinement]
+    J -->|No| E
+    
+    F4 --> K{Compliance Gap?}
+    K -->|Yes| H4[Compliance Remediation]
+    K -->|No| E
+    
+    H1 --> L[Security Profile Adaptation]
+    H2 --> L
+    H3 --> L
+    H4 --> L
+    
+    L --> M[Updated Security Recommendations]
+    M --> N[Implementation Planning]
+    N --> O[Continuous Improvement]
+    O --> D
 
-    B -->|Security Tools| C[SIEM/SOAR Integration]
-    B -->|GRC Tools| D[Compliance Platform Integration]
-    B -->|ITSM| E[Service Management Integration]
-    B -->|DevSecOps| F[CICD Pipeline Integration]
-    B -->|Asset Management| G[CMDB Integration]
-    B -->|Threat Intel| H[Threat Feed Integration]
-
-    C -->|Security Events| C1[Validate Control Effectiveness]
-    C -->|Security Alerts| C2[Update Risk Assessment]
-
-    D -->|Compliance Requirements| D1[Map to Security Controls]
-    D -->|Audit Evidence| D2[Validate Control Implementation]
-
-    E -->|Implementation Tasks| E1[Create Security Tickets]
-    E -->|Status Updates| E2[Track Implementation Progress]
-
-    F -->|Security Gates| F1[Enforce Security Requirements]
-    F -->|Test Results| F2[Update Control Effectiveness]
-
-    G -->|Asset Inventory| G1[Identify Protection Scope]
-    G -->|System Relationships| G2[Map Dependencies]
-
-    H -->|Threat Intelligence| H1[Update Risk Factors]
-    H -->|Vulnerabilities| H2[Prioritize Controls]
-
-    C1 & C2 & D1 & D2 & E1 & E2 & F1 & F2 & G1 & G2 & H1 & H2 --> I[Update Security Posture]
-    I --> A
-
-    classDef core fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef hub fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef integration fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef data fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef update fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
-
-    class A,I core
-    class B hub
-    class C,D,E,F,G,H integration
-    class C1,C2,D1,D2,E1,E2,F1,F2,G1,G2,H1,H2 data
+    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef profile fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef implement fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef monitor fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+    classDef monTypes fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    classDef decision fill:#ff9966,stroke:#333,stroke-width:1px,color:black
+    classDef analysis fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef update fill:#f9e4b7,stroke:#333,stroke-width:1px,color:black
+    
+    class A start
+    class B,L profile
+    class C,D,N,O implement
+    class E monitor
+    class F1,F2,F3,F4 monTypes
+    class G,I,J,K decision
+    class H1,H2,H3,H4 analysis
+    class M update
 ```
 
-## Continuous Compliance Monitoring Process
+## 🌐 Multi-Framework Compliance Mapping Process
 
-**📋 Compliance Focus:** Illustrates how the system will evolve to provide continuous compliance monitoring rather than point-in-time assessments.
+**📋 Compliance Focus:** Illustrates how security controls are dynamically mapped to multiple compliance frameworks based on organizational context.
 
-**🔄 Operational Focus:** Shows the automated monitoring and detection processes that maintain ongoing compliance visibility.
+**🔄 Regulatory Focus:** Shows how the system adapts to changing regulatory requirements and maintains continuous compliance.
 
 ```mermaid
 flowchart TD
-    A[Compliance Framework Mapping] --> B[Control Implementation Baseline]
-    B --> C[Deploy Continuous Monitors]
+    A[Security Profile] --> B[Compliance Context Analysis]
+    
+    B --> C1[Industry Requirements]
+    B --> C2[Jurisdictional Requirements]
+    B --> C3[Data Classification Requirements]
+    B --> C4[Business Function Requirements]
+    
+    C1 & C2 & C3 & C4 --> D[Applicable Framework Identification]
+    
+    D --> E{Multiple Frameworks?}
+    
+    E -->|Yes| F1[Multi-Framework Reconciliation]
+    E -->|No| F2[Single Framework Mapping]
+    
+    F1 --> G1[Common Control Identification]
+    F1 --> G2[Framework-Specific Controls]
+    F1 --> G3[Control Hierarchy Analysis]
+    
+    F2 --> G4[Direct Control Mapping]
+    
+    G1 & G2 & G3 & G4 --> H[Security Control to Framework Mapping]
+    
+    H --> I[Compliance Gap Analysis]
+    I --> J{Gaps Identified?}
+    
+    J -->|Yes| K1[Gap Remediation Recommendations]
+    J -->|No| K2[Compliance Confirmation]
+    
+    K1 --> L[Implementation Planning]
+    K2 --> M[Compliance Documentation]
+    
+    L & M --> N[Continuous Compliance Monitoring]
+    N --> O[Regulatory Change Detection]
+    
+    O --> P{Regulatory Change?}
+    P -->|Yes| Q[Impact Analysis]
+    P -->|No| N
+    
+    Q --> R{Significant Impact?}
+    R -->|Yes| B
+    R -->|No| S[Minor Compliance Adjustment]
+    S --> N
 
-    C --> D{Monitor Types}
-    D -->|Control Status| E1[Control Status Monitor]
-    D -->|Configuration| E2[Configuration Drift Monitor]
-    D -->|Updates| E3[Regulatory Update Monitor]
-    D -->|Evidence| E4[Evidence Collection Monitor]
-
-    E1 --> F1[Control Effectiveness]
-    E2 --> F2[Configuration Compliance]
-    E3 --> F3[Regulatory Gap Analysis]
-    E4 --> F4[Evidence Repository]
-
-    F1 & F2 & F3 & F4 --> G[Real-time Compliance Dashboard]
-    G --> H{Compliance Status}
-
-    H -->|Compliant| I1[Generate Compliance Reports]
-    H -->|Gaps Detected| I2[Create Remediation Tasks]
-
-    I1 --> J1[Schedule Next Assessment]
-    I2 --> J2[Implement Remediation]
-
-    J1 --> K[Continuous Improvement]
-    J2 --> G
-
-    classDef setup fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef monitor fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef data fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef dashboard fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
-    classDef action fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef improve fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-
-    class A,B,C setup
-    class D,E1,E2,E3,E4 monitor
-    class F1,F2,F3,F4 data
-    class G dashboard
-    class H decision
-    class I1,I2,J1,J2 action
-    class K improve
+    classDef profile fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef context fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef reqs fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    classDef framework fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef mapping fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef analysis fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+    classDef output fill:#f9e4b7,stroke:#333,stroke-width:1px,color:black
+    classDef decision fill:#ff9966,stroke:#333,stroke-width:1px,color:black
+    classDef monitoring fill:#66cccc,stroke:#333,stroke-width:1px,color:black
+    
+    class A profile
+    class B context
+    class C1,C2,C3,C4 reqs
+    class D,E,F1,F2 framework
+    class G1,G2,G3,G4,H mapping
+    class I,J,Q,R analysis
+    class K1,K2,L,M,S output
+    class N,O,P monitoring
 ```
 
-## Adaptive Security Decision Tree
+## 💰 Advanced Business Impact Analysis Flow
 
-**🔄 Adaptability Focus:** Shows the decision logic that will adjust security recommendations based on changing business and threat landscapes.
+**💼 Business Focus:** Shows how security decisions are connected to specific business outcomes and financial metrics.
 
-**🧠 Decision Making Focus:** Illustrates the complex decision matrix that drives adaptive security recommendations.
+**📊 ROI Focus:** Illustrates the process of quantifying security investments in business-relevant terms.
 
 ```mermaid
 flowchart TD
-    A[Detect Change Trigger] --> B{Change Type}
+    A[Security Profile] --> B[Business Context Collection]
+    
+    B --> C1[Industry KPIs]
+    B --> C2[Revenue Streams]
+    B --> C3[Business Processes]
+    B --> C4[Data Value Assessment]
+    B --> C5[Stakeholder Priorities]
+    
+    C1 & C2 & C3 & C4 & C5 --> D[Business Context Engine]
+    
+    D --> E1[Financial Impact Modeling]
+    D --> E2[Operational Impact Analysis]
+    D --> E3[Reputational Impact Analysis]
+    D --> E4[Strategic Impact Assessment]
+    
+    E1 --> F1[Revenue Protection Calculation]
+    E1 --> F2[Cost Avoidance Projection]
+    E1 --> F3[Implementation Cost Analysis]
+    
+    E2 --> G1[Process Efficiency Impact]
+    E2 --> G2[Business Continuity Analysis]
+    E2 --> G3[Productivity Effect Calculation]
+    
+    E3 --> H1[Brand Value Impact]
+    E3 --> H2[Customer Trust Model]
+    E3 --> H3[Market Perception Analysis]
+    
+    E4 --> I1[Growth Enablement Assessment]
+    E4 --> I2[Competitive Advantage Analysis]
+    E4 --> I3[Innovation Impact Projection]
+    
+    F1 & F2 & F3 --> J1[Financial ROI Calculation]
+    G1 & G2 & G3 --> J2[Operational ROI Calculation]
+    H1 & H2 & H3 --> J3[Reputational ROI Calculation]
+    I1 & I2 & I3 --> J4[Strategic ROI Calculation]
+    
+    J1 & J2 & J3 & J4 --> K[Comprehensive Business Case]
+    
+    K --> L[Security Investment Prioritization]
+    L --> M[Executive Dashboard]
+    M --> N[Decision Support System]
 
-    B -->|Business Change| C1[Business Impact Analysis]
-    B -->|Technical Change| C2[Technical Assessment]
-    B -->|Threat Change| C3[Threat Analysis]
-    B -->|Regulatory Change| C4[Compliance Assessment]
-
-    C1 --> D1[Update Business Context]
-    C2 --> D2[Update Technical Context]
-    C3 --> D3[Update Threat Context]
-    C4 --> D4[Update Regulatory Context]
-
-    D1 & D2 & D3 & D4 --> E[Re-evaluate Security Posture]
-
-    E --> F{Gap Analysis}
-    F -->|Critical Gap| G1[Immediate Action Required]
-    F -->|Significant Gap| G2[Prioritized Action Required]
-    F -->|Minor Gap| G3[Scheduled Action Required]
-    F -->|No Gap| G4[No Action Required]
-
-    G1 --> H1[Generate Critical Alert]
-    G2 --> H2[Create Prioritized Tasks]
-    G3 --> H3[Add to Implementation Roadmap]
-    G4 --> H4[Document Assessment]
-
-    H1 & H2 & H3 & H4 --> I[Update Security Posture]
-
-    classDef trigger fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef change fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    classDef analysis fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef context fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef evaluation fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
-    classDef action fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef update fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-
-    class A trigger
-    class B,F change
-    class C1,C2,C3,C4 analysis
-    class D1,D2,D3,D4 context
-    class E,G1,G2,G3,G4 evaluation
-    class H1,H2,H3,H4 action
-    class I update
+    classDef profile fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef context fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef params fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    classDef engine fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef impact fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef analysis fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+    classDef roi fill:#f9e4b7,stroke:#333,stroke-width:1px,color:black
+    classDef output fill:#66cccc,stroke:#333,stroke-width:1px,color:black
+    
+    class A profile
+    class B,D context
+    class C1,C2,C3,C4,C5 params
+    class E1,E2,E3,E4 engine
+    class F1,F2,F3,G1,G2,G3,H1,H2,H3,I1,I2,I3 analysis
+    class J1,J2,J3,J4,K roi
+    class L,M,N output
 ```
 
-<div class="diagram-legend">
-These flowcharts provide a detailed view of how the CIA Compliance Manager will evolve to incorporate context awareness, machine learning, integration capabilities, continuous monitoring, and adaptive security decision-making. They show the complex processes and decision pathways that will enable the system to provide increasingly tailored and relevant security recommendations as it matures.
+## 🔌 Integration Ecosystem Data Flow
 
-The color coding across diagrams helps to identify similar process stages:
+**🔌 Integration Focus:** Shows how data flows between the CIA Compliance Manager and various external systems in the security and compliance ecosystem.
 
-- 🔵 Blue shades for core processes, data, and start/end points
-- 🟡 Yellow/orange for context information and user interactions
-- 🟢 Green for profiles, recommendations, and monitoring activities
-- 🟣 Purple for implementation, ML, and integration components
-- 🔴 Red for decision points and status updates
+**🔄 Data Flow Focus:** Illustrates the bi-directional data exchanges and synchronization processes.
+
+```mermaid
+flowchart TD
+    subgraph "CIA Compliance Manager"
+        A[Security Assessment Engine]
+        B[Context Adaptation Engine]
+        C[Compliance Mapping Engine]
+        D[Business Impact Engine]
+        E[Integration Manager]
+        F[Security Posture Dashboard]
+    end
+    
+    subgraph "Security Tools"
+        G1[SIEM]
+        G2[Vulnerability Scanner]
+        G3[SOAR Platform]
+        G4[EDR/XDR]
+    end
+    
+    subgraph "GRC Platforms"
+        H1[GRC System]
+        H2[Audit Management]
+        H3[Policy Management]
+        H4[Risk Register]
+    end
+    
+    subgraph "IT Systems"
+        I1[CMDB/Asset Inventory]
+        I2[Service Management]
+        I3[Identity Management]
+        I4[Cloud Management]
+    end
+    
+    A <--> E
+    B <--> E
+    C <--> E
+    D <--> E
+    E <--> F
+
+    E <--> G1
+    E <--> G2
+    E <--> G3
+    E <--> G4
+    
+    E <--> H1
+    E <--> H2
+    E <--> H3
+    E <--> H4
+    
+    E <--> I1
+    E <--> I2
+    E <--> I3
+    E <--> I4
+    
+    %% Data Flows
+    G1 -->|Security Events| A
+    G2 -->|Vulnerabilities| A
+    A -->|Security Controls| G3
+    A -->|Security Posture| G4
+    
+    C -->|Control Mappings| H1
+    H1 -->|Framework Requirements| C
+    H2 -->|Evidence Requirements| C
+    C -->|Compliance Status| H2
+    H3 -->|Policy Requirements| B
+    B -->|Policy Recommendations| H3
+    D -->|Risk Metrics| H4
+    H4 -->|Risk Register| D
+    
+    I1 -->|Asset Inventory| B
+    B -->|Asset Classification| I1
+    I2 -->|Service Catalog| A
+    A -->|Security Requirements| I2
+    I3 -->|Identity Context| B
+    B -->|Access Recommendations| I3
+    I4 -->|Cloud Resources| A
+    A -->|Cloud Security Controls| I4
+
+    classDef ciacm fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef sectools fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+    classDef grctools fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef itsystems fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef dataflow fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    
+    class A,B,C,D,E,F ciacm
+    class G1,G2,G3,G4 sectools
+    class H1,H2,H3,H4 grctools
+    class I1,I2,I3,I4 itsystems
+```
+
+## 🧠 Context Collection and Analysis Process
+
+**🔍 Context Focus:** Shows the detailed process of collecting, processing, and analyzing organizational context for security assessments.
+
+**🔄 Data Flow Focus:** Illustrates how diverse context parameters are integrated into a cohesive security context model.
+
+```mermaid
+flowchart TD
+    A[Start Context Collection] --> B[Context Parameter Identification]
+    
+    B --> C1[Industry Context Collection]
+    B --> C2[Organization Size Collection]
+    B --> C3[Geographic Collection]
+    B --> C4[Business Function Collection]
+    B --> C5[Data Classification Collection]
+    B --> C6[Technology Stack Collection]
+    
+    C1 --> D1[Industry Model Selection]
+    C2 --> D2[Size-Based Scaling]
+    C3 --> D3[Jurisdictional Mapping]
+    C4 --> D4[Function Criticality Analysis]
+    C5 --> D5[Data Sensitivity Mapping]
+    C6 --> D6[Technology Compatibility Review]
+    
+    D1 & D2 & D3 & D4 & D5 & D6 --> E[Context Integration Engine]
+    
+    E --> F[Context Classification]
+    F --> G[Context Prioritization]
+    G --> H[Context Weighting]
+    
+    H --> I[Security Context Model]
+    I --> J[Regulatory Context Model]
+    I --> K[Business Context Model]
+    I --> L[Technical Context Model]
+    
+    J & K & L --> M[Unified Context Model]
+    M --> N[Context Validation]
+    
+    N --> O{Context Complete?}
+    
+    O -->|No| P[Context Gap Identification]
+    P --> B
+    
+    O -->|Yes| Q[Context Application]
+    Q --> R[End Context Collection]
+
+    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef collection fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef params fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    classDef processing fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef engine fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef model fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+    classDef unified fill:#f9e4b7,stroke:#333,stroke-width:1px,color:black
+    classDef decision fill:#ff9966,stroke:#333,stroke-width:1px,color:black
+    classDef end fill:#66cccc,stroke:#333,stroke-width:1px,color:black
+    
+    class A,R start
+    class B collection
+    class C1,C2,C3,C4,C5,C6 params
+    class D1,D2,D3,D4,D5,D6 processing
+    class E,F,G,H engine
+    class I,J,K,L model
+    class M,N unified
+    class O decision
+    class P,Q end
+```
+
+## 🎯 Future Process Evolution Roadmap
+
+The evolution of core processes in the CIA Compliance Manager will proceed through several phases as the platform matures:
+
+```mermaid
+gantt
+    title Future Process Evolution Timeline
+    dateFormat YYYY-MM-DD
+    axisFormat %b '%y
+    tickInterval 3month
+    
+    section Context Adaptation
+    Basic Context Parameters    :a1, 2023-10-01, 90d
+    Industry Models             :a2, after a1, 120d
+    Multi-Factor Context        :a3, after a2, 150d
+    Dynamic Context Adaptation  :a4, after a3, 180d
+    
+    section ML Enhancement
+    Data Collection Framework   :b1, 2024-01-01, 90d
+    Basic ML Models             :b2, after b1, 120d
+    Enhanced Pattern Learning   :b3, after b2, 150d
+    Predictive Capabilities     :b4, after b3, 180d
+    
+    section Integration
+    Core API Development        :c1, 2023-12-01, 90d
+    Security Tool Integration   :c2, after c1, 120d
+    GRC Platform Integration    :c3, after c2, 120d
+    Full Ecosystem Integration  :c4, after c3, 180d
+    
+    section Business Impact
+    Enhanced ROI Calculation    :d1, 2024-03-01, 90d
+    Multi-Factor Impact Analysis:d2, after d1, 120d
+    Financial Modeling          :d3, after d2, 150d
+    Strategic Impact Analysis   :d4, after d3, 180d
+```
+
+<div class="process-evolution">
+This evolution roadmap outlines the progressive enhancement of the CIA Compliance Manager's core processes. Each phase introduces more sophisticated capabilities while building on the foundation established in previous phases:
+
+1. **Context Adaptation**: From basic parameters to dynamic, multi-factor context sensitivity
+2. **ML Enhancement**: From data collection to predictive security posture management
+3. **Integration Ecosystem**: From core API to comprehensive security and GRC tool integration
+4. **Business Impact Analysis**: From basic ROI to sophisticated financial and strategic impact modeling
+
+The phased approach ensures continuous delivery of value while progressing toward the advanced context-aware security posture management vision.
 </div>
