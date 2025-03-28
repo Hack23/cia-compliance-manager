@@ -1,6 +1,6 @@
-# CIA Compliance Manager Mindmap
+# 🧠 CIA Compliance Manager Mindmap
 
-This mindmap provides a visual overview of the CIA Compliance Manager components, relationships, and concepts. It serves as a mental model to understand how different parts of the system fit together.
+This document provides a conceptual overview of the CIA Compliance Manager system, showing the relationships between different components, features, and concepts using mindmap visualizations.
 
 ## 📚 Related Architecture Documentation
 
@@ -23,218 +23,277 @@ This mindmap provides a visual overview of the CIA Compliance Manager components
 
 </div>
 
-## System Overview Mindmap
+## 🧩 System Overview Mindmap
+
+**🏛️ Architecture Focus:** Provides a hierarchical view of the CIA Compliance Manager's components, showing their organization and relationships.
+
+**💼 Business Focus:** Maps the business capabilities to the technical components that implement them.
 
 ```mermaid
 mindmap
-  root((CIA Compliance<br>Manager))
-
-    %% Core Security Domains
-    id(CIA Security Domains)
-      id1(Confidentiality)
-        id1.1[Access Controls]
-        id1.2[Encryption]
-        id1.3[Zero Trust]
-      id2(Integrity)
-        id2.1[Data Validation]
-        id2.2[Hash Verification]
-        id2.3[Blockchain]
-      id3(Availability)
-        id3.1[Uptime SLAs]
-        id3.2[RTO/RPO]
-        id3.3[Disaster Recovery]
-
-    %% Business Impact
-    id4(Business Impact Analysis)
-      id4.1[Financial Impact]
-      id4.2[Operational Impact]
-      id4.3[Reputational Impact]
-      id4.4[Regulatory Impact]
-      id4.5[Strategic Impact]
-
-    %% Compliance Mapping
-    id5(Compliance Frameworks)
-      id5.1[NIST 800-53]
-      id5.2[ISO 27001]
-      id5.3[NIST CSF]
-      id5.4[GDPR]
-      id5.5[HIPAA]
-      id5.6[SOC2]
-      id5.7[PCI DSS]
-
-    %% Implementation
-    id6(Implementation)
-      id6.1[Cost Estimation]
-        id6.1.1{{CAPEX}}
-        id6.1.2{{OPEX}}
-        id6.1.3{{ROI}}
-      id6.2[Technical Details]
-        id6.2.1{{Tools}}
-        id6.2.2{{Technologies}}
-        id6.2.3{{Controls}}
-      id6.3[Resources]
-        id6.3.1{{Personnel}}
-        id6.3.2{{Time}}
-        id6.3.3{{Training}}
-
-    %% User Interface
-    id7(UI Components)
-      id7.1[Security Widgets]
-      id7.2[Data Visualization]
-      id7.3[Forms & Controls]
-      id7.4[Assessment Reports]
-
-    %% Architecture
-    id8(Technical Architecture)
-      id8.1[React Components]
-      id8.2[State Management]
-      id8.3[Service Layer]
-      id8.4[TypeScript Types]
-```
-
-## Component Relationships Mindmap
-
-```mermaid
-mindmap
-  root((Component<br>Relationships))
-
-    %% Dashboard Components
-    id(Dashboard)
-      id1[Security Level Widget]
-      id2[Security Summary Widget]
-      id3[CIA Impact Widgets]
-      id4[Compliance Status Widget]
-      id5[Cost Estimation Widget]
-      id6[Value Creation Widget]
-      id7[Security Visualization]
-      id8[Technical Details Widget]
-      id9[Business Impact Widget]
-
-    %% Services & Utilities
-    id10(Services)
-      id10.1[CIA Content Service]
-      id10.2[Compliance Service]
-      id10.3[Cost Calculation Service]
-      id10.4[Business Impact Service]
-
-    %% Hooks
-    id11(Custom Hooks)
-      id11.1[useCIAOptions]
-      id11.2[useSecurityLevels]
-      id11.3[useComplianceStatus]
-      id11.4[useBusinessImpact]
-
-    %% Common Components
-    id12(Common UI)
-      id12.1[StatusBadge]
-      id12.2[KeyValuePair]
-      id12.3[ValueDisplay]
-      id12.4[MetricsCard]
-```
-
-## Technical Implementation Mindmap
-
-**🏛️ Architecture Focus:** Provides a technology-oriented view of the implementation stack, showing how different technologies work together to create a cohesive application.
-
-**🔧 Development Focus:** Highlights the modern framework choices, testing strategies, security layers, and development processes that ensure code quality and security.
-
-```mermaid
-mindmap
-  root((Technical<br/>Implementation))
-    Core Stack
-      React[React 19.x]
-      TypeScript[TypeScript 5.x]
-      Vite[Vite 6.x]
-    UI & Visualization
-      TailwindCSS[TailwindCSS 4.x]
-      ChartJS[Chart.js 4.x]
-    Testing
-      Vitest["Unit Tests (Vitest)"]
-        Component Tests
-        Utility Tests
-      Cypress["E2E Tests (Cypress)"]
-        User Flows
-        Widget Interactions
-        Visual Regression
-    Security Layers
-      CSP["Content Security Policy"]
-      Security Headers
-      Input Validation
-      Error Handling
-    Development Process
-      Documentation
-        TypeDoc
-        Architecture Diagrams
-        API Documentation
-      CI/CD
-        Automated Tests
-        Deployment
-        Documentation Generation
-    User Workflows
-      Security Assessment["Security Assessment"]
-        Level Selection
-        Impact Analysis
-        Recommendations
-      Compliance Verification["Compliance Verification"]
-        Framework Mapping
+  root((CIA Compliance<br/>Manager))
+    🔒 Security Assessment
+      🛡️ CIA Triad Evaluation
+        Confidentiality Levels
+        Integrity Levels
+        Availability Levels
+      📊 Security Level Selection
+        Interactive Controls
+        Level Descriptions
+        Impact Visualization
+      📈 Security Score Calculation
+        Weighted Scoring
+        Risk Assessment
+        Security Posture Metrics
+      🎯 Security Recommendations
+        Control Implementation Guidelines
+        Best Practices
+        Framework Alignment
+    💼 Business Impact Analysis
+      💰 Financial Impact
+        CAPEX Calculations
+        OPEX Estimations
+        ROI Analysis
+      ⚙️ Operational Impact
+        Process Effects
+        Workflow Changes
+        Implementation Considerations
+      🏢 Strategic Impact
+        Business Alignment
+        Competitive Advantage
+        Growth Enablement
+      📊 Impact Visualization
+        Charts & Graphs
+        Comparative Analysis
+        Trend Indicators
+    🔄 Compliance Management
+      📋 Framework Mapping
+        NIST 800-53
+        ISO 27001
+        Custom Frameworks
+      ✅ Control Implementation
         Gap Analysis
-        Status Reporting
-      Cost Analysis["Cost Analysis"]
-        CAPEX Calculation
-        OPEX Estimation
-        ROI Projection
+        Implementation Status
+        Evidence Collection
+      📝 Compliance Reporting
+        Status Dashboards
+        Compliance Percentage
+        Remediation Tracking
+      🔍 Audit Support
+        Control Evidence
+        Compliance Documentation
+        Audit Preparation
+    🧩 Application Architecture
+      🖥️ Frontend Components
+        React UI Elements
+        Component Library
+        State Management
+      🔧 Core Services
+        Data Processing
+        Security Calculation
+        Business Logic
+      🎨 Visualization Layer
+        Interactive Charts
+        Dashboards
+        Reports
+      💾 Data Management
+        Local Storage
+        Export & Import
+        Data Persistence
+    🚀 User Experience
+      👤 User Profiles
+        Security Officer
+        Business Stakeholder
+        Compliance Manager
+        Technical Implementer
+      🔄 Assessment Workflows
+        Initial Assessment
+        Review & Approval
+        Implementation Tracking
+      📱 Interface Elements
+        Interactive Controls
+        Data Visualization
+        Responsive Design
+      📊 Reporting & Exports
+        PDF Reports
+        CSV Data Export
+        Implementation Plans
 ```
 
-## Business Value Mindmap
+## 🧠 Security Assessment Components
 
-**💼 Business Focus:** Demonstrates how the CIA Compliance Manager creates value for organizations through strategic planning, business case development, and stakeholder communication.
+**🔒 Security Focus:** Provides a detailed breakdown of security assessment components and their relationships.
 
-**💰 Investment Focus:** Shows the relationship between security level implementation and business outcomes, helping decision-makers understand the return on security investments.
+**🔧 Technical Focus:** Shows how the technical implementation supports the security assessment methodology.
 
 ```mermaid
 mindmap
-  root(("Business<br/>Value"))
-    Security Investment Planning
-      Incremental Implementation
-      Risk-Based Approach
-      Cost Optimization
-    Business Case Development
-      ROI Analysis
-      Risk Reduction Metrics
-      Compliance Achievement
-    Stakeholder Communication
-      Executive Reporting
-      Technical Implementation
-      Compliance Management
-      Budget Planning
-    Industry Alignment
-      Low Level["Basic protection for non-critical systems"]
-      Moderate Level["Standard protection for internal systems"]
-      High Level["Enhanced protection for sensitive data"]
-      Very High Level["Maximum protection for mission-critical systems"]
-    Decision Support
-      Security Level Selection
-      Budget Allocation
-      Implementation Roadmap
-      Control Prioritization
+  root((Security<br/>Assessment))
+    🛡️ CIA Triad Elements
+      Confidentiality
+        Data Classification
+        Access Control
+        Encryption
+      Integrity
+        Data Validation
+        Change Control
+        Checksums
+      Availability
+        Redundancy
+        Failover
+        Resilience
+    📊 Security Levels
+      Level 1: Basic
+        Minimal Controls
+        Limited Protection
+        Low Investment
+      Level 2: Enhanced
+        Standard Controls
+        Moderate Protection
+        Standard Investment
+      Level 3: Substantial
+        Advanced Controls
+        Comprehensive Protection
+        Significant Investment
+      Level 4: High
+        Robust Controls
+        Strong Protection
+        Major Investment
+      Level 5: Maximum
+        Exhaustive Controls
+        Complete Protection
+        Enterprise Investment
+    🔧 Implementation Types
+      Technical Controls
+        Software Solutions
+        Hardware Components
+        Configuration Items
+      Administrative Controls
+        Policies
+        Procedures
+        Guidelines
+      Physical Controls
+        Facility Security
+        Environmental Protection
+        Access Restrictions
+      Operational Controls
+        Day-to-Day Activities
+        Monitoring
+        Maintenance
+    📈 Risk Management
+      Risk Assessment
+        Threat Identification
+        Vulnerability Analysis
+        Impact Evaluation
+      Risk Mitigation
+        Control Selection
+        Implementation Planning
+        Residual Risk Analysis
+      Risk Monitoring
+        Continuous Assessment
+        Metrics & KPIs
+        Trend Analysis
 ```
 
-<div class="mindmap-legend">
-The mindmaps above provide three different perspectives on the CIA Compliance Manager:
+## 📊 Business Impact Relationship Map
 
-1. **System Overview** - Shows the core components, security levels, and key features of the CIA triad components, business analysis domains, compliance frameworks, and architecture layers
-2. **Technical Implementation** - Focuses on the technology stack and implementation details including core frameworks, testing approaches, and development processes
-3. **Business Value** - Illustrates how the system delivers value to stakeholders through strategic planning, business case development, and decision support
+**💼 Business Focus:** Maps the relationships between security implementations and business impacts.
 
-These visualizations complement the C4 diagrams by providing a different way to understand the system's structure and purpose. While the visual styling through CSS classes isn't available in GitHub's Mermaid implementation, the hierarchical organization of concepts provides clarity on relationships and categories.
+**🔗 Integration Focus:** Shows how security decisions and business outcomes are connected.
 
-**Color Legend (conceptual):**
+```mermaid
+flowchart TD
+    A[CIA Compliance Manager] --> B{Security Profile}
+    B -->|Confidentiality| C1[Data Protection Level]
+    B -->|Integrity| C2[Data Accuracy Level]
+    B -->|Availability| C3[Service Uptime Level]
 
-- 🔵 CIA components - blue shades
-- 🟠 Business analysis - orange/amber shades
-- 🟣 Compliance - purple shades
-- 🟢 Architecture - green shades
-- 🌈 Security levels - graduated colors from orange (basic) to green (very high)
+    C1 --> D1[Privacy Impact]
+    C1 --> D2[Regulatory Compliance]
+    C1 --> D3[Intellectual Property Protection]
+
+    C2 --> D4[Business Decision Quality]
+    C2 --> D5[Financial Reporting Accuracy]
+    C2 --> D6[Operational Reliability]
+
+    C3 --> D7[Business Continuity]
+    C3 --> D8[Customer Experience]
+    C3 --> D9[Operational Efficiency]
+
+    D1 & D2 & D3 --> E1[Reputation & Trust]
+    D4 & D5 & D6 --> E2[Operational Excellence]
+    D7 & D8 & D9 --> E3[Business Resilience]
+
+    E1 & E2 & E3 --> F[Business Value]
+
+    classDef core fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef cia fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef level fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef impact fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef value fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    classDef outcome fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+
+    class A core
+    class B cia
+    class C1,C2,C3 level
+    class D1,D2,D3,D4,D5,D6,D7,D8,D9 impact
+    class E1,E2,E3 value
+    class F outcome
+```
+
+## 🔄 Key Component Relationships
+
+| Component                | Related Components                     | Business Purpose                           | Technical Implementation                                |
+|--------------------------|----------------------------------------|-------------------------------------------|--------------------------------------------------------|
+| 🛡️ CIA Triad Evaluation  | Security Level Selection, Risk Analysis | Define security requirements              | Interactive controls with descriptive guidance          |
+| 📊 Security Level Selection | CIA Triad Evaluation, Business Impact | Select appropriate security levels        | Slider/selector components with real-time feedback      |
+| 💰 Financial Impact      | Security Level Selection, ROI Analysis  | Quantify implementation costs             | Calculation engine with industry benchmark data         |
+| 📋 Framework Mapping     | Security Levels, Compliance Reporting   | Map controls to compliance frameworks     | Dynamic mapping engine with framework-specific rules    |
+| 📈 Security Score        | CIA Triad Levels, Risk Assessment       | Quantify overall security posture         | Weighted scoring algorithm with visualization           |
+| 📊 Reporting & Exports   | All Assessment Components              | Document and communicate results          | PDF generation, CSV export, and dashboard visualization |
+
+## 📱 User Interaction Map
+
+```mermaid
+graph TD
+    A[User] --> B{Role}
+    B -->|Security Officer| C1[Security Assessment]
+    B -->|Business Stakeholder| C2[Business Impact Review]
+    B -->|Compliance Manager| C3[Compliance Status]
+    B -->|Technical Implementer| C4[Implementation Plan]
+
+    C1 --> D1[CIA Level Selection]
+    C1 --> D2[Recommendation Review]
+    C2 --> D3[Financial Impact Analysis]
+    C2 --> D4[Strategic Alignment]
+    C3 --> D5[Framework Selection]
+    C3 --> D6[Gap Analysis]
+    C4 --> D7[Control Implementation]
+    C4 --> D8[Technical Guidelines]
+
+    D1 & D2 & D3 & D4 & D5 & D6 & D7 & D8 --> E[Security Profile]
+
+    classDef user fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef role fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef activity fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef task fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef profile fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+
+    class A user
+    class B role
+    class C1,C2,C3,C4 activity
+    class D1,D2,D3,D4,D5,D6,D7,D8 task
+    class E profile
+```
+
+<div class="visualization-legend">
+These mindmaps provide a conceptual overview of the CIA Compliance Manager system, showing how different components relate to each other and contribute to the overall functionality. The maps help stakeholders understand the scope and organization of the system without diving into technical implementation details.
+
+The color schemes across diagrams help to identify similar types of information:
+- 🔵 Blues represent core system components and architecture elements
+- 🟢 Greens represent implementation and operational aspects
+- 🟣 Purples represent business impact and outcomes
+- 🟠 Oranges/yellows represent strategic elements and user interactions
 </div>
 
 ## Color Legend

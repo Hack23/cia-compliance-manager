@@ -1,4 +1,4 @@
-# CIA Compliance Manager CI/CD Workflows
+# 🔁 CIA Compliance Manager CI/CD Workflows
 
 This document details the continuous integration and deployment workflows used in the CIA Compliance Manager project. The workflows automate testing, security scanning, and release procedures to ensure code quality, security, and reliable deployment.
 
@@ -23,17 +23,17 @@ This document details the continuous integration and deployment workflows used i
 
 </div>
 
-## Workflow Overview
+## 🔄 Workflow Overview
 
 The project uses GitHub Actions for automation with the following workflows:
 
-1. **Test and Report**: Run unit and E2E tests with coverage reporting
-2. **CodeQL Analysis**: Security scanning for code vulnerabilities
-3. **Dependency Review**: Scanning of dependency changes for vulnerabilities
-4. **Scorecard Analysis**: OSSF security scorecard for supply chain security
-5. **License Checking**: Verification of dependency licenses for compliance
-6. **Release Process**: Build, attest, and deploy new versions
-7. **PR Labeler**: Automated labeling of pull requests
+1. **🧪 Test and Report**: Run unit and E2E tests with coverage reporting
+2. **🔍 CodeQL Analysis**: Security scanning for code vulnerabilities
+3. **📦 Dependency Review**: Scanning of dependency changes for vulnerabilities
+4. **⭐ Scorecard Analysis**: OSSF security scorecard for supply chain security
+5. **📜 License Checking**: Verification of dependency licenses for compliance
+6. **🚀 Release Process**: Build, attest, and deploy new versions
+7. **🏷️ PR Labeler**: Automated labeling of pull requests
 
 ## Workflow Relationships
 
@@ -75,7 +75,7 @@ flowchart TB
     class main process
 ```
 
-## License Checking Workflow
+## 📜 License Checking Workflow
 
 The project includes license checking as part of the CI/CD process to ensure all dependencies comply with the project's license requirements:
 
@@ -104,7 +104,7 @@ flowchart TD
 
 License checks are run both during PR verification and before releases to ensure compliance.
 
-## Test and Report Workflow
+## 🧪 Test and Report Workflow
 
 This workflow runs on pull requests and pushes to the main branch to ensure code quality.
 
@@ -136,7 +136,7 @@ flowchart TD
     class LicenseCheck checkNode
 ```
 
-## Release Workflow
+## 🚀 Release Workflow
 
 This workflow handles the release process for new versions, triggered by version tags or manual workflow dispatch.
 
@@ -167,7 +167,7 @@ flowchart TD
     class LicenseCheck checkNode
 ```
 
-## Security Scanning Workflows
+## 🔍 Security Scanning Workflows
 
 Multiple security scanning workflows validate different aspects of the codebase.
 
@@ -193,7 +193,7 @@ flowchart TD
     class Report1,Report2,Report3 reportNode
 ```
 
-### CodeQL Analysis Workflow
+### 🔍 CodeQL Analysis Workflow
 
 Analyzes code for security vulnerabilities using GitHub's CodeQL engine. Runs on:
 
@@ -201,11 +201,11 @@ Analyzes code for security vulnerabilities using GitHub's CodeQL engine. Runs on
 - Pull requests to main branch
 - Weekly schedule (Mondays)
 
-### Dependency Review
+### 📦 Dependency Review
 
 Scans dependency manifest changes in pull requests to identify vulnerable packages.
 
-### Scorecard Analysis
+### ⭐ Scorecard Analysis
 
 Evaluates the project against OSSF security best practices:
 

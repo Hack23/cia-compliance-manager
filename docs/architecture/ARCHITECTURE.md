@@ -1,4 +1,4 @@
-# CIA Compliance Manager Architecture
+# 🏛️ CIA Compliance Manager Architecture
 
 This document serves as the primary entry point for the CIA Compliance Manager's architectural documentation. It provides a comprehensive view of the system's design using the C4 model approach, starting from a high-level system context and drilling down to component interactions.
 
@@ -26,7 +26,7 @@ This document serves as the primary entry point for the CIA Compliance Manager's
 
 </div>
 
-## C4 System Context Diagram
+## 🌐 C4 System Context Diagram
 
 **💼 Business Focus:** Illustrates how different stakeholders interact with the system and the external dependencies required for compliance references and cost estimation.
 
