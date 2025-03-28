@@ -96,4 +96,44 @@ describe("Logger Utility", () => {
     expect(console.log).toHaveBeenCalledWith("[CIA-CM]", "First");
     expect(console.info).toHaveBeenCalledWith("[CIA-CM]", "Second");
   });
+
+  it("logs an info message with context", () => {
+    const context = { user: "admin", action: "login" };
+    logger.info("Info message with context", context);
+    expect(console.info).toHaveBeenCalledWith(
+      "[CIA-CM]",
+      "Info message with context",
+      context
+    );
+  });
+
+  it("logs a warning message with context", () => {
+    const context = { warning: "deprecation" };
+    logger.warn("Warning message with context", context);
+    expect(console.warn).toHaveBeenCalledWith(
+      "[CIA-CM]",
+      "Warning message with context",
+      context
+    );
+  });
+
+  it("logs an error message with context", () => {
+    const context = new Error("Internal error");
+    logger.error("Error message with context", context);
+    expect(console.error).toHaveBeenCalledWith(
+      "[CIA-CM]",
+      "Error message with context",
+      context
+    );
+  });
+
+  it("logs a debug message with context", () => {
+    const context = { debug: true, level: 3 };
+    logger.debug("Debug message with context", context);
+    expect(console.debug).toHaveBeenCalledWith(
+      "[CIA-CM]",
+      "Debug message with context",
+      context
+    );
+  });
 });

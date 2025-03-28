@@ -97,7 +97,7 @@ export function SecurityRiskScore({
         <div className="absolute inset-0 flex items-center justify-center">
           <span
             className={`text-lg font-bold ${scoreColor}`}
-            data-testid={`${testId}-value`}
+            data-testid={testId ? `${testId}-value` : undefined}
           >
             {Math.round(normalizedScore)}
           </span>
@@ -105,7 +105,7 @@ export function SecurityRiskScore({
       </div>
       <span
         className="text-xs text-gray-600 dark:text-gray-400 mt-1"
-        data-testid={`${testId}-label`}
+        data-testid={testId ? `${testId}-label` : undefined}
       >
         {label}
       </span>

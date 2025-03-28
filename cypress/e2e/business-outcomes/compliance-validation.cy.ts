@@ -1,6 +1,6 @@
 /**
  * Compliance Status Validation Test
- * 
+ *
  * This test verifies that the compliance status widget correctly displays
  * compliance information based on different security level settings.
  * It has been updated to use more robust selectors and validation techniques.
@@ -21,7 +21,7 @@ describe("Compliance Status Validation", () => {
         levels: [SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW],
         expectedTextPatterns: [
           /minimal|basic|non-compliant|low|partial|warning|caution/i,
-          /compliance|status|level|security/i
+          /compliance|status|level|security/i,
         ],
         name: "low-security",
       },
@@ -33,7 +33,7 @@ describe("Compliance Status Validation", () => {
         ],
         expectedTextPatterns: [
           /moderate|partial|medium|some|limited/i,
-          /compliance|status|framework|requirement/i
+          /compliance|status|framework|requirement/i,
         ],
         name: "moderate-security",
       },
@@ -45,7 +45,7 @@ describe("Compliance Status Validation", () => {
         ],
         expectedTextPatterns: [
           /compliant|meets requirements|high|full|complete|standard|advanced/i,
-          /compliance|status|framework|requirement/i
+          /compliance|status|framework|requirement/i,
         ],
         name: "high-security",
       },
@@ -64,31 +64,35 @@ describe("Compliance Status Validation", () => {
       cy.screenshot(`compliance-scenario-${scenario.name}`);
 
       // Search for compliance information using multiple strategies
-      cy.get('body').then($body => {
+      cy.get("body").then(($body) => {
         const bodyText = $body.text();
-        
+
         // Check if all expected text patterns appear somewhere on the page
-        const allPatternsFound = scenario.expectedTextPatterns.every(pattern => 
-          pattern.test(bodyText)
+        const allPatternsFound = scenario.expectedTextPatterns.every(
+          (pattern) => pattern.test(bodyText)
         );
-        
+
         if (allPatternsFound) {
-          cy.log(`✓ Found all expected compliance patterns for ${scenario.name}`);
+          cy.log(
+            `✓ Found all expected compliance patterns for ${scenario.name}`
+          );
         } else {
           // Log which patterns were not found
-          scenario.expectedTextPatterns.forEach(pattern => {
+          scenario.expectedTextPatterns.forEach((pattern) => {
             if (!pattern.test(bodyText)) {
-              cy.log(`⚠️ Could not find pattern: ${pattern} for ${scenario.name}`);
+              cy.log(
+                `⚠️ Could not find pattern: ${pattern} for ${scenario.name}`
+              );
             }
           });
         }
-        
+
         // Take a screenshot regardless of result for debugging
         cy.screenshot(`compliance-content-${scenario.name}`);
       });
     });
   });
-  
+
   it("verifies compliance framework details visibility", () => {
     // Set high security to maximize framework visibility
     cy.setSecurityLevels(
@@ -97,21 +101,21 @@ describe("Compliance Status Validation", () => {
       SECURITY_LEVELS.HIGH
     );
     cy.wait(1000);
-    
+
     // Look for compliance-related elements using multiple selectors
     const complianceSelectors = [
       '[data-testid*="compliance"]',
       '[class*="compliance"]',
       '[data-testid*="framework"]',
-      '[class*="framework"]'
-    ].join(', ');
-    
+      '[class*="framework"]',
+    ].join(", ");
+
     // Try to find compliance elements
-    cy.get('body').then($body => {
+    cy.get("body").then(($body) => {
       if ($body.find(complianceSelectors).length > 0) {
         cy.get(complianceSelectors).first().scrollIntoView();
-        cy.get(complianceSelectors).first().screenshot('compliance-element');
-        
+        cy.get(complianceSelectors).first().screenshot("compliance-element");
+
         // Try to find clickable items
         const clickableSelectors = [
           '[data-testid*="framework"] button',
@@ -119,21 +123,59 @@ describe("Compliance Status Validation", () => {
           '[class*="framework"] button',
           '[class*="framework"] a',
           'li[class*="framework"]',
-          'li[data-testid*="framework"]'
-        ].join(', ');
-        
+          'li[data-testid*="framework"]',
+        ].join(", ");
+
         if ($body.find(clickableSelectors).length > 0) {
-          cy.get(clickableSelectors).first().click({force: true});
+          cy.get(clickableSelectors).first().click({ force: true });
           cy.wait(500);
-          cy.screenshot('after-framework-click');
+          cy.screenshot("after-framework-click");
         } else {
-          cy.log('⚠️ No clickable framework items found');
-          cy.screenshot('no-clickable-frameworks');
+          cy.log("⚠️ No clickable framework items found");
+          cy.screenshot("no-clickable-frameworks");
         }
       } else {
-        cy.log('⚠️ No compliance elements found');
-        cy.screenshot('no-compliance-elements');
+        cy.log("⚠️ No compliance elements found");
+        cy.screenshot("no-compliance-elements");
       }
+    });
+  });
+
+  it("shows appropriate compliance frameworks based on security levels", () => {
+    // Set high security to see maximum frameworks
+    cy.setSecurityLevels(
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH,
+      SECURITY_LEVELS.HIGH
+    );
+    cy.wait(1000);
+
+    // Look for compliance frameworks section
+    cy.get("body").then(($body) => {
+      // Define a regex pattern to identify framework elements
+      const frameworkPattern = /([A-Z0-9]+\s*[A-Z0-9]*\s*[0-9-]*)/g;
+
+      // Extract frameworks from the DOM text
+      const bodyText = $body.text();
+      const possibleFrameworks = bodyText.match(frameworkPattern) || [];
+
+      // Filter to likely frameworks
+      const frameworks = possibleFrameworks.filter(
+        (f) => /^[A-Z0-9]{2,}/.test(f) && !f.includes("CIA") && f.length > 2
+      );
+
+      // Fix the spread argument error by using properly typed arguments
+      const logMessage = `Found ${frameworks.length} compliance frameworks`;
+      cy.log(logMessage);
+
+      // Use typed array for log args
+      const typedLogArgs: [string, ...unknown[]] = [
+        `Frameworks: ${frameworks.join(", ")}`,
+      ];
+      cy.log(...typedLogArgs);
+
+      // Verify we found some frameworks
+      expect(frameworks.length).to.be.greaterThan(0);
     });
   });
 });

@@ -33,22 +33,27 @@ const additionalTests = () => {
       // Check for at least one category
       cy.wrap($widget).within(() => {
         // Try to find at least one category
-        let categoryFound = false;
+        let foundCategories = 0;
 
         categories.forEach((category) => {
           cy.contains(new RegExp(category, "i")).then(($matches) => {
             // Use our helper to safely check matches
             safelyCheckMatches($matches, (hasMatches) => {
               if (hasMatches) {
-                categoryFound = true;
+                foundCategories += 1;
                 cy.log(`Found category: ${category}`);
               }
             });
           });
         });
 
-        // The expect block would ideally go here, but Cypress commands are async
-        // so we can't do it within the forEach. We'll check after.
+        // Use the variable we're tracking to make an assertion
+        cy.wrap(foundCategories).then((count) => {
+          expect(count).to.be.at.least(
+            1,
+            "Should find at least one impact category"
+          );
+        });
       });
     });
   });

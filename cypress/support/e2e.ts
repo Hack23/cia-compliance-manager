@@ -1,16 +1,16 @@
 // Import all helper modules in the correct order
 import "@testing-library/cypress/add-commands";
+import "./command-registry";
 import "./commands";
 import "./debug-helpers";
 import "./enhanced-commands";
-import "./test-styles";
-import "./widget-testing-template";
-import "./command-registry";
+import "./global-test-setup";
 import "./screenshot-analysis";
-import "./widget-analyzer";
 import "./screenshot-utils";
 import "./test-cleanup";
-import "./global-test-setup";
+import "./test-styles";
+import "./widget-analyzer";
+import "./widget-testing-template";
 
 // Import TEST_IDS constant
 import { TEST_IDS } from "./constants";
@@ -68,14 +68,23 @@ Cypress.on("uncaught:exception", (err, runnable) => {
   return false;
 });
 
-// Fix: Define mount before using it
-const mount = (() => {
-  // No-op implementation to satisfy TypeScript
-  return (component: React.ReactNode) => cy.wrap(null);
-})();
-
-// Fix: Properly type mount command without type assertion
-Cypress.Commands.add("mount", mount as any);
+// Handle mount command gracefully for E2E tests
+// This avoids the need to check if the command exists using a non-existent list() method
+if (Cypress.env("testingType") === "component") {
+  // In component testing mode, mount is registered by the component testing plugin
+  cy.log("Component testing mode detected - mount command available");
+} else {
+  // In E2E mode, provide a placeholder that shows a helpful error
+  Cypress.Commands.add("mount", () => {
+    cy.log("⚠️ mount() is only available in component testing mode");
+    // Return an Element-typed chainable instead of null to match type expectations
+    return cy.document().then((doc) => {
+      // Create a dummy element for type compatibility
+      const dummyEl = doc.createElement("div");
+      return cy.wrap(dummyEl) as unknown as Cypress.Chainable<Element>;
+    });
+  });
+}
 
 // Custom commands that were defined in types but not implemented
 Cypress.Commands.add("selectSecurityLevelEnhanced", (category, level) => {
@@ -345,6 +354,15 @@ declare global {
        * Simple custom command for demo purpose
        */
       customCommand(arg: string): Chainable<void>;
+
+      /**
+       * Mount a component (only in component testing mode)
+       * This command is only fully implemented when running component tests
+       */
+      mount(
+        component: React.ReactNode,
+        options?: any
+      ): Cypress.Chainable<Element>;
     }
   }
 

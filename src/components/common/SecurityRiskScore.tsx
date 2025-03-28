@@ -10,24 +10,24 @@ interface SecurityRiskScoreProps {
 
 /**
  * Displays a visual security score indicator
- * 
+ *
  * ## Business Perspective
- * 
+ *
  * This component provides a quantitative measure of security posture in an
  * easy-to-understand format. The numerical score and color-coding help
  * business stakeholders quickly gauge security maturity and track improvements
  * over time, supporting data-driven security investment decisions. 📈
- * 
+ *
  * @param props Component props
  * @returns React Element
  */
-function SecurityRiskScore({
+const SecurityRiskScore: React.FC<SecurityRiskScoreProps> = ({
   score,
   maxScore = 100,
   label,
   className = "",
   testId,
-}: SecurityRiskScoreProps): React.ReactElement {
+}) => {
   // Normalize score as a percentage
   const normalizedScore = useMemo(() => {
     if (score <= 0) return 0;
@@ -41,6 +41,11 @@ function SecurityRiskScore({
     if (normalizedScore >= 50) return "text-yellow-500 dark:text-yellow-400";
     return "text-red-500 dark:text-red-400";
   }, [normalizedScore]);
+
+  // Calculate the stroke dash offset for the circular progress
+  const circumference = 2 * Math.PI * 28; // 2πr where r=28
+  const strokeDashArray = `${circumference}`;
+  const strokeDashOffset = ((100 - normalizedScore) / 100) * circumference;
 
   return (
     <div
@@ -68,23 +73,29 @@ function SecurityRiskScore({
             strokeLinecap="round"
             stroke="currentColor"
             strokeWidth="8"
-            strokeDasharray={`${normalizedScore * 1.76} 176`}
+            strokeDasharray={strokeDashArray}
+            strokeDashoffset={strokeDashOffset}
             transform="rotate(-90 32 32)"
             className={scoreColor}
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className={`text-lg font-bold ${scoreColor}`}>
+          <span
+            className={`text-lg font-bold ${scoreColor}`}
+            data-testid={testId ? `${testId}-value` : undefined}
+          >
             {Math.round(normalizedScore)}
           </span>
         </div>
       </div>
-      <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+      <span
+        className="text-xs text-gray-600 dark:text-gray-400 mt-1"
+        data-testid={testId ? `${testId}-label` : undefined}
+      >
         {label}
       </span>
     </div>
   );
-}
+};
 
-export { SecurityRiskScore };
 export default SecurityRiskScore;

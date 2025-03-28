@@ -3,11 +3,11 @@
  * These utilities help diagnose and fix test failures
  */
 
-// Simplified interface for window with debug properties
-interface WindowWithDebug extends Window {
-  [key: string]: any; // Allow dynamic property access
+// Properly define interface for window with debug properties
+interface WindowWithDebug extends Omit<Cypress.AUTWindow, "Infinity" | "NaN"> {
   consoleErrors?: string[];
-  __REACT_APP_STATE__?: any;
+  __REACT_APP_STATE__?: unknown;
+  // Don't include number index signatures that conflict with Window
 }
 
 /**
@@ -214,39 +214,33 @@ export function analyzeWidgets(): void {
 
 // Register commands once
 function registerDebugCommands(): void {
-  // Register debug helpers with proper options
-  Cypress.Commands.add(
-    "debugFailure",
-    { prevSubject: true }, // Fix: Use boolean value
-    (testName: string) => {
-      debugFailure(testName);
-      return cy.wrap(null);
-    }
-  );
+  // Register commands with proper typing
+  Cypress.Commands.add("debugFailure", (testName: string) => {
+    debugFailure(testName);
+    return cy.wrap(null);
+  });
 
-  Cypress.Commands.add(
-    "logVisibleElements",
-    { prevSubject: "optional" },
-    () => {
-      logVisibleElements();
-      return cy.wrap(null);
-    }
-  );
+  Cypress.Commands.add("logVisibleElements", () => {
+    logVisibleElements();
+    return cy.wrap(null);
+  });
 
-  Cypress.Commands.add("logAllTestIds", { prevSubject: "optional" }, () => {
+  Cypress.Commands.add("logAllTestIds", () => {
     logAllTestIds();
     return cy.wrap(null);
   });
 
-  Cypress.Commands.add("highlight", { prevSubject: "element" }, (subject) => {
-    cy.wrap(subject).then(($el) => {
+  Cypress.Commands.add("highlight", { prevSubject: true }, ($el) => {
+    // Add a highlight style to the element
+    if ($el && $el.length) {
+      // TypeScript knows the type here due to prevSubject: true
       $el.css({
         border: "3px solid red",
         "background-color": "yellow",
         opacity: "0.8",
       });
 
-      // Restore after 2 seconds
+      // Remove the highlight after a moment
       setTimeout(() => {
         $el.css({
           border: "",
@@ -254,64 +248,40 @@ function registerDebugCommands(): void {
           opacity: "",
         });
       }, 2000);
+    }
 
-      return $el;
-    });
+    return $el;
   });
 
-  Cypress.Commands.add(
-    "analyzeWidgetsOnPage",
-    { prevSubject: "optional" },
-    () => {
-      cy.log("Analyzing widgets on page...");
+  Cypress.Commands.add("analyzeWidgetsOnPage", () => {
+    cy.log("Analyzing widgets on page...");
 
-      // Common widget test IDs from the DOM analysis
-      const widgetIds = [
-        "widget-security-level-selection",
-        "widget-security-summary",
-        "widget-business-impact-container",
-        "widget-technical-details-container",
-        "widget-cost-estimation",
-        "widget-value-creation",
-        "widget-compliance-status",
-        "widget-radar-chart",
-        "widget-availability-impact-container",
-        "widget-integrity-impact-container",
-        "widget-confidentiality-impact-container",
-        "widget-security-resources-container",
-        "widget-cia-impact-summary",
-      ];
+    // Common widget test IDs from the DOM analysis
+    const widgetIds = [
+      "widget-security-level-selection",
+      // ...existing code...
+    ];
 
-      // Check for each widget
-      widgetIds.forEach((widgetId) => {
-        cy.get(`[data-testid="${widgetId}"]`).then(($widget) => {
-          if ($widget.length) {
-            cy.log(`✅ Found widget: ${widgetId}`);
-            // Log additional details about the widget
-            cy.log(`  - Visible: ${$widget.is(":visible")}`);
-            cy.log(`  - Children: ${$widget.children().length}`);
-            cy.log(`  - Text: ${$widget.text().substring(0, 50)}...`);
-          } else {
-            cy.log(`❌ Widget not found: ${widgetId}`);
-          }
-        });
+    // Check for each widget
+    widgetIds.forEach((widgetId) => {
+      cy.get(`[data-testid="${widgetId}"]`).then(($widget) => {
+        // ...existing code...
       });
+    });
 
-      return cy.wrap(null);
-    }
-  );
+    return cy.wrap(null);
+  });
 
-  // Fix: Register debugFailedTest command properly with correct typing
-  Cypress.Commands.add(
-    "debugFailedTest",
-    { prevSubject: true }, // Fix: Use boolean value
-    (testName: string) => {
-      debugFailedTest(testName);
-      return cy.wrap(null);
-    }
-  );
+  // Fix: Register debugFailedTest command properly
+  Cypress.Commands.add("debugFailedTest", (testName: string) => {
+    debugFailedTest(testName);
+    return cy.wrap(null);
+  });
 
-  Cypress.Commands.add("analyzeWidgets", analyzeWidgets);
+  Cypress.Commands.add("analyzeWidgets", () => {
+    analyzeWidgets();
+    return cy.wrap(null);
+  });
 }
 
 // Initialize commands
@@ -368,16 +338,14 @@ export function debugFailedTestInAfterEach(testName: string): void {
 // Make sure to declare the types
 declare global {
   namespace Cypress {
-    interface Chainable {
-      /**
-       * Debug a failed test with enhanced logging
-       */
-      debugFailedTest(testName: string): Chainable<void>;
-
-      /**
-       * Analyze widgets on the page for debugging
-       */
-      analyzeWidgets(): Chainable<void>;
+    interface Chainable<Subject = any> {
+      debugFailedTest(testName: string): Chainable<null>;
+      analyzeWidgets(): Chainable<null>;
+      debugFailure(testName: string): Chainable<null>;
+      logVisibleElements(): Chainable<null>;
+      logAllTestIds(): Chainable<null>;
+      highlight(): Chainable<JQuery<HTMLElement>>;
+      analyzeWidgetsOnPage(): Chainable<null>;
     }
   }
 }

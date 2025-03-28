@@ -37,7 +37,7 @@ export { default as MetricsCard } from "./common/MetricsCard";
 export { default as RiskAssessment } from "./common/RiskAssessment";
 export { default as RiskLevelBadge } from "./common/RiskLevelBadge";
 export { default as SecurityLevelBadge } from "./common/SecurityLevelBadge";
-export { SecurityRiskScore } from "./common/SecurityRiskScore";
+export { default as SecurityRiskScore } from "./common/SecurityRiskScore";
 export { default as StatusBadge } from "./common/StatusBadge";
 export { default as Tab } from "./common/Tab";
 export { default as ThemeToggle } from "./common/ThemeToggle";

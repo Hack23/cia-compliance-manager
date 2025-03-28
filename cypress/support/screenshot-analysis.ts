@@ -26,7 +26,7 @@ export function analyzeScreenshots(): void {
  * @param $widget jQuery element of the widget
  */
 export function detectWidgetIssues(
-  widgetName: string,
+  _widgetName: string, // Prefix with underscore to indicate intentionally unused
   $widget: JQuery<HTMLElement>
 ): Cypress.Chainable<{ hasIssues: boolean; issues: string[] }> {
   const issues: string[] = [];
@@ -47,9 +47,16 @@ export function detectWidgetIssues(
       '[style*="text-overflow: ellipsis"], [style*="overflow: hidden"][style*="white-space: nowrap"]'
     );
     if (ellipsisTexts.length > 0) {
-      issues.push(
-        `Truncated text: Found ${ellipsisTexts.length} elements with text truncation`
-      );
+      // Fix: Use index parameter in place of unused variable i
+      ellipsisTexts.each((index, element) => {
+        const $textEl = Cypress.$(element);
+        // Use index instead of declaring unused i
+        issues.push(
+          `Truncated text at index ${index}: "${$textEl
+            .text()
+            .substring(0, 30)}..."`
+        );
+      });
     }
 
     // Check for unusually small widget height
@@ -61,11 +68,12 @@ export function detectWidgetIssues(
 
     // Look for empty content areas
     const contentAreas = $el.find('[class*="content"], [class*="body"]');
-    contentAreas.each((i, contentEl) => {
+    contentAreas.each((index, contentEl) => {
+      // Use index instead of i
       const $content = Cypress.$(contentEl);
       if ($content.children().length === 0 && !$content.text().trim()) {
         issues.push(
-          `Empty content area: Found empty content container with class ${$content.attr(
+          `Empty content area at index ${index}: Found empty content container with class ${$content.attr(
             "class"
           )}`
         );

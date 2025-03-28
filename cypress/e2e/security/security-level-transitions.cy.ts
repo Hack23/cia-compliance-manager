@@ -37,8 +37,16 @@ describe("Security Level Transitions", () => {
     // Define only critical transitions to test
     const securityTransitions = [
       {
-        from: [SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW],
-        to: [SECURITY_LEVELS.HIGH, SECURITY_LEVELS.HIGH, SECURITY_LEVELS.HIGH],
+        from: [
+          SECURITY_LEVELS.LOW,
+          SECURITY_LEVELS.LOW,
+          SECURITY_LEVELS.LOW,
+        ] as const,
+        to: [
+          SECURITY_LEVELS.HIGH,
+          SECURITY_LEVELS.HIGH,
+          SECURITY_LEVELS.HIGH,
+        ] as const,
         name: "low-to-high",
       },
       {
@@ -46,26 +54,31 @@ describe("Security Level Transitions", () => {
           SECURITY_LEVELS.HIGH,
           SECURITY_LEVELS.HIGH,
           SECURITY_LEVELS.HIGH,
-        ],
+        ] as const,
         to: [
           SECURITY_LEVELS.HIGH,
           SECURITY_LEVELS.LOW,
           SECURITY_LEVELS.MODERATE,
-        ],
+        ] as const,
         name: "high-to-mixed",
       },
     ];
 
     // Test each transition with better error handling
     securityTransitions.forEach((transition, index) => {
-      cy.log(
+      const logArgs = [
         `Testing transition ${transition.name} (${index + 1}/${
           securityTransitions.length
-        })`
-      );
+        })`,
+      ] as const;
+      cy.log(logArgs[0]);
 
-      // Set initial levels
-      cy.setSecurityLevels(...transition.from);
+      // Set initial levels with type assertion
+      cy.setSecurityLevels(
+        transition.from[0],
+        transition.from[1],
+        transition.from[2]
+      );
       cy.wait(1000);
 
       // Take screenshot only if it's the first transition
@@ -77,9 +90,17 @@ describe("Security Level Transitions", () => {
       findImportantWidgets().then((widgets) => {
         // Capture initial content of each widget for comparison
         captureWidgetStates(widgets).then((initialStates) => {
-          // Perform transition
-          cy.log(`Changing to security levels: ${transition.to.join(", ")}`);
-          cy.setSecurityLevels(...transition.to);
+          // Perform transition with type assertion
+          const changeLogArgs = [
+            `Changing to security levels: ${transition.to.join(", ")}`,
+          ] as const;
+          cy.log(changeLogArgs[0]);
+
+          cy.setSecurityLevels(
+            transition.to[0],
+            transition.to[1],
+            transition.to[2]
+          );
           cy.wait(1000);
 
           // Take screenshot only if it's the first transition
@@ -89,7 +110,10 @@ describe("Security Level Transitions", () => {
 
           // Check widgets after transition
           findImportantWidgets().then((newWidgets) => {
-            cy.log(`Found ${newWidgets.length} widgets after transition`);
+            const foundLogArgs: [string, ...unknown[]] = [
+              `Found ${newWidgets.length} widgets after transition`,
+            ];
+            cy.log(...foundLogArgs);
 
             // Verify number of widgets didn't decrease significantly
             expect(newWidgets.length).to.be.at.least(
