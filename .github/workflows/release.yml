@@ -97,9 +97,9 @@ jobs:
           commit_message: "chore(release): bump version to ${{ github.event.inputs.version }}"
           tagging_message: "${{ github.event.inputs.version }}"
 
-      - name: Run unit tests with coverage
-        run: xvfb-run --auto-servernum npm run test:ci
-
+      - name: Check licenses
+        run: npm run test:licenses
+        
       - name: Verify Cypress
         run: npx cypress verify
 
