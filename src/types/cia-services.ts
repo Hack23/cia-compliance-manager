@@ -14,6 +14,30 @@ import { SecurityLevel } from "./cia";
 // Re-export SecurityLevel for backward compatibility
 export type { SecurityLevel };
 
+import { BusinessImpact } from "./businessImpact";
+import { SecurityLevels } from "./cia";
+import { ComplianceFramework } from "./compliance";
+
+/**
+ * Core data structure representing CIA assessment data
+ */
+export interface CIAData {
+  /** Security levels for availability, integrity, and confidentiality */
+  securityLevels: SecurityLevels;
+
+  /** Business impact analysis results */
+  businessImpact?: BusinessImpact;
+
+  /** Relevant compliance frameworks */
+  complianceFrameworks?: ComplianceFramework[];
+
+  /** Timestamp of last update */
+  lastUpdated?: Date;
+
+  /** Any additional metadata */
+  metadata?: Record<string, unknown>;
+}
+
 /**
  * Type representing CIA component types
  */

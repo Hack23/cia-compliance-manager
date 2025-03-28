@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { createCIAOptionsMock } from "../tests/testMocks/ciaOptionsMocks";
 import {
   TEST_SECURITY_LEVELS,
@@ -14,13 +14,13 @@ import {
 vi.mock("../hooks/useCIAOptions", () => createCIAOptionsMock());
 
 // Regular test constants (not hoisted or exported)
-const testLevels: SecurityLevel[] = [
-  "None",
-  "Low",
-  "Moderate",
-  "High",
-  "Very High",
-];
+// const testLevels: SecurityLevel[] = [
+//   "None",
+//   "Low",
+//   "Moderate",
+//   "High",
+//   "Very High",
+// ];
 
 // Create test data provider with mock security metrics
 const createTestDataProvider = () => {

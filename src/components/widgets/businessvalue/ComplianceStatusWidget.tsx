@@ -10,15 +10,6 @@ import { isNullish } from "../../../utils/typeGuards";
 import StatusBadge from "../../common/StatusBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 
-/**
- * Props for StatusBadge subcomponent
- */
-interface StatusBadgeProps {
-  status: StatusType;
-  children: React.ReactNode;
-  testId?: string;
-}
-
 // Add function to determine badge status with proper typing
 const getBadgeStatus = (complianceScore: number): StatusType => {
   if (complianceScore >= 80) return "success";
@@ -64,30 +55,6 @@ export interface ComplianceStatusWidgetProps {
    * Optional test ID for automated testing
    */
   testId?: string;
-}
-
-// Add this interface to define the structure of a gap in gap analysis
-interface ComplianceGap {
-  framework: string;
-  frameworkDescription: string;
-  components: {
-    availability: {
-      current: SecurityLevel;
-      required: SecurityLevel;
-      gap: number;
-    };
-    integrity: {
-      current: SecurityLevel;
-      required: SecurityLevel;
-      gap: number;
-    };
-    confidentiality: {
-      current: SecurityLevel;
-      required: SecurityLevel;
-      gap: number;
-    };
-  };
-  recommendations: string[];
 }
 
 /**

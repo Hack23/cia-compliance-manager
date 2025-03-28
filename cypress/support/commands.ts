@@ -171,17 +171,17 @@ Cypress.Commands.add(
 );
 
 // Improved findWidget command with more reliable widget detection
-Cypress.Commands.add("findWidget", (widgetName: string) => {
+Cypress.Commands.add("findWidget", (_widgetName: string) => {
   // More comprehensive list of possible widget naming patterns
   const widgetPatterns = [
     // Exact match patterns
-    `widget-${widgetName}`,
-    `widget-${widgetName}-container`,
-    `${widgetName}-widget`,
-    `${widgetName}-container`,
-    `${widgetName}`,
+    `widget-${_widgetName}`,
+    `widget-${_widgetName}-container`,
+    `${_widgetName}-widget`,
+    `${_widgetName}-container`,
+    `${_widgetName}`,
     // Partial match patterns
-    `*=${widgetName}`,
+    `*=${_widgetName}`,
   ];
 
   return cy.get("body").then(($body) => {
@@ -238,9 +238,9 @@ Cypress.Commands.add("findWidget", (widgetName: string) => {
 
     // Last resort - try a very generic approach
     const genericSelectors = [
-      `[data-testid*="${widgetName}"]`,
-      `[class*="${widgetName}"]`,
-      `[id*="${widgetName}"]`,
+      `[data-testid*="${_widgetName}"]`,
+      `[class*="${_widgetName}"]`,
+      `[id*="${_widgetName}"]`,
       `[data-testid*="widget"]`,
     ];
 
@@ -252,8 +252,8 @@ Cypress.Commands.add("findWidget", (widgetName: string) => {
     }
 
     // Nothing found, return an empty selector (this will fail gracefully)
-    cy.log(`⚠️ No widget found for "${widgetName}"`);
-    return cy.get(`[data-testid="nonexistent-${widgetName}"]`, { log: false });
+    cy.log(`⚠️ No widget found for "${_widgetName}"`);
+    return cy.get(`[data-testid="nonexistent-${_widgetName}"]`, { log: false });
   });
 });
 
@@ -261,22 +261,22 @@ Cypress.Commands.add("findWidget", (widgetName: string) => {
 Cypress.Commands.add(
   "verifyContentPresent",
   (
-    contentPatterns: Array<string | RegExp>
+    content: string | RegExp | Array<string | RegExp>
   ): Cypress.Chainable<JQuery<HTMLElement>> => {
-    cy.get("body").then(($body) => {
+    // Handle different input types
+    const contentPatterns = Array.isArray(content) ? content : [content];
+
+    return cy.get("body").then(($body) => {
       const text = $body.text();
       let matched = false;
-      let matchedPattern = null;
 
       for (const pattern of contentPatterns) {
         if (typeof pattern === "string" && text.includes(pattern)) {
           matched = true;
-          matchedPattern = pattern;
           cy.log(`Found content: "${pattern}"`);
           break;
         } else if (pattern instanceof RegExp && pattern.test(text)) {
           matched = true;
-          matchedPattern = pattern;
           cy.log(`Found content matching: ${pattern}`);
           break;
         }
@@ -288,15 +288,10 @@ Cypress.Commands.add(
           ", "
         )}`
       ).to.be.true;
-    });
 
-    // Return a proper HTMLElement type instead of HTMLBodyElement
-    return cy
-      .get("body")
-      .then(
-        () =>
-          cy.wrap(Cypress.$("body")) as Cypress.Chainable<JQuery<HTMLElement>>
-      );
+      // Return for chaining - properly typed as HTMLElement
+      return cy.wrap($body) as Cypress.Chainable<JQuery<HTMLElement>>;
+    });
   }
 );
 
@@ -622,6 +617,28 @@ Cypress.Commands.add("toggleTheme", () => {
     // Wait for theme change to take effect
     cy.wait(300);
   });
+});
+
+// Add proper type declarations for custom commands
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      findSecurityLevelControls(): Chainable<JQuery<HTMLElement>>;
+      verifyContentPresent(
+        content: string | RegExp | Array<string | RegExp>
+      ): Chainable<JQuery<HTMLElement>>;
+      containsText(text: string): Chainable<void>;
+      startMeasurement(name: string): Chainable<void>;
+      endMeasurement(name: string): Chainable<void>;
+      // Add other custom commands here
+    }
+  }
+}
+
+// Then register commands with proper types
+Cypress.Commands.add("findSecurityLevelControls", () => {
+  // Implementation
+  return cy.get('[data-testid="security-level-controls"]');
 });
 
 // Define custom command types
