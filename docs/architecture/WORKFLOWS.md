@@ -31,8 +31,9 @@ The project uses GitHub Actions for automation with the following workflows:
 2. **CodeQL Analysis**: Security scanning for code vulnerabilities
 3. **Dependency Review**: Scanning of dependency changes for vulnerabilities
 4. **Scorecard Analysis**: OSSF security scorecard for supply chain security
-5. **Release Process**: Build, attest, and deploy new versions
-6. **PR Labeler**: Automated labeling of pull requests
+5. **License Checking**: Verification of dependency licenses for compliance
+6. **Release Process**: Build, attest, and deploy new versions
+7. **PR Labeler**: Automated labeling of pull requests
 
 ## Workflow Relationships
 
@@ -42,14 +43,18 @@ flowchart TB
         PR[Pull Request] --> TestReport[Test and Report]
         PR --> DependencyReview[Dependency Review]
         PR --> Labeler[PR Labeler]
+        TestReport --> LicenseCheck[License Check]
         TestReport --> CodeQL[CodeQL Analysis]
         CodeQL --> Scorecard[Scorecard Analysis]
     end
 
     subgraph "Continuous Deployment"
         Release[Release Trigger] --> BuildTest[Prepare & Test]
-        BuildTest --> Build[Build Package]
-        Build --> CreateRelease[Create GitHub Release]
+        BuildTest --> LicenseCheck2[License Check]
+        LicenseCheck2 --> Build[Build Package]
+        Build --> GenerateSBOM[Generate SBOM]
+        GenerateSBOM --> Attestations[Create Attestations]
+        Attestations --> CreateRelease[Create GitHub Release]
         CreateRelease --> DeployGHPages[Deploy to GitHub Pages]
     end
 
@@ -63,11 +68,41 @@ flowchart TB
     classDef deployment fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
     classDef process fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
     classDef trigger fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef security fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
 
-    class PR,TestReport,DependencyReview,Labeler,CodeQL,Scorecard integration
-    class Release,BuildTest,Build,CreateRelease,DeployGHPages deployment
+    class PR,TestReport,DependencyReview,Labeler,CodeQL,Scorecard,LicenseCheck integration
+    class Release,BuildTest,Build,CreateRelease,DeployGHPages,LicenseCheck2,GenerateSBOM,Attestations deployment
     class main process
 ```
+
+## License Checking Workflow
+
+The project includes license checking as part of the CI/CD process to ensure all dependencies comply with the project's license requirements:
+
+```mermaid
+flowchart TD
+    Start[CI Pipeline] --> Setup[Setup Environment]
+    Setup --> Install[Install Dependencies]
+    Install --> LicenseCheck[Check Licenses]
+    LicenseCheck --> Pass{Licenses OK?}
+    Pass -->|Yes| Continue[Continue Pipeline]
+    Pass -->|No| Fail[Fail Build]
+
+    %% Cool color styling
+    classDef startNode fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
+    classDef checkNode fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef decisionNode fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef failNode fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+
+    class Start startNode
+    class Setup,Install,Continue processNode
+    class LicenseCheck checkNode
+    class Pass decisionNode
+    class Fail failNode
+```
+
+License checks are run both during PR verification and before releases to ensure compliance.
 
 ## Test and Report Workflow
 
@@ -76,6 +111,8 @@ This workflow runs on pull requests and pushes to the main branch to ensure code
 ```mermaid
 flowchart TD
     Start[Push or PR] --> Prepare[Setup Environment]
+    Prepare --> BuildValidation[Build Validation]
+    BuildValidation --> LicenseCheck[Check Licenses]
     Prepare --> UnitTests[Run Unit Tests]
     Prepare --> E2ETests[Run E2E Tests]
     UnitTests --> Coverage[Generate Coverage Report]
@@ -90,11 +127,13 @@ flowchart TD
     classDef testNode fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
     classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
     classDef endNode fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
+    classDef checkNode fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
 
     class Start,End startNode
-    class Prepare processNode
+    class Prepare,BuildValidation processNode
     class UnitTests,E2ETests testNode
     class Coverage,TestReport,Upload reportNode
+    class LicenseCheck checkNode
 ```
 
 ## Release Workflow
@@ -105,7 +144,9 @@ This workflow handles the release process for new versions, triggered by version
 flowchart TD
     Start[Release Trigger] --> Prepare[Prepare Release]
     Prepare --> TestBuild[Test & Build]
-    TestBuild --> SBOM[Generate SBOM]
+    TestBuild --> LicenseCheck[Check Licenses]
+    LicenseCheck --> Build[Build Package]
+    Build --> SBOM[Generate SBOM]
     SBOM --> Attestation[Generate Attestations]
     Attestation --> CreateRelease[Create GitHub Release]
     CreateRelease --> Deploy[Deploy to GitHub Pages]
@@ -117,11 +158,13 @@ flowchart TD
     classDef securityNode fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
     classDef deployNode fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
     classDef endNode fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
+    classDef checkNode fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
 
     class Start,End startNode
-    class Prepare,TestBuild processNode
+    class Prepare,TestBuild,Build processNode
     class SBOM,Attestation securityNode
     class CreateRelease,Deploy deployNode
+    class LicenseCheck checkNode
 ```
 
 ## Security Scanning Workflows
@@ -171,6 +214,44 @@ Evaluates the project against OSSF security best practices:
 - Code signing
 - Other supply chain security practices
 
+## CI/CD Integration
+
+Performance tests and license checks are integrated with CI/CD pipelines to catch performance regressions and licensing issues:
+
+```yaml
+# Excerpt from CI configuration
+stages:
+  - test
+  - performance
+  - compliance
+
+performance-tests:
+  stage: performance
+  script:
+    - npm run cypress:run:perf
+  artifacts:
+    paths:
+      - cypress/reports/performance/
+
+license-check:
+  stage: compliance
+  script:
+    - npm run test:licenses
+  artifacts:
+    paths:
+      - license-report/
+```
+
+## Mermaid Diagram Support
+
+GitHub natively supports Mermaid diagrams in Markdown files. The diagrams in this documentation leverage this support to visually represent workflows using the Mermaid syntax. This enables:
+
+- Real-time rendering of workflow diagrams
+- Automatic updates when the workflow code changes
+- Interactive visualization of complex processes
+
+For more information about Mermaid syntax and capabilities, see the [Mermaid documentation](https://mermaid.js.org/).
+
 ## Continuous Integration Diagram
 
 The complete CI/CD pipeline integrates all workflows:
@@ -188,6 +269,7 @@ flowchart LR
     subgraph "Automated Checks"
         PR --> UnitE2E[Unit & E2E Tests]
         PR --> DependencyScan[Dependency Scan]
+        PR --> LicenseCheck[License Check]
         UnitE2E --> Reports[Test Reports]
         Merge --> CodeQLScan[CodeQL Analysis]
         Merge --> ScoreCard[Security Scorecard]
@@ -195,7 +277,9 @@ flowchart LR
 
     subgraph "Release Process"
         Release --> Build[Build & Attestation]
-        Build --> DeployGH[GitHub Release]
+        Build --> LicenseVerify[License Verification]
+        LicenseVerify --> SBOM[Generate SBOM]
+        SBOM --> DeployGH[GitHub Release]
         DeployGH --> DeployPages[GitHub Pages]
     end
 
@@ -205,38 +289,19 @@ flowchart LR
     classDef testNode fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
     classDef deployNode fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
     classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef checkNode fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
 
     class Developer,PR,Review devNode
     class Merge,Tag,Release codeNode
     class UnitE2E,DependencyScan,Reports,CodeQLScan,ScoreCard testNode
-    class Build,DeployGH,DeployPages deployNode
+    class Build,DeployGH,DeployPages,SBOM deployNode
+    class LicenseCheck,LicenseVerify checkNode
 
     %% Remove previous styling that doesn't match color theme
     style PR fill:#a0c8e0,stroke:#333,stroke-width:2px
     style Release fill:#86b5d9,stroke:#333,stroke-width:2px
     style DeployPages fill:#c8e6c9,stroke:#333,stroke-width:2px
 ```
-
-## CI/CD Integration
-
-Performance tests are integrated with CI/CD pipelines to catch performance regressions:
-
-```yaml
-# Excerpt from CI configuration
-stages:
-  - test
-  - performance
-
-performance-tests:
-  stage: performance
-  script:
-    - npm run cypress:run:perf
-  artifacts:
-    paths:
-      - cypress/reports/performance/
-```
-
-For detailed information about the performance testing framework and methodology, see the [Performance Testing Documentation](/workspaces/cia-compliance-manager/docs/performance-testing.md).
 
 ## Future CI/CD Improvements
 
