@@ -4,6 +4,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)
 ![Coverage](https://img.shields.io/badge/coverage-85%25-yellow.svg)
+![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compliance-manager/badge)
 
 > For an interactive documentation experience, visit our [Documentation Portal](https://hack23.github.io/cia-compliance-manager/documentation.html)
 
@@ -14,6 +15,7 @@
 - [Security Features](#security-features)
 - [Documentation Resources](#documentation-resources)
 - [Key Documentation Sections](#key-documentation-sections)
+- [DevSecOps Practices](#devsecops-practices)
 - [Getting Started](#getting-started)
 - [Contributing](#contributing)
 
@@ -93,6 +95,24 @@ The following resources are available in our [Documentation Portal](https://hack
 - [Current Architecture](/workspaces/cia-compliance-manager/docs/architecture/ARCHITECTURE.md) - Current architecture documentation
 - [Future Architecture](/workspaces/cia-compliance-manager/docs/architecture/FUTURE_ARCHITECTURE.md) - Planned architectural improvements
 - [Performance Testing](/workspaces/cia-compliance-manager/docs/performance-testing.md) - Performance testing methodology and results
+
+## 🛡️ DevSecOps Practices
+
+The CIA Compliance Manager follows secure development practices, including:
+
+### GitHub Actions Security
+
+- **Principle of Least Privilege**: Workflows are configured with minimal required permissions
+- **Permission Scoping**: Permissions are scoped at the job level rather than workflow level where possible
+- **Supply Chain Security**: All releases include SBOM and build provenance attestations
+- **Dependency Scanning**: Automated scanning of dependencies for vulnerabilities
+- **OpenSSF Scorecard**: Regular security scoring through OpenSSF Scorecard ([View Current Score](https://scorecard.dev/viewer/?uri=github.com/Hack23/cia-compliance-manager))
+
+### Continuous Security Testing
+
+- **SAST**: Static Application Security Testing through CodeQL
+- **SCA**: Software Composition Analysis through Dependabot
+- **Security Monitoring**: Continuous monitoring of security issues
 
 ## 🚀 Getting Started
 

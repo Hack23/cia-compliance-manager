@@ -8,17 +8,19 @@ on:
   schedule:
     - cron: "0 0 * * 1"
 
-permissions:
-  contents: read
+# Declare default permissions as read only.
+permissions: read-all
 
 jobs:
   analyze:
-    name: Analyze
+    name: Scorecard analysis
     runs-on: ubuntu-latest
     permissions:
-      actions: read
-      contents: read
+      # Needed to upload the results to code-scanning dashboard.
       security-events: write
+      # Required to checkout the code
+      contents: read
+      actions: read
 
     strategy:
       fail-fast: false

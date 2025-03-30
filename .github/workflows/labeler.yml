@@ -4,14 +4,17 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened, edited]
 
-permissions:
-  contents: read
-  pull-requests: write
+# Set default permissions to read-only
+permissions: read-all
 
 jobs:
   labeler:
     name: Label Pull Request
     runs-on: ubuntu-latest
+    # Only this job needs specific permissions
+    permissions:
+      contents: read # Required to check out the code
+      pull-requests: write # Required to apply labels to PRs
     steps:
       - name: Harden the runner (Audit all outbound calls)
         uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
