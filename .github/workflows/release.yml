@@ -15,19 +15,16 @@ on:
     tags:
       - "v*"
 
-permissions:
-  contents: write
-  attestations: write
-  id-token: write
-  packages: read
-  security-events: write
-  issues: write
-  pull-requests: write
+# Restrict top-level permissions to minimum required defaults
+permissions: read-all
 
 jobs:
   prepare:
     name: Prepare Release
     runs-on: ubuntu-latest
+    # Only prepare job needs write permissions for commit and tagging
+    permissions:
+      contents: write # Required for git auto-commit
     outputs:
       version: ${{ steps.get-version.outputs.version }}
       is_prerelease: ${{ github.event.inputs.prerelease || 'false' }}
@@ -99,7 +96,7 @@ jobs:
 
       - name: Check licenses
         run: npm run test:licenses
-        
+
       - name: Verify Cypress
         run: npx cypress verify
 
@@ -145,6 +142,11 @@ jobs:
     name: Build Release Package
     needs: [prepare]
     runs-on: ubuntu-latest
+    # Build job needs specific permissions for attestations
+    permissions:
+      contents: read
+      id-token: write # Required for OIDC
+      attestations: write # Required for SBOM and build attestations
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
@@ -239,6 +241,10 @@ jobs:
     name: Create Release
     needs: [prepare, build]
     runs-on: ubuntu-latest
+    # Release job needs specific permissions to create GitHub releases
+    permissions:
+      contents: write # Required to create releases
+      id-token: write # Required for OIDC
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
