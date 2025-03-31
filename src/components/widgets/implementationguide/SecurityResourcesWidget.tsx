@@ -331,18 +331,19 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
               <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg text-sm">
                 <p className="mb-2 font-medium">Selected Security Levels:</p>
                 <div className="mb-2 text-xs">
-                  <div className="flex justify-between mb-1">
-                    <span>Availability:</span>
-                    <span className="font-medium">{availabilityLevel}</span>
+                <div className="flex justify-between">
+                    <span>Confidentiality:</span>
+                    <span className="font-medium">{confidentialityLevel}</span>
                   </div>
                   <div className="flex justify-between mb-1">
                     <span>Integrity:</span>
                     <span className="font-medium">{integrityLevel}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Confidentiality:</span>
-                    <span className="font-medium">{confidentialityLevel}</span>
+                  <div className="flex justify-between mb-1">
+                    <span>Availability:</span>
+                    <span className="font-medium">{availabilityLevel}</span>
                   </div>
+
                 </div>
 
                 <p className="mb-2 text-xs text-gray-600 dark:text-gray-400">
@@ -478,26 +479,28 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                 {/* Component-specific tips */}
                 {implementationGuides.length > 0 && (
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {/* Availability Implementation */}
-                    {implementationGuides[0] && (
-                      <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
-                        <h4 className="text-md font-medium mb-2 text-blue-700 dark:text-blue-300 flex items-center">
-                          <span className="mr-2">⏱️</span>Availability (
-                          {availabilityLevel})
+
+ 
+                     {/* Confidentiality Implementation */}
+                     {implementationGuides[2] && (
+                      <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
+                        <h4 className="text-md font-medium mb-2 text-purple-700 dark:text-purple-300 flex items-center">
+                          <span className="mr-2">🔒</span>Confidentiality (
+                          {confidentialityLevel})
                         </h4>
                         <div className="text-sm text-gray-600 dark:text-gray-400">
                           <p className="mb-2">
-                            {implementationGuides[0].description ||
-                              "Focus on systems uptime and recovery capabilities."}
+                            {implementationGuides[2].description ||
+                              "Focus on data protection and access controls."}
                           </p>
                           <div className="text-xs">
                             <span className="font-medium">Expertise:</span>{" "}
-                            {implementationGuides[0].expertiseLevel ||
+                            {implementationGuides[2].expertiseLevel ||
                               "Standard"}
                           </div>
                           <div className="text-xs">
                             <span className="font-medium">Effort:</span>{" "}
-                            {implementationGuides[0].developmentEffort ||
+                            {implementationGuides[2].developmentEffort ||
                               "Medium"}
                           </div>
                         </div>
@@ -530,31 +533,32 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                       </div>
                     )}
 
-                    {/* Confidentiality Implementation */}
-                    {implementationGuides[2] && (
-                      <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
-                        <h4 className="text-md font-medium mb-2 text-purple-700 dark:text-purple-300 flex items-center">
-                          <span className="mr-2">🔒</span>Confidentiality (
-                          {confidentialityLevel})
+                   {/* Availability Implementation */}
+                   {implementationGuides[0] && (
+                      <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+                        <h4 className="text-md font-medium mb-2 text-blue-700 dark:text-blue-300 flex items-center">
+                          <span className="mr-2">⏱️</span>Availability (
+                          {availabilityLevel})
                         </h4>
                         <div className="text-sm text-gray-600 dark:text-gray-400">
                           <p className="mb-2">
-                            {implementationGuides[2].description ||
-                              "Focus on data protection and access controls."}
+                            {implementationGuides[0].description ||
+                              "Focus on systems uptime and recovery capabilities."}
                           </p>
                           <div className="text-xs">
                             <span className="font-medium">Expertise:</span>{" "}
-                            {implementationGuides[2].expertiseLevel ||
+                            {implementationGuides[0].expertiseLevel ||
                               "Standard"}
                           </div>
                           <div className="text-xs">
                             <span className="font-medium">Effort:</span>{" "}
-                            {implementationGuides[2].developmentEffort ||
+                            {implementationGuides[0].developmentEffort ||
                               "Medium"}
                           </div>
                         </div>
                       </div>
                     )}
+
                   </div>
                 )}
 

@@ -2,8 +2,8 @@ import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
-import { isNullish } from "../../../utils/typeGuards";
 import { calculateOverallSecurityLevel } from "../../../utils/securityLevelUtils";
+import { isNullish } from "../../../utils/typeGuards";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
 
@@ -81,13 +81,16 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
     try {
       if (!isNullish(ciaContentService)) {
         // Check if the service has getBusinessValueMetrics method
-        if (typeof (ciaContentService as any).getBusinessValueMetrics === "function") {
+        if (
+          typeof (ciaContentService as any).getBusinessValueMetrics ===
+          "function"
+        ) {
           const metrics = (ciaContentService as any).getBusinessValueMetrics(
             availabilityLevel,
             integrityLevel,
             confidentialityLevel
           );
-          
+
           if (Array.isArray(metrics) && metrics.length > 0) {
             return metrics;
           }
@@ -119,16 +122,21 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   ]);
 
   // Get component-specific value statements
-  const getComponentValueStatements = (component: "availability" | "integrity" | "confidentiality", level: SecurityLevel): string[] => {
+  const getComponentValueStatements = (
+    component: "availability" | "integrity" | "confidentiality",
+    level: SecurityLevel
+  ): string[] => {
     try {
       if (!isNullish(ciaContentService)) {
         // Check if the service has getComponentValueStatements method
-        if (typeof (ciaContentService as any).getComponentValueStatements === "function") {
-          const statements = (ciaContentService as any).getComponentValueStatements(
-            component,
-            level
-          );
-          
+        if (
+          typeof (ciaContentService as any).getComponentValueStatements ===
+          "function"
+        ) {
+          const statements = (
+            ciaContentService as any
+          ).getComponentValueStatements(component, level);
+
           if (Array.isArray(statements) && statements.length > 0) {
             return statements;
           }
@@ -157,7 +165,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               "Maintained customer trust through consistent service delivery",
             ];
           }
-        
+
         case "integrity":
           if (level === "None" || level === "Low") {
             return [
@@ -178,7 +186,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               "Defensible audit trail for regulatory scrutiny",
             ];
           }
-        
+
         case "confidentiality":
           if (level === "None" || level === "Low") {
             return [
@@ -199,7 +207,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               "Reduced breach-related costs and regulatory penalties",
             ];
           }
-        
+
         default:
           return ["No value statements available"];
       }
@@ -220,7 +228,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
             integrityLevel,
             confidentialityLevel
           );
-          
+
           if (!isNullish(roi)) {
             return roi;
           }
@@ -230,21 +238,42 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
       // Fallback ROI based on security score
       switch (securityScore) {
         case "None":
-          return { value: "0%", description: "No measurable return on investment" };
+          return {
+            value: "0%",
+            description: "No measurable return on investment",
+          };
         case "Low":
-          return { value: "50-100%", description: "Basic return, primarily through risk avoidance" };
+          return {
+            value: "50-100%",
+            description: "Basic return, primarily through risk avoidance",
+          };
         case "Moderate":
-          return { value: "150-200%", description: "Balanced return through operational improvements and risk reduction" };
+          return {
+            value: "150-200%",
+            description:
+              "Balanced return through operational improvements and risk reduction",
+          };
         case "High":
-          return { value: "200-300%", description: "Strong return through business enablement and risk management" };
+          return {
+            value: "200-300%",
+            description:
+              "Strong return through business enablement and risk management",
+          };
         case "Very High":
-          return { value: "300-500%", description: "Premium return through competitive advantage and comprehensive protection" };
+          return {
+            value: "300-500%",
+            description:
+              "Premium return through competitive advantage and comprehensive protection",
+          };
         default:
           return { value: "Unknown", description: "Unable to calculate ROI" };
       }
     } catch (err) {
       console.error("Error calculating ROI estimate:", err);
-      return { value: "Unable to calculate", description: "ROI estimation error" };
+      return {
+        value: "Unable to calculate",
+        description: "ROI estimation error",
+      };
     }
   };
 
@@ -253,13 +282,16 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
     try {
       if (!isNullish(ciaContentService)) {
         // Check if the service has getBusinessValueSummary method
-        if (typeof (ciaContentService as any).getBusinessValueSummary === "function") {
+        if (
+          typeof (ciaContentService as any).getBusinessValueSummary ===
+          "function"
+        ) {
           const summary = (ciaContentService as any).getBusinessValueSummary(
             availabilityLevel,
             integrityLevel,
             confidentialityLevel
           );
-          
+
           if (typeof summary === "string" && summary) {
             return summary;
           }
@@ -288,13 +320,16 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   };
 
   // Get the ROI estimate
-  const roiEstimate = useMemo(() => getROIEstimate(), [
-    ciaContentService,
-    availabilityLevel,
-    integrityLevel,
-    confidentialityLevel,
-    securityScore,
-  ]);
+  const roiEstimate = useMemo(
+    () => getROIEstimate(),
+    [
+      ciaContentService,
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel,
+      securityScore,
+    ]
+  );
 
   return (
     <WidgetContainer
@@ -335,14 +370,20 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
                   {roiEstimate.description}
                 </p>
               </div>
-              <div className="text-2xl font-bold text-green-600 dark:text-green-400" data-testid="roi-value">
+              <div
+                className="text-2xl font-bold text-green-600 dark:text-green-400"
+                data-testid="roi-value"
+              >
                 {roiEstimate.value}
               </div>
             </div>
           </div>
 
           {/* Business value metrics grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" data-testid="value-metrics-grid">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+            data-testid="value-metrics-grid"
+          >
             {valueMetrics.map((metric, index) => (
               <div
                 key={index}
@@ -369,46 +410,81 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         {/* Component-specific value sections */}
         <div className="mb-6">
           <h3 className="text-lg font-medium mb-4">Component Business Value</h3>
-          
-          {/* Availability value */}
-          <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg" data-testid="availability-value-section">
-            <div className="flex items-center mb-2">
-              <span className="text-xl mr-2">⏱️</span>
-              <h4 className="font-medium">Availability Value ({availabilityLevel})</h4>
-            </div>
-            <ul className="list-disc list-inside pl-2 text-sm text-gray-600 dark:text-gray-400">
-              {getComponentValueStatements("availability", availabilityLevel).map((statement, index) => (
-                <li key={index} className="mb-1" data-testid={`availability-value-item-${index}`}>
-                  {statement}
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          {/* Integrity value */}
-          <div className="mb-4 p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg" data-testid="integrity-value-section">
-            <div className="flex items-center mb-2">
-              <span className="text-xl mr-2">✓</span>
-              <h4 className="font-medium">Integrity Value ({integrityLevel})</h4>
-            </div>
-            <ul className="list-disc list-inside pl-2 text-sm text-gray-600 dark:text-gray-400">
-              {getComponentValueStatements("integrity", integrityLevel).map((statement, index) => (
-                <li key={index} className="mb-1" data-testid={`integrity-value-item-${index}`}>
-                  {statement}
-                </li>
-              ))}
-            </ul>
-          </div>
-          
+
           {/* Confidentiality value */}
-          <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg" data-testid="confidentiality-value-section">
+          <div
+            className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg"
+            data-testid="confidentiality-value-section"
+          >
             <div className="flex items-center mb-2">
               <span className="text-xl mr-2">🔒</span>
-              <h4 className="font-medium">Confidentiality Value ({confidentialityLevel})</h4>
+              <h4 className="font-medium">
+                Confidentiality Value ({confidentialityLevel})
+              </h4>
             </div>
             <ul className="list-disc list-inside pl-2 text-sm text-gray-600 dark:text-gray-400">
-              {getComponentValueStatements("confidentiality", confidentialityLevel).map((statement, index) => (
-                <li key={index} className="mb-1" data-testid={`confidentiality-value-item-${index}`}>
+              {getComponentValueStatements(
+                "confidentiality",
+                confidentialityLevel
+              ).map((statement, index) => (
+                <li
+                  key={index}
+                  className="mb-1"
+                  data-testid={`confidentiality-value-item-${index}`}
+                >
+                  {statement}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Integrity value */}
+          <div
+            className="mb-4 p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
+            data-testid="integrity-value-section"
+          >
+            <div className="flex items-center mb-2">
+              <span className="text-xl mr-2">✓</span>
+              <h4 className="font-medium">
+                Integrity Value ({integrityLevel})
+              </h4>
+            </div>
+            <ul className="list-disc list-inside pl-2 text-sm text-gray-600 dark:text-gray-400">
+              {getComponentValueStatements("integrity", integrityLevel).map(
+                (statement, index) => (
+                  <li
+                    key={index}
+                    className="mb-1"
+                    data-testid={`integrity-value-item-${index}`}
+                  >
+                    {statement}
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+
+          {/* Availability value */}
+          <div
+            className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+            data-testid="availability-value-section"
+          >
+            <div className="flex items-center mb-2">
+              <span className="text-xl mr-2">⏱️</span>
+              <h4 className="font-medium">
+                Availability Value ({availabilityLevel})
+              </h4>
+            </div>
+            <ul className="list-disc list-inside pl-2 text-sm text-gray-600 dark:text-gray-400">
+              {getComponentValueStatements(
+                "availability",
+                availabilityLevel
+              ).map((statement, index) => (
+                <li
+                  key={index}
+                  className="mb-1"
+                  data-testid={`availability-value-item-${index}`}
+                >
                   {statement}
                 </li>
               ))}
@@ -418,28 +494,37 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
         {/* Business case section */}
         <div>
-          <h3 className="text-lg font-medium mb-3">Security Investment Business Case</h3>
+          <h3 className="text-lg font-medium mb-3">
+            Security Investment Business Case
+          </h3>
           <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-              Use these value statements to build your business case for security investments:
+              Use these value statements to build your business case for
+              security investments:
             </p>
             <div className="space-y-3">
               <div className="p-2 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded">
                 <h5 className="text-sm font-medium mb-1">Executive Summary</h5>
                 <p className="text-sm">
-                  Our {securityScore.toLowerCase()} security investment strategy delivers business value through improved operational reliability, data integrity, and information protection.
+                  Our {securityScore.toLowerCase()} security investment strategy
+                  delivers business value through improved operational
+                  reliability, data integrity, and information protection.
                 </p>
               </div>
               <div className="p-2 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded">
                 <h5 className="text-sm font-medium mb-1">Financial Value</h5>
                 <p className="text-sm">
-                  With an estimated ROI of {roiEstimate.value}, our security investments provide strong financial returns through risk reduction, operational improvements, and business enablement.
+                  With an estimated ROI of {roiEstimate.value}, our security
+                  investments provide strong financial returns through risk
+                  reduction, operational improvements, and business enablement.
                 </p>
               </div>
               <div className="p-2 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
                 <h5 className="text-sm font-medium mb-1">Strategic Value</h5>
                 <p className="text-sm">
-                  Beyond direct financial returns, our security program creates strategic value by enabling digital initiatives, protecting our brand, and building customer trust.
+                  Beyond direct financial returns, our security program creates
+                  strategic value by enabling digital initiatives, protecting
+                  our brand, and building customer trust.
                 </p>
               </div>
             </div>
@@ -467,10 +552,11 @@ function generateFallbackValueMetrics(
   };
 
   // Calculate average score
-  const avgScore = 
-    (levelScores[availabilityLevel] + 
-     levelScores[integrityLevel] + 
-     levelScores[confidentialityLevel]) / 3;
+  const avgScore =
+    (levelScores[availabilityLevel] +
+      levelScores[integrityLevel] +
+      levelScores[confidentialityLevel]) /
+    3;
 
   // Generate appropriate metrics based on the average score
   return [

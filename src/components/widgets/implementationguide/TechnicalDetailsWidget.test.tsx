@@ -113,7 +113,7 @@ describe("TechnicalDetailsWidget", () => {
 
     // Update to use the actual text that appears in the rendered component
     expect(screen.getByTestId("technical-description")).toHaveTextContent(
-      /availability Moderate technical details/i
+      /confidentiality Moderate technical details/i
     );
   });
 
@@ -124,10 +124,10 @@ describe("TechnicalDetailsWidget", () => {
 
     // Update to use the actual text pattern that appears in the component
     expect(
-      screen.getByText(/availability Moderate step 1/i)
+      screen.getByText(/confidentiality Moderate step 1/i)
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/availability Moderate step 2/i)
+      screen.getByText(/confidentiality Moderate step 2/i)
     ).toBeInTheDocument();
   });
 

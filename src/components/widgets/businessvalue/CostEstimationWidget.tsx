@@ -540,32 +540,32 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         <div className="mb-6">
           <h3 className="text-lg font-medium mb-3">Component Cost Breakdown</h3>
           <div className="space-y-4">
-            {/* Availability Costs */}
+            {/* Confidentiality Costs */}
             <div
-              className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
-              data-testid={TEST_IDS.costEstimation.availabilityCost}
+              className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg"
+              data-testid={TEST_IDS.costEstimation.confidentialityCost}
             >
-              <h4 className="text-md font-medium flex items-center text-blue-700 dark:text-blue-300">
-                <span className="mr-2">⏱️</span>
-                Availability Costs ({availabilityLevel})
+              <h4 className="text-md font-medium flex items-center text-purple-700 dark:text-purple-300">
+                <span className="mr-2">🔒</span>
+                Confidentiality Costs ({confidentialityLevel})
               </h4>
               <div className="mt-2 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
                 <div className="p-2 bg-white dark:bg-gray-800 rounded">
                   <div className="font-medium mb-1">Implementation</div>
-                  <div className="text-blue-600 dark:text-blue-400">
-                    {availabilityCost.implementation}
+                  <div className="text-purple-600 dark:text-purple-400">
+                    {confidentialityCost.implementation}
                   </div>
                 </div>
                 <div className="p-2 bg-white dark:bg-gray-800 rounded">
                   <div className="font-medium mb-1">Operational</div>
-                  <div className="text-blue-600 dark:text-blue-400">
-                    {availabilityCost.operational}
+                  <div className="text-purple-600 dark:text-purple-400">
+                    {confidentialityCost.operational}
                   </div>
                 </div>
                 <div className="p-2 bg-white dark:bg-gray-800 rounded">
                   <div className="font-medium mb-1">Personnel</div>
-                  <div className="text-blue-600 dark:text-blue-400">
-                    {availabilityCost.personnel}
+                  <div className="text-purple-600 dark:text-purple-400">
+                    {confidentialityCost.personnel}
                   </div>
                 </div>
               </div>
@@ -602,32 +602,32 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
               </div>
             </div>
 
-            {/* Confidentiality Costs */}
+            {/* Availability Costs */}
             <div
-              className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg"
-              data-testid={TEST_IDS.costEstimation.confidentialityCost}
+              className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+              data-testid={TEST_IDS.costEstimation.availabilityCost}
             >
-              <h4 className="text-md font-medium flex items-center text-purple-700 dark:text-purple-300">
-                <span className="mr-2">🔒</span>
-                Confidentiality Costs ({confidentialityLevel})
+              <h4 className="text-md font-medium flex items-center text-blue-700 dark:text-blue-300">
+                <span className="mr-2">⏱️</span>
+                Availability Costs ({availabilityLevel})
               </h4>
               <div className="mt-2 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
                 <div className="p-2 bg-white dark:bg-gray-800 rounded">
                   <div className="font-medium mb-1">Implementation</div>
-                  <div className="text-purple-600 dark:text-purple-400">
-                    {confidentialityCost.implementation}
+                  <div className="text-blue-600 dark:text-blue-400">
+                    {availabilityCost.implementation}
                   </div>
                 </div>
                 <div className="p-2 bg-white dark:bg-gray-800 rounded">
                   <div className="font-medium mb-1">Operational</div>
-                  <div className="text-purple-600 dark:text-purple-400">
-                    {confidentialityCost.operational}
+                  <div className="text-blue-600 dark:text-blue-400">
+                    {availabilityCost.operational}
                   </div>
                 </div>
                 <div className="p-2 bg-white dark:bg-gray-800 rounded">
                   <div className="font-medium mb-1">Personnel</div>
-                  <div className="text-purple-600 dark:text-purple-400">
-                    {confidentialityCost.personnel}
+                  <div className="text-blue-600 dark:text-blue-400">
+                    {availabilityCost.personnel}
                   </div>
                 </div>
               </div>
