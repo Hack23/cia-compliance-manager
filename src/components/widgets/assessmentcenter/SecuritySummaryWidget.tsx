@@ -131,14 +131,15 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
 
         <h3 className="text-lg font-medium mb-2">Component Security Levels</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Availability Card */}
-          <div
-            className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
-            data-testid={SECURITY_SUMMARY_TEST_IDS.AVAILABILITY_CARD}
+
+                    {/* Confidentiality Card */}
+                    <div
+            className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg"
+            data-testid={SECURITY_SUMMARY_TEST_IDS.CONFIDENTIALITY_CARD}
           >
             <div className="flex items-center mb-2">
-              <span className="text-xl mr-2">⏱️</span>
-              <h4 className="font-medium">Availability</h4>
+              <span className="text-xl mr-2">🔒</span>
+              <h4 className="font-medium">Confidentiality</h4>
             </div>
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm text-gray-600 dark:text-gray-400">
@@ -146,23 +147,25 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               </span>
               <span
                 className="font-medium"
-                data-testid={SECURITY_SUMMARY_TEST_IDS.AVAILABILITY_LEVEL}
+                data-testid={SECURITY_SUMMARY_TEST_IDS.CONFIDENTIALITY_LEVEL}
               >
-                <SecurityLevelIndicator level={availabilityLevel} />
+                <SecurityLevelIndicator level={confidentialityLevel} />
               </span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm text-gray-600 dark:text-gray-400">
                 Risk:
               </span>
-              <span data-testid={SECURITY_SUMMARY_TEST_IDS.AVAILABILITY_RISK}>
+              <span
+                data-testid={SECURITY_SUMMARY_TEST_IDS.CONFIDENTIALITY_RISK}
+              >
                 <StatusBadge
                   status={getStatusVariant(
-                    getRiskLevelFromSecurityLevel(availabilityLevel)
+                    getRiskLevelFromSecurityLevel(confidentialityLevel)
                   )}
                   size="sm"
                 >
-                  {getRiskLevelFromSecurityLevel(availabilityLevel)}
+                  {getRiskLevelFromSecurityLevel(confidentialityLevel)}
                 </StatusBadge>
               </span>
             </div>
@@ -205,14 +208,14 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
             </div>
           </div>
 
-          {/* Confidentiality Card */}
+          {/* Availability Card */}
           <div
-            className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg"
-            data-testid={SECURITY_SUMMARY_TEST_IDS.CONFIDENTIALITY_CARD}
+            className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+            data-testid={SECURITY_SUMMARY_TEST_IDS.AVAILABILITY_CARD}
           >
             <div className="flex items-center mb-2">
-              <span className="text-xl mr-2">🔒</span>
-              <h4 className="font-medium">Confidentiality</h4>
+              <span className="text-xl mr-2">⏱️</span>
+              <h4 className="font-medium">Availability</h4>
             </div>
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm text-gray-600 dark:text-gray-400">
@@ -220,29 +223,29 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               </span>
               <span
                 className="font-medium"
-                data-testid={SECURITY_SUMMARY_TEST_IDS.CONFIDENTIALITY_LEVEL}
+                data-testid={SECURITY_SUMMARY_TEST_IDS.AVAILABILITY_LEVEL}
               >
-                <SecurityLevelIndicator level={confidentialityLevel} />
+                <SecurityLevelIndicator level={availabilityLevel} />
               </span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm text-gray-600 dark:text-gray-400">
                 Risk:
               </span>
-              <span
-                data-testid={SECURITY_SUMMARY_TEST_IDS.CONFIDENTIALITY_RISK}
-              >
+              <span data-testid={SECURITY_SUMMARY_TEST_IDS.AVAILABILITY_RISK}>
                 <StatusBadge
                   status={getStatusVariant(
-                    getRiskLevelFromSecurityLevel(confidentialityLevel)
+                    getRiskLevelFromSecurityLevel(availabilityLevel)
                   )}
                   size="sm"
                 >
-                  {getRiskLevelFromSecurityLevel(confidentialityLevel)}
+                  {getRiskLevelFromSecurityLevel(availabilityLevel)}
                 </StatusBadge>
               </span>
             </div>
           </div>
+
+
         </div>
       </div>
     </WidgetContainer>

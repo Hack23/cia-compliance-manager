@@ -392,12 +392,12 @@ const BusinessImpactAnalysisWidget: React.FC<
       <div className="grid grid-cols-3 gap-2 mt-4 mb-4">
         <div
           className={`p-2 rounded text-center ${getImpactColorClass(
-            availabilityLevel
+            confidentialityLevel
           )}`}
-          data-testid={`${testId}-heatmap-availability`}
+          data-testid={`${testId}-heatmap-confidentiality`}
         >
-          <div className="text-xs font-medium">Availability</div>
-          <div className="font-bold">{availabilityLevel}</div>
+          <div className="text-xs font-medium">Confidentiality</div>
+          <div className="font-bold">{confidentialityLevel}</div>
         </div>
         <div
           className={`p-2 rounded text-center ${getImpactColorClass(
@@ -410,12 +410,12 @@ const BusinessImpactAnalysisWidget: React.FC<
         </div>
         <div
           className={`p-2 rounded text-center ${getImpactColorClass(
-            confidentialityLevel
+            availabilityLevel
           )}`}
-          data-testid={`${testId}-heatmap-confidentiality`}
+          data-testid={`${testId}-heatmap-availability`}
         >
-          <div className="text-xs font-medium">Confidentiality</div>
-          <div className="font-bold">{confidentialityLevel}</div>
+          <div className="text-xs font-medium">Availability</div>
+          <div className="font-bold">{availabilityLevel}</div>
         </div>
       </div>
     );
@@ -487,56 +487,27 @@ const BusinessImpactAnalysisWidget: React.FC<
       error={serviceError}
     >
       <div className="p-4">
-        {/* Executive Summary Section */}
-        {renderExecutiveSummary()}
-
-        {/* Current Security Levels & Impact */}
-        <div className="mb-4">
-          <h3 className="text-lg font-medium mb-2">Current Security Levels</h3>
-          <div className="flex flex-wrap gap-2">
-            <SecurityLevelBadge
-              category="Availability"
-              level={availabilityLevel}
-              colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
-              textClass="text-blue-800 dark:text-blue-300"
-              testId={`${testId}-availability-badge`}
-            />
-            <SecurityLevelBadge
-              category="Integrity"
-              level={integrityLevel}
-              colorClass="bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
-              textClass="text-green-800 dark:text-green-300"
-              testId={`${testId}-integrity-badge`}
-            />
-            <SecurityLevelBadge
-              category="Confidentiality"
-              level={confidentialityLevel}
-              colorClass="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
-              textClass="text-purple-800 dark:text-purple-300"
-              testId={`${testId}-confidentiality-badge`}
-            />
-          </div>
-          {renderImpactHeatMap()}
-        </div>
-
         {/* Component Business Impacts */}
         <div className="mb-4">
           <h3 className="text-lg font-medium mb-3">
             Business Impacts by Component
           </h3>
 
-          {/* Availability impact */}
-          {availabilityImpact && (
+          {/* Confidentiality impact */}
+          {confidentialityImpact && (
             <div className="mb-3">
               <h4 className="text-md font-medium mb-2 flex items-center">
-                <span className="mr-2">⏱️</span>Availability Impact
+                <span className="mr-2">🔒</span>Confidentiality Impact
               </h4>
-              {availabilityImpact.financial &&
-                renderImpactCategory("Financial", availabilityImpact.financial)}
-              {availabilityImpact.operational &&
+              {confidentialityImpact.reputational &&
                 renderImpactCategory(
-                  "Operational",
-                  availabilityImpact.operational
+                  "Reputational",
+                  confidentialityImpact.reputational
+                )}
+              {confidentialityImpact.regulatory &&
+                renderImpactCategory(
+                  "Regulatory",
+                  confidentialityImpact.regulatory
                 )}
             </div>
           )}
@@ -557,24 +528,57 @@ const BusinessImpactAnalysisWidget: React.FC<
             </div>
           )}
 
-          {/* Confidentiality impact */}
-          {confidentialityImpact && (
+          {/* Availability impact */}
+          {availabilityImpact && (
             <div className="mb-3">
               <h4 className="text-md font-medium mb-2 flex items-center">
-                <span className="mr-2">🔒</span>Confidentiality Impact
+                <span className="mr-2">⏱️</span>Availability Impact
               </h4>
-              {confidentialityImpact.reputational &&
+              {availabilityImpact.financial &&
+                renderImpactCategory("Financial", availabilityImpact.financial)}
+              {availabilityImpact.operational &&
                 renderImpactCategory(
-                  "Reputational",
-                  confidentialityImpact.reputational
-                )}
-              {confidentialityImpact.regulatory &&
-                renderImpactCategory(
-                  "Regulatory",
-                  confidentialityImpact.regulatory
+                  "Operational",
+                  availabilityImpact.operational
                 )}
             </div>
           )}
+        </div>
+
+        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+          <p className="text-sm">
+            {/* Executive Summary Section */}
+            {renderExecutiveSummary()}
+          </p>
+        </div>
+
+        {/* Current Security Levels & Impact */}
+        <div className="mb-4">
+          <h3 className="text-lg font-medium mb-2">Current Security Levels</h3>
+          <div className="flex flex-wrap gap-2">
+            <SecurityLevelBadge
+              category="Confidentiality"
+              level={confidentialityLevel}
+              colorClass="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
+              textClass="text-purple-800 dark:text-purple-300"
+              testId={`${testId}-confidentiality-badge`}
+            />
+            <SecurityLevelBadge
+              category="Integrity"
+              level={integrityLevel}
+              colorClass="bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
+              textClass="text-green-800 dark:text-green-300"
+              testId={`${testId}-integrity-badge`}
+            />
+            <SecurityLevelBadge
+              category="Availability"
+              level={availabilityLevel}
+              colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+              textClass="text-blue-800 dark:text-blue-300"
+              testId={`${testId}-availability-badge`}
+            />
+          </div>
+          {renderImpactHeatMap()}
         </div>
 
         {/* Business Considerations & Benefits */}

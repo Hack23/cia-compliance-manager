@@ -131,14 +131,14 @@ const SecurityVisualizationWidget: React.FC<
     const config: ChartConfiguration = {
       type: "radar",
       data: {
-        labels: ["Availability", "Integrity", "Confidentiality"],
+        labels: ["Confidentiality", "Integrity", "Availability"],
         datasets: [
           {
             label: "Current Security Levels",
             data: [
-              (availabilityValue / 4) * 100,
-              (integrityValue / 4) * 100,
               (confidentialityValue / 4) * 100,
+              (integrityValue / 4) * 100,
+              (availabilityValue / 4) * 100,
             ],
             backgroundColor: "rgba(75, 192, 192, 0.2)",
             borderColor: "rgba(75, 192, 192, 1)",
@@ -216,19 +216,13 @@ const SecurityVisualizationWidget: React.FC<
       <div className="p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center">
-            <SecurityRiskScore
-              score={securityScore}
-              label={riskLevel}
-              testId={`${testId}-risk-score`}
-            />
-
             <div className="mt-4 grid grid-cols-3 w-full text-center">
               <div
-                className="text-blue-600 dark:text-blue-400"
-                data-testid={CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE}
+                className="text-purple-600 dark:text-purple-400"
+                data-testid={CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE}
               >
-                <div className="text-sm mb-1">Availability</div>
-                <div className="font-medium">{availabilityLevel}</div>
+                <div className="text-sm mb-1">Confidentiality</div>
+                <div className="font-medium">{confidentialityLevel}</div>
               </div>
 
               <div
@@ -240,11 +234,11 @@ const SecurityVisualizationWidget: React.FC<
               </div>
 
               <div
-                className="text-purple-600 dark:text-purple-400"
-                data-testid={CHART_TEST_IDS.RADAR_CONFIDENTIALITY_VALUE}
+                className="text-blue-600 dark:text-blue-400"
+                data-testid={CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE}
               >
-                <div className="text-sm mb-1">Confidentiality</div>
-                <div className="font-medium">{confidentialityLevel}</div>
+                <div className="text-sm mb-1">Availability</div>
+                <div className="font-medium">{availabilityLevel}</div>
               </div>
             </div>
           </div>
@@ -270,6 +264,12 @@ const SecurityVisualizationWidget: React.FC<
               target "High" security level recommended for most business
               applications.
             </p>
+            <SecurityRiskScore
+              score={securityScore}
+              label={riskLevel}
+              testId={`${testId}-risk-score`}
+            />
+
             <p>
               Your overall security score is{" "}
               <span className="font-medium">{securityScore}%</span>, which
