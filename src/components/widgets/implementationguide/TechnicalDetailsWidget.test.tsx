@@ -124,10 +124,10 @@ describe("TechnicalDetailsWidget", () => {
 
     // Update to use the actual text pattern that appears in the component
     expect(
-      screen.getByText(/availability Moderate step 1/i)
+      screen.getByText(/confidentiality Moderate step 1/i)
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/availability Moderate step 2/i)
+      screen.getByText(/confidentiality Moderate step 2/i)
     ).toBeInTheDocument();
   });
 
