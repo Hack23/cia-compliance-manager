@@ -59,10 +59,10 @@ jobs:
     runs-on: ubuntu-latest
     # Needs write permissions to upload artifacts
     permissions:
-      contents: read # Required to check out code
+      contents: write # Required to check out code
       actions: read # Required to use GitHub actions
       id-token: write # Required for attestation
-      artifacts: write # Required to upload artifacts (implicit permission)
+      pull-requests: write # Required to upload artifacts (implicit permission)
     steps:
       - name: Harden the runner (Audit all outbound calls)
         uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
@@ -104,9 +104,9 @@ jobs:
     runs-on: ubuntu-latest
     # Needs write permissions to upload artifacts
     permissions:
-      contents: read # Required to check out code
+      contents: write # Required to check out code
       actions: read # Required to use GitHub actions
-      artifacts: write # Required to upload artifacts (implicit permission)
+      checks: write # Required to upload artifacts (implicit permission)
     steps:
       - name: Harden the runner (Audit all outbound calls)
         uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
@@ -140,9 +140,10 @@ jobs:
     runs-on: ubuntu-latest
     # Needs write permissions to upload artifacts
     permissions:
-      contents: read # Required to check out code
+      contents: write # Required to check out code
       actions: read # Required to use GitHub actions
-      artifacts: write # Required to upload artifacts (implicit permission)
+      checks: write # Required to upload artifacts (implicit permission)
+      pull-requests: write
     steps:
       - name: Harden the runner (Audit all outbound calls)
         uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
@@ -180,9 +181,9 @@ jobs:
     if: always()
     # Needs write permissions to upload artifacts
     permissions:
-      contents: read # Required to check out code
+      contents: write # Required to check out code
       actions: read # Required to use GitHub actions
-      artifacts: write # Required to upload artifacts (implicit permission)
+      checks: write # Required to upload artifacts (implicit permission)
     steps:
       - name: Harden the runner (Audit all outbound calls)
         uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
