@@ -113,7 +113,7 @@ describe("TechnicalDetailsWidget", () => {
 
     // Update to use the actual text that appears in the rendered component
     expect(screen.getByTestId("technical-description")).toHaveTextContent(
-      /availability Moderate technical details/i
+      /confidentiality Moderate technical details/i
     );
   });
 
