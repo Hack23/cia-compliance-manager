@@ -1,6 +1,6 @@
 # 🔁 CIA Compliance Manager CI/CD Workflows
 
-This document details the continuous integration and deployment workflows used in the CIA Compliance Manager project. The workflows automate testing, security scanning, and release procedures to ensure code quality, security, and reliable deployment.
+This document details the continuous integration and deployment workflows used in the CIA Compliance Manager project. The workflows automate testing, security scanning, and release procedures to ensure code quality and security compliance.
 
 ## 📚 Related Architecture Documentation
 
@@ -27,19 +27,22 @@ This document details the continuous integration and deployment workflows used i
 
 The project uses GitHub Actions for automation with the following workflows:
 
-1. **🧪 Test and Report**: Run unit and E2E tests with coverage reporting
-2. **🔍 CodeQL Analysis**: Security scanning for code vulnerabilities
-3. **📦 Dependency Review**: Scanning of dependency changes for vulnerabilities
-4. **⭐ Scorecard Analysis**: OSSF security scorecard for supply chain security
-5. **📜 License Checking**: Verification of dependency licenses for compliance
-6. **🚀 Release Process**: Build, attest, and deploy new versions
+1. **🚀 Build, Attest and Release**: Builds, attests, and releases new versions with security scanning
+2. **🧪 Test and Report**: Runs unit and E2E tests with coverage reporting
+3. **🔍 CodeQL Analysis**: Security scanning for code vulnerabilities
+4. **📦 Dependency Review**: Scanning of dependency changes for vulnerabilities
+5. **⭐ Scorecard Analysis**: OSSF security scorecard for supply chain security
+6. **📜 License Checking**: Verification of dependency licenses for compliance
 7. **🏷️ PR Labeler**: Automated labeling of pull requests
+8. **🔆 Lighthouse**: Performance, accessibility, and best practices auditing
+9. **🔒 ZAP Scan**: Dynamic security scanning of deployed application
 
 ## Workflow Relationships
 
 ```mermaid
 flowchart TB
     subgraph "Continuous Integration"
+        direction TB
         PR[Pull Request] --> TestReport[Test and Report]
         PR --> DependencyReview[Dependency Review]
         PR --> Labeler[PR Labeler]
@@ -49,6 +52,7 @@ flowchart TB
     end
 
     subgraph "Continuous Deployment"
+        direction TB
         Release[Release Trigger] --> BuildTest[Prepare & Test]
         BuildTest --> LicenseCheck2[License Check]
         LicenseCheck2 --> Build[Build Package]
@@ -56,6 +60,8 @@ flowchart TB
         GenerateSBOM --> Attestations[Create Attestations]
         Attestations --> CreateRelease[Create GitHub Release]
         CreateRelease --> DeployGHPages[Deploy to GitHub Pages]
+        DeployGHPages --> Lighthouse[Lighthouse Audit]
+        DeployGHPages --> ZAPScan[ZAP Security Scan]
     end
 
     PR -.-> |"approved & merged"| main[Main Branch]
@@ -63,15 +69,18 @@ flowchart TB
     main --> CodeQL
     main -.-> |"tag created or manual trigger"| Release
 
-    %% Cool color styling
-    classDef integration fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef deployment fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
-    classDef process fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef trigger fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef security fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+    %% Enhanced color styling
+    classDef integration fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
+    classDef deployment fill:#86b5d9,stroke:#333,stroke-width:1.5px,color:black
+    classDef process fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
+    classDef trigger fill:#bbdefb,stroke:#333,stroke-width:1.5px,color:black
+    classDef security fill:#ffccbc,stroke:#333,stroke-width:1.5px,color:black
+    classDef audit fill:#ffecb3,stroke:#333,stroke-width:1.5px,color:black
 
-    class PR,TestReport,DependencyReview,Labeler,CodeQL,Scorecard,LicenseCheck integration
+    class PR,TestReport,DependencyReview,Labeler integration
+    class CodeQL,Scorecard,LicenseCheck security
     class Release,BuildTest,Build,CreateRelease,DeployGHPages,LicenseCheck2,GenerateSBOM,Attestations deployment
+    class Lighthouse,ZAPScan audit
     class main process
 ```
 
@@ -88,12 +97,12 @@ flowchart TD
     Pass -->|Yes| Continue[Continue Pipeline]
     Pass -->|No| Fail[Fail Build]
 
-    %% Cool color styling
-    classDef startNode fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef checkNode fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef decisionNode fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef failNode fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+    %% Enhanced styling with better visual hierarchy
+    classDef startNode fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
+    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
+    classDef checkNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
+    classDef decisionNode fill:#d1c4e9,stroke:#333,stroke-width:2px,color:black
+    classDef failNode fill:#ffccbc,stroke:#333,stroke-width:2px,color:black,font-weight:bold
 
     class Start startNode
     class Setup,Install,Continue processNode
@@ -112,22 +121,22 @@ This workflow runs on pull requests and pushes to the main branch to ensure code
 flowchart TD
     Start[Push or PR] --> Prepare[Setup Environment]
     Prepare --> BuildValidation[Build Validation]
-    BuildValidation --> LicenseCheck[Check Licenses]
     Prepare --> UnitTests[Run Unit Tests]
     Prepare --> E2ETests[Run E2E Tests]
+    BuildValidation --> LicenseCheck[Check Licenses]
     UnitTests --> Coverage[Generate Coverage Report]
     E2ETests --> TestReport[Generate Test Report]
     Coverage --> Upload[Upload Reports]
     TestReport --> Upload
     Upload --> End[End]
 
-    %% Cool color styling
-    classDef startNode fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef testNode fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef endNode fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
-    classDef checkNode fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+    %% Enhanced styling with improved flow and grouping
+    classDef startNode fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
+    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
+    classDef testNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
+    classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1.5px,color:black
+    classDef endNode fill:#86b5d9,stroke:#333,stroke-width:2px,color:black
+    classDef checkNode fill:#ffccbc,stroke:#333,stroke-width:1.5px,color:black
 
     class Start,End startNode
     class Prepare,BuildValidation processNode
@@ -150,47 +159,59 @@ flowchart TD
     SBOM --> Attestation[Generate Attestations]
     Attestation --> CreateRelease[Create GitHub Release]
     CreateRelease --> Deploy[Deploy to GitHub Pages]
-    Deploy --> End[End]
+    Deploy --> LighthouseAudit[Lighthouse Audit]
+    Deploy --> ZAPScan[ZAP Security Scan]
+    LighthouseAudit --> End[End]
+    ZAPScan --> End
 
-    %% Cool color styling
-    classDef startNode fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef securityNode fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef deployNode fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef endNode fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
-    classDef checkNode fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+    %% Enhanced styling with better visual hierarchy
+    classDef startNode fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
+    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
+    classDef securityNode fill:#d1c4e9,stroke:#333,stroke-width:1.5px,color:black
+    classDef deployNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
+    classDef endNode fill:#86b5d9,stroke:#333,stroke-width:2px,color:black
+    classDef checkNode fill:#ffccbc,stroke:#333,stroke-width:1.5px,color:black
+    classDef auditNode fill:#ffecb3,stroke:#333,stroke-width:1.5px,color:black
 
     class Start,End startNode
     class Prepare,TestBuild,Build processNode
-    class SBOM,Attestation securityNode
+    class SBOM,Attestation,ZAPScan securityNode
     class CreateRelease,Deploy deployNode
     class LicenseCheck checkNode
+    class LighthouseAudit auditNode
 ```
 
-## 🔍 Security Scanning Workflows
+## 🔍 Security and Quality Scanning Workflows
 
-Multiple security scanning workflows validate different aspects of the codebase.
+Multiple security and quality scanning workflows validate different aspects of the codebase and deployed application.
 
 ```mermaid
 flowchart TD
-    subgraph "Security Workflows"
+    subgraph "Security & Quality Workflows"
+        direction TB
         PR[Pull Request] --> DependencyReview[Dependency Review]
         Branch[Main Branch] --> CodeQL[CodeQL Analysis]
         Branch --> Scorecard[Scorecard Analysis]
+        Deploy[Deployment] --> Lighthouse[Lighthouse Audit]
+        Deploy --> ZAPScan[ZAP Security Scan]
     end
 
     DependencyReview --> Report1[PR Comments]
     CodeQL --> Report2[GitHub Security Tab]
     Scorecard --> Report3[Security Dashboard]
+    Lighthouse --> Report4[Performance Report]
+    ZAPScan --> Report5[Security Findings]
 
-    %% Cool color styling
-    classDef sourceNode fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef scanNode fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    %% Enhanced styling with improved grouping
+    classDef sourceNode fill:#a0c8e0,stroke:#333,stroke-width:2px,color:black
+    classDef scanNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
+    classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1.5px,color:black,font-style:italic
+    classDef auditNode fill:#ffecb3,stroke:#333,stroke-width:1.5px,color:black
 
-    class PR,Branch sourceNode
-    class DependencyReview,CodeQL,Scorecard scanNode
-    class Report1,Report2,Report3 reportNode
+    class PR,Branch,Deploy sourceNode
+    class DependencyReview,CodeQL,Scorecard,ZAPScan scanNode
+    class Report1,Report2,Report3,Report5 reportNode
+    class Lighthouse,Report4 auditNode
 ```
 
 ### 🔍 CodeQL Analysis Workflow
@@ -214,6 +235,29 @@ Evaluates the project against OSSF security best practices:
 - Code signing
 - Other supply chain security practices
 
+### 🔆 Lighthouse Audit
+
+Runs performance and best practices audits on the deployed application:
+
+- Performance metrics
+- Accessibility compliance
+- SEO optimization
+- PWA compatibility
+- Best practices adherence
+
+The workflow uses a budget.json file to define performance budgets and thresholds, uploading results as artifacts and to temporary public storage for viewing.
+
+### 🔒 ZAP Security Scan
+
+Performs dynamic application security testing (DAST) on the deployed application:
+
+- Identifies common web vulnerabilities
+- API security scanning
+- Checks for OWASP Top 10 vulnerabilities
+- Generates comprehensive security reports
+
+ZAP scans are performed using the OWASP ZAP Docker container against the deployed GitHub Pages site to identify runtime security issues that static analysis might miss.
+
 ## CI/CD Integration
 
 Performance tests and license checks are integrated with CI/CD pipelines to catch performance regressions and licensing issues:
@@ -224,6 +268,7 @@ stages:
   - test
   - performance
   - compliance
+  - security
 
 performance-tests:
   stage: performance
@@ -240,6 +285,22 @@ license-check:
   artifacts:
     paths:
       - license-report/
+
+lighthouse-audit:
+  stage: performance
+  script:
+    - npm run lighthouse
+  artifacts:
+    paths:
+      - lighthouse-reports/
+
+zap-scan:
+  stage: security
+  script:
+    - npm run zap-scan
+  artifacts:
+    paths:
+      - zap-reports/
 ```
 
 ## Mermaid Diagram Support
@@ -259,7 +320,8 @@ The complete CI/CD pipeline integrates all workflows:
 ```mermaid
 flowchart LR
     subgraph "Code Changes"
-        Developer --> PR[Pull Request]
+        direction TB
+        Developer([Developer]) --> PR[Pull Request]
         PR --> Review[Code Review]
         Review --> Merge[Merge to Main]
         Merge --> Tag[Version Tag]
@@ -267,6 +329,7 @@ flowchart LR
     end
 
     subgraph "Automated Checks"
+        direction TB
         PR --> UnitE2E[Unit & E2E Tests]
         PR --> DependencyScan[Dependency Scan]
         PR --> LicenseCheck[License Check]
@@ -276,31 +339,32 @@ flowchart LR
     end
 
     subgraph "Release Process"
+        direction TB
         Release --> Build[Build & Attestation]
         Build --> LicenseVerify[License Verification]
         LicenseVerify --> SBOM[Generate SBOM]
         SBOM --> DeployGH[GitHub Release]
         DeployGH --> DeployPages[GitHub Pages]
+        DeployPages --> Lighthouse[Lighthouse Audit]
+        DeployPages --> ZAPScan[ZAP Security Scan]
     end
 
-    %% Cool color styling
-    classDef devNode fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef codeNode fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef testNode fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef deployNode fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
-    classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef checkNode fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
+    %% Enhanced styling with better visual hierarchy and flow indicators
+    classDef devNode fill:#a0c8e0,stroke:#333,stroke-width:2px,color:black
+    classDef codeNode fill:#bbdefb,stroke:#333,stroke-width:1.5px,color:black
+    classDef testNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
+    classDef deployNode fill:#86b5d9,stroke:#333,stroke-width:1.5px,color:black
+    classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1.5px,color:black
+    classDef checkNode fill:#ffccbc,stroke:#333,stroke-width:1.5px,color:black
+    classDef auditNode fill:#ffecb3,stroke:#333,stroke-width:1.5px,color:black
 
-    class Developer,PR,Review devNode
-    class Merge,Tag,Release codeNode
+    class Developer devNode
+    class PR,Review,Merge,Tag,Release codeNode
     class UnitE2E,DependencyScan,Reports,CodeQLScan,ScoreCard testNode
-    class Build,DeployGH,DeployPages,SBOM deployNode
+    class Build,DeployGH,DeployPages deployNode
     class LicenseCheck,LicenseVerify checkNode
-
-    %% Remove previous styling that doesn't match color theme
-    style PR fill:#a0c8e0,stroke:#333,stroke-width:2px
-    style Release fill:#86b5d9,stroke:#333,stroke-width:2px
-    style DeployPages fill:#c8e6c9,stroke:#333,stroke-width:2px
+    class SBOM,ZAPScan reportNode
+    class Lighthouse auditNode
 ```
 
 ## Future CI/CD Improvements
@@ -308,9 +372,13 @@ flowchart LR
 The following enhancements are planned for future CI/CD pipeline improvements:
 
 1. **Automated Versioning**: Semantic versioning based on commit messages
-2. **Performance Testing**: Integrating performance benchmarks into CI pipeline
-3. **Security Scanning Enhancement**: Additional security scanners
+2. **Performance Testing**: Expanding performance benchmarks with more metrics
+3. **Security Scanning Enhancement**: Additional security scanners and threat modeling
 4. **Containerization**: Docker image building and container scanning
 5. **Environment-Specific Deployments**: Staging and production deployment pipelines
+6. **Automated Accessibility Testing**: Extended accessibility compliance validation
+7. **Continuous Performance Monitoring**: Trend analysis for performance metrics
+8. **Vulnerability Management**: Automated vulnerability tracking and remediation workflows
+9. **Compliance Reporting**: Automated compliance status reporting and auditing
 
 For details on the future architecture direction, see [FUTURE_ARCHITECTURE.md](FUTURE_ARCHITECTURE.md).
