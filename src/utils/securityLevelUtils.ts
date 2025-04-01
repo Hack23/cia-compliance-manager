@@ -4,6 +4,7 @@ import {
   SECURITY_LEVEL_VALUES,
 } from "../constants/securityLevels";
 import { SecurityLevel } from "../types/cia";
+import { StatusType } from "../types/common/StatusTypes";
 
 /**
  * Utility functions for handling security levels.
@@ -468,3 +469,19 @@ export function formatSecurityLevel(level?: string): SecurityLevel | string {
   // If no match found, return original
   return level;
 }
+
+/**
+ * Converts a security level or risk level string to the appropriate StatusType
+ *
+ * @param level - The security or risk level to convert
+ * @returns The appropriate StatusType for the given level
+ */
+export const getStatusVariant = (level: string): StatusType => {
+  const normalizedLevel = level.toLowerCase();
+  if (normalizedLevel === "none") return "error";
+  if (normalizedLevel === "low") return "warning";
+  if (normalizedLevel === "moderate") return "info";
+  if (normalizedLevel === "high") return "success";
+  if (normalizedLevel === "very high") return "purple";
+  return "neutral";
+};
