@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import { TECHNICAL_DETAILS_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
+import { isNullish } from "../../../utils/typeGuards";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 
@@ -31,357 +31,1078 @@ interface TechnicalDetailsWidgetProps {
   className?: string;
 
   /**
-   * Optional test ID for automated testing
+   * Optional test ID for testing
    */
   testId?: string;
 }
 
 /**
- * Technical Details Widget provides implementation specifics for security levels
+ * Widget that displays detailed technical implementation requirements
  *
  * ## Business Perspective
  *
- * This widget helps technical teams understand the specific implementation
- * requirements for the selected security levels, providing detailed technical
- * guidance, expertise requirements, and implementation considerations to support
- * successful security control deployment. 🔧
+ * This widget provides technical teams with specific implementation details
+ * for achieving the selected security levels. It helps bridge the gap between
+ * security requirements and technical implementation by providing concrete
+ * guidance on controls, configurations, and technologies. 🛠️
  */
 const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   availabilityLevel,
   integrityLevel,
   confidentialityLevel,
   className = "",
-  testId = "widget-technical-details",
+  testId = "technical-details-widget",
 }) => {
-  // State for active tab
-  const [activeTab, setActiveTab] = useState<
-    "confidentiality" | "integrity" | "availability" 
-  >("confidentiality");
+  // Get CIA content service
+  const { ciaContentService, error, isLoading } = useCIAContentService();
 
-  // Get the content service
-  const { ciaContentService } = useCIAContentService();
-
-  // Helper function to get component-specific technical details
-  const getTechnicalDetails = (
-    component: "confidentiality" | "integrity" | "availability",
-    level: SecurityLevel
-  ) => {
-    // Add null check to service call
-    const technicalImplementation = useMemo(() => {
-      if (!ciaContentService) {
-        return {
-          description: "Service unavailable",
-          implementationSteps: [],
-          expertiseLevel: "Unknown",
-          developmentEffort: "Medium",
-          maintenanceLevel: "Medium",
-          recommendedTechStack: {},
-        };
+  // Get technical details for each component with error handling
+  const confidentialityDetails = useMemo(() => {
+    try {
+      if (isNullish(ciaContentService)) {
+        return getDefaultTechnicalDetails(
+          "confidentiality",
+          confidentialityLevel
+        );
       }
 
-      // Use getTechnicalDescription for the description field
-      const technicalDescription =
-        ciaContentService.getTechnicalDescription?.(component, level) ||
-        "Technical details not available";
+      const details = ciaContentService.getComponentDetails?.(
+        "confidentiality",
+        confidentialityLevel
+      );
+      return isNullish(details)
+        ? getDefaultTechnicalDetails("confidentiality", confidentialityLevel)
+        : details;
+    } catch (err) {
+      console.error("Error getting confidentiality details:", err);
+      return getDefaultTechnicalDetails(
+        "confidentiality",
+        confidentialityLevel
+      );
+    }
+  }, [ciaContentService, confidentialityLevel]);
 
-      // Return result from service or fallback to defaults
-      return {
-        description: technicalDescription,
-        implementationSteps:
-          ciaContentService.getTechnicalImplementation?.(component, level)
-            ?.implementationSteps || [],
-        expertiseLevel: "Standard",
-        developmentEffort: "Medium",
-        maintenanceLevel: "Medium",
-        recommendedTechStack: {},
-      };
-    }, [ciaContentService, component, level]);
+  // Get integrity technical details
+  const integrityDetails = useMemo(() => {
+    try {
+      if (isNullish(ciaContentService)) {
+        return getDefaultTechnicalDetails("integrity", integrityLevel);
+      }
 
-    return technicalImplementation;
+      const details = ciaContentService.getComponentDetails?.(
+        "integrity",
+        integrityLevel
+      );
+      return isNullish(details)
+        ? getDefaultTechnicalDetails("integrity", integrityLevel)
+        : details;
+    } catch (err) {
+      console.error("Error getting integrity details:", err);
+      return getDefaultTechnicalDetails("integrity", integrityLevel);
+    }
+  }, [ciaContentService, integrityLevel]);
+
+  // Get availability technical details
+  const availabilityDetails = useMemo(() => {
+    try {
+      if (isNullish(ciaContentService)) {
+        return getDefaultTechnicalDetails("availability", availabilityLevel);
+      }
+
+      const details = ciaContentService.getComponentDetails?.(
+        "availability",
+        availabilityLevel
+      );
+      return isNullish(details)
+        ? getDefaultTechnicalDetails("availability", availabilityLevel)
+        : details;
+    } catch (err) {
+      console.error("Error getting availability details:", err);
+      return getDefaultTechnicalDetails("availability", availabilityLevel);
+    }
+  }, [ciaContentService, availabilityLevel]);
+
+  // Get technical requirements for a specific component and level
+  const getTechnicalRequirements = (
+    component: string,
+    level: SecurityLevel
+  ): string[] => {
+    try {
+      if (isNullish(ciaContentService)) {
+        return getDefaultRequirements(component, level);
+      }
+
+      const requirements = (
+        ciaContentService as any
+      ).getTechnicalRequirements?.(component, level);
+      if (Array.isArray(requirements) && requirements.length > 0) {
+        return requirements;
+      }
+
+      return getDefaultRequirements(component, level);
+    } catch (err) {
+      console.error(`Error getting ${component} requirements:`, err);
+      return getDefaultRequirements(component, level);
+    }
   };
 
-  // Get details for each component
-  const availabilityDetails = getTechnicalDetails(
-    "availability",
-    availabilityLevel
-  );
-  const integrityDetails = getTechnicalDetails("integrity", integrityLevel);
-  const confidentialityDetails = getTechnicalDetails(
-    "confidentiality",
-    confidentialityLevel
-  );
+  // Calculate implementation complexity
+  const calculateComplexity = (
+    level: SecurityLevel
+  ): { value: number; label: string } => {
+    switch (level) {
+      case "None":
+        return { value: 0, label: "None" };
+      case "Low":
+        return { value: 25, label: "Low" };
+      case "Moderate":
+        return { value: 50, label: "Moderate" };
+      case "High":
+        return { value: 75, label: "High" };
+      case "Very High":
+        return { value: 100, label: "Very High" };
+      default:
+        return { value: 0, label: "Unknown" };
+    }
+  };
 
-  // Get the active details based on the active tab
-  const activeDetails =
-    activeTab === "availability"
-      ? availabilityDetails
-      : activeTab === "integrity"
-      ? integrityDetails
-      : confidentialityDetails;
+  // Get expertise required for implementation
+  const getExpertiseRequired = (
+    component: string,
+    level: SecurityLevel
+  ): string[] => {
+    try {
+      if (
+        !isNullish(ciaContentService) &&
+        typeof (ciaContentService as any).getExpertiseRequired === "function"
+      ) {
+        const expertise = (ciaContentService as any).getExpertiseRequired(
+          component,
+          level
+        );
+        if (Array.isArray(expertise) && expertise.length > 0) {
+          return expertise;
+        }
+      }
 
-  // Get the active level based on the active tab
-  const activeLevel =
-    activeTab === "availability"
-      ? availabilityLevel
-      : activeTab === "integrity"
-      ? integrityLevel
-      : confidentialityLevel;
+      return getDefaultExpertise(component, level);
+    } catch (err) {
+      console.error(`Error getting ${component} expertise requirements:`, err);
+      return getDefaultExpertise(component, level);
+    }
+  };
 
-  // Helper function to render expertise level badge
-  const renderExpertiseBadge = (level: string) => {
-    const levelMap: Record<string, { color: string; icon: string }> = {
-      Basic: {
-        color:
-          "bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-20 dark:text-green-300",
-        icon: "👨‍💻",
-      },
-      Standard: {
-        color:
-          "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-20 dark:text-blue-300",
-        icon: "👨‍💻👨‍💻",
-      },
-      Advanced: {
-        color:
-          "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:bg-opacity-20 dark:text-purple-300",
-        icon: "👨‍💻👨‍💻👨‍💻",
-      },
-      Expert: {
-        color:
-          "bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-20 dark:text-red-300",
-        icon: "👨‍💻👨‍💻👨‍💻👨‍💻",
-      },
+  // Get personnel requirements
+  const getPersonnelRequirements = (level: SecurityLevel): string => {
+    const levelValues: Record<SecurityLevel, number> = {
+      None: 0.1,
+      Low: 0.25,
+      Moderate: 0.5,
+      High: 1,
+      "Very High": 2,
     };
 
-    const { color, icon } = levelMap[level] || levelMap["Standard"];
-
-    return (
-      <span
-        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${color}`}
-      >
-        {icon} {level}
-      </span>
-    );
+    return `${levelValues[level] || 0.5} FTE`;
   };
 
-  // Helper function to render effort level badge
-  const renderEffortBadge = (level: string) => {
-    const levelMap: Record<string, { color: string; icon: string }> = {
-      Low: {
-        color:
-          "bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-20 dark:text-green-300",
-        icon: "⏱️",
-      },
-      Medium: {
-        color:
-          "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-20 dark:text-blue-300",
-        icon: "⏱️⏱️",
-      },
-      High: {
-        color:
-          "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:bg-opacity-20 dark:text-yellow-300",
-        icon: "⏱️⏱️⏱️",
-      },
-      "Very High": {
-        color:
-          "bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-20 dark:text-red-300",
-        icon: "⏱️⏱️⏱️⏱️",
-      },
-    };
-
-    const { color, icon } = levelMap[level] || levelMap["Medium"];
-
-    return (
-      <span
-        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${color}`}
-      >
-        {icon} {level}
-      </span>
-    );
-  };
+  // Calculate component complexities
+  const confidentialityComplexity = calculateComplexity(confidentialityLevel);
+  const integrityComplexity = calculateComplexity(integrityLevel);
+  const availabilityComplexity = calculateComplexity(availabilityLevel);
 
   return (
     <WidgetContainer
-      title={WIDGET_TITLES.TECHNICAL_DETAILS}
-      icon={WIDGET_ICONS.TECHNICAL_DETAILS}
+      title={
+        WIDGET_TITLES.TECHNICAL_DETAILS || "Technical Implementation Details"
+      }
+      icon={WIDGET_ICONS.TECHNICAL_DETAILS || "🛠️"}
       className={className}
       testId={testId}
+      isLoading={isLoading}
+      error={error}
     >
       <div className="p-4">
-        {/* Tabs navigation */}
-        <div className="flex border-b border-gray-200 dark:border-gray-700 mb-4">
-        <button
-            className={`px-4 py-2 text-sm font-medium ${
-              activeTab === "confidentiality"
-                ? "border-b-2 border-purple-500 text-purple-600 dark:text-purple-400"
-                : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-            }`}
-            onClick={() => setActiveTab("confidentiality")}
-            data-testid={TECHNICAL_DETAILS_TEST_IDS.CONFIDENTIALITY_TAB}
-          >
-            <span className="flex items-center">
-              <span className="mr-2">🔒</span>
-              Confidentiality
-            </span>
-          </button>
-          <button
-            className={`px-4 py-2 text-sm font-medium ${
-              activeTab === "integrity"
-                ? "border-b-2 border-green-500 text-green-600 dark:text-green-400"
-                : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-            }`}
-            onClick={() => setActiveTab("integrity")}
-            data-testid={TECHNICAL_DETAILS_TEST_IDS.INTEGRITY_TAB}
-          >
-            <span className="flex items-center">
-              <span className="mr-2">✓</span>
-              Integrity
-            </span>
-          </button>
-          <button
-            className={`px-4 py-2 text-sm font-medium ${
-              activeTab === "availability"
-                ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
-                : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-            }`}
-            onClick={() => setActiveTab("availability")}
-            data-testid={TECHNICAL_DETAILS_TEST_IDS.AVAILABILITY_TAB}
-          >
-            <span className="flex items-center">
-              <span className="mr-2">⏱️</span>
-              Availability
-            </span>
-          </button>
-
+        {/* Technical details description */}
+        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+          <p className="text-sm">
+            This widget provides technical implementation details for achieving
+            your selected security levels. Use these guidelines when designing
+            and implementing your security controls.
+          </p>
         </div>
 
-        {/* Security level badge */}
-        <div className="mb-4">
-          <SecurityLevelBadge
-            category={activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-            level={activeLevel}
-            colorClass={
-              activeTab === "availability"
-                ? "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
-                : activeTab === "integrity"
-                ? "bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
-                : "bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
-            }
-            textClass={
-              activeTab === "availability"
-                ? "text-blue-800 dark:text-blue-300"
-                : activeTab === "integrity"
-                ? "text-green-800 dark:text-green-300"
-                : "text-purple-800 dark:text-purple-300"
-            }
-          />
-        </div>
-
-        {/* Technical details content */}
-        <div className="space-y-6">
-          {/* Technical Description */}
-          <div>
-            <h3
-              className="text-lg font-medium mb-2"
-              data-testid={TECHNICAL_DETAILS_TEST_IDS.TECHNICAL_HEADER}
-            >
-              Technical Implementation
-            </h3>
-            <p
-              className="text-gray-600 dark:text-gray-300"
-              data-testid={TECHNICAL_DETAILS_TEST_IDS.TECHNICAL_DESCRIPTION}
-            >
-              {activeDetails.description}
-            </p>
-          </div>
-
-          {/* Implementation Requirements */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-              <div className="text-sm font-medium mb-1">Development Effort</div>
-              <div
-                className="font-medium"
-                data-testid={TECHNICAL_DETAILS_TEST_IDS.DEVELOPMENT_EFFORT}
-              >
-                {renderEffortBadge(activeDetails.developmentEffort)}
-              </div>
-            </div>
-            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-              <div className="text-sm font-medium mb-1">Maintenance Level</div>
-              <div
-                className="font-medium"
-                data-testid={TECHNICAL_DETAILS_TEST_IDS.MAINTENANCE_LEVEL}
-              >
-                {renderEffortBadge(activeDetails.maintenanceLevel)}
-              </div>
-            </div>
-            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-              <div className="text-sm font-medium mb-1">Required Expertise</div>
-              <div
-                className="font-medium"
-                data-testid={TECHNICAL_DETAILS_TEST_IDS.REQUIRED_EXPERTISE}
-              >
-                {renderExpertiseBadge(activeDetails.expertiseLevel)}
-              </div>
+        {/* Confidentiality details */}
+        <div className="mb-6">
+          <div className="flex items-center mb-4">
+            <span className="text-xl mr-2 text-purple-500">🔒</span>
+            <h3 className="text-lg font-medium">Confidentiality Controls</h3>
+            <div className="ml-auto">
+              <SecurityLevelBadge
+                category=""
+                level={confidentialityLevel}
+                colorClass="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
+                textClass="text-purple-800 dark:text-purple-300"
+                testId={`${testId}-confidentiality-badge`}
+              />
             </div>
           </div>
 
-          {/* Implementation Steps */}
-          {activeDetails.implementationSteps &&
-            activeDetails.implementationSteps.length > 0 && (
-              <div>
-                <h3
-                  className="text-lg font-medium mb-2"
-                  data-testid={TECHNICAL_DETAILS_TEST_IDS.IMPLEMENTATION_HEADER}
-                >
-                  Implementation Steps
-                </h3>
-                <ol
-                  className="list-decimal list-inside space-y-2 text-gray-600 dark:text-gray-300"
-                  data-testid={TECHNICAL_DETAILS_TEST_IDS.IMPLEMENTATION_STEPS}
-                >
-                  {activeDetails.implementationSteps.map((step, index) => (
-                    <li
-                      key={index}
-                      data-testid={`implementation-step-${index}`}
-                      className="pl-1"
-                    >
-                      {step}
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            {/* Main technical details card */}
+            <div className="p-4 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg shadow-sm border border-purple-100 dark:border-purple-800">
+              <h4 className="text-md font-medium text-purple-700 dark:text-purple-300 mb-3">
+                Technical Description
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {confidentialityDetails?.technical ||
+                  getDefaultTechDescription(
+                    "confidentiality",
+                    confidentialityLevel
+                  )}
+              </p>
 
-          {/* Technology Stack Recommendations */}
-          {activeDetails.recommendedTechStack && (
-            <div>
-              <h3 className="text-lg font-medium mb-2">
-                Recommended Technology Stack
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {Object.entries(activeDetails.recommendedTechStack).map(
-                  ([category, technologies], index) => (
+              <div className="mt-4">
+                <h5 className="text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">
+                  Implementation Complexity
+                </h5>
+                <div className="flex items-center">
+                  <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
                     <div
-                      key={index}
-                      className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                      className="h-2 bg-purple-500 dark:bg-purple-600 rounded-full"
+                      style={{ width: `${confidentialityComplexity.value}%` }}
+                    ></div>
+                  </div>
+                  <span className="text-xs font-medium">
+                    {confidentialityComplexity.label}
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <h5 className="text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">
+                  Personnel Requirements
+                </h5>
+                <div className="flex items-center">
+                  <span className="text-sm">Estimated staffing: </span>
+                  <span className="ml-2 text-sm font-medium text-purple-600 dark:text-purple-400">
+                    {getPersonnelRequirements(confidentialityLevel)}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Implementation requirements card */}
+            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+              <h4 className="text-md font-medium mb-3">
+                Implementation Requirements
+              </h4>
+              <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                {getTechnicalRequirements(
+                  "confidentiality",
+                  confidentialityLevel
+                ).map((req, index) => (
+                  <li
+                    key={`conf-req-${index}`}
+                    data-testid={`conf-req-${index}`}
+                  >
+                    {req}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            {/* Technologies card */}
+            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+              <h4 className="text-md font-medium flex items-center mb-3">
+                <span className="mr-2 text-purple-500">💻</span>Technologies
+              </h4>
+              <p className="text-sm text-purple-600 dark:text-purple-400">
+                {(confidentialityDetails as any)?.technologies ||
+                  getDefaultTechnologies(
+                    "confidentiality",
+                    confidentialityLevel
+                  )}
+              </p>
+            </div>
+
+            {/* Configurations card */}
+            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+              <h4 className="text-md font-medium flex items-center mb-3">
+                <span className="mr-2 text-purple-500">⚙️</span>Configurations
+              </h4>
+              <p className="text-sm text-purple-600 dark:text-purple-400">
+                {(confidentialityDetails as any)?.configurations ||
+                  getDefaultConfigurations(
+                    "confidentiality",
+                    confidentialityLevel
+                  )}
+              </p>
+            </div>
+          </div>
+
+          {/* Expertise Required card */}
+          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-4">
+            <h4 className="text-md font-medium flex items-center mb-3">
+              <span className="mr-2 text-purple-500">👨‍💻</span>Expertise Required
+            </h4>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              {getExpertiseRequired(
+                "confidentiality",
+                confidentialityLevel
+              ).map((expertise, index) => (
+                <li
+                  key={`conf-exp-${index}`}
+                  className="flex items-center text-sm"
+                >
+                  <span className="mr-2 text-purple-500">•</span>
+                  <span>{expertise}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Integrity details */}
+        <div className="mb-6">
+          <div className="flex items-center mb-4">
+            <span className="text-xl mr-2 text-green-500">✓</span>
+            <h3 className="text-lg font-medium">Integrity Controls</h3>
+            <div className="ml-auto">
+              <SecurityLevelBadge
+                category=""
+                level={integrityLevel}
+                colorClass="bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
+                textClass="text-green-800 dark:text-green-300"
+                testId={`${testId}-integrity-badge`}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            {/* Main technical details card */}
+            <div className="p-4 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg shadow-sm border border-green-100 dark:border-green-800">
+              <h4 className="text-md font-medium text-green-700 dark:text-green-300 mb-3">
+                Technical Description
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {integrityDetails?.technical ||
+                  getDefaultTechDescription("integrity", integrityLevel)}
+              </p>
+
+              <div className="mt-4">
+                <h5 className="text-sm font-medium text-green-700 dark:text-green-300 mb-2">
+                  Implementation Complexity
+                </h5>
+                <div className="flex items-center">
+                  <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
+                    <div
+                      className="h-2 bg-green-500 dark:bg-green-600 rounded-full"
+                      style={{ width: `${integrityComplexity.value}%` }}
+                    ></div>
+                  </div>
+                  <span className="text-xs font-medium">
+                    {integrityComplexity.label}
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <h5 className="text-sm font-medium text-green-700 dark:text-green-300 mb-2">
+                  Personnel Requirements
+                </h5>
+                <div className="flex items-center">
+                  <span className="text-sm">Estimated staffing: </span>
+                  <span className="ml-2 text-sm font-medium text-green-600 dark:text-green-400">
+                    {getPersonnelRequirements(integrityLevel)}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Implementation requirements card */}
+            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+              <h4 className="text-md font-medium mb-3">
+                Implementation Requirements
+              </h4>
+              <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                {getTechnicalRequirements("integrity", integrityLevel).map(
+                  (req, index) => (
+                    <li
+                      key={`int-req-${index}`}
+                      data-testid={`int-req-${index}`}
                     >
-                      <div className="text-sm font-medium mb-1">{category}</div>
-                      <div className="text-gray-600 dark:text-gray-300">
-                        {Array.isArray(technologies)
-                          ? technologies.join(", ")
-                          : String(technologies || "")}
-                      </div>
-                    </div>
+                      {req}
+                    </li>
                   )
                 )}
+              </ul>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            {/* Technologies card */}
+            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+              <h4 className="text-md font-medium flex items-center mb-3">
+                <span className="mr-2 text-green-500">💻</span>Technologies
+              </h4>
+              <p className="text-sm text-green-600 dark:text-green-400">
+                {(integrityDetails as any)?.technologies ||
+                  getDefaultTechnologies("integrity", integrityLevel)}
+              </p>
+            </div>
+
+            {/* Configurations card */}
+            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+              <h4 className="text-md font-medium flex items-center mb-3">
+                <span className="mr-2 text-green-500">⚙️</span>Configurations
+              </h4>
+              <p className="text-sm text-green-600 dark:text-green-400">
+                {(integrityDetails as any)?.configurations ||
+                  getDefaultConfigurations("integrity", integrityLevel)}
+              </p>
+            </div>
+          </div>
+
+          {/* Expertise Required card */}
+          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-4">
+            <h4 className="text-md font-medium flex items-center mb-3">
+              <span className="mr-2 text-green-500">👨‍💻</span>Expertise Required
+            </h4>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              {getExpertiseRequired("integrity", integrityLevel).map(
+                (expertise, index) => (
+                  <li
+                    key={`int-exp-${index}`}
+                    className="flex items-center text-sm"
+                  >
+                    <span className="mr-2 text-green-500">•</span>
+                    <span>{expertise}</span>
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+        </div>
+
+        {/* Availability details */}
+        <div className="mb-4">
+          <div className="flex items-center mb-4">
+            <span className="text-xl mr-2 text-blue-500">⏱️</span>
+            <h3 className="text-lg font-medium">Availability Controls</h3>
+            <div className="ml-auto">
+              <SecurityLevelBadge
+                category=""
+                level={availabilityLevel}
+                colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+                textClass="text-blue-800 dark:text-blue-300"
+                testId={`${testId}-availability-badge`}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            {/* Main technical details card */}
+            <div className="p-4 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg shadow-sm border border-blue-100 dark:border-blue-800">
+              <h4 className="text-md font-medium text-blue-700 dark:text-blue-300 mb-3">
+                Technical Description
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {availabilityDetails?.technical ||
+                  getDefaultTechDescription("availability", availabilityLevel)}
+              </p>
+
+              <div className="mt-4">
+                <h5 className="text-sm font-medium text-blue-700 dark:text-blue-300 mb-2">
+                  Implementation Complexity
+                </h5>
+                <div className="flex items-center">
+                  <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
+                    <div
+                      className="h-2 bg-blue-500 dark:bg-blue-600 rounded-full"
+                      style={{ width: `${availabilityComplexity.value}%` }}
+                    ></div>
+                  </div>
+                  <span className="text-xs font-medium">
+                    {availabilityComplexity.label}
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <h5 className="text-sm font-medium text-blue-700 dark:text-blue-300 mb-2">
+                  Personnel Requirements
+                </h5>
+                <div className="flex items-center">
+                  <span className="text-sm">Estimated staffing: </span>
+                  <span className="ml-2 text-sm font-medium text-blue-600 dark:text-blue-400">
+                    {getPersonnelRequirements(availabilityLevel)}
+                  </span>
+                </div>
               </div>
             </div>
-          )}
+
+            {/* Implementation requirements card */}
+            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+              <h4 className="text-md font-medium mb-3">
+                Implementation Requirements
+              </h4>
+              <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                {getTechnicalRequirements(
+                  "availability",
+                  availabilityLevel
+                ).map((req, index) => (
+                  <li
+                    key={`avail-req-${index}`}
+                    data-testid={`avail-req-${index}`}
+                  >
+                    {req}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            {/* Technologies card */}
+            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+              <h4 className="text-md font-medium flex items-center mb-3">
+                <span className="mr-2 text-blue-500">💻</span>Technologies
+              </h4>
+              <p className="text-sm text-blue-600 dark:text-blue-400">
+                {(availabilityDetails as any)?.technologies ||
+                  getDefaultTechnologies("availability", availabilityLevel)}
+              </p>
+            </div>
+
+            {/* Configurations card */}
+            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+              <h4 className="text-md font-medium flex items-center mb-3">
+                <span className="mr-2 text-blue-500">⚙️</span>Configurations
+              </h4>
+              <p className="text-sm text-blue-600 dark:text-blue-400">
+                {(availabilityDetails as any)?.configurations ||
+                  getDefaultConfigurations("availability", availabilityLevel)}
+              </p>
+            </div>
+          </div>
+
+          {/* Expertise Required card */}
+          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-4">
+            <h4 className="text-md font-medium flex items-center mb-3">
+              <span className="mr-2 text-blue-500">👨‍💻</span>Expertise Required
+            </h4>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              {getExpertiseRequired("availability", availabilityLevel).map(
+                (expertise, index) => (
+                  <li
+                    key={`avail-exp-${index}`}
+                    className="flex items-center text-sm"
+                  >
+                    <span className="mr-2 text-blue-500">•</span>
+                    <span>{expertise}</span>
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+        </div>
+
+        {/* Implementation considerations */}
+        <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+          <h3 className="text-lg font-medium mb-3 flex items-center">
+            <span className="mr-2">💡</span>Implementation Notes
+          </h3>
+          <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+            <li className="flex items-start">
+              <span className="mr-2 text-blue-500">•</span>
+              <span>
+                Implement these technical controls in a layered approach,
+                starting with foundational controls.
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className="mr-2 text-blue-500">•</span>
+              <span>
+                Regular testing and validation are required to ensure controls
+                are functioning as intended.
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className="mr-2 text-blue-500">•</span>
+              <span>
+                Consider integrating with existing security infrastructure to
+                maximize effectiveness.
+              </span>
+            </li>
+            <li className="flex items-start">
+              <span className="mr-2 text-blue-500">•</span>
+              <span>
+                Document all implementation details and maintain up-to-date
+                configuration records.
+              </span>
+            </li>
+          </ul>
         </div>
       </div>
     </WidgetContainer>
   );
 };
 
-// Export the component directly without HOC
+// Helper function to get default technical details when service isn't available
+function getDefaultTechnicalDetails(
+  component: string,
+  level: SecurityLevel
+): any {
+  return {
+    description: getDefaultDescription(component, level),
+    technical: getDefaultTechDescription(component, level),
+    recommendations: getDefaultRequirements(component, level),
+  };
+}
+
+// Default description based on component and security level
+function getDefaultDescription(
+  component: string,
+  level: SecurityLevel
+): string {
+  if (component === "confidentiality") {
+    switch (level) {
+      case "None":
+        return "No confidentiality controls implemented, allowing unrestricted access to data.";
+      case "Low":
+        return "Basic confidentiality controls to prevent casual unauthorized access to data.";
+      case "Moderate":
+        return "Standard confidentiality controls with defined access privileges and protections.";
+      case "High":
+        return "Advanced confidentiality controls with strong encryption and strict access management.";
+      case "Very High":
+        return "Comprehensive confidentiality controls with the highest level of protection.";
+      default:
+        return "Standard confidentiality controls.";
+    }
+  }
+
+  if (component === "integrity") {
+    switch (level) {
+      case "None":
+        return "No integrity controls implemented, data can be modified without detection.";
+      case "Low":
+        return "Basic integrity controls that provide minimal protection against unauthorized changes.";
+      case "Moderate":
+        return "Standard integrity controls that detect unauthorized modifications to data.";
+      case "High":
+        return "Advanced integrity controls with cryptographic verification of data.";
+      case "Very High":
+        return "Comprehensive integrity controls with immutable audit trails.";
+      default:
+        return "Standard integrity controls.";
+    }
+  }
+
+  // Default to availability
+  switch (level) {
+    case "None":
+      return "No availability controls implemented, no guarantees for system uptime.";
+    case "Low":
+      return "Basic availability controls providing minimal resilience to disruptions.";
+    case "Moderate":
+      return "Standard availability controls ensuring reasonable system uptime.";
+    case "High":
+      return "Advanced availability controls with redundancy and quick recovery capabilities.";
+    case "Very High":
+      return "Comprehensive availability controls with maximum fault tolerance.";
+    default:
+      return "Standard availability controls.";
+  }
+}
+
+// Default technical description based on component and security level
+function getDefaultTechDescription(
+  component: string,
+  level: SecurityLevel
+): string {
+  if (component === "confidentiality") {
+    switch (level) {
+      case "None":
+        return "No specific technical controls for protecting data confidentiality.";
+      case "Low":
+        return "Basic access controls and password protection for sensitive resources.";
+      case "Moderate":
+        return "Role-based access control (RBAC), data encryption at rest and in transit, and proper authentication mechanisms.";
+      case "High":
+        return "Granular access control, strong encryption with proper key management, DLP controls, and multi-factor authentication.";
+      case "Very High":
+        return "Zero-trust architecture, advanced encryption with hardware security modules, comprehensive DLP, and context-aware access controls.";
+      default:
+        return "Standard confidentiality technical controls.";
+    }
+  }
+
+  if (component === "integrity") {
+    switch (level) {
+      case "None":
+        return "No specific technical controls for ensuring data integrity.";
+      case "Low":
+        return "Basic input validation and error detection mechanisms.";
+      case "Moderate":
+        return "Comprehensive input validation, checksums, access controls, and error detection.";
+      case "High":
+        return "Digital signatures, cryptographic hashing, strong change control, and comprehensive logging.";
+      case "Very High":
+        return "Blockchain or similar technologies for critical data, immutable audit logs, and formal verification methods.";
+      default:
+        return "Standard integrity technical controls.";
+    }
+  }
+
+  // Default to availability
+  switch (level) {
+    case "None":
+      return "No specific technical controls for ensuring system availability.";
+    case "Low":
+      return "Basic monitoring and manual recovery procedures.";
+    case "Moderate":
+      return "Redundant components, scheduled backups, load balancing, and defined recovery procedures.";
+    case "High":
+      return "Automatic failover, real-time monitoring, comprehensive disaster recovery, and advanced load balancing.";
+    case "Very High":
+      return "Multi-site active-active configurations, continuous data protection, and fully automated recovery with zero data loss.";
+    default:
+      return "Standard availability technical controls.";
+  }
+}
+
+// Default technical requirements based on component and security level
+function getDefaultRequirements(
+  component: string,
+  level: SecurityLevel
+): string[] {
+  if (component === "confidentiality") {
+    switch (level) {
+      case "None":
+        return ["No specific requirements."];
+      case "Low":
+        return [
+          "Implement user authentication",
+          "Use basic password policies",
+          "Apply simple access controls",
+          "Secure sensitive data storage",
+        ];
+      case "Moderate":
+        return [
+          "Implement role-based access control",
+          "Use standard TLS for data in transit",
+          "Encrypt sensitive data at rest",
+          "Enforce strong password policies",
+          "Implement session management",
+        ];
+      case "High":
+        return [
+          "Implement multi-factor authentication",
+          "Deploy data loss prevention solutions",
+          "Use strong encryption for all data",
+          "Implement privileged access management",
+          "Conduct regular access reviews",
+        ];
+      case "Very High":
+        return [
+          "Implement zero-trust network architecture",
+          "Use hardware security modules for encryption",
+          "Deploy advanced data loss prevention",
+          "Implement just-in-time access",
+          "Use behavioral analytics for access monitoring",
+        ];
+      default:
+        return ["Standard confidentiality requirements."];
+    }
+  }
+
+  if (component === "integrity") {
+    switch (level) {
+      case "None":
+        return ["No specific requirements."];
+      case "Low":
+        return [
+          "Implement basic input validation",
+          "Use simple error detection",
+          "Apply basic data quality checks",
+        ];
+      case "Moderate":
+        return [
+          "Implement comprehensive input validation",
+          "Use checksums for data verification",
+          "Implement change detection mechanisms",
+          "Maintain data validation logs",
+          "Use database constraints",
+        ];
+      case "High":
+        return [
+          "Implement digital signatures",
+          "Use cryptographic hash verification",
+          "Deploy comprehensive audit logging",
+          "Implement strict change controls",
+          "Use data integrity monitoring",
+        ];
+      case "Very High":
+        return [
+          "Implement blockchain for critical data",
+          "Use immutable audit trails",
+          "Deploy formal verification methods",
+          "Implement hardware-based integrity controls",
+          "Use zero-knowledge proofs where applicable",
+        ];
+      default:
+        return ["Standard integrity requirements."];
+    }
+  }
+
+  // Default to availability
+  switch (level) {
+    case "None":
+      return ["No specific requirements."];
+    case "Low":
+      return [
+        "Set up basic system monitoring",
+        "Implement manual backup procedures",
+        "Create simple incident response plan",
+      ];
+    case "Moderate":
+      return [
+        "Implement redundant components",
+        "Set up scheduled backup routines",
+        "Deploy basic load balancing",
+        "Create disaster recovery procedures",
+        "Implement health checks and alerts",
+      ];
+    case "High":
+      return [
+        "Implement automatic failover mechanisms",
+        "Deploy real-time monitoring and alerting",
+        "Set up geographically distributed backups",
+        "Implement advanced load balancing",
+        "Create comprehensive disaster recovery plan",
+      ];
+    case "Very High":
+      return [
+        "Implement multi-site active-active configuration",
+        "Deploy continuous data protection",
+        "Use fully automated recovery mechanisms",
+        "Implement zero-downtime deployment processes",
+        "Deploy dedicated site reliability engineering",
+      ];
+    default:
+      return ["Standard availability requirements."];
+  }
+}
+
+// Default technologies based on component and security level
+function getDefaultTechnologies(
+  component: string,
+  level: SecurityLevel
+): string {
+  if (component === "confidentiality") {
+    switch (level) {
+      case "None":
+        return "No specific technologies";
+      case "Low":
+        return "Password managers, basic access control lists";
+      case "Moderate":
+        return "LDAP, Active Directory, TLS 1.2+, AES-128";
+      case "High":
+        return "MFA solutions, DLP tools, AES-256, Key Management Systems";
+      case "Very High":
+        return "Zero-trust platforms, HSMs, Advanced SIEM/SOAR, PAM solutions";
+      default:
+        return "Standard security technologies";
+    }
+  }
+
+  if (component === "integrity") {
+    switch (level) {
+      case "None":
+        return "No specific technologies";
+      case "Low":
+        return "Form validation libraries, database constraints";
+      case "Moderate":
+        return "Checksum tools, hash functions (SHA-256), validation frameworks";
+      case "High":
+        return "Digital signature tools, cryptographic libraries, audit platforms";
+      case "Very High":
+        return "Blockchain frameworks, zero-knowledge proof systems, formal verification tools";
+      default:
+        return "Standard integrity technologies";
+    }
+  }
+
+  // Default to availability
+  switch (level) {
+    case "None":
+      return "No specific technologies";
+    case "Low":
+      return "Basic monitoring tools, manual backup solutions";
+    case "Moderate":
+      return "Load balancers, backup solutions, monitoring systems";
+    case "High":
+      return "Clustering solutions, automated failover systems, advanced monitoring";
+    case "Very High":
+      return "Global load balancing, containerization, automated recovery systems";
+    default:
+      return "Standard availability technologies";
+  }
+}
+
+// Default configurations based on component and security level
+function getDefaultConfigurations(
+  component: string,
+  level: SecurityLevel
+): string {
+  if (component === "confidentiality") {
+    switch (level) {
+      case "None":
+        return "No specific configurations";
+      case "Low":
+        return "Basic password policies, minimal HTTPS";
+      case "Moderate":
+        return "RBAC configurations, TLS 1.2+, standard encryption setup";
+      case "High":
+        return "MFA policies, DLP rules, key management procedures";
+      case "Very High":
+        return "Zero-trust policies, HSM integration, advanced access controls";
+      default:
+        return "Standard security configurations";
+    }
+  }
+
+  if (component === "integrity") {
+    switch (level) {
+      case "None":
+        return "No specific configurations";
+      case "Low":
+        return "Basic validation rules, simple error handling";
+      case "Moderate":
+        return "Comprehensive validation rules, hash verification setup";
+      case "High":
+        return "Digital signature verification, advanced audit logging, strong change control";
+      case "Very High":
+        return "Blockchain node configuration, immutable storage settings";
+      default:
+        return "Standard integrity configurations";
+    }
+  }
+
+  // Default to availability
+  switch (level) {
+    case "None":
+      return "No specific configurations";
+    case "Low":
+      return "Basic monitoring alerts, manual backup procedures";
+    case "Moderate":
+      return "Redundant configurations, backup schedules, load balancer settings";
+    case "High":
+      return "Cluster configurations, automated failover settings, monitoring rules";
+    case "Very High":
+      return "Multi-region deployments, automated scaling, zero-downtime configurations";
+    default:
+      return "Standard availability configurations";
+  }
+}
+
+// Add function to return default expertise requirements
+function getDefaultExpertise(
+  component: string,
+  level: SecurityLevel
+): string[] {
+  if (component === "confidentiality") {
+    switch (level) {
+      case "None":
+        return ["No specific expertise required"];
+      case "Low":
+        return ["Basic security knowledge", "Access control fundamentals"];
+      case "Moderate":
+        return [
+          "Identity management",
+          "Encryption technologies",
+          "Authentication systems",
+        ];
+      case "High":
+        return [
+          "Advanced cryptography",
+          "Identity and access management",
+          "Security architecture",
+          "Data protection",
+        ];
+      case "Very High":
+        return [
+          "Security architecture",
+          "Advanced cryptography",
+          "Zero-trust implementation",
+          "Data protection specialization",
+          "Hardware security",
+        ];
+      default:
+        return ["General security knowledge"];
+    }
+  }
+
+  if (component === "integrity") {
+    switch (level) {
+      case "None":
+        return ["No specific expertise required"];
+      case "Low":
+        return ["Basic data validation", "Error handling"];
+      case "Moderate":
+        return [
+          "Data validation techniques",
+          "Database integrity",
+          "Error handling",
+        ];
+      case "High":
+        return [
+          "Cryptographic verification",
+          "Digital signatures",
+          "Secure logging",
+          "Change management",
+        ];
+      case "Very High":
+        return [
+          "Advanced cryptography",
+          "Formal verification",
+          "Distributed ledger technologies",
+          "Immutable logging systems",
+        ];
+      default:
+        return ["Data integrity fundamentals"];
+    }
+  }
+
+  // Default to availability expertise
+  switch (level) {
+    case "None":
+      return ["No specific expertise required"];
+    case "Low":
+      return ["Basic system monitoring", "Manual recovery procedures"];
+    case "Moderate":
+      return ["System redundancy", "Backup management", "Basic load balancing"];
+    case "High":
+      return [
+        "High availability architecture",
+        "Disaster recovery",
+        "Advanced monitoring",
+        "Automated failover",
+      ];
+    case "Very High":
+      return [
+        "Distributed systems",
+        "Site reliability engineering",
+        "Global load balancing",
+        "Chaos engineering",
+        "Real-time recovery systems",
+      ];
+    default:
+      return ["System reliability fundamentals"];
+  }
+}
+
 export default TechnicalDetailsWidget;
