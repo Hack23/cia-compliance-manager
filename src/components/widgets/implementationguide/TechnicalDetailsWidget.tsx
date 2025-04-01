@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
@@ -53,6 +53,11 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   className = "",
   testId = "technical-details-widget",
 }) => {
+  // State for active tab
+  const [activeTab, setActiveTab] = useState<
+    "confidentiality" | "integrity" | "availability"
+  >("confidentiality");
+
   // Get CIA content service
   const { ciaContentService, error, isLoading } = useCIAContentService();
 
@@ -231,383 +236,494 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
           </p>
         </div>
 
-        {/* Confidentiality details */}
-        <div className="mb-6">
-          <div className="flex items-center mb-4">
-            <span className="text-xl mr-2 text-purple-500">🔒</span>
-            <h3 className="text-lg font-medium">Confidentiality Controls</h3>
-            <div className="ml-auto">
-              <SecurityLevelBadge
-                category=""
-                level={confidentialityLevel}
-                colorClass="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
-                textClass="text-purple-800 dark:text-purple-300"
-                testId={`${testId}-confidentiality-badge`}
-              />
-            </div>
-          </div>
+        {/* Tab Navigation */}
+        <div className="flex border-b border-gray-200 dark:border-gray-700 mb-4">
+          <button
+            onClick={() => setActiveTab("confidentiality")}
+            className={`py-2 px-4 font-medium text-sm focus:outline-none ${
+              activeTab === "confidentiality"
+                ? "border-b-2 border-purple-500 text-purple-600 dark:text-purple-400"
+                : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            }`}
+            data-testid="confidentiality-tab"
+          >
+            <span className="mr-1">🔒</span> Confidentiality
+          </button>
+          <button
+            onClick={() => setActiveTab("integrity")}
+            className={`py-2 px-4 font-medium text-sm focus:outline-none ${
+              activeTab === "integrity"
+                ? "border-b-2 border-green-500 text-green-600 dark:text-green-400"
+                : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            }`}
+            data-testid="integrity-tab"
+          >
+            <span className="mr-1">✓</span> Integrity
+          </button>
+          <button
+            onClick={() => setActiveTab("availability")}
+            className={`py-2 px-4 font-medium text-sm focus:outline-none ${
+              activeTab === "availability"
+                ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
+                : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            }`}
+            data-testid="availability-tab"
+          >
+            <span className="mr-1">⏱️</span> Availability
+          </button>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            {/* Main technical details card */}
-            <div className="p-4 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg shadow-sm border border-purple-100 dark:border-purple-800">
-              <h4 className="text-md font-medium text-purple-700 dark:text-purple-300 mb-3">
-                Technical Description
-              </h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {confidentialityDetails?.technical ||
-                  getDefaultTechDescription(
+        {/* Confidentiality details */}
+        {activeTab === "confidentiality" && (
+          <div className="mb-6" data-testid="confidentiality-section">
+            <div
+              className="flex items-center mb-4"
+              data-testid="technical-header"
+            >
+              <span className="text-xl mr-2 text-purple-500">🔒</span>
+              <h3 className="text-lg font-medium">Confidentiality Controls</h3>
+              <div className="ml-auto">
+                <SecurityLevelBadge
+                  category=""
+                  level={confidentialityLevel}
+                  colorClass="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
+                  textClass="text-purple-800 dark:text-purple-300"
+                  testId={`${testId}-confidentiality-badge`}
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              {/* Main technical details card */}
+              <div className="p-4 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg shadow-sm border border-purple-100 dark:border-purple-800">
+                <h4 className="text-md font-medium text-purple-700 dark:text-purple-300 mb-3">
+                  Technical Description
+                </h4>
+                <p
+                  className="text-sm text-gray-600 dark:text-gray-400"
+                  data-testid="technical-description"
+                >
+                  {confidentialityDetails?.technical ||
+                    getDefaultTechDescription(
+                      "confidentiality",
+                      confidentialityLevel
+                    )}
+                </p>
+
+                <div className="mt-4">
+                  <h5 className="text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">
+                    Implementation Complexity
+                  </h5>
+                  <div
+                    className="flex items-center"
+                    data-testid="development-effort"
+                  >
+                    <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
+                      <div
+                        className="h-2 bg-purple-500 dark:bg-purple-600 rounded-full"
+                        style={{ width: `${confidentialityComplexity.value}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-xs font-medium">
+                      {confidentialityComplexity.label}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <h5 className="text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">
+                    Personnel Requirements
+                  </h5>
+                  <div
+                    className="flex items-center"
+                    data-testid="maintenance-level"
+                  >
+                    <span className="text-sm">Estimated staffing: </span>
+                    <span className="ml-2 text-sm font-medium text-purple-600 dark:text-purple-400">
+                      {getPersonnelRequirements(confidentialityLevel)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Implementation requirements card */}
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                <h4
+                  className="text-md font-medium mb-3"
+                  data-testid="implementation-header"
+                >
+                  Implementation Requirements
+                </h4>
+                <ul
+                  className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400"
+                  data-testid="implementation-steps"
+                >
+                  {getTechnicalRequirements(
                     "confidentiality",
                     confidentialityLevel
-                  )}
-              </p>
-
-              <div className="mt-4">
-                <h5 className="text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">
-                  Implementation Complexity
-                </h5>
-                <div className="flex items-center">
-                  <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
-                    <div
-                      className="h-2 bg-purple-500 dark:bg-purple-600 rounded-full"
-                      style={{ width: `${confidentialityComplexity.value}%` }}
-                    ></div>
-                  </div>
-                  <span className="text-xs font-medium">
-                    {confidentialityComplexity.label}
-                  </span>
-                </div>
-              </div>
-
-              <div className="mt-4">
-                <h5 className="text-sm font-medium text-purple-700 dark:text-purple-300 mb-2">
-                  Personnel Requirements
-                </h5>
-                <div className="flex items-center">
-                  <span className="text-sm">Estimated staffing: </span>
-                  <span className="ml-2 text-sm font-medium text-purple-600 dark:text-purple-400">
-                    {getPersonnelRequirements(confidentialityLevel)}
-                  </span>
-                </div>
+                  ).map((req, index) => (
+                    <li
+                      key={`conf-req-${index}`}
+                      data-testid={`conf-req-${index}`}
+                    >
+                      {req}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
-            {/* Implementation requirements card */}
-            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-              <h4 className="text-md font-medium mb-3">
-                Implementation Requirements
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              {/* Technologies card */}
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                <h4 className="text-md font-medium flex items-center mb-3">
+                  <span className="mr-2 text-purple-500">💻</span>Technologies
+                </h4>
+                <p className="text-sm text-purple-600 dark:text-purple-400">
+                  {(confidentialityDetails as any)?.technologies ||
+                    getDefaultTechnologies(
+                      "confidentiality",
+                      confidentialityLevel
+                    )}
+                </p>
+              </div>
+
+              {/* Configurations card */}
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                <h4 className="text-md font-medium flex items-center mb-3">
+                  <span className="mr-2 text-purple-500">⚙️</span>Configurations
+                </h4>
+                <p className="text-sm text-purple-600 dark:text-purple-400">
+                  {(confidentialityDetails as any)?.configurations ||
+                    getDefaultConfigurations(
+                      "confidentiality",
+                      confidentialityLevel
+                    )}
+                </p>
+              </div>
+            </div>
+
+            {/* Expertise Required card */}
+            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-4">
+              <h4 className="text-md font-medium flex items-center mb-3">
+                <span className="mr-2 text-purple-500">👨‍💻</span>Expertise
+                Required
               </h4>
-              <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                {getTechnicalRequirements(
+              <ul
+                className="grid grid-cols-1 md:grid-cols-2 gap-2"
+                data-testid="required-expertise"
+              >
+                {getExpertiseRequired(
                   "confidentiality",
                   confidentialityLevel
-                ).map((req, index) => (
+                ).map((expertise, index) => (
                   <li
-                    key={`conf-req-${index}`}
-                    data-testid={`conf-req-${index}`}
+                    key={`conf-exp-${index}`}
+                    className="flex items-center text-sm"
                   >
-                    {req}
+                    <span className="mr-2 text-purple-500">•</span>
+                    <span>{expertise}</span>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            {/* Technologies card */}
-            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-              <h4 className="text-md font-medium flex items-center mb-3">
-                <span className="mr-2 text-purple-500">💻</span>Technologies
-              </h4>
-              <p className="text-sm text-purple-600 dark:text-purple-400">
-                {(confidentialityDetails as any)?.technologies ||
-                  getDefaultTechnologies(
-                    "confidentiality",
-                    confidentialityLevel
-                  )}
-              </p>
-            </div>
-
-            {/* Configurations card */}
-            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-              <h4 className="text-md font-medium flex items-center mb-3">
-                <span className="mr-2 text-purple-500">⚙️</span>Configurations
-              </h4>
-              <p className="text-sm text-purple-600 dark:text-purple-400">
-                {(confidentialityDetails as any)?.configurations ||
-                  getDefaultConfigurations(
-                    "confidentiality",
-                    confidentialityLevel
-                  )}
-              </p>
-            </div>
-          </div>
-
-          {/* Expertise Required card */}
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-4">
-            <h4 className="text-md font-medium flex items-center mb-3">
-              <span className="mr-2 text-purple-500">👨‍💻</span>Expertise Required
-            </h4>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              {getExpertiseRequired(
-                "confidentiality",
-                confidentialityLevel
-              ).map((expertise, index) => (
-                <li
-                  key={`conf-exp-${index}`}
-                  className="flex items-center text-sm"
-                >
-                  <span className="mr-2 text-purple-500">•</span>
-                  <span>{expertise}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        )}
 
         {/* Integrity details */}
-        <div className="mb-6">
-          <div className="flex items-center mb-4">
-            <span className="text-xl mr-2 text-green-500">✓</span>
-            <h3 className="text-lg font-medium">Integrity Controls</h3>
-            <div className="ml-auto">
-              <SecurityLevelBadge
-                category=""
-                level={integrityLevel}
-                colorClass="bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
-                textClass="text-green-800 dark:text-green-300"
-                testId={`${testId}-integrity-badge`}
-              />
+        {activeTab === "integrity" && (
+          <div className="mb-6" data-testid="integrity-section">
+            <div
+              className="flex items-center mb-4"
+              data-testid="technical-header"
+            >
+              <span className="text-xl mr-2 text-green-500">✓</span>
+              <h3 className="text-lg font-medium">Integrity Controls</h3>
+              <div className="ml-auto">
+                <SecurityLevelBadge
+                  category=""
+                  level={integrityLevel}
+                  colorClass="bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
+                  textClass="text-green-800 dark:text-green-300"
+                  testId={`${testId}-integrity-badge`}
+                />
+              </div>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            {/* Main technical details card */}
-            <div className="p-4 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg shadow-sm border border-green-100 dark:border-green-800">
-              <h4 className="text-md font-medium text-green-700 dark:text-green-300 mb-3">
-                Technical Description
-              </h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {integrityDetails?.technical ||
-                  getDefaultTechDescription("integrity", integrityLevel)}
-              </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              {/* Main technical details card */}
+              <div className="p-4 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg shadow-sm border border-green-100 dark:border-green-800">
+                <h4 className="text-md font-medium text-green-700 dark:text-green-300 mb-3">
+                  Technical Description
+                </h4>
+                <p
+                  className="text-sm text-gray-600 dark:text-gray-400"
+                  data-testid="technical-description"
+                >
+                  {integrityDetails?.technical ||
+                    getDefaultTechDescription("integrity", integrityLevel)}
+                </p>
 
-              <div className="mt-4">
-                <h5 className="text-sm font-medium text-green-700 dark:text-green-300 mb-2">
-                  Implementation Complexity
-                </h5>
-                <div className="flex items-center">
-                  <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
-                    <div
-                      className="h-2 bg-green-500 dark:bg-green-600 rounded-full"
-                      style={{ width: `${integrityComplexity.value}%` }}
-                    ></div>
+                <div className="mt-4">
+                  <h5 className="text-sm font-medium text-green-700 dark:text-green-300 mb-2">
+                    Implementation Complexity
+                  </h5>
+                  <div
+                    className="flex items-center"
+                    data-testid="development-effort"
+                  >
+                    <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
+                      <div
+                        className="h-2 bg-green-500 dark:bg-green-600 rounded-full"
+                        style={{ width: `${integrityComplexity.value}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-xs font-medium">
+                      {integrityComplexity.label}
+                    </span>
                   </div>
-                  <span className="text-xs font-medium">
-                    {integrityComplexity.label}
-                  </span>
+                </div>
+
+                <div className="mt-4">
+                  <h5 className="text-sm font-medium text-green-700 dark:text-green-300 mb-2">
+                    Personnel Requirements
+                  </h5>
+                  <div
+                    className="flex items-center"
+                    data-testid="maintenance-level"
+                  >
+                    <span className="text-sm">Estimated staffing: </span>
+                    <span className="ml-2 text-sm font-medium text-green-600 dark:text-green-400">
+                      {getPersonnelRequirements(integrityLevel)}
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              <div className="mt-4">
-                <h5 className="text-sm font-medium text-green-700 dark:text-green-300 mb-2">
-                  Personnel Requirements
-                </h5>
-                <div className="flex items-center">
-                  <span className="text-sm">Estimated staffing: </span>
-                  <span className="ml-2 text-sm font-medium text-green-600 dark:text-green-400">
-                    {getPersonnelRequirements(integrityLevel)}
-                  </span>
-                </div>
+              {/* Implementation requirements card */}
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                <h4
+                  className="text-md font-medium mb-3"
+                  data-testid="implementation-header"
+                >
+                  Implementation Requirements
+                </h4>
+                <ul
+                  className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400"
+                  data-testid="implementation-steps"
+                >
+                  {getTechnicalRequirements("integrity", integrityLevel).map(
+                    (req, index) => (
+                      <li
+                        key={`int-req-${index}`}
+                        data-testid={`int-req-${index}`}
+                      >
+                        {req}
+                      </li>
+                    )
+                  )}
+                </ul>
               </div>
             </div>
 
-            {/* Implementation requirements card */}
-            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-              <h4 className="text-md font-medium mb-3">
-                Implementation Requirements
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              {/* Technologies card */}
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                <h4 className="text-md font-medium flex items-center mb-3">
+                  <span className="mr-2 text-green-500">💻</span>Technologies
+                </h4>
+                <p className="text-sm text-green-600 dark:text-green-400">
+                  {(integrityDetails as any)?.technologies ||
+                    getDefaultTechnologies("integrity", integrityLevel)}
+                </p>
+              </div>
+
+              {/* Configurations card */}
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                <h4 className="text-md font-medium flex items-center mb-3">
+                  <span className="mr-2 text-green-500">⚙️</span>Configurations
+                </h4>
+                <p className="text-sm text-green-600 dark:text-green-400">
+                  {(integrityDetails as any)?.configurations ||
+                    getDefaultConfigurations("integrity", integrityLevel)}
+                </p>
+              </div>
+            </div>
+
+            {/* Expertise Required card */}
+            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-4">
+              <h4 className="text-md font-medium flex items-center mb-3">
+                <span className="mr-2 text-green-500">👨‍💻</span>Expertise
+                Required
               </h4>
-              <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                {getTechnicalRequirements("integrity", integrityLevel).map(
-                  (req, index) => (
+              <ul
+                className="grid grid-cols-1 md:grid-cols-2 gap-2"
+                data-testid="required-expertise"
+              >
+                {getExpertiseRequired("integrity", integrityLevel).map(
+                  (expertise, index) => (
                     <li
-                      key={`int-req-${index}`}
-                      data-testid={`int-req-${index}`}
+                      key={`int-exp-${index}`}
+                      className="flex items-center text-sm"
                     >
-                      {req}
+                      <span className="mr-2 text-green-500">•</span>
+                      <span>{expertise}</span>
                     </li>
                   )
                 )}
               </ul>
             </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            {/* Technologies card */}
-            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-              <h4 className="text-md font-medium flex items-center mb-3">
-                <span className="mr-2 text-green-500">💻</span>Technologies
-              </h4>
-              <p className="text-sm text-green-600 dark:text-green-400">
-                {(integrityDetails as any)?.technologies ||
-                  getDefaultTechnologies("integrity", integrityLevel)}
-              </p>
-            </div>
-
-            {/* Configurations card */}
-            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-              <h4 className="text-md font-medium flex items-center mb-3">
-                <span className="mr-2 text-green-500">⚙️</span>Configurations
-              </h4>
-              <p className="text-sm text-green-600 dark:text-green-400">
-                {(integrityDetails as any)?.configurations ||
-                  getDefaultConfigurations("integrity", integrityLevel)}
-              </p>
-            </div>
-          </div>
-
-          {/* Expertise Required card */}
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-4">
-            <h4 className="text-md font-medium flex items-center mb-3">
-              <span className="mr-2 text-green-500">👨‍💻</span>Expertise Required
-            </h4>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              {getExpertiseRequired("integrity", integrityLevel).map(
-                (expertise, index) => (
-                  <li
-                    key={`int-exp-${index}`}
-                    className="flex items-center text-sm"
-                  >
-                    <span className="mr-2 text-green-500">•</span>
-                    <span>{expertise}</span>
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
-        </div>
+        )}
 
         {/* Availability details */}
-        <div className="mb-4">
-          <div className="flex items-center mb-4">
-            <span className="text-xl mr-2 text-blue-500">⏱️</span>
-            <h3 className="text-lg font-medium">Availability Controls</h3>
-            <div className="ml-auto">
-              <SecurityLevelBadge
-                category=""
-                level={availabilityLevel}
-                colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
-                textClass="text-blue-800 dark:text-blue-300"
-                testId={`${testId}-availability-badge`}
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            {/* Main technical details card */}
-            <div className="p-4 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg shadow-sm border border-blue-100 dark:border-blue-800">
-              <h4 className="text-md font-medium text-blue-700 dark:text-blue-300 mb-3">
-                Technical Description
-              </h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {availabilityDetails?.technical ||
-                  getDefaultTechDescription("availability", availabilityLevel)}
-              </p>
-
-              <div className="mt-4">
-                <h5 className="text-sm font-medium text-blue-700 dark:text-blue-300 mb-2">
-                  Implementation Complexity
-                </h5>
-                <div className="flex items-center">
-                  <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
-                    <div
-                      className="h-2 bg-blue-500 dark:bg-blue-600 rounded-full"
-                      style={{ width: `${availabilityComplexity.value}%` }}
-                    ></div>
-                  </div>
-                  <span className="text-xs font-medium">
-                    {availabilityComplexity.label}
-                  </span>
-                </div>
-              </div>
-
-              <div className="mt-4">
-                <h5 className="text-sm font-medium text-blue-700 dark:text-blue-300 mb-2">
-                  Personnel Requirements
-                </h5>
-                <div className="flex items-center">
-                  <span className="text-sm">Estimated staffing: </span>
-                  <span className="ml-2 text-sm font-medium text-blue-600 dark:text-blue-400">
-                    {getPersonnelRequirements(availabilityLevel)}
-                  </span>
-                </div>
+        {activeTab === "availability" && (
+          <div className="mb-6" data-testid="availability-section">
+            <div
+              className="flex items-center mb-4"
+              data-testid="technical-header"
+            >
+              <span className="text-xl mr-2 text-blue-500">⏱️</span>
+              <h3 className="text-lg font-medium">Availability Controls</h3>
+              <div className="ml-auto">
+                <SecurityLevelBadge
+                  category=""
+                  level={availabilityLevel}
+                  colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+                  textClass="text-blue-800 dark:text-blue-300"
+                  testId={`${testId}-availability-badge`}
+                />
               </div>
             </div>
 
-            {/* Implementation requirements card */}
-            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-              <h4 className="text-md font-medium mb-3">
-                Implementation Requirements
-              </h4>
-              <ul className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                {getTechnicalRequirements(
-                  "availability",
-                  availabilityLevel
-                ).map((req, index) => (
-                  <li
-                    key={`avail-req-${index}`}
-                    data-testid={`avail-req-${index}`}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              {/* Main technical details card */}
+              <div className="p-4 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg shadow-sm border border-blue-100 dark:border-blue-800">
+                <h4 className="text-md font-medium text-blue-700 dark:text-blue-300 mb-3">
+                  Technical Description
+                </h4>
+                <p
+                  className="text-sm text-gray-600 dark:text-gray-400"
+                  data-testid="technical-description"
+                >
+                  {availabilityDetails?.technical ||
+                    getDefaultTechDescription(
+                      "availability",
+                      availabilityLevel
+                    )}
+                </p>
+
+                <div className="mt-4">
+                  <h5 className="text-sm font-medium text-blue-700 dark:text-blue-300 mb-2">
+                    Implementation Complexity
+                  </h5>
+                  <div
+                    className="flex items-center"
+                    data-testid="development-effort"
                   >
-                    {req}
-                  </li>
-                ))}
+                    <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
+                      <div
+                        className="h-2 bg-blue-500 dark:bg-blue-600 rounded-full"
+                        style={{ width: `${availabilityComplexity.value}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-xs font-medium">
+                      {availabilityComplexity.label}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <h5 className="text-sm font-medium text-blue-700 dark:text-blue-300 mb-2">
+                    Personnel Requirements
+                  </h5>
+                  <div
+                    className="flex items-center"
+                    data-testid="maintenance-level"
+                  >
+                    <span className="text-sm">Estimated staffing: </span>
+                    <span className="ml-2 text-sm font-medium text-blue-600 dark:text-blue-400">
+                      {getPersonnelRequirements(availabilityLevel)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Implementation requirements card */}
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                <h4
+                  className="text-md font-medium mb-3"
+                  data-testid="implementation-header"
+                >
+                  Implementation Requirements
+                </h4>
+                <ul
+                  className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400"
+                  data-testid="implementation-steps"
+                >
+                  {getTechnicalRequirements(
+                    "availability",
+                    availabilityLevel
+                  ).map((req, index) => (
+                    <li
+                      key={`avail-req-${index}`}
+                      data-testid={`avail-req-${index}`}
+                    >
+                      {req}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              {/* Technologies card */}
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                <h4 className="text-md font-medium flex items-center mb-3">
+                  <span className="mr-2 text-blue-500">💻</span>Technologies
+                </h4>
+                <p className="text-sm text-blue-600 dark:text-blue-400">
+                  {(availabilityDetails as any)?.technologies ||
+                    getDefaultTechnologies("availability", availabilityLevel)}
+                </p>
+              </div>
+
+              {/* Configurations card */}
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                <h4 className="text-md font-medium flex items-center mb-3">
+                  <span className="mr-2 text-blue-500">⚙️</span>Configurations
+                </h4>
+                <p className="text-sm text-blue-600 dark:text-blue-400">
+                  {(availabilityDetails as any)?.configurations ||
+                    getDefaultConfigurations("availability", availabilityLevel)}
+                </p>
+              </div>
+            </div>
+
+            {/* Expertise Required card */}
+            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-4">
+              <h4 className="text-md font-medium flex items-center mb-3">
+                <span className="mr-2 text-blue-500">👨‍💻</span>Expertise Required
+              </h4>
+              <ul
+                className="grid grid-cols-1 md:grid-cols-2 gap-2"
+                data-testid="required-expertise"
+              >
+                {getExpertiseRequired("availability", availabilityLevel).map(
+                  (expertise, index) => (
+                    <li
+                      key={`avail-exp-${index}`}
+                      className="flex items-center text-sm"
+                    >
+                      <span className="mr-2 text-blue-500">•</span>
+                      <span>{expertise}</span>
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            {/* Technologies card */}
-            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-              <h4 className="text-md font-medium flex items-center mb-3">
-                <span className="mr-2 text-blue-500">💻</span>Technologies
-              </h4>
-              <p className="text-sm text-blue-600 dark:text-blue-400">
-                {(availabilityDetails as any)?.technologies ||
-                  getDefaultTechnologies("availability", availabilityLevel)}
-              </p>
-            </div>
-
-            {/* Configurations card */}
-            <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-              <h4 className="text-md font-medium flex items-center mb-3">
-                <span className="mr-2 text-blue-500">⚙️</span>Configurations
-              </h4>
-              <p className="text-sm text-blue-600 dark:text-blue-400">
-                {(availabilityDetails as any)?.configurations ||
-                  getDefaultConfigurations("availability", availabilityLevel)}
-              </p>
-            </div>
-          </div>
-
-          {/* Expertise Required card */}
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-4">
-            <h4 className="text-md font-medium flex items-center mb-3">
-              <span className="mr-2 text-blue-500">👨‍💻</span>Expertise Required
-            </h4>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              {getExpertiseRequired("availability", availabilityLevel).map(
-                (expertise, index) => (
-                  <li
-                    key={`avail-exp-${index}`}
-                    className="flex items-center text-sm"
-                  >
-                    <span className="mr-2 text-blue-500">•</span>
-                    <span>{expertise}</span>
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
-        </div>
+        )}
 
         {/* Implementation considerations */}
         <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
