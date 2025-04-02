@@ -21,95 +21,138 @@ Experience the CIA Compliance Manager in action by testing the application here:
 
 ## 🌟 Key Features
 
-### 🔐 Security Level Assessment
-Assess and configure security levels across Confidentiality, Integrity, and Availability dimensions.
-
-### 📋 Compliance Mapping
-Map security controls to frameworks like NIST, ISO, GDPR, HIPAA, SOC2, and PCI DSS.
-
-### 📊 Business Impact Analysis
-Analyze the financial, operational, and regulatory impacts of your security measures.
-
-### 💰 Cost Estimation
-Estimate CAPEX and OPEX for security implementations to support ROI analysis and budget planning.
-
-### 📈 Interactive Visualizations
-View security data and compliance status through intuitive interactive charts and dashboards.
-
-### 📝 Implementation Guidance
-Access detailed guidance on deploying and optimizing security controls based on industry best practices and compliance requirements.
+<table>
+<tr>
+  <td width="33%">
+    <h3>🔐 Security Level Assessment</h3>
+    <p>Configure and assess security levels across all dimensions of the CIA triad to establish your security baseline.</p>
+  </td>
+  <td width="33%">
+    <h3>📋 Compliance Mapping</h3>
+    <p>Map security controls to frameworks like NIST, ISO, GDPR, HIPAA, SOC2, and PCI DSS.</p>
+  </td>
+  <td width="33%">
+    <h3>📊 Business Impact Analysis</h3>
+    <p>Analyze financial, operational, and regulatory impacts of your security measures.</p>
+  </td>
+</tr>
+<tr>
+  <td width="33%">
+    <h3>💰 Cost Estimation</h3>
+    <p>Estimate CAPEX and OPEX for security implementations to support ROI analysis and budget planning.</p>
+  </td>
+  <td width="33%">
+    <h3>📈 Interactive Visualizations</h3>
+    <p>View security data and compliance status through intuitive interactive charts and dashboards.</p>
+  </td>
+  <td width="33%">
+    <h3>📝 Implementation Guidance</h3>
+    <p>Access detailed guidance on deploying and optimizing security controls based on industry best practices.</p>
+  </td>
+</tr>
+</table>
 
 ## 📚 Architecture & Documentation
 
-### 🏛️ Current Architecture
-C4 model showing current system containers, components, and dynamics of the CIA Compliance Manager.
-
-[View Architecture](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md)
-
-### 🏛️ Future Architecture
-Vision for context-aware security posture management platform and future system evolution.
-
-[View Future Architecture](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md)
+<table>
+<tr>
+  <td width="50%">
+    <h3>🏛️ Current Architecture</h3>
+    <p>C4 model showing current system containers, components, and dynamics of the CIA Compliance Manager.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md">View Architecture</a>
+  </td>
+  <td width="50%">
+    <h3>🏛️ Future Architecture</h3>
+    <p>Vision for context-aware security posture management platform and future system evolution.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md">View Future Architecture</a>
+  </td>
+</tr>
+</table>
 
 ## Behavior Documentation
 
-### 🔄 State Diagrams
-Security profile and compliance status state transitions for the current system implementation.
-
-[View State Diagrams](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/STATEDIAGRAM.md)
-
-### 🔄 Future State Diagrams
-Context-aware and adaptive security state transitions for future platform versions.
-
-[View Future States](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_STATEDIAGRAM.md)
+<table>
+<tr>
+  <td width="50%">
+    <h3>🔄 State Diagrams</h3>
+    <p>Security profile and compliance status state transitions for the current system implementation.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/STATEDIAGRAM.md">View State Diagrams</a>
+  </td>
+  <td width="50%">
+    <h3>🔄 Future State Diagrams</h3>
+    <p>Context-aware and adaptive security state transitions for future platform versions.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_STATEDIAGRAM.md">View Future States</a>
+  </td>
+</tr>
+</table>
 
 ## Process Documentation
 
-### 🔄 Process Flowcharts
-Security assessment and compliance workflows for the current implementation.
-
-[View Flowcharts](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FLOWCHART.md)
-
-### 🔄 Future Flowcharts
-ML-enhanced and context-aware workflows planned for future releases.
-
-[View Future Flows](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_FLOWCHART.md)
+<table>
+<tr>
+  <td width="50%">
+    <h3>🔄 Process Flowcharts</h3>
+    <p>Security assessment and compliance workflows for the current implementation.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FLOWCHART.md">View Flowcharts</a>
+  </td>
+  <td width="50%">
+    <h3>🔄 Future Flowcharts</h3>
+    <p>ML-enhanced and context-aware workflows planned for future releases.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_FLOWCHART.md">View Future Flows</a>
+  </td>
+</tr>
+</table>
 
 ## Conceptual Documentation
 
-### 🧠 Concept Mindmaps
-System structure and component relationships visualized through mind mapping.
-
-[View Mindmaps](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/MINDMAP.md)
-
-### 🧠 Future Concept Maps
-Evolution roadmap and capability expansion plans for future development.
-
-[View Future Concepts](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_MINDMAP.md)
+<table>
+<tr>
+  <td width="50%">
+    <h3>🧠 Concept Mindmaps</h3>
+    <p>System structure and component relationships visualized through mind mapping.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/MINDMAP.md">View Mindmaps</a>
+  </td>
+  <td width="50%">
+    <h3>🧠 Future Concept Maps</h3>
+    <p>Evolution roadmap and capability expansion plans for future development.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_MINDMAP.md">View Future Concepts</a>
+  </td>
+</tr>
+</table>
 
 ## Business Documentation
 
-### 💼 SWOT Analysis
-Strategic strengths, weaknesses, opportunities, and threats for the current platform.
-
-[View SWOT Analysis](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SWOT.md)
-
-### 💼 Future SWOT
-Strategic analysis of context-aware security platform and market positioning.
-
-[View Future SWOT](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_SWOT.md)
+<table>
+<tr>
+  <td width="50%">
+    <h3>💼 SWOT Analysis</h3>
+    <p>Strategic strengths, weaknesses, opportunities, and threats for the current platform.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SWOT.md">View SWOT Analysis</a>
+  </td>
+  <td width="50%">
+    <h3>💼 Future SWOT</h3>
+    <p>Strategic analysis of context-aware security platform and market positioning.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_SWOT.md">View Future SWOT</a>
+  </td>
+</tr>
+</table>
 
 ## DevOps Documentation
 
-### 🔧 CI/CD Workflows
-Build, test, and deployment automation for the current application architecture.
-
-[View CI/CD Workflows](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/WORKFLOWS.md)
-
-### 🔧 Future Workflows
-Advanced CI/CD with ML and security automation planned for future releases.
-
-[View Future DevOps](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_WORKFLOWS.md)
+<table>
+<tr>
+  <td width="50%">
+    <h3>🔧 CI/CD Workflows</h3>
+    <p>Build, test, and deployment automation for the current application architecture.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/WORKFLOWS.md">View CI/CD Workflows</a>
+  </td>
+  <td width="50%">
+    <h3>🔧 Future Workflows</h3>
+    <p>Advanced CI/CD with ML and security automation planned for future releases.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_WORKFLOWS.md">View Future DevOps</a>
+  </td>
+</tr>
+</table>
 
 ## Data Architecture
 
@@ -130,25 +173,34 @@ Advanced CI/CD with ML and security automation planned for future releases.
 
 ## 🧪 Testing & Quality
 
-### 🧪 Unit Tests
-Visual representation of unit test results and coverage of the codebase.
-
-[Test Results](https://hack23.github.io/cia-compliance-manager/test-results) | [Test Plan](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md)
-
-### 📊 Test Coverage
-Test coverage reports showing how much of the codebase is covered by tests.
-
-[View Coverage Report](https://hack23.github.io/cia-compliance-manager/coverage)
-
-### 🔍 E2E System Tests
-End-to-end test reports showing full system validation results.
-
-[View Test Report](https://hack23.github.io/cia-compliance-manager/e2e-report) | [E2E Plan](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md)
-
-### ⚡ Performance Tests
-Benchmarks and performance analysis under various load conditions.
-
-[View Performance Data](https://hack23.github.io/cia-compliance-manager/performance)
+<table>
+<tr>
+  <td width="50%">
+    <h3>🧪 Unit Tests</h3>
+    <p>Visual representation of unit test results and coverage of the codebase.</p>
+    <a href="https://hack23.github.io/cia-compliance-manager/test-results">Test Results</a> •
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md">Test Plan</a>
+  </td>
+  <td width="50%">
+    <h3>📊 Test Coverage</h3>
+    <p>Test coverage reports showing how much of the codebase is covered by tests.</p>
+    <a href="https://hack23.github.io/cia-compliance-manager/coverage">View Coverage Report</a>
+  </td>
+</tr>
+<tr>
+  <td width="50%">
+    <h3>🔍 E2E System Tests</h3>
+    <p>End-to-end test reports showing full system validation results.</p>
+    <a href="https://hack23.github.io/cia-compliance-manager/e2e-report">View Test Report</a> •
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md">E2E Plan</a>
+  </td>
+  <td width="50%">
+    <h3>⚡ Performance Tests</h3>
+    <p>Benchmarks and performance analysis under various load conditions.</p>
+    <a href="https://hack23.github.io/cia-compliance-manager/performance">View Performance Data</a>
+  </td>
+</tr>
+</table>
 
 ## 📘 Additional Documentation
 
