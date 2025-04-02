@@ -51,6 +51,8 @@ Vision for context-aware security posture management platform and future system 
 
 [View Future Architecture](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md)
 
+## Behavior Documentation
+
 ### 🔄 State Diagrams
 Security profile and compliance status state transitions for the current system implementation.
 
@@ -60,6 +62,8 @@ Security profile and compliance status state transitions for the current system 
 Context-aware and adaptive security state transitions for future platform versions.
 
 [View Future States](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_STATEDIAGRAM.md)
+
+## Process Documentation
 
 ### 🔄 Process Flowcharts
 Security assessment and compliance workflows for the current implementation.
@@ -71,6 +75,8 @@ ML-enhanced and context-aware workflows planned for future releases.
 
 [View Future Flows](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_FLOWCHART.md)
 
+## Conceptual Documentation
+
 ### 🧠 Concept Mindmaps
 System structure and component relationships visualized through mind mapping.
 
@@ -80,6 +86,8 @@ System structure and component relationships visualized through mind mapping.
 Evolution roadmap and capability expansion plans for future development.
 
 [View Future Concepts](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_MINDMAP.md)
+
+## Business Documentation
 
 ### 💼 SWOT Analysis
 Strategic strengths, weaknesses, opportunities, and threats for the current platform.
@@ -91,6 +99,8 @@ Strategic analysis of context-aware security platform and market positioning.
 
 [View Future SWOT](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_SWOT.md)
 
+## DevOps Documentation
+
 ### 🔧 CI/CD Workflows
 Build, test, and deployment automation for the current application architecture.
 
@@ -101,15 +111,22 @@ Advanced CI/CD with ML and security automation planned for future releases.
 
 [View Future DevOps](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_WORKFLOWS.md)
 
-### 📊 Data Model
-Current data architecture to support future platform capabilities.
+## Data Architecture
 
-[View Data Architecture](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/DATA_MODEL.md)
-
-### 📊 Future Data Model
-Enhanced context-aware data architecture to support future platform capabilities.
-
-[View Data Architecture](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_DATA_MODEL.md)
+<table>
+<tr>
+  <td width="50%">
+    <h3>📊 Data Model</h3>
+    <p>Current data architecture to support future platform capabilities.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/DATA_MODEL.md">View Data Architecture</a>
+  </td>
+  <td width="50%">
+    <h3>📊 Future Data Model</h3>
+    <p>Enhanced context-aware data architecture to support future platform capabilities.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_DATA_MODEL.md">View Data Architecture</a>
+  </td>
+</tr>
+</table>
 
 ## 🧪 Testing & Quality
 
