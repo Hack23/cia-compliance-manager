@@ -19,6 +19,171 @@ Experience the CIA Compliance Manager in action by testing the application here:
 [![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/Hack23/cia-compliance-manager.svg)](https://isitmaintained.com/project/Hack23/cia-compliance-manager "Average time to resolve an issue")
 [![Percentage of issues still open](https://isitmaintained.com/badge/open/Hack23/cia-compliance-manager.svg)](https://isitmaintained.com/project/Hack23/cia-compliance-manager "Percentage of issues still open")
 
+## 📌 Project Overview
+
+The CIA Compliance Manager is a comprehensive web application designed to help organizations assess, implement, and manage security controls across the CIA triad (Confidentiality, Integrity, Availability). The application enables users to evaluate security posture, measure compliance against major frameworks, and analyze the business impacts of security implementations.
+
+## 🌟 Key Features
+
+### 🔐 Security Level Assessment
+Assess and configure security levels across Confidentiality, Integrity, and Availability dimensions.
+
+### 📋 Compliance Mapping
+Map security controls to frameworks like NIST, ISO, GDPR, HIPAA, SOC2, and PCI DSS.
+
+### 📊 Business Impact Analysis
+Analyze the financial, operational, and regulatory impacts of your security measures.
+
+### 💰 Cost Estimation
+Estimate CAPEX and OPEX for security implementations to support ROI analysis and budget planning.
+
+### 📈 Interactive Visualizations
+View security data and compliance status through intuitive interactive charts and dashboards.
+
+### 📝 Implementation Guidance
+Access detailed guidance on deploying and optimizing security controls based on industry best practices and compliance requirements.
+
+## 📚 Architecture & Documentation
+
+### 🏛️ Current Architecture
+C4 model showing current system containers, components, and dynamics of the CIA Compliance Manager.
+
+[View Architecture](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md)
+
+### 🏛️ Future Architecture
+Vision for context-aware security posture management platform and future system evolution.
+
+[View Future Architecture](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md)
+
+### 🔄 State Diagrams
+Security profile and compliance status state transitions for the current system implementation.
+
+[View State Diagrams](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/STATEDIAGRAM.md)
+
+### 🔄 Future State Diagrams
+Context-aware and adaptive security state transitions for future platform versions.
+
+[View Future States](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_STATEDIAGRAM.md)
+
+### 🔄 Process Flowcharts
+Security assessment and compliance workflows for the current implementation.
+
+[View Flowcharts](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FLOWCHART.md)
+
+### 🔄 Future Flowcharts
+ML-enhanced and context-aware workflows planned for future releases.
+
+[View Future Flows](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_FLOWCHART.md)
+
+### 🧠 Concept Mindmaps
+System structure and component relationships visualized through mind mapping.
+
+[View Mindmaps](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/MINDMAP.md)
+
+### 🧠 Future Concept Maps
+Evolution roadmap and capability expansion plans for future development.
+
+[View Future Concepts](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_MINDMAP.md)
+
+### 💼 SWOT Analysis
+Strategic strengths, weaknesses, opportunities, and threats for the current platform.
+
+[View SWOT Analysis](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SWOT.md)
+
+### 💼 Future SWOT
+Strategic analysis of context-aware security platform and market positioning.
+
+[View Future SWOT](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_SWOT.md)
+
+### 🔧 CI/CD Workflows
+Build, test, and deployment automation for the current application architecture.
+
+[View CI/CD Workflows](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/WORKFLOWS.md)
+
+### 🔧 Future Workflows
+Advanced CI/CD with ML and security automation planned for future releases.
+
+[View Future DevOps](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_WORKFLOWS.md)
+
+### 📊 Data Model
+Current data architecture to support future platform capabilities.
+
+[View Data Architecture](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/DATA_MODEL.md)
+
+### 📊 Future Data Model
+Enhanced context-aware data architecture to support future platform capabilities.
+
+[View Data Architecture](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_DATA_MODEL.md)
+
+## 🧪 Testing & Quality
+
+### 🧪 Unit Tests
+Visual representation of unit test results and coverage of the codebase.
+
+[Test Results](https://hack23.github.io/cia-compliance-manager/test-results) | [Test Plan](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md)
+
+### 📊 Test Coverage
+Test coverage reports showing how much of the codebase is covered by tests.
+
+[View Coverage Report](https://hack23.github.io/cia-compliance-manager/coverage)
+
+### 🔍 E2E System Tests
+End-to-end test reports showing full system validation results.
+
+[View Test Report](https://hack23.github.io/cia-compliance-manager/e2e-report) | [E2E Plan](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md)
+
+### ⚡ Performance Tests
+Benchmarks and performance analysis under various load conditions.
+
+[View Performance Data](https://hack23.github.io/cia-compliance-manager/performance)
+
+## 📘 Additional Documentation
+
+### 📘 API Documentation
+Detailed API reference for all components, types, and functions in the application.
+
+[View API Docs](https://hack23.github.io/cia-compliance-manager/api-docs)
+
+### 🔄 Business Continuity
+Comprehensive business continuity planning and recovery strategies aligned with CIA principles.
+
+[View Interactive Plan](https://hack23.github.io/cia-compliance-manager/business-continuity) | [Markdown Version](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/BCP.md)
+
+## 🔍 System Context
+
+```mermaid
+C4Context
+  title System Context diagram for CIA Compliance Manager
+
+  Person(securityOfficer, "Security Officer", "Responsible for implementing and managing security controls")
+  Person(businessStakeholder, "Business Stakeholder", "Makes decisions based on security assessments and cost analysis")
+  Person(complianceManager, "Compliance Manager", "Ensures adherence to regulatory frameworks")
+  Person(technicalImplementer, "Technical Implementer", "Implements security controls based on recommendations")
+
+  System(ciaCM, "CIA Compliance Manager", "Helps organizations assess, implement, and manage security controls across the CIA triad")
+
+  System_Ext(complianceFrameworks, "Compliance Frameworks", "External reference for industry standards like NIST 800-53, ISO 27001, etc.")
+  System_Ext(costDatabase, "Cost Reference Database", "Provides industry benchmark costs for security implementations")
+
+  Rel(securityOfficer, ciaCM, "Uses to assess security posture")
+  Rel(businessStakeholder, ciaCM, "Uses to make security investment decisions")
+  Rel(complianceManager, ciaCM, "Uses to verify compliance status")
+  Rel(technicalImplementer, ciaCM, "Uses to get implementation guidance")
+
+  Rel(ciaCM, complianceFrameworks, "Maps security controls to")
+  Rel(ciaCM, costDatabase, "References for cost estimations")
+
+  UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+  
+  UpdateElementStyle(securityOfficer, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
+  UpdateElementStyle(businessStakeholder, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
+  UpdateElementStyle(complianceManager, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
+  UpdateElementStyle(technicalImplementer, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
+
+  UpdateElementStyle(ciaCM, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
+  UpdateElementStyle(complianceFrameworks, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
+  UpdateElementStyle(costDatabase, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
+```
 
 ## Executive Summary
 
