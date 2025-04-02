@@ -19,10 +19,6 @@ Experience the CIA Compliance Manager in action by testing the application here:
 [![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/Hack23/cia-compliance-manager.svg)](https://isitmaintained.com/project/Hack23/cia-compliance-manager "Average time to resolve an issue")
 [![Percentage of issues still open](https://isitmaintained.com/badge/open/Hack23/cia-compliance-manager.svg)](https://isitmaintained.com/project/Hack23/cia-compliance-manager "Percentage of issues still open")
 
-## 📌 Project Overview
-
-The CIA Compliance Manager is a comprehensive web application designed to help organizations assess, implement, and manage security controls across the CIA triad (Confidentiality, Integrity, Availability). The application enables users to evaluate security posture, measure compliance against major frameworks, and analyze the business impacts of security implementations.
-
 ## 🌟 Key Features
 
 ### 🔐 Security Level Assessment
