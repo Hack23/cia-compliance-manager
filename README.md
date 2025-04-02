@@ -212,7 +212,7 @@ Detailed API reference for all components, types, and functions in the applicati
 ### 🔄 Business Continuity
 Comprehensive business continuity planning and recovery strategies aligned with CIA principles.
 
-[View Interactive Plan](https://hack23.github.io/cia-compliance-manager/business-continuity) | [Markdown Version](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/BCP.md)
+[View Interactive Plan](https://hack23.github.io/cia-compliance-manager/business-continuity) | [Markdown Version](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/BCPPlan.md)
 
 ## 🔍 System Context
 
