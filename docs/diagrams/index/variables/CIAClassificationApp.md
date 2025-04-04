@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.6**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **CIAClassificationApp**: `React.FC`
 
-Defined in: [application/CIAClassificationApp.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/050a250237d6f621490781dbdf95155919f35aed/src/application/CIAClassificationApp.tsx#L27)
+Defined in: [application/CIAClassificationApp.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/application/CIAClassificationApp.tsx#L27)
 
 Main application component for CIA Classification
 

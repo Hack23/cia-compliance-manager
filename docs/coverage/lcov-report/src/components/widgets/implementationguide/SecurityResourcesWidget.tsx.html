@@ -654,11 +654,7 @@
 <a name='L589'></a><a href='#L589'>589</a>
 <a name='L590'></a><a href='#L590'>590</a>
 <a name='L591'></a><a href='#L591'>591</a>
-<a name='L592'></a><a href='#L592'>592</a>
-<a name='L593'></a><a href='#L593'>593</a>
-<a name='L594'></a><a href='#L594'>594</a>
-<a name='L595'></a><a href='#L595'>595</a>
-<a name='L596'></a><a href='#L596'>596</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L592'></a><a href='#L592'>592</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -1003,7 +999,6 @@
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">31x</span>
@@ -1140,8 +1135,6 @@
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
@@ -1217,7 +1210,6 @@
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1586,19 +1578,18 @@ const SecurityResourcesWidget: React.FC&lt;SecurityResourcesWidgetProps&gt; = ({
               &lt;div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg text-sm"&gt;
                 &lt;p className="mb-2 font-medium"&gt;Selected Security Levels:&lt;/p&gt;
                 &lt;div className="mb-2 text-xs"&gt;
-                &lt;div className="flex justify-between"&gt;
-                    &lt;span&gt;Confidentiality:&lt;/span&gt;
-                    &lt;span className="font-medium"&gt;{confidentialityLevel}&lt;/span&gt;
+                  &lt;div className="flex justify-between mb-1"&gt;
+                    &lt;span&gt;Availability:&lt;/span&gt;
+                    &lt;span className="font-medium"&gt;{availabilityLevel}&lt;/span&gt;
                   &lt;/div&gt;
                   &lt;div className="flex justify-between mb-1"&gt;
                     &lt;span&gt;Integrity:&lt;/span&gt;
                     &lt;span className="font-medium"&gt;{integrityLevel}&lt;/span&gt;
                   &lt;/div&gt;
-                  &lt;div className="flex justify-between mb-1"&gt;
-                    &lt;span&gt;Availability:&lt;/span&gt;
-                    &lt;span className="font-medium"&gt;{availabilityLevel}&lt;/span&gt;
+                  &lt;div className="flex justify-between"&gt;
+                    &lt;span&gt;Confidentiality:&lt;/span&gt;
+                    &lt;span className="font-medium"&gt;{confidentialityLevel}&lt;/span&gt;
                   &lt;/div&gt;
-&nbsp;
                 &lt;/div&gt;
 &nbsp;
                 &lt;p className="mb-2 text-xs text-gray-600 dark:text-gray-400"&gt;
@@ -1734,28 +1725,26 @@ const SecurityResourcesWidget: React.FC&lt;SecurityResourcesWidgetProps&gt; = ({
                 {/* Component-specific tips */}
                 {implementationGuides.length &gt; 0 &amp;&amp; (
                   &lt;div className="grid grid-cols-1 md:grid-cols-3 gap-4"&gt;
-&nbsp;
- 
-                     {/* Confidentiality Implementation */}
-                     {implementationGuides[2] &amp;&amp; (
-                      &lt;div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800"&gt;
-                        &lt;h4 className="text-md font-medium mb-2 text-purple-700 dark:text-purple-300 flex items-center"&gt;
-                          &lt;span className="mr-2"&gt;🔒&lt;/span&gt;Confidentiality (
-                          {confidentialityLevel})
+                    {/* Availability Implementation */}
+                    {implementationGuides[0] &amp;&amp; (
+                      &lt;div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800"&gt;
+                        &lt;h4 className="text-md font-medium mb-2 text-blue-700 dark:text-blue-300 flex items-center"&gt;
+                          &lt;span className="mr-2"&gt;⏱️&lt;/span&gt;Availability (
+                          {availabilityLevel})
                         &lt;/h4&gt;
                         &lt;div className="text-sm text-gray-600 dark:text-gray-400"&gt;
                           &lt;p className="mb-2"&gt;
-                            {implementationGuides[2].<span class="branch-0 cbranch-no" title="branch not covered" >description ||</span>
-<span class="cstat-no" title="statement not covered" >                              "Focus on data protection and access controls."}</span>
+                            {implementationGuides[0].<span class="branch-0 cbranch-no" title="branch not covered" >description ||</span>
+<span class="cstat-no" title="statement not covered" >                              "Focus on systems uptime and recovery capabilities."}</span>
                           &lt;/p&gt;
                           &lt;div className="text-xs"&gt;
                             &lt;span className="font-medium"&gt;Expertise:&lt;/span&gt;{" "}
-                            {implementationGuides[2].expertiseLevel ||
+                            {implementationGuides[0].expertiseLevel ||
                               "Standard"}
                           &lt;/div&gt;
                           &lt;div className="text-xs"&gt;
                             &lt;span className="font-medium"&gt;Effort:&lt;/span&gt;{" "}
-                            {implementationGuides[2].developmentEffort ||
+                            {implementationGuides[0].developmentEffort ||
                               "Medium"}
                           &lt;/div&gt;
                         &lt;/div&gt;
@@ -1788,32 +1777,31 @@ const SecurityResourcesWidget: React.FC&lt;SecurityResourcesWidgetProps&gt; = ({
                       &lt;/div&gt;
                     )}
 &nbsp;
-                   {/* Availability Implementation */}
-                   {implementationGuides[0] &amp;&amp; (
-                      &lt;div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800"&gt;
-                        &lt;h4 className="text-md font-medium mb-2 text-blue-700 dark:text-blue-300 flex items-center"&gt;
-                          &lt;span className="mr-2"&gt;⏱️&lt;/span&gt;Availability (
-                          {availabilityLevel})
+                    {/* Confidentiality Implementation */}
+                    {implementationGuides[2] &amp;&amp; (
+                      &lt;div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800"&gt;
+                        &lt;h4 className="text-md font-medium mb-2 text-purple-700 dark:text-purple-300 flex items-center"&gt;
+                          &lt;span className="mr-2"&gt;🔒&lt;/span&gt;Confidentiality (
+                          {confidentialityLevel})
                         &lt;/h4&gt;
                         &lt;div className="text-sm text-gray-600 dark:text-gray-400"&gt;
                           &lt;p className="mb-2"&gt;
-                            {implementationGuides[0].<span class="branch-0 cbranch-no" title="branch not covered" >description ||</span>
-<span class="cstat-no" title="statement not covered" >                              "Focus on systems uptime and recovery capabilities."}</span>
+                            {implementationGuides[2].<span class="branch-0 cbranch-no" title="branch not covered" >description ||</span>
+<span class="cstat-no" title="statement not covered" >                              "Focus on data protection and access controls."}</span>
                           &lt;/p&gt;
                           &lt;div className="text-xs"&gt;
                             &lt;span className="font-medium"&gt;Expertise:&lt;/span&gt;{" "}
-                            {implementationGuides[0].expertiseLevel ||
+                            {implementationGuides[2].expertiseLevel ||
                               "Standard"}
                           &lt;/div&gt;
                           &lt;div className="text-xs"&gt;
                             &lt;span className="font-medium"&gt;Effort:&lt;/span&gt;{" "}
-                            {implementationGuides[0].developmentEffort ||
+                            {implementationGuides[2].developmentEffort ||
                               "Medium"}
                           &lt;/div&gt;
                         &lt;/div&gt;
                       &lt;/div&gt;
                     )}
-&nbsp;
                   &lt;/div&gt;
                 )}
 &nbsp;
@@ -1855,7 +1843,7 @@ export default SecurityResourcesWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-04T09:34:12.139Z
+                at 2025-03-26T15:34:19.783Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
