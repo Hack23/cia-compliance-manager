@@ -2035,32 +2035,32 @@ const CostEstimationWidget: React.FC&lt;CostEstimationWidgetProps&gt; = ({
         &lt;div className="mb-6"&gt;
           &lt;h3 className="text-lg font-medium mb-3"&gt;Component Cost Breakdown&lt;/h3&gt;
           &lt;div className="space-y-4"&gt;
-            {/* Availability Costs */}
+            {/* Confidentiality Costs */}
             &lt;div
-              className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
-              data-testid={TEST_IDS.costEstimation.availabilityCost}
+              className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg"
+              data-testid={TEST_IDS.costEstimation.confidentialityCost}
             &gt;
-              &lt;h4 className="text-md font-medium flex items-center text-blue-700 dark:text-blue-300"&gt;
-                &lt;span className="mr-2"&gt;⏱️&lt;/span&gt;
-                Availability Costs ({availabilityLevel})
+              &lt;h4 className="text-md font-medium flex items-center text-purple-700 dark:text-purple-300"&gt;
+                &lt;span className="mr-2"&gt;🔒&lt;/span&gt;
+                Confidentiality Costs ({confidentialityLevel})
               &lt;/h4&gt;
               &lt;div className="mt-2 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm"&gt;
                 &lt;div className="p-2 bg-white dark:bg-gray-800 rounded"&gt;
                   &lt;div className="font-medium mb-1"&gt;Implementation&lt;/div&gt;
-                  &lt;div className="text-blue-600 dark:text-blue-400"&gt;
-                    {availabilityCost.implementation}
+                  &lt;div className="text-purple-600 dark:text-purple-400"&gt;
+                    {confidentialityCost.implementation}
                   &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div className="p-2 bg-white dark:bg-gray-800 rounded"&gt;
                   &lt;div className="font-medium mb-1"&gt;Operational&lt;/div&gt;
-                  &lt;div className="text-blue-600 dark:text-blue-400"&gt;
-                    {availabilityCost.operational}
+                  &lt;div className="text-purple-600 dark:text-purple-400"&gt;
+                    {confidentialityCost.operational}
                   &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div className="p-2 bg-white dark:bg-gray-800 rounded"&gt;
                   &lt;div className="font-medium mb-1"&gt;Personnel&lt;/div&gt;
-                  &lt;div className="text-blue-600 dark:text-blue-400"&gt;
-                    {availabilityCost.personnel}
+                  &lt;div className="text-purple-600 dark:text-purple-400"&gt;
+                    {confidentialityCost.personnel}
                   &lt;/div&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
@@ -2097,32 +2097,32 @@ const CostEstimationWidget: React.FC&lt;CostEstimationWidgetProps&gt; = ({
               &lt;/div&gt;
             &lt;/div&gt;
 &nbsp;
-            {/* Confidentiality Costs */}
+            {/* Availability Costs */}
             &lt;div
-              className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg"
-              data-testid={TEST_IDS.costEstimation.confidentialityCost}
+              className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+              data-testid={TEST_IDS.costEstimation.availabilityCost}
             &gt;
-              &lt;h4 className="text-md font-medium flex items-center text-purple-700 dark:text-purple-300"&gt;
-                &lt;span className="mr-2"&gt;🔒&lt;/span&gt;
-                Confidentiality Costs ({confidentialityLevel})
+              &lt;h4 className="text-md font-medium flex items-center text-blue-700 dark:text-blue-300"&gt;
+                &lt;span className="mr-2"&gt;⏱️&lt;/span&gt;
+                Availability Costs ({availabilityLevel})
               &lt;/h4&gt;
               &lt;div className="mt-2 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm"&gt;
                 &lt;div className="p-2 bg-white dark:bg-gray-800 rounded"&gt;
                   &lt;div className="font-medium mb-1"&gt;Implementation&lt;/div&gt;
-                  &lt;div className="text-purple-600 dark:text-purple-400"&gt;
-                    {confidentialityCost.implementation}
+                  &lt;div className="text-blue-600 dark:text-blue-400"&gt;
+                    {availabilityCost.implementation}
                   &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div className="p-2 bg-white dark:bg-gray-800 rounded"&gt;
                   &lt;div className="font-medium mb-1"&gt;Operational&lt;/div&gt;
-                  &lt;div className="text-purple-600 dark:text-purple-400"&gt;
-                    {confidentialityCost.operational}
+                  &lt;div className="text-blue-600 dark:text-blue-400"&gt;
+                    {availabilityCost.operational}
                   &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div className="p-2 bg-white dark:bg-gray-800 rounded"&gt;
                   &lt;div className="font-medium mb-1"&gt;Personnel&lt;/div&gt;
-                  &lt;div className="text-purple-600 dark:text-purple-400"&gt;
-                    {confidentialityCost.personnel}
+                  &lt;div className="text-blue-600 dark:text-blue-400"&gt;
+                    {availabilityCost.personnel}
                   &lt;/div&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
@@ -2215,7 +2215,7 @@ export default CostEstimationWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-26T15:34:19.783Z
+                at 2025-04-04T09:34:12.139Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../README.md)
+[**CIA Compliance Manager Diagrams v0.8.6**](../README.md)
 
 ***
 
@@ -19,20 +19,15 @@ Centralized component exports simplify imports and promote component reuse.
 
 ## Interfaces
 
-- [CodeBlockProps](interfaces/CodeBlockProps.md)
 - [KeyValuePairProps](interfaces/KeyValuePairProps.md)
 - [RiskLevelBadgeProps](interfaces/RiskLevelBadgeProps.md)
 - [SecurityLevelBadgeProps](interfaces/SecurityLevelBadgeProps.md)
-- [SecurityLevelProviderProps](interfaces/SecurityLevelProviderProps.md)
-- [SecurityLevelSelectorProps](interfaces/SecurityLevelSelectorProps.md)
-- [SecurityLevelSummaryItemProps](interfaces/SecurityLevelSummaryItemProps.md)
 - [SecurityRiskScoreProps](interfaces/SecurityRiskScoreProps.md)
-- [SelectionProps](interfaces/SelectionProps.md)
 - [TabProps](interfaces/TabProps.md)
 - [ThemeToggleProps](interfaces/ThemeToggleProps.md)
 - [TooltipProps](interfaces/TooltipProps.md)
-- [WidgetActionButtonProps](interfaces/WidgetActionButtonProps.md)
 - [WidgetActionsProps](interfaces/WidgetActionsProps.md)
+- [WidgetContainerProps](interfaces/WidgetContainerProps.md)
 
 ## Variables
 
@@ -55,6 +50,7 @@ Centralized component exports simplify imports and promote component reuse.
 - [SecurityLevelSelector](variables/SecurityLevelSelector.md)
 - [SecurityLevelWidget](variables/SecurityLevelWidget.md)
 - [SecurityResourcesWidget](variables/SecurityResourcesWidget.md)
+- [SecurityRiskScore](variables/SecurityRiskScore.md)
 - [SecuritySummaryWidget](variables/SecuritySummaryWidget.md)
 - [SecurityVisualizationWidget](variables/SecurityVisualizationWidget.md)
 - [Selection](variables/Selection.md)
@@ -72,7 +68,6 @@ Centralized component exports simplify imports and promote component reuse.
 
 - [ChartSecurityRiskScore](functions/ChartSecurityRiskScore.md)
 - [KeyValuePair](functions/KeyValuePair.md)
-- [SecurityRiskScore](functions/SecurityRiskScore.md)
 
 ## References
 
@@ -112,27 +107,9 @@ Re-exports [RiskAssessmentProps](../types/interfaces/RiskAssessmentProps.md)
 
 ***
 
-### SecurityLevelChangeTrackerProps
-
-Re-exports [SecurityLevelChangeTrackerProps](../typedoc-entry/interfaces/SecurityLevelChangeTrackerProps.md)
-
-***
-
-### SecurityLevelContextType
-
-Re-exports [SecurityLevelContextType](../typedoc-entry/interfaces/SecurityLevelContextType.md)
-
-***
-
 ### StatusBadgeProps
 
 Re-exports [StatusBadgeProps](../types/interfaces/StatusBadgeProps.md)
-
-***
-
-### UseSecurityLevelStateOptions
-
-Re-exports [UseSecurityLevelStateOptions](../typedoc-entry/interfaces/UseSecurityLevelStateOptions.md)
 
 ***
 
