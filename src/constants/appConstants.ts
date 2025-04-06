@@ -577,3 +577,10 @@ export const CHART_COLORS = {
  * Maximum column count for grid layout
  */
 export const GRID_MAX_COLUMNS = 12;
+
+/**
+ * Application name and version information
+ */
+export const APP_NAME = "CIA Compliance Manager";
+export const APP_VERSION = "0.8.6"; // Should match version in package.json
+export const appVersion = APP_VERSION; // Alias for backward compatibility

@@ -12,6 +12,51 @@
   --light-text: #222222;
 }
 
+/* Light Theme Styles */
+
+/* Light theme specific styles */
+body,
+#root {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Light mode widget styling */
+.widget-container {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.widget-header {
+  background: linear-gradient(
+    to right,
+    rgba(248, 250, 252, 0.8) 0%,
+    rgba(241, 245, 249, 0.8) 100%
+  );
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Light mode scrollbars */
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Light pattern background */
+.bg-pattern {
+  background-color: var(--background-color);
+  background-image: linear-gradient(
+      rgba(0, 102, 204, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(0, 102, 204, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center center;
+}
+
 /* Widget styling for light theme */
 .widget-container {
   background: #ffffff;
@@ -54,28 +99,28 @@ h4 {
 }
 
 .level-none {
-  background-color: #e74c3c;
-  box-shadow: 0 0 3px #e74c3c;
+  background-color: var(--color-none);
+  box-shadow: 0 0 3px var(--color-none);
 }
 
 .level-low {
-  background-color: #e67e22;
-  box-shadow: 0 0 3px #e67e22;
+  background-color: var(--color-low);
+  box-shadow: 0 0 3px var(--color-low);
 }
 
 .level-moderate {
-  background-color: #f1c40f;
-  box-shadow: 0 0 3px #f1c40f;
+  background-color: var(--color-moderate);
+  box-shadow: 0 0 3px var(--color-moderate);
 }
 
 .level-high {
-  background-color: #27ae60;
-  box-shadow: 0 0 3px #27ae60;
+  background-color: var(--color-high);
+  box-shadow: 0 0 3px var(--color-high);
 }
 
 .level-very-high {
-  background-color: #3498db;
-  box-shadow: 0 0 3px #3498db;
+  background-color: var(--color-very-high);
+  box-shadow: 0 0 3px var(--color-very-high);
 }
 
 /* Light theme security visualization styling */
@@ -113,28 +158,28 @@ h4 {
 
 /* Critical risk styling for light theme */
 .critical-risk {
-  color: #e74c3c;
+  color: var(--color-none);
   font-weight: 600;
 }
 
 .high-risk {
-  color: #e67e22;
+  color: var(--color-low);
   font-weight: 600;
 }
 
 .medium-risk {
-  color: #f1c40f;
+  color: var(--color-moderate);
   font-weight: 600;
 }
 
 .low-risk {
-  color: #27ae60;
+  color: var(--color-high);
   font-weight: 600;
 }
 
 /* Enhanced technical details styling */
 .tech-metric-card {
-  background: #ffffff;
+  background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
   border: 1px solid var(--light-border);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
@@ -172,6 +217,12 @@ h4 {
   padding: 0.5rem;
   border-radius: 0.25rem;
   transition: all 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem top 50%;
+  background-size: 0.65rem auto;
+  padding-right: 1.8rem;
 }
 
 .security-level-selector select:focus {
@@ -314,4 +365,44 @@ button.lightbutton:hover {
 
 .code-block .variable {
   color: #2980b9;
+}
+
+/* Enhanced tab styling for light theme */
+[role="tablist"] {
+  border-bottom-color: #e5e7eb;
+  background: linear-gradient(to bottom, #f9fafb, #f3f4f6);
+}
+
+[role="tab"] {
+  color: #6b7280;
+}
+
+[role="tab"]:hover {
+  color: #4b5563;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+[role="tab"][aria-selected="true"] {
+  color: var(--color-primary);
+  background-color: #ffffff;
+  border-bottom-color: var(--color-primary);
+  position: relative;
+}
+
+[role="tab"][aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  border-radius: 1px;
+}
+
+/* Tab focus states for accessibility */
+[role="tab"]:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -1px;
+  z-index: 1;
 }

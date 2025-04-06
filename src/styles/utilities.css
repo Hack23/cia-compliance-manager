@@ -189,6 +189,12 @@
   font-family: var(--font-mono);
 }
 
+/* Ultra small text */
+.text-xxs {
+  font-size: 0.65rem;
+  line-height: 1;
+}
+
 /* Layout utilities */
 .grid {
   display: grid;
@@ -904,14 +910,14 @@
   overflow: visible;
 }
 
-/* Grid container specific utilities */
+/* Grid container specific utilities - No scrollbars */
 .dashboard-grid-container {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 1.5rem; /* Increased gap for better separation */
   width: 100%;
   padding: 1rem;
-  grid-auto-rows: minmax(300px, auto);
+  grid-auto-rows: min-content; /* Allow content to dictate height */
 }
 
 /* Media queries to make the grid responsive */
@@ -933,14 +939,108 @@
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-  height: 100%;
-  min-height: 300px;
+  overflow: visible; /* Changed from hidden to visible */
+  height: auto; /* Allow container to grow */
+  width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grid-widget-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 /* Dark mode styles for grid widget containers */
 .dark .grid-widget-container {
-  background-color: #1f2937; /* dark:bg-gray-800 */
+  background-color: #1e293b; /* dark:bg-gray-800 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dark .grid-widget-container:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4), 0 0 10px rgba(56, 189, 248, 0.2);
+}
+
+/* Fix widget content to avoid scrollbars */
+[data-testid^="widget-"] > div.p-4,
+[data-testid^="widget-"] .overflow-y-auto,
+[data-testid^="widget-"] .max-h-\[550px\],
+[data-testid^="widget-"] .max-h-\[500px\] {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Transitions for smoother UI */
+* {
+  transition-property: color, background-color, border-color, box-shadow,
+    transform;
+  transition-duration: var(--transition-speed);
+  transition-timing-function: var(--transition-function);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Make scrollbars thinner for better space usage */
+.widget-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Accessibility focus styles */
+.widget-container button:focus,
+.widget-container [role="tab"]:focus,
+.widget-container a:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Remove max-height constraints from specific widgets */
+[data-testid="widget-confidentiality-impact"] > div,
+[data-testid="widget-integrity-impact"] > div,
+[data-testid="widget-availability-impact"] > div,
+[data-testid="widget-business-impact"] > div,
+[data-testid="widget-security-summary"] > div,
+[data-testid="widget-security-visualization"] > div,
+[data-testid="widget-cost-estimation"] > div,
+[data-testid="widget-compliance-status"] > div,
+[data-testid="widget-technical-details"] > div,
+[data-testid="widget-security-level"] > div {
+  max-height: none !important;
+  height: auto !important;
+  overflow-y: visible !important;
+}
+
+/* Ensure content containers have flexible height */
+.section-container,
+.impact-card,
+.metric-card,
+.widget-section,
+.business-impact-section,
+.cia-section,
+.security-card {
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  overflow: visible;
 }

@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
+import AppHeader from "../components/common/AppHeader";
+import { APP_NAME, APP_VERSION } from "../constants/appConstants";
 // Import widgets directly instead of Dashboard
 import BusinessImpactAnalysisWidget from "../components/widgets/assessmentcenter/BusinessImpactAnalysisWidget";
 import SecurityLevelWidget from "../components/widgets/assessmentcenter/SecurityLevelWidget";
@@ -12,7 +14,6 @@ import IntegrityImpactWidget from "../components/widgets/impactanalysis/Integrit
 import SecurityResourcesWidget from "../components/widgets/implementationguide/SecurityResourcesWidget";
 import SecurityVisualizationWidget from "../components/widgets/implementationguide/SecurityVisualizationWidget";
 import TechnicalDetailsWidget from "../components/widgets/implementationguide/TechnicalDetailsWidget";
-import { APP_TEST_IDS, UI_TEXT } from "../constants";
 import { SecurityLevel } from "../types/cia";
 
 /**
@@ -126,89 +127,12 @@ const CIAClassificationApp: React.FC = () => {
         } p-4 transition-colors duration-300`}
       >
         {/* App header with theme toggle */}
-        <div className="mb-4 p-3 bg-white dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center">
-          <div className="flex items-center">
-            <img
-              src="https://hack23.github.io/cia-compliance-manager/icon-192.png"
-              alt="CIA Compliance Manager Logo"
-              className="h-10 w-10 mr-3"
-              data-testid="app-logo"
-            />
-            <div>
-              <h1
-                data-testid={APP_TEST_IDS.APP_TITLE}
-                className="text-xl font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300"
-              >
-                {UI_TEXT.APP_TITLE}
-              </h1>
-              <div
-                className="terminal-text text-xs flex items-center flex-wrap"
-                style={{ color: "#22c55e" }}
-              >
-                <span
-                  className="inline-block mr-1"
-                  data-testid="app-indicator"
-                  style={{ color: "#22c55e", fontSize: "8px" }}
-                >
-                  ■
-                </span>
-                <span
-                  className="mr-1 text-xxs"
-                  data-testid="app-version"
-                  style={{ color: "#22c55e" }}
-                >
-                  v{appVersion}
-                </span>
-                <span className="mx-1 text-xxs" style={{ color: "#22c55e" }}>
-                  •
-                </span>
-                <a
-                  href="https://github.com/Hack23/cia-compliance-manager"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xxs hover:underline mr-1"
-                  data-testid="source-link"
-                  style={{ color: "#22c55e" }}
-                >
-                  Source
-                </a>
-                <span className="mx-1 text-xxs" style={{ color: "#22c55e" }}>
-                  •
-                </span>
-                <a
-                  href="https://hack23.github.io/cia-compliance-manager/documentation.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xxs hover:underline mr-1"
-                  data-testid="docs-link"
-                  style={{ color: "#22c55e" }}
-                >
-                  Doc
-                </a>
-                <span className="mx-1 text-xxs" style={{ color: "#22c55e" }}>
-                  •
-                </span>
-                <a
-                  href="https://hack23.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xxs hover:underline"
-                  data-testid="author-link"
-                  style={{ color: "#22c55e" }}
-                >
-                  Hack23
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <button
-            onClick={toggleDarkMode}
-            className="px-3 py-1 bg-blue-500 dark:bg-blue-600 text-white rounded-md text-sm"
-          >
-            {darkMode ? "☀️ Light" : "🌙 Dark"}
-          </button>
-        </div>
+        <AppHeader
+          title={APP_NAME}
+          testId="app-header"
+          toggleDarkMode={toggleDarkMode}
+          darkMode={darkMode}
+        />
 
         {/* Container with defined width to ensure grid fits properly */}
         <div className="w-full max-w-[1600px] mx-auto">

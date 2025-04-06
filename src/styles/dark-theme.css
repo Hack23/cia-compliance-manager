@@ -532,15 +532,15 @@
 }
 
 /* Ensure optimal text visibility in dark mode */
-.dark p, 
-.dark li, 
+.dark p,
+.dark li,
 .dark span:not([class*="icon"]),
 .dark div:not([class*="background"]):not([class*="gradient"]),
 .dark label,
-.dark td, 
+.dark td,
 .dark th,
-.dark input, 
-.dark select, 
+.dark input,
+.dark select,
 .dark textarea,
 .dark [data-testid^="widget-"] p,
 .dark [data-testid^="widget-"] div,
@@ -549,8 +549,8 @@
 }
 
 /* Stronger contrast for section headings */
-.dark h4, 
-.dark h5, 
+.dark h4,
+.dark h5,
 .dark h6,
 .dark [data-testid^="widget-"] h4,
 .dark [data-testid^="widget-"] h5,
@@ -587,3 +587,127 @@
 .dark [data-testid^="widget-"] [data-testid$="-recommendation-2"] {
   color: var(--text-color) !important;
 }
+
+/* Dark Theme Override Styles */
+
+/* General dark mode theme */
+.dark {
+  color-scheme: dark;
+}
+
+.dark body,
+.dark #root {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Dark mode widget styles */
+.dark .widget-container {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+.dark .widget-header {
+  background-color: #0f172a;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
+.dark [role="tablist"] {
+  border-color: #334155;
+}
+
+.dark [role="tab"][aria-selected="true"] {
+  border-color: #60a5fa;
+  color: #60a5fa;
+}
+
+/* Enhanced tab styling for dark theme */
+.dark [role="tablist"] {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.6),
+    rgba(30, 41, 59, 0.6)
+  );
+}
+
+.dark [role="tab"] {
+  color: #94a3b8;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.dark [role="tab"]:hover {
+  color: #e2e8f0;
+  background-color: rgba(51, 65, 85, 0.5);
+  box-shadow: inset 0 0 8px rgba(56, 189, 248, 0.1);
+}
+
+.dark [role="tab"][aria-selected="true"] {
+  color: var(--color-primary);
+  background: linear-gradient(
+    to bottom,
+    rgba(30, 41, 59, 0.95),
+    rgba(30, 41, 59, 0.9)
+  );
+  border-bottom-color: var(--color-primary);
+  position: relative;
+}
+
+.dark [role="tab"][aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  box-shadow: 0 0 8px var(--color-primary);
+  border-radius: 1px;
+}
+
+/* Improved focus states for better accessibility in dark mode */
+.dark [role="tab"]:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -1px;
+  z-index: 1;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+/* Accessibility focus styles */
+.dark .widget-container button:focus,
+.dark .widget-container [role="tab"]:focus,
+.dark .widget-container a:focus {
+  outline-color: #60a5fa;
+}
+
+.dark .widget-container th,
+.dark .widget-container td {
+  border-color: #334155;
+}
+
+/* Dark theme for scrollbars */
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(0, 204, 102, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 204, 102, 0.5);
+}
+
+/* Dark mode app logo styling */
+.dark [data-testid="app-logo"],
+.dark img.h-8.w-8.mr-2 {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 4px rgba(34, 197, 94, 0.3);
+}
+
+/* Dark mode terminal text styling */
+.dark .terminal-text.text-xs a:hover {
+  background-color: rgba(34, 197, 94, 0.15);
+}
+
+.dark .terminal-text.text-xs [data-testid="app-version"] {
+  background-color: rgba(34, 197, 94, 0.15);
+}
+
+/* More dark mode specific styles... */

@@ -3,11 +3,36 @@ import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { AVAILABILITY_IMPACT_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
-import { CIADetails } from "../../../types/cia-services";
+import { BusinessImpactDetails, CIADetails } from "../../../types/cia-services";
 import { getRiskLevelFromSecurityLevel } from "../../../utils/riskUtils";
+import { isNullish } from "../../../utils/typeGuards";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
+
+// Extended interface for infrastructure details to improve type safety
+interface InfrastructureDetails {
+  availabilityZones: string;
+  redundancyLevel: string;
+  failoverStrategy: string;
+}
+
+// Extended interface for SLA metrics to improve type safety
+interface SLAMetrics {
+  uptime: string;
+  rto: string;
+  rpo: string;
+  mttr: string;
+  sla: string;
+}
+
+// Extend the CIADetails type to include the properties we're accessing
+interface ExtendedCIADetails extends CIADetails {
+  availabilityZones?: string;
+  redundancyLevel?: string;
+  failoverStrategy?: string;
+  sla?: string;
+}
 
 interface AvailabilityImpactWidgetProps {
   /**
@@ -47,7 +72,7 @@ interface AvailabilityImpactWidgetProps {
  * ## Business Perspective
  *
  * This widget helps stakeholders understand the business impact of
- * availability controls, including uptime targets, recovery metrics,
+ * availability controls, including uptime targets, recovery objectives,
  * and resilience requirements for business continuity. ⏱️
  */
 const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
@@ -68,18 +93,31 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   );
 
   // Get availability details from service if available
-  const details = useMemo((): CIADetails | null => {
-    if (!ciaContentService) return null;
+  const details = useMemo((): ExtendedCIADetails | null => {
+    if (isNullish(ciaContentService)) return null;
 
     try {
       // Safely check if the method exists before calling it
       if (
         typeof (ciaContentService as any).getAvailabilityDetails === "function"
       ) {
-        return (ciaContentService as any).getAvailabilityDetails(
+        const result = (ciaContentService as any).getAvailabilityDetails(
           availabilityLevel
         );
+        // Handle undefined result by returning null
+        return isNullish(result) ? null : result;
       }
+
+      // Try getComponentDetails as an alternative method
+      if (typeof ciaContentService.getComponentDetails === "function") {
+        const result = ciaContentService.getComponentDetails(
+          "availability",
+          availabilityLevel
+        );
+        // Handle undefined result by returning null
+        return isNullish(result) ? null : result;
+      }
+
       return null;
     } catch (err) {
       console.error("Error getting availability details:", err);
@@ -106,7 +144,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   }, [ciaContentService, availabilityLevel]);
 
   // Default/fallback SLA metrics based on availability level
-  const slaMetrics = useMemo(() => {
+  const slaMetrics = useMemo((): SLAMetrics => {
     const metrics = {
       uptime: "",
       rto: "",
@@ -163,8 +201,8 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   }, [availabilityLevel]);
 
   // Default/fallback infrastructure details based on availability level
-  const infrastructureDetails = useMemo(() => {
-    const details = {
+  const infrastructureDetails = useMemo((): InfrastructureDetails => {
+    const details: InfrastructureDetails = {
       availabilityZones: "",
       redundancyLevel: "",
       failoverStrategy: "",
@@ -205,24 +243,64 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
     return details;
   }, [availabilityLevel]);
 
+  // Format business impact description based on availability level
+  const formatBusinessImpact = (level: SecurityLevel): string => {
+    const descriptions: Record<SecurityLevel, string> = {
+      None: "No specific availability requirements. Systems may have frequent and extended downtimes without notification.",
+      Low: "Basic availability requirements. Systems may experience occasional downtimes with minimal impact on operations.",
+      Moderate:
+        "Standard availability requirements. Systems are expected to be available during business hours with planned maintenance windows.",
+      High: "Enhanced availability requirements. Systems are expected to be available 24/7 with brief, scheduled maintenance windows.",
+      "Very High":
+        "Stringent availability requirements. Systems must maintain continuous operation with redundant components and no perceptible downtime.",
+    };
+
+    return (
+      descriptions[level] ||
+      "Standard availability controls to maintain system uptime and minimize disruptions."
+    );
+  };
+
+  // Create a safe business impact object that matches the required type
+  const safeBusinessImpact: BusinessImpactDetails = useMemo(() => {
+    if (businessImpact) return businessImpact;
+
+    // Provide a default business impact when the real one is null
+    return {
+      summary: "Comprehensive impact analysis",
+      financial: {
+        description:
+          "Revenue impact is modest, estimated at approximately 1-3% annually, assuming typical outage scenarios.",
+        riskLevel: "Medium Risk",
+        annualRevenueLoss: "1-3% of annual revenue",
+      },
+      operational: {
+        description:
+          "Disruptions occur infrequently and recovery is relatively quick.",
+        riskLevel: "Medium Risk",
+        meanTimeToRecover: "2-4 hours",
+      },
+    };
+  }, [businessImpact]);
+
   return (
     <WidgetContainer
       title={
         WIDGET_TITLES.AVAILABILITY_IMPACT || "Availability Impact Analysis"
       }
       icon={WIDGET_ICONS.AVAILABILITY_IMPACT || "⏱️"}
-      className={className}
+      className={`${className} cia-availability`} // Add cia-availability class for theme
       testId={testId}
       isLoading={isLoading}
       error={error}
     >
-      <div className="p-4">
-        {/* Availability impact summary */}
+      <div className="p-4 cia-widget">
+        {/* Impact overview */}
         <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
           <p className="text-sm">
             This widget analyzes the business impact of your chosen availability
-            level, including uptime requirements, recovery objectives, and
-            resilience requirements.
+            level, including uptime requirements, recovery time objectives, and
+            resilience strategies.
           </p>
         </div>
 
@@ -239,12 +317,14 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
 
         {/* Availability risk level */}
         <div
-          className="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+          className="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg cia-section cia-risk-section"
           data-testid={`${testId}-risk-level`}
         >
-          <h3 className="text-lg font-medium mb-2">Risk Assessment</h3>
-          <div className="flex items-center justify-between">
-            <span className="text-gray-600 dark:text-gray-400">
+          <h3 className="text-lg font-medium mb-2 cia-section-header">
+            Risk Assessment
+          </h3>
+          <div className="flex items-center justify-between cia-risk-level">
+            <span className="text-gray-600 dark:text-gray-400 cia-risk-label">
               Risk Level:
             </span>
             <span
@@ -259,161 +339,154 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
               {riskLevel}
             </span>
           </div>
-          <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            {details?.businessImpact ||
-              `${availabilityLevel} availability provides ${
-                availabilityLevel === "None"
-                  ? "minimal protection against"
-                  : availabilityLevel === "Low"
-                  ? "basic protection against"
-                  : availabilityLevel === "Moderate"
-                  ? "standard protection against"
-                  : availabilityLevel === "High"
-                  ? "strong protection against"
-                  : "very strong protection against"
-              } system downtime and service disruptions. Business operations ${
-                availabilityLevel === "None"
-                  ? "are at significant risk"
-                  : availabilityLevel === "Low"
-                  ? "may experience frequent disruptions"
-                  : availabilityLevel === "Moderate"
-                  ? "will experience occasional disruptions"
-                  : availabilityLevel === "High"
-                  ? "will rarely experience disruptions"
-                  : "will almost never experience disruptions"
-              }.`}
+          <div className="mt-2 text-sm text-gray-600 dark:text-gray-400 cia-risk-description">
+            {details?.businessImpact || formatBusinessImpact(availabilityLevel)}
           </div>
         </div>
 
-        {/* Technical Description */}
-        <div
-          className="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
-          data-testid={`${testId}-description`}
-        >
-          <h3 className="text-lg font-medium mb-2">Technical Description</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            {details?.description ||
-              `${availabilityLevel} availability level focuses on ensuring systems and data are accessible when needed. This involves implementing controls for high uptime, quick recovery from disruptions, and resilient infrastructure to maintain business continuity.`}
-          </p>
+        {/* Business Impact Analysis */}
+        <div className="mb-4">
+          <h3 className="text-lg font-medium mb-2">Business Impact</h3>
+          <BusinessImpactSection
+            impact={safeBusinessImpact}
+            color="blue"
+            testId={`${testId}-business-impact`}
+          />
         </div>
 
-        {/* SLA metrics */}
-        <div
-          className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
-          data-testid={`${testId}-metrics`}
-        >
-          <h3 className="text-lg font-medium mb-2 text-blue-800 dark:text-blue-300">
-            Availability Metrics
+        {/* SLA Metrics */}
+        <div className="mb-4">
+          <h3 className="text-lg font-medium mb-2 flex items-center">
+            <span className="mr-2">⏱️</span>SLA Metrics
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
-              <div className="text-sm font-medium mb-1">Target Uptime:</div>
-              <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+              <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
+                Uptime Target
+              </div>
+              <div className="text-lg font-bold">
                 {details?.uptime || slaMetrics.uptime}
               </div>
-            </div>
-            <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
-              <div className="text-sm font-medium mb-1">
-                Recovery Time Objective (RTO):
+              <div className="text-xs text-blue-600 dark:text-blue-400">
+                Expected system availability
               </div>
-              <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+            </div>
+            <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+              <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
+                Recovery Time Objective
+              </div>
+              <div className="text-lg font-bold">
                 {details?.rto || slaMetrics.rto}
               </div>
-            </div>
-            <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
-              <div className="text-sm font-medium mb-1">
-                Recovery Point Objective (RPO):
+              <div className="text-xs text-blue-600 dark:text-blue-400">
+                Time to restore service
               </div>
-              <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+            </div>
+            <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+              <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
+                Recovery Point Objective
+              </div>
+              <div className="text-lg font-bold">
                 {details?.rpo || slaMetrics.rpo}
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* More metrics */}
-        <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div
-            className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
-            data-testid={`${testId}-mttr`}
-          >
-            <h4 className="text-md font-medium mb-3 flex items-center">
-              <span className="mr-2">⚡</span>
-              Response Metrics
-            </h4>
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <div className="text-sm font-medium mb-1">
-                  Mean Time to Repair:
-                </div>
-                <div className="text-blue-600 dark:text-blue-400">
-                  {details?.mttr || slaMetrics.mttr}
-                </div>
-              </div>
-              <div>
-                <div className="text-sm font-medium mb-1">
-                  Service Level Agreement:
-                </div>
-                <div className="text-blue-600 dark:text-blue-400">
-                  {(details as any)?.sla || slaMetrics.sla}
-                </div>
+              <div className="text-xs text-blue-600 dark:text-blue-400">
+                Maximum data loss allowed
               </div>
             </div>
           </div>
-
-          <div
-            className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
-            data-testid={`${testId}-infrastructure`}
-          >
-            <h4 className="text-md font-medium mb-3 flex items-center">
-              <span className="mr-2">🏗️</span>
-              Infrastructure Requirements
-            </h4>
-            <div className="grid grid-cols-1 gap-2">
-              <div>
-                <div className="text-sm font-medium mb-1">
-                  Geographic Distribution:
-                </div>
-                <div className="text-blue-600 dark:text-blue-400">
-                  {(details as any)?.availabilityZones ||
-                    infrastructureDetails.availabilityZones}
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+              <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
+                Mean Time To Recovery
               </div>
-              <div>
-                <div className="text-sm font-medium mb-1">Redundancy:</div>
-                <div className="text-blue-600 dark:text-blue-400">
-                  {(details as any)?.redundancyLevel ||
-                    infrastructureDetails.redundancyLevel}
-                </div>
+              <div className="text-lg font-bold">
+                {details?.mttr || slaMetrics.mttr}
               </div>
-              <div>
-                <div className="text-sm font-medium mb-1">
-                  Failover Approach:
-                </div>
-                <div className="text-blue-600 dark:text-blue-400">
-                  {(details as any)?.failoverStrategy ||
-                    infrastructureDetails.failoverStrategy}
-                </div>
+              <div className="text-xs text-blue-600 dark:text-blue-400">
+                Average recovery duration
+              </div>
+            </div>
+            <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+              <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
+                Service Level Agreement
+              </div>
+              <div className="text-lg font-bold">
+                {details?.sla || slaMetrics.sla}
+              </div>
+              <div className="text-xs text-blue-600 dark:text-blue-400">
+                Support coverage period
               </div>
             </div>
           </div>
         </div>
 
-        {/* Business Impact */}
-        <div className="mt-4" data-testid={`${testId}-business-impact`}>
-          {businessImpact && (
-            <BusinessImpactSection
-              impact={businessImpact}
-              color="blue"
-              testId={`${testId}-business-impact`}
-            />
-          )}
+        {/* Infrastructure Details */}
+        <div className="mb-4">
+          <h3 className="text-lg font-medium mb-2 flex items-center">
+            <span className="mr-2">🏗️</span>Infrastructure Requirements
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <div className="text-sm font-medium mb-1">
+                Geographic Distribution:
+              </div>
+              <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                {details?.availabilityZones ||
+                  infrastructureDetails.availabilityZones}
+              </div>
+            </div>
+            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <div className="text-sm font-medium mb-1">Redundancy Level:</div>
+              <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                {details?.redundancyLevel ||
+                  infrastructureDetails.redundancyLevel}
+              </div>
+            </div>
+            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <div className="text-sm font-medium mb-1">Failover Strategy:</div>
+              <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                {details?.failoverStrategy ||
+                  infrastructureDetails.failoverStrategy}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Technical Implementation */}
+        <div className="mb-4">
+          <h3 className="text-lg font-medium mb-2 flex items-center">
+            <span className="mr-2">🔧</span>Technical Implementation
+          </h3>
+          <p className="text-gray-600 dark:text-gray-300">
+            {details?.technical ||
+              `${availabilityLevel} level requires ${
+                availabilityLevel === "None"
+                  ? "minimal"
+                  : availabilityLevel === "Low"
+                  ? "basic"
+                  : availabilityLevel === "Moderate"
+                  ? "standard"
+                  : availabilityLevel === "High"
+                  ? "robust"
+                  : "extensive"
+              } technical controls including ${
+                availabilityLevel === "None"
+                  ? "no specific measures"
+                  : availabilityLevel === "Low"
+                  ? "basic monitoring"
+                  : availabilityLevel === "Moderate"
+                  ? "monitoring and alerts"
+                  : availabilityLevel === "High"
+                  ? "advanced monitoring, failover mechanisms"
+                  : "comprehensive monitoring, automated recovery, and multi-region resilience"
+              }.`}
+          </p>
         </div>
 
         {/* Recommendations */}
         {details?.recommendations && details.recommendations.length > 0 && (
           <div
-            className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+            className="mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
             data-testid={`${testId}-recommendations`}
           >
             <h3 className="text-lg font-medium mb-2">Recommendations</h3>

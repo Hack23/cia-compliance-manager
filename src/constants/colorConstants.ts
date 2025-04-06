@@ -73,3 +73,85 @@ export const getCIAComponentColors = (
       : CIA_COMPONENT_COLORS[component].SECONDARY,
   };
 };
+
+/**
+ * Color constants for the CIA Compliance Manager application
+ * Centralizes all color values for consistent theming
+ */
+
+// CIA Component-specific colors
+export const CIA_COLORS = {
+  availability: {
+    primary: "#3b82f6", // blue-500
+    light: "#dbeafe", // blue-100
+    lighter: "rgba(59, 130, 246, 0.1)",
+    dark: "#2563eb", // blue-600
+    darker: "#1d4ed8", // blue-700
+    darkMode: {
+      primary: "#60a5fa", // blue-400
+      light: "rgba(59, 130, 246, 0.2)",
+      lighter: "rgba(59, 130, 246, 0.1)",
+      dark: "#3b82f6", // blue-500
+      background: "rgba(59, 130, 246, 0.1)",
+    },
+  },
+  integrity: {
+    primary: "#10b981", // green-500
+    light: "#d1fae5", // green-100
+    lighter: "rgba(16, 185, 129, 0.1)",
+    dark: "#059669", // green-600
+    darker: "#047857", // green-700
+    darkMode: {
+      primary: "#34d399", // green-400
+      light: "rgba(16, 185, 129, 0.2)",
+      lighter: "rgba(16, 185, 129, 0.1)",
+      dark: "#10b981", // green-500
+      background: "rgba(16, 185, 129, 0.1)",
+    },
+  },
+  confidentiality: {
+    primary: "#8b5cf6", // purple-500
+    light: "#ede9fe", // purple-100
+    lighter: "rgba(139, 92, 246, 0.1)",
+    dark: "#7c3aed", // purple-600
+    darker: "#6d28d9", // purple-700
+    darkMode: {
+      primary: "#a78bfa", // purple-400
+      light: "rgba(139, 92, 246, 0.2)",
+      lighter: "rgba(139, 92, 246, 0.1)",
+      dark: "#8b5cf6", // purple-500
+      background: "rgba(139, 92, 246, 0.1)",
+    },
+  },
+};
+
+// Color aliases for components (maps CIA attributes to their colors)
+export const COMPONENT_COLORS = {
+  availability: "blue",
+  integrity: "green",
+  confidentiality: "purple",
+};
+
+// System color tokens for generic UI elements
+export const UI_COLORS = {
+  primary: {
+    light: "#3b82f6", // blue-500
+    dark: "#60a5fa", // blue-400
+  },
+  success: {
+    light: "#10b981", // green-500
+    dark: "#34d399", // green-400
+  },
+  warning: {
+    light: "#f59e0b", // amber-500
+    dark: "#fbbf24", // amber-400
+  },
+  danger: {
+    light: "#ef4444", // red-500
+    dark: "#f87171", // red-400
+  },
+  neutral: {
+    light: "#6b7280", // gray-500
+    dark: "#9ca3af", // gray-400
+  },
+};

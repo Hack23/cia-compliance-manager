@@ -3,11 +3,8 @@
 
 /* Import our separate CSS files */
 @import "./styles/variables.css"; /* Variables must come first */
-@import "./styles/theme.css"; /* Base theme uses variables */
-@import "./styles/layout.css"; /* Layout comes before components */
-@import "./styles/components.css"; /* Component styles may override layout */
-@import "./styles/utilities.css"; /* Utilities may override components */
-@import "./styles/light-theme.css"; /* Theme variants come afterward */
-@import "./styles/dark-theme.css";
-@import "./styles/widget-improvements.css"; /* Widget-specific improvements */
-@import "./styles/optimizations.css"; /* Final overrides and fixes */
+@import "./styles/layout.css"; /* Base layout */
+@import "./styles/components.css"; /* Component styles */
+@import "./styles/utilities.css"; /* Utility classes */
+@import "./styles/light-theme.css"; /* Light theme specific styles */
+@import "./styles/dark-theme.css"; /* Dark theme specific styles */
