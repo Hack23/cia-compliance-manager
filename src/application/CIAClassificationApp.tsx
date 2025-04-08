@@ -125,76 +125,61 @@ const CIAClassificationApp: React.FC = () => {
           darkMode ? "dark bg-gray-900" : "bg-gray-100"
         } p-4 transition-colors duration-300`}
       >
-        {/* App header with theme toggle */}
-        <div className="mb-4 p-3 bg-white dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center">
+        {/* Ultra-compact app header with horizontal layout */}
+        <div className="mb-2 px-2 py-0.5 bg-white dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center app-header">
           <div className="flex items-center">
-            <img
-              src="https://hack23.github.io/cia-compliance-manager/icon-192.png"
-              alt="CIA Compliance Manager Logo"
-              className="h-10 w-10 mr-3"
-              data-testid="app-logo"
-            />
-            <div>
+            <div className="w-5 h-5 flex items-center justify-center overflow-hidden mr-1.5">
+              <img
+                src="./icon-192.png"
+                alt="CIA Compliance Manager Logo"
+                style={{ transform: "scale(0.2)" }}
+                data-testid="app-logo"
+              />
+            </div>
+            <div className="flex flex-row items-center">
               <h1
                 data-testid={APP_TEST_IDS.APP_TITLE}
-                className="text-xl font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300"
+                className="text-sm font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300 mr-2"
               >
                 {UI_TEXT.APP_TITLE}
               </h1>
-              <div
-                className="terminal-text text-xs flex items-center flex-wrap"
-                style={{ color: "#22c55e" }}
-              >
+              <div className="cyber-nav flex items-center flex-wrap">
                 <span
-                  className="inline-block mr-1"
+                  className="inline-block pulse-dot mr-1"
                   data-testid="app-indicator"
-                  style={{ color: "#22c55e", fontSize: "8px" }}
                 >
                   ■
                 </span>
-                <span
-                  className="mr-1 text-xxs"
-                  data-testid="app-version"
-                  style={{ color: "#22c55e" }}
-                >
+                <span className="mr-1 version-tag" data-testid="app-version">
                   v{appVersion}
                 </span>
-                <span className="mx-1 text-xxs" style={{ color: "#22c55e" }}>
-                  •
-                </span>
+                <span className="mx-1 nav-separator">•</span>
                 <a
                   href="https://github.com/Hack23/cia-compliance-manager"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xxs hover:underline mr-1"
+                  className="cyber-link"
                   data-testid="source-link"
-                  style={{ color: "#22c55e" }}
                 >
                   Source
                 </a>
-                <span className="mx-1 text-xxs" style={{ color: "#22c55e" }}>
-                  •
-                </span>
+                <span className="mx-1 nav-separator">•</span>
                 <a
                   href="https://hack23.github.io/cia-compliance-manager/documentation.html"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xxs hover:underline mr-1"
+                  className="cyber-link"
                   data-testid="docs-link"
-                  style={{ color: "#22c55e" }}
                 >
                   Doc
                 </a>
-                <span className="mx-1 text-xxs" style={{ color: "#22c55e" }}>
-                  •
-                </span>
+                <span className="mx-1 nav-separator">•</span>
                 <a
                   href="https://hack23.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xxs hover:underline"
+                  className="cyber-link"
                   data-testid="author-link"
-                  style={{ color: "#22c55e" }}
                 >
                   Hack23
                 </a>
@@ -204,7 +189,8 @@ const CIAClassificationApp: React.FC = () => {
 
           <button
             onClick={toggleDarkMode}
-            className="px-3 py-1 bg-blue-500 dark:bg-blue-600 text-white rounded-md text-sm"
+            className="theme-toggle-btn"
+            data-testid="theme-toggle"
           >
             {darkMode ? "☀️ Light" : "🌙 Dark"}
           </button>
@@ -292,7 +278,9 @@ const CIAClassificationApp: React.FC = () => {
             {/* Integrity Impact Widget */}
             <div className="grid-widget-container">
               <IntegrityImpactWidget
-                level={integrityLevel}
+                availabilityLevel={availabilityLevel}
+                integrityLevel={integrityLevel}
+                confidentialityLevel={confidentialityLevel}
                 testId="integrity-impact-widget"
               />
             </div>

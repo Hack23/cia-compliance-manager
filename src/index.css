@@ -1,13 +1,31 @@
-/* Main CSS entry point that imports other CSS files */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&display=swap");
+/* Main index.css - import all other CSS files here */
+/* Check for any loose variable declarations here too */
 
-/* Import our separate CSS files */
-@import "./styles/variables.css"; /* Variables must come first */
-@import "./styles/theme.css"; /* Base theme uses variables */
-@import "./styles/layout.css"; /* Layout comes before components */
-@import "./styles/components.css"; /* Component styles may override layout */
-@import "./styles/utilities.css"; /* Utilities may override components */
-@import "./styles/light-theme.css"; /* Theme variants come afterward */
+/* Import other CSS files */
+@import "./styles/variables.css";
+@import "./styles/utilities.css";
+@import "./styles/components.css";
+@import "./styles/layout.css";
+@import "./styles/light-theme.css";
 @import "./styles/dark-theme.css";
-@import "./styles/widget-improvements.css"; /* Widget-specific improvements */
-@import "./styles/optimizations.css"; /* Final overrides and fixes */
+
+/* Global styles that use CSS variables */
+:root {
+  /* Any global variables should be here, not outside a selector */
+  /* ...existing code... */
+}
+
+/* Dark mode variables */
+.dark {
+  /* Any dark mode variables should be here, not outside a selector */
+  /* ...existing code... */
+}
+
+/* Base styles */
+body {
+  /* ...existing code... */
+  color: var(--text-color); /* Use the variable defined in a selector */
+  /* ...existing code... */
+}
+
+/* ...existing code... */

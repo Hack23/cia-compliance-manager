@@ -1,53 +1,85 @@
 import React from "react";
-import { getRiskBadgeVariant } from "../../utils";
+import { StatusType } from "../../types/common/StatusTypes"; // Add this import
+import { getStatusBadgeForRiskLevel } from "../../utils/riskUtils";
 import StatusBadge from "./StatusBadge";
 
 interface RiskLevelBadgeProps {
-  riskLevel: string;
-  testId?: string;
+  /**
+   * Risk level to display
+   */
+  risk: string;
+
+  /**
+   * Additional class names
+   */
   className?: string;
+
+  /**
+   * Test ID for testing
+   */
+  testId?: string;
+
+  /**
+   * Show icon along with risk level
+   */
   showIcon?: boolean;
 }
 
 /**
- * A specialized badge component for displaying risk levels with consistent styling
- * 
- * ## Business Perspective
- * 
- * This component standardizes risk level visualization across the application,
- * ensuring consistent communication of risk to stakeholders. The visual consistency
- * improves risk perception and decision-making. 📊
+ * Badge for displaying risk levels with appropriate styling
  */
 const RiskLevelBadge: React.FC<RiskLevelBadgeProps> = ({
-  riskLevel,
-  testId,
+  risk,
   className = "",
-  showIcon = false
+  testId = "risk-level-badge",
+  showIcon = false,
 }) => {
-  // Get appropriate badge variant for risk level
-  const badgeVariant = getRiskBadgeVariant(riskLevel);
+  // Handle undefined risk level
+  if (!risk) {
+    return (
+      <StatusBadge status="neutral" className={className} testId={testId}>
+        Unknown
+      </StatusBadge>
+    );
+  }
 
-  // Risk level icons
-  const getRiskIcon = () => {
-    const normalizedLevel = riskLevel?.toLowerCase() || "";
-    if (normalizedLevel.includes("critical")) return "⚠️";
-    if (normalizedLevel.includes("high")) return "⚠️";
-    if (normalizedLevel.includes("medium") || normalizedLevel.includes("moderate")) return "⚠";
-    if (normalizedLevel.includes("low")) return "ℹ️";
-    if (normalizedLevel.includes("minimal")) return "✓";
-    return "";
-  };
+  // Normalize the risk level text
+  const formattedRisk = risk.includes("Risk") ? risk : `${risk} Risk`;
+
+  // Get the appropriate badge status based on risk level
+  // Use type assertion to ensure it's recognized as a valid StatusType
+  const status = getStatusBadgeForRiskLevel(risk) as StatusType;
 
   return (
-    <StatusBadge 
-      status={badgeVariant} 
-      testId={testId || `risk-level-${riskLevel?.toLowerCase().replace(/\s+/g, '-')}`}
-      className={className}
-    >
-      {showIcon && <span className="mr-1">{getRiskIcon()}</span>}
-      {riskLevel || "Unknown"}
+    <StatusBadge status={status} className={className} testId={testId}>
+      {showIcon && getRiskIcon(risk)} {formattedRisk}
     </StatusBadge>
   );
 };
+
+/**
+ * Get appropriate icon for risk level
+ */
+function getRiskIcon(risk: string): string {
+  const lowercaseRisk = risk.toLowerCase();
+
+  if (lowercaseRisk.includes("critical") || lowercaseRisk.includes("high")) {
+    return "⚠️";
+  } else if (
+    lowercaseRisk.includes("medium") ||
+    lowercaseRisk.includes("moderate")
+  ) {
+    return "⚠";
+  } else if (lowercaseRisk.includes("low")) {
+    return "ℹ️";
+  } else if (
+    lowercaseRisk.includes("minimal") ||
+    lowercaseRisk.includes("none")
+  ) {
+    return "✓";
+  }
+
+  return "❓";
+}
 
 export default RiskLevelBadge;

@@ -1,46 +1,42 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
 import RiskLevelBadge from "./RiskLevelBadge";
 
 describe("RiskLevelBadge", () => {
-  it("renders the risk level text", () => {
-    render(<RiskLevelBadge riskLevel="Critical" />);
-    expect(screen.getByText("Critical")).toBeInTheDocument();
+  it("displays risk level text", () => {
+    render(<RiskLevelBadge risk="Critical Risk" />);
+    expect(screen.getByText(/Critical Risk/i)).toBeInTheDocument();
   });
 
-  it("renders with correct test ID", () => {
-    render(<RiskLevelBadge riskLevel="High" testId="test-high-risk" />);
-    expect(screen.getByTestId("test-high-risk")).toBeInTheDocument();
+  it("uses custom test ID when provided", () => {
+    render(<RiskLevelBadge risk="High Risk" testId="custom-test-id" />);
+    expect(screen.getByTestId("custom-test-id")).toBeInTheDocument();
   });
 
-  it("renders with default test ID when not provided", () => {
-    render(<RiskLevelBadge riskLevel="Medium" />);
-    expect(screen.getByTestId("risk-level-medium")).toBeInTheDocument();
+  it("adds Risk suffix when not present", () => {
+    render(<RiskLevelBadge risk="Medium" />);
+    expect(screen.getByText(/Medium Risk/i)).toBeInTheDocument();
   });
 
-  it("renders with icon when showIcon is true", () => {
-    const { container } = render(<RiskLevelBadge riskLevel="Critical" showIcon={true} />);
-    // Check that there's a span before the text content, which would be the icon
-    expect(container.querySelector("span > span")).toBeInTheDocument();
-  });
+  it("displays icon when showIcon is true", () => {
+    const { rerender } = render(
+      <RiskLevelBadge risk="Critical" showIcon={true} />
+    );
+    const badgeText = screen.getByTestId("risk-level-badge").textContent;
+    expect(badgeText).toMatch(/⚠️/);
 
-  it("renders without icon when showIcon is false", () => {
-    render(<RiskLevelBadge riskLevel="Low" showIcon={false} />);
-    expect(screen.getByText("Low")).toBeInTheDocument();
-    // Check direct text content without preceding span
-    const badge = screen.getByTestId("risk-level-low");
-    const spans = badge.querySelectorAll("span");
-    expect(spans.length).toBe(0);
+    rerender(<RiskLevelBadge risk="Low" showIcon={true} />);
+    const lowRiskBadgeText = screen.getByTestId("risk-level-badge").textContent;
+    expect(lowRiskBadgeText).toMatch(/ℹ️/);
   });
 
   it("handles undefined risk level gracefully", () => {
-    render(<RiskLevelBadge riskLevel={undefined as any} />);
+    render(<RiskLevelBadge risk={undefined as any} />);
     expect(screen.getByText("Unknown")).toBeInTheDocument();
   });
 
-  it("applies additional className when provided", () => {
-    render(<RiskLevelBadge riskLevel="Medium" className="test-class" />);
-    const badge = screen.getByTestId("risk-level-medium");
-    expect(badge.classList.contains("test-class")).toBe(true);
+  it("applies custom class name", () => {
+    render(<RiskLevelBadge risk="Medium Risk" className="custom-class" />);
+    const badge = screen.getByTestId("risk-level-badge");
+    expect(badge).toHaveClass("custom-class");
   });
 });

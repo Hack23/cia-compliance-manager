@@ -1,4 +1,4 @@
-import { SecurityLevel } from './cia';
+import { SecurityLevel } from "./cia";
 
 /**
  * Standard interface for components that use security levels
@@ -54,3 +54,30 @@ export interface CommonWidgetProps {
  * Combined interface for widgets that use security levels
  */
 export type SecurityWidgetProps = WithSecurityLevelProps & CommonWidgetProps;
+
+/**
+ * Base interface for components that impact security levels
+ */
+export interface ComponentImpactBaseProps {
+  /**
+   * @deprecated Use specific *Level properties instead
+   */
+  level?: SecurityLevel;
+
+  /**
+   * Current availability security level
+   */
+  availabilityLevel: SecurityLevel;
+
+  /**
+   * Current integrity security level
+   */
+  integrityLevel: SecurityLevel;
+
+  /**
+   * Current confidentiality security level
+   */
+  confidentialityLevel: SecurityLevel;
+
+  // ...other existing properties...
+}

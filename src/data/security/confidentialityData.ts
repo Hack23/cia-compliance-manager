@@ -30,24 +30,26 @@ const confidentialityData: Record<SecurityLevel, CIADetails> = {
     ],
     protectionMethod: "None",
     businessImpactDetails: {
-      summary: "Analysis of data confidentiality impacts",
+      summary: "Critical risk due to absence of confidentiality controls",
+      financial: {
+        description:
+          "Severe financial impact from data breaches and regulatory penalties",
+        riskLevel: "Critical Risk",
+      },
+      operational: {
+        description:
+          "Significant operational disruption from data exposure and unauthorized access",
+        riskLevel: "Critical Risk",
+      },
       reputational: {
         description:
           "Without confidentiality controls, sensitive information can be accessed by unauthorized parties, severely damaging customer trust and brand reputation.",
-        riskLevel: "Critical",
-      },
-      financial: {
-        description: "Reduced risk of financial penalties from data breaches",
-        riskLevel: "Low",
-      },
-      operational: {
-        description: "Smooth operations with secure data flows",
-        riskLevel: "Low",
+        riskLevel: "Critical Risk",
       },
       regulatory: {
         description:
           "Non-compliance with data protection regulations is highly likely, potentially resulting in fines and legal action.",
-        riskLevel: "Critical",
+        riskLevel: "Critical Risk",
         complianceViolations: ["GDPR", "CCPA", "HIPAA", "PCI-DSS"],
       },
     },

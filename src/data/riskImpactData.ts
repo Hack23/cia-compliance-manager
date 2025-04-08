@@ -1,5 +1,8 @@
 import { SecurityLevel } from "../types/cia";
-import { BusinessImpactDetail } from "../types/cia-services";
+import {
+  BusinessImpactDetail,
+  BusinessImpactDetails,
+} from "../types/cia-services";
 
 /**
  * Risk impact levels
@@ -404,4 +407,34 @@ export function getRiskImpactLabel(level: string): string {
   };
 
   return levelMap[level] || "Impact level not defined";
+}
+
+/**
+ * Create a default business impact object with minimum required fields
+ *
+ * @param component - CIA component type
+ * @param level - Security level
+ * @returns Business impact details
+ */
+export function createDefaultBusinessImpact(
+  component: string,
+  level: SecurityLevel
+): BusinessImpactDetails {
+  const riskLevel = getRiskLevelFromSecurityLevel(level);
+
+  return {
+    summary: `${component} impact analysis for ${level} level`,
+    financial: {
+      description: `Financial impact for ${level} ${component} security level`,
+      riskLevel,
+    },
+    operational: {
+      description: `Operational impact for ${level} ${component} security level`,
+      riskLevel,
+    },
+    reputational: {
+      description: `Reputational impact for ${level} ${component} security level`,
+      riskLevel,
+    },
+  };
 }

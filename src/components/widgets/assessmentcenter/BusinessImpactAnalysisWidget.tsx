@@ -252,8 +252,8 @@ const BusinessImpactAnalysisWidget: React.FC<
           </h3>
           {impact.riskLevel && (
             <RiskLevelBadge
-              riskLevel={impact.riskLevel}
-              testId={`${testId}-${category.toLowerCase()}-risk-level`}
+              risk={impact.riskLevel}
+              testId={`${testId}-risk-level`}
             />
           )}
         </div>

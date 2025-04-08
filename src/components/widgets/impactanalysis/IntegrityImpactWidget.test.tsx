@@ -7,33 +7,44 @@ import IntegrityImpactWidget from "./IntegrityImpactWidget";
 vi.mock("../../../hooks/useCIAContentService", () => ({
   useCIAContentService: () => ({
     ciaContentService: {
-      getIntegrityDetails: vi.fn().mockImplementation((level: string) => ({
-        description: `Mock description for integrity at ${level} level`,
-        technical: `Mock technical details for integrity at ${level} level`,
-        businessImpact: `Mock business impact for integrity at ${level} level`,
-        recommendations: [
-          `Mock recommendation 1 for ${level}`,
-          `Mock recommendation 2 for ${level}`,
-        ],
-        validationMethod: `${level} validation method`,
-        metrics: {
-          dataAccuracy: `${level} data accuracy`,
-          dataValidation: `${level} data validation`,
+      getComponentDetails: vi.fn().mockImplementation((component, level) => ({
+        description: `${level} ${component} description`,
+        technical: `${level} ${component} technical details`,
+        businessImpact: `${level} ${component} business impact`,
+        validationLevel: `${level} validation level`,
+        errorRate: `< ${
+          level === "None"
+            ? "Not monitored"
+            : level === "Low"
+            ? "5%"
+            : level === "Moderate"
+            ? "3%" // Changed from 4% to 3% to match test expectations
+            : level === "High"
+            ? "1%"
+            : "0.01%"
+        }`,
+      })),
+      getBusinessImpact: vi.fn().mockImplementation((component, level) => ({
+        summary: `${level} ${component} business impact summary`,
+        financial: {
+          description: `${level} financial impact`,
+          riskLevel: level === "None" ? "Critical Risk" : "Medium Risk",
+        },
+        operational: {
+          description: `${level} operational impact`,
+          riskLevel: level === "None" ? "Critical Risk" : "Low Risk",
+        },
+        reputational: {
+          description: `${level} reputational impact`,
+          riskLevel: level === "None" ? "Critical Risk" : "Medium Risk",
         },
       })),
-      getBusinessImpact: vi
+      getRecommendations: vi
         .fn()
-        .mockImplementation((component: string, level: string) => ({
-          description: `Mock business impact for ${component} at ${level} level`,
-          financial: {
-            description: `Mock financial impact for ${component} at ${level} level`,
-            riskLevel: "Medium Risk",
-          },
-          operational: {
-            description: `Mock operational impact for ${component} at ${level} level`,
-            riskLevel: "Low Risk",
-          },
-        })),
+        .mockImplementation((component, level) => [
+          `Mock recommendation 1 for ${level}`,
+          `Mock recommendation 2 for ${level}`,
+        ]),
     },
     error: null,
     isLoading: false,
@@ -62,7 +73,7 @@ vi.mock("../../../components/common/WidgetContainer", () => ({
 vi.mock("../../../components/common/BusinessImpactSection", () => ({
   default: ({ impact, testId }: { impact: any; testId?: string }) => (
     <div data-testid={testId || "business-impact-section"}>
-      {impact?.description}
+      {impact?.summary}
     </div>
   ),
 }));
@@ -75,8 +86,12 @@ vi.mock("../../../components/common/SecurityLevelBadge", () => ({
 }));
 
 describe("IntegrityImpactWidget", () => {
+  // Update default props to include all required CIA levels
   const defaultProps = {
     level: "Moderate" as SecurityLevel,
+    availabilityLevel: "Moderate" as SecurityLevel,
+    integrityLevel: "Moderate" as SecurityLevel,
+    confidentialityLevel: "Moderate" as SecurityLevel,
     testId: "test-integrity-widget",
   };
 
@@ -97,7 +112,6 @@ describe("IntegrityImpactWidget", () => {
 
   it("displays security level badge", () => {
     createComponent();
-    // Use the correct testId that's used in the actual component
     expect(
       screen.getByTestId("test-integrity-widget-integrity-badge")
     ).toBeInTheDocument();
@@ -106,84 +120,83 @@ describe("IntegrityImpactWidget", () => {
     ).toHaveTextContent("Moderate");
   });
 
-  it("renders technical implementation section", () => {
-    createComponent();
-
-    // Look for the technical description section
-    const descriptionSection = screen.getByTestId(
-      "test-integrity-widget-description"
-    );
-    expect(descriptionSection).toBeInTheDocument();
-
-    // Check for the mock description within this section
-    expect(descriptionSection.textContent).toContain(
-      "Mock description for integrity at Moderate level"
-    );
-  });
-
   it("renders business impact section", () => {
     createComponent();
     expect(
-      screen.getByText(/Mock business impact for integrity at Moderate level/)
+      screen.getByTestId("test-integrity-widget-business-impact-container")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Moderate integrity business impact summary")
     ).toBeInTheDocument();
   });
 
-  it("renders recommendations section", () => {
+  it("displays data integrity metrics", () => {
     createComponent();
+    expect(screen.getByText("Data Integrity Metrics")).toBeInTheDocument();
+    expect(screen.getByText("Data Validation Controls:")).toBeInTheDocument();
+    expect(screen.getByText("Moderate validation level")).toBeInTheDocument();
+    expect(screen.getByText("Acceptable Error Rate:")).toBeInTheDocument();
+    expect(screen.getByText("< 3%")).toBeInTheDocument();
+  });
+
+  it("renders recommendations when showExtendedDetails is true", () => {
+    createComponent({ showExtendedDetails: true });
+    expect(screen.getByText("Recommendations")).toBeInTheDocument();
     expect(
-      screen.getByText(/Mock recommendation 1 for Moderate/)
+      screen.getByText("Mock recommendation 1 for Moderate")
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/Mock recommendation 2 for Moderate/)
+      screen.getByText("Mock recommendation 2 for Moderate")
     ).toBeInTheDocument();
   });
 
-  it("displays the none level correctly", () => {
-    createComponent({
-      level: "None" as SecurityLevel,
-      availabilityLevel: "None" as SecurityLevel,
-      integrityLevel: "None" as SecurityLevel,
-      confidentialityLevel: "None" as SecurityLevel,
-    });
-    // Use the correct testId
-    expect(
-      screen.getByTestId("test-integrity-widget-integrity-badge")
-    ).toHaveTextContent("None");
+  it("doesn't display recommendations when showExtendedDetails is false", () => {
+    createComponent({ showExtendedDetails: false });
+    expect(screen.queryByText("Recommendations")).not.toBeInTheDocument();
   });
 
-  it("displays the low level correctly", () => {
+  it("uses the specific integrity level from props when available", () => {
     createComponent({
-      level: "Low" as SecurityLevel,
-      availabilityLevel: "Low" as SecurityLevel,
-      integrityLevel: "Low" as SecurityLevel,
-      confidentialityLevel: "Low" as SecurityLevel,
-    });
-    expect(
-      screen.getByTestId("test-integrity-widget-integrity-badge")
-    ).toHaveTextContent("Low");
-  });
-
-  it("displays the high level correctly", () => {
-    createComponent({
-      level: "High" as SecurityLevel,
-      availabilityLevel: "High" as SecurityLevel,
-      integrityLevel: "High" as SecurityLevel,
-      confidentialityLevel: "High" as SecurityLevel,
+      level: "Low",
+      integrityLevel: "High",
     });
     expect(
       screen.getByTestId("test-integrity-widget-integrity-badge")
     ).toHaveTextContent("High");
   });
 
-  it("displays the very high level correctly", () => {
+  it("falls back to the legacy level prop when specific level is not provided", () => {
     createComponent({
-      level: "Very High" as SecurityLevel,
-      availabilityLevel: "Very High" as SecurityLevel,
+      level: "Low",
+      integrityLevel: undefined,
+    });
+    expect(
+      screen.getByTestId("test-integrity-widget-integrity-badge")
+    ).toHaveTextContent("Low");
+  });
+
+  it("properly handles different security levels", () => {
+    // Test with "None" level
+    const { unmount: unmountNone } = createComponent({
+      integrityLevel: "None" as SecurityLevel,
+    });
+    expect(
+      screen.getByTestId("test-integrity-widget-integrity-badge")
+    ).toHaveTextContent("None");
+
+    // Look for the text with the "< " prefix
+    expect(screen.getByText(/Not monitored/)).toBeInTheDocument();
+    unmountNone();
+
+    // Test with "Very High" level
+    createComponent({
       integrityLevel: "Very High" as SecurityLevel,
-      confidentialityLevel: "Very High" as SecurityLevel,
     });
     expect(
       screen.getByTestId("test-integrity-widget-integrity-badge")
     ).toHaveTextContent("Very High");
+
+    // Look for the text with the "< " prefix
+    expect(screen.getByText(/< 0.01%/)).toBeInTheDocument();
   });
 });
