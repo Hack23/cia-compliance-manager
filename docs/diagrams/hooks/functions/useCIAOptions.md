@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.7**](../../README.md)
 
 ***
 
@@ -6,107 +6,85 @@
 
 # Function: useCIAOptions()
 
-> **useCIAOptions**(`customProvider`?): `object`
+> **useCIAOptions**(): `object`
 
-Defined in: [hooks/useCIAOptions.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/hooks/useCIAOptions.ts#L28)
-
-Custom hook to access CIA options throughout the application
-
-## Parameters
-
-### customProvider?
-
-`Partial`\<[`CIADataProvider`](../../types/interfaces/CIADataProvider.md)\>
-
-Optional custom data provider
+Defined in: [hooks/useCIAOptions.ts:171](https://github.com/Hack23/cia-compliance-manager/blob/c1b03266cad85c2f58531e3fd0aea147fa649ae0/src/hooks/useCIAOptions.ts#L171)
 
 ## Returns
 
 `object`
 
-CIA options for all components
-
 ### availabilityOptions
 
-> **availabilityOptions**: `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), [`CIADetails`](../../types/interfaces/CIADetails.md)\> = `dataProvider.availabilityOptions`
+> **availabilityOptions**: `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), `CIAOptionDetails`\>
 
 ### confidentialityOptions
 
-> **confidentialityOptions**: `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), [`CIADetails`](../../types/interfaces/CIADetails.md)\> = `dataProvider.confidentialityOptions`
+> **confidentialityOptions**: `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), `CIAOptionDetails`\>
 
-### getComponentDescription()
+### getAvailabilityOptions()
 
-> **getComponentDescription**: (`component`, `level`) => `string`
+> **getAvailabilityOptions**: () => `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), `CIAOptionDetails`\>
+
+#### Returns
+
+`Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), `CIAOptionDetails`\>
+
+### getCombinedROIKey()
+
+> **getCombinedROIKey**: (`confidentiality`, `integrity`, `availability`) => `ROIType`
 
 #### Parameters
 
-##### component
+##### confidentiality
 
-`"confidentiality"` | `"integrity"` | `"availability"`
+[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
-##### level
+##### integrity
+
+[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
+
+##### availability
 
 [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
 #### Returns
 
-`string`
+`ROIType`
 
-### getComponentDetails()
+### getConfidentialityOptions()
 
-> **getComponentDetails**: (`component`, `level`) => [`CIADetails`](../../types/interfaces/CIADetails.md)
-
-#### Parameters
-
-##### component
-
-`"confidentiality"` | `"integrity"` | `"availability"`
-
-##### level
-
-[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
+> **getConfidentialityOptions**: () => `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), `CIAOptionDetails`\>
 
 #### Returns
 
-[`CIADetails`](../../types/interfaces/CIADetails.md)
+`Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), `CIAOptionDetails`\>
 
-### getImplementationDetails()
+### getIntegrityOptions()
 
-> **getImplementationDetails**: (`component`, `level`) => `object`
-
-#### Parameters
-
-##### component
-
-`"confidentiality"` | `"integrity"` | `"availability"`
-
-##### level
-
-[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
+> **getIntegrityOptions**: () => `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), `CIAOptionDetails`\>
 
 #### Returns
 
-`object`
+`Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), `CIAOptionDetails`\>
 
-##### effort
+### getROIDataForCombinedKey()
 
-> **effort**: `string` \| [`ImplementationEffort`](../../types/interfaces/ImplementationEffort.md)
+> **getROIDataForCombinedKey**: (`key`) => `ROIData`
 
-##### expertise
+#### Parameters
 
-> **expertise**: `string`
+##### key
 
-##### recommendations
+`ROIType`
 
-> **recommendations**: `string`[]
+#### Returns
 
-##### timeframe
+`ROIData`
 
-> **timeframe**: `string`
+### getROIEstimateForSecurityLevel()
 
-### getROIEstimate()
-
-> **getROIEstimate**: (`level`) => [`ROIEstimate`](../../types/interfaces/ROIEstimate.md)
+> **getROIEstimateForSecurityLevel**: (`level`) => `ROIType`
 
 #### Parameters
 
@@ -116,26 +94,20 @@ CIA options for all components
 
 #### Returns
 
-[`ROIEstimate`](../../types/interfaces/ROIEstimate.md)
+`ROIType`
 
-### getValuePoints()
+### getROIEstimates()
 
-> **getValuePoints**: (`level`) => `string`[]
-
-#### Parameters
-
-##### level
-
-[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
+> **getROIEstimates**: () => `Record`\<`ROIType`, `ROIData`\>
 
 #### Returns
 
-`string`[]
+`Record`\<`ROIType`, `ROIData`\>
 
 ### integrityOptions
 
-> **integrityOptions**: `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), [`CIADetails`](../../types/interfaces/CIADetails.md)\> = `dataProvider.integrityOptions`
+> **integrityOptions**: `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), `CIAOptionDetails`\>
 
 ### ROI\_ESTIMATES
 
-> **ROI\_ESTIMATES**: [`ROIEstimatesMap`](../../types/interfaces/ROIEstimatesMap.md) = `dataProvider.roiEstimates`
+> **ROI\_ESTIMATES**: `Record`\<`ROIType`, `ROIData`\>

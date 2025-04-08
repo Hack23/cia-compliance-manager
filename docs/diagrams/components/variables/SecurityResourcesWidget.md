@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.7**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **SecurityResourcesWidget**: `React.FC`\<`SecurityResourcesWidgetProps`\>
 
-Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:61](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L61)
+Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:61](https://github.com/Hack23/cia-compliance-manager/blob/c1b03266cad85c2f58531e3fd0aea147fa649ae0/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L61)
 
 Widget that displays security resources and implementation guides
 

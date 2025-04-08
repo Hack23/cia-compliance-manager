@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-04-08T02:57:08.141Z",
+    "end": "2025-04-08T02:57:21.871Z",
+    "duration": 13730,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "38d88bae-2996-4b0c-955b-0b01e69518ff",
+      "title": "",
+      "fullFile": "cypress/e2e/screenshots/widget-screenshots.cy.ts",
+      "file": "cypress/e2e/screenshots/widget-screenshots.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3d5e6a3e-4aba-455b-b42c-ded327360814",
+          "title": "Widget Screenshots Generator",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "captures full page screenshots in light and dark mode",
+              "fullTitle": "Widget Screenshots Generator captures full page screenshots in light and dark mode",
+              "timedOut": null,
+              "duration": 10950,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "captureFullPageModes(\"dashboard\");",
+              "err": {},
+              "uuid": "449f4dc1-47cc-4705-a71b-ec96f9cae549",
+              "parentUUID": "3d5e6a3e-4aba-455b-b42c-ded327360814",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "captures all widgets in current state",
+              "fullTitle": "Widget Screenshots Generator captures all widgets in current state",
+              "timedOut": null,
+              "duration": 2178,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.setSecurityLevels(\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.MODERATE,\n  SECURITY_LEVELS.MODERATE\n);\ncy.wait(1e3);",
+              "err": {},
+              "uuid": "928717cb-d631-4a27-9930-d01427b1618a",
+              "parentUUID": "3d5e6a3e-4aba-455b-b42c-ded327360814",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "captures essential widgets in different security states",
+              "fullTitle": "Widget Screenshots Generator captures essential widgets in different security states",
+              "timedOut": null,
+              "duration": 405,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "essentialWidgets.forEach((widgetName) => {\n  cy.log(`Capturing states for widget: ${widgetName}`);\n});",
+              "err": {},
+              "uuid": "458f258b-8dd8-47fd-8707-caea97d79c4f",
+              "parentUUID": "3d5e6a3e-4aba-455b-b42c-ded327360814",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "449f4dc1-47cc-4705-a71b-ec96f9cae549",
+            "928717cb-d631-4a27-9930-d01427b1618a",
+            "458f258b-8dd8-47fd-8707-caea97d79c4f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 13533,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "docs/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
