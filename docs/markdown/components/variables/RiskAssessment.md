@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.7**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.5**](../../README.md)
 
 ***
 
@@ -8,6 +8,12 @@
 
 > `const` **RiskAssessment**: `React.FC`\<`RiskAssessmentProps`\>
 
-Defined in: [components/common/RiskAssessment.tsx:109](https://github.com/Hack23/cia-compliance-manager/blob/c1b03266cad85c2f58531e3fd0aea147fa649ae0/src/components/common/RiskAssessment.tsx#L109)
+Defined in: [components/common/RiskAssessment.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/components/common/RiskAssessment.tsx#L21)
 
-Risk assessment component showing risk level and score
+Displays a risk assessment based on security level
+
+## Business Perspective
+
+This component provides a visual representation of risk levels derived from
+security levels, helping business stakeholders understand the relationship
+between security investments and risk reduction. ⚠️

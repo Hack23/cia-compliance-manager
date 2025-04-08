@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.7**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.5**](../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: getRiskBadgeVariant()
 
-> **getRiskBadgeVariant**(`riskLevel`): `"success"` \| `"info"` \| `"warning"` \| `"error"` \| `"neutral"`
+> **getRiskBadgeVariant**(`riskLevel`): `"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"`
 
-Defined in: [services/ciaContentService.ts:1324](https://github.com/Hack23/cia-compliance-manager/blob/c1b03266cad85c2f58531e3fd0aea147fa649ae0/src/services/ciaContentService.ts#L1324)
+Defined in: [services/ciaContentService.ts:1190](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/ciaContentService.ts#L1190)
 
 ## Parameters
 
@@ -18,4 +18,4 @@ Defined in: [services/ciaContentService.ts:1324](https://github.com/Hack23/cia-c
 
 ## Returns
 
-`"success"` \| `"info"` \| `"warning"` \| `"error"` \| `"neutral"`
+`"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"`

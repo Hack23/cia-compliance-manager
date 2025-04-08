@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.7**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.6**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **SecurityRiskScore**: `React.FC`\<`SecurityRiskScoreProps`\>
 
-Defined in: [components/common/SecurityRiskScore.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/c1b03266cad85c2f58531e3fd0aea147fa649ae0/src/components/common/SecurityRiskScore.tsx#L24)
+Defined in: [components/common/SecurityRiskScore.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/050a250237d6f621490781dbdf95155919f35aed/src/components/common/SecurityRiskScore.tsx#L24)
 
 Displays a visual security score indicator
 

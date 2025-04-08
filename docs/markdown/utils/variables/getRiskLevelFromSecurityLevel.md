@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.7**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.5**](../../README.md)
 
 ***
 
@@ -6,22 +6,22 @@
 
 # Variable: getRiskLevelFromSecurityLevel()
 
-> **getRiskLevelFromSecurityLevel**: (`level`) => `string`
+> **getRiskLevelFromSecurityLevel**: (`securityLevel`) => `string`
 
-Defined in: [utils/index.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/c1b03266cad85c2f58531e3fd0aea147fa649ae0/src/utils/index.ts#L92)
+Defined in: [utils/index.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/utils/index.ts#L92)
 
-Get risk level from security level
+Determines the risk level based on a security level
 
 ## Parameters
 
-### level
+### securityLevel
 
 [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
-Security level
+The security level to evaluate
 
 ## Returns
 
 `string`
 
-Risk level string
+The corresponding risk level
