@@ -339,7 +339,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </div>
 
                 <button
-                  className="mt-2 text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                  className="mt-2 px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
                   onClick={() => setActiveComponent("confidentiality")}
                   data-testid="confidentiality-details-button"
                 >
@@ -403,7 +403,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </div>
 
                 <button
-                  className="mt-2 text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                  className="mt-2 px-2 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600 transition-colors"
                   onClick={() => setActiveComponent("integrity")}
                   data-testid="integrity-details-button"
                 >
@@ -467,7 +467,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </div>
 
                 <button
-                  className="mt-2 text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                  className="mt-2 px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
                   onClick={() => setActiveComponent("availability")}
                   data-testid="availability-details-button"
                 >

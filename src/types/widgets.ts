@@ -514,21 +514,38 @@ export interface ComponentImpactWidgetProps extends WidgetBaseProps {
 }
 
 /**
- * Base interface for component-specific impact widgets
- *
- * ## Business Perspective
- *
- * This provides a foundation for specialized CIA component widgets that
- * help organizations understand the business impact of specific security
- * aspects (availability, integrity, confidentiality). 🔍
- *
- * @category Component Widgets
+ * Base properties for component impact widgets
  */
-export interface ComponentImpactBaseProps extends CIABaseWidgetProps {
+export interface ComponentImpactBaseProps {
   /**
-   * Security level (for backward compatibility)
+   * Security level (used for backward compatibility)
    */
   level?: SecurityLevel;
+
+  /**
+   * Availability security level
+   */
+  availabilityLevel: SecurityLevel;
+
+  /**
+   * Integrity security level
+   */
+  integrityLevel: SecurityLevel;
+
+  /**
+   * Confidentiality security level
+   */
+  confidentialityLevel: SecurityLevel;
+
+  /**
+   * CSS class name
+   */
+  className?: string;
+
+  /**
+   * Test ID for testing
+   */
+  testId?: string;
 
   /**
    * Callback when level changes

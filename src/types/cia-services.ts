@@ -249,12 +249,16 @@ export interface CIADetails {
   rto?: string;
   rpo?: string;
   mttr?: string;
+  sla?: string; // Added missing property
 
   // Integrity-specific metrics
   validationMethod?: string;
+  validationLevel?: string; // Added missing property
+  errorRate?: string; // Added missing property
 
   // Confidentiality-specific metrics
   protectionMethod?: string;
+  privacyImpact?: string; // Added missing property
 
   // Implementation details
   implementationComplexity?: string;

@@ -852,7 +852,7 @@ export class CIAContentService extends BaseService {
    * @param level Security level
    * @returns Information sensitivity classification
    */
-  getInformationSensitivity(level: SecurityLevel): string {
+  public getInformationSensitivity(level: SecurityLevel): string {
     switch (level) {
       case "None":
         return "Public Data";
@@ -865,7 +865,7 @@ export class CIAContentService extends BaseService {
       case "Very High":
         return "Restricted Data";
       default:
-        return "Unknown";
+        return "Unknown Classification";
     }
   }
 
@@ -1089,6 +1089,140 @@ export class CIAContentService extends BaseService {
     level: SecurityLevel
   ): string[] {
     return this.getValuePoints(level);
+  }
+
+  /**
+   * Get default privacy impact based on security level
+   *
+   * @param level - Security level
+   * @returns Privacy impact description
+   */
+  public getDefaultPrivacyImpact(level: SecurityLevel): string {
+    switch (level) {
+      case "None":
+        return "No Privacy Controls";
+      case "Low":
+        return "Basic Privacy Controls";
+      case "Moderate":
+        return "Standard Privacy Controls";
+      case "High":
+        return "Enhanced Privacy Controls";
+      case "Very High":
+        return "Maximum Privacy Controls";
+      default:
+        return "Unknown Privacy Impact";
+    }
+  }
+
+  /**
+   * Get default SLA metrics based on security level
+   *
+   * @param level - Security level
+   * @returns SLA metrics for availability
+   */
+  public getDefaultSLAMetrics(level: SecurityLevel): {
+    uptime: string;
+    rto: string;
+    rpo: string;
+    mttr: string;
+    sla: string;
+  } {
+    switch (level) {
+      case "None":
+        return {
+          uptime: "Best effort",
+          rto: "No commitment",
+          rpo: "No commitment",
+          mttr: "No commitment",
+          sla: "No SLA",
+        };
+      case "Low":
+        return {
+          uptime: "95% (18 days downtime/year)",
+          rto: "24 hours",
+          rpo: "24 hours",
+          mttr: "24 hours",
+          sla: "Business hours",
+        };
+      case "Moderate":
+        return {
+          uptime: "99% (3.7 days downtime/year)",
+          rto: "12 hours",
+          rpo: "12 hours",
+          mttr: "8 hours",
+          sla: "Business hours, 7 days",
+        };
+      case "High":
+        return {
+          uptime: "99.9% (8.8 hours downtime/year)",
+          rto: "4 hours",
+          rpo: "4 hours",
+          mttr: "4 hours",
+          sla: "24/7",
+        };
+      case "Very High":
+        return {
+          uptime: "99.999% (5 minutes downtime/year)",
+          rto: "15 minutes",
+          rpo: "15 minutes",
+          mttr: "1 hour",
+          sla: "24/7 with priority response",
+        };
+      default:
+        return {
+          uptime: "Unknown",
+          rto: "Unknown",
+          rpo: "Unknown",
+          mttr: "Unknown",
+          sla: "Unknown",
+        };
+    }
+  }
+
+  /**
+   * Get default data validation level based on security level
+   *
+   * @param level - Security level
+   * @returns Validation level description
+   */
+  public getDefaultValidationLevel(level: SecurityLevel): string {
+    switch (level) {
+      case "None":
+        return "No Validation";
+      case "Low":
+        return "Basic";
+      case "Moderate":
+        return "Standard";
+      case "High":
+        return "Enhanced";
+      case "Very High":
+        return "Comprehensive";
+      default:
+        return "Unknown";
+    }
+  }
+
+  /**
+   * Get default error rate based on security level
+   *
+   * @param level - Security level
+   * @returns Error rate description
+   */
+  public getDefaultErrorRate(level: SecurityLevel): string {
+    switch (level) {
+      case "None":
+        return "Not monitored";
+      case "Low":
+        return "< 5%";
+      case "Moderate":
+        return "< 1%";
+      case "High":
+        return "< 0.1%";
+      case "Very High":
+        return "< 0.01%";
+      default:
+        return "Unknown";
+    }
   }
 }
 
