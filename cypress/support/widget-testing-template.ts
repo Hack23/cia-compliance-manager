@@ -1,4 +1,5 @@
 import { SECURITY_LEVELS } from "./constants";
+import { captureWidgetScreenshot } from "./screenshot-utils";
 import { applyTestStyles } from "./test-styles";
 
 /**
@@ -119,9 +120,8 @@ export function createWidgetTests(
           `Widget should contain at least one expected content pattern`
         ).to.be.true;
 
-        // FIX: Take a screenshot of the FIRST element when there are multiple
-        // Use .first() to ensure we're only capturing one element
-        cy.wrap($widget).first().screenshot(`widget-${widgetTestId}-baseline`);
+        // Use the improved screenshot function
+        captureWidgetScreenshot($widget.first(), `${widgetTestId}-baseline`);
       });
     });
 
@@ -218,7 +218,7 @@ export function createWidgetTests(
           }
 
           // Add widget to test context so additionalTests can use it
-          // FIX: Wrap the FIRST element when multiple are found to avoid errors in widget-specific tests
+          // Wrap the FIRST element when multiple are found to avoid errors in widget-specific tests
           cy.wrap($widget.first()).as("currentWidget");
 
           // Run provided tests in try/catch to prevent cascading failures
