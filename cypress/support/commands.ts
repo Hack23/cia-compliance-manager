@@ -619,6 +619,73 @@ Cypress.Commands.add("toggleTheme", () => {
   });
 });
 
+/**
+ * Command to capture a complete widget even if it's larger than the viewport
+ */
+Cypress.Commands.add("captureEntireWidget", (widgetName: string) => {
+  cy.findWidget(widgetName).then(($widget) => {
+    if ($widget.length === 0) {
+      cy.log(`Widget ${widgetName} not found`);
+      return;
+    }
+
+    const widget = $widget[0];
+    const rect = widget.getBoundingClientRect();
+
+    // Log widget dimensions
+    cy.log(`Widget dimensions: ${rect.width}x${rect.height}`);
+
+    // If widget is very tall, adjust viewport to fit it
+    if (rect.height > 800) {
+      cy.viewport(1280, Math.min(rect.height + 100, 2000));
+      cy.wait(300); // Wait for viewport to adjust
+    }
+
+    // Center widget in viewport and take screenshot
+    cy.wrap($widget)
+      .scrollIntoView({ duration: 100 })
+      .screenshot(`full-widget-${widgetName}`, {
+        padding: 10,
+        overwrite: true,
+        capture: "viewport",
+      });
+  });
+});
+
+/**
+ * Command to capture HTML content of an element or page
+ */
+Cypress.Commands.add(
+  "captureHtml",
+  (name: string, selector: string = "body") => {
+    cy.get(selector).then(($el) => {
+      const html = $el.prop("outerHTML");
+      const fullHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Snapshot - ${name}</title>
+  <style>
+    body { font-family: system-ui, sans-serif; }
+    .dark { background-color: #1a1a1a; color: #f5f5f5; }
+  </style>
+</head>
+<body class="${document.body.classList.contains("dark") ? "dark" : ""}">
+  ${html}
+</body>
+</html>`;
+
+      cy.task("writeFile", {
+        path: `cypress/snapshots/html/${name}.html`,
+        content: fullHtml,
+      });
+
+      cy.log(`📄 Captured HTML: ${name}.html`);
+    });
+  }
+);
+
 // Add proper type declarations for custom commands
 declare global {
   namespace Cypress {
@@ -689,6 +756,18 @@ declare global {
        * Toggle theme regardless of button presence
        */
       toggleTheme(): Chainable<void>;
+
+      /**
+       * Capture a screenshot of an entire widget, adjusting viewport if necessary
+       */
+      captureEntireWidget(widgetName: string): Chainable<void>;
+
+      /**
+       * Capture HTML content of an element or page
+       * @param name Filename for the HTML snapshot (without extension)
+       * @param selector Optional CSS selector to capture specific content (defaults to body)
+       */
+      captureHtml(name: string, selector?: string): Chainable<void>;
     }
   }
 }

@@ -103,5 +103,36 @@ declare namespace Cypress {
      * Mount a component (only in component testing mode)
      */
     mount(component: React.ReactNode, options?: any): Chainable<Element>;
+
+    /**
+     * Capture screenshots of a widget in both light and dark themes
+     */
+    captureWidgetThemes(
+      widgetName: string,
+      captureHtml?: boolean
+    ): Chainable<void>;
+
+    /**
+     * Capture screenshots of a page in both light and dark modes
+     */
+    captureFullPageModes(
+      pageName: string,
+      captureHtml?: boolean
+    ): Chainable<void>;
+
+    /**
+     * Capture screenshots of all visible widgets on the page
+     */
+    captureAllWidgets(): Chainable<void>;
+
+    /**
+     * Set up the testing environment with standard settings
+     */
+    setupTestEnvironment(): Chainable<void>;
+
+    /**
+     * Apply a specific theme for testing
+     */
+    applyTestTheme(theme: "light" | "dark"): Chainable<void>;
   }
 }

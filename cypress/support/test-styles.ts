@@ -30,7 +30,10 @@ export function applyTestStyles(): void {
         background-color: white !important;
         position: relative !important;
         height: auto !important;
-        min-height: 200px !important;
+        /* Updated - set reasonable constraints to prevent excessive expansion */
+        max-width: 800px !important;
+        min-height: 50px !important;
+        max-height: 600px !important;
       }
       
       /* Ensure dark mode styling */
@@ -42,13 +45,14 @@ export function applyTestStyles(): void {
         color: #e2e8f0 !important;
       }
       
-      /* Fix widget content display */
+      /* Fix widget content display - updated to constrain size */
       .widget-body, 
       .widget-content,
       [class*="widget-body"],
       [class*="widget-content"] {
-        max-height: none !important;
-        overflow: visible !important;
+        max-height: 550px !important; /* Allow scrolling for very tall content */
+        overflow-y: auto !important; /* Show scrollbars only when needed */
+        overflow-x: hidden !important;
         height: auto !important;
         opacity: 1 !important;
         visibility: visible !important;
@@ -63,11 +67,6 @@ export function applyTestStyles(): void {
         padding: 0.75rem !important;
         border-bottom: 1px solid rgba(203, 213, 225, 0.5) !important;
         background-color: rgba(248, 250, 252, 0.8) !important;
-      }
-      
-      .dark .widget-header {
-        border-bottom: 1px solid rgba(51, 65, 85, 0.8) !important;
-        background-color: rgba(15, 23, 42, 0.8) !important;
       }
       
       /* Ensure text is visible */
@@ -125,11 +124,12 @@ export function applyTestStyles(): void {
       .grid {
         display: grid !important;
         gap: 1rem !important;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
       }
       
-      /* Fixed height containers should be auto */
+      /* Fixed height containers should have reasonable constraints */
       [style*="height:"], [style*="max-height:"] {
-        max-height: none !important;
+        max-height: 500px !important;
         height: auto !important;
         min-height: 10px !important;
       }
@@ -139,7 +139,8 @@ export function applyTestStyles(): void {
         display: block !important;
         max-width: 100% !important;
         height: auto !important;
-        min-height: 200px !important;
+        min-height: 100px !important;
+        max-height: 300px !important;
       }
       
       /* Fix badge styling - common in the widgets */
@@ -179,13 +180,15 @@ export function applyScreenshotStyles(): void {
       .widget-container,
       [data-testid^="widget-"],
       [class*="widget-container"] {
-        max-height: none !important;
-        overflow: visible !important;
+        max-height: 600px !important;
+        overflow: auto !important;
         margin: 10px !important;
         border: 2px solid rgba(59, 130, 246, 0.5) !important;
         position: relative !important;
         height: auto !important;
-        min-height: 200px !important;
+        min-height: 50px !important;
+        width: auto !important;
+        max-width: 800px !important;
       }
       
       /* Fix widget content display */
@@ -239,9 +242,10 @@ export function optimizeWidgetForScreenshot(
     .invoke("css", "opacity", "1")
     .invoke("css", "position", "relative")
     .invoke("css", "height", "auto")
-    .invoke("css", "min-height", "300px")
-    .invoke("css", "max-height", "none")
-    .invoke("css", "overflow", "visible");
+    .invoke("css", "min-height", "50px") // Reduced minimum height
+    .invoke("css", "max-height", "600px") // Added maximum height
+    .invoke("css", "max-width", "800px") // Added maximum width
+    .invoke("css", "overflow", "auto"); // Changed to auto instead of visible
 
   // Fix parent containers too (often needed for proper visibility)
   let $parent = $widget.parent();
@@ -275,7 +279,6 @@ export function optimizeWidgetForScreenshot(
  * Force dark mode on the page
  */
 export function forceDarkMode(): void {
-  // ...existing code if any...
   cy.document().then((doc) => {
     // Add dark mode class to html element
     doc.documentElement.classList.add("dark");
@@ -290,7 +293,6 @@ export function forceDarkMode(): void {
  * Force light mode on the page
  */
 export function forceLightMode(): void {
-  // ...existing code if any...
   cy.document().then((doc) => {
     // Remove dark mode class from html element
     doc.documentElement.classList.remove("dark");
@@ -300,3 +302,103 @@ export function forceLightMode(): void {
     localStorage.setItem("darkMode", "false");
   });
 }
+
+/**
+ * Apply styles specifically to optimize dashboard grid for screenshots
+ * Ensures proper 3x4 layout
+ */
+export function optimizeDashboardGridForScreenshots(): void {
+  cy.document().then((doc) => {
+    // Create style element if it doesn't exist
+    let styleEl = doc.getElementById("cypress-grid-styles");
+    if (!styleEl) {
+      styleEl = doc.createElement("style");
+      styleEl.id = "cypress-grid-styles";
+      doc.head.appendChild(styleEl);
+    }
+
+    // Add grid optimization styles
+    styleEl.textContent = `
+      /* Optimize grid for 3x4 layout */
+      [data-testid="dashboard-grid"] {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        grid-auto-rows: minmax(280px, auto) !important;
+        gap: 16px !important;
+        padding: 16px !important;
+        width: calc(100% - 32px) !important;
+        max-width: 1920px !important;
+        margin: 0 auto !important;
+      }
+      
+      /* Ensure widget containers have consistent sizing */
+      [data-testid="dashboard-grid"] > div {
+        min-height: 280px !important;
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: visible !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      
+      /* Ensure header and body have proper sizing */
+      .widget-header,
+      [data-testid^="widget-"] > div:first-child {
+        height: auto !important;
+        min-height: 32px !important;
+        max-height: 40px !important;
+        padding: 4px 12px !important;
+      }
+      
+      /* Ensure content body fills available space */
+      .widget-body,
+      [data-testid^="widget-"] > div:nth-child(2) {
+        flex: 1 1 auto !important;
+        overflow: auto !important;
+        height: auto !important;
+      }
+      
+      /* Disable animations for cleaner screenshots */
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    `;
+
+    // Force layout recalculation
+    doc.body.style.display = "none";
+    const _ = doc.body.offsetHeight; // Force reflow
+    doc.body.style.display = "";
+  });
+
+  // Add command to use this from tests
+  // Fix: Use 'as any' to bypass TypeScript checking for the command add operation
+  (Cypress.Commands as any).add(
+    "optimizeGridLayout",
+    optimizeDashboardGridForScreenshots
+  );
+}
+
+// Declare the optimizeGridLayout command in the global Cypress namespace
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      /**
+       * Optimize dashboard grid for screenshots
+       * Applies styles to ensure proper 3x4 layout
+       */
+      optimizeGridLayout(): Chainable<void>;
+    }
+  }
+}
+
+// Export the function for direct import
+export default {
+  applyTestStyles,
+  applyScreenshotStyles,
+  optimizeWidgetForScreenshot,
+  forceDarkMode,
+  forceLightMode,
+  optimizeDashboardGridForScreenshots,
+};

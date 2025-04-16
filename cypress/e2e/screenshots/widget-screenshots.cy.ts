@@ -1,33 +1,28 @@
 /**
- * Widget Screenshot Generator
+ * Widget Screenshot Generator for UI/UX improvements
  *
- * Optimized to capture only two states per widget and two full-page screenshots
- * to reduce test execution time and storage requirements
+ * Focused on capturing light & dark theme screenshots of each widget
  */
-import { SECURITY_LEVELS } from "../../support/constants";
 import {
-  captureAllWidgets,
-  captureFullPageModes,
-  captureWidgetStates,
+  captureFullDashboardGrid,
+  captureSimpleWidgetThemes,
 } from "../../support/screenshot-utils";
 import { applyTestStyles } from "../../support/test-styles";
 
-describe("Widget Screenshots Generator", () => {
+describe("Widget UI/UX Screenshots", () => {
   // Set a larger viewport to see widgets clearly
   const viewportWidth = 1920;
   const viewportHeight = 1080;
 
-  // Essential widgets to capture in different states
+  // Essential widgets to capture in different themes
   const essentialWidgets = [
     "security-level",
     "business-impact",
     "security-summary",
     "compliance-status",
     "technical-details",
-    "availability-impact",
-    "integrity-impact",
-    "confidentiality-impact",
-    "radar-chart",
+    "security-visualization",
+    "value-creation",
   ];
 
   beforeEach(() => {
@@ -37,29 +32,23 @@ describe("Widget Screenshots Generator", () => {
     applyTestStyles();
   });
 
-  it("captures full page screenshots in light and dark mode", () => {
-    // Capture full page in both modes using utility
-    captureFullPageModes("dashboard");
+  it("captures full dashboard grid with widgets in light and dark mode", () => {
+    // Set wider viewport to ensure all columns are visible
+    cy.viewport(2400, 1200);
+    // Ensure grid layout is properly displayed
+    cy.get('[data-testid="dashboard-grid"]').should("be.visible");
+
+    // Capture optimized grid screenshots only (no HTML)
+    captureFullDashboardGrid("dashboard-grid");
   });
 
-  it("captures all widgets in current state", () => {
-    // Set a moderate security level for baseline
-    cy.setSecurityLevels(
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE,
-      SECURITY_LEVELS.MODERATE
-    );
-    cy.wait(1000);
-
-    // Capture all widgets in current state
-    // captureAllWidgets();
-  });
-
-  it("captures essential widgets in different security states", () => {
-    // For each essential widget, capture two states
+  it("captures essential widgets in both light and dark themes", () => {
+    // For each essential widget, capture both light and dark themes
     essentialWidgets.forEach((widgetName) => {
-      cy.log(`Capturing states for widget: ${widgetName}`);
-      //captureWidgetStates(widgetName);
+      cy.log(`Capturing themes for widget: ${widgetName}`);
+
+      // Use the simplified capture function
+      captureSimpleWidgetThemes(widgetName);
     });
   });
 });

@@ -3,21 +3,21 @@
  * This helps avoid circular dependencies and duplicate registrations
  */
 import {
-  debugFailedTest,
   analyzeWidgets,
-  logVisibleElements,
+  debugFailedTest,
   logAllTestIds,
+  logVisibleElements,
 } from "./debug-helpers";
-import { applyTestStyles, forceDarkMode, forceLightMode } from "./test-styles";
-import { findWidgetFlexibly } from "./widget-testing-template";
-import { analyzeAndDocumentWidgets } from "./widget-analyzer";
+import { applyTestTheme, setupTestEnvironment } from "./global-test-setup";
 import {
-  captureWidgetStates,
+  captureAllWidgetsSimple,
   captureFullPageModes,
-  captureAllWidgets,
+  captureWidgetThemes,
 } from "./screenshot-utils";
 import { deprecatedTestFiles } from "./test-cleanup";
-import { setupTestEnvironment, applyTestTheme } from "./global-test-setup";
+import { applyTestStyles, forceDarkMode, forceLightMode } from "./test-styles";
+import { analyzeAndDocumentWidgets } from "./widget-analyzer";
+import { findWidgetFlexibly } from "./widget-testing-template";
 
 // Register all commands in one place
 export function registerAllCommands(): void {
@@ -55,8 +55,8 @@ export function registerAllCommands(): void {
     // Return implicitly
   });
 
-  (Cypress.Commands as any).add("captureWidgetStates", (widgetName: string) => {
-    captureWidgetStates(widgetName);
+  (Cypress.Commands as any).add("captureWidgetThemes", (widgetName: string) => {
+    captureWidgetThemes(widgetName);
     // Return implicitly
   });
 
@@ -66,7 +66,7 @@ export function registerAllCommands(): void {
   });
 
   (Cypress.Commands as any).add("captureAllWidgets", () => {
-    captureAllWidgets();
+    captureAllWidgetsSimple();
     // Return implicitly
   });
 
