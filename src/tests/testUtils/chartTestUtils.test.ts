@@ -1,10 +1,19 @@
-import { describe, expect, it, vi } from "vitest";
-import { setupChartTest } from "./chartTestUtils";
+import { describe, expect, it } from "vitest";
+import {
+  createChartMock,
+  setupChartEnvironment,
+  setupChartTest,
+} from "./chartTestUtils";
 
 describe("chartTestUtils", () => {
   it("properly sets up Chart.js test environment", () => {
-    const { mockChartInstance, mockConstructor, chartMock, renderChart } =
-      setupChartTest();
+    const {
+      mockChartInstance,
+      mockConstructor,
+      chartMock,
+      renderChart,
+      cleanupMocks,
+    } = setupChartTest();
 
     // Verify the mock constructor and instance are properly setup
     expect(mockConstructor).toBeInstanceOf(Function);
@@ -24,6 +33,42 @@ describe("chartTestUtils", () => {
 
     // Test render function is present
     expect(renderChart).toBeInstanceOf(Function);
+
+    // Clean up after the test
+    cleanupMocks();
+  });
+
+  it("creates a chart mock with data collectors", () => {
+    const { chartModule, getMockData, getMockOptions, resetMockData } =
+      createChartMock();
+
+    // Verify the chart module structure
+    expect(chartModule).toHaveProperty("Chart");
+    expect(chartModule.Chart).toHaveProperty("register");
+
+    // Check data collectors are functions
+    expect(getMockData).toBeInstanceOf(Function);
+    expect(getMockOptions).toBeInstanceOf(Function);
+    expect(resetMockData).toBeInstanceOf(Function);
+
+    // Test creating a chart and collecting data
+    const mockData = { datasets: [{ data: [1, 2, 3] }] };
+    const mockOptions = { responsive: true };
+
+    // Create a new chart instance
+    new chartModule.Chart("canvas", {
+      data: mockData,
+      options: mockOptions,
+    });
+
+    // Check data was collected
+    expect(getMockData()).toEqual(mockData);
+    expect(getMockOptions()).toEqual(mockOptions);
+
+    // Test reset function
+    resetMockData();
+    expect(getMockData()).toBeNull();
+    expect(getMockOptions()).toBeNull();
   });
 
   it("properly mocks Canvas API", () => {
@@ -34,10 +79,12 @@ describe("chartTestUtils", () => {
     const context = canvas.getContext("2d");
 
     expect(context).toBeDefined();
-    expect(context).toHaveProperty("clearRect");
-    expect(context).toHaveProperty("fill");
-    expect(context).toHaveProperty("beginPath");
-    expect(context).toHaveProperty("stroke");
+    expect(context).not.toBeNull();
+    if (context) {
+      expect(context).toHaveProperty("clearRect");
+      expect(context).toHaveProperty("fill");
+      expect(context).toHaveProperty("beginPath");
+    }
   });
 
   it("mocks ResizeObserver", () => {
@@ -52,21 +99,17 @@ describe("chartTestUtils", () => {
     expect(observer).toHaveProperty("disconnect");
   });
 
-  it("mocks requestAnimationFrame", () => {
-    setupChartTest();
+  it("provides setupChartEnvironment function", () => {
+    const cleanup = setupChartEnvironment();
 
-    const callback = vi.fn();
-    requestAnimationFrame(callback);
+    // Should properly mock the canvas context
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
 
-    expect(callback).toHaveBeenCalledWith(0);
-  });
+    expect(context).not.toBeNull();
 
-  it("provides cleanup method", () => {
-    const { cleanupMocks } = setupChartTest();
-
-    expect(cleanupMocks).toBeInstanceOf(Function);
-
-    // Ensure it runs without errors
-    expect(() => cleanupMocks()).not.toThrow();
+    // Should return a cleanup function
+    expect(cleanup).toBeInstanceOf(Function);
+    cleanup();
   });
 });

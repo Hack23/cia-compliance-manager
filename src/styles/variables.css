@@ -56,59 +56,71 @@
 
   /* Component-specific colors */
   --color-confidentiality: #8e44ad;
-  --color-integrity: #27ae60;
-  --color-availability: #2980b9;
+  --color-confidentiality-light: #d6b8e7;
+  --color-confidentiality-dark: #6c3483;
 
-  /* Background colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --bg-tertiary: #e9ecef;
+  --color-integrity: #27ae60;
+  --color-integrity-light: #a7e9c3;
+  --color-integrity-dark: #1e8449;
+
+  --color-availability: #3498db;
+  --color-availability-light: #a9cce3;
+  --color-availability-dark: #2874a6;
+
+  /* Status colors */
+  --color-success: #27ae60;
+  --color-warning: #f1c40f;
+  --color-error: #e74c3c;
+  --color-info: #3498db;
+  --color-neutral: #95a5a6;
 }
 
 /* Dark Mode - Cybersecurity Theme */
 .dark {
-  /* Core Colors */
-  --primary-color: #00ccff;
-  --primary-light: #33e0ff;
-  --primary-dark: #00a3cc;
-  --accent-color: #00ffaa;
-  --background-color: #0a1520;
-  --card-background: #0e1c2b;
-  --text-color: #e0e6ed; /* Make sure this is light enough for dark backgrounds */
-  --text-secondary: #a0abb9; /* Make sure this is light enough for dark backgrounds */
-  --border-color: rgba(0, 204, 255, 0.2);
-  --shadow-color: rgba(0, 204, 255, 0.1);
-  --highlight-color: #00ffaa;
-  --header-bg: #0c1825;
+  --primary-color: #2b8aff;
+  --primary-light: #5aa8ff;
+  --primary-dark: #0066cc;
+  --accent-color: #00eac4;
+  --background-color: #161b22;
+  --card-background: #1e2430;
+  --text-color: #e6e6ff;
+  --text-secondary: #b8b8cc;
+  --border-color: rgba(43, 138, 255, 0.2);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --highlight-color: #00eac4;
+  --header-bg: #1a1f29;
 
-  /* Font overrides for cybersecurity style */
-  --font-accent: "Orbitron", sans-serif;
+  /* Security level colors - Dark mode */
+  --color-none: #ff6b6b;
+  --color-low: #ff9f43;
+  --color-moderate: #feca57;
+  --color-high: #2ecc71;
+  --color-very-high: #54a0ff;
 
-  /* Enhanced Security level colors - Cyberpunk Inspired */
-  --color-none-dark: #ff3b3b;
-  --color-low-dark: #ff9500;
-  --color-moderate-dark: #ffcc00;
-  --color-high-dark: #00e676;
-  --color-very-high-dark: #00ccff;
+  /* Security level text colors - Dark mode */
+  --color-none-text: #ffffff;
+  --color-low-text: #ffffff;
+  --color-moderate-text: #000000;
+  --color-high-text: #ffffff;
+  --color-very-high-text: #ffffff;
 
-  /* Enhanced CIA component colors - More vibrant for dark mode */
-  --color-confidentiality: #a742ff;
-  --color-confidentiality-glow: rgba(167, 66, 255, 0.5);
-  --color-confidentiality-accent: #d4b3ff;
+  /* Component-specific colors - Dark mode */
+  --color-confidentiality: #a55eea;
+  --color-confidentiality-light: #d6b8e7;
+  --color-confidentiality-dark: #8854d0;
 
-  --color-integrity: #00e676;
-  --color-integrity-glow: rgba(0, 230, 118, 0.5);
-  --color-integrity-accent: #98ffc8;
+  --color-integrity: #2ecc71;
+  --color-integrity-light: #a7e9c3;
+  --color-integrity-dark: #26ae60;
 
-  --color-availability: #00ccff;
-  --color-availability-glow: rgba(0, 204, 255, 0.5);
-  --color-availability-accent: #99ebff;
+  --color-availability: #54a0ff;
+  --color-availability-light: #a9cce3;
+  --color-availability-dark: #3498db;
 
-  /* Depth and layering */
-  --bg-primary: #0c1825;
-  --bg-secondary: #0e1c2b;
-  --bg-tertiary: #12253a;
-  --card-bg: #0e1c2b;
-  --card-border: 1px solid rgba(0, 204, 255, 0.2);
-  --card-glow: 0 0 10px rgba(0, 204, 255, 0.15);
+  /* Status colors - Dark mode */
+  --color-success: #2ecc71;
+  --color-warning: #feca57;
+  --color-error: #ff6b6b;
+  --color-info: #54a0ff;
+  --color-neutral: #a4b0be;
 }

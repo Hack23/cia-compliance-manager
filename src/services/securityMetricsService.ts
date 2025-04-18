@@ -673,6 +673,20 @@ export class SecurityMetricsService extends BaseService {
   }
 
   /**
+   * Get risk level based on security score
+   *
+   * @param score Security score (0-100)
+   * @returns Risk level description
+   */
+  public getRiskLevel(score: number): string {
+    if (score <= 30) return "Critical Risk";
+    if (score <= 40) return "High Risk";
+    if (score <= 60) return "Medium Risk";
+    if (score <= 80) return "Low Risk";
+    return "Minimal Risk";
+  }
+
+  /**
    * Get security level from a numeric value
    *
    * @param value - Numeric security level value (0-4)
