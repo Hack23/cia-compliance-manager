@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.8**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.5**](../../README.md)
 
 ***
 
@@ -9,7 +9,6 @@
 ## Interfaces
 
 - [ComplianceFramework](interfaces/ComplianceFramework.md)
-- [ComplianceFrameworkCoverage](interfaces/ComplianceFrameworkCoverage.md)
 - [ComplianceFrameworkStatusDetails](interfaces/ComplianceFrameworkStatusDetails.md)
 - [ComplianceGap](interfaces/ComplianceGap.md)
 - [ComplianceGapAnalysis](interfaces/ComplianceGapAnalysis.md)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.8**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.5**](../../README.md)
 
 ***
 
@@ -8,9 +8,15 @@
 
 > **calculateTotalSecurityCost**: (`availabilityLevel`, `integrityLevel`, `confidentialityLevel`, `orgSize`, `industry`) => `object`
 
-Defined in: [utils/index.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/utils/index.ts#L55)
+Defined in: [utils/index.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/utils/index.ts#L55)
 
-Calculate total security costs across all CIA components
+Calculate total cost of implementing multiple security controls
+
+## Business Perspective
+
+This function helps organizations understand the combined financial impact
+of their security choices across the CIA triad. It provides a consolidated
+view for budget planning and approval processes. 💼
 
 ## Parameters
 
@@ -18,37 +24,73 @@ Calculate total security costs across all CIA components
 
 [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
+Availability security level
+
 ### integrityLevel
 
 [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
+
+Integrity security level
 
 ### confidentialityLevel
 
 [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
+Confidentiality security level
+
 ### orgSize
 
-`OrganizationSize` = `"medium"`
+Organization size
+
+`"small"` | `"medium"` | `"large"` | `"enterprise"`
 
 ### industry
 
-`Industry` = `"general"`
+Industry type
+
+`"financial"` | `"general"` | `"healthcare"` | `"government"` | `"retail"` | `"technology"` | `"manufacturing"`
 
 ## Returns
 
 `object`
 
+Object containing total costs and breakdown
+
 ### availabilityCost
 
-> **availabilityCost**: `CostResult`
+> **availabilityCost**: `object`
+
+#### availabilityCost.capex
+
+> **capex**: `number`
+
+#### availabilityCost.opex
+
+> **opex**: `number`
 
 ### confidentialityCost
 
-> **confidentialityCost**: `CostResult`
+> **confidentialityCost**: `object`
+
+#### confidentialityCost.capex
+
+> **capex**: `number`
+
+#### confidentialityCost.opex
+
+> **opex**: `number`
 
 ### integrityCost
 
-> **integrityCost**: `CostResult`
+> **integrityCost**: `object`
+
+#### integrityCost.capex
+
+> **capex**: `number`
+
+#### integrityCost.opex
+
+> **opex**: `number`
 
 ### totalCapex
 

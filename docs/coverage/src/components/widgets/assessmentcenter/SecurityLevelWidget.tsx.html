@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.25% </span>
+                <span class="strong">91.4% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>407/446</span>
+                <span class='fraction'>415/454</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.25% </span>
+                <span class="strong">91.4% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>407/446</span>
+                <span class='fraction'>415/454</span>
             </div>
         
             
@@ -715,7 +715,17 @@
 <a name='L650'></a><a href='#L650'>650</a>
 <a name='L651'></a><a href='#L651'>651</a>
 <a name='L652'></a><a href='#L652'>652</a>
-<a name='L653'></a><a href='#L653'>653</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L653'></a><a href='#L653'>653</a>
+<a name='L654'></a><a href='#L654'>654</a>
+<a name='L655'></a><a href='#L655'>655</a>
+<a name='L656'></a><a href='#L656'>656</a>
+<a name='L657'></a><a href='#L657'>657</a>
+<a name='L658'></a><a href='#L658'>658</a>
+<a name='L659'></a><a href='#L659'>659</a>
+<a name='L660'></a><a href='#L660'>660</a>
+<a name='L661'></a><a href='#L661'>661</a>
+<a name='L662'></a><a href='#L662'>662</a>
+<a name='L663'></a><a href='#L663'>663</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -879,20 +889,23 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">73x</span>
-<span class="cline-any cline-yes">73x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">73x</span>
-<span class="cline-any cline-yes">73x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">73x</span>
 <span class="cline-any cline-yes">73x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">73x</span>
 <span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -957,6 +970,13 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">73x</span>
+<span class="cline-any cline-yes">73x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">73x</span>
 <span class="cline-any cline-yes">73x</span>
@@ -1528,6 +1548,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
   const handleAvailabilityChange = useCallback(
     (event: React.ChangeEvent&lt;HTMLSelectElement&gt;) =&gt; {
       const newLevel = event.target.value as SecurityLevel;
+      console.log("SecurityLevelWidget: Setting availability to", newLevel);
       if (onAvailabilityChange) onAvailabilityChange(newLevel);
       setLastChangedComponent("availability");
     },
@@ -1537,6 +1558,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
   const handleIntegrityChange = useCallback(
     (event: React.ChangeEvent&lt;HTMLSelectElement&gt;) =&gt; {
       const newLevel = event.target.value as SecurityLevel;
+      console.log("SecurityLevelWidget: Setting integrity to", newLevel);
       if (onIntegrityChange) onIntegrityChange(newLevel);
       setLastChangedComponent("integrity");
     },
@@ -1546,6 +1568,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
   const handleConfidentialityChange = useCallback(
     (event: React.ChangeEvent&lt;HTMLSelectElement&gt;) =&gt; {
       const newLevel = event.target.value as SecurityLevel;
+      console.log("SecurityLevelWidget: Setting confidentiality to", newLevel);
       if (onConfidentialityChange) onConfidentialityChange(newLevel);
       setLastChangedComponent("confidentiality");
     },
@@ -1610,6 +1633,13 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
     }
   };
 &nbsp;
+  // Add debugging to the component render
+  console.log("SecurityLevelWidget rendering with levels:", {
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel,
+  });
+&nbsp;
   return (
     &lt;WidgetContainer
       title={WIDGET_TITLES.SECURITY_LEVEL}
@@ -1651,39 +1681,39 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
             &lt;/h3&gt;
 &nbsp;
             &lt;div className="space-y-4"&gt;
-              {/* Confidentiality selector */}
+              {/* Availability selector */}
               &lt;div
                 className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
-                data-testid="security-level-confidentiality"
+                data-testid="security-level-availability"
               &gt;
                 &lt;div className="flex justify-between items-center mb-2"&gt;
                   &lt;label
-                    htmlFor="confidentiality-select"
+                    htmlFor="availability-select"
                     className="text-sm font-medium flex items-center"
                   &gt;
-                    &lt;span className="text-purple-500 dark:text-purple-400 mr-2"&gt;
-                      {CIA_COMPONENT_ICONS.confidentiality}
+                    &lt;span className="text-blue-500 dark:text-blue-400 mr-2"&gt;
+                      {CIA_COMPONENT_ICONS.availability}
                     &lt;/span&gt;
-                    Confidentiality
+                    Availability
                   &lt;/label&gt;
                   &lt;SecurityLevelBadge
                     category=""
-                    level={confidentialityLevel}
-                    colorClass="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
-                    textClass="text-purple-800 dark:text-purple-300"
-                    testId="security-level-widget-confidentiality-badge"
+                    level={availabilityLevel}
+                    colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+                    textClass="text-blue-800 dark:text-blue-300"
+                    testId="security-level-widget-availability-badge"
                   /&gt;
                 &lt;/div&gt;
 &nbsp;
                 &lt;select
-                  id="confidentiality-select"
-                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-purple-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
-                  value={confidentialityLevel}
-                  onChange={handleConfidentialityChange}
-                  data-testid="confidentiality-select"
+                  id="availability-select"
+                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-blue-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                  value={availabilityLevel}
+                  onChange={handleAvailabilityChange}
+                  data-testid="availability-select"
                 &gt;
                   {securityLevelOptions.map((level) =&gt; (
-                    &lt;option key={`confidentiality-${level}`} value={level}&gt;
+                    &lt;option key={`availability-${level}`} value={level}&gt;
                       {level}
                     &lt;/option&gt;
                   ))}
@@ -1691,24 +1721,24 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
 &nbsp;
                 &lt;div
                   className="mt-2 text-xs text-gray-600 dark:text-gray-400"
-                  data-testid="security-level-widget-confidentiality-summary"
+                  data-testid="security-level-widget-availability-summary"
                 &gt;
-                  {confidentialityLevel}:{" "}
-                  {getComponentSummary("confidentiality", confidentialityLevel)}
+                  {availabilityLevel}:{" "}
+                  {getComponentSummary("availability", availabilityLevel)}
                 &lt;/div&gt;
 &nbsp;
                 &lt;button
-                  className="mt-2 px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
-                  onClick={<span class="fstat-no" title="function not covered" >() =&gt; setActiveComponent("confidentiality")}</span>
-                  data-testid="confidentiality-details-button"
+                  className="mt-2 text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                  onClick={<span class="fstat-no" title="function not covered" >() =&gt; setActiveComponent("availability")}</span>
+                  data-testid="availability-details-button"
                 &gt;
                   View details
                 &lt;/button&gt;
 &nbsp;
-                {lastChangedComponent === "confidentiality" &amp;&amp; (
+                {lastChangedComponent === "availability" &amp;&amp; (
                   &lt;div
                     className="mt-2 text-xs text-green-600 dark:text-green-400 animate-pulse"
-                    data-testid="confidentiality-changed-indicator"
+                    data-testid="availability-changed-indicator"
                   &gt;
                     ✓ Security level updated
                   &lt;/div&gt;
@@ -1762,7 +1792,7 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
                 &lt;/div&gt;
 &nbsp;
                 &lt;button
-                  className="mt-2 px-2 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600 transition-colors"
+                  className="mt-2 text-xs text-blue-600 dark:text-blue-400 hover:underline"
                   onClick={<span class="fstat-no" title="function not covered" >() =&gt; setActiveComponent("integrity")}</span>
                   data-testid="integrity-details-button"
                 &gt;
@@ -1779,39 +1809,39 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
                 )}
               &lt;/div&gt;
 &nbsp;
-              {/* Availability selector */}
+              {/* Confidentiality selector */}
               &lt;div
                 className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
-                data-testid="security-level-availability"
+                data-testid="security-level-confidentiality"
               &gt;
                 &lt;div className="flex justify-between items-center mb-2"&gt;
                   &lt;label
-                    htmlFor="availability-select"
+                    htmlFor="confidentiality-select"
                     className="text-sm font-medium flex items-center"
                   &gt;
-                    &lt;span className="text-blue-500 dark:text-blue-400 mr-2"&gt;
-                      {CIA_COMPONENT_ICONS.availability}
+                    &lt;span className="text-purple-500 dark:text-purple-400 mr-2"&gt;
+                      {CIA_COMPONENT_ICONS.confidentiality}
                     &lt;/span&gt;
-                    Availability
+                    Confidentiality
                   &lt;/label&gt;
                   &lt;SecurityLevelBadge
                     category=""
-                    level={availabilityLevel}
-                    colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
-                    textClass="text-blue-800 dark:text-blue-300"
-                    testId="security-level-widget-availability-badge"
+                    level={confidentialityLevel}
+                    colorClass="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
+                    textClass="text-purple-800 dark:text-purple-300"
+                    testId="security-level-widget-confidentiality-badge"
                   /&gt;
                 &lt;/div&gt;
 &nbsp;
                 &lt;select
-                  id="availability-select"
-                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-blue-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                  value={availabilityLevel}
-                  onChange={handleAvailabilityChange}
-                  data-testid="availability-select"
+                  id="confidentiality-select"
+                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-purple-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
+                  value={confidentialityLevel}
+                  onChange={handleConfidentialityChange}
+                  data-testid="confidentiality-select"
                 &gt;
                   {securityLevelOptions.map((level) =&gt; (
-                    &lt;option key={`availability-${level}`} value={level}&gt;
+                    &lt;option key={`confidentiality-${level}`} value={level}&gt;
                       {level}
                     &lt;/option&gt;
                   ))}
@@ -1819,24 +1849,24 @@ const SecurityLevelWidget: React.FC&lt;SecurityLevelWidgetProps&gt; = ({
 &nbsp;
                 &lt;div
                   className="mt-2 text-xs text-gray-600 dark:text-gray-400"
-                  data-testid="security-level-widget-availability-summary"
+                  data-testid="security-level-widget-confidentiality-summary"
                 &gt;
-                  {availabilityLevel}:{" "}
-                  {getComponentSummary("availability", availabilityLevel)}
+                  {confidentialityLevel}:{" "}
+                  {getComponentSummary("confidentiality", confidentialityLevel)}
                 &lt;/div&gt;
 &nbsp;
                 &lt;button
-                  className="mt-2 px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
-                  onClick={<span class="fstat-no" title="function not covered" >() =&gt; setActiveComponent("availability")}</span>
-                  data-testid="availability-details-button"
+                  className="mt-2 text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                  onClick={<span class="fstat-no" title="function not covered" >() =&gt; setActiveComponent("confidentiality")}</span>
+                  data-testid="confidentiality-details-button"
                 &gt;
                   View details
                 &lt;/button&gt;
 &nbsp;
-                {lastChangedComponent === "availability" &amp;&amp; (
+                {lastChangedComponent === "confidentiality" &amp;&amp; (
                   &lt;div
                     className="mt-2 text-xs text-green-600 dark:text-green-400 animate-pulse"
-                    data-testid="availability-changed-indicator"
+                    data-testid="confidentiality-changed-indicator"
                   &gt;
                     ✓ Security level updated
                   &lt;/div&gt;
@@ -2026,7 +2056,7 @@ export default SecurityLevelWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-18T18:04:42.990Z
+                at 2025-03-26T15:34:19.619Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

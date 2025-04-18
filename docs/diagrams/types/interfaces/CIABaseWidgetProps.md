@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.8**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIABaseWidgetProps
 
-Defined in: [types/widgets.ts:95](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L95)
+Defined in: [types/widgets.ts:95](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/widgets.ts#L95)
 
 Base props shared by all CIA-related widgets
 
@@ -21,16 +21,17 @@ providing consistent assessment and reporting capabilities. 📋
 
 ## Extends
 
-- `WidgetBaseProps`
+- [`WidgetBaseProps`](../../typedoc-entry/interfaces/WidgetBaseProps.md)
 
 ## Extended by
 
-- [`BusinessImpactAnalysisWidgetProps`](BusinessImpactAnalysisWidgetProps.md)
-- [`CostEstimationWidgetProps`](CostEstimationWidgetProps.md)
-- [`SecurityLevelWidgetProps`](SecurityLevelWidgetProps.md)
-- [`SecurityResourcesWidgetProps`](SecurityResourcesWidgetProps.md)
-- [`TechnicalDetailsWidgetProps`](TechnicalDetailsWidgetProps.md)
-- [`ValueCreationWidgetProps`](ValueCreationWidgetProps.md)
+- [`BusinessImpactAnalysisWidgetProps`](../../typedoc-entry/interfaces/BusinessImpactAnalysisWidgetProps.md)
+- [`CostEstimationWidgetProps`](../../typedoc-entry/interfaces/CostEstimationWidgetProps.md)
+- [`SecurityLevelWidgetProps`](../../typedoc-entry/interfaces/SecurityLevelWidgetProps.md)
+- [`SecurityResourcesWidgetProps`](../../typedoc-entry/interfaces/SecurityResourcesWidgetProps.md)
+- [`SecurityVisualizationWidgetProps`](../../typedoc-entry/interfaces/SecurityVisualizationWidgetProps.md)
+- [`TechnicalDetailsWidgetProps`](../../typedoc-entry/interfaces/TechnicalDetailsWidgetProps.md)
+- [`ValueCreationWidgetProps`](../../typedoc-entry/interfaces/ValueCreationWidgetProps.md)
 
 ## Properties
 
@@ -38,7 +39,7 @@ providing consistent assessment and reporting capabilities. 📋
 
 > **availabilityLevel**: [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:99](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L99)
+Defined in: [types/widgets.ts:99](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/widgets.ts#L99)
 
 Availability security level
 
@@ -48,13 +49,13 @@ Availability security level
 
 > `optional` **className**: `string`
 
-Defined in: [types/widgets.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L68)
+Defined in: [types/widgets.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/widgets.ts#L68)
 
 Optional CSS class name
 
 #### Inherited from
 
-`WidgetBaseProps.className`
+[`WidgetBaseProps`](../../typedoc-entry/interfaces/WidgetBaseProps.md).[`className`](../../typedoc-entry/interfaces/WidgetBaseProps.md#classname)
 
 ***
 
@@ -62,7 +63,7 @@ Optional CSS class name
 
 > **confidentialityLevel**: [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L109)
+Defined in: [types/widgets.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/widgets.ts#L109)
 
 Confidentiality security level
 
@@ -72,7 +73,7 @@ Confidentiality security level
 
 > **integrityLevel**: [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L104)
+Defined in: [types/widgets.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/widgets.ts#L104)
 
 Integrity security level
 
@@ -82,13 +83,13 @@ Integrity security level
 
 > `optional` **securityLevel**: [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L78)
+Defined in: [types/widgets.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/widgets.ts#L78)
 
 Optional security level for widgets that only need one level
 
 #### Inherited from
 
-`WidgetBaseProps.securityLevel`
+[`WidgetBaseProps`](../../typedoc-entry/interfaces/WidgetBaseProps.md).[`securityLevel`](../../typedoc-entry/interfaces/WidgetBaseProps.md#securitylevel)
 
 ***
 
@@ -96,10 +97,10 @@ Optional security level for widgets that only need one level
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widgets.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L73)
+Defined in: [types/widgets.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/widgets.ts#L73)
 
 Optional test ID for testing
 
 #### Inherited from
 
-`WidgetBaseProps.testId`
+[`WidgetBaseProps`](../../typedoc-entry/interfaces/WidgetBaseProps.md).[`testId`](../../typedoc-entry/interfaces/WidgetBaseProps.md#testid)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.8**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.5**](../../README.md)
 
 ***
 
@@ -6,26 +6,42 @@
 
 # Variable: calculateImplementationCost()
 
-> **calculateImplementationCost**: (`securityLevel`, `orgSize`, `industry`) => `CostResult`
+> **calculateImplementationCost**: (`level`, `orgSize`, `industry`) => `object`
 
-Defined in: [utils/index.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/utils/index.ts#L54)
+Defined in: [utils/index.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/utils/index.ts#L54)
 
-Calculate implementation cost based on security level
+Calculate implementation costs for a given security level
 
 ## Parameters
 
-### securityLevel
+### level
 
-`string`
+[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
+
+Security level
 
 ### orgSize
 
-`OrganizationSize` = `"medium"`
+Organization size
+
+`"small"` | `"medium"` | `"large"` | `"enterprise"`
 
 ### industry
 
-`Industry` = `"general"`
+Industry type
+
+`"financial"` | `"general"` | `"healthcare"` | `"government"` | `"retail"` | `"technology"` | `"manufacturing"`
 
 ## Returns
 
-`CostResult`
+`object`
+
+Object containing capex and opex costs
+
+### capex
+
+> **capex**: `number`
+
+### opex
+
+> **opex**: `number`

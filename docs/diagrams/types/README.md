@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.8**](../README.md)
+[**CIA Compliance Manager Diagrams v0.8.5**](../README.md)
 
 ***
 
@@ -28,26 +28,9 @@ Centralized type exports simplify imports and enforce type consistency.
 - [BaseWidgetProps](interfaces/BaseWidgetProps.md)
 - [CIABaseWidgetProps](interfaces/CIABaseWidgetProps.md)
 
-### Business Widgets
-
-- [BusinessImpactAnalysisWidgetProps](interfaces/BusinessImpactAnalysisWidgetProps.md)
-- [CostEstimationWidgetProps](interfaces/CostEstimationWidgetProps.md)
-- [ValueCreationWidgetProps](interfaces/ValueCreationWidgetProps.md)
-
 ### Compliance Widgets
 
 - [ComplianceStatusWidgetProps](interfaces/ComplianceStatusWidgetProps.md)
-
-### Impact Widgets
-
-- [AvailabilityImpactWidgetProps](interfaces/AvailabilityImpactWidgetProps.md)
-- [ConfidentialityImpactWidgetProps](interfaces/ConfidentialityImpactWidgetProps.md)
-- [IntegrityImpactWidgetProps](interfaces/IntegrityImpactWidgetProps.md)
-
-### Implementation Widgets
-
-- [SecurityResourcesWidgetProps](interfaces/SecurityResourcesWidgetProps.md)
-- [TechnicalDetailsWidgetProps](interfaces/TechnicalDetailsWidgetProps.md)
 
 ### Other
 
@@ -80,16 +63,11 @@ Centralized type exports simplify imports and enforce type consistency.
 - [RiskAssessmentProps](interfaces/RiskAssessmentProps.md)
 - [ROIEstimate](interfaces/ROIEstimate.md)
 - [ROIEstimatesMap](interfaces/ROIEstimatesMap.md)
-- [ROIMetrics](interfaces/ROIMetrics.md)
 - [SecurityLevels](interfaces/SecurityLevels.md)
 - [StatusBadgeProps](interfaces/StatusBadgeProps.md)
 - [TechnicalImplementationDetails](interfaces/TechnicalImplementationDetails.md)
 - [WidgetHeaderProps](interfaces/WidgetHeaderProps.md)
 - [WithSecurityLevelProps](interfaces/WithSecurityLevelProps.md)
-
-### Security Level Widgets
-
-- [SecurityLevelWidgetProps](interfaces/SecurityLevelWidgetProps.md)
 
 ## Type Aliases
 
@@ -111,6 +89,18 @@ Centralized type exports simplify imports and enforce type consistency.
 
 ## References
 
+### AvailabilityImpactWidgetProps
+
+Re-exports [AvailabilityImpactWidgetProps](../typedoc-entry/interfaces/AvailabilityImpactWidgetProps.md)
+
+***
+
+### BusinessImpactAnalysisWidgetProps
+
+Re-exports [BusinessImpactAnalysisWidgetProps](../typedoc-entry/interfaces/BusinessImpactAnalysisWidgetProps.md)
+
+***
+
 ### ComplianceFramework
 
 Re-exports [ComplianceFramework](compliance/interfaces/ComplianceFramework.md)
@@ -129,6 +119,18 @@ Re-exports [ComplianceStatusDetails](compliance/interfaces/ComplianceStatusDetai
 
 ***
 
+### ConfidentialityImpactWidgetProps
+
+Re-exports [ConfidentialityImpactWidgetProps](../typedoc-entry/interfaces/ConfidentialityImpactWidgetProps.md)
+
+***
+
+### CostEstimationWidgetProps
+
+Re-exports [CostEstimationWidgetProps](../typedoc-entry/interfaces/CostEstimationWidgetProps.md)
+
+***
+
 ### FrameworkApplicabilityOptions
 
 Re-exports [FrameworkApplicabilityOptions](compliance/interfaces/FrameworkApplicabilityOptions.md)
@@ -141,12 +143,48 @@ Re-exports [FrameworkComplianceStatus](compliance/interfaces/FrameworkCompliance
 
 ***
 
+### IntegrityImpactWidgetProps
+
+Re-exports [IntegrityImpactWidgetProps](../typedoc-entry/interfaces/IntegrityImpactWidgetProps.md)
+
+***
+
+### ROIMetrics
+
+Re-exports [ROIMetrics](../typedoc-entry/interfaces/ROIMetrics.md)
+
+***
+
 ### SecurityLevel
 
 Re-exports [SecurityLevel](../index/type-aliases/SecurityLevel.md)
 
 ***
 
+### SecurityLevelWidgetProps
+
+Re-exports [SecurityLevelWidgetProps](../typedoc-entry/interfaces/SecurityLevelWidgetProps.md)
+
+***
+
 ### SecurityProfile
 
 Re-exports [SecurityProfile](../index/interfaces/SecurityProfile.md)
+
+***
+
+### SecurityResourcesWidgetProps
+
+Re-exports [SecurityResourcesWidgetProps](../typedoc-entry/interfaces/SecurityResourcesWidgetProps.md)
+
+***
+
+### TechnicalDetailsWidgetProps
+
+Re-exports [TechnicalDetailsWidgetProps](../typedoc-entry/interfaces/TechnicalDetailsWidgetProps.md)
+
+***
+
+### ValueCreationWidgetProps
+
+Re-exports [ValueCreationWidgetProps](../typedoc-entry/interfaces/ValueCreationWidgetProps.md)

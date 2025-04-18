@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.8**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.5**](../../README.md)
 
 ***
 
@@ -6,11 +6,18 @@
 
 # Variable: calculateSecurityROI()
 
-> **calculateSecurityROI**: (`securityCost`, `riskReductionPercent`, `potentialLoss`, `timeframeYears`) => `object`
+> **calculateSecurityROI**: (`securityCost`, `riskReduction`, `potentialLoss`, `timeframeYears`) => `object`
 
-Defined in: [utils/index.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/utils/index.ts#L56)
+Defined in: [utils/index.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/utils/index.ts#L56)
 
-Calculate security ROI
+Calculate return on investment for security implementation
+
+## Business Perspective
+
+This function helps security officers demonstrate the business value of
+security investments, which is critical for getting executive buy-in. It
+translates security controls into financial terms that business leaders
+understand. 📊
 
 ## Parameters
 
@@ -18,21 +25,31 @@ Calculate security ROI
 
 `number`
 
-### riskReductionPercent
+Total security implementation cost
+
+### riskReduction
 
 `number`
+
+Risk reduction percentage (0-100)
 
 ### potentialLoss
 
 `number`
 
+Potential loss from security incidents
+
 ### timeframeYears
 
 `number` = `3`
 
+Timeframe for ROI calculation in years
+
 ## Returns
 
 `object`
+
+Object containing ROI metrics
 
 ### costAvoidance
 
