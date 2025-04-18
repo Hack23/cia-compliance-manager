@@ -1956,12 +1956,14 @@ button.more-info:hover::before {
 
 /* Ultra-compact app header - Now with 15% more height */
 .app-header {
-  margin-bottom: 0.25rem !important; 
+  margin-bottom: 0.25rem !important;
   border-radius: 0.5rem !important;
   box-shadow: 0 1px 3px var(--shadow-color) !important;
-  background-image: linear-gradient(to right, 
-    rgba(0, 102, 51, 0.05), 
-    rgba(0, 136, 68, 0.02)) !important;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 102, 51, 0.05),
+    rgba(0, 136, 68, 0.02)
+  ) !important;
   border-bottom: 1px solid var(--primary-color) !important;
   height: auto !important;
   min-height: 0 !important;
@@ -1973,9 +1975,11 @@ button.more-info:hover::before {
 }
 
 .dark .app-header {
-  background-image: linear-gradient(to right, 
-    rgba(0, 26, 37, 0.95), 
-    rgba(0, 20, 26, 0.98)) !important;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 26, 37, 0.95),
+    rgba(0, 20, 26, 0.98)
+  ) !important;
   border-bottom: 1px solid var(--ingress-primary) !important;
   /* Cyber glow effect in dark mode */
   box-shadow: 0 1px 5px rgba(0, 204, 102, 0.2) !important;
@@ -2016,7 +2020,8 @@ button.more-info:hover::before {
 .dark button.details-button:hover,
 .dark button.more-info:hover {
   border-color: var(--ingress-primary) !important;
-  box-shadow: 0 0 10px rgba(0, 204, 102, 0.4), inset 0 0 5px rgba(0, 204, 102, 0.2) !important;
+  box-shadow: 0 0 10px rgba(0, 204, 102, 0.4),
+    inset 0 0 5px rgba(0, 204, 102, 0.2) !important;
   text-shadow: 0 0 8px rgba(0, 204, 102, 0.7) !important;
   color: #00ff99 !important;
   transform: translateY(-1px) !important;
@@ -2035,10 +2040,12 @@ button.more-info:hover::before {
   left: -100%;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(0, 204, 102, 0.8), 
-    transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 204, 102, 0.8),
+    transparent
+  );
   transition: left 0.5s ease;
   opacity: 0;
 }
@@ -2054,14 +2061,14 @@ button.more-info:hover::before {
 }
 
 @keyframes cyber-scan {
-  0% { 
+  0% {
     left: -100%;
     opacity: 0;
   }
   50% {
     opacity: 1;
   }
-  100% { 
+  100% {
     left: 100%;
     opacity: 0;
   }
@@ -2127,7 +2134,11 @@ button.more-info:hover::before {
 
 /* Theme toggle button special styling */
 .dark .theme-toggle-btn {
-  background: linear-gradient(135deg, rgba(0, 30, 45, 0.8), rgba(0, 40, 60, 0.9)) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 30, 45, 0.8),
+    rgba(0, 40, 60, 0.9)
+  ) !important;
   border: 1px solid rgba(0, 204, 102, 0.5) !important;
   color: var(--ingress-primary) !important;
   padding: 0.2rem 0.5rem !important;
@@ -2138,9 +2149,242 @@ button.more-info:hover::before {
 }
 
 .dark .theme-toggle-btn:hover {
-  background: linear-gradient(135deg, rgba(0, 40, 55, 0.9), rgba(0, 50, 70, 1)) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 40, 55, 0.9),
+    rgba(0, 50, 70, 1)
+  ) !important;
   border-color: rgba(0, 255, 128, 0.8) !important;
   color: #00ff99 !important;
   box-shadow: 0 0 12px rgba(0, 204, 102, 0.4) !important;
   text-shadow: 0 0 8px rgba(0, 204, 102, 0.7) !important;
+}
+
+/* Security Summary Widget specific styles */
+[data-testid="security-summary-widget"] .tab-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Security score progress bar styling */
+[data-testid="security-summary-widget"]
+  .w-full.bg-gray-200.rounded-full.h-2\.5 {
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dark
+  [data-testid="security-summary-widget"]
+  .w-full.bg-gray-200.rounded-full.h-2\.5 {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-testid="security-summary-widget"] .h-2\.5.rounded-full {
+  height: 8px;
+  border-radius: 4px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Pulse animation for security status dot */
+[data-testid="security-summary-widget"] .pulse-dot {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+    box-shadow: 0 0 0 0 rgba(66, 153, 225, 0.5);
+  }
+  70% {
+    opacity: 1;
+    box-shadow: 0 0 0 6px rgba(66, 153, 225, 0);
+  }
+  100% {
+    opacity: 0.6;
+    box-shadow: 0 0 0 0 rgba(66, 153, 225, 0);
+  }
+}
+
+.dark [data-testid="security-summary-widget"] .pulse-dot {
+  animation: pulseDark 2s infinite;
+}
+
+@keyframes pulseDark {
+  0% {
+    opacity: 0.6;
+    box-shadow: 0 0 0 0 rgba(66, 153, 225, 0.7);
+  }
+  70% {
+    opacity: 1;
+    box-shadow: 0 0 0 6px rgba(66, 153, 225, 0);
+  }
+  100% {
+    opacity: 0.6;
+    box-shadow: 0 0 0 0 rgba(66, 153, 225, 0);
+  }
+}
+
+/* Enhanced CIA cards with hover effects */
+[data-testid="security-summary-widget"] [data-testid$="_CARD"] {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+[data-testid="security-summary-widget"] [data-testid$="_CARD"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dark [data-testid="security-summary-widget"] [data-testid$="_CARD"]:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Tab button styling improvements */
+[data-testid="security-summary-widget"] button[role="tab"] {
+  position: relative;
+  overflow: hidden;
+}
+
+[data-testid="security-summary-widget"] button[role="tab"]::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+[data-testid="security-summary-widget"] button[role="tab"]:hover::after {
+  width: 100%;
+}
+
+[data-testid="security-summary-widget"]
+  button[role="tab"][aria-selected="true"]::after {
+  width: 100%;
+  background-color: var(--primary-color);
+}
+
+/* Security Summary Widget Styles */
+[data-testid="security-summary-widget"] button[role="tab"] {
+  position: relative;
+  overflow: hidden;
+}
+
+[data-testid="security-summary-widget"] button[role="tab"]::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+[data-testid="security-summary-widget"] button[role="tab"]:hover::after {
+  width: 100%;
+}
+
+[data-testid="security-summary-widget"]
+  button[role="tab"][aria-selected="true"]::after {
+  width: 100%;
+  background-color: var(--primary-color, #0066cc);
+}
+
+/* Pulse animation for security status indicator */
+.pulse-dot {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 102, 204, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 6px rgba(0, 102, 204, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 102, 204, 0);
+  }
+}
+
+/* Dark mode adjustment for pulse animation */
+.dark .pulse-dot {
+  animation: pulse-dark 2s infinite;
+}
+
+@keyframes pulse-dark {
+  0% {
+    box-shadow: 0 0 0 0 rgba(43, 138, 255, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 6px rgba(43, 138, 255, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(43, 138, 255, 0);
+  }
+}
+
+/* Widget Card Styles */
+.widget-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.widget-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Security Level Indicator Animation */
+.security-level-change {
+  animation: fadeInOut 1s ease;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+/* Tab transition animations */
+.tab-content > div {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

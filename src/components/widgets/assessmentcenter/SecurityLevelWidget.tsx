@@ -159,7 +159,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   const handleAvailabilityChange = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const newLevel = event.target.value as SecurityLevel;
-      console.log("SecurityLevelWidget: Setting availability to", newLevel);
       if (onAvailabilityChange) onAvailabilityChange(newLevel);
       setLastChangedComponent("availability");
     },
@@ -169,7 +168,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   const handleIntegrityChange = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const newLevel = event.target.value as SecurityLevel;
-      console.log("SecurityLevelWidget: Setting integrity to", newLevel);
       if (onIntegrityChange) onIntegrityChange(newLevel);
       setLastChangedComponent("integrity");
     },
@@ -179,7 +177,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   const handleConfidentialityChange = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const newLevel = event.target.value as SecurityLevel;
-      console.log("SecurityLevelWidget: Setting confidentiality to", newLevel);
       if (onConfidentialityChange) onConfidentialityChange(newLevel);
       setLastChangedComponent("confidentiality");
     },
@@ -243,13 +240,6 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         return "text-gray-600 dark:text-gray-400";
     }
   };
-
-  // Add debugging to the component render
-  console.log("SecurityLevelWidget rendering with levels:", {
-    availabilityLevel,
-    integrityLevel,
-    confidentialityLevel,
-  });
 
   return (
     <WidgetContainer

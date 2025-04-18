@@ -1,92 +1,76 @@
-import { act, renderHook, waitFor } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import logger from "../utils/logger";
 import { useCIADataProvider } from "./useCIADataProvider";
 
-// Mock the logger to prevent console output during tests
-vi.mock("../utils/logger", () => ({
-  default: {
-    error: vi.fn(),
-    info: vi.fn(),
+// Mock the data provider module
+vi.mock("../data/ciaOptionsData", () => ({
+  defaultCIADataProvider: {
+    availabilityOptions: { minimal: { description: "Test" } },
+    integrityOptions: { minimal: { description: "Test" } },
+    confidentialityOptions: { minimal: { description: "Test" } },
+    roiEstimates: { minimal: { roi: 10 } },
+    initialize: vi.fn().mockResolvedValue(true),
   },
 }));
-
-// Mock the fetch function or API module that would be used by the hook
-vi.mock("../utils/api", () => ({
-  fetchCIAData: vi.fn().mockImplementation(async () => {
-    // Default mock implementation
-    return {
-      securityLevels: {
-        availability: "Low",
-        integrity: "Low",
-        confidentiality: "Low",
-      },
-    };
-  }),
-}));
-
-// Import the mocked module
-import { fetchCIAData } from "../utils/api";
 
 describe("useCIADataProvider", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it("initializes with loading state", () => {
+  it("should initialize with loading state", async () => {
     const { result } = renderHook(() => useCIADataProvider());
 
+    // Initially should be in loading state
     expect(result.current.isLoading).toBe(true);
+    expect(result.current.dataProvider).toBe(null);
     expect(result.current.error).toBe(null);
-    expect(result.current.ciaData).toBe(null);
   });
 
-  it("updates security levels correctly", async () => {
-    const { result } = renderHook(() => useCIADataProvider());
+  it("should provide data provider after initialization", async () => {
+    const { result, rerender } = renderHook(() => useCIADataProvider());
 
-    // Wait for initial data to be loaded
-    await waitFor(() => {
-      expect(result.current.isLoading).toBe(false);
+    // Mock async initialization
+    await act(async () => {
+      // Wait for initialization to complete
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      rerender();
     });
 
-    // Update security levels
-    act(() => {
-      result.current.updateSecurityLevels("High", "High", "Very High");
-    });
-
-    // Check that levels were updated
-    expect(result.current.ciaData?.securityLevels.availability).toBe("High");
-    expect(result.current.ciaData?.securityLevels.integrity).toBe("High");
-    expect(result.current.ciaData?.securityLevels.confidentiality).toBe(
-      "Very High"
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.error).toBe(null);
+    expect(result.current.dataProvider).not.toBe(null);
+    expect(result.current.dataProvider).toHaveProperty("availabilityOptions");
+    expect(result.current.dataProvider).toHaveProperty("integrityOptions");
+    expect(result.current.dataProvider).toHaveProperty(
+      "confidentialityOptions"
     );
-
-    // Verify that the logger was called
-    expect(logger.info).toHaveBeenCalledWith("Security levels updated", {
-      availability: "High",
-      integrity: "High",
-      confidentiality: "Very High",
-    });
+    expect(result.current.dataProvider).toHaveProperty("roiEstimates");
   });
 
-  it("handles errors gracefully", async () => {
-    // Mock a fetch error for this test only
-    (fetchCIAData as any).mockRejectedValueOnce(
-      new Error("Failed to fetch data")
-    );
+  it("should allow refreshing the data provider", async () => {
+    const { result, rerender } = renderHook(() => useCIADataProvider());
 
-    const { result } = renderHook(() => useCIADataProvider());
-
-    // Wait for the error to be processed
-    await waitFor(() => {
-      expect(result.current.isLoading).toBe(false);
-      expect(result.current.error).toBeTruthy();
+    // Mock async initialization
+    await act(async () => {
+      // Wait for initialization to complete
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      rerender();
     });
 
-    // Logger should be called with the error
-    expect(logger.error).toHaveBeenCalledWith(
-      "Failed to load CIA data",
-      expect.any(Error)
-    );
+    // Pre-refresh checks
+    expect(result.current.isLoading).toBe(false);
+
+    // Perform refresh - using the correct method name
+    await act(async () => {
+      result.current.refreshDataProvider();
+      // Wait for refresh to complete
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      rerender();
+    });
+
+    // Post-refresh checks
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.dataProvider).not.toBe(null);
   });
 });
