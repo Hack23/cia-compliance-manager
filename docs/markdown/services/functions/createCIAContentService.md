@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.5**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.8**](../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: createCIAContentService()
 
-> **createCIAContentService**(`dataProvider`?): [`CIAContentService`](../classes/CIAContentService.md)
+> **createCIAContentService**(`dataProvider?`): [`CIAContentService`](../classes/CIAContentService.md)
 
-Defined in: [services/ciaContentService.ts:1159](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/ciaContentService.ts#L1159)
+Defined in: [services/ciaContentService.ts:1293](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/services/ciaContentService.ts#L1293)
 
 Create a CIA content service with the specified data provider
 

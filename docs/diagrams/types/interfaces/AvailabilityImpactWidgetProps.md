@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.6**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.8**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: AvailabilityImpactWidgetProps
 
-Defined in: [types/widgets.ts:549](https://github.com/Hack23/cia-compliance-manager/blob/050a250237d6f621490781dbdf95155919f35aed/src/types/widgets.ts#L549)
+Defined in: [types/widgets.ts:566](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L566)
 
 Props for the Availability Impact Widget
 
@@ -25,7 +25,7 @@ affect uptime, recovery capabilities, and business continuity. ⏱️
 
 > **availabilityLevel**: [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:99](https://github.com/Hack23/cia-compliance-manager/blob/050a250237d6f621490781dbdf95155919f35aed/src/types/widgets.ts#L99)
+Defined in: [types/widgets.ts:528](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L528)
 
 Availability security level
 
@@ -39,9 +39,9 @@ Availability security level
 
 > `optional` **className**: `string`
 
-Defined in: [types/widgets.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/050a250237d6f621490781dbdf95155919f35aed/src/types/widgets.ts#L68)
+Defined in: [types/widgets.ts:543](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L543)
 
-Optional CSS class name
+CSS class name
 
 #### Inherited from
 
@@ -53,7 +53,7 @@ Optional CSS class name
 
 > **confidentialityLevel**: [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/050a250237d6f621490781dbdf95155919f35aed/src/types/widgets.ts#L109)
+Defined in: [types/widgets.ts:538](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L538)
 
 Confidentiality security level
 
@@ -67,7 +67,7 @@ Confidentiality security level
 
 > **integrityLevel**: [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/050a250237d6f621490781dbdf95155919f35aed/src/types/widgets.ts#L104)
+Defined in: [types/widgets.ts:533](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L533)
 
 Integrity security level
 
@@ -81,9 +81,9 @@ Integrity security level
 
 > `optional` **level**: [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:531](https://github.com/Hack23/cia-compliance-manager/blob/050a250237d6f621490781dbdf95155919f35aed/src/types/widgets.ts#L531)
+Defined in: [types/widgets.ts:523](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L523)
 
-Security level (for backward compatibility)
+Security level (used for backward compatibility)
 
 #### Inherited from
 
@@ -95,7 +95,7 @@ Security level (for backward compatibility)
 
 > `optional` **onLevelChange**: (`level`) => `void`
 
-Defined in: [types/widgets.ts:536](https://github.com/Hack23/cia-compliance-manager/blob/050a250237d6f621490781dbdf95155919f35aed/src/types/widgets.ts#L536)
+Defined in: [types/widgets.ts:553](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L553)
 
 Callback when level changes
 
@@ -115,27 +115,13 @@ Callback when level changes
 
 ***
 
-### securityLevel?
-
-> `optional` **securityLevel**: [`SecurityLevel`](../../index/type-aliases/SecurityLevel.md)
-
-Defined in: [types/widgets.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/050a250237d6f621490781dbdf95155919f35aed/src/types/widgets.ts#L78)
-
-Optional security level for widgets that only need one level
-
-#### Inherited from
-
-`ComponentImpactBaseProps.securityLevel`
-
-***
-
 ### testId?
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widgets.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/050a250237d6f621490781dbdf95155919f35aed/src/types/widgets.ts#L73)
+Defined in: [types/widgets.ts:548](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/types/widgets.ts#L548)
 
-Optional test ID for testing
+Test ID for testing
 
 #### Inherited from
 

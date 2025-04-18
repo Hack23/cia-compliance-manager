@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.5**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.8**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: BusinessImpactService
 
-Defined in: [services/businessImpactService.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/businessImpactService.ts#L33)
+Defined in: [services/businessImpactService.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/services/businessImpactService.ts#L33)
 
 Service for business impact related functionality
 
@@ -23,7 +23,7 @@ the business value of their security investments. 💼
 
 > **new BusinessImpactService**(`dataProvider`): `BusinessImpactService`
 
-Defined in: [services/businessImpactService.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/businessImpactService.ts#L36)
+Defined in: [services/businessImpactService.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/services/businessImpactService.ts#L36)
 
 #### Parameters
 
@@ -41,7 +41,7 @@ Defined in: [services/businessImpactService.ts:36](https://github.com/Hack23/cia
 
 > **calculateBusinessImpactLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `string`
 
-Defined in: [services/businessImpactService.ts:182](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/businessImpactService.ts#L182)
+Defined in: [services/businessImpactService.ts:216](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/services/businessImpactService.ts#L216)
 
 Calculate business impact level based on security levels
 
@@ -77,7 +77,7 @@ Business impact level description
 
 > **getBusinessImpact**(`component`, `level`): [`BusinessImpactDetails`](../../types/interfaces/BusinessImpactDetails.md)
 
-Defined in: [services/businessImpactService.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/businessImpactService.ts#L47)
+Defined in: [services/businessImpactService.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/services/businessImpactService.ts#L47)
 
 Get business impact details for a security level
 
@@ -107,7 +107,7 @@ Business impact details
 
 > **getBusinessImpactDescription**(`component`, `level`): `string`
 
-Defined in: [services/businessImpactService.ts:85](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/businessImpactService.ts#L85)
+Defined in: [services/businessImpactService.ts:119](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/services/businessImpactService.ts#L119)
 
 Get business impact description for a security level
 
@@ -137,7 +137,7 @@ Business impact description
 
 > **getCategoryIcon**(`category`): `string`
 
-Defined in: [services/businessImpactService.ts:74](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/businessImpactService.ts#L74)
+Defined in: [services/businessImpactService.ts:108](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/services/businessImpactService.ts#L108)
 
 Get impact category icon
 
@@ -159,9 +159,9 @@ Emoji icon representing the category
 
 ### getDetailedDescription()
 
-> **getDetailedDescription**(`category`, `detail`?): `string`
+> **getDetailedDescription**(`category`, `detail?`): `string`
 
-Defined in: [services/businessImpactService.ts:108](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/businessImpactService.ts#L108)
+Defined in: [services/businessImpactService.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/services/businessImpactService.ts#L142)
 
 Get detailed description of business impact
 

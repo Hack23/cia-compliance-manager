@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.8**](../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: createTechnicalImplementationService()
 
-> **createTechnicalImplementationService**(`dataProvider`?): [`TechnicalImplementationService`](../../typedoc-entry/classes/TechnicalImplementationService.md)
+> **createTechnicalImplementationService**(`dataProvider?`): `TechnicalImplementationService`
 
-Defined in: [services/technicalImplementationService.ts:331](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/technicalImplementationService.ts#L331)
+Defined in: [services/technicalImplementationService.ts:331](https://github.com/Hack23/cia-compliance-manager/blob/67855c73d041b21b5f90a46884e0e48cd0961cda/src/services/technicalImplementationService.ts#L331)
 
 Create a TechnicalImplementationService instance
 
@@ -22,6 +22,6 @@ Optional data provider for the service
 
 ## Returns
 
-[`TechnicalImplementationService`](../../typedoc-entry/classes/TechnicalImplementationService.md)
+`TechnicalImplementationService`
 
 A new TechnicalImplementationService instance
