@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.9**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.8**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **WidgetActions**: `React.FC`\<`WidgetActionsProps`\>
 
-Defined in: [components/common/WidgetActions.tsx:28](https://github.com/Hack23/cia-compliance-manager/blob/e1ae27dd41c4ccea8a13cdec993022242a97dce3/src/components/common/WidgetActions.tsx#L28)
+Defined in: [components/common/WidgetActions.tsx:28](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/components/common/WidgetActions.tsx#L28)
 
 Container for widget action buttons in widget headers
 
