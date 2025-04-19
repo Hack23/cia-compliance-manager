@@ -2,8 +2,15 @@ import React, { useMemo, useState } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { SECURITY_SUMMARY_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
+import { useComplianceService } from "../../../hooks/useComplianceService";
+import { useSecurityMetricsService } from "../../../hooks/useSecurityMetricsService";
 import { SecurityLevel } from "../../../types/cia";
 import { StatusType } from "../../../types/common/StatusTypes";
+import {
+  calculateImplementationCost,
+  calculateOperationalCost,
+  calculateROIEstimate,
+} from "../../../utils/businessValueUtils";
 import {
   calculateOverallSecurityLevel,
   getRiskLevelFromSecurityLevel,
@@ -11,6 +18,7 @@ import {
   getSecurityLevelValue,
 } from "../../../utils/securityLevelUtils";
 import { isNullish } from "../../../utils/typeGuards";
+import RadarChart from "../../charts/RadarChart";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import StatusBadge from "../../common/StatusBadge";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -59,23 +67,15 @@ type SecuritySummaryTab =
   | "implementation"
   | "compliance";
 
-// Interface for business impact content to address TypeScript errors
-interface BusinessImpactContent {
+// Interface for business impact content
+interface BusinessValueContent {
   description?: string;
   riskLevel?: string;
-  // Add other potential properties that might be needed
+  value?: string;
   [key: string]: any;
 }
 
-// Interface for business impact by component
-interface BusinessImpactByComponent {
-  availability?: BusinessImpactContent;
-  integrity?: BusinessImpactContent;
-  confidentiality?: BusinessImpactContent;
-  combined?: BusinessImpactContent;
-}
-
-// Interface for compliance status to use with proper typing
+// Interface for compliance status
 interface ComplianceStatusType {
   status?: string;
   complianceScore?: number;
@@ -86,15 +86,25 @@ interface ComplianceStatusType {
   [key: string]: any;
 }
 
+// Interface for implementation details
+interface ImplementationDetails {
+  complexity: string;
+  timeToImplement: string;
+  resources: string;
+  personnelNeeds: string;
+  technologies?: string[];
+  [key: string]: any;
+}
+
 /**
- * Displays a comprehensive summary of the security posture with key metrics
+ * Displays a comprehensive executive summary of security posture with key metrics
  *
  * ## Business Perspective
  *
- * This widget provides executives and security officers with an at-a-glance view
- * of the organization's security posture across the CIA triad. It highlights key
- * metrics, risk scores, and potential business value to support decision-making
- * and communicate security status effectively. 📊
+ * This widget serves as an executive dashboard that provides a comprehensive view of
+ * security posture, business value, implementation requirements, and compliance status.
+ * It consolidates critical metrics from specialized widgets to support executive
+ * decision-making and communication. 📊
  */
 const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
   availabilityLevel,
@@ -106,8 +116,26 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
   // Active tab state
   const [activeTab, setActiveTab] = useState<SecuritySummaryTab>("overview");
 
-  // Get CIA content service for additional data
-  const { ciaContentService, error, isLoading } = useCIAContentService();
+  // Get services for data
+  const {
+    ciaContentService,
+    error: ciaError,
+    isLoading: ciaLoading,
+  } = useCIAContentService();
+  const {
+    securityMetricsService,
+    error: metricsError,
+    isLoading: metricsLoading,
+  } = useSecurityMetricsService();
+  const {
+    complianceService,
+    error: complianceError,
+    isLoading: complianceLoading,
+  } = useComplianceService();
+
+  // Determine if any service is loading or has errors
+  const isLoading = ciaLoading || metricsLoading || complianceLoading;
+  const error = ciaError || metricsError || complianceError;
 
   // Calculate overall security level
   const overallSecurityLevel = useMemo(
@@ -120,13 +148,13 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     [availabilityLevel, integrityLevel, confidentialityLevel]
   );
 
-  // Get security level description for overall level
+  // Get security level description
   const securityLevelDescription = useMemo(
     () => getSecurityLevelDescription(overallSecurityLevel),
     [overallSecurityLevel]
   );
 
-  // Calculate security score (0-100) with improved calculation
+  // Calculate security score (0-100)
   const securityScore = useMemo(() => {
     const availabilityValue = getSecurityLevelValue(availabilityLevel);
     const integrityValue = getSecurityLevelValue(integrityLevel);
@@ -146,11 +174,10 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     return "Critical Risk";
   }, [securityScore]);
 
-  // Get security classification based on overall level
+  // Get security classification
   const securityClassification = useMemo(() => {
     if (!isNullish(ciaContentService)) {
       try {
-        // Use safe type checking with 'as any' to access potential methods
         if (
           typeof (ciaContentService as any).getSecurityClassification ===
           "function"
@@ -165,7 +192,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
       }
     }
 
-    // Fallback to local classification
+    // Fallback classification
     switch (overallSecurityLevel) {
       case "None":
         return "Minimal Security";
@@ -182,8 +209,8 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     }
   }, [ciaContentService, overallSecurityLevel]);
 
-  // Data protection classification based on confidentiality level
-  const dataProtectionClass = useMemo(() => {
+  // Get data classification
+  const dataClassification = useMemo(() => {
     if (
       !isNullish(ciaContentService) &&
       typeof ciaContentService.getInformationSensitivity === "function"
@@ -197,7 +224,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
       }
     }
 
-    // Fallback to local classification
+    // Fallback classification
     switch (confidentialityLevel) {
       case "None":
         return "Public Data";
@@ -214,7 +241,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     }
   }, [ciaContentService, confidentialityLevel]);
 
-  // Get implementation complexity based on security levels
+  // Get implementation complexity
   const implementationComplexity = useMemo(() => {
     if (
       !isNullish(ciaContentService) &&
@@ -235,7 +262,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
       }
     }
 
-    // Fallback to local calculation
+    // Fallback calculation
     const levelValues: Record<SecurityLevel, number> = {
       None: 0,
       Low: 1,
@@ -262,7 +289,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     confidentialityLevel,
   ]);
 
-  // Helper function to determine appropriate status variant
+  // Helper function for status badge variant
   const getStatusVariant = (level: string): StatusType => {
     const normalizedLevel = level.toLowerCase();
     if (normalizedLevel === "none") return "error";
@@ -273,146 +300,41 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     return "neutral";
   };
 
-  // Business impact details from service with improved error handling and typing
-  const businessImpact = useMemo((): BusinessImpactByComponent | null => {
-    try {
-      if (isNullish(ciaContentService)) return null;
-
-      const impact: BusinessImpactByComponent = {};
-
-      // Get availability business impact
-      if (typeof ciaContentService.getBusinessImpact === "function") {
-        impact.availability = ciaContentService.getBusinessImpact(
-          "availability",
-          availabilityLevel
-        ) as BusinessImpactContent;
-
-        impact.integrity = ciaContentService.getBusinessImpact(
-          "integrity",
-          integrityLevel
-        ) as BusinessImpactContent;
-
-        impact.confidentiality = ciaContentService.getBusinessImpact(
-          "confidentiality",
-          confidentialityLevel
-        ) as BusinessImpactContent;
-      }
-
-      // Get combined business impact if method exists
-      if (
-        typeof (ciaContentService as any).getCombinedBusinessImpact ===
-        "function"
-      ) {
-        impact.combined = (ciaContentService as any).getCombinedBusinessImpact(
-          availabilityLevel,
-          integrityLevel,
-          confidentialityLevel
-        ) as BusinessImpactContent;
-      }
-
-      return impact;
-    } catch (err) {
-      console.error("Error fetching business impact data:", err);
-      return null;
-    }
-  }, [
-    ciaContentService,
-    availabilityLevel,
-    integrityLevel,
-    confidentialityLevel,
-  ]);
-
-  // Implementation details with improved error handling
-  const implementationDetails = useMemo(() => {
-    try {
-      if (isNullish(ciaContentService)) return null;
-
-      return {
-        availability: ciaContentService.getComponentDetails?.(
-          "availability",
-          availabilityLevel
-        ),
-        integrity: ciaContentService.getComponentDetails?.(
-          "integrity",
-          integrityLevel
-        ),
-        confidentiality: ciaContentService.getComponentDetails?.(
-          "confidentiality",
-          confidentialityLevel
-        ),
-        timeToImplement:
-          typeof (ciaContentService as any).getImplementationTime === "function"
-            ? (ciaContentService as any).getImplementationTime(
-                availabilityLevel,
-                integrityLevel,
-                confidentialityLevel
-              )
-            : null,
-        resources:
-          typeof (ciaContentService as any).getRequiredResources === "function"
-            ? (ciaContentService as any).getRequiredResources(
-                availabilityLevel,
-                integrityLevel,
-                confidentialityLevel
-              )
-            : null,
-      };
-    } catch (err) {
-      console.error("Error fetching implementation details:", err);
-      return null;
-    }
-  }, [
-    ciaContentService,
-    availabilityLevel,
-    integrityLevel,
-    confidentialityLevel,
-  ]);
-
-  // Compliance status information with improved error handling
+  // Get compliance status
   const complianceStatus = useMemo((): ComplianceStatusType | null => {
     try {
-      if (isNullish(ciaContentService)) return null;
+      if (isNullish(complianceService)) return null;
 
-      if (
-        typeof (ciaContentService as any).getComplianceStatus === "function"
-      ) {
-        const status = (ciaContentService as any).getComplianceStatus(
-          availabilityLevel,
-          integrityLevel,
-          confidentialityLevel
-        );
+      const status = complianceService.getComplianceStatus?.(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      );
 
-        // Ensure we have at least empty arrays if they're missing
-        if (status) {
-          return {
-            ...status,
-            compliantFrameworks: status.compliantFrameworks || [],
-            partiallyCompliantFrameworks:
-              status.partiallyCompliantFrameworks || [],
-            nonCompliantFrameworks: status.nonCompliantFrameworks || [],
-          };
-        }
+      // Ensure we have proper arrays
+      if (status) {
+        return {
+          ...status,
+          compliantFrameworks: status.compliantFrameworks || [],
+          partiallyCompliantFrameworks:
+            status.partiallyCompliantFrameworks || [],
+          nonCompliantFrameworks: status.nonCompliantFrameworks || [],
+        };
       }
 
-      // Return default structure if we can't get it from the service
-      return {
-        status: "Unknown",
-        complianceScore: 0,
-        compliantFrameworks: [],
-        partiallyCompliantFrameworks: [],
-      };
+      return null;
     } catch (err) {
       console.error("Error fetching compliance status:", err);
       return null;
     }
   }, [
-    ciaContentService,
+    complianceService,
     availabilityLevel,
     integrityLevel,
     confidentialityLevel,
   ]);
 
-  // Get the appropriate risk color class
+  // Get appropriate risk color class
   const getRiskColorClass = (risk: string): string => {
     if (risk.includes("Low")) return "text-green-600 dark:text-green-400";
     if (risk.includes("Medium")) return "text-yellow-600 dark:text-yellow-400";
@@ -421,7 +343,57 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     return "text-gray-600 dark:text-gray-400";
   };
 
-  // Calculate business maturity level based on the security score
+  // Get implementation time
+  const getImplementationTime = (): string => {
+    try {
+      if (
+        !isNullish(ciaContentService) &&
+        typeof (ciaContentService as any).getImplementationTime === "function"
+      ) {
+        const time = (ciaContentService as any).getImplementationTime(
+          availabilityLevel,
+          integrityLevel,
+          confidentialityLevel
+        );
+        if (!isNullish(time)) return time;
+      }
+    } catch (err) {
+      console.error("Error fetching implementation time:", err);
+    }
+
+    // Fallback based on security score
+    if (securityScore >= 80) return "3-6 months";
+    if (securityScore >= 60) return "2-4 months";
+    if (securityScore >= 40) return "1-2 months";
+    return "2-4 weeks";
+  };
+
+  // Get resource requirements
+  const getRequiredResources = (): string => {
+    try {
+      if (
+        !isNullish(ciaContentService) &&
+        typeof (ciaContentService as any).getRequiredResources === "function"
+      ) {
+        const resources = (ciaContentService as any).getRequiredResources(
+          availabilityLevel,
+          integrityLevel,
+          confidentialityLevel
+        );
+        if (!isNullish(resources)) return resources;
+      }
+    } catch (err) {
+      console.error("Error fetching resource requirements:", err);
+    }
+
+    // Fallback based on security score
+    if (securityScore >= 80) return "Specialized Team";
+    if (securityScore >= 60) return "Dedicated Team";
+    if (securityScore >= 40) return "Small Team";
+    return "Individual Effort";
+  };
+
+  // Calculate business maturity level based on security score
   const businessMaturityLevel = useMemo(() => {
     if (securityScore >= 80) return "Strategic";
     if (securityScore >= 60) return "Advanced";
@@ -444,6 +416,64 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
         return "Unknown business maturity level";
     }
   }, [businessMaturityLevel]);
+
+  // Get ROI estimate based on security score
+  const getROIEstimate = (): string => {
+    try {
+      // Use the centralized utility function for consistent ROI calculation
+      const roiEstimate = calculateROIEstimate(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      );
+      return roiEstimate.value ?? "N/A"; // Add nullish coalescing operator to handle undefined
+    } catch (err) {
+      console.error("Error calculating ROI estimate:", err);
+      return "N/A";
+    }
+  };
+
+  // Get implementation cost estimate
+  const getImplementationCost = (): string => {
+    try {
+      // Use the centralized utility function for consistent implementation cost
+      const totalCost = calculateImplementationCost(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      );
+
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0,
+      }).format(totalCost);
+    } catch (err) {
+      console.error("Error calculating implementation cost:", err);
+      return "N/A";
+    }
+  };
+
+  // Get operational cost estimate
+  const getOperationalCost = (): string => {
+    try {
+      // Use the centralized utility function for consistent operational cost
+      const totalCost = calculateOperationalCost(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      );
+
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0,
+      }).format(totalCost);
+    } catch (err) {
+      console.error("Error calculating operational cost:", err);
+      return "N/A";
+    }
+  };
 
   return (
     <WidgetContainer
@@ -524,7 +554,22 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               data-testid={`${testId}-content-overview`}
               className="space-y-4"
             >
-              {/* Core Security Metrics - Clean, visual summary */}
+              {/* Security Radar Chart */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
+                <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
+                  Security Profile
+                </h3>
+                <div className="h-[300px]">
+                  <RadarChart
+                    availabilityLevel={availabilityLevel}
+                    integrityLevel={integrityLevel}
+                    confidentialityLevel={confidentialityLevel}
+                    testId={`${testId}-radar-chart`}
+                  />
+                </div>
+              </div>
+
+              {/* Security Level Summary */}
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
                 <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
                   Security Components
@@ -557,7 +602,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                     </div>
                     <div className="mt-2 text-xs text-gray-600 dark:text-gray-400">
                       Classification:{" "}
-                      <span className="font-medium">{dataProtectionClass}</span>
+                      <span className="font-medium">{dataClassification}</span>
                     </div>
                   </div>
 
@@ -586,18 +631,17 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                       </StatusBadge>
                     </div>
                     <div className="mt-2 text-xs text-gray-600 dark:text-gray-400">
-                      Data Quality:{" "}
+                      Validation Level:{" "}
                       <span className="font-medium">
-                        {implementationDetails?.integrity?.validationLevel ||
-                          (integrityLevel === "None"
-                            ? "Unverified"
-                            : integrityLevel === "Low"
-                            ? "Basic Validation"
-                            : integrityLevel === "Moderate"
-                            ? "Validated"
-                            : integrityLevel === "High"
-                            ? "Cryptographically Verified"
-                            : "Immutable")}
+                        {integrityLevel === "None"
+                          ? "Unverified"
+                          : integrityLevel === "Low"
+                          ? "Basic Validation"
+                          : integrityLevel === "Moderate"
+                          ? "Validated"
+                          : integrityLevel === "High"
+                          ? "Strongly Validated"
+                          : "Formally Verified"}
                       </span>
                     </div>
                   </div>
@@ -629,28 +673,27 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                     <div className="mt-2 text-xs text-gray-600 dark:text-gray-400">
                       Uptime Target:{" "}
                       <span className="font-medium">
-                        {implementationDetails?.availability?.uptime ||
-                          (availabilityLevel === "None"
-                            ? "No guarantee"
-                            : availabilityLevel === "Low"
-                            ? "~95%"
-                            : availabilityLevel === "Moderate"
-                            ? "~99%"
-                            : availabilityLevel === "High"
-                            ? "~99.9%"
-                            : "~99.99%")}
+                        {availabilityLevel === "None"
+                          ? "No guarantee"
+                          : availabilityLevel === "Low"
+                          ? "95%"
+                          : availabilityLevel === "Moderate"
+                          ? "99%"
+                          : availabilityLevel === "High"
+                          ? "99.9%"
+                          : "99.999%"}
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Implementation Complexity */}
+              {/* Key Metrics Dashboard */}
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
                 <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
-                  Implementation Summary
+                  Key Security Metrics
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <div className="text-sm font-medium mb-1">
                       Implementation Complexity
@@ -662,21 +705,28 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                       Based on combined security levels
                     </div>
                   </div>
+
                   <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <div className="text-sm font-medium mb-1">
-                      Security Profile
+                      Business Maturity
                     </div>
                     <div className="text-lg font-bold">
-                      {availabilityLevel === integrityLevel &&
-                      integrityLevel === confidentialityLevel
-                        ? `${availabilityLevel} (Balanced)`
-                        : "Mixed Levels"}
+                      {businessMaturityLevel}
                     </div>
                     <div className="text-xs text-gray-600 dark:text-gray-400">
-                      {availabilityLevel === integrityLevel &&
-                      integrityLevel === confidentialityLevel
-                        ? "Uniform security across all components"
-                        : "Varied security levels across components"}
+                      {getBusinessMaturityDescription}
+                    </div>
+                  </div>
+
+                  <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="text-sm font-medium mb-1">
+                      Compliance Status
+                    </div>
+                    <div className="text-lg font-bold">
+                      {complianceStatus?.complianceScore || securityScore}%
+                    </div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">
+                      Overall compliance alignment
                     </div>
                   </div>
                 </div>
@@ -693,171 +743,23 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               {/* Business Value content */}
               <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4">
                 <p className="text-sm">
-                  This section shows the business impact and value of your
-                  selected security levels across the CIA triad, highlighting
-                  benefits and considerations for executives and stakeholders.
+                  This section summarizes the business value and financial
+                  impact of your selected security levels, helping justify
+                  security investments to stakeholders.
                 </p>
               </div>
 
               {/* Business Impact Summary */}
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
                 <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
-                  Business Impact Summary
+                  Business Value Summary
                 </h3>
 
-                {!businessImpact ? (
-                  <p className="text-sm text-gray-600 dark:text-gray-400 italic">
-                    Business impact information is not available.
-                  </p>
-                ) : (
-                  <div className="space-y-4">
-                    {/* Combined impact summary if available */}
-                    {businessImpact.combined && (
-                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                        <p className="text-sm">
-                          {businessImpact.combined.description ||
-                            "The selected security levels provide appropriate protection for your business needs."}
-                        </p>
-                        {businessImpact.combined.riskLevel && (
-                          <div className="mt-2">
-                            <StatusBadge
-                              status={getStatusVariant(
-                                businessImpact.combined.riskLevel.split(
-                                  " "
-                                )[0] || "Neutral"
-                              )}
-                              size="sm"
-                            >
-                              {businessImpact.combined.riskLevel}
-                            </StatusBadge>
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Individual component impacts */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      {/* Confidentiality impact */}
-                      {businessImpact.confidentiality && (
-                        <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
-                          <h4 className="font-medium text-purple-700 dark:text-purple-300 mb-2">
-                            Confidentiality Impact
-                          </h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {businessImpact.confidentiality.description ||
-                              "Impact description not available"}
-                          </p>
-                          {businessImpact.confidentiality.riskLevel && (
-                            <div className="mt-2">
-                              <StatusBadge
-                                status={getStatusVariant(
-                                  businessImpact.confidentiality.riskLevel.split(
-                                    " "
-                                  )[0] || "Neutral"
-                                )}
-                                size="sm"
-                              >
-                                {businessImpact.confidentiality.riskLevel}
-                              </StatusBadge>
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      {/* Integrity impact */}
-                      {businessImpact.integrity && (
-                        <div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800">
-                          <h4 className="font-medium text-green-700 dark:text-green-300 mb-2">
-                            Integrity Impact
-                          </h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {businessImpact.integrity.description ||
-                              "Impact description not available"}
-                          </p>
-                          {businessImpact.integrity.riskLevel && (
-                            <div className="mt-2">
-                              <StatusBadge
-                                status={getStatusVariant(
-                                  businessImpact.integrity.riskLevel.split(
-                                    " "
-                                  )[0] || "Neutral"
-                                )}
-                                size="sm"
-                              >
-                                {businessImpact.integrity.riskLevel}
-                              </StatusBadge>
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      {/* Availability impact */}
-                      {businessImpact.availability && (
-                        <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
-                          <h4 className="font-medium text-blue-700 dark:text-blue-300 mb-2">
-                            Availability Impact
-                          </h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {businessImpact.availability.description ||
-                              "Impact description not available"}
-                          </p>
-                          {businessImpact.availability.riskLevel && (
-                            <div className="mt-2">
-                              <StatusBadge
-                                status={getStatusVariant(
-                                  businessImpact.availability.riskLevel.split(
-                                    " "
-                                  )[0] || "Neutral"
-                                )}
-                                size="sm"
-                              >
-                                {businessImpact.availability.riskLevel}
-                              </StatusBadge>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Business Value Metrics */}
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
-                <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
-                  Business Value Metrics
-                </h3>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* ROI Estimation */}
-                  <div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
-                    <h4 className="font-medium text-green-700 dark:text-green-300">
-                      Estimated ROI
-                    </h4>
-                    <div className="text-xl font-bold text-green-600 dark:text-green-400 mt-2">
-                      {securityScore >= 80
-                        ? "300-500%"
-                        : securityScore >= 60
-                        ? "200-300%"
-                        : securityScore >= 40
-                        ? "150-200%"
-                        : "50-100%"}
-                    </div>
-                    <p className="text-sm text-green-600 dark:text-green-400 mt-1">
-                      {securityScore >= 80
-                        ? "Premium return through competitive advantage"
-                        : securityScore >= 60
-                        ? "Strong return through business enablement"
-                        : securityScore >= 40
-                        ? "Balanced return through operational improvements"
-                        : "Basic return through risk reduction"}
-                    </p>
-                  </div>
-
-                  {/* Business Enablement */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Business Maturity */}
                   <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
                     <h4 className="font-medium text-blue-700 dark:text-blue-300">
-                      Business Enablement
+                      Business Maturity Level
                     </h4>
                     <div className="text-xl font-bold text-blue-600 dark:text-blue-400 mt-2">
                       {businessMaturityLevel}
@@ -865,6 +767,126 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                     <p className="text-sm text-blue-600 dark:text-blue-400 mt-1">
                       {getBusinessMaturityDescription}
                     </p>
+                  </div>
+
+                  {/* ROI Estimation */}
+                  <div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
+                    <h4 className="font-medium text-green-700 dark:text-green-300">
+                      Estimated ROI
+                    </h4>
+                    <div className="text-xl font-bold text-green-600 dark:text-green-400 mt-2">
+                      {getROIEstimate()}
+                    </div>
+                    <p className="text-sm text-green-600 dark:text-green-400 mt-1">
+                      {securityScore >= 80
+                        ? "Strong return from security investments"
+                        : securityScore >= 60
+                        ? "Good return from security investments"
+                        : securityScore >= 40
+                        ? "Basic return, primarily risk avoidance"
+                        : "Minimal return on investment"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Cost Summary */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
+                <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
+                  Cost Summary
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Implementation Cost */}
+                  <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="text-sm font-medium mb-1">
+                      Implementation Cost
+                    </div>
+                    <div className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                      {getImplementationCost()}
+                    </div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">
+                      One-time investment
+                    </div>
+                  </div>
+
+                  {/* Operational Cost */}
+                  <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="text-sm font-medium mb-1">
+                      Operational Cost
+                    </div>
+                    <div className="text-xl font-bold text-green-600 dark:text-green-400">
+                      {getOperationalCost()}
+                    </div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">
+                      Annual expense
+                    </div>
+                  </div>
+
+                  {/* Personnel Requirements */}
+                  <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="text-sm font-medium mb-1">
+                      Personnel Needs
+                    </div>
+                    <div className="text-xl font-bold text-purple-600 dark:text-purple-400">
+                      {(
+                        (getSecurityLevelValue(availabilityLevel) +
+                          getSecurityLevelValue(integrityLevel) +
+                          getSecurityLevelValue(confidentialityLevel)) *
+                        0.5
+                      ).toFixed(1)}{" "}
+                      FTE
+                    </div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">
+                      Full-time equivalents
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Business Enablement */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
+                <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
+                  Business Enablement
+                </h3>
+
+                <div className="space-y-3">
+                  <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <h4 className="text-sm font-medium mb-2">
+                      Business Capabilities
+                    </h4>
+                    <ul className="list-disc pl-5 space-y-1 text-sm">
+                      {securityScore >= 80 ? (
+                        <>
+                          <li>Enables digital transformation initiatives</li>
+                          <li>Supports secure cloud adoption</li>
+                          <li>Facilitates secure partner integrations</li>
+                          <li>
+                            Provides competitive advantage through security as a
+                            value
+                          </li>
+                        </>
+                      ) : securityScore >= 60 ? (
+                        <>
+                          <li>Supports most digital business initiatives</li>
+                          <li>Enables secure customer data handling</li>
+                          <li>Allows controlled partner access</li>
+                          <li>Meets most customer security requirements</li>
+                        </>
+                      ) : securityScore >= 40 ? (
+                        <>
+                          <li>Supports basic business operations</li>
+                          <li>Enables limited partner interactions</li>
+                          <li>Meets minimum customer expectations</li>
+                        </>
+                      ) : (
+                        <>
+                          <li>Limited security capabilities</li>
+                          <li>May restrict business opportunities</li>
+                          <li>Potential compliance limitations</li>
+                        </>
+                      )}
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -877,12 +899,12 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               data-testid={`${testId}-content-implementation`}
               className="space-y-4"
             >
-              {/* Implementation content */}
+              {/* Implementation introduction */}
               <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4">
                 <p className="text-sm">
-                  This section provides an overview of implementation
-                  considerations for your selected security levels across the
-                  CIA triad.
+                  This section summarizes implementation requirements for your
+                  selected security levels, helping plan resources, timelines,
+                  and technical approaches.
                 </p>
               </div>
 
@@ -925,98 +947,105 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                   </p>
                 </div>
 
-                {!implementationDetails ? (
-                  <p className="text-sm text-gray-600 dark:text-gray-400 italic">
-                    Implementation details are not available.
-                  </p>
-                ) : (
-                  <div className="grid grid-cols-1 gap-4">
-                    {/* Implementation time and resources */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {/* Implementation Time */}
-                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                        <h4 className="font-medium text-gray-800 dark:text-gray-100 mb-2">
-                          Implementation Timeline
-                        </h4>
-                        <div className="text-lg font-bold">
-                          {implementationDetails.timeToImplement ||
-                            (implementationComplexity === "Low"
-                              ? "1-3 months"
-                              : implementationComplexity === "Moderate"
-                              ? "3-6 months"
-                              : implementationComplexity === "High"
-                              ? "6-12 months"
-                              : "12+ months")}
-                        </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                          Estimated time for complete implementation
-                        </p>
-                      </div>
-
-                      {/* Resource Requirements */}
-                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                        <h4 className="font-medium text-gray-800 dark:text-gray-100 mb-2">
-                          Resource Requirements
-                        </h4>
-                        <div className="text-lg font-bold">
-                          {implementationDetails.resources ||
-                            (implementationComplexity === "Low"
-                              ? "Minimal"
-                              : implementationComplexity === "Moderate"
-                              ? "Standard"
-                              : implementationComplexity === "High"
-                              ? "Significant"
-                              : "Extensive")}
-                        </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                          Personnel, budget, and equipment needs
-                        </p>
-                      </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Implementation Timeline */}
+                  <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="text-sm font-medium mb-1">
+                      Estimated Implementation Time
                     </div>
-
-                    {/* Component implementation details */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
-                      {/* Confidentiality Implementation */}
-                      {implementationDetails.confidentiality && (
-                        <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
-                          <h4 className="font-medium text-purple-700 dark:text-purple-300 mb-2">
-                            Confidentiality Implementation
-                          </h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {implementationDetails.confidentiality.technical ||
-                              "No technical implementation details available"}
-                          </p>
-                        </div>
-                      )}
-
-                      {/* Integrity Implementation */}
-                      {implementationDetails.integrity && (
-                        <div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800">
-                          <h4 className="font-medium text-green-700 dark:text-green-300 mb-2">
-                            Integrity Implementation
-                          </h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {implementationDetails.integrity.technical ||
-                              "No technical implementation details available"}
-                          </p>
-                        </div>
-                      )}
-
-                      {/* Availability Implementation */}
-                      {implementationDetails.availability && (
-                        <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
-                          <h4 className="font-medium text-blue-700 dark:text-blue-300 mb-2">
-                            Availability Implementation
-                          </h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {implementationDetails.availability.technical ||
-                              "No technical implementation details available"}
-                          </p>
-                        </div>
-                      )}
+                    <div className="text-lg font-bold">
+                      {getImplementationTime()}
+                    </div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">
+                      Typical project timeline
                     </div>
                   </div>
-                )}
+
+                  {/* Required Resources */}
+                  <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="text-sm font-medium mb-1">
+                      Required Resources
+                    </div>
+                    <div className="text-lg font-bold">
+                      {getRequiredResources()}
+                    </div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">
+                      Resource allocation recommendation
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Component Implementation Summary */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
+                <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
+                  Component Implementation Summary
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Confidentiality Implementation */}
+                  <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
+                    <h4 className="font-medium text-purple-700 dark:text-purple-300 mb-2">
+                      Confidentiality Implementation
+                    </h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {confidentialityLevel === "None"
+                        ? "No data protection controls needed"
+                        : confidentialityLevel === "Low"
+                        ? "Basic access controls and authentication"
+                        : confidentialityLevel === "Moderate"
+                        ? "Role-based access and encryption for sensitive data"
+                        : confidentialityLevel === "High"
+                        ? "Comprehensive encryption and access controls"
+                        : "Maximum protection with advanced encryption and zero-trust"}
+                    </p>
+                    <div className="mt-2 text-xs font-medium text-purple-700 dark:text-purple-300">
+                      Level: {confidentialityLevel}
+                    </div>
+                  </div>
+
+                  {/* Integrity Implementation */}
+                  <div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800">
+                    <h4 className="font-medium text-green-700 dark:text-green-300 mb-2">
+                      Integrity Implementation
+                    </h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {integrityLevel === "None"
+                        ? "No data validation controls needed"
+                        : integrityLevel === "Low"
+                        ? "Basic input validation and error checking"
+                        : integrityLevel === "Moderate"
+                        ? "Data validation and cryptographic checksums"
+                        : integrityLevel === "High"
+                        ? "Digital signatures and strong validation"
+                        : "Formal verification and immutable audit trails"}
+                    </p>
+                    <div className="mt-2 text-xs font-medium text-green-700 dark:text-green-300">
+                      Level: {integrityLevel}
+                    </div>
+                  </div>
+
+                  {/* Availability Implementation */}
+                  <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+                    <h4 className="font-medium text-blue-700 dark:text-blue-300 mb-2">
+                      Availability Implementation
+                    </h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {availabilityLevel === "None"
+                        ? "No uptime guarantees or redundancy"
+                        : availabilityLevel === "Low"
+                        ? "Basic backup and recovery procedures"
+                        : availabilityLevel === "Moderate"
+                        ? "Redundant components and standard backups"
+                        : availabilityLevel === "High"
+                        ? "High availability clustering and failover"
+                        : "Multi-site redundancy and continuous availability"}
+                    </p>
+                    <div className="mt-2 text-xs font-medium text-blue-700 dark:text-blue-300">
+                      Level: {availabilityLevel}
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Implementation Considerations */}
@@ -1028,32 +1057,28 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="p-3 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg">
                     <h4 className="font-medium text-yellow-700 dark:text-yellow-300">
-                      Resource Requirements
+                      Success Factors
                     </h4>
-                    <p className="mt-2 text-sm">
-                      {implementationComplexity === "Low"
-                        ? "Minimal resources required. Can be implemented with existing team."
-                        : implementationComplexity === "Moderate"
-                        ? "Moderate resources required. May need additional expertise."
-                        : implementationComplexity === "High"
-                        ? "Significant resources required. Dedicated team recommended."
-                        : "Extensive resources required. Specialized team essential."}
-                    </p>
+                    <ul className="mt-2 space-y-1 list-disc list-inside text-sm">
+                      <li>Executive sponsorship and support</li>
+                      <li>Clear security requirements definition</li>
+                      <li>Adequate resource allocation</li>
+                      <li>Proper testing and validation</li>
+                      <li>Staff training and awareness</li>
+                    </ul>
                   </div>
 
                   <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
                     <h4 className="font-medium text-blue-700 dark:text-blue-300">
-                      Implementation Timeline
+                      Key Challenges
                     </h4>
-                    <p className="mt-2 text-sm">
-                      {implementationComplexity === "Low"
-                        ? "Short timeline: 1-3 months for complete implementation."
-                        : implementationComplexity === "Moderate"
-                        ? "Medium timeline: 3-6 months for complete implementation."
-                        : implementationComplexity === "High"
-                        ? "Extended timeline: 6-12 months for complete implementation."
-                        : "Long-term project: 12+ months for complete implementation."}
-                    </p>
+                    <ul className="mt-2 space-y-1 list-disc list-inside text-sm">
+                      <li>Balancing security with usability</li>
+                      <li>Integration with existing systems</li>
+                      <li>Managing scope and expectations</li>
+                      <li>Maintaining consistent controls</li>
+                      <li>Securing necessary expertise</li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -1066,185 +1091,214 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               data-testid={`${testId}-content-compliance`}
               className="space-y-4"
             >
-              {/* Compliance content */}
+              {/* Compliance introduction */}
               <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4">
                 <p className="text-sm">
-                  This section shows how your security selections align with
-                  common regulatory frameworks and compliance requirements.
+                  This section summarizes your compliance status based on
+                  selected security levels, highlighting alignment with
+                  regulatory frameworks and standards.
                 </p>
               </div>
 
               {/* Compliance Status */}
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
                 <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
-                  Compliance Status
+                  Compliance Status Overview
                 </h3>
 
                 {!complianceStatus ? (
-                  <div className="text-center py-6">
-                    <p className="text-sm text-gray-600 dark:text-gray-400 italic">
-                      Compliance status information is not available.
+                  <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium">Compliance Score</span>
+                      <span className="text-xl font-bold">
+                        {securityScore}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5 mb-2">
+                      <div
+                        className={`h-2.5 rounded-full ${
+                          securityScore >= 80
+                            ? "bg-green-500"
+                            : securityScore >= 50
+                            ? "bg-yellow-500"
+                            : "bg-red-500"
+                        }`}
+                        style={{ width: `${securityScore}%` }}
+                      ></div>
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {securityScore >= 80
+                        ? "Strong compliance position"
+                        : securityScore >= 50
+                        ? "Moderate compliance position"
+                        : "Compliance gaps detected"}
                     </p>
                   </div>
                 ) : (
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <div className="text-sm font-medium mb-1">
-                          Overall Compliance
-                        </div>
-                        <div className="text-sm">
-                          {complianceStatus.status || "Status not available"}
-                        </div>
-                      </div>
-                      <div>
-                        <StatusBadge
-                          status={
-                            (complianceStatus.complianceScore ?? 0) >= 80
-                              ? "success"
-                              : (complianceStatus.complianceScore ?? 0) >= 50
-                              ? "warning"
-                              : "error"
-                          }
-                          size="md"
-                        >
-                          {complianceStatus.complianceScore || 0}% Compliant
-                        </StatusBadge>
-                      </div>
+                  <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium">Compliance Score</span>
+                      <span className="text-xl font-bold">
+                        {complianceStatus.complianceScore}%
+                      </span>
                     </div>
-
-                    {/* Compliance gauge */}
-                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mb-4">
+                    <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5 mb-2">
                       <div
-                        className={`h-2.5 rounded-full bg-${
-                          (complianceStatus.complianceScore ?? 0) >= 80
-                            ? "green"
-                            : (complianceStatus.complianceScore ?? 0) >= 50
-                            ? "yellow"
-                            : "red"
-                        }-500`}
+                        className={`h-2.5 rounded-full ${
+                          (complianceStatus.complianceScore || 0) >= 80
+                            ? "bg-green-500"
+                            : (complianceStatus.complianceScore || 0) >= 50
+                            ? "bg-yellow-500"
+                            : "bg-red-500"
+                        }`}
                         style={{
                           width: `${complianceStatus.complianceScore || 0}%`,
                         }}
                       ></div>
                     </div>
-
-                    {/* Frameworks */}
-                    {complianceStatus.compliantFrameworks &&
-                      complianceStatus.compliantFrameworks.length > 0 && (
-                        <div className="mb-4">
-                          <h4 className="text-md font-medium mb-2">
-                            Compliant Frameworks
-                          </h4>
-                          <div className="flex flex-wrap gap-2">
-                            {complianceStatus.compliantFrameworks.map(
-                              (framework: string, index: number) => (
-                                <span
-                                  key={index}
-                                  className="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-30 dark:text-green-300 rounded text-xs"
-                                >
-                                  {framework}
-                                </span>
-                              )
-                            )}
-                          </div>
-                        </div>
-                      )}
-
-                    {/* Partial frameworks */}
-                    {complianceStatus.partiallyCompliantFrameworks &&
-                      complianceStatus.partiallyCompliantFrameworks.length >
-                        0 && (
-                        <div className="mb-4">
-                          <h4 className="text-md font-medium mb-2">
-                            Partially Compliant Frameworks
-                          </h4>
-                          <div className="flex flex-wrap gap-2">
-                            {complianceStatus.partiallyCompliantFrameworks.map(
-                              (framework: string, index: number) => (
-                                <span
-                                  key={index}
-                                  className="px-2 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:bg-opacity-30 dark:text-yellow-300 rounded text-xs"
-                                >
-                                  {framework}
-                                </span>
-                              )
-                            )}
-                          </div>
-                        </div>
-                      )}
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {complianceStatus.status ||
+                        ((complianceStatus.complianceScore || 0) >= 80
+                          ? "Strong compliance position"
+                          : (complianceStatus.complianceScore || 0) >= 50
+                          ? "Moderate compliance position"
+                          : "Compliance gaps detected")}
+                    </p>
                   </div>
                 )}
               </div>
 
-              {/* Component Compliance Requirements */}
+              {/* Framework Status */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
+                <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
+                  Framework Compliance Status
+                </h3>
+
+                {!complianceStatus ? (
+                  <p className="text-sm text-gray-600 dark:text-gray-400 italic">
+                    Detailed compliance information is not available.
+                  </p>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
+                      <h4 className="font-medium text-green-700 dark:text-green-300 flex items-center justify-between">
+                        <span>Compliant</span>
+                        <span className="text-sm bg-green-100 dark:bg-green-800 px-2 py-0.5 rounded-full">
+                          {complianceStatus.compliantFrameworks.length}
+                        </span>
+                      </h4>
+                      {complianceStatus.compliantFrameworks.length > 0 ? (
+                        <ul className="mt-2 space-y-1 list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
+                          {complianceStatus.compliantFrameworks.map(
+                            (framework, idx) => (
+                              <li key={`compliant-${idx}`}>{framework}</li>
+                            )
+                          )}
+                        </ul>
+                      ) : (
+                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 italic">
+                          No fully compliant frameworks
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="p-3 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg">
+                      <h4 className="font-medium text-yellow-700 dark:text-yellow-300 flex items-center justify-between">
+                        <span>Partially Compliant</span>
+                        <span className="text-sm bg-yellow-100 dark:bg-yellow-800 px-2 py-0.5 rounded-full">
+                          {complianceStatus.partiallyCompliantFrameworks.length}
+                        </span>
+                      </h4>
+                      {complianceStatus.partiallyCompliantFrameworks.length >
+                      0 ? (
+                        <ul className="mt-2 space-y-1 list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
+                          {complianceStatus.partiallyCompliantFrameworks.map(
+                            (framework, idx) => (
+                              <li key={`partial-${idx}`}>{framework}</li>
+                            )
+                          )}
+                        </ul>
+                      ) : (
+                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 italic">
+                          No partially compliant frameworks
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Component Requirements */}
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
                 <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
                   Component Compliance Requirements
                 </h3>
 
-                <div className="grid grid-cols-1 gap-4">
-                  <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                    <p className="text-sm">
-                      Component compliance information is{" "}
-                      {complianceStatus ? "available" : "not available"} based
-                      on your selected security levels.
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Confidentiality compliance */}
+                  <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
+                    <h5 className="text-sm font-medium mb-1 text-purple-700 dark:text-purple-300">
+                      Confidentiality
+                    </h5>
+                    <p className="text-xs">
+                      <span className="font-medium">Level:</span>{" "}
+                      {confidentialityLevel}
                     </p>
-                    <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-                      {/* Confidentiality compliance */}
-                      <div className="p-2 border border-purple-200 dark:border-purple-800 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
-                        <h5 className="text-sm font-medium mb-1 text-purple-700 dark:text-purple-300">
-                          Confidentiality
-                        </h5>
-                        <p className="text-xs">
-                          {confidentialityLevel === "None"
-                            ? "Does not meet basic compliance requirements"
-                            : confidentialityLevel === "Low"
-                            ? "Meets minimal compliance requirements"
-                            : confidentialityLevel === "Moderate"
-                            ? "Meets standard compliance requirements"
-                            : confidentialityLevel === "High"
-                            ? "Meets strict compliance requirements"
-                            : "Exceeds most compliance requirements"}
-                        </p>
-                      </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                      {confidentialityLevel === "None"
+                        ? "Not sufficient for most compliance frameworks"
+                        : confidentialityLevel === "Low"
+                        ? "Meets basic compliance requirements"
+                        : confidentialityLevel === "Moderate"
+                        ? "Satisfies most regulatory requirements"
+                        : confidentialityLevel === "High"
+                        ? "Meets stringent compliance standards"
+                        : "Exceeds most compliance requirements"}
+                    </p>
+                  </div>
 
-                      {/* Integrity compliance */}
-                      <div className="p-2 border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded">
-                        <h5 className="text-sm font-medium mb-1 text-green-700 dark:text-green-300">
-                          Integrity
-                        </h5>
-                        <p className="text-xs">
-                          {integrityLevel === "None"
-                            ? "Does not meet basic compliance requirements"
-                            : integrityLevel === "Low"
-                            ? "Meets minimal compliance requirements"
-                            : integrityLevel === "Moderate"
-                            ? "Meets standard compliance requirements"
-                            : integrityLevel === "High"
-                            ? "Meets strict compliance requirements"
-                            : "Exceeds most compliance requirements"}
-                        </p>
-                      </div>
+                  {/* Integrity compliance */}
+                  <div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded">
+                    <h5 className="text-sm font-medium mb-1 text-green-700 dark:text-green-300">
+                      Integrity
+                    </h5>
+                    <p className="text-xs">
+                      <span className="font-medium">Level:</span>{" "}
+                      {integrityLevel}
+                    </p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                      {integrityLevel === "None"
+                        ? "Not sufficient for most compliance frameworks"
+                        : integrityLevel === "Low"
+                        ? "Meets basic compliance requirements"
+                        : integrityLevel === "Moderate"
+                        ? "Satisfies most regulatory requirements"
+                        : integrityLevel === "High"
+                        ? "Meets stringent compliance standards"
+                        : "Exceeds most compliance requirements"}
+                    </p>
+                  </div>
 
-                      {/* Availability compliance */}
-                      <div className="p-2 border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded">
-                        <h5 className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
-                          Availability
-                        </h5>
-                        <p className="text-xs">
-                          {availabilityLevel === "None"
-                            ? "Does not meet basic compliance requirements"
-                            : availabilityLevel === "Low"
-                            ? "Meets minimal compliance requirements"
-                            : availabilityLevel === "Moderate"
-                            ? "Meets standard compliance requirements"
-                            : availabilityLevel === "High"
-                            ? "Meets strict compliance requirements"
-                            : "Exceeds most compliance requirements"}
-                        </p>
-                      </div>
-                    </div>
+                  {/* Availability compliance */}
+                  <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded">
+                    <h5 className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
+                      Availability
+                    </h5>
+                    <p className="text-xs">
+                      <span className="font-medium">Level:</span>{" "}
+                      {availabilityLevel}
+                    </p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                      {availabilityLevel === "None"
+                        ? "Not sufficient for most compliance frameworks"
+                        : availabilityLevel === "Low"
+                        ? "Meets basic compliance requirements"
+                        : availabilityLevel === "Moderate"
+                        ? "Satisfies most regulatory requirements"
+                        : availabilityLevel === "High"
+                        ? "Meets stringent compliance standards"
+                        : "Exceeds most compliance requirements"}
+                    </p>
                   </div>
                 </div>
               </div>
