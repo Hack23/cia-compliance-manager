@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.8**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.9**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getImplementationDetails**(`component`, `level`): `object`
 
-Defined in: [data/ciaOptionsData.ts:337](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/data/ciaOptionsData.ts#L337)
+Defined in: [data/ciaOptionsData.ts:337](https://github.com/Hack23/cia-compliance-manager/blob/e1ae27dd41c4ccea8a13cdec993022242a97dce3/src/data/ciaOptionsData.ts#L337)
 
 Get the implementation details for a specific component and level
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.8**](../../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.9**](../../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecuritySummaryWidgetProps
 
-Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L21)
+Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/e1ae27dd41c4ccea8a13cdec993022242a97dce3/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L21)
 
 Props for SecuritySummaryWidget component
 
@@ -16,7 +16,7 @@ Props for SecuritySummaryWidget component
 
 > **availabilityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L25)
+Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/e1ae27dd41c4ccea8a13cdec993022242a97dce3/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L25)
 
 Selected availability level
 
@@ -26,7 +26,7 @@ Selected availability level
 
 > `optional` **className**: `string`
 
-Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:45](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L45)
+Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:45](https://github.com/Hack23/cia-compliance-manager/blob/e1ae27dd41c4ccea8a13cdec993022242a97dce3/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L45)
 
 Optional CSS class name
 
@@ -36,7 +36,7 @@ Optional CSS class name
 
 > **confidentialityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:35](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L35)
+Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:35](https://github.com/Hack23/cia-compliance-manager/blob/e1ae27dd41c4ccea8a13cdec993022242a97dce3/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L35)
 
 Selected confidentiality level
 
@@ -46,7 +46,7 @@ Selected confidentiality level
 
 > **integrityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:30](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L30)
+Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:30](https://github.com/Hack23/cia-compliance-manager/blob/e1ae27dd41c4ccea8a13cdec993022242a97dce3/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L30)
 
 Selected integrity level
 
@@ -56,7 +56,7 @@ Selected integrity level
 
 > `optional` **securityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:40](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L40)
+Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:40](https://github.com/Hack23/cia-compliance-manager/blob/e1ae27dd41c4ccea8a13cdec993022242a97dce3/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L40)
 
 Optional overall security level
 
@@ -66,6 +66,6 @@ Optional overall security level
 
 > `optional` **testId**: `string`
 
-Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:50](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L50)
+Defined in: [components/widgets/assessmentcenter/SecuritySummaryWidget.tsx:50](https://github.com/Hack23/cia-compliance-manager/blob/e1ae27dd41c4ccea8a13cdec993022242a97dce3/src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx#L50)
 
 Optional test ID
