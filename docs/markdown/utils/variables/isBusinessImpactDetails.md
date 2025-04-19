@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.8**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.10**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isBusinessImpactDetails**: (`value`) => `value is BusinessImpactDetails`
 
-Defined in: [utils/index.ts:175](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/utils/index.ts#L175)
+Defined in: [utils/index.ts:175](https://github.com/Hack23/cia-compliance-manager/blob/680c1f0618a64f5e2a4571e2b2ee23d6baf8dc9d/src/utils/index.ts#L175)
 
 Type guard for BusinessImpactDetails
 

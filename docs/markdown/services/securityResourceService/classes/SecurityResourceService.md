@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.8**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.10**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: SecurityResourceService
 
-Defined in: [services/securityResourceService.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/services/securityResourceService.ts#L16)
+Defined in: [services/securityResourceService.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/680c1f0618a64f5e2a4571e2b2ee23d6baf8dc9d/src/services/securityResourceService.ts#L16)
 
 Service for security resource recommendations
 
@@ -20,7 +20,7 @@ Service for security resource recommendations
 
 > **new SecurityResourceService**(`dataProvider`): `SecurityResourceService`
 
-Defined in: [services/securityResourceService.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/services/securityResourceService.ts#L19)
+Defined in: [services/securityResourceService.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/680c1f0618a64f5e2a4571e2b2ee23d6baf8dc9d/src/services/securityResourceService.ts#L19)
 
 #### Parameters
 
@@ -42,7 +42,7 @@ Defined in: [services/securityResourceService.ts:19](https://github.com/Hack23/c
 
 > **getSecurityResources**(`component`, `level`): `EnhancedSecurityResource`[]
 
-Defined in: [services/securityResourceService.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/services/securityResourceService.ts#L44)
+Defined in: [services/securityResourceService.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/680c1f0618a64f5e2a4571e2b2ee23d6baf8dc9d/src/services/securityResourceService.ts#L44)
 
 Get security resources based on component and level
 
@@ -66,7 +66,7 @@ Get security resources based on component and level
 
 > **getValuePoints**(`level`): `string`[]
 
-Defined in: [services/securityResourceService.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/services/securityResourceService.ts#L174)
+Defined in: [services/securityResourceService.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/680c1f0618a64f5e2a4571e2b2ee23d6baf8dc9d/src/services/securityResourceService.ts#L174)
 
 Get value points for a security level
 
