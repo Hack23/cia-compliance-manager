@@ -2,6 +2,11 @@ import roiEstimatesData from "../data/security/roiEstimatesData";
 import { SecurityLevel } from "../types/cia";
 import { ROIEstimate } from "../types/cia-services";
 import {
+  calculateImplementationCost as calculateImplCost,
+  Industry,
+  OrganizationSize,
+} from "./costCalculationUtils";
+import {
   calculateOverallSecurityLevel,
   getSecurityLevelValue,
 } from "./securityLevelUtils";
@@ -88,45 +93,53 @@ export function calculateImplementationTimeline(
 }
 
 /**
+ * @deprecated Use calculateTotalSecurityCost from costCalculationUtils.ts instead
  * Estimates implementation cost based on security levels
  * @param availabilityLevel - Availability security level
  * @param integrityLevel - Integrity security level
  * @param confidentialityLevel - Confidentiality security level
+ * @param orgSize - Optional organization size
+ * @param industry - Optional industry
  * @returns Estimated implementation cost
  */
 export function calculateImplementationCost(
   availabilityLevel: SecurityLevel,
   integrityLevel: SecurityLevel,
-  confidentialityLevel: SecurityLevel
+  confidentialityLevel: SecurityLevel,
+  orgSize: OrganizationSize = "medium",
+  industry: Industry = "general"
 ): number {
-  const availabilityValue = getSecurityLevelValue(availabilityLevel);
-  const integrityValue = getSecurityLevelValue(integrityLevel);
-  const confidentialityValue = getSecurityLevelValue(confidentialityLevel);
+  // Redirect to the canonical implementation in costCalculationUtils
+  const availCost = calculateImplCost(availabilityLevel, orgSize, industry);
+  const integCost = calculateImplCost(integrityLevel, orgSize, industry);
+  const confCost = calculateImplCost(confidentialityLevel, orgSize, industry);
 
-  const costPerLevel = 25000; // Base cost per security level point
-  return (
-    (availabilityValue + integrityValue + confidentialityValue) * costPerLevel
-  );
+  // Return total CAPEX as implementation cost
+  return availCost.capex + integCost.capex + confCost.capex;
 }
 
 /**
+ * @deprecated Use calculateTotalSecurityCost from costCalculationUtils.ts instead
  * Estimates operational cost based on security levels
  * @param availabilityLevel - Availability security level
  * @param integrityLevel - Integrity security level
  * @param confidentialityLevel - Confidentiality security level
+ * @param orgSize - Optional organization size
+ * @param industry - Optional industry
  * @returns Estimated annual operational cost
  */
 export function calculateOperationalCost(
   availabilityLevel: SecurityLevel,
   integrityLevel: SecurityLevel,
-  confidentialityLevel: SecurityLevel
+  confidentialityLevel: SecurityLevel,
+  orgSize: OrganizationSize = "medium",
+  industry: Industry = "general"
 ): number {
-  const availabilityValue = getSecurityLevelValue(availabilityLevel);
-  const integrityValue = getSecurityLevelValue(integrityLevel);
-  const confidentialityValue = getSecurityLevelValue(confidentialityLevel);
+  // Redirect to the canonical implementation in costCalculationUtils
+  const availCost = calculateImplCost(availabilityLevel, orgSize, industry);
+  const integCost = calculateImplCost(integrityLevel, orgSize, industry);
+  const confCost = calculateImplCost(confidentialityLevel, orgSize, industry);
 
-  const costPerLevel = 10000; // Base operational cost per security level point
-  return (
-    (availabilityValue + integrityValue + confidentialityValue) * costPerLevel
-  );
+  // Return total OPEX as operational cost
+  return availCost.opex + integCost.opex + confCost.opex;
 }

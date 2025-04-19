@@ -2,6 +2,8 @@ import React, { useMemo, useState } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
+import { getImplementationComplexity } from "../../../utils/riskUtils";
+import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
 import { isNullish } from "../../../utils/typeGuards";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -60,6 +62,14 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
 
   // Get CIA content service
   const { ciaContentService, error, isLoading } = useCIAContentService();
+
+  // Helper to convert complexity string to numeric value for UI
+  // Simplified using existing utility
+  const getComplexityValue = (complexity: string): number => {
+    // Convert security level value (0-4) to percentage (0-100)
+    const value = getSecurityLevelValue(complexity as SecurityLevel);
+    return value * 25;
+  };
 
   // Get technical details for each component with error handling
   const confidentialityDetails = useMemo(() => {
@@ -151,26 +161,6 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
     }
   };
 
-  // Calculate implementation complexity
-  const calculateComplexity = (
-    level: SecurityLevel
-  ): { value: number; label: string } => {
-    switch (level) {
-      case "None":
-        return { value: 0, label: "None" };
-      case "Low":
-        return { value: 25, label: "Low" };
-      case "Moderate":
-        return { value: 50, label: "Moderate" };
-      case "High":
-        return { value: 75, label: "High" };
-      case "Very High":
-        return { value: 100, label: "Very High" };
-      default:
-        return { value: 0, label: "Unknown" };
-    }
-  };
-
   // Get expertise required for implementation
   const getExpertiseRequired = (
     component: string,
@@ -210,10 +200,45 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
     return `${levelValues[level] || 0.5} FTE`;
   };
 
-  // Calculate component complexities
-  const confidentialityComplexity = calculateComplexity(confidentialityLevel);
-  const integrityComplexity = calculateComplexity(integrityLevel);
-  const availabilityComplexity = calculateComplexity(availabilityLevel);
+  // Calculate component complexities using riskUtils
+  const confidentialityComplexity = useMemo(() => {
+    const complexity = getImplementationComplexity(
+      confidentialityLevel,
+      confidentialityLevel,
+      confidentialityLevel
+    );
+
+    return {
+      value: getComplexityValue(complexity),
+      label: complexity,
+    };
+  }, [confidentialityLevel]);
+
+  const integrityComplexity = useMemo(() => {
+    const complexity = getImplementationComplexity(
+      integrityLevel,
+      integrityLevel,
+      integrityLevel
+    );
+
+    return {
+      value: getComplexityValue(complexity),
+      label: complexity,
+    };
+  }, [integrityLevel]);
+
+  const availabilityComplexity = useMemo(() => {
+    const complexity = getImplementationComplexity(
+      availabilityLevel,
+      availabilityLevel,
+      availabilityLevel
+    );
+
+    return {
+      value: getComplexityValue(complexity),
+      label: complexity,
+    };
+  }, [availabilityLevel]);
 
   return (
     <WidgetContainer

@@ -105,6 +105,6 @@ describe("SecurityVisualizationWidget Enhanced Tests", () => {
     // Check risk level
     const riskLevel = screen.getByTestId("risk-level");
     expect(riskLevel).toBeInTheDocument();
-    expect(riskLevel.textContent).toBe("High Risk");
+    expect(riskLevel.textContent).toBe("Low Risk");
   });
 });

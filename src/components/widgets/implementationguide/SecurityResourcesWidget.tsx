@@ -4,7 +4,12 @@ import { SECURITY_RESOURCES_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { SecurityResource } from "../../../types/securityResources";
-import { isNullish } from "../../../utils/typeGuards";
+import {
+  isArray,
+  isNullish,
+  isObject,
+  isString,
+} from "../../../utils/typeGuards";
 import ResourceCard from "../../common/ResourceCard";
 import WidgetContainer from "../../common/WidgetContainer";
 
@@ -80,7 +85,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [resourcesPerPage, setResourcesPerPage] = useState(limit);
 
-  // Calculate security resources with proper error handling
+  // Calculate security resources with proper error handling and type safety
   const securityResources = useMemo((): SecurityResource[] => {
     try {
       if (isNullish(ciaContentService)) {
@@ -88,25 +93,41 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       }
 
       // Get resources for each security level
-      const availabilityResources =
+      const availabilityResources = isArray(
         ciaContentService.getSecurityResources?.(
           "availability",
           availabilityLevel
-        ) || [];
-      const integrityResources =
-        ciaContentService.getSecurityResources?.("integrity", integrityLevel) ||
-        [];
-      const confidentialityResources =
+        )
+      )
+        ? ciaContentService.getSecurityResources?.(
+            "availability",
+            availabilityLevel
+          )
+        : [];
+
+      const integrityResources = isArray(
+        ciaContentService.getSecurityResources?.("integrity", integrityLevel)
+      )
+        ? ciaContentService.getSecurityResources?.("integrity", integrityLevel)
+        : [];
+
+      const confidentialityResources = isArray(
         ciaContentService.getSecurityResources?.(
           "confidentiality",
           confidentialityLevel
-        ) || [];
+        )
+      )
+        ? ciaContentService.getSecurityResources?.(
+            "confidentiality",
+            confidentialityLevel
+          )
+        : [];
 
       // Combine all resources
       const allResources = [
-        ...availabilityResources,
-        ...integrityResources,
-        ...confidentialityResources,
+        ...(availabilityResources || []),
+        ...(integrityResources || []),
+        ...(confidentialityResources || []),
       ];
 
       // Deduplicate resources by URL (or title if URL is not available)
@@ -114,7 +135,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       const resourceKeys = new Set();
 
       allResources.forEach((resource) => {
-        const key = resource.url || resource.title;
+        const key = isString(resource.url) ? resource.url : resource.title;
         if (!resourceKeys.has(key)) {
           resourceKeys.add(key);
           uniqueResources.push(resource);
@@ -123,9 +144,15 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
       // Sort by relevance score if available, otherwise by title
       return uniqueResources.sort((a, b) => {
-        // Use type assertion to access the potentially missing property
-        const aScore = (a as any).relevanceScore;
-        const bScore = (b as any).relevanceScore;
+        // Use type safe approach to access properties
+        const aScore =
+          isObject(a) && "relevanceScore" in a
+            ? (a.relevanceScore as number)
+            : 0;
+        const bScore =
+          isObject(b) && "relevanceScore" in b
+            ? (b.relevanceScore as number)
+            : 0;
 
         if (aScore !== undefined && bScore !== undefined) {
           return bScore - aScore;
@@ -331,7 +358,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
               <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg text-sm">
                 <p className="mb-2 font-medium">Selected Security Levels:</p>
                 <div className="mb-2 text-xs">
-                <div className="flex justify-between">
+                  <div className="flex justify-between">
                     <span>Confidentiality:</span>
                     <span className="font-medium">{confidentialityLevel}</span>
                   </div>
@@ -343,7 +370,6 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                     <span>Availability:</span>
                     <span className="font-medium">{availabilityLevel}</span>
                   </div>
-
                 </div>
 
                 <p className="mb-2 text-xs text-gray-600 dark:text-gray-400">
@@ -479,10 +505,8 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                 {/* Component-specific tips */}
                 {implementationGuides.length > 0 && (
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
- 
-                     {/* Confidentiality Implementation */}
-                     {implementationGuides[2] && (
+                    {/* Confidentiality Implementation */}
+                    {implementationGuides[2] && (
                       <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
                         <h4 className="text-md font-medium mb-2 text-purple-700 dark:text-purple-300 flex items-center">
                           <span className="mr-2">🔒</span>Confidentiality (
@@ -533,8 +557,8 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                       </div>
                     )}
 
-                   {/* Availability Implementation */}
-                   {implementationGuides[0] && (
+                    {/* Availability Implementation */}
+                    {implementationGuides[0] && (
                       <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
                         <h4 className="text-md font-medium mb-2 text-blue-700 dark:text-blue-300 flex items-center">
                           <span className="mr-2">⏱️</span>Availability (
@@ -558,7 +582,6 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                         </div>
                       </div>
                     )}
-
                   </div>
                 )}
 

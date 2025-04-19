@@ -6,11 +6,8 @@ import { useComplianceService } from "../../../hooks/useComplianceService";
 import { useSecurityMetricsService } from "../../../hooks/useSecurityMetricsService";
 import { SecurityLevel } from "../../../types/cia";
 import { StatusType } from "../../../types/common/StatusTypes";
-import {
-  calculateImplementationCost,
-  calculateOperationalCost,
-  calculateROIEstimate,
-} from "../../../utils/businessValueUtils";
+import { calculateROIEstimate } from "../../../utils/businessValueUtils";
+import { calculateTotalSecurityCost } from "../../../utils/costCalculationUtils";
 import {
   calculateOverallSecurityLevel,
   getRiskLevelFromSecurityLevel,
@@ -433,47 +430,26 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     }
   };
 
-  // Get implementation cost estimate
-  const getImplementationCost = (): string => {
-    try {
-      // Use the centralized utility function for consistent implementation cost
-      const totalCost = calculateImplementationCost(
-        availabilityLevel,
-        integrityLevel,
-        confidentialityLevel
-      );
+  // Get cost details using standardized cost calculation utility
+  const costDetails = useMemo(() => {
+    // Use the standard cost calculation with consistent defaults
+    return calculateTotalSecurityCost(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel,
+      "medium", // Ensure consistent org size
+      "general" // Ensure consistent industry
+    );
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-      return new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-        maximumFractionDigits: 0,
-      }).format(totalCost);
-    } catch (err) {
-      console.error("Error calculating implementation cost:", err);
-      return "N/A";
-    }
-  };
-
-  // Get operational cost estimate
-  const getOperationalCost = (): string => {
-    try {
-      // Use the centralized utility function for consistent operational cost
-      const totalCost = calculateOperationalCost(
-        availabilityLevel,
-        integrityLevel,
-        confidentialityLevel
-      );
-
-      return new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-        maximumFractionDigits: 0,
-      }).format(totalCost);
-    } catch (err) {
-      console.error("Error calculating operational cost:", err);
-      return "N/A";
-    }
-  };
+  const { totalCapex, totalOpex } = calculateTotalSecurityCost(
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel,
+    "medium", // Ensure consistent org size
+    "general" // Ensure consistent industry
+  );
+  const implementationCost = totalCapex;
 
   return (
     <WidgetContainer
@@ -803,7 +779,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                       Implementation Cost
                     </div>
                     <div className="text-xl font-bold text-blue-600 dark:text-blue-400">
-                      {getImplementationCost()}
+                      {costDetails.totalCapex}
                     </div>
                     <div className="text-xs text-gray-600 dark:text-gray-400">
                       One-time investment
@@ -816,29 +792,23 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                       Operational Cost
                     </div>
                     <div className="text-xl font-bold text-green-600 dark:text-green-400">
-                      {getOperationalCost()}
+                      {costDetails.totalOpex}
                     </div>
                     <div className="text-xs text-gray-600 dark:text-gray-400">
                       Annual expense
                     </div>
                   </div>
 
-                  {/* Personnel Requirements */}
+                  {/* Total Cost */}
                   <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <div className="text-sm font-medium mb-1">
-                      Personnel Needs
+                      Total First-Year Cost
                     </div>
                     <div className="text-xl font-bold text-purple-600 dark:text-purple-400">
-                      {(
-                        (getSecurityLevelValue(availabilityLevel) +
-                          getSecurityLevelValue(integrityLevel) +
-                          getSecurityLevelValue(confidentialityLevel)) *
-                        0.5
-                      ).toFixed(1)}{" "}
-                      FTE
+                      {costDetails.totalCost}
                     </div>
                     <div className="text-xs text-gray-600 dark:text-gray-400">
-                      Full-time equivalents
+                      Combined implementation and operational costs
                     </div>
                   </div>
                 </div>

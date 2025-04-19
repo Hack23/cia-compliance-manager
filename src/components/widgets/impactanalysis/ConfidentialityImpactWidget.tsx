@@ -3,6 +3,8 @@ import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { getDefaultPrivacyImpact } from "../../../data/ciaOptionsData";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { ComponentImpactBaseProps } from "../../../types/widgets";
+import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
+import { getDefaultComponentImpact } from "../../../utils/riskUtils";
 import { isNullish } from "../../../utils/typeGuards";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
@@ -67,20 +69,24 @@ const ConfidentialityImpactWidget: React.FC<
     }
   }, [ciaContentService, effectiveLevel]);
 
-  // Get business impact from service
+  // Get business impact from service with fallback to our utility
   const businessImpact = useMemo(() => {
     try {
       if (isNullish(ciaContentService)) {
-        return null;
+        return getDefaultComponentImpact("confidentiality", effectiveLevel);
       }
 
-      return ciaContentService.getBusinessImpact(
+      const impact = ciaContentService.getBusinessImpact(
         "confidentiality",
         effectiveLevel
       );
+
+      return (
+        impact || getDefaultComponentImpact("confidentiality", effectiveLevel)
+      );
     } catch (err) {
       console.error("Error fetching business impact details:", err);
-      return null;
+      return getDefaultComponentImpact("confidentiality", effectiveLevel);
     }
   }, [ciaContentService, effectiveLevel]);
 
@@ -128,7 +134,8 @@ const ConfidentialityImpactWidget: React.FC<
             <SecurityLevelBadge
               category="Confidentiality"
               level={effectiveLevel}
-              colorClass="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
+              // Use utility functions for consistent color handling
+              colorClass={getSecurityLevelBackgroundClass("purple")}
               textClass="text-purple-800 dark:text-purple-300"
               testId={`${testId}-confidentiality-badge`}
             />

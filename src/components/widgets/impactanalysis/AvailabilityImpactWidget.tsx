@@ -4,6 +4,9 @@ import { AVAILABILITY_IMPACT_TEST_IDS } from "../../../constants/testIds";
 import { getDefaultSLAMetrics } from "../../../data/ciaOptionsData";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
+import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
+import { getDefaultComponentImpact } from "../../../utils/riskUtils";
+import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import { isNullish } from "../../../utils/typeGuards";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
@@ -75,9 +78,10 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   className = "",
   testId = AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_PREFIX,
 }) => {
-  // Use the effective level - prefer the specific availabilityLevel if available,
-  // otherwise fall back to the legacy level prop
-  const effectiveLevel = availabilityLevel || level || "Moderate";
+  // Use security level utility for consistent normalization
+  const effectiveLevel = normalizeSecurityLevel(
+    availabilityLevel || level || "Moderate"
+  );
 
   // Get CIA content service
   const { ciaContentService, error, isLoading } = useCIAContentService();
@@ -98,18 +102,24 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
     }
   }, [ciaContentService, effectiveLevel]);
 
-  // Get business impact from service
+  // Get business impact from service with fallback to our utility
   const businessImpact = useMemo(() => {
-    if (isNullish(ciaContentService)) return null;
+    if (isNullish(ciaContentService)) {
+      return getDefaultComponentImpact("availability", effectiveLevel);
+    }
 
     try {
-      return ciaContentService.getBusinessImpact(
+      const impact = ciaContentService.getBusinessImpact(
         "availability",
         effectiveLevel
       );
+
+      return (
+        impact || getDefaultComponentImpact("availability", effectiveLevel)
+      );
     } catch (err) {
       console.error("Error getting availability business impact:", err);
-      return null;
+      return getDefaultComponentImpact("availability", effectiveLevel);
     }
   }, [ciaContentService, effectiveLevel]);
 
@@ -148,7 +158,8 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
           <SecurityLevelBadge
             category="Availability"
             level={effectiveLevel}
-            colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+            // Use utility for consistent styling
+            colorClass={getSecurityLevelBackgroundClass("blue")}
             textClass="text-blue-800 dark:text-blue-300"
             testId={`${testId}-level`}
           />
