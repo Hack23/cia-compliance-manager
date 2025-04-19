@@ -117,26 +117,32 @@ jobs:
 
       # Create coverage directory in docs
       - name: Prepare coverage directory
-        run: mkdir -p docs/coverage docs/dependencies
+        run: |
+          mkdir -p docs/coverage docs/dependencies
+          echo "Coverage directory prepared at $(date)" > docs/coverage/build-info.txt
 
       # Generate documentation bundle
-      - name: Generate Coverage
-        run: npm run docs:bundle
+      - name: Generate Documentation
+        id: generate-docs
+        run: |
+          npm run docs:bundle || (echo "::error::Documentation generation failed" && exit 1)
+          echo "Documentation generation completed at $(date)" > docs/docs-build-info.txt
 
-      - name: Merge  e2e test report
+      - name: Merge e2e test report
         run: npm run test:e2ereportmerge
 
       - name: Generate e2e html report
         run: npm run test:e2ereporthtmlall
 
-      # Only deploy on push to main, not PRs
-      - name: Deploy to GitHub Pages
+      # Always deploy documentation in prepare phase
+      - name: Deploy Documentation to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@6c2d9db40f9296374acc17b90404b6e8864128c8 # v4.7.3
         with:
           folder: docs
           target-folder: docs
           branch: main
           clean: false
+          commit-message: "docs: update documentation for ${{ needs.prepare.outputs.version || 'development' }}"
 
   build:
     name: Build Release Package
@@ -282,6 +288,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Create GitHub Release with all artifacts
       - name: Create GitHub Release
         uses: ncipollo/release-action@440c8c1cb0ed28b9f43e4d1d670870f059653174 # v1.16.0
         with:
@@ -298,16 +305,28 @@ jobs:
             artifacts/security/cia-compliance-manager-${{ needs.prepare.outputs.version }}.spdx.json.intoto.jsonl
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Remove old version of APP
-        run: rm -rf docs/index.html.html assets
+      # Selectively clean only application files
+      - name: Clean application files
+        run: |
+          # Only remove specific application files, preserving documentation
+          rm -rf docs/index.html docs/assets
+          # Log the cleanup for debugging
+          echo "Application files cleaned at $(date)" > docs/app-update-info.txt
 
-      - name: Deploy new version of APP
-        run: unzip -o artifacts/build/cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip -d docs/
+      # Deploy new application version
+      - name: Deploy new version
+        run: |
+          mkdir -p docs
+          unzip -o artifacts/build/cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip -d docs/
+          # Create version marker for traceability
+          echo "Version ${{ needs.prepare.outputs.version }} deployed at $(date)" > docs/version.txt
 
-      - name: Deploy APP To GitHub Pages
+      # Final deployment with all components
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@6c2d9db40f9296374acc17b90404b6e8864128c8 # v4.7.3
         with:
           folder: docs
           target-folder: docs
           branch: main
           clean: false
+          commit-message: "chore(release): deploy version ${{ needs.prepare.outputs.version }}"
