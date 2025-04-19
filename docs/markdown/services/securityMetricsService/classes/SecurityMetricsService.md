@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.5**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.8**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: SecurityMetricsService
 
-Defined in: [services/securityMetricsService.ts:132](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityMetricsService.ts#L132)
+Defined in: [services/securityMetricsService.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L134)
 
 Service for security metrics and measurements
 
@@ -19,7 +19,7 @@ and risk reduction calculations. 📊
 
 ## Extends
 
-- [`BaseService`](../../classes/BaseService.md)
+- [`BaseService`](../../BaseService/classes/BaseService.md)
 
 ## Constructors
 
@@ -27,7 +27,7 @@ and risk reduction calculations. 📊
 
 > **new SecurityMetricsService**(`dataProvider`): `SecurityMetricsService`
 
-Defined in: [services/securityMetricsService.ts:133](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityMetricsService.ts#L133)
+Defined in: [services/securityMetricsService.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L135)
 
 #### Parameters
 
@@ -41,15 +41,15 @@ Defined in: [services/securityMetricsService.ts:133](https://github.com/Hack23/c
 
 #### Overrides
 
-[`BaseService`](../../classes/BaseService.md).[`constructor`](../../classes/BaseService.md#constructor)
+[`BaseService`](../../BaseService/classes/BaseService.md).[`constructor`](../../BaseService/classes/BaseService.md#constructor)
 
 ## Methods
 
 ### calculateRoi()
 
-> **calculateRoi**(`securityLevel`, `implementationCost`): [`ROIMetrics`](../../../typedoc-entry/interfaces/ROIMetrics.md)
+> **calculateRoi**(`securityLevel`, `implementationCost`): [`ROIMetrics`](../../../types/interfaces/ROIMetrics.md)
 
-Defined in: [services/securityMetricsService.ts:144](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityMetricsService.ts#L144)
+Defined in: [services/securityMetricsService.ts:146](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L146)
 
 Calculate ROI metrics based on security level and implementation cost
 
@@ -57,7 +57,7 @@ Calculate ROI metrics based on security level and implementation cost
 
 ##### securityLevel
 
-[`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
 Selected security level
 
@@ -69,7 +69,7 @@ Cost of implementation in currency units
 
 #### Returns
 
-[`ROIMetrics`](../../../typedoc-entry/interfaces/ROIMetrics.md)
+[`ROIMetrics`](../../../types/interfaces/ROIMetrics.md)
 
 ROI metrics with value, percentage and description
 
@@ -79,7 +79,7 @@ ROI metrics with value, percentage and description
 
 > **calculateSecurityScore**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `number`
 
-Defined in: [services/securityMetricsService.ts:553](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityMetricsService.ts#L553)
+Defined in: [services/securityMetricsService.ts:720](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L720)
 
 Calculate security score based on security levels
 
@@ -87,19 +87,19 @@ Calculate security score based on security levels
 
 ##### availabilityLevel
 
-[`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
 Availability security level
 
 ##### integrityLevel
 
-[`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md) = `availabilityLevel`
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md) = `availabilityLevel`
 
 Integrity security level
 
 ##### confidentialityLevel
 
-[`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md) = `availabilityLevel`
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md) = `availabilityLevel`
 
 Confidentiality security level
 
@@ -115,7 +115,7 @@ Security score (0-100)
 
 > **getComponentMetrics**(`component`, `level`): [`ComponentMetrics`](../interfaces/ComponentMetrics.md)
 
-Defined in: [services/securityMetricsService.ts:289](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityMetricsService.ts#L289)
+Defined in: [services/securityMetricsService.ts:311](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L311)
 
 Get component-specific metrics
 
@@ -129,7 +129,7 @@ CIA component type
 
 ##### level
 
-[`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
 Security level
 
@@ -145,7 +145,7 @@ Component metrics
 
 > **getComponentTechnicalMetrics**(`component`, `level`): `Record`\<`string`, `string`\>
 
-Defined in: [services/securityMetricsService.ts:318](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityMetricsService.ts#L318)
+Defined in: [services/securityMetricsService.ts:340](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L340)
 
 Get technical metrics for a component
 
@@ -159,7 +159,7 @@ The CIA component
 
 ##### level
 
-[`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
 The security level
 
@@ -175,7 +175,7 @@ Component technical metrics
 
 > **getImpactMetrics**(`component`, `level`): [`ImpactMetrics`](../interfaces/ImpactMetrics.md)
 
-Defined in: [services/securityMetricsService.ts:350](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityMetricsService.ts#L350)
+Defined in: [services/securityMetricsService.ts:372](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L372)
 
 Get impact metrics for a component and level
 
@@ -189,7 +189,7 @@ CIA component type
 
 ##### level
 
-[`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
 Security level
 
@@ -205,7 +205,7 @@ Impact metrics
 
 > **getProtectionLevel**(`level`): `string`
 
-Defined in: [services/securityMetricsService.ts:455](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityMetricsService.ts#L455)
+Defined in: [services/securityMetricsService.ts:608](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L608)
 
 Get protection level based on security level
 
@@ -213,7 +213,7 @@ Get protection level based on security level
 
 ##### level
 
-[`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
 Security level
 
@@ -227,9 +227,9 @@ Protection level description
 
 ### getRiskBadgeVariant()
 
-> **getRiskBadgeVariant**(`riskLevel`): `"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"`
+> **getRiskBadgeVariant**(`riskLevel`): `"success"` \| `"info"` \| `"warning"` \| `"error"` \| `"neutral"`
 
-Defined in: [services/securityMetricsService.ts:488](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityMetricsService.ts#L488)
+Defined in: [services/securityMetricsService.ts:641](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L641)
 
 Get appropriate UI badge variant for a risk level
 
@@ -243,9 +243,33 @@ Risk level string (High, Medium, Low, etc.)
 
 #### Returns
 
-`"info"` \| `"success"` \| `"warning"` \| `"error"` \| `"neutral"`
+`"success"` \| `"info"` \| `"warning"` \| `"error"` \| `"neutral"`
 
 Badge variant name
+
+***
+
+### getRiskLevel()
+
+> **getRiskLevel**(`score`): `string`
+
+Defined in: [services/securityMetricsService.ts:681](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L681)
+
+Get risk level based on security score
+
+#### Parameters
+
+##### score
+
+`number`
+
+Security score (0-100)
+
+#### Returns
+
+`string`
+
+Risk level description
 
 ***
 
@@ -253,7 +277,7 @@ Badge variant name
 
 > **getROIEstimates**(): [`ROIEstimatesMap`](../interfaces/ROIEstimatesMap.md)
 
-Defined in: [services/securityMetricsService.ts:181](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityMetricsService.ts#L181)
+Defined in: [services/securityMetricsService.ts:183](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L183)
 
 Get ROI estimates from the data provider
 
@@ -269,7 +293,7 @@ Map of ROI estimates for different security levels
 
 > **getSecurityIcon**(`level`): `string`
 
-Defined in: [services/securityMetricsService.ts:518](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityMetricsService.ts#L518)
+Defined in: [services/securityMetricsService.ts:671](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L671)
 
 Get security icon for a security level
 
@@ -277,7 +301,7 @@ Get security icon for a security level
 
 ##### level
 
-[`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
 Security level
 
@@ -293,7 +317,7 @@ Security icon (emoji)
 
 > **getSecurityLevelDescription**(`level`): `string`
 
-Defined in: [services/securityMetricsService.ts:432](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityMetricsService.ts#L432)
+Defined in: [services/securityMetricsService.ts:585](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L585)
 
 Get security level description based on level
 
@@ -301,7 +325,7 @@ Get security level description based on level
 
 ##### level
 
-[`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
 Security level
 
@@ -315,9 +339,9 @@ Textual description of security level
 
 ### getSecurityLevelFromValue()
 
-> **getSecurityLevelFromValue**(`value`): [`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+> **getSecurityLevelFromValue**(`value`): [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [services/securityMetricsService.ts:528](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityMetricsService.ts#L528)
+Defined in: [services/securityMetricsService.ts:695](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L695)
 
 Get security level from a numeric value
 
@@ -331,7 +355,7 @@ Numeric security level value (0-4)
 
 #### Returns
 
-[`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
 Security level string representation
 
@@ -341,7 +365,7 @@ Security level string representation
 
 > **getSecurityMetrics**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): [`SecurityMetrics`](../interfaces/SecurityMetrics.md)
 
-Defined in: [services/securityMetricsService.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/services/securityMetricsService.ts#L193)
+Defined in: [services/securityMetricsService.ts:195](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/services/securityMetricsService.ts#L195)
 
 Get comprehensive security metrics for security levels
 
@@ -349,19 +373,19 @@ Get comprehensive security metrics for security levels
 
 ##### availabilityLevel
 
-[`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
 Availability security level
 
 ##### integrityLevel
 
-[`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md) = `availabilityLevel`
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md) = `availabilityLevel`
 
 Integrity security level (optional, defaults to availabilityLevel)
 
 ##### confidentialityLevel
 
-[`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md) = `availabilityLevel`
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md) = `availabilityLevel`
 
 Confidentiality security level (optional, defaults to availabilityLevel)
 

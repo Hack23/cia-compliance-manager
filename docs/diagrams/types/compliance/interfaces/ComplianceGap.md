@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.8**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ComplianceGap
 
-Defined in: [types/compliance.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/compliance.ts#L114)
+Defined in: [types/compliance.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/types/compliance.ts#L114)
 
 Interface for individual compliance gap
 
@@ -16,7 +16,7 @@ Interface for individual compliance gap
 
 > **components**: `object`
 
-Defined in: [types/compliance.ts:128](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/compliance.ts#L128)
+Defined in: [types/compliance.ts:128](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/types/compliance.ts#L128)
 
 Component-specific gap details
 
@@ -26,7 +26,7 @@ Component-specific gap details
 
 ##### availability.current
 
-> **current**: [`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+> **current**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
 ##### availability.gap
 
@@ -34,7 +34,7 @@ Component-specific gap details
 
 ##### availability.required
 
-> **required**: [`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+> **required**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
 #### confidentiality
 
@@ -42,7 +42,7 @@ Component-specific gap details
 
 ##### confidentiality.current
 
-> **current**: [`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+> **current**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
 ##### confidentiality.gap
 
@@ -50,7 +50,7 @@ Component-specific gap details
 
 ##### confidentiality.required
 
-> **required**: [`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+> **required**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
 #### integrity
 
@@ -58,7 +58,7 @@ Component-specific gap details
 
 ##### integrity.current
 
-> **current**: [`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+> **current**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
 ##### integrity.gap
 
@@ -66,7 +66,7 @@ Component-specific gap details
 
 ##### integrity.required
 
-> **required**: [`SecurityLevel`](../../../index/type-aliases/SecurityLevel.md)
+> **required**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
 ***
 
@@ -74,7 +74,7 @@ Component-specific gap details
 
 > **framework**: `string`
 
-Defined in: [types/compliance.ts:118](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/compliance.ts#L118)
+Defined in: [types/compliance.ts:118](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/types/compliance.ts#L118)
 
 Framework name
 
@@ -84,7 +84,7 @@ Framework name
 
 > **frameworkDescription**: `string`
 
-Defined in: [types/compliance.ts:123](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/compliance.ts#L123)
+Defined in: [types/compliance.ts:123](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/types/compliance.ts#L123)
 
 Framework description
 
@@ -94,6 +94,6 @@ Framework description
 
 > **recommendations**: `string`[]
 
-Defined in: [types/compliance.ts:149](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/types/compliance.ts#L149)
+Defined in: [types/compliance.ts:149](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/types/compliance.ts#L149)
 
 Recommendations for addressing this gap

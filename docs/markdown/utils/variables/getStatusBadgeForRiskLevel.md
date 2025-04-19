@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.5**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.8**](../../README.md)
 
 ***
 
@@ -6,11 +6,11 @@
 
 # Variable: getStatusBadgeForRiskLevel()
 
-> **getStatusBadgeForRiskLevel**: (`riskLevel`) => [`StatusType`](../../typedoc-entry/type-aliases/StatusType.md)
+> **getStatusBadgeForRiskLevel**: (`riskLevel`) => `StatusType`
 
-Defined in: [utils/index.ts:95](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/utils/index.ts#L95)
+Defined in: [utils/index.ts:95](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/utils/index.ts#L95)
 
-Determines the status badge variant for a risk level
+Get status badge variant for risk level
 
 ## Parameters
 
@@ -18,10 +18,10 @@ Determines the status badge variant for a risk level
 
 `string`
 
-The risk level to evaluate
+Risk level string
 
 ## Returns
 
-[`StatusType`](../../typedoc-entry/type-aliases/StatusType.md)
+`StatusType`
 
-The appropriate status badge variant
+Badge variant for UI

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../README.md)
+[**CIA Compliance Manager Diagrams v0.8.8**](../README.md)
 
 ***
 
@@ -19,11 +19,7 @@ Centralized service exports simplify imports and promote service reuse.
 
 ## Classes
 
-- [BaseService](classes/BaseService.md)
-- [BusinessImpactService](classes/BusinessImpactService.md)
-- [CIAContentService](classes/CIAContentService.md)
 - [ComplianceServiceAdapter](classes/ComplianceServiceAdapter.md)
-- [SecurityResourceService](classes/SecurityResourceService.md)
 
 ## Interfaces
 
@@ -33,19 +29,43 @@ Centralized service exports simplify imports and promote service reuse.
 
 - [defaultCIAContentService](variables/defaultCIAContentService.md)
 
-## Functions
-
-- [createBusinessImpactService](functions/createBusinessImpactService.md)
-- [createCIAContentService](functions/createCIAContentService.md)
-- [createComplianceService](functions/createComplianceService.md)
-- [createSecurityResourceService](functions/createSecurityResourceService.md)
-- [createTechnicalImplementationService](functions/createTechnicalImplementationService.md)
-- [getInformationSensitivity](functions/getInformationSensitivity.md)
-- [getRiskBadgeVariant](functions/getRiskBadgeVariant.md)
-- [getROIEstimate](functions/getROIEstimate.md)
-- [getValuePoints](functions/getValuePoints.md)
-
 ## References
+
+### BaseService
+
+Re-exports [BaseService](BaseService/classes/BaseService.md)
+
+***
+
+### BusinessImpactService
+
+Re-exports [BusinessImpactService](businessImpactService/classes/BusinessImpactService.md)
+
+***
+
+### CIAContentService
+
+Re-exports [CIAContentService](ciaContentService/classes/CIAContentService.md)
+
+***
+
+### createBusinessImpactService
+
+Re-exports [createBusinessImpactService](businessImpactService/functions/createBusinessImpactService.md)
+
+***
+
+### createCIAContentService
+
+Re-exports [createCIAContentService](ciaContentService/functions/createCIAContentService.md)
+
+***
+
+### createComplianceService
+
+Re-exports [createComplianceService](complianceService/functions/createComplianceService.md)
+
+***
 
 ### createSecurityMetricsService
 
@@ -53,6 +73,48 @@ Re-exports [createSecurityMetricsService](securityMetricsService/functions/creat
 
 ***
 
+### createSecurityResourceService
+
+Re-exports [createSecurityResourceService](securityResourceService/functions/createSecurityResourceService.md)
+
+***
+
+### createTechnicalImplementationService
+
+Re-exports [createTechnicalImplementationService](technicalImplementationService/functions/createTechnicalImplementationService.md)
+
+***
+
+### getInformationSensitivity
+
+Re-exports [getInformationSensitivity](ciaContentService/functions/getInformationSensitivity.md)
+
+***
+
+### getRiskBadgeVariant
+
+Re-exports [getRiskBadgeVariant](ciaContentService/functions/getRiskBadgeVariant.md)
+
+***
+
+### getROIEstimate
+
+Re-exports [getROIEstimate](ciaContentService/functions/getROIEstimate.md)
+
+***
+
+### getValuePoints
+
+Re-exports [getValuePoints](ciaContentService/functions/getValuePoints.md)
+
+***
+
 ### SecurityMetricsService
 
 Re-exports [SecurityMetricsService](securityMetricsService/classes/SecurityMetricsService.md)
+
+***
+
+### SecurityResourceService
+
+Re-exports [SecurityResourceService](securityResourceService/classes/SecurityResourceService.md)

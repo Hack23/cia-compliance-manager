@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.5**](../README.md)
+[**CIA Compliance Manager Diagrams v0.8.8**](../README.md)
 
 ***
 
@@ -21,12 +21,6 @@ security compliance dashboards. 🔒
 ## Interfaces
 
 - [ComplianceStatus](interfaces/ComplianceStatus.md)
-- [ComponentTechnicalDetails](interfaces/ComponentTechnicalDetails.md)
-- [SecurityProfile](interfaces/SecurityProfile.md)
-
-## Type Aliases
-
-- [SecurityLevel](type-aliases/SecurityLevel.md)
 
 ## Variables
 
@@ -40,9 +34,27 @@ Renames and re-exports [components](../components/README.md)
 
 ***
 
+### ComponentTechnicalDetails
+
+Re-exports [ComponentTechnicalDetails](../services/technicalImplementationService/interfaces/ComponentTechnicalDetails.md)
+
+***
+
 ### Hooks
 
 Renames and re-exports [hooks](../hooks/README.md)
+
+***
+
+### SecurityLevel
+
+Re-exports [SecurityLevel](../types/cia/type-aliases/SecurityLevel.md)
+
+***
+
+### SecurityProfile
+
+Re-exports [SecurityProfile](../types/cia/interfaces/SecurityProfile.md)
 
 ***
 

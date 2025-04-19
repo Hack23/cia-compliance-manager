@@ -1,84 +1,71 @@
 # CIA Compliance Manager - Architecture Diagrams
 
-This documentation provides visual representations of the CIA Compliance Manager architecture.
+This documentation provides visual representations of the CIA Compliance Manager architecture through generated diagrams that help developers understand the system structure.
 
-## Component Hierarchy
+## Core Architecture
 
-The diagrams illustrate the component hierarchy and relationships between:
-- Application components
-- UI widgets
-- Services
-- Data models
+The CIA Compliance Manager follows a component-based architecture with clear separation of concerns:
 
-## Data Flow
-
-The diagrams show how data flows through the application:
-- From user input in security level selectors
-- Through security assessment services
-- To visualization components
-
-## Type Relationships
-
-The type diagrams illustrate:
-- Core domain types for security assessment
-- Component prop interfaces
-- Service interfaces
-
-These visualizations help developers understand the application structure and make informed design decisions when extending the system.
-# CIA Compliance Manager - Architecture Diagrams
-
-This documentation provides visual representations of the CIA Compliance Manager architecture.
-
-## Component Hierarchy
-
-The diagrams illustrate the component hierarchy and relationships between:
-- Application components
-- UI widgets
-- Services
-- Data models
-
-## Data Flow
-
-The diagrams show how data flows through the application:
-- From user input in security level selectors
-- Through security assessment services
-- To visualization components
-
-## Type Relationships
-
-The type diagrams illustrate:
-- Core domain types for security assessment
-- Component prop interfaces
-- Service interfaces
-
-These visualizations help developers understand the application structure and make informed design decisions when extending the system.
-# CIA Compliance Manager - Architecture Diagrams
-
-This documentation provides visual representations of the CIA Compliance Manager architecture.
+- **Domain Model**: Security concepts represented as types and interfaces
+- **Service Layer**: Business logic encapsulated in service classes
+- **Component Layer**: UI components organized by functional areas
+- **State Management**: React hooks and context for security level state
 
 ## Component Hierarchy
 
 The diagrams illustrate the component hierarchy and relationships between:
 
-- Application components
-- UI widgets
-- Services
-- Data models
+### Application Structure
+- **Root Application**: Main entry point and context providers
+- **Widget Containers**: Layout components for organizing security widgets
+- **Domain-Specific Widgets**: Specialized components for security assessment
 
-## Data Flow
+### Component Organization
+- **Assessment Widgets**: For security level selection and overview
+- **Impact Analysis Widgets**: For visualizing CIA impact analysis
+- **Implementation Widgets**: For security implementation guidance
+- **Business Value Widgets**: For ROI and compliance analysis
 
-The diagrams show how data flows through the application:
+## Data Flow Diagrams
 
-- From user input in security level selectors
-- Through security assessment services
-- To visualization components
+The data flow diagrams illustrate how information moves through the application:
 
-## Type Relationships
+### User Input Flow
+- From security level selectors to security level context
+- Through hooks to component props
+- To visualization components and calculated metrics
 
-The type diagrams illustrate:
+### Service Interaction Patterns
+- Component-to-service communication
+- Service dependency hierarchies
+- Data transformation patterns
 
-- Core domain types for security assessment
-- Component prop interfaces
-- Service interfaces
+## Type Relationship Diagrams
 
-These visualizations help developers understand the application structure and make informed design decisions when extending the system.
+The type diagrams provide insights into the domain model:
+
+### Core Domain Types
+- **CIA Security Model**: Confidentiality, Integrity, and Availability types
+- **Business Impact Model**: How security levels affect business outcomes
+- **Compliance Model**: Framework requirements and compliance status
+
+### Component Interface Hierarchy
+- Widget prop interfaces and their relationships
+- Common prop patterns and inheritance
+- Type composition patterns
+
+## Implementation Patterns
+
+The diagrams reveal common implementation patterns:
+
+### Service Architecture
+- Base service patterns and inheritance
+- Service adapter implementations
+- Service composition patterns
+
+### Component Composition
+- Higher-order component patterns
+- Component composition strategies
+- Reusable UI building blocks
+
+These visualizations help developers understand the application structure and make informed design decisions when maintaining or extending the system.

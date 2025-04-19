@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.5**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.8**](../../README.md)
 
 ***
 
@@ -6,6 +6,6 @@
 
 # Variable: SECURITY\_LEVEL\_VALUES
 
-> **SECURITY\_LEVEL\_VALUES**: `Record`\<[`SecurityLevel`](../../index/type-aliases/SecurityLevel.md), `number`\>
+> **SECURITY\_LEVEL\_VALUES**: `Record`\<[`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md), `number`\>
 
-Defined in: [utils/index.ts:83](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/utils/index.ts#L83)
+Defined in: [utils/index.ts:83](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/utils/index.ts#L83)

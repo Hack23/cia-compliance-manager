@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.5**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.8**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **hasProperty**: (`obj`, `prop`) => `boolean`
 
-Defined in: [utils/index.ts:172](https://github.com/Hack23/cia-compliance-manager/blob/4f2006283e1cd56feb8daea1f810b2bc8c1b1d1b/src/utils/index.ts#L172)
+Defined in: [utils/index.ts:172](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/utils/index.ts#L172)
 
 Helper function to check if an object has a property
 
