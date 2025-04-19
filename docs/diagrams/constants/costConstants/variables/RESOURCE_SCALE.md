@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.10**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.11**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **RESOURCE\_SCALE**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), `number`\>
 
-Defined in: [constants/costConstants.ts:218](https://github.com/Hack23/cia-compliance-manager/blob/680c1f0618a64f5e2a4571e2b2ee23d6baf8dc9d/src/constants/costConstants.ts#L218)
+Defined in: [constants/costConstants.ts:218](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/constants/costConstants.ts#L218)
 
 Resource requirement scaling factor for each security level

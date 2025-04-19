@@ -7,6 +7,9 @@ import {
 } from "../../../data/ciaOptionsData";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { ComponentImpactBaseProps } from "../../../types/widgets";
+import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
+import { getDefaultComponentImpact } from "../../../utils/riskUtils";
+import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import { isNullish } from "../../../utils/typeGuards";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
@@ -40,9 +43,10 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
   testId = INTEGRITY_IMPACT_TEST_IDS.INTEGRITY_IMPACT_PREFIX,
   showExtendedDetails = false,
 }) => {
-  // Use the effective level - prefer the specific integrityLevel if available,
-  // otherwise fall back to the legacy level prop
-  const effectiveLevel = integrityLevel || level || "Moderate";
+  // Use the utility for consistent security level normalization
+  const effectiveLevel = normalizeSecurityLevel(
+    integrityLevel || level || "Moderate"
+  );
 
   // Get CIA content service
   const { ciaContentService, error, isLoading } = useCIAContentService();
@@ -65,17 +69,21 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
     }
   }, [ciaContentService, effectiveLevel]);
 
-  // Get business impact from service
+  // Get business impact from service with fallback to our utility
   const businessImpact = useMemo(() => {
     try {
       if (isNullish(ciaContentService) || isNullish(effectiveLevel)) {
-        return null;
+        return getDefaultComponentImpact("integrity", effectiveLevel);
       }
 
-      return ciaContentService.getBusinessImpact("integrity", effectiveLevel);
+      const impact = ciaContentService.getBusinessImpact(
+        "integrity",
+        effectiveLevel
+      );
+      return impact || getDefaultComponentImpact("integrity", effectiveLevel);
     } catch (err) {
       console.error("Error getting integrity business impact:", err);
-      return null;
+      return getDefaultComponentImpact("integrity", effectiveLevel);
     }
   }, [ciaContentService, effectiveLevel]);
 
@@ -126,7 +134,8 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
           <SecurityLevelBadge
             category="Integrity"
             level={effectiveLevel}
-            colorClass="bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
+            // Use utility for consistent styling
+            colorClass={getSecurityLevelBackgroundClass("green")}
             textClass="text-green-800 dark:text-green-300"
             testId={`${testId}-integrity-badge`}
           />

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.10**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.11**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **CHART\_TEST\_IDS**: `object`
 
-Defined in: [constants/testIds.ts:438](https://github.com/Hack23/cia-compliance-manager/blob/680c1f0618a64f5e2a4571e2b2ee23d6baf8dc9d/src/constants/testIds.ts#L438)
+Defined in: [constants/testIds.ts:438](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/constants/testIds.ts#L438)
 
 ## Type declaration
 
@@ -63,10 +63,6 @@ Defined in: [constants/testIds.ts:438](https://github.com/Hack23/cia-compliance-
 ### RADAR\_CHART
 
 > **RADAR\_CHART**: `string` = `"radar-chart"`
-
-### RADAR\_CHART\_CANVAS
-
-> **RADAR\_CHART\_CANVAS**: `string` = `"radar-chart-canvas"`
 
 ### RADAR\_CHART\_CONTAINER
 

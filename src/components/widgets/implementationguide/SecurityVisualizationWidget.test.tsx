@@ -10,8 +10,14 @@ describe("SecurityVisualizationWidget", () => {
     confidentialityLevel: "moderate" as SecurityLevel,
   };
 
-  it("renders with default props", () => {
-    render(<SecurityVisualizationWidget {...defaultProps} />);
+  it("renders with default props", async () => {
+    render(
+      <SecurityVisualizationWidget
+        availabilityLevel="Moderate"
+        integrityLevel="Moderate"
+        confidentialityLevel="Moderate"
+      />
+    );
 
     // Check that widget container is rendered
     const widget = screen.getByTestId(
@@ -22,6 +28,6 @@ describe("SecurityVisualizationWidget", () => {
     // Find the risk level element and check its content
     const riskLevel = screen.getByTestId("risk-level");
     expect(riskLevel).toBeInTheDocument();
-    expect(riskLevel.textContent).toContain("High Risk");
+    expect(riskLevel.textContent).toContain("Low Risk");
   });
 });

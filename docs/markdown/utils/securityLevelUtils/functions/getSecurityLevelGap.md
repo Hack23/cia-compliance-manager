@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.10**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.11**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelGap**(`currentLevel`, `requiredLevel`): `number`
 
-Defined in: [utils/securityLevelUtils.ts:186](https://github.com/Hack23/cia-compliance-manager/blob/680c1f0618a64f5e2a4571e2b2ee23d6baf8dc9d/src/utils/securityLevelUtils.ts#L186)
+Defined in: [utils/securityLevelUtils.ts:205](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/utils/securityLevelUtils.ts#L205)
 
 Get the gap between current and required security levels
 

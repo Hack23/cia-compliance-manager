@@ -35,22 +35,63 @@ export function getSecurityLevelColorPair(
 }
 
 /**
- * Get the appropriate CSS color class for a security level
- *
- * @param level - The security level to get the color class for
- * @returns CSS class string for the given security level
+ * Get CSS color class for security level
+ * @param level - Security level
+ * @returns CSS class string
  */
-export function getSecurityLevelColorClass(level: string): string {
-  const normalizedLevel = level.toLowerCase();
+export function getSecurityLevelColorClass(
+  level: SecurityLevel | string
+): string {
+  // Normalize the level to handle case variations
+  const normalizedLevel =
+    typeof level === "string"
+      ? level.toLowerCase().trim()
+      : String(level).toLowerCase().trim();
 
-  if (normalizedLevel === "none") return "text-red-600 dark:text-red-400";
-  if (normalizedLevel === "low") return "text-yellow-600 dark:text-yellow-400";
-  if (normalizedLevel === "moderate") return "text-blue-600 dark:text-blue-400";
-  if (normalizedLevel === "high") return "text-green-600 dark:text-green-400";
-  if (normalizedLevel === "very high")
-    return "text-purple-600 dark:text-purple-400";
+  switch (normalizedLevel) {
+    case "none":
+      return "text-red-600 dark:text-red-400";
+    case "low":
+      return "text-yellow-600 dark:text-yellow-400";
+    case "moderate":
+      return "text-blue-600 dark:text-blue-400";
+    case "high":
+      return "text-green-600 dark:text-green-400";
+    case "very high":
+      return "text-purple-600 dark:text-purple-400";
+    default:
+      return "text-gray-600 dark:text-gray-400";
+  }
+}
 
-  return "text-gray-600 dark:text-gray-400"; // Default for unknown levels
+/**
+ * Get CSS background color class for security level
+ * @param level - Security level
+ * @returns CSS background class string
+ */
+export function getSecurityLevelBackgroundClass(
+  level: SecurityLevel | string
+): string {
+  // Normalize the level to handle case variations
+  const normalizedLevel =
+    typeof level === "string"
+      ? level.toLowerCase().trim()
+      : String(level).toLowerCase().trim();
+
+  switch (normalizedLevel) {
+    case "none":
+      return "bg-red-100 dark:bg-red-900 dark:bg-opacity-20";
+    case "low":
+      return "bg-yellow-100 dark:bg-yellow-900 dark:bg-opacity-20";
+    case "moderate":
+      return "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20";
+    case "high":
+      return "bg-green-100 dark:bg-green-900 dark:bg-opacity-20";
+    case "very high":
+      return "bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20";
+    default:
+      return "bg-gray-100 dark:bg-gray-800 dark:bg-opacity-20";
+  }
 }
 
 /**
@@ -61,29 +102,6 @@ export function getSecurityLevelColorClass(level: string): string {
  */
 export function getSecurityLevelBackground(level: SecurityLevel): string {
   return getSecurityLevelColorPair(level).bg;
-}
-
-/**
- * Get the background color class for a security level
- *
- * @param level - The security level
- * @returns CSS class for the background color
- */
-export function getSecurityLevelBackgroundClass(level: string): string {
-  const normalizedLevel = level.toLowerCase();
-
-  if (normalizedLevel === "none")
-    return "bg-red-100 dark:bg-red-900 dark:bg-opacity-20";
-  if (normalizedLevel === "low")
-    return "bg-yellow-100 dark:bg-yellow-900 dark:bg-opacity-20";
-  if (normalizedLevel === "moderate")
-    return "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20";
-  if (normalizedLevel === "high")
-    return "bg-green-100 dark:bg-green-900 dark:bg-opacity-20";
-  if (normalizedLevel === "very high")
-    return "bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20";
-
-  return "bg-gray-100 dark:bg-gray-800 dark:bg-opacity-20"; // Default for unknown levels
 }
 
 /**
@@ -181,4 +199,19 @@ export function hexToRgb(hex: string): { r: number; g: number; b: number } {
   const b = parseInt(cleanHex.substring(4, 6), 16);
 
   return { r, g, b };
+}
+
+/**
+ * Get background color class for security score (0-100)
+ * Preserve the exact behavior from main branch
+ *
+ * @param score - Security score (0-100)
+ * @returns CSS class for the security score background color
+ */
+export function getSecurityScoreColorClass(score: number): string {
+  if (score <= 30) return "bg-red-600"; // Critical
+  if (score <= 50) return "bg-yellow-400"; // Medium
+  if (score <= 60) return "bg-orange-500"; // High
+  if (score <= 80) return "bg-green-500"; // Low
+  return "bg-blue-500"; // Minimal
 }

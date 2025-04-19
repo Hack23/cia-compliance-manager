@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.42% </span>
+                <span class="strong">92.64% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>122/132</span>
+                <span class='fraction'>126/136</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.37% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>19/27</span>
+                <span class='fraction'>18/27</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.42% </span>
+                <span class="strong">92.64% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>122/132</span>
+                <span class='fraction'>126/136</span>
             </div>
         
             
@@ -247,11 +247,20 @@
 <a name='L182'></a><a href='#L182'>182</a>
 <a name='L183'></a><a href='#L183'>183</a>
 <a name='L184'></a><a href='#L184'>184</a>
-<a name='L185'></a><a href='#L185'>185</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a>
+<a name='L190'></a><a href='#L190'>190</a>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -326,8 +335,12 @@
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -377,6 +390,7 @@
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">32x</span>
@@ -385,11 +399,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -436,6 +450,8 @@ import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { getDefaultPrivacyImpact } from "../../../data/ciaOptionsData";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { ComponentImpactBaseProps } from "../../../types/widgets";
+import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
+import { getDefaultComponentImpact } from "../../../utils/riskUtils";
 import { isNullish } from "../../../utils/typeGuards";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
@@ -500,20 +516,24 @@ const ConfidentialityImpactWidget: React.FC&lt;
 <span class="cstat-no" title="statement not covered" >    }</span>
   }, [ciaContentService, effectiveLevel]);
 &nbsp;
-  // Get business impact from service
+  // Get business impact from service with fallback to our utility
   const businessImpact = useMemo(() =&gt; {
     try {
       if (isNullish(ciaContentService)) {
-        return null;
+        return getDefaultComponentImpact("confidentiality", effectiveLevel);
       }
 &nbsp;
-      return ciaContentService.getBusinessImpact(
+      const impact = ciaContentService.getBusinessImpact(
         "confidentiality",
         effectiveLevel
       );
+&nbsp;
+      return (
+<span class="branch-0 cbranch-no" title="branch not covered" >        impact || getDefaultComponentImpact("confidentiality", effectiveLevel)</span>
+      );
 <span class="branch-0 cbranch-no" title="branch not covered" >    } catch (err) {</span>
 <span class="cstat-no" title="statement not covered" >      console.error("Error fetching business impact details:", err);</span>
-<span class="cstat-no" title="statement not covered" >      return null;</span>
+<span class="cstat-no" title="statement not covered" >      return getDefaultComponentImpact("confidentiality", effectiveLevel);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
   }, [ciaContentService, effectiveLevel]);
 &nbsp;
@@ -561,7 +581,8 @@ const ConfidentialityImpactWidget: React.FC&lt;
             &lt;SecurityLevelBadge
               category="Confidentiality"
               level={effectiveLevel}
-              colorClass="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
+              // Use utility functions for consistent color handling
+              colorClass={getSecurityLevelBackgroundClass("purple")}
               textClass="text-purple-800 dark:text-purple-300"
               testId={`${testId}-confidentiality-badge`}
             /&gt;
@@ -622,7 +643,7 @@ export default ConfidentialityImpactWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-19T08:48:12.016Z
+                at 2025-04-19T16:36:13.201Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

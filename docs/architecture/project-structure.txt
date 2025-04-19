@@ -205,6 +205,7 @@ src/types/widget-props.ts
 src/types/widgets.test.ts
 src/types/widgets.ts
 src/utils/api.ts
+src/utils/businessValueUtils.ts
 src/utils/colorUtils.test.ts
 src/utils/colorUtils.ts
 src/utils/costCalculationUtils.test.ts
