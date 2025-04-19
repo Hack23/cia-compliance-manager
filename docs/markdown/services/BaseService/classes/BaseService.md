@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.10**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.11**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: BaseService
 
-Defined in: [services/BaseService.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/680c1f0618a64f5e2a4571e2b2ee23d6baf8dc9d/src/services/BaseService.ts#L15)
+Defined in: [services/BaseService.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/services/BaseService.ts#L15)
 
 Base service class that provides common functionality
 for security-related services
@@ -26,7 +26,7 @@ for security-related services
 
 > **new BaseService**(`dataProvider`): `BaseService`
 
-Defined in: [services/BaseService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/680c1f0618a64f5e2a4571e2b2ee23d6baf8dc9d/src/services/BaseService.ts#L26)
+Defined in: [services/BaseService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/services/BaseService.ts#L26)
 
 Create a new service instance
 

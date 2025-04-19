@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.10**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.11**](../../README.md)
 
 ***
 
@@ -20,15 +20,21 @@
 
 ## Functions
 
+- [calculateBusinessImpactLevel](functions/calculateBusinessImpactLevel.md)
 - [calculateCombinedRiskLevel](functions/calculateCombinedRiskLevel.md)
 - [calculateRiskScore](functions/calculateRiskScore.md)
 - [createDefaultBusinessImpact](functions/createDefaultBusinessImpact.md)
+- [formatRiskLevel](functions/formatRiskLevel.md)
 - [~~getDefaultBusinessImpact~~](functions/getDefaultBusinessImpact.md)
+- [getDefaultComponentImpact](functions/getDefaultComponentImpact.md)
 - [getDefaultPrivacyImpact](functions/getDefaultPrivacyImpact.md)
 - [getDefaultSLAMetrics](functions/getDefaultSLAMetrics.md)
 - [getDefaultValidationLevel](functions/getDefaultValidationLevel.md)
 - [getFormattedRiskLevel](functions/getFormattedRiskLevel.md)
+- [getHighestImpactArea](functions/getHighestImpactArea.md)
+- [getImplementationComplexity](functions/getImplementationComplexity.md)
 - [getRiskBadgeVariant](functions/getRiskBadgeVariant.md)
+- [getRiskLevelFromImpactLevel](functions/getRiskLevelFromImpactLevel.md)
 - [getRiskLevelFromSecurityLevel](functions/getRiskLevelFromSecurityLevel.md)
 - [getRiskScoreFromSecurityLevel](functions/getRiskScoreFromSecurityLevel.md)
 - [getRiskSeverityDescription](functions/getRiskSeverityDescription.md)
