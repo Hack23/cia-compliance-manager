@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
+import { calculateROIEstimate } from "../../../utils/businessValueUtils";
 import { calculateOverallSecurityLevel } from "../../../utils/securityLevelUtils";
 import { isNullish } from "../../../utils/typeGuards";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
@@ -230,44 +231,25 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           );
 
           if (!isNullish(roi)) {
-            return roi;
+            return {
+              value: roi.value ?? "Unable to calculate", // Ensure value is a string
+              description: roi.description || "ROI estimation",
+            };
           }
         }
       }
 
-      // Fallback ROI based on security score
-      switch (securityScore) {
-        case "None":
-          return {
-            value: "0%",
-            description: "No measurable return on investment",
-          };
-        case "Low":
-          return {
-            value: "50-100%",
-            description: "Basic return, primarily through risk avoidance",
-          };
-        case "Moderate":
-          return {
-            value: "150-200%",
-            description:
-              "Balanced return through operational improvements and risk reduction",
-          };
-        case "High":
-          return {
-            value: "200-300%",
-            description:
-              "Strong return through business enablement and risk management",
-          };
-        case "Very High":
-          return {
-            value: "300-500%",
-            description:
-              "Premium return through competitive advantage and comprehensive protection",
-          };
-        default:
-          return { value: "Unknown", description: "Unable to calculate ROI" };
-      }
+      // Use the centralized utility function for consistent ROI calculation
+      const roiEstimate = calculateROIEstimate(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      );
+
+      return {
+        value: roiEstimate.value ?? "Unable to calculate", // Ensure value is a string
+        description: roiEstimate.description,
+      };
     } catch (err) {
       console.error("Error calculating ROI estimate:", err);
       return {

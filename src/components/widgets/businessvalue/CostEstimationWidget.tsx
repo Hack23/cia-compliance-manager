@@ -4,6 +4,12 @@ import { TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { useCIAOptions } from "../../../hooks/useCIAOptions";
 import { SecurityLevel } from "../../../types/cia";
+import {
+  calculateImplementationCost,
+  calculateImplementationTimeline,
+  calculateOperationalCost,
+  ImplementationTimeline,
+} from "../../../utils/businessValueUtils";
 import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
 import { isNullish } from "../../../utils/typeGuards";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -88,16 +94,6 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
     personnel: string;
   }
 
-  interface TimelinePhase {
-    name: string;
-    duration: string;
-  }
-
-  interface ImplementationTimeline {
-    total: string;
-    phases?: TimelinePhase[];
-  }
-
   // Calculate total implementation cost
   const implementationCost = useMemo((): ImplementationCost => {
     try {
@@ -119,37 +115,12 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         }
       }
 
-      // Fallback calculation using options if available
-      let total = 0;
-      if (
-        !isNullish(availabilityOptions) &&
-        !isNullish(availabilityOptions[availabilityLevel]) &&
-        !isNullish(availabilityOptions[availabilityLevel].capex)
-      ) {
-        total += availabilityOptions[availabilityLevel].capex;
-      } else {
-        total += availabilityValue * 25000;
-      }
-
-      if (
-        !isNullish(integrityOptions) &&
-        !isNullish(integrityOptions[integrityLevel]) &&
-        !isNullish(integrityOptions[integrityLevel].capex)
-      ) {
-        total += integrityOptions[integrityLevel].capex;
-      } else {
-        total += integrityValue * 25000;
-      }
-
-      if (
-        !isNullish(confidentialityOptions) &&
-        !isNullish(confidentialityOptions[confidentialityLevel]) &&
-        !isNullish(confidentialityOptions[confidentialityLevel].capex)
-      ) {
-        total += confidentialityOptions[confidentialityLevel].capex;
-      } else {
-        total += confidentialityValue * 25000;
-      }
+      // Use the centralized utility function for consistent cost calculation
+      const total = calculateImplementationCost(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      );
 
       // Simple personnel calculation
       const fte =
@@ -245,37 +216,12 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         }
       }
 
-      // Fallback calculation using options if available
-      let annual = 0;
-      if (
-        !isNullish(availabilityOptions) &&
-        !isNullish(availabilityOptions[availabilityLevel]) &&
-        !isNullish(availabilityOptions[availabilityLevel].opex)
-      ) {
-        annual += availabilityOptions[availabilityLevel].opex;
-      } else {
-        annual += availabilityValue * 10000;
-      }
-
-      if (
-        !isNullish(integrityOptions) &&
-        !isNullish(integrityOptions[integrityLevel]) &&
-        !isNullish(integrityOptions[integrityLevel].opex)
-      ) {
-        annual += integrityOptions[integrityLevel].opex;
-      } else {
-        annual += integrityValue * 10000;
-      }
-
-      if (
-        !isNullish(confidentialityOptions) &&
-        !isNullish(confidentialityOptions[confidentialityLevel]) &&
-        !isNullish(confidentialityOptions[confidentialityLevel].opex)
-      ) {
-        annual += confidentialityOptions[confidentialityLevel].opex;
-      } else {
-        annual += confidentialityValue * 10000;
-      }
+      // Use the centralized utility function for consistent operational cost calculation
+      const annual = calculateOperationalCost(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      );
 
       return { annual };
     } catch (err) {
@@ -378,34 +324,12 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         }
       }
 
-      // Fallback calculation
-      const totalWeeks = Math.round(
-        (availabilityValue + integrityValue + confidentialityValue) * 1.5
+      // Use the centralized utility function for consistent timeline calculation
+      return calculateImplementationTimeline(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
       );
-
-      return {
-        total: `${totalWeeks} weeks`,
-        phases: [
-          {
-            name: "Planning",
-            duration: `${Math.round(
-              (availabilityValue + integrityValue + confidentialityValue) * 0.3
-            )} weeks`,
-          },
-          {
-            name: "Implementation",
-            duration: `${Math.round(
-              (availabilityValue + integrityValue + confidentialityValue) * 0.8
-            )} weeks`,
-          },
-          {
-            name: "Testing & Adoption",
-            duration: `${Math.round(
-              (availabilityValue + integrityValue + confidentialityValue) * 0.4
-            )} weeks`,
-          },
-        ],
-      };
     } catch (err) {
       console.error("Error getting implementation timeline:", err);
       const totalWeeks = Math.round(
