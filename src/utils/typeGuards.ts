@@ -367,7 +367,6 @@ export function isComplianceFramework(obj: any): boolean {
   }
 
   // Validate types of optional properties if present
-  // ...existing code...
 
   return true;
 }
@@ -448,16 +447,6 @@ export function isCIADetails(value: unknown): value is CIADetails {
  * @param value - The value to check
  * @returns True if the value is a valid widget props object
  */
-// Remove this duplicate implementation
-// export function isWidgetProps(value: unknown): boolean {
-//  if (!isObject(value)) return false;
-//
-//  // Check only that it's an object with optional className and testId of type string
-//  if (hasProperty(value, "className") && !isString(value.className)) return false;
-//  if (hasProperty(value, "testId") && !isString(value.testId)) return false;
-//
-//  return true;
-// };
 
 /**
  * Type guard for checking if a value is a SecurityLevelWidgetProps
@@ -873,26 +862,6 @@ export function isValidKey(value: unknown): value is string | number | symbol {
 export function isCIAComponent(value: unknown): value is CIAComponentType {
   return isCIAComponentType(value);
 }
-
-/**
- * Type guard to check if a value is a valid SecurityLevel
- * @param value The value to check
- * @returns Whether the value is a valid SecurityLevel
- */
-// Remove this duplicate implementation
-// export const isSecurityLevel = (value: unknown): value is SecurityLevel => {
-//   if (typeof value !== "string") return false;
-//
-//   const validLevels: SecurityLevel[] = [
-//     "None",
-//     "Low",
-//     "Moderate",
-//     "High",
-//     "Very High",
-//   ];
-//
-//   return validLevels.includes(value as SecurityLevel);
-// };
 
 /**
  * Safely converts a string to a SecurityLevel, with fallback

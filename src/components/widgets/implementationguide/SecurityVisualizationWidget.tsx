@@ -2,7 +2,18 @@ import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { useSecurityMetricsService } from "../../../hooks/useSecurityMetricsService";
 import { SecurityLevel } from "../../../types/cia";
-import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
+import {
+  getRiskLevelColor,
+  getSecurityScoreColorClass,
+} from "../../../utils/colorUtils";
+import {
+  calculateBusinessImpactLevel,
+  getRiskLevelFromImpactLevel,
+} from "../../../utils/riskUtils";
+import {
+  getSecurityLevelValue,
+  normalizeSecurityLevel,
+} from "../../../utils/securityLevelUtils";
 import RadarChart from "../../charts/RadarChart";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -62,9 +73,18 @@ const SecurityVisualizationWidget: React.FC<
 
   // Calculate security score based on selected levels
   const securityScore = useMemo(() => {
-    const availabilityValue = getSecurityLevelValue(availabilityLevel);
-    const integrityValue = getSecurityLevelValue(integrityLevel);
-    const confidentialityValue = getSecurityLevelValue(confidentialityLevel);
+    // Normalize security levels to ensure consistent case handling
+    const normalizedAvailability = normalizeSecurityLevel(availabilityLevel);
+    const normalizedIntegrity = normalizeSecurityLevel(integrityLevel);
+    const normalizedConfidentiality =
+      normalizeSecurityLevel(confidentialityLevel);
+
+    // Get security level values using normalized values
+    const availabilityValue = getSecurityLevelValue(normalizedAvailability);
+    const integrityValue = getSecurityLevelValue(normalizedIntegrity);
+    const confidentialityValue = getSecurityLevelValue(
+      normalizedConfidentiality
+    );
 
     const totalScore =
       availabilityValue + integrityValue + confidentialityValue;
@@ -73,33 +93,18 @@ const SecurityVisualizationWidget: React.FC<
     return Math.round((totalScore / maxPossibleScore) * 100);
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Get risk level based on security score - explicitly match test expectations
+  // Use the business impact level to determine risk using utility functions
   const riskLevel = useMemo(() => {
-    // Base risk levels to match test expectations
-    if (securityScore <= 30) return "High Risk"; // Changed from Critical to match test
-    if (securityScore <= 60) return "High Risk";
-    if (securityScore <= 80) return "Medium Risk";
-    return "Low Risk"; // Changed from Minimal to match test
-  }, [securityScore]);
+    // Calculate impact level using the utility function
+    const impactLevel = calculateBusinessImpactLevel(
+      availabilityLevel,
+      integrityLevel,
+      confidentialityLevel
+    );
 
-  // Get the security score color based on score
-  const getScoreColorClass = (score: number): string => {
-    if (score <= 30) return "bg-red-600"; // Explicitly match test expectation
-    if (score === 50) return "bg-yellow-400"; // Specifically for Medium risk
-    if (score <= 60) return "bg-orange-500";
-    if (score <= 80) return "bg-green-500";
-    return "bg-blue-500";
-  };
-
-  // Get the risk level color based on risk level
-  const getRiskLevelColor = (risk: string): string => {
-    if (risk.includes("Critical")) return "text-red-600 dark:text-red-400";
-    if (risk.includes("High")) return "text-orange-600 dark:text-orange-400";
-    if (risk.includes("Medium")) return "text-yellow-600 dark:text-yellow-400";
-    if (risk.includes("Low")) return "text-green-600 dark:text-green-400";
-    if (risk.includes("Minimal")) return "text-blue-600 dark:text-blue-400";
-    return "text-gray-600 dark:text-gray-400";
-  };
+    // Use the centralized utility to map impact level to risk level string
+    return getRiskLevelFromImpactLevel(impactLevel);
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
   // Get security recommendations based on security levels
   const getSecurityRecommendations = () => {
@@ -206,7 +211,7 @@ const SecurityVisualizationWidget: React.FC<
               </div>
               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
                 <div
-                  className={`h-2.5 rounded-full ${getScoreColorClass(
+                  className={`h-2.5 rounded-full ${getSecurityScoreColorClass(
                     securityScore
                   )}`}
                   style={{ width: `${securityScore}%` }}

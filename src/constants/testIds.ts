@@ -436,9 +436,10 @@ export const FRAMEWORK_TEST_IDS = {
 // ---------------------------------------------------------------
 
 export const CHART_TEST_IDS = {
-  // Radar chart
   RADAR_CHART: "radar-chart",
-  RADAR_CHART_CANVAS: "radar-chart-canvas",
+  RADAR_AVAILABILITY_VALUE: "radar-availability-value",
+  RADAR_INTEGRITY_VALUE: "radar-integrity-value",
+  RADAR_CONFIDENTIALITY_VALUE: "radar-confidentiality-value",
   SECURITY_SCORE_OVERLAY: "security-score-overlay",
   SECURITY_SCORE_SUMMARY: "security-score-summary",
 
@@ -461,9 +462,6 @@ export const CHART_TEST_IDS = {
   CHART_TITLE: "chart-title",
   CHART_SUBTITLE: "chart-subtitle",
   RADAR_CHART_CONTAINER: "radar-chart-container",
-  RADAR_AVAILABILITY_VALUE: "radar-availability-value",
-  RADAR_INTEGRITY_VALUE: "radar-integrity-value",
-  RADAR_CONFIDENTIALITY_VALUE: "radar-confidentiality-value",
 };
 
 // ---------------------------------------------------------------

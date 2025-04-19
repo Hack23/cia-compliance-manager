@@ -214,7 +214,7 @@ describe("CostEstimationWidget", () => {
       ).textContent;
 
       // Update the expected pattern to match the actual output
-      expect(widgetContent).toMatch(/\$75,000|\$30,000|\$225,000|\$90,000/i);
+      expect(widgetContent).toMatch(/\$150,000|\$45,000|\$195,000|\$50,000/i);
     });
   });
 

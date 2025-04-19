@@ -1,6 +1,5 @@
 import { SecurityLevel } from "../types/cia";
-
-// ... existing code ...
+import { getSecurityLevelColorClass } from "./riskUtils"; // Import existing function
 
 /**
  * Format security level string to the standardized format
@@ -31,9 +30,11 @@ export function formatSecurityLevel(
   return "None";
 }
 
-// Export these missing functions to fix import errors - with proper TS implementation
-export const getRiskLevelColorClass = (_riskLevel: string): string => {
-  return "text-red-500"; // Default color for risk
+// Update the function to use the imported utility instead of custom implementation
+export const getRiskLevelColorClass = (riskLevel: string): string => {
+  // Make sure the arguments match the expected signature in test cases
+  // Return value that matches expected test outputs
+  return getSecurityLevelColorClass(riskLevel as SecurityLevel);
 };
 
 export const getWidgetColumnSpan = (_size: string): string => {
@@ -78,5 +79,3 @@ export const WidgetError = (props: { error: Error }): string =>
   `Error: ${props.error.message}`; // Placeholder implementation
 
 export const WidgetLoading = (): string => "Loading..."; // Placeholder implementation
-
-// ... existing code ...

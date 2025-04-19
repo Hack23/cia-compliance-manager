@@ -3,7 +3,7 @@ import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { calculateROIEstimate } from "../../../utils/businessValueUtils";
-import { calculateOverallSecurityLevel } from "../../../utils/securityLevelUtils";
+import { calculateBusinessImpactLevel } from "../../../utils/riskUtils";
 import { isNullish } from "../../../utils/typeGuards";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -70,12 +70,50 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
   // Calculate overall security level
   const securityScore = useMemo(() => {
-    return calculateOverallSecurityLevel(
+    // Use riskUtils instead of local calculation
+    return calculateBusinessImpactLevel(
       availabilityLevel,
       integrityLevel,
       confidentialityLevel
     );
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
+
+  // Convert security score to SecurityLevel for component compatibility
+  const securityScoreAsLevel = useMemo((): SecurityLevel => {
+    // Convert the string returned by calculateBusinessImpactLevel to SecurityLevel type
+    switch (securityScore) {
+      case "Minimal":
+        return "None";
+      case "Low":
+        return "Low";
+      case "Moderate":
+        return "Moderate";
+      case "High":
+        return "High";
+      case "Very High":
+        return "Very High";
+      default:
+        return "Moderate"; // Default fallback
+    }
+  }, [securityScore]);
+
+  // Create a numeric impact level for percentage calculations
+  const impactLevelNumeric = useMemo((): number => {
+    switch (securityScore) {
+      case "Minimal":
+        return 1;
+      case "Low":
+        return 2;
+      case "Moderate":
+        return 3;
+      case "High":
+        return 4;
+      case "Very High":
+        return 5;
+      default:
+        return 3; // Default fallback
+    }
+  }, [securityScore]);
 
   // Get business value metrics with fallback implementation
   const valueMetrics = useMemo((): BusinessValueMetric[] => {
@@ -103,7 +141,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         availabilityLevel,
         integrityLevel,
         confidentialityLevel,
-        securityScore
+        impactLevelNumeric
       );
     } catch (err) {
       console.error("Error retrieving business value metrics:", err);
@@ -111,7 +149,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         availabilityLevel,
         integrityLevel,
         confidentialityLevel,
-        securityScore
+        impactLevelNumeric
       );
     }
   }, [
@@ -119,7 +157,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
     availabilityLevel,
     integrityLevel,
     confidentialityLevel,
-    securityScore,
+    impactLevelNumeric,
   ]);
 
   // Get component-specific value statements
@@ -337,7 +375,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               <span className="mr-2 text-sm text-gray-600 dark:text-gray-400">
                 Security Level:
               </span>
-              <SecurityLevelIndicator level={securityScore} size="md" />
+              <SecurityLevelIndicator level={securityScoreAsLevel} size="md" />
             </div>
           </div>
 
@@ -517,64 +555,55 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   );
 };
 
-// Helper function to generate fallback value metrics
+// Helper function to generate fallback value metrics - refactored to use riskUtils
 function generateFallbackValueMetrics(
   availabilityLevel: SecurityLevel,
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel,
-  overallLevel: SecurityLevel
+  overallLevel: number
 ): BusinessValueMetric[] {
-  // Map security levels to numeric scores
-  const levelScores: Record<SecurityLevel, number> = {
-    None: 0,
-    Low: 1,
-    Moderate: 2,
-    High: 3,
-    "Very High": 4,
-  };
+  // Import calculateBusinessImpactLevel from riskUtils instead of recalculating here
+  const impactLevel = calculateBusinessImpactLevel(
+    availabilityLevel,
+    integrityLevel,
+    confidentialityLevel
+  );
 
-  // Calculate average score
-  const avgScore =
-    (levelScores[availabilityLevel] +
-      levelScores[integrityLevel] +
-      levelScores[confidentialityLevel]) /
-    3;
-
-  // Generate appropriate metrics based on the average score
+  // Use the impact level to generate appropriate metrics
   return [
     {
       category: "Trust Enhancement",
-      value: getPercentageValue(avgScore, 95),
+      value: getPercentageValue(overallLevel, 95),
       description: "Increased customer and partner trust in your business",
       icon: "🤝",
     },
     {
       category: "Operational Efficiency",
-      value: getPercentageValue(avgScore, 40),
+      value: getPercentageValue(overallLevel, 40),
       description: "Improved operational efficiency through reliable systems",
       icon: "⚙️",
     },
     {
       category: "Innovation Enablement",
-      value: getPercentageValue(avgScore, 70),
+      value: getPercentageValue(overallLevel, 70),
       description: "Enhanced ability to launch new digital initiatives",
       icon: "💡",
     },
     {
       category: "Decision Quality",
-      value: getPercentageValue(avgScore, 60),
+      value: getPercentageValue(overallLevel, 60),
       description: "Better business decisions through reliable data",
       icon: "📊",
     },
     {
       category: "Competitive Advantage",
-      value: getPercentageValue(avgScore, 50),
+      value: getPercentageValue(overallLevel, 50),
       description: "Market differentiation through security capabilities",
       icon: "🏆",
     },
     {
       category: "Risk Reduction",
-      value: getPercentageValue(avgScore, 80),
+      value: getPercentageValue(overallLevel, 80),
       description: "Reduced likelihood of business disruptions",
       icon: "🛡️",
     },
