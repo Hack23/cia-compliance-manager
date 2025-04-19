@@ -8,7 +8,7 @@
 
 > **getSecurityLevelFromValue**(`value`): [`SecurityLevel`](../../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.utility.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/types/cia.utility.ts#L42)
+Defined in: [types/cia.utility.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/types/cia.utility.ts#L42)
 
 Get security level based on numeric value
 

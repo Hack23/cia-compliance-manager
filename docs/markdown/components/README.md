@@ -61,13 +61,11 @@ Centralized component exports simplify imports and promote component reuse.
 - [Tooltip](variables/Tooltip.md)
 - [ValueCreationWidget](variables/ValueCreationWidget.md)
 - [WidgetActions](variables/WidgetActions.md)
-- [WidgetContainer](variables/WidgetContainer.md)
 - [WidgetHeader](variables/WidgetHeader.md)
 
 ## Functions
 
 - [ChartSecurityRiskScore](functions/ChartSecurityRiskScore.md)
-- [KeyValuePair](functions/KeyValuePair.md)
 
 ## References
 
@@ -86,6 +84,12 @@ Re-exports [BusinessRiskDisplayProps](../types/interfaces/BusinessRiskDisplayPro
 ### CIAImpactCardProps
 
 Re-exports [CIAImpactCardProps](../types/interfaces/CIAImpactCardProps.md)
+
+***
+
+### KeyValuePair
+
+Re-exports [KeyValuePair](common/KeyValuePair/functions/KeyValuePair.md)
 
 ***
 
@@ -110,6 +114,12 @@ Re-exports [RiskAssessmentProps](../types/interfaces/RiskAssessmentProps.md)
 ### StatusBadgeProps
 
 Re-exports [StatusBadgeProps](../types/interfaces/StatusBadgeProps.md)
+
+***
+
+### WidgetContainer
+
+Re-exports [WidgetContainer](common/WidgetContainer/variables/WidgetContainer.md)
 
 ***
 

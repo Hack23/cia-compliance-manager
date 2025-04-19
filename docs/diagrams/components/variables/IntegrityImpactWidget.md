@@ -6,9 +6,9 @@
 
 # Variable: IntegrityImpactWidget
 
-> `const` **IntegrityImpactWidget**: `React.FC`\<`IntegrityImpactWidgetProps`\>
+> `const` **IntegrityImpactWidget**: `React.FC`\<[`IntegrityImpactWidgetProps`](../widgets/impactanalysis/IntegrityImpactWidget/interfaces/IntegrityImpactWidgetProps.md)\>
 
-Defined in: [components/widgets/impactanalysis/IntegrityImpactWidget.tsx:34](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/components/widgets/impactanalysis/IntegrityImpactWidget.tsx#L34)
+Defined in: [components/widgets/impactanalysis/IntegrityImpactWidget.tsx:34](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/components/widgets/impactanalysis/IntegrityImpactWidget.tsx#L34)
 
 Widget that displays the impact of selected integrity level
 

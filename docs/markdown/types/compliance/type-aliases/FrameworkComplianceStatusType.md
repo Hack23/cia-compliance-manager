@@ -8,6 +8,6 @@
 
 > **FrameworkComplianceStatusType** = `"compliant"` \| `"partially-compliant"` \| `"non-compliant"`
 
-Defined in: [types/compliance.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/types/compliance.ts#L18)
+Defined in: [types/compliance.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/types/compliance.ts#L18)
 
 Status of framework compliance

@@ -8,7 +8,7 @@
 
 > `const` **Selection**: `React.FC`\<`SelectionProps`\>
 
-Defined in: [components/securitylevel/Selection.tsx:32](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/components/securitylevel/Selection.tsx#L32)
+Defined in: [components/securitylevel/Selection.tsx:32](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/components/securitylevel/Selection.tsx#L32)
 
 Component for selecting security levels with consistent styling
 

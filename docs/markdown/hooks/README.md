@@ -17,7 +17,14 @@ enabling consistent behavior across the application. 🔄
 ## Technical Perspective
 Centralized hook exports simplify imports and promote hook reuse.
 
-## Functions
+## References
 
-- [useCIAContentService](functions/useCIAContentService.md)
-- [useCIAOptions](functions/useCIAOptions.md)
+### useCIAContentService
+
+Re-exports [useCIAContentService](useCIAContentService/functions/useCIAContentService.md)
+
+***
+
+### useCIAOptions
+
+Re-exports [useCIAOptions](useCIAOptions/functions/useCIAOptions.md)

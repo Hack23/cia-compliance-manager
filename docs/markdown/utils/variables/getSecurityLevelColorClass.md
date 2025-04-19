@@ -8,7 +8,7 @@
 
 > **getSecurityLevelColorClass**: (`level`) => `string`
 
-Defined in: [utils/index.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/utils/index.ts#L28)
+Defined in: [utils/index.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/utils/index.ts#L28)
 
 Get the appropriate CSS color class for a security level
 

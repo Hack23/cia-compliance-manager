@@ -6,9 +6,9 @@
 
 # Variable: ConfidentialityImpactWidget
 
-> `const` **ConfidentialityImpactWidget**: `React.FC`\<`ConfidentialityImpactWidgetProps`\>
+> `const` **ConfidentialityImpactWidget**: `React.FC`\<[`ConfidentialityImpactWidgetProps`](../widgets/impactanalysis/ConfidentialityImpactWidget/interfaces/ConfidentialityImpactWidgetProps.md)\>
 
-Defined in: [components/widgets/impactanalysis/ConfidentialityImpactWidget.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/88094f2c4c350fd10a1e440c3eab70aedd819944/src/components/widgets/impactanalysis/ConfidentialityImpactWidget.tsx#L29)
+Defined in: [components/widgets/impactanalysis/ConfidentialityImpactWidget.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/283c1f3ddf6c7084b20c21176cda3bc5166ffcb9/src/components/widgets/impactanalysis/ConfidentialityImpactWidget.tsx#L29)
 
 Displays confidentiality impact details for the selected security level
 

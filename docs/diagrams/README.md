@@ -6,14 +6,47 @@
 
 This documentation provides visual representations of the CIA Compliance Manager architecture through generated diagrams that help developers understand the system structure.
 
-## Core Architecture
+## About the Diagrams
 
-The CIA Compliance Manager follows a component-based architecture with clear separation of concerns:
+These diagrams are automatically generated from the TypeScript codebase using TypeDoc and Mermaid. They provide insights into:
 
-- **Domain Model**: Security concepts represented as types and interfaces
-- **Service Layer**: Business logic encapsulated in service classes
-- **Component Layer**: UI components organized by functional areas
-- **State Management**: React hooks and context for security level state
+- Class relationships and inheritance hierarchies
+- Component dependencies and composition patterns
+- State and data flow
+- Type relationships and interfaces
+
+## Core Domain Model
+
+At the heart of CIA Compliance Manager is the CIA Triad model, represented in these key relationships:
+
+```mermaid
+classDiagram
+    class SecurityProfile {
+        +confidentiality: SecurityLevel
+        +integrity: SecurityLevel
+        +availability: SecurityLevel
+        +getOverallScore(): number
+    }
+    
+    SecurityLevel --|> SecurityProfile
+    SecurityProfile --> BusinessImpact
+    SecurityProfile --> ComplianceStatus
+    SecurityProfile --> RiskAssessment
+    
+    class BusinessImpact {
+        +confidentialityImpact: ImpactLevel
+        +integrityImpact: ImpactLevel
+        +availabilityImpact: ImpactLevel
+        +overallImpact: ImpactLevel
+    }
+    
+    class ComplianceStatus {
+        +isCompliant: boolean
+        +complianceScore: number
+        +gaps: ComplianceGap[]
+        +recommendations: string[]
+    }
+```
 
 ## Component Hierarchy
 
@@ -29,6 +62,24 @@ The diagrams illustrate the component hierarchy and relationships between:
 - **Impact Analysis Widgets**: For visualizing CIA impact analysis
 - **Implementation Widgets**: For security implementation guidance
 - **Business Value Widgets**: For ROI and compliance analysis
+
+## Service Architecture 
+
+The service layer follows a well-defined hierarchy:
+
+```mermaid
+classDiagram
+    class BaseService {
+        #logger: Logger
+        +initialize(): void
+    }
+    
+    BaseService <|-- ComplianceService
+    BaseService <|-- SecurityMetricsService
+    BaseService <|-- BusinessImpactService
+    BaseService <|-- CIAContentService
+    BaseService <|-- TechnicalImplementationService
+```
 
 ## Data Flow Diagrams
 
@@ -71,5 +122,12 @@ The diagrams reveal common implementation patterns:
 - Higher-order component patterns
 - Component composition strategies
 - Reusable UI building blocks
+
+## How to Use These Diagrams
+
+- **Architectural Understanding**: Use these diagrams to understand the overall structure
+- **Component Selection**: Identify which components to use for specific requirements
+- **Extension Planning**: Plan how to extend the system by understanding relationships
+- **Dependency Analysis**: Identify component and service dependencies
 
 These visualizations help developers understand the application structure and make informed design decisions when maintaining or extending the system.

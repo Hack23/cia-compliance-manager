@@ -14,7 +14,6 @@ to ensure they're properly accessible throughout the application.
 ## Variables
 
 - [asSecurityLevel](variables/asSecurityLevel.md)
-- [BUSINESS\_IMPACT\_CATEGORIES](variables/BUSINESS_IMPACT_CATEGORIES.md)
 - [calculateCombinedRiskLevel](variables/calculateCombinedRiskLevel.md)
 - [calculateImplementationCost](variables/calculateImplementationCost.md)
 - [calculateOverallSecurityLevel](variables/calculateOverallSecurityLevel.md)
@@ -90,7 +89,6 @@ to ensure they're properly accessible throughout the application.
 - [meetsComplianceRequirements](variables/meetsComplianceRequirements.md)
 - [normalizeSecurityLevel](variables/normalizeSecurityLevel.md)
 - [parseRiskLevel](variables/parseRiskLevel.md)
-- [RISK\_LEVELS](variables/RISK_LEVELS.md)
 - [RiskLevelKeyValue](variables/RiskLevelKeyValue.md)
 - [safeAccess](variables/safeAccess.md)
 - [safeNumberConversion](variables/safeNumberConversion.md)
@@ -113,6 +111,18 @@ to ensure they're properly accessible throughout the application.
 
 ## References
 
+### BUSINESS\_IMPACT\_CATEGORIES
+
+Re-exports [BUSINESS_IMPACT_CATEGORIES](../constants/riskConstants/variables/BUSINESS_IMPACT_CATEGORIES.md)
+
+***
+
 ### calculateRiskLevel
 
 Re-exports [calculateRiskLevel](../types/namespaces/CIAUtilities/functions/calculateRiskLevel.md)
+
+***
+
+### RISK\_LEVELS
+
+Re-exports [RISK_LEVELS](../constants/riskConstants/variables/RISK_LEVELS.md)
