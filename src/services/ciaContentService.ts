@@ -298,8 +298,8 @@ export class CIAContentService extends BaseService {
    * Get ROI estimate for a security level
    */
   public getROIEstimate(level: SecurityLevel): ROIEstimate {
+    // Fix: consistently handle None and undefined security levels
     if (!level || level === "None") {
-      // Fix: correctly handle None and undefined security levels
       return {
         value: "0%",
         returnRate: "0%",
@@ -487,11 +487,11 @@ export class CIAContentService extends BaseService {
     level: SecurityLevel,
     implementationCost: number
   ): ROIMetrics {
-    // Fix: Handle None security level and zero/negative costs
+    // Fix: Handle None security level and zero/negative costs consistently
     if (!level || level === "None" || implementationCost <= 0) {
       return {
         value: "$0",
-        percentage: level === "None" ? "0%" : this.getROIEstimate(level)?.returnRate || "0%",
+        percentage: "0%", // Always return 0% for None or zero/negative costs
         description: getROIDescription(level || "None"),
       };
     }
@@ -1318,15 +1318,14 @@ export const getRiskBadgeVariant = (
 };
 
 export const getROIEstimate = (level: SecurityLevel): ROIEstimate => {
-  // Fix: correctly handle None and undefined security levels
   if (!level || level === "None") {
-    return { 
-      returnRate: "0%", 
-      description: "No ROI", 
-      value: "0%" 
+    return {
+      returnRate: "0%",
+      description: "No ROI",
+      value: "0%",
     };
   }
-  
+
   const estimates = {
     None: { returnRate: "0%", description: "No ROI", value: "0%" },
     Low: { returnRate: "50%", description: "Low ROI", value: "50%" },
@@ -1352,7 +1351,7 @@ export const getValuePoints = (level: SecurityLevel): string[] => {
     return [
       "No security value",
       "Suitable only for non-sensitive public information",
-      "High vulnerability to security incidents"
+      "High vulnerability to security incidents",
     ];
   }
 
