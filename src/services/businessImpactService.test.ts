@@ -225,3 +225,54 @@ describe("BusinessImpactService", () => {
     });
   });
 });
+
+describe("BusinessImpactService additional methods", () => {
+  let service: BusinessImpactService;
+
+  beforeEach(() => {
+    service = new BusinessImpactService(createTestDataProvider());
+  });
+
+  it("getRiskLevelForSecurityLevel returns correct risk levels", () => {
+    // Testing the private method using TypeScript casting
+    const instance = service as any;
+    
+    expect(instance.getRiskLevelForSecurityLevel("None")).toBe("Critical Risk");
+    expect(instance.getRiskLevelForSecurityLevel("Low")).toBe("High Risk");
+    expect(instance.getRiskLevelForSecurityLevel("Moderate")).toBe("Medium Risk");
+    expect(instance.getRiskLevelForSecurityLevel("High")).toBe("Low Risk");
+    expect(instance.getRiskLevelForSecurityLevel("Very High")).toBe("Minimal Risk");
+  });
+
+  it("getDefaultRevenueLoss returns appropriate values based on security level", () => {
+    const instance = service as any;
+    
+    expect(instance.getDefaultRevenueLoss("None")).toContain(">20%");
+    expect(instance.getDefaultRevenueLoss("Low")).toContain("10-20%");
+    expect(instance.getDefaultRevenueLoss("Moderate")).toContain("5-10%");
+    expect(instance.getDefaultRevenueLoss("High")).toContain("1-5%");
+    expect(instance.getDefaultRevenueLoss("Very High")).toContain("<1%");
+  });
+
+  it("getDefaultRecoveryTime returns appropriate times based on security level", () => {
+    const instance = service as any;
+    
+    expect(instance.getDefaultRecoveryTime("None")).toBe("Unpredictable");
+    expect(instance.getDefaultRecoveryTime("Low")).toBe("24-48 hours");
+    expect(instance.getDefaultRecoveryTime("Moderate")).toBe("4-8 hours");
+    expect(instance.getDefaultRecoveryTime("High")).toBe("1 hour");
+    expect(instance.getDefaultRecoveryTime("Very High")).toBe("<15 minutes");
+  });
+
+  it("createDefaultBusinessImpact generates proper impact structure", () => {
+    const instance = service as any;
+    
+    const impact = instance.createDefaultBusinessImpact("availability", "Moderate");
+    expect(impact).toBeDefined();
+    expect(impact).toHaveProperty("summary");
+    expect(impact).toHaveProperty("financial");
+    expect(impact).toHaveProperty("operational");
+    expect(impact).toHaveProperty("reputational");
+    expect(impact.financial.riskLevel).toBe("Medium Risk");
+  });
+});

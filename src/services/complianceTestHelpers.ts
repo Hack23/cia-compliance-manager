@@ -1,11 +1,20 @@
-import { COMPLIANCE_FRAMEWORKS } from "../constants/complianceConstants";
 import { SecurityLevel } from "../types/cia";
 import { CIADataProvider } from "../types/cia-services";
-import { ComplianceStatusDetails } from "../types/compliance";
 import {
   ComplianceGapAnalysis,
-  ComplianceServiceAdapter,
-} from "./ComplianceServiceAdapter";
+  ComplianceStatusDetails,
+} from "../types/compliance";
+import { ComplianceServiceAdapter } from "./ComplianceServiceAdapter";
+
+// Add the missing COMPLIANCE_FRAMEWORKS constant
+const COMPLIANCE_FRAMEWORKS = {
+  ISO_27001: "ISO 27001",
+  NIST_CSF: "NIST CSF",
+  GDPR: "GDPR",
+  HIPAA: "HIPAA",
+  PCI_DSS: "PCI DSS",
+  SOC2: "SOC2",
+};
 
 /**
  * Test helper for compliance service functions
@@ -84,30 +93,86 @@ export function createMockComplianceStatus(
 }
 
 /**
- * Generate mock compliance gap analysis for testing
- *
- * @param isCompliant - Whether the analysis should show compliance
- * @param overrides - Optional overrides for the mock data
- * @returns Mock compliance gap analysis
+ * Create mock gap analysis for testing
+ * @param isCompliant Whether the analysis should represent a compliant state
  */
 export function createMockGapAnalysis(
-  isCompliant: boolean,
-  overrides?: Partial<ComplianceGapAnalysis>
+  isCompliant: boolean
 ): ComplianceGapAnalysis {
   if (isCompliant) {
     return {
       isCompliant: true,
+      overallStatus: "Compliant with all frameworks",
+      complianceScore: 100,
       gaps: [],
-      recommendations: ["Maintain current controls", "Regular reviews"],
-      ...overrides,
+      recommendations: [
+        "Maintain current security controls",
+        "Conduct regular security assessments",
+      ],
     };
   }
 
   return {
     isCompliant: false,
-    gaps: ["Insufficient security controls", "Missing documentation"],
-    recommendations: ["Implement required controls", "Document procedures"],
-    ...overrides,
+    overallStatus: "Non-compliant with some frameworks",
+    complianceScore: 60,
+    recommendations: [
+      "Implement additional security controls",
+      "Address identified compliance gaps",
+      "Review compliance requirements",
+    ],
+    gaps: [
+      {
+        framework: "GDPR",
+        frameworkDescription: "General Data Protection Regulation",
+        components: {
+          availability: {
+            current: "Moderate" as SecurityLevel,
+            required: "High" as SecurityLevel,
+            gap: -1,
+          },
+          integrity: {
+            current: "Moderate" as SecurityLevel,
+            required: "High" as SecurityLevel,
+            gap: -1,
+          },
+          confidentiality: {
+            current: "Moderate" as SecurityLevel,
+            required: "High" as SecurityLevel,
+            gap: -1,
+          },
+        },
+        recommendations: [
+          "Improve data protection controls",
+          "Implement privacy by design",
+        ],
+      },
+      {
+        framework: "PCI DSS",
+        frameworkDescription: "Payment Card Industry Data Security Standard",
+        components: {
+          availability: {
+            current: "Low" as SecurityLevel,
+            required: "High" as SecurityLevel,
+            gap: -2,
+          },
+          integrity: {
+            current: "Moderate" as SecurityLevel,
+            required: "High" as SecurityLevel,
+            gap: -1,
+          },
+          confidentiality: {
+            current: "Moderate" as SecurityLevel,
+            required: "High" as SecurityLevel,
+            gap: -1,
+          },
+        },
+        recommendations: [
+          "Implement encryption for cardholder data",
+          "Establish network segmentation",
+        ],
+      },
+    ],
   };
 }
 
@@ -343,4 +408,72 @@ export function getComplianceStatusForTest(
     integrityLevel,
     confidentialityLevel
   );
+}
+
+/**
+ * Get a mock compliance gap analysis for testing
+ */
+export function getMockComplianceGapAnalysis(): ComplianceGapAnalysis {
+  return {
+    isCompliant: false,
+    overallStatus: "Non-compliant with specified framework",
+    complianceScore: 60,
+    recommendations: [
+      "Implement encryption for sensitive data",
+      "Establish access controls",
+      "Create audit procedures",
+    ],
+    gaps: [
+      {
+        framework: "GDPR",
+        frameworkDescription: "General Data Protection Regulation",
+        components: {
+          availability: {
+            current: "Moderate" as SecurityLevel,
+            required: "High" as SecurityLevel,
+            gap: -1,
+          },
+          integrity: {
+            current: "Moderate" as SecurityLevel,
+            required: "High" as SecurityLevel,
+            gap: -1,
+          },
+          confidentiality: {
+            current: "Moderate" as SecurityLevel,
+            required: "High" as SecurityLevel,
+            gap: -1,
+          },
+        },
+        recommendations: [
+          "Improve data protection controls",
+          "Implement privacy by design",
+        ],
+      },
+      {
+        framework: "PCI DSS",
+        frameworkDescription: "Payment Card Industry Data Security Standard",
+        components: {
+          availability: {
+            current: "Low" as SecurityLevel,
+            required: "High" as SecurityLevel,
+            gap: -2,
+          },
+          integrity: {
+            current: "Moderate" as SecurityLevel,
+            required: "High" as SecurityLevel,
+            gap: -1,
+          },
+          confidentiality: {
+            current: "Moderate" as SecurityLevel,
+            required: "High" as SecurityLevel,
+            gap: -1,
+          },
+        },
+        recommendations: [
+          "Implement encryption for cardholder data",
+          "Establish network segmentation",
+        ],
+      },
+    ],
+  };
 }

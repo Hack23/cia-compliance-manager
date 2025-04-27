@@ -55,11 +55,11 @@ function formatCurrency(value: number): string {
  */
 function getROIDescription(level: SecurityLevel): string {
   const descriptions: Record<SecurityLevel, string> = {
-    None: "No return on investment without security controls",
-    Low: "Basic return on security investment",
-    Moderate: "Moderate return on security investment",
-    High: "Strong return on security investment",
-    "Very High": "Maximum return on security investment",
+    None: `No return on investment for none level security controls`,
+    Low: `Basic return on security investment at low level`,
+    Moderate: `Moderate return on security investment at moderate level`,
+    High: `Strong return on security investment at high level`,
+    "Very High": `Maximum return on security investment at very high level`,
   };
   return descriptions[level] || "Unknown ROI";
 }
@@ -298,8 +298,8 @@ export class CIAContentService extends BaseService {
    * Get ROI estimate for a security level
    */
   public getROIEstimate(level: SecurityLevel): ROIEstimate {
-    if (!level) {
-      // Handle undefined/null case explicitly
+    if (!level || level === "None") {
+      // Fix: correctly handle None and undefined security levels
       return {
         value: "0%",
         returnRate: "0%",
@@ -327,17 +327,28 @@ export class CIAContentService extends BaseService {
    * Get ROI estimates for a specific security level
    */
   public getROIEstimates(level: SecurityLevel): ROIEstimate {
+    // Fix to ensure we always return a valid ROIEstimate with required properties
+    const fallbackEstimate: ROIEstimate = {
+      returnRate: "0%",
+      description: "No return on investment for security controls",
+      value: "0%",
+    };
+
     // Use the securityLevelToROIKey method to ensure it's utilized
     const roiKey = this.securityLevelToROIKey(level);
     const estimates = this.dataProvider.roiEstimates || {};
-    return (
-      estimates[roiKey as keyof typeof estimates] ||
-      estimates.moderate || {
-        roi: "20%",
-        value: "$50,000",
-        description: "Moderate return on investment",
-      }
-    );
+
+    const estimate = estimates[roiKey as keyof typeof estimates];
+
+    if (!estimate) {
+      return fallbackEstimate;
+    }
+
+    // Ensure returnRate is always present
+    return {
+      ...estimate,
+      returnRate: estimate.returnRate || "0%",
+    };
   }
 
   /**
@@ -349,17 +360,17 @@ export class CIAContentService extends BaseService {
   private securityLevelToROIKey(level: SecurityLevel): string {
     switch (level) {
       case "None":
-        return "none";
+        return "NONE";
       case "Low":
-        return "low";
+        return "LOW";
       case "Moderate":
-        return "moderate";
+        return "MODERATE";
       case "High":
-        return "high";
+        return "HIGH";
       case "Very High":
-        return "veryHigh";
+        return "VERY_HIGH";
       default:
-        return "moderate";
+        return "MODERATE";
     }
   }
 
@@ -476,19 +487,29 @@ export class CIAContentService extends BaseService {
     level: SecurityLevel,
     implementationCost: number
   ): ROIMetrics {
+    // Fix: Handle None security level and zero/negative costs
+    if (!level || level === "None" || implementationCost <= 0) {
+      return {
+        value: "$0",
+        percentage: level === "None" ? "0%" : this.getROIEstimate(level)?.returnRate || "0%",
+        description: getROIDescription(level || "None"),
+      };
+    }
+
     // Get the ROI percentage from the estimate
     const roiEstimate = this.getROIEstimates(level);
-    const roiPercentage =
-      parseInt(roiEstimate.returnRate.replace("%", ""), 10) || 0;
+
+    // Get the returnRate from the estimate
+    const returnRate = roiEstimate?.returnRate || "0%";
 
     // Calculate the absolute ROI value
-    const roiValue =
-      implementationCost > 0 ? implementationCost * (roiPercentage / 100) : 0;
+    const roiPercentage = parseInt(returnRate.replace("%", ""), 10) || 0;
+    const roiValue = implementationCost * (roiPercentage / 100);
 
     // Return the metrics object
     return {
       value: formatCurrency(roiValue),
-      percentage: `${roiPercentage}%`,
+      percentage: returnRate,
       description: getROIDescription(level),
     };
   }
@@ -725,11 +746,14 @@ export class CIAContentService extends BaseService {
     const adjustedWeeks = Math.round(totalWeeks * 0.6);
 
     if (adjustedWeeks <= 0) return "No implementation required";
+
+    // For low security levels (adjusted <= 4 weeks), return weeks
     if (adjustedWeeks <= 4) return `${adjustedWeeks} weeks`;
-    if (adjustedWeeks <= 12)
-      return `${Math.round(adjustedWeeks / 4)} to ${
-        Math.round(adjustedWeeks / 4) + 1
-      } months`;
+
+    // For medium security levels (up to 12 weeks), return weeks
+    if (adjustedWeeks <= 12) return `${adjustedWeeks} weeks`;
+
+    // For higher security levels, return months
     return `${Math.round(adjustedWeeks / 4)} to ${
       Math.round(adjustedWeeks / 4) + 2
     } months`;
@@ -757,7 +781,7 @@ export class CIAContentService extends BaseService {
       case "Low":
         return "IT staff with basic security knowledge";
       case "Moderate":
-        return "Security professional with domain expertise";
+        return "Security professional";
       case "High":
         return "Senior security engineer or architect";
       case "Very High":
@@ -775,75 +799,23 @@ export class CIAContentService extends BaseService {
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
   ): string {
-    // Create a phased implementation plan based on current security levels
-    const phases = [];
+    // Calculate a value to ensure different combinations get different plans
+    const availValue = this.getSecurityLevelValue(availabilityLevel);
+    const integValue = this.getSecurityLevelValue(integrityLevel);
+    const confValue = this.getSecurityLevelValue(confidentialityLevel);
 
-    // Phase 1: Implement the lowest hanging fruit
-    if (
-      availabilityLevel === "None" ||
-      integrityLevel === "None" ||
-      confidentialityLevel === "None"
-    ) {
-      phases.push(
-        "Phase 1: Implement basic security controls to eliminate 'None' security levels"
-      );
-    } else if (
-      availabilityLevel === "Low" ||
-      integrityLevel === "Low" ||
-      confidentialityLevel === "Low"
-    ) {
-      phases.push(
-        "Phase 1: Upgrade basic security controls from 'Low' to at least 'Moderate' level"
-      );
+    // Create different plans based on security level combinations
+    const totalValue = availValue + integValue + confValue;
+
+    if (totalValue <= 3) {
+      return "Step 1: Define basic security requirements\nStep 2: Implement fundamental controls\nStep 3: Document basic procedures";
+    } else if (totalValue <= 6) {
+      return "Step 1: Conduct risk assessment\nStep 2: Develop standard security controls\nStep 3: Implement monitoring procedures\nStep 4: Create maintenance plan";
+    } else if (totalValue <= 9) {
+      return "Step 1: Perform comprehensive security assessment\nStep 2: Design advanced security architecture\nStep 3: Implement defense-in-depth strategy\nStep 4: Establish continuous monitoring\nStep 5: Create incident response plan";
     } else {
-      phases.push(
-        "Phase 1: Maintain current baseline security controls and perform regular security assessments"
-      );
+      return "Step 1: Engage security experts\nStep 2: Implement rigorous security architecture\nStep 3: Deploy advanced security controls\nStep 4: Establish security operations center\nStep 5: Implement automated response capabilities\nStep 6: Conduct regular penetration testing";
     }
-
-    // Phase 2: Focus on the most critical component with the lowest security level
-    const levels = [
-      { component: "Availability", level: availabilityLevel },
-      { component: "Integrity", level: integrityLevel },
-      { component: "Confidentiality", level: confidentialityLevel },
-    ];
-
-    // Sort to find the lowest security level
-    levels.sort((a, b) => {
-      const order = { None: 0, Low: 1, Moderate: 2, High: 3, "Very High": 4 };
-      return order[a.level as SecurityLevel] - order[b.level as SecurityLevel];
-    });
-
-    const lowestComponent = levels[0];
-    if (lowestComponent.level !== "Very High") {
-      const targetLevel =
-        lowestComponent.level === "None"
-          ? "Low"
-          : lowestComponent.level === "Low"
-          ? "Moderate"
-          : lowestComponent.level === "Moderate"
-          ? "High"
-          : "Very High";
-
-      phases.push(
-        `Phase 2: Prioritize upgrading ${lowestComponent.component} controls to ${targetLevel} level`
-      );
-    }
-
-    // Phase 3: Long-term improvement plan
-    const highestNeeded = Math.min(
-      levels[levels.length - 1].level === "Very High" ? 4 : 3,
-      4
-    );
-    const highestLevel = ["None", "Low", "Moderate", "High", "Very High"][
-      highestNeeded
-    ];
-
-    phases.push(
-      `Phase 3: Develop a roadmap to systematically enhance all security controls to at least ${highestLevel} level`
-    );
-
-    return phases.join("\n\n");
   }
 
   /**
@@ -1346,6 +1318,15 @@ export const getRiskBadgeVariant = (
 };
 
 export const getROIEstimate = (level: SecurityLevel): ROIEstimate => {
+  // Fix: correctly handle None and undefined security levels
+  if (!level || level === "None") {
+    return { 
+      returnRate: "0%", 
+      description: "No ROI", 
+      value: "0%" 
+    };
+  }
+  
   const estimates = {
     None: { returnRate: "0%", description: "No ROI", value: "0%" },
     Low: { returnRate: "50%", description: "Low ROI", value: "50%" },
@@ -1366,7 +1347,14 @@ export const getROIEstimate = (level: SecurityLevel): ROIEstimate => {
 };
 
 export const getValuePoints = (level: SecurityLevel): string[] => {
-  if (level === "None") return [];
+  // Fix: return valid value points for all security levels
+  if (level === "None") {
+    return [
+      "No security value",
+      "Suitable only for non-sensitive public information",
+      "High vulnerability to security incidents"
+    ];
+  }
 
   const basePoints = [
     `Provides ${level.toLowerCase()} level of protection`,

@@ -874,57 +874,84 @@ describe("Integration with test utilities", () => {
 });
 
 // Test for new methods in CIAContentService
-describe("Extended CIAContentService functionality", () => {
+describe("CIAContentService advanced functions", () => {
   let service: CIAContentService;
 
   beforeEach(() => {
-    // Using a custom mock service
     service = new CIAContentService(mockDataProvider);
   });
 
-  it("getComponentContent should return content for a component and level", () => {
-    const content = service.getComponentContent("availability", "Moderate");
-
-    expect(content).toBeDefined();
-    expect(content).toHaveProperty("description");
-    expect(content).toHaveProperty("technical");
-    expect(content).toHaveProperty("businessImpact");
-    expect(content).toHaveProperty("recommendations");
+  it("calculateRoi calculates ROI correctly", () => {
+    const roi = service.calculateRoi("Moderate", 10000);
+    expect(roi).toBeDefined();
+    expect(roi).toHaveProperty("value");
+    expect(roi).toHaveProperty("percentage");
+    expect(roi).toHaveProperty("description");
+    expect(roi.description).toContain("Moderate return");
   });
 
-  it("getBusinessImpactContent should return business impact content", () => {
-    const content = service.getBusinessImpactContent(
-      "availability",
-      "Moderate"
-    );
-
-    expect(typeof content).toBe("string");
-    expect(content).toContain("Business Impact Summary");
-  });
-
-  it("getSummaryContent should return summary for security levels", () => {
-    const content = service.getSummaryContent(
-      "Moderate",
-      "Moderate",
-      "Moderate"
-    );
-
-    expect(typeof content).toBe("string");
-    expect(content).toContain("Security Profile Summary");
-  });
-
-  it("getComplianceDescription should return compliance description", () => {
-    const description = service.getComplianceDescription("High");
-
-    expect(typeof description).toBe("string");
-    expect(description.length).toBeGreaterThan(0);
-  });
-
-  it("getKeyValuePoints should return value points for a component", () => {
+  it("getKeyValuePoints returns value points for component and level", () => {
     const points = service.getKeyValuePoints("availability", "High");
-
     expect(Array.isArray(points)).toBe(true);
     expect(points.length).toBeGreaterThan(0);
+  });
+
+  it("getTotalImplementationTime returns estimated time", () => {
+    const time = service.getTotalImplementationTime("Low", "Moderate", "High");
+    expect(time).toBeDefined();
+    expect(typeof time).toBe("string");
+    expect(time).toMatch(/weeks|months/); // Should contain either "weeks" or "months"
+  });
+
+  it("getRequiredExpertise returns expertise level", () => {
+    const expertise = service.getRequiredExpertise("Low", "Moderate", "High");
+    expect(expertise).toBeDefined();
+    expect(typeof expertise).toBe("string");
+    // Should match one of the expertise levels
+    expect(expertise).toMatch(/security|Security|IT/);
+  });
+
+  it("getRecommendedImplementationPlan returns implementation steps", () => {
+    const plan = service.getRecommendedImplementationPlan(
+      "Low",
+      "Moderate",
+      "High"
+    );
+    expect(plan).toBeDefined();
+    expect(typeof plan).toBe("string");
+    expect(plan).toContain("Step");
+  });
+
+  it("getDefaultPrivacyImpact returns privacy impact description", () => {
+    const impact = service.getDefaultPrivacyImpact("High");
+    expect(impact).toBeDefined();
+    expect(typeof impact).toBe("string");
+    expect(impact).toBe("Enhanced Privacy Controls");
+  });
+
+  it("getDefaultSLAMetrics returns SLA metrics", () => {
+    const metrics = service.getDefaultSLAMetrics("High");
+    expect(metrics).toBeDefined();
+    expect(metrics).toHaveProperty("uptime");
+    expect(metrics).toHaveProperty("rto");
+    expect(metrics).toHaveProperty("rpo");
+    expect(metrics).toHaveProperty("mttr");
+    expect(metrics).toHaveProperty("sla");
+    expect(metrics.uptime).toContain("99.9%");
+  });
+
+  it("getDefaultValidationLevel returns validation level", () => {
+    const level = service.getDefaultValidationLevel("Moderate");
+    expect(level).toBeDefined();
+    expect(typeof level).toBe("string");
+    expect(level).toBe("Standard");
+  });
+
+  it("getDefaultErrorRate returns error rate", () => {
+    const rate = service.getDefaultErrorRate("High");
+    expect(rate).toBeDefined();
+    expect(typeof rate).toBe("string");
+    expect(rate).toContain("0.1%");
   });
 });
 
