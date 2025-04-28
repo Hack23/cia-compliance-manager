@@ -7,6 +7,7 @@ import {
   CIADetails,
 } from "../types/cia-services";
 import { normalizeSecurityLevel } from "../utils/securityLevelUtils";
+import { BaseService } from "./BaseService";
 
 /**
  * Category icons for business impact categories
@@ -30,11 +31,9 @@ const CATEGORY_ICONS: Record<string, string> = {
  * strategic, and regulatory perspectives. It helps organizations understand
  * the business value of their security investments. 💼
  */
-export class BusinessImpactService {
-  private dataProvider: CIADataProvider;
-
+export class BusinessImpactService extends BaseService {
   constructor(dataProvider: CIADataProvider) {
-    this.dataProvider = dataProvider;
+    super(dataProvider);
   }
 
   /**
@@ -283,7 +282,7 @@ export class BusinessImpactService {
     component: CIAComponentType,
     level: SecurityLevel
   ): BusinessImpactDetails {
-    const riskLevel = this.getRiskLevelFromSecurityLevel(level);
+    const riskLevel = this.getRiskLevelWithSuffix(level);
 
     // Special handling for "None" confidentiality level
     if (component === "confidentiality" && level === "None") {
@@ -329,36 +328,26 @@ export class BusinessImpactService {
    * @param level - Security level
    * @returns Risk level
    */
-  private getRiskLevelFromSecurityLevel(level: SecurityLevel): string {
+  public getRiskLevelFromSecurityLevel(level: SecurityLevel): string {
     const riskLevels: Record<SecurityLevel, string> = {
-      None: "Critical Risk",
-      Low: "High Risk",
-      Moderate: "Medium Risk",
-      High: "Low Risk",
-      "Very High": "Minimal Risk",
+      None: "Critical",
+      Low: "High",
+      Moderate: "Medium",
+      High: "Low",
+      "Very High": "Minimal",
     };
 
-    return riskLevels[level] || "Unknown Risk";
+    return riskLevels[level] || "Unknown";
   }
 
   /**
-   * Get risk level based on security level
+   * Get risk level with "Risk" suffix
+   *
+   * @param level - Security level
+   * @returns Risk level string with "Risk" suffix
    */
-  private getRiskLevelForSecurityLevel(level: SecurityLevel): string {
-    switch (level) {
-      case "None":
-        return "Critical Risk";
-      case "Low":
-        return "High Risk";
-      case "Moderate":
-        return "Medium Risk";
-      case "High":
-        return "Low Risk";
-      case "Very High":
-        return "Minimal Risk";
-      default:
-        return "Unknown Risk";
-    }
+  private getRiskLevelWithSuffix(level: SecurityLevel): string {
+    return this.getRiskLevelFromSecurityLevel(level) + " Risk";
   }
 
   /**
@@ -404,7 +393,7 @@ export class BusinessImpactService {
   /**
    * Get options for a CIA component
    */
-  private getCIAOptions(
+  protected getCIAOptions(
     component: CIAComponentType
   ): Record<string, CIADetails> {
     switch (component) {
@@ -422,7 +411,7 @@ export class BusinessImpactService {
   /**
    * Capitalize first letter of a string
    */
-  private capitalizeFirstLetter(string: string): string {
+  protected capitalizeFirstLetter(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 

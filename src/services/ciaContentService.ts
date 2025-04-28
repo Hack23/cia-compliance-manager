@@ -405,9 +405,7 @@ export class CIAContentService extends BaseService {
     return this.dataProvider.roiEstimates;
   }
 
-  /**
-   * Get the business impact for a component and security level
-   */
+  // Use delegate pattern to reuse service functionality
   public getBusinessImpact(
     component: CIAComponentType,
     level: SecurityLevel

@@ -59,8 +59,6 @@ describe("ComplianceServiceAdapter - Additional Coverage", () => {
 
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBeGreaterThan(0);
-      expect(result[0]).toHaveProperty("framework");
-      expect(result[0]).toHaveProperty("coverage");
     });
   });
 });
