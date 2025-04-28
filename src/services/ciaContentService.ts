@@ -295,17 +295,25 @@ export class CIAContentService extends BaseService {
   }
 
   /**
+   * Normalise an incoming security‑level value (trim & lower‑case)
+   */
+  private static normalizeLevel(level?: SecurityLevel | string): string {
+    return (level ?? "None").toString().trim().toLowerCase();
+  }
+
+  /**
    * Get ROI estimate for a security level
    */
   public getROIEstimate(level: SecurityLevel): ROIEstimate {
-    // Fix: consistently handle None and undefined security levels
-    if (!level || level === "None") {
+    // --- normalise & early‑exit ------------------------------------------------
+    if (CIAContentService.normalizeLevel(level) === "none") {
       return {
         value: "0%",
         returnRate: "0%",
         description: "No return on investment for security controls",
       };
     }
+    // --------------------------------------------------------------------------
 
     const levelKey = level
       .toUpperCase()
@@ -327,6 +335,16 @@ export class CIAContentService extends BaseService {
    * Get ROI estimates for a specific security level
    */
   public getROIEstimates(level: SecurityLevel): ROIEstimate {
+    // --- normalise & short‑circuit --------------------------------------------
+    if (CIAContentService.normalizeLevel(level) === "none") {
+      return {
+        value: "0%",
+        returnRate: "0%",
+        description: "No return on investment for security controls",
+      };
+    }
+    // --------------------------------------------------------------------------
+
     // Fix to ensure we always return a valid ROIEstimate with required properties
     const fallbackEstimate: ROIEstimate = {
       returnRate: "0%",
@@ -487,29 +505,36 @@ export class CIAContentService extends BaseService {
     level: SecurityLevel,
     implementationCost: number
   ): ROIMetrics {
-    // Fix: Handle None security level and zero/negative costs consistently
-    if (!level || level === "None" || implementationCost <= 0) {
+    const normalized = CIAContentService.normalizeLevel(level);
+
+    // 1. No security selected  → 0 % / $0 (irrespective of cost)
+    if (normalized === "none") {
       return {
         value: "$0",
-        percentage: "0%", // Always return 0% for None or zero/negative costs
-        description: getROIDescription(level || "None"),
+        percentage: "0%",
+        description: getROIDescription("None"),
       };
     }
 
-    // Get the ROI percentage from the estimate
-    const roiEstimate = this.getROIEstimates(level);
+    // 2. Invalid / zero / negative cost  → $0 *but keep percent value*
+    const roiEstimate = this.getROIEstimates(level); // already normalised inside
+    if (implementationCost <= 0) {
+      return {
+        value: "$0",
+        percentage: roiEstimate.returnRate,
+        description: getROIDescription(level),
+      };
+    }
 
-    // Get the returnRate from the estimate
-    const returnRate = roiEstimate?.returnRate || "0%";
+    // 3. Standard calculation path
+    const roiPercentageNum =
+      parseInt(roiEstimate.returnRate.replace("%", ""), 10) || 0;
 
-    // Calculate the absolute ROI value
-    const roiPercentage = parseInt(returnRate.replace("%", ""), 10) || 0;
-    const roiValue = implementationCost * (roiPercentage / 100);
+    const roiValue = implementationCost * (roiPercentageNum / 100);
 
-    // Return the metrics object
     return {
       value: formatCurrency(roiValue),
-      percentage: returnRate,
+      percentage: roiEstimate.returnRate,
       description: getROIDescription(level),
     };
   }
