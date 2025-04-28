@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.11**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.12**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ComplianceSecurityMetrics
 
-Defined in: [types/compliance.ts:201](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/types/compliance.ts#L201)
+Defined in: [types/compliance.ts:201](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/types/compliance.ts#L201)
 
 Security metrics for visualization from compliance perspective
 
@@ -16,7 +16,7 @@ Security metrics for visualization from compliance perspective
 
 > **availability**: `number`
 
-Defined in: [types/compliance.ts:209](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/types/compliance.ts#L209)
+Defined in: [types/compliance.ts:209](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/types/compliance.ts#L209)
 
 Availability score (0-100)
 
@@ -26,7 +26,7 @@ Availability score (0-100)
 
 > **benchmarkScore**: `number`
 
-Defined in: [types/compliance.ts:224](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/types/compliance.ts#L224)
+Defined in: [types/compliance.ts:224](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/types/compliance.ts#L224)
 
 Industry benchmark score for comparison
 
@@ -36,7 +36,7 @@ Industry benchmark score for comparison
 
 > **compliance**: `number`
 
-Defined in: [types/compliance.ts:218](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/types/compliance.ts#L218)
+Defined in: [types/compliance.ts:218](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/types/compliance.ts#L218)
 
 Compliance score (0-100)
 
@@ -46,7 +46,7 @@ Compliance score (0-100)
 
 > **confidentiality**: `number`
 
-Defined in: [types/compliance.ts:203](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/types/compliance.ts#L203)
+Defined in: [types/compliance.ts:203](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/types/compliance.ts#L203)
 
 Confidentiality score (0-100)
 
@@ -56,7 +56,7 @@ Confidentiality score (0-100)
 
 > **integrity**: `number`
 
-Defined in: [types/compliance.ts:206](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/types/compliance.ts#L206)
+Defined in: [types/compliance.ts:206](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/types/compliance.ts#L206)
 
 Integrity score (0-100)
 
@@ -66,7 +66,7 @@ Integrity score (0-100)
 
 > **monitoring**: `number`
 
-Defined in: [types/compliance.ts:212](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/types/compliance.ts#L212)
+Defined in: [types/compliance.ts:212](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/types/compliance.ts#L212)
 
 Monitoring capabilities score (0-100)
 
@@ -76,7 +76,7 @@ Monitoring capabilities score (0-100)
 
 > **overallScore**: `number`
 
-Defined in: [types/compliance.ts:221](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/types/compliance.ts#L221)
+Defined in: [types/compliance.ts:221](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/types/compliance.ts#L221)
 
 Overall security score (0-100)
 
@@ -86,7 +86,7 @@ Overall security score (0-100)
 
 > **resilience**: `number`
 
-Defined in: [types/compliance.ts:215](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/types/compliance.ts#L215)
+Defined in: [types/compliance.ts:215](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/types/compliance.ts#L215)
 
 Resilience score (0-100)
 
@@ -96,6 +96,6 @@ Resilience score (0-100)
 
 > **securityMaturity**: `string`
 
-Defined in: [types/compliance.ts:227](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/types/compliance.ts#L227)
+Defined in: [types/compliance.ts:227](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/types/compliance.ts#L227)
 
 Security maturity level

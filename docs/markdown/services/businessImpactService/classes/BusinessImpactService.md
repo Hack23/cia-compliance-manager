@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.11**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.12**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: BusinessImpactService
 
-Defined in: [services/businessImpactService.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/services/businessImpactService.ts#L33)
+Defined in: [services/businessImpactService.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/businessImpactService.ts#L34)
 
 Service for business impact related functionality
 
@@ -17,13 +17,17 @@ different dimensions including financial, operational, reputational,
 strategic, and regulatory perspectives. It helps organizations understand
 the business value of their security investments. 💼
 
+## Extends
+
+- [`BaseService`](../../BaseService/classes/BaseService.md)
+
 ## Constructors
 
 ### Constructor
 
 > **new BusinessImpactService**(`dataProvider`): `BusinessImpactService`
 
-Defined in: [services/businessImpactService.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/services/businessImpactService.ts#L36)
+Defined in: [services/businessImpactService.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/businessImpactService.ts#L35)
 
 #### Parameters
 
@@ -35,13 +39,17 @@ Defined in: [services/businessImpactService.ts:36](https://github.com/Hack23/cia
 
 `BusinessImpactService`
 
+#### Overrides
+
+[`BaseService`](../../BaseService/classes/BaseService.md).[`constructor`](../../BaseService/classes/BaseService.md#constructor)
+
 ## Methods
 
 ### calculateBusinessImpactLevel()
 
 > **calculateBusinessImpactLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `string`
 
-Defined in: [services/businessImpactService.ts:216](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/services/businessImpactService.ts#L216)
+Defined in: [services/businessImpactService.ts:215](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/businessImpactService.ts#L215)
 
 Calculate business impact level based on security levels
 
@@ -77,7 +85,7 @@ Business impact level description
 
 > **getBusinessImpact**(`component`, `level`): [`BusinessImpactDetails`](../../../types/interfaces/BusinessImpactDetails.md)
 
-Defined in: [services/businessImpactService.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/services/businessImpactService.ts#L47)
+Defined in: [services/businessImpactService.ts:46](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/businessImpactService.ts#L46)
 
 Get business impact details for a security level
 
@@ -107,7 +115,7 @@ Business impact details
 
 > **getBusinessImpactDescription**(`component`, `level`): `string`
 
-Defined in: [services/businessImpactService.ts:119](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/services/businessImpactService.ts#L119)
+Defined in: [services/businessImpactService.ts:118](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/businessImpactService.ts#L118)
 
 Get business impact description for a security level
 
@@ -137,7 +145,7 @@ Business impact description
 
 > **getCategoryIcon**(`category`): `string`
 
-Defined in: [services/businessImpactService.ts:108](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/services/businessImpactService.ts#L108)
+Defined in: [services/businessImpactService.ts:107](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/businessImpactService.ts#L107)
 
 Get impact category icon
 
@@ -157,11 +165,39 @@ Emoji icon representing the category
 
 ***
 
+### getComponentDetails()
+
+> **getComponentDetails**(`component`, `level`): `undefined` \| [`CIADetails`](../../../types/interfaces/CIADetails.md)
+
+Defined in: [services/BaseService.ts:53](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/BaseService.ts#L53)
+
+Get component details for a specific component and security level
+
+#### Parameters
+
+##### component
+
+[`CIAComponentType`](../../../types/type-aliases/CIAComponentType.md)
+
+##### level
+
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
+
+#### Returns
+
+`undefined` \| [`CIADetails`](../../../types/interfaces/CIADetails.md)
+
+#### Inherited from
+
+[`BaseService`](../../BaseService/classes/BaseService.md).[`getComponentDetails`](../../BaseService/classes/BaseService.md#getcomponentdetails)
+
+***
+
 ### getDetailedDescription()
 
 > **getDetailedDescription**(`category`, `detail?`): `string`
 
-Defined in: [services/businessImpactService.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/services/businessImpactService.ts#L142)
+Defined in: [services/businessImpactService.ts:141](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/businessImpactService.ts#L141)
 
 Get detailed description of business impact
 
@@ -184,3 +220,55 @@ Business impact detail
 `string`
 
 Formatted detailed description
+
+***
+
+### getRiskLevelFromSecurityLevel()
+
+> **getRiskLevelFromSecurityLevel**(`level`): `string`
+
+Defined in: [services/businessImpactService.ts:331](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/businessImpactService.ts#L331)
+
+Get risk level from security level
+
+#### Parameters
+
+##### level
+
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
+
+Security level
+
+#### Returns
+
+`string`
+
+Risk level
+
+#### Overrides
+
+[`BaseService`](../../BaseService/classes/BaseService.md).[`getRiskLevelFromSecurityLevel`](../../BaseService/classes/BaseService.md#getrisklevelfromsecuritylevel)
+
+***
+
+### getSecurityLevelDescription()
+
+> **getSecurityLevelDescription**(`level`): `string`
+
+Defined in: [services/BaseService.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/BaseService.ts#L93)
+
+Get security level description
+
+#### Parameters
+
+##### level
+
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
+
+#### Returns
+
+`string`
+
+#### Inherited from
+
+[`BaseService`](../../BaseService/classes/BaseService.md).[`getSecurityLevelDescription`](../../BaseService/classes/BaseService.md#getsecurityleveldescription)

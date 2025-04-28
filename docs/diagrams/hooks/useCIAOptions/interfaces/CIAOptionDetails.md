@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.11**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.12**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIAOptionDetails
 
-Defined in: [hooks/useCIAOptions.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/hooks/useCIAOptions.ts#L14)
+Defined in: [hooks/useCIAOptions.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/hooks/useCIAOptions.ts#L14)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [hooks/useCIAOptions.ts:14](https://github.com/Hack23/cia-compliance
 
 > `optional` **bg**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/hooks/useCIAOptions.ts#L24)
+Defined in: [hooks/useCIAOptions.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/hooks/useCIAOptions.ts#L24)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [hooks/useCIAOptions.ts:24](https://github.com/Hack23/cia-compliance
 
 > `optional` **businessImpact**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/hooks/useCIAOptions.ts#L18)
+Defined in: [hooks/useCIAOptions.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/hooks/useCIAOptions.ts#L18)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [hooks/useCIAOptions.ts:18](https://github.com/Hack23/cia-compliance
 
 > `optional` **capex**: `number`
 
-Defined in: [hooks/useCIAOptions.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/hooks/useCIAOptions.ts#L19)
+Defined in: [hooks/useCIAOptions.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/hooks/useCIAOptions.ts#L19)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [hooks/useCIAOptions.ts:19](https://github.com/Hack23/cia-compliance
 
 > **description**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/hooks/useCIAOptions.ts#L16)
+Defined in: [hooks/useCIAOptions.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/hooks/useCIAOptions.ts#L16)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [hooks/useCIAOptions.ts:16](https://github.com/Hack23/cia-compliance
 
 > `optional` **fte**: `number`
 
-Defined in: [hooks/useCIAOptions.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/hooks/useCIAOptions.ts#L23)
+Defined in: [hooks/useCIAOptions.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/hooks/useCIAOptions.ts#L23)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: [hooks/useCIAOptions.ts:23](https://github.com/Hack23/cia-compliance
 
 > `optional` **impact**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/hooks/useCIAOptions.ts#L22)
+Defined in: [hooks/useCIAOptions.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/hooks/useCIAOptions.ts#L22)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: [hooks/useCIAOptions.ts:22](https://github.com/Hack23/cia-compliance
 
 > `optional` **opex**: `number`
 
-Defined in: [hooks/useCIAOptions.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/hooks/useCIAOptions.ts#L20)
+Defined in: [hooks/useCIAOptions.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/hooks/useCIAOptions.ts#L20)
 
 ***
 
@@ -70,7 +70,7 @@ Defined in: [hooks/useCIAOptions.ts:20](https://github.com/Hack23/cia-compliance
 
 > `optional` **recommendations**: `string`[]
 
-Defined in: [hooks/useCIAOptions.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/hooks/useCIAOptions.ts#L21)
+Defined in: [hooks/useCIAOptions.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/hooks/useCIAOptions.ts#L21)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: [hooks/useCIAOptions.ts:21](https://github.com/Hack23/cia-compliance
 
 > `optional` **technical**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/hooks/useCIAOptions.ts#L17)
+Defined in: [hooks/useCIAOptions.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/hooks/useCIAOptions.ts#L17)
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: [hooks/useCIAOptions.ts:17](https://github.com/Hack23/cia-compliance
 
 > `optional` **text**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/hooks/useCIAOptions.ts#L25)
+Defined in: [hooks/useCIAOptions.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/hooks/useCIAOptions.ts#L25)
 
 ***
 
@@ -94,4 +94,4 @@ Defined in: [hooks/useCIAOptions.ts:25](https://github.com/Hack23/cia-compliance
 
 > **value**: `number`
 
-Defined in: [hooks/useCIAOptions.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/hooks/useCIAOptions.ts#L15)
+Defined in: [hooks/useCIAOptions.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/hooks/useCIAOptions.ts#L15)

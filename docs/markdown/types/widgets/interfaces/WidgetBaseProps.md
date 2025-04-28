@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.11**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.12**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetBaseProps
 
-Defined in: [types/widgets.ts:64](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/types/widgets.ts#L64)
+Defined in: [types/widgets.ts:64](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/types/widgets.ts#L64)
 
 Base props for all widgets
 
@@ -30,7 +30,7 @@ a unified dashboard experience for security officers and executives. 🎨
 
 > `optional` **className**: `string`
 
-Defined in: [types/widgets.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/types/widgets.ts#L68)
+Defined in: [types/widgets.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/types/widgets.ts#L68)
 
 Optional CSS class name
 
@@ -40,7 +40,7 @@ Optional CSS class name
 
 > `optional` **securityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/types/widgets.ts#L78)
+Defined in: [types/widgets.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/types/widgets.ts#L78)
 
 Optional security level for widgets that only need one level
 
@@ -50,6 +50,6 @@ Optional security level for widgets that only need one level
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widgets.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/types/widgets.ts#L73)
+Defined in: [types/widgets.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/types/widgets.ts#L73)
 
 Optional test ID for testing

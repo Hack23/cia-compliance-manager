@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.11**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.12**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **formatCurrencyWithOptions**: (`value`, `options?`, `locale?`) => `string` = `formatCurrency`
 
-Defined in: [utils/formatUtils.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/utils/formatUtils.ts#L93)
+Defined in: [utils/formatUtils.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/utils/formatUtils.ts#L93)
 
 Formats a number as currency with proper thousands separators
 
@@ -24,7 +24,7 @@ The number to format as currency
 
 Formatting options or currency code string for backward compatibility
 
-`string` | \{ `currency`: `string`; `locale`: `string`; `maximumFractionDigits`: `number`; `minimumFractionDigits`: `number`; \}
+`string` | \{ `currency?`: `string`; `locale?`: `string`; `maximumFractionDigits?`: `number`; `minimumFractionDigits?`: `number`; \}
 
 ### locale?
 

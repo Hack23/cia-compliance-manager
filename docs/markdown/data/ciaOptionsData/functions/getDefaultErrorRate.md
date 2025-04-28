@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.11**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.12**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getDefaultErrorRate**(`level`): `string`
 
-Defined in: [data/ciaOptionsData.ts:514](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/data/ciaOptionsData.ts#L514)
+Defined in: [data/ciaOptionsData.ts:514](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/data/ciaOptionsData.ts#L514)
 
 Get default error rate for a security level
 

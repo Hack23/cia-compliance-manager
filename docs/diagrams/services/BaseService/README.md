@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.11**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.12**](../../README.md)
 
 ***
 
@@ -9,3 +9,7 @@
 ## Classes
 
 - [BaseService](classes/BaseService.md)
+
+## Interfaces
+
+- [CIAService](interfaces/CIAService.md)

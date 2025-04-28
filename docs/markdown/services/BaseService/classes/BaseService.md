@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.11**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.12**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: BaseService
 
-Defined in: [services/BaseService.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/services/BaseService.ts#L15)
+Defined in: [services/BaseService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/BaseService.ts#L26)
 
 Base service class that provides common functionality
 for security-related services
@@ -16,9 +16,14 @@ for security-related services
 - [`SecurityMetricsService`](../../securityMetricsService/classes/SecurityMetricsService.md)
 - [`ComplianceService`](../../complianceService/classes/ComplianceService.md)
 - [`CIAContentService`](../../ciaContentService/classes/CIAContentService.md)
+- [`BusinessImpactService`](../../businessImpactService/classes/BusinessImpactService.md)
 - [`SecurityResourceService`](../../securityResourceService/classes/SecurityResourceService.md)
 - [`TechnicalImplementationService`](../../technicalImplementationService/classes/TechnicalImplementationService.md)
 - [`ComplianceServiceAdapter`](../../classes/ComplianceServiceAdapter.md)
+
+## Implements
+
+- [`CIAService`](../interfaces/CIAService.md)
 
 ## Constructors
 
@@ -26,7 +31,7 @@ for security-related services
 
 > **new BaseService**(`dataProvider`): `BaseService`
 
-Defined in: [services/BaseService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/d6eede30e4f01622fe18187e98b207e9a06a781f/src/services/BaseService.ts#L26)
+Defined in: [services/BaseService.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/BaseService.ts#L37)
 
 Create a new service instance
 
@@ -41,3 +46,79 @@ Data provider for security information
 #### Returns
 
 `BaseService`
+
+## Methods
+
+### getComponentDetails()
+
+> **getComponentDetails**(`component`, `level`): `undefined` \| [`CIADetails`](../../../types/interfaces/CIADetails.md)
+
+Defined in: [services/BaseService.ts:53](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/BaseService.ts#L53)
+
+Get component details for a specific component and security level
+
+#### Parameters
+
+##### component
+
+[`CIAComponentType`](../../../types/type-aliases/CIAComponentType.md)
+
+##### level
+
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
+
+#### Returns
+
+`undefined` \| [`CIADetails`](../../../types/interfaces/CIADetails.md)
+
+#### Implementation of
+
+[`CIAService`](../interfaces/CIAService.md).[`getComponentDetails`](../interfaces/CIAService.md#getcomponentdetails)
+
+***
+
+### getRiskLevelFromSecurityLevel()
+
+> **getRiskLevelFromSecurityLevel**(`level`): `string`
+
+Defined in: [services/BaseService.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/BaseService.ts#L114)
+
+Get risk level from security level
+
+#### Parameters
+
+##### level
+
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
+
+#### Returns
+
+`string`
+
+#### Implementation of
+
+[`CIAService`](../interfaces/CIAService.md).[`getRiskLevelFromSecurityLevel`](../interfaces/CIAService.md#getrisklevelfromsecuritylevel)
+
+***
+
+### getSecurityLevelDescription()
+
+> **getSecurityLevelDescription**(`level`): `string`
+
+Defined in: [services/BaseService.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/services/BaseService.ts#L93)
+
+Get security level description
+
+#### Parameters
+
+##### level
+
+[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
+
+#### Returns
+
+`string`
+
+#### Implementation of
+
+[`CIAService`](../interfaces/CIAService.md).[`getSecurityLevelDescription`](../interfaces/CIAService.md#getsecurityleveldescription)
