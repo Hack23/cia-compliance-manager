@@ -1,10 +1,188 @@
-import { describe, expect, it } from "vitest";
-import { createTestCIAContentService } from "../tests/utils/mock";
+import { describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../types/cia";
-import { ROIMetrics } from "./ciaContentService";
+import { CIAContentService, ROIMetrics } from "./ciaContentService";
 
 describe("CIAContentService ROI Calculations", () => {
-  const service = createTestCIAContentService();
+  // Create a real service instead of a mocked one for accurate testing
+  const mockData = {
+    roiEstimates: {
+      NONE: { returnRate: "0%", description: "No return", value: "0%" },
+      LOW: { returnRate: "50%", description: "Low return", value: "50%" },
+      MODERATE: {
+        returnRate: "150%",
+        description: "Moderate return",
+        value: "150%",
+      },
+      HIGH: { returnRate: "300%", description: "High return", value: "300%" },
+      VERY_HIGH: {
+        returnRate: "500%",
+        description: "Very high return",
+        value: "500%",
+      },
+    },
+    // Create proper mock structures for each required property
+    availabilityOptions: {
+      None: {
+        description: "No availability controls",
+        technical: "No availability measures",
+        businessImpact: "Critical business impact",
+        capex: 0,
+        opex: 0,
+        bg: "#f8d7da",
+        text: "#721c24",
+        recommendations: [],
+      },
+      Low: {
+        description: "Basic availability",
+        technical: "Basic availability measures",
+        businessImpact: "High business impact",
+        capex: 1000,
+        opex: 500,
+        bg: "#fff3cd",
+        text: "#856404",
+        recommendations: [],
+      },
+      Moderate: {
+        description: "Standard availability",
+        technical: "Standard availability measures",
+        businessImpact: "Medium business impact",
+        capex: 5000,
+        opex: 2000,
+        bg: "#d1ecf1",
+        text: "#0c5460",
+        recommendations: [],
+      },
+      High: {
+        description: "Enhanced availability",
+        technical: "Enhanced availability measures",
+        businessImpact: "Low business impact",
+        capex: 15000,
+        opex: 5000,
+        bg: "#d4edda",
+        text: "#155724",
+        recommendations: [],
+      },
+      "Very High": {
+        description: "Maximum availability",
+        technical: "Maximum availability measures",
+        businessImpact: "Minimal business impact",
+        capex: 30000,
+        opex: 10000,
+        bg: "#cce5ff",
+        text: "#004085",
+        recommendations: [],
+      },
+    },
+    integrityOptions: {
+      None: {
+        description: "No integrity controls",
+        technical: "No integrity measures",
+        businessImpact: "Critical business impact",
+        capex: 0,
+        opex: 0,
+        bg: "#f8d7da",
+        text: "#721c24",
+        recommendations: [],
+      },
+      Low: {
+        description: "Basic integrity",
+        technical: "Basic integrity measures",
+        businessImpact: "High business impact",
+        capex: 1000,
+        opex: 500,
+        bg: "#fff3cd",
+        text: "#856404",
+        recommendations: [],
+      },
+      Moderate: {
+        description: "Standard integrity",
+        technical: "Standard integrity measures",
+        businessImpact: "Medium business impact",
+        capex: 5000,
+        opex: 2000,
+        bg: "#d1ecf1",
+        text: "#0c5460",
+        recommendations: [],
+      },
+      High: {
+        description: "Enhanced integrity",
+        technical: "Enhanced integrity measures",
+        businessImpact: "Low business impact",
+        capex: 15000,
+        opex: 5000,
+        bg: "#d4edda",
+        text: "#155724",
+        recommendations: [],
+      },
+      "Very High": {
+        description: "Maximum integrity",
+        technical: "Maximum integrity measures",
+        businessImpact: "Minimal business impact",
+        capex: 30000,
+        opex: 10000,
+        bg: "#cce5ff",
+        text: "#004085",
+        recommendations: [],
+      },
+    },
+    confidentialityOptions: {
+      None: {
+        description: "No confidentiality controls",
+        technical: "No confidentiality measures",
+        businessImpact: "Critical business impact",
+        capex: 0,
+        opex: 0,
+        bg: "#f8d7da",
+        text: "#721c24",
+        recommendations: [],
+      },
+      Low: {
+        description: "Basic confidentiality",
+        technical: "Basic confidentiality measures",
+        businessImpact: "High business impact",
+        capex: 1000,
+        opex: 500,
+        bg: "#fff3cd",
+        text: "#856404",
+        recommendations: [],
+      },
+      Moderate: {
+        description: "Standard confidentiality",
+        technical: "Standard confidentiality measures",
+        businessImpact: "Medium business impact",
+        capex: 5000,
+        opex: 2000,
+        bg: "#d1ecf1",
+        text: "#0c5460",
+        recommendations: [],
+      },
+      High: {
+        description: "Enhanced confidentiality",
+        technical: "Enhanced confidentiality measures",
+        businessImpact: "Low business impact",
+        capex: 15000,
+        opex: 5000,
+        bg: "#d4edda",
+        text: "#155724",
+        recommendations: [],
+      },
+      "Very High": {
+        description: "Maximum confidentiality",
+        technical: "Maximum confidentiality measures",
+        businessImpact: "Minimal business impact",
+        capex: 30000,
+        opex: 10000,
+        bg: "#cce5ff",
+        text: "#004085",
+        recommendations: [],
+      },
+    },
+    getDefaultSecurityIcon: vi.fn(),
+    getDefaultValuePoints: vi.fn(),
+  };
+
+  // Create a real service instance with our mock data
+  const service = new CIAContentService(mockData);
 
   describe("calculateRoi", () => {
     it("calculates proper ROI for different security levels", () => {
