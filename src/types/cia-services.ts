@@ -185,14 +185,14 @@ export interface ComplianceImpact {
 }
 
 /**
- * Return on investment estimate
+ * Enhanced ROI estimate interface that combines existing definitions
  */
 export interface ROIEstimate {
-  returnRate: string; // Required property
-  description: string;
-  value?: string; // For backward compatibility
-  potentialSavings?: string;
-  breakEvenPeriod?: string;
+  returnRate: string; // Percentage return rate (e.g., "150%")
+  description: string; // Description of the ROI
+  value?: string; // Value representation (can be formatted currency or percentage)
+  potentialSavings?: string; // Potential savings estimation
+  breakEvenPeriod?: string; // Time to break even on investment
 }
 
 /**
@@ -402,5 +402,3 @@ export interface ComplianceStatus {
   complianceScore: number;
   // ...other properties...
 }
-
-// ...existing types if any...

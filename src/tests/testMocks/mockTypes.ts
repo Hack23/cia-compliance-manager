@@ -1,7 +1,8 @@
 import { SecurityLevel } from "../../types/cia";
+import { CIAComponentType } from "../../types/cia-services";
 
 /**
- * Standard mock security levels to use across tests
+ * Standard security levels for testing
  */
 export const TEST_SECURITY_LEVELS: SecurityLevel[] = [
   "None",
@@ -10,6 +11,33 @@ export const TEST_SECURITY_LEVELS: SecurityLevel[] = [
   "High",
   "Very High",
 ];
+
+/**
+ * Standard CIA components for testing
+ */
+export const TEST_CIA_COMPONENTS: CIAComponentType[] = [
+  "availability",
+  "integrity",
+  "confidentiality",
+];
+
+/**
+ * Creates test cases for all combinations of components and security levels
+ */
+export function createComponentLevelTestCases() {
+  const testCases: Array<{
+    component: CIAComponentType;
+    level: SecurityLevel;
+  }> = [];
+
+  TEST_CIA_COMPONENTS.forEach((component) => {
+    TEST_SECURITY_LEVELS.forEach((level) => {
+      testCases.push({ component, level });
+    });
+  });
+
+  return testCases;
+}
 
 /**
  * Default mock options for security level testing

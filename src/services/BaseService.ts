@@ -6,13 +6,24 @@ import {
 } from "../types/cia-services";
 import { getSecurityLevelValue } from "../utils/levelValuesUtils";
 import logger from "../utils/logger";
-import { getRiskLevelFromSecurityLevel } from "../utils/riskUtils";
+
+/**
+ * Common interface for CIA services
+ */
+export interface CIAService {
+  getComponentDetails(
+    component: CIAComponentType,
+    level: SecurityLevel
+  ): CIADetails | undefined;
+  getSecurityLevelDescription(level: SecurityLevel): string;
+  getRiskLevelFromSecurityLevel(level: SecurityLevel): string;
+}
 
 /**
  * Base service class that provides common functionality
  * for security-related services
  */
-export class BaseService {
+export class BaseService implements CIAService {
   /**
    * Data provider used by the service
    */
@@ -28,14 +39,26 @@ export class BaseService {
   }
 
   /**
-   * Get component details for a specific security level
+   * Check if a string is a valid CIA component type
    */
-  protected getComponentDetails(
+  protected isCIAComponentType(
+    component: string
+  ): component is CIAComponentType {
+    return ["availability", "integrity", "confidentiality"].includes(component);
+  }
+
+  /**
+   * Get component details for a specific component and security level
+   */
+  public getComponentDetails(
     component: CIAComponentType,
     level: SecurityLevel
   ): CIADetails | undefined {
     try {
       const options = this.getCIAOptions(component);
+      if (!options) {
+        return undefined;
+      }
       return options[level];
     } catch (error) {
       logger.warn(
@@ -65,10 +88,40 @@ export class BaseService {
   }
 
   /**
+   * Get security level description
+   */
+  public getSecurityLevelDescription(level: SecurityLevel): string {
+    // Default implementation
+    switch (level) {
+      case "None":
+        return "No security controls";
+      case "Low":
+        return "Basic security controls";
+      case "Moderate":
+        return "Standard security controls";
+      case "High":
+        return "Enhanced security controls";
+      case "Very High":
+        return "Maximum security controls";
+      default:
+        return "Unknown security level";
+    }
+  }
+
+  /**
    * Get risk level from security level
    */
-  protected getRiskLevelFromSecurityLevel(level: SecurityLevel): string {
-    return getRiskLevelFromSecurityLevel(level);
+  public getRiskLevelFromSecurityLevel(level: SecurityLevel): string {
+    // Modified to return the exact format expected by tests
+    const riskLevels: Record<SecurityLevel, string> = {
+      None: "Critical",
+      Low: "High",
+      Moderate: "Medium",
+      High: "Low",
+      "Very High": "Minimal",
+    };
+
+    return riskLevels[level] || "Unknown";
   }
 
   /**
@@ -89,8 +142,10 @@ export class BaseService {
    * Get default security icon for a level
    */
   protected getDefaultSecurityIcon(level: SecurityLevel): string {
+    // Check if dataProvider provides the method and if it returns a non-null value
     if (typeof this.dataProvider.getDefaultSecurityIcon === "function") {
-      return this.dataProvider.getDefaultSecurityIcon(level);
+      const icon = this.dataProvider.getDefaultSecurityIcon(level);
+      if (icon) return icon;
     }
 
     // Default icons
@@ -124,7 +179,6 @@ export class BaseService {
         logger.warn("Error fetching custom value points:", error);
       }
     }
-
     return this.getDefaultValuePoints(level);
   }
 
@@ -166,7 +220,6 @@ export class BaseService {
           "May not meet regulatory requirements",
         ];
       case "None":
-      default:
         return [
           "No security value",
           "Suitable only for non-sensitive public information",
@@ -174,6 +227,29 @@ export class BaseService {
           "No protection against threats",
           "Does not meet any compliance requirements",
         ];
+      default:
+        return [
+          "Unknown security level",
+          "Security value cannot be determined",
+        ];
     }
+  }
+
+  /**
+   * Formats a currency value
+   */
+  protected formatCurrency(value: number): string {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    }).format(value);
+  }
+
+  /**
+   * Formats a percentage value
+   */
+  protected formatPercentage(value: number): string {
+    return `${value}%`;
   }
 }

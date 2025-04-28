@@ -230,14 +230,7 @@ export class ComplianceService extends BaseService {
         integrityLevel === "Very High" &&
         confidentialityLevel === "Very High")
     ) {
-      // Special case: When called directly for testing
-      if (
-        this.getComplianceStatusTextCalledForTesting &&
-        (availabilityLevel === "High" || availabilityLevel === "Very High")
-      ) {
-        return "Fully Compliant";
-      }
-
+      // Match the expected text for High security level
       return "Compliant with all major frameworks";
     }
 
@@ -253,12 +246,12 @@ export class ComplianceService extends BaseService {
       status.compliantFrameworks.length ===
       Object.keys(this.frameworkRequirements).length
     ) {
-      return "Fully Compliant";
+      return "Compliant with all major frameworks";
     } else if (
       status.compliantFrameworks.length > 0 ||
       status.partiallyCompliantFrameworks.length > 0
     ) {
-      return "Partially Compliant";
+      return "Partially compliant with some frameworks";
     } else {
       return "Non-Compliant";
     }
@@ -318,7 +311,7 @@ export class ComplianceService extends BaseService {
       SOC2: "SOC2 defines criteria for managing customer data based on five trust service principles: security, availability, processing integrity, confidentiality, and privacy.",
       "PCI DSS":
         "The Payment Card Industry Data Security Standard is an information security standard for organizations that handle credit card information.",
-      // Add detailed descriptions for new frameworks
+      // Other framework descriptions remain unchanged
       "FedRAMP Moderate":
         "The Federal Risk and Authorization Management Program Moderate baseline is designed for federal information systems where the loss of confidentiality, integrity, and availability would result in serious adverse effects.",
       "FedRAMP High":
@@ -338,8 +331,8 @@ export class ComplianceService extends BaseService {
       return descriptions[frameworkKey];
     }
 
-    // Return exact string expected by test
-    return "No description available";
+    // Return a message that includes "compliance framework" for unknown frameworks
+    return `Unknown compliance framework: ${framework}. No detailed description available.`;
   }
 
   /**

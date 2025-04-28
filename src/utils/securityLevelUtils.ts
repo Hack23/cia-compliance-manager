@@ -118,20 +118,21 @@ export function getSecurityLevelFromValue(value: number): SecurityLevel {
 }
 
 /**
- * Converts a security level to a risk level
+ * Get risk level string from a security level
  *
  * @param level - Security level
- * @returns Risk level string
+ * @returns Corresponding risk level string
  */
 export function getRiskLevelFromSecurityLevel(level: SecurityLevel): string {
-  const mapping: Record<SecurityLevel, string> = {
+  const riskLevels: Record<SecurityLevel, string> = {
     None: "Critical",
     Low: "High",
     Moderate: "Medium",
     High: "Low",
     "Very High": "Minimal",
   };
-  return mapping[level] || "Unknown";
+
+  return riskLevels[level] || "Unknown";
 }
 
 /**

@@ -227,12 +227,16 @@ export interface ComplianceSecurityMetrics {
   securityMaturity: string;
 }
 
-// Add missing type needed by ComplianceServiceAdapter
+/**
+ * Compliance framework coverage
+ */
 export interface ComplianceFrameworkCoverage {
   id: string;
   name: string;
   coverage: number;
   required: boolean;
-  status: "compliant" | "partially-compliant" | "non-compliant";
+  status: FrameworkComplianceStatus;
   details?: string;
+  framework: string;
+  requiredLevel?: SecurityLevel; // New optional property to store the required security level
 }
