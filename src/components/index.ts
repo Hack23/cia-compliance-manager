@@ -30,29 +30,13 @@ export { default as TechnicalDetailsWidget } from "./widgets/implementationguide
 // Common Components
 // Only include components that exist and are actively used
 export { default as BusinessImpactSection } from "./common/BusinessImpactSection";
-export { default as BusinessRiskDisplay } from "./common/BusinessRiskDisplay";
-export { default as CIAImpactCard } from "./common/CIAImpactCard";
 export { KeyValuePair } from "./common/KeyValuePair";
-export { default as MetricsCard } from "./common/MetricsCard";
-export { default as RiskAssessment } from "./common/RiskAssessment";
 export { default as RiskLevelBadge } from "./common/RiskLevelBadge";
 export { default as SecurityLevelBadge } from "./common/SecurityLevelBadge";
-export { default as SecurityRiskScore } from "./common/SecurityRiskScore";
 export { default as StatusBadge } from "./common/StatusBadge";
-export { default as Tab } from "./common/Tab";
-export { default as ThemeToggle } from "./common/ThemeToggle";
-export { default as Tooltip } from "./common/Tooltip";
-export { default as WidgetActions } from "./common/WidgetActions";
-export { default as WidgetContainer } from "./common/WidgetContainer";
-export { default as WidgetHeader } from "./common/WidgetHeader";
 
 // Charts
 export { default as RadarChart } from "./charts/RadarChart";
-export { SecurityRiskScore as ChartSecurityRiskScore } from "./charts/SecurityRiskScore";
-
-// Security level components
-export { SecurityLevelSelector } from "./securitylevel/SecurityLevelSelector";
-export { Selection } from "./securitylevel/Selection";
 
 // Export widget components that are actively used
 export * from "./widgets";
