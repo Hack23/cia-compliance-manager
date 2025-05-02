@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.12**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.13**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **COST\_CATEGORIES**: `object`
 
-Defined in: [constants/costConstants.ts:158](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/constants/costConstants.ts#L158)
+Defined in: [constants/costConstants.ts:158](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/constants/costConstants.ts#L158)
 
 Cost categories
 

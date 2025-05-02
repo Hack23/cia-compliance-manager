@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.12**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.13**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **financialImpactByLevel**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`BusinessImpactDetail`](../../../types/interfaces/BusinessImpactDetail.md)\>
 
-Defined in: [data/riskImpactData.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/e7811142a771ec75716a7ce3a0d60f18cb91cd06/src/data/riskImpactData.ts#L58)
+Defined in: [data/riskImpactData.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/data/riskImpactData.ts#L58)
 
 Financial impact data by security level

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.12**](../README.md)
+[**CIA Compliance Manager Documentation v0.8.13**](../README.md)
 
 ***
 
@@ -34,38 +34,22 @@ Centralized component exports simplify imports and promote component reuse.
 - [AvailabilityImpactWidget](variables/AvailabilityImpactWidget.md)
 - [BusinessImpactAnalysisWidget](variables/BusinessImpactAnalysisWidget.md)
 - [BusinessImpactSection](variables/BusinessImpactSection.md)
-- [BusinessRiskDisplay](variables/BusinessRiskDisplay.md)
-- [CIAImpactCard](variables/CIAImpactCard.md)
 - [COMPLIANCE\_STATUS](variables/COMPLIANCE_STATUS.md)
 - [COMPLIANCE\_STATUS\_TEST\_IDS](variables/COMPLIANCE_STATUS_TEST_IDS.md)
 - [ComplianceStatusWidget](variables/ComplianceStatusWidget.md)
 - [ConfidentialityImpactWidget](variables/ConfidentialityImpactWidget.md)
 - [CostEstimationWidget](variables/CostEstimationWidget.md)
 - [IntegrityImpactWidget](variables/IntegrityImpactWidget.md)
-- [MetricsCard](variables/MetricsCard.md)
 - [RadarChart](variables/RadarChart.md)
-- [RiskAssessment](variables/RiskAssessment.md)
 - [RiskLevelBadge](variables/RiskLevelBadge.md)
 - [SecurityLevelBadge](variables/SecurityLevelBadge.md)
-- [SecurityLevelSelector](variables/SecurityLevelSelector.md)
 - [SecurityLevelWidget](variables/SecurityLevelWidget.md)
 - [SecurityResourcesWidget](variables/SecurityResourcesWidget.md)
-- [SecurityRiskScore](variables/SecurityRiskScore.md)
 - [SecuritySummaryWidget](variables/SecuritySummaryWidget.md)
 - [SecurityVisualizationWidget](variables/SecurityVisualizationWidget.md)
-- [Selection](variables/Selection.md)
 - [StatusBadge](variables/StatusBadge.md)
-- [Tab](variables/Tab.md)
 - [TechnicalDetailsWidget](variables/TechnicalDetailsWidget.md)
-- [ThemeToggle](variables/ThemeToggle.md)
-- [Tooltip](variables/Tooltip.md)
 - [ValueCreationWidget](variables/ValueCreationWidget.md)
-- [WidgetActions](variables/WidgetActions.md)
-- [WidgetHeader](variables/WidgetHeader.md)
-
-## Functions
-
-- [ChartSecurityRiskScore](functions/ChartSecurityRiskScore.md)
 
 ## References
 
@@ -114,12 +98,6 @@ Re-exports [RiskAssessmentProps](../types/interfaces/RiskAssessmentProps.md)
 ### StatusBadgeProps
 
 Re-exports [StatusBadgeProps](../types/interfaces/StatusBadgeProps.md)
-
-***
-
-### WidgetContainer
-
-Re-exports [WidgetContainer](common/WidgetContainer/variables/WidgetContainer.md)
 
 ***
 

@@ -1,8 +1,8 @@
-[**CIA Compliance Manager Diagrams v0.8.12**](README.md)
+[**CIA Compliance Manager Diagrams v0.8.13**](README.md)
 
 ***
 
-# CIA Compliance Manager Diagrams v0.8.12
+# CIA Compliance Manager Diagrams v0.8.13
 
 ## Modules
 
@@ -10,16 +10,12 @@
 - [components](components/README.md)
 - [components/common/BusinessImpactSection](components/common/BusinessImpactSection/README.md)
 - [components/common/KeyValuePair](components/common/KeyValuePair/README.md)
-- [components/common/MetricsCard](components/common/MetricsCard/README.md)
 - [components/common/ResourceCard](components/common/ResourceCard/README.md)
-- [components/common/RiskAssessment](components/common/RiskAssessment/README.md)
 - [components/common/SecurityLevelBadge](components/common/SecurityLevelBadge/README.md)
 - [components/common/SecurityLevelIndicator](components/common/SecurityLevelIndicator/README.md)
 - [components/common/StatusBadge](components/common/StatusBadge/README.md)
 - [components/common/ValueDisplay](components/common/ValueDisplay/README.md)
-- [components/common/WidgetActions](components/common/WidgetActions/README.md)
 - [components/common/WidgetContainer](components/common/WidgetContainer/README.md)
-- [components/common/WidgetHeader](components/common/WidgetHeader/README.md)
 - [components/widgets](components/widgets/README.md)
 - [components/widgets/assessmentcenter/BusinessImpactAnalysisWidget](components/widgets/assessmentcenter/BusinessImpactAnalysisWidget/README.md)
 - [components/widgets/assessmentcenter/SecurityLevelWidget](components/widgets/assessmentcenter/SecurityLevelWidget/README.md)
