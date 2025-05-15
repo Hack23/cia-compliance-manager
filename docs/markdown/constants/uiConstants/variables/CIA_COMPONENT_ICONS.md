@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.13**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.14**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **CIA\_COMPONENT\_ICONS**: `Record`\<[`CIAComponentType`](../../../types/type-aliases/CIAComponentType.md), `string`\>
 
-Defined in: [constants/uiConstants.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/constants/uiConstants.ts#L37)
+Defined in: [constants/uiConstants.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/constants/uiConstants.ts#L37)
 
 Icons for CIA components

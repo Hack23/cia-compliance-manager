@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.13**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.14**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CostEstimationWidgetProps
 
-Defined in: [types/widgets.ts:343](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/widgets.ts#L343)
+Defined in: [types/widgets.ts:343](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/widgets.ts#L343)
 
 Props for cost estimation widgets
 
@@ -26,7 +26,7 @@ investment prioritization. 💰
 
 > **availabilityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:99](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/widgets.ts#L99)
+Defined in: [types/widgets.ts:99](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/widgets.ts#L99)
 
 Availability security level
 
@@ -40,7 +40,7 @@ Availability security level
 
 > `optional` **className**: `string`
 
-Defined in: [types/widgets.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/widgets.ts#L68)
+Defined in: [types/widgets.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/widgets.ts#L68)
 
 Optional CSS class name
 
@@ -54,7 +54,7 @@ Optional CSS class name
 
 > **confidentialityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/widgets.ts#L109)
+Defined in: [types/widgets.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/widgets.ts#L109)
 
 Confidentiality security level
 
@@ -68,7 +68,7 @@ Confidentiality security level
 
 > **integrityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/widgets.ts#L104)
+Defined in: [types/widgets.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/widgets.ts#L104)
 
 Integrity security level
 
@@ -82,7 +82,7 @@ Integrity security level
 
 > `optional` **securityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/widgets.ts#L78)
+Defined in: [types/widgets.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/widgets.ts#L78)
 
 Optional security level for widgets that only need one level
 
@@ -96,7 +96,7 @@ Optional security level for widgets that only need one level
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widgets.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/widgets.ts#L73)
+Defined in: [types/widgets.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/widgets.ts#L73)
 
 Optional test ID for testing
 

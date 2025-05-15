@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.13**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.14**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessValueMetrics
 
-Defined in: [types/businessImpact.ts:367](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/businessImpact.ts#L367)
+Defined in: [types/businessImpact.ts:367](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/businessImpact.ts#L367)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/businessImpact.ts:367](https://github.com/Hack23/cia-complian
 
 > **ROI\_ESTIMATES**: [`BusinessROIEstimates`](BusinessROIEstimates.md)
 
-Defined in: [types/businessImpact.ts:368](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/businessImpact.ts#L368)
+Defined in: [types/businessImpact.ts:368](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/businessImpact.ts#L368)
 
 ***
 
@@ -22,4 +22,4 @@ Defined in: [types/businessImpact.ts:368](https://github.com/Hack23/cia-complian
 
 > **TIME\_TO\_VALUE**: [`BusinessTimeToValue`](BusinessTimeToValue.md)
 
-Defined in: [types/businessImpact.ts:369](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/businessImpact.ts#L369)
+Defined in: [types/businessImpact.ts:369](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/businessImpact.ts#L369)

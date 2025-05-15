@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.13**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.14**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BaseImpact
 
-Defined in: [types/cia.ts:249](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/cia.ts#L249)
+Defined in: [types/cia.ts:249](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/cia.ts#L249)
 
 Base interface for CIA impacts
 
@@ -22,7 +22,7 @@ Base interface for CIA impacts
 
 > **description**: `string`
 
-Defined in: [types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/cia.ts#L251)
+Defined in: [types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/cia.ts#L251)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/
 
 > **level**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/cia.ts#L250)
+Defined in: [types/cia.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/cia.ts#L250)

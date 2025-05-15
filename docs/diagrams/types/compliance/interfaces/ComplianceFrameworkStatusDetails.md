@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.13**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.14**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ComplianceFrameworkStatusDetails
 
-Defined in: [types/compliance.ts:155](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/compliance.ts#L155)
+Defined in: [types/compliance.ts:155](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/compliance.ts#L155)
 
 Details about compliance status for a specific framework
 
@@ -16,7 +16,7 @@ Details about compliance status for a specific framework
 
 > **findings**: `string`[]
 
-Defined in: [types/compliance.ts:163](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/compliance.ts#L163)
+Defined in: [types/compliance.ts:163](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/compliance.ts#L163)
 
 List of findings or gaps
 
@@ -26,7 +26,7 @@ List of findings or gaps
 
 > **frameworkName**: `string`
 
-Defined in: [types/compliance.ts:157](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/compliance.ts#L157)
+Defined in: [types/compliance.ts:157](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/compliance.ts#L157)
 
 Name of the framework
 
@@ -36,7 +36,7 @@ Name of the framework
 
 > **metRequirements**: `string`[]
 
-Defined in: [types/compliance.ts:166](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/compliance.ts#L166)
+Defined in: [types/compliance.ts:166](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/compliance.ts#L166)
 
 List of requirements that are met
 
@@ -46,7 +46,7 @@ List of requirements that are met
 
 > **recommendations**: `string`[]
 
-Defined in: [types/compliance.ts:172](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/compliance.ts#L172)
+Defined in: [types/compliance.ts:172](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/compliance.ts#L172)
 
 Recommendations for achieving compliance
 
@@ -56,7 +56,7 @@ Recommendations for achieving compliance
 
 > **status**: `string`
 
-Defined in: [types/compliance.ts:160](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/compliance.ts#L160)
+Defined in: [types/compliance.ts:160](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/compliance.ts#L160)
 
 Current compliance status
 
@@ -66,6 +66,6 @@ Current compliance status
 
 > **unmetRequirements**: `string`[]
 
-Defined in: [types/compliance.ts:169](https://github.com/Hack23/cia-compliance-manager/blob/2f6ce8651c6fa9a0d9c8860576f0ee67ef038efd/src/types/compliance.ts#L169)
+Defined in: [types/compliance.ts:169](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/types/compliance.ts#L169)
 
 List of requirements that are not met
