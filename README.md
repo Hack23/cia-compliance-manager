@@ -559,8 +559,8 @@ We welcome contributions to our documentation. Please see the [Contributing Guid
 |                       | [Testing Library](https://www.npmjs.com/package/@testing-library/react)      | Active         | 16.x           | Community maintained, regular updates                                                    |
 | Development Utilities | [Cross-env](https://www.npmjs.com/package/cross-env)                         | Active         | 7.x            | Stable utility, minimal updates needed                                                   |
 |                       | [Start-server-and-test](https://www.npmjs.com/package/start-server-and-test) | Active         | 2.x            | Utility package, stable API                                                              |
-| Runtime Requirements  | Node.js                                                                      | Required       | ≥22.0.0        | [Node 22 EOL: April 2027](https://endoflife.date/nodejs)                                 |
-|                       | npm                                                                          | Required       | ≥10.8.2        | Follows Node.js support lifecycle                                                        |
+| Runtime Requirements  | Node.js                                                                      | Required       | ≥24.0.0        | [Node 24 EOL: April 2028](https://endoflife.date/nodejs)                                 |
+|                       | npm                                                                          | Required       | ≥11.0.0        | Follows Node.js support lifecycle                                                        |
 
 ## Widgets
 
