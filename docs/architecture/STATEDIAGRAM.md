@@ -1,172 +1,369 @@
-# CIA Compliance Manager State Diagrams
+# 🔄 CIA Compliance Manager State Diagrams
 
-This document contains state diagrams that illustrate key states and transitions within the CIA Compliance Manager.
+This document illustrates the key state transitions and behavioral models of the CIA Compliance Manager application, showing how the system responds to user interactions and processes security assessments.
 
-## 📚 Related Architecture Documentation
+## 📚 Related Documentation
 
 <div class="documentation-map">
 
 | Document                                            | Focus           | Description                               |
 | --------------------------------------------------- | --------------- | ----------------------------------------- |
-| **[Current Architecture](ARCHITECTURE.md)**         | 🏛️ Architecture | C4 model showing current system structure |
-| **[Future Architecture](FUTURE_ARCHITECTURE.md)**   | 🏛️ Architecture | Vision for context-aware platform         |
-| **[Future State Diagrams](FUTURE_STATEDIAGRAM.md)** | 🔄 Behavior     | Enhanced adaptive state transitions       |
-| **[Process Flowcharts](FLOWCHART.md)**              | 🔄 Process      | Current security workflows                |
-| **[Future Flowcharts](FUTURE_FLOWCHART.md)**        | 🔄 Process      | Enhanced context-aware workflows          |
-| **[Mindmaps](MINDMAP.md)**                          | 🧠 Concept      | Current system component relationships    |
-| **[Future Mindmaps](FUTURE_MINDMAP.md)**            | 🧠 Concept      | Future capability evolution               |
-| **[SWOT Analysis](SWOT.md)**                        | 💼 Business     | Current strategic assessment              |
-| **[Future SWOT Analysis](FUTURE_SWOT.md)**          | 💼 Business     | Future strategic opportunities            |
-| **[CI/CD Workflows](WORKFLOWS.md)**                 | 🔧 DevOps       | Current automation processes              |
-| **[Future Workflows](FUTURE_WORKFLOWS.md)**         | 🔧 DevOps       | Enhanced CI/CD with ML                    |
-| **[Future Data Model](FUTURE_DATA_MODEL.md)**       | 📊 Data         | Context-aware data architecture           |
+| **[Architecture](ARCHITECTURE.md)**                 | 🏛️ Architecture | C4 model showing system structure         |
+| **[Process Flowcharts](FLOWCHART.md)**              | 🔄 Process      | Security assessment workflows             |
+| **[System Architecture](SYSTEM_ARCHITECTURE.md)**   | 🏛️ System       | Layered architecture and component details |
+| **[Widget Analysis](WIDGET_ANALYSIS.md)**           | 🧩 Components   | Detailed widget component analysis        |
 
 </div>
 
-## Security Profile State Diagram
+## 🔍 Application Core States
 
-**🔒 Security Focus:** Illustrates the states and transitions of a security profile as security levels are configured and updated.
-
-**🔄 State Transition Focus:** Shows how security profiles evolve from initialization to completeness, with transitions triggered by user actions.
+The diagram below shows the main application states and transitions between them:
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Initialized: Create Security Profile
-    Initialized --> PartiallyConfigured: Set First Security Level
-    PartiallyConfigured --> PartiallyConfigured: Set Additional Security Level
-    PartiallyConfigured --> Configured: Set All Security Levels
-    Configured --> Analyzed: Calculate Business Impact
-    Analyzed --> ComplianceMapped: Map to Compliance Frameworks
-    ComplianceMapped --> CostEstimated: Calculate Implementation Costs
-    CostEstimated --> RecommendationsGenerated: Generate Recommendations
-    RecommendationsGenerated --> Implemented: Implement Recommendations
-    RecommendationsGenerated --> [*]: Export Report Only
-    Implemented --> [*]: Complete Implementation
-
-    Configured --> Configured: Update Security Level
-    Analyzed --> Analyzed: Recalculate Impact
-    ComplianceMapped --> ComplianceMapped: Update Compliance Mapping
-    CostEstimated --> CostEstimated: Update Cost Estimates
-
-    %% Cool color scheme
-    classDef baseState fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef analysisState fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef actionState fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef end fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
-
-    class Initialized baseState
-    class PartiallyConfigured baseState
-    class Configured baseState
-    class Analyzed analysisState
-    class ComplianceMapped analysisState
-    class CostEstimated actionState
-    class RecommendationsGenerated actionState
-    class Implemented end
-    class [*] start
+    [*] --> Initializing: Application<br>Launch
+    
+    state Initializing {
+        [*] --> LoadingConfigurations
+        LoadingConfigurations --> LoadingServices
+        LoadingServices --> InitializingUI
+        InitializingUI --> [*]
+    }
+    
+    Initializing --> Ready: Initialization<br>Complete
+    
+    state Ready {
+        [*] --> DefaultSecurityLevels
+        DefaultSecurityLevels --> CustomSecurityLevels: User Adjusts<br>Levels
+    }
+    
+    Ready --> Assessing: User Triggers<br>Assessment
+    
+    state Assessing {
+        [*] --> CalculatingSecurityScore
+        CalculatingSecurityScore --> EvaluatingBusinessImpact
+        EvaluatingBusinessImpact --> MappingToCompliance
+        MappingToCompliance --> GeneratingRecommendations
+        GeneratingRecommendations --> [*]
+    }
+    
+    Assessing --> Reviewing: Assessment<br>Complete
+    
+    state Reviewing {
+        [*] --> ViewingResults
+        ViewingResults --> ExploringDetails: User Explores<br>Specific Areas
+        ExploringDetails --> ViewingResults: Return to<br>Overview
+    }
+    
+    Reviewing --> Ready: User Adjusts<br>Security Levels
+    Reviewing --> Exporting: User Exports<br>Results
+    
+    Exporting --> Reviewing: Export<br>Complete
+    
+    classDef initial fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef process fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef review fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
+    classDef export fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    
+    class Initializing initial
+    class Ready,Assessing process
+    class Reviewing review
+    class Exporting export
 ```
 
-## Compliance Status State Diagram
+## 🔒 Security Level Selection States
 
-**📋 Compliance Focus:** Illustrates how compliance status changes based on security level selections and framework requirements.
-
-**🚦 Status Transition Focus:** Shows the transitions between different compliance states and the actions that trigger them.
+This diagram illustrates the state transitions during security level configuration:
 
 ```mermaid
 stateDiagram-v2
-    [*] --> NotEvaluated: Initialize Compliance Status
-    NotEvaluated --> Evaluating: Select Security Levels
-    Evaluating --> NonCompliant: All Levels Below Requirements
-    Evaluating --> PartiallyCompliant: Some Levels Meet Requirements
-    Evaluating --> Compliant: All Levels Meet Requirements
-
-    NonCompliant --> Evaluating: Update Security Levels
-    PartiallyCompliant --> Evaluating: Update Security Levels
-    Compliant --> Evaluating: Update Security Levels
-
-    NonCompliant --> RemediationPlanned: Create Remediation Plan
-    RemediationPlanned --> RemediationInProgress: Begin Remediation
-    RemediationInProgress --> RemediationInProgress: Continue Remediation
-    RemediationInProgress --> PartiallyCompliant: Partial Remediation Complete
-    RemediationInProgress --> Compliant: Full Remediation Complete
-
-    Compliant --> [*]: Generate Compliance Report
-    PartiallyCompliant --> [*]: Generate Partial Compliance Report
-    NonCompliant --> [*]: Generate Non-Compliance Report
-
-    %% Cool color scheme
-    classDef baseState fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef processState fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef nonCompliantState fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
-    classDef partialState fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
-    classDef compliantState fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef remediationState fill:#dae8fc,stroke:#333,stroke-width:1px,color:black
-
-    class NotEvaluated baseState
-    class Evaluating baseState
-    class NonCompliant nonCompliantState
-    class PartiallyCompliant partialState
-    class Compliant compliantState
-    class RemediationPlanned remediationState
-    class RemediationInProgress remediationState
-    class [*] start
+    [*] --> DefaultProfile: Initial Load
+    
+    state DefaultProfile {
+        [*] --> ModerateSecurityLevels
+    }
+    
+    DefaultProfile --> EditingProfile: User Selects<br>Security Levels
+    
+    state EditingProfile {
+        [*] --> SelectingConfidentiality
+        SelectingConfidentiality --> SelectingIntegrity: Next
+        SelectingIntegrity --> SelectingAvailability: Next
+        SelectingAvailability --> ReviewingSelections: Complete
+        
+        SelectingConfidentiality --> ReviewingSelections: Skip
+        SelectingIntegrity --> ReviewingSelections: Skip
+        
+        ReviewingSelections --> SelectingConfidentiality: Edit<br>Confidentiality
+        ReviewingSelections --> SelectingIntegrity: Edit<br>Integrity
+        ReviewingSelections --> SelectingAvailability: Edit<br>Availability
+    }
+    
+    EditingProfile --> ProfileSelected: User Confirms<br>Selections
+    
+    state ProfileSelected {
+        [*] --> LoadingProfileDetails
+        LoadingProfileDetails --> DisplayingProfileDetails
+    }
+    
+    ProfileSelected --> EditingProfile: User Modifies<br>Security Levels
+    
+    classDef default fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef editing fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef selected fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
+    classDef confidentiality fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
+    classDef integrity fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
+    classDef availability fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    
+    class DefaultProfile default
+    class EditingProfile editing
+    class ProfileSelected selected
+    class SelectingConfidentiality confidentiality
+    class SelectingIntegrity integrity
+    class SelectingAvailability availability
 ```
 
-## Widget State Diagram
+## 📊 Assessment Widget States
 
-**🖥️ UI Focus:** Illustrates the states of dashboard widgets as they respond to security level changes and user interactions.
-
-**🔄 Data Flow Focus:** Shows how widgets update in response to data changes and user-initiated actions.
+The state diagram for assessment widgets shows how they respond to security level changes:
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Initialized: Widget Mounted
-    Initialized --> Loading: Request Data
-    Loading --> Error: Data Error
-    Loading --> DataReceived: Data Loaded
-    DataReceived --> Rendered: Render Widget
-    Rendered --> Interactive: Enable Interactions
-
-    Interactive --> Updating: User Interaction
-    Updating --> Loading: Request New Data
-
-    Interactive --> Filtering: Apply Filter
-    Filtering --> Rendered: Update Display
-
-    Interactive --> Expanding: Expand Detail View
-    Expanding --> Expanded: Show Details
-    Expanded --> Interactive: Collapse View
-
-    Interactive --> Exporting: Export Data
-    Exporting --> Interactive: Export Complete
-
-    Error --> Loading: Retry
-    Error --> [*]: Unmount
-    Interactive --> [*]: Unmount
-
-    %% Cool color scheme
-    classDef baseState fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef loadingState fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
-    classDef dataState fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef interactionState fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef errorState fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
-
-    class Initialized baseState
-    class Rendered baseState
-    class Loading loadingState
-    class Updating loadingState
-    class Filtering loadingState
-    class Expanding loadingState
-    class Exporting loadingState
-    class DataReceived dataState
-    class Interactive interactionState
-    class Expanded interactionState
-    class Error errorState
-    class [*] start
+    [*] --> Idle: Widget<br>Initialized
+    
+    Idle --> Loading: Security Levels<br>Changed
+    
+    state Loading {
+        [*] --> FetchingData
+        FetchingData --> ProcessingData
+        ProcessingData --> RenderingResults
+        RenderingResults --> [*]
+    }
+    
+    Loading --> DisplayingResults: Data<br>Loaded
+    Loading --> Error: Data Fetch<br>Failed
+    
+    state DisplayingResults {
+        [*] --> ShowingPrimaryView
+        ShowingPrimaryView --> ShowingDetailedView: User Requests<br>Details
+        ShowingDetailedView --> ShowingPrimaryView: User Returns<br>to Summary
+    }
+    
+    Error --> Retrying: User Requests<br>Retry
+    Retrying --> Loading
+    
+    DisplayingResults --> Idle: Widget<br>Reset
+    
+    classDef idle fill:#95a5a6,stroke:#7f8c8d,stroke-width:2px,color:white
+    classDef loading fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef display fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
+    classDef error fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    
+    class Idle idle
+    class Loading,Retrying loading
+    class DisplayingResults,ShowingPrimaryView,ShowingDetailedView display
+    class Error error
 ```
 
-<div class="diagram-legend">
-These state diagrams illustrate the various states and transitions that occur within the CIA Compliance Manager application. They provide a visual representation of how different components of the system change state in response to user actions and data updates, offering insights into the application's behavior over time.
-</div>
+## 🧩 Widget Interaction States
+
+This diagram shows the state transitions resulting from interactions between widgets:
+
+```mermaid
+stateDiagram-v2
+    state SecurityLevelWidget {
+        [*] --> Ready
+        Ready --> Configuring: User Changes<br>Security Level
+        Configuring --> Propagating: New Levels<br>Selected
+        Propagating --> Ready: Propagation<br>Complete
+    }
+    
+    state AssessmentWidgets {
+        [*] --> Idle
+        Idle --> Loading: Receive New<br>Security Levels
+        Loading --> Rendering: Data<br>Retrieved
+        Rendering --> Displaying: Render<br>Complete
+        Displaying --> Idle: Reset or<br>New Changes
+    }
+    
+    SecurityLevelWidget --> AssessmentWidgets: Security Levels<br>Changed
+    
+    classDef slw fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    classDef aw fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    
+    class SecurityLevelWidget slw
+    class AssessmentWidgets aw
+```
+
+## 🔒 Confidentiality Component States
+
+This diagram illustrates states related to confidentiality controls:
+
+```mermaid
+stateDiagram-v2
+    [*] --> NoAccess: Level: None
+    
+    NoAccess --> BasicAccess: Level: Low
+    BasicAccess --> StandardAccess: Level: Moderate
+    StandardAccess --> EnhancedAccess: Level: High
+    EnhancedAccess --> ZeroTrust: Level: Very High
+    
+    ZeroTrust --> EnhancedAccess: Decrease Level
+    EnhancedAccess --> StandardAccess: Decrease Level
+    StandardAccess --> BasicAccess: Decrease Level
+    BasicAccess --> NoAccess: Decrease Level
+    
+    state NoAccess {
+        [*] --> PublicData
+    }
+    
+    state BasicAccess {
+        [*] --> SimpleAuthentication
+    }
+    
+    state StandardAccess {
+        [*] --> RoleBasedControl
+        RoleBasedControl --> DataEncryption
+    }
+    
+    state EnhancedAccess {
+        [*] --> MFA
+        MFA --> EndToEndEncryption
+        EndToEndEncryption --> AuditLogging
+    }
+    
+    state ZeroTrust {
+        [*] --> ContinuousVerification
+        ContinuousVerification --> JustInTimeAccess
+        JustInTimeAccess --> LeastPrivilege
+        LeastPrivilege --> ContextAwareAccess
+    }
+    
+    classDef none fill:#95a5a6,stroke:#7f8c8d,stroke-width:2px,color:white
+    classDef low fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef moderate fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    classDef high fill:#e67e22,stroke:#d35400,stroke-width:2px,color:white
+    classDef veryhigh fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
+    
+    class NoAccess,PublicData none
+    class BasicAccess,SimpleAuthentication low
+    class StandardAccess,RoleBasedControl,DataEncryption moderate
+    class EnhancedAccess,MFA,EndToEndEncryption,AuditLogging high
+    class ZeroTrust,ContinuousVerification,JustInTimeAccess,LeastPrivilege,ContextAwareAccess veryhigh
+```
+
+## ✓ Integrity Component States
+
+This diagram illustrates states related to integrity controls:
+
+```mermaid
+stateDiagram-v2
+    [*] --> NoValidation: Level: None
+    
+    NoValidation --> BasicValidation: Level: Low
+    BasicValidation --> StandardValidation: Level: Moderate
+    StandardValidation --> EnhancedValidation: Level: High
+    EnhancedValidation --> FormalVerification: Level: Very High
+    
+    FormalVerification --> EnhancedValidation: Decrease Level
+    EnhancedValidation --> StandardValidation: Decrease Level
+    StandardValidation --> BasicValidation: Decrease Level
+    BasicValidation --> NoValidation: Decrease Level
+    
+    state NoValidation {
+        [*] --> NoControls
+    }
+    
+    state BasicValidation {
+        [*] --> ManualChecks
+    }
+    
+    state StandardValidation {
+        [*] --> AutomatedValidation
+        AutomatedValidation --> ErrorHandling
+    }
+    
+    state EnhancedValidation {
+        [*] --> CryptographicVerification
+        CryptographicVerification --> DataSignatures
+        DataSignatures --> ImmutableLogging
+    }
+    
+    state FormalVerification {
+        [*] --> BlockchainValidation
+        BlockchainValidation --> ZeroKnowledgeProofs
+        ZeroKnowledgeProofs --> FormalMethodVerification
+    }
+    
+    classDef none fill:#95a5a6,stroke:#7f8c8d,stroke-width:2px,color:white
+    classDef low fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef moderate fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    classDef high fill:#e67e22,stroke:#d35400,stroke-width:2px,color:white
+    classDef veryhigh fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
+    
+    class NoValidation,NoControls none
+    class BasicValidation,ManualChecks low
+    class StandardValidation,AutomatedValidation,ErrorHandling moderate
+    class EnhancedValidation,CryptographicVerification,DataSignatures,ImmutableLogging high
+    class FormalVerification,BlockchainValidation,ZeroKnowledgeProofs,FormalMethodVerification veryhigh
+```
+
+## ⏱️ Availability Component States
+
+This diagram illustrates states related to availability controls:
+
+```mermaid
+stateDiagram-v2
+    [*] --> NoAvailability: Level: None
+    
+    NoAvailability --> BasicAvailability: Level: Low
+    BasicAvailability --> StandardAvailability: Level: Moderate
+    StandardAvailability --> EnhancedAvailability: Level: High
+    EnhancedAvailability --> ContinuousAvailability: Level: Very High
+    
+    ContinuousAvailability --> EnhancedAvailability: Decrease Level
+    EnhancedAvailability --> StandardAvailability: Decrease Level
+    StandardAvailability --> BasicAvailability: Decrease Level
+    BasicAvailability --> NoAvailability: Decrease Level
+    
+    state NoAvailability {
+        [*] --> NoSLA
+    }
+    
+    state BasicAvailability {
+        [*] --> MinimalUptime
+        MinimalUptime --> BasicBackup
+    }
+    
+    state StandardAvailability {
+        [*] --> DefinedSLA
+        DefinedSLA --> RegularBackups
+        RegularBackups --> IncidentResponse
+    }
+    
+    state EnhancedAvailability {
+        [*] --> HighAvailabilitySystem
+        HighAvailabilitySystem --> DisasterRecovery
+        DisasterRecovery --> AutomatedFailover
+    }
+    
+    state ContinuousAvailability {
+        [*] --> MultiRegionDeployment
+        MultiRegionDeployment --> RealTimeFailover
+        RealTimeFailover --> SelfHealingSystems
+    }
+    
+    classDef none fill:#95a5a6,stroke:#7f8c8d,stroke-width:2px,color:white
+    classDef low fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef moderate fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    classDef high fill:#e67e22,stroke:#d35400,stroke-width:2px,color:white
+    classDef veryhigh fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:white
+    
+    class NoAvailability,NoSLA none
+    class BasicAvailability,MinimalUptime,BasicBackup low
+    class StandardAvailability,DefinedSLA,RegularBackups,IncidentResponse moderate
+    class EnhancedAvailability,HighAvailabilitySystem,DisasterRecovery,AutomatedFailover high
+    class ContinuousAvailability,MultiRegionDeployment,RealTimeFailover,SelfHealingSystems veryhigh
+```
+
+These state diagrams provide a comprehensive view of the CIA Compliance Manager's behavioral model, illustrating how the application transitions between states in response to user interactions and security level changes.

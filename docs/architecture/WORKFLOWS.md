@@ -1,384 +1,442 @@
-# 🔁 CIA Compliance Manager CI/CD Workflows
+# 🚀 CIA Compliance Manager CI/CD and Development Workflows
 
-This document details the continuous integration and deployment workflows used in the CIA Compliance Manager project. The workflows automate testing, security scanning, and release procedures to ensure code quality and security compliance.
+This document describes the current automation processes and development workflows used in the CIA Compliance Manager project.
 
-## 📚 Related Architecture Documentation
+## 📦 CI/CD Pipeline
+
+The CIA Compliance Manager uses GitHub Actions for continuous integration and continuous deployment. The workflow is designed to ensure code quality, test coverage, and automated deployment.
+
+```mermaid
+flowchart TD
+    PR[Pull Request] --> TestsAndLint[Tests & Lint]
+    PR --> SecurityScan[Security Scan]
+    PR --> DependencyReview[Dependency Review]
+    
+    TestsAndLint --> CoverageReport[Coverage Report]
+    TestsAndLint --> BuildValidation[Build Validation]
+    SecurityScan --> CodeQL[CodeQL Analysis]
+    
+    CoverageReport & BuildValidation & CodeQL & DependencyReview --> MergePR{Merge PR}
+    
+    MergePR -->|Merged| MainBranch[Main Branch]
+    MainBranch -->|Create Tag| ReleaseProcess[Release Process]
+    
+    ReleaseProcess --> PrepareRelease[Prepare Release]
+    PrepareRelease --> BuildAndTest[Build & Test]
+    BuildAndTest --> GenerateDocs[Generate Documentation]
+    GenerateDocs --> CreateRelease[Create GitHub Release]
+    CreateRelease --> DeployGHPages[Deploy to GitHub Pages]
+    
+    classDef pr fill:#ffcc80,stroke:#e65100,stroke-width:2px,color:black
+    classDef check fill:#a5d6a7,stroke:#2e7d32,stroke-width:2px,color:black
+    classDef branch fill:#90caf9,stroke:#0d47a1,stroke-width:2px,color:black
+    classDef release fill:#ce93d8,stroke:#6a1b9a,stroke-width:2px,color:black
+    classDef deploy fill:#81d4fa,stroke:#01579b,stroke-width:2px,color:black
+    
+    class PR,MergePR pr
+    class TestsAndLint,SecurityScan,DependencyReview,CoverageReport,BuildValidation,CodeQL check
+    class MainBranch branch
+    class ReleaseProcess,PrepareRelease,BuildAndTest,GenerateDocs,CreateRelease release
+    class DeployGHPages deploy
+```
+
+## 🏗️ GitHub Actions Workflows
+
+The following GitHub Actions workflows are used in the CI/CD pipeline:
+
+### Pull Request Workflow
+
+```yaml
+name: PR Checks
+on:
+  pull_request:
+    branches: [ main ]
+    
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test:coverage
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+  
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        
+  dependency-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v3
+```
+
+### Release Workflow
+
+```yaml
+name: Release
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+    
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run test
+      - run: npm run build
+      - name: Generate documentation
+        run: npm run docs:build
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+```
+
+## 🔄 Development Workflow
+
+The development workflow follows these steps:
+
+1. **Feature Branch Creation**: Developers create a new branch from `main` for each feature or bug fix.
+2. **Local Development**:
+   - Code changes are made locally
+   - Tests are written for new features
+   - Code is tested using `npm run test`
+   - Linting is performed using `npm run lint`
+3. **Pull Request Creation**:
+   - Developer creates a pull request to merge their branch into `main`
+   - PR template is filled out with relevant information
+   - PR is linked to any relevant issues
+4. **Automated Checks**:
+   - GitHub Actions runs automated checks on the PR
+   - Tests, lint, security scans, and dependency review are performed
+5. **Code Review**:
+   - Team members review the code changes
+   - Comments and suggestions are addressed
+   - Changes are pushed to the PR branch
+6. **Merge**:
+   - PR is merged to `main` once approved and passing all checks
+   - Branch is deleted after successful merge
+7. **Release**:
+   - When ready for release, a tag is created following semantic versioning
+   - GitHub Actions creates a GitHub Release and deploys to GitHub Pages
+
+```mermaid
+gitGraph
+    commit id: "Initial commit"
+    branch feature/new-widget
+    checkout feature/new-widget
+    commit id: "Add new widget component"
+    commit id: "Add tests for widget"
+    checkout main
+    merge feature/new-widget
+    branch bugfix/typo-fix
+    checkout bugfix/typo-fix
+    commit id: "Fix typo in documentation"
+    checkout main
+    merge bugfix/typo-fix
+    commit id: "Update version"
+    commit tag: "v1.0.0"
+```
+
+## 📋 Pull Request Workflow
+
+The pull request process follows these steps:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Draft
+    Draft --> Open: Ready for review
+    Open --> InReview: Reviewer assigned
+    InReview --> ChangesRequested: Review completed with requests
+    InReview --> Approved: Review completed with approval
+    ChangesRequested --> InReview: Changes pushed
+    Approved --> Merged: PR merged
+    Merged --> [*]
+```
+
+## 🔍 Code Review Guidelines
+
+When reviewing code, team members should follow these guidelines:
+
+1. **Security**: Verify that code follows security best practices
+2. **Code Quality**: Check for clean, readable, and maintainable code
+3. **Tests**: Ensure proper test coverage for new code
+4. **Types**: Verify TypeScript types are properly used
+5. **Reusability**: Check that existing utilities and components are reused appropriately
+6. **Documentation**: Verify that code is properly documented
+7. **Performance**: Consider performance implications of changes
+
+## 📊 Quality Gates
+
+The following quality gates are enforced in the CI/CD pipeline:
+
+| Gate | Requirement | Description |
+|------|------------|-------------|
+| 🧪 Tests | All tests pass | All unit and integration tests must pass |
+| 📏 Lint | No lint errors | Code must conform to ESLint rules |
+| 📊 Coverage | Minimum 80% | Code coverage must be at least 80% |
+| 🔒 Security | No high or critical vulnerabilities | CodeQL must not find high or critical vulnerabilities |
+| 📦 Dependencies | No vulnerable dependencies | Dependency review must not find vulnerable dependencies |
+
+## 🚀 Deployment Process
+
+The deployment process is automated and triggered by creating a new tag:
+
+1. **Tag Creation**: A new tag is created following semantic versioning
+2. **Build**: The application is built and tested
+3. **Documentation**: Documentation is generated
+4. **GitHub Release**: A new release is created on GitHub
+5. **GitHub Pages**: The application is deployed to GitHub Pages
+
+## 🔄 Versioning Strategy
+
+The project uses semantic versioning:
+
+- **Major version** (X.y.z): Breaking changes
+- **Minor version** (x.Y.z): New features without breaking changes
+- **Patch version** (x.y.Z): Bug fixes and minor improvements
+
+## 🗓️ Release Schedule
+
+- **Patch Releases**: As needed for bug fixes
+- **Minor Releases**: Every 2-4 weeks with new features
+- **Major Releases**: Planned, with migration guides and documentation
+
+# 🔄 CIA Compliance Manager Workflows
+
+## 📚 Related Documentation
 
 <div class="documentation-map">
 
-| Document                                            | Focus           | Description                               |
-| --------------------------------------------------- | --------------- | ----------------------------------------- |
-| **[Current Architecture](ARCHITECTURE.md)**         | 🏛️ Architecture | C4 model showing current system structure |
-| **[Future Architecture](FUTURE_ARCHITECTURE.md)**   | 🏛️ Architecture | Vision for context-aware platform         |
-| **[State Diagrams](STATEDIAGRAM.md)**               | 🔄 Behavior     | Current system state transitions          |
-| **[Future State Diagrams](FUTURE_STATEDIAGRAM.md)** | 🔄 Behavior     | Enhanced adaptive state transitions       |
-| **[Process Flowcharts](FLOWCHART.md)**              | 🔄 Process      | Current security workflows                |
-| **[Future Flowcharts](FUTURE_FLOWCHART.md)**        | 🔄 Process      | Enhanced context-aware workflows          |
-| **[Mindmaps](MINDMAP.md)**                          | 🧠 Concept      | Current system component relationships    |
-| **[Future Mindmaps](FUTURE_MINDMAP.md)**            | 🧠 Concept      | Future capability evolution               |
-| **[SWOT Analysis](SWOT.md)**                        | 💼 Business     | Current strategic assessment              |
-| **[Future SWOT Analysis](FUTURE_SWOT.md)**          | 💼 Business     | Future strategic opportunities            |
-| **[Future Workflows](FUTURE_WORKFLOWS.md)**         | 🔧 DevOps       | Enhanced CI/CD with ML                    |
-| **[Future Data Model](FUTURE_DATA_MODEL.md)**       | 📊 Data         | Context-aware data architecture           |
+| Document                                          | Focus           | Description                               |
+| ------------------------------------------------- | --------------- | ----------------------------------------- |
+| **[System Architecture](SYSTEM_ARCHITECTURE.md)** | 🏛️ System       | Layered architecture and component details |
+| **[Process Flowcharts](FLOWCHART.md)**            | 🔄 Process      | Security assessment workflows             |
+| **[State Diagrams](STATEDIAGRAM.md)**             | 🔄 Behavior     | System state transitions                   |
 
 </div>
 
-## 🔄 Workflow Overview
+## Development Workflows
 
-The project uses GitHub Actions for automation with the following workflows:
+The CIA Compliance Manager project follows established development workflows to ensure code quality, maintainability, and collaborative development.
 
-1. **🚀 Build, Attest and Release**: Builds, attests, and releases new versions with security scanning
-2. **🧪 Test and Report**: Runs unit and E2E tests with coverage reporting
-3. **🔍 CodeQL Analysis**: Security scanning for code vulnerabilities
-4. **📦 Dependency Review**: Scanning of dependency changes for vulnerabilities
-5. **⭐ Scorecard Analysis**: OSSF security scorecard for supply chain security
-6. **📜 License Checking**: Verification of dependency licenses for compliance
-7. **🏷️ PR Labeler**: Automated labeling of pull requests
-8. **🔆 Lighthouse**: Performance, accessibility, and best practices auditing
-9. **🔒 ZAP Scan**: Dynamic security scanning of deployed application
+### 🌿 Git Workflow
 
-## Workflow Relationships
+The project uses a GitHub Flow model with the following characteristics:
 
 ```mermaid
-flowchart TB
-    subgraph "Continuous Integration"
-        direction TB
-        PR[Pull Request] --> TestReport[Test and Report]
-        PR --> DependencyReview[Dependency Review]
-        PR --> Labeler[PR Labeler]
-        TestReport --> LicenseCheck[License Check]
-        TestReport --> CodeQL[CodeQL Analysis]
-        CodeQL --> Scorecard[Scorecard Analysis]
-    end
-
-    subgraph "Continuous Deployment"
-        direction TB
-        Release[Release Trigger] --> BuildTest[Prepare & Test]
-        BuildTest --> LicenseCheck2[License Check]
-        LicenseCheck2 --> Build[Build Package]
-        Build --> GenerateSBOM[Generate SBOM]
-        GenerateSBOM --> Attestations[Create Attestations]
-        Attestations --> CreateRelease[Create GitHub Release]
-        CreateRelease --> DeployGHPages[Deploy to GitHub Pages]
-        DeployGHPages --> Lighthouse[Lighthouse Audit]
-        DeployGHPages --> ZAPScan[ZAP Security Scan]
-    end
-
-    PR -.-> |"approved & merged"| main[Main Branch]
-    main --> Scorecard
-    main --> CodeQL
-    main -.-> |"tag created or manual trigger"| Release
-
-    %% Enhanced color styling
-    classDef integration fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
-    classDef deployment fill:#86b5d9,stroke:#333,stroke-width:1.5px,color:black
-    classDef process fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    classDef trigger fill:#bbdefb,stroke:#333,stroke-width:1.5px,color:black
-    classDef security fill:#ffccbc,stroke:#333,stroke-width:1.5px,color:black
-    classDef audit fill:#ffecb3,stroke:#333,stroke-width:1.5px,color:black
-
-    class PR,TestReport,DependencyReview,Labeler integration
-    class CodeQL,Scorecard,LicenseCheck security
-    class Release,BuildTest,Build,CreateRelease,DeployGHPages,LicenseCheck2,GenerateSBOM,Attestations deployment
-    class Lighthouse,ZAPScan audit
-    class main process
+gitGraph
+    commit id: "initial" tag: "v0.8.0"
+    branch feature/widget-improvements
+    checkout feature/widget-improvements
+    commit id: "add widget tests"
+    commit id: "improve widget styles"
+    checkout main
+    merge feature/widget-improvements
+    branch bugfix/compliance-calculation
+    checkout bugfix/compliance-calculation
+    commit id: "fix calculation logic"
+    checkout main
+    merge bugfix/compliance-calculation
+    commit id: "release prep" tag: "v0.9.0"
+    branch feature/security-enhancements
+    checkout feature/security-enhancements
+    commit id: "improve type safety"
+    checkout main
+    merge feature/security-enhancements
+    commit id: "final v1 prep" tag: "v1.0.0"
 ```
 
-## 📜 License Checking Workflow
+#### Key Workflow Elements:
 
-The project includes license checking as part of the CI/CD process to ensure all dependencies comply with the project's license requirements:
+1. **Feature Branches**: Created from `main` for new features
+2. **Bugfix Branches**: Created from `main` for bug fixes
+3. **Pull Requests**: Required for all changes to `main`
+4. **Code Reviews**: Required for all PRs
+5. **CI Checks**: Must pass before merging
+
+### 🔄 CI/CD Pipeline
+
+The CI/CD pipeline automates testing, building, and deployment processes:
 
 ```mermaid
 flowchart TD
-    Start[CI Pipeline] --> Setup[Setup Environment]
-    Setup --> Install[Install Dependencies]
-    Install --> LicenseCheck[Check Licenses]
-    LicenseCheck --> Pass{Licenses OK?}
-    Pass -->|Yes| Continue[Continue Pipeline]
-    Pass -->|No| Fail[Fail Build]
-
-    %% Enhanced styling with better visual hierarchy
-    classDef startNode fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
-    classDef checkNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    classDef decisionNode fill:#d1c4e9,stroke:#333,stroke-width:2px,color:black
-    classDef failNode fill:#ffccbc,stroke:#333,stroke-width:2px,color:black,font-weight:bold
-
-    class Start startNode
-    class Setup,Install,Continue processNode
-    class LicenseCheck checkNode
-    class Pass decisionNode
-    class Fail failNode
+    CodeChange[Code Change] --> PR[Pull Request Created]
+    PR --> Lint[ESLint Analysis]
+    PR --> TypeCheck[TypeScript Check]
+    PR --> UnitTest[Unit Tests]
+    
+    Lint & TypeCheck & UnitTest --> CodeReview[Code Review]
+    CodeReview --> IntegrationTests[Integration Tests]
+    IntegrationTests --> Build[Build Process]
+    Build --> SecurityScan[Security Scan]
+    SecurityScan --> DeployStaging[Deploy to Staging]
+    DeployStaging --> E2ETests[E2E Tests]
+    E2ETests --> ApproveDeployment{Approve Deployment?}
+    ApproveDeployment -->|Yes| DeployProduction[Deploy to Production]
+    ApproveDeployment -->|No| FixIssues[Fix Issues]
+    FixIssues --> PR
+    
+    DeployProduction --> ReleaseNotes[Generate Release Notes]
+    DeployProduction --> MonitoringAlerts[Monitoring & Alerts]
+    
+    classDef start fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
+    classDef test fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef deploy fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    classDef decision fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    
+    class CodeChange,PR start
+    class Lint,TypeCheck,CodeReview,Build,FixIssues process
+    class UnitTest,IntegrationTests,SecurityScan,E2ETests test
+    class DeployStaging,DeployProduction,ReleaseNotes,MonitoringAlerts deploy
+    class ApproveDeployment decision
 ```
 
-License checks are run both during PR verification and before releases to ensure compliance.
-
-## 🧪 Test and Report Workflow
-
-This workflow runs on pull requests and pushes to the main branch to ensure code quality.
-
-```mermaid
-flowchart TD
-    Start[Push or PR] --> Prepare[Setup Environment]
-    Prepare --> BuildValidation[Build Validation]
-    Prepare --> UnitTests[Run Unit Tests]
-    Prepare --> E2ETests[Run E2E Tests]
-    BuildValidation --> LicenseCheck[Check Licenses]
-    UnitTests --> Coverage[Generate Coverage Report]
-    E2ETests --> TestReport[Generate Test Report]
-    Coverage --> Upload[Upload Reports]
-    TestReport --> Upload
-    Upload --> End[End]
-
-    %% Enhanced styling with improved flow and grouping
-    classDef startNode fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
-    classDef testNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1.5px,color:black
-    classDef endNode fill:#86b5d9,stroke:#333,stroke-width:2px,color:black
-    classDef checkNode fill:#ffccbc,stroke:#333,stroke-width:1.5px,color:black
-
-    class Start,End startNode
-    class Prepare,BuildValidation processNode
-    class UnitTests,E2ETests testNode
-    class Coverage,TestReport,Upload reportNode
-    class LicenseCheck checkNode
-```
-
-## 🚀 Release Workflow
-
-This workflow handles the release process for new versions, triggered by version tags or manual workflow dispatch.
-
-```mermaid
-flowchart TD
-    Start[Release Trigger] --> Prepare[Prepare Release]
-    Prepare --> TestBuild[Test & Build]
-    TestBuild --> LicenseCheck[Check Licenses]
-    LicenseCheck --> Build[Build Package]
-    Build --> SBOM[Generate SBOM]
-    SBOM --> Attestation[Generate Attestations]
-    Attestation --> CreateRelease[Create GitHub Release]
-    CreateRelease --> Deploy[Deploy to GitHub Pages]
-    Deploy --> LighthouseAudit[Lighthouse Audit]
-    Deploy --> ZAPScan[ZAP Security Scan]
-    LighthouseAudit --> End[End]
-    ZAPScan --> End
-
-    %% Enhanced styling with better visual hierarchy
-    classDef startNode fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
-    classDef securityNode fill:#d1c4e9,stroke:#333,stroke-width:1.5px,color:black
-    classDef deployNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    classDef endNode fill:#86b5d9,stroke:#333,stroke-width:2px,color:black
-    classDef checkNode fill:#ffccbc,stroke:#333,stroke-width:1.5px,color:black
-    classDef auditNode fill:#ffecb3,stroke:#333,stroke-width:1.5px,color:black
-
-    class Start,End startNode
-    class Prepare,TestBuild,Build processNode
-    class SBOM,Attestation,ZAPScan securityNode
-    class CreateRelease,Deploy deployNode
-    class LicenseCheck checkNode
-    class LighthouseAudit auditNode
-```
-
-## 🔍 Security and Quality Scanning Workflows
-
-Multiple security and quality scanning workflows validate different aspects of the codebase and deployed application.
-
-```mermaid
-flowchart TD
-    subgraph "Security & Quality Workflows"
-        direction TB
-        PR[Pull Request] --> DependencyReview[Dependency Review]
-        Branch[Main Branch] --> CodeQL[CodeQL Analysis]
-        Branch --> Scorecard[Scorecard Analysis]
-        Deploy[Deployment] --> Lighthouse[Lighthouse Audit]
-        Deploy --> ZAPScan[ZAP Security Scan]
-    end
-
-    DependencyReview --> Report1[PR Comments]
-    CodeQL --> Report2[GitHub Security Tab]
-    Scorecard --> Report3[Security Dashboard]
-    Lighthouse --> Report4[Performance Report]
-    ZAPScan --> Report5[Security Findings]
-
-    %% Enhanced styling with improved grouping
-    classDef sourceNode fill:#a0c8e0,stroke:#333,stroke-width:2px,color:black
-    classDef scanNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1.5px,color:black,font-style:italic
-    classDef auditNode fill:#ffecb3,stroke:#333,stroke-width:1.5px,color:black
-
-    class PR,Branch,Deploy sourceNode
-    class DependencyReview,CodeQL,Scorecard,ZAPScan scanNode
-    class Report1,Report2,Report3,Report5 reportNode
-    class Lighthouse,Report4 auditNode
-```
-
-### 🔍 CodeQL Analysis Workflow
-
-Analyzes code for security vulnerabilities using GitHub's CodeQL engine. Runs on:
-
-- Push to main branch
-- Pull requests to main branch
-- Weekly schedule (Mondays)
-
-### 📦 Dependency Review
-
-Scans dependency manifest changes in pull requests to identify vulnerable packages.
-
-### ⭐ Scorecard Analysis
-
-Evaluates the project against OSSF security best practices:
-
-- Branch protection rules
-- Dependency management
-- Code signing
-- Other supply chain security practices
-
-### 🔆 Lighthouse Audit
-
-Runs performance and best practices audits on the deployed application:
-
-- Performance metrics
-- Accessibility compliance
-- SEO optimization
-- PWA compatibility
-- Best practices adherence
-
-The workflow uses a budget.json file to define performance budgets and thresholds, uploading results as artifacts and to temporary public storage for viewing.
-
-### 🔒 ZAP Security Scan
-
-Performs dynamic application security testing (DAST) on the deployed application:
-
-- Identifies common web vulnerabilities
-- API security scanning
-- Checks for OWASP Top 10 vulnerabilities
-- Generates comprehensive security reports
-
-ZAP scans are performed using the OWASP ZAP Docker container against the deployed GitHub Pages site to identify runtime security issues that static analysis might miss.
-
-## CI/CD Integration
-
-Performance tests and license checks are integrated with CI/CD pipelines to catch performance regressions and licensing issues:
-
-```yaml
-# Excerpt from CI configuration
-stages:
-  - test
-  - performance
-  - compliance
-  - security
-
-performance-tests:
-  stage: performance
-  script:
-    - npm run cypress:run:perf
-  artifacts:
-    paths:
-      - cypress/reports/performance/
-
-license-check:
-  stage: compliance
-  script:
-    - npm run test:licenses
-  artifacts:
-    paths:
-      - license-report/
-
-lighthouse-audit:
-  stage: performance
-  script:
-    - npm run lighthouse
-  artifacts:
-    paths:
-      - lighthouse-reports/
-
-zap-scan:
-  stage: security
-  script:
-    - npm run zap-scan
-  artifacts:
-    paths:
-      - zap-reports/
-```
-
-## Mermaid Diagram Support
-
-GitHub natively supports Mermaid diagrams in Markdown files. The diagrams in this documentation leverage this support to visually represent workflows using the Mermaid syntax. This enables:
-
-- Real-time rendering of workflow diagrams
-- Automatic updates when the workflow code changes
-- Interactive visualization of complex processes
-
-For more information about Mermaid syntax and capabilities, see the [Mermaid documentation](https://mermaid.js.org/).
-
-## Continuous Integration Diagram
-
-The complete CI/CD pipeline integrates all workflows:
+### 🔬 Testing Workflow
 
 ```mermaid
 flowchart LR
-    subgraph "Code Changes"
+    Component[Component Development] -->|TDD| UnitTests[Unit Tests]
+    UnitTests --> ComponentTests[Component Tests]
+    ComponentTests --> IntegrationTests[Integration Tests]
+    IntegrationTests --> E2ETests[E2E Tests]
+    
+    subgraph "Continuous Testing"
         direction TB
-        Developer([Developer]) --> PR[Pull Request]
-        PR --> Review[Code Review]
-        Review --> Merge[Merge to Main]
-        Merge --> Tag[Version Tag]
-        Tag --> Release[Release]
+        CommitHook[Pre-commit Hook]
+        WatchMode[Watch Mode]
+        CICycle[CI Pipeline]
     end
-
-    subgraph "Automated Checks"
-        direction TB
-        PR --> UnitE2E[Unit & E2E Tests]
-        PR --> DependencyScan[Dependency Scan]
-        PR --> LicenseCheck[License Check]
-        UnitE2E --> Reports[Test Reports]
-        Merge --> CodeQLScan[CodeQL Analysis]
-        Merge --> ScoreCard[Security Scorecard]
-    end
-
-    subgraph "Release Process"
-        direction TB
-        Release --> Build[Build & Attestation]
-        Build --> LicenseVerify[License Verification]
-        LicenseVerify --> SBOM[Generate SBOM]
-        SBOM --> DeployGH[GitHub Release]
-        DeployGH --> DeployPages[GitHub Pages]
-        DeployPages --> Lighthouse[Lighthouse Audit]
-        DeployPages --> ZAPScan[ZAP Security Scan]
-    end
-
-    %% Enhanced styling with better visual hierarchy and flow indicators
-    classDef devNode fill:#a0c8e0,stroke:#333,stroke-width:2px,color:black
-    classDef codeNode fill:#bbdefb,stroke:#333,stroke-width:1.5px,color:black
-    classDef testNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    classDef deployNode fill:#86b5d9,stroke:#333,stroke-width:1.5px,color:black
-    classDef reportNode fill:#d1c4e9,stroke:#333,stroke-width:1.5px,color:black
-    classDef checkNode fill:#ffccbc,stroke:#333,stroke-width:1.5px,color:black
-    classDef auditNode fill:#ffecb3,stroke:#333,stroke-width:1.5px,color:black
-
-    class Developer devNode
-    class PR,Review,Merge,Tag,Release codeNode
-    class UnitE2E,DependencyScan,Reports,CodeQLScan,ScoreCard testNode
-    class Build,DeployGH,DeployPages deployNode
-    class LicenseCheck,LicenseVerify checkNode
-    class SBOM,ZAPScan reportNode
-    class Lighthouse auditNode
+    
+    Component -.-> CommitHook
+    Component -.-> WatchMode
+    UnitTests & ComponentTests & IntegrationTests -.-> CICycle
+    
+    classDef component fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef test fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef continuous fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    
+    class Component component
+    class UnitTests,ComponentTests,IntegrationTests,E2ETests test
+    class CommitHook,WatchMode,CICycle continuous
 ```
 
-## Future CI/CD Improvements
+## Issue Management Process
 
-The following enhancements are planned for future CI/CD pipeline improvements:
+```mermaid
+stateDiagram-v2
+    [*] --> Open: Issue Created
+    
+    state IssueLifecycle {
+        Open --> InProgress: Developer Assigned
+        InProgress --> CodeReview: PR Created
+        CodeReview --> ReadyForRelease: PR Merged
+        ReadyForRelease --> Released: Deployed
+        
+        InProgress --> NeedInfo: Additional Info Required
+        NeedInfo --> InProgress: Info Provided
+        
+        CodeReview --> NeedsChanges: Review Feedback
+        NeedsChanges --> CodeReview: Changes Made
+    }
+    
+    Released --> [*]: Issue Closed
+    
+    classDef start fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef process fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef review fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    classDef release fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
+    classDef special fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    
+    class Open start
+    class InProgress,NeedInfo,NeedsChanges process
+    class CodeReview review
+    class ReadyForRelease,Released release
+```
 
-1. **Automated Versioning**: Semantic versioning based on commit messages
-2. **Performance Testing**: Expanding performance benchmarks with more metrics
-3. **Security Scanning Enhancement**: Additional security scanners and threat modeling
-4. **Containerization**: Docker image building and container scanning
-5. **Environment-Specific Deployments**: Staging and production deployment pipelines
-6. **Automated Accessibility Testing**: Extended accessibility compliance validation
-7. **Continuous Performance Monitoring**: Trend analysis for performance metrics
-8. **Vulnerability Management**: Automated vulnerability tracking and remediation workflows
-9. **Compliance Reporting**: Automated compliance status reporting and auditing
+## Release Process
 
-For details on the future architecture direction, see [FUTURE_ARCHITECTURE.md](FUTURE_ARCHITECTURE.md).
+```mermaid
+flowchart TD
+    FeatureComplete[Features Complete] --> TestingCycle[Testing Cycle]
+    TestingCycle --> BugFixes[Bug Fixes]
+    BugFixes --> FinalTesting[Final Testing]
+    FinalTesting --> ReleasePrep[Release Preparation]
+    ReleasePrep --> CreateReleaseBranch[Create Release Branch]
+    CreateReleaseBranch --> BuildArtifacts[Build Artifacts]
+    BuildArtifacts --> DeployStaging[Deploy to Staging]
+    DeployStaging --> FinalValidation[Final Validation]
+    FinalValidation --> CreateTag[Create Release Tag]
+    CreateTag --> DeployProduction[Deploy to Production]
+    DeployProduction --> PostReleaseMonitoring[Post-Release Monitoring]
+    PostReleaseMonitoring --> ReleasePostMortem[Release Post-Mortem]
+    
+    classDef feature fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef testing fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef release fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    classDef deploy fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
+    classDef monitor fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    
+    class FeatureComplete,BugFixes feature
+    class TestingCycle,FinalTesting,FinalValidation testing
+    class ReleasePrep,CreateReleaseBranch,CreateTag release
+    class BuildArtifacts,DeployStaging,DeployProduction deploy
+    class PostReleaseMonitoring,ReleasePostMortem monitor
+```
+
+## Working with GitHub Actions
+
+The project leverages GitHub Actions for automated workflows:
+
+### Currently Configured Actions
+
+1. **CI Pipeline**: `test-and-report.yml`
+   - Run tests
+   - Generate coverage reports
+   - Lint code
+
+2. **Security Scanning**: 
+   - `codeql.yml` - Code quality and security scanning
+   - `dependency-review.yml` - Check dependencies for vulnerabilities
+   - `scorecards.yml` - OSSF security scorecard
+   - `zap-scan.yml` - OWASP ZAP security scan
+
+3. **Performance Testing**: `lighthouse-performance.yml`
+
+4. **Issue Management**: `labeler.yml`
+
+5. **Release Automation**: `release.yml`
+
+These workflows help maintain code quality, security, and streamline the development process for the CIA Compliance Manager.

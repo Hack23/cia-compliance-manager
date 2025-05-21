@@ -1,351 +1,369 @@
-# 🏛️ CIA Compliance Manager Architecture
+# 🏗️ CIA Compliance Manager Architecture
 
-This document serves as the primary entry point for the CIA Compliance Manager's architectural documentation. It provides a comprehensive view of the system's design using the C4 model approach, starting from a high-level system context and drilling down to component interactions.
+This document provides a comprehensive view of the CIA Compliance Manager architecture using the C4 model, illustrating how components interact to deliver security assessment capabilities.
 
-> **Note:** For a more interactive experience, you can also view this documentation in our [Documentation Portal](https://hack23.github.io/cia-compliance-manager/documentation.html).
-
-## 📚 Architecture Documentation Map
+## 📚 Complete Architecture Documentation Map
 
 <div class="documentation-map">
 
-| Document                                            | Type    | Focus           | Description                                                          | Documentation Link                                                                                |
-| --------------------------------------------------- | ------- | --------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **[Current Architecture](ARCHITECTURE.md)**         | Core    | 🏛️ Architecture | C4 model showing current system containers, components, and dynamics | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| **[Future Architecture](FUTURE_ARCHITECTURE.md)**   | Future  | 🏛️ Architecture | Vision for context-aware security posture management platform        | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| **[State Diagrams](STATEDIAGRAM.md)**               | Current | 🔄 Behavior     | Security profile and compliance status state transitions             | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| **[Future State Diagrams](FUTURE_STATEDIAGRAM.md)** | Future  | 🔄 Behavior     | Context-aware and adaptive security state transitions                | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| **[Process Flowcharts](FLOWCHART.md)**              | Current | 🔄 Process      | Security assessment and compliance workflows                         | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| **[Future Flowcharts](FUTURE_FLOWCHART.md)**        | Future  | 🔄 Process      | ML-enhanced and context-aware workflows                              | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| **[Mindmaps](MINDMAP.md)**                          | Current | 🧠 Concept      | System structure and component relationships                         | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| **[Future Mindmaps](FUTURE_MINDMAP.md)**            | Future  | 🧠 Concept      | Evolution roadmap and capability expansion                           | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| **[SWOT Analysis](SWOT.md)**                        | Current | 💼 Business     | Strategic strengths, weaknesses, opportunities, and threats          | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| **[Future SWOT Analysis](FUTURE_SWOT.md)**          | Future  | 💼 Business     | Strategic analysis of context-aware security platform                | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| **[CI/CD Workflows](WORKFLOWS.md)**                 | Current | 🔧 DevOps       | Build, test, and deployment automation                               | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| **[Future Workflows](FUTURE_WORKFLOWS.md)**         | Future  | 🔧 DevOps       | Advanced CI/CD with ML and security automation                       | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| **[Future Data Model](FUTURE_DATA_MODEL.md)**       | Future  | 📊 Data         | Enhanced context-aware data architecture                             | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
+### Current Architecture
+
+| Document                                          | Focus           | Description                               |
+| ------------------------------------------------- | --------------- | ----------------------------------------- |
+| **[Architecture](ARCHITECTURE.md)**               | 🏗️ C4 Model     | C4 model showing system structure          |
+| **[System Architecture](SYSTEM_ARCHITECTURE.md)** | 🏛️ System       | Layered architecture and component details |
+| **[Data Model](DATA_MODEL.md)**                   | 📊 Data         | Current data structures and relationships  |
+| **[Widget Analysis](WIDGET_ANALYSIS.md)**         | 🧩 Components   | Detailed widget component analysis        |
+
+### Behavioral Documentation
+
+| Document                                       | Focus           | Description                               |
+| ---------------------------------------------- | --------------- | ----------------------------------------- |
+| **[State Diagrams](STATEDIAGRAM.md)**          | 🔄 Behavior     | System state transitions                   |
+| **[Process Flowcharts](FLOWCHART.md)**         | 🔄 Process      | Security assessment workflows              |
+| **[Mindmaps](MINDMAP.md)**                     | 🧠 Concept      | System component relationships             |
+
+### Business & Operations
+
+| Document                                       | Focus           | Description                               |
+| ---------------------------------------------- | --------------- | ----------------------------------------- |
+| **[SWOT Analysis](SWOT.md)**                  | 💼 Business     | Strategic business assessment              |
+| **[BCP Plan](BCPPlan.md)**                    | 🔄 Recovery     | Business continuity planning               |
+| **[Workflows](WORKFLOWS.md)**                 | 🚀 DevOps       | CI/CD and development workflows            |
+
+### Guidelines & Standards
+
+| Document                                                   | Focus           | Description                               |
+| ---------------------------------------------------------- | --------------- | ----------------------------------------- |
+| **[Style Guide](STYLE_GUIDE.md)**                          | 🎨 Style        | Documentation style guidelines             |
+| **[Contribution Guidelines](CONTRIBUTION_GUIDELINES.md)**  | 📋 Guidelines   | Documentation contribution process         |
+
+### Future Architecture
+
+| Document                                               | Focus           | Description                               |
+| ------------------------------------------------------ | --------------- | ----------------------------------------- |
+| **[Future Architecture](FUTURE_ARCHITECTURE.md)**      | 🚀 Evolution    | Vision for platform evolution              |
+| **[Future Data Model](FUTURE_DATA_MODEL.md)**          | 🚀 Data         | Future data architecture vision            |
+| **[Future Workflows](FUTURE_WORKFLOWS.md)**            | 🔄 DevOps       | Future CI/CD and development workflows     |
+| **[Future SWOT](FUTURE_SWOT.md)**                      | 💼 Business     | Future strategic business assessment       |
+| **[Future State Diagrams](FUTURE_STATEDIAGRAM.md)**    | 🔄 Behavior     | Future system state transitions            |
+| **[Future Mindmaps](FUTURE_MINDMAP.md)**               | 🧠 Concept      | Future system component relationships      |
+| **[Future Flowcharts](FUTURE_FLOWCHART.md)**           | 🔄 Process      | Future security assessment workflows       |
 
 </div>
 
-## 🌐 C4 System Context Diagram
+## 🌐 System Context
 
-**💼 Business Focus:** Illustrates how different stakeholders interact with the system and the external dependencies required for compliance references and cost estimation.
-
-**🔒 Security Focus:** Demonstrates clear boundaries between internal system components and external data sources, establishing the trust boundaries for security analysis.
-
-> For interactive diagrams and visualizations, visit our [Documentation Portal](https://hack23.github.io/cia-compliance-manager/documentation.html#diagrams)
+The CIA Compliance Manager operates within the broader context of an organization's security governance ecosystem.
 
 ```mermaid
 C4Context
-  title System Context diagram for CIA Compliance Manager
+  title System Context Diagram for CIA Compliance Manager
 
-  Person(securityOfficer, "Security Officer", "Responsible for implementing and managing security controls")
-  Person(businessStakeholder, "Business Stakeholder", "Makes decisions based on security assessments and cost analysis")
-  Person(complianceManager, "Compliance Manager", "Ensures adherence to regulatory frameworks")
-  Person(technicalImplementer, "Technical Implementer", "Implements security controls based on recommendations")
+  Person(securityOfficer, "Security Officer", "Manages security levels and reviews assessment results")
+  Person(complianceManager, "Compliance Manager", "Ensures regulatory compliance and manages frameworks")
+  Person(executiveStakeholder, "Executive Stakeholder", "Reviews business impacts and approves security investments")
+  
+  System(ciaManager, "CIA Compliance Manager", "Security assessment and compliance mapping platform")
+  
+  System_Ext(grcSystem, "GRC Platform", "Governance, Risk, and Compliance management")
+  System_Ext(cmdb, "CMDB", "Configuration Management Database")
+  System_Ext(siemSystem, "SIEM Solution", "Security Information and Event Management")
 
-  System(ciaCM, "CIA Compliance Manager", "Helps organizations assess, implement, and manage security controls across the CIA triad")
+  Rel(securityOfficer, ciaManager, "Configures security levels and reviews assessments")
+  Rel(complianceManager, ciaManager, "Maps security controls to compliance frameworks")
+  Rel(executiveStakeholder, ciaManager, "Reviews business impact and investment reports")
+  
+  Rel(ciaManager, grcSystem, "Could integrate with (future)")
+  Rel(ciaManager, cmdb, "Could reference asset information from (future)")
+  Rel(ciaManager, siemSystem, "Could provide security recommendations for (future)")
 
-  System_Ext(complianceFrameworks, "Compliance Frameworks", "External reference for industry standards like NIST 800-53, ISO 27001, etc.")
-  System_Ext(costDatabase, "Cost Reference Database", "Provides industry benchmark costs for security implementations")
-
-  Rel(securityOfficer, ciaCM, "Uses to assess security posture")
-  Rel(businessStakeholder, ciaCM, "Uses to make security investment decisions")
-  Rel(complianceManager, ciaCM, "Uses to verify compliance status")
-  Rel(technicalImplementer, ciaCM, "Uses to get implementation guidance")
-
-  Rel(ciaCM, complianceFrameworks, "Maps security controls to")
-  Rel(ciaCM, costDatabase, "References for cost estimations")
-
-  UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
-
-  %% Cool color scheme
-  UpdateElementStyle(securityOfficer, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
-  UpdateElementStyle(businessStakeholder, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
-  UpdateElementStyle(complianceManager, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
-  UpdateElementStyle(technicalImplementer, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
-
-  UpdateElementStyle(ciaCM, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(complianceFrameworks, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
-  UpdateElementStyle(costDatabase, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
-
-  UpdateRelStyle(securityOfficer, ciaCM, "#a0c8e0", "bold")
-  UpdateRelStyle(businessStakeholder, ciaCM, "#a0c8e0", "bold")
-  UpdateRelStyle(complianceManager, ciaCM, "#a0c8e0", "bold")
-  UpdateRelStyle(technicalImplementer, ciaCM, "#a0c8e0", "bold")
-
-  UpdateRelStyle(ciaCM, complianceFrameworks, "#d1c4e9", "dashed")
-  UpdateRelStyle(ciaCM, costDatabase, "#d1c4e9", "dashed")
+  UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
 ```
 
-## C4 Container Diagram
+## 🏢 Container View
 
-**🏛️ Architecture Focus:** Reveals the modular construction of the application with distinct components for security assessment, business impact analysis, cost estimation, and compliance mapping.
-
-**🔧 Technical Focus:** Highlights how the single-page application architecture leverages React and TypeScript to create a responsive, client-side experience with centralized state management.
-
-> For API documentation related to these containers, see the [API Documentation](https://hack23.github.io/cia-compliance-manager/documentation.html#api-documentation) section in our portal.
+The CIA Compliance Manager consists of several interconnected containers that provide its core functionality.
 
 ```mermaid
 C4Container
-  title Container diagram for CIA Compliance Manager
+    title Container Diagram - CIA Compliance Manager
 
-  Person(securityOfficer, "Security Officer", "Responsible for implementing and managing security controls")
-  Person(businessStakeholder, "Business Stakeholder", "Makes decisions based on security assessments and cost analysis")
-
-  System_Boundary(ciaCM, "CIA Compliance Manager") {
-    Container(spaFrontend, "Single Page Application", "React, TypeScript, TailwindCSS", "Provides interactive user interface for security assessment and visualization")
-
-    Container(securityAssessment, "Security Assessment Module", "React Components, TypeScript", "Handles CIA triad assessment and security level selection")
-    Container(businessImpact, "Business Impact Analysis", "React Components, TypeScript", "Analyzes impact of security implementations on business operations")
-    Container(costEstimation, "Cost Estimation Engine", "TypeScript, Chart.js", "Calculates CAPEX and OPEX for security implementations")
-    Container(complianceMapping, "Compliance Mapping Engine", "TypeScript", "Maps security controls to compliance frameworks")
-
-    ContainerDb(stateManager, "State Management", "React Context API", "Manages application state and security profiles")
-  }
-
-  System_Ext(complianceFrameworks, "Compliance Frameworks", "External systems with compliance requirements")
-
-  Rel(securityOfficer, spaFrontend, "Uses")
-  Rel(businessStakeholder, spaFrontend, "Reviews")
-
-  Rel(spaFrontend, securityAssessment, "Uses")
-  Rel(spaFrontend, businessImpact, "Uses")
-  Rel(spaFrontend, costEstimation, "Uses")
-  Rel(spaFrontend, complianceMapping, "Uses")
-
-  Rel(securityAssessment, stateManager, "Reads/Updates")
-  Rel(businessImpact, stateManager, "Reads")
-  Rel(costEstimation, stateManager, "Reads")
-  Rel(complianceMapping, stateManager, "Reads")
-
-  Rel(complianceMapping, complianceFrameworks, "References")
-
-  UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
-
-  %% Cool color scheme
-  UpdateElementStyle(securityOfficer, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
-  UpdateElementStyle(businessStakeholder, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
-
-  UpdateElementStyle(spaFrontend, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(securityAssessment, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(businessImpact, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(costEstimation, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(complianceMapping, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(stateManager, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
-
-  UpdateElementStyle(complianceFrameworks, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
-
-  UpdateRelStyle(securityOfficer, spaFrontend, "#a0c8e0", "bold")
-  UpdateRelStyle(businessStakeholder, spaFrontend, "#a0c8e0", "bold")
-
-  UpdateRelStyle(spaFrontend, securityAssessment, "#c8e6c9", "solid")
-  UpdateRelStyle(spaFrontend, businessImpact, "#c8e6c9", "solid")
-  UpdateRelStyle(spaFrontend, costEstimation, "#c8e6c9", "solid")
-  UpdateRelStyle(spaFrontend, complianceMapping, "#c8e6c9", "solid")
-
-  UpdateRelStyle(securityAssessment, stateManager, "#d1c4e9", "solid")
-  UpdateRelStyle(businessImpact, stateManager, "#d1c4e9", "solid")
-  UpdateRelStyle(costEstimation, stateManager, "#d1c4e9", "solid")
-  UpdateRelStyle(complianceMapping, stateManager, "#d1c4e9", "solid")
-
-  UpdateRelStyle(complianceMapping, complianceFrameworks, "#bbdefb", "dashed")
+    Person(securityOfficer, "Security Officer", "Manages security levels and reviews assessment results")
+    
+    System_Boundary(ciaManager, "CIA Compliance Manager") {
+        Container(frontend, "Frontend Application", "React.js, TypeScript", "Web interface for security assessment and visualization")
+        ContainerDb(staticData, "Static Data", "TypeScript Files", "Static security data, controls and framework information")
+    }
+    
+    Rel(securityOfficer, frontend, "Uses")
+    Rel(frontend, staticData, "Reads from", "Import")
+    
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 ```
 
-## C4 Component Diagram
+## 🧩 Component View
 
-**🏛️ Architecture Focus:** Demonstrates the internal structure of the Security Assessment Module, showing how individual UI components interact with data repositories and state management.
-
-**🔧 Technical Focus:** Illustrates the component-based approach to security assessment, with specialized components for selection, visualization, calculation, and recommendations.
-
-> For detailed module dependencies, see the [Dependencies](https://hack23.github.io/cia-compliance-manager/documentation.html#dependencies) section in our documentation portal.
+The frontend application is composed of specialized components organized by domain functionality.
 
 ```mermaid
 C4Component
-  title Component diagram for Security Assessment Module
+    title Component Diagram - Frontend Application
 
-  Container_Boundary(securityAssessment, "Security Assessment Module") {
-    Component(securityLevelSelector, "Security Level Selector", "React Component", "Allows selection of security levels for CIA components")
-    Component(securitySummary, "Security Summary Widget", "React Component", "Displays overall security posture and recommendations")
-    Component(ciaImpactAnalysis, "CIA Impact Analysis", "React Component", "Shows detailed impact analysis for each CIA element")
-    Component(securityRadarChart, "Security Radar Chart", "Chart.js", "Visualizes security level selections across CIA dimensions")
-    Component(securityScoreCalculator, "Security Score Calculator", "TypeScript", "Calculates overall security score based on selections")
-    Component(securityRecommendations, "Security Recommendations", "React Component", "Provides actionable security recommendations")
+    Container_Boundary(frontend, "Frontend Application") {
+        Component(slWidget, "Security Level Widget", "React, TypeScript", "Core configuration widget for CIA security levels")
+        
+        Component(assessmentWidgets, "Assessment Widgets", "React, TypeScript", "Security summary and business impact analysis")
+        Component(businessWidgets, "Business Value Widgets", "React, TypeScript", "Compliance status, cost estimation, and value creation")
+        Component(impactWidgets, "Impact Analysis Widgets", "React, TypeScript", "CIA component-specific impact analysis")
+        Component(implWidgets, "Implementation Widgets", "React, TypeScript", "Technical details and security resources")
+        
+        Component(serviceLayer, "Service Layer", "TypeScript", "Business logic and data processing services")
+        Component(dataProvider, "Data Provider", "TypeScript", "Provides security controls data and configuration")
+        Component(utilityLayer, "Utility Layer", "TypeScript", "Shared utility functions for calculations and formatting")
+    }
 
-    ComponentDb(securityLevels, "Security Levels Repository", "TypeScript", "Stores definitions of security levels and their characteristics")
-  }
+    Rel(slWidget, assessmentWidgets, "Provides security levels to")
+    Rel(slWidget, businessWidgets, "Provides security levels to")
+    Rel(slWidget, impactWidgets, "Provides security levels to")
+    Rel(slWidget, implWidgets, "Provides security levels to")
+    
+    Rel(assessmentWidgets, serviceLayer, "Uses")
+    Rel(businessWidgets, serviceLayer, "Uses")
+    Rel(impactWidgets, serviceLayer, "Uses")
+    Rel(implWidgets, serviceLayer, "Uses")
+    
+    Rel(serviceLayer, dataProvider, "Retrieves data from")
+    Rel(serviceLayer, utilityLayer, "Uses")
+    
+    Rel(assessmentWidgets, utilityLayer, "Uses")
+    Rel(businessWidgets, utilityLayer, "Uses")
+    Rel(impactWidgets, utilityLayer, "Uses")
+    Rel(implWidgets, utilityLayer, "Uses")
 
-  System_Ext(complianceFrameworks, "Compliance Frameworks", "External systems providing compliance requirements")
-
-  Container(stateManager, "State Management", "React Context API", "Manages application state")
-
-  Rel(securityLevelSelector, securityLevels, "Reads levels from")
-  Rel(securityLevelSelector, stateManager, "Updates security selections in")
-  Rel(securitySummary, stateManager, "Reads security state from")
-  Rel(ciaImpactAnalysis, stateManager, "Reads security state from")
-  Rel(securityRadarChart, stateManager, "Reads security state from")
-  Rel(securityScoreCalculator, stateManager, "Reads security state from")
-  Rel(securityRecommendations, securityLevels, "Gets recommendations from")
-  Rel(securityRecommendations, complianceFrameworks, "Maps recommendations to")
-
-  UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
-
-  %% Cool color scheme
-  UpdateElementStyle(securityLevelSelector, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(securitySummary, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(ciaImpactAnalysis, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(securityRadarChart, $fontColor="#333333", $bgColor="#c8e6c9", $borderColor="#66bb6a")
-  UpdateElementStyle(securityScoreCalculator, $fontColor="#333333", $bgColor="#c8e6c9", $borderColor="#66bb6a")
-  UpdateElementStyle(securityRecommendations, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(securityLevels, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
-  UpdateElementStyle(stateManager, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
-  UpdateElementStyle(complianceFrameworks, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#64b5f6")
-
-  UpdateRelStyle(securityLevelSelector, securityLevels, "#d1c4e9", "solid")
-  UpdateRelStyle(securityLevelSelector, stateManager, "#d1c4e9", "solid")
-  UpdateRelStyle(securitySummary, stateManager, "#d1c4e9", "solid")
-  UpdateRelStyle(ciaImpactAnalysis, stateManager, "#d1c4e9", "solid")
-  UpdateRelStyle(securityRadarChart, stateManager, "#d1c4e9", "solid")
-  UpdateRelStyle(securityScoreCalculator, stateManager, "#d1c4e9", "solid")
-  UpdateRelStyle(securityRecommendations, securityLevels, "#d1c4e9", "solid")
-  UpdateRelStyle(securityRecommendations, complianceFrameworks, "#bbdefb", "dashed")
+    UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-## C4 Dynamic Diagram
+## 🔍 Service Component Diagram
 
-**👤 User Experience Focus:** Maps the sequence of interactions from initial security level selection to the display of various business impacts and compliance status.
-
-**📊 Data Flow Focus:** Reveals how changes to security levels propagate through the application state to update multiple visualization components.
-
-> For comprehensive code coverage information on these flows, see our [Code Coverage](https://hack23.github.io/cia-compliance-manager/documentation.html#code-coverage) dashboard.
+This diagram shows the detailed structure of the service layer:
 
 ```mermaid
-C4Dynamic
-  title Dynamic diagram for Security Level Assessment
+C4Component
+    title Component Diagram - Service Layer
 
-  Person(securityOfficer, "Security Officer", "Responsible for security controls")
+    Container_Boundary(services, "Service Layer") {
+        Component(baseService, "BaseService", "TypeScript", "Base service with common functionality")
+        Component(ciaContentService, "CIAContentService", "TypeScript", "Orchestrates access to CIA triad content")
+        Component(businessImpactService, "BusinessImpactService", "TypeScript", "Handles business impact calculations")
+        Component(complianceService, "ComplianceService", "TypeScript", "Manages compliance framework mapping")
+        Component(securityMetricsService, "SecurityMetricsService", "TypeScript", "Calculates security metrics and scores")
+        Component(technicalImplService, "TechnicalImplementationService", "TypeScript", "Provides implementation guidance")
+        Component(securityResourceService, "SecurityResourceService", "TypeScript", "Manages security resource references")
+    }
 
-  Container_Boundary(ciaCM, "CIA Compliance Manager") {
-    Component(securityLevelSelector, "Security Level Selector", "React Component")
-    Component(securitySummary, "Security Summary Widget", "React Component")
-    Component(ciaImpactAnalysis, "CIA Impact Analysis", "React Component")
-    Component(complianceStatus, "Compliance Status Widget", "React Component")
-    Component(costEstimation, "Cost Estimation Widget", "React Component")
-    ComponentDb(appState, "Application State", "React Context")
-  }
+    Container_Boundary(dataLayer, "Data Layer") {
+        Component(dataProvider, "CIADataProvider", "TypeScript", "Data provider interface")
+        Component(defaultProvider, "DefaultDataProvider", "TypeScript", "Default implementation using static data")
+        Component(staticData, "StaticDataFiles", "TypeScript", "JSON/TS data files for CIA components")
+    }
 
-  Rel(securityOfficer, securityLevelSelector, "1. Selects security levels")
-  Rel(securityLevelSelector, appState, "2. Updates security profile")
-  Rel(appState, securitySummary, "3a. Triggers update")
-  Rel(appState, ciaImpactAnalysis, "3b. Triggers update")
-  Rel(appState, complianceStatus, "3c. Triggers update")
-  Rel(appState, costEstimation, "3d. Triggers update")
-  Rel(securitySummary, securityOfficer, "4a. Shows security posture")
-  Rel(ciaImpactAnalysis, securityOfficer, "4b. Shows business impact")
-  Rel(complianceStatus, securityOfficer, "4c. Shows compliance status")
-  Rel(costEstimation, securityOfficer, "4d. Shows cost implications")
+    Rel(ciaContentService, baseService, "Extends")
+    Rel(businessImpactService, baseService, "Extends")
+    Rel(complianceService, baseService, "Extends")
+    Rel(securityMetricsService, baseService, "Extends")
+    Rel(technicalImplService, baseService, "Extends")
+    Rel(securityResourceService, baseService, "Extends")
+    
+    Rel(ciaContentService, businessImpactService, "Uses")
+    Rel(ciaContentService, complianceService, "Uses")
+    Rel(ciaContentService, securityMetricsService, "Uses")
+    Rel(ciaContentService, technicalImplService, "Uses")
+    Rel(ciaContentService, securityResourceService, "Uses")
+    
+    Rel(baseService, dataProvider, "Uses")
+    Rel(dataProvider, defaultProvider, "Implemented by")
+    Rel(defaultProvider, staticData, "Reads from")
 
-  %% Cool color scheme
-  UpdateElementStyle(securityOfficer, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
-  UpdateElementStyle(securityLevelSelector, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(securitySummary, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(ciaImpactAnalysis, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(complianceStatus, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(costEstimation, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(appState, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
-
-  UpdateRelStyle(securityOfficer, securityLevelSelector, "#a0c8e0", "bold")
-  UpdateRelStyle(securityLevelSelector, appState, "#d1c4e9", "solid")
-  UpdateRelStyle(appState, securitySummary, "#c8e6c9", "dashed")
-  UpdateRelStyle(appState, ciaImpactAnalysis, "#c8e6c9", "dashed")
-  UpdateRelStyle(appState, complianceStatus, "#c8e6c9", "dashed")
-  UpdateRelStyle(appState, costEstimation, "#c8e6c9", "dashed")
-  UpdateRelStyle(securitySummary, securityOfficer, "#a0c8e0", "solid")
-  UpdateRelStyle(ciaImpactAnalysis, securityOfficer, "#a0c8e0", "solid")
-  UpdateRelStyle(complianceStatus, securityOfficer, "#a0c8e0", "solid")
-  UpdateRelStyle(costEstimation, securityOfficer, "#a0c8e0", "solid")
+    UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
 ```
 
-## Security Architecture Layers
+## 🧩 Widget Components Structure
 
-### 1. Application Security
+This diagram shows the structure of the widget components:
 
-- **Content Security Policy (CSP)**: Restricts resource loading to prevent XSS attacks
-- **Security Headers**: Implements modern web security headers (HSTS, X-Content-Type-Options, etc.)
-- **Input Validation**: Validates all user inputs before processing
-- **Output Sanitization**: Sanitizes data before rendering to prevent XSS
-- **Error Handling**: Uses error boundaries to prevent exposing sensitive information
+```mermaid
+C4Component
+    title Component Diagram - Widget Components
 
-### 2. State Management Security
+    Container_Boundary(widgets, "Widget Components") {
+        Component(widgetBase, "WidgetContainer", "React, TypeScript", "Base container for all widgets")
+        
+        Component(securityLevel, "SecurityLevelWidget", "React, TypeScript", "Core configuration widget")
+        
+        Component(securitySummary, "SecuritySummaryWidget", "React, TypeScript", "Overall security summary")
+        Component(businessImpact, "BusinessImpactAnalysisWidget", "React, TypeScript", "Business impact analysis")
+        
+        Component(complianceStatus, "ComplianceStatusWidget", "React, TypeScript", "Compliance status and mapping")
+        Component(costEstimation, "CostEstimationWidget", "React, TypeScript", "Implementation cost estimates")
+        Component(valueCreation, "ValueCreationWidget", "React, TypeScript", "Business value metrics")
+        
+        Component(confidentiality, "ConfidentialityImpactWidget", "React, TypeScript", "Confidentiality impact")
+        Component(integrity, "IntegrityImpactWidget", "React, TypeScript", "Integrity impact")
+        Component(availability, "AvailabilityImpactWidget", "React, TypeScript", "Availability impact")
+        
+        Component(technicalDetails, "TechnicalDetailsWidget", "React, TypeScript", "Technical implementation details")
+        Component(securityResources, "SecurityResourcesWidget", "React, TypeScript", "Security implementation resources")
+        Component(securityVis, "SecurityVisualizationWidget", "React, TypeScript", "Security metrics visualization")
+    }
 
-- **Immutable State**: Ensures state cannot be modified directly
-- **State Validation**: Validates state transitions to prevent impossible states
-- **Deep Object Freezing**: Prevents accidental state mutations
+    Rel(securitySummary, widgetBase, "Uses")
+    Rel(businessImpact, widgetBase, "Uses")
+    Rel(complianceStatus, widgetBase, "Uses")
+    Rel(costEstimation, widgetBase, "Uses")
+    Rel(valueCreation, widgetBase, "Uses")
+    Rel(confidentiality, widgetBase, "Uses")
+    Rel(integrity, widgetBase, "Uses")
+    Rel(availability, widgetBase, "Uses")
+    Rel(technicalDetails, widgetBase, "Uses")
+    Rel(securityResources, widgetBase, "Uses")
+    Rel(securityVis, widgetBase, "Uses")
+    Rel(securityLevel, widgetBase, "Uses")
 
-### 3. Network Security
+    UpdateLayoutConfig($c4ShapeInRow="4", $c4BoundaryInRow="1")
+```
 
-- **HTTPS Only**: Enforces secure connections
-- **API Request Validation**: Validates all API requests
-- **Response Validation**: Validates API responses against expected schemas
+## 🪝 React Hooks Structure
 
-### 4. Development Security
+This diagram shows the custom React hooks that bridge components and services:
 
-- **Dependency Scanning**: Automatically scans for vulnerable dependencies
-- **Static Code Analysis**: Uses TypeScript strict mode and linting for code quality
-- **Secrets Management**: No hardcoded secrets in codebase
+```mermaid
+C4Component
+    title Component Diagram - React Hooks
 
-> For a comprehensive security overview, visit the [Security Documentation](../documentation.html) section in our portal.
+    Container_Boundary(hooks, "React Hooks") {
+        Component(useCIAContent, "useCIAContentService", "React, TypeScript", "Hook for CIA content service")
+        Component(useCompliance, "useComplianceService", "React, TypeScript", "Hook for compliance service")
+        Component(useSecurityMetrics, "useSecurityMetricsService", "React, TypeScript", "Hook for security metrics")
+        Component(useTechnical, "useTechnicalImplementationService", "React, TypeScript", "Hook for technical implementation")
+        Component(useResources, "useSecurityResourcesService", "React, TypeScript", "Hook for security resources")
+    }
 
-## Architecture Color Legend
+    Container_Boundary(services, "Services") {
+        Component(ciaContentService, "CIAContentService", "TypeScript")
+        Component(complianceService, "ComplianceService", "TypeScript")
+        Component(securityMetricsService, "SecurityMetricsService", "TypeScript")
+        Component(technicalImplService, "TechnicalImplementationService", "TypeScript")
+        Component(securityResourceService, "SecurityResourceService", "TypeScript")
+    }
 
-The color schemes used throughout the C4 diagrams follow these conventions:
+    Container_Boundary(components, "Components") {
+        Component(widgets, "Widget Components", "React")
+    }
 
-| Element Type        | Color                  | Description                                         |
-| ------------------- | ---------------------- | --------------------------------------------------- |
-| Person              | #bbdefb (Light Blue)   | External users or roles interacting with the system |
-| System              | #a0c8e0 (Medium Blue)  | The main system being described                     |
-| Container           | #a0c8e0 (Medium Blue)  | Main application containers within the system       |
-| Component           | #a0c8e0 (Medium Blue)  | Individual components within containers             |
-| Database            | #d1c4e9 (Light Purple) | Data storage components                             |
-| External System     | #d1c4e9 (Light Purple) | External systems or services                        |
-| Process Component   | #c8e6c9 (Light Green)  | Processing and calculation components               |
-| Active Relationship | #a0c8e0 (Medium Blue)  | User interactions with the system                   |
-| Data Flow           | #d1c4e9 (Light Purple) | Data flows between components                       |
-| Process Flow        | #c8e6c9 (Light Green)  | Process flows between components                    |
-| Reference           | #bbdefb (Light Blue)   | References to external systems or resources         |
+    Rel(widgets, useCIAContent, "Uses")
+    Rel(widgets, useCompliance, "Uses")
+    Rel(widgets, useSecurityMetrics, "Uses")
+    Rel(widgets, useTechnical, "Uses")
+    Rel(widgets, useResources, "Uses")
+    
+    Rel(useCIAContent, ciaContentService, "Provides")
+    Rel(useCompliance, complianceService, "Provides")
+    Rel(useSecurityMetrics, securityMetricsService, "Provides")
+    Rel(useTechnical, technicalImplService, "Provides")
+    Rel(useResources, securityResourceService, "Provides")
 
-This cool color scheme provides visual consistency across all architectural diagrams and helps distinguish between different types of components and their relationships.
+    UpdateLayoutConfig($c4ShapeInRow="5", $c4BoundaryInRow="1")
+```
 
-## Testing Architecture
+## 📊 Key Architecture Decisions
 
-The CIA Compliance Manager implements comprehensive testing strategies to ensure reliability, security, and quality across all components.
+### Architecture Decision Records
 
-### Unit Testing Strategy
+| ID | Decision | Rationale |
+|----|----------|-----------|
+| ADR-001 | Widget-Based UI Architecture | Enables modular development and clear separation of concerns between different security assessment areas |
+| ADR-002 | Static Data in TypeScript Files | Simplifies initial development and enables type safety without requiring a database |
+| ADR-003 | Service Layer with Hooks | Provides clean API between UI components and business logic with React-idiomatic state management |
+| ADR-004 | CIA Triad as Organizational Principle | Aligns with industry-standard security model and provides intuitive organization for security controls |
+| ADR-005 | Multiple Views of Security (Technical, Business) | Addresses needs of different stakeholders, from technical implementers to business decision makers |
 
-[Unit Test Plan](../UnitTestPlan.md) - Our unit testing approach focuses on isolated component testing with mocked dependencies, using Vitest and React Testing Library. The plan details:
+### Key Quality Attributes
 
-- Test organization and structure
-- TestID patterns for reliable element selection
-- Different types of component tests (rendering, interaction, state management)
-- Best practices for testable components
+| Quality Attribute | Support in Current Architecture |
+|-------------------|--------------------------------|
+| Modularity | Achieved through widget-based organization and service layer |
+| Maintainability | Supported by TypeScript typing, consistent patterns, and clear interfaces |
+| Extensibility | Enabled by service abstractions and data provider pattern |
+| Performance | Basic performance considerations with React best practices |
+| Security | Security-focused design reflects security best practices in application itself |
+| Usability | Widget-based UI with consistent styling and interaction patterns |
 
-### End-to-End Testing Strategy
+## 🔍 Business View of Architecture 
 
-[E2E Test Plan](../E2ETestPlan.md) - Our end-to-end testing strategy uses Cypress to validate complete user flows and business outcomes. The plan covers:
+### Stakeholder Alignment
 
-- User-centric testing approaches
-- Resilient selector strategies
-- Test patterns for business outcomes and user flows
-- Custom commands and utilities for stable tests
+```mermaid
+flowchart TD
+    SLW[Security Level Widget] --- SO[Security Officer]
+    
+    SSW[Security Summary Widget] --- CSO[Chief Security Officer]
+    BIAW[Business Impact Analysis Widget] --- CSO
+    
+    CIW[CIA Impact Widgets] --- ST[Security Team]
+    
+    CSW[Compliance Status Widget] --- CO[Compliance Officer]
+    
+    CEW[Cost Estimation Widget] --- CFO[Finance Officer]
+    VCW[Value Creation Widget] --- CFO & CEO[Executive Team]
+    
+    TDW[Technical Details Widget] --- IT[IT Implementation Team]
+    SRW[Security Resources Widget] --- IT
+    
+    classDef stakeholder fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    classDef widget fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    
+    class SO,CSO,ST,CO,CFO,CEO,IT stakeholder
+    class SLW,SSW,BIAW,CIW,CSW,CEW,VCW,TDW,SRW widget
+```
 
-### Performance Testing Strategy
+### Business Value Map
 
-[Performance Testing Framework](../performance-testing.md) - Our performance testing approach uses Cypress with custom commands to measure and verify application performance. The framework provides:
+```mermaid
+flowchart TD
+    SL[Security Levels] -->|enables| RA[Risk Assessment]
+    SL -->|enables| CI[Compliance Implementation] 
+    SL -->|enables| SC[Security Controls]
+    
+    RA -->|provides| RI[Risk Insights]
+    CI -->|ensures| RC[Regulatory Compliance]
+    SC -->|delivers| SP[Security Posture]
+    
+    RI & RC & SP -->|create| BV[Business Value]
+    
+    BV -->|through| RL[Risk Reduction]
+    BV -->|through| BC[Business Continuity]
+    BV -->|through| CT[Customer Trust]
+    BV -->|through| CD[Competitive Differentiation]
+    BV -->|through| CA[Compliance Assurance]
+    
+    classDef input fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef process fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    classDef output fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef value fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    classDef benefit fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    
+    class SL input
+    class RA,CI,SC process
+    class RI,RC,SP output
+    class BV value
+    class RL,BC,CT,CD,CA benefit
+```
 
-- Operation measurement methodology
-- Performance baseline configuration
-- Visualization and reporting tools
-- Performance optimization guidance
+## Current Architecture Constraints
 
-These testing strategies work together to ensure the CIA Compliance Manager delivers consistent, reliable functionality while maintaining its security controls and architecture integrity.
-
-> View our [Code Coverage Reports](https://hack23.github.io/cia-compliance-manager/documentation.html#code-coverage) in the Documentation Portal for more details on test coverage.
+1. **Static Data Only**: The current implementation uses static TypeScript data files without database persistence
+2. **Single-User Focus**: No multi-user or collaborative features are currently implemented  
+3. **Client-Side Processing**: All processing occurs in the browser without server-side components
+4. **Limited Customization**: Security metrics and frameworks are pre-defined without custom framework support
+5. **No Authentication**: No user authentication or authorization system is currently implemented
