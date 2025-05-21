@@ -6,12 +6,12 @@ This document illustrates the key state transitions and behavioral models of the
 
 <div class="documentation-map">
 
-| Document                                            | Focus           | Description                               |
-| --------------------------------------------------- | --------------- | ----------------------------------------- |
-| **[Architecture](ARCHITECTURE.md)**                 | 🏛️ Architecture | C4 model showing system structure         |
-| **[Process Flowcharts](FLOWCHART.md)**              | 🔄 Process      | Security assessment workflows             |
-| **[System Architecture](SYSTEM_ARCHITECTURE.md)**   | 🏛️ System       | Layered architecture and component details |
-| **[Widget Analysis](WIDGET_ANALYSIS.md)**           | 🧩 Components   | Detailed widget component analysis        |
+| Document                                          | Focus           | Description                               |
+| ------------------------------------------------- | --------------- | ----------------------------------------- |
+| **[Architecture](ARCHITECTURE.md)**               | 🏗️ Architecture | C4 model showing system structure         |
+| **[Process Flowcharts](FLOWCHART.md)**            | 🔄 Process      | Security assessment workflows             |
+| **[System Architecture](SYSTEM_ARCHITECTURE.md)** | 🏛️ System       | Layered architecture and component details |
+| **[Widget Analysis](WIDGET_ANALYSIS.md)**         | 🧩 Components   | Detailed widget component analysis        |
 
 </div>
 
@@ -77,13 +77,13 @@ This diagram illustrates the state transitions during security level configurati
 
 ```mermaid
 stateDiagram-v2
-    [*] --> DefaultProfile: Initial Load
+    [*] --> DefaultProfile: "Initial Load"
     
     state DefaultProfile {
         [*] --> ModerateSecurityLevels
     }
     
-    DefaultProfile --> EditingProfile: User Selects<br>Security Levels
+    DefaultProfile --> EditingProfile: "User Selects<br>Security Levels"
     
     state EditingProfile {
         [*] --> SelectingConfidentiality
@@ -94,28 +94,28 @@ stateDiagram-v2
         SelectingConfidentiality --> ReviewingSelections: Skip
         SelectingIntegrity --> ReviewingSelections: Skip
         
-        ReviewingSelections --> SelectingConfidentiality: Edit<br>Confidentiality
-        ReviewingSelections --> SelectingIntegrity: Edit<br>Integrity
-        ReviewingSelections --> SelectingAvailability: Edit<br>Availability
+        ReviewingSelections --> SelectingConfidentiality: "Edit<br>Confidentiality"
+        ReviewingSelections --> SelectingIntegrity: "Edit<br>Integrity"
+        ReviewingSelections --> SelectingAvailability: "Edit<br>Availability"
     }
     
-    EditingProfile --> ProfileSelected: User Confirms<br>Selections
+    EditingProfile --> ProfileSelected: "User Confirms<br>Selections"
     
     state ProfileSelected {
         [*] --> LoadingProfileDetails
         LoadingProfileDetails --> DisplayingProfileDetails
     }
     
-    ProfileSelected --> EditingProfile: User Modifies<br>Security Levels
+    ProfileSelected --> EditingProfile: "User Modifies<br>Security Levels"
     
-    classDef default fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef defaultState fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
     classDef editing fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
     classDef selected fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
     classDef confidentiality fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
     classDef integrity fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
     classDef availability fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
     
-    class DefaultProfile default
+    class DefaultProfile defaultState
     class EditingProfile editing
     class ProfileSelected selected
     class SelectingConfidentiality confidentiality
@@ -129,9 +129,9 @@ The state diagram for assessment widgets shows how they respond to security leve
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Idle: Widget<br>Initialized
+    [*] --> Idle: "Widget<br>Initialized"
     
-    Idle --> Loading: Security Levels<br>Changed
+    Idle --> Loading: "Security Levels<br>Changed"
     
     state Loading {
         [*] --> FetchingData
@@ -140,19 +140,19 @@ stateDiagram-v2
         RenderingResults --> [*]
     }
     
-    Loading --> DisplayingResults: Data<br>Loaded
-    Loading --> Error: Data Fetch<br>Failed
+    Loading --> DisplayingResults: "Data<br>Loaded"
+    Loading --> Error: "Data Fetch<br>Failed"
     
     state DisplayingResults {
         [*] --> ShowingPrimaryView
-        ShowingPrimaryView --> ShowingDetailedView: User Requests<br>Details
-        ShowingDetailedView --> ShowingPrimaryView: User Returns<br>to Summary
+        ShowingPrimaryView --> ShowingDetailedView: "User Requests<br>Details"
+        ShowingDetailedView --> ShowingPrimaryView: "User Returns<br>to Summary"
     }
     
-    Error --> Retrying: User Requests<br>Retry
+    Error --> Retrying: "User Requests<br>Retry"
     Retrying --> Loading
     
-    DisplayingResults --> Idle: Widget<br>Reset
+    DisplayingResults --> Idle: "Widget<br>Reset"
     
     classDef idle fill:#95a5a6,stroke:#7f8c8d,stroke-width:2px,color:white
     classDef loading fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
@@ -173,20 +173,20 @@ This diagram shows the state transitions resulting from interactions between wid
 stateDiagram-v2
     state SecurityLevelWidget {
         [*] --> Ready
-        Ready --> Configuring: User Changes<br>Security Level
-        Configuring --> Propagating: New Levels<br>Selected
-        Propagating --> Ready: Propagation<br>Complete
+        Ready --> Configuring: "User Changes<br>Security Level"
+        Configuring --> Propagating: "New Levels<br>Selected"
+        Propagating --> Ready: "Propagation<br>Complete"
     }
     
     state AssessmentWidgets {
         [*] --> Idle
-        Idle --> Loading: Receive New<br>Security Levels
-        Loading --> Rendering: Data<br>Retrieved
-        Rendering --> Displaying: Render<br>Complete
-        Displaying --> Idle: Reset or<br>New Changes
+        Idle --> Loading: "Receive New<br>Security Levels"
+        Loading --> Rendering: "Data<br>Retrieved"
+        Rendering --> Displaying: "Render<br>Complete"
+        Displaying --> Idle: "Reset or<br>New Changes"
     }
     
-    SecurityLevelWidget --> AssessmentWidgets: Security Levels<br>Changed
+    SecurityLevelWidget --> AssessmentWidgets: "Security Levels<br>Changed"
     
     classDef slw fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
     classDef aw fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
@@ -201,17 +201,17 @@ This diagram illustrates states related to confidentiality controls:
 
 ```mermaid
 stateDiagram-v2
-    [*] --> NoAccess: Level: None
+    [*] --> NoAccess: "Level: None"
     
-    NoAccess --> BasicAccess: Level: Low
-    BasicAccess --> StandardAccess: Level: Moderate
-    StandardAccess --> EnhancedAccess: Level: High
-    EnhancedAccess --> ZeroTrust: Level: Very High
+    NoAccess --> BasicAccess: "Level: Low"
+    BasicAccess --> StandardAccess: "Level: Moderate"
+    StandardAccess --> EnhancedAccess: "Level: High"
+    EnhancedAccess --> ZeroTrust: "Level: Very High"
     
-    ZeroTrust --> EnhancedAccess: Decrease Level
-    EnhancedAccess --> StandardAccess: Decrease Level
-    StandardAccess --> BasicAccess: Decrease Level
-    BasicAccess --> NoAccess: Decrease Level
+    ZeroTrust --> EnhancedAccess: "Decrease Level"
+    EnhancedAccess --> StandardAccess: "Decrease Level"
+    StandardAccess --> BasicAccess: "Decrease Level"
+    BasicAccess --> NoAccess: "Decrease Level"
     
     state NoAccess {
         [*] --> PublicData
@@ -258,17 +258,17 @@ This diagram illustrates states related to integrity controls:
 
 ```mermaid
 stateDiagram-v2
-    [*] --> NoValidation: Level: None
+    [*] --> NoValidation: "Level: None"
     
-    NoValidation --> BasicValidation: Level: Low
-    BasicValidation --> StandardValidation: Level: Moderate
-    StandardValidation --> EnhancedValidation: Level: High
-    EnhancedValidation --> FormalVerification: Level: Very High
+    NoValidation --> BasicValidation: "Level: Low"
+    BasicValidation --> StandardValidation: "Level: Moderate"
+    StandardValidation --> EnhancedValidation: "Level: High"
+    EnhancedValidation --> FormalVerification: "Level: Very High"
     
-    FormalVerification --> EnhancedValidation: Decrease Level
-    EnhancedValidation --> StandardValidation: Decrease Level
-    StandardValidation --> BasicValidation: Decrease Level
-    BasicValidation --> NoValidation: Decrease Level
+    FormalVerification --> EnhancedValidation: "Decrease Level"
+    EnhancedValidation --> StandardValidation: "Decrease Level"
+    StandardValidation --> BasicValidation: "Decrease Level"
+    BasicValidation --> NoValidation: "Decrease Level"
     
     state NoValidation {
         [*] --> NoControls
@@ -314,17 +314,17 @@ This diagram illustrates states related to availability controls:
 
 ```mermaid
 stateDiagram-v2
-    [*] --> NoAvailability: Level: None
+    [*] --> NoAvailability: "Level: None"
     
-    NoAvailability --> BasicAvailability: Level: Low
-    BasicAvailability --> StandardAvailability: Level: Moderate
-    StandardAvailability --> EnhancedAvailability: Level: High
-    EnhancedAvailability --> ContinuousAvailability: Level: Very High
+    NoAvailability --> BasicAvailability: "Level: Low"
+    BasicAvailability --> StandardAvailability: "Level: Moderate"
+    StandardAvailability --> EnhancedAvailability: "Level: High"
+    EnhancedAvailability --> ContinuousAvailability: "Level: Very High"
     
-    ContinuousAvailability --> EnhancedAvailability: Decrease Level
-    EnhancedAvailability --> StandardAvailability: Decrease Level
-    StandardAvailability --> BasicAvailability: Decrease Level
-    BasicAvailability --> NoAvailability: Decrease Level
+    ContinuousAvailability --> EnhancedAvailability: "Decrease Level"
+    EnhancedAvailability --> StandardAvailability: "Decrease Level"
+    StandardAvailability --> BasicAvailability: "Decrease Level"
+    BasicAvailability --> NoAvailability: "Decrease Level"
     
     state NoAvailability {
         [*] --> NoSLA
