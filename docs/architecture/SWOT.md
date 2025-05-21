@@ -30,6 +30,29 @@ This document provides a strategic analysis of the CIA Compliance Manager's curr
 **Strategic Focus:** This quadrant chart provides a visual representation of the CIA Compliance Manager's strengths, weaknesses, opportunities, and threats arranged by their internal/external nature and positive/negative impact.
 
 ```mermaid
+%%{init: {
+  "theme": "neutral",
+  "themeVariables": {
+    "quadrant1Fill": "#2b83ba",
+    "quadrant2Fill": "#1a9641", 
+    "quadrant3Fill": "#d7191c",
+    "quadrant4Fill": "#756bb1",
+    "quadrantTitleFill": "#ffffff",
+    "quadrantPointFill": "#ffffff",
+    "quadrantPointTextFill": "#000000",
+    "quadrantXAxisTextFill": "#000000",
+    "quadrantYAxisTextFill": "#000000"
+  },
+  "quadrantChart": {
+    "chartWidth": 700,
+    "chartHeight": 700,
+    "pointLabelFontSize": 14,
+    "titleFontSize": 24,
+    "quadrantLabelFontSize": 18,
+    "xAxisLabelFontSize": 16,
+    "yAxisLabelFontSize": 16
+  }
+}}%%
 quadrantChart
     title CIA Compliance Manager SWOT Analysis
     x-axis Internal --> External
@@ -39,29 +62,29 @@ quadrantChart
     quadrant-3 Weaknesses
     quadrant-4 Threats
 
-    "Comprehensive CIA Framework": [0.2, 0.8]
-    "Strong TypeScript Implementation": [0.25, 0.75]
-    "Modular Widget Architecture": [0.3, 0.7]
-    "Visual Security Assessment": [0.15, 0.85]
-    "Business Context Documentation": [0.1, 0.7]
+    "Comprehensive CIA Framework": [0.2, 0.8] radius: 7, color: #a2d2a4, stroke-color: #2c882c, stroke-width: 2px
+    "Strong TypeScript Implementation": [0.25, 0.75] radius: 8, color: #a2d2a4, stroke-color: #2c882c, stroke-width: 2px
+    "Modular Widget Architecture": [0.3, 0.7] radius: 7, color: #a2d2a4, stroke-color: #2c882c, stroke-width: 2px
+    "Visual Security Assessment": [0.15, 0.85] radius: 8, color: #a2d2a4, stroke-color: #2c882c, stroke-width: 2px
+    "Business Context Documentation": [0.1, 0.7] radius: 6, color: #a2d2a4, stroke-color: #2c882c, stroke-width: 2px
 
-    "Incomplete Widget Implementation": [0.2, 0.25]
-    "Inconsistent Error Handling": [0.3, 0.3]
-    "Performance Optimization Needed": [0.25, 0.2]
-    "Data Inconsistencies": [0.15, 0.25]
-    "Type Safety Gaps": [0.35, 0.35]
+    "Incomplete Widget Implementation": [0.2, 0.25] radius: 8, color: #f5a9a9, stroke-color: #aa3939, stroke-width: 2px
+    "Inconsistent Error Handling": [0.3, 0.3] radius: 7, color: #f5a9a9, stroke-color: #aa3939, stroke-width: 2px
+    "Performance Optimization Needed": [0.25, 0.2] radius: 7, color: #f5a9a9, stroke-color: #aa3939, stroke-width: 2px
+    "Data Inconsistencies": [0.15, 0.25] radius: 6, color: #f5a9a9, stroke-color: #aa3939, stroke-width: 2px
+    "Type Safety Gaps": [0.35, 0.35] radius: 7, color: #f5a9a9, stroke-color: #aa3939, stroke-width: 2px
 
-    "Context-Aware Security": [0.8, 0.9]
-    "Compliance Framework Expansion": [0.7, 0.8]
-    "Integration Ecosystem Growth": [0.85, 0.75]
-    "Business Intelligence Features": [0.75, 0.85]
-    "Machine Learning Enhancements": [0.9, 0.7]
+    "Context-Aware Security": [0.8, 0.9] radius: 8, color: #a4c2f4, stroke-color: #3d64ba, stroke-width: 2px
+    "Compliance Framework Expansion": [0.7, 0.8] radius: 7, color: #a4c2f4, stroke-color: #3d64ba, stroke-width: 2px
+    "Integration Ecosystem Growth": [0.85, 0.75] radius: 7, color: #a4c2f4, stroke-color: #3d64ba, stroke-width: 2px
+    "Business Intelligence Features": [0.75, 0.85] radius: 8, color: #a4c2f4, stroke-color: #3d64ba, stroke-width: 2px
+    "Machine Learning Enhancements": [0.9, 0.7] radius: 6, color: #a4c2f4, stroke-color: #3d64ba, stroke-width: 2px
 
-    "Competing Security Platforms": [0.8, 0.3]
-    "Changing Compliance Standards": [0.7, 0.2]
-    "Technical Debt Accumulation": [0.75, 0.25]
-    "Complex Security Landscape": [0.9, 0.3]
-    "Regulatory Changes": [0.85, 0.15]
+    "Competing Security Platforms": [0.8, 0.3] radius: 7, color: #d5a6bd, stroke-color: #9b568a, stroke-width: 2px
+    "Changing Compliance Standards": [0.7, 0.2] radius: 7, color: #d5a6bd, stroke-color: #9b568a, stroke-width: 2px
+    "Technical Debt Accumulation": [0.75, 0.25] radius: 8, color: #d5a6bd, stroke-color: #9b568a, stroke-width: 2px
+    "Complex Security Landscape": [0.9, 0.3] radius: 6, color: #d5a6bd, stroke-color: #9b568a, stroke-width: 2px
+    "Regulatory Changes": [0.85, 0.15] radius: 7, color: #d5a6bd, stroke-color: #9b568a, stroke-width: 2px
 ```
 
 ### Alternative Network Visualization
