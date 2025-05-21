@@ -67,24 +67,39 @@ quadrantChart
     "Modular Widget Architecture": [0.3, 0.7] radius: 7, color: #a2d2a4, stroke-color: #2c882c, stroke-width: 2px
     "Visual Security Assessment": [0.15, 0.85] radius: 8, color: #a2d2a4, stroke-color: #2c882c, stroke-width: 2px
     "Business Context Documentation": [0.1, 0.7] radius: 6, color: #a2d2a4, stroke-color: #2c882c, stroke-width: 2px
+    "Comprehensive Testing Strategy": [0.18, 0.82] radius: 7, color: #a2d2a4, stroke-color: #2c882c, stroke-width: 2px
+    "DevOps Integration": [0.22, 0.78] radius: 6, color: #a2d2a4, stroke-color: #2c882c, stroke-width: 2px
+    "Supply Chain Security Controls": [0.27, 0.86] radius: 7, color: #a2d2a4, stroke-color: #2c882c, stroke-width: 2px
+    "Business Continuity Planning": [0.14, 0.77] radius: 6, color: #a2d2a4, stroke-color: #2c882c, stroke-width: 2px
 
     "Incomplete Widget Implementation": [0.2, 0.25] radius: 8, color: #f5a9a9, stroke-color: #aa3939, stroke-width: 2px
     "Inconsistent Error Handling": [0.3, 0.3] radius: 7, color: #f5a9a9, stroke-color: #aa3939, stroke-width: 2px
     "Performance Optimization Needed": [0.25, 0.2] radius: 7, color: #f5a9a9, stroke-color: #aa3939, stroke-width: 2px
     "Data Inconsistencies": [0.15, 0.25] radius: 6, color: #f5a9a9, stroke-color: #aa3939, stroke-width: 2px
     "Type Safety Gaps": [0.35, 0.35] radius: 7, color: #f5a9a9, stroke-color: #aa3939, stroke-width: 2px
+    "GitHub Infrastructure Dependency": [0.12, 0.28] radius: 6, color: #f5a9a9, stroke-color: #aa3939, stroke-width: 2px
+    "Complex Recovery Procedures": [0.32, 0.22] radius: 6, color: #f5a9a9, stroke-color: #aa3939, stroke-width: 2px
+    "Limited Dependency Isolation": [0.18, 0.18] radius: 5, color: #f5a9a9, stroke-color: #aa3939, stroke-width: 2px
 
     "Context-Aware Security": [0.8, 0.9] radius: 8, color: #a4c2f4, stroke-color: #3d64ba, stroke-width: 2px
     "Compliance Framework Expansion": [0.7, 0.8] radius: 7, color: #a4c2f4, stroke-color: #3d64ba, stroke-width: 2px
     "Integration Ecosystem Growth": [0.85, 0.75] radius: 7, color: #a4c2f4, stroke-color: #3d64ba, stroke-width: 2px
     "Business Intelligence Features": [0.75, 0.85] radius: 8, color: #a4c2f4, stroke-color: #3d64ba, stroke-width: 2px
     "Machine Learning Enhancements": [0.9, 0.7] radius: 6, color: #a4c2f4, stroke-color: #3d64ba, stroke-width: 2px
+    "Zero Trust Architecture": [0.78, 0.82] radius: 7, color: #a4c2f4, stroke-color: #3d64ba, stroke-width: 2px
+    "AI-Enhanced Security Analytics": [0.83, 0.78] radius: 6, color: #a4c2f4, stroke-color: #3d64ba, stroke-width: 2px
+    "Advanced SBOM Integration": [0.73, 0.75] radius: 6, color: #a4c2f4, stroke-color: #3d64ba, stroke-width: 2px
+    "Cross-Platform Deployment": [0.87, 0.68] radius: 6, color: #a4c2f4, stroke-color: #3d64ba, stroke-width: 2px
 
     "Competing Security Platforms": [0.8, 0.3] radius: 7, color: #d5a6bd, stroke-color: #9b568a, stroke-width: 2px
     "Changing Compliance Standards": [0.7, 0.2] radius: 7, color: #d5a6bd, stroke-color: #9b568a, stroke-width: 2px
     "Technical Debt Accumulation": [0.75, 0.25] radius: 8, color: #d5a6bd, stroke-color: #9b568a, stroke-width: 2px
     "Complex Security Landscape": [0.9, 0.3] radius: 6, color: #d5a6bd, stroke-color: #9b568a, stroke-width: 2px
     "Regulatory Changes": [0.85, 0.15] radius: 7, color: #d5a6bd, stroke-color: #9b568a, stroke-width: 2px
+    "Advanced Persistent Threats": [0.78, 0.22] radius: 7, color: #d5a6bd, stroke-color: #9b568a, stroke-width: 2px
+    "Supply Chain Risk": [0.72, 0.18] radius: 6, color: #d5a6bd, stroke-color: #9b568a, stroke-width: 2px
+    "Emerging Dependency Vulnerabilities": [0.82, 0.25] radius: 6, color: #d5a6bd, stroke-color: #9b568a, stroke-width: 2px
+    "Platform Provider Lock-in": [0.68, 0.28] radius: 5, color: #d5a6bd, stroke-color: #9b568a, stroke-width: 2px
 ```
 
 ### Alternative Network Visualization
@@ -99,6 +114,10 @@ graph TD
         S3["Modular widget architecture"]
         S4["Visual security assessments"]
         S5["Business context documentation"]
+        S6["Comprehensive testing strategy"]
+        S7["DevOps integration"]
+        S8["Supply chain security controls"]
+        S9["Business continuity planning"]
     end
 
     subgraph "Weaknesses (Internal, Negative)"
@@ -107,6 +126,9 @@ graph TD
         W3["Performance optimization needed"]
         W4["Data inconsistencies"]
         W5["Type safety gaps"]
+        W6["GitHub infrastructure dependency"]
+        W7["Complex recovery procedures"]
+        W8["Limited dependency isolation"]
     end
 
     subgraph "Opportunities (External, Positive)"
@@ -115,6 +137,10 @@ graph TD
         O3["Integration ecosystem growth"]
         O4["Business intelligence features"]
         O5["Machine learning enhancements"]
+        O6["Zero Trust Architecture"]
+        O7["AI-Enhanced security analytics"]
+        O8["Advanced SBOM integration"]
+        O9["Cross-platform deployment"]
     end
 
     subgraph "Threats (External, Negative)"
@@ -123,6 +149,10 @@ graph TD
         T3["Technical debt accumulation"]
         T4["Complex security landscape"]
         T5["Regulatory changes"]
+        T6["Advanced persistent threats"]
+        T7["Supply chain risk"]
+        T8["Emerging dependency vulnerabilities"]
+        T9["Platform provider lock-in"]
     end
 
     %% Style
@@ -131,10 +161,10 @@ graph TD
     classDef opportunities fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
     classDef threats fill:#f8cecc,stroke:#333,stroke-width:1px,color:black
 
-    class S1,S2,S3,S4,S5 strengths
-    class W1,W2,W3,W4,W5 weaknesses
-    class O1,O2,O3,O4,O5 opportunities
-    class T1,T2,T3,T4,T5 threats
+    class S1,S2,S3,S4,S5,S6,S7,S8,S9 strengths
+    class W1,W2,W3,W4,W5,W6,W7,W8 weaknesses
+    class O1,O2,O3,O4,O5,O6,O7,O8,O9 opportunities
+    class T1,T2,T3,T4,T5,T6,T7,T8,T9 threats
 ```
 
 ## Strengths
@@ -162,6 +192,22 @@ mindmap
       id5.1[Business perspective comments]
       id5.2[Clear value proposition articulation]
       id5.3[Domain terminology alignment]
+    id6(Comprehensive Testing Strategy)
+      id6.1[Detailed unit testing plans]
+      id6.2[End-to-end test coverage]
+      id6.3[Performance testing framework]
+    id7(DevOps Integration)
+      id7.1[CI/CD workflows with GitHub Actions]
+      id7.2[Automated security scanning]
+      id7.3[Deployment automation]
+    id8(Supply Chain Security Controls)
+      id8.1[Dependency vulnerability scanning]
+      id8.2[SBOM generation and attestations] 
+      id8.3[License compliance automation]
+    id9(Business Continuity Planning)
+      id9.1[Comprehensive disaster recovery]
+      id9.2[GitHub-specific resilience strategies]
+      id9.3[Recovery time and point objectives]
 ```
 
 ### Current Strengths Analysis
@@ -177,6 +223,14 @@ The CIA Compliance Manager has established several key strengths that provide a 
 4. **Visual Security Assessment**: The application provides intuitive visualizations of security levels and impacts through components like `SecurityVisualizationWidget` and `SecurityRiskScore`, making complex security concepts accessible.
 
 5. **Business Context Documentation**: Components and services include "Business Perspective" documentation sections that explain their business value and purpose, helping engineers understand how technical implementations support business needs.
+
+6. **Comprehensive Testing Strategy**: The application includes detailed unit testing, end-to-end testing plans, and performance testing frameworks that ensure reliability, security, and quality across all components.
+
+7. **DevOps Integration**: Well-established CI/CD workflows using GitHub Actions provide automated building, testing, security scanning, and deployment capabilities supporting the development lifecycle.
+
+8. **Supply Chain Security Controls**: The project implements robust supply chain security measures including dependency vulnerability scanning, SBOM (Software Bill of Materials) generation, security attestations, and automated license compliance checking, which help protect against supply chain attacks.
+
+9. **Business Continuity Planning**: A comprehensive business continuity plan addresses disaster recovery, including GitHub-specific resilience strategies, clearly defined recovery time objectives (RTOs) and recovery point objectives (RPOs), and detailed testing procedures.
 
 ## Weaknesses
 
@@ -203,6 +257,18 @@ mindmap
       id5.1[Type casts instead of proper guards]
       id5.2[Incomplete interface implementations]
       id5.3[Missing type definitions]
+    id6(GitHub Infrastructure Dependency)
+      id6.1[Heavy reliance on GitHub for hosting]
+      id6.2[GitHub-specific CI/CD workflows]
+      id6.3[Limited platform independence]
+    id7(Complex Recovery Procedures)
+      id7.1[Detailed but complex BCP processes]
+      id7.2[Multiple recovery mechanisms]
+      id7.3[Recovery testing requirements]
+    id8(Limited Dependency Isolation)
+      id8.1[Inadequate dependency pinning]
+      id8.2[Lack of dependency sandboxing]
+      id8.3[Limited transitive dependency controls]
 ```
 
 ### Current Weaknesses Analysis
@@ -218,6 +284,12 @@ As the project approaches v1.0, several weaknesses must be addressed:
 4. **Data Inconsistencies**: The application shows inconsistent data access patterns with some components using direct imports while others use hooks for the same data, and mixed approaches to service consumption.
 
 5. **Type Safety Gaps**: Despite good overall TypeScript usage, there are areas with type safety issues including components that cast types with `as` instead of using proper type guards, and incomplete interface implementations.
+
+6. **GitHub Infrastructure Dependency**: The system is heavily dependent on GitHub for hosting, CI/CD, and deployment, which may limit flexibility for organizations requiring self-hosted or alternative platform solutions.
+
+7. **Complex Recovery Procedures**: While the business continuity planning is comprehensive, the recovery procedures are complex and may be challenging to implement in crisis situations, requiring significant testing and training.
+
+8. **Limited Dependency Isolation**: Despite good supply chain security controls, there's limited isolation of dependencies, including inconsistent dependency pinning strategies, lack of dependency sandboxing, and insufficient controls for managing transitive dependencies, which could leave the application vulnerable to certain types of supply chain attacks.
 
 ## Opportunities
 
@@ -244,6 +316,22 @@ mindmap
       id5.1[Recommendation engine]
       id5.2[Anomaly detection]
       id5.3[Predictive security analysis]
+    id6(Zero Trust Architecture)
+      id6.1[Implementation guidelines]
+      id6.2[Control mapping to zero trust]
+      id6.3[Assessment tooling]
+    id7(AI-Enhanced Security Analytics)
+      id7.1[ML-driven threat detection]
+      id7.2[Predictive risk modeling]
+      id7.3[Automated security posture assessment]
+    id8(Advanced SBOM Integration)
+      id8.1[Real-time vulnerability monitoring]
+      id8.2[Comprehensive dependency visualization]
+      id8.3[Supply chain risk scoring]
+    id9(Cross-Platform Deployment)
+      id9.1[Platform-agnostic CI/CD pipelines]
+      id9.2[Self-hosted deployment options]
+      id9.3[Multi-environment configuration]
 ```
 
 ### Future Opportunities Analysis
@@ -259,6 +347,14 @@ Looking beyond v1.0, several opportunities exist for growth and expansion:
 4. **Business Intelligence Features**: Enhancing ROI calculations, developing security investment dashboards, and enabling scenario modeling would help justify security investments to business stakeholders.
 
 5. **Machine Learning Enhancements**: Implementing recommendation engines, anomaly detection, and predictive security analysis would provide additional value through smart automation and insights.
+
+6. **Zero Trust Architecture**: Providing implementation guidelines, control mapping to zero trust principles, and assessment tooling would align with modern security architecture trends.
+
+7. **AI-Enhanced Security Analytics**: Developing ML-driven threat detection, predictive risk modeling, and automated security posture assessment would add significant value in increasingly complex threat environments.
+
+8. **Advanced SBOM Integration**: Enhancing the Software Bill of Materials capabilities with real-time vulnerability monitoring, comprehensive dependency visualization, and supply chain risk scoring would provide deeper supply chain security insights.
+
+9. **Cross-Platform Deployment**: Developing platform-agnostic CI/CD pipelines, self-hosted deployment options, and multi-environment configurations would increase flexibility and reduce platform lock-in risks.
 
 ## Threats
 
@@ -285,6 +381,23 @@ mindmap
       id5.1[New compliance requirements]
       id5.2[Regional regulation differences]
       id5.3[Stricter enforcement]
+    id6(Advanced Persistent Threats)
+      id6.1[State-sponsored attacks]
+      id6.2[Sophisticated threat actors]
+      id6.3[Targeted security vulnerabilities]
+    id7(Supply Chain Risk)
+      id7.1[Third-party system vulnerabilities]
+      id7.2[Dependency risks]
+      id7.3[Integration security challenges]
+      id7.4[Trojanized dependencies]
+    id8(Emerging Dependency Vulnerabilities)
+      id8.1[Zero-day vulnerabilities]
+      id8.2[Dependency maintainer compromise]
+      id8.3[Malicious package substitution]
+    id9(Platform Provider Lock-in)
+      id9.1[GitHub service disruptions]
+      id9.2[Provider policy changes]
+      id9.3[Cost structure changes]
 ```
 
 ### Current Threats Analysis
@@ -300,6 +413,14 @@ Several external threats could impact the project's success:
 4. **Complex Security Landscape**: Evolving security threats, industry-specific security models, and increasing technical complexity make it challenging to provide comprehensive security assessment.
 
 5. **Regulatory Changes**: Shifting compliance landscapes may require frequent updates to compliance mappings, potentially causing gaps in coverage if not addressed promptly.
+
+6. **Advanced Persistent Threats**: The sophistication of state-sponsored attacks and targeted security vulnerabilities increases the complexity of security planning and implementation.
+
+7. **Supply Chain Risk**: Third-party system vulnerabilities, dependency risks, integration security challenges, and trojanized dependencies pose significant risks despite current mitigations.
+
+8. **Emerging Dependency Vulnerabilities**: Zero-day vulnerabilities, dependency maintainer compromises, and malicious package substitution present evolving threats to the supply chain that require continuous monitoring and mitigation.
+
+9. **Platform Provider Lock-in**: Heavy reliance on GitHub infrastructure creates risks related to service disruptions, provider policy changes, and potential cost structure changes that could impact availability or operations.
 
 ## Path to v1.0 - Critical Focus Areas
 
@@ -330,6 +451,59 @@ Based on the SWOT analysis and code examination, the following areas require imm
    - Create unified approach to service consumption
    - Implement proper data validation
 
+6. **Strengthen Supply Chain Security**:
+   - Implement dependency pinning strategy
+   - Enhance dependency isolation mechanisms
+   - Improve transitive dependency controls
+   - Simplify recovery procedures for critical components
+
+## Supply Chain Risk Mitigation Analysis
+
+The project currently implements several controls to mitigate supply chain risks:
+
+```mermaid
+flowchart TD
+    subgraph "Current Supply Chain Security Controls"
+        A[Dependency Review] --> B[Vulnerability Detection]
+        C[CodeQL Analysis] --> D[Code Vulnerability Scanning]
+        E[SBOM Generation] --> F[Dependency Documentation]
+        G[License Checking] --> H[Compliance Verification]
+        I[Build Attestations] --> J[Artifact Verification]
+        K[Scorecard Analysis] --> L[Supply Chain Best Practices]
+    end
+
+    subgraph "Recommended Additional Controls"
+        M[Dependency Pinning] --> N[Version Lock]
+        O[Dependency Sandboxing] --> P[Isolation Enforcement]
+        Q[Transitive Dependency Analysis] --> R[Deep Dependency Inspection]
+        S[Multi-Source Verification] --> T[Package Integrity]
+    end
+
+    style A fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    style C fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    style E fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    style G fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    style I fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    style K fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    
+    style M fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
+    style O fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
+    style Q fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
+    style S fill:#fff2cc,stroke:#333,stroke-width:1px,color:black
+```
+
+While the current supply chain security controls provide good protection, some specific enhancements could further reduce risks:
+
+1. **Dependency Pinning Strategy**: Implement exact version pinning for all direct dependencies and consider using lockfiles for transitive dependencies to prevent dependency confusion attacks.
+
+2. **Dependency Sandboxing**: Consider implementing dependency isolation techniques to limit the impact of compromised packages.
+
+3. **Transitive Dependency Analysis**: Enhance the current dependency review to include deep analysis of transitive dependencies which often represent a larger attack surface.
+
+4. **Multi-Source Verification**: Implement checksum verification from multiple sources to ensure package integrity and detect tampering.
+
+5. **Simplified Recovery Procedures**: Streamline the current complex recovery procedures to enable faster response to supply chain incidents.
+
 ## Post-v1.0 Strategic Direction
 
 After achieving v1.0 stability, these opportunities can be explored:
@@ -343,6 +517,14 @@ After achieving v1.0 stability, these opportunities can be explored:
 4. **Framework Expansion**: Add support for additional compliance frameworks and regional variations.
 
 5. **Machine Learning Features**: Implement recommendation engines and anomaly detection to add intelligence.
+
+6. **Zero Trust Architecture**: Provide implementation guidelines and assessment tools for zero trust security models.
+
+7. **Platform Independence**: Reduce dependency on GitHub-specific infrastructure to increase deployment flexibility.
+
+8. **Advanced Supply Chain Security**: Implement comprehensive SBOM analysis, dependency visualization, and risk scoring.
+
+9. **Cross-Platform Capabilities**: Develop platform-agnostic deployment options to reduce infrastructure lock-in risks.
 
 <div class="chart-legend">
 The color scheme used in these diagrams follows the cool color palette established in other architectural documentation, with:
