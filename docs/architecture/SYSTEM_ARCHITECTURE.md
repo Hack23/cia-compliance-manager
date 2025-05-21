@@ -2,19 +2,26 @@
 
 This document provides multiple architectural perspectives of the CIA Compliance Manager system, illustrating how different layers interact to deliver security assessment, business impact analysis, and compliance mapping capabilities.
 
-## 📚 Related Architecture Documentation
+## 📚 Architecture Documentation Map
 
 <div class="documentation-map">
 
 | Document                                            | Focus           | Description                               |
 | --------------------------------------------------- | --------------- | ----------------------------------------- |
-| **[Current Architecture](ARCHITECTURE.md)**         | 🏛️ Architecture | C4 model showing current system structure |
-| **[Future Architecture](FUTURE_ARCHITECTURE.md)**   | 🏛️ Architecture | Vision for context-aware platform         |
-| **[Data Model](DATA_MODEL.md)**                     | 📊 Data         | Current data structures and relationships |
-| **[Future Data Model](FUTURE_DATA_MODEL.md)**       | 📊 Data         | Context-aware data architecture           |
-| **[State Diagrams](STATEDIAGRAM.md)**               | 🔄 Behavior     | System state transitions                  |
-| **[Process Flowcharts](FLOWCHART.md)**              | 🔄 Process      | Security assessment workflows             |
-| **[Mindmaps](MINDMAP.md)**                          | 🧠 Concept      | System component relationships            |
+| **[System Architecture](SYSTEM_ARCHITECTURE.md)**   | 🏛️ System       | Layered architecture and component details |
+| **[Architecture](ARCHITECTURE.md)**                 | 🏗️ C4 Model     | C4 model showing system structure          |
+| **[Data Model](DATA_MODEL.md)**                     | 📊 Data         | Current data structures and relationships  |
+| **[State Diagrams](STATEDIAGRAM.md)**               | 🔄 Behavior     | System state transitions                   |
+| **[Process Flowcharts](FLOWCHART.md)**              | 🔄 Process      | Security assessment workflows              |
+| **[Mindmaps](MINDMAP.md)**                          | 🧠 Concept      | System component relationships             |
+| **[Widget Analysis](WIDGET_ANALYSIS.md)**           | 🧩 Components   | Detailed widget component analysis         |
+| **[Style Guide](STYLE_GUIDE.md)**                   | 🎨 Style        | Documentation style guidelines             |
+| **[SWOT Analysis](SWOT.md)**                        | 💼 Business     | Strategic business assessment              |
+| **[BCP Plan](BCPPlan.md)**                          | 🔄 Recovery     | Business continuity planning               |
+| **[Workflows](WORKFLOWS.md)**                       | 🚀 DevOps       | CI/CD and development workflows            |
+| **[Contribution Guidelines](CONTRIBUTION_GUIDELINES.md)** | 📋 Guidelines | Documentation contribution process        |
+| **[Future Architecture](FUTURE_ARCHITECTURE.md)**   | 🚀 Evolution    | Vision for platform evolution              |
+| **[Future Data Model](FUTURE_DATA_MODEL.md)**       | 🚀 Evolution    | Future data architecture vision            |
 
 </div>
 
@@ -26,8 +33,8 @@ The CIA Compliance Manager is structured as a layered architecture with clear se
 flowchart TD
     subgraph "Presentation Layer"
         UI[User Interface]
-        Widgets[Widgets]
-        Components[Common Components]
+        Widgets[Widget Components]
+        Common[Common Components]
     end
     
     subgraph "Business Logic Layer"
@@ -37,37 +44,93 @@ flowchart TD
     
     subgraph "Data Layer"
         Providers[Data Providers]
-        Models[Data Models]
+        StaticData[Static Data Files]
     end
     
     subgraph "Utility Layer"
         Utils[Utility Functions]
     end
     
-    UI --> Widgets --> Components
+    UI --> Widgets --> Common
     Widgets --> Hooks --> Services
-    Components --> Hooks
-    Services --> Providers --> Models
+    Common --> Hooks
+    Services --> Providers --> StaticData
     Services --> Utils
     Hooks --> Utils
-    Components --> Utils
+    Common --> Utils
     
-    classDef presentation fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef business fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef data fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef utility fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef presentation fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    classDef business fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef data fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    classDef utility fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
     
-    class UI,Widgets,Components presentation
+    class UI,Widgets,Common presentation
     class Services,Hooks business
-    class Providers,Models data
+    class Providers,StaticData data
     class Utils utility
+```
+
+## 🧩 Widget Architecture
+
+The application uses a widget-based architecture organized into four main categories, each addressing specific aspects of security assessment and management:
+
+```mermaid
+flowchart TB
+    subgraph "Core"
+        direction LR
+        SLW[Security Level<br>Widget]
+    end
+
+    subgraph "Categories" ["CIA Security Widget Categories"]
+        direction TB
+        
+        subgraph "Assessment Center" ["📊 Assessment Center"]
+            style "Assessment Center" fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+            SSW[Security Summary<br>Widget]
+            BIAW[Business Impact<br>Analysis Widget]
+        end
+        
+        subgraph "Business Value" ["💰 Business Value"]
+            style "Business Value" fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+            CSW[Compliance Status<br>Widget]
+            CEW[Cost Estimation<br>Widget]
+            VCW[Value Creation<br>Widget]
+        end
+        
+        subgraph "Impact Analysis" ["🔍 Impact Analysis"]
+            style "Impact Analysis" fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+            
+            subgraph "CIA" ["🔐 CIA Components"]
+                direction LR
+                CIW[Confidentiality<br>Impact Widget]
+                IIW[Integrity<br>Impact Widget]
+                AIW[Availability<br>Impact Widget]
+                
+                style CIW fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
+                style IIW fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
+                style AIW fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:white
+            end
+        end
+        
+        subgraph "Implementation Guide" ["🛠️ Implementation"]
+            style "Implementation Guide" fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+            SRW[Security Resources<br>Widget]
+            SVW[Security Visualization<br>Widget]
+            TDW[Technical Details<br>Widget]
+        end
+    end
+    
+    SLW --> SSW & BIAW
+    SLW --> CSW & CEW & VCW
+    SLW --> CIW & IIW & AIW
+    SLW --> SRW & SVW & TDW
+    
+    style SLW fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
 ```
 
 ## 🔧 Service Architecture
 
-**💼 Business Focus:** The service layer encapsulates core business logic and provides a clean API for user interface components.
-
-**🔄 Data Flow Focus:** Services handle data transformation, processing, and interaction with data providers.
+The service layer encapsulates business logic and provides a clean API for widget components. Services retrieve data from static files through data providers:
 
 ```mermaid
 classDiagram
@@ -95,31 +158,16 @@ classDiagram
         +getSupportedFrameworks() Framework[]
         +getFrameworkRequiredLevel(framework) SecurityLevel
         +isFrameworkApplicable(framework, ...levels) boolean
+        +getComplianceGapAnalysis(...) GapAnalysis
     }
     
     class SecurityMetricsService {
         +getSecurityMetrics(...levels) SecurityMetrics
         +getComponentMetrics(component, level) ComponentMetrics
-        +getImpactMetrics(component, level) ImpactMetrics
         +getSecurityLevelDescription(level) string
         +getProtectionLevel(...levels) string
         +getSecurityIcon(level) string
         +calculateSecurityScore(...levels) number
-        +calculateRoi(...levels) ROIMetrics
-    }
-    
-    class SecurityResourceService {
-        +getValuePoints(level) string[]
-        +getSecurityResources(component, level) SecurityResource[]
-    }
-    
-    class TechnicalImplementationService {
-        +getTechnicalImplementation(component, level) TechnicalImplementationDetails
-        +getComponentImplementationDetails(component, level) ComponentImplementationDetails
-        +getTechnicalDescription(component, level) string
-        +getRecommendations(component, level) string[]
-        +getImplementationConsiderations(...levels) string
-        +getImplementationTime(...levels) string
     }
     
     class CIAContentService {
@@ -133,749 +181,258 @@ classDiagram
         +getComplianceStatus(...levels) ComplianceStatus
         +getTechnicalImplementation(...) TechnicalImplementationDetails
         +getSecurityResources(...) SecurityResource[]
+        +getComponentDetails(component, level) CIADetails
     }
     
     BaseService <|-- BusinessImpactService
     BaseService <|-- ComplianceService
     BaseService <|-- SecurityMetricsService
-    BaseService <|-- SecurityResourceService
-    BaseService <|-- TechnicalImplementationService
     BaseService <|-- CIAContentService
     CIAContentService --> BusinessImpactService
     CIAContentService --> ComplianceService
     CIAContentService --> SecurityMetricsService
-    CIAContentService --> SecurityResourceService
-    CIAContentService --> TechnicalImplementationService
 ```
 
-### 🔄 Service Dependencies
+## 📊 Data Architecture
+
+The application currently uses static data files for all configuration and content. There is no database in the current implementation:
 
 ```mermaid
 flowchart TD
-    CIA[CIAContentService] --> BIS[BusinessImpactService]
-    CIA --> SMS[SecurityMetricsService]
-    CIA --> CS[ComplianceService]
-    CIA --> TIS[TechnicalImplementationService]
-    CIA --> SRS[SecurityResourceService]
-    
-    BIS --> DP[CIADataProvider]
-    SMS --> DP
-    CS --> DP
-    TIS --> DP
-    SRS --> DP
-    
-    classDef main fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef service fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef data fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    
-    class CIA main
-    class BIS,SMS,CS,TIS,SRS service
-    class DP data
-```
-
-## 🧩 Component Architecture
-
-**🎯 UI Focus:** Components form the building blocks of the user interface, providing reusable functionality.
-
-**🔄 Composition Focus:** Shows how components are composed to create the complete user experience.
-
-```mermaid
-classDiagram
-    class Component {
-        <<interface>>
-        +render() ReactNode
-    }
-    
-    class CommonComponents {
-        BusinessImpactSection
-        CIAImpactCard
-        KeyValuePair
-        MetricsCard
-        RiskLevelBadge
-        SecurityLevelBadge
-        StatusBadge
-        WidgetContainer
-    }
-    
-    class ChartComponents {
-        RadarChart
-        SecurityRiskScore
-    }
-    
-    class SecurityLevelComponents {
-        SecurityLevelSelector
-    }
-    
-    class Widget {
-        <<interface>>
-        +title: string
-        +children: ReactNode
-        +testId: string
-    }
-    
-    class AssessmentWidgets {
-        BusinessImpactAnalysisWidget
-        SecurityLevelWidget
-        SecuritySummaryWidget
-    }
-    
-    class BusinessValueWidgets {
-        ComplianceStatusWidget
-        CostEstimationWidget
-        ValueCreationWidget
-    }
-    
-    class ImpactAnalysisWidgets {
-        AvailabilityImpactWidget
-        ConfidentialityImpactWidget
-        IntegrityImpactWidget
-    }
-    
-    class ImplementationGuideWidgets {
-        SecurityResourcesWidget
-        SecurityVisualizationWidget
-        TechnicalDetailsWidget
-    }
-    
-    Component <|-- CommonComponents
-    Component <|-- ChartComponents
-    Component <|-- SecurityLevelComponents
-    Component <|-- Widget
-    Widget <|-- AssessmentWidgets
-    Widget <|-- BusinessValueWidgets
-    Widget <|-- ImpactAnalysisWidgets
-    Widget <|-- ImplementationGuideWidgets
-    AssessmentWidgets ..> CommonComponents : uses
-    BusinessValueWidgets ..> CommonComponents : uses
-    ImpactAnalysisWidgets ..> CommonComponents : uses
-    ImplementationGuideWidgets ..> CommonComponents : uses
-    AssessmentWidgets ..> ChartComponents : uses
-    ImplementationGuideWidgets ..> ChartComponents : uses
-```
-
-### 🖼️ Component Hierarchy
-
-```mermaid
-flowchart TD
-    App[CIAClassificationApp] --> SLW[SecurityLevelWidget]
-    App --> SSW[SecuritySummaryWidget]
-    App --> BIAW[BusinessImpactAnalysisWidget]
-    App --> CSW[ComplianceStatusWidget]
-    App --> CEW[CostEstimationWidget]
-    App --> VCW[ValueCreationWidget]
-    App --> AIW[AvailabilityImpactWidget]
-    App --> IIW[IntegrityImpactWidget]
-    App --> CIW[ConfidentialityImpactWidget]
-    App --> SRW[SecurityResourcesWidget]
-    App --> SVW[SecurityVisualizationWidget]
-    App --> TDW[TechnicalDetailsWidget]
-    
-    SLW --> SLS[SecurityLevelSelector]
-    SLS --> SEL[Selection]
-    
-    SSW --> SRS[SecurityRiskScore]
-    SSW --> RC[RadarChart]
-    
-    BIAW --> BIS[BusinessImpactSection]
-    CSW --> SB[StatusBadge]
-    SVW --> RC
-    
-    AIW --> KVP[KeyValuePair]
-    IIW --> KVP
-    CIW --> KVP
-    
-    SRW --> MC[MetricsCard]
-    
-    classDef app fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef widget fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef component fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef common fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    
-    class App app
-    class SLW,SSW,BIAW,CSW,CEW,VCW,AIW,IIW,CIW,SRW,SVW,TDW widget
-    class SLS,RC,SRS component
-    class SEL,BIS,SB,KVP,MC common
-```
-
-## 📊 Widget Architecture
-
-**🧩 Modular Focus:** Widgets encapsulate domain-specific functionality in self-contained modules.
-
-**💼 Domain Focus:** Each widget addresses a specific aspect of security assessment and management.
-
-```mermaid
-flowchart TD
-    subgraph "Assessment Center"
-        SLW[SecurityLevelWidget]
-        SSW[SecuritySummaryWidget]
-        BIAW[BusinessImpactAnalysisWidget]
+    subgraph "Data Access Layer"
+        CIADataProvider{{"CIADataProvider\n<<interface>>"}}
+        DefaultDP[DefaultDataProvider]
+        TestDP[TestDataProvider]
     end
     
-    subgraph "Business Value"
-        CSW[ComplianceStatusWidget]
-        CEW[CostEstimationWidget]
-        VCW[ValueCreationWidget]
+    subgraph "Data Files"
+        confidentialityOpts["confidentialityOptions.ts"]
+        integrityOpts["integrityOptions.ts"]
+        availabilityOpts["availabilityOptions.ts"]
+        frameworkData["frameworks.ts"]
+        resourcesData["securityResources.ts"]
     end
     
-    subgraph "Impact Analysis"
-        AIW[AvailabilityImpactWidget]
-        IIW[IntegrityImpactWidget]
-        CIW[ConfidentialityImpactWidget]
-    end
+    CIADataProvider <|.. DefaultDP
+    CIADataProvider <|.. TestDP
     
-    subgraph "Implementation Guide"
-        SRW[SecurityResourcesWidget]
-        SVW[SecurityVisualizationWidget]
-        TDW[TechnicalDetailsWidget]
-    end
+    DefaultDP --> confidentialityOpts
+    DefaultDP --> integrityOpts
+    DefaultDP --> availabilityOpts
+    DefaultDP --> frameworkData
+    DefaultDP --> resourcesData
     
-    SLW --> SSW
-    SLW --> BIAW
-    SLW --> CSW
-    SLW --> CEW
-    SLW --> VCW
-    SLW --> AIW
-    SLW --> IIW
-    SLW --> CIW
-    SLW --> SRW
-    SLW --> SVW
-    SLW --> TDW
+    Services[Service Layer] --> CIADataProvider
     
-    classDef assessment fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef business fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef impact fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef implementation fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
+    classDef interface fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,stroke-dasharray: 5 5
+    classDef provider fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    classDef data fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    classDef service fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
     
-    class SLW,SSW,BIAW assessment
-    class CSW,CEW,VCW business
-    class AIW,IIW,CIW impact
-    class SRW,SVW,TDW implementation
-```
-
-### 📊 Widget Data Flow
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant SLW as SecurityLevelWidget
-    participant Service as Services
-    participant Data as DataProvider
-    participant OtherWidgets as Other Widgets
-    
-    User->>SLW: Set Security Levels
-    SLW->>Service: Update Security Profile
-    Service->>Data: Process Security Levels
-    Service-->>SLW: Updated Profile Data
-    Service-->>OtherWidgets: Updated Profile Data
-    OtherWidgets-->>User: Display Updated Assessments
-```
-
-## 📂 Data Architecture
-
-**📊 Data Model Focus:** Shows the organization and relationships of data structures.
-
-**🧩 State Management Focus:** Illustrates how data flows and state is managed throughout the application.
-
-```mermaid
-erDiagram
-    SecurityProfile {
-        string confidentialityLevel
-        string integrityLevel
-        string availabilityLevel
-    }
-    
-    CIADetails {
-        string level
-        string description
-        string impact
-        string technical
-        string businessImpact
-        number capex
-        number opex
-        array recommendations
-    }
-    
-    BusinessImpact {
-        object financial
-        object operational
-        object reputational
-        object strategic
-    }
-    
-    ComplianceStatus {
-        string status
-        array compliantFrameworks
-        array partiallyCompliantFrameworks
-        array nonCompliantFrameworks
-        array remediationSteps
-        number complianceScore
-    }
-    
-    SecurityMetrics {
-        number score
-        number maxScore
-        string percentage
-        number totalCapex
-        number totalOpex
-        number totalCost
-        string riskReduction
-    }
-    
-    TechnicalImplementation {
-        string description
-        array implementationSteps
-        object effort
-    }
-    
-    SecurityResources {
-        string id
-        string title
-        string description
-        string url
-        string type
-        array tags
-    }
-    
-    SecurityProfile ||--o{ CIADetails : "defined by"
-    SecurityProfile ||--|| BusinessImpact : "assesses"
-    SecurityProfile ||--|| ComplianceStatus : "maps to"
-    SecurityProfile ||--|| SecurityMetrics : "measures"
-    SecurityProfile ||--|| TechnicalImplementation : "implements"
-    SecurityProfile ||--o{ SecurityResources : "utilizes"
-```
-
-### 🗃️ Data Provider Architecture
-
-```mermaid
-classDiagram
-    class CIADataProvider {
-        <<interface>>
-        +confidentialityOptions: Record~string, CIADetails~
-        +integrityOptions: Record~string, CIADetails~
-        +availabilityOptions: Record~string, CIADetails~
-        +roiEstimates: Record~string, ROIEstimate~
-    }
-    
-    class DefaultDataProvider {
-        +confidentialityOptions
-        +integrityOptions
-        +availabilityOptions
-        +roiEstimates
-    }
-    
-    class TestDataProvider {
-        +confidentialityOptions
-        +integrityOptions
-        +availabilityOptions
-        +roiEstimates
-    }
-    
-    CIADataProvider <|.. DefaultDataProvider
-    CIADataProvider <|.. TestDataProvider
+    class CIADataProvider interface
+    class DefaultDP,TestDP provider
+    class confidentialityOpts,integrityOpts,availabilityOpts,frameworkData,resourcesData data
+    class Services service
 ```
 
 ## 🔨 Utility Architecture
 
-**🧰 Tools Focus:** Shows the organization and purpose of utility functions that support the application.
-
-**🔧 Reuse Focus:** Illustrates how utilities provide common functionality across the system.
+The application has a rich set of utility functions that provide common functionality across components:
 
 ```mermaid
 classDiagram
     class Utils {
         colorUtils
         costCalculationUtils
-        defaultDataProvider
-        errorUtils
+        businessValueUtils
         formatUtils
-        levelValuesUtils
-        logger
         riskUtils
-        securityDefaults
         securityLevelUtils
-        serviceUtils
         typeGuards
-        widgetHelpers
     }
     
     class colorUtils {
-        +getColorForSecurityLevel() string
-        +getBackgroundForSecurityLevel() string
-        +getHexForLevel() string
+        +getSecurityLevelBackgroundClass(color) string
+        +getSecurityLevelTextClass(color) string
+        +getColorForSecurityLevel(level) string
+        +getBackgroundForSecurityLevel(level) string
+    }
+    
+    class costCalculationUtils {
+        +calculateTotalSecurityCost(...levels) CostDetails
+        +calculateComponentCost(component, level) ComponentCost
+        +estimateImplementationCost(...levels) number
+    }
+    
+    class businessValueUtils {
+        +calculateROIEstimate(...levels) ROIEstimate
+        +generateValueMetrics(...levels) BusinessValueMetric[]
+        +getComponentValueStatements(component, level) string[]
     }
     
     class formatUtils {
-        +formatCurrency() string
-        +formatPercentage() string
-        +truncateText() string
-    }
-    
-    class levelValuesUtils {
-        +getLevelValue() number
-        +getLevelFromValue() string
-        +compareSecurityLevels() number
-    }
-    
-    class logger {
-        +debug() void
-        +info() void
-        +warn() void
-        +error() void
+        +formatCurrency(value) string
+        +formatPercentage(value) string
+        +truncateText(text, length) string
     }
     
     class riskUtils {
-        +calculateRiskScore() number
-        +getRiskLevel() string
-        +getRiskColor() string
+        +calculateBusinessImpactLevel(...levels) string
+        +getRiskLevelFromImpactLevel(level) string
+        +getDefaultComponentImpact(component, level) BusinessImpact
+        +getImplementationComplexity(...levels) string
     }
     
     class securityLevelUtils {
-        +normalizeSecurityLevel() string
-        +getNextSecurityLevel() string
-        +getPreviousSecurityLevel() string
+        +normalizeSecurityLevel(level) SecurityLevel
+        +getSecurityLevelValue(level) number
+        +getNextSecurityLevel(level) SecurityLevel
+        +getPreviousSecurityLevel(level) SecurityLevel
     }
     
     class typeGuards {
-        +isSecurityLevel() boolean
-        +isCIAComponentType() boolean
-        +isObject() boolean
+        +isSecurityLevel(value) boolean
+        +isCIAComponent(value) boolean
+        +isArray(value) boolean
+        +isObject(value) boolean
+        +isString(value) boolean
+        +isNullish(value) boolean
     }
     
     Utils *-- colorUtils
+    Utils *-- costCalculationUtils
+    Utils *-- businessValueUtils
     Utils *-- formatUtils
-    Utils *-- levelValuesUtils
-    Utils *-- logger
     Utils *-- riskUtils
     Utils *-- securityLevelUtils
     Utils *-- typeGuards
 ```
 
-### 🔗 Utility Dependencies
+## 🧰 React Hook Architecture
+
+Custom hooks provide a clean interface for components to access services and manage state:
 
 ```mermaid
-flowchart LR
-    subgraph "Components"
-        Comp[UI Components]
+flowchart TD
+    subgraph "React Hooks"
+        useCIA[useCIAContentService]
+        useComp[useComplianceService]
+        useSecMetrics[useSecurityMetricsService]
+        useSecRes[useSecurityResourcesService]
+        useTech[useTechnicalImplementationService]
     end
     
     subgraph "Services"
-        Serv[Business Services]
+        CIA[CIAContentService]
+        Comp[ComplianceService]
+        SecMetrics[SecurityMetricsService]
+        SecRes[SecurityResourceService]
+        Tech[TechnicalImplementationService]
     end
     
-    subgraph "Utils"
-        Format[Format Utils]
-        Color[Color Utils]
-        Risk[Risk Utils]
-        Level[Level Utils]
-        Logger[Logger]
-        TypeGuard[Type Guards]
+    subgraph "Components"
+        Widgets[Widget Components]
     end
     
-    Comp --> Color
-    Comp --> Format
-    Comp --> Level
+    Widgets --> useCIA & useComp & useSecMetrics & useSecRes & useTech
+    useCIA --> CIA
+    useComp --> Comp
+    useSecMetrics --> SecMetrics
+    useSecRes --> SecRes
+    useTech --> Tech
     
-    Serv --> Risk
-    Serv --> Level
-    Serv --> Format
-    Serv --> Logger
-    Serv --> TypeGuard
+    classDef hook fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef service fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    classDef component fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
     
-    Risk --> Level
-    Color --> Level
-    
-    classDef comp fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef serv fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef util fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    
-    class Comp comp
-    class Serv serv
-    class Format,Color,Risk,Level,Logger,TypeGuard util
+    class useCIA,useComp,useSecMetrics,useSecRes,useTech hook
+    class CIA,Comp,SecMetrics,SecRes,Tech service
+    class Widgets component
 ```
 
-## 🔄 Workflow Architecture
+## 🔄 Application Data Flow
 
-**🔄 Process Focus:** Shows the key workflows and processes within the application.
-
-**🚀 User Journey Focus:** Illustrates how users interact with the system to perform tasks.
+The diagram below illustrates how data flows through the application:
 
 ```mermaid
-stateDiagram-v2
-    [*] --> InitialState
-    InitialState --> SecurityLevelSelection: User Opens Application
+sequenceDiagram
+    participant User
+    participant Widget as Widget Components
+    participant Hooks as React Hooks
+    participant Services as Services
+    participant Providers as Data Providers
+    participant Data as Static Data Files
     
-    state SecurityLevelSelection {
-        [*] --> SelectConfidentiality
-        SelectConfidentiality --> SelectIntegrity
-        SelectIntegrity --> SelectAvailability
-        SelectAvailability --> [*]
-    }
-    
-    SecurityLevelSelection --> SecurityAssessment: Levels Selected
-    
-    state SecurityAssessment {
-        [*] --> CalculateSecurityScore
-        CalculateSecurityScore --> EvaluateBusinessImpact
-        EvaluateBusinessImpact --> MapToCompliance
-        MapToCompliance --> GenerateRecommendations
-        GenerateRecommendations --> [*]
-    }
-    
-    SecurityAssessment --> ReviewResults: Assessment Complete
-    
-    state ReviewResults {
-        [*] --> ExamineBusinessImpact
-        [*] --> ReviewComplianceStatus
-        [*] --> ExploreRecommendations
-    }
-    
-    ReviewResults --> AdjustLevels: User Adjusts Settings
-    AdjustLevels --> SecurityLevelSelection
-    
-    ReviewResults --> ExportResults: User Exports
-    ExportResults --> [*]
-```
-
-## 🔌 Integration Architecture
-
-**🔗 Integration Focus:** Shows how the application interfaces with external systems.
-
-**🏗️ Extension Focus:** Illustrates the extension points for adding new functionality.
-
-```mermaid
-flowchart TD
-    subgraph "CIA Compliance Manager"
-        App[Core Application]
-        Services[Service Layer]
-        Data[Data Providers]
-        API[API Layer]
-    end
-    
-    subgraph "External Systems"
-        GRC[GRC Platforms]
-        SIEM[SIEM Systems]
-        CMDB[Asset Management]
-        BI[BI/Reporting]
-    end
-    
-    App --> Services --> Data
-    Services <--> API
-    
-    API <-.-> GRC
-    API <-.-> SIEM
-    API <-.-> CMDB
-    API <-.-> BI
-    
-    classDef internal fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef external fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef integration fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    
-    class App,Services,Data internal
-    class GRC,SIEM,CMDB,BI external
-    class API integration
-```
-
-## 🔒 Security Architecture
-
-**🛡️ Security Focus:** Shows the security controls and mechanisms within the application.
-
-**🔐 Protection Focus:** Illustrates how the system safeguards data and functionality.
-
-```mermaid
-flowchart TD
-    subgraph "Authentication & Authorization"
-        Auth[Authentication]
-        Roles[Role-Based Access]
-        Perm[Permissions]
-    end
-    
-    subgraph "Data Security"
-        Store[Secure Storage]
-        Trans[Transport Security]
-        Enc[Encryption]
-    end
-    
-    subgraph "Application Security"
-        Valid[Input Validation]
-        Output[Output Sanitization]
-        CSRF[CSRF Protection]
-    end
-    
-    subgraph "Audit & Logging"
-        Audit[Audit Logging]
-        Monitor[Activity Monitoring]
-        Alert[Security Alerts]
-    end
-    
-    User((User)) --> Auth --> Roles --> Perm
-    Perm --> App[Application]
-    App --> Store
-    App --> Trans
-    App --> Enc
-    App --> Valid
-    App --> Output
-    App --> CSRF
-    App --> Audit --> Monitor --> Alert
-    
-    classDef user fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef authn fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef data fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef app fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef audit fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    
-    class User user
-    class Auth,Roles,Perm authn
-    class Store,Trans,Enc data
-    class Valid,Output,CSRF,App app
-    class Audit,Monitor,Alert audit
-```
-
-## 🔄 State Management Architecture
-
-**🔄 State Flow Focus:** Shows how state is managed and propagated through the application.
-
-**🧩 Hook Focus:** Illustrates the role of React hooks in state management.
-
-```mermaid
-flowchart TD
-    subgraph "State Management"
-        App[Application State]
-        Hooks[Custom Hooks]
-        Context[React Context]
-    end
-    
-    subgraph "Component State Consumers"
-        Widgets[Widgets]
-        Components[UI Components]
-    end
-    
-    subgraph "State Providers"
-        Services[Services]
-        DataProviders[Data Providers]
-    end
-    
-    App --> Context
-    Context --> Hooks
-    Services --> Hooks
-    DataProviders --> Services
-    
-    Hooks --> Widgets
-    Hooks --> Components
-    
-    classDef state fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef consumer fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef provider fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    
-    class App,Context,Hooks state
-    class Widgets,Components consumer
-    class Services,DataProviders provider
-```
-
-## 📦 Package Dependencies
-
-**🔗 Dependency Focus:** Shows the key dependencies between packages in the codebase.
-
-**📚 Module Focus:** Illustrates how modules relate to each other.
-
-```mermaid
-flowchart TD
-    subgraph "Core Packages"
-        App[App]
-        Components[Components]
-        Services[Services]
-        Hooks[Hooks]
-        Utils[Utils]
-        Data[Data]
-        Types[Types]
-    end
-    
-    App --> Components
-    App --> Hooks
-    Components --> Services
-    Components --> Utils
-    Hooks --> Services
-    Hooks --> Utils
-    Services --> Data
-    Services --> Utils
-    Services --> Types
-    Data --> Types
-    Utils --> Types
-    
-    classDef app fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef ui fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef business fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef data fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef utility fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    
-    class App app
-    class Components ui
-    class Services,Hooks business
-    class Data,Types data
-    class Utils utility
+    User->>Widget: Change security level
+    Widget->>Hooks: Call hook with new level
+    Hooks->>Services: Forward request
+    Services->>Providers: Request data
+    Providers->>Data: Access static data
+    Data-->>Providers: Return data
+    Providers-->>Services: Return formatted data
+    Services-->>Hooks: Process & return data
+    Hooks-->>Widget: Return processed data
+    Widget-->>User: Update UI
 ```
 
 ## 🧪 Testing Architecture
 
-**🧪 Test Focus:** Shows the testing approach and organization across the codebase.
-
-**🔍 Quality Focus:** Illustrates how different types of tests ensure system quality.
+The application uses Vitest for testing with a structured approach to component and service testing:
 
 ```mermaid
 flowchart TD
     subgraph "Test Types"
         Unit[Unit Tests]
-        Integration[Integration Tests]
         Component[Component Tests]
-        E2E[End-to-End Tests]
+        Integration[Integration Tests]
     end
     
-    subgraph "Test Support"
-        Mocks[Mock Objects]
-        Fixtures[Test Fixtures]
-        TestUtils[Test Utilities]
+    subgraph "Test Utilities"
+        Mocks[Mock Services/Hooks]
+        TestUtils[Testing Utilities]
         TestData[Test Data]
+        TestIDs[Test IDs Constants]
     end
     
     subgraph "Test Coverage"
         Services[Services]
-        Components[Components]
         Hooks[Hooks]
-        Utils[Utils]
+        Widgets[Widgets]
+        Common[Common Components]
+        Utils[Utilities]
     end
     
     Unit --> Services
     Unit --> Utils
-    Component --> Components
+    Component --> Widgets
+    Component --> Common
     Integration --> Hooks
-    E2E --> App[Application]
     
-    Unit & Component & Integration & E2E --> Mocks
-    Unit & Component & Integration & E2E --> Fixtures
-    Unit & Component & Integration & E2E --> TestUtils
-    Unit & Component & Integration & E2E --> TestData
+    Unit & Component & Integration --> Mocks
+    Unit & Component & Integration --> TestUtils
+    Unit & Component & Integration --> TestData
+    Component & Integration --> TestIDs
     
-    classDef test fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef support fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef coverage fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    classDef app fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
+    classDef testType fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    classDef testUtil fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef coverage fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
     
-    class Unit,Integration,Component,E2E test
-    class Mocks,Fixtures,TestUtils,TestData support
-    class Services,Components,Hooks,Utils coverage
-    class App app
+    class Unit,Component,Integration testType
+    class Mocks,TestUtils,TestData,TestIDs testUtil
+    class Services,Hooks,Widgets,Common,Utils coverage
 ```
 
-## Color Legend
+## Color Schema
 
-The color scheme used throughout these diagrams follows a consistent pattern to enhance readability:
+The color schema used throughout these diagrams follows consistent patterns to enhance readability:
 
-| Element Type           | Color                  | Description                                       |
-| ------------------------ | ---------------------- | ------------------------------------------------- |
-| Application Core         | #a0c8e0 (Medium Blue)  | Core application components and services          |
-| User Interface           | #bbdefb (Light Blue)   | UI components, widgets, and presentation elements |
-| Business Logic           | #d1c4e9 (Light Purple) | Business rules, services, and processing logic    |
-| Data Elements            | #c8e6c9 (Light Green)  | Data structures, models, and storage              |
-| Integration Elements     | #ffda9e (Light Orange) | External interfaces and integration points        |
-| Support & Infrastructure | #ffccbc (Light Coral)  | Supporting functions, utilities, and infrastructure|
-
-This consistent color scheme helps distinguish between different architectural aspects and creates visual continuity across all diagrams in the documentation.
+| Element Type | Color | Purpose |
+|-------------|-------|---------|
+| 🔒 Confidentiality | #8e44ad (Purple) | Confidentiality-related components |
+| ✓ Integrity | #27ae60 (Green) | Integrity-related components |
+| ⏱️ Availability | #2980b9 (Blue) | Availability-related components |
+| 🏛️ Core Architecture | #34495e (Dark Blue) | Core architectural elements |
+| 🧩 UI Components | #e74c3c (Red) | User interface elements |
+| ⚙️ Services | #3498db (Light Blue) | Service layer components |
+| 💼 Business Value | #f1c40f (Yellow) | Business impact, value creation |
+| 🛠️ Implementation | #16a085 (Teal) | Technical implementation, utilities |
