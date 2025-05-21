@@ -168,16 +168,16 @@ flowchart TD
     D --> E
     E --> F([Complete])
 
-    classDef start fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,rx:25
-    classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
-    classDef decision fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef end fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:white,rx:25
+    classDef startNode fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,rx:25
+    classDef processNode fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
+    classDef decisionNode fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    classDef endNode fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:white,rx:25
 
-    class A start
-    class B decision
-    class C,D process
-    class E process
-    class F end
+    class A startNode
+    class B decisionNode
+    class C,D processNode
+    class E processNode
+    class F endNode
 ```
 
 #### State Diagrams
