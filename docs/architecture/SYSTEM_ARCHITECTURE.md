@@ -76,44 +76,31 @@ The application uses a widget-based architecture organized into four main catego
 
 ```mermaid
 flowchart TB
-    subgraph "Core"
-        direction LR
+    subgraph Core
         SLW[Security Level<br>Widget]
     end
 
-    subgraph "Categories" ["CIA Security Widget Categories"]
-        direction TB
-        
-        subgraph "Assessment Center" ["📊 Assessment Center"]
-            style "Assessment Center" fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    subgraph Categories ["CIA Security Widget Categories"]
+        subgraph Assessment ["📊 Assessment Center"]
             SSW[Security Summary<br>Widget]
             BIAW[Business Impact<br>Analysis Widget]
         end
         
-        subgraph "Business Value" ["💰 Business Value"]
-            style "Business Value" fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+        subgraph Business ["💰 Business Value"]
             CSW[Compliance Status<br>Widget]
             CEW[Cost Estimation<br>Widget]
             VCW[Value Creation<br>Widget]
         end
         
-        subgraph "Impact Analysis" ["🔍 Impact Analysis"]
-            style "Impact Analysis" fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-            
-            subgraph "CIA" ["🔐 CIA Components"]
-                direction LR
+        subgraph Impact ["🔍 Impact Analysis"]
+            subgraph CIA ["🔐 CIA Components"]
                 CIW[Confidentiality<br>Impact Widget]
                 IIW[Integrity<br>Impact Widget]
                 AIW[Availability<br>Impact Widget]
-                
-                style CIW fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
-                style IIW fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
-                style AIW fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:white
             end
         end
         
-        subgraph "Implementation Guide" ["🛠️ Implementation"]
-            style "Implementation Guide" fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+        subgraph Implementation ["🛠️ Implementation"]
             SRW[Security Resources<br>Widget]
             SVW[Security Visualization<br>Widget]
             TDW[Technical Details<br>Widget]
@@ -125,7 +112,24 @@ flowchart TB
     SLW --> CIW & IIW & AIW
     SLW --> SRW & SVW & TDW
     
-    style SLW fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    %% Apply styles using class definitions
+    classDef core fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    classDef assessment fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef business fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    classDef impact fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    classDef implementation fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef confidentiality fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
+    classDef integrity fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
+    classDef availability fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:white
+    
+    %% Apply classes to nodes
+    class SLW core
+    class SSW,BIAW assessment
+    class CSW,CEW,VCW business
+    class CIW confidentiality
+    class IIW integrity
+    class AIW availability
+    class SRW,SVW,TDW implementation
 ```
 
 ## 🔧 Service Architecture
@@ -200,7 +204,7 @@ The application currently uses static data files for all configuration and conte
 ```mermaid
 flowchart TD
     subgraph "Data Access Layer"
-        CIADataProvider{{"CIADataProvider\n<<interface>>"}}
+        CIADataProvider(["CIADataProvider\n<<interface>>"])
         DefaultDP[DefaultDataProvider]
         TestDP[TestDataProvider]
     end
@@ -213,8 +217,8 @@ flowchart TD
         resourcesData["securityResources.ts"]
     end
     
-    CIADataProvider <|.. DefaultDP
-    CIADataProvider <|.. TestDP
+    CIADataProvider -.-> DefaultDP
+    CIADataProvider -.-> TestDP
     
     DefaultDP --> confidentialityOpts
     DefaultDP --> integrityOpts
@@ -224,11 +228,13 @@ flowchart TD
     
     Services[Service Layer] --> CIADataProvider
     
-    classDef interface fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,stroke-dasharray: 5 5
+    %% Style definitions
+    classDef interface fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,stroke-dasharray:5 5
     classDef provider fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
     classDef data fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
     classDef service fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
     
+    %% Apply styles
     class CIADataProvider interface
     class DefaultDP,TestDP provider
     class confidentialityOpts,integrityOpts,availabilityOpts,frameworkData,resourcesData data
