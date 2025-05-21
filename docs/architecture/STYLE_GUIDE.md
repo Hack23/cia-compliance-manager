@@ -47,149 +47,197 @@ Use consistent emoji prefixes for common section types:
 | Technical | 🔧 | 🔧 Implementation Details |
 | DevOps | 🚀 | 🚀 Deployment Process |
 | Status | ✅ | ✅ Current Status |
+| Risk | ⚠️ | ⚠️ Risk Analysis |
+| Performance | ⚡ | ⚡ Performance Metrics |
+| Compliance | 🔍 | 🔍 Compliance Mapping |
+| Availability | ⏱️ | ⏱️ Availability Controls |
+| Integrity | ✓ | ✓ Integrity Verification |
+| Confidentiality | 🛡️ | 🛡️ Data Protection |
+| Testing | 🧪 | 🧪 Test Strategy |
+| Analytics | 📈 | 📈 Metrics & Monitoring |
+| Design | 🎭 | 🎭 UI/UX Components |
+| Documentation | 📝 | 📝 Documentation Structure |
 
 ### 🎨 Color Palette
 
-Use this standardized color palette for all diagrams:
+Use this enhanced color palette for all diagrams:
 
 ```mermaid
 graph TD
-    subgraph "Standard Color Palette"
-        A1[Core Components<br>#a0c8e0]
-        A2[Process Elements<br>#ffda9e]
-        A3[Critical Items<br>#ff6666]
-        A4[Success States<br>#c8e6c9]
-        A5[Data Elements<br>#d1c4e9]
-        A6[External Systems<br>#bbdefb]
+    subgraph "CIA Triad Colors"
+        C1[Confidentiality<br>#8e44ad]
+        I1[Integrity<br>#27ae60]
+        A1[Availability<br>#2980b9]
     end
     
-    style A1 fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    style A2 fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    style A3 fill:#ff6666,stroke:#333,stroke-width:1px,color:white
-    style A4 fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    style A5 fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    style A6 fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
+    subgraph "Architectural Elements"
+        A2[Core Components<br>#34495e]
+        A3[UI Elements<br>#e74c3c]
+        A4[Services<br>#3498db]
+        A5[Data Elements<br>#9b59b6]
+    end
+    
+    subgraph "Status Colors"
+        S1[Success<br>#2ecc71]
+        S2[Warning<br>#f39c12]
+        S3[Critical<br>#c0392b]
+        S4[Neutral<br>#7f8c8d]
+    end
+    
+    style C1 fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
+    style I1 fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
+    style A1 fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:white
+    
+    style A2 fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
+    style A3 fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    style A4 fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    style A5 fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    
+    style S1 fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:white
+    style S2 fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:white
+    style S3 fill:#c0392b,stroke:#922b21,stroke-width:2px,color:white
+    style S4 fill:#7f8c8d,stroke:#626567,stroke-width:2px,color:white
 ```
 
-#### Secondary Colors
+#### Business & Value Colors
 
 ```mermaid
 graph TD
-    subgraph "Extended Color Palette"
-        B1[Light Blue<br>#bbdefb]
-        B2[Medium Blue<br>#a0c8e0]
-        B3[Dark Blue<br>#86b5d9]
-        B4[Light Purple<br>#d1c4e9]
-        B5[Medium Purple<br>#9575cd]
-        B6[Light Green<br>#c8e6c9]
-        B7[Medium Green<br>#81c784]
-        B8[Light Orange<br>#ffda9e]
-        B9[Medium Orange<br>#ffb74d]
-        B10[Light Red<br>#ffccbc]
-        B11[Medium Red<br>#ff8a65]
+    subgraph "Business & Value Colors"
+        B1[Financial<br>#f1c40f]
+        B2[Operational<br>#3498db]
+        B3[Reputational<br>#9b59b6]
+        B4[Strategic<br>#16a085]
+        B5[Regulatory<br>#e74c3c]
     end
     
-    style B1 fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    style B2 fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    style B3 fill:#86b5d9,stroke:#333,stroke-width:1px,color:black
-    style B4 fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    style B5 fill:#9575cd,stroke:#333,stroke-width:1px,color:black
-    style B6 fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
-    style B7 fill:#81c784,stroke:#333,stroke-width:1px,color:black
-    style B8 fill:#ffda9e,stroke:#333,stroke-width:1px,color:black
-    style B9 fill:#ffb74d,stroke:#333,stroke-width:1px,color:black
-    style B10 fill:#ffccbc,stroke:#333,stroke-width:1px,color:black
-    style B11 fill:#ff8a65,stroke:#333,stroke-width:1px,color:black
+    style B1 fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    style B2 fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    style B3 fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    style B4 fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    style B5 fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
 ```
+
+#### Color Usage Guide
+
+| Component Type | Primary Color | Stroke Color | Use Case |
+|----------------|---------------|-------------|----------|
+| Confidentiality | #8e44ad (Purple) | #6c3483 | Confidentiality components, data protection |
+| Integrity | #27ae60 (Green) | #1e8449 | Integrity components, validation |
+| Availability | #2980b9 (Blue) | #2471a3 | Availability components, uptime |
+| Architecture | #34495e (Dark Blue) | #2c3e50 | Core architectural elements |
+| Services | #3498db (Light Blue) | #2980b9 | Service layer components |
+| UI Components | #e74c3c (Red) | #c0392b | User interface elements |
+| Business | #f1c40f (Yellow) | #f39c12 | Business impact, value creation |
+| Utilities | #1abc9c (Teal) | #16a085 | Utility functions, helpers |
 
 ### 🖼️ Diagram Styles
 
 #### C4 Diagrams
 
-For C4 model diagrams, use these styling guidelines:
+For C4 model diagrams, use these enhanced styling guidelines:
 
 ```mermaid
 C4Context
   title Example C4 Context Diagram Styling
 
-  Person(user, "User", "Description of user")
-  System(system, "System", "Description of system")
-  System_Ext(external, "External System", "Description of external system")
+  Person(user, "User", "A system user")
+  System(system, "CIA Compliance Manager", "Security assessment system")
+  System_Ext(external, "External System", "Integration point")
 
   Rel(user, system, "Uses")
   Rel(system, external, "Integrates with")
 
   UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 
-  UpdateElementStyle(user, $fontColor="#333333", $bgColor="#bbdefb", $borderColor="#86b5d9")
-  UpdateElementStyle(system, $fontColor="#333333", $bgColor="#a0c8e0", $borderColor="#86b5d9")
-  UpdateElementStyle(external, $fontColor="#333333", $bgColor="#d1c4e9", $borderColor="#9575cd")
+  UpdateElementStyle(user, $fontColor="white", $bgColor="#e74c3c", $borderColor="#c0392b")
+  UpdateElementStyle(system, $fontColor="white", $bgColor="#34495e", $borderColor="#2c3e50")
+  UpdateElementStyle(external, $fontColor="white", $bgColor="#3498db", $borderColor="#2980b9")
 ```
 
 #### Flowcharts
 
-For process flowcharts, use these styling guidelines:
+For process flowcharts, use these enhanced styling guidelines:
 
 ```mermaid
 flowchart TD
-    A[Start Process] --> B{Decision Point}
-    B -->|Option 1| C[Process Step 1]
-    B -->|Option 2| D[Process Step 2]
-    C --> E[End Process]
+    A([Start Assessment]) --> B{Select<br>Security Level}
+    B -->|Basic| C[Configure<br>Low Security]
+    B -->|Enhanced| D[Configure<br>High Security]
+    C --> E[Generate<br>Assessment]
     D --> E
+    E --> F([Complete])
 
-    classDef start fill:#bbdefb,stroke:#333,stroke-width:1px,color:black
-    classDef process fill:#a0c8e0,stroke:#333,stroke-width:1px,color:black
-    classDef decision fill:#d1c4e9,stroke:#333,stroke-width:1px,color:black
-    classDef end fill:#c8e6c9,stroke:#333,stroke-width:1px,color:black
+    classDef start fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white,rx:25
+    classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
+    classDef decision fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
+    classDef end fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:white,rx:25
 
     class A start
     class B decision
     class C,D process
-    class E end
+    class E process
+    class F end
 ```
 
 #### State Diagrams
 
-For state diagrams, use these styling guidelines:
+For state diagrams, use these enhanced styling guidelines:
 
 ```mermaid
 stateDiagram-v2
     [*] --> Idle
     
-    Idle --> Processing: Event Received
-    Processing --> Success: Process Complete
-    Processing --> Error: Process Failed
+    Idle --> Processing: Security Level Selected
+    Processing --> Success: Assessment Complete
+    Processing --> Error: Assessment Failed
     Success --> Idle: Reset
     Error --> Idle: Reset
     
     state Processing {
-        [*] --> Validating
-        Validating --> Computing
-        Computing --> Saving
-        Saving --> [*]
+        [*] --> Loading
+        Loading --> Calculating
+        Calculating --> Generating
+        Generating --> [*]
     }
+    
+    note right of Success : Ready for export
+    
+    classDef idle fill:#7f8c8d,stroke:#626567,color:white
+    classDef processing fill:#3498db,stroke:#2980b9,color:white
+    classDef success fill:#2ecc71,stroke:#27ae60,color:white
+    classDef error fill:#e74c3c,stroke:#c0392b,color:white
+    
+    class Idle idle
+    class Processing,Loading,Calculating,Generating processing
+    class Success success
+    class Error error
 ```
 
 #### Entity Relationship Diagrams
 
-For data models, use these styling guidelines:
+For data models, use these enhanced styling guidelines:
 
 ```mermaid
 erDiagram
-    ENTITY1 {
+    SECURITY_PROFILE {
         string id PK
-        string name
+        string confidentialityLevel
+        string integrityLevel
+        string availabilityLevel
+    }
+    
+    ASSESSMENT_RESULT {
+        string id PK
+        string profileId FK
+        string complianceStatus
+        float securityScore
         date createdAt
     }
     
-    ENTITY2 {
-        string id PK
-        string entity1Id FK
-        string attribute
-    }
+    SECURITY_PROFILE ||--o{ ASSESSMENT_RESULT : "produces"
     
-    ENTITY1 ||--o{ ENTITY2 : "has"
+    SECURITY_PROFILE }|..|{ COMPLIANCE_FRAMEWORK : "complies with"
 ```
 
 ## 📝 Text Formatting
@@ -208,9 +256,9 @@ erDiagram
 ```typescript
 // Example of a properly formatted code block
 interface SecurityProfile {
-  confidentiality: number;
-  integrity: number;
-  availability: number;
+  confidentiality: SecurityLevel;
+  integrity: SecurityLevel;
+  availability: SecurityLevel;
   getOverallScore(): number;
 }
 ```
