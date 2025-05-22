@@ -404,6 +404,117 @@ stateDiagram-v2
     ModelRetraining --> [*]
 ```
 
+# 🧠 Reputational Impact Modeling Mind Map
+
+## 📊 Color-Coded Concept Map
+
+```mermaid
+mindmap
+  root((Reputational<br/>Impact<br/>Modeling))
+    Impact Assessment:::impactAssessment
+      Direct Business Effects:::impactAssessment
+        Revenue Impact
+        Customer Retention
+        Market Share
+      Stakeholder Trust:::impactAssessment
+        Investor Confidence
+        Customer Loyalty
+        Partner Relationships
+      Media Coverage:::impactAssessment
+        News Cycle Dynamics
+        Social Media Spread
+        Coverage Sentiment
+    Measurement Methods:::measurementMethods
+      Quantitative Metrics:::measurementMethods
+        Share Price Correlation
+        Sales Impact Analytics
+        Customer Churn Rate
+      Qualitative Analysis:::measurementMethods
+        Brand Sentiment Tracking
+        Trust Index Surveys
+        Public Perception Studies
+      Scoring Frameworks:::measurementMethods
+        Reputation Risk Score
+        Comparative Benchmarking
+        Historical Trend Analysis
+    Industry Factors:::industryFactors
+      Sector Sensitivity:::industryFactors
+        Financial Services Impact
+        Healthcare Trust Factors
+        Retail Consumer Effects
+      Regulatory Context:::industryFactors
+        Compliance Requirements
+        Disclosure Obligations
+        Regulatory Scrutiny
+      Competitive Position:::industryFactors
+        Industry Leader Premium
+        Market Differentiation
+        Trust as Competitive Edge
+    Security Integration:::securityIntegration
+      Control Mapping:::securityIntegration
+        Preventative Value
+        Detection Capabilities
+        Response Readiness
+      CIA Triad Connection:::securityIntegration
+        Confidentiality Breaches
+        Integrity Failures
+        Availability Incidents
+      Risk Register Alignment:::securityIntegration
+        Risk Classification
+        Impact Assessment
+        Treatment Prioritization
+    Response Management:::responseManagement
+      Crisis Communications:::responseManagement
+        Message Development
+        Stakeholder Engagement
+        Timing Sensitivity
+      Incident Recovery:::responseManagement
+        Damage Mitigation
+        Trust Rebuilding
+        Reputation Restoration
+      Monitoring Effectiveness:::responseManagement
+        Response Outcomes
+        Sentiment Recovery
+        Long-term Impact
+    Executive Support:::executiveSupport
+      Decision Tools:::executiveSupport
+        Impact Visualization
+        Scenario Modeling
+        Strategic Implications
+      ROI Framework:::executiveSupport
+        Prevention Investment
+        Response Preparedness
+        Reputation Value Protection
+      Board Reporting:::executiveSupport
+        Strategic Risk Updates
+        Reputation Metrics Dashboard
+        Investment Justification
+
+classDef impactAssessment fill:#ffcdd2,stroke:#c62828,stroke-width:1px,color:#b71c1c
+classDef measurementMethods fill:#bbdefb,stroke:#1565c0,stroke-width:1px,color:#0d47a1
+classDef industryFactors fill:#c8e6c9,stroke:#2e7d32,stroke-width:1px,color:#1b5e20
+classDef securityIntegration fill:#d1c4e9,stroke:#4527a0,stroke-width:1px,color:#311b92
+classDef responseManagement fill:#ffe0b2,stroke:#ef6c00,stroke-width:1px,color:#e65100
+classDef executiveSupport fill:#f8bbd0,stroke:#c2185b,stroke-width:1px,color:#880e4f
+```
+
+## 🎨 Color Code Legend
+
+| Category | Color | Description |
+|----------|-------|-------------|
+| **Impact Assessment** | 🔴 Red | Core components for evaluating reputation damage |
+| **Measurement Methods** | 🔵 Blue | Approaches to quantify and qualify reputation impact |
+| **Industry Factors** | 🟢 Green | Sector-specific considerations affecting reputation |
+| **Security Integration** | 🟣 Purple | Connections to security controls and CIA triad |
+| **Response Management** | 🟠 Orange | Crisis management and reputation recovery processes |
+| **Executive Support** | 🌸 Pink | Decision support tools for leadership |
+
+## 🔗 Integration with CIA Compliance Manager
+
+This mindmap extends the existing BusinessImpactAnalysisWidget by adding comprehensive reputation impact modeling capabilities as part of the ML-Enhanced Security features planned in the future architecture. It provides structured guidance for organizations to assess, measure, and manage reputational risks alongside their confidentiality, integrity, and availability controls.
+
+The model incorporates both preventive approaches (mapping controls to reputation protection) and responsive strategies (incident recovery and stakeholder communications), making it a valuable addition to the organization's overall security posture assessment.
+
 ## 🔮 Future Evolution Roadmap
 
 ```mermaid
