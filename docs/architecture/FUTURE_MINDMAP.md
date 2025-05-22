@@ -490,12 +490,6 @@ mindmap
         Reputation Metrics Dashboard
         Investment Justification
 
-classDef impactAssessment fill:#ffcdd2,stroke:#c62828,stroke-width:1px,color:#b71c1c
-classDef measurementMethods fill:#bbdefb,stroke:#1565c0,stroke-width:1px,color:#0d47a1
-classDef industryFactors fill:#c8e6c9,stroke:#2e7d32,stroke-width:1px,color:#1b5e20
-classDef securityIntegration fill:#d1c4e9,stroke:#4527a0,stroke-width:1px,color:#311b92
-classDef responseManagement fill:#ffe0b2,stroke:#ef6c00,stroke-width:1px,color:#e65100
-classDef executiveSupport fill:#f8bbd0,stroke:#c2185b,stroke-width:1px,color:#880e4f
 ```
 
 ## 🎨 Color Code Legend
