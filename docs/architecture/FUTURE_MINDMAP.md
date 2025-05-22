@@ -491,3 +491,101 @@ mindmap
 
 ```
 
+## 🧠 Business Impact Analysis Mind Map
+
+
+```mermaid
+mindmap
+  root((Business<br/>Impact<br/>Analysis))
+    Asset Identification:::assetIdentification
+      Critical Systems:::assetIdentification
+        Core Applications
+        Infrastructure Components
+        Network Services
+      Data Assets:::assetIdentification
+        Customer Information
+        Financial Records
+        Intellectual Property
+      Business Functions:::assetIdentification
+        Revenue Generating
+        Operational Support
+        Strategic Initiatives
+    Impact Categories:::impactCategories
+      Financial Impacts:::impactCategories
+        Revenue Loss
+        Recovery Costs
+        Regulatory Penalties
+      Operational Impacts:::impactCategories
+        Process Disruption
+        Productivity Loss
+        Service Delivery
+      Reputational Impacts:::impactCategories
+        Brand Damage
+        Customer Trust
+        Market Perception
+    Time Dimensions:::timeDimensions
+      Recovery Targets:::timeDimensions
+        Recovery Time Objective
+        Recovery Point Objective
+        Maximum Tolerable Downtime
+      Impact Timeline:::timeDimensions
+        Immediate Effects
+        Short-term Consequences
+        Long-term Implications
+      Time-Based Valuation:::timeDimensions
+        Per-Hour Cost
+        Cumulative Impact
+        Escalation Thresholds
+    Risk Integration:::riskIntegration
+      Threat Assessment:::riskIntegration
+        Threat Scenarios
+        Vulnerability Analysis
+        Likelihood Estimation
+      Control Effectiveness:::riskIntegration
+        Prevention Controls
+        Detection Mechanisms
+        Recovery Capabilities
+      Risk Prioritization:::riskIntegration
+        Risk Scoring
+        Treatment Prioritization
+        Residual Risk Evaluation
+    Compliance Linkage:::complianceLink
+      Regulatory Requirements:::complianceLink
+        Industry Regulations
+        Data Protection Laws
+        Governance Standards
+      Audit Considerations:::complianceLink
+        Evidence Documentation
+        Control Verification
+        Compliance Reporting
+      Framework Alignment:::complianceLink
+        NIST Framework
+        ISO Standards
+        Industry Benchmarks
+    Decision Support:::decisionSupport
+      Executive Reporting:::decisionSupport
+        Impact Visualization
+        Risk Heat Maps
+        Executive Dashboards
+      Resource Allocation:::decisionSupport
+        Budget Justification
+        Staff Requirements
+        Technology Investments
+      Strategic Planning:::decisionSupport
+        Resilience Planning
+        Continuity Strategy
+        Security Roadmap
+
+```
+
+## 🔗 Integration with CIA Compliance Manager
+
+This Business Impact Analysis mindmap extends the current BusinessImpactAnalysisWidget capabilities by providing a comprehensive framework for assessing and communicating how security incidents affect business operations across multiple dimensions. It links directly to the CIA triad by helping organizations understand:
+
+- What assets require confidentiality, integrity, and availability protections
+- The business consequences of security failures
+- How impact analysis drives security control selection and prioritization
+- The relationship between impact analysis and compliance requirements
+
+The structured approach ensures that security investments are properly aligned with business priorities and risk tolerance levels, supporting more effective decision-making around security control implementation.
+
