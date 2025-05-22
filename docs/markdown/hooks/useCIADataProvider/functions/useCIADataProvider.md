@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.14**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.15**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **useCIADataProvider**(): `object`
 
-Defined in: [hooks/useCIADataProvider.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/hooks/useCIADataProvider.ts#L9)
+Defined in: [hooks/useCIADataProvider.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/50a3bb1fa64948444e36c06fee075b5043350db0/src/hooks/useCIADataProvider.ts#L9)
 
 Hook that provides access to the CIA data provider
 

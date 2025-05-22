@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.5% </span>
+                <span class="strong">89.3% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>331/374</span>
+                <span class='fraction'>334/374</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">78.94% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>15/18</span>
+                <span class='fraction'>15/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.5% </span>
+                <span class="strong">89.3% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>331/374</span>
+                <span class='fraction'>334/374</span>
             </div>
         
             
@@ -1022,6 +1022,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1032,25 +1046,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { SecurityLevel } from "../types/cia";
 import {
   CIADataProvider,
@@ -1514,9 +1514,9 @@ function getExpertiseForLevel(level: SecurityLevel): string {
 }
 &nbsp;
 // Named export for the class
-export class TestDataProvider implements CIADataProvider <span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >{</span></span>
+export class TestDataProvider implements CIADataProvider {
   // Implementation of the CIADataProvider interface
-<span class="cstat-no" title="statement not covered" >  availabilityOptions: Record&lt;SecurityLevel, CIADetails&gt;;</span>
+<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >  availabilityOptions: Record&lt;SecurityLevel, CIADetails&gt;;</span></span>
 <span class="cstat-no" title="statement not covered" >  integrityOptions: Record&lt;SecurityLevel, CIADetails&gt;;</span>
 <span class="cstat-no" title="statement not covered" >  confidentialityOptions: Record&lt;SecurityLevel, CIADetails&gt;;</span>
 <span class="cstat-no" title="statement not covered" >  roiEstimates: ROIEstimatesMap;</span>
@@ -1527,7 +1527,7 @@ export class TestDataProvider implements CIADataProvider <span class="fstat-no" 
 <span class="cstat-no" title="statement not covered" >  getDefaultExpertiseLevel: (level: SecurityLevel) =&gt; string;</span>
 <span class="cstat-no" title="statement not covered" >  getProtectionLevel: (level: SecurityLevel) =&gt; string;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  constructor() {</span>
+<span class="fstat-no" title="function not covered" >  constructor() {</span>
     // Initialize using the createTestDataProvider function
 <span class="cstat-no" title="statement not covered" >    const provider = createTestDataProvider();</span>
 <span class="cstat-no" title="statement not covered" >    this.availabilityOptions = provider.availabilityOptions;</span>
@@ -1544,7 +1544,7 @@ export class TestDataProvider implements CIADataProvider <span class="fstat-no" 
 <span class="cstat-no" title="statement not covered" >      provider.getDefaultExpertiseLevel || getDefaultExpertiseLevel;</span>
 <span class="cstat-no" title="statement not covered" >    this.getProtectionLevel = provider.getProtectionLevel || getProtectionLevel;</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -1552,7 +1552,7 @@ export class TestDataProvider implements CIADataProvider <span class="fstat-no" 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-15T22:13:19.078Z
+                at 2025-05-22T02:23:22.346Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

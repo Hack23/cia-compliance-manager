@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.14**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.15**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **SecurityVisualizationWidget**: `React.FC`\<[`SecurityVisualizationWidgetProps`](../widgets/implementationguide/SecurityVisualizationWidget/interfaces/SecurityVisualizationWidgetProps.md)\>
 
-Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:61](https://github.com/Hack23/cia-compliance-manager/blob/257dd569f432a46611a1746c832a7e3d29232229/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L61)
+Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:61](https://github.com/Hack23/cia-compliance-manager/blob/50a3bb1fa64948444e36c06fee075b5043350db0/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L61)
 
 SecurityVisualizationWidget displays security metrics in visual form
 
