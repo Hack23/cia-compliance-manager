@@ -1,4 +1,4 @@
-# CIA Compliance Manager SWOT Analysis
+# 📊 CIA Compliance Manager SWOT Analysis
 
 This document provides a strategic analysis of the CIA Compliance Manager's current strengths, weaknesses, opportunities, and threats as of version 0.8.5. This analysis helps inform the roadmap toward the v1.0 release and beyond.
 

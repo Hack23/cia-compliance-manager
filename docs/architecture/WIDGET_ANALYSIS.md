@@ -1,463 +1,339 @@
-# Widget Analysis for CIA Compliance Manager v1.0
+# 🧩 Widget Analysis for CIA Compliance Manager
 
 This document provides a detailed analysis of the widget components in the CIA Compliance Manager, their responsibilities, dependencies, and relationships.
 
-## Widget Categories
+## 📚 Related Documentation
 
-The CIA Compliance Manager organizes widgets into four functional categories:
+<div class="documentation-map">
+
+| Document                                          | Focus           | Description                               |
+| ------------------------------------------------- | --------------- | ----------------------------------------- |
+| **[System Architecture](SYSTEM_ARCHITECTURE.md)** | 🏛️ System       | Layered architecture and component details |
+| **[Architecture](ARCHITECTURE.md)**               | 🏗️ C4 Model     | C4 model showing system structure          |
+| **[Data Model](DATA_MODEL.md)**                   | 📊 Data         | Current data structures and relationships  |
+
+</div>
+
+## 🔍 Widget Categories
+
+The CIA Compliance Manager organizes widgets into four functional categories, each serving specific business and security purposes:
 
 ```mermaid
 mindmap
   root((Widgets))
     Assessment Center
-      SecurityLevelWidget
-      SecuritySummaryWidget
-      BusinessImpactAnalysisWidget
+      Security Summary Widget
+      Business Impact Analysis Widget
     Business Value
-      ComplianceStatusWidget
-      CostEstimationWidget
-      ValueCreationWidget
+      Compliance Status Widget
+      Cost Estimation Widget 
+      Value Creation Widget
     Impact Analysis
-      AvailabilityImpactWidget
-      IntegrityImpactWidget
-      ConfidentialityImpactWidget
+      Confidentiality Impact Widget
+      Integrity Impact Widget
+      Availability Impact Widget
     Implementation Guide
-      SecurityResourcesWidget
-      SecurityVisualizationWidget
-      TechnicalDetailsWidget
+      Technical Details Widget
+      Security Resources Widget
+      Security Visualization Widget
 ```
 
-## Common Widget Patterns
+## 🧩 Widget Dependency Flow
 
-Each widget follows these consistent patterns:
-
-1. **Container Structure**
-   - All widgets use a common `WidgetContainer` component as their wrapper
-   - Standard layout with title, icon, content, loading state, and error handling
-   
-2. **Service Access**
-   - Services are accessed through dedicated hooks:
-     - `useCIAContentService`
-     - `useComplianceService`
-     - `useSecurityMetricsService`
-   - Error and loading states are handled consistently
-   
-3. **State Management**
-   - Heavy use of `useMemo` for derived calculations
-   - `useCallback` for event handlers
-   - Local state with `useState` for UI interactions
-
-4. **Type Safety**
-   - TypeScript interfaces for props
-   - Type guards for runtime type checking
-   - Avoidance of `any` types
-
-5. **Error Handling**
-   - Consistent try-catch blocks for service interactions
-   - Fallback UI states for error conditions
-   - Proper null/undefined checking
-
-## Detailed Widget Analysis
-
-### Assessment Center Widgets
-
-#### SecurityLevelWidget
-
-**Purpose:** Primary configuration widget for the CIA triad security levels.
-
-**Dependencies:**
-- `useCIAContentService` - For loading security level details
-- Constants: `SECURITY_LEVELS`, `WIDGET_ICONS`, `WIDGET_TITLES`, `CIA_COMPONENT_ICONS`
-
-**Components:**
-- WidgetContainer
-- SecurityLevelBadge
-
-**Key Behaviors:**
-- Allows selection of security levels for all three CIA components
-- Displays detailed information about each security level
-- Provides real-time feedback on selections
-- Contains the core configuration that drives the entire application
-
-#### SecuritySummaryWidget
-
-**Purpose:** Provides an overview of the selected security posture and its implications.
-
-**Dependencies:**
-- `useCIAContentService` - For security level descriptions and metrics
-- Risk calculation utilities 
-
-**Components:**
-- WidgetContainer
-- SecurityRiskScore
-- RadarChart
-
-**Key Behaviors:**
-- Displays overall security score
-- Shows radar chart visualization of security levels
-- Provides tab-based view of different security aspects
-
-#### BusinessImpactAnalysisWidget
-
-**Purpose:** Analyzes business impact of selected security levels.
-
-**Dependencies:**
-- `useCIAContentService` - For business impact information
-- Risk calculation utilities
-
-**Components:**
-- WidgetContainer
-- KeyValuePair
-- RiskLevelBadge
-- SecurityLevelBadge
-
-**Key Behaviors:**
-- Displays impact by component (availability, integrity, confidentiality)
-- Shows business considerations and benefits
-- Provides executive summary for quick analysis
-
-### Business Value Widgets
-
-#### ComplianceStatusWidget
-
-**Purpose:** Shows compliance status with regulatory frameworks based on security selections.
-
-**Dependencies:**
-- `useComplianceService` - For compliance status data
-- Constants: `WIDGET_ICONS`, `WIDGET_TITLES`, `COMPLIANCE_TEST_IDS`, `SECURITY_ICONS`
-
-**Components:**
-- WidgetContainer
-- StatusBadge
-
-**Key Behaviors:**
-- Displays overall compliance score
-- Lists compliant, partially compliant, and non-compliant frameworks
-- Provides gap analysis for selected frameworks
-- Offers compliance tips based on current status
-
-#### CostEstimationWidget
-
-**Purpose:** Estimates costs for implementing and maintaining security controls.
-
-**Dependencies:**
-- `useCIAContentService` - For implementation details
-- `calculateTotalSecurityCost` - Cost calculation utility
-- `formatCurrency` - Formatting utility
-
-**Components:**
-- WidgetContainer
-- SecurityLevelBadge
-
-**Key Behaviors:**
-- Shows implementation and operational costs
-- Breaks down costs by CIA component
-- Displays implementation complexity and FTE requirements
-- Visualizes CAPEX vs OPEX ratios
-
-#### ValueCreationWidget
-
-**Purpose:** Articulates the business value created by security investments.
-
-**Dependencies:**
-- `useCIAContentService` - For value data
-- `calculateROIEstimate` - ROI calculation utility
-- `calculateBusinessImpactLevel` - Risk utility
-
-**Components:**
-- WidgetContainer
-- SecurityLevelIndicator
-
-**Key Behaviors:**
-- Shows estimated return on investment
-- Displays business value metrics
-- Lists component-specific value statements
-- Provides business case building blocks
-
-### Impact Analysis Widgets
-
-#### AvailabilityImpactWidget
-
-**Purpose:** Analyzes the impact of availability controls on business operations.
-
-**Dependencies:**
-- `useCIAContentService` - For availability impact data
-- `getSecurityLevelBackgroundClass` - Color utility
-- `getDefaultComponentImpact` - Default data fallback
-
-**Components:**
-- WidgetContainer
-- SecurityLevelBadge
-- BusinessImpactSection
-
-**Key Behaviors:**
-- Displays availability level badge
-- Shows business impact analysis
-- Lists SLA metrics (uptime, RTO, RPO, etc.)
-
-#### IntegrityImpactWidget
-
-**Purpose:** Analyzes the impact of integrity controls on data reliability.
-
-**Dependencies:**
-- `useCIAContentService` - For integrity impact data
-- `getSecurityLevelBackgroundClass` - Color utility
-- `normalizeSecurityLevel` - Level normalization
-
-**Components:**
-- WidgetContainer
-- SecurityLevelBadge
-- BusinessImpactSection
-
-**Key Behaviors:**
-- Displays integrity level badge
-- Shows business impact of data integrity
-- Lists integrity metrics (validation level, error rate)
-- Shows recommendations when extended details enabled
-
-#### ConfidentialityImpactWidget
-
-**Purpose:** Analyzes the impact of confidentiality controls on data protection.
-
-**Dependencies:**
-- `useCIAContentService` - For confidentiality impact data
-- `getSecurityLevelBackgroundClass` - Color utility
-- `getDefaultComponentImpact` - Default data fallback
-
-**Components:**
-- WidgetContainer
-- SecurityLevelBadge
-- BusinessImpactSection
-
-**Key Behaviors:**
-- Displays confidentiality level badge
-- Shows business impact of data protection
-- Displays data classification and privacy impact information
-
-### Implementation Guide Widgets
-
-#### SecurityResourcesWidget
-
-**Purpose:** Provides resources and implementation guides for security controls.
-
-**Dependencies:**
-- `useCIAContentService` - For security resources and implementation guides
-- Type guards for data validation
-
-**Components:**
-- WidgetContainer
-- ResourceCard (implied)
-
-**Key Behaviors:**
-- Lists relevant security resources based on security levels
-- Provides filtering by category and search
-- Shows implementation tips for each CIA component
-- Displays implementation guide details and expertise requirements
-
-#### SecurityVisualizationWidget
-
-**Purpose:** Visualizes security metrics to support decision-making.
-
-**Dependencies:**
-- `useSecurityMetricsService` - For security metrics data
-- `normalizeSecurityLevel`, `getSecurityLevelValue` - Level utilities
-- `calculateBusinessImpactLevel`, `getRiskLevelFromImpactLevel` - Risk utilities
-
-**Components:**
-- WidgetContainer
-- (Likely includes charts/visualization components not shown in the code snippet)
-
-**Key Behaviors:**
-- Calculates security score based on selected levels
-- Determines risk level based on business impact
-- Provides security recommendations
-- Displays visual representations of security posture
-
-#### TechnicalDetailsWidget
-
-**Purpose:** Provides detailed technical implementation requirements.
-
-**Dependencies:**
-- (Only partial code provided, but likely uses `useCIAContentService` and technical implementation utilities)
-
-**Key Behaviors:**
-- Provides technical teams with implementation details
-- Bridges gap between security requirements and technical implementation
-- Offers concrete guidance on controls, configurations, and technologies
-
-## Widget Interactions and Data Flow
+The widgets are organized in a hierarchical relationship, with the Security Level Widget at the core controlling the security levels that affect all other widgets:
 
 ```mermaid
-sequenceDiagram
-    participant User
-    participant SLW as SecurityLevelWidget
-    participant Hooks as Hooks Layer
-    participant Services as Service Layer
-    participant Other as Other Widgets
+flowchart TD
+    SLW((Security Level<br>Widget)) --> SSW[Security Summary<br>Widget]
+    SLW --> BIAW[Business Impact<br>Analysis Widget]
+    SLW --> CIW[Confidentiality<br>Impact Widget]
+    SLW --> IIW[Integrity<br>Impact Widget]
+    SLW --> AIW[Availability<br>Impact Widget]
+    SLW --> CSW[Compliance Status<br>Widget]
+    SLW --> CEW[Cost Estimation<br>Widget]
+    SLW --> VCW[Value Creation<br>Widget]
+    SLW --> TDW[Technical Details<br>Widget]
+    SLW --> SRW[Security Resources<br>Widget]
+    SLW --> SVW[Security Visualization<br>Widget]
     
-    User->>SLW: Configure Security Levels
-    SLW->>Hooks: Request Level Details
-    Hooks->>Services: Get Component Details
-    Services-->>Hooks: Return Component Details
-    Hooks-->>SLW: Display Level Details
+    classDef core fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    classDef assessment fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef business fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:black
+    classDef confidentiality fill:#8e44ad,stroke:#6c3483,stroke-width:2px,color:white
+    classDef integrity fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
+    classDef availability fill:#2980b9,stroke:#2471a3,stroke-width:2px,color:white
+    classDef implementation fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
     
-    User->>SLW: Update Security Levels
-    SLW->>Hooks: New Security Levels
-    Hooks-->>Other: Propagate New Levels
-    
-    Other->>Hooks: Request Impact Analysis
-    Hooks->>Services: Get Business Impact
-    Services-->>Hooks: Return Impact Data
-    Hooks-->>Other: Display Impact Analysis
-    
-    Other->>Hooks: Request Compliance Status
-    Hooks->>Services: Get Compliance Data
-    Services-->>Hooks: Return Compliance Status
-    Hooks-->>Other: Display Compliance Status
+    class SLW core
+    class SSW,BIAW assessment
+    class CSW,CEW,VCW business
+    class CIW confidentiality
+    class IIW integrity
+    class AIW availability
+    class TDW,SRW,SVW implementation
 ```
 
-## Common State Management Patterns
+## 📊 Widget Service Dependencies
 
-Most widgets follow these state management patterns:
+Each widget depends on specific services to provide its functionality:
 
-1. **Service Data Fetching**
-```typescript
-// Common pattern for accessing service data
-const { ciaContentService, error, isLoading } = useCIAContentService();
+```mermaid
+flowchart LR
+    subgraph "Services"
+        CIAContent[CIA Content<br>Service]
+        Compliance[Compliance<br>Service]
+        SecMetrics[Security Metrics<br>Service]
+        SecResources[Security Resources<br>Service]
+        TechImpl[Technical Implementation<br>Service]
+        BusImpact[Business Impact<br>Service]
+    end
+    
+    subgraph "Widgets"
+        SLW[Security Level<br>Widget]
+        SSW[Security Summary<br>Widget]
+        BIAW[Business Impact<br>Analysis Widget]
+        CIW[Confidentiality<br>Impact Widget]
+        IIW[Integrity<br>Impact Widget]
+        AIW[Availability<br>Impact Widget]
+        CSW[Compliance Status<br>Widget]
+        CEW[Cost Estimation<br>Widget]
+        VCW[Value Creation<br>Widget]
+        TDW[Technical Details<br>Widget]
+        SRW[Security Resources<br>Widget]
+        SVW[Security Visualization<br>Widget]
+    end
+    
+    SLW --> CIAContent
+    SSW --> CIAContent & SecMetrics
+    BIAW --> CIAContent & BusImpact
+    CIW --> CIAContent & BusImpact
+    IIW --> CIAContent & BusImpact
+    AIW --> CIAContent & BusImpact
+    CSW --> Compliance
+    CEW --> CIAContent & SecMetrics
+    VCW --> CIAContent & BusImpact
+    TDW --> CIAContent & TechImpl
+    SRW --> CIAContent & SecResources
+    SVW --> SecMetrics
+    
+    classDef widget fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    classDef service fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    
+    class SLW,SSW,BIAW,CIW,IIW,AIW,CSW,CEW,VCW,TDW,SRW,SVW widget
+    class CIAContent,Compliance,SecMetrics,SecResources,TechImpl,BusImpact service
+```
 
-// Using the service with proper error handling
-const details = useMemo(() => {
-  try {
-    if (isNullish(ciaContentService)) {
-      return null;
+## 🧪 Widget Detailed Analysis
+
+### Core Widget
+
+#### Security Level Widget
+
+- **Purpose**: Controls security levels across the CIA triad
+- **Key Features**: 
+  - Independent selectors for Confidentiality, Integrity, and Availability
+  - Detailed descriptions for each security level
+  - Real-time state propagation to other widgets
+- **Dependencies**: CIA Content Service
+- **Business Perspective**: Central control point for configuring the organization's security posture
+
+### Assessment Center
+
+#### Security Summary Widget
+
+- **Purpose**: Provides an overview of the security posture across all components
+- **Key Features**:
+  - Overall security score
+  - Component-specific security levels
+  - Tabbed interface for business and technical views
+- **Dependencies**: CIA Content Service, Security Metrics Service
+- **Business Perspective**: Executive dashboard for security posture assessment
+
+#### Business Impact Analysis Widget
+
+- **Purpose**: Analyzes business impacts of selected security levels
+- **Key Features**:
+  - Impact analysis by business dimension
+  - Component-specific business impact details
+  - Implementation considerations and benefits
+- **Dependencies**: CIA Content Service, Business Impact Service
+- **Business Perspective**: Helps stakeholders understand business implications of security decisions
+
+### Impact Analysis
+
+#### Confidentiality Impact Widget
+
+- **Purpose**: Analyzes confidentiality-specific impacts
+- **Key Features**:
+  - Data classification and privacy impact
+  - Component-specific business impacts
+- **Dependencies**: CIA Content Service, Business Impact Service
+- **Business Perspective**: Understanding data protection requirements and impacts
+
+#### Integrity Impact Widget
+
+- **Purpose**: Analyzes integrity-specific impacts
+- **Key Features**:
+  - Data validation metrics
+  - Data error rate information
+- **Dependencies**: CIA Content Service, Business Impact Service
+- **Business Perspective**: Understanding data accuracy and validation requirements
+
+#### Availability Impact Widget
+
+- **Purpose**: Analyzes availability-specific impacts
+- **Key Features**:
+  - SLA metrics (uptime, RTO, RPO)
+  - Business operational impacts
+- **Dependencies**: CIA Content Service, Business Impact Service
+- **Business Perspective**: Understanding uptime requirements and recovery capabilities
+
+### Business Value
+
+#### Compliance Status Widget
+
+- **Purpose**: Analyzes compliance with regulatory frameworks
+- **Key Features**:
+  - Compliance status by framework
+  - Gap analysis
+  - Recommendations for addressing gaps
+- **Dependencies**: Compliance Service
+- **Business Perspective**: Understanding regulatory compliance posture and gaps
+
+#### Cost Estimation Widget
+
+- **Purpose**: Estimates costs for implementing selected security levels
+- **Key Features**:
+  - Implementation and operational costs
+  - Component-specific cost breakdown
+  - Resource requirements
+- **Dependencies**: CIA Content Service, Security Metrics Service
+- **Business Perspective**: Budget planning for security investments
+
+#### Value Creation Widget
+
+- **Purpose**: Articulates business value of security investments
+- **Key Features**:
+  - ROI estimates
+  - Business value metrics
+  - Component-specific value statements
+- **Dependencies**: CIA Content Service, Business Impact Service
+- **Business Perspective**: Building business cases for security investments
+
+### Implementation Guide
+
+#### Technical Details Widget
+
+- **Purpose**: Provides technical implementation guidance
+- **Key Features**:
+  - Component-specific technical requirements
+  - Implementation complexity assessments
+  - Technical expertise requirements
+- **Dependencies**: CIA Content Service, Technical Implementation Service
+- **Business Perspective**: Bridging security requirements and technical implementation
+
+#### Security Resources Widget
+
+- **Purpose**: Provides reference materials and implementation guides
+- **Key Features**:
+  - Curated security resources
+  - Component-specific implementation guides
+  - Searchable resource database
+- **Dependencies**: CIA Content Service, Security Resources Service
+- **Business Perspective**: Knowledge base for implementing security controls
+
+#### Security Visualization Widget
+
+- **Purpose**: Visualizes security metrics and relationships
+- **Key Features**:
+  - Security posture radar chart
+  - Risk level visualization
+  - Component metrics visualization
+- **Dependencies**: Security Metrics Service
+- **Business Perspective**: Visual communication of security posture
+
+## 🔄 State Management
+
+The application uses React's state management with a hierarchical approach:
+
+```mermaid
+flowchart TD
+    App[App Component] -->|Security Levels| SLW[Security Level Widget]
+    SLW -->|Changes| App
+    App -->|Security Levels| OtherWidgets[Other Widget Components]
+    
+    classDef app fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:white
+    classDef widget fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    
+    class App app
+    class SLW,OtherWidgets widget
+```
+
+## 🧵 Widget Component Structure
+
+Each widget follows a consistent component pattern:
+
+```mermaid
+classDiagram
+    class BaseWidget {
+        +props: WidgetProps
+        +render()
     }
     
-    const componentDetails = ciaContentService.getComponentDetails(
-      component,
-      level
-    );
-    
-    return isNullish(componentDetails) ? null : componentDetails;
-  } catch (err) {
-    console.error("Error fetching details:", err);
-    return null;
-  }
-}, [ciaContentService, component, level]);
-```
-
-2. **Computed Properties with Fallbacks**
-```typescript
-// Pattern for computed properties with fallbacks
-const businessImpact = useMemo(() => {
-  try {
-    if (isNullish(ciaContentService)) {
-      return getDefaultComponentImpact(component, level);
+    class WidgetContainer {
+        +title: string
+        +icon: string
+        +children: React.ReactNode
+        +isLoading: boolean
+        +error: Error
+        +render()
     }
     
-    const impact = ciaContentService.getBusinessImpact(component, level);
-    return impact || getDefaultComponentImpact(component, level);
-  } catch (err) {
-    console.error("Error getting business impact:", err);
-    return getDefaultComponentImpact(component, level);
-  }
-}, [ciaContentService, component, level]);
+    class SpecificWidget {
+        +availabilityLevel: SecurityLevel
+        +integrityLevel: SecurityLevel
+        +confidentialityLevel: SecurityLevel
+        +className: string
+        +testId: string
+        +render()
+    }
+    
+    WidgetContainer <|-- BaseWidget
+    BaseWidget <|-- SpecificWidget
 ```
 
-3. **User Interaction Handlers**
-```typescript
-// Pattern for user interaction handlers
-const handleCategorySelect = useCallback((category: string | null) => {
-  setSelectedCategory(category);
-  setCurrentPage(1); // Reset to first page when changing filters
-}, []);
+## 🧪 Widget Testing Approach
+
+The widget testing strategy employs several techniques:
+
+1. **Unit Testing**: Tests individual widget rendering and behavior
+2. **Service Mocking**: Provides mock implementations of services
+3. **Props Testing**: Validates widget behavior with different prop combinations
+4. **Accessibility Testing**: Ensures widgets meet accessibility requirements
+5. **Visual Regression**: Prevents unintended visual changes
+
+```mermaid
+flowchart LR
+    subgraph "Widget Testing"
+        Unit[Unit Tests]
+        Integration[Integration Tests]
+        Visual[Visual Tests]
+    end
+    
+    subgraph "Mocks"
+        ServiceMocks[Service Mocks]
+        DataMocks[Data Mocks]
+    end
+    
+    Unit --> ServiceMocks
+    Unit --> DataMocks
+    Integration --> ServiceMocks
+    
+    classDef test fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
+    classDef mock fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    
+    class Unit,Integration,Visual test
+    class ServiceMocks,DataMocks mock
 ```
 
-## Widget-to-Widget Communication
-
-Widgets communicate primarily through these mechanisms:
-
-1. **Prop Passing**: Parent components pass security levels and callbacks to widgets
-2. **Custom Hooks**: Hooks manage state that's shared between widgets
-3. **Service Layer**: Services provide a consistent data model across widgets
-
-## Error Handling and Loading States
-
-Widgets implement consistent error handling and loading states:
-
-1. **Loading State Display**:
-   - WidgetContainer accepts `isLoading` prop
-   - Loading indicators shown during data fetching
-
-2. **Error Handling**:
-   - WidgetContainer accepts `error` prop
-   - Try-catch blocks for service interactions
-   - Default/fallback data when services fail
-
-3. **Nullish Checking**:
-   - Consistent use of `isNullish` type guard
-   - Fallbacks for missing or incomplete data
-
-## Widget Testing Approaches
-
-The SecuritySummaryWidget.test.tsx file demonstrates these testing approaches:
-
-1. **Mocking Services**:
-   ```typescript
-   vi.mock("../../../hooks/useCIAContentService", () => ({
-     useCIAContentService: () => ({
-       ciaContentService: {
-         getSecurityLevelDescription: vi.fn().mockImplementation(/*...*/),
-         // Other mocked methods
-       },
-       error: null,
-       isLoading: false,
-     }),
-   }));
-   ```
-
-2. **Component Rendering Tests**:
-   ```typescript
-   it("renders without crashing", () => {
-     const { container } = render(
-       <SecuritySummaryWidget
-         availabilityLevel="Moderate"
-         integrityLevel="Moderate"
-         confidentialityLevel="Moderate"
-         testId="custom-test-id"
-         className="custom-class"
-       />
-     );
-     expect(
-       screen.getByTestId("widget-container-custom-test-id")
-     ).toBeInTheDocument();
-   });
-   ```
-
-3. **Feature Testing**:
-   ```typescript
-   it("displays individual component levels", () => {
-     render(
-       <SecuritySummaryWidget
-         availabilityLevel="Moderate"
-         integrityLevel="Moderate"
-         confidentialityLevel="Moderate"
-       />
-     );
-     expect(
-       screen.getByTestId(SECURITY_SUMMARY_TEST_IDS.CONFIDENTIALITY_CARD)
-     ).toBeInTheDocument();
-     // Additional assertions
-   });
-   ```
-
-## Conclusion
-
-The widget architecture follows consistent patterns for:
-
-1. **Component Structure**: Clear separation of presentation and data access
-2. **Type Safety**: Strong TypeScript typing throughout
-3. **Error Handling**: Comprehensive error handling and fallbacks
-4. **Reusability**: Common components and utilities
-5. **Testability**: Well-structured code that supports unit testing
-
-This analysis provides a foundation for understanding the current widget architecture and can guide future development and refactoring efforts.
+This document provides a comprehensive analysis of the CIA Compliance Manager's widget architecture, highlighting the current implementation details and relationships between components.
