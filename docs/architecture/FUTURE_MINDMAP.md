@@ -404,9 +404,8 @@ stateDiagram-v2
     ModelRetraining --> [*]
 ```
 
-# 🧠 Reputational Impact Modeling Mind Map
+## 🧠 Reputational Impact Modeling Mind Map
 
-## 📊 Color-Coded Concept Map
 
 ```mermaid
 mindmap
@@ -492,16 +491,6 @@ mindmap
 
 ```
 
-## 🎨 Color Code Legend
-
-| Category | Color | Description |
-|----------|-------|-------------|
-| **Impact Assessment** | 🔴 Red | Core components for evaluating reputation damage |
-| **Measurement Methods** | 🔵 Blue | Approaches to quantify and qualify reputation impact |
-| **Industry Factors** | 🟢 Green | Sector-specific considerations affecting reputation |
-| **Security Integration** | 🟣 Purple | Connections to security controls and CIA triad |
-| **Response Management** | 🟠 Orange | Crisis management and reputation recovery processes |
-| **Executive Support** | 🌸 Pink | Decision support tools for leadership |
 
 ## 🔗 Integration with CIA Compliance Manager
 
