@@ -135,12 +135,12 @@ flowchart TD
     classDef start fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
     classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
     classDef decision fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
-    classDef end fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef endProcess fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
     
     class CodeChange start
     class UnitTests,IntegrationTests,UITests,CoverageMeasurement,AddTests process
     class Adequate decision
-    class MergeCode end
+    class MergeCode endProcess
 ```
 
 ## 🔍 Widget Component Interaction
