@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.15**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.16**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelFromValue**(`value`): [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/50a3bb1fa64948444e36c06fee075b5043350db0/src/types/cia.ts#L109)
+Defined in: [types/cia.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/96f4020424aba8c55d4fe94eddf596babc070968/src/types/cia.ts#L109)
 
 Convert a numeric value to a security level
 

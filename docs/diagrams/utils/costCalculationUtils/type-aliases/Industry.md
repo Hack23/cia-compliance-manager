@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.15**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.16**](../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > **Industry** = `"general"` \| `"financial"` \| `"healthcare"` \| `"government"` \| `"retail"` \| `"technology"` \| `"manufacturing"`
 
-Defined in: [utils/costCalculationUtils.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/50a3bb1fa64948444e36c06fee075b5043350db0/src/utils/costCalculationUtils.ts#L20)
+Defined in: [utils/costCalculationUtils.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/96f4020424aba8c55d4fe94eddf596babc070968/src/utils/costCalculationUtils.ts#L20)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.15**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.16**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ComponentTechnicalDetails
 
-Defined in: [services/technicalImplementationService.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/50a3bb1fa64948444e36c06fee075b5043350db0/src/services/technicalImplementationService.ts#L13)
+Defined in: [services/technicalImplementationService.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/96f4020424aba8c55d4fe94eddf596babc070968/src/services/technicalImplementationService.ts#L13)
 
 Technical implementation details for different security components
 
@@ -16,7 +16,7 @@ Technical implementation details for different security components
 
 > **description**: `string`
 
-Defined in: [services/technicalImplementationService.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/50a3bb1fa64948444e36c06fee075b5043350db0/src/services/technicalImplementationService.ts#L14)
+Defined in: [services/technicalImplementationService.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/96f4020424aba8c55d4fe94eddf596babc070968/src/services/technicalImplementationService.ts#L14)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [services/technicalImplementationService.ts:14](https://github.com/H
 
 > **effort**: `object`
 
-Defined in: [services/technicalImplementationService.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/50a3bb1fa64948444e36c06fee075b5043350db0/src/services/technicalImplementationService.ts#L16)
+Defined in: [services/technicalImplementationService.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/96f4020424aba8c55d4fe94eddf596babc070968/src/services/technicalImplementationService.ts#L16)
 
 #### development
 
@@ -44,4 +44,4 @@ Defined in: [services/technicalImplementationService.ts:16](https://github.com/H
 
 > **implementationSteps**: `string`[]
 
-Defined in: [services/technicalImplementationService.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/50a3bb1fa64948444e36c06fee075b5043350db0/src/services/technicalImplementationService.ts#L15)
+Defined in: [services/technicalImplementationService.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/96f4020424aba8c55d4fe94eddf596babc070968/src/services/technicalImplementationService.ts#L15)
