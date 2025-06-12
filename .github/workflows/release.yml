@@ -30,7 +30,7 @@ jobs:
       is_prerelease: ${{ github.event.inputs.prerelease || 'false' }}
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+        uses: step-security/harden-runner@002fdce3c6a235733a90a27c80493a3241e56863 # v2.12.1
         with:
           egress-policy: audit
 
@@ -88,7 +88,7 @@ jobs:
           PLAIN_VERSION="${PLAIN_VERSION#v}"
           npm version $PLAIN_VERSION --no-git-tag-version
 
-      - uses: stefanzweifel/git-auto-commit-action@b863ae1933cb653a53c021fe36dbb774e1fb9403 # v5.2.0
+      - uses: stefanzweifel/git-auto-commit-action@3cc016cfc892e0844046da36fc68da4e525e081f # v6.0.0
         if: github.event_name == 'workflow_dispatch'
         with:
           commit_message: "chore(release): bump version to ${{ github.event.inputs.version }}"
@@ -155,7 +155,7 @@ jobs:
       attestations: write # Required for SBOM and build attestations
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+        uses: step-security/harden-runner@002fdce3c6a235733a90a27c80493a3241e56863 # v2.12.1
         with:
           egress-policy: audit
 
@@ -213,7 +213,7 @@ jobs:
           artifact-name: cia-compliance-manager-${{ needs.prepare.outputs.version }}
 
       - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@db473fddc028af60658334401dc6fa3ffd8669fd # v2.3.0
+        uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be # v2.4.0
         id: attest
         with:
           subject-path: cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip
@@ -225,7 +225,7 @@ jobs:
 
       - name: Generate SBOM attestation
         id: attestsbom
-        uses: actions/attest-sbom@115c3be05ff3974bcbd596578934b3f9ce39bf68 # v2.2.0
+        uses: actions/attest-sbom@bd218ad0dbcb3e146bd073d1d9c6d78e08aa8a0b # v2.4.0
         with:
           subject-path: cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip
           sbom-path: cia-compliance-manager-${{ needs.prepare.outputs.version }}.spdx.json
@@ -253,7 +253,7 @@ jobs:
       id-token: write # Required for OIDC
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+        uses: step-security/harden-runner@002fdce3c6a235733a90a27c80493a3241e56863 # v2.12.1
         with:
           egress-policy: audit
 
