@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.16**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.17**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **BASE\_IMPLEMENTATION\_COSTS**: `object`
 
-Defined in: [constants/costConstants.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/96f4020424aba8c55d4fe94eddf596babc070968/src/constants/costConstants.ts#L55)
+Defined in: [constants/costConstants.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/constants/costConstants.ts#L55)
 
 Base implementation costs (in USD) for each security level
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.16**](../../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.17**](../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **formatSecurityLevel**(`level?`): `string`
 
-Defined in: [types/cia.utility.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/96f4020424aba8c55d4fe94eddf596babc070968/src/types/cia.utility.ts#L9)
+Defined in: [types/cia.utility.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/types/cia.utility.ts#L9)
 
 Format security level string for display
 

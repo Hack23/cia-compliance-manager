@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.16**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.17**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **createBusinessImpactService**(`dataProvider`): [`BusinessImpactService`](../classes/BusinessImpactService.md)
 
-Defined in: [services/businessImpactService.ts:475](https://github.com/Hack23/cia-compliance-manager/blob/96f4020424aba8c55d4fe94eddf596babc070968/src/services/businessImpactService.ts#L475)
+Defined in: [services/businessImpactService.ts:475](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/businessImpactService.ts#L475)
 
 Create a BusinessImpactService with the provided data provider
 
