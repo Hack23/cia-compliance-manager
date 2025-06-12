@@ -225,7 +225,7 @@ jobs:
 
       - name: Generate SBOM attestation
         id: attestsbom
-        uses: actions/attest-sbom@115c3be05ff3974bcbd596578934b3f9ce39bf68 # v2.2.0
+        uses: actions/attest-sbom@bd218ad0dbcb3e146bd073d1d9c6d78e08aa8a0b # v2.4.0
         with:
           subject-path: cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip
           sbom-path: cia-compliance-manager-${{ needs.prepare.outputs.version }}.spdx.json
