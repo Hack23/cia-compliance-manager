@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.17**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.18**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ComplianceStatusDetails
 
-Defined in: [services/complianceService.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/complianceService.ts#L21)
+Defined in: [services/complianceService.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/complianceService.ts#L21)
 
 Interface for compliance status details
 
@@ -16,7 +16,7 @@ Interface for compliance status details
 
 > **complianceScore**: `number`
 
-Defined in: [services/complianceService.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/complianceService.ts#L28)
+Defined in: [services/complianceService.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/complianceService.ts#L28)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [services/complianceService.ts:28](https://github.com/Hack23/cia-com
 
 > **compliantFrameworks**: `string`[]
 
-Defined in: [services/complianceService.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/complianceService.ts#L23)
+Defined in: [services/complianceService.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/complianceService.ts#L23)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [services/complianceService.ts:23](https://github.com/Hack23/cia-com
 
 > **nonCompliantFrameworks**: `string`[]
 
-Defined in: [services/complianceService.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/complianceService.ts#L25)
+Defined in: [services/complianceService.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/complianceService.ts#L25)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [services/complianceService.ts:25](https://github.com/Hack23/cia-com
 
 > **partiallyCompliantFrameworks**: `string`[]
 
-Defined in: [services/complianceService.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/complianceService.ts#L24)
+Defined in: [services/complianceService.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/complianceService.ts#L24)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [services/complianceService.ts:24](https://github.com/Hack23/cia-com
 
 > `optional` **remediationSteps**: `string`[]
 
-Defined in: [services/complianceService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/complianceService.ts#L26)
+Defined in: [services/complianceService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/complianceService.ts#L26)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [services/complianceService.ts:26](https://github.com/Hack23/cia-com
 
 > `optional` **requirements**: `string`[]
 
-Defined in: [services/complianceService.ts:27](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/complianceService.ts#L27)
+Defined in: [services/complianceService.ts:27](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/complianceService.ts#L27)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [services/complianceService.ts:27](https://github.com/Hack23/cia-com
 
 > **status**: `string`
 
-Defined in: [services/complianceService.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/complianceService.ts#L22)
+Defined in: [services/complianceService.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/complianceService.ts#L22)

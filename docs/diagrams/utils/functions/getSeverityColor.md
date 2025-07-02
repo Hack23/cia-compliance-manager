@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.17**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.18**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSeverityColor**(`severity`): `"text-green-500"` \| `"text-yellow-500"` \| `"text-red-500"`
 
-Defined in: [utils/index.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/utils/index.ts#L45)
+Defined in: [utils/index.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/utils/index.ts#L45)
 
 ## Parameters
 

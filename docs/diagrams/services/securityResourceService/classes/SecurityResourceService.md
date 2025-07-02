@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.17**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.18**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: SecurityResourceService
 
-Defined in: [services/securityResourceService.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/securityResourceService.ts#L16)
+Defined in: [services/securityResourceService.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/securityResourceService.ts#L16)
 
 Service for security resource recommendations
 
@@ -20,7 +20,7 @@ Service for security resource recommendations
 
 > **new SecurityResourceService**(`dataProvider`): `SecurityResourceService`
 
-Defined in: [services/securityResourceService.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/securityResourceService.ts#L19)
+Defined in: [services/securityResourceService.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/securityResourceService.ts#L19)
 
 #### Parameters
 
@@ -42,7 +42,7 @@ Defined in: [services/securityResourceService.ts:19](https://github.com/Hack23/c
 
 > **getComponentDetails**(`component`, `level`): `undefined` \| [`CIADetails`](../../../types/interfaces/CIADetails.md)
 
-Defined in: [services/BaseService.ts:53](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/BaseService.ts#L53)
+Defined in: [services/BaseService.ts:53](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/BaseService.ts#L53)
 
 Get component details for a specific component and security level
 
@@ -70,7 +70,7 @@ Get component details for a specific component and security level
 
 > **getRiskLevelFromSecurityLevel**(`level`): `string`
 
-Defined in: [services/BaseService.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/BaseService.ts#L114)
+Defined in: [services/BaseService.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/BaseService.ts#L114)
 
 Get risk level from security level
 
@@ -94,7 +94,7 @@ Get risk level from security level
 
 > **getSecurityLevelDescription**(`level`): `string`
 
-Defined in: [services/BaseService.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/BaseService.ts#L93)
+Defined in: [services/BaseService.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/BaseService.ts#L93)
 
 Get security level description
 
@@ -118,7 +118,7 @@ Get security level description
 
 > **getSecurityResources**(`component`, `level`): `EnhancedSecurityResource`[]
 
-Defined in: [services/securityResourceService.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/securityResourceService.ts#L44)
+Defined in: [services/securityResourceService.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/securityResourceService.ts#L44)
 
 Get security resources based on component and level
 
@@ -142,7 +142,7 @@ Get security resources based on component and level
 
 > **getValuePoints**(`level`): `string`[]
 
-Defined in: [services/securityResourceService.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/6a2219920f4c187f7eafa3e355e36b35c9c19248/src/services/securityResourceService.ts#L174)
+Defined in: [services/securityResourceService.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/services/securityResourceService.ts#L174)
 
 Get value points for a security level
 

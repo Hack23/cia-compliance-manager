@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-07-02T23:01:57.749Z",
+    "end": "2025-07-02T23:02:09.606Z",
+    "duration": 11857,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c59e6188-a25b-4404-8c9d-c0ec7aaa7cc3",
+      "title": "",
+      "fullFile": "cypress/e2e/screenshots/widget-screenshots.cy.ts",
+      "file": "cypress/e2e/screenshots/widget-screenshots.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8f48413a-936c-40ee-9ba3-f6adaec4c0c6",
+          "title": "Widget UI/UX Screenshots",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "captures full dashboard grid with widgets in light and dark mode",
+              "fullTitle": "Widget UI/UX Screenshots captures full dashboard grid with widgets in light and dark mode",
+              "timedOut": null,
+              "duration": 3124,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.viewport(2400, 1200);\ncy.get('[data-testid=\"dashboard-grid\"]').should(\"be.visible\");\ncaptureFullDashboardGrid(\"dashboard-grid\");",
+              "err": {},
+              "uuid": "4d39b2cd-1e17-4ddb-9ecb-71fd93543395",
+              "parentUUID": "8f48413a-936c-40ee-9ba3-f6adaec4c0c6",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "captures essential widgets in both light and dark themes",
+              "fullTitle": "Widget UI/UX Screenshots captures essential widgets in both light and dark themes",
+              "timedOut": null,
+              "duration": 8658,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "essentialWidgets.forEach((widgetName) => {\n  cy.log(`Capturing themes for widget: ${widgetName}`);\n  captureSimpleWidgetThemes(widgetName);\n});",
+              "err": {},
+              "uuid": "f1595349-dce1-4d80-95af-430c8c647397",
+              "parentUUID": "8f48413a-936c-40ee-9ba3-f6adaec4c0c6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4d39b2cd-1e17-4ddb-9ecb-71fd93543395",
+            "f1595349-dce1-4d80-95af-430c8c647397"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 11782,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "docs/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

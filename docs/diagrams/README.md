@@ -1,4 +1,4 @@
-**CIA Compliance Manager Diagrams v0.8.17**
+**CIA Compliance Manager Diagrams v0.8.18**
 
 ***
 
