@@ -1,5 +1,4 @@
 import { defineConfig } from "cypress";
-import vitePreprocessor from "cypress-vite";
 import * as fs from "fs";
 import * as path from "path";
 import { resolve } from "path";
@@ -39,7 +38,6 @@ export default defineConfig({
       attachments: true,
       testCaseSwitchClassnameAndName: false,
       includePending: true,
-      
     },
     mochawesomeReporterOptions: {
       reportDir: REPORTS.mochawesome,
@@ -78,13 +76,8 @@ export default defineConfig({
         });
       });
 
-      // Register vite preprocessor
-      on(
-        "file:preprocessor",
-        vitePreprocessor({
-          configFile: resolve(__dirname, "./vite.config.ts"),
-        })
-      );
+      // Use Cypress built-in TypeScript support instead of external preprocessor
+      // Cypress 10+ has built-in TypeScript support, no additional configuration needed
 
       // Define tasks properly to avoid Promise chain issues
       on("task", {
@@ -171,15 +164,27 @@ export default defineConfig({
         },
 
         // Simple implementation for the checkFilesExist task
-        checkFilesExist({ basePath, fileList }) {
-          const existingFiles = fileList.filter((file) =>
+        checkFilesExist({
+          basePath,
+          fileList,
+        }: {
+          basePath: string;
+          fileList: string[];
+        }) {
+          const existingFiles = fileList.filter((file: string) =>
             fs.existsSync(path.join(basePath, file))
           );
           return existingFiles;
         },
 
         // Simple implementation for finding unconverted tests
-        findUnconvertedTests({ testDir, templatePattern }) {
+        findUnconvertedTests({
+          testDir,
+          templatePattern,
+        }: {
+          testDir: string;
+          templatePattern: string;
+        }) {
           const files = fs.readdirSync(testDir);
 
           const unconverted = files.filter((file) => {
@@ -205,6 +210,9 @@ export default defineConfig({
     devServer: {
       framework: "react",
       bundler: "vite",
+      viteConfig: {
+        configFile: resolve(__dirname, "./vite.config.ts"),
+      },
     },
   },
   waitForAnimations: false,
