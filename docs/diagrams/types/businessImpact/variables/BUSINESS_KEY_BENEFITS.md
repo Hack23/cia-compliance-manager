@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.18**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.19**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **BUSINESS\_KEY\_BENEFITS**: `object`
 
-Defined in: [types/businessImpact.ts:410](https://github.com/Hack23/cia-compliance-manager/blob/509f2f6138f4e24aa7fe1ae9432ec1ccefbe5f32/src/types/businessImpact.ts#L410)
+Defined in: [types/businessImpact.ts:410](https://github.com/Hack23/cia-compliance-manager/blob/8a17389ebf0d2a027875b835eec814811b99abcc/src/types/businessImpact.ts#L410)
 
 ## Type declaration
 
