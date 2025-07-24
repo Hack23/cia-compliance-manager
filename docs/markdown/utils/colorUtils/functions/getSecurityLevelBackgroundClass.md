@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.19**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.20**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelBackgroundClass**(`level`): `string`
 
-Defined in: [utils/colorUtils.ts:72](https://github.com/Hack23/cia-compliance-manager/blob/8a17389ebf0d2a027875b835eec814811b99abcc/src/utils/colorUtils.ts#L72)
+Defined in: [utils/colorUtils.ts:72](https://github.com/Hack23/cia-compliance-manager/blob/9180e2700dca841f6711d7243c036db4de73db57/src/utils/colorUtils.ts#L72)
 
 Get CSS background color class for security level
 

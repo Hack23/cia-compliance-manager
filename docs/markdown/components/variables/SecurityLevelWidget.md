@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.19**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.20**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **SecurityLevelWidget**: `React.FC`\<[`SecurityLevelWidgetProps`](../widgets/assessmentcenter/SecurityLevelWidget/interfaces/SecurityLevelWidgetProps.md)\>
 
-Defined in: [components/widgets/assessmentcenter/SecurityLevelWidget.tsx:80](https://github.com/Hack23/cia-compliance-manager/blob/8a17389ebf0d2a027875b835eec814811b99abcc/src/components/widgets/assessmentcenter/SecurityLevelWidget.tsx#L80)
+Defined in: [components/widgets/assessmentcenter/SecurityLevelWidget.tsx:80](https://github.com/Hack23/cia-compliance-manager/blob/9180e2700dca841f6711d7243c036db4de73db57/src/components/widgets/assessmentcenter/SecurityLevelWidget.tsx#L80)
 
 Widget for configuring CIA triad security levels
 

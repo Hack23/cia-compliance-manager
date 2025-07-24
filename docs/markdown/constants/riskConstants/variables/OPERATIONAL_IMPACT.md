@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.19**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.20**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **OPERATIONAL\_IMPACT**: `Record`\<`string`, `string`\>
 
-Defined in: [constants/riskConstants.ts:80](https://github.com/Hack23/cia-compliance-manager/blob/8a17389ebf0d2a027875b835eec814811b99abcc/src/constants/riskConstants.ts#L80)
+Defined in: [constants/riskConstants.ts:80](https://github.com/Hack23/cia-compliance-manager/blob/9180e2700dca841f6711d7243c036db4de73db57/src/constants/riskConstants.ts#L80)
 
 Operational impact descriptions by risk level

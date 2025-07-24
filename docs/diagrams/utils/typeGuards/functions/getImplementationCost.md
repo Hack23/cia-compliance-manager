@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.19**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.20**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getImplementationCost**(`costObj`): `number`
 
-Defined in: [utils/typeGuards.ts:622](https://github.com/Hack23/cia-compliance-manager/blob/8a17389ebf0d2a027875b835eec814811b99abcc/src/utils/typeGuards.ts#L622)
+Defined in: [utils/typeGuards.ts:622](https://github.com/Hack23/cia-compliance-manager/blob/9180e2700dca841f6711d7243c036db4de73db57/src/utils/typeGuards.ts#L622)
 
 Calculates the implementation cost from a cost object
 
