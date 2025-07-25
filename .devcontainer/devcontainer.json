@@ -1,6 +1,6 @@
 {
   "name": "CIA Compliance Manager Dev Container",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:24",
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/node:1": {
@@ -26,7 +26,6 @@
         "github.vscode-github-actions",
 
         // TypeScript/Node support
-        "ms-vscode.vscode-typescript-next",
         "christian-kohler.npm-intellisense",
         "ritwickdey.LiveServer",
 
