@@ -76,7 +76,7 @@
     "@vitest/ui": "3.2.4",
     "autoprefixer": "^10.4.21",
     "canvas": "3.1.2",
-    "cross-env": "^7.0.3",
+    "cross-env": "^10.0.0",
     "cypress": "^14.5.3",
     "cypress-junit-reporter": "1.3.1",
     "cypress-multi-reporters": "2.0.5",
