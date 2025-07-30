@@ -50,13 +50,8 @@ export default defineConfig({
     },
     // Set target for rollup
     target: "es2022",
-    // Add minification options for production
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: true,
-      },
-    },
+    // Remove terser configuration for now - use esbuild minification
+    minify: "esbuild",
     // Add chunk size reporting
     reportCompressedSize: true,
     rollupOptions: {
@@ -89,7 +84,6 @@ export default defineConfig({
           "node_modules/**/*",
           "**/node_modules/**/*",
           "node_module",
-
           "**/@kurkle/color/**",
           "**/chart.js/**",
           "**/react/**",
