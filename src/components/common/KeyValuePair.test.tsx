@@ -39,7 +39,7 @@ describe("KeyValuePair Component", () => {
     // Check directly if the value text has the applied styling by finding it specifically
     const valueElement = screen.getByText("Active");
     expect(valueElement).toBeInTheDocument();
-    expect(valueElement.className).toContain("text-green-600");
+    expect(valueElement.className).contain("text-green-600");
   });
 
   it("renders with label styling", () => {
@@ -49,7 +49,7 @@ describe("KeyValuePair Component", () => {
 
     expect(screen.getByTestId("key-value-pair")).toBeInTheDocument();
     expect(screen.getByText("Status")).toBeInTheDocument();
-    expect(screen.getByText("Status").className).toContain("font-bold");
+    expect(screen.getByText("Status").className).contain("font-bold");
   });
 
   it("renders with custom style class", () => {
@@ -58,6 +58,6 @@ describe("KeyValuePair Component", () => {
     );
 
     const keyValuePair = screen.getByTestId("key-value-pair");
-    expect(keyValuePair.className).toContain("custom-class");
+    expect(keyValuePair.className).contain("custom-class");
   });
 });

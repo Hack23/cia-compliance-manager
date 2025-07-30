@@ -26,13 +26,13 @@ describe("ValueDisplay Component", () => {
     render(<ValueDisplay value="Success" variant="success" />);
 
     // Find the value span and check its class using getByText instead of querySelector
-    expect(screen.getByText("Success").className).toContain("text-green");
+    expect(screen.getByText("Success").className).contain("text-green");
   });
 
   it("applies size styling", () => {
     render(<ValueDisplay value="Large Text" size="lg" />);
 
     // Find the value span and check its class using getByText instead of querySelector
-    expect(screen.getByText("Large Text").className).toContain("text-lg");
+    expect(screen.getByText("Large Text").className).contain("text-lg");
   });
 });

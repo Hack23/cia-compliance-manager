@@ -99,7 +99,7 @@ describe("BusinessImpactSection", () => {
     // Check for color class on the parent element or use a different attribute
     // that we can be sure exists
     const sections = screen.getAllByTestId(/^minimal-impact/);
-    expect(sections.length).toBeGreaterThan(0);
+    expect(sections.length).greaterThan(0);
 
     // Simply verify the component doesn't crash with empty values
     // Instead of checking specific styling which can change

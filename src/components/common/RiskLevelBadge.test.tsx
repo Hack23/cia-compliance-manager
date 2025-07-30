@@ -22,11 +22,11 @@ describe("RiskLevelBadge", () => {
       <RiskLevelBadge risk="Critical" showIcon={true} />
     );
     const badgeText = screen.getByTestId("risk-level-badge").textContent;
-    expect(badgeText).toMatch(/⚠️/);
+    expect(badgeText).match(/⚠️/);
 
     rerender(<RiskLevelBadge risk="Low" showIcon={true} />);
     const lowRiskBadgeText = screen.getByTestId("risk-level-badge").textContent;
-    expect(lowRiskBadgeText).toMatch(/ℹ️/);
+    expect(lowRiskBadgeText).match(/ℹ️/);
   });
 
   it("handles undefined risk level gracefully", () => {
@@ -37,6 +37,6 @@ describe("RiskLevelBadge", () => {
   it("applies custom class name", () => {
     render(<RiskLevelBadge risk="Medium Risk" className="custom-class" />);
     const badge = screen.getByTestId("risk-level-badge");
-    expect(badge).toHaveClass("custom-class");
+    expect(badge).have("custom-class");
   });
 });

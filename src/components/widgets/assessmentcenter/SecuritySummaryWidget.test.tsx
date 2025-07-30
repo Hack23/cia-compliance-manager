@@ -180,7 +180,7 @@ describe("SecuritySummaryWidget", () => {
     );
 
     // Update to use the correct testId without the loading-container prefix
-    expect(screen.getByTestId("widget-container-custom-test-id")).toHaveClass(
+    expect(screen.getByTestId("widget-container-custom-test-id")).have(
       "custom-class"
     );
   });

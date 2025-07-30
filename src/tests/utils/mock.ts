@@ -483,14 +483,13 @@ export function createTypeGuardTests<T>(
 ): void {
   describe(`Type guard tests for ${guard.name}`, () => {
     it("correctly identifies valid and invalid values", () => {
-      // Use expect().toBeTruthy() pattern instead of toBe for better compatibility
-      expect(guard(validExample)).toBeTruthy();
-      expect(guard(null)).toBeFalsy();
-      expect(guard(undefined)).toBeFalsy();
-      expect(guard(123)).toBeFalsy();
-      expect(guard("string")).toBeFalsy();
-      expect(guard([])).toBeFalsy();
-
+      // Use Vitest's native expect matchers instead of jest-dom specific ones
+      expect(guard(validExample)).true;
+      expect(guard(null)).false;
+      expect(guard(undefined)).false;
+      expect(guard(123)).false;
+      expect(guard("string")).false;
+      expect(guard([])).false;
       // If validExample is an object, test with modified versions
       if (typeof validExample === "object" && validExample !== null) {
         const invalidObject = { ...validExample };
@@ -499,7 +498,7 @@ export function createTypeGuardTests<T>(
         if (key) {
           (invalidObject as any)[key] = 123; // Make the property an invalid type
         }
-        expect(guard(invalidObject)).toBeFalsy();
+        expect(guard(invalidObject)).false;
       }
     });
   });
