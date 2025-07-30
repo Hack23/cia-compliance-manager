@@ -179,10 +179,9 @@ describe("SecuritySummaryWidget", () => {
       />
     );
 
-    // Update to use the correct testId without the loading-container prefix
-    expect(screen.getByTestId("widget-container-custom-test-id")).have(
-      "custom-class"
-    );
+    // Use classList.contains or className checks instead of toHaveClass
+    const element = screen.getByTestId("widget-container-custom-test-id");
+    expect(element.classList.contains("custom-class")).true;
   });
 
   it("uses default test ID when not provided", () => {

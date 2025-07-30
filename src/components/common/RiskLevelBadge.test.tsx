@@ -37,6 +37,6 @@ describe("RiskLevelBadge", () => {
   it("applies custom class name", () => {
     render(<RiskLevelBadge risk="Medium Risk" className="custom-class" />);
     const badge = screen.getByTestId("risk-level-badge");
-    expect(badge).have("custom-class");
+    expect(badge.classList.contains("custom-class")).true;
   });
 });
