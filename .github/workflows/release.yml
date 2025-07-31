@@ -217,8 +217,6 @@ jobs:
         id: attest
         with:
           subject-path: cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip
-          subject-digest-algorithm: sha256
-          bundle-path: cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip.intoto.jsonl
 
       - name: Copy artifact attestation for zip
         run: cp ${{ steps.attest.outputs.bundle-path }} cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip.intoto.jsonl
