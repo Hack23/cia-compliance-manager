@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.20**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.21**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > **SecurityLevel** = `"None"` \| `"Low"` \| `"Moderate"` \| `"High"` \| `"Very High"`
 
-Defined in: [types/cia.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/9180e2700dca841f6711d7243c036db4de73db57/src/types/cia.ts#L25)
+Defined in: [types/cia.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/689e67e40bb6afe811128d672a0d7dd5fcbdaea5/src/types/cia.ts#L25)
 
 Represents security levels in the system

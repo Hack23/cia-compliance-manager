@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.20**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.21**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **valueCreationImpact**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), `string`\>
 
-Defined in: [data/valueCreationData.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/9180e2700dca841f6711d7243c036db4de73db57/src/data/valueCreationData.ts#L148)
+Defined in: [data/valueCreationData.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/689e67e40bb6afe811128d672a0d7dd5fcbdaea5/src/data/valueCreationData.ts#L148)
 
 Value creation impact by level

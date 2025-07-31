@@ -1,8 +1,8 @@
-[**CIA Compliance Manager Documentation v0.8.20**](README.md)
+[**CIA Compliance Manager Documentation v0.8.21**](README.md)
 
 ***
 
-# CIA Compliance Manager Documentation v0.8.20
+# CIA Compliance Manager Documentation v0.8.21
 
 ## Modules
 
