@@ -1,37 +1,11 @@
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: daily
-    open-pull-requests-limit: 10
-    versioning-strategy: auto
-    labels:
-      - "dependencies"
-      - "security"
-    groups:
-      dev-dependencies:
-        patterns:
-          - "*"
-        update-types:
-          - "minor"
-          - "patch"
-    commit-message:
-      prefix: "build(deps)"
-      prefix-development: "build(deps-dev)"
-
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: daily
-    open-pull-requests-limit: 10
-    labels:
-      - "dependencies"
-      - "build"
-    commit-message:
-      prefix: "build(deps)"
 
-  - package-ecosystem: docker
-    directory: /.devcontainer
+  - package-ecosystem: npm
+    directory: /
     schedule:
       interval: daily
