@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.21**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.22**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **compareSecurityLevels**(`levelA`, `levelB`): `number`
 
-Defined in: [utils/levelValuesUtils.ts:126](https://github.com/Hack23/cia-compliance-manager/blob/689e67e40bb6afe811128d672a0d7dd5fcbdaea5/src/utils/levelValuesUtils.ts#L126)
+Defined in: [utils/levelValuesUtils.ts:126](https://github.com/Hack23/cia-compliance-manager/blob/5eebba14bef5523072dd8c486c1cd0c7c18766fc/src/utils/levelValuesUtils.ts#L126)
 
 Compare two security levels
 

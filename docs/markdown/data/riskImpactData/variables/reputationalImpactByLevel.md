@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.21**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.22**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **reputationalImpactByLevel**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`BusinessImpactDetail`](../../../types/interfaces/BusinessImpactDetail.md)\>
 
-Defined in: [data/riskImpactData.ts:127](https://github.com/Hack23/cia-compliance-manager/blob/689e67e40bb6afe811128d672a0d7dd5fcbdaea5/src/data/riskImpactData.ts#L127)
+Defined in: [data/riskImpactData.ts:127](https://github.com/Hack23/cia-compliance-manager/blob/5eebba14bef5523072dd8c486c1cd0c7c18766fc/src/data/riskImpactData.ts#L127)
 
 Reputational impact data by security level

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.21**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.22**](../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > `const` **BUSINESS\_IMPACT\_CATEGORY\_LIST**: `string`[]
 
-Defined in: [constants/riskConstants.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/689e67e40bb6afe811128d672a0d7dd5fcbdaea5/src/constants/riskConstants.ts#L34)
+Defined in: [constants/riskConstants.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/5eebba14bef5523072dd8c486c1cd0c7c18766fc/src/constants/riskConstants.ts#L34)
