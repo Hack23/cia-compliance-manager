@@ -1,4 +1,6 @@
-# 🛡️ Black Trigram (흑괘) Future Security Architecture
+# 🛡️ CIA Compliance Manager Future Security Architecture
+
+TODO: change to CIA Commpliance manager, everywhere.
 
 This document outlines the comprehensive security architecture for Black Trigram's evolution into a full-stack Korean martial arts combat simulator with AWS cloud infrastructure, user accounts, and advanced security services.
 
