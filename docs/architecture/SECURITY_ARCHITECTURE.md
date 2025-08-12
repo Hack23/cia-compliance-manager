@@ -1,6 +1,7 @@
 # 🛡️ CIA Compliance Manager Security Architecture
 
 This document outlines the comprehensive security architecture of the CIA Compliance Manager, detailing how we protect our systems and data through multiple security layers.
+TODO: change to CIA Commpliance manager, everywhere.
 
 ## 📑 Table of Contents
 
