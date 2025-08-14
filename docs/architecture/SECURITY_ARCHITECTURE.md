@@ -1,7 +1,6 @@
 # 🛡️ CIA Compliance Manager Security Architecture
 
 This document outlines the comprehensive security architecture of the CIA Compliance Manager, detailing how we protect our systems and data through multiple security layers.
-TODO: change to CIA Commpliance manager, everywhere.
 
 ## 📑 Table of Contents
 
@@ -67,12 +66,12 @@ flowchart TD
 
 ### Current Implementation
 
-Black Trigram is a frontend-only web application with:
+CIA Compliance Manager is a frontend-only web application with:
 
 - **🌐 No Authentication System**: Direct browser access without login
 - **💾 No Persistent Data**: All state stored in browser session only
 - **🔄 No Backend Services**: Purely static content delivery
-- **⚠️ No Access Controls**: All game content publicly accessible
+- **⚠️ No Access Controls**: All content publicly accessible
 
 ### Security Implications
 
@@ -105,10 +104,10 @@ flowchart TD
 
 ### Current Implementation
 
-Black Trigram currently has:
+CIA Compliance Manager currently has:
 
 - **🚫 No Data Auditing**: No tracking of user actions or data changes
-- **🚫 No Change History**: No record of combat sessions or progress
+- **🚫 No Change History**: No record of user assessment sessions or progress
 - **🚫 No Author Attribution**: Cannot track individual user activities
 - **🚫 No Persistence**: All data lost when browser session ends
 
@@ -143,11 +142,11 @@ flowchart TD
 
 ### Current Implementation
 
-Black Trigram session handling:
+CIA Compliance Manager session handling:
 
 - **🚫 No Session Tracking**: No server-side session management
-- **🚫 No User Identification**: Anonymous gameplay only
-- **🚫 No Activity Logging**: No record of player actions
+- **🚫 No User Identification**: Anonymous usage only
+- **🚫 No Activity Logging**: No record of user actions
 - **🚫 No Metadata Collection**: No browser or device information stored
 
 ### Security Implications
@@ -178,7 +177,7 @@ flowchart TD
 
 ### Current Implementation
 
-Black Trigram security monitoring:
+CIA Compliance Manager security monitoring:
 
 - **🚫 No Authentication Events**: No login/logout to monitor
 - **🚫 No Authorization Events**: No access control to track
@@ -219,7 +218,7 @@ graph TD
 
 ### Current Implementation
 
-Black Trigram network security includes comprehensive DNS protection:
+CIA Compliance Manager network security includes comprehensive DNS protection:
 
 #### 🛡️ DNS Security (Route53 + DNSSEC)
 
@@ -245,15 +244,15 @@ Black Trigram network security includes comprehensive DNS protection:
 ### DNS Security Configuration
 
 ```dns
-; Example DNSSEC and CAA configuration for blacktrigram.com
-blacktrigram.com.    IN    CAA    0 issue "letsencrypt.org"
-blacktrigram.com.    IN    CAA    0 issuewild "letsencrypt.org"
-blacktrigram.com.    IN    CAA    0 iodef "mailto:security@blacktrigram.com"
+; Example DNSSEC and CAA configuration for ciacompliancemanager.com
+ciacompliancemanager.com.    IN    CAA    0 issue "letsencrypt.org"
+ciacompliancemanager.com.    IN    CAA    0 issuewild "letsencrypt.org"
+ciacompliancemanager.com.    IN    CAA    0 iodef "mailto:security@ciacompliancemanager.com"
 
 ; DNSSEC records automatically managed by Route53
-blacktrigram.com.    IN    DNSKEY    256 3 8 (base64-encoded-key)
-blacktrigram.com.    IN    DS        12345 8 2 (sha256-hash)
-blacktrigram.com.    IN    RRSIG     DNSKEY 8 2 86400 (signature-data)
+ciacompliancemanager.com.    IN    DNSKEY    256 3 8 (base64-encoded-key)
+ciacompliancemanager.com.    IN    DS        12345 8 2 (sha256-hash)
+ciacompliancemanager.com.    IN    RRSIG     DNSKEY 8 2 86400 (signature-data)
 ```
 
 ### Security Benefits
@@ -325,7 +324,7 @@ flowchart LR
 
 ### Current Status
 
-Black Trigram does not use VPC infrastructure:
+CIA Compliance Manager does not use VPC infrastructure:
 
 - **🚫 No VPC**: Frontend-only application with no AWS VPC
 - **🚫 No Private Subnets**: Static content delivery only
@@ -351,7 +350,7 @@ graph TD
 
 ### Current Implementation
 
-Black Trigram availability:
+CIA Compliance Manager availability:
 
 - **✅ CDN Distribution**: Global content delivery network
 - **✅ Edge Caching**: Assets cached at multiple locations
@@ -386,7 +385,7 @@ flowchart TD
 
 ### Current Implementation
 
-Black Trigram data protection:
+CIA Compliance Manager data protection:
 
 - **✅ TLS Encryption**: All communications encrypted in transit
 - **✅ No Persistent Data**: No data at rest to protect
@@ -418,7 +417,7 @@ graph TD
 
 ### Current Status
 
-Black Trigram does not use AWS infrastructure:
+CIA Compliance Manager does not use AWS infrastructure:
 
 - **🚫 No AWS Services**: Frontend-only application
 - **🚫 No IAM**: No AWS identity management needed
@@ -443,7 +442,7 @@ flowchart TD
 
 ### Current Status
 
-Black Trigram does not implement AWS FSBP:
+CIA Compliance Manager does not implement AWS FSBP:
 
 - **🚫 No AWS Config**: No AWS resources to configure
 - **🚫 No Security Hub**: No AWS security findings to aggregate
@@ -467,7 +466,7 @@ flowchart TD
 
 ### Current Status
 
-Black Trigram threat detection:
+CIA Compliance Manager threat detection:
 
 - **🚫 No Threat Detection**: No monitoring infrastructure
 - **🚫 No Investigation Tools**: No forensic capabilities
@@ -497,7 +496,7 @@ flowchart TD
 
 ### Current Status
 
-Black Trigram vulnerability management:
+CIA Compliance Manager vulnerability management:
 
 - **🚫 No Scanning**: No server infrastructure to scan
 - **🚫 No CVE Tracking**: No operating systems or services to patch
@@ -528,7 +527,7 @@ flowchart TD
 
 ### Current Status
 
-Black Trigram resilience:
+CIA Compliance Manager resilience:
 
 - **✅ CDN Resilience**: Global content distribution provides natural resilience
 - **🚫 No RTO/RPO**: No data persistence means no recovery objectives
@@ -557,7 +556,7 @@ flowchart TD
 
 ### Current Status
 
-Black Trigram configuration management:
+CIA Compliance Manager configuration management:
 
 - **🚫 No AWS Config**: No AWS resources to configure
 - **🚫 No Resource Inventory**: Only static files to manage
@@ -587,7 +586,7 @@ flowchart TD
 
 ### Current Status
 
-Black Trigram monitoring:
+CIA Compliance Manager monitoring:
 
 - **🚫 No Server Logs**: No server infrastructure to monitor
 - **🚫 No CloudWatch**: No AWS services to monitor
@@ -617,7 +616,7 @@ flowchart TD
 
 ### Current Status
 
-Black Trigram automated operations:
+CIA Compliance Manager automated operations:
 
 - **🚫 No Maintenance Windows**: No infrastructure to maintain
 - **🚫 No Patch Management**: No operating systems to patch
@@ -651,7 +650,7 @@ flowchart LR
 
 ### Current Implementation
 
-Black Trigram application security:
+CIA Compliance Manager application security:
 
 - **✅ HTTPS Enforcement**: All traffic over encrypted connections
 - **✅ Browser Security Model**: Leverages browser sandboxing and isolation
@@ -685,7 +684,7 @@ graph TD
 
 ### Current Status
 
-Black Trigram compliance:
+CIA Compliance Manager compliance:
 
 - **🚫 No Formal Framework**: No regulatory compliance requirements
 - **🚫 No NIST CSF**: Educational application with no compliance mandate
@@ -720,7 +719,7 @@ flowchart TD
 
 ### Current Implementation
 
-Black Trigram's simplified defense approach:
+CIA Compliance Manager's simplified defense approach:
 
 1. **🌐 Network Security**: HTTPS-only communication with TLS encryption
 2. **🖥️ Application Security**: Browser security model and CSP headers
@@ -756,7 +755,7 @@ flowchart TD
 
 ### Current Status
 
-Black Trigram security operations:
+CIA Compliance Manager security operations:
 
 - **🚫 No Security Operations Center**: No infrastructure to monitor
 - **🚫 No Incident Response**: No security events to respond to
@@ -791,7 +790,7 @@ flowchart TD
 
 ### Current Investment
 
-Black Trigram security investment:
+CIA Compliance Manager security investment:
 
 - **💰 CDN Costs**: Content delivery network hosting costs
 - **🔒 TLS Certificates**: HTTPS encryption (often free with CDN)
@@ -799,43 +798,9 @@ Black Trigram security investment:
 - **🚫 No Infrastructure Costs**: No servers or cloud services to pay for
 - **🚫 No Security Tools**: No paid security monitoring or scanning tools
 
-### Cost Benefits
-
-- **💸 Low Operating Costs**: Minimal ongoing security expenses
-- **🔄 No Licensing**: No security software licenses required
-- **👥 No Security Staff**: No dedicated security operations team needed
-
-## 🏛️ CI/CD Security Architecture
-
-**Current Status**: ✅ Comprehensive CI/CD Security - GitHub Actions
-
-```mermaid
-flowchart TD
-    subgraph "Security-Hardened CI/CD Pipeline"
-        A[🔒 Source Code<br>Security] --> B[🔍 CodeQL Analysis]
-        A --> C[📦 Dependency Review]
-        A --> D[⭐ OSSF Scorecard]
-
-        E[🏗️ Build Security] --> F[🔏 SLSA Attestations]
-        E --> G[📄 SBOM Generation]
-        E --> H[🔐 Artifact Signing]
-
-        I[🚀 Deployment<br>Security] --> J[🌐 GitHub Pages]
-        I --> K[🔆 Lighthouse Audit]
-        I --> L[🕷️ ZAP Security Scan]
-
-        M[🛡️ Runner Security] --> N[📌 SHA Pinning]
-        M --> O[📊 Audit Logging]
-        M --> P[🔒 Hardened Runners]
-    end
-
-    style A,B,C,D fill:#2979FF,stroke:#0D47A1,stroke-width:2px,color:white,font-weight:bold
-    style E,F,G,H,J,K,L,N,O,P fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-```
-
 ### Implemented CI/CD Security
 
-Black Trigram implements comprehensive CI/CD security:
+CIA Compliance Manager implements comprehensive CI/CD security:
 
 1. **🔍 Static Analysis Security**:
 
@@ -862,6 +827,41 @@ Black Trigram implements comprehensive CI/CD security:
 
 ### Security Workflow Features
 
+- **🔄 Continuous Scanning**: Every commit and pull request analyzed
+- **📊 Security Reporting**: Centralized security findings in GitHub Security tab
+- **⚡ Automated Remediation**: Dependency updates and vulnerability fixes
+- **🏆 Supply Chain Protection**: Complete software supply chain visibility
+
+### Key Security Benefits
+
+- **🔍 Early Detection**: Security issues caught during development
+- **📄 Transparency**: Complete audit trail of all changes and builds
+- **🔒 Integrity**: Cryptographic verification of all artifacts
+- **⚡ Automation**: Reduced human error through automated security checks
+
+## 📝 Conclusion
+
+Black Trigram implements a **security-first approach optimized for a frontend-only Korean martial arts gaming application**. While the application architecture intentionally avoids many traditional security concerns through its stateless, client-side-only design, it implements robust security where applicable.
+
+### Current Security Strengths
+
+1. **🔒 Transport Security**: HTTPS-only communication with TLS encryption
+2. **🛡️ Minimal Attack Surface**: No backend servers, databases, or user accounts to compromise
+3. **🔐 CI/CD Security**: Comprehensive security scanning and attestation in the build pipeline
+4. **🎯 Privacy by Design**: No personal data collection or storage
+5. **🌐 Global Availability**: CDN-based delivery with natural resilience
+
+### Security Architecture Benefits
+
+1. **💰 Cost Effective**: Minimal security infrastructure and operational costs
+2. **🔄 Zero Maintenance**: No ongoing security patching or monitoring required
+3. **🚀 High Performance**: Security controls designed for minimal performance impact
+4. **🌍 Global Access**: No geographic restrictions or compliance complexities
+5. **🎮 Focus on Gaming**: Security approach supports the educational gaming mission
+
+### Future Security Considerations
+
+As documented in the [End-of-Life Strategy](End-of-Life-Strategy.md), any future evolution toward backend services or user accounts would require implementing the traditional security layers currently marked as "not applicable."
 - **🔄 Continuous Scanning**: Every commit and pull request analyzed
 - **📊 Security Reporting**: Centralized security findings in GitHub Security tab
 - **⚡ Automated Remediation**: Dependency updates and vulnerability fixes

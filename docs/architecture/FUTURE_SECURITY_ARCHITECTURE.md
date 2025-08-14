@@ -1,8 +1,6 @@
 # 🛡️ CIA Compliance Manager Future Security Architecture
 
-TODO: change to CIA Commpliance manager, everywhere.
-
-This document outlines the comprehensive security architecture for Black Trigram's evolution into a full-stack Korean martial arts combat simulator with AWS cloud infrastructure, user accounts, and advanced security services.
+This document outlines the comprehensive future security architecture for the CIA Compliance Manager as it evolves into a full-stack multi-tenant security assessment, compliance mapping, and analytics SaaS platform leveraging AWS cloud infrastructure, user accounts, and advanced security services.
 
 ## 📑 Table of Contents
 
@@ -74,39 +72,39 @@ flowchart TD
 
 ### Implementation
 
-Black Trigram implements comprehensive authentication using AWS Cognito:
+CIA Compliance Manager implements comprehensive authentication using AWS Cognito:
 
 #### 🔐 AWS Cognito User Pool
 
-- **✅ User Registration**: Email-based account creation with Korean language support
-- **✅ Multi-Factor Authentication**: SMS, Email, and TOTP-based MFA with Korean carriers
-- **✅ Advanced Password Policies**: Complex requirements supporting Korean characters
-- **✅ Account Recovery**: Secure password reset flows with Korean language support
-- **✅ User Groups**: Role-based access control (Admin, Instructor, Student, Master)
-- **✅ Custom Attributes**: Korean martial arts rank, training history, dojang affiliation
+- **✅ User Registration**: Email-based account creation with multi-tenant organization support
+- **✅ Multi-Factor Authentication**: SMS, email, and TOTP-based MFA
+- **✅ Advanced Password Policies**: Strong complexity & rotation policies
+- **✅ Account Recovery**: Secure password reset flows
+- **✅ User Groups / Roles**: Role-based access control (Admin, SecurityOfficer, ComplianceManager, Auditor, ReadOnly)
+- **✅ Custom Attributes**: Organization ID, department, regulatory scope, assessment history pointers
 
 #### 🔑 AWS Cognito Identity Pool
 
-- **✅ Federated Identities**: Social login support (Google, Facebook, Naver, Kakao)
+- **✅ Federated Identities**: Social / enterprise IdP (SAML / OIDC) integration
 - **✅ Temporary Credentials**: AWS STS for secure API access with least privilege
-- **✅ Fine-Grained Permissions**: IAM roles based on user groups and Korean martial arts ranks
-- **✅ Anonymous Access**: Limited demo mode for prospective students
+- **✅ Fine-Grained Permissions**: IAM roles mapped to platform RBAC roles
+- **✅ Limited Trial Access**: Optional constrained evaluation mode
 
 #### 🛡️ Security Features
 
-- **✅ JWT Token Validation**: Secure token-based authentication with Korean user context
-- **✅ Token Refresh**: Automatic credential renewal with session continuity
-- **✅ Session Management**: Configurable timeouts based on user activity and risk level
-- **✅ Rate Limiting**: Advanced brute force protection with geographic analysis
+- **✅ JWT Token Validation**: Secure token-based auth with tenant isolation context
+- **✅ Token Refresh**: Automatic credential renewal
+- **✅ Session Management**: Configurable timeouts based on activity & risk
+- **✅ Rate Limiting**: Brute force & anomaly protections
 - **✅ Comprehensive Audit Logging**: All authentication events tracked in CloudTrail
 
-### Korean Martial Arts Integration
+### Domain Integration
 
-- **🥋 Rank System**: Integration with traditional Korean martial arts belt rankings (급/단)
-- **📊 Progress Tracking**: Authenticated progress through trigram mastery and vital point training
-- **👥 Dojang Groups**: Virtual training groups with verified instructor oversight
-- **🏆 Achievement System**: Cryptographically signed accomplishments and certifications
-- **🇰🇷 Cultural Validation**: Korean language proficiency and cultural knowledge assessment
+- **📂 Organizational Structure Support**: Tenants, business units, and environment segmentation
+- **🧪 Assessment History Tracking**: Versioned history of security level & control evaluations
+- **📊 Control Implementation Metrics**: Maturity scores, remediation status, drift indicators
+- **🔁 Framework Coverage Mapping**: Cross-framework control correlation (e.g., NIST ↔ ISO)
+- **🏷️ Tagging & Classification**: Asset / control tagging for risk, criticality, and data class
 
 ## 📜 Data Integrity & Auditing
 
@@ -140,7 +138,7 @@ flowchart TD
 
 ### Implementation
 
-Black Trigram implements comprehensive data auditing:
+CIA Compliance Manager implements comprehensive data auditing:
 
 #### 📝 AWS CloudTrail
 
@@ -164,12 +162,12 @@ Black Trigram implements comprehensive data auditing:
 - **✅ Access Controls**: Strict IAM policies limiting audit data access to authorized personnel
 - **✅ Retention Policies**: Long-term retention for compliance (7 years) with automated lifecycle
 
-### Korean Martial Arts Audit Features
+### Domain Audit Features
 
-- **🥋 Training Progress Auditing**: Complete audit trail of skill advancement and belt promotions
-- **📊 Combat Analytics Logging**: Detailed logging of vital point targeting accuracy and improvement
-- **👥 Instructor Actions**: All teaching, grading, and certification activities logged
-- **🏆 Achievement Verification**: Cryptographic proof of accomplishments with immutable records
+- **🧪 Assessment Lineage**: Immutable record of assessment inputs & computed scores
+- **🔄 Control Change Tracking**: Who changed required level / rationale / timestamp
+- **📊 Framework Mapping Revisions**: Versioned compliance mapping adjustments
+- **🧾 Report Provenance**: Cryptographic hash of exported executive/compliance reports
 
 ## 📊 Session & Action Tracking
 
@@ -203,7 +201,7 @@ flowchart TD
 
 ### Implementation
 
-Black Trigram implements detailed session and action tracking:
+CIA Compliance Manager implements detailed session and action tracking:
 
 #### 🔐 Session Management
 
@@ -226,12 +224,12 @@ Black Trigram implements detailed session and action tracking:
 - **✅ Data Minimization**: Only collect data necessary for educational and security purposes
 - **✅ Right to Deletion**: Complete removal of user data on request with verification
 
-### Korean Martial Arts Tracking Features
+### Domain Tracking Features
 
-- **🎯 Vital Point Mastery**: Detailed accuracy tracking for all 70 vital points with progression analytics
-- **☯️ Trigram Proficiency**: Progress through the eight trigram stances with mastery validation
-- **⚔️ Combat Analytics**: Win/loss ratios, technique effectiveness, sparring performance
-- **📚 Learning Analytics**: Time to mastery, common mistakes identification, improvement recommendations
+- **📊 User Interaction Metrics**: Time-in-assessment, navigation patterns, feature utilization
+- **🧪 Assessment Progress Analytics**: Draft vs finalized assessments, approval workflows
+- **🛠️ Remediation Lifecycle**: Opening, assignment, SLA tracking, closure validation
+- **📈 Trend Insights**: Control maturity evolution & risk reduction over time
 
 ## 🔍 Security Event Monitoring
 
@@ -266,7 +264,7 @@ flowchart TD
 
 ### Implementation
 
-Black Trigram implements comprehensive security event monitoring:
+CIA Compliance Manager implements comprehensive security event monitoring:
 
 #### 🕵️ Amazon Detective
 
@@ -296,12 +294,12 @@ Black Trigram implements comprehensive security event monitoring:
 - **✅ Failed Authentication**: Brute force and credential stuffing detection with geographic analysis
 - **✅ Privilege Escalation**: Unauthorized access attempt detection with immediate response
 
-### Korean Martial Arts Security Events
+### Domain-Specific Security Events
 
-- **🥋 Training Anomalies**: Unusual progress patterns that might indicate cheating or automation
-- **🎯 Accuracy Anomalies**: Impossible vital point accuracy suggesting bot usage
-- **👥 Account Sharing**: Detection of multiple users on single account through behavioral analysis
-- **🏆 Achievement Fraud**: Validation of authentic skill progression with expert system verification
+- **📌 Abnormal Permission Escalation Attempts**
+- **⚠️ Rapid Bulk Control Downgrades**
+- **🛑 Suspicious Framework Scope Changes**
+- **📤 Large Volume Report Exports / Data Exfil Signals**
 
 ## 🌐 Network Security
 
@@ -336,7 +334,7 @@ graph TD
 
 ### Implementation
 
-Black Trigram implements enterprise-grade network security:
+CIA Compliance Manager implements enterprise-grade network security:
 
 #### ⚖️ CloudFront + WAF Security
 
@@ -569,7 +567,7 @@ graph TD
 
 ### Implementation
 
-Black Trigram implements enterprise-grade high availability:
+CIA Compliance Manager implements enterprise-grade high availability:
 
 #### 🌍 Multi-Region Architecture
 
@@ -606,12 +604,12 @@ Black Trigram implements enterprise-grade high availability:
 - **🔄 Availability Target**: 99.9% uptime (8.76 hours downtime annually)
 - **📈 Performance Target**: <500ms response time during failover scenarios
 
-### Korean Martial Arts HA Benefits
+### Platform Resilience Features
 
-- **🥋 Continuous Training**: Minimal disruption to martial arts practice sessions
-- **📊 Data Consistency**: Global tables ensure consistent user progress across regions
-- **🏆 Achievement Preservation**: Robust backup and recovery of user accomplishments
-- **👥 Global Instructor Support**: Multi-region support for worldwide dojang operations
+- **🚀 Continuous Access to Assessment Dashboards**
+- **🧮 Preservation of Historical Scorecards & Reports**
+- **🔁 In-flight Assessment Session Continuity**
+- **✅ Guaranteed Integrity of Archived Compliance Evidence**
 
 ## 💾 Data Protection
 
@@ -649,7 +647,7 @@ flowchart TD
 
 ### Implementation
 
-Black Trigram implements enterprise-grade data protection:
+CIA Compliance Manager implements enterprise-grade data protection:
 
 #### 🔐 Advanced Encryption at Rest
 
@@ -729,7 +727,7 @@ graph TD
 
 ### Implementation
 
-Black Trigram implements comprehensive AWS security services:
+CIA Compliance Manager implements comprehensive AWS security services:
 
 #### 👤 Identity & Access Management
 
@@ -796,7 +794,7 @@ flowchart TD
 
 ### Implementation
 
-Black Trigram implements full AWS Foundational Security Best Practices:
+CIA Compliance Manager implements full AWS Foundational Security Best Practices:
 
 #### 📋 Comprehensive FSBP Controls
 
@@ -877,7 +875,7 @@ flowchart TD
 
 ### Implementation
 
-Black Trigram implements advanced threat detection:
+CIA Compliance Manager implements advanced threat detection:
 
 #### 🛡️ Amazon GuardDuty
 
@@ -948,7 +946,7 @@ flowchart TD
 
 ### Implementation
 
-Black Trigram implements comprehensive vulnerability management:
+CIA Compliance Manager implements comprehensive vulnerability management:
 
 #### 🔎 Amazon Inspector
 
@@ -978,12 +976,12 @@ Black Trigram implements comprehensive vulnerability management:
 - **✅ Vulnerability Trend Analysis**: Historical trend analysis with predictive modeling
 - **✅ Compliance Scoring**: Vulnerability management maturity assessment with benchmarking
 
-### Korean Martial Arts Specific Vulnerability Concerns
+### Domain-Specific Vulnerability Concerns
 
-- **🥋 Training Data Integrity**: Protection against manipulation of combat performance data
-- **📊 Analytics Accuracy**: Ensuring accurate performance measurements and progress tracking
-- **👥 Instructor Authentication**: Strong verification of instructor identities and credentials
-- **🏆 Achievement Validation**: Prevention of fraudulent accomplishments and certifications
+- **🧮 Integrity of Risk Calculation Logic**
+- **📊 Unauthorized Manipulation of Cost / ROI Models**
+- **🔐 Exposure of Tenant-Separated Compliance Data**
+- **🧾 Report Generation Injection / Template Abuse**
 
 ## ⚡ Resilience & Operational Readiness
 
@@ -1019,7 +1017,7 @@ flowchart TD
 
 ### Implementation
 
-Black Trigram implements advanced resilience and operational readiness:
+CIA Compliance Manager implements advanced resilience and operational readiness:
 
 #### 📊 AWS Resilience Hub
 
@@ -1056,48 +1054,9 @@ Black Trigram implements advanced resilience and operational readiness:
 - **🔄 Availability Target**: 99.9% uptime (43.8 minutes downtime per month)
 - **📈 Performance Target**: <500ms API response time during failover scenarios
 
-### Korean Martial Arts Resilience Features
-
-- **🥋 Training Continuity**: Minimal disruption to ongoing martial arts training sessions
-- **📊 Progress Preservation**: Robust protection and recovery of user advancement data
-- **👥 Instructor Availability**: Multi-region support for global dojang operations
-- **🏆 Achievement Integrity**: Immutable and recoverable certification records
-
-## 📋 Configuration & Compliance Management
-
-**Status**: ✅ Advanced Configuration Management - Config + Security Hub + Custom Rules
-
-```mermaid
-flowchart TD
-    subgraph "Advanced Configuration & Compliance Management"
-        A[⚙️ AWS Config] --> B[📋 Configuration Recording]
-        A --> C[🔍 Compliance Rules]
-        A --> D[📊 Configuration History]
-
-        E[🛡️ Security Hub] --> F[📈 Compliance Dashboard]
-        E --> G[🎯 Security Standards]
-        E --> H[📊 Finding Aggregation]
-
-        I[🔧 Custom Compliance] --> J[⚙️ Korean Martial Arts Rules]
-        I --> K[📊 Training Data Validation]
-        I --> L[🏆 Achievement Verification]
-
-        M[🔄 Automated Remediation] --> N[⚙️ Lambda Remediation]
-        M --> O[📱 Alert Systems]
-        M --> P[🔧 Self-Healing]
-
-        Q[📊 Compliance Reporting] --> R[📋 Audit Reports]
-        Q --> S[📈 Trend Analysis]
-        Q --> T[🎯 Compliance Scoring]
-    end
-
-    style A,E,I,M,Q fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,H,J,K,L,N,O,P,R,S,T fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-```
-
 ### Implementation
 
-Black Trigram implements advanced configuration and compliance management:
+CIA Compliance Manager implements advanced configuration and compliance management:
 
 #### ⚙️ AWS Config
 
@@ -1108,10 +1067,10 @@ Black Trigram implements advanced configuration and compliance management:
 
 #### 🛡️ Security Standards Compliance
 
-- **✅ AWS Foundational Security Best Practices**: Full FSBP compliance with automated remediation
+- **✅ AWS Foundational Security Best Practices**: Full implementation and continuous monitoring
 - **✅ PCI DSS**: Payment Card Industry compliance for future payment features
 - **✅ ISO 27001**: Information security management standards with certification
-- **✅ Custom Standards**: Korean martial arts application-specific security requirements
+- **✅ Custom Standards**: Specific compliance requirements for Korean martial arts data
 
 #### 🔧 Korean Martial Arts Custom Rules
 
@@ -1124,51 +1083,12 @@ Black Trigram implements advanced configuration and compliance management:
 
 - **✅ Self-Healing Infrastructure**: Automatic correction of common misconfigurations
 - **✅ Compliance Drift Prevention**: Immediate correction of compliance violations
-- **✅ Security Hardening**: Automatic application of security best practices
+- **✅ Security Hardening**: Continuous application of security best practices
 - **✅ Cost Optimization**: Automated cleanup of unused resources with approval workflows
-
-### Configuration Management Features
-
-- **📊 Configuration Dashboards**: Real-time view of entire infrastructure state
-- **🔍 Change Impact Analysis**: Assessment of configuration change impacts with approval
-- **📱 Mobile Notifications**: Critical configuration change alerts with details
-- **🎯 Compliance Scoring**: Automated calculation of compliance posture with trending
-
-## 📊 Monitoring & Analytics
-
-**Status**: ✅ Comprehensive Monitoring - CloudWatch + Security Lake + Custom Analytics
-
-```mermaid
-flowchart TD
-    subgraph "Comprehensive Monitoring & Analytics"
-        A[📈 Amazon CloudWatch] --> B[📊 Metrics & Logs]
-        A --> C[🚨 Alarms & Notifications]
-        A --> D[📋 Dashboards]
-
-        E[🗂️ Amazon Security Lake] --> F[📊 Centralized Security Data]
-        E --> G[🔍 Advanced Analytics]
-        E --> H[📈 ML-powered Insights]
-
-        I[⚙️ Custom Analytics] --> J[🥋 Korean Martial Arts Metrics]
-        I --> K[📊 Combat Performance]
-        I --> L[🎯 Learning Analytics]
-
-        M[📱 Real-time Monitoring] --> N[🚨 Critical Alerts]
-        M --> O[📊 Performance Tracking]
-        M --> P[🔍 Anomaly Detection]
-
-        Q[📋 Reporting & Intelligence] --> R[📊 Executive Dashboards]
-        Q --> S[📈 Trend Analysis]
-        Q --> T[🎯 Predictive Analytics]
-    end
-
-    style A,E,I,M,Q fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
-    style B,C,D,F,G,H,J,K,L,N,O,P,R,S,T fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
-```
 
 ### Implementation
 
-Black Trigram implements comprehensive monitoring and analytics:
+CIA Compliance Manager implements comprehensive monitoring and analytics:
 
 #### 📈 Amazon CloudWatch
 
@@ -1198,12 +1118,12 @@ Black Trigram implements comprehensive monitoring and analytics:
 - **✅ Security Events**: Real-time security incident detection and automated response
 - **✅ Infrastructure Health**: AWS service health and resource utilization with optimization
 
-### Analytics and Intelligence
+### Platform Analytics
 
-- **📊 Business Intelligence**: Data-driven insights for martial arts education with recommendations
-- **🎯 Predictive Analytics**: Forecasting of user engagement and skill development patterns
-- **📈 Trend Analysis**: Long-term patterns in user behavior and system performance
-- **🔍 Root Cause Analysis**: Automated investigation of performance issues with resolution
+- **📈 Control Adoption Velocity**
+- **🧪 Remediation SLA Performance**
+- **🛡️ Framework Coverage Gaps**
+- **💰 Cost vs Maturity Optimization Trends**
 
 ## 🤖 Automated Security Operations
 
@@ -1239,7 +1159,7 @@ flowchart TD
 
 ### Implementation
 
-Black Trigram implements advanced automated security operations:
+CIA Compliance Manager implements advanced automated security operations:
 
 #### ⏱️ Scheduled Security Operations
 
@@ -1268,13 +1188,6 @@ Black Trigram implements advanced automated security operations:
 - **✅ User Behavior Analytics**: Detection of unusual user patterns with risk scoring
 - **✅ Predictive Security**: Forecasting of potential security issues with prevention
 - **✅ Risk Scoring**: Automated risk assessment and prioritization with business context
-
-### Security Automation Benefits
-
-- **⚡ Faster Response**: Automated response reduces mean time to containment
-- **🎯 Consistency**: Standardized response procedures reduce human error
-- **📊 Scale**: Ability to handle large volumes of security events
-- **🔄 Continuous Improvement**: Automated learning and adaptation of security controls
 
 ## 🔒 Application Security
 
@@ -1311,7 +1224,7 @@ flowchart TD
 
 ### Implementation
 
-Black Trigram implements comprehensive application security:
+CIA Compliance Manager implements comprehensive application security:
 
 #### 🔒 Input Validation
 
@@ -1367,7 +1280,7 @@ flowchart TD
 
 ### Implementation
 
-Black Trigram implements a comprehensive compliance framework:
+CIA Compliance Manager implements a comprehensive compliance framework:
 
 #### 📋 Compliance Standards
 
@@ -1420,7 +1333,7 @@ flowchart TD
 
 ### Implementation
 
-Black Trigram implements a comprehensive defense-in-depth strategy:
+CIA Compliance Manager implements a comprehensive defense-in-depth strategy:
 
 #### 🔒 Perimeter Defense
 
@@ -1430,6 +1343,93 @@ Black Trigram implements a comprehensive defense-in-depth strategy:
 
 #### 🔑 Access Control
 
+- **✅ AWS Cognito**: User authentication and authorization with MFA
+- **✅ IAM Roles**: Fine-grained access control for AWS resources
+
+#### 🛡️ Application Security
+
+- **✅ Input Validation**: Strict validation of all user inputs
+- **✅ WAF Protection**: Application-layer protection with AWS WAF
+
+#### 📊 Monitoring & Response
+
+- **✅ CloudWatch**: Real-time monitoring and alerting
+- **✅ GuardDuty**: Threat detection and continuous monitoring
+- **✅ Detective**: Security investigation and analysis
+
+#### 🔄 Incident Management
+
+- **✅ Alerting**: Immediate notification of security incidents
+- **✅ Remediation**: Automated and manual procedures for incident response
+- **✅ Reporting**: Comprehensive reporting of security incidents and responses
+
+## 🔄 Security Operations
+
+**Status**: ✅ Advanced Security Operations - 24/7 Monitoring & Response
+
+```mermaid
+flowchart TD
+    subgraph "Advanced Security Operations Center"
+        A[🕵️ Security Monitoring] --> B[📊 Security Dashboard]
+        A --> C[🚨 Alerting]
+        A --> D[🔍 Investigation]
+
+        E[🔄 Incident Response] --> F[📱 Notifications]
+        E --> G[🔧 Remediation]
+        E --> H[📋 Reporting]
+
+        I[📈 Threat Intelligence] --> J[🌐 Threat Feeds]
+        I --> K[📊 Threat Analysis]
+
+        L[🔒 Vulnerability Management] --> M[🔎 Scanning]
+        L --> N[📦 Patching]
+        L --> O[🔄 Verification]
+
+        P[📋 Compliance Management] --> Q[🔍 Auditing]
+        P --> R[📈 Reporting]
+    end
+
+    style A,E,I,L,P fill:#FF6F00,stroke:#E65100,stroke-width:2px,color:white,font-weight:bold
+    style B,C,D,F,G,H,J,K,M,N,O,Q,R fill:#00C853,stroke:#007E33,stroke-width:2px,color:white,font-weight:bold
+```
+
+### Implementation
+
+CIA Compliance Manager implements advanced security operations:
+
+#### 🕵️ Security Monitoring
+
+- **✅ 24/7 Monitoring**: Continuous monitoring of all security events
+- **✅ Centralized Dashboard**: Unified view of security posture and incidents
+- **✅ Real-time Alerting**: Immediate notification of critical security events
+
+#### 🔄 Incident Response
+
+- **✅ Automated Response**: Immediate containment and mitigation of incidents
+- **✅ Manual Response**: Detailed procedures for security team intervention
+- **✅ Post-Incident Analysis**: Review and analysis of incidents for improvement
+
+#### 📈 Threat Intelligence
+
+- **✅ Integrated Threat Feeds**: Real-time threat intelligence from multiple sources
+- **✅ Threat Analysis**: In-depth analysis of threats and vulnerabilities
+
+#### 🔒 Vulnerability Management
+
+- **✅ Regular Scanning**: Automated scanning for vulnerabilities in applications and infrastructure
+- **✅ Timely Patching**: Rapid deployment of security patches and updates
+- **✅ Verification**: Validation of patch deployment and vulnerability remediation
+
+#### 📋 Compliance Management
+
+- **✅ Continuous Auditing**: Regular audits of security controls and compliance
+- **✅ Compliance Reporting**: Automated generation of compliance reports
+
+## 📝 Conclusion
+
+The CIA Compliance Manager Future Security Architecture is a comprehensive, multi-layered security framework designed to protect the integrity, availability, and confidentiality of the platform. By leveraging AWS's advanced security services and following best practices for security and compliance, the platform will provide a secure and resilient environment for organizations to perform security assessments, manage compliance mappings, track remediation, and generate assurance reporting.
+
+---
 - **✅ AWS Cognito**: User authentication and authorization with MFA
 - **✅ IAM Roles**: Fine-grained access control for AWS resources
 
