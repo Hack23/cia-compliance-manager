@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.22**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.23**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **STORAGE\_KEYS**: `object`
 
-Defined in: [constants/coreConstants.ts:291](https://github.com/Hack23/cia-compliance-manager/blob/5eebba14bef5523072dd8c486c1cd0c7c18766fc/src/constants/coreConstants.ts#L291)
+Defined in: [constants/coreConstants.ts:291](https://github.com/Hack23/cia-compliance-manager/blob/55488ba3ac0003e4435eb3634b6ab6e9b8b05a9b/src/constants/coreConstants.ts#L291)
 
 Local storage keys
 

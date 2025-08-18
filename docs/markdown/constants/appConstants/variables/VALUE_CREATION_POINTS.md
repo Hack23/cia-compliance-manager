@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.22**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.23**](../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > `const` **VALUE\_CREATION\_POINTS**: `Partial`\<`Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), `string`[]\>\>
 
-Defined in: [constants/appConstants.ts:182](https://github.com/Hack23/cia-compliance-manager/blob/5eebba14bef5523072dd8c486c1cd0c7c18766fc/src/constants/appConstants.ts#L182)
+Defined in: [constants/appConstants.ts:182](https://github.com/Hack23/cia-compliance-manager/blob/55488ba3ac0003e4435eb3634b6ab6e9b8b05a9b/src/constants/appConstants.ts#L182)
