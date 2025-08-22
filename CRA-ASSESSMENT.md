@@ -21,7 +21,6 @@
 **Document Owner:** CEO | **Version:** 1.0 | **Last Updated:** 2025-08-22  
 **Review Cycle:** Quarterly | **Next Review:** 2025-11-22
 
-
 ---
 
 ## 🎯 **Purpose Statement**
@@ -154,16 +153,20 @@ Reference: [📊 Risk Assessment Methodology](https://github.com/Hack23/ISMS-PUB
 
 _Supports CRA Annex I - Essential Requirements Self-Assessment_
 
-| 📋 **CRA Annex I Requirement**            | ✅ Status | 📋 Implementation Evidence                                                                                                              |
-| ----------------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| **🛡️ § 1.1 - Secure by Design**           | [ ]       | Minimal attack surface via `SECURITY_ARCHITECTURE.md` (threat model appendix pending)                                                   |
-| **🔒 § 1.2 - Secure by Default**          | [ ]       | Hardened default configurations (baseline checklist pending)                                                                            |
-| **🏷️ § 2.1 - Personal Data Protection**   | [x]       | GDPR alignment via [🏷️ Data Classification Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Data_Classification_Policy.md)       |
-| **🔍 § 2.2 - Vulnerability Disclosure**   | [x]       | Public VDP (`SECURITY.md`) + [⚠️ Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) |
-| **📦 § 2.3 - Software Bill of Materials** | [x]       | Automated SBOM in releases (signed)                                                                                                     |
-| **🔐 § 2.4 - Secure Updates**             | [x]       | Signed build + SBOM attestations (provenance)                                                                                           |
-| **📊 § 2.5 - Security Monitoring**        | [ ]       | Incident handling per [🚨 Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md)            |
-| **📚 § 2.6 - Security Documentation**     | [x]       | User & security guidance docs present                                                                                                   |
+| CRA Annex I Requirement                   | Status                                                                                  | Evidence (Badges / Links)                                                                                                                                                                                                                                                                           |
+| ----------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **🛡️ § 1.1 - Secure by Design**           | ![Partial](https://img.shields.io/badge/Status-Partial-yellow?style=flat-square)        | Architecture & trust boundaries (`docs/architecture/`), [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md), minimal surface principles documented. **Pending:** Threat model appendix (GAP-01).                                           |
+| **🔒 § 1.2 - Secure by Default**          | ![Planned](https://img.shields.io/badge/Status-Planned-lightgrey?style=flat-square)     | Baseline hardening checklist not yet published (GAP-02). Config defaults governed by [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md).                                                                                                  |
+| **🏷️ § 2.1 - Personal Data Protection**   | ![Implemented](https://img.shields.io/badge/Status-Implemented-green?style=flat-square) | [🏷️ Data Classification Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Data_Classification_Policy.md) + classification applied (public data only).                                                                                                                                         |
+| **🔍 § 2.2 - Vulnerability Disclosure**   | ![Implemented](https://img.shields.io/badge/Status-Implemented-green?style=flat-square) | `SECURITY.md` + [⚠️ Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) (48h acknowledge SLA).                                                                                                                                                   |
+| **📦 § 2.3 - Software Bill of Materials** | ![Implemented](https://img.shields.io/badge/Status-Implemented-green?style=flat-square) | Automated SBOM (SPDX) in [Latest Release](https://github.com/Hack23/cia-compliance-manager/releases/latest) (signed) + attested (`*.spdx.json`).                                                                                                                                                    |
+| **🔐 § 2.4 - Secure Updates**             | ![Implemented](https://img.shields.io/badge/Status-Implemented-green?style=flat-square) | Signed build + provenance attestations (SLSA) + [📝 Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md).                                                                                                                                                       |
+| **📊 § 2.5 - Security Monitoring**        | ![Partial](https://img.shields.io/badge/Status-Partial-yellow?style=flat-square)        | Detection & response via [🚨 Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md) + posture metrics ([📊 Security Metrics](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Security_Metrics.md)). **Planned:** Expanded monitoring coverage baseline. |
+| **📚 § 2.6 - Security Documentation**     | ![Implemented](https://img.shields.io/badge/Status-Implemented-green?style=flat-square) | User/security guidance (`docs/`, portal) + public ISMS policies (listed below).                                                                                                                                                                                                                     |
+
+**Legend:** ![Implemented](https://img.shields.io/badge/Implemented-green?style=flat-square) Implemented | ![Partial](https://img.shields.io/badge/Partial-yellow?style=flat-square) Partially implemented (gap scheduled) | ![Planned](https://img.shields.io/badge/Planned-lightgrey?style=flat-square) Planned / scheduled.
+
+**Open Gaps Referenced:** GAP-01 (Threat model appendix), GAP-02 (Secure-by-default checklist) — see Section 9 for schedule.
 
 **🎯 CRA Self-Assessment Status:** IN_PROGRESS
 
@@ -188,18 +191,21 @@ _Supports CRA Article 19 - Conformity Assessment Documentation_
 
 Reference: [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md)
 
-| 🧪 Control                | 🎯 Requirement                        | ✅ Implementation | 📋 Evidence                                |
-| ------------------------- | ------------------------------------- | ----------------- | ------------------------------------------ |
-| 🧪 Unit Testing           | ≥80% line coverage, ≥70% branch       | Active            | CI unit test workflow + coverage artifacts |
-| 🌐 E2E Testing            | Critical user journeys validated      | Active            | Cypress E2E workflow + mochawesome reports |
-| 🔍 SAST Scanning (CodeQL) | Zero critical/high vulnerabilities    | Implemented       | CodeQL workflow (push/PR/schedule)         |
-| 📦 SCA Scanning           | Zero critical unresolved dependencies | Active            | Dependency Review + Dependabot PRs         |
-| 🔒 Secret Scanning        | Zero exposed secrets/credentials      | Active            | GitHub secret scanning (native)            |
-| 🕷️ DAST Scanning          | Zero exploitable high+ findings       | On-Demand         | Manual ZAP scan workflow                   |
-| 📦 SBOM Generation        | SPDX per release                      | Implemented       | Release workflow (Anchore SBOM)            |
-| 🛡️ Provenance             | SLSA Level 3 attestation              | Implemented       | Build & SBOM attestations (intoto)         |
-| 📊 Quality Gates          | SonarCloud quality gate passing       | Planned           | SonarCloud onboarding pending              |
-| 🚦 Performance Budgets    | Budget file passes                    | Active            | Lighthouse CI workflow + `budget.json`     |
+| Control                | Requirement                        | Status      | Evidence (Badges / Links)                                                                                                                                                                                                                                                                                 |
+| ---------------------- | ---------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🧪 Unit Testing        | ≥80% line, ≥70% branch             | Active      | [![CI Tests](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml) [![Coverage](https://img.shields.io/badge/coverage-85%25-yellow.svg)](./docs/coverage/)           |
+| 🌐 E2E Testing         | Critical user journeys validated   | Active      | Included in same workflow: see CI Tests badge + [E2E Plan](./docs/E2ETestPlan.md)                                                                                                                                                                                                                         |
+| 🔍 SAST (CodeQL)       | Zero critical/high vulns           | Implemented | [![CodeQL](https://github.com/Hack23/cia-compliance-manager/actions/workflows/codeql.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/codeql.yml) [Code Scanning Alerts](https://github.com/Hack23/cia-compliance-manager/security/code-scanning)                       |
+| 📦 SCA (Dependencies)  | Zero critical unresolved           | Active      | [![Dependency Review](https://github.com/Hack23/cia-compliance-manager/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/dependency-review.yml) [Dependabot Alerts](https://github.com/Hack23/cia-compliance-manager/network/alerts) |
+| 🔒 Secret Scanning     | Zero exposed secrets               | Active      | [Security Overview](https://github.com/Hack23/cia-compliance-manager/security) (GitHub native)                                                                                                                                                                                                            |
+| 🕷️ DAST (ZAP)          | Zero exploitable high+ (on demand) | On-Demand   | [![ZAP Scan](https://github.com/Hack23/cia-compliance-manager/actions/workflows/zap-scan.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/zap-scan.yml)                                                                                                                 |
+| 📦 SBOM Generation     | SPDX per release                   | Implemented | [![Release](https://img.shields.io/github/v/release/Hack23/cia-compliance-manager?label=latest%20release)](https://github.com/Hack23/cia-compliance-manager/releases/latest) (SBOM asset)                                                                                                                 |
+| 🛡️ Provenance          | SLSA Level 3 attestation           | Implemented | [![SLSA 3](https://slsa.dev/images/gh-badge-level3.svg)](https://github.com/Hack23/cia-compliance-manager/attestations)                                                                                                                                                                                   |
+| 📊 Quality Gates       | SonarCloud quality gate            | Planned     | [SonarCloud Project](https://sonarcloud.io/summary/new_code?id=cia-compliance-manager) (pending onboarding)                                                                                                                                                                                               |
+| 🚦 Performance Budgets | Budget file passes                 | Active      | [![Lighthouse](https://github.com/Hack23/cia-compliance-manager/actions/workflows/lighthouse-performance.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/lighthouse-performance.yml) [budget.json](./budget.json)                                                      |
+| 🔍 Scorecards          | Score >= industry baseline         | Active      | [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compliance-manager/badge)](https://scorecard.dev/viewer/?uri=github.com/Hack23/cia-compliance-manager)                                                                                                            |
+
+_Note:_ Some security pages (alerts, secret scanning) may require appropriate GitHub permissions to view detailed findings. All release artifacts (SBOM, attestations) are published with version {{CURRENT_VERSION}}.
 
 ### 🎖️ **Security & Compliance Badges**
 
