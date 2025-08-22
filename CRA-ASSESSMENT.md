@@ -89,7 +89,7 @@ _Supports CRA Article 6 - Scope and Article 7 - Product Classification Assessmen
 | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | ![Non-commercial OSS](https://img.shields.io/badge/Applicability-Non--commercial_OSS-lightgreen?style=flat-square&logo=github&logoColor=white) | ![Community](https://img.shields.io/badge/Distribution-Community-green?style=flat-square&logo=users&logoColor=white) | ![Standard](https://img.shields.io/badge/CRA-Standard-green?style=flat-square&logo=clipboard-check&logoColor=white) |
 
-**📝 CRA Scope Justification:** Distributed as non‑commercial open source (no revenue). Provides decision support (assessment, visualization) only; no embedded privileged execution or safety‑critical control. Standard CRA product self‑assessment is appropriate.
+**📝 CRA Scope Justification:** Distributed as non-commercial open source (no revenue). Provides decision support (assessment, visualization) only; no embedded privileged execution or safety-critical control. Standard CRA product self-assessment is appropriate.
 
 **🔍 Classification Impact:**
 
