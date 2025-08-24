@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.23**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.24**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelClass**(`level`): `string`
 
-Defined in: [utils/securityLevelUtils.ts:281](https://github.com/Hack23/cia-compliance-manager/blob/55488ba3ac0003e4435eb3634b6ab6e9b8b05a9b/src/utils/securityLevelUtils.ts#L281)
+Defined in: [utils/securityLevelUtils.ts:281](https://github.com/Hack23/cia-compliance-manager/blob/8f5d084752ccee354557e96bf8b49239fb671c91/src/utils/securityLevelUtils.ts#L281)
 
 Determines the appropriate CSS classes for displaying a security level
 
