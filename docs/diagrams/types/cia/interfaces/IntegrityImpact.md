@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.23**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.24**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: IntegrityImpact
 
-Defined in: [types/cia.ts:265](https://github.com/Hack23/cia-compliance-manager/blob/55488ba3ac0003e4435eb3634b6ab6e9b8b05a9b/src/types/cia.ts#L265)
+Defined in: [types/cia.ts:265](https://github.com/Hack23/cia-compliance-manager/blob/8f5d084752ccee354557e96bf8b49239fb671c91/src/types/cia.ts#L265)
 
 Impact associated with the integrity of the system
 
@@ -20,7 +20,7 @@ Impact associated with the integrity of the system
 
 > **dataAccuracy**: `string`
 
-Defined in: [types/cia.ts:266](https://github.com/Hack23/cia-compliance-manager/blob/55488ba3ac0003e4435eb3634b6ab6e9b8b05a9b/src/types/cia.ts#L266)
+Defined in: [types/cia.ts:266](https://github.com/Hack23/cia-compliance-manager/blob/8f5d084752ccee354557e96bf8b49239fb671c91/src/types/cia.ts#L266)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [types/cia.ts:266](https://github.com/Hack23/cia-compliance-manager/
 
 > **description**: `string`
 
-Defined in: [types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/blob/55488ba3ac0003e4435eb3634b6ab6e9b8b05a9b/src/types/cia.ts#L251)
+Defined in: [types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/blob/8f5d084752ccee354557e96bf8b49239fb671c91/src/types/cia.ts#L251)
 
 #### Inherited from
 
@@ -40,7 +40,7 @@ Defined in: [types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/
 
 > **level**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/55488ba3ac0003e4435eb3634b6ab6e9b8b05a9b/src/types/cia.ts#L250)
+Defined in: [types/cia.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/8f5d084752ccee354557e96bf8b49239fb671c91/src/types/cia.ts#L250)
 
 #### Inherited from
 
@@ -52,4 +52,4 @@ Defined in: [types/cia.ts:250](https://github.com/Hack23/cia-compliance-manager/
 
 > **verificationSteps**: `string`
 
-Defined in: [types/cia.ts:267](https://github.com/Hack23/cia-compliance-manager/blob/55488ba3ac0003e4435eb3634b6ab6e9b8b05a9b/src/types/cia.ts#L267)
+Defined in: [types/cia.ts:267](https://github.com/Hack23/cia-compliance-manager/blob/8f5d084752ccee354557e96bf8b49239fb671c91/src/types/cia.ts#L267)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.23**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.24**](../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ValueDisplayProps
 
-Defined in: [components/common/ValueDisplay.tsx:4](https://github.com/Hack23/cia-compliance-manager/blob/55488ba3ac0003e4435eb3634b6ab6e9b8b05a9b/src/components/common/ValueDisplay.tsx#L4)
+Defined in: [components/common/ValueDisplay.tsx:4](https://github.com/Hack23/cia-compliance-manager/blob/8f5d084752ccee354557e96bf8b49239fb671c91/src/components/common/ValueDisplay.tsx#L4)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [components/common/ValueDisplay.tsx:4](https://github.com/Hack23/cia
 
 > `optional` **label**: `string`
 
-Defined in: [components/common/ValueDisplay.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/55488ba3ac0003e4435eb3634b6ab6e9b8b05a9b/src/components/common/ValueDisplay.tsx#L8)
+Defined in: [components/common/ValueDisplay.tsx:8](https://github.com/Hack23/cia-compliance-manager/blob/8f5d084752ccee354557e96bf8b49239fb671c91/src/components/common/ValueDisplay.tsx#L8)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [components/common/ValueDisplay.tsx:8](https://github.com/Hack23/cia
 
 > `optional` **size**: `"sm"` \| `"md"` \| `"lg"`
 
-Defined in: [components/common/ValueDisplay.tsx:7](https://github.com/Hack23/cia-compliance-manager/blob/55488ba3ac0003e4435eb3634b6ab6e9b8b05a9b/src/components/common/ValueDisplay.tsx#L7)
+Defined in: [components/common/ValueDisplay.tsx:7](https://github.com/Hack23/cia-compliance-manager/blob/8f5d084752ccee354557e96bf8b49239fb671c91/src/components/common/ValueDisplay.tsx#L7)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [components/common/ValueDisplay.tsx:7](https://github.com/Hack23/cia
 
 > `optional` **testId**: `string`
 
-Defined in: [components/common/ValueDisplay.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/55488ba3ac0003e4435eb3634b6ab6e9b8b05a9b/src/components/common/ValueDisplay.tsx#L9)
+Defined in: [components/common/ValueDisplay.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/8f5d084752ccee354557e96bf8b49239fb671c91/src/components/common/ValueDisplay.tsx#L9)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [components/common/ValueDisplay.tsx:9](https://github.com/Hack23/cia
 
 > **value**: `string` \| `number`
 
-Defined in: [components/common/ValueDisplay.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/55488ba3ac0003e4435eb3634b6ab6e9b8b05a9b/src/components/common/ValueDisplay.tsx#L5)
+Defined in: [components/common/ValueDisplay.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/8f5d084752ccee354557e96bf8b49239fb671c91/src/components/common/ValueDisplay.tsx#L5)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [components/common/ValueDisplay.tsx:5](https://github.com/Hack23/cia
 
 > `optional` **variant**: `"success"` \| `"info"` \| `"warning"` \| `"primary"` \| `"danger"`
 
-Defined in: [components/common/ValueDisplay.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/55488ba3ac0003e4435eb3634b6ab6e9b8b05a9b/src/components/common/ValueDisplay.tsx#L6)
+Defined in: [components/common/ValueDisplay.tsx:6](https://github.com/Hack23/cia-compliance-manager/blob/8f5d084752ccee354557e96bf8b49239fb671c91/src/components/common/ValueDisplay.tsx#L6)
