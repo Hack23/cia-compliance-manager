@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.24**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.25**](../../../README.md)
 
 ***
 
@@ -8,11 +8,11 @@
 
 > `const` **industryValueInsights**: `object`
 
-Defined in: [data/valueCreationData.ts:421](https://github.com/Hack23/cia-compliance-manager/blob/8f5d084752ccee354557e96bf8b49239fb671c91/src/data/valueCreationData.ts#L421)
+Defined in: [data/valueCreationData.ts:421](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/data/valueCreationData.ts#L421)
 
 Enhanced industry-specific value creation insights
 
-## Type declaration
+## Type Declaration
 
 ### financial
 

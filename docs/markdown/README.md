@@ -1,4 +1,4 @@
-**CIA Compliance Manager Documentation v0.8.24**
+**CIA Compliance Manager Documentation v0.8.25**
 
 ***
 
