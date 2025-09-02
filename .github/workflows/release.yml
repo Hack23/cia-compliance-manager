@@ -293,7 +293,8 @@ jobs:
           tag: ${{ needs.prepare.outputs.version }}
           name: CIA Compliance Manager ${{ needs.prepare.outputs.version }}
           body: ${{ steps.release-drafter.outputs.body }}
-          generateReleaseNotes: true
+          generateReleaseNotes: false
+          immutableCreate: true
           draft: false
           prerelease: ${{ needs.prepare.outputs.is_prerelease }}
           artifacts: |
