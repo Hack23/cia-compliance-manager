@@ -213,7 +213,7 @@ jobs:
           artifact-name: cia-compliance-manager-${{ needs.prepare.outputs.version }}
 
       - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be # v2.4.0
+        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # v3.0.0
         id: attest
         with:
           subject-path: cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip
@@ -223,7 +223,7 @@ jobs:
 
       - name: Generate SBOM attestation
         id: attestsbom
-        uses: actions/attest-sbom@bd218ad0dbcb3e146bd073d1d9c6d78e08aa8a0b # v2.4.0
+        uses: actions/attest-sbom@4651f806c01d8637787e274ac3bdf724ef169f34 # v3.0.0
         with:
           subject-path: cia-compliance-manager-${{ needs.prepare.outputs.version }}.zip
           sbom-path: cia-compliance-manager-${{ needs.prepare.outputs.version }}.spdx.json
@@ -288,12 +288,13 @@ jobs:
 
       # Create GitHub Release with all artifacts
       - name: Create GitHub Release
-        uses: ncipollo/release-action@bcfe5470707e8832e12347755757cec0eb3c22af # v1.18.0
+        uses: ncipollo/release-action@98d25d4189e9b6cee19b8635b1ea5cc39c158a41 # v1.19.2
         with:
           tag: ${{ needs.prepare.outputs.version }}
           name: CIA Compliance Manager ${{ needs.prepare.outputs.version }}
           body: ${{ steps.release-drafter.outputs.body }}
-          generateReleaseNotes: true
+          generateReleaseNotes: false
+          immutableCreate: true
           draft: false
           prerelease: ${{ needs.prepare.outputs.is_prerelease }}
           artifacts: |

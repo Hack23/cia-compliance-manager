@@ -52,6 +52,11 @@ Experience the CIA Compliance Manager in action by testing the application here:
 [![Scorecard supply-chain security](https://github.com/Hack23/cia-compliance-manager/actions/workflows/scorecards.yml/badge.svg?branch=main)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/scorecards.yml)
 [![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/Hack23/cia-compliance-manager.svg)](https://isitmaintained.com/project/Hack23/cia-compliance-manager "Average time to resolve an issue")
 [![Percentage of issues still open](https://isitmaintained.com/badge/open/Hack23/cia-compliance-manager.svg)](https://isitmaintained.com/project/Hack23/cia-compliance-manager "Percentage of issues still open")
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
 
 
 ## 🔐 Commitment to Transparency and Security
