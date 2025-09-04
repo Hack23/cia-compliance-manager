@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "@eslint/js": "9.34.0",
-    "@tailwindcss/postcss": "4.1.12",
+    "@tailwindcss/postcss": "4.1.13",
     "@testing-library/cypress": "^10.1.0",
     "@testing-library/jest-dom": "6.8.0",
     "@testing-library/react": "16.3.0",
