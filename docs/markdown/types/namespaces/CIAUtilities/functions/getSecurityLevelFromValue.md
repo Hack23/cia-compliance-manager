@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.25**](../../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.26**](../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelFromValue**(`value`): [`SecurityLevel`](../../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.utility.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/types/cia.utility.ts#L42)
+Defined in: [types/cia.utility.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/cia.utility.ts#L42)
 
 Get security level based on numeric value
 

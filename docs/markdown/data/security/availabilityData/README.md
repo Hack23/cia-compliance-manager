@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.25**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.26**](../../../README.md)
 
 ***
 

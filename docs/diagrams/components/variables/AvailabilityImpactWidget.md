@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.25**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.26**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **AvailabilityImpactWidget**: `React.FC`\<`AvailabilityImpactWidgetProps`\>
 
-Defined in: [components/widgets/impactanalysis/AvailabilityImpactWidget.tsx:72](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/components/widgets/impactanalysis/AvailabilityImpactWidget.tsx#L72)
+Defined in: [components/widgets/impactanalysis/AvailabilityImpactWidget.tsx:72](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/components/widgets/impactanalysis/AvailabilityImpactWidget.tsx#L72)
 
 Widget that displays the impact of selected availability level
 
