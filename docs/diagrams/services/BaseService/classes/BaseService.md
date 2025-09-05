@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.25**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.26**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: BaseService
 
-Defined in: [services/BaseService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/services/BaseService.ts#L26)
+Defined in: [services/BaseService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/services/BaseService.ts#L26)
 
 Base service class that provides common functionality
 for security-related services
@@ -31,7 +31,7 @@ for security-related services
 
 > **new BaseService**(`dataProvider`): `BaseService`
 
-Defined in: [services/BaseService.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/services/BaseService.ts#L37)
+Defined in: [services/BaseService.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/services/BaseService.ts#L37)
 
 Create a new service instance
 
@@ -53,7 +53,7 @@ Data provider for security information
 
 > **getComponentDetails**(`component`, `level`): `undefined` \| [`CIADetails`](../../../types/interfaces/CIADetails.md)
 
-Defined in: [services/BaseService.ts:53](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/services/BaseService.ts#L53)
+Defined in: [services/BaseService.ts:53](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/services/BaseService.ts#L53)
 
 Get component details for a specific component and security level
 
@@ -81,7 +81,7 @@ Get component details for a specific component and security level
 
 > **getRiskLevelFromSecurityLevel**(`level`): `string`
 
-Defined in: [services/BaseService.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/services/BaseService.ts#L114)
+Defined in: [services/BaseService.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/services/BaseService.ts#L114)
 
 Get risk level from security level
 
@@ -105,7 +105,7 @@ Get risk level from security level
 
 > **getSecurityLevelDescription**(`level`): `string`
 
-Defined in: [services/BaseService.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/services/BaseService.ts#L93)
+Defined in: [services/BaseService.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/services/BaseService.ts#L93)
 
 Get security level description
 

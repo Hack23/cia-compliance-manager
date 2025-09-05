@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.25**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.26**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isWidgetConfig**: (`obj`) => `boolean`
 
-Defined in: [utils/index.ts:190](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/utils/index.ts#L190)
+Defined in: [utils/index.ts:190](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/utils/index.ts#L190)
 
 Checks if an object is a valid widget config
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.25**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.26**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityLevelSelectorProps
 
-Defined in: [types/widgets.ts:457](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/types/widgets.ts#L457)
+Defined in: [types/widgets.ts:457](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/widgets.ts#L457)
 
 Props for security level selector components
 
@@ -25,7 +25,7 @@ providing immediate feedback on the impact of their choices. 🎚️
 
 > `optional` **className**: `string`
 
-Defined in: [types/widgets.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/types/widgets.ts#L68)
+Defined in: [types/widgets.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/widgets.ts#L68)
 
 Optional CSS class name
 
@@ -39,7 +39,7 @@ Optional CSS class name
 
 > `optional` **compact**: `boolean`
 
-Defined in: [types/widgets.ts:486](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/types/widgets.ts#L486)
+Defined in: [types/widgets.ts:486](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/widgets.ts#L486)
 
 Whether to use compact layout
 
@@ -49,7 +49,7 @@ Whether to use compact layout
 
 > **component**: `"confidentiality"` \| `"integrity"` \| `"availability"`
 
-Defined in: [types/widgets.ts:471](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/types/widgets.ts#L471)
+Defined in: [types/widgets.ts:471](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/widgets.ts#L471)
 
 The CIA component this selector controls
 
@@ -59,7 +59,7 @@ The CIA component this selector controls
 
 > `optional` **disabled**: `boolean`
 
-Defined in: [types/widgets.ts:491](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/types/widgets.ts#L491)
+Defined in: [types/widgets.ts:491](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/widgets.ts#L491)
 
 Whether the selector is disabled
 
@@ -69,7 +69,7 @@ Whether the selector is disabled
 
 > `optional` **highlight**: `boolean`
 
-Defined in: [types/widgets.ts:481](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/types/widgets.ts#L481)
+Defined in: [types/widgets.ts:481](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/widgets.ts#L481)
 
 Whether to highlight the selector
 
@@ -79,7 +79,7 @@ Whether to highlight the selector
 
 > `optional` **mode**: `"horizontal"` \| `"vertical"`
 
-Defined in: [types/widgets.ts:476](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/types/widgets.ts#L476)
+Defined in: [types/widgets.ts:476](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/widgets.ts#L476)
 
 Layout orientation
 
@@ -89,7 +89,7 @@ Layout orientation
 
 > **onLevelChange**: (`level`) => `void`
 
-Defined in: [types/widgets.ts:466](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/types/widgets.ts#L466)
+Defined in: [types/widgets.ts:466](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/widgets.ts#L466)
 
 Callback when level changes
 
@@ -109,7 +109,7 @@ Callback when level changes
 
 > `optional` **securityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/types/widgets.ts#L78)
+Defined in: [types/widgets.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/widgets.ts#L78)
 
 Optional security level for widgets that only need one level
 
@@ -123,7 +123,7 @@ Optional security level for widgets that only need one level
 
 > **selectedLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:461](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/types/widgets.ts#L461)
+Defined in: [types/widgets.ts:461](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/widgets.ts#L461)
 
 Currently selected security level
 
@@ -133,7 +133,7 @@ Currently selected security level
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widgets.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/types/widgets.ts#L73)
+Defined in: [types/widgets.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/widgets.ts#L73)
 
 Optional test ID for testing
 

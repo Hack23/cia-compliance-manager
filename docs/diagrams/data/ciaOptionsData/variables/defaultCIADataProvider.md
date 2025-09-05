@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.25**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.26**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **defaultCIADataProvider**: [`CIADataProvider`](../../../types/interfaces/CIADataProvider.md)
 
-Defined in: [data/ciaOptionsData.ts:274](https://github.com/Hack23/cia-compliance-manager/blob/b7816746b3b7f5e02cb18303af9cc6696a8caef9/src/data/ciaOptionsData.ts#L274)
+Defined in: [data/ciaOptionsData.ts:274](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/data/ciaOptionsData.ts#L274)
 
 Default CIA Options Data Provider
