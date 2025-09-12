@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.26**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.27**](../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > **RiskLevel** = `"Critical Risk"` \| `"High Risk"` \| `"Medium Risk"` \| `"Low Risk"` \| `"Minimal Risk"` \| `"Unknown Risk"`
 
-Defined in: [utils/riskUtils.ts:232](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/utils/riskUtils.ts#L232)
+Defined in: [utils/riskUtils.ts:232](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/utils/riskUtils.ts#L232)

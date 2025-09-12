@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.26**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.27**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **TechnicalDetailsWidget**: `React.FC`\<`TechnicalDetailsWidgetProps`\>
 
-Defined in: [components/widgets/implementationguide/TechnicalDetailsWidget.tsx:51](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/components/widgets/implementationguide/TechnicalDetailsWidget.tsx#L51)
+Defined in: [components/widgets/implementationguide/TechnicalDetailsWidget.tsx:51](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/components/widgets/implementationguide/TechnicalDetailsWidget.tsx#L51)
 
 Widget that displays detailed technical implementation requirements
 

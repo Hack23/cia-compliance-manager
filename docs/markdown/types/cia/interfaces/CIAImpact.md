@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.26**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.27**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIAImpact
 
-Defined in: [types/cia.ts:281](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/cia.ts#L281)
+Defined in: [types/cia.ts:281](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/types/cia.ts#L281)
 
 Complete CIA impact model
 
@@ -16,7 +16,7 @@ Complete CIA impact model
 
 > **availability**: [`AvailabilityImpact`](AvailabilityImpact.md)
 
-Defined in: [types/cia.ts:282](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/cia.ts#L282)
+Defined in: [types/cia.ts:282](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/types/cia.ts#L282)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [types/cia.ts:282](https://github.com/Hack23/cia-compliance-manager/
 
 > **confidentiality**: [`ConfidentialityImpact`](ConfidentialityImpact.md)
 
-Defined in: [types/cia.ts:284](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/cia.ts#L284)
+Defined in: [types/cia.ts:284](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/types/cia.ts#L284)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [types/cia.ts:284](https://github.com/Hack23/cia-compliance-manager/
 
 > **integrity**: [`IntegrityImpact`](IntegrityImpact.md)
 
-Defined in: [types/cia.ts:283](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/cia.ts#L283)
+Defined in: [types/cia.ts:283](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/types/cia.ts#L283)

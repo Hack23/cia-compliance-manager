@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.26**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.27**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **INDUSTRY\_COST\_FACTORS**: `object`
 
-Defined in: [constants/costConstants.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/constants/costConstants.ts#L42)
+Defined in: [constants/costConstants.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/constants/costConstants.ts#L42)
 
 Industry-specific cost factors that adjust implementation costs
 

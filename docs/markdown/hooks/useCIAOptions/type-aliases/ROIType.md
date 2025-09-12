@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.26**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.27**](../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > **ROIType** = `"NONE"` \| `"LOW"` \| `"MODERATE"` \| `"HIGH"` \| `"VERY_HIGH"`
 
-Defined in: [hooks/useCIAOptions.ts:3](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/hooks/useCIAOptions.ts#L3)
+Defined in: [hooks/useCIAOptions.ts:3](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/hooks/useCIAOptions.ts#L3)

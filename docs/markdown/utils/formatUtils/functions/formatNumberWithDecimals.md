@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.26**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.27**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **formatNumberWithDecimals**(`value`, `decimalPlaces`): `string`
 
-Defined in: [utils/formatUtils.ts:161](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/utils/formatUtils.ts#L161)
+Defined in: [utils/formatUtils.ts:161](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/utils/formatUtils.ts#L161)
 
 Format a number with specified decimal places
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.26**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.27**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ROIData
 
-Defined in: [hooks/useCIAOptions.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/hooks/useCIAOptions.ts#L5)
+Defined in: [hooks/useCIAOptions.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/hooks/useCIAOptions.ts#L5)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [hooks/useCIAOptions.ts:5](https://github.com/Hack23/cia-compliance-
 
 > `optional` **breakEvenPeriod**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/hooks/useCIAOptions.ts#L11)
+Defined in: [hooks/useCIAOptions.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/hooks/useCIAOptions.ts#L11)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [hooks/useCIAOptions.ts:11](https://github.com/Hack23/cia-compliance
 
 > **description**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/hooks/useCIAOptions.ts#L8)
+Defined in: [hooks/useCIAOptions.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/hooks/useCIAOptions.ts#L8)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [hooks/useCIAOptions.ts:8](https://github.com/Hack23/cia-compliance-
 
 > `optional` **potentialSavings**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/hooks/useCIAOptions.ts#L10)
+Defined in: [hooks/useCIAOptions.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/hooks/useCIAOptions.ts#L10)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [hooks/useCIAOptions.ts:10](https://github.com/Hack23/cia-compliance
 
 > **recommendation**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/hooks/useCIAOptions.ts#L7)
+Defined in: [hooks/useCIAOptions.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/hooks/useCIAOptions.ts#L7)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [hooks/useCIAOptions.ts:7](https://github.com/Hack23/cia-compliance-
 
 > **returnRate**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/hooks/useCIAOptions.ts#L6)
+Defined in: [hooks/useCIAOptions.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/hooks/useCIAOptions.ts#L6)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [hooks/useCIAOptions.ts:6](https://github.com/Hack23/cia-compliance-
 
 > `optional` **value**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/hooks/useCIAOptions.ts#L9)
+Defined in: [hooks/useCIAOptions.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/hooks/useCIAOptions.ts#L9)

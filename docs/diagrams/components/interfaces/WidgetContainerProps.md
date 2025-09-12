@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.26**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.27**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetContainerProps
 
-Defined in: [types/componentPropExports.ts:230](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/componentPropExports.ts#L230)
+Defined in: [types/componentPropExports.ts:230](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/types/componentPropExports.ts#L230)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:230](https://github.com/Hack23/cia-co
 
 > **children**: `ReactNode`
 
-Defined in: [types/componentPropExports.ts:231](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/componentPropExports.ts#L231)
+Defined in: [types/componentPropExports.ts:231](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/types/componentPropExports.ts#L231)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types/componentPropExports.ts:231](https://github.com/Hack23/cia-co
 
 > `optional` **className**: `string`
 
-Defined in: [types/componentPropExports.ts:232](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/componentPropExports.ts#L232)
+Defined in: [types/componentPropExports.ts:232](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/types/componentPropExports.ts#L232)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [types/componentPropExports.ts:232](https://github.com/Hack23/cia-co
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:233](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/types/componentPropExports.ts#L233)
+Defined in: [types/componentPropExports.ts:233](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/types/componentPropExports.ts#L233)

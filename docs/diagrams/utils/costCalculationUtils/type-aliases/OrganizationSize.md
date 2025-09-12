@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.26**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.27**](../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > **OrganizationSize** = `"small"` \| `"medium"` \| `"large"` \| `"enterprise"`
 
-Defined in: [utils/costCalculationUtils.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/utils/costCalculationUtils.ts#L19)
+Defined in: [utils/costCalculationUtils.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/utils/costCalculationUtils.ts#L19)

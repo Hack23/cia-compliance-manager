@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.26**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.27**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **calculateImplementationCost**(`securityLevel`, `orgSize`, `industry`): `CostResult`
 
-Defined in: [utils/costCalculationUtils.ts:88](https://github.com/Hack23/cia-compliance-manager/blob/168f1311621722afef33b264085d8ac99d4a3213/src/utils/costCalculationUtils.ts#L88)
+Defined in: [utils/costCalculationUtils.ts:88](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/utils/costCalculationUtils.ts#L88)
 
 Calculate implementation cost based on security level
 
