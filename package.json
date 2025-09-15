@@ -93,7 +93,7 @@
     "license-compliance": "3.0.1",
     "madge": "^8.0.0",
     "mocha-junit-reporter": "2.2.1",
-    "mochawesome": "7.1.3",
+    "mochawesome": "7.1.4",
     "mochawesome-merge": "5.0.0",
     "mochawesome-report-generator": "6.2.0",
     "postcss": "^8.5.6",
