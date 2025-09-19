@@ -12,12 +12,12 @@
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/Owner-Development_Team-0A66C2?style=for-the-badge" alt="Owner"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Version-1.0-555?style=for-the-badge" alt="Version"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Effective-2025--01--23-success?style=for-the-badge" alt="Effective Date"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Effective-2025--09--19-success?style=for-the-badge" alt="Effective Date"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Review-Quarterly-orange?style=for-the-badge" alt="Review Cycle"/></a>
 </p>
 
-**📋 Document Owner:** Development Team | **📄 Version:** 1.0 | **📅 Last Updated:** 2025-01-23 (UTC)  
-**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2025-04-23
+**📋 Document Owner:** Development Team | **📄 Version:** 1.0 | **📅 Last Updated:** 2025-09-19 (UTC)  
+**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2025-12-19
 
 ---
 
@@ -592,6 +592,6 @@ graph TB
 **✅ Approved by:** Development Team  
 **📤 Distribution:** Public  
 **🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-lightgrey?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
-**📅 Effective Date:** 2025-01-23  
-**⏰ Next Review:** 2025-04-23  
+**📅 Effective Date:** 2025-09-19  
+**⏰ Next Review:** 2025-12-19  
 **🎯 Compliance:** [![Modern Development](https://img.shields.io/badge/Compliance-Modern_Development-blue?style=flat-square)](https://react.dev/) [![Security Best Practices](https://img.shields.io/badge/Security-Best_Practices-green?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) [![Bleeding Edge](https://img.shields.io/badge/Strategy-Bleeding_Edge-purple?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md)
