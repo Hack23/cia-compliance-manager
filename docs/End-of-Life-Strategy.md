@@ -118,6 +118,67 @@ mindmap
 
 ---
 
+## ⏰ **End-of-Life Tracking & Monitoring**
+
+### **📊 Technology EOL Dashboard**
+
+Real-time monitoring using [endoflife.date](https://endoflife.date/) references and automated tracking:
+
+```mermaid
+gantt
+    title CIA Compliance Manager Technology End-of-Life Timeline (2025-2030)
+    dateFormat YYYY-MM-DD
+    axisFormat %Y
+
+    section Runtime & Core
+    Node.js 24.x LTS          :active, node24, 2024-10-29, 2027-04-30
+    Node.js 26.x LTS (Target) :node26, 2025-10-28, 2028-04-30
+    Node.js 28.x LTS (Future) :node28, 2027-10-28, 2030-04-30
+
+    section Frontend Framework
+    React 19.x                :active, react19, 2024-12-05, 2027-12-31
+    React 20.x (Future)       :react20, 2025-12-01, 2028-12-31
+    React 21.x (Future)       :react21, 2026-12-01, 2029-12-31
+
+    section Build & Tooling
+    Vite 6.x                  :active, vite6, 2024-12-03, 2025-12-31
+    Vite 7.x (Future)         :vite7, 2025-06-01, 2026-12-31
+    TypeScript 5.x            :active, ts5, 2024-03-16, 2025-09-30
+    TypeScript 6.x (Future)   :ts6, 2025-03-01, 2026-09-30
+
+    section Visualization
+    Chart.js 4.x              :active, chartjs4, 2024-01-01, 2026-12-31
+    Chart.js 5.x (Future)     :chartjs5, 2025-06-01, 2027-06-01
+    TailwindCSS 4.x           :active, tailwind4, 2024-12-01, 2025-12-01
+
+    section Critical Milestones
+    Node.js 24 Migration Alert :milestone, node24alert, 2026-04-30, 0d
+    React 19 Assessment       :milestone, react19assess, 2026-12-01, 0d
+    Major Stack Review        :milestone, stackreview, 2027-01-01, 0d
+```
+
+### **🚨 EOL Warning System**
+
+#### **📊 Automated EOL Monitoring**
+
+- **⏰ 24-Month Early Warning:** Initial migration planning phase
+- **⚠️ 18-Month Alert:** Active migration preparation required
+- **🚨 12-Month Critical:** Migration implementation must begin
+- **⛔ 6-Month Emergency:** Final migration deadline approach
+- **🔴 EOL Reached:** Immediate security risk assessment required
+
+#### **📋 EOL Response Procedures**
+
+| Warning Level | Timeline | Actions Required | Escalation |
+|---------------|----------|------------------|------------|
+| **🟢 Early Warning** | 24+ months | Technology assessment, alternative evaluation | [![Low Priority](https://img.shields.io/badge/Priority-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **🟡 Planning Phase** | 18+ months | Migration strategy development, testing plan | [![Medium Priority](https://img.shields.io/badge/Priority-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **🟠 Implementation** | 12+ months | Active migration, compatibility testing | [![High Priority](https://img.shields.io/badge/Priority-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **🔴 Critical Phase** | 6+ months | Final testing, production migration | [![Critical Priority](https://img.shields.io/badge/Priority-Critical-red?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+| **⛔ Emergency** | <6 months | Security assessment, risk acceptance | [![Emergency](https://img.shields.io/badge/Priority-Emergency-darkred?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
+
+---
+
 ## ☕ **Node.js 24 → 26 Transition Strategy**
 
 ### **🎯 Strategic Node.js Lifecycle Management**
@@ -125,20 +186,8 @@ mindmap
 Following [Hack23 AB's Proactive Runtime Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md#proactive-runtime--operations-management), CIA Compliance Manager implements a **current-version-first** approach for optimal security and performance.
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryColor': '#fff3e0',
-      'primaryTextColor': '#e65100',
-      'lineColor': '#ff9800',
-      'secondaryColor': '#e8f5e9',
-      'tertiaryColor': '#fff8e1'
-    }
-  }
-}%%
 gantt
-    title ☕ Node.js Lifecycle & CIA Compliance Manager Transition Timeline
+    title Node.js Lifecycle & CIA Compliance Manager Transition Timeline
     dateFormat YYYY-MM-DD
     axisFormat %Y-%m
 
@@ -147,21 +196,21 @@ gantt
     Node.js 24.x LTS        :active, node24lts, 2024-10-29, 2027-04-30
     Node.js 25.x Current    :node25, 2024-10-22, 2025-04-01
     Node.js 26.x Current    :node26, 2025-04-22, 2025-10-28
-    Node.js 26.x LTS        :milestone, node26lts, 2025-10-28, 2025-10-30
-    Node.js 24.x EOL        :crit, node24eol, 2027-04-30, 2027-05-02
+    Node.js 26.x LTS        :milestone, node26lts, 2025-10-28, 0d
+    Node.js 24.x EOL        :crit, node24eol, 2027-04-30, 0d
 
     section CIA Compliance Manager Strategy
     Current Node 24.x Production :active, cm24prod, 2024-12-01, 2026-10-01
-    Node.js 26.x Testing Phase   :testing, cm26test, 2025-08-01, 2025-10-28
-    Node.js 26.x Migration       :migration, cm26mig, 2025-10-28, 2026-01-31
+    Node.js 26.x Testing Phase   :cm26test, 2025-08-01, 2025-10-28
+    Node.js 26.x Migration       :cm26mig, 2025-10-28, 2026-01-31
     Node.js 26.x Production      :prod26, 2026-01-31, 2027-04-30
-    Legacy 24.x Support End      :milestone, legacy24end, 2026-10-01, 2026-10-03
+    Legacy 24.x Support End      :milestone, legacy24end, 2026-10-01, 0d
 
     section Risk Management
-    Compatibility Testing       :testing, compat, 2025-06-01, 2025-10-28
-    Dependency Validation       :testing, deps, 2025-07-01, 2025-10-28
-    Performance Benchmarking    :testing, perf, 2025-08-01, 2025-10-28
-    Migration Risk Assessment    :milestone, riskassess, 2025-09-15, 2025-09-17
+    Compatibility Testing       :compat, 2025-06-01, 2025-10-28
+    Dependency Validation       :deps, 2025-07-01, 2025-10-28
+    Performance Benchmarking    :perf, 2025-08-01, 2025-10-28
+    Migration Risk Assessment    :milestone, riskassess, 2025-09-15, 0d
 ```
 
 ### **📋 Node.js Transition Trigger Conditions**
@@ -244,79 +293,6 @@ flowchart TB
 | **🔧 Build System Changes** | [![Medium](https://img.shields.io/badge/Risk-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![Medium](https://img.shields.io/badge/Impact-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Vite + ESBuild compatibility testing | Build process unchanged |
 | **🌐 Runtime API Changes** | [![Low](https://img.shields.io/badge/Risk-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![Low](https://img.shields.io/badge/Impact-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | API compatibility validation | All APIs function correctly |
 | **🔒 Security Control Impact** | [![Low](https://img.shields.io/badge/Risk-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | [![High](https://img.shields.io/badge/Impact-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) | Security scanning + attestation | Security posture maintained |
-
----
-
-## ⏰ **End-of-Life Tracking & Monitoring**
-
-### **📊 Technology EOL Dashboard**
-
-Real-time monitoring using [endoflife.date](https://endoflife.date/) references and automated tracking:
-
-```mermaid
-%%{
-  init: {
-    'theme': 'base',
-    'themeVariables': {
-      'primaryColor': '#ffebee',
-      'primaryTextColor': '#c62828',
-      'lineColor': '#f44336',
-      'secondaryColor': '#e8f5e9',
-      'tertiaryColor': '#fff3e0'
-    }
-  }
-}%%
-gantt
-    title 📅 CIA Compliance Manager Technology End-of-Life Timeline (2025-2030)
-    dateFormat YYYY-MM-DD
-    axisFormat %Y
-
-    section Runtime & Core
-    Node.js 24.x LTS          :active, node24, 2024-10-29, 2027-04-30
-    Node.js 26.x LTS (Target) :future, node26, 2025-10-28, 2028-04-30
-    Node.js 28.x LTS (Future) :future, node28, 2027-10-28, 2030-04-30
-
-    section Frontend Framework
-    React 19.x                :active, react19, 2024-12-05, 2027-12-31
-    React 20.x (Future)       :future, react20, 2025-12-01, 2028-12-31
-    React 21.x (Future)       :future, react21, 2026-12-01, 2029-12-31
-
-    section Build & Tooling
-    Vite 6.x                  :active, vite6, 2024-12-03, 2025-12-31
-    Vite 7.x (Future)         :future, vite7, 2025-06-01, 2026-12-31
-    TypeScript 5.x            :active, ts5, 2024-03-16, 2025-09-30
-    TypeScript 6.x (Future)   :future, ts6, 2025-03-01, 2026-09-30
-
-    section Visualization
-    Chart.js 4.x              :active, chartjs4, 2024-01-01, 2026-12-31
-    Chart.js 5.x (Future)     :future, chartjs5, 2025-06-01, 2027-06-01
-    TailwindCSS 4.x           :active, tailwind4, 2024-12-01, 2025-12-01
-
-    section Critical Milestones
-    Node.js 24 Migration Alert :milestone, node24alert, 2026-04-30, 2026-05-02
-    React 19 Assessment       :milestone, react19assess, 2026-12-01, 2026-12-03
-    Major Stack Review        :milestone, stackreview, 2027-01-01, 2027-01-03
-```
-
-### **🚨 EOL Warning System**
-
-#### **📊 Automated EOL Monitoring**
-
-- **⏰ 24-Month Early Warning:** Initial migration planning phase
-- **⚠️ 18-Month Alert:** Active migration preparation required
-- **🚨 12-Month Critical:** Migration implementation must begin
-- **⛔ 6-Month Emergency:** Final migration deadline approach
-- **🔴 EOL Reached:** Immediate security risk assessment required
-
-#### **📋 EOL Response Procedures**
-
-| Warning Level | Timeline | Actions Required | Escalation |
-|---------------|----------|------------------|------------|
-| **🟢 Early Warning** | 24+ months | Technology assessment, alternative evaluation | [![Low Priority](https://img.shields.io/badge/Priority-Low-lightgreen?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
-| **🟡 Planning Phase** | 18+ months | Migration strategy development, testing plan | [![Medium Priority](https://img.shields.io/badge/Priority-Medium-yellow?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
-| **🟠 Implementation** | 12+ months | Active migration, compatibility testing | [![High Priority](https://img.shields.io/badge/Priority-High-orange?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
-| **🔴 Critical Phase** | 6+ months | Final testing, production migration | [![Critical Priority](https://img.shields.io/badge/Priority-Critical-red?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
-| **⛔ Emergency** | <6 months | Security assessment, risk acceptance | [![Emergency](https://img.shields.io/badge/Priority-Emergency-darkred?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) |
 
 ---
 
