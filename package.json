@@ -97,7 +97,7 @@
     "mochawesome-merge": "5.0.0",
     "mochawesome-report-generator": "6.3.0",
     "postcss": "^8.5.6",
-    "start-server-and-test": "^2.1.1",
+    "start-server-and-test": "^2.1.2",
     "tailwindcss": "^4.1.13",
     "typedoc": "^0.28.13",
     "typedoc-plugin-markdown": "^4.8.1",
