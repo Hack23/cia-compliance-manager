@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.27**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.28**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isString**: (`value`) => `value is string`
 
-Defined in: [utils/index.ts:188](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/utils/index.ts#L188)
+Defined in: [utils/index.ts:188](https://github.com/Hack23/cia-compliance-manager/blob/7619f76b35999bc4eb3f6ff6c1e77c13be78f250/src/utils/index.ts#L188)
 
 Type guard to check if a value is a string
 

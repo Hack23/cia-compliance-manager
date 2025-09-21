@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.27**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.28**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **SECURITY\_LEVEL\_FROM\_VALUE**: [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)[]
 
-Defined in: [constants/securityLevels.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/constants/securityLevels.ts#L30)
+Defined in: [constants/securityLevels.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/7619f76b35999bc4eb3f6ff6c1e77c13be78f250/src/constants/securityLevels.ts#L30)
 
 Maps integer values back to security levels

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.27**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.28**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **integrityOptions**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIADetails`](../../../types/interfaces/CIADetails.md)\> = `integrityData`
 
-Defined in: [data/ciaOptionsData.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/data/ciaOptionsData.ts#L22)
+Defined in: [data/ciaOptionsData.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/7619f76b35999bc4eb3f6ff6c1e77c13be78f250/src/data/ciaOptionsData.ts#L22)
 
 Integrity options derived from security module.
 Ensures data integrity and accuracy.

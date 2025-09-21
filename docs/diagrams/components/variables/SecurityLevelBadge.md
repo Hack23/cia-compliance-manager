@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.27**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.28**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **SecurityLevelBadge**: `React.FC`\<`SecurityLevelBadgeProps`\>
 
-Defined in: [components/common/SecurityLevelBadge.tsx:45](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/components/common/SecurityLevelBadge.tsx#L45)
+Defined in: [components/common/SecurityLevelBadge.tsx:45](https://github.com/Hack23/cia-compliance-manager/blob/7619f76b35999bc4eb3f6ff6c1e77c13be78f250/src/components/common/SecurityLevelBadge.tsx#L45)
 
 Displays a security level in a badge format
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.27**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.28**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ComplianceGap
 
-Defined in: [types/compliance.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/types/compliance.ts#L114)
+Defined in: [types/compliance.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/7619f76b35999bc4eb3f6ff6c1e77c13be78f250/src/types/compliance.ts#L114)
 
 Interface for individual compliance gap
 
@@ -16,7 +16,7 @@ Interface for individual compliance gap
 
 > **components**: `object`
 
-Defined in: [types/compliance.ts:128](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/types/compliance.ts#L128)
+Defined in: [types/compliance.ts:128](https://github.com/Hack23/cia-compliance-manager/blob/7619f76b35999bc4eb3f6ff6c1e77c13be78f250/src/types/compliance.ts#L128)
 
 Component-specific gap details
 
@@ -74,7 +74,7 @@ Component-specific gap details
 
 > **framework**: `string`
 
-Defined in: [types/compliance.ts:118](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/types/compliance.ts#L118)
+Defined in: [types/compliance.ts:118](https://github.com/Hack23/cia-compliance-manager/blob/7619f76b35999bc4eb3f6ff6c1e77c13be78f250/src/types/compliance.ts#L118)
 
 Framework name
 
@@ -84,7 +84,7 @@ Framework name
 
 > **frameworkDescription**: `string`
 
-Defined in: [types/compliance.ts:123](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/types/compliance.ts#L123)
+Defined in: [types/compliance.ts:123](https://github.com/Hack23/cia-compliance-manager/blob/7619f76b35999bc4eb3f6ff6c1e77c13be78f250/src/types/compliance.ts#L123)
 
 Framework description
 
@@ -94,6 +94,6 @@ Framework description
 
 > **recommendations**: `string`[]
 
-Defined in: [types/compliance.ts:149](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/types/compliance.ts#L149)
+Defined in: [types/compliance.ts:149](https://github.com/Hack23/cia-compliance-manager/blob/7619f76b35999bc4eb3f6ff6c1e77c13be78f250/src/types/compliance.ts#L149)
 
 Recommendations for addressing this gap

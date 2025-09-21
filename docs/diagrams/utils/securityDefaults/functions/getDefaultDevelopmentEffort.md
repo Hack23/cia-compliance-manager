@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.27**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.28**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getDefaultDevelopmentEffort**(`level`): `string`
 
-Defined in: [utils/securityDefaults.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/26bb73ca86d23be8656cdd29d12202323a449310/src/utils/securityDefaults.ts#L6)
+Defined in: [utils/securityDefaults.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/7619f76b35999bc4eb3f6ff6c1e77c13be78f250/src/utils/securityDefaults.ts#L6)
 
 Gets default development effort based on security level
 
