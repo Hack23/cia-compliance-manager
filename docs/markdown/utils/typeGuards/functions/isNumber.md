@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.28**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.29**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isNumber**(`value`): `value is number`
 
-Defined in: [utils/typeGuards.ts:96](https://github.com/Hack23/cia-compliance-manager/blob/7619f76b35999bc4eb3f6ff6c1e77c13be78f250/src/utils/typeGuards.ts#L96)
+Defined in: [utils/typeGuards.ts:96](https://github.com/Hack23/cia-compliance-manager/blob/5836b4c74e2010cd05eca63c0016fd711c628ec9/src/utils/typeGuards.ts#L96)
 
 Type guard to check if a value is a number
 
