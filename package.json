@@ -62,7 +62,7 @@
     "@eslint/js": "9.36.0",
     "@tailwindcss/postcss": "4.1.13",
     "@testing-library/cypress": "^10.1.0",
-    "@testing-library/jest-dom": "6.8.0",
+    "@testing-library/jest-dom": "6.9.0",
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
     "@types/fs-extra": "11.0.4",
