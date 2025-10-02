@@ -5,7 +5,7 @@
   "type": "module",
   "dependencies": {
     "chart.js": "^4.5.0",
-    "react": "^19.1.1",
+    "react": "^19.2.0",
     "react-dom": "^19.1.1",
     "react-error-boundary": "^6.0.0"
   },
@@ -67,7 +67,7 @@
     "@testing-library/user-event": "14.6.1",
     "@types/fs-extra": "11.0.4",
     "@types/node": "24.6.1",
-    "@types/react": "^19.1.16",
+    "@types/react": "^19.2.0",
     "@types/react-dom": "^19.1.11",
     "@types/testing-library__jest-dom": "6.0.0",
     "@vitejs/plugin-react": "^5.0.4",
