@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.29**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.30**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **DETAILED\_VALUE\_POINTS**: `object`
 
-Defined in: [constants/appConstants.ts:191](https://github.com/Hack23/cia-compliance-manager/blob/5836b4c74e2010cd05eca63c0016fd711c628ec9/src/constants/appConstants.ts#L191)
+Defined in: [constants/appConstants.ts:191](https://github.com/Hack23/cia-compliance-manager/blob/6afa716316469147e542039d136ec79ffdbd4ac9/src/constants/appConstants.ts#L191)
 
 ## Type Declaration
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.29**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.30**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **INTEGRITY\_RISK\_IMPACTS**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`RiskImpact`](../interfaces/RiskImpact.md)\>
 
-Defined in: [data/riskImpactData.ts:209](https://github.com/Hack23/cia-compliance-manager/blob/5836b4c74e2010cd05eca63c0016fd711c628ec9/src/data/riskImpactData.ts#L209)
+Defined in: [data/riskImpactData.ts:209](https://github.com/Hack23/cia-compliance-manager/blob/6afa716316469147e542039d136ec79ffdbd4ac9/src/data/riskImpactData.ts#L209)
 
 Risk impact data by security level for integrity
