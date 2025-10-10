@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.30**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.31**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **valueCreationTitles**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), `string`\>
 
-Defined in: [data/valueCreationData.ts:60](https://github.com/Hack23/cia-compliance-manager/blob/6afa716316469147e542039d136ec79ffdbd4ac9/src/data/valueCreationData.ts#L60)
+Defined in: [data/valueCreationData.ts:60](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/data/valueCreationData.ts#L60)
 
 Value creation titles for different security levels

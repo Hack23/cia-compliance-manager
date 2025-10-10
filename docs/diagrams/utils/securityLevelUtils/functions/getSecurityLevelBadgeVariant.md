@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.30**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.31**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelBadgeVariant**(`level`): `"purple"` \| `"success"` \| `"info"` \| `"warning"` \| `"error"` \| `"neutral"`
 
-Defined in: [utils/securityLevelUtils.ts:309](https://github.com/Hack23/cia-compliance-manager/blob/6afa716316469147e542039d136ec79ffdbd4ac9/src/utils/securityLevelUtils.ts#L309)
+Defined in: [utils/securityLevelUtils.ts:309](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/utils/securityLevelUtils.ts#L309)
 
 Map a security level to a status badge variant
 

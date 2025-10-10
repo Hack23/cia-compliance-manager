@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.30**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.31**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isROIMetricDetails**: (`obj`) => `boolean`
 
-Defined in: [utils/index.ts:184](https://github.com/Hack23/cia-compliance-manager/blob/6afa716316469147e542039d136ec79ffdbd4ac9/src/utils/index.ts#L184)
+Defined in: [utils/index.ts:184](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/utils/index.ts#L184)
 
 Checks if an object is a valid ROI metric details object
 
