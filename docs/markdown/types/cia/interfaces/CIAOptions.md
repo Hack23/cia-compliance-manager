@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.31**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.32**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIAOptions
 
-Defined in: [types/cia.ts:290](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/types/cia.ts#L290)
+Defined in: [types/cia.ts:290](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/types/cia.ts#L290)
 
 Available options for each CIA pillar
 
@@ -16,7 +16,7 @@ Available options for each CIA pillar
 
 > **availability**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)[]
 
-Defined in: [types/cia.ts:291](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/types/cia.ts#L291)
+Defined in: [types/cia.ts:291](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/types/cia.ts#L291)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [types/cia.ts:291](https://github.com/Hack23/cia-compliance-manager/
 
 > **confidentiality**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)[]
 
-Defined in: [types/cia.ts:293](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/types/cia.ts#L293)
+Defined in: [types/cia.ts:293](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/types/cia.ts#L293)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [types/cia.ts:293](https://github.com/Hack23/cia-compliance-manager/
 
 > **integrity**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)[]
 
-Defined in: [types/cia.ts:292](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/types/cia.ts#L292)
+Defined in: [types/cia.ts:292](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/types/cia.ts#L292)

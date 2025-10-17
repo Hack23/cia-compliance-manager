@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.31**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.32**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: IntegrityImpact
 
-Defined in: [types/cia.ts:265](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/types/cia.ts#L265)
+Defined in: [types/cia.ts:265](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/types/cia.ts#L265)
 
 Impact associated with the integrity of the system
 
@@ -20,7 +20,7 @@ Impact associated with the integrity of the system
 
 > **dataAccuracy**: `string`
 
-Defined in: [types/cia.ts:266](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/types/cia.ts#L266)
+Defined in: [types/cia.ts:266](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/types/cia.ts#L266)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [types/cia.ts:266](https://github.com/Hack23/cia-compliance-manager/
 
 > **description**: `string`
 
-Defined in: [types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/types/cia.ts#L251)
+Defined in: [types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/types/cia.ts#L251)
 
 #### Inherited from
 
@@ -40,7 +40,7 @@ Defined in: [types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/
 
 > **level**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/types/cia.ts#L250)
+Defined in: [types/cia.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/types/cia.ts#L250)
 
 #### Inherited from
 
@@ -52,4 +52,4 @@ Defined in: [types/cia.ts:250](https://github.com/Hack23/cia-compliance-manager/
 
 > **verificationSteps**: `string`
 
-Defined in: [types/cia.ts:267](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/types/cia.ts#L267)
+Defined in: [types/cia.ts:267](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/types/cia.ts#L267)

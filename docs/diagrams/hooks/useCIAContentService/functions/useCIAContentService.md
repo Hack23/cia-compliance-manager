@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.31**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.32**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **useCIAContentService**(): `object`
 
-Defined in: [hooks/useCIAContentService.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/hooks/useCIAContentService.ts#L12)
+Defined in: [hooks/useCIAContentService.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/hooks/useCIAContentService.ts#L12)
 
 Hook to access the CIA content service with loading and error states
 
@@ -20,11 +20,11 @@ Object containing the CIA content service, loading state, and error state
 
 ### ciaContentService
 
-> **ciaContentService**: `null` \| [`CIAContentService`](../../../services/ciaContentService/classes/CIAContentService.md)
+> **ciaContentService**: [`CIAContentService`](../../../services/ciaContentService/classes/CIAContentService.md) \| `null`
 
 ### error
 
-> **error**: `null` \| `Error`
+> **error**: `Error` \| `null`
 
 ### isLoading
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.31**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.32**](../../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: getSecurityLevelOption()
 
-> **getSecurityLevelOption**\<`T`\>(`options`, `key`): `undefined` \| `T`
+> **getSecurityLevelOption**\<`T`\>(`options`, `key`): `T` \| `undefined`
 
-Defined in: [utils/typeGuards.ts:163](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/utils/typeGuards.ts#L163)
+Defined in: [utils/typeGuards.ts:163](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/utils/typeGuards.ts#L163)
 
 Helper function to safely access CIA options with string keys
 
@@ -30,10 +30,10 @@ The options object to access
 
 The string key that should be treated as SecurityLevel
 
-`undefined` | `string`
+`string` | `undefined`
 
 ## Returns
 
-`undefined` \| `T`
+`T` \| `undefined`
 
 The option value or undefined if not found

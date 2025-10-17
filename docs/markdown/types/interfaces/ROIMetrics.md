@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.31**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.32**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ROIMetrics
 
-Defined in: [types/cia-services.ts:201](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/types/cia-services.ts#L201)
+Defined in: [types/cia-services.ts:201](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/types/cia-services.ts#L201)
 
 Return on investment metrics
 
@@ -16,7 +16,7 @@ Return on investment metrics
 
 > **description**: `string`
 
-Defined in: [types/cia-services.ts:204](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/types/cia-services.ts#L204)
+Defined in: [types/cia-services.ts:204](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/types/cia-services.ts#L204)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [types/cia-services.ts:204](https://github.com/Hack23/cia-compliance
 
 > **percentage**: `string`
 
-Defined in: [types/cia-services.ts:203](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/types/cia-services.ts#L203)
+Defined in: [types/cia-services.ts:203](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/types/cia-services.ts#L203)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [types/cia-services.ts:203](https://github.com/Hack23/cia-compliance
 
 > **value**: `string`
 
-Defined in: [types/cia-services.ts:202](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/types/cia-services.ts#L202)
+Defined in: [types/cia-services.ts:202](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/types/cia-services.ts#L202)

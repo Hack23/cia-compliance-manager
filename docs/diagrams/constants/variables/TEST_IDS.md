@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.31**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.32**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **TEST\_IDS**: `object`
 
-Defined in: [constants/testIds.ts:915](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/constants/testIds.ts#L915)
+Defined in: [constants/testIds.ts:915](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/constants/testIds.ts#L915)
 
 Consolidated export of all test IDs for easier imports
 
@@ -1834,7 +1834,7 @@ Test helpers for finding and matching elements
 
 #### TEST\_HELPERS.findByText()
 
-> **findByText**: (`text`) => `null` \| `Node`
+> **findByText**: (`text`) => `Node` \| `null`
 
 Find an element by text
 
@@ -1846,7 +1846,7 @@ Find an element by text
 
 ##### Returns
 
-`null` \| `Node`
+`Node` \| `null`
 
 #### TEST\_HELPERS.getValuePointsForLevel()
 

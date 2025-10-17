@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.31**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.32**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **useCIADataProvider**(): `object`
 
-Defined in: [hooks/useCIADataProvider.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/85c025371255f412469ec0119911b7cb143a6212/src/hooks/useCIADataProvider.ts#L9)
+Defined in: [hooks/useCIADataProvider.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/hooks/useCIADataProvider.ts#L9)
 
 Hook that provides access to the CIA data provider
 
@@ -20,11 +20,11 @@ An object containing the data provider, loading state, and error
 
 ### dataProvider
 
-> **dataProvider**: `null` \| [`CIADataProvider`](../../../types/interfaces/CIADataProvider.md)
+> **dataProvider**: [`CIADataProvider`](../../../types/interfaces/CIADataProvider.md) \| `null`
 
 ### error
 
-> **error**: `null` \| `Error`
+> **error**: `Error` \| `null`
 
 ### isLoading
 
