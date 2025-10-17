@@ -47,6 +47,8 @@ categories:
   - title: "📦 Dependencies"
     labels:
       - "dependencies"
+      - "javascript"
+      - "github_actions"
 
   - title: "🐛 Bug Fixes"
     labels:
