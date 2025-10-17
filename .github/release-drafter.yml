@@ -1,5 +1,7 @@
 name-template: "Release $RESOLVED_VERSION"
 tag-template: "$RESOLVED_VERSION"
+
+# Categories match exactly with PR labels from labeler.yml
 categories:
   - title: "🚀 New Features"
     labels:
@@ -23,6 +25,7 @@ categories:
       - "infrastructure"
       - "performance"
       - "build"
+      - "config"
 
   - title: "🔄 Code Quality & Refactoring"
     labels:
@@ -56,6 +59,7 @@ categories:
       - "needs-tests"
       - "branches-coverage-impact"
       - "function-coverage-impact"
+      - "high-coverage"
 
   - title: "🔍 Component Updates"
     labels:
@@ -76,8 +80,13 @@ categories:
       - "critical-business-code"
 
 change-template: "- $TITLE @$AUTHOR (#$NUMBER)"
+change-title-escapes: '\<*_&' # Escape characters for markdown
+
 exclude-labels:
   - "skip-changelog"
+  - "duplicate"
+  - "invalid"
+  - "wontfix"
 
 include-paths:
   - "src"
@@ -85,12 +94,25 @@ include-paths:
   - "docs"
   - ".github"
 
+exclude-paths:
+  - "**/*.test.ts"
+  - "**/*.test.tsx"
+  - "**/*.spec.ts"
+  - "**/*.spec.tsx"
+
 template: |
   # Highlights
   $CHANGES
 
   ## Security Compliance
   [![SLSA 3](https://slsa.dev/images/gh-badge-level3.svg)](https://github.com/Hack23/cia-compliance-manager/attestations/)
+  
+  ## Tech Stack
+  - ⚡ **Vite** - Fast build tool
+  - ⚛️ **React 19** - Modern UI framework
+  - 🔷 **TypeScript** - Type-safe development
+  - 📊 **Recharts** - Data visualization
+  - 🧪 **Vitest** - Unit testing
 
   ## Contributors
   Thanks to $CONTRIBUTORS for their contributions to this release!
@@ -106,45 +128,159 @@ version-resolver:
     labels:
       - "feature"
       - "enhancement"
+      - "analytics"
+      - "visualization"
   patch:
     labels:
       - "bug"
+      - "fix"
       - "security"
       - "dependencies"
       - "documentation"
       - "performance"
-    # Detect patch version from conventional commit messages
-    pattern: '^(fix|refactor|perf|security|build\(deps\)|docs|chore)(\([^)]+\))?:'
+      - "refactor"
   default: patch
 
+# Autolabeler is BACKUP for PRs without labels
+# Primary labeling happens via .github/labeler.yml
 autolabeler:
+  # Features & Enhancements
   - label: "feature"
     title:
       - '/^feat(\([^)]+\))?:/i'
-  - label: "bug"
-    title:
-      - '/^fix(\([^)]+\))?:/i'
-  - label: "documentation"
-    title:
-      - '/^docs(\([^)]+\))?:/i'
+      - '/^feature(\([^)]+\))?:/i'
+      - '/^add(\([^)]+\))?:/i'
+  
   - label: "enhancement"
     title:
       - '/^enhance(\([^)]+\))?:/i'
+      - '/^improve(\([^)]+\))?:/i'
+      - '/^improvement(\([^)]+\))?:/i'
+  
+  # Bug Fixes
+  - label: "bug"
+    title:
+      - '/^fix(\([^)]+\))?:/i'
+      - '/^bug(\([^)]+\))?:/i'
+    branch:
+      - '/^fix\/.+/'
+      - '/^bugfix\/.+/'
+      - '/^hotfix\/.+/'
+  
+  - label: "fix"
+    title:
+      - '/^fix(\([^)]+\))?:/i'
+  
+  # Analytics & Data
+  - label: "analytics"
+    title:
+      - '/^analytics(\([^)]+\))?:/i'
+      - '/^stats(\([^)]+\))?:/i'
+      - '/^metrics(\([^)]+\))?:/i'
+  
+  - label: "visualization"
+    title:
+      - '/^visualization(\([^)]+\))?:/i'
+      - '/^chart(\([^)]+\))?:/i'
+      - '/^graph(\([^)]+\))?:/i'
+  
+  - label: "database"
+    title:
+      - '/^database(\([^)]+\))?:/i'
+      - '/^db(\([^)]+\))?:/i'
+  
+  # Documentation
+  - label: "documentation"
+    title:
+      - '/^docs(\([^)]+\))?:/i'
+      - '/^doc(\([^)]+\))?:/i'
+    files:
+      - '**/*.md'
+      - 'docs/**/*'
+  
+  # UI/UX
   - label: "ui"
     title:
-      - '/^style(\([^)]+\))?:/i'
       - '/^ui(\([^)]+\))?:/i'
+  
+  - label: "design"
+    title:
       - '/^design(\([^)]+\))?:/i'
+  
+  - label: "style"
+    title:
+      - '/^style(\([^)]+\))?:/i'
+  
+  # Dependencies - CRITICAL
   - label: "dependencies"
     title:
       - '/^build\(deps\):/i'
+      - '/^build\(deps-dev\):/i'
+      - '/^chore\(deps\):/i'
+      - '/^chore\(deps-dev\):/i'
       - '/^deps(\([^)]+\))?:/i'
+      - '/^dependency(\([^)]+\))?:/i'
+      - '/^dependencies(\([^)]+\))?:/i'
+      - '/^bump/i'
+      - '/^update.*dependenc/i'
+    files:
+      - 'package.json'
+      - 'package-lock.json'
+      - 'yarn.lock'
+      - 'pnpm-lock.yaml'
+    branch:
+      - '/^dependabot\/.+/'
+      - '/^renovate\/.+/'
+  
+  # Security & Compliance
   - label: "security"
     title:
       - '/^security(\([^)]+\))?:/i'
+      - '/^sec(\([^)]+\))?:/i'
+      - '/^fix-vuln(\([^)]+\))?:/i'
+      - '/\[security\]/i'
+    branch:
+      - '/^security\/.+/'
+  
+  - label: "compliance"
+    title:
+      - '/^compliance(\([^)]+\))?:/i'
+      - '/^audit(\([^)]+\))?:/i'
+  
+  # Performance & Infrastructure
   - label: "performance"
     title:
       - '/^perf(\([^)]+\))?:/i'
+      - '/^optimize(\([^)]+\))?:/i'
+  
+  - label: "infrastructure"
+    title:
+      - '/^infra(\([^)]+\))?:/i'
+      - '/^ci(\([^)]+\))?:/i'
+      - '/^cd(\([^)]+\))?:/i'
+    files:
+      - '.github/**/*'
+  
+  - label: "build"
+    title:
+      - '/^build(\([^)]+\))?:/i'
+      - '/^chore\(build\):/i'
+  
+  - label: "config"
+    title:
+      - '/^config(\([^)]+\))?:/i'
+      - '/^chore\(config\):/i'
+  
+  # Code Quality
   - label: "refactor"
     title:
       - '/^refactor(\([^)]+\))?:/i'
+  
+  - label: "testing"
+    title:
+      - '/^test(\([^)]+\))?:/i'
+    files:
+      - '**/*.test.*'
+      - '**/*.spec.*'
+      - 'cypress/**/*'
+      - '__tests__/**/*'
