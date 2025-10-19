@@ -77,7 +77,7 @@
     "autoprefixer": "^10.4.21",
     "canvas": "3.2.0",
     "cross-env": "^10.1.0",
-    "cypress": "^15.4.0",
+    "cypress": "^15.5.0",
     "cypress-junit-reporter": "1.3.1",
     "cypress-multi-reporters": "2.0.5",
     "cypress-react-selector": "^3.0.0",
