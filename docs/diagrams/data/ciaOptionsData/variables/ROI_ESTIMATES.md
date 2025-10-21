@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.32**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.33**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **ROI\_ESTIMATES**: [`ROIEstimatesMap`](../../../types/interfaces/ROIEstimatesMap.md) = `roiEstimatesData`
 
-Defined in: [data/ciaOptionsData.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/data/ciaOptionsData.ts#L34)
+Defined in: [data/ciaOptionsData.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/1f4f2c51bc48d917eff1eb43881cee05d381f406/src/data/ciaOptionsData.ts#L34)
 
 ROI estimates derived from security module.
 Provides return on investment estimates.

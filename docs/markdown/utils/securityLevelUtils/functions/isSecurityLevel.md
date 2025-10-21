@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.32**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.33**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isSecurityLevel**(`value`): `value is SecurityLevel`
 
-Defined in: [utils/securityLevelUtils.ts:336](https://github.com/Hack23/cia-compliance-manager/blob/0dc9a11e510cc2f2986e7debe532892627f2b00f/src/utils/securityLevelUtils.ts#L336)
+Defined in: [utils/securityLevelUtils.ts:336](https://github.com/Hack23/cia-compliance-manager/blob/1f4f2c51bc48d917eff1eb43881cee05d381f406/src/utils/securityLevelUtils.ts#L336)
 
 Check if a string is a valid security level
 
