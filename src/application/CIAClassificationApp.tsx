@@ -165,7 +165,7 @@ const CIAClassificationApp: React.FC = () => {
                 </a>
                 <span className="mx-1 nav-separator">•</span>
                 <a
-                  href="https://hack23.github.io/cia-compliance-manager/documentation.html"
+                  href="https://www.hack23.com/cia-compliance-manager-features.html"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cyber-link"
