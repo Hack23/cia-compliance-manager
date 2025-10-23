@@ -22,7 +22,9 @@ type ChartMockConstructor = ReturnType<typeof vi.fn> & {
 };
 
 const mockChartConstructor = vi.hoisted(() => {
-  const constructor = vi.fn().mockImplementation(() => mockChartInstance);
+  const constructor = vi.fn(function () {
+    return mockChartInstance;
+  });
   // Add the static properties needed by Chart.js with type assertion
   return constructor as ChartMockConstructor;
 });
