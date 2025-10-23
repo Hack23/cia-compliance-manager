@@ -18,306 +18,344 @@ vi.mock("../hooks/useCIAOptions", () => createCIAOptionsMock());
 
 // Properly format the vi.mock() calls with return objects
 vi.mock("./businessImpactService", () => ({
-  BusinessImpactService: vi.fn().mockImplementation(() => ({
-    getBusinessImpact: vi.fn().mockReturnValue({
-      summary: "Mock business impact",
-      financial: { description: "Mock financial impact", riskLevel: "Medium" },
-      operational: {
-        description: "Mock operational impact",
-        riskLevel: "Medium",
-      },
-      reputational: {
-        description: "Mock reputational impact",
-        riskLevel: "Medium",
-      },
-    }),
-    getBusinessImpactDescription: vi
-      .fn()
-      .mockReturnValue("Mock business impact description"),
-    getDetailedDescription: vi.fn().mockReturnValue({
-      summary: "Mock detailed description",
-      financial: { description: "Mock financial impact", riskLevel: "Medium" },
-      operational: {
-        description: "Mock operational impact",
-        riskLevel: "Medium",
-      },
-      reputational: {
-        description: "Mock reputational impact",
-        riskLevel: "Medium",
-      },
-    }),
-    calculateBusinessImpactLevel: vi.fn().mockReturnValue("Moderate"),
-    getCategoryIcon: vi.fn().mockReturnValue("💰"),
-  })),
-  createBusinessImpactService: vi.fn().mockImplementation(() => ({
-    getBusinessImpact: vi.fn().mockReturnValue({
-      summary: "Mock business impact",
-      financial: { description: "Mock financial impact", riskLevel: "Medium" },
-      operational: {
-        description: "Mock operational impact",
-        riskLevel: "Medium",
-      },
-      reputational: {
-        description: "Mock reputational impact",
-        riskLevel: "Medium",
-      },
-    }),
-    getBusinessImpactDescription: vi
-      .fn()
-      .mockReturnValue("Mock business impact description"),
-    getDetailedDescription: vi.fn().mockReturnValue({
-      summary: "Mock detailed description",
-      financial: { description: "Mock financial impact", riskLevel: "Medium" },
-      operational: {
-        description: "Mock operational impact",
-        riskLevel: "Medium",
-      },
-      reputational: {
-        description: "Mock reputational impact",
-        riskLevel: "Medium",
-      },
-    }),
-    calculateBusinessImpactLevel: vi.fn().mockReturnValue("Moderate"),
-    getCategoryIcon: vi.fn().mockReturnValue("💰"),
-  })),
+  BusinessImpactService: vi.fn(function () {
+    return {
+      getBusinessImpact: vi.fn().mockReturnValue({
+        summary: "Mock business impact",
+        financial: {
+          description: "Mock financial impact",
+          riskLevel: "Medium",
+        },
+        operational: {
+          description: "Mock operational impact",
+          riskLevel: "Medium",
+        },
+        reputational: {
+          description: "Mock reputational impact",
+          riskLevel: "Medium",
+        },
+      }),
+      getBusinessImpactDescription: vi
+        .fn()
+        .mockReturnValue("Mock business impact description"),
+      getDetailedDescription: vi.fn().mockReturnValue({
+        summary: "Mock detailed description",
+        financial: {
+          description: "Mock financial impact",
+          riskLevel: "Medium",
+        },
+        operational: {
+          description: "Mock operational impact",
+          riskLevel: "Medium",
+        },
+        reputational: {
+          description: "Mock reputational impact",
+          riskLevel: "Medium",
+        },
+      }),
+      calculateBusinessImpactLevel: vi.fn().mockReturnValue("Moderate"),
+      getCategoryIcon: vi.fn().mockReturnValue("💰"),
+    };
+  }),
+  createBusinessImpactService: vi.fn(function () {
+    return {
+      getBusinessImpact: vi.fn().mockReturnValue({
+        summary: "Mock business impact",
+        financial: {
+          description: "Mock financial impact",
+          riskLevel: "Medium",
+        },
+        operational: {
+          description: "Mock operational impact",
+          riskLevel: "Medium",
+        },
+        reputational: {
+          description: "Mock reputational impact",
+          riskLevel: "Medium",
+        },
+      }),
+      getBusinessImpactDescription: vi
+        .fn()
+        .mockReturnValue("Mock business impact description"),
+      getDetailedDescription: vi.fn().mockReturnValue({
+        summary: "Mock detailed description",
+        financial: {
+          description: "Mock financial impact",
+          riskLevel: "Medium",
+        },
+        operational: {
+          description: "Mock operational impact",
+          riskLevel: "Medium",
+        },
+        reputational: {
+          description: "Mock reputational impact",
+          riskLevel: "Medium",
+        },
+      }),
+      calculateBusinessImpactLevel: vi.fn().mockReturnValue("Moderate"),
+      getCategoryIcon: vi.fn().mockReturnValue("💰"),
+    };
+  }),
 }));
 
 vi.mock("./complianceService", () => ({
-  ComplianceService: vi.fn().mockImplementation(() => ({
-    getComplianceStatus: vi.fn().mockReturnValue({
-      status: "Meets basic compliance only",
-      compliantFrameworks: ["GDPR", "NIST CSF", "Basic ISO 27001"],
-      partiallyCompliantFrameworks: ["SOC2"],
-      nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
-      remediationSteps: ["Implement data protection"],
-      requirements: ["Data protection by design"],
-      complianceScore: 65,
-    }),
-    getCompliantFrameworks: vi.fn().mockReturnValue(["GDPR", "NIST CSF"]),
-    getFrameworkDescription: vi
-      .fn()
-      .mockReturnValue("Mock framework description"),
-    getFrameworkStatus: vi.fn().mockReturnValue("compliant"),
-  })),
-  createComplianceService: vi.fn().mockImplementation(() => ({
-    getComplianceStatus: vi.fn().mockReturnValue({
-      status: "Meets basic compliance only",
-      compliantFrameworks: ["GDPR", "NIST CSF"],
-      partiallyCompliantFrameworks: ["SOC2"],
-      nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
-      remediationSteps: ["Implement data protection"],
-      requirements: ["Data protection by design"],
-      complianceScore: 65,
-    }),
-    getCompliantFrameworks: vi.fn().mockReturnValue(["GDPR", "NIST CSF"]),
-    getFrameworkDescription: vi
-      .fn()
-      .mockReturnValue("Mock framework description"),
-    getFrameworkStatus: vi.fn().mockReturnValue("compliant"),
-  })),
+  ComplianceService: vi.fn(function () {
+    return {
+      getComplianceStatus: vi.fn().mockReturnValue({
+        status: "Meets basic compliance only",
+        compliantFrameworks: ["GDPR", "NIST CSF", "Basic ISO 27001"],
+        partiallyCompliantFrameworks: ["SOC2"],
+        nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
+        remediationSteps: ["Implement data protection"],
+        requirements: ["Data protection by design"],
+        complianceScore: 65,
+      }),
+      getCompliantFrameworks: vi.fn().mockReturnValue(["GDPR", "NIST CSF"]),
+      getFrameworkDescription: vi
+        .fn()
+        .mockReturnValue("Mock framework description"),
+      getFrameworkStatus: vi.fn().mockReturnValue("compliant"),
+    };
+  }),
+  createComplianceService: vi.fn(function () {
+    return {
+      getComplianceStatus: vi.fn().mockReturnValue({
+        status: "Meets basic compliance only",
+        compliantFrameworks: ["GDPR", "NIST CSF"],
+        partiallyCompliantFrameworks: ["SOC2"],
+        nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
+        remediationSteps: ["Implement data protection"],
+        requirements: ["Data protection by design"],
+        complianceScore: 65,
+      }),
+      getCompliantFrameworks: vi.fn().mockReturnValue(["GDPR", "NIST CSF"]),
+      getFrameworkDescription: vi
+        .fn()
+        .mockReturnValue("Mock framework description"),
+      getFrameworkStatus: vi.fn().mockReturnValue("compliant"),
+    };
+  }),
 }));
 
 vi.mock("./ComplianceServiceAdapter", () => ({
-  ComplianceServiceAdapter: vi.fn().mockImplementation(() => ({
-    getComplianceStatus: vi.fn().mockReturnValue({
-      status: "Meets basic compliance only",
-      compliantFrameworks: ["GDPR", "NIST CSF"],
-      partiallyCompliantFrameworks: ["SOC2"],
-      nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
-      remediationSteps: ["Implement data protection"],
-      requirements: ["Data protection by design"],
-      complianceScore: 65,
-    }),
-    getCompliantFrameworks: vi.fn().mockReturnValue(["GDPR", "NIST CSF"]),
-    getFrameworkDescription: vi
-      .fn()
-      .mockReturnValue("Mock framework description"),
-  })),
+  ComplianceServiceAdapter: vi.fn(function () {
+    return {
+      getComplianceStatus: vi.fn().mockReturnValue({
+        status: "Meets basic compliance only",
+        compliantFrameworks: ["GDPR", "NIST CSF"],
+        partiallyCompliantFrameworks: ["SOC2"],
+        nonCompliantFrameworks: ["HIPAA", "PCI DSS"],
+        remediationSteps: ["Implement data protection"],
+        requirements: ["Data protection by design"],
+        complianceScore: 65,
+      }),
+      getCompliantFrameworks: vi.fn().mockReturnValue(["GDPR", "NIST CSF"]),
+      getFrameworkDescription: vi
+        .fn()
+        .mockReturnValue("Mock framework description"),
+    };
+  }),
 }));
 
 vi.mock("./securityMetricsService", () => ({
-  SecurityMetricsService: vi.fn().mockImplementation(() => ({
-    getSecurityMetrics: vi.fn().mockReturnValue({
-      score: 6,
-      maxScore: 12,
-      percentage: "50%",
-      totalCapex: 53000,
-      totalOpex: 10600,
-      totalCost: 63600,
-      riskReduction: "50%",
-    }),
-    getComponentMetrics: vi.fn().mockReturnValue({
-      component: "availability",
-      level: "Moderate",
-      value: 2,
-      percentage: "50%",
-      capex: 15000,
-      opex: 3000,
-      description: "Standard security controls",
-    }),
-    getImpactMetrics: vi.fn().mockReturnValue({
-      securityLevel: "Moderate",
-      riskReduction: "50%",
-      uptime: "99%",
-      rto: "4 hours",
-      description: "Standard controls",
-      technical: "Standard technical implementation",
-      businessImpact: "Medium business impact",
-    }),
-    getSecurityLevelDescription: vi
-      .fn()
-      .mockReturnValue("Standard security controls"),
-    getProtectionLevel: vi.fn().mockReturnValue("Balanced Protection"),
-    calculateRoi: vi.fn().mockReturnValue({
-      value: "$150,000",
-      percentage: "150%",
-      description: "Moderate return on security investment",
-    }),
-    getRiskBadgeVariant: vi.fn().mockReturnValue("info"),
-    getSecurityIcon: vi.fn().mockReturnValue("🔓"),
-    calculateSecurityScore: vi.fn().mockReturnValue(50),
-    getSecurityLevelFromValue: vi.fn().mockImplementation((value) => {
-      const levels = ["None", "Low", "Moderate", "High", "Very High"];
-      return levels[value] || "None";
-    }),
-  })),
-  createSecurityMetricsService: vi.fn().mockImplementation(() => ({
-    getSecurityMetrics: vi.fn().mockReturnValue({
-      score: 6,
-      maxScore: 12,
-      percentage: "50%",
-      totalCapex: 53000,
-      totalOpex: 10600,
-      totalCost: 63600,
-      riskReduction: "50%",
-    }),
-    getComponentMetrics: vi.fn().mockReturnValue({
-      component: "availability",
-      level: "Moderate",
-      value: 2,
-      percentage: "50%",
-      capex: 15000,
-      opex: 3000,
-      description: "Standard security controls",
-    }),
-    getImpactMetrics: vi.fn().mockReturnValue({
-      securityLevel: "Moderate",
-      riskReduction: "50%",
-      uptime: "99%",
-      rto: "4 hours",
-      description: "Standard controls",
-      technical: "Standard technical implementation",
-      businessImpact: "Medium business impact",
-    }),
-    getSecurityLevelDescription: vi
-      .fn()
-      .mockReturnValue("Standard security controls"),
-    getProtectionLevel: vi.fn().mockReturnValue("Balanced Protection"),
-    calculateRoi: vi.fn().mockReturnValue({
-      value: "$150,000",
-      percentage: "150%",
-      description: "Moderate return on security investment",
-    }),
-    getRiskBadgeVariant: vi.fn().mockReturnValue("info"),
-    getSecurityIcon: vi.fn().mockReturnValue("🔓"),
-    calculateSecurityScore: vi.fn().mockReturnValue(50),
-    getSecurityLevelFromValue: vi.fn().mockImplementation((value) => {
-      const levels = ["None", "Low", "Moderate", "High", "Very High"];
-      return levels[value] || "None";
-    }),
-  })),
+  SecurityMetricsService: vi.fn(function () {
+    return {
+      getSecurityMetrics: vi.fn().mockReturnValue({
+        score: 6,
+        maxScore: 12,
+        percentage: "50%",
+        totalCapex: 53000,
+        totalOpex: 10600,
+        totalCost: 63600,
+        riskReduction: "50%",
+      }),
+      getComponentMetrics: vi.fn().mockReturnValue({
+        component: "availability",
+        level: "Moderate",
+        value: 2,
+        percentage: "50%",
+        capex: 15000,
+        opex: 3000,
+        description: "Standard security controls",
+      }),
+      getImpactMetrics: vi.fn().mockReturnValue({
+        securityLevel: "Moderate",
+        riskReduction: "50%",
+        uptime: "99%",
+        rto: "4 hours",
+        description: "Standard controls",
+        technical: "Standard technical implementation",
+        businessImpact: "Medium business impact",
+      }),
+      getSecurityLevelDescription: vi
+        .fn()
+        .mockReturnValue("Standard security controls"),
+      getProtectionLevel: vi.fn().mockReturnValue("Balanced Protection"),
+      calculateRoi: vi.fn().mockReturnValue({
+        value: "$150,000",
+        percentage: "150%",
+        description: "Moderate return on security investment",
+      }),
+      getRiskBadgeVariant: vi.fn().mockReturnValue("info"),
+      getSecurityIcon: vi.fn().mockReturnValue("🔓"),
+      calculateSecurityScore: vi.fn().mockReturnValue(50),
+      getSecurityLevelFromValue: vi.fn().mockImplementation((value) => {
+        const levels = ["None", "Low", "Moderate", "High", "Very High"];
+        return levels[value] || "None";
+      }),
+    };
+  }),
+  createSecurityMetricsService: vi.fn(function () {
+    return {
+      getSecurityMetrics: vi.fn().mockReturnValue({
+        score: 6,
+        maxScore: 12,
+        percentage: "50%",
+        totalCapex: 53000,
+        totalOpex: 10600,
+        totalCost: 63600,
+        riskReduction: "50%",
+      }),
+      getComponentMetrics: vi.fn().mockReturnValue({
+        component: "availability",
+        level: "Moderate",
+        value: 2,
+        percentage: "50%",
+        capex: 15000,
+        opex: 3000,
+        description: "Standard security controls",
+      }),
+      getImpactMetrics: vi.fn().mockReturnValue({
+        securityLevel: "Moderate",
+        riskReduction: "50%",
+        uptime: "99%",
+        rto: "4 hours",
+        description: "Standard controls",
+        technical: "Standard technical implementation",
+        businessImpact: "Medium business impact",
+      }),
+      getSecurityLevelDescription: vi
+        .fn()
+        .mockReturnValue("Standard security controls"),
+      getProtectionLevel: vi.fn().mockReturnValue("Balanced Protection"),
+      calculateRoi: vi.fn().mockReturnValue({
+        value: "$150,000",
+        percentage: "150%",
+        description: "Moderate return on security investment",
+      }),
+      getRiskBadgeVariant: vi.fn().mockReturnValue("info"),
+      getSecurityIcon: vi.fn().mockReturnValue("🔓"),
+      calculateSecurityScore: vi.fn().mockReturnValue(50),
+      getSecurityLevelFromValue: vi.fn().mockImplementation((value) => {
+        const levels = ["None", "Low", "Moderate", "High", "Very High"];
+        return levels[value] || "None";
+      }),
+    };
+  }),
 }));
 
 vi.mock("./technicalImplementationService", () => ({
-  TechnicalImplementationService: vi.fn().mockImplementation(() => ({
-    getTechnicalImplementation: vi.fn().mockReturnValue({
-      description: "Mock technical implementation",
-      implementationSteps: ["Step 1", "Step 2"],
-      effort: {
-        development: "Weeks (2-4)",
-        maintenance: "Regular (monthly review)",
-        expertise: "Security professional",
-      },
-    }),
-    getComponentImplementationDetails: vi.fn().mockReturnValue({
-      description: "Mock component implementation",
-      implementationSteps: ["Step 1", "Step 2"],
-      effort: {
-        development: "Weeks (2-4)",
-        maintenance: "Regular",
-        expertise: "Security professional",
-      },
-    }),
-    getTechnicalDescription: vi
-      .fn()
-      .mockReturnValue("Mock technical description"),
-    getRecommendations: vi
-      .fn()
-      .mockReturnValue(["Recommendation 1", "Recommendation 2"]),
-    getImplementationConsiderations: vi
-      .fn()
-      .mockReturnValue("Mock implementation considerations"),
-    getImplementationTime: vi.fn().mockReturnValue("1-2 months"),
-  })),
-  createTechnicalImplementationService: vi.fn().mockImplementation(() => ({
-    getTechnicalImplementation: vi.fn().mockReturnValue({
-      description: "Mock technical implementation",
-      implementationSteps: ["Step 1", "Step 2"],
-      effort: {
-        development: "Weeks (2-4)",
-        maintenance: "Regular (monthly review)",
-        expertise: "Security professional",
-      },
-    }),
-    getComponentImplementationDetails: vi.fn().mockReturnValue({
-      description: "Mock component implementation",
-      implementationSteps: ["Step 1", "Step 2"],
-      effort: {
-        development: "Weeks (2-4)",
-        maintenance: "Regular",
-        expertise: "Security professional",
-      },
-    }),
-    getTechnicalDescription: vi
-      .fn()
-      .mockReturnValue("Mock technical description"),
-    getRecommendations: vi
-      .fn()
-      .mockReturnValue(["Recommendation 1", "Recommendation 2"]),
-    getImplementationConsiderations: vi
-      .fn()
-      .mockReturnValue("Mock implementation considerations"),
-    getImplementationTime: vi.fn().mockReturnValue("1-2 months"),
-  })),
+  TechnicalImplementationService: vi.fn(function () {
+    return {
+      getTechnicalImplementation: vi.fn().mockReturnValue({
+        description: "Mock technical implementation",
+        implementationSteps: ["Step 1", "Step 2"],
+        effort: {
+          development: "Weeks (2-4)",
+          maintenance: "Regular (monthly review)",
+          expertise: "Security professional",
+        },
+      }),
+      getComponentImplementationDetails: vi.fn().mockReturnValue({
+        description: "Mock component implementation",
+        implementationSteps: ["Step 1", "Step 2"],
+        effort: {
+          development: "Weeks (2-4)",
+          maintenance: "Regular",
+          expertise: "Security professional",
+        },
+      }),
+      getTechnicalDescription: vi
+        .fn()
+        .mockReturnValue("Mock technical description"),
+      getRecommendations: vi
+        .fn()
+        .mockReturnValue(["Recommendation 1", "Recommendation 2"]),
+      getImplementationConsiderations: vi
+        .fn()
+        .mockReturnValue("Mock implementation considerations"),
+      getImplementationTime: vi.fn().mockReturnValue("1-2 months"),
+    };
+  }),
+  createTechnicalImplementationService: vi.fn(function () {
+    return {
+      getTechnicalImplementation: vi.fn().mockReturnValue({
+        description: "Mock technical implementation",
+        implementationSteps: ["Step 1", "Step 2"],
+        effort: {
+          development: "Weeks (2-4)",
+          maintenance: "Regular (monthly review)",
+          expertise: "Security professional",
+        },
+      }),
+      getComponentImplementationDetails: vi.fn().mockReturnValue({
+        description: "Mock component implementation",
+        implementationSteps: ["Step 1", "Step 2"],
+        effort: {
+          development: "Weeks (2-4)",
+          maintenance: "Regular",
+          expertise: "Security professional",
+        },
+      }),
+      getTechnicalDescription: vi
+        .fn()
+        .mockReturnValue("Mock technical description"),
+      getRecommendations: vi
+        .fn()
+        .mockReturnValue(["Recommendation 1", "Recommendation 2"]),
+      getImplementationConsiderations: vi
+        .fn()
+        .mockReturnValue("Mock implementation considerations"),
+      getImplementationTime: vi.fn().mockReturnValue("1-2 months"),
+    };
+  }),
 }));
 
 vi.mock("./securityResourceService", () => ({
-  SecurityResourceService: vi.fn().mockImplementation(() => ({
-    getValuePoints: vi.fn().mockReturnValue(["Value point 1", "Value point 2"]),
-    getSecurityResources: vi.fn().mockReturnValue([
-      {
-        id: "resource-1",
-        title: "Resource 1",
-        description: "Description 1",
-        url: "https://example.com/resource1",
-        type: "general",
-        relevance: 90,
-      },
-    ]),
-  })),
-  createSecurityResourceService: vi.fn().mockImplementation(() => ({
-    getValuePoints: vi.fn().mockReturnValue(["Value point 1", "Value point 2"]),
-    getSecurityResources: vi.fn().mockReturnValue([
-      {
-        id: "resource-1",
-        title: "Resource 1",
-        description: "Description 1",
-        url: "https://example.com/resource1",
-        type: "general",
-        relevance: 90,
-      },
-    ]),
-  })),
+  SecurityResourceService: vi.fn(function () {
+    return {
+      getValuePoints: vi
+        .fn()
+        .mockReturnValue(["Value point 1", "Value point 2"]),
+      getSecurityResources: vi.fn().mockReturnValue([
+        {
+          id: "resource-1",
+          title: "Resource 1",
+          description: "Description 1",
+          url: "https://example.com/resource1",
+          type: "general",
+          relevance: 90,
+        },
+      ]),
+    };
+  }),
+  createSecurityResourceService: vi.fn(function () {
+    return {
+      getValuePoints: vi
+        .fn()
+        .mockReturnValue(["Value point 1", "Value point 2"]),
+      getSecurityResources: vi.fn().mockReturnValue([
+        {
+          id: "resource-1",
+          title: "Resource 1",
+          description: "Description 1",
+          url: "https://example.com/resource1",
+          type: "general",
+          relevance: 90,
+        },
+      ]),
+    };
+  }),
 }));
 
 // Convert to regular object instead of using vi.hoisted

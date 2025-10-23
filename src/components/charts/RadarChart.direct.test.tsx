@@ -1,11 +1,17 @@
 // Add these helper functions at the top before other code
 const suppressCanvasErrors = () => {
-  return vi.spyOn(console, "error").mockImplementation((msg) => {
+  return vi.spyOn(console, "error").mockImplementation((msg: unknown) => {
     if (
-      msg?.toString().includes("canvas") ||
-      msg?.toString().includes("Canvas")
+      typeof msg === "string" &&
+      (msg.includes("canvas") || msg.includes("Canvas"))
     ) {
       return;
+    }
+    if (msg && typeof msg === "object" && "toString" in msg) {
+      const msgStr = msg.toString();
+      if (msgStr.includes("canvas") || msgStr.includes("Canvas")) {
+        return;
+      }
     }
     // Let other errors through
     console.warn("Console error:", msg);
@@ -27,26 +33,48 @@ const mockCanvasContext = () => {
 
 // Define mocks at the top of the file, before imports
 vi.mock("chart.js/auto", () => {
-  const mockChart = vi.fn().mockImplementation(() => ({
-    destroy: vi.fn(),
-    update: vi.fn(),
-    data: {
-      labels: ["Availability", "Integrity", "Confidentiality"],
-      datasets: [],
-    },
-    options: {},
-  })) as ChartMock;
+  // Create a proper constructor function using vi.fn()
+  const MockChart = vi.fn(function (this: unknown) {
+    return {
+      destroy: vi.fn(),
+      update: vi.fn(),
+      data: {
+        labels: ["Availability", "Integrity", "Confidentiality"],
+        datasets: [],
+      },
+      options: {},
+    };
+  }) as unknown as {
+    new (): {
+      destroy: ReturnType<typeof vi.fn>;
+      update: ReturnType<typeof vi.fn>;
+      data: { labels: string[]; datasets: never[] };
+      options: Record<string, unknown>;
+    };
+    register: ReturnType<typeof vi.fn>;
+    defaults: {
+      font: { family: string };
+      plugins: { legend: { display: boolean } };
+    };
+  };
 
-  // Add properties to the mockChart function
-  mockChart.register = vi.fn();
-  mockChart.defaults = {
+  // Add static properties to the constructor
+  (MockChart as { register: ReturnType<typeof vi.fn> }).register = vi.fn();
+  (
+    MockChart as {
+      defaults: {
+        font: { family: string };
+        plugins: { legend: { display: boolean } };
+      };
+    }
+  ).defaults = {
     font: { family: "Arial" },
     plugins: { legend: { display: true } },
   };
 
   return {
     __esModule: true,
-    default: mockChart,
+    default: MockChart,
   };
 });
 
@@ -55,19 +83,10 @@ import { describe, expect, it, vi } from "vitest";
 import { CHART_TEST_IDS } from "../../constants/testIds";
 import RadarChart from "./RadarChart";
 
-// Define type for the Chart mock to include register and defaults properties
-type ChartMock = ReturnType<typeof vi.fn> & {
-  register: ReturnType<typeof vi.fn>;
-  defaults: {
-    font: { family: string };
-    plugins: { legend: { display: boolean } };
-  };
-};
-
 // Mock Chart.js more comprehensively to avoid canvas issues
 
 describe("RadarChart Component", () => {
-  let consoleErrorSpy: ReturnType<typeof vi.spyOn>;
+  let consoleErrorSpy: ReturnType<typeof suppressCanvasErrors>;
 
   beforeEach(() => {
     vi.clearAllMocks();
