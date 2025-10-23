@@ -73,7 +73,7 @@
     "@vitejs/plugin-react": "^5.0.4",
     "@vitest/coverage-istanbul": "4.0.1",
     "@vitest/coverage-v8": "^4.0.1",
-    "@vitest/ui": "4.0.1",
+    "@vitest/ui": "4.0.2",
     "autoprefixer": "^10.4.21",
     "canvas": "3.2.0",
     "cross-env": "^10.1.0",
