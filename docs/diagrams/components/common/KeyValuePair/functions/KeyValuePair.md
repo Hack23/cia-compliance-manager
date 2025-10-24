@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.33**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.34**](../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **KeyValuePair**(`props`): `ReactElement`
 
-Defined in: [components/common/KeyValuePair.tsx:43](https://github.com/Hack23/cia-compliance-manager/blob/1f4f2c51bc48d917eff1eb43881cee05d381f406/src/components/common/KeyValuePair.tsx#L43)
+Defined in: [components/common/KeyValuePair.tsx:43](https://github.com/Hack23/cia-compliance-manager/blob/a33140701dae02a85d2f0d957645dda4d2c4da41/src/components/common/KeyValuePair.tsx#L43)
 
 Displays a label-value pair for metrics and properties
 

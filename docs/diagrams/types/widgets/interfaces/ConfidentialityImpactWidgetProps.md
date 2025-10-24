@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.33**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.34**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ConfidentialityImpactWidgetProps
 
-Defined in: [types/widgets.ts:595](https://github.com/Hack23/cia-compliance-manager/blob/1f4f2c51bc48d917eff1eb43881cee05d381f406/src/types/widgets.ts#L595)
+Defined in: [types/widgets.ts:595](https://github.com/Hack23/cia-compliance-manager/blob/a33140701dae02a85d2f0d957645dda4d2c4da41/src/types/widgets.ts#L595)
 
 Props for the Confidentiality Impact Widget
 
@@ -25,7 +25,7 @@ affect data protection, access controls, and privacy safeguards. 🔒
 
 > **availabilityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:528](https://github.com/Hack23/cia-compliance-manager/blob/1f4f2c51bc48d917eff1eb43881cee05d381f406/src/types/widgets.ts#L528)
+Defined in: [types/widgets.ts:528](https://github.com/Hack23/cia-compliance-manager/blob/a33140701dae02a85d2f0d957645dda4d2c4da41/src/types/widgets.ts#L528)
 
 Availability security level
 
@@ -39,7 +39,7 @@ Availability security level
 
 > `optional` **className**: `string`
 
-Defined in: [types/widgets.ts:543](https://github.com/Hack23/cia-compliance-manager/blob/1f4f2c51bc48d917eff1eb43881cee05d381f406/src/types/widgets.ts#L543)
+Defined in: [types/widgets.ts:543](https://github.com/Hack23/cia-compliance-manager/blob/a33140701dae02a85d2f0d957645dda4d2c4da41/src/types/widgets.ts#L543)
 
 CSS class name
 
@@ -53,7 +53,7 @@ CSS class name
 
 > **confidentialityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:538](https://github.com/Hack23/cia-compliance-manager/blob/1f4f2c51bc48d917eff1eb43881cee05d381f406/src/types/widgets.ts#L538)
+Defined in: [types/widgets.ts:538](https://github.com/Hack23/cia-compliance-manager/blob/a33140701dae02a85d2f0d957645dda4d2c4da41/src/types/widgets.ts#L538)
 
 Confidentiality security level
 
@@ -67,7 +67,7 @@ Confidentiality security level
 
 > **integrityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:533](https://github.com/Hack23/cia-compliance-manager/blob/1f4f2c51bc48d917eff1eb43881cee05d381f406/src/types/widgets.ts#L533)
+Defined in: [types/widgets.ts:533](https://github.com/Hack23/cia-compliance-manager/blob/a33140701dae02a85d2f0d957645dda4d2c4da41/src/types/widgets.ts#L533)
 
 Integrity security level
 
@@ -81,7 +81,7 @@ Integrity security level
 
 > `optional` **level**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:523](https://github.com/Hack23/cia-compliance-manager/blob/1f4f2c51bc48d917eff1eb43881cee05d381f406/src/types/widgets.ts#L523)
+Defined in: [types/widgets.ts:523](https://github.com/Hack23/cia-compliance-manager/blob/a33140701dae02a85d2f0d957645dda4d2c4da41/src/types/widgets.ts#L523)
 
 Security level (used for backward compatibility)
 
@@ -95,7 +95,7 @@ Security level (used for backward compatibility)
 
 > `optional` **onLevelChange**: (`level`) => `void`
 
-Defined in: [types/widgets.ts:553](https://github.com/Hack23/cia-compliance-manager/blob/1f4f2c51bc48d917eff1eb43881cee05d381f406/src/types/widgets.ts#L553)
+Defined in: [types/widgets.ts:553](https://github.com/Hack23/cia-compliance-manager/blob/a33140701dae02a85d2f0d957645dda4d2c4da41/src/types/widgets.ts#L553)
 
 Callback when level changes
 
@@ -119,7 +119,7 @@ Callback when level changes
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widgets.ts:548](https://github.com/Hack23/cia-compliance-manager/blob/1f4f2c51bc48d917eff1eb43881cee05d381f406/src/types/widgets.ts#L548)
+Defined in: [types/widgets.ts:548](https://github.com/Hack23/cia-compliance-manager/blob/a33140701dae02a85d2f0d957645dda4d2c4da41/src/types/widgets.ts#L548)
 
 Test ID for testing
 

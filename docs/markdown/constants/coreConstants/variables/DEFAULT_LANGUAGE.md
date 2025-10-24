@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.33**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.34**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **DEFAULT\_LANGUAGE**: `"en-US"` = `"en-US"`
 
-Defined in: [constants/coreConstants.ts:261](https://github.com/Hack23/cia-compliance-manager/blob/1f4f2c51bc48d917eff1eb43881cee05d381f406/src/constants/coreConstants.ts#L261)
+Defined in: [constants/coreConstants.ts:261](https://github.com/Hack23/cia-compliance-manager/blob/a33140701dae02a85d2f0d957645dda4d2c4da41/src/constants/coreConstants.ts#L261)
 
 Default language for the application
