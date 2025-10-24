@@ -84,23 +84,6 @@ categories:
 change-template: "- $TITLE @$AUTHOR (#$NUMBER)"
 change-title-escapes: '\<*_&' # Escape characters for markdown
 
-exclude-labels:
-  - "skip-changelog"
-  - "duplicate"
-  - "invalid"
-  - "wontfix"
-
-include-paths:
-  - "src"
-  - "public"
-  - "docs"
-  - ".github"
-
-exclude-paths:
-  - "**/*.test.ts"
-  - "**/*.test.tsx"
-  - "**/*.spec.ts"
-  - "**/*.spec.tsx"
 
 template: |
   # Highlights
@@ -164,10 +147,6 @@ autolabeler:
     title:
       - '/^fix(\([^)]+\))?:/i'
       - '/^bug(\([^)]+\))?:/i'
-    branch:
-      - '/^fix\/.+/'
-      - '/^bugfix\/.+/'
-      - '/^hotfix\/.+/'
   
   - label: "fix"
     title:
@@ -230,9 +209,6 @@ autolabeler:
       - 'package-lock.json'
       - 'yarn.lock'
       - 'pnpm-lock.yaml'
-    branch:
-      - '/^dependabot\/.+/'
-      - '/^renovate\/.+/'
   
   # Security & Compliance
   - label: "security"
@@ -241,8 +217,6 @@ autolabeler:
       - '/^sec(\([^)]+\))?:/i'
       - '/^fix-vuln(\([^)]+\))?:/i'
       - '/\[security\]/i'
-    branch:
-      - '/^security\/.+/'
   
   - label: "compliance"
     title:
