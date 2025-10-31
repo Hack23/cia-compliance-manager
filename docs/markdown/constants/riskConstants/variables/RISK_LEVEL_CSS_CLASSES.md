@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.34**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.35**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **RISK\_LEVEL\_CSS\_CLASSES**: `Record`\<`string`, \{ `bg`: `string`; `text`: `string`; \}\>
 
-Defined in: [constants/riskConstants.ts:164](https://github.com/Hack23/cia-compliance-manager/blob/a33140701dae02a85d2f0d957645dda4d2c4da41/src/constants/riskConstants.ts#L164)
+Defined in: [constants/riskConstants.ts:164](https://github.com/Hack23/cia-compliance-manager/blob/b297770fc62abf558e2711cd029bbbe74e6c5cfb/src/constants/riskConstants.ts#L164)
 
 TailwindCSS classes for risk levels
