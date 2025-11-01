@@ -17,11 +17,11 @@
 - **Reusability - _Mandatory_:**
   - **Always** reuse/extend existing utilities, helpers, constants, components, and types.
     - **Key Reusable Items:**
-      - **Types:** `src/types/cia.ts`, `src/types/businessImpact.ts`, `src/types/widgets.ts`, `src/types/compliance.ts`, `src/types/componentProps.ts`, `src/types/widget-props.ts`
+      - **Types:** `src/types/cia.ts`, `src/types/businessImpact.ts`, `src/types/widgets.ts`, `src/types/compliance.ts`, `src/types/componentPropExports.ts`, `src/types/widget-props.ts`
       - **Constants:** `src/constants/securityLevels.ts`, `src/constants/businessConstants.ts`, `src/constants/appConstants.ts`, `src/constants/uiConstants.ts`, `src/constants/testIds.ts`
       - **Utilities:** `src/utils/securityLevelUtils.ts`, `src/utils/riskUtils.ts`, `src/utils/formatUtils.ts`, `src/utils/typeGuards.ts`, `src/utils/colorUtils.ts`
       - **Services:** `src/services/ciaContentService.ts`, `src/services/businessImpactService.ts`, `src/services/complianceService.ts`, `src/services/securityMetricsService.ts`, `src/services/BaseService.ts`
-      - **Components:** `src/components/UI/*`, `src/components/common/*`, `src/components/charts/RadarChart.tsx`
+      - **Components:** `src/components/common/*`, `src/components/charts/*`, `src/components/widgets/*`
   - _Avoid creating new types files unless absolutely necessary. Extend existing ones_.
   - _Any new component/type PR MUST justify why existing ones couldn't be reused/extended with a detailed comment_.
 
@@ -38,15 +38,15 @@
 ## Component Architecture
 
 - **Component Organization:**
-  - Place reusable UI components in `src/components/UI/`
-  - Place business logic components in `src/components/common/`
-  - Place feature-specific components in `src/components/widgets/`
+  - Place shared/common components in `src/components/common/`
+  - Place chart components in `src/components/charts/`
+  - Place feature-specific widget components in `src/components/widgets/`
   - Keep components small and focused on a single responsibility
   - Extract complex logic into custom hooks in `src/hooks/`
 
 - **Component Patterns:**
   - Use functional components with TypeScript interfaces for props
-  - Define prop interfaces in `src/types/componentProps.ts` or `src/types/widget-props.ts`
+  - Define prop interfaces in `src/types/componentPropExports.ts` or `src/types/widget-props.ts`
   - Use React hooks for state management
   - Implement proper error boundaries using `react-error-boundary`
   - Use `React.memo()` for performance optimization when appropriate
