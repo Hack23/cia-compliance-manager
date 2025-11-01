@@ -1,8 +1,19 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Validate GitHub Copilot agent configuration files
 # This script ensures all agent YAML files are syntactically valid
 
 set -e
+
+# Check for required dependencies
+if ! command -v npx &> /dev/null; then
+    echo "❌ Error: npx is required but not found"
+    exit 1
+fi
+
+if ! command -v jq &> /dev/null; then
+    echo "❌ Error: jq is required but not found"
+    exit 1
+fi
 
 AGENTS_DIR=".github/agents"
 AGENTS=(
@@ -34,13 +45,13 @@ for agent in "${AGENTS[@]}"; do
     fi
     
     # Validate YAML syntax and extract fields using npx js-yaml
-    if YAML_OUTPUT=$(npx js-yaml "$AGENT_PATH" 2>&1); then
+    if YAML_JSON=$(npx js-yaml "$AGENT_PATH" 2>&1); then
         echo "✅ Valid: $agent"
         
-        # Check for required fields in JSON output (js-yaml converts to JSON)
+        # Check for required fields using jq for proper JSON parsing
         REQUIRED_FIELDS=("name" "description" "instructions")
         for field in "${REQUIRED_FIELDS[@]}"; do
-            if ! echo "$YAML_OUTPUT" | grep -q "\"$field\":"; then
+            if ! echo "$YAML_JSON" | jq -e ".$field" > /dev/null 2>&1; then
                 echo "   ⚠️  Warning: $agent missing '$field' field"
             fi
         done
