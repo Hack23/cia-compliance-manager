@@ -177,6 +177,6 @@ instructions: |
   
   ## Release Context (v1.0 Focus)
   - Update documentation for bug fixes and stability improvements
-  - Do not document new features (they shouldn't be added)
+  - Update documentation only for permitted changes (bug fixes and stability improvements, not new features)
   - Ensure existing documentation is accurate
   - Improve documentation quality and clarity where needed

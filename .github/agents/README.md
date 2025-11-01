@@ -175,8 +175,14 @@ When updating or adding agents:
 To validate agent configuration files:
 
 ```bash
-# Using js-yaml (if available)
-npx js-yaml .github/agents/agent-name.yml
+# Using js-yaml to validate a specific agent
+npx js-yaml .github/agents/typescript-react-agent.yml
+
+# Or validate all agents at once
+for file in .github/agents/*.yml; do 
+  echo "Validating $file..."
+  npx js-yaml "$file" && echo "✓ Valid"
+done
 
 # Or use any YAML validator
 ```
