@@ -143,6 +143,18 @@
   - Documentation: Are changes documented?
   - Breaking changes: Are they justified and documented?
 
+## Specialized Agents
+
+This project has specialized agent profiles in `.github/agents/` that provide domain-specific expertise:
+
+- **TypeScript React Agent** (`typescript-react-agent.yml`) - Expert in TypeScript and React development
+- **Testing Agent** (`testing-agent.yml`) - Expert in Vitest and Cypress testing
+- **Code Review Agent** (`code-review-agent.yml`) - Expert in code quality and security review
+- **Documentation Agent** (`documentation-agent.yml`) - Expert in technical documentation
+- **Security Compliance Agent** (`security-compliance-agent.yml`) - Expert in security and compliance frameworks
+
+For detailed information about these agents and how to use them, see [`.github/agents/README.md`](.github/agents/README.md).
+
 ## Summary
 
 Focus on stability, strict TypeScript usage, and Vite-enhanced testing while reusing existing code. Align all changes with clear business, architectural, and security requirements to achieve a robust v1.0 release.

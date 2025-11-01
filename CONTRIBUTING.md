@@ -32,6 +32,18 @@ Here are a few things you can do that will increase the likelihood of your pull 
 
 Work in Progress pull requests are also welcome to get feedback early on, or if there is something blocked you.
 
+## GitHub Copilot Assistance
+
+This project has specialized GitHub Copilot agent profiles to help you with development:
+
+- **TypeScript React Agent** - Expert assistance with TypeScript and React development
+- **Testing Agent** - Help with Vitest unit tests and Cypress E2E tests
+- **Code Review Agent** - Automated code quality and security reviews
+- **Documentation Agent** - Support for technical documentation and API docs
+- **Security Compliance Agent** - Guidance on security and compliance frameworks
+
+Learn more about these agents in [`.github/agents/README.md`](.github/agents/README.md).
+
 ## Resources
 
 - [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)
