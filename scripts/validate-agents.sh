@@ -58,10 +58,12 @@ for agent in "${AGENTS[@]}"; do
     
     # Validate YAML syntax and extract fields using npx js-yaml
     # npx will automatically download js-yaml if not present
-    if YAML_JSON=$(npx js-yaml "$AGENT_PATH" 2>&1); then
+    # Capture only stdout (valid JSON) and check exit code separately
+    if YAML_JSON=$(npx js-yaml "$AGENT_PATH" 2>/dev/null); then
         echo "✅ Valid: $agent"
         
         # Check for required fields using jq for proper JSON parsing
+        # This only runs when YAML parsing succeeded and JSON is valid
         REQUIRED_FIELDS=("name" "description" "instructions")
         for field in "${REQUIRED_FIELDS[@]}"; do
             if ! echo "$YAML_JSON" | jq -e ".$field" > /dev/null 2>&1; then
