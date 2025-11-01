@@ -1,17 +1,29 @@
 #!/usr/bin/env bash
 # Validate GitHub Copilot agent configuration files
 # This script ensures all agent YAML files are syntactically valid
+#
+# Dependencies:
+#   - npx: Comes with Node.js (npm >= 5.2.0)
+#   - jq: JSON processor (https://stedolan.github.io/jq/)
+#     Install with: apt-get install jq (Linux), brew install jq (macOS)
+#   - js-yaml: Will be installed via npx if not present
+#
+# Usage:
+#   ./scripts/validate-agents.sh
+#   npm run validate:agents
 
 set -e
 
 # Check for required dependencies
 if ! command -v npx &> /dev/null; then
     echo "❌ Error: npx is required but not found"
+    echo "   Install Node.js (which includes npx): https://nodejs.org/"
     exit 1
 fi
 
 if ! command -v jq &> /dev/null; then
     echo "❌ Error: jq is required but not found"
+    echo "   Install jq: apt-get install jq (Linux) or brew install jq (macOS)"
     exit 1
 fi
 
@@ -45,6 +57,7 @@ for agent in "${AGENTS[@]}"; do
     fi
     
     # Validate YAML syntax and extract fields using npx js-yaml
+    # npx will automatically download js-yaml if not present
     if YAML_JSON=$(npx js-yaml "$AGENT_PATH" 2>&1); then
         echo "✅ Valid: $agent"
         
@@ -52,7 +65,8 @@ for agent in "${AGENTS[@]}"; do
         REQUIRED_FIELDS=("name" "description" "instructions")
         for field in "${REQUIRED_FIELDS[@]}"; do
             if ! echo "$YAML_JSON" | jq -e ".$field" > /dev/null 2>&1; then
-                echo "   ⚠️  Warning: $agent missing '$field' field"
+                echo "   ❌ Error: $agent missing required '$field' field"
+                FAILED=1
             fi
         done
     else
