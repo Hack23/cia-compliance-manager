@@ -33,25 +33,20 @@ for agent in "${AGENTS[@]}"; do
         continue
     fi
     
-    # Validate YAML syntax using npx js-yaml
-    if npx js-yaml "$AGENT_PATH" > /dev/null 2>&1; then
+    # Validate YAML syntax and extract fields using npx js-yaml
+    if YAML_OUTPUT=$(npx js-yaml "$AGENT_PATH" 2>&1); then
         echo "✅ Valid: $agent"
+        
+        # Check for required fields in JSON output (js-yaml converts to JSON)
+        REQUIRED_FIELDS=("name" "description" "instructions")
+        for field in "${REQUIRED_FIELDS[@]}"; do
+            if ! echo "$YAML_OUTPUT" | grep -q "\"$field\":"; then
+                echo "   ⚠️  Warning: $agent missing '$field' field"
+            fi
+        done
     else
         echo "❌ Invalid YAML: $agent"
         FAILED=1
-    fi
-    
-    # Check for required fields
-    if ! grep -q "^name:" "$AGENT_PATH"; then
-        echo "   ⚠️  Warning: $agent missing 'name' field"
-    fi
-    
-    if ! grep -q "^description:" "$AGENT_PATH"; then
-        echo "   ⚠️  Warning: $agent missing 'description' field"
-    fi
-    
-    if ! grep -q "^instructions:" "$AGENT_PATH"; then
-        echo "   ⚠️  Warning: $agent missing 'instructions' field"
     fi
 done
 
