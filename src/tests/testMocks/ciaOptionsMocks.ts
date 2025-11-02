@@ -1,17 +1,20 @@
 // Use vi.hoisted to create mocks that can be used at the top level
-import { vi } from "vitest";
+import { vi, Mock } from "vitest";
 import { SecurityLevel } from "../../types/cia";
 
 // Define types for Chart.js mock
 interface ChartMock {
-  destroy: ReturnType<typeof vi.fn>;
-  update: ReturnType<typeof vi.fn>;
-  resize: ReturnType<typeof vi.fn>;
+  destroy: Mock;
+  update: Mock;
+  resize: Mock;
   data: { datasets: any[] };
 }
 
-interface ChartConstructor extends ReturnType<typeof vi.fn> {
-  register: ReturnType<typeof vi.fn>;
+// ChartConstructor is a callable function that returns ChartMock
+// with additional properties
+type ChartConstructor = {
+  (): ChartMock;
+  register: Mock;
   defaults: {
     font: { family: string };
     plugins: { legend: { display: boolean } };
@@ -29,7 +32,7 @@ const mockChartInstance = vi.hoisted(
 );
 
 const mockChartConstructor = vi.hoisted((): ChartConstructor => {
-  const constructor = vi.fn(() => mockChartInstance) as ChartConstructor;
+  const constructor = vi.fn(() => mockChartInstance) as unknown as ChartConstructor;
   constructor.register = vi.fn();
   constructor.defaults = {
     font: { family: "Arial" },
