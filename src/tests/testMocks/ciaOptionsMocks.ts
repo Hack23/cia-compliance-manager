@@ -10,7 +10,8 @@ interface ChartMock {
   data: { datasets: any[] };
 }
 
-interface ChartConstructor extends ReturnType<typeof vi.fn> {
+interface ChartConstructor {
+  (): ChartMock;
   register: ReturnType<typeof vi.fn>;
   defaults: {
     font: { family: string };
@@ -29,13 +30,14 @@ const mockChartInstance = vi.hoisted(
 );
 
 const mockChartConstructor = vi.hoisted((): ChartConstructor => {
-  const constructor = vi.fn(() => mockChartInstance) as ChartConstructor;
-  constructor.register = vi.fn();
-  constructor.defaults = {
-    font: { family: "Arial" },
-    plugins: { legend: { display: false } },
-  };
-  return constructor;
+  const constructor = vi.fn(() => mockChartInstance);
+  return Object.assign(constructor, {
+    register: vi.fn(),
+    defaults: {
+      font: { family: "Arial" },
+      plugins: { legend: { display: false } },
+    },
+  }) as ChartConstructor;
 });
 
 // Properly hoisted CIA options mock
