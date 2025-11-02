@@ -9,3 +9,62 @@ updates:
     directory: /
     schedule:
       interval: daily
+    groups:
+      # Vite ecosystem - bundler and related plugins
+      vite:
+        patterns:
+          - "vite"
+          - "@vitejs/*"
+          - "vite-*"
+
+      # Vitest ecosystem - testing framework and coverage tools
+      vitest:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+
+      # ESLint ecosystem - linter and plugins
+      eslint:
+        patterns:
+          - "eslint"
+          - "@eslint/*"
+          - "eslint-*"
+          - "typescript-eslint"
+
+      # Testing libraries - React Testing Library and related
+      testing-libraries:
+        patterns:
+          - "@testing-library/*"
+
+      # TypeScript type definitions
+      typescript-types:
+        patterns:
+          - "@types/*"
+
+      # Tailwind CSS ecosystem - styling framework and plugins
+      tailwindcss:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+          - "autoprefixer"
+          - "postcss"
+
+      # Cypress ecosystem - E2E testing framework and plugins
+      cypress:
+        patterns:
+          - "cypress"
+          - "cypress-*"
+          - "@cypress/*"
+
+      # React ecosystem - React and React DOM
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "react-error-boundary"
+
+      # Documentation tools - TypeDoc and plugins
+      documentation:
+        patterns:
+          - "typedoc"
+          - "typedoc-plugin-*"
