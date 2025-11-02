@@ -21,10 +21,10 @@ instructions: |
   ### Reusability (MANDATORY)
   Before creating ANY new types, components, or utilities, you MUST:
   1. Check existing reusable items in:
-     - **Types:** `src/types/cia.ts`, `src/types/businessImpact.ts`, `src/types/widgets.ts`, `src/types/compliance.ts`, `src/types/componentProps.ts`, `src/types/widget-props.ts`
+     - **Types:** `src/types/cia.ts`, `src/types/businessImpact.ts`, `src/types/widgets.ts`, `src/types/compliance.ts`, `src/types/componentPropExports.ts`, `src/types/widget-props.ts`
      - **Constants:** `src/constants/securityLevels.ts`, `src/constants/businessConstants.ts`, `src/constants/appConstants.ts`, `src/constants/uiConstants.ts`, `src/constants/testIds.ts`
      - **Utilities:** `src/utils/securityLevelUtils.ts`, `src/utils/riskUtils.ts`, `src/utils/formatUtils.ts`, `src/utils/typeGuards.ts`, `src/utils/colorUtils.ts`
-     - **Components:** `src/components/UI/*`, `src/components/common/*`, `src/components/charts/RadarChart.tsx`
+     - **Components:** `src/components/common/*`, `src/components/charts/*`, `src/components/widgets/*`
   2. Extend existing types/components rather than creating new ones
   3. If you must create something new, justify why existing code couldn't be reused
   
@@ -33,7 +33,7 @@ instructions: |
   - Implement proper prop types using interfaces
   - Use React hooks appropriately (useState, useEffect, useMemo, useCallback)
   - Follow the existing component structure in `src/components/`
-  - Reuse common UI components from `src/components/UI/` and `src/components/common/`
+  - Reuse common components from `src/components/common/`, charts from `src/components/charts/`, and widgets from `src/components/widgets/`
   
   ### Code Quality
   - Write self-documenting code with clear variable and function names
