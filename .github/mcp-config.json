@@ -1,0 +1,168 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schemas/mcp-config.json",
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/home/runner/work/cia-compliance-manager/cia-compliance-manager"
+      ],
+      "description": "File system access for the CIA Compliance Manager codebase",
+      "enabled": true
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "description": "GitHub API access for repository management, issues, PRs, and workflows",
+      "enabled": true
+    },
+    "typescript": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-typescript",
+        "--project",
+        "/home/runner/work/cia-compliance-manager/cia-compliance-manager/tsconfig.json"
+      ],
+      "description": "TypeScript language server for type information, navigation, and refactoring",
+      "enabled": true
+    },
+    "eslint": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "eslint",
+        "--format=json"
+      ],
+      "description": "ESLint integration for code quality and linting",
+      "enabled": true,
+      "cwd": "/home/runner/work/cia-compliance-manager/cia-compliance-manager"
+    },
+    "vitest": {
+      "command": "npx",
+      "args": [
+        "vitest",
+        "--run",
+        "--reporter=json"
+      ],
+      "description": "Vitest test runner for unit and integration tests",
+      "enabled": true,
+      "cwd": "/home/runner/work/cia-compliance-manager/cia-compliance-manager"
+    },
+    "npm": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-npm"
+      ],
+      "description": "NPM package information and dependency management",
+      "enabled": true
+    },
+    "web-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      },
+      "description": "Web search capabilities for researching documentation, frameworks, and best practices",
+      "enabled": false,
+      "note": "Requires BRAVE_API_KEY environment variable. Enable when needed for research."
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "description": "Persistent memory for storing context across Copilot sessions",
+      "enabled": true
+    }
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "project": "CIA Compliance Manager",
+    "description": "MCP server configuration for GitHub Copilot to enhance development experience",
+    "tech-stack": {
+      "runtime": "Node.js 24+",
+      "language": "TypeScript 5.9",
+      "framework": "React 19.2",
+      "build": "Vite 7.x",
+      "styling": "TailwindCSS 4.x",
+      "testing": {
+        "unit": "Vitest 4.x",
+        "e2e": "Cypress 15.x"
+      },
+      "charts": "Chart.js 4.5"
+    },
+    "key-directories": {
+      "source": "src/",
+      "tests": ["src/**/*.test.ts", "src/**/*.test.tsx", "cypress/"],
+      "build": "dist/",
+      "docs": "docs/",
+      "agents": ".github/agents/"
+    },
+    "guidelines": {
+      "instructions": ".github/copilot-instructions.md",
+      "agents-readme": ".github/agents/README.md",
+      "contributing": "CONTRIBUTING.md",
+      "security": "SECURITY.md"
+    },
+    "reusability-mandate": {
+      "description": "Always check and reuse existing code before creating new utilities, types, or components",
+      "key-reusable-items": {
+        "types": [
+          "src/types/cia.ts",
+          "src/types/businessImpact.ts",
+          "src/types/widgets.ts",
+          "src/types/compliance.ts",
+          "src/types/componentPropExports.ts",
+          "src/types/widget-props.ts"
+        ],
+        "constants": [
+          "src/constants/securityLevels.ts",
+          "src/constants/businessConstants.ts",
+          "src/constants/appConstants.ts",
+          "src/constants/uiConstants.ts",
+          "src/constants/testIds.ts"
+        ],
+        "utilities": [
+          "src/utils/securityLevelUtils.ts",
+          "src/utils/riskUtils.ts",
+          "src/utils/formatUtils.ts",
+          "src/utils/typeGuards.ts",
+          "src/utils/colorUtils.ts"
+        ],
+        "services": [
+          "src/services/ciaContentService.ts",
+          "src/services/businessImpactService.ts",
+          "src/services/complianceService.ts",
+          "src/services/securityMetricsService.ts",
+          "src/services/BaseService.ts"
+        ],
+        "components": [
+          "src/components/common/",
+          "src/components/charts/",
+          "src/components/widgets/"
+        ]
+      }
+    },
+    "custom-agents": {
+      "typescript-react": ".github/agents/typescript-react-agent.yml",
+      "testing": ".github/agents/testing-agent.yml",
+      "code-review": ".github/agents/code-review-agent.yml",
+      "documentation": ".github/agents/documentation-agent.yml",
+      "security-compliance": ".github/agents/security-compliance-agent.yml"
+    },
+    "release-priority": "v1.0 - Focus on stability, bug fixes, and test coverage. No new features."
+  }
+}

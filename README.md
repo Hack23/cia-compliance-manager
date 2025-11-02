@@ -647,6 +647,51 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://vitejs.dev/guide/static-deploy.html) for more information.
 
+## 🤖 GitHub Copilot & MCP Servers
+
+This project is optimized for GitHub Copilot with Model Context Protocol (MCP) server integration to provide enhanced development assistance.
+
+### Setup
+
+GitHub Copilot Workspace sessions automatically:
+- Install all npm dependencies
+- Verify Cypress installation
+- Build TypeScript code
+- Run ESLint validation
+- Execute initial tests
+
+Configuration files:
+- **[`.github/copilot-setup-steps.yml`](.github/copilot-setup-steps.yml)** - Pre-installation steps for Copilot workspace sessions
+- **[`.github/mcp-config.json`](.github/mcp-config.json)** - MCP server configuration for enhanced context
+- **[`.github/copilot-instructions.md`](.github/copilot-instructions.md)** - Project-specific coding guidelines
+
+### MCP Servers
+
+The following MCP servers provide specialized capabilities:
+
+| Server | Purpose | Status |
+|--------|---------|--------|
+| filesystem | File system access for the codebase | ✅ Enabled |
+| github | GitHub API for repository, issues, PRs, and workflows | ✅ Enabled |
+| typescript | TypeScript language server for type info and refactoring | ✅ Enabled |
+| eslint | Code quality and linting integration | ✅ Enabled |
+| vitest | Test runner for unit and integration tests | ✅ Enabled |
+| npm | NPM package information and dependency management | ✅ Enabled |
+| memory | Persistent memory across Copilot sessions | ✅ Enabled |
+
+For detailed information, see [**MCP Servers Documentation**](.github/MCP-SERVERS.md).
+
+### Custom Agents
+
+Specialized agents provide domain-specific expertise:
+- **TypeScript React Agent** - Expert in TypeScript and React development
+- **Testing Agent** - Expert in Vitest and Cypress testing
+- **Code Review Agent** - Expert in code quality and security review
+- **Documentation Agent** - Expert in technical documentation
+- **Security Compliance Agent** - Expert in security and compliance frameworks
+
+See [**Custom Agents Guide**](.github/agents/README.md) for details.
+
 ## Learn More
 
 You can learn more in the [Vite documentation](https://vitejs.dev/guide/).

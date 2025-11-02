@@ -1,5 +1,8 @@
 name: Test and Report
 
+# This workflow follows the setup steps defined in .github/copilot-setup-steps.yml
+# for consistency between CI/CD and GitHub Copilot development environments
+
 on:
   push:
     branches: ["main"]
@@ -27,6 +30,7 @@ jobs:
           node-version: "24"
           cache: "npm"
 
+      # System dependencies as defined in .github/copilot-setup-steps.yml
       - name: Setup display and dependencies
         run: |
           sudo apt-get update

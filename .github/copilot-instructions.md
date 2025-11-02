@@ -155,6 +155,16 @@ This project has specialized agent profiles in `.github/agents/` that provide do
 
 For detailed information about these agents and how to use them, see [`.github/agents/README.md`](.github/agents/README.md).
 
+## MCP Server Configuration
+
+This project uses Model Context Protocol (MCP) servers to enhance GitHub Copilot's capabilities:
+
+- **Configuration**: `.github/mcp-config.json` defines available MCP servers
+- **Setup Steps**: `.github/copilot-setup-steps.yml` pre-installs dependencies
+- **Documentation**: See [`.github/MCP-SERVERS.md`](.github/MCP-SERVERS.md) for details
+
+Available servers include filesystem, GitHub API, TypeScript language server, ESLint, Vitest, NPM, and persistent memory.
+
 ## Summary
 
 Focus on stability, strict TypeScript usage, and Vite-enhanced testing while reusing existing code. Align all changes with clear business, architectural, and security requirements to achieve a robust v1.0 release.

@@ -1,0 +1,102 @@
+# GitHub Copilot Setup Steps
+# This file configures the environment setup for GitHub Copilot workspace sessions
+# It ensures all dependencies are pre-installed before the agent starts working
+
+name: CIA Compliance Manager Development Environment
+
+# Pre-installation steps to prepare the development environment
+setup:
+  # Install Node.js dependencies
+  - name: Install Node.js dependencies
+    run: npm ci
+    description: Install all npm dependencies from package-lock.json for reproducible builds
+    
+  # Verify Cypress installation for E2E testing
+  - name: Verify Cypress
+    run: npx cypress verify
+    description: Ensure Cypress binary is properly installed for E2E testing
+    
+  # Build TypeScript to validate configuration
+  - name: Build TypeScript
+    run: npm run build
+    description: Compile TypeScript to ensure no compilation errors exist
+    
+  # Validate ESLint configuration
+  - name: Validate ESLint
+    run: npm run lint
+    description: Run ESLint to check code quality and identify issues
+    
+  # Run tests to verify current state
+  - name: Run unit tests
+    run: npm test -- --run --reporter=verbose
+    description: Execute Vitest unit tests to ensure baseline functionality
+    continue-on-error: true
+
+# Environment variables needed for the development environment
+environment:
+  NODE_ENV: development
+  CYPRESS_VERIFY_TIMEOUT: "100000"
+  NODE_OPTIONS: "--max-old-space-size=8192"
+
+# System dependencies required for the stack
+system-dependencies:
+  - graphviz  # For dependency diagrams
+  - libgtk2.0-0  # For Cypress
+  - libgtk-3-0  # For Cypress
+  - libgbm-dev  # For Cypress
+  - libnotify-dev  # For Cypress
+  - libnss3  # For Cypress
+  - libxss1  # For Cypress
+  - libasound2  # For Cypress audio
+  - libxtst6  # For Cypress
+  - xauth  # For X11 authentication
+  - xvfb  # Virtual framebuffer for headless testing
+  - dbus  # D-Bus message bus system
+  - dbus-x11  # D-Bus X11 integration
+
+# Key directories and their purposes
+workspace:
+  source: src/
+  tests: 
+    - src/**/*.test.ts
+    - src/**/*.test.tsx
+    - cypress/
+  build: dist/
+  docs: docs/
+  config:
+    - tsconfig.json
+    - vite.config.ts
+    - cypress.config.ts
+    - eslint.config.js
+
+# Important files that Copilot should be aware of
+key-files:
+  guidelines: .github/copilot-instructions.md
+  agents: .github/agents/
+  workflows: .github/workflows/
+  package-manifest: package.json
+  typescript-config: tsconfig.json
+  vite-config: vite.config.ts
+  cypress-config: cypress.config.ts
+  eslint-config: eslint.config.js
+  tailwind-config: tailwind.config.js
+
+# Project-specific context for Copilot
+context:
+  project-type: React TypeScript Application
+  build-tool: Vite
+  testing:
+    unit: Vitest with React Testing Library
+    e2e: Cypress
+    coverage: Vitest Coverage (Istanbul/V8)
+  frameworks:
+    - React 19.x
+    - TypeScript 5.x
+    - TailwindCSS 4.x
+    - Chart.js 4.x
+  release-focus: v1.0 - Stability, bug fixes, no new features
+  coding-standards:
+    - Strict TypeScript typing (no 'any')
+    - Mandatory code reusability
+    - 80% minimum test coverage
+    - Security-first development
