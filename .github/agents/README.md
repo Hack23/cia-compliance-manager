@@ -9,7 +9,7 @@ Custom agents are specialized configurations that help GitHub Copilot provide mo
 ## Available Agents
 
 ### 1. TypeScript React Development Agent
-**File:** `typescript-react-agent.yml`
+**File:** `typescript-react-agent.md`
 
 Expert in TypeScript and React development for the CIA Compliance Manager.
 
@@ -28,7 +28,7 @@ Expert in TypeScript and React development for the CIA Compliance Manager.
 ---
 
 ### 2. Testing Agent
-**File:** `testing-agent.yml`
+**File:** `testing-agent.md`
 
 Expert in testing using Vitest and Cypress.
 
@@ -47,7 +47,7 @@ Expert in testing using Vitest and Cypress.
 ---
 
 ### 3. Code Review Agent
-**File:** `code-review-agent.yml`
+**File:** `code-review-agent.md`
 
 Expert in code quality, security, and best practices.
 
@@ -68,7 +68,7 @@ Expert in code quality, security, and best practices.
 ---
 
 ### 4. Documentation Agent
-**File:** `documentation-agent.yml`
+**File:** `documentation-agent.md`
 
 Expert in technical documentation and API documentation.
 
@@ -87,7 +87,7 @@ Expert in technical documentation and API documentation.
 ---
 
 ### 5. Security and Compliance Agent
-**File:** `security-compliance-agent.yml`
+**File:** `security-compliance-agent.md`
 
 Expert in security best practices and compliance frameworks.
 
@@ -138,31 +138,46 @@ All agents follow these core project principles:
 
 ## Agent Configuration Format
 
-Each agent configuration file follows this structure:
+Each agent configuration file is a Markdown file with YAML frontmatter that follows this structure:
 
-```yaml
-name: Agent Name
+```markdown
+---
+name: agent-name
 description: Brief description of the agent's expertise
+tools: ["read", "edit", "search"]  # optional - list of tool names or aliases
+---
 
-instructions: |
-  Detailed instructions for the agent including:
-  - Area of expertise
-  - Project-specific guidelines
-  - Best practices
-  - When to use the agent
-  - How to respond to requests
+Agent prompt and instructions in Markdown format.
+
+## Expertise Area
+- Detailed instructions for the agent
+- Project-specific guidelines
+- Best practices
+- When to use the agent
+- How to respond to requests
 ```
+
+**Key Properties:**
+- `name`: Unique identifier for the agent (lowercase with hyphens)
+- `description`: Brief description of the agent's purpose and expertise
+- `tools`: (Optional) List of tools the agent can use. If omitted, the agent has access to all available tools.
+
+The Markdown content below the frontmatter defines the agent's behavior, expertise, and instructions.
 
 ## Contributing to Agent Configurations
 
 When updating or adding agents:
 
-1. Follow the existing YAML structure
-2. Ensure instructions are clear and actionable
-3. Include project-specific guidelines
-4. Reference relevant files and directories
-5. Align with the v1.0 release priorities
-6. Validate YAML syntax before committing
+1. Create a Markdown file (`.md` extension) with YAML frontmatter
+2. Use lowercase with hyphens for the filename (e.g., `my-agent.md`)
+3. Include `name` and `description` in the YAML frontmatter
+4. Optionally specify `tools` list if the agent should have restricted tool access
+5. Write agent instructions in Markdown format below the frontmatter
+6. Ensure instructions are clear and actionable
+7. Include project-specific guidelines
+8. Reference relevant files and directories
+9. Align with the v1.0 release priorities
+10. Validate YAML frontmatter syntax before committing
 
 ## Related Files
 
@@ -175,16 +190,23 @@ When updating or adding agents:
 To validate agent configuration files:
 
 ```bash
-# Using js-yaml to validate a specific agent
-npx js-yaml .github/agents/typescript-react-agent.yml
+# Validate YAML frontmatter in a specific agent
+npx js-yaml -t < <(sed -n '/^---$/,/^---$/p' .github/agents/typescript-react-agent.md | sed '1d;$d')
 
 # Or validate all agents at once
-for file in .github/agents/*.yml; do 
-  echo "Validating $file..."
-  npx js-yaml "$file" && echo "✓ Valid"
+for file in .github/agents/*.md; do 
+  if [ "$file" != ".github/agents/README.md" ]; then
+    echo "Validating $file..."
+    npx js-yaml -t < <(sed -n '/^---$/,/^---$/p' "$file" | sed '1d;$d') && echo "✓ Valid frontmatter"
+  fi
 done
 
-# Or use any YAML validator
+# Or check the Markdown structure
+npx markdownlint .github/agents/*.md --ignore .github/agents/README.md
 ```
 
-All agent files must be valid YAML and follow the defined structure.
+All agent files must:
+- Be valid Markdown files with YAML frontmatter
+- Follow the defined structure
+- Have valid YAML in the frontmatter section
+- Include the required `name` and `description` properties
