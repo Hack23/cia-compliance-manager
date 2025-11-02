@@ -54,6 +54,7 @@ updates:
         patterns:
           - "cypress"
           - "cypress-*"
+          - "@cypress/*"
 
       # React ecosystem - React and React DOM
       react:
