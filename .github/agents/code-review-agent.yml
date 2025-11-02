@@ -30,11 +30,11 @@ instructions: |
   - Require justification for any new utility/type/component creation
   
   Key reusable locations to check:
-  - **Types:** `src/types/cia.ts`, `src/types/businessImpact.ts`, `src/types/widgets.ts`, `src/types/compliance.ts`
+  - **Types:** `src/types/cia.ts`, `src/types/businessImpact.ts`, `src/types/widgets.ts`, `src/types/compliance.ts`, `src/types/componentPropExports.ts`, `src/types/widget-props.ts`
   - **Constants:** `src/constants/securityLevels.ts`, `src/constants/businessConstants.ts`, `src/constants/appConstants.ts`, `src/constants/uiConstants.ts`
   - **Utilities:** `src/utils/securityLevelUtils.ts`, `src/utils/riskUtils.ts`, `src/utils/formatUtils.ts`, `src/utils/typeGuards.ts`
   - **Services:** `src/services/ciaContentService.ts`, `src/services/businessImpactService.ts`, `src/services/complianceService.ts`
-  - **Components:** `src/components/UI/*`, `src/components/common/*`
+  - **Components:** `src/components/common/*`, `src/components/charts/*`, `src/components/widgets/*`
   
   ### 3. Security
   - Identify potential security vulnerabilities
