@@ -6,7 +6,7 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/home/runner/work/cia-compliance-manager/cia-compliance-manager"
+        "./"
       ],
       "description": "File system access for the CIA Compliance Manager codebase",
       "enabled": true
@@ -29,7 +29,7 @@
         "-y",
         "@modelcontextprotocol/server-typescript",
         "--project",
-        "/home/runner/work/cia-compliance-manager/cia-compliance-manager/tsconfig.json"
+        "./tsconfig.json"
       ],
       "description": "TypeScript language server for type information, navigation, and refactoring",
       "enabled": true
@@ -43,7 +43,7 @@
       ],
       "description": "ESLint integration for code quality and linting",
       "enabled": true,
-      "cwd": "/home/runner/work/cia-compliance-manager/cia-compliance-manager"
+      "cwd": "./"
     },
     "vitest": {
       "command": "npx",
@@ -54,7 +54,7 @@
       ],
       "description": "Vitest test runner for unit and integration tests",
       "enabled": true,
-      "cwd": "/home/runner/work/cia-compliance-manager/cia-compliance-manager"
+      "cwd": "./"
     },
     "npm": {
       "command": "npx",

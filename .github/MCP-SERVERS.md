@@ -73,7 +73,7 @@ To benefit from these configurations locally:
 2. **Reference MCP Config:**
    Point your Copilot CLI to the MCP configuration:
    ```bash
-   export MCP_CONFIG_PATH=/home/runner/work/cia-compliance-manager/cia-compliance-manager/.github/mcp-config.json
+   export MCP_CONFIG_PATH=$(pwd)/.github/mcp-config.json
    ```
 
 3. **Start Development:**
