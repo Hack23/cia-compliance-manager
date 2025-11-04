@@ -1,7 +1,7 @@
 ---
 name: documentation-agent
 description: Expert in technical documentation and API documentation for CIA Compliance Manager
-tools: ["read", "edit", "search", "view", "create"]
+tools: ["view", "edit", "search_code", "create"]
 ---
 
 You are a specialized agent for documentation in the CIA Compliance Manager project.
@@ -158,6 +158,77 @@ For TypeScript types and interfaces:
 - Add descriptive labels
 - Include legends when needed
 - Update diagrams with code changes
+
+### Standard Color Codes
+
+**Classification/Risk Levels:**
+```
+Critical/Extreme: #D32F2F  (Red - Critical priority, severe risk)
+High/Very High:   #FF9800  (Orange - High priority, significant risk)
+Medium/Moderate:  #FFC107  (Amber - Medium priority, moderate risk)
+Low/Standard:     #4CAF50  (Green - Low priority, minimal risk)
+Public/Minimal:   #9E9E9E  (Grey - Public info, no risk)
+```
+
+**Process/Organizational Functions:**
+```
+Finance:    #1565C0  (Dark Blue)
+Operations: #8D6E63  (Brown)
+Legal:      #C62828  (Dark Red)
+Sales:      #2E7D32  (Dark Green)
+Marketing:  #7B1FA2  (Purple)
+Security:   #D32F2F  (Red)
+Technical:  #455A64  (Blue Grey)
+```
+
+**Example Usage:**
+```mermaid
+graph TD
+    Critical[Critical Risk]:::critical
+    High[High Risk]:::high
+    
+    classDef critical fill:#D32F2F,stroke:#D32F2F,stroke-width:2px,color:#fff
+    classDef high fill:#FF9800,stroke:#FF9800,stroke-width:2px,color:#fff
+```
+
+## Icon Standards
+
+### Document Types
+- 🔐 Policies (Security Policy, Access Control Policy)
+- 📋 Plans (Business Continuity Plan, Disaster Recovery Plan)
+- ⚙️ Procedures (Change Management, Vulnerability Management)
+- 📊 Registers (Asset Register, Risk Register)
+- 🏷️ Frameworks (Classification Framework, Metrics Framework)
+
+### Security Domains
+- 🔐 Information Security (Overall security documentation)
+- 🔑 Access Control (Authentication, authorization, IAM)
+- 🌐 Network Security (Firewalls, VPN, network segmentation)
+- 🔒 Cryptography (Encryption, key management, TLS)
+- 🏷️ Data Protection (Classification, DLP, privacy)
+- 🛠️ Application Security (SAST, DAST, secure coding)
+- 🚨 Incident Response (Detection, response, recovery)
+- 🔍 Vulnerability Management (Scanning, patching, remediation)
+- 💾 Backup & Recovery (Backup, restore, continuity)
+
+### Business Processes
+- 💰 Finance (Budget, invoicing, procurement)
+- ⚙️ Operations (IT operations, infrastructure)
+- ⚖️ Legal (Contracts, compliance, regulatory)
+- 🤝 Sales/Consulting (Client engagement, proposals)
+- 📢 Marketing (Content, campaigns, branding)
+- 👥 Human Resources (Hiring, training, benefits)
+- 🏛️ Executive (Strategy, governance, oversight)
+
+### Status & Priority
+- ⚡ Immediate/Critical (Urgent action required)
+- 🔴 Critical Priority (Highest priority items)
+- 🟠 High Priority (Important items)
+- 🟡 Medium Priority (Normal priority)
+- 🟢 Low Priority (Can be deferred)
+- ✅ Approved/Complete (Finished, approved)
+- 🚀 In Progress (Currently being worked on)
+- ⏭️ Planned (Scheduled for future)
 
 ## When Responding
 
