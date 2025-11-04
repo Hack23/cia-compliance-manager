@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 # Validate GitHub Copilot agent configuration files
-# This script ensures all agent YAML files are syntactically valid
+# This script ensures all agent markdown files have valid YAML frontmatter
 #
 # Dependencies:
 #   - npx: Comes with Node.js (npm >= 5.2.0)
-#   - jq: JSON processor (https://stedolan.github.io/jq/)
-#     Install with: apt-get install jq (Linux), brew install jq (macOS)
 #   - js-yaml: Will be installed via npx if not present
 #
 # Usage:
@@ -21,19 +19,13 @@ if ! command -v npx &> /dev/null; then
     exit 1
 fi
 
-if ! command -v jq &> /dev/null; then
-    echo "❌ Error: jq is required but not found"
-    echo "   Install jq: apt-get install jq (Linux) or brew install jq (macOS)"
-    exit 1
-fi
-
 AGENTS_DIR=".github/agents"
 AGENTS=(
-    "typescript-react-agent.yml"
-    "testing-agent.yml"
-    "code-review-agent.yml"
-    "documentation-agent.yml"
-    "security-compliance-agent.yml"
+    "typescript-react-agent.md"
+    "testing-agent.md"
+    "code-review-agent.md"
+    "documentation-agent.md"
+    "security-compliance-agent.md"
 )
 
 echo "Validating GitHub Copilot agent configurations..."
@@ -56,21 +48,39 @@ for agent in "${AGENTS[@]}"; do
         continue
     fi
     
-    # Validate YAML syntax and extract fields using npx js-yaml
-    # npx will automatically download js-yaml if not present
-    # Capture only stdout (valid JSON) and check exit code separately
-    if YAML_JSON=$(npx js-yaml "$AGENT_PATH" 2>/dev/null); then
-        echo "✅ Valid: $agent"
+    # Extract YAML frontmatter (between first and second ---)
+    FRONTMATTER=$(sed -n '/^---$/,/^---$/p' "$AGENT_PATH" | sed '1d;$d')
+    
+    if [ -z "$FRONTMATTER" ]; then
+        echo "❌ Missing frontmatter: $agent"
+        FAILED=1
+        continue
+    fi
+    
+    # Validate YAML syntax using npx js-yaml
+    if echo "$FRONTMATTER" | npx js-yaml -t > /dev/null 2>&1; then
+        echo "✅ Valid YAML: $agent"
         
-        # Check for required fields using jq for proper JSON parsing
-        # This only runs when YAML parsing succeeded and JSON is valid
-        REQUIRED_FIELDS=("name" "description" "instructions")
-        for field in "${REQUIRED_FIELDS[@]}"; do
-            if ! echo "$YAML_JSON" | jq -e ".$field" > /dev/null 2>&1; then
-                echo "   ❌ Error: $agent missing required '$field' field"
-                FAILED=1
+        # Check for required fields
+        if ! echo "$FRONTMATTER" | grep -q "^name:"; then
+            echo "   ❌ Error: $agent missing required 'name' field"
+            FAILED=1
+        fi
+        
+        if ! echo "$FRONTMATTER" | grep -q "^description:"; then
+            echo "   ❌ Error: $agent missing required 'description' field"
+            FAILED=1
+        fi
+        
+        # Check description length (should be under 200 chars)
+        DESC_LINE=$(echo "$FRONTMATTER" | grep "^description:" || echo "")
+        if [ -n "$DESC_LINE" ]; then
+            DESC_VALUE=$(echo "$DESC_LINE" | sed 's/description: *//')
+            DESC_LEN=${#DESC_VALUE}
+            if [ $DESC_LEN -gt 200 ]; then
+                echo "   ⚠️  Warning: $agent description is $DESC_LEN chars (max 200 recommended)"
             fi
-        done
+        fi
     else
         echo "❌ Invalid YAML: $agent"
         FAILED=1
