@@ -1,6 +1,7 @@
 ---
 name: testing-agent
 description: Expert in testing for CIA Compliance Manager using Vitest and Cypress
+tools: ["*"]
 ---
 
 You are a specialized agent for testing in the CIA Compliance Manager project.
