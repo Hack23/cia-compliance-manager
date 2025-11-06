@@ -30,7 +30,7 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
       expect(confidentialityImpact).toBeDefined();
 
       // Step 2: Get compliance status
-      const complianceService = new ComplianceService();
+      const complianceService = new ComplianceService(dataProvider);
       const complianceStatus = complianceService.getComplianceStatus(
         availability,
         integrity,
@@ -44,11 +44,11 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
 
       // Step 3: Calculate security metrics
       const metricsService = new SecurityMetricsService(dataProvider);
-      const securityMetrics = metricsService.getSecurityMetrics({
-        availabilityLevel: availability,
-        integrityLevel: integrity,
-        confidentialityLevel: confidentiality,
-      });
+      const securityMetrics = metricsService.getSecurityMetrics(
+        availability,
+        integrity,
+        confidentiality
+      );
 
       expect(securityMetrics).toBeDefined();
       expect(securityMetrics.overallScore).toBeGreaterThanOrEqual(0); // Metrics should be calculated
@@ -63,16 +63,12 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
 
       const dataProvider = createMockDataProvider();
       const businessImpactService = new BusinessImpactService(dataProvider);
-      const complianceService = new ComplianceService();
+      const complianceService = new ComplianceService(dataProvider);
       const metricsService = new SecurityMetricsService(dataProvider);
 
       const impact = businessImpactService.getBusinessImpact("availability", level);
       const compliance = complianceService.getComplianceStatus(level, level, level);
-      const metrics = metricsService.getSecurityMetrics({
-        availabilityLevel: level,
-        integrityLevel: level,
-        confidentialityLevel: level,
-      });
+      const metrics = metricsService.getSecurityMetrics(level, level, level);
 
       // All services should handle None level gracefully
       expect(impact).toBeDefined();
@@ -89,16 +85,12 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
 
       const dataProvider = createMockDataProvider();
       const businessImpactService = new BusinessImpactService(dataProvider);
-      const complianceService = new ComplianceService();
+      const complianceService = new ComplianceService(dataProvider);
       const metricsService = new SecurityMetricsService(dataProvider);
 
       const impact = businessImpactService.getBusinessImpact("availability", level);
       const compliance = complianceService.getComplianceStatus(level, level, level);
-      const metrics = metricsService.getSecurityMetrics({
-        availabilityLevel: level,
-        integrityLevel: level,
-        confidentialityLevel: level,
-      });
+      const metrics = metricsService.getSecurityMetrics(level, level, level);
 
       // All services should handle Very High level gracefully
       expect(impact).toBeDefined();
@@ -117,17 +109,13 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
       
       const dataProvider = createMockDataProvider();
       const businessImpactService = new BusinessImpactService(dataProvider);
-      const complianceService = new ComplianceService();
+      const complianceService = new ComplianceService(dataProvider);
       const metricsService = new SecurityMetricsService(dataProvider);
 
       for (const level of levels) {
         const impact = businessImpactService.getBusinessImpact("availability", level);
         const compliance = complianceService.getComplianceStatus(level, level, level);
-        const metrics = metricsService.getSecurityMetrics({
-          availabilityLevel: level,
-          integrityLevel: level,
-          confidentialityLevel: level,
-        });
+        const metrics = metricsService.getSecurityMetrics(level, level, level);
 
         // All services should return valid data
         expect(impact).toBeDefined();
@@ -144,7 +132,8 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
     });
 
     it("should have compliance frameworks consistent with security levels", () => {
-      const complianceService = new ComplianceService();
+      const dataProvider = createMockDataProvider();
+      const complianceService = new ComplianceService(dataProvider);
 
       // Low security should have few compliant frameworks
       const lowCompliance = complianceService.getComplianceStatus("Low", "Low", "Low");
@@ -188,15 +177,11 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
 
       for (const testCase of testCases) {
         const impact = businessImpactService.getBusinessImpact("availability", testCase.level);
-        const metrics = metricsService.getSecurityMetrics({
-          availabilityLevel: testCase.level,
-          integrityLevel: testCase.level,
-          confidentialityLevel: testCase.level,
-        });
+        const metrics = metricsService.getSecurityMetrics(testCase.level, testCase.level, testCase.level);
 
         results.push({
           level: testCase.level,
-          riskLevel: impact.financial.riskLevel || "Unknown", // Use financial risk level
+          riskLevel: impact.financial?.riskLevel || "Unknown", // Use financial risk level
           metricsScore: metrics.overallScore,
         });
       }
@@ -212,7 +197,7 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
     it("should handle mixed security levels gracefully", () => {
       const dataProvider = createMockDataProvider();
       const businessImpactService = new BusinessImpactService(dataProvider);
-      const complianceService = new ComplianceService();
+      const complianceService = new ComplianceService(dataProvider);
       const metricsService = new SecurityMetricsService(dataProvider);
 
       const mixedScenarios: Array<{
@@ -232,11 +217,7 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
         const confidentialityImpact = businessImpactService.getBusinessImpact("confidentiality", scenario.c);
         
         const compliance = complianceService.getComplianceStatus(scenario.a, scenario.i, scenario.c);
-        const metrics = metricsService.getSecurityMetrics({
-          availabilityLevel: scenario.a,
-          integrityLevel: scenario.i,
-          confidentialityLevel: scenario.c,
-        });
+        const metrics = metricsService.getSecurityMetrics(scenario.a, scenario.i, scenario.c);
 
         // All services should handle mixed levels without errors
         expect(availabilityImpact).toBeDefined();
@@ -252,7 +233,7 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
       const dataProvider = createMockDataProvider();
       const service1 = new BusinessImpactService(dataProvider);
       const service2 = new BusinessImpactService(dataProvider);
-      const service3 = new ComplianceService();
+      const service3 = new ComplianceService(dataProvider);
       const service4 = new SecurityMetricsService(dataProvider);
 
       const testLevel: SecurityLevel = "High";
@@ -265,11 +246,7 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
 
       // Different service types should return valid data
       const compliance = service3.getComplianceStatus(testLevel, testLevel, testLevel);
-      const metrics = service4.getSecurityMetrics({
-        availabilityLevel: testLevel,
-        integrityLevel: testLevel,
-        confidentialityLevel: testLevel,
-      });
+      const metrics = service4.getSecurityMetrics(testLevel, testLevel, testLevel);
 
       expect(compliance).toBeDefined();
       expect(metrics).toBeDefined();
@@ -291,7 +268,7 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
       const confidentialityImpact = businessService.getBusinessImpact("confidentiality", confidentiality);
 
       // Step 2: Check compliance
-      const complianceService = new ComplianceService();
+      const complianceService = new ComplianceService(dataProvider);
       const complianceStatus = complianceService.getComplianceStatus(
         availability,
         integrity,
@@ -300,17 +277,9 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
 
       // Step 3: Calculate metrics and costs
       const metricsService = new SecurityMetricsService(dataProvider);
-      const metrics = metricsService.getSecurityMetrics({
-        availabilityLevel: availability,
-        integrityLevel: integrity,
-        confidentialityLevel: confidentiality,
-      });
+      const metrics = metricsService.getSecurityMetrics(availability, integrity, confidentiality);
 
-      const roiEstimates = metricsService.getROIEstimates(
-        availability,
-        integrity,
-        confidentiality
-      );
+      const roiEstimates = metricsService.getROIEstimates();
 
       // Verify complete workflow produces consistent results
       expect(availabilityImpact.summary).toBeTruthy();
@@ -332,7 +301,7 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
       const dataProvider = createMockDataProvider();
       const services = {
         business: new BusinessImpactService(dataProvider),
-        compliance: new ComplianceService(),
+        compliance: new ComplianceService(dataProvider),
         metrics: new SecurityMetricsService(dataProvider),
       };
 
@@ -343,11 +312,7 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
         level,
         business: services.business.getBusinessImpact("availability", level),
         compliance: services.compliance.getComplianceStatus(level, level, level),
-        metrics: services.metrics.getSecurityMetrics({
-          availabilityLevel: level,
-          integrityLevel: level,
-          confidentialityLevel: level,
-        }),
+        metrics: services.metrics.getSecurityMetrics(level, level, level),
       }));
 
       // All results should be valid
@@ -361,7 +326,8 @@ describe("Service Integration Tests - Holistic System Perspective", () => {
     });
 
     it("should maintain data integrity across multiple assessments", () => {
-      const complianceService = new ComplianceService();
+      const dataProvider = createMockDataProvider();
+      const complianceService = new ComplianceService(dataProvider);
       
       // Run multiple assessments
       const assessments = [

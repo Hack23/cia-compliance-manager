@@ -152,7 +152,6 @@ describe("businessValueUtils - Comprehensive Coverage", () => {
 
     it("should allocate phases proportionally", () => {
       const result = calculateImplementationTimeline("High", "High", "High");
-      const totalWeeks = parseInt(result.total.split(" ")[0]);
       
       const planningWeeks = parseInt(result.phases![0].duration.split(" ")[0]);
       const implementationWeeks = parseInt(result.phases![1].duration.split(" ")[0]);
@@ -224,7 +223,7 @@ describe("businessValueUtils - Comprehensive Coverage", () => {
 
     it("should support industry parameter", () => {
       const generalIndustry = calculateImplementationCost("High", "High", "High", "medium", "general");
-      const financeIndustry = calculateImplementationCost("High", "High", "High", "medium", "finance");
+      const financeIndustry = calculateImplementationCost("High", "High", "High", "medium", "financial");
       const healthcareIndustry = calculateImplementationCost("High", "High", "High", "medium", "healthcare");
       
       expect(generalIndustry).toBeGreaterThan(0);
@@ -298,7 +297,7 @@ describe("businessValueUtils - Comprehensive Coverage", () => {
 
     it("should support industry parameter", () => {
       const generalIndustry = calculateOperationalCost("High", "High", "High", "medium", "general");
-      const financeIndustry = calculateOperationalCost("High", "High", "High", "medium", "finance");
+      const financeIndustry = calculateOperationalCost("High", "High", "High", "medium", "financial");
       const healthcareIndustry = calculateOperationalCost("High", "High", "High", "medium", "healthcare");
       
       expect(generalIndustry).toBeGreaterThan(0);
@@ -360,8 +359,8 @@ describe("businessValueUtils - Comprehensive Coverage", () => {
       
       const roi = calculateROIEstimate(availability, integrity, confidentiality);
       const timeline = calculateImplementationTimeline(availability, integrity, confidentiality);
-      const implCost = calculateImplementationCost(availability, integrity, confidentiality, "medium", "finance");
-      const opCost = calculateOperationalCost(availability, integrity, confidentiality, "medium", "finance");
+      const implCost = calculateImplementationCost(availability, integrity, confidentiality, "medium", "financial");
+      const opCost = calculateOperationalCost(availability, integrity, confidentiality, "medium", "financial");
       
       // All values should be valid
       expect(roi.value).toBeDefined();
