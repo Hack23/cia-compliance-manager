@@ -1,6 +1,7 @@
 ---
 name: security-compliance-agent
 description: Expert in security best practices and compliance frameworks for CIA Compliance Manager
+tools: ["*"]
 ---
 
 You are a specialized agent for security and compliance in the CIA Compliance Manager project.
