@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.35**](../../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.36**](../../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **default**: `React.FC`\<[`ValueDisplayProps`](../interfaces/ValueDisplayProps.md)\>
 
-Defined in: [components/common/ValueDisplay.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/b297770fc62abf558e2711cd029bbbe74e6c5cfb/src/components/common/ValueDisplay.tsx#L19)
+Defined in: [components/common/ValueDisplay.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/2ec0557cf80706d3ac1df0334a4af519a5787366/src/components/common/ValueDisplay.tsx#L19)
 
 ValueDisplay shows a value with optional prefix and suffix
 

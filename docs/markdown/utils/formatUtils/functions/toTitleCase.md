@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.35**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.36**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **toTitleCase**(`str`): `string`
 
-Defined in: [utils/formatUtils.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/b297770fc62abf558e2711cd029bbbe74e6c5cfb/src/utils/formatUtils.ts#L22)
+Defined in: [utils/formatUtils.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/2ec0557cf80706d3ac1df0334a4af519a5787366/src/utils/formatUtils.ts#L22)
 
 Converts a string to title case
 

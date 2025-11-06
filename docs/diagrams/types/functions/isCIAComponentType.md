@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.35**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.36**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isCIAComponentType**(`value`): `value is CIAComponentType`
 
-Defined in: [types/cia-services.ts:52](https://github.com/Hack23/cia-compliance-manager/blob/b297770fc62abf558e2711cd029bbbe74e6c5cfb/src/types/cia-services.ts#L52)
+Defined in: [types/cia-services.ts:52](https://github.com/Hack23/cia-compliance-manager/blob/2ec0557cf80706d3ac1df0334a4af519a5787366/src/types/cia-services.ts#L52)
 
 Type guard to check if a value is a valid CIA component type
 

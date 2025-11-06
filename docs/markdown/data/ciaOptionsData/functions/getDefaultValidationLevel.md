@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.35**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.36**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getDefaultValidationLevel**(`level`): `string`
 
-Defined in: [data/ciaOptionsData.ts:491](https://github.com/Hack23/cia-compliance-manager/blob/b297770fc62abf558e2711cd029bbbe74e6c5cfb/src/data/ciaOptionsData.ts#L491)
+Defined in: [data/ciaOptionsData.ts:491](https://github.com/Hack23/cia-compliance-manager/blob/2ec0557cf80706d3ac1df0334a4af519a5787366/src/data/ciaOptionsData.ts#L491)
 
 Get default validation level for a security level
 

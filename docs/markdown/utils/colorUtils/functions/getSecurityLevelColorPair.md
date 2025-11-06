@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.35**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.36**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelColorPair**(`level`): `SecurityLevelColorPair`
 
-Defined in: [utils/colorUtils.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/b297770fc62abf558e2711cd029bbbe74e6c5cfb/src/utils/colorUtils.ts#L23)
+Defined in: [utils/colorUtils.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/2ec0557cf80706d3ac1df0334a4af519a5787366/src/utils/colorUtils.ts#L23)
 
 Get color pair (background and text) for a specific security level
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.35**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.36**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **formatNumber**(`value`, `decimalPlaces?`): `string`
 
-Defined in: [utils/formatUtils.ts:147](https://github.com/Hack23/cia-compliance-manager/blob/b297770fc62abf558e2711cd029bbbe74e6c5cfb/src/utils/formatUtils.ts#L147)
+Defined in: [utils/formatUtils.ts:147](https://github.com/Hack23/cia-compliance-manager/blob/2ec0557cf80706d3ac1df0334a4af519a5787366/src/utils/formatUtils.ts#L147)
 
 Format a number with thousands separators and optional decimal places
 

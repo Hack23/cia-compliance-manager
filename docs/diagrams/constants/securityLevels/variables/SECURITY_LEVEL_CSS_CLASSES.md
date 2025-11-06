@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.35**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.36**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **SECURITY\_LEVEL\_CSS\_CLASSES**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), \{ `bg`: `string`; `text`: `string`; \}\>
 
-Defined in: [constants/securityLevels.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/b297770fc62abf558e2711cd029bbbe74e6c5cfb/src/constants/securityLevels.ts#L68)
+Defined in: [constants/securityLevels.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/2ec0557cf80706d3ac1df0334a4af519a5787366/src/constants/securityLevels.ts#L68)
 
 CSS classes for security levels in Tailwind

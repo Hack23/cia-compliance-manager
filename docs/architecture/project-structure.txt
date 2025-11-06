@@ -137,6 +137,7 @@ src/services/securityMetricsService.ts
 src/services/securityResourceService.additional.test.ts
 src/services/securityResourceService.test.ts
 src/services/securityResourceService.ts
+src/services/service-integration.comprehensive.test.ts
 src/services/technicalImplementationService.test.ts
 src/services/technicalImplementationService.ts
 src/styles/components.css
@@ -174,6 +175,7 @@ src/types/businessImpact.test.ts
 src/types/businessImpact.ts
 src/types/cia-services.test.ts
 src/types/cia-services.ts
+src/types/cia.comprehensive.test.ts
 src/types/cia.test.ts
 src/types/cia.ts
 src/types/cia.utility.test.ts
@@ -195,6 +197,7 @@ src/types/widget-props.ts
 src/types/widgets.test.ts
 src/types/widgets.ts
 src/utils/api.ts
+src/utils/businessValueUtils.comprehensive.test.ts
 src/utils/businessValueUtils.ts
 src/utils/colorUtils.test.ts
 src/utils/colorUtils.ts
@@ -202,6 +205,7 @@ src/utils/costCalculationUtils.test.ts
 src/utils/costCalculationUtils.ts
 src/utils/errorUtils.test.ts
 src/utils/errorUtils.ts
+src/utils/formatUtils.comprehensive.test.ts
 src/utils/formatUtils.test.ts
 src/utils/formatUtils.ts
 src/utils/index.ts
