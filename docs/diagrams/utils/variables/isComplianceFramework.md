@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.36**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.38**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isComplianceFramework**: (`obj`) => `boolean`
 
-Defined in: [utils/index.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/2ec0557cf80706d3ac1df0334a4af519a5787366/src/utils/index.ts#L176)
+Defined in: [utils/index.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/utils/index.ts#L176)
 
 Checks if an object is a valid compliance framework
 

@@ -12,13 +12,13 @@
     "hasOther": false,
     "skipped": 0,
     "hasSkipped": false,
-    "start": "2025-11-06T16:06:46.519Z",
-    "end": "2025-11-06T16:10:44.655Z",
-    "duration": 238136
+    "start": "2025-11-07T18:24:41.499Z",
+    "end": "2025-11-07T18:28:32.207Z",
+    "duration": 230708
   },
   "results": [
     {
-      "uuid": "e7c41370-53e4-4347-848a-e9ba531efd3d",
+      "uuid": "39671d9a-3bef-4702-9fff-f0c9d883a2c3",
       "title": "",
       "fullFile": "cypress/e2e/business-outcomes/compliance-validation.cy.ts",
       "file": "cypress/e2e/business-outcomes/compliance-validation.cy.ts",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "921a06c5-0cd3-4a74-935d-146e8abb9eb2",
+          "uuid": "f95a6cc9-2e34-405c-bf00-009f44127742",
           "title": "Compliance Status Validation",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "accurately reflects compliance status based on security levels",
               "fullTitle": "Compliance Status Validation accurately reflects compliance status based on security levels",
               "timedOut": null,
-              "duration": 37087,
+              "duration": 36074,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -47,8 +47,8 @@
               "context": null,
               "code": "// Define more resilient test scenarios with flexible assertions\nconst complianceScenarios = [\n    {\n        levels: [_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW],\n        expectedTextPatterns: [\n            /minimal|basic|non-compliant|low|partial|warning|caution/i,\n            /compliance|status|level|security/i,\n        ],\n        name: \"low-security\",\n    },\n    {\n        levels: [\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE,\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE,\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE,\n        ],\n        expectedTextPatterns: [\n            /moderate|partial|medium|some|limited/i,\n            /compliance|status|framework|requirement/i,\n        ],\n        name: \"moderate-security\",\n    },\n    {\n        levels: [\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n        ],\n        expectedTextPatterns: [\n            /compliant|meets requirements|high|full|complete|standard|advanced/i,\n            /compliance|status|framework|requirement/i,\n        ],\n        name: \"high-security\",\n    },\n];\n// Test each scenario with better error handling\ncomplianceScenarios.forEach((scenario, index) => {\n    cy.log(`Testing compliance scenario ${index + 1}: ${scenario.name}`);\n    cy.screenshot(`compliance-scenario-start-${scenario.name}`);\n    // More reliable way to set security levels\n    cy.setSecurityLevels(...scenario.levels);\n    cy.wait(1000); // Wait for UI updates\n    // Take screenshot for debugging\n    cy.screenshot(`compliance-scenario-${scenario.name}`);\n    // Search for compliance information using multiple strategies\n    cy.get(\"body\").then(($body) => {\n        const bodyText = $body.text();\n        // Check if all expected text patterns appear somewhere on the page\n        const allPatternsFound = scenario.expectedTextPatterns.every((pattern) => pattern.test(bodyText));\n        if (allPatternsFound) {\n            cy.log(`✓ Found all expected compliance patterns for ${scenario.name}`);\n        }\n        else {\n            // Log which patterns were not found\n            scenario.expectedTextPatterns.forEach((pattern) => {\n                if (!pattern.test(bodyText)) {\n                    cy.log(`⚠️ Could not find pattern: ${pattern} for ${scenario.name}`);\n                }\n            });\n        }\n        // Take a screenshot regardless of result for debugging\n        cy.screenshot(`compliance-content-${scenario.name}`);\n    });\n});",
               "err": {},
-              "uuid": "893ee2f6-f447-44ec-8734-421cc6f71a40",
-              "parentUUID": "921a06c5-0cd3-4a74-935d-146e8abb9eb2",
+              "uuid": "8c2a63fb-409c-43cb-b4e4-4277652157eb",
+              "parentUUID": "f95a6cc9-2e34-405c-bf00-009f44127742",
               "isHook": false,
               "skipped": false
             },
@@ -56,7 +56,7 @@
               "title": "verifies compliance framework details visibility",
               "fullTitle": "Compliance Status Validation verifies compliance framework details visibility",
               "timedOut": null,
-              "duration": 6675,
+              "duration": 6344,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -65,8 +65,8 @@
               "context": null,
               "code": "// Set high security to maximize framework visibility\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\ncy.wait(1000);\n// Look for compliance-related elements using multiple selectors\nconst complianceSelectors = [\n    '[data-testid*=\"compliance\"]',\n    '[class*=\"compliance\"]',\n    '[data-testid*=\"framework\"]',\n    '[class*=\"framework\"]',\n].join(\", \");\n// Try to find compliance elements\ncy.get(\"body\").then(($body) => {\n    if ($body.find(complianceSelectors).length > 0) {\n        cy.get(complianceSelectors).first().scrollIntoView();\n        cy.get(complianceSelectors).first().screenshot(\"compliance-element\");\n        // Try to find clickable items\n        const clickableSelectors = [\n            '[data-testid*=\"framework\"] button',\n            '[data-testid*=\"framework\"] a',\n            '[class*=\"framework\"] button',\n            '[class*=\"framework\"] a',\n            'li[class*=\"framework\"]',\n            'li[data-testid*=\"framework\"]',\n        ].join(\", \");\n        if ($body.find(clickableSelectors).length > 0) {\n            cy.get(clickableSelectors).first().click({ force: true });\n            cy.wait(500);\n            cy.screenshot(\"after-framework-click\");\n        }\n        else {\n            cy.log(\"⚠️ No clickable framework items found\");\n            cy.screenshot(\"no-clickable-frameworks\");\n        }\n    }\n    else {\n        cy.log(\"⚠️ No compliance elements found\");\n        cy.screenshot(\"no-compliance-elements\");\n    }\n});",
               "err": {},
-              "uuid": "3b2af467-bd4e-4c96-ab1a-c35ab89da99b",
-              "parentUUID": "921a06c5-0cd3-4a74-935d-146e8abb9eb2",
+              "uuid": "8701abde-3eac-453b-94ff-11acf606165f",
+              "parentUUID": "f95a6cc9-2e34-405c-bf00-009f44127742",
               "isHook": false,
               "skipped": false
             },
@@ -74,7 +74,7 @@
               "title": "shows appropriate compliance frameworks based on security levels",
               "fullTitle": "Compliance Status Validation shows appropriate compliance frameworks based on security levels",
               "timedOut": null,
-              "duration": 2569,
+              "duration": 2498,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -83,22 +83,22 @@
               "context": null,
               "code": "// Set high security to see maximum frameworks\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\ncy.wait(1000);\n// Look for compliance frameworks section\ncy.get(\"body\").then(($body) => {\n    // Define a regex pattern to identify framework elements\n    const frameworkPattern = /([A-Z0-9]+\\s*[A-Z0-9]*\\s*[0-9-]*)/g;\n    // Extract frameworks from the DOM text\n    const bodyText = $body.text();\n    const possibleFrameworks = bodyText.match(frameworkPattern) || [];\n    // Filter to likely frameworks\n    const frameworks = possibleFrameworks.filter((f) => /^[A-Z0-9]{2,}/.test(f) && !f.includes(\"CIA\") && f.length > 2);\n    // Fix the spread argument error by using properly typed arguments\n    const logMessage = `Found ${frameworks.length} compliance frameworks`;\n    cy.log(logMessage);\n    // Use typed array for log args\n    const typedLogArgs = [\n        `Frameworks: ${frameworks.join(\", \")}`,\n    ];\n    cy.log(...typedLogArgs);\n    // Verify we found some frameworks\n    expect(frameworks.length).to.be.greaterThan(0);\n});",
               "err": {},
-              "uuid": "2ec9c6ce-9773-4ec1-943a-cf32aac6176a",
-              "parentUUID": "921a06c5-0cd3-4a74-935d-146e8abb9eb2",
+              "uuid": "49ff21cd-5691-4678-b902-1233767ce5df",
+              "parentUUID": "f95a6cc9-2e34-405c-bf00-009f44127742",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "893ee2f6-f447-44ec-8734-421cc6f71a40",
-            "3b2af467-bd4e-4c96-ab1a-c35ab89da99b",
-            "2ec9c6ce-9773-4ec1-943a-cf32aac6176a"
+            "8c2a63fb-409c-43cb-b4e4-4277652157eb",
+            "8701abde-3eac-453b-94ff-11acf606165f",
+            "49ff21cd-5691-4678-b902-1233767ce5df"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 46331,
+          "duration": 44916,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -114,7 +114,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "a373567f-22b3-4475-a65e-b061aa372f9a",
+      "uuid": "8afc5e30-4796-464a-b02c-b42d34120a7a",
       "title": "",
       "fullFile": "cypress/e2e/screenshots/widget-screenshots.cy.ts",
       "file": "cypress/e2e/screenshots/widget-screenshots.cy.ts",
@@ -123,7 +123,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "fd984dab-432b-4d7c-9bc0-41f166d75e14",
+          "uuid": "258cefe3-db2d-4d1c-a3b3-f07ec1536eb1",
           "title": "Widget UI/UX Screenshots",
           "fullFile": "",
           "file": "",
@@ -134,7 +134,7 @@
               "title": "captures full dashboard grid with widgets in light and dark mode",
               "fullTitle": "Widget UI/UX Screenshots captures full dashboard grid with widgets in light and dark mode",
               "timedOut": null,
-              "duration": 3305,
+              "duration": 3095,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -143,8 +143,8 @@
               "context": null,
               "code": "// Set wider viewport to ensure all columns are visible\ncy.viewport(2400, 1200);\n// Ensure grid layout is properly displayed\ncy.get('[data-testid=\"dashboard-grid\"]').should(\"be.visible\");\n// Capture optimized grid screenshots only (no HTML)\n(0,_support_screenshot_utils__WEBPACK_IMPORTED_MODULE_0__.captureFullDashboardGrid)(\"dashboard-grid\");",
               "err": {},
-              "uuid": "0d8bfaf3-32d6-4e64-b728-5136c8dbb8ad",
-              "parentUUID": "fd984dab-432b-4d7c-9bc0-41f166d75e14",
+              "uuid": "9d11a895-69ae-4b09-9bc0-1b3f06cecab1",
+              "parentUUID": "258cefe3-db2d-4d1c-a3b3-f07ec1536eb1",
               "isHook": false,
               "skipped": false
             },
@@ -152,7 +152,7 @@
               "title": "captures essential widgets in both light and dark themes",
               "fullTitle": "Widget UI/UX Screenshots captures essential widgets in both light and dark themes",
               "timedOut": null,
-              "duration": 8772,
+              "duration": 8537,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -161,21 +161,21 @@
               "context": null,
               "code": "// For each essential widget, capture both light and dark themes\nessentialWidgets.forEach((widgetName) => {\n    cy.log(`Capturing themes for widget: ${widgetName}`);\n    // Use the simplified capture function\n    (0,_support_screenshot_utils__WEBPACK_IMPORTED_MODULE_0__.captureSimpleWidgetThemes)(widgetName);\n});",
               "err": {},
-              "uuid": "dcb99efd-d6e6-4c77-bc0d-d0098e31fa92",
-              "parentUUID": "fd984dab-432b-4d7c-9bc0-41f166d75e14",
+              "uuid": "8e30c0a4-3210-4c2f-9423-c3d7a53decdf",
+              "parentUUID": "258cefe3-db2d-4d1c-a3b3-f07ec1536eb1",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "0d8bfaf3-32d6-4e64-b728-5136c8dbb8ad",
-            "dcb99efd-d6e6-4c77-bc0d-d0098e31fa92"
+            "9d11a895-69ae-4b09-9bc0-1b3f06cecab1",
+            "8e30c0a4-3210-4c2f-9423-c3d7a53decdf"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 12077,
+          "duration": 11632,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -191,7 +191,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "ced12333-ac4d-4869-a86c-6e97672d2f92",
+      "uuid": "aae09258-56fb-4a74-a5b6-82aac72c1d94",
       "title": "",
       "fullFile": "cypress/e2e/security/security-level-transitions.cy.ts",
       "file": "cypress/e2e/security/security-level-transitions.cy.ts",
@@ -200,7 +200,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "b1be5ae5-53d7-405b-bf90-7c15df4ef180",
+          "uuid": "456a0e37-dfdb-414f-aec5-3fc8440b5078",
           "title": "Security Level Transitions",
           "fullFile": "",
           "file": "",
@@ -211,7 +211,7 @@
               "title": "maintains application integrity during security level changes",
               "fullTitle": "Security Level Transitions maintains application integrity during security level changes",
               "timedOut": null,
-              "duration": 11414,
+              "duration": 11158,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -220,20 +220,20 @@
               "context": null,
               "code": "// Define only critical transitions to test\nconst securityTransitions = [\n    {\n        from: [\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW,\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW,\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW,\n        ],\n        to: [\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n        ],\n        name: \"low-to-high\",\n    },\n    {\n        from: [\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n        ],\n        to: [\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW,\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE,\n        ],\n        name: \"high-to-mixed\",\n    },\n];\n// Test each transition with better error handling\nsecurityTransitions.forEach((transition, index) => {\n    const logArgs = [\n        `Testing transition ${transition.name} (${index + 1}/${securityTransitions.length})`,\n    ];\n    cy.log(logArgs[0]);\n    // Set initial levels with type assertion\n    cy.setSecurityLevels(transition.from[0], transition.from[1], transition.from[2]);\n    cy.wait(1000);\n    // Take screenshot only if it's the first transition\n    if (index === 0) {\n        cy.screenshot(`transition-initial-${transition.name}`);\n    }\n    // Look for important widgets to verify initial state\n    findImportantWidgets().then((widgets) => {\n        // Capture initial content of each widget for comparison\n        captureWidgetStates(widgets).then((initialStates) => {\n            // Perform transition with type assertion\n            const changeLogArgs = [\n                `Changing to security levels: ${transition.to.join(\", \")}`,\n            ];\n            cy.log(changeLogArgs[0]);\n            cy.setSecurityLevels(transition.to[0], transition.to[1], transition.to[2]);\n            cy.wait(1000);\n            // Take screenshot only if it's the first transition\n            if (index === 0) {\n                cy.screenshot(`transition-after-${transition.name}`);\n            }\n            // Check widgets after transition\n            findImportantWidgets().then((newWidgets) => {\n                const foundLogArgs = [\n                    `Found ${newWidgets.length} widgets after transition`,\n                ];\n                cy.log(...foundLogArgs);\n                // Verify number of widgets didn't decrease significantly\n                expect(newWidgets.length).to.be.at.least(Math.max(1, widgets.length - 1), \"Number of widgets shouldn't decrease significantly during transitions\");\n                // Process each widget after transition\n                cy.wrap(newWidgets).each(($widget, i) => {\n                    const id = $widget.attr(\"data-testid\") || `widget-${i}`;\n                    // Check for problematic content\n                    checkForProblematicContent($widget);\n                    // Compare with initial state if available\n                    if (initialStates[id]) {\n                        compareWidgetContent($widget, initialStates[id], id);\n                    }\n                });\n            });\n        });\n    });\n});",
               "err": {},
-              "uuid": "e58814bf-f0f0-4dad-acaf-c137ac7061ca",
-              "parentUUID": "b1be5ae5-53d7-405b-bf90-7c15df4ef180",
+              "uuid": "5cb90e8b-7bfb-46d2-a916-cdf4042cccf9",
+              "parentUUID": "456a0e37-dfdb-414f-aec5-3fc8440b5078",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "e58814bf-f0f0-4dad-acaf-c137ac7061ca"
+            "5cb90e8b-7bfb-46d2-a916-cdf4042cccf9"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 11414,
+          "duration": 11158,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -249,7 +249,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "070858ea-4e98-4093-b3a0-da7cdd556c5e",
+      "uuid": "ff7eaf71-a751-4c6b-b15b-adfdbafc01ae",
       "title": "",
       "fullFile": "cypress/e2e/widgets/assessmentcenter/business-impact.cy.ts",
       "file": "cypress/e2e/widgets/assessmentcenter/business-impact.cy.ts",
@@ -258,7 +258,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "f563e01b-a37a-4f44-a004-a2377bdd6981",
+          "uuid": "8a547d8e-b1f0-4ac4-9eb8-f0f1c94e7629",
           "title": "Business Impact Widget Tests",
           "fullFile": "",
           "file": "",
@@ -269,7 +269,7 @@
               "title": "is visible and contains expected content",
               "fullTitle": "Business Impact Widget Tests is visible and contains expected content",
               "timedOut": null,
-              "duration": 3404,
+              "duration": 3248,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -278,8 +278,8 @@
               "context": null,
               "code": "// This test uses more flexible widget finding\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Check for at least one expected content pattern\n    const widgetText = $widget.text();\n    let foundPattern = false;\n    let matchedPattern = \"\";\n    contentPatterns.forEach((pattern) => {\n        if (typeof pattern === \"string\") {\n            if (widgetText.includes(pattern)) {\n                foundPattern = true;\n                matchedPattern = pattern;\n            }\n        }\n        else if (pattern.test(widgetText)) {\n            foundPattern = true;\n            matchedPattern = pattern.toString();\n        }\n    });\n    if (foundPattern) {\n        cy.log(`Found expected content pattern: ${matchedPattern}`);\n    }\n    else {\n        cy.log(`No expected content patterns found in widget text: ${widgetText.substring(0, 100)}...`);\n    }\n    expect(foundPattern, `Widget should contain at least one expected content pattern`).to.be.true;\n    // Use the improved screenshot function\n    (0,_screenshot_utils__WEBPACK_IMPORTED_MODULE_1__.captureWidgetScreenshot)($widget.first(), `${widgetTestId}-baseline`);\n});",
               "err": {},
-              "uuid": "7af55d76-9e95-4137-840b-6ade6e73fb5f",
-              "parentUUID": "f563e01b-a37a-4f44-a004-a2377bdd6981",
+              "uuid": "02c49f4e-af91-4274-9ed0-c6d3b31f3b1f",
+              "parentUUID": "8a547d8e-b1f0-4ac4-9eb8-f0f1c94e7629",
               "isHook": false,
               "skipped": false
             },
@@ -287,7 +287,7 @@
               "title": "updates content when security levels change",
               "fullTitle": "Business Impact Widget Tests updates content when security levels change",
               "timedOut": null,
-              "duration": 6195,
+              "duration": 6132,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -296,8 +296,8 @@
               "context": null,
               "code": "// First verify if widget exists to avoid cascading failures\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-security-change`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    const initialContent = $widget.text();\n    // Only test this if we have content to compare against\n    if (initialContent.trim().length === 0) {\n        cy.log(`Widget ${widgetName} has no initial content - test will be skipped`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Change to different security levels and verify changes\n    cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n    cy.wait(1000); // Longer wait for stability\n    // Try to find the widget again after security level change\n    findWidgetFlexibly(widgetTestId).then(($lowWidget) => {\n        if ($lowWidget.length === 0) {\n            cy.log(`Widget ${widgetName} disappeared after security level change - test will be skipped`);\n            expect(true).to.equal(true); // Soft-pass to avoid failing tests\n            return;\n        }\n        const lowContent = $lowWidget.text();\n        // Change to high security\n        cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n        cy.wait(1000);\n        // Verify widget still exists and content changed again\n        findWidgetFlexibly(widgetTestId).then(($highWidget) => {\n            if ($highWidget.length === 0) {\n                cy.log(`Widget ${widgetName} disappeared after high security level change - test will be skipped`);\n                expect(true).to.equal(true); // Soft-pass to avoid failing tests\n                return;\n            }\n            const highContent = $highWidget.text();\n            // Log results for debugging\n            if (lowContent === highContent) {\n                cy.log(`Warning: Content did not change between low and high security levels`);\n            }\n            // Verify at least one content change happened\n            const contentChanged = initialContent !== lowContent || lowContent !== highContent;\n            expect(contentChanged, \"Content should change with security levels\")\n                .to.be.true;\n        });\n    });\n});",
               "err": {},
-              "uuid": "01f6a883-89d4-4b00-8ba0-1f27d75314a7",
-              "parentUUID": "f563e01b-a37a-4f44-a004-a2377bdd6981",
+              "uuid": "849b1953-9754-4155-8fa7-57b0107b8860",
+              "parentUUID": "8a547d8e-b1f0-4ac4-9eb8-f0f1c94e7629",
               "isHook": false,
               "skipped": false
             },
@@ -305,7 +305,7 @@
               "title": "supports widget-specific functionality",
               "fullTitle": "Business Impact Widget Tests supports widget-specific functionality",
               "timedOut": null,
-              "duration": 2182,
+              "duration": 2122,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -314,22 +314,22 @@
               "context": null,
               "code": "// First check if widget exists\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - specific test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-specific`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Add widget to test context so additionalTests can use it\n    // Wrap the FIRST element when multiple are found to avoid errors in widget-specific tests\n    cy.wrap($widget.first()).as(\"currentWidget\");\n    // Run provided tests in try/catch to prevent cascading failures\n    try {\n        additionalTests();\n    }\n    catch (e) {\n        // Handle unknown error type safely\n        const errorMessage = e instanceof Error ? e.message : String(e);\n        cy.log(`Error in additional tests for ${widgetName}: ${errorMessage}`);\n        cy.screenshot(`error-${widgetName}-specific-test`);\n    }\n});",
               "err": {},
-              "uuid": "00c9c459-5a5b-49d5-96a8-81e5b6f979b7",
-              "parentUUID": "f563e01b-a37a-4f44-a004-a2377bdd6981",
+              "uuid": "86447513-e3c8-48d2-be69-e9d11405f226",
+              "parentUUID": "8a547d8e-b1f0-4ac4-9eb8-f0f1c94e7629",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "7af55d76-9e95-4137-840b-6ade6e73fb5f",
-            "01f6a883-89d4-4b00-8ba0-1f27d75314a7",
-            "00c9c459-5a5b-49d5-96a8-81e5b6f979b7"
+            "02c49f4e-af91-4274-9ed0-c6d3b31f3b1f",
+            "849b1953-9754-4155-8fa7-57b0107b8860",
+            "86447513-e3c8-48d2-be69-e9d11405f226"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 11781,
+          "duration": 11502,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -345,7 +345,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "e4eee8e4-2a57-4eaa-9370-b911b41fdfa6",
+      "uuid": "6b3c2608-5f48-4932-8dbd-a73f2d9a8041",
       "title": "",
       "fullFile": "cypress/e2e/widgets/assessmentcenter/security-level.cy.ts",
       "file": "cypress/e2e/widgets/assessmentcenter/security-level.cy.ts",
@@ -354,7 +354,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "068869b7-4bf1-4b39-bae7-0fa167fa3a27",
+          "uuid": "0254fd60-d9f7-4ee5-88b5-bfeda098ca91",
           "title": "Security Level Widget Tests",
           "fullFile": "",
           "file": "",
@@ -365,7 +365,7 @@
               "title": "is visible and contains expected content",
               "fullTitle": "Security Level Widget Tests is visible and contains expected content",
               "timedOut": null,
-              "duration": 3325,
+              "duration": 3231,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -374,8 +374,8 @@
               "context": null,
               "code": "// This test uses more flexible widget finding\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Check for at least one expected content pattern\n    const widgetText = $widget.text();\n    let foundPattern = false;\n    let matchedPattern = \"\";\n    contentPatterns.forEach((pattern) => {\n        if (typeof pattern === \"string\") {\n            if (widgetText.includes(pattern)) {\n                foundPattern = true;\n                matchedPattern = pattern;\n            }\n        }\n        else if (pattern.test(widgetText)) {\n            foundPattern = true;\n            matchedPattern = pattern.toString();\n        }\n    });\n    if (foundPattern) {\n        cy.log(`Found expected content pattern: ${matchedPattern}`);\n    }\n    else {\n        cy.log(`No expected content patterns found in widget text: ${widgetText.substring(0, 100)}...`);\n    }\n    expect(foundPattern, `Widget should contain at least one expected content pattern`).to.be.true;\n    // Use the improved screenshot function\n    (0,_screenshot_utils__WEBPACK_IMPORTED_MODULE_1__.captureWidgetScreenshot)($widget.first(), `${widgetTestId}-baseline`);\n});",
               "err": {},
-              "uuid": "b99aa61b-ee1b-4d63-9661-ec04438baf9e",
-              "parentUUID": "068869b7-4bf1-4b39-bae7-0fa167fa3a27",
+              "uuid": "c2c4d934-0216-4c4c-b37b-c59aa92a8abf",
+              "parentUUID": "0254fd60-d9f7-4ee5-88b5-bfeda098ca91",
               "isHook": false,
               "skipped": false
             },
@@ -383,7 +383,7 @@
               "title": "updates content when security levels change",
               "fullTitle": "Security Level Widget Tests updates content when security levels change",
               "timedOut": null,
-              "duration": 6088,
+              "duration": 6012,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -392,8 +392,8 @@
               "context": null,
               "code": "// First verify if widget exists to avoid cascading failures\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-security-change`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    const initialContent = $widget.text();\n    // Only test this if we have content to compare against\n    if (initialContent.trim().length === 0) {\n        cy.log(`Widget ${widgetName} has no initial content - test will be skipped`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Change to different security levels and verify changes\n    cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n    cy.wait(1000); // Longer wait for stability\n    // Try to find the widget again after security level change\n    findWidgetFlexibly(widgetTestId).then(($lowWidget) => {\n        if ($lowWidget.length === 0) {\n            cy.log(`Widget ${widgetName} disappeared after security level change - test will be skipped`);\n            expect(true).to.equal(true); // Soft-pass to avoid failing tests\n            return;\n        }\n        const lowContent = $lowWidget.text();\n        // Change to high security\n        cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n        cy.wait(1000);\n        // Verify widget still exists and content changed again\n        findWidgetFlexibly(widgetTestId).then(($highWidget) => {\n            if ($highWidget.length === 0) {\n                cy.log(`Widget ${widgetName} disappeared after high security level change - test will be skipped`);\n                expect(true).to.equal(true); // Soft-pass to avoid failing tests\n                return;\n            }\n            const highContent = $highWidget.text();\n            // Log results for debugging\n            if (lowContent === highContent) {\n                cy.log(`Warning: Content did not change between low and high security levels`);\n            }\n            // Verify at least one content change happened\n            const contentChanged = initialContent !== lowContent || lowContent !== highContent;\n            expect(contentChanged, \"Content should change with security levels\")\n                .to.be.true;\n        });\n    });\n});",
               "err": {},
-              "uuid": "3561af7f-1a04-48a1-bef4-72c2607d3730",
-              "parentUUID": "068869b7-4bf1-4b39-bae7-0fa167fa3a27",
+              "uuid": "6351c24a-e773-47a1-89eb-212d9bb9bd0c",
+              "parentUUID": "0254fd60-d9f7-4ee5-88b5-bfeda098ca91",
               "isHook": false,
               "skipped": false
             },
@@ -401,7 +401,7 @@
               "title": "supports widget-specific functionality",
               "fullTitle": "Security Level Widget Tests supports widget-specific functionality",
               "timedOut": null,
-              "duration": 2226,
+              "duration": 2104,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -410,22 +410,22 @@
               "context": null,
               "code": "// First check if widget exists\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - specific test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-specific`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Add widget to test context so additionalTests can use it\n    // Wrap the FIRST element when multiple are found to avoid errors in widget-specific tests\n    cy.wrap($widget.first()).as(\"currentWidget\");\n    // Run provided tests in try/catch to prevent cascading failures\n    try {\n        additionalTests();\n    }\n    catch (e) {\n        // Handle unknown error type safely\n        const errorMessage = e instanceof Error ? e.message : String(e);\n        cy.log(`Error in additional tests for ${widgetName}: ${errorMessage}`);\n        cy.screenshot(`error-${widgetName}-specific-test`);\n    }\n});",
               "err": {},
-              "uuid": "04d1cd9a-57af-4d6c-ad85-27b054fe5a2a",
-              "parentUUID": "068869b7-4bf1-4b39-bae7-0fa167fa3a27",
+              "uuid": "97315fcd-1ed0-484b-b6c6-5a6c49ff68cf",
+              "parentUUID": "0254fd60-d9f7-4ee5-88b5-bfeda098ca91",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "b99aa61b-ee1b-4d63-9661-ec04438baf9e",
-            "3561af7f-1a04-48a1-bef4-72c2607d3730",
-            "04d1cd9a-57af-4d6c-ad85-27b054fe5a2a"
+            "c2c4d934-0216-4c4c-b37b-c59aa92a8abf",
+            "6351c24a-e773-47a1-89eb-212d9bb9bd0c",
+            "97315fcd-1ed0-484b-b6c6-5a6c49ff68cf"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 11639,
+          "duration": 11347,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -441,7 +441,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "3047c1c8-90cd-4cad-a603-d150da1145c9",
+      "uuid": "88a29bdc-1fc1-4c23-abce-855ae04bc5f9",
       "title": "",
       "fullFile": "cypress/e2e/widgets/assessmentcenter/security-summary.cy.ts",
       "file": "cypress/e2e/widgets/assessmentcenter/security-summary.cy.ts",
@@ -450,7 +450,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "f4e97932-0d11-4b20-9b64-468411c3d2b7",
+          "uuid": "4f938d4a-6556-4252-801a-843f1da7dc82",
           "title": "Security Summary Widget Tests",
           "fullFile": "",
           "file": "",
@@ -461,7 +461,7 @@
               "title": "is visible and contains expected content",
               "fullTitle": "Security Summary Widget Tests is visible and contains expected content",
               "timedOut": null,
-              "duration": 3263,
+              "duration": 3197,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -470,8 +470,8 @@
               "context": null,
               "code": "// This test uses more flexible widget finding\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Check for at least one expected content pattern\n    const widgetText = $widget.text();\n    let foundPattern = false;\n    let matchedPattern = \"\";\n    contentPatterns.forEach((pattern) => {\n        if (typeof pattern === \"string\") {\n            if (widgetText.includes(pattern)) {\n                foundPattern = true;\n                matchedPattern = pattern;\n            }\n        }\n        else if (pattern.test(widgetText)) {\n            foundPattern = true;\n            matchedPattern = pattern.toString();\n        }\n    });\n    if (foundPattern) {\n        cy.log(`Found expected content pattern: ${matchedPattern}`);\n    }\n    else {\n        cy.log(`No expected content patterns found in widget text: ${widgetText.substring(0, 100)}...`);\n    }\n    expect(foundPattern, `Widget should contain at least one expected content pattern`).to.be.true;\n    // Use the improved screenshot function\n    (0,_screenshot_utils__WEBPACK_IMPORTED_MODULE_1__.captureWidgetScreenshot)($widget.first(), `${widgetTestId}-baseline`);\n});",
               "err": {},
-              "uuid": "8edf11e1-47e6-4ad0-bb43-558166f40e08",
-              "parentUUID": "f4e97932-0d11-4b20-9b64-468411c3d2b7",
+              "uuid": "9631a58c-9f21-431b-8c78-0ac865f4e30b",
+              "parentUUID": "4f938d4a-6556-4252-801a-843f1da7dc82",
               "isHook": false,
               "skipped": false
             },
@@ -479,7 +479,7 @@
               "title": "updates content when security levels change",
               "fullTitle": "Security Summary Widget Tests updates content when security levels change",
               "timedOut": null,
-              "duration": 6122,
+              "duration": 6000,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -488,8 +488,8 @@
               "context": null,
               "code": "// First verify if widget exists to avoid cascading failures\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-security-change`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    const initialContent = $widget.text();\n    // Only test this if we have content to compare against\n    if (initialContent.trim().length === 0) {\n        cy.log(`Widget ${widgetName} has no initial content - test will be skipped`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Change to different security levels and verify changes\n    cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n    cy.wait(1000); // Longer wait for stability\n    // Try to find the widget again after security level change\n    findWidgetFlexibly(widgetTestId).then(($lowWidget) => {\n        if ($lowWidget.length === 0) {\n            cy.log(`Widget ${widgetName} disappeared after security level change - test will be skipped`);\n            expect(true).to.equal(true); // Soft-pass to avoid failing tests\n            return;\n        }\n        const lowContent = $lowWidget.text();\n        // Change to high security\n        cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n        cy.wait(1000);\n        // Verify widget still exists and content changed again\n        findWidgetFlexibly(widgetTestId).then(($highWidget) => {\n            if ($highWidget.length === 0) {\n                cy.log(`Widget ${widgetName} disappeared after high security level change - test will be skipped`);\n                expect(true).to.equal(true); // Soft-pass to avoid failing tests\n                return;\n            }\n            const highContent = $highWidget.text();\n            // Log results for debugging\n            if (lowContent === highContent) {\n                cy.log(`Warning: Content did not change between low and high security levels`);\n            }\n            // Verify at least one content change happened\n            const contentChanged = initialContent !== lowContent || lowContent !== highContent;\n            expect(contentChanged, \"Content should change with security levels\")\n                .to.be.true;\n        });\n    });\n});",
               "err": {},
-              "uuid": "215b471c-ce7e-44b3-9b50-6f8ded7a7d07",
-              "parentUUID": "f4e97932-0d11-4b20-9b64-468411c3d2b7",
+              "uuid": "65f131a4-aa0d-4198-8b47-2cb34372eb65",
+              "parentUUID": "4f938d4a-6556-4252-801a-843f1da7dc82",
               "isHook": false,
               "skipped": false
             },
@@ -497,7 +497,7 @@
               "title": "supports widget-specific functionality",
               "fullTitle": "Security Summary Widget Tests supports widget-specific functionality",
               "timedOut": null,
-              "duration": 2145,
+              "duration": 2134,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -506,22 +506,22 @@
               "context": null,
               "code": "// First check if widget exists\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - specific test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-specific`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Add widget to test context so additionalTests can use it\n    // Wrap the FIRST element when multiple are found to avoid errors in widget-specific tests\n    cy.wrap($widget.first()).as(\"currentWidget\");\n    // Run provided tests in try/catch to prevent cascading failures\n    try {\n        additionalTests();\n    }\n    catch (e) {\n        // Handle unknown error type safely\n        const errorMessage = e instanceof Error ? e.message : String(e);\n        cy.log(`Error in additional tests for ${widgetName}: ${errorMessage}`);\n        cy.screenshot(`error-${widgetName}-specific-test`);\n    }\n});",
               "err": {},
-              "uuid": "ae588ebd-5d81-4ea3-8953-329ba908cb85",
-              "parentUUID": "f4e97932-0d11-4b20-9b64-468411c3d2b7",
+              "uuid": "1540115e-cb8d-4736-be21-b5fa03b8e105",
+              "parentUUID": "4f938d4a-6556-4252-801a-843f1da7dc82",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "8edf11e1-47e6-4ad0-bb43-558166f40e08",
-            "215b471c-ce7e-44b3-9b50-6f8ded7a7d07",
-            "ae588ebd-5d81-4ea3-8953-329ba908cb85"
+            "9631a58c-9f21-431b-8c78-0ac865f4e30b",
+            "65f131a4-aa0d-4198-8b47-2cb34372eb65",
+            "1540115e-cb8d-4736-be21-b5fa03b8e105"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 11530,
+          "duration": 11331,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -537,7 +537,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "cca447aa-8142-4915-a79e-201ba3d6fbdd",
+      "uuid": "47e8e674-768f-4f9f-9ac9-5f21dfae1510",
       "title": "",
       "fullFile": "cypress/e2e/widgets/businessvalue/compliance-status.cy.ts",
       "file": "cypress/e2e/widgets/businessvalue/compliance-status.cy.ts",
@@ -546,7 +546,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "682b64c8-940f-4516-839a-a1588b22adb0",
+          "uuid": "5623df76-b52c-4c05-964a-35d18ecb00aa",
           "title": "Compliance Status Widget Tests",
           "fullFile": "",
           "file": "",
@@ -557,7 +557,7 @@
               "title": "is visible and contains expected content",
               "fullTitle": "Compliance Status Widget Tests is visible and contains expected content",
               "timedOut": null,
-              "duration": 3335,
+              "duration": 3189,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -566,8 +566,8 @@
               "context": null,
               "code": "// This test uses more flexible widget finding\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Check for at least one expected content pattern\n    const widgetText = $widget.text();\n    let foundPattern = false;\n    let matchedPattern = \"\";\n    contentPatterns.forEach((pattern) => {\n        if (typeof pattern === \"string\") {\n            if (widgetText.includes(pattern)) {\n                foundPattern = true;\n                matchedPattern = pattern;\n            }\n        }\n        else if (pattern.test(widgetText)) {\n            foundPattern = true;\n            matchedPattern = pattern.toString();\n        }\n    });\n    if (foundPattern) {\n        cy.log(`Found expected content pattern: ${matchedPattern}`);\n    }\n    else {\n        cy.log(`No expected content patterns found in widget text: ${widgetText.substring(0, 100)}...`);\n    }\n    expect(foundPattern, `Widget should contain at least one expected content pattern`).to.be.true;\n    // Use the improved screenshot function\n    (0,_screenshot_utils__WEBPACK_IMPORTED_MODULE_1__.captureWidgetScreenshot)($widget.first(), `${widgetTestId}-baseline`);\n});",
               "err": {},
-              "uuid": "c05d8601-1a22-4f63-994f-fb8304fcab5c",
-              "parentUUID": "682b64c8-940f-4516-839a-a1588b22adb0",
+              "uuid": "f4f679d1-6614-4296-8cf1-195b18dd9863",
+              "parentUUID": "5623df76-b52c-4c05-964a-35d18ecb00aa",
               "isHook": false,
               "skipped": false
             },
@@ -575,7 +575,7 @@
               "title": "updates content when security levels change",
               "fullTitle": "Compliance Status Widget Tests updates content when security levels change",
               "timedOut": null,
-              "duration": 6038,
+              "duration": 5964,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -584,8 +584,8 @@
               "context": null,
               "code": "// First verify if widget exists to avoid cascading failures\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-security-change`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    const initialContent = $widget.text();\n    // Only test this if we have content to compare against\n    if (initialContent.trim().length === 0) {\n        cy.log(`Widget ${widgetName} has no initial content - test will be skipped`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Change to different security levels and verify changes\n    cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n    cy.wait(1000); // Longer wait for stability\n    // Try to find the widget again after security level change\n    findWidgetFlexibly(widgetTestId).then(($lowWidget) => {\n        if ($lowWidget.length === 0) {\n            cy.log(`Widget ${widgetName} disappeared after security level change - test will be skipped`);\n            expect(true).to.equal(true); // Soft-pass to avoid failing tests\n            return;\n        }\n        const lowContent = $lowWidget.text();\n        // Change to high security\n        cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n        cy.wait(1000);\n        // Verify widget still exists and content changed again\n        findWidgetFlexibly(widgetTestId).then(($highWidget) => {\n            if ($highWidget.length === 0) {\n                cy.log(`Widget ${widgetName} disappeared after high security level change - test will be skipped`);\n                expect(true).to.equal(true); // Soft-pass to avoid failing tests\n                return;\n            }\n            const highContent = $highWidget.text();\n            // Log results for debugging\n            if (lowContent === highContent) {\n                cy.log(`Warning: Content did not change between low and high security levels`);\n            }\n            // Verify at least one content change happened\n            const contentChanged = initialContent !== lowContent || lowContent !== highContent;\n            expect(contentChanged, \"Content should change with security levels\")\n                .to.be.true;\n        });\n    });\n});",
               "err": {},
-              "uuid": "d17a71cf-e227-4f46-811e-585876f1c41b",
-              "parentUUID": "682b64c8-940f-4516-839a-a1588b22adb0",
+              "uuid": "3aee32df-d8b2-4b69-b5f3-3971f6f4ddc0",
+              "parentUUID": "5623df76-b52c-4c05-964a-35d18ecb00aa",
               "isHook": false,
               "skipped": false
             },
@@ -593,7 +593,7 @@
               "title": "supports widget-specific functionality",
               "fullTitle": "Compliance Status Widget Tests supports widget-specific functionality",
               "timedOut": null,
-              "duration": 2171,
+              "duration": 2136,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -602,22 +602,22 @@
               "context": null,
               "code": "// First check if widget exists\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - specific test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-specific`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Add widget to test context so additionalTests can use it\n    // Wrap the FIRST element when multiple are found to avoid errors in widget-specific tests\n    cy.wrap($widget.first()).as(\"currentWidget\");\n    // Run provided tests in try/catch to prevent cascading failures\n    try {\n        additionalTests();\n    }\n    catch (e) {\n        // Handle unknown error type safely\n        const errorMessage = e instanceof Error ? e.message : String(e);\n        cy.log(`Error in additional tests for ${widgetName}: ${errorMessage}`);\n        cy.screenshot(`error-${widgetName}-specific-test`);\n    }\n});",
               "err": {},
-              "uuid": "e48f98c7-ad54-4b15-b5b3-ec519fd857cd",
-              "parentUUID": "682b64c8-940f-4516-839a-a1588b22adb0",
+              "uuid": "599693a4-df65-4d19-bf6f-1baa109f7330",
+              "parentUUID": "5623df76-b52c-4c05-964a-35d18ecb00aa",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "c05d8601-1a22-4f63-994f-fb8304fcab5c",
-            "d17a71cf-e227-4f46-811e-585876f1c41b",
-            "e48f98c7-ad54-4b15-b5b3-ec519fd857cd"
+            "f4f679d1-6614-4296-8cf1-195b18dd9863",
+            "3aee32df-d8b2-4b69-b5f3-3971f6f4ddc0",
+            "599693a4-df65-4d19-bf6f-1baa109f7330"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 11544,
+          "duration": 11289,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -633,7 +633,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "3fe4c407-3680-43a2-bb64-1bd8a766b5c2",
+      "uuid": "cb036ad6-cceb-407a-9302-fcd4e0411cc7",
       "title": "",
       "fullFile": "cypress/e2e/widgets/businessvalue/cost-estimation.cy.ts",
       "file": "cypress/e2e/widgets/businessvalue/cost-estimation.cy.ts",
@@ -642,7 +642,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "0140ef1c-c81a-429d-a88d-7663f77f67a1",
+          "uuid": "9a04b040-070b-4f30-9d1e-e844435b9ecf",
           "title": "Cost Estimation Widget Tests",
           "fullFile": "",
           "file": "",
@@ -653,7 +653,7 @@
               "title": "is visible and contains expected content",
               "fullTitle": "Cost Estimation Widget Tests is visible and contains expected content",
               "timedOut": null,
-              "duration": 3289,
+              "duration": 3172,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -662,8 +662,8 @@
               "context": null,
               "code": "// This test uses more flexible widget finding\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Check for at least one expected content pattern\n    const widgetText = $widget.text();\n    let foundPattern = false;\n    let matchedPattern = \"\";\n    contentPatterns.forEach((pattern) => {\n        if (typeof pattern === \"string\") {\n            if (widgetText.includes(pattern)) {\n                foundPattern = true;\n                matchedPattern = pattern;\n            }\n        }\n        else if (pattern.test(widgetText)) {\n            foundPattern = true;\n            matchedPattern = pattern.toString();\n        }\n    });\n    if (foundPattern) {\n        cy.log(`Found expected content pattern: ${matchedPattern}`);\n    }\n    else {\n        cy.log(`No expected content patterns found in widget text: ${widgetText.substring(0, 100)}...`);\n    }\n    expect(foundPattern, `Widget should contain at least one expected content pattern`).to.be.true;\n    // Use the improved screenshot function\n    (0,_screenshot_utils__WEBPACK_IMPORTED_MODULE_1__.captureWidgetScreenshot)($widget.first(), `${widgetTestId}-baseline`);\n});",
               "err": {},
-              "uuid": "dda9a94d-0189-4c8c-8dc5-0c14fa86d384",
-              "parentUUID": "0140ef1c-c81a-429d-a88d-7663f77f67a1",
+              "uuid": "ff206067-66de-4d08-aaaa-c9416a6b085f",
+              "parentUUID": "9a04b040-070b-4f30-9d1e-e844435b9ecf",
               "isHook": false,
               "skipped": false
             },
@@ -671,7 +671,7 @@
               "title": "updates content when security levels change",
               "fullTitle": "Cost Estimation Widget Tests updates content when security levels change",
               "timedOut": null,
-              "duration": 6113,
+              "duration": 5990,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -680,8 +680,8 @@
               "context": null,
               "code": "// First verify if widget exists to avoid cascading failures\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-security-change`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    const initialContent = $widget.text();\n    // Only test this if we have content to compare against\n    if (initialContent.trim().length === 0) {\n        cy.log(`Widget ${widgetName} has no initial content - test will be skipped`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Change to different security levels and verify changes\n    cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n    cy.wait(1000); // Longer wait for stability\n    // Try to find the widget again after security level change\n    findWidgetFlexibly(widgetTestId).then(($lowWidget) => {\n        if ($lowWidget.length === 0) {\n            cy.log(`Widget ${widgetName} disappeared after security level change - test will be skipped`);\n            expect(true).to.equal(true); // Soft-pass to avoid failing tests\n            return;\n        }\n        const lowContent = $lowWidget.text();\n        // Change to high security\n        cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n        cy.wait(1000);\n        // Verify widget still exists and content changed again\n        findWidgetFlexibly(widgetTestId).then(($highWidget) => {\n            if ($highWidget.length === 0) {\n                cy.log(`Widget ${widgetName} disappeared after high security level change - test will be skipped`);\n                expect(true).to.equal(true); // Soft-pass to avoid failing tests\n                return;\n            }\n            const highContent = $highWidget.text();\n            // Log results for debugging\n            if (lowContent === highContent) {\n                cy.log(`Warning: Content did not change between low and high security levels`);\n            }\n            // Verify at least one content change happened\n            const contentChanged = initialContent !== lowContent || lowContent !== highContent;\n            expect(contentChanged, \"Content should change with security levels\")\n                .to.be.true;\n        });\n    });\n});",
               "err": {},
-              "uuid": "7f958f9d-2af1-4f59-8cf6-53ca01a49525",
-              "parentUUID": "0140ef1c-c81a-429d-a88d-7663f77f67a1",
+              "uuid": "548f9f75-28b5-4d2b-b161-861a9ea7a16c",
+              "parentUUID": "9a04b040-070b-4f30-9d1e-e844435b9ecf",
               "isHook": false,
               "skipped": false
             },
@@ -689,7 +689,7 @@
               "title": "supports widget-specific functionality",
               "fullTitle": "Cost Estimation Widget Tests supports widget-specific functionality",
               "timedOut": null,
-              "duration": 2192,
+              "duration": 2134,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -698,22 +698,22 @@
               "context": null,
               "code": "// First check if widget exists\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - specific test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-specific`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Add widget to test context so additionalTests can use it\n    // Wrap the FIRST element when multiple are found to avoid errors in widget-specific tests\n    cy.wrap($widget.first()).as(\"currentWidget\");\n    // Run provided tests in try/catch to prevent cascading failures\n    try {\n        additionalTests();\n    }\n    catch (e) {\n        // Handle unknown error type safely\n        const errorMessage = e instanceof Error ? e.message : String(e);\n        cy.log(`Error in additional tests for ${widgetName}: ${errorMessage}`);\n        cy.screenshot(`error-${widgetName}-specific-test`);\n    }\n});",
               "err": {},
-              "uuid": "aa7af6cb-44fc-42c4-9c9d-26ee61107ddc",
-              "parentUUID": "0140ef1c-c81a-429d-a88d-7663f77f67a1",
+              "uuid": "90348eb2-49dd-406f-b9bf-7746738a7dba",
+              "parentUUID": "9a04b040-070b-4f30-9d1e-e844435b9ecf",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "dda9a94d-0189-4c8c-8dc5-0c14fa86d384",
-            "7f958f9d-2af1-4f59-8cf6-53ca01a49525",
-            "aa7af6cb-44fc-42c4-9c9d-26ee61107ddc"
+            "ff206067-66de-4d08-aaaa-c9416a6b085f",
+            "548f9f75-28b5-4d2b-b161-861a9ea7a16c",
+            "90348eb2-49dd-406f-b9bf-7746738a7dba"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 11594,
+          "duration": 11296,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -729,7 +729,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "1698f9e8-e8ef-4511-9602-94e813ca455e",
+      "uuid": "83d9f1a2-0736-435f-8ce2-1b3348dbee8b",
       "title": "",
       "fullFile": "cypress/e2e/widgets/businessvalue/value-creation.cy.ts",
       "file": "cypress/e2e/widgets/businessvalue/value-creation.cy.ts",
@@ -738,7 +738,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "4cd6a16e-b73f-4642-b987-19c9bbba909a",
+          "uuid": "4b4f3c97-f395-4215-8908-d01634990ef4",
           "title": "Value Creation Widget Tests",
           "fullFile": "",
           "file": "",
@@ -749,7 +749,7 @@
               "title": "is visible and contains expected content",
               "fullTitle": "Value Creation Widget Tests is visible and contains expected content",
               "timedOut": null,
-              "duration": 3298,
+              "duration": 3177,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -758,8 +758,8 @@
               "context": null,
               "code": "// This test uses more flexible widget finding\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Check for at least one expected content pattern\n    const widgetText = $widget.text();\n    let foundPattern = false;\n    let matchedPattern = \"\";\n    contentPatterns.forEach((pattern) => {\n        if (typeof pattern === \"string\") {\n            if (widgetText.includes(pattern)) {\n                foundPattern = true;\n                matchedPattern = pattern;\n            }\n        }\n        else if (pattern.test(widgetText)) {\n            foundPattern = true;\n            matchedPattern = pattern.toString();\n        }\n    });\n    if (foundPattern) {\n        cy.log(`Found expected content pattern: ${matchedPattern}`);\n    }\n    else {\n        cy.log(`No expected content patterns found in widget text: ${widgetText.substring(0, 100)}...`);\n    }\n    expect(foundPattern, `Widget should contain at least one expected content pattern`).to.be.true;\n    // Use the improved screenshot function\n    (0,_screenshot_utils__WEBPACK_IMPORTED_MODULE_1__.captureWidgetScreenshot)($widget.first(), `${widgetTestId}-baseline`);\n});",
               "err": {},
-              "uuid": "f9f67a16-265e-4b14-b4c6-bbc71bb451d8",
-              "parentUUID": "4cd6a16e-b73f-4642-b987-19c9bbba909a",
+              "uuid": "25e60a6c-6680-4866-b6d4-d0951c4688f7",
+              "parentUUID": "4b4f3c97-f395-4215-8908-d01634990ef4",
               "isHook": false,
               "skipped": false
             },
@@ -767,7 +767,7 @@
               "title": "updates content when security levels change",
               "fullTitle": "Value Creation Widget Tests updates content when security levels change",
               "timedOut": null,
-              "duration": 6006,
+              "duration": 5965,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -776,8 +776,8 @@
               "context": null,
               "code": "// First verify if widget exists to avoid cascading failures\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-security-change`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    const initialContent = $widget.text();\n    // Only test this if we have content to compare against\n    if (initialContent.trim().length === 0) {\n        cy.log(`Widget ${widgetName} has no initial content - test will be skipped`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Change to different security levels and verify changes\n    cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n    cy.wait(1000); // Longer wait for stability\n    // Try to find the widget again after security level change\n    findWidgetFlexibly(widgetTestId).then(($lowWidget) => {\n        if ($lowWidget.length === 0) {\n            cy.log(`Widget ${widgetName} disappeared after security level change - test will be skipped`);\n            expect(true).to.equal(true); // Soft-pass to avoid failing tests\n            return;\n        }\n        const lowContent = $lowWidget.text();\n        // Change to high security\n        cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n        cy.wait(1000);\n        // Verify widget still exists and content changed again\n        findWidgetFlexibly(widgetTestId).then(($highWidget) => {\n            if ($highWidget.length === 0) {\n                cy.log(`Widget ${widgetName} disappeared after high security level change - test will be skipped`);\n                expect(true).to.equal(true); // Soft-pass to avoid failing tests\n                return;\n            }\n            const highContent = $highWidget.text();\n            // Log results for debugging\n            if (lowContent === highContent) {\n                cy.log(`Warning: Content did not change between low and high security levels`);\n            }\n            // Verify at least one content change happened\n            const contentChanged = initialContent !== lowContent || lowContent !== highContent;\n            expect(contentChanged, \"Content should change with security levels\")\n                .to.be.true;\n        });\n    });\n});",
               "err": {},
-              "uuid": "0e8e4662-b8f4-407e-bd1d-6e4c6840fcef",
-              "parentUUID": "4cd6a16e-b73f-4642-b987-19c9bbba909a",
+              "uuid": "cd883ce6-b365-43ae-afcc-c7409a54d16c",
+              "parentUUID": "4b4f3c97-f395-4215-8908-d01634990ef4",
               "isHook": false,
               "skipped": false
             },
@@ -785,7 +785,7 @@
               "title": "supports widget-specific functionality",
               "fullTitle": "Value Creation Widget Tests supports widget-specific functionality",
               "timedOut": null,
-              "duration": 2174,
+              "duration": 2116,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -794,22 +794,22 @@
               "context": null,
               "code": "// First check if widget exists\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - specific test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-specific`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Add widget to test context so additionalTests can use it\n    // Wrap the FIRST element when multiple are found to avoid errors in widget-specific tests\n    cy.wrap($widget.first()).as(\"currentWidget\");\n    // Run provided tests in try/catch to prevent cascading failures\n    try {\n        additionalTests();\n    }\n    catch (e) {\n        // Handle unknown error type safely\n        const errorMessage = e instanceof Error ? e.message : String(e);\n        cy.log(`Error in additional tests for ${widgetName}: ${errorMessage}`);\n        cy.screenshot(`error-${widgetName}-specific-test`);\n    }\n});",
               "err": {},
-              "uuid": "9242eb76-0fcf-4642-9ed7-26e8b44634b1",
-              "parentUUID": "4cd6a16e-b73f-4642-b987-19c9bbba909a",
+              "uuid": "873ea33d-fce4-4fe8-9e43-2338675bdb0d",
+              "parentUUID": "4b4f3c97-f395-4215-8908-d01634990ef4",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "f9f67a16-265e-4b14-b4c6-bbc71bb451d8",
-            "0e8e4662-b8f4-407e-bd1d-6e4c6840fcef",
-            "9242eb76-0fcf-4642-9ed7-26e8b44634b1"
+            "25e60a6c-6680-4866-b6d4-d0951c4688f7",
+            "cd883ce6-b365-43ae-afcc-c7409a54d16c",
+            "873ea33d-fce4-4fe8-9e43-2338675bdb0d"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 11478,
+          "duration": 11258,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -825,7 +825,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "8a531301-247b-451b-bd6d-485dca5b0c48",
+      "uuid": "2b076868-4a77-4772-996b-83668857466c",
       "title": "",
       "fullFile": "cypress/e2e/widgets/impactanalysis/availability-impact.cy.ts",
       "file": "cypress/e2e/widgets/impactanalysis/availability-impact.cy.ts",
@@ -834,7 +834,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "d767df27-1e2d-4094-a42f-285de3ed619b",
+          "uuid": "396a574b-4732-4a8d-8bac-43fb90e72891",
           "title": "Availability Impact Widget Tests",
           "fullFile": "",
           "file": "",
@@ -845,7 +845,7 @@
               "title": "is visible and contains expected content",
               "fullTitle": "Availability Impact Widget Tests is visible and contains expected content",
               "timedOut": null,
-              "duration": 3358,
+              "duration": 3154,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -854,8 +854,8 @@
               "context": null,
               "code": "// This test uses more flexible widget finding\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Check for at least one expected content pattern\n    const widgetText = $widget.text();\n    let foundPattern = false;\n    let matchedPattern = \"\";\n    contentPatterns.forEach((pattern) => {\n        if (typeof pattern === \"string\") {\n            if (widgetText.includes(pattern)) {\n                foundPattern = true;\n                matchedPattern = pattern;\n            }\n        }\n        else if (pattern.test(widgetText)) {\n            foundPattern = true;\n            matchedPattern = pattern.toString();\n        }\n    });\n    if (foundPattern) {\n        cy.log(`Found expected content pattern: ${matchedPattern}`);\n    }\n    else {\n        cy.log(`No expected content patterns found in widget text: ${widgetText.substring(0, 100)}...`);\n    }\n    expect(foundPattern, `Widget should contain at least one expected content pattern`).to.be.true;\n    // Use the improved screenshot function\n    (0,_screenshot_utils__WEBPACK_IMPORTED_MODULE_1__.captureWidgetScreenshot)($widget.first(), `${widgetTestId}-baseline`);\n});",
               "err": {},
-              "uuid": "e6cf92ac-5229-4798-bcee-bcba0231c9d0",
-              "parentUUID": "d767df27-1e2d-4094-a42f-285de3ed619b",
+              "uuid": "e39f977d-4aec-402f-8bc1-9ff96fd76bfa",
+              "parentUUID": "396a574b-4732-4a8d-8bac-43fb90e72891",
               "isHook": false,
               "skipped": false
             },
@@ -863,7 +863,7 @@
               "title": "updates content when security levels change",
               "fullTitle": "Availability Impact Widget Tests updates content when security levels change",
               "timedOut": null,
-              "duration": 6053,
+              "duration": 5983,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -872,8 +872,8 @@
               "context": null,
               "code": "// First verify if widget exists to avoid cascading failures\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-security-change`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    const initialContent = $widget.text();\n    // Only test this if we have content to compare against\n    if (initialContent.trim().length === 0) {\n        cy.log(`Widget ${widgetName} has no initial content - test will be skipped`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Change to different security levels and verify changes\n    cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n    cy.wait(1000); // Longer wait for stability\n    // Try to find the widget again after security level change\n    findWidgetFlexibly(widgetTestId).then(($lowWidget) => {\n        if ($lowWidget.length === 0) {\n            cy.log(`Widget ${widgetName} disappeared after security level change - test will be skipped`);\n            expect(true).to.equal(true); // Soft-pass to avoid failing tests\n            return;\n        }\n        const lowContent = $lowWidget.text();\n        // Change to high security\n        cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n        cy.wait(1000);\n        // Verify widget still exists and content changed again\n        findWidgetFlexibly(widgetTestId).then(($highWidget) => {\n            if ($highWidget.length === 0) {\n                cy.log(`Widget ${widgetName} disappeared after high security level change - test will be skipped`);\n                expect(true).to.equal(true); // Soft-pass to avoid failing tests\n                return;\n            }\n            const highContent = $highWidget.text();\n            // Log results for debugging\n            if (lowContent === highContent) {\n                cy.log(`Warning: Content did not change between low and high security levels`);\n            }\n            // Verify at least one content change happened\n            const contentChanged = initialContent !== lowContent || lowContent !== highContent;\n            expect(contentChanged, \"Content should change with security levels\")\n                .to.be.true;\n        });\n    });\n});",
               "err": {},
-              "uuid": "f5fcf0d2-9de4-4b0c-b586-785f1e883594",
-              "parentUUID": "d767df27-1e2d-4094-a42f-285de3ed619b",
+              "uuid": "da88f494-9b55-4b3f-ae29-6cd2e2d13cf9",
+              "parentUUID": "396a574b-4732-4a8d-8bac-43fb90e72891",
               "isHook": false,
               "skipped": false
             },
@@ -881,7 +881,7 @@
               "title": "supports widget-specific functionality",
               "fullTitle": "Availability Impact Widget Tests supports widget-specific functionality",
               "timedOut": null,
-              "duration": 2147,
+              "duration": 2136,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -890,22 +890,22 @@
               "context": null,
               "code": "// First check if widget exists\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - specific test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-specific`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Add widget to test context so additionalTests can use it\n    // Wrap the FIRST element when multiple are found to avoid errors in widget-specific tests\n    cy.wrap($widget.first()).as(\"currentWidget\");\n    // Run provided tests in try/catch to prevent cascading failures\n    try {\n        additionalTests();\n    }\n    catch (e) {\n        // Handle unknown error type safely\n        const errorMessage = e instanceof Error ? e.message : String(e);\n        cy.log(`Error in additional tests for ${widgetName}: ${errorMessage}`);\n        cy.screenshot(`error-${widgetName}-specific-test`);\n    }\n});",
               "err": {},
-              "uuid": "f5d3d598-7feb-490a-9462-a3ca68e519bb",
-              "parentUUID": "d767df27-1e2d-4094-a42f-285de3ed619b",
+              "uuid": "b9eeb17c-ee51-49c9-9b19-7d4852625976",
+              "parentUUID": "396a574b-4732-4a8d-8bac-43fb90e72891",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "e6cf92ac-5229-4798-bcee-bcba0231c9d0",
-            "f5fcf0d2-9de4-4b0c-b586-785f1e883594",
-            "f5d3d598-7feb-490a-9462-a3ca68e519bb"
+            "e39f977d-4aec-402f-8bc1-9ff96fd76bfa",
+            "da88f494-9b55-4b3f-ae29-6cd2e2d13cf9",
+            "b9eeb17c-ee51-49c9-9b19-7d4852625976"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 11558,
+          "duration": 11273,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -921,7 +921,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "95c5a64a-fd5a-407c-83ab-2ad184f0c2ba",
+      "uuid": "13d0353c-6b34-414c-a5ac-c87e9fa0aefb",
       "title": "",
       "fullFile": "cypress/e2e/widgets/impactanalysis/confidentiality-impact.cy.ts",
       "file": "cypress/e2e/widgets/impactanalysis/confidentiality-impact.cy.ts",
@@ -930,7 +930,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "5cfecb71-bc86-4e5c-acbc-b2c89a43e5e9",
+          "uuid": "92cfe0f7-fbaa-4f58-8615-bf232845b64f",
           "title": "Confidentiality Impact Widget Tests",
           "fullFile": "",
           "file": "",
@@ -941,7 +941,7 @@
               "title": "is visible and contains expected content",
               "fullTitle": "Confidentiality Impact Widget Tests is visible and contains expected content",
               "timedOut": null,
-              "duration": 3282,
+              "duration": 3286,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -950,8 +950,8 @@
               "context": null,
               "code": "// This test uses more flexible widget finding\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Check for at least one expected content pattern\n    const widgetText = $widget.text();\n    let foundPattern = false;\n    let matchedPattern = \"\";\n    contentPatterns.forEach((pattern) => {\n        if (typeof pattern === \"string\") {\n            if (widgetText.includes(pattern)) {\n                foundPattern = true;\n                matchedPattern = pattern;\n            }\n        }\n        else if (pattern.test(widgetText)) {\n            foundPattern = true;\n            matchedPattern = pattern.toString();\n        }\n    });\n    if (foundPattern) {\n        cy.log(`Found expected content pattern: ${matchedPattern}`);\n    }\n    else {\n        cy.log(`No expected content patterns found in widget text: ${widgetText.substring(0, 100)}...`);\n    }\n    expect(foundPattern, `Widget should contain at least one expected content pattern`).to.be.true;\n    // Use the improved screenshot function\n    (0,_screenshot_utils__WEBPACK_IMPORTED_MODULE_1__.captureWidgetScreenshot)($widget.first(), `${widgetTestId}-baseline`);\n});",
               "err": {},
-              "uuid": "e43ecfd8-3c01-4c48-a5fb-898cdb8ba300",
-              "parentUUID": "5cfecb71-bc86-4e5c-acbc-b2c89a43e5e9",
+              "uuid": "2e161aac-1d55-499a-9f96-3cbdf59ebc1b",
+              "parentUUID": "92cfe0f7-fbaa-4f58-8615-bf232845b64f",
               "isHook": false,
               "skipped": false
             },
@@ -959,7 +959,7 @@
               "title": "updates content when security levels change",
               "fullTitle": "Confidentiality Impact Widget Tests updates content when security levels change",
               "timedOut": null,
-              "duration": 6078,
+              "duration": 5972,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -968,8 +968,8 @@
               "context": null,
               "code": "// First verify if widget exists to avoid cascading failures\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-security-change`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    const initialContent = $widget.text();\n    // Only test this if we have content to compare against\n    if (initialContent.trim().length === 0) {\n        cy.log(`Widget ${widgetName} has no initial content - test will be skipped`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Change to different security levels and verify changes\n    cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n    cy.wait(1000); // Longer wait for stability\n    // Try to find the widget again after security level change\n    findWidgetFlexibly(widgetTestId).then(($lowWidget) => {\n        if ($lowWidget.length === 0) {\n            cy.log(`Widget ${widgetName} disappeared after security level change - test will be skipped`);\n            expect(true).to.equal(true); // Soft-pass to avoid failing tests\n            return;\n        }\n        const lowContent = $lowWidget.text();\n        // Change to high security\n        cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n        cy.wait(1000);\n        // Verify widget still exists and content changed again\n        findWidgetFlexibly(widgetTestId).then(($highWidget) => {\n            if ($highWidget.length === 0) {\n                cy.log(`Widget ${widgetName} disappeared after high security level change - test will be skipped`);\n                expect(true).to.equal(true); // Soft-pass to avoid failing tests\n                return;\n            }\n            const highContent = $highWidget.text();\n            // Log results for debugging\n            if (lowContent === highContent) {\n                cy.log(`Warning: Content did not change between low and high security levels`);\n            }\n            // Verify at least one content change happened\n            const contentChanged = initialContent !== lowContent || lowContent !== highContent;\n            expect(contentChanged, \"Content should change with security levels\")\n                .to.be.true;\n        });\n    });\n});",
               "err": {},
-              "uuid": "ade6436d-78ff-4969-9f40-f8a098ca2103",
-              "parentUUID": "5cfecb71-bc86-4e5c-acbc-b2c89a43e5e9",
+              "uuid": "35616630-6c1a-4a08-9645-0743e659f219",
+              "parentUUID": "92cfe0f7-fbaa-4f58-8615-bf232845b64f",
               "isHook": false,
               "skipped": false
             },
@@ -977,7 +977,7 @@
               "title": "supports widget-specific functionality",
               "fullTitle": "Confidentiality Impact Widget Tests supports widget-specific functionality",
               "timedOut": null,
-              "duration": 2133,
+              "duration": 2086,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -986,22 +986,22 @@
               "context": null,
               "code": "// First check if widget exists\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - specific test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-specific`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Add widget to test context so additionalTests can use it\n    // Wrap the FIRST element when multiple are found to avoid errors in widget-specific tests\n    cy.wrap($widget.first()).as(\"currentWidget\");\n    // Run provided tests in try/catch to prevent cascading failures\n    try {\n        additionalTests();\n    }\n    catch (e) {\n        // Handle unknown error type safely\n        const errorMessage = e instanceof Error ? e.message : String(e);\n        cy.log(`Error in additional tests for ${widgetName}: ${errorMessage}`);\n        cy.screenshot(`error-${widgetName}-specific-test`);\n    }\n});",
               "err": {},
-              "uuid": "a3d14c8d-6b7f-4d93-8a5d-c1e10ea580ae",
-              "parentUUID": "5cfecb71-bc86-4e5c-acbc-b2c89a43e5e9",
+              "uuid": "5b2cff10-389b-4513-9de0-0e7c64d696f5",
+              "parentUUID": "92cfe0f7-fbaa-4f58-8615-bf232845b64f",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "e43ecfd8-3c01-4c48-a5fb-898cdb8ba300",
-            "ade6436d-78ff-4969-9f40-f8a098ca2103",
-            "a3d14c8d-6b7f-4d93-8a5d-c1e10ea580ae"
+            "2e161aac-1d55-499a-9f96-3cbdf59ebc1b",
+            "35616630-6c1a-4a08-9645-0743e659f219",
+            "5b2cff10-389b-4513-9de0-0e7c64d696f5"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 11493,
+          "duration": 11344,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -1017,7 +1017,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "086853cc-240a-48da-a0aa-9319604213e5",
+      "uuid": "c61c7d39-a3b3-41d8-b990-8156e1a8dd26",
       "title": "",
       "fullFile": "cypress/e2e/widgets/impactanalysis/integrity-impact.cy.ts",
       "file": "cypress/e2e/widgets/impactanalysis/integrity-impact.cy.ts",
@@ -1026,7 +1026,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "30579a9b-8819-4019-a83b-31eb103f9a5e",
+          "uuid": "503c9de9-f9b7-4e9e-bedb-aed2da5ecd48",
           "title": "Integrity Impact Widget Tests",
           "fullFile": "",
           "file": "",
@@ -1037,7 +1037,7 @@
               "title": "is visible and contains expected content",
               "fullTitle": "Integrity Impact Widget Tests is visible and contains expected content",
               "timedOut": null,
-              "duration": 3438,
+              "duration": 3297,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -1046,8 +1046,8 @@
               "context": null,
               "code": "// This test uses more flexible widget finding\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Check for at least one expected content pattern\n    const widgetText = $widget.text();\n    let foundPattern = false;\n    let matchedPattern = \"\";\n    contentPatterns.forEach((pattern) => {\n        if (typeof pattern === \"string\") {\n            if (widgetText.includes(pattern)) {\n                foundPattern = true;\n                matchedPattern = pattern;\n            }\n        }\n        else if (pattern.test(widgetText)) {\n            foundPattern = true;\n            matchedPattern = pattern.toString();\n        }\n    });\n    if (foundPattern) {\n        cy.log(`Found expected content pattern: ${matchedPattern}`);\n    }\n    else {\n        cy.log(`No expected content patterns found in widget text: ${widgetText.substring(0, 100)}...`);\n    }\n    expect(foundPattern, `Widget should contain at least one expected content pattern`).to.be.true;\n    // Use the improved screenshot function\n    (0,_screenshot_utils__WEBPACK_IMPORTED_MODULE_1__.captureWidgetScreenshot)($widget.first(), `${widgetTestId}-baseline`);\n});",
               "err": {},
-              "uuid": "46725d73-7995-43dd-829e-e909667479ac",
-              "parentUUID": "30579a9b-8819-4019-a83b-31eb103f9a5e",
+              "uuid": "a0405b1c-c11c-4f9e-8b43-b3cbc303bc56",
+              "parentUUID": "503c9de9-f9b7-4e9e-bedb-aed2da5ecd48",
               "isHook": false,
               "skipped": false
             },
@@ -1055,7 +1055,7 @@
               "title": "updates content when security levels change",
               "fullTitle": "Integrity Impact Widget Tests updates content when security levels change",
               "timedOut": null,
-              "duration": 6115,
+              "duration": 5964,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -1064,8 +1064,8 @@
               "context": null,
               "code": "// First verify if widget exists to avoid cascading failures\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-security-change`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    const initialContent = $widget.text();\n    // Only test this if we have content to compare against\n    if (initialContent.trim().length === 0) {\n        cy.log(`Widget ${widgetName} has no initial content - test will be skipped`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Change to different security levels and verify changes\n    cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n    cy.wait(1000); // Longer wait for stability\n    // Try to find the widget again after security level change\n    findWidgetFlexibly(widgetTestId).then(($lowWidget) => {\n        if ($lowWidget.length === 0) {\n            cy.log(`Widget ${widgetName} disappeared after security level change - test will be skipped`);\n            expect(true).to.equal(true); // Soft-pass to avoid failing tests\n            return;\n        }\n        const lowContent = $lowWidget.text();\n        // Change to high security\n        cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n        cy.wait(1000);\n        // Verify widget still exists and content changed again\n        findWidgetFlexibly(widgetTestId).then(($highWidget) => {\n            if ($highWidget.length === 0) {\n                cy.log(`Widget ${widgetName} disappeared after high security level change - test will be skipped`);\n                expect(true).to.equal(true); // Soft-pass to avoid failing tests\n                return;\n            }\n            const highContent = $highWidget.text();\n            // Log results for debugging\n            if (lowContent === highContent) {\n                cy.log(`Warning: Content did not change between low and high security levels`);\n            }\n            // Verify at least one content change happened\n            const contentChanged = initialContent !== lowContent || lowContent !== highContent;\n            expect(contentChanged, \"Content should change with security levels\")\n                .to.be.true;\n        });\n    });\n});",
               "err": {},
-              "uuid": "ef2c6473-2b9b-4381-ac14-97f9f0eec311",
-              "parentUUID": "30579a9b-8819-4019-a83b-31eb103f9a5e",
+              "uuid": "aee8a30c-f858-4edb-bae0-55cbd54abf0d",
+              "parentUUID": "503c9de9-f9b7-4e9e-bedb-aed2da5ecd48",
               "isHook": false,
               "skipped": false
             },
@@ -1073,7 +1073,7 @@
               "title": "supports widget-specific functionality",
               "fullTitle": "Integrity Impact Widget Tests supports widget-specific functionality",
               "timedOut": null,
-              "duration": 2175,
+              "duration": 2091,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -1082,22 +1082,22 @@
               "context": null,
               "code": "// First check if widget exists\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - specific test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-specific`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Add widget to test context so additionalTests can use it\n    // Wrap the FIRST element when multiple are found to avoid errors in widget-specific tests\n    cy.wrap($widget.first()).as(\"currentWidget\");\n    // Run provided tests in try/catch to prevent cascading failures\n    try {\n        additionalTests();\n    }\n    catch (e) {\n        // Handle unknown error type safely\n        const errorMessage = e instanceof Error ? e.message : String(e);\n        cy.log(`Error in additional tests for ${widgetName}: ${errorMessage}`);\n        cy.screenshot(`error-${widgetName}-specific-test`);\n    }\n});",
               "err": {},
-              "uuid": "3196c870-1df6-46a5-8962-2e898de6c2a3",
-              "parentUUID": "30579a9b-8819-4019-a83b-31eb103f9a5e",
+              "uuid": "e89a0c4c-bd20-4264-abc5-c8493267a25f",
+              "parentUUID": "503c9de9-f9b7-4e9e-bedb-aed2da5ecd48",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "46725d73-7995-43dd-829e-e909667479ac",
-            "ef2c6473-2b9b-4381-ac14-97f9f0eec311",
-            "3196c870-1df6-46a5-8962-2e898de6c2a3"
+            "a0405b1c-c11c-4f9e-8b43-b3cbc303bc56",
+            "aee8a30c-f858-4edb-bae0-55cbd54abf0d",
+            "e89a0c4c-bd20-4264-abc5-c8493267a25f"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 11728,
+          "duration": 11352,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -1113,7 +1113,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "1849a463-cedc-4468-8a98-9c5ccb166f09",
+      "uuid": "baf47bb4-c839-4be3-8c7e-59dc5edab793",
       "title": "",
       "fullFile": "cypress/e2e/widgets/implementationguide/security-resources.cy.ts",
       "file": "cypress/e2e/widgets/implementationguide/security-resources.cy.ts",
@@ -1122,7 +1122,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "8028ae28-87e8-4709-8244-3ae2944440a7",
+          "uuid": "7d18e7d8-a79d-483d-afa8-9097f0d9e378",
           "title": "Security Resources Widget Tests",
           "fullFile": "",
           "file": "",
@@ -1133,7 +1133,7 @@
               "title": "is visible and contains expected content",
               "fullTitle": "Security Resources Widget Tests is visible and contains expected content",
               "timedOut": null,
-              "duration": 3328,
+              "duration": 3279,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -1142,8 +1142,8 @@
               "context": null,
               "code": "// This test uses more flexible widget finding\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Check for at least one expected content pattern\n    const widgetText = $widget.text();\n    let foundPattern = false;\n    let matchedPattern = \"\";\n    contentPatterns.forEach((pattern) => {\n        if (typeof pattern === \"string\") {\n            if (widgetText.includes(pattern)) {\n                foundPattern = true;\n                matchedPattern = pattern;\n            }\n        }\n        else if (pattern.test(widgetText)) {\n            foundPattern = true;\n            matchedPattern = pattern.toString();\n        }\n    });\n    if (foundPattern) {\n        cy.log(`Found expected content pattern: ${matchedPattern}`);\n    }\n    else {\n        cy.log(`No expected content patterns found in widget text: ${widgetText.substring(0, 100)}...`);\n    }\n    expect(foundPattern, `Widget should contain at least one expected content pattern`).to.be.true;\n    // Use the improved screenshot function\n    (0,_screenshot_utils__WEBPACK_IMPORTED_MODULE_1__.captureWidgetScreenshot)($widget.first(), `${widgetTestId}-baseline`);\n});",
               "err": {},
-              "uuid": "af149a56-e837-4ef8-ba0f-342052f4ba88",
-              "parentUUID": "8028ae28-87e8-4709-8244-3ae2944440a7",
+              "uuid": "d8d14833-d3c9-46a8-9249-2b6e9102a53b",
+              "parentUUID": "7d18e7d8-a79d-483d-afa8-9097f0d9e378",
               "isHook": false,
               "skipped": false
             },
@@ -1151,7 +1151,7 @@
               "title": "updates content when security levels change",
               "fullTitle": "Security Resources Widget Tests updates content when security levels change",
               "timedOut": null,
-              "duration": 6074,
+              "duration": 6012,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -1160,8 +1160,8 @@
               "context": null,
               "code": "// First verify if widget exists to avoid cascading failures\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-security-change`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    const initialContent = $widget.text();\n    // Only test this if we have content to compare against\n    if (initialContent.trim().length === 0) {\n        cy.log(`Widget ${widgetName} has no initial content - test will be skipped`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Change to different security levels and verify changes\n    cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n    cy.wait(1000); // Longer wait for stability\n    // Try to find the widget again after security level change\n    findWidgetFlexibly(widgetTestId).then(($lowWidget) => {\n        if ($lowWidget.length === 0) {\n            cy.log(`Widget ${widgetName} disappeared after security level change - test will be skipped`);\n            expect(true).to.equal(true); // Soft-pass to avoid failing tests\n            return;\n        }\n        const lowContent = $lowWidget.text();\n        // Change to high security\n        cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n        cy.wait(1000);\n        // Verify widget still exists and content changed again\n        findWidgetFlexibly(widgetTestId).then(($highWidget) => {\n            if ($highWidget.length === 0) {\n                cy.log(`Widget ${widgetName} disappeared after high security level change - test will be skipped`);\n                expect(true).to.equal(true); // Soft-pass to avoid failing tests\n                return;\n            }\n            const highContent = $highWidget.text();\n            // Log results for debugging\n            if (lowContent === highContent) {\n                cy.log(`Warning: Content did not change between low and high security levels`);\n            }\n            // Verify at least one content change happened\n            const contentChanged = initialContent !== lowContent || lowContent !== highContent;\n            expect(contentChanged, \"Content should change with security levels\")\n                .to.be.true;\n        });\n    });\n});",
               "err": {},
-              "uuid": "4e757af2-2ea8-4267-8617-de8e98dfa45c",
-              "parentUUID": "8028ae28-87e8-4709-8244-3ae2944440a7",
+              "uuid": "80f096da-0934-47d9-bd86-6ad0ffc795b4",
+              "parentUUID": "7d18e7d8-a79d-483d-afa8-9097f0d9e378",
               "isHook": false,
               "skipped": false
             },
@@ -1169,7 +1169,7 @@
               "title": "supports widget-specific functionality",
               "fullTitle": "Security Resources Widget Tests supports widget-specific functionality",
               "timedOut": null,
-              "duration": 2191,
+              "duration": 2096,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -1178,22 +1178,22 @@
               "context": null,
               "code": "// First check if widget exists\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - specific test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-specific`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Add widget to test context so additionalTests can use it\n    // Wrap the FIRST element when multiple are found to avoid errors in widget-specific tests\n    cy.wrap($widget.first()).as(\"currentWidget\");\n    // Run provided tests in try/catch to prevent cascading failures\n    try {\n        additionalTests();\n    }\n    catch (e) {\n        // Handle unknown error type safely\n        const errorMessage = e instanceof Error ? e.message : String(e);\n        cy.log(`Error in additional tests for ${widgetName}: ${errorMessage}`);\n        cy.screenshot(`error-${widgetName}-specific-test`);\n    }\n});",
               "err": {},
-              "uuid": "4f865148-2b24-4ad1-82f3-02e2ffc5acaf",
-              "parentUUID": "8028ae28-87e8-4709-8244-3ae2944440a7",
+              "uuid": "96749d26-b064-46e6-9cd9-05f809e21294",
+              "parentUUID": "7d18e7d8-a79d-483d-afa8-9097f0d9e378",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "af149a56-e837-4ef8-ba0f-342052f4ba88",
-            "4e757af2-2ea8-4267-8617-de8e98dfa45c",
-            "4f865148-2b24-4ad1-82f3-02e2ffc5acaf"
+            "d8d14833-d3c9-46a8-9249-2b6e9102a53b",
+            "80f096da-0934-47d9-bd86-6ad0ffc795b4",
+            "96749d26-b064-46e6-9cd9-05f809e21294"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 11593,
+          "duration": 11387,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -1209,7 +1209,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "d0dca1e2-10d4-4cea-b297-01a4464d920e",
+      "uuid": "1ce6f00c-9d72-4bc9-ad54-57c44ca856b8",
       "title": "",
       "fullFile": "cypress/e2e/widgets/implementationguide/security-visualization.cy.ts",
       "file": "cypress/e2e/widgets/implementationguide/security-visualization.cy.ts",
@@ -1218,7 +1218,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "17d28f01-ad3d-43b1-bdd2-dd8f87cfde00",
+          "uuid": "614af08c-0a10-4b79-a02b-780d5861fd49",
           "title": "Security Visualization Widget Tests",
           "fullFile": "",
           "file": "",
@@ -1229,7 +1229,7 @@
               "title": "is visible and contains expected content",
               "fullTitle": "Security Visualization Widget Tests is visible and contains expected content",
               "timedOut": null,
-              "duration": 3343,
+              "duration": 3261,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -1238,8 +1238,8 @@
               "context": null,
               "code": "// This test uses more flexible widget finding\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Check for at least one expected content pattern\n    const widgetText = $widget.text();\n    let foundPattern = false;\n    let matchedPattern = \"\";\n    contentPatterns.forEach((pattern) => {\n        if (typeof pattern === \"string\") {\n            if (widgetText.includes(pattern)) {\n                foundPattern = true;\n                matchedPattern = pattern;\n            }\n        }\n        else if (pattern.test(widgetText)) {\n            foundPattern = true;\n            matchedPattern = pattern.toString();\n        }\n    });\n    if (foundPattern) {\n        cy.log(`Found expected content pattern: ${matchedPattern}`);\n    }\n    else {\n        cy.log(`No expected content patterns found in widget text: ${widgetText.substring(0, 100)}...`);\n    }\n    expect(foundPattern, `Widget should contain at least one expected content pattern`).to.be.true;\n    // Use the improved screenshot function\n    (0,_screenshot_utils__WEBPACK_IMPORTED_MODULE_1__.captureWidgetScreenshot)($widget.first(), `${widgetTestId}-baseline`);\n});",
               "err": {},
-              "uuid": "010811b8-1718-4b1e-a92c-dc40e4b98457",
-              "parentUUID": "17d28f01-ad3d-43b1-bdd2-dd8f87cfde00",
+              "uuid": "517da367-3659-4b80-8e4b-e1432843d7f8",
+              "parentUUID": "614af08c-0a10-4b79-a02b-780d5861fd49",
               "isHook": false,
               "skipped": false
             },
@@ -1247,7 +1247,7 @@
               "title": "updates content when security levels change",
               "fullTitle": "Security Visualization Widget Tests updates content when security levels change",
               "timedOut": null,
-              "duration": 6188,
+              "duration": 5974,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -1256,8 +1256,8 @@
               "context": null,
               "code": "// First verify if widget exists to avoid cascading failures\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-security-change`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    const initialContent = $widget.text();\n    // Only test this if we have content to compare against\n    if (initialContent.trim().length === 0) {\n        cy.log(`Widget ${widgetName} has no initial content - test will be skipped`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Change to different security levels and verify changes\n    cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n    cy.wait(1000); // Longer wait for stability\n    // Try to find the widget again after security level change\n    findWidgetFlexibly(widgetTestId).then(($lowWidget) => {\n        if ($lowWidget.length === 0) {\n            cy.log(`Widget ${widgetName} disappeared after security level change - test will be skipped`);\n            expect(true).to.equal(true); // Soft-pass to avoid failing tests\n            return;\n        }\n        const lowContent = $lowWidget.text();\n        // Change to high security\n        cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n        cy.wait(1000);\n        // Verify widget still exists and content changed again\n        findWidgetFlexibly(widgetTestId).then(($highWidget) => {\n            if ($highWidget.length === 0) {\n                cy.log(`Widget ${widgetName} disappeared after high security level change - test will be skipped`);\n                expect(true).to.equal(true); // Soft-pass to avoid failing tests\n                return;\n            }\n            const highContent = $highWidget.text();\n            // Log results for debugging\n            if (lowContent === highContent) {\n                cy.log(`Warning: Content did not change between low and high security levels`);\n            }\n            // Verify at least one content change happened\n            const contentChanged = initialContent !== lowContent || lowContent !== highContent;\n            expect(contentChanged, \"Content should change with security levels\")\n                .to.be.true;\n        });\n    });\n});",
               "err": {},
-              "uuid": "374e32b9-d68e-4481-a8e1-79f689b91467",
-              "parentUUID": "17d28f01-ad3d-43b1-bdd2-dd8f87cfde00",
+              "uuid": "5cd90545-5e66-4b33-9ddd-797051971f3f",
+              "parentUUID": "614af08c-0a10-4b79-a02b-780d5861fd49",
               "isHook": false,
               "skipped": false
             },
@@ -1265,7 +1265,7 @@
               "title": "supports widget-specific functionality",
               "fullTitle": "Security Visualization Widget Tests supports widget-specific functionality",
               "timedOut": null,
-              "duration": 2124,
+              "duration": 2096,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -1274,22 +1274,22 @@
               "context": null,
               "code": "// First check if widget exists\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - specific test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-specific`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Add widget to test context so additionalTests can use it\n    // Wrap the FIRST element when multiple are found to avoid errors in widget-specific tests\n    cy.wrap($widget.first()).as(\"currentWidget\");\n    // Run provided tests in try/catch to prevent cascading failures\n    try {\n        additionalTests();\n    }\n    catch (e) {\n        // Handle unknown error type safely\n        const errorMessage = e instanceof Error ? e.message : String(e);\n        cy.log(`Error in additional tests for ${widgetName}: ${errorMessage}`);\n        cy.screenshot(`error-${widgetName}-specific-test`);\n    }\n});",
               "err": {},
-              "uuid": "8232b565-8088-4938-b09b-a4010c7baeda",
-              "parentUUID": "17d28f01-ad3d-43b1-bdd2-dd8f87cfde00",
+              "uuid": "66a0b8a9-a4e0-4d08-ab85-5bad05658a71",
+              "parentUUID": "614af08c-0a10-4b79-a02b-780d5861fd49",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "010811b8-1718-4b1e-a92c-dc40e4b98457",
-            "374e32b9-d68e-4481-a8e1-79f689b91467",
-            "8232b565-8088-4938-b09b-a4010c7baeda"
+            "517da367-3659-4b80-8e4b-e1432843d7f8",
+            "5cd90545-5e66-4b33-9ddd-797051971f3f",
+            "66a0b8a9-a4e0-4d08-ab85-5bad05658a71"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 11655,
+          "duration": 11331,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -1305,7 +1305,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "b21a9ad6-5009-451f-9edb-af5aa14814a9",
+      "uuid": "4c8ad795-d783-46c7-9864-6760927239a0",
       "title": "",
       "fullFile": "cypress/e2e/widgets/implementationguide/technical-details.cy.ts",
       "file": "cypress/e2e/widgets/implementationguide/technical-details.cy.ts",
@@ -1314,7 +1314,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "16db438c-9cb3-456f-af0b-01c9c4368c5a",
+          "uuid": "c22930e6-9209-4d10-bdce-9cd79a4b8add",
           "title": "Technical Details Widget Tests",
           "fullFile": "",
           "file": "",
@@ -1325,7 +1325,7 @@
               "title": "is visible and contains expected content",
               "fullTitle": "Technical Details Widget Tests is visible and contains expected content",
               "timedOut": null,
-              "duration": 3328,
+              "duration": 3158,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -1334,8 +1334,8 @@
               "context": null,
               "code": "// This test uses more flexible widget finding\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Check for at least one expected content pattern\n    const widgetText = $widget.text();\n    let foundPattern = false;\n    let matchedPattern = \"\";\n    contentPatterns.forEach((pattern) => {\n        if (typeof pattern === \"string\") {\n            if (widgetText.includes(pattern)) {\n                foundPattern = true;\n                matchedPattern = pattern;\n            }\n        }\n        else if (pattern.test(widgetText)) {\n            foundPattern = true;\n            matchedPattern = pattern.toString();\n        }\n    });\n    if (foundPattern) {\n        cy.log(`Found expected content pattern: ${matchedPattern}`);\n    }\n    else {\n        cy.log(`No expected content patterns found in widget text: ${widgetText.substring(0, 100)}...`);\n    }\n    expect(foundPattern, `Widget should contain at least one expected content pattern`).to.be.true;\n    // Use the improved screenshot function\n    (0,_screenshot_utils__WEBPACK_IMPORTED_MODULE_1__.captureWidgetScreenshot)($widget.first(), `${widgetTestId}-baseline`);\n});",
               "err": {},
-              "uuid": "8effcd02-4026-440f-8daf-64875f21b841",
-              "parentUUID": "16db438c-9cb3-456f-af0b-01c9c4368c5a",
+              "uuid": "be5acf2c-0698-4c6d-bb2f-b8b605dfa55c",
+              "parentUUID": "c22930e6-9209-4d10-bdce-9cd79a4b8add",
               "isHook": false,
               "skipped": false
             },
@@ -1343,7 +1343,7 @@
               "title": "updates content when security levels change",
               "fullTitle": "Technical Details Widget Tests updates content when security levels change",
               "timedOut": null,
-              "duration": 6125,
+              "duration": 5993,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -1352,8 +1352,8 @@
               "context": null,
               "code": "// First verify if widget exists to avoid cascading failures\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-security-change`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    const initialContent = $widget.text();\n    // Only test this if we have content to compare against\n    if (initialContent.trim().length === 0) {\n        cy.log(`Widget ${widgetName} has no initial content - test will be skipped`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Change to different security levels and verify changes\n    cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n    cy.wait(1000); // Longer wait for stability\n    // Try to find the widget again after security level change\n    findWidgetFlexibly(widgetTestId).then(($lowWidget) => {\n        if ($lowWidget.length === 0) {\n            cy.log(`Widget ${widgetName} disappeared after security level change - test will be skipped`);\n            expect(true).to.equal(true); // Soft-pass to avoid failing tests\n            return;\n        }\n        const lowContent = $lowWidget.text();\n        // Change to high security\n        cy.setSecurityLevels(_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n        cy.wait(1000);\n        // Verify widget still exists and content changed again\n        findWidgetFlexibly(widgetTestId).then(($highWidget) => {\n            if ($highWidget.length === 0) {\n                cy.log(`Widget ${widgetName} disappeared after high security level change - test will be skipped`);\n                expect(true).to.equal(true); // Soft-pass to avoid failing tests\n                return;\n            }\n            const highContent = $highWidget.text();\n            // Log results for debugging\n            if (lowContent === highContent) {\n                cy.log(`Warning: Content did not change between low and high security levels`);\n            }\n            // Verify at least one content change happened\n            const contentChanged = initialContent !== lowContent || lowContent !== highContent;\n            expect(contentChanged, \"Content should change with security levels\")\n                .to.be.true;\n        });\n    });\n});",
               "err": {},
-              "uuid": "30857df9-6ccd-48c5-9497-250d40f91871",
-              "parentUUID": "16db438c-9cb3-456f-af0b-01c9c4368c5a",
+              "uuid": "5957c130-6bfe-4706-9183-46712c8e1c37",
+              "parentUUID": "c22930e6-9209-4d10-bdce-9cd79a4b8add",
               "isHook": false,
               "skipped": false
             },
@@ -1361,7 +1361,7 @@
               "title": "supports widget-specific functionality",
               "fullTitle": "Technical Details Widget Tests supports widget-specific functionality",
               "timedOut": null,
-              "duration": 2155,
+              "duration": 2097,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -1370,22 +1370,22 @@
               "context": null,
               "code": "// First check if widget exists\nfindWidgetFlexibly(widgetTestId).then(($widget) => {\n    if ($widget.length === 0) {\n        cy.log(`Widget ${widgetName} not found - specific test will be skipped`);\n        cy.screenshot(`missing-widget-${widgetTestId}-specific`);\n        expect(true).to.equal(true); // Soft-pass to avoid failing tests\n        return;\n    }\n    // Add widget to test context so additionalTests can use it\n    // Wrap the FIRST element when multiple are found to avoid errors in widget-specific tests\n    cy.wrap($widget.first()).as(\"currentWidget\");\n    // Run provided tests in try/catch to prevent cascading failures\n    try {\n        additionalTests();\n    }\n    catch (e) {\n        // Handle unknown error type safely\n        const errorMessage = e instanceof Error ? e.message : String(e);\n        cy.log(`Error in additional tests for ${widgetName}: ${errorMessage}`);\n        cy.screenshot(`error-${widgetName}-specific-test`);\n    }\n});",
               "err": {},
-              "uuid": "030fa76a-661c-47e4-9f23-2855152150af",
-              "parentUUID": "16db438c-9cb3-456f-af0b-01c9c4368c5a",
+              "uuid": "aa9c228f-7ff5-4122-9f8f-414458c9b7d0",
+              "parentUUID": "c22930e6-9209-4d10-bdce-9cd79a4b8add",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "8effcd02-4026-440f-8daf-64875f21b841",
-            "30857df9-6ccd-48c5-9497-250d40f91871",
-            "030fa76a-661c-47e4-9f23-2855152150af"
+            "be5acf2c-0698-4c6d-bb2f-b8b605dfa55c",
+            "5957c130-6bfe-4706-9183-46712c8e1c37",
+            "aa9c228f-7ff5-4122-9f8f-414458c9b7d0"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 11608,
+          "duration": 11248,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

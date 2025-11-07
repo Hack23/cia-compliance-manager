@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.36**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.38**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CommonWidgetProps
 
-Defined in: [types/widget-props.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/2ec0557cf80706d3ac1df0334a4af519a5787366/src/types/widget-props.ts#L41)
+Defined in: [types/widget-props.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/types/widget-props.ts#L41)
 
 Common props shared by all widgets
 
@@ -20,7 +20,7 @@ Common props shared by all widgets
 
 > `optional` **className**: `string`
 
-Defined in: [types/widget-props.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/2ec0557cf80706d3ac1df0334a4af519a5787366/src/types/widget-props.ts#L45)
+Defined in: [types/widget-props.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/types/widget-props.ts#L45)
 
 Optional CSS class name
 
@@ -30,6 +30,6 @@ Optional CSS class name
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widget-props.ts:50](https://github.com/Hack23/cia-compliance-manager/blob/2ec0557cf80706d3ac1df0334a4af519a5787366/src/types/widget-props.ts#L50)
+Defined in: [types/widget-props.ts:50](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/types/widget-props.ts#L50)
 
 Optional test ID for automated testing
