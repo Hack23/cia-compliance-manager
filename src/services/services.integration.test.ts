@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { SecurityLevel, CIAComponentType } from "../types/cia";
+import { SecurityLevel, CIAComponent } from "../types/cia";
 import { BusinessImpactService } from "./businessImpactService";
 import { ComplianceService } from "./complianceService";
 import { SecurityMetricsService } from "./securityMetricsService";
@@ -38,7 +38,7 @@ describe("Services Integration Tests", () => {
   describe("Cross-Service Data Consistency", () => {
     it("provides consistent security level assessments across all services", () => {
       const testLevel: SecurityLevel = "High";
-      const component: CIAComponentType = "availability";
+      const component: CIAComponent = "availability";
 
       // Get data from different services
       const businessImpact = businessImpactService.getBusinessImpact(component, testLevel);
@@ -114,7 +114,7 @@ describe("Services Integration Tests", () => {
   describe("Service Interdependencies", () => {
     it("provides aligned recommendations across business impact and technical services", () => {
       const level: SecurityLevel = "High";
-      const component: CIAComponentType = "availability";
+      const component: CIAComponent = "availability";
 
       const businessImpact = businessImpactService.getBusinessImpact(component, level);
       const technicalDetails =
@@ -128,10 +128,10 @@ describe("Services Integration Tests", () => {
 
     it("provides consistent resource requirements across services", () => {
       const level: SecurityLevel = "Moderate";
+      const component: CIAComponent = "availability";
 
       const securityResources = securityResourceService.getSecurityResources(
-        level,
-        level,
+        component,
         level
       );
       const metrics = securityMetricsService.getSecurityMetrics(
@@ -145,9 +145,7 @@ describe("Services Integration Tests", () => {
       expect(metrics).toBeDefined();
 
       // Resources should be non-empty for non-None levels
-      if (level !== "None") {
-        expect(securityResources.length).toBeGreaterThan(0);
-      }
+      expect(securityResources.length).toBeGreaterThan(0);
     });
 
     it("aligns compliance requirements with technical implementations", () => {
@@ -243,9 +241,9 @@ describe("Services Integration Tests", () => {
 
       testCases.forEach((testCase) => {
         const compliance = complianceService.getComplianceStatus(
-          testCase.availability,
-          testCase.integrity,
-          testCase.confidentiality
+          testCase.availability as SecurityLevel,
+          testCase.integrity as SecurityLevel,
+          testCase.confidentiality as SecurityLevel
         );
 
         // Should provide compliance status for any combination
@@ -281,14 +279,14 @@ describe("Services Integration Tests", () => {
       };
 
       const testLevel: SecurityLevel = "Moderate";
-      const testComponent: CIAComponentType = "availability";
+      const testComponent: CIAComponent = "availability";
 
       // All services should work with the shared data provider
       expect(() => {
         services.business.getBusinessImpact(testComponent, testLevel);
         services.compliance.getComplianceStatus(testLevel, testLevel, testLevel);
         services.metrics.getSecurityMetrics(testLevel, testLevel, testLevel);
-        services.resources.getSecurityResources(testLevel, testLevel, testLevel);
+        services.resources.getSecurityResources(testComponent, testLevel);
         services.technical.getTechnicalImplementation(testComponent, testLevel);
       }).not.toThrow();
     });
@@ -303,7 +301,7 @@ describe("Services Integration Tests", () => {
         "High",
         "Very High",
       ];
-      const component: CIAComponentType = "availability";
+      const component: CIAComponent = "availability";
 
       allLevels.forEach((level) => {
         // All services should handle all valid security levels
@@ -311,7 +309,7 @@ describe("Services Integration Tests", () => {
           businessImpactService.getBusinessImpact(component, level);
           complianceService.getComplianceStatus(level, level, level);
           securityMetricsService.getSecurityMetrics(level, level, level);
-          securityResourceService.getSecurityResources(level, level, level);
+          securityResourceService.getSecurityResources(component, level);
           technicalImplementationService.getTechnicalImplementation(component, level);
         }).not.toThrow();
       });
@@ -319,7 +317,7 @@ describe("Services Integration Tests", () => {
 
     it("provides appropriate baseline data for None security level", () => {
       const noneLevel: SecurityLevel = "None";
-      const component: CIAComponentType = "availability";
+      const component: CIAComponent = "availability";
 
       const businessImpact = businessImpactService.getBusinessImpact(component, noneLevel);
       const compliance = complianceService.getComplianceStatus(
@@ -345,10 +343,10 @@ describe("Services Integration Tests", () => {
 
     it("handles Very High security level with comprehensive data", () => {
       const veryHighLevel: SecurityLevel = "Very High";
+      const component: CIAComponent = "availability";
 
       const businessImpact = businessImpactService.getBusinessImpact(
-        veryHighLevel,
-        veryHighLevel,
+        component,
         veryHighLevel
       );
       const compliance = complianceService.getComplianceStatus(
@@ -377,7 +375,7 @@ describe("Services Integration Tests", () => {
     it("handles multiple service calls efficiently", () => {
       const iterations = 10;
       const level: SecurityLevel = "Moderate";
-      const component: CIAComponentType = "availability";
+      const component: CIAComponent = "availability";
 
       const startTime = performance.now();
 
@@ -385,7 +383,7 @@ describe("Services Integration Tests", () => {
         businessImpactService.getBusinessImpact(component, level);
         complianceService.getComplianceStatus(level, level, level);
         securityMetricsService.getSecurityMetrics(level, level, level);
-        securityResourceService.getSecurityResources(level, level, level);
+        securityResourceService.getSecurityResources(component, level);
         technicalImplementationService.getTechnicalImplementation(component, level);
       }
 
@@ -398,7 +396,7 @@ describe("Services Integration Tests", () => {
 
     it("provides consistent results on repeated calls", () => {
       const level: SecurityLevel = "High";
-      const component: CIAComponentType = "availability";
+      const component: CIAComponent = "availability";
 
       // Call each service multiple times
       const businessImpact1 = businessImpactService.getBusinessImpact(component, level);
