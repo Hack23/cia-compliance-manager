@@ -88,7 +88,7 @@ graph TD
 |------------------|-------------------------|----------------------|----------------|
 | **🏗️ Architecture** | Security-by-design principles | Comprehensive architecture documentation with security boundaries | [SECURITY_ARCHITECTURE.md](./docs/architecture/SECURITY_ARCHITECTURE.md) |
 | **📝 Design** | Threat modeling | STRIDE analysis and attack tree documentation | [THREAT_MODEL.md](./docs/architecture/THREAT_MODEL.md) |
-| **💻 Development** | Secure coding standards | TypeScript strict mode, ESLint security rules, code review requirements | [.eslintrc.js](./.eslintrc.js), [tsconfig.json](./tsconfig.json) |
+| **💻 Development** | Secure coding standards | TypeScript strict mode, ESLint security rules, code review requirements | [eslint.config.js](./eslint.config.js), [tsconfig.json](./tsconfig.json) |
 | **🧪 Testing** | Security testing automation | Unit tests (80%+ coverage), E2E tests, SAST, SCA, DAST | [UnitTestPlan.md](./docs/UnitTestPlan.md), [E2ETestPlan.md](./docs/E2ETestPlan.md) |
 | **📦 Build** | Secure build pipeline | Automated builds with SLSA Level 3 attestation | [GitHub Actions Workflows](./.github/workflows/) |
 | **🚀 Deployment** | Immutable deployments | Static site deployment with integrity verification | [Release Attestations](https://github.com/Hack23/cia-compliance-manager/attestations) |
