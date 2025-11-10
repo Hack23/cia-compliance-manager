@@ -1,8 +1,29 @@
 # 🔍 CIA Compliance Manager - End-to-End Test Plan
 
+**🔐 ISMS Alignment:** This E2E test plan implements [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) Section 4.3.3 - End-to-End Testing Requirements.
+
 ## 📋 Executive Summary
 
 This End-to-End (E2E) Test Plan provides comprehensive testing coverage for the CIA Compliance Manager application, ensuring all critical user journeys and business workflows function correctly across different environments and use cases.
+
+### ISMS Compliance Requirements
+
+Per Hack23 AB's Secure Development Policy, this project maintains:
+
+| 🎯 **Requirement** | 📊 **Implementation** | ✅ **Status** | 📋 **ISMS Reference** |
+|-------------------|---------------------|--------------|---------------------|
+| **Critical Path Coverage** | Security assessment workflow | ✅ Implemented | Section 4.3.3.1 |
+| **Browser Testing** | Chrome, Firefox, Safari, Edge | ✅ Validated | Section 4.3.3.2 |
+| **Automated Execution** | Every PR via Cypress | ✅ Active | Section 4.3.3.3 |
+| **Public Reporting** | Test reports published | ✅ Published | Section 4.3.3.4 |
+
+**Evidence Links:**
+- [E2E Test Reports](https://hack23.github.io/cia-compliance-manager/e2e-report)
+- [Cypress Workflow](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml)
+
+**See Also:** [ISMS Implementation Guide - E2E Testing](../ISMS_IMPLEMENTATION_GUIDE.md#end-to-end-testing)
+
+---
 
 ## 🎯 Testing Objectives
 
