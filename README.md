@@ -150,6 +150,12 @@ Our implementation demonstrates security excellence across all critical domains:
 - ✅ **Cryptography**: TLS 1.2+, signed releases, integrity verification
 - ✅ **Monitoring**: [OpenSSF Scorecard](https://scorecard.dev/viewer/?uri=github.com/Hack23/cia-compliance-manager), [SonarCloud quality gates](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager), continuous security scanning
 
+**📋 Complete Documentation:**
+- **[Control Mapping](./control-mapping.md)** - Framework-to-ISMS-policy mappings (NIST, ISO, CIS)
+- **[ISMS Implementation Guide](./ISMS_IMPLEMENTATION_GUIDE.md)** - Detailed security control implementation (790 lines)
+- **[Traceability Matrix](./TRACEABILITY_MATRIX.md)** - End-to-end mapping from controls to evidence (100+ controls)
+- **[CRA Assessment](./CRA-ASSESSMENT.md)** - EU Cyber Resilience Act compliance documentation
+
 #### 📋 **Framework Alignment**
 
 CIA Compliance Manager maps controls to multiple compliance frameworks:
