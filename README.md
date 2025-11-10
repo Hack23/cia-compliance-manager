@@ -100,6 +100,92 @@ Our approach to cybersecurity consulting is built on a foundation of transparent
   <p><strong>— James Pether Sörling, CEO/Founder</strong></p>
 </div>
 
+### 🛡️ CIA Compliance Manager: A Compliance Tool Built with Compliance
+
+CIA Compliance Manager exemplifies our security-first approach by **practicing what it preaches**. This compliance assessment tool is itself built following comprehensive ISMS controls, demonstrating our cybersecurity consulting expertise through transparent implementation.
+
+<table>
+  <tr>
+    <td width="33%">
+      <div align="center">
+        <h4>📊 Control Mapping</h4>
+        <p>Comprehensive framework-to-ISMS-policy mapping</p>
+        <a href="./control-mapping.md">
+          <img src="https://img.shields.io/badge/View-Control_Mapping-4CAF50?style=for-the-badge" alt="Control Mapping">
+        </a>
+      </div>
+    </td>
+    <td width="33%">
+      <div align="center">
+        <h4>🔐 ISMS Implementation</h4>
+        <p>Documented security control implementation</p>
+        <a href="./ISMS_IMPLEMENTATION_GUIDE.md">
+          <img src="https://img.shields.io/badge/View-ISMS_Guide-2196F3?style=for-the-badge" alt="ISMS Implementation">
+        </a>
+      </div>
+    </td>
+    <td width="33%">
+      <div align="center">
+        <h4>🛡️ CRA Compliance</h4>
+        <p>EU Cyber Resilience Act assessment</p>
+        <a href="./CRA-ASSESSMENT.md">
+          <img src="https://img.shields.io/badge/View-CRA_Assessment-FF9800?style=for-the-badge" alt="CRA Assessment">
+        </a>
+      </div>
+    </td>
+  </tr>
+</table>
+
+#### 🎯 **ISMS Compliance Highlights**
+
+Our implementation demonstrates security excellence across all critical domains:
+
+- ✅ **Secure Development**: [80%+ test coverage](./docs/UnitTestPlan.md), automated security scanning, code review requirements
+- ✅ **Supply Chain Security**: [SLSA Level 3 attestation](https://github.com/Hack23/cia-compliance-manager/attestations), SBOM generation, dependency scanning
+- ✅ **Vulnerability Management**: [Zero critical/high vulnerabilities](https://github.com/Hack23/cia-compliance-manager/security), coordinated disclosure, 48h response SLA
+- ✅ **Access Control**: GitHub RBAC, branch protection, least privilege enforcement
+- ✅ **Change Management**: Git workflow, automated testing gates, release attestation
+- ✅ **Incident Response**: P1-P4 classification, documented runbooks, 24h notification
+- ✅ **Business Continuity**: RTO 4h / RPO 1h, automated backups, tested recovery procedures
+- ✅ **Cryptography**: TLS 1.2+, signed releases, integrity verification
+- ✅ **Monitoring**: [OpenSSF Scorecard](https://scorecard.dev/viewer/?uri=github.com/Hack23/cia-compliance-manager), [SonarCloud quality gates](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager), continuous security scanning
+
+**📋 Complete Documentation:**
+- **[Control Mapping](./control-mapping.md)** - Framework-to-ISMS-policy mappings (NIST, ISO, CIS)
+- **[ISMS Implementation Guide](./ISMS_IMPLEMENTATION_GUIDE.md)** - Detailed security control implementation (790 lines)
+- **[Traceability Matrix](./TRACEABILITY_MATRIX.md)** - End-to-end mapping from controls to evidence (100+ controls)
+- **[CRA Assessment](./CRA-ASSESSMENT.md)** - EU Cyber Resilience Act compliance documentation
+
+#### 📋 **Framework Alignment**
+
+CIA Compliance Manager maps controls to multiple compliance frameworks:
+
+| 🏛️ **Framework** | 📊 **Coverage** | 🔗 **Documentation** |
+|------------------|----------------|---------------------|
+| **NIST CSF 2.0** | ✅ Complete | [control-mapping.md](./control-mapping.md) |
+| **ISO 27001:2022** | ✅ Complete | [control-mapping.md](./control-mapping.md) |
+| **CIS Controls v8.1** | ✅ Complete | [control-mapping.md](./control-mapping.md) |
+| **NIST 800-53 Rev. 5** | ✅ Complete | [control-mapping.md](./control-mapping.md) |
+| **SLSA** | ✅ Level 3 | [Build Attestations](https://github.com/Hack23/cia-compliance-manager/attestations) |
+| **CII Best Practices** | ✅ Passing | [![Badge](https://bestpractices.coreinfrastructure.org/projects/10365/badge)](https://bestpractices.coreinfrastructure.org/projects/10365) |
+| **EU CRA** | ✅ Self-Assessed | [CRA-ASSESSMENT.md](./CRA-ASSESSMENT.md) |
+
+#### 🎯 **Why This Matters to You**
+
+When you use CIA Compliance Manager, you're leveraging a tool that:
+
+1. **🏆 Demonstrates Expertise** - Built by security practitioners who understand compliance deeply
+2. **📊 Provides Evidence** - Every control mapped to frameworks AND operational implementation
+3. **🔍 Enables Traceability** - See exactly how compliance requirements translate to security practices
+4. **🤝 Builds Trust** - Transparent documentation shows we practice what we preach
+5. **💡 Offers Best Practices** - Use our implementation as a reference for your own security journey
+
+<div align="center">
+  <h4>📚 Complete ISMS Documentation</h4>
+  <p>Explore our comprehensive security control framework:</p>
+  <a href="https://github.com/Hack23/ISMS-PUBLIC"><img src="https://img.shields.io/badge/Explore-16_ISMS_Policies-0066CC?style=for-the-badge&logo=github&logoColor=white" alt="Explore ISMS"></a>
+</div>
+
 ---
 
 

@@ -1,12 +1,30 @@
 # Security Policy
 
+**🔐 ISMS Alignment:** This security policy implements [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) and [Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md).
+
 ## Supported Versions
 
 This project is under active development, and we provide security updates for the latest version only. Please ensure you're using the latest version of the project to receive security updates.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| latest  | :white_check_mark: |
+| Version | Supported          | ISMS Policy |
+| ------- | ------------------ | ----------- |
+| latest  | :white_check_mark: | [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) |
+
+## Security Posture
+
+CIA Compliance Manager maintains strong security practices as documented in our [ISMS Implementation Guide](./ISMS_IMPLEMENTATION_GUIDE.md):
+
+- ✅ **Zero Critical/High Vulnerabilities** - Continuous scanning with automated remediation
+- ✅ **SLSA Level 3** - Supply chain security with build attestation
+- ✅ **80%+ Test Coverage** - Comprehensive automated testing
+- ✅ **Automated Security Scanning** - SAST, SCA, DAST, Secret Scanning
+
+**Evidence:**
+- [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compliance-manager/badge)](https://scorecard.dev/viewer/?uri=github.com/Hack23/cia-compliance-manager)
+- [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/10365/badge)](https://bestpractices.coreinfrastructure.org/projects/10365)
+- [Security Overview](https://github.com/Hack23/cia-compliance-manager/security)
+
+---
 
 ## Reporting a Vulnerability
 
@@ -47,5 +65,34 @@ Upon receipt of a vulnerability report, our team will:
 ### Recognition and Anonymity
 
 We appreciate your effort in helping us maintain a secure and reliable project. If your report results in a confirmed security fix, we will recognize your contribution in the release notes and/or a public acknowledgment, unless you request to remain anonymous.
+
+---
+
+## 🔐 ISMS Framework Integration
+
+CIA Compliance Manager's security practices are part of Hack23 AB's comprehensive Information Security Management System (ISMS):
+
+### 📋 Related ISMS Policies
+
+| 🛡️ **Policy** | 📊 **Application to CIA Compliance Manager** |
+|--------------|-------------------------------------------|
+| [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) | 48h response SLA, coordinated disclosure process |
+| [Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md) | P1-P4 incident classification, escalation procedures |
+| [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) | Security testing requirements, code review standards |
+| [Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md) | Overall security governance framework |
+
+### 🔍 Comprehensive Security Documentation
+
+For complete details on how CIA Compliance Manager implements security controls:
+
+- **📊 Control Mapping:** [control-mapping.md](./control-mapping.md) - Framework mappings (NIST, ISO, CIS)
+- **🛡️ ISMS Implementation:** [ISMS_IMPLEMENTATION_GUIDE.md](./ISMS_IMPLEMENTATION_GUIDE.md) - Detailed control implementation
+- **⚖️ CRA Compliance:** [CRA-ASSESSMENT.md](./CRA-ASSESSMENT.md) - EU Cyber Resilience Act assessment
+
+### 🏆 Security Excellence Through Transparency
+
+By publicly documenting our security practices, we demonstrate that CIA Compliance Manager is not just a compliance assessment tool—it's a **reference implementation** of secure software development practices. Every security control we help customers evaluate is implemented in our own development process.
+
+**Explore Our Public ISMS:** [https://github.com/Hack23/ISMS-PUBLIC](https://github.com/Hack23/ISMS-PUBLIC)
 
 Thank you for helping us keep the cia-compliance-manager project and its users safe.

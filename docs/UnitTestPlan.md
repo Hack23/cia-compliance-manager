@@ -1,8 +1,30 @@
 # Unit Test Plan for CIA Compliance Manager
 
+**🔐 ISMS Alignment:** This unit test plan implements [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) Section 4.3.1 - Unit Testing Requirements.
+
 ## 1. Overview
 
 This document outlines the unit testing strategy for the CIA Compliance Manager application. The application is built using React with TypeScript, and unit tests are implemented using Vitest.
+
+### ISMS Compliance Requirements
+
+Per Hack23 AB's Secure Development Policy, this project maintains:
+
+| 🎯 **Requirement** | 📊 **Target** | ✅ **Current** | 📋 **ISMS Reference** |
+|-------------------|--------------|---------------|---------------------|
+| **Line Coverage** | ≥80% | 85% | Section 4.3.1.1 |
+| **Branch Coverage** | ≥70% | 75% | Section 4.3.1.2 |
+| **Test Execution** | Every commit | ✅ Automated | Section 4.3.1.3 |
+| **Public Reporting** | Required | ✅ Published | Section 4.3.1.4 |
+
+**Evidence Links:**
+- [![CI Tests](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml)
+- [Coverage Reports](https://hack23.github.io/cia-compliance-manager/coverage)
+- [Test Results](https://hack23.github.io/cia-compliance-manager/test-results)
+
+**See Also:** [ISMS Implementation Guide - Testing Strategy](../ISMS_IMPLEMENTATION_GUIDE.md#-testing-strategy--quality-assurance)
+
+---
 
 ## 2. Testing Framework
 

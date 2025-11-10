@@ -1,5 +1,20 @@
 # Testing Guide: Best Practices
 
+**🔐 ISMS Alignment:** This testing guide implements controls from [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) Section 4.3 - Security Testing Requirements.
+
+## ISMS Testing Standards
+
+Per Hack23 AB's Secure Development Policy, CIA Compliance Manager implements:
+
+- **✅ Unit Testing:** ≥80% line coverage, ≥70% branch coverage (ISMS requirement 4.3.1)
+- **✅ Security Testing:** SAST, SCA, DAST, Secret Scanning (ISMS requirement 4.3.2)
+- **✅ E2E Testing:** Critical user journeys validated (ISMS requirement 4.3.3)
+- **✅ Performance Testing:** Lighthouse 90+ scores (ISMS requirement 4.3.4)
+
+**Evidence:** See [ISMS Implementation Guide](../ISMS_IMPLEMENTATION_GUIDE.md#-testing-strategy--quality-assurance)
+
+---
+
 ## Proper Mock Ordering and Hoisting
 
 ```typescript
