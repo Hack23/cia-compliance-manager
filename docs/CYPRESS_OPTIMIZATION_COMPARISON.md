@@ -115,7 +115,7 @@ const essentialWidgets = [
 
 // Plus conditional execution guard
 before(function() {
-  if (!Cypress.env('CAPTURE_SCREENSHOTS') && Cypress.config('isInteractive')) {
+  if (Cypress.env('CYPRESS_SCREENSHOTS') !== 'true' && Cypress.config('isInteractive')) {
     this.skip();
   }
 });

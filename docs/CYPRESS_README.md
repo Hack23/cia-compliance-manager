@@ -71,7 +71,7 @@ CYPRESS_SCREENSHOTS=true npm run test:e2e
 CYPRESS_VIDEO=true npm run test:e2e
 
 # Enable full screenshot capture test
-CAPTURE_SCREENSHOTS=true npm run test:e2e
+CYPRESS_SCREENSHOTS=true npm run test:e2e
 ```
 
 ## File Structure

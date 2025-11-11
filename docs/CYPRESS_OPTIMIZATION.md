@@ -37,7 +37,7 @@ Removed redundant screenshots from additional widget tests:
 File: `cypress/e2e/screenshots/widget-screenshots.cy.ts`
 - Reduced from 7 widgets to 3 essential widgets
 - Removed dark theme captures (reduced from 2 themes to 1)
-- Added conditional execution via `CAPTURE_SCREENSHOTS` environment variable
+- Added conditional execution via `CYPRESS_SCREENSHOTS` environment variable
 - **Impact**: From 14+ screenshots to 3 screenshots (78% reduction)
 
 ### 2. Wait Time Optimization
@@ -134,7 +134,7 @@ File: `cypress/support/commands.ts`
 CYPRESS_SCREENSHOTS=true npm run test:e2e
 
 # Enable full screenshot capture test
-CAPTURE_SCREENSHOTS=true npm run test:e2e
+CYPRESS_SCREENSHOTS=true npm run test:e2e
 ```
 
 ### Enable Video Recording
