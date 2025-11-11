@@ -1,0 +1,312 @@
+name: Create v1.0 Release Priority Issues
+
+on:
+  workflow_dispatch:
+    inputs:
+      create_issues:
+        description: 'Create the 5 priority issues'
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  create-issues:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.create_issues == 'true' }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create Issue 1 - Fix ESLint Errors
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = '🔧 Fix Critical ESLint Errors and Code Quality Issues for v1.0';
+            const labels = ['refactor', 'testing', 'priority:high', 'size:medium'];
+            const body = `## 🎯 Objective
+
+Fix all critical ESLint errors in the codebase to improve code quality, maintainability, and prepare for v1.0 release.
+
+## 📋 Background
+
+The codebase currently has **60 ESLint errors** and **185 warnings** that need to be addressed before the v1.0 release. These issues impact code quality, type safety, and adherence to modern TypeScript/ES2015+ standards.
+
+## ✅ Acceptance Criteria
+
+- [ ] All \`@typescript-eslint/no-require-imports\` errors resolved (migrate to ES6 imports)
+- [ ] All \`@typescript-eslint/no-namespace\` errors resolved (migrate to ES2015 modules)
+- [ ] All \`@typescript-eslint/no-unused-expressions\` errors fixed
+- [ ] All \`prefer-const\` violations corrected
+- [ ] All \`@typescript-eslint/ban-ts-comment\` issues addressed
+- [ ] ESLint passes with 0 errors (warnings acceptable)
+- [ ] All tests continue to pass after fixes
+- [ ] No breaking changes to existing functionality
+
+## 🛠️ Implementation Guidance
+
+See detailed guidance in [v1.0 Priority Issues Documentation](../docs/v1.0-priority-issues.md#issue-1-fix-critical-eslint-errors-and-code-quality-issues)
+
+### Key Files to Fix:
+- Cypress configuration and support files (~15 files)
+- E2E test files with expression issues
+- Source code console statement usage
+- Script files with console warnings
+
+## 📊 Metadata
+
+**Priority:** High  
+**Effort:** Medium (4-6 hours)  
+**Labels:** refactor, testing, code-quality  
+**Impact:** All test files, Cypress configuration, source code`;
+
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: labels
+            });
+            
+            console.log(`Created issue #${issue.data.number}: ${title}`);
+
+      - name: Create Issue 2 - Improve Test Coverage
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = '🧪 Improve Test Coverage for Critical Low-Coverage Areas (<60%)';
+            const labels = ['testing', 'priority:high', 'size:medium'];
+            const body = `## 🎯 Objective
+
+Increase test coverage in critical low-coverage areas to improve code reliability and confidence for the v1.0 release.
+
+## 📋 Background
+
+Current overall test coverage is ~77%, but several critical utility and service files have coverage below 60%.
+
+## ✅ Acceptance Criteria
+
+- [ ] \`src/utils/securityLevelUtils.ts\` coverage: 59.22% → ≥80%
+- [ ] \`src/utils/riskUtils.ts\` coverage: 51.07% → ≥75%
+- [ ] \`src/services/valueCreationService.ts\` coverage: 51.42% → ≥75%
+- [ ] \`src/utils/index.ts\` coverage: 48.57% → ≥70%
+- [ ] \`src/utils/metricValuesUtils.ts\` coverage: 41.02% → ≥70%
+- [ ] \`src/data/businessImpactData.ts\` coverage: 34.48% → ≥70%
+- [ ] Overall project coverage increases to ≥80%
+- [ ] No regression in existing test coverage
+
+## 🛠️ Implementation Guidance
+
+See detailed guidance in [v1.0 Priority Issues Documentation](../docs/v1.0-priority-issues.md#issue-2-improve-test-coverage-in-critical-low-coverage-areas)
+
+### Priority Files:
+1. **securityLevelUtils.ts** - Core security calculations
+2. **riskUtils.ts** - Risk assessment logic
+3. **valueCreationService.ts** - Business value calculations
+4. **metricValuesUtils.ts** - Metric transformations
+5. **businessImpactData.ts** - Business impact data
+6. **index.ts** - Utility exports
+
+## 📊 Metadata
+
+**Priority:** High  
+**Effort:** Medium (6-8 hours)  
+**Labels:** testing, quality, code-coverage  
+**Target:** Overall coverage ≥80%`;
+
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: labels
+            });
+            
+            console.log(`Created issue #${issue.data.number}: ${title}`);
+
+      - name: Create Issue 3 - Enhance Type Safety
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = '🔒 Enhance Type Safety by Removing Explicit \'any\' Types';
+            const labels = ['refactor', 'priority:medium', 'size:small'];
+            const body = `## 🎯 Objective
+
+Improve type safety by replacing all explicit \`any\` types with proper TypeScript types.
+
+## 📋 Background
+
+The codebase has ~20+ instances of \`@typescript-eslint/no-explicit-any\` warnings, primarily in Cypress test support files and service adapters.
+
+## ✅ Acceptance Criteria
+
+- [ ] All \`@typescript-eslint/no-explicit-any\` warnings resolved
+- [ ] Proper types defined for all function parameters and return values
+- [ ] Generic types used where appropriate instead of \`any\`
+- [ ] Unknown type used for truly dynamic values instead of \`any\`
+- [ ] Type guards implemented for runtime type validation where needed
+- [ ] All tests continue to pass
+- [ ] TypeScript strict mode continues to pass
+
+## 🛠️ Implementation Guidance
+
+See detailed guidance in [v1.0 Priority Issues Documentation](../docs/v1.0-priority-issues.md#issue-3-enhance-type-safety-by-removing-any-types)
+
+### Key Files:
+- \`cypress/support/command-registry.ts\` - 8 instances
+- \`cypress/support/commands.ts\` - 1 instance
+- \`cypress/support/debug-helpers.ts\` - 1 instance
+- \`cypress/support/e2e.ts\` - 2 instances
+- \`cypress/support/screenshot-analysis.ts\` - 2 instances
+- \`cypress/support/widget-analyzer.ts\` - 1 instance
+
+## 📊 Metadata
+
+**Priority:** Medium  
+**Effort:** Small (3-4 hours)  
+**Labels:** refactor, typescript, type-safety  
+**Risk:** Low`;
+
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: labels
+            });
+            
+            console.log(`Created issue #${issue.data.number}: ${title}`);
+
+      - name: Create Issue 4 - Performance Optimization
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = '⚡ Performance Optimization and Bundle Size Review for v1.0';
+            const labels = ['performance', 'priority:medium', 'size:small'];
+            const body = `## 🎯 Objective
+
+Analyze and optimize application bundle size and performance to ensure v1.0 meets performance budgets.
+
+## 📋 Background
+
+**Current Bundle Sizes:**
+- \`index.js\` - 270.06 kB (gzip: 55.77 kB)
+- \`vendor.js\` - 210.35 kB (gzip: 72.21 kB)
+- \`react.js\` - 188.92 kB (gzip: 59.07 kB)
+- **Total JS:** ~669 kB (gzip: ~187 kB)
+
+**Budget (budget.json):**
+- Script budget: 180 kB
+- Total budget: 500 kB
+
+## ✅ Acceptance Criteria
+
+- [ ] Bundle analysis report generated and reviewed
+- [ ] Identify and document top 5 largest dependencies
+- [ ] Code splitting strategy evaluated and implemented
+- [ ] Tree shaking verified for all imports
+- [ ] Lazy loading implemented for non-critical components
+- [ ] Bundle sizes documented in performance metrics
+- [ ] Performance budget compliance verified or updated
+- [ ] Lighthouse performance score ≥90 maintained
+
+## 🛠️ Implementation Guidance
+
+See detailed guidance in [v1.0 Priority Issues Documentation](../docs/v1.0-priority-issues.md#issue-4-performance-optimization-and-bundle-size-analysis)
+
+### Key Tasks:
+1. Generate bundle analysis with \`vite-bundle-visualizer\`
+2. Identify optimization opportunities
+3. Implement code splitting where beneficial
+4. Optimize dependencies and imports
+5. Document findings and recommendations
+
+## 📊 Metadata
+
+**Priority:** Medium  
+**Effort:** Small (2-3 hours)  
+**Labels:** performance, optimization, infrastructure`;
+
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: labels
+            });
+            
+            console.log(`Created issue #${issue.data.number}: ${title}`);
+
+      - name: Create Issue 5 - Documentation Updates
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = '📝 Documentation Updates and Changelog for v1.0 Release';
+            const labels = ['documentation', 'priority:medium', 'size:small'];
+            const body = `## 🎯 Objective
+
+Update all documentation to reflect v1.0 release status and create comprehensive changelog.
+
+## 📋 Background
+
+The project is transitioning from v0.8.38 to v1.0, marking a significant milestone.
+
+## ✅ Acceptance Criteria
+
+- [ ] CHANGELOG.md created/updated with v1.0 release notes
+- [ ] README.md updated with v1.0 feature highlights
+- [ ] Version number updated to 1.0.0 in \`package.json\`
+- [ ] API documentation regenerated with latest changes
+- [ ] Architecture diagrams verified as current
+- [ ] All broken links in documentation fixed
+- [ ] Security documentation reviewed and updated
+- [ ] Contributing guide verified and updated if needed
+- [ ] Migration guide created (if breaking changes exist)
+- [ ] Release announcement draft prepared
+
+## 🛠️ Implementation Guidance
+
+See detailed guidance in [v1.0 Priority Issues Documentation](../docs/v1.0-priority-issues.md#issue-5-documentation-updates-for-v10-release)
+
+### Key Tasks:
+1. Create comprehensive CHANGELOG.md following [Keep a Changelog](https://keepachangelog.com/)
+2. Update README.md with v1.0 highlights
+3. Update version in package.json
+4. Regenerate API docs with \`npm run docs:bundle\`
+5. Verify all architecture documentation
+6. Check for broken links
+7. Prepare release announcement
+
+## 📊 Metadata
+
+**Priority:** Medium  
+**Effort:** Small (2-3 hours)  
+**Labels:** documentation, release  
+**Milestone:** v1.0 Release`;
+
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: labels
+            });
+            
+            console.log(`Created issue #${issue.data.number}: ${title}`);
+
+      - name: Summary
+        run: |
+          echo "✅ Successfully created 5 priority issues for v1.0 release preparation"
+          echo ""
+          echo "Issues created:"
+          echo "1. 🔧 Fix Critical ESLint Errors and Code Quality Issues"
+          echo "2. 🧪 Improve Test Coverage for Critical Low-Coverage Areas"
+          echo "3. 🔒 Enhance Type Safety by Removing Explicit 'any' Types"
+          echo "4. ⚡ Performance Optimization and Bundle Size Review"
+          echo "5. 📝 Documentation Updates and Changelog for v1.0 Release"
+          echo ""
+          echo "View all issues at: https://github.com/${{ github.repository }}/issues"
