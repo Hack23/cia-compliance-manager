@@ -19,7 +19,6 @@ const REPORTS = {
 export default defineConfig({
   screenshotsFolder: REPORTS.screenshots,
   videosFolder: REPORTS.videos,
-  experimentalMemoryManagement: true,
   video: false, // Disable video by default to save time - can be enabled via env var
   screenshotOnRunFailure: true,
   trashAssetsBeforeRuns: true,
