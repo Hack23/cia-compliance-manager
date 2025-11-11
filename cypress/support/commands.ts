@@ -82,15 +82,15 @@ Cypress.Commands.add(
         cy.log("Found select elements directly - using index-based approach");
         if (availability) {
           cy.wrap(selects.eq(0)).select(availability, { force: true });
-          cy.wait(500); // Wait longer between selections
+          cy.wait(300); // Reduced wait time
         }
         if (integrity) {
           cy.wrap(selects.eq(1)).select(integrity, { force: true });
-          cy.wait(500);
+          cy.wait(300); // Reduced wait time
         }
         if (confidentiality) {
           cy.wrap(selects.eq(2)).select(confidentiality, { force: true });
-          cy.wait(500);
+          cy.wait(300); // Reduced wait time
         }
       }
       // Approach 2: Try to find security level controls using data-testid
@@ -105,17 +105,17 @@ Cypress.Commands.add(
             cy.wrap(containerSelects.eq(0)).select(availability, {
               force: true,
             });
-            cy.wait(500);
+            cy.wait(300); // Reduced wait time
           }
           if (integrity) {
             cy.wrap(containerSelects.eq(1)).select(integrity, { force: true });
-            cy.wait(500);
+            cy.wait(300); // Reduced wait time
           }
           if (confidentiality) {
             cy.wrap(containerSelects.eq(2)).select(confidentiality, {
               force: true,
             });
-            cy.wait(500);
+            cy.wait(300); // Reduced wait time
           }
         }
       }
@@ -138,7 +138,7 @@ Cypress.Commands.add(
             availability
           ) {
             cy.wrap($select).select(availability, { force: true });
-            cy.wait(500);
+            cy.wait(300); // Reduced wait time
           } else if (
             (id.includes("integr") ||
               name.includes("integr") ||
@@ -146,7 +146,7 @@ Cypress.Commands.add(
             integrity
           ) {
             cy.wrap($select).select(integrity, { force: true });
-            cy.wait(500);
+            cy.wait(300); // Reduced wait time
           } else if (
             (id.includes("conf") ||
               name.includes("conf") ||
@@ -154,13 +154,13 @@ Cypress.Commands.add(
             confidentiality
           ) {
             cy.wrap($select).select(confidentiality, { force: true });
-            cy.wait(500);
+            cy.wait(300); // Reduced wait time
           }
         });
       }
 
-      // Always wait for any updates to propagate - longer wait
-      cy.wait(1000);
+      // Always wait for any updates to propagate - reduced wait time
+      cy.wait(500);
 
       // Take a screenshot to see the current state
       cy.screenshot(
@@ -615,7 +615,7 @@ Cypress.Commands.add("toggleTheme", () => {
     }
 
     // Wait for theme change to take effect
-    cy.wait(300);
+    cy.wait(200); // Reduced wait time
   });
 });
 

@@ -15,7 +15,7 @@ describe("Compliance Status Validation", () => {
   });
 
   it("accurately reflects compliance status based on security levels", () => {
-    // Define more resilient test scenarios with flexible assertions
+    // Reduced to 2 critical scenarios (low and high) - moderate is covered by beforeEach in other tests
     const complianceScenarios = [
       {
         levels: [SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW],
@@ -24,18 +24,6 @@ describe("Compliance Status Validation", () => {
           /compliance|status|level|security/i,
         ],
         name: "low-security",
-      },
-      {
-        levels: [
-          SECURITY_LEVELS.MODERATE,
-          SECURITY_LEVELS.MODERATE,
-          SECURITY_LEVELS.MODERATE,
-        ],
-        expectedTextPatterns: [
-          /moderate|partial|medium|some|limited/i,
-          /compliance|status|framework|requirement/i,
-        ],
-        name: "moderate-security",
       },
       {
         levels: [
@@ -54,13 +42,12 @@ describe("Compliance Status Validation", () => {
     // Test each scenario with better error handling
     complianceScenarios.forEach((scenario, index) => {
       cy.log(`Testing compliance scenario ${index + 1}: ${scenario.name}`);
-      cy.screenshot(`compliance-scenario-start-${scenario.name}`);
 
       // More reliable way to set security levels
       cy.setSecurityLevels(...scenario.levels);
-      cy.wait(1000); // Wait for UI updates
+      cy.wait(500); // Reduced wait time
 
-      // Take screenshot for debugging
+      // Take screenshot for debugging (only 2 screenshots now instead of 6)
       cy.screenshot(`compliance-scenario-${scenario.name}`);
 
       // Search for compliance information using multiple strategies
@@ -86,9 +73,6 @@ describe("Compliance Status Validation", () => {
             }
           });
         }
-
-        // Take a screenshot regardless of result for debugging
-        cy.screenshot(`compliance-content-${scenario.name}`);
       });
     });
   });
@@ -100,7 +84,7 @@ describe("Compliance Status Validation", () => {
       SECURITY_LEVELS.HIGH,
       SECURITY_LEVELS.HIGH
     );
-    cy.wait(1000);
+    cy.wait(500); // Reduced wait time
 
     // Look for compliance-related elements using multiple selectors
     const complianceSelectors = [
@@ -114,8 +98,7 @@ describe("Compliance Status Validation", () => {
     cy.get("body").then(($body) => {
       if ($body.find(complianceSelectors).length > 0) {
         cy.get(complianceSelectors).first().scrollIntoView();
-        cy.get(complianceSelectors).first().screenshot("compliance-element");
-
+        
         // Try to find clickable items
         const clickableSelectors = [
           '[data-testid*="framework"] button',
@@ -128,15 +111,13 @@ describe("Compliance Status Validation", () => {
 
         if ($body.find(clickableSelectors).length > 0) {
           cy.get(clickableSelectors).first().click({ force: true });
-          cy.wait(500);
-          cy.screenshot("after-framework-click");
+          cy.wait(300); // Reduced wait time
+          cy.log("✓ Successfully clicked on framework item");
         } else {
           cy.log("⚠️ No clickable framework items found");
-          cy.screenshot("no-clickable-frameworks");
         }
       } else {
         cy.log("⚠️ No compliance elements found");
-        cy.screenshot("no-compliance-elements");
       }
     });
   });

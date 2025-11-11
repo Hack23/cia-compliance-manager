@@ -46,8 +46,8 @@ const additionalTests = () => {
           });
         });
 
-        // Take screenshot for documentation
-        cy.wrap($widget).screenshot("security-summary-indicators");
+        // Log for documentation (no screenshot needed)
+        cy.log("✓ Security level indicators check completed");
       });
     });
   });

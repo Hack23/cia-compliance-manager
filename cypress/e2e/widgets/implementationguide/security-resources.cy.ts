@@ -18,7 +18,7 @@ const additionalTests = () => {
       SECURITY_LEVELS.LOW,
       SECURITY_LEVELS.LOW
     );
-    cy.wait(1000);
+    cy.wait(500); // Reduced wait time
 
     // Get widget reference from test context and save low security content
     cy.get("@currentWidget").then(($widget) => {
@@ -36,7 +36,7 @@ const additionalTests = () => {
         SECURITY_LEVELS.HIGH,
         SECURITY_LEVELS.HIGH
       );
-      cy.wait(1000);
+      cy.wait(500); // Reduced wait time
 
       // Get content with high security and compare
       cy.get("@currentWidget").then(($highWidget) => {
@@ -45,8 +45,7 @@ const additionalTests = () => {
         // Content should be different between security levels
         expect(highSecurityContent).not.to.equal(lowSecurityContent);
 
-        // Take screenshot for comparison
-        cy.wrap($highWidget).screenshot("security-resources-high");
+        cy.log("✓ Security resources high security verified");
       });
     });
   });
@@ -87,8 +86,7 @@ const additionalTests = () => {
           });
         });
 
-        // Take screenshot for documentation
-        cy.wrap($widget).screenshot("security-resources-content");
+        cy.log("✓ Security resources content verified");
       });
     });
   });

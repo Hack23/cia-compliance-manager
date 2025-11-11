@@ -45,8 +45,7 @@ const additionalTests = () => {
           });
         });
 
-        // Take screenshot for documentation
-        cy.wrap($widget).screenshot("technical-details-content");
+        cy.log("✓ Technical details content verified");
       });
     });
   });

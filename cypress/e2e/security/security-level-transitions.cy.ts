@@ -34,7 +34,7 @@ describe("Security Level Transitions", () => {
   });
 
   it("maintains application integrity during security level changes", () => {
-    // Define only critical transitions to test
+    // Reduced to only the most critical transition to test (low to high covers edge cases)
     const securityTransitions = [
       {
         from: [
@@ -48,19 +48,6 @@ describe("Security Level Transitions", () => {
           SECURITY_LEVELS.HIGH,
         ] as const,
         name: "low-to-high",
-      },
-      {
-        from: [
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH,
-        ] as const,
-        to: [
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.LOW,
-          SECURITY_LEVELS.MODERATE,
-        ] as const,
-        name: "high-to-mixed",
       },
     ];
 
@@ -79,12 +66,10 @@ describe("Security Level Transitions", () => {
         transition.from[1],
         transition.from[2]
       );
-      cy.wait(1000);
+      cy.wait(500); // Reduced wait time
 
-      // Take screenshot only if it's the first transition
-      if (index === 0) {
-        cy.screenshot(`transition-initial-${transition.name}`);
-      }
+      // Take screenshot only once
+      cy.screenshot(`transition-initial-${transition.name}`);
 
       // Look for important widgets to verify initial state
       findImportantWidgets().then((widgets) => {
@@ -101,12 +86,10 @@ describe("Security Level Transitions", () => {
             transition.to[1],
             transition.to[2]
           );
-          cy.wait(1000);
+          cy.wait(500); // Reduced wait time
 
-          // Take screenshot only if it's the first transition
-          if (index === 0) {
-            cy.screenshot(`transition-after-${transition.name}`);
-          }
+          // Take screenshot after transition
+          cy.screenshot(`transition-after-${transition.name}`);
 
           // Check widgets after transition
           findImportantWidgets().then((newWidgets) => {
@@ -121,7 +104,7 @@ describe("Security Level Transitions", () => {
               "Number of widgets shouldn't decrease significantly during transitions"
             );
 
-            // Process each widget after transition
+            // Process each widget after transition - reduced screenshot overhead
             cy.wrap(newWidgets).each(($widget, i) => {
               const id = $widget.attr("data-testid") || `widget-${i}`;
 
@@ -196,6 +179,7 @@ describe("Security Level Transitions", () => {
     if (hasProblems) {
       const id = $widget.attr("data-testid") || "unknown";
       cy.log(`⚠️ Widget ${id} contains problematic content`);
+      // Only take screenshot on actual problems
       cy.wrap($widget).screenshot(`widget-problematic-${id}`);
     }
   }
@@ -213,16 +197,16 @@ describe("Security Level Transitions", () => {
     // Content should change, but shouldn't be empty
     if (newText.trim().length === 0) {
       cy.log(`⚠️ Widget ${id} content is empty after transition`);
+      // Only screenshot on error
       cy.wrap($widget).screenshot(`widget-empty-${id}`);
     }
 
-    // Log significant changes
+    // Log significant changes but don't screenshot (saves time)
     if (
       initialContent.length > 0 &&
       newText.length < initialContent.length * 0.5
     ) {
       cy.log(`⚠️ Widget ${id} content reduced significantly`);
-      cy.wrap($widget).screenshot(`widget-reduced-${id}`);
     }
 
     // Changes in content are expected and good

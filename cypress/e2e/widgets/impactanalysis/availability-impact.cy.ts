@@ -48,7 +48,7 @@ const additionalTests = () => {
         });
 
         // Screenshot for documentation
-        cy.wrap($widget).screenshot("availability-metrics");
+        cy.log("✓ Availability metrics check completed");
       });
     });
   });

@@ -48,7 +48,7 @@ const additionalTests = () => {
         });
 
         // Screenshot for documentation
-        cy.wrap($widget).screenshot("confidentiality-concepts");
+        cy.log("✓ Confidentiality concepts check completed");
       });
     });
   });
