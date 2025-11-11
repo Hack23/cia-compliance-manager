@@ -19,15 +19,12 @@ const REPORTS = {
 export default defineConfig({
   screenshotsFolder: REPORTS.screenshots,
   videosFolder: REPORTS.videos,
-  video: false, // Disable video by default to save time - can be enabled via env var
+  video: process.env.CYPRESS_VIDEO === 'true' || false, // Disable video by default to save time - can be enabled via env var
   screenshotOnRunFailure: true,
   trashAssetsBeforeRuns: true,
   viewportWidth: 1280, // More focused viewport default
   viewportHeight: 800, // More focused viewport default
-  retries: {
-    runMode: 1, // Reduce retries to speed up failing tests
-    openMode: 0, // No retries in open mode
-  },
+  experimentalMemoryManagement: true,
   reporter: "cypress-multi-reporters",
   reporterOptions: {
     reporterEnabled: "spec, cypress-junit-reporter, mochawesome",
@@ -205,7 +202,6 @@ export default defineConfig({
     defaultCommandTimeout: 6000, // Reduced from 8000ms
     chromeWebSecurity: false,
     numTestsKeptInMemory: 10, // Reduce memory usage
-    experimentalMemoryManagement: true,
   },
   component: {
     devServer: {

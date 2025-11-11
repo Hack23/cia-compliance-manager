@@ -17,9 +17,9 @@ This document provides a detailed comparison of the Cypress E2E test suite befor
 - **Reduction**: 48 lines (3.5% reduction)
 
 ### Screenshots per Test Run
-- **Before**: 20+ screenshots
-- **After**: 4 screenshots (only in dedicated screenshot test)
-- **Reduction**: 78% fewer screenshots
+- **Before**: 49 screenshots
+- **After**: 7 screenshots (3 in widget-screenshots.cy.ts + 2 in security-level-transitions.cy.ts + 2 in compliance-validation.cy.ts)
+- **Reduction**: 86% fewer screenshots
 
 ### Wait Times
 

@@ -23,8 +23,8 @@ describe("Widget UI/UX Screenshots", () => {
 
   // Only run screenshot tests when explicitly enabled or on scheduled runs
   before(function() {
-    if (!Cypress.env('CAPTURE_SCREENSHOTS') && Cypress.config('isInteractive')) {
-      cy.log('Skipping screenshot tests - set CAPTURE_SCREENSHOTS=true to enable');
+    if (Cypress.env('CYPRESS_SCREENSHOTS') !== 'true' && Cypress.config('isInteractive')) {
+      cy.log('Skipping screenshot tests - set CYPRESS_SCREENSHOTS=true to enable');
       this.skip();
     }
   });

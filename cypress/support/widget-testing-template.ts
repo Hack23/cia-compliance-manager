@@ -121,7 +121,7 @@ export function createWidgetTests(
         ).to.be.true;
 
         // Screenshot only on CI or when explicitly enabled via env var
-        if (Cypress.env('CYPRESS_SCREENSHOTS') === 'true' || Cypress.config('isInteractive') === false) {
+        if (Cypress.env('CYPRESS_SCREENSHOTS') === true || Cypress.env('CYPRESS_SCREENSHOTS') === 'true' || Cypress.config('isInteractive') === false) {
           captureWidgetScreenshot($widget.first(), `${widgetTestId}-baseline`);
         }
       });
