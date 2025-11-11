@@ -14,16 +14,20 @@ describe("Widget UI/UX Screenshots", () => {
   const viewportWidth = 1920;
   const viewportHeight = 1080;
 
-  // Essential widgets to capture in different themes
+  // Reduced to only critical widgets to capture - reduces test time significantly
   const essentialWidgets = [
     "security-level",
-    "business-impact",
     "security-summary",
     "compliance-status",
-    "technical-details",
-    "security-visualization",
-    "value-creation",
   ];
+
+  // Only run screenshot tests when explicitly enabled or on scheduled runs
+  before(function() {
+    if (!Cypress.env('CAPTURE_SCREENSHOTS') && Cypress.config('isInteractive')) {
+      cy.log('Skipping screenshot tests - set CAPTURE_SCREENSHOTS=true to enable');
+      this.skip();
+    }
+  });
 
   beforeEach(() => {
     cy.visit("/");
@@ -32,23 +36,29 @@ describe("Widget UI/UX Screenshots", () => {
     applyTestStyles();
   });
 
-  it("captures full dashboard grid with widgets in light and dark mode", () => {
+  it("captures full dashboard grid in light mode only", () => {
     // Set wider viewport to ensure all columns are visible
     cy.viewport(2400, 1200);
     // Ensure grid layout is properly displayed
     cy.get('[data-testid="dashboard-grid"]').should("be.visible");
 
-    // Capture optimized grid screenshots only (no HTML)
-    captureFullDashboardGrid("dashboard-grid");
+    // Capture only light mode to reduce test time by 50%
+    cy.screenshot("dashboard-grid-light", { capture: "viewport" });
   });
 
-  it("captures essential widgets in both light and dark themes", () => {
-    // For each essential widget, capture both light and dark themes
+  it("captures essential widgets in light theme only", () => {
+    // Capture only light theme to reduce test time - dark theme can be tested separately if needed
     essentialWidgets.forEach((widgetName) => {
-      cy.log(`Capturing themes for widget: ${widgetName}`);
+      cy.log(`Capturing widget: ${widgetName}`);
 
-      // Use the simplified capture function
-      captureSimpleWidgetThemes(widgetName);
+      // Simplified capture - just take a single screenshot
+      cy.findWidget(widgetName).then(($widget) => {
+        if ($widget.length > 0) {
+          cy.wrap($widget.first()).screenshot(`widget-${widgetName}-light`, {
+            overwrite: true,
+          });
+        }
+      });
     });
   });
 });

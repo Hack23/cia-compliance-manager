@@ -40,8 +40,8 @@ const additionalTests = () => {
           // Verify the selection happened
           cy.wrap($selects).first().should("have.value", SECURITY_LEVELS.HIGH);
 
-          // Screenshot for documentation
-          cy.wrap($widget).screenshot("security-level-selection");
+          // Log for documentation (no screenshot needed)
+          cy.log("✓ Security level selection verified");
         });
       });
     });

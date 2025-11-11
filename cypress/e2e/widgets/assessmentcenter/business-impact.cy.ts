@@ -66,7 +66,7 @@ const additionalTests = () => {
       SECURITY_LEVELS.HIGH,
       SECURITY_LEVELS.HIGH
     );
-    cy.wait(1000);
+    cy.wait(500); // Reduced wait time
 
     // Get current widget
     cy.get("@currentWidget").then(($widget) => {
@@ -75,8 +75,8 @@ const additionalTests = () => {
         return;
       }
 
-      // Take screenshot of high security state
-      cy.wrap($widget).screenshot("business-impact-high-security");
+      // Verify widget is still visible
+      expect($widget).to.be.visible;
     });
   });
 };

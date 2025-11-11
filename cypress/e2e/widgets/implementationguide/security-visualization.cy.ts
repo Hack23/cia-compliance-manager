@@ -46,8 +46,7 @@ const additionalTests = () => {
           });
         });
 
-        // Take screenshot for documentation
-        cy.wrap($widget).screenshot("security-visualization-chart");
+        cy.log("✓ Security visualization chart verified");
       });
     });
   });

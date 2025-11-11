@@ -48,7 +48,7 @@ const additionalTests = () => {
         });
 
         // Screenshot for documentation
-        cy.wrap($widget).screenshot("integrity-concepts");
+        cy.log("✓ Integrity concepts check completed");
       });
     });
   });

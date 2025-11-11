@@ -48,8 +48,7 @@ const additionalTests = () => {
           });
         });
 
-        // Take screenshot for documentation
-        cy.wrap($widget).screenshot("cost-estimation-content");
+        cy.log("✓ Cost estimation content verified");
       });
     });
   });
@@ -93,8 +92,7 @@ const additionalTests = () => {
               expect(highSecurityContent).not.to.equal(lowSecurityContent);
             });
 
-          // Take screenshot for documentation
-          cy.wrap($widget).screenshot("cost-estimation-high-security");
+          cy.log("✓ Cost estimation high security verified");
         });
     });
   });

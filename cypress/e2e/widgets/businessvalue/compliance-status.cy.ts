@@ -42,7 +42,7 @@ const additionalTests = () => {
         });
 
         // Screenshot for documentation
-        cy.wrap($widget).screenshot("compliance-frameworks");
+        cy.log("✓ Compliance frameworks check completed");
       });
     });
   });

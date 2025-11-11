@@ -20,14 +20,14 @@ export default defineConfig({
   screenshotsFolder: REPORTS.screenshots,
   videosFolder: REPORTS.videos,
   experimentalMemoryManagement: true,
-  video: true,
+  video: false, // Disable video by default to save time - can be enabled via env var
   screenshotOnRunFailure: true,
   trashAssetsBeforeRuns: true,
   viewportWidth: 1280, // More focused viewport default
   viewportHeight: 800, // More focused viewport default
   retries: {
-    runMode: 2, // Increase retries for CI runs
-    openMode: 1, // Allow one retry in open mode
+    runMode: 1, // Reduce retries to speed up failing tests
+    openMode: 0, // No retries in open mode
   },
   reporter: "cypress-multi-reporters",
   reporterOptions: {
@@ -200,11 +200,13 @@ export default defineConfig({
       return config;
     },
     retries: {
-      runMode: 1,
+      runMode: 1, // Reduced retries for faster feedback
       openMode: 0,
     },
-    defaultCommandTimeout: 8000, // Slightly reduced from 10000
+    defaultCommandTimeout: 6000, // Reduced from 8000ms
     chromeWebSecurity: false,
+    numTestsKeptInMemory: 10, // Reduce memory usage
+    experimentalMemoryManagement: true,
   },
   component: {
     devServer: {
@@ -216,6 +218,7 @@ export default defineConfig({
     },
   },
   waitForAnimations: false,
-  pageLoadTimeout: 10000,
-  requestTimeout: 5000,
+  pageLoadTimeout: 8000, // Reduced from 10000ms
+  requestTimeout: 4000, // Reduced from 5000ms
+  responseTimeout: 8000, // Add explicit response timeout
 });

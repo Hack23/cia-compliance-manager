@@ -47,7 +47,7 @@ const additionalTests = () => {
         });
 
         // Take screenshot for documentation - FIX: Since we're already in a single element's context, this is fine
-        cy.wrap($widget).screenshot("value-creation-metrics");
+        cy.log("✓ Value creation metrics verified");
       });
     });
   });
