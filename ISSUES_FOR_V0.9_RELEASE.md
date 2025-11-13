@@ -2,7 +2,25 @@
 
 **Status:** ⚠️ Unable to create issues automatically due to missing GitHub authentication token.
 
-**Action Required:** These 5 issues need to be created manually in the GitHub repository or by re-running this workflow with proper `COPILOT_MCP_GITHUB_PERSONAL_ACCESS_TOKEN` configured.
+**✅ SOLUTION:** Use the provided shell script `create-issues.sh` to create all 5 issues automatically.
+
+## Quick Start - Create Issues Now
+
+### Option 1: Using GitHub CLI (Recommended)
+```bash
+# Authenticate with GitHub CLI
+gh auth login
+
+# Run the script to create all 5 issues
+./create-issues.sh
+```
+
+### Option 2: Manual Creation
+Copy each issue title and body below and create via GitHub UI at:
+https://github.com/Hack23/cia-compliance-manager/issues/new
+
+### Option 3: Re-run Workflow with Authentication
+Add `COPILOT_MCP_GITHUB_PERSONAL_ACCESS_TOKEN` to repository secrets and re-run this workflow.
 
 ---
 
