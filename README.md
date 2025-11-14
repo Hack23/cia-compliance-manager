@@ -372,20 +372,20 @@ When you use CIA Compliance Manager, you're leveraging a tool that:
   <td width="50%">
     <h3>🧪 Unit Tests</h3>
     <p>Visual representation of unit test results and coverage of the codebase.</p>
-    <a href="https://hack23.github.io/cia-compliance-manager/test-results">Test Results</a> •
+    <a href="https://hack23.github.io/cia-compliance-manager/docs/test-results">Test Results</a> •
     <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md">Test Plan</a>
   </td>
   <td width="50%">
     <h3>📊 Test Coverage</h3>
     <p>Test coverage reports showing how much of the codebase is covered by tests.</p>
-    <a href="https://hack23.github.io/cia-compliance-manager/coverage">View Coverage Report</a>
+    <a href="https://hack23.github.io/cia-compliance-manager/docs/coverage">View Coverage Report</a>
   </td>
 </tr>
 <tr>
   <td width="50%">
     <h3>🔍 E2E System Tests</h3>
     <p>End-to-end test reports showing full system validation results.</p>
-    <a href="https://hack23.github.io/cia-compliance-manager/e2e-report">View Test Report</a> •
+    <a href="https://hack23.github.io/cia-compliance-manager/docs/cypress/mochawesome">View Test Report</a> •
     <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md">E2E Plan</a>
   </td>
   <td width="50%">
@@ -721,7 +721,7 @@ The following resources are available in our [Documentation Portal](https://hack
 | API Documentation         | Detailed API reference for all components             | [View](https://hack23.github.io/cia-compliance-manager/api)                                  |
 | Architecture Diagrams     | C4 model diagrams and architecture documentation      | [View](/workspaces/cia-compliance-manager/docs/architecture/ARCHITECTURE.md)                 |
 | Diagrams & Visualizations | UML and Mermaid diagrams showing system relationships | [View](https://hack23.github.io/cia-compliance-manager/diagrams)                             |
-| Code Coverage             | Test coverage reports and metrics                     | [View](https://hack23.github.io/cia-compliance-manager/coverage)                             |
+| Code Coverage             | Test coverage reports and metrics                     | [View](https://hack23.github.io/cia-compliance-manager/docs/coverage)                        |
 | Dependencies              | Visual representation of module dependencies          | [View](https://hack23.github.io/cia-compliance-manager/dependencies/module-dependencies.svg) |
 
 ## 📝 Key Documentation Sections
