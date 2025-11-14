@@ -8,6 +8,6 @@
 
 > `const` **BUSINESS\_KEY\_BENEFITS**: [`BusinessKeyBenefits`](../../../types/businessImpact/interfaces/BusinessKeyBenefits.md)
 
-Defined in: [constants/businessConstants.ts:185](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/constants/businessConstants.ts#L185)
+Defined in: [constants/businessConstants.ts:185](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/constants/businessConstants.ts#L185)
 
 Business key benefits for each security level

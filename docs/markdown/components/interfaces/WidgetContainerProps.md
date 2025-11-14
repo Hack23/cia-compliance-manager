@@ -6,7 +6,7 @@
 
 # Interface: WidgetContainerProps
 
-Defined in: [types/componentPropExports.ts:230](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/types/componentPropExports.ts#L230)
+Defined in: [types/componentPropExports.ts:230](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/types/componentPropExports.ts#L230)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:230](https://github.com/Hack23/cia-co
 
 > **children**: `ReactNode`
 
-Defined in: [types/componentPropExports.ts:231](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/types/componentPropExports.ts#L231)
+Defined in: [types/componentPropExports.ts:231](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/types/componentPropExports.ts#L231)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types/componentPropExports.ts:231](https://github.com/Hack23/cia-co
 
 > `optional` **className**: `string`
 
-Defined in: [types/componentPropExports.ts:232](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/types/componentPropExports.ts#L232)
+Defined in: [types/componentPropExports.ts:232](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/types/componentPropExports.ts#L232)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [types/componentPropExports.ts:232](https://github.com/Hack23/cia-co
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:233](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/types/componentPropExports.ts#L233)
+Defined in: [types/componentPropExports.ts:233](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/types/componentPropExports.ts#L233)

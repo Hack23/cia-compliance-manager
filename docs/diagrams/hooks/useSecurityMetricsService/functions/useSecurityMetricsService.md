@@ -8,7 +8,7 @@
 
 > **useSecurityMetricsService**(): `object`
 
-Defined in: [hooks/useSecurityMetricsService.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/hooks/useSecurityMetricsService.ts#L13)
+Defined in: [hooks/useSecurityMetricsService.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/hooks/useSecurityMetricsService.ts#L13)
 
 Hook for accessing the SecurityMetricsService
 
