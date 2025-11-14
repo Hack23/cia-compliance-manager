@@ -85,36 +85,34 @@ Bundle Analysis:
 Performance budgets are defined in `budget.json` and enforced via Lighthouse CI:
 
 ```json
-{
-  "budgets": [
-    {
-      "path": "/*",
-      "timings": [
-        { "metric": "interactive", "budget": 6000 },
-        { "metric": "first-contentful-paint", "budget": 3500 },
-        { "metric": "largest-contentful-paint", "budget": 4000 },
-        { "metric": "total-blocking-time", "budget": 1600 },
-        { "metric": "cumulative-layout-shift", "budget": 0.1 },
-        { "metric": "speed-index", "budget": 5000 }
-      ],
-      "resourceSizes": [
-        { "resourceType": "script", "budget": 180 },
-        { "resourceType": "image", "budget": 200 },
-        { "resourceType": "stylesheet", "budget": 50 },
-        { "resourceType": "document", "budget": 20 },
-        { "resourceType": "font", "budget": 50 },
-        { "resourceType": "total", "budget": 500 }
-      ],
-      "resourceCounts": [
-        { "resourceType": "third-party", "budget": 59 }
-      ]
-    }
-  ]
-}
+[
+  {
+    "path": "/*",
+    "timings": [
+      { "metric": "interactive", "budget": 6000 },
+      { "metric": "first-contentful-paint", "budget": 3500 },
+      { "metric": "largest-contentful-paint", "budget": 4000 },
+      { "metric": "total-blocking-time", "budget": 1600 },
+      { "metric": "cumulative-layout-shift", "budget": 0.1 },
+      { "metric": "speed-index", "budget": 5000 }
+    ],
+    "resourceSizes": [
+      { "resourceType": "script", "budget": 180 },
+      { "resourceType": "image", "budget": 200 },
+      { "resourceType": "stylesheet", "budget": 50 },
+      { "resourceType": "document", "budget": 20 },
+      { "resourceType": "font", "budget": 50 },
+      { "resourceType": "total", "budget": 500 }
+    ],
+    "resourceCounts": [
+      { "resourceType": "third-party", "budget": 59 }
+    ]
+  }
+]
 ```
 
 **Budget Thresholds (KB):**
-- Scripts: 180 KB ✅ (Currently: ~189 KB compressed - *slightly over, optimization opportunity*)
+- Scripts: 180 KB ❌ (Currently: ~189 KB compressed - *over budget, optimization required*)
 - Stylesheets: 50 KB ✅ (Currently: 12.55 KB compressed)
 - Images: 200 KB ✅
 - Total: 500 KB ✅ (Currently: ~189 KB compressed)
@@ -200,8 +198,8 @@ npm run cypress:run -- --spec "cypress/e2e/performance/**/*"
 # Run specific performance test
 npm run cypress:run -- --spec "cypress/e2e/performance/widget-performance.cy.ts"
 
-# Run with performance dashboard
-npm run cypress:run:perf
+# (No dedicated script; use cypress:run with appropriate options)
+# Example: npm run cypress:run -- --spec "cypress/e2e/performance/dashboard.cy.ts"
 ```
 
 **Writing Performance Tests:**
@@ -446,6 +444,9 @@ npm run build && npm run test:e2e
 
 ### Local Performance Reports
 
+> ⚠️ Local E2E performance report generation is not yet implemented. The documentation for `cypress/reports/performance/performance-report.json` and `performance-dashboard.html` is a placeholder for a planned feature.
+
+<!--
 **E2E Performance Reports:**
 - **JSON Report:** `cypress/reports/performance/performance-report.json`
 - **HTML Dashboard:** `cypress/reports/performance/performance-dashboard.html`
@@ -456,25 +457,26 @@ npm run build && npm run test:e2e
 - Slowest operations
 - Widget-specific performance metrics
 - Performance trends (with historical data)
+-->
 
 ---
 
-## 🧪 Performance Baseline Configuration
+## 🧪 Performance Baseline Configuration (Planned)
 
-Performance thresholds are defined in `cypress/config/performance-baseline.ts` (for E2E tests):
+> **Note:** The file `cypress/config/performance-baseline.ts` and the baseline configurations (`DEV_BASELINE`, `PROD_BASELINE`, `CI_BASELINE`) are **not yet implemented**. The following describes a proposed feature for future releases.
 
-**Three Baseline Configurations:**
+**Planned Baseline Configurations:**
 1. **DEV_BASELINE**: Lenient thresholds for development environments
 2. **PROD_BASELINE**: Stricter thresholds for production environments
 3. **CI_BASELINE**: Adjusted thresholds for CI environments
 
-**Example Configuration:**
+**Proposed Example Configuration:**
 ```typescript
-// Modify baseline for custom operations
-DEV_BASELINE.operations["my-custom-operation"] = {
-  warning: 300,
-  error: 800,
-};
+// (Planned) Modify baseline for custom operations
+// DEV_BASELINE.operations["my-custom-operation"] = {
+//   warning: 300,
+//   error: 800,
+// };
 ```
 
 ---
@@ -548,10 +550,10 @@ DEV_BASELINE.operations["my-custom-operation"] = {
 ## 📚 Related Documentation
 
 ### Internal Documentation
-- [Testing Guide](/docs/testing-guide.md) - Comprehensive testing strategy
-- [E2E Test Plan](/docs/E2ETestPlan.md) - End-to-end testing procedures
-- [Widget Testing Recipe](/docs/widget-testing-recipe.md) - Widget testing patterns
-- [Cypress Optimization](/docs/CYPRESS_OPTIMIZATION.md) - Cypress performance optimization
+- [Testing Guide](testing-guide.md) - Comprehensive testing strategy
+- [E2E Test Plan](E2ETestPlan.md) - End-to-end testing procedures
+- [Widget Testing Recipe](widget-testing-recipe.md) - Widget testing patterns
+- [Cypress Optimization](CYPRESS_OPTIMIZATION.md) - Cypress performance optimization
 
 ### External Resources
 - [Hack23 ISMS Secure Development Policy §8](https://github.com/Hack23/ISMS/blob/main/Secure_Development_Policy.md#-performance-testing--monitoring-framework) - Policy requirements
