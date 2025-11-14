@@ -1,16 +1,22 @@
 import { describe, expect, it, test } from "vitest";
 import { SecurityLevel } from "../types/cia";
 import {
+  asSecurityLevel,
   calculateOverallSecurityLevel,
   DEFAULT_SECURITY_LEVEL,
   formatSecurityLevel,
+  getRecommendedSecurityLevel,
   getRecommendedSecurityLevels,
   getRiskLevelFromSecurityLevel,
   getSecurityIcon,
+  getSecurityLevelBadgeVariant,
+  getSecurityLevelClass,
   getSecurityLevelDescription,
   getSecurityLevelFromValue,
   getSecurityLevelGap,
+  getSecurityLevelPercentage,
   getSecurityLevelValue,
+  getStatusVariant,
   isSecurityLevel,
   meetsComplianceRequirements,
   meetsSecurityRequirements,
@@ -363,6 +369,110 @@ describe("securityLevelUtils", () => {
       expect(result.availability).toBe("Low");
       expect(result.integrity).toBe("Low");
       expect(result.confidentiality).toBe("Moderate");
+    });
+  });
+
+  describe("getSecurityLevelPercentage", () => {
+    it("returns correct percentage for each security level", () => {
+      expect(getSecurityLevelPercentage("None")).toBe("0%");
+      expect(getSecurityLevelPercentage("Low")).toBe("25%");
+      expect(getSecurityLevelPercentage("Moderate")).toBe("50%");
+      expect(getSecurityLevelPercentage("High")).toBe("75%");
+      expect(getSecurityLevelPercentage("Very High")).toBe("100%");
+    });
+
+    it("handles string inputs", () => {
+      expect(getSecurityLevelPercentage("none")).toBe("0%");
+      expect(getSecurityLevelPercentage("HIGH")).toBe("75%");
+    });
+  });
+
+  describe("getSecurityLevelClass", () => {
+    it("returns correct CSS class for each security level", () => {
+      expect(getSecurityLevelClass("None")).toContain("red");
+      expect(getSecurityLevelClass("Low")).toContain("yellow");
+      expect(getSecurityLevelClass("Moderate")).toContain("blue");
+      expect(getSecurityLevelClass("High")).toContain("green");
+      expect(getSecurityLevelClass("Very High")).toContain("purple");
+    });
+
+    it("handles case variations", () => {
+      expect(getSecurityLevelClass("none")).toContain("red");
+      expect(getSecurityLevelClass("MODERATE")).toContain("blue");
+    });
+
+    it("returns gray for invalid levels", () => {
+      expect(getSecurityLevelClass("Invalid")).toContain("gray");
+    });
+  });
+
+  describe("getSecurityLevelBadgeVariant", () => {
+    it("returns correct badge variant for each security level", () => {
+      expect(getSecurityLevelBadgeVariant("Very High")).toBe("purple");
+      expect(getSecurityLevelBadgeVariant("High")).toBe("success");
+      expect(getSecurityLevelBadgeVariant("Moderate")).toBe("info");
+      expect(getSecurityLevelBadgeVariant("Low")).toBe("warning");
+      expect(getSecurityLevelBadgeVariant("None")).toBe("error");
+    });
+
+    it("returns info for invalid levels (normalized to Moderate)", () => {
+      // normalizeSecurityLevel returns Moderate for invalid values
+      expect(getSecurityLevelBadgeVariant("Invalid")).toBe("info");
+    });
+  });
+
+  describe("asSecurityLevel", () => {
+    it("returns valid security level unchanged", () => {
+      expect(asSecurityLevel("High")).toBe("High");
+      expect(asSecurityLevel("Low")).toBe("Low");
+    });
+
+    it("returns fallback for invalid values", () => {
+      expect(asSecurityLevel("Invalid")).toBe("None");
+      expect(asSecurityLevel("Invalid", "Moderate")).toBe("Moderate");
+    });
+  });
+
+  describe("getRecommendedSecurityLevel", () => {
+    it("returns None for sensitivity level 1 or less", () => {
+      expect(getRecommendedSecurityLevel(1)).toBe("None");
+      expect(getRecommendedSecurityLevel(0)).toBe("None");
+    });
+
+    it("returns Low for sensitivity level 2", () => {
+      expect(getRecommendedSecurityLevel(2)).toBe("Low");
+    });
+
+    it("returns Moderate for sensitivity level 3", () => {
+      expect(getRecommendedSecurityLevel(3)).toBe("Moderate");
+    });
+
+    it("returns High for sensitivity level 4", () => {
+      expect(getRecommendedSecurityLevel(4)).toBe("High");
+    });
+
+    it("returns Very High for sensitivity level 5 or more", () => {
+      expect(getRecommendedSecurityLevel(5)).toBe("Very High");
+      expect(getRecommendedSecurityLevel(10)).toBe("Very High");
+    });
+  });
+
+  describe("getStatusVariant", () => {
+    it("returns correct status variant for each security level", () => {
+      expect(getStatusVariant("none")).toBe("error");
+      expect(getStatusVariant("low")).toBe("warning");
+      expect(getStatusVariant("moderate")).toBe("info");
+      expect(getStatusVariant("high")).toBe("success");
+      expect(getStatusVariant("very high")).toBe("purple");
+    });
+
+    it("handles case variations", () => {
+      expect(getStatusVariant("None")).toBe("error");
+      expect(getStatusVariant("HIGH")).toBe("success");
+    });
+
+    it("returns neutral for unknown levels", () => {
+      expect(getStatusVariant("unknown")).toBe("neutral");
     });
   });
 });

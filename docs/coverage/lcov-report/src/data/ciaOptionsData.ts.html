@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.84% </span>
+                <span class="strong">42.1% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>21/57</span>
+                <span class='fraction'>24/57</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25.8% </span>
+                <span class="strong">35.48% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/31</span>
+                <span class='fraction'>11/31</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.84% </span>
+                <span class="strong">42.1% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>21/57</span>
+                <span class='fraction'>24/57</span>
             </div>
         
             
@@ -1003,7 +1003,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1029,7 +1029,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1062,7 +1062,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">23x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1070,7 +1070,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1084,16 +1084,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1108,7 +1108,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">23x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1116,7 +1116,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1600,8 +1600,8 @@ export function getDefaultPrivacyImpact(level: SecurityLevel): string {
 <span class="cstat-no" title="statement not covered" >      return "Basic Privacy Controls";</span>
     case "Moderate":
       return "Standard Privacy Controls";
-<span class="branch-3 cbranch-no" title="branch not covered" >    case "High":</span>
-<span class="cstat-no" title="statement not covered" >      return "Enhanced Privacy Controls";</span>
+    case "High":
+      return "Enhanced Privacy Controls";
 <span class="branch-4 cbranch-no" title="branch not covered" >    case "Very High":</span>
 <span class="cstat-no" title="statement not covered" >      return "Maximum Privacy Controls";</span>
 <span class="branch-5 cbranch-no" title="branch not covered" >    default:</span>
@@ -1623,8 +1623,8 @@ export function getDefaultValidationLevel(level: SecurityLevel): string {
 <span class="cstat-no" title="statement not covered" >      return "Basic";</span>
     case "Moderate":
       return "Standard";
-<span class="branch-3 cbranch-no" title="branch not covered" >    case "High":</span>
-<span class="cstat-no" title="statement not covered" >      return "Enhanced";</span>
+    case "High":
+      return "Enhanced";
 <span class="branch-4 cbranch-no" title="branch not covered" >    case "Very High":</span>
 <span class="cstat-no" title="statement not covered" >      return "Comprehensive";</span>
 <span class="branch-5 cbranch-no" title="branch not covered" >    default:</span>
@@ -1646,8 +1646,8 @@ export const getDefaultErrorRate = (level: SecurityLevel): string =&gt; {
 <span class="cstat-no" title="statement not covered" >      return "&lt; 5%";</span>
     case "Moderate":
       return "&lt; 3%"; // Changed to match test expectations
-<span class="branch-3 cbranch-no" title="branch not covered" >    case "High":</span>
-<span class="cstat-no" title="statement not covered" >      return "&lt; 1%";</span>
+    case "High":
+      return "&lt; 1%";
 <span class="branch-4 cbranch-no" title="branch not covered" >    case "Very High":</span>
 <span class="cstat-no" title="statement not covered" >      return "&lt; 0.01%";</span>
 <span class="branch-5 cbranch-no" title="branch not covered" >    default:</span>
@@ -1663,7 +1663,7 @@ export default defaultCIADataProvider;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-14T06:35:35.118Z
+                at 2025-11-14T17:19:32.179Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
