@@ -1,111 +1,41 @@
-<p align="center">
-  <img src="https://hack23.github.io/cia-compliance-manager/icon-192.png" alt="CIA Compliance Manager Logo" width="192" height="192">
-</p>
-
-<h1 align="center">🔄 CIA Compliance Manager — CI/CD Workflows</h1>
-
-<p align="center">
-  <strong>🛡️ Automated Security Excellence Through Continuous Integration</strong><br>
-  <em>🎯 Transparent Pipeline Operations Demonstrating ISMS Policy Compliance</em>
-</p>
-
-<p align="center">
-  <a href="#"><img src="https://img.shields.io/badge/Owner-Security_Architect-0A66C2?style=for-the-badge" alt="Owner"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Version-1.0-555?style=for-the-badge" alt="Version"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Updated-2025--11--14-success?style=for-the-badge" alt="Last Updated"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Review-Quarterly-orange?style=for-the-badge" alt="Review Cycle"/></a>
-</p>
-
-**📋 Document Owner:** Security Architect | **📄 Version:** 1.0 | **📅 Last Updated:** 2025-11-14 (UTC)  
-**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2026-02-14
-
----
-
-## 🎯 Purpose & Scope
-
-This document provides comprehensive documentation of the CI/CD workflows implemented in the CIA Compliance Manager project, demonstrating alignment with **Hack23 ISMS Secure Development Policy §10.1 "CI/CD Workflow & Automation Excellence"**. It serves as evidence of automated security operations, pipeline transparency, and continuous security validation.
-
-**Compliance Objectives:**
-- **ISO 27001 (A.12.1)**: Change management documentation and controls
-- **NIST CSF (DE.CM)**: Continuous monitoring and detection evidence
-- **CIS Controls (17.1)**: Implement and manage automated secure application deployments
-- **Transparency**: Public demonstration of security automation and quality gates
+# 🔁 CIA Compliance Manager CI/CD Workflows
 
 This document details the continuous integration and deployment workflows used in the CIA Compliance Manager project. The workflows automate testing, security scanning, and release procedures to ensure code quality and security compliance.
 
-## 📚 Related Documents
+## 📚 Related Architecture Documentation
 
-- [🏛️ Current Architecture](ARCHITECTURE.md) - C4 model showing current system structure
-- [🏛️ Future Architecture](FUTURE_ARCHITECTURE.md) - Vision for context-aware platform
-- [🛡️ Security Architecture](SECURITY_ARCHITECTURE.md) - Comprehensive security design and controls
-- [🎯 Threat Model](THREAT_MODEL.md) - Risk analysis informing security gates
-- [🔄 State Diagrams](STATEDIAGRAM.md) - Current system state transitions
-- [🔄 Future State Diagrams](FUTURE_STATEDIAGRAM.md) - Enhanced adaptive state transitions
-- [📋 Process Flowcharts](FLOWCHART.md) - Current security workflows
-- [📋 Future Flowcharts](FUTURE_FLOWCHART.md) - Enhanced context-aware workflows
-- [🧠 Mindmaps](MINDMAP.md) - Current system component relationships
-- [🧠 Future Mindmaps](FUTURE_MINDMAP.md) - Future capability evolution
-- [💼 SWOT Analysis](SWOT.md) - Current strategic assessment
-- [💼 Future SWOT Analysis](FUTURE_SWOT.md) - Future strategic opportunities
-- [🔧 Future Workflows](FUTURE_WORKFLOWS.md) - Enhanced CI/CD with ML
-- [📊 Future Data Model](FUTURE_DATA_MODEL.md) - Context-aware data architecture
-- [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) - ISMS development standards
-- [🔍 Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) - Security vulnerability processes
+<div class="documentation-map">
 
-## 📊 Workflow Status Badges
+| Document                                            | Focus           | Description                               |
+| --------------------------------------------------- | --------------- | ----------------------------------------- |
+| **[Current Architecture](ARCHITECTURE.md)**         | 🏛️ Architecture | C4 model showing current system structure |
+| **[Future Architecture](FUTURE_ARCHITECTURE.md)**   | 🏛️ Architecture | Vision for context-aware platform         |
+| **[State Diagrams](STATEDIAGRAM.md)**               | 🔄 Behavior     | Current system state transitions          |
+| **[Future State Diagrams](FUTURE_STATEDIAGRAM.md)** | 🔄 Behavior     | Enhanced adaptive state transitions       |
+| **[Process Flowcharts](FLOWCHART.md)**              | 🔄 Process      | Current security workflows                |
+| **[Future Flowcharts](FUTURE_FLOWCHART.md)**        | 🔄 Process      | Enhanced context-aware workflows          |
+| **[Mindmaps](MINDMAP.md)**                          | 🧠 Concept      | Current system component relationships    |
+| **[Future Mindmaps](FUTURE_MINDMAP.md)**            | 🧠 Concept      | Future capability evolution               |
+| **[SWOT Analysis](SWOT.md)**                        | 💼 Business     | Current strategic assessment              |
+| **[Future SWOT Analysis](FUTURE_SWOT.md)**          | 💼 Business     | Future strategic opportunities            |
+| **[Future Workflows](FUTURE_WORKFLOWS.md)**         | 🔧 DevOps       | Enhanced CI/CD with ML                    |
+| **[Future Data Model](FUTURE_DATA_MODEL.md)**       | 📊 Data         | Context-aware data architecture           |
 
-Real-time status of all CI/CD workflows:
-
-[![Build, Attest and Release](https://github.com/Hack23/cia-compliance-manager/actions/workflows/release.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/release.yml)
-[![Test and Report](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml)
-[![CodeQL](https://github.com/Hack23/cia-compliance-manager/actions/workflows/codeql.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/codeql.yml)
-[![Dependency Review](https://github.com/Hack23/cia-compliance-manager/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/dependency-review.yml)
-[![Scorecard supply-chain security](https://github.com/Hack23/cia-compliance-manager/actions/workflows/scorecards.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/scorecards.yml)
-[![ZAP Security Scan](https://github.com/Hack23/cia-compliance-manager/actions/workflows/zap-scan.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/zap-scan.yml)
-[![Lighthouse Performance Test](https://github.com/Hack23/cia-compliance-manager/actions/workflows/lighthouse-performance.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/lighthouse-performance.yml)
-[![Pull Request Automatic Labeler](https://github.com/Hack23/cia-compliance-manager/actions/workflows/labeler.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/labeler.yml)
-[![Copilot Setup Steps](https://github.com/Hack23/cia-compliance-manager/actions/workflows/copilot-setup-steps.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/copilot-setup-steps.yml)
-
-**Quality & Security Metrics:**
-
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compliance-manager/badge)](https://scorecard.dev/viewer/?uri=github.com/Hack23/cia-compliance-manager)
-[![SLSA 3](https://slsa.dev/images/gh-badge-level3.svg)](https://github.com/Hack23/cia-compliance-manager/attestations)
+</div>
 
 ## 🔄 Workflow Overview
 
 The project uses GitHub Actions for automation with the following workflows:
 
-1. **🚀 Build, Attest and Release** (`.github/workflows/release.yml`) - Builds, attests, and releases new versions with comprehensive security scanning
-2. **🧪 Test and Report** (`.github/workflows/test-and-report.yml`) - Runs unit and E2E tests with coverage reporting
-3. **🔍 CodeQL Analysis** (`.github/workflows/codeql.yml`) - SAST scanning for code vulnerabilities
-4. **📦 Dependency Review** (`.github/workflows/dependency-review.yml`) - SCA scanning of dependency changes for vulnerabilities
-5. **⭐ Scorecard Analysis** (`.github/workflows/scorecards.yml`) - OSSF security scorecard for supply chain security
-6. **🏷️ PR Labeler** (`.github/workflows/labeler.yml`) - Automated labeling of pull requests
-7. **🔆 Lighthouse Performance** (`.github/workflows/lighthouse-performance.yml`) - Performance, accessibility, and best practices auditing
-8. **🔒 ZAP Scan** (`.github/workflows/zap-scan.yml`) - DAST scanning of deployed application
-9. **🤖 Copilot Setup Steps** (`.github/workflows/copilot-setup-steps.yml`) - GitHub Copilot workspace environment setup and validation
-
-### 📊 Security Gates & Quality Thresholds
-
-The CI/CD pipeline enforces the following quality gates and thresholds:
-
-| Security Gate | Threshold | Workflow | Enforcement |
-|--------------|-----------|----------|-------------|
-| **Code Coverage** | 80% line, 70% branch | test-and-report.yml | Required ✅ |
-| **SonarCloud Quality Gate** | Pass | release.yml, test-and-report.yml | Required ✅ |
-| **CodeQL SAST** | No critical/high | codeql.yml | Required ✅ |
-| **Dependency Vulnerabilities** | No critical/high | dependency-review.yml | Required ✅ |
-| **License Compliance** | Approved licenses only | release.yml, test-and-report.yml | Required ✅ |
-| **OSSF Scorecard** | Score > 7.0 | scorecards.yml | Advisory ℹ️ |
-| **Lighthouse Performance** | Score 90+ | lighthouse-performance.yml | Advisory ℹ️ |
-| **ZAP DAST Scan** | No high-risk findings | zap-scan.yml | Advisory ℹ️ |
-| **TypeScript Compilation** | Zero errors | test-and-report.yml | Required ✅ |
-| **ESLint** | Zero errors | test-and-report.yml | Required ✅ |
-
-**Note:** Required gates block merges and deployments. Advisory gates generate reports for review but don't block progression.
+1. **🚀 Build, Attest and Release**: Builds, attests, and releases new versions with security scanning
+2. **🧪 Test and Report**: Runs unit and E2E tests with coverage reporting
+3. **🔍 CodeQL Analysis**: Security scanning for code vulnerabilities
+4. **📦 Dependency Review**: Scanning of dependency changes for vulnerabilities
+5. **⭐ Scorecard Analysis**: OSSF security scorecard for supply chain security
+6. **📜 License Checking**: Verification of dependency licenses for compliance
+7. **🏷️ PR Labeler**: Automated labeling of pull requests
+8. **🔆 Lighthouse**: Performance, accessibility, and best practices auditing
+9. **🔒 ZAP Scan**: Dynamic security scanning of deployed application
 
 ## 🔐 Security Hardening Practices
 
@@ -585,202 +515,6 @@ Each phase adds additional security and quality validation:
 4. **Deploy Preview**: Preview environments, Smoke tests
 5. **Audit & Verify**: Lighthouse, ZAP, Accessibility testing
 
-## 🤖 Copilot Setup Steps Workflow
-
-**File:** `.github/workflows/copilot-setup-steps.yml`  
-**Triggers:** 
-- Manual workflow dispatch
-- Push to workflow file
-- Pull requests affecting workflow file
-
-**Purpose:** Automates GitHub Copilot workspace environment setup and validation for AI-assisted development workflows.
-
-**Key Steps:**
-1. **Checkout Repository**: Securely checks out code with proper permissions
-2. **Node.js Environment**: Sets up Node.js 24 with npm caching
-3. **Dependency Installation**: Installs project dependencies with `npm ci`
-4. **Environment Validation**: Displays Node, npm, and TypeScript versions
-5. **Build Artifact Caching**: Caches node_modules and dist directories for performance
-
-**Security Features:**
-- Read-only permissions (contents: read)
-- SHA-pinned actions for immutability
-- Copilot receives separate token for operations
-
-## 📈 Pipeline Analytics & Success Metrics
-
-The CI/CD pipeline is continuously monitored to ensure reliability and performance:
-
-### Build Performance Metrics
-
-| Metric | Target | Current Status |
-|--------|--------|----------------|
-| **Average Build Time** | < 10 minutes | ✅ 8.2 minutes |
-| **Test Execution Time** | < 5 minutes | ✅ 4.1 minutes |
-| **E2E Test Duration** | < 3 minutes | ✅ 2.7 minutes |
-| **Release Build Time** | < 15 minutes | ✅ 12.5 minutes |
-
-### Quality & Security Metrics
-
-| Metric | Target | Current Status |
-|--------|--------|----------------|
-| **Build Success Rate** | > 95% | ✅ 97.3% |
-| **Test Pass Rate** | 100% | ✅ 100% |
-| **Code Coverage** | > 80% | ✅ 82.4% |
-| **Security Scan Pass Rate** | 100% | ✅ 100% |
-| **OSSF Scorecard** | > 7.0 | ✅ 8.1 |
-| **SonarCloud Quality Gate** | Pass | ✅ Pass |
-
-### Deployment Metrics
-
-| Metric | Target | Current Status |
-|--------|--------|----------------|
-| **Deployment Frequency** | Multiple per day | ✅ 2-3 per day |
-| **Deployment Success Rate** | > 98% | ✅ 99.1% |
-| **Rollback Rate** | < 2% | ✅ 0.9% |
-| **Mean Time to Deploy** | < 20 minutes | ✅ 15.3 minutes |
-
-**Trend Analysis:**
-- Build times have improved 15% over the last quarter through caching optimizations
-- Security scan coverage increased from 85% to 100% with addition of ZAP DAST
-- Test coverage improved from 78% to 82.4% through systematic test expansion
-- Zero critical vulnerabilities detected in the last 6 months
-
-## 🔄 Automated Rollback Procedures
-
-The CI/CD pipeline includes comprehensive rollback capabilities to ensure rapid recovery from deployment issues:
-
-### Rollback Triggers
-
-Automated rollback is triggered when:
-- **Health Check Failures**: Application fails to respond within 30 seconds post-deployment
-- **Error Rate Spike**: Error rate exceeds 5% within first 10 minutes
-- **Performance Degradation**: Core Web Vitals drop below thresholds
-- **Security Alert**: Critical vulnerability detected in deployed version
-- **Manual Trigger**: Manual rollback initiated via workflow dispatch
-
-### Rollback Process
-
-```mermaid
-flowchart TD
-    Deploy[New Deployment] --> Monitor[Health Monitoring]
-    Monitor --> Check{Health<br>Status?}
-    Check -->|Healthy| Success[Deployment Success]
-    Check -->|Failed| Alert[Trigger Alert]
-    Alert --> Rollback[Initiate Rollback]
-    Rollback --> PrevVersion[Restore Previous Version]
-    PrevVersion --> VerifyHealth[Verify Health]
-    VerifyHealth --> Healthy{Status?}
-    Healthy -->|OK| Stable[System Stable]
-    Healthy -->|Failed| Escalate[Escalate to Team]
-    
-    classDef deployNode fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef checkNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    classDef alertNode fill:#ffccbc,stroke:#333,stroke-width:2px,color:black
-    classDef successNode fill:#a5d6a7,stroke:#333,stroke-width:2px,color:black
-    
-    class Deploy,PrevVersion deployNode
-    class Monitor,VerifyHealth checkNode
-    class Alert,Rollback,Escalate alertNode
-    class Success,Stable successNode
-```
-
-### Rollback Implementation
-
-**GitHub Pages Rollback:**
-1. **Version Pinning**: Each release is tagged and artifacts are preserved
-2. **Automated Reversion**: GitHub Actions can redeploy previous artifact
-3. **Asset Preservation**: All build artifacts retained for 90 days
-4. **Zero-Downtime**: Uses GitHub Pages atomic deployment model
-
-**Manual Rollback Steps:**
-```bash
-# 1. Identify the last known good release
-gh release list
-
-# 2. Trigger rollback workflow with target version
-gh workflow run release.yml -f version=v0.7.0
-
-# 3. Monitor deployment health
-gh run watch
-
-# 4. Verify application functionality
-npm run test:e2e:prod
-```
-
-**Recovery Time Objectives:**
-- **Detection Time**: < 5 minutes (automated monitoring)
-- **Decision Time**: < 2 minutes (automated or manual)
-- **Rollback Execution**: < 3 minutes (automated deployment)
-- **Total RTO**: < 10 minutes from incident to recovery
-
-## 🔍 Failure Analysis & Continuous Improvement
-
-The project maintains a systematic approach to analyzing failures and implementing improvements:
-
-### Failure Categories & Mitigation
-
-| Failure Type | Frequency | Root Cause | Mitigation |
-|-------------|-----------|------------|------------|
-| **Flaky Tests** | 2% | Race conditions in E2E tests | Implemented explicit waits, retry logic |
-| **Dependency Issues** | 1% | Breaking changes in updates | Pinned versions, automated testing |
-| **Build Timeouts** | < 1% | Resource constraints | Increased timeouts, parallel execution |
-| **Security Scan False Positives** | 3% | Tool limitations | Manual review process, suppression rules |
-
-### Continuous Improvement Process
-
-```mermaid
-flowchart LR
-    Incident[Incident Occurs] --> Log[Log Details]
-    Log --> Analyze[Root Cause Analysis]
-    Analyze --> Document[Document Finding]
-    Document --> Implement[Implement Fix]
-    Implement --> Validate[Validate Solution]
-    Validate --> Review[Post-Mortem Review]
-    Review --> Update[Update Procedures]
-    Update --> Monitor[Monitor Effectiveness]
-    
-    classDef incidentNode fill:#ffccbc,stroke:#333,stroke-width:2px,color:black
-    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
-    classDef improveNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    
-    class Incident incidentNode
-    class Log,Analyze,Document,Validate processNode
-    class Implement,Review,Update,Monitor improveNode
-```
-
-### Recent Improvements
-
-**Q4 2024 Improvements:**
-1. **Cypress Test Optimization**: Reduced E2E test time from 4.5 to 2.7 minutes through parallel execution
-2. **Caching Strategy**: Implemented multi-level caching reducing build time by 15%
-3. **Security Hardening**: Added StepSecurity Harden Runner to all workflows
-4. **SLSA Attestation**: Achieved SLSA Level 3 with comprehensive build provenance
-5. **License Automation**: Automated license compliance checking in CI pipeline
-
-**Lessons Learned:**
-- **Test Isolation**: E2E tests must be fully isolated to prevent race conditions
-- **Dependency Pinning**: SHA-pinned actions eliminate unexpected behavior changes
-- **Progressive Enhancement**: Add security controls incrementally with validation
-- **Documentation**: Keep workflow documentation synchronized with implementation
-- **Monitoring First**: Implement monitoring before deploying new features
-
-### Performance Trends
-
-**Build Time Evolution:**
-- **Q1 2024**: 15.2 minutes average
-- **Q2 2024**: 12.1 minutes (-20% through caching)
-- **Q3 2024**: 10.3 minutes (-15% through parallelization)
-- **Q4 2024**: 8.2 minutes (-20% through optimization)
-
-**Security Posture Evolution:**
-- **Initial State**: Manual security reviews only
-- **Phase 1**: Added CodeQL SAST scanning
-- **Phase 2**: Integrated Dependabot and dependency review
-- **Phase 3**: Added OSSF Scorecard and supply chain security
-- **Phase 4**: Implemented ZAP DAST and SLSA attestations
-- **Current**: Comprehensive automated security pipeline with 100% gate coverage
-
 ## Future CI/CD Improvements
 
 While focusing on stabilizing the current workflows for the v1.0 release, the following enhancements are planned for future pipeline improvements:
@@ -796,25 +530,3 @@ While focusing on stabilizing the current workflows for the v1.0 release, the fo
 9. **Compliance Reporting**: Automated compliance status reporting and auditing
 
 For details on the future architecture direction, see [FUTURE_ARCHITECTURE.md](FUTURE_ARCHITECTURE.md).
-
----
-
-## 🔗 Related Resources
-
-- [Hack23 ISMS Secure Development Policy - §10.1](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-cicd-workflow--automation-excellence)
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [OSSF Scorecard](https://scorecard.dev/)
-- [SLSA Framework](https://slsa.dev/)
-- [StepSecurity Secure Workflows](https://www.stepsecurity.io/)
-- [OWASP ZAP](https://www.zaproxy.org/)
-- [Google Lighthouse](https://developers.google.com/web/tools/lighthouse)
-
----
-
-**📋 Document Control:**  
-**✅ Approved by:** Security Architect, Hack23 AB  
-**📤 Distribution:** Public  
-**🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-green?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
-**📅 Effective Date:** 2025-11-14  
-**⏰ Next Review:** 2026-02-14  
-**🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)
