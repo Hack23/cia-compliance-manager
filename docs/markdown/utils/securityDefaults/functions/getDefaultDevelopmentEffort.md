@@ -8,7 +8,7 @@
 
 > **getDefaultDevelopmentEffort**(`level`): `string`
 
-Defined in: [utils/securityDefaults.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/utils/securityDefaults.ts#L6)
+Defined in: [utils/securityDefaults.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/utils/securityDefaults.ts#L6)
 
 Gets default development effort based on security level
 

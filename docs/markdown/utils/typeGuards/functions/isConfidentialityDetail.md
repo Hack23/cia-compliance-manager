@@ -8,7 +8,7 @@
 
 > **isConfidentialityDetail**(`obj`): `obj is ConfidentialityDetail`
 
-Defined in: [utils/typeGuards.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/utils/typeGuards.ts#L55)
+Defined in: [utils/typeGuards.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/utils/typeGuards.ts#L55)
 
 Type guard to check if an object is a ConfidentialityDetail
 

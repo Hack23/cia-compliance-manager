@@ -8,7 +8,7 @@
 
 > `const` **STORAGE\_KEYS**: `object`
 
-Defined in: [constants/appConstants.ts:530](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/constants/appConstants.ts#L530)
+Defined in: [constants/appConstants.ts:530](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/constants/appConstants.ts#L530)
 
 Local storage keys
 
