@@ -160,3 +160,4 @@ yarn-error.log*
 
 # ESLint
 .eslintcache
+docs/test-results/
