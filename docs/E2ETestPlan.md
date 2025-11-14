@@ -463,11 +463,12 @@ const additionalTests = () => {
 };
 
 // Create standardized widget tests
-createWidgetTests({
-  widgetId: "security-level",
+createWidgetTests(
+  "Security Level",
+  "security-level",
   contentPatterns,
-  additionalTests,
-});
+  additionalTests
+);
 ```
 
 #### Integration Test Example
@@ -484,6 +485,7 @@ describe("Compliance Status Validation", () => {
   it("accurately reflects compliance status based on security levels", () => {
     const complianceScenarios = [
       {
+        // Order: availability, integrity, confidentiality
         levels: [SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW],
         expectedTextPatterns: [
           /minimal|basic|non-compliant|low|partial/i,
@@ -492,6 +494,7 @@ describe("Compliance Status Validation", () => {
         name: "low-security",
       },
       {
+        // Order: availability, integrity, confidentiality
         levels: [SECURITY_LEVELS.HIGH, SECURITY_LEVELS.HIGH, SECURITY_LEVELS.HIGH],
         expectedTextPatterns: [
           /compliant|meets requirements|high|full|complete/i,
@@ -505,8 +508,9 @@ describe("Compliance Status Validation", () => {
     complianceScenarios.forEach((scenario, index) => {
       cy.log(`Testing compliance scenario ${index + 1}: ${scenario.name}`);
       
-      // Set security levels using custom command
-      cy.setSecurityLevels(...scenario.levels);
+      // Set security levels using custom command (availability, integrity, confidentiality)
+      const [availability, integrity, confidentiality] = scenario.levels;
+      cy.setSecurityLevels(availability, integrity, confidentiality);
       cy.wait(500);
 
       // Validate compliance status display
@@ -583,59 +587,92 @@ The test suite includes custom commands for common test operations:
 declare global {
   namespace Cypress {
     interface Chainable {
-      ensureAppLoaded(): Chainable<void>
+      ensureAppLoaded(timeoutValue?: number): Chainable<void>
       setSecurityLevels(
-        confidentiality: string,
-        integrity: string,
-        availability: string
+        availability?: string,
+        integrity?: string,
+        confidentiality?: string
       ): Chainable<void>
-      findWidgetFlexibly(widgetId: string): Chainable<JQuery<HTMLElement>>
     }
   }
 }
 
 // Wait for application to fully load
-Cypress.Commands.add('ensureAppLoaded', () => {
-  cy.get('[data-testid*="widget"]', { timeout: 10000 })
-    .should('have.length.greaterThan', 0)
-  cy.wait(500) // Allow for widget initialization
+Cypress.Commands.add('ensureAppLoaded', (timeoutValue = 10000) => {
+  cy.get('body').should('exist')
+  
+  // Check for dashboard or widgets
+  cy.get('body')
+    .contains('[data-testid="dashboard-grid"], [data-testid^="widget-"]')
+    .should('exist')
+    .then(() => {
+      cy.log('✅ Application loaded successfully')
+    })
+  
+  // Check if select elements are present
+  cy.get('select').then(($selects) => {
+    if ($selects.length < 3) {
+      cy.log('⚠️ Warning: Not all security level selects found')
+    }
+  })
 })
 
 // Set security levels for all CIA components
-Cypress.Commands.add('setSecurityLevels', (confidentiality, integrity, availability) => {
-  const securityLevels = { confidentiality, integrity, availability }
-  
-  Object.entries(securityLevels).forEach(([component, level]) => {
-    cy.get(`select[data-testid*="${component}"]`).then(($select) => {
-      if ($select.length > 0) {
-        cy.wrap($select).select(level, { force: true })
+// Parameters: availability, integrity, confidentiality (in that order)
+Cypress.Commands.add('setSecurityLevels', (availability, integrity, confidentiality) => {
+  cy.get('body').then(($body) => {
+    const selectCount = $body.find('select').length
+    
+    if (selectCount >= 3) {
+      // Set levels using dropdowns
+      if (availability !== undefined) {
+        cy.get('select').eq(0).select(availability, { force: true })
       }
-    })
+      if (integrity !== undefined) {
+        cy.get('select').eq(1).select(integrity, { force: true })
+      }
+      if (confidentiality !== undefined) {
+        cy.get('select').eq(2).select(confidentiality, { force: true })
+      }
+    }
   })
   
-  cy.wait(300) // Allow for state updates
+  cy.wait(500) // Allow for state updates
 })
+```
 
-// Flexible widget finding with multiple selector strategies
-Cypress.Commands.add('findWidgetFlexibly', (widgetId: string) => {
-  const selectors = [
-    `[data-testid="${widgetId}"]`,
-    `[data-testid="widget-${widgetId}"]`,
-    `[data-testid*="${widgetId}"]`,
-    `[class*="${widgetId}"]`,
-  ]
-  
+### 📦 Utility Functions
+
+In addition to Cypress commands, the test suite includes utility functions:
+
+```typescript
+// cypress/support/widget-testing-template.ts
+
+// Flexible widget finding function (not a Cypress command)
+export function findWidgetFlexibly(
+  widgetId: string
+): Cypress.Chainable<JQuery<HTMLElement>> {
   return cy.document().then((doc) => {
+    const selectors = [
+      `[data-testid="${widgetId}"]`,
+      `[data-testid="widget-${widgetId}"]`,
+      `[data-testid*="${widgetId}"]`,
+      `[class*="${widgetId}"]`,
+    ]
+    
     for (const selector of selectors) {
       const elements = doc.querySelectorAll(selector)
       if (elements.length > 0) {
+        cy.log(`Found widget using selector: ${selector}`)
         return cy.get(selector)
       }
     }
+    
     cy.log(`Widget not found: ${widgetId}`)
-    return cy.get('body') // Return fallback to avoid test failure
+    cy.screenshot(`widget-search-failed-${widgetId}`)
+    return cy.wrap($()) // Return empty JQuery object
   })
-})
+}
 ```
 
 ### 📊 Test Constants
@@ -649,19 +686,19 @@ export const SECURITY_LEVELS = {
   VERY_HIGH: "Very High",
 } as const
 
-export const WIDGET_IDS = {
-  SECURITY_LEVEL: "security-level",
-  SECURITY_SUMMARY: "security-summary",
-  BUSINESS_IMPACT: "business-impact",
-  COMPLIANCE_STATUS: "compliance-status",
-  COST_ESTIMATION: "cost-estimation",
-  VALUE_CREATION: "value-creation",
-  CONFIDENTIALITY_IMPACT: "confidentiality-impact",
-  INTEGRITY_IMPACT: "integrity-impact",
-  AVAILABILITY_IMPACT: "availability-impact",
-  SECURITY_VISUALIZATION: "security-visualization",
-  SECURITY_RESOURCES: "security-resources",
-  TECHNICAL_DETAILS: "technical-details",
+export const WIDGET_TEST_IDS = {
+  SECURITY_LEVEL_WIDGET: "security-level",
+  SECURITY_SUMMARY_WIDGET: "security-summary",
+  BUSINESS_IMPACT_WIDGET: "business-impact",
+  COMPLIANCE_STATUS_WIDGET: "compliance-status",
+  COST_ESTIMATION_WIDGET: "cost-estimation",
+  VALUE_CREATION_WIDGET: "value-creation",
+  CONFIDENTIALITY_IMPACT_WIDGET: "confidentiality-impact",
+  INTEGRITY_IMPACT_WIDGET: "integrity-impact",
+  AVAILABILITY_IMPACT_WIDGET: "availability-impact",
+  SECURITY_VISUALIZATION_WIDGET: "security-visualization",
+  SECURITY_RESOURCES_WIDGET: "security-resources",
+  TECHNICAL_DETAILS_WIDGET: "technical-details",
 } as const
 ```
 
