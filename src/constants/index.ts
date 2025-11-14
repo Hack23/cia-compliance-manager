@@ -51,3 +51,6 @@ export {
 
 // Re-export specific constants from app constants that should remain there
 export { WIDGET_ICONS, WIDGET_TITLES } from "./appConstants";
+
+// Re-export security constants
+export * from "./securityConstants";
