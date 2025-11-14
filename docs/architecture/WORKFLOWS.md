@@ -646,43 +646,49 @@ The CI/CD pipeline is continuously monitored to ensure reliability and performan
 - Test coverage improved from 78% to 82.4% through systematic test expansion
 - Zero critical vulnerabilities detected in the last 6 months
 
-## 🔄 Automated Rollback Procedures
+## 🔄 Rollback Capabilities
 
-The CI/CD pipeline includes comprehensive rollback capabilities to ensure rapid recovery from deployment issues:
+The CI/CD pipeline supports rollback to ensure rapid recovery from deployment issues. Currently, rollback is performed manually via workflow dispatch:
 
 ### Rollback Triggers
 
-Automated rollback is triggered when:
-- **Health Check Failures**: Application fails to respond within 30 seconds post-deployment
-- **Error Rate Spike**: Error rate exceeds 5% within first 10 minutes
-- **Performance Degradation**: Core Web Vitals drop below thresholds
-- **Security Alert**: Critical vulnerability detected in deployed version
-- **Manual Trigger**: Manual rollback initiated via workflow dispatch
+Rollback should be triggered manually when:
+- **Deployment Failure**: If a deployment is found to be faulty after release
+- **Detected Issues**: If post-deployment monitoring (external to the workflow) identifies critical issues
+- **Performance Degradation**: If Core Web Vitals or application performance drops significantly
+- **Security Alert**: If a critical vulnerability is discovered in the deployed version
+- **Manual Decision**: Rollback initiated via workflow dispatch by an authorized team member
+
+> **Note:** Automated rollback based on health checks, error rates, or performance metrics is not currently implemented in the workflow. All rollbacks require manual initiation via GitHub Actions workflow dispatch.
 
 ### Rollback Process
 
+The rollback process follows these steps:
+
 ```mermaid
 flowchart TD
-    Deploy[New Deployment] --> Monitor[Health Monitoring]
-    Monitor --> Check{Health<br>Status?}
-    Check -->|Healthy| Success[Deployment Success]
-    Check -->|Failed| Alert[Trigger Alert]
-    Alert --> Rollback[Initiate Rollback]
+    Issue[Deployment Issue Detected] --> Assess[Assess Impact]
+    Assess --> Decision{Rollback<br>Needed?}
+    Decision -->|Yes| Manual[Manual Workflow Trigger]
+    Decision -->|No| Monitor[Continue Monitoring]
+    Manual --> Rollback[Initiate Rollback]
     Rollback --> PrevVersion[Restore Previous Version]
-    PrevVersion --> VerifyHealth[Verify Health]
+    PrevVersion --> VerifyHealth[Verify Functionality]
     VerifyHealth --> Healthy{Status?}
     Healthy -->|OK| Stable[System Stable]
     Healthy -->|Failed| Escalate[Escalate to Team]
     
-    classDef deployNode fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef checkNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    classDef alertNode fill:#ffccbc,stroke:#333,stroke-width:2px,color:black
+    classDef issueNode fill:#ffccbc,stroke:#333,stroke-width:2px,color:black
+    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
+    classDef decisionNode fill:#d1c4e9,stroke:#333,stroke-width:2px,color:black
+    classDef actionNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
     classDef successNode fill:#a5d6a7,stroke:#333,stroke-width:2px,color:black
     
-    class Deploy,PrevVersion deployNode
-    class Monitor,VerifyHealth checkNode
-    class Alert,Rollback,Escalate alertNode
-    class Success,Stable successNode
+    class Issue issueNode
+    class Assess,VerifyHealth processNode
+    class Decision,Healthy decisionNode
+    class Manual,Rollback,PrevVersion,Monitor,Escalate actionNode
+    class Stable successNode
 ```
 
 ### Rollback Implementation
@@ -709,10 +715,10 @@ npm run test:e2e:prod
 ```
 
 **Recovery Time Objectives:**
-- **Detection Time**: < 5 minutes (automated monitoring)
-- **Decision Time**: < 2 minutes (automated or manual)
-- **Rollback Execution**: < 3 minutes (automated deployment)
-- **Total RTO**: < 10 minutes from incident to recovery
+- **Detection Time**: < 5 minutes (manual monitoring or alerts)
+- **Decision Time**: < 2 minutes (manual assessment)
+- **Rollback Execution**: < 3 minutes (manual workflow trigger)
+- **Total RTO**: < 10 minutes from incident detection to recovery
 
 ## 🔍 Failure Analysis & Continuous Improvement
 
