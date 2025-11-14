@@ -2,6 +2,40 @@
 
 This document outlines the comprehensive security architecture of the CIA Compliance Manager, detailing how we protect our systems and data through multiple security layers.
 
+## 📊 Security Evidence & Validation
+
+This security architecture is continuously validated through automated security scanning and compliance monitoring. The following badges provide real-time evidence of our security posture:
+
+### 🏆 Supply Chain Security
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compliance-manager/badge)](https://scorecard.dev/viewer/?uri=github.com/Hack23/cia-compliance-manager)
+[![SLSA 3](https://slsa.dev/images/gh-badge-level3.svg)](https://github.com/Hack23/cia-compliance-manager/attestations)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/10365/badge)](https://bestpractices.coreinfrastructure.org/projects/10365)
+
+**OpenSSF Scorecard:** Comprehensive supply chain security assessment covering code review, dependency management, vulnerability disclosure, and security practices.
+
+**SLSA Level 3:** Software artifact provenance and integrity verification through build attestations, ensuring tamper-evident software supply chain.
+
+**CII Best Practices:** Open Source Security Foundation's best practices for secure software development and maintenance.
+
+### 📈 Code Quality & Security Analysis
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
+
+**SonarCloud Quality Gate:** Static application security testing (SAST) with comprehensive code quality analysis, detecting security vulnerabilities, code smells, and technical debt.
+
+**Security Rating:** Specific security vulnerability assessment including CWE detection, injection vulnerability analysis, and security hotspot identification.
+
+### 📜 License Compliance & Threat Analysis
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FHack23%2Fcia-compliance-manager.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FHack23%2Fcia-compliance-manager?ref=badge_shield)
+[![Threat Model](https://img.shields.io/badge/Threat_Model-Public_Documentation-blue?style=flat-square&logo=github&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/THREAT_MODEL.md)
+
+**FOSSA:** Automated license compliance scanning ensuring all dependencies meet open source license requirements and legal obligations.
+
+**Threat Model:** Comprehensive STRIDE-based threat analysis with MITRE ATT&CK mapping, attack trees, and quantitative risk assessment.
+
+---
+
 ## 📑 Table of Contents
 
 - [🔐 Security Documentation Map](#-security-documentation-map)

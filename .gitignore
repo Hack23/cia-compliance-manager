@@ -1,4 +1,6 @@
 # Logs
+docs
+docs/coverage
 logs
 *.log
 npm-debug.log*

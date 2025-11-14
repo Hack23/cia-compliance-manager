@@ -8,7 +8,7 @@
 
 > **formatSecurityLevel**(`level?`): `string`
 
-Defined in: [types/cia.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/types/cia.ts#L58)
+Defined in: [types/cia.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/types/cia.ts#L58)
 
 Format a security level string to ensure proper capitalization
 

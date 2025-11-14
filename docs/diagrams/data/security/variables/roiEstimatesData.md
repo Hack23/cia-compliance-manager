@@ -8,7 +8,7 @@
 
 > `const` **roiEstimatesData**: [`ROIEstimatesMap`](../../../types/interfaces/ROIEstimatesMap.md)
 
-Defined in: [data/security/roiEstimatesData.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/aedb85c440cd82a5c63a8b131e99fe72da8b07ec/src/data/security/roiEstimatesData.ts#L12)
+Defined in: [data/security/roiEstimatesData.ts:12](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/data/security/roiEstimatesData.ts#L12)
 
 Return on investment estimates for different security levels
 
