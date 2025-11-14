@@ -100,6 +100,22 @@ Explore in-depth technical insights and architectural analysis from our expert c
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Hack23/cia-compliance-manager)
 
+## 📊 Test Coverage & Quality
+
+**Current Metrics** (Per [Secure Development Policy §4.1](https://github.com/Hack23/ISMS/blob/main/Secure_Development_Policy.md#-unit-test-coverage--quality)):
+
+[![Coverage](https://img.shields.io/badge/Coverage-Live%20Results-success?style=flat-square&logo=vitest&logoColor=white)](https://hack23.github.io/cia-compliance-manager/docs/coverage/)
+[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-Live%20Results-success?style=flat-square&logo=vitest&logoColor=white)](https://hack23.github.io/cia-compliance-manager/docs/test-results/)
+[![Test Plan](https://img.shields.io/badge/Test%20Plan-Documentation-blue?style=flat-square&logo=markdown&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md)
+[![Code Quality](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
+
+- **Statements**: 75.06% (Target: 80%+)
+- **Branches**: 64.9% (Target: 70%+) ⚠️
+- **Functions**: 80% ✅
+- **Lines**: 75.78% (Target: 80%+)
+
+*Coverage reports are automatically generated and deployed with each release. View the [detailed coverage report](https://hack23.github.io/cia-compliance-manager/docs/coverage/) for line-by-line analysis.*
+
 ## 🔐 Commitment to Transparency and Security
 
 At Hack23 AB, we believe that true security comes through transparency and demonstrable practices. Our Information Security Management System (ISMS) is publicly available, showcasing our commitment to security excellence and organizational transparency.
