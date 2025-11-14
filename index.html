@@ -18,6 +18,31 @@
     />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Security Headers -->
+    <!-- Content Security Policy: Prevent XSS attacks -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;"
+    />
+    <!-- X-Frame-Options: Prevent clickjacking -->
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <!-- X-Content-Type-Options: Prevent MIME-type sniffing -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <!-- Cross-Origin-Opener-Policy: Spectre protection -->
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
+    <!-- Cross-Origin-Embedder-Policy: Spectre protection -->
+    <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp" />
+    <!-- Cross-Origin-Resource-Policy: Control resource loading -->
+    <meta http-equiv="Cross-Origin-Resource-Policy" content="cross-origin" />
+    <!-- Referrer-Policy: Control referrer information leakage -->
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <!-- Permissions-Policy: Disable unnecessary browser features -->
+    <meta
+      http-equiv="Permissions-Policy"
+      content="accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+    />
+    
     <title>CIA Compliance Manager</title>
   </head>
   <body>
