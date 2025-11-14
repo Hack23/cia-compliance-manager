@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.38**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.39**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **formatSecurityLevel**(`level?`): `string`
 
-Defined in: [types/cia.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/types/cia.ts#L58)
+Defined in: [types/cia.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia.ts#L58)
 
 Format a security level string to ensure proper capitalization
 

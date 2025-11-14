@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.38**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.39**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **COMPLIANCE\_STATUS**: `object`
 
-Defined in: [components/widgets/constants.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/components/widgets/constants.ts#L6)
+Defined in: [components/widgets/constants.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/components/widgets/constants.ts#L6)
 
 Constants used by widget components
 

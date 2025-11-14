@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.38**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.39**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ComplianceStatus
 
-Defined in: [types/cia-services.ts:396](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/types/cia-services.ts#L396)
+Defined in: [types/cia-services.ts:396](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L396)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/cia-services.ts:396](https://github.com/Hack23/cia-compliance
 
 > **complianceScore**: `number`
 
-Defined in: [types/cia-services.ts:402](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/types/cia-services.ts#L402)
+Defined in: [types/cia-services.ts:402](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L402)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types/cia-services.ts:402](https://github.com/Hack23/cia-compliance
 
 > **compliantFrameworks**: `string`[]
 
-Defined in: [types/cia-services.ts:398](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/types/cia-services.ts#L398)
+Defined in: [types/cia-services.ts:398](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L398)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [types/cia-services.ts:398](https://github.com/Hack23/cia-compliance
 
 > **nonCompliantFrameworks**: `string`[]
 
-Defined in: [types/cia-services.ts:400](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/types/cia-services.ts#L400)
+Defined in: [types/cia-services.ts:400](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L400)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [types/cia-services.ts:400](https://github.com/Hack23/cia-compliance
 
 > **partiallyCompliantFrameworks**: `string`[]
 
-Defined in: [types/cia-services.ts:399](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/types/cia-services.ts#L399)
+Defined in: [types/cia-services.ts:399](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L399)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [types/cia-services.ts:399](https://github.com/Hack23/cia-compliance
 
 > `optional` **remediationSteps**: `string`[]
 
-Defined in: [types/cia-services.ts:401](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/types/cia-services.ts#L401)
+Defined in: [types/cia-services.ts:401](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L401)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [types/cia-services.ts:401](https://github.com/Hack23/cia-compliance
 
 > **status**: `string`
 
-Defined in: [types/cia-services.ts:397](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/types/cia-services.ts#L397)
+Defined in: [types/cia-services.ts:397](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L397)

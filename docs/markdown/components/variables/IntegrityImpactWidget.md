@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.38**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.39**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **IntegrityImpactWidget**: `React.FC`\<[`IntegrityImpactWidgetProps`](../widgets/impactanalysis/IntegrityImpactWidget/interfaces/IntegrityImpactWidgetProps.md)\>
 
-Defined in: [components/widgets/impactanalysis/IntegrityImpactWidget.tsx:37](https://github.com/Hack23/cia-compliance-manager/blob/1bdf265bbf5387ac7eac8636cc4b7cdd43a7664b/src/components/widgets/impactanalysis/IntegrityImpactWidget.tsx#L37)
+Defined in: [components/widgets/impactanalysis/IntegrityImpactWidget.tsx:37](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/components/widgets/impactanalysis/IntegrityImpactWidget.tsx#L37)
 
 Widget that displays the impact of selected integrity level
 
