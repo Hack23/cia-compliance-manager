@@ -36,11 +36,11 @@ CIA Compliance Manager implements comprehensive security headers to protect agai
 #### Content-Security-Policy (CSP)
 Restricts content sources to prevent XSS attacks:
 - **default-src 'self'**: Only load resources from same origin by default
-- **script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net**: Allow scripts from same origin, inline scripts (required for Vite), and CDN
-- **style-src 'self' 'unsafe-inline'**: Allow styles from same origin and inline styles (required for TailwindCSS)
+- **script-src 'self' 'unsafe-inline'**: Allow scripts from same origin and inline scripts (required for Vite)
+- **style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com**: Allow styles from same origin, inline styles (required for TailwindCSS), and Google Fonts stylesheets
 - **img-src 'self' data: https:**: Allow images from same origin, data URIs, and HTTPS sources
 - **connect-src 'self'**: Only allow network requests to same origin
-- **font-src 'self' data:**: Allow fonts from same origin and data URIs
+- **font-src 'self' data: https://fonts.gstatic.com**: Allow fonts from same origin, data URIs, and Google Fonts (required for Orbitron and Share Tech Mono)
 - **object-src 'none'**: Block all plugins (Flash, Java, etc.)
 - **base-uri 'self'**: Restrict base tag URLs to same origin
 - **form-action 'self'**: Only allow form submissions to same origin
