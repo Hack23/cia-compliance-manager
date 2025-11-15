@@ -79,7 +79,7 @@ export default defineConfig({
       coverage: {
         provider: "v8",
         reporter: ["text", "json", "html", "lcov"],
-        reportsDirectory: "./docs/coverage",
+        reportsDirectory: "./build/coverage",
         exclude: [
           "node_modules/**/*",
           "**/node_modules/**/*",
@@ -126,7 +126,7 @@ export default defineConfig({
         "html",
       ],
       outputFile: {
-        html: "./docs/test-results/index.html",
+        html: "./build/test-results/index.html",
       },
       // Configure types to ensure testing library matchers are recognized
       typecheck: {

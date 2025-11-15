@@ -133,6 +133,11 @@ docs/cypress/downloads
 # Production build files
 /dist
 /build
+
+# Test results and reports (only in build directory, not in docs for releases)
+build/coverage/
+build/cypress/
+build/test-results/
 /out
 
 # TypeScript
