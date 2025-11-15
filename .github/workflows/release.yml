@@ -121,6 +121,19 @@ jobs:
           mkdir -p docs/coverage docs/dependencies
           echo "Coverage directory prepared at $(date)" > docs/coverage/build-info.txt
 
+      # Generate documentation bundle
+      - name: Generate Documentation
+        id: generate-docs
+        run: |
+          npm run docs:bundle || (echo "::error::Documentation generation failed" && exit 1)
+          echo "Documentation generation completed at $(date)" > docs/docs-build-info.txt
+
+      - name: Merge e2e test report
+        run: npm run test:e2ereportmerge
+
+      - name: Generate e2e html report
+        run: npm run test:e2ereporthtmlall
+
       # Copy test results from build to docs for release
       - name: Copy test results to docs
         run: |
@@ -141,19 +154,6 @@ jobs:
             cp -r build/test-results/* docs/test-results/ || echo "No test-results files to copy"
           fi
           echo "Test results copied at $(date)" > docs/test-results-info.txt
-
-      # Generate documentation bundle
-      - name: Generate Documentation
-        id: generate-docs
-        run: |
-          npm run docs:bundle || (echo "::error::Documentation generation failed" && exit 1)
-          echo "Documentation generation completed at $(date)" > docs/docs-build-info.txt
-
-      - name: Merge e2e test report
-        run: npm run test:e2ereportmerge
-
-      - name: Generate e2e html report
-        run: npm run test:e2ereporthtmlall
 
       # Always deploy documentation in prepare phase
       - name: Deploy Documentation to GitHub Pages
