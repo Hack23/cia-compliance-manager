@@ -920,7 +920,7 @@ export const toStatusType = (
 export function hasMethod<T extends object, K extends PropertyKey>(
   obj: T | null | undefined,
   methodName: K
-): obj is T & Record<K, Function> {
+): obj is T & Record<K, (...args: any[]) => any> {
   return (
     obj !== null &&
     obj !== undefined &&

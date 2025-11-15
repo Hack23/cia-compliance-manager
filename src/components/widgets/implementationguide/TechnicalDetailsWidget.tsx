@@ -144,12 +144,14 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
     defaultValue: string
   ): string => {
     if (
-      details &&
+      details !== null &&
       typeof details === "object" &&
-      propertyName in details &&
-      typeof (details as Record<string, unknown>)[propertyName] === "string"
+      Object.prototype.hasOwnProperty.call(details, propertyName)
     ) {
-      return (details as Record<string, unknown>)[propertyName] as string;
+      const value = (details as { [key: string]: unknown })[propertyName];
+      if (typeof value === "string") {
+        return value;
+      }
     }
     return defaultValue;
   };
