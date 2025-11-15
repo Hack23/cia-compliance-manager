@@ -1,4 +1,23 @@
-# 🔍 CIA Compliance Manager - End-to-End Test Plan
+<p align="center">
+  <img src="https://hack23.github.io/cia-compliance-manager/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+</p>
+
+<h1 align="center">🧪 Hack23 AB — End-to-End Test Plan</h1>
+
+<p align="center">
+  <strong>🔍 Comprehensive E2E Testing for CIA Compliance Manager</strong><br>
+  <em>🎯 Ensuring Quality, Security, and Reliability Through Automated Testing</em>
+</p>
+
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/badge/Owner-Security%20Team-0A66C2?style=for-the-badge" alt="Owner"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Version-2.0-555?style=for-the-badge" alt="Version"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Effective-2025--01--14-success?style=for-the-badge" alt="Effective Date"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Review-Monthly-orange?style=for-the-badge" alt="Review Cycle"/></a>
+</p>
+
+**📋 Document Owner:** Security Team & QA Team | **📄 Version:** 2.0 | **📅 Last Updated:** 2025-01-14 (UTC)  
+**🔄 Review Cycle:** Monthly | **⏰ Next Review:** 2025-02-14
 
 **🔐 ISMS Alignment:** This E2E test plan implements [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) Section 4.2 - End-to-End Testing Strategy.
 
@@ -869,14 +888,14 @@ export default defineConfig({
   reporterOptions: {
     reporterEnabled: "spec, cypress-junit-reporter, mochawesome",
     mochaJunitReporterReporterOptions: {
-      mochaFile: "docs/cypress/junit/results-[hash].xml",
+      mochaFile: "build/cypress/junit/results-[hash].xml",
       toConsole: false,
       attachments: true,
       testCaseSwitchClassnameAndName: false,
       includePending: true,
     },
     mochawesomeReporterOptions: {
-      reportDir: "docs/cypress/mochawesome",
+      reportDir: "build/cypress/mochawesome",
       overwrite: false,
       html: true,
       json: true,
@@ -937,11 +956,11 @@ export default defineConfig({
 When tests fail, Cypress automatically captures:
 
 1. **📸 Screenshots**: Captured on failure for visual debugging
-   - Location: `docs/cypress/screenshots/`
+   - Location: `build/cypress/screenshots/`
    - Embedded in Mochawesome reports
 
 2. **🎥 Videos**: Full test execution videos (when enabled)
-   - Location: `docs/cypress/videos/`
+   - Location: `build/cypress/videos/`
    - Configurable via `CYPRESS_VIDEO=true` environment variable
 
 3. **📋 Console Logs**: Application console output
@@ -949,7 +968,7 @@ When tests fail, Cypress automatically captures:
    - Monitored for undefined values and errors
 
 4. **🗂️ Test Artifacts**: JUnit XML reports
-   - Location: `docs/cypress/junit/`
+   - Location: `build/cypress/junit/`
    - CI/CD integration for automated analysis
 
 #### Debugging Procedures
@@ -957,7 +976,7 @@ When tests fail, Cypress automatically captures:
 **Step 1: Review Mochawesome Report**
 ```bash
 # Open latest HTML report
-open docs/cypress/mochawesome/index.html
+open build/cypress/mochawesome/index.html
 ```
 
 **Step 2: Reproduce Locally**
@@ -1034,7 +1053,7 @@ test-e2e:
       uses: actions/upload-artifact@v5
       with:
         name: cypress-reports
-        path: docs/cypress/
+        path: build/cypress/
 ```
 
 ## 🚀 Test Execution Procedures
@@ -1075,7 +1094,7 @@ npm run test:e2ereportmerge
 npm run test:e2ereporthtmlall
 
 # View the generated report
-open docs/cypress/mochawesome/index.html
+open build/cypress/mochawesome/index.html
 ```
 
 ### CI/CD Execution
@@ -1205,13 +1224,13 @@ npx cypress run --config video=true
 #### Analyze Test Artifacts
 ```bash
 # View screenshots of failures
-ls -la docs/cypress/screenshots/
+ls -la build/cypress/screenshots/
 
 # View test videos
-ls -la docs/cypress/videos/
+ls -la build/cypress/videos/
 
 # View Mochawesome JSON for detailed analysis
-cat docs/cypress/mochawesome/*.json | jq '.results[].suites[].tests[] | select(.pass == false)'
+cat build/cypress/mochawesome/*.json | jq '.results[].suites[].tests[] | select(.pass == false)'
 ```
 
 ### Test Data Management
@@ -1248,40 +1267,25 @@ npm run clean:test-data
 
 ## 📋 Document Control
 
-**Document Information:**
-- **Title:** End-to-End Test Plan
-- **Version:** 2.0
-- **Status:** Active
-- **Classification:** Public
+**📋 Document Control:**  
+**✅ Approved by:** Development Team Lead  
+**📤 Distribution:** Development Team, QA Team, Security Team, DevOps Team, Public (via GitHub)  
+**🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-green?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
+**📅 Effective Date:** 2025-01-14  
+**⏰ Next Review:** 2025-02-14  
+**🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)
 
-**Ownership & Approval:**
-- **Document Owner:** Security Team & QA Team
-- **Approved By:** Development Team Lead
-- **Approval Date:** 2025-01-14
-- **Effective Date:** 2025-01-14
-
-**Distribution:**
-- Development Team
-- QA Team
-- Security Team
-- DevOps Team
-- Public (via GitHub)
-
-**Review & Maintenance:**
-- **Review Cycle:** Monthly
-- **Next Scheduled Review:** 2025-02-14
-- **Document Location:** `docs/E2ETestPlan.md`
-- **Related Documents:**
-  - [Unit Test Plan](./UnitTestPlan.md)
-  - [ISMS Implementation Guide](../ISMS_IMPLEMENTATION_GUIDE.md)
-  - [Cypress Troubleshooting Guide](./CYPRESS-TROUBLESHOOTING.md)
-  - [Security Architecture](./architecture/SECURITY_ARCHITECTURE.md)
+**Related Documents:**
+- [Unit Test Plan](./UnitTestPlan.md)
+- [ISMS Implementation Guide](../ISMS_IMPLEMENTATION_GUIDE.md)
+- [Cypress Troubleshooting Guide](./CYPRESS-TROUBLESHOOTING.md)
+- [Security Architecture](./architecture/SECURITY_ARCHITECTURE.md)
 
 **Change History:**
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
-| 2.0 | 2025-01-14 | GitHub Copilot | Comprehensive update: Added all 15 test specs, Mermaid architecture diagram, actual test patterns, execution procedures, debugging guide |
+| 2.0 | 2025-01-14 | GitHub Copilot | Comprehensive update: Added all 15 test specs, Mermaid architecture diagram, actual test patterns, execution procedures, debugging guide. Updated to ISMS Style Guide format. |
 | 1.0 | 2025-01-10 | Development Team | Initial E2E test plan with generic examples |
 
 **Compliance Mapping:**
