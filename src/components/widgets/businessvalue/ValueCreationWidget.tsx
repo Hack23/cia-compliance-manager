@@ -4,7 +4,7 @@ import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { calculateROIEstimate } from "../../../utils/businessValueUtils";
 import { calculateBusinessImpactLevel } from "../../../utils/riskUtils";
-import { isNullish } from "../../../utils/typeGuards";
+import { hasMethod, isNullish } from "../../../utils/typeGuards";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
 
@@ -120,11 +120,8 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
     try {
       if (!isNullish(ciaContentService)) {
         // Check if the service has getBusinessValueMetrics method
-        if (
-          typeof (ciaContentService as any).getBusinessValueMetrics ===
-          "function"
-        ) {
-          const metrics = (ciaContentService as any).getBusinessValueMetrics(
+        if (hasMethod(ciaContentService, "getBusinessValueMetrics")) {
+          const metrics = ciaContentService.getBusinessValueMetrics(
             availabilityLevel,
             integrityLevel,
             confidentialityLevel
@@ -168,13 +165,9 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
     try {
       if (!isNullish(ciaContentService)) {
         // Check if the service has getComponentValueStatements method
-        if (
-          typeof (ciaContentService as any).getComponentValueStatements ===
-          "function"
-        ) {
-          const statements = (
-            ciaContentService as any
-          ).getComponentValueStatements(component, level);
+        if (hasMethod(ciaContentService, "getComponentValueStatements")) {
+          const statements =
+            ciaContentService.getComponentValueStatements(component, level);
 
           if (Array.isArray(statements) && statements.length > 0) {
             return statements;
@@ -259,24 +252,6 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   // Get ROI estimates based on security levels
   const getROIEstimate = (): { value: string; description: string } => {
     try {
-      if (!isNullish(ciaContentService)) {
-        // Check if the service has getROIEstimate method
-        if (typeof (ciaContentService as any).getROIEstimate === "function") {
-          const roi = (ciaContentService as any).getROIEstimate(
-            availabilityLevel,
-            integrityLevel,
-            confidentialityLevel
-          );
-
-          if (!isNullish(roi)) {
-            return {
-              value: roi.value ?? "Unable to calculate", // Ensure value is a string
-              description: roi.description || "ROI estimation",
-            };
-          }
-        }
-      }
-
       // Use the centralized utility function for consistent ROI calculation
       const roiEstimate = calculateROIEstimate(
         availabilityLevel,
@@ -302,11 +277,8 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
     try {
       if (!isNullish(ciaContentService)) {
         // Check if the service has getBusinessValueSummary method
-        if (
-          typeof (ciaContentService as any).getBusinessValueSummary ===
-          "function"
-        ) {
-          const summary = (ciaContentService as any).getBusinessValueSummary(
+        if (hasMethod(ciaContentService, "getBusinessValueSummary")) {
+          const summary = ciaContentService.getBusinessValueSummary(
             availabilityLevel,
             integrityLevel,
             confidentialityLevel

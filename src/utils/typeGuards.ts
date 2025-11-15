@@ -910,3 +910,22 @@ export const toStatusType = (
   if (isStatusType(value)) return value;
   return fallback;
 };
+
+/**
+ * Type guard to check if an object has a specific method
+ * @param obj The object to check
+ * @param methodName The method name to check for
+ * @returns True if the object has the method as a function
+ */
+export function hasMethod<T extends object, K extends PropertyKey>(
+  obj: T | null | undefined,
+  methodName: K
+): obj is T & Record<K, (...args: any[]) => any> {
+  return (
+    obj !== null &&
+    obj !== undefined &&
+    typeof obj === "object" &&
+    methodName in obj &&
+    typeof (obj as Record<PropertyKey, unknown>)[methodName] === "function"
+  );
+}

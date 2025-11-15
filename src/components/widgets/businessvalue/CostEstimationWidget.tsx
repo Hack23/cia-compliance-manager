@@ -109,14 +109,14 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
       const details = ciaContentService.getComponentDetails(component, level);
 
       // Since expertiseRequired is not in CIADetails type, we need to handle it differently
-      // Use a type assertion with a runtime check for safety
-      if (!isNullish(details)) {
-        const anyDetails = details as any;
-        if (isArray(anyDetails.expertiseRequired)) {
-          return anyDetails.expertiseRequired;
+      // Use runtime checks for safety without type assertions
+      if (!isNullish(details) && typeof details === "object" && "expertiseRequired" in details) {
+        const expertise = (details as { expertiseRequired?: unknown }).expertiseRequired;
+        if (isArray(expertise) && expertise.every(item => isString(item))) {
+          return expertise as string[];
         }
-        if (isString(anyDetails.expertiseRequired)) {
-          return [anyDetails.expertiseRequired];
+        if (isString(expertise)) {
+          return [expertise];
         }
       }
 
