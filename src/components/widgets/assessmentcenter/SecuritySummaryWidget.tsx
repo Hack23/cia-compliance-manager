@@ -14,7 +14,7 @@ import {
   getSecurityLevelDescription,
   getSecurityLevelValue,
 } from "../../../utils/securityLevelUtils";
-import { isNullish } from "../../../utils/typeGuards";
+import { isNullish, hasMethod } from "../../../utils/typeGuards";
 import RadarChart from "../../charts/RadarChart";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import StatusBadge from "../../common/StatusBadge";
@@ -64,14 +64,6 @@ type SecuritySummaryTab =
   | "implementation"
   | "compliance";
 
-// Interface for business impact content
-interface BusinessValueContent {
-  description?: string;
-  riskLevel?: string;
-  value?: string;
-  [key: string]: any;
-}
-
 // Interface for compliance status
 interface ComplianceStatusType {
   status?: string;
@@ -80,17 +72,6 @@ interface ComplianceStatusType {
   partiallyCompliantFrameworks: string[];
   nonCompliantFrameworks?: string[];
   remediationSteps?: string[];
-  [key: string]: any;
-}
-
-// Interface for implementation details
-interface ImplementationDetails {
-  complexity: string;
-  timeToImplement: string;
-  resources: string;
-  personnelNeeds: string;
-  technologies?: string[];
-  [key: string]: any;
 }
 
 /**
@@ -175,13 +156,9 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
   const securityClassification = useMemo(() => {
     if (!isNullish(ciaContentService)) {
       try {
-        if (
-          typeof (ciaContentService as any).getSecurityClassification ===
-          "function"
-        ) {
-          const classification = (
-            ciaContentService as any
-          ).getSecurityClassification(overallSecurityLevel);
+        if (hasMethod(ciaContentService, "getSecurityClassification")) {
+          const classification =
+            ciaContentService.getSecurityClassification(overallSecurityLevel);
           if (!isNullish(classification)) return classification;
         }
       } catch (err) {
@@ -242,13 +219,10 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
   const implementationComplexity = useMemo(() => {
     if (
       !isNullish(ciaContentService) &&
-      typeof (ciaContentService as any).getImplementationComplexity ===
-        "function"
+      hasMethod(ciaContentService, "getImplementationComplexity")
     ) {
       try {
-        const complexity = (
-          ciaContentService as any
-        ).getImplementationComplexity(
+        const complexity = ciaContentService.getImplementationComplexity(
           availabilityLevel,
           integrityLevel,
           confidentialityLevel
@@ -345,9 +319,9 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     try {
       if (
         !isNullish(ciaContentService) &&
-        typeof (ciaContentService as any).getImplementationTime === "function"
+        hasMethod(ciaContentService, "getTotalImplementationTime")
       ) {
-        const time = (ciaContentService as any).getImplementationTime(
+        const time = ciaContentService.getTotalImplementationTime(
           availabilityLevel,
           integrityLevel,
           confidentialityLevel
@@ -370,9 +344,9 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     try {
       if (
         !isNullish(ciaContentService) &&
-        typeof (ciaContentService as any).getRequiredResources === "function"
+        hasMethod(ciaContentService, "getRequiredExpertise")
       ) {
-        const resources = (ciaContentService as any).getRequiredResources(
+        const resources = ciaContentService.getRequiredExpertise(
           availabilityLevel,
           integrityLevel,
           confidentialityLevel

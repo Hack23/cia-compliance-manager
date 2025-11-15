@@ -4,7 +4,7 @@ import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { getImplementationComplexity } from "../../../utils/riskUtils";
 import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
-import { isNullish } from "../../../utils/typeGuards";
+import { hasMethod, isNullish } from "../../../utils/typeGuards";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 
@@ -137,6 +137,23 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
     }
   }, [ciaContentService, availabilityLevel]);
 
+  // Helper to safely access optional properties from details objects
+  const getOptionalProperty = (
+    details: unknown,
+    propertyName: string,
+    defaultValue: string
+  ): string => {
+    if (
+      details &&
+      typeof details === "object" &&
+      propertyName in details &&
+      typeof (details as Record<string, unknown>)[propertyName] === "string"
+    ) {
+      return (details as Record<string, unknown>)[propertyName] as string;
+    }
+    return defaultValue;
+  };
+
   // Get technical requirements for a specific component and level
   const getTechnicalRequirements = (
     component: string,
@@ -147,11 +164,14 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         return getDefaultRequirements(component, level);
       }
 
-      const requirements = (
-        ciaContentService as any
-      ).getTechnicalRequirements?.(component, level);
-      if (Array.isArray(requirements) && requirements.length > 0) {
-        return requirements;
+      if (hasMethod(ciaContentService, "getTechnicalRequirements")) {
+        const requirements = ciaContentService.getTechnicalRequirements(
+          component,
+          level
+        );
+        if (Array.isArray(requirements) && requirements.length > 0) {
+          return requirements;
+        }
       }
 
       return getDefaultRequirements(component, level);
@@ -169,9 +189,9 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
     try {
       if (
         !isNullish(ciaContentService) &&
-        typeof (ciaContentService as any).getExpertiseRequired === "function"
+        hasMethod(ciaContentService, "getExpertiseRequired")
       ) {
-        const expertise = (ciaContentService as any).getExpertiseRequired(
+        const expertise = ciaContentService.getExpertiseRequired(
           component,
           level
         );
@@ -405,11 +425,14 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                   <span className="mr-2 text-purple-500">💻</span>Technologies
                 </h4>
                 <p className="text-sm text-purple-600 dark:text-purple-400">
-                  {(confidentialityDetails as any)?.technologies ||
+                  {getOptionalProperty(
+                    confidentialityDetails,
+                    "technologies",
                     getDefaultTechnologies(
                       "confidentiality",
                       confidentialityLevel
-                    )}
+                    )
+                  )}
                 </p>
               </div>
 
@@ -419,11 +442,14 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                   <span className="mr-2 text-purple-500">⚙️</span>Configurations
                 </h4>
                 <p className="text-sm text-purple-600 dark:text-purple-400">
-                  {(confidentialityDetails as any)?.configurations ||
+                  {getOptionalProperty(
+                    confidentialityDetails,
+                    "configurations",
                     getDefaultConfigurations(
                       "confidentiality",
                       confidentialityLevel
-                    )}
+                    )
+                  )}
                 </p>
               </div>
             </div>
@@ -558,8 +584,11 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                   <span className="mr-2 text-green-500">💻</span>Technologies
                 </h4>
                 <p className="text-sm text-green-600 dark:text-green-400">
-                  {(integrityDetails as any)?.technologies ||
-                    getDefaultTechnologies("integrity", integrityLevel)}
+                  {getOptionalProperty(
+                    integrityDetails,
+                    "technologies",
+                    getDefaultTechnologies("integrity", integrityLevel)
+                  )}
                 </p>
               </div>
 
@@ -569,8 +598,11 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                   <span className="mr-2 text-green-500">⚙️</span>Configurations
                 </h4>
                 <p className="text-sm text-green-600 dark:text-green-400">
-                  {(integrityDetails as any)?.configurations ||
-                    getDefaultConfigurations("integrity", integrityLevel)}
+                  {getOptionalProperty(
+                    integrityDetails,
+                    "configurations",
+                    getDefaultConfigurations("integrity", integrityLevel)
+                  )}
                 </p>
               </div>
             </div>
@@ -708,8 +740,11 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                   <span className="mr-2 text-blue-500">💻</span>Technologies
                 </h4>
                 <p className="text-sm text-blue-600 dark:text-blue-400">
-                  {(availabilityDetails as any)?.technologies ||
-                    getDefaultTechnologies("availability", availabilityLevel)}
+                  {getOptionalProperty(
+                    availabilityDetails,
+                    "technologies",
+                    getDefaultTechnologies("availability", availabilityLevel)
+                  )}
                 </p>
               </div>
 
@@ -719,8 +754,11 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                   <span className="mr-2 text-blue-500">⚙️</span>Configurations
                 </h4>
                 <p className="text-sm text-blue-600 dark:text-blue-400">
-                  {(availabilityDetails as any)?.configurations ||
-                    getDefaultConfigurations("availability", availabilityLevel)}
+                  {getOptionalProperty(
+                    availabilityDetails,
+                    "configurations",
+                    getDefaultConfigurations("availability", availabilityLevel)
+                  )}
                 </p>
               </div>
             </div>
@@ -795,7 +833,11 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
 function getDefaultTechnicalDetails(
   component: string,
   level: SecurityLevel
-): any {
+): {
+  description: string;
+  technical: string;
+  recommendations: string[];
+} {
   return {
     description: getDefaultDescription(component, level),
     technical: getDefaultTechDescription(component, level),
