@@ -121,6 +121,27 @@ jobs:
           mkdir -p docs/coverage docs/dependencies
           echo "Coverage directory prepared at $(date)" > docs/coverage/build-info.txt
 
+      # Copy test results from build to docs for release
+      - name: Copy test results to docs
+        run: |
+          echo "Copying test results from build/ to docs/ for GitHub Pages deployment..."
+          # Copy coverage reports
+          if [ -d "build/coverage" ]; then
+            mkdir -p docs/coverage
+            cp -r build/coverage/* docs/coverage/ || echo "No coverage files to copy"
+          fi
+          # Copy cypress reports
+          if [ -d "build/cypress" ]; then
+            mkdir -p docs/cypress
+            cp -r build/cypress/* docs/cypress/ || echo "No cypress files to copy"
+          fi
+          # Copy test results
+          if [ -d "build/test-results" ]; then
+            mkdir -p docs/test-results
+            cp -r build/test-results/* docs/test-results/ || echo "No test-results files to copy"
+          fi
+          echo "Test results copied at $(date)" > docs/test-results-info.txt
+
       # Generate documentation bundle
       - name: Generate Documentation
         id: generate-docs

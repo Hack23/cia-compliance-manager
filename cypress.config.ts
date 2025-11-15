@@ -7,7 +7,7 @@ import { resolve } from "path";
 const __dirname = resolve(process.cwd());
 
 // Centralize report directories
-const REPORTS_BASE_DIR = "docs/cypress";
+const REPORTS_BASE_DIR = "build/cypress";
 const REPORTS = {
   junit: `${REPORTS_BASE_DIR}/junit`,
   mochawesome: `${REPORTS_BASE_DIR}/mochawesome`,
@@ -29,7 +29,7 @@ export default defineConfig({
   reporterOptions: {
     reporterEnabled: "spec, cypress-junit-reporter, mochawesome",
     mochaJunitReporterReporterOptions: {
-      mochaFile: "docs/cypress/junit/results-[hash].xml",
+      mochaFile: "build/cypress/junit/results-[hash].xml",
       toConsole: false,
       attachments: true,
       testCaseSwitchClassnameAndName: false,

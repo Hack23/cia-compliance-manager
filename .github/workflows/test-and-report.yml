@@ -125,14 +125,14 @@ jobs:
       - name: Run unit tests with coverage
         run: xvfb-run --auto-servernum npm run test:ci
         env:
-          JEST_JUNIT_OUTPUT_DIR: "docs/coverage"
+          JEST_JUNIT_OUTPUT_DIR: "build/coverage"
           JEST_JUNIT_OUTPUT_NAME: "junit.xml"
 
       - name: Upload coverage report
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: coverage-report
-          path: docs/coverage
+          path: build/coverage
           if-no-files-found: error
 
   e2e-tests:
