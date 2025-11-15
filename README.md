@@ -107,6 +107,8 @@ Explore in-depth technical insights and architectural analysis from our expert c
 [![Coverage](https://img.shields.io/badge/Coverage-Live%20Results-success?style=flat-square&logo=vitest&logoColor=white)](https://hack23.github.io/cia-compliance-manager/docs/coverage/)
 [![Unit Tests](https://img.shields.io/badge/Unit%20Tests-Live%20Results-success?style=flat-square&logo=vitest&logoColor=white)](https://hack23.github.io/cia-compliance-manager/docs/test-results/)
 [![Test Plan](https://img.shields.io/badge/Test%20Plan-Documentation-blue?style=flat-square&logo=markdown&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md)
+[![E2E Tests](https://img.shields.io/badge/E2E%20Tests-Cypress-success?style=flat-square&logo=cypress&logoColor=white)](https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/)
+[![E2E Plan](https://img.shields.io/badge/E2E%20Plan-Documentation-blue?style=flat-square&logo=markdown&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md)
 [![Code Quality](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
 
 - **Statements**: 75.06% (Target: 80%+)
