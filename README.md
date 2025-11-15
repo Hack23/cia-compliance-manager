@@ -116,6 +116,21 @@ Explore in-depth technical insights and architectural analysis from our expert c
 
 *Coverage reports are automatically generated and deployed with each release. View the [detailed coverage report](https://hack23.github.io/cia-compliance-manager/docs/coverage/) for line-by-line analysis.*
 
+## ⚡ Performance & Optimization
+
+**Performance Metrics** (Per [Secure Development Policy §8](https://github.com/Hack23/ISMS/blob/main/Secure_Development_Policy.md#-performance-testing--monitoring-framework)):
+
+[![Performance Testing](https://img.shields.io/badge/Performance-Documentation-success?style=flat-square&logo=lighthouse&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md)
+[![Bundle Size](https://img.shields.io/badge/Bundle%20Size-~201KB%20(gzip)-success?style=flat-square&logo=webpack&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md#-current-bundle-size-analysis)
+[![Lighthouse](https://img.shields.io/badge/Lighthouse-Run%20Audit-blue?style=flat-square&logo=lighthouse&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/lighthouse-performance.yml)
+
+- **Total Bundle**: ~201 KB (gzip) ✅ (Target: <500 KB)
+- **JavaScript**: ~188 KB (gzip) ⚠️ (Target: <180 KB - optimization recommended)
+- **Stylesheets**: ~13 KB (gzip) ✅ (Target: <50 KB)
+- **Load Time Target**: <2 seconds (GitHub Pages deployment)
+
+*Comprehensive performance benchmarks, testing procedures, and optimization strategies are documented in [performance-testing.md](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md).*
+
 ## 🔐 Commitment to Transparency and Security
 
 At Hack23 AB, we believe that true security comes through transparency and demonstrable practices. Our Information Security Management System (ISMS) is publicly available, showcasing our commitment to security excellence and organizational transparency.
