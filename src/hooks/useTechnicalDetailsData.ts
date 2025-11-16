@@ -46,7 +46,7 @@ export function useTechnicalDetailsData(
         return getDefaultTechnicalDetails("confidentiality", confidentialityLevel);
       }
 
-      const details = ciaContentService.getComponentDetails?.(
+      const details = (ciaContentService as any).getComponentDetails?.(
         "confidentiality",
         confidentialityLevel
       );
@@ -66,7 +66,7 @@ export function useTechnicalDetailsData(
         return getDefaultTechnicalDetails("integrity", integrityLevel);
       }
 
-      const details = ciaContentService.getComponentDetails?.(
+      const details = (ciaContentService as any).getComponentDetails?.(
         "integrity",
         integrityLevel
       );
@@ -86,7 +86,7 @@ export function useTechnicalDetailsData(
         return getDefaultTechnicalDetails("availability", availabilityLevel);
       }
 
-      const details = ciaContentService.getComponentDetails?.(
+      const details = (ciaContentService as any).getComponentDetails?.(
         "availability",
         availabilityLevel
       );
@@ -98,6 +98,8 @@ export function useTechnicalDetailsData(
       return getDefaultTechnicalDetails("availability", availabilityLevel);
     }
   }, [ciaContentService, availabilityLevel]);
+
+  // Get availability technical details
 
   // Calculate component complexities using riskUtils
   const confidentialityComplexity = useMemo(() => {
@@ -163,7 +165,7 @@ export function useTechnicalDetailsData(
   ): string[] => {
     try {
       if (!isNullish(ciaContentService)) {
-        const requirements = ciaContentService.getTechnicalRequirements?.(
+        const requirements = (ciaContentService as any).getTechnicalRequirements?.(
           component,
           level
         );
@@ -219,7 +221,7 @@ export function useTechnicalDetailsData(
   ): string[] => {
     try {
       if (!isNullish(ciaContentService)) {
-        const expertise = ciaContentService.getRequiredExpertise?.(
+        const expertise = (ciaContentService as any).getRequiredExpertise?.(
           component,
           level
         );

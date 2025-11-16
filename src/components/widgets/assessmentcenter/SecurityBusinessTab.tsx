@@ -1,4 +1,5 @@
 import React from "react";
+import { formatCurrency } from "../../../utils/formatUtils";
 
 /**
  * Props for SecurityBusinessTab component
@@ -8,9 +9,9 @@ export interface SecurityBusinessTabProps {
   businessMaturityDescription: string;
   securityScore: number;
   costDetails: {
-    totalCapex: string;
-    totalOpex: string;
-    totalCost: string;
+    totalCapex: number;
+    totalOpex: number;
+    totalCost: number;
   };
   testId: string;
   roiEstimate: string;
@@ -91,7 +92,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
           <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-sm font-medium mb-1">Implementation Cost</div>
             <div className="text-xl font-bold text-blue-600 dark:text-blue-400">
-              {costDetails.totalCapex}
+              {formatCurrency(costDetails.totalCapex)}
             </div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               One-time investment
@@ -102,7 +103,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
           <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-sm font-medium mb-1">Operational Cost</div>
             <div className="text-xl font-bold text-green-600 dark:text-green-400">
-              {costDetails.totalOpex}
+              {formatCurrency(costDetails.totalOpex)}
             </div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Annual expense
@@ -115,7 +116,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
               Total First-Year Cost
             </div>
             <div className="text-xl font-bold text-purple-600 dark:text-purple-400">
-              {costDetails.totalCost}
+              {formatCurrency(costDetails.totalCost)}
             </div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Combined implementation and operational costs

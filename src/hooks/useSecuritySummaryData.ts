@@ -104,11 +104,12 @@ export function useSecuritySummaryData(
   const dataClassification = useMemo(() => {
     if (
       !isNullish(ciaContentService) &&
-      typeof ciaContentService.getInformationSensitivity === "function"
+      hasMethod(ciaContentService, "getInformationSensitivity")
     ) {
       try {
-        const sensitivity =
-          ciaContentService.getInformationSensitivity(confidentialityLevel);
+        const sensitivity = (ciaContentService as any).getInformationSensitivity(
+          confidentialityLevel
+        );
         if (!isNullish(sensitivity)) return sensitivity;
       } catch (err) {
         console.error("Error fetching information sensitivity:", err);
@@ -182,7 +183,7 @@ export function useSecuritySummaryData(
     try {
       if (isNullish(complianceService)) return null;
 
-      const status = complianceService.getComplianceStatus?.(
+      const status = (complianceService as any).getComplianceStatus?.(
         availabilityLevel,
         integrityLevel,
         confidentialityLevel
