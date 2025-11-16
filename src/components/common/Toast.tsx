@@ -1,56 +1,6 @@
 import React from 'react';
+import type { Toast as ToastData, ToastType, ToastProps, ToastContainerProps } from '../../types/componentPropExports';
 import { COMMON_COMPONENT_TEST_IDS } from '../../constants/testIds';
-
-/**
- * Toast notification types
- */
-export type ToastType = 'success' | 'error' | 'warning' | 'info';
-
-/**
- * Toast notification interface
- */
-export interface Toast {
-  /**
-   * Unique identifier for the toast
-   */
-  id: number;
-  
-  /**
-   * Toast type
-   */
-  type: ToastType;
-  
-  /**
-   * Toast message
-   */
-  message: string;
-  
-  /**
-   * Duration in milliseconds before auto-dismiss
-   * @default 3000
-   */
-  duration?: number;
-}
-
-/**
- * Props for Toast component
- */
-export interface ToastProps {
-  /**
-   * Toast configuration
-   */
-  toast: Toast;
-  
-  /**
-   * Callback when toast is dismissed
-   */
-  onDismiss: (id: number) => void;
-  
-  /**
-   * Optional test ID
-   */
-  testId?: string;
-}
 
 /**
  * Toast notification component
@@ -127,32 +77,6 @@ export const Toast: React.FC<ToastProps> = ({
 };
 
 /**
- * Props for ToastContainer component
- */
-export interface ToastContainerProps {
-  /**
-   * Array of toast notifications
-   */
-  toasts: Toast[];
-  
-  /**
-   * Callback when a toast is dismissed
-   */
-  onDismiss: (id: number) => void;
-  
-  /**
-   * Position of the toast container
-   * @default 'top-right'
-   */
-  position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center';
-  
-  /**
-   * Optional test ID
-   */
-  testId?: string;
-}
-
-/**
  * Toast container component
  * 
  * Manages the display of multiple toast notifications
@@ -191,5 +115,8 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
     </div>
   );
 };
+
+// Re-export types for backward compatibility with tests and other modules
+export type { ToastData, ToastType, ToastProps, ToastContainerProps };
 
 export default ToastContainer;

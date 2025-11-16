@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
-import type { Toast, ToastType } from '../components/common/Toast';
+import type { Toast, ToastType } from '../types/componentPropExports';
 
 /**
  * Configuration for creating a toast

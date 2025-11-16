@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Toast, ToastContainer } from './Toast';
-import type { Toast as ToastType } from './Toast';
+import type { ToastData } from './Toast';
 
 describe('Toast', () => {
   const mockOnDismiss = vi.fn();
   
-  const defaultToast: ToastType = {
+  const defaultToast: ToastData = {
     id: 1,
     type: 'info',
     message: 'Test message'
@@ -19,7 +19,7 @@ describe('Toast', () => {
   });
 
   it('renders success toast with correct styling', () => {
-    const successToast: ToastType = { ...defaultToast, type: 'success' };
+    const successToast: ToastData = { ...defaultToast, type: 'success' };
     render(<Toast toast={successToast} onDismiss={mockOnDismiss} />);
     
     const toast = screen.getByRole('alert');
@@ -28,7 +28,7 @@ describe('Toast', () => {
   });
 
   it('renders error toast with correct styling', () => {
-    const errorToast: ToastType = { ...defaultToast, type: 'error' };
+    const errorToast: ToastData = { ...defaultToast, type: 'error' };
     render(<Toast toast={errorToast} onDismiss={mockOnDismiss} />);
     
     const toast = screen.getByRole('alert');
@@ -37,7 +37,7 @@ describe('Toast', () => {
   });
 
   it('renders warning toast with correct styling', () => {
-    const warningToast: ToastType = { ...defaultToast, type: 'warning' };
+    const warningToast: ToastData = { ...defaultToast, type: 'warning' };
     render(<Toast toast={warningToast} onDismiss={mockOnDismiss} />);
     
     const toast = screen.getByRole('alert');
@@ -46,7 +46,7 @@ describe('Toast', () => {
   });
 
   it('renders info toast with correct styling', () => {
-    const infoToast: ToastType = { ...defaultToast, type: 'info' };
+    const infoToast: ToastData = { ...defaultToast, type: 'info' };
     render(<Toast toast={infoToast} onDismiss={mockOnDismiss} />);
     
     const toast = screen.getByRole('alert');
@@ -84,7 +84,7 @@ describe('Toast', () => {
 describe('ToastContainer', () => {
   const mockOnDismiss = vi.fn();
   
-  const toasts: ToastType[] = [
+  const toasts: ToastData[] = [
     { id: 1, type: 'success', message: 'Success message' },
     { id: 2, type: 'error', message: 'Error message' }
   ];
