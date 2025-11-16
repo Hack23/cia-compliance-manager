@@ -6,6 +6,10 @@ This directory contains specialized agent configurations for the **CIA Complianc
 
 ```mermaid
 graph TB
+    subgraph "Product Coordination"
+        TASK[🎯 Product Task Agent]:::task
+    end
+    
     subgraph "Development Agents"
         TS[⚛️ TypeScript React Agent]:::dev
         TEST[🧪 Testing Agent]:::test
@@ -20,12 +24,46 @@ graph TB
         DOC[📝 Documentation Agent]:::docs
     end
     
+    TASK --> TS
+    TASK --> TEST
+    TASK --> CR
+    TASK --> SEC
+    TASK --> DOC
+    
+    classDef task fill:#FFC107,stroke:#F57C00,stroke-width:3px,color:#000
     classDef dev fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#fff
     classDef test fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#fff
     classDef review fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#fff
     classDef security fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#fff
     classDef docs fill:#FF9800,stroke:#E65100,stroke-width:2px,color:#fff
 ```
+
+### 🎯 Product Task Agent
+**File:** `product-task-agent.md`
+
+Expert product coordinator for creating GitHub issues, assigning tasks to agents, and ensuring quality across all dimensions.
+
+**🎯 Core Expertise:**
+- Comprehensive product analysis (code quality, UX, ISMS)
+- GitHub issue creation and task coordination
+- Multi-dimensional quality assessment
+- Agent assignment and workflow coordination
+- ISMS compliance alignment
+
+**💡 Use Cases:**
+- Conducting product audits and creating improvement backlogs
+- Analyzing UI/UX and creating accessibility issues
+- Coordinating cross-functional quality improvements
+- Security and ISMS compliance assessments
+- Creating structured GitHub issues with agent assignments
+
+**🛠️ Special Tools:**
+- GitHub issue management (create, list, update, comment)
+- Playwright for UI/UX testing (navigate, screenshot, click)
+- Code analysis and quality metrics
+- ISMS policy mapping
+
+---
 
 ### ⚛️ TypeScript React Agent
 **File:** `typescript-react-agent.md`
@@ -155,6 +193,7 @@ Use this matrix to choose the right agent for your task:
 
 | Task Type | Agent | Icon |
 |-----------|-------|------|
+| **Product Analysis & Issue Creation** | Product Task Agent | 🎯 |
 | **Component Development** | TypeScript React Agent | ⚛️ |
 | **Writing Tests** | Testing Agent | 🧪 |
 | **Code Review** | Code Review Agent | 🔍 |
@@ -162,11 +201,13 @@ Use this matrix to choose the right agent for your task:
 | **Security & Compliance** | Security Compliance Agent | 🔐 |
 
 **Quick Examples:**
+- Product audit & issue creation → **🎯 Product Task Agent**
 - Building a new widget → **⚛️ TypeScript React Agent**
 - Adding Vitest tests → **🧪 Testing Agent**
 - PR review → **🔍 Code Review Agent**
 - Creating Mermaid diagrams → **📝 Documentation Agent**
 - NIST CSF mapping → **🔐 Security Compliance Agent**
+- UI/UX assessment → **🎯 Product Task Agent** (coordinates with ⚛️ & 🧪)
 
 ## ⚙️ Agent Configuration
 

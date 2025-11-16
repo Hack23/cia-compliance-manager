@@ -21,6 +21,7 @@ fi
 
 AGENTS_DIR=".github/agents"
 AGENTS=(
+    "product-task-agent.md"
     "typescript-react-agent.md"
     "testing-agent.md"
     "code-review-agent.md"
