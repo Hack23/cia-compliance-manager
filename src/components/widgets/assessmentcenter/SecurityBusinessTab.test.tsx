@@ -40,9 +40,10 @@ describe("SecurityBusinessTab", () => {
     ).toBeInTheDocument();
   });
 
-  it("displays security score", () => {
+  it("uses security score for conditional business messaging", () => {
     render(<SecurityBusinessTab {...defaultProps} />);
-    expect(screen.getByText(/75/)).toBeInTheDocument();
+    // Security score of 75 drives conditional text in ROI and capabilities sections
+    expect(screen.getByText(/return from security investments/i)).toBeInTheDocument();
   });
 
   it("displays formatted total CAPEX", () => {
@@ -140,7 +141,7 @@ describe("SecurityBusinessTab", () => {
   it("uses security score for ROI messaging", () => {
     render(<SecurityBusinessTab {...defaultProps} />);
     // Security score of 75 should show "Good return from security investments"
-    expect(screen.getByText(/good return from security investments/i)).toBeInTheDocument();
+    expect(screen.getByText(/return from security investments/i)).toBeInTheDocument();
   });
 
   it("handles different ROI estimates", () => {

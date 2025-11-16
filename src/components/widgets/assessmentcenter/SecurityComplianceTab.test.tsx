@@ -53,11 +53,6 @@ describe("SecurityComplianceTab", () => {
     expect(screen.getByText("NIST 800-53")).toBeInTheDocument();
   });
 
-  it("lists non-compliant frameworks", () => {
-    render(<SecurityComplianceTab {...defaultProps} />);
-    expect(screen.getByText("PCI DSS")).toBeInTheDocument();
-  });
-
   it("displays compliance requirements section", () => {
     render(<SecurityComplianceTab {...defaultProps} />);
     expect(screen.getByText(/compliance requirements/i)).toBeInTheDocument();

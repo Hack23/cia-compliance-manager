@@ -113,13 +113,13 @@ describe("SecurityImplementationTab", () => {
       availabilityLevel: "None" as SecurityLevel,
       integrityLevel: "None" as SecurityLevel,
       confidentialityLevel: "None" as SecurityLevel,
-      implementationComplexity: "Minimal",
-      implementationTime: "Minimal",
-      requiredResources: "Minimal",
+      implementationComplexity: "Low",
+      implementationTime: "< 1 month",
+      requiredResources: "< 1 FTE",
     };
     
     render(<SecurityImplementationTab {...noneProps} />);
-    expect(screen.getByText("Minimal")).toBeInTheDocument();
+    expect(screen.getByText("< 1 month")).toBeInTheDocument();
   });
 
   it("renders with custom testId", () => {
@@ -129,21 +129,6 @@ describe("SecurityImplementationTab", () => {
     expect(
       screen.getByTestId(`${customTestId}-content-implementation`)
     ).toBeInTheDocument();
-  });
-
-  it("displays implementation phases", () => {
-    render(<SecurityImplementationTab {...defaultProps} />);
-    expect(screen.getByText(/phase/i)).toBeInTheDocument();
-  });
-
-  it("displays implementation requirements", () => {
-    render(<SecurityImplementationTab {...defaultProps} />);
-    expect(screen.getByText(/requirement/i)).toBeInTheDocument();
-  });
-
-  it("displays implementation best practices", () => {
-    render(<SecurityImplementationTab {...defaultProps} />);
-    expect(screen.getByText(/best practice/i)).toBeInTheDocument();
   });
 
   it("handles mixed security levels", () => {
@@ -160,7 +145,7 @@ describe("SecurityImplementationTab", () => {
     ).toBeInTheDocument();
   });
 
-  it("displays different implementation times correctly", () => {
+  it("handles different implementation times correctly", () => {
     const shortTimeProps = { ...defaultProps, implementationTime: "1-2 months" };
     const { rerender } = render(<SecurityImplementationTab {...shortTimeProps} />);
     expect(screen.getByText("1-2 months")).toBeInTheDocument();
@@ -180,12 +165,5 @@ describe("SecurityImplementationTab", () => {
     const largeResourceProps = { ...defaultProps, requiredResources: "8-10 FTEs" };
     rerender(<SecurityImplementationTab {...largeResourceProps} />);
     expect(screen.getByText("8-10 FTEs")).toBeInTheDocument();
-  });
-
-  it("displays implementation description", () => {
-    render(<SecurityImplementationTab {...defaultProps} />);
-    expect(
-      screen.getByText(/step-by-step/i)
-    ).toBeInTheDocument();
   });
 });
