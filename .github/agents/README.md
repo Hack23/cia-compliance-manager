@@ -172,20 +172,27 @@ Expert in security best practices and compliance framework mapping.
 
 ## 🚀 How to Use Agents
 
-### Explicit Agent Selection
+For comprehensive guidance on using custom agents effectively, see the **[Agent Usage Guide](AGENT_GUIDE.md)**.
+
+### Quick Start
+
+#### Explicit Agent Selection
 Reference agents directly in your prompts:
 
 ```
 "@typescript-react-agent, help me create a new dashboard component"
 "@testing-agent, write unit tests for the SecurityMetrics component"
 "@security-compliance-agent, review this code for security vulnerabilities"
+"@product-task-agent, conduct a product audit and create improvement issues"
 ```
 
-### Implicit Selection
+#### Implicit Selection
 GitHub Copilot may automatically select the appropriate agent based on:
 - Current file type and context
 - Task description in your prompt
 - Project structure and patterns
+
+**Pro Tip:** Use `@product-task-agent` for complex tasks requiring coordination across multiple quality dimensions (code, UX, security, ISMS).
 
 ## 📊 Agent Selection Guide
 
@@ -367,11 +374,13 @@ sed -n '/^---$/,/^---$/p' my-agent.md | sed '1d;$d' | npx js-yaml -t
 
 | Resource | Description | Link |
 |----------|-------------|------|
+| 📘 **Agent Usage Guide** | Comprehensive guide to using custom agents | [AGENT_GUIDE.md](AGENT_GUIDE.md) |
 | 🌐 **GitHub Docs** | Official Copilot agent documentation | [View Docs](https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-custom-agents) |
 | 📖 **Copilot Instructions** | Global project guidelines | `.github/copilot-instructions.md` |
 | 🤝 **Contributing** | General contribution guide | `CONTRIBUTING.md` |
 | 🧪 **Test Plans** | Unit & E2E testing guidelines | `docs/UnitTestPlan.md`, `docs/E2ETestPlan.md` |
 | 🏗️ **Architecture** | System architecture docs | `docs/architecture/` |
+| 🔐 **ISMS Guide** | Security implementation guide | `ISMS_IMPLEMENTATION_GUIDE.md` |
 
 ---
 
