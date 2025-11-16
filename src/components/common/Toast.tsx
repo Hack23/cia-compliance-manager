@@ -1,4 +1,5 @@
 import React from 'react';
+import { COMMON_COMPONENT_TEST_IDS } from '../../constants/testIds';
 
 /**
  * Toast notification types
@@ -64,15 +65,15 @@ export interface ToastProps {
 export const Toast: React.FC<ToastProps> = ({
   toast,
   onDismiss,
-  testId = 'toast'
+  testId = COMMON_COMPONENT_TEST_IDS.TOAST
 }) => {
   const { id, type, message } = toast;
 
   const typeStyles = {
-    success: 'bg-green-500 dark:bg-green-600 text-white',
-    error: 'bg-red-500 dark:bg-red-600 text-white',
-    warning: 'bg-yellow-500 dark:bg-yellow-600 text-white',
-    info: 'bg-blue-500 dark:bg-blue-600 text-white'
+    success: 'bg-green-500 dark:bg-green-700 text-white',
+    error: 'bg-red-500 dark:bg-red-700 text-white',
+    warning: 'bg-yellow-500 dark:bg-yellow-700 text-white',
+    info: 'bg-blue-500 dark:bg-blue-700 text-white'
   };
 
   const typeIcons = {
@@ -160,7 +161,7 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
   toasts,
   onDismiss,
   position = 'top-right',
-  testId = 'toast-container'
+  testId = COMMON_COMPONENT_TEST_IDS.TOAST_CONTAINER
 }) => {
   const positionStyles = {
     'top-right': 'top-4 right-4',
@@ -184,7 +185,7 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
           key={toast.id}
           toast={toast}
           onDismiss={onDismiss}
-          testId="toast"
+          testId={COMMON_COMPONENT_TEST_IDS.TOAST}
         />
       ))}
     </div>

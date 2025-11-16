@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import type { Toast, ToastType } from '../components/common/Toast';
 
 /**
@@ -47,6 +47,8 @@ export interface UseToastReturn {
   clearToasts: () => void;
 }
 
+let toastIdCounter = 0;
+
 /**
  * Hook for managing toast notifications
  * 
@@ -74,13 +76,27 @@ export interface UseToastReturn {
  */
 export function useToast(): UseToastReturn {
   const [toasts, setToasts] = useState<Toast[]>([]);
+  const timeoutRef = useRef<Map<number, NodeJS.Timeout>>(new Map());
+
+  // Cleanup timeouts on unmount
+  useEffect(() => {
+    return () => {
+      timeoutRef.current.forEach((timeoutId) => clearTimeout(timeoutId));
+      timeoutRef.current.clear();
+    };
+  }, []);
 
   const dismissToast = useCallback((id: number): void => {
+    const timeoutId = timeoutRef.current.get(id);
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      timeoutRef.current.delete(id);
+    }
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   }, []);
 
   const showToast = useCallback((config: ToastConfig): void => {
-    const id = Date.now();
+    const id = Date.now() + toastIdCounter++;
     const duration = config.duration || 3000;
     
     const newToast: Toast = {
@@ -93,12 +109,17 @@ export function useToast(): UseToastReturn {
     setToasts((prev) => [...prev, newToast]);
 
     // Auto-dismiss after duration
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setToasts((prev) => prev.filter((toast) => toast.id !== id));
+      timeoutRef.current.delete(id);
     }, duration);
+    
+    timeoutRef.current.set(id, timeoutId);
   }, []);
 
   const clearToasts = useCallback((): void => {
+    timeoutRef.current.forEach((timeoutId) => clearTimeout(timeoutId));
+    timeoutRef.current.clear();
     setToasts([]);
   }, []);
 

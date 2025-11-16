@@ -1,37 +1,6 @@
 import React from 'react';
-
-/**
- * Props for SkeletonCard component
- */
-export interface SkeletonCardProps {
-  /**
-   * Number of skeleton lines to show
-   * @default 3
-   */
-  lines?: number;
-  
-  /**
-   * Show header skeleton
-   * @default true
-   */
-  showHeader?: boolean;
-  
-  /**
-   * Show footer skeleton
-   * @default false
-   */
-  showFooter?: boolean;
-  
-  /**
-   * Optional CSS class name
-   */
-  className?: string;
-  
-  /**
-   * Optional test ID
-   */
-  testId?: string;
-}
+import type { SkeletonCardProps } from '../../types/componentPropExports';
+import { COMMON_COMPONENT_TEST_IDS } from '../../constants/testIds';
 
 /**
  * Skeleton card component for loading states
@@ -48,7 +17,7 @@ export const SkeletonCard: React.FC<SkeletonCardProps> = ({
   showHeader = true,
   showFooter = false,
   className = '',
-  testId = 'skeleton-card'
+  testId = COMMON_COMPONENT_TEST_IDS.SKELETON_CARD
 }) => {
   return (
     <div

@@ -1,31 +1,6 @@
 import React from 'react';
-
-/**
- * Props for LoadingSpinner component
- */
-export interface LoadingSpinnerProps {
-  /**
-   * Size of the spinner
-   * @default 'medium'
-   */
-  size?: 'small' | 'medium' | 'large';
-  
-  /**
-   * Accessible label for the spinner
-   * @default 'Loading...'
-   */
-  label?: string;
-  
-  /**
-   * Optional CSS class name
-   */
-  className?: string;
-  
-  /**
-   * Optional test ID
-   */
-  testId?: string;
-}
+import type { LoadingSpinnerProps } from '../../types/componentPropExports';
+import { COMMON_COMPONENT_TEST_IDS } from '../../constants/testIds';
 
 /**
  * Loading spinner component with accessibility support
@@ -40,12 +15,12 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   size = 'medium',
   label = 'Loading...',
   className = '',
-  testId = 'loading-spinner'
+  testId = COMMON_COMPONENT_TEST_IDS.LOADING_SPINNER
 }) => {
   const sizeClasses = {
     small: 'h-4 w-4 border-2',
     medium: 'h-8 w-8 border-2',
-    large: 'h-12 w-12 border-3'
+    large: 'h-12 w-12 border-4'
   };
 
   return (
