@@ -232,3 +232,41 @@ export interface WidgetContainerProps {
   className?: string;
   testId?: string;
 }
+
+// Loading and Feedback Component Props
+export interface LoadingSpinnerProps {
+  size?: 'small' | 'medium' | 'large';
+  label?: string;
+  className?: string;
+  testId?: string;
+}
+
+export interface SkeletonCardProps {
+  lines?: number;
+  showHeader?: boolean;
+  showFooter?: boolean;
+  className?: string;
+  testId?: string;
+}
+
+export type ToastType = 'success' | 'error' | 'warning' | 'info';
+
+export interface Toast {
+  id: number;
+  type: ToastType;
+  message: string;
+  duration?: number;
+}
+
+export interface ToastProps {
+  toast: Toast;
+  onDismiss: (id: number) => void;
+  testId?: string;
+}
+
+export interface ToastContainerProps {
+  toasts: Toast[];
+  onDismiss: (id: number) => void;
+  position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center';
+  testId?: string;
+}

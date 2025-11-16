@@ -17,4 +17,7 @@
 export { default as useCIAContentService } from "./useCIAContentService";
 export { useCIAOptions } from "./useCIAOptions";
 
+// UI Feedback Hooks
+export { useToast } from "./useToast";
+
 // Add other hooks as they're created
