@@ -1,4 +1,4 @@
-import { SecurityLevel, CIAComponent } from "../types/cia";
+import { SecurityLevel } from "../types/cia";
 
 /**
  * Gets default technical details when service isn't available
