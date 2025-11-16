@@ -16,6 +16,7 @@ The `LoadingSpinner` component provides visual feedback during loading operation
 ### Basic Usage
 
 ```tsx
+import React, { useState } from 'react';
 import { LoadingSpinner } from '../components';
 
 function MyComponent() {
@@ -57,6 +58,7 @@ The `SkeletonCard` component improves perceived performance by showing content s
 ### Basic Usage
 
 ```tsx
+import React, { useState } from 'react';
 import { SkeletonCard } from '../components';
 
 function MyWidget() {
@@ -102,6 +104,7 @@ Toast notifications provide non-intrusive feedback for user actions and system e
 ### Basic Setup
 
 ```tsx
+import React from 'react';
 import { useToast } from '../hooks';
 import { ToastContainer } from '../components';
 
@@ -240,6 +243,10 @@ Toast notifications automatically include:
 
 1. **Debounce rapid showToast calls**
    ```tsx
+   import React, { useMemo } from 'react';
+   // Note: debounce can be imported from lodash or a custom utility
+   import debounce from 'lodash/debounce';
+   
    const debouncedToast = useMemo(
      () => debounce((config) => showToast(config), 500),
      [showToast]
@@ -259,7 +266,7 @@ Toast notifications automatically include:
 ## Example: Complete Widget with Loading and Feedback
 
 ```tsx
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useToast, useCIAContentService } from '../hooks';
 import { LoadingSpinner, SkeletonCard, ToastContainer } from '../components';
 import WidgetContainer from '../components/common/WidgetContainer';
