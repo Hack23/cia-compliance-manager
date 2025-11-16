@@ -19,6 +19,12 @@ export function useTechnicalDetailsData(
   confidentialityLevel: SecurityLevel,
   ciaContentService: unknown
 ) {
+  // Helper to convert complexity string to numeric value for UI
+  const getComplexityValue = (complexity: string): number => {
+    const value = getSecurityLevelValue(complexity as SecurityLevel);
+    return value * 25;
+  };
+
   // Get technical details for each component with error handling
   const confidentialityDetails = useMemo(() => {
     try {
@@ -117,12 +123,6 @@ export function useTechnicalDetailsData(
   }, [availabilityLevel]);
 
   // Helper functions
-  const getComplexityValue = (complexity: string): number => {
-    const value = getSecurityLevelValue(complexity as SecurityLevel);
-    return value * 25;
-  };
-
-  // Get technical description
   const getTechnicalDescription = (
     component: CIAComponent,
     level: SecurityLevel
