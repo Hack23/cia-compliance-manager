@@ -402,3 +402,26 @@ export interface ComplianceStatus {
   complianceScore: number;
   // ...other properties...
 }
+
+/**
+ * CIA Content Service interface
+ * Defines methods for retrieving CIA-related content and technical details
+ */
+export interface CIAContentService {
+  getComponentDetails?: (component: string, level: SecurityLevel) => unknown;
+  getTechnicalRequirements?: (component: string, level: SecurityLevel) => string[];
+  getRequiredExpertise?: (component: string, level: SecurityLevel) => string[];
+  getInformationSensitivity?: (level: SecurityLevel) => string;
+}
+
+/**
+ * Compliance Service interface
+ * Defines methods for compliance status and framework checks
+ */
+export interface ComplianceService {
+  getComplianceStatus?: (
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ) => ComplianceStatus | null;
+}
