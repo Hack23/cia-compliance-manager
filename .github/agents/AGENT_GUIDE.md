@@ -573,7 +573,7 @@ To add a new custom agent:
 | Resource | Description | Link |
 |----------|-------------|------|
 | 🌐 **GitHub Docs** | Official Copilot agent documentation | [View Docs](https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-custom-agents) |
-| 📖 **Agent README** | Project agent overview | [README.md](.github/agents/README.md) |
+| 📖 **Agent README** | Project agent overview | [README.md](README.md) |
 | 🔍 **ISMS Guide** | Security implementation guide | [ISMS_IMPLEMENTATION_GUIDE.md](../../ISMS_IMPLEMENTATION_GUIDE.md) |
 | 🏗️ **Architecture** | System architecture docs | [docs/architecture/](../../docs/architecture/) |
 | 🧪 **Test Plans** | Testing guidelines | [UnitTestPlan.md](../../docs/UnitTestPlan.md), [E2ETestPlan.md](../../docs/E2ETestPlan.md) |
