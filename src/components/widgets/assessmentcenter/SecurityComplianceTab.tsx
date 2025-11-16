@@ -1,6 +1,8 @@
 import React from "react";
 import { SecurityLevel } from "../../../types/cia";
-import { ComplianceStatusType } from "../../../hooks/useSecuritySummaryData";
+import { ComplianceStatusType } from "../../../types/compliance";
+import { getComplianceRequirementText } from "../../../utils/complianceTextUtils";
+import { getComplianceStatusText } from "../../../utils/statusUtils";
 
 /**
  * Props for SecurityComplianceTab component
@@ -62,11 +64,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
               ></div>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              {securityScore >= 80
-                ? "Strong compliance position"
-                : securityScore >= 50
-                ? "Moderate compliance position"
-                : "Compliance gaps detected"}
+              {getComplianceStatusText(securityScore)}
             </p>
           </div>
         ) : (
@@ -93,11 +91,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               {complianceStatus.status ||
-                ((complianceStatus.complianceScore || 0) >= 80
-                  ? "Strong compliance position"
-                  : (complianceStatus.complianceScore || 0) >= 50
-                  ? "Moderate compliance position"
-                  : "Compliance gaps detected")}
+                getComplianceStatusText(complianceStatus.complianceScore || 0)}
             </p>
           </div>
         )}
@@ -178,15 +172,10 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
               <span className="font-medium">Level:</span> {confidentialityLevel}
             </p>
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-              {confidentialityLevel === "None"
-                ? "Not sufficient for most compliance frameworks"
-                : confidentialityLevel === "Low"
-                ? "Meets basic compliance requirements"
-                : confidentialityLevel === "Moderate"
-                ? "Satisfies most regulatory requirements"
-                : confidentialityLevel === "High"
-                ? "Meets stringent compliance standards"
-                : "Exceeds most compliance requirements"}
+              {getComplianceRequirementText(
+                "confidentiality",
+                confidentialityLevel
+              )}
             </p>
           </div>
 
@@ -199,15 +188,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
               <span className="font-medium">Level:</span> {integrityLevel}
             </p>
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-              {integrityLevel === "None"
-                ? "Does not meet compliance standards"
-                : integrityLevel === "Low"
-                ? "Meets minimal compliance requirements"
-                : integrityLevel === "Moderate"
-                ? "Satisfies standard compliance expectations"
-                : integrityLevel === "High"
-                ? "Meets advanced compliance standards"
-                : "Exceeds regulatory requirements"}
+              {getComplianceRequirementText("integrity", integrityLevel)}
             </p>
           </div>
 
@@ -220,15 +201,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
               <span className="font-medium">Level:</span> {availabilityLevel}
             </p>
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-              {availabilityLevel === "None"
-                ? "Does not meet compliance standards"
-                : availabilityLevel === "Low"
-                ? "Meets basic availability requirements"
-                : availabilityLevel === "Moderate"
-                ? "Satisfies most compliance needs"
-                : availabilityLevel === "High"
-                ? "Meets high availability standards"
-                : "Exceeds enterprise requirements"}
+              {getComplianceRequirementText("availability", availabilityLevel)}
             </p>
           </div>
         </div>

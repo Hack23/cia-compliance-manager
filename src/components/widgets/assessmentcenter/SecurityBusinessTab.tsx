@@ -13,7 +13,7 @@ export interface SecurityBusinessTabProps {
     totalCost: string;
   };
   testId: string;
-  getROIEstimate: () => string;
+  roiEstimate: string;
 }
 
 /**
@@ -26,7 +26,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
   securityScore,
   costDetails,
   testId,
-  getROIEstimate,
+  roiEstimate,
 }) => {
   return (
     <div data-testid={`${testId}-content-business`} className="space-y-4">
@@ -65,7 +65,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
               Estimated ROI
             </h4>
             <div className="text-xl font-bold text-green-600 dark:text-green-400 mt-2">
-              {getROIEstimate()}
+              {roiEstimate}
             </div>
             <p className="text-sm text-green-600 dark:text-green-400 mt-1">
               {securityScore >= 80

@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { SecurityLevel } from "../../../types/cia";
 import { getImplementationComplexity } from "../../../utils/riskUtils";
+import { getPersonnelRequirements } from "../../../utils/resourceUtils";
 import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
 import { isNullish } from "../../../utils/typeGuards";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
@@ -20,6 +21,7 @@ interface ComponentTheme {
   bgClass: string;
   borderClass: string;
   accentClass: string;
+  accentBgClass: string;
   title: string;
 }
 
@@ -34,6 +36,7 @@ const COMPONENT_THEMES: Record<CIAComponent, ComponentTheme> = {
     bgClass: "bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20",
     borderClass: "border-purple-100 dark:border-purple-800",
     accentClass: "text-purple-500",
+    accentBgClass: "bg-purple-500 dark:bg-purple-600",
     title: "Confidentiality Controls",
   },
   integrity: {
@@ -43,6 +46,7 @@ const COMPONENT_THEMES: Record<CIAComponent, ComponentTheme> = {
     bgClass: "bg-green-50 dark:bg-green-900 dark:bg-opacity-20",
     borderClass: "border-green-100 dark:border-green-800",
     accentClass: "text-green-500",
+    accentBgClass: "bg-green-500 dark:bg-green-600",
     title: "Integrity Controls",
   },
   availability: {
@@ -52,6 +56,7 @@ const COMPONENT_THEMES: Record<CIAComponent, ComponentTheme> = {
     bgClass: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20",
     borderClass: "border-blue-100 dark:border-blue-800",
     accentClass: "text-blue-500",
+    accentBgClass: "bg-blue-500 dark:bg-blue-600",
     title: "Availability Controls",
   },
 };
@@ -103,18 +108,6 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
       label: complexityLabel,
     };
   }, [level]);
-
-  // Get personnel requirements
-  const getPersonnelRequirements = (secLevel: SecurityLevel): string => {
-    const levelValues: Record<SecurityLevel, number> = {
-      None: 0.1,
-      Low: 0.25,
-      Moderate: 0.5,
-      High: 1,
-      "Very High": 2,
-    };
-    return `${levelValues[secLevel] || 0.5} FTE`;
-  };
 
   // Get optional property with fallback
   const getOptionalProperty = (
@@ -177,7 +170,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             >
               <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
                 <div
-                  className={`h-2 ${theme.accentClass.replace('text-', 'bg-')} rounded-full`}
+                  className={`h-2 ${theme.accentBgClass} rounded-full`}
                   style={{ width: `${complexity.value}%` }}
                 ></div>
               </div>
@@ -216,7 +209,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             {getTechnicalRequirements(component, level).map((req, index) => (
               <li
                 key={`${component}-req-${index}`}
-                data-testid={`${component.substring(0, 4)}-req-${index}`}
+                data-testid={`${component}-req-${index}`}
               >
                 {req}
               </li>

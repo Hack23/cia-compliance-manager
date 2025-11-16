@@ -1,5 +1,6 @@
 import React from "react";
 import { SecurityLevel } from "../../../types/cia";
+import { getImplementationDescription } from "../../../utils/implementationUtils";
 
 /**
  * Props for SecurityImplementationTab component
@@ -10,8 +11,8 @@ export interface SecurityImplementationTabProps {
   confidentialityLevel: SecurityLevel;
   implementationComplexity: string;
   testId: string;
-  getImplementationTime: () => string;
-  getRequiredResources: () => string;
+  implementationTime: string;
+  requiredResources: string;
 }
 
 /**
@@ -26,8 +27,8 @@ export const SecurityImplementationTab: React.FC<
   confidentialityLevel,
   implementationComplexity,
   testId,
-  getImplementationTime,
-  getRequiredResources,
+  implementationTime,
+  requiredResources,
 }) => {
   return (
     <div
@@ -84,7 +85,7 @@ export const SecurityImplementationTab: React.FC<
             <div className="text-sm font-medium mb-1">
               Estimated Implementation Time
             </div>
-            <div className="text-lg font-bold">{getImplementationTime()}</div>
+            <div className="text-lg font-bold">{implementationTime}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Typical project timeline
             </div>
@@ -93,7 +94,7 @@ export const SecurityImplementationTab: React.FC<
           {/* Required Resources */}
           <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-sm font-medium mb-1">Required Resources</div>
-            <div className="text-lg font-bold">{getRequiredResources()}</div>
+            <div className="text-lg font-bold">{requiredResources}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Resource allocation recommendation
             </div>
@@ -114,15 +115,10 @@ export const SecurityImplementationTab: React.FC<
               Confidentiality Implementation
             </h4>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              {confidentialityLevel === "None"
-                ? "No data protection controls needed"
-                : confidentialityLevel === "Low"
-                ? "Basic access controls and authentication"
-                : confidentialityLevel === "Moderate"
-                ? "Role-based access and encryption for sensitive data"
-                : confidentialityLevel === "High"
-                ? "Comprehensive encryption and access controls"
-                : "Maximum protection with advanced encryption and zero-trust"}
+              {getImplementationDescription(
+                "confidentiality",
+                confidentialityLevel
+              )}
             </p>
             <div className="mt-2 text-xs font-medium text-purple-700 dark:text-purple-300">
               Level: {confidentialityLevel}
@@ -135,15 +131,7 @@ export const SecurityImplementationTab: React.FC<
               Integrity Implementation
             </h4>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              {integrityLevel === "None"
-                ? "No data validation controls needed"
-                : integrityLevel === "Low"
-                ? "Basic input validation and error checking"
-                : integrityLevel === "Moderate"
-                ? "Data validation and cryptographic checksums"
-                : integrityLevel === "High"
-                ? "Digital signatures and strong validation"
-                : "Formal verification and immutable audit trails"}
+              {getImplementationDescription("integrity", integrityLevel)}
             </p>
             <div className="mt-2 text-xs font-medium text-green-700 dark:text-green-300">
               Level: {integrityLevel}
@@ -156,15 +144,7 @@ export const SecurityImplementationTab: React.FC<
               Availability Implementation
             </h4>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              {availabilityLevel === "None"
-                ? "No uptime guarantees or redundancy"
-                : availabilityLevel === "Low"
-                ? "Basic backup and recovery procedures"
-                : availabilityLevel === "Moderate"
-                ? "Redundant components and standard backups"
-                : availabilityLevel === "High"
-                ? "High availability clustering and failover"
-                : "Multi-site redundancy and continuous availability"}
+              {getImplementationDescription("availability", availabilityLevel)}
             </p>
             <div className="mt-2 text-xs font-medium text-blue-700 dark:text-blue-300">
               Level: {availabilityLevel}

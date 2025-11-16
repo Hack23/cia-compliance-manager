@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { SecurityLevel } from "../types/cia";
-import { StatusType } from "../types/common/StatusTypes";
+import { ComplianceStatusType } from "../types/compliance";
 import { calculateROIEstimate } from "../utils/businessValueUtils";
 import { calculateTotalSecurityCost } from "../utils/costCalculationUtils";
 import {
@@ -8,23 +8,22 @@ import {
   getSecurityLevelDescription,
   getSecurityLevelValue,
 } from "../utils/securityLevelUtils";
+import {
+  getStatusVariant,
+  getRiskColorClass,
+} from "../utils/statusUtils";
 import { hasMethod, isNullish } from "../utils/typeGuards";
-
-/**
- * Interface for compliance status
- */
-export interface ComplianceStatusType {
-  status?: string;
-  complianceScore?: number;
-  compliantFrameworks: string[];
-  partiallyCompliantFrameworks: string[];
-  nonCompliantFrameworks?: string[];
-  remediationSteps?: string[];
-}
 
 /**
  * Custom hook for SecuritySummaryWidget data calculations
  * Extracts all data transformation logic for better testability and reusability
+ *
+ * @param availabilityLevel - Selected availability security level
+ * @param integrityLevel - Selected integrity security level  
+ * @param confidentialityLevel - Selected confidentiality security level
+ * @param ciaContentService - CIA content service instance
+ * @param complianceService - Compliance service instance
+ * @returns Computed security summary data and helper functions
  */
 export function useSecuritySummaryData(
   availabilityLevel: SecurityLevel,
@@ -247,28 +246,8 @@ export function useSecuritySummaryData(
     );
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Helper function for status badge variant
-  const getStatusVariant = (level: string): StatusType => {
-    const normalizedLevel = level.toLowerCase();
-    if (normalizedLevel === "none") return "error";
-    if (normalizedLevel === "low") return "warning";
-    if (normalizedLevel === "moderate") return "info";
-    if (normalizedLevel === "high") return "success";
-    if (normalizedLevel === "very high") return "purple";
-    return "neutral";
-  };
-
-  // Get appropriate risk color class
-  const getRiskColorClass = (risk: string): string => {
-    if (risk.includes("Low")) return "text-green-600 dark:text-green-400";
-    if (risk.includes("Medium")) return "text-yellow-600 dark:text-yellow-400";
-    if (risk.includes("High")) return "text-orange-600 dark:text-orange-400";
-    if (risk.includes("Critical")) return "text-red-600 dark:text-red-400";
-    return "text-gray-600 dark:text-gray-400";
-  };
-
-  // Get implementation time
-  const getImplementationTime = (): string => {
+  // Compute implementation time
+  const implementationTime = useMemo(() => {
     try {
       if (
         !isNullish(ciaContentService) &&
@@ -290,10 +269,10 @@ export function useSecuritySummaryData(
     if (securityScore >= 60) return "2-4 months";
     if (securityScore >= 40) return "1-2 months";
     return "2-4 weeks";
-  };
+  }, [ciaContentService, securityScore, availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Get resource requirements
-  const getRequiredResources = (): string => {
+  // Compute resource requirements
+  const requiredResources = useMemo(() => {
     try {
       if (
         !isNullish(ciaContentService) &&
@@ -315,22 +294,22 @@ export function useSecuritySummaryData(
     if (securityScore >= 60) return "Dedicated Team";
     if (securityScore >= 40) return "Small Team";
     return "Individual Effort";
-  };
+  }, [ciaContentService, securityScore, availabilityLevel, integrityLevel, confidentialityLevel]);
 
-  // Get ROI estimate based on security score
-  const getROIEstimate = (): string => {
+  // Compute ROI estimate
+  const roiEstimate = useMemo(() => {
     try {
-      const roiEstimate = calculateROIEstimate(
+      const estimate = calculateROIEstimate(
         availabilityLevel,
         integrityLevel,
         confidentialityLevel
       );
-      return roiEstimate.value ?? "N/A";
+      return estimate.value ?? "N/A";
     } catch (err) {
       console.error("Error calculating ROI estimate:", err);
       return "N/A";
     }
-  };
+  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
   return {
     overallSecurityLevel,
@@ -344,10 +323,10 @@ export function useSecuritySummaryData(
     businessMaturityLevel,
     businessMaturityDescription,
     costDetails,
+    implementationTime,
+    requiredResources,
+    roiEstimate,
     getStatusVariant,
     getRiskColorClass,
-    getImplementationTime,
-    getRequiredResources,
-    getROIEstimate,
   };
 }

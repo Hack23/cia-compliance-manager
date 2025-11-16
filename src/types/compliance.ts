@@ -21,6 +21,25 @@ export type FrameworkComplianceStatusType =
   | "non-compliant";
 
 /**
+ * Interface for compliance status used in SecuritySummaryWidget
+ * Represents a simplified view of compliance status for UI display
+ */
+export interface ComplianceStatusType {
+  /** Optional status text */
+  status?: string;
+  /** Compliance score (0-100) */
+  complianceScore?: number;
+  /** List of fully compliant frameworks */
+  compliantFrameworks: string[];
+  /** List of partially compliant frameworks */
+  partiallyCompliantFrameworks: string[];
+  /** List of non-compliant frameworks */
+  nonCompliantFrameworks?: string[];
+  /** Recommended remediation steps */
+  remediationSteps?: string[];
+}
+
+/**
  * Represents a compliance framework definition
  */
 export interface ComplianceFramework {

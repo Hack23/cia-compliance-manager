@@ -108,11 +108,11 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     businessMaturityLevel,
     businessMaturityDescription,
     costDetails,
+    implementationTime,
+    requiredResources,
+    roiEstimate,
     getStatusVariant,
     getRiskColorClass,
-    getImplementationTime,
-    getRequiredResources,
-    getROIEstimate,
   } = useSecuritySummaryData(
     availabilityLevel,
     integrityLevel,
@@ -219,7 +219,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               securityScore={securityScore}
               costDetails={costDetails}
               testId={testId}
-              getROIEstimate={getROIEstimate}
+              roiEstimate={roiEstimate}
             />
           )}
 
@@ -231,8 +231,8 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               confidentialityLevel={confidentialityLevel}
               implementationComplexity={implementationComplexity}
               testId={testId}
-              getImplementationTime={getImplementationTime}
-              getRequiredResources={getRequiredResources}
+              implementationTime={implementationTime}
+              requiredResources={requiredResources}
             />
           )}
 

@@ -2,6 +2,10 @@ import React from "react";
 import { SECURITY_SUMMARY_TEST_IDS } from "../../../constants/testIds";
 import { SecurityLevel } from "../../../types/cia";
 import { getRiskLevelFromSecurityLevel } from "../../../utils/securityLevelUtils";
+import {
+  getIntegrityValidationLevel,
+  getAvailabilityUptimeTarget,
+} from "../../../utils/implementationUtils";
 import RadarChart from "../../charts/RadarChart";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import StatusBadge from "../../common/StatusBadge";
@@ -121,15 +125,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
             <div className="mt-2 text-xs text-gray-600 dark:text-gray-400">
               Validation Level:{" "}
               <span className="font-medium">
-                {integrityLevel === "None"
-                  ? "Unverified"
-                  : integrityLevel === "Low"
-                  ? "Basic Validation"
-                  : integrityLevel === "Moderate"
-                  ? "Validated"
-                  : integrityLevel === "High"
-                  ? "Strongly Validated"
-                  : "Formally Verified"}
+                {getIntegrityValidationLevel(integrityLevel)}
               </span>
             </div>
           </div>
@@ -161,15 +157,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
             <div className="mt-2 text-xs text-gray-600 dark:text-gray-400">
               Uptime Target:{" "}
               <span className="font-medium">
-                {availabilityLevel === "None"
-                  ? "No guarantee"
-                  : availabilityLevel === "Low"
-                  ? "95%"
-                  : availabilityLevel === "Moderate"
-                  ? "99%"
-                  : availabilityLevel === "High"
-                  ? "99.9%"
-                  : "99.999%"}
+                {getAvailabilityUptimeTarget(availabilityLevel)}
               </span>
             </div>
           </div>
