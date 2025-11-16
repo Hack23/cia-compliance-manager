@@ -1,0 +1,212 @@
+import React from "react";
+import { SecurityLevel } from "../../../types/cia";
+
+/**
+ * Props for SecurityImplementationTab component
+ */
+export interface SecurityImplementationTabProps {
+  availabilityLevel: SecurityLevel;
+  integrityLevel: SecurityLevel;
+  confidentialityLevel: SecurityLevel;
+  implementationComplexity: string;
+  testId: string;
+  getImplementationTime: () => string;
+  getRequiredResources: () => string;
+}
+
+/**
+ * Implementation tab component for SecuritySummaryWidget
+ * Displays implementation requirements, timeline, resources, and considerations
+ */
+export const SecurityImplementationTab: React.FC<
+  SecurityImplementationTabProps
+> = ({
+  availabilityLevel,
+  integrityLevel,
+  confidentialityLevel,
+  implementationComplexity,
+  testId,
+  getImplementationTime,
+  getRequiredResources,
+}) => {
+  return (
+    <div
+      data-testid={`${testId}-content-implementation`}
+      className="space-y-4"
+    >
+      {/* Implementation introduction */}
+      <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4">
+        <p className="text-sm">
+          This section summarizes implementation requirements for your selected
+          security levels, helping plan resources, timelines, and technical
+          approaches.
+        </p>
+      </div>
+
+      {/* Implementation Overview */}
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
+        <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
+          Implementation Overview
+        </h3>
+
+        <div className="mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <div className="text-md font-medium">Implementation Complexity:</div>
+            <div className="font-medium">{implementationComplexity}</div>
+          </div>
+          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+            <div
+              className={`h-2.5 rounded-full ${
+                implementationComplexity === "Low"
+                  ? "w-1/4 bg-green-500"
+                  : implementationComplexity === "Moderate"
+                  ? "w-2/4 bg-yellow-500"
+                  : implementationComplexity === "High"
+                  ? "w-3/4 bg-orange-500"
+                  : "w-full bg-red-500"
+              }`}
+            ></div>
+          </div>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+            {implementationComplexity === "Low"
+              ? "Basic security controls with straightforward implementation"
+              : implementationComplexity === "Moderate"
+              ? "Standard security measures with moderate implementation effort"
+              : implementationComplexity === "High"
+              ? "Advanced security controls requiring significant implementation effort"
+              : "Comprehensive security framework requiring extensive resources"}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Implementation Timeline */}
+          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="text-sm font-medium mb-1">
+              Estimated Implementation Time
+            </div>
+            <div className="text-lg font-bold">{getImplementationTime()}</div>
+            <div className="text-xs text-gray-600 dark:text-gray-400">
+              Typical project timeline
+            </div>
+          </div>
+
+          {/* Required Resources */}
+          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="text-sm font-medium mb-1">Required Resources</div>
+            <div className="text-lg font-bold">{getRequiredResources()}</div>
+            <div className="text-xs text-gray-600 dark:text-gray-400">
+              Resource allocation recommendation
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Component Implementation Summary */}
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
+        <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
+          Component Implementation Summary
+        </h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Confidentiality Implementation */}
+          <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
+            <h4 className="font-medium text-purple-700 dark:text-purple-300 mb-2">
+              Confidentiality Implementation
+            </h4>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {confidentialityLevel === "None"
+                ? "No data protection controls needed"
+                : confidentialityLevel === "Low"
+                ? "Basic access controls and authentication"
+                : confidentialityLevel === "Moderate"
+                ? "Role-based access and encryption for sensitive data"
+                : confidentialityLevel === "High"
+                ? "Comprehensive encryption and access controls"
+                : "Maximum protection with advanced encryption and zero-trust"}
+            </p>
+            <div className="mt-2 text-xs font-medium text-purple-700 dark:text-purple-300">
+              Level: {confidentialityLevel}
+            </div>
+          </div>
+
+          {/* Integrity Implementation */}
+          <div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800">
+            <h4 className="font-medium text-green-700 dark:text-green-300 mb-2">
+              Integrity Implementation
+            </h4>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {integrityLevel === "None"
+                ? "No data validation controls needed"
+                : integrityLevel === "Low"
+                ? "Basic input validation and error checking"
+                : integrityLevel === "Moderate"
+                ? "Data validation and cryptographic checksums"
+                : integrityLevel === "High"
+                ? "Digital signatures and strong validation"
+                : "Formal verification and immutable audit trails"}
+            </p>
+            <div className="mt-2 text-xs font-medium text-green-700 dark:text-green-300">
+              Level: {integrityLevel}
+            </div>
+          </div>
+
+          {/* Availability Implementation */}
+          <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+            <h4 className="font-medium text-blue-700 dark:text-blue-300 mb-2">
+              Availability Implementation
+            </h4>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {availabilityLevel === "None"
+                ? "No uptime guarantees or redundancy"
+                : availabilityLevel === "Low"
+                ? "Basic backup and recovery procedures"
+                : availabilityLevel === "Moderate"
+                ? "Redundant components and standard backups"
+                : availabilityLevel === "High"
+                ? "High availability clustering and failover"
+                : "Multi-site redundancy and continuous availability"}
+            </p>
+            <div className="mt-2 text-xs font-medium text-blue-700 dark:text-blue-300">
+              Level: {availabilityLevel}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Implementation Considerations */}
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
+        <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
+          Implementation Considerations
+        </h3>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="p-3 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg">
+            <h4 className="font-medium text-yellow-700 dark:text-yellow-300">
+              Success Factors
+            </h4>
+            <ul className="mt-2 space-y-1 list-disc list-inside text-sm">
+              <li>Executive sponsorship and support</li>
+              <li>Clear security requirements definition</li>
+              <li>Adequate resource allocation</li>
+              <li>Proper testing and validation</li>
+              <li>Staff training and awareness</li>
+            </ul>
+          </div>
+
+          <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+            <h4 className="font-medium text-blue-700 dark:text-blue-300">
+              Key Challenges
+            </h4>
+            <ul className="mt-2 space-y-1 list-disc list-inside text-sm">
+              <li>Balancing security with usability</li>
+              <li>Integration with existing systems</li>
+              <li>Managing scope and expectations</li>
+              <li>Maintaining consistent controls</li>
+              <li>Securing necessary expertise</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
