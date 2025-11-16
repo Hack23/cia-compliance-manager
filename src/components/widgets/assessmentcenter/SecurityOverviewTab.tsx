@@ -1,6 +1,7 @@
 import React from "react";
 import { SECURITY_SUMMARY_TEST_IDS } from "../../../constants/testIds";
 import { SecurityLevel } from "../../../types/cia";
+import { StatusType } from "../../../types/common/StatusTypes";
 import { getRiskLevelFromSecurityLevel } from "../../../utils/securityLevelUtils";
 import {
   getIntegrityValidationLevel,
@@ -24,7 +25,7 @@ export interface SecurityOverviewTabProps {
   securityScore: number;
   complianceScore?: number;
   testId: string;
-  getStatusVariant: (level: string) => "success" | "error" | "warning" | "info" | "purple" | "neutral";
+  getStatusVariant: (level: string) => StatusType;
 }
 
 /**
