@@ -1,15 +1,10 @@
 import React, { useMemo } from "react";
-import { SecurityLevel } from "../../../types/cia";
+import { SecurityLevel, CIAComponent } from "../../../types/cia";
 import { getImplementationComplexity } from "../../../utils/riskUtils";
 import { getPersonnelRequirements } from "../../../utils/resourceUtils";
 import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
 import { isNullish } from "../../../utils/typeGuards";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
-
-/**
- * CIA Component types
- */
-type CIAComponent = "confidentiality" | "integrity" | "availability";
 
 /**
  * Component theme configuration

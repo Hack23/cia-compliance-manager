@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { SecurityLevel } from "../types/cia";
+import { SecurityLevel, CIAComponent } from "../types/cia";
+import { CIAContentService } from "../types/cia-services";
 import { getImplementationComplexity } from "../utils/riskUtils";
 import { getSecurityLevelValue } from "../utils/securityLevelUtils";
 import {
@@ -11,11 +12,6 @@ import {
   getDefaultExpertise,
 } from "../utils/technicalDetailsDefaults";
 import { isNullish } from "../utils/typeGuards";
-
-/**
- * CIA Component types
- */
-type CIAComponent = "confidentiality" | "integrity" | "availability";
 
 /**
  * Custom hook for TechnicalDetailsWidget helper functions and data
@@ -46,7 +42,7 @@ export function useTechnicalDetailsData(
         return getDefaultTechnicalDetails("confidentiality", confidentialityLevel);
       }
 
-      const details = (ciaContentService as any).getComponentDetails?.(
+      const details = (ciaContentService as CIAContentService).getComponentDetails?.(
         "confidentiality",
         confidentialityLevel
       );
@@ -66,7 +62,7 @@ export function useTechnicalDetailsData(
         return getDefaultTechnicalDetails("integrity", integrityLevel);
       }
 
-      const details = (ciaContentService as any).getComponentDetails?.(
+      const details = (ciaContentService as CIAContentService).getComponentDetails?.(
         "integrity",
         integrityLevel
       );
@@ -86,7 +82,7 @@ export function useTechnicalDetailsData(
         return getDefaultTechnicalDetails("availability", availabilityLevel);
       }
 
-      const details = (ciaContentService as any).getComponentDetails?.(
+      const details = (ciaContentService as CIAContentService).getComponentDetails?.(
         "availability",
         availabilityLevel
       );
@@ -98,8 +94,6 @@ export function useTechnicalDetailsData(
       return getDefaultTechnicalDetails("availability", availabilityLevel);
     }
   }, [ciaContentService, availabilityLevel]);
-
-  // Get availability technical details
 
   // Calculate component complexities using riskUtils
   const confidentialityComplexity = useMemo(() => {
@@ -165,7 +159,7 @@ export function useTechnicalDetailsData(
   ): string[] => {
     try {
       if (!isNullish(ciaContentService)) {
-        const requirements = (ciaContentService as any).getTechnicalRequirements?.(
+        const requirements = (ciaContentService as CIAContentService).getTechnicalRequirements?.(
           component,
           level
         );
@@ -221,7 +215,7 @@ export function useTechnicalDetailsData(
   ): string[] => {
     try {
       if (!isNullish(ciaContentService)) {
-        const expertise = (ciaContentService as any).getRequiredExpertise?.(
+        const expertise = (ciaContentService as CIAContentService).getRequiredExpertise?.(
           component,
           level
         );

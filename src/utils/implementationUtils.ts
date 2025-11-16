@@ -65,7 +65,7 @@ export function getImplementationDescription(
 /**
  * Gets validation level text for integrity security level
  *
- * @param level - The integrity security level
+ * @param level - The security level
  * @returns Human-readable validation level
  */
 export function getIntegrityValidationLevel(level: SecurityLevel): string {
@@ -88,7 +88,7 @@ export function getIntegrityValidationLevel(level: SecurityLevel): string {
 /**
  * Gets uptime target text for availability security level
  *
- * @param level - The availability security level
+ * @param level - The security level
  * @returns Human-readable uptime target
  */
 export function getAvailabilityUptimeTarget(level: SecurityLevel): string {

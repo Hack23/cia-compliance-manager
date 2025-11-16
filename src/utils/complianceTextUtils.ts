@@ -11,9 +11,6 @@ export function getComplianceRequirementText(
   component: "confidentiality" | "integrity" | "availability",
   level: SecurityLevel
 ): string {
-  const componentName =
-    component.charAt(0).toUpperCase() + component.slice(1);
-
   if (level === "None") {
     return `Not sufficient for most compliance frameworks`;
   }

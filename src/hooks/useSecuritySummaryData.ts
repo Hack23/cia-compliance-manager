@@ -1,5 +1,9 @@
 import { useMemo } from "react";
 import { SecurityLevel } from "../types/cia";
+import {
+  CIAContentService,
+  ComplianceService,
+} from "../types/cia-services";
 import { ComplianceStatusType } from "../types/compliance";
 import { calculateROIEstimate } from "../utils/businessValueUtils";
 import { calculateTotalSecurityCost } from "../utils/costCalculationUtils";
@@ -107,7 +111,7 @@ export function useSecuritySummaryData(
       hasMethod(ciaContentService, "getInformationSensitivity")
     ) {
       try {
-        const sensitivity = (ciaContentService as any).getInformationSensitivity(
+        const sensitivity = (ciaContentService as CIAContentService).getInformationSensitivity?.(
           confidentialityLevel
         );
         if (!isNullish(sensitivity)) return sensitivity;
@@ -183,7 +187,7 @@ export function useSecuritySummaryData(
     try {
       if (isNullish(complianceService)) return null;
 
-      const status = (complianceService as any).getComplianceStatus?.(
+      const status = (complianceService as ComplianceService).getComplianceStatus?.(
         availabilityLevel,
         integrityLevel,
         confidentialityLevel
