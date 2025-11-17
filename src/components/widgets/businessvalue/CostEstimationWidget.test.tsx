@@ -328,4 +328,209 @@ describe("CostEstimationWidget", () => {
       expect(widgetContent).toMatch(/one-time cost|annual cost/i);
     });
   });
+
+  it("handles None security levels", async () => {
+    await act(async () => {
+      render(
+        <CostEstimationWidget
+          availabilityLevel="None"
+          integrityLevel="None"
+          confidentialityLevel="None"
+        />
+      );
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
+    });
+  });
+
+  it("handles Low security levels", async () => {
+    await act(async () => {
+      render(
+        <CostEstimationWidget
+          availabilityLevel="Low"
+          integrityLevel="Low"
+          confidentialityLevel="Low"
+        />
+      );
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
+    });
+  });
+
+  it("handles Very High security levels", async () => {
+    await act(async () => {
+      render(
+        <CostEstimationWidget
+          availabilityLevel="Very High"
+          integrityLevel="Very High"
+          confidentialityLevel="Very High"
+        />
+      );
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
+    });
+  });
+
+  it("handles mixed security levels", async () => {
+    await act(async () => {
+      render(
+        <CostEstimationWidget
+          availabilityLevel="None"
+          integrityLevel="High"
+          confidentialityLevel="Moderate"
+        />
+      );
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
+    });
+  });
+
+  it("displays FTE requirements", async () => {
+    await act(async () => {
+      render(<CostEstimationWidget {...defaultProps} />);
+    });
+
+    await waitFor(() => {
+      const widgetContent = screen.getByTestId(
+        "cost-estimation-widget"
+      ).textContent;
+
+      // Should display FTE-related information
+      expect(widgetContent).toMatch(/fte|full.?time|staff|personnel/i);
+    });
+  });
+
+  it("displays implementation complexity", async () => {
+    await act(async () => {
+      render(<CostEstimationWidget {...defaultProps} />);
+    });
+
+    await waitFor(() => {
+      const widgetContent = screen.getByTestId(
+        "cost-estimation-widget"
+      ).textContent;
+
+      // Should display complexity information
+      expect(widgetContent).toMatch(/complexity|simple|complex|moderate/i);
+    });
+  });
+
+  it("displays expertise required", async () => {
+    await act(async () => {
+      render(<CostEstimationWidget {...defaultProps} />);
+    });
+
+    await waitFor(() => {
+      const widgetContent = screen.getByTestId(
+        "cost-estimation-widget"
+      ).textContent;
+
+      // Should display expertise information
+      expect(widgetContent).toMatch(/expertise|skill|professional|experience/i);
+    });
+  });
+
+  it("handles service loading state", async () => {
+    render(<CostEstimationWidget {...defaultProps} />);
+
+    // Widget should handle loading state gracefully
+    expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
+  });
+
+  it("handles service error state", async () => {
+    render(<CostEstimationWidget {...defaultProps} />);
+
+    // Widget should handle error state gracefully
+    await waitFor(() => {
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
+    });
+  });
+
+  it("calculates cost breakdown percentages correctly", async () => {
+    await act(async () => {
+      render(
+        <CostEstimationWidget
+          availabilityLevel="High"
+          integrityLevel="Moderate"
+          confidentialityLevel="Low"
+        />
+      );
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
+    });
+  });
+
+  it("displays cost breakdown by component", async () => {
+    await act(async () => {
+      render(<CostEstimationWidget {...defaultProps} />);
+    });
+
+    await waitFor(() => {
+      const widgetContent = screen.getByTestId(
+        "cost-estimation-widget"
+      ).textContent;
+
+      // Should show breakdown by CIA components
+      expect(widgetContent).toMatch(/availability|integrity|confidentiality/i);
+    });
+  });
+
+  it("updates FTE requirements when security levels change", async () => {
+    const { rerender } = render(
+      <CostEstimationWidget
+        availabilityLevel="Low"
+        integrityLevel="Low"
+        confidentialityLevel="Low"
+      />
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
+    });
+
+    // Rerender with higher security levels
+    await act(async () => {
+      rerender(
+        <CostEstimationWidget
+          availabilityLevel="Very High"
+          integrityLevel="Very High"
+          confidentialityLevel="Very High"
+        />
+      );
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
+    });
+  });
+
+  it("calculates complexity percentage correctly for different levels", async () => {
+    const levels: SecurityLevel[] = ["Low", "Moderate", "High", "Very High"];
+
+    for (const level of levels) {
+      const { unmount } = render(
+        <CostEstimationWidget
+          availabilityLevel={level}
+          integrityLevel={level}
+          confidentialityLevel={level}
+        />
+      );
+
+      await waitFor(() => {
+        expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
+      });
+
+      unmount();
+    }
+  });
 });

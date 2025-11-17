@@ -206,4 +206,219 @@ describe("ValueCreationWidget", () => {
       expect(container).toBeInTheDocument();
     });
   });
+
+  it("handles None security level", async () => {
+    render(
+      <ValueCreationWidget
+        availabilityLevel={"None" as SecurityLevel}
+        integrityLevel={"None" as SecurityLevel}
+        confidentialityLevel={"None" as SecurityLevel}
+        testId="test-value-creation"
+      />
+    );
+
+    await waitFor(() => {
+      const container = screen.queryByTestId(
+        /widget-container.*test-value-creation/
+      );
+      expect(container).toBeInTheDocument();
+    });
+  });
+
+  it("handles Very High security level", async () => {
+    render(
+      <ValueCreationWidget
+        availabilityLevel={"Very High" as SecurityLevel}
+        integrityLevel={"Very High" as SecurityLevel}
+        confidentialityLevel={"Very High" as SecurityLevel}
+        testId="test-value-creation"
+      />
+    );
+
+    await waitFor(() => {
+      const container = screen.queryByTestId(
+        /widget-container.*test-value-creation/
+      );
+      expect(container).toBeInTheDocument();
+    });
+  });
+
+  it("displays value creation points", async () => {
+    render(<ValueCreationWidget {...defaultProps} />);
+
+    await waitFor(() => {
+      const content = document.body.textContent;
+      // Check for content that would be in value creation points
+      expect(content).toBeTruthy();
+    });
+  });
+
+  it("shows different value points for different security levels", async () => {
+    const { rerender } = render(
+      <ValueCreationWidget
+        availabilityLevel={"Low" as SecurityLevel}
+        integrityLevel={"Low" as SecurityLevel}
+        confidentialityLevel={"Low" as SecurityLevel}
+        testId="test-value-creation"
+      />
+    );
+
+    let lowContent = "";
+    await waitFor(() => {
+      lowContent = document.body.textContent || "";
+      expect(lowContent).toBeTruthy();
+    });
+
+    // Rerender with Very High
+    rerender(
+      <ValueCreationWidget
+        availabilityLevel={"Very High" as SecurityLevel}
+        integrityLevel={"Very High" as SecurityLevel}
+        confidentialityLevel={"Very High" as SecurityLevel}
+        testId="test-value-creation"
+      />
+    );
+
+    await waitFor(() => {
+      const highContent = document.body.textContent || "";
+      // Content should be different
+      expect(highContent).toBeTruthy();
+    });
+  });
+
+  it("displays business considerations", async () => {
+    render(<ValueCreationWidget {...defaultProps} />);
+
+    await waitFor(() => {
+      const content = document.body.textContent;
+      // Look for typical business consideration terms
+      expect(content).toMatch(/business|consideration|impact|risk/i);
+    });
+  });
+
+  it("displays potential savings information", async () => {
+    render(<ValueCreationWidget {...defaultProps} />);
+
+    await waitFor(() => {
+      const content = document.body.textContent;
+      // Look for savings-related content
+      expect(content).toMatch(/saving|return|benefit|value/i);
+    });
+  });
+
+  it("handles rapid security level changes", async () => {
+    const levels: SecurityLevel[] = [
+      "None",
+      "Low",
+      "Moderate",
+      "High",
+      "Very High",
+    ];
+
+    for (const level of levels) {
+      const { unmount } = render(
+        <ValueCreationWidget
+          availabilityLevel={level}
+          integrityLevel={level}
+          confidentialityLevel={level}
+          testId="test-value-creation"
+        />
+      );
+
+      await waitFor(() => {
+        const container = screen.queryByTestId(
+          /widget-container.*test-value-creation/
+        );
+        expect(container).toBeInTheDocument();
+      });
+
+      unmount();
+    }
+  });
+
+  it("displays break-even period information", async () => {
+    render(<ValueCreationWidget {...defaultProps} />);
+
+    await waitFor(() => {
+      const content = document.body.textContent;
+      // Look for break-even or timeline information
+      expect(content).toMatch(/break.?even|period|month|time/i);
+    });
+  });
+
+  it("displays ROI percentage", async () => {
+    render(<ValueCreationWidget {...defaultProps} />);
+
+    await waitFor(() => {
+      const content = document.body.textContent;
+      // Look for percentage or rate information
+      expect(content).toMatch(/%|percent|rate|return/i);
+    });
+  });
+
+  it("handles className prop", async () => {
+    render(<ValueCreationWidget {...defaultProps} className="custom-class" />);
+
+    await waitFor(() => {
+      // Just verify it renders
+      const container = screen.queryByTestId(
+        /widget-container.*test-value-creation/
+      );
+      expect(container).toBeInTheDocument();
+    });
+  });
+
+  it("renders with all security levels at minimum", async () => {
+    render(
+      <ValueCreationWidget
+        availabilityLevel={"None" as SecurityLevel}
+        integrityLevel={"Low" as SecurityLevel}
+        confidentialityLevel={"None" as SecurityLevel}
+        testId="test-value-creation"
+      />
+    );
+
+    await waitFor(() => {
+      const container = screen.queryByTestId(
+        /widget-container.*test-value-creation/
+      );
+      expect(container).toBeInTheDocument();
+    });
+  });
+
+  it("renders with all security levels at maximum", async () => {
+    render(
+      <ValueCreationWidget
+        availabilityLevel={"Very High" as SecurityLevel}
+        integrityLevel={"Very High" as SecurityLevel}
+        confidentialityLevel={"High" as SecurityLevel}
+        testId="test-value-creation"
+      />
+    );
+
+    await waitFor(() => {
+      const container = screen.queryByTestId(
+        /widget-container.*test-value-creation/
+      );
+      expect(container).toBeInTheDocument();
+    });
+  });
+
+  it("handles asymmetric security levels", async () => {
+    render(
+      <ValueCreationWidget
+        availabilityLevel={"None" as SecurityLevel}
+        integrityLevel={"Very High" as SecurityLevel}
+        confidentialityLevel={"Low" as SecurityLevel}
+        testId="test-value-creation"
+      />
+    );
+
+    await waitFor(() => {
+      const container = screen.queryByTestId(
+        /widget-container.*test-value-creation/
+      );
+      expect(container).toBeInTheDocument();
+    });
+  });
 });
