@@ -1,3 +1,36 @@
+<p align="center">
+  <img src="https://hack23.github.io/cia-compliance-manager/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+</p>
+
+<h1 align="center">🤝 Contributing — CIA Compliance Manager</h1>
+
+<p align="center">
+  <strong>🛡️ Secure Contribution Guidelines</strong><br>
+  <em>🎯 Building Security Through Collaborative Excellence</em>
+</p>
+
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/badge/Owner-CEO-0A66C2?style=for-the-badge" alt="Owner"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Version-1.0-555?style=for-the-badge" alt="Version"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Effective-2024--11--17-success?style=for-the-badge" alt="Effective Date"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Review-Quarterly-orange?style=for-the-badge" alt="Review Cycle"/></a>
+</p>
+
+**📋 Document Owner:** CEO | **📄 Version:** 1.0 | **📅 Last Updated:** 2024-11-17 (UTC)  
+**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2025-02-17
+
+---
+
+## 🎯 **Purpose Statement**
+
+This contributing guide establishes secure contribution procedures for CIA Compliance Manager, implementing [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) and [Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md) from Hack23 AB's ISMS framework.
+
+We believe in **security through transparency** and **continuous improvement**, welcoming contributions that enhance the project while maintaining our high security standards.
+
+*— James Pether Sörling, CEO/Founder*
+
+---
+
 ## Contributing
 
 [fork]: /fork
@@ -49,3 +82,40 @@ Learn more about these agents in [`.github/agents/README.md`](.github/agents/REA
 - [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)
 - [Using Pull Requests](https://help.github.com/articles/about-pull-requests/)
 - [GitHub Help](https://help.github.com)
+
+---
+
+## 📚 Related Documents
+
+### 🛠️ Development & Security Policies
+- [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) - Development security standards
+- [📝 Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md) - Change control procedures
+- [🔐 Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md) - Overall security governance
+- [🔍 Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) - Security testing and remediation
+
+### 📝 Testing & Documentation
+- [📝 Unit Test Plan](./docs/UnitTestPlan.md) - Unit testing requirements
+- [🌐 E2E Test Plan](./docs/E2ETestPlan.md) - End-to-end testing standards
+- [⚡ Performance Testing](./docs/performance-testing.md) - Performance benchmarks
+
+### 🤖 GitHub Copilot Agents
+- [🤖 Agent Guide](../.github/agents/README.md) - Copilot agent documentation
+- [💻 TypeScript React Agent](../.github/agents/typescript-react-agent.md) - React development assistance
+- [🧪 Testing Agent](../.github/agents/testing-agent.md) - Testing support
+- [🔍 Code Review Agent](../.github/agents/code-review-agent.md) - Code quality reviews
+- [🛡️ Security Compliance Agent](../.github/agents/security-compliance-agent.md) - Security guidance
+
+### 📋 Project Governance
+- [📜 Code of Conduct](./CODE_OF_CONDUCT.md) - Community standards
+- [🔐 Security Policy](./SECURITY.md) - Vulnerability reporting
+- [📋 README](./README.md) - Project overview
+
+---
+
+**📋 Document Control:**  
+**✅ Approved by:** James Pether Sörling, CEO  
+**📤 Distribution:** Public  
+**🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-lightgrey?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
+**📅 Effective Date:** 2024-11-17  
+**⏰ Next Review:** 2025-02-17  
+**🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![AWS Well-Architected](https://img.shields.io/badge/AWS-Well_Architected-orange?style=flat-square&logo=amazon-aws&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)
