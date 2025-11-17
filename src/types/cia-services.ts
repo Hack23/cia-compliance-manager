@@ -160,7 +160,11 @@ export interface TechnicalImplementationDetails {
   validationMethod?: string; // For integrity
   protectionMethod?: string; // For confidentiality
   recoveryMethod?: string; // For availability
-  [key: string]: any; // Allow additional properties
+  // Additional optional properties for implementation guidance
+  expertiseLevel?: string; // Expertise level required
+  developmentEffort?: string; // Development effort estimate
+  // Allow additional properties for extensibility (use unknown for type safety)
+  [key: string]: unknown;
 }
 
 /**
