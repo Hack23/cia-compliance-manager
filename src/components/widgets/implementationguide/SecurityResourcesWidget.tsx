@@ -15,53 +15,140 @@ import WidgetContainer from "../../common/WidgetContainer";
 
 /**
  * Props for SecurityResourcesWidget component
+ * 
+ * Defines the configuration for displaying security resources and implementation
+ * guides based on selected security levels across all CIA components.
+ * 
+ * @example
+ * ```tsx
+ * <SecurityResourcesWidget
+ *   availabilityLevel="High"
+ *   integrityLevel="Very High"
+ *   confidentialityLevel="Moderate"
+ *   limit={10}
+ *   showTopResourcesOnly={true}
+ *   className="mt-4"
+ *   testId="security-resources"
+ * />
+ * ```
  */
 export interface SecurityResourcesWidgetProps {
   /**
    * Selected availability level
+   * 
+   * Determines which availability-specific resources and guides to display.
+   * 
+   * @example 'High'
    */
   availabilityLevel: SecurityLevel;
 
   /**
    * Selected integrity level
+   * 
+   * Determines which integrity-specific resources and guides to display.
+   * 
+   * @example 'Very High'
    */
   integrityLevel: SecurityLevel;
 
   /**
    * Selected confidentiality level
+   * 
+   * Determines which confidentiality-specific resources and guides to display.
+   * 
+   * @example 'Moderate'
    */
   confidentialityLevel: SecurityLevel;
 
   /**
-   * Optional CSS class name
+   * Optional CSS class name for custom styling
+   * 
+   * Allows consumers to apply custom CSS classes via Tailwind or custom styles.
+   * 
+   * @default ""
+   * @example "mt-4 shadow-lg rounded-lg"
    */
   className?: string;
 
   /**
-   * Optional test ID for testing
+   * Optional test ID for automated testing
+   * 
+   * Used by Cypress and Vitest for component identification in tests.
+   * Defaults to SECURITY_RESOURCES_TEST_IDS.WIDGET constant.
+   * 
+   * @default SECURITY_RESOURCES_TEST_IDS.WIDGET
+   * @example "custom-security-resources"
    */
   testId?: string;
 
   /**
    * Optional limit for the number of resources to display
+   * 
+   * Controls how many resource cards are shown. Higher limits provide
+   * more comprehensive guidance but require more screen space.
+   * 
+   * @default 8
+   * @example 10
    */
   limit?: number;
 
   /**
-   * Optional flag to show only top resources
+   * Optional flag to show only top/priority resources
+   * 
+   * When true, filters to show only the most relevant and high-priority
+   * resources for the selected security levels, providing focused guidance.
+   * 
+   * @default false
+   * @example true
    */
   showTopResourcesOnly?: boolean;
 }
 
 /**
  * Widget that displays security resources and implementation guides
- *
- * ## Business Perspective
- *
- * This widget provides security practitioners with relevant resources,
+ * 
+ * This component provides security practitioners with relevant resources,
  * implementation guides, and best practices to help implement appropriate
  * security controls for the selected security levels. It bridges the gap
- * between security requirements and practical implementation. 📚
+ * between security requirements and practical implementation.
+ * 
+ * ## Features
+ * - Dynamic resource filtering based on security levels
+ * - Categorized display of resources by CIA component
+ * - Support for limiting displayed resources
+ * - Top resources filtering for focused guidance
+ * - Loading and error states
+ * - Accessible and responsive design
+ * 
+ * ## Business Perspective
+ * 
+ * This widget accelerates security implementation by providing practitioners
+ * with immediately actionable guidance, reducing research time and ensuring
+ * best practices are followed. It improves security ROI by helping teams
+ * implement controls correctly the first time. 📚
+ * 
+ * @component
+ * 
+ * @example
+ * ```tsx
+ * // Basic usage with uniform security levels
+ * <SecurityResourcesWidget
+ *   availabilityLevel="Moderate"
+ *   integrityLevel="Moderate"
+ *   confidentialityLevel="Moderate"
+ * />
+ * 
+ * // Advanced usage with custom configuration
+ * <SecurityResourcesWidget
+ *   availabilityLevel="High"
+ *   integrityLevel="Very High"
+ *   confidentialityLevel="Moderate"
+ *   limit={12}
+ *   showTopResourcesOnly={true}
+ *   className="border-2 border-gray-200 p-4"
+ *   testId="main-security-resources"
+ * />
+ * ```
  */
 const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   availabilityLevel,
