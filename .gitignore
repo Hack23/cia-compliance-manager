@@ -122,6 +122,13 @@ build/*
 docs/cypress/videos
 docs/cypress/downloads
 
+# Build artifacts - generated documentation and reports (should not be committed)
+docs/api/
+docs/assets/
+docs/coverage/
+docs/test-results/
+docs/cypress/mochawesome/
+
 # Dependencies
 /node_modules
 /.pnp
