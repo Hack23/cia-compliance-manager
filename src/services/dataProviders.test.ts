@@ -72,9 +72,9 @@ describe("dataProviders", () => {
       it("should have increasing costs with higher security levels", () => {
         const provider = createDefaultDataProvider();
 
-        const noneCost = provider.availabilityOptions["None"].capex;
-        const lowCost = provider.availabilityOptions["Low"].capex;
-        const veryHighCost = provider.availabilityOptions["Very High"].capex;
+        const noneCost = provider.availabilityOptions["None"].capex ?? 0;
+        const lowCost = provider.availabilityOptions["Low"].capex ?? 0;
+        const veryHighCost = provider.availabilityOptions["Very High"].capex ?? 0;
 
         expect(lowCost).toBeGreaterThan(noneCost);
         expect(veryHighCost).toBeGreaterThan(lowCost);
@@ -102,14 +102,6 @@ describe("dataProviders", () => {
     });
 
     describe("integrityOptions", () => {
-      const securityLevels: SecurityLevel[] = [
-        "None",
-        "Low",
-        "Moderate",
-        "High",
-        "Very High",
-      ];
-
       it("should have options for all security levels", () => {
         const provider = createDefaultDataProvider();
 
@@ -164,9 +156,9 @@ describe("dataProviders", () => {
       it("should have increasing costs with higher security levels", () => {
         const provider = createDefaultDataProvider();
 
-        const noneCost = provider.integrityOptions["None"].capex;
-        const lowCost = provider.integrityOptions["Low"].capex;
-        const veryHighCost = provider.integrityOptions["Very High"].capex;
+        const noneCost = provider.integrityOptions["None"].capex ?? 0;
+        const lowCost = provider.integrityOptions["Low"].capex ?? 0;
+        const veryHighCost = provider.integrityOptions["Very High"].capex ?? 0;
 
         expect(lowCost).toBeGreaterThan(noneCost);
         expect(veryHighCost).toBeGreaterThan(lowCost);
@@ -174,14 +166,6 @@ describe("dataProviders", () => {
     });
 
     describe("confidentialityOptions", () => {
-      const securityLevels: SecurityLevel[] = [
-        "None",
-        "Low",
-        "Moderate",
-        "High",
-        "Very High",
-      ];
-
       it("should have options for all security levels", () => {
         const provider = createDefaultDataProvider();
 
@@ -293,13 +277,6 @@ describe("dataProviders", () => {
     describe("data consistency", () => {
       it("should have consistent structure across all security levels", () => {
         const provider = createDefaultDataProvider();
-        const securityLevels: SecurityLevel[] = [
-          "None",
-          "Low",
-          "Moderate",
-          "High",
-          "Very High",
-        ];
 
         securityLevels.forEach((level) => {
           // Check availability option structure

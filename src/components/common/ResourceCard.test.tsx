@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
 import ResourceCard from "./ResourceCard";
 import { SecurityResource } from "../../types/securityResources";
 
@@ -32,7 +32,9 @@ describe("ResourceCard Component", () => {
   it("displays resource description", () => {
     render(<ResourceCard resource={mockResource} />);
 
-    expect(screen.getByText(mockResource.description)).toBeInTheDocument();
+    if (mockResource.description) {
+      expect(screen.getByText(mockResource.description)).toBeInTheDocument();
+    }
   });
 
   it("displays resource type", () => {
