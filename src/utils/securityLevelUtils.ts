@@ -32,8 +32,22 @@ export const DEFAULT_SECURITY_LEVEL: SecurityLevel = "Moderate";
 
 /**
  * Normalize any security level input to a valid SecurityLevel enum value
- * @param level - Input that might be a security level
- * @returns A valid SecurityLevel
+ * 
+ * Handles various input formats including case variations and null/undefined values.
+ * Provides a robust way to convert user input or API responses to valid SecurityLevel values.
+ * 
+ * @param level - Input that might be a security level (can be string, SecurityLevel, null, or undefined)
+ * @returns A valid SecurityLevel enum value (defaults to 'Moderate' if invalid)
+ * 
+ * @example
+ * ```typescript
+ * normalizeSecurityLevel('high')        // 'High' (case normalization)
+ * normalizeSecurityLevel('VERY HIGH')   // 'Very High' (case normalization)
+ * normalizeSecurityLevel(null)          // 'Moderate' (default)
+ * normalizeSecurityLevel(undefined)     // 'Moderate' (default)
+ * normalizeSecurityLevel('invalid')     // 'Moderate' (default for invalid input)
+ * normalizeSecurityLevel('High')        // 'High' (already valid)
+ * ```
  */
 export function normalizeSecurityLevel(
   level?: string | SecurityLevel | null
@@ -68,8 +82,25 @@ export function normalizeSecurityLevel(
 
 /**
  * Get numeric value for a security level (0-4)
- * @param level - Security level to convert
- * @returns Numeric value
+ * 
+ * Converts SecurityLevel enum values to numeric scores for comparison,
+ * calculation, and sorting operations. Returns 0 for invalid levels.
+ * 
+ * @param level - Security level to convert (SecurityLevel or string)
+ * @returns Numeric value: None=0, Low=1, Moderate=2, High=3, Very High=4
+ * 
+ * @example
+ * ```typescript
+ * getSecurityLevelValue('None')         // 0
+ * getSecurityLevelValue('Low')          // 1
+ * getSecurityLevelValue('Moderate')     // 2
+ * getSecurityLevelValue('High')         // 3
+ * getSecurityLevelValue('Very High')    // 4
+ * getSecurityLevelValue('invalid')      // 0 (invalid input)
+ * 
+ * // Use for comparison
+ * const isHighEnough = getSecurityLevelValue(currentLevel) >= getSecurityLevelValue('High');
+ * ```
  */
 export function getSecurityLevelValue(level: SecurityLevel | string): number {
   // Special handling for invalid security levels to ensure they return 0
@@ -102,9 +133,28 @@ export function getSecurityLevelValue(level: SecurityLevel | string): number {
 
 /**
  * Maps numeric values to security levels
+ * 
+ * Converts numeric security scores back to SecurityLevel enum values.
+ * Useful for converting calculated scores or slider values to security levels.
+ * Values outside 0-4 range default to 'None'.
  *
- * @param value - Numeric value (0-4)
+ * @param value - Numeric value (0-4), where higher numbers indicate stronger security
  * @returns The corresponding security level
+ * 
+ * @example
+ * ```typescript
+ * getSecurityLevelFromValue(0)    // 'None'
+ * getSecurityLevelFromValue(1)    // 'Low'
+ * getSecurityLevelFromValue(2)    // 'Moderate'
+ * getSecurityLevelFromValue(3)    // 'High'
+ * getSecurityLevelFromValue(4)    // 'Very High'
+ * getSecurityLevelFromValue(5)    // 'None' (out of range)
+ * getSecurityLevelFromValue(-1)   // 'None' (out of range)
+ * 
+ * // Use with calculated average
+ * const avgValue = Math.round((val1 + val2 + val3) / 3);
+ * const overallLevel = getSecurityLevelFromValue(avgValue);
+ * ```
  */
 export function getSecurityLevelFromValue(value: number): SecurityLevel {
   const levels: SecurityLevel[] = [
@@ -119,9 +169,26 @@ export function getSecurityLevelFromValue(value: number): SecurityLevel {
 
 /**
  * Get risk level string from a security level
+ * 
+ * Maps security levels to corresponding risk levels using an inverse relationship:
+ * higher security levels correlate with lower risk levels. Used for risk assessment
+ * and dashboard visualizations.
  *
- * @param level - Security level
- * @returns Corresponding risk level string
+ * @param level - Security level to assess
+ * @returns Corresponding risk level: Critical, High, Medium, Low, or Minimal
+ * 
+ * @example
+ * ```typescript
+ * getRiskLevelFromSecurityLevel('None')        // 'Critical'
+ * getRiskLevelFromSecurityLevel('Low')         // 'High'
+ * getRiskLevelFromSecurityLevel('Moderate')    // 'Medium'
+ * getRiskLevelFromSecurityLevel('High')        // 'Low'
+ * getRiskLevelFromSecurityLevel('Very High')   // 'Minimal'
+ * 
+ * // Use in risk assessment
+ * const riskLevel = getRiskLevelFromSecurityLevel(currentSecurityLevel);
+ * const riskFormatted = formatRiskLevel(`${riskLevel} Risk`);
+ * ```
  */
 export function getRiskLevelFromSecurityLevel(level: SecurityLevel): string {
   const riskLevels: Record<SecurityLevel, string> = {
@@ -137,11 +204,33 @@ export function getRiskLevelFromSecurityLevel(level: SecurityLevel): string {
 
 /**
  * Calculates the overall security level based on individual CIA components
+ * 
+ * Computes a composite security level by averaging the numeric values of
+ * availability, integrity, and confidentiality levels, then rounding to
+ * the nearest security level. Provides a single metric for overall security posture.
  *
- * @param availabilityLevel - Availability level
- * @param integrityLevel - Integrity level
- * @param confidentialityLevel - Confidentiality level
- * @returns The overall security level
+ * @param availabilityLevel - Availability security level
+ * @param integrityLevel - Integrity security level
+ * @param confidentialityLevel - Confidentiality security level
+ * @returns The overall security level (average of the three components, rounded)
+ * 
+ * @example
+ * ```typescript
+ * // All equal - returns same level
+ * calculateOverallSecurityLevel('High', 'High', 'High')  // 'High'
+ * 
+ * // Mixed levels - returns average
+ * calculateOverallSecurityLevel('Low', 'Moderate', 'High')  // 'Moderate'
+ * calculateOverallSecurityLevel('None', 'Low', 'Low')       // 'Low'
+ * 
+ * // Use for system-wide security assessment
+ * const overallLevel = calculateOverallSecurityLevel(
+ *   availabilityLevel,
+ *   integrityLevel,
+ *   confidentialityLevel
+ * );
+ * console.log(`System security level: ${overallLevel}`);
+ * ```
  */
 export function calculateOverallSecurityLevel(
   availabilityLevel: SecurityLevel,
@@ -166,14 +255,42 @@ export function calculateOverallSecurityLevel(
 
 /**
  * Determine if a given set of security levels meets minimum requirements
+ * 
+ * Validates that current security levels meet or exceed specified minimum
+ * requirements for all three CIA components. Returns true only if ALL
+ * requirements are met. Essential for compliance checking and gap analysis.
  *
- * @param availabilityLevel - Current availability level
- * @param integrityLevel - Current integrity level
- * @param confidentialityLevel - Current confidentiality level
+ * @param availabilityLevel - Current availability security level
+ * @param integrityLevel - Current integrity security level
+ * @param confidentialityLevel - Current confidentiality security level
  * @param minAvailability - Minimum required availability level
  * @param minIntegrity - Minimum required integrity level
  * @param minConfidentiality - Minimum required confidentiality level
- * @returns Whether all requirements are met
+ * @returns true if all current levels meet or exceed minimum requirements
+ * 
+ * @example
+ * ```typescript
+ * // All requirements met
+ * meetsSecurityRequirements(
+ *   'High', 'High', 'High',      // Current levels
+ *   'Moderate', 'Moderate', 'Moderate'  // Required levels
+ * )  // true
+ * 
+ * // One requirement not met
+ * meetsSecurityRequirements(
+ *   'Low', 'High', 'High',       // Current levels (availability too low)
+ *   'Moderate', 'Moderate', 'Moderate'  // Required levels
+ * )  // false
+ * 
+ * // Use for compliance validation
+ * const compliant = meetsSecurityRequirements(
+ *   currentAvailability, currentIntegrity, currentConfidentiality,
+ *   'High', 'High', 'Moderate'
+ * );
+ * if (!compliant) {
+ *   console.log('Security levels do not meet requirements');
+ * }
+ * ```
  */
 export function meetsSecurityRequirements(
   availabilityLevel: SecurityLevel,
@@ -198,10 +315,29 @@ export function meetsSecurityRequirements(
 
 /**
  * Get the gap between current and required security levels
+ * 
+ * Calculates the numeric difference between two security levels.
+ * Positive values indicate current level exceeds requirements,
+ * negative values indicate a gap that needs to be addressed.
  *
  * @param currentLevel - Current security level
- * @param requiredLevel - Required security level
- * @returns Number of levels gap (negative if current is lower than required)
+ * @param requiredLevel - Required/target security level
+ * @returns Number of levels gap (positive if current > required, negative if current < required)
+ * 
+ * @example
+ * ```typescript
+ * getSecurityLevelGap('High', 'Moderate')      // 1 (exceeds by 1 level)
+ * getSecurityLevelGap('Low', 'High')           // -2 (falls short by 2 levels)
+ * getSecurityLevelGap('Moderate', 'Moderate')  // 0 (meets exactly)
+ * 
+ * // Use for gap analysis
+ * const gap = getSecurityLevelGap(currentLevel, requiredLevel);
+ * if (gap < 0) {
+ *   console.log(`Need to increase security by ${Math.abs(gap)} level(s)`);
+ * } else if (gap > 0) {
+ *   console.log(`Security exceeds requirements by ${gap} level(s)`);
+ * }
+ * ```
  */
 export function getSecurityLevelGap(
   currentLevel: SecurityLevel,
@@ -260,8 +396,25 @@ export function getRecommendedSecurityLevels(
 
 /**
  * Provides a numerical representation of security levels for UI presentation
- * @param level The security level string
- * @returns A string representation formatted as a percentage
+ * 
+ * Converts security levels to percentage strings for use in progress bars,
+ * gauges, and other visual indicators. Maps 0-4 scale to 0-100% range
+ * in 25% increments.
+ * 
+ * @param level - The security level (string or SecurityLevel enum)
+ * @returns A percentage string (0%, 25%, 50%, 75%, or 100%)
+ * 
+ * @example
+ * ```typescript
+ * getSecurityLevelPercentage('None')        // "0%"
+ * getSecurityLevelPercentage('Low')         // "25%"
+ * getSecurityLevelPercentage('Moderate')    // "50%"
+ * getSecurityLevelPercentage('High')        // "75%"
+ * getSecurityLevelPercentage('Very High')   // "100%"
+ * 
+ * // Use in UI components
+ * <ProgressBar value={getSecurityLevelPercentage(level)} />
+ * ```
  */
 export function getSecurityLevelPercentage(
   level: SecurityLevel | string
@@ -275,8 +428,27 @@ export function getSecurityLevelPercentage(
 
 /**
  * Determines the appropriate CSS classes for displaying a security level
- * @param level The security level string or SecurityLevel enum
- * @returns CSS class string for styling the security level
+ * 
+ * Returns Tailwind CSS classes with color coding that visually represents
+ * security level severity. Includes dark mode support. Red=None, Yellow=Low,
+ * Blue=Moderate, Green=High, Purple=Very High.
+ * 
+ * @param level - The security level (string or SecurityLevel enum)
+ * @returns CSS class string for styling the security level badge/indicator
+ * 
+ * @example
+ * ```typescript
+ * getSecurityLevelClass('None')        
+ * // "bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-20 dark:text-red-300"
+ * 
+ * getSecurityLevelClass('High')        
+ * // "bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-20 dark:text-green-300"
+ * 
+ * // Use in components
+ * <span className={`px-2 py-1 rounded ${getSecurityLevelClass(level)}`}>
+ *   {level}
+ * </span>
+ * ```
  */
 export function getSecurityLevelClass(level: string | SecurityLevel): string {
   // Normalize the level to handle both string and SecurityLevel types
@@ -329,9 +501,26 @@ export function getSecurityLevelBadgeVariant(
 
 /**
  * Check if a string is a valid security level
+ * 
+ * Type guard function that validates whether a value is a valid SecurityLevel.
+ * Useful for runtime type checking and validation of user input or API responses.
  *
- * @param value - Value to check
- * @returns Type guard for SecurityLevel
+ * @param value - Value to check (can be any type)
+ * @returns Type predicate indicating if value is SecurityLevel
+ * 
+ * @example
+ * ```typescript
+ * if (isSecurityLevel(userInput)) {
+ *   // TypeScript knows userInput is SecurityLevel here
+ *   const level: SecurityLevel = userInput;
+ *   console.log(`Valid security level: ${level}`);
+ * }
+ * 
+ * isSecurityLevel('High')        // true
+ * isSecurityLevel('Invalid')     // false
+ * isSecurityLevel(123)           // false
+ * isSecurityLevel(null)          // false
+ * ```
  */
 export function isSecurityLevel(value: unknown): value is SecurityLevel {
   if (typeof value !== "string") return false;
@@ -374,11 +563,29 @@ export function getSecurityLevelDescription(level: SecurityLevel): string {
 }
 
 /**
- * Determine if a security level meets compliance requirements
+ * Determine if a security level meets compliance requirements for a specific framework
+ * 
+ * Validates that a security level meets the minimum requirements defined for
+ * common compliance frameworks (SOC 2, ISO 27001, PCI-DSS, HIPAA, NIST, GDPR, CCPA).
+ * Returns true if the level meets or exceeds the framework's minimum requirement.
  *
- * @param level - Security level to check
- * @param framework - Compliance framework to check against
- * @returns Whether the level meets requirements
+ * @param level - Security level to validate
+ * @param framework - Compliance framework name (e.g., 'SOC2', 'PCI-DSS', 'HIPAA')
+ * @returns true if the security level meets the framework's minimum requirements
+ * 
+ * @example
+ * ```typescript
+ * meetsComplianceRequirements('High', 'PCI-DSS')     // true (PCI-DSS requires High)
+ * meetsComplianceRequirements('Moderate', 'PCI-DSS') // false (needs High)
+ * meetsComplianceRequirements('Moderate', 'SOC2')    // true (SOC2 requires Moderate)
+ * meetsComplianceRequirements('High', 'GDPR')        // true (exceeds Moderate requirement)
+ * 
+ * // Validate against multiple frameworks
+ * const frameworks = ['SOC2', 'ISO27001', 'GDPR'];
+ * const allMet = frameworks.every(f => 
+ *   meetsComplianceRequirements(currentLevel, f)
+ * );
+ * ```
  */
 export function meetsComplianceRequirements(
   level: SecurityLevel,
