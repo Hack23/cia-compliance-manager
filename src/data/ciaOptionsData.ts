@@ -528,4 +528,3 @@ export const getDefaultErrorRate = (level: SecurityLevel): string => {
   }
 };
 
-export default defaultCIADataProvider;

@@ -62,9 +62,6 @@ export class ComplianceServiceStatic {
   }
 }
 
-// Add this explicit export to ensure it's available
-export default ComplianceServiceStatic;
-
 /**
  * Generate mock compliance status for testing
  *

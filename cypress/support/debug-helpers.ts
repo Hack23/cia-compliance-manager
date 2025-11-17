@@ -288,11 +288,3 @@ declare global {
     }
   }
 }
-
-// Export helpers object
-export default {
-  debugFailedTest,
-  logAllTestIds,
-  logVisibleElements,
-  analyzeWidgets,
-};

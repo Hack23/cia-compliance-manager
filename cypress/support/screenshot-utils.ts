@@ -9,59 +9,6 @@ interface EnhancedScreenshotOptions extends Cypress.ScreenshotOptions {
 }
 
 /**
- * Apply screenshot-specific styles without affecting the main application
- */
-export function applyScreenshotStyles(): void {
-  cy.document().then((doc) => {
-    const styleElement = doc.createElement("style");
-    styleElement.id = "cypress-screenshot-styles";
-    styleElement.textContent = `
-      /* Stabilize animations for screenshots */
-      * {
-        animation-duration: 0ms !important;
-        transition-duration: 0ms !important;
-        animation-delay: 0ms !important;
-        transition-delay: 0ms !important;
-      }
-      
-      /* Ensure consistent widget heights in screenshots */
-      [data-testid^="widget-"] {
-        min-height: 300px;
-        height: auto !important;
-        max-height: none !important;
-      }
-      
-      /* Make sure content is fully visible */
-      .widget-body {
-        overflow: visible !important;
-        max-height: none !important;
-      }
-      
-      /* Fix radar chart specifically for screenshots */
-      .radar-chart-container canvas {
-        max-height: 250px;
-        max-width: 100%;
-        height: auto !important;
-        width: auto !important;
-        display: block !important;
-        margin: 0 auto !important;
-      }
-      
-      /* Ensure text is visible in screenshots */
-      [data-testid^="widget-"] .widget-body {
-        color: var(--text-color) !important;
-      }
-      
-      /* Fix positioning for screenshots */
-      .fixed {
-        position: absolute !important;
-      }
-    `;
-    doc.head.appendChild(styleElement);
-  });
-}
-
-/**
  * Capture full page screenshots in both light and dark modes
  * @param pageName Name of the page to capture
  * @param captureHtml Whether to capture HTML content (default: false)
