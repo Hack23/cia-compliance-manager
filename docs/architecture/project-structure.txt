@@ -18,6 +18,7 @@ src/components/common/BusinessImpactSection.test.tsx
 src/components/common/BusinessImpactSection.tsx
 src/components/common/KeyValuePair.test.tsx
 src/components/common/KeyValuePair.tsx
+src/components/common/ResourceCard.test.tsx
 src/components/common/ResourceCard.tsx
 src/components/common/RiskLevelBadge.test.tsx
 src/components/common/RiskLevelBadge.tsx
@@ -34,8 +35,16 @@ src/components/common/WidgetContainer.tsx
 src/components/index.ts
 src/components/widgets/assessmentcenter/BusinessImpactAnalysisWidget.test.tsx
 src/components/widgets/assessmentcenter/BusinessImpactAnalysisWidget.tsx
+src/components/widgets/assessmentcenter/SecurityBusinessTab.test.tsx
+src/components/widgets/assessmentcenter/SecurityBusinessTab.tsx
+src/components/widgets/assessmentcenter/SecurityComplianceTab.test.tsx
+src/components/widgets/assessmentcenter/SecurityComplianceTab.tsx
+src/components/widgets/assessmentcenter/SecurityImplementationTab.test.tsx
+src/components/widgets/assessmentcenter/SecurityImplementationTab.tsx
 src/components/widgets/assessmentcenter/SecurityLevelWidget.test.tsx
 src/components/widgets/assessmentcenter/SecurityLevelWidget.tsx
+src/components/widgets/assessmentcenter/SecurityOverviewTab.test.tsx
+src/components/widgets/assessmentcenter/SecurityOverviewTab.tsx
 src/components/widgets/assessmentcenter/SecuritySummaryWidget.test.tsx
 src/components/widgets/assessmentcenter/SecuritySummaryWidget.tsx
 src/components/widgets/businessvalue/ComplianceStatusWidget.test.tsx
@@ -51,6 +60,8 @@ src/components/widgets/impactanalysis/ConfidentialityImpactWidget.test.tsx
 src/components/widgets/impactanalysis/ConfidentialityImpactWidget.tsx
 src/components/widgets/impactanalysis/IntegrityImpactWidget.test.tsx
 src/components/widgets/impactanalysis/IntegrityImpactWidget.tsx
+src/components/widgets/implementationguide/CIAComponentDetails.test.tsx
+src/components/widgets/implementationguide/CIAComponentDetails.tsx
 src/components/widgets/implementationguide/SecurityResourcesWidget.test.tsx
 src/components/widgets/implementationguide/SecurityResourcesWidget.tsx
 src/components/widgets/implementationguide/SecurityVisualizationWidget.enhanced.test.tsx
@@ -102,6 +113,8 @@ src/hooks/useCIAOptions.test.tsx
 src/hooks/useCIAOptions.ts
 src/hooks/useComplianceService.ts
 src/hooks/useSecurityMetricsService.ts
+src/hooks/useSecuritySummaryData.ts
+src/hooks/useTechnicalDetailsData.ts
 src/index.css
 src/index.ts
 src/index.tsx
@@ -129,6 +142,7 @@ src/services/complianceService.ts
 src/services/complianceTestHelpers.implementation.test.ts
 src/services/complianceTestHelpers.test.ts
 src/services/complianceTestHelpers.ts
+src/services/dataProviders.test.ts
 src/services/dataProviders.ts
 src/services/index.ts
 src/services/securityMetricsService.impact.test.ts
@@ -201,6 +215,7 @@ src/utils/businessValueUtils.comprehensive.test.ts
 src/utils/businessValueUtils.ts
 src/utils/colorUtils.test.ts
 src/utils/colorUtils.ts
+src/utils/complianceTextUtils.ts
 src/utils/costCalculationUtils.test.ts
 src/utils/costCalculationUtils.ts
 src/utils/errorUtils.test.ts
@@ -208,11 +223,13 @@ src/utils/errorUtils.ts
 src/utils/formatUtils.comprehensive.test.ts
 src/utils/formatUtils.test.ts
 src/utils/formatUtils.ts
+src/utils/implementationUtils.ts
 src/utils/index.ts
 src/utils/levelValuesUtils.test.ts
 src/utils/levelValuesUtils.ts
 src/utils/logger.test.ts
 src/utils/logger.ts
+src/utils/resourceUtils.ts
 src/utils/riskUtils.test.ts
 src/utils/riskUtils.ts
 src/utils/securityDefaults.test.ts
@@ -220,6 +237,8 @@ src/utils/securityDefaults.ts
 src/utils/securityLevelUtils.test.ts
 src/utils/securityLevelUtils.ts
 src/utils/serviceUtils.ts
+src/utils/statusUtils.ts
+src/utils/technicalDetailsDefaults.ts
 src/utils/typeGuards.enhanced.test.ts
 src/utils/typeGuards.test.ts
 src/utils/typeGuards.ts

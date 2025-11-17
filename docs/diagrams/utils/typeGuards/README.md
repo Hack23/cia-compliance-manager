@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.39**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.40**](../../README.md)
 
 ***
 
@@ -12,6 +12,7 @@
 - [extractSecurityLevels](functions/extractSecurityLevels.md)
 - [getImplementationCost](functions/getImplementationCost.md)
 - [getSecurityLevelOption](functions/getSecurityLevelOption.md)
+- [hasMethod](functions/hasMethod.md)
 - [hasProperty](functions/hasProperty.md)
 - [hasTagValue](functions/hasTagValue.md)
 - [hasWidgetProps](functions/hasWidgetProps.md)

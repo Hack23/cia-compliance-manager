@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.39**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isComplianceFrameworkObject**(`value`): `boolean`
 
-Defined in: [utils/typeGuards.ts:695](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/utils/typeGuards.ts#L695)
+Defined in: [utils/typeGuards.ts:699](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/utils/typeGuards.ts#L699)
 
 Type guard for compliance framework object
 

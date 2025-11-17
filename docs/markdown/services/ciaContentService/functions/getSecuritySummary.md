@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.39**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: getSecuritySummary()
 
-> **getSecuritySummary**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `Promise`\<`any`\>
+> **getSecuritySummary**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `Promise`\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [services/ciaContentService.ts:1428](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/services/ciaContentService.ts#L1428)
+Defined in: [services/ciaContentService.ts:1428](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/services/ciaContentService.ts#L1428)
 
 Get security summary based on security levels
 
@@ -34,6 +34,6 @@ Confidentiality security level
 
 ## Returns
 
-`Promise`\<`any`\>
+`Promise`\<`Record`\<`string`, `unknown`\>\>
 
 Security summary details

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.39**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.40**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIADataProvider
 
-Defined in: [types/cia-services.ts:301](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L301)
+Defined in: [types/cia-services.ts:302](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L302)
 
 Data provider for CIA security information
 
@@ -16,7 +16,7 @@ Data provider for CIA security information
 
 > **availabilityOptions**: `Record`\<[`SecurityLevel`](../cia/type-aliases/SecurityLevel.md), [`CIADetails`](CIADetails.md)\>
 
-Defined in: [types/cia-services.ts:307](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L307)
+Defined in: [types/cia-services.ts:308](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L308)
 
 ***
 
@@ -24,63 +24,63 @@ Defined in: [types/cia-services.ts:307](https://github.com/Hack23/cia-compliance
 
 > **confidentialityOptions**: `Record`\<[`SecurityLevel`](../cia/type-aliases/SecurityLevel.md), [`CIADetails`](CIADetails.md)\>
 
-Defined in: [types/cia-services.ts:309](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L309)
+Defined in: [types/cia-services.ts:310](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L310)
 
 ***
 
 ### getBusinessImpact()?
 
-> `optional` **getBusinessImpact**: () => `Promise`\<`any`\>
+> `optional` **getBusinessImpact**: () => `Promise`\<[`BusinessImpactDetails`](BusinessImpactDetails.md)\>
 
-Defined in: [types/cia-services.ts:356](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L356)
+Defined in: [types/cia-services.ts:357](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L357)
 
 Get business impact
 
 #### Returns
 
-`Promise`\<`any`\>
+`Promise`\<[`BusinessImpactDetails`](BusinessImpactDetails.md)\>
 
 ***
 
 ### getComplianceFrameworks()?
 
-> `optional` **getComplianceFrameworks**: () => `Promise`\<`any`[]\>
+> `optional` **getComplianceFrameworks**: () => `Promise`\<[`ComplianceFramework`](../compliance/interfaces/ComplianceFramework.md)[]\>
 
-Defined in: [types/cia-services.ts:346](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L346)
+Defined in: [types/cia-services.ts:347](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L347)
 
 Get compliance frameworks
 
 #### Returns
 
-`Promise`\<`any`[]\>
+`Promise`\<[`ComplianceFramework`](../compliance/interfaces/ComplianceFramework.md)[]\>
 
 ***
 
 ### getComplianceRequirements()?
 
-> `optional` **getComplianceRequirements**: () => `Promise`\<`any`\>
+> `optional` **getComplianceRequirements**: () => `Promise`\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [types/cia-services.ts:351](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L351)
+Defined in: [types/cia-services.ts:352](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L352)
 
 Get compliance requirements
 
 #### Returns
 
-`Promise`\<`any`\>
+`Promise`\<`Record`\<`string`, `unknown`\>\>
 
 ***
 
 ### getCostEstimates()?
 
-> `optional` **getCostEstimates**: () => `Promise`\<`any`\>
+> `optional` **getCostEstimates**: () => `Promise`\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [types/cia-services.ts:376](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L376)
+Defined in: [types/cia-services.ts:377](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L377)
 
 Get cost estimates
 
 #### Returns
 
-`Promise`\<`any`\>
+`Promise`\<`Record`\<`string`, `unknown`\>\>
 
 ***
 
@@ -88,7 +88,7 @@ Get cost estimates
 
 > `optional` **getDefaultExpertiseLevel**: (`level`) => `string`
 
-Defined in: [types/cia-services.ts:320](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L320)
+Defined in: [types/cia-services.ts:321](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L321)
 
 Get default expertise level for a security level
 
@@ -108,7 +108,7 @@ Get default expertise level for a security level
 
 > `optional` **getDefaultSecurityIcon**: (`level`) => `string`
 
-Defined in: [types/cia-services.ts:315](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L315)
+Defined in: [types/cia-services.ts:316](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L316)
 
 Get default security icon for a security level
 
@@ -128,7 +128,7 @@ Get default security icon for a security level
 
 > `optional` **getDefaultValuePoints**: (`level`) => `string`[]
 
-Defined in: [types/cia-services.ts:330](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L330)
+Defined in: [types/cia-services.ts:331](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L331)
 
 Get default value points for a security level
 
@@ -146,15 +146,15 @@ Get default value points for a security level
 
 ### getImplementationDetails()?
 
-> `optional` **getImplementationDetails**: () => `Promise`\<`any`\>
+> `optional` **getImplementationDetails**: () => `Promise`\<[`TechnicalImplementationDetails`](TechnicalImplementationDetails.md)\>
 
-Defined in: [types/cia-services.ts:386](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L386)
+Defined in: [types/cia-services.ts:387](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L387)
 
 Get implementation details
 
 #### Returns
 
-`Promise`\<`any`\>
+`Promise`\<[`TechnicalImplementationDetails`](TechnicalImplementationDetails.md)\>
 
 ***
 
@@ -162,7 +162,7 @@ Get implementation details
 
 > `optional` **getProtectionLevel**: (`level`) => `string`
 
-Defined in: [types/cia-services.ts:325](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L325)
+Defined in: [types/cia-services.ts:326](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L326)
 
 Get protection level for a security level
 
@@ -180,15 +180,15 @@ Get protection level for a security level
 
 ### getRemediationSteps()?
 
-> `optional` **getRemediationSteps**: () => `Promise`\<`any`[]\>
+> `optional` **getRemediationSteps**: () => `Promise`\<`string`[]\>
 
-Defined in: [types/cia-services.ts:391](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L391)
+Defined in: [types/cia-services.ts:392](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L392)
 
 Get remediation steps
 
 #### Returns
 
-`Promise`\<`any`[]\>
+`Promise`\<`string`[]\>
 
 ***
 
@@ -196,7 +196,7 @@ Get remediation steps
 
 > `optional` **getSecurityLevelRecommendations**: (`level`) => `Promise`\<`string`[]\>
 
-Defined in: [types/cia-services.ts:341](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L341)
+Defined in: [types/cia-services.ts:342](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L342)
 
 Get security level recommendations
 
@@ -214,57 +214,57 @@ Get security level recommendations
 
 ### getSecurityMetrics()?
 
-> `optional` **getSecurityMetrics**: () => `Promise`\<`any`\>
+> `optional` **getSecurityMetrics**: () => `Promise`\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [types/cia-services.ts:361](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L361)
+Defined in: [types/cia-services.ts:362](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L362)
 
 Get security metrics
 
 #### Returns
 
-`Promise`\<`any`\>
+`Promise`\<`Record`\<`string`, `unknown`\>\>
 
 ***
 
 ### getSecurityResources()?
 
-> `optional` **getSecurityResources**: () => `Promise`\<`any`[]\>
+> `optional` **getSecurityResources**: () => `Promise`\<[`SecurityResource`](../../services/interfaces/SecurityResource.md)[]\>
 
-Defined in: [types/cia-services.ts:366](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L366)
+Defined in: [types/cia-services.ts:367](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L367)
 
 Get security resources
 
 #### Returns
 
-`Promise`\<`any`[]\>
+`Promise`\<[`SecurityResource`](../../services/interfaces/SecurityResource.md)[]\>
 
 ***
 
 ### getSLAMetrics()?
 
-> `optional` **getSLAMetrics**: () => `Promise`\<`any`\>
+> `optional` **getSLAMetrics**: () => `Promise`\<[`SLAMetrics`](../businessImpact/interfaces/SLAMetrics.md)\>
 
-Defined in: [types/cia-services.ts:371](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L371)
+Defined in: [types/cia-services.ts:372](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L372)
 
 Get SLA metrics
 
 #### Returns
 
-`Promise`\<`any`\>
+`Promise`\<[`SLAMetrics`](../businessImpact/interfaces/SLAMetrics.md)\>
 
 ***
 
 ### getValueCreationMetrics()?
 
-> `optional` **getValueCreationMetrics**: () => `Promise`\<`any`\>
+> `optional` **getValueCreationMetrics**: () => `Promise`\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [types/cia-services.ts:381](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L381)
+Defined in: [types/cia-services.ts:382](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L382)
 
 Get value creation metrics
 
 #### Returns
 
-`Promise`\<`any`\>
+`Promise`\<`Record`\<`string`, `unknown`\>\>
 
 ***
 
@@ -272,7 +272,7 @@ Get value creation metrics
 
 > `optional` **getValuePoints**: (`level`) => `string`[]
 
-Defined in: [types/cia-services.ts:336](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L336)
+Defined in: [types/cia-services.ts:337](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L337)
 
 Get value points for a security level
 
@@ -296,7 +296,7 @@ Use getDefaultValuePoints instead
 
 > `optional` **initialize**: () => `Promise`\<`boolean`\>
 
-Defined in: [types/cia-services.ts:305](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L305)
+Defined in: [types/cia-services.ts:306](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L306)
 
 Initialize the data provider
 
@@ -310,7 +310,7 @@ Initialize the data provider
 
 > **integrityOptions**: `Record`\<[`SecurityLevel`](../cia/type-aliases/SecurityLevel.md), [`CIADetails`](CIADetails.md)\>
 
-Defined in: [types/cia-services.ts:308](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L308)
+Defined in: [types/cia-services.ts:309](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L309)
 
 ***
 
@@ -318,4 +318,4 @@ Defined in: [types/cia-services.ts:308](https://github.com/Hack23/cia-compliance
 
 > **roiEstimates**: [`ROIEstimatesMap`](ROIEstimatesMap.md)
 
-Defined in: [types/cia-services.ts:310](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/cia-services.ts#L310)
+Defined in: [types/cia-services.ts:311](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L311)
