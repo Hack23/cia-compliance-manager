@@ -160,73 +160,6 @@ export function applyTestStyles(): void {
   });
 }
 
-/**
- * Apply optimized test styles for screenshot tests - simplified version
- * that applies only critical fixes for better performance
- */
-export function applyScreenshotStyles(): void {
-  cy.document().then((doc) => {
-    // Create style element if it doesn't exist
-    let styleEl = doc.getElementById("cypress-screenshot-styles");
-    if (!styleEl) {
-      styleEl = doc.createElement("style");
-      styleEl.id = "cypress-screenshot-styles";
-      doc.head.appendChild(styleEl);
-    }
-
-    // Add only the most important styles needed for screenshots
-    styleEl.textContent = `
-      /* Fix widget container styling for screenshots */
-      .widget-container,
-      [data-testid^="widget-"],
-      [class*="widget-container"] {
-        max-height: 600px !important;
-        overflow: auto !important;
-        margin: 10px !important;
-        border: 2px solid rgba(59, 130, 246, 0.5) !important;
-        position: relative !important;
-        height: auto !important;
-        min-height: 50px !important;
-        width: auto !important;
-        max-width: 800px !important;
-      }
-      
-      /* Fix widget content display */
-      .widget-body, 
-      .widget-content,
-      [class*="widget-body"],
-      [class*="widget-content"] {
-        max-height: none !important;
-        overflow: visible !important;
-        height: auto !important;
-        display: block !important;
-      }
-      
-      /* Ensure text is visible */
-      p, h1, h2, h3, h4, h5, h6, span, div, li {
-        overflow: visible !important;
-        text-overflow: clip !important;
-        white-space: normal !important;
-      }
-      
-      /* Disable animations and transitions */
-      * {
-        transition: none !important;
-        animation: none !important;
-      }
-      
-      /* Fix radar chart specific issues */
-      [data-testid*="radar-chart"] canvas,
-      [class*="radar-chart"] canvas {
-        width: 100% !important;
-        max-width: 400px !important;
-        height: 300px !important;
-        margin: 0 auto;
-        display: block;
-      }
-    `;
-  });
-}
 
 /**
  * Optimize a specific widget for screenshot
@@ -303,102 +236,34 @@ export function forceLightMode(): void {
   });
 }
 
-/**
- * Apply styles specifically to optimize dashboard grid for screenshots
- * Ensures proper 3x4 layout
- */
-export function optimizeDashboardGridForScreenshots(): void {
-  cy.document().then((doc) => {
-    // Create style element if it doesn't exist
-    let styleEl = doc.getElementById("cypress-grid-styles");
-    if (!styleEl) {
-      styleEl = doc.createElement("style");
-      styleEl.id = "cypress-grid-styles";
-      doc.head.appendChild(styleEl);
-    }
-
-    // Add grid optimization styles
-    styleEl.textContent = `
-      /* Optimize grid for 3x4 layout */
-      [data-testid="dashboard-grid"] {
-        display: grid !important;
-        grid-template-columns: repeat(3, 1fr) !important;
-        grid-auto-rows: minmax(280px, auto) !important;
-        gap: 16px !important;
-        padding: 16px !important;
-        width: calc(100% - 32px) !important;
-        max-width: 1920px !important;
-        margin: 0 auto !important;
-      }
-      
-      /* Ensure widget containers have consistent sizing */
-      [data-testid="dashboard-grid"] > div {
-        min-height: 280px !important;
-        height: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
-        overflow: visible !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-      
-      /* Ensure header and body have proper sizing */
-      .widget-header,
-      [data-testid^="widget-"] > div:first-child {
-        height: auto !important;
-        min-height: 32px !important;
-        max-height: 40px !important;
-        padding: 4px 12px !important;
-      }
-      
-      /* Ensure content body fills available space */
-      .widget-body,
-      [data-testid^="widget-"] > div:nth-child(2) {
-        flex: 1 1 auto !important;
-        overflow: auto !important;
-        height: auto !important;
-      }
-      
-      /* Disable animations for cleaner screenshots */
-      * {
-        animation: none !important;
-        transition: none !important;
-      }
-    `;
-
-    // Force layout recalculation
-    doc.body.style.display = "none";
-    const _ = doc.body.offsetHeight; // Force reflow
-    doc.body.style.display = "";
-  });
-
-  // Add command to use this from tests
-  // Fix: Use 'as any' to bypass TypeScript checking for the command add operation
-  (Cypress.Commands as any).add(
-    "optimizeGridLayout",
-    optimizeDashboardGridForScreenshots
-  );
-}
-
-// Declare the optimizeGridLayout command in the global Cypress namespace
+// Declare commands in the global Cypress namespace
 declare global {
   namespace Cypress {
     interface Chainable {
       /**
-       * Optimize dashboard grid for screenshots
-       * Applies styles to ensure proper 3x4 layout
+       * Apply test styles to fix common widget display issues
        */
-      optimizeGridLayout(): Chainable<void>;
+      applyTestStyles(): Chainable<void>;
+      /**
+       * Optimize widget for screenshot
+       */
+      optimizeWidgetForScreenshot($widget: JQuery<HTMLElement>): Chainable<void>;
+      /**
+       * Force dark mode on the page
+       */
+      forceDarkMode(): Chainable<void>;
+      /**
+       * Force light mode on the page
+       */
+      forceLightMode(): Chainable<void>;
     }
   }
 }
 
-// Export the function for direct import
+// Export functions for direct import
 export default {
   applyTestStyles,
-  applyScreenshotStyles,
   optimizeWidgetForScreenshot,
   forceDarkMode,
   forceLightMode,
-  optimizeDashboardGridForScreenshots,
 };

@@ -3,24 +3,6 @@
  */
 
 /**
- * Run this command after tests to analyze widget layout and content issues
- */
-export function analyzeScreenshots(): void {
-  cy.task("analyzeScreenshots").then((results: any) => {
-    cy.log(
-      `Screenshot analysis complete: ${results.analyzed} screenshots processed`
-    );
-    cy.log(`Issues found: ${results.issues.length}`);
-
-    // Log detailed issues
-    results.issues.forEach((issue: any, idx: number) => {
-      cy.log(`Issue ${idx + 1}: ${issue.type} in ${issue.file}`);
-      cy.log(`Description: ${issue.description}`);
-    });
-  });
-}
-
-/**
  * Detects common issues in widget layout and content
  * @param widgetName Name of the widget being tested
  * @param $widget jQuery element of the widget
