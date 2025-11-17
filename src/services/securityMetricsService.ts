@@ -23,6 +23,7 @@ export interface CostEstimation {
   totalImplementationCost: string | number;
   annualMaintenanceCost: string | number;
   costBreakdown: Record<string, unknown>;
+  roi?: Record<string, unknown>;
 }
 
 /**
@@ -39,7 +40,7 @@ export interface TechnicalDetailsResponse {
     diagrams?: unknown[];
   };
   implementation: {
-    steps: string[];
+    steps?: string[];
     timeline: string;
     keyMilestones: string[];
     resources: Array<{
@@ -1290,11 +1291,11 @@ export const getValueCreationMetrics = async (
   confidentialityLevel: SecurityLevel
 ): Promise<ValueCreationMetrics> => {
   // This would normally fetch from an API, but for now we'll return mock data
-  const roiValue = calculateROI(availabilityLevel, integrityLevel, confidentialityLevel);
+  const roiPercentage = calculateROI(availabilityLevel, integrityLevel, confidentialityLevel);
   return {
     roi: {
-      value: roiValue,
-      percentage: roiValue,
+      value: "Estimated", // Placeholder for actual ROI value calculation
+      percentage: roiPercentage,
       description: `Expected return on investment for security implementation`,
     },
     riskReduction: calculateRiskReduction(
@@ -1418,13 +1419,6 @@ export const getTechnicalDetails = async (
       confidentiality: getConfidentialityTechnologies(confidentialityLevel),
     },
     implementation: {
-      steps: [
-        "Assess current security posture",
-        "Design security architecture",
-        "Implement security controls",
-        "Test and validate",
-        "Deploy and monitor",
-      ],
       complexity: calculateImplementationComplexity(
         availabilityLevel,
         integrityLevel,
