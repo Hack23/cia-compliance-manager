@@ -462,7 +462,7 @@ export function isSecurityLevelWidgetProps(
 ): value is SecurityLevelWidgetProps {
   if (!isWidgetProps(value)) return false;
 
-  const val = value as any; // Use any temporarily for property checking
+  const val = value as Record<string, unknown>;
 
   // Check for the additional required properties
   return (
@@ -485,7 +485,7 @@ export function isCIAImpactSummaryWidgetProps(
 ): value is CIAImpactSummaryWidgetProps {
   if (!isWidgetProps(value)) return false;
 
-  const val = value as any; // Use any temporarily for property checking
+  const val = value as Record<string, unknown>;
 
   // Check for the additional required properties
   return (
