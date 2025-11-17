@@ -226,5 +226,3 @@ export const useCIAOptions = () => {
     getROIDataForCombinedKey,
   };
 };
-
-export default useCIAOptions;

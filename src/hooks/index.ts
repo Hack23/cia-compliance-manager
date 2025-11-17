@@ -14,7 +14,9 @@
  */
 
 // Security Level Hooks
-export { default as useCIAContentService } from "./useCIAContentService";
+export { useCIAContentService } from "./useCIAContentService";
 export { useCIAOptions } from "./useCIAOptions";
+export { useComplianceService } from "./useComplianceService";
+export { useSecurityMetricsService } from "./useSecurityMetricsService";
 
 // Add other hooks as they're created

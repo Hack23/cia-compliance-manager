@@ -50,6 +50,3 @@ export const useCIAContentService = () => {
     refresh,
   };
 };
-
-// Keep the default export for backward compatibility
-export default useCIAContentService;

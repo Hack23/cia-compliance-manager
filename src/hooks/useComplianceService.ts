@@ -68,5 +68,3 @@ export function useComplianceService() {
     error,
   };
 }
-
-export default useComplianceService;
