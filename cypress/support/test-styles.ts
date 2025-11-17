@@ -259,11 +259,3 @@ declare global {
     }
   }
 }
-
-// Export functions for direct import
-export default {
-  applyTestStyles,
-  optimizeWidgetForScreenshot,
-  forceDarkMode,
-  forceLightMode,
-};
