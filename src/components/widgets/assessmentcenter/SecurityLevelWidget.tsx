@@ -7,6 +7,7 @@ import {
 import { CIA_COMPONENT_ICONS } from "../../../constants/uiConstants";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
+import { CIADetails } from "../../../types/cia-services";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 
@@ -101,7 +102,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
   // Add error state
   const [error, setError] = useState<Error | null>(null);
-  const [activeDetails, setActiveDetails] = useState<any>(null);
+  const [activeDetails, setActiveDetails] = useState<CIADetails | null>(null);
 
   // Track the last changed component for visual feedback
   const [lastChangedComponent, setLastChangedComponent] = useState<

@@ -37,9 +37,10 @@ describe("CIAContentService Exported Functions", () => {
       );
 
       expect(summary).toBeDefined();
-      expect(summary.domains.availability.level).toBe("Low");
-      expect(summary.domains.integrity.level).toBe("Moderate");
-      expect(summary.domains.confidentiality.level).toBe("High");
+      const summaryTyped = summary as { domains: { availability: { level: string }; integrity: { level: string }; confidentiality: { level: string } } };
+      expect(summaryTyped.domains.availability.level).toBe("Low");
+      expect(summaryTyped.domains.integrity.level).toBe("Moderate");
+      expect(summaryTyped.domains.confidentiality.level).toBe("High");
     });
   });
 

@@ -41,7 +41,7 @@ export type RiskLevel =
  * @param value - Value to check
  * @returns True if the value is a valid SecurityLevel
  */
-export function isSecurityLevel(value: any): value is SecurityLevel {
+export function isSecurityLevel(value: unknown): value is SecurityLevel {
   if (typeof value !== "string") {
     return false;
   }

@@ -52,10 +52,10 @@ declare module './complianceService' {
     ): boolean;
     
     // Support for instance-based testing
-    static create(dataProvider?: any): ComplianceServiceAdapter;
+    static create(dataProvider?: Record<string, unknown>): ComplianceServiceAdapter;
     
     // Instance methods (for compatibility with tests)
-    constructor(dataProvider?: any);
+    constructor(dataProvider?: Record<string, unknown>);
     
     getComplianceStatus(
       availabilityLevel: SecurityLevel,

@@ -7,6 +7,7 @@ import {
   BusinessItem,
 } from "../../../types/businessImpact";
 import { SecurityLevel } from "../../../types/cia";
+import { BusinessImpactDetails } from "../../../types/cia-services";
 import { isNullish } from "../../../utils/typeGuards";
 import KeyValuePair from "../../common/KeyValuePair";
 import RiskLevelBadge from "../../common/RiskLevelBadge";
@@ -661,9 +662,9 @@ const BusinessImpactAnalysisWidget: React.FC<
 
 // Helper function to determine the highest impact area from the components
 function getHighestImpactArea(
-  availabilityImpact: any,
-  integrityImpact: any,
-  confidentialityImpact: any
+  availabilityImpact: BusinessImpactDetails,
+  integrityImpact: BusinessImpactDetails,
+  confidentialityImpact: BusinessImpactDetails
 ): string {
   const impactAreas = [];
 
