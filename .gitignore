@@ -121,13 +121,6 @@ build/*
 # Cypress
 docs/cypress/videos
 docs/cypress/downloads
-docs/cypress/mochawesome/
-
-# Documentation build artifacts (generated files)
-docs/api/
-docs/assets/
-docs/coverage/
-docs/test-results/
 
 # Dependencies
 /node_modules

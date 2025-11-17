@@ -1,0 +1,111 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-05-02T16:31:56.059Z",
+    "end": "2025-05-02T16:32:07.550Z",
+    "duration": 11491,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "4f3c553c-2be2-4e1a-9052-00b12b0ad0d5",
+      "title": "",
+      "fullFile": "cypress/e2e/security/security-level-transitions.cy.ts",
+      "file": "cypress/e2e/security/security-level-transitions.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2a62d79d-e677-43e7-9746-bb22414a1414",
+          "title": "Security Level Transitions",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "maintains application integrity during security level changes",
+              "fullTitle": "Security Level Transitions maintains application integrity during security level changes",
+              "timedOut": null,
+              "duration": 11422,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const securityTransitions = [\n  {\n    from: [\n      SECURITY_LEVELS.LOW,\n      SECURITY_LEVELS.LOW,\n      SECURITY_LEVELS.LOW\n    ],\n    to: [\n      SECURITY_LEVELS.HIGH,\n      SECURITY_LEVELS.HIGH,\n      SECURITY_LEVELS.HIGH\n    ],\n    name: \"low-to-high\"\n  },\n  {\n    from: [\n      SECURITY_LEVELS.HIGH,\n      SECURITY_LEVELS.HIGH,\n      SECURITY_LEVELS.HIGH\n    ],\n    to: [\n      SECURITY_LEVELS.HIGH,\n      SECURITY_LEVELS.LOW,\n      SECURITY_LEVELS.MODERATE\n    ],\n    name: \"high-to-mixed\"\n  }\n];\nsecurityTransitions.forEach((transition, index) => {\n  const logArgs = [\n    `Testing transition ${transition.name} (${index + 1}/${securityTransitions.length})`\n  ];\n  cy.log(logArgs[0]);\n  cy.setSecurityLevels(\n    transition.from[0],\n    transition.from[1],\n    transition.from[2]\n  );\n  cy.wait(1e3);\n  if (index === 0) {\n    cy.screenshot(`transition-initial-${transition.name}`);\n  }\n  findImportantWidgets().then((widgets) => {\n    captureWidgetStates(widgets).then((initialStates) => {\n      const changeLogArgs = [\n        `Changing to security levels: ${transition.to.join(\", \")}`\n      ];\n      cy.log(changeLogArgs[0]);\n      cy.setSecurityLevels(\n        transition.to[0],\n        transition.to[1],\n        transition.to[2]\n      );\n      cy.wait(1e3);\n      if (index === 0) {\n        cy.screenshot(`transition-after-${transition.name}`);\n      }\n      findImportantWidgets().then((newWidgets) => {\n        const foundLogArgs = [\n          `Found ${newWidgets.length} widgets after transition`\n        ];\n        cy.log(...foundLogArgs);\n        expect(newWidgets.length).to.be.at.least(\n          Math.max(1, widgets.length - 1),\n          \"Number of widgets shouldn't decrease significantly during transitions\"\n        );\n        cy.wrap(newWidgets).each(($widget, i) => {\n          const id = $widget.attr(\"data-testid\") || `widget-${i}`;\n          checkForProblematicContent($widget);\n          if (initialStates[id]) {\n            compareWidgetContent($widget, initialStates[id], id);\n          }\n        });\n      });\n    });\n  });\n});",
+              "err": {},
+              "uuid": "b68f6979-2700-4a9f-b147-eac195ee3618",
+              "parentUUID": "2a62d79d-e677-43e7-9746-bb22414a1414",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b68f6979-2700-4a9f-b147-eac195ee3618"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 11422,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "docs/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
