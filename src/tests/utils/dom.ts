@@ -40,16 +40,6 @@ export function mockDOMAPIs() {
 }
 
 /**
- * Checks if a DOM element has a specific CSS class
- * @param element Element to check
- * @param className Class name to check for
- * @returns True if the element has the class
- */
-export function hasClass(element: Element, className: string): boolean {
-  return element.classList.contains(className);
-}
-
-/**
  * Checks if an element has a security level class
  * @param element Element to check
  * @param level Security level to check for
@@ -59,5 +49,5 @@ export function checkSecurityLevelColor(
   element: Element,
   level: "none" | "low" | "moderate" | "high" | "very-high"
 ): boolean {
-  return hasClass(element, `security-level-${level}`);
+  return element.classList.contains(`security-level-${level}`);
 }

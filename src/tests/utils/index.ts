@@ -2,7 +2,6 @@
  * Centralized export of all test utilities for CIA Compliance Manager.
  *
  * ## Organization:
- * - component: Component testing utilities
  * - mock: Mock factories and data
  * - render: Render utilities
  * - security: Security-specific test helpers
@@ -11,9 +10,6 @@
  *
  * @packageDocumentation
  */
-
-// Re-export from component testing utils
-export * from "./component";
 
 // Re-export from mock utilities
 export * from "./mock";
