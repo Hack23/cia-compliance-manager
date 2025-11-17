@@ -8,7 +8,7 @@ import { SecurityLevel } from "./cia";
  * a consistent pattern for props across the application.
  * 
  * @example
- * ```tsx
+ * ```typescript
  * interface MyWidgetProps extends WithSecurityLevelProps {
  *   customProp: string;
  * }
@@ -57,7 +57,7 @@ export interface WithSecurityLevelProps {
    * @param level - New security level selected by user
    * 
    * @example
-   * ```tsx
+   * ```typescript
    * onAvailabilityChange={(level) => {
    *   console.log('New availability level:', level);
    *   updateConfiguration('availability', level);
@@ -72,7 +72,7 @@ export interface WithSecurityLevelProps {
    * @param level - New security level selected by user
    * 
    * @example
-   * ```tsx
+   * ```typescript
    * onIntegrityChange={(level) => {
    *   console.log('New integrity level:', level);
    *   updateConfiguration('integrity', level);
@@ -87,7 +87,7 @@ export interface WithSecurityLevelProps {
    * @param level - New security level selected by user
    * 
    * @example
-   * ```tsx
+   * ```typescript
    * onConfidentialityChange={(level) => {
    *   console.log('New confidentiality level:', level);
    *   updateConfiguration('confidentiality', level);
@@ -104,7 +104,7 @@ export interface WithSecurityLevelProps {
  * for consistent styling and testing across the application.
  * 
  * @example
- * ```tsx
+ * ```typescript
  * <MyWidget 
  *   className="custom-styles" 
  *   testId="my-widget-test" 
@@ -141,7 +141,7 @@ export interface CommonWidgetProps {
  * a complete set of props for security-aware widgets.
  * 
  * @example
- * ```tsx
+ * ```typescript
  * const SecurityWidget: React.FC<SecurityWidgetProps> = ({
  *   availabilityLevel,
  *   integrityLevel,
@@ -152,7 +152,7 @@ export interface CommonWidgetProps {
  * }) => {
  *   return (
  *     <div className={className} data-testid={testId}>
- *       {/* Widget content */}
+ *       Widget content here
  *     </div>
  *   );
  * };
@@ -170,9 +170,9 @@ export type SecurityWidgetProps = WithSecurityLevelProps & CommonWidgetProps;
  * `availabilityLevel`, `integrityLevel`, and `confidentialityLevel` instead.
  * 
  * @example
- * ```tsx
+ * ```typescript
  * interface MyComponentProps extends ComponentImpactBaseProps {
- *   // Additional props
+ *   additionalProp: string;
  * }
  * ```
  */
