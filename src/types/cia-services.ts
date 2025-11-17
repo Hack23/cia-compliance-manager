@@ -119,7 +119,7 @@ export interface BusinessImpactDetail {
  * Business impact details
  */
 export interface BusinessImpactDetails {
-  summary: string; // Required summary property
+  summary?: string; // Optional summary property
 
   // Either use the new names or the legacy names
   financial?: BusinessImpactDetail;
@@ -231,13 +231,13 @@ export interface CIADetails {
   businessImpact: string;
   impact?: string; // Legacy field - use businessImpact instead
 
-  // Financial metrics
-  capex: number;
-  opex: number;
+  // Financial metrics (optional for partial data)
+  capex?: number;
+  opex?: number;
 
-  // Styling properties
-  bg: string;
-  text: string;
+  // Styling properties (optional for partial data)
+  bg?: string;
+  text?: string;
 
   // Security guidance
   recommendations: string[];

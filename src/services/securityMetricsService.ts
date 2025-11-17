@@ -20,8 +20,8 @@ export interface SecurityTool {
  * Cost estimation details
  */
 export interface CostEstimation {
-  totalImplementationCost: number;
-  annualMaintenanceCost: number;
+  totalImplementationCost: string | number;
+  annualMaintenanceCost: string | number;
   costBreakdown: Record<string, unknown>;
 }
 
@@ -36,6 +36,7 @@ export interface TechnicalDetailsResponse {
       purpose: string;
       security: string;
     }>;
+    diagrams?: unknown[];
   };
   implementation: {
     steps: string[];
@@ -45,7 +46,9 @@ export interface TechnicalDetailsResponse {
       role: string;
       effort: string;
     }>;
+    complexity?: string;
   };
+  technologies?: Record<string, unknown>;
 }
 
 /**
@@ -59,6 +62,7 @@ export interface ValueCreationMetrics {
     score: number;
     description: string;
   }>;
+  businessImpacts?: unknown;
 }
 
 /**
@@ -1164,7 +1168,7 @@ export const getCostEstimation = async (
   availabilityLevel: SecurityLevel,
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel
-): Promise<any> => {
+): Promise<CostEstimation> => {
   // This would normally fetch from an API, but for now we'll return mock data
   return {
     totalImplementationCost: calculateTotalCost(
@@ -1286,8 +1290,13 @@ export const getValueCreationMetrics = async (
   confidentialityLevel: SecurityLevel
 ): Promise<ValueCreationMetrics> => {
   // This would normally fetch from an API, but for now we'll return mock data
+  const roiValue = calculateROI(availabilityLevel, integrityLevel, confidentialityLevel);
   return {
-    roi: calculateROI(availabilityLevel, integrityLevel, confidentialityLevel),
+    roi: {
+      value: roiValue,
+      percentage: roiValue,
+      description: `Expected return on investment for security implementation`,
+    },
     riskReduction: calculateRiskReduction(
       availabilityLevel,
       integrityLevel,
@@ -1409,6 +1418,13 @@ export const getTechnicalDetails = async (
       confidentiality: getConfidentialityTechnologies(confidentialityLevel),
     },
     implementation: {
+      steps: [
+        "Assess current security posture",
+        "Design security architecture",
+        "Implement security controls",
+        "Test and validate",
+        "Deploy and monitor",
+      ],
       complexity: calculateImplementationComplexity(
         availabilityLevel,
         integrityLevel,
@@ -1448,7 +1464,7 @@ export const getSecurityResources = async (
   availabilityLevel: SecurityLevel,
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel
-): Promise<any> => {
+): Promise<Record<string, unknown>> => {
   // This would normally fetch from an API, but for now we'll return mock data
   return {
     standards: [
