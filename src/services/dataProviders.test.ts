@@ -102,6 +102,8 @@ describe("dataProviders", () => {
     });
 
     describe("integrityOptions", () => {
+      const securityLevels = ALL_SECURITY_LEVELS;
+
       it("should have options for all security levels", () => {
         const provider = createDefaultDataProvider();
 
@@ -166,6 +168,8 @@ describe("dataProviders", () => {
     });
 
     describe("confidentialityOptions", () => {
+      const securityLevels = ALL_SECURITY_LEVELS;
+
       it("should have options for all security levels", () => {
         const provider = createDefaultDataProvider();
 
@@ -220,9 +224,9 @@ describe("dataProviders", () => {
       it("should have increasing costs with higher security levels", () => {
         const provider = createDefaultDataProvider();
 
-        const noneCost = provider.confidentialityOptions["None"].capex;
-        const lowCost = provider.confidentialityOptions["Low"].capex;
-        const veryHighCost = provider.confidentialityOptions["Very High"].capex;
+        const noneCost = provider.confidentialityOptions["None"].capex ?? 0;
+        const lowCost = provider.confidentialityOptions["Low"].capex ?? 0;
+        const veryHighCost = provider.confidentialityOptions["Very High"].capex ?? 0;
 
         expect(lowCost).toBeGreaterThan(noneCost);
         expect(veryHighCost).toBeGreaterThan(lowCost);
@@ -275,6 +279,8 @@ describe("dataProviders", () => {
     });
 
     describe("data consistency", () => {
+      const securityLevels = ALL_SECURITY_LEVELS;
+
       it("should have consistent structure across all security levels", () => {
         const provider = createDefaultDataProvider();
 
