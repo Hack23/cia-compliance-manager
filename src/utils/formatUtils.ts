@@ -29,9 +29,21 @@ export function toTitleCase(str: string): string {
 /**
  * Formats a decimal as a percentage
  * 
- * @param value - Decimal value (0.75 = 75%)
- * @param decimalPlaces - Number of decimal places to show
- * @returns Formatted percentage string
+ * Converts decimal values (0-1 range) to percentage strings with
+ * configurable decimal places. Useful for displaying metrics like
+ * uptime, completion rates, or risk reduction percentages.
+ * 
+ * @param value - Decimal value where 1.0 = 100% (e.g., 0.75 = 75%)
+ * @param decimalPlaces - Number of decimal places to display
+ * @returns Formatted percentage string with % symbol
+ * 
+ * @example
+ * ```typescript
+ * formatPercentage(0.754, 1)    // "75.4%"
+ * formatPercentage(0.99, 0)     // "99%"
+ * formatPercentage(0.9999, 2)   // "99.99%"
+ * formatPercentage(1, 0)        // "100%"
+ * ```
  */
 export function formatPercentage(value: number, decimalPlaces: number = 0): string {
   // Multiply by 100 to convert decimal to percentage
@@ -44,10 +56,34 @@ export function formatPercentage(value: number, decimalPlaces: number = 0): stri
 /**
  * Formats a number as currency with proper thousands separators
  * 
- * @param value - The number to format as currency
- * @param options - Formatting options or currency code string for backward compatibility
- * @param locale - Optional locale for backward compatibility
- * @returns Formatted currency string
+ * Provides flexible currency formatting with support for different locales
+ * and currencies. Handles both object-style and legacy string-style parameters
+ * for backward compatibility.
+ * 
+ * @param value - The numeric value to format as currency
+ * @param options - Formatting options object or currency code string (for backward compatibility)
+ * @param options.locale - Locale string for regional formatting (e.g., 'en-US', 'sv-SE')
+ * @param options.currency - Currency code (e.g., 'USD', 'EUR', 'SEK')
+ * @param options.minimumFractionDigits - Minimum decimal places to show
+ * @param options.maximumFractionDigits - Maximum decimal places to show
+ * @param locale - Optional locale for backward compatibility with string options
+ * @returns Formatted currency string with symbol and separators
+ * 
+ * @example
+ * ```typescript
+ * // Object-style options (recommended)
+ * formatCurrency(1234.56)                                    // "$1,235" (default: USD, 0 decimals)
+ * formatCurrency(1234.56, { currency: 'EUR' })              // "€1,235"
+ * formatCurrency(1234.56, { 
+ *   currency: 'USD',
+ *   minimumFractionDigits: 2,
+ *   maximumFractionDigits: 2
+ * })                                                         // "$1,234.56"
+ * 
+ * // Legacy string-style options (backward compatible)
+ * formatCurrency(1234.56, 'SEK', 'sv-SE')                   // "1 235 kr"
+ * formatCurrency(50000, 'USD')                              // "$50,000"
+ * ```
  */
 export function formatCurrency(
   value: number,
@@ -93,10 +129,21 @@ export function formatCurrency(
 export const formatCurrencyWithOptions = formatCurrency;
 
 /**
- * Format security level for display (capitalize first letter)
+ * Format security level for display
  * 
- * @param level - Security level
+ * Currently returns the security level as-is since SecurityLevel type
+ * values are already properly capitalized. This function exists for
+ * consistency and potential future formatting needs.
+ * 
+ * @param level - Security level to format
  * @returns Formatted security level string
+ * 
+ * @example
+ * ```typescript
+ * formatSecurityLevel('High')       // "High"
+ * formatSecurityLevel('Very High')  // "Very High"
+ * formatSecurityLevel('Moderate')   // "Moderate"
+ * ```
  */
 export function formatSecurityLevel(level: SecurityLevel): string {
   return level;
@@ -116,10 +163,27 @@ const RISK_LEVEL_ICONS: Record<string, string> = {
 };
 
 /**
- * Formats a risk level by adding an appropriate icon
+ * Formats a risk level by adding an appropriate emoji icon
  * 
- * @param riskLevel - The risk level text to format
- * @returns Risk level with icon prefix
+ * Enhances risk level text with visual indicators for quick comprehension
+ * in dashboards and reports. Handles case-insensitive matching.
+ * 
+ * @param riskLevel - The risk level text to format (case-insensitive)
+ * @returns Risk level with emoji icon prefix
+ * 
+ * @example
+ * ```typescript
+ * formatRiskLevel('Critical Risk')  // "⚠️ Critical Risk"
+ * formatRiskLevel('High Risk')      // "🔴 High Risk"
+ * formatRiskLevel('Medium Risk')    // "🟠 Medium Risk"
+ * formatRiskLevel('Low Risk')       // "🟡 Low Risk"
+ * formatRiskLevel('Minimal Risk')   // "🟢 Minimal Risk"
+ * formatRiskLevel('No Risk')        // "✅ No Risk"
+ * formatRiskLevel('Unknown')        // "❓ Unknown"
+ * 
+ * // Case-insensitive
+ * formatRiskLevel('high risk')      // "🔴 high risk"
+ * ```
  */
 export function formatRiskLevel(riskLevel: string): string {
   // Handle case insensitivity by checking against lowercase values
@@ -140,9 +204,20 @@ export function formatRiskLevel(riskLevel: string): string {
 /**
  * Format a number with thousands separators and optional decimal places
  * 
+ * Provides locale-aware number formatting with thousands separators
+ * and configurable decimal precision.
+ * 
  * @param value - Number to format
- * @param decimalPlaces - Optional decimal places
- * @returns Formatted number with thousand separators
+ * @param decimalPlaces - Optional number of decimal places to display
+ * @returns Formatted number string with separators
+ * 
+ * @example
+ * ```typescript
+ * formatNumber(1234567)          // "1,234,567"
+ * formatNumber(1234.5678)        // "1,234.568" (locale dependent)
+ * formatNumber(1234.5678, 2)     // "1234.57"
+ * formatNumber(999.999, 1)       // "1000.0"
+ * ```
  */
 export function formatNumber(value: number, decimalPlaces?: number): string {
   if (decimalPlaces !== undefined) {
@@ -154,20 +229,46 @@ export function formatNumber(value: number, decimalPlaces?: number): string {
 /**
  * Format a number with specified decimal places
  * 
+ * Similar to formatNumber but always returns a string with exact
+ * decimal places, without locale-based thousands separators.
+ * 
  * @param value - Number to format
- * @param decimalPlaces - Number of decimal places
- * @returns Formatted number string
+ * @param decimalPlaces - Exact number of decimal places to display
+ * @returns Formatted number string with fixed decimals
+ * 
+ * @example
+ * ```typescript
+ * formatNumberWithDecimals(1234.5678, 2)   // "1234.57"
+ * formatNumberWithDecimals(99.5, 3)        // "99.500"
+ * formatNumberWithDecimals(1000, 0)        // "1000"
+ * ```
  */
 export function formatNumberWithDecimals(value: number, decimalPlaces: number): string {
   return value.toFixed(decimalPlaces);
 }
 
 /**
- * Format a cost value for budget display (adds "% of IT budget" text)
+ * Format a cost value for budget display
  * 
- * @param value - Cost percentage value
+ * Adds contextual text explaining whether the cost represents capital
+ * expenditure (one-time) or operational expenditure (recurring annual).
+ * Useful in budget presentations and financial reports.
+ * 
+ * @param value - Cost percentage value (0-1 range, where 0.05 = 5% of IT budget)
  * @param isCapex - Whether this is capital expenditure (vs operational)
- * @returns Formatted budget string
+ * @returns Formatted budget string with contextual description
+ * 
+ * @example
+ * ```typescript
+ * formatBudgetPercentage(0.05, true)   
+ * // "5% of IT budget as one-time capital expenditure"
+ * 
+ * formatBudgetPercentage(0.03, false)  
+ * // "3% of IT budget as annual operational expenses"
+ * 
+ * formatBudgetPercentage(0.1, true)    
+ * // "10% of IT budget as one-time capital expenditure"
+ * ```
  */
 export function formatBudgetPercentage(value: number, isCapex: boolean): string {
   const percentValue = formatPercentage(value);
@@ -181,8 +282,20 @@ export function formatBudgetPercentage(value: number, isCapex: boolean): string 
 /**
  * Format uptime percentage for availability display
  * 
- * @param uptime - Uptime value (e.g., "99.9%")
- * @returns Formatted uptime string
+ * Normalizes uptime values which may be provided in different formats
+ * (with or without % symbol, as string or number). Ensures consistent
+ * percentage display format.
+ * 
+ * @param uptime - Uptime value in various formats
+ * @returns Formatted uptime string with % symbol
+ * 
+ * @example
+ * ```typescript
+ * formatUptime("99.9%")     // "99.9%" (already formatted)
+ * formatUptime("99.9")      // "99.9%" (adds % symbol)
+ * formatUptime("0.999")     // "99.9%" (converts decimal to percentage)
+ * formatUptime("invalid")   // "invalid" (returns as-is if not parseable)
+ * ```
  */
 export function formatUptime(uptime: string): string {
   // If uptime is already formatted, return as is
