@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { SecurityLevel } from "../types/cia";
+import { ALL_SECURITY_LEVELS } from "../constants/securityLevels";
 import { createDefaultDataProvider } from "./dataProviders";
 
 describe("dataProviders", () => {
@@ -15,13 +16,7 @@ describe("dataProviders", () => {
     });
 
     describe("availabilityOptions", () => {
-      const securityLevels: SecurityLevel[] = [
-        "None",
-        "Low",
-        "Moderate",
-        "High",
-        "Very High",
-      ];
+      const securityLevels = ALL_SECURITY_LEVELS;
 
       it("should have options for all security levels", () => {
         const provider = createDefaultDataProvider();

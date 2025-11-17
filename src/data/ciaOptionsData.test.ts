@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { SecurityLevel } from "../types/cia";
+import { ALL_SECURITY_LEVELS } from "../constants/securityLevels";
 import {
     availabilityOptions,
     confidentialityOptions,
@@ -21,13 +22,7 @@ import {
 } from "./security";
 
 describe("CIA Options Data", () => {
-  const securityLevels: SecurityLevel[] = [
-    "None",
-    "Low",
-    "Moderate",
-    "High",
-    "Very High",
-  ];
+  const securityLevels = ALL_SECURITY_LEVELS;
 
   it("should export availability options for all security levels", () => {
     securityLevels.forEach((level) => {
