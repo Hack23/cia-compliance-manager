@@ -14,11 +14,11 @@ const PREFIX = "[CIA-CM]";
  * Logger interface to define the shape of our logger object
  */
 interface Logger {
-  log(...args: any[]): Logger;
-  info(message: string, context?: any): Logger;
-  warn(message: string, context?: any): Logger;
-  error(message: string, context?: any): Logger;
-  debug(message: string, context?: any): Logger;
+  log(...args: unknown[]): Logger;
+  info(message: string, context?: unknown): Logger;
+  warn(message: string, context?: unknown): Logger;
+  error(message: string, context?: unknown): Logger;
+  debug(message: string, context?: unknown): Logger;
 }
 
 /**
@@ -30,7 +30,7 @@ const logger: Logger = {
    * @param args - Arguments to log
    * @returns The logger instance for chaining
    */
-  log(...args: any[]): typeof logger {
+  log(...args: unknown[]): typeof logger {
     console.log(PREFIX, ...args);
     return logger;
   },
@@ -42,7 +42,7 @@ const logger: Logger = {
    * @param context - Optional context object
    * @returns The logger instance for chaining
    */
-  debug(message: string, context?: any): typeof logger {
+  debug(message: string, context?: unknown): typeof logger {
     if (context !== undefined) {
       console.debug(PREFIX, message, context);
     } else {
@@ -58,7 +58,7 @@ const logger: Logger = {
    * @param context - Optional context object
    * @returns The logger instance for chaining
    */
-  info(message: string, context?: any): typeof logger {
+  info(message: string, context?: unknown): typeof logger {
     if (context !== undefined) {
       console.info(PREFIX, message, context);
     } else {
@@ -74,7 +74,7 @@ const logger: Logger = {
    * @param context - Optional context object
    * @returns The logger instance for chaining
    */
-  warn(message: string, context?: any): typeof logger {
+  warn(message: string, context?: unknown): typeof logger {
     if (context !== undefined) {
       console.warn(PREFIX, message, context);
     } else {
@@ -90,7 +90,7 @@ const logger: Logger = {
    * @param context - Optional context object
    * @returns The logger instance for chaining
    */
-  error(message: string, context?: any): typeof logger {
+  error(message: string, context?: unknown): typeof logger {
     if (context !== undefined) {
       console.error(PREFIX, message, context);
     } else {

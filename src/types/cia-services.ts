@@ -14,9 +14,10 @@ import { SecurityLevel } from "./cia";
 // Re-export SecurityLevel for backward compatibility
 export type { SecurityLevel };
 
-import { BusinessImpact } from "./businessImpact";
+import { BusinessImpact, SLAMetrics } from "./businessImpact";
 import { SecurityLevels } from "./cia";
 import { ComplianceFramework } from "./compliance";
+import { SecurityResource } from "./securityResources";
 
 /**
  * Core data structure representing CIA assessment data
@@ -343,52 +344,52 @@ export interface CIADataProvider {
   /**
    * Get compliance frameworks
    */
-  getComplianceFrameworks?: () => Promise<any[]>;
+  getComplianceFrameworks?: () => Promise<ComplianceFramework[]>;
 
   /**
    * Get compliance requirements
    */
-  getComplianceRequirements?: () => Promise<any>;
+  getComplianceRequirements?: () => Promise<Record<string, unknown>>;
 
   /**
    * Get business impact
    */
-  getBusinessImpact?: () => Promise<any>;
+  getBusinessImpact?: () => Promise<BusinessImpactDetails>;
 
   /**
    * Get security metrics
    */
-  getSecurityMetrics?: () => Promise<any>;
+  getSecurityMetrics?: () => Promise<Record<string, unknown>>;
 
   /**
    * Get security resources
    */
-  getSecurityResources?: () => Promise<any[]>;
+  getSecurityResources?: () => Promise<SecurityResource[]>;
 
   /**
    * Get SLA metrics
    */
-  getSLAMetrics?: () => Promise<any>;
+  getSLAMetrics?: () => Promise<SLAMetrics>;
 
   /**
    * Get cost estimates
    */
-  getCostEstimates?: () => Promise<any>;
+  getCostEstimates?: () => Promise<Record<string, unknown>>;
 
   /**
    * Get value creation metrics
    */
-  getValueCreationMetrics?: () => Promise<any>;
+  getValueCreationMetrics?: () => Promise<Record<string, unknown>>;
 
   /**
    * Get implementation details
    */
-  getImplementationDetails?: () => Promise<any>;
+  getImplementationDetails?: () => Promise<TechnicalImplementationDetails>;
 
   /**
    * Get remediation steps
    */
-  getRemediationSteps?: () => Promise<any[]>;
+  getRemediationSteps?: () => Promise<string[]>;
 }
 
 // Types used by CIA service modules

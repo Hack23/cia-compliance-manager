@@ -387,7 +387,9 @@ export const BUSINESS_CONSIDERATIONS = {
     MODERATE: [],
     HIGH: [],
     VERY_HIGH: [],
-    ...((BC as any)?.availability || (BC as any)?.AVAILABILITY || {}),
+    ...(BC as unknown as Record<string, unknown>)?.availability ||
+      (BC as unknown as Record<string, unknown>)?.AVAILABILITY ||
+      {},
   },
   INTEGRITY: {
     NONE: [],
@@ -395,7 +397,9 @@ export const BUSINESS_CONSIDERATIONS = {
     MODERATE: [],
     HIGH: [],
     VERY_HIGH: [],
-    ...((BC as any)?.integrity || (BC as any)?.INTEGRITY || {}),
+    ...(BC as unknown as Record<string, unknown>)?.integrity ||
+      (BC as unknown as Record<string, unknown>)?.INTEGRITY ||
+      {},
   },
   CONFIDENTIALITY: {
     NONE: [],
@@ -403,7 +407,9 @@ export const BUSINESS_CONSIDERATIONS = {
     MODERATE: [],
     HIGH: [],
     VERY_HIGH: [],
-    ...((BC as any)?.confidentiality || (BC as any)?.CONFIDENTIALITY || {}),
+    ...(BC as unknown as Record<string, unknown>)?.confidentiality ||
+      (BC as unknown as Record<string, unknown>)?.CONFIDENTIALITY ||
+      {},
   },
 };
 

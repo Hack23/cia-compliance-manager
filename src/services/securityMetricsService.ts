@@ -8,6 +8,60 @@ import logger from "../utils/logger";
 import { BaseService } from "./BaseService";
 
 /**
+ * Represents a security tool recommendation
+ */
+export interface SecurityTool {
+  name: string;
+  example: string;
+  purpose: string;
+}
+
+/**
+ * Cost estimation details
+ */
+export interface CostEstimation {
+  totalImplementationCost: number;
+  annualMaintenanceCost: number;
+  costBreakdown: Record<string, unknown>;
+}
+
+/**
+ * Technical details response
+ */
+export interface TechnicalDetailsResponse {
+  architecture: {
+    description: string;
+    components: Array<{
+      name: string;
+      purpose: string;
+      security: string;
+    }>;
+  };
+  implementation: {
+    steps: string[];
+    timeline: string;
+    keyMilestones: string[];
+    resources: Array<{
+      role: string;
+      effort: string;
+    }>;
+  };
+}
+
+/**
+ * Value creation metrics
+ */
+export interface ValueCreationMetrics {
+  roi: ROIMetrics;
+  riskReduction: string;
+  valuePoints: Array<{
+    title: string;
+    score: number;
+    description: string;
+  }>;
+}
+
+/**
  * Represents security metrics for a component
  */
 export interface ComponentMetrics {
@@ -1230,7 +1284,7 @@ export const getValueCreationMetrics = async (
   availabilityLevel: SecurityLevel,
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel
-): Promise<any> => {
+): Promise<ValueCreationMetrics> => {
   // This would normally fetch from an API, but for now we'll return mock data
   return {
     roi: calculateROI(availabilityLevel, integrityLevel, confidentialityLevel),
@@ -1319,7 +1373,7 @@ export const getTechnicalDetails = async (
   availabilityLevel: SecurityLevel,
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel
-): Promise<any> => {
+): Promise<TechnicalDetailsResponse> => {
   // This would normally fetch from an API, but for now we'll return mock data
   return {
     architecture: {
@@ -2011,7 +2065,7 @@ function getConfidentialityTechnologies(level: SecurityLevel): string[] {
   }
 }
 
-function getAvailabilityTools(level: SecurityLevel): any[] {
+function getAvailabilityTools(level: SecurityLevel): SecurityTool[] {
   const baseTools = [
     {
       name: "Server monitoring tools",
@@ -2072,7 +2126,7 @@ function getAvailabilityTools(level: SecurityLevel): any[] {
   }
 }
 
-function getIntegrityTools(level: SecurityLevel): any[] {
+function getIntegrityTools(level: SecurityLevel): SecurityTool[] {
   const baseTools = [
     {
       name: "Validation frameworks",
@@ -2133,7 +2187,7 @@ function getIntegrityTools(level: SecurityLevel): any[] {
   }
 }
 
-function getConfidentialityTools(level: SecurityLevel): any[] {
+function getConfidentialityTools(level: SecurityLevel): SecurityTool[] {
   const baseTools = [
     {
       name: "Authentication systems",

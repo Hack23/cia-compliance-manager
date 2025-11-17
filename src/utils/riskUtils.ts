@@ -434,9 +434,9 @@ export function getImplementationComplexity(
  * @returns The highest impact area or areas as a string
  */
 export function getHighestImpactArea(
-  availabilityImpact: any,
-  integrityImpact: any,
-  confidentialityImpact: any
+  availabilityImpact: BusinessImpactDetails,
+  integrityImpact: BusinessImpactDetails,
+  confidentialityImpact: BusinessImpactDetails
 ): string {
   const impactAreas: string[] = [];
 
@@ -502,7 +502,7 @@ export function getHighestImpactArea(
 export function getDefaultComponentImpact(
   component: string,
   level: SecurityLevel
-): any {
+): BusinessImpactDetails {
   const isLowSecurity = level === "None" || level === "Low";
 
   if (component === "availability") {

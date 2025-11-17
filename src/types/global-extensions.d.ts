@@ -4,28 +4,28 @@ import "@testing-library/jest-dom";
 declare global {
   namespace Vi {
     interface JestAssertion {
-      toBeInTheDocument(): any;
-      toHaveTextContent(text: string | RegExp): any;
-      toHaveAttribute(name: string, value?: string): any;
-      toBeChecked(): any;
-      toBeDisabled(): any;
-      toBeEnabled(): any;
-      toBeRequired(): any;
-      toBeValid(): any;
-      toBeVisible(): any;
-      toContainElement(element: HTMLElement | null): any;
-      toContainHTML(htmlText: string): any;
-      toHaveClass(...classNames: string[]): any;
-      toHaveFocus(): any;
-      toHaveFormValues(expectedValues: Record<string, any>): any;
-      toHaveStyle(css: string | Record<string, any>): any;
-      toHaveValue(value?: string | string[] | number): any;
+      toBeInTheDocument(): Vi.JestAssertion;
+      toHaveTextContent(text: string | RegExp): Vi.JestAssertion;
+      toHaveAttribute(name: string, value?: string): Vi.JestAssertion;
+      toBeChecked(): Vi.JestAssertion;
+      toBeDisabled(): Vi.JestAssertion;
+      toBeEnabled(): Vi.JestAssertion;
+      toBeRequired(): Vi.JestAssertion;
+      toBeValid(): Vi.JestAssertion;
+      toBeVisible(): Vi.JestAssertion;
+      toContainElement(element: HTMLElement | null): Vi.JestAssertion;
+      toContainHTML(htmlText: string): Vi.JestAssertion;
+      toHaveClass(...classNames: string[]): Vi.JestAssertion;
+      toHaveFocus(): Vi.JestAssertion;
+      toHaveFormValues(expectedValues: Record<string, unknown>): Vi.JestAssertion;
+      toHaveStyle(css: string | Record<string, unknown>): Vi.JestAssertion;
+      toHaveValue(value?: string | string[] | number): Vi.JestAssertion;
     }
   }
 
   // Add window extensions for Cypress
   interface Window {
-    Cypress?: any;
+    Cypress?: typeof Cypress;
     consoleErrors?: string[];
     cypressPerformanceMetrics?: {
       records: Array<{
