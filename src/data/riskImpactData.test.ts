@@ -14,6 +14,11 @@ import {
     AVAILABILITY_RISK_IMPACTS,
     INTEGRITY_RISK_IMPACTS,
     CONFIDENTIALITY_RISK_IMPACTS,
+    isRiskImpactLevel,
+    isRiskImpact,
+    isValidCIAComponent,
+    type RiskImpact,
+    type RiskImpactLevel,
 } from "./riskImpactData";
 
 describe("Risk Impact Data", () => {
@@ -283,6 +288,92 @@ describe("Risk Impact Data", () => {
       // Current implementation is case-sensitive
       const label = getRiskImpactLabel("critical");
       expect(label).toBe("Impact level not defined");
+    });
+  });
+
+  describe("Type Guards", () => {
+    describe("isRiskImpactLevel", () => {
+      it("should return true for valid risk impact levels", () => {
+        expect(isRiskImpactLevel("Minimal")).toBe(true);
+        expect(isRiskImpactLevel("Low")).toBe(true);
+        expect(isRiskImpactLevel("Medium")).toBe(true);
+        expect(isRiskImpactLevel("High")).toBe(true);
+        expect(isRiskImpactLevel("Critical")).toBe(true);
+      });
+
+      it("should return false for invalid values", () => {
+        expect(isRiskImpactLevel("Invalid")).toBe(false);
+        expect(isRiskImpactLevel("")).toBe(false);
+        expect(isRiskImpactLevel(null)).toBe(false);
+        expect(isRiskImpactLevel(undefined)).toBe(false);
+        expect(isRiskImpactLevel(123)).toBe(false);
+        expect(isRiskImpactLevel({})).toBe(false);
+        expect(isRiskImpactLevel([])).toBe(false);
+      });
+    });
+
+    describe("isRiskImpact", () => {
+      it("should return true for valid RiskImpact objects", () => {
+        const validImpact: RiskImpact = {
+          level: "High",
+          description: "Test description",
+          impact: "Test impact",
+        };
+        expect(isRiskImpact(validImpact)).toBe(true);
+      });
+
+      it("should return true for RiskImpact with optional fields", () => {
+        const validImpact: RiskImpact = {
+          level: "Medium",
+          description: "Test description",
+          impact: "Test impact",
+          annualLoss: "$1M",
+          recoveryTime: "2 hours",
+          frameworks: ["ISO 27001"],
+        };
+        expect(isRiskImpact(validImpact)).toBe(true);
+      });
+
+      it("should return false for null or undefined", () => {
+        expect(isRiskImpact(null)).toBe(false);
+        expect(isRiskImpact(undefined)).toBe(false);
+      });
+
+      it("should return false for non-objects", () => {
+        expect(isRiskImpact("string")).toBe(false);
+        expect(isRiskImpact(123)).toBe(false);
+        expect(isRiskImpact(true)).toBe(false);
+      });
+
+      it("should return false for objects missing required fields", () => {
+        expect(isRiskImpact({})).toBe(false);
+        expect(isRiskImpact({ level: "High" })).toBe(false);
+        expect(isRiskImpact({ level: "High", description: "test" })).toBe(false);
+        expect(isRiskImpact({ description: "test", impact: "test" })).toBe(false);
+      });
+    });
+
+    describe("isValidCIAComponent", () => {
+      it("should return true for valid CIA components", () => {
+        expect(isValidCIAComponent("availability")).toBe(true);
+        expect(isValidCIAComponent("integrity")).toBe(true);
+        expect(isValidCIAComponent("confidentiality")).toBe(true);
+      });
+
+      it("should return false for invalid components", () => {
+        expect(isValidCIAComponent("invalid")).toBe(false);
+        expect(isValidCIAComponent("")).toBe(false);
+        expect(isValidCIAComponent(null)).toBe(false);
+        expect(isValidCIAComponent(undefined)).toBe(false);
+        expect(isValidCIAComponent(123)).toBe(false);
+        expect(isValidCIAComponent({})).toBe(false);
+      });
+    });
+  });
+
+  describe("getBusinessImpact - Error Handling", () => {
+    it("should throw error for invalid CIA component", () => {
+      expect(() => getBusinessImpact("invalid" as any, "High")).toThrow("Invalid CIA component");
     });
   });
 });
