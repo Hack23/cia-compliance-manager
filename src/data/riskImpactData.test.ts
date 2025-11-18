@@ -186,25 +186,46 @@ describe("Risk Impact Data", () => {
       expect(impact).toBe("Minimal");
     });
 
+    it("should correctly handle Very High security level (value 0) without treating it as falsy", () => {
+      // This test specifically validates the ?? operator fix
+      // Very High maps to 0, which || would treat as falsy but ?? correctly preserves
+      const impact = calculateBusinessImpactLevel("Very High", "None", "None");
+      
+      // Formula with correct 0 value: (0 + 4 + 4*1.5) / 3.5 = 10 / 3.5 = 2.86 → rounds to 3 ("High")
+      // If bug still exists with ||: (4 + 4 + 4*1.5) / 3.5 = 14 / 3.5 = 4.0 → "Critical"
+      expect(impact).toBe("High");
+      expect(impact).not.toBe("Critical"); // Would be Critical if 0 was treated as falsy
+    });
+
     it("should return Medium for all Moderate levels", () => {
       const impact = calculateBusinessImpactLevel("Moderate", "Moderate", "Moderate");
       expect(impact).toBe("Medium");
     });
 
     it("should weight confidentiality higher in calculations", () => {
-      // Verify that confidentiality has higher weight (1.5x) in the calculation
-      // Test with a case where confidentiality matters more
-      const impact1 = calculateBusinessImpactLevel("Moderate", "Moderate", "Very High");
-      const impact2 = calculateBusinessImpactLevel("Very High", "Very High", "Moderate");
+      // Test case where confidentiality's higher weight changes the result
+      // Example: Availability=High(1), Integrity=High(1), Confidentiality=None(4)
+      // Formula: (1 + 1 + 4*1.5) / 3.5 = 8 / 3.5 = 2.29 -> rounds to 2 ("Medium")
+      const impact1 = calculateBusinessImpactLevel("High", "High", "None");
       
-      // Both should be calculated correctly with the weighted formula
-      // Since confidentiality is weighted 1.5x, the results should differ
-      // impact1: (2 + 2 + 0*1.5) / 3.5 = 1.14 -> rounds to 1 ("Low")
-      // impact2: (0 + 0 + 2*1.5) / 3.5 = 0.86 -> rounds to 1 ("Low")
-      // These actually round to the same, so let's just test they are valid
-      const validLevels: RiskImpactLevel[] = ["Minimal", "Low", "Medium", "High", "Critical"];
-      expect(validLevels).toContain(impact1);
-      expect(validLevels).toContain(impact2);
+      // Compare to: Availability=None(4), Integrity=High(1), Confidentiality=High(1)
+      // Formula: (4 + 1 + 1*1.5) / 3.5 = 6.5 / 3.5 = 1.86 -> rounds to 2 ("Medium")
+      const impact2 = calculateBusinessImpactLevel("None", "High", "High");
+      
+      // Better example that shows difference:
+      // Availability=High(1), Integrity=High(1), Confidentiality=Moderate(2)
+      // Formula: (1 + 1 + 2*1.5) / 3.5 = 5 / 3.5 = 1.43 -> rounds to 1 ("Low")
+      const impact3 = calculateBusinessImpactLevel("High", "High", "Moderate");
+      
+      // Availability=Moderate(2), Integrity=Moderate(2), Confidentiality=High(1)
+      // Formula: (2 + 2 + 1*1.5) / 3.5 = 5.5 / 3.5 = 1.57 -> rounds to 2 ("Medium")
+      const impact4 = calculateBusinessImpactLevel("Moderate", "Moderate", "High");
+      
+      // Verify that confidentiality's weight affects the results
+      expect(impact1).toBe("Medium");
+      expect(impact2).toBe("Medium");
+      expect(impact3).toBe("Low");
+      expect(impact4).toBe("Medium");
     });
 
     it("should return valid impact level for mixed security levels", () => {

@@ -18,12 +18,12 @@ export type RiskImpactLevel =
  * Risk impact structure with comprehensive business impact details
  */
 export interface RiskImpact {
-  /** Impact level classification */
-  level: string;
   /** Human-readable description of the risk impact */
   description: string;
   /** Overall business impact summary */
   impact: string;
+  /** Impact level classification */
+  level: RiskImpactLevel;
   /** Annual financial loss estimate (optional) */
   annualLoss?: string;
   /** Time required to recover from incident (optional) */
@@ -83,7 +83,7 @@ export function isRiskImpact(value: unknown): value is RiskImpact {
  */
 export function isValidCIAComponent(
   value: unknown
-): value is "availability" | "integrity" | "confidentiality" {
+): value is CIAComponent {
   return (
     typeof value === "string" &&
     ["availability", "integrity", "confidentiality"].includes(value)
@@ -114,7 +114,7 @@ const securityToRiskMap: Record<SecurityLevel, string> = {
  * ```
  */
 export function getRiskLevelFromSecurityLevel(level: SecurityLevel): string {
-  return securityToRiskMap[level] || "Unknown";
+  return securityToRiskMap[level] ?? "Unknown";
 }
 
 /**
@@ -388,11 +388,11 @@ export const CONFIDENTIALITY_RISK_IMPACTS: Record<SecurityLevel, RiskImpact> = {
  * ```typescript
  * const impact = getBusinessImpact("availability", "High");
  * console.log(impact.riskLevel); // "Low"
- * console.log(impact.annualRevenueLoss); // "< 2% annually"
+ * console.log(impact.annualRevenueLoss); // "Potential revenue loss <2% annually"
  * ```
  */
 export function getBusinessImpact(
-  component: "availability" | "integrity" | "confidentiality",
+  component: CIAComponent,
   level: SecurityLevel
 ): BusinessImpactDetail {
   // Validate inputs
@@ -417,26 +417,18 @@ export function getBusinessImpact(
       impactData = AVAILABILITY_RISK_IMPACTS[level];
   }
 
-  // Validate that we have impact data
-  if (!isRiskImpact(impactData)) {
-    throw new Error(`Invalid impact data for component ${component} and level ${level}`);
-  }
-
   // Convert RiskImpact to BusinessImpactDetail
   return {
     description: impactData.description,
     riskLevel: impactData.level,
-    annualRevenueLoss: impactData.annualLoss || impactData.financialImpact,
-    meanTimeToRecover: impactData.recoveryTime || impactData.operationalImpact,
-    // Fix the type issue by ensuring we only include defined strings in the array
+    annualRevenueLoss: impactData.annualLoss ?? impactData.financialImpact,
+    meanTimeToRecover: impactData.recoveryTime ?? impactData.operationalImpact,
     complianceViolations: impactData.frameworks
       ? (impactData.frameworks.filter(Boolean) as string[])
       : impactData.regulatoryImpact
       ? [impactData.regulatoryImpact]
       : [],
-    // Remove this property if it's not in the interface, or map it to a property that exists
-    // Depending on the interface definition in cia-services.ts
-    complianceImpact: impactData.competitiveImpact, // Map to a property that exists
+    complianceImpact: impactData.competitiveImpact,
   };
 }
 
@@ -453,11 +445,15 @@ export function getBusinessImpact(
  * 
  * @example
  * ```typescript
- * // All high security = minimal impact
+ * // All Very High security = minimal impact
+ * calculateBusinessImpactLevel("Very High", "Very High", "Very High") // Returns "Minimal"
+ * 
+ * // All High security = Low impact
  * calculateBusinessImpactLevel("High", "High", "High") // Returns "Low"
  * 
  * // Mixed levels with confidentiality weighted higher
- * calculateBusinessImpactLevel("High", "Moderate", "None") // Returns "High" or "Critical"
+ * // Formula: (1 [High] + 2 [Moderate] + 4 [None] * 1.5) / 3.5 = (1 + 2 + 6) / 3.5 = 9 / 3.5 = 2.57 → rounds to 3 ("High")
+ * calculateBusinessImpactLevel("High", "Moderate", "None") // Returns "High"
  * ```
  */
 export function calculateBusinessImpactLevel(
@@ -490,7 +486,9 @@ export function calculateBusinessImpactLevel(
     "Critical",
   ];
 
-  return impactLevels[roundedImpact] ?? "Critical";
+  // Ensure the index is within bounds
+  const clampedIndex = Math.max(0, Math.min(4, roundedImpact));
+  return impactLevels[clampedIndex] ?? "Critical";
 }
 
 /**
@@ -518,7 +516,7 @@ export function getRiskImpactLabel(level: string): string {
     Minimal: "Negligible business impact requiring routine monitoring",
   };
 
-  return levelMap[level] || "Impact level not defined";
+  return levelMap[level] ?? "Impact level not defined";
 }
 
 /**
@@ -536,7 +534,7 @@ export function getRiskImpactLabel(level: string): string {
  * ```typescript
  * const impact = createDefaultBusinessImpact("availability", "Moderate");
  * console.log(impact.summary); // "availability impact analysis for Moderate level"
- * console.log(impact.financial.riskLevel); // "Medium"
+ * console.log(impact.financial?.riskLevel); // "Medium"
  * ```
  */
 export function createDefaultBusinessImpact(
