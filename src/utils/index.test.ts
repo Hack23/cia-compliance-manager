@@ -239,6 +239,8 @@ describe('Utils Index - Widget Utilities', () => {
 });
 
 describe('Utils Index - Legacy Exports', () => {
+  // Testing deprecated functions for backward compatibility until removal
+  // These remain in the public API and must work correctly until officially removed
   describe('SecurityLevelDisplay', () => {
     it('returns a simple display object', () => {
       const result = SecurityLevelDisplay({ level: 'High' as SecurityLevel });
