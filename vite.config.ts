@@ -111,12 +111,12 @@ export default defineConfig({
           "src/index.tsx",
           ".dependency-cruiser.cjs",
         ],
-        // Increase thresholds for v1.0 release
+        // ISMS Secure Development Policy requirements (v1.0 release)
         thresholds: {
-          statements: 60,
-          branches: 60,
-          functions: 60,
-          lines: 60,
+          statements: 80,
+          branches: 70,
+          functions: 80,
+          lines: 80,
         },
       },
       reporters: [
