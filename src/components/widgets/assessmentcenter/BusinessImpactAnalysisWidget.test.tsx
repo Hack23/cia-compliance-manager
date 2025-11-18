@@ -426,4 +426,130 @@ describe("BusinessImpactAnalysisWidget", () => {
   beforeEach(() => {
     vi.mock("../../../hooks/useCIAContentService", () => defaultMock);
   });
+
+  // Additional coverage tests
+  describe("Additional Coverage", () => {
+    it("handles Very High security levels", () => {
+      render(
+        <BusinessImpactAnalysisWidget
+          availabilityLevel="Very High"
+          integrityLevel="Very High"
+          confidentialityLevel="Very High"
+          testId="business-impact-analysis-widget"
+        />
+      );
+
+      expect(
+        screen.getByTestId("business-impact-analysis-widget")
+      ).toBeInTheDocument();
+    });
+
+    it("handles None security levels", () => {
+      render(
+        <BusinessImpactAnalysisWidget
+          availabilityLevel="None"
+          integrityLevel="None"
+          confidentialityLevel="None"
+          testId="business-impact-analysis-widget"
+        />
+      );
+
+      expect(
+        screen.getByTestId("business-impact-analysis-widget")
+      ).toBeInTheDocument();
+    });
+
+    it("handles Low security levels", () => {
+      render(
+        <BusinessImpactAnalysisWidget
+          availabilityLevel="Low"
+          integrityLevel="Low"
+          confidentialityLevel="Low"
+          testId="business-impact-analysis-widget"
+        />
+      );
+
+      expect(
+        screen.getByTestId("business-impact-analysis-widget")
+      ).toBeInTheDocument();
+    });
+
+    it("handles asymmetric security levels", () => {
+      render(
+        <BusinessImpactAnalysisWidget
+          availabilityLevel="Very High"
+          integrityLevel="Low"
+          confidentialityLevel="Moderate"
+          testId="business-impact-analysis-widget"
+        />
+      );
+
+      expect(
+        screen.getByTestId("business-impact-analysis-widget")
+      ).toBeInTheDocument();
+    });
+
+    it("handles custom className prop", () => {
+      render(
+        <BusinessImpactAnalysisWidget
+          availabilityLevel="Moderate"
+          integrityLevel="Moderate"
+          confidentialityLevel="Moderate"
+          className="custom-test-class"
+          testId="business-impact-analysis-widget"
+        />
+      );
+
+      // The widget container passes className through
+      const widget = screen.getByTestId("business-impact-analysis-widget");
+      expect(widget).toBeInTheDocument();
+    });
+
+    it("renders all CIA components in content", () => {
+      render(
+        <BusinessImpactAnalysisWidget
+          availabilityLevel="High"
+          integrityLevel="High"
+          confidentialityLevel="High"
+          testId="business-impact-analysis-widget"
+        />
+      );
+
+      const content =
+        screen.getByTestId("business-impact-analysis-widget").textContent || "";
+      expect(content).toMatch(/confidentiality/i);
+      expect(content).toMatch(/integrity/i);
+      expect(content).toMatch(/availability/i);
+    });
+
+    it("displays impact-related content", () => {
+      render(
+        <BusinessImpactAnalysisWidget
+          availabilityLevel="Moderate"
+          integrityLevel="Moderate"
+          confidentialityLevel="Moderate"
+          testId="business-impact-analysis-widget"
+        />
+      );
+
+      const content =
+        screen.getByTestId("business-impact-analysis-widget").textContent || "";
+      expect(content).toMatch(/impact/i);
+    });
+
+    it("displays security level information", () => {
+      render(
+        <BusinessImpactAnalysisWidget
+          availabilityLevel="High"
+          integrityLevel="Moderate"
+          confidentialityLevel="Low"
+          testId="business-impact-analysis-widget"
+        />
+      );
+
+      const content =
+        screen.getByTestId("business-impact-analysis-widget").textContent || "";
+      expect(content).toMatch(/high|moderate|low/i);
+    });
+  });
 });
