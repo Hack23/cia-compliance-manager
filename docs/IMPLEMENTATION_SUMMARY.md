@@ -190,7 +190,7 @@ Test Files:  15 passed (15)
    Duration: ~6 seconds
 ```
 
-**New Tests Added:** 35 tests across 5 test files
+**New Tests Added:** 40 tests across 5 test files
 - LoadingSpinner: 7 tests
 - ErrorMessage: 11 tests
 - LoadingSkeleton: 8 tests

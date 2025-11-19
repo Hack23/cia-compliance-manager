@@ -7,10 +7,9 @@
 
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import ErrorMessage from '../ErrorMessage';
 import LoadingSpinner from '../LoadingSpinner';
-import WidgetErrorBoundary from '../WidgetErrorBoundary';
 
 // Mock service that can simulate different scenarios
 class MockService {
@@ -53,7 +52,7 @@ const ExampleWidget: React.FC<ExampleWidgetProps> = ({ service }) => {
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<Error | null>(null);
 
-  const fetchData = async (): Promise<void> => {
+  const fetchData = React.useCallback(async (): Promise<void> => {
     setLoading(true);
     setError(null);
     
@@ -65,11 +64,11 @@ const ExampleWidget: React.FC<ExampleWidgetProps> = ({ service }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [service]);
 
   React.useEffect(() => {
     void fetchData();
-  }, []);
+  }, [fetchData]);
 
   if (loading) {
     return <LoadingSpinner testId="widget-loader" />;

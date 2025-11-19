@@ -1,5 +1,6 @@
 import React, { Component, ReactNode } from 'react';
 import ErrorMessage from './ErrorMessage';
+import logger from '../../utils/logger';
 
 /**
  * Props for WidgetErrorBoundary component
@@ -108,11 +109,10 @@ export class WidgetErrorBoundary extends Component<
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
     const { widgetName, onError } = this.props;
     
-    // Log to console for debugging
-    console.error(
-      `WidgetErrorBoundary caught error${widgetName ? ` in ${widgetName}` : ''}:`,
-      error,
-      errorInfo
+    // Log using centralized logger for debugging
+    logger.error(
+      `WidgetErrorBoundary caught error${widgetName ? ` in ${widgetName}` : ''}`,
+      { error, errorInfo }
     );
     
     // Call optional error callback

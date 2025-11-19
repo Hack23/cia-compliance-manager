@@ -153,7 +153,7 @@ const MyWidget: React.FC<Props> = ({ level }) => {
   );
 
   if (loading) return <LoadingSpinner />;
-  if (error) return <ErrorMessage error={error} retry={refetch} />;
+  if (error) return <ErrorMessage message={error.message} retry={refetch} />;
   if (!data) return <div>No data available</div>;
 
   return <DataDisplay data={data} />;

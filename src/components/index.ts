@@ -50,7 +50,10 @@ export type {
   BusinessImpactSectionProps,
   BusinessRiskDisplayProps,
   CIAImpactCardProps,
+  ErrorMessageProps,
   KeyValuePairProps,
+  LoadingSkeletonProps,
+  LoadingSpinnerProps,
   MetricsCardProps,
   RadarChartProps,
   RiskAssessmentProps,
@@ -63,5 +66,6 @@ export type {
   TooltipProps,
   WidgetActionsProps,
   WidgetContainerProps,
+  WidgetErrorBoundaryProps,
   WidgetHeaderProps,
 } from "../types/componentPropExports";
