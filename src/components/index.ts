@@ -30,10 +30,14 @@ export { default as TechnicalDetailsWidget } from "./widgets/implementationguide
 // Common Components
 // Only include components that exist and are actively used
 export { default as BusinessImpactSection } from "./common/BusinessImpactSection";
+export { default as ErrorMessage } from "./common/ErrorMessage";
 export { KeyValuePair } from "./common/KeyValuePair";
+export { default as LoadingSkeleton } from "./common/LoadingSkeleton";
+export { default as LoadingSpinner } from "./common/LoadingSpinner";
 export { default as RiskLevelBadge } from "./common/RiskLevelBadge";
 export { default as SecurityLevelBadge } from "./common/SecurityLevelBadge";
 export { default as StatusBadge } from "./common/StatusBadge";
+export { default as WidgetErrorBoundary } from "./common/WidgetErrorBoundary";
 
 // Charts
 export { default as RadarChart } from "./charts/RadarChart";
@@ -46,7 +50,10 @@ export type {
   BusinessImpactSectionProps,
   BusinessRiskDisplayProps,
   CIAImpactCardProps,
+  ErrorMessageProps,
   KeyValuePairProps,
+  LoadingSkeletonProps,
+  LoadingSpinnerProps,
   MetricsCardProps,
   RadarChartProps,
   RiskAssessmentProps,
@@ -59,5 +66,6 @@ export type {
   TooltipProps,
   WidgetActionsProps,
   WidgetContainerProps,
+  WidgetErrorBoundaryProps,
   WidgetHeaderProps,
 } from "../types/componentPropExports";
