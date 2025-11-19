@@ -232,3 +232,41 @@ export interface WidgetContainerProps {
   className?: string;
   testId?: string;
 }
+
+// ============================================================================
+// STANDARDIZED WIDGET PROP INTERFACES
+// ============================================================================
+
+// Export all standardized widget prop interfaces from widget-props
+export type {
+  // Base interfaces
+  BaseWidgetProps,
+  CIAComponentWidgetProps,
+  SecurityLevelChangeWidgetProps,
+  AllCIAComponentsProps,
+  
+  // Utility types
+  CIALevelsOnly,
+  PartialCIALevels,
+  WidgetPropsWithLoading,
+  
+  // Assessment Center widgets
+  SecurityLevelWidgetProps,
+  SecuritySummaryWidgetProps,
+  BusinessImpactAnalysisWidgetProps,
+  
+  // Business Value widgets
+  CostEstimationWidgetProps,
+  ComplianceStatusWidgetProps,
+  ValueCreationWidgetProps,
+  
+  // Impact Analysis widgets
+  AvailabilityImpactWidgetProps,
+  IntegrityImpactWidgetProps,
+  ConfidentialityImpactWidgetProps,
+  
+  // Implementation Guide widgets
+  TechnicalDetailsWidgetProps,
+  SecurityResourcesWidgetProps,
+  SecurityVisualizationWidgetProps,
+} from './widget-props';
