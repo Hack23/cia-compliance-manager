@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.1**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIADetails
 
-Defined in: [types/cia.ts:537](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L537)
+Defined in: [types/cia.ts:537](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/cia.ts#L537)
 
 CIA details structure
 
@@ -35,7 +35,7 @@ const details: CIADetails = {
 
 > `optional` **businessImpact**: `string`
 
-Defined in: [types/cia.ts:548](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L548)
+Defined in: [types/cia.ts:548](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/cia.ts#L548)
 
 Business impact and value proposition
 
@@ -45,7 +45,7 @@ Business impact and value proposition
 
 > `optional` **description**: `string`
 
-Defined in: [types/cia.ts:539](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L539)
+Defined in: [types/cia.ts:539](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/cia.ts#L539)
 
 General description of the configuration
 
@@ -55,7 +55,7 @@ General description of the configuration
 
 > `optional` **impact**: `string`
 
-Defined in: [types/cia.ts:542](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L542)
+Defined in: [types/cia.ts:542](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/cia.ts#L542)
 
 Impact statement describing the effect of this configuration
 
@@ -65,7 +65,7 @@ Impact statement describing the effect of this configuration
 
 > `optional` **mttr**: `string`
 
-Defined in: [types/cia.ts:554](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L554)
+Defined in: [types/cia.ts:554](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/cia.ts#L554)
 
 Mean Time To Repair - average time to fix issues
 
@@ -75,7 +75,7 @@ Mean Time To Repair - average time to fix issues
 
 > `optional` **recommendations**: `string`[]
 
-Defined in: [types/cia.ts:563](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L563)
+Defined in: [types/cia.ts:563](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/cia.ts#L563)
 
 List of recommendations for improvement
 
@@ -85,7 +85,7 @@ List of recommendations for improvement
 
 > `optional` **rpo**: `string`
 
-Defined in: [types/cia.ts:560](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L560)
+Defined in: [types/cia.ts:560](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/cia.ts#L560)
 
 Recovery Point Objective - maximum acceptable data loss
 
@@ -95,7 +95,7 @@ Recovery Point Objective - maximum acceptable data loss
 
 > `optional` **rto**: `string`
 
-Defined in: [types/cia.ts:557](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L557)
+Defined in: [types/cia.ts:557](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/cia.ts#L557)
 
 Recovery Time Objective - maximum acceptable downtime
 
@@ -105,7 +105,7 @@ Recovery Time Objective - maximum acceptable downtime
 
 > `optional` **technical**: `string`
 
-Defined in: [types/cia.ts:545](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L545)
+Defined in: [types/cia.ts:545](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/cia.ts#L545)
 
 Technical implementation details
 
@@ -115,6 +115,6 @@ Technical implementation details
 
 > `optional` **uptime**: `string`
 
-Defined in: [types/cia.ts:551](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L551)
+Defined in: [types/cia.ts:551](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/cia.ts#L551)
 
 Expected uptime percentage

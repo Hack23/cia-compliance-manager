@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.9.0**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.1**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **ConfidentialityImpactWidget**: `React.FC`\<[`ConfidentialityImpactWidgetProps`](../widgets/impactanalysis/ConfidentialityImpactWidget/type-aliases/ConfidentialityImpactWidgetProps.md)\>
 
-Defined in: [components/widgets/impactanalysis/ConfidentialityImpactWidget.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/components/widgets/impactanalysis/ConfidentialityImpactWidget.tsx#L27)
+Defined in: [components/widgets/impactanalysis/ConfidentialityImpactWidget.tsx:27](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/components/widgets/impactanalysis/ConfidentialityImpactWidget.tsx#L27)
 
 Displays confidentiality impact details for the selected security level
 

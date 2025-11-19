@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.1**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **createComplianceService**(`dataProvider?`): [`ComplianceService`](../classes/ComplianceService.md)
 
-Defined in: [services/complianceService.ts:818](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/services/complianceService.ts#L818)
+Defined in: [services/complianceService.ts:818](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/services/complianceService.ts#L818)
 
 Create a ComplianceService with the provided data provider
 

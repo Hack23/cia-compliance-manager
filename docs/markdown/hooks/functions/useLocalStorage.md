@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.9.0**](../../README.md)
+[**CIA Compliance Manager Documentation v0.9.1**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **useLocalStorage**\<`T`\>(`key`, `initialValue`): \[`T`, (`value`) => `void`\]
 
-Defined in: [hooks/useLocalStorage.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useLocalStorage.ts#L55)
+Defined in: [hooks/useLocalStorage.ts:55](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/hooks/useLocalStorage.ts#L55)
 
 Custom hook to sync state with localStorage
 

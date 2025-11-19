@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.9.0**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.1**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetActionsProps
 
-Defined in: [types/componentPropExports.ts:150](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/componentPropExports.ts#L150)
+Defined in: [types/componentPropExports.ts:150](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/componentPropExports.ts#L150)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:150](https://github.com/Hack23/cia-co
 
 > **actions**: `WidgetActionButtonProps`[]
 
-Defined in: [types/componentPropExports.ts:151](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/componentPropExports.ts#L151)
+Defined in: [types/componentPropExports.ts:151](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/componentPropExports.ts#L151)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types/componentPropExports.ts:151](https://github.com/Hack23/cia-co
 
 > `optional` **className**: `string`
 
-Defined in: [types/componentPropExports.ts:152](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/componentPropExports.ts#L152)
+Defined in: [types/componentPropExports.ts:152](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/componentPropExports.ts#L152)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [types/componentPropExports.ts:152](https://github.com/Hack23/cia-co
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:153](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/componentPropExports.ts#L153)
+Defined in: [types/componentPropExports.ts:153](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/componentPropExports.ts#L153)

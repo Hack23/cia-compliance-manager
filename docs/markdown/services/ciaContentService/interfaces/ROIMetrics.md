@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.1**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ROIMetrics
 
-Defined in: [services/ciaContentService.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/services/ciaContentService.ts#L30)
+Defined in: [services/ciaContentService.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/services/ciaContentService.ts#L30)
 
 Metrics for ROI assessment
 
@@ -16,7 +16,7 @@ Metrics for ROI assessment
 
 > **description**: `string`
 
-Defined in: [services/ciaContentService.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/services/ciaContentService.ts#L33)
+Defined in: [services/ciaContentService.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/services/ciaContentService.ts#L33)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [services/ciaContentService.ts:33](https://github.com/Hack23/cia-com
 
 > **percentage**: `string`
 
-Defined in: [services/ciaContentService.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/services/ciaContentService.ts#L32)
+Defined in: [services/ciaContentService.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/services/ciaContentService.ts#L32)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [services/ciaContentService.ts:32](https://github.com/Hack23/cia-com
 
 > **value**: `string`
 
-Defined in: [services/ciaContentService.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/services/ciaContentService.ts#L31)
+Defined in: [services/ciaContentService.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/services/ciaContentService.ts#L31)

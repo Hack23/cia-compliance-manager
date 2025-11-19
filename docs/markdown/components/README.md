@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.9.0**](../README.md)
+[**CIA Compliance Manager Documentation v0.9.1**](../README.md)
 
 ***
 
@@ -17,9 +17,16 @@ with intuitive interfaces for managing security compliance. 🎨
 ## Technical Perspective
 Centralized component exports simplify imports and promote component reuse.
 
+## Classes
+
+- [WidgetErrorBoundary](classes/WidgetErrorBoundary.md)
+
 ## Interfaces
 
+- [ErrorMessageProps](interfaces/ErrorMessageProps.md)
 - [KeyValuePairProps](interfaces/KeyValuePairProps.md)
+- [LoadingSkeletonProps](interfaces/LoadingSkeletonProps.md)
+- [LoadingSpinnerProps](interfaces/LoadingSpinnerProps.md)
 - [RiskLevelBadgeProps](interfaces/RiskLevelBadgeProps.md)
 - [SecurityLevelBadgeProps](interfaces/SecurityLevelBadgeProps.md)
 - [SecurityRiskScoreProps](interfaces/SecurityRiskScoreProps.md)
@@ -28,6 +35,7 @@ Centralized component exports simplify imports and promote component reuse.
 - [TooltipProps](interfaces/TooltipProps.md)
 - [WidgetActionsProps](interfaces/WidgetActionsProps.md)
 - [WidgetContainerProps](interfaces/WidgetContainerProps.md)
+- [WidgetErrorBoundaryProps](interfaces/WidgetErrorBoundaryProps.md)
 
 ## Variables
 
@@ -39,7 +47,10 @@ Centralized component exports simplify imports and promote component reuse.
 - [ComplianceStatusWidget](variables/ComplianceStatusWidget.md)
 - [ConfidentialityImpactWidget](variables/ConfidentialityImpactWidget.md)
 - [CostEstimationWidget](variables/CostEstimationWidget.md)
+- [ErrorMessage](variables/ErrorMessage.md)
 - [IntegrityImpactWidget](variables/IntegrityImpactWidget.md)
+- [LoadingSkeleton](variables/LoadingSkeleton.md)
+- [LoadingSpinner](variables/LoadingSpinner.md)
 - [RadarChart](variables/RadarChart.md)
 - [RiskLevelBadge](variables/RiskLevelBadge.md)
 - [SecurityLevelBadge](variables/SecurityLevelBadge.md)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.1**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactWidgetProps
 
-Defined in: [types/widgets.ts:170](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widgets.ts#L170)
+Defined in: [types/widgets.ts:170](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L170)
 
 Props for widgets that display business impacts
 
@@ -26,7 +26,7 @@ and business value of security investments. 📊
 
 > **availabilityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L34)
+Defined in: [types/widget-props.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widget-props.ts#L34)
 
 The selected availability level
 
@@ -48,7 +48,7 @@ Controls system uptime and accessibility requirements.
 
 > `optional` **children**: `ReactNode`
 
-Defined in: [types/widgets.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widgets.ts#L35)
+Defined in: [types/widgets.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L35)
 
 Optional children elements
 
@@ -62,7 +62,7 @@ Optional children elements
 
 > `optional` **className**: `string`
 
-Defined in: [types/widget-props.ts:123](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L123)
+Defined in: [types/widget-props.ts:123](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widget-props.ts#L123)
 
 Optional CSS class name for custom styling
 
@@ -85,7 +85,7 @@ Use Tailwind CSS classes or custom CSS classes.
 
 > **confidentialityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:52](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L52)
+Defined in: [types/widget-props.ts:52](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widget-props.ts#L52)
 
 The selected confidentiality level
 
@@ -107,7 +107,7 @@ Controls data privacy and access control requirements.
 
 > **integrityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L43)
+Defined in: [types/widget-props.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widget-props.ts#L43)
 
 The selected integrity level
 
@@ -129,7 +129,7 @@ Controls data accuracy and consistency requirements.
 
 > `optional` **onAvailabilityChange**: (`level`) => `void`
 
-Defined in: [types/widget-props.ts:67](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L67)
+Defined in: [types/widget-props.ts:67](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widget-props.ts#L67)
 
 Optional callback fired when availability level changes
 
@@ -164,7 +164,7 @@ onAvailabilityChange={(level) => {
 
 > `optional` **onConfidentialityChange**: (`level`) => `void`
 
-Defined in: [types/widget-props.ts:97](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L97)
+Defined in: [types/widget-props.ts:97](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widget-props.ts#L97)
 
 Optional callback fired when confidentiality level changes
 
@@ -199,7 +199,7 @@ onConfidentialityChange={(level) => {
 
 > `optional` **onIntegrityChange**: (`level`) => `void`
 
-Defined in: [types/widget-props.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L82)
+Defined in: [types/widget-props.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widget-props.ts#L82)
 
 Optional callback fired when integrity level changes
 
@@ -234,7 +234,7 @@ onIntegrityChange={(level) => {
 
 > `optional` **roi**: `object`
 
-Defined in: [types/widgets.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widgets.ts#L174)
+Defined in: [types/widgets.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L174)
 
 Optional ROI information
 
@@ -252,7 +252,7 @@ Optional ROI information
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widget-props.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L134)
+Defined in: [types/widget-props.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widget-props.ts#L134)
 
 Optional test ID for automated testing
 

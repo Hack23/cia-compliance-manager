@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.1**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **availabilityData**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIADetails`](../../../types/interfaces/CIADetails.md)\>
 
-Defined in: [data/security/availabilityData.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/security/availabilityData.ts#L14)
+Defined in: [data/security/availabilityData.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/data/security/availabilityData.ts#L14)
 
 Detailed availability security options for each security level
 

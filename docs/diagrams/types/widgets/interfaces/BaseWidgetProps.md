@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.1**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BaseWidgetProps
 
-Defined in: [types/widgets.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widgets.ts#L31)
+Defined in: [types/widgets.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L31)
 
 Base widget props shared by all widgets
 
@@ -24,7 +24,7 @@ Base widget props shared by all widgets
 
 > `optional` **children**: `ReactNode`
 
-Defined in: [types/widgets.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widgets.ts#L35)
+Defined in: [types/widgets.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L35)
 
 Optional children elements
 
@@ -34,7 +34,7 @@ Optional children elements
 
 > `optional` **className**: `string`
 
-Defined in: [types/widget-props.ts:123](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L123)
+Defined in: [types/widget-props.ts:123](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widget-props.ts#L123)
 
 Optional CSS class name for custom styling
 
@@ -57,7 +57,7 @@ Use Tailwind CSS classes or custom CSS classes.
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widget-props.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L134)
+Defined in: [types/widget-props.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widget-props.ts#L134)
 
 Optional test ID for automated testing
 
