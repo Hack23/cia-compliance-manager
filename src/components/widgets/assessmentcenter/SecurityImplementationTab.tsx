@@ -79,7 +79,7 @@ export const SecurityImplementationTab: React.FC<
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Implementation Timeline */}
           <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-sm font-medium mb-1">
@@ -108,7 +108,7 @@ export const SecurityImplementationTab: React.FC<
           Component Implementation Summary
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Confidentiality Implementation */}
           <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
             <h4 className="font-medium text-purple-700 dark:text-purple-300 mb-2">

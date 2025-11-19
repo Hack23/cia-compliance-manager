@@ -108,7 +108,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
             Detailed compliance information is not available.
           </p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
               <h4 className="font-medium text-green-700 dark:text-green-300 flex items-center justify-between">
                 <span>Compliant</span>
@@ -162,7 +162,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
           Component Compliance Requirements
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Confidentiality compliance */}
           <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
             <h5 className="text-sm font-medium mb-1 text-purple-700 dark:text-purple-300">

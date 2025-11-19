@@ -247,7 +247,7 @@ const SecurityVisualizationWidget: React.FC<
         {/* Component Details Section */}
         <div className="mb-6">
           <h3 className="text-lg font-medium mb-3">Component Details</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Confidentiality component */}
             <div
               className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg"
@@ -344,7 +344,7 @@ const SecurityVisualizationWidget: React.FC<
             your CIA triad levels. The risk level indicates the potential
             business risk associated with your current security posture.
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 text-xs">
             <div className="p-1 bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-30 dark:text-red-300 rounded text-center">
               Critical Risk
             </div>

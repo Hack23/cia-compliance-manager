@@ -383,7 +383,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
             <div className="mb-6">
               <h3 className="text-lg font-medium mb-2">Compliant Frameworks</h3>
               <div
-                className="grid grid-cols-1 md:grid-cols-2 gap-3"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-3"
                 data-testid={COMPLIANCE_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST}
               >
                 {complianceStatus.compliantFrameworks.map(
@@ -425,7 +425,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                 Partially Compliant Frameworks
               </h3>
               <div
-                className="grid grid-cols-1 md:grid-cols-2 gap-3"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-3"
                 data-testid={
                   COMPLIANCE_TEST_IDS.PARTIALLY_COMPLIANT_FRAMEWORKS_LIST
                 }
@@ -469,7 +469,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                 Non-Compliant Frameworks
               </h3>
               <div
-                className="grid grid-cols-1 md:grid-cols-2 gap-3"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-3"
                 data-testid={COMPLIANCE_TEST_IDS.NON_COMPLIANT_FRAMEWORKS_LIST}
               >
                 {complianceStatus.nonCompliantFrameworks.map(
@@ -527,7 +527,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                   {/* CIA Component Analysis */}
                   <div className="mb-3">
                     <h4 className="font-medium mb-1">Component Requirements</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-2">
                       {["availability", "integrity", "confidentiality"].map(
                         (comp) => {
                           const componentType = comp as CIAComponent;

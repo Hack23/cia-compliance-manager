@@ -390,33 +390,33 @@ const BusinessImpactAnalysisWidget: React.FC<
   const renderImpactHeatMap = () => {
     // Create a visual representation of impact across CIA components
     return (
-      <div className="grid grid-cols-3 gap-2 mt-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4 mb-4">
         <div
-          className={`p-2 rounded text-center ${getImpactColorClass(
+          className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
             confidentialityLevel
           )}`}
           data-testid={`${testId}-heatmap-confidentiality`}
         >
-          <div className="text-xs font-medium">Confidentiality</div>
-          <div className="font-bold">{confidentialityLevel}</div>
+          <div className="text-xs sm:text-sm font-medium">Confidentiality</div>
+          <div className="text-sm sm:text-base font-bold">{confidentialityLevel}</div>
         </div>
         <div
-          className={`p-2 rounded text-center ${getImpactColorClass(
+          className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
             integrityLevel
           )}`}
           data-testid={`${testId}-heatmap-integrity`}
         >
-          <div className="text-xs font-medium">Integrity</div>
-          <div className="font-bold">{integrityLevel}</div>
+          <div className="text-xs sm:text-sm font-medium">Integrity</div>
+          <div className="text-sm sm:text-base font-bold">{integrityLevel}</div>
         </div>
         <div
-          className={`p-2 rounded text-center ${getImpactColorClass(
+          className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
             availabilityLevel
           )}`}
           data-testid={`${testId}-heatmap-availability`}
         >
-          <div className="text-xs font-medium">Availability</div>
-          <div className="font-bold">{availabilityLevel}</div>
+          <div className="text-xs sm:text-sm font-medium">Availability</div>
+          <div className="text-sm sm:text-base font-bold">{availabilityLevel}</div>
         </div>
       </div>
     );
@@ -587,7 +587,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           <div className="border-b border-gray-200 dark:border-gray-700 mb-4">
             <div className="flex">
               <button
-                className={`py-2 px-4 font-medium ${
+                className={`py-3 px-4 sm:py-2 font-medium text-sm sm:text-base min-h-[44px] ${
                   activeTab === "considerations"
                     ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
                     : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
@@ -598,7 +598,7 @@ const BusinessImpactAnalysisWidget: React.FC<
                 Implementation Considerations
               </button>
               <button
-                className={`py-2 px-4 font-medium ${
+                className={`py-3 px-4 sm:py-2 font-medium text-sm sm:text-base min-h-[44px] ${
                   activeTab === "benefits"
                     ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
                     : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"

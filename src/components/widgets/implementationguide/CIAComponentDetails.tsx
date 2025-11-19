@@ -136,7 +136,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
         {/* Main technical details card */}
         <div
           className={`p-4 ${theme.bgClass} rounded-lg shadow-sm border ${theme.borderClass}`}
@@ -251,7 +251,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
           Required
         </h4>
         <ul
-          className="grid grid-cols-1 md:grid-cols-2 gap-2"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-2"
           data-testid="required-expertise"
         >
           {getExpertiseRequired(component, level).map((expertise, index) => (
