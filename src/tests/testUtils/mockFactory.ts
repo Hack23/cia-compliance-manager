@@ -52,23 +52,16 @@ export function mockDOMAPIs() {
 }
 
 /**
- * Create a mocked Chart.js instance
+ * Create a standardized mock for Chart.js
  */
-export function createMockChart() {
-  return {
+export function createChartMock() {
+  const chartInstance = {
     destroy: vi.fn(),
     update: vi.fn(),
     resize: vi.fn(),
     data: { datasets: [] },
     options: {},
   };
-}
-
-/**
- * Create a standardized mock for Chart.js
- */
-export function createChartMock() {
-  const chartInstance = createMockChart();
 
   // Create the mock constructor with proper typing
   type ChartConstructor = ReturnType<typeof vi.fn> & {

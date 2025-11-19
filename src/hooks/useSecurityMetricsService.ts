@@ -56,5 +56,3 @@ export const useSecurityMetricsService = () => {
     refreshService: initService,
   };
 };
-
-export default useSecurityMetricsService;

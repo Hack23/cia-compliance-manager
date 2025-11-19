@@ -2,12 +2,11 @@ import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { AVAILABILITY_IMPACT_TEST_IDS } from "../../../constants/testIds";
 import { getDefaultSLAMetrics } from "../../../data/ciaOptionsData";
+import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
-import { getDefaultComponentImpact } from "../../../utils/riskUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
-import { isNullish } from "../../../utils/typeGuards";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -72,9 +71,9 @@ interface AvailabilityImpactWidgetProps {
 const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   level, // For backward compatibility
   availabilityLevel,
-  integrityLevel,
-  confidentialityLevel,
-  showExtendedDetails = false,
+  integrityLevel: _integrityLevel,
+  confidentialityLevel: _confidentialityLevel,
+  showExtendedDetails: _showExtendedDetails = false,
   className = "",
   testId = AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_PREFIX,
 }) => {
@@ -83,45 +82,12 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
     availabilityLevel || level || "Moderate"
   );
 
-  // Get CIA content service
-  const { ciaContentService, error, isLoading } = useCIAContentService();
+  // Get CIA content service for loading/error states
+  const { error, isLoading } = useCIAContentService();
 
-  // Get availability details from service
-  const details = useMemo(() => {
-    if (isNullish(ciaContentService)) return null;
-
-    try {
-      const result = ciaContentService.getComponentDetails(
-        "availability",
-        effectiveLevel
-      );
-      return isNullish(result) ? null : result;
-    } catch (err) {
-      console.error("Error getting availability details:", err);
-      return null;
-    }
-  }, [ciaContentService, effectiveLevel]);
-
-  // Get business impact from service with fallback to our utility
-  const businessImpact = useMemo(() => {
-    if (isNullish(ciaContentService)) {
-      return getDefaultComponentImpact("availability", effectiveLevel);
-    }
-
-    try {
-      const impact = ciaContentService.getBusinessImpact(
-        "availability",
-        effectiveLevel
-      );
-
-      return (
-        impact || getDefaultComponentImpact("availability", effectiveLevel)
-      );
-    } catch (err) {
-      console.error("Error getting availability business impact:", err);
-      return getDefaultComponentImpact("availability", effectiveLevel);
-    }
-  }, [ciaContentService, effectiveLevel]);
+  // Use custom hooks for data fetching (replaces manual useMemo logic)
+  const details = useComponentDetails("availability", effectiveLevel);
+  const businessImpact = useBusinessImpact("availability", effectiveLevel);
 
   // Get SLA metrics with fallback to utility function
   const slaMetrics = useMemo((): SLAMetrics => {
@@ -129,7 +95,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
     const defaultMetrics = getDefaultSLAMetrics(effectiveLevel);
 
     // If no details, return defaults
-    if (isNullish(details)) return defaultMetrics;
+    if (!details) return defaultMetrics;
 
     // Return metrics from details with fallbacks to defaults
     return {

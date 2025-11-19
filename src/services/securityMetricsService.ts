@@ -218,10 +218,29 @@ export class SecurityMetricsService extends BaseService {
 
   /**
    * Calculate ROI metrics based on security level and implementation cost
+   * 
+   * Computes return on investment (ROI) for security implementations by analyzing
+   * the expected returns for different security levels. Higher security levels
+   * typically yield better ROI through reduced incident costs and improved resilience.
    *
-   * @param securityLevel - Selected security level
-   * @param implementationCost - Cost of implementation in currency units
-   * @returns ROI metrics with value, percentage and description
+   * @param securityLevel - Selected security level to calculate ROI for
+   * @param implementationCost - Total cost of implementation in currency units (CAPEX + OPEX)
+   * @returns ROI metrics including monetary value, percentage return, and description
+   * 
+   * @example
+   * ```typescript
+   * const service = new SecurityMetricsService(dataProvider);
+   * 
+   * // Calculate ROI for High security level with $100,000 investment
+   * const roi = service.calculateRoi('High', 100000);
+   * console.log(roi.value);        // "$300,000"
+   * console.log(roi.percentage);   // "300%"
+   * console.log(roi.description);  // "Return on investment for High security level implementation"
+   * 
+   * // No ROI for zero investment
+   * const noRoi = service.calculateRoi('High', 0);
+   * console.log(noRoi.value);      // "$0"
+   * ```
    */
   public calculateRoi(
     securityLevel: SecurityLevel,
@@ -257,20 +276,60 @@ export class SecurityMetricsService extends BaseService {
 
   /**
    * Get ROI estimates from the data provider
+   * 
+   * Retrieves pre-configured return on investment estimates for all security levels.
+   * Each level has associated return rates, potential savings, and break-even periods
+   * based on industry research and historical data.
    *
-   * @returns Map of ROI estimates for different security levels
+   * @returns Map of ROI estimates keyed by security level (NONE, LOW, MODERATE, HIGH, VERY_HIGH)
+   * 
+   * @example
+   * ```typescript
+   * const service = new SecurityMetricsService(dataProvider);
+   * const estimates = service.getROIEstimates();
+   * 
+   * console.log(estimates.HIGH.returnRate);        // "300%"
+   * console.log(estimates.HIGH.description);       // "High ROI with significant risk reduction"
+   * console.log(estimates.MODERATE.breakEvenPeriod); // "2 years"
+   * ```
    */
   public getROIEstimates(): ROIEstimatesMap {
     return this.dataProvider.roiEstimates;
   }
 
   /**
-   * Get comprehensive security metrics for security levels
+   * Get comprehensive security metrics for selected security levels
+   * 
+   * Calculates a complete security assessment including scores, costs, risk reduction,
+   * compliance metrics, and component-specific analysis. This is the primary method
+   * for obtaining a holistic view of security posture across all CIA triad components.
    *
    * @param availabilityLevel - Availability security level
-   * @param integrityLevel - Integrity security level (optional, defaults to availabilityLevel)
-   * @param confidentialityLevel - Confidentiality security level (optional, defaults to availabilityLevel)
-   * @returns Security metrics including score, costs, and risk reduction
+   * @param integrityLevel - Integrity security level (defaults to availabilityLevel if not provided)
+   * @param confidentialityLevel - Confidentiality security level (defaults to availabilityLevel if not provided)
+   * @returns Comprehensive security metrics object with scores, costs, and assessments
+   * 
+   * @example
+   * ```typescript
+   * const service = new SecurityMetricsService(dataProvider);
+   * 
+   * // Get metrics for specific configuration
+   * const metrics = service.getSecurityMetrics('High', 'Very High', 'Moderate');
+   * console.log(metrics.overallScore);     // 75 (0-100 scale)
+   * console.log(metrics.totalCost);        // 450000 (total CAPEX + OPEX)
+   * console.log(metrics.riskReduction);    // "85%"
+   * console.log(metrics.securityMaturity); // "Advanced"
+   * 
+   * // Use uniform level across all components
+   * const uniformMetrics = service.getSecurityMetrics('Moderate');
+   * console.log(uniformMetrics.availability.level);      // "Moderate"
+   * console.log(uniformMetrics.integrity.level);         // "Moderate"
+   * console.log(uniformMetrics.confidentiality.level);   // "Moderate"
+   * 
+   * // Access component-specific metrics
+   * console.log(metrics.availability.score);           // Score for availability
+   * console.log(metrics.availability.recommendations); // Recommendations array
+   * ```
    */
   public getSecurityMetrics(
     availabilityLevel: SecurityLevel,
@@ -382,11 +441,33 @@ export class SecurityMetricsService extends BaseService {
   }
 
   /**
-   * Get component-specific metrics
+   * Get component-specific security metrics
+   * 
+   * Provides detailed metrics for a single CIA component at a specific security level,
+   * including score, description, recommendations, and cost information. Useful for
+   * component-level analysis and detailed reporting.
    *
-   * @param component - CIA component type
-   * @param level - Security level
-   * @returns Component metrics
+   * @param component - CIA component type ('availability', 'integrity', or 'confidentiality')
+   * @param level - Security level for the component
+   * @returns Component metrics with score, description, recommendations, and cost details
+   * 
+   * @example
+   * ```typescript
+   * const service = new SecurityMetricsService(dataProvider);
+   * 
+   * // Get metrics for availability at High level
+   * const availMetrics = service.getComponentMetrics('availability', 'High');
+   * console.log(availMetrics.score);         // 75 (0-100 scale)
+   * console.log(availMetrics.level);         // "High"
+   * console.log(availMetrics.description);   // "High availability with 99.9% uptime"
+   * console.log(availMetrics.recommendations); // Array of improvement suggestions
+   * console.log(availMetrics.capex);         // Capital expenditure cost
+   * console.log(availMetrics.opex);          // Operational expenditure cost
+   * 
+   * // Get metrics for integrity
+   * const integrityMetrics = service.getComponentMetrics('integrity', 'Very High');
+   * console.log(integrityMetrics.component); // "integrity"
+   * ```
    */
   public getComponentMetrics(
     component: CIAComponentType,

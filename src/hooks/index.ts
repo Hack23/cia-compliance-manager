@@ -14,7 +14,33 @@
  */
 
 // Security Level Hooks
-export { default as useCIAContentService } from "./useCIAContentService";
+export { useCIAContentService } from "./useCIAContentService";
 export { useCIAOptions } from "./useCIAOptions";
+export { useComplianceService } from "./useComplianceService";
+export { useSecurityMetricsService } from "./useSecurityMetricsService";
 
-// Add other hooks as they're created
+// Component Data Hooks
+export { useComponentDetails } from "./useComponentDetails";
+export { useBusinessImpact } from "./useBusinessImpact";
+
+// Formatting Hooks
+export { useFormattedMetrics } from "./useFormattedMetrics";
+export type { MetricFormatters, MetricFormattingOptions } from "./useFormattedMetrics";
+
+// UI Hooks
+export { useResponsiveBreakpoint } from "./useResponsiveBreakpoint";
+export type { Breakpoint } from "./useResponsiveBreakpoint";
+
+// State Management Hooks
+export { useSecurityLevelState } from "./useSecurityLevelState";
+export type { 
+  SecurityLevelState, 
+  UseSecurityLevelStateReturn 
+} from "./useSecurityLevelState";
+
+// Data Fetching Hooks
+export { useServiceData } from "./useServiceData";
+export type { ServiceDataState } from "./useServiceData";
+
+// Storage Hooks
+export { useLocalStorage } from "./useLocalStorage";

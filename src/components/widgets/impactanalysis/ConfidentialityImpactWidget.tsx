@@ -1,11 +1,10 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { getDefaultPrivacyImpact } from "../../../data/ciaOptionsData";
+import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { ComponentImpactBaseProps } from "../../../types/widgets";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
-import { getDefaultComponentImpact } from "../../../utils/riskUtils";
-import { isNullish } from "../../../utils/typeGuards";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -13,10 +12,7 @@ import WidgetContainer from "../../common/WidgetContainer";
 /**
  * Props for the Confidentiality Impact Widget
  */
-export interface ConfidentialityImpactWidgetProps
-  extends ComponentImpactBaseProps {
-  // All required props are inherited from ComponentImpactBaseProps
-}
+export type ConfidentialityImpactWidgetProps = ComponentImpactBaseProps;
 
 /**
  * Displays confidentiality impact details for the selected security level
@@ -32,14 +28,14 @@ const ConfidentialityImpactWidget: React.FC<
   ConfidentialityImpactWidgetProps
 > = ({
   level, // For backward compatibility
-  availabilityLevel,
-  integrityLevel,
+  availabilityLevel: _availabilityLevel,
+  integrityLevel: _integrityLevel,
   confidentialityLevel,
   className = "",
   testId = "widget-confidentiality-impact",
-  onLevelChange,
+  onLevelChange: _onLevelChange,
 }) => {
-  // Use the content service to get component details
+  // Use the content service to get loading/error state
   const {
     ciaContentService,
     error: serviceError,
@@ -50,49 +46,13 @@ const ConfidentialityImpactWidget: React.FC<
   // otherwise fall back to the legacy level prop
   const effectiveLevel = confidentialityLevel || level || "Moderate";
 
-  // Get component details from service
-  const details = useMemo(() => {
-    try {
-      if (isNullish(ciaContentService)) {
-        return null;
-      }
-
-      const componentDetails = ciaContentService.getComponentDetails(
-        "confidentiality",
-        effectiveLevel
-      );
-
-      return isNullish(componentDetails) ? null : componentDetails;
-    } catch (err) {
-      console.error("Error fetching confidentiality details:", err);
-      return null;
-    }
-  }, [ciaContentService, effectiveLevel]);
-
-  // Get business impact from service with fallback to our utility
-  const businessImpact = useMemo(() => {
-    try {
-      if (isNullish(ciaContentService)) {
-        return getDefaultComponentImpact("confidentiality", effectiveLevel);
-      }
-
-      const impact = ciaContentService.getBusinessImpact(
-        "confidentiality",
-        effectiveLevel
-      );
-
-      return (
-        impact || getDefaultComponentImpact("confidentiality", effectiveLevel)
-      );
-    } catch (err) {
-      console.error("Error fetching business impact details:", err);
-      return getDefaultComponentImpact("confidentiality", effectiveLevel);
-    }
-  }, [ciaContentService, effectiveLevel]);
+  // Use custom hooks for data fetching (replaces manual useMemo logic)
+  const details = useComponentDetails("confidentiality", effectiveLevel);
+  const businessImpact = useBusinessImpact("confidentiality", effectiveLevel);
 
   // Get data classification from service with fallback
   const dataClassification = useMemo(() => {
-    if (isNullish(ciaContentService)) {
+    if (!ciaContentService) {
       return `${effectiveLevel} Classification`;
     }
 
@@ -106,7 +66,7 @@ const ConfidentialityImpactWidget: React.FC<
 
   // Get privacy impact with fallback to utility function
   const privacyImpact = useMemo(() => {
-    if (!isNullish(details) && details.privacyImpact) {
+    if (details && details.privacyImpact) {
       return details.privacyImpact;
     }
     return getDefaultPrivacyImpact(effectiveLevel);

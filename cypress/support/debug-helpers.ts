@@ -11,21 +11,6 @@ interface WindowWithDebug extends Omit<Cypress.AUTWindow, "Infinity" | "NaN"> {
 }
 
 /**
- * Takes a screenshot with current test info and logs DOM state
- */
-export function debugFailure(testName: string): void {
-  cy.screenshot(`debug-${testName.replace(/\s+/g, "-")}`, {
-    capture: "viewport",
-  });
-  cy.document().then((doc) => {
-    console.log(
-      `HTML at failure point for ${testName}:`,
-      doc.body.outerHTML.substring(0, 1000) + "..."
-    );
-  });
-}
-
-/**
  * Debug test failures with comprehensive info including widget content
  */
 export function debugFailedTest(testName: string): void {
@@ -147,40 +132,6 @@ export function logAllTestIds(): void {
 /**
  * Logs the current DOM structure for debugging
  */
-export function logDomStructure(selector = "body > *"): void {
-  cy.get(selector).then(($elements) => {
-    cy.log(`DOM Structure for "${selector}" (${$elements.length} elements):`);
-
-    $elements.each((i, el) => {
-      if (i < 10) {
-        // Limit to first 10 elements
-        const $el = Cypress.$(el);
-        cy.log(
-          `${i + 1}: ${el.tagName.toLowerCase()}${
-            el.id ? "#" + el.id : ""
-          } - classes: ${el.className}`
-        );
-      }
-    });
-
-    if ($elements.length > 10) {
-      cy.log(`...and ${$elements.length - 10} more elements`);
-    }
-  });
-}
-
-/**
- * Takes screenshots of all widgets for debugging
- */
-export function screenshotAllWidgets(): void {
-  cy.get('[data-testid*="widget"], [class*="widget"]').each(($widget, i) => {
-    const testId = $widget.attr("data-testid") || `widget-${i}`;
-    cy.wrap($widget)
-      .scrollIntoView()
-      .screenshot(`widget-${testId}`, { capture: "viewport" });
-  });
-}
-
 /**
  * Analyzes available widgets on the page for debugging test failures
  */
@@ -322,17 +273,6 @@ Cypress.Commands.add("debugFailedTest", (testName: string) => {
   });
 });
 
-/**
- * Fix for the debug helper to work in afterEach
- * Use this pattern in afterEach hooks
- */
-export function debugFailedTestInAfterEach(testName: string): void {
-  cy.log(`Debugging failed test: ${testName}`);
-
-  // Take a screenshot only
-  cy.screenshot(`afterhook-debug-${testName.replace(/\s+/g, "-")}`);
-}
-
 // Add more debug helpers as needed
 
 // Make sure to declare the types
@@ -341,7 +281,6 @@ declare global {
     interface Chainable<Subject = any> {
       debugFailedTest(testName: string): Chainable<null>;
       analyzeWidgets(): Chainable<null>;
-      debugFailure(testName: string): Chainable<null>;
       logVisibleElements(): Chainable<null>;
       logAllTestIds(): Chainable<null>;
       highlight(): Chainable<JQuery<HTMLElement>>;
@@ -349,13 +288,3 @@ declare global {
     }
   }
 }
-
-// Export helpers object
-export default {
-  debugFailure,
-  debugFailedTest,
-  logAllTestIds,
-  logVisibleElements,
-  logDomStructure,
-  screenshotAllWidgets,
-};

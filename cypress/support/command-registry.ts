@@ -20,7 +20,7 @@ import { analyzeAndDocumentWidgets } from "./widget-analyzer";
 import { findWidgetFlexibly } from "./widget-testing-template";
 
 // Register all commands in one place
-export function registerAllCommands(): void {
+function registerAllCommands(): void {
   // Debug helpers - these have proper types already
   Cypress.Commands.add("debugFailedTest", debugFailedTest);
   Cypress.Commands.add("analyzeWidgets", analyzeWidgets);
