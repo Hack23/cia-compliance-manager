@@ -233,6 +233,98 @@ export interface WidgetContainerProps {
   testId?: string;
 }
 
+// Error handling component props
+export interface ErrorMessageProps {
+  /**
+   * Error title
+   * @default 'Error'
+   */
+  title?: string;
+  
+  /**
+   * Error message to display
+   */
+  message: string;
+  
+  /**
+   * Optional retry callback function
+   */
+  retry?: () => void;
+  
+  /**
+   * Optional test ID for automated testing
+   */
+  testId?: string;
+  
+  /**
+   * Optional CSS class name
+   */
+  className?: string;
+}
+
+export interface LoadingSpinnerProps {
+  /**
+   * Size of the spinner
+   * @default 'md'
+   */
+  size?: 'sm' | 'md' | 'lg';
+  
+  /**
+   * Optional test ID for automated testing
+   */
+  testId?: string;
+  
+  /**
+   * Optional CSS class name
+   */
+  className?: string;
+}
+
+export interface LoadingSkeletonProps {
+  /**
+   * Number of skeleton lines to display
+   * @default 3
+   */
+  lines?: number;
+  
+  /**
+   * Optional test ID for automated testing
+   */
+  testId?: string;
+  
+  /**
+   * Optional CSS class name
+   */
+  className?: string;
+}
+
+export interface WidgetErrorBoundaryProps {
+  /**
+   * Child components to wrap with error boundary
+   */
+  children: ReactNode;
+  
+  /**
+   * Optional custom fallback component to display on error
+   */
+  fallback?: ReactNode;
+  
+  /**
+   * Optional callback when an error is caught
+   */
+  onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
+  
+  /**
+   * Optional widget name for error messages
+   */
+  widgetName?: string;
+  
+  /**
+   * Optional test ID for automated testing
+   */
+  testId?: string;
+}
+
 // ============================================================================
 // STANDARDIZED WIDGET PROP INTERFACES
 // ============================================================================
