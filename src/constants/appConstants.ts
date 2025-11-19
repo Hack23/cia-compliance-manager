@@ -97,31 +97,6 @@ export const COMPLIANCE_STATUS = {
   FULL_COMPLIANCE: "Compliant with all major frameworks",
 };
 
-// Status Icons
-export const UI_ICONS = {
-  // Compliance icons
-  NON_COMPLIANT: "❌",
-  BASIC_COMPLIANCE: "⚠️",
-  STANDARD_COMPLIANCE: "✓",
-  FULL_COMPLIANCE: "✅",
-
-  // Security level icons
-  SECURITY_NONE: "⚠️",
-  SECURITY_LOW: "🔓",
-  SECURITY_MODERATE: "🔐",
-  SECURITY_HIGH: "🛡️",
-  SECURITY_VERY_HIGH: "🔒",
-};
-
-// Security Summary Titles - derived from security levels
-export const SECURITY_SUMMARY_TITLES = {
-  NONE: `${SECURITY_LEVELS.NONE} Security`,
-  LOW: `${SECURITY_LEVELS.LOW} Security`,
-  MODERATE: `${SECURITY_LEVELS.MODERATE} Security`,
-  HIGH: `${SECURITY_LEVELS.HIGH} Security`,
-  VERY_HIGH: `${SECURITY_LEVELS.VERY_HIGH} Security`,
-};
-
 // Security recommendations for each level
 export const SECURITY_RECOMMENDATIONS = {
   NONE: "Not recommended for any production system. Implement basic security controls immediately.",
@@ -155,29 +130,6 @@ export const SECURITY_DESCRIPTIONS = {
 };
 
 // Technical descriptions - for more detailed tooltips - using the helper function
-export const TECHNICAL_DESCRIPTIONS = {
-  // Placeholder that will be populated by the actual components
-  AVAILABILITY: {} as Record<SecurityLevelKey, string>,
-  INTEGRITY: {} as Record<SecurityLevelKey, string>,
-  CONFIDENTIALITY: {} as Record<SecurityLevelKey, string>,
-};
-
-// Impact Analysis Descriptions using enhanced helper
-export const IMPACT_DESCRIPTIONS = {
-  // Placeholder that will be populated by the actual components
-  AVAILABILITY: {} as Record<SecurityLevelKey, string>,
-  INTEGRITY: {} as Record<SecurityLevelKey, string>,
-  CONFIDENTIALITY: {} as Record<SecurityLevelKey, string>,
-};
-
-// Business Impact - using the helper
-export const BUSINESS_IMPACTS = {
-  // Placeholder that will be populated by the actual components
-  AVAILABILITY: {} as Record<SecurityLevelKey, string>,
-  INTEGRITY: {} as Record<SecurityLevelKey, string>,
-  CONFIDENTIALITY: {} as Record<SecurityLevelKey, string>,
-};
-
 // Value Creation Points
 export const VALUE_CREATION_POINTS: Partial<Record<SecurityLevel, string[]>> = {
   None: ["Minimal security baseline"],
@@ -185,40 +137,6 @@ export const VALUE_CREATION_POINTS: Partial<Record<SecurityLevel, string[]>> = {
   Moderate: ["Demonstrates security diligence"],
   High: ["Enables expansion into regulated markets"],
   "Very High": ["Enables participation in classified"],
-};
-
-// Detailed value creation points by security level
-export const DETAILED_VALUE_POINTS = {
-  NONE: [
-    "No value creation from security perspective",
-    "High risk of security incidents with significant business impact",
-    "Limited ability to participate in business relationships requiring security",
-    "Potential regulatory issues in many industries",
-  ],
-  LOW: [
-    "Minimal upfront costs allow budget allocation elsewhere",
-    "Appropriate for public data and low-impact internal systems",
-    "Provides basic protection against common threats",
-    "Simple implementation with minimal maintenance overhead",
-  ],
-  MODERATE: [
-    "Reduces operational disruptions by 80% compared to Basic level",
-    "Prevents common security incidents affecting quarterly performance",
-    "Provides competitive advantage over businesses with sub-standard security",
-    "Meets requirements for standard business relationships",
-  ],
-  HIGH: [
-    "Provides assurance to high-value customers with stringent requirements",
-    "Reduces insurance premiums through demonstrated security",
-    "Minimizes breach-related costs (avg. $4.45M per incident)",
-    "Supports premium service offerings where security is a differentiator",
-  ],
-  VERY_HIGH: [
-    "Protects irreplaceable intellectual property worth billions",
-    "Creates long-term trust with stakeholders including governments",
-    "Provides resilience against catastrophic events",
-    "Supports premium pricing models based on security guarantees",
-  ],
 };
 
 // ROI Estimates - consistent format across all values
@@ -270,12 +188,6 @@ export const COMPLIANCE_FRAMEWORKS = {
 };
 
 // Additional constants for specific UI components (previously in testConstants)
-export const DISPLAY_FORMAT = {
-  CURRENCY_PREFIX: "$",
-  PERCENTAGE_SUFFIX: "%",
-  DECIMAL_PLACES: 2,
-};
-
 // UI Text constants - centralized text for all UI elements
 export const UI_TEXT = {
   // Common UI labels
@@ -476,17 +388,6 @@ export const SECURITY_LEVEL_COLORS = {
 /**
  * Default CIA Details when none are provided
  */
-export const DEFAULT_CIA_DETAILS: CIADetails = {
-  description: "Not specified",
-  technical: "Not specified",
-  businessImpact: "Not specified",
-  capex: 0,
-  opex: 0,
-  bg: "#f0f0f0",
-  text: "#333333",
-  recommendations: [],
-};
-
 /**
  * Default security level
  */

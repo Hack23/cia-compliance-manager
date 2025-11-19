@@ -5,6 +5,15 @@ import {
   getROIEstimateForLevel,
   valueCreationPoints,
   valueCreationTitles,
+  valueCreationImpact,
+  VALUE_CREATION_POINTS,
+  BUSINESS_CONSIDERATIONS,
+  BUSINESS_BENEFITS,
+  getROIEstimate,
+  getValuePoints,
+  getBusinessConsiderations,
+  getBusinessBenefits,
+  ROI_ESTIMATES as VALUE_ROI_ESTIMATES,
 } from "./valueCreationData";
 
 describe("Value Creation Data", () => {
@@ -178,6 +187,198 @@ describe("Value Creation Data", () => {
         ROI_ESTIMATES.LOW
       );
       // ... rest of the test assertions ...
+    });
+  });
+
+  describe("valueCreationImpact", () => {
+    it("should have impact statements for all security levels", () => {
+      securityLevels.forEach((level) => {
+        expect(valueCreationImpact[level]).toBeDefined();
+        expect(typeof valueCreationImpact[level]).toBe("string");
+        expect(valueCreationImpact[level].length).toBeGreaterThan(0);
+      });
+    });
+
+    it("should have appropriate risk descriptions", () => {
+      expect(valueCreationImpact.None).toContain("maximum risk");
+      expect(valueCreationImpact.Low).toContain("high risk");
+      expect(valueCreationImpact.Moderate).toContain("moderate risk");
+      expect(valueCreationImpact.High).toContain("low risk");
+      expect(valueCreationImpact["Very High"]).toContain("minimal risk");
+    });
+  });
+
+  describe("VALUE_CREATION_POINTS", () => {
+    it("should have points for all security levels", () => {
+      securityLevels.forEach((level) => {
+        expect(VALUE_CREATION_POINTS[level]).toBeDefined();
+        expect(Array.isArray(VALUE_CREATION_POINTS[level])).toBe(true);
+        expect(VALUE_CREATION_POINTS[level].length).toBeGreaterThan(0);
+      });
+    });
+
+    it("should have value points with appropriate length", () => {
+      expect(VALUE_CREATION_POINTS.None.length).toBeGreaterThan(0);
+      expect(VALUE_CREATION_POINTS["Very High"].length).toBeGreaterThanOrEqual(
+        VALUE_CREATION_POINTS.None.length
+      );
+    });
+  });
+
+  describe("BUSINESS_CONSIDERATIONS", () => {
+    it("should have considerations for all security levels", () => {
+      securityLevels.forEach((level) => {
+        expect(BUSINESS_CONSIDERATIONS[level]).toBeDefined();
+        expect(Array.isArray(BUSINESS_CONSIDERATIONS[level])).toBe(true);
+        expect(BUSINESS_CONSIDERATIONS[level].length).toBeGreaterThan(0);
+      });
+    });
+
+    it("should have proper structure for each consideration", () => {
+      securityLevels.forEach((level) => {
+        BUSINESS_CONSIDERATIONS[level].forEach((consideration) => {
+          expect(consideration.title).toBeDefined();
+          expect(consideration.description).toBeDefined();
+          expect(typeof consideration.title).toBe("string");
+          expect(typeof consideration.description).toBe("string");
+        });
+      });
+    });
+  });
+
+  describe("BUSINESS_BENEFITS", () => {
+    it("should have benefits for all security levels", () => {
+      securityLevels.forEach((level) => {
+        expect(BUSINESS_BENEFITS[level]).toBeDefined();
+        expect(Array.isArray(BUSINESS_BENEFITS[level])).toBe(true);
+        expect(BUSINESS_BENEFITS[level].length).toBeGreaterThan(0);
+      });
+    });
+
+    it("should have proper structure for each benefit", () => {
+      securityLevels.forEach((level) => {
+        BUSINESS_BENEFITS[level].forEach((benefit) => {
+          expect(benefit.title).toBeDefined();
+          expect(benefit.description).toBeDefined();
+          expect(typeof benefit.title).toBe("string");
+          expect(typeof benefit.description).toBe("string");
+        });
+      });
+    });
+  });
+
+  describe("getROIEstimate", () => {
+    it("should return ROI estimate for all security levels", () => {
+      securityLevels.forEach((level) => {
+        const estimate = getROIEstimate(level);
+        expect(estimate).toBeDefined();
+        expect(estimate.returnRate).toBeDefined();
+        expect(estimate.description).toBeDefined();
+      });
+    });
+
+    it("should handle case variations", () => {
+      const estimate = getROIEstimate("Very High");
+      expect(estimate).toBeDefined();
+      expect(estimate.returnRate).toBeDefined();
+    });
+
+    it("should return NONE for invalid levels", () => {
+      const estimate = getROIEstimate("Invalid" as SecurityLevel);
+      expect(estimate).toEqual(VALUE_ROI_ESTIMATES.NONE);
+    });
+  });
+
+  describe("getValuePoints", () => {
+    it("should return value points for all security levels", () => {
+      securityLevels.forEach((level) => {
+        const points = getValuePoints(level);
+        expect(points).toBeDefined();
+        expect(Array.isArray(points)).toBe(true);
+        expect(points.length).toBeGreaterThan(0);
+      });
+    });
+
+    it("should return correct points for specific levels", () => {
+      const nonePoints = getValuePoints("None");
+      const highPoints = getValuePoints("High");
+
+      expect(nonePoints).toEqual(VALUE_CREATION_POINTS.None);
+      expect(highPoints).toEqual(VALUE_CREATION_POINTS.High);
+    });
+
+    it("should return None points for invalid levels", () => {
+      const points = getValuePoints("Invalid" as SecurityLevel);
+      expect(points).toEqual(VALUE_CREATION_POINTS.None);
+    });
+  });
+
+  describe("getBusinessConsiderations", () => {
+    it("should return considerations for all security levels", () => {
+      securityLevels.forEach((level) => {
+        const considerations = getBusinessConsiderations(level);
+        expect(considerations).toBeDefined();
+        expect(Array.isArray(considerations)).toBe(true);
+        expect(considerations.length).toBeGreaterThan(0);
+      });
+    });
+
+    it("should return correct considerations for specific levels", () => {
+      const noneConsiderations = getBusinessConsiderations("None");
+      const highConsiderations = getBusinessConsiderations("High");
+
+      expect(noneConsiderations).toEqual(BUSINESS_CONSIDERATIONS.None);
+      expect(highConsiderations).toEqual(BUSINESS_CONSIDERATIONS.High);
+    });
+
+    it("should return None considerations for invalid levels", () => {
+      const considerations = getBusinessConsiderations("Invalid" as SecurityLevel);
+      expect(considerations).toEqual(BUSINESS_CONSIDERATIONS.None);
+    });
+  });
+
+  describe("getBusinessBenefits", () => {
+    it("should return benefits for all security levels", () => {
+      securityLevels.forEach((level) => {
+        const benefits = getBusinessBenefits(level);
+        expect(benefits).toBeDefined();
+        expect(Array.isArray(benefits)).toBe(true);
+        expect(benefits.length).toBeGreaterThan(0);
+      });
+    });
+
+    it("should return correct benefits for specific levels", () => {
+      const noneBenefits = getBusinessBenefits("None");
+      const highBenefits = getBusinessBenefits("High");
+
+      expect(noneBenefits).toEqual(BUSINESS_BENEFITS.None);
+      expect(highBenefits).toEqual(BUSINESS_BENEFITS.High);
+    });
+
+    it("should return None benefits for invalid levels", () => {
+      const benefits = getBusinessBenefits("Invalid" as SecurityLevel);
+      expect(benefits).toEqual(BUSINESS_BENEFITS.None);
+    });
+  });
+
+  describe("ROI_ESTIMATES from valueCreationData", () => {
+    it("should have all required fields for each level", () => {
+      const levels = ["NONE", "LOW", "MODERATE", "HIGH", "VERY_HIGH"];
+
+      levels.forEach((level) => {
+        const estimate = VALUE_ROI_ESTIMATES[level];
+        expect(estimate).toBeDefined();
+        expect(estimate.returnRate).toBeDefined();
+        expect(estimate.description).toBeDefined();
+        expect(typeof estimate.returnRate).toBe("string");
+        expect(typeof estimate.description).toBe("string");
+      });
+    });
+
+    it("should have increasing return rates", () => {
+      expect(VALUE_ROI_ESTIMATES.NONE.returnRate).toBe("0%");
+      expect(VALUE_ROI_ESTIMATES.LOW.returnRate).toContain("%");
+      expect(VALUE_ROI_ESTIMATES.VERY_HIGH.returnRate).toContain("%");
     });
   });
 });

@@ -13,10 +13,10 @@ declare global {
       toBeRequired(): Assertion;
       toHaveAttribute(attr: string, value?: string): Assertion;
       toHaveClass(...classNames: string[]): Assertion;
-      toHaveStyle(css: Record<string, any>): Assertion;
+      toHaveStyle(css: Record<string, unknown>): Assertion;
       toHaveFocus(): Assertion;
       toHaveTextContent(text: string | RegExp): Assertion;
-      toHaveValue(value: any): Assertion;
+      toHaveValue(value: unknown): Assertion;
       toBeEnabled(): Assertion;
       toBeDisabled(): Assertion;
       toBeEmpty(): Assertion;
@@ -29,8 +29,8 @@ declare global {
       // Mock matchers
       toHaveBeenCalled(): Assertion;
       toHaveBeenCalledTimes(times: number): Assertion;
-      toHaveBeenCalledWith(...args: any[]): Assertion;
-      toHaveBeenNthCalledWith(n: number, ...args: any[]): Assertion;
+      toHaveBeenCalledWith(...args: unknown[]): Assertion;
+      toHaveBeenNthCalledWith(n: number, ...args: unknown[]): Assertion;
       toHaveReturned(): Assertion;
 
       // Other matchers
@@ -39,7 +39,7 @@ declare global {
       toBeLessThan(number: number): Assertion;
       toBeLessThanOrEqual(number: number): Assertion;
       toMatch(pattern: RegExp | string): Assertion;
-      toEqual(value: any): Assertion;
+      toEqual(value: unknown): Assertion;
       toBeTruthy(): Assertion;
     }
   }

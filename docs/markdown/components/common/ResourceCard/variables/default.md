@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.39**](../../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.40**](../../../../README.md)
 
 ***
 
@@ -8,4 +8,4 @@
 
 > `const` **default**: `React.FC`\<`ResourceCardProps`\>
 
-Defined in: [components/common/ResourceCard.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/components/common/ResourceCard.tsx#L17)
+Defined in: [components/common/ResourceCard.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/components/common/ResourceCard.tsx#L17)

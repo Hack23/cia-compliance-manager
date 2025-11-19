@@ -13,6 +13,7 @@ import {
   RISK_LEVELS,
 } from "../constants/riskConstants";
 import { calculateRiskLevel } from "../types/cia.utility";
+import { SecurityLevel } from "../types/cia";
 import * as colorUtils from "./colorUtils";
 import * as costUtils from "./costCalculationUtils";
 import * as errorUtils from "./errorUtils";
@@ -130,9 +131,9 @@ export const {
 
 // Add missing widget utilities with appropriate implementations
 export const calculateWidgetRiskLevel = (
-  availabilityLevel: any,
-  integrityLevel: any,
-  confidentialityLevel: any
+  availabilityLevel: SecurityLevel,
+  integrityLevel: SecurityLevel,
+  confidentialityLevel: SecurityLevel
 ) => {
   // Basic implementation based on average security level
   const levels: Record<string, number> = {
@@ -210,7 +211,7 @@ export const formatSecurityLevel = securityUtils.formatSecurityLevel;
 /**
  * @deprecated Use your own implementation - this will be removed in v1.0
  */
-export const SecurityLevelDisplay = ({ level }: { level: any }) => {
+export const SecurityLevelDisplay = ({ level }: { level: SecurityLevel | string }) => {
   // Simple fallback implementation
   return {
     type: "div",

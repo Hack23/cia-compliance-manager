@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.39**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: getSecurityResources()
 
-> **getSecurityResources**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `Promise`\<`any`\>
+> **getSecurityResources**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `Promise`\<`Record`\<`string`, `unknown`\>\>
 
-Defined in: [services/securityMetricsService.ts:1393](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/services/securityMetricsService.ts#L1393)
+Defined in: [services/securityMetricsService.ts:1478](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/services/securityMetricsService.ts#L1478)
 
 Get security resources based on security levels
 
@@ -34,6 +34,6 @@ Confidentiality security level
 
 ## Returns
 
-`Promise`\<`any`\>
+`Promise`\<`Record`\<`string`, `unknown`\>\>
 
 Security resources

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.39**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Function: getCostEstimation()
 
-> **getCostEstimation**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `Promise`\<`any`\>
+> **getCostEstimation**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `Promise`\<[`CostEstimation`](../interfaces/CostEstimation.md)\>
 
-Defined in: [services/securityMetricsService.ts:1109](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/services/securityMetricsService.ts#L1109)
+Defined in: [services/securityMetricsService.ts:1189](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/services/securityMetricsService.ts#L1189)
 
 Get cost estimation based on security levels
 
@@ -34,6 +34,6 @@ Confidentiality security level
 
 ## Returns
 
-`Promise`\<`any`\>
+`Promise`\<[`CostEstimation`](../interfaces/CostEstimation.md)\>
 
 Cost estimation details

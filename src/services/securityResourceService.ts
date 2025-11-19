@@ -51,7 +51,7 @@ export class SecurityResourceService extends BaseService {
       title: `Basic security guidance for ${component}`,
       description: `Start with these resources to implement ${component} security controls`,
       url: "https://www.nist.gov/cyberframework",
-      type: component === "all" ? "general" : (component as any),
+      type: component === "all" ? "general" : (component as CIAComponentType),
       relevance: 100,
       score: 100,
       tags: ["beginner", "basics"],

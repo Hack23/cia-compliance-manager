@@ -29,7 +29,7 @@ export class ComplianceServiceStatic {
     integrityLevel: SecurityLevel = availabilityLevel,
     confidentialityLevel: SecurityLevel = availabilityLevel
   ): string {
-    const adapter = new ComplianceServiceAdapter({} as any);
+    const adapter = new ComplianceServiceAdapter({} as unknown as CIADataProvider);
     return adapter.getComplianceStatusText(
       availabilityLevel,
       integrityLevel,
@@ -45,7 +45,7 @@ export class ComplianceServiceStatic {
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
   ): ComplianceStatusDetails {
-    const adapter = new ComplianceServiceAdapter({} as any);
+    const adapter = new ComplianceServiceAdapter({} as unknown as CIADataProvider);
     return adapter.getComplianceStatus(
       availabilityLevel,
       integrityLevel,
@@ -57,13 +57,10 @@ export class ComplianceServiceStatic {
    * Get framework description for tests
    */
   static getFrameworkDescription(framework: string): string {
-    const adapter = new ComplianceServiceAdapter({} as any);
+    const adapter = new ComplianceServiceAdapter({} as unknown as CIADataProvider);
     return adapter.getFrameworkDescription(framework);
   }
 }
-
-// Add this explicit export to ensure it's available
-export default ComplianceServiceStatic;
 
 /**
  * Generate mock compliance status for testing

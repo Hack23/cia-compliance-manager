@@ -22,7 +22,7 @@ export interface WidgetContainerProps {
  * widgets, with standardized loading, error states, and styling. Consistency
  * in presentation helps users navigate security information more effectively. 🎨
  */
-export const WidgetContainer: React.FC<WidgetContainerProps> = ({
+const WidgetContainer: React.FC<WidgetContainerProps> = ({
   title,
   children,
   isLoading = false,

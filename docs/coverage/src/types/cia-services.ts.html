@@ -467,7 +467,35 @@
 <a name='L402'></a><a href='#L402'>402</a>
 <a name='L403'></a><a href='#L403'>403</a>
 <a name='L404'></a><a href='#L404'>404</a>
-<a name='L405'></a><a href='#L405'>405</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L405'></a><a href='#L405'>405</a>
+<a name='L406'></a><a href='#L406'>406</a>
+<a name='L407'></a><a href='#L407'>407</a>
+<a name='L408'></a><a href='#L408'>408</a>
+<a name='L409'></a><a href='#L409'>409</a>
+<a name='L410'></a><a href='#L410'>410</a>
+<a name='L411'></a><a href='#L411'>411</a>
+<a name='L412'></a><a href='#L412'>412</a>
+<a name='L413'></a><a href='#L413'>413</a>
+<a name='L414'></a><a href='#L414'>414</a>
+<a name='L415'></a><a href='#L415'>415</a>
+<a name='L416'></a><a href='#L416'>416</a>
+<a name='L417'></a><a href='#L417'>417</a>
+<a name='L418'></a><a href='#L418'>418</a>
+<a name='L419'></a><a href='#L419'>419</a>
+<a name='L420'></a><a href='#L420'>420</a>
+<a name='L421'></a><a href='#L421'>421</a>
+<a name='L422'></a><a href='#L422'>422</a>
+<a name='L423'></a><a href='#L423'>423</a>
+<a name='L424'></a><a href='#L424'>424</a>
+<a name='L425'></a><a href='#L425'>425</a>
+<a name='L426'></a><a href='#L426'>426</a>
+<a name='L427'></a><a href='#L427'>427</a>
+<a name='L428'></a><a href='#L428'>428</a>
+<a name='L429'></a><a href='#L429'>429</a>
+<a name='L430'></a><a href='#L430'>430</a>
+<a name='L431'></a><a href='#L431'>431</a>
+<a name='L432'></a><a href='#L432'>432</a>
+<a name='L433'></a><a href='#L433'>433</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -519,7 +547,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -887,9 +943,10 @@ import { SecurityLevel } from "./cia";
 // Re-export SecurityLevel for backward compatibility
 export type { SecurityLevel };
 &nbsp;
-import { BusinessImpact } from "./businessImpact";
+import { BusinessImpact, SLAMetrics } from "./businessImpact";
 import { SecurityLevels } from "./cia";
 import { ComplianceFramework } from "./compliance";
+import { SecurityResource } from "./securityResources";
 &nbsp;
 /**
  * Core data structure representing CIA assessment data
@@ -991,7 +1048,7 @@ export interface BusinessImpactDetail {
  * Business impact details
  */
 export interface BusinessImpactDetails {
-  summary: string; // Required summary property
+  summary?: string; // Optional summary property
 &nbsp;
   // Either use the new names or the legacy names
   financial?: BusinessImpactDetail;
@@ -1032,7 +1089,11 @@ export interface TechnicalImplementationDetails {
   validationMethod?: string; // For integrity
   protectionMethod?: string; // For confidentiality
   recoveryMethod?: string; // For availability
-  [key: string]: any; // Allow additional properties
+  // Additional optional properties for implementation guidance
+  expertiseLevel?: string; // Expertise level required
+  developmentEffort?: string; // Development effort estimate
+  // Allow additional properties for extensibility (use unknown for type safety)
+  [key: string]: unknown;
 }
 &nbsp;
 /**
@@ -1103,13 +1164,13 @@ export interface CIADetails {
   businessImpact: string;
   impact?: string; // Legacy field - use businessImpact instead
 &nbsp;
-  // Financial metrics
-  capex: number;
-  opex: number;
+  // Financial metrics (optional for partial data)
+  capex?: number;
+  opex?: number;
 &nbsp;
-  // Styling properties
-  bg: string;
-  text: string;
+  // Styling properties (optional for partial data)
+  bg?: string;
+  text?: string;
 &nbsp;
   // Security guidance
   recommendations: string[];
@@ -1216,52 +1277,52 @@ export interface CIADataProvider {
   /**
    * Get compliance frameworks
    */
-  getComplianceFrameworks?: () =&gt; Promise&lt;any[]&gt;;
+  getComplianceFrameworks?: () =&gt; Promise&lt;ComplianceFramework[]&gt;;
 &nbsp;
   /**
    * Get compliance requirements
    */
-  getComplianceRequirements?: () =&gt; Promise&lt;any&gt;;
+  getComplianceRequirements?: () =&gt; Promise&lt;Record&lt;string, unknown&gt;&gt;;
 &nbsp;
   /**
    * Get business impact
    */
-  getBusinessImpact?: () =&gt; Promise&lt;any&gt;;
+  getBusinessImpact?: () =&gt; Promise&lt;BusinessImpactDetails&gt;;
 &nbsp;
   /**
    * Get security metrics
    */
-  getSecurityMetrics?: () =&gt; Promise&lt;any&gt;;
+  getSecurityMetrics?: () =&gt; Promise&lt;Record&lt;string, unknown&gt;&gt;;
 &nbsp;
   /**
    * Get security resources
    */
-  getSecurityResources?: () =&gt; Promise&lt;any[]&gt;;
+  getSecurityResources?: () =&gt; Promise&lt;SecurityResource[]&gt;;
 &nbsp;
   /**
    * Get SLA metrics
    */
-  getSLAMetrics?: () =&gt; Promise&lt;any&gt;;
+  getSLAMetrics?: () =&gt; Promise&lt;SLAMetrics&gt;;
 &nbsp;
   /**
    * Get cost estimates
    */
-  getCostEstimates?: () =&gt; Promise&lt;any&gt;;
+  getCostEstimates?: () =&gt; Promise&lt;Record&lt;string, unknown&gt;&gt;;
 &nbsp;
   /**
    * Get value creation metrics
    */
-  getValueCreationMetrics?: () =&gt; Promise&lt;any&gt;;
+  getValueCreationMetrics?: () =&gt; Promise&lt;Record&lt;string, unknown&gt;&gt;;
 &nbsp;
   /**
    * Get implementation details
    */
-  getImplementationDetails?: () =&gt; Promise&lt;any&gt;;
+  getImplementationDetails?: () =&gt; Promise&lt;TechnicalImplementationDetails&gt;;
 &nbsp;
   /**
    * Get remediation steps
    */
-  getRemediationSteps?: () =&gt; Promise&lt;any[]&gt;;
+  getRemediationSteps?: () =&gt; Promise&lt;string[]&gt;;
 }
 &nbsp;
 // Types used by CIA service modules
@@ -1275,6 +1336,29 @@ export interface ComplianceStatus {
   complianceScore: number;
   // ...other properties...
 }
+&nbsp;
+/**
+ * CIA Content Service interface
+ * Defines methods for retrieving CIA-related content and technical details
+ */
+export interface CIAContentService {
+  getComponentDetails?: (component: string, level: SecurityLevel) =&gt; unknown;
+  getTechnicalRequirements?: (component: string, level: SecurityLevel) =&gt; string[];
+  getRequiredExpertise?: (component: string, level: SecurityLevel) =&gt; string[];
+  getInformationSensitivity?: (level: SecurityLevel) =&gt; string;
+}
+&nbsp;
+/**
+ * Compliance Service interface
+ * Defines methods for compliance status and framework checks
+ */
+export interface ComplianceService {
+  getComplianceStatus?: (
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ) =&gt; ComplianceStatus | null;
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -1282,7 +1366,7 @@ export interface ComplianceStatus {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-14T17:40:18.424Z
+                at 2025-11-18T11:40:08.599Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

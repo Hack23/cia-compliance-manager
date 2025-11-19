@@ -931,9 +931,12 @@ describe("SecurityMetricsService", () => {
 
         // Verify ROI data
         expect(costEstimation.roi).toBeDefined();
-        expect(costEstimation.roi.paybackPeriod).toBeDefined();
-        expect(costEstimation.roi.riskReduction).toBeDefined();
-        expect(Array.isArray(costEstimation.roi.businessBenefits)).toBe(true);
+        if (costEstimation.roi) {
+          const roi = costEstimation.roi as Record<string, unknown>;
+          expect(roi.paybackPeriod).toBeDefined();
+          expect(roi.riskReduction).toBeDefined();
+          expect(Array.isArray(roi.businessBenefits)).toBe(true);
+        }
       });
 
       TEST_SECURITY_LEVELS.forEach((level) => {
@@ -1086,30 +1089,34 @@ describe("SecurityMetricsService", () => {
         expect(Array.isArray(resources.training)).toBe(true);
 
         // Verify standards structure
-        if (resources.standards.length > 0) {
-          expect(resources.standards[0]).toHaveProperty("name");
-          expect(resources.standards[0]).toHaveProperty("relevance");
-          expect(resources.standards[0]).toHaveProperty("link");
+        const standards = resources.standards as unknown[];
+        if (standards.length > 0) {
+          expect(standards[0]).toHaveProperty("name");
+          expect(standards[0]).toHaveProperty("relevance");
+          expect(standards[0]).toHaveProperty("link");
         }
 
         // Verify tools structure
-        if (resources.tools.length > 0) {
-          expect(resources.tools[0]).toHaveProperty("category");
-          expect(Array.isArray(resources.tools[0].items)).toBe(true);
+        const tools = resources.tools as unknown[];
+        if (tools.length > 0) {
+          expect(tools[0]).toHaveProperty("category");
+          expect(Array.isArray((tools[0] as Record<string, unknown>).items)).toBe(true);
         }
 
         // Verify guidance structure
-        if (resources.guidance.length > 0) {
-          expect(resources.guidance[0]).toHaveProperty("title");
-          expect(resources.guidance[0]).toHaveProperty("type");
-          expect(resources.guidance[0]).toHaveProperty("link");
+        const guidance = resources.guidance as unknown[];
+        if (guidance.length > 0) {
+          expect(guidance[0]).toHaveProperty("title");
+          expect(guidance[0]).toHaveProperty("type");
+          expect(guidance[0]).toHaveProperty("link");
         }
 
         // Verify training structure
-        if (resources.training.length > 0) {
-          expect(resources.training[0]).toHaveProperty("title");
-          expect(resources.training[0]).toHaveProperty("audience");
-          expect(resources.training[0]).toHaveProperty("duration");
+        const training = resources.training as unknown[];
+        if (training.length > 0) {
+          expect(training[0]).toHaveProperty("title");
+          expect(training[0]).toHaveProperty("audience");
+          expect(training[0]).toHaveProperty("duration");
         }
       });
 

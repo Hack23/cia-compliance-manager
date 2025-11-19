@@ -1,4 +1,4 @@
-import { SecurityLevel } from "../types/cia";
+import { SecurityLevel, CIAComponent } from "../types/cia";
 import {
   BusinessImpactDetail,
   BusinessImpactDetails,
@@ -15,23 +15,79 @@ export type RiskImpactLevel =
   | "Critical";
 
 /**
- * Risk impact structure
+ * Risk impact structure with comprehensive business impact details
  */
 export interface RiskImpact {
+  /** Human-readable description of the risk impact */
   description: string;
+  /** Overall business impact summary */
   impact: string;
-  level: string;
-  // Add missing properties
+  /** Impact level classification */
+  level: RiskImpactLevel;
+  /** Annual financial loss estimate (optional) */
   annualLoss?: string;
+  /** Time required to recover from incident (optional) */
   recoveryTime?: string;
+  /** Compliance frameworks affected (optional) */
   frameworks?: string[];
+  /** Competitive business impact (optional) */
   competitiveImpact?: string;
-  // Include financial impact for backwards compatibility
+  /** Financial impact details (legacy, optional) */
   financialImpact?: string;
-  // Include other impact types for backwards compatibility
+  /** Operational impact details (legacy, optional) */
   operationalImpact?: string;
+  /** Reputational impact details (optional) */
   reputationalImpact?: string;
+  /** Regulatory compliance impact (optional) */
   regulatoryImpact?: string;
+}
+
+/**
+ * Type guard to check if a value is a valid RiskImpactLevel
+ * 
+ * @param value - Value to check
+ * @returns True if the value is a valid RiskImpactLevel
+ */
+export function isRiskImpactLevel(value: unknown): value is RiskImpactLevel {
+  return (
+    typeof value === "string" &&
+    ["Minimal", "Low", "Medium", "High", "Critical"].includes(value)
+  );
+}
+
+/**
+ * Type guard to check if a value is a valid RiskImpact object
+ * 
+ * @param value - Value to check
+ * @returns True if the value has the required RiskImpact properties
+ */
+export function isRiskImpact(value: unknown): value is RiskImpact {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  const obj = value as Record<string, unknown>;
+  
+  return (
+    typeof obj.level === "string" &&
+    typeof obj.description === "string" &&
+    typeof obj.impact === "string"
+  );
+}
+
+/**
+ * Type guard to check if a value is a valid CIA component for risk impact
+ * 
+ * @param value - Value to check
+ * @returns True if the value is a valid CIA component
+ */
+export function isValidCIAComponent(
+  value: unknown
+): value is CIAComponent {
+  return (
+    typeof value === "string" &&
+    ["availability", "integrity", "confidentiality"].includes(value)
+  );
 }
 
 /**
@@ -47,9 +103,18 @@ const securityToRiskMap: Record<SecurityLevel, string> = {
 
 /**
  * Get risk level from security level
+ * 
+ * @param level - Security level to convert
+ * @returns Risk level string corresponding to the security level
+ * 
+ * @example
+ * ```typescript
+ * getRiskLevelFromSecurityLevel("None") // Returns "Critical"
+ * getRiskLevelFromSecurityLevel("Very High") // Returns "Minimal"
+ * ```
  */
 export function getRiskLevelFromSecurityLevel(level: SecurityLevel): string {
-  return securityToRiskMap[level] || "Unknown";
+  return securityToRiskMap[level] ?? "Unknown";
 }
 
 /**
@@ -309,15 +374,32 @@ export const CONFIDENTIALITY_RISK_IMPACTS: Record<SecurityLevel, RiskImpact> = {
 
 /**
  * Get business impact details for a specific component and security level
+ * 
+ * This function retrieves comprehensive business impact information based on
+ * the CIA component (availability, integrity, or confidentiality) and the
+ * selected security level.
  *
- * @param component - CIA component
- * @param level - Security level
- * @returns Business impact details
+ * @param component - CIA component to get impact for
+ * @param level - Security level for the component
+ * @returns Business impact details including risk level, revenue loss, and recovery time
+ * @throws {Error} If component or level is invalid
+ * 
+ * @example
+ * ```typescript
+ * const impact = getBusinessImpact("availability", "High");
+ * console.log(impact.riskLevel); // "Low"
+ * console.log(impact.annualRevenueLoss); // "Potential revenue loss <2% annually"
+ * ```
  */
 export function getBusinessImpact(
-  component: "availability" | "integrity" | "confidentiality",
+  component: CIAComponent,
   level: SecurityLevel
 ): BusinessImpactDetail {
+  // Validate inputs
+  if (!isValidCIAComponent(component)) {
+    throw new Error(`Invalid CIA component: ${component}`);
+  }
+
   let impactData: RiskImpact;
 
   // Get the right impact map for the component
@@ -339,33 +421,46 @@ export function getBusinessImpact(
   return {
     description: impactData.description,
     riskLevel: impactData.level,
-    annualRevenueLoss: impactData.annualLoss || impactData.financialImpact,
-    meanTimeToRecover: impactData.recoveryTime || impactData.operationalImpact,
-    // Fix the type issue by ensuring we only include defined strings in the array
+    annualRevenueLoss: impactData.annualLoss ?? impactData.financialImpact,
+    meanTimeToRecover: impactData.recoveryTime ?? impactData.operationalImpact,
     complianceViolations: impactData.frameworks
       ? (impactData.frameworks.filter(Boolean) as string[])
       : impactData.regulatoryImpact
       ? [impactData.regulatoryImpact]
       : [],
-    // Remove this property if it's not in the interface, or map it to a property that exists
-    // Depending on the interface definition in cia-services.ts
-    complianceImpact: impactData.competitiveImpact, // Map to a property that exists
+    complianceImpact: impactData.competitiveImpact,
   };
 }
 
 /**
  * Calculate the overall business impact level based on security levels
+ * 
+ * Uses a weighted algorithm that gives higher priority to confidentiality
+ * when determining the overall business impact across all CIA components.
  *
  * @param availabilityLevel - Availability security level
  * @param integrityLevel - Integrity security level
  * @param confidentialityLevel - Confidentiality security level
- * @returns Overall business impact level
+ * @returns Overall business impact level (Minimal to Critical)
+ * 
+ * @example
+ * ```typescript
+ * // All Very High security = minimal impact
+ * calculateBusinessImpactLevel("Very High", "Very High", "Very High") // Returns "Minimal"
+ * 
+ * // All High security = Low impact
+ * calculateBusinessImpactLevel("High", "High", "High") // Returns "Low"
+ * 
+ * // Mixed levels with confidentiality weighted higher
+ * // Formula: (1 [High] + 2 [Moderate] + 4 [None] * 1.5) / 3.5 = (1 + 2 + 6) / 3.5 = 9 / 3.5 = 2.57 → rounds to 3 ("High")
+ * calculateBusinessImpactLevel("High", "Moderate", "None") // Returns "High"
+ * ```
  */
 export function calculateBusinessImpactLevel(
   availabilityLevel: SecurityLevel,
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel
-): "Minimal" | "Low" | "Medium" | "High" | "Critical" {
+): RiskImpactLevel {
   const impactMap: Record<SecurityLevel, number> = {
     None: 4, // Critical impact
     Low: 3, // High impact
@@ -374,16 +469,16 @@ export function calculateBusinessImpactLevel(
     "Very High": 0, // Minimal impact
   };
 
-  const availabilityImpact = impactMap[availabilityLevel] || 4;
-  const integrityImpact = impactMap[integrityLevel] || 4;
-  const confidentialityImpact = impactMap[confidentialityLevel] || 4;
+  const availabilityImpact = impactMap[availabilityLevel] ?? 4;
+  const integrityImpact = impactMap[integrityLevel] ?? 4;
+  const confidentialityImpact = impactMap[confidentialityLevel] ?? 4;
 
   // Calculate weighted average, with higher weight on confidentiality
   const weightedAverage =
     (availabilityImpact + integrityImpact + confidentialityImpact * 1.5) / 3.5;
   const roundedImpact = Math.round(weightedAverage);
 
-  const impactLevels: ("Minimal" | "Low" | "Medium" | "High" | "Critical")[] = [
+  const impactLevels: RiskImpactLevel[] = [
     "Minimal",
     "Low",
     "Medium",
@@ -391,11 +486,26 @@ export function calculateBusinessImpactLevel(
     "Critical",
   ];
 
-  return impactLevels[roundedImpact] || "Critical";
+  // Ensure the index is within bounds
+  const clampedIndex = Math.max(0, Math.min(4, roundedImpact));
+  return impactLevels[clampedIndex] ?? "Critical";
 }
 
 /**
  * Get risk impact level label
+ * 
+ * Converts a risk level into a human-readable description of the business
+ * impact and required response.
+ * 
+ * @param level - Risk level to get label for
+ * @returns Human-readable description of the risk impact level
+ * 
+ * @example
+ * ```typescript
+ * getRiskImpactLabel("Critical") // Returns "Severe business impact requiring immediate action"
+ * getRiskImpactLabel("Low") // Returns "Minor business impact to be addressed in normal operations"
+ * getRiskImpactLabel("Unknown") // Returns "Impact level not defined"
+ * ```
  */
 export function getRiskImpactLabel(level: string): string {
   const levelMap: Record<string, string> = {
@@ -406,15 +516,26 @@ export function getRiskImpactLabel(level: string): string {
     Minimal: "Negligible business impact requiring routine monitoring",
   };
 
-  return levelMap[level] || "Impact level not defined";
+  return levelMap[level] ?? "Impact level not defined";
 }
 
 /**
  * Create a default business impact object with minimum required fields
+ * 
+ * Generates a basic business impact assessment structure for a given
+ * CIA component and security level, suitable for initial assessments
+ * or as a fallback when detailed data is unavailable.
  *
- * @param component - CIA component type
- * @param level - Security level
- * @returns Business impact details
+ * @param component - CIA component type (availability, integrity, confidentiality, or custom)
+ * @param level - Security level for the component
+ * @returns Business impact details with financial, operational, and reputational aspects
+ * 
+ * @example
+ * ```typescript
+ * const impact = createDefaultBusinessImpact("availability", "Moderate");
+ * console.log(impact.summary); // "availability impact analysis for Moderate level"
+ * console.log(impact.financial?.riskLevel); // "Medium"
+ * ```
  */
 export function createDefaultBusinessImpact(
   component: string,

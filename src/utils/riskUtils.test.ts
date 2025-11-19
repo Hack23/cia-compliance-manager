@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { SecurityLevel } from "../types/cia";
+import { BusinessImpactDetails } from "../types/cia-services";
 import {
   calculateBusinessImpactLevel,
   calculateCombinedRiskLevel,
@@ -401,16 +402,16 @@ describe("riskUtils", () => {
   describe("getHighestImpactArea", () => {
     it("should identify operational as highest impact", () => {
       const availImpact = {
-        operational: { riskLevel: "High Risk" },
-        financial: { riskLevel: "Low Risk" },
+        operational: { riskLevel: "High Risk", description: "High operational risk" },
+        financial: { riskLevel: "Low Risk", description: "Low financial risk" },
       };
       const integImpact = {
-        operational: { riskLevel: "Low Risk" },
-        financial: { riskLevel: "Low Risk" },
+        operational: { riskLevel: "Low Risk", description: "Low operational risk" },
+        financial: { riskLevel: "Low Risk", description: "Low financial risk" },
       };
       const confImpact = {
-        reputational: { riskLevel: "Low Risk" },
-        regulatory: { riskLevel: "Low Risk" },
+        reputational: { riskLevel: "Low Risk", description: "Low reputational risk" },
+        regulatory: { riskLevel: "Low Risk", description: "Low regulatory risk" },
       };
 
       const result = getHighestImpactArea(
@@ -423,16 +424,16 @@ describe("riskUtils", () => {
 
     it("should identify financial as highest impact", () => {
       const availImpact = {
-        operational: { riskLevel: "Low Risk" },
-        financial: { riskLevel: "High Risk" },
+        operational: { riskLevel: "Low Risk", description: "Low operational risk" },
+        financial: { riskLevel: "High Risk", description: "High financial risk" },
       };
       const integImpact = {
-        operational: { riskLevel: "Low Risk" },
-        financial: { riskLevel: "Low Risk" },
+        operational: { riskLevel: "Low Risk", description: "Low operational risk" },
+        financial: { riskLevel: "Low Risk", description: "Low financial risk" },
       };
       const confImpact = {
-        reputational: { riskLevel: "Low Risk" },
-        regulatory: { riskLevel: "Low Risk" },
+        reputational: { riskLevel: "Low Risk", description: "Low reputational risk" },
+        regulatory: { riskLevel: "Low Risk", description: "Low regulatory risk" },
       };
 
       const result = getHighestImpactArea(
@@ -445,16 +446,16 @@ describe("riskUtils", () => {
 
     it("should return minimal for no high impact areas", () => {
       const availImpact = {
-        operational: { riskLevel: "Low Risk" },
-        financial: { riskLevel: "Low Risk" },
+        operational: { riskLevel: "Low Risk", description: "Low operational risk" },
+        financial: { riskLevel: "Low Risk", description: "Low financial risk" },
       };
       const integImpact = {
-        operational: { riskLevel: "Low Risk" },
-        financial: { riskLevel: "Low Risk" },
+        operational: { riskLevel: "Low Risk", description: "Low operational risk" },
+        financial: { riskLevel: "Low Risk", description: "Low financial risk" },
       };
       const confImpact = {
-        reputational: { riskLevel: "Low Risk" },
-        regulatory: { riskLevel: "Low Risk" },
+        reputational: { riskLevel: "Low Risk", description: "Low reputational risk" },
+        regulatory: { riskLevel: "Low Risk", description: "Low regulatory risk" },
       };
 
       const result = getHighestImpactArea(
@@ -467,16 +468,16 @@ describe("riskUtils", () => {
 
     it("should handle multiple high impact areas", () => {
       const availImpact = {
-        operational: { riskLevel: "High Risk" },
-        financial: { riskLevel: "High Risk" },
+        operational: { riskLevel: "High Risk", description: "High operational risk" },
+        financial: { riskLevel: "High Risk", description: "High financial risk" },
       };
       const integImpact = {
-        operational: { riskLevel: "High Risk" },
-        financial: { riskLevel: "Low Risk" },
+        operational: { riskLevel: "High Risk", description: "High operational risk" },
+        financial: { riskLevel: "Low Risk", description: "Low financial risk" },
       };
       const confImpact = {
-        reputational: { riskLevel: "Low Risk" },
-        regulatory: { riskLevel: "Low Risk" },
+        reputational: { riskLevel: "Low Risk", description: "Low reputational risk" },
+        regulatory: { riskLevel: "Low Risk", description: "Low regulatory risk" },
       };
 
       const result = getHighestImpactArea(
@@ -490,16 +491,16 @@ describe("riskUtils", () => {
 
     it("should return multiple for more than 2 high impact areas", () => {
       const availImpact = {
-        operational: { riskLevel: "High Risk" },
-        financial: { riskLevel: "High Risk" },
+        operational: { riskLevel: "High Risk", description: "High operational risk" },
+        financial: { riskLevel: "High Risk", description: "High financial risk" },
       };
       const integImpact = {
-        operational: { riskLevel: "High Risk" },
-        financial: { riskLevel: "High Risk" },
+        operational: { riskLevel: "High Risk", description: "High operational risk" },
+        financial: { riskLevel: "High Risk", description: "High financial risk" },
       };
       const confImpact = {
-        reputational: { riskLevel: "Low Risk" },
-        regulatory: { riskLevel: "Low Risk" },
+        reputational: { riskLevel: "Low Risk", description: "Low reputational risk" },
+        regulatory: { riskLevel: "Low Risk", description: "Low regulatory risk" },
       };
 
       const result = getHighestImpactArea(
@@ -511,7 +512,11 @@ describe("riskUtils", () => {
     });
 
     it("should handle undefined or null impact objects", () => {
-      const result = getHighestImpactArea(null, null, null);
+      const result = getHighestImpactArea(
+        {} as BusinessImpactDetails,
+        {} as BusinessImpactDetails,
+        {} as BusinessImpactDetails
+      );
       expect(result).toBe("minimal");
     });
   });

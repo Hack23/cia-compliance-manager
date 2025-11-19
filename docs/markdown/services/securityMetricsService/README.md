@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.39**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.40**](../../README.md)
 
 ***
 
@@ -12,10 +12,15 @@
 
 ## Interfaces
 
+- [BusinessImpactMetrics](interfaces/BusinessImpactMetrics.md)
 - [ComponentMetrics](interfaces/ComponentMetrics.md)
+- [CostEstimation](interfaces/CostEstimation.md)
 - [ImpactMetrics](interfaces/ImpactMetrics.md)
 - [ROIEstimatesMap](interfaces/ROIEstimatesMap.md)
 - [SecurityMetrics](interfaces/SecurityMetrics.md)
+- [SecurityTool](interfaces/SecurityTool.md)
+- [TechnicalDetailsResponse](interfaces/TechnicalDetailsResponse.md)
+- [ValueCreationMetrics](interfaces/ValueCreationMetrics.md)
 
 ## Functions
 

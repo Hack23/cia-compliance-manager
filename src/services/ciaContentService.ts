@@ -1429,7 +1429,7 @@ export const getSecuritySummary = async (
   availabilityLevel: SecurityLevel,
   integrityLevel: SecurityLevel,
   confidentialityLevel: SecurityLevel
-): Promise<any> => {
+): Promise<Record<string, unknown>> => {
   // This would normally fetch from an API, but for now we'll return mock data
   return {
     overallLevel: Math.max(

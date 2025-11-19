@@ -14,9 +14,10 @@ import { SecurityLevel } from "./cia";
 // Re-export SecurityLevel for backward compatibility
 export type { SecurityLevel };
 
-import { BusinessImpact } from "./businessImpact";
+import { BusinessImpact, SLAMetrics } from "./businessImpact";
 import { SecurityLevels } from "./cia";
 import { ComplianceFramework } from "./compliance";
+import { SecurityResource } from "./securityResources";
 
 /**
  * Core data structure representing CIA assessment data
@@ -118,7 +119,7 @@ export interface BusinessImpactDetail {
  * Business impact details
  */
 export interface BusinessImpactDetails {
-  summary: string; // Required summary property
+  summary?: string; // Optional summary property
 
   // Either use the new names or the legacy names
   financial?: BusinessImpactDetail;
@@ -159,7 +160,11 @@ export interface TechnicalImplementationDetails {
   validationMethod?: string; // For integrity
   protectionMethod?: string; // For confidentiality
   recoveryMethod?: string; // For availability
-  [key: string]: any; // Allow additional properties
+  // Additional optional properties for implementation guidance
+  expertiseLevel?: string; // Expertise level required
+  developmentEffort?: string; // Development effort estimate
+  // Allow additional properties for extensibility (use unknown for type safety)
+  [key: string]: unknown;
 }
 
 /**
@@ -230,13 +235,13 @@ export interface CIADetails {
   businessImpact: string;
   impact?: string; // Legacy field - use businessImpact instead
 
-  // Financial metrics
-  capex: number;
-  opex: number;
+  // Financial metrics (optional for partial data)
+  capex?: number;
+  opex?: number;
 
-  // Styling properties
-  bg: string;
-  text: string;
+  // Styling properties (optional for partial data)
+  bg?: string;
+  text?: string;
 
   // Security guidance
   recommendations: string[];
@@ -343,52 +348,52 @@ export interface CIADataProvider {
   /**
    * Get compliance frameworks
    */
-  getComplianceFrameworks?: () => Promise<any[]>;
+  getComplianceFrameworks?: () => Promise<ComplianceFramework[]>;
 
   /**
    * Get compliance requirements
    */
-  getComplianceRequirements?: () => Promise<any>;
+  getComplianceRequirements?: () => Promise<Record<string, unknown>>;
 
   /**
    * Get business impact
    */
-  getBusinessImpact?: () => Promise<any>;
+  getBusinessImpact?: () => Promise<BusinessImpactDetails>;
 
   /**
    * Get security metrics
    */
-  getSecurityMetrics?: () => Promise<any>;
+  getSecurityMetrics?: () => Promise<Record<string, unknown>>;
 
   /**
    * Get security resources
    */
-  getSecurityResources?: () => Promise<any[]>;
+  getSecurityResources?: () => Promise<SecurityResource[]>;
 
   /**
    * Get SLA metrics
    */
-  getSLAMetrics?: () => Promise<any>;
+  getSLAMetrics?: () => Promise<SLAMetrics>;
 
   /**
    * Get cost estimates
    */
-  getCostEstimates?: () => Promise<any>;
+  getCostEstimates?: () => Promise<Record<string, unknown>>;
 
   /**
    * Get value creation metrics
    */
-  getValueCreationMetrics?: () => Promise<any>;
+  getValueCreationMetrics?: () => Promise<Record<string, unknown>>;
 
   /**
    * Get implementation details
    */
-  getImplementationDetails?: () => Promise<any>;
+  getImplementationDetails?: () => Promise<TechnicalImplementationDetails>;
 
   /**
    * Get remediation steps
    */
-  getRemediationSteps?: () => Promise<any[]>;
+  getRemediationSteps?: () => Promise<string[]>;
 }
 
 // Types used by CIA service modules

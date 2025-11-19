@@ -74,13 +74,13 @@ export function useSecuritySummaryData(
   }, [securityScore]);
 
   // Get security classification
-  const securityClassification = useMemo(() => {
+  const securityClassification = useMemo((): string => {
     if (!isNullish(ciaContentService)) {
       try {
         if (hasMethod(ciaContentService, "getSecurityClassification")) {
           const classification =
             ciaContentService.getSecurityClassification(overallSecurityLevel);
-          if (!isNullish(classification)) return classification;
+          if (!isNullish(classification)) return classification as string;
         }
       } catch (err) {
         console.error("Error fetching security classification:", err);
@@ -105,7 +105,7 @@ export function useSecuritySummaryData(
   }, [ciaContentService, overallSecurityLevel]);
 
   // Get data classification
-  const dataClassification = useMemo(() => {
+  const dataClassification = useMemo((): string => {
     if (
       !isNullish(ciaContentService) &&
       hasMethod(ciaContentService, "getInformationSensitivity")
@@ -114,7 +114,7 @@ export function useSecuritySummaryData(
         const sensitivity = (ciaContentService as CIAContentService).getInformationSensitivity?.(
           confidentialityLevel
         );
-        if (!isNullish(sensitivity)) return sensitivity;
+        if (!isNullish(sensitivity)) return sensitivity as string;
       } catch (err) {
         console.error("Error fetching information sensitivity:", err);
       }
@@ -138,7 +138,7 @@ export function useSecuritySummaryData(
   }, [ciaContentService, confidentialityLevel]);
 
   // Get implementation complexity
-  const implementationComplexity = useMemo(() => {
+  const implementationComplexity = useMemo((): string => {
     if (
       !isNullish(ciaContentService) &&
       hasMethod(ciaContentService, "getImplementationComplexity")
@@ -149,7 +149,7 @@ export function useSecuritySummaryData(
           integrityLevel,
           confidentialityLevel
         );
-        if (!isNullish(complexity)) return complexity;
+        if (!isNullish(complexity)) return complexity as string;
       } catch (err) {
         console.error("Error fetching implementation complexity:", err);
       }
@@ -252,7 +252,7 @@ export function useSecuritySummaryData(
   }, [availabilityLevel, integrityLevel, confidentialityLevel]);
 
   // Compute implementation time
-  const implementationTime = useMemo(() => {
+  const implementationTime = useMemo((): string => {
     try {
       if (
         !isNullish(ciaContentService) &&
@@ -263,7 +263,7 @@ export function useSecuritySummaryData(
           integrityLevel,
           confidentialityLevel
         );
-        if (!isNullish(time)) return time;
+        if (!isNullish(time)) return time as string;
       }
     } catch (err) {
       console.error("Error fetching implementation time:", err);
@@ -277,7 +277,7 @@ export function useSecuritySummaryData(
   }, [ciaContentService, securityScore, availabilityLevel, integrityLevel, confidentialityLevel]);
 
   // Compute resource requirements
-  const requiredResources = useMemo(() => {
+  const requiredResources = useMemo((): string => {
     try {
       if (
         !isNullish(ciaContentService) &&
@@ -288,7 +288,7 @@ export function useSecuritySummaryData(
           integrityLevel,
           confidentialityLevel
         );
-        if (!isNullish(resources)) return resources;
+        if (!isNullish(resources)) return resources as string;
       }
     } catch (err) {
       console.error("Error fetching resource requirements:", err);

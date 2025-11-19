@@ -1,6 +1,37 @@
-# Security Policy
+<p align="center">
+  <img src="https://hack23.github.io/cia-compliance-manager/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+</p>
 
-**🔐 ISMS Alignment:** This security policy implements [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) and [Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md).
+<h1 align="center">🔐 Security Policy — CIA Compliance Manager</h1>
+
+<p align="center">
+  <strong>🛡️ Security Through Transparency and Vulnerability Management</strong><br>
+  <em>🎯 Enterprise-grade Security Posture and Incident Response</em>
+</p>
+
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/badge/Owner-CEO-0A66C2?style=for-the-badge" alt="Owner"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Version-1.0-555?style=for-the-badge" alt="Version"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Effective-2024--11--17-success?style=for-the-badge" alt="Effective Date"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Review-Quarterly-orange?style=for-the-badge" alt="Review Cycle"/></a>
+</p>
+
+**📋 Document Owner:** CEO | **📄 Version:** 1.0 | **📅 Last Updated:** 2024-11-17 (UTC)  
+**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2025-02-17
+
+---
+
+## 🎯 **Purpose Statement**
+
+This security policy establishes vulnerability disclosure and incident response procedures for CIA Compliance Manager, implementing [Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) and [Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md) from Hack23 AB's ISMS framework.
+
+Our security approach demonstrates our commitment to **transparency** and **operational excellence**, ensuring that vulnerabilities are managed systematically with documented response times and coordinated disclosure processes.
+
+*— James Pether Sörling, CEO/Founder*
+
+---
+
+# Security Policy
 
 ## Supported Versions
 
@@ -195,3 +226,37 @@ By publicly documenting our security practices, we demonstrate that CIA Complian
 **Explore Our Public ISMS:** [https://github.com/Hack23/ISMS-PUBLIC](https://github.com/Hack23/ISMS-PUBLIC)
 
 Thank you for helping us keep the cia-compliance-manager project and its users safe.
+
+---
+
+## 📚 Related Documents
+
+### 🔐 Security Policies & Procedures
+- [🔐 Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md) - Overall security governance
+- [🔍 Vulnerability Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md) - Security testing and remediation
+- [🚨 Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md) - Security incident management
+- [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) - Development security standards
+- [🎯 Threat Modeling Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Threat_Modeling.md) - STRIDE and MITRE ATT&CK
+
+### 🏗️ Security Architecture & Implementation
+- [🏗️ Security Architecture](./docs/architecture/SECURITY_ARCHITECTURE.md) - System security design
+- [🎯 Threat Model](./docs/architecture/THREAT_MODEL.md) - Comprehensive threat analysis
+- [📋 Control Mapping](./control-mapping.md) - Framework-to-ISMS mappings
+- [📊 ISMS Implementation Guide](./ISMS_IMPLEMENTATION_GUIDE.md) - Security control implementation
+- [🔍 Traceability Matrix](./TRACEABILITY_MATRIX.md) - Control-to-evidence mapping
+
+### 📜 Compliance & Governance
+- [🛡️ EU Cyber Resilience Act Assessment](./CRA-ASSESSMENT.md) - CRA compliance
+- [📋 README](./README.md) - Project overview and classification
+- [🤝 Contributing Guidelines](./CONTRIBUTING.md) - Secure contribution process
+- [📜 Code of Conduct](./CODE_OF_CONDUCT.md) - Community standards
+
+---
+
+**📋 Document Control:**  
+**✅ Approved by:** James Pether Sörling, CEO  
+**📤 Distribution:** Public  
+**🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-lightgrey?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
+**📅 Effective Date:** 2024-11-17  
+**⏰ Next Review:** 2025-02-17  
+**🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![AWS Well-Architected](https://img.shields.io/badge/AWS-Well_Architected-orange?style=flat-square&logo=amazon-aws&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)

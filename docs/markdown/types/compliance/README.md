@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.39**](../../README.md)
+[**CIA Compliance Manager Documentation v0.8.40**](../../README.md)
 
 ***
 
@@ -15,6 +15,7 @@
 - [ComplianceGapAnalysis](interfaces/ComplianceGapAnalysis.md)
 - [ComplianceSecurityMetrics](interfaces/ComplianceSecurityMetrics.md)
 - [ComplianceStatusDetails](interfaces/ComplianceStatusDetails.md)
+- [ComplianceStatusType](interfaces/ComplianceStatusType.md)
 - [FrameworkApplicabilityOptions](interfaces/FrameworkApplicabilityOptions.md)
 - [FrameworkComplianceStatus](interfaces/FrameworkComplianceStatus.md)
 

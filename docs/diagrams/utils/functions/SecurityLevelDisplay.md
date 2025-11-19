@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.39**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.8.40**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **SecurityLevelDisplay**(`__namedParameters`): `object`
 
-Defined in: [utils/index.ts:213](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/utils/index.ts#L213)
+Defined in: [utils/index.ts:214](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/utils/index.ts#L214)
 
 ## Parameters
 
@@ -16,7 +16,7 @@ Defined in: [utils/index.ts:213](https://github.com/Hack23/cia-compliance-manage
 
 #### level
 
-`any`
+`string`
 
 ## Returns
 
@@ -28,7 +28,7 @@ Defined in: [utils/index.ts:213](https://github.com/Hack23/cia-compliance-manage
 
 #### props.children
 
-> **children**: `any` = `level`
+> **children**: `string` = `level`
 
 #### props.className
 

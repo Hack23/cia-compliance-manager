@@ -104,8 +104,8 @@ export function isNumber(value: unknown): value is number {
  * @param defaultValue The default value to return if the property doesn't exist
  * @returns The value at the path or the default value
  */
-export function safeAccess<T = any>(
-  obj: any,
+export function safeAccess<T = unknown>(
+  obj: unknown,
   path: string | (string | number)[],
   defaultValue?: T
 ): T {
@@ -117,18 +117,18 @@ export function safeAccess<T = any>(
     ? path
     : path.replace(/\[(\d+)\]/g, ".$1").split(".");
 
-  let current = obj;
+  let current: unknown = obj;
 
   for (const part of parts) {
     if (current == null || typeof current !== "object") {
       return defaultValue as T;
     }
 
-    current = current[part];
+    current = (current as Record<string | number, unknown>)[part];
   }
 
   return current !== undefined && current !== null
-    ? current
+    ? (current as T)
     : (defaultValue as T);
 }
 
@@ -186,7 +186,7 @@ export function getSecurityLevelOption<T>(
  * @param prop The property to check for
  * @returns True if the object has the property
  */
-export function hasProperty(obj: any, prop: string): boolean {
+export function hasProperty(obj: unknown, prop: string): boolean {
   return Boolean(obj && Object.prototype.hasOwnProperty.call(obj, prop));
 }
 
@@ -195,7 +195,7 @@ export function hasProperty(obj: any, prop: string): boolean {
  * @param value - The value to check
  * @returns True if the value is a valid ROI metrics object
  */
-export function isROIMetrics(value: any): boolean {
+export function isROIMetrics(value: unknown): boolean {
   return (
     isObject(value) &&
     typeof value.returnRate === "string" &&
@@ -208,7 +208,7 @@ export function isROIMetrics(value: any): boolean {
  * @param value - The value to check
  * @returns True if the value is a valid technical implementation details object
  */
-export function isTechnicalImplementationDetails(value: any): boolean {
+export function isTechnicalImplementationDetails(value: unknown): boolean {
   return (
     isObject(value) &&
     typeof value.description === "string" &&
@@ -225,7 +225,7 @@ export function isTechnicalImplementationDetails(value: any): boolean {
  * @param value - The value to check
  * @returns True if the value is a valid security resource object
  */
-export function isSecurityResource(value: any): boolean {
+export function isSecurityResource(value: unknown): boolean {
   return (
     isObject(value) &&
     typeof value.title === "string" &&
@@ -243,7 +243,7 @@ export function isSecurityResource(value: any): boolean {
  * @param value - The value to check
  * @returns True if the value has the required widget properties
  */
-export function hasWidgetProps(value: any): boolean {
+export function hasWidgetProps(value: unknown): boolean {
   return (
     isObject(value) &&
     typeof value.title === "string" &&
@@ -277,7 +277,7 @@ export function isWidgetProps(value: unknown): boolean {
 /**
  * Checks if an object is a valid security profile
  */
-export function isSecurityProfile(obj: any): boolean {
+export function isSecurityProfile(obj: unknown): boolean {
   if (!isObject(obj)) return false;
 
   // Check for all required properties with correct types
@@ -299,31 +299,33 @@ export function isSecurityProfile(obj: any): boolean {
  * @param obj - Object to check
  * @returns True if the object is a valid compliance status
  */
-export function isComplianceStatus(obj: any): boolean {
+export function isComplianceStatus(obj: unknown): boolean {
   if (!obj || typeof obj !== "object") return false;
 
+  const typedObj = obj as Record<string, unknown>;
+
   // Check for required array properties
-  if (!Array.isArray(obj.compliantFrameworks)) return false;
-  if (!Array.isArray(obj.partiallyCompliantFrameworks)) return false;
-  if (!Array.isArray(obj.nonCompliantFrameworks)) return false;
+  if (!Array.isArray(typedObj.compliantFrameworks)) return false;
+  if (!Array.isArray(typedObj.partiallyCompliantFrameworks)) return false;
+  if (!Array.isArray(typedObj.nonCompliantFrameworks)) return false;
 
   // Optional properties can be undefined but must be arrays if present
   if (
-    obj.remediationSteps !== undefined &&
-    !Array.isArray(obj.remediationSteps)
+    typedObj.remediationSteps !== undefined &&
+    !Array.isArray(typedObj.remediationSteps)
   )
     return false;
-  if (obj.requirements !== undefined && !Array.isArray(obj.requirements))
+  if (typedObj.requirements !== undefined && !Array.isArray(typedObj.requirements))
     return false;
 
   // Status and complianceScore/score are also acceptable properties
-  if (obj.status !== undefined && typeof obj.status !== "string") return false;
+  if (typedObj.status !== undefined && typeof typedObj.status !== "string") return false;
   if (
-    obj.complianceScore !== undefined &&
-    typeof obj.complianceScore !== "number"
+    typedObj.complianceScore !== undefined &&
+    typeof typedObj.complianceScore !== "number"
   )
     return false;
-  if (obj.score !== undefined && typeof obj.score !== "number") return false;
+  if (typedObj.score !== undefined && typeof typedObj.score !== "number") return false;
 
   return true;
 }
@@ -334,7 +336,7 @@ export function isComplianceStatus(obj: any): boolean {
  * @param obj - Object to check
  * @returns True if the object is a valid compliance framework
  */
-export function isComplianceFramework(obj: any): boolean {
+export function isComplianceFramework(obj: unknown): boolean {
   if (!obj) {
     return false;
   }
@@ -349,8 +351,10 @@ export function isComplianceFramework(obj: any): boolean {
     return false;
   }
 
+  const typedObj = obj as Record<string, unknown>;
+
   // Check for required properties - name must be a string
-  if (!hasProperty(obj, "name") || typeof obj.name !== "string") {
+  if (!hasProperty(obj, "name") || typeof typedObj.name !== "string") {
     return false;
   }
 
@@ -374,7 +378,7 @@ export function isComplianceFramework(obj: any): boolean {
 /**
  * Checks if an object is a valid ROI metric details object
  */
-export function isROIMetricDetails(obj: any): boolean {
+export function isROIMetricDetails(obj: unknown): boolean {
   if (!isObject(obj)) return false;
   return (
     hasProperty(obj, "amount") &&
@@ -458,7 +462,7 @@ export function isSecurityLevelWidgetProps(
 ): value is SecurityLevelWidgetProps {
   if (!isWidgetProps(value)) return false;
 
-  const val = value as any; // Use any temporarily for property checking
+  const val = value as Record<string, unknown>;
 
   // Check for the additional required properties
   return (
@@ -481,7 +485,7 @@ export function isCIAImpactSummaryWidgetProps(
 ): value is CIAImpactSummaryWidgetProps {
   if (!isWidgetProps(value)) return false;
 
-  const val = value as any; // Use any temporarily for property checking
+  const val = value as Record<string, unknown>;
 
   // Check for the additional required properties
   return (
@@ -538,7 +542,7 @@ export function isROIEstimate(value: unknown): value is ROIEstimate {
 /**
  * Checks if an object is a valid widget config
  */
-export function isWidgetConfig(obj: any): boolean {
+export function isWidgetConfig(obj: unknown): boolean {
   if (!isObject(obj)) return false;
   return hasProperty(obj, "type") && isString(obj.type);
 }
@@ -546,7 +550,7 @@ export function isWidgetConfig(obj: any): boolean {
 /**
  * Checks if an object has a specific tag value
  */
-export function hasTagValue(obj: any, tagValue: string): boolean {
+export function hasTagValue(obj: unknown, tagValue: string): boolean {
   if (!isObject(obj) || !hasProperty(obj, "tags") || !Array.isArray(obj.tags)) {
     return false;
   }
@@ -596,7 +600,7 @@ export function parseRiskLevel(
 /**
  * Extracts CIA security levels from an object
  */
-export function extractSecurityLevels(obj: any): {
+export function extractSecurityLevels(obj: unknown): {
   availability: string;
   integrity: string;
   confidentiality: string;
@@ -619,7 +623,7 @@ export function extractSecurityLevels(obj: any): {
 /**
  * Calculates the implementation cost from a cost object
  */
-export function getImplementationCost(costObj: any): number {
+export function getImplementationCost(costObj: unknown): number {
   if (!isObject(costObj)) return 0;
 
   let total = 0;
@@ -920,7 +924,7 @@ export const toStatusType = (
 export function hasMethod<T extends object, K extends PropertyKey>(
   obj: T | null | undefined,
   methodName: K
-): obj is T & Record<K, (...args: any[]) => any> {
+): obj is T & Record<K, (...args: unknown[]) => unknown> {
   return (
     obj !== null &&
     obj !== undefined &&

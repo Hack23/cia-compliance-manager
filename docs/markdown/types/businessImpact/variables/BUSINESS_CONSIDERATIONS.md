@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.39**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
 
 ***
 
@@ -8,13 +8,33 @@
 
 > `const` **BUSINESS\_CONSIDERATIONS**: `object`
 
-Defined in: [types/businessImpact.ts:380](https://github.com/Hack23/cia-compliance-manager/blob/9eb094f233d2f30300190730a81ad03ea8549a0e/src/types/businessImpact.ts#L380)
+Defined in: [types/businessImpact.ts:380](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/businessImpact.ts#L380)
 
 ## Type Declaration
 
 ### AVAILABILITY
 
-> **AVAILABILITY**: `any`
+> **AVAILABILITY**: `object`
+
+#### AVAILABILITY.HIGH
+
+> **HIGH**: `never`[] = `[]`
+
+#### AVAILABILITY.LOW
+
+> **LOW**: `never`[] = `[]`
+
+#### AVAILABILITY.MODERATE
+
+> **MODERATE**: `never`[] = `[]`
+
+#### AVAILABILITY.NONE
+
+> **NONE**: `never`[] = `[]`
+
+#### AVAILABILITY.VERY\_HIGH
+
+> **VERY\_HIGH**: `never`[] = `[]`
 
 ### compliance?
 
@@ -24,7 +44,27 @@ Compliance considerations
 
 ### CONFIDENTIALITY
 
-> **CONFIDENTIALITY**: `any`
+> **CONFIDENTIALITY**: `object`
+
+#### CONFIDENTIALITY.HIGH
+
+> **HIGH**: `never`[] = `[]`
+
+#### CONFIDENTIALITY.LOW
+
+> **LOW**: `never`[] = `[]`
+
+#### CONFIDENTIALITY.MODERATE
+
+> **MODERATE**: `never`[] = `[]`
+
+#### CONFIDENTIALITY.NONE
+
+> **NONE**: `never`[] = `[]`
+
+#### CONFIDENTIALITY.VERY\_HIGH
+
+> **VERY\_HIGH**: `never`[] = `[]`
 
 ### financial
 
@@ -34,7 +74,27 @@ Financial considerations
 
 ### INTEGRITY
 
-> **INTEGRITY**: `any`
+> **INTEGRITY**: `object`
+
+#### INTEGRITY.HIGH
+
+> **HIGH**: `never`[] = `[]`
+
+#### INTEGRITY.LOW
+
+> **LOW**: `never`[] = `[]`
+
+#### INTEGRITY.MODERATE
+
+> **MODERATE**: `never`[] = `[]`
+
+#### INTEGRITY.NONE
+
+> **NONE**: `never`[] = `[]`
+
+#### INTEGRITY.VERY\_HIGH
+
+> **VERY\_HIGH**: `never`[] = `[]`
 
 ### operational
 

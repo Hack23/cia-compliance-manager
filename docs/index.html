@@ -18,8 +18,25 @@
     />
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
     <link rel="manifest" href="./manifest.json" />
+    
+    <!-- Security Headers -->
+    <!-- Content Security Policy: Defines sources of content that can be loaded -->
+    <meta 
+      http-equiv="Content-Security-Policy" 
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;"
+    />
+    <!-- Prevent MIME-type sniffing -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <!-- Clickjacking protection: Prevent site from being embedded in frames -->
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <!-- Cross-Origin isolation for Spectre vulnerability protection -->
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
+    <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp" />
+    <!-- Referrer Policy: Control information sent in Referer header -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
     <title>CIA Compliance Manager</title>
-    <script type="module" crossorigin src="./assets/index-Bs1GugqV.js"></script>
+    <script type="module" crossorigin src="./assets/index-CACkIfiw.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vendor-BRU2jZet.js">
     <link rel="modulepreload" crossorigin href="./assets/react-DpI18Uv0.js">
     <link rel="stylesheet" crossorigin href="./assets/index-gduEf1gb.css">
