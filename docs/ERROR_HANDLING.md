@@ -6,6 +6,8 @@ This document describes the error handling patterns and components available in 
 
 The application provides a comprehensive set of error handling components and patterns to ensure robust, user-friendly error handling across all widgets and components.
 
+**Production Status:** All error handling components are actively used in `src/application/CIAClassificationApp.tsx`, with WidgetErrorBoundary wrapping all 11 widgets to prevent crashes and provide graceful error recovery.
+
 ## Components
 
 ### 1. LoadingSpinner
@@ -125,6 +127,63 @@ import { WidgetErrorBoundary } from '@/components';
 >
   <SecurityMetricsWidget />
 </WidgetErrorBoundary>
+```
+
+## Production Usage
+
+All error handling components are actively deployed in the application. Here's how they're used:
+
+### Widget Error Boundaries in CIAClassificationApp
+
+**File:** `src/application/CIAClassificationApp.tsx`
+
+All 11 widgets are wrapped with `WidgetErrorBoundary` to prevent widget crashes from affecting the entire application:
+
+```tsx
+import WidgetErrorBoundary from "../components/common/WidgetErrorBoundary";
+import logger from "../utils/logger";
+
+// Error handler logs errors centrally
+const handleWidgetError = useCallback((error: Error, errorInfo: React.ErrorInfo) => {
+  logger.error('Widget error caught by error boundary', { error, errorInfo });
+}, []);
+
+// Each widget is wrapped for protection
+<WidgetErrorBoundary widgetName="Business Impact Analysis" onError={handleWidgetError}>
+  <BusinessImpactAnalysisWidget {...props} />
+</WidgetErrorBoundary>
+
+<WidgetErrorBoundary widgetName="Security Summary" onError={handleWidgetError}>
+  <SecuritySummaryWidget {...props} />
+</WidgetErrorBoundary>
+
+// ... and 9 more widgets
+```
+
+**Benefits:**
+- If one widget crashes, others continue working
+- Errors are logged centrally via the logger utility
+- Users see friendly error messages instead of a blank screen
+- Retry functionality built-in via error boundary reset
+
+### Widget-Level Error Handling
+
+All widgets use `WidgetContainer` which provides consistent error and loading state display:
+
+```tsx
+const MyWidget: React.FC<Props> = (props) => {
+  const { data, isLoading, error } = useServiceHook();
+  
+  return (
+    <WidgetContainer 
+      title="My Widget"
+      isLoading={isLoading}
+      error={error}
+    >
+      <WidgetContent data={data} />
+    </WidgetContainer>
+  );
+};
 ```
 
 ## Hooks

@@ -12,9 +12,11 @@ import IntegrityImpactWidget from "../components/widgets/impactanalysis/Integrit
 import SecurityResourcesWidget from "../components/widgets/implementationguide/SecurityResourcesWidget";
 import SecurityVisualizationWidget from "../components/widgets/implementationguide/SecurityVisualizationWidget";
 import TechnicalDetailsWidget from "../components/widgets/implementationguide/TechnicalDetailsWidget";
+import WidgetErrorBoundary from "../components/common/WidgetErrorBoundary";
 import { APP_TEST_IDS, UI_TEXT } from "../constants";
 import { useSecurityLevelState, useLocalStorage, SecurityLevelState } from "../hooks";
 import { SecurityLevel } from "../types/cia";
+import logger from "../utils/logger";
 
 /**
  * Main application component for CIA Classification
@@ -91,6 +93,11 @@ const CIAClassificationApp: React.FC = () => {
   const toggleDarkMode = () => {
     setDarkMode((prev) => !prev);
   };
+
+  // Error handler for widget error boundaries
+  const handleWidgetError = useCallback((error: Error, errorInfo: React.ErrorInfo) => {
+    logger.error('Widget error caught by error boundary', { error, errorInfo });
+  }, []);
 
   // Apply dark mode class
   useEffect(() => {
@@ -202,112 +209,134 @@ const CIAClassificationApp: React.FC = () => {
 
             {/* Business Impact Analysis Widget */}
             <div className="grid-widget-container">
-              <BusinessImpactAnalysisWidget
-                availabilityLevel={levels.availability}
-                integrityLevel={levels.integrity}
-                confidentialityLevel={levels.confidentiality}
-                testId="widget-business-impact"
-              />
+              <WidgetErrorBoundary widgetName="Business Impact Analysis" onError={handleWidgetError}>
+                <BusinessImpactAnalysisWidget
+                  availabilityLevel={levels.availability}
+                  integrityLevel={levels.integrity}
+                  confidentialityLevel={levels.confidentiality}
+                  testId="widget-business-impact"
+                />
+              </WidgetErrorBoundary>
             </div>
 
             {/* Security Summary Widget */}
             <div className="grid-widget-container">
-              <SecuritySummaryWidget
-                availabilityLevel={levels.availability}
-                integrityLevel={levels.integrity}
-                confidentialityLevel={levels.confidentiality}
-                testId="widget-security-summary"
-              />
+              <WidgetErrorBoundary widgetName="Security Summary" onError={handleWidgetError}>
+                <SecuritySummaryWidget
+                  availabilityLevel={levels.availability}
+                  integrityLevel={levels.integrity}
+                  confidentialityLevel={levels.confidentiality}
+                  testId="widget-security-summary"
+                />
+              </WidgetErrorBoundary>
             </div>
 
             {/* Value Creation Widget */}
             <div className="grid-widget-container">
-              <ValueCreationWidget
-                availabilityLevel={levels.availability}
-                integrityLevel={levels.integrity}
-                confidentialityLevel={levels.confidentiality}
-                testId="widget-value-creation"
-              />
+              <WidgetErrorBoundary widgetName="Value Creation" onError={handleWidgetError}>
+                <ValueCreationWidget
+                  availabilityLevel={levels.availability}
+                  integrityLevel={levels.integrity}
+                  confidentialityLevel={levels.confidentiality}
+                  testId="widget-value-creation"
+                />
+              </WidgetErrorBoundary>
             </div>
 
             {/* Cost Estimation Widget */}
             <div className="grid-widget-container">
-              <CostEstimationWidget
-                availabilityLevel={levels.availability}
-                integrityLevel={levels.integrity}
-                confidentialityLevel={levels.confidentiality}
-                testId="widget-cost-estimation"
-              />
+              <WidgetErrorBoundary widgetName="Cost Estimation" onError={handleWidgetError}>
+                <CostEstimationWidget
+                  availabilityLevel={levels.availability}
+                  integrityLevel={levels.integrity}
+                  confidentialityLevel={levels.confidentiality}
+                  testId="widget-cost-estimation"
+                />
+              </WidgetErrorBoundary>
             </div>
 
             {/* Compliance Status Widget */}
             <div className="grid-widget-container">
-              <ComplianceStatusWidget
-                availabilityLevel={levels.availability}
-                integrityLevel={levels.integrity}
-                confidentialityLevel={levels.confidentiality}
-                testId="widget-compliance-status"
-              />
+              <WidgetErrorBoundary widgetName="Compliance Status" onError={handleWidgetError}>
+                <ComplianceStatusWidget
+                  availabilityLevel={levels.availability}
+                  integrityLevel={levels.integrity}
+                  confidentialityLevel={levels.confidentiality}
+                  testId="widget-compliance-status"
+                />
+              </WidgetErrorBoundary>
             </div>
 
             {/* Confidentiality Impact Widget */}
             <div className="grid-widget-container">
-              <ConfidentialityImpactWidget
-                availabilityLevel={levels.availability}
-                integrityLevel={levels.integrity}
-                confidentialityLevel={levels.confidentiality}
-                testId="widget-confidentiality-impact"
-              />
+              <WidgetErrorBoundary widgetName="Confidentiality Impact" onError={handleWidgetError}>
+                <ConfidentialityImpactWidget
+                  availabilityLevel={levels.availability}
+                  integrityLevel={levels.integrity}
+                  confidentialityLevel={levels.confidentiality}
+                  testId="widget-confidentiality-impact"
+                />
+              </WidgetErrorBoundary>
             </div>
 
             {/* Integrity Impact Widget */}
             <div className="grid-widget-container">
-              <IntegrityImpactWidget
-                availabilityLevel={levels.availability}
-                integrityLevel={levels.integrity}
-                confidentialityLevel={levels.confidentiality}
-                testId="integrity-impact-widget"
-              />
+              <WidgetErrorBoundary widgetName="Integrity Impact" onError={handleWidgetError}>
+                <IntegrityImpactWidget
+                  availabilityLevel={levels.availability}
+                  integrityLevel={levels.integrity}
+                  confidentialityLevel={levels.confidentiality}
+                  testId="integrity-impact-widget"
+                />
+              </WidgetErrorBoundary>
             </div>
 
             {/* Availability Impact Widget */}
             <div className="grid-widget-container">
-              <AvailabilityImpactWidget
-                availabilityLevel={levels.availability}
-                integrityLevel={levels.integrity}
-                confidentialityLevel={levels.confidentiality}
-                testId="widget-availability-impact"
-              />
+              <WidgetErrorBoundary widgetName="Availability Impact" onError={handleWidgetError}>
+                <AvailabilityImpactWidget
+                  availabilityLevel={levels.availability}
+                  integrityLevel={levels.integrity}
+                  confidentialityLevel={levels.confidentiality}
+                  testId="widget-availability-impact"
+                />
+              </WidgetErrorBoundary>
             </div>
 
             {/* Technical Details Widget */}
             <div className="grid-widget-container">
-              <TechnicalDetailsWidget
-                availabilityLevel={levels.availability}
-                integrityLevel={levels.integrity}
-                confidentialityLevel={levels.confidentiality}
-                testId="widget-technical-details"
-              />
+              <WidgetErrorBoundary widgetName="Technical Details" onError={handleWidgetError}>
+                <TechnicalDetailsWidget
+                  availabilityLevel={levels.availability}
+                  integrityLevel={levels.integrity}
+                  confidentialityLevel={levels.confidentiality}
+                  testId="widget-technical-details"
+                />
+              </WidgetErrorBoundary>
             </div>
 
             {/* Security Visualization Widget */}
             <div className="grid-widget-container">
-              <SecurityVisualizationWidget
-                availabilityLevel={levels.availability}
-                integrityLevel={levels.integrity}
-                confidentialityLevel={levels.confidentiality}
-                testId="widget-security-visualization"
-              />
+              <WidgetErrorBoundary widgetName="Security Visualization" onError={handleWidgetError}>
+                <SecurityVisualizationWidget
+                  availabilityLevel={levels.availability}
+                  integrityLevel={levels.integrity}
+                  confidentialityLevel={levels.confidentiality}
+                  testId="widget-security-visualization"
+                />
+              </WidgetErrorBoundary>
             </div>
 
             {/* Security Resources Widget */}
             <div className="grid-widget-container">
-              <SecurityResourcesWidget
-                availabilityLevel={levels.availability}
-                integrityLevel={levels.integrity}
-                confidentialityLevel={levels.confidentiality}
-                testId="security-resources-widget"
-              />
+              <WidgetErrorBoundary widgetName="Security Resources" onError={handleWidgetError}>
+                <SecurityResourcesWidget
+                  availabilityLevel={levels.availability}
+                  integrityLevel={levels.integrity}
+                  confidentialityLevel={levels.confidentiality}
+                  testId="security-resources-widget"
+                />
+              </WidgetErrorBoundary>
             </div>
           </div>
         </div>
