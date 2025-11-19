@@ -8,7 +8,9 @@ import {
   SECURITY_RECOMMENDATIONS,
   WIDGET_ICONS,
   WIDGET_TITLES,
+  mapOptionsToConstants,
 } from "./appConstants";
+import { CIADetails } from "../types/cia-services";
 
 describe("Application Constants", () => {
   describe("SECURITY_LEVEL_COLORS", () => {
@@ -113,6 +115,153 @@ describe("Application Constants", () => {
       expect(
         WIDGET_ICONS[key as keyof typeof WIDGET_ICONS].length
       ).toBeGreaterThan(0);
+    });
+  });
+
+  describe("mapOptionsToConstants", () => {
+    const mockOptions: Record<string, CIADetails> = {
+      None: {
+        description: "None description",
+        impact: "None impact",
+        technical: "None technical",
+        capex: 0,
+        opex: 0,
+        bg: "#fff",
+        text: "#000",
+      },
+      Low: {
+        description: "Low description",
+        impact: "Low impact",
+        technical: "Low technical",
+        capex: 5,
+        opex: 2,
+        bg: "#fef",
+        text: "#111",
+      },
+      Moderate: {
+        description: "Moderate description",
+        impact: "Moderate impact",
+        technical: "Moderate technical",
+        capex: 10,
+        opex: 5,
+        bg: "#eee",
+        text: "#222",
+      },
+      High: {
+        description: "High description",
+        impact: "High impact",
+        technical: "High technical",
+        capex: 15,
+        opex: 8,
+        bg: "#ddd",
+        text: "#333",
+      },
+      "Very High": {
+        description: "Very High description",
+        impact: "Very High impact",
+        technical: "Very High technical",
+        capex: 20,
+        opex: 10,
+        bg: "#ccc",
+        text: "#444",
+      },
+    };
+
+    it("returns undefined values when options is null", () => {
+      const result = mapOptionsToConstants(null as unknown as Record<string, CIADetails>, "description");
+
+      expect(result.NONE).toBeUndefined();
+      expect(result.LOW).toBeUndefined();
+      expect(result.MODERATE).toBeUndefined();
+      expect(result.HIGH).toBeUndefined();
+      expect(result.VERY_HIGH).toBeUndefined();
+    });
+
+    it("returns undefined values when options is undefined", () => {
+      const result = mapOptionsToConstants(undefined as unknown as Record<string, CIADetails>, "description");
+
+      expect(result.NONE).toBeUndefined();
+      expect(result.LOW).toBeUndefined();
+      expect(result.MODERATE).toBeUndefined();
+      expect(result.HIGH).toBeUndefined();
+      expect(result.VERY_HIGH).toBeUndefined();
+    });
+
+    it("maps description field correctly", () => {
+      const result = mapOptionsToConstants(mockOptions, "description");
+
+      expect(result.NONE).toBe("None description");
+      expect(result.LOW).toBe("Low description");
+      expect(result.MODERATE).toBe("Moderate description");
+      expect(result.HIGH).toBe("High description");
+      expect(result.VERY_HIGH).toBe("Very High description");
+    });
+
+    it("maps impact field correctly", () => {
+      const result = mapOptionsToConstants(mockOptions, "impact");
+
+      expect(result.NONE).toBe("None impact");
+      expect(result.LOW).toBe("Low impact");
+      expect(result.MODERATE).toBe("Moderate impact");
+      expect(result.HIGH).toBe("High impact");
+      expect(result.VERY_HIGH).toBe("Very High impact");
+    });
+
+    it("maps technical field correctly", () => {
+      const result = mapOptionsToConstants(mockOptions, "technical");
+
+      expect(result.NONE).toBe("None technical");
+      expect(result.LOW).toBe("Low technical");
+      expect(result.MODERATE).toBe("Moderate technical");
+      expect(result.HIGH).toBe("High technical");
+      expect(result.VERY_HIGH).toBe("Very High technical");
+    });
+
+    it("applies transform function when provided", () => {
+      const transform = (value: string, level: string) => `${level}: ${value}`;
+      const result = mapOptionsToConstants(mockOptions, "description", transform);
+
+      expect(result.NONE).toBe("None: None description");
+      expect(result.LOW).toBe("Low: Low description");
+      expect(result.MODERATE).toBe("Moderate: Moderate description");
+      expect(result.HIGH).toBe("High: High description");
+      expect(result.VERY_HIGH).toBe("Very High: Very High description");
+    });
+
+    it("applies transform function to numeric fields", () => {
+      const transform = (value: number) => value * 2;
+      const result = mapOptionsToConstants(mockOptions, "capex", transform);
+
+      expect(result.NONE).toBe(0);
+      expect(result.LOW).toBe(10);
+      expect(result.MODERATE).toBe(20);
+      expect(result.HIGH).toBe(30);
+      expect(result.VERY_HIGH).toBe(40);
+    });
+
+    it("handles missing options gracefully", () => {
+      const incompleteOptions: Record<string, CIADetails> = {
+        Low: mockOptions.Low,
+        High: mockOptions.High,
+      };
+
+      const result = mapOptionsToConstants(incompleteOptions, "description");
+
+      expect(result.NONE).toBeUndefined();
+      expect(result.LOW).toBe("Low description");
+      expect(result.MODERATE).toBeUndefined();
+      expect(result.HIGH).toBe("High description");
+      expect(result.VERY_HIGH).toBeUndefined();
+    });
+
+    it("returns values without transform when transform is not provided", () => {
+      const result = mapOptionsToConstants(mockOptions, "capex");
+
+      expect(result.NONE).toBe(0);
+      expect(result.LOW).toBe(5);
+      expect(result.MODERATE).toBe(10);
+      expect(result.HIGH).toBe(15);
+      expect(result.VERY_HIGH).toBe(20);
     });
   });
 });
