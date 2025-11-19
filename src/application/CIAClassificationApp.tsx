@@ -13,6 +13,7 @@ import SecurityResourcesWidget from "../components/widgets/implementationguide/S
 import SecurityVisualizationWidget from "../components/widgets/implementationguide/SecurityVisualizationWidget";
 import TechnicalDetailsWidget from "../components/widgets/implementationguide/TechnicalDetailsWidget";
 import { APP_TEST_IDS, UI_TEXT } from "../constants";
+import { useSecurityLevelState, useLocalStorage, SecurityLevelState } from "../hooks";
 import { SecurityLevel } from "../types/cia";
 
 /**
@@ -27,80 +28,64 @@ import { SecurityLevel } from "../types/cia";
 const CIAClassificationApp: React.FC = () => {
   const appVersion = APP_VERSION;
 
-  // Use local state with persisted values from localStorage
-  const defaultAvailabilityLevel =
-    (localStorage.getItem("availabilityLevel") as SecurityLevel) || "Moderate";
-  const defaultIntegrityLevel =
-    (localStorage.getItem("integrityLevel") as SecurityLevel) || "Moderate";
-  const defaultConfidentialityLevel =
-    (localStorage.getItem("confidentialityLevel") as SecurityLevel) ||
-    "Moderate";
+  // Use custom hooks for security level state management with localStorage persistence
+  const defaultLevels: SecurityLevelState = {
+    availability: "Moderate",
+    integrity: "Moderate",
+    confidentiality: "Moderate",
+  };
+  const [savedLevels, setSavedLevels] = useLocalStorage("securityLevels", defaultLevels);
+
+  // Initialize security level state with saved values
+  const { levels, setLevel } = useSecurityLevelState(savedLevels);
+
+  // Persist security levels to localStorage whenever they change
+  useEffect(() => {
+    setSavedLevels(levels);
+  }, [levels, setSavedLevels]);
+
+  // Use custom hook for dark mode persistence
   const defaultDarkMode =
-    localStorage.getItem("darkMode") === "true" ||
-    (window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-  // Use state with manual localStorage handling
-  const [availabilityLevel, setAvailabilityLevelState] =
-    useState<SecurityLevel>(defaultAvailabilityLevel);
-  const [integrityLevel, setIntegrityLevelState] = useState<SecurityLevel>(
-    defaultIntegrityLevel
-  );
-  const [confidentialityLevel, setConfidentialityLevelState] =
-    useState<SecurityLevel>(defaultConfidentialityLevel);
-  const [darkMode, setDarkModeState] = useState<boolean>(defaultDarkMode);
-
-  // Custom setters that also persist values to localStorage
-  const setAvailabilityLevel = (level: SecurityLevel) => {
-    localStorage.setItem("availabilityLevel", level);
-    setAvailabilityLevelState(level);
-  };
-
-  const setIntegrityLevel = (level: SecurityLevel) => {
-    localStorage.setItem("integrityLevel", level);
-    setIntegrityLevelState(level);
-  };
-
-  const setConfidentialityLevel = (level: SecurityLevel) => {
-    localStorage.setItem("confidentialityLevel", level);
-    setConfidentialityLevelState(level);
-  };
-
-  const setDarkMode = (
-    value: boolean | ((prevDarkMode: boolean) => boolean)
-  ) => {
-    const newValue = typeof value === "function" ? value(darkMode) : value;
-    localStorage.setItem("darkMode", String(newValue));
-    setDarkModeState(newValue);
-  };
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [darkMode, setDarkMode] = useLocalStorage("darkMode", defaultDarkMode);
 
   // Log initial values for debugging
   useEffect(() => {
     console.log("CIA App Security Levels:", {
-      availability: availabilityLevel,
-      integrity: integrityLevel,
-      confidentiality: confidentialityLevel,
+      availability: levels.availability,
+      integrity: levels.integrity,
+      confidentiality: levels.confidentiality,
     });
-  }, [availabilityLevel, integrityLevel, confidentialityLevel]);
+  }, [levels]);
 
-  // Create handler functions
-  const handleAvailabilityChange = useCallback((level: SecurityLevel) => {
-    console.log("CIAClassificationApp: Setting availability level to:", level);
-    setAvailabilityLevel(level);
-  }, []);
+  // Create handler functions using the hook's setLevel method
+  const handleAvailabilityChange = useCallback(
+    (level: SecurityLevel) => {
+      console.log("CIAClassificationApp: Setting availability level to:", level);
+      setLevel("availability", level);
+    },
+    [setLevel]
+  );
 
-  const handleIntegrityChange = useCallback((level: SecurityLevel) => {
-    console.log("CIAClassificationApp: Setting integrity level to:", level);
-    setIntegrityLevel(level);
-  }, []);
+  const handleIntegrityChange = useCallback(
+    (level: SecurityLevel) => {
+      console.log("CIAClassificationApp: Setting integrity level to:", level);
+      setLevel("integrity", level);
+    },
+    [setLevel]
+  );
 
-  const handleConfidentialityChange = useCallback((level: SecurityLevel) => {
-    console.log(
-      "CIAClassificationApp: Setting confidentiality level to:",
-      level
-    );
-    setConfidentialityLevel(level);
-  }, []);
+  const handleConfidentialityChange = useCallback(
+    (level: SecurityLevel) => {
+      console.log(
+        "CIAClassificationApp: Setting confidentiality level to:",
+        level
+      );
+      setLevel("confidentiality", level);
+    },
+    [setLevel]
+  );
 
   // Toggle dark mode
   const toggleDarkMode = () => {
@@ -205,9 +190,9 @@ const CIAClassificationApp: React.FC = () => {
             {/* Security Level Widget */}
             <div className="grid-widget-container">
               <SecurityLevelWidget
-                availabilityLevel={availabilityLevel}
-                integrityLevel={integrityLevel}
-                confidentialityLevel={confidentialityLevel}
+                availabilityLevel={levels.availability}
+                integrityLevel={levels.integrity}
+                confidentialityLevel={levels.confidentiality}
                 onAvailabilityChange={handleAvailabilityChange}
                 onIntegrityChange={handleIntegrityChange}
                 onConfidentialityChange={handleConfidentialityChange}
@@ -218,9 +203,9 @@ const CIAClassificationApp: React.FC = () => {
             {/* Business Impact Analysis Widget */}
             <div className="grid-widget-container">
               <BusinessImpactAnalysisWidget
-                availabilityLevel={availabilityLevel}
-                integrityLevel={integrityLevel}
-                confidentialityLevel={confidentialityLevel}
+                availabilityLevel={levels.availability}
+                integrityLevel={levels.integrity}
+                confidentialityLevel={levels.confidentiality}
                 testId="widget-business-impact"
               />
             </div>
@@ -228,9 +213,9 @@ const CIAClassificationApp: React.FC = () => {
             {/* Security Summary Widget */}
             <div className="grid-widget-container">
               <SecuritySummaryWidget
-                availabilityLevel={availabilityLevel}
-                integrityLevel={integrityLevel}
-                confidentialityLevel={confidentialityLevel}
+                availabilityLevel={levels.availability}
+                integrityLevel={levels.integrity}
+                confidentialityLevel={levels.confidentiality}
                 testId="widget-security-summary"
               />
             </div>
@@ -238,9 +223,9 @@ const CIAClassificationApp: React.FC = () => {
             {/* Value Creation Widget */}
             <div className="grid-widget-container">
               <ValueCreationWidget
-                availabilityLevel={availabilityLevel}
-                integrityLevel={integrityLevel}
-                confidentialityLevel={confidentialityLevel}
+                availabilityLevel={levels.availability}
+                integrityLevel={levels.integrity}
+                confidentialityLevel={levels.confidentiality}
                 testId="widget-value-creation"
               />
             </div>
@@ -248,9 +233,9 @@ const CIAClassificationApp: React.FC = () => {
             {/* Cost Estimation Widget */}
             <div className="grid-widget-container">
               <CostEstimationWidget
-                availabilityLevel={availabilityLevel}
-                integrityLevel={integrityLevel}
-                confidentialityLevel={confidentialityLevel}
+                availabilityLevel={levels.availability}
+                integrityLevel={levels.integrity}
+                confidentialityLevel={levels.confidentiality}
                 testId="widget-cost-estimation"
               />
             </div>
@@ -258,9 +243,9 @@ const CIAClassificationApp: React.FC = () => {
             {/* Compliance Status Widget */}
             <div className="grid-widget-container">
               <ComplianceStatusWidget
-                availabilityLevel={availabilityLevel}
-                integrityLevel={integrityLevel}
-                confidentialityLevel={confidentialityLevel}
+                availabilityLevel={levels.availability}
+                integrityLevel={levels.integrity}
+                confidentialityLevel={levels.confidentiality}
                 testId="widget-compliance-status"
               />
             </div>
@@ -268,9 +253,9 @@ const CIAClassificationApp: React.FC = () => {
             {/* Confidentiality Impact Widget */}
             <div className="grid-widget-container">
               <ConfidentialityImpactWidget
-                availabilityLevel={availabilityLevel}
-                integrityLevel={integrityLevel}
-                confidentialityLevel={confidentialityLevel}
+                availabilityLevel={levels.availability}
+                integrityLevel={levels.integrity}
+                confidentialityLevel={levels.confidentiality}
                 testId="widget-confidentiality-impact"
               />
             </div>
@@ -278,9 +263,9 @@ const CIAClassificationApp: React.FC = () => {
             {/* Integrity Impact Widget */}
             <div className="grid-widget-container">
               <IntegrityImpactWidget
-                availabilityLevel={availabilityLevel}
-                integrityLevel={integrityLevel}
-                confidentialityLevel={confidentialityLevel}
+                availabilityLevel={levels.availability}
+                integrityLevel={levels.integrity}
+                confidentialityLevel={levels.confidentiality}
                 testId="integrity-impact-widget"
               />
             </div>
@@ -288,9 +273,9 @@ const CIAClassificationApp: React.FC = () => {
             {/* Availability Impact Widget */}
             <div className="grid-widget-container">
               <AvailabilityImpactWidget
-                availabilityLevel={availabilityLevel}
-                integrityLevel={integrityLevel}
-                confidentialityLevel={confidentialityLevel}
+                availabilityLevel={levels.availability}
+                integrityLevel={levels.integrity}
+                confidentialityLevel={levels.confidentiality}
                 testId="widget-availability-impact"
               />
             </div>
@@ -298,9 +283,9 @@ const CIAClassificationApp: React.FC = () => {
             {/* Technical Details Widget */}
             <div className="grid-widget-container">
               <TechnicalDetailsWidget
-                availabilityLevel={availabilityLevel}
-                integrityLevel={integrityLevel}
-                confidentialityLevel={confidentialityLevel}
+                availabilityLevel={levels.availability}
+                integrityLevel={levels.integrity}
+                confidentialityLevel={levels.confidentiality}
                 testId="widget-technical-details"
               />
             </div>
@@ -308,9 +293,9 @@ const CIAClassificationApp: React.FC = () => {
             {/* Security Visualization Widget */}
             <div className="grid-widget-container">
               <SecurityVisualizationWidget
-                availabilityLevel={availabilityLevel}
-                integrityLevel={integrityLevel}
-                confidentialityLevel={confidentialityLevel}
+                availabilityLevel={levels.availability}
+                integrityLevel={levels.integrity}
+                confidentialityLevel={levels.confidentiality}
                 testId="widget-security-visualization"
               />
             </div>
@@ -318,9 +303,9 @@ const CIAClassificationApp: React.FC = () => {
             {/* Security Resources Widget */}
             <div className="grid-widget-container">
               <SecurityResourcesWidget
-                availabilityLevel={availabilityLevel}
-                integrityLevel={integrityLevel}
-                confidentialityLevel={confidentialityLevel}
+                availabilityLevel={levels.availability}
+                integrityLevel={levels.integrity}
+                confidentialityLevel={levels.confidentiality}
                 testId="security-resources-widget"
               />
             </div>
