@@ -37,6 +37,7 @@ export { default as LoadingSpinner } from "./common/LoadingSpinner";
 export { default as RiskLevelBadge } from "./common/RiskLevelBadge";
 export { default as SecurityLevelBadge } from "./common/SecurityLevelBadge";
 export { default as StatusBadge } from "./common/StatusBadge";
+export { default as WidgetErrorBoundary } from "./common/WidgetErrorBoundary";
 
 // Charts
 export { default as RadarChart } from "./charts/RadarChart";
