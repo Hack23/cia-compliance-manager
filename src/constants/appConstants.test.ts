@@ -124,6 +124,8 @@ describe("Application Constants", () => {
         description: "None description",
         impact: "None impact",
         technical: "None technical",
+        businessImpact: "None business impact",
+        recommendations: [],
         capex: 0,
         opex: 0,
         bg: "#fff",
@@ -133,6 +135,8 @@ describe("Application Constants", () => {
         description: "Low description",
         impact: "Low impact",
         technical: "Low technical",
+        businessImpact: "Low business impact",
+        recommendations: ["Low recommendation"],
         capex: 5,
         opex: 2,
         bg: "#fef",
@@ -142,6 +146,8 @@ describe("Application Constants", () => {
         description: "Moderate description",
         impact: "Moderate impact",
         technical: "Moderate technical",
+        businessImpact: "Moderate business impact",
+        recommendations: ["Moderate recommendation"],
         capex: 10,
         opex: 5,
         bg: "#eee",
@@ -151,6 +157,8 @@ describe("Application Constants", () => {
         description: "High description",
         impact: "High impact",
         technical: "High technical",
+        businessImpact: "High business impact",
+        recommendations: ["High recommendation"],
         capex: 15,
         opex: 8,
         bg: "#ddd",
@@ -160,6 +168,8 @@ describe("Application Constants", () => {
         description: "Very High description",
         impact: "Very High impact",
         technical: "Very High technical",
+        businessImpact: "Very High business impact",
+        recommendations: ["Very High recommendation"],
         capex: 20,
         opex: 10,
         bg: "#ccc",
@@ -221,7 +231,7 @@ describe("Application Constants", () => {
     });
 
     it("applies transform function to numeric fields", () => {
-      const transform = (value: number) => value * 2;
+      const transform = (value: number | undefined) => value ? value * 2 : 0;
       const result = mapOptionsToConstants(mockOptions, "capex", transform);
 
       expect(result.NONE).toBe(0);
