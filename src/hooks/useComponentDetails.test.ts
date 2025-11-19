@@ -3,6 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { useComponentDetails } from './useComponentDetails';
 import * as useCIAContentServiceModule from './useCIAContentService';
 import { CIAComponent, SecurityLevel } from '../types/cia';
+import { CIAContentService } from '../services/ciaContentService';
 
 // Mock the useCIAContentService hook
 vi.mock('./useCIAContentService');
@@ -23,12 +24,13 @@ describe('useComponentDetails', () => {
 
     const mockService = {
       getComponentDetails: vi.fn().mockReturnValue(mockDetails),
-    };
+    } as unknown as CIAContentService;
 
     vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
+      refresh: vi.fn(),
     });
 
     const { result } = renderHook(() =>
@@ -47,6 +49,7 @@ describe('useComponentDetails', () => {
       ciaContentService: null,
       error: null,
       isLoading: false,
+      refresh: vi.fn(),
     });
 
     const { result } = renderHook(() =>
@@ -58,9 +61,10 @@ describe('useComponentDetails', () => {
 
   it('should return null when service is undefined', () => {
     vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
-      ciaContentService: undefined,
+      ciaContentService: null,
       error: null,
       isLoading: false,
+      refresh: vi.fn(),
     });
 
     const { result } = renderHook(() =>
@@ -73,12 +77,13 @@ describe('useComponentDetails', () => {
   it('should return null when getComponentDetails returns null', () => {
     const mockService = {
       getComponentDetails: vi.fn().mockReturnValue(null),
-    };
+    } as unknown as CIAContentService;
 
     vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
+      refresh: vi.fn(),
     });
 
     const { result } = renderHook(() =>
@@ -91,12 +96,13 @@ describe('useComponentDetails', () => {
   it('should return null when getComponentDetails returns undefined', () => {
     const mockService = {
       getComponentDetails: vi.fn().mockReturnValue(undefined),
-    };
+    } as unknown as CIAContentService;
 
     vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
+      refresh: vi.fn(),
     });
 
     const { result } = renderHook(() =>
@@ -113,12 +119,13 @@ describe('useComponentDetails', () => {
       getComponentDetails: vi.fn().mockImplementation(() => {
         throw new Error('Service error');
       }),
-    };
+    } as unknown as CIAContentService;
 
     vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
+      refresh: vi.fn(),
     });
 
     const { result } = renderHook(() =>
@@ -141,13 +148,14 @@ describe('useComponentDetails', () => {
       const mockDetails = { test: `${component} details` };
       const mockService = {
         getComponentDetails: vi.fn().mockReturnValue(mockDetails),
-      };
+      } as unknown as CIAContentService;
 
       vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
         ciaContentService: mockService,
         error: null,
         isLoading: false,
-      });
+      refresh: vi.fn(),
+    });
 
       const { result } = renderHook(() =>
         useComponentDetails(component, 'High' as SecurityLevel)
@@ -164,13 +172,14 @@ describe('useComponentDetails', () => {
       const mockDetails = { test: `${level} details` };
       const mockService = {
         getComponentDetails: vi.fn().mockReturnValue(mockDetails),
-      };
+      } as unknown as CIAContentService;
 
       vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
         ciaContentService: mockService,
         error: null,
         isLoading: false,
-      });
+      refresh: vi.fn(),
+    });
 
       const { result } = renderHook(() =>
         useComponentDetails('availability' as CIAComponent, level)
@@ -184,12 +193,13 @@ describe('useComponentDetails', () => {
     const mockDetails = { uptime: '99.9%' };
     const mockService = {
       getComponentDetails: vi.fn().mockReturnValue(mockDetails),
-    };
+    } as unknown as CIAContentService;
 
     vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
+      refresh: vi.fn(),
     });
 
     const { result, rerender } = renderHook(() =>
@@ -211,12 +221,13 @@ describe('useComponentDetails', () => {
       getComponentDetails: vi.fn()
         .mockReturnValueOnce({ availability: 'data' })
         .mockReturnValueOnce({ integrity: 'data' }),
-    };
+    } as unknown as CIAContentService;
 
     vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
+      refresh: vi.fn(),
     });
 
     const { result, rerender } = renderHook(
@@ -246,12 +257,13 @@ describe('useComponentDetails', () => {
       getComponentDetails: vi.fn()
         .mockReturnValueOnce({ high: 'data' })
         .mockReturnValueOnce({ low: 'data' }),
-    };
+    } as unknown as CIAContentService;
 
     vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
+      refresh: vi.fn(),
     });
 
     const { result, rerender } = renderHook(
