@@ -392,31 +392,31 @@ const BusinessImpactAnalysisWidget: React.FC<
     return (
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4 mb-4">
         <div
-          className={`p-3 sm:p-2 rounded text-center ${getImpactColorClass(
+          className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
             confidentialityLevel
           )}`}
           data-testid={`${testId}-heatmap-confidentiality`}
         >
-          <div className="text-sm sm:text-xs font-medium">Confidentiality</div>
-          <div className="text-base sm:text-sm font-bold">{confidentialityLevel}</div>
+          <div className="text-xs sm:text-sm font-medium">Confidentiality</div>
+          <div className="text-sm sm:text-base font-bold">{confidentialityLevel}</div>
         </div>
         <div
-          className={`p-3 sm:p-2 rounded text-center ${getImpactColorClass(
+          className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
             integrityLevel
           )}`}
           data-testid={`${testId}-heatmap-integrity`}
         >
-          <div className="text-sm sm:text-xs font-medium">Integrity</div>
-          <div className="text-base sm:text-sm font-bold">{integrityLevel}</div>
+          <div className="text-xs sm:text-sm font-medium">Integrity</div>
+          <div className="text-sm sm:text-base font-bold">{integrityLevel}</div>
         </div>
         <div
-          className={`p-3 sm:p-2 rounded text-center ${getImpactColorClass(
+          className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
             availabilityLevel
           )}`}
           data-testid={`${testId}-heatmap-availability`}
         >
-          <div className="text-sm sm:text-xs font-medium">Availability</div>
-          <div className="text-base sm:text-sm font-bold">{availabilityLevel}</div>
+          <div className="text-xs sm:text-sm font-medium">Availability</div>
+          <div className="text-sm sm:text-base font-bold">{availabilityLevel}</div>
         </div>
       </div>
     );
