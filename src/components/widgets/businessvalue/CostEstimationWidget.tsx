@@ -225,7 +225,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         </div>
 
         {/* Summary cost section - using direct JSX instead of InfoCard */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
           <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
             <div className="flex items-center mb-2">
               <span className="mr-2 text-blue-500">💼</span>
@@ -233,7 +233,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 Implementation Cost
               </div>
             </div>
-            <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+            <div className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400">
               {formatCurrency(totalCapex)}
             </div>
             <div className="text-xs text-gray-500 dark:text-gray-500">
@@ -248,7 +248,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 Annual Operations
               </div>
             </div>
-            <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+            <div className="text-xl sm:text-2xl font-bold text-green-600 dark:text-green-400">
               {formatCurrency(totalOpex)}
             </div>
             <div className="text-xs text-gray-500 dark:text-gray-500">
@@ -263,7 +263,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 Total First Year Cost
               </div>
             </div>
-            <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+            <div className="text-xl sm:text-2xl font-bold text-purple-600 dark:text-purple-400">
               {formatCurrency(totalCost)}
             </div>
             <div className="text-xs text-gray-500 dark:text-gray-500">
@@ -298,7 +298,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         </div>
 
         {/* Implementation details grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
           {/* Implementation complexity */}
           <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
             <h4 className="text-md font-medium mb-3">

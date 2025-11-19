@@ -115,7 +115,7 @@ const ConfidentialityImpactWidget: React.FC<
             <h4 className="text-md font-medium mb-3 flex items-center">
               <span className="mr-2">📊</span>Data Protection
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
               <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
                 <div className="text-sm font-medium mb-1 text-purple-700 dark:text-purple-300">
                   Data Classification
@@ -133,7 +133,7 @@ const ConfidentialityImpactWidget: React.FC<
             <h4 className="text-md font-medium mb-3 flex items-center">
               <span className="mr-2">🔒</span>Privacy Impact
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
                 <div className="text-sm font-medium mb-1">Privacy Impact:</div>
                 <div className="text-lg font-bold text-purple-600 dark:text-purple-400">

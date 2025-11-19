@@ -148,7 +148,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
           <h3 className="text-lg font-medium mb-2 flex items-center">
             <span className="mr-2">⏱️</span>SLA Metrics
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
             <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
               <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
                 Uptime Target
@@ -177,7 +177,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
               <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
                 Service Level Agreement

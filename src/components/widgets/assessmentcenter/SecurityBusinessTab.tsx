@@ -46,7 +46,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
           Business Value Summary
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Business Maturity */}
           <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
             <h4 className="font-medium text-blue-700 dark:text-blue-300">
@@ -87,7 +87,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
           Cost Summary
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* Implementation Cost */}
           <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-sm font-medium mb-1">Implementation Cost</div>

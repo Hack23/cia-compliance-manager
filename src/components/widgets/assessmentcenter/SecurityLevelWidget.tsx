@@ -275,7 +275,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Security level selectors */}
           <div>
             <h3 className="text-lg font-medium mb-4">
@@ -330,7 +330,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </div>
 
                 <button
-                  className="mt-2 px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+                  className="mt-2 px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
                   onClick={() => setActiveComponent("confidentiality")}
                   data-testid="confidentiality-details-button"
                 >
@@ -394,7 +394,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </div>
 
                 <button
-                  className="mt-2 px-2 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600 transition-colors"
+                  className="mt-2 px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-green-600 text-white rounded hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600 transition-colors"
                   onClick={() => setActiveComponent("integrity")}
                   data-testid="integrity-details-button"
                 >
@@ -458,7 +458,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </div>
 
                 <button
-                  className="mt-2 px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+                  className="mt-2 px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
                   onClick={() => setActiveComponent("availability")}
                   data-testid="availability-details-button"
                 >
@@ -479,7 +479,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
           {/* Security level details */}
           <div>
-            <h3 className="text-lg font-medium mb-4">
+            <h3 className="text-base sm:text-lg font-medium mb-4">
               {activeComponent.charAt(0).toUpperCase() +
                 activeComponent.slice(1)}{" "}
               Details

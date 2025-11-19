@@ -130,7 +130,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
           <h3 className="text-lg font-medium mb-2 text-green-800 dark:text-green-300">
             Data Integrity Metrics
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
               <div className="text-sm font-medium mb-1">
                 Data Validation Controls:

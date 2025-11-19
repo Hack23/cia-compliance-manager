@@ -497,7 +497,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
               {/* Resources grid */}
               {filteredResources.length > 0 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   {currentResources.map((resource, index) => (
                     <ResourceCard
                       key={`${resource.url || ""}-${index}`}
@@ -591,7 +591,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
                 {/* Component-specific tips */}
                 {implementationGuides.length > 0 && (
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {/* Confidentiality Implementation */}
                     {implementationGuides[2] && (
                       <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
