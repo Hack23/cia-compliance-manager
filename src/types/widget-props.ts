@@ -233,7 +233,9 @@ export interface ComponentImpactBaseProps {
  * Base props common to all widgets
  * 
  * Provides the foundation for all widget components with standard
- * styling and testing capabilities.
+ * styling, testing capabilities, and error handling.
+ * 
+ * Extends CommonWidgetProps to maintain consistency with existing patterns.
  * 
  * @example
  * ```typescript
@@ -242,17 +244,7 @@ export interface ComponentImpactBaseProps {
  * }
  * ```
  */
-export interface BaseWidgetProps {
-  /**
-   * Optional CSS class name for styling
-   */
-  className?: string;
-
-  /**
-   * Optional test ID for testing
-   */
-  testId?: string;
-
+export interface BaseWidgetProps extends CommonWidgetProps {
   /**
    * Optional callback when widget encounters an error
    * @param error - Error that occurred
@@ -428,7 +420,6 @@ export interface WidgetPropsWithLoading<T> extends BaseWidgetProps {
  * Props for SecurityLevelWidget component
  * 
  * Allows users to select and view security level for CIA components.
- * Provides detailed information about each security level.
  * 
  * @example
  * ```typescript
@@ -458,12 +449,6 @@ export interface SecurityLevelWidgetProps extends AllCIAComponentsProps {
    * @param level - New confidentiality security level
    */
   onConfidentialityChange?: (level: SecurityLevel) => void;
-
-  /**
-   * If true, displays detailed information about each security level
-   * @default false
-   */
-  showDetails?: boolean;
 }
 
 /**
@@ -647,7 +632,7 @@ export interface ValueCreationWidgetProps extends AllCIAComponentsProps {
  *   availabilityLevel="High"
  *   integrityLevel="Moderate"
  *   confidentialityLevel="Moderate"
- *   showTechnicalDetails
+ *   showExtendedDetails
  * />
  * ```
  */
@@ -673,12 +658,6 @@ export interface AvailabilityImpactWidgetProps extends BaseWidgetProps {
   confidentialityLevel?: SecurityLevel;
 
   /**
-   * If true, displays technical details
-   * @default false
-   */
-  showTechnicalDetails?: boolean;
-
-  /**
    * If true, displays extended details
    * @default false
    */
@@ -697,7 +676,7 @@ export interface AvailabilityImpactWidgetProps extends BaseWidgetProps {
  *   integrityLevel="Very High"
  *   availabilityLevel="High"
  *   confidentialityLevel="Moderate"
- *   showComplianceMapping
+ *   showExtendedDetails
  * />
  * ```
  */
@@ -723,12 +702,6 @@ export interface IntegrityImpactWidgetProps extends BaseWidgetProps {
   confidentialityLevel?: SecurityLevel;
 
   /**
-   * If true, displays compliance mapping
-   * @default false
-   */
-  showComplianceMapping?: boolean;
-
-  /**
    * If true, displays extended details
    * @default false
    */
@@ -747,7 +720,6 @@ export interface IntegrityImpactWidgetProps extends BaseWidgetProps {
  *   confidentialityLevel="High"
  *   availabilityLevel="Moderate"
  *   integrityLevel="High"
- *   showDataClassification
  * />
  * ```
  */
@@ -773,12 +745,6 @@ export interface ConfidentialityImpactWidgetProps extends BaseWidgetProps {
   confidentialityLevel: SecurityLevel;
 
   /**
-   * If true, displays data classification details
-   * @default false
-   */
-  showDataClassification?: boolean;
-
-  /**
    * If true, displays extended details
    * @default false
    */
@@ -801,16 +767,11 @@ export interface ConfidentialityImpactWidgetProps extends BaseWidgetProps {
  *   availabilityLevel="High"
  *   integrityLevel="Very High"
  *   confidentialityLevel="Moderate"
- *   showCodeExamples
  * />
  * ```
  */
 export interface TechnicalDetailsWidgetProps extends AllCIAComponentsProps {
-  /**
-   * If true, displays code examples
-   * @default false
-   */
-  showCodeExamples?: boolean;
+  // All props inherited from AllCIAComponentsProps
 }
 
 /**
