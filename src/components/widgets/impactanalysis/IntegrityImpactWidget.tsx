@@ -5,12 +5,11 @@ import {
   getDefaultErrorRate,
   getDefaultValidationLevel,
 } from "../../../data/ciaOptionsData";
+import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { ComponentImpactBaseProps } from "../../../types/widgets";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
-import { getDefaultComponentImpact } from "../../../utils/riskUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
-import { isNullish } from "../../../utils/typeGuards";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -36,9 +35,9 @@ export interface IntegrityImpactWidgetProps extends ComponentImpactBaseProps {
  */
 const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
   level, // For backward compatibility
-  availabilityLevel,
+  availabilityLevel: _availabilityLevel,
   integrityLevel,
-  confidentialityLevel,
+  confidentialityLevel: _confidentialityLevel,
   className = "",
   testId = INTEGRITY_IMPACT_TEST_IDS.INTEGRITY_IMPACT_PREFIX,
   showExtendedDetails = false,
@@ -48,49 +47,17 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
     integrityLevel || level || "Moderate"
   );
 
-  // Get CIA content service
+  // Get CIA content service for loading/error states
   const { ciaContentService, error, isLoading } = useCIAContentService();
 
-  // Get integrity details from service
-  const integrityDetails = useMemo(() => {
-    try {
-      if (isNullish(ciaContentService) || isNullish(effectiveLevel)) {
-        return null;
-      }
-
-      const details = ciaContentService.getComponentDetails(
-        "integrity",
-        effectiveLevel
-      );
-      return isNullish(details) ? null : details;
-    } catch (err) {
-      console.error("Error getting integrity details:", err);
-      return null;
-    }
-  }, [ciaContentService, effectiveLevel]);
-
-  // Get business impact from service with fallback to our utility
-  const businessImpact = useMemo(() => {
-    try {
-      if (isNullish(ciaContentService) || isNullish(effectiveLevel)) {
-        return getDefaultComponentImpact("integrity", effectiveLevel);
-      }
-
-      const impact = ciaContentService.getBusinessImpact(
-        "integrity",
-        effectiveLevel
-      );
-      return impact || getDefaultComponentImpact("integrity", effectiveLevel);
-    } catch (err) {
-      console.error("Error getting integrity business impact:", err);
-      return getDefaultComponentImpact("integrity", effectiveLevel);
-    }
-  }, [ciaContentService, effectiveLevel]);
+  // Use custom hooks for data fetching (replaces manual useMemo logic)
+  const integrityDetails = useComponentDetails("integrity", effectiveLevel);
+  const businessImpact = useBusinessImpact("integrity", effectiveLevel);
 
   // Get recommendations from service
   const recommendations = useMemo(() => {
     try {
-      if (isNullish(ciaContentService) || isNullish(effectiveLevel)) {
+      if (!ciaContentService || !effectiveLevel) {
         return [];
       }
 
@@ -105,7 +72,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
 
   // Get validation level with fallback to utility function
   const validationLevel = useMemo(() => {
-    if (!isNullish(integrityDetails) && integrityDetails.validationLevel) {
+    if (integrityDetails && integrityDetails.validationLevel) {
       return integrityDetails.validationLevel;
     }
     return getDefaultValidationLevel(effectiveLevel);
@@ -113,7 +80,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
 
   // Get error rate with fallback to utility function
   const errorRate = useMemo(() => {
-    if (!isNullish(integrityDetails) && integrityDetails.errorRate) {
+    if (integrityDetails && integrityDetails.errorRate) {
       return integrityDetails.errorRate;
     }
     return getDefaultErrorRate(effectiveLevel);
