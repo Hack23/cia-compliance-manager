@@ -170,21 +170,13 @@ describe("Application Constants", () => {
     it("returns undefined values when options is null", () => {
       const result = mapOptionsToConstants(null as unknown as Record<string, CIADetails>, "description");
 
-      expect(result.NONE).toBeUndefined();
-      expect(result.LOW).toBeUndefined();
-      expect(result.MODERATE).toBeUndefined();
-      expect(result.HIGH).toBeUndefined();
-      expect(result.VERY_HIGH).toBeUndefined();
+      expect(Object.values(result).every(v => v === undefined)).toBe(true);
     });
 
     it("returns undefined values when options is undefined", () => {
       const result = mapOptionsToConstants(undefined as unknown as Record<string, CIADetails>, "description");
 
-      expect(result.NONE).toBeUndefined();
-      expect(result.LOW).toBeUndefined();
-      expect(result.MODERATE).toBeUndefined();
-      expect(result.HIGH).toBeUndefined();
-      expect(result.VERY_HIGH).toBeUndefined();
+      expect(Object.values(result).every(v => v === undefined)).toBe(true);
     });
 
     it("maps description field correctly", () => {

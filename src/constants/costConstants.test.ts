@@ -310,6 +310,18 @@ describe("costConstants", () => {
       expect(formatted).toContain("1,235");
     });
 
+    it("rounds down correctly at .49 boundary", () => {
+      const formatted = formatCurrency(1234.49);
+      expect(formatted).toContain("$");
+      expect(formatted).toContain("1,234");
+    });
+
+    it("rounds up correctly at .50 boundary", () => {
+      const formatted = formatCurrency(1234.50);
+      expect(formatted).toContain("$");
+      expect(formatted).toContain("1,235");
+    });
+
     it("uses default USD when no currency specified", () => {
       const formatted = formatCurrency(500);
       expect(formatted).toContain("$");
