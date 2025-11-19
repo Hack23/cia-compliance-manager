@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BaseWidgetProps
 
-Defined in: [types/widgets.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/widgets.ts#L31)
+Defined in: [types/widgets.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widgets.ts#L31)
 
 Base widget props shared by all widgets
 
@@ -24,7 +24,7 @@ Base widget props shared by all widgets
 
 > `optional` **children**: `ReactNode`
 
-Defined in: [types/widgets.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/widgets.ts#L35)
+Defined in: [types/widgets.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widgets.ts#L35)
 
 Optional children elements
 
@@ -34,9 +34,18 @@ Optional children elements
 
 > `optional` **className**: `string`
 
-Defined in: [types/widget-props.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/widget-props.ts#L45)
+Defined in: [types/widget-props.ts:123](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L123)
 
-Optional CSS class name
+Optional CSS class name for custom styling
+
+Allows consumers to apply custom styles via CSS classes.
+Use Tailwind CSS classes or custom CSS classes.
+
+#### Example
+
+```ts
+"mt-4 border-2 rounded-lg"
+```
 
 #### Inherited from
 
@@ -48,9 +57,19 @@ Optional CSS class name
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widget-props.ts:50](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/widget-props.ts#L50)
+Defined in: [types/widget-props.ts:134](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L134)
 
 Optional test ID for automated testing
+
+Used by testing frameworks (Cypress, Vitest) to locate
+and interact with the component. Should follow the pattern
+defined in testIds constants.
+
+#### Example
+
+```ts
+"security-widget-availability"
+```
 
 #### Inherited from
 

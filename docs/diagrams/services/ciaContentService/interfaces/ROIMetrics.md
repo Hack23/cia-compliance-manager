@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ROIMetrics
 
-Defined in: [services/ciaContentService.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/services/ciaContentService.ts#L30)
+Defined in: [services/ciaContentService.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/services/ciaContentService.ts#L30)
 
 Metrics for ROI assessment
 
@@ -16,7 +16,7 @@ Metrics for ROI assessment
 
 > **description**: `string`
 
-Defined in: [services/ciaContentService.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/services/ciaContentService.ts#L33)
+Defined in: [services/ciaContentService.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/services/ciaContentService.ts#L33)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [services/ciaContentService.ts:33](https://github.com/Hack23/cia-com
 
 > **percentage**: `string`
 
-Defined in: [services/ciaContentService.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/services/ciaContentService.ts#L32)
+Defined in: [services/ciaContentService.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/services/ciaContentService.ts#L32)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [services/ciaContentService.ts:32](https://github.com/Hack23/cia-com
 
 > **value**: `string`
 
-Defined in: [services/ciaContentService.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/services/ciaContentService.ts#L31)
+Defined in: [services/ciaContentService.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/services/ciaContentService.ts#L31)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
 
 ***
 
@@ -8,4 +8,9 @@
 
 > **ROIType** = `"NONE"` \| `"LOW"` \| `"MODERATE"` \| `"HIGH"` \| `"VERY_HIGH"`
 
-Defined in: [hooks/useCIAOptions.ts:3](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L3)
+Defined in: [hooks/useCIAOptions.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L9)
+
+ROI type representing different security level categories
+
+Used to categorize return on investment estimates based on
+security level investments. Maps to SecurityLevel enum values.

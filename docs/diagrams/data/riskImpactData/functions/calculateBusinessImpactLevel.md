@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
 
 ***
 
@@ -6,11 +6,14 @@
 
 # Function: calculateBusinessImpactLevel()
 
-> **calculateBusinessImpactLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `"Critical"` \| `"High"` \| `"Medium"` \| `"Low"` \| `"Minimal"`
+> **calculateBusinessImpactLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): [`RiskImpactLevel`](../type-aliases/RiskImpactLevel.md)
 
-Defined in: [data/riskImpactData.ts:364](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L364)
+Defined in: [data/riskImpactData.ts:459](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L459)
 
 Calculate the overall business impact level based on security levels
+
+Uses a weighted algorithm that gives higher priority to confidentiality
+when determining the overall business impact across all CIA components.
 
 ## Parameters
 
@@ -34,6 +37,20 @@ Confidentiality security level
 
 ## Returns
 
-`"Critical"` \| `"High"` \| `"Medium"` \| `"Low"` \| `"Minimal"`
+[`RiskImpactLevel`](../type-aliases/RiskImpactLevel.md)
 
-Overall business impact level
+Overall business impact level (Minimal to Critical)
+
+## Example
+
+```typescript
+// All Very High security = minimal impact
+calculateBusinessImpactLevel("Very High", "Very High", "Very High") // Returns "Minimal"
+
+// All High security = Low impact
+calculateBusinessImpactLevel("High", "High", "High") // Returns "Low"
+
+// Mixed levels with confidentiality weighted higher
+// Formula: (1 [High] + 2 [Moderate] + 4 [None] * 1.5) / 3.5 = (1 + 2 + 6) / 3.5 = 9 / 3.5 = 2.57 → rounds to 3 ("High")
+calculateBusinessImpactLevel("High", "Moderate", "None") // Returns "High"
+```

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../README.md)
 
 ***
 
@@ -8,9 +8,13 @@
 
 > **meetsComplianceRequirements**: (`level`, `framework`) => `boolean`
 
-Defined in: [utils/index.ts:113](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/utils/index.ts#L113)
+Defined in: [utils/index.ts:113](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/utils/index.ts#L113)
 
-Determine if a security level meets compliance requirements
+Determine if a security level meets compliance requirements for a specific framework
+
+Validates that a security level meets the minimum requirements defined for
+common compliance frameworks (SOC 2, ISO 27001, PCI-DSS, HIPAA, NIST, GDPR, CCPA).
+Returns true if the level meets or exceeds the framework's minimum requirement.
 
 ## Parameters
 
@@ -18,16 +22,31 @@ Determine if a security level meets compliance requirements
 
 [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md)
 
-Security level to check
+Security level to validate
 
 ### framework
 
 `string`
 
-Compliance framework to check against
+Compliance framework name (e.g., 'SOC2', 'PCI-DSS', 'HIPAA')
 
 ## Returns
 
 `boolean`
 
-Whether the level meets requirements
+true if the security level meets the framework's minimum requirements
+
+## Example
+
+```typescript
+meetsComplianceRequirements('High', 'PCI-DSS')     // true (PCI-DSS requires High)
+meetsComplianceRequirements('Moderate', 'PCI-DSS') // false (needs High)
+meetsComplianceRequirements('Moderate', 'SOC2')    // true (SOC2 requires Moderate)
+meetsComplianceRequirements('High', 'GDPR')        // true (exceeds Moderate requirement)
+
+// Validate against multiple frameworks
+const frameworks = ['SOC2', 'ISO27001', 'GDPR'];
+const allMet = frameworks.every(f => 
+  meetsComplianceRequirements(currentLevel, f)
+);
+```

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # components/widgets/impactanalysis/ConfidentialityImpactWidget
 
-## Interfaces
+## Type Aliases
 
-- [ConfidentialityImpactWidgetProps](interfaces/ConfidentialityImpactWidgetProps.md)
+- [ConfidentialityImpactWidgetProps](type-aliases/ConfidentialityImpactWidgetProps.md)
 
 ## References
 

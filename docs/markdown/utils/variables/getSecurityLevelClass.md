@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../README.md)
 
 ***
 
@@ -8,9 +8,13 @@
 
 > **getSecurityLevelClass**: (`level`) => `string`
 
-Defined in: [utils/index.ts:108](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/utils/index.ts#L108)
+Defined in: [utils/index.ts:108](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/utils/index.ts#L108)
 
 Determines the appropriate CSS classes for displaying a security level
+
+Returns Tailwind CSS classes with color coding that visually represents
+security level severity. Includes dark mode support. Red=None, Yellow=Low,
+Blue=Moderate, Green=High, Purple=Very High.
 
 ## Parameters
 
@@ -18,10 +22,25 @@ Determines the appropriate CSS classes for displaying a security level
 
 `string`
 
-The security level string or SecurityLevel enum
+The security level (string or SecurityLevel enum)
 
 ## Returns
 
 `string`
 
-CSS class string for styling the security level
+CSS class string for styling the security level badge/indicator
+
+## Example
+
+```typescript
+getSecurityLevelClass('None')        
+// "bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-20 dark:text-red-300"
+
+getSecurityLevelClass('High')        
+// "bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-20 dark:text-green-300"
+
+// Use in components
+<span className={`px-2 py-1 rounded ${getSecurityLevelClass(level)}`}>
+  {level}
+</span>
+```

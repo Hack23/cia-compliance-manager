@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../README.md)
 
 ***
 
@@ -10,6 +10,7 @@
 
 - [CIAOptionDetails](interfaces/CIAOptionDetails.md)
 - [ROIData](interfaces/ROIData.md)
+- [UseCIAOptionsReturn](interfaces/UseCIAOptionsReturn.md)
 
 ## Type Aliases
 
@@ -25,9 +26,3 @@
 ## Functions
 
 - [useCIAOptions](functions/useCIAOptions.md)
-
-## References
-
-### default
-
-Renames and re-exports [useCIAOptions](functions/useCIAOptions.md)

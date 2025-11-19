@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48.92% </span>
+                <span class="strong">46.76% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>68/139</span>
+                <span class='fraction'>65/139</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">49.24% </span>
+                <span class="strong">46.96% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>65/132</span>
+                <span class='fraction'>62/132</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48.92% </span>
+                <span class="strong">46.76% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>68/139</span>
+                <span class='fraction'>65/139</span>
             </div>
         
             
@@ -641,13 +641,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -703,13 +703,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -814,7 +814,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -838,7 +838,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1148,8 +1148,8 @@ export function getDefaultDescription(
 <span class="cstat-no" title="statement not covered" >      return "Advanced availability controls with redundancy and quick recovery capabilities.";</span>
 <span class="branch-4 cbranch-no" title="branch not covered" >    case "Very High":</span>
 <span class="cstat-no" title="statement not covered" >      return "Comprehensive availability controls with maximum fault tolerance.";</span>
-    default:
-      return "Standard availability controls.";
+<span class="branch-5 cbranch-no" title="branch not covered" >    default:</span>
+<span class="cstat-no" title="statement not covered" >      return "Standard availability controls.";</span>
   }
 }
 &nbsp;
@@ -1210,8 +1210,8 @@ export function getDefaultTechDescription(
 <span class="cstat-no" title="statement not covered" >      return "Automatic failover, real-time monitoring, comprehensive disaster recovery, and advanced load balancing.";</span>
 <span class="branch-4 cbranch-no" title="branch not covered" >    case "Very High":</span>
 <span class="cstat-no" title="statement not covered" >      return "Multi-site active-active configurations, continuous data protection, and fully automated recovery with zero data loss.";</span>
-    default:
-      return "Standard availability technical controls.";
+<span class="branch-5 cbranch-no" title="branch not covered" >    default:</span>
+<span class="cstat-no" title="statement not covered" >      return "Standard availability technical controls.";</span>
   }
 }
 &nbsp;
@@ -1339,8 +1339,8 @@ export function getDefaultRequirements(
         "Implement zero-downtime deployment processes",
         "Deploy dedicated site reliability engineering",
       ];
-    default:
-      return ["Standard availability requirements."];
+<span class="branch-5 cbranch-no" title="branch not covered" >    default:</span>
+<span class="cstat-no" title="statement not covered" >      return ["Standard availability requirements."];</span>
   }
 }
 &nbsp;
@@ -1576,7 +1576,7 @@ export function getDefaultExpertise(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-18T11:40:08.599Z
+                at 2025-11-19T10:12:38.267Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

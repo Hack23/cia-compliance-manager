@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CodeExample
 
-Defined in: [types/cia-services.ts:169](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L169)
+Defined in: [types/cia-services.ts:173](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia-services.ts#L173)
 
 Code example for technical implementation
 
@@ -16,7 +16,7 @@ Code example for technical implementation
 
 > **code**: `string`
 
-Defined in: [types/cia-services.ts:172](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L172)
+Defined in: [types/cia-services.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia-services.ts#L176)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [types/cia-services.ts:172](https://github.com/Hack23/cia-compliance
 
 > **language**: `string`
 
-Defined in: [types/cia-services.ts:170](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L170)
+Defined in: [types/cia-services.ts:174](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia-services.ts#L174)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [types/cia-services.ts:170](https://github.com/Hack23/cia-compliance
 
 > **title**: `string`
 
-Defined in: [types/cia-services.ts:171](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia-services.ts#L171)
+Defined in: [types/cia-services.ts:175](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia-services.ts#L175)

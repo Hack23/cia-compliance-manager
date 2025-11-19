@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
 
 ***
 
@@ -8,9 +8,12 @@
 
 > **getRiskImpactLabel**(`level`): `string`
 
-Defined in: [data/riskImpactData.ts:400](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L400)
+Defined in: [data/riskImpactData.ts:510](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L510)
 
 Get risk impact level label
+
+Converts a risk level into a human-readable description of the business
+impact and required response.
 
 ## Parameters
 
@@ -18,6 +21,18 @@ Get risk impact level label
 
 `string`
 
+Risk level to get label for
+
 ## Returns
 
 `string`
+
+Human-readable description of the risk impact level
+
+## Example
+
+```typescript
+getRiskImpactLabel("Critical") // Returns "Severe business impact requiring immediate action"
+getRiskImpactLabel("Low") // Returns "Minor business impact to be addressed in normal operations"
+getRiskImpactLabel("Unknown") // Returns "Impact level not defined"
+```

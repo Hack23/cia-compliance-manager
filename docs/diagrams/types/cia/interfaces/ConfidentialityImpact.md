@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
 
 ***
 
@@ -6,9 +6,23 @@
 
 # Interface: ConfidentialityImpact
 
-Defined in: [types/cia.ts:273](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L273)
+Defined in: [types/cia.ts:415](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L415)
 
 Impact associated with the confidentiality of the system
+
+Describes data classification and access control requirements
+for the selected confidentiality security level.
+
+## Example
+
+```typescript
+const impact: ConfidentialityImpact = {
+  level: 'High',
+  description: 'Data must be encrypted and access strictly controlled',
+  dataClassification: 'Confidential - Restricted Access',
+  accessControls: 'Multi-factor authentication, role-based access, encryption at rest and in transit'
+};
+```
 
 ## Extends
 
@@ -20,7 +34,9 @@ Impact associated with the confidentiality of the system
 
 > **accessControls**: `string`
 
-Defined in: [types/cia.ts:275](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L275)
+Defined in: [types/cia.ts:420](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L420)
+
+Access control mechanisms required (e.g., "MFA", "RBAC", "encryption")
 
 ***
 
@@ -28,7 +44,9 @@ Defined in: [types/cia.ts:275](https://github.com/Hack23/cia-compliance-manager/
 
 > **dataClassification**: `string`
 
-Defined in: [types/cia.ts:274](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L274)
+Defined in: [types/cia.ts:417](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L417)
+
+Data classification level (e.g., "Public", "Internal", "Confidential", "Restricted")
 
 ***
 
@@ -36,7 +54,9 @@ Defined in: [types/cia.ts:274](https://github.com/Hack23/cia-compliance-manager/
 
 > **description**: `string`
 
-Defined in: [types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L251)
+Defined in: [types/cia.ts:348](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L348)
+
+Human-readable description of the impact
 
 #### Inherited from
 
@@ -48,7 +68,9 @@ Defined in: [types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/
 
 > **level**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L250)
+Defined in: [types/cia.ts:345](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L345)
+
+Security level associated with this impact
 
 #### Inherited from
 

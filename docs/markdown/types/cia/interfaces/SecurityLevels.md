@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
 
 ***
 
@@ -6,9 +6,22 @@
 
 # Interface: SecurityLevels
 
-Defined in: [types/cia.ts:299](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L299)
+Defined in: [types/cia.ts:505](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L505)
 
 Selected security levels for each CIA pillar
+
+Represents the currently selected or recommended security levels
+for a specific system or application.
+
+## Example
+
+```typescript
+const selectedLevels: SecurityLevels = {
+  availability: 'High',
+  integrity: 'Very High',
+  confidentiality: 'Moderate'
+};
+```
 
 ## Properties
 
@@ -16,7 +29,9 @@ Selected security levels for each CIA pillar
 
 > **availability**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:300](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L300)
+Defined in: [types/cia.ts:507](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L507)
+
+Selected availability security level
 
 ***
 
@@ -24,7 +39,9 @@ Defined in: [types/cia.ts:300](https://github.com/Hack23/cia-compliance-manager/
 
 > **confidentiality**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:302](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L302)
+Defined in: [types/cia.ts:513](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L513)
+
+Selected confidentiality security level
 
 ***
 
@@ -32,4 +49,6 @@ Defined in: [types/cia.ts:302](https://github.com/Hack23/cia-compliance-manager/
 
 > **integrity**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:301](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L301)
+Defined in: [types/cia.ts:510](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L510)
+
+Selected integrity security level

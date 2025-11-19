@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
 
 ***
 
@@ -8,9 +8,13 @@
 
 > **getRiskLevelFromSecurityLevel**(`level`): `string`
 
-Defined in: [utils/securityLevelUtils.ts:126](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/utils/securityLevelUtils.ts#L126)
+Defined in: [utils/securityLevelUtils.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/utils/securityLevelUtils.ts#L193)
 
 Get risk level string from a security level
+
+Maps security levels to corresponding risk levels using an inverse relationship:
+higher security levels correlate with lower risk levels. Used for risk assessment
+and dashboard visualizations.
 
 ## Parameters
 
@@ -18,10 +22,24 @@ Get risk level string from a security level
 
 [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
-Security level
+Security level to assess
 
 ## Returns
 
 `string`
 
-Corresponding risk level string
+Corresponding risk level: Critical, High, Medium, Low, or Minimal
+
+## Example
+
+```typescript
+getRiskLevelFromSecurityLevel('None')        // 'Critical'
+getRiskLevelFromSecurityLevel('Low')         // 'High'
+getRiskLevelFromSecurityLevel('Moderate')    // 'Medium'
+getRiskLevelFromSecurityLevel('High')        // 'Low'
+getRiskLevelFromSecurityLevel('Very High')   // 'Minimal'
+
+// Use in risk assessment
+const riskLevel = getRiskLevelFromSecurityLevel(currentSecurityLevel);
+const riskFormatted = formatRiskLevel(`${riskLevel} Risk`);
+```

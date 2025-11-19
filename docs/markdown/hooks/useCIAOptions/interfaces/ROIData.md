@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
 
 ***
 
@@ -6,7 +6,26 @@
 
 # Interface: ROIData
 
-Defined in: [hooks/useCIAOptions.ts:5](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L5)
+Defined in: [hooks/useCIAOptions.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L30)
+
+ROI data structure containing investment analysis
+
+Provides return on investment metrics and recommendations for
+security level implementations, helping stakeholders understand
+the business value of security investments.
+
+## Example
+
+```typescript
+const roiData: ROIData = {
+  returnRate: "75%",
+  recommendation: "High investment recommended",
+  description: "Advanced security measures should be implemented.",
+  value: "$75,000",
+  potentialSavings: "$200,000 annually",
+  breakEvenPeriod: "18 months"
+};
+```
 
 ## Properties
 
@@ -14,7 +33,9 @@ Defined in: [hooks/useCIAOptions.ts:5](https://github.com/Hack23/cia-compliance-
 
 > `optional` **breakEvenPeriod**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L11)
+Defined in: [hooks/useCIAOptions.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L47)
+
+Optional time period to break even on investment
 
 ***
 
@@ -22,7 +43,9 @@ Defined in: [hooks/useCIAOptions.ts:11](https://github.com/Hack23/cia-compliance
 
 > **description**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:8](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L8)
+Defined in: [hooks/useCIAOptions.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L38)
+
+Detailed description of the investment scenario
 
 ***
 
@@ -30,7 +53,9 @@ Defined in: [hooks/useCIAOptions.ts:8](https://github.com/Hack23/cia-compliance-
 
 > `optional` **potentialSavings**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L10)
+Defined in: [hooks/useCIAOptions.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L44)
+
+Optional estimated cost savings
 
 ***
 
@@ -38,7 +63,9 @@ Defined in: [hooks/useCIAOptions.ts:10](https://github.com/Hack23/cia-compliance
 
 > **recommendation**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L7)
+Defined in: [hooks/useCIAOptions.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L35)
+
+Investment recommendation text
 
 ***
 
@@ -46,7 +73,9 @@ Defined in: [hooks/useCIAOptions.ts:7](https://github.com/Hack23/cia-compliance-
 
 > **returnRate**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L6)
+Defined in: [hooks/useCIAOptions.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L32)
+
+Expected return rate as percentage (e.g., "75%", "100%")
 
 ***
 
@@ -54,4 +83,6 @@ Defined in: [hooks/useCIAOptions.ts:6](https://github.com/Hack23/cia-compliance-
 
 > `optional` **value**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:9](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L9)
+Defined in: [hooks/useCIAOptions.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L41)
+
+Optional calculated ROI value in currency

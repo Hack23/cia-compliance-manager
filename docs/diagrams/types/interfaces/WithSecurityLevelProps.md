@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../README.md)
 
 ***
 
@@ -6,9 +6,30 @@
 
 # Interface: WithSecurityLevelProps
 
-Defined in: [types/widget-props.ts:6](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/widget-props.ts#L6)
+Defined in: [types/widget-props.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L26)
 
 Standard interface for components that use security levels
+
+This interface should be used by any component that needs to display
+or modify security levels for the CIA triad components. It provides
+a consistent pattern for props across the application.
+
+## Example
+
+```typescript
+interface MyWidgetProps extends WithSecurityLevelProps {
+  customProp: string;
+}
+
+const MyWidget: React.FC<MyWidgetProps> = ({
+  availabilityLevel,
+  integrityLevel,
+  confidentialityLevel,
+  onAvailabilityChange
+}) => {
+  // Component implementation
+};
+```
 
 ## Extended by
 
@@ -20,9 +41,17 @@ Standard interface for components that use security levels
 
 > **availabilityLevel**: [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:10](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/widget-props.ts#L10)
+Defined in: [types/widget-props.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L34)
 
 The selected availability level
+
+Controls system uptime and accessibility requirements.
+
+#### Example
+
+```ts
+'High'
+```
 
 ***
 
@@ -30,9 +59,17 @@ The selected availability level
 
 > **confidentialityLevel**: [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/widget-props.ts#L20)
+Defined in: [types/widget-props.ts:52](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L52)
 
 The selected confidentiality level
+
+Controls data privacy and access control requirements.
+
+#### Example
+
+```ts
+'Moderate'
+```
 
 ***
 
@@ -40,9 +77,17 @@ The selected confidentiality level
 
 > **integrityLevel**: [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/widget-props.ts#L15)
+Defined in: [types/widget-props.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L43)
 
 The selected integrity level
+
+Controls data accuracy and consistency requirements.
+
+#### Example
+
+```ts
+'Very High'
+```
 
 ***
 
@@ -50,9 +95,9 @@ The selected integrity level
 
 > `optional` **onAvailabilityChange**: (`level`) => `void`
 
-Defined in: [types/widget-props.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/widget-props.ts#L25)
+Defined in: [types/widget-props.ts:67](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L67)
 
-Optional callback for availability level changes
+Optional callback fired when availability level changes
 
 #### Parameters
 
@@ -60,9 +105,20 @@ Optional callback for availability level changes
 
 [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
+New security level selected by user
+
 #### Returns
 
 `void`
+
+#### Example
+
+```typescript
+onAvailabilityChange={(level) => {
+  console.log('New availability level:', level);
+  updateConfiguration('availability', level);
+}}
+```
 
 ***
 
@@ -70,9 +126,9 @@ Optional callback for availability level changes
 
 > `optional` **onConfidentialityChange**: (`level`) => `void`
 
-Defined in: [types/widget-props.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/widget-props.ts#L35)
+Defined in: [types/widget-props.ts:97](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L97)
 
-Optional callback for confidentiality level changes
+Optional callback fired when confidentiality level changes
 
 #### Parameters
 
@@ -80,9 +136,20 @@ Optional callback for confidentiality level changes
 
 [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
+New security level selected by user
+
 #### Returns
 
 `void`
+
+#### Example
+
+```typescript
+onConfidentialityChange={(level) => {
+  console.log('New confidentiality level:', level);
+  updateConfiguration('confidentiality', level);
+}}
+```
 
 ***
 
@@ -90,9 +157,9 @@ Optional callback for confidentiality level changes
 
 > `optional` **onIntegrityChange**: (`level`) => `void`
 
-Defined in: [types/widget-props.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/widget-props.ts#L30)
+Defined in: [types/widget-props.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/widget-props.ts#L82)
 
-Optional callback for integrity level changes
+Optional callback fired when integrity level changes
 
 #### Parameters
 
@@ -100,6 +167,17 @@ Optional callback for integrity level changes
 
 [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
+New security level selected by user
+
 #### Returns
 
 `void`
+
+#### Example
+
+```typescript
+onIntegrityChange={(level) => {
+  console.log('New integrity level:', level);
+  updateConfiguration('integrity', level);
+}}
+```

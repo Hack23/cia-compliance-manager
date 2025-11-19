@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../README.md)
 
 ***
 
@@ -81,12 +81,6 @@ Re-exports [BUSINESS_IMPACT_CATEGORY_LIST](riskConstants/variables/BUSINESS_IMPA
 ### BUSINESS\_IMPACT\_ICONS
 
 Re-exports [BUSINESS_IMPACT_ICONS](uiConstants/variables/BUSINESS_IMPACT_ICONS.md)
-
-***
-
-### BUSINESS\_IMPACTS
-
-Re-exports [BUSINESS_IMPACTS](appConstants/variables/BUSINESS_IMPACTS.md)
 
 ***
 
@@ -210,12 +204,6 @@ Re-exports [CURRENCY_OPTIONS](costConstants/variables/CURRENCY_OPTIONS.md)
 
 ***
 
-### DEFAULT\_CIA\_DETAILS
-
-Re-exports [DEFAULT_CIA_DETAILS](appConstants/variables/DEFAULT_CIA_DETAILS.md)
-
-***
-
 ### DEFAULT\_COST\_PARAMS
 
 Re-exports [DEFAULT_COST_PARAMS](costConstants/variables/DEFAULT_COST_PARAMS.md)
@@ -231,18 +219,6 @@ Re-exports [DEFAULT_SECURITY_LEVEL](appConstants/variables/DEFAULT_SECURITY_LEVE
 ### DEFAULT\_TRANSITION\_DURATION
 
 Re-exports [DEFAULT_TRANSITION_DURATION](appConstants/variables/DEFAULT_TRANSITION_DURATION.md)
-
-***
-
-### DETAILED\_VALUE\_POINTS
-
-Re-exports [DETAILED_VALUE_POINTS](appConstants/variables/DETAILED_VALUE_POINTS.md)
-
-***
-
-### DISPLAY\_FORMAT
-
-Re-exports [DISPLAY_FORMAT](appConstants/variables/DISPLAY_FORMAT.md)
 
 ***
 
@@ -285,12 +261,6 @@ Re-exports [getRiskLevelFromSecurityLevel](riskConstants/functions/getRiskLevelF
 ### GRID\_MAX\_COLUMNS
 
 Re-exports [GRID_MAX_COLUMNS](appConstants/variables/GRID_MAX_COLUMNS.md)
-
-***
-
-### IMPACT\_DESCRIPTIONS
-
-Re-exports [IMPACT_DESCRIPTIONS](appConstants/variables/IMPACT_DESCRIPTIONS.md)
 
 ***
 
@@ -462,12 +432,6 @@ Re-exports [SECURITY_RECOMMENDATIONS](appConstants/variables/SECURITY_RECOMMENDA
 
 ***
 
-### SECURITY\_SUMMARY\_TITLES
-
-Re-exports [SECURITY_SUMMARY_TITLES](appConstants/variables/SECURITY_SUMMARY_TITLES.md)
-
-***
-
 ### SECURITY\_TO\_RISK\_MAP
 
 Re-exports [SECURITY_TO_RISK_MAP](riskConstants/variables/SECURITY_TO_RISK_MAP.md)
@@ -492,12 +456,6 @@ Re-exports [STORAGE_KEYS](appConstants/variables/STORAGE_KEYS.md)
 
 ***
 
-### TECHNICAL\_DESCRIPTIONS
-
-Re-exports [TECHNICAL_DESCRIPTIONS](appConstants/variables/TECHNICAL_DESCRIPTIONS.md)
-
-***
-
 ### TEST\_DATA
 
 Re-exports [TEST_DATA](appConstants/variables/TEST_DATA.md)
@@ -513,12 +471,6 @@ Re-exports [TEST_MATCHERS](appConstants/variables/TEST_MATCHERS.md)
 ### THEMES
 
 Re-exports [THEMES](appConstants/variables/THEMES.md)
-
-***
-
-### UI\_ICONS
-
-Re-exports [UI_ICONS](appConstants/variables/UI_ICONS.md)
 
 ***
 

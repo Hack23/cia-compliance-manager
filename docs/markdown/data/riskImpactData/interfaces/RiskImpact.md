@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Interface: RiskImpact
 
-Defined in: [data/riskImpactData.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L20)
+Defined in: [data/riskImpactData.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L20)
 
-Risk impact structure
+Risk impact structure with comprehensive business impact details
 
 ## Properties
 
@@ -16,7 +16,9 @@ Risk impact structure
 
 > `optional` **annualLoss**: `string`
 
-Defined in: [data/riskImpactData.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L25)
+Defined in: [data/riskImpactData.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L28)
+
+Annual financial loss estimate (optional)
 
 ***
 
@@ -24,7 +26,9 @@ Defined in: [data/riskImpactData.ts:25](https://github.com/Hack23/cia-compliance
 
 > `optional` **competitiveImpact**: `string`
 
-Defined in: [data/riskImpactData.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L28)
+Defined in: [data/riskImpactData.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L34)
+
+Competitive business impact (optional)
 
 ***
 
@@ -32,7 +36,9 @@ Defined in: [data/riskImpactData.ts:28](https://github.com/Hack23/cia-compliance
 
 > **description**: `string`
 
-Defined in: [data/riskImpactData.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L21)
+Defined in: [data/riskImpactData.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L22)
+
+Human-readable description of the risk impact
 
 ***
 
@@ -40,7 +46,9 @@ Defined in: [data/riskImpactData.ts:21](https://github.com/Hack23/cia-compliance
 
 > `optional` **financialImpact**: `string`
 
-Defined in: [data/riskImpactData.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L30)
+Defined in: [data/riskImpactData.ts:36](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L36)
+
+Financial impact details (legacy, optional)
 
 ***
 
@@ -48,7 +56,9 @@ Defined in: [data/riskImpactData.ts:30](https://github.com/Hack23/cia-compliance
 
 > `optional` **frameworks**: `string`[]
 
-Defined in: [data/riskImpactData.ts:27](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L27)
+Defined in: [data/riskImpactData.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L32)
+
+Compliance frameworks affected (optional)
 
 ***
 
@@ -56,15 +66,19 @@ Defined in: [data/riskImpactData.ts:27](https://github.com/Hack23/cia-compliance
 
 > **impact**: `string`
 
-Defined in: [data/riskImpactData.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L22)
+Defined in: [data/riskImpactData.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L24)
+
+Overall business impact summary
 
 ***
 
 ### level
 
-> **level**: `string`
+> **level**: [`RiskImpactLevel`](../type-aliases/RiskImpactLevel.md)
 
-Defined in: [data/riskImpactData.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L23)
+Defined in: [data/riskImpactData.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L26)
+
+Impact level classification
 
 ***
 
@@ -72,7 +86,9 @@ Defined in: [data/riskImpactData.ts:23](https://github.com/Hack23/cia-compliance
 
 > `optional` **operationalImpact**: `string`
 
-Defined in: [data/riskImpactData.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L32)
+Defined in: [data/riskImpactData.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L38)
+
+Operational impact details (legacy, optional)
 
 ***
 
@@ -80,7 +96,9 @@ Defined in: [data/riskImpactData.ts:32](https://github.com/Hack23/cia-compliance
 
 > `optional` **recoveryTime**: `string`
 
-Defined in: [data/riskImpactData.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L26)
+Defined in: [data/riskImpactData.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L30)
+
+Time required to recover from incident (optional)
 
 ***
 
@@ -88,7 +106,9 @@ Defined in: [data/riskImpactData.ts:26](https://github.com/Hack23/cia-compliance
 
 > `optional` **regulatoryImpact**: `string`
 
-Defined in: [data/riskImpactData.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L34)
+Defined in: [data/riskImpactData.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L42)
+
+Regulatory compliance impact (optional)
 
 ***
 
@@ -96,4 +116,6 @@ Defined in: [data/riskImpactData.ts:34](https://github.com/Hack23/cia-compliance
 
 > `optional` **reputationalImpact**: `string`
 
-Defined in: [data/riskImpactData.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L33)
+Defined in: [data/riskImpactData.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L40)
+
+Reputational impact details (optional)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
 
 ***
 
@@ -8,9 +8,13 @@
 
 > **getSecurityLevelFromValue**(`value`): [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [utils/securityLevelUtils.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/utils/securityLevelUtils.ts#L109)
+Defined in: [utils/securityLevelUtils.ts:159](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/utils/securityLevelUtils.ts#L159)
 
 Maps numeric values to security levels
+
+Converts numeric security scores back to SecurityLevel enum values.
+Useful for converting calculated scores or slider values to security levels.
+Values outside 0-4 range default to 'None'.
 
 ## Parameters
 
@@ -18,10 +22,26 @@ Maps numeric values to security levels
 
 `number`
 
-Numeric value (0-4)
+Numeric value (0-4), where higher numbers indicate stronger security
 
 ## Returns
 
 [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
 The corresponding security level
+
+## Example
+
+```typescript
+getSecurityLevelFromValue(0)    // 'None'
+getSecurityLevelFromValue(1)    // 'Low'
+getSecurityLevelFromValue(2)    // 'Moderate'
+getSecurityLevelFromValue(3)    // 'High'
+getSecurityLevelFromValue(4)    // 'Very High'
+getSecurityLevelFromValue(5)    // 'None' (out of range)
+getSecurityLevelFromValue(-1)   // 'None' (out of range)
+
+// Use with calculated average
+const avgValue = Math.round((val1 + val2 + val3) / 3);
+const overallLevel = getSecurityLevelFromValue(avgValue);
+```

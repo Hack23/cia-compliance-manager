@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
 
 ***
 
@@ -8,9 +8,13 @@
 
 > `const` **createBusinessImpact**: (`component`, `level`) => [`BusinessImpactDetails`](../../../types/interfaces/BusinessImpactDetails.md) = `createDefaultBusinessImpact`
 
-Defined in: [utils/riskUtils.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/utils/riskUtils.ts#L41)
+Defined in: [utils/riskUtils.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/utils/riskUtils.ts#L41)
 
 Create a default business impact object with minimum required fields
+
+Generates a basic business impact assessment structure for a given
+CIA component and security level, suitable for initial assessments
+or as a fallback when detailed data is unavailable.
 
 ## Parameters
 
@@ -18,16 +22,24 @@ Create a default business impact object with minimum required fields
 
 `string`
 
-CIA component type
+CIA component type (availability, integrity, confidentiality, or custom)
 
 ### level
 
 [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
-Security level
+Security level for the component
 
 ## Returns
 
 [`BusinessImpactDetails`](../../../types/interfaces/BusinessImpactDetails.md)
 
-Business impact details
+Business impact details with financial, operational, and reputational aspects
+
+## Example
+
+```typescript
+const impact = createDefaultBusinessImpact("availability", "Moderate");
+console.log(impact.summary); // "availability impact analysis for Moderate level"
+console.log(impact.financial?.riskLevel); // "Medium"
+```

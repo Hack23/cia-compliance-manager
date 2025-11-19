@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
 
 ***
 
@@ -8,9 +8,12 @@
 
 > **formatNumberWithDecimals**(`value`, `decimalPlaces`): `string`
 
-Defined in: [utils/formatUtils.ts:161](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/utils/formatUtils.ts#L161)
+Defined in: [utils/formatUtils.ts:246](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/utils/formatUtils.ts#L246)
 
 Format a number with specified decimal places
+
+Similar to formatNumber but always returns a string with exact
+decimal places, without locale-based thousands separators.
 
 ## Parameters
 
@@ -24,10 +27,18 @@ Number to format
 
 `number`
 
-Number of decimal places
+Exact number of decimal places to display
 
 ## Returns
 
 `string`
 
-Formatted number string
+Formatted number string with fixed decimals
+
+## Example
+
+```typescript
+formatNumberWithDecimals(1234.5678, 2)   // "1234.57"
+formatNumberWithDecimals(99.5, 3)        // "99.500"
+formatNumberWithDecimals(1000, 0)        // "1000"
+```

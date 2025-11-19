@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
 
 ***
 
@@ -8,9 +8,13 @@
 
 > **calculateOverallSecurityLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [utils/securityLevelUtils.ts:146](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/utils/securityLevelUtils.ts#L146)
+Defined in: [utils/securityLevelUtils.ts:235](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/utils/securityLevelUtils.ts#L235)
 
 Calculates the overall security level based on individual CIA components
+
+Computes a composite security level by averaging the numeric values of
+availability, integrity, and confidentiality levels, then rounding to
+the nearest security level. Provides a single metric for overall security posture.
 
 ## Parameters
 
@@ -18,22 +22,41 @@ Calculates the overall security level based on individual CIA components
 
 [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
-Availability level
+Availability security level
 
 ### integrityLevel
 
 [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
-Integrity level
+Integrity security level
 
 ### confidentialityLevel
 
 [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
-Confidentiality level
+Confidentiality security level
 
 ## Returns
 
 [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
-The overall security level
+The overall security level (average of the three components, rounded)
+
+## Example
+
+```typescript
+// All equal - returns same level
+calculateOverallSecurityLevel('High', 'High', 'High')  // 'High'
+
+// Mixed levels - returns average
+calculateOverallSecurityLevel('Low', 'Moderate', 'High')  // 'Moderate'
+calculateOverallSecurityLevel('None', 'Low', 'Low')       // 'Low'
+
+// Use for system-wide security assessment
+const overallLevel = calculateOverallSecurityLevel(
+  availabilityLevel,
+  integrityLevel,
+  confidentialityLevel
+);
+console.log(`System security level: ${overallLevel}`);
+```

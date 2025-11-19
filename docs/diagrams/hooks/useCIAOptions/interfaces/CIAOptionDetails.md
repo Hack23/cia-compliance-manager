@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
 
 ***
 
@@ -6,7 +6,31 @@
 
 # Interface: CIAOptionDetails
 
-Defined in: [hooks/useCIAOptions.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L14)
+Defined in: [hooks/useCIAOptions.ts:74](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L74)
+
+CIA option details for a specific security level
+
+Comprehensive configuration data for a security level including
+costs, descriptions, and technical details. Used to display
+security level options to users with full context.
+
+## Example
+
+```typescript
+const optionDetails: CIAOptionDetails = {
+  value: 3,
+  description: "High availability requirements",
+  technical: "Multi-AZ deployment with auto-scaling",
+  businessImpact: "Minimal downtime, improved customer satisfaction",
+  capex: 75000,
+  opex: 30000,
+  recommendations: ["Implement monitoring", "Regular DR testing"],
+  impact: "99.9% uptime guarantee",
+  fte: 2,
+  bg: "bg-green-100",
+  text: "text-green-800"
+};
+```
 
 ## Properties
 
@@ -14,7 +38,9 @@ Defined in: [hooks/useCIAOptions.ts:14](https://github.com/Hack23/cia-compliance
 
 > `optional` **bg**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L24)
+Defined in: [hooks/useCIAOptions.ts:103](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L103)
+
+Optional background color CSS class for UI display
 
 ***
 
@@ -22,7 +48,9 @@ Defined in: [hooks/useCIAOptions.ts:24](https://github.com/Hack23/cia-compliance
 
 > `optional` **businessImpact**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L18)
+Defined in: [hooks/useCIAOptions.ts:85](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L85)
+
+Optional business impact description
 
 ***
 
@@ -30,7 +58,9 @@ Defined in: [hooks/useCIAOptions.ts:18](https://github.com/Hack23/cia-compliance
 
 > `optional` **capex**: `number`
 
-Defined in: [hooks/useCIAOptions.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L19)
+Defined in: [hooks/useCIAOptions.ts:88](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L88)
+
+Optional capital expenditure (one-time costs)
 
 ***
 
@@ -38,7 +68,9 @@ Defined in: [hooks/useCIAOptions.ts:19](https://github.com/Hack23/cia-compliance
 
 > **description**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L16)
+Defined in: [hooks/useCIAOptions.ts:79](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L79)
+
+Human-readable description of the security level
 
 ***
 
@@ -46,7 +78,9 @@ Defined in: [hooks/useCIAOptions.ts:16](https://github.com/Hack23/cia-compliance
 
 > `optional` **fte**: `number`
 
-Defined in: [hooks/useCIAOptions.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L23)
+Defined in: [hooks/useCIAOptions.ts:100](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L100)
+
+Optional full-time equivalent resources needed
 
 ***
 
@@ -54,7 +88,9 @@ Defined in: [hooks/useCIAOptions.ts:23](https://github.com/Hack23/cia-compliance
 
 > `optional` **impact**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L22)
+Defined in: [hooks/useCIAOptions.ts:97](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L97)
+
+Optional impact statement
 
 ***
 
@@ -62,7 +98,9 @@ Defined in: [hooks/useCIAOptions.ts:22](https://github.com/Hack23/cia-compliance
 
 > `optional` **opex**: `number`
 
-Defined in: [hooks/useCIAOptions.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L20)
+Defined in: [hooks/useCIAOptions.ts:91](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L91)
+
+Optional operational expenditure (recurring annual costs)
 
 ***
 
@@ -70,7 +108,9 @@ Defined in: [hooks/useCIAOptions.ts:20](https://github.com/Hack23/cia-compliance
 
 > `optional` **recommendations**: `string`[]
 
-Defined in: [hooks/useCIAOptions.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L21)
+Defined in: [hooks/useCIAOptions.ts:94](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L94)
+
+Optional array of implementation recommendations
 
 ***
 
@@ -78,7 +118,9 @@ Defined in: [hooks/useCIAOptions.ts:21](https://github.com/Hack23/cia-compliance
 
 > `optional` **technical**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L17)
+Defined in: [hooks/useCIAOptions.ts:82](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L82)
+
+Optional technical implementation details
 
 ***
 
@@ -86,7 +128,9 @@ Defined in: [hooks/useCIAOptions.ts:17](https://github.com/Hack23/cia-compliance
 
 > `optional` **text**: `string`
 
-Defined in: [hooks/useCIAOptions.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L25)
+Defined in: [hooks/useCIAOptions.ts:106](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L106)
+
+Optional text color CSS class for UI display
 
 ***
 
@@ -94,4 +138,6 @@ Defined in: [hooks/useCIAOptions.ts:25](https://github.com/Hack23/cia-compliance
 
 > **value**: `number`
 
-Defined in: [hooks/useCIAOptions.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L15)
+Defined in: [hooks/useCIAOptions.ts:76](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L76)
+
+Numeric value (0-4) representing security level strength

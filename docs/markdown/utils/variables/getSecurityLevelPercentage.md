@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../README.md)
 
 ***
 
@@ -8,9 +8,13 @@
 
 > **getSecurityLevelPercentage**: (`level`) => `string`
 
-Defined in: [utils/index.ts:110](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/utils/index.ts#L110)
+Defined in: [utils/index.ts:110](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/utils/index.ts#L110)
 
 Provides a numerical representation of security levels for UI presentation
+
+Converts security levels to percentage strings for use in progress bars,
+gauges, and other visual indicators. Maps 0-4 scale to 0-100% range
+in 25% increments.
 
 ## Parameters
 
@@ -18,10 +22,23 @@ Provides a numerical representation of security levels for UI presentation
 
 `string`
 
-The security level string
+The security level (string or SecurityLevel enum)
 
 ## Returns
 
 `string`
 
-A string representation formatted as a percentage
+A percentage string (0%, 25%, 50%, 75%, or 100%)
+
+## Example
+
+```typescript
+getSecurityLevelPercentage('None')        // "0%"
+getSecurityLevelPercentage('Low')         // "25%"
+getSecurityLevelPercentage('Moderate')    // "50%"
+getSecurityLevelPercentage('High')        // "75%"
+getSecurityLevelPercentage('Very High')   // "100%"
+
+// Use in UI components
+<ProgressBar value={getSecurityLevelPercentage(level)} />
+```

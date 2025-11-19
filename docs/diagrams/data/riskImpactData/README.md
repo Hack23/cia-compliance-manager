@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../README.md)
 
 ***
 
@@ -30,3 +30,6 @@
 - [getBusinessImpact](functions/getBusinessImpact.md)
 - [getRiskImpactLabel](functions/getRiskImpactLabel.md)
 - [getRiskLevelFromSecurityLevel](functions/getRiskLevelFromSecurityLevel.md)
+- [isRiskImpact](functions/isRiskImpact.md)
+- [isRiskImpactLevel](functions/isRiskImpactLevel.md)
+- [isValidCIAComponent](functions/isValidCIAComponent.md)

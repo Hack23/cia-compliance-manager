@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
 
 ***
 
@@ -8,26 +8,42 @@
 
 > **getBusinessImpact**(`component`, `level`): [`BusinessImpactDetail`](../../../types/interfaces/BusinessImpactDetail.md)
 
-Defined in: [data/riskImpactData.ts:317](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L317)
+Defined in: [data/riskImpactData.ts:394](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L394)
 
 Get business impact details for a specific component and security level
+
+This function retrieves comprehensive business impact information based on
+the CIA component (availability, integrity, or confidentiality) and the
+selected security level.
 
 ## Parameters
 
 ### component
 
-CIA component
+[`CIAComponent`](../../../types/cia/type-aliases/CIAComponent.md)
 
-`"confidentiality"` | `"integrity"` | `"availability"`
+CIA component to get impact for
 
 ### level
 
 [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
-Security level
+Security level for the component
 
 ## Returns
 
 [`BusinessImpactDetail`](../../../types/interfaces/BusinessImpactDetail.md)
 
-Business impact details
+Business impact details including risk level, revenue loss, and recovery time
+
+## Throws
+
+If component or level is invalid
+
+## Example
+
+```typescript
+const impact = getBusinessImpact("availability", "High");
+console.log(impact.riskLevel); // "Low"
+console.log(impact.annualRevenueLoss); // "Potential revenue loss <2% annually"
+```

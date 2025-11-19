@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
 
 ***
 
@@ -12,10 +12,4 @@
 
 ## Variables
 
-- [WidgetContainer](variables/WidgetContainer.md)
-
-## References
-
-### default
-
-Renames and re-exports [WidgetContainer](variables/WidgetContainer.md)
+- [default](variables/default.md)

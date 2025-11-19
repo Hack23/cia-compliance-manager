@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
 
 ***
 
@@ -8,6 +8,17 @@
 
 > **CIAComponent** = `"confidentiality"` \| `"integrity"` \| `"availability"`
 
-Defined in: [types/cia.ts:203](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L203)
+Defined in: [types/cia.ts:226](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L226)
 
-CIA component type
+CIA triad components representing different security aspects
+
+- **confidentiality**: Data privacy and access control (who can see the data)
+- **integrity**: Data accuracy and consistency (ensuring data is not tampered with)
+- **availability**: System uptime and accessibility (ensuring the system is accessible when needed)
+
+## Example
+
+```typescript
+const component: CIAComponent = 'availability';
+// Use to configure security level for availability
+```

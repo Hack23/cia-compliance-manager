@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../README.md)
 
 ***
 
@@ -6,12 +6,10 @@
 
 # hooks/useCIAContentService
 
+## Interfaces
+
+- [UseCIAContentServiceReturn](interfaces/UseCIAContentServiceReturn.md)
+
 ## Functions
 
 - [useCIAContentService](functions/useCIAContentService.md)
-
-## References
-
-### default
-
-Renames and re-exports [useCIAContentService](functions/useCIAContentService.md)

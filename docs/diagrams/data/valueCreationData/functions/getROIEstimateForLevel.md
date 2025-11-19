@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getROIEstimateForLevel**(`level`): [`ROIEstimate`](../../../types/interfaces/ROIEstimate.md)
 
-Defined in: [data/valueCreationData.ts:119](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/valueCreationData.ts#L119)
+Defined in: [data/valueCreationData.ts:119](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/valueCreationData.ts#L119)
 
 Get ROI estimate for a specific security level
 

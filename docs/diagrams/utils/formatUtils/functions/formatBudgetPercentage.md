@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
 
 ***
 
@@ -8,9 +8,13 @@
 
 > **formatBudgetPercentage**(`value`, `isCapex`): `string`
 
-Defined in: [utils/formatUtils.ts:172](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/utils/formatUtils.ts#L172)
+Defined in: [utils/formatUtils.ts:273](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/utils/formatUtils.ts#L273)
 
-Format a cost value for budget display (adds "% of IT budget" text)
+Format a cost value for budget display
+
+Adds contextual text explaining whether the cost represents capital
+expenditure (one-time) or operational expenditure (recurring annual).
+Useful in budget presentations and financial reports.
 
 ## Parameters
 
@@ -18,7 +22,7 @@ Format a cost value for budget display (adds "% of IT budget" text)
 
 `number`
 
-Cost percentage value
+Cost percentage value (0-1 range, where 0.05 = 5% of IT budget)
 
 ### isCapex
 
@@ -30,4 +34,17 @@ Whether this is capital expenditure (vs operational)
 
 `string`
 
-Formatted budget string
+Formatted budget string with contextual description
+
+## Example
+
+```typescript
+formatBudgetPercentage(0.05, true)   
+// "5% of IT budget as one-time capital expenditure"
+
+formatBudgetPercentage(0.03, false)  
+// "3% of IT budget as annual operational expenses"
+
+formatBudgetPercentage(0.1, true)    
+// "10% of IT budget as one-time capital expenditure"
+```

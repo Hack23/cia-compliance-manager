@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
 
 ***
 
@@ -6,9 +6,23 @@
 
 # Interface: AvailabilityImpact
 
-Defined in: [types/cia.ts:257](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L257)
+Defined in: [types/cia.ts:367](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L367)
 
 Impact associated with the availability of the system
+
+Describes the expected uptime and recovery characteristics
+for the selected availability security level.
+
+## Example
+
+```typescript
+const impact: AvailabilityImpact = {
+  level: 'High',
+  description: 'System must be available 99.9% of the time',
+  uptime: '99.9%',
+  recoveryTime: '< 1 hour'
+};
+```
 
 ## Extends
 
@@ -20,7 +34,9 @@ Impact associated with the availability of the system
 
 > **description**: `string`
 
-Defined in: [types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L251)
+Defined in: [types/cia.ts:348](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L348)
+
+Human-readable description of the impact
 
 #### Inherited from
 
@@ -32,7 +48,9 @@ Defined in: [types/cia.ts:251](https://github.com/Hack23/cia-compliance-manager/
 
 > **level**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L250)
+Defined in: [types/cia.ts:345](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L345)
+
+Security level associated with this impact
 
 #### Inherited from
 
@@ -44,7 +62,9 @@ Defined in: [types/cia.ts:250](https://github.com/Hack23/cia-compliance-manager/
 
 > **recoveryTime**: `string`
 
-Defined in: [types/cia.ts:259](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L259)
+Defined in: [types/cia.ts:372](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L372)
+
+Maximum acceptable recovery time (e.g., "< 1 hour", "< 15 minutes")
 
 ***
 
@@ -52,4 +72,6 @@ Defined in: [types/cia.ts:259](https://github.com/Hack23/cia-compliance-manager/
 
 > **uptime**: `string`
 
-Defined in: [types/cia.ts:258](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L258)
+Defined in: [types/cia.ts:369](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L369)
+
+Expected uptime percentage (e.g., "99.9%", "99.99%")

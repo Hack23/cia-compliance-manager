@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getSecurityLevelDescription**(`level`): `string`
 
-Defined in: [utils/securityLevelUtils.ts:364](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/utils/securityLevelUtils.ts#L364)
+Defined in: [utils/securityLevelUtils.ts:553](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/utils/securityLevelUtils.ts#L553)
 
 Get security level description
 

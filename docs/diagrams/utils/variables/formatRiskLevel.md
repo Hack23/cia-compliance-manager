@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../README.md)
 
 ***
 
@@ -8,9 +8,12 @@
 
 > **formatRiskLevel**: (`riskLevel`) => `string`
 
-Defined in: [utils/index.ts:71](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/utils/index.ts#L71)
+Defined in: [utils/index.ts:71](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/utils/index.ts#L71)
 
-Formats a risk level by adding an appropriate icon
+Formats a risk level by adding an appropriate emoji icon
+
+Enhances risk level text with visual indicators for quick comprehension
+in dashboards and reports. Handles case-insensitive matching.
 
 ## Parameters
 
@@ -18,10 +21,25 @@ Formats a risk level by adding an appropriate icon
 
 `string`
 
-The risk level text to format
+The risk level text to format (case-insensitive)
 
 ## Returns
 
 `string`
 
-Risk level with icon prefix
+Risk level with emoji icon prefix
+
+## Example
+
+```typescript
+formatRiskLevel('Critical Risk')  // "⚠️ Critical Risk"
+formatRiskLevel('High Risk')      // "🔴 High Risk"
+formatRiskLevel('Medium Risk')    // "🟠 Medium Risk"
+formatRiskLevel('Low Risk')       // "🟡 Low Risk"
+formatRiskLevel('Minimal Risk')   // "🟢 Minimal Risk"
+formatRiskLevel('No Risk')        // "✅ No Risk"
+formatRiskLevel('Unknown')        // "❓ Unknown"
+
+// Case-insensitive
+formatRiskLevel('high risk')      // "🔴 high risk"
+```

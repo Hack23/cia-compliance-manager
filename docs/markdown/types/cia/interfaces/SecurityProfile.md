@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
 
 ***
 
@@ -6,9 +6,23 @@
 
 # Interface: SecurityProfile
 
-Defined in: [types/cia.ts:239](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L239)
+Defined in: [types/cia.ts:324](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L324)
 
 Security profile containing all security levels
+
+Represents a complete security configuration for a system,
+including individual CIA component levels and an overall security level.
+
+## Example
+
+```typescript
+const profile: SecurityProfile = {
+  availabilityLevel: 'High',
+  integrityLevel: 'Very High',
+  confidentialityLevel: 'High',
+  securityLevel: 'Very High' // Calculated from highest component level
+};
+```
 
 ## Properties
 
@@ -16,7 +30,9 @@ Security profile containing all security levels
 
 > **availabilityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:240](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L240)
+Defined in: [types/cia.ts:326](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L326)
+
+Security level for system availability
 
 ***
 
@@ -24,7 +40,9 @@ Defined in: [types/cia.ts:240](https://github.com/Hack23/cia-compliance-manager/
 
 > **confidentialityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:242](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L242)
+Defined in: [types/cia.ts:332](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L332)
+
+Security level for data confidentiality
 
 ***
 
@@ -32,7 +50,9 @@ Defined in: [types/cia.ts:242](https://github.com/Hack23/cia-compliance-manager/
 
 > **integrityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:241](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L241)
+Defined in: [types/cia.ts:329](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L329)
+
+Security level for data integrity
 
 ***
 
@@ -40,4 +60,6 @@ Defined in: [types/cia.ts:241](https://github.com/Hack23/cia-compliance-manager/
 
 > **securityLevel**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:243](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/types/cia.ts#L243)
+Defined in: [types/cia.ts:335](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/types/cia.ts#L335)
+
+Overall security level (typically the highest of the three components)

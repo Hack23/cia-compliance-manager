@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.0**](../../../README.md)
 
 ***
 
@@ -6,108 +6,114 @@
 
 # Function: useCIAOptions()
 
-> **useCIAOptions**(): `object`
+> **useCIAOptions**(): [`UseCIAOptionsReturn`](../interfaces/UseCIAOptionsReturn.md)
 
-Defined in: [hooks/useCIAOptions.ts:171](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/hooks/useCIAOptions.ts#L171)
+Defined in: [hooks/useCIAOptions.ts:417](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/hooks/useCIAOptions.ts#L417)
+
+Custom hook for accessing CIA security level options and ROI estimates
+
+Provides comprehensive access to security level configurations including
+availability, integrity, and confidentiality options with associated costs,
+descriptions, and ROI estimates. This hook is essential for building
+security configuration interfaces and cost calculators.
+
+## Features
+- Pre-configured security level options for all CIA components
+- Cost estimates (CAPEX and OPEX) for each security level
+- ROI estimates and recommendations
+- Utility functions for calculating combined security metrics
+- Type-safe access to all configuration data
+
+## Usage Guidelines
+- Use the options objects to populate security level selectors
+- Reference cost data for budget planning and financial analysis
+- Use ROI functions to calculate investment returns
+- Combine with other hooks for complete security assessments
 
 ## Returns
 
-`object`
+[`UseCIAOptionsReturn`](../interfaces/UseCIAOptionsReturn.md)
 
-### availabilityOptions
+Object containing CIA options, ROI estimates, and utility functions
 
-> **availabilityOptions**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](../interfaces/CIAOptionDetails.md)\>
+## Examples
 
-### confidentialityOptions
+```tsx
+// Basic usage - accessing security level options
+function SecurityLevelSelector() {
+  const { availabilityOptions } = useCIAOptions();
+  const [selected, setSelected] = useState<SecurityLevel>('Moderate');
 
-> **confidentialityOptions**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](../interfaces/CIAOptionDetails.md)\>
+  return (
+    <select value={selected} onChange={(e) => setSelected(e.target.value as SecurityLevel)}>
+      {Object.entries(availabilityOptions).map(([level, details]) => (
+        <option key={level} value={level}>
+          {level} - {details.description} (CAPEX: ${details.capex}, OPEX: ${details.opex})
+        </option>
+      ))}
+    </select>
+  );
+}
+```
 
-### getAvailabilityOptions()
+```tsx
+// Advanced usage - calculating ROI
+function ROICalculator() {
+  const {
+    getCombinedROIKey,
+    getROIDataForCombinedKey
+  } = useCIAOptions();
 
-> **getAvailabilityOptions**: () => `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](../interfaces/CIAOptionDetails.md)\>
+  const [levels, setLevels] = useState({
+    confidentiality: 'High' as SecurityLevel,
+    integrity: 'Very High' as SecurityLevel,
+    availability: 'Moderate' as SecurityLevel
+  });
 
-#### Returns
+  const roiKey = getCombinedROIKey(
+    levels.confidentiality,
+    levels.integrity,
+    levels.availability
+  );
+  const roiData = getROIDataForCombinedKey(roiKey);
 
-`Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](../interfaces/CIAOptionDetails.md)\>
+  return (
+    <div>
+      <h3>ROI Analysis</h3>
+      <p>Return Rate: {roiData.returnRate}</p>
+      <p>Recommendation: {roiData.recommendation}</p>
+      <p>{roiData.description}</p>
+    </div>
+  );
+}
+```
 
-### getCombinedROIKey()
+```tsx
+// Cost comparison across security levels
+function CostComparison() {
+  const { availabilityOptions, integrityOptions, confidentialityOptions } = useCIAOptions();
 
-> **getCombinedROIKey**: (`confidentiality`, `integrity`, `availability`) => [`ROIType`](../type-aliases/ROIType.md)
+  const calculateTotalCost = (level: SecurityLevel) => {
+    const availCost = (availabilityOptions[level]?.capex || 0) + (availabilityOptions[level]?.opex || 0);
+    const integrityCost = (integrityOptions[level]?.capex || 0) + (integrityOptions[level]?.opex || 0);
+    const confCost = (confidentialityOptions[level]?.capex || 0) + (confidentialityOptions[level]?.opex || 0);
+    return availCost + integrityCost + confCost;
+  };
 
-#### Parameters
-
-##### confidentiality
-
-[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
-
-##### integrity
-
-[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
-
-##### availability
-
-[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
-
-#### Returns
-
-[`ROIType`](../type-aliases/ROIType.md)
-
-### getConfidentialityOptions()
-
-> **getConfidentialityOptions**: () => `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](../interfaces/CIAOptionDetails.md)\>
-
-#### Returns
-
-`Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](../interfaces/CIAOptionDetails.md)\>
-
-### getIntegrityOptions()
-
-> **getIntegrityOptions**: () => `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](../interfaces/CIAOptionDetails.md)\>
-
-#### Returns
-
-`Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](../interfaces/CIAOptionDetails.md)\>
-
-### getROIDataForCombinedKey()
-
-> **getROIDataForCombinedKey**: (`key`) => [`ROIData`](../interfaces/ROIData.md)
-
-#### Parameters
-
-##### key
-
-[`ROIType`](../type-aliases/ROIType.md)
-
-#### Returns
-
-[`ROIData`](../interfaces/ROIData.md)
-
-### getROIEstimateForSecurityLevel()
-
-> **getROIEstimateForSecurityLevel**: (`level`) => [`ROIType`](../type-aliases/ROIType.md)
-
-#### Parameters
-
-##### level
-
-[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
-
-#### Returns
-
-[`ROIType`](../type-aliases/ROIType.md)
-
-### getROIEstimates()
-
-> **getROIEstimates**: () => `Record`\<[`ROIType`](../type-aliases/ROIType.md), [`ROIData`](../interfaces/ROIData.md)\>
-
-#### Returns
-
-`Record`\<[`ROIType`](../type-aliases/ROIType.md), [`ROIData`](../interfaces/ROIData.md)\>
-
-### integrityOptions
-
-> **integrityOptions**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](../interfaces/CIAOptionDetails.md)\>
-
-### ROI\_ESTIMATES
-
-> **ROI\_ESTIMATES**: `Record`\<[`ROIType`](../type-aliases/ROIType.md), [`ROIData`](../interfaces/ROIData.md)\>
+  return (
+    <table>
+      <thead>
+        <tr><th>Level</th><th>Total Cost</th></tr>
+      </thead>
+      <tbody>
+        {(['None', 'Low', 'Moderate', 'High', 'Very High'] as SecurityLevel[]).map(level => (
+          <tr key={level}>
+            <td>{level}</td>
+            <td>${calculateTotalCost(level).toLocaleString()}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+```

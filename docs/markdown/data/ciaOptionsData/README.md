@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../README.md)
 
 ***
 
@@ -28,9 +28,3 @@
 ### CIADetails
 
 Re-exports [CIADetails](../../types/interfaces/CIADetails.md)
-
-***
-
-### default
-
-Renames and re-exports [defaultCIADataProvider](variables/defaultCIADataProvider.md)

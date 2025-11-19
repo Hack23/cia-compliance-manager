@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.8.40**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.0**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getRiskLevelFromSecurityLevel**(`level`): `string`
 
-Defined in: [data/riskImpactData.ts:51](https://github.com/Hack23/cia-compliance-manager/blob/2b107bc5ef373a8a303974daa2e29737a341c871/src/data/riskImpactData.ts#L51)
+Defined in: [data/riskImpactData.ts:116](https://github.com/Hack23/cia-compliance-manager/blob/bc57971ed3748ecb634c027ecf03cc2853174aaa/src/data/riskImpactData.ts#L116)
 
 Get risk level from security level
 
@@ -18,6 +18,17 @@ Get risk level from security level
 
 [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md)
 
+Security level to convert
+
 ## Returns
 
 `string`
+
+Risk level string corresponding to the security level
+
+## Example
+
+```typescript
+getRiskLevelFromSecurityLevel("None") // Returns "Critical"
+getRiskLevelFromSecurityLevel("Very High") // Returns "Minimal"
+```
