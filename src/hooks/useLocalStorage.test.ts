@@ -269,7 +269,6 @@ describe('useLocalStorage', () => {
         const event = new StorageEvent('storage', {
           key: 'test-key',
           newValue: JSON.stringify('from-another-tab'),
-          oldValue: JSON.stringify('initial'),
         });
         window.dispatchEvent(event);
       });

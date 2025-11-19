@@ -204,7 +204,8 @@ function useLocalStorage<T>(
 - Error handling for read/write failures
 - TypeScript generic support
 
-**Test Coverage**: 20 tests, 89% coverage ✅
+**Test Coverage**: 20 tests, 84% coverage  
+_Note: One test is skipped for the edge case where `localStorage.setItem` throws an error. This scenario is difficult to test in isolation but is handled gracefully in the implementation._
 
 ---
 

@@ -32,9 +32,10 @@ export interface ServiceDataState<T> {
  * reducing code duplication and ensuring consistent error handling. Uses
  * React hooks best practices with proper dependency management.
  * 
- * Note: This hook currently supports synchronous fetch functions. For
- * async operations, wrap the async function in a synchronous wrapper
- * or extend this hook in the future.
+ * Note: This hook currently supports synchronous fetch functions only.
+ * The services in this application return data synchronously, so this
+ * design choice simplifies the implementation and testing. For async
+ * operations, the hook can be extended in the future if needed.
  * 
  * @template T - Type of data returned by the fetch function
  * @param fetchFn - Synchronous function to fetch data

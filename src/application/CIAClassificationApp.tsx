@@ -13,7 +13,7 @@ import SecurityResourcesWidget from "../components/widgets/implementationguide/S
 import SecurityVisualizationWidget from "../components/widgets/implementationguide/SecurityVisualizationWidget";
 import TechnicalDetailsWidget from "../components/widgets/implementationguide/TechnicalDetailsWidget";
 import { APP_TEST_IDS, UI_TEXT } from "../constants";
-import { useSecurityLevelState, useLocalStorage } from "../hooks";
+import { useSecurityLevelState, useLocalStorage, SecurityLevelState } from "../hooks";
 import { SecurityLevel } from "../types/cia";
 
 /**
@@ -29,11 +29,12 @@ const CIAClassificationApp: React.FC = () => {
   const appVersion = APP_VERSION;
 
   // Use custom hooks for security level state management with localStorage persistence
-  const [savedLevels, setSavedLevels] = useLocalStorage("securityLevels", {
-    availability: "Moderate" as SecurityLevel,
-    integrity: "Moderate" as SecurityLevel,
-    confidentiality: "Moderate" as SecurityLevel,
-  });
+  const defaultLevels: SecurityLevelState = {
+    availability: "Moderate",
+    integrity: "Moderate",
+    confidentiality: "Moderate",
+  };
+  const [savedLevels, setSavedLevels] = useLocalStorage("securityLevels", defaultLevels);
 
   // Initialize security level state with saved values
   const { levels, setLevel } = useSecurityLevelState(savedLevels);
