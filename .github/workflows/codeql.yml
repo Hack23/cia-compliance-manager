@@ -39,6 +39,7 @@ jobs:
         with:
           node-version: "24"
           cache: "npm"
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@e12f0178983d466f2f6028f5cc7a6d786fd97f4b # v3.29.5
         with:
