@@ -514,46 +514,33 @@ export interface ComponentImpactWidgetProps extends WidgetBaseProps {
 }
 
 /**
- * Base properties for component impact widgets
+ * @deprecated Use widget prop interfaces from widget-props.ts instead
+ * 
+ * This interface is deprecated. Use the canonical widget prop interfaces
+ * from widget-props.ts which provide better type safety and remove
+ * deprecated properties like the generic `level` prop.
+ * 
+ * Migration:
+ * - For AvailabilityImpactWidget: use AvailabilityImpactWidgetProps from widget-props.ts
+ * - For IntegrityImpactWidget: use IntegrityImpactWidgetProps from widget-props.ts
+ * - For ConfidentialityImpactWidget: use ConfidentialityImpactWidgetProps from widget-props.ts
  */
 export interface ComponentImpactBaseProps {
   /**
-   * Security level (used for backward compatibility)
+   * @deprecated Use specific level props instead
    */
   level?: SecurityLevel;
-
-  /**
-   * Availability security level
-   */
   availabilityLevel: SecurityLevel;
-
-  /**
-   * Integrity security level
-   */
   integrityLevel: SecurityLevel;
-
-  /**
-   * Confidentiality security level
-   */
   confidentialityLevel: SecurityLevel;
-
-  /**
-   * CSS class name
-   */
   className?: string;
-
-  /**
-   * Test ID for testing
-   */
   testId?: string;
-
-  /**
-   * Callback when level changes
-   */
   onLevelChange?: (level: SecurityLevel) => void;
 }
 
 /**
+ * @deprecated Use AvailabilityImpactWidgetProps from widget-props.ts instead
+ *
  * Props for the Availability Impact Widget
  *
  * ## Business Perspective
@@ -569,6 +556,8 @@ export interface AvailabilityImpactWidgetProps
 }
 
 /**
+ * @deprecated Use IntegrityImpactWidgetProps from widget-props.ts instead
+ *
  * Props for the Integrity Impact Widget
  *
  * ## Business Perspective
@@ -583,6 +572,8 @@ export interface IntegrityImpactWidgetProps extends ComponentImpactBaseProps {
 }
 
 /**
+ * @deprecated Use ConfidentialityImpactWidgetProps from widget-props.ts instead
+ *
  * Props for the Confidentiality Impact Widget
  *
  * ## Business Perspective

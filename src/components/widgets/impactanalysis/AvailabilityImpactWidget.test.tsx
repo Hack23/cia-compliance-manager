@@ -187,11 +187,10 @@ describe("AvailabilityImpactWidget", () => {
     expect(screen.getByText("Business hours, 7 days")).toBeInTheDocument();
   });
 
-  it("uses the specific availability level from props when available", () => {
+  it("uses the specific availability level from props", () => {
     render(
       <AvailabilityImpactWidget
         {...defaultProps}
-        level="Low"
         availabilityLevel="High"
       />
     );
@@ -205,11 +204,10 @@ describe("AvailabilityImpactWidget", () => {
     expect(screen.getByText("24/7")).toBeInTheDocument();
   });
 
-  it("falls back to the legacy level prop when specific level is not provided", () => {
+  it("uses the availability level prop correctly", () => {
     render(
       <AvailabilityImpactWidget
-        level="Low"
-        availabilityLevel="Low" // Provide a valid SecurityLevel value instead of undefined
+        availabilityLevel="Low"
         testId="availability-widget"
       />
     );

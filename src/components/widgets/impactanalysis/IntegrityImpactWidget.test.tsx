@@ -165,10 +165,9 @@ describe("IntegrityImpactWidget", () => {
     ).toHaveTextContent("High");
   });
 
-  it("falls back to the legacy level prop when specific level is not provided", () => {
+  it("uses the integrity level prop correctly", () => {
     createComponent({
-      level: "Low",
-      integrityLevel: undefined,
+      integrityLevel: "Low",
     });
     expect(
       screen.getByTestId("test-integrity-widget-integrity-badge")

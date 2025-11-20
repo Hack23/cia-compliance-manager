@@ -3,16 +3,11 @@ import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { getDefaultPrivacyImpact } from "../../../data/ciaOptionsData";
 import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
-import { ComponentImpactBaseProps } from "../../../types/widgets";
+import type { ConfidentialityImpactWidgetProps } from "../../../types/widget-props";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
-
-/**
- * Props for the Confidentiality Impact Widget
- */
-export type ConfidentialityImpactWidgetProps = ComponentImpactBaseProps;
 
 /**
  * Displays confidentiality impact details for the selected security level
@@ -27,13 +22,12 @@ export type ConfidentialityImpactWidgetProps = ComponentImpactBaseProps;
 const ConfidentialityImpactWidget: React.FC<
   ConfidentialityImpactWidgetProps
 > = ({
-  level, // For backward compatibility
   availabilityLevel: _availabilityLevel,
   integrityLevel: _integrityLevel,
   confidentialityLevel,
   className = "",
   testId = "widget-confidentiality-impact",
-  onLevelChange: _onLevelChange,
+  onError: _onError,
 }) => {
   // Use the content service to get loading/error state
   const {
@@ -42,9 +36,8 @@ const ConfidentialityImpactWidget: React.FC<
     isLoading,
   } = useCIAContentService();
 
-  // Use the effective level - prefer the specific confidentialityLevel if available,
-  // otherwise fall back to the legacy level prop
-  const effectiveLevel = confidentialityLevel || level || "Moderate";
+  // Use the effective level - confidentialityLevel is required
+  const effectiveLevel = confidentialityLevel || "Moderate";
 
   // Use custom hooks for data fetching (replaces manual useMemo logic)
   const details = useComponentDetails("confidentiality", effectiveLevel);
