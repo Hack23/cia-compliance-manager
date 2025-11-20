@@ -33,64 +33,41 @@ describe("Security Assessment Flow", () => {
       cy.get("body").should("be.visible");
       cy.get("select").should("have.length.at.least", 3);
 
-      // Step 2: Configure Confidentiality level to High
-      cy.log("Step 2: Configuring Confidentiality to High");
-      cy.get("select").eq(2).select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.wait(300);
+      // Step 2-4: Configure CIA triad (Availability: Moderate, Integrity: High, Confidentiality: High)
+      cy.log("Step 2-4: Configuring CIA triad levels");
+      cy.setSecurityLevels(
+        SECURITY_LEVELS.MODERATE,
+        SECURITY_LEVELS.HIGH,
+        SECURITY_LEVELS.HIGH
+      );
 
-      // Verify confidentiality selection and description
+      // Verify security level selections
+      cy.get("select").eq(0).should("have.value", SECURITY_LEVELS.MODERATE);
+      cy.get("select").eq(1).should("have.value", SECURITY_LEVELS.HIGH);
       cy.get("select").eq(2).should("have.value", SECURITY_LEVELS.HIGH);
+      // Verify security controls are detected
+      cy.log("Verifying security controls in page content");
       cy.get("body").then(($body) => {
         const text = $body.text().toLowerCase();
-        // High confidentiality should mention MFA, encryption, or similar security controls
+        
+        // Check for various security control indicators
         const hasSecurityControls =
           text.includes("mfa") ||
           text.includes("multi-factor") ||
           text.includes("encryption") ||
-          text.includes("access control");
-        if (hasSecurityControls) {
-          cy.log("✓ High confidentiality security controls detected");
-        }
-      });
-
-      // Step 3: Configure Integrity level to High
-      cy.log("Step 3: Configuring Integrity to High");
-      cy.get("select").eq(1).select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.wait(300);
-
-      // Verify integrity selection and description
-      cy.get("select").eq(1).should("have.value", SECURITY_LEVELS.HIGH);
-      cy.get("body").then(($body) => {
-        const text = $body.text().toLowerCase();
-        // High integrity should mention blockchain, checksums, or similar integrity controls
-        const hasIntegrityControls =
+          text.includes("access control") ||
           text.includes("blockchain") ||
           text.includes("checksum") ||
           text.includes("hash") ||
           text.includes("immutable") ||
-          text.includes("audit");
-        if (hasIntegrityControls) {
-          cy.log("✓ High integrity controls detected");
-        }
-      });
-
-      // Step 4: Configure Availability level to Moderate
-      cy.log("Step 4: Configuring Availability to Moderate");
-      cy.get("select").eq(0).select(SECURITY_LEVELS.MODERATE, { force: true });
-      cy.wait(300);
-
-      // Verify availability selection and description
-      cy.get("select").eq(0).should("have.value", SECURITY_LEVELS.MODERATE);
-      cy.get("body").then(($body) => {
-        const text = $body.text().toLowerCase();
-        // Moderate availability should mention pilot light, warm standby, or similar DR options
-        const hasAvailabilityControls =
+          text.includes("audit") ||
           text.includes("pilot light") ||
           text.includes("warm standby") ||
           text.includes("backup") ||
           text.includes("recovery");
-        if (hasAvailabilityControls) {
-          cy.log("✓ Moderate availability controls detected");
+        
+        if (hasSecurityControls) {
+          cy.log("✓ Security controls detected in page content");
         }
       });
 
@@ -204,8 +181,7 @@ describe("Security Assessment Flow", () => {
       cy.log("Testing confidentiality level impact on costs");
 
       // Set initial low confidentiality
-      cy.get("select").eq(2).select(SECURITY_LEVELS.LOW, { force: true });
-      cy.wait(500);
+      cy.setSecurityLevels(undefined, undefined, SECURITY_LEVELS.LOW);
 
       // Capture initial cost values
       cy.get("body")
@@ -214,8 +190,7 @@ describe("Security Assessment Flow", () => {
           cy.log("Initial state captured");
 
           // Change to Very High confidentiality
-          cy.get("select").eq(2).select(SECURITY_LEVELS.VERY_HIGH, { force: true });
-          cy.wait(500);
+          cy.setSecurityLevels(undefined, undefined, SECURITY_LEVELS.VERY_HIGH);
 
           // Verify costs changed
           cy.get("body")
@@ -232,8 +207,7 @@ describe("Security Assessment Flow", () => {
       cy.log("Testing technical details display for each security level");
 
       // Test High integrity level
-      cy.get("select").eq(1).select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.wait(500);
+      cy.setSecurityLevels(undefined, SECURITY_LEVELS.HIGH, undefined);
 
       cy.get("body").then(($body) => {
         const text = $body.text().toLowerCase();
@@ -255,8 +229,7 @@ describe("Security Assessment Flow", () => {
       });
 
       // Test Very High availability level
-      cy.get("select").eq(0).select(SECURITY_LEVELS.VERY_HIGH, { force: true });
-      cy.wait(500);
+      cy.setSecurityLevels(SECURITY_LEVELS.VERY_HIGH, undefined, undefined);
 
       cy.get("body").then(($body) => {
         const text = $body.text().toLowerCase();
@@ -302,18 +275,16 @@ describe("Security Assessment Flow", () => {
       combinations.forEach((combo) => {
         cy.log(`Testing combination: ${combo.name}`);
 
-        // Set security levels (availability, integrity, confidentiality)
-        cy.get("select").eq(0).select(combo.levels[0], { force: true });
-        cy.wait(200);
-        cy.get("select").eq(1).select(combo.levels[1], { force: true });
-        cy.wait(200);
-        cy.get("select").eq(2).select(combo.levels[2], { force: true });
-        cy.wait(500);
+        // Set security levels using custom command (availability, integrity, confidentiality)
+        cy.setSecurityLevels(combo.levels[0], combo.levels[1], combo.levels[2]);
 
-        // Verify selections
+        // Verify selections are applied correctly
         cy.get("select").eq(0).should("have.value", combo.levels[0]);
         cy.get("select").eq(1).should("have.value", combo.levels[1]);
         cy.get("select").eq(2).should("have.value", combo.levels[2]);
+        
+        // Verify widgets are still present and responsive
+        cy.get("[data-testid^='widget-']").should("have.length.at.least", 1);
 
         cy.log(`✓ ${combo.name} combination configured successfully`);
       });
@@ -325,12 +296,11 @@ describe("Security Assessment Flow", () => {
       cy.log("Testing framework compliance mapping");
 
       // Set high security levels to maximize compliance
-      cy.get("select").eq(0).select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.wait(200);
-      cy.get("select").eq(1).select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.wait(200);
-      cy.get("select").eq(2).select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.wait(500);
+      cy.setSecurityLevels(
+        SECURITY_LEVELS.HIGH,
+        SECURITY_LEVELS.HIGH,
+        SECURITY_LEVELS.HIGH
+      );
 
       // Look for compliance framework information
       cy.get("body").then(($body) => {
@@ -367,12 +337,11 @@ describe("Security Assessment Flow", () => {
       cy.log("Testing framework-specific control display");
 
       // Set high security configuration
-      cy.get("select").eq(0).select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.wait(200);
-      cy.get("select").eq(1).select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.wait(200);
-      cy.get("select").eq(2).select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.wait(500);
+      cy.setSecurityLevels(
+        SECURITY_LEVELS.HIGH,
+        SECURITY_LEVELS.HIGH,
+        SECURITY_LEVELS.HIGH
+      );
 
       // Look for control-related content
       cy.get("body").then(($body) => {
@@ -412,7 +381,7 @@ describe("Security Assessment Flow", () => {
 
       // Reload page
       cy.reload();
-      cy.wait(1000);
+      cy.ensureAppLoaded();
 
       // Application should still load
       cy.get("body").should("exist").and("be.visible");
@@ -439,26 +408,29 @@ describe("Security Assessment Flow", () => {
         };
       });
 
-      // Rapidly change security levels
-      cy.get("select").eq(0).select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.get("select").eq(1).select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.get("select").eq(2).select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.wait(200);
+      // Rapidly change security levels using custom command
+      cy.setSecurityLevels(
+        SECURITY_LEVELS.HIGH,
+        SECURITY_LEVELS.HIGH,
+        SECURITY_LEVELS.HIGH
+      );
 
-      cy.get("select").eq(0).select(SECURITY_LEVELS.LOW, { force: true });
-      cy.get("select").eq(1).select(SECURITY_LEVELS.LOW, { force: true });
-      cy.get("select").eq(2).select(SECURITY_LEVELS.LOW, { force: true });
-      cy.wait(200);
+      cy.setSecurityLevels(
+        SECURITY_LEVELS.LOW,
+        SECURITY_LEVELS.LOW,
+        SECURITY_LEVELS.LOW
+      );
 
-      cy.get("select").eq(0).select(SECURITY_LEVELS.MODERATE, { force: true });
-      cy.get("select").eq(1).select(SECURITY_LEVELS.MODERATE, { force: true });
-      cy.get("select").eq(2).select(SECURITY_LEVELS.MODERATE, { force: true });
-      cy.wait(500);
+      cy.setSecurityLevels(
+        SECURITY_LEVELS.MODERATE,
+        SECURITY_LEVELS.MODERATE,
+        SECURITY_LEVELS.MODERATE
+      );
 
       // Check for critical console errors
       cy.window().then((win) => {
         const criticalErrors = win.consoleErrors.filter(
-          (msg: string) =>
+          (msg) =>
             msg.includes("undefined") ||
             msg.includes("TypeError") ||
             msg.includes("ReferenceError")
@@ -486,15 +458,12 @@ describe("Security Assessment Flow", () => {
 
         const lowestLevel = hasNoneOption ? "None" : SECURITY_LEVELS.LOW;
 
-        cy.get("select").eq(0).select(lowestLevel, { force: true });
-        cy.wait(200);
-        cy.get("select").eq(1).select(lowestLevel, { force: true });
-        cy.wait(200);
-        cy.get("select").eq(2).select(lowestLevel, { force: true });
-        cy.wait(500);
+        // Use custom command to set lowest levels
+        cy.setSecurityLevels(lowestLevel, lowestLevel, lowestLevel);
 
         // Application should still function with lowest security levels
         cy.get("body").should("be.visible");
+        cy.get("select").should("have.length.at.least", 3);
         cy.log(`✓ Application handles ${lowestLevel} security levels gracefully`);
       });
     });
@@ -518,8 +487,15 @@ describe("Security Assessment Flow", () => {
       cy.log("✓ Third select is focusable");
 
       // Test that selects can be changed with keyboard
-      cy.get("select").eq(0).focus().type("{downarrow}{enter}");
-      cy.log("✓ Select can be changed with keyboard");
+      cy.get("select").eq(0).invoke("val").then((initialValue) => {
+        cy.get("select").eq(0).focus().type("{downarrow}{enter}");
+        cy.get("select").eq(0).invoke("val").then((newValue) => {
+          // Value should have changed after keyboard interaction
+          if (newValue !== initialValue) {
+            cy.log("✓ Select value changed with keyboard interaction");
+          }
+        });
+      });
 
       cy.log("✓ Security level selects are keyboard navigable");
     });
@@ -544,7 +520,7 @@ describe("Security Assessment Flow", () => {
 
         const hasAccessibilityLabel = !!(ariaLabel || ariaLabelledBy || hasLabel);
 
-        if (hasAccessibilityLabel || ariaLabel || ariaLabelledBy) {
+        if (hasAccessibilityLabel) {
           cy.log("✓ Select has accessibility label");
         }
       });
@@ -595,13 +571,8 @@ describe("Security Assessment Flow", () => {
       scenarios.forEach((scenario) => {
         cy.log(`Testing ${scenario.name}`);
 
-        // Set security levels
-        cy.get("select").eq(0).select(scenario.levels[0], { force: true });
-        cy.wait(200);
-        cy.get("select").eq(1).select(scenario.levels[1], { force: true });
-        cy.wait(200);
-        cy.get("select").eq(2).select(scenario.levels[2], { force: true });
-        cy.wait(500);
+        // Set security levels using custom command
+        cy.setSecurityLevels(scenario.levels[0], scenario.levels[1], scenario.levels[2]);
 
         // Look for business impact content
         cy.get("body").then(($body) => {
@@ -635,17 +606,15 @@ describe("Security Assessment Flow", () => {
       cy.log("Testing security level persistence");
 
       // Set specific security levels
-      cy.get("select").eq(0).select(SECURITY_LEVELS.MODERATE, { force: true });
-      cy.wait(200);
-      cy.get("select").eq(1).select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.wait(200);
-      cy.get("select").eq(2).select(SECURITY_LEVELS.LOW, { force: true });
-      cy.wait(500);
+      cy.setSecurityLevels(
+        SECURITY_LEVELS.MODERATE,
+        SECURITY_LEVELS.HIGH,
+        SECURITY_LEVELS.LOW
+      );
 
       // Reload page
       cy.reload();
       cy.ensureAppLoaded();
-      cy.wait(1000);
 
       // Verify selections are preserved (if app implements persistence)
       cy.get("select").then(($selects) => {
@@ -672,13 +641,12 @@ describe("Security Assessment Flow", () => {
         const initialCount = $initialWidgets.length;
         cy.log(`Initial widget count: ${initialCount}`);
 
-        // Change security levels
-        cy.get("select").eq(0).select(SECURITY_LEVELS.HIGH, { force: true });
-        cy.wait(200);
-        cy.get("select").eq(1).select(SECURITY_LEVELS.HIGH, { force: true });
-        cy.wait(200);
-        cy.get("select").eq(2).select(SECURITY_LEVELS.HIGH, { force: true });
-        cy.wait(500);
+        // Change security levels using custom command
+        cy.setSecurityLevels(
+          SECURITY_LEVELS.HIGH,
+          SECURITY_LEVELS.HIGH,
+          SECURITY_LEVELS.HIGH
+        );
 
         // Verify widgets still present and responsive
         cy.get("[data-testid^='widget-']").then(($updatedWidgets) => {
