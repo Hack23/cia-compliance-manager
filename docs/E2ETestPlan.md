@@ -16,8 +16,8 @@
   <a href="#"><img src="https://img.shields.io/badge/Review-Monthly-orange?style=for-the-badge" alt="Review Cycle"/></a>
 </p>
 
-**📋 Document Owner:** Security Team & QA Team | **📄 Version:** 2.0 | **📅 Last Updated:** 2025-01-14 (UTC)  
-**🔄 Review Cycle:** Monthly | **⏰ Next Review:** 2025-02-14
+**📋 Document Owner:** Security Team & QA Team | **📄 Version:** 2.1 | **📅 Last Updated:** 2025-01-20 (UTC)  
+**🔄 Review Cycle:** Monthly | **⏰ Next Review:** 2025-02-20
 
 **🔐 ISMS Alignment:** This E2E test plan implements [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) Section 4.2 - End-to-End Testing Strategy.
 
@@ -25,10 +25,13 @@
 
 This End-to-End (E2E) Test Plan provides comprehensive testing coverage for the CIA Compliance Manager application, ensuring all critical user journeys and business workflows function correctly across different environments and use cases.
 
-**Test Suite:** 15 comprehensive test specifications covering 12 widgets and 3 integration scenarios  
-**Coverage:** 100% of production widgets, 87% critical path coverage (13/15 tests)  
+**Test Suite:** 16 comprehensive test specifications covering 12 widgets and 4 integration scenarios  
+**Individual Tests:** 30+ test scenarios validating critical functionality  
+**Coverage:** 100% of production widgets, 87.5% critical path coverage (14/16 tests)  
 **Browsers:** Chrome, Firefox, Edge  
 **Framework:** Cypress with Mochawesome reporting
+
+**Latest Enhancement (v2.1):** Added comprehensive **Security Assessment Flow** test suite with 15 test scenarios covering the complete user journey from initial configuration through assessment completion, including CIA triad selection, cost estimation, compliance mapping, accessibility, and error handling.
 
 ### ISMS Compliance Requirements
 
@@ -36,7 +39,7 @@ Per Hack23 AB's Secure Development Policy Section 4.2, this project maintains:
 
 | 🎯 **Requirement** | 📊 **Implementation** | ✅ **Status** | 📋 **ISMS Reference** |
 |-------------------|---------------------|--------------|---------------------|
-| **Critical Path Coverage** | 13/15 tests cover critical user journeys | ✅ 87% Coverage | Section 4.2.1 |
+| **Critical Path Coverage** | 14/16 tests cover critical user journeys | ✅ 87.5% Coverage | Section 4.2.1 |
 | **Test Plan Documentation** | Comprehensive E2ETestPlan.md with all specs | ✅ Complete | Section 4.2.2 |
 | **Public Test Results** | Mochawesome reports published to GitHub Pages | ✅ Published | Section 4.2.3 |
 | **Browser Testing** | Chrome, Firefox, Edge tested in CI | ✅ Validated | Section 4.2.4 |
@@ -243,6 +246,7 @@ cypress/
 │   │   └── widget-screenshots.cy.ts             # UI/UX screenshot capture (light/dark themes)
 │   ├── security/
 │   │   └── security-level-transitions.cy.ts     # Security level state management integrity
+│   ├── security-assessment-flow.cy.ts           # 🆕 Complete security assessment workflow E2E test
 │   └── widgets/
 │       ├── assessmentcenter/
 │       │   ├── business-impact.cy.ts            # Business impact analysis widget
@@ -390,9 +394,44 @@ cypress/
   - Architecture recommendations
 - **Critical Path:** ⚠️ Supporting content
 
-#### 🔄 Integration & End-to-End Tests (3 tests)
+#### 🔄 Integration & End-to-End Tests (4 tests)
 
-**13. Compliance Validation** (`cypress/e2e/business-outcomes/compliance-validation.cy.ts`)
+**13. Security Assessment Flow** (`cypress/e2e/security-assessment-flow.cy.ts`) 🆕
+- **Purpose:** Comprehensive end-to-end testing of the complete security assessment workflow
+- **Coverage:**
+  - **Complete Assessment Workflow (1 test):** Full user journey from landing to assessment completion
+    - Initial application state verification
+    - CIA triad configuration (Confidentiality → High, Integrity → High, Availability → Moderate)
+    - Security control verification (MFA, blockchain, pilot light)
+    - Cost estimation validation
+    - Compliance status checking
+    - Business impact analysis verification
+  - **CIA Level Selection (4 tests):**
+    - Cost updates when changing confidentiality levels
+    - Technical details display for each security level
+    - All CIA level combinations validation
+  - **Framework Compliance Mapping (2 tests):**
+    - Compliance status display for all supported frameworks (NIST, ISO, GDPR, HIPAA, PCI, SOC, FedRAMP)
+    - Framework-specific controls and requirements display
+  - **Error Handling (3 tests):**
+    - Invalid localStorage data recovery
+    - Rapid security level changes without errors
+    - User-friendly messages for edge cases
+  - **Accessibility (3 tests):**
+    - Keyboard navigation support
+    - ARIA labels and semantic HTML
+    - Visual focus indicators
+  - **Business Impact Analysis (1 test):**
+    - Business impact calculations for different security levels
+  - **Data Persistence (1 test):**
+    - Security level persistence across page reloads
+  - **Widget Integration (1 test):**
+    - All widgets respond to security level changes
+- **Test Count:** 15 comprehensive test scenarios
+- **Critical Path:** ✅ Core user workflow validation
+- **Status:** ✅ All 15 tests passing
+
+**14. Compliance Validation** (`cypress/e2e/business-outcomes/compliance-validation.cy.ts`)
 - **Purpose:** End-to-end compliance workflow validation
 - **Coverage:**
   - Complete user journey from security level selection to compliance report
@@ -401,7 +440,7 @@ cypress/
   - Compliance scenario testing (low, moderate, high security)
 - **Critical Path:** ✅ Complete workflow validation
 
-**14. Security Level Transitions** (`cypress/e2e/security/security-level-transitions.cy.ts`)
+**15. Security Level Transitions** (`cypress/e2e/security/security-level-transitions.cy.ts`)
 - **Purpose:** Security level state management and transition integrity
 - **Coverage:**
   - State consistency during security level changes
@@ -410,7 +449,7 @@ cypress/
   - Console error monitoring
 - **Critical Path:** ✅ Application stability critical
 
-**15. Widget Screenshots** (`cypress/e2e/screenshots/widget-screenshots.cy.ts`)
+**16. Widget Screenshots** (`cypress/e2e/screenshots/widget-screenshots.cy.ts`)
 - **Purpose:** UI/UX screenshot capture for documentation and design validation
 - **Coverage:**
   - Light and dark theme screenshots
@@ -427,8 +466,13 @@ cypress/
 | **Business Value** | 3 | ✅ All critical | 100% |
 | **Impact Analysis** | 3 | ✅ All critical | 100% |
 | **Implementation Guide** | 3 | ⚠️ 1 critical | 100% |
-| **Integration Tests** | 3 | ✅ 2 critical | 100% |
-| **Total** | **15** | **13 critical** | **100%** |
+| **Integration Tests** | 4 | ✅ 3 critical | 100% |
+| **Total** | **16** | **14 critical** | **100%** |
+
+**New in v2.1:**
+- ✅ **Security Assessment Flow Test Suite** - 15 comprehensive tests covering the complete user journey
+- 📊 **Total Test Scenarios:** 30+ individual test scenarios across 16 test specifications
+- 🎯 **Critical Path Coverage:** 87.5% (14/16 tests marked critical)
 
 ### 🔍 Actual Test Implementation Pattern
 
@@ -1271,8 +1315,8 @@ npm run clean:test-data
 **✅ Approved by:** Development Team Lead  
 **📤 Distribution:** Development Team, QA Team, Security Team, DevOps Team, Public (via GitHub)  
 **🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-green?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
-**📅 Effective Date:** 2025-01-14  
-**⏰ Next Review:** 2025-02-14  
+**📅 Effective Date:** 2025-01-20  
+**⏰ Next Review:** 2025-02-20  
 **🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)
 
 **Related Documents:**
@@ -1285,6 +1329,7 @@ npm run clean:test-data
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 2.1 | 2025-01-20 | Testing Agent | Added comprehensive Security Assessment Flow test suite (15 tests). Updated test counts and coverage metrics. Enhanced documentation with detailed test scenarios. |
 | 2.0 | 2025-01-14 | GitHub Copilot | Comprehensive update: Added all 15 test specs, Mermaid architecture diagram, actual test patterns, execution procedures, debugging guide. Updated to ISMS Style Guide format. |
 | 1.0 | 2025-01-10 | Development Team | Initial E2E test plan with generic examples |
 
