@@ -114,7 +114,7 @@ export default defineConfig({
         // ISMS Secure Development Policy requirements (v1.0 release)
         thresholds: {
           statements: 80,
-          branches: 70,
+          branches: 75,
           functions: 80,
           lines: 80,
         },

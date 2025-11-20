@@ -1,12 +1,86 @@
 import { describe, expect, it, vi } from "vitest";
 import {
   displayErrorMessage,
+  formatError,
   formatErrorMessage,
   handleApiError,
   isErrorWithMessage,
+  toErrorObject,
 } from "./errorUtils";
 
 describe("errorUtils", () => {
+  describe("toErrorObject", () => {
+    it("returns Error object as-is", () => {
+      const error = new Error("Test error");
+      const result = toErrorObject(error);
+      expect(result).toBe(error);
+      expect(result.message).toBe("Test error");
+    });
+
+    it("converts object with message property to Error", () => {
+      const errorObj = { message: "Object error" };
+      const result = toErrorObject(errorObj);
+      expect(result).toBeInstanceOf(Error);
+      expect(result.message).toBe("Object error");
+    });
+
+    it("converts string to Error", () => {
+      const result = toErrorObject("String error");
+      expect(result).toBeInstanceOf(Error);
+      expect(result.message).toBe("String error");
+    });
+
+    it("converts number to Error", () => {
+      const result = toErrorObject(123);
+      expect(result).toBeInstanceOf(Error);
+      expect(result.message).toBe("123");
+    });
+
+    it("converts null to Error", () => {
+      const result = toErrorObject(null);
+      expect(result).toBeInstanceOf(Error);
+      expect(result.message).toBe("null");
+    });
+
+    it("converts undefined to Error", () => {
+      const result = toErrorObject(undefined);
+      expect(result).toBeInstanceOf(Error);
+      expect(result.message).toBe("undefined");
+    });
+
+    it("converts object without message to Error", () => {
+      const obj = { code: 500 };
+      const result = toErrorObject(obj);
+      expect(result).toBeInstanceOf(Error);
+      expect(result.message).toBe("[object Object]");
+    });
+  });
+
+  describe("formatError", () => {
+    it("formats error with prefix", () => {
+      const error = new Error("Test error");
+      const result = formatError(error, "Prefix");
+      expect(result).toBe("Prefix: Test error");
+    });
+
+    it("formats error without prefix", () => {
+      const error = new Error("Test error");
+      const result = formatError(error);
+      expect(result).toBe("Test error");
+    });
+
+    it("formats string error with prefix", () => {
+      const result = formatError("String error", "API");
+      expect(result).toBe("API: String error");
+    });
+
+    it("formats object with message property", () => {
+      const errorObj = { message: "Object error" };
+      const result = formatError(errorObj, "Service");
+      expect(result).toBe("Service: Object error");
+    });
+  });
+
   describe("isErrorWithMessage", () => {
     it("returns true for Error objects", () => {
       const error = new Error("Test error");

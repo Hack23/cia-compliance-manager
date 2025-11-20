@@ -12,8 +12,8 @@ Per Hack23 AB's Secure Development Policy, this project maintains:
 
 | 🎯 **Requirement** | 📊 **Target** | ✅ **Current** | 📋 **ISMS Reference** |
 |-------------------|--------------|---------------|---------------------|
-| **Line Coverage** | ≥80% | 85% | Section 4.3.1.1 |
-| **Branch Coverage** | ≥70% | 75% | Section 4.3.1.2 |
+| **Line Coverage** | ≥80% | 83% | Section 4.3.1.1 |
+| **Branch Coverage** | ≥75% (v1.0) | 75.39% | Section 4.3.1.2 |
 | **Test Execution** | Every commit | ✅ Automated | Section 4.3.1.3 |
 | **Public Reporting** | Required | ✅ Published | Section 4.3.1.4 |
 
@@ -74,9 +74,150 @@ src/
 ## 5. Code Coverage Requirements
 
 - **Statements**: 80% minimum
-- **Branches**: 70% minimum
+- **Branches**: 75% minimum (v1.0 release target)
 - **Functions**: 80% minimum
 - **Lines**: 80% minimum
+
+### 5.1 Branch Coverage Strategies
+
+Branch coverage ensures that all conditional paths in the code are tested. To achieve and maintain 75%+ branch coverage:
+
+#### 5.1.1 Conditional Logic Testing
+
+Test all branches of conditional statements:
+
+```typescript
+// Function with conditional logic
+export function getStatusVariant(level: string): StatusType {
+  const normalizedLevel = level.toLowerCase();
+  if (normalizedLevel === "none") return "error";
+  if (normalizedLevel === "low") return "warning";
+  if (normalizedLevel === "moderate") return "info";
+  if (normalizedLevel === "high") return "success";
+  if (normalizedLevel === "very high") return "purple";
+  return "neutral";
+}
+
+// Tests covering all branches
+describe("getStatusVariant", () => {
+  it("returns error for none level", () => {
+    expect(getStatusVariant("none")).toBe("error");
+  });
+
+  it("returns warning for low level", () => {
+    expect(getStatusVariant("low")).toBe("warning");
+  });
+
+  // ... test each branch
+
+  it("returns neutral for unknown levels", () => {
+    expect(getStatusVariant("unknown")).toBe("neutral");
+  });
+});
+```
+
+#### 5.1.2 Error Handling Paths
+
+Test both success and error paths:
+
+```typescript
+// Test error handling branches
+it("handles Error objects", () => {
+  const error = new Error("Test error");
+  expect(toErrorObject(error)).toBe(error);
+});
+
+it("handles null/undefined", () => {
+  expect(toErrorObject(null)).toBeInstanceOf(Error);
+  expect(toErrorObject(undefined)).toBeInstanceOf(Error);
+});
+
+it("handles string errors", () => {
+  const result = toErrorObject("String error");
+  expect(result.message).toBe("String error");
+});
+```
+
+#### 5.1.3 Null/Undefined Checks
+
+Test optional chaining and nullish coalescing:
+
+```typescript
+// Function with fallback
+export function getValue(level: SecurityLevel): number {
+  return levelValues[level] || defaultValue;
+}
+
+// Test both branches
+it("returns value for valid level", () => {
+  expect(getValue("High")).toBe(1);
+});
+
+it("returns default for invalid level", () => {
+  expect(getValue("Unknown" as any)).toBe(defaultValue);
+});
+```
+
+#### 5.1.4 Boolean Logic
+
+Test all combinations of && and || operators:
+
+```typescript
+// Test complex conditions
+it("validates all conditions", () => {
+  expect(isValid(true, true)).toBe(true);   // Both true
+  expect(isValid(true, false)).toBe(false); // First true
+  expect(isValid(false, true)).toBe(false); // Second true
+  expect(isValid(false, false)).toBe(false); // Both false
+});
+```
+
+#### 5.1.5 Switch Statements
+
+Test all cases including default:
+
+```typescript
+describe("switch statement coverage", () => {
+  it("handles case A", () => { /* test */ });
+  it("handles case B", () => { /* test */ });
+  it("handles default case", () => { /* test */ });
+});
+```
+
+#### 5.1.6 Ternary Operators
+
+Test both branches of conditional expressions:
+
+```typescript
+// Function with ternary
+const color = isActive ? "green" : "gray";
+
+// Tests
+it("returns green when active", () => {
+  expect(getColor(true)).toBe("green");
+});
+
+it("returns gray when inactive", () => {
+  expect(getColor(false)).toBe("gray");
+});
+```
+
+### 5.2 Coverage Enforcement
+
+The project enforces coverage thresholds in `vite.config.ts`:
+
+```typescript
+coverage: {
+  thresholds: {
+    statements: 80,
+    branches: 75,  // v1.0 release requirement
+    functions: 80,
+    lines: 80,
+  },
+}
+```
+
+CI builds will fail if coverage falls below these thresholds.
 
 ## 6. Running Tests
 
