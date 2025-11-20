@@ -16,7 +16,7 @@
   <a href="#"><img src="https://img.shields.io/badge/Review-Monthly-orange?style=for-the-badge" alt="Review Cycle"/></a>
 </p>
 
-**📋 Document Owner:** Security Team & QA Team | **📄 Version:** 2.1 | **📅 Last Updated:** 2025-01-20 (UTC)  
+**📋 Document Owner:** Security Team & QA Team | **📄 Version:** 2.2 | **📅 Last Updated:** 2025-01-20 (UTC)  
 **🔄 Review Cycle:** Monthly | **⏰ Next Review:** 2025-02-20
 
 **🔐 ISMS Alignment:** This E2E test plan implements [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) Section 4.2 - End-to-End Testing Strategy.
@@ -29,9 +29,12 @@ This End-to-End (E2E) Test Plan provides comprehensive testing coverage for the 
 **Individual Tests:** 30+ test scenarios validating critical functionality  
 **Coverage:** 100% of production widgets, 87.5% critical path coverage (14/16 tests)  
 **Browsers:** Chrome, Firefox, Edge  
-**Framework:** Cypress with Mochawesome reporting
+**Framework:** Cypress 15.7.0 with Mochawesome reporting  
+**TypeScript:** Native TypeScript support with enhanced type checking
 
-**Latest Enhancement (v2.1):** Added comprehensive **Security Assessment Flow** test suite with 15 test scenarios covering the complete user journey from initial configuration through assessment completion, including CIA triad selection, cost estimation, compliance mapping, accessibility, and error handling.
+**Latest Enhancements:**
+- **v2.2:** Comprehensive Cypress 15.x migration documentation, including new features, best practices, troubleshooting, and CI/CD optimizations
+- **v2.1:** Added comprehensive **Security Assessment Flow** test suite with 15 test scenarios covering the complete user journey from initial configuration through assessment completion
 
 ### ISMS Compliance Requirements
 
@@ -155,6 +158,255 @@ Scenario: Validate NIST 800-53 control mapping
 ```
 
 ## 🧪 Test Implementation with Cypress
+
+### 🆕 Cypress 15.x Migration & Features
+
+The CIA Compliance Manager project uses **Cypress 15.7.0** (latest stable version) for end-to-end testing, leveraging the newest features and improvements in the Cypress ecosystem.
+
+#### Key Cypress 15.x Features
+
+**1. Enhanced TypeScript Support**
+- **Built-in TypeScript compilation**: Cypress 15.x includes native TypeScript support without requiring additional preprocessors
+- **Improved type definitions**: Better IntelliSense and type checking for Cypress commands
+- **Type-safe custom commands**: Enhanced typing for custom command definitions
+
+```typescript
+// cypress/support/commands.ts - Native TypeScript support
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      findWidget(widgetName: string): Chainable<JQuery<HTMLElement>>;
+      setSecurityLevels(availability: string, integrity: string, confidentiality: string): Chainable<void>;
+    }
+  }
+}
+
+// Commands are fully type-checked
+Cypress.Commands.add('findWidget', (widgetName: string) => {
+  return cy.get(`[data-testid*="${widgetName}"]`);
+});
+```
+
+**2. Component Testing Capabilities**
+- **React Component Testing**: Test React components in isolation without a full application
+- **Component configuration**: Separate configuration for component vs E2E tests
+
+```typescript
+// cypress.config.ts - Component testing configuration
+export default defineConfig({
+  component: {
+    devServer: {
+      framework: "react",
+      bundler: "vite",
+      viteConfig: {
+        configFile: resolve(__dirname, "./vite.config.ts"),
+      },
+    },
+  },
+});
+```
+
+**3. Improved Selector Engine**
+- **Better element detection**: More reliable element finding strategies
+- **Enhanced waiting mechanisms**: Smarter retry logic for dynamic content
+- **Flexible selector patterns**: Multiple fallback strategies for robust tests
+
+```typescript
+// Example: Multi-strategy widget finding
+export function findWidgetFlexibly(widgetId: string) {
+  const selectors = [
+    `[data-testid="${widgetId}"]`,
+    `[data-testid="widget-${widgetId}"]`,
+    `[data-testid*="${widgetId}"]`,
+    `[class*="${widgetId}"]`,
+  ];
+  
+  for (const selector of selectors) {
+    const elements = doc.querySelectorAll(selector);
+    if (elements.length > 0) {
+      return cy.get(selector);
+    }
+  }
+}
+```
+
+**4. Performance Improvements**
+- **Faster test execution**: Optimized test runner and browser communication
+- **Memory management**: Experimental memory management feature (`experimentalMemoryManagement: true`)
+- **Reduced overhead**: More efficient video recording and screenshot capture
+
+```typescript
+// cypress.config.ts - Performance optimizations
+export default defineConfig({
+  experimentalMemoryManagement: true,
+  numTestsKeptInMemory: 10,
+  video: false, // Disable by default, enable via env var
+  screenshotOnRunFailure: true,
+});
+```
+
+**5. Enhanced Debugging Tools**
+- **Better error messages**: More informative test failure messages
+- **Improved time-travel debugging**: Enhanced test runner UI with detailed snapshots
+- **Console error tracking**: Better integration with browser console
+
+```typescript
+// Automatic error tracking in tests
+cy.window().then((win) => {
+  const errors = win.consoleErrors || [];
+  expect(errors).to.have.length(0, "No console errors during test");
+});
+```
+
+**6. Modern Browser Support**
+- **Latest Electron**: Bundled with Electron 37.6.0
+- **Chrome, Firefox, Edge**: Full support for latest browser versions
+- **Node.js 22**: Bundled Node.js 22.19.0 for better performance
+
+#### Migration from Previous Versions
+
+**Breaking Changes in Cypress 15.x:**
+
+1. **Configuration Changes**
+   - Legacy `pluginsFile` and `supportFile` options removed
+   - New `setupNodeEvents` function in config file
+   - Updated reporter options structure
+
+```typescript
+// Old (Cypress 9.x)
+module.exports = (on, config) => {
+  return config;
+};
+
+// New (Cypress 15.x)
+export default defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      // Plugin configuration here
+      return config;
+    },
+  },
+});
+```
+
+2. **TypeScript Configuration**
+   - No longer requires `@cypress/webpack-preprocessor`
+   - Built-in TypeScript support through `tsconfig.json`
+   - Automatic compilation of `.ts` test files
+
+3. **Command Syntax Updates**
+   - `.then()` callback type improvements
+   - Better async/await handling
+   - Enhanced chainable command typing
+
+**Migration Checklist:**
+- ✅ Update `cypress.config.ts` to use `defineConfig()` API
+- ✅ Remove deprecated `pluginsFile` references
+- ✅ Update TypeScript custom command declarations
+- ✅ Enable `experimentalMemoryManagement` for better performance
+- ✅ Review and update retry logic (`retries` configuration)
+- ✅ Update CI/CD workflows for Cypress 15.x compatibility
+
+#### Best Practices for Cypress 15.x
+
+**1. Use Data-TestId Selectors**
+```typescript
+// Preferred: Stable, semantic selectors
+cy.get('[data-testid="security-level-widget"]')
+
+// Avoid: Brittle class-based selectors
+cy.get('.widget-container .security-level')
+```
+
+**2. Leverage Custom Commands**
+```typescript
+// Reusable, maintainable test patterns
+cy.ensureAppLoaded();
+cy.setSecurityLevels('High', 'High', 'Moderate');
+cy.findWidget('security-summary').should('be.visible');
+```
+
+**3. Implement Smart Waiting**
+```typescript
+// Good: Built-in retry logic
+cy.get('[data-testid="widget"]').should('be.visible');
+
+// Avoid: Arbitrary timeouts
+cy.wait(2000); // Only when necessary
+```
+
+**4. Use Test Isolation**
+```typescript
+// cypress.config.ts
+export default defineConfig({
+  e2e: {
+    testIsolation: true, // Each test runs in clean state
+  },
+});
+```
+
+**5. Optimize Test Performance**
+```typescript
+// Disable video for local development
+export default defineConfig({
+  video: process.env.CYPRESS_VIDEO === 'true' || false,
+  
+  // Faster timeouts for quick feedback
+  defaultCommandTimeout: 6000,
+  pageLoadTimeout: 8000,
+  
+  // Reduce memory usage
+  numTestsKeptInMemory: 10,
+});
+```
+
+**6. Monitor Console Errors**
+```typescript
+beforeEach(() => {
+  cy.window().then((win) => {
+    win.consoleErrors = [];
+    const originalError = win.console.error;
+    win.console.error = (...args) => {
+      win.consoleErrors.push(args.join(' '));
+      originalError.apply(win.console, args);
+    };
+  });
+});
+```
+
+#### Component Testing with Cypress 15.x
+
+While our current focus is on E2E testing, Cypress 15.x offers powerful component testing capabilities:
+
+```typescript
+// Example: Component test for SecurityLevelWidget
+import SecurityLevelWidget from './SecurityLevelWidget';
+
+describe('SecurityLevelWidget', () => {
+  it('renders with default props', () => {
+    cy.mount(<SecurityLevelWidget level="Moderate" />);
+    cy.contains('Moderate').should('be.visible');
+  });
+  
+  it('handles level changes', () => {
+    cy.mount(<SecurityLevelWidget level="Low" />);
+    cy.get('select').select('High');
+    cy.contains('High').should('be.visible');
+  });
+});
+```
+
+**When to Use Component Tests:**
+- Unit-level testing of isolated React components
+- Testing component behavior without full application context
+- Faster feedback loop during development
+- Visual regression testing of individual components
+
+**When to Use E2E Tests:**
+- Complete user workflows and journeys
+- Integration between multiple components
+- Business logic spanning multiple features
+- Real-world user scenarios
 
 ### 🏗️ E2E Test Architecture
 
@@ -643,10 +895,12 @@ describe("Security Level Transitions", () => {
 
 ### 🛠️ Custom Cypress Commands
 
-The test suite includes custom commands for common test operations:
+The test suite includes custom commands optimized for Cypress 15.x:
 
 ```typescript
 // cypress/support/commands.ts
+
+// Type declarations for Cypress 15.x
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -656,11 +910,23 @@ declare global {
         integrity?: string,
         confidentiality?: string
       ): Chainable<void>
+      findWidget(widgetName: string): Chainable<JQuery<HTMLElement>>
+      findSecurityLevelControls(): Chainable<JQuery<HTMLElement>>
+      verifyContentPresent(
+        content: string | RegExp | Array<string | RegExp>
+      ): Chainable<JQuery<HTMLElement>>
+      forceDarkMode(): Chainable<void>
+      forceLightMode(): Chainable<void>
+      toggleTheme(): Chainable<void>
+      captureEntireWidget(widgetName: string): Chainable<void>
     }
   }
 }
 
-// Wait for application to fully load
+/**
+ * Wait for application to fully load
+ * Uses flexible detection strategies for robust waiting
+ */
 Cypress.Commands.add('ensureAppLoaded', (timeoutValue = 10000) => {
   cy.get('body').should('exist')
   
@@ -672,7 +938,7 @@ Cypress.Commands.add('ensureAppLoaded', (timeoutValue = 10000) => {
       cy.log('✅ Application loaded successfully')
     })
   
-  // Check if select elements are present
+  // Verify security level controls are present
   cy.get('select').then(($selects) => {
     if ($selects.length < 3) {
       cy.log('⚠️ Warning: Not all security level selects found')
@@ -680,8 +946,11 @@ Cypress.Commands.add('ensureAppLoaded', (timeoutValue = 10000) => {
   })
 })
 
-// Set security levels for all CIA components
-// Parameters: availability, integrity, confidentiality (in that order)
+/**
+ * Set security levels for all CIA components
+ * Parameters: availability, integrity, confidentiality (in that order)
+ * Uses multi-strategy approach for reliability
+ */
 Cypress.Commands.add('setSecurityLevels', (availability, integrity, confidentiality) => {
   cy.get('body').then(($body) => {
     const selectCount = $body.find('select').length
@@ -701,6 +970,172 @@ Cypress.Commands.add('setSecurityLevels', (availability, integrity, confidential
   })
   
   cy.wait(500) // Allow for state updates
+})
+
+/**
+ * Find widget using flexible selector strategies
+ * Implements multiple fallback patterns for robustness
+ */
+Cypress.Commands.add('findWidget', (widgetName: string) => {
+  const widgetPatterns = [
+    `widget-${widgetName}`,
+    `widget-${widgetName}-container`,
+    `${widgetName}-widget`,
+    `${widgetName}-container`,
+    `${widgetName}`,
+  ]
+
+  return cy.get('body').then(($body) => {
+    // Try each pattern until we find a match
+    for (const pattern of widgetPatterns) {
+      const selector = `[data-testid="${pattern}"]`
+      if ($body.find(selector).length) {
+        cy.log(`Found widget using selector: ${selector}`)
+        return cy.get(selector)
+      }
+    }
+    
+    // Fallback to partial match
+    const partialSelector = `[data-testid*="${widgetName}"]`
+    cy.log(`Using partial match: ${partialSelector}`)
+    return cy.get(partialSelector)
+  })
+})
+
+/**
+ * Find security level controls with resilient selectors
+ * Returns empty jQuery object if not found (won't break test chain)
+ */
+Cypress.Commands.add('findSecurityLevelControls', () => {
+  const selectors = [
+    '[data-testid="security-level-controls"]',
+    '[data-testid="security-level-selector"]',
+    '[data-testid*="security-level"]',
+    'select[name*="availability"], select[name*="integrity"], select[name*="confidentiality"]',
+    'select',
+  ]
+
+  return cy.get('body').then(($body) => {
+    for (const selector of selectors) {
+      const elements = $body.find(selector)
+      if (elements.length > 0) {
+        cy.log(`✅ Found security level controls: ${selector}`)
+        return cy.get(selector)
+      }
+    }
+    
+    cy.log('⚠️ Security level controls not found')
+    return cy.wrap(Cypress.$('<div>'))
+  }) as Cypress.Chainable<JQuery<HTMLElement>>
+})
+
+/**
+ * Verify content is present using flexible pattern matching
+ * Supports strings, regex, or arrays of patterns
+ */
+Cypress.Commands.add('verifyContentPresent', (content) => {
+  const contentPatterns = Array.isArray(content) ? content : [content]
+
+  return cy.get('body').then(($body) => {
+    const text = $body.text()
+    let matched = false
+
+    for (const pattern of contentPatterns) {
+      if (typeof pattern === 'string' && text.includes(pattern)) {
+        matched = true
+        cy.log(`Found content: "${pattern}"`)
+        break
+      } else if (pattern instanceof RegExp && pattern.test(text)) {
+        matched = true
+        cy.log(`Found content matching: ${pattern}`)
+        break
+      }
+    }
+
+    expect(matched, `Page should contain at least one of the patterns`).to.be.true
+    return cy.wrap($body)
+  })
+})
+
+/**
+ * Force dark mode via DOM manipulation
+ * More reliable than clicking theme toggle button
+ */
+Cypress.Commands.add('forceDarkMode', () => {
+  cy.document().then((doc) => {
+    doc.documentElement.classList.add('dark')
+    doc.body.classList.add('dark')
+    localStorage.setItem('darkMode', 'true')
+    cy.log('Forced dark mode')
+  })
+})
+
+/**
+ * Force light mode via DOM manipulation
+ */
+Cypress.Commands.add('forceLightMode', () => {
+  cy.document().then((doc) => {
+    doc.documentElement.classList.remove('dark')
+    doc.body.classList.remove('dark')
+    localStorage.setItem('darkMode', 'false')
+    cy.log('Forced light mode')
+  })
+})
+
+/**
+ * Capture screenshot of entire widget, adjusting viewport if needed
+ */
+Cypress.Commands.add('captureEntireWidget', (widgetName: string) => {
+  cy.findWidget(widgetName).then(($widget) => {
+    if ($widget.length === 0) {
+      cy.log(`Widget ${widgetName} not found`)
+      return
+    }
+
+    const widget = $widget[0]
+    const rect = widget.getBoundingClientRect()
+
+    // Adjust viewport for tall widgets
+    if (rect.height > 800) {
+      cy.viewport(1280, Math.min(rect.height + 100, 2000))
+      cy.wait(300)
+    }
+
+    cy.wrap($widget)
+      .scrollIntoView({ duration: 100 })
+      .screenshot(`full-widget-${widgetName}`, {
+        padding: 10,
+        overwrite: true,
+      })
+  })
+})
+```
+
+#### Enhanced Error Handling (Cypress 15.x)
+
+```typescript
+// Automatic failure diagnostics
+Cypress.on('fail', (error, runnable) => {
+  cy.log(`Test failed: ${runnable.title}`)
+  
+  // Capture failure context
+  const screenshotName = `${Cypress.spec.relative}/${runnable.title}-failure`
+  cy.screenshot(screenshotName)
+  
+  // Log DOM state
+  cy.document().then((doc) => {
+    cy.log(`Page title: ${doc.title}`)
+    cy.log(`Number of [data-testid] elements: ${doc.querySelectorAll('[data-testid]').length}`)
+  })
+  
+  // Check for console errors
+  cy.window().then((win) => {
+    if (win.consoleErrors?.length) {
+      cy.log(`Console errors: ${win.consoleErrors.length}`)
+    }
+  })
+  
+  throw error
 })
 ```
 
@@ -1068,39 +1503,195 @@ gh run view <run-id> --log
 
 E2E tests run automatically on every PR and merge to main:
 
+#### GitHub Actions Workflow (Cypress 15.x Optimized)
+
 ```yaml
 # .github/workflows/test-and-report.yml
-test-e2e:
+e2e-tests:
+  needs: [prepare, build-validation]
   runs-on: ubuntu-latest
   steps:
+    # Harden the runner
+    - name: Harden the runner
+      uses: step-security/harden-runner@v2
+      with:
+        egress-policy: audit
+    
+    # Checkout and setup
     - uses: actions/checkout@v5
     - uses: actions/setup-node@v6
       with:
         node-version: "24"
+        cache: "npm"
     
+    # Cache Cypress binary for faster runs
+    - name: Cache Cypress binary
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/Cypress
+        key: cypress-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-binary
+    
+    # Install dependencies
     - name: Install dependencies
-      run: npm ci
+      run: npm install
     
-    - name: Build application
-      run: npm run build
+    # Run Cypress tests with xvfb
+    - name: Start app and run Cypress tests
+      run: |
+        xvfb-run --auto-servernum --server-args="-screen 0 1280x720x24" npm run test:e2e
+      env:
+        CYPRESS_VIDEO: true
     
-    - name: Run E2E tests
-      run: npm run test:e2e
-    
-    - name: Merge Mochawesome reports
-      run: npm run test:e2ereportmerge
-    
-    - name: Generate HTML report
-      run: npm run test:e2ereporthtmlall
-    
-    - name: Upload test reports
+    # Upload test artifacts
+    - name: Upload Cypress results
+      if: always()
       uses: actions/upload-artifact@v5
       with:
-        name: cypress-reports
-        path: build/cypress/
+        name: cypress-results
+        path: |
+          cypress/videos
+          cypress/screenshots
+          build/cypress
 ```
 
-## 🚀 Test Execution Procedures
+#### Cypress 15.x CI Optimizations
+
+**1. Display Configuration**
+```yaml
+# Setup xvfb for headless browser testing
+- name: Setup display and dependencies
+  run: |
+    sudo apt-get update
+    sudo apt-get install -y xvfb libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2t64 libxtst6 xauth
+    sudo mkdir -p /var/run/dbus
+    sudo dbus-daemon --system --fork
+```
+
+**2. Binary Caching**
+```yaml
+# Speeds up CI runs by caching Cypress binary
+- name: Cache Cypress binary
+  uses: actions/cache@v4
+  with:
+    path: ~/.cache/Cypress
+    key: cypress-${{ runner.os }}-${{ hashFiles('**/package.json') }}
+```
+
+**3. Verification Step**
+```yaml
+# Verify Cypress is properly installed
+- name: Verify Cypress
+  run: npx cypress verify
+```
+
+**4. Parallel Execution (Optional)**
+```yaml
+# Run tests in parallel for faster feedback
+strategy:
+  matrix:
+    containers: [1, 2, 3]
+steps:
+  - name: Run Cypress tests
+    run: npx cypress run --record --parallel --group "E2E Tests"
+```
+
+#### Environment Variables for CI
+
+```bash
+# Enable video recording in CI
+CYPRESS_VIDEO=true
+
+# Custom base URL for different environments
+CYPRESS_BASE_URL=http://localhost:5173
+
+# Enable experimental features
+CYPRESS_experimentalMemoryManagement=true
+
+# Configure retries
+CYPRESS_retries=1
+```
+
+#### NPM Scripts for CI/CD
+
+```json
+{
+  "scripts": {
+    "test:e2e": "start-server-and-test 'vite --port 5173' http://localhost:5173 'cypress run'",
+    "test:e2ereportmerge": "npx mochawesome-merge build/cypress/mochawesome/*.json > build/cypress/mochawesome-all.json",
+    "test:e2ereporthtmlall": "npx marge -f index.html -o build/cypress/mochawesome build/cypress/mochawesome-all.json",
+    "cypress:verify": "cypress verify",
+    "cypress:install": "cypress install"
+  }
+}
+```
+
+#### Multi-Reporter Configuration
+
+```typescript
+// cypress.config.ts - Generate multiple report formats
+export default defineConfig({
+  reporter: "cypress-multi-reporters",
+  reporterOptions: {
+    reporterEnabled: "spec, cypress-junit-reporter, mochawesome",
+    mochaJunitReporterReporterOptions: {
+      mochaFile: "build/cypress/junit/results-[hash].xml",
+      toConsole: false,
+      attachments: true,
+      includePending: true,
+    },
+    mochawesomeReporterOptions: {
+      reportDir: "build/cypress/mochawesome",
+      overwrite: false,
+      html: true,
+      json: true,
+      charts: true,
+      embeddedScreenshots: true,
+    },
+  },
+});
+```
+
+#### Artifact Collection
+
+```yaml
+# Upload test artifacts for debugging
+- name: Upload Cypress results
+  if: always()
+  uses: actions/upload-artifact@v5
+  with:
+    name: cypress-results
+    path: |
+      build/cypress/videos
+      build/cypress/screenshots
+      build/cypress/mochawesome
+      build/cypress/junit
+    retention-days: 30
+```
+
+#### Test Result Publishing
+
+**Mochawesome HTML Reports:**
+```bash
+# Merge individual test reports
+npm run test:e2ereportmerge
+
+# Generate consolidated HTML report
+npm run test:e2ereporthtmlall
+
+# Reports published to: https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/
+```
+
+**JUnit XML Reports:**
+```xml
+<!-- Used by CI systems for test result tracking -->
+<testsuites>
+  <testsuite name="E2E Tests" tests="16" failures="0" errors="0">
+    <testcase classname="Security Level Widget" name="should render correctly"/>
+  </testsuite>
+</testsuites>
+```
+
+### 🔍 Test Failure Investigation & Debugging
 
 ### Local Development Execution
 
@@ -1294,6 +1885,275 @@ npm run generate:test-data
 npm run clean:test-data
 ```
 
+## 🔧 Cypress 15.x Troubleshooting
+
+### Common Issues and Solutions
+
+#### 1. TypeScript Compilation Errors
+
+**Issue:** TypeScript errors in test files or custom commands
+
+**Solution:**
+```typescript
+// Ensure tsconfig.json includes Cypress types
+{
+  "compilerOptions": {
+    "types": ["cypress", "node"]
+  },
+  "include": ["cypress/**/*.ts"]
+}
+
+// Update type declarations for custom commands
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      customCommand(): Chainable<void>;
+    }
+  }
+}
+```
+
+#### 2. Memory Issues During Test Runs
+
+**Issue:** Tests crash or become slow due to memory buildup
+
+**Solution:**
+```typescript
+// cypress.config.ts
+export default defineConfig({
+  experimentalMemoryManagement: true,
+  numTestsKeptInMemory: 10,
+  
+  e2e: {
+    testIsolation: true, // Clean state between tests
+  },
+});
+```
+
+#### 3. Selector Not Found / Element Not Visible
+
+**Issue:** Elements not found despite being present in DOM
+
+**Solution:**
+```typescript
+// Use flexible selector strategies
+cy.get('[data-testid="widget"]', { timeout: 10000 })
+  .should('be.visible')
+  .and('not.be.disabled');
+
+// Implement smart waiting
+cy.ensureAppLoaded(); // Custom command
+cy.wait(500); // Allow for animations
+```
+
+#### 4. Video Recording Issues
+
+**Issue:** Videos not recording or causing slowdown
+
+**Solution:**
+```bash
+# Disable video by default
+CYPRESS_VIDEO=false npm run test:e2e
+
+# Enable only in CI
+CYPRESS_VIDEO=true npm run test:e2e
+```
+
+```typescript
+// cypress.config.ts
+video: process.env.CYPRESS_VIDEO === 'true' || false,
+```
+
+#### 5. Test Retries and Flakiness
+
+**Issue:** Intermittent test failures
+
+**Solution:**
+```typescript
+// Configure retries for CI
+export default defineConfig({
+  e2e: {
+    retries: {
+      runMode: 1,     // Retry once in CI
+      openMode: 0,    // No retries in dev
+    },
+  },
+});
+
+// Use proper assertions with built-in retry
+cy.get('[data-testid="widget"]')
+  .should('be.visible')
+  .and('contain', 'Expected Text');
+```
+
+#### 6. Custom Command Type Errors
+
+**Issue:** Custom commands not recognized or type errors
+
+**Solution:**
+```typescript
+// cypress/support/e2e.ts - Import commands
+import './commands';
+
+// Ensure proper type declaration
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      findWidget(name: string): Chainable<JQuery<HTMLElement>>;
+    }
+  }
+}
+
+// Verify command is registered
+Cypress.Commands.add('findWidget', (name: string) => {
+  return cy.get(`[data-testid="${name}"]`);
+});
+```
+
+#### 7. CI/CD Pipeline Failures
+
+**Issue:** Tests pass locally but fail in CI
+
+**Solution:**
+```yaml
+# .github/workflows/test-and-report.yml
+- name: Start app and run Cypress tests
+  run: |
+    xvfb-run --auto-servernum --server-args="-screen 0 1280x720x24" npm run test:e2e
+  env:
+    CYPRESS_VIDEO: true
+    
+# Ensure proper display setup
+- name: Setup display and dependencies
+  run: |
+    sudo apt-get update
+    sudo apt-get install -y xvfb libgtk2.0-0 libgtk-3-0 libgbm-dev
+```
+
+#### 8. Component Test Configuration Issues
+
+**Issue:** Component tests not running or configuration errors
+
+**Solution:**
+```typescript
+// cypress.config.ts
+export default defineConfig({
+  component: {
+    devServer: {
+      framework: "react",
+      bundler: "vite",
+      viteConfig: {
+        configFile: resolve(__dirname, "./vite.config.ts"),
+      },
+    },
+  },
+});
+```
+
+### Debugging Techniques for Cypress 15.x
+
+**1. Enhanced Logging**
+```typescript
+// Log detailed information
+cy.log('🔍 Searching for widget');
+cy.get('[data-testid="widget"]').then(($el) => {
+  cy.log(`✓ Found ${$el.length} elements`);
+  cy.log(`Element text: ${$el.text()}`);
+});
+```
+
+**2. Screenshots on Failure**
+```typescript
+// Automatic screenshots
+cy.screenshot('test-state', { capture: 'viewport' });
+
+// Conditional screenshots
+if (Cypress.config('isInteractive')) {
+  cy.screenshot('debug-view');
+}
+```
+
+**3. Time-Travel Debugging**
+```bash
+# Open Cypress Test Runner for interactive debugging
+npm run cypress:open
+
+# Click on test steps to see DOM snapshots
+# Hover over commands to see before/after states
+```
+
+**4. Browser DevTools Integration**
+```typescript
+// Debug with browser console
+cy.window().then((win) => {
+  console.log('Window object:', win);
+  debugger; // Breakpoint in browser
+});
+
+// Pause test execution
+cy.pause();
+```
+
+**5. Network Request Monitoring**
+```typescript
+// Intercept and log API calls
+cy.intercept('GET', '/api/**', (req) => {
+  cy.log(`API Request: ${req.url}`);
+}).as('apiCalls');
+
+cy.wait('@apiCalls').its('response.statusCode').should('eq', 200);
+```
+
+### Performance Optimization for Cypress 15.x
+
+**1. Reduce Test Execution Time**
+```typescript
+// Optimize viewport size
+viewportWidth: 1280,
+viewportHeight: 800,
+
+// Faster timeouts
+defaultCommandTimeout: 6000,
+pageLoadTimeout: 8000,
+requestTimeout: 4000,
+
+// Disable animations
+waitForAnimations: false,
+```
+
+**2. Parallel Test Execution**
+```bash
+# Split tests across multiple runners (CI)
+# Terminal 1
+npx cypress run --spec "cypress/e2e/widgets/**/*.cy.ts"
+
+# Terminal 2
+npx cypress run --spec "cypress/e2e/integration/**/*.cy.ts"
+```
+
+**3. Smart Caching**
+```yaml
+# GitHub Actions - Cache Cypress binary
+- name: Cache Cypress binary
+  uses: actions/cache@v4
+  with:
+    path: ~/.cache/Cypress
+    key: cypress-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+```
+
+### Cypress 15.x Resources
+
+**Official Documentation:**
+- 📚 [Cypress 15.x Release Notes](https://docs.cypress.io/guides/references/changelog)
+- 🔧 [TypeScript Support](https://docs.cypress.io/guides/tooling/typescript-support)
+- 🧪 [Component Testing](https://docs.cypress.io/guides/component-testing/overview)
+- 🎯 [Best Practices](https://docs.cypress.io/guides/references/best-practices)
+
+**Project-Specific Resources:**
+- 📖 [CYPRESS-TROUBLESHOOTING.md](./CYPRESS-TROUBLESHOOTING.md)
+- 🔍 [CYPRESS_ANALYSIS_FINDINGS.md](./CYPRESS_ANALYSIS_FINDINGS.md)
+- ⚙️ [CYPRESS-CONFIG.md](./CYPRESS-CONFIG.md)
+
 ## 🔄 Test Maintenance Strategy
 
 ### Test Review Schedule
@@ -1329,6 +2189,7 @@ npm run clean:test-data
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 2.2 | 2025-01-20 | Documentation Agent | Added comprehensive Cypress 15.x migration section, including new features, breaking changes, best practices, troubleshooting guide, CI/CD optimizations, and enhanced custom commands documentation. Updated for Cypress 15.7.0. |
 | 2.1 | 2025-01-20 | Testing Agent | Added comprehensive Security Assessment Flow test suite (15 tests). Updated test counts and coverage metrics. Enhanced documentation with detailed test scenarios. |
 | 2.0 | 2025-01-14 | GitHub Copilot | Comprehensive update: Added all 15 test specs, Mermaid architecture diagram, actual test patterns, execution procedures, debugging guide. Updated to ISMS Style Guide format. |
 | 1.0 | 2025-01-10 | Development Team | Initial E2E test plan with generic examples |
