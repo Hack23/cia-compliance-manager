@@ -201,23 +201,3 @@ export const { toErrorObject, formatError } = errorUtils;
 
 // Other exports
 export { BUSINESS_IMPACT_CATEGORIES, calculateRiskLevel, RISK_LEVELS };
-
-// Legacy compatibility exports with explicit deprecation warnings
-/**
- * @deprecated Use formatSecurityLevelString instead
- */
-export const formatSecurityLevel = securityUtils.formatSecurityLevel;
-
-/**
- * @deprecated Use your own implementation - this will be removed in v1.0
- */
-export const SecurityLevelDisplay = ({ level }: { level: SecurityLevel | string }) => {
-  // Simple fallback implementation
-  return {
-    type: "div",
-    props: {
-      className: "security-level-display",
-      children: level,
-    },
-  };
-};

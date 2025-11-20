@@ -100,9 +100,6 @@ import {
   BUSINESS_IMPACT_CATEGORIES,
   calculateRiskLevel,
   RISK_LEVELS,
-  // Legacy exports
-  formatSecurityLevel,
-  SecurityLevelDisplay,
 } from './index';
 import { SecurityLevel } from '../types/cia';
 
@@ -234,43 +231,6 @@ describe('Utils Index - Widget Utilities', () => {
       const result = formatSecurityMetric(-1000, '$');
       expect(result).toContain('$');
       expect(result).toContain('-');
-    });
-  });
-});
-
-describe('Utils Index - Legacy Exports', () => {
-  // Testing deprecated functions for backward compatibility until removal
-  // These remain in the public API and must work correctly until officially removed
-  describe('SecurityLevelDisplay', () => {
-    it('returns a simple display object', () => {
-      const result = SecurityLevelDisplay({ level: 'High' as SecurityLevel });
-      expect(result).toHaveProperty('type');
-      expect(result).toHaveProperty('props');
-      expect(result.type).toBe('div');
-      expect(result.props).toHaveProperty('className');
-      expect(result.props).toHaveProperty('children');
-    });
-
-    it('handles string levels', () => {
-      const result = SecurityLevelDisplay({ level: 'Moderate' });
-      expect(result.props.children).toBe('Moderate');
-    });
-
-    it('handles SecurityLevel types', () => {
-      const result = SecurityLevelDisplay({ level: 'Low' as SecurityLevel });
-      expect(result.props.children).toBe('Low');
-    });
-  });
-
-  describe('formatSecurityLevel (deprecated)', () => {
-    it('is available for backwards compatibility', () => {
-      expect(formatSecurityLevel).toBeDefined();
-      expect(typeof formatSecurityLevel).toBe('function');
-    });
-
-    it('formats security levels', () => {
-      const result = formatSecurityLevel('High' as SecurityLevel);
-      expect(typeof result).toBe('string');
     });
   });
 });

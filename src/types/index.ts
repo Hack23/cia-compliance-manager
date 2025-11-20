@@ -57,18 +57,22 @@ export type {
   FrameworkComplianceStatus,
 } from "./compliance";
 
-// Widget Types - more selective exports to avoid ambiguity
+// Widget Types - export from widget-props.ts for impact widgets
 export type {
   AvailabilityImpactWidgetProps,
+  IntegrityImpactWidgetProps,
+  ConfidentialityImpactWidgetProps,
   BusinessImpactAnalysisWidgetProps,
   ComplianceStatusWidgetProps,
-  ConfidentialityImpactWidgetProps,
   CostEstimationWidgetProps,
-  IntegrityImpactWidgetProps,
   SecurityLevelWidgetProps,
   SecurityResourcesWidgetProps,
   TechnicalDetailsWidgetProps,
   ValueCreationWidgetProps,
+} from "./widget-props";
+
+// Export remaining widget types from widgets.ts
+export type {
   WidgetProps,
 } from "./widgets";
 

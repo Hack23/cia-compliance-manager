@@ -296,11 +296,6 @@ export interface CIADetails {
 }
 
 /**
- * @deprecated Use CIADetails instead - kept for backward compatibility
- */
-export type EnhancedCIADetails = CIADetails;
-
-/**
  * Data provider for CIA security information
  */
 export interface CIADataProvider {
@@ -333,12 +328,6 @@ export interface CIADataProvider {
    * Get default value points for a security level
    */
   getDefaultValuePoints?: (level: SecurityLevel) => string[];
-
-  /**
-   * Get value points for a security level
-   * @deprecated Use getDefaultValuePoints instead
-   */
-  getValuePoints?: (level: SecurityLevel) => string[];
 
   /**
    * Get security level recommendations

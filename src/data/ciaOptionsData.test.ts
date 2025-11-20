@@ -114,9 +114,7 @@ describe("CIA Options Data", () => {
 
     it("should have value points functions", () => {
       expect(defaultCIADataProvider.getDefaultValuePoints).toBeDefined();
-      expect(defaultCIADataProvider.getValuePoints).toBeDefined();
       expect(typeof defaultCIADataProvider.getDefaultValuePoints).toBe("function");
-      expect(typeof defaultCIADataProvider.getValuePoints).toBe("function");
     });
 
     it("should have all security levels in availability options", () => {

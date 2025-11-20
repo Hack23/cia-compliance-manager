@@ -5,7 +5,6 @@ import {
   CIAComponentType,
   CIADataProvider,
   CIADetails,
-  EnhancedCIADetails,
   ROIEstimate,
   ROIEstimatesMap,
   ROIMetrics,
@@ -67,9 +66,9 @@ describe("CIADetails Interface", () => {
     expect(result).toEqual(fullDetails);
   });
 
-  it("should work with deprecated EnhancedCIADetails for backward compatibility", () => {
-    // Create object using EnhancedCIADetails
-    const enhancedDetails: EnhancedCIADetails = {
+  it("should work with CIADetails interface", () => {
+    // Create object using CIADetails
+    const details: CIADetails = {
       description: "Using deprecated interface",
       technical: "Technical details",
       businessImpact: "Business impact details",
@@ -85,9 +84,9 @@ describe("CIADetails Interface", () => {
     };
 
     // Should work the same as CIADetails
-    expect(enhancedDetails.description).toBe("Using deprecated interface");
-    expect(enhancedDetails.recommendations.length).toBe(1);
-    expect(enhancedDetails.valuePoints?.length).toBe(1);
+    expect(details.description).toBe("Using deprecated interface");
+    expect(details.technical).toBe("Technical details");
+    expect(details.businessImpact).toBe("Business impact details");
   });
 
   it("should handle different combinations of optional fields", () => {

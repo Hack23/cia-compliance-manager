@@ -3,6 +3,8 @@ import {
   AvailabilityImpactWidgetProps,
   ConfidentialityImpactWidgetProps,
   IntegrityImpactWidgetProps,
+} from "./widget-props";
+import {
   SecurityLevelWidgetProps,
   SecurityResourcesWidgetProps
 } from "./widgets";

@@ -1,14 +1,8 @@
 /**
- * @deprecated Risk utility functions - these functions have been moved to other more appropriate modules
+ * Risk utility functions for CIA compliance management
  *
- * ## Migration Guide
- *
- * - For SLA metrics: use `getDefaultSLAMetrics` from `data/ciaOptionsData.ts`
- * - For privacy impact: use `getDefaultPrivacyImpact` from `data/ciaOptionsData.ts`
- * - For validation level: use `getDefaultValidationLevel` from `data/ciaOptionsData.ts`
- * - For error rate: use `getDefaultErrorRate` from `data/ciaOptionsData.ts`
- * - For business impact: use `createDefaultBusinessImpact` from `data/riskImpactData.ts`
- * - For service access: use methods on `ciaContentService` instance
+ * Provides utilities for risk assessment, business impact calculations,
+ * and security level mappings.
  */
 
 import {
@@ -24,7 +18,7 @@ import type { StatusType } from "../types/common/StatusTypes";
 import { getSecurityLevelValue } from "./securityLevelUtils";
 import { isNullish } from "./typeGuards";
 
-// Re-export the functions from their new locations for backward compatibility
+// Re-export the functions from their canonical locations
 export {
   createDefaultBusinessImpact,
   getDefaultErrorRate,
@@ -41,7 +35,7 @@ export const getErrorRate = getDefaultErrorRate;
 export const createBusinessImpact = createDefaultBusinessImpact;
 
 /**
- * @deprecated Use createDefaultBusinessImpact from riskImpactData.ts instead
+ * Get default business impact details
  */
 export function getDefaultBusinessImpact(
   component: string,
