@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { CIAComponent, SecurityLevel } from "./cia";
 
 /**
@@ -225,7 +226,7 @@ export interface ComponentImpactBaseProps {
  * Base props common to all widgets
  * 
  * Provides the foundation for all widget components with standard
- * styling, testing capabilities, and error handling.
+ * styling, testing capabilities, error handling, and child content.
  * 
  * Extends CommonWidgetProps to maintain consistency with existing patterns.
  * 
@@ -237,6 +238,11 @@ export interface ComponentImpactBaseProps {
  * ```
  */
 export interface BaseWidgetProps extends CommonWidgetProps {
+  /**
+   * Optional children elements
+   */
+  children?: ReactNode;
+  
   /**
    * Optional callback when widget encounters an error
    * @param error - Error that occurred

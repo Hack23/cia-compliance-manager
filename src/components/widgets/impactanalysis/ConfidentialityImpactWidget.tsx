@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { getDefaultPrivacyImpact } from "../../../data/ciaOptionsData";
 import { useBusinessImpact, useComponentDetails } from "../../../hooks";
@@ -39,6 +39,13 @@ const ConfidentialityImpactWidget: React.FC<
 
   // Use the effective level - confidentialityLevel is required
   const effectiveLevel = confidentialityLevel || "Moderate";
+
+  // Invoke error callback when service error occurs
+  useEffect(() => {
+    if (serviceError && _onError) {
+      _onError(serviceError);
+    }
+  }, [serviceError, _onError]);
 
   // Use custom hooks for data fetching (replaces manual useMemo logic)
   const details = useComponentDetails("confidentiality", effectiveLevel);

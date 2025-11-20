@@ -6,7 +6,7 @@ import {
   ROIEstimate,
   TechnicalImplementationDetails,
 } from "./cia-services";
-import { CommonWidgetProps, WithSecurityLevelProps } from "./widget-props";
+import { BaseWidgetProps, CommonWidgetProps, WithSecurityLevelProps } from "./widget-props";
 
 /**
  * Widget-specific interfaces that extend or use the core CIA types
@@ -22,18 +22,6 @@ import { CommonWidgetProps, WithSecurityLevelProps } from "./widget-props";
  * @category Widgets
  * @packageDocumentation
  */
-
-/**
- * Base widget props shared by all widgets
- *
- * @category Base Types
- */
-export interface BaseWidgetProps extends CommonWidgetProps {
-  /**
-   * Optional children elements
-   */
-  children?: ReactNode;
-}
 
 /**
  * Props for security-related widgets
