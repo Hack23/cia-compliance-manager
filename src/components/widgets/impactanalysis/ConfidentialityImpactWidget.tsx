@@ -27,6 +27,7 @@ const ConfidentialityImpactWidget: React.FC<
   confidentialityLevel,
   className = "",
   testId = "widget-confidentiality-impact",
+  showExtendedDetails: _showExtendedDetails = false,
   onError: _onError,
 }) => {
   // Use the content service to get loading/error state
