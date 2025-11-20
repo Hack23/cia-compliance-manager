@@ -747,9 +747,7 @@ export interface ConfidentialityImpactWidgetProps extends BaseWidgetProps {
  * />
  * ```
  */
-export interface TechnicalDetailsWidgetProps extends AllCIAComponentsProps {
-  // All props inherited from AllCIAComponentsProps
-}
+export type TechnicalDetailsWidgetProps = AllCIAComponentsProps;
 
 /**
  * Props for SecurityResourcesWidget component

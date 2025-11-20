@@ -340,9 +340,7 @@ export interface ValueCreationWidgetProps extends CIABaseWidgetProps {
  *
  * @category Business Widgets
  */
-export interface CostEstimationWidgetProps extends CIABaseWidgetProps {
-  // No additional props needed beyond CIABaseWidgetProps
-}
+export type CostEstimationWidgetProps = CIABaseWidgetProps;
 
 /**
  * Props for technical details widgets
@@ -550,10 +548,7 @@ export interface ComponentImpactBaseProps {
  *
  * @category Impact Widgets
  */
-export interface AvailabilityImpactWidgetProps
-  extends ComponentImpactBaseProps {
-  // All required props are inherited from ComponentImpactBaseProps
-}
+export type AvailabilityImpactWidgetProps = ComponentImpactBaseProps;
 
 /**
  * @deprecated Use IntegrityImpactWidgetProps from widget-props.ts instead
@@ -567,9 +562,7 @@ export interface AvailabilityImpactWidgetProps
  *
  * @category Impact Widgets
  */
-export interface IntegrityImpactWidgetProps extends ComponentImpactBaseProps {
-  // All required props are inherited from ComponentImpactBaseProps
-}
+export type IntegrityImpactWidgetProps = ComponentImpactBaseProps;
 
 /**
  * @deprecated Use ConfidentialityImpactWidgetProps from widget-props.ts instead
@@ -583,7 +576,4 @@ export interface IntegrityImpactWidgetProps extends ComponentImpactBaseProps {
  *
  * @category Impact Widgets
  */
-export interface ConfidentialityImpactWidgetProps
-  extends ComponentImpactBaseProps {
-  // All required props are inherited from ComponentImpactBaseProps
-}
+export type ConfidentialityImpactWidgetProps = ComponentImpactBaseProps;
