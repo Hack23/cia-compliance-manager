@@ -11,6 +11,11 @@
  * @see ../../../SECURITY.md#security-headers-implementation
  */
 
+import {
+  SECURITY_HEADER_SELECTORS,
+  SECURITY_LAYER_CONFIGS,
+} from "../../support/constants";
+
 describe("Security Headers", () => {
   beforeEach(() => {
     cy.visit("/");
@@ -147,12 +152,12 @@ describe("Security Headers", () => {
   describe("Security Headers Comprehensive Check", () => {
     it("should have all required security headers present", () => {
       const requiredHeaders = [
-        'meta[http-equiv="Content-Security-Policy"]',
-        'meta[http-equiv="X-Content-Type-Options"]',
-        'meta[http-equiv="X-Frame-Options"]',
-        'meta[http-equiv="Cross-Origin-Opener-Policy"]',
-        'meta[http-equiv="Cross-Origin-Embedder-Policy"]',
-        'meta[name="referrer"]',
+        SECURITY_HEADER_SELECTORS.CSP,
+        SECURITY_HEADER_SELECTORS.X_CONTENT_TYPE_OPTIONS,
+        SECURITY_HEADER_SELECTORS.X_FRAME_OPTIONS,
+        SECURITY_HEADER_SELECTORS.COOP,
+        SECURITY_HEADER_SELECTORS.COEP,
+        SECURITY_HEADER_SELECTORS.REFERRER,
       ];
 
       requiredHeaders.forEach((selector) => {
@@ -161,24 +166,34 @@ describe("Security Headers", () => {
     });
 
     it("should not display any CSP violations in console", () => {
+      // This test needs to be run separately to capture violations during initial page load
+      cy.visit("/", {
+        onBeforeLoad(win: Window) {
+          // Track CSP violations
+          let cspViolations = 0;
+          win.addEventListener("securitypolicyviolation", (e) => {
+            cspViolations++;
+            // Log violation details for debugging
+            cy.log(
+              `CSP Violation: ${(e as SecurityPolicyViolationEvent).violatedDirective} - ${(e as SecurityPolicyViolationEvent).blockedURI || "inline"}`
+            );
+          });
+          // Store reference for later assertion
+          (win as Window & { cspViolations: () => number }).cspViolations =
+            () => cspViolations;
+        },
+      });
+      cy.ensureAppLoaded();
+
+      // Wait a moment for any violations to be reported
+      cy.wait(1000);
+
+      // Verify no violations occurred during page load
       cy.window().then((win) => {
-        // Check for CSP violation reports
-        cy.wrap(win).its("console").should("exist");
-
-        // Monitor for CSP violations
-        let cspViolations = 0;
-        win.addEventListener("securitypolicyviolation", (e) => {
-          cspViolations++;
-          cy.log(
-            `CSP Violation: ${e.violatedDirective} - ${e.blockedURI || "inline"}`
-          );
-        });
-
-        // Wait a moment for any violations to be reported
-        cy.wait(1000);
-
-        // Verify no violations occurred during page load
-        cy.wrap(cspViolations).should("equal", 0, "No CSP violations detected");
+        const violations = (
+          win as Window & { cspViolations: () => number }
+        ).cspViolations();
+        expect(violations).to.equal(0, "No CSP violations detected");
       });
     });
   });
@@ -187,40 +202,21 @@ describe("Security Headers", () => {
     it("should meet Application Security Framework requirements", () => {
       // Verify all security headers are present as per ISMS requirements
       cy.get("head")
-        .find('meta[http-equiv="Content-Security-Policy"]')
+        .find(SECURITY_HEADER_SELECTORS.CSP)
         .should("exist");
       cy.get("head")
-        .find('meta[http-equiv="X-Frame-Options"]')
+        .find(SECURITY_HEADER_SELECTORS.X_FRAME_OPTIONS)
         .should("exist");
       cy.get("head")
-        .find('meta[http-equiv="X-Content-Type-Options"]')
+        .find(SECURITY_HEADER_SELECTORS.X_CONTENT_TYPE_OPTIONS)
         .should("exist");
 
       cy.log("✅ Application Security Framework requirements met");
     });
 
     it("should implement defense-in-depth security strategy", () => {
-      // Multiple layers of security controls
-      const securityLayers = [
-        {
-          name: "XSS Protection",
-          selector: 'meta[http-equiv="Content-Security-Policy"]',
-        },
-        {
-          name: "Clickjacking Protection",
-          selector: 'meta[http-equiv="X-Frame-Options"]',
-        },
-        {
-          name: "MIME-Sniffing Protection",
-          selector: 'meta[http-equiv="X-Content-Type-Options"]',
-        },
-        {
-          name: "Spectre Protection",
-          selector: 'meta[http-equiv="Cross-Origin-Opener-Policy"]',
-        },
-      ];
-
-      securityLayers.forEach((layer) => {
+      // Multiple layers of security controls using reusable constants
+      SECURITY_LAYER_CONFIGS.forEach((layer) => {
         cy.get(layer.selector).should(
           "exist",
           `${layer.name} should be implemented`

@@ -1,6 +1,6 @@
 # Security Headers Configuration
 
-**Document Owner:** Security Team | **Version:** 1.0 | **Last Updated:** 2025-11-21
+**Document Owner:** Security Team | **Version:** 1.0 | **Last Updated:** 2024-11-21
 
 ## Overview
 
@@ -411,7 +411,7 @@ Before deploying changes:
 
 | Version | Date       | Changes                                 | Author        |
 |---------|------------|-----------------------------------------|---------------|
-| 1.0     | 2025-11-21 | Initial documentation for v1.0 release | Security Team |
+| 1.0     | 2024-11-21 | Initial documentation for v1.0 release | Security Team |
 
 ---
 
