@@ -6,7 +6,7 @@ import {
   ROIEstimate,
   TechnicalImplementationDetails,
 } from "./cia-services";
-import { BaseWidgetProps, CommonWidgetProps, WithSecurityLevelProps } from "./widget-props";
+import { BaseWidgetProps, WithSecurityLevelProps } from "./widget-props";
 
 /**
  * Widget-specific interfaces that extend or use the core CIA types
