@@ -13,6 +13,7 @@ import KeyValuePair from "../../common/KeyValuePair";
 import RiskLevelBadge from "../../common/RiskLevelBadge";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
 /**
  * Props for BusinessImpactAnalysisWidget component
@@ -477,7 +478,8 @@ const BusinessImpactAnalysisWidget: React.FC<
   };
 
   return (
-    <WidgetContainer
+    <WidgetErrorBoundary widgetName="Business Impact Analysis">
+      <WidgetContainer
       title={
         WIDGET_TITLES.BUSINESS_IMPACT_ANALYSIS || "Business Impact Analysis"
       }
@@ -657,6 +659,7 @@ const BusinessImpactAnalysisWidget: React.FC<
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 

@@ -10,6 +10,7 @@ import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
 import { isArray, isNullish, isString } from "../../../utils/typeGuards";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
 /**
  * Widget for estimating implementation and operational costs
@@ -206,7 +207,8 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
   }, [totalCapex, totalOpex]);
 
   return (
-    <WidgetContainer
+    <WidgetErrorBoundary widgetName="Cost Estimation">
+      <WidgetContainer
       title={WIDGET_TITLES.COST_ESTIMATION || "Cost Estimation"}
       icon={WIDGET_ICONS.COST_ESTIMATION || "💰"}
       className={className}
@@ -490,6 +492,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 

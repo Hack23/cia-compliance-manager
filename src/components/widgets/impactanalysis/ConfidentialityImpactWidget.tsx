@@ -8,6 +8,7 @@ import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
 /**
  * Displays confidentiality impact details for the selected security level
@@ -74,7 +75,8 @@ const ConfidentialityImpactWidget: React.FC<
   }, [details, effectiveLevel]);
 
   return (
-    <WidgetContainer
+    <WidgetErrorBoundary widgetName="Confidentiality Impact">
+      <WidgetContainer
       title={
         WIDGET_TITLES.CONFIDENTIALITY_IMPACT ||
         "Confidentiality Impact Analysis"
@@ -146,6 +148,7 @@ const ConfidentialityImpactWidget: React.FC<
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 

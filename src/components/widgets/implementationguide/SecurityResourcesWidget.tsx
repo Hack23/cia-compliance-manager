@@ -12,6 +12,7 @@ import {
 } from "../../../utils/typeGuards";
 import ResourceCard from "../../common/ResourceCard";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
 /**
  * Props for SecurityResourcesWidget component
@@ -359,7 +360,8 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   ]);
 
   return (
-    <WidgetContainer
+    <WidgetErrorBoundary widgetName="Security Resources">
+      <WidgetContainer
       title={WIDGET_TITLES.SECURITY_RESOURCES || "Security Resources"}
       icon={WIDGET_ICONS.SECURITY_RESOURCES || "📚"}
       className={className}
@@ -699,6 +701,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 

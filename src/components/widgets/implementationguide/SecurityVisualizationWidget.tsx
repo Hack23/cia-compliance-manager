@@ -17,6 +17,7 @@ import {
 import RadarChart from "../../charts/RadarChart";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
 /**
  * Props for SecurityVisualizationWidget component
@@ -164,7 +165,8 @@ const SecurityVisualizationWidget: React.FC<
   };
 
   return (
-    <WidgetContainer
+    <WidgetErrorBoundary widgetName="Security Visualization">
+      <WidgetContainer
       title={WIDGET_TITLES.SECURITY_VISUALIZATION || "Security Visualization"}
       icon={WIDGET_ICONS.SECURITY_VISUALIZATION || "📊"}
       className={className}
@@ -364,6 +366,7 @@ const SecurityVisualizationWidget: React.FC<
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 

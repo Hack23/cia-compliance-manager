@@ -10,6 +10,7 @@ import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
 // Extended interface for SLA metrics to improve type safety
 interface SLAMetrics {
@@ -68,7 +69,8 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   }, [details, effectiveLevel]);
 
   return (
-    <WidgetContainer
+    <WidgetErrorBoundary widgetName="Availability Impact">
+      <WidgetContainer
       title={
         WIDGET_TITLES.AVAILABILITY_IMPACT || "Availability Impact Analysis"
       }
@@ -151,6 +153,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 

@@ -13,6 +13,7 @@ import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
 /**
  * Widget that displays the impact of selected integrity level
@@ -74,7 +75,8 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
   }, [integrityDetails, effectiveLevel]);
 
   return (
-    <WidgetContainer
+    <WidgetErrorBoundary widgetName="Integrity Impact">
+      <WidgetContainer
       title={WIDGET_TITLES.INTEGRITY_IMPACT || "Integrity Impact Analysis"}
       icon={WIDGET_ICONS.INTEGRITY_IMPACT || "✓"}
       className={className}
@@ -155,6 +157,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
         )}
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 

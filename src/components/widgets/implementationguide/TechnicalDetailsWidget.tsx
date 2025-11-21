@@ -4,6 +4,7 @@ import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { useTechnicalDetailsData } from "../../../hooks/useTechnicalDetailsData";
 import { SecurityLevel } from "../../../types/cia";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 import { CIAComponentDetails } from "./CIAComponentDetails";
 
 /**
@@ -79,7 +80,8 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   );
 
   return (
-    <WidgetContainer
+    <WidgetErrorBoundary widgetName="Technical Details">
+      <WidgetContainer
       title={
         WIDGET_TITLES.TECHNICAL_DETAILS || "Technical Implementation Details"
       }
@@ -222,6 +224,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 
