@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the bundle size optimizations implemented in v0.9.1+ to reduce the JavaScript bundle size from 188KB to 117KB (gzip) for initial page load - a 37.9% reduction that significantly improves performance.
+This document describes the bundle size optimizations implemented in v0.9.1+ to reduce the JavaScript bundle size from 188KB to 117KB (gzip) for initial page load - a 37.5% reduction that significantly improves performance.
 
 ## Optimization Results
 
@@ -21,9 +21,9 @@ This document describes the bundle size optimizations implemented in v0.9.1+ to 
     - SecurityVisualizationWidget: 1.79 KB
 
 ### Performance Impact
-- **71.6 KB reduction** in initial bundle size
-- **37.9% faster** initial page load
-- **Exceeds target** of <180 KB by 62.6 KB
+- **70.54 KB reduction** in initial bundle size
+- **37.5% smaller** initial bundle (188KB → 117.46KB)
+- **Exceeds target** of <180 KB by 62.54 KB
 - Chart.js only loads when visualization widget is viewed
 
 ## Optimization Techniques
