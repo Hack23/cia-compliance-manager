@@ -12,8 +12,14 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { CHART_TEST_IDS } from "../../constants/testIds";
 
-// Register Chart.js components only if not already registered
-// Use overrides map to check if radar controller exists
+// Register Chart.js components at module level (intentional)
+// This executes once when the module is first imported, which is the recommended
+// approach for Chart.js registration. The check prevents duplicate registration
+// in environments where the module might be imported multiple times (e.g., tests).
+// Module-level registration is safe because:
+// 1. Chart.js registration is global and idempotent
+// 2. The overrides check ensures components are only registered once
+// 3. Lazy loading of SecurityVisualizationWidget defers this until needed
 const isRadarRegistered = Chart.overrides.radar !== undefined;
 if (!isRadarRegistered) {
   Chart.register(

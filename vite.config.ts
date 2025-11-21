@@ -30,6 +30,8 @@ export default defineConfig(({ mode }) => ({
       open: false,
       gzipSize: true,
       brotliSize: true,
+      template: 'treemap',
+      projectRoot: process.cwd(),
     })] : []),
   ],
   publicDir: "public",
