@@ -30,7 +30,8 @@
     "resourceSizes": [
       {
         "resourceType": "script",
-        "budget": 180
+        "budget": 120,
+        "description": "Initial JS bundle (gzip) - excludes lazy loaded chunks"
       },
       {
         "resourceType": "image",

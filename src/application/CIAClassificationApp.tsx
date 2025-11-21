@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, lazy, Suspense } from "react";
 // Import widgets directly instead of Dashboard
 import BusinessImpactAnalysisWidget from "../components/widgets/assessmentcenter/BusinessImpactAnalysisWidget";
 import SecurityLevelWidget from "../components/widgets/assessmentcenter/SecurityLevelWidget";
@@ -10,8 +10,13 @@ import AvailabilityImpactWidget from "../components/widgets/impactanalysis/Avail
 import ConfidentialityImpactWidget from "../components/widgets/impactanalysis/ConfidentialityImpactWidget";
 import IntegrityImpactWidget from "../components/widgets/impactanalysis/IntegrityImpactWidget";
 import SecurityResourcesWidget from "../components/widgets/implementationguide/SecurityResourcesWidget";
-import SecurityVisualizationWidget from "../components/widgets/implementationguide/SecurityVisualizationWidget";
 import TechnicalDetailsWidget from "../components/widgets/implementationguide/TechnicalDetailsWidget";
+
+// Lazy load SecurityVisualizationWidget as it includes Chart.js dependency
+const SecurityVisualizationWidget = lazy(
+  () => import("../components/widgets/implementationguide/SecurityVisualizationWidget")
+);
+
 import WidgetErrorBoundary from "../components/common/WidgetErrorBoundary";
 import { APP_TEST_IDS, UI_TEXT } from "../constants";
 import { useSecurityLevelState, useLocalStorage, SecurityLevelState } from "../hooks";
@@ -315,15 +320,21 @@ const CIAClassificationApp: React.FC = () => {
               </WidgetErrorBoundary>
             </div>
 
-            {/* Security Visualization Widget */}
+            {/* Security Visualization Widget - Lazy Loaded */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Security Visualization" onError={handleWidgetError}>
-                <SecurityVisualizationWidget
-                  availabilityLevel={levels.availability}
-                  integrityLevel={levels.integrity}
-                  confidentialityLevel={levels.confidentiality}
-                  testId="widget-security-visualization"
-                />
+                <Suspense fallback={
+                  <div className="widget-loading" role="status" aria-live="polite">
+                    Loading visualization...
+                  </div>
+                }>
+                  <SecurityVisualizationWidget
+                    availabilityLevel={levels.availability}
+                    integrityLevel={levels.integrity}
+                    confidentialityLevel={levels.confidentiality}
+                    testId="widget-security-visualization"
+                  />
+                </Suspense>
               </WidgetErrorBoundary>
             </div>
 

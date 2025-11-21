@@ -2,3 +2,21 @@
 .app-root {
   min-height: 100vh;
 }
+
+/* Loading state for lazy-loaded widgets */
+.widget-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 2rem;
+  color: #666;
+  font-style: italic;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+}
+
+.dark .widget-loading {
+  color: #aaa;
+  background: rgba(255, 255, 255, 0.02);
+}

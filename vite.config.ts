@@ -3,6 +3,7 @@ import { readFileSync } from "fs";
 import path from "path";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig as defineVitestConfig } from "vitest/config";
 
 // Read version from package.json
@@ -17,12 +18,21 @@ const packageJson: PackageJson = JSON.parse(
 );
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     // Enable React features
     react(),
     // Support for TypeScript paths
     tsconfigPaths(),
+    // Bundle size visualization (only in production builds)
+    ...(mode === 'production' ? [visualizer({
+      filename: "./build/stats.html",
+      open: false,
+      gzipSize: true,
+      brotliSize: true,
+      template: 'treemap',
+      projectRoot: process.cwd(),
+    })] : []),
   ],
   publicDir: "public",
   server: {
@@ -64,11 +74,22 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          // Create a "vendor" chunk for node_modules
+          // Create separate chunks for better code splitting
           if (id.includes("node_modules")) {
-            if (id.includes("react") || id.includes("react-dom")) {
-              return "react";
+            // React and React DOM in separate chunk
+            if (id.includes("react") || id.includes("react-dom") || id.includes("scheduler")) {
+              return "react-vendor";
             }
+            // Chart.js in separate chunk for lazy loading
+            // @kurkle/color is a required Chart.js dependency for color handling
+            if (id.includes("chart.js") || id.includes("@kurkle/color")) {
+              return "chart";
+            }
+            // React Error Boundary in separate chunk
+            if (id.includes("react-error-boundary")) {
+              return "react-vendor";
+            }
+            // Other vendor dependencies
             return "vendor";
           }
         },
@@ -142,4 +163,4 @@ export default defineConfig({
       },
     },
   }),
-});
+}));
