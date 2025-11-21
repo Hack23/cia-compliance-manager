@@ -13,12 +13,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { CHART_TEST_IDS } from "../../constants/testIds";
 
 // Register Chart.js components only if not already registered
-// Use try-catch to safely check registry without throwing errors
-try {
-  // Check if radar controller is already registered
-  Chart.registry.getController('radar');
-} catch {
-  // Not registered yet, register all required components
+// Use overrides map to check if radar controller exists
+const isRadarRegistered = Chart.overrides.radar !== undefined;
+if (!isRadarRegistered) {
   Chart.register(
     RadarController,
     RadialLinearScale,
