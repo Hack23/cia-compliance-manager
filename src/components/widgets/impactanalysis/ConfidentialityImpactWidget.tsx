@@ -77,16 +77,16 @@ const ConfidentialityImpactWidget: React.FC<
   return (
     <WidgetErrorBoundary widgetName="Confidentiality Impact">
       <WidgetContainer
-      title={
-        WIDGET_TITLES.CONFIDENTIALITY_IMPACT ||
-        "Confidentiality Impact Analysis"
-      }
-      icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT || "🔒"}
-      className={`${className} overflow-visible`}
-      testId={testId}
-      isLoading={isLoading}
-      error={serviceError}
-    >
+        title={
+          WIDGET_TITLES.CONFIDENTIALITY_IMPACT ||
+          "Confidentiality Impact Analysis"
+        }
+        icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT || "🔒"}
+        className={`${className} overflow-visible`}
+        testId={testId}
+        isLoading={isLoading}
+        error={serviceError}
+      >
       <div className="max-h-[550px] overflow-y-auto pr-1">
         <div
           className="p-4"

@@ -480,15 +480,15 @@ const BusinessImpactAnalysisWidget: React.FC<
   return (
     <WidgetErrorBoundary widgetName="Business Impact Analysis">
       <WidgetContainer
-      title={
-        WIDGET_TITLES.BUSINESS_IMPACT_ANALYSIS || "Business Impact Analysis"
-      }
-      icon={WIDGET_ICONS.BUSINESS_IMPACT_ANALYSIS || "💼"}
-      className={className}
-      testId={testId}
-      isLoading={isLoading}
-      error={serviceError}
-    >
+        title={
+          WIDGET_TITLES.BUSINESS_IMPACT_ANALYSIS || "Business Impact Analysis"
+        }
+        icon={WIDGET_ICONS.BUSINESS_IMPACT_ANALYSIS || "💼"}
+        className={className}
+        testId={testId}
+        isLoading={isLoading}
+        error={serviceError}
+      >
       <div className="p-4">
         {/* Component Business Impacts */}
         <div className="mb-4">

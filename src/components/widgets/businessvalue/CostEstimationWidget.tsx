@@ -209,13 +209,13 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
   return (
     <WidgetErrorBoundary widgetName="Cost Estimation">
       <WidgetContainer
-      title={WIDGET_TITLES.COST_ESTIMATION || "Cost Estimation"}
-      icon={WIDGET_ICONS.COST_ESTIMATION || "💰"}
-      className={className}
-      testId={testId}
-      isLoading={isLoading}
-      error={serviceError}
-    >
+        title={WIDGET_TITLES.COST_ESTIMATION || "Cost Estimation"}
+        icon={WIDGET_ICONS.COST_ESTIMATION || "💰"}
+        className={className}
+        testId={testId}
+        isLoading={isLoading}
+        error={serviceError}
+      >
       <div className="p-4">
         {/* Introduction */}
         <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">

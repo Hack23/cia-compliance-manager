@@ -71,15 +71,15 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   return (
     <WidgetErrorBoundary widgetName="Availability Impact">
       <WidgetContainer
-      title={
-        WIDGET_TITLES.AVAILABILITY_IMPACT || "Availability Impact Analysis"
-      }
-      icon={WIDGET_ICONS.AVAILABILITY_IMPACT || "⏱️"}
-      className={`${className} cia-availability`}
-      testId={testId}
-      isLoading={isLoading}
-      error={error}
-    >
+        title={
+          WIDGET_TITLES.AVAILABILITY_IMPACT || "Availability Impact Analysis"
+        }
+        icon={WIDGET_ICONS.AVAILABILITY_IMPACT || "⏱️"}
+        className={`${className} cia-availability`}
+        testId={testId}
+        isLoading={isLoading}
+        error={error}
+      >
       <div className="p-4 cia-widget">
         {/* Security level indicator */}
         <div className="mb-4">

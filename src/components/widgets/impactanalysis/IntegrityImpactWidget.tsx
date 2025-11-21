@@ -77,13 +77,13 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
   return (
     <WidgetErrorBoundary widgetName="Integrity Impact">
       <WidgetContainer
-      title={WIDGET_TITLES.INTEGRITY_IMPACT || "Integrity Impact Analysis"}
-      icon={WIDGET_ICONS.INTEGRITY_IMPACT || "✓"}
-      className={className}
-      testId={testId}
-      isLoading={isLoading}
-      error={error}
-    >
+        title={WIDGET_TITLES.INTEGRITY_IMPACT || "Integrity Impact Analysis"}
+        icon={WIDGET_ICONS.INTEGRITY_IMPACT || "✓"}
+        className={className}
+        testId={testId}
+        isLoading={isLoading}
+        error={error}
+      >
       <div className="p-4">
         {/* Security level indicator */}
         <div className="mb-4">

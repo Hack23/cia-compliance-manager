@@ -167,13 +167,13 @@ const SecurityVisualizationWidget: React.FC<
   return (
     <WidgetErrorBoundary widgetName="Security Visualization">
       <WidgetContainer
-      title={WIDGET_TITLES.SECURITY_VISUALIZATION || "Security Visualization"}
-      icon={WIDGET_ICONS.SECURITY_VISUALIZATION || "📊"}
-      className={className}
-      testId={testId}
-      isLoading={isLoading}
-      error={error}
-    >
+        title={WIDGET_TITLES.SECURITY_VISUALIZATION || "Security Visualization"}
+        icon={WIDGET_ICONS.SECURITY_VISUALIZATION || "📊"}
+        className={className}
+        testId={testId}
+        isLoading={isLoading}
+        error={error}
+      >
       <div className="p-4">
         {/* Security score section */}
         <div className="mb-6">

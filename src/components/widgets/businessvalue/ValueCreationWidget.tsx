@@ -327,13 +327,13 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   return (
     <WidgetErrorBoundary widgetName="Value Creation">
       <WidgetContainer
-      title={WIDGET_TITLES.VALUE_CREATION || "Business Value Creation"}
-      icon={WIDGET_ICONS.VALUE_CREATION || "💰"}
-      className={className}
-      testId={testId}
-      isLoading={isLoading}
-      error={error}
-    >
+        title={WIDGET_TITLES.VALUE_CREATION || "Business Value Creation"}
+        icon={WIDGET_ICONS.VALUE_CREATION || "💰"}
+        className={className}
+        testId={testId}
+        isLoading={isLoading}
+        error={error}
+      >
       <div className="p-4">
         {/* Overview section */}
         <div className="mb-6">

@@ -362,13 +362,13 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   return (
     <WidgetErrorBoundary widgetName="Security Resources">
       <WidgetContainer
-      title={WIDGET_TITLES.SECURITY_RESOURCES || "Security Resources"}
-      icon={WIDGET_ICONS.SECURITY_RESOURCES || "📚"}
-      className={className}
-      testId={testId}
-      isLoading={isLoading}
-      error={serviceError}
-    >
+        title={WIDGET_TITLES.SECURITY_RESOURCES || "Security Resources"}
+        icon={WIDGET_ICONS.SECURITY_RESOURCES || "📚"}
+        className={className}
+        testId={testId}
+        isLoading={isLoading}
+        error={serviceError}
+      >
       <div className="p-4">
         {/* Widget introduction */}
         <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
