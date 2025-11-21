@@ -7,22 +7,12 @@ import {
 } from "../../../data/ciaOptionsData";
 import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
-import { ComponentImpactBaseProps } from "../../../types/widgets";
+import type { IntegrityImpactWidgetProps } from "../../../types/widget-props";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
-
-/**
- * Props for IntegrityImpactWidget component
- */
-export interface IntegrityImpactWidgetProps extends ComponentImpactBaseProps {
-  /**
-   * Flag to show extended details (optional)
-   */
-  showExtendedDetails?: boolean;
-}
 
 /**
  * Widget that displays the impact of selected integrity level
@@ -34,7 +24,6 @@ export interface IntegrityImpactWidgetProps extends ComponentImpactBaseProps {
  * mechanisms protect business operations and decision-making. 📊
  */
 const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
-  level, // For backward compatibility
   availabilityLevel: _availabilityLevel,
   integrityLevel,
   confidentialityLevel: _confidentialityLevel,
@@ -43,9 +32,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
   showExtendedDetails = false,
 }) => {
   // Use the utility for consistent security level normalization
-  const effectiveLevel = normalizeSecurityLevel(
-    integrityLevel || level || "Moderate"
-  );
+  const effectiveLevel = normalizeSecurityLevel(integrityLevel || "Moderate");
 
   // Get CIA content service for loading/error states
   const { ciaContentService, error, isLoading } = useCIAContentService();

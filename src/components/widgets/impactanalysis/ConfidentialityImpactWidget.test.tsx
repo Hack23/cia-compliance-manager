@@ -167,11 +167,10 @@ describe("ConfidentialityImpactWidget", () => {
     expect(screen.getByText("Moderate Privacy Controls")).toBeInTheDocument();
   });
 
-  it("uses the specific confidentiality level prop when available", () => {
+  it("uses the specific confidentiality level prop", () => {
     render(
       <ConfidentialityImpactWidget
         {...defaultProps}
-        level="Low"
         confidentialityLevel="High"
       />
     );
@@ -180,11 +179,10 @@ describe("ConfidentialityImpactWidget", () => {
     ).toHaveTextContent("High");
   });
 
-  it("falls back to legacy level prop when specific level isn't provided", () => {
+  it("uses the confidentiality level prop correctly", () => {
     render(
       <ConfidentialityImpactWidget
-        level="Low"
-        confidentialityLevel="Low" // Provide a valid SecurityLevel value
+        confidentialityLevel="Low"
         availabilityLevel="Moderate"
         integrityLevel="Moderate"
       />

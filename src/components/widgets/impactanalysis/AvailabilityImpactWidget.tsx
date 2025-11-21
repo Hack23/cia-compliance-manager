@@ -4,7 +4,7 @@ import { AVAILABILITY_IMPACT_TEST_IDS } from "../../../constants/testIds";
 import { getDefaultSLAMetrics } from "../../../data/ciaOptionsData";
 import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
-import { SecurityLevel } from "../../../types/cia";
+import type { AvailabilityImpactWidgetProps } from "../../../types/widget-props";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
@@ -20,45 +20,6 @@ interface SLAMetrics {
   sla: string;
 }
 
-// Improve type safety with proper typing
-interface AvailabilityImpactWidgetProps {
-  /**
-   * Legacy level property for backward compatibility
-   * @deprecated Use availabilityLevel instead
-   */
-  level?: SecurityLevel;
-
-  /**
-   * Selected availability level
-   */
-  availabilityLevel: SecurityLevel;
-
-  /**
-   * Current integrity level (optional)
-   */
-  integrityLevel?: SecurityLevel;
-
-  /**
-   * Current confidentiality level (optional)
-   */
-  confidentialityLevel?: SecurityLevel;
-
-  /**
-   * Flag to show extended details (optional)
-   */
-  showExtendedDetails?: boolean;
-
-  /**
-   * Optional CSS class name
-   */
-  className?: string;
-
-  /**
-   * Optional test ID for testing
-   */
-  testId?: string;
-}
-
 /**
  * Widget that displays the impact of selected availability level
  *
@@ -69,7 +30,6 @@ interface AvailabilityImpactWidgetProps {
  * and resilience requirements for business continuity. ⏱️
  */
 const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
-  level, // For backward compatibility
   availabilityLevel,
   integrityLevel: _integrityLevel,
   confidentialityLevel: _confidentialityLevel,
@@ -79,7 +39,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
 }) => {
   // Use security level utility for consistent normalization
   const effectiveLevel = normalizeSecurityLevel(
-    availabilityLevel || level || "Moderate"
+    availabilityLevel || "Moderate"
   );
 
   // Get CIA content service for loading/error states

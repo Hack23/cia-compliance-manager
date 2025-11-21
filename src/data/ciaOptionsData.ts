@@ -302,8 +302,6 @@ export const defaultCIADataProvider: CIADataProvider = {
     },
   },
   getDefaultValuePoints: getValuePoints,
-  // Keep for backward compatibility
-  getValuePoints: getValuePoints,
 };
 
 /**

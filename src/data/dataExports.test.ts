@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { SecurityLevel } from "../types/cia";
-import { EnhancedCIADetails } from "../types/cia-services";
+import { CIADetails } from "../types/cia-services";
 
 describe("Data Module Exports", () => {
   const securityLevels: SecurityLevel[] = [
@@ -59,7 +59,7 @@ describe("Data Module Exports", () => {
       securityLevels.forEach((level) => {
         const options = ciaOptionsModule.availabilityOptions[
           level
-        ] as EnhancedCIADetails;
+        ] as CIADetails;
         expect(options).toBeDefined();
         expect(options.description).toBeTruthy();
         expect(options.technical).toBeTruthy();

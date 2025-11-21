@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { CIAComponent, SecurityLevel } from "./cia";
 
 /**
@@ -166,8 +167,8 @@ export type SecurityWidgetProps = WithSecurityLevelProps & CommonWidgetProps;
  * Provides a foundation for components that need to display or
  * interact with security levels across all CIA components.
  * 
- * @deprecated The generic `level` property is deprecated. Use specific 
- * `availabilityLevel`, `integrityLevel`, and `confidentialityLevel` instead.
+ * This interface has been cleaned up to remove deprecated properties.
+ * All components should now use specific level properties.
  * 
  * @example
  * ```typescript
@@ -177,14 +178,6 @@ export type SecurityWidgetProps = WithSecurityLevelProps & CommonWidgetProps;
  * ```
  */
 export interface ComponentImpactBaseProps {
-  /**
-   * @deprecated Use specific *Level properties instead (availabilityLevel, integrityLevel, confidentialityLevel)
-   * 
-   * This property is maintained for backward compatibility but will be
-   * removed in a future version. Migrate to using the specific level properties.
-   */
-  level?: SecurityLevel;
-
   /**
    * Current availability security level
    * 
@@ -233,7 +226,7 @@ export interface ComponentImpactBaseProps {
  * Base props common to all widgets
  * 
  * Provides the foundation for all widget components with standard
- * styling, testing capabilities, and error handling.
+ * styling, testing capabilities, error handling, and child content.
  * 
  * Extends CommonWidgetProps to maintain consistency with existing patterns.
  * 
@@ -245,6 +238,11 @@ export interface ComponentImpactBaseProps {
  * ```
  */
 export interface BaseWidgetProps extends CommonWidgetProps {
+  /**
+   * Optional children elements
+   */
+  children?: ReactNode;
+  
   /**
    * Optional callback when widget encounters an error
    * @param error - Error that occurred
@@ -638,11 +636,6 @@ export interface ValueCreationWidgetProps extends AllCIAComponentsProps {
  */
 export interface AvailabilityImpactWidgetProps extends BaseWidgetProps {
   /**
-   * @deprecated Use availabilityLevel instead
-   */
-  level?: SecurityLevel;
-
-  /**
    * Availability security level
    */
   availabilityLevel: SecurityLevel;
@@ -682,11 +675,6 @@ export interface AvailabilityImpactWidgetProps extends BaseWidgetProps {
  */
 export interface IntegrityImpactWidgetProps extends BaseWidgetProps {
   /**
-   * @deprecated Use integrityLevel instead
-   */
-  level?: SecurityLevel;
-
-  /**
    * Availability security level (optional, for context)
    */
   availabilityLevel?: SecurityLevel;
@@ -724,11 +712,6 @@ export interface IntegrityImpactWidgetProps extends BaseWidgetProps {
  * ```
  */
 export interface ConfidentialityImpactWidgetProps extends BaseWidgetProps {
-  /**
-   * @deprecated Use confidentialityLevel instead
-   */
-  level?: SecurityLevel;
-
   /**
    * Availability security level (optional, for context)
    */
@@ -770,9 +753,7 @@ export interface ConfidentialityImpactWidgetProps extends BaseWidgetProps {
  * />
  * ```
  */
-export interface TechnicalDetailsWidgetProps extends AllCIAComponentsProps {
-  // All props inherited from AllCIAComponentsProps
-}
+export type TechnicalDetailsWidgetProps = AllCIAComponentsProps;
 
 /**
  * Props for SecurityResourcesWidget component

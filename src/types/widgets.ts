@@ -6,7 +6,7 @@ import {
   ROIEstimate,
   TechnicalImplementationDetails,
 } from "./cia-services";
-import { CommonWidgetProps, WithSecurityLevelProps } from "./widget-props";
+import { BaseWidgetProps, WithSecurityLevelProps } from "./widget-props";
 
 /**
  * Widget-specific interfaces that extend or use the core CIA types
@@ -22,18 +22,6 @@ import { CommonWidgetProps, WithSecurityLevelProps } from "./widget-props";
  * @category Widgets
  * @packageDocumentation
  */
-
-/**
- * Base widget props shared by all widgets
- *
- * @category Base Types
- */
-export interface BaseWidgetProps extends CommonWidgetProps {
-  /**
-   * Optional children elements
-   */
-  children?: ReactNode;
-}
 
 /**
  * Props for security-related widgets
@@ -340,9 +328,7 @@ export interface ValueCreationWidgetProps extends CIABaseWidgetProps {
  *
  * @category Business Widgets
  */
-export interface CostEstimationWidgetProps extends CIABaseWidgetProps {
-  // No additional props needed beyond CIABaseWidgetProps
-}
+export type CostEstimationWidgetProps = CIABaseWidgetProps;
 
 /**
  * Props for technical details widgets
@@ -511,88 +497,4 @@ export interface ComponentImpactWidgetProps extends WidgetBaseProps {
    * The CIA component type to display
    */
   componentType: "availability" | "integrity" | "confidentiality";
-}
-
-/**
- * Base properties for component impact widgets
- */
-export interface ComponentImpactBaseProps {
-  /**
-   * Security level (used for backward compatibility)
-   */
-  level?: SecurityLevel;
-
-  /**
-   * Availability security level
-   */
-  availabilityLevel: SecurityLevel;
-
-  /**
-   * Integrity security level
-   */
-  integrityLevel: SecurityLevel;
-
-  /**
-   * Confidentiality security level
-   */
-  confidentialityLevel: SecurityLevel;
-
-  /**
-   * CSS class name
-   */
-  className?: string;
-
-  /**
-   * Test ID for testing
-   */
-  testId?: string;
-
-  /**
-   * Callback when level changes
-   */
-  onLevelChange?: (level: SecurityLevel) => void;
-}
-
-/**
- * Props for the Availability Impact Widget
- *
- * ## Business Perspective
- *
- * This widget helps stakeholders understand how availability settings
- * affect uptime, recovery capabilities, and business continuity. ⏱️
- *
- * @category Impact Widgets
- */
-export interface AvailabilityImpactWidgetProps
-  extends ComponentImpactBaseProps {
-  // All required props are inherited from ComponentImpactBaseProps
-}
-
-/**
- * Props for the Integrity Impact Widget
- *
- * ## Business Perspective
- *
- * This widget helps stakeholders understand how integrity settings
- * affect data accuracy, validation processes, and information trustworthiness. 🔐
- *
- * @category Impact Widgets
- */
-export interface IntegrityImpactWidgetProps extends ComponentImpactBaseProps {
-  // All required props are inherited from ComponentImpactBaseProps
-}
-
-/**
- * Props for the Confidentiality Impact Widget
- *
- * ## Business Perspective
- *
- * This widget helps stakeholders understand how confidentiality settings
- * affect data protection, access controls, and privacy safeguards. 🔒
- *
- * @category Impact Widgets
- */
-export interface ConfidentialityImpactWidgetProps
-  extends ComponentImpactBaseProps {
-  // All required props are inherited from ComponentImpactBaseProps
 }
