@@ -1,6 +1,28 @@
-import Chart from "chart.js/auto";
+import {
+  Chart,
+  RadarController,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend,
+  CategoryScale,
+} from "chart.js";
 import React, { useEffect, useRef, useState } from "react";
 import { CHART_TEST_IDS } from "../../constants/testIds";
+
+// Register only the components we need for radar charts
+Chart.register(
+  RadarController,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend,
+  CategoryScale
+);
 
 interface RadarChartProps {
   availabilityLevel: string;
