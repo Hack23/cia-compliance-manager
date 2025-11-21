@@ -12,17 +12,23 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { CHART_TEST_IDS } from "../../constants/testIds";
 
-// Register only the components we need for radar charts
-Chart.register(
-  RadarController,
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-  Tooltip,
-  Legend,
-  CategoryScale
-);
+// Flag to track if Chart.js components are already registered
+let chartComponentsRegistered = false;
+
+// Register Chart.js components only once
+if (!chartComponentsRegistered) {
+  Chart.register(
+    RadarController,
+    RadialLinearScale,
+    PointElement,
+    LineElement,
+    Filler,
+    Tooltip,
+    Legend,
+    CategoryScale
+  );
+  chartComponentsRegistered = true;
+}
 
 interface RadarChartProps {
   availabilityLevel: string;

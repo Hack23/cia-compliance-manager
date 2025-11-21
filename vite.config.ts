@@ -18,19 +18,19 @@ const packageJson: PackageJson = JSON.parse(
 );
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     // Enable React features
     react(),
     // Support for TypeScript paths
     tsconfigPaths(),
-    // Bundle size visualization (only in build mode)
-    visualizer({
+    // Bundle size visualization (only in production builds)
+    ...(mode === 'production' ? [visualizer({
       filename: "./build/stats.html",
       open: false,
       gzipSize: true,
       brotliSize: true,
-    }),
+    })] : []),
   ],
   publicDir: "public",
   server: {
@@ -161,4 +161,4 @@ export default defineConfig({
       },
     },
   }),
-});
+}));
