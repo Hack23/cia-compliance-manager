@@ -16,6 +16,13 @@ import {
   SECURITY_LAYER_CONFIGS,
 } from "../../support/constants";
 
+/**
+ * Extended Window interface for CSP violation tracking
+ */
+interface WindowWithCSPViolations extends Window {
+  cspViolations: () => number;
+}
+
 describe("Security Headers", () => {
   beforeEach(() => {
     cy.visit("/");
@@ -24,14 +31,14 @@ describe("Security Headers", () => {
 
   describe("Content Security Policy (CSP)", () => {
     it("should have CSP meta tag configured", () => {
-      cy.get('meta[http-equiv="Content-Security-Policy"]')
+      cy.get(SECURITY_HEADER_SELECTORS.CSP)
         .should("exist")
         .and("have.attr", "content")
         .and("not.be.empty");
     });
 
     it("should include required CSP directives", () => {
-      cy.get('meta[http-equiv="Content-Security-Policy"]')
+      cy.get(SECURITY_HEADER_SELECTORS.CSP)
         .should("have.attr", "content")
         .then((content) => {
           const cspContent = content as string;
@@ -65,7 +72,7 @@ describe("Security Headers", () => {
     });
 
     it("should allow required font sources for Orbitron and Share Tech Mono", () => {
-      cy.get('meta[http-equiv="Content-Security-Policy"]')
+      cy.get(SECURITY_HEADER_SELECTORS.CSP)
         .should("have.attr", "content")
         .then((content) => {
           const cspContent = content as string;
@@ -83,7 +90,7 @@ describe("Security Headers", () => {
     });
 
     it("should allow required style sources", () => {
-      cy.get('meta[http-equiv="Content-Security-Policy"]')
+      cy.get(SECURITY_HEADER_SELECTORS.CSP)
         .should("have.attr", "content")
         .then((content) => {
           const cspContent = content as string;
@@ -105,7 +112,7 @@ describe("Security Headers", () => {
     });
 
     it("should include upgrade-insecure-requests directive", () => {
-      cy.get('meta[http-equiv="Content-Security-Policy"]')
+      cy.get(SECURITY_HEADER_SELECTORS.CSP)
         .should("have.attr", "content")
         .and("include", "upgrade-insecure-requests");
     });
@@ -113,7 +120,7 @@ describe("Security Headers", () => {
 
   describe("X-Content-Type-Options", () => {
     it("should have X-Content-Type-Options meta tag set to nosniff", () => {
-      cy.get('meta[http-equiv="X-Content-Type-Options"]')
+      cy.get(SECURITY_HEADER_SELECTORS.X_CONTENT_TYPE_OPTIONS)
         .should("exist")
         .and("have.attr", "content", "nosniff");
     });
@@ -121,7 +128,7 @@ describe("Security Headers", () => {
 
   describe("X-Frame-Options", () => {
     it("should have X-Frame-Options meta tag set to DENY", () => {
-      cy.get('meta[http-equiv="X-Frame-Options"]')
+      cy.get(SECURITY_HEADER_SELECTORS.X_FRAME_OPTIONS)
         .should("exist")
         .and("have.attr", "content", "DENY");
     });
@@ -129,13 +136,13 @@ describe("Security Headers", () => {
 
   describe("Cross-Origin Policies", () => {
     it("should have Cross-Origin-Opener-Policy set to same-origin", () => {
-      cy.get('meta[http-equiv="Cross-Origin-Opener-Policy"]')
+      cy.get(SECURITY_HEADER_SELECTORS.COOP)
         .should("exist")
         .and("have.attr", "content", "same-origin");
     });
 
     it("should have Cross-Origin-Embedder-Policy set to require-corp", () => {
-      cy.get('meta[http-equiv="Cross-Origin-Embedder-Policy"]')
+      cy.get(SECURITY_HEADER_SELECTORS.COEP)
         .should("exist")
         .and("have.attr", "content", "require-corp");
     });
@@ -143,7 +150,7 @@ describe("Security Headers", () => {
 
   describe("Referrer Policy", () => {
     it("should have Referrer-Policy meta tag configured", () => {
-      cy.get('meta[name="referrer"]')
+      cy.get(SECURITY_HEADER_SELECTORS.REFERRER)
         .should("exist")
         .and("have.attr", "content", "strict-origin-when-cross-origin");
     });
@@ -171,15 +178,16 @@ describe("Security Headers", () => {
         onBeforeLoad(win: Window) {
           // Track CSP violations
           let cspViolations = 0;
-          win.addEventListener("securitypolicyviolation", (e) => {
+          win.addEventListener("securitypolicyviolation", (e: SecurityPolicyViolationEvent) => {
             cspViolations++;
             // Log violation details for debugging
+            const { violatedDirective, blockedURI } = e;
             cy.log(
-              `CSP Violation: ${(e as SecurityPolicyViolationEvent).violatedDirective} - ${(e as SecurityPolicyViolationEvent).blockedURI || "inline"}`
+              `CSP Violation: ${violatedDirective} - ${blockedURI || "inline"}`
             );
           });
           // Store reference for later assertion
-          (win as Window & { cspViolations: () => number }).cspViolations =
+          (win as WindowWithCSPViolations).cspViolations =
             () => cspViolations;
         },
       });
@@ -191,7 +199,7 @@ describe("Security Headers", () => {
       // Verify no violations occurred during page load
       cy.window().then((win) => {
         const violations = (
-          win as Window & { cspViolations: () => number }
+          win as WindowWithCSPViolations
         ).cspViolations();
         expect(violations).to.equal(0, "No CSP violations detected");
       });
