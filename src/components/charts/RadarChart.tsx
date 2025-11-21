@@ -12,11 +12,13 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { CHART_TEST_IDS } from "../../constants/testIds";
 
-// Flag to track if Chart.js components are already registered
-let chartComponentsRegistered = false;
-
-// Register Chart.js components only once
-if (!chartComponentsRegistered) {
+// Register Chart.js components only if not already registered
+// Use try-catch to safely check registry without throwing errors
+try {
+  // Check if radar controller is already registered
+  Chart.registry.getController('radar');
+} catch {
+  // Not registered yet, register all required components
   Chart.register(
     RadarController,
     RadialLinearScale,
@@ -27,7 +29,6 @@ if (!chartComponentsRegistered) {
     Legend,
     CategoryScale
   );
-  chartComponentsRegistered = true;
 }
 
 interface RadarChartProps {
