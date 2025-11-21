@@ -409,9 +409,9 @@ Before deploying changes:
 
 ## Changelog
 
-| Version | Date | Changes | Author |
-|---------|------|---------|--------|
-| 1.0 | 2025-11-21 | Initial documentation for v1.0 release | Security Team |
+| Version | Date       | Changes                                 | Author        |
+|---------|------------|-----------------------------------------|---------------|
+| 1.0     | 2025-11-21 | Initial documentation for v1.0 release | Security Team |
 
 ---
 
