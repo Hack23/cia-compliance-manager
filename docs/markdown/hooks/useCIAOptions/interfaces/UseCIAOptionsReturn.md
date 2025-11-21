@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.9.1**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.2**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: UseCIAOptionsReturn
 
-Defined in: [hooks/useCIAOptions.ts:258](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/hooks/useCIAOptions.ts#L258)
+Defined in: [hooks/useCIAOptions.ts:258](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/hooks/useCIAOptions.ts#L258)
 
 Return type for useCIAOptions hook
 
@@ -19,7 +19,7 @@ and utility functions for working with security configurations.
 
 > **availabilityOptions**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](CIAOptionDetails.md)\>
 
-Defined in: [hooks/useCIAOptions.ts:260](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/hooks/useCIAOptions.ts#L260)
+Defined in: [hooks/useCIAOptions.ts:260](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/hooks/useCIAOptions.ts#L260)
 
 Availability security level options with details and costs
 
@@ -29,7 +29,7 @@ Availability security level options with details and costs
 
 > **confidentialityOptions**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](CIAOptionDetails.md)\>
 
-Defined in: [hooks/useCIAOptions.ts:266](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/hooks/useCIAOptions.ts#L266)
+Defined in: [hooks/useCIAOptions.ts:266](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/hooks/useCIAOptions.ts#L266)
 
 Confidentiality security level options with details and costs
 
@@ -39,7 +39,7 @@ Confidentiality security level options with details and costs
 
 > **getAvailabilityOptions**: () => `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](CIAOptionDetails.md)\>
 
-Defined in: [hooks/useCIAOptions.ts:272](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/hooks/useCIAOptions.ts#L272)
+Defined in: [hooks/useCIAOptions.ts:272](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/hooks/useCIAOptions.ts#L272)
 
 Get availability options (same as availabilityOptions property)
 
@@ -53,7 +53,7 @@ Get availability options (same as availabilityOptions property)
 
 > **getCombinedROIKey**: (`confidentiality`, `integrity`, `availability`) => [`ROIType`](../type-aliases/ROIType.md)
 
-Defined in: [hooks/useCIAOptions.ts:297](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/hooks/useCIAOptions.ts#L297)
+Defined in: [hooks/useCIAOptions.ts:297](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/hooks/useCIAOptions.ts#L297)
 
 Get combined ROI key based on CIA triad levels
 
@@ -89,7 +89,7 @@ ROI type based on highest security level
 
 > **getConfidentialityOptions**: () => `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](CIAOptionDetails.md)\>
 
-Defined in: [hooks/useCIAOptions.ts:278](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/hooks/useCIAOptions.ts#L278)
+Defined in: [hooks/useCIAOptions.ts:278](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/hooks/useCIAOptions.ts#L278)
 
 Get confidentiality options (same as confidentialityOptions property)
 
@@ -103,7 +103,7 @@ Get confidentiality options (same as confidentialityOptions property)
 
 > **getIntegrityOptions**: () => `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](CIAOptionDetails.md)\>
 
-Defined in: [hooks/useCIAOptions.ts:275](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/hooks/useCIAOptions.ts#L275)
+Defined in: [hooks/useCIAOptions.ts:275](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/hooks/useCIAOptions.ts#L275)
 
 Get integrity options (same as integrityOptions property)
 
@@ -117,7 +117,7 @@ Get integrity options (same as integrityOptions property)
 
 > **getROIDataForCombinedKey**: (`key`) => [`ROIData`](ROIData.md)
 
-Defined in: [hooks/useCIAOptions.ts:308](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/hooks/useCIAOptions.ts#L308)
+Defined in: [hooks/useCIAOptions.ts:308](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/hooks/useCIAOptions.ts#L308)
 
 Get ROI data for a specific ROI type
 
@@ -141,7 +141,7 @@ ROI data object
 
 > **getROIEstimateForSecurityLevel**: (`level`) => [`ROIType`](../type-aliases/ROIType.md)
 
-Defined in: [hooks/useCIAOptions.ts:288](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/hooks/useCIAOptions.ts#L288)
+Defined in: [hooks/useCIAOptions.ts:288](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/hooks/useCIAOptions.ts#L288)
 
 Get ROI type for a specific security level
 
@@ -165,7 +165,7 @@ Corresponding ROI type
 
 > **getROIEstimates**: () => `Record`\<[`ROIType`](../type-aliases/ROIType.md), [`ROIData`](ROIData.md)\>
 
-Defined in: [hooks/useCIAOptions.ts:281](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/hooks/useCIAOptions.ts#L281)
+Defined in: [hooks/useCIAOptions.ts:281](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/hooks/useCIAOptions.ts#L281)
 
 Get ROI estimates (same as ROI_ESTIMATES property)
 
@@ -179,7 +179,7 @@ Get ROI estimates (same as ROI_ESTIMATES property)
 
 > **integrityOptions**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIAOptionDetails`](CIAOptionDetails.md)\>
 
-Defined in: [hooks/useCIAOptions.ts:263](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/hooks/useCIAOptions.ts#L263)
+Defined in: [hooks/useCIAOptions.ts:263](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/hooks/useCIAOptions.ts#L263)
 
 Integrity security level options with details and costs
 
@@ -189,6 +189,6 @@ Integrity security level options with details and costs
 
 > **ROI\_ESTIMATES**: `Record`\<[`ROIType`](../type-aliases/ROIType.md), [`ROIData`](ROIData.md)\>
 
-Defined in: [hooks/useCIAOptions.ts:269](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/hooks/useCIAOptions.ts#L269)
+Defined in: [hooks/useCIAOptions.ts:269](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/hooks/useCIAOptions.ts#L269)
 
 ROI estimates for different security investment levels

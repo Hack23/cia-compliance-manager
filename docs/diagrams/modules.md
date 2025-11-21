@@ -1,8 +1,8 @@
-[**CIA Compliance Manager Diagrams v0.9.1**](README.md)
+[**CIA Compliance Manager Diagrams v0.9.2**](README.md)
 
 ***
 
-# CIA Compliance Manager Diagrams v0.9.1
+# CIA Compliance Manager Diagrams v0.9.2
 
 ## Modules
 

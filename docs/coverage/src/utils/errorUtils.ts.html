@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/25</span>
+                <span class='fraction'>25/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">58.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>14/24</span>
+                <span class='fraction'>24/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/25</span>
+                <span class='fraction'>25/25</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -157,22 +157,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -180,8 +177,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -241,20 +241,20 @@
  * @param err - The error value to convert
  * @returns An Error object
  */
-export function <span class="fstat-no" title="function not covered" >toErrorObject(e</span>rr: unknown): Error {
-<span class="cstat-no" title="statement not covered" >  if (isError(err)) {</span>
-<span class="cstat-no" title="statement not covered" >    return err;</span>
+export function toErrorObject(err: unknown): Error {
+  if (isError(err)) {
+    return err;
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (err instanceof Object) {</span>
+  if (err instanceof Object) {
     // If the error is an object with a message property, use that
-<span class="cstat-no" title="statement not covered" >    if ("message" in err &amp;&amp; typeof err.message === "string") {</span>
-<span class="cstat-no" title="statement not covered" >      return new Error(err.message);</span>
+    if ("message" in err &amp;&amp; typeof err.message === "string") {
+      return new Error(err.message);
     }
   }
 &nbsp;
   // For strings, numbers, etc.
-<span class="cstat-no" title="statement not covered" >  return new Error(String(err));</span>
+  return new Error(String(err));
 }
 &nbsp;
 /**
@@ -264,9 +264,9 @@ export function <span class="fstat-no" title="function not covered" >toErrorObje
  * @param prefix - Optional prefix for the error message
  * @returns A formatted error message
  */
-export function <span class="fstat-no" title="function not covered" >formatError(e</span>rr: unknown, prefix?: string): string {
-  const error = <span class="cstat-no" title="statement not covered" >toErrorObject(err);</span>
-<span class="cstat-no" title="statement not covered" >  return prefix ? `${prefix}: ${error.message}` : error.message;</span>
+export function formatError(err: unknown, prefix?: string): string {
+  const error = toErrorObject(err);
+  return prefix ? `${prefix}: ${error.message}` : error.message;
 }
 &nbsp;
 /**
@@ -325,7 +325,7 @@ export const handleApiError = (error: unknown, operation: string): string =&gt; 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-19T22:28:47.638Z
+                at 2025-11-21T15:09:04.922Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

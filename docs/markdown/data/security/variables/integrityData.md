@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.9.1**](../../../README.md)
+[**CIA Compliance Manager Documentation v0.9.2**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **integrityData**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`CIADetails`](../../../types/interfaces/CIADetails.md)\>
 
-Defined in: [data/security/integrityData.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/data/security/integrityData.ts#L14)
+Defined in: [data/security/integrityData.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/data/security/integrityData.ts#L14)
 
 Detailed integrity security options for each security level
 

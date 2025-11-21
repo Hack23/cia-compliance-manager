@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.9.1**](../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.2**](../../README.md)
 
 ***
 
@@ -15,7 +15,6 @@
 
 ### Base Types
 
-- [BaseWidgetProps](interfaces/BaseWidgetProps.md)
 - [CIABaseWidgetProps](interfaces/CIABaseWidgetProps.md)
 - [SecurityWidgetBaseProps](interfaces/SecurityWidgetBaseProps.md)
 - [WidgetBaseProps](interfaces/WidgetBaseProps.md)
@@ -24,7 +23,6 @@
 
 - [BusinessImpactAnalysisWidgetProps](interfaces/BusinessImpactAnalysisWidgetProps.md)
 - [BusinessImpactWidgetProps](interfaces/BusinessImpactWidgetProps.md)
-- [CostEstimationWidgetProps](interfaces/CostEstimationWidgetProps.md)
 - [ValueCreationWidgetProps](interfaces/ValueCreationWidgetProps.md)
 
 ### Compliance Widgets
@@ -49,19 +47,12 @@
 
 ### Impact Widgets
 
-- [AvailabilityImpactWidgetProps](interfaces/AvailabilityImpactWidgetProps.md)
-- [ConfidentialityImpactWidgetProps](interfaces/ConfidentialityImpactWidgetProps.md)
-- [IntegrityImpactWidgetProps](interfaces/IntegrityImpactWidgetProps.md)
 - [SecurityImpactWidgetProps](interfaces/SecurityImpactWidgetProps.md)
 
 ### Implementation Widgets
 
 - [SecurityResourcesWidgetProps](interfaces/SecurityResourcesWidgetProps.md)
 - [TechnicalDetailsWidgetProps](interfaces/TechnicalDetailsWidgetProps.md)
-
-### Other
-
-- [ComponentImpactBaseProps](interfaces/ComponentImpactBaseProps.md)
 
 ### Security Level Widgets
 
@@ -76,3 +67,7 @@
 ### Base Types
 
 - [WidgetProps](type-aliases/WidgetProps.md)
+
+### Business Widgets
+
+- [CostEstimationWidgetProps](type-aliases/CostEstimationWidgetProps.md)

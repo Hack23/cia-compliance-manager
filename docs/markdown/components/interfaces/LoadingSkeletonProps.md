@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.9.1**](../../README.md)
+[**CIA Compliance Manager Documentation v0.9.2**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: LoadingSkeletonProps
 
-Defined in: [types/componentPropExports.ts:283](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/componentPropExports.ts#L283)
+Defined in: [types/componentPropExports.ts:283](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/types/componentPropExports.ts#L283)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:283](https://github.com/Hack23/cia-co
 
 > `optional` **className**: `string`
 
-Defined in: [types/componentPropExports.ts:298](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/componentPropExports.ts#L298)
+Defined in: [types/componentPropExports.ts:298](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/types/componentPropExports.ts#L298)
 
 Optional CSS class name
 
@@ -24,7 +24,7 @@ Optional CSS class name
 
 > `optional` **lines**: `number`
 
-Defined in: [types/componentPropExports.ts:288](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/componentPropExports.ts#L288)
+Defined in: [types/componentPropExports.ts:288](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/types/componentPropExports.ts#L288)
 
 Number of skeleton lines to display
 
@@ -40,6 +40,6 @@ Number of skeleton lines to display
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:293](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/componentPropExports.ts#L293)
+Defined in: [types/componentPropExports.ts:293](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/types/componentPropExports.ts#L293)
 
 Optional test ID for automated testing

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.23% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/26</span>
+                <span class='fraction'>26/26</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.63% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>14/22</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/15</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -115,13 +115,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">35x</span>
-<span class="cline-any cline-yes">35x</span>
-<span class="cline-any cline-yes">34x</span>
-<span class="cline-any cline-yes">34x</span>
+<span class="cline-any cline-yes">49x</span>
+<span class="cline-any cline-yes">49x</span>
+<span class="cline-any cline-yes">47x</span>
+<span class="cline-any cline-yes">44x</span>
+<span class="cline-any cline-yes">42x</span>
+<span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-yes">37x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -131,11 +131,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">63x</span>
-<span class="cline-any cline-yes">63x</span>
-<span class="cline-any cline-yes">63x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">74x</span>
+<span class="cline-any cline-yes">72x</span>
+<span class="cline-any cline-yes">70x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -145,9 +145,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { StatusType } from "../types/common/StatusTypes";
 &nbsp;
@@ -159,11 +159,11 @@
  */
 export function getStatusVariant(level: string): StatusType {
   const normalizedLevel = level.toLowerCase();
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (normalizedLevel === "none") <span class="cstat-no" title="statement not covered" >return "error";</span>
+  if (normalizedLevel === "none") return "error";
   if (normalizedLevel === "low") return "warning";
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (normalizedLevel === "moderate") <span class="cstat-no" title="statement not covered" >return "info";</span>
+  if (normalizedLevel === "moderate") return "info";
   if (normalizedLevel === "high") return "success";
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (normalizedLevel === "very high") <span class="cstat-no" title="statement not covered" >return "purple";</span>
+  if (normalizedLevel === "very high") return "purple";
   return "neutral";
 }
 &nbsp;
@@ -174,11 +174,11 @@ export function getStatusVariant(level: string): StatusType {
  * @returns Tailwind CSS class string for text color
  */
 export function getRiskColorClass(risk: string): string {
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (risk.includes("Low")) <span class="cstat-no" title="statement not covered" >return "text-green-600 dark:text-green-400";</span>
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (risk.includes("Medium")) <span class="cstat-no" title="statement not covered" >return "text-yellow-600 dark:text-yellow-400";</span>
+  if (risk.includes("Low")) return "text-green-600 dark:text-green-400";
+  if (risk.includes("Medium")) return "text-yellow-600 dark:text-yellow-400";
   if (risk.includes("High")) return "text-orange-600 dark:text-orange-400";
-  <span class="missing-if-branch" title="else path not taken" >E</span>if (risk.includes("Critical")) return "text-red-600 dark:text-red-400";
-<span class="cstat-no" title="statement not covered" >  return "text-gray-600 dark:text-gray-400";</span>
+  if (risk.includes("Critical")) return "text-red-600 dark:text-red-400";
+  return "text-gray-600 dark:text-gray-400";
 }
 &nbsp;
 /**
@@ -188,9 +188,9 @@ export function getRiskColorClass(risk: string): string {
  * @returns Human-readable compliance status text
  */
 export function getComplianceStatusText(complianceScore: number): string {
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (complianceScore &gt;= 80) <span class="cstat-no" title="statement not covered" >return "Strong compliance position";</span>
-  <span class="missing-if-branch" title="else path not taken" >E</span>if (complianceScore &gt;= 50) return "Moderate compliance position";
-<span class="cstat-no" title="statement not covered" >  return "Compliance gaps detected";</span>
+  if (complianceScore &gt;= 80) return "Strong compliance position";
+  if (complianceScore &gt;= 50) return "Moderate compliance position";
+  return "Compliance gaps detected";
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -199,7 +199,7 @@ export function getComplianceStatusText(complianceScore: number): string {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-19T22:28:47.734Z
+                at 2025-11-21T15:09:05.015Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

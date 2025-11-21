@@ -42,6 +42,7 @@ src/components/common/WidgetErrorBoundary.test.tsx
 src/components/common/WidgetErrorBoundary.tsx
 src/components/common/__tests__/ErrorHandlingIntegration.test.tsx
 src/components/index.ts
+src/components/widgets/__tests__/widget-error-boundaries.test.tsx
 src/components/widgets/assessmentcenter/BusinessImpactAnalysisWidget.test.tsx
 src/components/widgets/assessmentcenter/BusinessImpactAnalysisWidget.tsx
 src/components/widgets/assessmentcenter/SecurityBusinessTab.test.tsx
@@ -237,7 +238,6 @@ src/types/vitest.d.ts
 src/types/widget-props.ts
 src/types/widgets.test.ts
 src/types/widgets.ts
-src/utils/businessValueUtils.comprehensive.test.ts
 src/utils/businessValueUtils.ts
 src/utils/colorUtils.test.ts
 src/utils/colorUtils.ts
@@ -256,6 +256,7 @@ src/utils/levelValuesUtils.test.ts
 src/utils/levelValuesUtils.ts
 src/utils/logger.test.ts
 src/utils/logger.ts
+src/utils/resourceUtils.test.ts
 src/utils/resourceUtils.ts
 src/utils/riskUtils.test.ts
 src/utils/riskUtils.ts
@@ -264,6 +265,7 @@ src/utils/securityDefaults.ts
 src/utils/securityLevelUtils.test.ts
 src/utils/securityLevelUtils.ts
 src/utils/serviceUtils.ts
+src/utils/statusUtils.test.ts
 src/utils/statusUtils.ts
 src/utils/technicalDetailsDefaults.ts
 src/utils/typeGuards.enhanced.test.ts

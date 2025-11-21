@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.9.1**](../README.md)
+[**CIA Compliance Manager Documentation v0.9.2**](../README.md)
 
 ***
 
@@ -34,7 +34,6 @@ to ensure they're properly accessible throughout the application.
 - [formatNumberWithDecimals](variables/formatNumberWithDecimals.md)
 - [formatPercentage](variables/formatPercentage.md)
 - [formatRiskLevel](variables/formatRiskLevel.md)
-- [~~formatSecurityLevel~~](variables/formatSecurityLevel.md)
 - [formatSecurityLevelFromWidget](variables/formatSecurityLevelFromWidget.md)
 - [formatSecurityLevelString](variables/formatSecurityLevelString.md)
 - [formatTimeframe](variables/formatTimeframe.md)
@@ -107,7 +106,6 @@ to ensure they're properly accessible throughout the application.
 - [formatSecurityMetric](functions/formatSecurityMetric.md)
 - [getProgressColor](functions/getProgressColor.md)
 - [getSeverityColor](functions/getSeverityColor.md)
-- [~~SecurityLevelDisplay~~](functions/SecurityLevelDisplay.md)
 
 ## References
 

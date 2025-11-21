@@ -1,14 +1,10 @@
-[**CIA Compliance Manager Diagrams v0.9.1**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.2**](../../../../README.md)
 
 ***
 
 [CIA Compliance Manager Diagrams](../../../../modules.md) / components/widgets/impactanalysis/IntegrityImpactWidget
 
 # components/widgets/impactanalysis/IntegrityImpactWidget
-
-## Interfaces
-
-- [IntegrityImpactWidgetProps](interfaces/IntegrityImpactWidgetProps.md)
 
 ## References
 

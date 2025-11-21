@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.9.1**](../../README.md)
+[**CIA Compliance Manager Documentation v0.9.2**](../../README.md)
 
 ***
 
@@ -25,7 +25,7 @@
 - [calculateRiskScore](functions/calculateRiskScore.md)
 - [createDefaultBusinessImpact](functions/createDefaultBusinessImpact.md)
 - [formatRiskLevel](functions/formatRiskLevel.md)
-- [~~getDefaultBusinessImpact~~](functions/getDefaultBusinessImpact.md)
+- [getDefaultBusinessImpact](functions/getDefaultBusinessImpact.md)
 - [getDefaultComponentImpact](functions/getDefaultComponentImpact.md)
 - [getDefaultPrivacyImpact](functions/getDefaultPrivacyImpact.md)
 - [getDefaultSLAMetrics](functions/getDefaultSLAMetrics.md)

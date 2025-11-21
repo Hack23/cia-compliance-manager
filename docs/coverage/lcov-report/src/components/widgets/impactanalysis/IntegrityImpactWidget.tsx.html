@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.2% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>25/29</span>
+                <span class='fraction'>24/28</span>
             </div>
         
             
@@ -227,26 +227,7 @@
 <a name='L162'></a><a href='#L162'>162</a>
 <a name='L163'></a><a href='#L163'>163</a>
 <a name='L164'></a><a href='#L164'>164</a>
-<a name='L165'></a><a href='#L165'>165</a>
-<a name='L166'></a><a href='#L166'>166</a>
-<a name='L167'></a><a href='#L167'>167</a>
-<a name='L168'></a><a href='#L168'>168</a>
-<a name='L169'></a><a href='#L169'>169</a>
-<a name='L170'></a><a href='#L170'>170</a>
-<a name='L171'></a><a href='#L171'>171</a>
-<a name='L172'></a><a href='#L172'>172</a>
-<a name='L173'></a><a href='#L173'>173</a>
-<a name='L174'></a><a href='#L174'>174</a>
-<a name='L175'></a><a href='#L175'>175</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L165'></a><a href='#L165'>165</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -281,10 +262,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">50x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">50x</span>
@@ -395,7 +373,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -420,22 +400,13 @@ import {
 } from "../../../data/ciaOptionsData";
 import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
-import { ComponentImpactBaseProps } from "../../../types/widgets";
+import type { IntegrityImpactWidgetProps } from "../../../types/widget-props";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
-&nbsp;
-/**
- * Props for IntegrityImpactWidget component
- */
-export interface IntegrityImpactWidgetProps extends ComponentImpactBaseProps {
-  /**
-   * Flag to show extended details (optional)
-   */
-  showExtendedDetails?: boolean;
-}
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 &nbsp;
 /**
  * Widget that displays the impact of selected integrity level
@@ -447,7 +418,6 @@ export interface IntegrityImpactWidgetProps extends ComponentImpactBaseProps {
  * mechanisms protect business operations and decision-making. 📊
  */
 const IntegrityImpactWidget: React.FC&lt;IntegrityImpactWidgetProps&gt; = ({
-  level, // For backward compatibility
   availabilityLevel: _availabilityLevel,
   integrityLevel,
   confidentialityLevel: _confidentialityLevel,
@@ -456,9 +426,7 @@ const IntegrityImpactWidget: React.FC&lt;IntegrityImpactWidgetProps&gt; = ({
   showExtendedDetails = false,
 }) =&gt; {
   // Use the utility for consistent security level normalization
-  const effectiveLevel = normalizeSecurityLevel(
-    integrityLevel || level || <span class="branch-2 cbranch-no" title="branch not covered" >"Moderate"</span>
-  );
+  const effectiveLevel = normalizeSecurityLevel(integrityLevel || <span class="branch-1 cbranch-no" title="branch not covered" >"Moderate")</span>;
 &nbsp;
   // Get CIA content service for loading/error states
   const { ciaContentService, error, isLoading } = useCIAContentService();
@@ -500,14 +468,15 @@ const IntegrityImpactWidget: React.FC&lt;IntegrityImpactWidgetProps&gt; = ({
   }, [integrityDetails, effectiveLevel]);
 &nbsp;
   return (
-    &lt;WidgetContainer
-      title={WIDGET_TITLES.INTEGRITY_IMPACT || <span class="branch-1 cbranch-no" title="branch not covered" >"Integrity Impact Analysis"}</span>
-      icon={WIDGET_ICONS.INTEGRITY_IMPACT || <span class="branch-1 cbranch-no" title="branch not covered" >"✓"}</span>
-      className={className}
-      testId={testId}
-      isLoading={isLoading}
-      error={error}
-    &gt;
+    &lt;WidgetErrorBoundary widgetName="Integrity Impact"&gt;
+      &lt;WidgetContainer
+        title={WIDGET_TITLES.INTEGRITY_IMPACT || <span class="branch-1 cbranch-no" title="branch not covered" >"Integrity Impact Analysis"}</span>
+        icon={WIDGET_ICONS.INTEGRITY_IMPACT || <span class="branch-1 cbranch-no" title="branch not covered" >"✓"}</span>
+        className={className}
+        testId={testId}
+        isLoading={isLoading}
+        error={error}
+      &gt;
       &lt;div className="p-4"&gt;
         {/* Security level indicator */}
         &lt;div className="mb-4"&gt;
@@ -581,6 +550,7 @@ const IntegrityImpactWidget: React.FC&lt;IntegrityImpactWidgetProps&gt; = ({
         )}
       &lt;/div&gt;
     &lt;/WidgetContainer&gt;
+    &lt;/WidgetErrorBoundary&gt;
   );
 };
 &nbsp;
@@ -592,7 +562,7 @@ export default IntegrityImpactWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-19T22:28:47.734Z
+                at 2025-11-21T15:09:05.015Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

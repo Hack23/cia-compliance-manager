@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v0.9.1**](../../../README.md)
+[**CIA Compliance Manager Diagrams v0.9.2**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIAImpactSummaryWidgetProps
 
-Defined in: [types/widgets.ts:376](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L376)
+Defined in: [types/widgets.ts:362](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/types/widgets.ts#L362)
 
 Props for the CIA Impact Summary Widget
 
@@ -26,7 +26,7 @@ posture at a glance. 📊
 
 > **availabilityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:99](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L99)
+Defined in: [types/widgets.ts:87](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/types/widgets.ts#L87)
 
 Availability security level
 
@@ -40,7 +40,7 @@ Availability security level
 
 > `optional` **className**: `string`
 
-Defined in: [types/widgets.ts:68](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L68)
+Defined in: [types/widgets.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/types/widgets.ts#L56)
 
 Optional CSS class name
 
@@ -54,7 +54,7 @@ Optional CSS class name
 
 > **confidentialityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:109](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L109)
+Defined in: [types/widgets.ts:97](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/types/widgets.ts#L97)
 
 Confidentiality security level
 
@@ -68,7 +68,7 @@ Confidentiality security level
 
 > `optional` **disabled**: `boolean`
 
-Defined in: [types/widgets.ts:220](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L220)
+Defined in: [types/widgets.ts:208](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/types/widgets.ts#L208)
 
 Whether the widget is disabled
 
@@ -82,7 +82,7 @@ Whether the widget is disabled
 
 > **integrityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L104)
+Defined in: [types/widgets.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/types/widgets.ts#L92)
 
 Integrity security level
 
@@ -96,7 +96,7 @@ Integrity security level
 
 > `optional` **onLevelChange**: (`component`, `level`) => `void`
 
-Defined in: [types/widgets.ts:212](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L212)
+Defined in: [types/widgets.ts:200](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/types/widgets.ts#L200)
 
 Callback for when security levels change
 
@@ -124,7 +124,7 @@ Callback for when security levels change
 
 > `optional` **securityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:78](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L78)
+Defined in: [types/widgets.ts:66](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/types/widgets.ts#L66)
 
 Optional security level for widgets that only need one level
 
@@ -138,7 +138,7 @@ Optional security level for widgets that only need one level
 
 > `optional` **showDetails**: `boolean`
 
-Defined in: [types/widgets.ts:380](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L380)
+Defined in: [types/widgets.ts:366](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/types/widgets.ts#L366)
 
 Whether to show detailed information
 
@@ -148,7 +148,7 @@ Whether to show detailed information
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widgets.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/ed529758bfc0094a33b4d59489764ae95f191acd/src/types/widgets.ts#L73)
+Defined in: [types/widgets.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/types/widgets.ts#L61)
 
 Optional test ID for testing
 
