@@ -9,6 +9,7 @@ import { ComplianceStatusDetails } from "../../../types/compliance";
 import { isNullish } from "../../../utils/typeGuards";
 import StatusBadge from "../../common/StatusBadge";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
 // Add function to determine badge status with proper typing
 const getBadgeStatus = (complianceScore: number): StatusType => {
@@ -306,14 +307,15 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
   );
 
   return (
-    <WidgetContainer
-      title={WIDGET_TITLES.COMPLIANCE_STATUS || "Compliance Status"}
-      icon={WIDGET_ICONS.COMPLIANCE_STATUS || "📋"}
-      className={className}
-      testId={testId}
-      isLoading={isLoading}
-      error={serviceError}
-    >
+    <WidgetErrorBoundary widgetName="Compliance Status">
+      <WidgetContainer
+        title={WIDGET_TITLES.COMPLIANCE_STATUS || "Compliance Status"}
+        icon={WIDGET_ICONS.COMPLIANCE_STATUS || "📋"}
+        className={className}
+        testId={testId}
+        isLoading={isLoading}
+        error={serviceError}
+      >
       <div className="p-4">
         {/* Add high-level description */}
         <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
@@ -695,6 +697,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 

@@ -7,6 +7,7 @@ import { calculateBusinessImpactLevel } from "../../../utils/riskUtils";
 import { hasMethod, isNullish } from "../../../utils/typeGuards";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
 /**
  * Props for ValueCreationWidget component
@@ -324,14 +325,15 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   );
 
   return (
-    <WidgetContainer
-      title={WIDGET_TITLES.VALUE_CREATION || "Business Value Creation"}
-      icon={WIDGET_ICONS.VALUE_CREATION || "💰"}
-      className={className}
-      testId={testId}
-      isLoading={isLoading}
-      error={error}
-    >
+    <WidgetErrorBoundary widgetName="Value Creation">
+      <WidgetContainer
+        title={WIDGET_TITLES.VALUE_CREATION || "Business Value Creation"}
+        icon={WIDGET_ICONS.VALUE_CREATION || "💰"}
+        className={className}
+        testId={testId}
+        isLoading={isLoading}
+        error={error}
+      >
       <div className="p-4">
         {/* Overview section */}
         <div className="mb-6">
@@ -524,6 +526,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 

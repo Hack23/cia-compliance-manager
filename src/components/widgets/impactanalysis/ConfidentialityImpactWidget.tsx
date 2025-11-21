@@ -8,6 +8,7 @@ import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
 /**
  * Displays confidentiality impact details for the selected security level
@@ -74,17 +75,18 @@ const ConfidentialityImpactWidget: React.FC<
   }, [details, effectiveLevel]);
 
   return (
-    <WidgetContainer
-      title={
-        WIDGET_TITLES.CONFIDENTIALITY_IMPACT ||
-        "Confidentiality Impact Analysis"
-      }
-      icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT || "🔒"}
-      className={`${className} overflow-visible`}
-      testId={testId}
-      isLoading={isLoading}
-      error={serviceError}
-    >
+    <WidgetErrorBoundary widgetName="Confidentiality Impact">
+      <WidgetContainer
+        title={
+          WIDGET_TITLES.CONFIDENTIALITY_IMPACT ||
+          "Confidentiality Impact Analysis"
+        }
+        icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT || "🔒"}
+        className={`${className} overflow-visible`}
+        testId={testId}
+        isLoading={isLoading}
+        error={serviceError}
+      >
       <div className="max-h-[550px] overflow-y-auto pr-1">
         <div
           className="p-4"
@@ -146,6 +148,7 @@ const ConfidentialityImpactWidget: React.FC<
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 

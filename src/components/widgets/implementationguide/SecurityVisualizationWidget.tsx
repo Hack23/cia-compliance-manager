@@ -17,6 +17,7 @@ import {
 import RadarChart from "../../charts/RadarChart";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
 /**
  * Props for SecurityVisualizationWidget component
@@ -164,14 +165,15 @@ const SecurityVisualizationWidget: React.FC<
   };
 
   return (
-    <WidgetContainer
-      title={WIDGET_TITLES.SECURITY_VISUALIZATION || "Security Visualization"}
-      icon={WIDGET_ICONS.SECURITY_VISUALIZATION || "📊"}
-      className={className}
-      testId={testId}
-      isLoading={isLoading}
-      error={error}
-    >
+    <WidgetErrorBoundary widgetName="Security Visualization">
+      <WidgetContainer
+        title={WIDGET_TITLES.SECURITY_VISUALIZATION || "Security Visualization"}
+        icon={WIDGET_ICONS.SECURITY_VISUALIZATION || "📊"}
+        className={className}
+        testId={testId}
+        isLoading={isLoading}
+        error={error}
+      >
       <div className="p-4">
         {/* Security score section */}
         <div className="mb-6">
@@ -364,6 +366,7 @@ const SecurityVisualizationWidget: React.FC<
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 

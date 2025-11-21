@@ -13,6 +13,7 @@ import KeyValuePair from "../../common/KeyValuePair";
 import RiskLevelBadge from "../../common/RiskLevelBadge";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
 /**
  * Props for BusinessImpactAnalysisWidget component
@@ -477,16 +478,17 @@ const BusinessImpactAnalysisWidget: React.FC<
   };
 
   return (
-    <WidgetContainer
-      title={
-        WIDGET_TITLES.BUSINESS_IMPACT_ANALYSIS || "Business Impact Analysis"
-      }
-      icon={WIDGET_ICONS.BUSINESS_IMPACT_ANALYSIS || "💼"}
-      className={className}
-      testId={testId}
-      isLoading={isLoading}
-      error={serviceError}
-    >
+    <WidgetErrorBoundary widgetName="Business Impact Analysis">
+      <WidgetContainer
+        title={
+          WIDGET_TITLES.BUSINESS_IMPACT_ANALYSIS || "Business Impact Analysis"
+        }
+        icon={WIDGET_ICONS.BUSINESS_IMPACT_ANALYSIS || "💼"}
+        className={className}
+        testId={testId}
+        isLoading={isLoading}
+        error={serviceError}
+      >
       <div className="p-4">
         {/* Component Business Impacts */}
         <div className="mb-4">
@@ -657,6 +659,7 @@ const BusinessImpactAnalysisWidget: React.FC<
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 

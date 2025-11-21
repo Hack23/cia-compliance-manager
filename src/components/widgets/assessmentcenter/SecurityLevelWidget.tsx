@@ -10,6 +10,7 @@ import { SecurityLevel } from "../../../types/cia";
 import { CIADetails } from "../../../types/cia-services";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
 /**
  * Props for SecurityLevelWidget component
@@ -243,12 +244,13 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   };
 
   return (
-    <WidgetContainer
-      title={WIDGET_TITLES.SECURITY_LEVEL}
-      icon={WIDGET_ICONS.SECURITY_LEVEL}
-      className={className}
-      testId={testId}
-    >
+    <WidgetErrorBoundary widgetName="Security Level">
+      <WidgetContainer
+        title={WIDGET_TITLES.SECURITY_LEVEL}
+        icon={WIDGET_ICONS.SECURITY_LEVEL}
+        className={className}
+        testId={testId}
+      >
       <div className="p-4">
         <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
           <p className="text-sm">
@@ -646,6 +648,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 

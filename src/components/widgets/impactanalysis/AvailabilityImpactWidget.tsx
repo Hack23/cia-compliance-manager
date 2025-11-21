@@ -10,6 +10,7 @@ import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
 // Extended interface for SLA metrics to improve type safety
 interface SLAMetrics {
@@ -68,16 +69,17 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   }, [details, effectiveLevel]);
 
   return (
-    <WidgetContainer
-      title={
-        WIDGET_TITLES.AVAILABILITY_IMPACT || "Availability Impact Analysis"
-      }
-      icon={WIDGET_ICONS.AVAILABILITY_IMPACT || "⏱️"}
-      className={`${className} cia-availability`}
-      testId={testId}
-      isLoading={isLoading}
-      error={error}
-    >
+    <WidgetErrorBoundary widgetName="Availability Impact">
+      <WidgetContainer
+        title={
+          WIDGET_TITLES.AVAILABILITY_IMPACT || "Availability Impact Analysis"
+        }
+        icon={WIDGET_ICONS.AVAILABILITY_IMPACT || "⏱️"}
+        className={`${className} cia-availability`}
+        testId={testId}
+        isLoading={isLoading}
+        error={error}
+      >
       <div className="p-4 cia-widget">
         {/* Security level indicator */}
         <div className="mb-4">
@@ -151,6 +153,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 

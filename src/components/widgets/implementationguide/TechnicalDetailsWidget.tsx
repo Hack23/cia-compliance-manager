@@ -4,6 +4,7 @@ import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { useTechnicalDetailsData } from "../../../hooks/useTechnicalDetailsData";
 import { SecurityLevel } from "../../../types/cia";
 import WidgetContainer from "../../common/WidgetContainer";
+import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 import { CIAComponentDetails } from "./CIAComponentDetails";
 
 /**
@@ -79,16 +80,17 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   );
 
   return (
-    <WidgetContainer
-      title={
-        WIDGET_TITLES.TECHNICAL_DETAILS || "Technical Implementation Details"
-      }
-      icon={WIDGET_ICONS.TECHNICAL_DETAILS || "🛠️"}
-      className={className}
-      testId={testId}
-      isLoading={isLoading}
-      error={error}
-    >
+    <WidgetErrorBoundary widgetName="Technical Details">
+      <WidgetContainer
+        title={
+          WIDGET_TITLES.TECHNICAL_DETAILS || "Technical Implementation Details"
+        }
+        icon={WIDGET_ICONS.TECHNICAL_DETAILS || "🛠️"}
+        className={className}
+        testId={testId}
+        isLoading={isLoading}
+        error={error}
+      >
       <div className="p-4">
         {/* Technical details description */}
         <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
@@ -222,6 +224,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         </div>
       </div>
     </WidgetContainer>
+    </WidgetErrorBoundary>
   );
 };
 
