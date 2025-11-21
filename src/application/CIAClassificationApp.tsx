@@ -323,7 +323,11 @@ const CIAClassificationApp: React.FC = () => {
             {/* Security Visualization Widget - Lazy Loaded */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Security Visualization" onError={handleWidgetError}>
-                <Suspense fallback={<div className="widget-loading">Loading visualization...</div>}>
+                <Suspense fallback={
+                  <div className="widget-loading" role="status" aria-live="polite">
+                    Loading visualization...
+                  </div>
+                }>
                   <SecurityVisualizationWidget
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}

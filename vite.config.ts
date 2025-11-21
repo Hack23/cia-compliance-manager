@@ -79,6 +79,7 @@ export default defineConfig({
               return "react-vendor";
             }
             // Chart.js in separate chunk for lazy loading
+            // @kurkle/color is a required Chart.js dependency for color handling
             if (id.includes("chart.js") || id.includes("@kurkle/color")) {
               return "chart";
             }
