@@ -2,15 +2,15 @@
 
 ## Overview
 
-This document describes the bundle size optimizations implemented in v0.9.1+ to reduce the JavaScript bundle size from 189KB to 117KB (gzip) for initial page load - a 37.9% reduction that significantly improves performance.
+This document describes the bundle size optimizations implemented in v0.9.1+ to reduce the JavaScript bundle size from 188KB to 117KB (gzip) for initial page load - a 37.9% reduction that significantly improves performance.
 
 ## Optimization Results
 
 ### Before Optimization
-- **Total Initial Load**: 189 KB (gzip)
+- **Total Initial Load**: 188 KB (gzip)
   - React + React DOM: 59.07 KB
   - Vendor (Chart.js): 72.21 KB
-  - Application code: 57.83 KB
+  - Application code: 56.72 KB
 
 ### After Optimization
 - **Total Initial Load**: 117.40 KB (gzip) ✅

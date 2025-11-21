@@ -19,6 +19,10 @@ type ChartMockConstructor = ReturnType<typeof vi.fn> & {
     font: { family: string };
     plugins: { legend: { display: boolean } };
   };
+  overrides: Record<string, any>;
+  registry: {
+    controllers: { items: Record<string, any> };
+  };
 };
 
 const mockChartConstructor = vi.hoisted(() => {
@@ -36,12 +40,24 @@ vi.hoisted(() => {
     font: { family: "Arial" },
     plugins: { legend: { display: false } },
   };
+  // Add overrides for registration check
+  mockChartConstructor.overrides = {};
+  mockChartConstructor.registry = {
+    controllers: { items: {} },
+  };
 });
 
-// Use vi.mock with factory pattern to ensure the mock is hoisted correctly
-vi.mock("chart.js/auto", () => ({
-  __esModule: true,
-  default: mockChartConstructor,
+// Use vi.mock with factory pattern to mock chart.js module
+vi.mock("chart.js", () => ({
+  Chart: mockChartConstructor,
+  RadarController: vi.fn(),
+  RadialLinearScale: vi.fn(),
+  PointElement: vi.fn(),
+  LineElement: vi.fn(),
+  Filler: vi.fn(),
+  Tooltip: vi.fn(),
+  Legend: vi.fn(),
+  CategoryScale: vi.fn(),
 }));
 
 // Import testing utilities and components after mock definitions
