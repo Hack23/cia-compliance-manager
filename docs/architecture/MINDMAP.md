@@ -448,7 +448,7 @@ mindmap
         ErrorMessage
     (🎨 Charts)
       📊 RadarChart
-        Recharts Integration
+        Chart.js Integration
         CIA Visualization
         Interactive Display
         Responsive Design
@@ -734,7 +734,6 @@ mindmap
       Chart.js 4.5.1
         Charting Library
         Canvas Rendering
-      Recharts Integration
         React Components
         RadarChart
       Custom Visualizations
