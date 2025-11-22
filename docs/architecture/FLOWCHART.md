@@ -334,7 +334,7 @@ flowchart TD
 4. **Risk Prioritization**: CVSS-based risk scoring
 5. **Remediation Planning**: Phased implementation roadmap
 
-**Cross-Reference:** See [SECURITY_ARCHITECTURE.md](SECURITY_ARCHITECTURE.md#-compliance-framework-mapping) for control details.
+**Cross-Reference:** See [SECURITY_ARCHITECTURE.md](SECURITY_ARCHITECTURE.md#-compliance-framework) for control details.
 
 ## 🧪 Testing Process
 
@@ -489,7 +489,7 @@ Total Business Risk = (Financial Impact × Likelihood) +
                       (Regulatory Impact × Likelihood)
 ```
 
-**Cross-Reference:** See [SECURITY_ARCHITECTURE.md](SECURITY_ARCHITECTURE.md#-business-impact-analysis) for impact calculations.
+**Cross-Reference:** See [BCPPlan.md](BCPPlan.md#-business-impact-analysis-bia) for impact calculations.
 
 ## 🔍 Widget Component Interaction
 
@@ -872,7 +872,7 @@ flowchart TD
     
     AddMetadata --> MetadataFields[Add Metadata Fields]
     MetadataFields --> Timestamp[Timestamp:<br>ISO 8601 UTC]
-    MetadataFields --> Version[App Version:<br>v1.0]
+    MetadataFields --> Version[App Version:<br>v0.9.2]
     MetadataFields --> Classification[Classification:<br>CIA Levels]
     
     Timestamp --> CompileDocument[Compile Final<br>Document]
