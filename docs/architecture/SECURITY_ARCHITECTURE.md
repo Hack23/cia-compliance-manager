@@ -1028,7 +1028,7 @@ flowchart TD
     subject-path: 'build/**/*'
 
 - name: Generate SBOM attestation
-  uses: actions/attest-sbom@...
+  uses: actions/attest-sbom@4651f806c01d8637787e274ac3bdf724ef169f34 # v3.0.0
   with:
     subject-path: 'build/**/*'
     sbom-path: 'sbom.json'
