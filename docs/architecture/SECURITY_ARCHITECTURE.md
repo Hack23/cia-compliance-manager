@@ -742,14 +742,14 @@ flowchart TD
 **Implementation:**
 ```typescript
 // Error boundary wrapping for all widgets
-import { ErrorBoundary } from 'react-error-boundary';
+import WidgetErrorBoundary from './components/common/WidgetErrorBoundary';
 
-<ErrorBoundary
-  fallback={<ErrorFallback />}
-  onError={logErrorToService}
+<WidgetErrorBoundary
+  widgetName="Assessment Widget"
+  onError={(error, info) => logErrorToService(error, info)}
 >
   <AssessmentWidget />
-</ErrorBoundary>
+</WidgetErrorBoundary>
 ```
 
 #### 🔄 Concurrent Rendering Security

@@ -45,7 +45,7 @@ This threat model demonstrates **🛡️ cybersecurity consulting expertise** th
 - 📊 **Static Data Files**: JSON configuration and compliance framework mappings
 - 🔧 **GitHub Pages Hosting**: CDN-based static content delivery with HTTPS
 - 🛡️ **GitHub Actions CI/CD**: SLSA Level 3 build provenance and attestations
-- 📦 **NPM Dependency Ecosystem**: 11 production dependencies with SBOM tracking
+- 📦 **NPM Dependency Ecosystem**: 4 production dependencies with SBOM tracking
 - 🔍 **Client-Side Assessment Engine**: TypeScript 5.9.3 strict mode with type safety
 - 🧪 **Cypress 15.7.0 Testing**: Comprehensive E2E and component security testing
 - 🛡️ **Content Security Policy**: Multi-layer XSS protection with strict CSP headers
@@ -1121,7 +1121,7 @@ The following security enhancements have been successfully implemented for v1.0 
 
 3. **✅ React 19.x Error Boundaries — IMPLEMENTED**:
    - ✅ Widget-level error boundaries for component isolation
-   - ✅ react-error-boundary package integration
+   - ✅ Custom WidgetErrorBoundary class component implementation
    - ✅ Graceful failure handling preventing cascading errors
    - ✅ Information disclosure prevention
 
