@@ -750,43 +750,69 @@ flowchart TD
 
 **Error Boundary Implementation:**
 ```typescript
-// WidgetErrorBoundary component (React class component)
-class WidgetErrorBoundary extends React.Component<WidgetErrorBoundaryProps, WidgetErrorBoundaryState> {
+// WidgetErrorBoundary component (actual implementation from src/components/common/WidgetErrorBoundary.tsx)
+export class WidgetErrorBoundary extends Component<WidgetErrorBoundaryProps, WidgetErrorBoundaryState> {
   constructor(props: WidgetErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
   }
 
-  // Error recovery methods
-  handleRetry = () => {
-    this.setState({ hasError: false, error: undefined });
-  };
-
-  handleReset = () => {
-    localStorage.clear();
-    window.location.reload();
-  };
-
-  handleReport = (error: Error) => {
-    window.open(`https://github.com/Hack23/cia-compliance-manager/issues/new?title=${encodeURIComponent(error.message)}`);
-  };
-
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    logger.error('Widget error caught by boundary:', { error, errorInfo });
-    if (this.props.onError) {
-      this.props.onError(error, errorInfo);
-    }
-  }
-
+  /**
+   * Update state when an error is caught
+   */
   static getDerivedStateFromError(error: Error): WidgetErrorBoundaryState {
     return { hasError: true, error };
   }
 
-  render() {
-    if (this.state.hasError) {
-      return this.props.fallback || <ErrorMessage error={this.state.error} onRetry={this.handleRetry} />;
+  /**
+   * Log error information and call optional callback
+   */
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
+    const { widgetName, onError } = this.props;
+    
+    // Log using centralized logger for debugging
+    logger.error(
+      `WidgetErrorBoundary caught error${widgetName ? ` in ${widgetName}` : ''}`,
+      { error, errorInfo }
+    );
+    
+    // Call optional error callback
+    if (onError) {
+      onError(error, errorInfo);
     }
-    return this.props.children;
+  }
+
+  /**
+   * Reset error state (for retry functionality)
+   */
+  private resetError = (): void => {
+    this.setState({ hasError: false, error: undefined });
+  };
+
+  render(): ReactNode {
+    const { hasError, error } = this.state;
+    const { children, fallback, widgetName, testId = 'widget-error-boundary' } = this.props;
+
+    if (hasError) {
+      // Use custom fallback if provided
+      if (fallback) {
+        return fallback;
+      }
+
+      // Default error UI using ErrorMessage component
+      return (
+        <div data-testid={testId} className="p-4">
+          <ErrorMessage
+            title={widgetName ? `${widgetName} Error` : 'Widget Error'}
+            message={error?.message || 'An unexpected error occurred in this widget'}
+            retry={this.resetError}
+            testId={`${testId}-message`}
+          />
+        </div>
+      );
+    }
+
+    return children;
   }
 }
 ```
