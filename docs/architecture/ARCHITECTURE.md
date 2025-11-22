@@ -19,7 +19,7 @@ This document provides a comprehensive view of the CIA Compliance Manager archit
 - **CSP Headers**: Content Security Policy implementation in production
 - **CodeQL Integration**: Automated security vulnerability scanning
 - **Dependabot**: Continuous dependency vulnerability monitoring
-- **Test Coverage**: 75% → 81.18% line coverage achieved (80% target met)
+- **Test Coverage**: 75% → 83.26% line coverage achieved (80% target exceeded)
 
 ## 📚 Complete Architecture Documentation Map
 
@@ -115,7 +115,7 @@ C4Container
         Container(frontend, "Frontend Application", "React 19.2.0, TypeScript 5.9.3 (Strict)", "SPA with error boundaries, context API state management")
         ContainerDb(staticData, "Static Data", "TypeScript/JSON", "Security controls, frameworks, CIA triad data")
         Container(buildSystem, "Build System", "Vite 7.2.4, esbuild", "Code splitting, tree-shaking, bundle optimization")
-        Container(testFramework, "Test Infrastructure", "Vitest 4.0.6, Cypress 15.7.0", "Unit tests (81.18% coverage), E2E tests")
+        Container(testFramework, "Test Infrastructure", "Vitest 4.0.6, Cypress 15.7.0", "Unit tests (83.26% line coverage), E2E tests")
         Container(securityScan, "Security Scanner", "CodeQL, SonarCloud, Dependabot", "SAST, SCA, vulnerability detection")
         Container(deployment, "Deployment", "GitHub Actions, Pages", "SLSA Level 3 attestation, CSP headers")
     }
@@ -140,7 +140,7 @@ C4Container
 | **Frontend Application** | React 19.2.0, TypeScript 5.9.3 | User interface | Error boundaries, concurrent rendering, strict types |
 | **Static Data** | TypeScript/JSON | Data source | CIA triad controls, compliance frameworks |
 | **Build System** | Vite 7.2.4, esbuild | Build pipeline | 175KB bundle, code splitting, tree-shaking |
-| **Test Infrastructure** | Vitest 4.0.6, Cypress 15.7.0 | Quality assurance | 81.18% line coverage, component & E2E tests |
+| **Test Infrastructure** | Vitest 4.0.6, Cypress 15.7.0 | Quality assurance | 83.26% line coverage, component & E2E tests |
 | **Security Scanner** | CodeQL, SonarCloud | Vulnerability detection | SAST, SCA, dependency scanning |
 | **Deployment** | GitHub Actions, Pages | Production hosting | SLSA Level 3, CSP headers |
 
@@ -440,7 +440,7 @@ C4Component
     title Testing Infrastructure - v1.0
 
     Container_Boundary(testFramework, "Test Infrastructure") {
-        Component(vitest, "Vitest 4.0.6", "Unit Testing", "81.18% line coverage, fast execution")
+        Component(vitest, "Vitest 4.0.6", "Unit Testing", "83.26% line coverage, fast execution")
         Component(cypress, "Cypress 15.7.0", "E2E Testing", "Component tests, session handling")
         Component(testingLibrary, "React Testing Library 16.3.0", "Component Testing", "User-centric testing")
         Component(jsdom, "jsdom 27.2.0", "DOM Simulation", "Browser environment simulation")
@@ -476,12 +476,16 @@ C4Component
 
 ### **Test Coverage Metrics (v1.0)**
 
+[![Coverage Report](https://img.shields.io/badge/Coverage_Report-Live_Results-success?style=flat-square&logo=vitest&logoColor=white)](https://hack23.github.io/cia-compliance-manager/coverage/index.html)
+
+Current coverage from latest build ([view full report](https://hack23.github.io/cia-compliance-manager/coverage/index.html)):
+
 | Coverage Type | Current | Target | Status |
 |--------------|---------|--------|---------|
-| Line Coverage | 81.18% | 80% | ✅ Exceeded |
-| Branch Coverage | 75.42% | 75% | ✅ Met |
-| Function Coverage | 82.35% | 80% | ✅ Exceeded |
-| Statement Coverage | 81.18% | 80% | ✅ Exceeded |
+| Line Coverage | 83.26% | 80% | ✅ Exceeded |
+| Branch Coverage | 75.22% | 75% | ✅ Exceeded |
+| Function Coverage | 88.4% | 80% | ✅ Exceeded |
+| Statement Coverage | 82.8% | 80% | ✅ Exceeded |
 
 ### **Test Infrastructure Features**
 
@@ -635,7 +639,7 @@ C4Component
 ### **Testing & Quality**
 | Technology | Version | Purpose | Key Features |
 |-----------|---------|---------|--------------|
-| **Vitest** | 4.0.6 | Unit Testing | 81.18% coverage, parallel execution, watch mode |
+| **Vitest** | 4.0.6 | Unit Testing | 83.26% line coverage, parallel execution, watch mode |
 | **Cypress** | 15.7.0 | E2E Testing | Component tests, improved session handling, video/screenshot control |
 | **@testing-library/react** | 16.3.0 | Component Testing | User-centric testing patterns |
 | **jsdom** | 27.2.0 | DOM Simulation | Fast browser environment simulation |
@@ -680,12 +684,12 @@ C4Component
 | ADR-001 | Widget-Based UI Architecture | Enables modular development and clear separation of concerns | Added error boundary protection per widget |
 | ADR-002 | Static Data in TypeScript Files | Simplifies development, enables type safety without database | Enhanced with strict mode typing |
 | ADR-003 | Service Layer with Hooks | Clean API between UI and business logic | Full TypeScript strict mode compliance |
-| ADR-004 | CIA Triad Organization | Aligns with industry-standard security model | Comprehensive testing coverage (81.18%) |
+| ADR-004 | CIA Triad Organization | Aligns with industry-standard security model | Comprehensive testing coverage (83.26%) |
 | ADR-005 | Multiple Security Views | Addresses technical and business stakeholder needs | Performance optimized with code splitting |
 | ADR-006 | React 19.x Adoption | Leverage concurrent features, error boundaries | **NEW**: Automatic batching, improved rendering |
 | ADR-007 | TypeScript Strict Mode | Eliminate runtime type errors, improve maintainability | **NEW**: Zero `any` types, full null safety |
 | ADR-008 | Vite Build System | Fast development experience, optimized production builds | **NEW**: 175KB bundle, 8s build time |
-| ADR-009 | Comprehensive Testing | Ensure code quality and prevent regressions | **NEW**: 81.18% coverage with Vitest 4.x |
+| ADR-009 | Comprehensive Testing | Ensure code quality and prevent regressions | **NEW**: 83.26% line coverage with Vitest 4.x |
 | ADR-010 | SLSA Level 3 Attestation | Supply chain security and build integrity | **NEW**: Public provenance verification |
 
 ### Key Quality Attributes (v1.0 Enhancements)
@@ -693,12 +697,12 @@ C4Component
 | Quality Attribute | Support in v1.0 Architecture | Measurement |
 |-------------------|------------------------------|-------------|
 | **Modularity** | Widget-based organization with error boundaries | 13 independent widgets |
-| **Maintainability** | TypeScript strict mode, 81.18% test coverage | Zero `any` types |
+| **Maintainability** | TypeScript strict mode, 83.26% test coverage | Zero `any` types |
 | **Extensibility** | Service abstractions, data provider pattern | Clean interfaces |
 | **Performance** | Code splitting, lazy loading, tree-shaking | 175KB total bundle |
 | **Security** | SLSA Level 3, CodeQL, SonarCloud, Dependabot | OpenSSF Score 7.5/10 |
 | **Usability** | Consistent UI, error recovery, responsive design | Error boundaries active |
-| **Reliability** | Comprehensive testing, error handling | 81.18% test coverage |
+| **Reliability** | Comprehensive testing, error handling | 83.26% test coverage |
 | **Type Safety** | TypeScript 5.9.3 strict mode | 100% type coverage |
 
 ## 🔍 Business View of Architecture 
@@ -780,7 +784,7 @@ flowchart TD
 4. **Type Safety**: 100% TypeScript coverage with strict mode
 5. **High Availability**: Static hosting on GitHub Pages CDN with 99.9% uptime
 6. **Security Transparency**: SLSA Level 3 attestation, public security scanning
-7. **Developer Experience**: Fast HMR (<200ms), comprehensive testing (81.18% coverage)
+7. **Developer Experience**: Fast HMR (<200ms), comprehensive testing (83.26% coverage)
 
 ## 📚 Related Architecture Documentation
 
@@ -815,7 +819,7 @@ This document is part of a comprehensive architecture documentation suite. For c
 - **[📋 BCPPlan.md](BCPPlan.md)** — Business continuity planning and recovery strategies
 
 ### **Testing & Quality**
-- **[📋 UnitTestPlan.md](../UnitTestPlan.md)** — Unit testing strategy (81.18% coverage achieved)
+- **[📋 UnitTestPlan.md](../UnitTestPlan.md)** — Unit testing strategy (83.26% line coverage achieved)
 - **[📋 E2ETestPlan.md](../E2ETestPlan.md)** — End-to-end testing strategy
 - **[⚡ performance-testing.md](../performance-testing.md)** — Performance benchmarks and optimization
 
@@ -840,7 +844,7 @@ The CIA Compliance Manager v1.0 architecture represents a significant evolution 
 - ✅ **React 19.2.0**: Modern concurrent rendering and error boundaries
 - ✅ **TypeScript Strict Mode**: Complete type safety with zero `any` types
 - ✅ **Vite 7.2.4**: Fast builds (8s) and optimized bundles (175KB)
-- ✅ **Comprehensive Testing**: 81.18% coverage exceeding 80% target
+- ✅ **Comprehensive Testing**: 83.26% coverage exceeding 80% target
 - ✅ **Cypress 15.7.0**: Advanced E2E and component testing
 
 ### **Security & Compliance**
