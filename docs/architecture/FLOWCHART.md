@@ -115,7 +115,7 @@ flowchart TD
 - ✅ **localStorage Persistence**: State survives browser sessions
 - ✅ **Input Validation**: Real-time validation of security level selections
 - ✅ **Error Boundaries**: React 19.x error recovery with retry mechanisms
-- ✅ **State Propagation**: Automatic update of 11 assessment widgets
+- ✅ **State Propagation**: Automatic update of 11 assessment widgets (12 total widgets including SecurityLevelWidget)
 - ✅ **Type Safety**: TypeScript validation at compile and runtime
 
 **Cross-Reference:** See [STATEDIAGRAM.md](STATEDIAGRAM.md#-securitylevelstate-hook-state-management) for detailed state machine.
@@ -155,7 +155,7 @@ flowchart TD
     GenerateOutput --> CalcCostEstimates[Calculate Cost<br>Estimates CAPEX/OPEX]
     CalcCostEstimates --> GenRecommendations[Generate Prioritized<br>Recommendations]
     GenRecommendations --> CompileResults[Compile Complete<br>Assessment Package]
-    CompileResults --> UpdateWidgets[Update 11 Assessment<br>Widgets]
+    CompileResults --> UpdateWidgets[Update 11 Assessment<br>Widgets + SecurityLevelWidget]
     
     UpdateWidgets --> RenderCheck{Render<br>Success?}
     RenderCheck -->|Success| DisplayResults[Display Assessment<br>Results]
@@ -751,20 +751,44 @@ flowchart TD
 **Error Boundary Implementation:**
 ```typescript
 // WidgetErrorBoundary component (React class component)
-interface ErrorBoundaryState {
-  hasError: boolean;
-  error: Error | null;
-  errorInfo: React.ErrorInfo | null;
-  retryCount: number;
-}
+class WidgetErrorBoundary extends React.Component<WidgetErrorBoundaryProps, WidgetErrorBoundaryState> {
+  constructor(props: WidgetErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
-// Error recovery strategies
-const recoveryStrategies = {
-  retry: () => this.setState({ hasError: false, error: null }),
-  reset: () => { localStorage.clear(); window.location.reload(); },
-  fallback: () => <FallbackComponent />,
-  report: (error: Error) => window.open(`https://github.com/Hack23/cia-compliance-manager/issues/new?title=${encodeURIComponent(error.message)}`)
-};
+  // Error recovery methods
+  handleRetry = () => {
+    this.setState({ hasError: false, error: undefined });
+  };
+
+  handleReset = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
+
+  handleReport = (error: Error) => {
+    window.open(`https://github.com/Hack23/cia-compliance-manager/issues/new?title=${encodeURIComponent(error.message)}`);
+  };
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    logger.error('Widget error caught by boundary:', { error, errorInfo });
+    if (this.props.onError) {
+      this.props.onError(error, errorInfo);
+    }
+  }
+
+  static getDerivedStateFromError(error: Error): WidgetErrorBoundaryState {
+    return { hasError: true, error };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback || <ErrorMessage error={this.state.error} onRetry={this.handleRetry} />;
+    }
+    return this.props.children;
+  }
+}
 ```
 
 **Error Types Handled:**
@@ -919,6 +943,7 @@ flowchart TD
     "version": "1.0",
     "generated": "2025-11-22T15:24:45.034Z",
     "tool": "CIA Compliance Manager v0.9.2",
+    "note": "Document describes v1.0 workflows; application version reflects current package.json",
     "classification": {
       "confidentiality": "Moderate",
       "integrity": "High",
