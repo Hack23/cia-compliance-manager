@@ -183,14 +183,8 @@ stateDiagram-v2
     [*] --> Initializing: Hook Called
     
     state Initializing {
-        [*] --> CheckingLocalStorage
-        CheckingLocalStorage --> LoadingSavedLevels: Saved State Found
-        CheckingLocalStorage --> UsingDefaultLevels: No Saved State
-        LoadingSavedLevels --> ValidatingSavedData
-        ValidatingSavedData --> ApplyingSavedLevels: Valid Data
-        ValidatingSavedData --> UsingDefaultLevels: Invalid Data
-        UsingDefaultLevels --> [*]
-        ApplyingSavedLevels --> [*]
+        [*] --> ApplyingInitialLevels
+        ApplyingInitialLevels --> [*]
     }
     
     Initializing --> Ready: State Initialized
@@ -202,35 +196,17 @@ stateDiagram-v2
         Idle --> UpdatingConfidentiality: setLevel('confidentiality', level)
         Idle --> ResettingAll: resetLevels(level)
         
-        UpdatingAvailability --> PersistingToStorage
-        UpdatingIntegrity --> PersistingToStorage
-        UpdatingConfidentiality --> PersistingToStorage
-        ResettingAll --> PersistingToStorage
-        
-        PersistingToStorage --> NotifyingSubscribers
-        NotifyingSubscribers --> PropagatingToWidgets
-        PropagatingToWidgets --> Idle
+        UpdatingAvailability --> Idle
+        UpdatingIntegrity --> Idle
+        UpdatingConfidentiality --> Idle
+        ResettingAll --> Idle
     }
-    
-    Ready --> SyncingCrossTab: Storage Event Detected
-    
-    state SyncingCrossTab {
-        [*] --> DetectingChange
-        DetectingChange --> ValidatingExternalChange
-        ValidatingExternalChange --> MergingState: Valid Change
-        ValidatingExternalChange --> IgnoringChange: Invalid Change
-        MergingState --> [*]
-        IgnoringChange --> [*]
-    }
-    
-    SyncingCrossTab --> Ready: Sync Complete
     
     Ready --> Unmounting: Component Unmounted
     
     state Unmounting {
-        [*] --> RemovingStorageListeners
-        RemovingStorageListeners --> ClearingTimers
-        ClearingTimers --> [*]
+        [*] --> CleaningUp
+        CleaningUp --> [*]
     }
     
     Unmounting --> [*]
@@ -238,13 +214,11 @@ stateDiagram-v2
     classDef init fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
     classDef ready fill:#27ae60,stroke:#1e8449,stroke-width:2px,color:white
     classDef update fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:white
-    classDef sync fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
     classDef unmount fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
     
-    class Initializing,CheckingLocalStorage init
+    class Initializing,ApplyingInitialLevels init
     class Ready,Idle ready
     class UpdatingAvailability,UpdatingIntegrity,UpdatingConfidentiality update
-    class SyncingCrossTab,DetectingChange sync
     class Unmounting unmount
 ```
 
@@ -252,36 +226,45 @@ stateDiagram-v2
 ```typescript
 interface UseSecurityLevelStateReturn {
   levels: SecurityLevelState;        // Current levels
-  setLevel: (component, level) => void;  // Update single level
-  resetLevels: (defaultLevel?) => void;  // Reset all levels
-  getLevel: (component) => SecurityLevel; // Get single level
+  setLevel: (component: CIAComponent, level: SecurityLevel) => void;  // Update single level
+  resetLevels: (defaultLevel?: SecurityLevel) => void;  // Reset all levels
+  getLevel: (component: CIAComponent) => SecurityLevel; // Get single level
 }
 ```
 
-**State Persistence Flow:**
+> **Note:** The `useSecurityLevelState` hook manages in-memory state only. It does **not** persist to localStorage or handle cross-tab synchronization.
+
+**State Update Flow:**
 ```
-User Action → setLevel() → useState update → 
-useEffect trigger → localStorage.setItem() →
-storage event → other tabs sync
+User Action → setLevel() → useState update → React re-render
 ```
 
-**Cross-Tab Synchronization:**
-- Uses browser `storage` event for cross-tab sync
-- Validates external changes before applying
-- Prevents infinite update loops with event filtering
+**Application-Level Persistence & Sync:**
+
+LocalStorage persistence and cross-tab synchronization are handled by the `useLocalStorage` hook at the application/component level (e.g., in `CIAClassificationApp.tsx`):
+
+- LocalStorage persistence via `useLocalStorage` hook
+- Browser `storage` event for cross-tab sync
+- External changes validated before applying
+- Infinite update loops prevented with event filtering
 
 **Usage Example:**
 ```tsx
-const { levels, setLevel } = useSecurityLevelState({
-  availability: 'High',
-  integrity: 'Moderate',
-  confidentiality: 'Very High'
-});
+// In CIAClassificationApp.tsx (application level)
+const [savedLevels, setSavedLevels] = useLocalStorage('securityLevels', defaultLevels);
 
-// Update single level
+// Initialize security level state with saved values
+const { levels, setLevel } = useSecurityLevelState(savedLevels);
+
+// Persist security levels to localStorage whenever they change
+useEffect(() => {
+  setSavedLevels(levels);
+}, [levels, setSavedLevels]);
+
+// Update single level (in-memory only)
 setLevel('availability', 'Very High');
 
-// All widgets re-render with new levels
+// useEffect above automatically persists to localStorage
 ```
 
 ## 🧩 Widget Component State Machine (v1.0)
@@ -343,15 +326,13 @@ stateDiagram-v2
     Error --> Idle: Error Boundary Reset
     
     state Retrying {
-        [*] --> ExponentialBackoff
-        ExponentialBackoff --> RetryAttempt1: First Retry
-        RetryAttempt1 --> RetryAttempt2: Failed (2s delay)
-        RetryAttempt2 --> RetryAttempt3: Failed (4s delay)
-        RetryAttempt3 --> MaxRetriesReached: Failed (8s delay)
+        [*] --> ResetErrorState
+        ResetErrorState --> InitiatingRetry
+        InitiatingRetry --> [*]
     }
     
     Retrying --> Loading: Retry Initiated
-    Retrying --> Error: Max Retries Reached
+    Retrying --> Error: Retry Failed
     
     DisplayingResults --> Idle: Widget Reset
     DisplayingResults --> Loading: Security Levels Changed
@@ -413,7 +394,7 @@ stateDiagram-v2
 
 ## 🛡️ React Error Boundary State Transitions (v1.0)
 
-State machine for `WidgetErrorBoundary` component implementing React 19.x error boundary pattern:
+State machine for `WidgetErrorBoundary` component implementing React Error Boundary pattern:
 
 ```mermaid
 stateDiagram-v2
@@ -514,7 +495,7 @@ stateDiagram-v2
 interface WidgetErrorBoundaryProps {
   children: ReactNode;           // Components to protect
   fallback?: ReactNode;           // Custom error UI
-  onError?: (error, info) => void; // Error callback
+  onError?: (error: Error, errorInfo: React.ErrorInfo) => void; // Error callback
   widgetName?: string;            // Widget identification
   testId?: string;                // Testing identifier
 }
@@ -913,11 +894,12 @@ stateDiagram-v2
 **Event Propagation Flow:**
 1. User changes security level in SecurityLevelWidget
 2. Widget calls `setLevel()` from useSecurityLevelState hook
-3. Hook updates internal state and localStorage
-4. React re-renders all components consuming the hook
-5. All 11 assessment widgets receive updated props
-6. Each widget independently fetches/processes data for new levels
-7. UI updates across all widgets simultaneously
+3. Hook updates internal state only (not localStorage)
+4. React re-renders CIAClassificationApp
+5. App's useEffect triggers and updates localStorage via useLocalStorage
+6. All 11 assessment widgets receive updated props
+7. Each widget independently fetches/processes data for new levels
+8. UI updates across all widgets simultaneously
 
 ## 🌐 Offline/Online State Handling
 
