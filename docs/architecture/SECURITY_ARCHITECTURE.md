@@ -721,7 +721,7 @@ flowchart TD
         C --> H[⏱️ Priority-Based Rendering]
         
         I[🔐 TypeScript Strict Mode] --> A
-        J[🛡️ React Error Boundary Package] --> B
+        J[🛡️ Custom WidgetErrorBoundary] --> B
     end
 
     style A fill:#61DAFB,stroke:#00D8FF,stroke-width:2px,color:black,font-weight:bold
