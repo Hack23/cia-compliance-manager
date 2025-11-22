@@ -253,10 +253,13 @@ The `CIADetails` interface provides comprehensive information about a specific s
 /**
  * Detailed information for a CIA component at specific security level
  * 
- * Location: src/types/cia-services.ts
+ * Location: src/types/cia-services.ts (lines 231-296)
  * Used by: Content service, impact widgets, recommendation engine
+ * 
+ * Note: This is a simplified view. See source file for complete interface with all properties.
  */
 export interface CIADetails {
+  // Core descriptive fields
   /** Human-readable description of security level implications */
   description: string;
   
@@ -266,10 +269,28 @@ export interface CIADetails {
   /** Business impact assessment summary */
   businessImpact: string;
   
-  /** List of recommended actions and improvements */
+  /** List of recommended actions and improvements (required) */
   recommendations: string[];
   
-  // Component-specific properties (availability)
+  // Financial metrics
+  /** Capital expenditure */
+  capex?: number;
+  
+  /** Operational expenditure */
+  opex?: number;
+  
+  // Styling properties
+  /** Background color */
+  bg?: string;
+  
+  /** Text color */
+  text?: string;
+  
+  // Business impact analysis
+  /** Structured business impact details */
+  businessImpactDetails?: BusinessImpactDetails;
+  
+  // Availability-specific metrics
   /** System uptime requirement (e.g., "99.9%", "99.99%") */
   uptime?: string;
   
@@ -279,24 +300,93 @@ export interface CIADetails {
   /** Recovery Point Objective - maximum tolerable data loss window */
   rpo?: string;
   
+  /** Mean Time To Repair */
+  mttr?: string;
+  
   /** Service Level Agreement target */
   sla?: string;
   
-  // Component-specific properties (integrity)
+  // Integrity-specific metrics
+  /** Data validation method */
+  validationMethod?: string;
+  
   /** Data validation level (e.g., "Checksums", "Digital Signatures") */
   validationLevel?: string;
   
   /** Acceptable error rate (e.g., "< 0.01%", "< 0.0001%") */
   errorRate?: string;
   
-  // Component-specific properties (confidentiality)
+  // Confidentiality-specific metrics
+  /** Protection method (e.g., "AES-256", "TLS 1.3") */
+  protectionMethod?: string;
+  
   /** Privacy impact description */
   privacyImpact?: string;
   
-  /** Protection method (e.g., "AES-256", "TLS 1.3") */
-  protectionMethod?: string;
+  // Implementation details
+  /** Implementation complexity level */
+  implementationComplexity?: string;
+  
+  /** Ongoing maintenance requirements */
+  maintenanceRequirements?: string;
+  
+  /** Required expertise areas */
+  requiredExpertise?: string;
+  
+  /** Control family categories */
+  controlFamily?: string[];
+  
+  /** Applicable compliance frameworks */
+  applicableFrameworks?: string[];
+  
+  // Business perspective and value creation
+  /** Business perspective description */
+  businessPerspective?: string;
+  
+  /** Step-by-step implementation guide */
+  implementationSteps?: string[];
+  
+  /** Implementation effort breakdown */
+  effort?: ImplementationEffort;
+  
+  /** Key business impact */
+  keyImpact?: string;
+  
+  /** Security metric */
+  metric?: string;
+  
+  /** Value creation points */
+  valuePoints?: string[];
+  
+  /** ROI estimate */
+  roiEstimate?: ROIEstimate;
+  
+  /** Implementation considerations */
+  implementationConsiderations?: string;
+  
+  // Visual and compliance indicators
+  /** Security icon identifier */
+  securityIcon?: string;
+  
+  /** Compliance impact details */
+  complianceImpact?: ComplianceImpact;
+  
+  // Implementation guidance
+  /** Code examples */
+  codeExamples?: CodeExample[];
+  
+  /** Technical implementation details */
+  technicalImplementation?: TechnicalImplementationDetails;
+  
+  /** Required expertise level */
+  expertise?: string;
+  
+  /** Implementation timeframe */
+  timeframe?: string;
 }
 ```
+
+> **Note:** The complete interface includes 30+ optional properties for extensibility. See `src/types/cia-services.ts` lines 231-296 for the authoritative definition.
 
 ---
 
@@ -337,7 +427,7 @@ export interface BusinessImpactDetails {
 /**
  * Detailed impact information for a specific category
  * 
- * Location: src/types/cia-services.ts
+ * Location: src/types/cia-services.ts (lines 76-116)
  */
 export interface BusinessImpactDetail {
   /** Impact description */
@@ -363,12 +453,6 @@ export interface BusinessImpactDetail {
   
   /** Reputational impact description */
   reputationalImpact?: string;
-  
-  /** Additional details */
-  details?: string[];
-  
-  /** Recommended mitigation actions */
-  recommendations?: string[];
 }
 ```
 
@@ -523,33 +607,63 @@ export type FrameworkComplianceStatusType =
 /**
  * Security resource reference
  * 
- * Location: src/types/securityResources.ts
+ * Location: src/types/securityResources.ts (lines 11-101)
  * Used by: SecurityResourcesWidget, recommendation system
  */
 export interface SecurityResource {
+  /** Resource ID (required) */
+  id: string;
+  
   /** Resource title */
   title: string;
   
+  /** Resource URL (required) */
+  url: string;
+  
   /** Resource description */
-  description: string;
+  description?: string;
   
-  /** Resource URL (optional) */
-  url?: string;
-  
-  /** Resource category (e.g., "Framework", "Tool", "Guide") */
-  category?: string;
-  
-  /** Resource type (e.g., "Documentation", "Software", "Service") */
+  /** Resource type or category */
   type?: string;
   
-  /** Resource format (e.g., "PDF", "Web", "Video") */
+  /** Resource tags */
+  tags?: string[];
+  
+  /** CIA component relevance */
+  component?: "availability" | "integrity" | "confidentiality" | "general";
+  
+  /** Security level relevance */
+  level?: string;
+  
+  /** Resource source/provider */
+  source?: string;
+  
+  /** Resource category */
+  category?: string;
+  
+  /** Resource priority/relevance score (0-100) */
+  priority?: number;
+  
+  /** Security levels this resource applies to */
+  securityLevels?: string[];
+  
+  /** Components this resource applies to (multiple possible) */
+  components?: string[];
+  
+  /** Levels this resource is relevant for */
+  relevantLevels?: string[];
+  
+  /** Format of the resource (e.g., PDF, Website, Video) */
   format?: string;
   
-  /** Relevance score (0-100) */
-  relevanceScore?: number;
+  /** Resource relevance score */
+  relevance?: number;
   
-  /** Associated tags for filtering and search */
-  tags?: string[];
+  /** Implementation complexity (1-5) */
+  complexity?: number;
+  
+  /** Whether the resource is premium/paid */
+  isPremium?: boolean;
 }
 ```
 
@@ -561,36 +675,50 @@ export interface SecurityResource {
 /**
  * Technical implementation details
  * 
- * Location: src/types/cia-services.ts
+ * Location: src/types/cia-services.ts (lines 151-168)
  * Used by: Implementation planning, effort estimation
  */
 export interface TechnicalImplementationDetails {
   /** Implementation description */
   description: string;
   
-  /** Complexity level (Low, Medium, High, Very High) */
-  complexity: string;
-  
-  /** Required expertise areas */
-  expertiseRequired: string[];
-  
   /** Step-by-step implementation guide */
   implementationSteps: string[];
   
-  /** Technologies and tools required */
-  technologies: string[];
+  /** Effort breakdown for implementation */
+  effort: {
+    /** Development effort estimate (e.g., "2-4 weeks") */
+    development: string;
+    /** Ongoing maintenance effort */
+    maintenance: string;
+    /** Required expertise level */
+    expertise: string;
+  };
   
-  /** Development effort estimate (e.g., "2-4 weeks") */
-  developmentEffort: string;
+  /** Required expertise level (optional) */
+  expertiseLevel?: string;
   
-  /** Full-time equivalent staff required */
-  fteRequired: number;
+  /** Additional development effort details (optional) */
+  developmentEffort?: string;
+  
+  /** Validation method used (optional, for integrity) */
+  validationMethod?: string;
+  
+  /** Protection method used (optional, for confidentiality) */
+  protectionMethod?: string;
+  
+  /** Recovery method used (optional, for availability) */
+  recoveryMethod?: string;
+  
+  /** Extensible for additional properties */
+  [key: string]: unknown;
 }
 
 /**
  * Implementation effort breakdown
  * 
  * Location: src/types/cia-services.ts
+ * Note: This interface is nested within TechnicalImplementationDetails.effort
  */
 export interface ImplementationEffort {
   /** Development effort estimate */
@@ -608,12 +736,46 @@ export interface ImplementationEffort {
 
 ## 💰 **Cost and ROI Data Structures**
 
+> **Note:** The `CostEstimationDetails` and `CostBreakdown` interfaces documented below do not currently exist in the v1.0 codebase. They are planned for future implementation and are documented here for reference.
+
 ```typescript
 /**
- * Cost estimation details
+ * Return on Investment estimation
  * 
  * Location: src/types/cia-services.ts
- * Used by: CostEstimationWidget, financial planning
+ * Status: ✅ Implemented
+ * Used by: ValueCreationWidget, executive reporting
+ */
+export interface ROIEstimate {
+  /** Break-even timeline */
+  breakEvenPeriod: string;
+  
+  /** Annual savings estimate */
+  annualSavings: string;
+  
+  /** ROI percentage (3-year) */
+  roiPercentage: number;
+  
+  /** Value creation areas */
+  valueCreation?: string[];
+  
+  /** Risk reduction benefits */
+  riskReduction?: string[];
+}
+```
+
+```typescript
+/**
+ * 📋 Planned Interfaces for Future Implementation
+ * 
+ * The following interfaces are planned but not yet implemented in v1.0:
+ */
+
+/**
+ * Cost estimation details (PLANNED)
+ * 
+ * Planned Location: src/types/cia-services.ts
+ * Status: 🚀 Planned for v1.x
  */
 export interface CostEstimationDetails {
   /** Initial implementation cost */
@@ -633,9 +795,10 @@ export interface CostEstimationDetails {
 }
 
 /**
- * Cost breakdown by category
+ * Cost breakdown by category (PLANNED)
  * 
- * Location: src/types/cia-services.ts
+ * Planned Location: src/types/cia-services.ts
+ * Status: 🚀 Planned for v1.x
  */
 export interface CostBreakdown {
   /** Infrastructure costs */
@@ -652,29 +815,6 @@ export interface CostBreakdown {
   
   /** Other costs */
   other?: string;
-}
-
-/**
- * Return on Investment estimation
- * 
- * Location: src/types/cia-services.ts
- * Used by: ValueCreationWidget, executive reporting
- */
-export interface ROIEstimate {
-  /** Break-even timeline */
-  breakEvenPeriod: string;
-  
-  /** Annual savings estimate */
-  annualSavings: string;
-  
-  /** ROI percentage (3-year) */
-  roiPercentage: number;
-  
-  /** Value creation areas */
-  valueCreation?: string[];
-  
-  /** Risk reduction benefits */
-  riskReduction?: string[];
 }
 ```
 
@@ -911,44 +1051,58 @@ interface CIAContentService {
  * Location: src/services/complianceService.ts
  * Status: Implemented ✅
  * Provides: Compliance assessment and framework mapping
+ * 
+ * Note: This is a class implementation, not an interface. Main public methods shown below.
  */
 interface ComplianceService {
-  /** Assess compliance status for security profile */
-  assessCompliance(profile: SecurityProfile): ComplianceStatus;
+  /**
+   * Get compliance status for given security levels
+   * 
+   * Actual method signature:
+   * getComplianceStatus(
+   *   availabilityLevel: SecurityLevel,
+   *   integrityLevel: SecurityLevel,
+   *   confidentialityLevel: SecurityLevel
+   * ): ComplianceStatusDetails
+   */
+  getComplianceStatus(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): ComplianceStatusDetails;
   
-  /** Get compliance gap analysis */
-  getComplianceGaps(
-    profile: SecurityProfile,
-    framework: string
-  ): ComplianceGap[];
-  
-  /** Get recommended remediation steps */
-  getRemediationSteps(gaps: ComplianceGap[]): string[];
-  
-  /** Calculate compliance score (0-100) */
-  calculateComplianceScore(profile: SecurityProfile): number;
+  /**
+   * Get compliance gap analysis
+   * 
+   * Actual method signature:
+   * getComplianceGapAnalysis(
+   *   availabilityLevel: SecurityLevel,
+   *   integrityLevel: SecurityLevel,
+   *   confidentialityLevel: SecurityLevel,
+   *   frameworks?: string[]
+   * ): ComplianceGapAnalysis
+   */
+  getComplianceGapAnalysis(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel,
+    frameworks?: string[]
+  ): ComplianceGapAnalysis;
 }
 
 /**
- * Compliance gap definition
+ * Compliance status details returned by getComplianceStatus
  * 
- * Location: src/services/complianceService.ts
+ * Location: src/services/complianceService.ts (lines 21-29)
  */
-interface ComplianceGap {
-  /** Framework requirement not met */
-  requirement: string;
-  
-  /** Current level */
-  currentLevel: SecurityLevel;
-  
-  /** Required level */
-  requiredLevel: SecurityLevel;
-  
-  /** Gap severity */
-  severity: "Critical" | "High" | "Medium" | "Low";
-  
-  /** Recommended actions */
-  recommendations: string[];
+interface ComplianceStatusDetails {
+  status: string;
+  compliantFrameworks: string[];
+  partiallyCompliantFrameworks: string[];
+  nonCompliantFrameworks: string[];
+  remediationSteps?: string[];
+  requirements?: string[];
+  complianceScore: number;
 }
 ```
 
@@ -1148,32 +1302,25 @@ The application uses React hooks for state management (no Context API):
 /**
  * CIA data provider hook
  * 
- * Location: src/hooks/useCIADataProvider.ts
- * Provides: Convenient access to data provider methods
+ * Location: src/hooks/useCIADataProvider.ts (lines 9-54)
+ * Provides: Access to the CIA data provider instance and state
  */
 function useCIADataProvider(): {
-  /** Get details for specific component and level */
-  getDetails: (component: CIAComponent, level: SecurityLevel) => CIADetails;
-  
-  /** Get security resources */
-  getResources: (component: CIAComponent, level: SecurityLevel) => SecurityResource[];
-  
-  /** Get framework details */
-  getFramework: (frameworkId: string) => ComplianceFramework;
-  
-  /** Get all supported frameworks */
-  getSupportedFrameworks: () => string[];
-  
-  /** Check if provider is ready */
-  isReady: boolean;
-  
-  /** Loading state */
-  loading: boolean;
+  /** The CIA data provider instance (implements CIADataProvider), or null if not loaded */
+  dataProvider: CIADataProvider | null;
   
   /** Error state */
   error: Error | null;
+  
+  /** Loading state */
+  isLoading: boolean;
+  
+  /** Refreshes the data provider (reloads data) */
+  refreshDataProvider: () => Promise<void>;
 }
 ```
+
+> **Note:** The hook returns the raw `dataProvider` object which implements the `CIADataProvider` interface. To use it, access methods like `dataProvider.getConfidentialityOptions()`, `dataProvider.getIntegrityOptions()`, etc.
 
 ---
 
@@ -1185,56 +1332,35 @@ The application persists user selections in local storage:
 /**
  * Local storage key constants
  * 
- * Location: src/constants/storageKeys.ts
+ * Locations:
+ *   - src/constants/appConstants.ts (lines 431-436)
+ *   - src/constants/coreConstants.ts (lines 291-295)
  */
 const STORAGE_KEYS = {
-  /** Security profile key */
-  SECURITY_PROFILE: 'cia-security-profile',
-  
   /** Theme preference key */
   THEME: 'cia-theme',
-  
+
+  /** Security levels key */
+  SECURITY_LEVELS: 'cia-security-levels',
+
+  /** Dashboard layout key */
+  DASHBOARD_LAYOUT: 'cia-dashboard-layout',
+
   /** User preferences key */
-  PREFERENCES: 'cia-user-preferences',
+  USER_PREFERENCES: 'cia-user-preferences',
+
+  /** Manager settings key */
+  SETTINGS: 'cia-manager-settings',
+
+  /** Selected levels key */
+  SELECTED_LEVELS: 'cia-manager-levels',
+
+  /** Last visit key */
+  LAST_VISIT: 'cia-manager-last-visit',
 } as const;
-
-/**
- * Stored security profile structure
- */
-interface StoredSecurityProfile {
-  /** Availability level */
-  availability: SecurityLevel;
-  
-  /** Integrity level */
-  integrity: SecurityLevel;
-  
-  /** Confidentiality level */
-  confidentiality: SecurityLevel;
-  
-  /** Last updated timestamp */
-  timestamp: number;
-  
-  /** Schema version for migration */
-  version: number;
-}
-
-/**
- * User preferences structure
- */
-interface UserPreferences {
-  /** Theme preference */
-  theme: 'light' | 'dark' | 'system';
-  
-  /** Show tooltips */
-  showTooltips: boolean;
-  
-  /** Show advanced options */
-  showAdvanced: boolean;
-  
-  /** Preferred frameworks for highlighting */
-  preferredFrameworks: string[];
-}
 ```
+
+> **Note:** The `StoredSecurityProfile` and `UserPreferences` interfaces shown in earlier versions do not exist in the v1.0 codebase. Local storage implementation uses the keys above with flexible data structures.
 
 ---
 
@@ -1346,17 +1472,19 @@ flowchart LR
 
 ### **Type Definitions**
 
-| Category | Count | Files |
-|----------|-------|-------|
-| **Core Types** | 15+ | `cia.ts`, `cia-services.ts` |
-| **Widget Props** | 19 | `widget-props.ts` |
-| **Component Props** | 30 | `componentPropExports.ts` |
-| **Legacy Widget Types** | 15+ | `widgets.ts` |
-| **Business Impact** | 5 | `businessImpact.ts` |
-| **Compliance** | 8 | `compliance.ts` |
-| **Risk** | 4 | `risk.ts` |
-| **Security Resources** | 2 | `securityResources.ts` |
-| **Total Interfaces** | **~95** (estimate) | **8 files** |
+| Category                | Verified Count | Planned | Files                        |
+|------------------------|---------------|---------|------------------------------|
+| **Core Types**         | 13            | 2       | `cia.ts`, `cia-services.ts`  |
+| **Widget Props**       | 19            | 0       | `widget-props.ts`            |
+| **Component Props**    | 30            | 0       | `componentPropExports.ts`    |
+| **Legacy Widget Types**| 15            | 0       | `widgets.ts`                 |
+| **Business Impact**    | 5             | 0       | `businessImpact.ts`          |
+| **Compliance**         | 8             | 0       | `compliance.ts`              |
+| **Risk**               | 4             | 0       | `risk.ts`                    |
+| **Security Resources** | 2             | 0       | `securityResources.ts`       |
+| **Total Interfaces**   | **96**        | **2**   | **8 files**                  |
+
+> **Note:** The counts above reflect verified, implemented interfaces as of v1.0. Planned interfaces (`CostEstimationDetails`, `CostBreakdown`) are listed separately and marked as 🚀 Planned for v1.x. Some interfaces like `SecurityResource`, `TechnicalImplementationDetails`, and `CIADetails` have been updated to match actual implementation. Please refer to the respective type files for the most current definitions.
 
 ### **Widget Components**
 
@@ -1377,7 +1505,7 @@ flowchart LR
 | Control | Data Model Implementation | Evidence |
 |---------|-------------------------|----------|
 | **A.8.3** Asset Handling | `SecurityProfile`, `CIADetails` | Type-safe asset classification |
-| **A.8.10** Information Deletion | `StoredSecurityProfile.version` | Schema versioning for data migration |
+| **A.8.10** Information Deletion | Local storage schema versioning | Data migration support |
 | **A.8.11** Data Masking | `confidentialityLevel` mapping | Privacy level controls |
 | **A.8.12** Data Leakage Prevention | Type guards, validation | Runtime type checking |
 
