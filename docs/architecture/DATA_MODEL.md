@@ -198,7 +198,7 @@ export type RiskLevel =
 /**
  * Core security profile representing CIA triad selections
  * 
- * Location: src/types/cia.ts
+ * Location: src/types/cia.ts (line 324)
  * Used by: All assessment widgets, compliance service, business impact calculators
  */
 export interface SecurityProfile {
@@ -211,26 +211,34 @@ export interface SecurityProfile {
   /** Selected confidentiality security level */
   confidentialityLevel: SecurityLevel;
   
-  /** Calculate overall security level from individual components */
-  calculateOverallLevel(): SecurityLevel;
-  
-  /** Check if profile meets framework requirements */
-  isCompliant(framework: string): boolean;
+  /** Overall security level (typically the highest of the three components) */
+  securityLevel: SecurityLevel;
 }
+
+// Note: Security level calculations are provided by utility functions:
+// - calculateOverallSecurityLevel(availability, integrity, confidentiality)
+// - calculateRiskLevel(availability, integrity, confidentiality)
+// See src/types/cia.ts lines 147-208
 ```
 
 ### **SecurityLevels Interface**
 
 ```typescript
 /**
- * Alternative security profile structure
+ * Alternative security profile structure (without Level suffix)
  * 
- * Location: src/types/cia.ts
+ * Location: src/types/cia.ts (line 505)
  * Used by: Service layer, data providers
+ * Note: Property names differ from SecurityProfile (no "Level" suffix)
  */
 export interface SecurityLevels {
+  /** Selected availability security level */
   availability: SecurityLevel;
+  
+  /** Selected integrity security level */
   integrity: SecurityLevel;
+  
+  /** Selected confidentiality security level */
   confidentiality: SecurityLevel;
 }
 ```
@@ -867,6 +875,7 @@ classDiagram
  * CIA content service interface
  * 
  * Location: src/services/ciaContentService.ts
+ * Status: Implemented ✅
  * Provides: Security level content and recommendations
  */
 interface CIAContentService {
@@ -900,6 +909,7 @@ interface CIAContentService {
  * Compliance service interface
  * 
  * Location: src/services/complianceService.ts
+ * Status: Implemented ✅
  * Provides: Compliance assessment and framework mapping
  */
 interface ComplianceService {
@@ -949,6 +959,7 @@ interface ComplianceGap {
  * Business impact service interface
  * 
  * Location: src/services/businessImpactService.ts
+ * Status: Implemented ✅
  * Provides: Business impact analysis and ROI calculation
  */
 interface BusinessImpactService {
@@ -976,6 +987,7 @@ interface BusinessImpactService {
  * Security metrics service interface
  * 
  * Location: src/services/securityMetricsService.ts
+ * Status: Implemented ✅
  * Provides: Security scoring and metrics calculation
  */
 interface SecurityMetricsService {
@@ -1344,7 +1356,7 @@ flowchart LR
 | **Compliance** | 8 | `compliance.ts` |
 | **Risk** | 4 | `risk.ts` |
 | **Security Resources** | 2 | `securityResources.ts` |
-| **Total Interfaces** | **95+** | **8 files** |
+| **Total Interfaces** | **~95** (estimate) | **8 files** |
 
 ### **Widget Components**
 
