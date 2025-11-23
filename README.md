@@ -11,12 +11,12 @@
 
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/Owner-CEO-0A66C2?style=for-the-badge" alt="Owner"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Version-0.8.x-555?style=for-the-badge" alt="Version"/></a>
+  [![GitHub Release](https://img.shields.io/github/v/release/Hack23/cia-compliance-manager)](https://github.com/Hack23/cia-compliance-manager/releases)
   <a href="#"><img src="https://img.shields.io/badge/Effective-2024--01--01-success?style=for-the-badge" alt="Effective Date"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Review-Quarterly-orange?style=for-the-badge" alt="Review Cycle"/></a>
 </p>
 
-**📋 Document Owner:** CEO | **📄 Version:** 0.8.x | **📅 Last Updated:** 2024-11-17 (UTC)  
+**📋 Document Owner:** CEO | **📄 Version:** [![GitHub Release](https://img.shields.io/github/v/release/Hack23/cia-compliance-manager)](https://github.com/Hack23/cia-compliance-manager/releases) | **📅 Last Updated:** 2024-11-17 (UTC)  
 **🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2025-02-17
 
 ---
