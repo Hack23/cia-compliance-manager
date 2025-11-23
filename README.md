@@ -87,6 +87,109 @@ This platform serves security professionals and decision-makers:
 - **🏗️ Security Architects & Engineers** - Technical security design and architecture validation
 - **💰 Business Stakeholders** - Security investment decisions and ROI analysis
 
+## 🤖 GitHub Copilot Custom Agents
+
+CIA Compliance Manager includes a set of **specialized GitHub Copilot custom agents** that are tailored to this project’s architecture, ISMS alignment, and quality standards. Each agent focuses on a specific domain (product, development, testing, documentation, or security) to provide **context-aware assistance** across the codebase.
+
+```mermaid
+graph TB
+    subgraph "Product Coordination"
+        TASK[🎯 Product Task Agent]:::task
+    end
+    
+    subgraph "Development Agents"
+        TS[⚛️ TypeScript React Agent]:::dev
+        TEST[🧪 Testing Agent]:::test
+    end
+    
+    subgraph "Quality & Security"
+        CR[🔍 Code Review Agent]:::review
+        SEC[🔐 Security Compliance Agent]:::security
+    end
+    
+    subgraph "Documentation"
+        DOC[📝 Documentation Agent]:::docs
+    end
+    
+    TASK --> TS
+    TASK --> TEST
+    TASK --> CR
+    TASK --> SEC
+    TASK --> DOC
+    
+    classDef task fill:#FFC107,stroke:#F57C00,stroke-width:3px,color:#000
+    classDef dev fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#fff
+    classDef test fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#fff
+    classDef review fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#fff
+    classDef security fill:#D32F2F,stroke:#B71C1C,stroke-width:2px,color:#fff
+    classDef docs fill:#FF9800,stroke:#E65100,stroke-width:2px,color:#fff
+```
+
+### 📋 Available Agents
+
+<table>
+  <tr>
+    <td width="50%">
+      <h3>🎯 Product Task Agent</h3>
+      <p><strong>File:</strong> <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/.github/agents/product-task-agent.md"><code>.github/agents/product-task-agent.md</code></a></p>
+      <p>Expert product coordinator for creating GitHub issues, assigning tasks to agents, and ensuring quality across code, UX, security, and ISMS dimensions.</p>
+      <p><strong>Use for:</strong> product audits, issue creation, UI/UX and accessibility findings, ISMS alignment, and multi‑agent task coordination.</p>
+    </td>
+    <td width="50%">
+      <h3>⚛️ TypeScript React Agent</h3>
+      <p><strong>File:</strong> <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/.github/agents/typescript-react-agent.md"><code>.github/agents/typescript-react-agent.md</code></a></p>
+      <p>Specialist in React&nbsp;19.x and TypeScript for building secure, type‑safe components that follow the project’s architecture and reusability standards.</p>
+      <p><strong>Use for:</strong> new components, state management patterns, type definitions, refactoring, and type‑safe integrations.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>🧪 Testing Agent</h3>
+      <p><strong>File:</strong> <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/.github/agents/testing-agent.md"><code>.github/agents/testing-agent.md</code></a></p>
+      <p>Testing expert for Vitest, React Testing Library, and Cypress, aligned with the project’s Secure Development Policy and coverage thresholds.</p>
+      <p><strong>Use for:</strong> unit tests, integration tests, E2E scenarios, improving coverage, and debugging failing tests.</p>
+    </td>
+    <td width="50%">
+      <h3>🔍 Code Review Agent</h3>
+      <p><strong>File:</strong> <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/.github/agents/code-review-agent.md"><code>.github/agents/code-review-agent.md</code></a></p>
+      <p>Reviewer focused on code quality, maintainability, performance, accessibility, and security hygiene across the TypeScript/React codebase.</p>
+      <p><strong>Use for:</strong> PR reviews, identifying code smells, performance tuning, and enforcing project coding standards.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>📝 Documentation Agent</h3>
+      <p><strong>File:</strong> <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/.github/agents/documentation-agent.md"><code>.github/agents/documentation-agent.md</code></a></p>
+      <p>Documentation specialist for Markdown, JSDoc/TypeDoc, and Mermaid diagrams, aligned with the project’s architecture and ISMS documentation.</p>
+      <p><strong>Use for:</strong> updating README files, writing API docs, and creating architecture and workflow diagrams.</p>
+    </td>
+    <td width="50%">
+      <h3>🔐 Security &amp; Compliance Agent</h3>
+      <p><strong>File:</strong> <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/.github/agents/security-compliance-agent.md"><code>.github/agents/security-compliance-agent.md</code></a></p>
+      <p>Security and compliance expert for CIA triad analysis, NIST/ISO/GDPR mapping, threat modeling, and secure coding practices.</p>
+      <p><strong>Use for:</strong> security control implementation, framework mapping, threat modeling, and risk assessment.</p>
+    </td>
+  </tr>
+</table>
+
+### 🚀 Using Agents in This Project
+
+You can explicitly address agents in your prompts when working in this repository, for example:
+
+```text
+@product-task-agent, create GitHub issues for improving the CRA assessment documentation.
+
+@typescript-react-agent, refactor the SecuritySummaryWidget to reuse existing types and constants.
+
+@testing-agent, add Vitest unit tests for the BusinessImpactAnalysisWidget.
+
+@security-compliance-agent, review the cost estimation logic for compliance with the Classification Framework.
+```
+
+For full configuration details and advanced usage, see the **Agent README**:
+
+- [`.github/agents/README.md`](https://github.com/Hack23/cia-compliance-manager/blob/main/.github/agents/README.md)
+
 ## 📝 Featured Blog Posts
 
 Explore in-depth technical insights and architectural analysis from our expert contributors:
