@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.9.2**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.0.0**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **DEFAULT\_SETTINGS**: `object`
 
-Defined in: [constants/coreConstants.ts:279](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/constants/coreConstants.ts#L279)
+Defined in: [constants/coreConstants.ts:279](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/constants/coreConstants.ts#L279)
 
 Default settings for the application
 

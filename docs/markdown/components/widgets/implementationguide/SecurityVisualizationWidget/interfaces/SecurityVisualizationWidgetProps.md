@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v0.9.2**](../../../../../README.md)
+[**CIA Compliance Manager Documentation v1.0.0**](../../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityVisualizationWidgetProps
 
-Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L25)
+Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L25)
 
 Props for SecurityVisualizationWidget component
 
@@ -16,7 +16,7 @@ Props for SecurityVisualizationWidget component
 
 > **availabilityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L29)
+Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L29)
 
 Selected availability level
 
@@ -26,7 +26,7 @@ Selected availability level
 
 > `optional` **className**: `string`
 
-Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:44](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L44)
+Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:44](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L44)
 
 Optional CSS class name
 
@@ -36,7 +36,7 @@ Optional CSS class name
 
 > **confidentialityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:39](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L39)
+Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:39](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L39)
 
 Selected confidentiality level
 
@@ -46,7 +46,7 @@ Selected confidentiality level
 
 > **integrityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:34](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L34)
+Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:34](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L34)
 
 Selected integrity level
 
@@ -56,6 +56,6 @@ Selected integrity level
 
 > `optional` **testId**: `string`
 
-Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:49](https://github.com/Hack23/cia-compliance-manager/blob/4a2010ba7d0748aab2dadaf655c5204c6a96bd65/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L49)
+Defined in: [components/widgets/implementationguide/SecurityVisualizationWidget.tsx:49](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/components/widgets/implementationguide/SecurityVisualizationWidget.tsx#L49)
 
 Optional test ID for testing
