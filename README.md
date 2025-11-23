@@ -479,6 +479,23 @@ Comprehensive architectural documentation with 20+ diagrams covering current imp
 </tr>
 </table>
 
+## Security Architecture Documentation
+
+<table>
+<tr>
+  <td width="50%">
+    <h3>🔐 Security Architecture</h3>
+    <p>STRIDE threat analysis, attack trees, and security design patterns for the current implementation.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SECURITY_ARCHITECTURE.md">View Security Architecture</a>
+  </td>
+  <td width="50%">
+    <h3>🔐 Future Security Architecture</h3>
+    <p>Advanced security patterns and zero-trust architecture planned for future platform evolution.</p>
+    <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_SECURITY_ARCHITECTURE.md">View Future Security Architecture</a>
+  </td>
+</tr>
+</table>
+
 ## 🧪 Testing & Quality
 
 <table>
@@ -521,6 +538,26 @@ Detailed API reference for all components, types, and functions in the applicati
 Comprehensive business continuity planning and recovery strategies aligned with CIA principles.
 
 [View Interactive Plan](https://hack23.github.io/cia-compliance-manager/business-continuity) | [Markdown Version](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/BCPPlan.md)
+
+### 📅 Lifecycle Management
+Product lifecycle management documentation covering development, deployment, maintenance, and retirement phases.
+
+[View Lifecycle Documentation](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/End-of-Life-Strategy.md)
+
+### 💰 Financial Security Plan
+Security investment analysis, cost-benefit models, and financial planning for security implementations.
+
+[View Financial Plan](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/FinancialSecurityPlan.md)
+
+### 🛡️ Evidence-Based Threat Model
+Comprehensive threat model using STRIDE methodology with risk quantification and mitigation strategies.
+
+[View Threat Model](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/THREAT_MODEL.md)
+
+### 🏛️ CRA Assessment Implementation
+EU Cyber Resilience Act compliance assessment and implementation documentation.
+
+[View CRA Assessment](https://github.com/Hack23/cia-compliance-manager/blob/main/CRA-ASSESSMENT.md)
 
 ## 🔍 System Context
 
