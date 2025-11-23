@@ -1,6 +1,8 @@
 # 🛡️ CIA Compliance Manager Future Security Architecture
 
-This document outlines the comprehensive future security architecture for the CIA Compliance Manager as it evolves into a full-stack multi-tenant security assessment, compliance mapping, and analytics SaaS platform leveraging AWS cloud infrastructure, user accounts, and advanced security services.
+> **Version:** v2.0-DRAFT | **Based on:** v1.0 Baseline | **Last Updated:** 2025-11-23 | **Status:** 🚀 Evolution Roadmap
+
+This document outlines the comprehensive future security architecture for the CIA Compliance Manager as it evolves from v1.0 baseline into a full-stack multi-tenant security assessment, compliance mapping, and analytics SaaS platform leveraging AWS cloud infrastructure, user accounts, and advanced security services.
 
 ## 📑 Table of Contents
 
@@ -31,14 +33,33 @@ This document outlines the comprehensive future security architecture for the CI
 
 ## 🔐 Security Documentation Map
 
+<div class="documentation-map">
+
+### Current Architecture (v1.0 Baseline)
 | Document                                                        | Focus          | Description                                         |
 | --------------------------------------------------------------- | -------------- | --------------------------------------------------- |
-| [Current Security Architecture](SECURITY_ARCHITECTURE.md)       | 🛡️ Current     | Current frontend-only security implementation       |
-| [Future Security Architecture](FUTURE_SECURITY_ARCHITECTURE.md) | 🔮 Future      | **This document** - AWS cloud security architecture |
-| [End-of-Life Strategy](End-of-Life-Strategy.md)                 | 📅 Lifecycle   | Security patching and updates                       |
-| [Workflows](WORKFLOWS.md)                                       | 🔧 CI/CD       | Security-hardened CI/CD workflows                   |
-| [Development Guide](development.md)                             | 🔧 Development | Security features and testing strategy              |
-| [Architecture](ARCHITECTURE.md)                                 | 🏛️ Structure   | Overall system architecture                         |
+| [Current Security Architecture](SECURITY_ARCHITECTURE.md)       | 🛡️ Security    | v1.0 frontend-only security implementation          |
+| [Current Architecture](ARCHITECTURE.md)                         | 🏛️ Architecture | C4 model showing v1.0 system structure              |
+| [Current State Diagrams](STATEDIAGRAM.md)                       | 🔄 Behavior    | v1.0 state transitions and error handling           |
+| [Current Workflows](WORKFLOWS.md)                               | 🔧 CI/CD       | v1.0 security-hardened CI/CD workflows              |
+
+### Future Architecture Evolution (v2.0+)
+| Document                                                        | Focus          | Description                                         |
+| --------------------------------------------------------------- | -------------- | --------------------------------------------------- |
+| [Future Security Architecture](FUTURE_SECURITY_ARCHITECTURE.md) | 🛡️ Security    | **This document** - AWS cloud security architecture |
+| [Future Architecture](FUTURE_ARCHITECTURE.md)                   | 🏛️ Architecture | Vision for context-aware platform                   |
+| [Future State Diagrams](FUTURE_STATEDIAGRAM.md)                | 🔄 Behavior    | Context-aware state management and ML-driven states |
+| [Future Workflows](FUTURE_WORKFLOWS.md)                         | 🔧 CI/CD       | Enhanced CI/CD with ML model training               |
+| [Future SWOT Analysis](FUTURE_SWOT.md)                          | 💼 Business    | Strategic analysis of v2.0 transformation           |
+| [Future Flowcharts](FUTURE_FLOWCHART.md)                        | 🔄 Process     | ML-enhanced compliance workflows                    |
+
+### Supporting Documentation
+| Document                                    | Focus          | Description                         |
+| ------------------------------------------- | -------------- | ----------------------------------- |
+| [End-of-Life Strategy](End-of-Life-Strategy.md) | 📅 Lifecycle   | Security patching and updates       |
+| [Development Guide](development.md)         | 🔧 Development | Security features and testing       |
+
+</div>
 
 ## 🔑 Authentication Architecture (AWS Cognito)
 
