@@ -872,26 +872,6 @@ The application itself is built with security as a priority:
 
 For comprehensive security documentation, visit the [Security Documentation](https://hack23.github.io/cia-compliance-manager/documentation.html#security) in our Documentation Portal.
 
-## 📚 Documentation Resources
-
-The following resources are available in our [Documentation Portal](https://hack23.github.io/cia-compliance-manager/documentation.html):
-
-| Resource                  | Description                                           | Link                                                                                         |
-| ------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| API Documentation         | Detailed API reference for all components             | [View](https://hack23.github.io/cia-compliance-manager/api)                                  |
-| Architecture Diagrams     | C4 model diagrams and architecture documentation      | [View](/workspaces/cia-compliance-manager/docs/architecture/ARCHITECTURE.md)                 |
-| Diagrams & Visualizations | UML and Mermaid diagrams showing system relationships | [View](https://hack23.github.io/cia-compliance-manager/diagrams)                             |
-| Code Coverage             | Test coverage reports and metrics                     | [View](https://hack23.github.io/cia-compliance-manager/docs/coverage)                        |
-| Dependencies              | Visual representation of module dependencies          | [View](https://hack23.github.io/cia-compliance-manager/dependencies/module-dependencies.svg) |
-
-## 📝 Key Documentation Sections
-
-- [API Reference]s(https://hack23.github.io/cia-compliance-manager/api/) - For developers integrating with our API
-  frameworks
-- [Current Architecture](/workspaces/cia-compliance-manager/docs/architecture/ARCHITECTURE.md) - Current architecture documentation
-- [Future Architecture](/workspaces/cia-compliance-manager/docs/architecture/FUTURE_ARCHITECTURE.md) - Planned architectural improvements
-- [Performance Testing](/workspaces/cia-compliance-manager/docs/performance-testing.md) - Performance testing methodology and results
-
 ## 👥 Contributing
 
 We welcome contributions to our documentation. Please see the [Contributing Guide](https://github.com/Hack23/cia-compliance-manager/blob/main/CONTRIBUTING.md) for more information.
