@@ -15,7 +15,7 @@
 
 The **CIA Compliance Manager** is a comprehensive application designed to help organizations assess, implement, and manage security controls across the CIA triad (Confidentiality, Integrity, and Availability). It provides detailed security assessments, cost estimation tools, business impact analysis, and technical implementation guidance to support organizations in achieving their security objectives within budget constraints.
 
-This compliance tool demonstrates Hack23 AB's commitment to **security by design** and **transparency**, serving as both an operational platform and a live demonstration of our cybersecurity consulting expertise.
+This compliance tool demonstrates Hack23 AB's commitment to **security by design** and **transparency**, serving as both an operational platform and a live demonstration of our cybersecurity consulting expertise. Built following our [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) and classified according to our [Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md), this project exemplifies security best practices through transparent implementation.
 
 *— James Pether Sörling, CEO/Founder*
 
@@ -30,6 +30,9 @@ Experience the CIA Compliance Manager in action by testing the application here:
 ## 🏆 Business Value & Strategic Impact
 
 ### 🎯 Project Classification
+
+This project is classified according to our [Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md), which provides systematic impact analysis across security, business continuity, and operational dimensions.
+
 [![Project Type](https://img.shields.io/badge/Type-Compliance_Platform-green?style=for-the-badge&logo=clipboard-check&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#project-type-classifications)
 [![Process Type](https://img.shields.io/badge/Process-Development-cyan?style=for-the-badge&logo=code&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#project-type-classifications)
 
@@ -71,36 +74,62 @@ Experience the CIA Compliance Manager in action by testing the application here:
 
 ## 🌟 Key Features
 
+The CIA Compliance Manager provides enterprise-grade capabilities for security assessment and compliance management:
+
 <table>
 <tr>
   <td width="33%">
-    <h3>🔐 Security Level Assessment</h3>
-    <p>Configure and assess security levels across all dimensions of the CIA triad to establish your security baseline.</p>
+    <h3>🔐 Advanced CIA Triad Assessment</h3>
+    <p>Automated security level assessment across Confidentiality, Integrity, and Availability dimensions with real-time control effectiveness tracking.</p>
   </td>
   <td width="33%">
-    <h3>📋 Compliance Mapping</h3>
-    <p>Map security controls to frameworks like NIST, ISO, GDPR, HIPAA, SOC2, and PCI DSS.</p>
+    <h3>📋 Multi-Framework Compliance Mapping</h3>
+    <p>Comprehensive compliance automation for NIST 800-53, ISO 27001, GDPR, HIPAA, SOC2, PCI DSS, and EU Cyber Resilience Act (CRA).</p>
   </td>
   <td width="33%">
-    <h3>📊 Business Impact Analysis</h3>
-    <p>Analyze financial, operational, and regulatory impacts of your security measures.</p>
+    <h3>🎯 Sophisticated Threat Modeling</h3>
+    <p>Integrated STRIDE threat analysis with risk quantification and attack tree visualization for comprehensive security assessment.</p>
   </td>
 </tr>
 <tr>
   <td width="33%">
-    <h3>💰 Cost Estimation</h3>
-    <p>Estimate CAPEX and OPEX for security implementations to support ROI analysis and budget planning.</p>
+    <h3>📊 Enterprise Business Impact Analysis</h3>
+    <p>Quantify financial, operational, reputational, and regulatory impacts using structured impact assessment methodologies from our <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#business-impact-analysis-matrix">Classification Framework</a>.</p>
   </td>
   <td width="33%">
-    <h3>📈 Interactive Visualizations</h3>
-    <p>View security data and compliance status through intuitive interactive charts and dashboards.</p>
+    <h3>💰 Cost Estimation & ROI Analysis</h3>
+    <p>Calculate CAPEX and OPEX for security implementations with detailed breakdown and ROI calculator to justify security investments.</p>
+  </td>
+  <td width="33%">
+    <h3>🏷️ Professional Data Classification</h3>
+    <p>Apply systematic data classification based on confidentiality, integrity, and availability requirements aligned with <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">ISMS standards</a>.</p>
+  </td>
+</tr>
+<tr>
+  <td width="33%">
+    <h3>📈 Interactive Dashboards</h3>
+    <p>Real-time visualization of security posture, compliance status, and risk metrics through intuitive interactive charts and widgets.</p>
   </td>
   <td width="33%">
     <h3>📝 Implementation Guidance</h3>
-    <p>Access detailed guidance on deploying and optimizing security controls based on industry best practices.</p>
+    <p>Detailed technical guidance and best practices for deploying security controls across all CIA triad levels.</p>
+  </td>
+  <td width="33%">
+    <h3>🔍 Automated Evidence Collection</h3>
+    <p>Generate compliance reports and collect evidence artifacts for audit preparation and regulatory requirements.</p>
   </td>
 </tr>
 </table>
+
+### 👥 **Target Audience**
+
+This platform serves security professionals and decision-makers:
+
+- **🎯 CISOs & Security Directors** - Strategic security posture management and compliance oversight
+- **📋 Compliance & Risk Officers** - Regulatory compliance tracking and audit preparation
+- **💼 IT Managers & System Administrators** - Security control implementation and operational management
+- **🏗️ Security Architects & Engineers** - Technical security design and architecture validation
+- **💰 Business Stakeholders** - Security investment decisions and ROI analysis
 
 ## 📝 Featured Blog Posts
 
@@ -164,7 +193,9 @@ Explore in-depth technical insights and architectural analysis from our expert c
 
 ## 📊 Test Coverage & Quality
 
-**Current Metrics** (Per [Secure Development Policy §4.1](https://github.com/Hack23/ISMS/blob/main/Secure_Development_Policy.md#-unit-test-coverage--quality)):
+The CIA Compliance Manager follows rigorous testing standards as defined in our [Secure Development Policy §4](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-unit-test-coverage--quality), ensuring comprehensive validation of all security controls and features.
+
+**Current Metrics** (Per [Secure Development Policy §4.1](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-unit-test-coverage--quality)):
 
 [![Coverage](https://img.shields.io/badge/Coverage-Live%20Results-success?style=flat-square&logo=vitest&logoColor=white)](https://hack23.github.io/cia-compliance-manager/docs/coverage/)
 [![Unit Tests](https://img.shields.io/badge/Unit%20Tests-Live%20Results-success?style=flat-square&logo=vitest&logoColor=white)](https://hack23.github.io/cia-compliance-manager/docs/test-results/)
@@ -184,7 +215,7 @@ Explore in-depth technical insights and architectural analysis from our expert c
 
 ## ⚡ Performance & Optimization
 
-**Performance Metrics** (Per [Secure Development Policy §8](https://github.com/Hack23/ISMS/blob/main/Secure_Development_Policy.md#-performance-testing--monitoring-framework)):
+**Performance Metrics** (Per [Secure Development Policy §8](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-performance-testing--monitoring-framework)):
 
 [![Performance Testing](https://img.shields.io/badge/Performance-Documentation-success?style=flat-square&logo=lighthouse&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md)
 [![Bundle Size](https://img.shields.io/badge/Bundle%20Size-~201KB%20(gzip)-success?style=flat-square&logo=webpack&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md#-current-bundle-size-analysis)
@@ -199,7 +230,7 @@ Explore in-depth technical insights and architectural analysis from our expert c
 
 ## 🔐 Commitment to Transparency and Security
 
-At Hack23 AB, we believe that true security comes through transparency and demonstrable practices. Our Information Security Management System (ISMS) is publicly available, showcasing our commitment to security excellence and organizational transparency.
+At Hack23 AB, we believe that true security comes through transparency and demonstrable practices. Our Information Security Management System (ISMS) is publicly available, showcasing our commitment to security excellence and organizational transparency. This approach aligns with our [Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) and [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md).
 
 <table>
   <tr>
@@ -276,17 +307,17 @@ CIA Compliance Manager exemplifies our security-first approach by **practicing w
 
 #### 🎯 **ISMS Compliance Highlights**
 
-Our implementation demonstrates security excellence across all critical domains:
+Our implementation demonstrates security excellence across all critical domains, fully aligned with our [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) and [Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md):
 
-- ✅ **Secure Development**: [80%+ test coverage](./docs/UnitTestPlan.md), automated security scanning, code review requirements
-- ✅ **Supply Chain Security**: [SLSA Level 3 attestation](https://github.com/Hack23/cia-compliance-manager/attestations), SBOM generation, dependency scanning
-- ✅ **Vulnerability Management**: [Zero critical/high vulnerabilities](https://github.com/Hack23/cia-compliance-manager/security), coordinated disclosure, 48h response SLA
-- ✅ **Access Control**: GitHub RBAC, branch protection, least privilege enforcement
-- ✅ **Change Management**: Git workflow, automated testing gates, release attestation
-- ✅ **Incident Response**: P1-P4 classification, documented runbooks, 24h notification
-- ✅ **Business Continuity**: RTO 4h / RPO 1h, automated backups, tested recovery procedures
-- ✅ **Cryptography**: TLS 1.2+, signed releases, integrity verification
-- ✅ **Monitoring**: [OpenSSF Scorecard](https://scorecard.dev/viewer/?uri=github.com/Hack23/cia-compliance-manager), [SonarCloud quality gates](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager), continuous security scanning
+- ✅ **Secure Development**: [80%+ test coverage](./docs/UnitTestPlan.md), automated security scanning, code review requirements per [Secure Development Policy §4](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-unit-test-coverage--quality)
+- ✅ **Supply Chain Security**: [SLSA Level 3 attestation](https://github.com/Hack23/cia-compliance-manager/attestations), SBOM generation, dependency scanning per [Secure Development Policy §3](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-phase-3-security-testing)
+- ✅ **Vulnerability Management**: [Zero critical/high vulnerabilities](https://github.com/Hack23/cia-compliance-manager/security), coordinated disclosure, 48h response SLA per [Vulnerability Management Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Vulnerability_Management.md)
+- ✅ **Access Control**: GitHub RBAC, branch protection, least privilege enforcement per [Access Control Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md)
+- ✅ **Change Management**: Git workflow, automated testing gates, release attestation per [Change Management Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md)
+- ✅ **Incident Response**: P1-P4 classification, documented runbooks, 24h notification per [Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md)
+- ✅ **Business Continuity**: RTO 4h / RPO 1h, automated backups, tested recovery procedures per [Business Continuity Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Business_Continuity_Plan.md)
+- ✅ **Cryptography**: TLS 1.2+, signed releases, integrity verification per [Cryptographic Controls](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Cryptographic_Controls.md)
+- ✅ **Monitoring**: [OpenSSF Scorecard](https://scorecard.dev/viewer/?uri=github.com/Hack23/cia-compliance-manager), [SonarCloud quality gates](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager), continuous security scanning per [Security Metrics](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Security_Metrics.md)
 
 **📋 Complete Documentation:**
 - **[Control Mapping](./control-mapping.md)** - Framework-to-ISMS-policy mappings (NIST, ISO, CIS)
@@ -329,16 +360,18 @@ When you use CIA Compliance Manager, you're leveraging a tool that:
 
 ## 📚 Architecture & Documentation
 
+Comprehensive architectural documentation with 20+ diagrams covering current implementation and future roadmap. All documentation follows our [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) requirements for transparency and maintainability.
+
 <table>
 <tr>
   <td width="50%">
     <h3>🏛️ Current Architecture</h3>
-    <p>C4 model showing current system containers, components, and dynamics of the CIA Compliance Manager.</p>
+    <p>C4 model showing current system containers, components, and dynamics of the CIA Compliance Manager. Includes detailed security architecture aligned with <a href="https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md">Classification Framework</a>.</p>
     <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md">View Architecture</a>
   </td>
   <td width="50%">
     <h3>🏛️ Future Architecture</h3>
-    <p>Vision for context-aware security posture management platform and future system evolution.</p>
+    <p>Vision for context-aware security posture management platform and future system evolution with enhanced capabilities.</p>
     <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md">View Future Architecture</a>
   </td>
 </tr>
@@ -729,16 +762,62 @@ The application provides both aggregated and detailed views of cost estimates, a
 - Create multi-year security investment roadmaps
 - Justify security investments with specific business benefits
 
+---
+
+## 🎯 Why Choose CIA Compliance Manager?
+
+### 🏆 **Built By Security Practitioners, For Security Professionals**
+
+The CIA Compliance Manager isn't just another compliance tool—it's a platform built by security experts who understand the complexity of modern security management. Our approach demonstrates:
+
+**📊 Evidence-Based Security**
+- Every control mapped to industry frameworks (NIST, ISO, CIS, GDPR)
+- Transparent implementation following public [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md)
+- Complete traceability from requirements to evidence
+- Real security posture, not checkbox compliance
+
+**💡 Systematic Decision Support**
+- Business impact analysis using proven [Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)
+- Cost-benefit analysis for security investments (CAPEX/OPEX)
+- ROI calculations based on actual breach statistics
+- Risk-based prioritization aligned with business objectives
+
+**🔍 Transparency & Trust**
+- Open-source platform with public ISMS documentation
+- Living security architecture with continuous updates
+- Public security badges and quality metrics
+- Audit-ready documentation and evidence collection
+
+**⚡ Practical Implementation**
+- Technical guidance based on real-world deployments
+- Integration with existing tools and frameworks
+- Scalable from startups to enterprises
+- Regular updates based on emerging threats and regulations
+
+### 🎓 **Learn From Our Implementation**
+
+This project serves as a **reference implementation** of security best practices:
+- See how [SLSA Level 3](https://github.com/Hack23/cia-compliance-manager/attestations) is achieved in practice
+- Understand [80%+ test coverage](https://hack23.github.io/cia-compliance-manager/docs/coverage) implementation
+- Review our [threat modeling](./docs/architecture/THREAT_MODEL.md) approach
+- Explore [supply chain security](./ISMS_IMPLEMENTATION_GUIDE.md) controls
+
+---
+
 ## Features
 
-- **Dynamic Security Assessment**: Configure and assess security requirements across the CIA triad
-- **Cost Estimation Tools**: Calculate both CAPEX and OPEX based on selected security levels with detailed breakdown
-- **Business Impact Analysis**: Evaluate potential impacts of security incidents on operations and quantify potential losses
-- **Technical Implementation Guidance**: Detailed implementation recommendations for each security level with technology suggestions
-- **Compliance Mapping**: Map controls to common compliance frameworks (GDPR, HIPAA, SOC2, etc.)
-- **Customizable Security Levels**: Tailor security controls to your organization's specific needs and risk profile
-- **Reporting and Documentation**: Generate comprehensive reports for stakeholders at technical and executive levels
-- **ROI Calculator**: Measure return on investment for security implementations against potential breach costs
+The CIA Compliance Manager provides enterprise-grade capabilities for comprehensive security management:
+
+- **🔍 Dynamic Security Assessment**: Configure and assess security requirements across the CIA triad with real-time control effectiveness tracking per [Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)
+- **💰 Cost Estimation Tools**: Calculate both CAPEX and OPEX based on selected security levels with detailed breakdown and multi-year roadmap planning
+- **📊 Business Impact Analysis**: Evaluate potential impacts using our [Business Impact Analysis Matrix](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#business-impact-analysis-matrix) across financial, operational, reputational, and regulatory dimensions
+- **🛠️ Technical Implementation Guidance**: Detailed implementation recommendations for each security level with technology suggestions and best practices
+- **📋 Compliance Mapping**: Map controls to NIST 800-53, ISO 27001, GDPR, HIPAA, SOC2, PCI DSS, and CRA frameworks with automated gap analysis
+- **🎯 Customizable Security Levels**: Tailor security controls to your organization's specific needs and risk profile based on classification requirements
+- **📝 Reporting and Documentation**: Generate comprehensive reports for stakeholders at technical and executive levels with automated evidence collection
+- **💵 ROI Calculator**: Measure return on investment for security implementations against potential breach costs and business impact
+- **🎭 Threat Modeling Integration**: STRIDE analysis with attack tree visualization for comprehensive risk assessment
+- **🏷️ Data Classification Framework**: Apply systematic classification based on confidentiality, integrity, and availability requirements
 
 ## 🏢 Business Overview
 
@@ -879,37 +958,42 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Testing
 
-The project implements comprehensive testing strategies to ensure reliability and quality:
+The project implements comprehensive testing strategies to ensure reliability and quality, following our [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) requirements.
 
 ### Unit Testing
 
-The CIA Compliance Manager uses Vitest with React Testing Library for component testing. Our unit test approach follows these principles:
+The CIA Compliance Manager uses Vitest with React Testing Library for component testing. Our unit test approach follows these principles aligned with [Secure Development Policy §4.1](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-unit-test-coverage--quality):
 
+- **Coverage Thresholds**: Minimum 80% line coverage, 70% branch coverage
 - Component isolation with mocked dependencies
 - Constant-driven validation
 - Test ID selection for reliable element selection
 - Behavior verification focused on component functionality
+- Automated execution on every commit and pull request
 
 For detailed information on unit test structure, categories, examples, and best practices, see our [Unit Test Plan](docs/UnitTestPlan.md).
 
 ### End-to-End Testing
 
-End-to-end tests are implemented using Cypress and follow these core principles:
+End-to-end tests are implemented using Cypress following [Secure Development Policy §4.2](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-end-to-end-testing-strategy) and follow these core principles:
 
+- **Critical Path Coverage**: All user journeys and business workflows tested
 - User-centric testing with focus on key user flows
 - Constant-driven selection for reliable element targeting
 - Resilient testing with fallbacks and retry mechanisms
 - Comprehensive coverage of both UI components and integrated functionality
+- Browser compatibility validation across major platforms
 
 For more information about E2E test organization, custom commands, test patterns, and best practices, see our [E2E Test Plan](docs/E2ETestPlan.md).
 
 ### Performance Testing
 
-The application includes a comprehensive performance testing framework to ensure optimal user experience:
+The application includes a comprehensive performance testing framework per [Secure Development Policy §8](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-performance-testing--monitoring-framework) to ensure optimal user experience:
 
 - Measurement of key operations and interactions
-- Performance baseline configuration
+- Performance baseline configuration per [Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) availability requirements
 - Reporting and visualization tools
+- Response time validation within E2E tests
 
 For detailed information on performance testing methodology and tools, see our [Performance Testing Documentation](docs/performance-testing.md).
 
@@ -937,6 +1021,71 @@ We're committed to making this project accessible, inclusive, and secure. Please
 - [Code of Conduct](CODE_OF_CONDUCT.md) - Our standards for project participation
 - [Security Policy](SECURITY.md) - How to report security vulnerabilities
 - [License](LICENSE) - Project license details and terms
+
+---
+
+## 📖 Complete Documentation Portal
+
+Explore our comprehensive documentation covering architecture, security, testing, and API references. All documentation is maintained according to our [Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) transparency requirements.
+
+### 🏗️ **Architecture Documentation**
+
+Complete system design with 20+ architectural diagrams including C4 models, security architecture, threat models, and future roadmaps.
+
+| Document | Description | Links |
+|----------|-------------|-------|
+| **C4 Architecture Models** | System context, containers, components, and deployment views | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md) |
+| **Security Architecture** | STRIDE threat analysis, attack trees, security patterns | [Current](./docs/architecture/SECURITY_ARCHITECTURE.md) • [Future](./docs/architecture/FUTURE_SECURITY_ARCHITECTURE.md) |
+| **Threat Model** | Comprehensive threat analysis with STRIDE methodology | [View Threat Model](./docs/architecture/THREAT_MODEL.md) |
+| **Data Models** | Entity relationships, data flows, classification | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/DATA_MODEL.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_DATA_MODEL.md) |
+| **State Diagrams** | System state transitions and workflows | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/STATEDIAGRAM.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_STATEDIAGRAM.md) |
+| **Process Flowcharts** | Assessment workflows and compliance processes | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FLOWCHART.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_FLOWCHART.md) |
+| **Concept Mindmaps** | System structure and component relationships | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/MINDMAP.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_MINDMAP.md) |
+| **SWOT Analysis** | Strategic analysis and market positioning | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SWOT.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_SWOT.md) |
+| **CI/CD Workflows** | DevOps pipelines and automation | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/WORKFLOWS.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_WORKFLOWS.md) |
+| **Business Continuity** | BCP planning and recovery strategies | [Interactive](https://hack23.github.io/cia-compliance-manager/business-continuity) • [Markdown](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/BCPPlan.md) |
+
+### 🔒 **Security & Compliance Documentation**
+
+Security implementation details, compliance mappings, and ISMS integration aligned with our [Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md).
+
+| Document | Description | Link |
+|----------|-------------|------|
+| **Control Mapping** | Framework-to-ISMS-policy mappings (NIST, ISO, CIS) | [View Mapping](./control-mapping.md) |
+| **ISMS Implementation** | Detailed security control implementation (790 lines) | [View Guide](./ISMS_IMPLEMENTATION_GUIDE.md) |
+| **Traceability Matrix** | End-to-end control-to-evidence mapping (100+ controls) | [View Matrix](./TRACEABILITY_MATRIX.md) |
+| **CRA Assessment** | EU Cyber Resilience Act compliance documentation | [View Assessment](./CRA-ASSESSMENT.md) |
+| **Security Policy** | Vulnerability disclosure and security contacts | [View Policy](./SECURITY.md) |
+
+### 🧪 **Testing & Quality Documentation**
+
+Comprehensive testing strategies following [Secure Development Policy §4-5](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-unit-test-coverage--quality).
+
+| Resource | Description | Links |
+|----------|-------------|-------|
+| **Unit Tests** | Vitest-based component and utility testing | [Results](https://hack23.github.io/cia-compliance-manager/docs/test-results) • [Plan](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md) |
+| **Test Coverage** | Line, branch, and function coverage reports | [Coverage Report](https://hack23.github.io/cia-compliance-manager/docs/coverage) |
+| **E2E Tests** | Cypress end-to-end system validation | [Report](https://hack23.github.io/cia-compliance-manager/docs/cypress/mochawesome) • [Plan](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md) |
+| **Performance Tests** | Benchmarks and optimization metrics | [View Data](https://hack23.github.io/cia-compliance-manager/performance) • [Documentation](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md) |
+
+### 📘 **API & Developer Documentation**
+
+Technical reference documentation for developers and integrators.
+
+| Resource | Description | Link |
+|----------|-------------|------|
+| **API Documentation** | TypeDoc-generated API reference for all components | [View API Docs](https://hack23.github.io/cia-compliance-manager/api-docs) |
+| **UML Diagrams** | Class diagrams and component relationships | [View Diagrams](https://hack23.github.io/cia-compliance-manager/diagrams) |
+| **Dependencies** | Module dependency visualization | [View Graph](https://hack23.github.io/cia-compliance-manager/dependencies/module-dependencies.svg) |
+| **Contributing Guide** | How to contribute code and documentation | [View Guide](https://github.com/Hack23/cia-compliance-manager/blob/main/CONTRIBUTING.md) |
+
+<div align="center">
+  <h3>🌐 Live Documentation Portal</h3>
+  <p>Access all documentation through our centralized portal</p>
+  <a href="https://hack23.github.io/cia-compliance-manager/documentation.html">
+    <img src="https://img.shields.io/badge/Documentation-Portal-0066CC?style=for-the-badge&logo=read-the-docs&logoColor=white" alt="Documentation Portal">
+  </a>
+</div>
 
 ---
 
