@@ -479,7 +479,7 @@ Comprehensive architectural documentation with 20+ diagrams covering current imp
 </tr>
 </table>
 
-## Security Architecture Documentation
+## 🔐 Security Architecture Documentation
 
 <table>
 <tr>
@@ -836,25 +836,10 @@ The CIA Compliance Manager isn't just another compliance tool—it's a platform 
 This project serves as a **reference implementation** of security best practices:
 - See how [SLSA Level 3](https://github.com/Hack23/cia-compliance-manager/attestations) is achieved in practice
 - Understand [80%+ test coverage](https://hack23.github.io/cia-compliance-manager/docs/coverage) implementation
-- Review our [threat modeling](./docs/architecture/THREAT_MODEL.md) approach
-- Explore [supply chain security](./ISMS_IMPLEMENTATION_GUIDE.md) controls
+- Review our [threat modeling](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/THREAT_MODEL.md) approach
+- Explore [supply chain security](https://github.com/Hack23/cia-compliance-manager/blob/main/ISMS_IMPLEMENTATION_GUIDE.md) controls
 
 ---
-
-## Features
-
-The CIA Compliance Manager provides enterprise-grade capabilities for comprehensive security management:
-
-- **🔍 Dynamic Security Assessment**: Configure and assess security requirements across the CIA triad with real-time control effectiveness tracking per [Classification Framework](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)
-- **💰 Cost Estimation Tools**: Calculate both CAPEX and OPEX based on selected security levels with detailed breakdown and multi-year roadmap planning
-- **📊 Business Impact Analysis**: Evaluate potential impacts using our [Business Impact Analysis Matrix](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#business-impact-analysis-matrix) across financial, operational, reputational, and regulatory dimensions
-- **🛠️ Technical Implementation Guidance**: Detailed implementation recommendations for each security level with technology suggestions and best practices
-- **📋 Compliance Mapping**: Map controls to NIST 800-53, ISO 27001, GDPR, HIPAA, SOC2, PCI DSS, and CRA frameworks with automated gap analysis
-- **🎯 Customizable Security Levels**: Tailor security controls to your organization's specific needs and risk profile based on classification requirements
-- **📝 Reporting and Documentation**: Generate comprehensive reports for stakeholders at technical and executive levels with automated evidence collection
-- **💵 ROI Calculator**: Measure return on investment for security implementations against potential breach costs and business impact
-- **🎭 Threat Modeling Integration**: STRIDE analysis with attack tree visualization for comprehensive risk assessment
-- **🏷️ Data Classification Framework**: Apply systematic classification based on confidentiality, integrity, and availability requirements
 
 ## 🏢 Business Overview
 
@@ -1052,8 +1037,8 @@ Complete system design with 20+ architectural diagrams including C4 models, secu
 | Document | Description | Links |
 |----------|-------------|-------|
 | **C4 Architecture Models** | System context, containers, components, and deployment views | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/ARCHITECTURE.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md) |
-| **Security Architecture** | STRIDE threat analysis, attack trees, security patterns | [Current](./docs/architecture/SECURITY_ARCHITECTURE.md) • [Future](./docs/architecture/FUTURE_SECURITY_ARCHITECTURE.md) |
-| **Threat Model** | Comprehensive threat analysis with STRIDE methodology | [View Threat Model](./docs/architecture/THREAT_MODEL.md) |
+| **Security Architecture** | STRIDE threat analysis, attack trees, security patterns | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SECURITY_ARCHITECTURE.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_SECURITY_ARCHITECTURE.md) |
+| **Threat Model** | Comprehensive threat analysis with STRIDE methodology | [View Threat Model](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/THREAT_MODEL.md) |
 | **Data Models** | Entity relationships, data flows, classification | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/DATA_MODEL.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_DATA_MODEL.md) |
 | **State Diagrams** | System state transitions and workflows | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/STATEDIAGRAM.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_STATEDIAGRAM.md) |
 | **Process Flowcharts** | Assessment workflows and compliance processes | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FLOWCHART.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_FLOWCHART.md) |
@@ -1068,11 +1053,11 @@ Security implementation details, compliance mappings, and ISMS integration align
 
 | Document | Description | Link |
 |----------|-------------|------|
-| **Control Mapping** | Framework-to-ISMS-policy mappings (NIST, ISO, CIS) | [View Mapping](./control-mapping.md) |
-| **ISMS Implementation** | Detailed security control implementation (790 lines) | [View Guide](./ISMS_IMPLEMENTATION_GUIDE.md) |
-| **Traceability Matrix** | End-to-end control-to-evidence mapping (100+ controls) | [View Matrix](./TRACEABILITY_MATRIX.md) |
-| **CRA Assessment** | EU Cyber Resilience Act compliance documentation | [View Assessment](./CRA-ASSESSMENT.md) |
-| **Security Policy** | Vulnerability disclosure and security contacts | [View Policy](./SECURITY.md) |
+| **Control Mapping** | Framework-to-ISMS-policy mappings (NIST, ISO, CIS) | [View Mapping](https://github.com/Hack23/cia-compliance-manager/blob/main/control-mapping.md) |
+| **ISMS Implementation** | Detailed security control implementation (790 lines) | [View Guide](https://github.com/Hack23/cia-compliance-manager/blob/main/ISMS_IMPLEMENTATION_GUIDE.md) |
+| **Traceability Matrix** | End-to-end control-to-evidence mapping (100+ controls) | [View Matrix](https://github.com/Hack23/cia-compliance-manager/blob/main/TRACEABILITY_MATRIX.md) |
+| **CRA Assessment** | EU Cyber Resilience Act compliance documentation | [View Assessment](https://github.com/Hack23/cia-compliance-manager/blob/main/CRA-ASSESSMENT.md) |
+| **Security Policy** | Vulnerability disclosure and security contacts | [View Policy](https://github.com/Hack23/cia-compliance-manager/blob/main/SECURITY.md) |
 
 ### 🧪 **Testing & Quality Documentation**
 
