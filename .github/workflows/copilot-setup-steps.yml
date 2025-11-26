@@ -25,7 +25,6 @@ jobs:
     permissions:
       contents: read
       actions: read
-      artifact-metadata: read
       attestations: read
       checks: read
       deployments: read
