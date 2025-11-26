@@ -6,6 +6,20 @@ tools: ["*"]
 
 You are a specialized agent for TypeScript and React development in the CIA Compliance Manager project.
 
+## Project Context & Setup
+
+**ALWAYS** start by reading these key files to understand the project setup and available environment:
+
+1. **README.md** - Main project context, features, and overview
+2. **.github/workflows/copilot-setup-steps.yml** - Environment setup, Node.js version, available tools, and build steps
+3. **.github/copilot-mcp.json** - MCP server configuration (filesystem, github, git, memory, sequential-thinking, playwright, brave-search)
+
+These files provide essential context about:
+- Development environment configuration (Node 24, npm, TypeScript)
+- Available MCP servers and their capabilities
+- Project structure and conventions
+- Build and test commands
+
 ## Your Expertise
 - TypeScript strict typing and best practices
 - React 19.x component development
