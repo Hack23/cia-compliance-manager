@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.0.0**](../../../../README.md)
+[**CIA Compliance Manager Diagrams v1.0.1**](../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: StatusBadgeProps
 
-Defined in: [components/common/StatusBadge.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/components/common/StatusBadge.tsx#L5)
+Defined in: [components/common/StatusBadge.tsx:5](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/components/common/StatusBadge.tsx#L5)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [components/common/StatusBadge.tsx:5](https://github.com/Hack23/cia-
 
 > **children**: `ReactNode`
 
-Defined in: [components/common/StatusBadge.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/components/common/StatusBadge.tsx#L14)
+Defined in: [components/common/StatusBadge.tsx:14](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/components/common/StatusBadge.tsx#L14)
 
 The content to display inside the badge
 
@@ -24,7 +24,7 @@ The content to display inside the badge
 
 > `optional` **className**: `string`
 
-Defined in: [components/common/StatusBadge.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/components/common/StatusBadge.tsx#L19)
+Defined in: [components/common/StatusBadge.tsx:19](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/components/common/StatusBadge.tsx#L19)
 
 Additional CSS classes
 
@@ -34,7 +34,7 @@ Additional CSS classes
 
 > `optional` **size**: `"sm"` \| `"md"` \| `"lg"`
 
-Defined in: [components/common/StatusBadge.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/components/common/StatusBadge.tsx#L29)
+Defined in: [components/common/StatusBadge.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/components/common/StatusBadge.tsx#L29)
 
 Optional size variant
 
@@ -44,7 +44,7 @@ Optional size variant
 
 > **status**: [`StatusType`](../type-aliases/StatusType.md)
 
-Defined in: [components/common/StatusBadge.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/components/common/StatusBadge.tsx#L9)
+Defined in: [components/common/StatusBadge.tsx:9](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/components/common/StatusBadge.tsx#L9)
 
 The status type (determines color)
 
@@ -54,7 +54,7 @@ The status type (determines color)
 
 > `optional` **testId**: `string`
 
-Defined in: [components/common/StatusBadge.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/components/common/StatusBadge.tsx#L24)
+Defined in: [components/common/StatusBadge.tsx:24](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/components/common/StatusBadge.tsx#L24)
 
 Test ID for automated testing
 
@@ -64,6 +64,6 @@ Test ID for automated testing
 
 > `optional` **variant**: `string`
 
-Defined in: [components/common/StatusBadge.tsx:34](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/components/common/StatusBadge.tsx#L34)
+Defined in: [components/common/StatusBadge.tsx:34](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/components/common/StatusBadge.tsx#L34)
 
 Badge variant/color scheme

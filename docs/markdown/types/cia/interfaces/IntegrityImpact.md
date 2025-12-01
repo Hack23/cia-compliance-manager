@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.0**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.0.1**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: IntegrityImpact
 
-Defined in: [types/cia.ts:391](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/types/cia.ts#L391)
+Defined in: [types/cia.ts:391](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/types/cia.ts#L391)
 
 Impact associated with the integrity of the system
 
@@ -34,7 +34,7 @@ const impact: IntegrityImpact = {
 
 > **dataAccuracy**: `string`
 
-Defined in: [types/cia.ts:393](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/types/cia.ts#L393)
+Defined in: [types/cia.ts:393](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/types/cia.ts#L393)
 
 Expected data accuracy level and tolerance for errors
 
@@ -44,7 +44,7 @@ Expected data accuracy level and tolerance for errors
 
 > **description**: `string`
 
-Defined in: [types/cia.ts:348](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/types/cia.ts#L348)
+Defined in: [types/cia.ts:348](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/types/cia.ts#L348)
 
 Human-readable description of the impact
 
@@ -58,7 +58,7 @@ Human-readable description of the impact
 
 > **level**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:345](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/types/cia.ts#L345)
+Defined in: [types/cia.ts:345](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/types/cia.ts#L345)
 
 Security level associated with this impact
 
@@ -72,6 +72,6 @@ Security level associated with this impact
 
 > **verificationSteps**: `string`
 
-Defined in: [types/cia.ts:396](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/types/cia.ts#L396)
+Defined in: [types/cia.ts:396](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/types/cia.ts#L396)
 
 Verification and validation processes required

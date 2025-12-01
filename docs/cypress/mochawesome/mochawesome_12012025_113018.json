@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-12-01T11:30:03.439Z",
+    "end": "2025-12-01T11:30:18.976Z",
+    "duration": 15537,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "0b0cbd03-f4c0-4b38-afae-1e8421fd59af",
+      "title": "",
+      "fullFile": "cypress/e2e/business-outcomes/compliance-validation.cy.ts",
+      "file": "cypress/e2e/business-outcomes/compliance-validation.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "158e1a70-9f54-4867-8355-020fc9fde86b",
+          "title": "Compliance Status Validation",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "accurately reflects compliance status based on security levels",
+              "fullTitle": "Compliance Status Validation accurately reflects compliance status based on security levels",
+              "timedOut": null,
+              "duration": 10987,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Reduced to 2 critical scenarios (low and high) - moderate is covered by beforeEach in other tests\nconst complianceScenarios = [\n    {\n        levels: [_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW],\n        expectedTextPatterns: [\n            /minimal|basic|non-compliant|low|partial|warning|caution/i,\n            /compliance|status|level|security/i,\n        ],\n        name: \"low-security\",\n    },\n    {\n        levels: [\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n            _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n        ],\n        expectedTextPatterns: [\n            /compliant|meets requirements|high|full|complete|standard|advanced/i,\n            /compliance|status|framework|requirement/i,\n        ],\n        name: \"high-security\",\n    },\n];\n// Test each scenario with better error handling\ncomplianceScenarios.forEach((scenario, index) => {\n    cy.log(`Testing compliance scenario ${index + 1}: ${scenario.name}`);\n    // More reliable way to set security levels\n    cy.setSecurityLevels(...scenario.levels);\n    cy.wait(500); // Reduced wait time\n    // Take screenshot for debugging (only 2 screenshots now instead of 6)\n    cy.screenshot(`compliance-scenario-${scenario.name}`);\n    // Search for compliance information using multiple strategies\n    cy.get(\"body\").then(($body) => {\n        const bodyText = $body.text();\n        // Check if all expected text patterns appear somewhere on the page\n        const allPatternsFound = scenario.expectedTextPatterns.every((pattern) => pattern.test(bodyText));\n        if (allPatternsFound) {\n            cy.log(`✓ Found all expected compliance patterns for ${scenario.name}`);\n        }\n        else {\n            // Log which patterns were not found\n            scenario.expectedTextPatterns.forEach((pattern) => {\n                if (!pattern.test(bodyText)) {\n                    cy.log(`⚠️ Could not find pattern: ${pattern} for ${scenario.name}`);\n                }\n            });\n        }\n    });\n});",
+              "err": {},
+              "uuid": "e595a6bf-de46-4285-87c5-f02b8fd5d9f0",
+              "parentUUID": "158e1a70-9f54-4867-8355-020fc9fde86b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "verifies compliance framework details visibility",
+              "fullTitle": "Compliance Status Validation verifies compliance framework details visibility",
+              "timedOut": null,
+              "duration": 1955,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Set high security to maximize framework visibility\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\ncy.wait(500); // Reduced wait time\n// Look for compliance-related elements using multiple selectors\nconst complianceSelectors = [\n    '[data-testid*=\"compliance\"]',\n    '[class*=\"compliance\"]',\n    '[data-testid*=\"framework\"]',\n    '[class*=\"framework\"]',\n].join(\", \");\n// Try to find compliance elements\ncy.get(\"body\").then(($body) => {\n    if ($body.find(complianceSelectors).length > 0) {\n        cy.get(complianceSelectors).first().scrollIntoView();\n        // Try to find clickable items\n        const clickableSelectors = [\n            '[data-testid*=\"framework\"] button',\n            '[data-testid*=\"framework\"] a',\n            '[class*=\"framework\"] button',\n            '[class*=\"framework\"] a',\n            'li[class*=\"framework\"]',\n            'li[data-testid*=\"framework\"]',\n        ].join(\", \");\n        if ($body.find(clickableSelectors).length > 0) {\n            cy.get(clickableSelectors).first().click({ force: true });\n            cy.wait(300); // Reduced wait time\n            cy.log(\"✓ Successfully clicked on framework item\");\n        }\n        else {\n            cy.log(\"⚠️ No clickable framework items found\");\n        }\n    }\n    else {\n        cy.log(\"⚠️ No compliance elements found\");\n    }\n});",
+              "err": {},
+              "uuid": "5c1a0c9a-64a8-4ff4-a0f0-3adbd5e79973",
+              "parentUUID": "158e1a70-9f54-4867-8355-020fc9fde86b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "shows appropriate compliance frameworks based on security levels",
+              "fullTitle": "Compliance Status Validation shows appropriate compliance frameworks based on security levels",
+              "timedOut": null,
+              "duration": 2446,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Set high security to see maximum frameworks\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\ncy.wait(1000);\n// Look for compliance frameworks section\ncy.get(\"body\").then(($body) => {\n    // Define a regex pattern to identify framework elements\n    const frameworkPattern = /([A-Z0-9]+\\s*[A-Z0-9]*\\s*[0-9-]*)/g;\n    // Extract frameworks from the DOM text\n    const bodyText = $body.text();\n    const possibleFrameworks = bodyText.match(frameworkPattern) || [];\n    // Filter to likely frameworks\n    const frameworks = possibleFrameworks.filter((f) => /^[A-Z0-9]{2,}/.test(f) && !f.includes(\"CIA\") && f.length > 2);\n    // Fix the spread argument error by using properly typed arguments\n    const logMessage = `Found ${frameworks.length} compliance frameworks`;\n    cy.log(logMessage);\n    // Use typed array for log args\n    const typedLogArgs = [\n        `Frameworks: ${frameworks.join(\", \")}`,\n    ];\n    cy.log(...typedLogArgs);\n    // Verify we found some frameworks\n    expect(frameworks.length).to.be.greaterThan(0);\n});",
+              "err": {},
+              "uuid": "5c1075d3-238d-4cf5-be8c-b92bde366853",
+              "parentUUID": "158e1a70-9f54-4867-8355-020fc9fde86b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e595a6bf-de46-4285-87c5-f02b8fd5d9f0",
+            "5c1a0c9a-64a8-4ff4-a0f0-3adbd5e79973",
+            "5c1075d3-238d-4cf5-be8c-b92bde366853"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 15388,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "build/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

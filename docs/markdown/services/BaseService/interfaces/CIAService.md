@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.0**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.0.1**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIAService
 
-Defined in: [services/BaseService.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/services/BaseService.ts#L13)
+Defined in: [services/BaseService.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/services/BaseService.ts#L13)
 
 Common interface for CIA services
 
@@ -16,7 +16,7 @@ Common interface for CIA services
 
 > **getComponentDetails**(`component`, `level`): [`CIADetails`](../../../types/interfaces/CIADetails.md) \| `undefined`
 
-Defined in: [services/BaseService.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/services/BaseService.ts#L14)
+Defined in: [services/BaseService.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/services/BaseService.ts#L14)
 
 #### Parameters
 
@@ -38,7 +38,7 @@ Defined in: [services/BaseService.ts:14](https://github.com/Hack23/cia-complianc
 
 > **getRiskLevelFromSecurityLevel**(`level`): `string`
 
-Defined in: [services/BaseService.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/services/BaseService.ts#L19)
+Defined in: [services/BaseService.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/services/BaseService.ts#L19)
 
 #### Parameters
 
@@ -56,7 +56,7 @@ Defined in: [services/BaseService.ts:19](https://github.com/Hack23/cia-complianc
 
 > **getSecurityLevelDescription**(`level`): `string`
 
-Defined in: [services/BaseService.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/services/BaseService.ts#L18)
+Defined in: [services/BaseService.ts:18](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/services/BaseService.ts#L18)
 
 #### Parameters
 

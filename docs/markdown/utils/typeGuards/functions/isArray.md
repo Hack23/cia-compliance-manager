@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.0**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.0.1**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isArray**(`value`): `value is unknown[]`
 
-Defined in: [utils/typeGuards.ts:793](https://github.com/Hack23/cia-compliance-manager/blob/6290ffdea026b27178aa3dd9f66b65db82b8b040/src/utils/typeGuards.ts#L793)
+Defined in: [utils/typeGuards.ts:793](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/utils/typeGuards.ts#L793)
 
 Type guard to check if a value is an array
 
