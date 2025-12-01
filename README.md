@@ -10,6 +10,8 @@
 </p>
 
 [![GitHub Release](https://img.shields.io/github/v/release/Hack23/cia-compliance-manager)](https://github.com/Hack23/cia-compliance-manager/releases) 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Hack23/cia-compliance-manager)
+
 
 ## 🎯 **Purpose Statement**
 
