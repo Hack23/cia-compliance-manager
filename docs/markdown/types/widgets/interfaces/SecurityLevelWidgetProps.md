@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.1**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.0.2**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityLevelWidgetProps
 
-Defined in: [types/widgets.ts:196](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/types/widgets.ts#L196)
+Defined in: [types/widgets.ts:196](https://github.com/Hack23/cia-compliance-manager/blob/175c46a72442c615bb0c104848c5b4deec0cfc31/src/types/widgets.ts#L196)
 
 Security level widget props for selecting and displaying security levels
 
@@ -29,7 +29,7 @@ adjust security levels and immediately see the impact of their choices. 🔄
 
 > **availabilityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:87](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/types/widgets.ts#L87)
+Defined in: [types/widgets.ts:87](https://github.com/Hack23/cia-compliance-manager/blob/175c46a72442c615bb0c104848c5b4deec0cfc31/src/types/widgets.ts#L87)
 
 Availability security level
 
@@ -43,7 +43,7 @@ Availability security level
 
 > `optional` **className**: `string`
 
-Defined in: [types/widgets.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/types/widgets.ts#L56)
+Defined in: [types/widgets.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/175c46a72442c615bb0c104848c5b4deec0cfc31/src/types/widgets.ts#L56)
 
 Optional CSS class name
 
@@ -57,7 +57,7 @@ Optional CSS class name
 
 > **confidentialityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:97](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/types/widgets.ts#L97)
+Defined in: [types/widgets.ts:97](https://github.com/Hack23/cia-compliance-manager/blob/175c46a72442c615bb0c104848c5b4deec0cfc31/src/types/widgets.ts#L97)
 
 Confidentiality security level
 
@@ -71,7 +71,7 @@ Confidentiality security level
 
 > `optional` **disabled**: `boolean`
 
-Defined in: [types/widgets.ts:208](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/types/widgets.ts#L208)
+Defined in: [types/widgets.ts:208](https://github.com/Hack23/cia-compliance-manager/blob/175c46a72442c615bb0c104848c5b4deec0cfc31/src/types/widgets.ts#L208)
 
 Whether the widget is disabled
 
@@ -81,7 +81,7 @@ Whether the widget is disabled
 
 > **integrityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/types/widgets.ts#L92)
+Defined in: [types/widgets.ts:92](https://github.com/Hack23/cia-compliance-manager/blob/175c46a72442c615bb0c104848c5b4deec0cfc31/src/types/widgets.ts#L92)
 
 Integrity security level
 
@@ -95,7 +95,7 @@ Integrity security level
 
 > `optional` **onLevelChange**: (`component`, `level`) => `void`
 
-Defined in: [types/widgets.ts:200](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/types/widgets.ts#L200)
+Defined in: [types/widgets.ts:200](https://github.com/Hack23/cia-compliance-manager/blob/175c46a72442c615bb0c104848c5b4deec0cfc31/src/types/widgets.ts#L200)
 
 Callback for when security levels change
 
@@ -119,7 +119,7 @@ Callback for when security levels change
 
 > `optional` **securityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:66](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/types/widgets.ts#L66)
+Defined in: [types/widgets.ts:66](https://github.com/Hack23/cia-compliance-manager/blob/175c46a72442c615bb0c104848c5b4deec0cfc31/src/types/widgets.ts#L66)
 
 Optional security level for widgets that only need one level
 
@@ -133,7 +133,7 @@ Optional security level for widgets that only need one level
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widgets.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/c7987c008cc0b8531a9c787c68851dc49ec5f6e0/src/types/widgets.ts#L61)
+Defined in: [types/widgets.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/175c46a72442c615bb0c104848c5b4deec0cfc31/src/types/widgets.ts#L61)
 
 Optional test ID for testing
 
