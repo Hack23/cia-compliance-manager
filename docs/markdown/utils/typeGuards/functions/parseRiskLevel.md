@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.2**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.0.3**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **parseRiskLevel**(`riskLevel`): `number`
 
-Defined in: [utils/typeGuards.ts:566](https://github.com/Hack23/cia-compliance-manager/blob/175c46a72442c615bb0c104848c5b4deec0cfc31/src/utils/typeGuards.ts#L566)
+Defined in: [utils/typeGuards.ts:566](https://github.com/Hack23/cia-compliance-manager/blob/154d4849b7a49eb8fb95e15a0e05f6b86eed9405/src/utils/typeGuards.ts#L566)
 
 Parse a risk level from a string or number
 

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.2**](../../README.md)
+[**CIA Compliance Manager Documentation v1.0.3**](../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > **RiskLevelLiteral** = `"Critical"` \| `"High"` \| `"Medium"` \| `"Low"` \| `"Minimal"` \| `"Unknown"`
 
-Defined in: [types/risk.ts:4](https://github.com/Hack23/cia-compliance-manager/blob/175c46a72442c615bb0c104848c5b4deec0cfc31/src/types/risk.ts#L4)
+Defined in: [types/risk.ts:4](https://github.com/Hack23/cia-compliance-manager/blob/154d4849b7a49eb8fb95e15a0e05f6b86eed9405/src/types/risk.ts#L4)
 
 Literal types for risk levels
