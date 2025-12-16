@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.3**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.0.4**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **calculateOverallSecurityLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:147](https://github.com/Hack23/cia-compliance-manager/blob/154d4849b7a49eb8fb95e15a0e05f6b86eed9405/src/types/cia.ts#L147)
+Defined in: [types/cia.ts:147](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/cia.ts#L147)
 
 Calculate overall security level from individual component levels
 

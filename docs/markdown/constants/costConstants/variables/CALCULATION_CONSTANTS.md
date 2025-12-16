@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.3**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.0.4**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **CALCULATION\_CONSTANTS**: `object`
 
-Defined in: [constants/costConstants.ts:229](https://github.com/Hack23/cia-compliance-manager/blob/154d4849b7a49eb8fb95e15a0e05f6b86eed9405/src/constants/costConstants.ts#L229)
+Defined in: [constants/costConstants.ts:229](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/constants/costConstants.ts#L229)
 
 Calculation constants
 
