@@ -50,6 +50,14 @@ jobs:
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
           echo "Version: ${VERSION}"
 
+      - name: Cache apt packages
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
+        with:
+          path: /var/cache/apt/archives
+          key: ${{ runner.os }}-apt-${{ hashFiles('.github/workflows/release.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-apt-
+
       - name: Setup display and dependencies
         run: |
           sudo apt-get update
@@ -75,7 +83,9 @@ jobs:
         uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
         with:
           path: ~/.cache/Cypress
-          key: cypress-${{ runner.os }}-${{ hashFiles('**/package.json') }}
+          key: cypress-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-
 
       - name: Install dependencies
         run: npm ci
@@ -105,6 +115,15 @@ jobs:
           xvfb-run --auto-servernum --server-args="-screen 0 1280x720x24" npm run test:e2e
         env:
           CYPRESS_VIDEO: false
+
+      - name: Cache GraphViz packages
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
+        with:
+          path: /var/cache/apt/archives
+          key: ${{ runner.os }}-apt-graphviz-${{ hashFiles('.github/workflows/release.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-apt-graphviz-
+            ${{ runner.os }}-apt-
 
       - name: Install GraphViz
         run: |
@@ -193,11 +212,21 @@ jobs:
           node-version: "24"
           cache: "npm"
 
+      - name: Cache dependencies
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Cache Cypress binary
         uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
         with:
           path: ~/.cache/Cypress
-          key: cypress-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}-binary
+          key: cypress-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-
 
       - name: Install dependencies
         run: npm ci
