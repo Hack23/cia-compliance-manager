@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.4**](../../README.md)
+[**CIA Compliance Manager Documentation v1.0.5**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ConfidentialityImpactWidgetProps
 
-Defined in: [types/widget-props.ts:714](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widget-props.ts#L714)
+Defined in: [types/widget-props.ts:714](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widget-props.ts#L714)
 
 Props for ConfidentialityImpactWidget component
 
@@ -33,7 +33,7 @@ classification, access controls, and privacy safeguards.
 
 > `optional` **availabilityLevel**: [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:718](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widget-props.ts#L718)
+Defined in: [types/widget-props.ts:718](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widget-props.ts#L718)
 
 Availability security level (optional, for context)
 
@@ -43,7 +43,7 @@ Availability security level (optional, for context)
 
 > `optional` **children**: `ReactNode`
 
-Defined in: [types/widget-props.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widget-props.ts#L244)
+Defined in: [types/widget-props.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widget-props.ts#L244)
 
 Optional children elements
 
@@ -57,7 +57,7 @@ Optional children elements
 
 > `optional` **className**: `string`
 
-Defined in: [types/widget-props.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widget-props.ts#L124)
+Defined in: [types/widget-props.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widget-props.ts#L124)
 
 Optional CSS class name for custom styling
 
@@ -80,7 +80,7 @@ Use Tailwind CSS classes or custom CSS classes.
 
 > **confidentialityLevel**: [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:728](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widget-props.ts#L728)
+Defined in: [types/widget-props.ts:728](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widget-props.ts#L728)
 
 Confidentiality security level
 
@@ -90,7 +90,7 @@ Confidentiality security level
 
 > `optional` **integrityLevel**: [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:723](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widget-props.ts#L723)
+Defined in: [types/widget-props.ts:723](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widget-props.ts#L723)
 
 Integrity security level (optional, for context)
 
@@ -100,7 +100,7 @@ Integrity security level (optional, for context)
 
 > `optional` **onError**: (`error`) => `void`
 
-Defined in: [types/widget-props.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widget-props.ts#L250)
+Defined in: [types/widget-props.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widget-props.ts#L250)
 
 Optional callback when widget encounters an error
 
@@ -126,7 +126,7 @@ Error that occurred
 
 > `optional` **showExtendedDetails**: `boolean`
 
-Defined in: [types/widget-props.ts:734](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widget-props.ts#L734)
+Defined in: [types/widget-props.ts:734](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widget-props.ts#L734)
 
 If true, displays extended details
 
@@ -142,7 +142,7 @@ false
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widget-props.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widget-props.ts#L135)
+Defined in: [types/widget-props.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widget-props.ts#L135)
 
 Optional test ID for automated testing
 

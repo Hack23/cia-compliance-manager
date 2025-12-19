@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.0.4**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.0.5**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **getBusinessImpact**(`component`, `level`): [`BusinessImpactDetail`](../../../types/interfaces/BusinessImpactDetail.md)
 
-Defined in: [data/riskImpactData.ts:394](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/data/riskImpactData.ts#L394)
+Defined in: [data/riskImpactData.ts:394](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/data/riskImpactData.ts#L394)
 
 Get business impact details for a specific component and security level
 

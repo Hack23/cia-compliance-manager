@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.4**](../../README.md)
+[**CIA Compliance Manager Documentation v1.0.5**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ImplementationEffort
 
-Defined in: [types/cia-services.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/cia-services.ts#L142)
+Defined in: [types/cia-services.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/cia-services.ts#L142)
 
 Technical implementation effort details
 
@@ -16,7 +16,7 @@ Technical implementation effort details
 
 > **development**: `string`
 
-Defined in: [types/cia-services.ts:143](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/cia-services.ts#L143)
+Defined in: [types/cia-services.ts:143](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/cia-services.ts#L143)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [types/cia-services.ts:143](https://github.com/Hack23/cia-compliance
 
 > **expertise**: `string`
 
-Defined in: [types/cia-services.ts:145](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/cia-services.ts#L145)
+Defined in: [types/cia-services.ts:145](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/cia-services.ts#L145)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [types/cia-services.ts:145](https://github.com/Hack23/cia-compliance
 
 > **maintenance**: `string`
 
-Defined in: [types/cia-services.ts:144](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/cia-services.ts#L144)
+Defined in: [types/cia-services.ts:144](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/cia-services.ts#L144)

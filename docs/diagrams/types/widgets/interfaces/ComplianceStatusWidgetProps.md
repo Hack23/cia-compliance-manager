@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.0.4**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.0.5**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ComplianceStatusWidgetProps
 
-Defined in: [types/widgets.ts:270](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widgets.ts#L270)
+Defined in: [types/widgets.ts:270](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widgets.ts#L270)
 
 Props for ComplianceStatusWidget component
 
@@ -26,7 +26,7 @@ insights into compliance gaps and requirements. 📋
 
 > `optional` **availabilityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:274](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widgets.ts#L274)
+Defined in: [types/widgets.ts:274](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widgets.ts#L274)
 
 Availability security level (optional when securityLevel is provided)
 
@@ -36,7 +36,7 @@ Availability security level (optional when securityLevel is provided)
 
 > `optional` **className**: `string`
 
-Defined in: [types/widgets.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widgets.ts#L56)
+Defined in: [types/widgets.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widgets.ts#L56)
 
 Optional CSS class name
 
@@ -50,7 +50,7 @@ Optional CSS class name
 
 > `optional` **confidentialityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:284](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widgets.ts#L284)
+Defined in: [types/widgets.ts:284](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widgets.ts#L284)
 
 Confidentiality security level (optional when securityLevel is provided)
 
@@ -60,7 +60,7 @@ Confidentiality security level (optional when securityLevel is provided)
 
 > `optional` **integrityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:279](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widgets.ts#L279)
+Defined in: [types/widgets.ts:279](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widgets.ts#L279)
 
 Integrity security level (optional when securityLevel is provided)
 
@@ -70,7 +70,7 @@ Integrity security level (optional when securityLevel is provided)
 
 > `optional` **refreshTrigger**: `number`
 
-Defined in: [types/widgets.ts:294](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widgets.ts#L294)
+Defined in: [types/widgets.ts:294](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widgets.ts#L294)
 
 Optional refresh trigger to reload data
 
@@ -80,7 +80,7 @@ Optional refresh trigger to reload data
 
 > `optional` **securityLevel**: [`SecurityLevel`](../../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widgets.ts:289](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widgets.ts#L289)
+Defined in: [types/widgets.ts:289](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widgets.ts#L289)
 
 Optional overall security level, used as fallback when individual levels aren't provided
 
@@ -94,7 +94,7 @@ Optional overall security level, used as fallback when individual levels aren't 
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widgets.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/0b7da06a2d009cc9cac58e6400d72865b757f5d4/src/types/widgets.ts#L61)
+Defined in: [types/widgets.ts:61](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/widgets.ts#L61)
 
 Optional test ID for testing
 
