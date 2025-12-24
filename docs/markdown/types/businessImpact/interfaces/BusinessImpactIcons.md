@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.5**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.0.6**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactIcons
 
-Defined in: [types/businessImpact.ts:140](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/businessImpact.ts#L140)
+Defined in: [types/businessImpact.ts:140](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/types/businessImpact.ts#L140)
 
 Icon mappings for business impact categories
 
@@ -16,7 +16,7 @@ Icon mappings for business impact categories
 
 > **compliance**: `string`
 
-Defined in: [types/businessImpact.ts:151](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/businessImpact.ts#L151)
+Defined in: [types/businessImpact.ts:151](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/types/businessImpact.ts#L151)
 
 Compliance/regulatory impact icon
 
@@ -26,7 +26,7 @@ Compliance/regulatory impact icon
 
 > **financial**: `string`
 
-Defined in: [types/businessImpact.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/businessImpact.ts#L142)
+Defined in: [types/businessImpact.ts:142](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/types/businessImpact.ts#L142)
 
 Financial impact icon
 
@@ -36,7 +36,7 @@ Financial impact icon
 
 > **operational**: `string`
 
-Defined in: [types/businessImpact.ts:145](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/businessImpact.ts#L145)
+Defined in: [types/businessImpact.ts:145](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/types/businessImpact.ts#L145)
 
 Operational impact icon
 
@@ -46,7 +46,7 @@ Operational impact icon
 
 > **reputational**: `string`
 
-Defined in: [types/businessImpact.ts:154](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/businessImpact.ts#L154)
+Defined in: [types/businessImpact.ts:154](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/types/businessImpact.ts#L154)
 
 Reputational impact icon
 
@@ -56,6 +56,6 @@ Reputational impact icon
 
 > **strategic**: `string`
 
-Defined in: [types/businessImpact.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/businessImpact.ts#L148)
+Defined in: [types/businessImpact.ts:148](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/types/businessImpact.ts#L148)
 
 Strategic impact icon

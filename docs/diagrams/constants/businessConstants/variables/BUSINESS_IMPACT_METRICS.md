@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.0.5**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.0.6**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **BUSINESS\_IMPACT\_METRICS**: `object`
 
-Defined in: [constants/businessConstants.ts:637](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/constants/businessConstants.ts#L637)
+Defined in: [constants/businessConstants.ts:637](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/constants/businessConstants.ts#L637)
 
 Enhanced business impact metrics with specific values
 

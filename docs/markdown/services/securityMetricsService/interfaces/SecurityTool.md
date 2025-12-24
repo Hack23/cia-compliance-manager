@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.5**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.0.6**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityTool
 
-Defined in: [services/securityMetricsService.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/services/securityMetricsService.ts#L13)
+Defined in: [services/securityMetricsService.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/securityMetricsService.ts#L13)
 
 Represents a security tool recommendation
 
@@ -16,7 +16,7 @@ Represents a security tool recommendation
 
 > **example**: `string`
 
-Defined in: [services/securityMetricsService.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/services/securityMetricsService.ts#L15)
+Defined in: [services/securityMetricsService.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/securityMetricsService.ts#L15)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [services/securityMetricsService.ts:15](https://github.com/Hack23/ci
 
 > **name**: `string`
 
-Defined in: [services/securityMetricsService.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/services/securityMetricsService.ts#L14)
+Defined in: [services/securityMetricsService.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/securityMetricsService.ts#L14)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [services/securityMetricsService.ts:14](https://github.com/Hack23/ci
 
 > **purpose**: `string`
 
-Defined in: [services/securityMetricsService.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/services/securityMetricsService.ts#L16)
+Defined in: [services/securityMetricsService.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/securityMetricsService.ts#L16)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.5**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.0.6**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: AvailabilityImpact
 
-Defined in: [types/cia.ts:367](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/cia.ts#L367)
+Defined in: [types/cia.ts:367](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/types/cia.ts#L367)
 
 Impact associated with the availability of the system
 
@@ -34,7 +34,7 @@ const impact: AvailabilityImpact = {
 
 > **description**: `string`
 
-Defined in: [types/cia.ts:348](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/cia.ts#L348)
+Defined in: [types/cia.ts:348](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/types/cia.ts#L348)
 
 Human-readable description of the impact
 
@@ -48,7 +48,7 @@ Human-readable description of the impact
 
 > **level**: [`SecurityLevel`](../type-aliases/SecurityLevel.md)
 
-Defined in: [types/cia.ts:345](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/cia.ts#L345)
+Defined in: [types/cia.ts:345](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/types/cia.ts#L345)
 
 Security level associated with this impact
 
@@ -62,7 +62,7 @@ Security level associated with this impact
 
 > **recoveryTime**: `string`
 
-Defined in: [types/cia.ts:372](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/cia.ts#L372)
+Defined in: [types/cia.ts:372](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/types/cia.ts#L372)
 
 Maximum acceptable recovery time (e.g., "< 1 hour", "< 15 minutes")
 
@@ -72,6 +72,6 @@ Maximum acceptable recovery time (e.g., "< 1 hour", "< 15 minutes")
 
 > **uptime**: `string`
 
-Defined in: [types/cia.ts:369](https://github.com/Hack23/cia-compliance-manager/blob/c49a34536cfcfd69c910d0edcabcf96845464e51/src/types/cia.ts#L369)
+Defined in: [types/cia.ts:369](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/types/cia.ts#L369)
 
 Expected uptime percentage (e.g., "99.9%", "99.99%")
