@@ -178,7 +178,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               ].map((tab) => (
                 <button
                   key={tab.id}
-                  className={`py-sm px-md text-body font-medium border-b-2 transition-normal ${
+                  className={`py-sm px-md text-body font-medium border-b-2 transition-all duration-normal ${
                     activeTab === tab.id
                       ? "border-primary text-primary dark:text-primary-light dark:border-primary-light"
                       : "border-transparent text-neutral hover:text-neutral-dark dark:text-neutral-light dark:hover:text-white hover:border-neutral-light"

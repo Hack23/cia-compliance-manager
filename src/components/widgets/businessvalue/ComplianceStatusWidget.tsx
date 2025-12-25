@@ -392,7 +392,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                   (framework, index) => (
                     <div
                       key={framework}
-                      className={`p-md bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light dark:border-success-dark cursor-pointer transition-normal ${
+                      className={`p-md bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light dark:border-success-dark cursor-pointer transition-all duration-normal ${
                         activeFramework === framework
                           ? "ring-2 ring-success dark:ring-success-light"
                           : ""

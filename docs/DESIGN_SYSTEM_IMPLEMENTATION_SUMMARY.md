@@ -303,11 +303,11 @@ import { WIDGET_DESIGN } from '@/constants/designTokens';
 ### Widget Updates (11 widgets)
 
 **Assessment Center** (2 widgets)
-- [ ] SecuritySummaryWidget
-- [ ] SecurityLevelWidget
+- [x] SecuritySummaryWidget
+- [x] SecurityLevelWidget
 
 **Business Value** (3 widgets)
-- [ ] ComplianceStatusWidget
+- [x] ComplianceStatusWidget
 - [ ] CostEstimationWidget
 - [ ] ValueCreationWidget
 

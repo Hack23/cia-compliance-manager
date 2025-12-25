@@ -297,11 +297,11 @@ npx tsc --noEmit
 ## Remaining Work
 
 ### Assessment Center (2 widgets)
-- [ ] SecuritySummaryWidget
-- [ ] SecurityLevelWidget
+- [x] SecuritySummaryWidget
+- [x] SecurityLevelWidget
 
 ### Business Value (3 widgets)
-- [ ] ComplianceStatusWidget
+- [x] ComplianceStatusWidget
 - [ ] CostEstimationWidget
 - [ ] ValueCreationWidget
 
