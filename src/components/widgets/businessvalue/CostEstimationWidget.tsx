@@ -216,10 +216,10 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         isLoading={isLoading}
         error={serviceError}
       >
-      <div className="p-4">
+      <div className="p-md sm:p-lg">
         {/* Introduction */}
-        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
-          <p className="text-sm">
+        <div className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md">
+          <p className="text-body">
             This widget provides cost estimates for implementing and maintaining
             security controls based on your selected security levels across the
             CIA triad.
@@ -227,57 +227,57 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         </div>
 
         {/* Summary cost section - using direct JSX instead of InfoCard */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center mb-2">
-              <span className="mr-2 text-blue-500">💼</span>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md mb-lg">
+          <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
+            <div className="flex items-center mb-sm">
+              <span className="mr-sm text-info">💼</span>
+              <div className="text-body text-neutral dark:text-neutral-light">
                 Implementation Cost
               </div>
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400">
+            <div className="text-title font-bold text-info dark:text-info-light">
               {formatCurrency(totalCapex)}
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-500">
+            <div className="text-caption text-neutral dark:text-neutral-light">
               One-time capital expenditure
             </div>
           </div>
 
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center mb-2">
-              <span className="mr-2 text-green-500">🔄</span>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+          <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
+            <div className="flex items-center mb-sm">
+              <span className="mr-sm text-success">🔄</span>
+              <div className="text-body text-neutral dark:text-neutral-light">
                 Annual Operations
               </div>
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-green-600 dark:text-green-400">
+            <div className="text-title font-bold text-success dark:text-success-light">
               {formatCurrency(totalOpex)}
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-500">
+            <div className="text-caption text-neutral dark:text-neutral-light">
               Yearly operational expenses
             </div>
           </div>
 
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center mb-2">
-              <span className="mr-2 text-purple-500">💲</span>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+          <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
+            <div className="flex items-center mb-sm">
+              <span className="mr-sm text-purple-500">💲</span>
+              <div className="text-body text-neutral dark:text-neutral-light">
                 Total First Year Cost
               </div>
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-purple-600 dark:text-purple-400">
+            <div className="text-title font-bold text-purple-600 dark:text-purple-400">
               {formatCurrency(totalCost)}
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-500">
+            <div className="text-caption text-neutral dark:text-neutral-light">
               Implementation + first year operations
             </div>
           </div>
         </div>
 
         {/* CAPEX vs OPEX ratio visualization */}
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-3">Cost Breakdown</h3>
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+        <div className="mb-lg">
+          <h3 className="text-heading font-medium mb-md">Cost Breakdown</h3>
+          <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
             <div className="flex justify-between items-center mb-1">
               <div className="text-sm font-medium">CAPEX</div>
               <div className="text-sm font-medium">OPEX</div>
