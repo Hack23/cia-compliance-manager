@@ -74,12 +74,12 @@ module.exports = {
       },
       // Shadows
       boxShadow: {
+        'none': 'none',
         'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
         'md': '0 2px 8px 0 rgba(0, 0, 0, 0.1)',
         'lg': '0 4px 16px 0 rgba(0, 0, 0, 0.15)',
         'xl': '0 8px 24px 0 rgba(0, 0, 0, 0.2)',
         'xxl': '0 12px 32px 0 rgba(0, 0, 0, 0.25)',
-        'none': 'none',
       },
       // Transitions
       transitionDuration: {

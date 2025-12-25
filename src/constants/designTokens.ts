@@ -113,7 +113,7 @@ export const SEMANTIC_COLORS = {
  * Border radius values for consistent rounded corners
  */
 export const BORDER_RADIUS = {
-  /** 2px - Minimal rounding */
+  /** 0 - No rounding (sharp corners) */
   none: '0',
   /** 4px - Small rounding for buttons and badges */
   sm: '4px',
@@ -191,21 +191,21 @@ export const Z_INDEX = {
  */
 export const WIDGET_DESIGN = {
   /** Standard padding for widget containers */
-  padding: SPACING.lg,
+  padding: '24px', // SPACING.lg value
   /** Border radius for widget containers */
-  borderRadius: BORDER_RADIUS.md,
+  borderRadius: '8px', // BORDER_RADIUS.md value
   /** Shadow for widget containers */
-  shadow: SHADOWS.md,
+  shadow: '0 2px 8px 0 rgba(0, 0, 0, 0.1)', // SHADOWS.md value
   /** Gap between widget sections */
-  sectionGap: SPACING.md,
+  sectionGap: '16px', // SPACING.md value
   /** Header height */
   headerHeight: '48px',
   /** Header padding */
-  headerPadding: SPACING.md,
+  headerPadding: '16px', // SPACING.md value
   /** Content padding */
-  contentPadding: SPACING.md,
+  contentPadding: '16px', // SPACING.md value
   /** Footer padding */
-  footerPadding: SPACING.md,
+  footerPadding: '16px', // SPACING.md value
 } as const;
 
 /**
