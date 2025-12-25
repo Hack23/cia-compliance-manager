@@ -7,6 +7,7 @@ import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import type { AvailabilityImpactWidgetProps } from "../../../types/widget-props";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
+import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -79,10 +80,20 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
         testId={testId}
         isLoading={isLoading}
         error={error}
+        aria-label={getWidgetAriaDescription(
+          "Availability Impact Analysis",
+          "Business impact of availability controls including uptime targets and recovery objectives"
+        )}
       >
       <div className="p-md sm:p-lg cia-widget">
         {/* Security level indicator */}
-        <div className="mb-4">
+        <section 
+          className="mb-4"
+          aria-labelledby="availability-level-heading"
+        >
+          <h3 id="availability-level-heading" className="sr-only">
+            Current Availability Security Level
+          </h3>
           <SecurityLevelBadge
             category="Availability"
             level={effectiveLevel}
@@ -91,31 +102,45 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
             textClass="text-blue-800 dark:text-blue-300"
             testId={`${testId}-level`}
           />
-        </div>
+        </section>
 
         {/* Business Impact Analysis */}
         {businessImpact && (
-          <div className="mb-4">
-            <h3 className="text-lg font-medium mb-2">Business Impact</h3>
+          <section 
+            className="mb-4"
+            aria-labelledby="availability-business-impact-heading"
+          >
+            <h3 id="availability-business-impact-heading" className="text-lg font-medium mb-2">
+              Business Impact
+            </h3>
             <BusinessImpactSection
               impact={businessImpact}
               color="blue"
               testId={`${testId}-business-impact`}
             />
-          </div>
+          </section>
         )}
 
         {/* SLA Metrics */}
-        <div className="mb-4">
-          <h3 className="text-lg font-medium mb-2 flex items-center">
-            <span className="mr-2">⏱️</span>SLA Metrics
+        <section 
+          className="mb-4"
+          aria-labelledby="sla-metrics-heading"
+        >
+          <h3 id="sla-metrics-heading" className="text-lg font-medium mb-2 flex items-center">
+            <span className="mr-2" aria-hidden="true">⏱️</span>SLA Metrics
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+          <div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4"
+            role="group"
+            aria-label="Service level agreement metrics"
+          >
             <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light dark:border-info-dark">
               <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
                 Uptime Target
               </div>
-              <div className="text-lg font-bold">{slaMetrics.uptime}</div>
+              <div className="text-lg font-bold" aria-label={`Uptime target: ${slaMetrics.uptime}`}>
+                {slaMetrics.uptime}
+              </div>
               <div className="text-xs text-blue-600 dark:text-blue-400">
                 Expected system availability
               </div>
@@ -124,7 +149,9 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
               <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
                 Recovery Time Objective
               </div>
-              <div className="text-lg font-bold">{slaMetrics.rto}</div>
+              <div className="text-lg font-bold" aria-label={`Recovery time objective: ${slaMetrics.rto}`}>
+                {slaMetrics.rto}
+              </div>
               <div className="text-xs text-blue-600 dark:text-blue-400">
                 Time to restore service
               </div>
@@ -133,7 +160,9 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
               <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
                 Recovery Point Objective
               </div>
-              <div className="text-lg font-bold">{slaMetrics.rpo}</div>
+              <div className="text-lg font-bold" aria-label={`Recovery point objective: ${slaMetrics.rpo}`}>
+                {slaMetrics.rpo}
+              </div>
               <div className="text-xs text-blue-600 dark:text-blue-400">
                 Maximum data loss allowed
               </div>
@@ -144,13 +173,15 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
               <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
                 Service Level Agreement
               </div>
-              <div className="text-lg font-bold">{slaMetrics.sla}</div>
+              <div className="text-lg font-bold" aria-label={`Service level agreement: ${slaMetrics.sla}`}>
+                {slaMetrics.sla}
+              </div>
               <div className="text-xs text-blue-600 dark:text-blue-400">
                 Support coverage period
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </WidgetContainer>
     </WidgetErrorBoundary>

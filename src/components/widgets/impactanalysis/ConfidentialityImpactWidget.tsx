@@ -5,6 +5,7 @@ import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import type { ConfidentialityImpactWidgetProps } from "../../../types/widget-props";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
+import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -86,13 +87,19 @@ const ConfidentialityImpactWidget: React.FC<
         testId={testId}
         isLoading={isLoading}
         error={serviceError}
+        aria-label={getWidgetAriaDescription(
+          "Confidentiality Impact Analysis",
+          "Business impact of confidentiality controls including data classification and privacy measures"
+        )}
       >
       <div className="max-h-[550px] overflow-y-auto pr-1">
-        <div
+        <section
           className="p-md sm:p-lg"
-          role="region"
           aria-labelledby="confidentiality-impact-heading"
         >
+          <h3 id="confidentiality-impact-heading" className="sr-only">
+            Confidentiality Impact Details
+          </h3>
           <div className="mb-4">
             <SecurityLevelBadge
               category="Confidentiality"
@@ -116,7 +123,7 @@ const ConfidentialityImpactWidget: React.FC<
           {/* Data Protection & Classification */}
           <div className="mb-6">
             <h4 className="text-md font-medium mb-3 flex items-center">
-              <span className="mr-2">📊</span>Data Protection
+              <span className="mr-2" aria-hidden="true">📊</span>Data Protection
             </h4>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
               <div className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light dark:border-primary-dark">
@@ -134,7 +141,7 @@ const ConfidentialityImpactWidget: React.FC<
           {/* Privacy Impact */}
           <div className="mb-6">
             <h4 className="text-md font-medium mb-3 flex items-center">
-              <span className="mr-2">🔒</span>Privacy Impact
+              <span className="mr-2" aria-hidden="true">🔒</span>Privacy Impact
             </h4>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className="p-sm bg-white dark:bg-gray-800 rounded-md">
@@ -145,7 +152,7 @@ const ConfidentialityImpactWidget: React.FC<
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </WidgetContainer>
     </WidgetErrorBoundary>

@@ -10,6 +10,7 @@ import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import type { IntegrityImpactWidgetProps } from "../../../types/widget-props";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
+import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -83,10 +84,20 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
         testId={testId}
         isLoading={isLoading}
         error={error}
+        aria-label={getWidgetAriaDescription(
+          "Integrity Impact Analysis",
+          "Business impact of integrity controls including data accuracy and validation mechanisms"
+        )}
       >
       <div className="p-md sm:p-lg">
         {/* Security level indicator */}
-        <div className="mb-4">
+        <section 
+          className="mb-4"
+          aria-labelledby="integrity-level-heading"
+        >
+          <h3 id="integrity-level-heading" className="sr-only">
+            Current Integrity Security Level
+          </h3>
           <SecurityLevelBadge
             category="Integrity"
             level={effectiveLevel}
@@ -95,7 +106,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
             textClass="text-green-800 dark:text-green-300"
             testId={`${testId}-integrity-badge`}
           />
-        </div>
+        </section>
 
         {/* Business impact */}
         {businessImpact && (
