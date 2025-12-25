@@ -132,28 +132,28 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
         isLoading={isLoading}
         error={error}
       >
-        <div className="p-4">
+        <div className="p-md sm:p-lg">
           {/* Security Classification Banner */}
-          <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border-l-4 border-blue-500 dark:border-blue-400 shadow-sm">
+          <div className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border-l-4 border-info dark:border-info-light shadow-md">
             <div className="flex justify-between items-center">
               <div>
-                <h2 className="text-lg font-semibold flex items-center gap-2">
-                  <span className="inline-block w-3 h-3 rounded-full bg-blue-500 dark:bg-blue-400 pulse-dot"></span>
+                <h2 className="text-heading font-semibold flex items-center gap-sm">
+                  <span className="inline-block w-3 h-3 rounded-full bg-info dark:bg-info-light pulse-dot"></span>
                   {securityClassification}
                 </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
+                <p className="text-body text-neutral dark:text-neutral-light">
                   {securityLevelDescription}
                 </p>
               </div>
               <div className="text-right">
-                <div className="text-xs text-gray-500 dark:text-gray-400">
+                <div className="text-caption text-neutral dark:text-neutral-light">
                   Security Score
                 </div>
-                <div className="font-bold text-xl text-blue-600 dark:text-blue-400">
+                <div className="font-bold text-title text-info dark:text-info-light">
                   {securityScore}%
                 </div>
                 <div
-                  className={`text-sm font-medium ${getRiskColorClass(
+                  className={`text-body font-medium ${getRiskColorClass(
                     riskLevel
                   )}`}
                   data-testid={`${testId}-risk-level`}
@@ -165,9 +165,9 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
           </div>
 
           {/* Tab Navigation */}
-          <div className="border-b border-gray-200 dark:border-gray-700 mb-4">
+          <div className="border-b border-neutral-light dark:border-neutral-dark mb-md">
             <nav
-              className="flex flex-wrap -mb-px gap-2"
+              className="flex flex-wrap -mb-px gap-sm"
               aria-label="Security Summary Tabs"
             >
               {[
@@ -178,10 +178,10 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               ].map((tab) => (
                 <button
                   key={tab.id}
-                  className={`py-2 px-4 text-sm font-medium border-b-2 transition-colors duration-200 ${
+                  className={`py-sm px-md text-body font-medium border-b-2 transition-all duration-normal ${
                     activeTab === tab.id
-                      ? "border-blue-500 text-blue-600 dark:text-blue-400 dark:border-blue-400"
-                      : "border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 hover:border-gray-300"
+                      ? "border-primary text-primary dark:text-primary-light dark:border-primary-light"
+                      : "border-transparent text-neutral hover:text-neutral-dark dark:text-neutral-light dark:hover:text-white hover:border-neutral-light"
                   }`}
                   onClick={() => setActiveTab(tab.id as SecuritySummaryTab)}
                   data-testid={`${testId}-tab-${tab.id}`}
