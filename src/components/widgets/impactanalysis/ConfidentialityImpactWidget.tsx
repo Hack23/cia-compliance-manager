@@ -119,7 +119,7 @@ const ConfidentialityImpactWidget: React.FC<
               <span className="mr-2">📊</span>Data Protection
             </h4>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-              <div className="p-md bg-purple-light/10 dark:bg-purple-dark/20 rounded-md border border-purple-light dark:border-purple-dark">
+              <div className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light dark:border-primary-dark">
                 <div className="text-sm font-medium mb-1 text-purple-700 dark:text-purple-300">
                   Data Classification
                 </div>

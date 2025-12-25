@@ -153,7 +153,7 @@ const SecurityVisualizationWidget: React.FC<
           </div>
         )}
         {confidentialityValue < 2 && (
-          <div className="p-sm bg-purple-light/10 dark:bg-purple-dark/20 rounded">
+          <div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md">
             <p className="text-sm">
               Strengthen access controls and data protection to improve
               confidentiality.
@@ -252,11 +252,11 @@ const SecurityVisualizationWidget: React.FC<
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Confidentiality component */}
             <div
-              className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg"
+              className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md"
               data-testid="confidentiality-component"
             >
               <div className="flex items-center justify-between mb-2">
-                <div className="text-md font-medium text-purple-800 dark:text-purple-300">
+                <div className="text-md font-medium text-primary-dark dark:text-primary-light">
                   Confidentiality
                 </div>
                 <SecurityLevelIndicator
@@ -266,7 +266,7 @@ const SecurityVisualizationWidget: React.FC<
               </div>
               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
                 <div
-                  className="bg-purple-500 h-1.5 rounded-full"
+                  className="bg-primary h-1.5 rounded-full"
                   style={{
                     width: `${
                       (getSecurityLevelValue(confidentialityLevel) / 4) * 100

@@ -407,7 +407,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
           {/* Confidentiality value */}
           <div
-            className="p-md bg-purple-light/10 dark:bg-purple-dark/20 rounded-md"
+            className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md"
             data-testid="confidentiality-value-section"
           >
             <div className="flex items-center mb-sm">

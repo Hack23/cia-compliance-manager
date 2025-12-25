@@ -596,8 +596,8 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {/* Confidentiality Implementation */}
                     {implementationGuides[2] && (
-                      <div className="p-md bg-purple-light/10 dark:bg-purple-dark/20 rounded-md border border-purple-light dark:border-purple-dark">
-                        <h4 className="text-md font-medium mb-2 text-purple-700 dark:text-purple-300 flex items-center">
+                      <div className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light dark:border-primary-dark">
+                        <h4 className="text-md font-medium mb-2 text-primary-dark dark:text-primary-light flex items-center">
                           <span className="mr-2">🔒</span>Confidentiality (
                           {confidentialityLevel})
                         </h4>
