@@ -384,7 +384,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               <div
                 className="text-title font-bold text-success dark:text-success-light"
                 data-testid="roi-value"
-                aria-label={`Return on investment: ${roiEstimate.percentage}`}
+                aria-label={`Return on investment: ${roiEstimate.value}`}
               >
                 {roiEstimate.value}
               </div>
