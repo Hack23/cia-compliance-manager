@@ -9,8 +9,6 @@ import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { CIADetails } from "../../../types/cia-services";
 import { 
-  getSelectAriaProps, 
-  getButtonAriaProps,
   getWidgetAriaDescription,
   announceToScreenReader 
 } from "../../../utils/accessibility";
@@ -262,12 +260,15 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         icon={WIDGET_ICONS.SECURITY_LEVEL}
         className={className}
         testId={testId}
+      >
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
         aria-label={getWidgetAriaDescription(
           "Security Level Configuration",
           "Configure security levels for each CIA component to set your organization's security posture"
         )}
       >
-      <div className="p-md sm:p-lg">
         <div className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md">
           <p className="text-body">
             Configure security levels for each CIA component to set your

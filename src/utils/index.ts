@@ -26,7 +26,11 @@ import * as widgetUtils from "./widgetHelpers";
 import * as accessibilityUtils from "./accessibility";
 
 // Export individual utilities with explicit names to avoid conflicts
-// Accessibility utilities
+
+// ===============================================================================
+// ACCESSIBILITY UTILITIES - WCAG 2.1 Level AA Compliance
+// ===============================================================================
+// ARIA helpers, keyboard navigation, screen reader support, and color contrast
 export const {
   ARIA_ROLES,
   ARIA_LIVE,

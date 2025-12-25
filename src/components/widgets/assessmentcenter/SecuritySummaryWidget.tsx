@@ -65,6 +65,16 @@ type SecuritySummaryTab =
   | "compliance";
 
 /**
+ * Tab configuration for accessibility navigation
+ */
+const SUMMARY_TABS = [
+  { id: "overview" as const, label: "Overview" },
+  { id: "business" as const, label: "Business Value" },
+  { id: "implementation" as const, label: "Implementation" },
+  { id: "compliance" as const, label: "Compliance" },
+] as const;
+
+/**
  * Displays a comprehensive executive summary of security posture with key metrics
  *
  * ## Business Perspective
@@ -84,25 +94,15 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
   // Active tab state
   const [activeTab, setActiveTab] = useState<SecuritySummaryTab>("overview");
   const tabListRef = useRef<HTMLDivElement>(null);
-  const [focusedTabIndex, setFocusedTabIndex] = useState(0);
-
-  // Tab configuration
-  const tabs = [
-    { id: "overview", label: "Overview" },
-    { id: "business", label: "Business Value" },
-    { id: "implementation", label: "Implementation" },
-    { id: "compliance", label: "Compliance" },
-  ] as const;
 
   // Handle keyboard navigation for tabs
   const handleTabKeyDown = (event: React.KeyboardEvent, index: number): void => {
     handleArrowKeyNavigation(
       event,
       index,
-      tabs.length,
+      SUMMARY_TABS.length,
       (newIndex) => {
-        setFocusedTabIndex(newIndex);
-        setActiveTab(tabs[newIndex].id);
+        setActiveTab(SUMMARY_TABS[newIndex].id);
         
         // Focus the new tab button
         const tabButtons = tabListRef.current?.querySelectorAll('button[role="tab"]');
@@ -113,14 +113,6 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
       'horizontal'
     );
   };
-
-  // Focus management when tab changes
-  useEffect(() => {
-    const activeTabIndex = tabs.findIndex(tab => tab.id === activeTab);
-    if (activeTabIndex !== -1) {
-      setFocusedTabIndex(activeTabIndex);
-    }
-  }, [activeTab]);
 
   // Get services for data
   const {
@@ -247,7 +239,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               <span className="sr-only" id="tab-keyboard-instructions">
                 Use arrow keys to navigate between tabs. Press Enter or Space to activate a tab.
               </span>
-              {tabs.map((tab, index) => {
+              {SUMMARY_TABS.map((tab, index) => {
                 const isSelected = activeTab === tab.id;
                 const tabId = `${testId}-tab-${tab.id}`;
                 const panelId = `${testId}-panel-${tab.id}`;
@@ -262,7 +254,6 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                     }`}
                     onClick={() => {
                       setActiveTab(tab.id);
-                      setFocusedTabIndex(index);
                     }}
                     onKeyDown={(e) => handleTabKeyDown(e, index)}
                     data-testid={tabId}

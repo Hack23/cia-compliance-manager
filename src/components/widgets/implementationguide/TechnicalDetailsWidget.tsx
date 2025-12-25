@@ -45,6 +45,15 @@ interface TechnicalDetailsWidgetProps {
 }
 
 /**
+ * Tab configuration for CIA components
+ */
+const CIA_TABS = [
+  { id: "confidentiality" as const, label: "Confidentiality", icon: "🔒" },
+  { id: "integrity" as const, label: "Integrity", icon: "✓" },
+  { id: "availability" as const, label: "Availability", icon: "⏱️" },
+] as const;
+
+/**
  * Widget that displays detailed technical implementation requirements
  *
  * ## Business Perspective
@@ -68,24 +77,15 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   
   // Refs for keyboard navigation
   const tabListRef = useRef<HTMLDivElement>(null);
-  const [focusedTabIndex, setFocusedTabIndex] = useState(0);
-
-  // Tab configuration
-  const tabs = [
-    { id: "confidentiality" as const, label: "Confidentiality", icon: "🔒" },
-    { id: "integrity" as const, label: "Integrity", icon: "✓" },
-    { id: "availability" as const, label: "Availability", icon: "⏱️" },
-  ];
 
   // Handle keyboard navigation for tabs
   const handleTabKeyDown = (event: React.KeyboardEvent, index: number): void => {
     handleArrowKeyNavigation(
       event,
       index,
-      tabs.length,
+      CIA_TABS.length,
       (newIndex) => {
-        setFocusedTabIndex(newIndex);
-        setActiveTab(tabs[newIndex].id);
+        setActiveTab(CIA_TABS[newIndex].id);
         
         // Focus the new tab button
         const tabButtons = tabListRef.current?.querySelectorAll('button[role="tab"]');
@@ -96,14 +96,6 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
       'horizontal'
     );
   };
-
-  // Focus management when tab changes
-  useEffect(() => {
-    const activeTabIndex = tabs.findIndex(tab => tab.id === activeTab);
-    if (activeTabIndex !== -1) {
-      setFocusedTabIndex(activeTabIndex);
-    }
-  }, [activeTab]);
 
   // Get CIA content service
   const { ciaContentService, error, isLoading } = useCIAContentService();
@@ -165,7 +157,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
             <span className="sr-only" id="tech-tab-keyboard-instructions">
               Use arrow keys to navigate between tabs. Press Enter or Space to activate a tab.
             </span>
-            {tabs.map((tab, index) => {
+            {CIA_TABS.map((tab, index) => {
               const isSelected = activeTab === tab.id;
               const tabId = `${testId}-tab-${tab.id}`;
               const panelId = `${testId}-panel-${tab.id}`;
@@ -175,7 +167,6 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                   key={tab.id}
                   onClick={() => {
                     setActiveTab(tab.id);
-                    setFocusedTabIndex(index);
                   }}
                   onKeyDown={(e) => handleTabKeyDown(e, index)}
                   className={`py-2 px-4 font-medium text-sm focus:outline-none ${

@@ -412,9 +412,31 @@ export function getMetricAccessibleName(
   return `${label}: ${value}${unitString}`;
 }
 
+// Singleton live region for screen reader announcements
+let liveRegionElement: HTMLDivElement | null = null;
+let cleanupTimeout: ReturnType<typeof setTimeout> | null = null;
+
+/**
+ * Get or create the singleton live region element
+ */
+function getLiveRegion(): HTMLDivElement {
+  if (!liveRegionElement || !document.body.contains(liveRegionElement)) {
+    liveRegionElement = document.createElement('div');
+    liveRegionElement.setAttribute('aria-atomic', 'true');
+    liveRegionElement.setAttribute('class', 'sr-only');
+    liveRegionElement.style.position = 'absolute';
+    liveRegionElement.style.left = '-10000px';
+    liveRegionElement.style.width = '1px';
+    liveRegionElement.style.height = '1px';
+    liveRegionElement.style.overflow = 'hidden';
+    document.body.appendChild(liveRegionElement);
+  }
+  return liveRegionElement;
+}
+
 /**
  * Announce a message to screen readers using ARIA live region
- * Creates a temporary live region element to announce messages
+ * Uses a singleton live region to prevent duplicate announcements
  * 
  * @param message - Message to announce
  * @param politeness - ARIA live politeness level
@@ -423,26 +445,25 @@ export function announceToScreenReader(
   message: string,
   politeness: 'polite' | 'assertive' = 'polite'
 ): void {
-  const liveRegion = document.createElement('div');
+  const liveRegion = getLiveRegion();
+  
+  // Update politeness level if changed
   liveRegion.setAttribute('aria-live', politeness);
-  liveRegion.setAttribute('aria-atomic', 'true');
-  liveRegion.setAttribute('class', 'sr-only');
-  liveRegion.style.position = 'absolute';
-  liveRegion.style.left = '-10000px';
-  liveRegion.style.width = '1px';
-  liveRegion.style.height = '1px';
-  liveRegion.style.overflow = 'hidden';
+  
+  // Clear existing content and cancel pending cleanup
+  liveRegion.textContent = '';
+  if (cleanupTimeout) {
+    clearTimeout(cleanupTimeout);
+  }
 
-  document.body.appendChild(liveRegion);
-
-  // Delay to ensure screen readers detect the live region
+  // Delay to ensure screen readers detect the change
   setTimeout(() => {
     liveRegion.textContent = message;
   }, 100);
 
-  // Clean up after announcement
-  setTimeout(() => {
-    document.body.removeChild(liveRegion);
+  // Schedule cleanup after announcement (but keep the element for reuse)
+  cleanupTimeout = setTimeout(() => {
+    liveRegion.textContent = '';
   }, 3000);
 }
 
@@ -454,12 +475,24 @@ export function announceToScreenReader(
  * @param background - Background color (hex)
  * @param isLargeText - Whether text is large (18pt+ or 14pt+ bold)
  * @returns Whether contrast meets WCAG AA standards
+ * @throws Error if colors are invalid hex values
  */
 export function meetsContrastRequirement(
   foreground: string,
   background: string,
   isLargeText = false
 ): boolean {
+  // Validate hex colors
+  const fgRgb = hexToRgb(foreground);
+  const bgRgb = hexToRgb(background);
+  
+  if (!fgRgb || !bgRgb) {
+    console.warn(
+      `Invalid hex color provided to meetsContrastRequirement: foreground=${foreground}, background=${background}`
+    );
+    return false; // Fail validation for invalid colors
+  }
+  
   const requiredRatio = isLargeText ? 3 : 4.5;
   const ratio = calculateContrastRatio(foreground, background);
   return ratio >= requiredRatio;

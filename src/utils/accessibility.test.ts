@@ -346,9 +346,12 @@ describe('Accessibility Utilities', () => {
     afterEach(() => {
       vi.restoreAllMocks();
       vi.useRealTimers();
+      // Clean up any live regions created during tests
+      const liveRegions = document.querySelectorAll('[aria-live]');
+      liveRegions.forEach(region => region.remove());
     });
 
-    it('should create and remove live region', () => {
+    it('should create and reuse singleton live region', () => {
       announceToScreenReader('Test message', 'polite');
 
       // Fast-forward through initial timeout
@@ -358,11 +361,29 @@ describe('Accessibility Utilities', () => {
       expect(liveRegions.length).toBe(1);
       expect(liveRegions[0].textContent).toBe('Test message');
 
-      // Fast-forward through cleanup timeout
+      // Fast-forward through cleanup timeout - content should be cleared but element remains
       vi.advanceTimersByTime(3000);
 
       const remainingRegions = document.querySelectorAll('[aria-live="polite"]');
-      expect(remainingRegions.length).toBe(0);
+      expect(remainingRegions.length).toBe(1); // Element still exists (singleton)
+      expect(remainingRegions[0].textContent).toBe(''); // But content is cleared
+    });
+
+    it('should reuse singleton for multiple announcements', () => {
+      announceToScreenReader('First message', 'polite');
+      vi.advanceTimersByTime(100);
+      
+      const firstRegions = document.querySelectorAll('[aria-live="polite"]');
+      expect(firstRegions.length).toBe(1);
+      expect(firstRegions[0].textContent).toBe('First message');
+
+      // Make another announcement - should reuse same element
+      announceToScreenReader('Second message', 'polite');
+      vi.advanceTimersByTime(100);
+
+      const secondRegions = document.querySelectorAll('[aria-live="polite"]');
+      expect(secondRegions.length).toBe(1); // Still only one element
+      expect(secondRegions[0].textContent).toBe('Second message');
     });
 
     it('should create assertive live region', () => {
