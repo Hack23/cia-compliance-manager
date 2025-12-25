@@ -89,7 +89,7 @@ const ConfidentialityImpactWidget: React.FC<
       >
       <div className="max-h-[550px] overflow-y-auto pr-1">
         <div
-          className="p-4"
+          className="p-md sm:p-lg"
           role="region"
           aria-labelledby="confidentiality-impact-heading"
         >
@@ -119,7 +119,7 @@ const ConfidentialityImpactWidget: React.FC<
               <span className="mr-2">📊</span>Data Protection
             </h4>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-              <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
+              <div className="p-md bg-purple-light/10 dark:bg-purple-dark/20 rounded-md border border-purple-light dark:border-purple-dark">
                 <div className="text-sm font-medium mb-1 text-purple-700 dark:text-purple-300">
                   Data Classification
                 </div>
@@ -137,7 +137,7 @@ const ConfidentialityImpactWidget: React.FC<
               <span className="mr-2">🔒</span>Privacy Impact
             </h4>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
+              <div className="p-sm bg-white dark:bg-gray-800 rounded-md">
                 <div className="text-sm font-medium mb-1">Privacy Impact:</div>
                 <div className="text-lg font-bold text-purple-600 dark:text-purple-400">
                   {privacyImpact}

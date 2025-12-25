@@ -80,7 +80,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
         isLoading={isLoading}
         error={error}
       >
-      <div className="p-4 cia-widget">
+      <div className="p-md sm:p-lg cia-widget">
         {/* Security level indicator */}
         <div className="mb-4">
           <SecurityLevelBadge
@@ -111,7 +111,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
             <span className="mr-2">⏱️</span>SLA Metrics
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-            <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+            <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light dark:border-info-dark">
               <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
                 Uptime Target
               </div>
@@ -120,7 +120,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
                 Expected system availability
               </div>
             </div>
-            <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+            <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light dark:border-info-dark">
               <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
                 Recovery Time Objective
               </div>
@@ -129,7 +129,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
                 Time to restore service
               </div>
             </div>
-            <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+            <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light dark:border-info-dark">
               <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
                 Recovery Point Objective
               </div>
@@ -140,7 +140,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
             </div>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+            <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light dark:border-info-dark">
               <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
                 Service Level Agreement
               </div>

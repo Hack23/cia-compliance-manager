@@ -84,7 +84,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
         isLoading={isLoading}
         error={error}
       >
-      <div className="p-4">
+      <div className="p-md sm:p-lg">
         {/* Security level indicator */}
         <div className="mb-4">
           <SecurityLevelBadge
@@ -120,7 +120,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
             Data Integrity Metrics
           </h3>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
+            <div className="p-sm bg-white dark:bg-gray-800 rounded-md">
               <div className="text-sm font-medium mb-1">
                 Data Validation Controls:
               </div>
@@ -128,7 +128,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
                 {validationLevel}
               </div>
             </div>
-            <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
+            <div className="p-sm bg-white dark:bg-gray-800 rounded-md">
               <div className="text-sm font-medium mb-1">
                 Acceptable Error Rate:
               </div>
