@@ -10,6 +10,7 @@ import {
   isObject,
   isString,
 } from "../../../utils/typeGuards";
+import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import ResourceCard from "../../common/ResourceCard";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -368,20 +369,31 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
         testId={testId}
         isLoading={isLoading}
         error={serviceError}
+        aria-label={getWidgetAriaDescription(
+          "Security Resources",
+          "Curated security resources and implementation guides for selected CIA security levels"
+        )}
       >
       <div className="p-md sm:p-lg">
         {/* Widget introduction */}
-        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+        <section 
+          className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+          aria-labelledby="resources-intro-heading"
+        >
+          <h2 id="resources-intro-heading" className="sr-only">Security Resources Introduction</h2>
           <p className="text-sm">
             This widget provides curated security resources to help implement
             controls that align with your selected security levels across the
             CIA triad.
           </p>
-        </div>
+        </section>
 
         <div className="flex flex-col md:flex-row gap-4">
           {/* Filters and search - left column on larger screens */}
-          <div className="md:w-1/4">
+          <aside 
+            className="md:w-1/4"
+            aria-label="Resource filters and search"
+          >
             <div className="mb-4">
               <label
                 htmlFor="resource-search"
@@ -398,76 +410,91 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                   value={searchTerm}
                   onChange={handleSearchChange}
                   data-testid={`${testId}-search`}
+                  aria-label="Search security resources by title or description"
                 />
-                <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-gray-400">
+                <span 
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 dark:text-gray-400"
+                  aria-hidden="true"
+                >
                   🔍
                 </span>
               </div>
             </div>
 
             {resourceCategories.length > 0 && (
-              <div className="mb-4">
+              <nav 
+                className="mb-4"
+                aria-label="Resource categories"
+              >
                 <h3 className="text-sm font-medium mb-2">Categories</h3>
-                <div className="space-y-2">
-                  <div
-                    className={`px-3 py-2 rounded-md cursor-pointer text-sm ${
-                      selectedCategory === null
-                        ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300"
-                        : "bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
-                    }`}
-                    onClick={() => handleCategorySelect(null)}
-                    data-testid={`${testId}-category-all`}
-                  >
-                    All Resources
-                  </div>
-
-                  {resourceCategories.map((category, index) => (
-                    <div
-                      key={category}
-                      className={`px-3 py-2 rounded-md cursor-pointer text-sm ${
-                        selectedCategory === category
+                <ul 
+                  className="space-y-2"
+                  role="list"
+                >
+                  <li>
+                    <button
+                      className={`w-full text-left px-3 py-2 rounded-md text-sm ${
+                        selectedCategory === null
                           ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300"
                           : "bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
                       }`}
-                      onClick={() => handleCategorySelect(category)}
-                      data-testid={`${testId}-category-${index}`}
+                      onClick={() => handleCategorySelect(null)}
+                      data-testid={`${testId}-category-all`}
+                      aria-pressed={selectedCategory === null}
                     >
-                      {category}
-                    </div>
+                    All Resources
+                  </button>
+                  </li>
+
+                  {resourceCategories.map((category, index) => (
+                    <li key={category}>
+                      <button
+                        className={`w-full text-left px-3 py-2 rounded-md text-sm ${
+                          selectedCategory === category
+                            ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300"
+                            : "bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+                        }`}
+                        onClick={() => handleCategorySelect(category)}
+                        data-testid={`${testId}-category-${index}`}
+                        aria-pressed={selectedCategory === category}
+                      >
+                        {category}
+                      </button>
+                    </li>
                   ))}
-                </div>
-              </div>
+                </ul>
+              </nav>
             )}
 
             {/* Implementation Guidelines */}
-            <div className="mb-4">
-              <h3 className="text-sm font-medium mb-2">
+            <section className="mb-4" aria-labelledby="implementation-guidelines-heading">
+              <h3 id="implementation-guidelines-heading" className="text-sm font-medium mb-2">
                 Implementation Guidelines
               </h3>
               <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg text-sm">
                 <p className="mb-2 font-medium">Selected Security Levels:</p>
-                <div className="mb-2 text-xs">
+                <dl className="mb-2 text-xs">
                   <div className="flex justify-between">
-                    <span>Confidentiality:</span>
-                    <span className="font-medium">{confidentialityLevel}</span>
+                    <dt>Confidentiality:</dt>
+                    <dd className="font-medium">{confidentialityLevel}</dd>
                   </div>
                   <div className="flex justify-between mb-1">
-                    <span>Integrity:</span>
-                    <span className="font-medium">{integrityLevel}</span>
+                    <dt>Integrity:</dt>
+                    <dd className="font-medium">{integrityLevel}</dd>
                   </div>
                   <div className="flex justify-between mb-1">
-                    <span>Availability:</span>
-                    <span className="font-medium">{availabilityLevel}</span>
+                    <dt>Availability:</dt>
+                    <dd className="font-medium">{availabilityLevel}</dd>
                   </div>
-                </div>
+                </dl>
 
                 <p className="mb-2 text-xs text-gray-600 dark:text-gray-400">
                   Focus on implementing controls that satisfy all three
                   components for a balanced security posture.
                 </p>
               </div>
-            </div>
-          </div>
+            </section>
+          </aside>
 
           {/* Resources grid - right column on larger screens */}
           <div className="md:w-3/4">

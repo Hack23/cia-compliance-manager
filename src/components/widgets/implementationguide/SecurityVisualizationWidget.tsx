@@ -14,6 +14,7 @@ import {
   getSecurityLevelValue,
   normalizeSecurityLevel,
 } from "../../../utils/securityLevelUtils";
+import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import RadarChart from "../../charts/RadarChart";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -173,12 +174,23 @@ const SecurityVisualizationWidget: React.FC<
         testId={testId}
         isLoading={isLoading}
         error={error}
+        aria-label={getWidgetAriaDescription(
+          "Security Visualization",
+          "Visual representation of security posture with CIA triad metrics, security score, and risk level"
+        )}
       >
       <div className="p-md sm:p-lg">
         {/* Security score section */}
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-3">Security Posture</h3>
-          <div className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md">
+        <section 
+          className="mb-6"
+          aria-labelledby="security-posture-heading"
+        >
+          <h3 id="security-posture-heading" className="text-lg font-medium mb-3">Security Posture</h3>
+          <div 
+            className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md"
+            role="group"
+            aria-label="Security metrics"
+          >
             <div className="flex justify-between items-center mb-4">
               <div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -187,6 +199,7 @@ const SecurityVisualizationWidget: React.FC<
                 <div
                   className="text-3xl font-bold"
                   data-testid="security-score-value"
+                  aria-label={`Security score: ${securityScore} out of 100`}
                 >
                   {securityScore}
                 </div>
@@ -200,6 +213,8 @@ const SecurityVisualizationWidget: React.FC<
                     riskLevel
                   )}`}
                   data-testid="risk-level"
+                  role="status"
+                  aria-label={`Risk level: ${riskLevel}`}
                 >
                   {riskLevel}
                 </div>
@@ -207,7 +222,7 @@ const SecurityVisualizationWidget: React.FC<
             </div>
 
             {/* Score gauge */}
-            <div className="mb-2">
+            <div className="mb-2" aria-label="Security score visualization">
               <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
                 Security Level
               </div>
@@ -229,7 +244,7 @@ const SecurityVisualizationWidget: React.FC<
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* Security Radar Chart using existing component */}
         <div className="mb-6">
