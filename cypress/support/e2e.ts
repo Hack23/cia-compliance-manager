@@ -1,5 +1,6 @@
 // Import all helper modules in the correct order
 import "@testing-library/cypress/add-commands";
+import "cypress-real-events";
 import "./command-registry";
 import "./commands";
 import "./debug-helpers";
