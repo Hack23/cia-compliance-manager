@@ -91,7 +91,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         isLoading={isLoading}
         error={error}
       >
-      <div className="p-4">
+      <div className="p-md sm:p-lg">
         {/* Technical details description */}
         <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
           <p className="text-sm">

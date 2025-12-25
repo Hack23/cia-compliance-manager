@@ -302,18 +302,18 @@ npx tsc --noEmit
 
 ### Business Value (3 widgets)
 - [x] ComplianceStatusWidget
-- [ ] CostEstimationWidget
-- [ ] ValueCreationWidget
+- [x] CostEstimationWidget
+- [x] ValueCreationWidget
 
 ### Impact Analysis (3 widgets)
-- [ ] AvailabilityImpactWidget
-- [ ] IntegrityImpactWidget
-- [ ] ConfidentialityImpactWidget
+- [x] AvailabilityImpactWidget
+- [x] IntegrityImpactWidget
+- [x] ConfidentialityImpactWidget
 
 ### Implementation Guide (3 widgets)
-- [ ] TechnicalDetailsWidget
-- [ ] SecurityVisualizationWidget
-- [ ] SecurityResourcesWidget
+- [x] TechnicalDetailsWidget
+- [x] SecurityVisualizationWidget
+- [x] SecurityResourcesWidget
 
 ### Additional (1 widget)
 - [ ] BusinessImpactAnalysisWidget

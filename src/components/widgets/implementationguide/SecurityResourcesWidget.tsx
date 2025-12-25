@@ -369,7 +369,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
         isLoading={isLoading}
         error={serviceError}
       >
-      <div className="p-4">
+      <div className="p-md sm:p-lg">
         {/* Widget introduction */}
         <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
           <p className="text-sm">
@@ -566,7 +566,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
               <div className="space-y-4">
                 {/* General implementation tips */}
-                <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                <div className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md">
                   <h4 className="text-md font-medium mb-2">
                     Getting Started with Implementation
                   </h4>
@@ -596,7 +596,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {/* Confidentiality Implementation */}
                     {implementationGuides[2] && (
-                      <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
+                      <div className="p-md bg-purple-light/10 dark:bg-purple-dark/20 rounded-md border border-purple-light dark:border-purple-dark">
                         <h4 className="text-md font-medium mb-2 text-purple-700 dark:text-purple-300 flex items-center">
                           <span className="mr-2">🔒</span>Confidentiality (
                           {confidentialityLevel})
@@ -622,7 +622,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
                     {/* Integrity Implementation */}
                     {implementationGuides[1] && (
-                      <div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800">
+                      <div className="p-md bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light dark:border-success-dark">
                         <h4 className="text-md font-medium mb-2 text-green-700 dark:text-green-300 flex items-center">
                           <span className="mr-2">✓</span>Integrity (
                           {integrityLevel})
@@ -648,7 +648,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
                     {/* Availability Implementation */}
                     {implementationGuides[0] && (
-                      <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+                      <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light dark:border-info-dark">
                         <h4 className="text-md font-medium mb-2 text-blue-700 dark:text-blue-300 flex items-center">
                           <span className="mr-2">⏱️</span>Availability (
                           {availabilityLevel})
