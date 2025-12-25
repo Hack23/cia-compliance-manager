@@ -489,12 +489,15 @@ const BusinessImpactAnalysisWidget: React.FC<
         testId={testId}
         isLoading={isLoading}
         error={serviceError}
+      >
+      <div 
+        className="p-4"
+        role="region"
         aria-label={getWidgetAriaDescription(
           "Business Impact Analysis",
           "Business implications of security measures across financial, operational, reputational and regulatory dimensions"
         )}
       >
-      <div className="p-4">
         {/* Component Business Impacts */}
         <section 
           className="mb-4"

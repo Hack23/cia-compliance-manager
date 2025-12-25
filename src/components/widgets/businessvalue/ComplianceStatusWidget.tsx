@@ -316,12 +316,15 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         testId={testId}
         isLoading={isLoading}
         error={serviceError}
+      >
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
         aria-label={getWidgetAriaDescription(
           "Compliance Status",
           "Status of compliance with regulatory frameworks and industry standards"
         )}
       >
-      <div className="p-md sm:p-lg">
         {/* Add high-level description */}
         <section 
           className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md"

@@ -174,12 +174,15 @@ const SecurityVisualizationWidget: React.FC<
         testId={testId}
         isLoading={isLoading}
         error={error}
+      >
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
         aria-label={getWidgetAriaDescription(
           "Security Visualization",
           "Visual representation of security posture with CIA triad metrics, security score, and risk level"
         )}
       >
-      <div className="p-md sm:p-lg">
         {/* Security score section */}
         <section 
           className="mb-6"

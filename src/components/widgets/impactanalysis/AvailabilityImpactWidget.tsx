@@ -80,12 +80,15 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
         testId={testId}
         isLoading={isLoading}
         error={error}
+      >
+      <div 
+        className="p-md sm:p-lg cia-widget"
+        role="region"
         aria-label={getWidgetAriaDescription(
           "Availability Impact Analysis",
           "Business impact of availability controls including uptime targets and recovery objectives"
         )}
       >
-      <div className="p-md sm:p-lg cia-widget">
         {/* Security level indicator */}
         <section 
           className="mb-4"

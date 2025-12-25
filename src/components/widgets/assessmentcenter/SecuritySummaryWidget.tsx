@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { SECURITY_SUMMARY_TEST_IDS, ACCESSIBILITY_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
@@ -168,12 +168,15 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
         testId={testId}
         isLoading={isLoading}
         error={error}
-        aria-label={getWidgetAriaDescription(
-          "Security Summary",
-          "Comprehensive executive summary of security posture with key metrics"
-        )}
       >
-        <div className="p-md sm:p-lg">
+        <div 
+          className="p-md sm:p-lg"
+          role={ARIA_ROLES.REGION}
+          aria-label={getWidgetAriaDescription(
+            "Security Summary",
+            "Comprehensive executive summary of security posture with key metrics"
+          )}
+        >
           {/* Security Classification Banner */}
           <section 
             className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border-l-4 border-info dark:border-info-light shadow-md"

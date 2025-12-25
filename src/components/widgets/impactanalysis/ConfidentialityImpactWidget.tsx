@@ -87,12 +87,15 @@ const ConfidentialityImpactWidget: React.FC<
         testId={testId}
         isLoading={isLoading}
         error={serviceError}
+      >
+      <div 
+        className="max-h-[550px] overflow-y-auto pr-1"
+        role="region"
         aria-label={getWidgetAriaDescription(
           "Confidentiality Impact Analysis",
           "Business impact of confidentiality controls including data classification and privacy measures"
         )}
       >
-      <div className="max-h-[550px] overflow-y-auto pr-1">
         <section
           className="p-md sm:p-lg"
           aria-labelledby="confidentiality-impact-heading"

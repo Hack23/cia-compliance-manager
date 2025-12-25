@@ -369,12 +369,15 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
         testId={testId}
         isLoading={isLoading}
         error={serviceError}
+      >
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
         aria-label={getWidgetAriaDescription(
           "Security Resources",
           "Curated security resources and implementation guides for selected CIA security levels"
         )}
       >
-      <div className="p-md sm:p-lg">
         {/* Widget introduction */}
         <section 
           className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"

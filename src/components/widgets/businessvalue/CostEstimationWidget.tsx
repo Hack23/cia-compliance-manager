@@ -216,12 +216,15 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         testId={testId}
         isLoading={isLoading}
         error={serviceError}
+      >
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
         aria-label={getWidgetAriaDescription(
           "Cost Estimation",
           "Cost estimates for implementing and maintaining security controls"
         )}
       >
-      <div className="p-md sm:p-lg">
         {/* Introduction */}
         <section 
           className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md"

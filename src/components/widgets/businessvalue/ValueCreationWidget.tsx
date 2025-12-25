@@ -334,12 +334,15 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         testId={testId}
         isLoading={isLoading}
         error={error}
+      >
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
         aria-label={getWidgetAriaDescription(
           "Business Value Creation",
           "Business value and return on investment created by security investments"
         )}
       >
-      <div className="p-md sm:p-lg">
         {/* Overview section */}
         <section 
           className="mb-lg"

@@ -84,12 +84,15 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
         testId={testId}
         isLoading={isLoading}
         error={error}
+      >
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
         aria-label={getWidgetAriaDescription(
           "Integrity Impact Analysis",
           "Business impact of integrity controls including data accuracy and validation mechanisms"
         )}
       >
-      <div className="p-md sm:p-lg">
         {/* Security level indicator */}
         <section 
           className="mb-4"

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { useTechnicalDetailsData } from "../../../hooks/useTechnicalDetailsData";
@@ -128,12 +128,15 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         testId={testId}
         isLoading={isLoading}
         error={error}
+      >
+      <div 
+        className="p-md sm:p-lg"
+        role={ARIA_ROLES.REGION}
         aria-label={getWidgetAriaDescription(
           "Technical Implementation Details",
           "Detailed technical implementation requirements for achieving selected security levels"
         )}
       >
-      <div className="p-md sm:p-lg">
         {/* Technical details description */}
         <section 
           className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md"
