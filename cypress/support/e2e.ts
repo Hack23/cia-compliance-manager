@@ -1,5 +1,9 @@
 // Import all helper modules in the correct order
 import "@testing-library/cypress/add-commands";
+// Side-effect import: registers global "real" event commands (keyboard/mouse)
+// used by accessibility E2E tests (e.g., accessibility.cy.ts) for realistic
+// keyboard navigation simulation (Tab, Shift+Tab, Arrow keys, Home, End).
+// This enables WCAG 2.1 keyboard accessibility validation.
 import "cypress-real-events";
 import "./command-registry";
 import "./commands";

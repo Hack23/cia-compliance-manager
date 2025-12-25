@@ -415,6 +415,7 @@ export function getMetricAccessibleName(
 // Singleton live region for screen reader announcements
 let liveRegionElement: HTMLDivElement | null = null;
 let cleanupTimeout: ReturnType<typeof setTimeout> | null = null;
+const pendingTimeouts: Array<ReturnType<typeof setTimeout>> = [];
 
 /**
  * Get or create the singleton live region element
@@ -450,21 +451,33 @@ export function announceToScreenReader(
   // Update politeness level if changed
   liveRegion.setAttribute('aria-live', politeness);
   
-  // Clear existing content and cancel pending cleanup
+  // Clear existing content and cancel ALL pending timeouts to prevent accumulation
   liveRegion.textContent = '';
   if (cleanupTimeout) {
     clearTimeout(cleanupTimeout);
+    cleanupTimeout = null;
+  }
+  
+  // Clear all pending timeouts from rapid successive calls
+  while (pendingTimeouts.length > 0) {
+    const timeout = pendingTimeouts.pop();
+    if (timeout) clearTimeout(timeout);
   }
 
   // Delay to ensure screen readers detect the change
-  setTimeout(() => {
+  const messageTimeout = setTimeout(() => {
     liveRegion.textContent = message;
   }, 100);
+  pendingTimeouts.push(messageTimeout);
 
   // Schedule cleanup after announcement (but keep the element for reuse)
   cleanupTimeout = setTimeout(() => {
     liveRegion.textContent = '';
+    // Clear completed timeout from pending array
+    const index = pendingTimeouts.indexOf(messageTimeout);
+    if (index > -1) pendingTimeouts.splice(index, 1);
   }, 3000);
+  pendingTimeouts.push(cleanupTimeout);
 }
 
 /**

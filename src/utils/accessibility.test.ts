@@ -386,6 +386,23 @@ describe('Accessibility Utilities', () => {
       expect(secondRegions[0].textContent).toBe('Second message');
     });
 
+    it('should clear all pending timeouts on rapid successive calls', () => {
+      // Make multiple rapid announcements
+      announceToScreenReader('First', 'polite');
+      announceToScreenReader('Second', 'polite');
+      announceToScreenReader('Third', 'polite');
+      
+      // Only the last message should be shown after timeout
+      vi.advanceTimersByTime(100);
+      
+      const liveRegion = document.querySelector('[aria-live="polite"]') as HTMLElement;
+      expect(liveRegion?.textContent).toBe('Third');
+      
+      // After cleanup, content should be cleared
+      vi.advanceTimersByTime(3000);
+      expect(liveRegion?.textContent).toBe('');
+    });
+
     it('should create assertive live region', () => {
       announceToScreenReader('Error message', 'assertive');
 
