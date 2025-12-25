@@ -1,5 +1,4 @@
 import React from 'react';
-import { WIDGET_DESIGN } from '../../constants/designTokens';
 
 export interface WidgetContainerProps {
   title: string;
