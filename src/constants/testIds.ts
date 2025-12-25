@@ -965,3 +965,61 @@ export const createCompoundTestId = (prefix: string, suffix: string): string =>
 export function asSecurityLevel(level: string): SecurityLevel {
   return level as SecurityLevel;
 }
+
+// ---------------------------------------------------------------
+// SECTION 22: ACCESSIBILITY TEST IDs
+// ---------------------------------------------------------------
+
+/**
+ * Test IDs for accessibility features and WCAG compliance
+ */
+export const ACCESSIBILITY_TEST_IDS = {
+  // Skip links
+  SKIP_TO_MAIN: 'skip-to-main-content',
+  SKIP_TO_NAVIGATION: 'skip-to-navigation',
+  SKIP_TO_FOOTER: 'skip-to-footer',
+
+  // Landmarks
+  MAIN_CONTENT: 'main-content',
+  PRIMARY_NAVIGATION: 'primary-navigation',
+  CONTENT_REGION: 'content-region',
+
+  // ARIA live regions
+  ANNOUNCEMENT_REGION: 'announcement-region',
+  STATUS_MESSAGE: 'status-message',
+  ALERT_MESSAGE: 'alert-message',
+
+  // Focus management
+  FOCUS_TRAP_CONTAINER: 'focus-trap-container',
+  FIRST_FOCUSABLE: 'first-focusable-element',
+  LAST_FOCUSABLE: 'last-focusable-element',
+
+  // Screen reader only text
+  SR_ONLY_TEXT: 'sr-only-text',
+  VISUALLY_HIDDEN: 'visually-hidden',
+
+  // Keyboard navigation indicators
+  KEYBOARD_FOCUS_INDICATOR: 'keyboard-focus-indicator',
+  ACTIVE_ELEMENT: 'active-element',
+
+  // Accessible descriptions
+  ACCESSIBLE_DESCRIPTION: 'accessible-description',
+  ACCESSIBLE_LABEL: 'accessible-label',
+  ACCESSIBLE_NAME: 'accessible-name',
+
+  // Chart accessibility
+  CHART_DATA_TABLE: 'chart-data-table',
+  CHART_ACCESSIBLE_DESCRIPTION: 'chart-accessible-description',
+  CHART_SUMMARY: 'chart-summary',
+
+  // Form accessibility
+  FORM_ERROR_SUMMARY: 'form-error-summary',
+  FORM_SUCCESS_MESSAGE: 'form-success-message',
+  REQUIRED_FIELD_INDICATOR: 'required-field-indicator',
+  FIELD_ERROR_MESSAGE: 'field-error-message',
+  FIELD_HELP_TEXT: 'field-help-text',
+
+  // Widget accessibility
+  WIDGET_ACCESSIBLE_DESCRIPTION: 'widget-accessible-description',
+  WIDGET_KEYBOARD_INSTRUCTIONS: 'widget-keyboard-instructions',
+};
