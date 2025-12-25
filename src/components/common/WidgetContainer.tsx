@@ -1,4 +1,5 @@
 import React from 'react';
+import { WIDGET_DESIGN } from '../../constants/designTokens';
 
 export interface WidgetContainerProps {
   title: string;
@@ -56,18 +57,18 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
   // Handle error state
   if (errorMessage) {
     return (
-      <div className={`widget-container widget-error border border-red-300 rounded-lg shadow-sm ${className}`} data-testid={containerTestId}>
-        <div className="widget-header bg-red-50 dark:bg-red-900 dark:bg-opacity-20 px-4 py-3 border-b border-red-200 dark:border-red-800 rounded-t-lg">
-          <h3 className="text-lg font-medium text-red-800 dark:text-red-300 flex items-center">
-            <span className="mr-2">⚠️</span>
+      <div className={`widget-container widget-error border border-error rounded-md shadow-md ${className}`} data-testid={containerTestId}>
+        <div className="widget-header bg-error-light/10 dark:bg-error-dark/20 px-md py-sm sm:px-lg sm:py-md border-b border-error-light dark:border-error-dark rounded-t-md">
+          <h3 className="text-body-lg sm:text-heading font-semibold text-error-dark dark:text-error-light flex items-center">
+            <span className="mr-sm">⚠️</span>
             {title}
           </h3>
         </div>
-        <div className="widget-body p-4 bg-white dark:bg-gray-900">
-          <div className="text-red-600 dark:text-red-400" data-testid={errorTestId}>
+        <div className="widget-body p-md sm:p-lg bg-white dark:bg-gray-900 rounded-b-md">
+          <div className="text-error dark:text-error-light" data-testid={errorTestId}>
             {errorMessage}
           </div>
-          {errorContent && <div>{errorContent}</div>}
+          {errorContent && <div className="mt-md">{errorContent}</div>}
         </div>
       </div>
     );
@@ -75,17 +76,17 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
 
   // Handle loading or normal state
   return (
-    <div className={`widget-container border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm ${className}`} data-testid={containerTestId}>
-      <div className="widget-header bg-gray-50 dark:bg-gray-800 px-3 py-2 sm:px-4 sm:py-3 border-b border-gray-200 dark:border-gray-700 rounded-t-lg flex justify-between items-center">
-        <h3 className="text-base sm:text-lg font-medium text-gray-800 dark:text-gray-200 flex items-center">
-          {icon && <span className="mr-2">{icon}</span>}
+    <div className={`widget-container border border-neutral-light dark:border-neutral-dark rounded-md shadow-md ${className}`} data-testid={containerTestId}>
+      <div className="widget-header bg-neutral-light/10 dark:bg-neutral-dark/20 px-md py-sm sm:px-lg sm:py-md border-b border-neutral-light dark:border-neutral-dark rounded-t-md flex justify-between items-center">
+        <h3 className="text-body-lg sm:text-heading font-semibold text-gray-800 dark:text-gray-200 flex items-center">
+          {icon && <span className="mr-sm">{icon}</span>}
           {title}
         </h3>
         {actions && <div className="widget-actions">{actions}</div>}
       </div>
-      <div className={`widget-body p-3 sm:p-4 bg-white dark:bg-gray-900 rounded-b-lg ${isLoadingState ? 'flex items-center justify-center min-h-[100px]' : ''}`}>
+      <div className={`widget-body p-md sm:p-lg bg-white dark:bg-gray-900 rounded-b-md ${isLoadingState ? 'flex items-center justify-center min-h-[100px]' : ''}`}>
         {isLoadingState ? (
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" data-testid={spinnerTestId} />
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" data-testid={spinnerTestId} />
         ) : (
           children
         )}
