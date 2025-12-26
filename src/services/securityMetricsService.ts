@@ -4,6 +4,7 @@ import {
   CIADataProvider,
   ROIMetrics,
 } from "../types/cia-services";
+import { ISecurityMetricsService } from "../types/services";
 import logger from "../utils/logger";
 import { BaseService } from "./BaseService";
 
@@ -210,10 +211,121 @@ export interface ROIEstimatesMap {
  * organizations to measure their security posture, track improvements over time,
  * and quantify the impact of security investments through cost-benefit analysis
  * and risk reduction calculations. 📊
+ * 
+ * @implements {ISecurityMetricsService}
  */
-export class SecurityMetricsService extends BaseService {
+export class SecurityMetricsService extends BaseService implements ISecurityMetricsService {
+  /**
+   * Service name for identification
+   */
+  public readonly name: string = 'SecurityMetricsService';
+
+  /**
+   * Create a new SecurityMetricsService instance
+   * 
+   * @param dataProvider - Data provider for CIA options and metrics data
+   * @throws {ServiceError} If dataProvider is not provided
+   */
   constructor(dataProvider: CIADataProvider) {
     super(dataProvider);
+  }
+
+  /**
+   * Calculate security score for given security levels
+   * 
+   * Computes an overall security score (0-100) based on the weighted average
+   * of availability, integrity, and confidentiality security levels.
+   * 
+   * @param availabilityLevel - Availability security level
+   * @param integrityLevel - Integrity security level
+   * @param confidentialityLevel - Confidentiality security level
+   * @returns Security score from 0-100
+   * @throws {ServiceError} If any security level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const score = service.calculateSecurityScore('High', 'High', 'Very High');
+   * console.log(`Overall security score: ${score}/100`);
+   * ```
+   */
+  public calculateSecurityScore(
+    availabilityLevel: SecurityLevel,
+    integrityLevel: SecurityLevel,
+    confidentialityLevel: SecurityLevel
+  ): number {
+    // Validate inputs
+    this.validateSecurityLevel(availabilityLevel);
+    this.validateSecurityLevel(integrityLevel);
+    this.validateSecurityLevel(confidentialityLevel);
+
+    const availScore = this.getSecurityLevelValue(availabilityLevel) * 20;
+    const integScore = this.getSecurityLevelValue(integrityLevel) * 20;
+    const confScore = this.getSecurityLevelValue(confidentialityLevel) * 20;
+
+    return Math.round((availScore + integScore + confScore) / 3);
+  }
+
+  /**
+   * Get component metrics for a specific security level
+   * 
+   * @param component - CIA component type
+   * @param level - Security level
+   * @returns Component-specific metrics
+   * @throws {ServiceError} If component or level is invalid
+   */
+  public getComponentMetrics(component: CIAComponentType, level: SecurityLevel): unknown {
+    this.validateComponent(component);
+    this.validateSecurityLevel(level);
+    
+    return {
+      component,
+      level,
+      score: this.getSecurityLevelValue(level) * 20,
+      description: `${component} security at ${level} level`
+    };
+  }
+
+  /**
+   * Get impact metrics for a component and level
+   * 
+   * @param component - CIA component type
+   * @param level - Security level
+   * @returns Impact metrics
+   * @throws {ServiceError} If component or level is invalid
+   */
+  public getImpactMetrics(component: CIAComponentType, level: SecurityLevel): unknown {
+    this.validateComponent(component);
+    this.validateSecurityLevel(level);
+    
+    return {
+      component,
+      level,
+      impact: this.getRiskLevelFromSecurityLevel(level),
+      metrics: `Impact metrics for ${component} at ${level}`
+    };
+  }
+
+  /**
+   * Get security icon for a security level
+   * 
+   * @param level - Security level
+   * @returns Icon string or component
+   */
+  public getSecurityIcon(level: SecurityLevel): string | unknown {
+    this.validateSecurityLevel(level);
+    return this.getDefaultSecurityIcon(level);
+  }
+
+  /**
+   * Get protection level description for a security level
+   * 
+   * @param level - Security level
+   * @returns Protection level description
+   * @throws {ServiceError} If level is invalid
+   */
+  public getProtectionLevel(level: SecurityLevel): string {
+    this.validateSecurityLevel(level);
+    return this.getSecurityLevelDescription(level);
   }
 
   /**
@@ -226,6 +338,7 @@ export class SecurityMetricsService extends BaseService {
    * @param securityLevel - Selected security level to calculate ROI for
    * @param implementationCost - Total cost of implementation in currency units (CAPEX + OPEX)
    * @returns ROI metrics including monetary value, percentage return, and description
+   * @throws {ServiceError} If security level is invalid
    * 
    * @example
    * ```typescript
