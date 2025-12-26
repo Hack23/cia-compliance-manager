@@ -132,6 +132,21 @@ export class ServiceError extends Error {
   }
 
   /**
+   * Serialize error cause for JSON output
+   *
+   * @returns Serialized cause or undefined
+   */
+  private serializeCause(): { message: string; stack?: string } | undefined {
+    if (!this.cause) {
+      return undefined;
+    }
+    return {
+      message: this.cause.message,
+      stack: this.cause.stack,
+    };
+  }
+
+  /**
    * Convert error to JSON for logging
    *
    * @returns JSON representation of the error
@@ -144,10 +159,7 @@ export class ServiceError extends Error {
       context: this.context,
       timestamp: this.timestamp.toISOString(),
       stack: this.stack,
-      cause: this.cause ? {
-        message: this.cause.message,
-        stack: this.cause.stack,
-      } : undefined,
+      cause: this.serializeCause(),
     };
   }
 }

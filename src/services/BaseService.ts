@@ -54,10 +54,11 @@ export class BaseService implements CIAService, IBaseService {
    * @param dataProvider - Data provider for security information
    */
   constructor(dataProvider: CIADataProvider) {
+    // Validate data provider before super() call
     if (!dataProvider) {
       throw createValidationError(
         'Data provider is required',
-        { service: this.name, method: 'constructor' }
+        { service: 'BaseService', method: 'constructor' }
       );
     }
     this.dataProvider = dataProvider;
@@ -375,17 +376,30 @@ export class BaseService implements CIAService, IBaseService {
   }
 
   /**
+   * Validate a numeric value for formatting
+   *
+   * @param value - Value to validate
+   * @param context - Context for error logging
+   * @returns True if valid, false otherwise
+   */
+  private validateNumericValue(value: number, context: string): boolean {
+    if (!Number.isFinite(value)) {
+      this.logOperation('warn', `Invalid ${context} value: ${value}`, {
+        method: context === 'currency' ? 'formatCurrency' : 'formatPercentage',
+      });
+      return false;
+    }
+    return true;
+  }
+
+  /**
    * Formats a currency value
    *
    * @param value - Numeric value to format
    * @returns Formatted currency string
    */
   protected formatCurrency(value: number): string {
-    if (!Number.isFinite(value)) {
-      logger.warn(`Invalid currency value: ${value}`, {
-        service: this.name,
-        method: 'formatCurrency',
-      });
+    if (!this.validateNumericValue(value, 'currency')) {
       return '$0';
     }
 
@@ -403,11 +417,7 @@ export class BaseService implements CIAService, IBaseService {
    * @returns Formatted percentage string
    */
   protected formatPercentage(value: number): string {
-    if (!Number.isFinite(value)) {
-      logger.warn(`Invalid percentage value: ${value}`, {
-        service: this.name,
-        method: 'formatPercentage',
-      });
+    if (!this.validateNumericValue(value, 'percentage')) {
       return '0%';
     }
 
