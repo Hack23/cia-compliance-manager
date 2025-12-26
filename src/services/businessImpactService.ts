@@ -6,6 +6,7 @@ import {
   CIADataProvider,
   CIADetails,
 } from "../types/cia-services";
+import { IBusinessImpactService } from "../types/services";
 import { normalizeSecurityLevel } from "../utils/securityLevelUtils";
 import { BaseService } from "./BaseService";
 
@@ -30,23 +31,52 @@ const CATEGORY_ICONS: Record<string, string> = {
  * different dimensions including financial, operational, reputational,
  * strategic, and regulatory perspectives. It helps organizations understand
  * the business value of their security investments. 💼
+ * 
+ * @implements {IBusinessImpactService}
  */
-export class BusinessImpactService extends BaseService {
+export class BusinessImpactService extends BaseService implements IBusinessImpactService {
+  /**
+   * Service name for identification
+   */
+  public readonly name: string = 'BusinessImpactService';
+
+  /**
+   * Create a new BusinessImpactService instance
+   * 
+   * @param dataProvider - Data provider for CIA options and business impact data
+   * @throws {ServiceError} If dataProvider is not provided
+   */
   constructor(dataProvider: CIADataProvider) {
     super(dataProvider);
   }
 
   /**
    * Get business impact details for a security level
+   * 
+   * Retrieves comprehensive business impact analysis including financial,
+   * operational, and reputational impacts for a specific CIA component
+   * at a given security level.
    *
    * @param component - CIA component (confidentiality, integrity, availability)
-   * @param level - Security level
-   * @returns Business impact details
+   * @param level - Security level (defaults to 'Moderate' if not provided)
+   * @returns Business impact details including summary and risk levels for each impact category
+   * @throws {ServiceError} If component or level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const impact = service.getBusinessImpact('confidentiality', 'High');
+   * console.log(impact.summary);
+   * console.log(`Financial risk: ${impact.financial.riskLevel}`);
+   * ```
    */
   public getBusinessImpact(
     component: CIAComponentType,
     level: SecurityLevel = "Moderate" as SecurityLevel
   ): BusinessImpactDetails {
+    // Validate inputs
+    this.validateComponent(component);
+    this.validateSecurityLevel(level);
+
     const normalizedLevel = normalizeSecurityLevel(level);
     const options = this.getCIAOptions(component);
 
@@ -104,21 +134,53 @@ export class BusinessImpactService extends BaseService {
    * @param category - Impact category
    * @returns Emoji icon representing the category
    */
+  /**
+   * Get category icon for business impact visualization
+   * 
+   * Returns an icon (emoji) representing the business impact category
+   * for visual identification in reports and dashboards.
+   * 
+   * @param category - Impact category (e.g., 'financial', 'operational', 'reputational')
+   * @returns Icon string (emoji) for the category or '❓' if category is unknown
+   * 
+   * @example
+   * ```typescript
+   * const icon = service.getCategoryIcon('financial');
+   * console.log(icon); // '💰'
+   * ```
+   */
   public getCategoryIcon(category: string): string {
+    if (!category || typeof category !== 'string') {
+      return "❓";
+    }
     return CATEGORY_ICONS[category.toLowerCase()] || "❓";
   }
 
   /**
    * Get business impact description for a security level
+   * 
+   * Returns a human-readable description of the business impact for a specific
+   * CIA component at a given security level.
    *
-   * @param component - CIA component
+   * @param component - CIA component (confidentiality, integrity, availability)
    * @param level - Security level
-   * @returns Business impact description
+   * @returns Business impact description string
+   * @throws {ServiceError} If component or level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const desc = service.getBusinessImpactDescription('availability', 'High');
+   * console.log(desc); // "High level of system uptime and availability..."
+   * ```
    */
   public getBusinessImpactDescription(
     component: CIAComponentType,
     level: SecurityLevel
   ): string {
+    // Validate inputs
+    this.validateComponent(component);
+    this.validateSecurityLevel(level);
+
     const options = this.getCIAOptions(component);
     // Fix the type by adding a more specific return type for getCIAOptions
     const componentDetails = options
@@ -206,17 +268,32 @@ export class BusinessImpactService extends BaseService {
 
   /**
    * Calculate business impact level based on security levels
+   * 
+   * Evaluates the overall business impact risk by analyzing security levels
+   * across all three CIA components and determining the weakest link.
    *
    * @param availabilityLevel - Availability security level
-   * @param integrityLevel - Integrity security level
-   * @param confidentialityLevel - Confidentiality security level
-   * @returns Business impact level description
+   * @param integrityLevel - Integrity security level (defaults to availabilityLevel if not provided)
+   * @param confidentialityLevel - Confidentiality security level (defaults to availabilityLevel if not provided)
+   * @returns Business impact level description (e.g., "Critical", "High", "Moderate", "Low", "Minimal")
+   * @throws {ServiceError} If any security level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const impactLevel = service.calculateBusinessImpactLevel('High', 'Moderate', 'High');
+   * console.log(`Business impact risk: ${impactLevel}`);
+   * ```
    */
   public calculateBusinessImpactLevel(
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel = availabilityLevel,
     confidentialityLevel: SecurityLevel = availabilityLevel
   ): string {
+    // Validate inputs
+    this.validateSecurityLevel(availabilityLevel);
+    this.validateSecurityLevel(integrityLevel);
+    this.validateSecurityLevel(confidentialityLevel);
+
     // Get the minimum security level across all three components
     // as it represents the weakest link in the security chain
     const levelValues = {
