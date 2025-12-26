@@ -46,6 +46,24 @@ export interface IImpactMetrics {
 }
 
 /**
+ * Base security metrics interface
+ * Services may return richer types that extend this interface
+ */
+export interface ISecurityMetrics {
+  availability: IComponentMetrics;
+  integrity: IComponentMetrics;
+  confidentiality: IComponentMetrics;
+  impactMetrics: IImpactMetrics;
+  overallScore: number;
+  monitoring: number;
+  resilience: number;
+  compliance: number;
+  benchmarkScore: number;
+  securityMaturity: string;
+  [key: string]: unknown;
+}
+
+/**
  * Configuration options for service factory
  */
 export interface ServiceConfig {
@@ -155,7 +173,7 @@ export interface ICIAContentService extends IBaseService {
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
-  ): unknown;
+  ): ISecurityMetrics;
 }
 
 /**

@@ -4,7 +4,7 @@ import {
   CIADataProvider,
   ROIMetrics,
 } from "../types/cia-services";
-import { ISecurityMetricsService, IComponentMetrics, IImpactMetrics } from "../types/services";
+import { ISecurityMetricsService } from "../types/services";
 import logger from "../utils/logger";
 import { BaseService } from "./BaseService";
 
