@@ -2,6 +2,7 @@ import defaultResources from "../data/securityResources";
 import { SecurityLevel } from "../types/cia";
 import { CIAComponentType, CIADataProvider } from "../types/cia-services";
 import { SecurityResource } from "../types/securityResources";
+import { ISecurityResourceService } from "../types/services";
 import { BaseService } from "./BaseService";
 
 // Add the interface extension to include the relevance property
@@ -12,10 +13,33 @@ interface EnhancedSecurityResource extends SecurityResource {
 
 /**
  * Service for security resource recommendations
+ * 
+ * ## Business Perspective
+ * 
+ * Provides curated security resources, best practices, and implementation
+ * guidance tailored to specific security levels and CIA components. Helps
+ * organizations find relevant documentation, tools, and frameworks to
+ * implement effective security controls. 📚
+ * 
+ * @implements {ISecurityResourceService}
  */
-export class SecurityResourceService extends BaseService {
+export class SecurityResourceService extends BaseService implements ISecurityResourceService {
+  /**
+   * Service name for identification
+   */
+  public readonly name: string = 'SecurityResourceService';
+
+  /**
+   * Processed and enhanced security resources
+   */
   private resources: EnhancedSecurityResource[];
 
+  /**
+   * Create a new SecurityResourceService instance
+   * 
+   * @param dataProvider - Data provider for CIA options and security data
+   * @throws {ServiceError} If dataProvider is not provided
+   */
   constructor(dataProvider: CIADataProvider) {
     super(dataProvider);
     this.resources = this.processResources(defaultResources);
@@ -23,6 +47,9 @@ export class SecurityResourceService extends BaseService {
 
   /**
    * Process resources to add score and ensure required properties
+   * 
+   * @param resources - Raw security resources to process
+   * @returns Enhanced security resources with relevance scores
    */
   private processResources(
     resources: SecurityResource[]
@@ -40,11 +67,32 @@ export class SecurityResourceService extends BaseService {
 
   /**
    * Get security resources based on component and level
+   * 
+   * Returns a curated list of security resources tailored to the specific
+   * CIA component and security level, including documentation, tools,
+   * frameworks, and best practices.
+   * 
+   * @param component - CIA component type or 'general' for general resources
+   * @param level - Security level
+   * @returns Array of relevant security resources sorted by relevance
+   * @throws {ServiceError} If component or level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const resources = service.getSecurityResources('confidentiality', 'High');
+   * console.log(`Found ${resources.length} resources`);
+   * resources.forEach(r => console.log(`- ${r.title}: ${r.url}`));
+   * ```
    */
   public getSecurityResources(
     component: CIAComponentType | "general" | "all",
     level: SecurityLevel
   ): EnhancedSecurityResource[] {
+    // Validate inputs
+    if (component !== "general" && component !== "all") {
+      this.validateComponent(component as CIAComponentType);
+    }
+    this.validateSecurityLevel(level);
     // For None level, still return resources (to match test expectations)
     const fallbackResource: EnhancedSecurityResource = {
       id: `fallback-${component}`,
@@ -170,12 +218,25 @@ export class SecurityResourceService extends BaseService {
 
   /**
    * Get value points for a security level
+   * 
+   * Returns a list of key value propositions and benefits for implementing
+   * security controls at the specified security level. Helps justify
+   * security investments to stakeholders.
+   * 
+   * @param level - Security level
+   * @returns Array of value point strings describing the benefits and characteristics
+   * @throws {ServiceError} If level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const valuePoints = service.getValuePoints('High');
+   * console.log('Benefits of High security:');
+   * valuePoints.forEach(point => console.log(`- ${point}`));
+   * ```
    */
   public getValuePoints(level: SecurityLevel): string[] {
-    // Add null/undefined check to prevent runtime errors
-    if (!level) {
-      return ["No value points available for undefined security level"];
-    }
+    // Validate input
+    this.validateSecurityLevel(level);
 
     // Call the data provider's method if available
     if (this.dataProvider.getDefaultValuePoints) {
@@ -185,7 +246,11 @@ export class SecurityResourceService extends BaseService {
           return valuePoints;
         }
       } catch (error) {
-        console.warn("Error fetching custom value points:", error);
+        this.logOperation('warn', 'Error fetching custom value points', {
+          method: 'getValuePoints',
+          level,
+          error: error instanceof Error ? error.message : String(error)
+        });
       }
     }
 
