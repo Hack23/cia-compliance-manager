@@ -1,12 +1,9 @@
 import { SecurityLevel } from "../types/cia";
 import { CIAComponentType, CIADataProvider } from "../types/cia-services";
-import { ComplianceGapAnalysis } from "../types/compliance";
+import { ComplianceGapAnalysis, ComplianceStatusDetails } from "../types/compliance";
 import { IComplianceService } from "../types/services";
 import { BaseService } from "./BaseService";
-import {
-  ComplianceService,
-  ComplianceStatusDetails,
-} from "./complianceService";
+import { ComplianceService } from "./complianceService";
 import { createValidationError } from "./errors";
 
 /**

@@ -18,20 +18,38 @@ import {
   BusinessImpactDetails,
   TechnicalImplementationDetails,
 } from './cia-services';
-import { ComplianceGapAnalysis } from './compliance';
+import { ComplianceGapAnalysis, ComplianceStatusDetails } from './compliance';
+import { SecurityResource } from './securityResources';
 import { ServiceError } from '../services/errors';
 
 /**
- * Compliance status details
+ * Base component metrics interface
+ * Services may return richer types that extend this interface
  */
-export interface ComplianceStatusDetails {
-  status: string;
-  compliantFrameworks: string[];
-  partiallyCompliantFrameworks: string[];
-  nonCompliantFrameworks: string[];
-  remediationSteps?: string[];
-  requirements?: string[];
-  complianceScore: number;
+export interface IComponentMetrics {
+  component?: CIAComponentType;
+  level: SecurityLevel;
+  score: number;
+  description: string;
+}
+
+/**
+ * Base impact metrics interface
+ * Services may return richer types that extend this interface
+ */
+export interface IImpactMetrics {
+  financialImpact?: string;
+  operationalImpact?: string;
+  reputationalImpact?: string;
+  complianceImpact?: string;
+  [key: string]: unknown;
+}
+
+/**
+ * Configuration options for service factory
+ */
+export interface ServiceConfig {
+  [key: string]: unknown;
 }
 
 /**
@@ -247,9 +265,9 @@ export interface IBusinessImpactService extends IBaseService {
    * Get category icon for business impact visualization
    *
    * @param category - Impact category
-   * @returns Icon string or component
+   * @returns Icon string (emoji)
    */
-  getCategoryIcon(category: string): string | unknown;
+  getCategoryIcon(category: string): string;
 }
 
 /**
@@ -279,7 +297,7 @@ export interface ISecurityMetricsService extends IBaseService {
    * @param level - Security level
    * @returns Component-specific metrics
    */
-  getComponentMetrics(component: CIAComponentType, level: SecurityLevel): unknown;
+  getComponentMetrics(component: CIAComponentType, level: SecurityLevel): IComponentMetrics;
 
   /**
    * Get impact metrics
@@ -288,15 +306,15 @@ export interface ISecurityMetricsService extends IBaseService {
    * @param level - Security level
    * @returns Impact metrics
    */
-  getImpactMetrics(component: CIAComponentType, level: SecurityLevel): unknown;
+  getImpactMetrics(component: CIAComponentType, level: SecurityLevel): IImpactMetrics;
 
   /**
    * Get security icon for a level
    *
    * @param level - Security level
-   * @returns Icon string or component
+   * @returns Icon string (emoji)
    */
-  getSecurityIcon(level: SecurityLevel): string | unknown;
+  getSecurityIcon(level: SecurityLevel): string;
 
   /**
    * Get protection level description
@@ -363,9 +381,9 @@ export interface ISecurityResourceService extends IBaseService {
    *
    * @param component - CIA component type
    * @param level - Security level
-   * @returns Security resources
+   * @returns Array of security resources
    */
-  getSecurityResources(component: CIAComponentType, level: SecurityLevel): unknown;
+  getSecurityResources(component: CIAComponentType, level: SecurityLevel): SecurityResource[];
 
   /**
    * Get value points for a security level
@@ -388,7 +406,7 @@ export interface IServiceFactory<T extends IBaseService> {
    * @param config - Optional configuration
    * @returns Service instance
    */
-  create(config?: unknown): T;
+  create(config?: ServiceConfig): T;
 }
 
 /**

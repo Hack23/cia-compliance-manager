@@ -54,7 +54,7 @@ export class BaseService implements CIAService, IBaseService {
    * @param dataProvider - Data provider for security information
    */
   constructor(dataProvider: CIADataProvider) {
-    // Validate data provider before super() call
+    // Validate data provider
     if (!dataProvider) {
       throw createValidationError(
         'Data provider is required',
