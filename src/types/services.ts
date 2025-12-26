@@ -18,9 +18,21 @@ import {
   BusinessImpactDetails,
   TechnicalImplementationDetails,
 } from './cia-services';
-import { ComplianceStatusDetails } from '../services/complianceService';
 import { ComplianceGapAnalysis } from './compliance';
 import { ServiceError } from '../services/errors';
+
+/**
+ * Compliance status details
+ */
+export interface ComplianceStatusDetails {
+  status: string;
+  compliantFrameworks: string[];
+  partiallyCompliantFrameworks: string[];
+  nonCompliantFrameworks: string[];
+  remediationSteps?: string[];
+  requirements?: string[];
+  complianceScore: number;
+}
 
 /**
  * Base service interface that all services must implement
@@ -34,7 +46,7 @@ export interface IBaseService {
   readonly name: string;
 
   /**
-   * Validate input parameters
+   * Validate input parameters (returns simple boolean)
    *
    * @param input - Input to validate
    * @returns True if valid, false otherwise
@@ -380,7 +392,7 @@ export interface IServiceFactory<T extends IBaseService> {
 }
 
 /**
- * Service validation result
+ * Detailed validation result (for internal use)
  */
 export interface ValidationResult {
   /**
@@ -392,17 +404,4 @@ export interface ValidationResult {
    * Validation errors if any
    */
   errors: string[];
-}
-
-/**
- * Input validation interface for services
- */
-export interface IValidatable {
-  /**
-   * Validate input
-   *
-   * @param input - Input to validate
-   * @returns Validation result
-   */
-  validate(input: unknown): ValidationResult;
 }
