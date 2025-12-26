@@ -5,6 +5,7 @@ import { SecurityLevel } from "../../../types/cia";
 import { calculateROIEstimate } from "../../../utils/businessValueUtils";
 import { calculateBusinessImpactLevel } from "../../../utils/riskUtils";
 import { hasMethod, isNullish } from "../../../utils/typeGuards";
+import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -334,9 +335,19 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         isLoading={isLoading}
         error={error}
       >
-      <div className="p-md sm:p-lg">
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
+        aria-label={getWidgetAriaDescription(
+          "Business Value Creation",
+          "Business value and return on investment created by security investments"
+        )}
+      >
         {/* Overview section */}
-        <div className="mb-lg">
+        <section 
+          className="mb-lg"
+          aria-labelledby="value-profile-heading"
+        >
           <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md mb-md">
             <p className="text-body" data-testid="value-creation-summary">
               {getBusinessValueSummary()}
@@ -344,7 +355,9 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           </div>
 
           <div className="flex justify-between items-center mb-md">
-            <h3 className="text-heading font-medium">Overall Value Profile</h3>
+            <h3 id="value-profile-heading" className="text-heading font-medium">
+              Overall Value Profile
+            </h3>
             <div className="flex items-center">
               <span className="mr-sm text-body text-neutral dark:text-neutral-light">
                 Security Level:
@@ -354,10 +367,14 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           </div>
 
           {/* ROI estimate */}
-          <div className="p-md bg-success-light/10 dark:bg-success-dark/20 rounded-md mb-md">
+          <div 
+            className="p-md bg-success-light/10 dark:bg-success-dark/20 rounded-md mb-md"
+            role="region"
+            aria-labelledby="roi-heading"
+          >
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="font-medium text-success-dark dark:text-success-light">
+                <h4 id="roi-heading" className="font-medium text-success-dark dark:text-success-light">
                   Estimated Return on Investment
                 </h4>
                 <p className="text-body text-success dark:text-success-light mt-1">
@@ -367,6 +384,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               <div
                 className="text-title font-bold text-success dark:text-success-light"
                 data-testid="roi-value"
+                aria-label={`Return on investment: ${roiEstimate.value}`}
               >
                 {roiEstimate.value}
               </div>
@@ -399,7 +417,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Component-specific value sections */}
         <div className="mb-lg">

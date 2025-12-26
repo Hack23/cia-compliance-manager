@@ -23,8 +23,33 @@ import * as riskUtils from "./riskUtils";
 import * as securityUtils from "./securityLevelUtils";
 import * as typeGuards from "./typeGuards";
 import * as widgetUtils from "./widgetHelpers";
+import * as accessibilityUtils from "./accessibility";
 
 // Export individual utilities with explicit names to avoid conflicts
+
+// ===============================================================================
+// ACCESSIBILITY UTILITIES - WCAG 2.1 Level AA Compliance
+// ===============================================================================
+// ARIA helpers, keyboard navigation, screen reader support, and color contrast
+export const {
+  ARIA_ROLES,
+  ARIA_LIVE,
+  getSecurityLevelAriaLabel,
+  getWidgetAriaDescription,
+  getTabAriaProps,
+  getTabPanelAriaProps,
+  getButtonAriaProps,
+  getSelectAriaProps,
+  getProgressAriaProps,
+  getStatusAriaProps,
+  getChartAriaProps,
+  getTabIndex,
+  handleArrowKeyNavigation,
+  getMetricAccessibleName,
+  announceToScreenReader,
+  meetsContrastRequirement,
+} = accessibilityUtils;
+
 // Color utilities
 export const { getSecurityLevelColorClass } = colorUtils;
 

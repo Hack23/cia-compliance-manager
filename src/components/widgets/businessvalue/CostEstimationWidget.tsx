@@ -8,6 +8,7 @@ import { formatCurrency } from "../../../utils/formatUtils";
 import { getImplementationComplexity } from "../../../utils/riskUtils";
 import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
 import { isArray, isNullish, isString } from "../../../utils/typeGuards";
+import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -216,26 +217,43 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         isLoading={isLoading}
         error={serviceError}
       >
-      <div className="p-md sm:p-lg">
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
+        aria-label={getWidgetAriaDescription(
+          "Cost Estimation",
+          "Cost estimates for implementing and maintaining security controls"
+        )}
+      >
         {/* Introduction */}
-        <div className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md">
-          <p className="text-body">
+        <section 
+          className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md"
+          aria-labelledby="cost-intro-heading"
+        >
+          <p id="cost-intro-heading" className="text-body">
             This widget provides cost estimates for implementing and maintaining
             security controls based on your selected security levels across the
             CIA triad.
           </p>
-        </div>
+        </section>
 
         {/* Summary cost section - using direct JSX instead of InfoCard */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md mb-lg">
+        <section 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md mb-lg"
+          aria-labelledby="cost-summary-heading"
+        >
+          <h3 id="cost-summary-heading" className="sr-only">Cost Summary</h3>
           <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
             <div className="flex items-center mb-sm">
-              <span className="mr-sm text-info">💼</span>
+              <span className="mr-sm text-info" aria-hidden="true">💼</span>
               <div className="text-body text-neutral dark:text-neutral-light">
                 Implementation Cost
               </div>
             </div>
-            <div className="text-title font-bold text-info dark:text-info-light">
+            <div 
+              className="text-title font-bold text-info dark:text-info-light"
+              aria-label={`Implementation cost: ${formatCurrency(totalCapex)}`}
+            >
               {formatCurrency(totalCapex)}
             </div>
             <div className="text-caption text-neutral dark:text-neutral-light">
@@ -245,12 +263,15 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
 
           <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
             <div className="flex items-center mb-sm">
-              <span className="mr-sm text-success">🔄</span>
+              <span className="mr-sm text-success" aria-hidden="true">🔄</span>
               <div className="text-body text-neutral dark:text-neutral-light">
                 Annual Operations
               </div>
             </div>
-            <div className="text-title font-bold text-success dark:text-success-light">
+            <div 
+              className="text-title font-bold text-success dark:text-success-light"
+              aria-label={`Annual operations cost: ${formatCurrency(totalOpex)}`}
+            >
               {formatCurrency(totalOpex)}
             </div>
             <div className="text-caption text-neutral dark:text-neutral-light">
@@ -260,19 +281,22 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
 
           <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
             <div className="flex items-center mb-sm">
-              <span className="mr-sm text-primary">💲</span>
+              <span className="mr-sm text-primary" aria-hidden="true">💲</span>
               <div className="text-body text-neutral dark:text-neutral-light">
                 Total First Year Cost
               </div>
             </div>
-            <div className="text-title font-bold text-primary-dark dark:text-primary-light">
+            <div 
+              className="text-title font-bold text-primary-dark dark:text-primary-light"
+              aria-label={`Total first year cost: ${formatCurrency(totalCost)}`}
+            >
               {formatCurrency(totalCost)}
             </div>
             <div className="text-caption text-neutral dark:text-neutral-light">
               Implementation + first year operations
             </div>
           </div>
-        </div>
+        </section>
 
         {/* CAPEX vs OPEX ratio visualization */}
         <div className="mb-lg">
