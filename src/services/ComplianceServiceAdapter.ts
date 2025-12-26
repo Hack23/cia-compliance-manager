@@ -1,11 +1,13 @@
 import { SecurityLevel } from "../types/cia";
 import { CIAComponentType, CIADataProvider } from "../types/cia-services";
 import { ComplianceGapAnalysis } from "../types/compliance";
+import { IComplianceService } from "../types/services";
 import { BaseService } from "./BaseService";
 import {
   ComplianceService,
   ComplianceStatusDetails,
 } from "./complianceService";
+import { createValidationError } from "./errors";
 
 /**
  * Framework coverage information
@@ -35,11 +37,29 @@ export interface ControlMapping {
 
 /**
  * Adapter for compliance service functionality
+ * 
+ * ## Business Perspective
+ * Provides a simplified interface to compliance checking and framework mapping,
+ * adapting the ComplianceService for easier consumption by components and services.
+ * Enables organizations to understand their compliance posture and identify gaps. 📋
+ * 
+ * @implements {IComplianceService}
  */
-export class ComplianceServiceAdapter extends BaseService {
+export class ComplianceServiceAdapter extends BaseService implements IComplianceService {
+  /**
+   * Service name for identification
+   */
+  public readonly name: string = 'ComplianceServiceAdapter';
+
+  /**
+   * Underlying compliance service
+   */
   private complianceService: ComplianceService;
 
-  // Framework requirements mapping
+  /**
+   * Framework requirements mapping
+   * Maps compliance frameworks to their minimum security requirements
+   */
   public frameworkRequirements: Record<
     string,
     {
@@ -110,6 +130,12 @@ export class ComplianceServiceAdapter extends BaseService {
     },
   };
 
+  /**
+   * Create a new ComplianceServiceAdapter instance
+   * 
+   * @param dataProvider - Data provider for CIA options and compliance data
+   * @throws {ServiceError} If dataProvider is not provided
+   */
   constructor(dataProvider: CIADataProvider) {
     super(dataProvider);
     this.complianceService = new ComplianceService(dataProvider);
@@ -117,37 +143,70 @@ export class ComplianceServiceAdapter extends BaseService {
 
   /**
    * Get compliance status based on security levels
+   * 
+   * Evaluates compliance with all supported frameworks based on the provided
+   * security levels for availability, integrity, and confidentiality.
    *
    * @param availabilityLevel - Availability security level
    * @param integrityLevel - Integrity security level
    * @param confidentialityLevel - Confidentiality security level
-   * @returns Compliance status details
+   * @returns Compliance status details including compliant, partially compliant, and non-compliant frameworks
+   * @throws {ServiceError} If any security level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const status = adapter.getComplianceStatus('High', 'High', 'Very High');
+   * console.log(`Compliant with ${status.compliantFrameworks.length} frameworks`);
+   * ```
    */
   public getComplianceStatus(
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
   ): ComplianceStatusDetails {
-    return this.complianceService.getComplianceStatus(
-      availabilityLevel,
-      integrityLevel,
-      confidentialityLevel
-    );
+    // Validate inputs
+    this.validateSecurityLevel(availabilityLevel);
+    this.validateSecurityLevel(integrityLevel);
+    this.validateSecurityLevel(confidentialityLevel);
+
+    try {
+      return this.complianceService.getComplianceStatus(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      );
+    } catch (error) {
+      throw this.handleError(error as Error);
+    }
   }
 
   /**
    * Get compliance status text based on security levels
+   * 
+   * Returns a human-readable text description of the overall compliance status.
    *
    * @param availabilityLevel - Availability security level
-   * @param integrityLevel - Integrity security level (optional, defaults to availabilityLevel)
-   * @param confidentialityLevel - Confidentiality security level (optional, defaults to availabilityLevel)
-   * @returns Compliance status text
+   * @param integrityLevel - Integrity security level (defaults to availabilityLevel if not provided)
+   * @param confidentialityLevel - Confidentiality security level (defaults to availabilityLevel if not provided)
+   * @returns Compliance status text description
+   * @throws {ServiceError} If any security level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const statusText = adapter.getComplianceStatusText('High', 'High', 'Very High');
+   * console.log(statusText); // "Compliant with all major frameworks"
+   * ```
    */
   public getComplianceStatusText(
     availabilityLevel: SecurityLevel,
     integrityLevel: SecurityLevel = availabilityLevel,
     confidentialityLevel: SecurityLevel = availabilityLevel
   ): string {
+    // Validate inputs
+    this.validateSecurityLevel(availabilityLevel);
+    this.validateSecurityLevel(integrityLevel);
+    this.validateSecurityLevel(confidentialityLevel);
+
     if (availabilityLevel === "None") {
       return "Non-Compliant";
     } else if (availabilityLevel === "Low") {
@@ -166,12 +225,22 @@ export class ComplianceServiceAdapter extends BaseService {
   }
 
   /**
-   * Get compliant frameworks
+   * Get compliant frameworks for given security levels
+   * 
+   * Returns a list of all compliance frameworks that are fully satisfied
+   * by the provided security levels.
    *
    * @param availabilityLevel - Availability security level
-   * @param integrityLevel - Integrity security level (optional, defaults to availabilityLevel)
-   * @param confidentialityLevel - Confidentiality security level (optional, defaults to availabilityLevel)
+   * @param integrityLevel - Integrity security level (defaults to availabilityLevel if not provided)
+   * @param confidentialityLevel - Confidentiality security level (defaults to availabilityLevel if not provided)
    * @returns Array of compliant framework names
+   * @throws {ServiceError} If any security level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const frameworks = adapter.getCompliantFrameworks('High', 'High', 'Very High');
+   * console.log(`Compliant with: ${frameworks.join(', ')}`);
+   * ```
    */
   public getCompliantFrameworks(
     availabilityLevel: SecurityLevel,
@@ -191,7 +260,31 @@ export class ComplianceServiceAdapter extends BaseService {
    * @param framework - Framework name
    * @returns Framework description
    */
+  /**
+   * Get description of a compliance framework
+   * 
+   * Returns a detailed description of the specified compliance framework,
+   * explaining its purpose and scope.
+   *
+   * @param framework - Framework name (e.g., 'NIST 800-53', 'ISO 27001', 'GDPR')
+   * @returns Framework description or "No description available" if framework is unknown
+   * 
+   * @example
+   * ```typescript
+   * const desc = adapter.getFrameworkDescription('GDPR');
+   * console.log(desc); // "General Data Protection Regulation for protecting personal data in the EU"
+   * ```
+   */
   public getFrameworkDescription(framework: string): string {
+    // Input validation
+    if (!framework || typeof framework !== 'string' || framework.trim() === '') {
+      this.logOperation('warn', 'Invalid framework name provided', {
+        method: 'getFrameworkDescription',
+        framework
+      });
+      return "No description available";
+    }
+
     const frameworkDescriptions: Record<string, string> = {
       "ISO 27001":
         "Information Security Management System standard for implementing security controls",
@@ -218,13 +311,23 @@ export class ComplianceServiceAdapter extends BaseService {
   }
 
   /**
-   * Get framework status (compliant, partially-compliant, non-compliant)
+   * Get framework compliance status
+   * 
+   * Evaluates whether a specific framework's requirements are met by the given
+   * security levels.
    *
-   * @param framework - Framework name
+   * @param framework - Framework name to evaluate
    * @param availabilityLevel - Availability security level
    * @param integrityLevel - Integrity security level
    * @param confidentialityLevel - Confidentiality security level
-   * @returns Compliance status for the framework
+   * @returns Object containing status string (Compliant, Partially Compliant, or Non-Compliant)
+   * @throws {ServiceError} If any security level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const status = adapter.getFrameworkStatus('HIPAA', 'High', 'High', 'Very High');
+   * console.log(status.status); // "Compliant"
+   * ```
    */
   public getFrameworkStatus(
     framework: string,
@@ -232,30 +335,46 @@ export class ComplianceServiceAdapter extends BaseService {
     integrityLevel: SecurityLevel,
     confidentialityLevel: SecurityLevel
   ): { status: string } {
-    const statusType = this.complianceService.getFrameworkStatus(
-      framework,
-      availabilityLevel,
-      integrityLevel,
-      confidentialityLevel
-    );
+    // Validate inputs
+    this.validateSecurityLevel(availabilityLevel);
+    this.validateSecurityLevel(integrityLevel);
+    this.validateSecurityLevel(confidentialityLevel);
 
-    // Convert the status type to a format matching test expectations
-    let statusString = "";
-    switch (statusType) {
-      case "compliant":
-        statusString = "Compliant";
-        break;
-      case "partially-compliant":
-        statusString = "Partially Compliant";
-        break;
-      case "non-compliant":
-        statusString = "Non-Compliant";
-        break;
-      default:
-        statusString = "Unknown";
+    if (!framework || typeof framework !== 'string') {
+      throw createValidationError(
+        'Invalid framework name',
+        { service: this.name, method: 'getFrameworkStatus', framework }
+      );
     }
 
-    return { status: statusString };
+    try {
+      const statusType = this.complianceService.getFrameworkStatus(
+        framework,
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel
+      );
+
+      // Convert the status type to a format matching test expectations
+      let statusString = "";
+      switch (statusType) {
+        case "compliant":
+          statusString = "Compliant";
+          break;
+        case "partially-compliant":
+          statusString = "Partially Compliant";
+          break;
+        case "non-compliant":
+          statusString = "Non-Compliant";
+          break;
+        default:
+          statusString = "Unknown";
+      }
+
+      return { status: statusString };
+    } catch (error) {
+      throw this.handleError(error as Error);
+    }
   }
 
   /**
@@ -295,12 +414,24 @@ export class ComplianceServiceAdapter extends BaseService {
 
   /**
    * Get compliance gap analysis between current and required security levels
+   * 
+   * Performs a comprehensive gap analysis, identifying where the current security
+   * posture falls short of compliance framework requirements and providing
+   * actionable remediation steps.
    *
-   * @param availabilityLevel - Availability security level
-   * @param integrityLevel - Integrity security level
-   * @param confidentialityLevel - Confidentiality security level
-   * @param framework - Optional framework to analyze specifically
-   * @returns Compliance gap analysis
+   * @param availabilityLevel - Current availability security level
+   * @param integrityLevel - Current integrity security level
+   * @param confidentialityLevel - Current confidentiality security level
+   * @param framework - Optional specific framework to analyze (analyzes all if not provided)
+   * @returns Detailed gap analysis including gaps, recommendations, and compliance score
+   * @throws {ServiceError} If any security level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const gapAnalysis = adapter.getComplianceGapAnalysis('Moderate', 'Moderate', 'High', 'HIPAA');
+   * console.log(`Compliance score: ${gapAnalysis.complianceScore}%`);
+   * console.log(`Number of gaps: ${gapAnalysis.gaps.length}`);
+   * ```
    */
   public getComplianceGapAnalysis(
     availabilityLevel: SecurityLevel,
@@ -308,12 +439,21 @@ export class ComplianceServiceAdapter extends BaseService {
     confidentialityLevel: SecurityLevel,
     framework?: string
   ): ComplianceGapAnalysis {
-    return this.complianceService.getComplianceGapAnalysis(
-      availabilityLevel,
-      integrityLevel,
-      confidentialityLevel,
-      framework
-    );
+    // Validate inputs
+    this.validateSecurityLevel(availabilityLevel);
+    this.validateSecurityLevel(integrityLevel);
+    this.validateSecurityLevel(confidentialityLevel);
+
+    try {
+      return this.complianceService.getComplianceGapAnalysis(
+        availabilityLevel,
+        integrityLevel,
+        confidentialityLevel,
+        framework
+      );
+    } catch (error) {
+      throw this.handleError(error as Error);
+    }
   }
 }
 
