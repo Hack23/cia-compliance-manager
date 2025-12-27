@@ -1065,12 +1065,12 @@ The application automatically detects your platform and displays appropriate mod
 
 ### Future Enhancements
 
-Additional keyboard shortcuts are planned for future releases:
-- Security level selection (`Ctrl+1-5`)
+Additional keyboard shortcuts are defined and ready to be implemented:
+- Security level selection (`Alt+1-5`)
 - Widget navigation (`Ctrl+Shift+1-4`)
 - Comparison mode toggle (`Ctrl+M`)
-- Quick search/filter (`Ctrl+K`)
-- Export functionality (`Ctrl+E`)
+- Quick search/filter (`Ctrl+Shift+K`)
+- Export functionality (`Ctrl+Shift+E`)
 
 ## Installation
 

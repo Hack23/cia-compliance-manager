@@ -26,7 +26,10 @@ describe('keyboardUtils', () => {
   });
   describe('detectPlatform', () => {
     it('detects Mac platform via userAgentData', () => {
-      const originalUserAgentData = (navigator as any).userAgentData;
+      interface NavigatorWithUserAgentData extends Navigator {
+        userAgentData?: { platform?: string };
+      }
+      const originalUserAgentData = (navigator as NavigatorWithUserAgentData).userAgentData;
       Object.defineProperty(navigator, 'userAgentData', {
         value: { platform: 'macOS' },
         writable: true,
@@ -44,7 +47,10 @@ describe('keyboardUtils', () => {
     });
 
     it('detects Windows platform via userAgentData', () => {
-      const originalUserAgentData = (navigator as any).userAgentData;
+      interface NavigatorWithUserAgentData extends Navigator {
+        userAgentData?: { platform?: string };
+      }
+      const originalUserAgentData = (navigator as NavigatorWithUserAgentData).userAgentData;
       Object.defineProperty(navigator, 'userAgentData', {
         value: { platform: 'Windows' },
         writable: true,
@@ -62,7 +68,10 @@ describe('keyboardUtils', () => {
     });
 
     it('detects Linux platform via userAgentData', () => {
-      const originalUserAgentData = (navigator as any).userAgentData;
+      interface NavigatorWithUserAgentData extends Navigator {
+        userAgentData?: { platform?: string };
+      }
+      const originalUserAgentData = (navigator as NavigatorWithUserAgentData).userAgentData;
       Object.defineProperty(navigator, 'userAgentData', {
         value: { platform: 'Linux' },
         writable: true,

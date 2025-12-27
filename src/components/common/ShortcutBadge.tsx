@@ -71,4 +71,6 @@ export const ShortcutBadge: React.FC<ShortcutBadgeProps> = React.memo(({
   );
 });
 
+ShortcutBadge.displayName = 'ShortcutBadge';
+
 export default ShortcutBadge;
