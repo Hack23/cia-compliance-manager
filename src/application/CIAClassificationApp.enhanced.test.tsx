@@ -1,3 +1,5 @@
+import React from "react";
+import { KeyboardShortcutProvider } from "../contexts/KeyboardShortcutContext";
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import CIAClassificationApp from "./CIAClassificationApp";
@@ -93,6 +95,15 @@ vi.mock("../components/widgets/SecuritySummaryWidget", () => ({
   ),
 }));
 
+// Helper to render with keyboard shortcut provider
+const renderWithProviders = (ui: React.ReactElement) => {
+  return render(
+    <KeyboardShortcutProvider>
+      {ui}
+    </KeyboardShortcutProvider>
+  );
+};
+
 describe("CIAClassificationApp", () => {
   // Setup before each test
   beforeEach(() => {
@@ -114,20 +125,20 @@ describe("CIAClassificationApp", () => {
 
   // Basic tests that don't depend on DOM complexity
   it("renders without crashing", () => {
-    render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
     expect(screen.getByText(/CIA Compliance Manager/i)).toBeInTheDocument();
     // Find dashboard grid by its actual test id
     expect(screen.getByTestId("dashboard-grid")).toBeInTheDocument();
   });
 
   it("renders app title", () => {
-    render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
     const titleElement = screen.getByText(/CIA Compliance Manager/i);
     expect(titleElement).toBeInTheDocument();
   });
 
   it("renders theme toggle button", () => {
-    render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
     // Fix the selector to match actual text
     const themeButton = screen.getByText(/🌙 Dark|☀️ Light/);
     expect(themeButton).toBeInTheDocument();
@@ -136,7 +147,7 @@ describe("CIAClassificationApp", () => {
   // For the failing tests, simplify them to check just the basics
   it("updates security levels when widget changes values", () => {
     // Create a custom event that the component listens for
-    const { container } = render(<CIAClassificationApp />);
+    const { container } = renderWithProviders(<CIAClassificationApp />);
 
     // Ensure the component is rendered
     expect(container).toBeInTheDocument();
@@ -149,7 +160,7 @@ describe("CIAClassificationApp", () => {
   it("listens for test events to set security levels", () => {
     // Setup test
     vi.useFakeTimers();
-    render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
 
     // Create a custom event with security levels
     const testEvent = new CustomEvent("cia-test-set-levels", {
@@ -179,7 +190,7 @@ describe("CIAClassificationApp", () => {
   });
 
   it("calculates overall security level correctly", () => {
-    render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
     // Look for dashboard-grid instead of mocked-dashboard
     expect(screen.getByTestId("dashboard-grid")).toBeInTheDocument();
   });
@@ -188,7 +199,7 @@ describe("CIAClassificationApp", () => {
     // This is also difficult to test thoroughly without mocking the global
     // addEventListener and removeEventListener methods
 
-    const { unmount } = render(<CIAClassificationApp />);
+    const { unmount } = renderWithProviders(<CIAClassificationApp />);
     unmount();
 
     // If the test gets here without errors, it passed

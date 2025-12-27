@@ -226,3 +226,9 @@ export const { toErrorObject, formatError } = errorUtils;
 
 // Other exports
 export { BUSINESS_IMPACT_CATEGORIES, calculateRiskLevel, RISK_LEVELS };
+
+// Keyboard utilities
+// Note: Internal utilities like `resetPlatformCache()` are marked @internal
+// and should be imported directly from "./keyboardUtils" in tests/internal modules
+// to avoid exposing them as part of the public API surface.
+export * from "./keyboardUtils";

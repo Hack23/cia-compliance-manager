@@ -111,3 +111,15 @@ export {
 
 // Type guards for better type safety
 export { isCIAComponentType } from "./cia-services";
+
+// Keyboard shortcut types
+export type {
+  KeyboardShortcut,
+  KeyboardShortcutContextValue,
+  KeyboardShortcutHelpProps,
+  Platform,
+  ShortcutBadgeProps,
+  ShortcutCategory,
+  ShortcutMap,
+  UseKeyboardShortcutsOptions,
+} from './keyboard';

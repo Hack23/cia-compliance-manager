@@ -54,3 +54,6 @@ export { WIDGET_ICONS, WIDGET_TITLES } from "./appConstants";
 
 // Re-export design tokens for consistent styling
 export * from "./designTokens";
+
+// Re-export keyboard shortcut constants
+export * from "./keyboardShortcuts";

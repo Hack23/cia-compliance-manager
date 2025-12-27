@@ -1038,6 +1038,40 @@ The application offers several widgets to help manage and visualize security con
 - **BusinessImpactAnalysisWidget**: Analyzes business impact of security controls
 - **SecurityResourcesWidget**: Shows resources relevant to security implementation
 
+## ⌨️ Keyboard Shortcuts
+
+The CIA Compliance Manager supports keyboard shortcuts to improve productivity and accessibility for power users.
+
+### Available Shortcuts
+
+| **Shortcut** | **Action** | **Category** |
+|--------------|------------|--------------|
+| `?` or `Ctrl+/` | Show keyboard shortcuts help | Help |
+| `Escape` | Close modals and dialogs | General |
+
+**Note:** Cmd (⌘) is used instead of Ctrl on macOS systems for platform consistency.
+
+### Accessing Keyboard Shortcuts
+
+- Click the **⌨️ Shortcuts** button in the application header
+- Press `?` or `Ctrl+/` (`Cmd+/` on Mac) to open the keyboard shortcuts help modal
+- The help modal displays all available shortcuts grouped by category
+
+### Platform-Specific Behavior
+
+The application automatically detects your platform and displays appropriate modifier keys:
+- **Windows/Linux**: Displays `Ctrl`, `Alt`, `Shift`
+- **macOS**: Displays `⌘` (Command), `⌥` (Option), `⇧` (Shift)
+
+### Future Enhancements
+
+Additional keyboard shortcuts are defined and ready to be implemented:
+- Security level selection (`Alt+1-5`)
+- Widget navigation (`Ctrl+Shift+1-4`)
+- Comparison mode toggle (`Ctrl+M`)
+- Quick search/filter (`Ctrl+Shift+K`)
+- Export functionality (`Ctrl+Shift+E`)
+
 ## Installation
 
 ### `npm start`

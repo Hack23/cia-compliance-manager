@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, lazy, Suspense } from "react";
+import React, { useCallback, useEffect, lazy, Suspense, useMemo } from "react";
 // Import widgets directly instead of Dashboard
 import BusinessImpactAnalysisWidget from "../components/widgets/assessmentcenter/BusinessImpactAnalysisWidget";
 import SecurityLevelWidget from "../components/widgets/assessmentcenter/SecurityLevelWidget";
@@ -18,9 +18,14 @@ const SecurityVisualizationWidget = lazy(
 );
 
 import WidgetErrorBoundary from "../components/common/WidgetErrorBoundary";
+import KeyboardShortcutHelp from "../components/common/KeyboardShortcutHelp";
 import { APP_TEST_IDS, UI_TEXT } from "../constants";
+import { KEYBOARD_SHORTCUTS } from "../constants/keyboardShortcuts";
 import { useSecurityLevelState, useLocalStorage, SecurityLevelState } from "../hooks";
+import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
+import { useKeyboardShortcutContext } from "../contexts/KeyboardShortcutContext";
 import { SecurityLevel } from "../types/cia";
+import { ShortcutMap } from "../types/keyboard";
 import logger from "../utils/logger";
 
 /**
@@ -34,6 +39,9 @@ import logger from "../utils/logger";
  */
 const CIAClassificationApp: React.FC = () => {
   const appVersion = APP_VERSION;
+  
+  // Get keyboard shortcut context
+  const { showHelp, setShowHelp } = useKeyboardShortcutContext();
 
   // Use custom hooks for security level state management with localStorage persistence
   const defaultLevels: SecurityLevelState = {
@@ -103,6 +111,29 @@ const CIAClassificationApp: React.FC = () => {
   const handleWidgetError = useCallback((error: Error, errorInfo: React.ErrorInfo) => {
     logger.error('Widget error caught by error boundary', { error, errorInfo });
   }, []);
+  
+  // Register keyboard shortcuts
+  const shortcuts: ShortcutMap = useMemo(() => ({
+    // Show help
+    [KEYBOARD_SHORTCUTS.SHOW_HELP.id]: {
+      ...KEYBOARD_SHORTCUTS.SHOW_HELP,
+      handler: () => setShowHelp(true),
+    },
+    [KEYBOARD_SHORTCUTS.SHOW_HELP_ALT.id]: {
+      ...KEYBOARD_SHORTCUTS.SHOW_HELP_ALT,
+      handler: () => setShowHelp(true),
+    },
+    // Security level selection shortcuts (future enhancement)
+    // Navigation shortcuts (future enhancement)
+    // Action shortcuts (future enhancement)
+  }), [setShowHelp]);
+  
+  // Use keyboard shortcuts hook
+  useKeyboardShortcuts({
+    shortcuts,
+    enabled: true,
+    preventDefault: true,
+  });
 
   // Apply dark mode class
   useEffect(() => {
@@ -184,13 +215,23 @@ const CIAClassificationApp: React.FC = () => {
             </div>
           </div>
 
-          <button
-            onClick={toggleDarkMode}
-            className="theme-toggle-btn"
-            data-testid="theme-toggle"
-          >
-            {darkMode ? "☀️ Light" : "🌙 Dark"}
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setShowHelp(true)}
+              className="px-2 py-1 text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded transition-colors"
+              title="Keyboard Shortcuts (? or Ctrl+/)"
+              data-testid="keyboard-shortcuts-button"
+            >
+              ⌨️ Shortcuts
+            </button>
+            <button
+              onClick={toggleDarkMode}
+              className="theme-toggle-btn"
+              data-testid="theme-toggle"
+            >
+              {darkMode ? "☀️ Light" : "🌙 Dark"}
+            </button>
+          </div>
         </div>
 
         {/* Container with defined width to ensure grid fits properly */}
@@ -351,6 +392,12 @@ const CIAClassificationApp: React.FC = () => {
             </div>
           </div>
         </div>
+        
+        {/* Keyboard Shortcut Help Modal */}
+        <KeyboardShortcutHelp
+          isOpen={showHelp}
+          onClose={() => setShowHelp(false)}
+        />
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+import React from "react";
+import { KeyboardShortcutProvider } from "../contexts/KeyboardShortcutContext";
 // Define mocks at the top of the file, before imports
 vi.mock("./hooks/useCIAOptions", () => {
   return {
@@ -130,9 +132,18 @@ vi.mock("./components/widgets/SecurityLevelWidget", () => ({
 // Add mocks for other widgets (similar to CIAClassificationApp.test.tsx)
 // ...
 
+// Helper to render with keyboard shortcut provider
+const renderWithProviders = (ui: React.ReactElement) => {
+  return render(
+    <KeyboardShortcutProvider>
+      {ui}
+    </KeyboardShortcutProvider>
+  );
+};
+
 describe("CIAClassificationApp Component Direct Tests", () => {
   it("renders basic structure correctly", () => {
-    render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
 
     // Check for app title
     expect(screen.getByTestId("app-title")).toBeInTheDocument();
@@ -148,7 +159,7 @@ describe("CIAClassificationApp Component Direct Tests", () => {
   });
 
   it("shows security level section", () => {
-    render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
 
     // Look for the widget container
     const securityLevelWidget = screen.getByTestId(

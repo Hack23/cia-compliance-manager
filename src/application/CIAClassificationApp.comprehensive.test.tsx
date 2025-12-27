@@ -57,9 +57,20 @@ vi.mock("../components/dashboard/Dashboard", () => ({
 }));
 
 // Import components after mocks
+import React from "react";
 import { act, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import CIAClassificationApp from "./CIAClassificationApp";
+import { KeyboardShortcutProvider } from "../contexts/KeyboardShortcutContext";
+
+// Helper to render with keyboard shortcut provider
+const renderWithProviders = (ui: React.ReactElement) => {
+  return render(
+    <KeyboardShortcutProvider>
+      {ui}
+    </KeyboardShortcutProvider>
+  );
+};
 
 // Define proper test IDs that match the actual component
 const TEST_IDS = {
@@ -105,7 +116,7 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
   });
 
   it("renders application structure with header and dashboard", () => {
-    const { container } = render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
 
     // Instead of looking for test IDs that may not exist, check for elements by content and class
     const appTitle = screen.getByText(/CIA Compliance Manager/i);
@@ -120,7 +131,7 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
   });
 
   it("toggles theme when theme button is clicked", () => {
-    render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
 
     // Find the theme toggle button by its text content - use the actual text that's displayed
     const themeToggleButton = screen.getByText(/☀️ Light|🌙 Dark/);
@@ -128,7 +139,7 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
   });
 
   it("handles test event to set security levels", () => {
-    render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
 
     // Look for the dashboard grid instead of app container
     expect(screen.getByTestId(TEST_IDS.DASHBOARD_GRID)).toBeInTheDocument();
@@ -138,7 +149,7 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
     // Mock localStorage to return 'dark'
     vi.spyOn(window.localStorage, "getItem").mockReturnValueOnce("dark");
 
-    render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
 
     // Dark mode should be applied on load
     expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
@@ -156,7 +167,7 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
       writable: true,
     });
 
-    render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
 
     // Dark mode should be applied based on system preference
     expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
@@ -180,7 +191,7 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
 
     // Use act to ensure all state updates are processed
     await act(async () => {
-      render(<CIAClassificationApp />);
+      renderWithProviders(<CIAClassificationApp />);
       // Small delay to allow for any asynchronous operations
       await new Promise((resolve) => setTimeout(resolve, 10));
     });
@@ -194,7 +205,7 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
   });
 
   it("cleans up event listeners on unmount", () => {
-    const { unmount } = render(<CIAClassificationApp />);
+    const { unmount } = renderWithProviders(<CIAClassificationApp />);
 
     // Just verify unmount doesn't throw an error
     unmount();

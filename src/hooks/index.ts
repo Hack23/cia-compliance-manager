@@ -44,3 +44,7 @@ export type { ServiceDataState } from "./useServiceData";
 
 // Storage Hooks
 export { useLocalStorage } from "./useLocalStorage";
+
+// Keyboard Shortcuts Hooks
+export { useKeyboardShortcuts } from "./useKeyboardShortcuts";
+export type { UseKeyboardShortcutsOptions } from "../types/keyboard";
