@@ -15,6 +15,9 @@ import {
 /**
  * Detect the current platform
  * 
+ * Uses modern navigator.userAgentData when available, with fallback to
+ * deprecated navigator.platform for older browsers.
+ * 
  * @returns The detected platform
  */
 export function detectPlatform(): Platform {
@@ -22,6 +25,22 @@ export function detectPlatform(): Platform {
     return 'unknown';
   }
   
+  // Use modern userAgentData API if available
+  if ('userAgentData' in navigator && (navigator as any).userAgentData?.platform) {
+    const platform = (navigator as any).userAgentData.platform.toUpperCase();
+    
+    if (platform.indexOf(PLATFORM_DETECTION.MAC) >= 0) {
+      return 'mac';
+    }
+    if (platform.indexOf(PLATFORM_DETECTION.WINDOWS) >= 0) {
+      return 'windows';
+    }
+    if (platform.indexOf(PLATFORM_DETECTION.LINUX) >= 0) {
+      return 'linux';
+    }
+  }
+  
+  // Fallback to deprecated platform property for older browsers
   const platform = window.navigator.platform.toUpperCase();
   
   if (platform.indexOf(PLATFORM_DETECTION.MAC) >= 0) {
@@ -47,22 +66,7 @@ export function getPlatformModifier(): 'cmd' | 'ctrl' {
   return platform === 'mac' ? 'cmd' : 'ctrl';
 }
 
-/**
- * Parse keyboard event into structured information
- * 
- * @param event - The keyboard event
- * @returns Structured keyboard event info
- */
-export function parseKeyboardEvent(event: KeyboardEvent): KeyboardEventInfo {
-  return {
-    key: event.key,
-    ctrl: event.ctrlKey,
-    shift: event.shiftKey,
-    alt: event.altKey,
-    meta: event.metaKey,
-    originalEvent: event,
-  };
-}
+
 
 /**
  * Get key combination string from keyboard event
@@ -99,16 +103,41 @@ export function getKeyCombination(event: KeyboardEvent): string {
 /**
  * Normalize shortcut string for comparison
  * 
+ * Maintains the canonical modifier key order (ctrl, cmd, shift, alt)
+ * to ensure consistent matching with getKeyCombination output.
+ * 
  * @param shortcut - The shortcut string (e.g., 'Ctrl+K', 'cmd+k')
  * @returns Normalized shortcut string
  */
 export function normalizeShortcut(shortcut: string): string {
-  return shortcut
+  const modifierOrder: string[] = ['ctrl', 'cmd', 'shift', 'alt'];
+
+  const parts: string[] = shortcut
     .toLowerCase()
     .split('+')
-    .map(part => part.trim())
-    .sort()
-    .join('+');
+    .map((part: string) => part.trim())
+    .filter((part: string) => part.length > 0);
+
+  const modifiers: string[] = [];
+  const others: string[] = [];
+
+  for (const part of parts) {
+    if (modifierOrder.includes(part)) {
+      modifiers.push(part);
+    } else {
+      others.push(part);
+    }
+  }
+
+  // Ensure modifiers follow the same canonical order as getKeyCombination
+  const orderedModifiers: string[] = modifierOrder.filter(
+    (modifier: string) => modifiers.includes(modifier),
+  );
+
+  // Sort non-modifier keys for determinism; typically there is only one main key
+  const orderedOthers: string[] = [...others].sort();
+
+  return [...orderedModifiers, ...orderedOthers].join('+');
 }
 
 /**

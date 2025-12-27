@@ -2,7 +2,7 @@
  * Tests for keyboard utilities
  */
 
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import {
   detectPlatform,
   getPlatformModifier,
@@ -164,8 +164,9 @@ describe('keyboardUtils', () => {
       expect(normalizeShortcut('Ctrl+K')).toBe('ctrl+k');
     });
 
-    it('sorts modifier keys consistently', () => {
-      expect(normalizeShortcut('k+shift+ctrl')).toBe('ctrl+k+shift');
+    it('sorts modifier keys consistently in canonical order', () => {
+      // Should maintain ctrl, cmd, shift, alt order
+      expect(normalizeShortcut('k+shift+ctrl')).toBe('ctrl+shift+k');
     });
 
     it('trims whitespace', () => {

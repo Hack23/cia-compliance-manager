@@ -42,6 +42,9 @@ export const KeyboardShortcutHelp: React.FC<KeyboardShortcutHelpProps> = ({
   }, [shortcuts]);
 
   // Handle Escape key to close modal
+  // Note: This local handler coexists with the global keyboard shortcut handler.
+  // The Escape key is marked as a bypass key in BYPASS_INPUT_CHECK_KEYS, ensuring
+  // it works correctly in both contexts without conflicts.
   useEffect(() => {
     if (!isOpen) return;
 

@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, afterEach } from 'vitest';
 import { ShortcutBadge } from './ShortcutBadge';
 import { KEYBOARD_TEST_IDS } from '../../constants/keyboardShortcuts';
 

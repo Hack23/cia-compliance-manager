@@ -116,7 +116,7 @@ describe("CIAClassificationApp Comprehensive Tests", () => {
   });
 
   it("renders application structure with header and dashboard", () => {
-    const { container } = renderWithProviders(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
 
     // Instead of looking for test IDs that may not exist, check for elements by content and class
     const appTitle = screen.getByText(/CIA Compliance Manager/i);

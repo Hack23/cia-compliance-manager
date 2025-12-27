@@ -226,3 +226,6 @@ export const { toErrorObject, formatError } = errorUtils;
 
 // Other exports
 export { BUSINESS_IMPACT_CATEGORIES, calculateRiskLevel, RISK_LEVELS };
+
+// Keyboard utilities
+export * from "./keyboardUtils";

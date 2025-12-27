@@ -95,7 +95,7 @@ export const KEYBOARD_SHORTCUTS = {
   },
   SHOW_HELP: {
     id: 'show-help',
-    keys: '?',
+    keys: 'shift+/',
     description: 'Show keyboard shortcuts',
     category: 'Help' as ShortcutCategory,
   },
