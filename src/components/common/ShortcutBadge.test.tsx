@@ -82,6 +82,7 @@ describe('ShortcutBadge', () => {
       writable: true,
       configurable: true,
     });
+    resetPlatformCache(); // Reset cache after setting platform
 
     render(<ShortcutBadge shortcut="ctrl+k" platformSpecific={true} />);
     
@@ -95,6 +96,7 @@ describe('ShortcutBadge', () => {
       writable: true,
       configurable: true,
     });
+    resetPlatformCache(); // Reset cache after setting platform
 
     render(<ShortcutBadge shortcut="ctrl+k" platformSpecific={false} />);
     

@@ -23,11 +23,8 @@ export const ShortcutBadge: React.FC<ShortcutBadgeProps> = ({
   className = '',
   platformSpecific = true,
 }) => {
-  // Memoize platform detection for performance
-  const platform = React.useMemo(
-    () => (platformSpecific ? detectPlatform() : 'windows'),
-    [platformSpecific],
-  );
+  // detectPlatform is already cached at module level
+  const platform = platformSpecific ? detectPlatform() : 'windows';
   const keys = splitShortcutKeys(shortcut, platform);
 
   // Size classes

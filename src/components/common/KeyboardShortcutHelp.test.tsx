@@ -190,8 +190,6 @@ describe('KeyboardShortcutHelp', () => {
     );
 
     const event = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
-    const preventDefaultSpy = vi.spyOn(event, 'preventDefault');
-    const stopPropagationSpy = vi.spyOn(event, 'stopPropagation');
     
     window.dispatchEvent(event);
 

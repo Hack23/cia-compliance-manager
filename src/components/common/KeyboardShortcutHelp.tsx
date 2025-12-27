@@ -64,8 +64,10 @@ export const KeyboardShortcutHelp: React.FC<KeyboardShortcutHelpProps> = ({
   useEffect(() => {
     if (!isOpen) return;
 
+    let cleanup: (() => void) | undefined;
+
     // Use requestAnimationFrame to ensure modal is in DOM
-    const setupFocusTrap = () => {
+    const rafId = requestAnimationFrame(() => {
       const modal = document.querySelector('[role="dialog"]');
       if (!modal) return;
 
@@ -91,11 +93,13 @@ export const KeyboardShortcutHelp: React.FC<KeyboardShortcutHelpProps> = ({
       modal.addEventListener('keydown', handleTab as EventListener);
       firstElement?.focus();
 
-      return () => modal.removeEventListener('keydown', handleTab as EventListener);
-    };
+      cleanup = () => modal.removeEventListener('keydown', handleTab as EventListener);
+    });
 
-    const rafId = requestAnimationFrame(setupFocusTrap);
-    return () => cancelAnimationFrame(rafId);
+    return () => {
+      cancelAnimationFrame(rafId);
+      cleanup?.();
+    };
   }, [isOpen]);
 
   if (!isOpen) return null;

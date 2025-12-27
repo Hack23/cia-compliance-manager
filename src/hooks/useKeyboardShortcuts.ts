@@ -117,14 +117,7 @@ export function useKeyboardShortcuts(options: UseKeyboardShortcutsOptions): void
       return;
     }
 
-    logger.debug('Registering keyboard shortcuts', {
-      count: Object.keys(shortcuts).length,
-      shortcuts: Object.values(shortcuts).map(s => ({
-        id: s.id,
-        keys: s.keys,
-        description: s.description,
-      })),
-    });
+    logger.debug('Registering keyboard shortcuts');
 
     window.addEventListener('keydown', handleKeyDown);
 
