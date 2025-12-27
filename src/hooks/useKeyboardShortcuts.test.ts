@@ -8,10 +8,10 @@ import { useKeyboardShortcuts } from './useKeyboardShortcuts';
 import { ShortcutMap } from '../types/keyboard';
 
 describe('useKeyboardShortcuts', () => {
-  let mockHandler: ReturnType<typeof vi.fn>;
+  let mockHandler: () => void;
 
   beforeEach(() => {
-    mockHandler = vi.fn();
+    mockHandler = vi.fn() as () => void;
   });
 
   it('registers keyboard event listener when enabled', () => {
@@ -236,8 +236,8 @@ describe('useKeyboardShortcuts', () => {
   });
 
   it('handles multiple shortcuts', () => {
-    const handler1 = vi.fn();
-    const handler2 = vi.fn();
+    const handler1 = vi.fn() as () => void;
+    const handler2 = vi.fn() as () => void;
 
     const shortcuts: ShortcutMap = {
       test1: {

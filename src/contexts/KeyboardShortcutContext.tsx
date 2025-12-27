@@ -47,7 +47,7 @@ export function KeyboardShortcutProvider({
   children,
   initialShortcuts = {},
   defaultEnabled = true,
-}: KeyboardShortcutProviderProps): JSX.Element {
+}: KeyboardShortcutProviderProps): React.ReactElement {
   const [shortcuts, setShortcuts] = useState<ShortcutMap>(initialShortcuts);
   const [isEnabled, setIsEnabled] = useState<boolean>(defaultEnabled);
   const [showHelp, setShowHelp] = useState<boolean>(false);

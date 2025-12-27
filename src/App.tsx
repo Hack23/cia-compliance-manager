@@ -1,5 +1,6 @@
 import "./App.css"; // Keep the import to avoid build errors
 import CIAClassificationApp from "./application/CIAClassificationApp";
+import { KeyboardShortcutProvider } from "./contexts/KeyboardShortcutContext";
 import { APP_TEST_IDS } from "./constants/testIds";
 
 /**
@@ -24,9 +25,11 @@ import { APP_TEST_IDS } from "./constants/testIds";
  */
 function App() {
   return (
-    <div className="app-container" data-testid={APP_TEST_IDS.APP_CONTAINER}>
-      <CIAClassificationApp />
-    </div>
+    <KeyboardShortcutProvider>
+      <div className="app-container" data-testid={APP_TEST_IDS.APP_CONTAINER}>
+        <CIAClassificationApp />
+      </div>
+    </KeyboardShortcutProvider>
   );
 }
 
