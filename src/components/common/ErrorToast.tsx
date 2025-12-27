@@ -153,9 +153,7 @@ export const ErrorToast: React.FC<ErrorToastProps> = ({
 
       return () => clearTimeout(timer);
     }
-    
-    // Return empty cleanup function if not setting timer
-    return () => {};
+    return undefined;
   }, [isVisible, autoHideDuration]);
 
   const handleDismiss = (): void => {

@@ -156,7 +156,8 @@ export class ErrorService {
         });
     }
 
-    // In production, this would send to a monitoring service (e.g., Sentry)
+    // TODO: Integrate with external monitoring service (e.g., Sentry, LogRocket)
+    // See docs/ERROR_HANDLING.md for future enhancement plan
     // this.sendToMonitoring(logEntry);
   }
 

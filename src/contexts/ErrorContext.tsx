@@ -144,7 +144,7 @@ export const ErrorProvider: React.FC<ErrorProviderProps> = ({
    * Generate unique error ID
    */
   const generateErrorId = (): string => {
-    return `error-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    return `error-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
   };
 
   /**
