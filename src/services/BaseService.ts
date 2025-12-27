@@ -437,7 +437,7 @@ export class BaseService implements CIAService, IBaseService {
     key: string,
     fallback: T
   ): T {
-    if (!obj || !obj[key]) {
+    if (!obj || !(key in obj)) {
       return fallback;
     }
     return obj[key];
