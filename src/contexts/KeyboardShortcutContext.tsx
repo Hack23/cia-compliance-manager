@@ -51,7 +51,10 @@ export function KeyboardShortcutProvider({
   const [shortcuts, setShortcuts] = useState<ShortcutMap>(initialShortcuts);
   const [isEnabled, setIsEnabled] = useState<boolean>(defaultEnabled);
   const [showHelp, setShowHelp] = useState<boolean>(false);
-  const [platform] = useState<Platform>(detectPlatform());
+  
+  // Platform detection is cached at module level, so we can use useMemo
+  // instead of state to avoid unnecessary state slot
+  const platform = React.useMemo(() => detectPlatform(), []);
 
   /**
    * Register a new keyboard shortcut

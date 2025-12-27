@@ -217,7 +217,7 @@ describe('KeyboardShortcutHelp', () => {
       </KeyboardShortcutProvider>
     );
 
-    const backdrop = screen.getByRole('button', { name: /close keyboard shortcuts dialog/i });
+    const backdrop = screen.getByLabelText(/close keyboard shortcuts dialog/i);
     expect(backdrop).toBeInTheDocument();
   });
 });

@@ -25,6 +25,60 @@ describe('keyboardUtils', () => {
     resetPlatformCache();
   });
   describe('detectPlatform', () => {
+    it('detects Mac platform via userAgentData', () => {
+      const originalUserAgentData = (navigator as any).userAgentData;
+      Object.defineProperty(navigator, 'userAgentData', {
+        value: { platform: 'macOS' },
+        writable: true,
+        configurable: true,
+      });
+      resetPlatformCache();
+      
+      expect(detectPlatform()).toBe('mac');
+      
+      Object.defineProperty(navigator, 'userAgentData', {
+        value: originalUserAgentData,
+        writable: true,
+        configurable: true,
+      });
+    });
+
+    it('detects Windows platform via userAgentData', () => {
+      const originalUserAgentData = (navigator as any).userAgentData;
+      Object.defineProperty(navigator, 'userAgentData', {
+        value: { platform: 'Windows' },
+        writable: true,
+        configurable: true,
+      });
+      resetPlatformCache();
+      
+      expect(detectPlatform()).toBe('windows');
+      
+      Object.defineProperty(navigator, 'userAgentData', {
+        value: originalUserAgentData,
+        writable: true,
+        configurable: true,
+      });
+    });
+
+    it('detects Linux platform via userAgentData', () => {
+      const originalUserAgentData = (navigator as any).userAgentData;
+      Object.defineProperty(navigator, 'userAgentData', {
+        value: { platform: 'Linux' },
+        writable: true,
+        configurable: true,
+      });
+      resetPlatformCache();
+      
+      expect(detectPlatform()).toBe('linux');
+      
+      Object.defineProperty(navigator, 'userAgentData', {
+        value: originalUserAgentData,
+        writable: true,
+        configurable: true,
+      });
+    });
+
     it('detects Mac platform', () => {
       const originalPlatform = window.navigator.platform;
       Object.defineProperty(window.navigator, 'platform', {

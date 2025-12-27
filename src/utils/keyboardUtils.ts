@@ -116,10 +116,18 @@ export function getPlatformModifier(): 'cmd' | 'ctrl' {
  */
 export function getKeyCombination(event: KeyboardEvent): string {
   const parts: string[] = [];
+  const platform: Platform = detectPlatform();
   
   // Add modifiers in consistent order
   if (event.ctrlKey) parts.push('ctrl');
-  if (event.metaKey && detectPlatform() === 'mac') parts.push('cmd');
+  if (event.metaKey) {
+    // On Mac, metaKey is Command key; on Windows/Linux, it's Windows/Super key
+    if (platform === 'mac') {
+      parts.push('cmd');
+    } else {
+      parts.push('meta');
+    }
+  }
   if (event.shiftKey) parts.push('shift');
   if (event.altKey) parts.push('alt');
   

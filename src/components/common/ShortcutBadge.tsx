@@ -9,6 +9,13 @@ import { ShortcutBadgeProps } from '../../types/keyboard';
 import { splitShortcutKeys, detectPlatform } from '../../utils/keyboardUtils';
 import { KEYBOARD_TEST_IDS } from '../../constants/keyboardShortcuts';
 
+// Size classes defined outside component to avoid recreation on each render
+const SIZE_CLASSES = {
+  sm: 'px-1.5 py-0.5 text-xs',
+  md: 'px-2 py-1 text-sm',
+  lg: 'px-2.5 py-1.5 text-base',
+} as const;
+
 /**
  * ShortcutBadge component displays a visual representation of a keyboard shortcut
  * 
@@ -27,13 +34,6 @@ export const ShortcutBadge: React.FC<ShortcutBadgeProps> = ({
   const platform = platformSpecific ? detectPlatform() : 'windows';
   const keys = splitShortcutKeys(shortcut, platform);
 
-  // Size classes
-  const sizeClasses = {
-    sm: 'px-1.5 py-0.5 text-xs',
-    md: 'px-2 py-1 text-sm',
-    lg: 'px-2.5 py-1.5 text-base',
-  };
-
   return (
     <span
       className={`inline-flex items-center gap-0.5 ${className}`}
@@ -44,7 +44,7 @@ export const ShortcutBadge: React.FC<ShortcutBadgeProps> = ({
         <React.Fragment key={index}>
           <kbd
             className={`
-              ${sizeClasses[size]}
+              ${SIZE_CLASSES[size]}
               font-mono font-semibold
               bg-gray-100 dark:bg-gray-700
               text-gray-700 dark:text-gray-300

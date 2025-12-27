@@ -58,29 +58,6 @@ export interface KeyboardShortcut {
 export type ShortcutMap = Record<string, KeyboardShortcut>;
 
 /**
- * Keyboard event information
- */
-export interface KeyboardEventInfo {
-  /** Key pressed */
-  key: string;
-  
-  /** Whether Ctrl/Cmd was pressed */
-  ctrl: boolean;
-  
-  /** Whether Shift was pressed */
-  shift: boolean;
-  
-  /** Whether Alt was pressed */
-  alt: boolean;
-  
-  /** Whether Meta/Cmd was pressed */
-  meta: boolean;
-  
-  /** The original keyboard event */
-  originalEvent: KeyboardEvent;
-}
-
-/**
  * Props for keyboard shortcut hook
  */
 export interface UseKeyboardShortcutsOptions {
@@ -164,29 +141,24 @@ export interface GroupedShortcuts {
   [category: string]: KeyboardShortcut[];
 }
 
-/**
- * Shortcut action types for security level selection
- */
-export type SecurityLevelShortcutAction = {
-  component: CIAComponent;
-  level: SecurityLevel;
-};
-
-/**
- * Shortcut action types for navigation
- */
-export type NavigationShortcutAction = 
-  | 'assessment-center'
-  | 'business-value'
-  | 'impact-analysis'
-  | 'implementation-guide';
-
-/**
- * Shortcut action types for general actions
- */
-export type GeneralShortcutAction = 
-  | 'toggle-comparison'
-  | 'export-data'
-  | 'quick-search'
-  | 'show-help'
-  | 'close-modal';
+// TODO: Future types for v1.1+ feature expansion
+// These will be used when implementing additional keyboard shortcuts
+// for security level selection, navigation, and general actions
+//
+// export type SecurityLevelShortcutAction = {
+//   component: CIAComponent;
+//   level: SecurityLevel;
+// };
+//
+// export type NavigationShortcutAction = 
+//   | 'assessment-center'
+//   | 'business-value'
+//   | 'impact-analysis'
+//   | 'implementation-guide';
+//
+// export type GeneralShortcutAction = 
+//   | 'toggle-comparison'
+//   | 'export-data'
+//   | 'quick-search'
+//   | 'show-help'
+//   | 'close-modal';
