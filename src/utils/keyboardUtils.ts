@@ -183,7 +183,10 @@ export function splitShortcutKeys(keys: string, platform?: Platform): string[] {
  * @param element - DOM element to check
  * @returns True if element is an input
  */
-export function isInputElement(element: Element): boolean {
+export function isInputElement(element: Element | null): boolean {
+  if (!element || !element.tagName) {
+    return false;
+  }
   const tagName = element.tagName.toUpperCase();
   return INPUT_ELEMENT_TAGS.includes(tagName as typeof INPUT_ELEMENT_TAGS[number]);
 }
@@ -195,7 +198,7 @@ export function isInputElement(element: Element): boolean {
  * @returns True if event should be ignored
  */
 export function shouldIgnoreKeyboardEvent(event: KeyboardEvent): boolean {
-  const target = event.target as Element;
+  const target = event.target as Element | null;
   
   // Check if key should bypass input check (e.g., Escape)
   if (BYPASS_INPUT_CHECK_KEYS.includes(event.key as typeof BYPASS_INPUT_CHECK_KEYS[number])) {
@@ -208,7 +211,7 @@ export function shouldIgnoreKeyboardEvent(event: KeyboardEvent): boolean {
   }
   
   // Ignore if contenteditable
-  if (target && target.getAttribute('contenteditable') === 'true') {
+  if (target && target.getAttribute && target.getAttribute('contenteditable') === 'true') {
     return true;
   }
   
