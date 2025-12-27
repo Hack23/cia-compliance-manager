@@ -132,5 +132,5 @@ export function useKeyboardShortcuts(options: UseKeyboardShortcutsOptions): void
       logger.debug('Unregistering keyboard shortcuts');
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [enabled, handleKeyDown, shortcuts]);
+  }, [enabled, handleKeyDown]);
 }

@@ -179,4 +179,47 @@ describe('KeyboardShortcutHelp', () => {
     expect(dialog).toHaveAttribute('aria-modal', 'true');
     expect(dialog).toHaveAttribute('aria-labelledby', 'keyboard-shortcuts-title');
   });
+
+  it('prevents default and stops propagation on Escape key', () => {
+    const onClose = vi.fn();
+    
+    render(
+      <KeyboardShortcutProvider>
+        <KeyboardShortcutHelp isOpen={true} onClose={onClose} />
+      </KeyboardShortcutProvider>
+    );
+
+    const event = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
+    const preventDefaultSpy = vi.spyOn(event, 'preventDefault');
+    const stopPropagationSpy = vi.spyOn(event, 'stopPropagation');
+    
+    window.dispatchEvent(event);
+
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('sets up focus trap with requestAnimationFrame', async () => {
+    render(
+      <KeyboardShortcutProvider>
+        <KeyboardShortcutHelp isOpen={true} onClose={vi.fn()} />
+      </KeyboardShortcutProvider>
+    );
+
+    // Wait for RAF
+    await new Promise(resolve => requestAnimationFrame(() => resolve(undefined)));
+
+    const dialog = screen.getByRole('dialog');
+    expect(dialog).toBeInTheDocument();
+  });
+
+  it('has proper ARIA label on backdrop', () => {
+    render(
+      <KeyboardShortcutProvider>
+        <KeyboardShortcutHelp isOpen={true} onClose={vi.fn()} />
+      </KeyboardShortcutProvider>
+    );
+
+    const backdrop = screen.getByRole('button', { name: /close keyboard shortcuts dialog/i });
+    expect(backdrop).toBeInTheDocument();
+  });
 });

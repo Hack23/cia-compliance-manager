@@ -51,6 +51,8 @@ export const KeyboardShortcutHelp: React.FC<KeyboardShortcutHelpProps> = ({
     const handleEscape = (e: KeyboardEvent): void => {
       if (e.key === 'Escape') {
         onClose();
+        e.preventDefault();
+        e.stopPropagation();
       }
     };
 
@@ -62,32 +64,38 @@ export const KeyboardShortcutHelp: React.FC<KeyboardShortcutHelpProps> = ({
   useEffect(() => {
     if (!isOpen) return;
 
-    const modal = document.querySelector('[role="dialog"]');
-    if (!modal) return;
+    // Use requestAnimationFrame to ensure modal is in DOM
+    const setupFocusTrap = () => {
+      const modal = document.querySelector('[role="dialog"]');
+      if (!modal) return;
 
-    const focusableElements = modal.querySelectorAll<HTMLElement>(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-    
-    const firstElement = focusableElements[0];
-    const lastElement = focusableElements[focusableElements.length - 1];
+      const focusableElements = modal.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
 
-    const handleTab = (e: KeyboardEvent): void => {
-      if (e.key !== 'Tab') return;
+      const handleTab = (e: KeyboardEvent): void => {
+        if (e.key !== 'Tab') return;
 
-      if (e.shiftKey && document.activeElement === firstElement) {
-        e.preventDefault();
-        lastElement?.focus();
-      } else if (!e.shiftKey && document.activeElement === lastElement) {
-        e.preventDefault();
-        firstElement?.focus();
-      }
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement?.focus();
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement?.focus();
+        }
+      };
+
+      modal.addEventListener('keydown', handleTab as EventListener);
+      firstElement?.focus();
+
+      return () => modal.removeEventListener('keydown', handleTab as EventListener);
     };
 
-    modal.addEventListener('keydown', handleTab as EventListener);
-    firstElement?.focus();
-
-    return () => modal.removeEventListener('keydown', handleTab as EventListener);
+    const rafId = requestAnimationFrame(setupFocusTrap);
+    return () => cancelAnimationFrame(rafId);
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -97,6 +105,8 @@ export const KeyboardShortcutHelp: React.FC<KeyboardShortcutHelpProps> = ({
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
       onClick={onClose}
       data-testid={KEYBOARD_TEST_IDS.HELP_MODAL}
+      role="button"
+      aria-label="Close keyboard shortcuts dialog by clicking outside"
     >
       <div
         role="dialog"

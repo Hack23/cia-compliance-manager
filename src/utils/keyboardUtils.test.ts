@@ -2,7 +2,7 @@
  * Tests for keyboard utilities
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import {
   detectPlatform,
   getPlatformModifier,
@@ -16,9 +16,14 @@ import {
   getPlatformShortcut,
   getShortcutAriaLabel,
   areKeyboardShortcutsSupported,
+  resetPlatformCache,
 } from './keyboardUtils';
 
 describe('keyboardUtils', () => {
+  // Reset platform cache before each test
+  beforeEach(() => {
+    resetPlatformCache();
+  });
   describe('detectPlatform', () => {
     it('detects Mac platform', () => {
       const originalPlatform = window.navigator.platform;

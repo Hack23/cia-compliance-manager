@@ -4,12 +4,18 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect, afterEach, beforeEach } from 'vitest';
 import { ShortcutBadge } from './ShortcutBadge';
 import { KEYBOARD_TEST_IDS } from '../../constants/keyboardShortcuts';
+import { resetPlatformCache } from '../../utils/keyboardUtils';
 
 describe('ShortcutBadge', () => {
   const originalPlatform = window.navigator.platform;
+
+  beforeEach(() => {
+    // Reset platform cache before each test
+    resetPlatformCache();
+  });
 
   afterEach(() => {
     // Restore original platform

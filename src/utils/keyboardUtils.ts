@@ -26,17 +26,35 @@ interface NavigatorWithUserAgentData extends Navigator {
   userAgentData?: NavigatorUAData;
 }
 
+// Cache platform detection result for performance
+let cachedPlatform: Platform | null = null;
+
+/**
+ * Reset the cached platform (used for testing)
+ * @internal
+ */
+export function resetPlatformCache(): void {
+  cachedPlatform = null;
+}
+
 /**
  * Detect the current platform
  * 
  * Uses modern navigator.userAgentData when available, with fallback to
  * deprecated navigator.platform for older browsers.
+ * Result is cached for performance.
  * 
  * @returns The detected platform
  */
 export function detectPlatform(): Platform {
+  // Return cached result if available
+  if (cachedPlatform !== null) {
+    return cachedPlatform;
+  }
+  
   if (typeof window === 'undefined') {
-    return 'unknown';
+    cachedPlatform = 'unknown';
+    return cachedPlatform;
   }
   
   // Use modern userAgentData API if available
@@ -45,13 +63,16 @@ export function detectPlatform(): Platform {
     const platform = nav.userAgentData.platform.toUpperCase();
     
     if (platform.indexOf(PLATFORM_DETECTION.MAC) >= 0) {
-      return 'mac';
+      cachedPlatform = 'mac';
+      return cachedPlatform;
     }
     if (platform.indexOf(PLATFORM_DETECTION.WINDOWS) >= 0) {
-      return 'windows';
+      cachedPlatform = 'windows';
+      return cachedPlatform;
     }
     if (platform.indexOf(PLATFORM_DETECTION.LINUX) >= 0) {
-      return 'linux';
+      cachedPlatform = 'linux';
+      return cachedPlatform;
     }
   }
   
@@ -59,16 +80,20 @@ export function detectPlatform(): Platform {
   const platform = window.navigator.platform.toUpperCase();
   
   if (platform.indexOf(PLATFORM_DETECTION.MAC) >= 0) {
-    return 'mac';
+    cachedPlatform = 'mac';
+    return cachedPlatform;
   }
   if (platform.indexOf(PLATFORM_DETECTION.WINDOWS) >= 0) {
-    return 'windows';
+    cachedPlatform = 'windows';
+    return cachedPlatform;
   }
   if (platform.indexOf(PLATFORM_DETECTION.LINUX) >= 0) {
-    return 'linux';
+    cachedPlatform = 'linux';
+    return cachedPlatform;
   }
   
-  return 'unknown';
+  cachedPlatform = 'unknown';
+  return cachedPlatform;
 }
 
 /**
