@@ -1,6 +1,7 @@
 import "./App.css"; // Keep the import to avoid build errors
 import CIAClassificationApp from "./application/CIAClassificationApp";
 import { KeyboardShortcutProvider } from "./contexts/KeyboardShortcutContext";
+import { ErrorProvider } from "./contexts/ErrorContext";
 import { APP_TEST_IDS } from "./constants/testIds";
 
 /**
@@ -22,14 +23,19 @@ import { APP_TEST_IDS } from "./constants/testIds";
  * 
  * ### Security
  * By acting as a wrapper, the `App` component ensures that the security measures implemented in the `CIAClassificationApp` are consistently applied across the application. 🔒
+ * 
+ * ### Error Handling
+ * The `App` component integrates centralized error handling through ErrorProvider, ensuring consistent error tracking and user-friendly error notifications. ⚠️
  */
 function App() {
   return (
-    <KeyboardShortcutProvider>
-      <div className="app-container" data-testid={APP_TEST_IDS.APP_CONTAINER}>
-        <CIAClassificationApp />
-      </div>
-    </KeyboardShortcutProvider>
+    <ErrorProvider>
+      <KeyboardShortcutProvider>
+        <div className="app-container" data-testid={APP_TEST_IDS.APP_CONTAINER}>
+          <CIAClassificationApp />
+        </div>
+      </KeyboardShortcutProvider>
+    </ErrorProvider>
   );
 }
 
