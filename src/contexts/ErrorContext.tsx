@@ -17,7 +17,7 @@
  * @packageDocumentation
  */
 
-import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback, useMemo, ReactNode } from 'react';
 import { errorService } from '../services/errorService';
 import ErrorToast, { ToastPosition } from '../components/common/ErrorToast';
 
@@ -211,7 +211,7 @@ export const ErrorProvider: React.FC<ErrorProviderProps> = ({
     return errors[0];
   }, [errors]);
 
-  const contextValue: ErrorContextValue = {
+  const contextValue: ErrorContextValue = useMemo(() => ({
     errors,
     addError,
     clearError,
@@ -219,7 +219,7 @@ export const ErrorProvider: React.FC<ErrorProviderProps> = ({
     showToast,
     hideToast,
     getLatestError,
-  };
+  }), [errors, addError, clearError, clearAllErrors, showToast, hideToast, getLatestError]);
 
   return (
     <ErrorContext.Provider value={contextValue}>
