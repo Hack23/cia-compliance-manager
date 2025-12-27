@@ -13,34 +13,35 @@ import { ShortcutCategory } from '../types/keyboard';
  * with browser default shortcuts.
  */
 export const KEYBOARD_SHORTCUTS = {
-  // Security Level Selection (Ctrl+1-5 for None through Very High)
+  // Security Level Selection (Alt+1-5 for None through Very High)
+  // Note: Using Alt instead of Ctrl to avoid browser tab switching conflicts
   SELECT_NONE: {
     id: 'select-none',
-    keys: 'ctrl+1',
+    keys: 'alt+1',
     description: 'Set security level to None',
     category: 'Selection' as ShortcutCategory,
   },
   SELECT_LOW: {
     id: 'select-low',
-    keys: 'ctrl+2',
+    keys: 'alt+2',
     description: 'Set security level to Low',
     category: 'Selection' as ShortcutCategory,
   },
   SELECT_MODERATE: {
     id: 'select-moderate',
-    keys: 'ctrl+3',
+    keys: 'alt+3',
     description: 'Set security level to Moderate',
     category: 'Selection' as ShortcutCategory,
   },
   SELECT_HIGH: {
     id: 'select-high',
-    keys: 'ctrl+4',
+    keys: 'alt+4',
     description: 'Set security level to High',
     category: 'Selection' as ShortcutCategory,
   },
   SELECT_VERY_HIGH: {
     id: 'select-very-high',
-    keys: 'ctrl+5',
+    keys: 'alt+5',
     description: 'Set security level to Very High',
     category: 'Selection' as ShortcutCategory,
   },
@@ -80,17 +81,17 @@ export const KEYBOARD_SHORTCUTS = {
   },
   EXPORT_DATA: {
     id: 'export-data',
-    keys: 'ctrl+e',
+    keys: 'ctrl+shift+e',
     description: 'Export assessment data',
     category: 'Actions' as ShortcutCategory,
   },
   QUICK_SEARCH: {
     id: 'quick-search',
-    keys: 'ctrl+k',
+    keys: 'ctrl+shift+k',
     description: 'Quick search/filter',
     category: 'Actions' as ShortcutCategory,
     platformKeys: {
-      mac: 'cmd+k',
+      mac: 'cmd+shift+k',
     },
   },
   SHOW_HELP: {
@@ -105,12 +106,8 @@ export const KEYBOARD_SHORTCUTS = {
     description: 'Show keyboard shortcuts (alternative)',
     category: 'Help' as ShortcutCategory,
   },
-  CLOSE_MODAL: {
-    id: 'close-modal',
-    keys: 'Escape',
-    description: 'Close modals/reset',
-    category: 'General' as ShortcutCategory,
-  },
+  // CLOSE_MODAL is handled locally by individual modal components
+  // and doesn't need to be registered globally
 } as const;
 
 /**

@@ -4,8 +4,6 @@
  * @module types/keyboard
  */
 
-import { CIAComponent, SecurityLevel } from './cia';
-
 /**
  * Keyboard shortcut categories for organization
  */

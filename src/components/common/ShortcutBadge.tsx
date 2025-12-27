@@ -24,7 +24,7 @@ const SIZE_CLASSES = {
  * <ShortcutBadge shortcut="ctrl+k" size="sm" />
  * ```
  */
-export const ShortcutBadge: React.FC<ShortcutBadgeProps> = ({
+export const ShortcutBadge: React.FC<ShortcutBadgeProps> = React.memo(({
   shortcut,
   size = 'sm',
   className = '',
@@ -69,6 +69,6 @@ export const ShortcutBadge: React.FC<ShortcutBadgeProps> = ({
       ))}
     </span>
   );
-};
+});
 
 export default ShortcutBadge;

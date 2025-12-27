@@ -9,7 +9,6 @@ import {
   KeyboardShortcutContextValue, 
   ShortcutMap, 
   KeyboardShortcut,
-  Platform,
 } from '../types/keyboard';
 import { detectPlatform } from '../utils/keyboardUtils';
 import logger from '../utils/logger';
@@ -52,9 +51,9 @@ export function KeyboardShortcutProvider({
   const [isEnabled, setIsEnabled] = useState<boolean>(defaultEnabled);
   const [showHelp, setShowHelp] = useState<boolean>(false);
   
-  // Platform detection is cached at module level, so we can use useMemo
-  // instead of state to avoid unnecessary state slot
-  const platform = React.useMemo(() => detectPlatform(), []);
+  // Platform detection is cached at module level, so we can simply call it
+  // directly without memoization (it returns the cached value instantly)
+  const platform = detectPlatform();
 
   /**
    * Register a new keyboard shortcut

@@ -151,14 +151,14 @@ export function getKeyCombination(event: KeyboardEvent): string {
 /**
  * Normalize shortcut string for comparison
  * 
- * Maintains the canonical modifier key order (ctrl, cmd, shift, alt)
+ * Maintains the canonical modifier key order (ctrl, cmd, meta, shift, alt)
  * to ensure consistent matching with getKeyCombination output.
  * 
  * @param shortcut - The shortcut string (e.g., 'Ctrl+K', 'cmd+k')
  * @returns Normalized shortcut string
  */
 export function normalizeShortcut(shortcut: string): string {
-  const modifierOrder: string[] = ['ctrl', 'cmd', 'shift', 'alt'];
+  const modifierOrder: string[] = ['ctrl', 'cmd', 'meta', 'shift', 'alt'];
 
   const parts: string[] = shortcut
     .toLowerCase()
@@ -196,9 +196,13 @@ export function normalizeShortcut(shortcut: string): string {
  * @returns True if shortcuts match
  */
 export function shortcutsMatch(shortcut1: string, shortcut2: string): boolean {
-  // Handle cmd/ctrl equivalence
-  const normalized1 = normalizeShortcut(shortcut1.replace('cmd', 'ctrl'));
-  const normalized2 = normalizeShortcut(shortcut2.replace('cmd', 'ctrl'));
+  // Handle cmd/meta/ctrl equivalence for cross-platform matching
+  const normalized1 = normalizeShortcut(
+    shortcut1.replace(/cmd/g, 'ctrl').replace(/meta/g, 'ctrl')
+  );
+  const normalized2 = normalizeShortcut(
+    shortcut2.replace(/cmd/g, 'ctrl').replace(/meta/g, 'ctrl')
+  );
   
   return normalized1 === normalized2;
 }
