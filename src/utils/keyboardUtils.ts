@@ -4,13 +4,27 @@
  * @module utils/keyboardUtils
  */
 
-import { Platform, KeyboardEventInfo } from '../types/keyboard';
+import { Platform } from '../types/keyboard';
 import { 
   PLATFORM_DETECTION, 
   KEY_DISPLAY_NAMES, 
   INPUT_ELEMENT_TAGS,
   BYPASS_INPUT_CHECK_KEYS 
 } from '../constants/keyboardShortcuts';
+
+/**
+ * Interface for navigator.userAgentData (experimental API)
+ */
+interface NavigatorUAData {
+  platform?: string;
+}
+
+/**
+ * Extended Navigator interface with userAgentData property
+ */
+interface NavigatorWithUserAgentData extends Navigator {
+  userAgentData?: NavigatorUAData;
+}
 
 /**
  * Detect the current platform
@@ -26,8 +40,9 @@ export function detectPlatform(): Platform {
   }
   
   // Use modern userAgentData API if available
-  if ('userAgentData' in navigator && (navigator as any).userAgentData?.platform) {
-    const platform = (navigator as any).userAgentData.platform.toUpperCase();
+  const nav = navigator as NavigatorWithUserAgentData;
+  if ('userAgentData' in navigator && nav.userAgentData?.platform) {
+    const platform = nav.userAgentData.platform.toUpperCase();
     
     if (platform.indexOf(PLATFORM_DETECTION.MAC) >= 0) {
       return 'mac';
