@@ -19,10 +19,6 @@
 
 import logger from '../utils/logger';
 import {
-  ServiceError,
-  ValidationError,
-  NetworkError,
-  RetryableError,
   isServiceError,
   isValidationError,
   isNetworkError,
