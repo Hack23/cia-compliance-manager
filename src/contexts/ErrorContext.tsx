@@ -143,9 +143,9 @@ export const ErrorProvider: React.FC<ErrorProviderProps> = ({
   /**
    * Generate unique error ID
    */
-  const generateErrorId = (): string => {
+  const generateErrorId = useCallback((): string => {
     return `error-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
-  };
+  }, []);
 
   /**
    * Add an error to tracking
@@ -169,7 +169,7 @@ export const ErrorProvider: React.FC<ErrorProviderProps> = ({
       const newErrors = [errorEntry, ...prevErrors];
       return newErrors.slice(0, maxErrors);
     });
-  }, [maxErrors]);
+  }, [maxErrors, generateErrorId]);
 
   /**
    * Clear a specific error

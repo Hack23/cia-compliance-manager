@@ -19,7 +19,7 @@
  */
 
 import React, { Component, ReactNode } from 'react';
-import { errorService, ErrorSeverity } from '../../services/errorService';
+import { errorService } from '../../services/errorService';
 import ErrorFallback from './ErrorFallback';
 
 /**

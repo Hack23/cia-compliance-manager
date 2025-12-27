@@ -17,7 +17,7 @@
  * @packageDocumentation
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 /**
  * Toast notification position
@@ -145,6 +145,14 @@ export const ErrorToast: React.FC<ErrorToastProps> = ({
 }) => {
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
+  const handleDismiss = useCallback((): void => {
+    setIsAnimatingOut(true);
+    setTimeout(() => {
+      setIsAnimatingOut(false);
+      onDismiss();
+    }, 300); // Match animation duration
+  }, [onDismiss]);
+
   useEffect(() => {
     if (isVisible && autoHideDuration > 0) {
       const timer = setTimeout(() => {
@@ -154,15 +162,7 @@ export const ErrorToast: React.FC<ErrorToastProps> = ({
       return () => clearTimeout(timer);
     }
     return undefined;
-  }, [isVisible, autoHideDuration]);
-
-  const handleDismiss = (): void => {
-    setIsAnimatingOut(true);
-    setTimeout(() => {
-      setIsAnimatingOut(false);
-      onDismiss();
-    }, 300); // Match animation duration
-  };
+  }, [isVisible, autoHideDuration, handleDismiss]);
 
   if (!isVisible && !isAnimatingOut) {
     return null;
