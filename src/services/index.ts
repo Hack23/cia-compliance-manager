@@ -53,3 +53,29 @@ import { SecurityResource } from "../types/securityResources";
 
 // Export SecurityResource type
 export type { SecurityResource };
+
+// Export error service
+export {
+  ErrorService,
+  errorService,
+  ErrorSeverity,
+  type ErrorLogEntry,
+} from "./errorService";
+
+// Export error types
+export {
+  ServiceError,
+  ServiceErrorCode,
+  ValidationError,
+  NetworkError,
+  RetryableError,
+  type ErrorContext,
+  createValidationError,
+  createDataNotFoundError,
+  createCalculationError,
+  isServiceError,
+  isValidationError,
+  isNetworkError,
+  isRetryableError,
+  getErrorMessage,
+} from "./errors";

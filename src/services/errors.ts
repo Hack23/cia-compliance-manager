@@ -252,3 +252,77 @@ export function getErrorMessage(error: unknown): string {
 
   return 'An unknown error occurred';
 }
+
+/**
+ * Validation error for input validation failures
+ */
+export class ValidationError extends Error {
+  public readonly field?: string;
+  
+  constructor(message: string, field?: string) {
+    super(message);
+    this.name = 'ValidationError';
+    this.field = field;
+    
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, ValidationError);
+    }
+  }
+}
+
+/**
+ * Network error for connectivity issues
+ */
+export class NetworkError extends Error {
+  public readonly statusCode?: number;
+  
+  constructor(message: string, statusCode?: number) {
+    super(message);
+    this.name = 'NetworkError';
+    this.statusCode = statusCode;
+    
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, NetworkError);
+    }
+  }
+}
+
+/**
+ * Retryable error for operations that can be retried
+ */
+export class RetryableError extends Error {
+  public readonly retryAfter?: number;
+  public readonly retryCount?: number;
+  
+  constructor(message: string, retryAfter?: number, retryCount?: number) {
+    super(message);
+    this.name = 'RetryableError';
+    this.retryAfter = retryAfter;
+    this.retryCount = retryCount;
+    
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, RetryableError);
+    }
+  }
+}
+
+/**
+ * Type guard to check if an error is a ValidationError
+ */
+export function isValidationError(error: unknown): error is ValidationError {
+  return error instanceof ValidationError;
+}
+
+/**
+ * Type guard to check if an error is a NetworkError
+ */
+export function isNetworkError(error: unknown): error is NetworkError {
+  return error instanceof NetworkError;
+}
+
+/**
+ * Type guard to check if an error is a RetryableError
+ */
+export function isRetryableError(error: unknown): error is RetryableError {
+  return error instanceof RetryableError;
+}
