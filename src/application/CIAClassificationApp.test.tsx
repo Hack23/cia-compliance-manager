@@ -112,14 +112,25 @@ vi.mock("./utils/widgetRegistry", () => {
 });
 
 // Import dependencies after mocks
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import CIAClassificationApp from "./CIAClassificationApp";
+import { KeyboardShortcutProvider } from "../contexts/KeyboardShortcutContext";
+
+// Helper to render with keyboard shortcut provider
+const renderWithProviders = (ui: React.ReactElement) => {
+  return render(
+    <KeyboardShortcutProvider>
+      {ui}
+    </KeyboardShortcutProvider>
+  );
+};
 
 describe("CIAClassificationApp", () => {
   it("renders the app with all required components", () => {
     // Render the component
-    render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
 
     // Check for the main title
     expect(screen.getByText(/CIA Compliance Manager/i)).toBeInTheDocument();

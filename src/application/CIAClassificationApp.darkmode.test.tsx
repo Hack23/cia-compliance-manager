@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
+import { KeyboardShortcutProvider } from "../contexts/KeyboardShortcutContext";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import CIAClassificationApp from "./CIAClassificationApp";
 
@@ -17,7 +18,7 @@ const AppWrapper: React.FC<{
     }
   }, [darkMode]);
 
-  return <>{children}</>;
+  return <KeyboardShortcutProvider>{children}</KeyboardShortcutProvider>;
 };
 
 // Mock the useLocalStorage hook
@@ -110,6 +111,15 @@ vi.mock("../components/widgets/SecuritySummaryWidget", () => ({
   ),
 }));
 
+// Helper to render with keyboard shortcut provider
+const renderWithProviders = (ui: React.ReactElement) => {
+  return render(
+    <KeyboardShortcutProvider>
+      {ui}
+    </KeyboardShortcutProvider>
+  );
+};
+
 describe("CIAClassificationApp Dark Mode Tests", () => {
   beforeEach(() => {
     // Mock window.matchMedia
@@ -142,14 +152,14 @@ describe("CIAClassificationApp Dark Mode Tests", () => {
   });
 
   it("has dark mode enabled by default", () => {
-    render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
 
     // Check if dark mode classes were added by default
     expect(document.documentElement.classList.add).toHaveBeenCalledWith("dark");
   });
 
   it("toggles to light mode when theme toggle button is clicked", () => {
-    render(<CIAClassificationApp />);
+    renderWithProviders(<CIAClassificationApp />);
 
     // Find the theme toggle button by text content - use the actual text that's displayed
     const themeToggleButton = screen.getByText(/☀️ Light|🌙 Dark/);
@@ -171,7 +181,7 @@ describe("CIAClassificationApp Dark Mode Tests", () => {
   });
 
   it("applies dark mode to application container", () => {
-    const { container } = render(<CIAClassificationApp />);
+    const { container } = renderWithProviders(<CIAClassificationApp />);
 
     // Instead of checking class on a specific element, check that the container has children
     expect(container.firstChild).toBeInTheDocument();
