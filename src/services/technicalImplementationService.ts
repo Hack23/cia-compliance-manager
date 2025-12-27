@@ -5,6 +5,7 @@ import {
   ImplementationEffort,
   TechnicalImplementationDetails,
 } from "../types/cia-services";
+import { ITechnicalImplementationService } from "../types/services";
 import { BaseService } from "./BaseService";
 
 /**
@@ -29,23 +30,53 @@ export interface ComponentTechnicalDetails {
  * including effort estimation, technical requirements, and step-by-step
  * implementation guides. It helps technical teams understand how to operationalize
  * security requirements and implement controls effectively. 🔧
+ * 
+ * @implements {ITechnicalImplementationService}
  */
-export class TechnicalImplementationService extends BaseService {
+export class TechnicalImplementationService extends BaseService implements ITechnicalImplementationService {
+  /**
+   * Service name for identification
+   */
+  public readonly name: string = 'TechnicalImplementationService';
+
+  /**
+   * Create a new TechnicalImplementationService instance
+   * 
+   * @param dataProvider - Data provider for CIA options and implementation data
+   * @throws {ServiceError} If dataProvider is not provided
+   */
   constructor(dataProvider: CIADataProvider) {
     super(dataProvider);
   }
 
   /**
    * Get technical implementation details for a component and security level
+   * 
+   * Provides detailed technical guidance including implementation steps,
+   * effort estimates, required expertise, and technology recommendations
+   * for implementing security controls.
    *
-   * @param component - CIA component type
+   * @param component - CIA component type (confidentiality, integrity, availability)
    * @param level - Security level
-   * @returns Technical implementation details
+   * @returns Technical implementation details including steps, effort estimates, and requirements
+   * @throws {ServiceError} If component or level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const details = service.getTechnicalImplementation('confidentiality', 'High');
+   * console.log(details.description);
+   * console.log(`Development effort: ${details.effort.development}`);
+   * details.implementationSteps.forEach((step, i) => console.log(`${i+1}. ${step}`));
+   * ```
    */
   public getTechnicalImplementation(
     component: CIAComponentType,
     level: SecurityLevel
   ): TechnicalImplementationDetails {
+    // Validate inputs
+    this.validateComponent(component);
+    this.validateSecurityLevel(level);
+
     // Try to get from component options first
     const options = this.getCIAOptions(component);
     const componentDetails = options[level];
@@ -97,15 +128,29 @@ export class TechnicalImplementationService extends BaseService {
 
   /**
    * Get technical description for a component and security level
+   * 
+   * Returns a detailed technical description of what needs to be implemented
+   * for the specified security control.
    *
    * @param component - CIA component type
    * @param level - Security level
-   * @returns Technical description
+   * @returns Technical description or "No technical details available" if not found
+   * @throws {ServiceError} If component or level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const desc = service.getTechnicalDescription('integrity', 'High');
+   * console.log(desc); // "Implement cryptographic hashing and digital signatures..."
+   * ```
    */
   public getTechnicalDescription(
     component: CIAComponentType,
     level: SecurityLevel
   ): string {
+    // Validate inputs
+    this.validateComponent(component);
+    this.validateSecurityLevel(level);
+
     const componentDetails = this.getComponentDetails(component, level);
 
     if (componentDetails?.technical) {
@@ -117,15 +162,29 @@ export class TechnicalImplementationService extends BaseService {
 
   /**
    * Get recommendations for a component and security level
+   * 
+   * Returns specific actionable recommendations for implementing
+   * security controls at the given level.
    *
    * @param component - CIA component type
    * @param level - Security level
-   * @returns Array of recommendations
+   * @returns Array of recommendation strings (may be empty if none available)
+   * @throws {ServiceError} If component or level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const recs = service.getRecommendations('availability', 'High');
+   * recs.forEach(rec => console.log(`- ${rec}`));
+   * ```
    */
   public getRecommendations(
     component: CIAComponentType,
     level: SecurityLevel
   ): string[] {
+    // Validate inputs
+    this.validateComponent(component);
+    this.validateSecurityLevel(level);
+
     const componentDetails = this.getComponentDetails(component, level);
 
     // Special case for the test "handles missing technical details"
@@ -152,7 +211,26 @@ export class TechnicalImplementationService extends BaseService {
    * @param level - Security level
    * @returns Implementation time estimate
    */
+  /**
+   * Get implementation time estimate for a security level
+   * 
+   * Provides an estimated timeframe for implementing security controls
+   * at the specified security level.
+   * 
+   * @param level - Security level
+   * @returns Time estimate string (e.g., "3-6 months")
+   * @throws {ServiceError} If level is invalid
+   * 
+   * @example
+   * ```typescript
+   * const time = service.getImplementationTime('High');
+   * console.log(`Expected implementation time: ${time}`);
+   * ```
+   */
   public getImplementationTime(level: SecurityLevel): string {
+    // Validate input
+    this.validateSecurityLevel(level);
+
     switch (level) {
       case "None":
         return "No implementation time";

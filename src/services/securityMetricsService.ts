@@ -4,6 +4,7 @@ import {
   CIADataProvider,
   ROIMetrics,
 } from "../types/cia-services";
+import { ISecurityMetricsService } from "../types/services";
 import logger from "../utils/logger";
 import { BaseService } from "./BaseService";
 
@@ -119,6 +120,9 @@ export interface ImpactMetrics {
   description?: string;
   technical?: string;
   businessImpact?: string;
+  
+  // Allow additional properties
+  [key: string]: unknown;
 }
 
 /**
@@ -210,8 +214,21 @@ export interface ROIEstimatesMap {
  * organizations to measure their security posture, track improvements over time,
  * and quantify the impact of security investments through cost-benefit analysis
  * and risk reduction calculations. 📊
+ * 
+ * @implements {ISecurityMetricsService}
  */
-export class SecurityMetricsService extends BaseService {
+export class SecurityMetricsService extends BaseService implements ISecurityMetricsService {
+  /**
+   * Service name for identification
+   */
+  public readonly name: string = 'SecurityMetricsService';
+
+  /**
+   * Create a new SecurityMetricsService instance
+   * 
+   * @param dataProvider - Data provider for CIA options and metrics data
+   * @throws {ServiceError} If dataProvider is not provided
+   */
   constructor(dataProvider: CIADataProvider) {
     super(dataProvider);
   }
@@ -226,6 +243,7 @@ export class SecurityMetricsService extends BaseService {
    * @param securityLevel - Selected security level to calculate ROI for
    * @param implementationCost - Total cost of implementation in currency units (CAPEX + OPEX)
    * @returns ROI metrics including monetary value, percentage return, and description
+   * @throws {ServiceError} If security level is invalid
    * 
    * @example
    * ```typescript

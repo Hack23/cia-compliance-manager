@@ -4,6 +4,7 @@ import {
   ComplianceGap,
   ComplianceGapAnalysis,
   ComplianceStatus,
+  ComplianceStatusDetails,
 } from "../types/compliance";
 import { BaseService } from "./BaseService";
 
@@ -14,19 +15,6 @@ export type ComplianceStatusType =
   | "compliant"
   | "partially-compliant"
   | "non-compliant";
-
-/**
- * Interface for compliance status details
- */
-export interface ComplianceStatusDetails {
-  status: string;
-  compliantFrameworks: string[];
-  partiallyCompliantFrameworks: string[];
-  nonCompliantFrameworks: string[];
-  remediationSteps?: string[];
-  requirements?: string[];
-  complianceScore: number;
-}
 
 // Framework requirement levels
 interface FrameworkRequirements {
