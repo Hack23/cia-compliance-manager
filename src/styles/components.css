@@ -2301,6 +2301,23 @@ button.more-info:hover::before {
   margin-top: 0.5rem !important;
 }
 
+/* Improve tab container borders for both widgets */
+.border-b.border-neutral-light,
+.border-b.border-gray-200 {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.dark .border-b.border-neutral-dark,
+.dark .border-b.border-gray-700 {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ensure tab gap is consistent */
+nav.flex.gap-sm,
+nav.flex[role="tablist"] {
+  gap: 0.5rem !important; /* Consistent spacing between tabs */
+}
+
 /* Universal tab styling for consistency across all widgets */
 button[role="tab"],
 [data-testid$="-tab-considerations"],
@@ -2337,6 +2354,8 @@ button[role="tab"]:hover,
 
 /* Active/Selected tab state - Light theme */
 button[role="tab"][aria-selected="true"],
+button.border-b-2.border-blue-500,
+button.border-b-2.border-primary,
 [data-testid$="-tab-considerations"].border-b-2.border-blue-500,
 [data-testid$="-tab-benefits"].border-b-2.border-blue-500 {
   border-bottom-color: var(--primary-color) !important;
@@ -2347,6 +2366,8 @@ button[role="tab"][aria-selected="true"],
 
 /* Active/Selected tab state - Dark theme */
 .dark button[role="tab"][aria-selected="true"],
+.dark button.border-b-2.border-blue-500,
+.dark button.border-b-2.border-primary,
 .dark [data-testid$="-tab-considerations"].border-b-2.border-blue-500,
 .dark [data-testid$="-tab-benefits"].border-b-2.border-blue-500 {
   border-bottom-color: var(--primary-color) !important;
@@ -2354,6 +2375,7 @@ button[role="tab"][aria-selected="true"],
   font-weight: 600 !important;
   background-color: rgba(43, 138, 255, 0.15) !important;
   box-shadow: 0 0 10px rgba(43, 138, 255, 0.2) !important;
+  text-shadow: 0 0 5px rgba(43, 138, 255, 0.4) !important;
 }
 
 /* Inactive tab colors - Light theme */
@@ -2396,6 +2418,23 @@ button[role="tab"][aria-selected="true"]::after {
 
 .dark button[role="tab"][aria-selected="true"]::after {
   box-shadow: 0 0 8px var(--primary-color);
+}
+
+/* Tab content area styling - reduce empty space */
+.tab-content,
+div.tab-content,
+[class*="tab-content"] {
+  padding: 0 !important; /* Remove padding on container */
+  margin-top: 0.75rem !important; /* Small gap after tabs */
+}
+
+/* Tab panels should have consistent minimal padding */
+div[role="tabpanel"],
+[data-testid$="-panel-overview"],
+[data-testid$="-panel-business"],
+[data-testid$="-panel-implementation"],
+[data-testid$="-panel-compliance"] {
+  padding: 0.5rem 0 !important; /* Vertical padding only */
 }
 
 /* Security Summary Widget Styles */
