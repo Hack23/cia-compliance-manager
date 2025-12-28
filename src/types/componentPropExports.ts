@@ -298,6 +298,13 @@ export interface LoadingSkeletonProps {
   className?: string;
 }
 
+export interface WidgetLoaderProps {
+  /**
+   * Name of the widget being loaded (displayed in loading message)
+   */
+  widgetName: string;
+}
+
 export interface WidgetErrorBoundaryProps {
   /**
    * Child components to wrap with error boundary

@@ -218,7 +218,7 @@ When converting from a monolithic bundle to lazy-loaded chunks, some overhead is
 | Factor | Monolithic Bundle | Lazy Loading |
 |--------|-------------------|--------------|
 | Total Size | 189 KB ✅ Smaller | 194 KB ⚠️ Larger |
-| Initial Load | 67 KB ❌ Slow | 9.6 KB ✅ Fast |
+| Initial Load | 67 KB ❌ Slow | 9.63 KB ✅ Fast |
 | Time to Interactive | 3.4s ❌ Slow | 0.9s ✅ Fast |
 | User Experience | ❌ Long wait | ✅ Instant |
 | **Recommended** | ❌ No | ✅ **Yes** |
@@ -297,12 +297,25 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          node-version: '24'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
       - name: Build and analyze
         run: npm run build
+      
       - name: Check budget
-        run: npx bundlesize
-      - name: Comment PR
-        uses: andresz1/size-limit-action@v1
+        run: npm run check:bundle-size
+        # Note: Add bundlesize to package.json devDependencies with specific version
+        # and create check:bundle-size script to avoid ad-hoc npx usage
 ```
 
 ### Monitoring Dashboard

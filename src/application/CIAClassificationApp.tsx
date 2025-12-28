@@ -53,13 +53,14 @@ import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
 import { useKeyboardShortcutContext } from "../contexts/KeyboardShortcutContext";
 import { SecurityLevel } from "../types/cia";
 import { ShortcutMap } from "../types/keyboard";
+import type { WidgetLoaderProps } from "../types/componentPropExports";
 import logger from "../utils/logger";
 
 /**
  * Reusable widget loading fallback component
  * Provides accessible loading states for lazy-loaded widgets
  */
-const WidgetLoader: React.FC<{ widgetName: string }> = ({ widgetName }) => (
+const WidgetLoader: React.FC<WidgetLoaderProps> = ({ widgetName }) => (
   <div 
     className="widget-loading animate-pulse bg-gray-200 dark:bg-gray-700 p-4 rounded-lg min-h-[200px] flex items-center justify-center" 
     role="status" 

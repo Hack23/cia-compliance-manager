@@ -31,7 +31,7 @@
       {
         "resourceType": "script",
         "budget": 170,
-        "description": "Total JavaScript across all chunks (gzip) - target for v1.1.0 optimization"
+        "description": "Total JavaScript across all chunks (gzip) - aspirational target for future optimization. Current: 194KB (initial bundle: 9.6KB)"
       },
       {
         "resourceType": "image",
