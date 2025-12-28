@@ -18,10 +18,41 @@ import {
  * Type guard utilities for the CIA compliance manager
  *
  * These utilities ensure type safety when working with domain-specific types.
+ * Type guards help TypeScript narrow types at runtime, preventing type errors
+ * and enabling safe property access.
+ * 
+ * @example
+ * ```typescript
+ * import { isSecurityLevel, isObject } from './typeGuards';
+ * 
+ * // Type guard for security level
+ * const level: unknown = 'High';
+ * if (isSecurityLevel(level)) {
+ *   console.log(level.toUpperCase()); // TypeScript knows level is SecurityLevel
+ * }
+ * 
+ * // Type guard for objects
+ * const data: unknown = { key: 'value' };
+ * if (isObject(data)) {
+ *   console.log(data.key); // Safe access after type guard
+ * }
+ * ```
  */
 
 /**
  * Type guard to check if an object is an AvailabilityDetail
+ * 
+ * @param obj - Value to check
+ * @returns True if obj is an AvailabilityDetail
+ * 
+ * @example
+ * ```typescript
+ * const data: unknown = getAvailabilityData();
+ * if (isAvailabilityDetail(data)) {
+ *   console.log(data.uptime); // Safe to access uptime property
+ *   console.log(data.recommendations); // Safe to access array
+ * }
+ * ```
  */
 export function isAvailabilityDetail(obj: unknown): obj is AvailabilityDetail {
   if (!obj || typeof obj !== "object") return false;
@@ -76,6 +107,28 @@ export function isValidCIADetail(
 
 /**
  * Type guard to check if a value is a non-null object
+ * 
+ * Useful for safely checking if a value is an object before accessing properties.
+ * Filters out null, arrays, and primitive values.
+ * 
+ * @param value - Value to check
+ * @returns True if value is a non-null object (excludes arrays)
+ * 
+ * @example
+ * ```typescript
+ * isObject({})              // true
+ * isObject({ key: 'val' })  // true
+ * isObject(null)            // false
+ * isObject([])              // false (arrays excluded)
+ * isObject('string')        // false
+ * isObject(123)             // false
+ * 
+ * // Usage in code
+ * const data: unknown = getUserData();
+ * if (isObject(data) && 'name' in data) {
+ *   console.log(data.name); // Safe property access
+ * }
+ * ```
  */
 export function isObject(
   value: unknown

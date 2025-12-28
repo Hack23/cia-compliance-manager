@@ -46,8 +46,26 @@ export function getDefaultBusinessImpact(
 
 /**
  * Get risk level string from security level
+ * 
+ * Maps security levels to corresponding risk levels using inverse relationship:
+ * higher security = lower risk. Essential for risk assessment and reporting.
+ * 
  * @param level - Security level
- * @returns Risk level string
+ * @returns Risk level string describing the security posture
+ * 
+ * @example
+ * ```typescript
+ * getRiskLevelFromSecurityLevel('None')       // "Critical Risk"
+ * getRiskLevelFromSecurityLevel('Low')        // "High Risk"
+ * getRiskLevelFromSecurityLevel('Moderate')   // "Medium Risk"
+ * getRiskLevelFromSecurityLevel('High')       // "Low Risk"
+ * getRiskLevelFromSecurityLevel('Very High')  // "Minimal Risk"
+ * 
+ * // Usage in risk assessment
+ * const securityLevel = getSecurityLevel();
+ * const riskLevel = getRiskLevelFromSecurityLevel(securityLevel);
+ * console.log(`Current risk: ${riskLevel}`);
+ * ```
  */
 export function getRiskLevelFromSecurityLevel(level: SecurityLevel): string {
   switch (level) {
