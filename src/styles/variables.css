@@ -74,15 +74,15 @@
   --color-info: #3498db;
   --color-neutral: #95a5a6;
 
-  /* Primary color RGB for rgba usage */
+  /* Primary color RGB for rgba usage (derived from --primary-color: #0066cc) */
   --primary-color-rgb: 0, 102, 204;
   
-  /* Hover and active background colors */
+  /* Hover and active background colors (based on --primary-color: #0066cc) */
   --primary-bg-hover: rgba(0, 102, 204, 0.05);
   --primary-bg-active: rgba(0, 102, 204, 0.08);
   --primary-border-hover: rgba(0, 102, 204, 0.3);
   
-  /* Primary effects used by components (light mode) */
+  /* Primary effects used by components - light mode (based on --primary-color: #0066cc) */
   --primary-shadow: rgba(0, 102, 204, 0.2);
   --primary-glow: rgba(0, 102, 204, 0.4);
   
@@ -140,10 +140,10 @@
   --color-info: #54a0ff;
   --color-neutral: #a4b0be;
 
-  /* Primary color RGB for rgba usage */
+  /* Primary color RGB for rgba usage (derived from --primary-color: #2b8aff) */
   --primary-color-rgb: 43, 138, 255;
   
-  /* Hover and active background colors */
+  /* Hover and active background colors (based on --primary-color: #2b8aff) */
   --primary-bg-hover: rgba(43, 138, 255, 0.1);
   --primary-bg-active: rgba(43, 138, 255, 0.15);
   --primary-border-hover: rgba(43, 138, 255, 0.3);

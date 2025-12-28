@@ -2315,7 +2315,7 @@ button.more-info:hover::before {
 /* Ensure tab gap is consistent within widgets without overriding Tailwind utilities */
 [data-testid^="widget-"] nav.flex,
 [data-testid^="widget-"] nav[role="tablist"] {
-  gap: var(--spacing-sm); /* Consistent spacing between tabs */
+  gap: 0.375rem; /* Consistent spacing between tabs (6px to match widget padding) */
 }
 
 /* Universal tab styling for consistency across all widgets */
