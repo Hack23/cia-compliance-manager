@@ -408,30 +408,11 @@ describe("Error Handling and Edge Cases", () => {
       // we test that the app loads efficiently
 
       cy.then(() => {
-        cy.then(() => {
-
-          const startTime = Date.now();
-
-          
-
-          cy.reload();
-
-          cy.ensureAppLoaded();
-
-          
-
-          cy.then(() => {
-
-            const loadTime = Date.now() - startTime;
-
-            cy.log(`Page load time: ${loadTime}ms`);
-
-            expect(loadTime).to.be.lessThan(10000); // 10 second max
-
-          });
-
-        });
-
+        const startTime = Date.now();
+        
+        cy.reload();
+        cy.ensureAppLoaded();
+        
         cy.then(() => {
           const loadTime = Date.now() - startTime;
           cy.log(`Page load time: ${loadTime}ms`);

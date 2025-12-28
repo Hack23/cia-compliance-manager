@@ -76,7 +76,7 @@ const additionalTests = () => {
       }
 
       // Verify widget is still visible
-      expect($widget).to.be.visible;
+      cy.wrap($widget).should("be.visible");
     });
   });
 };

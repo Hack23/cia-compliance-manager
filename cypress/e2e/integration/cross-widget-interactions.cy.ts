@@ -26,9 +26,12 @@ describe("Cross-Widget Interactions", () => {
       );
       cy.wait(500);
 
+      // Ensure widgets are loaded before capturing count
+      cy.verifyMinimumWidgets(5);
+
       // Capture initial widget states
       let initialWidgetCount = 0;
-      cy.get('[data-testid*="widget"]').then(($widgets) => {
+      cy.get('[data-testid*="widget"]', { timeout: 10000 }).then(($widgets) => {
         initialWidgetCount = $widgets.length;
         cy.log(`✓ Found ${initialWidgetCount} widgets in initial state`);
       });
@@ -42,14 +45,14 @@ describe("Cross-Widget Interactions", () => {
       cy.wait(500);
 
       // Verify all widgets still rendered and potentially updated
-      cy.get('[data-testid*="widget"]').then(($widgets) => {
+      cy.get('[data-testid*="widget"]', { timeout: 10000 }).then(($widgets) => {
         expect($widgets.length).to.equal(initialWidgetCount);
         cy.log(`✓ All ${$widgets.length} widgets updated successfully`);
-
-        // Verify widgets are visible and responsive
-        $widgets.each((index, widget) => {
-          expect(widget).to.be.visible;
-        });
+      });
+      
+      // Verify widgets are visible and responsive
+      cy.get('[data-testid*="widget"]', { timeout: 10000 }).each(($widget) => {
+        cy.wrap($widget).should("be.visible");
       });
 
       cy.log("✅ All widgets respond to security level changes");
