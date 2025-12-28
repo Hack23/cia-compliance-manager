@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.6**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.0**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isAvailabilityDetail**(`obj`): `obj is AvailabilityDetail`
 
-Defined in: [utils/typeGuards.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/utils/typeGuards.ts#L26)
+Defined in: [utils/typeGuards.ts:57](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/utils/typeGuards.ts#L57)
 
 Type guard to check if an object is an AvailabilityDetail
 
@@ -18,6 +18,20 @@ Type guard to check if an object is an AvailabilityDetail
 
 `unknown`
 
+Value to check
+
 ## Returns
 
 `obj is AvailabilityDetail`
+
+True if obj is an AvailabilityDetail
+
+## Example
+
+```typescript
+const data: unknown = getAvailabilityData();
+if (isAvailabilityDetail(data)) {
+  console.log(data.uptime); // Safe to access uptime property
+  console.log(data.recommendations); // Safe to access array
+}
+```

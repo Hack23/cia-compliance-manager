@@ -218,7 +218,17 @@
 <a name='L153'></a><a href='#L153'>153</a>
 <a name='L154'></a><a href='#L154'>154</a>
 <a name='L155'></a><a href='#L155'>155</a>
-<a name='L156'></a><a href='#L156'>156</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -242,7 +252,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -256,26 +267,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">49x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">49x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">49x</span>
-<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">49x</span>
-<span class="cline-any cline-yes">49x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">49x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">11x</span>
@@ -287,14 +298,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">49x</span>
-<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">49x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -380,6 +400,7 @@ import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import type { ConfidentialityImpactWidgetProps } from "../../../types/widget-props";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
+import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -462,12 +483,21 @@ const ConfidentialityImpactWidget: React.FC&lt;
         isLoading={isLoading}
         error={serviceError}
       &gt;
-      &lt;div className="max-h-[550px] overflow-y-auto pr-1"&gt;
-        &lt;div
-          className="p-4"
-          role="region"
+      &lt;div 
+        className="max-h-[550px] overflow-y-auto pr-1"
+        role="region"
+        aria-label={getWidgetAriaDescription(
+          "Confidentiality Impact Analysis",
+          "Business impact of confidentiality controls including data classification and privacy measures"
+        )}
+      &gt;
+        &lt;section
+          className="p-md sm:p-lg"
           aria-labelledby="confidentiality-impact-heading"
         &gt;
+          &lt;h3 id="confidentiality-impact-heading" className="sr-only"&gt;
+            Confidentiality Impact Details
+          &lt;/h3&gt;
           &lt;div className="mb-4"&gt;
             &lt;SecurityLevelBadge
               category="Confidentiality"
@@ -491,10 +521,10 @@ const ConfidentialityImpactWidget: React.FC&lt;
           {/* Data Protection &amp; Classification */}
           &lt;div className="mb-6"&gt;
             &lt;h4 className="text-md font-medium mb-3 flex items-center"&gt;
-              &lt;span className="mr-2"&gt;📊&lt;/span&gt;Data Protection
+              &lt;span className="mr-2" aria-hidden="true"&gt;📊&lt;/span&gt;Data Protection
             &lt;/h4&gt;
             &lt;div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4"&gt;
-              &lt;div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800"&gt;
+              &lt;div className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light dark:border-primary-dark"&gt;
                 &lt;div className="text-sm font-medium mb-1 text-purple-700 dark:text-purple-300"&gt;
                   Data Classification
                 &lt;/div&gt;
@@ -509,10 +539,10 @@ const ConfidentialityImpactWidget: React.FC&lt;
           {/* Privacy Impact */}
           &lt;div className="mb-6"&gt;
             &lt;h4 className="text-md font-medium mb-3 flex items-center"&gt;
-              &lt;span className="mr-2"&gt;🔒&lt;/span&gt;Privacy Impact
+              &lt;span className="mr-2" aria-hidden="true"&gt;🔒&lt;/span&gt;Privacy Impact
             &lt;/h4&gt;
             &lt;div className="grid grid-cols-1 lg:grid-cols-2 gap-4"&gt;
-              &lt;div className="p-2 bg-white dark:bg-gray-800 rounded-lg"&gt;
+              &lt;div className="p-sm bg-white dark:bg-gray-800 rounded-md"&gt;
                 &lt;div className="text-sm font-medium mb-1"&gt;Privacy Impact:&lt;/div&gt;
                 &lt;div className="text-lg font-bold text-purple-600 dark:text-purple-400"&gt;
                   {privacyImpact}
@@ -520,7 +550,7 @@ const ConfidentialityImpactWidget: React.FC&lt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
-        &lt;/div&gt;
+        &lt;/section&gt;
       &lt;/div&gt;
     &lt;/WidgetContainer&gt;
     &lt;/WidgetErrorBoundary&gt;
@@ -535,7 +565,7 @@ export default ConfidentialityImpactWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-24T21:19:38.007Z
+                at 2025-12-28T14:18:48.271Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

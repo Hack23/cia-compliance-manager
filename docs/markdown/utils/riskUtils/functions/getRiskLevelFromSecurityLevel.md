@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.6**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.0**](../../../README.md)
 
 ***
 
@@ -8,9 +8,12 @@
 
 > **getRiskLevelFromSecurityLevel**(`level`): `string`
 
-Defined in: [utils/riskUtils.ts:52](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/utils/riskUtils.ts#L52)
+Defined in: [utils/riskUtils.ts:70](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/utils/riskUtils.ts#L70)
 
 Get risk level string from security level
+
+Maps security levels to corresponding risk levels using inverse relationship:
+higher security = lower risk. Essential for risk assessment and reporting.
 
 ## Parameters
 
@@ -24,4 +27,19 @@ Security level
 
 `string`
 
-Risk level string
+Risk level string describing the security posture
+
+## Example
+
+```typescript
+getRiskLevelFromSecurityLevel('None')       // "Critical Risk"
+getRiskLevelFromSecurityLevel('Low')        // "High Risk"
+getRiskLevelFromSecurityLevel('Moderate')   // "Medium Risk"
+getRiskLevelFromSecurityLevel('High')       // "Low Risk"
+getRiskLevelFromSecurityLevel('Very High')  // "Minimal Risk"
+
+// Usage in risk assessment
+const securityLevel = getSecurityLevel();
+const riskLevel = getRiskLevelFromSecurityLevel(securityLevel);
+console.log(`Current risk: ${riskLevel}`);
+```

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.6**](../README.md)
+[**CIA Compliance Manager Documentation v1.1.0**](../README.md)
 
 ***
 
@@ -34,6 +34,7 @@ Centralized hook exports simplify imports and promote hook reuse.
 - [useBusinessImpact](functions/useBusinessImpact.md)
 - [useComponentDetails](functions/useComponentDetails.md)
 - [useFormattedMetrics](functions/useFormattedMetrics.md)
+- [useKeyboardShortcuts](functions/useKeyboardShortcuts.md)
 - [useLocalStorage](functions/useLocalStorage.md)
 - [useResponsiveBreakpoint](functions/useResponsiveBreakpoint.md)
 - [useSecurityLevelState](functions/useSecurityLevelState.md)
@@ -56,6 +57,12 @@ Re-exports [useCIAOptions](useCIAOptions/functions/useCIAOptions.md)
 ### useComplianceService
 
 Re-exports [useComplianceService](useComplianceService/functions/useComplianceService.md)
+
+***
+
+### UseKeyboardShortcutsOptions
+
+Re-exports [UseKeyboardShortcutsOptions](../types/interfaces/UseKeyboardShortcutsOptions.md)
 
 ***
 

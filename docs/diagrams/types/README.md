@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.0.6**](../README.md)
+[**CIA Compliance Manager Diagrams v1.1.0**](../README.md)
 
 ***
 
@@ -41,6 +41,9 @@ Centralized type exports simplify imports and enforce type consistency.
 - [CostEstimationWidgetProps](interfaces/CostEstimationWidgetProps.md)
 - [ImplementationEffort](interfaces/ImplementationEffort.md)
 - [IntegrityImpactWidgetProps](interfaces/IntegrityImpactWidgetProps.md)
+- [KeyboardShortcut](interfaces/KeyboardShortcut.md)
+- [KeyboardShortcutContextValue](interfaces/KeyboardShortcutContextValue.md)
+- [KeyboardShortcutHelpProps](interfaces/KeyboardShortcutHelpProps.md)
 - [MetricsCardProps](interfaces/MetricsCardProps.md)
 - [RadarChartProps](interfaces/RadarChartProps.md)
 - [RiskAssessmentProps](interfaces/RiskAssessmentProps.md)
@@ -49,8 +52,10 @@ Centralized type exports simplify imports and enforce type consistency.
 - [ROIMetrics](interfaces/ROIMetrics.md)
 - [SecurityLevelWidgetProps](interfaces/SecurityLevelWidgetProps.md)
 - [SecurityResourcesWidgetProps](interfaces/SecurityResourcesWidgetProps.md)
+- [ShortcutBadgeProps](interfaces/ShortcutBadgeProps.md)
 - [StatusBadgeProps](interfaces/StatusBadgeProps.md)
 - [TechnicalImplementationDetails](interfaces/TechnicalImplementationDetails.md)
+- [UseKeyboardShortcutsOptions](interfaces/UseKeyboardShortcutsOptions.md)
 - [ValueCreationWidgetProps](interfaces/ValueCreationWidgetProps.md)
 - [WidgetHeaderProps](interfaces/WidgetHeaderProps.md)
 - [WithSecurityLevelProps](interfaces/WithSecurityLevelProps.md)
@@ -58,6 +63,9 @@ Centralized type exports simplify imports and enforce type consistency.
 ## Type Aliases
 
 - [CIAComponentType](type-aliases/CIAComponentType.md)
+- [Platform](type-aliases/Platform.md)
+- [ShortcutCategory](type-aliases/ShortcutCategory.md)
+- [ShortcutMap](type-aliases/ShortcutMap.md)
 - [TechnicalDetailsWidgetProps](type-aliases/TechnicalDetailsWidgetProps.md)
 
 ## Functions

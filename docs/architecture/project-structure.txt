@@ -5,6 +5,7 @@ src/application/CIAClassificationApp.comprehensive.test.tsx
 src/application/CIAClassificationApp.darkmode.test.tsx
 src/application/CIAClassificationApp.direct.test.tsx
 src/application/CIAClassificationApp.enhanced.test.tsx
+src/application/CIAClassificationApp.lazyloading.test.tsx
 src/application/CIAClassificationApp.test.tsx
 src/application/CIAClassificationApp.tsx
 src/components/charts/RadarChart.comprehensive.test.tsx
@@ -18,8 +19,12 @@ src/components/common/BusinessImpactSection.test.tsx
 src/components/common/BusinessImpactSection.tsx
 src/components/common/ErrorMessage.test.tsx
 src/components/common/ErrorMessage.tsx
+src/components/common/ErrorToast.test.tsx
+src/components/common/ErrorToast.tsx
 src/components/common/KeyValuePair.test.tsx
 src/components/common/KeyValuePair.tsx
+src/components/common/KeyboardShortcutHelp.test.tsx
+src/components/common/KeyboardShortcutHelp.tsx
 src/components/common/LoadingSkeleton.test.tsx
 src/components/common/LoadingSkeleton.tsx
 src/components/common/LoadingSpinner.test.tsx
@@ -32,6 +37,8 @@ src/components/common/SecurityLevelBadge.test.tsx
 src/components/common/SecurityLevelBadge.tsx
 src/components/common/SecurityLevelIndicator.test.tsx
 src/components/common/SecurityLevelIndicator.tsx
+src/components/common/ShortcutBadge.test.tsx
+src/components/common/ShortcutBadge.tsx
 src/components/common/StatusBadge.test.tsx
 src/components/common/StatusBadge.tsx
 src/components/common/ValueDisplay.test.tsx
@@ -89,7 +96,10 @@ src/constants/complianceConstants.ts
 src/constants/coreConstants.ts
 src/constants/costConstants.test.ts
 src/constants/costConstants.ts
+src/constants/designTokens.test.ts
+src/constants/designTokens.ts
 src/constants/index.ts
+src/constants/keyboardShortcuts.ts
 src/constants/riskConstants.test.ts
 src/constants/riskConstants.ts
 src/constants/securityLevels.test.ts
@@ -100,6 +110,10 @@ src/constants/testIds.test.ts
 src/constants/testIds.ts
 src/constants/uiConstants.test.ts
 src/constants/uiConstants.ts
+src/contexts/ErrorContext.test.tsx
+src/contexts/ErrorContext.tsx
+src/contexts/KeyboardShortcutContext.test.tsx
+src/contexts/KeyboardShortcutContext.tsx
 src/data/ciaOptionsData.test.ts
 src/data/ciaOptionsData.ts
 src/data/dataExports.test.ts
@@ -134,6 +148,8 @@ src/hooks/useComponentDetails.test.ts
 src/hooks/useComponentDetails.ts
 src/hooks/useFormattedMetrics.test.ts
 src/hooks/useFormattedMetrics.ts
+src/hooks/useKeyboardShortcuts.test.ts
+src/hooks/useKeyboardShortcuts.ts
 src/hooks/useLocalStorage.test.ts
 src/hooks/useLocalStorage.ts
 src/hooks/useResponsiveBreakpoint.test.ts
@@ -174,6 +190,10 @@ src/services/complianceTestHelpers.test.ts
 src/services/complianceTestHelpers.ts
 src/services/dataProviders.test.ts
 src/services/dataProviders.ts
+src/services/errorService.test.ts
+src/services/errorService.ts
+src/services/errors.test.ts
+src/services/errors.ts
 src/services/index.ts
 src/services/securityMetricsService.impact.test.ts
 src/services/securityMetricsService.test.ts
@@ -232,12 +252,16 @@ src/types/global.d.ts
 src/types/impact.ts
 src/types/index.ts
 src/types/jest.d.ts
+src/types/keyboard.ts
 src/types/risk.ts
 src/types/securityResources.ts
+src/types/services.ts
 src/types/vitest.d.ts
 src/types/widget-props.ts
 src/types/widgets.test.ts
 src/types/widgets.ts
+src/utils/accessibility.test.ts
+src/utils/accessibility.ts
 src/utils/businessValueUtils.ts
 src/utils/colorUtils.test.ts
 src/utils/colorUtils.ts
@@ -252,6 +276,8 @@ src/utils/formatUtils.ts
 src/utils/implementationUtils.ts
 src/utils/index.test.ts
 src/utils/index.ts
+src/utils/keyboardUtils.test.ts
+src/utils/keyboardUtils.ts
 src/utils/levelValuesUtils.test.ts
 src/utils/levelValuesUtils.ts
 src/utils/logger.test.ts

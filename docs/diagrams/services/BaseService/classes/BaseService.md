@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.0.6**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.0**](../../../README.md)
 
 ***
 
@@ -6,10 +6,16 @@
 
 # Class: BaseService
 
-Defined in: [services/BaseService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/BaseService.ts#L26)
+Defined in: [services/BaseService.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L40)
 
 Base service class that provides common functionality
 for security-related services
+
+## Key Features
+- Standardized error handling
+- Input validation
+- Common utility methods
+- Consistent logging patterns
 
 ## Extended by
 
@@ -24,6 +30,7 @@ for security-related services
 ## Implements
 
 - [`CIAService`](../interfaces/CIAService.md)
+- `IBaseService`
 
 ## Constructors
 
@@ -31,7 +38,7 @@ for security-related services
 
 > **new BaseService**(`dataProvider`): `BaseService`
 
-Defined in: [services/BaseService.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/BaseService.ts#L37)
+Defined in: [services/BaseService.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L56)
 
 Create a new service instance
 
@@ -47,13 +54,27 @@ Data provider for security information
 
 `BaseService`
 
+## Properties
+
+### name
+
+> `readonly` **name**: `string` = `'BaseService'`
+
+Defined in: [services/BaseService.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L44)
+
+Service name for identification
+
+#### Implementation of
+
+`IBaseService.name`
+
 ## Methods
 
 ### getComponentDetails()
 
 > **getComponentDetails**(`component`, `level`): [`CIADetails`](../../../types/interfaces/CIADetails.md) \| `undefined`
 
-Defined in: [services/BaseService.ts:53](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/BaseService.ts#L53)
+Defined in: [services/BaseService.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L193)
 
 Get component details for a specific component and security level
 
@@ -81,7 +102,7 @@ Get component details for a specific component and security level
 
 > **getRiskLevelFromSecurityLevel**(`level`): `string`
 
-Defined in: [services/BaseService.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/BaseService.ts#L114)
+Defined in: [services/BaseService.ts:254](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L254)
 
 Get risk level from security level
 
@@ -105,7 +126,7 @@ Get risk level from security level
 
 > **getSecurityLevelDescription**(`level`): `string`
 
-Defined in: [services/BaseService.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/BaseService.ts#L93)
+Defined in: [services/BaseService.ts:233](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L233)
 
 Get security level description
 
@@ -122,3 +143,59 @@ Get security level description
 #### Implementation of
 
 [`CIAService`](../interfaces/CIAService.md).[`getSecurityLevelDescription`](../interfaces/CIAService.md#getsecurityleveldescription)
+
+***
+
+### handleError()
+
+> **handleError**(`error`): [`ServiceError`](../../classes/ServiceError.md)
+
+Defined in: [services/BaseService.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L104)
+
+Handle errors consistently across services
+
+#### Parameters
+
+##### error
+
+`Error`
+
+Error to handle
+
+#### Returns
+
+[`ServiceError`](../../classes/ServiceError.md)
+
+ServiceError
+
+#### Implementation of
+
+`IBaseService.handleError`
+
+***
+
+### validate()
+
+> **validate**(`input`): `boolean`
+
+Defined in: [services/BaseService.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L73)
+
+Validate input parameters (to be overridden by subclasses)
+
+#### Parameters
+
+##### input
+
+`unknown`
+
+Input to validate
+
+#### Returns
+
+`boolean`
+
+True if valid, false otherwise
+
+#### Implementation of
+
+`IBaseService.validate`

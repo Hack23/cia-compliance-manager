@@ -436,7 +436,25 @@
 <a name='L371'></a><a href='#L371'>371</a>
 <a name='L372'></a><a href='#L372'>372</a>
 <a name='L373'></a><a href='#L373'>373</a>
-<a name='L374'></a><a href='#L374'>374</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L374'></a><a href='#L374'>374</a>
+<a name='L375'></a><a href='#L375'>375</a>
+<a name='L376'></a><a href='#L376'>376</a>
+<a name='L377'></a><a href='#L377'>377</a>
+<a name='L378'></a><a href='#L378'>378</a>
+<a name='L379'></a><a href='#L379'>379</a>
+<a name='L380'></a><a href='#L380'>380</a>
+<a name='L381'></a><a href='#L381'>381</a>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a>
+<a name='L384'></a><a href='#L384'>384</a>
+<a name='L385'></a><a href='#L385'>385</a>
+<a name='L386'></a><a href='#L386'>386</a>
+<a name='L387'></a><a href='#L387'>387</a>
+<a name='L388'></a><a href='#L388'>388</a>
+<a name='L389'></a><a href='#L389'>389</a>
+<a name='L390'></a><a href='#L390'>390</a>
+<a name='L391'></a><a href='#L391'>391</a>
+<a name='L392'></a><a href='#L392'>392</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -499,7 +517,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -809,6 +828,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { useSecurityMetricsService } from "../../../hooks/useSecurityMetricsService";
@@ -825,6 +861,7 @@ import {
   getSecurityLevelValue,
   normalizeSecurityLevel,
 } from "../../../utils/securityLevelUtils";
+import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import RadarChart from "../../charts/RadarChart";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -948,7 +985,7 @@ const SecurityVisualizationWidget: React.FC&lt;
     return (
       &lt;div className="space-y-2 mt-4" data-testid="security-recommendations"&gt;
         {availabilityValue &lt; 2 &amp;&amp; (
-          &lt;div className="p-2 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded"&gt;
+          &lt;div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded"&gt;
             &lt;p className="text-sm"&gt;
               Consider improving availability controls to ensure business
               continuity.
@@ -956,7 +993,7 @@ const SecurityVisualizationWidget: React.FC&lt;
           &lt;/div&gt;
         )}
         {integrityValue &lt; 3 &amp;&amp; (
-          &lt;div className="p-2 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded"&gt;
+          &lt;div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded"&gt;
             &lt;p className="text-sm"&gt;
               Enhance data validation mechanisms and change management to
               improve integrity.
@@ -964,7 +1001,7 @@ const SecurityVisualizationWidget: React.FC&lt;
           &lt;/div&gt;
         )}
         {confidentialityValue &lt; 2 &amp;&amp; (
-          &lt;div className="p-2 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded"&gt;
+          &lt;div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md"&gt;
             &lt;p className="text-sm"&gt;
               Strengthen access controls and data protection to improve
               confidentiality.
@@ -985,11 +1022,25 @@ const SecurityVisualizationWidget: React.FC&lt;
         isLoading={isLoading}
         error={error}
       &gt;
-      &lt;div className="p-4"&gt;
+      &lt;div 
+        className="p-md sm:p-lg"
+        role="region"
+        aria-label={getWidgetAriaDescription(
+          "Security Visualization",
+          "Visual representation of security posture with CIA triad metrics, security score, and risk level"
+        )}
+      &gt;
         {/* Security score section */}
-        &lt;div className="mb-6"&gt;
-          &lt;h3 className="text-lg font-medium mb-3"&gt;Security Posture&lt;/h3&gt;
-          &lt;div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"&gt;
+        &lt;section 
+          className="mb-6"
+          aria-labelledby="security-posture-heading"
+        &gt;
+          &lt;h3 id="security-posture-heading" className="text-lg font-medium mb-3"&gt;Security Posture&lt;/h3&gt;
+          &lt;div 
+            className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md"
+            role="group"
+            aria-label="Security metrics"
+          &gt;
             &lt;div className="flex justify-between items-center mb-4"&gt;
               &lt;div&gt;
                 &lt;div className="text-sm text-gray-600 dark:text-gray-400"&gt;
@@ -998,6 +1049,7 @@ const SecurityVisualizationWidget: React.FC&lt;
                 &lt;div
                   className="text-3xl font-bold"
                   data-testid="security-score-value"
+                  aria-label={`Security score: ${securityScore} out of 100`}
                 &gt;
                   {securityScore}
                 &lt;/div&gt;
@@ -1011,6 +1063,8 @@ const SecurityVisualizationWidget: React.FC&lt;
                     riskLevel
                   )}`}
                   data-testid="risk-level"
+                  role="status"
+                  aria-label={`Risk level: ${riskLevel}`}
                 &gt;
                   {riskLevel}
                 &lt;/div&gt;
@@ -1018,7 +1072,7 @@ const SecurityVisualizationWidget: React.FC&lt;
             &lt;/div&gt;
 &nbsp;
             {/* Score gauge */}
-            &lt;div className="mb-2"&gt;
+            &lt;div className="mb-2" aria-label="Security score visualization"&gt;
               &lt;div className="text-xs text-gray-600 dark:text-gray-400 mb-1"&gt;
                 Security Level
               &lt;/div&gt;
@@ -1040,14 +1094,14 @@ const SecurityVisualizationWidget: React.FC&lt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
-        &lt;/div&gt;
+        &lt;/section&gt;
 &nbsp;
         {/* Security Radar Chart using existing component */}
         &lt;div className="mb-6"&gt;
           &lt;h3 className="text-lg font-medium mb-3"&gt;Security Components&lt;/h3&gt;
 &nbsp;
           {/* Reuse the RadarChart component */}
-          &lt;div className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"&gt;
+          &lt;div className="p-md bg-white dark:bg-gray-800 rounded-md border border-neutral-light dark:border-neutral-dark"&gt;
             &lt;RadarChart
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
@@ -1063,11 +1117,11 @@ const SecurityVisualizationWidget: React.FC&lt;
           &lt;div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"&gt;
             {/* Confidentiality component */}
             &lt;div
-              className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg"
+              className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md"
               data-testid="confidentiality-component"
             &gt;
               &lt;div className="flex items-center justify-between mb-2"&gt;
-                &lt;div className="text-md font-medium text-purple-800 dark:text-purple-300"&gt;
+                &lt;div className="text-md font-medium text-primary-dark dark:text-primary-light"&gt;
                   Confidentiality
                 &lt;/div&gt;
                 &lt;SecurityLevelIndicator
@@ -1077,7 +1131,7 @@ const SecurityVisualizationWidget: React.FC&lt;
               &lt;/div&gt;
               &lt;div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5"&gt;
                 &lt;div
-                  className="bg-purple-500 h-1.5 rounded-full"
+                  className="bg-primary h-1.5 rounded-full"
                   style={{
                     width: `${
                       (getSecurityLevelValue(confidentialityLevel) / 4) * 100
@@ -1189,7 +1243,7 @@ export default SecurityVisualizationWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-24T21:19:38.007Z
+                at 2025-12-28T14:18:48.271Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

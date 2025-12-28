@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.6**](../README.md)
+[**CIA Compliance Manager Documentation v1.1.0**](../README.md)
 
 ***
 
@@ -17,17 +17,41 @@ and business impact analysis, centralizing critical functionality. 💼
 ## Technical Perspective
 Centralized service exports simplify imports and promote service reuse.
 
+## Enumerations
+
+- [ErrorSeverity](enumerations/ErrorSeverity.md)
+- [ServiceErrorCode](enumerations/ServiceErrorCode.md)
+
 ## Classes
 
 - [ComplianceServiceAdapter](classes/ComplianceServiceAdapter.md)
+- [ErrorService](classes/ErrorService.md)
+- [ServiceError](classes/ServiceError.md)
 
 ## Interfaces
 
+- [ErrorContext](interfaces/ErrorContext.md)
+- [ErrorLogEntry](interfaces/ErrorLogEntry.md)
 - [SecurityResource](interfaces/SecurityResource.md)
 
 ## Variables
 
 - [defaultCIAContentService](variables/defaultCIAContentService.md)
+- [errorService](variables/errorService.md)
+
+## Functions
+
+- [createCalculationError](functions/createCalculationError.md)
+- [createDataNotFoundError](functions/createDataNotFoundError.md)
+- [createNetworkServiceError](functions/createNetworkServiceError.md)
+- [createRetryableServiceError](functions/createRetryableServiceError.md)
+- [createValidationError](functions/createValidationError.md)
+- [createValidationServiceError](functions/createValidationServiceError.md)
+- [getErrorMessage](functions/getErrorMessage.md)
+- [isNetworkError](functions/isNetworkError.md)
+- [isRetryableError](functions/isRetryableError.md)
+- [isServiceError](functions/isServiceError.md)
+- [isValidationError](functions/isValidationError.md)
 
 ## References
 

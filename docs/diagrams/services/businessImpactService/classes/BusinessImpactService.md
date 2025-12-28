@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.0.6**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.0**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: BusinessImpactService
 
-Defined in: [services/businessImpactService.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/businessImpactService.ts#L34)
+Defined in: [services/businessImpactService.ts:37](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/businessImpactService.ts#L37)
 
 Service for business impact related functionality
 
@@ -17,9 +17,15 @@ different dimensions including financial, operational, reputational,
 strategic, and regulatory perspectives. It helps organizations understand
 the business value of their security investments. 💼
 
+## Implements
+
 ## Extends
 
 - [`BaseService`](../../BaseService/classes/BaseService.md)
+
+## Implements
+
+- `IBusinessImpactService`
 
 ## Constructors
 
@@ -27,7 +33,9 @@ the business value of their security investments. 💼
 
 > **new BusinessImpactService**(`dataProvider`): `BusinessImpactService`
 
-Defined in: [services/businessImpactService.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/businessImpactService.ts#L35)
+Defined in: [services/businessImpactService.ts:49](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/businessImpactService.ts#L49)
+
+Create a new BusinessImpactService instance
 
 #### Parameters
 
@@ -35,13 +43,37 @@ Defined in: [services/businessImpactService.ts:35](https://github.com/Hack23/cia
 
 [`CIADataProvider`](../../../types/interfaces/CIADataProvider.md)
 
+Data provider for CIA options and business impact data
+
 #### Returns
 
 `BusinessImpactService`
 
+#### Throws
+
+If dataProvider is not provided
+
 #### Overrides
 
 [`BaseService`](../../BaseService/classes/BaseService.md).[`constructor`](../../BaseService/classes/BaseService.md#constructor)
+
+## Properties
+
+### name
+
+> `readonly` **name**: `string` = `'BusinessImpactService'`
+
+Defined in: [services/businessImpactService.ts:41](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/businessImpactService.ts#L41)
+
+Service name for identification
+
+#### Implementation of
+
+`IBusinessImpactService.name`
+
+#### Overrides
+
+[`BaseService`](../../BaseService/classes/BaseService.md).[`name`](../../BaseService/classes/BaseService.md#name)
 
 ## Methods
 
@@ -49,9 +81,12 @@ Defined in: [services/businessImpactService.ts:35](https://github.com/Hack23/cia
 
 > **calculateBusinessImpactLevel**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `string`
 
-Defined in: [services/businessImpactService.ts:215](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/businessImpactService.ts#L215)
+Defined in: [services/businessImpactService.ts:287](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/businessImpactService.ts#L287)
 
 Calculate business impact level based on security levels
+
+Evaluates the overall business impact risk by analyzing security levels
+across all three CIA components and determining the weakest link.
 
 #### Parameters
 
@@ -65,19 +100,34 @@ Availability security level
 
 [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md) = `availabilityLevel`
 
-Integrity security level
+Integrity security level (defaults to availabilityLevel if not provided)
 
 ##### confidentialityLevel
 
 [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md) = `availabilityLevel`
 
-Confidentiality security level
+Confidentiality security level (defaults to availabilityLevel if not provided)
 
 #### Returns
 
 `string`
 
-Business impact level description
+Business impact level description (e.g., "Critical", "High", "Moderate", "Low", "Minimal")
+
+#### Throws
+
+If any security level is invalid
+
+#### Example
+
+```typescript
+const impactLevel = service.calculateBusinessImpactLevel('High', 'Moderate', 'High');
+console.log(`Business impact risk: ${impactLevel}`);
+```
+
+#### Implementation of
+
+`IBusinessImpactService.calculateBusinessImpactLevel`
 
 ***
 
@@ -85,9 +135,13 @@ Business impact level description
 
 > **getBusinessImpact**(`component`, `level`): [`BusinessImpactDetails`](../../../types/interfaces/BusinessImpactDetails.md)
 
-Defined in: [services/businessImpactService.ts:46](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/businessImpactService.ts#L46)
+Defined in: [services/businessImpactService.ts:72](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/businessImpactService.ts#L72)
 
 Get business impact details for a security level
+
+Retrieves comprehensive business impact analysis including financial,
+operational, and reputational impacts for a specific CIA component
+at a given security level.
 
 #### Parameters
 
@@ -101,13 +155,29 @@ CIA component (confidentiality, integrity, availability)
 
 [`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md) = `...`
 
-Security level
+Security level (defaults to 'Moderate' if not provided)
 
 #### Returns
 
 [`BusinessImpactDetails`](../../../types/interfaces/BusinessImpactDetails.md)
 
-Business impact details
+Business impact details including summary and risk levels for each impact category
+
+#### Throws
+
+If component or level is invalid
+
+#### Example
+
+```typescript
+const impact = service.getBusinessImpact('confidentiality', 'High');
+console.log(impact.summary);
+console.log(`Financial risk: ${impact.financial.riskLevel}`);
+```
+
+#### Implementation of
+
+`IBusinessImpactService.getBusinessImpact`
 
 ***
 
@@ -115,9 +185,12 @@ Business impact details
 
 > **getBusinessImpactDescription**(`component`, `level`): `string`
 
-Defined in: [services/businessImpactService.ts:118](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/businessImpactService.ts#L118)
+Defined in: [services/businessImpactService.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/businessImpactService.ts#L176)
 
 Get business impact description for a security level
+
+Returns a human-readable description of the business impact for a specific
+CIA component at a given security level.
 
 #### Parameters
 
@@ -125,7 +198,7 @@ Get business impact description for a security level
 
 [`CIAComponentType`](../../../types/type-aliases/CIAComponentType.md)
 
-CIA component
+CIA component (confidentiality, integrity, availability)
 
 ##### level
 
@@ -137,7 +210,22 @@ Security level
 
 `string`
 
-Business impact description
+Business impact description string
+
+#### Throws
+
+If component or level is invalid
+
+#### Example
+
+```typescript
+const desc = service.getBusinessImpactDescription('availability', 'High');
+console.log(desc); // "High level of system uptime and availability..."
+```
+
+#### Implementation of
+
+`IBusinessImpactService.getBusinessImpactDescription`
 
 ***
 
@@ -145,9 +233,12 @@ Business impact description
 
 > **getCategoryIcon**(`category`): `string`
 
-Defined in: [services/businessImpactService.ts:107](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/businessImpactService.ts#L107)
+Defined in: [services/businessImpactService.ts:152](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/businessImpactService.ts#L152)
 
-Get impact category icon
+Get category icon for business impact visualization
+
+Returns an icon (emoji) representing the business impact category
+for visual identification in reports and dashboards.
 
 #### Parameters
 
@@ -155,13 +246,24 @@ Get impact category icon
 
 `string`
 
-Impact category
+Impact category (e.g., 'financial', 'operational', 'reputational')
 
 #### Returns
 
 `string`
 
-Emoji icon representing the category
+Icon string (emoji) for the category or '❓' if category is unknown
+
+#### Example
+
+```typescript
+const icon = service.getCategoryIcon('financial');
+console.log(icon); // '💰'
+```
+
+#### Implementation of
+
+`IBusinessImpactService.getCategoryIcon`
 
 ***
 
@@ -169,7 +271,7 @@ Emoji icon representing the category
 
 > **getComponentDetails**(`component`, `level`): [`CIADetails`](../../../types/interfaces/CIADetails.md) \| `undefined`
 
-Defined in: [services/BaseService.ts:53](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/BaseService.ts#L53)
+Defined in: [services/BaseService.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L193)
 
 Get component details for a specific component and security level
 
@@ -197,7 +299,7 @@ Get component details for a specific component and security level
 
 > **getDetailedDescription**(`category`, `detail?`): `string`
 
-Defined in: [services/businessImpactService.ts:141](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/businessImpactService.ts#L141)
+Defined in: [services/businessImpactService.ts:203](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/businessImpactService.ts#L203)
 
 Get detailed description of business impact
 
@@ -227,7 +329,7 @@ Formatted detailed description
 
 > **getRiskLevelFromSecurityLevel**(`level`): `string`
 
-Defined in: [services/businessImpactService.ts:331](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/businessImpactService.ts#L331)
+Defined in: [services/businessImpactService.ts:408](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/businessImpactService.ts#L408)
 
 Get risk level from security level
 
@@ -255,7 +357,7 @@ Risk level
 
 > **getSecurityLevelDescription**(`level`): `string`
 
-Defined in: [services/BaseService.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/BaseService.ts#L93)
+Defined in: [services/BaseService.ts:233](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L233)
 
 Get security level description
 
@@ -272,3 +374,67 @@ Get security level description
 #### Inherited from
 
 [`BaseService`](../../BaseService/classes/BaseService.md).[`getSecurityLevelDescription`](../../BaseService/classes/BaseService.md#getsecurityleveldescription)
+
+***
+
+### handleError()
+
+> **handleError**(`error`): [`ServiceError`](../../classes/ServiceError.md)
+
+Defined in: [services/BaseService.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L104)
+
+Handle errors consistently across services
+
+#### Parameters
+
+##### error
+
+`Error`
+
+Error to handle
+
+#### Returns
+
+[`ServiceError`](../../classes/ServiceError.md)
+
+ServiceError
+
+#### Implementation of
+
+`IBusinessImpactService.handleError`
+
+#### Inherited from
+
+[`BaseService`](../../BaseService/classes/BaseService.md).[`handleError`](../../BaseService/classes/BaseService.md#handleerror)
+
+***
+
+### validate()
+
+> **validate**(`input`): `boolean`
+
+Defined in: [services/BaseService.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L73)
+
+Validate input parameters (to be overridden by subclasses)
+
+#### Parameters
+
+##### input
+
+`unknown`
+
+Input to validate
+
+#### Returns
+
+`boolean`
+
+True if valid, false otherwise
+
+#### Implementation of
+
+`IBusinessImpactService.validate`
+
+#### Inherited from
+
+[`BaseService`](../../BaseService/classes/BaseService.md).[`validate`](../../BaseService/classes/BaseService.md#validate)

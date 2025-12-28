@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.6**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.0**](../../README.md)
 
 ***
 
@@ -9,10 +9,6 @@
 ## Classes
 
 - [ComplianceService](classes/ComplianceService.md)
-
-## Interfaces
-
-- [ComplianceStatusDetails](interfaces/ComplianceStatusDetails.md)
 
 ## Type Aliases
 

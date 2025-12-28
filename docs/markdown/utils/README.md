@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.6**](../README.md)
+[**CIA Compliance Manager Documentation v1.1.0**](../README.md)
 
 ***
 
@@ -13,6 +13,9 @@ to ensure they're properly accessible throughout the application.
 
 ## Variables
 
+- [announceToScreenReader](variables/announceToScreenReader.md)
+- [ARIA\_LIVE](variables/ARIA_LIVE.md)
+- [ARIA\_ROLES](variables/ARIA_ROLES.md)
 - [asSecurityLevel](variables/asSecurityLevel.md)
 - [calculateCombinedRiskLevel](variables/calculateCombinedRiskLevel.md)
 - [calculateImplementationCost](variables/calculateImplementationCost.md)
@@ -38,11 +41,15 @@ to ensure they're properly accessible throughout the application.
 - [formatSecurityLevelString](variables/formatSecurityLevelString.md)
 - [formatTimeframe](variables/formatTimeframe.md)
 - [formatUptime](variables/formatUptime.md)
+- [getButtonAriaProps](variables/getButtonAriaProps.md)
+- [getChartAriaProps](variables/getChartAriaProps.md)
 - [getColorForRiskLevel](variables/getColorForRiskLevel.md)
 - [getComplianceStatusColor](variables/getComplianceStatusColor.md)
 - [getFormattedRiskLevel](variables/getFormattedRiskLevel.md)
+- [getMetricAccessibleName](variables/getMetricAccessibleName.md)
 - [getNormalizedSecurityValue](variables/getNormalizedSecurityValue.md)
 - [getNumericSecurityLevelValue](variables/getNumericSecurityLevelValue.md)
+- [getProgressAriaProps](variables/getProgressAriaProps.md)
 - [getRecommendedBudgetAllocation](variables/getRecommendedBudgetAllocation.md)
 - [getRecommendedSecurityLevel](variables/getRecommendedSecurityLevel.md)
 - [getRiskBadgeVariant](variables/getRiskBadgeVariant.md)
@@ -50,6 +57,7 @@ to ensure they're properly accessible throughout the application.
 - [getRiskScoreFromSecurityLevel](variables/getRiskScoreFromSecurityLevel.md)
 - [getRiskSeverityDescription](variables/getRiskSeverityDescription.md)
 - [getSecurityIcon](variables/getSecurityIcon.md)
+- [getSecurityLevelAriaLabel](variables/getSecurityLevelAriaLabel.md)
 - [getSecurityLevelBadgeVariant](variables/getSecurityLevelBadgeVariant.md)
 - [getSecurityLevelClass](variables/getSecurityLevelClass.md)
 - [getSecurityLevelColorClass](variables/getSecurityLevelColorClass.md)
@@ -57,9 +65,16 @@ to ensure they're properly accessible throughout the application.
 - [getSecurityLevelFromValue](variables/getSecurityLevelFromValue.md)
 - [getSecurityLevelPercentage](variables/getSecurityLevelPercentage.md)
 - [getSecurityLevelValue](variables/getSecurityLevelValue.md)
+- [getSelectAriaProps](variables/getSelectAriaProps.md)
+- [getStatusAriaProps](variables/getStatusAriaProps.md)
 - [getStatusBadgeForRiskLevel](variables/getStatusBadgeForRiskLevel.md)
+- [getTabAriaProps](variables/getTabAriaProps.md)
+- [getTabIndex](variables/getTabIndex.md)
+- [getTabPanelAriaProps](variables/getTabPanelAriaProps.md)
+- [getWidgetAriaDescription](variables/getWidgetAriaDescription.md)
 - [getWidgetColumnSpan](variables/getWidgetColumnSpan.md)
 - [getWidgetRowSpan](variables/getWidgetRowSpan.md)
+- [handleArrowKeyNavigation](variables/handleArrowKeyNavigation.md)
 - [handleWidgetError](variables/handleWidgetError.md)
 - [hasProperty](variables/hasProperty.md)
 - [hasTagValue](variables/hasTagValue.md)
@@ -86,6 +101,7 @@ to ensure they're properly accessible throughout the application.
 - [isWidgetType](variables/isWidgetType.md)
 - [KeyValuePair](variables/KeyValuePair.md)
 - [meetsComplianceRequirements](variables/meetsComplianceRequirements.md)
+- [meetsContrastRequirement](variables/meetsContrastRequirement.md)
 - [normalizeSecurityLevel](variables/normalizeSecurityLevel.md)
 - [parseRiskLevel](variables/parseRiskLevel.md)
 - [RiskLevelKeyValue](variables/RiskLevelKeyValue.md)
@@ -102,10 +118,23 @@ to ensure they're properly accessible throughout the application.
 
 ## Functions
 
+- [areKeyboardShortcutsSupported](functions/areKeyboardShortcutsSupported.md)
 - [calculateWidgetRiskLevel](functions/calculateWidgetRiskLevel.md)
+- [detectPlatform](functions/detectPlatform.md)
 - [formatSecurityMetric](functions/formatSecurityMetric.md)
+- [formatShortcut](functions/formatShortcut.md)
+- [getKeyCombination](functions/getKeyCombination.md)
+- [getPlatformModifier](functions/getPlatformModifier.md)
+- [getPlatformShortcut](functions/getPlatformShortcut.md)
 - [getProgressColor](functions/getProgressColor.md)
 - [getSeverityColor](functions/getSeverityColor.md)
+- [getShortcutAriaLabel](functions/getShortcutAriaLabel.md)
+- [isInputElement](functions/isInputElement.md)
+- [normalizeShortcut](functions/normalizeShortcut.md)
+- [resetPlatformCache](functions/resetPlatformCache.md)
+- [shortcutsMatch](functions/shortcutsMatch.md)
+- [shouldIgnoreKeyboardEvent](functions/shouldIgnoreKeyboardEvent.md)
+- [splitShortcutKeys](functions/splitShortcutKeys.md)
 
 ## References
 

@@ -1,8 +1,8 @@
-[**CIA Compliance Manager Diagrams v1.0.6**](README.md)
+[**CIA Compliance Manager Diagrams v1.1.0**](README.md)
 
 ***
 
-# CIA Compliance Manager Diagrams v1.0.6
+# CIA Compliance Manager Diagrams v1.1.0
 
 ## Modules
 
@@ -32,11 +32,11 @@
 - [constants](constants/README.md)
 - [constants/appConstants](constants/appConstants/README.md)
 - [constants/businessConstants](constants/businessConstants/README.md)
-- [constants/coreConstants](constants/coreConstants/README.md)
 - [constants/costConstants](constants/costConstants/README.md)
 - [constants/riskConstants](constants/riskConstants/README.md)
 - [constants/securityLevels](constants/securityLevels/README.md)
 - [constants/uiConstants](constants/uiConstants/README.md)
+- [coreConstants](coreConstants/README.md)
 - [data/ciaOptionsData](data/ciaOptionsData/README.md)
 - [data/riskImpactData](data/riskImpactData/README.md)
 - [data/security](data/security/README.md)

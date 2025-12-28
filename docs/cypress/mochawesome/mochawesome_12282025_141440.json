@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-12-28T14:14:37.991Z",
+    "end": "2025-12-28T14:14:40.581Z",
+    "duration": 2590,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "f4200fab-1c5b-472a-915a-e2827b4ce419",
+      "title": "",
+      "fullFile": "cypress/e2e/screenshots/widget-screenshots.cy.ts",
+      "file": "cypress/e2e/screenshots/widget-screenshots.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2dd73359-a063-49b7-a075-2ce4e135d23a",
+          "title": "Widget UI/UX Screenshots",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "captures full dashboard grid in light mode only",
+              "fullTitle": "Widget UI/UX Screenshots captures full dashboard grid in light mode only",
+              "timedOut": null,
+              "duration": 1205,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Set wider viewport to ensure all columns are visible\ncy.viewport(2400, 1200);\n// Ensure grid layout is properly displayed\ncy.get('[data-testid=\"dashboard-grid\"]').should(\"be.visible\");\n// Capture only light mode to reduce test time by 50%\ncy.screenshot(\"dashboard-grid-light\", { capture: \"viewport\" });",
+              "err": {},
+              "uuid": "c77a69f1-b0cd-4605-a35d-82b15c456740",
+              "parentUUID": "2dd73359-a063-49b7-a075-2ce4e135d23a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "captures essential widgets in light theme only",
+              "fullTitle": "Widget UI/UX Screenshots captures essential widgets in light theme only",
+              "timedOut": null,
+              "duration": 1244,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Capture only light theme to reduce test time - dark theme can be tested separately if needed\nessentialWidgets.forEach((widgetName) => {\n    cy.log(`Capturing widget: ${widgetName}`);\n    // Simplified capture - just take a single screenshot\n    cy.findWidget(widgetName).then(($widget) => {\n        if ($widget.length > 0) {\n            cy.wrap($widget.first()).screenshot(`widget-${widgetName}-light`, {\n                overwrite: true,\n            });\n        }\n    });\n});",
+              "err": {},
+              "uuid": "8b87e01f-f405-4948-ad61-a0dd2c90ba5f",
+              "parentUUID": "2dd73359-a063-49b7-a075-2ce4e135d23a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c77a69f1-b0cd-4605-a35d-82b15c456740",
+            "8b87e01f-f405-4948-ad61-a0dd2c90ba5f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2449,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "build/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

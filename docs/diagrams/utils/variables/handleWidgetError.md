@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.0.6**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.0**](../../README.md)
 
 ***
 
@@ -8,14 +8,39 @@
 
 > **handleWidgetError**: (`error`) => `string`
 
-Defined in: [utils/index.ts:122](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/utils/index.ts#L122)
+Defined in: [utils/index.ts:147](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/utils/index.ts#L147)
+
+Handle widget errors and format error messages consistently
+
+Provides consistent error message formatting across all widgets,
+handling null/undefined errors gracefully with fallback messages.
 
 ## Parameters
 
 ### error
+
+Error object or null/undefined
 
 `Error` | `null` | `undefined`
 
 ## Returns
 
 `string`
+
+Formatted error message string
+
+## Example
+
+```typescript
+handleWidgetError(new Error('Network failed'))  // 'Error: Network failed'
+handleWidgetError(null)                         // 'Error: Unknown error'
+handleWidgetError(undefined)                    // 'Error: Unknown error'
+
+// Usage in error boundary
+try {
+  await loadWidgetData();
+} catch (error) {
+  const message = handleWidgetError(error as Error);
+  showNotification(message);
+}
+```

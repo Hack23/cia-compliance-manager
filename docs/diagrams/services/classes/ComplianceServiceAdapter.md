@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.0.6**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.0**](../../README.md)
 
 ***
 
@@ -6,13 +6,24 @@
 
 # Class: ComplianceServiceAdapter
 
-Defined in: [services/ComplianceServiceAdapter.ts:39](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/ComplianceServiceAdapter.ts#L39)
+Defined in: [services/ComplianceServiceAdapter.ts:45](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/ComplianceServiceAdapter.ts#L45)
 
 Adapter for compliance service functionality
+
+## Business Perspective
+Provides a simplified interface to compliance checking and framework mapping,
+adapting the ComplianceService for easier consumption by components and services.
+Enables organizations to understand their compliance posture and identify gaps. 📋
+
+## Implements
 
 ## Extends
 
 - [`BaseService`](../BaseService/classes/BaseService.md)
+
+## Implements
+
+- `IComplianceService`
 
 ## Constructors
 
@@ -20,7 +31,9 @@ Adapter for compliance service functionality
 
 > **new ComplianceServiceAdapter**(`dataProvider`): `ComplianceServiceAdapter`
 
-Defined in: [services/ComplianceServiceAdapter.ts:113](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/ComplianceServiceAdapter.ts#L113)
+Defined in: [services/ComplianceServiceAdapter.ts:136](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/ComplianceServiceAdapter.ts#L136)
+
+Create a new ComplianceServiceAdapter instance
 
 #### Parameters
 
@@ -28,9 +41,15 @@ Defined in: [services/ComplianceServiceAdapter.ts:113](https://github.com/Hack23
 
 [`CIADataProvider`](../../types/interfaces/CIADataProvider.md)
 
+Data provider for CIA options and compliance data
+
 #### Returns
 
 `ComplianceServiceAdapter`
+
+#### Throws
+
+If dataProvider is not provided
 
 #### Overrides
 
@@ -42,7 +61,28 @@ Defined in: [services/ComplianceServiceAdapter.ts:113](https://github.com/Hack23
 
 > **frameworkRequirements**: `Record`\<`string`, \{ `availability`: [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md); `confidentiality`: [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md); `integrity`: [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md); \}\>
 
-Defined in: [services/ComplianceServiceAdapter.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/ComplianceServiceAdapter.ts#L43)
+Defined in: [services/ComplianceServiceAdapter.ts:60](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/ComplianceServiceAdapter.ts#L60)
+
+Framework requirements mapping
+Maps compliance frameworks to their minimum security requirements
+
+***
+
+### name
+
+> `readonly` **name**: `string` = `'ComplianceServiceAdapter'`
+
+Defined in: [services/ComplianceServiceAdapter.ts:49](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/ComplianceServiceAdapter.ts#L49)
+
+Service name for identification
+
+#### Implementation of
+
+`IComplianceService.name`
+
+#### Overrides
+
+[`BaseService`](../BaseService/classes/BaseService.md).[`name`](../BaseService/classes/BaseService.md#name)
 
 ## Methods
 
@@ -50,9 +90,13 @@ Defined in: [services/ComplianceServiceAdapter.ts:43](https://github.com/Hack23/
 
 > **getComplianceGapAnalysis**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`, `framework?`): [`ComplianceGapAnalysis`](../../types/compliance/interfaces/ComplianceGapAnalysis.md)
 
-Defined in: [services/ComplianceServiceAdapter.ts:305](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/ComplianceServiceAdapter.ts#L305)
+Defined in: [services/ComplianceServiceAdapter.ts:433](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/ComplianceServiceAdapter.ts#L433)
 
 Get compliance gap analysis between current and required security levels
+
+Performs a comprehensive gap analysis, identifying where the current security
+posture falls short of compliance framework requirements and providing
+actionable remediation steps.
 
 #### Parameters
 
@@ -60,41 +104,60 @@ Get compliance gap analysis between current and required security levels
 
 [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md)
 
-Availability security level
+Current availability security level
 
 ##### integrityLevel
 
 [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md)
 
-Integrity security level
+Current integrity security level
 
 ##### confidentialityLevel
 
 [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md)
 
-Confidentiality security level
+Current confidentiality security level
 
 ##### framework?
 
 `string`
 
-Optional framework to analyze specifically
+Optional specific framework to analyze (analyzes all if not provided)
 
 #### Returns
 
 [`ComplianceGapAnalysis`](../../types/compliance/interfaces/ComplianceGapAnalysis.md)
 
-Compliance gap analysis
+Detailed gap analysis including gaps, recommendations, and compliance score
+
+#### Throws
+
+If any security level is invalid
+
+#### Example
+
+```typescript
+const gapAnalysis = adapter.getComplianceGapAnalysis('Moderate', 'Moderate', 'High', 'HIPAA');
+console.log(`Compliance score: ${gapAnalysis.complianceScore}%`);
+console.log(`Number of gaps: ${gapAnalysis.gaps.length}`);
+```
+
+#### Implementation of
+
+`IComplianceService.getComplianceGapAnalysis`
 
 ***
 
 ### getComplianceStatus()
 
-> **getComplianceStatus**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): [`ComplianceStatusDetails`](../complianceService/interfaces/ComplianceStatusDetails.md)
+> **getComplianceStatus**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): [`ComplianceStatusDetails`](../../types/compliance/interfaces/ComplianceStatusDetails.md)
 
-Defined in: [services/ComplianceServiceAdapter.ts:126](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/ComplianceServiceAdapter.ts#L126)
+Defined in: [services/ComplianceServiceAdapter.ts:159](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/ComplianceServiceAdapter.ts#L159)
 
 Get compliance status based on security levels
+
+Evaluates compliance with all supported frameworks based on the provided
+security levels for availability, integrity, and confidentiality.
 
 #### Parameters
 
@@ -118,9 +181,24 @@ Confidentiality security level
 
 #### Returns
 
-[`ComplianceStatusDetails`](../complianceService/interfaces/ComplianceStatusDetails.md)
+[`ComplianceStatusDetails`](../../types/compliance/interfaces/ComplianceStatusDetails.md)
 
-Compliance status details
+Compliance status details including compliant, partially compliant, and non-compliant frameworks
+
+#### Throws
+
+If any security level is invalid
+
+#### Example
+
+```typescript
+const status = adapter.getComplianceStatus('High', 'High', 'Very High');
+console.log(`Compliant with ${status.compliantFrameworks.length} frameworks`);
+```
+
+#### Implementation of
+
+`IComplianceService.getComplianceStatus`
 
 ***
 
@@ -128,9 +206,11 @@ Compliance status details
 
 > **getComplianceStatusText**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `string`
 
-Defined in: [services/ComplianceServiceAdapter.ts:146](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/ComplianceServiceAdapter.ts#L146)
+Defined in: [services/ComplianceServiceAdapter.ts:197](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/ComplianceServiceAdapter.ts#L197)
 
 Get compliance status text based on security levels
+
+Returns a human-readable text description of the overall compliance status.
 
 #### Parameters
 
@@ -144,19 +224,30 @@ Availability security level
 
 [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md) = `availabilityLevel`
 
-Integrity security level (optional, defaults to availabilityLevel)
+Integrity security level (defaults to availabilityLevel if not provided)
 
 ##### confidentialityLevel
 
 [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md) = `availabilityLevel`
 
-Confidentiality security level (optional, defaults to availabilityLevel)
+Confidentiality security level (defaults to availabilityLevel if not provided)
 
 #### Returns
 
 `string`
 
-Compliance status text
+Compliance status text description
+
+#### Throws
+
+If any security level is invalid
+
+#### Example
+
+```typescript
+const statusText = adapter.getComplianceStatusText('High', 'High', 'Very High');
+console.log(statusText); // "Compliant with all major frameworks"
+```
 
 ***
 
@@ -164,9 +255,12 @@ Compliance status text
 
 > **getCompliantFrameworks**(`availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `string`[]
 
-Defined in: [services/ComplianceServiceAdapter.ts:176](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/ComplianceServiceAdapter.ts#L176)
+Defined in: [services/ComplianceServiceAdapter.ts:242](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/ComplianceServiceAdapter.ts#L242)
 
-Get compliant frameworks
+Get compliant frameworks for given security levels
+
+Returns a list of all compliance frameworks that are fully satisfied
+by the provided security levels.
 
 #### Parameters
 
@@ -180,13 +274,13 @@ Availability security level
 
 [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md) = `availabilityLevel`
 
-Integrity security level (optional, defaults to availabilityLevel)
+Integrity security level (defaults to availabilityLevel if not provided)
 
 ##### confidentialityLevel
 
 [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md) = `availabilityLevel`
 
-Confidentiality security level (optional, defaults to availabilityLevel)
+Confidentiality security level (defaults to availabilityLevel if not provided)
 
 #### Returns
 
@@ -194,13 +288,28 @@ Confidentiality security level (optional, defaults to availabilityLevel)
 
 Array of compliant framework names
 
+#### Throws
+
+If any security level is invalid
+
+#### Example
+
+```typescript
+const frameworks = adapter.getCompliantFrameworks('High', 'High', 'Very High');
+console.log(`Compliant with: ${frameworks.join(', ')}`);
+```
+
+#### Implementation of
+
+`IComplianceService.getCompliantFrameworks`
+
 ***
 
 ### getComponentDetails()
 
 > **getComponentDetails**(`component`, `level`): [`CIADetails`](../../types/interfaces/CIADetails.md) \| `undefined`
 
-Defined in: [services/BaseService.ts:53](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/BaseService.ts#L53)
+Defined in: [services/BaseService.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L193)
 
 Get component details for a specific component and security level
 
@@ -228,9 +337,12 @@ Get component details for a specific component and security level
 
 > **getFrameworkDescription**(`framework`): `string`
 
-Defined in: [services/ComplianceServiceAdapter.ts:194](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/ComplianceServiceAdapter.ts#L194)
+Defined in: [services/ComplianceServiceAdapter.ts:275](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/ComplianceServiceAdapter.ts#L275)
 
 Get description of a compliance framework
+
+Returns a detailed description of the specified compliance framework,
+explaining its purpose and scope.
 
 #### Parameters
 
@@ -238,13 +350,24 @@ Get description of a compliance framework
 
 `string`
 
-Framework name
+Framework name (e.g., 'NIST 800-53', 'ISO 27001', 'GDPR')
 
 #### Returns
 
 `string`
 
-Framework description
+Framework description or "No description available" if framework is unknown
+
+#### Example
+
+```typescript
+const desc = adapter.getFrameworkDescription('GDPR');
+console.log(desc); // "General Data Protection Regulation for protecting personal data in the EU"
+```
+
+#### Implementation of
+
+`IComplianceService.getFrameworkDescription`
 
 ***
 
@@ -252,7 +375,7 @@ Framework description
 
 > **getFrameworkRequiredLevel**(`framework`, `component`): [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [services/ComplianceServiceAdapter.ts:286](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/ComplianceServiceAdapter.ts#L286)
+Defined in: [services/ComplianceServiceAdapter.ts:402](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/ComplianceServiceAdapter.ts#L402)
 
 Get required security level for a specific framework and component
 
@@ -282,9 +405,12 @@ Required security level
 
 > **getFrameworkStatus**(`framework`, `availabilityLevel`, `integrityLevel`, `confidentialityLevel`): `object`
 
-Defined in: [services/ComplianceServiceAdapter.ts:229](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/ComplianceServiceAdapter.ts#L229)
+Defined in: [services/ComplianceServiceAdapter.ts:329](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/ComplianceServiceAdapter.ts#L329)
 
-Get framework status (compliant, partially-compliant, non-compliant)
+Get framework compliance status
+
+Evaluates whether a specific framework's requirements are met by the given
+security levels.
 
 #### Parameters
 
@@ -292,7 +418,7 @@ Get framework status (compliant, partially-compliant, non-compliant)
 
 `string`
 
-Framework name
+Framework name to evaluate
 
 ##### availabilityLevel
 
@@ -316,11 +442,22 @@ Confidentiality security level
 
 `object`
 
-Compliance status for the framework
+Object containing status string (Compliant, Partially Compliant, or Non-Compliant)
 
 ##### status
 
 > **status**: `string`
+
+#### Throws
+
+If any security level is invalid
+
+#### Example
+
+```typescript
+const status = adapter.getFrameworkStatus('HIPAA', 'High', 'High', 'Very High');
+console.log(status.status); // "Compliant"
+```
 
 ***
 
@@ -328,7 +465,7 @@ Compliance status for the framework
 
 > **getRiskLevelFromSecurityLevel**(`level`): `string`
 
-Defined in: [services/BaseService.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/BaseService.ts#L114)
+Defined in: [services/BaseService.ts:254](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L254)
 
 Get risk level from security level
 
@@ -352,7 +489,7 @@ Get risk level from security level
 
 > **getSecurityLevelDescription**(`level`): `string`
 
-Defined in: [services/BaseService.ts:93](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/BaseService.ts#L93)
+Defined in: [services/BaseService.ts:233](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L233)
 
 Get security level description
 
@@ -372,11 +509,43 @@ Get security level description
 
 ***
 
+### handleError()
+
+> **handleError**(`error`): [`ServiceError`](ServiceError.md)
+
+Defined in: [services/BaseService.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L104)
+
+Handle errors consistently across services
+
+#### Parameters
+
+##### error
+
+`Error`
+
+Error to handle
+
+#### Returns
+
+[`ServiceError`](ServiceError.md)
+
+ServiceError
+
+#### Implementation of
+
+`IComplianceService.handleError`
+
+#### Inherited from
+
+[`BaseService`](../BaseService/classes/BaseService.md).[`handleError`](../BaseService/classes/BaseService.md#handleerror)
+
+***
+
 ### isFrameworkApplicable()
 
 > **isFrameworkApplicable**(`framework`, `industry?`, `region?`): `boolean`
 
-Defined in: [services/ComplianceServiceAdapter.ts:269](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/services/ComplianceServiceAdapter.ts#L269)
+Defined in: [services/ComplianceServiceAdapter.ts:385](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/ComplianceServiceAdapter.ts#L385)
 
 Check if a framework is applicable to an industry/region
 
@@ -405,3 +574,35 @@ Region (optional)
 `boolean`
 
 True if the framework is applicable
+
+***
+
+### validate()
+
+> **validate**(`input`): `boolean`
+
+Defined in: [services/BaseService.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L73)
+
+Validate input parameters (to be overridden by subclasses)
+
+#### Parameters
+
+##### input
+
+`unknown`
+
+Input to validate
+
+#### Returns
+
+`boolean`
+
+True if valid, false otherwise
+
+#### Implementation of
+
+`IComplianceService.validate`
+
+#### Inherited from
+
+[`BaseService`](../BaseService/classes/BaseService.md).[`validate`](../BaseService/classes/BaseService.md#validate)

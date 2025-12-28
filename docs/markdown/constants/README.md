@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.0.6**](../README.md)
+[**CIA Compliance Manager Documentation v1.1.0**](../README.md)
 
 ***
 
@@ -8,13 +8,23 @@
 
 ## Type Aliases
 
+- [BorderRadiusSize](type-aliases/BorderRadiusSize.md)
+- [KeyboardShortcutId](type-aliases/KeyboardShortcutId.md)
 - [RiskLevelLiteral](type-aliases/RiskLevelLiteral.md)
+- [SemanticColorType](type-aliases/SemanticColorType.md)
+- [ShadowDepth](type-aliases/ShadowDepth.md)
+- [SpacingSize](type-aliases/SpacingSize.md)
+- [TypographySize](type-aliases/TypographySize.md)
 
 ## Variables
 
+- [ACCESSIBILITY\_TEST\_IDS](variables/ACCESSIBILITY_TEST_IDS.md)
 - [APP\_TEST\_IDS](variables/APP_TEST_IDS.md)
 - [AVAILABILITY\_IMPACT\_TEST\_IDS](variables/AVAILABILITY_IMPACT_TEST_IDS.md)
+- [BORDER\_RADIUS](variables/BORDER_RADIUS.md)
+- [BREAKPOINTS](variables/BREAKPOINTS.md)
 - [BUSINESS\_IMPACT\_TEST\_IDS](variables/BUSINESS_IMPACT_TEST_IDS.md)
+- [BYPASS\_INPUT\_CHECK\_KEYS](variables/BYPASS_INPUT_CHECK_KEYS.md)
 - [CHART\_TEST\_IDS](variables/CHART_TEST_IDS.md)
 - [CIA\_TEST\_IDS](variables/CIA_TEST_IDS.md)
 - [COMMON\_COMPONENT\_TEST\_IDS](variables/COMMON_COMPONENT_TEST_IDS.md)
@@ -24,19 +34,35 @@
 - [COST\_ESTIMATION\_TEST\_IDS](variables/COST_ESTIMATION_TEST_IDS.md)
 - [COST\_TEST\_IDS](variables/COST_TEST_IDS.md)
 - [createDynamicTestId](variables/createDynamicTestId.md)
+- [EASING](variables/EASING.md)
+- [FONT\_WEIGHTS](variables/FONT_WEIGHTS.md)
 - [FRAMEWORK\_TEST\_IDS](variables/FRAMEWORK_TEST_IDS.md)
+- [INPUT\_ELEMENT\_TAGS](variables/INPUT_ELEMENT_TAGS.md)
 - [INTEGRITY\_IMPACT\_TEST\_IDS](variables/INTEGRITY_IMPACT_TEST_IDS.md)
+- [KEY\_DISPLAY\_NAMES](variables/KEY_DISPLAY_NAMES.md)
+- [KEYBOARD\_SHORTCUTS](variables/KEYBOARD_SHORTCUTS.md)
+- [KEYBOARD\_TEST\_IDS](variables/KEYBOARD_TEST_IDS.md)
+- [LINE\_HEIGHTS](variables/LINE_HEIGHTS.md)
+- [PLATFORM\_DETECTION](variables/PLATFORM_DETECTION.md)
 - [RESOURCE\_TEST\_IDS](variables/RESOURCE_TEST_IDS.md)
 - [SECURITY\_LEVEL\_TEST\_IDS](variables/SECURITY_LEVEL_TEST_IDS.md)
 - [SECURITY\_RESOURCES\_TEST\_IDS](variables/SECURITY_RESOURCES_TEST_IDS.md)
 - [SECURITY\_SUMMARY\_TEST\_IDS](variables/SECURITY_SUMMARY_TEST_IDS.md)
+- [SEMANTIC\_COLORS](variables/SEMANTIC_COLORS.md)
+- [SHADOWS](variables/SHADOWS.md)
+- [SHORTCUT\_CATEGORY\_LABELS](variables/SHORTCUT_CATEGORY_LABELS.md)
+- [SPACING](variables/SPACING.md)
 - [SUMMARY\_TEST\_IDS](variables/SUMMARY_TEST_IDS.md)
 - [TECHNICAL\_DETAILS\_TEST\_IDS](variables/TECHNICAL_DETAILS_TEST_IDS.md)
 - [TEST\_HELPERS](variables/TEST_HELPERS.md)
 - [TEST\_IDS](variables/TEST_IDS.md)
+- [TRANSITIONS](variables/TRANSITIONS.md)
+- [TYPOGRAPHY](variables/TYPOGRAPHY.md)
 - [VALUE\_CREATION\_TEST\_IDS](variables/VALUE_CREATION_TEST_IDS.md)
+- [WIDGET\_DESIGN](variables/WIDGET_DESIGN.md)
 - [WIDGET\_REGISTRY\_TEST\_IDS](variables/WIDGET_REGISTRY_TEST_IDS.md)
 - [WIDGET\_TEST\_IDS](variables/WIDGET_TEST_IDS.md)
+- [Z\_INDEX](variables/Z_INDEX.md)
 
 ## Functions
 
@@ -44,7 +70,12 @@
 - [categorySpecific](functions/categorySpecific.md)
 - [createCompoundTestId](functions/createCompoundTestId.md)
 - [createContextualTestId](functions/createContextualTestId.md)
+- [getBorderRadius](functions/getBorderRadius.md)
+- [getSemanticColor](functions/getSemanticColor.md)
+- [getShadow](functions/getShadow.md)
+- [getSpacing](functions/getSpacing.md)
 - [getTestId](functions/getTestId.md)
+- [getTypography](functions/getTypography.md)
 
 ## References
 

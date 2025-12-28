@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.0.6**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.0**](../../README.md)
 
 ***
 
@@ -8,9 +8,13 @@
 
 > **formatSecurityLevelFromWidget**: (`level`) => `string`
 
-Defined in: [utils/index.ts:119](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/utils/index.ts#L119)
+Defined in: [utils/index.ts:144](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/utils/index.ts#L144)
 
 Format security level string to the standardized format
+
+Normalizes security level strings to match the SecurityLevel enum values,
+handling case variations and trimming whitespace. Essential for ensuring
+consistent level representation across the application.
 
 ## Parameters
 
@@ -24,4 +28,15 @@ Security level string to format
 
 `string`
 
-Formatted security level
+Formatted security level matching SecurityLevel enum
+
+## Example
+
+```typescript
+formatSecurityLevel('high')        // 'High'
+formatSecurityLevel('VERY HIGH')   // 'Very High'
+formatSecurityLevel('  low  ')     // 'Low'
+formatSecurityLevel(null)          // 'None'
+formatSecurityLevel(undefined)     // 'None'
+formatSecurityLevel('invalid')     // 'None' (defaults to None)
+```

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.0.6**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.0**](../../README.md)
 
 ***
 
@@ -8,7 +8,13 @@
 
 > **sanitizeWidgetId**: (`id`) => `string`
 
-Defined in: [utils/index.ts:125](https://github.com/Hack23/cia-compliance-manager/blob/9b3072efb30bdaf3352c14e8d2bbb95562548f7a/src/utils/index.ts#L125)
+Defined in: [utils/index.ts:150](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/utils/index.ts#L150)
+
+Sanitize widget ID to ensure valid HTML/CSS identifiers
+
+Removes special characters and replaces them with hyphens to create
+valid HTML element IDs and CSS class names. Essential for dynamic
+widget generation and proper DOM manipulation.
 
 ## Parameters
 
@@ -16,6 +22,25 @@ Defined in: [utils/index.ts:125](https://github.com/Hack23/cia-compliance-manage
 
 `string`
 
+Widget identifier string to sanitize
+
 ## Returns
 
 `string`
+
+Sanitized ID safe for use in HTML/CSS
+
+## Example
+
+```typescript
+sanitizeWidgetId('my-widget')        // 'my-widget'
+sanitizeWidgetId('My Widget!')       // 'My-Widget-'
+sanitizeWidgetId('widget#123')       // 'widget-123'
+sanitizeWidgetId('test@example.com') // 'test-example-com'
+
+// Usage in components
+const widgetId = sanitizeWidgetId(userInput);
+<div id={widgetId} className={`widget-${widgetId}`}>
+  {content}
+</div>
+```
