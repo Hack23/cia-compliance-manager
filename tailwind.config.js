@@ -5,11 +5,12 @@ module.exports = {
   theme: {
     extend: {
       // Spacing scale based on 8px grid system
+      // Fixed: Reduced md from 16px to 12px to fix excessive padding issues
       spacing: {
         'xs': '4px',
         'sm': '8px',
-        'md': '16px',
-        'lg': '24px',
+        'md': '12px',    // Changed from 16px - fixes 50% blank space issue
+        'lg': '20px',    // Changed from 24px - better proportion
         'xl': '32px',
         'xxl': '48px',
       },
@@ -31,11 +32,12 @@ module.exports = {
         'bold': '700',
       },
       // Semantic colors
+      // Fixed: Changed from blue to purple to restore v1.0.6 appearance
       colors: {
         primary: {
-          light: '#2b8aff',
-          DEFAULT: '#0066cc',
-          dark: '#004d99',
+          light: '#c084fc',  // purple-400 - Changed from blue
+          DEFAULT: '#9333ea', // purple-600 - Changed from blue
+          dark: '#7e22ce',    // purple-700 - Changed from blue
         },
         success: {
           light: '#4caf50',
@@ -53,9 +55,9 @@ module.exports = {
           dark: '#c0392b',
         },
         info: {
-          light: '#54a0ff',
-          DEFAULT: '#3498db',
-          dark: '#2980b9',
+          light: '#60a5fa',  // blue-400 - Keep blue for info
+          DEFAULT: '#3b82f6', // blue-500 - Keep blue for info  
+          dark: '#2563eb',    // blue-600 - Keep blue for info
         },
         neutral: {
           light: '#b8b8cc',
@@ -64,12 +66,13 @@ module.exports = {
         },
       },
       // Border radius
+      // Fixed: Increased md and lg to restore rounded appearance from v1.0.6
       borderRadius: {
         'none': '0',
         'sm': '4px',
-        'md': '8px',
-        'lg': '12px',
-        'xl': '16px',
+        'md': '12px',  // Changed from 8px - more rounded appearance
+        'lg': '16px',  // Changed from 12px - restore v1.0.6 look
+        'xl': '20px',  // Changed from 16px - better proportion
         'full': '9999px',
       },
       // Shadows
