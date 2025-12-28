@@ -1,197 +1,198 @@
-/* Optimized Layout Styles */
+/* Layout-related styles */
 
-/* ============================================
-   CONTAINER AND GRID LAYOUT
-   ============================================ */
-
+/* Container basic styling */
 .container {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  padding-right: 0.75rem;
-  padding-left: 0.75rem;
+  padding-right: 0.75rem; /* Reduced from 1rem */
+  padding-left: 0.75rem; /* Reduced from 1rem */
 }
 
-/* Dashboard grid */
+/* Grid layout fixes - use CSS Grid properties directly */
 [data-testid="dashboard-grid"] {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 0.875rem;
+  gap: 0.75rem; /* Reduced from 1rem */
   width: 100%;
   margin: 0 auto;
-  padding: 0.875rem;
-  grid-auto-rows: minmax(280px, auto);
+  padding: 0.75rem; /* Reduced from 1rem */
+  /* Add explicit grid-auto-rows property to ensure rows are created */
+  grid-auto-rows: minmax(250px, auto); /* Reduced from 300px */
 }
 
-/* Responsive grid columns */
+/* Apply responsive grid columns - these override the base definition at breakpoints */
 @media (min-width: 640px) {
   [data-testid="dashboard-grid"] {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem; /* Reduced from default */
   }
 }
 
 @media (min-width: 1024px) {
   [data-testid="dashboard-grid"] {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
+    gap: 0.75rem; /* Moderate gap for larger screens */
   }
 }
 
-/* Grid item containers */
+/* Fix the direct children of the grid (the widget containers) */
 [data-testid="dashboard-grid"] > div {
-  height: 100%;
-  min-height: 280px;
+  height: 100%; /* Fill the grid cell */
+  min-height: 250px; /* Reduced from 300px */
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  margin-bottom: 0; /* Remove margin that could cause spacing issues */
 }
 
-/* ============================================
-   WIDGET CONTAINERS
-   ============================================ */
+/* Fix individual widgets inside their containers */
+.bg-white.dark\:bg-gray-800.shadow-md.rounded-lg.overflow-hidden {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
 
+/* Widget body should scroll if content overflows - with less padding */
+[data-testid^="widget-container"] > div:nth-child(2) {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.5rem; /* Added reduced padding */
+}
+
+/* App header styling - more compact */
+.mb-6.p-4.bg-white.dark\:bg-gray-800.rounded-lg.shadow-md.flex.justify-between.items-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem; /* Reduced from 1rem */
+  margin-bottom: 1rem; /* Reduced from 1.5rem */
+  border-radius: 0.5rem;
+}
+
+/* IMPORTANT: DO NOT add any styling that would override grid-cols-* classes */
+
+/* Responsive adjustments - enhance but don't override Tailwind's responsive classes */
+@media (max-width: 640px) {
+  [data-testid="dashboard-grid"] > div {
+    margin-bottom: 0.5rem; /* Reduced spacing on mobile */
+  }
+}
+
+/* Fix widget container height issues */
 .widget-container {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible;
   height: auto;
-  min-height: 280px;
-  max-height: 750px;
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  min-height: 200px; /* Reduced from original */
+  max-height: 700px; /* Reduced from 800px */
 }
 
-.dark .widget-container {
-  background-color: var(--card-background);
-  border: 1px solid rgba(0, 204, 102, 0.2);
-}
-
-/* ============================================
-   SCROLLING BEHAVIOR
-   ============================================ */
-
+/* Fix widget content scrolling */
 .widget-body {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 1rem;
+  padding: 0.75rem; /* Reduced from 1rem */
 }
 
+/* Fix scroll behavior - thinner and more subtle */
 .widget-body::-webkit-scrollbar {
-  width: 5px;
+  width: 4px; /* Reduced from 8px */
   background-color: transparent;
 }
 
 .widget-body::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 102, 51, 0.3);
-  border-radius: 2.5px;
+  background-color: rgba(100, 116, 139, 0.4); /* More transparent */
+  border-radius: 2px; /* Reduced from 4px */
 }
 
-.dark .widget-body::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 204, 102, 0.3);
+/* Fix widget header spacing */
+.widget-header {
+  padding: 0.5rem 0.75rem; /* Reduced from 0.75rem 1rem */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
 }
 
-/* ============================================
-   CHART CONTAINERS
-   ============================================ */
-
-/* Chart containers - !important needed to override Chart.js defaults */
+/* Fixed height for charts to prevent layout shifts - more compact */
 canvas.chart {
-  height: 280px !important;
+  height: 250px !important; /* Reduced from 300px */
   width: 100% !important;
-  max-height: 280px !important;
+  max-height: 250px !important; /* Reduced from 300px */
 }
 
-.radar-chart-container {
-  height: 300px !important;
-  overflow: hidden !important;
+/* Consistent widget padding - reduced */
+.widget-content {
+  padding: 0.75rem; /* Reduced from 1rem */
 }
 
-.radar-chart-container canvas {
-  max-width: 100% !important;
-  max-height: 100% !important;
-  width: auto !important;
-  height: auto !important;
-  object-fit: contain !important;
-}
-
-/* ============================================
-   CONTENT OVERFLOW HANDLING
-   ============================================ */
-
+/* Fix content overflow in lists - more compact */
 .widget-container ul,
 .widget-container ol {
-  padding-left: 1.25rem;
-  margin-bottom: 0.875rem;
+  padding-left: 1.25rem; /* Reduced from 1.5rem */
+  margin-bottom: 0.75rem; /* Reduced from 1rem */
 }
 
 .widget-container li {
-  margin-bottom: 0.375rem;
+  margin-bottom: 0.35rem; /* Reduced from 0.5rem */
   overflow-wrap: break-word;
   word-break: break-word;
 }
 
+/* Fix images and icons sizing */
 .widget-container img,
 .widget-container svg {
   max-width: 100%;
   height: auto;
 }
 
-/* ============================================
-   APP HEADER
-   ============================================ */
-
-.mb-6.p-4.bg-white.dark\:bg-gray-800.rounded-lg.shadow-md.flex.justify-between.items-center,
-.app-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.625rem 1rem;
-  margin-bottom: 0.75rem;
-  border-radius: 0.5rem;
-  background-color: var(--card-background);
+/* Fix theme toggle spacing */
+.theme-toggle {
+  margin-left: 0.75rem; /* Reduced from 1rem */
 }
 
-/* ============================================
-   RESPONSIVE ADJUSTMENTS
-   ============================================ */
+/* Dark mode improvements */
+.dark .widget-container {
+  background-color: rgba(30, 41, 59, 0.95);
+  border-color: rgba(71, 85, 105, 0.5);
+}
 
+.dark .widget-body::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.3);
+}
+
+/* Responsive design improvements */
 @media (max-width: 768px) {
   .widget-container {
     max-height: none;
-    min-height: 250px;
   }
 
   canvas.chart {
-    height: 220px !important;
+    height: 180px !important; /* Reduced from 200px */
   }
 
+  /* Further compact elements on small screens */
   .widget-header {
     padding: 0.4rem 0.6rem;
-    min-height: 36px;
+    min-height: 40px;
   }
 
   .widget-body {
-    padding: 0.75rem;
+    padding: 0.4rem 0.6rem;
   }
 
   p,
   li,
   .widget-content {
-    font-size: 0.875rem;
-    line-height: 1.4;
-  }
-
-  [data-testid="dashboard-grid"] {
-    gap: 0.625rem;
-    padding: 0.625rem;
-    grid-auto-rows: minmax(250px, auto);
-  }
-}
-
-@media (max-width: 640px) {
-  [data-testid="dashboard-grid"] > div {
-    margin-bottom: 0;
+    font-size: 0.85rem; /* Smaller font on mobile */
+    line-height: 1.3; /* Tighter line height */
   }
 }
