@@ -2285,11 +2285,11 @@ button.more-info:hover::before {
 /* Use attribute word-match selectors to handle elements with multiple Tailwind classes */
 /* [class~="p-md"] matches elements with class="p-md" or class="p-md sm:p-lg" etc. */
 [data-testid="security-summary-widget"] [class~="p-md"] {
-  padding: var(--spacing-sm); /* Use CSS variable instead of hardcoded value */
+  padding: 0.375rem; /* 6px: slightly tighter than Tailwind p-md (8px) */
 }
 
 [data-testid="security-summary-widget"] [class~="mb-md"] {
-  margin-bottom: var(--spacing-sm); /* Use CSS variable */
+  margin-bottom: 0.375rem; /* 6px: slightly tighter than Tailwind mb-md (8px) */
 }
 
 [data-testid="security-summary-widget"] section[class~="mb-md"] {
