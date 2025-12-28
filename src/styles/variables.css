@@ -77,7 +77,19 @@
   /* Primary color RGB for rgba usage (derived from --primary-color: #0066cc) */
   --primary-color-rgb: 0, 102, 204;
   
-  /* Hover and active background colors (based on --primary-color: #0066cc) */
+  /*
+   * Primary interaction opacities (based on --primary-color: #0066cc)
+   *
+   * These opacity levels define a consistent visual hierarchy across components:
+   * - 0.05 (hover background): very subtle highlight for low-distraction hover
+   * - 0.08 (active background): slightly more prominent state than hover
+   * - 0.3  (border hover): clearly visible border for focused/hovered elements
+   * - 0.2  (shadow): soft shadow that adds depth without overpowering content
+   * - 0.4  (glow): strong glow effect for emphasis (e.g., focus rings/primary callouts)
+   *
+   * Note: Light theme uses lower opacity values (0.05/0.08) for subtle effects on light backgrounds.
+   * Dark theme uses higher values (0.1/0.15) for better visibility on dark backgrounds.
+   */
   --primary-bg-hover: rgba(0, 102, 204, 0.05);
   --primary-bg-active: rgba(0, 102, 204, 0.08);
   --primary-border-hover: rgba(0, 102, 204, 0.3);
@@ -143,7 +155,16 @@
   /* Primary color RGB for rgba usage (derived from --primary-color: #2b8aff) */
   --primary-color-rgb: 43, 138, 255;
   
-  /* Hover and active background colors (based on --primary-color: #2b8aff) */
+  /*
+   * Primary interaction opacities - Dark theme (based on --primary-color: #2b8aff)
+   *
+   * Higher opacity values compared to light theme for better visibility on dark backgrounds:
+   * - 0.1  (hover background): subtle but visible on dark background
+   * - 0.15 (active background): more prominent than hover for clear feedback
+   * - 0.3  (border hover): maintains consistent border visibility across themes
+   * - 0.2  (shadow): soft shadow with neon glow effect
+   * - 0.4  (glow): strong cyberpunk-style glow for emphasis
+   */
   --primary-bg-hover: rgba(43, 138, 255, 0.1);
   --primary-bg-active: rgba(43, 138, 255, 0.15);
   --primary-border-hover: rgba(43, 138, 255, 0.3);

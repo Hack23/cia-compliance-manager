@@ -2368,14 +2368,9 @@ button[role="tab"][aria-selected="true"] {
 }
 
 /* Inactive tab colors - using CSS variables */
+/* Inactive tab colors - uses theme-specific --text-secondary variable */
 .widget-tab:not([aria-selected="true"]),
 button[role="tab"]:not([aria-selected="true"]) {
-  color: var(--text-secondary);
-}
-
-/* Inactive tab colors - Dark theme */
-.dark .widget-tab:not([aria-selected="true"]),
-.dark button[role="tab"]:not([aria-selected="true"]) {
   color: var(--text-secondary);
 }
 
@@ -2387,12 +2382,8 @@ button[role="tab"]:not([aria-selected="true"]) {
   margin-top: 0.75rem;
 }
 
-/* Tab panels should have consistent minimal padding */
-[data-testid^="widget-"] div[role="tabpanel"],
-[data-testid^="widget-"] [data-testid$="-panel-overview"],
-[data-testid^="widget-"] [data-testid$="-panel-business"],
-[data-testid^="widget-"] [data-testid$="-panel-implementation"],
-[data-testid^="widget-"] [data-testid$="-panel-compliance"] {
+/* Tab panels should have consistent minimal padding - use semantic ARIA attributes */
+[data-testid^="widget-"] [role="tabpanel"] {
   padding: 0.5rem 0;
 }
 
