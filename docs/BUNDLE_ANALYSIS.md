@@ -80,7 +80,9 @@ const SecuritySummaryWidget = lazy(
 ```typescript
 // vite.config.ts - manualChunks strategy
 manualChunks: (id) => {
-  if (id.includes("/widgets/assessmentcenter/")) return "widgets-assessment";
+  if (id.includes("/widgets/assessmentcenter/") && !id.includes("SecurityLevelWidget")) {
+    return "widgets-assessment";
+  }
   if (id.includes("/widgets/businessvalue/")) return "widgets-business";
   if (id.includes("/widgets/impactanalysis/")) return "widgets-impact";
   if (id.includes("/widgets/implementationguide/")) {
