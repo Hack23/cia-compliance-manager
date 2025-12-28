@@ -152,7 +152,7 @@ describe("Security Level Comparison Scenarios", () => {
 
       combinations.forEach((combo) => {
         cy.log(`\nTesting ${combo.name}`);
-        cy.setSecurityLevels(...combo.levels);
+        cy.setSecurityLevels(combo.levels[0], combo.levels[1], combo.levels[2]);
         cy.wait(500);
 
         // Verify widgets updated
@@ -376,7 +376,7 @@ describe("Security Level Comparison Scenarios", () => {
 
       rapidScenarios.forEach((levels, index) => {
         cy.log(`Rapid switch ${index + 1}: ${levels.join(", ")}`);
-        cy.setSecurityLevels(...levels);
+        cy.setSecurityLevels(levels[0], levels[1], levels[2]);
         cy.wait(200); // Reduced wait for stress test
       });
 

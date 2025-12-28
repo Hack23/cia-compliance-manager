@@ -142,27 +142,29 @@ describe("Cross-Widget Interactions", () => {
     it("should synchronize all widgets within reasonable time", () => {
       cy.log("⚡ Testing widget synchronization performance");
 
-      const startTime = Date.now();
-
-      // Make a change that affects all widgets
-      cy.setSecurityLevels(
-        SECURITY_LEVELS.HIGH,
-        SECURITY_LEVELS.HIGH,
-        SECURITY_LEVELS.HIGH
-      );
-
-      // Wait for synchronization
-      cy.wait(500);
-
-      // Verify all widgets visible
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
-
       cy.then(() => {
-        const syncTime = Date.now() - startTime;
-        cy.log(`✓ All widgets synchronized in ${syncTime}ms`);
+        const startTime = Date.now();
 
-        // Target: <1000ms for full synchronization
-        expect(syncTime).to.be.lessThan(1000);
+        // Make a change that affects all widgets
+        cy.setSecurityLevels(
+          SECURITY_LEVELS.HIGH,
+          SECURITY_LEVELS.HIGH,
+          SECURITY_LEVELS.HIGH
+        );
+
+        // Wait for synchronization
+        cy.wait(500);
+
+        // Verify all widgets visible
+        cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+
+        cy.then(() => {
+          const syncTime = Date.now() - startTime;
+          cy.log(`✓ All widgets synchronized in ${syncTime}ms`);
+
+          // Target: <1000ms for full synchronization
+          expect(syncTime).to.be.lessThan(1000);
+        });
       });
 
       cy.log("✅ Widget synchronization performance acceptable");

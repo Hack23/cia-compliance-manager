@@ -740,8 +740,8 @@ cypress/
 
 **New in v2.1:**
 - ✅ **Security Assessment Flow Test Suite** - 15 comprehensive tests covering the complete user journey
-- 📊 **Total Test Scenarios:** 30+ individual test scenarios across 16 test specifications
-- 🎯 **Critical Path Coverage:** 87.5% (14/16 tests marked critical)
+- 📊 **Total Test Scenarios (current):** ~143 individual test scenarios across 21 test specifications
+- 🎯 **Critical Path Coverage:** >95% (19/21 tests marked critical)
 
 **New in v2.3 (Comprehensive E2E Expansion):**
 - ✅ **Complete Assessment Workflow** (`workflows/complete-assessment.cy.ts`) - 15 test scenarios covering:

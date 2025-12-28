@@ -396,15 +396,17 @@ describe("Error Handling and Edge Cases", () => {
       // Note: Since this is a client-side app with no backend,
       // we test that the app loads efficiently
 
-      const startTime = Date.now();
-
-      cy.reload();
-      cy.ensureAppLoaded();
-
       cy.then(() => {
-        const loadTime = Date.now() - startTime;
-        cy.log(`Page load time: ${loadTime}ms`);
-        expect(loadTime).to.be.lessThan(10000); // 10 second max
+        const startTime = Date.now();
+
+        cy.reload();
+        cy.ensureAppLoaded();
+
+        cy.then(() => {
+          const loadTime = Date.now() - startTime;
+          cy.log(`Page load time: ${loadTime}ms`);
+          expect(loadTime).to.be.lessThan(10000); // 10 second max
+        });
       });
 
       cy.log("✅ Application loads within acceptable time");
@@ -421,19 +423,21 @@ describe("Error Handling and Edge Cases", () => {
       );
       cy.wait(500);
 
-      const startTime = Date.now();
-
-      // Verify all widgets are visible
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
-
-      // Perform interaction
-      cy.get("select").eq(0).select(SECURITY_LEVELS.MODERATE, { force: true });
-      cy.wait(500);
-
       cy.then(() => {
-        const interactionTime = Date.now() - startTime;
-        cy.log(`Interaction time with full widget load: ${interactionTime}ms`);
-        expect(interactionTime).to.be.lessThan(2000); // 2 second max
+        const startTime = Date.now();
+
+        // Verify all widgets are visible
+        cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+
+        // Perform interaction
+        cy.get("select").eq(0).select(SECURITY_LEVELS.MODERATE, { force: true });
+        cy.wait(500);
+
+        cy.then(() => {
+          const interactionTime = Date.now() - startTime;
+          cy.log(`Interaction time with full widget load: ${interactionTime}ms`);
+          expect(interactionTime).to.be.lessThan(2000); // 2 second max
+        });
       });
 
       cy.log("✅ Performance acceptable with full widget load");

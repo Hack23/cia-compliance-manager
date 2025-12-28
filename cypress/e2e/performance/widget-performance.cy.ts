@@ -25,34 +25,38 @@ describe("Widget Performance Tests", () => {
     it("should load initial page within acceptable time", () => {
       cy.log("⏱️ Measuring initial page load time");
 
-      const startTime = Date.now();
-
-      cy.visit("/");
-      cy.ensureAppLoaded();
-
       cy.then(() => {
-        const loadTime = Date.now() - startTime;
-        cy.log(`✓ Page loaded in ${loadTime}ms`);
+        const startTime = Date.now();
 
-        // Target: <3000ms (3 seconds)
-        expect(loadTime).to.be.lessThan(3000);
+        cy.visit("/");
+        cy.ensureAppLoaded();
+
+        cy.then(() => {
+          const loadTime = Date.now() - startTime;
+          cy.log(`✓ Page loaded in ${loadTime}ms`);
+
+          // Target: <3000ms (3 seconds)
+          expect(loadTime).to.be.lessThan(3000);
+        });
       });
     });
 
     it("should render all critical widgets quickly", () => {
       cy.log("⏱️ Measuring widget rendering time");
 
-      const startTime = Date.now();
-
-      // Wait for widgets to render
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
-
       cy.then(() => {
-        const renderTime = Date.now() - startTime;
-        cy.log(`✓ Widgets rendered in ${renderTime}ms`);
+        const startTime = Date.now();
 
-        // Target: <1000ms for all widgets
-        expect(renderTime).to.be.lessThan(1000);
+        // Wait for widgets to render
+        cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+
+        cy.then(() => {
+          const renderTime = Date.now() - startTime;
+          cy.log(`✓ Widgets rendered in ${renderTime}ms`);
+
+          // Target: <1000ms for all widgets
+          expect(renderTime).to.be.lessThan(1000);
+        });
       });
     });
   });
@@ -122,23 +126,25 @@ describe("Widget Performance Tests", () => {
       cy.wait(500);
 
       // Measure time to update all widgets
-      const startTime = Date.now();
-
-      cy.setSecurityLevels(
-        SECURITY_LEVELS.HIGH,
-        SECURITY_LEVELS.HIGH,
-        SECURITY_LEVELS.HIGH
-      );
-
-      // Wait for all widgets to update
-      cy.get('[data-testid*="widget"]').should("be.visible");
-
       cy.then(() => {
-        const updateTime = Date.now() - startTime;
-        cy.log(`✓ All widgets updated in ${updateTime}ms`);
+        const startTime = Date.now();
 
-        // Target: <500ms for propagation to all widgets
-        expect(updateTime).to.be.lessThan(500);
+        cy.setSecurityLevels(
+          SECURITY_LEVELS.HIGH,
+          SECURITY_LEVELS.HIGH,
+          SECURITY_LEVELS.HIGH
+        );
+
+        // Wait for all widgets to update
+        cy.get('[data-testid*="widget"]').should("be.visible");
+
+        cy.then(() => {
+          const updateTime = Date.now() - startTime;
+          cy.log(`✓ All widgets updated in ${updateTime}ms`);
+
+          // Target: <500ms for propagation to all widgets
+          expect(updateTime).to.be.lessThan(500);
+        });
       });
     });
   });
@@ -156,25 +162,27 @@ describe("Widget Performance Tests", () => {
 
         cy.viewport(viewport.width, viewport.height);
 
-        const startTime = Date.now();
-
-        cy.setSecurityLevels(
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.MODERATE,
-          SECURITY_LEVELS.HIGH
-        );
-        cy.wait(500);
-
-        // Verify widgets render on this viewport
-        cy.get('[data-testid*="widget"]').should("have.length.at.least", 1);
-
         cy.then(() => {
-          const renderTime = Date.now() - startTime;
-          cy.log(`✓ ${viewport.name} rendered in ${renderTime}ms`);
+          const startTime = Date.now();
 
-          // Performance targets may be slightly higher for mobile
-          const maxTime = viewport.width < 768 ? 1500 : 1000;
-          expect(renderTime).to.be.lessThan(maxTime);
+          cy.setSecurityLevels(
+            SECURITY_LEVELS.HIGH,
+            SECURITY_LEVELS.MODERATE,
+            SECURITY_LEVELS.HIGH
+          );
+          cy.wait(500);
+
+          // Verify widgets render on this viewport
+          cy.get('[data-testid*="widget"]').should("have.length.at.least", 1);
+
+          cy.then(() => {
+            const renderTime = Date.now() - startTime;
+            cy.log(`✓ ${viewport.name} rendered in ${renderTime}ms`);
+
+            // Performance targets may be slightly higher for mobile
+            const maxTime = viewport.width < 768 ? 1500 : 1000;
+            expect(renderTime).to.be.lessThan(maxTime);
+          });
         });
       });
     });
