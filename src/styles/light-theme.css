@@ -252,18 +252,19 @@ button.lightbutton:hover:active {
 
 /* Tab buttons specific styling for light theme */
 /* Increased specificity to ensure these override universal tab styling in components.css */
-:root button[role="tab"]:not([aria-selected="true"]) {
+/* Light theme tab styling - complements universal tab styles in components.css */
+button[role="tab"]:not([aria-selected="true"]) {
   background: transparent;
   border: none;
   border-bottom: 2px solid transparent;
 }
 
-:root button[role="tab"]:not([aria-selected="true"]):hover {
+button[role="tab"]:not([aria-selected="true"]):hover {
   background: var(--primary-bg-hover);
   border-bottom-color: var(--primary-border-hover);
 }
 
-:root button[role="tab"][aria-selected="true"] {
+button[role="tab"][aria-selected="true"] {
   background: var(--primary-bg-active);
   border-bottom-color: var(--primary-color);
   color: var(--primary-color);
