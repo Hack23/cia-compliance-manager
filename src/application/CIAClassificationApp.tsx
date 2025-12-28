@@ -1,20 +1,47 @@
 import React, { useCallback, useEffect, lazy, Suspense, useMemo } from "react";
-// Import widgets directly instead of Dashboard
-import BusinessImpactAnalysisWidget from "../components/widgets/assessmentcenter/BusinessImpactAnalysisWidget";
+// Import SecurityLevelWidget eagerly - critical for initial user interaction
 import SecurityLevelWidget from "../components/widgets/assessmentcenter/SecurityLevelWidget";
-import SecuritySummaryWidget from "../components/widgets/assessmentcenter/SecuritySummaryWidget";
-import ComplianceStatusWidget from "../components/widgets/businessvalue/ComplianceStatusWidget";
-import CostEstimationWidget from "../components/widgets/businessvalue/CostEstimationWidget";
-import ValueCreationWidget from "../components/widgets/businessvalue/ValueCreationWidget";
-import AvailabilityImpactWidget from "../components/widgets/impactanalysis/AvailabilityImpactWidget";
-import ConfidentialityImpactWidget from "../components/widgets/impactanalysis/ConfidentialityImpactWidget";
-import IntegrityImpactWidget from "../components/widgets/impactanalysis/IntegrityImpactWidget";
-import SecurityResourcesWidget from "../components/widgets/implementationguide/SecurityResourcesWidget";
-import TechnicalDetailsWidget from "../components/widgets/implementationguide/TechnicalDetailsWidget";
 
-// Lazy load SecurityVisualizationWidget as it includes Chart.js dependency
+// Lazy load all other widgets for better code splitting and faster initial load
+// Assessment Center Widgets
+const BusinessImpactAnalysisWidget = lazy(
+  () => import("../components/widgets/assessmentcenter/BusinessImpactAnalysisWidget")
+);
+const SecuritySummaryWidget = lazy(
+  () => import("../components/widgets/assessmentcenter/SecuritySummaryWidget")
+);
+
+// Business Value Widgets
+const ComplianceStatusWidget = lazy(
+  () => import("../components/widgets/businessvalue/ComplianceStatusWidget")
+);
+const CostEstimationWidget = lazy(
+  () => import("../components/widgets/businessvalue/CostEstimationWidget")
+);
+const ValueCreationWidget = lazy(
+  () => import("../components/widgets/businessvalue/ValueCreationWidget")
+);
+
+// Impact Analysis Widgets
+const AvailabilityImpactWidget = lazy(
+  () => import("../components/widgets/impactanalysis/AvailabilityImpactWidget")
+);
+const ConfidentialityImpactWidget = lazy(
+  () => import("../components/widgets/impactanalysis/ConfidentialityImpactWidget")
+);
+const IntegrityImpactWidget = lazy(
+  () => import("../components/widgets/impactanalysis/IntegrityImpactWidget")
+);
+
+// Implementation Guide Widgets (includes Chart.js dependency)
+const SecurityResourcesWidget = lazy(
+  () => import("../components/widgets/implementationguide/SecurityResourcesWidget")
+);
 const SecurityVisualizationWidget = lazy(
   () => import("../components/widgets/implementationguide/SecurityVisualizationWidget")
+);
+const TechnicalDetailsWidget = lazy(
+  () => import("../components/widgets/implementationguide/TechnicalDetailsWidget")
 );
 
 import WidgetErrorBoundary from "../components/common/WidgetErrorBoundary";
@@ -111,6 +138,20 @@ const CIAClassificationApp: React.FC = () => {
   const handleWidgetError = useCallback((error: Error, errorInfo: React.ErrorInfo) => {
     logger.error('Widget error caught by error boundary', { error, errorInfo });
   }, []);
+
+  // Reusable widget loading fallback component
+  const WidgetLoader: React.FC<{ widgetName: string }> = ({ widgetName }) => (
+    <div 
+      className="widget-loading animate-pulse bg-gray-200 dark:bg-gray-700 p-4 rounded-lg min-h-[200px] flex items-center justify-center" 
+      role="status" 
+      aria-live="polite"
+      aria-label={`Loading ${widgetName}...`}
+    >
+      <div className="text-gray-500 dark:text-gray-400">
+        Loading {widgetName}...
+      </div>
+    </div>
+  );
   
   // Register keyboard shortcuts
   const shortcuts: ShortcutMap = useMemo(() => ({
@@ -256,119 +297,133 @@ const CIAClassificationApp: React.FC = () => {
             {/* Business Impact Analysis Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Business Impact Analysis" onError={handleWidgetError}>
-                <BusinessImpactAnalysisWidget
-                  availabilityLevel={levels.availability}
-                  integrityLevel={levels.integrity}
-                  confidentialityLevel={levels.confidentiality}
-                  testId="widget-business-impact"
-                />
+                <Suspense fallback={<WidgetLoader widgetName="Business Impact Analysis" />}>
+                  <BusinessImpactAnalysisWidget
+                    availabilityLevel={levels.availability}
+                    integrityLevel={levels.integrity}
+                    confidentialityLevel={levels.confidentiality}
+                    testId="widget-business-impact"
+                  />
+                </Suspense>
               </WidgetErrorBoundary>
             </div>
 
             {/* Security Summary Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Security Summary" onError={handleWidgetError}>
-                <SecuritySummaryWidget
-                  availabilityLevel={levels.availability}
-                  integrityLevel={levels.integrity}
-                  confidentialityLevel={levels.confidentiality}
-                  testId="widget-security-summary"
-                />
+                <Suspense fallback={<WidgetLoader widgetName="Security Summary" />}>
+                  <SecuritySummaryWidget
+                    availabilityLevel={levels.availability}
+                    integrityLevel={levels.integrity}
+                    confidentialityLevel={levels.confidentiality}
+                    testId="widget-security-summary"
+                  />
+                </Suspense>
               </WidgetErrorBoundary>
             </div>
 
             {/* Value Creation Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Value Creation" onError={handleWidgetError}>
-                <ValueCreationWidget
-                  availabilityLevel={levels.availability}
-                  integrityLevel={levels.integrity}
-                  confidentialityLevel={levels.confidentiality}
-                  testId="widget-value-creation"
-                />
+                <Suspense fallback={<WidgetLoader widgetName="Value Creation" />}>
+                  <ValueCreationWidget
+                    availabilityLevel={levels.availability}
+                    integrityLevel={levels.integrity}
+                    confidentialityLevel={levels.confidentiality}
+                    testId="widget-value-creation"
+                  />
+                </Suspense>
               </WidgetErrorBoundary>
             </div>
 
             {/* Cost Estimation Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Cost Estimation" onError={handleWidgetError}>
-                <CostEstimationWidget
-                  availabilityLevel={levels.availability}
-                  integrityLevel={levels.integrity}
-                  confidentialityLevel={levels.confidentiality}
-                  testId="widget-cost-estimation"
-                />
+                <Suspense fallback={<WidgetLoader widgetName="Cost Estimation" />}>
+                  <CostEstimationWidget
+                    availabilityLevel={levels.availability}
+                    integrityLevel={levels.integrity}
+                    confidentialityLevel={levels.confidentiality}
+                    testId="widget-cost-estimation"
+                  />
+                </Suspense>
               </WidgetErrorBoundary>
             </div>
 
             {/* Compliance Status Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Compliance Status" onError={handleWidgetError}>
-                <ComplianceStatusWidget
-                  availabilityLevel={levels.availability}
-                  integrityLevel={levels.integrity}
-                  confidentialityLevel={levels.confidentiality}
-                  testId="widget-compliance-status"
-                />
+                <Suspense fallback={<WidgetLoader widgetName="Compliance Status" />}>
+                  <ComplianceStatusWidget
+                    availabilityLevel={levels.availability}
+                    integrityLevel={levels.integrity}
+                    confidentialityLevel={levels.confidentiality}
+                    testId="widget-compliance-status"
+                  />
+                </Suspense>
               </WidgetErrorBoundary>
             </div>
 
             {/* Confidentiality Impact Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Confidentiality Impact" onError={handleWidgetError}>
-                <ConfidentialityImpactWidget
-                  availabilityLevel={levels.availability}
-                  integrityLevel={levels.integrity}
-                  confidentialityLevel={levels.confidentiality}
-                  testId="widget-confidentiality-impact"
-                />
+                <Suspense fallback={<WidgetLoader widgetName="Confidentiality Impact" />}>
+                  <ConfidentialityImpactWidget
+                    availabilityLevel={levels.availability}
+                    integrityLevel={levels.integrity}
+                    confidentialityLevel={levels.confidentiality}
+                    testId="widget-confidentiality-impact"
+                  />
+                </Suspense>
               </WidgetErrorBoundary>
             </div>
 
             {/* Integrity Impact Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Integrity Impact" onError={handleWidgetError}>
-                <IntegrityImpactWidget
-                  availabilityLevel={levels.availability}
-                  integrityLevel={levels.integrity}
-                  confidentialityLevel={levels.confidentiality}
-                  testId="integrity-impact-widget"
-                />
+                <Suspense fallback={<WidgetLoader widgetName="Integrity Impact" />}>
+                  <IntegrityImpactWidget
+                    availabilityLevel={levels.availability}
+                    integrityLevel={levels.integrity}
+                    confidentialityLevel={levels.confidentiality}
+                    testId="integrity-impact-widget"
+                  />
+                </Suspense>
               </WidgetErrorBoundary>
             </div>
 
             {/* Availability Impact Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Availability Impact" onError={handleWidgetError}>
-                <AvailabilityImpactWidget
-                  availabilityLevel={levels.availability}
-                  integrityLevel={levels.integrity}
-                  confidentialityLevel={levels.confidentiality}
-                  testId="widget-availability-impact"
-                />
+                <Suspense fallback={<WidgetLoader widgetName="Availability Impact" />}>
+                  <AvailabilityImpactWidget
+                    availabilityLevel={levels.availability}
+                    integrityLevel={levels.integrity}
+                    confidentialityLevel={levels.confidentiality}
+                    testId="widget-availability-impact"
+                  />
+                </Suspense>
               </WidgetErrorBoundary>
             </div>
 
             {/* Technical Details Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Technical Details" onError={handleWidgetError}>
-                <TechnicalDetailsWidget
-                  availabilityLevel={levels.availability}
-                  integrityLevel={levels.integrity}
-                  confidentialityLevel={levels.confidentiality}
-                  testId="widget-technical-details"
-                />
+                <Suspense fallback={<WidgetLoader widgetName="Technical Details" />}>
+                  <TechnicalDetailsWidget
+                    availabilityLevel={levels.availability}
+                    integrityLevel={levels.integrity}
+                    confidentialityLevel={levels.confidentiality}
+                    testId="widget-technical-details"
+                  />
+                </Suspense>
               </WidgetErrorBoundary>
             </div>
 
             {/* Security Visualization Widget - Lazy Loaded */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Security Visualization" onError={handleWidgetError}>
-                <Suspense fallback={
-                  <div className="widget-loading" role="status" aria-live="polite">
-                    Loading visualization...
-                  </div>
-                }>
+                <Suspense fallback={<WidgetLoader widgetName="Security Visualization" />}>
                   <SecurityVisualizationWidget
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}
@@ -382,12 +437,14 @@ const CIAClassificationApp: React.FC = () => {
             {/* Security Resources Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Security Resources" onError={handleWidgetError}>
-                <SecurityResourcesWidget
-                  availabilityLevel={levels.availability}
-                  integrityLevel={levels.integrity}
-                  confidentialityLevel={levels.confidentiality}
-                  testId="security-resources-widget"
-                />
+                <Suspense fallback={<WidgetLoader widgetName="Security Resources" />}>
+                  <SecurityResourcesWidget
+                    availabilityLevel={levels.availability}
+                    integrityLevel={levels.integrity}
+                    confidentialityLevel={levels.confidentiality}
+                    testId="security-resources-widget"
+                  />
+                </Suspense>
               </WidgetErrorBoundary>
             </div>
           </div>
