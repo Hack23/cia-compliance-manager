@@ -24,13 +24,12 @@ describe("Cross-Widget Interactions", () => {
         SECURITY_LEVELS.LOW,
         SECURITY_LEVELS.LOW
       );
-      cy.wait(500);
 
       // Ensure widgets are loaded before capturing count
       cy.verifyMinimumWidgets(5);
 
       // Capture initial widget count and then test changes
-      cy.get('[data-testid*="widget"]', { timeout: 10000 }).then(($initialWidgets) => {
+      cy.get('[data-testid*="widget"]').then(($initialWidgets) => {
         const initialWidgetCount = $initialWidgets.length;
         cy.log(`✓ Found ${initialWidgetCount} widgets in initial state`);
 
@@ -40,17 +39,16 @@ describe("Cross-Widget Interactions", () => {
           SECURITY_LEVELS.HIGH,
           SECURITY_LEVELS.HIGH
         );
-        cy.wait(500);
 
         // Verify all widgets still rendered and potentially updated
-        cy.get('[data-testid*="widget"]', { timeout: 10000 }).then(($widgets) => {
+        cy.get('[data-testid*="widget"]').then(($widgets) => {
           expect($widgets.length).to.be.at.least(initialWidgetCount);
           cy.log(`✓ All ${$widgets.length} widgets updated successfully`);
         });
       });
       
       // Verify widgets are visible and responsive
-      cy.get('[data-testid*="widget"]', { timeout: 10000 }).each(($widget) => {
+      cy.get('[data-testid*="widget"]').each(($widget) => {
         cy.wrap($widget).should("be.visible");
       });
 
@@ -66,7 +64,6 @@ describe("Cross-Widget Interactions", () => {
         SECURITY_LEVELS.HIGH,
         SECURITY_LEVELS.MODERATE
       );
-      cy.wait(500);
 
       // Check body text for consistency
       cy.get("body").then(($body) => {
@@ -99,9 +96,8 @@ describe("Cross-Widget Interactions", () => {
         SECURITY_LEVELS.LOW,
         SECURITY_LEVELS.LOW
       );
-      cy.wait(500);
 
-      cy.get('[data-testid*="cost"]', { timeout: 10000 })
+      cy.get('[data-testid*="cost"]')
         .first()
         .invoke("text")
         .then((lowSecurityCostText) => {
@@ -113,9 +109,8 @@ describe("Cross-Widget Interactions", () => {
             SECURITY_LEVELS.HIGH,
             SECURITY_LEVELS.HIGH
           );
-          cy.wait(500);
 
-          cy.get('[data-testid*="cost"]', { timeout: 10000 })
+          cy.get('[data-testid*="cost"]')
             .first()
             .invoke("text")
             .then((highSecurityCostText) => {
@@ -149,12 +144,9 @@ describe("Cross-Widget Interactions", () => {
         SECURITY_LEVELS.HIGH
       );
 
-      // Wait for changes to propagate
-      cy.wait(500);
-
       // Verify all widgets are visible and synchronized
       cy.verifyMinimumWidgets(5);
-      cy.get('[data-testid*="widget"]', { timeout: 10000 }).should("have.length.at.least", 5);
+      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
 
       cy.log("✅ Widget synchronization performance acceptable");
     });
@@ -192,7 +184,6 @@ describe("Cross-Widget Interactions", () => {
         SECURITY_LEVELS.HIGH,
         SECURITY_LEVELS.HIGH
       );
-      cy.wait(500);
 
       // Step 2: Verify inputs registered
       cy.log("Step 2: Verifying inputs registered");
