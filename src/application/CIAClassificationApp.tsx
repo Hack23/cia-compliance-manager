@@ -407,7 +407,7 @@ const CIAClassificationApp: React.FC = () => {
               </WidgetErrorBoundary>
             </div>
 
-            {/* Security Visualization Widget - Lazy Loaded */}
+            {/* Security Visualization Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Security Visualization" onError={handleWidgetError}>
                 <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-security-visualization" />}>

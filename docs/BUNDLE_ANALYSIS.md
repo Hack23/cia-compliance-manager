@@ -112,19 +112,16 @@ manualChunks: (id) => {
 
 ### 4. Loading State UX
 
-**Implementation:** Custom loading component with accessibility
+**Implementation:** Reuse existing `LoadingSkeleton` component for consistency
 
 ```typescript
-const WidgetLoader: React.FC<{ widgetName: string }> = ({ widgetName }) => (
-  <div 
-    className="widget-loading animate-pulse bg-gray-200 dark:bg-gray-700 p-4 rounded-lg"
-    role="status" 
-    aria-live="polite"
-    aria-label={`Loading ${widgetName}...`}
-  >
-    Loading {widgetName}...
-  </div>
-);
+// Import existing LoadingSkeleton from common components
+import LoadingSkeleton from "../components/common/LoadingSkeleton";
+
+// Use in Suspense fallback
+<Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-business-impact" />}>
+  <BusinessImpactAnalysisWidget {...props} />
+</Suspense>
 ```
 
 **UX Impact:**
