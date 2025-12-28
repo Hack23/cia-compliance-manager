@@ -353,8 +353,10 @@ export class ErrorService {
         
         case ServiceErrorCode.INTERNAL_ERROR:
         case ServiceErrorCode.UNEXPECTED_ERROR:
-        case ServiceErrorCode.RATE_LIMIT_ERROR:
           return ErrorSeverity.CRITICAL;
+        
+        case ServiceErrorCode.RATE_LIMIT_ERROR:
+          return ErrorSeverity.MEDIUM;
         
         default:
           return ErrorSeverity.HIGH;

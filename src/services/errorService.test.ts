@@ -316,6 +316,14 @@ describe('ErrorService', () => {
       expect(errorService.getErrorSeverity(error)).toBe(ErrorSeverity.CRITICAL);
     });
 
+    it('should return MEDIUM for ServiceError rate limit error', () => {
+      const error = new ServiceError(
+        'Rate limit exceeded',
+        ServiceErrorCode.RATE_LIMIT_ERROR
+      );
+      expect(errorService.getErrorSeverity(error)).toBe(ErrorSeverity.MEDIUM);
+    });
+
     it('should return HIGH for unknown error types', () => {
       const error = new Error('Unknown error');
       expect(errorService.getErrorSeverity(error)).toBe(ErrorSeverity.HIGH);

@@ -68,8 +68,9 @@ export interface ErrorToastProps {
   
   /**
    * Optional retry callback function
+   * Aligns with ErrorMessage component API for consistency
    */
-  onRetry?: () => void;
+  retry?: () => void;
   
   /**
    * Optional test ID for automated testing
@@ -120,7 +121,7 @@ const getPositionClasses = (position: ToastPosition): string => {
  *   message="Unable to connect to server"
  *   isVisible={showToast}
  *   onDismiss={() => setShowToast(false)}
- *   onRetry={() => retryOperation()}
+ *   retry={() => retryOperation()}
  * />
  *
  * // Custom position and timeout
@@ -140,7 +141,7 @@ export const ErrorToast: React.FC<ErrorToastProps> = ({
   onDismiss,
   autoHideDuration = 5000,
   position = 'top-right',
-  onRetry,
+  retry,
   testId = 'error-toast',
 }) => {
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
@@ -239,11 +240,11 @@ export const ErrorToast: React.FC<ErrorToastProps> = ({
           </div>
 
           {/* Action Button */}
-          {onRetry && (
+          {retry && (
             <div className="mt-3">
               <button
                 onClick={() => {
-                  onRetry();
+                  retry();
                   handleDismiss();
                 }}
                 className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 focus:outline-none focus:ring-2 focus:ring-red-500 rounded"

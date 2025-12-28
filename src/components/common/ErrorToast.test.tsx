@@ -129,25 +129,25 @@ describe('ErrorToast', () => {
     expect(onDismiss).not.toHaveBeenCalled();
   });
 
-  it('should render retry button when onRetry is provided', () => {
-    const onRetry = vi.fn();
+  it('should render retry button when retry is provided', () => {
+    const retry = vi.fn();
 
     render(
       <ErrorToast
         message="Test error message"
         isVisible={true}
         onDismiss={vi.fn()}
-        onRetry={onRetry}
+        retry={retry}
       />
     );
 
     expect(screen.getByTestId('error-toast-retry-button')).toBeInTheDocument();
   });
 
-  it('should call onRetry and onDismiss when retry button is clicked', async () => {
+  it('should call retry and onDismiss when retry button is clicked', async () => {
     vi.useRealTimers(); // Use real timers for userEvent
     const user = userEvent.setup();
-    const onRetry = vi.fn();
+    const retry = vi.fn();
     const onDismiss = vi.fn();
 
     render(
@@ -155,7 +155,7 @@ describe('ErrorToast', () => {
         message="Test error message"
         isVisible={true}
         onDismiss={onDismiss}
-        onRetry={onRetry}
+        retry={retry}
         autoHideDuration={0} // Disable auto-dismiss
       />
     );
@@ -163,7 +163,7 @@ describe('ErrorToast', () => {
     const retryButton = screen.getByTestId('error-toast-retry-button');
     await user.click(retryButton);
 
-    expect(onRetry).toHaveBeenCalledTimes(1);
+    expect(retry).toHaveBeenCalledTimes(1);
     
     // Wait for animation
     await new Promise(resolve => setTimeout(resolve, 350));
@@ -172,7 +172,7 @@ describe('ErrorToast', () => {
     vi.useFakeTimers(); // Restore fake timers
   });
 
-  it('should not render retry button when onRetry is not provided', () => {
+  it('should not render retry button when retry is not provided', () => {
     render(
       <ErrorToast
         message="Test error message"

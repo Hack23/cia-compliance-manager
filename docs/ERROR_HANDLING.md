@@ -222,7 +222,7 @@ function MyComponent() {
 
 ### WidgetErrorBoundary Component
 
-The application uses the existing WidgetErrorBoundary component, which is actively wrapping all 11 widgets in production. This component integrates with the error service for user-friendly error displays.
+The application uses the existing WidgetErrorBoundary component, which is actively wrapping all 11 widgets in production. This component provides a fallback UI for widget failures and can be used alongside the error service for user-friendly error displays.
 
 ```typescript
 import { WidgetErrorBoundary } from './components/common/WidgetErrorBoundary';
@@ -260,7 +260,7 @@ import { ErrorMessage } from './components/common/ErrorMessage';
 <ErrorMessage
   title="Widget Error"
   message="Failed to load widget data"
-  onRetry={() => refetch()}
+  retry={() => refetch()}
 />
 ```
 
