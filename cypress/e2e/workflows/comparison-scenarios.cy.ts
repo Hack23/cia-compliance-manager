@@ -67,7 +67,6 @@ describe("Security Level Comparison Scenarios", () => {
           scenario.integrity,
           scenario.confidentiality
         );
-        cy.wait(500);
 
         // Verify selections
         cy.get("select").eq(0).should("have.value", scenario.availability);
@@ -113,7 +112,6 @@ describe("Security Level Comparison Scenarios", () => {
 
         // Set all CIA components to the same level
         cy.setSecurityLevels(test.level, test.level, test.level);
-        cy.wait(500);
 
         // Capture cost information
         cy.get('[data-testid*="cost"]').then(($costs) => {
@@ -153,7 +151,6 @@ describe("Security Level Comparison Scenarios", () => {
       combinations.forEach((combo) => {
         cy.log(`\nTesting ${combo.name}`);
         cy.setSecurityLevels(combo.levels[0], combo.levels[1], combo.levels[2]);
-        cy.wait(500);
 
         // Verify widgets updated
         cy.get('[data-testid*="widget"]').should("be.visible");
@@ -202,7 +199,6 @@ describe("Security Level Comparison Scenarios", () => {
           scenario.integrity,
           scenario.confidentiality
         );
-        cy.wait(500);
 
         // Check for compliance framework mentions
         cy.get('[data-testid*="compliance"]').then(($widgets) => {
@@ -272,7 +268,6 @@ describe("Security Level Comparison Scenarios", () => {
           scenario.integrity,
           scenario.confidentiality
         );
-        cy.wait(500);
 
         // Verify configuration applied
         cy.get("select").eq(0).should("have.value", scenario.availability);
@@ -303,7 +298,6 @@ describe("Security Level Comparison Scenarios", () => {
         SECURITY_LEVELS.LOW,
         SECURITY_LEVELS.LOW
       );
-      cy.wait(500);
 
       // Verify all widgets still render with minimal security
       cy.verifyMinimumWidgets(5);
@@ -325,7 +319,6 @@ describe("Security Level Comparison Scenarios", () => {
         SECURITY_LEVELS.HIGH,
         SECURITY_LEVELS.HIGH
       );
-      cy.wait(500);
 
       // Verify all widgets render with maximum security
       cy.verifyMinimumWidgets(5);
@@ -348,7 +341,6 @@ describe("Security Level Comparison Scenarios", () => {
         SECURITY_LEVELS.HIGH,    // Integrity: High
         SECURITY_LEVELS.MODERATE // Confidentiality: Moderate
       );
-      cy.wait(500);
 
       // Verify selections
       cy.get("select").eq(0).should("have.value", SECURITY_LEVELS.LOW);
@@ -377,7 +369,6 @@ describe("Security Level Comparison Scenarios", () => {
       rapidScenarios.forEach((levels, index) => {
         cy.log(`Rapid switch ${index + 1}: ${levels.join(", ")}`);
         cy.setSecurityLevels(levels[0], levels[1], levels[2]);
-        cy.wait(200); // Reduced wait for stress test
       });
 
       // Verify no errors occurred and app is still functional

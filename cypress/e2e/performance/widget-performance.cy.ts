@@ -105,7 +105,6 @@ describe("Widget Performance Tests", () => {
           });
           
           // Wait after measurement, not during
-          cy.wait(300);
           
           cy.then(() => {
             // Continue to next measurement
@@ -127,7 +126,6 @@ describe("Widget Performance Tests", () => {
         SECURITY_LEVELS.LOW,
         SECURITY_LEVELS.LOW
       );
-      cy.wait(500);
 
       // Measure time to update all widgets
       cy.then(() => {
@@ -191,7 +189,6 @@ describe("Widget Performance Tests", () => {
           });
           
           // Wait for stability after measurement
-          cy.wait(500);
         });
       });
     });

@@ -14,7 +14,6 @@
 
 import { SECURITY_LEVELS } from "../../support/constants";
 
-
 // Type interface for Window extensions
 interface WindowWithConsoleErrors extends Window {
   consoleErrors?: string[];
@@ -48,7 +47,6 @@ describe("Complete Assessment Workflow", () => {
       cy.get("select").eq(0).should("have.value", SECURITY_LEVELS.MODERATE);
       cy.get("select").eq(1).should("have.value", SECURITY_LEVELS.HIGH);
       cy.get("select").eq(2).should("have.value", SECURITY_LEVELS.HIGH);
-      cy.wait(500);
 
       // Step 5: Review Security Summary
       cy.log("Step 5: Reviewing security summary");
@@ -153,7 +151,6 @@ describe("Complete Assessment Workflow", () => {
         SECURITY_LEVELS.MODERATE,
         SECURITY_LEVELS.HIGH
       );
-      cy.wait(500);
 
       // Verify selections
       cy.get("select").eq(0).should("have.value", SECURITY_LEVELS.HIGH);
@@ -163,7 +160,6 @@ describe("Complete Assessment Workflow", () => {
       // Reload page
       cy.reload();
       cy.ensureAppLoaded();
-      cy.wait(500);
 
       // Verify state persisted (if localStorage is used)
       cy.window().then((win: WindowWithConsoleErrors) => {
@@ -191,7 +187,6 @@ describe("Complete Assessment Workflow", () => {
         SECURITY_LEVELS.LOW,
         SECURITY_LEVELS.LOW
       );
-      cy.wait(500);
 
       // Capture initial state
       let initialCost = "";
@@ -210,7 +205,6 @@ describe("Complete Assessment Workflow", () => {
         SECURITY_LEVELS.HIGH,
         SECURITY_LEVELS.HIGH
       );
-      cy.wait(500);
 
       // Verify cost increased
       cy.get('[data-testid*="cost"]')
@@ -233,7 +227,6 @@ describe("Complete Assessment Workflow", () => {
         SECURITY_LEVELS.HIGH,
         SECURITY_LEVELS.MODERATE
       );
-      cy.wait(500);
 
       // Verify all widgets updated
       cy.get('[data-testid*="widget"]').each(($widget) => {
@@ -276,7 +269,6 @@ describe("Complete Assessment Workflow", () => {
           scenario.integrity,
           scenario.confidentiality
         );
-        cy.wait(500);
 
         // Verify levels were set
         cy.get("select")
@@ -311,7 +303,6 @@ describe("Complete Assessment Workflow", () => {
         SECURITY_LEVELS.LOW,
         SECURITY_LEVELS.LOW
       );
-      cy.wait(500);
 
       let lowSecurityText = "";
       cy.get("body")
@@ -327,7 +318,6 @@ describe("Complete Assessment Workflow", () => {
         SECURITY_LEVELS.HIGH,
         SECURITY_LEVELS.HIGH
       );
-      cy.wait(500);
 
       cy.get("body")
         .invoke("text")
@@ -356,7 +346,6 @@ describe("Complete Assessment Workflow", () => {
       levels.forEach((level, index) => {
         cy.log(`Rapid change ${index + 1}: ${level}`);
         cy.get("select").eq(0).select(level, { force: true });
-        cy.wait(100); // Minimal wait to stress-test
       });
 
       // Verify no errors occurred
@@ -423,8 +412,6 @@ describe("Complete Assessment Workflow", () => {
           expect(duration).to.be.lessThan(6000); // 6 second max
         });
       });
-
-      cy.wait(500);
     });
 
     it("should respond quickly to security level changes", () => {
@@ -443,8 +430,6 @@ describe("Complete Assessment Workflow", () => {
           expect(responseTime).to.be.lessThan(1000); // 1 second max
         });
       });
-
-      cy.wait(500);
     });
   });
 });

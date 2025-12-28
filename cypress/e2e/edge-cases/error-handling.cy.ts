@@ -15,7 +15,6 @@
 
 import { SECURITY_LEVELS } from "../../support/constants";
 
-
 // Type interface for Window extensions
 interface WindowWithConsoleErrors extends Window {
   consoleErrors?: string[];
@@ -105,8 +104,6 @@ describe("Error Handling and Edge Cases", () => {
         // No wait - stress test
       }
 
-      cy.wait(500); // Allow state to settle
-
       // Application should still be functional
       cy.verifyMinimumWidgets(5);
       cy.log("✅ Handled rapid changes without breaking");
@@ -117,25 +114,21 @@ describe("Error Handling and Edge Cases", () => {
 
       // Test very small viewport (mobile)
       cy.viewport(320, 568);
-      cy.wait(300);
       cy.get("body").should("be.visible");
       cy.log("✓ Small viewport (320x568) renders correctly");
 
       // Test medium viewport (tablet)
       cy.viewport(768, 1024);
-      cy.wait(300);
       cy.get("body").should("be.visible");
       cy.log("✓ Medium viewport (768x1024) renders correctly");
 
       // Test large viewport (desktop)
       cy.viewport(1920, 1080);
-      cy.wait(300);
       cy.get("body").should("be.visible");
       cy.log("✓ Large viewport (1920x1080) renders correctly");
 
       // Test ultra-wide viewport
       cy.viewport(2560, 1440);
-      cy.wait(300);
       cy.get("body").should("be.visible");
       cy.log("✓ Ultra-wide viewport (2560x1440) renders correctly");
 
@@ -154,14 +147,12 @@ describe("Error Handling and Edge Cases", () => {
           SECURITY_LEVELS.HIGH,
           SECURITY_LEVELS.MODERATE
         );
-        cy.wait(200);
 
         cy.setSecurityLevels(
           SECURITY_LEVELS.HIGH,
           SECURITY_LEVELS.MODERATE,
           SECURITY_LEVELS.HIGH
         );
-        cy.wait(200);
       }
 
       // Verify application still responsive
@@ -208,7 +199,6 @@ describe("Error Handling and Edge Cases", () => {
         SECURITY_LEVELS.HIGH,
         SECURITY_LEVELS.MODERATE
       );
-      cy.wait(500);
 
       // Check for critical errors
       cy.window().then((win: WindowWithConsoleErrors) => {
@@ -246,14 +236,12 @@ describe("Error Handling and Edge Cases", () => {
         SECURITY_LEVELS.MODERATE,
         SECURITY_LEVELS.LOW
       );
-      cy.wait(300);
 
       // Perform rapid refreshes
       for (let i = 0; i < 3; i++) {
         cy.log(`Refresh ${i + 1}/3`);
         cy.reload();
         cy.ensureAppLoaded();
-        cy.wait(500);
       }
 
       // Verify application still works
@@ -288,14 +276,12 @@ describe("Error Handling and Edge Cases", () => {
 
       // Set only one security level
       cy.get("select").eq(0).select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.wait(300);
 
       // Application should still render all widgets
       cy.verifyMinimumWidgets(5);
 
       // Set second security level
       cy.get("select").eq(1).select(SECURITY_LEVELS.MODERATE, { force: true });
-      cy.wait(300);
 
       // Application should update appropriately
       cy.get('[data-testid*="widget"]').should("be.visible");
@@ -314,7 +300,6 @@ describe("Error Handling and Edge Cases", () => {
         SECURITY_LEVELS.HIGH,
         SECURITY_LEVELS.MODERATE
       );
-      cy.wait(500);
 
       // Verify selections in controls
       cy.get("select").eq(0).should("have.value", SECURITY_LEVELS.HIGH);
@@ -325,7 +310,7 @@ describe("Error Handling and Edge Cases", () => {
       cy.verifyMinimumWidgets(5);
 
       // All widgets should be visible and responding to the same state
-      cy.get('[data-testid*="widget"]', { timeout: 10000 }).each(($widget) => {
+      cy.get('[data-testid*="widget"]').each(($widget) => {
         cy.wrap($widget).should("be.visible");
       });
 
@@ -337,15 +322,12 @@ describe("Error Handling and Edge Cases", () => {
 
       // Perform rapid changes
       cy.setSecurityLevels(SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW, SECURITY_LEVELS.LOW);
-      cy.wait(100);
       cy.setSecurityLevels(SECURITY_LEVELS.HIGH, SECURITY_LEVELS.HIGH, SECURITY_LEVELS.HIGH);
-      cy.wait(100);
       cy.setSecurityLevels(
         SECURITY_LEVELS.MODERATE,
         SECURITY_LEVELS.MODERATE,
         SECURITY_LEVELS.MODERATE
       );
-      cy.wait(500);
 
       // Final state should be Moderate across all
       cy.get("select").eq(0).should("have.value", SECURITY_LEVELS.MODERATE);
@@ -432,18 +414,16 @@ describe("Error Handling and Edge Cases", () => {
         SECURITY_LEVELS.HIGH,
         SECURITY_LEVELS.HIGH
       );
-      cy.wait(500);
 
       // Verify all widgets are visible
       cy.verifyMinimumWidgets(5);
-      cy.get('[data-testid*="widget"]', { timeout: 10000 }).should("have.length.at.least", 5);
+      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
 
       // Perform interaction
       cy.get("select").eq(0).select(SECURITY_LEVELS.MODERATE, { force: true });
-      cy.wait(300);
 
       // Verify widgets still functional after interaction
-      cy.get('[data-testid*="widget"]', { timeout: 10000 }).should("have.length.at.least", 5);
+      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
 
       cy.log("✅ Performance acceptable with full widget load");
     });
