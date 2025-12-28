@@ -14,11 +14,7 @@
  */
 
 import { SECURITY_LEVELS } from "../../support/constants";
-
-// Type interface for Window extensions
-interface WindowWithConsoleErrors extends Window {
-  consoleErrors?: string[];
-}
+import type { WindowWithConsoleErrors } from "../../support/test-types";
 
 describe("Error Handling and Edge Cases", () => {
   beforeEach(() => {
@@ -67,17 +63,16 @@ describe("Error Handling and Edge Cases", () => {
     it("should handle localStorage quota exceeded scenario", () => {
       cy.log("💾 Testing localStorage quota handling");
 
-      // Stub localStorage.setItem to throw QuotaExceededError
-      cy.window().then((win: WindowWithConsoleErrors) => {
-        const quotaError = new DOMException(
-          "The quota has been exceeded.",
-          "QuotaExceededError"
-        );
-        cy.stub(win.localStorage, "setItem").throws(quotaError);
+      // Visit page with localStorage.setItem stubbed to throw QuotaExceededError
+      cy.visit("/", {
+        onBeforeLoad(win: WindowWithConsoleErrors) {
+          const quotaError = new DOMException(
+            "The quota has been exceeded.",
+            "QuotaExceededError"
+          );
+          cy.stub(win.localStorage, "setItem").throws(quotaError);
+        },
       });
-
-      // Reload to trigger app's normal localStorage usage with stubbed error
-      cy.reload();
       cy.ensureAppLoaded();
 
       // Application should still function despite quota errors

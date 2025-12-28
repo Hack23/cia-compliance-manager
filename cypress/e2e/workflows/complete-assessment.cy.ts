@@ -13,11 +13,7 @@
  */
 
 import { SECURITY_LEVELS } from "../../support/constants";
-
-// Type interface for Window extensions
-interface WindowWithConsoleErrors extends Window {
-  consoleErrors?: string[];
-}
+import type { WindowWithConsoleErrors } from "../../support/test-types";
 
 describe("Complete Assessment Workflow", () => {
   beforeEach(() => {
@@ -189,35 +185,32 @@ describe("Complete Assessment Workflow", () => {
       );
 
       // Capture initial state
-      let initialCost = "";
       cy.get('[data-testid*="cost"]')
         .first()
         .invoke("text")
-        .then((text) => {
-          initialCost = text;
-          cy.log(`Initial cost state captured: ${text.slice(0, 50)}...`);
-        });
+        .then((initialCost) => {
+          cy.log(`Initial cost state captured: ${initialCost.slice(0, 50)}...`);
 
-      // User realizes they need higher security - upgrade to High
-      cy.log("Phase 2: Upgrading to high security");
-      cy.setSecurityLevels(
-        SECURITY_LEVELS.HIGH,
-        SECURITY_LEVELS.HIGH,
-        SECURITY_LEVELS.HIGH
-      );
-
-      // Verify cost increased
-      cy.get('[data-testid*="cost"]')
-        .first()
-        .invoke("text")
-        .then((newText) => {
-          // Cost display should have changed
-          cy.log(
-            `New cost state: ${newText.slice(0, 50)}...`
+          // User realizes they need higher security - upgrade to High
+          cy.log("Phase 2: Upgrading to high security");
+          cy.setSecurityLevels(
+            SECURITY_LEVELS.HIGH,
+            SECURITY_LEVELS.HIGH,
+            SECURITY_LEVELS.HIGH
           );
-          // Just verify the widget updated, not necessarily that cost increased
-          // (as the specific values depend on complex business logic)
-          expect(newText.length).to.be.greaterThan(0);
+
+          // Verify cost widget updated
+          cy.get('[data-testid*="cost"]')
+            .first()
+            .invoke("text")
+            .then((newText) => {
+              // Cost display should have changed
+              cy.log(`New cost state: ${newText.slice(0, 50)}...`);
+              // Verify the widget updated with valid content
+              expect(newText.length).to.be.greaterThan(0);
+              // Optionally verify it changed from initial state
+              cy.log(`Cost changed: ${initialCost !== newText}`);
+            });
         });
 
       // User adjusts to balanced approach
