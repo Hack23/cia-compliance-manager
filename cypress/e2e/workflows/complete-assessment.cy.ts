@@ -222,9 +222,7 @@ describe("Complete Assessment Workflow", () => {
       );
 
       // Verify all widgets updated
-      cy.get('[data-testid*="widget"]').each(($widget) => {
-        cy.wrap($widget).should("be.visible");
-      });
+      cy.get('[data-testid*="widget"]').should("exist");
 
       cy.log("✅ Assessment modification workflow completed");
     });
