@@ -125,7 +125,7 @@ export interface ErrorProviderProps {
  *   addError(error, { component: 'DataFetcher' });
  *   showToast({
  *     message: 'Failed to load data',
- *     onRetry: () => fetchData()
+ *     retry: () => fetchData()
  *   });
  * }
  * ```
@@ -258,7 +258,7 @@ export const ErrorProvider: React.FC<ErrorProviderProps> = ({
  *   addError(error, { operation: 'save' });
  *   showToast({
  *     message: 'Failed to save data',
- *     onRetry: () => saveData()
+ *     retry: () => saveData()
  *   });
  * }
  * ```

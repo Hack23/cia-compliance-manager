@@ -26,20 +26,20 @@ vi.mock('../services/errorService', () => ({
 
 // Mock ErrorToast component
 vi.mock('../components/common/ErrorToast', () => ({
-  default: ({ message, title, isVisible, onDismiss, onRetry }: {
+  default: ({ message, title, isVisible, onDismiss, retry }: {
     message: string;
     title?: string;
     isVisible: boolean;
     onDismiss: () => void;
-    onRetry?: () => void;
+    retry?: () => void;
   }) => (
     isVisible ? (
       <div data-testid="error-toast">
         <div data-testid="error-toast-title">{title || 'Error'}</div>
         <div data-testid="error-toast-message">{message}</div>
         <button onClick={onDismiss} data-testid="error-toast-close">Close</button>
-        {onRetry && (
-          <button onClick={onRetry} data-testid="error-toast-retry">Retry</button>
+        {retry && (
+          <button onClick={retry} data-testid="error-toast-retry">Retry</button>
         )}
       </div>
     ) : null
@@ -330,7 +330,7 @@ describe('ErrorContext', () => {
       );
 
       await waitFor(() => {
-        expect(screen.getByTestId('error-toast-retry-button')).toBeInTheDocument();
+        expect(screen.getByTestId('error-toast-retry')).toBeInTheDocument();
       });
     });
   });

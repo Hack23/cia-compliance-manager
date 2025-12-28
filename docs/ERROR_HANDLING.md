@@ -289,7 +289,7 @@ const [showToast, setShowToast] = useState(false);
   onDismiss={() => setShowToast(false)}
   autoHideDuration={5000}
   position="top-right"
-  onRetry={() => saveChanges()}
+  retry={() => saveChanges()}
 />
 ```
 
@@ -300,7 +300,7 @@ const [showToast, setShowToast] = useState(false);
 - `onDismiss`: Dismiss callback (required)
 - `autoHideDuration`: Auto-hide time in ms (default: 5000, 0 to disable)
 - `position`: Toast position (default: "top-right")
-- `onRetry`: Retry callback (optional)
+- `retry`: Retry callback (optional)
 
 **Positions:** `top-left`, `top-center`, `top-right`, `bottom-left`, `bottom-center`, `bottom-right`
 
@@ -448,7 +448,7 @@ showToast({ message: 'Failed to save' });
 // ✅ Good - With retry option
 showToast({
   message: 'Failed to save',
-  onRetry: () => saveData()
+  retry: () => saveData()
 });
 ```
 
