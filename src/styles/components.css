@@ -413,6 +413,9 @@ input:focus {
 }
 
 /* Widget body with improved padding and scrolling behavior */
+/* Reduced padding (0.5rem/8px) to minimize empty space while maintaining usability */
+/* Note: This overrides responsive Tailwind padding (p-md sm:p-lg) with fixed 8px for consistency */
+/* Design validated through testing - provides adequate whitespace on touch devices */
 .widget-body {
   padding: 0.5rem; /* Further reduced from 0.75rem for less empty space */
   flex: 1 1 auto;
@@ -2330,7 +2333,7 @@ button[role="tab"] {
   font-weight: 500;
   font-size: 0.875rem; /* 14px */
   border-bottom: 2px solid transparent;
-  transition: background-color 0.2s ease, transform 0.2s ease, border-bottom-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease, border-bottom-color 0.2s ease, color 0.2s ease;
   cursor: pointer;
   background: transparent;
 }
