@@ -61,38 +61,53 @@ describe("Widget Performance Tests", () => {
     it("should respond quickly to security level changes", () => {
       cy.log("⚡ Testing security level change response time");
 
+      // Test multiple security level changes and measure response time
+      // Using recursive chaining to properly capture timing with Cypress async behavior
+      const levels = [
+        SECURITY_LEVELS.LOW,
+        SECURITY_LEVELS.MODERATE,
+        SECURITY_LEVELS.HIGH,
+        SECURITY_LEVELS.MODERATE,
+        SECURITY_LEVELS.LOW,
+      ];
+      
       const measurements: number[] = [];
+      
+      // Recursive function to chain commands properly
+      const measureChange = (index: number) => {
+        if (index >= levels.length) {
+          // After all measurements, calculate average
+          cy.then(() => {
+            const avgTime =
+              measurements.reduce((sum, time) => sum + time, 0) /
+              measurements.length;
+            cy.log(`✓ Average response time: ${avgTime.toFixed(0)}ms`);
 
-      // Test 5 security level changes and measure each
-      for (let i = 0; i < 5; i++) {
-        const level =
-          i % 3 === 0
-            ? SECURITY_LEVELS.LOW
-            : i % 3 === 1
-            ? SECURITY_LEVELS.MODERATE
-            : SECURITY_LEVELS.HIGH;
-
-        const startTime = Date.now();
-
-        cy.get("select").eq(0).select(level, { force: true });
-        cy.wait(300);
+            // Target: <500ms per interaction
+            expect(avgTime).to.be.lessThan(500);
+          });
+          return;
+        }
 
         cy.then(() => {
-          const responseTime = Date.now() - startTime;
-          measurements.push(responseTime);
-          cy.log(`Change ${i + 1}: ${responseTime}ms`);
+          const startTime = Date.now();
+          
+          cy.get("select").eq(0).select(levels[index], { force: true });
+          cy.wait(300);
+          
+          cy.then(() => {
+            const responseTime = Date.now() - startTime;
+            measurements.push(responseTime);
+            cy.log(`Change ${index + 1}: ${responseTime}ms`);
+            
+            // Continue to next measurement
+            measureChange(index + 1);
+          });
         });
-      }
-
-      cy.then(() => {
-        const avgTime =
-          measurements.reduce((sum, time) => sum + time, 0) /
-          measurements.length;
-        cy.log(`✓ Average response time: ${avgTime.toFixed(0)}ms`);
-
-        // Target: <500ms per interaction
-        expect(avgTime).to.be.lessThan(500);
-      });
+      };
+      
+      // Start the measurement chain
+      measureChange(0);
     });
 
     it("should update all widgets quickly when state changes", () => {
