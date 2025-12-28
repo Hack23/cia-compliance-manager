@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.0**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.1**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **useKeyboardShortcuts**(`options`): `void`
 
-Defined in: [hooks/useKeyboardShortcuts.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/hooks/useKeyboardShortcuts.ts#L42)
+Defined in: [hooks/useKeyboardShortcuts.ts:42](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/hooks/useKeyboardShortcuts.ts#L42)
 
 Custom hook for registering and handling keyboard shortcuts
 

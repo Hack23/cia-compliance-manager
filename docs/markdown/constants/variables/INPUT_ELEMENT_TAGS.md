@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.0**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.1**](../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **INPUT\_ELEMENT\_TAGS**: readonly \[`"INPUT"`, `"TEXTAREA"`, `"SELECT"`\]
 
-Defined in: [constants/keyboardShortcuts.ts:225](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/constants/keyboardShortcuts.ts#L225)
+Defined in: [constants/keyboardShortcuts.ts:225](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/constants/keyboardShortcuts.ts#L225)
 
 Keys that should not trigger shortcuts when focused in input elements

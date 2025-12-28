@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.0**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.1**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Class: SecurityResourceService
 
-Defined in: [services/securityResourceService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/securityResourceService.ts#L26)
+Defined in: [services/securityResourceService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/securityResourceService.ts#L26)
 
 Service for security resource recommendations
 
@@ -33,7 +33,7 @@ implement effective security controls. 📚
 
 > **new SecurityResourceService**(`dataProvider`): `SecurityResourceService`
 
-Defined in: [services/securityResourceService.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/securityResourceService.ts#L43)
+Defined in: [services/securityResourceService.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/securityResourceService.ts#L43)
 
 Create a new SecurityResourceService instance
 
@@ -63,7 +63,7 @@ If dataProvider is not provided
 
 > `readonly` **name**: `string` = `'SecurityResourceService'`
 
-Defined in: [services/securityResourceService.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/securityResourceService.ts#L30)
+Defined in: [services/securityResourceService.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/securityResourceService.ts#L30)
 
 Service name for identification
 
@@ -81,7 +81,7 @@ Service name for identification
 
 > **getComponentDetails**(`component`, `level`): [`CIADetails`](../../../types/interfaces/CIADetails.md) \| `undefined`
 
-Defined in: [services/BaseService.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L193)
+Defined in: [services/BaseService.ts:193](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/BaseService.ts#L193)
 
 Get component details for a specific component and security level
 
@@ -109,7 +109,7 @@ Get component details for a specific component and security level
 
 > **getRiskLevelFromSecurityLevel**(`level`): `string`
 
-Defined in: [services/BaseService.ts:254](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L254)
+Defined in: [services/BaseService.ts:254](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/BaseService.ts#L254)
 
 Get risk level from security level
 
@@ -133,7 +133,7 @@ Get risk level from security level
 
 > **getSecurityLevelDescription**(`level`): `string`
 
-Defined in: [services/BaseService.ts:233](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L233)
+Defined in: [services/BaseService.ts:233](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/BaseService.ts#L233)
 
 Get security level description
 
@@ -157,7 +157,7 @@ Get security level description
 
 > **getSecurityResources**(`component`, `level`): `EnhancedSecurityResource`[]
 
-Defined in: [services/securityResourceService.ts:87](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/securityResourceService.ts#L87)
+Defined in: [services/securityResourceService.ts:87](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/securityResourceService.ts#L87)
 
 Get security resources based on component and level
 
@@ -207,7 +207,7 @@ resources.forEach(r => console.log(`- ${r.title}: ${r.url}`));
 
 > **getValuePoints**(`level`): `string`[]
 
-Defined in: [services/securityResourceService.ts:237](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/securityResourceService.ts#L237)
+Defined in: [services/securityResourceService.ts:237](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/securityResourceService.ts#L237)
 
 Get value points for a security level
 
@@ -255,7 +255,7 @@ valuePoints.forEach(point => console.log(`- ${point}`));
 
 > **handleError**(`error`): [`ServiceError`](../../classes/ServiceError.md)
 
-Defined in: [services/BaseService.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L104)
+Defined in: [services/BaseService.ts:104](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/BaseService.ts#L104)
 
 Handle errors consistently across services
 
@@ -287,7 +287,7 @@ ServiceError
 
 > **validate**(`input`): `boolean`
 
-Defined in: [services/BaseService.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/BaseService.ts#L73)
+Defined in: [services/BaseService.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/BaseService.ts#L73)
 
 Validate input parameters (to be overridden by subclasses)
 

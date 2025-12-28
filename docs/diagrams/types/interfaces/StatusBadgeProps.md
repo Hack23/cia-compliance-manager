@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.0**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.1**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: StatusBadgeProps
 
-Defined in: [types/componentPropExports.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/types/componentPropExports.ts#L114)
+Defined in: [types/componentPropExports.ts:114](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/componentPropExports.ts#L114)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:114](https://github.com/Hack23/cia-co
 
 > `optional` **className**: `string`
 
-Defined in: [types/componentPropExports.ts:117](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/types/componentPropExports.ts#L117)
+Defined in: [types/componentPropExports.ts:117](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/componentPropExports.ts#L117)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types/componentPropExports.ts:117](https://github.com/Hack23/cia-co
 
 > **status**: `string`
 
-Defined in: [types/componentPropExports.ts:115](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/types/componentPropExports.ts#L115)
+Defined in: [types/componentPropExports.ts:115](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/componentPropExports.ts#L115)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [types/componentPropExports.ts:115](https://github.com/Hack23/cia-co
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:118](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/types/componentPropExports.ts#L118)
+Defined in: [types/componentPropExports.ts:118](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/componentPropExports.ts#L118)
 
 ***
 
@@ -38,4 +38,4 @@ Defined in: [types/componentPropExports.ts:118](https://github.com/Hack23/cia-co
 
 > `optional` **variant**: `"purple"` \| `"success"` \| `"info"` \| `"warning"` \| `"error"` \| `"neutral"`
 
-Defined in: [types/componentPropExports.ts:116](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/types/componentPropExports.ts#L116)
+Defined in: [types/componentPropExports.ts:116](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/componentPropExports.ts#L116)

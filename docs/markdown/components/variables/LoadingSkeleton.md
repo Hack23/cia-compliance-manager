@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.0**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.1**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **LoadingSkeleton**: `React.FC`\<`LoadingSkeletonProps`\>
 
-Defined in: [components/common/LoadingSkeleton.tsx:51](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/components/common/LoadingSkeleton.tsx#L51)
+Defined in: [components/common/LoadingSkeleton.tsx:51](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/components/common/LoadingSkeleton.tsx#L51)
 
 Loading skeleton component for better perceived performance
 

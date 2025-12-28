@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.0**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.1**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityLevelState
 
-Defined in: [hooks/useSecurityLevelState.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/hooks/useSecurityLevelState.ts#L11)
+Defined in: [hooks/useSecurityLevelState.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/hooks/useSecurityLevelState.ts#L11)
 
 State object containing security levels for all CIA components
 
@@ -16,7 +16,7 @@ State object containing security levels for all CIA components
 
 > **availability**: [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [hooks/useSecurityLevelState.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/hooks/useSecurityLevelState.ts#L13)
+Defined in: [hooks/useSecurityLevelState.ts:13](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/hooks/useSecurityLevelState.ts#L13)
 
 Availability security level
 
@@ -26,7 +26,7 @@ Availability security level
 
 > **confidentiality**: [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [hooks/useSecurityLevelState.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/hooks/useSecurityLevelState.ts#L17)
+Defined in: [hooks/useSecurityLevelState.ts:17](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/hooks/useSecurityLevelState.ts#L17)
 
 Confidentiality security level
 
@@ -36,6 +36,6 @@ Confidentiality security level
 
 > **integrity**: [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [hooks/useSecurityLevelState.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/hooks/useSecurityLevelState.ts#L15)
+Defined in: [hooks/useSecurityLevelState.ts:15](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/hooks/useSecurityLevelState.ts#L15)
 
 Integrity security level

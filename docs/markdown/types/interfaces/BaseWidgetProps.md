@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.0**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.1**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BaseWidgetProps
 
-Defined in: [types/widget-props.ts:240](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/types/widget-props.ts#L240)
+Defined in: [types/widget-props.ts:240](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L240)
 
 Base props common to all widgets
 
@@ -40,7 +40,7 @@ interface MyWidgetProps extends BaseWidgetProps {
 
 > `optional` **children**: `ReactNode`
 
-Defined in: [types/widget-props.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/types/widget-props.ts#L244)
+Defined in: [types/widget-props.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L244)
 
 Optional children elements
 
@@ -50,7 +50,7 @@ Optional children elements
 
 > `optional` **className**: `string`
 
-Defined in: [types/widget-props.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/types/widget-props.ts#L124)
+Defined in: [types/widget-props.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L124)
 
 Optional CSS class name for custom styling
 
@@ -73,7 +73,7 @@ Use Tailwind CSS classes or custom CSS classes.
 
 > `optional` **onError**: (`error`) => `void`
 
-Defined in: [types/widget-props.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/types/widget-props.ts#L250)
+Defined in: [types/widget-props.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L250)
 
 Optional callback when widget encounters an error
 
@@ -95,7 +95,7 @@ Error that occurred
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widget-props.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/types/widget-props.ts#L135)
+Defined in: [types/widget-props.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L135)
 
 Optional test ID for automated testing
 

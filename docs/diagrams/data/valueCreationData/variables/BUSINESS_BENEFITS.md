@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.0**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.1**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > `const` **BUSINESS\_BENEFITS**: `Record`\<[`SecurityLevel`](../../../types/cia/type-aliases/SecurityLevel.md), [`BusinessItem`](../../../types/businessImpact/interfaces/BusinessItem.md)[]\>
 
-Defined in: [data/valueCreationData.ts:285](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/data/valueCreationData.ts#L285)
+Defined in: [data/valueCreationData.ts:285](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/data/valueCreationData.ts#L285)
 
 Business benefits by security level

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.0**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.1**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ErrorContext
 
-Defined in: [services/errors.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/errors.ts#L54)
+Defined in: [services/errors.ts:54](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/errors.ts#L54)
 
 Context information for errors
 
@@ -22,7 +22,7 @@ Additional context information
 
 > `optional` **component**: `string`
 
-Defined in: [services/errors.ts:60](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/errors.ts#L60)
+Defined in: [services/errors.ts:60](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/errors.ts#L60)
 
 Component being processed
 
@@ -32,7 +32,7 @@ Component being processed
 
 > `optional` **level**: `string`
 
-Defined in: [services/errors.ts:62](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/errors.ts#L62)
+Defined in: [services/errors.ts:62](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/errors.ts#L62)
 
 Security level being processed
 
@@ -42,7 +42,7 @@ Security level being processed
 
 > `optional` **method**: `string`
 
-Defined in: [services/errors.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/errors.ts#L58)
+Defined in: [services/errors.ts:58](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/errors.ts#L58)
 
 Method that generated the error
 
@@ -52,6 +52,6 @@ Method that generated the error
 
 > `optional` **service**: `string`
 
-Defined in: [services/errors.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/c466031910d76c5cbb596249d801f7ed60a95e63/src/services/errors.ts#L56)
+Defined in: [services/errors.ts:56](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/services/errors.ts#L56)
 
 Service that generated the error
