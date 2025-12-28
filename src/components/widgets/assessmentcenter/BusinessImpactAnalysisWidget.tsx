@@ -9,7 +9,6 @@ import {
 import { SecurityLevel } from "../../../types/cia";
 import { BusinessImpactDetails } from "../../../types/cia-services";
 import { isNullish } from "../../../utils/typeGuards";
-import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import KeyValuePair from "../../common/KeyValuePair";
 import RiskLevelBadge from "../../common/RiskLevelBadge";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
@@ -490,20 +489,10 @@ const BusinessImpactAnalysisWidget: React.FC<
         isLoading={isLoading}
         error={serviceError}
       >
-      <div 
-        className="p-4"
-        role="region"
-        aria-label={getWidgetAriaDescription(
-          "Business Impact Analysis",
-          "Business implications of security measures across financial, operational, reputational and regulatory dimensions"
-        )}
-      >
+      <div className="p-4">
         {/* Component Business Impacts */}
-        <section 
-          className="mb-4"
-          aria-labelledby="business-impacts-heading"
-        >
-          <h3 id="business-impacts-heading" className="text-lg font-medium mb-3">
+        <div className="mb-4">
+          <h3 className="text-lg font-medium mb-3">
             Business Impacts by Component
           </h3>
 
@@ -511,7 +500,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           {confidentialityImpact && (
             <div className="mb-3">
               <h4 className="text-md font-medium mb-2 flex items-center">
-                <span className="mr-2" aria-hidden="true">🔒</span>Confidentiality Impact
+                <span className="mr-2">🔒</span>Confidentiality Impact
               </h4>
               {confidentialityImpact.reputational &&
                 renderImpactCategory(
@@ -546,7 +535,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           {availabilityImpact && (
             <div className="mb-3">
               <h4 className="text-md font-medium mb-2 flex items-center">
-                <span className="mr-2" aria-hidden="true">⏱️</span>Availability Impact
+                <span className="mr-2">⏱️</span>Availability Impact
               </h4>
               {availabilityImpact.financial &&
                 renderImpactCategory("Financial", availabilityImpact.financial)}
@@ -557,7 +546,7 @@ const BusinessImpactAnalysisWidget: React.FC<
                 )}
             </div>
           )}
-        </section>
+        </div>
 
         <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
           <p className="text-sm">
