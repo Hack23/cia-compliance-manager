@@ -731,16 +731,16 @@ cypress/
 - Impact Analysis Widgets: 12 scenarios
 - Implementation Guide Widgets: 12 scenarios
 - Security Assessment Flow: 15 scenarios
-- Complete Assessment Workflow: 15 scenarios
-- Comparison Scenarios: 20 scenarios
-- Error Handling & Edge Cases: 25 scenarios
-- Performance Tests: 8 scenarios
-- Cross-Widget Interactions: 12 scenarios
-- **Total Test Scenarios:** **~143** comprehensive test cases
+- Complete Assessment Workflow: 11 scenarios
+- Comparison Scenarios: 14 scenarios
+- Error Handling & Edge Cases: 17 scenarios
+- Performance Tests: 7 scenarios
+- Cross-Widget Interactions: 6 scenarios
+- **Total Test Scenarios:** **~106** comprehensive test cases
 
 **New in v2.1:**
 - ✅ **Security Assessment Flow Test Suite** - 15 comprehensive tests covering the complete user journey
-- 📊 **Total Test Scenarios (current):** ~143 individual test scenarios across 21 test specifications
+- 📊 **Total Test Scenarios (current):** ~106 individual test scenarios across 21 test specifications
 - 🎯 **Critical Path Coverage:** >95% (19/21 tests marked critical)
 
 **New in v2.3 (Comprehensive E2E Expansion):**
@@ -773,11 +773,11 @@ cypress/
 
 **Enhanced Test Coverage Metrics:**
 - 📊 **Total Test Files:** 21 E2E test specifications (5 new files added)
-- 📊 **Total Test Scenarios:** ~143 comprehensive test cases (80 new scenarios added)
+- 📊 **Total Test Scenarios:** ~106 comprehensive test cases (55 new scenarios added)
 - 🎯 **Critical Path Coverage:** >95% (all critical user journeys validated)
 - ⚡ **Performance Coverage:** Complete (page load, widgets, interactions, responsive)
 - 🔄 **Workflow Coverage:** Complete (assessment, modification, comparison)
-- 🐛 **Error Handling Coverage:** Comprehensive (25+ edge case scenarios)
+- 🐛 **Error Handling Coverage:** Comprehensive (17 edge case scenarios)
 - 🔗 **Integration Coverage:** Complete (cross-widget data flow validation)
 
 ### 🔍 Actual Test Implementation Pattern

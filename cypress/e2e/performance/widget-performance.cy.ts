@@ -48,7 +48,7 @@ describe("Widget Performance Tests", () => {
         const startTime = Date.now();
 
         // Wait for widgets to render
-        cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+        cy.verifyMinimumWidgets(5);
 
         cy.then(() => {
           const renderTime = Date.now() - startTime;
@@ -97,13 +97,17 @@ describe("Widget Performance Tests", () => {
           const startTime = Date.now();
           
           cy.get("select").eq(0).select(levels[index], { force: true });
-          cy.wait(300);
           
           cy.then(() => {
             const responseTime = Date.now() - startTime;
             measurements.push(responseTime);
             cy.log(`Change ${index + 1}: ${responseTime}ms`);
-            
+          });
+          
+          // Wait after measurement, not during
+          cy.wait(300);
+          
+          cy.then(() => {
             // Continue to next measurement
             measureChange(index + 1);
           });
@@ -170,19 +174,23 @@ describe("Widget Performance Tests", () => {
             SECURITY_LEVELS.MODERATE,
             SECURITY_LEVELS.HIGH
           );
-          cy.wait(500);
 
           // Verify widgets render on this viewport
-          cy.get('[data-testid*="widget"]').should("have.length.at.least", 1);
+          cy.verifyMinimumWidgets(1);
 
           cy.then(() => {
             const renderTime = Date.now() - startTime;
             cy.log(`✓ ${viewport.name} rendered in ${renderTime}ms`);
 
-            // Performance targets may be slightly higher for mobile
-            const maxTime = viewport.width < 768 ? 1500 : 1000;
+            // Performance targets adjusted for setSecurityLevels internal waits
+            // setSecurityLevels includes ~1400ms of internal waits, so targets are:
+            // Mobile: <2500ms total, Desktop: <2000ms total
+            const maxTime = viewport.width < 768 ? 2500 : 2000;
             expect(renderTime).to.be.lessThan(maxTime);
           });
+          
+          // Wait for stability after measurement
+          cy.wait(500);
         });
       });
     });

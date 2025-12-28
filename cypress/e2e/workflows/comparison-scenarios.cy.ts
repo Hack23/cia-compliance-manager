@@ -92,7 +92,7 @@ describe("Security Level Comparison Scenarios", () => {
         });
 
         // Verify all widgets are responsive
-        cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+        cy.verifyMinimumWidgets(5);
         cy.log(`✅ ${scenario.name} validated`);
       });
     });
@@ -280,7 +280,7 @@ describe("Security Level Comparison Scenarios", () => {
         cy.get("select").eq(2).should("have.value", scenario.confidentiality);
 
         // Verify widgets rendered
-        cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+        cy.verifyMinimumWidgets(5);
 
         // Capture assessment results
         cy.get("body").then(($body) => {
@@ -306,7 +306,7 @@ describe("Security Level Comparison Scenarios", () => {
       cy.wait(500);
 
       // Verify all widgets still render with minimal security
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
 
       // Check for cost information (should be lowest)
       cy.get("body").then(($body) => {
@@ -328,7 +328,7 @@ describe("Security Level Comparison Scenarios", () => {
       cy.wait(500);
 
       // Verify all widgets render with maximum security
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
 
       // Check for high security indicators
       cy.get("body").then(($body) => {
@@ -356,7 +356,7 @@ describe("Security Level Comparison Scenarios", () => {
       cy.get("select").eq(2).should("have.value", SECURITY_LEVELS.MODERATE);
 
       // Verify application handles this mixed configuration
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
 
       cy.log("✅ Unbalanced security configuration validated");
     });
@@ -381,7 +381,7 @@ describe("Security Level Comparison Scenarios", () => {
       });
 
       // Verify no errors occurred and app is still functional
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
       cy.get("select").should("have.length.at.least", 3);
 
       cy.log("✅ Rapid scenario switching handled gracefully");

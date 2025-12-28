@@ -15,6 +15,12 @@
 
 import { SECURITY_LEVELS } from "../../support/constants";
 
+
+// Type interface for Window extensions
+interface WindowWithConsoleErrors extends Window {
+  consoleErrors?: string[];
+}
+
 describe("Error Handling and Edge Cases", () => {
   beforeEach(() => {
     cy.visit("/");
@@ -27,7 +33,7 @@ describe("Error Handling and Edge Cases", () => {
       cy.log("🔧 Testing recovery from corrupted localStorage");
 
       // Inject various types of invalid data
-      cy.window().then((win) => {
+      cy.window().then((win: WindowWithConsoleErrors) => {
         win.localStorage.setItem("securityLevels", "invalid-json");
         win.localStorage.setItem("assessmentData", '{"broken": json}');
         win.localStorage.setItem("userPreferences", "null");
@@ -39,7 +45,7 @@ describe("Error Handling and Edge Cases", () => {
 
       // Application should recover and show default state
       cy.get("select").should("have.length.at.least", 3);
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
       cy.log("✅ Application recovered from corrupted localStorage");
     });
 
@@ -62,7 +68,7 @@ describe("Error Handling and Edge Cases", () => {
     it("should handle localStorage quota exceeded scenario", () => {
       cy.log("💾 Testing localStorage quota handling");
 
-      cy.window().then((win) => {
+      cy.window().then((win: WindowWithConsoleErrors) => {
         try {
           // Try to fill localStorage with large data
           const largeData = "x".repeat(1000000); // 1MB of data
@@ -100,7 +106,7 @@ describe("Error Handling and Edge Cases", () => {
       cy.wait(500); // Allow state to settle
 
       // Application should still be functional
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
       cy.log("✅ Handled rapid changes without breaking");
     });
 
@@ -157,7 +163,7 @@ describe("Error Handling and Edge Cases", () => {
       }
 
       // Verify application still responsive
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
       cy.log("✅ Extended session handled without degradation");
     });
   });
@@ -185,7 +191,7 @@ describe("Error Handling and Edge Cases", () => {
       cy.log("🐛 Monitoring console errors during usage");
 
       // Set up error tracking
-      cy.window().then((win) => {
+      cy.window().then((win: WindowWithConsoleErrors) => {
         win.consoleErrors = [];
         const originalError = win.console.error;
         win.console.error = (...args: any[]) => {
@@ -203,7 +209,7 @@ describe("Error Handling and Edge Cases", () => {
       cy.wait(500);
 
       // Check for critical errors
-      cy.window().then((win) => {
+      cy.window().then((win: WindowWithConsoleErrors) => {
         const errors = win.consoleErrors || [];
         const criticalErrors = errors.filter(
           (msg: string) =>
@@ -250,7 +256,7 @@ describe("Error Handling and Edge Cases", () => {
 
       // Verify application still works
       cy.get("select").should("have.length.at.least", 3);
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
       cy.log("✅ Handled rapid refreshes successfully");
     });
   });
@@ -265,7 +271,7 @@ describe("Error Handling and Edge Cases", () => {
       cy.ensureAppLoaded();
 
       // Application should show widgets even with no selections
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
       cy.log("✓ Widgets render with default state");
 
       // Check that selectors are available
@@ -283,7 +289,7 @@ describe("Error Handling and Edge Cases", () => {
       cy.wait(300);
 
       // Application should still render all widgets
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
 
       // Set second security level
       cy.get("select").eq(1).select(SECURITY_LEVELS.MODERATE, { force: true });
@@ -342,7 +348,7 @@ describe("Error Handling and Edge Cases", () => {
       cy.get("select").eq(2).should("have.value", SECURITY_LEVELS.MODERATE);
 
       // All widgets should reflect final state
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
 
       cy.log("✅ State synchronized after rapid changes");
     });
@@ -352,7 +358,7 @@ describe("Error Handling and Edge Cases", () => {
     it("should handle missing Web API features gracefully", () => {
       cy.log("🌐 Testing graceful degradation");
 
-      cy.window().then((win) => {
+      cy.window().then((win: WindowWithConsoleErrors) => {
         // Check for common Web APIs
         const hasLocalStorage = !!win.localStorage;
         const hasSessionStorage = !!win.sessionStorage;
@@ -376,10 +382,10 @@ describe("Error Handling and Edge Cases", () => {
 
       // Application should work regardless of locale
       cy.get("body").should("be.visible");
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
 
       // Timestamps and dates should be handled properly
-      cy.window().then((win) => {
+      cy.window().then((win: WindowWithConsoleErrors) => {
         const now = new Date();
         cy.log(`Current timezone offset: ${now.getTimezoneOffset()} minutes`);
         cy.log(`Current locale: ${win.navigator.language}`);
@@ -397,10 +403,29 @@ describe("Error Handling and Edge Cases", () => {
       // we test that the app loads efficiently
 
       cy.then(() => {
-        const startTime = Date.now();
+        cy.then(() => {
 
-        cy.reload();
-        cy.ensureAppLoaded();
+          const startTime = Date.now();
+
+          
+
+          cy.reload();
+
+          cy.ensureAppLoaded();
+
+          
+
+          cy.then(() => {
+
+            const loadTime = Date.now() - startTime;
+
+            cy.log(`Page load time: ${loadTime}ms`);
+
+            expect(loadTime).to.be.lessThan(10000); // 10 second max
+
+          });
+
+        });
 
         cy.then(() => {
           const loadTime = Date.now() - startTime;
@@ -424,13 +449,38 @@ describe("Error Handling and Edge Cases", () => {
       cy.wait(500);
 
       cy.then(() => {
-        const startTime = Date.now();
+        cy.then(() => {
 
-        // Verify all widgets are visible
-        cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+          const startTime = Date.now();
 
-        // Perform interaction
-        cy.get("select").eq(0).select(SECURITY_LEVELS.MODERATE, { force: true });
+          
+
+          // Verify all widgets are visible
+
+          cy.get(\'[data-testid*="widget"]\').should("have.length.at.least", 5);
+
+          
+
+          // Perform interaction
+
+          cy.get("select").eq(0).select(SECURITY_LEVELS.MODERATE, { force: true });
+
+          
+
+          cy.then(() => {
+
+            const interactionTime = Date.now() - startTime;
+
+            cy.log(`Interaction time with full widget load: ${interactionTime}ms`);
+
+            expect(interactionTime).to.be.lessThan(2000); // 2 second max
+
+          });
+
+        });
+
+        
+
         cy.wait(500);
 
         cy.then(() => {

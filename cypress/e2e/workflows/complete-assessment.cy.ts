@@ -14,6 +14,12 @@
 
 import { SECURITY_LEVELS } from "../../support/constants";
 
+
+// Type interface for Window extensions
+interface WindowWithConsoleErrors extends Window {
+  consoleErrors?: string[];
+}
+
 describe("Complete Assessment Workflow", () => {
   beforeEach(() => {
     cy.visit("/");
@@ -30,28 +36,18 @@ describe("Complete Assessment Workflow", () => {
       cy.get("body").should("be.visible");
       cy.get("select").should("have.length.at.least", 3);
 
-      // Step 2: User reads guidance and selects first security level (Confidentiality)
-      cy.log("Step 2: Selecting Confidentiality level");
-      cy.get("select")
-        .eq(2) // Confidentiality selector
-        .select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.wait(300);
+      // Step 2-4: User selects security levels systematically
+      cy.log("Step 2-4: Selecting security levels");
+      cy.setSecurityLevels(
+        SECURITY_LEVELS.MODERATE, // Availability
+        SECURITY_LEVELS.HIGH,      // Integrity
+        SECURITY_LEVELS.HIGH       // Confidentiality
+      );
 
-      // Verify selection persisted
+      // Verify selections persisted
+      cy.get("select").eq(0).should("have.value", SECURITY_LEVELS.MODERATE);
+      cy.get("select").eq(1).should("have.value", SECURITY_LEVELS.HIGH);
       cy.get("select").eq(2).should("have.value", SECURITY_LEVELS.HIGH);
-
-      // Step 3: User selects Integrity level
-      cy.log("Step 3: Selecting Integrity level");
-      cy.get("select")
-        .eq(1) // Integrity selector
-        .select(SECURITY_LEVELS.HIGH, { force: true });
-      cy.wait(300);
-
-      // Step 4: User selects Availability level
-      cy.log("Step 4: Selecting Availability level");
-      cy.get("select")
-        .eq(0) // Availability selector
-        .select(SECURITY_LEVELS.MODERATE, { force: true });
       cy.wait(500);
 
       // Step 5: Review Security Summary
@@ -144,7 +140,7 @@ describe("Complete Assessment Workflow", () => {
 
       // Step 10: Verify all widgets are responsive and functional
       cy.log("Step 10: Verifying all widgets loaded successfully");
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
       cy.log("✅ Complete assessment workflow validated");
     });
 
@@ -170,7 +166,7 @@ describe("Complete Assessment Workflow", () => {
       cy.wait(500);
 
       // Verify state persisted (if localStorage is used)
-      cy.window().then((win) => {
+      cy.window().then((win: WindowWithConsoleErrors) => {
         const storedData = win.localStorage.getItem("securityLevels");
         if (storedData) {
           cy.log("✓ Security levels persisted in localStorage");
@@ -299,7 +295,7 @@ describe("Complete Assessment Workflow", () => {
         });
 
         // Verify widgets are rendering for this scenario
-        cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+        cy.verifyMinimumWidgets(5);
 
         cy.log(`✅ ${scenario.name} scenario validated`);
       });
@@ -364,7 +360,7 @@ describe("Complete Assessment Workflow", () => {
       });
 
       // Verify no errors occurred
-      cy.window().then((win) => {
+      cy.window().then((win: WindowWithConsoleErrors) => {
         // Check for console errors if tracking is enabled
         if (win.consoleErrors) {
           const criticalErrors = win.consoleErrors.filter(
@@ -381,7 +377,7 @@ describe("Complete Assessment Workflow", () => {
       });
 
       // Verify app still functional
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
       cy.log("✅ Rapid changes handled gracefully");
     });
 
@@ -389,7 +385,7 @@ describe("Complete Assessment Workflow", () => {
       cy.log("🔧 Testing recovery from corrupted state");
 
       // Inject invalid data into localStorage
-      cy.window().then((win) => {
+      cy.window().then((win: WindowWithConsoleErrors) => {
         win.localStorage.setItem("securityLevels", '{"invalid": "data"}');
         win.localStorage.setItem("assessmentData", "invalid-json");
       });
@@ -400,7 +396,7 @@ describe("Complete Assessment Workflow", () => {
 
       // App should recover and show default state
       cy.get("select").should("have.length.at.least", 3);
-      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+      cy.verifyMinimumWidgets(5);
       cy.log("✅ Application recovered from invalid state");
     });
   });
@@ -408,18 +404,52 @@ describe("Complete Assessment Workflow", () => {
   describe("Performance Validation", () => {
     it("should complete assessment workflow within acceptable time", () => {
       cy.then(() => {
-        const startTime = Date.now();
+        cy.then(() => {
 
-        // Complete full assessment
-        cy.setSecurityLevels(
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.HIGH,
-          SECURITY_LEVELS.MODERATE
-        );
+          const startTime = Date.now();
+
+          
+
+          // Complete full assessment
+
+          cy.setSecurityLevels(
+
+            SECURITY_LEVELS.HIGH,
+
+            SECURITY_LEVELS.HIGH,
+
+            SECURITY_LEVELS.MODERATE
+
+          );
+
+          
+
+          // Verify all widgets loaded
+
+          cy.get(\'[data-testid*="widget"]\').should("have.length.at.least", 5);
+
+          
+
+          cy.then(() => {
+
+            const duration = Date.now() - startTime;
+
+            cy.log(`Assessment workflow completed in ${duration}ms`);
+
+            // Adjusted for setSecurityLevels internal waits (~1400ms)
+
+            expect(duration).to.be.lessThan(6000); // 6 second max
+
+          });
+
+        });
+
+        
+
         cy.wait(500);
 
         // Verify all widgets loaded
-        cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
+        cy.verifyMinimumWidgets(5);
 
         cy.then(() => {
           const duration = Date.now() - startTime;
@@ -433,11 +463,33 @@ describe("Complete Assessment Workflow", () => {
       cy.log("⚡ Testing interaction response time");
 
       cy.then(() => {
-        const startTime = Date.now();
+        cy.then(() => {
 
-        cy.get("select")
-          .eq(0)
-          .select(SECURITY_LEVELS.HIGH, { force: true });
+          const startTime = Date.now();
+
+          
+
+          cy.get("select")
+
+            .eq(0)
+
+            .select(SECURITY_LEVELS.HIGH, { force: true });
+
+          
+
+          cy.then(() => {
+
+            const responseTime = Date.now() - startTime;
+
+            cy.log(`Response time: ${responseTime}ms`);
+
+            expect(responseTime).to.be.lessThan(1000); // 1 second max
+
+          });
+
+        });
+
+        
 
         cy.wait(500);
 
