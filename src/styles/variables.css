@@ -73,6 +73,14 @@
   --color-error: #e74c3c;
   --color-info: #3498db;
   --color-neutral: #95a5a6;
+
+  /* Primary color RGB for rgba usage */
+  --primary-color-rgb: 0, 102, 204;
+  
+  /* Hover and active background colors */
+  --primary-bg-hover: rgba(0, 102, 204, 0.05);
+  --primary-bg-active: rgba(0, 102, 204, 0.08);
+  --primary-border-hover: rgba(0, 102, 204, 0.3);
 }
 
 /* Dark Mode - Cybersecurity Theme */
@@ -123,4 +131,14 @@
   --color-error: #ff6b6b;
   --color-info: #54a0ff;
   --color-neutral: #a4b0be;
+
+  /* Primary color RGB for rgba usage */
+  --primary-color-rgb: 43, 138, 255;
+  
+  /* Hover and active background colors */
+  --primary-bg-hover: rgba(43, 138, 255, 0.1);
+  --primary-bg-active: rgba(43, 138, 255, 0.15);
+  --primary-border-hover: rgba(43, 138, 255, 0.3);
+  --primary-shadow: rgba(43, 138, 255, 0.2);
+  --primary-glow: rgba(43, 138, 255, 0.4);
 }

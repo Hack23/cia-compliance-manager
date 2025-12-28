@@ -2282,187 +2282,131 @@ button.more-info:hover::before {
 /* ========== IMPROVED TAB STYLING ========== */
 
 /* Fix SecuritySummaryWidget specific spacing issues */
-[data-testid="security-summary-widget"] .p-md,
-[data-testid="security-summary-widget"] [class*="p-md"] {
-  padding: 0.5rem !important; /* Override p-md to reduce empty space */
+/* Use exact class selectors instead of substring matching */
+[data-testid="security-summary-widget"] .p-md {
+  padding: var(--spacing-sm); /* Use CSS variable instead of hardcoded value */
 }
 
-[data-testid="security-summary-widget"] .mb-md,
-[data-testid="security-summary-widget"] [class*="mb-md"] {
-  margin-bottom: 0.5rem !important; /* Reduce bottom margins */
+[data-testid="security-summary-widget"] .mb-md {
+  margin-bottom: var(--spacing-sm); /* Use CSS variable */
 }
 
 [data-testid="security-summary-widget"] section.mb-md {
-  margin-bottom: 0.75rem !important; /* Slightly more space for banner */
+  margin-bottom: 0.75rem; /* Slightly more space for banner */
 }
 
 /* Reduce tab navigation margin */
 [data-testid="security-summary-widget"] nav + * {
-  margin-top: 0.5rem !important;
+  margin-top: var(--spacing-sm);
 }
 
 /* Improve tab container borders for both widgets */
 .border-b.border-neutral-light,
 .border-b.border-gray-200 {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .dark .border-b.border-neutral-dark,
 .dark .border-b.border-gray-700 {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Ensure tab gap is consistent */
 nav.flex.gap-sm,
 nav.flex[role="tablist"] {
-  gap: 0.5rem !important; /* Consistent spacing between tabs */
+  gap: var(--spacing-sm); /* Consistent spacing between tabs */
 }
 
 /* Universal tab styling for consistency across all widgets */
-button[role="tab"],
-[data-testid$="-tab-considerations"],
-[data-testid$="-tab-benefits"],
-[data-testid$="-tab-overview"],
-[data-testid$="-tab-business"],
-[data-testid$="-tab-implementation"],
-[data-testid$="-tab-compliance"] {
+/* Increased specificity to avoid !important */
+[data-testid^="widget-"] button[role="tab"],
+[data-testid^="widget-"] [data-testid$="-tab-considerations"],
+[data-testid^="widget-"] [data-testid$="-tab-benefits"],
+[data-testid^="widget-"] [data-testid$="-tab-overview"],
+[data-testid^="widget-"] [data-testid$="-tab-business"],
+[data-testid^="widget-"] [data-testid$="-tab-implementation"],
+[data-testid^="widget-"] [data-testid$="-tab-compliance"] {
   position: relative;
   overflow: hidden;
-  padding: 0.75rem 1rem !important; /* Consistent comfortable padding */
-  min-height: 44px !important; /* Touch-friendly minimum */
-  font-weight: 500 !important;
-  font-size: 0.875rem !important; /* 14px */
-  border-bottom: 2px solid transparent !important;
-  transition: all 0.2s ease !important;
-  cursor: pointer !important;
-  background: transparent !important;
+  padding: 0.75rem 1rem; /* Consistent comfortable padding */
+  min-height: 44px; /* Touch-friendly minimum */
+  font-weight: 500;
+  font-size: 0.875rem; /* 14px */
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background: transparent;
 }
 
-/* Hover state for all tabs */
-button[role="tab"]:hover,
-[data-testid$="-tab-considerations"]:hover,
-[data-testid$="-tab-benefits"]:hover {
-  background-color: rgba(0, 102, 204, 0.05) !important;
-  transform: translateY(-1px) !important;
+/* Hover state for all tabs - using CSS variables */
+[data-testid^="widget-"] button[role="tab"]:hover,
+[data-testid^="widget-"] [data-testid$="-tab-considerations"]:hover,
+[data-testid^="widget-"] [data-testid$="-tab-benefits"]:hover {
+  background-color: var(--primary-bg-hover);
+  transform: translateY(-1px);
 }
 
-.dark button[role="tab"]:hover,
-.dark [data-testid$="-tab-considerations"]:hover,
-.dark [data-testid$="-tab-benefits"]:hover {
-  background-color: rgba(43, 138, 255, 0.1) !important;
+.dark [data-testid^="widget-"] button[role="tab"]:hover,
+.dark [data-testid^="widget-"] [data-testid$="-tab-considerations"]:hover,
+.dark [data-testid^="widget-"] [data-testid$="-tab-benefits"]:hover {
+  background-color: var(--primary-bg-hover);
 }
 
-/* Active/Selected tab state - Light theme */
-button[role="tab"][aria-selected="true"],
-button.border-b-2.border-blue-500,
-button.border-b-2.border-primary,
-[data-testid$="-tab-considerations"].border-b-2.border-blue-500,
-[data-testid$="-tab-benefits"].border-b-2.border-blue-500 {
-  border-bottom-color: var(--primary-color) !important;
-  color: var(--primary-color) !important;
-  font-weight: 600 !important;
-  background-color: rgba(0, 102, 204, 0.08) !important;
+/* Active/Selected tab state - Light theme - using CSS variables */
+[data-testid^="widget-"] button[role="tab"][aria-selected="true"],
+[data-testid^="widget-"] button.border-b-2.border-blue-500,
+[data-testid^="widget-"] button.border-b-2.border-primary,
+[data-testid^="widget-"] [data-testid$="-tab-considerations"].border-b-2.border-blue-500,
+[data-testid^="widget-"] [data-testid$="-tab-benefits"].border-b-2.border-blue-500 {
+  border-bottom-color: var(--primary-color);
+  color: var(--primary-color);
+  font-weight: 600;
+  background-color: var(--primary-bg-active);
 }
 
-/* Active/Selected tab state - Dark theme */
-.dark button[role="tab"][aria-selected="true"],
-.dark button.border-b-2.border-blue-500,
-.dark button.border-b-2.border-primary,
-.dark [data-testid$="-tab-considerations"].border-b-2.border-blue-500,
-.dark [data-testid$="-tab-benefits"].border-b-2.border-blue-500 {
-  border-bottom-color: var(--primary-color) !important;
-  color: var(--primary-light) !important;
-  font-weight: 600 !important;
-  background-color: rgba(43, 138, 255, 0.15) !important;
-  box-shadow: 0 0 10px rgba(43, 138, 255, 0.2) !important;
-  text-shadow: 0 0 5px rgba(43, 138, 255, 0.4) !important;
+/* Active/Selected tab state - Dark theme - using CSS variables */
+.dark [data-testid^="widget-"] button[role="tab"][aria-selected="true"],
+.dark [data-testid^="widget-"] button.border-b-2.border-blue-500,
+.dark [data-testid^="widget-"] button.border-b-2.border-primary,
+.dark [data-testid^="widget-"] [data-testid$="-tab-considerations"].border-b-2.border-blue-500,
+.dark [data-testid^="widget-"] [data-testid$="-tab-benefits"].border-b-2.border-blue-500 {
+  border-bottom-color: var(--primary-color);
+  color: var(--primary-light);
+  font-weight: 600;
+  background-color: var(--primary-bg-active);
+  box-shadow: 0 0 10px var(--primary-shadow);
+  text-shadow: 0 0 5px var(--primary-glow);
 }
 
-/* Inactive tab colors - Light theme */
-button[role="tab"]:not([aria-selected="true"]),
-[data-testid$="-tab-considerations"]:not(.border-b-2),
-[data-testid$="-tab-benefits"]:not(.border-b-2) {
-  color: #6b7280 !important; /* gray-500 */
+/* Inactive tab colors - using CSS variables */
+[data-testid^="widget-"] button[role="tab"]:not([aria-selected="true"]),
+[data-testid^="widget-"] [data-testid$="-tab-considerations"]:not(.border-b-2),
+[data-testid^="widget-"] [data-testid$="-tab-benefits"]:not(.border-b-2) {
+  color: var(--text-secondary);
 }
 
 /* Inactive tab colors - Dark theme */
-.dark button[role="tab"]:not([aria-selected="true"]),
-.dark [data-testid$="-tab-considerations"]:not(.border-b-2),
-.dark [data-testid$="-tab-benefits"]:not(.border-b-2) {
-  color: #9ca3af !important; /* gray-400 */
-}
-
-/* Add animated underline effect */
-button[role="tab"]::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background-color: currentColor;
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
-}
-
-button[role="tab"]:hover::after {
-  width: 80%;
-  opacity: 0.5;
-}
-
-button[role="tab"][aria-selected="true"]::after {
-  width: 100%;
-  background-color: var(--primary-color);
-  opacity: 1;
-}
-
-.dark button[role="tab"][aria-selected="true"]::after {
-  box-shadow: 0 0 8px var(--primary-color);
+.dark [data-testid^="widget-"] button[role="tab"]:not([aria-selected="true"]),
+.dark [data-testid^="widget-"] [data-testid$="-tab-considerations"]:not(.border-b-2),
+.dark [data-testid^="widget-"] [data-testid$="-tab-benefits"]:not(.border-b-2) {
+  color: var(--text-secondary);
 }
 
 /* Tab content area styling - reduce empty space */
-.tab-content,
-div.tab-content,
-[class*="tab-content"] {
-  padding: 0 !important; /* Remove padding on container */
-  margin-top: 0.75rem !important; /* Small gap after tabs */
+/* Use exact class selector instead of substring matching */
+[data-testid^="widget-"] .tab-content,
+[data-testid^="widget-"] div.tab-content {
+  padding: 0;
+  margin-top: 0.75rem;
 }
 
 /* Tab panels should have consistent minimal padding */
-div[role="tabpanel"],
-[data-testid$="-panel-overview"],
-[data-testid$="-panel-business"],
-[data-testid$="-panel-implementation"],
-[data-testid$="-panel-compliance"] {
-  padding: 0.5rem 0 !important; /* Vertical padding only */
-}
-
-/* Security Summary Widget Styles */
-[data-testid="security-summary-widget"] button[role="tab"] {
-  position: relative;
-  overflow: hidden;
-}
-
-[data-testid="security-summary-widget"] button[role="tab"]::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background-color: currentColor;
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
-}
-
-[data-testid="security-summary-widget"] button[role="tab"]:hover::after {
-  width: 100%;
-}
-
-[data-testid="security-summary-widget"]
-  button[role="tab"][aria-selected="true"]::after {
-  width: 100%;
-  background-color: var(--primary-color, #0066cc);
+[data-testid^="widget-"] div[role="tabpanel"],
+[data-testid^="widget-"] [data-testid$="-panel-overview"],
+[data-testid^="widget-"] [data-testid$="-panel-business"],
+[data-testid^="widget-"] [data-testid$="-panel-implementation"],
+[data-testid^="widget-"] [data-testid$="-panel-compliance"] {
+  padding: 0.5rem 0;
 }
 
 /* Pulse animation for security status indicator */
@@ -2472,15 +2416,15 @@ div[role="tabpanel"],
 
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(0, 102, 204, 0.7);
+    box-shadow: 0 0 0 0 rgba(var(--primary-color-rgb), 0.7);
   }
 
   70% {
-    box-shadow: 0 0 0 6px rgba(0, 102, 204, 0);
+    box-shadow: 0 0 0 6px rgba(var(--primary-color-rgb), 0);
   }
 
   100% {
-    box-shadow: 0 0 0 0 rgba(0, 102, 204, 0);
+    box-shadow: 0 0 0 0 rgba(var(--primary-color-rgb), 0);
   }
 }
 
@@ -2491,15 +2435,15 @@ div[role="tabpanel"],
 
 @keyframes pulse-dark {
   0% {
-    box-shadow: 0 0 0 0 rgba(43, 138, 255, 0.7);
+    box-shadow: 0 0 0 0 rgba(var(--primary-color-rgb), 0.7);
   }
 
   70% {
-    box-shadow: 0 0 0 6px rgba(43, 138, 255, 0);
+    box-shadow: 0 0 0 6px rgba(var(--primary-color-rgb), 0);
   }
 
   100% {
-    box-shadow: 0 0 0 0 rgba(43, 138, 255, 0);
+    box-shadow: 0 0 0 0 rgba(var(--primary-color-rgb), 0);
   }
 }
 
