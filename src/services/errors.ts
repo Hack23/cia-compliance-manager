@@ -12,26 +12,38 @@
 
 /**
  * Error codes for service operations
+ * 
+ * Note: The numeric ranges in comments (e.g., 1000-1999) are organizational
+ * categories for documentation purposes. The actual enum values are strings.
  */
 export enum ServiceErrorCode {
-  // Validation errors (1000-1999)
+  // Validation errors
   VALIDATION_ERROR = 'VALIDATION_ERROR',
   INVALID_SECURITY_LEVEL = 'INVALID_SECURITY_LEVEL',
   INVALID_COMPONENT_TYPE = 'INVALID_COMPONENT_TYPE',
   INVALID_INPUT = 'INVALID_INPUT',
   MISSING_REQUIRED_FIELD = 'MISSING_REQUIRED_FIELD',
 
-  // Data access errors (2000-2999)
+  // Data access errors
   DATA_NOT_FOUND = 'DATA_NOT_FOUND',
   DATA_PROVIDER_ERROR = 'DATA_PROVIDER_ERROR',
   CONFIGURATION_ERROR = 'CONFIGURATION_ERROR',
 
-  // Business logic errors (3000-3999)
+  // Business logic errors
   CALCULATION_ERROR = 'CALCULATION_ERROR',
   COMPLIANCE_CHECK_ERROR = 'COMPLIANCE_CHECK_ERROR',
   ROI_CALCULATION_ERROR = 'ROI_CALCULATION_ERROR',
 
-  // System errors (4000-4999)
+  // Network errors
+  NETWORK_ERROR = 'NETWORK_ERROR',
+  CONNECTION_ERROR = 'CONNECTION_ERROR',
+  TIMEOUT_ERROR = 'TIMEOUT_ERROR',
+  
+  // Retryable errors
+  RETRYABLE_ERROR = 'RETRYABLE_ERROR',
+  RATE_LIMIT_ERROR = 'RATE_LIMIT_ERROR',
+  
+  // System errors
   INTERNAL_ERROR = 'INTERNAL_ERROR',
   UNEXPECTED_ERROR = 'UNEXPECTED_ERROR',
 }
@@ -251,4 +263,92 @@ export function getErrorMessage(error: unknown): string {
   }
 
   return 'An unknown error occurred';
+}
+
+/**
+ * Create a validation error using ServiceError
+ * 
+ * @param message - Error message
+ * @param field - Optional field name that failed validation
+ * @param context - Additional error context
+ * @returns ServiceError instance
+ */
+export function createValidationServiceError(
+  message: string,
+  field?: string,
+  context: ErrorContext = {}
+): ServiceError {
+  return new ServiceError(
+    message,
+    ServiceErrorCode.VALIDATION_ERROR,
+    { ...context, field }
+  );
+}
+
+/**
+ * Create a network error using ServiceError
+ * 
+ * @param message - Error message
+ * @param statusCode - Optional HTTP status code
+ * @param context - Additional error context
+ * @returns ServiceError instance
+ */
+export function createNetworkServiceError(
+  message: string,
+  statusCode?: number,
+  context: ErrorContext = {}
+): ServiceError {
+  return new ServiceError(
+    message,
+    ServiceErrorCode.NETWORK_ERROR,
+    { ...context, statusCode }
+  );
+}
+
+/**
+ * Create a retryable error using ServiceError
+ * 
+ * @param message - Error message
+ * @param retryAfter - Optional retry delay in seconds
+ * @param context - Additional error context
+ * @returns ServiceError instance
+ */
+export function createRetryableServiceError(
+  message: string,
+  retryAfter?: number,
+  context: ErrorContext = {}
+): ServiceError {
+  return new ServiceError(
+    message,
+    ServiceErrorCode.RETRYABLE_ERROR,
+    { ...context, retryAfter }
+  );
+}
+
+/**
+ * Check if error is validation related
+ */
+export function isValidationError(error: unknown): boolean {
+  return isServiceError(error) && error.code === ServiceErrorCode.VALIDATION_ERROR;
+}
+
+/**
+ * Check if error is network related
+ */
+export function isNetworkError(error: unknown): boolean {
+  return isServiceError(error) && (
+    error.code === ServiceErrorCode.NETWORK_ERROR ||
+    error.code === ServiceErrorCode.CONNECTION_ERROR ||
+    error.code === ServiceErrorCode.TIMEOUT_ERROR
+  );
+}
+
+/**
+ * Check if error is retryable
+ */
+export function isRetryableError(error: unknown): boolean {
+  return isServiceError(error) && (
+    error.code === ServiceErrorCode.RETRYABLE_ERROR ||
+    error.code === ServiceErrorCode.RATE_LIMIT_ERROR
+  );
 }

@@ -1,580 +1,616 @@
-# Error Handling Patterns
-
-This document describes the error handling patterns and components available in the CIA Compliance Manager application.
+# Error Handling Documentation
 
 ## Overview
 
-The application provides a comprehensive set of error handling components and patterns to ensure robust, user-friendly error handling across all widgets and components.
+The CIA Compliance Manager implements a comprehensive error handling system that provides:
 
-**Production Status:** All error handling components are actively used in `src/application/CIAClassificationApp.tsx`, with WidgetErrorBoundary wrapping all 11 widgets to prevent crashes and provide graceful error recovery.
+- **Centralized error service** for consistent error logging and user-friendly messages
+- **Extended ServiceError system** with factory functions for different error types (Validation, Network, Retryable)
+- **React Error Boundaries** (WidgetErrorBoundary) for graceful error recovery
+- **Error Context** for application-wide error state management
+- **Toast notifications** for non-blocking error messages
+- **User-friendly error displays** using existing ErrorMessage component
 
-## Components
+## Architecture
 
-### 1. LoadingSpinner
-
-A consistent loading indicator for showing data loading states.
-
-**Location:** `src/components/common/LoadingSpinner.tsx`
-
-**Props:**
-- `size?: 'sm' | 'md' | 'lg'` - Size of the spinner (default: 'md')
-- `testId?: string` - Test ID for automated testing
-- `className?: string` - Additional CSS classes
-
-**Example Usage:**
-```tsx
-import { LoadingSpinner } from '@/components';
-
-// Default medium spinner
-<LoadingSpinner />
-
-// Small spinner
-<LoadingSpinner size="sm" />
-
-// Large spinner with custom test ID
-<LoadingSpinner size="lg" testId="metrics-loader" />
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     Application Layer                        │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │           ErrorProvider (React Context)               │  │
+│  │  - Centralizes error state                            │  │
+│  │  - Manages toast notifications                        │  │
+│  │  - Tracks error history                               │  │
+│  └──────────────────────────────────────────────────────┘  │
+│                          │                                   │
+│         ┌────────────────┼────────────────┐                 │
+│         ▼                ▼                ▼                 │
+│   ┌───────────────┐   ┌──────────────┐  ┌──────────────┐  │
+│   │Widget Error   │   │ ErrorToast   │  │ErrorMessage  │  │
+│   │Boundary (11)  │   │(Transient)   │  │(Fallback UI) │  │
+│   └───────────────┘   └──────────────┘  └──────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    Service Layer                             │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │              ErrorService                             │  │
+│  │  - Logs errors with context                           │  │
+│  │  - Generates user-friendly messages                   │  │
+│  │  - Determines error severity                          │  │
+│  │  - Checks error recoverability                        │  │
+│  └──────────────────────────────────────────────────────┘  │
+│                          │                                   │
+│                          ▼                                   │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │         ServiceError with Factory Functions           │  │
+│  │  - ServiceError (base class with error codes)         │  │
+│  │  - createValidationServiceError() factory             │  │
+│  │  - createNetworkServiceError() factory                │  │
+│  │  - createRetryableServiceError() factory              │  │
+│  └──────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### 2. ErrorMessage
+## Error Classes
 
-User-friendly error message component with optional retry functionality.
+### ServiceError
 
-**Location:** `src/components/common/ErrorMessage.tsx`
+Base error class for service-layer errors with error codes and context.
 
-**Props:**
-- `title?: string` - Error title (default: 'Error')
-- `message: string` - Error message to display (required)
-- `retry?: () => void` - Optional retry callback function
-- `testId?: string` - Test ID for automated testing
-- `className?: string` - Additional CSS classes
+```typescript
+import { ServiceError, ServiceErrorCode } from './services/errors';
 
-**Example Usage:**
-```tsx
-import { ErrorMessage } from '@/components';
-
-// Simple error message
-<ErrorMessage message="Failed to load data" />
-
-// Error with custom title
-<ErrorMessage 
-  title="Connection Error" 
-  message="Unable to reach the server"
-/>
-
-// Error with retry button
-<ErrorMessage 
-  message="Failed to load metrics"
-  retry={() => refetchData()}
-/>
+throw new ServiceError(
+  'Invalid security level provided',
+  ServiceErrorCode.VALIDATION_ERROR,
+  { service: 'ComplianceService', level: invalidLevel }
+);
 ```
 
-### 3. LoadingSkeleton
+**Properties:**
+- `code`: ServiceErrorCode - Categorizes the error
+- `context`: ErrorContext - Additional information
+- `cause`: Error - Original error if wrapping
+- `timestamp`: Date - When the error occurred
 
-Animated placeholder content for better perceived performance.
+### Factory Functions for Common Error Types
 
-**Location:** `src/components/common/LoadingSkeleton.tsx`
+Instead of creating separate error classes, use factory functions that return ServiceError instances with appropriate error codes:
 
-**Props:**
-- `lines?: number` - Number of skeleton lines (default: 3)
-- `testId?: string` - Test ID for automated testing
-- `className?: string` - Additional CSS classes
+#### createValidationServiceError
 
-**Example Usage:**
-```tsx
-import { LoadingSkeleton } from '@/components';
+For input validation failures.
 
-// Default 3-line skeleton
-<LoadingSkeleton />
+```typescript
+import { createValidationServiceError } from './services/errors';
 
-// Custom number of lines
-<LoadingSkeleton lines={5} />
-
-// With custom styling
-<LoadingSkeleton lines={4} className="my-4" />
+throw createValidationServiceError(
+  'Email format is invalid',
+  'email', // Optional field name
+  { component: 'UserForm' } // Optional additional context
+);
 ```
 
-### 4. WidgetErrorBoundary
+#### createNetworkServiceError
 
-Error boundary component for catching and handling React rendering errors.
+For network and HTTP errors.
 
-**Location:** `src/components/common/WidgetErrorBoundary.tsx`
+```typescript
+import { createNetworkServiceError } from './services/errors';
 
-**Props:**
-- `children: ReactNode` - Child components to protect (required)
-- `fallback?: ReactNode` - Custom fallback UI on error
-- `onError?: (error: Error, errorInfo: React.ErrorInfo) => void` - Error callback
-- `widgetName?: string` - Widget name for error messages
-- `testId?: string` - Test ID for automated testing
+throw createNetworkServiceError(
+  'Failed to fetch data from server',
+  500, // HTTP status code
+  { service: 'DataService' } // Optional additional context
+);
+```
 
-**Example Usage:**
-```tsx
-import { WidgetErrorBoundary } from '@/components';
+#### createRetryableServiceError
 
-// Basic usage
-<WidgetErrorBoundary>
-  <SecurityMetricsWidget />
-</WidgetErrorBoundary>
+For operations that can be retried.
 
-// With custom fallback
-<WidgetErrorBoundary fallback={<CustomErrorUI />}>
-  <ComplianceWidget />
-</WidgetErrorBoundary>
+```typescript
+import { createRetryableServiceError } from './services/errors';
 
-// With error logging
+throw createRetryableServiceError(
+  'Rate limit exceeded',
+  60, // Retry after 60 seconds
+  { component: 'APIClient' } // Optional additional context
+);
+```
+
+## Error Service
+
+The centralized error service provides consistent error handling across the application.
+
+### Methods
+
+#### logError(error, context?, severity?)
+
+Logs an error with context and severity.
+
+```typescript
+import { errorService, ErrorSeverity } from './services/errorService';
+
+try {
+  await fetchData();
+} catch (error) {
+  errorService.logError(
+    error as Error,
+    { service: 'DataService', operation: 'fetch' },
+    ErrorSeverity.HIGH
+  );
+}
+```
+
+#### getUserFriendlyMessage(error)
+
+Converts any error into a user-friendly message.
+
+```typescript
+const userMessage = errorService.getUserFriendlyMessage(error);
+// Returns: "Network connection issue. Please check your connection and try again."
+```
+
+#### canRecover(error)
+
+Checks if an error is recoverable.
+
+```typescript
+if (errorService.canRecover(error)) {
+  // Show retry button
+}
+```
+
+#### getErrorSeverity(error)
+
+Determines error severity.
+
+```typescript
+const severity = errorService.getErrorSeverity(error);
+// Returns: ErrorSeverity.HIGH
+```
+
+## Error Context
+
+React Context for application-wide error state management.
+
+### Usage
+
+```typescript
+import { useError } from './contexts/ErrorContext';
+
+function MyComponent() {
+  const { addError, showToast, clearError } = useError();
+
+  const handleSubmit = async () => {
+    try {
+      await saveData();
+    } catch (error) {
+      // Track error in context
+      addError(error as Error, { component: 'MyComponent', action: 'submit' });
+      
+      // Show toast notification
+      showToast({
+        message: 'Failed to save data',
+        title: 'Save Error',
+        onRetry: handleSubmit
+      });
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* Form content */}
+    </form>
+  );
+}
+```
+
+### Methods
+
+- `addError(error, context?)` - Track an error
+- `clearError(id)` - Remove specific error
+- `clearAllErrors()` - Remove all errors
+- `showToast(config)` - Display toast notification
+- `hideToast()` - Hide current toast
+- `getLatestError()` - Get most recent error
+
+## Error Boundaries
+
+### WidgetErrorBoundary Component
+
+The application uses the existing WidgetErrorBoundary component, which is actively wrapping all 11 widgets in production. This component provides a fallback UI for widget failures and can be used alongside the error service for user-friendly error displays.
+
+```typescript
+import { WidgetErrorBoundary } from './components/common/WidgetErrorBoundary';
+
 <WidgetErrorBoundary 
-  widgetName="Security Metrics"
-  onError={(error, info) => logToService(error, info)}
+  widgetName="Security Metrics Widget"
+  onError={(error, errorInfo) => {
+    // Optional error callback
+    console.log('Error caught:', error, errorInfo);
+  }}
 >
   <SecurityMetricsWidget />
 </WidgetErrorBoundary>
 ```
 
-## Production Usage
+**Props:**
+- `children`: Components to wrap
+- `widgetName`: Name of the widget for error messages
+- `onError`: Error callback (optional)
+- `testId`: Test ID for testing (optional)
 
-All error handling components are actively deployed in the application. Here's how they're used:
+**Features:**
+- Component-level error isolation
+- Integration with centralized logger
+- Uses ErrorMessage component for fallback UI
+- Consistent error handling across all widgets
 
-### Widget Error Boundaries in CIAClassificationApp
+### ErrorMessage Component (Fallback UI)
 
-**File:** `src/application/CIAClassificationApp.tsx`
+The existing ErrorMessage component is used by WidgetErrorBoundary as the default fallback UI for displaying errors.
 
-All 11 widgets are wrapped with `WidgetErrorBoundary` to prevent widget crashes from affecting the entire application:
+```typescript
+import { ErrorMessage } from './components/common/ErrorMessage';
 
-```tsx
-import WidgetErrorBoundary from "../components/common/WidgetErrorBoundary";
-import logger from "../utils/logger";
-
-// Error handler logs errors centrally
-const handleWidgetError = useCallback((error: Error, errorInfo: React.ErrorInfo) => {
-  logger.error('Widget error caught by error boundary', { error, errorInfo });
-}, []);
-
-// Each widget is wrapped for protection
-<WidgetErrorBoundary widgetName="Business Impact Analysis" onError={handleWidgetError}>
-  <BusinessImpactAnalysisWidget {...props} />
-</WidgetErrorBoundary>
-
-<WidgetErrorBoundary widgetName="Security Summary" onError={handleWidgetError}>
-  <SecuritySummaryWidget {...props} />
-</WidgetErrorBoundary>
-
-// ... and 9 more widgets
+<ErrorMessage
+  title="Widget Error"
+  message="Failed to load widget data"
+  retry={() => refetch()}
+/>
 ```
 
-**Benefits:**
-- If one widget crashes, others continue working
-- Errors are logged centrally via the logger utility
-- Users see friendly error messages instead of a blank screen
-- Retry functionality built-in via error boundary reset
+**Features:**
+- Clear error title and message display
+- Optional retry functionality via retry callback
+- Consistent styling with error icon
+- Test IDs for testing
+- Accessibility support (ARIA attributes)
 
-### Widget-Level Error Handling
+## Toast Notifications
 
-All widgets use `WidgetContainer` which provides consistent error and loading state display:
+### ErrorToast Component
 
-```tsx
-const MyWidget: React.FC<Props> = (props) => {
-  const { data, isLoading, error } = useServiceHook();
-  
-  return (
-    <WidgetContainer 
-      title="My Widget"
-      isLoading={isLoading}
-      error={error}
-    >
-      <WidgetContent data={data} />
-    </WidgetContainer>
-  );
-};
+Non-blocking toast notifications for transient errors.
+
+```typescript
+import { ErrorToast } from './components/common/ErrorToast';
+
+const [showToast, setShowToast] = useState(false);
+
+<ErrorToast
+  message="Failed to save changes"
+  title="Save Error"
+  isVisible={showToast}
+  onDismiss={() => setShowToast(false)}
+  autoHideDuration={5000}
+  position="top-right"
+  retry={() => saveChanges()}
+/>
 ```
 
-## Hooks
+**Props:**
+- `message`: Error message (required)
+- `title`: Toast title (default: "Error")
+- `isVisible`: Visibility state (required)
+- `onDismiss`: Dismiss callback (required)
+- `autoHideDuration`: Auto-hide time in ms (default: 5000, 0 to disable)
+- `position`: Toast position (default: "top-right")
+- `retry`: Retry callback (optional)
 
-### useServiceData
+**Positions:** `top-left`, `top-center`, `top-right`, `bottom-left`, `bottom-center`, `bottom-right`
 
-Custom hook for fetching service data with loading and error states.
+## Service Layer Integration
 
-**Location:** `src/hooks/useServiceData.ts`
+### Example Service Implementation
 
-**Returns:**
-- `data: T | null` - Fetched data
-- `loading: boolean` - Loading state
-- `error: Error | null` - Error if fetch failed
-- `refetch: () => void` - Manual refetch function
+```typescript
+import { 
+  ServiceError, 
+  ServiceErrorCode,
+  createValidationServiceError,
+  createNetworkServiceError
+} from './services/errors';
+import { errorService } from './services/errorService';
 
-**Example Usage:**
-```tsx
-import { useServiceData } from '@/hooks';
-import { LoadingSpinner, ErrorMessage } from '@/components';
+export class DataService {
+  async fetchData(id: string): Promise<Data> {
+    try {
+      // Validate input
+      if (!id) {
+        throw createValidationServiceError('ID is required', 'id', {
+          service: 'DataService',
+          method: 'fetchData'
+        });
+      }
 
-const MyWidget: React.FC<Props> = ({ level }) => {
-  const { data, loading, error, refetch } = useServiceData(
-    () => getSecurityMetrics(level),
-    [level]
-  );
-
-  if (loading) return <LoadingSpinner />;
-  if (error) return <ErrorMessage message={error.message} retry={refetch} />;
-  if (!data) return <div>No data available</div>;
-
-  return <DataDisplay data={data} />;
-};
-```
-
-## Patterns
-
-### Pattern 1: Widget with Loading and Error States
-
-The standard pattern for widgets that fetch data:
-
-```tsx
-import React from 'react';
-import { useServiceData } from '@/hooks';
-import { LoadingSpinner, ErrorMessage, WidgetContainer } from '@/components';
-
-interface MyWidgetProps {
-  levels: SecurityLevels;
-}
-
-const MyWidget: React.FC<MyWidgetProps> = ({ levels }) => {
-  const { data, loading, error, refetch } = useServiceData(
-    () => fetchData(levels),
-    [levels]
-  );
-
-  return (
-    <WidgetContainer 
-      title="My Widget"
-      isLoading={loading}
-      error={error}
-    >
-      {data ? (
-        <DataDisplay data={data} />
-      ) : (
-        <div>No data available</div>
-      )}
-    </WidgetContainer>
-  );
-};
-
-export default MyWidget;
-```
-
-### Pattern 2: Widget with Error Boundary
-
-Wrap widgets with error boundaries to prevent crashes:
-
-```tsx
-import React from 'react';
-import { WidgetErrorBoundary } from '@/components';
-import SecurityMetricsWidget from './SecurityMetricsWidget';
-
-const SecurityTab: React.FC = () => {
-  return (
-    <div>
-      <WidgetErrorBoundary widgetName="Security Metrics">
-        <SecurityMetricsWidget />
-      </WidgetErrorBoundary>
+      // Fetch data
+      const response = await fetch(`/api/data/${id}`);
       
-      <WidgetErrorBoundary widgetName="Compliance Status">
-        <ComplianceStatusWidget />
-      </WidgetErrorBoundary>
-    </div>
-  );
-};
+      if (!response.ok) {
+        throw createNetworkServiceError(
+          'Failed to fetch data',
+          response.status,
+          { service: 'DataService', method: 'fetchData', id }
+        );
+      }
+
+      return await response.json();
+    } catch (error) {
+      // Log error
+      errorService.logError(
+        error as Error,
+        { service: 'DataService', method: 'fetchData', id }
+      );
+
+      // Re-throw or return undefined
+      throw error;
+    }
+  }
+}
 ```
 
-### Pattern 3: Graceful Degradation
+## Widget Integration
 
-Display partial data when available:
+### Adding Error Handling to Widgets
 
-```tsx
-const MyWidget: React.FC<Props> = ({ levels }) => {
-  const { data, loading, error } = useServiceData(
-    () => fetchData(levels),
-    [levels]
-  );
+```typescript
+import { WidgetErrorBoundary } from '../components/common/WidgetErrorBoundary';
+import { useError } from '../contexts/ErrorContext';
 
-  if (loading) return <LoadingSkeleton lines={5} />;
+export const MyWidget: React.FC<MyWidgetProps> = (props) => {
+  const { addError, showToast } = useError();
+  const [data, setData] = useState<Data | null>(null);
 
-  // Show partial data if available
-  if (error && data?.partialData) {
-    return (
-      <WidgetContainer title="My Widget">
-        <div className="mb-2 p-2 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded">
-          <span className="text-sm text-yellow-800 dark:text-yellow-300">
-            ⚠️ Some data unavailable
-          </span>
-        </div>
-        <PartialDataDisplay data={data.partialData} />
-      </WidgetContainer>
-    );
-  }
-
-  // Complete error
-  if (error) {
-    return (
-      <WidgetContainer title="My Widget">
-        <ErrorMessage 
-          title="Unable to load widget data"
-          message={error.message}
-        />
-      </WidgetContainer>
-    );
-  }
+  const loadData = async () => {
+    try {
+      const result = await dataService.fetchData(props.id);
+      setData(result);
+    } catch (error) {
+      addError(error as Error, { widget: 'MyWidget', action: 'load' });
+      showToast({
+        message: 'Failed to load widget data',
+        onRetry: loadData
+      });
+    }
+  };
 
   return (
-    <WidgetContainer title="My Widget">
-      <FullDataDisplay data={data!} />
-    </WidgetContainer>
-  );
-};
-```
-
-### Pattern 4: Using WidgetContainer Built-in Error Handling
-
-The simplest pattern - let WidgetContainer handle errors:
-
-```tsx
-const MyWidget: React.FC<Props> = ({ levels }) => {
-  const { data, loading, error } = useServiceData(
-    () => fetchData(levels),
-    [levels]
-  );
-
-  return (
-    <WidgetContainer 
-      title="My Widget"
-      isLoading={loading}
-      error={error}
-    >
-      <DataDisplay data={data} />
-    </WidgetContainer>
+    <WidgetErrorBoundary widgetName="My Widget">
+      <div className="widget">
+        {/* Widget content */}
+      </div>
+    </WidgetErrorBoundary>
   );
 };
 ```
 
 ## Best Practices
 
-### 1. Always Handle Loading States
+### 1. Always Use Factory Functions for Specific Error Types
 
-Show loading indicators to provide user feedback:
-
-```tsx
-// ✅ Good
-if (loading) return <LoadingSpinner />;
-
-// ❌ Bad - No loading feedback
-// Just waiting silently
-```
-
-### 2. Provide Actionable Error Messages
-
-Give users clear information and actions:
-
-```tsx
-// ✅ Good
-<ErrorMessage 
-  title="Connection Error"
-  message="Unable to connect to the server. Please check your connection."
-  retry={refetch}
-/>
-
+```typescript
 // ❌ Bad
-<ErrorMessage message="Error" />
+throw new Error('Invalid input');
+
+// ✅ Good
+throw createValidationServiceError('Email format is invalid', 'email');
 ```
 
-### 3. Use Error Boundaries for Critical Components
+### 2. Provide Context
 
-Prevent widget failures from crashing the entire app:
+```typescript
+// ❌ Bad
+errorService.logError(error);
 
-```tsx
 // ✅ Good
-<WidgetErrorBoundary widgetName="Critical Widget">
-  <CriticalWidget />
+errorService.logError(error, {
+  service: 'ComplianceService',
+  method: 'calculateScore',
+  userId: currentUser.id
+});
+```
+
+### 3. Use Error Boundaries for Component Errors
+
+```typescript
+// ❌ Bad - No error boundary
+<MyWidget />
+
+// ✅ Good - Wrapped with WidgetErrorBoundary
+<WidgetErrorBoundary widgetName="My Widget">
+  <MyWidget />
 </WidgetErrorBoundary>
-
-// ❌ Bad - No error protection
-<CriticalWidget />
 ```
 
-### 4. Log Errors for Debugging
+### 4. Show User-Friendly Messages
 
-Always log errors for troubleshooting:
+```typescript
+// ❌ Bad
+alert(error.message); // Technical message
 
-```tsx
 // ✅ Good
-const { data, error } = useServiceData(() => fetchData());
-
-useEffect(() => {
-  if (error) {
-    console.error('Failed to fetch data:', error);
-  }
-}, [error]);
-
-// ❌ Bad - Errors silently ignored
+showToast({
+  message: errorService.getUserFriendlyMessage(error)
+});
 ```
 
-### 5. Validate Data Before Using
+### 5. Provide Recovery Options
 
-Use type guards to ensure data integrity:
+```typescript
+// ❌ Bad - No recovery option
+showToast({ message: 'Failed to save' });
 
-```tsx
-import { isValidSecurityMetrics } from '@/utils/typeGuards';
+// ✅ Good - With retry option
+showToast({
+  message: 'Failed to save',
+  retry: () => saveData()
+});
+```
 
-// ✅ Good
-if (!isValidSecurityMetrics(data)) {
-  return <ErrorMessage message="Invalid data received" />;
+### 6. Log Before Displaying
+
+```typescript
+// ✅ Good pattern
+try {
+  await operation();
+} catch (error) {
+  // 1. Log for debugging
+  errorService.logError(error as Error, context);
+  
+  // 2. Track in context
+  addError(error as Error, context);
+  
+  // 3. Notify user
+  showToast({
+    message: errorService.getUserFriendlyMessage(error),
+    onRetry: canRecover ? () => operation() : undefined
+  });
 }
-
-// ❌ Bad - No validation
-return <Display data={data} />;
 ```
 
-## Testing Error Scenarios
+## Testing
 
-### Testing Loading States
+### Testing Error Handling
 
-```tsx
-describe('MyWidget', () => {
-  it('shows loading spinner while fetching data', () => {
-    const { getByTestId } = render(<MyWidget levels={mockLevels} />);
-    expect(getByTestId('loading-spinner')).toBeInTheDocument();
-  });
-});
-```
+```typescript
+import { render, screen } from '@testing-library/react';
+import { ErrorProvider } from './contexts/ErrorContext';
+import { createNetworkServiceError } from './services/errors';
 
-### Testing Error States
-
-```tsx
-describe('MyWidget', () => {
-  it('shows error message when fetch fails', () => {
-    vi.spyOn(service, 'fetchData').mockImplementation(() => {
-      throw new Error('Service unavailable');
-    });
-
-    const { getByText } = render(<MyWidget levels={mockLevels} />);
-    expect(getByText(/service unavailable/i)).toBeInTheDocument();
-  });
-});
-```
-
-### Testing Error Boundaries
-
-```tsx
-describe('WidgetErrorBoundary', () => {
-  it('catches and displays errors from child components', () => {
-    const ThrowError = () => {
-      throw new Error('Test error');
-    };
-
-    const { getByText } = render(
-      <WidgetErrorBoundary>
-        <ThrowError />
-      </WidgetErrorBoundary>
+describe('MyComponent', () => {
+  it('should handle errors gracefully', async () => {
+    // Mock error using factory function
+    const mockFetch = vi.fn().mockRejectedValue(
+      createNetworkServiceError('Failed to fetch', 500)
     );
 
-    expect(getByText(/test error/i)).toBeInTheDocument();
+    render(
+      <ErrorProvider>
+        <MyComponent fetch={mockFetch} />
+      </ErrorProvider>
+    );
+
+    // Trigger error
+    await user.click(screen.getByRole('button', { name: 'Load' }));
+
+    // Assert toast is shown
+    expect(screen.getByTestId('error-toast')).toBeInTheDocument();
+    expect(screen.getByText(/network connection/i)).toBeInTheDocument();
   });
 });
 ```
 
-## Accessibility
+## Error Severity Levels
 
-All error handling components follow accessibility best practices:
+| Severity | Description | When to Use |
+|----------|-------------|-------------|
+| **LOW** | Informational errors | Validation errors, user input errors |
+| **MEDIUM** | User action may be needed | Network errors, missing data |
+| **HIGH** | Significant functionality impacted | Calculation errors, service failures |
+| **CRITICAL** | Application-wide impact | System configuration errors, internal failures |
 
-1. **ARIA Labels**: Components include proper ARIA labels for screen readers
-2. **Role Attributes**: Appropriate role attributes (status, alert, etc.)
-3. **Keyboard Navigation**: All interactive elements are keyboard accessible
-4. **Screen Reader Text**: Hidden text for screen readers where appropriate
+## Error Codes
 
-Example:
-```tsx
-<ErrorMessage 
-  message="Error occurred"
-  retry={refetch}
-/>
-// Renders with role="alert" and aria-live="polite"
+| Code | Category | Description |
+|------|----------|-------------|
+| `VALIDATION_ERROR` | Validation | Input validation failed |
+| `INVALID_SECURITY_LEVEL` | Validation | Invalid security level provided |
+| `INVALID_COMPONENT_TYPE` | Validation | Invalid component type |
+| `INVALID_INPUT` | Validation | General invalid input |
+| `MISSING_REQUIRED_FIELD` | Validation | Required field missing |
+| `DATA_NOT_FOUND` | Data Access | Data not found |
+| `DATA_PROVIDER_ERROR` | Data Access | Data provider error |
+| `CONFIGURATION_ERROR` | Data Access | Configuration error |
+| `CALCULATION_ERROR` | Business Logic | Calculation failed |
+| `COMPLIANCE_CHECK_ERROR` | Business Logic | Compliance check failed |
+| `ROI_CALCULATION_ERROR` | Business Logic | ROI calculation failed |
+| `NETWORK_ERROR` | Network | Network request failed |
+| `CONNECTION_ERROR` | Network | Connection failed |
+| `TIMEOUT_ERROR` | Network | Request timed out |
+| `RETRYABLE_ERROR` | Retryable | Operation can be retried |
+| `RATE_LIMIT_ERROR` | Retryable | Rate limit exceeded |
+| `INTERNAL_ERROR` | System | Internal system error |
+| `UNEXPECTED_ERROR` | System | Unexpected error occurred |
+
+> **Note:** The `ServiceErrorCode` enum uses string identifiers (e.g., `'VALIDATION_ERROR'`). The categories listed above are organizational groupings for documentation purposes. Error code comments in the source code (e.g., "1000-1999") indicate organizational ranges but the actual values are strings.
+
+## Troubleshooting
+
+### Common Issues
+
+#### 1. useError throws "must be used within ErrorProvider"
+
+**Solution:** Ensure component is wrapped with ErrorProvider.
+
+```typescript
+// App.tsx
+<ErrorProvider>
+  <App />
+</ErrorProvider>
 ```
 
-## Security Considerations
+#### 2. Toast not appearing
 
-1. **Never expose sensitive data** in error messages
-2. **Sanitize error messages** before displaying to users
-3. **Log detailed errors** server-side, show generic messages to users
-4. **Validate all user input** before processing
+**Solution:** Check that ErrorProvider is rendering and isVisible is true.
 
-```tsx
-// ✅ Good
-catch (error) {
-  console.error('Detailed error:', error); // Log details
-  return <ErrorMessage message="Unable to process request" />; // Generic message
-}
-
-// ❌ Bad
-catch (error) {
-  return <ErrorMessage message={error.stack} />; // Exposes internals
-}
+```typescript
+const { showToast } = useError();
+showToast({ message: 'Test message' });
 ```
 
-## Migration Guide
+#### 3. Error boundaries not catching errors
 
-### Migrating Existing Widgets
+**Solution:** Error boundaries only catch rendering errors. Use try-catch for async errors.
 
-If you have a widget with custom error handling, migrate to the standard pattern:
+```typescript
+// ❌ Won't be caught by error boundary
+useEffect(() => {
+  fetchData(); // Async error
+}, []);
 
-**Before:**
-```tsx
-const MyWidget = () => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    try {
-      const result = fetchData();
-      setData(result);
-    } catch (err) {
-      setError(err);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-  return <div>{data}</div>;
-};
+// ✅ Will work
+useEffect(() => {
+  try {
+    fetchData();
+  } catch (error) {
+    handleError(error);
+  }
+}, []);
 ```
 
-**After:**
-```tsx
-import { useServiceData } from '@/hooks';
-import { WidgetContainer } from '@/components';
+## Performance Considerations
 
-const MyWidget = () => {
-  const { data, loading, error } = useServiceData(() => fetchData(), []);
+1. **Error Tracking Limit:** Set `maxErrors` prop on ErrorProvider to prevent memory leaks
+2. **Toast Auto-Dismiss:** Use appropriate `autoHideDuration` to avoid cluttering UI
+3. **Error Logging:** Errors are logged synchronously; consider debouncing for high-frequency errors
+4. **Context Updates:** Minimize error context updates to reduce re-renders
 
-  return (
-    <WidgetContainer 
-      title="My Widget"
-      isLoading={loading}
-      error={error}
-    >
-      <div>{data}</div>
-    </WidgetContainer>
-  );
-};
-```
+## Future Enhancements
 
-## Summary
+- Error monitoring integration (Sentry, LogRocket, etc.)
+- Error analytics and reporting dashboard
+- Automatic error recovery strategies
+- Error notification preferences
+- Batch error handling
+- Error rate limiting
+- Custom error handlers per component type
 
-The error handling system provides:
+## References
 
-- ✅ Consistent error display across all widgets
-- ✅ User-friendly loading states
-- ✅ Graceful error recovery with retry options
-- ✅ Error boundaries to prevent app crashes
-- ✅ Comprehensive testing support
-- ✅ Full accessibility compliance
-- ✅ Type-safe implementations
+- [React Error Boundaries](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary)
+- [Error Handling Best Practices](https://react.dev/learn/error-boundaries)
+- [TypeScript Error Handling](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates)
 
-For questions or issues, refer to the component source code or tests for detailed examples.
+## Support
+
+For questions or issues with error handling:
+
+1. Check this documentation
+2. Review existing error handling patterns in the codebase
+3. Consult the error service tests for usage examples
+4. Open a GitHub issue with the `error-handling` label
