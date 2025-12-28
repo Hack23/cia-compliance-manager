@@ -32,7 +32,7 @@ describe("Widget Performance Tests", () => {
 
       cy.then(() => {
         const loadTime = Date.now() - startTime;
-        cy.log(\`✓ Page loaded in \${loadTime}ms\`);
+        cy.log(`✓ Page loaded in ${loadTime}ms`);
 
         // Target: <3000ms (3 seconds)
         expect(loadTime).to.be.lessThan(3000);
@@ -49,7 +49,7 @@ describe("Widget Performance Tests", () => {
 
       cy.then(() => {
         const renderTime = Date.now() - startTime;
-        cy.log(\`✓ Widgets rendered in \${renderTime}ms\`);
+        cy.log(`✓ Widgets rendered in ${renderTime}ms`);
 
         // Target: <1000ms for all widgets
         expect(renderTime).to.be.lessThan(1000);
@@ -80,7 +80,7 @@ describe("Widget Performance Tests", () => {
         cy.then(() => {
           const responseTime = Date.now() - startTime;
           measurements.push(responseTime);
-          cy.log(\`Change \${i + 1}: \${responseTime}ms\`);
+          cy.log(`Change ${i + 1}: ${responseTime}ms`);
         });
       }
 
@@ -88,7 +88,7 @@ describe("Widget Performance Tests", () => {
         const avgTime =
           measurements.reduce((sum, time) => sum + time, 0) /
           measurements.length;
-        cy.log(\`✓ Average response time: \${avgTime.toFixed(0)}ms\`);
+        cy.log(`✓ Average response time: ${avgTime.toFixed(0)}ms`);
 
         // Target: <500ms per interaction
         expect(avgTime).to.be.lessThan(500);
@@ -120,7 +120,7 @@ describe("Widget Performance Tests", () => {
 
       cy.then(() => {
         const updateTime = Date.now() - startTime;
-        cy.log(\`✓ All widgets updated in \${updateTime}ms\`);
+        cy.log(`✓ All widgets updated in ${updateTime}ms`);
 
         // Target: <500ms for propagation to all widgets
         expect(updateTime).to.be.lessThan(500);
@@ -136,8 +136,8 @@ describe("Widget Performance Tests", () => {
     ];
 
     viewports.forEach((viewport) => {
-      it(\`should perform well on \${viewport.name} (\${viewport.width}x\${viewport.height})\`, () => {
-        cy.log(\`📱 Testing \${viewport.name} performance\`);
+      it(`should perform well on ${viewport.name} (${viewport.width}x${viewport.height})`, () => {
+        cy.log(`📱 Testing ${viewport.name} performance`);
 
         cy.viewport(viewport.width, viewport.height);
 
@@ -155,7 +155,7 @@ describe("Widget Performance Tests", () => {
 
         cy.then(() => {
           const renderTime = Date.now() - startTime;
-          cy.log(\`✓ \${viewport.name} rendered in \${renderTime}ms\`);
+          cy.log(`✓ ${viewport.name} rendered in ${renderTime}ms`);
 
           // Performance targets may be slightly higher for mobile
           const maxTime = viewport.width < 768 ? 1500 : 1000;

@@ -30,7 +30,7 @@ describe("Cross-Widget Interactions", () => {
       let initialWidgetCount = 0;
       cy.get('[data-testid*="widget"]').then(($widgets) => {
         initialWidgetCount = $widgets.length;
-        cy.log(\`✓ Found \${initialWidgetCount} widgets in initial state\`);
+        cy.log(`✓ Found ${initialWidgetCount} widgets in initial state`);
       });
 
       // Change to high security
@@ -44,7 +44,7 @@ describe("Cross-Widget Interactions", () => {
       // Verify all widgets still rendered and potentially updated
       cy.get('[data-testid*="widget"]').then(($widgets) => {
         expect($widgets.length).to.equal(initialWidgetCount);
-        cy.log(\`✓ All \${$widgets.length} widgets updated successfully\`);
+        cy.log(`✓ All ${$widgets.length} widgets updated successfully`);
 
         // Verify widgets are visible and responsive
         $widgets.each((index, widget) => {
@@ -76,8 +76,8 @@ describe("Cross-Widget Interactions", () => {
         // Verify "moderate" appears (from Availability and Confidentiality)
         const hasModerate = pageText.includes("moderate");
 
-        cy.log(\`✓ High security level mentioned: \${hasHigh}\`);
-        cy.log(\`✓ Moderate security level mentioned: \${hasModerate}\`);
+        cy.log(`✓ High security level mentioned: ${hasHigh}`);
+        cy.log(`✓ Moderate security level mentioned: ${hasModerate}`);
 
         // At least one widget should show the selected levels
         expect(hasHigh || hasModerate).to.be.true;
@@ -105,7 +105,7 @@ describe("Cross-Widget Interactions", () => {
         .invoke("text")
         .then((text) => {
           lowSecurityCostText = text;
-          cy.log(\`Low security cost display: \${text.slice(0, 50)}...\`);
+          cy.log(`Low security cost display: ${text.slice(0, 50)}...`);
         });
 
       // Change to high security
@@ -120,7 +120,7 @@ describe("Cross-Widget Interactions", () => {
         .first()
         .invoke("text")
         .then((highSecurityCostText) => {
-          cy.log(\`High security cost display: \${highSecurityCostText.slice(0, 50)}...\`);
+          cy.log(`High security cost display: ${highSecurityCostText.slice(0, 50)}...`);
 
           // Verify cost display changed (content should be different)
           const costChanged = highSecurityCostText !== lowSecurityCostText;
@@ -159,7 +159,7 @@ describe("Cross-Widget Interactions", () => {
 
       cy.then(() => {
         const syncTime = Date.now() - startTime;
-        cy.log(\`✓ All widgets synchronized in \${syncTime}ms\`);
+        cy.log(`✓ All widgets synchronized in ${syncTime}ms`);
 
         // Target: <1000ms for full synchronization
         expect(syncTime).to.be.lessThan(1000);
@@ -222,9 +222,9 @@ describe("Cross-Widget Interactions", () => {
       ];
 
       widgetTypes.forEach((type) => {
-        cy.get(\`[data-testid*="\${type}"]\`).then(($widgets) => {
+        cy.get(`[data-testid*="${type}"]`).then(($widgets) => {
           if ($widgets.length > 0) {
-            cy.log(\`✓ \${type} widgets updated (\${$widgets.length} found)\`);
+            cy.log(`✓ ${type} widgets updated (${$widgets.length} found)`);
           }
         });
       });

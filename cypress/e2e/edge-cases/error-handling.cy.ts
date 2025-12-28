@@ -376,7 +376,7 @@ describe("Error Handling and Edge Cases", () => {
 
       // Application should work regardless of locale
       cy.get("body").should("be.visible");
-      cy.get('[data-testid*="widget"]").should("have.length.at.least", 5);
+      cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
 
       // Timestamps and dates should be handled properly
       cy.window().then((win) => {
