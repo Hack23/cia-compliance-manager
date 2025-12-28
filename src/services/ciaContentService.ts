@@ -210,6 +210,27 @@ export class CIAContentService extends BaseService {
 
   /**
    * Get options data for a CIA component
+   * 
+   * Retrieves all security level options (None through Very High) for a specific
+   * CIA triad component, including descriptions, technical details, costs, and recommendations.
+   * 
+   * @param component - CIA component type ('confidentiality', 'integrity', or 'availability')
+   * @returns Record mapping each SecurityLevel to its CIADetails
+   * 
+   * @example
+   * ```typescript
+   * const service = new CIAContentService(dataProvider);
+   * const options = service.getCIAOptions('confidentiality');
+   * 
+   * // Access specific level
+   * console.log(options['High'].description);
+   * console.log(options['High'].capex); // CAPEX percentage
+   * 
+   * // Iterate through all levels
+   * Object.entries(options).forEach(([level, details]) => {
+   *   console.log(`${level}: ${details.description}`);
+   * });
+   * ```
    */
   public getCIAOptions(
     component: CIAComponentType
@@ -277,6 +298,36 @@ export class CIAContentService extends BaseService {
 
   /**
    * Get details for a specific component and security level
+   * 
+   * Retrieves comprehensive details for a specific CIA component at a given
+   * security level, including description, technical requirements, business impact,
+   * cost estimates (CAPEX/OPEX), and implementation recommendations.
+   * 
+   * @param component - CIA component type ('confidentiality', 'integrity', or 'availability')
+   * @param level - Security level ('None', 'Low', 'Moderate', 'High', 'Very High')
+   * @returns CIADetails object with all information, or undefined if invalid component
+   * 
+   * @example
+   * ```typescript
+   * const service = new CIAContentService(dataProvider);
+   * 
+   * // Get High confidentiality details
+   * const details = service.getComponentDetails('confidentiality', 'High');
+   * 
+   * if (details) {
+   *   console.log('Description:', details.description);
+   *   console.log('Technical:', details.technical);
+   *   console.log('Business Impact:', details.businessImpact);
+   *   console.log('CAPEX:', details.capex, '%');
+   *   console.log('OPEX:', details.opex, '%');
+   *   console.log('Colors:', details.bg, details.text);
+   *   
+   *   // Access recommendations
+   *   details.recommendations?.forEach(rec => {
+   *     console.log('- ', rec);
+   *   });
+   * }
+   * ```
    */
   public getComponentDetails(
     component: CIAComponentType,
@@ -302,7 +353,31 @@ export class CIAContentService extends BaseService {
   }
 
   /**
-   * Get ROI estimate for a security level
+   * Get ROI (Return on Investment) estimate for a security level
+   * 
+   * Calculates the expected return on investment for implementing security
+   * controls at a specific level. Higher security levels typically provide
+   * better ROI through risk mitigation and incident prevention.
+   * 
+   * @param level - Security level to calculate ROI for
+   * @returns ROI estimate with value, return rate, and description
+   * 
+   * @example
+   * ```typescript
+   * const service = new CIAContentService(dataProvider);
+   * 
+   * // Get ROI for High security level
+   * const roi = service.getROIEstimate('High');
+   * console.log('ROI Value:', roi.value);           // e.g., "250%"
+   * console.log('Return Rate:', roi.returnRate);    // e.g., "150%"
+   * console.log('Description:', roi.description);
+   * 
+   * // Compare ROI across levels
+   * ['Low', 'Moderate', 'High'].forEach(level => {
+   *   const levelRoi = service.getROIEstimate(level as SecurityLevel);
+   *   console.log(`${level}: ${levelRoi.value}`);
+   * });
+   * ```
    */
   public getROIEstimate(level: SecurityLevel): ROIEstimate {
     // More robust check for None security level

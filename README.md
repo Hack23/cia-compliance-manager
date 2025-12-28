@@ -640,6 +640,21 @@ Detailed API reference for all components, types, and functions in the applicati
 
 [View API Docs](https://hack23.github.io/cia-compliance-manager/api-docs)
 
+### 👨‍💻 Developer Guide
+Comprehensive guide for developers, covering setup, architecture, development workflows, and best practices.
+
+[View Developer Guide](docs/DEVELOPER_GUIDE.md)
+
+### 📚 API Examples
+Common API usage patterns and examples for services, widgets, hooks, and utilities.
+
+[View API Examples](docs/API_EXAMPLES.md)
+
+### 🔄 Migration Guide
+Guide for migrating between versions, including breaking changes and new features.
+
+[View Migration Guide](docs/MIGRATION_GUIDE.md)
+
 ### 🔄 Business Continuity
 Comprehensive business continuity planning and recovery strategies aligned with CIA principles.
 

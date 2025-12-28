@@ -105,11 +105,32 @@ export class ComplianceService extends BaseService {
 
   /**
    * Get compliance status based on security levels
+   * 
+   * Evaluates current security levels against multiple compliance frameworks
+   * (NIST 800-53, ISO 27001, GDPR, HIPAA, SOC2, PCI DSS, etc.) and provides
+   * detailed compliance status, gaps, and remediation guidance.
    *
    * @param availabilityLevel - Availability security level
    * @param integrityLevel - Integrity security level
    * @param confidentialityLevel - Confidentiality security level
-   * @returns Compliance status details
+   * @returns Compliance status details including compliant/non-compliant frameworks and remediation steps
+   * 
+   * @example
+   * ```typescript
+   * const service = new ComplianceService(dataProvider);
+   * 
+   * // Check compliance for High security levels
+   * const status = service.getComplianceStatus('High', 'High', 'High');
+   * console.log('Overall Status:', status.status);
+   * console.log('Compliance Score:', status.complianceScore, '%');
+   * console.log('Compliant Frameworks:', status.compliantFrameworks);
+   * console.log('Non-Compliant Frameworks:', status.nonCompliantFrameworks);
+   * 
+   * // Get remediation steps
+   * status.remediationSteps.forEach(step => {
+   *   console.log('- ', step);
+   * });
+   * ```
    */
   public getComplianceStatus(
     availabilityLevel: SecurityLevel,
@@ -250,11 +271,28 @@ export class ComplianceService extends BaseService {
 
   /**
    * Get compliant frameworks for a specific security level
+   * 
+   * Identifies which compliance frameworks are fully met by the current
+   * security configuration. Useful for compliance reporting and gap analysis.
    *
    * @param availabilityLevel - Availability security level
    * @param integrityLevel - Integrity security level (optional, defaults to availabilityLevel)
    * @param confidentialityLevel - Confidentiality security level (optional, defaults to availabilityLevel)
    * @returns Array of compliant framework names
+   * 
+   * @example
+   * ```typescript
+   * const service = new ComplianceService(dataProvider);
+   * 
+   * // Check which frameworks High security meets
+   * const frameworks = service.getCompliantFrameworks('High', 'High', 'High');
+   * console.log('Compliant with:', frameworks.join(', '));
+   * // Output: "Compliant with: NIST 800-53, ISO 27001, NIST CSF, GDPR, HIPAA, SOC2, PCI DSS..."
+   * 
+   * // Check moderate security levels
+   * const moderateFrameworks = service.getCompliantFrameworks('Moderate', 'Moderate', 'Moderate');
+   * console.log('Moderate meets:', moderateFrameworks.length, 'frameworks');
+   * ```
    */
   public getCompliantFrameworks(
     availabilityLevel: SecurityLevel,
@@ -325,12 +363,36 @@ export class ComplianceService extends BaseService {
 
   /**
    * Get compliance status for a specific framework
+   * 
+   * Evaluates whether current security levels meet a specific compliance
+   * framework's requirements. Returns detailed status showing full compliance,
+   * partial compliance, or non-compliance.
    *
-   * @param framework - Framework name
+   * @param framework - Framework name (e.g., "NIST 800-53", "ISO 27001", "GDPR")
    * @param availabilityLevel - Availability security level
    * @param integrityLevel - Integrity security level
    * @param confidentialityLevel - Confidentiality security level
-   * @returns Compliance status for the framework
+   * @returns Compliance status for the framework ("compliant", "partially-compliant", or "non-compliant")
+   * 
+   * @example
+   * ```typescript
+   * const service = new ComplianceService(dataProvider);
+   * 
+   * // Check GDPR compliance
+   * const gdprStatus = service.getFrameworkStatus('GDPR', 'High', 'High', 'High');
+   * console.log('GDPR Status:', gdprStatus); // "compliant"
+   * 
+   * // Check HIPAA with moderate levels
+   * const hipaaStatus = service.getFrameworkStatus('HIPAA', 'Moderate', 'Moderate', 'Moderate');
+   * console.log('HIPAA Status:', hipaaStatus); // "partially-compliant" or "non-compliant"
+   * 
+   * // Evaluate all frameworks
+   * const frameworks = ['NIST 800-53', 'ISO 27001', 'GDPR', 'HIPAA'];
+   * frameworks.forEach(framework => {
+   *   const status = service.getFrameworkStatus(framework, 'High', 'High', 'Moderate');
+   *   console.log(`${framework}: ${status}`);
+   * });
+   * ```
    */
   public getFrameworkStatus(
     framework: string,
