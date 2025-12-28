@@ -12,35 +12,38 @@
 
 /**
  * Error codes for service operations
+ * 
+ * Note: The numeric ranges in comments (e.g., 1000-1999) are organizational
+ * categories for documentation purposes. The actual enum values are strings.
  */
 export enum ServiceErrorCode {
-  // Validation errors (1000-1999)
+  // Validation errors
   VALIDATION_ERROR = 'VALIDATION_ERROR',
   INVALID_SECURITY_LEVEL = 'INVALID_SECURITY_LEVEL',
   INVALID_COMPONENT_TYPE = 'INVALID_COMPONENT_TYPE',
   INVALID_INPUT = 'INVALID_INPUT',
   MISSING_REQUIRED_FIELD = 'MISSING_REQUIRED_FIELD',
 
-  // Data access errors (2000-2999)
+  // Data access errors
   DATA_NOT_FOUND = 'DATA_NOT_FOUND',
   DATA_PROVIDER_ERROR = 'DATA_PROVIDER_ERROR',
   CONFIGURATION_ERROR = 'CONFIGURATION_ERROR',
 
-  // Business logic errors (3000-3999)
+  // Business logic errors
   CALCULATION_ERROR = 'CALCULATION_ERROR',
   COMPLIANCE_CHECK_ERROR = 'COMPLIANCE_CHECK_ERROR',
   ROI_CALCULATION_ERROR = 'ROI_CALCULATION_ERROR',
 
-  // Network errors (4000-4499)
+  // Network errors
   NETWORK_ERROR = 'NETWORK_ERROR',
   CONNECTION_ERROR = 'CONNECTION_ERROR',
   TIMEOUT_ERROR = 'TIMEOUT_ERROR',
   
-  // Retryable errors (4500-4999)
+  // Retryable errors
   RETRYABLE_ERROR = 'RETRYABLE_ERROR',
   RATE_LIMIT_ERROR = 'RATE_LIMIT_ERROR',
   
-  // System errors (5000-5999)
+  // System errors
   INTERNAL_ERROR = 'INTERNAL_ERROR',
   UNEXPECTED_ERROR = 'UNEXPECTED_ERROR',
 }

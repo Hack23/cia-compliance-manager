@@ -5,11 +5,11 @@
 The CIA Compliance Manager implements a comprehensive error handling system that provides:
 
 - **Centralized error service** for consistent error logging and user-friendly messages
-- **Custom error classes** for different error types (Validation, Network, Retryable)
-- **React Error Boundaries** for graceful error recovery
+- **Extended ServiceError system** with factory functions for different error types (Validation, Network, Retryable)
+- **React Error Boundaries** (WidgetErrorBoundary) for graceful error recovery
 - **Error Context** for application-wide error state management
 - **Toast notifications** for non-blocking error messages
-- **User-friendly error fallbacks** with technical details option
+- **User-friendly error displays** using existing ErrorMessage component
 
 ## Architecture
 
@@ -25,10 +25,10 @@ The CIA Compliance Manager implements a comprehensive error handling system that
 │                          │                                   │
 │         ┌────────────────┼────────────────┐                 │
 │         ▼                ▼                ▼                 │
-│   ┌──────────┐   ┌──────────────┐  ┌──────────────┐       │
-│   │  Error   │   │ ErrorToast   │  │ErrorBoundary │       │
-│   │Boundaries│   │(Transient)   │  │ (Critical)   │       │
-│   └──────────┘   └──────────────┘  └──────────────┘       │
+│   ┌───────────────┐   ┌──────────────┐  ┌──────────────┐  │
+│   │Widget Error   │   │ ErrorToast   │  │ErrorMessage  │  │
+│   │Boundary (11)  │   │(Transient)   │  │(Fallback UI) │  │
+│   └───────────────┘   └──────────────┘  └──────────────┘  │
 └─────────────────────────────────────────────────────────────┘
                           │
                           ▼
@@ -44,11 +44,11 @@ The CIA Compliance Manager implements a comprehensive error handling system that
 │                          │                                   │
 │                          ▼                                   │
 │  ┌──────────────────────────────────────────────────────┐  │
-│  │           Custom Error Classes                        │  │
-│  │  - ServiceError (with error codes)                    │  │
-│  │  - ValidationError (field-specific)                   │  │
-│  │  - NetworkError (HTTP status codes)                   │  │
-│  │  - RetryableError (with retry timing)                 │  │
+│  │         ServiceError with Factory Functions           │  │
+│  │  - ServiceError (base class with error codes)         │  │
+│  │  - createValidationServiceError() factory             │  │
+│  │  - createNetworkServiceError() factory                │  │
+│  │  - createRetryableServiceError() factory              │  │
 │  └──────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -75,43 +75,49 @@ throw new ServiceError(
 - `cause`: Error - Original error if wrapping
 - `timestamp`: Date - When the error occurred
 
-### ValidationError
+### Factory Functions for Common Error Types
+
+Instead of creating separate error classes, use factory functions that return ServiceError instances with appropriate error codes:
+
+#### createValidationServiceError
 
 For input validation failures.
 
 ```typescript
-import { ValidationError } from './services/errors';
+import { createValidationServiceError } from './services/errors';
 
-throw new ValidationError(
+throw createValidationServiceError(
   'Email format is invalid',
-  'email' // Optional field name
+  'email', // Optional field name
+  { component: 'UserForm' } // Optional additional context
 );
 ```
 
-### NetworkError
+#### createNetworkServiceError
 
 For network and HTTP errors.
 
 ```typescript
-import { NetworkError } from './services/errors';
+import { createNetworkServiceError } from './services/errors';
 
-throw new NetworkError(
+throw createNetworkServiceError(
   'Failed to fetch data from server',
-  500 // HTTP status code
+  500, // HTTP status code
+  { service: 'DataService' } // Optional additional context
 );
 ```
 
-### RetryableError
+#### createRetryableServiceError
 
 For operations that can be retried.
 
 ```typescript
-import { RetryableError } from './services/errors';
+import { createRetryableServiceError } from './services/errors';
 
-throw new RetryableError(
+throw createRetryableServiceError(
   'Rate limit exceeded',
   60, // Retry after 60 seconds
-  3   // Retry count
+  { component: 'APIClient' } // Optional additional context
 );
 ```
 
@@ -214,58 +220,55 @@ function MyComponent() {
 
 ## Error Boundaries
 
-### ErrorBoundary Component
+### WidgetErrorBoundary Component
 
-Enhanced error boundary with recovery options.
+The application uses the existing WidgetErrorBoundary component, which is actively wrapping all 11 widgets in production. This component integrates with the error service for user-friendly error displays.
 
 ```typescript
-import { ErrorBoundary } from './components/common/ErrorBoundary';
+import { WidgetErrorBoundary } from './components/common/WidgetErrorBoundary';
 
-<ErrorBoundary
-  componentName="Security Metrics Widget"
-  onError={(error, info) => {
+<WidgetErrorBoundary 
+  widgetName="Security Metrics Widget"
+  onError={(error, errorInfo) => {
     // Optional error callback
-    console.log('Error caught:', error, info);
+    console.log('Error caught:', error, errorInfo);
   }}
-  showTechnicalDetails={process.env.NODE_ENV === 'development'}
-  allowReset={true}
 >
   <SecurityMetricsWidget />
-</ErrorBoundary>
+</WidgetErrorBoundary>
 ```
 
 **Props:**
 - `children`: Components to wrap
-- `fallback`: Custom fallback component (optional)
+- `widgetName`: Name of the widget for error messages
 - `onError`: Error callback (optional)
-- `componentName`: Name for error messages (optional)
-- `showTechnicalDetails`: Show technical error details (default: false)
-- `allowReset`: Allow error reset/retry (default: true)
 - `testId`: Test ID for testing (optional)
 
-### ErrorFallback Component
+**Features:**
+- Component-level error isolation
+- Integration with centralized logger
+- Uses ErrorMessage component for fallback UI
+- Consistent error handling across all widgets
 
-User-friendly error display with optional technical details.
+### ErrorMessage Component (Fallback UI)
+
+The existing ErrorMessage component is used by WidgetErrorBoundary as the default fallback UI for displaying errors.
 
 ```typescript
-import { ErrorFallback } from './components/common/ErrorFallback';
+import { ErrorMessage } from './components/common/ErrorMessage';
 
-<ErrorFallback
+<ErrorMessage
   title="Widget Error"
   message="Failed to load widget data"
-  error={error}
-  errorInfo={errorInfo}
-  onReset={() => refetch()}
-  showTechnicalDetails={true}
+  onRetry={() => refetch()}
 />
 ```
 
 **Features:**
-- Clear error title and message
-- Optional reset/retry button
-- Collapsible technical details
-- Stack trace display
-- Component stack display
+- Clear error title and message display
+- Optional retry functionality via retry callback
+- Consistent styling with error icon
+- Test IDs for testing
 - Accessibility support (ARIA attributes)
 
 ## Toast Notifications
@@ -309,8 +312,8 @@ const [showToast, setShowToast] = useState(false);
 import { 
   ServiceError, 
   ServiceErrorCode,
-  ValidationError,
-  NetworkError 
+  createValidationServiceError,
+  createNetworkServiceError
 } from './services/errors';
 import { errorService } from './services/errorService';
 
@@ -319,16 +322,20 @@ export class DataService {
     try {
       // Validate input
       if (!id) {
-        throw new ValidationError('ID is required', 'id');
+        throw createValidationServiceError('ID is required', 'id', {
+          service: 'DataService',
+          method: 'fetchData'
+        });
       }
 
       // Fetch data
       const response = await fetch(`/api/data/${id}`);
       
       if (!response.ok) {
-        throw new NetworkError(
+        throw createNetworkServiceError(
           'Failed to fetch data',
-          response.status
+          response.status,
+          { service: 'DataService', method: 'fetchData', id }
         );
       }
 
@@ -352,7 +359,7 @@ export class DataService {
 ### Adding Error Handling to Widgets
 
 ```typescript
-import { ErrorBoundary } from '../components/common/ErrorBoundary';
+import { WidgetErrorBoundary } from '../components/common/WidgetErrorBoundary';
 import { useError } from '../contexts/ErrorContext';
 
 export const MyWidget: React.FC<MyWidgetProps> = (props) => {
@@ -373,25 +380,25 @@ export const MyWidget: React.FC<MyWidgetProps> = (props) => {
   };
 
   return (
-    <ErrorBoundary componentName="My Widget">
+    <WidgetErrorBoundary widgetName="My Widget">
       <div className="widget">
         {/* Widget content */}
       </div>
-    </ErrorBoundary>
+    </WidgetErrorBoundary>
   );
 };
 ```
 
 ## Best Practices
 
-### 1. Always Use Specific Error Classes
+### 1. Always Use Factory Functions for Specific Error Types
 
 ```typescript
 // ❌ Bad
 throw new Error('Invalid input');
 
 // ✅ Good
-throw new ValidationError('Email format is invalid', 'email');
+throw createValidationServiceError('Email format is invalid', 'email');
 ```
 
 ### 2. Provide Context
@@ -414,10 +421,10 @@ errorService.logError(error, {
 // ❌ Bad - No error boundary
 <MyWidget />
 
-// ✅ Good - Wrapped with error boundary
-<ErrorBoundary componentName="My Widget">
+// ✅ Good - Wrapped with WidgetErrorBoundary
+<WidgetErrorBoundary widgetName="My Widget">
   <MyWidget />
-</ErrorBoundary>
+</WidgetErrorBoundary>
 ```
 
 ### 4. Show User-Friendly Messages
@@ -473,12 +480,13 @@ try {
 ```typescript
 import { render, screen } from '@testing-library/react';
 import { ErrorProvider } from './contexts/ErrorContext';
+import { createNetworkServiceError } from './services/errors';
 
 describe('MyComponent', () => {
   it('should handle errors gracefully', async () => {
-    // Mock error
+    // Mock error using factory function
     const mockFetch = vi.fn().mockRejectedValue(
-      new NetworkError('Failed to fetch', 500)
+      createNetworkServiceError('Failed to fetch', 500)
     );
 
     render(
@@ -510,19 +518,26 @@ describe('MyComponent', () => {
 
 | Code | Category | Description |
 |------|----------|-------------|
-| `VALIDATION_ERROR` | Validation (1000-1999) | Input validation failed |
+| `VALIDATION_ERROR` | Validation | Input validation failed |
 | `INVALID_SECURITY_LEVEL` | Validation | Invalid security level provided |
 | `INVALID_COMPONENT_TYPE` | Validation | Invalid component type |
 | `INVALID_INPUT` | Validation | General invalid input |
 | `MISSING_REQUIRED_FIELD` | Validation | Required field missing |
-| `DATA_NOT_FOUND` | Data Access (2000-2999) | Data not found |
+| `DATA_NOT_FOUND` | Data Access | Data not found |
 | `DATA_PROVIDER_ERROR` | Data Access | Data provider error |
 | `CONFIGURATION_ERROR` | Data Access | Configuration error |
-| `CALCULATION_ERROR` | Business Logic (3000-3999) | Calculation failed |
+| `CALCULATION_ERROR` | Business Logic | Calculation failed |
 | `COMPLIANCE_CHECK_ERROR` | Business Logic | Compliance check failed |
 | `ROI_CALCULATION_ERROR` | Business Logic | ROI calculation failed |
-| `INTERNAL_ERROR` | System (4000-4999) | Internal system error |
+| `NETWORK_ERROR` | Network | Network request failed |
+| `CONNECTION_ERROR` | Network | Connection failed |
+| `TIMEOUT_ERROR` | Network | Request timed out |
+| `RETRYABLE_ERROR` | Retryable | Operation can be retried |
+| `RATE_LIMIT_ERROR` | Retryable | Rate limit exceeded |
+| `INTERNAL_ERROR` | System | Internal system error |
 | `UNEXPECTED_ERROR` | System | Unexpected error occurred |
+
+> **Note:** The `ServiceErrorCode` enum uses string identifiers (e.g., `'VALIDATION_ERROR'`). The categories listed above are organizational groupings for documentation purposes. Error code comments in the source code (e.g., "1000-1999") indicate organizational ranges but the actual values are strings.
 
 ## Troubleshooting
 
