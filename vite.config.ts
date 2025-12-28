@@ -92,6 +92,31 @@ export default defineConfig(({ mode }) => ({
             // Other vendor dependencies
             return "vendor";
           }
+          
+          // Group widgets by category for better chunking efficiency
+          // Assessment Center Widgets (group together)
+          if (id.includes("/widgets/assessmentcenter/") && !id.includes("SecurityLevelWidget")) {
+            return "widgets-assessment";
+          }
+          
+          // Business Value Widgets (group together)
+          if (id.includes("/widgets/businessvalue/")) {
+            return "widgets-business";
+          }
+          
+          // Impact Analysis Widgets (group together)
+          if (id.includes("/widgets/impactanalysis/")) {
+            return "widgets-impact";
+          }
+          
+          // Implementation Guide Widgets (Chart.js widgets separate)
+          if (id.includes("/widgets/implementationguide/")) {
+            if (id.includes("SecurityVisualizationWidget")) {
+              return "widgets-visualization";
+            }
+            // Other implementation widgets together
+            return "widgets-implementation";
+          }
         },
       },
       external: (id) => id.includes(".test.") || id.includes("__mocks__"),
