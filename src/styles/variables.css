@@ -81,6 +81,14 @@
   --primary-bg-hover: rgba(0, 102, 204, 0.05);
   --primary-bg-active: rgba(0, 102, 204, 0.08);
   --primary-border-hover: rgba(0, 102, 204, 0.3);
+  
+  /* Primary effects used by components (light mode) */
+  --primary-shadow: rgba(0, 102, 204, 0.2);
+  --primary-glow: rgba(0, 102, 204, 0.4);
+  
+  /* Border colors for theme consistency */
+  --border-light: rgba(0, 0, 0, 0.1);
+  --border-dark: rgba(255, 255, 255, 0.1);
 }
 
 /* Dark Mode - Cybersecurity Theme */
@@ -141,4 +149,8 @@
   --primary-border-hover: rgba(43, 138, 255, 0.3);
   --primary-shadow: rgba(43, 138, 255, 0.2);
   --primary-glow: rgba(43, 138, 255, 0.4);
+  
+  /* Border colors for theme consistency (dark mode values) */
+  --border-light: rgba(255, 255, 255, 0.15);
+  --border-dark: rgba(255, 255, 255, 0.1);
 }

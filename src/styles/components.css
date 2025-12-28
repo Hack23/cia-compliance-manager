@@ -2282,7 +2282,8 @@ button.more-info:hover::before {
 /* ========== IMPROVED TAB STYLING ========== */
 
 /* Fix SecuritySummaryWidget specific spacing issues */
-/* Use exact class selectors instead of substring matching */
+/* Intentionally target Tailwind utility classes (e.g. .p-md, .mb-md) within this widget */
+/* Use exact class selectors like .p-md instead of substring matching such as [class*="p-md"] */
 [data-testid="security-summary-widget"] .p-md {
   padding: var(--spacing-sm); /* Use CSS variable instead of hardcoded value */
 }
@@ -2303,17 +2304,17 @@ button.more-info:hover::before {
 /* Improve tab container borders for both widgets */
 .border-b.border-neutral-light,
 .border-b.border-gray-200 {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .dark .border-b.border-neutral-dark,
 .dark .border-b.border-gray-700 {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-dark);
 }
 
-/* Ensure tab gap is consistent */
-nav.flex.gap-sm,
-nav.flex[role="tablist"] {
+/* Ensure tab gap is consistent within widgets without overriding Tailwind utilities */
+[data-testid^="widget-"] nav.flex,
+[data-testid^="widget-"] nav[role="tablist"] {
   gap: var(--spacing-sm); /* Consistent spacing between tabs */
 }
 
