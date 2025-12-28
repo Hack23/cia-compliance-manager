@@ -404,94 +404,38 @@ describe("Complete Assessment Workflow", () => {
   describe("Performance Validation", () => {
     it("should complete assessment workflow within acceptable time", () => {
       cy.then(() => {
-        cy.then(() => {
+        const startTime = Date.now();
 
-          const startTime = Date.now();
-
-          
-
-          // Complete full assessment
-
-          cy.setSecurityLevels(
-
-            SECURITY_LEVELS.HIGH,
-
-            SECURITY_LEVELS.HIGH,
-
-            SECURITY_LEVELS.MODERATE
-
-          );
-
-          
-
-          // Verify all widgets loaded
-
-          cy.get(\'[data-testid*="widget"]\').should("have.length.at.least", 5);
-
-          
-
-          cy.then(() => {
-
-            const duration = Date.now() - startTime;
-
-            cy.log(`Assessment workflow completed in ${duration}ms`);
-
-            // Adjusted for setSecurityLevels internal waits (~1400ms)
-
-            expect(duration).to.be.lessThan(6000); // 6 second max
-
-          });
-
-        });
-
-        
-
-        cy.wait(500);
+        // Complete full assessment
+        cy.setSecurityLevels(
+          SECURITY_LEVELS.HIGH,
+          SECURITY_LEVELS.HIGH,
+          SECURITY_LEVELS.MODERATE
+        );
 
         // Verify all widgets loaded
-        cy.verifyMinimumWidgets(5);
+        cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
 
         cy.then(() => {
           const duration = Date.now() - startTime;
           cy.log(`Assessment workflow completed in ${duration}ms`);
-          expect(duration).to.be.lessThan(5000); // 5 second max
+          // Adjusted for setSecurityLevels internal waits (~1400ms)
+          expect(duration).to.be.lessThan(6000); // 6 second max
         });
       });
+
+      cy.wait(500);
     });
 
     it("should respond quickly to security level changes", () => {
       cy.log("⚡ Testing interaction response time");
 
       cy.then(() => {
-        cy.then(() => {
+        const startTime = Date.now();
 
-          const startTime = Date.now();
-
-          
-
-          cy.get("select")
-
-            .eq(0)
-
-            .select(SECURITY_LEVELS.HIGH, { force: true });
-
-          
-
-          cy.then(() => {
-
-            const responseTime = Date.now() - startTime;
-
-            cy.log(`Response time: ${responseTime}ms`);
-
-            expect(responseTime).to.be.lessThan(1000); // 1 second max
-
-          });
-
-        });
-
-        
-
-        cy.wait(500);
+        cy.get("select")
+          .eq(0)
+          .select(SECURITY_LEVELS.HIGH, { force: true });
 
         cy.then(() => {
           const responseTime = Date.now() - startTime;
@@ -499,6 +443,8 @@ describe("Complete Assessment Workflow", () => {
           expect(responseTime).to.be.lessThan(1000); // 1 second max
         });
       });
+
+      cy.wait(500);
     });
   });
 });

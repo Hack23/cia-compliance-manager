@@ -744,32 +744,36 @@ cypress/
 - 🎯 **Critical Path Coverage:** >95% (19/21 tests marked critical)
 
 **New in v2.3 (Comprehensive E2E Expansion):**
-- ✅ **Complete Assessment Workflow** (`workflows/complete-assessment.cy.ts`) - 15 test scenarios covering:
-  - New user assessment journey (7 scenarios)
-  - Assessment modification workflow (3 scenarios)
-  - Multi-scenario comparison (5 security combinations)
-- ✅ **Comparison Scenarios** (`workflows/comparison-scenarios.cy.ts`) - 20 test scenarios covering:
-  - CIA triad balance scenarios (4 focused approaches)
-  - Cost vs security trade-offs
-  - Compliance framework comparison
-  - Industry-specific scenarios (5 industry types)
-  - Edge case comparisons and rapid scenario switching
-- ✅ **Error Handling & Edge Cases** (`edge-cases/error-handling.cy.ts`) - 25 test scenarios covering:
-  - Invalid input handling (corrupted localStorage, missing data)
-  - Boundary conditions (rapid changes, viewport extremes, extended sessions)
-  - Error recovery scenarios (navigation errors, console errors)
-  - Empty state handling and state consistency validation
-  - Browser compatibility and performance edge cases
-- ✅ **Performance Tests** (`performance/widget-performance.cy.ts`) - 8 test scenarios covering:
-  - Page load performance (<3 seconds target)
-  - Widget rendering performance (<500ms target)
-  - Interaction response time (<500ms target)
-  - Responsive performance across 3 viewports (Mobile, Tablet, Desktop)
-- ✅ **Cross-Widget Interactions** (`integration/cross-widget-interactions.cy.ts`) - 12 test scenarios covering:
-  - Security level propagation to all widgets
-  - Widget-to-widget data flow validation
-  - Widget synchronization performance
-  - End-to-end data flow verification
+- ✅ **Complete Assessment Workflow** (`workflows/complete-assessment.cy.ts`) - 11 test scenarios covering:
+  - New user assessment journey (2 scenarios)
+  - Assessment modification workflow (1 scenario)
+  - Multi-scenario comparison (3 parameterized security combinations)
+  - Scenario differences validation (1 scenario)
+  - Error handling and edge cases (2 scenarios)
+  - Performance validation (2 scenarios)
+- ✅ **Comparison Scenarios** (`workflows/comparison-scenarios.cy.ts`) - 14 test scenarios covering:
+  - CIA triad balance scenarios (4 parameterized focused approaches)
+  - Cost vs security trade-offs (2 scenarios)
+  - Compliance framework comparison (3 parameterized frameworks)
+  - Industry-specific scenarios (5 parameterized industry types)
+  - Edge case comparisons and rapid scenario switching (3 scenarios total)
+- ✅ **Error Handling & Edge Cases** (`edge-cases/error-handling.cy.ts`) - 17 test scenarios covering:
+  - Invalid input handling (3 scenarios: corrupted localStorage, missing data, quota exceeded)
+  - Boundary conditions (3 scenarios: rapid changes, viewport extremes, extended sessions)
+  - Error recovery scenarios (3 scenarios: navigation errors, console errors, rapid refreshes)
+  - Empty state handling (2 scenarios)
+  - State consistency validation (2 scenarios)
+  - Browser compatibility edge cases (2 scenarios)
+  - Performance edge cases (2 scenarios)
+- ✅ **Performance Tests** (`performance/widget-performance.cy.ts`) - 7 test scenarios covering:
+  - Page load performance (2 scenarios: <3 seconds target)
+  - Widget interaction performance (2 scenarios: recursive measurement with accurate timing)
+  - Responsive performance across 3 viewports (3 parameterized scenarios: Mobile, Tablet, Desktop)
+- ✅ **Cross-Widget Interactions** (`integration/cross-widget-interactions.cy.ts`) - 6 test scenarios covering:
+  - Security level propagation to all widgets (2 scenarios)
+  - Cost estimation widget integration (1 scenario)
+  - Widget synchronization (2 scenarios)
+  - End-to-end data flow verification (1 scenario)
 
 **Enhanced Test Coverage Metrics:**
 - 📊 **Total Test Files:** 21 E2E test specifications (5 new files added)

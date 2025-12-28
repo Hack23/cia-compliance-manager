@@ -68,21 +68,23 @@ describe("Error Handling and Edge Cases", () => {
     it("should handle localStorage quota exceeded scenario", () => {
       cy.log("💾 Testing localStorage quota handling");
 
+      // Stub localStorage.setItem to throw QuotaExceededError
       cy.window().then((win: WindowWithConsoleErrors) => {
-        try {
-          // Try to fill localStorage with large data
-          const largeData = "x".repeat(1000000); // 1MB of data
-          win.localStorage.setItem("testData", largeData);
-          cy.log("✓ Large data stored successfully");
-        } catch (e) {
-          // Quota exceeded - application should handle this gracefully
-          cy.log("✓ Quota exceeded handled gracefully");
-        }
+        const quotaError = new DOMException(
+          "The quota has been exceeded.",
+          "QuotaExceededError"
+        );
+        cy.stub(win.localStorage, "setItem").throws(quotaError);
       });
 
-      // Application should still function
+      // Reload to trigger app's normal localStorage usage with stubbed error
+      cy.reload();
+      cy.ensureAppLoaded();
+
+      // Application should still function despite quota errors
       cy.get("body").should("be.visible");
       cy.get("select").should("have.length.at.least", 3);
+      cy.log("✓ Application handles quota exceeded gracefully");
     });
   });
 
@@ -449,39 +451,13 @@ describe("Error Handling and Edge Cases", () => {
       cy.wait(500);
 
       cy.then(() => {
-        cy.then(() => {
+        const startTime = Date.now();
 
-          const startTime = Date.now();
+        // Verify all widgets are visible
+        cy.get('[data-testid*="widget"]').should("have.length.at.least", 5);
 
-          
-
-          // Verify all widgets are visible
-
-          cy.get(\'[data-testid*="widget"]\').should("have.length.at.least", 5);
-
-          
-
-          // Perform interaction
-
-          cy.get("select").eq(0).select(SECURITY_LEVELS.MODERATE, { force: true });
-
-          
-
-          cy.then(() => {
-
-            const interactionTime = Date.now() - startTime;
-
-            cy.log(`Interaction time with full widget load: ${interactionTime}ms`);
-
-            expect(interactionTime).to.be.lessThan(2000); // 2 second max
-
-          });
-
-        });
-
-        
-
-        cy.wait(500);
+        // Perform interaction
+        cy.get("select").eq(0).select(SECURITY_LEVELS.MODERATE, { force: true });
 
         cy.then(() => {
           const interactionTime = Date.now() - startTime;
@@ -489,6 +465,8 @@ describe("Error Handling and Edge Cases", () => {
           expect(interactionTime).to.be.lessThan(2000); // 2 second max
         });
       });
+
+      cy.wait(500);
 
       cy.log("✅ Performance acceptable with full widget load");
     });
