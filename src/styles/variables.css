@@ -86,9 +86,9 @@
   --primary-shadow: rgba(0, 102, 204, 0.2);
   --primary-glow: rgba(0, 102, 204, 0.4);
   
-  /* Border colors for theme consistency */
-  --border-light: rgba(0, 0, 0, 0.1);
-  --border-dark: rgba(255, 255, 255, 0.1);
+  /* Border colors for theme consistency - semantic naming */
+  --border-subtle: rgba(0, 0, 0, 0.1);
+  --border-prominent: rgba(0, 0, 0, 0.2);
 }
 
 /* Dark Mode - Cybersecurity Theme */
@@ -150,7 +150,7 @@
   --primary-shadow: rgba(43, 138, 255, 0.2);
   --primary-glow: rgba(43, 138, 255, 0.4);
   
-  /* Border colors for theme consistency (dark mode values) */
-  --border-light: rgba(255, 255, 255, 0.15);
-  --border-dark: rgba(255, 255, 255, 0.1);
+  /* Border colors for theme consistency (dark mode) - semantic naming */
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-prominent: rgba(255, 255, 255, 0.15);
 }

@@ -2282,17 +2282,17 @@ button.more-info:hover::before {
 /* ========== IMPROVED TAB STYLING ========== */
 
 /* Fix SecuritySummaryWidget specific spacing issues */
-/* Intentionally target Tailwind utility classes (e.g. .p-md, .mb-md) within this widget */
-/* Use exact class selectors like .p-md instead of substring matching such as [class*="p-md"] */
-[data-testid="security-summary-widget"] .p-md {
+/* Use attribute word-match selectors to handle elements with multiple Tailwind classes */
+/* [class~="p-md"] matches elements with class="p-md" or class="p-md sm:p-lg" etc. */
+[data-testid="security-summary-widget"] [class~="p-md"] {
   padding: var(--spacing-sm); /* Use CSS variable instead of hardcoded value */
 }
 
-[data-testid="security-summary-widget"] .mb-md {
+[data-testid="security-summary-widget"] [class~="mb-md"] {
   margin-bottom: var(--spacing-sm); /* Use CSS variable */
 }
 
-[data-testid="security-summary-widget"] section.mb-md {
+[data-testid="security-summary-widget"] section[class~="mb-md"] {
   margin-bottom: 0.75rem; /* Slightly more space for banner */
 }
 
@@ -2301,15 +2301,15 @@ button.more-info:hover::before {
   margin-top: var(--spacing-sm);
 }
 
-/* Improve tab container borders for both widgets */
+/* Improve tab container borders for both widgets - using semantic border variables */
 .border-b.border-neutral-light,
 .border-b.border-gray-200 {
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .dark .border-b.border-neutral-dark,
 .dark .border-b.border-gray-700 {
-  border-bottom: 1px solid var(--border-dark);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 /* Ensure tab gap is consistent within widgets without overriding Tailwind utilities */
@@ -2319,14 +2319,10 @@ button.more-info:hover::before {
 }
 
 /* Universal tab styling for consistency across all widgets */
-/* Increased specificity to avoid !important */
-[data-testid^="widget-"] button[role="tab"],
-[data-testid^="widget-"] [data-testid$="-tab-considerations"],
-[data-testid^="widget-"] [data-testid$="-tab-benefits"],
-[data-testid^="widget-"] [data-testid$="-tab-overview"],
-[data-testid^="widget-"] [data-testid$="-tab-business"],
-[data-testid^="widget-"] [data-testid$="-tab-implementation"],
-[data-testid^="widget-"] [data-testid$="-tab-compliance"] {
+/* Simplified approach: use semantic .widget-tab class for explicit styling */
+/* Also support standard role="tab" for accessibility */
+.widget-tab,
+button[role="tab"] {
   position: relative;
   overflow: hidden;
   padding: 0.75rem 1rem; /* Consistent comfortable padding */
@@ -2340,25 +2336,21 @@ button.more-info:hover::before {
 }
 
 /* Hover state for all tabs - using CSS variables */
-[data-testid^="widget-"] button[role="tab"]:hover,
-[data-testid^="widget-"] [data-testid$="-tab-considerations"]:hover,
-[data-testid^="widget-"] [data-testid$="-tab-benefits"]:hover {
+.widget-tab:hover,
+button[role="tab"]:hover {
   background-color: var(--primary-bg-hover);
   transform: translateY(-1px);
 }
 
-.dark [data-testid^="widget-"] button[role="tab"]:hover,
-.dark [data-testid^="widget-"] [data-testid$="-tab-considerations"]:hover,
-.dark [data-testid^="widget-"] [data-testid$="-tab-benefits"]:hover {
+.dark .widget-tab:hover,
+.dark button[role="tab"]:hover {
   background-color: var(--primary-bg-hover);
 }
 
-/* Active/Selected tab state - Light theme - using CSS variables */
-[data-testid^="widget-"] button[role="tab"][aria-selected="true"],
-[data-testid^="widget-"] button.border-b-2.border-blue-500,
-[data-testid^="widget-"] button.border-b-2.border-primary,
-[data-testid^="widget-"] [data-testid$="-tab-considerations"].border-b-2.border-blue-500,
-[data-testid^="widget-"] [data-testid$="-tab-benefits"].border-b-2.border-blue-500 {
+/* Active/Selected tab state - Light theme - using aria-selected for semantics */
+.widget-tab[aria-selected="true"],
+.widget-tab.active,
+button[role="tab"][aria-selected="true"] {
   border-bottom-color: var(--primary-color);
   color: var(--primary-color);
   font-weight: 600;
@@ -2366,11 +2358,9 @@ button.more-info:hover::before {
 }
 
 /* Active/Selected tab state - Dark theme - using CSS variables */
-.dark [data-testid^="widget-"] button[role="tab"][aria-selected="true"],
-.dark [data-testid^="widget-"] button.border-b-2.border-blue-500,
-.dark [data-testid^="widget-"] button.border-b-2.border-primary,
-.dark [data-testid^="widget-"] [data-testid$="-tab-considerations"].border-b-2.border-blue-500,
-.dark [data-testid^="widget-"] [data-testid$="-tab-benefits"].border-b-2.border-blue-500 {
+.dark .widget-tab[aria-selected="true"],
+.dark .widget-tab.active,
+.dark button[role="tab"][aria-selected="true"] {
   border-bottom-color: var(--primary-color);
   color: var(--primary-light);
   font-weight: 600;
@@ -2380,16 +2370,14 @@ button.more-info:hover::before {
 }
 
 /* Inactive tab colors - using CSS variables */
-[data-testid^="widget-"] button[role="tab"]:not([aria-selected="true"]),
-[data-testid^="widget-"] [data-testid$="-tab-considerations"]:not(.border-b-2),
-[data-testid^="widget-"] [data-testid$="-tab-benefits"]:not(.border-b-2) {
+.widget-tab:not([aria-selected="true"]),
+button[role="tab"]:not([aria-selected="true"]) {
   color: var(--text-secondary);
 }
 
 /* Inactive tab colors - Dark theme */
-.dark [data-testid^="widget-"] button[role="tab"]:not([aria-selected="true"]),
-.dark [data-testid^="widget-"] [data-testid$="-tab-considerations"]:not(.border-b-2),
-.dark [data-testid^="widget-"] [data-testid$="-tab-benefits"]:not(.border-b-2) {
+.dark .widget-tab:not([aria-selected="true"]),
+.dark button[role="tab"]:not([aria-selected="true"]) {
   color: var(--text-secondary);
 }
 
@@ -2411,6 +2399,9 @@ button.more-info:hover::before {
 }
 
 /* Pulse animation for security status indicator */
+/* Note: Uses rgba(var(--primary-color-rgb), opacity) pattern */
+/* Requires --primary-color-rgb to be defined as comma-separated RGB values (e.g., "0, 102, 204") */
+/* This pattern is supported in all modern browsers (Chrome 49+, Firefox 31+, Safari 9.1+) */
 .pulse-dot {
   animation: pulse 2s infinite;
 }
