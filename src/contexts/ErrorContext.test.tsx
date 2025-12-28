@@ -5,6 +5,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { renderHook, act } from '@testing-library/react';
+import { useEffect } from 'react';
 import { ErrorProvider, useError } from './ErrorContext';
 import * as errorServiceModule from '../services/errorService';
 
@@ -305,24 +306,31 @@ describe('ErrorContext', () => {
       });
     });
 
-    it('should display toast with retry button when onRetry provided', async () => {
-      const { result } = renderHook(() => useError(), {
-        wrapper: ErrorProvider,
-      });
+    it('should display toast with retry button when retry provided', async () => {
+      let retryFn: (() => void) | undefined;
+      
+      function TestComponent() {
+        const { showToast } = useError();
+        retryFn = vi.fn();
+        
+        useEffect(() => {
+          showToast({
+            message: 'Test message',
+            retry: retryFn,
+          });
+        }, [showToast]);
+        
+        return <div />;
+      }
 
-      render(<ErrorProvider><div /></ErrorProvider>);
-
-      const onRetry = vi.fn();
-
-      act(() => {
-        result.current.showToast({
-          message: 'Test message',
-          onRetry,
-        });
-      });
+      render(
+        <ErrorProvider>
+          <TestComponent />
+        </ErrorProvider>
+      );
 
       await waitFor(() => {
-        expect(screen.getByTestId('error-toast-retry')).toBeInTheDocument();
+        expect(screen.getByTestId('error-toast-retry-button')).toBeInTheDocument();
       });
     });
   });

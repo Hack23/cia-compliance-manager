@@ -51,8 +51,8 @@ export interface ToastConfig {
   autoHideDuration?: number;
   /** Toast position */
   position?: ToastPosition;
-  /** Retry callback (optional) */
-  onRetry?: () => void;
+  /** Retry callback (optional) - aligns with ErrorToast component API */
+  retry?: () => void;
 }
 
 /**
@@ -234,7 +234,7 @@ export const ErrorProvider: React.FC<ErrorProviderProps> = ({
           onDismiss={hideToast}
           autoHideDuration={toastConfig.autoHideDuration ?? defaultAutoHideDuration}
           position={toastConfig.position ?? defaultToastPosition}
-          onRetry={toastConfig.onRetry}
+          retry={toastConfig.retry}
         />
       )}
     </ErrorContext.Provider>
