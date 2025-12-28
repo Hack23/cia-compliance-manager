@@ -16,9 +16,28 @@ import { SecurityLevel } from "../types/cia";
 
 /**
  * Get color pair (background and text) for a specific security level
+ * 
+ * Returns coordinated background and text colors optimized for readability
+ * and visual hierarchy in security level displays. Colors follow consistent
+ * semantic meaning across the application.
  *
  * @param level - Security level to get color for
- * @returns Object with background and text color
+ * @returns Object with background and text color hex codes
+ * 
+ * @example
+ * ```typescript
+ * const colors = getSecurityLevelColorPair('High');
+ * console.log(colors.bg);   // "#fff8e1" (light amber background)
+ * console.log(colors.text); // "#ff8f00" (amber text)
+ * 
+ * // Usage in component
+ * <div style={{ 
+ *   backgroundColor: colors.bg,
+ *   color: colors.text 
+ * }}>
+ *   High Security Level
+ * </div>
+ * ```
  */
 export function getSecurityLevelColorPair(
   level: SecurityLevel

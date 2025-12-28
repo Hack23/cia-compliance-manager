@@ -1,11 +1,65 @@
 import { SecurityLevel } from "../types/cia";
 
 /**
+ * Implementation planning and guidance utilities for security controls
+ * 
+ * Provides human-readable implementation descriptions, validation levels,
+ * and uptime targets for different security levels across CIA components.
+ * Helps stakeholders understand practical implementation requirements.
+ * 
+ * @example
+ * ```typescript
+ * import { 
+ *   getImplementationDescription,
+ *   getIntegrityValidationLevel,
+ *   getAvailabilityUptimeTarget
+ * } from './implementationUtils';
+ * 
+ * // Get implementation guidance
+ * const desc = getImplementationDescription('confidentiality', 'High');
+ * // 'Comprehensive encryption and access controls'
+ * 
+ * // Get validation level
+ * const validation = getIntegrityValidationLevel('High');
+ * // 'Strongly Validated'
+ * 
+ * // Get uptime target
+ * const uptime = getAvailabilityUptimeTarget('Very High');
+ * // '99.99%'
+ * ```
+ */
+
+/**
  * Gets implementation description for a CIA component at a specific security level
+ * 
+ * Provides actionable implementation guidance tailored to each security level
+ * and CIA component. Helps teams understand what controls to implement.
  *
  * @param component - The CIA component (confidentiality, integrity, availability)
  * @param level - The security level
  * @returns Human-readable implementation description
+ * 
+ * @example
+ * ```typescript
+ * // Confidentiality implementations
+ * getImplementationDescription('confidentiality', 'None')
+ * // 'No data protection controls needed'
+ * 
+ * getImplementationDescription('confidentiality', 'High')
+ * // 'Comprehensive encryption and access controls'
+ * 
+ * // Integrity implementations
+ * getImplementationDescription('integrity', 'Moderate')
+ * // 'Data validation and cryptographic checksums'
+ * 
+ * // Availability implementations
+ * getImplementationDescription('availability', 'Very High')
+ * // 'Multi-site redundancy and continuous availability'
+ * 
+ * // Usage in widget display
+ * const description = getImplementationDescription(component, selectedLevel);
+ * <ImplementationGuide description={description} />
+ * ```
  */
 export function getImplementationDescription(
   component: "confidentiality" | "integrity" | "availability",

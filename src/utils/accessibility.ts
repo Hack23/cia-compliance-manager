@@ -45,9 +45,32 @@ export const ARIA_LIVE = {
 /**
  * Create an accessible label for a security level
  * 
- * @param level - The security level
+ * Generates WCAG-compliant ARIA labels for security level selectors and displays,
+ * ensuring screen readers properly announce the component and its current level.
+ * 
+ * @param level - The security level (None, Low, Moderate, High, Very High)
  * @param component - The CIA component (availability, integrity, confidentiality)
- * @returns An accessible label string
+ * @returns An accessible label string formatted for screen readers
+ * 
+ * @example
+ * ```typescript
+ * // Availability level label
+ * getSecurityLevelAriaLabel('High', 'availability')
+ * // 'Availability security level: High'
+ * 
+ * // Integrity level label
+ * getSecurityLevelAriaLabel('Moderate', 'integrity')
+ * // 'Integrity security level: Moderate'
+ * 
+ * // Confidentiality level label
+ * getSecurityLevelAriaLabel('Very High', 'confidentiality')
+ * // 'Confidentiality security level: Very High'
+ * 
+ * // Usage in component
+ * <select aria-label={getSecurityLevelAriaLabel(level, 'availability')}>
+ *   {levels.map(l => <option key={l} value={l}>{l}</option>)}
+ * </select>
+ * ```
  */
 export function getSecurityLevelAriaLabel(
   level: SecurityLevel,
@@ -60,9 +83,38 @@ export function getSecurityLevelAriaLabel(
 /**
  * Create an accessible description for a widget
  * 
- * @param widgetType - Type of widget
- * @param description - Widget description
+ * Generates descriptive ARIA descriptions for widgets to provide context
+ * to screen reader users about the widget's purpose and content.
+ * 
+ * @param widgetType - Type of widget (e.g., 'Security Metrics', 'Risk Analysis')
+ * @param description - Optional additional description
  * @returns An accessible description string
+ * 
+ * @example
+ * ```typescript
+ * // Without additional description
+ * getWidgetAriaDescription('Security Metrics')
+ * // 'Security Metrics widget'
+ * 
+ * // With additional description
+ * getWidgetAriaDescription('Risk Analysis', 'Shows current risk levels')
+ * // 'Risk Analysis widget. Shows current risk levels'
+ * 
+ * getWidgetAriaDescription('Cost Estimation', 'CAPEX and OPEX breakdown')
+ * // 'Cost Estimation widget. CAPEX and OPEX breakdown'
+ * 
+ * // Usage in component
+ * <div 
+ *   role="region"
+ *   aria-label={widgetTitle}
+ *   aria-describedby="widget-desc"
+ * >
+ *   <span id="widget-desc" className="sr-only">
+ *     {getWidgetAriaDescription(widgetType, description)}
+ *   </span>
+ *   {widgetContent}
+ * </div>
+ * ```
  */
 export function getWidgetAriaDescription(
   widgetType: string,
@@ -77,10 +129,50 @@ export function getWidgetAriaDescription(
 /**
  * Generate ARIA props for a tab component
  * 
- * @param id - Tab identifier
- * @param isSelected - Whether the tab is currently selected
- * @param controls - ID of the panel this tab controls
- * @returns ARIA props object
+ * Creates a complete set of ARIA properties for tab controls following
+ * WAI-ARIA Authoring Practices for tab patterns. Ensures proper keyboard
+ * navigation and screen reader announcements.
+ * 
+ * @param id - Unique tab identifier
+ * @param isSelected - Whether the tab is currently selected/active
+ * @param controls - ID of the tabpanel this tab controls
+ * @returns ARIA props object with role, selection state, controls reference, and keyboard focus
+ * 
+ * @example
+ * ```typescript
+ * // Selected tab
+ * const selectedTabProps = getTabAriaProps('tab-security', true, 'panel-security');
+ * // {
+ * //   role: 'tab',
+ * //   'aria-selected': true,
+ * //   'aria-controls': 'panel-security',
+ * //   id: 'tab-security',
+ * //   tabIndex: 0
+ * // }
+ * 
+ * // Unselected tab
+ * const unselectedTabProps = getTabAriaProps('tab-compliance', false, 'panel-compliance');
+ * // {
+ * //   role: 'tab',
+ * //   'aria-selected': false,
+ * //   'aria-controls': 'panel-compliance',
+ * //   id: 'tab-compliance',
+ * //   tabIndex: -1
+ * // }
+ * 
+ * // Usage in component
+ * <div role="tablist">
+ *   {tabs.map(tab => (
+ *     <button
+ *       key={tab.id}
+ *       {...getTabAriaProps(tab.id, tab.id === selectedTab, `panel-${tab.id}`)}
+ *       onClick={() => selectTab(tab.id)}
+ *     >
+ *       {tab.label}
+ *     </button>
+ *   ))}
+ * </div>
+ * ```
  */
 export function getTabAriaProps(
   id: string,
