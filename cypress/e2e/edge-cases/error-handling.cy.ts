@@ -305,9 +305,7 @@ describe("Error Handling and Edge Cases", () => {
       cy.verifyMinimumWidgets(5);
 
       // All widgets should be visible and responding to the same state
-      cy.get('[data-testid*="widget"]').each(($widget) => {
-        cy.wrap($widget).should("be.visible");
-      });
+      cy.get('[data-testid*="widget"]').should("be.visible");
 
       cy.log("✅ State consistency validated across all widgets");
     });
