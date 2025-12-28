@@ -768,6 +768,17 @@ declare global {
        * @param selector Optional CSS selector to capture specific content (defaults to body)
        */
       captureHtml(name: string, selector?: string): Chainable<void>;
+
+      /**
+       * Verify minimum number of widgets are present
+       * @param count Minimum number of widgets expected
+       */
+      verifyMinimumWidgets(count: number): Chainable<void>;
     }
   }
 }
+
+// Add the verifyMinimumWidgets command implementation
+Cypress.Commands.add("verifyMinimumWidgets", (count: number) => {
+  cy.get('[data-testid*="widget"]').should("have.length.at.least", count);
+});
