@@ -8,6 +8,10 @@ import { CIA_COMPONENT_ICONS } from "../../../constants/uiConstants";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { CIADetails } from "../../../types/cia-services";
+import { 
+  getWidgetAriaDescription,
+  announceToScreenReader 
+} from "../../../utils/accessibility";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -163,6 +167,8 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       const newLevel = event.target.value as SecurityLevel;
       if (onAvailabilityChange) onAvailabilityChange(newLevel);
       setLastChangedComponent("availability");
+      // Announce change to screen readers
+      announceToScreenReader(`Availability security level changed to ${newLevel}`, 'polite');
     },
     [onAvailabilityChange]
   );
@@ -172,6 +178,8 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       const newLevel = event.target.value as SecurityLevel;
       if (onIntegrityChange) onIntegrityChange(newLevel);
       setLastChangedComponent("integrity");
+      // Announce change to screen readers
+      announceToScreenReader(`Integrity security level changed to ${newLevel}`, 'polite');
     },
     [onIntegrityChange]
   );
@@ -181,6 +189,8 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       const newLevel = event.target.value as SecurityLevel;
       if (onConfidentialityChange) onConfidentialityChange(newLevel);
       setLastChangedComponent("confidentiality");
+      // Announce change to screen readers
+      announceToScreenReader(`Confidentiality security level changed to ${newLevel}`, 'polite');
     },
     [onConfidentialityChange]
   );
@@ -251,9 +261,16 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         className={className}
         testId={testId}
       >
-      <div className="p-4">
-        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
-          <p className="text-sm">
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
+        aria-label={getWidgetAriaDescription(
+          "Security Level Configuration",
+          "Configure security levels for each CIA component to set your organization's security posture"
+        )}
+      >
+        <div className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md">
+          <p className="text-body">
             Configure security levels for each CIA component to set your
             organization's security posture. Higher levels provide stronger
             protection but may require more resources to implement.
@@ -262,9 +279,9 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
         {/* Display error message if there's an error */}
         {(error || serviceError) && (
-          <div className="p-3 mb-4 bg-red-100 dark:bg-red-900 dark:bg-opacity-20 text-red-800 dark:text-red-200 rounded-lg">
+          <div className="p-md mb-md bg-error-light/10 dark:bg-error-dark/20 text-error-dark dark:text-error-light rounded-md">
             <h4 className="font-medium">Error</h4>
-            <p className="text-sm">
+            <p className="text-body">
               Unable to load component details. Please try again later.
             </p>
           </div>
@@ -272,30 +289,30 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
         {/* Display loading state */}
         {isLoading && (
-          <div className="p-3 mb-4 bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20 text-blue-800 dark:text-blue-200 rounded-lg">
-            <p className="text-sm">Loading security level details...</p>
+          <div className="p-md mb-md bg-info-light/10 dark:bg-info-dark/20 text-info-dark dark:text-info-light rounded-md">
+            <p className="text-body">Loading security level details...</p>
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-lg">
           {/* Security level selectors */}
           <div>
-            <h3 className="text-lg font-medium mb-4">
+            <h3 className="text-heading font-medium mb-md">
               Configure Security Levels
             </h3>
 
-            <div className="space-y-4">
+            <div className="space-y-md">
               {/* Confidentiality selector */}
               <div
-                className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md border border-neutral-light dark:border-neutral-dark"
                 data-testid="security-level-confidentiality"
               >
-                <div className="flex justify-between items-center mb-2">
+                <div className="flex justify-between items-center mb-sm">
                   <label
                     htmlFor="confidentiality-select"
-                    className="text-sm font-medium flex items-center"
+                    className="text-body font-medium flex items-center"
                   >
-                    <span className="text-purple-500 dark:text-purple-400 mr-2">
+                    <span className="text-purple-500 dark:text-purple-400 mr-sm">
                       {CIA_COMPONENT_ICONS.confidentiality}
                     </span>
                     Confidentiality

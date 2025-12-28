@@ -8,6 +8,7 @@ import { formatCurrency } from "../../../utils/formatUtils";
 import { getImplementationComplexity } from "../../../utils/riskUtils";
 import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
 import { isArray, isNullish, isString } from "../../../utils/typeGuards";
+import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -216,68 +217,91 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         isLoading={isLoading}
         error={serviceError}
       >
-      <div className="p-4">
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
+        aria-label={getWidgetAriaDescription(
+          "Cost Estimation",
+          "Cost estimates for implementing and maintaining security controls"
+        )}
+      >
         {/* Introduction */}
-        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
-          <p className="text-sm">
+        <section 
+          className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md"
+          aria-labelledby="cost-intro-heading"
+        >
+          <p id="cost-intro-heading" className="text-body">
             This widget provides cost estimates for implementing and maintaining
             security controls based on your selected security levels across the
             CIA triad.
           </p>
-        </div>
+        </section>
 
         {/* Summary cost section - using direct JSX instead of InfoCard */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center mb-2">
-              <span className="mr-2 text-blue-500">💼</span>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+        <section 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md mb-lg"
+          aria-labelledby="cost-summary-heading"
+        >
+          <h3 id="cost-summary-heading" className="sr-only">Cost Summary</h3>
+          <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
+            <div className="flex items-center mb-sm">
+              <span className="mr-sm text-info" aria-hidden="true">💼</span>
+              <div className="text-body text-neutral dark:text-neutral-light">
                 Implementation Cost
               </div>
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400">
+            <div 
+              className="text-title font-bold text-info dark:text-info-light"
+              aria-label={`Implementation cost: ${formatCurrency(totalCapex)}`}
+            >
               {formatCurrency(totalCapex)}
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-500">
+            <div className="text-caption text-neutral dark:text-neutral-light">
               One-time capital expenditure
             </div>
           </div>
 
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center mb-2">
-              <span className="mr-2 text-green-500">🔄</span>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+          <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
+            <div className="flex items-center mb-sm">
+              <span className="mr-sm text-success" aria-hidden="true">🔄</span>
+              <div className="text-body text-neutral dark:text-neutral-light">
                 Annual Operations
               </div>
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-green-600 dark:text-green-400">
+            <div 
+              className="text-title font-bold text-success dark:text-success-light"
+              aria-label={`Annual operations cost: ${formatCurrency(totalOpex)}`}
+            >
               {formatCurrency(totalOpex)}
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-500">
+            <div className="text-caption text-neutral dark:text-neutral-light">
               Yearly operational expenses
             </div>
           </div>
 
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center mb-2">
-              <span className="mr-2 text-purple-500">💲</span>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+          <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
+            <div className="flex items-center mb-sm">
+              <span className="mr-sm text-primary" aria-hidden="true">💲</span>
+              <div className="text-body text-neutral dark:text-neutral-light">
                 Total First Year Cost
               </div>
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-purple-600 dark:text-purple-400">
+            <div 
+              className="text-title font-bold text-primary-dark dark:text-primary-light"
+              aria-label={`Total first year cost: ${formatCurrency(totalCost)}`}
+            >
               {formatCurrency(totalCost)}
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-500">
+            <div className="text-caption text-neutral dark:text-neutral-light">
               Implementation + first year operations
             </div>
           </div>
-        </div>
+        </section>
 
         {/* CAPEX vs OPEX ratio visualization */}
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-3">Cost Breakdown</h3>
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+        <div className="mb-lg">
+          <h3 className="text-heading font-medium mb-md">Cost Breakdown</h3>
+          <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
             <div className="flex justify-between items-center mb-1">
               <div className="text-sm font-medium">CAPEX</div>
               <div className="text-sm font-medium">OPEX</div>
@@ -307,12 +331,12 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
               Implementation Complexity
             </h4>
             <div className="mb-3">
-              <div className="text-lg font-bold text-purple-600 dark:text-purple-400">
+              <div className="text-lg font-bold text-primary-dark dark:text-primary-light">
                 {implementationComplexity}
               </div>
               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mt-2">
                 <div
-                  className="h-2.5 bg-purple-500 dark:bg-purple-600 rounded-full"
+                  className="h-2.5 bg-primary dark:bg-primary-light rounded-full"
                   style={{ width: `${complexityPercentage}%` }}
                 ></div>
               </div>
@@ -361,26 +385,26 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           </h3>
           <div className="grid grid-cols-1 gap-3">
             {/* Using SecurityLevelBadge component for consistency with other widgets */}
-            <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg">
+            <div className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md">
               <div className="flex justify-between items-center mb-2">
-                <div className="font-medium text-purple-800 dark:text-purple-300 flex items-center">
+                <div className="font-medium text-primary-dark dark:text-primary-light flex items-center">
                   <span className="mr-2">🔒</span>Confidentiality
                 </div>
                 <SecurityLevelBadge
                   category=""
                   level={confidentialityLevel}
-                  colorClass="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
-                  textClass="text-purple-800 dark:text-purple-300"
+                  colorClass="bg-primary-light/20 dark:bg-primary-dark/20"
+                  textClass="text-primary-dark dark:text-primary-light"
                   testId={`${testId}-conf-level`}
                 />
               </div>
               <div className="flex justify-between items-center">
-                <div className="text-md font-bold text-purple-600 dark:text-purple-400">
+                <div className="text-md font-bold text-primary-dark dark:text-primary-light">
                   {formatCurrency(
                     confidentialityCost.capex + confidentialityCost.opex
                   )}
                 </div>
-                <div className="text-sm bg-purple-100 dark:bg-purple-900 dark:bg-opacity-30 px-2 py-1 rounded">
+                <div className="text-sm bg-primary-light/20 dark:bg-primary-dark/30 px-2 py-1 rounded">
                   {costBreakdown.confidentiality}% of total
                 </div>
               </div>

@@ -10,6 +10,7 @@ import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import type { IntegrityImpactWidgetProps } from "../../../types/widget-props";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
+import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -84,9 +85,22 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
         isLoading={isLoading}
         error={error}
       >
-      <div className="p-4">
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
+        aria-label={getWidgetAriaDescription(
+          "Integrity Impact Analysis",
+          "Business impact of integrity controls including data accuracy and validation mechanisms"
+        )}
+      >
         {/* Security level indicator */}
-        <div className="mb-4">
+        <section 
+          className="mb-4"
+          aria-labelledby="integrity-level-heading"
+        >
+          <h3 id="integrity-level-heading" className="sr-only">
+            Current Integrity Security Level
+          </h3>
           <SecurityLevelBadge
             category="Integrity"
             level={effectiveLevel}
@@ -95,7 +109,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
             textClass="text-green-800 dark:text-green-300"
             testId={`${testId}-integrity-badge`}
           />
-        </div>
+        </section>
 
         {/* Business impact */}
         {businessImpact && (
@@ -120,7 +134,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
             Data Integrity Metrics
           </h3>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
+            <div className="p-sm bg-white dark:bg-gray-800 rounded-md">
               <div className="text-sm font-medium mb-1">
                 Data Validation Controls:
               </div>
@@ -128,7 +142,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
                 {validationLevel}
               </div>
             </div>
-            <div className="p-2 bg-white dark:bg-gray-800 rounded-lg">
+            <div className="p-sm bg-white dark:bg-gray-800 rounded-md">
               <div className="text-sm font-medium mb-1">
                 Acceptable Error Rate:
               </div>

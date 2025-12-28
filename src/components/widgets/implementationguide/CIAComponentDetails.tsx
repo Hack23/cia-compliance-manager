@@ -190,7 +190,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </div>
 
         {/* Implementation requirements card */}
-        <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+        <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
           <h4
             className="text-md font-medium mb-3"
             data-testid="implementation-header"
@@ -215,7 +215,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         {/* Technologies card */}
-        <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+        <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
           <h4 className="text-md font-medium flex items-center mb-3">
             <span className={`mr-2 ${theme.accentClass}`}>💻</span>Technologies
           </h4>
@@ -229,7 +229,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </div>
 
         {/* Configurations card */}
-        <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+        <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
           <h4 className="text-md font-medium flex items-center mb-3">
             <span className={`mr-2 ${theme.accentClass}`}>⚙️</span>
             Configurations

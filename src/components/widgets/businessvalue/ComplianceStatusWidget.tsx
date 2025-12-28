@@ -7,6 +7,7 @@ import { CIAComponent, SecurityLevel } from "../../../types/cia";
 import { StatusType } from "../../../types/common/StatusTypes";
 import { ComplianceStatusDetails } from "../../../types/compliance";
 import { isNullish } from "../../../utils/typeGuards";
+import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import StatusBadge from "../../common/StatusBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -316,28 +317,43 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         isLoading={isLoading}
         error={serviceError}
       >
-      <div className="p-4">
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
+        aria-label={getWidgetAriaDescription(
+          "Compliance Status",
+          "Status of compliance with regulatory frameworks and industry standards"
+        )}
+      >
         {/* Add high-level description */}
-        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
-          <p className="text-sm">
+        <section 
+          className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md"
+          aria-labelledby="compliance-description-heading"
+        >
+          <p id="compliance-description-heading" className="text-body">
             This widget shows your compliance status with various regulatory
             frameworks and industry standards based on your selected security
             levels.
           </p>
-        </div>
+        </section>
 
         {/* Overall Compliance Status */}
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-2">
+        <section 
+          className="mb-lg"
+          aria-labelledby="overall-compliance-heading"
+        >
+          <h3 id="overall-compliance-heading" className="text-heading font-medium mb-sm">
             Overall Compliance Status
           </h3>
           <div
-            className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+            className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md border border-neutral-light dark:border-neutral-dark"
             data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_SUMMARY}
+            role="group"
+            aria-label="Compliance status summary"
           >
             <div className="flex justify-between items-center">
               <div className="flex items-center">
-                <span className="text-2xl mr-2 text-blue-500">
+                <span className="text-title mr-sm text-info" aria-hidden="true">
                   {SECURITY_ICONS.compliance || "📋"}
                 </span>
                 <span className="font-medium">Compliance Status</span>
@@ -351,25 +367,38 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
             </div>
 
             {complianceStatus && (
-              <div className="mt-3">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="mt-md">
+                <div className="flex justify-between items-center mb-sm">
+                  <span 
+                    className="text-body text-neutral dark:text-neutral-light"
+                    id="compliance-score-label"
+                  >
                     Compliance Score
                   </span>
                   <span
                     className="font-bold"
                     data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_SCORE}
+                    aria-labelledby="compliance-score-label"
+                    role="status"
+                    aria-live="polite"
                   >
                     {complianceStatus.complianceScore ?? 0}%
                   </span>
                 </div>
                 <div className="relative pt-1">
-                  <div className="overflow-hidden h-2 mb-2 text-xs flex rounded bg-blue-200 dark:bg-blue-900">
+                  <div 
+                    className="overflow-hidden h-2 mb-sm text-xs flex rounded bg-info-light/20 dark:bg-info-dark"
+                    role="progressbar"
+                    aria-valuenow={complianceStatus.complianceScore ?? 0}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label={`Compliance score: ${complianceStatus.complianceScore ?? 0} percent`}
+                  >
                     <div
                       style={{
                         width: `${complianceStatus.complianceScore ?? 0}%`,
                       }}
-                      className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500 dark:bg-blue-600"
+                      className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-info dark:bg-info-light"
                       data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_SCORE_BAR}
                     ></div>
                   </div>
@@ -377,24 +406,24 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
               </div>
             )}
           </div>
-        </div>
+        </section>
 
         {/* Compliant Frameworks */}
         {complianceStatus &&
           complianceStatus.compliantFrameworks.length > 0 && (
-            <div className="mb-6">
-              <h3 className="text-lg font-medium mb-2">Compliant Frameworks</h3>
+            <div className="mb-lg">
+              <h3 className="text-heading font-medium mb-sm">Compliant Frameworks</h3>
               <div
-                className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-md"
                 data-testid={COMPLIANCE_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST}
               >
                 {complianceStatus.compliantFrameworks.map(
                   (framework, index) => (
                     <div
                       key={framework}
-                      className={`p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-200 dark:border-green-800 cursor-pointer ${
+                      className={`p-md bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light dark:border-success-dark cursor-pointer transition-all duration-normal ${
                         activeFramework === framework
-                          ? "ring-2 ring-green-500 dark:ring-green-400"
+                          ? "ring-2 ring-success dark:ring-success-light"
                           : ""
                       }`}
                       onClick={() => setActiveFramework(framework)}

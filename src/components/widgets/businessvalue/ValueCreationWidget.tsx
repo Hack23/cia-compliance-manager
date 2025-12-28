@@ -5,6 +5,7 @@ import { SecurityLevel } from "../../../types/cia";
 import { calculateROIEstimate } from "../../../utils/businessValueUtils";
 import { calculateBusinessImpactLevel } from "../../../utils/riskUtils";
 import { hasMethod, isNullish } from "../../../utils/typeGuards";
+import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -334,19 +335,31 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         isLoading={isLoading}
         error={error}
       >
-      <div className="p-4">
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
+        aria-label={getWidgetAriaDescription(
+          "Business Value Creation",
+          "Business value and return on investment created by security investments"
+        )}
+      >
         {/* Overview section */}
-        <div className="mb-6">
-          <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4">
-            <p className="text-sm" data-testid="value-creation-summary">
+        <section 
+          className="mb-lg"
+          aria-labelledby="value-profile-heading"
+        >
+          <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md mb-md">
+            <p className="text-body" data-testid="value-creation-summary">
               {getBusinessValueSummary()}
             </p>
           </div>
 
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-medium">Overall Value Profile</h3>
+          <div className="flex justify-between items-center mb-md">
+            <h3 id="value-profile-heading" className="text-heading font-medium">
+              Overall Value Profile
+            </h3>
             <div className="flex items-center">
-              <span className="mr-2 text-sm text-gray-600 dark:text-gray-400">
+              <span className="mr-sm text-body text-neutral dark:text-neutral-light">
                 Security Level:
               </span>
               <SecurityLevelIndicator level={securityScoreAsLevel} size="md" />
@@ -354,19 +367,24 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           </div>
 
           {/* ROI estimate */}
-          <div className="p-4 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg mb-4">
+          <div 
+            className="p-md bg-success-light/10 dark:bg-success-dark/20 rounded-md mb-md"
+            role="region"
+            aria-labelledby="roi-heading"
+          >
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="font-medium text-green-700 dark:text-green-300">
+                <h4 id="roi-heading" className="font-medium text-success-dark dark:text-success-light">
                   Estimated Return on Investment
                 </h4>
-                <p className="text-sm text-green-600 dark:text-green-400 mt-1">
+                <p className="text-body text-success dark:text-success-light mt-1">
                   {roiEstimate.description}
                 </p>
               </div>
               <div
-                className="text-2xl font-bold text-green-600 dark:text-green-400"
+                className="text-title font-bold text-success dark:text-success-light"
                 data-testid="roi-value"
+                aria-label={`Return on investment: ${roiEstimate.value}`}
               >
                 {roiEstimate.value}
               </div>
@@ -375,48 +393,48 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
           {/* Business value metrics grid */}
           <div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md"
             data-testid="value-metrics-grid"
           >
             {valueMetrics.map((metric, index) => (
               <div
                 key={index}
-                className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md border border-neutral-light dark:border-neutral-dark"
                 data-testid={`value-metric-${index}`}
               >
-                <div className="flex items-center mb-2">
-                  <span className="text-xl mr-2 text-blue-500">
+                <div className="flex items-center mb-sm">
+                  <span className="text-title mr-sm text-info">
                     {metric.icon || "📈"}
                   </span>
                   <h4 className="font-medium">{metric.category}</h4>
                 </div>
-                <div className="text-lg font-bold text-blue-600 dark:text-blue-400 mb-1">
+                <div className="text-heading font-bold text-info dark:text-info-light mb-1">
                   {metric.value}
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-body text-neutral dark:text-neutral-light">
                   {metric.description}
                 </p>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Component-specific value sections */}
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-4">Component Business Value</h3>
+        <div className="mb-lg">
+          <h3 className="text-heading font-medium mb-md">Component Business Value</h3>
 
           {/* Confidentiality value */}
           <div
-            className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg"
+            className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md"
             data-testid="confidentiality-value-section"
           >
-            <div className="flex items-center mb-2">
-              <span className="text-xl mr-2">🔒</span>
+            <div className="flex items-center mb-sm">
+              <span className="text-title mr-sm">🔒</span>
               <h4 className="font-medium">
                 Confidentiality Value ({confidentialityLevel})
               </h4>
             </div>
-            <ul className="list-disc list-inside pl-2 text-sm text-gray-600 dark:text-gray-400">
+            <ul className="list-disc list-inside pl-2 text-body text-neutral dark:text-neutral-light">
               {getComponentValueStatements(
                 "confidentiality",
                 confidentialityLevel

@@ -14,6 +14,7 @@ import {
   getSecurityLevelValue,
   normalizeSecurityLevel,
 } from "../../../utils/securityLevelUtils";
+import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import RadarChart from "../../charts/RadarChart";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -137,7 +138,7 @@ const SecurityVisualizationWidget: React.FC<
     return (
       <div className="space-y-2 mt-4" data-testid="security-recommendations">
         {availabilityValue < 2 && (
-          <div className="p-2 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded">
+          <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded">
             <p className="text-sm">
               Consider improving availability controls to ensure business
               continuity.
@@ -145,7 +146,7 @@ const SecurityVisualizationWidget: React.FC<
           </div>
         )}
         {integrityValue < 3 && (
-          <div className="p-2 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded">
+          <div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded">
             <p className="text-sm">
               Enhance data validation mechanisms and change management to
               improve integrity.
@@ -153,7 +154,7 @@ const SecurityVisualizationWidget: React.FC<
           </div>
         )}
         {confidentialityValue < 2 && (
-          <div className="p-2 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
+          <div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md">
             <p className="text-sm">
               Strengthen access controls and data protection to improve
               confidentiality.
@@ -174,11 +175,25 @@ const SecurityVisualizationWidget: React.FC<
         isLoading={isLoading}
         error={error}
       >
-      <div className="p-4">
+      <div 
+        className="p-md sm:p-lg"
+        role="region"
+        aria-label={getWidgetAriaDescription(
+          "Security Visualization",
+          "Visual representation of security posture with CIA triad metrics, security score, and risk level"
+        )}
+      >
         {/* Security score section */}
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-3">Security Posture</h3>
-          <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+        <section 
+          className="mb-6"
+          aria-labelledby="security-posture-heading"
+        >
+          <h3 id="security-posture-heading" className="text-lg font-medium mb-3">Security Posture</h3>
+          <div 
+            className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md"
+            role="group"
+            aria-label="Security metrics"
+          >
             <div className="flex justify-between items-center mb-4">
               <div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -187,6 +202,7 @@ const SecurityVisualizationWidget: React.FC<
                 <div
                   className="text-3xl font-bold"
                   data-testid="security-score-value"
+                  aria-label={`Security score: ${securityScore} out of 100`}
                 >
                   {securityScore}
                 </div>
@@ -200,6 +216,8 @@ const SecurityVisualizationWidget: React.FC<
                     riskLevel
                   )}`}
                   data-testid="risk-level"
+                  role="status"
+                  aria-label={`Risk level: ${riskLevel}`}
                 >
                   {riskLevel}
                 </div>
@@ -207,7 +225,7 @@ const SecurityVisualizationWidget: React.FC<
             </div>
 
             {/* Score gauge */}
-            <div className="mb-2">
+            <div className="mb-2" aria-label="Security score visualization">
               <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
                 Security Level
               </div>
@@ -229,14 +247,14 @@ const SecurityVisualizationWidget: React.FC<
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* Security Radar Chart using existing component */}
         <div className="mb-6">
           <h3 className="text-lg font-medium mb-3">Security Components</h3>
 
           {/* Reuse the RadarChart component */}
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+          <div className="p-md bg-white dark:bg-gray-800 rounded-md border border-neutral-light dark:border-neutral-dark">
             <RadarChart
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
@@ -252,11 +270,11 @@ const SecurityVisualizationWidget: React.FC<
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Confidentiality component */}
             <div
-              className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg"
+              className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md"
               data-testid="confidentiality-component"
             >
               <div className="flex items-center justify-between mb-2">
-                <div className="text-md font-medium text-purple-800 dark:text-purple-300">
+                <div className="text-md font-medium text-primary-dark dark:text-primary-light">
                   Confidentiality
                 </div>
                 <SecurityLevelIndicator
@@ -266,7 +284,7 @@ const SecurityVisualizationWidget: React.FC<
               </div>
               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
                 <div
-                  className="bg-purple-500 h-1.5 rounded-full"
+                  className="bg-primary h-1.5 rounded-full"
                   style={{
                     width: `${
                       (getSecurityLevelValue(confidentialityLevel) / 4) * 100
