@@ -2330,7 +2330,7 @@ button[role="tab"] {
   font-weight: 500;
   font-size: 0.875rem; /* 14px */
   border-bottom: 2px solid transparent;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease, border-bottom-color 0.2s ease;
   cursor: pointer;
   background: transparent;
 }
@@ -2340,11 +2340,6 @@ button[role="tab"] {
 button[role="tab"]:hover {
   background-color: var(--primary-bg-hover);
   transform: translateY(-1px);
-}
-
-.dark .widget-tab:hover,
-.dark button[role="tab"]:hover {
-  background-color: var(--primary-bg-hover);
 }
 
 /* Active/Selected tab state - Light theme - using aria-selected for semantics */
@@ -2401,7 +2396,7 @@ button[role="tab"]:not([aria-selected="true"]) {
 /* Pulse animation for security status indicator */
 /* Note: Uses rgba(var(--primary-color-rgb), opacity) pattern */
 /* Requires --primary-color-rgb to be defined as comma-separated RGB values (e.g., "0, 102, 204") */
-/* This pattern is supported in all modern browsers (Chrome 49+, Firefox 31+, Safari 9.1+) */
+/* This pattern is supported in all actively maintained modern browsers */
 .pulse-dot {
   animation: pulse 2s infinite;
 }
