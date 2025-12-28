@@ -321,8 +321,11 @@ describe("Error Handling and Edge Cases", () => {
       cy.get("select").eq(1).should("have.value", SECURITY_LEVELS.HIGH);
       cy.get("select").eq(2).should("have.value", SECURITY_LEVELS.MODERATE);
 
+      // Wait for widgets to be present and verify minimum count
+      cy.verifyMinimumWidgets(5);
+
       // All widgets should be visible and responding to the same state
-      cy.get('[data-testid*="widget"]').each(($widget) => {
+      cy.get('[data-testid*="widget"]', { timeout: 10000 }).each(($widget) => {
         cy.wrap($widget).should("be.visible");
       });
 
