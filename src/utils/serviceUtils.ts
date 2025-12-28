@@ -5,6 +5,22 @@ import { CIADetails } from "../types/cia-services";
  * This helps satisfy type requirements when creating mock/empty objects
  *
  * @returns An empty CIADetails object
+ * 
+ * @example
+ * ```typescript
+ * // Create empty placeholder
+ * const empty = createEmptyCIADetails();
+ * 
+ * // Use as fallback in service
+ * const details = data?.details ?? createEmptyCIADetails();
+ * 
+ * // Initialize with partial data
+ * const details = {
+ *   ...createEmptyCIADetails(),
+ *   description: 'Custom description',
+ *   capex: 50000
+ * };
+ * ```
  */
 export function createEmptyCIADetails(): CIADetails {
   return {
