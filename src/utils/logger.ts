@@ -5,6 +5,27 @@
  *
  * Provides standardized logging across the application with different log levels.
  * Can be extended to support more advanced features like remote logging or log rotation.
+ *
+ * @example
+ * ```typescript
+ * import { logger } from './utils/logger';
+ *
+ * // Basic logging
+ * logger.info('Application started');
+ * 
+ * // Logging with context
+ * logger.warn('High memory usage', { memory: '85%', threshold: '80%' });
+ * 
+ * // Error logging
+ * try {
+ *   processData();
+ * } catch (error) {
+ *   logger.error('Data processing failed', error);
+ * }
+ * 
+ * // Debug logging (development only)
+ * logger.debug('Security calculation', { confidentiality: 'High', integrity: 'Moderate' });
+ * ```
  */
 
 // Define a prefix for all log messages
@@ -41,6 +62,18 @@ const logger: Logger = {
    * @param message - Message to log
    * @param context - Optional context object
    * @returns The logger instance for chaining
+   * 
+   * @example
+   * ```typescript
+   * // Simple debug message
+   * logger.debug('Rendering widget');
+   * 
+   * // Debug with context
+   * logger.debug('Service call', { 
+   *   endpoint: '/api/security', 
+   *   params: { level: 'High' } 
+   * });
+   * ```
    */
   debug(message: string, context?: unknown): typeof logger {
     if (context !== undefined) {

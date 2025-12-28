@@ -6,6 +6,24 @@ import { SecurityLevel } from "../types/cia";
  * @param component - The CIA component (confidentiality, integrity, availability)
  * @param level - The security level
  * @returns Human-readable compliance requirement description
+ * 
+ * @example
+ * ```typescript
+ * // Get compliance text for confidentiality
+ * const confText = getComplianceRequirementText('confidentiality', 'High');
+ * console.log(confText); // "Meets stringent compliance standards"
+ * 
+ * // Check availability compliance
+ * const availText = getComplianceRequirementText('availability', 'Moderate');
+ * console.log(availText); // "Satisfies most compliance needs"
+ * 
+ * // Display in compliance report
+ * const components = ['confidentiality', 'integrity', 'availability'] as const;
+ * components.forEach(comp => {
+ *   const requirement = getComplianceRequirementText(comp, 'High');
+ *   console.log(`${comp}: ${requirement}`);
+ * });
+ * ```
  */
 export function getComplianceRequirementText(
   component: "confidentiality" | "integrity" | "availability",

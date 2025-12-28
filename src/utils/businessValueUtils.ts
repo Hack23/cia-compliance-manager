@@ -24,10 +24,23 @@ export interface ImplementationTimeline {
 
 /**
  * Calculates ROI estimate based on security levels
+ * 
  * @param availabilityLevel - Availability security level
  * @param integrityLevel - Integrity security level
  * @param confidentialityLevel - Confidentiality security level
  * @returns ROI estimate object with value and description
+ * 
+ * @example
+ * ```typescript
+ * // Calculate ROI for high security configuration
+ * const roi = calculateROIEstimate('High', 'High', 'Moderate');
+ * console.log(`ROI: ${roi.value}, ${roi.description}`);
+ * // Output: ROI: 150-250%, Significant risk reduction
+ * 
+ * // Calculate ROI for moderate security
+ * const moderateROI = calculateROIEstimate('Moderate', 'Moderate', 'Low');
+ * console.log(moderateROI.value); // "100-150%"
+ * ```
  */
 export function calculateROIEstimate(
   availabilityLevel: SecurityLevel,

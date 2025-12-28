@@ -15,9 +15,26 @@ import { SecurityLevel } from "../types/cia";
 
 /**
  * Converts a string to title case
+ * 
+ * Transforms strings by capitalizing the first letter of each word and
+ * lowercasing the rest. Useful for formatting security level names,
+ * component labels, and user-facing text.
  *
  * @param str - The string to convert to title case
  * @returns The title-cased string
+ * 
+ * @example
+ * ```typescript
+ * toTitleCase('hello world')           // 'Hello World'
+ * toTitleCase('SECURITY LEVEL')        // 'Security Level'
+ * toTitleCase('confidentiality')       // 'Confidentiality'
+ * toTitleCase('risk-based approach')   // 'Risk-Based Approach'
+ * toTitleCase('multi-factor authentication') // 'Multi-Factor Authentication'
+ * 
+ * // Usage in display
+ * const displayName = toTitleCase(component);
+ * <h2>{displayName} Analysis</h2>
+ * ```
  */
 export function toTitleCase(str: string): string {
   return str.replace(

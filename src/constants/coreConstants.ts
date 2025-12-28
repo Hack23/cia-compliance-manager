@@ -1,6 +1,49 @@
+/**
+ * Core constants for CIA Compliance Manager
+ * 
+ * This module provides centralized constants for icons, labels, colors,
+ * and titles used throughout the application. These constants ensure
+ * consistency across all widgets and components.
+ * 
+ * @module coreConstants
+ * 
+ * @example
+ * ```typescript
+ * import { WIDGET_ICONS, CIA_LABELS, SECURITY_LEVELS } from './constants/coreConstants';
+ * 
+ * // Using widget icons
+ * const icon = WIDGET_ICONS.COMPLIANCE_STATUS; // "⚖️"
+ * 
+ * // Using CIA component labels
+ * const label = CIA_LABELS.AVAILABILITY; // "Availability"
+ * 
+ * // Using security levels
+ * const level = SECURITY_LEVELS.HIGH; // "High"
+ * ```
+ */
+
 import { SecurityLevel } from "../types/cia"; // Remove unused CIAOptions import
 
-// Widget Icons - For consistent icon use across the application
+/**
+ * Widget icon constants for consistent icon use across the application.
+ * 
+ * Each widget has a unique emoji icon that visually represents its purpose
+ * in the dashboard. These icons improve user recognition and navigation.
+ * 
+ * @example
+ * ```typescript
+ * // In widget header
+ * <h2>
+ *   {WIDGET_ICONS.SECURITY_SUMMARY} Security Summary
+ * </h2>
+ * 
+ * // In navigation menu
+ * const menuItems = [
+ *   { icon: WIDGET_ICONS.COMPLIANCE_STATUS, label: 'Compliance' },
+ *   { icon: WIDGET_ICONS.COST_ESTIMATION, label: 'Cost Analysis' }
+ * ];
+ * ```
+ */
 export const WIDGET_ICONS = {
   SECURITY_LEVEL: "🛡️",
   SECURITY_SUMMARY: "🔐",
@@ -18,20 +61,71 @@ export const WIDGET_ICONS = {
   TECHNICAL_DETAILS: "⚙️",
 };
 
-// CIA Component Icons and Labels
+/**
+ * CIA component icon constants.
+ * 
+ * Icons representing the three pillars of the CIA triad: Confidentiality,
+ * Integrity, and Availability. Used in component-specific widgets and
+ * visualizations to provide visual consistency.
+ * 
+ * @example
+ * ```typescript
+ * // Display CIA component with its icon
+ * const component = 'availability';
+ * const icon = CIA_COMPONENT_ICONS.AVAILABILITY; // "⏱️"
+ * 
+ * return <div>{icon} {CIA_LABELS.AVAILABILITY}</div>;
+ * // Renders: "⏱️ Availability"
+ * ```
+ */
 export const CIA_COMPONENT_ICONS = {
   AVAILABILITY: "⏱️",
   INTEGRITY: "✓",
   CONFIDENTIALITY: "🔒",
 };
 
+/**
+ * CIA component label constants for consistent terminology.
+ * 
+ * Standard display labels for CIA triad components. Use these labels
+ * throughout the UI to ensure consistent terminology and improve
+ * user recognition.
+ * 
+ * @example
+ * ```typescript
+ * // In select dropdown
+ * const options = [
+ *   { value: 'availability', label: CIA_LABELS.AVAILABILITY },
+ *   { value: 'integrity', label: CIA_LABELS.INTEGRITY },
+ *   { value: 'confidentiality', label: CIA_LABELS.CONFIDENTIALITY }
+ * ];
+ * ```
+ */
 export const CIA_LABELS = {
   AVAILABILITY: "Availability",
   INTEGRITY: "Integrity",
   CONFIDENTIALITY: "Confidentiality",
 };
 
-// Security level color scheme
+/**
+ * Security level color scheme mapping.
+ * 
+ * Color palette for representing security levels visually. Colors progress
+ * from red (None) through orange/yellow (Low/Moderate) to green/blue
+ * (High/Very High), providing intuitive visual feedback on security posture.
+ * 
+ * @example
+ * ```typescript
+ * // Apply color based on security level
+ * const level = 'High';
+ * const color = SECURITY_LEVEL_COLORS.HIGH; // "#2ecc71" (green)
+ * 
+ * // In styled component
+ * <Badge style={{ backgroundColor: color }}>
+ *   {level}
+ * </Badge>
+ * ```
+ */
 export const SECURITY_LEVEL_COLORS = {
   NONE: "#e74c3c", // Red
   LOW: "#f39c12", // Orange
@@ -40,7 +134,24 @@ export const SECURITY_LEVEL_COLORS = {
   VERY_HIGH: "#3498db", // Blue
 };
 
-// Security Levels
+/**
+ * Security level enumeration constants.
+ * 
+ * Maps friendly constant names to SecurityLevel type values. Use these
+ * constants when working with security levels to avoid string literals
+ * and improve type safety.
+ * 
+ * @example
+ * ```typescript
+ * // Compare security level
+ * if (currentLevel === SECURITY_LEVELS.HIGH) {
+ *   console.log('High security configured');
+ * }
+ * 
+ * // Set default level
+ * const [level, setLevel] = useState(SECURITY_LEVELS.MODERATE);
+ * ```
+ */
 export const SECURITY_LEVELS: Record<string, SecurityLevel> = {
   NONE: "None",
   LOW: "Low",
@@ -49,7 +160,25 @@ export const SECURITY_LEVELS: Record<string, SecurityLevel> = {
   VERY_HIGH: "Very High",
 };
 
-// Widget Titles
+/**
+ * Widget title constants for consistent naming.
+ * 
+ * Standard titles for all dashboard widgets. Using these constants ensures
+ * consistent naming across the application and simplifies localization
+ * efforts if needed in the future.
+ * 
+ * @example
+ * ```typescript
+ * // In widget header
+ * <WidgetHeader title={WIDGET_TITLES.COMPLIANCE_STATUS} />
+ * 
+ * // In navigation
+ * const widgets = [
+ *   { id: 'compliance', title: WIDGET_TITLES.COMPLIANCE_STATUS },
+ *   { id: 'cost', title: WIDGET_TITLES.COST_ESTIMATION }
+ * ];
+ * ```
+ */
 export const WIDGET_TITLES = {
   SECURITY_LEVEL: "Security Level Selection",
   SECURITY_SUMMARY: "Security Summary",
@@ -68,7 +197,32 @@ export const WIDGET_TITLES = {
   TECHNICAL_DETAILS: "Technical Details",
 };
 
-// Implementation details
+/**
+ * Implementation cost estimates by security level.
+ * 
+ * Provides rough estimates for development effort, ongoing maintenance,
+ * and required expertise for each security level. These estimates help
+ * stakeholders understand the resource requirements for implementing
+ * different security postures.
+ * 
+ * @example
+ * ```typescript
+ * // Display implementation requirements
+ * const level = 'High';
+ * const costs = IMPLEMENTATION_COSTS[level];
+ * 
+ * console.log(`Development: ${costs.developmentEffort}`); // "1-2 Months"
+ * console.log(`Maintenance: ${costs.maintenance}`);       // "Daily monitoring"
+ * console.log(`Expertise: ${costs.expertise}`);           // "Senior"
+ * 
+ * // In cost estimation widget
+ * <div>
+ *   <p>Development Effort: {costs.developmentEffort}</p>
+ *   <p>Maintenance: {costs.maintenance}</p>
+ *   <p>Required Expertise: {costs.expertise}</p>
+ * </div>
+ * ```
+ */
 export const IMPLEMENTATION_COSTS: Record<
   SecurityLevel,
   {

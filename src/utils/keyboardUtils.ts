@@ -1,7 +1,24 @@
 /**
  * Keyboard utilities for shortcut handling and platform detection
  * 
+ * This module provides cross-platform keyboard shortcut handling with proper
+ * platform detection (Mac vs. Windows/Linux) and key combination parsing.
+ * 
  * @module utils/keyboardUtils
+ * 
+ * @example
+ * ```typescript
+ * import { detectPlatform, getKeyCombination, formatKeyDisplay } from './keyboardUtils';
+ * 
+ * // Detect user's platform
+ * const platform = detectPlatform(); // 'mac' | 'windows' | 'linux' | 'unknown'
+ * 
+ * // Handle keyboard event
+ * document.addEventListener('keydown', (e) => {
+ *   const combo = getKeyCombination(e);
+ *   console.log('Pressed:', combo); // e.g., 'ctrl+shift+k'
+ * });
+ * ```
  */
 
 import { Platform } from '../types/keyboard';
@@ -45,6 +62,22 @@ export function resetPlatformCache(): void {
  * Result is cached for performance.
  * 
  * @returns The detected platform
+ * 
+ * @example
+ * ```typescript
+ * // Simple platform detection
+ * const platform = detectPlatform();
+ * 
+ * if (platform === 'mac') {
+ *   console.log('User is on macOS - show Cmd shortcuts');
+ * } else if (platform === 'windows') {
+ *   console.log('User is on Windows - show Ctrl shortcuts');
+ * }
+ * 
+ * // Use in keyboard shortcut display
+ * const modifier = platform === 'mac' ? '⌘' : 'Ctrl';
+ * const shortcutText = `${modifier}+K to search`;
+ * ```
  */
 export function detectPlatform(): Platform {
   // Return cached result if available
@@ -100,6 +133,21 @@ export function detectPlatform(): Platform {
  * Get platform modifier key (Cmd on Mac, Ctrl elsewhere)
  * 
  * @returns The platform-specific modifier key name
+ * 
+ * @example
+ * ```typescript
+ * // Get the right modifier for current platform
+ * const modifier = getPlatformModifier();
+ * 
+ * // Use in shortcut configuration
+ * const shortcuts = {
+ *   search: `${modifier}+k`,    // 'cmd+k' on Mac, 'ctrl+k' elsewhere
+ *   save: `${modifier}+s`,      // 'cmd+s' on Mac, 'ctrl+s' elsewhere
+ * };
+ * 
+ * // Display in UI
+ * const displayText = modifier === 'cmd' ? '⌘+K' : 'Ctrl+K';
+ * ```
  */
 export function getPlatformModifier(): 'cmd' | 'ctrl' {
   const platform = detectPlatform();
@@ -111,8 +159,34 @@ export function getPlatformModifier(): 'cmd' | 'ctrl' {
 /**
  * Get key combination string from keyboard event
  * 
+ * Converts KeyboardEvent to a normalized key combination string.
+ * Handles platform differences (Cmd vs. Ctrl) and special keys.
+ * 
  * @param event - The keyboard event
  * @returns Key combination string (e.g., 'ctrl+shift+k')
+ * 
+ * @example
+ * ```typescript
+ * // In event handler
+ * document.addEventListener('keydown', (event) => {
+ *   const combo = getKeyCombination(event);
+ *   
+ *   // Match against shortcuts
+ *   if (combo === 'ctrl+shift+k' || combo === 'cmd+shift+k') {
+ *     event.preventDefault();
+ *     openCommandPalette();
+ *   }
+ *   
+ *   // Log for debugging
+ *   console.log('Key combo:', combo);
+ *   // Examples: 'ctrl+s', 'cmd+k', 'shift+enter', 'escape'
+ * });
+ * 
+ * // Handle special keys
+ * // Space key: 'ctrl+space'
+ * // Escape key: 'escape'
+ * // Enter key: 'shift+enter'
+ * ```
  */
 export function getKeyCombination(event: KeyboardEvent): string {
   const parts: string[] = [];
