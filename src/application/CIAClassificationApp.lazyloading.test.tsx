@@ -46,19 +46,20 @@ describe("CIAClassificationApp Lazy Loading", () => {
   it("provides test IDs for LoadingSkeleton components", () => {
     renderWithProviders(<CIAClassificationApp />);
     
-    // Check that loading skeleton test IDs follow naming convention
-    const expectedTestIdPrefix = "widget-loading-";
+    // Check that loading skeleton test IDs follow naming convention (loading-* not widget-*)
+    const expectedTestIdPrefix = "loading-";
     const loadingElements = screen.queryAllByRole("status");
     
     // At least some loading skeletons should be present
     expect(loadingElements.length).toBeGreaterThan(0);
     
-    // Verify test IDs follow the pattern
+    // Verify test IDs follow the pattern (loading-* not widget-loading-*)
     loadingElements.forEach(element => {
       const testId = element.getAttribute("data-testid");
       if (testId && testId.startsWith(expectedTestIdPrefix)) {
-        // Valid loading skeleton test ID
-        expect(testId).toContain("widget-loading-");
+        // Valid loading skeleton test ID (should be loading-*, not widget-loading-*)
+        expect(testId).toContain("loading-");
+        expect(testId).not.toContain("widget-loading-");
       }
     });
   });

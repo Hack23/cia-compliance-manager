@@ -284,7 +284,7 @@ const CIAClassificationApp: React.FC = () => {
             {/* Business Impact Analysis Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Business Impact Analysis" onError={handleWidgetError}>
-                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="widget-loading-business-impact" />}>
+                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-business-impact" />}>
                   <BusinessImpactAnalysisWidget
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}
@@ -298,7 +298,7 @@ const CIAClassificationApp: React.FC = () => {
             {/* Security Summary Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Security Summary" onError={handleWidgetError}>
-                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="widget-loading-security-summary" />}>
+                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-security-summary" />}>
                   <SecuritySummaryWidget
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}
@@ -312,7 +312,7 @@ const CIAClassificationApp: React.FC = () => {
             {/* Value Creation Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Value Creation" onError={handleWidgetError}>
-                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="widget-loading-value-creation" />}>
+                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-value-creation" />}>
                   <ValueCreationWidget
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}
@@ -326,7 +326,7 @@ const CIAClassificationApp: React.FC = () => {
             {/* Cost Estimation Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Cost Estimation" onError={handleWidgetError}>
-                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="widget-loading-cost-estimation" />}>
+                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-cost-estimation" />}>
                   <CostEstimationWidget
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}
@@ -340,7 +340,7 @@ const CIAClassificationApp: React.FC = () => {
             {/* Compliance Status Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Compliance Status" onError={handleWidgetError}>
-                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="widget-loading-compliance-status" />}>
+                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-compliance-status" />}>
                   <ComplianceStatusWidget
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}
@@ -354,7 +354,7 @@ const CIAClassificationApp: React.FC = () => {
             {/* Confidentiality Impact Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Confidentiality Impact" onError={handleWidgetError}>
-                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="widget-loading-confidentiality-impact" />}>
+                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-confidentiality-impact" />}>
                   <ConfidentialityImpactWidget
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}
@@ -368,7 +368,7 @@ const CIAClassificationApp: React.FC = () => {
             {/* Integrity Impact Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Integrity Impact" onError={handleWidgetError}>
-                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="widget-loading-integrity-impact" />}>
+                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-integrity-impact" />}>
                   <IntegrityImpactWidget
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}
@@ -382,7 +382,7 @@ const CIAClassificationApp: React.FC = () => {
             {/* Availability Impact Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Availability Impact" onError={handleWidgetError}>
-                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="widget-loading-availability-impact" />}>
+                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-availability-impact" />}>
                   <AvailabilityImpactWidget
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}
@@ -396,7 +396,7 @@ const CIAClassificationApp: React.FC = () => {
             {/* Technical Details Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Technical Details" onError={handleWidgetError}>
-                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="widget-loading-technical-details" />}>
+                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-technical-details" />}>
                   <TechnicalDetailsWidget
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}
@@ -410,7 +410,7 @@ const CIAClassificationApp: React.FC = () => {
             {/* Security Visualization Widget - Lazy Loaded */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Security Visualization" onError={handleWidgetError}>
-                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="widget-loading-security-visualization" />}>
+                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-security-visualization" />}>
                   <SecurityVisualizationWidget
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}
@@ -424,7 +424,7 @@ const CIAClassificationApp: React.FC = () => {
             {/* Security Resources Widget */}
             <div className="grid-widget-container">
               <WidgetErrorBoundary widgetName="Security Resources" onError={handleWidgetError}>
-                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="widget-loading-security-resources" />}>
+                <Suspense fallback={<LoadingSkeleton lines={5} className="p-4" testId="loading-security-resources" />}>
                   <SecurityResourcesWidget
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}
