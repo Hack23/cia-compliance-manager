@@ -56,6 +56,23 @@ import { ShortcutMap } from "../types/keyboard";
 import logger from "../utils/logger";
 
 /**
+ * Reusable widget loading fallback component
+ * Provides accessible loading states for lazy-loaded widgets
+ */
+const WidgetLoader: React.FC<{ widgetName: string }> = ({ widgetName }) => (
+  <div 
+    className="widget-loading animate-pulse bg-gray-200 dark:bg-gray-700 p-4 rounded-lg min-h-[200px] flex items-center justify-center" 
+    role="status" 
+    aria-live="polite"
+    aria-label={`Loading ${widgetName}...`}
+  >
+    <div className="text-gray-500 dark:text-gray-400">
+      Loading {widgetName}...
+    </div>
+  </div>
+);
+
+/**
  * Main application component for CIA Classification
  *
  * ## Business Perspective
@@ -138,20 +155,6 @@ const CIAClassificationApp: React.FC = () => {
   const handleWidgetError = useCallback((error: Error, errorInfo: React.ErrorInfo) => {
     logger.error('Widget error caught by error boundary', { error, errorInfo });
   }, []);
-
-  // Reusable widget loading fallback component
-  const WidgetLoader: React.FC<{ widgetName: string }> = ({ widgetName }) => (
-    <div 
-      className="widget-loading animate-pulse bg-gray-200 dark:bg-gray-700 p-4 rounded-lg min-h-[200px] flex items-center justify-center" 
-      role="status" 
-      aria-live="polite"
-      aria-label={`Loading ${widgetName}...`}
-    >
-      <div className="text-gray-500 dark:text-gray-400">
-        Loading {widgetName}...
-      </div>
-    </div>
-  );
   
   // Register keyboard shortcuts
   const shortcuts: ShortcutMap = useMemo(() => ({

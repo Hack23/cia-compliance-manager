@@ -31,7 +31,7 @@
       {
         "resourceType": "script",
         "budget": 170,
-        "description": "Total JavaScript bundle (gzip) - includes initial + lazy loaded chunks"
+        "description": "Total JavaScript across all chunks (gzip) - target for v1.1.0 optimization"
       },
       {
         "resourceType": "image",
