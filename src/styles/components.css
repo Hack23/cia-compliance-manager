@@ -414,7 +414,7 @@ input:focus {
 
 /* Widget body with improved padding and scrolling behavior */
 .widget-body {
-  padding: 0.75rem; /* Consistent padding without !important */
+  padding: 0.5rem; /* Further reduced from 0.75rem for less empty space */
   flex: 1 1 auto;
   overflow-y: auto; /* Change to auto for better scrolling */
   overflow-x: hidden; /* Prevent horizontal scrolling */
@@ -436,7 +436,7 @@ input:focus {
 
 /* Widget content with consistent padding - adjust to compensate for smaller header */
 .widget-content {
-  padding: 0.35rem 0.5rem; /* Reduced padding */
+  padding: 0.25rem 0.5rem; /* Further reduced to minimize empty space */
   margin: 0.15rem 0;
   flex: 1;
   background-color: rgba(255, 255, 255, 0.02); /* Subtle background */
@@ -2277,6 +2277,125 @@ button.more-info:hover::before {
   button[role="tab"][aria-selected="true"]::after {
   width: 100%;
   background-color: var(--primary-color);
+}
+
+/* ========== IMPROVED TAB STYLING ========== */
+
+/* Fix SecuritySummaryWidget specific spacing issues */
+[data-testid="security-summary-widget"] .p-md,
+[data-testid="security-summary-widget"] [class*="p-md"] {
+  padding: 0.5rem !important; /* Override p-md to reduce empty space */
+}
+
+[data-testid="security-summary-widget"] .mb-md,
+[data-testid="security-summary-widget"] [class*="mb-md"] {
+  margin-bottom: 0.5rem !important; /* Reduce bottom margins */
+}
+
+[data-testid="security-summary-widget"] section.mb-md {
+  margin-bottom: 0.75rem !important; /* Slightly more space for banner */
+}
+
+/* Reduce tab navigation margin */
+[data-testid="security-summary-widget"] nav + * {
+  margin-top: 0.5rem !important;
+}
+
+/* Universal tab styling for consistency across all widgets */
+button[role="tab"],
+[data-testid$="-tab-considerations"],
+[data-testid$="-tab-benefits"],
+[data-testid$="-tab-overview"],
+[data-testid$="-tab-business"],
+[data-testid$="-tab-implementation"],
+[data-testid$="-tab-compliance"] {
+  position: relative;
+  overflow: hidden;
+  padding: 0.75rem 1rem !important; /* Consistent comfortable padding */
+  min-height: 44px !important; /* Touch-friendly minimum */
+  font-weight: 500 !important;
+  font-size: 0.875rem !important; /* 14px */
+  border-bottom: 2px solid transparent !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+  background: transparent !important;
+}
+
+/* Hover state for all tabs */
+button[role="tab"]:hover,
+[data-testid$="-tab-considerations"]:hover,
+[data-testid$="-tab-benefits"]:hover {
+  background-color: rgba(0, 102, 204, 0.05) !important;
+  transform: translateY(-1px) !important;
+}
+
+.dark button[role="tab"]:hover,
+.dark [data-testid$="-tab-considerations"]:hover,
+.dark [data-testid$="-tab-benefits"]:hover {
+  background-color: rgba(43, 138, 255, 0.1) !important;
+}
+
+/* Active/Selected tab state - Light theme */
+button[role="tab"][aria-selected="true"],
+[data-testid$="-tab-considerations"].border-b-2.border-blue-500,
+[data-testid$="-tab-benefits"].border-b-2.border-blue-500 {
+  border-bottom-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+  font-weight: 600 !important;
+  background-color: rgba(0, 102, 204, 0.08) !important;
+}
+
+/* Active/Selected tab state - Dark theme */
+.dark button[role="tab"][aria-selected="true"],
+.dark [data-testid$="-tab-considerations"].border-b-2.border-blue-500,
+.dark [data-testid$="-tab-benefits"].border-b-2.border-blue-500 {
+  border-bottom-color: var(--primary-color) !important;
+  color: var(--primary-light) !important;
+  font-weight: 600 !important;
+  background-color: rgba(43, 138, 255, 0.15) !important;
+  box-shadow: 0 0 10px rgba(43, 138, 255, 0.2) !important;
+}
+
+/* Inactive tab colors - Light theme */
+button[role="tab"]:not([aria-selected="true"]),
+[data-testid$="-tab-considerations"]:not(.border-b-2),
+[data-testid$="-tab-benefits"]:not(.border-b-2) {
+  color: #6b7280 !important; /* gray-500 */
+}
+
+/* Inactive tab colors - Dark theme */
+.dark button[role="tab"]:not([aria-selected="true"]),
+.dark [data-testid$="-tab-considerations"]:not(.border-b-2),
+.dark [data-testid$="-tab-benefits"]:not(.border-b-2) {
+  color: #9ca3af !important; /* gray-400 */
+}
+
+/* Add animated underline effect */
+button[role="tab"]::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+button[role="tab"]:hover::after {
+  width: 80%;
+  opacity: 0.5;
+}
+
+button[role="tab"][aria-selected="true"]::after {
+  width: 100%;
+  background-color: var(--primary-color);
+  opacity: 1;
+}
+
+.dark button[role="tab"][aria-selected="true"]::after {
+  box-shadow: 0 0 8px var(--primary-color);
 }
 
 /* Security Summary Widget Styles */

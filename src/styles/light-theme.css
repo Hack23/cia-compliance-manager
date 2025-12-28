@@ -229,14 +229,40 @@ button.lightbutton {
   color: var(--light-primary);
   font-family: var(--font-mono);
   padding: 0.5rem 1rem;
-  border-radius: 4px;
+  border-radius: 6px; /* Increased for better appearance */
   transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
 }
 
 button.lightbutton:hover {
-  background: linear-gradient(to bottom, #e9ecef 0%, #dee2e6 100%);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   border-color: var(--light-primary);
+  transform: translateY(-1px); /* Slight lift on hover */
+}
+
+button.lightbutton:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+/* Tab buttons specific styling for light theme */
+button[role="tab"]:not([aria-selected="true"]) {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+}
+
+button[role="tab"]:not([aria-selected="true"]):hover {
+  background: rgba(0, 102, 204, 0.05);
+  border-bottom-color: rgba(0, 102, 204, 0.3);
+}
+
+button[role="tab"][aria-selected="true"] {
+  background: rgba(0, 102, 204, 0.08);
+  border-bottom-color: var(--light-primary);
+  color: var(--light-primary);
+  font-weight: 600;
 }
 
 /* CIA component specific styling */

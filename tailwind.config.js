@@ -5,14 +5,14 @@ module.exports = {
   theme: {
     extend: {
       // Spacing scale based on 8px grid system
-      // Fixed: Reduced md from 16px to 12px to fix excessive padding issues
+      // Fixed: Further optimized spacing to reduce widget empty space
       spacing: {
         'xs': '4px',
-        'sm': '8px',
-        'md': '12px',    // Changed from 16px - fixes 50% blank space issue
-        'lg': '20px',    // Changed from 24px - better proportion
-        'xl': '32px',
-        'xxl': '48px',
+        'sm': '6px',     // Reduced from 8px - tighter spacing
+        'md': '8px',     // Reduced from 12px - fixes 50% blank space issue
+        'lg': '16px',    // Reduced from 20px - better proportion
+        'xl': '24px',    // Reduced from 32px - more compact
+        'xxl': '40px',   // Reduced from 48px - consistent reduction
       },
       // Typography scale
       fontSize: {
