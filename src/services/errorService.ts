@@ -164,38 +164,41 @@ export class ErrorService {
    * @returns User-friendly error message
    */
   public getUserFriendlyMessage(error: unknown): string {
-    // Handle ValidationError
-    if (isValidationError(error)) {
-      return error.field
-        ? `Please check the ${error.field} field and try again.`
-        : 'Please check your input and try again.';
-    }
-
-    // Handle NetworkError
-    if (isNetworkError(error)) {
-      if (error.statusCode === 404) {
-        return 'The requested resource was not found.';
-      }
-      if (error.statusCode === 401 || error.statusCode === 403) {
-        return 'You do not have permission to access this resource.';
-      }
-      if (error.statusCode && error.statusCode >= 500) {
-        return 'Server error. Please try again later.';
-      }
-      return 'Network connection issue. Please check your connection and try again.';
-    }
-
-    // Handle RetryableError
-    if (isRetryableError(error)) {
-      return error.retryAfter
-        ? `Operation failed. Please try again in ${error.retryAfter} seconds.`
-        : 'Operation failed. Please try again.';
-    }
-
-    // Handle ServiceError
+    // Handle ServiceError with specific codes
     if (isServiceError(error)) {
+      // Check for validation errors
+      if (error.code === ServiceErrorCode.VALIDATION_ERROR) {
+        const field = error.context.field as string | undefined;
+        return field
+          ? `Please check the ${field} field and try again.`
+          : 'Please check your input and try again.';
+      }
+      
+      // Check for network errors
+      if (isNetworkError(error)) {
+        const statusCode = error.context.statusCode as number | undefined;
+        if (statusCode === 404) {
+          return 'The requested resource was not found.';
+        }
+        if (statusCode === 401 || statusCode === 403) {
+          return 'You do not have permission to access this resource.';
+        }
+        if (statusCode && statusCode >= 500) {
+          return 'Server error. Please try again later.';
+        }
+        return 'Network connection issue. Please check your connection and try again.';
+      }
+      
+      // Check for retryable errors
+      if (isRetryableError(error)) {
+        const retryAfter = error.context.retryAfter as number | undefined;
+        return retryAfter
+          ? `Operation failed. Please try again in ${retryAfter} seconds.`
+          : 'Operation failed. Please try again.';
+      }
+      
+      // Handle other service error codes
       switch (error.code) {
-        case ServiceErrorCode.VALIDATION_ERROR:
         case ServiceErrorCode.INVALID_SECURITY_LEVEL:
         case ServiceErrorCode.INVALID_COMPONENT_TYPE:
         case ServiceErrorCode.INVALID_INPUT:
@@ -213,6 +216,15 @@ export class ErrorService {
         case ServiceErrorCode.COMPLIANCE_CHECK_ERROR:
         case ServiceErrorCode.ROI_CALCULATION_ERROR:
           return 'Error processing your request. Please try again.';
+        
+        case ServiceErrorCode.TIMEOUT_ERROR:
+          return 'Operation timed out. Please try again.';
+        
+        case ServiceErrorCode.CONNECTION_ERROR:
+          return 'Connection error. Please check your network.';
+        
+        case ServiceErrorCode.RATE_LIMIT_ERROR:
+          return 'Too many requests. Please wait a moment and try again.';
         
         case ServiceErrorCode.INTERNAL_ERROR:
         case ServiceErrorCode.UNEXPECTED_ERROR:
@@ -247,35 +259,32 @@ export class ErrorService {
    * @returns True if the error is recoverable
    */
   public canRecover(error: unknown): boolean {
-    // RetryableErrors are explicitly marked as recoverable
+    // Retryable ServiceErrors are explicitly marked as recoverable
     if (isRetryableError(error)) {
       return true;
     }
 
-    // NetworkErrors are generally recoverable
+    // Network ServiceErrors are generally recoverable
     if (isNetworkError(error)) {
-      // Server errors might be recoverable
-      if (error.statusCode && error.statusCode >= 500) {
-        return true;
-      }
-      // Timeout errors are recoverable
       return true;
     }
 
-    // ValidationErrors are recoverable through user correction
+    // Validation ServiceErrors are recoverable through user correction
     if (isValidationError(error)) {
       return true;
     }
 
-    // Some ServiceErrors are recoverable
+    // Other ServiceErrors - check code
     if (isServiceError(error)) {
       switch (error.code) {
-        case ServiceErrorCode.VALIDATION_ERROR:
         case ServiceErrorCode.INVALID_SECURITY_LEVEL:
         case ServiceErrorCode.INVALID_COMPONENT_TYPE:
         case ServiceErrorCode.INVALID_INPUT:
         case ServiceErrorCode.MISSING_REQUIRED_FIELD:
         case ServiceErrorCode.DATA_NOT_FOUND:
+        case ServiceErrorCode.TIMEOUT_ERROR:
+        case ServiceErrorCode.CONNECTION_ERROR:
+        case ServiceErrorCode.RATE_LIMIT_ERROR:
           return true;
         default:
           return false;
@@ -301,28 +310,29 @@ export class ErrorService {
    * @returns Error severity level
    */
   public getErrorSeverity(error: unknown): ErrorSeverity {
-    // ValidationErrors are usually low severity
-    if (isValidationError(error)) {
-      return ErrorSeverity.LOW;
-    }
-
-    // NetworkErrors severity depends on status code
-    if (isNetworkError(error)) {
-      if (error.statusCode && error.statusCode >= 500) {
-        return ErrorSeverity.HIGH;
-      }
-      return ErrorSeverity.MEDIUM;
-    }
-
-    // RetryableErrors are medium severity
-    if (isRetryableError(error)) {
-      return ErrorSeverity.MEDIUM;
-    }
-
-    // ServiceErrors severity depends on error code
+    // Handle ServiceErrors
     if (isServiceError(error)) {
+      // Validation errors are usually low severity
+      if (error.code === ServiceErrorCode.VALIDATION_ERROR) {
+        return ErrorSeverity.LOW;
+      }
+      
+      // Network errors severity depends on status code
+      if (isNetworkError(error)) {
+        const statusCode = error.context.statusCode as number | undefined;
+        if (statusCode && statusCode >= 500) {
+          return ErrorSeverity.HIGH;
+        }
+        return ErrorSeverity.MEDIUM;
+      }
+      
+      // Retryable errors are medium severity
+      if (isRetryableError(error)) {
+        return ErrorSeverity.MEDIUM;
+      }
+      
+      // Other error codes
       switch (error.code) {
-        case ServiceErrorCode.VALIDATION_ERROR:
         case ServiceErrorCode.INVALID_INPUT:
         case ServiceErrorCode.MISSING_REQUIRED_FIELD:
           return ErrorSeverity.LOW;
@@ -330,6 +340,8 @@ export class ErrorService {
         case ServiceErrorCode.DATA_NOT_FOUND:
         case ServiceErrorCode.INVALID_SECURITY_LEVEL:
         case ServiceErrorCode.INVALID_COMPONENT_TYPE:
+        case ServiceErrorCode.TIMEOUT_ERROR:
+        case ServiceErrorCode.CONNECTION_ERROR:
           return ErrorSeverity.MEDIUM;
         
         case ServiceErrorCode.DATA_PROVIDER_ERROR:
@@ -341,12 +353,15 @@ export class ErrorService {
         
         case ServiceErrorCode.INTERNAL_ERROR:
         case ServiceErrorCode.UNEXPECTED_ERROR:
-        default:
+        case ServiceErrorCode.RATE_LIMIT_ERROR:
           return ErrorSeverity.CRITICAL;
+        
+        default:
+          return ErrorSeverity.HIGH;
       }
     }
 
-    // Default to high severity for unknown errors
+    // Default to HIGH for unknown error types
     return ErrorSeverity.HIGH;
   }
 

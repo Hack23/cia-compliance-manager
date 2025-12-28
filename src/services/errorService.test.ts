@@ -11,9 +11,9 @@ import {
 import {
   ServiceError,
   ServiceErrorCode,
-  ValidationError,
-  NetworkError,
-  RetryableError,
+  createValidationServiceError,
+  createNetworkServiceError,
+  createRetryableServiceError,
 } from './errors';
 import logger from '../utils/logger';
 
@@ -90,56 +90,56 @@ describe('ErrorService', () => {
 
   describe('getUserFriendlyMessage', () => {
     it('should return user-friendly message for ValidationError', () => {
-      const error = new ValidationError('Invalid email', 'email');
+      const error = createValidationServiceError('Invalid email', 'email');
       const message = errorService.getUserFriendlyMessage(error);
       
       expect(message).toBe('Please check the email field and try again.');
     });
 
     it('should return generic validation message for ValidationError without field', () => {
-      const error = new ValidationError('Invalid input');
+      const error = createValidationServiceError('Invalid input');
       const message = errorService.getUserFriendlyMessage(error);
       
       expect(message).toBe('Please check your input and try again.');
     });
 
     it('should return user-friendly message for NetworkError 404', () => {
-      const error = new NetworkError('Not found', 404);
+      const error = createNetworkServiceError('Not found', 404);
       const message = errorService.getUserFriendlyMessage(error);
       
       expect(message).toBe('The requested resource was not found.');
     });
 
     it('should return user-friendly message for NetworkError 401', () => {
-      const error = new NetworkError('Unauthorized', 401);
+      const error = createNetworkServiceError('Unauthorized', 401);
       const message = errorService.getUserFriendlyMessage(error);
       
       expect(message).toBe('You do not have permission to access this resource.');
     });
 
     it('should return user-friendly message for NetworkError 500', () => {
-      const error = new NetworkError('Server error', 500);
+      const error = createNetworkServiceError('Server error', 500);
       const message = errorService.getUserFriendlyMessage(error);
       
       expect(message).toBe('Server error. Please try again later.');
     });
 
     it('should return user-friendly message for NetworkError without status', () => {
-      const error = new NetworkError('Connection failed');
+      const error = createNetworkServiceError('Connection failed');
       const message = errorService.getUserFriendlyMessage(error);
       
       expect(message).toBe('Network connection issue. Please check your connection and try again.');
     });
 
     it('should return user-friendly message for RetryableError with retry time', () => {
-      const error = new RetryableError('Rate limited', 60);
+      const error = createRetryableServiceError('Rate limited', 60);
       const message = errorService.getUserFriendlyMessage(error);
       
       expect(message).toBe('Operation failed. Please try again in 60 seconds.');
     });
 
     it('should return user-friendly message for RetryableError without retry time', () => {
-      const error = new RetryableError('Temporary failure');
+      const error = createRetryableServiceError('Temporary failure');
       const message = errorService.getUserFriendlyMessage(error);
       
       expect(message).toBe('Operation failed. Please try again.');
@@ -209,22 +209,22 @@ describe('ErrorService', () => {
 
   describe('canRecover', () => {
     it('should return true for RetryableError', () => {
-      const error = new RetryableError('Temporary failure');
+      const error = createRetryableServiceError('Temporary failure');
       expect(errorService.canRecover(error)).toBe(true);
     });
 
     it('should return true for NetworkError with server error', () => {
-      const error = new NetworkError('Server error', 500);
+      const error = createNetworkServiceError('Server error', 500);
       expect(errorService.canRecover(error)).toBe(true);
     });
 
     it('should return true for NetworkError without status', () => {
-      const error = new NetworkError('Connection failed');
+      const error = createNetworkServiceError('Connection failed');
       expect(errorService.canRecover(error)).toBe(true);
     });
 
     it('should return true for ValidationError', () => {
-      const error = new ValidationError('Invalid input');
+      const error = createValidationServiceError('Invalid input');
       expect(errorService.canRecover(error)).toBe(true);
     });
 
@@ -265,22 +265,22 @@ describe('ErrorService', () => {
 
   describe('getErrorSeverity', () => {
     it('should return LOW for ValidationError', () => {
-      const error = new ValidationError('Invalid input');
+      const error = createValidationServiceError('Invalid input');
       expect(errorService.getErrorSeverity(error)).toBe(ErrorSeverity.LOW);
     });
 
     it('should return HIGH for NetworkError with server error', () => {
-      const error = new NetworkError('Server error', 500);
+      const error = createNetworkServiceError('Server error', 500);
       expect(errorService.getErrorSeverity(error)).toBe(ErrorSeverity.HIGH);
     });
 
     it('should return MEDIUM for NetworkError without server error', () => {
-      const error = new NetworkError('Connection failed', 404);
+      const error = createNetworkServiceError('Connection failed', 404);
       expect(errorService.getErrorSeverity(error)).toBe(ErrorSeverity.MEDIUM);
     });
 
     it('should return MEDIUM for RetryableError', () => {
-      const error = new RetryableError('Temporary failure');
+      const error = createRetryableServiceError('Temporary failure');
       expect(errorService.getErrorSeverity(error)).toBe(ErrorSeverity.MEDIUM);
     });
 
@@ -324,7 +324,7 @@ describe('ErrorService', () => {
 
   describe('formatErrorForDisplay', () => {
     it('should return user-friendly message without details', () => {
-      const error = new ValidationError('Invalid email', 'email');
+      const error = createValidationServiceError('Invalid email', 'email');
       const formatted = errorService.formatErrorForDisplay(error, false);
       
       expect(formatted).toBe('Please check the email field and try again.');

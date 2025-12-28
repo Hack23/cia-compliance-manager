@@ -66,9 +66,9 @@ export {
 export {
   ServiceError,
   ServiceErrorCode,
-  ValidationError,
-  NetworkError,
-  RetryableError,
+  createValidationServiceError,
+  createNetworkServiceError,
+  createRetryableServiceError,
   type ErrorContext,
   createValidationError,
   createDataNotFoundError,

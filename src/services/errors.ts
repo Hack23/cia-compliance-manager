@@ -31,7 +31,16 @@ export enum ServiceErrorCode {
   COMPLIANCE_CHECK_ERROR = 'COMPLIANCE_CHECK_ERROR',
   ROI_CALCULATION_ERROR = 'ROI_CALCULATION_ERROR',
 
-  // System errors (4000-4999)
+  // Network errors (4000-4499)
+  NETWORK_ERROR = 'NETWORK_ERROR',
+  CONNECTION_ERROR = 'CONNECTION_ERROR',
+  TIMEOUT_ERROR = 'TIMEOUT_ERROR',
+  
+  // Retryable errors (4500-4999)
+  RETRYABLE_ERROR = 'RETRYABLE_ERROR',
+  RATE_LIMIT_ERROR = 'RATE_LIMIT_ERROR',
+  
+  // System errors (5000-5999)
   INTERNAL_ERROR = 'INTERNAL_ERROR',
   UNEXPECTED_ERROR = 'UNEXPECTED_ERROR',
 }
@@ -254,75 +263,89 @@ export function getErrorMessage(error: unknown): string {
 }
 
 /**
- * Validation error for input validation failures
+ * Create a validation error using ServiceError
+ * 
+ * @param message - Error message
+ * @param field - Optional field name that failed validation
+ * @param context - Additional error context
+ * @returns ServiceError instance
  */
-export class ValidationError extends Error {
-  public readonly field?: string;
-  
-  constructor(message: string, field?: string) {
-    super(message);
-    this.name = 'ValidationError';
-    this.field = field;
-    
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, ValidationError);
-    }
-  }
+export function createValidationServiceError(
+  message: string,
+  field?: string,
+  context: ErrorContext = {}
+): ServiceError {
+  return new ServiceError(
+    message,
+    ServiceErrorCode.VALIDATION_ERROR,
+    { ...context, field }
+  );
 }
 
 /**
- * Network error for connectivity issues
+ * Create a network error using ServiceError
+ * 
+ * @param message - Error message
+ * @param statusCode - Optional HTTP status code
+ * @param context - Additional error context
+ * @returns ServiceError instance
  */
-export class NetworkError extends Error {
-  public readonly statusCode?: number;
-  
-  constructor(message: string, statusCode?: number) {
-    super(message);
-    this.name = 'NetworkError';
-    this.statusCode = statusCode;
-    
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, NetworkError);
-    }
-  }
+export function createNetworkServiceError(
+  message: string,
+  statusCode?: number,
+  context: ErrorContext = {}
+): ServiceError {
+  return new ServiceError(
+    message,
+    ServiceErrorCode.NETWORK_ERROR,
+    { ...context, statusCode }
+  );
 }
 
 /**
- * Retryable error for operations that can be retried
+ * Create a retryable error using ServiceError
+ * 
+ * @param message - Error message
+ * @param retryAfter - Optional retry delay in seconds
+ * @param context - Additional error context
+ * @returns ServiceError instance
  */
-export class RetryableError extends Error {
-  public readonly retryAfter?: number;
-  public readonly retryCount?: number;
-  
-  constructor(message: string, retryAfter?: number, retryCount?: number) {
-    super(message);
-    this.name = 'RetryableError';
-    this.retryAfter = retryAfter;
-    this.retryCount = retryCount;
-    
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, RetryableError);
-    }
-  }
+export function createRetryableServiceError(
+  message: string,
+  retryAfter?: number,
+  context: ErrorContext = {}
+): ServiceError {
+  return new ServiceError(
+    message,
+    ServiceErrorCode.RETRYABLE_ERROR,
+    { ...context, retryAfter }
+  );
 }
 
 /**
- * Type guard to check if an error is a ValidationError
+ * Check if error is validation related
  */
-export function isValidationError(error: unknown): error is ValidationError {
-  return error instanceof ValidationError;
+export function isValidationError(error: unknown): boolean {
+  return isServiceError(error) && error.code === ServiceErrorCode.VALIDATION_ERROR;
 }
 
 /**
- * Type guard to check if an error is a NetworkError
+ * Check if error is network related
  */
-export function isNetworkError(error: unknown): error is NetworkError {
-  return error instanceof NetworkError;
+export function isNetworkError(error: unknown): boolean {
+  return isServiceError(error) && (
+    error.code === ServiceErrorCode.NETWORK_ERROR ||
+    error.code === ServiceErrorCode.CONNECTION_ERROR ||
+    error.code === ServiceErrorCode.TIMEOUT_ERROR
+  );
 }
 
 /**
- * Type guard to check if an error is a RetryableError
+ * Check if error is retryable
  */
-export function isRetryableError(error: unknown): error is RetryableError {
-  return error instanceof RetryableError;
+export function isRetryableError(error: unknown): boolean {
+  return isServiceError(error) && (
+    error.code === ServiceErrorCode.RETRYABLE_ERROR ||
+    error.code === ServiceErrorCode.RATE_LIMIT_ERROR
+  );
 }
