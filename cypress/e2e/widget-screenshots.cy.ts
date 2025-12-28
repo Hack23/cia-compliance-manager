@@ -5,7 +5,8 @@
 
 describe('Widget Screenshots for CSS Verification', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5174');
+    // Use Cypress baseUrl or fallback to localhost
+    cy.visit(Cypress.config('baseUrl') || 'http://localhost:5174');
     cy.wait(2000); // Wait for app to fully load
   });
 

@@ -97,7 +97,7 @@
 }
 
 /* ============================================
-   TAB NAVIGATION - CLEAN AND MODERN
+   TAB NAVIGATION - OPTIMIZED LAYOUT
    ============================================ */
 
 /* Tab list container */
@@ -396,7 +396,7 @@ input:focus {
   margin-right: 0.5rem;
 }
 
-/* Info button */
+/* Info button - !important needed to override inline styles from components */
 .info-button {
   width: 20px !important;
   height: 20px !important;
