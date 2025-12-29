@@ -454,7 +454,9 @@
 <a name='L389'></a><a href='#L389'>389</a>
 <a name='L390'></a><a href='#L390'>390</a>
 <a name='L391'></a><a href='#L391'>391</a>
-<a name='L392'></a><a href='#L392'>392</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L392'></a><a href='#L392'>392</a>
+<a name='L393'></a><a href='#L393'>393</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -847,6 +849,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { SECURITY_VISUALIZATION_WIDGET_IDS } from "../../../constants/testIds";
 import { useSecurityMetricsService } from "../../../hooks/useSecurityMetricsService";
 import { SecurityLevel } from "../../../types/cia";
 import {
@@ -969,7 +972,7 @@ const SecurityVisualizationWidget: React.FC&lt;
       <span class="missing-if-branch" title="if path not taken" >I</span>if (availabilityLevel === "High" || availabilityLevel === "Very High") {
 <span class="cstat-no" title="statement not covered" >        return (</span>
           &lt;div
-            data-testid="balanced-recommendation"
+            data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('balanced-recommendation')}
             className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg mt-4"
           &gt;
             &lt;p className="text-sm"&gt;
@@ -983,7 +986,7 @@ const SecurityVisualizationWidget: React.FC&lt;
 &nbsp;
     // Component-specific recommendations
     return (
-      &lt;div className="space-y-2 mt-4" data-testid="security-recommendations"&gt;
+      &lt;div className="space-y-2 mt-4" data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('recommendations')}&gt;
         {availabilityValue &lt; 2 &amp;&amp; (
           &lt;div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded"&gt;
             &lt;p className="text-sm"&gt;
@@ -1048,7 +1051,7 @@ const SecurityVisualizationWidget: React.FC&lt;
                 &lt;/div&gt;
                 &lt;div
                   className="text-3xl font-bold"
-                  data-testid="security-score-value"
+                  data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.value('security-score')}
                   aria-label={`Security score: ${securityScore} out of 100`}
                 &gt;
                   {securityScore}
@@ -1062,7 +1065,7 @@ const SecurityVisualizationWidget: React.FC&lt;
                   className={`text-xl font-bold ${getRiskLevelColor(
                     riskLevel
                   )}`}
-                  data-testid="risk-level"
+                  data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.label('risk-level')}
                   role="status"
                   aria-label={`Risk level: ${riskLevel}`}
                 &gt;
@@ -1082,7 +1085,7 @@ const SecurityVisualizationWidget: React.FC&lt;
                     securityScore
                   )}`}
                   style={{ width: `${securityScore}%` }}
-                  data-testid="security-score-bar"
+                  data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('security-score-bar')}
                 &gt;&lt;/div&gt;
               &lt;/div&gt;
               &lt;div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mt-1"&gt;
@@ -1118,7 +1121,7 @@ const SecurityVisualizationWidget: React.FC&lt;
             {/* Confidentiality component */}
             &lt;div
               className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md"
-              data-testid="confidentiality-component"
+              data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('confidentiality-component')}
             &gt;
               &lt;div className="flex items-center justify-between mb-2"&gt;
                 &lt;div className="text-md font-medium text-primary-dark dark:text-primary-light"&gt;
@@ -1137,7 +1140,7 @@ const SecurityVisualizationWidget: React.FC&lt;
                       (getSecurityLevelValue(confidentialityLevel) / 4) * 100
                     }%`,
                   }}
-                  data-testid="confidentiality-gauge"
+                  data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('confidentiality-gauge')}
                 &gt;&lt;/div&gt;
               &lt;/div&gt;
             &lt;/div&gt;
@@ -1145,7 +1148,7 @@ const SecurityVisualizationWidget: React.FC&lt;
             {/* Integrity component */}
             &lt;div
               className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
-              data-testid="integrity-component"
+              data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('integrity-component')}
             &gt;
               &lt;div className="flex items-center justify-between mb-2"&gt;
                 &lt;div className="text-md font-medium text-green-800 dark:text-green-300"&gt;
@@ -1164,7 +1167,7 @@ const SecurityVisualizationWidget: React.FC&lt;
                       (getSecurityLevelValue(integrityLevel) / 4) * 100
                     }%`,
                   }}
-                  data-testid="integrity-gauge"
+                  data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('integrity-gauge')}
                 &gt;&lt;/div&gt;
               &lt;/div&gt;
             &lt;/div&gt;
@@ -1172,7 +1175,7 @@ const SecurityVisualizationWidget: React.FC&lt;
             {/* Availability component */}
             &lt;div
               className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
-              data-testid="availability-component"
+              data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('availability-component')}
             &gt;
               &lt;div className="flex items-center justify-between mb-2"&gt;
                 &lt;div className="text-md font-medium text-blue-800 dark:text-blue-300"&gt;
@@ -1191,7 +1194,7 @@ const SecurityVisualizationWidget: React.FC&lt;
                       (getSecurityLevelValue(availabilityLevel) / 4) * 100
                     }%`,
                   }}
-                  data-testid="availability-gauge"
+                  data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('availability-gauge')}
                 &gt;&lt;/div&gt;
               &lt;/div&gt;
             &lt;/div&gt;
@@ -1243,7 +1246,7 @@ export default SecurityVisualizationWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-29T00:42:29.138Z
+                at 2025-12-29T20:28:14.224Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

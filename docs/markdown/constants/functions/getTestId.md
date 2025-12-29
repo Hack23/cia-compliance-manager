@@ -1,14 +1,14 @@
-[**CIA Compliance Manager Documentation v1.1.2**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.3**](../../README.md)
 
 ***
 
 [CIA Compliance Manager Documentation](../../modules.md) / [constants](../README.md) / getTestId
 
-# Function: getTestId()
+# ~~Function: getTestId()~~
 
 > **getTestId**(`prefix`, `id`): `string`
 
-Defined in: [constants/testIds.ts:20](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/constants/testIds.ts#L20)
+Defined in: [constants/testIds.ts:140](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/constants/testIds.ts#L140)
 
 Helper to create a test ID with a prefix
 
@@ -25,3 +25,7 @@ Helper to create a test ID with a prefix
 ## Returns
 
 `string`
+
+## Deprecated
+
+Use createTestId() instead for consistency

@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.56% </span>
+                <span class="strong">95.65% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>16/23</span>
+                <span class='fraction'>22/23</span>
             </div>
         
             
@@ -290,7 +290,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -312,23 +312,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -453,7 +453,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import { AVAILABILITY_IMPACT_TEST_IDS } from "../../../constants/testIds";
+import { AVAILABILITY_IMPACT_TEST_IDS, AVAILABILITY_IMPACT_WIDGET_IDS } from "../../../constants/testIds";
 import { getDefaultSLAMetrics } from "../../../data/ciaOptionsData";
 import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
@@ -494,7 +494,7 @@ const AvailabilityImpactWidget: React.FC&lt;AvailabilityImpactWidgetProps&gt; = 
 }) =&gt; {
   // Use security level utility for consistent normalization
   const effectiveLevel = normalizeSecurityLevel(
-    availabilityLevel || <span class="branch-1 cbranch-no" title="branch not covered" >"Moderate"</span>
+    availabilityLevel || "Moderate"
   );
 &nbsp;
   // Get CIA content service for loading/error states
@@ -510,14 +510,14 @@ const AvailabilityImpactWidget: React.FC&lt;AvailabilityImpactWidgetProps&gt; = 
     const defaultMetrics = getDefaultSLAMetrics(effectiveLevel);
 &nbsp;
     // If no details, return defaults
-    if (!details) return defaultMetrics;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!details) return defaultMetrics;
 &nbsp;
     // Return metrics from details with fallbacks to defaults
     return {
-      uptime: details.uptime || <span class="branch-1 cbranch-no" title="branch not covered" >defaultMetrics.uptime,</span>
-      rto: details.rto || <span class="branch-1 cbranch-no" title="branch not covered" >defaultMetrics.rto,</span>
-      rpo: details.rpo || <span class="branch-1 cbranch-no" title="branch not covered" >defaultMetrics.rpo,</span>
-      mttr: details.mttr || <span class="branch-1 cbranch-no" title="branch not covered" >defaultMetrics.mttr,</span>
+      uptime: details.uptime || defaultMetrics.uptime,
+      rto: details.rto || defaultMetrics.rto,
+      rpo: details.rpo || defaultMetrics.rpo,
+      mttr: details.mttr || defaultMetrics.mttr,
       sla: details.sla || defaultMetrics.sla,
     };
   }, [details, effectiveLevel]);
@@ -526,9 +526,9 @@ const AvailabilityImpactWidget: React.FC&lt;AvailabilityImpactWidgetProps&gt; = 
     &lt;WidgetErrorBoundary widgetName="Availability Impact"&gt;
       &lt;WidgetContainer
         title={
-          WIDGET_TITLES.AVAILABILITY_IMPACT || <span class="branch-1 cbranch-no" title="branch not covered" >"Availability Impact Analysis"</span>
+          WIDGET_TITLES.AVAILABILITY_IMPACT || "Availability Impact Analysis"
         }
-        icon={WIDGET_ICONS.AVAILABILITY_IMPACT || <span class="branch-1 cbranch-no" title="branch not covered" >"⏱️"}</span>
+        icon={WIDGET_ICONS.AVAILABILITY_IMPACT || "⏱️"}
         className={`${className} cia-availability`}
         testId={testId}
         isLoading={isLoading}
@@ -556,7 +556,7 @@ const AvailabilityImpactWidget: React.FC&lt;AvailabilityImpactWidgetProps&gt; = 
             // Use utility for consistent styling
             colorClass={getSecurityLevelBackgroundClass("blue")}
             textClass="text-blue-800 dark:text-blue-300"
-            testId={`${testId}-level`}
+            testId={AVAILABILITY_IMPACT_WIDGET_IDS.label('security-level')}
           /&gt;
         &lt;/section&gt;
 &nbsp;
@@ -572,7 +572,7 @@ const AvailabilityImpactWidget: React.FC&lt;AvailabilityImpactWidgetProps&gt; = 
             &lt;BusinessImpactSection
               impact={businessImpact}
               color="blue"
-              testId={`${testId}-business-impact`}
+              testId={AVAILABILITY_IMPACT_WIDGET_IDS.section('business-impact')}
             /&gt;
           &lt;/section&gt;
         )}
@@ -652,7 +652,7 @@ export default AvailabilityImpactWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-29T00:42:29.138Z
+                at 2025-12-29T20:28:14.224Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

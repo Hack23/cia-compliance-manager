@@ -30,16 +30,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">76.19% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>16/21</span>
+                <span class='fraction'>15/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
@@ -228,7 +228,8 @@
 <a name='L163'></a><a href='#L163'>163</a>
 <a name='L164'></a><a href='#L164'>164</a>
 <a name='L165'></a><a href='#L165'>165</a>
-<a name='L166'></a><a href='#L166'>166</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -253,7 +254,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -271,38 +273,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">14x</span>
@@ -395,6 +397,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { CONFIDENTIALITY_IMPACT_WIDGET_IDS } from "../../../constants/testIds";
 import { getDefaultPrivacyImpact } from "../../../data/ciaOptionsData";
 import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
@@ -435,12 +438,12 @@ const ConfidentialityImpactWidget: React.FC&lt;
   } = useCIAContentService();
 &nbsp;
   // Use the effective level - confidentialityLevel is required
-  const effectiveLevel = confidentialityLevel || <span class="branch-1 cbranch-no" title="branch not covered" >"Moderate";</span>
+  const effectiveLevel = confidentialityLevel || "Moderate";
 &nbsp;
   // Invoke error callback when service error occurs
   useEffect(() =&gt; {
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (serviceError &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >_onError) {</span>
-<span class="cstat-no" title="statement not covered" >      _onError(serviceError);</span>
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (serviceError &amp;&amp; _onError) {
+      _onError(serviceError);
     }
   }, [serviceError, _onError]);
 &nbsp;
@@ -450,24 +453,24 @@ const ConfidentialityImpactWidget: React.FC&lt;
 &nbsp;
   // Get data classification from service with fallback
   const dataClassification = useMemo(() =&gt; {
-    if (!ciaContentService) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!ciaContentService) {
       return `${effectiveLevel} Classification`;
     }
 &nbsp;
     try {
       return ciaContentService.getInformationSensitivity(effectiveLevel);
     } catch (err) {
-<span class="cstat-no" title="statement not covered" >      console.error("Error getting data classification:", err);</span>
-<span class="cstat-no" title="statement not covered" >      return `${effectiveLevel} Classification`;</span>
+      console.error("Error getting data classification:", err);
+      return `${effectiveLevel} Classification`;
     }
   }, [ciaContentService, effectiveLevel]);
 &nbsp;
   // Get privacy impact with fallback to utility function
-  const privacyImpact = useMemo(() =&gt; {
-    if (details &amp;&amp; details.privacyImpact) {
-      return details.privacyImpact;
+  const privacyImpact = useMemo(<span class="fstat-no" title="function not covered" >() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (details &amp;&amp; details.privacyImpact) {</span>
+<span class="cstat-no" title="statement not covered" >      return details.privacyImpact;</span>
     }
-    return getDefaultPrivacyImpact(effectiveLevel);
+<span class="cstat-no" title="statement not covered" >    return getDefaultPrivacyImpact(effectiveLevel);</span>
   }, [details, effectiveLevel]);
 &nbsp;
   return (
@@ -475,9 +478,9 @@ const ConfidentialityImpactWidget: React.FC&lt;
       &lt;WidgetContainer
         title={
           WIDGET_TITLES.CONFIDENTIALITY_IMPACT ||
-<span class="branch-1 cbranch-no" title="branch not covered" >          "Confidentiality Impact Analysis"</span>
+          "Confidentiality Impact Analysis"
         }
-        icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT || <span class="branch-1 cbranch-no" title="branch not covered" >"🔒"}</span>
+        icon={WIDGET_ICONS.CONFIDENTIALITY_IMPACT || "🔒"}
         className={`${className} overflow-visible`}
         testId={testId}
         isLoading={isLoading}
@@ -505,7 +508,7 @@ const ConfidentialityImpactWidget: React.FC&lt;
               // Use utility functions for consistent color handling
               colorClass={getSecurityLevelBackgroundClass("purple")}
               textClass="text-purple-800 dark:text-purple-300"
-              testId={`${testId}-confidentiality-badge`}
+              testId={CONFIDENTIALITY_IMPACT_WIDGET_IDS.label('security-badge')}
             /&gt;
           &lt;/div&gt;
 &nbsp;
@@ -514,7 +517,7 @@ const ConfidentialityImpactWidget: React.FC&lt;
             &lt;BusinessImpactSection
               impact={businessImpact}
               color="purple"
-              testId={`${testId}-business-impact`}
+              testId={CONFIDENTIALITY_IMPACT_WIDGET_IDS.section('business-impact')}
             /&gt;
           )}
 &nbsp;
@@ -565,7 +568,7 @@ export default ConfidentialityImpactWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-29T00:42:29.138Z
+                at 2025-12-29T20:28:14.224Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

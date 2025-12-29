@@ -1789,7 +1789,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useMemo, useState } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import { BUSINESS_IMPACT_TEST_IDS } from "../../../constants/testIds";
+import { BUSINESS_IMPACT_WIDGET_IDS, BUSINESS_IMPACT_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import {
   BusinessImpactDetail,
@@ -2035,7 +2035,7 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
       &lt;div
         key={`impact-${category}`}
         className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg mb-3"
-        data-testid={`${testId}-impact-${category.toLowerCase()}`}
+        data-testid={BUSINESS_IMPACT_WIDGET_IDS.section(`impact-${category.toLowerCase()}`)}
       &gt;
         &lt;div className="flex justify-between items-center mb-2"&gt;
           &lt;h3 className="text-md font-medium flex items-center"&gt;
@@ -2186,7 +2186,7 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
           className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
             confidentialityLevel
           )}`}
-          data-testid={`${testId}-heatmap-confidentiality`}
+          data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-confidentiality')}
         &gt;
           &lt;div className="text-xs sm:text-sm font-medium"&gt;Confidentiality&lt;/div&gt;
           &lt;div className="text-sm sm:text-base font-bold"&gt;{confidentialityLevel}&lt;/div&gt;
@@ -2195,7 +2195,7 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
           className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
             integrityLevel
           )}`}
-          data-testid={`${testId}-heatmap-integrity`}
+          data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-integrity')}
         &gt;
           &lt;div className="text-xs sm:text-sm font-medium"&gt;Integrity&lt;/div&gt;
           &lt;div className="text-sm sm:text-base font-bold"&gt;{integrityLevel}&lt;/div&gt;
@@ -2204,7 +2204,7 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
           className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
             availabilityLevel
           )}`}
-          data-testid={`${testId}-heatmap-availability`}
+          data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-availability')}
         &gt;
           &lt;div className="text-xs sm:text-sm font-medium"&gt;Availability&lt;/div&gt;
           &lt;div className="text-sm sm:text-base font-bold"&gt;{availabilityLevel}&lt;/div&gt;
@@ -2218,7 +2218,7 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
     return (
       &lt;div
         className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4"
-        data-testid={`${testId}-executive-summary`}
+        data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('executive-summary')}
       &gt;
         &lt;h3 className="text-lg font-medium mb-2 flex items-center"&gt;
           &lt;span className="mr-2"&gt;📊&lt;/span&gt;Executive Summary
@@ -2395,7 +2395,7 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
                     : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                 }`}
                 onClick={() =&gt; setActiveTab("considerations")}
-                data-testid={`${testId}-tab-considerations`}
+                data-testid={BUSINESS_IMPACT_WIDGET_IDS.button('tab-considerations')}
               &gt;
                 Implementation Considerations
               &lt;/button&gt;
@@ -2406,7 +2406,7 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
                     : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                 }`}
                 onClick={() =&gt; setActiveTab("benefits")}
-                data-testid={`${testId}-tab-benefits`}
+                data-testid={BUSINESS_IMPACT_WIDGET_IDS.button('tab-benefits')}
               &gt;
                 Business Benefits
               &lt;/button&gt;
@@ -2416,13 +2416,13 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
           {activeTab === "considerations" ? (
             &lt;div
               className="grid grid-cols-1 gap-4"
-              data-testid={`${testId}-considerations`}
+              data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('considerations')}
             &gt;
               {considerations.map((item, index) =&gt; (
                 &lt;div
                   key={`consideration-${index}`}
                   className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
-                  data-testid={`${testId}-consideration-${index}`}
+                  data-testid={BUSINESS_IMPACT_WIDGET_IDS.item(`consideration-${index}`)}
                 &gt;
                   &lt;div className="flex items-center mb-2"&gt;
                     &lt;span className="mr-2 text-blue-500"&gt;{item.icon}&lt;/span&gt;
@@ -2437,13 +2437,13 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
           ) : (
             &lt;div
               className="grid grid-cols-1 gap-4"
-              data-testid={`${testId}-benefits`}
+              data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('benefits')}
             &gt;
               {benefits.map((item, index) =&gt; (
                 &lt;div
                   key={`benefit-${index}`}
                   className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
-                  data-testid={`${testId}-benefit-${index}`}
+                  data-testid={BUSINESS_IMPACT_WIDGET_IDS.item(`benefit-${index}`)}
                 &gt;
                   &lt;div className="flex items-center mb-2"&gt;
                     &lt;span className="mr-2 text-green-500"&gt;{item.icon}&lt;/span&gt;
@@ -2656,7 +2656,7 @@ export default BusinessImpactAnalysisWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-29T00:42:29.138Z
+                at 2025-12-29T20:28:14.224Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.2**](../../../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.3**](../../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ValueCreationWidgetProps
 
-Defined in: [components/widgets/businessvalue/ValueCreationWidget.tsx:16](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/businessvalue/ValueCreationWidget.tsx#L16)
+Defined in: [components/widgets/businessvalue/ValueCreationWidget.tsx:17](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/businessvalue/ValueCreationWidget.tsx#L17)
 
 Props for ValueCreationWidget component
 
@@ -16,7 +16,7 @@ Props for ValueCreationWidget component
 
 > **availabilityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/businessvalue/ValueCreationWidget.tsx:20](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/businessvalue/ValueCreationWidget.tsx#L20)
+Defined in: [components/widgets/businessvalue/ValueCreationWidget.tsx:21](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/businessvalue/ValueCreationWidget.tsx#L21)
 
 Selected availability level
 
@@ -26,7 +26,7 @@ Selected availability level
 
 > `optional` **className**: `string`
 
-Defined in: [components/widgets/businessvalue/ValueCreationWidget.tsx:35](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/businessvalue/ValueCreationWidget.tsx#L35)
+Defined in: [components/widgets/businessvalue/ValueCreationWidget.tsx:36](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/businessvalue/ValueCreationWidget.tsx#L36)
 
 Optional CSS class name
 
@@ -36,7 +36,7 @@ Optional CSS class name
 
 > **confidentialityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/businessvalue/ValueCreationWidget.tsx:30](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/businessvalue/ValueCreationWidget.tsx#L30)
+Defined in: [components/widgets/businessvalue/ValueCreationWidget.tsx:31](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/businessvalue/ValueCreationWidget.tsx#L31)
 
 Selected confidentiality level
 
@@ -46,7 +46,7 @@ Selected confidentiality level
 
 > **integrityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/businessvalue/ValueCreationWidget.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/businessvalue/ValueCreationWidget.tsx#L25)
+Defined in: [components/widgets/businessvalue/ValueCreationWidget.tsx:26](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/businessvalue/ValueCreationWidget.tsx#L26)
 
 Selected integrity level
 
@@ -56,6 +56,6 @@ Selected integrity level
 
 > `optional` **testId**: `string`
 
-Defined in: [components/widgets/businessvalue/ValueCreationWidget.tsx:40](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/businessvalue/ValueCreationWidget.tsx#L40)
+Defined in: [components/widgets/businessvalue/ValueCreationWidget.tsx:41](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/businessvalue/ValueCreationWidget.tsx#L41)
 
 Optional test ID for testing

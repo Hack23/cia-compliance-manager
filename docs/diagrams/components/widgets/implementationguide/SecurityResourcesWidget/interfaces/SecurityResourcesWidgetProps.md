@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.2**](../../../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.3**](../../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityResourcesWidgetProps
 
-Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:37](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L37)
+Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:38](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L38)
 
 Props for SecurityResourcesWidget component
 
@@ -33,7 +33,7 @@ guides based on selected security levels across all CIA components.
 
 > **availabilityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:45](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L45)
+Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:46](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L46)
 
 Selected availability level
 
@@ -51,7 +51,7 @@ Determines which availability-specific resources and guides to display.
 
 > `optional` **className**: `string`
 
-Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:73](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L73)
+Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:74](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L74)
 
 Optional CSS class name for custom styling
 
@@ -75,7 +75,7 @@ Allows consumers to apply custom CSS classes via Tailwind or custom styles.
 
 > **confidentialityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:63](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L63)
+Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:64](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L64)
 
 Selected confidentiality level
 
@@ -93,7 +93,7 @@ Determines which confidentiality-specific resources and guides to display.
 
 > **integrityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:54](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L54)
+Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:55](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L55)
 
 Selected integrity level
 
@@ -111,7 +111,7 @@ Determines which integrity-specific resources and guides to display.
 
 > `optional` **limit**: `number`
 
-Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:95](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L95)
+Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:96](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L96)
 
 Optional limit for the number of resources to display
 
@@ -136,7 +136,7 @@ more comprehensive guidance but require more screen space.
 
 > `optional` **showTopResourcesOnly**: `boolean`
 
-Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:106](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L106)
+Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:107](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L107)
 
 Optional flag to show only top/priority resources
 
@@ -161,7 +161,7 @@ true
 
 > `optional` **testId**: `string`
 
-Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:84](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L84)
+Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:85](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L85)
 
 Optional test ID for automated testing
 

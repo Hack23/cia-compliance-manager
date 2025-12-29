@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.2**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.3**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Enumeration: ServiceErrorCode
 
-Defined in: [services/errors.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L19)
+Defined in: [services/errors.ts:19](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L19)
 
 Error codes for service operations
 
@@ -19,7 +19,7 @@ categories for documentation purposes. The actual enum values are strings.
 
 > **CALCULATION\_ERROR**: `"CALCULATION_ERROR"`
 
-Defined in: [services/errors.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L33)
+Defined in: [services/errors.ts:33](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L33)
 
 ***
 
@@ -27,7 +27,7 @@ Defined in: [services/errors.ts:33](https://github.com/Hack23/cia-compliance-man
 
 > **COMPLIANCE\_CHECK\_ERROR**: `"COMPLIANCE_CHECK_ERROR"`
 
-Defined in: [services/errors.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L34)
+Defined in: [services/errors.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L34)
 
 ***
 
@@ -35,7 +35,7 @@ Defined in: [services/errors.ts:34](https://github.com/Hack23/cia-compliance-man
 
 > **CONFIGURATION\_ERROR**: `"CONFIGURATION_ERROR"`
 
-Defined in: [services/errors.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L30)
+Defined in: [services/errors.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L30)
 
 ***
 
@@ -43,7 +43,7 @@ Defined in: [services/errors.ts:30](https://github.com/Hack23/cia-compliance-man
 
 > **CONNECTION\_ERROR**: `"CONNECTION_ERROR"`
 
-Defined in: [services/errors.ts:39](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L39)
+Defined in: [services/errors.ts:39](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L39)
 
 ***
 
@@ -51,7 +51,7 @@ Defined in: [services/errors.ts:39](https://github.com/Hack23/cia-compliance-man
 
 > **DATA\_NOT\_FOUND**: `"DATA_NOT_FOUND"`
 
-Defined in: [services/errors.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L28)
+Defined in: [services/errors.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L28)
 
 ***
 
@@ -59,7 +59,7 @@ Defined in: [services/errors.ts:28](https://github.com/Hack23/cia-compliance-man
 
 > **DATA\_PROVIDER\_ERROR**: `"DATA_PROVIDER_ERROR"`
 
-Defined in: [services/errors.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L29)
+Defined in: [services/errors.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L29)
 
 ***
 
@@ -67,7 +67,7 @@ Defined in: [services/errors.ts:29](https://github.com/Hack23/cia-compliance-man
 
 > **INTERNAL\_ERROR**: `"INTERNAL_ERROR"`
 
-Defined in: [services/errors.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L47)
+Defined in: [services/errors.ts:47](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L47)
 
 ***
 
@@ -75,7 +75,7 @@ Defined in: [services/errors.ts:47](https://github.com/Hack23/cia-compliance-man
 
 > **INVALID\_COMPONENT\_TYPE**: `"INVALID_COMPONENT_TYPE"`
 
-Defined in: [services/errors.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L23)
+Defined in: [services/errors.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L23)
 
 ***
 
@@ -83,7 +83,7 @@ Defined in: [services/errors.ts:23](https://github.com/Hack23/cia-compliance-man
 
 > **INVALID\_INPUT**: `"INVALID_INPUT"`
 
-Defined in: [services/errors.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L24)
+Defined in: [services/errors.ts:24](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L24)
 
 ***
 
@@ -91,7 +91,7 @@ Defined in: [services/errors.ts:24](https://github.com/Hack23/cia-compliance-man
 
 > **INVALID\_SECURITY\_LEVEL**: `"INVALID_SECURITY_LEVEL"`
 
-Defined in: [services/errors.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L22)
+Defined in: [services/errors.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L22)
 
 ***
 
@@ -99,7 +99,7 @@ Defined in: [services/errors.ts:22](https://github.com/Hack23/cia-compliance-man
 
 > **MISSING\_REQUIRED\_FIELD**: `"MISSING_REQUIRED_FIELD"`
 
-Defined in: [services/errors.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L25)
+Defined in: [services/errors.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L25)
 
 ***
 
@@ -107,7 +107,7 @@ Defined in: [services/errors.ts:25](https://github.com/Hack23/cia-compliance-man
 
 > **NETWORK\_ERROR**: `"NETWORK_ERROR"`
 
-Defined in: [services/errors.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L38)
+Defined in: [services/errors.ts:38](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L38)
 
 ***
 
@@ -115,7 +115,7 @@ Defined in: [services/errors.ts:38](https://github.com/Hack23/cia-compliance-man
 
 > **RATE\_LIMIT\_ERROR**: `"RATE_LIMIT_ERROR"`
 
-Defined in: [services/errors.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L44)
+Defined in: [services/errors.ts:44](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L44)
 
 ***
 
@@ -123,7 +123,7 @@ Defined in: [services/errors.ts:44](https://github.com/Hack23/cia-compliance-man
 
 > **RETRYABLE\_ERROR**: `"RETRYABLE_ERROR"`
 
-Defined in: [services/errors.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L43)
+Defined in: [services/errors.ts:43](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L43)
 
 ***
 
@@ -131,7 +131,7 @@ Defined in: [services/errors.ts:43](https://github.com/Hack23/cia-compliance-man
 
 > **ROI\_CALCULATION\_ERROR**: `"ROI_CALCULATION_ERROR"`
 
-Defined in: [services/errors.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L35)
+Defined in: [services/errors.ts:35](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L35)
 
 ***
 
@@ -139,7 +139,7 @@ Defined in: [services/errors.ts:35](https://github.com/Hack23/cia-compliance-man
 
 > **TIMEOUT\_ERROR**: `"TIMEOUT_ERROR"`
 
-Defined in: [services/errors.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L40)
+Defined in: [services/errors.ts:40](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L40)
 
 ***
 
@@ -147,7 +147,7 @@ Defined in: [services/errors.ts:40](https://github.com/Hack23/cia-compliance-man
 
 > **UNEXPECTED\_ERROR**: `"UNEXPECTED_ERROR"`
 
-Defined in: [services/errors.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L48)
+Defined in: [services/errors.ts:48](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L48)
 
 ***
 
@@ -155,4 +155,4 @@ Defined in: [services/errors.ts:48](https://github.com/Hack23/cia-compliance-man
 
 > **VALIDATION\_ERROR**: `"VALIDATION_ERROR"`
 
-Defined in: [services/errors.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/services/errors.ts#L21)
+Defined in: [services/errors.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/errors.ts#L21)

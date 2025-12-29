@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.2**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.3**](../../README.md)
 
 ***
 
@@ -8,13 +8,21 @@
 
 > `const` **APP\_TEST\_IDS**: `object`
 
-Defined in: [constants/testIds.ts:568](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/constants/testIds.ts#L568)
+Defined in: [constants/testIds.ts:721](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/constants/testIds.ts#L721)
 
 ## Type Declaration
 
 ### APP\_CONTAINER
 
 > **APP\_CONTAINER**: `string` = `"app-container"`
+
+### APP\_INDICATOR
+
+> **APP\_INDICATOR**: `string` = `"app-indicator"`
+
+### APP\_LOGO
+
+> **APP\_LOGO**: `string` = `"app-logo"`
 
 ### APP\_ROOT
 
@@ -23,6 +31,14 @@ Defined in: [constants/testIds.ts:568](https://github.com/Hack23/cia-compliance-
 ### APP\_TITLE
 
 > **APP\_TITLE**: `string` = `"app-title"`
+
+### APP\_VERSION
+
+> **APP\_VERSION**: `string` = `"app-version"`
+
+### AUTHOR\_LINK
+
+> **AUTHOR\_LINK**: `string` = `"author-link"`
 
 ### CIA\_CLASSIFICATION\_APP
 
@@ -35,6 +51,10 @@ Defined in: [constants/testIds.ts:568](https://github.com/Hack23/cia-compliance-
 ### DASHBOARD\_GRID
 
 > **DASHBOARD\_GRID**: `string` = `"dashboard-grid"`
+
+### DOCS\_LINK
+
+> **DOCS\_LINK**: `string` = `"docs-link"`
 
 ### ERROR\_BOUNDARY
 
@@ -56,9 +76,17 @@ Defined in: [constants/testIds.ts:568](https://github.com/Hack23/cia-compliance-
 
 > **ERROR\_STACK**: `string` = `"error-stack"`
 
+### KEYBOARD\_SHORTCUTS\_BUTTON
+
+> **KEYBOARD\_SHORTCUTS\_BUTTON**: `string` = `"keyboard-shortcuts-button"`
+
 ### LIGHT\_MODE\_BUTTON
 
 > **LIGHT\_MODE\_BUTTON**: `string` = `"light-mode-button"`
+
+### SOURCE\_LINK
+
+> **SOURCE\_LINK**: `string` = `"source-link"`
 
 ### SYSTEM\_MODE\_BUTTON
 

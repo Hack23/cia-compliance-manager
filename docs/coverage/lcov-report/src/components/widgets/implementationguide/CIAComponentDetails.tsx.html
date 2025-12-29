@@ -333,7 +333,9 @@
 <a name='L268'></a><a href='#L268'>268</a>
 <a name='L269'></a><a href='#L269'>269</a>
 <a name='L270'></a><a href='#L270'>270</a>
-<a name='L271'></a><a href='#L271'>271</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -604,6 +606,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useMemo } from "react";
+import { TECHNICAL_DETAILS_WIDGET_IDS } from "../../../constants/testIds";
 import { SecurityLevel, CIAComponent } from "../../../types/cia";
 import { getImplementationComplexity } from "../../../utils/riskUtils";
 import { getPersonnelRequirements } from "../../../utils/resourceUtils";
@@ -724,8 +727,8 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
   };
 &nbsp;
   return (
-    &lt;div className="mb-6" data-testid={`${component}-section`}&gt;
-      &lt;div className="flex items-center mb-4" data-testid="technical-header"&gt;
+    &lt;div className="mb-6" data-testid={TECHNICAL_DETAILS_WIDGET_IDS.section(component)}&gt;
+      &lt;div className="flex items-center mb-4" data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header()}&gt;
         &lt;span className={`text-xl mr-2 ${theme.accentClass}`}&gt;
           {theme.icon}
         &lt;/span&gt;
@@ -751,7 +754,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
           &lt;/h4&gt;
           &lt;p
             className="text-sm text-gray-600 dark:text-gray-400"
-            data-testid="technical-description"
+            data-testid={TECHNICAL_DETAILS_WIDGET_IDS.label('description')}
           &gt;
             {getOptionalProperty(
               details,
@@ -766,7 +769,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
             &lt;/h5&gt;
             &lt;div
               className="flex items-center"
-              data-testid="development-effort"
+              data-testid={TECHNICAL_DETAILS_WIDGET_IDS.label('development-effort')}
             &gt;
               &lt;div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2"&gt;
                 &lt;div
@@ -784,7 +787,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
             &lt;/h5&gt;
             &lt;div
               className="flex items-center"
-              data-testid="maintenance-level"
+              data-testid={TECHNICAL_DETAILS_WIDGET_IDS.label('maintenance-level')}
             &gt;
               &lt;span className="text-sm"&gt;Estimated staffing: &lt;/span&gt;
               &lt;span className={`ml-2 text-sm font-medium ${theme.textClass}`}&gt;
@@ -798,18 +801,18 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
         &lt;div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark"&gt;
           &lt;h4
             className="text-md font-medium mb-3"
-            data-testid="implementation-header"
+            data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header('implementation')}
           &gt;
             Implementation Requirements
           &lt;/h4&gt;
           &lt;ul
             className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400"
-            data-testid="implementation-steps"
+            data-testid={TECHNICAL_DETAILS_WIDGET_IDS.list('implementation-steps')}
           &gt;
             {getTechnicalRequirements(component, level).map((req, index) =&gt; (
               &lt;li
                 key={`${component}-req-${index}`}
-                data-testid={`${component}-req-${index}`}
+                data-testid={TECHNICAL_DETAILS_WIDGET_IDS.item(`requirement-${index}`)}
               &gt;
                 {req}
               &lt;/li&gt;
@@ -857,7 +860,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
         &lt;/h4&gt;
         &lt;ul
           className="grid grid-cols-1 lg:grid-cols-2 gap-2"
-          data-testid="required-expertise"
+          data-testid={TECHNICAL_DETAILS_WIDGET_IDS.list('required-expertise')}
         &gt;
           {getExpertiseRequired(component, level).map((expertise, index) =&gt; (
             &lt;li
@@ -880,7 +883,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-29T00:42:29.254Z
+                at 2025-12-29T20:28:14.357Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

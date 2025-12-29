@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.2**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.3**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **TEST\_IDS**: `object`
 
-Defined in: [constants/testIds.ts:915](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/constants/testIds.ts#L915)
+Defined in: [constants/testIds.ts:1075](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/constants/testIds.ts#L1075)
 
 Consolidated export of all test IDs for easier imports
 
@@ -22,6 +22,14 @@ Consolidated export of all test IDs for easier imports
 
 > **APP\_CONTAINER**: `string` = `"app-container"`
 
+### APP\_INDICATOR
+
+> **APP\_INDICATOR**: `string` = `"app-indicator"`
+
+### APP\_LOGO
+
+> **APP\_LOGO**: `string` = `"app-logo"`
+
 ### APP\_ROOT
 
 > **APP\_ROOT**: `string` = `"app-root"`
@@ -29,6 +37,14 @@ Consolidated export of all test IDs for easier imports
 ### APP\_TITLE
 
 > **APP\_TITLE**: `string` = `"app-title"`
+
+### APP\_VERSION
+
+> **APP\_VERSION**: `string` = `"app-version"`
+
+### AUTHOR\_LINK
+
+> **AUTHOR\_LINK**: `string` = `"author-link"`
 
 ### AUTO\_CALCULATE\_BUTTON
 
@@ -1042,6 +1058,10 @@ Create test ID for a widget
 
 > **DISPLAYED\_VALUE**: `string` = `"displayed-value"`
 
+### DOCS\_LINK
+
+> **DOCS\_LINK**: `string` = `"docs-link"`
+
 ### EMPTY\_STATE
 
 > **EMPTY\_STATE**: `string` = `"empty-state"`
@@ -1106,7 +1126,7 @@ Create test ID for a widget
 
 > **FRAMEWORK\_STATUS**: `string` = `"framework-status"`
 
-### getTestId()
+### ~~getTestId()~~
 
 > **getTestId**: (`prefix`, `id`) => `string`
 
@@ -1125,6 +1145,10 @@ Helper to create a test ID with a prefix
 #### Returns
 
 `string`
+
+#### Deprecated
+
+Use createTestId() instead for consistency
 
 ### GUIDELINES\_CONTENT
 
@@ -1325,6 +1349,10 @@ Helper to create a test ID with a prefix
 ### KEY\_VALUE\_VALUE
 
 > **KEY\_VALUE\_VALUE**: `string` = `"key-value-value"`
+
+### KEYBOARD\_SHORTCUTS\_BUTTON
+
+> **KEYBOARD\_SHORTCUTS\_BUTTON**: `string` = `"keyboard-shortcuts-button"`
 
 ### LIGHT\_MODE\_BUTTON
 
@@ -1749,6 +1777,10 @@ Helper to create a test ID with a prefix
 ### SELECTED\_FRAMEWORK\_STATUS
 
 > **SELECTED\_FRAMEWORK\_STATUS**: `string` = `"selected-framework-status"`
+
+### SOURCE\_LINK
+
+> **SOURCE\_LINK**: `string` = `"source-link"`
 
 ### STATUS\_BADGE
 
