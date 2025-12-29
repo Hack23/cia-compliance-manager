@@ -297,7 +297,40 @@ export const WIDGET_REGISTRY_TEST_IDS = {
 };
 
 // ---------------------------------------------------------------
-// SECTION 3: CIA COMPONENT TEST IDs
+// SECTION 3: WIDGET-SCOPED TEST ID GENERATORS
+// ---------------------------------------------------------------
+
+/**
+ * Widget-scoped test ID generators using the createWidgetTestId helper.
+ * These provide consistent, hierarchical test IDs for each widget.
+ * 
+ * Usage:
+ * ```tsx
+ * import { SECURITY_LEVEL_WIDGET_IDS } from '@/constants/testIds';
+ * 
+ * <div data-testid={SECURITY_LEVEL_WIDGET_IDS.root}>
+ *   <section data-testid={SECURITY_LEVEL_WIDGET_IDS.section('confidentiality')}>
+ *     <button data-testid={SECURITY_LEVEL_WIDGET_IDS.button('view-details')}>
+ *   </section>
+ * </div>
+ * ```
+ */
+
+export const SECURITY_LEVEL_WIDGET_IDS = createWidgetTestId('security-level');
+export const VALUE_CREATION_WIDGET_IDS = createWidgetTestId('value-creation');
+export const COST_ESTIMATION_WIDGET_IDS = createWidgetTestId('cost-estimation');
+export const BUSINESS_IMPACT_WIDGET_IDS = createWidgetTestId('business-impact');
+export const COMPLIANCE_STATUS_WIDGET_IDS = createWidgetTestId('compliance-status');
+export const SECURITY_SUMMARY_WIDGET_IDS = createWidgetTestId('security-summary');
+export const AVAILABILITY_IMPACT_WIDGET_IDS = createWidgetTestId('availability-impact');
+export const INTEGRITY_IMPACT_WIDGET_IDS = createWidgetTestId('integrity-impact');
+export const CONFIDENTIALITY_IMPACT_WIDGET_IDS = createWidgetTestId('confidentiality-impact');
+export const TECHNICAL_DETAILS_WIDGET_IDS = createWidgetTestId('technical-details');
+export const SECURITY_RESOURCES_WIDGET_IDS = createWidgetTestId('security-resources');
+export const SECURITY_VISUALIZATION_WIDGET_IDS = createWidgetTestId('security-visualization');
+
+// ---------------------------------------------------------------
+// SECTION 4: CIA COMPONENT TEST IDs
 // ---------------------------------------------------------------
 
 export const CIA_TEST_IDS = {

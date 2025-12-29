@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { VALUE_CREATION_WIDGET_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { calculateROIEstimate } from "../../../utils/businessValueUtils";
@@ -349,7 +350,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           aria-labelledby="value-profile-heading"
         >
           <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md mb-md">
-            <p className="text-body" data-testid="value-creation-summary">
+            <p className="text-body" data-testid={VALUE_CREATION_WIDGET_IDS.label('summary')}>
               {getBusinessValueSummary()}
             </p>
           </div>
@@ -383,7 +384,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               </div>
               <div
                 className="text-title font-bold text-success dark:text-success-light"
-                data-testid="roi-value"
+                data-testid={VALUE_CREATION_WIDGET_IDS.value('roi')}
                 aria-label={`Return on investment: ${roiEstimate.value}`}
               >
                 {roiEstimate.value}
@@ -394,7 +395,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           {/* Business value metrics grid */}
           <div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md"
-            data-testid="value-metrics-grid"
+            data-testid={VALUE_CREATION_WIDGET_IDS.section('metrics-grid')}
           >
             {valueMetrics.map((metric, index) => (
               <div
@@ -426,7 +427,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           {/* Confidentiality value */}
           <div
             className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md"
-            data-testid="confidentiality-value-section"
+            data-testid={VALUE_CREATION_WIDGET_IDS.section('confidentiality-value')}
           >
             <div className="flex items-center mb-sm">
               <span className="text-title mr-sm">🔒</span>
@@ -453,7 +454,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           {/* Integrity value */}
           <div
             className="mb-4 p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
-            data-testid="integrity-value-section"
+            data-testid={VALUE_CREATION_WIDGET_IDS.section('integrity-value')}
           >
             <div className="flex items-center mb-2">
               <span className="text-xl mr-2">✓</span>
@@ -479,7 +480,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           {/* Availability value */}
           <div
             className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
-            data-testid="availability-value-section"
+            data-testid={VALUE_CREATION_WIDGET_IDS.section('availability-value')}
           >
             <div className="flex items-center mb-2">
               <span className="text-xl mr-2">⏱️</span>
