@@ -68,7 +68,7 @@ describe("TechnicalDetailsWidget", () => {
     });
 
     // By default, confidentiality tab should be active
-    expect(screen.getByTestId("technical-description")).toHaveTextContent(
+    expect(screen.getByTestId("widget-technical-details-label-description")).toHaveTextContent(
       /confidentiality Moderate technical details/i
     );
   });
@@ -79,7 +79,7 @@ describe("TechnicalDetailsWidget", () => {
     });
 
     // Check implementation requirements
-    expect(screen.getByTestId("implementation-steps")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-list-implementation-steps")).toBeInTheDocument();
     expect(
       screen.getByText(/Implement role-based access control/i)
     ).toBeInTheDocument();
@@ -100,7 +100,7 @@ describe("TechnicalDetailsWidget", () => {
 
     // Should now show integrity content
     expect(screen.getByTestId("integrity-section")).toBeInTheDocument();
-    expect(screen.getByTestId("technical-description")).toHaveTextContent(
+    expect(screen.getByTestId("widget-technical-details-label-description")).toHaveTextContent(
       /integrity Moderate technical details/i
     );
   });
@@ -117,7 +117,7 @@ describe("TechnicalDetailsWidget", () => {
 
     // Should now show integrity content
     expect(screen.getByTestId("integrity-section")).toBeInTheDocument();
-    expect(screen.getByTestId("technical-description")).toHaveTextContent(
+    expect(screen.getByTestId("widget-technical-details-label-description")).toHaveTextContent(
       /integrity Moderate technical details/i
     );
 
@@ -128,7 +128,7 @@ describe("TechnicalDetailsWidget", () => {
 
     // Should now show availability content
     expect(screen.getByTestId("availability-section")).toBeInTheDocument();
-    expect(screen.getByTestId("technical-description")).toHaveTextContent(
+    expect(screen.getByTestId("widget-technical-details-label-description")).toHaveTextContent(
       /availability Moderate technical details/i
     );
   });
@@ -149,7 +149,7 @@ describe("TechnicalDetailsWidget", () => {
     expect(screen.getByTestId("development-effort")).toBeInTheDocument();
     expect(screen.getByTestId("maintenance-level")).toBeInTheDocument();
     expect(screen.getByTestId("required-expertise")).toBeInTheDocument();
-    expect(screen.getByTestId("technical-header")).toBeInTheDocument();
+    expect(screen.getAllByTestId("widget-technical-details-header")[0]).toBeInTheDocument();
   });
 
   it("handles different security levels", async () => {
@@ -163,7 +163,7 @@ describe("TechnicalDetailsWidget", () => {
     );
 
     // By default shows None level for confidentiality
-    expect(screen.getByTestId("technical-description")).toHaveTextContent(
+    expect(screen.getByTestId("widget-technical-details-label-description")).toHaveTextContent(
       /confidentiality None technical details/i
     );
 
@@ -180,7 +180,7 @@ describe("TechnicalDetailsWidget", () => {
     });
 
     // Should still show confidentiality but with Very High level
-    expect(screen.getByTestId("technical-description")).toHaveTextContent(
+    expect(screen.getByTestId("widget-technical-details-label-description")).toHaveTextContent(
       /confidentiality Very High technical details/i
     );
 
@@ -189,7 +189,7 @@ describe("TechnicalDetailsWidget", () => {
       fireEvent.click(screen.getByTestId("integrity-tab"));
     });
 
-    expect(screen.getByTestId("technical-description")).toHaveTextContent(
+    expect(screen.getByTestId("widget-technical-details-label-description")).toHaveTextContent(
       /integrity Very High technical details/i
     );
   });
@@ -200,10 +200,10 @@ describe("TechnicalDetailsWidget", () => {
     });
 
     // The component should show the technical implementation
-    expect(screen.getByTestId("technical-header")).toBeInTheDocument();
-    expect(screen.getByTestId("technical-description")).toBeInTheDocument();
-    expect(screen.getByTestId("implementation-header")).toBeInTheDocument();
-    expect(screen.getByTestId("implementation-steps")).toBeInTheDocument();
+    expect(screen.getAllByTestId("widget-technical-details-header")[0]).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-label-description")).toBeInTheDocument();
+    expect(screen.getAllByTestId("widget-technical-details-header")[0]).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-list-implementation-steps")).toBeInTheDocument();
   });
 
   it("applies custom testId", async () => {

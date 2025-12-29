@@ -105,17 +105,17 @@ describe("CIAComponentDetails", () => {
 
   it("displays technical description", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("technical-description")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-label-description")).toBeInTheDocument();
   });
 
   it("displays implementation requirements header", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("implementation-header")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-header")).toBeInTheDocument();
   });
 
   it("displays technical requirements", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("implementation-steps")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-list-implementation-steps")).toBeInTheDocument();
     expect(screen.getByText(/Implement encryption at rest/i)).toBeInTheDocument();
     expect(screen.getByText(/Implement role-based access control/i)).toBeInTheDocument();
   });
@@ -138,22 +138,23 @@ describe("CIAComponentDetails", () => {
 
   it("displays development effort", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("development-effort")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-label-development-effort")).toBeInTheDocument();
   });
 
   it("displays maintenance level", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("maintenance-level")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-label-maintenance-level")).toBeInTheDocument();
   });
 
   it("displays required expertise section", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("required-expertise")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-list-required-expertise")).toBeInTheDocument();
   });
 
   it("displays technical header", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("technical-header")).toBeInTheDocument();
+    const headers = screen.getAllByTestId("widget-technical-details-header");
+    expect(headers.length).toBeGreaterThan(0);
   });
 
   it("handles High security level", () => {
@@ -299,7 +300,7 @@ describe("CIAComponentDetails", () => {
     };
     
     render(<CIAComponentDetails {...emptyReqsProps} />);
-    expect(screen.getByTestId("implementation-steps")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-list-implementation-steps")).toBeInTheDocument();
   });
 
   it("handles empty expertise requirements", () => {
@@ -309,7 +310,7 @@ describe("CIAComponentDetails", () => {
     };
     
     render(<CIAComponentDetails {...emptyExpertiseProps} />);
-    expect(screen.getByTestId("required-expertise")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-list-required-expertise")).toBeInTheDocument();
   });
 
   it("applies correct theme colors for confidentiality", () => {

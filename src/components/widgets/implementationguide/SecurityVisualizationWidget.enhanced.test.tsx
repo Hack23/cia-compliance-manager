@@ -103,7 +103,7 @@ describe("SecurityVisualizationWidget Enhanced Tests", () => {
     render(<SecurityVisualizationWidget {...defaultProps} />);
 
     // Check risk level
-    const riskLevel = screen.getByTestId("risk-level");
+    const riskLevel = screen.getByTestId("widget-security-visualization-label-risk");
     expect(riskLevel).toBeInTheDocument();
     expect(riskLevel.textContent).toBe("Low Risk");
   });
