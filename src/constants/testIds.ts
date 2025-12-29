@@ -1,11 +1,130 @@
 import { SecurityLevel } from "../types/cia";
 
 // ---------------------------------------------------------------
-// SECTION 1: HELPER FUNCTIONS AND UTILITIES
+// SECTION 1: TEST ID NAMING CONVENTION
 // ---------------------------------------------------------------
 
 /**
+ * ## Test ID Naming Convention
+ *
+ * All test IDs in this codebase follow a consistent hierarchical pattern:
+ * **Pattern**: `{scope}-{element}-{modifier}`
+ *
+ * ### Examples:
+ * - Widget containers: `widget-cost-estimation`
+ * - Buttons: `cost-estimation-button-submit`
+ * - Sections: `security-summary-section-overview`
+ * - Labels: `availability-label-current-level`
+ * - Values: `cost-estimation-value-total`
+ *
+ * ### Rules:
+ * 1. **Use kebab-case** (lowercase with hyphens)
+ * 2. **Start with widget/component name** for scoping
+ * 3. **Follow hierarchical structure** (parent → child → specific)
+ * 4. **Use semantic descriptors** (describe purpose, not appearance)
+ * 5. **Avoid generic names** like "button-1" or "div-2"
+ *
+ * ### Widget-Scoped Pattern:
+ * - Root: `widget-{name}` (e.g., `widget-cost-estimation`)
+ * - Section: `widget-{name}-section-{section-name}`
+ * - Button: `widget-{name}-button-{action}`
+ * - Value: `widget-{name}-value-{data-type}`
+ * - Label: `widget-{name}-label-{field}`
+ */
+
+// ---------------------------------------------------------------
+// SECTION 2: HELPER FUNCTIONS AND UTILITIES
+// ---------------------------------------------------------------
+
+/**
+ * Generate hierarchical test ID from parts
+ *
+ * @param parts - Array of ID parts to combine
+ * @returns Formatted test ID in kebab-case
+ *
+ * @example
+ * createTestId('cost', 'estimation', 'button', 'submit')
+ * // Returns: 'cost-estimation-button-submit'
+ *
+ * @example
+ * createTestId('widget', 'Security Level')
+ * // Returns: 'widget-security-level'
+ */
+export function createTestId(...parts: string[]): string {
+  return parts
+    .filter(Boolean)
+    .map(part => part.toLowerCase().replace(/\s+/g, '-'))
+    .join('-');
+}
+
+/**
+ * Type definition for widget test ID generators
+ */
+export interface WidgetTestIds {
+  root: string;
+  section: (name: string) => string;
+  button: (name: string) => string;
+  value: (name: string) => string;
+  label: (name: string) => string;
+  icon: (name: string) => string;
+  input: (name: string) => string;
+  list: (name: string) => string;
+  item: (name: string) => string;
+  card: (name: string) => string;
+  header: (name?: string) => string;
+  content: (name?: string) => string;
+  footer: (name?: string) => string;
+}
+
+/**
+ * Widget-scoped test ID generator factory
+ * Creates a factory object with methods to generate consistent test IDs
+ * for all elements within a widget.
+ *
+ * @param widgetName - Name of the widget (will be normalized to kebab-case)
+ * @returns Object with methods to generate scoped test IDs
+ *
+ * @example
+ * const COST_IDS = createWidgetTestId('cost-estimation');
+ * COST_IDS.root              // 'widget-cost-estimation'
+ * COST_IDS.section('capex')  // 'widget-cost-estimation-section-capex'
+ * COST_IDS.button('submit')  // 'widget-cost-estimation-button-submit'
+ * COST_IDS.value('total')    // 'widget-cost-estimation-value-total'
+ * COST_IDS.label('amount')   // 'widget-cost-estimation-label-amount'
+ * COST_IDS.header()          // 'widget-cost-estimation-header'
+ * COST_IDS.header('main')    // 'widget-cost-estimation-header-main'
+ */
+export function createWidgetTestId(widgetName: string): WidgetTestIds {
+  const normalizedName = widgetName.toLowerCase().replace(/\s+/g, '-');
+  return {
+    root: createTestId('widget', normalizedName),
+    section: (name: string) => createTestId('widget', normalizedName, 'section', name),
+    button: (name: string) => createTestId('widget', normalizedName, 'button', name),
+    value: (name: string) => createTestId('widget', normalizedName, 'value', name),
+    label: (name: string) => createTestId('widget', normalizedName, 'label', name),
+    icon: (name: string) => createTestId('widget', normalizedName, 'icon', name),
+    input: (name: string) => createTestId('widget', normalizedName, 'input', name),
+    list: (name: string) => createTestId('widget', normalizedName, 'list', name),
+    item: (name: string) => createTestId('widget', normalizedName, 'item', name),
+    card: (name: string) => createTestId('widget', normalizedName, 'card', name),
+    header: (name?: string) =>
+      name
+        ? createTestId('widget', normalizedName, 'header', name)
+        : createTestId('widget', normalizedName, 'header'),
+    content: (name?: string) =>
+      name
+        ? createTestId('widget', normalizedName, 'content', name)
+        : createTestId('widget', normalizedName, 'content'),
+    footer: (name?: string) =>
+      name
+        ? createTestId('widget', normalizedName, 'footer', name)
+        : createTestId('widget', normalizedName, 'footer'),
+  };
+}
+
+/**
  * Create a context-specific test ID by combining a component prefix with an element ID
+ * @deprecated Use createTestId() or createWidgetTestId() instead for consistency
  */
 export const createContextualTestId = (
   componentPrefix: string,
@@ -16,6 +135,7 @@ export const createContextualTestId = (
 
 /**
  * Helper to create a test ID with a prefix
+ * @deprecated Use createTestId() instead for consistency
  */
 export const getTestId = (prefix: string, id: string): string => {
   return `${prefix}-${id}`;
@@ -206,7 +326,40 @@ export const WIDGET_REGISTRY_TEST_IDS = {
 };
 
 // ---------------------------------------------------------------
-// SECTION 3: CIA COMPONENT TEST IDs
+// SECTION 3: WIDGET-SCOPED TEST ID GENERATORS
+// ---------------------------------------------------------------
+
+/**
+ * Widget-scoped test ID generators using the createWidgetTestId helper.
+ * These provide consistent, hierarchical test IDs for each widget.
+ * 
+ * Usage:
+ * ```tsx
+ * import { SECURITY_LEVEL_WIDGET_IDS } from '../constants/testIds';
+ * 
+ * <div data-testid={SECURITY_LEVEL_WIDGET_IDS.root}>
+ *   <section data-testid={SECURITY_LEVEL_WIDGET_IDS.section('confidentiality')}>
+ *     <button data-testid={SECURITY_LEVEL_WIDGET_IDS.button('view-details')}>
+ *   </section>
+ * </div>
+ * ```
+ */
+
+export const SECURITY_LEVEL_WIDGET_IDS = createWidgetTestId('security-level');
+export const VALUE_CREATION_WIDGET_IDS = createWidgetTestId('value-creation');
+export const COST_ESTIMATION_WIDGET_IDS = createWidgetTestId('cost-estimation');
+export const BUSINESS_IMPACT_WIDGET_IDS = createWidgetTestId('business-impact');
+export const COMPLIANCE_STATUS_WIDGET_IDS = createWidgetTestId('compliance-status');
+export const SECURITY_SUMMARY_WIDGET_IDS = createWidgetTestId('security-summary');
+export const AVAILABILITY_IMPACT_WIDGET_IDS = createWidgetTestId('availability-impact');
+export const INTEGRITY_IMPACT_WIDGET_IDS = createWidgetTestId('integrity-impact');
+export const CONFIDENTIALITY_IMPACT_WIDGET_IDS = createWidgetTestId('confidentiality-impact');
+export const TECHNICAL_DETAILS_WIDGET_IDS = createWidgetTestId('technical-details');
+export const SECURITY_RESOURCES_WIDGET_IDS = createWidgetTestId('security-resources');
+export const SECURITY_VISUALIZATION_WIDGET_IDS = createWidgetTestId('security-visualization');
+
+// ---------------------------------------------------------------
+// SECTION 4: CIA COMPONENT TEST IDs
 // ---------------------------------------------------------------
 
 export const CIA_TEST_IDS = {
@@ -569,12 +722,19 @@ export const APP_TEST_IDS = {
   APP_CONTAINER: "app-container",
   APP_TITLE: "app-title",
   APP_ROOT: "app-root",
+  APP_LOGO: "app-logo",
+  APP_VERSION: "app-version",
+  APP_INDICATOR: "app-indicator",
   DASHBOARD_GRID: "dashboard-grid",
   THEME_TOGGLE: "theme-toggle",
   LIGHT_MODE_BUTTON: "light-mode-button",
   DARK_MODE_BUTTON: "dark-mode-button",
   SYSTEM_MODE_BUTTON: "system-mode-button",
   CIA_CLASSIFICATION_APP: "cia-classification-app",
+  KEYBOARD_SHORTCUTS_BUTTON: "keyboard-shortcuts-button",
+  SOURCE_LINK: "source-link",
+  DOCS_LINK: "docs-link",
+  AUTHOR_LINK: "author-link",
 
   // Additional app-level constants
   ERROR_BOUNDARY: "error-boundary",

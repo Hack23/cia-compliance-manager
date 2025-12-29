@@ -77,6 +77,80 @@ This project has specialized GitHub Copilot agent profiles to help you with deve
 
 Learn more about these agents in [`.github/agents/README.md`](.github/agents/README.md).
 
+## Test ID Naming Convention
+
+All test IDs in the codebase follow a consistent hierarchical pattern for improved test reliability and maintainability.
+
+### Pattern
+`{scope}-{element}-{modifier}`
+
+### Examples
+- Widget containers: `widget-cost-estimation`
+- Buttons: `cost-estimation-button-submit`
+- Sections: `security-summary-section-overview`
+- Labels: `availability-label-current-level`
+- Values: `cost-estimation-value-total`
+
+### Rules
+1. **Use kebab-case** (lowercase with hyphens)
+2. **Start with widget/component name** for scoping
+3. **Follow hierarchical structure** (parent → child → specific)
+4. **Use semantic descriptors** (describe purpose, not appearance)
+5. **Avoid generic names** like "button-1" or "div-2"
+6. **Always use constants** from `src/constants/testIds.ts`
+
+### Implementation
+
+**✅ DO**: Use test ID constants
+```tsx
+import { createWidgetTestId } from '../constants/testIds';
+
+const COST_IDS = createWidgetTestId('cost-estimation');
+
+<div data-testid={COST_IDS.root}>
+  <section data-testid={COST_IDS.section('capex')}>
+    <button data-testid={COST_IDS.button('submit')}>Submit</button>
+  </section>
+</div>
+```
+
+**❌ DON'T**: Use hardcoded strings
+```tsx
+// BAD - Hardcoded strings
+<div data-testid="cost-container">
+  <section data-testid="capex-value">
+    <button data-testid="submitBtn">Submit</button>
+  </section>
+</div>
+```
+
+### Helper Functions
+
+The codebase provides helper functions for creating consistent test IDs:
+
+```typescript
+import { createTestId, createWidgetTestId } from '../constants/testIds';
+
+// Simple test ID creation
+const myId = createTestId('security', 'level', 'badge');
+// Result: 'security-level-badge'
+
+// Widget-scoped test ID generator
+const WIDGET_IDS = createWidgetTestId('security-summary');
+WIDGET_IDS.root           // 'widget-security-summary'
+WIDGET_IDS.section('cia') // 'widget-security-summary-section-cia'
+WIDGET_IDS.button('save') // 'widget-security-summary-button-save'
+```
+
+### ESLint Rule
+
+An ESLint rule enforces this convention by preventing hardcoded test ID strings. If you need to add a test ID:
+
+1. Check if a constant already exists in `src/constants/testIds.ts`
+2. If not, add it following the naming convention
+3. Import and use the constant in your component
+4. Run `npm run lint` to verify compliance
+
 ## Resources
 
 - [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)

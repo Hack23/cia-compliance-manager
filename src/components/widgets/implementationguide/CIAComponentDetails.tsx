@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { TECHNICAL_DETAILS_WIDGET_IDS } from "../../../constants/testIds";
 import { SecurityLevel, CIAComponent } from "../../../types/cia";
 import { getImplementationComplexity } from "../../../utils/riskUtils";
 import { getPersonnelRequirements } from "../../../utils/resourceUtils";
@@ -119,8 +120,8 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
   };
 
   return (
-    <div className="mb-6" data-testid={`${component}-section`}>
-      <div className="flex items-center mb-4" data-testid="technical-header">
+    <div className="mb-6" data-testid={TECHNICAL_DETAILS_WIDGET_IDS.section(component)}>
+      <div className="flex items-center mb-4" data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header()}>
         <span className={`text-xl mr-2 ${theme.accentClass}`}>
           {theme.icon}
         </span>
@@ -146,7 +147,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
           </h4>
           <p
             className="text-sm text-gray-600 dark:text-gray-400"
-            data-testid="technical-description"
+            data-testid={TECHNICAL_DETAILS_WIDGET_IDS.label('description')}
           >
             {getOptionalProperty(
               details,
@@ -161,7 +162,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             </h5>
             <div
               className="flex items-center"
-              data-testid="development-effort"
+              data-testid={TECHNICAL_DETAILS_WIDGET_IDS.label('development-effort')}
             >
               <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
                 <div
@@ -179,7 +180,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             </h5>
             <div
               className="flex items-center"
-              data-testid="maintenance-level"
+              data-testid={TECHNICAL_DETAILS_WIDGET_IDS.label('maintenance-level')}
             >
               <span className="text-sm">Estimated staffing: </span>
               <span className={`ml-2 text-sm font-medium ${theme.textClass}`}>
@@ -193,18 +194,18 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
           <h4
             className="text-md font-medium mb-3"
-            data-testid="implementation-header"
+            data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header('implementation')}
           >
             Implementation Requirements
           </h4>
           <ul
             className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400"
-            data-testid="implementation-steps"
+            data-testid={TECHNICAL_DETAILS_WIDGET_IDS.list('implementation-steps')}
           >
             {getTechnicalRequirements(component, level).map((req, index) => (
               <li
                 key={`${component}-req-${index}`}
-                data-testid={`${component}-req-${index}`}
+                data-testid={TECHNICAL_DETAILS_WIDGET_IDS.item(`requirement-${index}`)}
               >
                 {req}
               </li>
@@ -252,7 +253,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </h4>
         <ul
           className="grid grid-cols-1 lg:grid-cols-2 gap-2"
-          data-testid="required-expertise"
+          data-testid={TECHNICAL_DETAILS_WIDGET_IDS.list('required-expertise')}
         >
           {getExpertiseRequired(component, level).map((expertise, index) => (
             <li

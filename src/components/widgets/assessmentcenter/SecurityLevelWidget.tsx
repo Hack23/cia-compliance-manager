@@ -5,6 +5,7 @@ import {
   WIDGET_TITLES,
 } from "../../../constants/appConstants";
 import { CIA_COMPONENT_ICONS } from "../../../constants/uiConstants";
+import { SECURITY_LEVEL_WIDGET_IDS, CIA_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { CIADetails } from "../../../types/cia-services";
@@ -305,7 +306,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
               {/* Confidentiality selector */}
               <div
                 className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md border border-neutral-light dark:border-neutral-dark"
-                data-testid="security-level-confidentiality"
+                data-testid={SECURITY_LEVEL_WIDGET_IDS.section('confidentiality')}
               >
                 <div className="flex justify-between items-center mb-sm">
                   <label
@@ -331,7 +332,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                   className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-purple-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
                   value={confidentialityLevel}
                   onChange={handleConfidentialityChange}
-                  data-testid="confidentiality-select"
+                  data-testid={CIA_TEST_IDS.CONFIDENTIALITY_SELECT}
                 >
                   {securityLevelOptions.map((level) => (
                     <option key={`confidentiality-${level}`} value={level}>
@@ -342,7 +343,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 <div
                   className="mt-2 text-xs text-gray-600 dark:text-gray-400"
-                  data-testid="security-level-widget-confidentiality-summary"
+                  data-testid={SECURITY_LEVEL_WIDGET_IDS.label('confidentiality-summary')}
                 >
                   {confidentialityLevel}:{" "}
                   {getComponentSummary("confidentiality", confidentialityLevel)}
@@ -351,7 +352,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 <button
                   className="mt-2 px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
                   onClick={() => setActiveComponent("confidentiality")}
-                  data-testid="confidentiality-details-button"
+                  data-testid={SECURITY_LEVEL_WIDGET_IDS.button('confidentiality-details')}
                 >
                   View details
                 </button>
@@ -359,7 +360,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 {lastChangedComponent === "confidentiality" && (
                   <div
                     className="mt-2 text-xs text-green-600 dark:text-green-400 animate-pulse"
-                    data-testid="confidentiality-changed-indicator"
+                    data-testid={SECURITY_LEVEL_WIDGET_IDS.label('confidentiality-changed')}
                   >
                     ✓ Security level updated
                   </div>
@@ -369,7 +370,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
               {/* Integrity selector */}
               <div
                 className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
-                data-testid="security-level-integrity"
+                data-testid={SECURITY_LEVEL_WIDGET_IDS.section('integrity')}
               >
                 <div className="flex justify-between items-center mb-2">
                   <label
@@ -395,7 +396,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                   className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-green-400 focus:border-green-500 focus:ring-2 focus:ring-green-200"
                   value={integrityLevel}
                   onChange={handleIntegrityChange}
-                  data-testid="integrity-select"
+                  data-testid={CIA_TEST_IDS.INTEGRITY_SELECT}
                 >
                   {securityLevelOptions.map((level) => (
                     <option key={`integrity-${level}`} value={level}>
@@ -406,7 +407,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 <div
                   className="mt-2 text-xs text-gray-600 dark:text-gray-400"
-                  data-testid="security-level-widget-integrity-summary"
+                  data-testid={SECURITY_LEVEL_WIDGET_IDS.label('integrity-summary')}
                 >
                   {integrityLevel}:{" "}
                   {getComponentSummary("integrity", integrityLevel)}
@@ -415,7 +416,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 <button
                   className="mt-2 px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-green-600 text-white rounded hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600 transition-colors"
                   onClick={() => setActiveComponent("integrity")}
-                  data-testid="integrity-details-button"
+                  data-testid={SECURITY_LEVEL_WIDGET_IDS.button('integrity-details')}
                 >
                   View details
                 </button>
@@ -423,7 +424,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 {lastChangedComponent === "integrity" && (
                   <div
                     className="mt-2 text-xs text-green-600 dark:text-green-400 animate-pulse"
-                    data-testid="integrity-changed-indicator"
+                    data-testid={SECURITY_LEVEL_WIDGET_IDS.label('integrity-changed')}
                   >
                     ✓ Security level updated
                   </div>
@@ -433,7 +434,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
               {/* Availability selector */}
               <div
                 className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
-                data-testid="security-level-availability"
+                data-testid={SECURITY_LEVEL_WIDGET_IDS.section('availability')}
               >
                 <div className="flex justify-between items-center mb-2">
                   <label
@@ -459,7 +460,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                   className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-blue-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                   value={availabilityLevel}
                   onChange={handleAvailabilityChange}
-                  data-testid="availability-select"
+                  data-testid={CIA_TEST_IDS.AVAILABILITY_SELECT}
                 >
                   {securityLevelOptions.map((level) => (
                     <option key={`availability-${level}`} value={level}>
@@ -470,7 +471,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 <div
                   className="mt-2 text-xs text-gray-600 dark:text-gray-400"
-                  data-testid="security-level-widget-availability-summary"
+                  data-testid={SECURITY_LEVEL_WIDGET_IDS.label('availability-summary')}
                 >
                   {availabilityLevel}:{" "}
                   {getComponentSummary("availability", availabilityLevel)}
@@ -479,7 +480,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 <button
                   className="mt-2 px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
                   onClick={() => setActiveComponent("availability")}
-                  data-testid="availability-details-button"
+                  data-testid={SECURITY_LEVEL_WIDGET_IDS.button('availability-details')}
                 >
                   View details
                 </button>
@@ -487,7 +488,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 {lastChangedComponent === "availability" && (
                   <div
                     className="mt-2 text-xs text-green-600 dark:text-green-400 animate-pulse"
-                    data-testid="availability-changed-indicator"
+                    data-testid={SECURITY_LEVEL_WIDGET_IDS.label('availability-changed')}
                   >
                     ✓ Security level updated
                   </div>

@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import { BUSINESS_IMPACT_TEST_IDS } from "../../../constants/testIds";
+import { BUSINESS_IMPACT_WIDGET_IDS, BUSINESS_IMPACT_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import {
   BusinessImpactDetail,
@@ -246,7 +246,7 @@ const BusinessImpactAnalysisWidget: React.FC<
       <div
         key={`impact-${category}`}
         className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg mb-3"
-        data-testid={`${testId}-impact-${category.toLowerCase()}`}
+        data-testid={BUSINESS_IMPACT_WIDGET_IDS.section(`impact-${category.toLowerCase()}`)}
       >
         <div className="flex justify-between items-center mb-2">
           <h3 className="text-md font-medium flex items-center">
@@ -397,7 +397,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
             confidentialityLevel
           )}`}
-          data-testid={`${testId}-heatmap-confidentiality`}
+          data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-confidentiality')}
         >
           <div className="text-xs sm:text-sm font-medium">Confidentiality</div>
           <div className="text-sm sm:text-base font-bold">{confidentialityLevel}</div>
@@ -406,7 +406,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
             integrityLevel
           )}`}
-          data-testid={`${testId}-heatmap-integrity`}
+          data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-integrity')}
         >
           <div className="text-xs sm:text-sm font-medium">Integrity</div>
           <div className="text-sm sm:text-base font-bold">{integrityLevel}</div>
@@ -415,7 +415,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
             availabilityLevel
           )}`}
-          data-testid={`${testId}-heatmap-availability`}
+          data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-availability')}
         >
           <div className="text-xs sm:text-sm font-medium">Availability</div>
           <div className="text-sm sm:text-base font-bold">{availabilityLevel}</div>
@@ -429,7 +429,7 @@ const BusinessImpactAnalysisWidget: React.FC<
     return (
       <div
         className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4"
-        data-testid={`${testId}-executive-summary`}
+        data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('executive-summary')}
       >
         <h3 className="text-lg font-medium mb-2 flex items-center">
           <span className="mr-2">📊</span>Executive Summary
@@ -606,7 +606,7 @@ const BusinessImpactAnalysisWidget: React.FC<
                     : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                 }`}
                 onClick={() => setActiveTab("considerations")}
-                data-testid={`${testId}-tab-considerations`}
+                data-testid={BUSINESS_IMPACT_WIDGET_IDS.button('tab-considerations')}
               >
                 Implementation Considerations
               </button>
@@ -617,7 +617,7 @@ const BusinessImpactAnalysisWidget: React.FC<
                     : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                 }`}
                 onClick={() => setActiveTab("benefits")}
-                data-testid={`${testId}-tab-benefits`}
+                data-testid={BUSINESS_IMPACT_WIDGET_IDS.button('tab-benefits')}
               >
                 Business Benefits
               </button>
@@ -627,13 +627,13 @@ const BusinessImpactAnalysisWidget: React.FC<
           {activeTab === "considerations" ? (
             <div
               className="grid grid-cols-1 gap-4"
-              data-testid={`${testId}-considerations`}
+              data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('considerations')}
             >
               {considerations.map((item, index) => (
                 <div
                   key={`consideration-${index}`}
                   className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
-                  data-testid={`${testId}-consideration-${index}`}
+                  data-testid={BUSINESS_IMPACT_WIDGET_IDS.item(`consideration-${index}`)}
                 >
                   <div className="flex items-center mb-2">
                     <span className="mr-2 text-blue-500">{item.icon}</span>
@@ -648,13 +648,13 @@ const BusinessImpactAnalysisWidget: React.FC<
           ) : (
             <div
               className="grid grid-cols-1 gap-4"
-              data-testid={`${testId}-benefits`}
+              data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('benefits')}
             >
               {benefits.map((item, index) => (
                 <div
                   key={`benefit-${index}`}
                   className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
-                  data-testid={`${testId}-benefit-${index}`}
+                  data-testid={BUSINESS_IMPACT_WIDGET_IDS.item(`benefit-${index}`)}
                 >
                   <div className="flex items-center mb-2">
                     <span className="mr-2 text-green-500">{item.icon}</span>

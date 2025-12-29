@@ -622,11 +622,10 @@ td {
 }
 
 /* Fix for specific widgets that need vertical scrolling */
-[data-testid="combined-business-impact-widget"],
 [data-testid="security-summary-container"],
-[data-testid="value-creation-content"],
-[data-testid="cost-estimation-content"],
-[data-testid="compliance-status-widget"] {
+[data-testid="widget-value-creation"],
+[data-testid="widget-cost-estimation"],
+[data-testid="widget-compliance-status"] {
   overflow-y: auto !important;
   max-height: 100% !important;
   padding-bottom: var(--spacing-md) !important;
@@ -649,12 +648,12 @@ td {
 }
 
 /* Security level selector optimizations */
-[data-testid="security-level-selector"] select {
+[data-testid="widget-security-level"] select {
   height: 28px !important; /* Reduced height */
   padding: 0.2rem 0.4rem; /* Smaller padding */
 }
 
-[data-testid="security-level-selector"] .section-container {
+[data-testid="widget-security-level"] .section-container {
   padding: 0.35rem; /* Reduced padding */
   margin-bottom: 0.35rem; /* Reduced margin */
 }
@@ -2164,7 +2163,7 @@ button.more-info:hover::before {
 }
 
 /* Security Summary Widget specific styles */
-[data-testid="security-summary-widget"] .tab-content {
+[data-testid="widget-security-summary"] .tab-content {
   animation: fadeIn 0.3s ease-in-out;
 }
 
@@ -2180,7 +2179,7 @@ button.more-info:hover::before {
 }
 
 /* Security score progress bar styling */
-[data-testid="security-summary-widget"]
+[data-testid="widget-security-summary"]
   .w-full.bg-gray-200.rounded-full.h-2\.5 {
   height: 8px;
   border-radius: 4px;
@@ -2189,20 +2188,20 @@ button.more-info:hover::before {
 }
 
 .dark
-  [data-testid="security-summary-widget"]
+  [data-testid="widget-security-summary"]
   .w-full.bg-gray-200.rounded-full.h-2\.5 {
   background-color: rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-[data-testid="security-summary-widget"] .h-2\.5.rounded-full {
+[data-testid="widget-security-summary"] .h-2\.5.rounded-full {
   height: 8px;
   border-radius: 4px;
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Pulse animation for security status dot */
-[data-testid="security-summary-widget"] .pulse-dot {
+[data-testid="widget-security-summary"] .pulse-dot {
   animation: pulse 2s infinite;
 }
 
@@ -2221,7 +2220,7 @@ button.more-info:hover::before {
   }
 }
 
-.dark [data-testid="security-summary-widget"] .pulse-dot {
+.dark [data-testid="widget-security-summary"] .pulse-dot {
   animation: pulseDark 2s infinite;
 }
 
@@ -2241,26 +2240,26 @@ button.more-info:hover::before {
 }
 
 /* Enhanced CIA cards with hover effects */
-[data-testid="security-summary-widget"] [data-testid$="_CARD"] {
+[data-testid="widget-security-summary"] [data-testid$="_CARD"] {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-[data-testid="security-summary-widget"] [data-testid$="_CARD"]:hover {
+[data-testid="widget-security-summary"] [data-testid$="_CARD"]:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
-.dark [data-testid="security-summary-widget"] [data-testid$="_CARD"]:hover {
+.dark [data-testid="widget-security-summary"] [data-testid$="_CARD"]:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Tab button styling improvements */
-[data-testid="security-summary-widget"] button[role="tab"] {
+[data-testid="widget-security-summary"] button[role="tab"] {
   position: relative;
   overflow: hidden;
 }
 
-[data-testid="security-summary-widget"] button[role="tab"]::after {
+[data-testid="widget-security-summary"] button[role="tab"]::after {
   content: "";
   position: absolute;
   bottom: -2px;
@@ -2272,11 +2271,11 @@ button.more-info:hover::before {
   transform: translateX(-50%);
 }
 
-[data-testid="security-summary-widget"] button[role="tab"]:hover::after {
+[data-testid="widget-security-summary"] button[role="tab"]:hover::after {
   width: 100%;
 }
 
-[data-testid="security-summary-widget"]
+[data-testid="widget-security-summary"]
   button[role="tab"][aria-selected="true"]::after {
   width: 100%;
   background-color: var(--primary-color);
@@ -2287,20 +2286,20 @@ button.more-info:hover::before {
 /* Fix SecuritySummaryWidget specific spacing issues */
 /* Use attribute word-match selectors to handle elements with multiple Tailwind classes */
 /* [class~="p-md"] matches elements with class="p-md" or class="p-md sm:p-lg" etc. */
-[data-testid="security-summary-widget"] [class~="p-md"] {
+[data-testid="widget-security-summary"] [class~="p-md"] {
   padding: 0.375rem; /* 6px: slightly tighter than Tailwind p-md (8px) */
 }
 
-[data-testid="security-summary-widget"] [class~="mb-md"] {
+[data-testid="widget-security-summary"] [class~="mb-md"] {
   margin-bottom: 0.375rem; /* 6px: slightly tighter than Tailwind mb-md (8px) */
 }
 
-[data-testid="security-summary-widget"] section[class~="mb-md"] {
+[data-testid="widget-security-summary"] section[class~="mb-md"] {
   margin-bottom: 0.75rem; /* Slightly more space for banner */
 }
 
 /* Reduce tab navigation margin */
-[data-testid="security-summary-widget"] nav + * {
+[data-testid="widget-security-summary"] nav + * {
   margin-top: var(--spacing-sm);
 }
 
@@ -2318,10 +2317,10 @@ button.more-info:hover::before {
 /* Ensure tab gap is consistent within widgets without overriding Tailwind utilities */
 [data-testid^="widget-"] nav.flex,
 [data-testid^="widget-"] nav[role="tablist"],
-[data-testid="security-summary-widget"] nav.flex,
-[data-testid="security-summary-widget"] nav[role="tablist"],
-[data-testid="business-impact-analysis-widget"] nav.flex,
-[data-testid="business-impact-analysis-widget"] nav[role="tablist"] {
+[data-testid="widget-security-summary"] nav.flex,
+[data-testid="widget-security-summary"] nav[role="tablist"],
+[data-testid="widget-business-impact"] nav.flex,
+[data-testid="widget-business-impact"] nav[role="tablist"] {
   gap: 0.375rem; /* Consistent spacing between tabs */
 }
 
@@ -2381,18 +2380,18 @@ button[role="tab"]:not([aria-selected="true"]) {
 /* Use exact class selector instead of substring matching */
 [data-testid^="widget-"] .tab-content,
 [data-testid^="widget-"] div.tab-content,
-[data-testid="security-summary-widget"] .tab-content,
-[data-testid="security-summary-widget"] div.tab-content,
-[data-testid="business-impact-analysis-widget"] .tab-content,
-[data-testid="business-impact-analysis-widget"] div.tab-content {
+[data-testid="widget-security-summary"] .tab-content,
+[data-testid="widget-security-summary"] div.tab-content,
+[data-testid="widget-business-impact"] .tab-content,
+[data-testid="widget-business-impact"] div.tab-content {
   padding: 0;
   margin-top: 0.75rem;
 }
 
 /* Tab panels should have consistent minimal padding - use semantic ARIA attributes */
 [data-testid^="widget-"] [role="tabpanel"],
-[data-testid="security-summary-widget"] [role="tabpanel"],
-[data-testid="business-impact-analysis-widget"] [role="tabpanel"] {
+[data-testid="widget-security-summary"] [role="tabpanel"],
+[data-testid="widget-business-impact"] [role="tabpanel"] {
   padding: 0.5rem 0;
 }
 

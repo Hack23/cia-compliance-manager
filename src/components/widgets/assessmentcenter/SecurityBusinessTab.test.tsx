@@ -19,7 +19,7 @@ describe("SecurityBusinessTab", () => {
   it("renders without crashing", () => {
     render(<SecurityBusinessTab {...defaultProps} />);
     expect(
-      screen.getByTestId("security-business-content-business")
+      screen.getByTestId(defaultProps.testId)
     ).toBeInTheDocument();
   });
 
@@ -96,7 +96,7 @@ describe("SecurityBusinessTab", () => {
     
     render(<SecurityBusinessTab {...zeroCostsProps} />);
     expect(
-      screen.getByTestId("security-business-content-business")
+      screen.getByTestId(zeroCostsProps.testId)
     ).toBeInTheDocument();
   });
 
@@ -120,7 +120,7 @@ describe("SecurityBusinessTab", () => {
     render(<SecurityBusinessTab {...defaultProps} testId={customTestId} />);
     
     expect(
-      screen.getByTestId(`${customTestId}-content-business`)
+      screen.getByTestId(customTestId)
     ).toBeInTheDocument();
   });
 

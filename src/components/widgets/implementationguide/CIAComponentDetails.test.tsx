@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { TECHNICAL_DETAILS_WIDGET_IDS } from "../../../constants/testIds";
 import { CIAComponent, SecurityLevel } from "../../../types/cia";
 import {
   CIAComponentDetails,
@@ -46,7 +47,7 @@ describe("CIAComponentDetails", () => {
 
   it("renders without crashing", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("confidentiality-section")).toBeInTheDocument();
+    expect(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.section("confidentiality"))).toBeInTheDocument();
   });
 
   it("displays component icon for confidentiality", () => {
@@ -60,7 +61,7 @@ describe("CIAComponentDetails", () => {
       component: "integrity" as CIAComponent,
     };
     render(<CIAComponentDetails {...integrityProps} />);
-    expect(screen.getByTestId("integrity-section")).toBeInTheDocument();
+    expect(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.section("integrity"))).toBeInTheDocument();
     expect(screen.getByText("✓")).toBeInTheDocument();
   });
 
@@ -70,7 +71,7 @@ describe("CIAComponentDetails", () => {
       component: "availability" as CIAComponent,
     };
     render(<CIAComponentDetails {...availabilityProps} />);
-    expect(screen.getByTestId("availability-section")).toBeInTheDocument();
+    expect(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.section("availability"))).toBeInTheDocument();
     expect(screen.getByText("⏱️")).toBeInTheDocument();
   });
 
@@ -105,17 +106,17 @@ describe("CIAComponentDetails", () => {
 
   it("displays technical description", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("technical-description")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-label-description")).toBeInTheDocument();
   });
 
   it("displays implementation requirements header", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("implementation-header")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-header")).toBeInTheDocument();
   });
 
   it("displays technical requirements", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("implementation-steps")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-list-implementation-steps")).toBeInTheDocument();
     expect(screen.getByText(/Implement encryption at rest/i)).toBeInTheDocument();
     expect(screen.getByText(/Implement role-based access control/i)).toBeInTheDocument();
   });
@@ -138,22 +139,23 @@ describe("CIAComponentDetails", () => {
 
   it("displays development effort", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("development-effort")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-label-development-effort")).toBeInTheDocument();
   });
 
   it("displays maintenance level", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("maintenance-level")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-label-maintenance-level")).toBeInTheDocument();
   });
 
   it("displays required expertise section", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("required-expertise")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-list-required-expertise")).toBeInTheDocument();
   });
 
   it("displays technical header", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("technical-header")).toBeInTheDocument();
+    const headers = screen.getAllByTestId("widget-technical-details-header");
+    expect(headers.length).toBeGreaterThan(0);
   });
 
   it("handles High security level", () => {
@@ -271,7 +273,7 @@ describe("CIAComponentDetails", () => {
     const customTestId = "custom-cia-component";
     render(<CIAComponentDetails {...defaultProps} testId={customTestId} />);
     
-    expect(screen.getByTestId("confidentiality-section")).toBeInTheDocument();
+    expect(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.section("confidentiality"))).toBeInTheDocument();
   });
 
   it("displays multiple technical requirements", () => {
@@ -299,7 +301,7 @@ describe("CIAComponentDetails", () => {
     };
     
     render(<CIAComponentDetails {...emptyReqsProps} />);
-    expect(screen.getByTestId("implementation-steps")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-list-implementation-steps")).toBeInTheDocument();
   });
 
   it("handles empty expertise requirements", () => {
@@ -309,7 +311,7 @@ describe("CIAComponentDetails", () => {
     };
     
     render(<CIAComponentDetails {...emptyExpertiseProps} />);
-    expect(screen.getByTestId("required-expertise")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-technical-details-list-required-expertise")).toBeInTheDocument();
   });
 
   it("applies correct theme colors for confidentiality", () => {

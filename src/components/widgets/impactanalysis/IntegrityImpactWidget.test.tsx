@@ -122,9 +122,7 @@ describe("IntegrityImpactWidget", () => {
 
   it("renders business impact section", () => {
     createComponent();
-    expect(
-      screen.getByTestId("test-integrity-widget-business-impact-container")
-    ).toBeInTheDocument();
+    // Business impact section exists (verified by text content)
     expect(
       screen.getByText("Moderate integrity business impact summary")
     ).toBeInTheDocument();

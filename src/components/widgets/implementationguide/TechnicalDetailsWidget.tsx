@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { TECHNICAL_DETAILS_WIDGET_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { useTechnicalDetailsData } from "../../../hooks/useTechnicalDetailsData";
 import { SecurityLevel } from "../../../types/cia";
@@ -181,7 +182,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                         : "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
                       : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                   }`}
-                  data-testid={`${tab.id}-tab`}
+                  data-testid={TECHNICAL_DETAILS_WIDGET_IDS.button(`${tab.id}-tab`)}
                   {...getTabAriaProps(tabId, isSelected, panelId)}
                   aria-describedby="tech-tab-keyboard-instructions"
                 >

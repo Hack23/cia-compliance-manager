@@ -26,7 +26,7 @@ describe("SecurityVisualizationWidget", () => {
     expect(widget).toBeInTheDocument();
 
     // Find the risk level element and check its content
-    const riskLevel = screen.getByTestId("risk-level");
+    const riskLevel = screen.getByTestId("widget-security-visualization-label-risk-level");
     expect(riskLevel).toBeInTheDocument();
     expect(riskLevel.textContent).toContain("Low Risk");
   });

@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { INTEGRITY_IMPACT_WIDGET_IDS } from "../../../constants/testIds";
 import { INTEGRITY_IMPACT_TEST_IDS } from "../../../constants/testIds";
 import {
   getDefaultErrorRate,
@@ -115,7 +116,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
         {businessImpact && (
           <div
             className="mt-4"
-            data-testid={`${testId}-business-impact-container`}
+            data-testid={INTEGRITY_IMPACT_WIDGET_IDS.section('business-impact')}
           >
             <BusinessImpactSection
               impact={businessImpact}
@@ -128,7 +129,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
         {/* Data Integrity metrics */}
         <div
           className="mb-4 p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
-          data-testid={`${testId}-metrics`}
+          data-testid={INTEGRITY_IMPACT_WIDGET_IDS.section('metrics')}
         >
           <h3 className="text-lg font-medium mb-2 text-green-800 dark:text-green-300">
             Data Integrity Metrics

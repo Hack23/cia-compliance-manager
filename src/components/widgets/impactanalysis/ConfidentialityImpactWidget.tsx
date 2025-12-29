@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { CONFIDENTIALITY_IMPACT_WIDGET_IDS } from "../../../constants/testIds";
 import { getDefaultPrivacyImpact } from "../../../data/ciaOptionsData";
 import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
@@ -110,7 +111,7 @@ const ConfidentialityImpactWidget: React.FC<
               // Use utility functions for consistent color handling
               colorClass={getSecurityLevelBackgroundClass("purple")}
               textClass="text-purple-800 dark:text-purple-300"
-              testId={`${testId}-confidentiality-badge`}
+              testId={CONFIDENTIALITY_IMPACT_WIDGET_IDS.label('security-badge')}
             />
           </div>
 
@@ -119,7 +120,7 @@ const ConfidentialityImpactWidget: React.FC<
             <BusinessImpactSection
               impact={businessImpact}
               color="purple"
-              testId={`${testId}-business-impact`}
+              testId={CONFIDENTIALITY_IMPACT_WIDGET_IDS.section('business-impact')}
             />
           )}
 

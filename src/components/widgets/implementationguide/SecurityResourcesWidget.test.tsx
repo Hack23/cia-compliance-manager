@@ -139,7 +139,7 @@ describe("SecurityResourcesWidget", () => {
   it("shows search input field", () => {
     render(<SecurityResourcesWidget {...defaultProps} />);
 
-    const searchInput = screen.getByTestId("security-resources-widget-search");
+    const searchInput = screen.getByTestId("widget-security-resources-input-search");
     expect(searchInput).toBeInTheDocument();
     expect(searchInput).toHaveAttribute("type", "text");
     expect(searchInput).toHaveAttribute(
@@ -177,7 +177,7 @@ describe("SecurityResourcesWidget", () => {
     render(<SecurityResourcesWidget {...defaultProps} />);
 
     // Get search input
-    const searchInput = screen.getByTestId("security-resources-widget-search");
+    const searchInput = screen.getByTestId("widget-security-resources-input-search");
 
     // Type search query
     fireEvent.change(searchInput, { target: { value: "encryption" } });

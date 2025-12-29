@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import { SECURITY_SUMMARY_TEST_IDS, ACCESSIBILITY_TEST_IDS } from "../../../constants/testIds";
+import { SECURITY_SUMMARY_WIDGET_IDS, SECURITY_SUMMARY_TEST_IDS, ACCESSIBILITY_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { useComplianceService } from "../../../hooks/useComplianceService";
 import { useSecurityMetricsService } from "../../../hooks/useSecurityMetricsService";
@@ -181,7 +181,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
           <section 
             className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border-l-4 border-info dark:border-info-light shadow-md"
             aria-labelledby="security-classification-heading"
-            data-testid={`${testId}-classification-banner`}
+            data-testid={SECURITY_SUMMARY_WIDGET_IDS.section('classification-banner')}
           >
             <div className="flex justify-between items-center">
               <div>
@@ -220,7 +220,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                   className={`text-body font-medium ${getRiskColorClass(
                     riskLevel
                   )}`}
-                  data-testid={`${testId}-risk-level`}
+                  data-testid={SECURITY_SUMMARY_WIDGET_IDS.label('risk-level')}
                   aria-label={`Risk level: ${riskLevel}`}
                   role="status"
                 >

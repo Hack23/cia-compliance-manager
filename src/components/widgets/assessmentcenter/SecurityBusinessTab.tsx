@@ -1,4 +1,5 @@
 import React from "react";
+import { SECURITY_SUMMARY_WIDGET_IDS } from "../../../constants/testIds";
 import { formatCurrency } from "../../../utils/formatUtils";
 
 /**
@@ -30,7 +31,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
   roiEstimate,
 }) => {
   return (
-    <div data-testid={`${testId}-content-business`} className="space-y-4">
+    <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-business')} className="space-y-4">
       {/* Business Value content */}
       <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4">
         <p className="text-sm">
