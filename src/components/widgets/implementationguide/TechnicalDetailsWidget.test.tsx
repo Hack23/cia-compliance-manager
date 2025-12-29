@@ -92,7 +92,7 @@ describe("TechnicalDetailsWidget", () => {
     });
 
     // By default, should show confidentiality content
-    expect(screen.getByTestId("confidentiality-section")).toBeInTheDocument();
+    expect(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.section("confidentiality"))).toBeInTheDocument();
 
     // Click on integrity tab
     await act(async () => {
@@ -100,7 +100,7 @@ describe("TechnicalDetailsWidget", () => {
     });
 
     // Should now show integrity content
-    expect(screen.getByTestId("integrity-section")).toBeInTheDocument();
+    expect(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.section("integrity"))).toBeInTheDocument();
     expect(screen.getByTestId("widget-technical-details-label-description")).toHaveTextContent(
       /integrity Moderate technical details/i
     );
@@ -117,7 +117,7 @@ describe("TechnicalDetailsWidget", () => {
     });
 
     // Should now show integrity content
-    expect(screen.getByTestId("integrity-section")).toBeInTheDocument();
+    expect(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.section("integrity"))).toBeInTheDocument();
     expect(screen.getByTestId("widget-technical-details-label-description")).toHaveTextContent(
       /integrity Moderate technical details/i
     );
@@ -128,7 +128,7 @@ describe("TechnicalDetailsWidget", () => {
     });
 
     // Should now show availability content
-    expect(screen.getByTestId("availability-section")).toBeInTheDocument();
+    expect(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.section("availability"))).toBeInTheDocument();
     expect(screen.getByTestId("widget-technical-details-label-description")).toHaveTextContent(
       /availability Moderate technical details/i
     );
