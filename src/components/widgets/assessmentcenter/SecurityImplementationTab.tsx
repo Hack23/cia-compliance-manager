@@ -1,4 +1,5 @@
 import React from "react";
+import { SECURITY_SUMMARY_WIDGET_IDS } from "../../../constants/testIds";
 import { SecurityLevel } from "../../../types/cia";
 import { getImplementationDescription } from "../../../utils/implementationUtils";
 
@@ -32,7 +33,7 @@ export const SecurityImplementationTab: React.FC<
 }) => {
   return (
     <div
-      data-testid={`${testId}-content-implementation`}
+      data-testid={SECURITY_SUMMARY_WIDGET_IDS.section('content-implementation')}
       className="space-y-4"
     >
       {/* Implementation introduction */}

@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { SECURITY_RESOURCES_WIDGET_IDS } from "../../../constants/testIds";
 import { SECURITY_RESOURCES_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
@@ -412,7 +413,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                   placeholder="Search by title, description..."
                   value={searchTerm}
                   onChange={handleSearchChange}
-                  data-testid={`${testId}-search`}
+                  data-testid={SECURITY_RESOURCES_WIDGET_IDS.input('search')}
                   aria-label="Search security resources by title or description"
                 />
                 <span 
@@ -442,7 +443,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                           : "bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
                       }`}
                       onClick={() => handleCategorySelect(null)}
-                      data-testid={`${testId}-category-all`}
+                      data-testid={SECURITY_RESOURCES_WIDGET_IDS.button('category-all')}
                       aria-pressed={selectedCategory === null}
                     >
                     All Resources
@@ -458,7 +459,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                             : "bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
                         }`}
                         onClick={() => handleCategorySelect(category)}
-                        data-testid={`${testId}-category-${index}`}
+                        data-testid={SECURITY_RESOURCES_WIDGET_IDS.button(`category-${index}`)}
                         aria-pressed={selectedCategory === category}
                       >
                         {category}
@@ -516,7 +517,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
               {filteredResources.length === 0 && (
                 <div
                   className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center text-gray-500 dark:text-gray-400"
-                  data-testid={`${testId}-no-resources`}
+                  data-testid={SECURITY_RESOURCES_WIDGET_IDS.label('no-resources')}
                 >
                   <p className="mb-2">No resources found.</p>
                   <p className="text-sm">

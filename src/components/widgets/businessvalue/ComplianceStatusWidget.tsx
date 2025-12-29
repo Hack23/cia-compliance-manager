@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import { COMPLIANCE_TEST_IDS } from "../../../constants/testIds";
+import { COMPLIANCE_STATUS_WIDGET_IDS, COMPLIANCE_TEST_IDS } from "../../../constants/testIds";
 import { SECURITY_ICONS } from "../../../constants/uiConstants";
 import { useComplianceService } from "../../../hooks/useComplianceService";
 import { CIAComponent, SecurityLevel } from "../../../types/cia";

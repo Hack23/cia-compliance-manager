@@ -1,4 +1,5 @@
 import React from "react";
+import { SECURITY_SUMMARY_WIDGET_IDS } from "../../../constants/testIds";
 import { SecurityLevel } from "../../../types/cia";
 import { ComplianceStatusType } from "../../../types/compliance";
 import { getComplianceRequirementText } from "../../../utils/complianceTextUtils";
@@ -29,7 +30,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
   testId,
 }) => {
   return (
-    <div data-testid={`${testId}-content-compliance`} className="space-y-4">
+    <div data-testid={SECURITY_SUMMARY_WIDGET_IDS.section('content-compliance')} className="space-y-4">
       {/* Compliance introduction */}
       <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4">
         <p className="text-sm">

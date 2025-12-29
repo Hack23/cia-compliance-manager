@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { TECHNICAL_DETAILS_WIDGET_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { useTechnicalDetailsData } from "../../../hooks/useTechnicalDetailsData";
 import { SecurityLevel } from "../../../types/cia";

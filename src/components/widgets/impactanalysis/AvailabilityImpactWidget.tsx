@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { AVAILABILITY_IMPACT_WIDGET_IDS } from "../../../constants/testIds";
 import { AVAILABILITY_IMPACT_TEST_IDS } from "../../../constants/testIds";
 import { getDefaultSLAMetrics } from "../../../data/ciaOptionsData";
 import { useBusinessImpact, useComponentDetails } from "../../../hooks";

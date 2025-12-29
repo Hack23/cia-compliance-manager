@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { CONFIDENTIALITY_IMPACT_WIDGET_IDS } from "../../../constants/testIds";
 import { getDefaultPrivacyImpact } from "../../../data/ciaOptionsData";
 import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";

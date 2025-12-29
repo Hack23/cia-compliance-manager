@@ -46,7 +46,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
   getStatusVariant,
 }) => {
   return (
-    <div data-testid={`${testId}-content-overview`} className="space-y-4">
+    <div data-testid={SECURITY_SUMMARY_WIDGET_IDS.section('content-overview')} className="space-y-4">
       {/* Security Radar Chart */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
         <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
