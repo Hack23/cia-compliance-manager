@@ -135,10 +135,10 @@ describe("ConfidentialityImpactWidget", () => {
   it("displays security level badge with the correct level", () => {
     render(<ConfidentialityImpactWidget {...defaultProps} />);
     expect(
-      screen.getByTestId("confidentiality-widget-confidentiality-badge")
+      screen.getByTestId("widget-confidentiality-impact-label-security-badge")
     ).toBeInTheDocument();
     expect(
-      screen.getByTestId("confidentiality-widget-confidentiality-badge")
+      screen.getByTestId("widget-confidentiality-impact-label-security-badge")
     ).toHaveTextContent("Moderate");
   });
 
@@ -175,7 +175,7 @@ describe("ConfidentialityImpactWidget", () => {
       />
     );
     expect(
-      screen.getByTestId("confidentiality-widget-confidentiality-badge")
+      screen.getByTestId("widget-confidentiality-impact-label-security-badge")
     ).toHaveTextContent("High");
   });
 
@@ -189,7 +189,7 @@ describe("ConfidentialityImpactWidget", () => {
     );
     // Update to use the correct testId based on how the component builds it
     expect(
-      screen.getByTestId("widget-confidentiality-impact-confidentiality-badge")
+      screen.getByTestId("widget-confidentiality-impact-label-security-badge")
     ).toHaveTextContent("Low");
   });
 
@@ -201,7 +201,7 @@ describe("ConfidentialityImpactWidget", () => {
       />
     );
     expect(
-      screen.getByTestId("confidentiality-widget-confidentiality-badge")
+      screen.getByTestId("widget-confidentiality-impact-label-security-badge")
     ).toHaveTextContent("None");
     expect(screen.getByText("No Privacy Controls")).toBeInTheDocument();
     expect(screen.getByText("Public Data")).toBeInTheDocument();
@@ -215,7 +215,7 @@ describe("ConfidentialityImpactWidget", () => {
       />
     );
     expect(
-      screen.getByTestId("confidentiality-widget-confidentiality-badge")
+      screen.getByTestId("widget-confidentiality-impact-label-security-badge")
     ).toHaveTextContent("Very High");
     expect(screen.getByText("Very High Privacy Controls")).toBeInTheDocument();
     expect(screen.getByText("Restricted Data")).toBeInTheDocument();
@@ -225,12 +225,14 @@ describe("ConfidentialityImpactWidget", () => {
     render(
       <ConfidentialityImpactWidget {...defaultProps} testId="custom-test-id" />
     );
+    // Root widget container uses custom testId
     expect(screen.getByTestId("custom-test-id")).toBeInTheDocument();
+    // Internal elements use widget-scoped constants
     expect(
-      screen.getByTestId("custom-test-id-confidentiality-badge")
+      screen.getByTestId("widget-confidentiality-impact-label-security-badge")
     ).toBeInTheDocument();
     expect(
-      screen.getByTestId("custom-test-id-business-impact")
+      screen.getByTestId("widget-confidentiality-impact-section-business-impact")
     ).toBeInTheDocument();
   });
 });

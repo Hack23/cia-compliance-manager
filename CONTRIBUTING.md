@@ -129,7 +129,7 @@ const COST_IDS = createWidgetTestId('cost-estimation');
 The codebase provides helper functions for creating consistent test IDs:
 
 ```typescript
-import { createTestId, createWidgetTestId } from '@/constants/testIds';
+import { createTestId, createWidgetTestId } from '../constants/testIds';
 
 // Simple test ID creation
 const myId = createTestId('security', 'level', 'badge');

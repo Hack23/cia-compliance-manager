@@ -335,7 +335,7 @@ export const WIDGET_REGISTRY_TEST_IDS = {
  * 
  * Usage:
  * ```tsx
- * import { SECURITY_LEVEL_WIDGET_IDS } from '@/constants/testIds';
+ * import { SECURITY_LEVEL_WIDGET_IDS } from '../constants/testIds';
  * 
  * <div data-testid={SECURITY_LEVEL_WIDGET_IDS.root}>
  *   <section data-testid={SECURITY_LEVEL_WIDGET_IDS.section('confidentiality')}>

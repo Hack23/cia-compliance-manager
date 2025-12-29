@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import { AVAILABILITY_IMPACT_TEST_IDS } from "../../../constants/testIds";
+import { AVAILABILITY_IMPACT_TEST_IDS, AVAILABILITY_IMPACT_WIDGET_IDS } from "../../../constants/testIds";
 import { getDefaultSLAMetrics } from "../../../data/ciaOptionsData";
 import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
@@ -103,7 +103,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
             // Use utility for consistent styling
             colorClass={getSecurityLevelBackgroundClass("blue")}
             textClass="text-blue-800 dark:text-blue-300"
-            testId={`${testId}-level`}
+            testId={AVAILABILITY_IMPACT_WIDGET_IDS.label('security-level')}
           />
         </section>
 
@@ -119,7 +119,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
             <BusinessImpactSection
               impact={businessImpact}
               color="blue"
-              testId={`${testId}-business-impact`}
+              testId={AVAILABILITY_IMPACT_WIDGET_IDS.section('business-impact')}
             />
           </section>
         )}

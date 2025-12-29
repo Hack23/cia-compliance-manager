@@ -220,10 +220,12 @@ describe("AvailabilityImpactWidget", () => {
     render(
       <AvailabilityImpactWidget {...defaultProps} testId="custom-test-id" />
     );
+    // Root widget container uses custom testId
     expect(screen.getByTestId("custom-test-id")).toBeInTheDocument();
-    expect(screen.getByTestId("custom-test-id-level")).toBeInTheDocument();
+    // Internal elements use widget-scoped constants
+    expect(screen.getByTestId("widget-availability-impact-label-security-level")).toBeInTheDocument();
     expect(
-      screen.getByTestId("custom-test-id-business-impact")
+      screen.getByTestId("widget-availability-impact-section-business-impact")
     ).toBeInTheDocument();
   });
 

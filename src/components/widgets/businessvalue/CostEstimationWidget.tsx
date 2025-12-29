@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { COST_ESTIMATION_WIDGET_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { CIAComponent, SecurityLevel } from "../../../types/cia";
 import { CostEstimationWidgetProps } from "../../../types/widgets";
@@ -395,7 +396,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                   level={confidentialityLevel}
                   colorClass="bg-primary-light/20 dark:bg-primary-dark/20"
                   textClass="text-primary-dark dark:text-primary-light"
-                  testId={`${testId}-conf-level`}
+                  testId={COST_ESTIMATION_WIDGET_IDS.label('conf-level')}
                 />
               </div>
               <div className="flex justify-between items-center">
@@ -424,7 +425,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                   level={integrityLevel}
                   colorClass="bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
                   textClass="text-green-800 dark:text-green-300"
-                  testId={`${testId}-int-level`}
+                  testId={COST_ESTIMATION_WIDGET_IDS.label('int-level')}
                 />
               </div>
               <div className="flex justify-between items-center">
@@ -451,7 +452,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                   level={availabilityLevel}
                   colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
                   textClass="text-blue-800 dark:text-blue-300"
-                  testId={`${testId}-avail-level`}
+                  testId={COST_ESTIMATION_WIDGET_IDS.label('avail-level')}
                 />
               </div>
               <div className="flex justify-between items-center">
