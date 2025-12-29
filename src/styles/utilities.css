@@ -532,18 +532,18 @@
 }
 
 /* Add explicit dark mode color override for business impact sections */
-.dark [data-testid="business-impact-widget"] p,
-.dark [data-testid="business-impact-widget"] div,
-.dark [data-testid="business-impact-widget"] span,
-.dark [data-testid="availability-impact-widget"] p,
-.dark [data-testid="availability-impact-widget"] div,
-.dark [data-testid="availability-impact-widget"] span,
-.dark [data-testid="integrity-impact-widget"] p,
-.dark [data-testid="integrity-impact-widget"] div,
-.dark [data-testid="integrity-impact-widget"] span,
-.dark [data-testid="confidentiality-impact-widget"] p,
-.dark [data-testid="confidentiality-impact-widget"] div,
-.dark [data-testid="confidentiality-impact-widget"] span {
+.dark [data-testid="widget-business-impact"] p,
+.dark [data-testid="widget-business-impact"] div,
+.dark [data-testid="widget-business-impact"] span,
+.dark [data-testid="widget-availability-impact"] p,
+.dark [data-testid="widget-availability-impact"] div,
+.dark [data-testid="widget-availability-impact"] span,
+.dark [data-testid="widget-integrity-impact"] p,
+.dark [data-testid="widget-integrity-impact"] div,
+.dark [data-testid="widget-integrity-impact"] span,
+.dark [data-testid="widget-confidentiality-impact"] p,
+.dark [data-testid="widget-confidentiality-impact"] div,
+.dark [data-testid="widget-confidentiality-impact"] span {
   color: var(--text-color);
 }
 

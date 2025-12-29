@@ -373,7 +373,7 @@ const CIAClassificationApp: React.FC = () => {
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}
                     confidentialityLevel={levels.confidentiality}
-                    testId="integrity-impact-widget"
+                    testId="widget-integrity-impact"
                   />
                 </Suspense>
               </WidgetErrorBoundary>
@@ -429,7 +429,7 @@ const CIAClassificationApp: React.FC = () => {
                     availabilityLevel={levels.availability}
                     integrityLevel={levels.integrity}
                     confidentialityLevel={levels.confidentiality}
-                    testId="security-resources-widget"
+                    testId="widget-security-resources"
                   />
                 </Suspense>
               </WidgetErrorBoundary>
