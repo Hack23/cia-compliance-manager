@@ -189,7 +189,7 @@ const CIAClassificationApp: React.FC = () => {
                 src="./icon-192.png"
                 alt="CIA Compliance Manager Logo"
                 style={{ transform: "scale(0.2)" }}
-                data-testid="app-logo"
+                data-testid={APP_TEST_IDS.APP_TITLE}
               />
             </div>
             <div className="flex flex-row items-center">
@@ -202,11 +202,11 @@ const CIAClassificationApp: React.FC = () => {
               <div className="cyber-nav flex items-center flex-wrap">
                 <span
                   className="inline-block pulse-dot mr-1"
-                  data-testid="app-indicator"
+                  data-testid={APP_TEST_IDS.APP_ROOT}
                 >
                   ■
                 </span>
-                <span className="mr-1 version-tag" data-testid="app-version">
+                <span className="mr-1 version-tag" data-testid={APP_TEST_IDS.APP_TITLE}>
                   v{appVersion}
                 </span>
                 <span className="mx-1 nav-separator">•</span>
@@ -215,7 +215,7 @@ const CIAClassificationApp: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cyber-link"
-                  data-testid="source-link"
+                  data-testid={APP_TEST_IDS.APP_ROOT}
                 >
                   Source
                 </a>
@@ -225,7 +225,7 @@ const CIAClassificationApp: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cyber-link"
-                  data-testid="docs-link"
+                  data-testid={APP_TEST_IDS.APP_ROOT}
                 >
                   Doc
                 </a>
@@ -235,7 +235,7 @@ const CIAClassificationApp: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cyber-link"
-                  data-testid="author-link"
+                  data-testid={APP_TEST_IDS.APP_ROOT}
                 >
                   Hack23
                 </a>
@@ -248,14 +248,14 @@ const CIAClassificationApp: React.FC = () => {
               onClick={() => setShowHelp(true)}
               className="px-2 py-1 text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded transition-colors"
               title="Keyboard Shortcuts (? or Ctrl+/)"
-              data-testid="keyboard-shortcuts-button"
+              data-testid={APP_TEST_IDS.APP_ROOT}
             >
               ⌨️ Shortcuts
             </button>
             <button
               onClick={toggleDarkMode}
               className="theme-toggle-btn"
-              data-testid="theme-toggle"
+              data-testid={APP_TEST_IDS.THEME_TOGGLE}
             >
               {darkMode ? "☀️ Light" : "🌙 Dark"}
             </button>
@@ -265,7 +265,7 @@ const CIAClassificationApp: React.FC = () => {
         {/* Container with defined width to ensure grid fits properly */}
         <div className="w-full max-w-[1600px] mx-auto">
           <div
-            data-testid="dashboard-grid"
+            data-testid={APP_TEST_IDS.DASHBOARD_GRID}
             className="dashboard-grid-container"
           >
             {/* Security Level Widget */}
