@@ -55,6 +55,9 @@ module.exports = {
 
             // Also check for template literals inside JSX expression containers,
             // e.g. data-testid={`${testId}-suffix`}
+            // NOTE: Template literals used as arguments to ID generator functions
+            // (e.g., WIDGET_IDS.item(`some-${index}`)) are intentionally allowed
+            // since the widget-scoped ID generators are designed to accept dynamic arguments.
             if (
               attrValue &&
               attrValue.type === 'JSXExpressionContainer' &&

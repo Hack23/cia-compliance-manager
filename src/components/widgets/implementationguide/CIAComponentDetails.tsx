@@ -205,7 +205,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             {getTechnicalRequirements(component, level).map((req, index) => (
               <li
                 key={`${component}-req-${index}`}
-                data-testid={`${component}-req-${index}`}
+                data-testid={TECHNICAL_DETAILS_WIDGET_IDS.item(`requirement-${index}`)}
               >
                 {req}
               </li>
