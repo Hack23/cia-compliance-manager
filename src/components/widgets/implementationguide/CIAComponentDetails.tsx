@@ -194,7 +194,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
           <h4
             className="text-md font-medium mb-3"
-            data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header()}
+            data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header('implementation')}
           >
             Implementation Requirements
           </h4>

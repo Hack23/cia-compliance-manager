@@ -59,7 +59,27 @@ export function createTestId(...parts: string[]): string {
 
 /**
  * Widget-scoped test ID generator
- *
+/**
+ * Type definition for widget test ID generators
+ */
+export interface WidgetTestIds {
+  root: string;
+  section: (name: string) => string;
+  button: (name: string) => string;
+  value: (name: string) => string;
+  label: (name: string) => string;
+  icon: (name: string) => string;
+  input: (name: string) => string;
+  list: (name: string) => string;
+  item: (name: string) => string;
+  card: (name: string) => string;
+  header: (name?: string) => string;
+  content: (name?: string) => string;
+  footer: (name?: string) => string;
+}
+
+/**
+ * Widget-scoped test ID generator factory
  * Creates a factory object with methods to generate consistent test IDs
  * for all elements within a widget.
  *
@@ -73,8 +93,10 @@ export function createTestId(...parts: string[]): string {
  * COST_IDS.button('submit')  // 'widget-cost-estimation-button-submit'
  * COST_IDS.value('total')    // 'widget-cost-estimation-value-total'
  * COST_IDS.label('amount')   // 'widget-cost-estimation-label-amount'
+ * COST_IDS.header()          // 'widget-cost-estimation-header'
+ * COST_IDS.header('main')    // 'widget-cost-estimation-header-main'
  */
-export function createWidgetTestId(widgetName: string) {
+export function createWidgetTestId(widgetName: string): WidgetTestIds {
   const normalizedName = widgetName.toLowerCase().replace(/\s+/g, '-');
   return {
     root: createTestId('widget', normalizedName),
@@ -87,9 +109,18 @@ export function createWidgetTestId(widgetName: string) {
     list: (name: string) => createTestId('widget', normalizedName, 'list', name),
     item: (name: string) => createTestId('widget', normalizedName, 'item', name),
     card: (name: string) => createTestId('widget', normalizedName, 'card', name),
-    header: () => createTestId('widget', normalizedName, 'header'),
-    content: () => createTestId('widget', normalizedName, 'content'),
-    footer: () => createTestId('widget', normalizedName, 'footer'),
+    header: (name?: string) =>
+      name
+        ? createTestId('widget', normalizedName, 'header', name)
+        : createTestId('widget', normalizedName, 'header'),
+    content: (name?: string) =>
+      name
+        ? createTestId('widget', normalizedName, 'content', name)
+        : createTestId('widget', normalizedName, 'content'),
+    footer: (name?: string) =>
+      name
+        ? createTestId('widget', normalizedName, 'footer', name)
+        : createTestId('widget', normalizedName, 'footer'),
   };
 }
 
