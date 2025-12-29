@@ -1,5 +1,5 @@
 import React from "react";
-import { SECURITY_SUMMARY_TEST_IDS } from "../../../constants/testIds";
+import { SECURITY_SUMMARY_WIDGET_IDS, SECURITY_SUMMARY_TEST_IDS } from "../../../constants/testIds";
 import { SecurityLevel } from "../../../types/cia";
 import { StatusType } from "../../../types/common/StatusTypes";
 import { getRiskLevelFromSecurityLevel } from "../../../utils/securityLevelUtils";
