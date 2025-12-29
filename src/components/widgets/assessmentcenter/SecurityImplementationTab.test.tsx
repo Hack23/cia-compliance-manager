@@ -20,7 +20,7 @@ describe("SecurityImplementationTab", () => {
   it("renders without crashing", () => {
     render(<SecurityImplementationTab {...defaultProps} />);
     expect(
-      screen.getByTestId("security-implementation-content-implementation")
+      screen.getByTestId("widget-security-summary-section-content-implementation")
     ).toBeInTheDocument();
   });
 
@@ -127,7 +127,7 @@ describe("SecurityImplementationTab", () => {
     render(<SecurityImplementationTab {...defaultProps} testId={customTestId} />);
     
     expect(
-      screen.getByTestId(`${customTestId}-content-implementation`)
+      screen.getByTestId("widget-security-summary-section-content-implementation")
     ).toBeInTheDocument();
   });
 
@@ -141,7 +141,7 @@ describe("SecurityImplementationTab", () => {
     
     render(<SecurityImplementationTab {...mixedProps} />);
     expect(
-      screen.getByTestId("security-implementation-content-implementation")
+      screen.getByTestId("widget-security-summary-section-content-implementation")
     ).toBeInTheDocument();
   });
 

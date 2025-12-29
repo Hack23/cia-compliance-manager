@@ -163,7 +163,7 @@ describe("SecuritySummaryWidget", () => {
 
     // Check for risk level displayed in the widget
     const riskLevel = screen.getByTestId(
-      `${SECURITY_SUMMARY_TEST_IDS.WIDGET}-risk-level`
+      "widget-security-summary-label-risk-level"
     );
     expect(riskLevel).toBeInTheDocument();
   });

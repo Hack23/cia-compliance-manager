@@ -28,7 +28,7 @@ describe("SecurityComplianceTab", () => {
   it("renders without crashing", () => {
     render(<SecurityComplianceTab {...defaultProps} />);
     expect(
-      screen.getByTestId("security-compliance-content-compliance")
+      screen.getByTestId("widget-security-summary-section-content-compliance")
     ).toBeInTheDocument();
   });
 
@@ -66,7 +66,7 @@ describe("SecurityComplianceTab", () => {
     
     render(<SecurityComplianceTab {...nullComplianceProps} />);
     expect(
-      screen.getByTestId("security-compliance-content-compliance")
+      screen.getByTestId("widget-security-summary-section-content-compliance")
     ).toBeInTheDocument();
     // Should display securityScore when complianceStatus is null
     expect(screen.getByText(/75/)).toBeInTheDocument();
@@ -83,7 +83,7 @@ describe("SecurityComplianceTab", () => {
     
     render(<SecurityComplianceTab {...emptyCompliantProps} />);
     expect(
-      screen.getByTestId("security-compliance-content-compliance")
+      screen.getByTestId("widget-security-summary-section-content-compliance")
     ).toBeInTheDocument();
   });
 
@@ -98,7 +98,7 @@ describe("SecurityComplianceTab", () => {
     
     render(<SecurityComplianceTab {...emptyPartialProps} />);
     expect(
-      screen.getByTestId("security-compliance-content-compliance")
+      screen.getByTestId("widget-security-summary-section-content-compliance")
     ).toBeInTheDocument();
   });
 
@@ -113,7 +113,7 @@ describe("SecurityComplianceTab", () => {
     
     render(<SecurityComplianceTab {...emptyNonCompliantProps} />);
     expect(
-      screen.getByTestId("security-compliance-content-compliance")
+      screen.getByTestId("widget-security-summary-section-content-compliance")
     ).toBeInTheDocument();
   });
 
@@ -139,7 +139,7 @@ describe("SecurityComplianceTab", () => {
     render(<SecurityComplianceTab {...defaultProps} testId={customTestId} />);
     
     expect(
-      screen.getByTestId(`${customTestId}-content-compliance`)
+      screen.getByTestId("widget-security-summary-section-content-compliance")
     ).toBeInTheDocument();
   });
 
@@ -183,7 +183,7 @@ describe("SecurityComplianceTab", () => {
     
     render(<SecurityComplianceTab {...mixedProps} />);
     expect(
-      screen.getByTestId("security-compliance-content-compliance")
+      screen.getByTestId("widget-security-summary-section-content-compliance")
     ).toBeInTheDocument();
   });
 
