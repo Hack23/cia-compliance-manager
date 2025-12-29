@@ -150,8 +150,8 @@ describe("AvailabilityImpactWidget", () => {
 
   it("displays security level badge", () => {
     render(<AvailabilityImpactWidget {...defaultProps} />);
-    expect(screen.getByTestId("availability-widget-level")).toBeInTheDocument();
-    expect(screen.getByTestId("availability-widget-level")).toHaveTextContent(
+    expect(screen.getByTestId("widget-availability-impact-label-security-level")).toBeInTheDocument();
+    expect(screen.getByTestId("widget-availability-impact-label-security-level")).toHaveTextContent(
       "Moderate"
     );
   });
@@ -160,7 +160,7 @@ describe("AvailabilityImpactWidget", () => {
     render(<AvailabilityImpactWidget {...defaultProps} />);
     expect(screen.getByText("Business Impact")).toBeInTheDocument();
     expect(
-      screen.getByTestId("availability-widget-business-impact")
+      screen.getByTestId("widget-availability-impact-section-business-impact")
     ).toBeInTheDocument();
     expect(
       screen.getByText("Moderate availability business impact summary")
@@ -194,7 +194,7 @@ describe("AvailabilityImpactWidget", () => {
         availabilityLevel="High"
       />
     );
-    expect(screen.getByTestId("availability-widget-level")).toHaveTextContent(
+    expect(screen.getByTestId("widget-availability-impact-label-security-level")).toHaveTextContent(
       "High"
     );
     expect(screen.getByText("99.9%")).toBeInTheDocument();
@@ -211,7 +211,7 @@ describe("AvailabilityImpactWidget", () => {
         testId="availability-widget"
       />
     );
-    expect(screen.getByTestId("availability-widget-level")).toHaveTextContent(
+    expect(screen.getByTestId("widget-availability-impact-label-security-level")).toHaveTextContent(
       "Low"
     );
   });
@@ -233,7 +233,7 @@ describe("AvailabilityImpactWidget", () => {
     render(
       <AvailabilityImpactWidget {...defaultProps} availabilityLevel="None" />
     );
-    expect(screen.getByTestId("availability-widget-level")).toHaveTextContent(
+    expect(screen.getByTestId("widget-availability-impact-label-security-level")).toHaveTextContent(
       "None"
     );
     // None level would show default metrics for "None" level
@@ -247,7 +247,7 @@ describe("AvailabilityImpactWidget", () => {
         availabilityLevel="Very High"
       />
     );
-    expect(screen.getByTestId("availability-widget-level")).toHaveTextContent(
+    expect(screen.getByTestId("widget-availability-impact-label-security-level")).toHaveTextContent(
       "Very High"
     );
     // Very High level would show advanced metrics

@@ -812,13 +812,13 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         expect(
-          screen.getByTestId("cost-estimation-widget-conf-level")
+          screen.getByTestId("widget-cost-estimation-label-conf-level")
         ).toBeInTheDocument();
         expect(
-          screen.getByTestId("cost-estimation-widget-int-level")
+          screen.getByTestId("widget-cost-estimation-label-int-level")
         ).toBeInTheDocument();
         expect(
-          screen.getByTestId("cost-estimation-widget-avail-level")
+          screen.getByTestId("widget-cost-estimation-label-avail-level")
         ).toBeInTheDocument();
       });
     });

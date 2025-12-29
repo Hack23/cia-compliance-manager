@@ -145,7 +145,7 @@ describe("ConfidentialityImpactWidget", () => {
   it("displays business impact section", () => {
     render(<ConfidentialityImpactWidget {...defaultProps} />);
     expect(
-      screen.getByTestId("confidentiality-widget-business-impact")
+      screen.getByTestId("widget-confidentiality-impact-section-business-impact")
     ).toBeInTheDocument();
     expect(
       screen.getByText("Moderate confidentiality business impact summary")

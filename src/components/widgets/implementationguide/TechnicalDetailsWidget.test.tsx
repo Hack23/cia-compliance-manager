@@ -1,5 +1,6 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { TECHNICAL_DETAILS_WIDGET_IDS } from "../../../constants/testIds";
 import { SecurityLevel } from "../../../types/cia";
 import TechnicalDetailsWidget from "./TechnicalDetailsWidget";
 
@@ -95,7 +96,7 @@ describe("TechnicalDetailsWidget", () => {
 
     // Click on integrity tab
     await act(async () => {
-      fireEvent.click(screen.getByTestId("integrity-tab"));
+      fireEvent.click(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.button("integrity-tab")));
     });
 
     // Should now show integrity content
@@ -112,7 +113,7 @@ describe("TechnicalDetailsWidget", () => {
 
     // Click on integrity tab
     await act(async () => {
-      fireEvent.click(screen.getByTestId("integrity-tab"));
+      fireEvent.click(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.button("integrity-tab")));
     });
 
     // Should now show integrity content
@@ -123,7 +124,7 @@ describe("TechnicalDetailsWidget", () => {
 
     // Click on availability tab
     await act(async () => {
-      fireEvent.click(screen.getByTestId("availability-tab"));
+      fireEvent.click(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.button("availability-tab")));
     });
 
     // Should now show availability content
@@ -183,7 +184,7 @@ describe("TechnicalDetailsWidget", () => {
 
     // Switch to integrity tab to see Very High level there
     await act(async () => {
-      fireEvent.click(screen.getByTestId("integrity-tab"));
+      fireEvent.click(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.button("integrity-tab")));
     });
 
     expect(screen.getByTestId("widget-technical-details-label-description")).toHaveTextContent(
@@ -199,7 +200,6 @@ describe("TechnicalDetailsWidget", () => {
     // The component should show the technical implementation
     expect(screen.getAllByTestId("widget-technical-details-header")[0]).toBeInTheDocument();
     expect(screen.getByTestId("widget-technical-details-label-description")).toBeInTheDocument();
-    expect(screen.getAllByTestId("widget-technical-details-header")[0]).toBeInTheDocument();
     expect(screen.getByTestId("widget-technical-details-list-implementation-steps")).toBeInTheDocument();
   });
 

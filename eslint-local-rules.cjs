@@ -39,14 +39,30 @@ module.exports = {
         JSXAttribute(node) {
           // Check if this is a data-testid attribute
           if (node.name && node.name.name === 'data-testid') {
+            const attrValue = node.value;
+
             // Check if the value is a literal string (hardcoded)
             if (
-              node.value &&
-              node.value.type === 'Literal' &&
-              typeof node.value.value === 'string'
+              attrValue &&
+              attrValue.type === 'Literal' &&
+              typeof attrValue.value === 'string'
             ) {
               context.report({
-                node: node.value,
+                node: attrValue,
+                messageId: 'hardcodedTestId',
+              });
+            }
+
+            // Also check for template literals inside JSX expression containers,
+            // e.g. data-testid={`${testId}-suffix`}
+            if (
+              attrValue &&
+              attrValue.type === 'JSXExpressionContainer' &&
+              attrValue.expression &&
+              attrValue.expression.type === 'TemplateLiteral'
+            ) {
+              context.report({
+                node: attrValue.expression,
                 messageId: 'hardcodedTestId',
               });
             }
