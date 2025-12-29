@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { TECHNICAL_DETAILS_WIDGET_IDS } from "../../../constants/testIds";
 import { SecurityLevel, CIAComponent } from "../../../types/cia";
 import { getImplementationComplexity } from "../../../utils/riskUtils";
 import { getPersonnelRequirements } from "../../../utils/resourceUtils";
