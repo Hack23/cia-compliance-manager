@@ -42,7 +42,7 @@ describe("SecurityOverviewTab", () => {
   it("renders without crashing", () => {
     render(<SecurityOverviewTab {...defaultProps} />);
     expect(
-      screen.getByTestId("widget-security-summary-section-content-overview")
+      screen.getByTestId(defaultProps.testId)
     ).toBeInTheDocument();
   });
 
@@ -100,7 +100,7 @@ describe("SecurityOverviewTab", () => {
     const propsWithoutCompliance = { ...defaultProps, complianceScore: undefined };
     render(<SecurityOverviewTab {...propsWithoutCompliance} />);
     expect(
-      screen.getByTestId("widget-security-summary-section-content-overview")
+      screen.getByTestId(defaultProps.testId)
     ).toBeInTheDocument();
   });
 
@@ -175,7 +175,7 @@ describe("SecurityOverviewTab", () => {
     render(<SecurityOverviewTab {...defaultProps} testId={customTestId} />);
     
     expect(
-      screen.getByTestId("widget-security-summary-section-content-overview")
+      screen.getByTestId(customTestId)
     ).toBeInTheDocument();
   });
 

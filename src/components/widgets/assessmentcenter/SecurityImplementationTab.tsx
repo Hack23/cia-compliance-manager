@@ -33,7 +33,7 @@ export const SecurityImplementationTab: React.FC<
 }) => {
   return (
     <div
-      data-testid={SECURITY_SUMMARY_WIDGET_IDS.section('content-implementation')}
+      data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-implementation')}
       className="space-y-4"
     >
       {/* Implementation introduction */}

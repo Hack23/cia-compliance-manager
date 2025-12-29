@@ -58,8 +58,6 @@ export function createTestId(...parts: string[]): string {
 }
 
 /**
- * Widget-scoped test ID generator
-/**
  * Type definition for widget test ID generators
  */
 export interface WidgetTestIds {

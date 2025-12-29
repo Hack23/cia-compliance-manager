@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
-import { COST_ESTIMATION_WIDGET_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { CIAComponent, SecurityLevel } from "../../../types/cia";
 import { CostEstimationWidgetProps } from "../../../types/widgets";
