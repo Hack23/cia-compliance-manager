@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.1**](../../../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.2**](../../../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ComplianceStatusWidgetProps
 
-Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L25)
+Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:25](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L25)
 
 Props for ComplianceStatusWidget component
 
@@ -16,7 +16,7 @@ Props for ComplianceStatusWidget component
 
 > **availabilityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L29)
+Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:29](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L29)
 
 Selected availability level
 
@@ -26,7 +26,7 @@ Selected availability level
 
 > `optional` **className**: `string`
 
-Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:54](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L54)
+Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:54](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L54)
 
 Optional CSS class name
 
@@ -36,7 +36,7 @@ Optional CSS class name
 
 > **confidentialityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:39](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L39)
+Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:39](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L39)
 
 Selected confidentiality level
 
@@ -46,7 +46,7 @@ Selected confidentiality level
 
 > `optional` **industry**: `string`
 
-Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:44](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L44)
+Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:44](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L44)
 
 Optional industry for compliance context
 
@@ -56,7 +56,7 @@ Optional industry for compliance context
 
 > **integrityLevel**: [`SecurityLevel`](../../../../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:34](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L34)
+Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:34](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L34)
 
 Selected integrity level
 
@@ -66,7 +66,7 @@ Selected integrity level
 
 > `optional` **region**: `string`
 
-Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:49](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L49)
+Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:49](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L49)
 
 Optional region for compliance context
 
@@ -76,6 +76,6 @@ Optional region for compliance context
 
 > `optional` **testId**: `string`
 
-Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:59](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L59)
+Defined in: [components/widgets/businessvalue/ComplianceStatusWidget.tsx:59](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/components/widgets/businessvalue/ComplianceStatusWidget.tsx#L59)
 
 Optional test ID for automated testing

@@ -1,0 +1,400 @@
+{
+  "stats": {
+    "suites": 6,
+    "tests": 11,
+    "passes": 11,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-12-29T00:39:18.873Z",
+    "end": "2025-12-29T00:39:37.139Z",
+    "duration": 18266,
+    "testsRegistered": 11,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "6a93c406-3d48-40c6-95fa-783c8f51e39a",
+      "title": "",
+      "fullFile": "cypress/e2e/workflows/complete-assessment.cy.ts",
+      "file": "cypress/e2e/workflows/complete-assessment.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "fa963022-9de9-4487-90f0-73489720c7db",
+          "title": "Complete Assessment Workflow",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "c3267811-0c57-4a3a-b14e-9d7277df9af0",
+              "title": "New User Assessment Journey",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should guide user through complete assessment process",
+                  "fullTitle": "Complete Assessment Workflow New User Assessment Journey should guide user through complete assessment process",
+                  "timedOut": null,
+                  "duration": 1996,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"🎯 Starting new user assessment workflow\");\n// Step 1: Verify initial state - no security levels selected\ncy.log(\"Step 1: Verifying initial application state\");\ncy.get(\"body\").should(\"be.visible\");\ncy.get(\"select\").should(\"have.length.at.least\", 3);\n// Step 2-4: User selects security levels systematically\ncy.log(\"Step 2-4: Selecting security levels\");\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE, // Availability\n_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, // Integrity\n_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH // Confidentiality\n);\n// Verify selections persisted\ncy.get(\"select\").eq(0).should(\"have.value\", _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE);\ncy.get(\"select\").eq(1).should(\"have.value\", _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\ncy.get(\"select\").eq(2).should(\"have.value\", _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n// Step 5: Review Security Summary\ncy.log(\"Step 5: Reviewing security summary\");\ncy.get('[data-testid*=\"security-summary\"], [data-testid*=\"summary\"]').then(($widgets) => {\n    if ($widgets.length > 0) {\n        cy.log(\"✓ Security summary widget found\");\n        expect($widgets.length).to.be.at.least(1);\n    }\n    else {\n        cy.log(\"ℹ Security summary not visible - may be in collapsed state\");\n    }\n});\n// Step 6: Review Business Impact Analysis\ncy.log(\"Step 6: Reviewing business impact analysis\");\ncy.get('[data-testid*=\"business-impact\"], [data-testid*=\"impact\"]').then(($widgets) => {\n    if ($widgets.length > 0) {\n        cy.log(`✓ Found ${$widgets.length} impact analysis widgets`);\n        // Check for impact categories\n        const impactText = $widgets.text().toLowerCase();\n        const hasImpactCategories = impactText.includes(\"financial\") ||\n            impactText.includes(\"operational\") ||\n            impactText.includes(\"reputational\") ||\n            impactText.includes(\"regulatory\");\n        if (hasImpactCategories) {\n            cy.log(\"✓ Impact analysis shows business impact categories\");\n        }\n    }\n});\n// Step 7: Review Compliance Status\ncy.log(\"Step 7: Reviewing compliance status\");\ncy.get('[data-testid*=\"compliance\"]').then(($widgets) => {\n    if ($widgets.length > 0) {\n        cy.log(`✓ Found ${$widgets.length} compliance widgets`);\n        // Verify compliance frameworks are mentioned\n        const text = $widgets.text().toLowerCase();\n        const hasFrameworks = text.includes(\"nist\") ||\n            text.includes(\"iso\") ||\n            text.includes(\"gdpr\") ||\n            text.includes(\"hipaa\") ||\n            text.includes(\"pci\");\n        if (hasFrameworks) {\n            cy.log(\"✓ Compliance frameworks detected\");\n        }\n    }\n});\n// Step 8: Review Cost Estimation\ncy.log(\"Step 8: Reviewing cost estimation\");\ncy.get('[data-testid*=\"cost\"], [data-testid*=\"capex\"], [data-testid*=\"opex\"]').then(($widgets) => {\n    if ($widgets.length > 0) {\n        cy.log(`✓ Found ${$widgets.length} cost-related elements`);\n        // Verify cost values are present\n        const text = $widgets.text();\n        const hasCostValues = text.includes(\"$\") ||\n            text.includes(\"€\") ||\n            text.includes(\"£\") ||\n            /\\d+%/.test(text);\n        if (hasCostValues) {\n            cy.log(\"✓ Cost estimation values displayed\");\n        }\n    }\n});\n// Step 9: Review Technical Implementation Details\ncy.log(\"Step 9: Reviewing technical details\");\ncy.get('[data-testid*=\"technical\"], [data-testid*=\"implementation\"]').then(($widgets) => {\n    if ($widgets.length > 0) {\n        cy.log(`✓ Found ${$widgets.length} technical detail elements`);\n    }\n});\n// Step 10: Verify all widgets are responsive and functional\ncy.log(\"Step 10: Verifying all widgets loaded successfully\");\ncy.verifyMinimumWidgets(5);\ncy.log(\"✅ Complete assessment workflow validated\");",
+                  "err": {},
+                  "uuid": "45607fe6-9467-4047-8bfa-94ff8ab79687",
+                  "parentUUID": "c3267811-0c57-4a3a-b14e-9d7277df9af0",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "should maintain assessment state during navigation",
+                  "fullTitle": "Complete Assessment Workflow New User Assessment Journey should maintain assessment state during navigation",
+                  "timedOut": null,
+                  "duration": 1750,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"🔄 Testing state persistence\");\n// Set security levels\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n// Verify selections\ncy.get(\"select\").eq(0).should(\"have.value\", _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\ncy.get(\"select\").eq(1).should(\"have.value\", _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE);\ncy.get(\"select\").eq(2).should(\"have.value\", _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n// Reload page\ncy.reload();\ncy.ensureAppLoaded();\n// Verify state persisted (if localStorage is used)\ncy.window().then((win) => {\n    const storedData = win.localStorage.getItem(\"securityLevels\");\n    if (storedData) {\n        cy.log(\"✓ Security levels persisted in localStorage\");\n        expect(storedData).to.exist;\n    }\n    else {\n        cy.log(\"ℹ No localStorage persistence - using default session state\");\n    }\n});",
+                  "err": {},
+                  "uuid": "eb855a39-7920-47c0-85fa-550deb97c85a",
+                  "parentUUID": "c3267811-0c57-4a3a-b14e-9d7277df9af0",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "45607fe6-9467-4047-8bfa-94ff8ab79687",
+                "eb855a39-7920-47c0-85fa-550deb97c85a"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 3746,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "e344b686-0678-461c-ae60-9edd5c317516",
+              "title": "Assessment Modification Workflow",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should allow users to modify and update their assessment",
+                  "fullTitle": "Complete Assessment Workflow Assessment Modification Workflow should allow users to modify and update their assessment",
+                  "timedOut": null,
+                  "duration": 3176,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"🔄 Starting assessment modification workflow\");\n// Initial assessment: Low security across the board\ncy.log(\"Phase 1: Creating initial low-security assessment\");\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n// Capture initial state\ncy.get('[data-testid*=\"cost\"]')\n    .first()\n    .invoke(\"text\")\n    .then((initialCost) => {\n    cy.log(`Initial cost state captured: ${initialCost.slice(0, 50)}...`);\n    // User realizes they need higher security - upgrade to High\n    cy.log(\"Phase 2: Upgrading to high security\");\n    cy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n    // Verify cost widget updated\n    cy.get('[data-testid*=\"cost\"]')\n        .first()\n        .invoke(\"text\")\n        .then((newText) => {\n        // Cost display should have changed\n        cy.log(`New cost state: ${newText.slice(0, 50)}...`);\n        // Verify the widget updated with valid content\n        expect(newText.length).to.be.greaterThan(0);\n        // Optionally verify it changed from initial state\n        cy.log(`Cost changed: ${initialCost !== newText}`);\n    });\n});\n// User adjusts to balanced approach\ncy.log(\"Phase 3: Adjusting to balanced security posture\");\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE);\n// Verify all widgets updated\ncy.get('[data-testid*=\"widget\"]').should(\"exist\");\ncy.log(\"✅ Assessment modification workflow completed\");",
+                  "err": {},
+                  "uuid": "845d1f09-0021-4502-97ab-3bb501365b37",
+                  "parentUUID": "e344b686-0678-461c-ae60-9edd5c317516",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "845d1f09-0021-4502-97ab-3bb501365b37"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 3176,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "ab00c0cf-004b-4403-8191-abe00c71690d",
+              "title": "Multi-Scenario Comparison",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should assess Minimum Security scenario correctly",
+                  "fullTitle": "Complete Assessment Workflow Multi-Scenario Comparison should assess Minimum Security scenario correctly",
+                  "timedOut": null,
+                  "duration": 1354,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(`📊 Testing scenario: ${scenario.name}`);\n// Set security levels for scenario\ncy.setSecurityLevels(scenario.availability, scenario.integrity, scenario.confidentiality);\n// Verify levels were set\ncy.get(\"select\")\n    .eq(0)\n    .should(\"have.value\", scenario.availability);\ncy.get(\"select\").eq(1).should(\"have.value\", scenario.integrity);\ncy.get(\"select\")\n    .eq(2)\n    .should(\"have.value\", scenario.confidentiality);\n// Capture scenario results\ncy.get(\"body\").then(($body) => {\n    const pageText = $body.text();\n    cy.log(`Scenario ${scenario.name}: Assessment complete`);\n    cy.log(`Page contains ${pageText.length} characters of content`);\n});\n// Verify widgets are rendering for this scenario\ncy.verifyMinimumWidgets(5);\ncy.log(`✅ ${scenario.name} scenario validated`);",
+                  "err": {},
+                  "uuid": "9c87d907-be43-4fb8-baca-38141c094346",
+                  "parentUUID": "ab00c0cf-004b-4403-8191-abe00c71690d",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "should assess Balanced Security scenario correctly",
+                  "fullTitle": "Complete Assessment Workflow Multi-Scenario Comparison should assess Balanced Security scenario correctly",
+                  "timedOut": null,
+                  "duration": 1204,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(`📊 Testing scenario: ${scenario.name}`);\n// Set security levels for scenario\ncy.setSecurityLevels(scenario.availability, scenario.integrity, scenario.confidentiality);\n// Verify levels were set\ncy.get(\"select\")\n    .eq(0)\n    .should(\"have.value\", scenario.availability);\ncy.get(\"select\").eq(1).should(\"have.value\", scenario.integrity);\ncy.get(\"select\")\n    .eq(2)\n    .should(\"have.value\", scenario.confidentiality);\n// Capture scenario results\ncy.get(\"body\").then(($body) => {\n    const pageText = $body.text();\n    cy.log(`Scenario ${scenario.name}: Assessment complete`);\n    cy.log(`Page contains ${pageText.length} characters of content`);\n});\n// Verify widgets are rendering for this scenario\ncy.verifyMinimumWidgets(5);\ncy.log(`✅ ${scenario.name} scenario validated`);",
+                  "err": {},
+                  "uuid": "3dd09045-47a1-4cef-ba54-211866dafaaf",
+                  "parentUUID": "ab00c0cf-004b-4403-8191-abe00c71690d",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "should assess Maximum Security scenario correctly",
+                  "fullTitle": "Complete Assessment Workflow Multi-Scenario Comparison should assess Maximum Security scenario correctly",
+                  "timedOut": null,
+                  "duration": 1490,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(`📊 Testing scenario: ${scenario.name}`);\n// Set security levels for scenario\ncy.setSecurityLevels(scenario.availability, scenario.integrity, scenario.confidentiality);\n// Verify levels were set\ncy.get(\"select\")\n    .eq(0)\n    .should(\"have.value\", scenario.availability);\ncy.get(\"select\").eq(1).should(\"have.value\", scenario.integrity);\ncy.get(\"select\")\n    .eq(2)\n    .should(\"have.value\", scenario.confidentiality);\n// Capture scenario results\ncy.get(\"body\").then(($body) => {\n    const pageText = $body.text();\n    cy.log(`Scenario ${scenario.name}: Assessment complete`);\n    cy.log(`Page contains ${pageText.length} characters of content`);\n});\n// Verify widgets are rendering for this scenario\ncy.verifyMinimumWidgets(5);\ncy.log(`✅ ${scenario.name} scenario validated`);",
+                  "err": {},
+                  "uuid": "70cc1682-2f0d-4f17-a30a-32f1ce48bab3",
+                  "parentUUID": "ab00c0cf-004b-4403-8191-abe00c71690d",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "should show meaningful differences between scenarios",
+                  "fullTitle": "Complete Assessment Workflow Multi-Scenario Comparison should show meaningful differences between scenarios",
+                  "timedOut": null,
+                  "duration": 2267,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"📊 Comparing Low vs High security scenarios\");\n// Test Low security\ncy.log(\"Phase 1: Testing Low security\");\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\nlet lowSecurityText = \"\";\ncy.get(\"body\")\n    .invoke(\"text\")\n    .then((text) => {\n    lowSecurityText = text.toLowerCase();\n});\n// Test High security\ncy.log(\"Phase 2: Testing High security\");\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\ncy.get(\"body\")\n    .invoke(\"text\")\n    .then((highSecurityText) => {\n    // Verify the content changed between scenarios\n    const textChanged = highSecurityText.toLowerCase() !== lowSecurityText;\n    expect(textChanged).to.be.true;\n    cy.log(\"✓ Content differs between Low and High security scenarios\");\n});",
+                  "err": {},
+                  "uuid": "37b0233b-4c9e-4879-8dac-3310aefb10b3",
+                  "parentUUID": "ab00c0cf-004b-4403-8191-abe00c71690d",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "9c87d907-be43-4fb8-baca-38141c094346",
+                "3dd09045-47a1-4cef-ba54-211866dafaaf",
+                "70cc1682-2f0d-4f17-a30a-32f1ce48bab3",
+                "37b0233b-4c9e-4879-8dac-3310aefb10b3"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 6315,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "c178a39e-70b1-46cd-bbaf-eb92cfab0a0b",
+              "title": "Error Handling and Edge Cases",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should handle rapid security level changes gracefully",
+                  "fullTitle": "Complete Assessment Workflow Error Handling and Edge Cases should handle rapid security level changes gracefully",
+                  "timedOut": null,
+                  "duration": 1511,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"⚡ Testing rapid security level changes\");\n// Rapidly change security levels\nconst levels = [\n    _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW,\n    _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n    _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE,\n    _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n    _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW,\n];\nlevels.forEach((level, index) => {\n    cy.log(`Rapid change ${index + 1}: ${level}`);\n    cy.get(\"select\").eq(0).select(level, { force: true });\n});\n// Verify no errors occurred\ncy.window().then((win) => {\n    // Check for console errors if tracking is enabled\n    if (win.consoleErrors) {\n        const criticalErrors = win.consoleErrors.filter((msg) => msg.includes(\"error\") ||\n            msg.includes(\"undefined\") ||\n            msg.includes(\"null\"));\n        expect(criticalErrors).to.have.length(0, \"No critical errors during rapid changes\");\n    }\n});\n// Verify app still functional\ncy.verifyMinimumWidgets(5);\ncy.log(\"✅ Rapid changes handled gracefully\");",
+                  "err": {},
+                  "uuid": "6e528ef6-6192-4e65-aed8-4f195584d3fc",
+                  "parentUUID": "c178a39e-70b1-46cd-bbaf-eb92cfab0a0b",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "should recover from invalid localStorage data",
+                  "fullTitle": "Complete Assessment Workflow Error Handling and Edge Cases should recover from invalid localStorage data",
+                  "timedOut": null,
+                  "duration": 830,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"🔧 Testing recovery from corrupted state\");\n// Inject invalid data into localStorage\ncy.window().then((win) => {\n    win.localStorage.setItem(\"securityLevels\", '{\"invalid\": \"data\"}');\n    win.localStorage.setItem(\"assessmentData\", \"invalid-json\");\n});\n// Reload page\ncy.reload();\ncy.ensureAppLoaded();\n// App should recover and show default state\ncy.get(\"select\").should(\"have.length.at.least\", 3);\ncy.verifyMinimumWidgets(5);\ncy.log(\"✅ Application recovered from invalid state\");",
+                  "err": {},
+                  "uuid": "f3698be1-46db-49b5-b82f-ad5e8b8da8c0",
+                  "parentUUID": "c178a39e-70b1-46cd-bbaf-eb92cfab0a0b",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "6e528ef6-6192-4e65-aed8-4f195584d3fc",
+                "f3698be1-46db-49b5-b82f-ad5e8b8da8c0"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 2341,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "5bc95977-5b96-414b-88e4-3bba95deb744",
+              "title": "Performance Validation",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should complete assessment workflow within acceptable time",
+                  "fullTitle": "Complete Assessment Workflow Performance Validation should complete assessment workflow within acceptable time",
+                  "timedOut": null,
+                  "duration": 1346,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.then(() => {\n    const startTime = Date.now();\n    // Complete full assessment\n    cy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE);\n    // Verify all widgets loaded\n    cy.get('[data-testid*=\"widget\"]').should(\"have.length.at.least\", 5);\n    cy.then(() => {\n        const duration = Date.now() - startTime;\n        cy.log(`Assessment workflow completed in ${duration}ms`);\n        // Adjusted for setSecurityLevels internal waits (~1400ms)\n        expect(duration).to.be.lessThan(6000); // 6 second max\n    });\n});",
+                  "err": {},
+                  "uuid": "f6d8fbdd-b8f4-4d1e-a704-b3f45b90e782",
+                  "parentUUID": "5bc95977-5b96-414b-88e4-3bba95deb744",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "should respond quickly to security level changes",
+                  "fullTitle": "Complete Assessment Workflow Performance Validation should respond quickly to security level changes",
+                  "timedOut": null,
+                  "duration": 593,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"⚡ Testing interaction response time\");\ncy.then(() => {\n    const startTime = Date.now();\n    cy.get(\"select\")\n        .eq(0)\n        .select(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, { force: true });\n    cy.then(() => {\n        const responseTime = Date.now() - startTime;\n        cy.log(`Response time: ${responseTime}ms`);\n        expect(responseTime).to.be.lessThan(1000); // 1 second max\n    });\n});",
+                  "err": {},
+                  "uuid": "59217037-bde3-405d-ad96-c20207ae64d5",
+                  "parentUUID": "5bc95977-5b96-414b-88e4-3bba95deb744",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "f6d8fbdd-b8f4-4d1e-a704-b3f45b90e782",
+                "59217037-bde3-405d-ad96-c20207ae64d5"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 1939,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "build/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

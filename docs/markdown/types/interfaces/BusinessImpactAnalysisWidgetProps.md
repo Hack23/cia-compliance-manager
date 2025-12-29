@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.1**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.2**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: BusinessImpactAnalysisWidgetProps
 
-Defined in: [types/widget-props.ts:498](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L498)
+Defined in: [types/widget-props.ts:498](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/types/widget-props.ts#L498)
 
 Props for BusinessImpactAnalysisWidget component
 
@@ -34,7 +34,7 @@ financial, operational, reputational, and regulatory dimensions.
 
 > **availabilityLevel**: [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:325](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L325)
+Defined in: [types/widget-props.ts:325](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/types/widget-props.ts#L325)
 
 Security level for availability component
 
@@ -48,7 +48,7 @@ Security level for availability component
 
 > `optional` **children**: `ReactNode`
 
-Defined in: [types/widget-props.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L244)
+Defined in: [types/widget-props.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/types/widget-props.ts#L244)
 
 Optional children elements
 
@@ -62,7 +62,7 @@ Optional children elements
 
 > `optional` **className**: `string`
 
-Defined in: [types/widget-props.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L124)
+Defined in: [types/widget-props.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/types/widget-props.ts#L124)
 
 Optional CSS class name for custom styling
 
@@ -85,7 +85,7 @@ Use Tailwind CSS classes or custom CSS classes.
 
 > **confidentialityLevel**: [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:335](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L335)
+Defined in: [types/widget-props.ts:335](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/types/widget-props.ts#L335)
 
 Security level for confidentiality component
 
@@ -99,7 +99,7 @@ Security level for confidentiality component
 
 > `optional` **industrySector**: `string`
 
-Defined in: [types/widget-props.ts:508](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L508)
+Defined in: [types/widget-props.ts:508](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/types/widget-props.ts#L508)
 
 Industry sector for impact analysis
 
@@ -109,7 +109,7 @@ Industry sector for impact analysis
 
 > **integrityLevel**: [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:330](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L330)
+Defined in: [types/widget-props.ts:330](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/types/widget-props.ts#L330)
 
 Security level for integrity component
 
@@ -123,7 +123,7 @@ Security level for integrity component
 
 > `optional` **onError**: (`error`) => `void`
 
-Defined in: [types/widget-props.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L250)
+Defined in: [types/widget-props.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/types/widget-props.ts#L250)
 
 Optional callback when widget encounters an error
 
@@ -149,7 +149,7 @@ Error that occurred
 
 > `optional` **organizationSize**: `"medium"` \| `"small"` \| `"large"` \| `"enterprise"`
 
-Defined in: [types/widget-props.ts:503](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L503)
+Defined in: [types/widget-props.ts:503](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/types/widget-props.ts#L503)
 
 Organization size for impact calculations
 
@@ -165,7 +165,7 @@ Organization size for impact calculations
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widget-props.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/types/widget-props.ts#L135)
+Defined in: [types/widget-props.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/types/widget-props.ts#L135)
 
 Optional test ID for automated testing
 

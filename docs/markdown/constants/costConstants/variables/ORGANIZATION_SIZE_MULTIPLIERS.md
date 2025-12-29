@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.1**](../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.2**](../../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **ORGANIZATION\_SIZE\_MULTIPLIERS**: `object`
 
-Defined in: [constants/costConstants.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/1ebf341a32b3e817927a60b7d1a0904ca94c68ff/src/constants/costConstants.ts#L32)
+Defined in: [constants/costConstants.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/9c3f9c0212e00ca1f7e7e22ddf0d1c98efb3e2be/src/constants/costConstants.ts#L32)
 
 Cost multipliers based on organization size
 
