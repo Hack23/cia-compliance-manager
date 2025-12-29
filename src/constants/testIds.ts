@@ -1,11 +1,101 @@
 import { SecurityLevel } from "../types/cia";
 
 // ---------------------------------------------------------------
-// SECTION 1: HELPER FUNCTIONS AND UTILITIES
+// SECTION 1: TEST ID NAMING CONVENTION
 // ---------------------------------------------------------------
 
 /**
+ * ## Test ID Naming Convention
+ *
+ * All test IDs in this codebase follow a consistent hierarchical pattern:
+ * **Pattern**: `{scope}-{element}-{modifier}`
+ *
+ * ### Examples:
+ * - Widget containers: `widget-cost-estimation`
+ * - Buttons: `cost-estimation-button-submit`
+ * - Sections: `security-summary-section-overview`
+ * - Labels: `availability-label-current-level`
+ * - Values: `cost-estimation-value-total`
+ *
+ * ### Rules:
+ * 1. **Use kebab-case** (lowercase with hyphens)
+ * 2. **Start with widget/component name** for scoping
+ * 3. **Follow hierarchical structure** (parent → child → specific)
+ * 4. **Use semantic descriptors** (describe purpose, not appearance)
+ * 5. **Avoid generic names** like "button-1" or "div-2"
+ *
+ * ### Widget-Scoped Pattern:
+ * - Root: `widget-{name}` (e.g., `widget-cost-estimation`)
+ * - Section: `widget-{name}-section-{section-name}`
+ * - Button: `widget-{name}-button-{action}`
+ * - Value: `widget-{name}-value-{data-type}`
+ * - Label: `widget-{name}-label-{field}`
+ */
+
+// ---------------------------------------------------------------
+// SECTION 2: HELPER FUNCTIONS AND UTILITIES
+// ---------------------------------------------------------------
+
+/**
+ * Generate hierarchical test ID from parts
+ *
+ * @param parts - Array of ID parts to combine
+ * @returns Formatted test ID in kebab-case
+ *
+ * @example
+ * createTestId('cost', 'estimation', 'button', 'submit')
+ * // Returns: 'cost-estimation-button-submit'
+ *
+ * @example
+ * createTestId('widget', 'Security Level')
+ * // Returns: 'widget-security-level'
+ */
+export function createTestId(...parts: string[]): string {
+  return parts
+    .filter(Boolean)
+    .map(part => part.toLowerCase().replace(/\s+/g, '-'))
+    .join('-');
+}
+
+/**
+ * Widget-scoped test ID generator
+ *
+ * Creates a factory object with methods to generate consistent test IDs
+ * for all elements within a widget.
+ *
+ * @param widgetName - Name of the widget (will be normalized to kebab-case)
+ * @returns Object with methods to generate scoped test IDs
+ *
+ * @example
+ * const COST_IDS = createWidgetTestId('cost-estimation');
+ * COST_IDS.root              // 'widget-cost-estimation'
+ * COST_IDS.section('capex')  // 'widget-cost-estimation-section-capex'
+ * COST_IDS.button('submit')  // 'widget-cost-estimation-button-submit'
+ * COST_IDS.value('total')    // 'widget-cost-estimation-value-total'
+ * COST_IDS.label('amount')   // 'widget-cost-estimation-label-amount'
+ */
+export function createWidgetTestId(widgetName: string) {
+  const normalizedName = widgetName.toLowerCase().replace(/\s+/g, '-');
+  return {
+    root: createTestId('widget', normalizedName),
+    section: (name: string) => createTestId('widget', normalizedName, 'section', name),
+    button: (name: string) => createTestId('widget', normalizedName, 'button', name),
+    value: (name: string) => createTestId('widget', normalizedName, 'value', name),
+    label: (name: string) => createTestId('widget', normalizedName, 'label', name),
+    icon: (name: string) => createTestId('widget', normalizedName, 'icon', name),
+    input: (name: string) => createTestId('widget', normalizedName, 'input', name),
+    list: (name: string) => createTestId('widget', normalizedName, 'list', name),
+    item: (name: string) => createTestId('widget', normalizedName, 'item', name),
+    card: (name: string) => createTestId('widget', normalizedName, 'card', name),
+    header: () => createTestId('widget', normalizedName, 'header'),
+    content: () => createTestId('widget', normalizedName, 'content'),
+    footer: () => createTestId('widget', normalizedName, 'footer'),
+  };
+}
+
+/**
  * Create a context-specific test ID by combining a component prefix with an element ID
+ * @deprecated Use createTestId() or createWidgetTestId() instead for consistency
  */
 export const createContextualTestId = (
   componentPrefix: string,
@@ -16,6 +106,7 @@ export const createContextualTestId = (
 
 /**
  * Helper to create a test ID with a prefix
+ * @deprecated Use createTestId() instead for consistency
  */
 export const getTestId = (prefix: string, id: string): string => {
   return `${prefix}-${id}`;
