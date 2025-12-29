@@ -232,6 +232,7 @@ button.lightbutton {
   border-radius: 6px; /* Increased for better appearance */
   transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  transform: translateY(0);
 }
 
 button.lightbutton:hover {
@@ -248,27 +249,6 @@ button.lightbutton:active {
 
 button.lightbutton:hover:active {
   transform: translateY(0);
-}
-
-/* Tab buttons specific styling for light theme */
-/* Increased specificity to ensure these override universal tab styling in components.css */
-/* Light theme tab styling - complements universal tab styles in components.css */
-button[role="tab"]:not([aria-selected="true"]) {
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
-}
-
-button[role="tab"]:not([aria-selected="true"]):hover {
-  background: var(--primary-bg-hover);
-  border-bottom-color: var(--primary-border-hover);
-}
-
-button[role="tab"][aria-selected="true"] {
-  background: var(--primary-bg-active);
-  border-bottom-color: var(--primary-color);
-  color: var(--primary-color);
-  font-weight: 600;
 }
 
 /* CIA component specific styling */

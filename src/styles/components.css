@@ -2317,8 +2317,12 @@ button.more-info:hover::before {
 
 /* Ensure tab gap is consistent within widgets without overriding Tailwind utilities */
 [data-testid^="widget-"] nav.flex,
-[data-testid^="widget-"] nav[role="tablist"] {
-  gap: 0.375rem; /* Consistent spacing between tabs (6px to match widget padding) */
+[data-testid^="widget-"] nav[role="tablist"],
+[data-testid="security-summary-widget"] nav.flex,
+[data-testid="security-summary-widget"] nav[role="tablist"],
+[data-testid="business-impact-analysis-widget"] nav.flex,
+[data-testid="business-impact-analysis-widget"] nav[role="tablist"] {
+  gap: 0.375rem; /* Consistent spacing between tabs */
 }
 
 /* Universal tab styling for consistency across all widgets */
@@ -2367,8 +2371,7 @@ button[role="tab"][aria-selected="true"] {
   text-shadow: 0 0 5px var(--primary-glow);
 }
 
-/* Inactive tab colors - using CSS variables */
-/* Inactive tab colors - uses theme-specific --text-secondary variable */
+/* Inactive tab colors using theme-specific --text-secondary CSS variable */
 .widget-tab:not([aria-selected="true"]),
 button[role="tab"]:not([aria-selected="true"]) {
   color: var(--text-secondary);
@@ -2377,13 +2380,19 @@ button[role="tab"]:not([aria-selected="true"]) {
 /* Tab content area styling - reduce empty space */
 /* Use exact class selector instead of substring matching */
 [data-testid^="widget-"] .tab-content,
-[data-testid^="widget-"] div.tab-content {
+[data-testid^="widget-"] div.tab-content,
+[data-testid="security-summary-widget"] .tab-content,
+[data-testid="security-summary-widget"] div.tab-content,
+[data-testid="business-impact-analysis-widget"] .tab-content,
+[data-testid="business-impact-analysis-widget"] div.tab-content {
   padding: 0;
   margin-top: 0.75rem;
 }
 
 /* Tab panels should have consistent minimal padding - use semantic ARIA attributes */
-[data-testid^="widget-"] [role="tabpanel"] {
+[data-testid^="widget-"] [role="tabpanel"],
+[data-testid="security-summary-widget"] [role="tabpanel"],
+[data-testid="business-impact-analysis-widget"] [role="tabpanel"] {
   padding: 0.5rem 0;
 }
 
