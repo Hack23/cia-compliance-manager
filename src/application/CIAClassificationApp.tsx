@@ -189,7 +189,7 @@ const CIAClassificationApp: React.FC = () => {
                 src="./icon-192.png"
                 alt="CIA Compliance Manager Logo"
                 style={{ transform: "scale(0.2)" }}
-                data-testid={APP_TEST_IDS.APP_TITLE}
+                data-testid={APP_TEST_IDS.APP_LOGO}
               />
             </div>
             <div className="flex flex-row items-center">
@@ -202,11 +202,11 @@ const CIAClassificationApp: React.FC = () => {
               <div className="cyber-nav flex items-center flex-wrap">
                 <span
                   className="inline-block pulse-dot mr-1"
-                  data-testid={APP_TEST_IDS.APP_ROOT}
+                  data-testid={APP_TEST_IDS.APP_INDICATOR}
                 >
                   ■
                 </span>
-                <span className="mr-1 version-tag" data-testid={APP_TEST_IDS.APP_TITLE}>
+                <span className="mr-1 version-tag" data-testid={APP_TEST_IDS.APP_VERSION}>
                   v{appVersion}
                 </span>
                 <span className="mx-1 nav-separator">•</span>
@@ -215,7 +215,7 @@ const CIAClassificationApp: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cyber-link"
-                  data-testid={APP_TEST_IDS.APP_ROOT}
+                  data-testid={APP_TEST_IDS.SOURCE_LINK}
                 >
                   Source
                 </a>
@@ -225,7 +225,7 @@ const CIAClassificationApp: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cyber-link"
-                  data-testid={APP_TEST_IDS.APP_ROOT}
+                  data-testid={APP_TEST_IDS.DOCS_LINK}
                 >
                   Doc
                 </a>
@@ -235,7 +235,7 @@ const CIAClassificationApp: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cyber-link"
-                  data-testid={APP_TEST_IDS.APP_ROOT}
+                  data-testid={APP_TEST_IDS.AUTHOR_LINK}
                 >
                   Hack23
                 </a>
@@ -248,7 +248,7 @@ const CIAClassificationApp: React.FC = () => {
               onClick={() => setShowHelp(true)}
               className="px-2 py-1 text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded transition-colors"
               title="Keyboard Shortcuts (? or Ctrl+/)"
-              data-testid={APP_TEST_IDS.APP_ROOT}
+              data-testid={APP_TEST_IDS.KEYBOARD_SHORTCUTS_BUTTON}
             >
               ⌨️ Shortcuts
             </button>
