@@ -622,7 +622,6 @@ td {
 }
 
 /* Fix for specific widgets that need vertical scrolling */
-[data-testid="widget-combined-business-impact"],
 [data-testid="security-summary-container"],
 [data-testid="widget-value-creation"],
 [data-testid="widget-cost-estimation"],

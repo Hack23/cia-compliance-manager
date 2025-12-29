@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { TECHNICAL_DETAILS_WIDGET_IDS } from "../../../constants/testIds";
 import { CIAComponent, SecurityLevel } from "../../../types/cia";
 import {
   CIAComponentDetails,
@@ -46,7 +47,7 @@ describe("CIAComponentDetails", () => {
 
   it("renders without crashing", () => {
     render(<CIAComponentDetails {...defaultProps} />);
-    expect(screen.getByTestId("confidentiality-section")).toBeInTheDocument();
+    expect(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.section("confidentiality"))).toBeInTheDocument();
   });
 
   it("displays component icon for confidentiality", () => {
@@ -60,7 +61,7 @@ describe("CIAComponentDetails", () => {
       component: "integrity" as CIAComponent,
     };
     render(<CIAComponentDetails {...integrityProps} />);
-    expect(screen.getByTestId("integrity-section")).toBeInTheDocument();
+    expect(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.section("integrity"))).toBeInTheDocument();
     expect(screen.getByText("✓")).toBeInTheDocument();
   });
 
@@ -70,7 +71,7 @@ describe("CIAComponentDetails", () => {
       component: "availability" as CIAComponent,
     };
     render(<CIAComponentDetails {...availabilityProps} />);
-    expect(screen.getByTestId("availability-section")).toBeInTheDocument();
+    expect(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.section("availability"))).toBeInTheDocument();
     expect(screen.getByText("⏱️")).toBeInTheDocument();
   });
 
@@ -272,7 +273,7 @@ describe("CIAComponentDetails", () => {
     const customTestId = "custom-cia-component";
     render(<CIAComponentDetails {...defaultProps} testId={customTestId} />);
     
-    expect(screen.getByTestId("confidentiality-section")).toBeInTheDocument();
+    expect(screen.getByTestId(TECHNICAL_DETAILS_WIDGET_IDS.section("confidentiality"))).toBeInTheDocument();
   });
 
   it("displays multiple technical requirements", () => {

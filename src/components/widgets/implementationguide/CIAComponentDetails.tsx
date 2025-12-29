@@ -120,7 +120,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
   };
 
   return (
-    <div className="mb-6" data-testid={`${component}-section`}>
+    <div className="mb-6" data-testid={TECHNICAL_DETAILS_WIDGET_IDS.section(component)}>
       <div className="flex items-center mb-4" data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header()}>
         <span className={`text-xl mr-2 ${theme.accentClass}`}>
           {theme.icon}
