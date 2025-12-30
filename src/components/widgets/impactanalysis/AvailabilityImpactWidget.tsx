@@ -18,7 +18,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
   confidentialityLevel: _confidentialityLevel,
   showExtendedDetails = false,
   className = "",
-  testId = AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_PREFIX,
+  testId = `widget-${AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_PREFIX}`,
   onError,
 }) => {
   return (

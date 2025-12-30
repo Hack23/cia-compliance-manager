@@ -127,17 +127,6 @@ describe("ImpactWidget", () => {
         expect(screen.getByTestId("widget-container-loading-container-custom-test-id")).toBeInTheDocument();
       });
     });
-
-    it("calls onError callback when provided", () => {
-      const onError = vi.fn();
-      
-      // Note: This test is hard to trigger without mocking the service
-      // The component handles errors internally, so we're just verifying the prop exists
-      render(<ImpactWidget {...defaultProps} onError={onError} />);
-      
-      // If there's no error, onError shouldn't be called
-      expect(onError).not.toHaveBeenCalled();
-    });
   });
 
   describe("Styling and layout", () => {

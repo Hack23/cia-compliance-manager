@@ -29,14 +29,6 @@ import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 import WidgetSection from "../../common/WidgetSection";
 
 /**
- * Maximum height for the confidentiality widget content area.
- * This value (550px) ensures the widget content remains scrollable
- * and doesn't overflow the container when displaying extensive
- * privacy and data protection information.
- */
-const MAX_CONFIDENTIALITY_WIDGET_HEIGHT = "550px";
-
-/**
  * Configuration for each CIA component type
  * 
  * Defines component-specific settings including titles, icons, colors,
@@ -154,7 +146,7 @@ const getTestIds = (component: CIAComponent) => {
  * of their security choices through metrics, business impact analysis, and
  * technical details. 📊
  */
-const ImpactWidget: React.FC<ImpactWidgetProps> = ({
+const ImpactWidget = React.memo<ImpactWidgetProps>(({
   component,
   level,
   className = "",
@@ -452,6 +444,9 @@ const ImpactWidget: React.FC<ImpactWidgetProps> = ({
       </WidgetContainer>
     </WidgetErrorBoundary>
   );
-};
+});
+
+// Set display name for debugging
+ImpactWidget.displayName = "ImpactWidget";
 
 export default ImpactWidget;
