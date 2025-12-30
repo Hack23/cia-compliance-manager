@@ -69,6 +69,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   confidentialityLevel,
   className = "",
   testId = SECURITY_RESOURCES_TEST_IDS.WIDGET,
+  maxItems,
   limit = 8,
   showTopResourcesOnly = false,
 }) => {
@@ -79,11 +80,14 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
     isLoading,
   } = useCIAContentService();
 
+  // Use maxItems if provided, otherwise fall back to limit for backward compatibility
+  const itemsPerPage = maxItems ?? limit;
+
   // State for resource filtering and pagination
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [resourcesPerPage, setResourcesPerPage] = useState(limit);
+  const [resourcesPerPage, setResourcesPerPage] = useState(itemsPerPage);
 
   // Calculate security resources with proper error handling and type safety
   const securityResources = useMemo((): SecurityResource[] => {
@@ -181,9 +185,29 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
     return Array.from(categories).sort();
   }, [securityResources]);
 
-  // Filter resources based on category and search term
+  // Filter resources based on category, search term, and top resources flag
   const filteredResources = useMemo(() => {
     let filtered = securityResources;
+
+    // Filter to show only top priority resources if requested
+    if (showTopResourcesOnly) {
+      // Filter resources with high relevance scores (top 50% or those with explicit priority)
+      const sortedByRelevance = [...filtered].sort((a, b) => {
+        const aScore =
+          isObject(a) && "relevanceScore" in a
+            ? (a.relevanceScore as number)
+            : 0;
+        const bScore =
+          isObject(b) && "relevanceScore" in b
+            ? (b.relevanceScore as number)
+            : 0;
+        return bScore - aScore;
+      });
+      
+      // Take top 50% of resources based on relevance score
+      const topCount = Math.max(Math.ceil(sortedByRelevance.length / 2), 5);
+      filtered = sortedByRelevance.slice(0, topCount);
+    }
 
     // Apply category filter
     if (selectedCategory) {
@@ -207,7 +231,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
     }
 
     return filtered;
-  }, [securityResources, selectedCategory, searchTerm]);
+  }, [securityResources, selectedCategory, searchTerm, showTopResourcesOnly]);
 
   // Paginate resources
   const currentResources = useMemo(() => {
