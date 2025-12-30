@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { 
   AVAILABILITY_IMPACT_TEST_IDS, 
@@ -162,23 +162,32 @@ const ImpactWidget: React.FC<ImpactWidgetProps> = ({
   showExtendedDetails = false,
   onError,
 }) => {
-  // Get component-specific configuration
-  const config = getComponentConfig(component);
-  const testIds = getTestIds(component);
+  // Get component-specific configuration (memoized for performance)
+  const config = useMemo(() => getComponentConfig(component), [component]);
+  const testIds = useMemo(() => getTestIds(component), [component]);
   const effectiveTestId = testId || testIds.prefix;
 
   // Use security level utility for consistent normalization
-  const effectiveLevel = normalizeSecurityLevel(level || "Moderate");
+  const effectiveLevel = useMemo(() => 
+    normalizeSecurityLevel(level || "Moderate"), 
+    [level]
+  );
 
   // Get CIA content service for loading/error states
   const { ciaContentService, error, isLoading } = useCIAContentService();
 
-  // Invoke error callback when service error occurs
-  React.useEffect(() => {
-    if (error && onError) {
-      onError(error);
+  // Invoke error callback when service error occurs (memoized callback)
+  const handleError = useCallback((err: Error) => {
+    if (onError) {
+      onError(err);
     }
-  }, [error, onError]);
+  }, [onError]);
+
+  React.useEffect(() => {
+    if (error) {
+      handleError(error);
+    }
+  }, [error, handleError]);
 
   // Use custom hooks for data fetching
   const details = useComponentDetails(component, effectiveLevel);
