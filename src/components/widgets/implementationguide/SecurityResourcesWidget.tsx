@@ -150,12 +150,12 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       return uniqueResources.sort((a, b) => {
         // Use type safe approach to access properties
         const aScore =
-          isObject(a) && "relevanceScore" in a
-            ? (a.relevanceScore as number)
+          isObject(a) && "relevance" in a
+            ? (a.relevance as number)
             : 0;
         const bScore =
-          isObject(b) && "relevanceScore" in b
-            ? (b.relevanceScore as number)
+          isObject(b) && "relevance" in b
+            ? (b.relevance as number)
             : 0;
 
         if (aScore !== undefined && bScore !== undefined) {
@@ -194,12 +194,12 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       // Filter resources with high relevance scores (top 50% or those with explicit priority)
       const sortedByRelevance = [...filtered].sort((a, b) => {
         const aScore =
-          isObject(a) && "relevanceScore" in a
-            ? (a.relevanceScore as number)
+          isObject(a) && "relevance" in a
+            ? (a.relevance as number)
             : 0;
         const bScore =
-          isObject(b) && "relevanceScore" in b
-            ? (b.relevanceScore as number)
+          isObject(b) && "relevance" in b
+            ? (b.relevance as number)
             : 0;
         return bScore - aScore;
       });
