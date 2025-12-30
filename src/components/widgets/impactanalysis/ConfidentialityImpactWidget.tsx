@@ -106,7 +106,7 @@ const ConfidentialityImpactWidget: React.FC<
           <h3 id="confidentiality-impact-heading" className="sr-only">
             Confidentiality Impact Details
           </h3>
-          <div className="mb-4">
+          <div className="mb-md">
             <SecurityLevelBadge
               category="Confidentiality"
               level={effectiveLevel}
@@ -131,10 +131,10 @@ const ConfidentialityImpactWidget: React.FC<
             title="Data Protection"
             icon="📊"
             variant="primary"
-            className="mb-6"
+            className="mb-lg"
             testId={CONFIDENTIALITY_IMPACT_WIDGET_IDS.section('data-protection')}
           >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
               <MetricCard
                 label="Data Classification"
                 value={dataClassification}
@@ -151,10 +151,10 @@ const ConfidentialityImpactWidget: React.FC<
             title="Privacy Impact"
             icon="🔒"
             variant="primary"
-            className="mb-6"
+            className="mb-lg"
             testId={CONFIDENTIALITY_IMPACT_WIDGET_IDS.section('privacy-impact')}
           >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
               <MetricCard
                 label="Privacy Impact"
                 value={privacyImpact}

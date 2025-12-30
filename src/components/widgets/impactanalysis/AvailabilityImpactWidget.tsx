@@ -93,7 +93,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
       >
         {/* Security level indicator */}
         <section 
-          className="mb-4"
+          className="mb-md"
           aria-labelledby="availability-level-heading"
         >
           <h3 id="availability-level-heading" className="sr-only">
@@ -112,10 +112,10 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
         {/* Business Impact Analysis */}
         {businessImpact && (
           <section 
-            className="mb-4"
+            className="mb-md"
             aria-labelledby="availability-business-impact-heading"
           >
-            <h3 id="availability-business-impact-heading" className="text-lg font-medium mb-2">
+            <h3 id="availability-business-impact-heading" className="text-lg font-medium mb-sm">
               Business Impact
             </h3>
             <BusinessImpactSection
@@ -131,12 +131,12 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
           title="SLA Metrics"
           icon="⏱️"
           variant="info"
-          className="mb-4"
+          className="mb-md"
           ariaLabelledBy="sla-metrics-heading"
           testId={AVAILABILITY_IMPACT_WIDGET_IDS.section('sla-metrics')}
         >
           <div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md mb-md"
             role="group"
             aria-label="Service level agreement metrics"
           >
@@ -165,7 +165,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
               testId={AVAILABILITY_IMPACT_WIDGET_IDS.label('rpo')}
             />
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
             <MetricCard
               label="Service Level Agreement"
               value={slaMetrics.sla}

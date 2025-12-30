@@ -399,7 +399,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                           Compliant
                         </StatusBadge>
                       </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-xs">
                         {getFrameworkDescription(framework)}
                       </p>
                     </div>
@@ -412,12 +412,12 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         {/* Partially Compliant Frameworks */}
         {complianceStatus &&
           complianceStatus.partiallyCompliantFrameworks.length > 0 && (
-            <div className="mb-6">
-              <h3 className="text-lg font-medium mb-2">
+            <div className="mb-lg">
+              <h3 className="text-lg font-medium mb-sm">
                 Partially Compliant Frameworks
               </h3>
               <div
-                className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-md"
                 data-testid={
                   COMPLIANCE_TEST_IDS.PARTIALLY_COMPLIANT_FRAMEWORKS_LIST
                 }
@@ -434,7 +434,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                       onClick={() => setActiveFramework(framework)}
                       data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-partial-${index}`}
                     >
-                      <div className="flex justify-between items-center mb-1">
+                      <div className="flex justify-between items-center mb-xs">
                         <span className="font-medium">{framework}</span>
                         <StatusBadge
                           status={getFrameworkStatusBadge(framework)}
@@ -456,12 +456,12 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         {/* Non-Compliant Frameworks */}
         {complianceStatus &&
           complianceStatus.nonCompliantFrameworks.length > 0 && (
-            <div className="mb-6">
-              <h3 className="text-lg font-medium mb-2">
+            <div className="mb-lg">
+              <h3 className="text-lg font-medium mb-sm">
                 Non-Compliant Frameworks
               </h3>
               <div
-                className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-md"
                 data-testid={COMPLIANCE_TEST_IDS.NON_COMPLIANT_FRAMEWORKS_LIST}
               >
                 {complianceStatus.nonCompliantFrameworks.map(
@@ -476,7 +476,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                       onClick={() => setActiveFramework(framework)}
                       data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-non-${index}`}
                     >
-                      <div className="flex justify-between items-center mb-1">
+                      <div className="flex justify-between items-center mb-xs">
                         <span className="font-medium">{framework}</span>
                         <StatusBadge
                           status={getFrameworkStatusBadge(framework)}
@@ -497,18 +497,18 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
 
         {/* Framework Gap Analysis */}
         {activeFramework && (
-          <div className="mt-6">
-            <h3 className="text-lg font-medium mb-2">
+          <div className="mt-lg">
+            <h3 className="text-lg font-medium mb-sm">
               {activeFramework} Gap Analysis
             </h3>
             <div
-              className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+              className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
               data-testid={COMPLIANCE_TEST_IDS.FRAMEWORK_GAP_ANALYSIS}
             >
               {gapAnalysis ? (
                 <div>
-                  <div className="mb-3">
-                    <h4 className="font-medium mb-1">Status</h4>
+                  <div className="mb-md">
+                    <h4 className="font-medium mb-xs">Status</h4>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                       {gapAnalysis.isCompliant
                         ? `Your security controls meet the requirements for ${activeFramework}.`
@@ -517,9 +517,9 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                   </div>
 
                   {/* CIA Component Analysis */}
-                  <div className="mb-3">
-                    <h4 className="font-medium mb-1">Component Requirements</h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-2">
+                  <div className="mb-md">
+                    <h4 className="font-medium mb-xs">Component Requirements</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-sm mt-sm">
                       {["availability", "integrity", "confidentiality"].map(
                         (comp) => {
                           const componentType = comp as CIAComponent;
@@ -546,7 +546,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                                   : "bg-red-50 dark:bg-red-900 dark:bg-opacity-20"
                               }`}
                             >
-                              <div className="text-xs font-medium mb-1">
+                              <div className="text-xs font-medium mb-xs">
                                 {componentType.charAt(0).toUpperCase() +
                                   componentType.slice(1)}
                               </div>
@@ -564,7 +564,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                                   </span>
                                 </span>
                               </div>
-                              <div className="mt-1 text-xs text-right">
+                              <div className="mt-xs text-xs text-right">
                                 <StatusBadge
                                   status={isMeeting ? "success" : "error"}
                                   testId={`${comp}-requirement-status`}
@@ -581,8 +581,8 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
 
                   {/* Gap Analysis */}
                   {gapAnalysis.gaps && gapAnalysis.gaps.length > 0 && (
-                    <div className="mb-3">
-                      <h4 className="font-medium mb-1">Compliance Gaps</h4>
+                    <div className="mb-md">
+                      <h4 className="font-medium mb-xs">Compliance Gaps</h4>
                       <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
                         {gapAnalysis.gaps.map((gap, index) => (
                           <li key={index}>
@@ -601,7 +601,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                   {gapAnalysis.recommendations &&
                     gapAnalysis.recommendations.length > 0 && (
                       <div>
-                        <h4 className="font-medium mb-1">Recommendations</h4>
+                        <h4 className="font-medium mb-xs">Recommendations</h4>
                         <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
                           {gapAnalysis.recommendations.map((rec, index) => (
                             <li key={index}>{rec}</li>
@@ -623,9 +623,9 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         )}
 
         {/* Compliance Tips */}
-        <div className="mt-6 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-200 dark:border-blue-800">
-          <div className="flex items-center mb-2">
-            <span className="text-blue-500 dark:text-blue-400 mr-2">💡</span>
+        <div className="mt-lg p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-200 dark:border-blue-800">
+          <div className="flex items-center mb-sm">
+            <span className="text-blue-500 dark:text-blue-400 mr-sm">💡</span>
             <h3 className="font-medium">Compliance Tips</h3>
           </div>
           <ul

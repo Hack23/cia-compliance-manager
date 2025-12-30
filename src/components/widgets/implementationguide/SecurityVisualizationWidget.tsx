@@ -95,7 +95,7 @@ const SecurityVisualizationWidget: React.FC<
         return (
           <div
             data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('balanced-recommendation')}
-            className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg mt-4"
+            className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg mt-md"
           >
             <p className="text-sm">
               Your security posture is well-balanced with strong controls across
@@ -108,7 +108,7 @@ const SecurityVisualizationWidget: React.FC<
 
     // Component-specific recommendations
     return (
-      <div className="space-y-2 mt-4" data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('recommendations')}>
+      <div className="space-y-2 mt-md" data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('recommendations')}>
         {availabilityValue < 2 && (
           <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded">
             <p className="text-sm">
@@ -157,22 +157,22 @@ const SecurityVisualizationWidget: React.FC<
       >
         {/* Security score section */}
         <section 
-          className="mb-6"
+          className="mb-lg"
           aria-labelledby="security-posture-heading"
         >
-          <h3 id="security-posture-heading" className="text-lg font-medium mb-3">Security Posture</h3>
+          <h3 id="security-posture-heading" className="text-lg font-medium mb-md">Security Posture</h3>
           <div 
             className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md"
             role="group"
             aria-label="Security metrics"
           >
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-md">
               <div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">
                   Security Score
                 </div>
                 <div
-                  className="text-3xl font-bold"
+                  className="text-title font-bold"
                   data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.value('security-score')}
                   aria-label={`Security score: ${securityScore} out of 100`}
                 >
@@ -197,8 +197,8 @@ const SecurityVisualizationWidget: React.FC<
             </div>
 
             {/* Score gauge */}
-            <div className="mb-2" aria-label="Security score visualization">
-              <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+            <div className="mb-sm" aria-label="Security score visualization">
+              <div className="text-xs text-gray-600 dark:text-gray-400 mb-xs">
                 Security Level
               </div>
               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
@@ -210,7 +210,7 @@ const SecurityVisualizationWidget: React.FC<
                   data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('security-score-bar')}
                 ></div>
               </div>
-              <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mt-1">
+              <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mt-xs">
                 <div>Critical</div>
                 <div>High</div>
                 <div>Medium</div>
@@ -222,8 +222,8 @@ const SecurityVisualizationWidget: React.FC<
         </section>
 
         {/* Security Radar Chart using existing component */}
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-3">Security Components</h3>
+        <div className="mb-lg">
+          <h3 className="text-lg font-medium mb-md">Security Components</h3>
 
           {/* Reuse the RadarChart component */}
           <div className="p-md bg-white dark:bg-gray-800 rounded-md border border-neutral-light dark:border-neutral-dark">
@@ -237,15 +237,15 @@ const SecurityVisualizationWidget: React.FC<
         </div>
 
         {/* Component Details Section */}
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-3">Component Details</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="mb-lg">
+          <h3 className="text-lg font-medium mb-md">Component Details</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
             {/* Confidentiality component */}
             <div
               className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md"
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('confidentiality-component')}
             >
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center justify-between mb-sm">
                 <div className="text-md font-medium text-primary-dark dark:text-primary-light">
                   Confidentiality
                 </div>
@@ -269,10 +269,10 @@ const SecurityVisualizationWidget: React.FC<
 
             {/* Integrity component */}
             <div
-              className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
+              className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('integrity-component')}
             >
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center justify-between mb-sm">
                 <div className="text-md font-medium text-green-800 dark:text-green-300">
                   Integrity
                 </div>
@@ -296,10 +296,10 @@ const SecurityVisualizationWidget: React.FC<
 
             {/* Availability component */}
             <div
-              className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+              className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('availability-component')}
             >
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center justify-between mb-sm">
                 <div className="text-md font-medium text-blue-800 dark:text-blue-300">
                   Availability
                 </div>
@@ -327,29 +327,29 @@ const SecurityVisualizationWidget: React.FC<
         {getSecurityRecommendations()}
 
         {/* Explanation section */}
-        <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mt-4">
-          <h3 className="text-md font-medium mb-2">
+        <div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mt-md">
+          <h3 className="text-md font-medium mb-sm">
             Security Visualization Key
           </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-sm">
             The security score represents your overall security posture based on
             your CIA triad levels. The risk level indicates the potential
             business risk associated with your current security posture.
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 text-xs">
-            <div className="p-1 bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-30 dark:text-red-300 rounded text-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-sm text-xs">
+            <div className="p-xs bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-30 dark:text-red-300 rounded text-center">
               Critical Risk
             </div>
-            <div className="p-1 bg-orange-100 text-orange-800 dark:bg-orange-900 dark:bg-opacity-30 dark:text-orange-300 rounded text-center">
+            <div className="p-xs bg-orange-100 text-orange-800 dark:bg-orange-900 dark:bg-opacity-30 dark:text-orange-300 rounded text-center">
               High Risk
             </div>
-            <div className="p-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:bg-opacity-30 dark:text-yellow-300 rounded text-center">
+            <div className="p-xs bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:bg-opacity-30 dark:text-yellow-300 rounded text-center">
               Medium Risk
             </div>
-            <div className="p-1 bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-30 dark:text-green-300 rounded text-center">
+            <div className="p-xs bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-30 dark:text-green-300 rounded text-center">
               Low Risk
             </div>
-            <div className="p-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300 rounded text-center">
+            <div className="p-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300 rounded text-center">
               Minimal Risk
             </div>
           </div>

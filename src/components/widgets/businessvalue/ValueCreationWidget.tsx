@@ -349,7 +349,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
                 <h4 id="roi-heading" className="font-medium text-success-dark dark:text-success-light">
                   Estimated Return on Investment
                 </h4>
-                <p className="text-body text-success dark:text-success-light mt-1">
+                <p className="text-body text-success dark:text-success-light mt-xs">
                   {roiEstimate.description}
                 </p>
               </div>
@@ -380,7 +380,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
                   </span>
                   <h4 className="font-medium">{metric.category}</h4>
                 </div>
-                <div className="text-heading font-bold text-info dark:text-info-light mb-1">
+                <div className="text-heading font-bold text-info dark:text-info-light mb-xs">
                   {metric.value}
                 </div>
                 <p className="text-body text-neutral dark:text-neutral-light">
@@ -413,7 +413,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               ).map((statement, index) => (
                 <li
                   key={index}
-                  className="mb-1"
+                  className="mb-xs"
                   data-testid={`confidentiality-value-item-${index}`}
                 >
                   {statement}
@@ -424,11 +424,11 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
           {/* Integrity value */}
           <div
-            className="mb-4 p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
+            className="mb-md p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
             data-testid={VALUE_CREATION_WIDGET_IDS.section('integrity-value')}
           >
-            <div className="flex items-center mb-2">
-              <span className="text-xl mr-2">✓</span>
+            <div className="flex items-center mb-sm">
+              <span className="text-subheading mr-sm">✓</span>
               <h4 className="font-medium">
                 Integrity Value ({integrityLevel})
               </h4>
@@ -438,7 +438,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
                 (statement, index) => (
                   <li
                     key={index}
-                    className="mb-1"
+                    className="mb-xs"
                     data-testid={`integrity-value-item-${index}`}
                   >
                     {statement}
@@ -450,11 +450,11 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
           {/* Availability value */}
           <div
-            className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+            className="mb-md p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
             data-testid={VALUE_CREATION_WIDGET_IDS.section('availability-value')}
           >
-            <div className="flex items-center mb-2">
-              <span className="text-xl mr-2">⏱️</span>
+            <div className="flex items-center mb-sm">
+              <span className="text-subheading mr-sm">⏱️</span>
               <h4 className="font-medium">
                 Availability Value ({availabilityLevel})
               </h4>
@@ -466,7 +466,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               ).map((statement, index) => (
                 <li
                   key={index}
-                  className="mb-1"
+                  className="mb-xs"
                   data-testid={`availability-value-item-${index}`}
                 >
                   {statement}
@@ -478,33 +478,33 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
         {/* Business case section */}
         <div>
-          <h3 className="text-lg font-medium mb-3">
+          <h3 className="text-lg font-medium mb-md">
             Security Investment Business Case
           </h3>
-          <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+          <div className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-md">
               Use these value statements to build your business case for
               security investments:
             </p>
             <div className="space-y-3">
-              <div className="p-2 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded">
-                <h5 className="text-sm font-medium mb-1">Executive Summary</h5>
+              <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded">
+                <h5 className="text-sm font-medium mb-xs">Executive Summary</h5>
                 <p className="text-sm">
                   Our {securityScore.toLowerCase()} security investment strategy
                   delivers business value through improved operational
                   reliability, data integrity, and information protection.
                 </p>
               </div>
-              <div className="p-2 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded">
-                <h5 className="text-sm font-medium mb-1">Financial Value</h5>
+              <div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded">
+                <h5 className="text-sm font-medium mb-xs">Financial Value</h5>
                 <p className="text-sm">
                   With an estimated ROI of {roiEstimate.value}, our security
                   investments provide strong financial returns through risk
                   reduction, operational improvements, and business enablement.
                 </p>
               </div>
-              <div className="p-2 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
-                <h5 className="text-sm font-medium mb-1">Strategic Value</h5>
+              <div className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
+                <h5 className="text-sm font-medium mb-xs">Strategic Value</h5>
                 <p className="text-sm">
                   Beyond direct financial returns, our security program creates
                   strategic value by enabling digital initiatives, protecting
