@@ -89,6 +89,11 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [resourcesPerPage, setResourcesPerPage] = useState(itemsPerPage);
 
+  // Update resourcesPerPage when itemsPerPage changes
+  React.useEffect(() => {
+    setResourcesPerPage(itemsPerPage);
+  }, [itemsPerPage]);
+
   // Calculate security resources with proper error handling and type safety
   const securityResources = useMemo((): SecurityResource[] => {
     try {

@@ -427,7 +427,7 @@ describe('SecurityLevelWidget', () => {
 
 - **v1.1.3** (2025-12-30): Props implementation standardization
   - ✅ Removed duplicate prop interface definitions from 10 widgets
-  - ✅ All 14 standalone widgets now import props from `widget-props.ts`
+  - ✅ All 12 standalone widgets now import props from `widget-props.ts`
   - ✅ Updated `SecurityResourcesWidgetProps` to include `limit` and `showTopResourcesOnly`
   - ✅ Verified TypeScript strict mode compliance (no `any` types)
   - ✅ All 2271 tests passing
@@ -446,7 +446,7 @@ describe('SecurityLevelWidget', () => {
 
 All standalone widgets have been migrated to use centralized prop definitions:
 
-**Assessment Center (4 standalone widgets):**
+**Assessment Center (3 standalone widgets):**
 - ✅ SecuritySummaryWidget
 - ✅ SecurityLevelWidget  
 - ✅ BusinessImpactAnalysisWidget
@@ -462,7 +462,7 @@ All standalone widgets have been migrated to use centralized prop definitions:
 - ✅ IntegrityImpactWidget
 - ✅ ConfidentialityImpactWidget
 
-**Implementation Guide (4 widgets):**
+**Implementation Guide (3 standalone widgets):**
 - ✅ TechnicalDetailsWidget
 - ✅ SecurityResourcesWidget
 - ✅ SecurityVisualizationWidget

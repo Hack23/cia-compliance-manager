@@ -767,8 +767,7 @@ export type TechnicalDetailsWidgetProps = AllCIAComponentsProps;
  *   availabilityLevel="High"
  *   integrityLevel="Very High"
  *   confidentialityLevel="Moderate"
- *   category="frameworks"
- *   limit={10}
+ *   maxItems={10}
  *   showTopResourcesOnly
  * />
  * ```
