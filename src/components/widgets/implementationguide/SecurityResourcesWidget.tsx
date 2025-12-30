@@ -83,6 +83,21 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   // Use maxItems if provided, otherwise fall back to limit for backward compatibility
   const itemsPerPage = maxItems ?? limit;
 
+  // Warn in development when deprecated `limit` prop is used instead of `maxItems`
+  React.useEffect(() => {
+    if (
+      process.env.NODE_ENV === "development" &&
+      typeof maxItems === "undefined" &&
+      typeof limit !== "undefined"
+    ) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        "SecurityResourcesWidget: The `limit` prop is deprecated. " +
+          "Please use the `maxItems` prop instead for controlling the number of resources displayed."
+      );
+    }
+  }, [limit, maxItems]);
+
   // State for resource filtering and pagination
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -153,17 +168,17 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
       // Sort by relevance score if available, otherwise by title
       return uniqueResources.sort((a, b) => {
-        // Use type safe approach to access properties
+        // Use type safe approach with proper null checks
         const aScore =
-          isObject(a) && "relevance" in a
-            ? (a.relevance as number)
+          isObject(a) && "relevance" in a && typeof a.relevance === "number"
+            ? a.relevance
             : 0;
         const bScore =
-          isObject(b) && "relevance" in b
-            ? (b.relevance as number)
+          isObject(b) && "relevance" in b && typeof b.relevance === "number"
+            ? b.relevance
             : 0;
 
-        if (aScore !== undefined && bScore !== undefined) {
+        if (aScore !== bScore) {
           return bScore - aScore;
         }
         return a.title.localeCompare(b.title);
@@ -196,20 +211,21 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
     // Filter to show only top priority resources if requested
     if (showTopResourcesOnly) {
-      // Filter resources with high relevance scores (top 50% or those with explicit priority)
+      // Filter resources with high relevance scores
+      // Shows top 50% with a minimum of 5 resources (or all if less than 10 total)
       const sortedByRelevance = [...filtered].sort((a, b) => {
         const aScore =
-          isObject(a) && "relevance" in a
-            ? (a.relevance as number)
+          isObject(a) && "relevance" in a && typeof a.relevance === "number"
+            ? a.relevance
             : 0;
         const bScore =
-          isObject(b) && "relevance" in b
-            ? (b.relevance as number)
+          isObject(b) && "relevance" in b && typeof b.relevance === "number"
+            ? b.relevance
             : 0;
         return bScore - aScore;
       });
       
-      // Take top 50% of resources based on relevance score
+      // Take top 50% of resources with a minimum of 5 to ensure meaningful results
       const topCount = Math.max(Math.ceil(sortedByRelevance.length / 2), 5);
       filtered = sortedByRelevance.slice(0, topCount);
     }

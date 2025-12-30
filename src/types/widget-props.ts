@@ -774,25 +774,16 @@ export type TechnicalDetailsWidgetProps = AllCIAComponentsProps;
  */
 export interface SecurityResourcesWidgetProps extends AllCIAComponentsProps {
   /**
-   * Filter resources by category
-   */
-  category?: 'documentation' | 'tools' | 'frameworks' | 'all';
-
-  /**
-   * Optional filter string for resource filtering
-   */
-  filter?: string;
-
-  /**
    * Maximum number of items to display
    * @default 8
    */
   maxItems?: number;
 
   /**
-   * Optional limit for the number of resources to display
+   * Optional limit for the number of resources to display.
+   *
+   * @deprecated Use maxItems instead. This prop will be removed in v2.0.
    * @default 8
-   * @deprecated Use maxItems instead
    */
   limit?: number;
 
