@@ -93,13 +93,11 @@ interface SecurityLevelWidgetProps extends AllCIAComponentsProps {
 
 #### `SecuritySummaryWidgetProps`
 ```typescript
-// Simplified to base props only - matches implementation
 type SecuritySummaryWidgetProps = AllCIAComponentsProps;
 ```
 
 #### `BusinessImpactAnalysisWidgetProps`
 ```typescript
-// Simplified to base props only - matches implementation
 type BusinessImpactAnalysisWidgetProps = AllCIAComponentsProps;
 ```
 
@@ -107,7 +105,6 @@ type BusinessImpactAnalysisWidgetProps = AllCIAComponentsProps;
 
 #### `CostEstimationWidgetProps`
 ```typescript
-// Simplified to base props only - matches implementation
 type CostEstimationWidgetProps = AllCIAComponentsProps;
 ```
 
@@ -121,7 +118,6 @@ interface ComplianceStatusWidgetProps extends AllCIAComponentsProps {
 
 #### `ValueCreationWidgetProps`
 ```typescript
-// Simplified to base props only - matches implementation
 type ValueCreationWidgetProps = AllCIAComponentsProps;
 ```
 
@@ -183,7 +179,6 @@ interface SecurityResourcesWidgetProps extends AllCIAComponentsProps {
 
 #### `SecurityVisualizationWidgetProps`
 ```typescript
-// Simplified to base props only - matches implementation
 type SecurityVisualizationWidgetProps = AllCIAComponentsProps;
 ```
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState, useRef } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { SECURITY_RESOURCES_WIDGET_IDS } from "../../../constants/testIds";
 import { SECURITY_RESOURCES_TEST_IDS } from "../../../constants/testIds";
@@ -16,6 +16,21 @@ import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import ResourceCard from "../../common/ResourceCard";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
+
+// Constants for top resources filtering
+const TOP_RESOURCES_PERCENTAGE = 0.5; // 50%
+const MIN_TOP_RESOURCES = 5;
+
+/**
+ * Helper function to extract relevance score from a security resource
+ * @param resource - The security resource to extract score from
+ * @returns The relevance score, defaulting to 0 if not available
+ */
+const getResourceRelevanceScore = (resource: SecurityResource): number => {
+  return isObject(resource) && "relevance" in resource && typeof resource.relevance === "number"
+    ? resource.relevance
+    : 0;
+};
 
 /**
  * Widget that displays security resources and implementation guides
@@ -83,10 +98,14 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   // Use maxItems if provided, otherwise fall back to limit (or default 8)
   const itemsPerPage = maxItems ?? limit ?? 8;
 
+  // Track if deprecation warning has been shown to avoid duplicates
+  const hasShownWarning = useRef(false);
+
   // Warn in development when deprecated `limit` prop is used instead of `maxItems`
   React.useEffect(() => {
     if (
       process.env.NODE_ENV === "development" &&
+      !hasShownWarning.current &&
       typeof maxItems === "undefined" &&
       typeof limit !== "undefined"
     ) {
@@ -95,6 +114,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
         "SecurityResourcesWidget: The `limit` prop is deprecated. " +
           "Please use the `maxItems` prop instead for controlling the number of resources displayed."
       );
+      hasShownWarning.current = true;
     }
   }, [limit, maxItems]);
 
@@ -168,16 +188,11 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
       // Sort by relevance score if available, otherwise by title
       return uniqueResources.sort((a, b) => {
-        // Use type safe approach with proper null checks
-        const aScore =
-          isObject(a) && "relevance" in a && typeof a.relevance === "number"
-            ? a.relevance
-            : 0;
-        const bScore =
-          isObject(b) && "relevance" in b && typeof b.relevance === "number"
-            ? b.relevance
-            : 0;
+        // Extract scores using helper (0 is default for missing scores)
+        const aScore = getResourceRelevanceScore(a);
+        const bScore = getResourceRelevanceScore(b);
 
+        // Sort by score (higher first), then by title
         if (aScore !== bScore) {
           return bScore - aScore;
         }
@@ -214,19 +229,16 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       // Filter resources with high relevance scores
       // Shows top 50% with a minimum of 5 resources (or all if less than 10 total)
       const sortedByRelevance = [...filtered].sort((a, b) => {
-        const aScore =
-          isObject(a) && "relevance" in a && typeof a.relevance === "number"
-            ? a.relevance
-            : 0;
-        const bScore =
-          isObject(b) && "relevance" in b && typeof b.relevance === "number"
-            ? b.relevance
-            : 0;
+        const aScore = getResourceRelevanceScore(a);
+        const bScore = getResourceRelevanceScore(b);
         return bScore - aScore;
       });
       
-      // Take top 50% of resources with a minimum of 5 to ensure meaningful results
-      const topCount = Math.max(Math.ceil(sortedByRelevance.length / 2), 5);
+      // Take top percentage of resources with a minimum to ensure meaningful results
+      const topCount = Math.max(
+        Math.ceil(sortedByRelevance.length * TOP_RESOURCES_PERCENTAGE), 
+        MIN_TOP_RESOURCES
+      );
       filtered = sortedByRelevance.slice(0, topCount);
     }
 

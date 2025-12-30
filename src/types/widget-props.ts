@@ -717,7 +717,7 @@ export interface SecurityResourcesWidgetProps extends AllCIAComponentsProps {
   /**
    * Optional limit for the number of resources to display.
    *
-   * @deprecated Use maxItems instead. This prop will be removed in v2.0.
+   * @deprecated Use maxItems instead. This prop is planned for removal in a future major version.
    * @default 8
    */
   limit?: number;
