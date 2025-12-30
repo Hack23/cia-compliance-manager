@@ -5,6 +5,7 @@ import { SECURITY_RESOURCES_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { SecurityResource } from "../../../types/securityResources";
+import { SecurityResourcesWidgetProps } from "../../../types/widget-props";
 import {
   isArray,
   isNullish,
@@ -15,97 +16,6 @@ import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import ResourceCard from "../../common/ResourceCard";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
-
-/**
- * Props for SecurityResourcesWidget component
- * 
- * Defines the configuration for displaying security resources and implementation
- * guides based on selected security levels across all CIA components.
- * 
- * @example
- * ```tsx
- * <SecurityResourcesWidget
- *   availabilityLevel="High"
- *   integrityLevel="Very High"
- *   confidentialityLevel="Moderate"
- *   limit={10}
- *   showTopResourcesOnly={true}
- *   className="mt-4"
- *   testId="security-resources"
- * />
- * ```
- */
-export interface SecurityResourcesWidgetProps {
-  /**
-   * Selected availability level
-   * 
-   * Determines which availability-specific resources and guides to display.
-   * 
-   * @example 'High'
-   */
-  availabilityLevel: SecurityLevel;
-
-  /**
-   * Selected integrity level
-   * 
-   * Determines which integrity-specific resources and guides to display.
-   * 
-   * @example 'Very High'
-   */
-  integrityLevel: SecurityLevel;
-
-  /**
-   * Selected confidentiality level
-   * 
-   * Determines which confidentiality-specific resources and guides to display.
-   * 
-   * @example 'Moderate'
-   */
-  confidentialityLevel: SecurityLevel;
-
-  /**
-   * Optional CSS class name for custom styling
-   * 
-   * Allows consumers to apply custom CSS classes via Tailwind or custom styles.
-   * 
-   * @default ""
-   * @example "mt-4 shadow-lg rounded-lg"
-   */
-  className?: string;
-
-  /**
-   * Optional test ID for automated testing
-   * 
-   * Used by Cypress and Vitest for component identification in tests.
-   * Defaults to SECURITY_RESOURCES_TEST_IDS.WIDGET constant.
-   * 
-   * @default SECURITY_RESOURCES_TEST_IDS.WIDGET
-   * @example "custom-security-resources"
-   */
-  testId?: string;
-
-  /**
-   * Optional limit for the number of resources to display
-   * 
-   * Controls how many resource cards are shown. Higher limits provide
-   * more comprehensive guidance but require more screen space.
-   * 
-   * @default 8
-   * @example 10
-   */
-  limit?: number;
-
-  /**
-   * Optional flag to show only top/priority resources
-   * 
-   * When true, filters to show only the most relevant and high-priority
-   * resources for the selected security levels, providing focused guidance.
-   * 
-   * @default false
-   * @example true
-   */
-  showTopResourcesOnly?: boolean;
-}
 
 /**
  * Widget that displays security resources and implementation guides

@@ -768,6 +768,8 @@ export type TechnicalDetailsWidgetProps = AllCIAComponentsProps;
  *   integrityLevel="Very High"
  *   confidentialityLevel="Moderate"
  *   category="frameworks"
+ *   limit={10}
+ *   showTopResourcesOnly
  * />
  * ```
  */
@@ -784,8 +786,22 @@ export interface SecurityResourcesWidgetProps extends AllCIAComponentsProps {
 
   /**
    * Maximum number of items to display
+   * @default 8
    */
   maxItems?: number;
+
+  /**
+   * Optional limit for the number of resources to display
+   * @default 8
+   * @deprecated Use maxItems instead
+   */
+  limit?: number;
+
+  /**
+   * Optional flag to show only top/priority resources
+   * @default false
+   */
+  showTopResourcesOnly?: boolean;
 }
 
 /**
