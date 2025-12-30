@@ -98,7 +98,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
       >
         {/* Security level indicator */}
         <section 
-          className="mb-4"
+          className="mb-md"
           aria-labelledby="integrity-level-heading"
         >
           <h3 id="integrity-level-heading" className="sr-only">
@@ -117,7 +117,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
         {/* Business impact */}
         {businessImpact && (
           <div
-            className="mt-4"
+            className="mt-md"
             data-testid={INTEGRITY_IMPACT_WIDGET_IDS.section('business-impact')}
           >
             <BusinessImpactSection
@@ -133,10 +133,10 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
           title="Data Integrity Metrics"
           icon="📊"
           variant="success"
-          className="mb-4"
+          className="mb-md"
           testId={INTEGRITY_IMPACT_WIDGET_IDS.section('metrics')}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
             <MetricCard
               label="Data Validation Controls"
               value={validationLevel}
