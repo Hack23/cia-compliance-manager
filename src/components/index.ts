@@ -34,10 +34,12 @@ export { default as ErrorMessage } from "./common/ErrorMessage";
 export { KeyValuePair } from "./common/KeyValuePair";
 export { default as LoadingSkeleton } from "./common/LoadingSkeleton";
 export { default as LoadingSpinner } from "./common/LoadingSpinner";
+export { default as MetricCard } from "./common/MetricCard";
 export { default as RiskLevelBadge } from "./common/RiskLevelBadge";
 export { default as SecurityLevelBadge } from "./common/SecurityLevelBadge";
 export { default as StatusBadge } from "./common/StatusBadge";
 export { default as WidgetErrorBoundary } from "./common/WidgetErrorBoundary";
+export { default as WidgetSection } from "./common/WidgetSection";
 
 // Charts
 export { default as RadarChart } from "./charts/RadarChart";
@@ -54,6 +56,7 @@ export type {
   KeyValuePairProps,
   LoadingSkeletonProps,
   LoadingSpinnerProps,
+  MetricCardProps,
   MetricsCardProps,
   RadarChartProps,
   RiskAssessmentProps,
@@ -68,4 +71,5 @@ export type {
   WidgetContainerProps,
   WidgetErrorBoundaryProps,
   WidgetHeaderProps,
+  WidgetSectionProps,
 } from "../types/componentPropExports";

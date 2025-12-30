@@ -10,6 +10,7 @@ import { getImplementationComplexity } from "../../../utils/riskUtils";
 import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
 import { isArray, isNullish, isString } from "../../../utils/typeGuards";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
+import MetricCard from "../../common/MetricCard";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -238,65 +239,36 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           </p>
         </section>
 
-        {/* Summary cost section - using direct JSX instead of InfoCard */}
+        {/* Summary cost section */}
         <section 
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md mb-lg"
           aria-labelledby="cost-summary-heading"
         >
           <h3 id="cost-summary-heading" className="sr-only">Cost Summary</h3>
-          <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
-            <div className="flex items-center mb-sm">
-              <span className="mr-sm text-info" aria-hidden="true">💼</span>
-              <div className="text-body text-neutral dark:text-neutral-light">
-                Implementation Cost
-              </div>
-            </div>
-            <div 
-              className="text-title font-bold text-info dark:text-info-light"
-              aria-label={`Implementation cost: ${formatCurrency(totalCapex)}`}
-            >
-              {formatCurrency(totalCapex)}
-            </div>
-            <div className="text-caption text-neutral dark:text-neutral-light">
-              One-time capital expenditure
-            </div>
-          </div>
-
-          <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
-            <div className="flex items-center mb-sm">
-              <span className="mr-sm text-success" aria-hidden="true">🔄</span>
-              <div className="text-body text-neutral dark:text-neutral-light">
-                Annual Operations
-              </div>
-            </div>
-            <div 
-              className="text-title font-bold text-success dark:text-success-light"
-              aria-label={`Annual operations cost: ${formatCurrency(totalOpex)}`}
-            >
-              {formatCurrency(totalOpex)}
-            </div>
-            <div className="text-caption text-neutral dark:text-neutral-light">
-              Yearly operational expenses
-            </div>
-          </div>
-
-          <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
-            <div className="flex items-center mb-sm">
-              <span className="mr-sm text-primary" aria-hidden="true">💲</span>
-              <div className="text-body text-neutral dark:text-neutral-light">
-                Total First Year Cost
-              </div>
-            </div>
-            <div 
-              className="text-title font-bold text-primary-dark dark:text-primary-light"
-              aria-label={`Total first year cost: ${formatCurrency(totalCost)}`}
-            >
-              {formatCurrency(totalCost)}
-            </div>
-            <div className="text-caption text-neutral dark:text-neutral-light">
-              Implementation + first year operations
-            </div>
-          </div>
+          <MetricCard
+            label="Implementation Cost"
+            value={formatCurrency(totalCapex)}
+            icon="💼"
+            description="One-time capital expenditure"
+            variant="info"
+            testId={COST_ESTIMATION_WIDGET_IDS.label('capex')}
+          />
+          <MetricCard
+            label="Annual Operations"
+            value={formatCurrency(totalOpex)}
+            icon="🔄"
+            description="Yearly operational expenses"
+            variant="success"
+            testId={COST_ESTIMATION_WIDGET_IDS.label('opex')}
+          />
+          <MetricCard
+            label="Total First Year Cost"
+            value={formatCurrency(totalCost)}
+            icon="💲"
+            description="Implementation + first year operations"
+            variant="primary"
+            testId={COST_ESTIMATION_WIDGET_IDS.label('total')}
+          />
         </section>
 
         {/* CAPEX vs OPEX ratio visualization */}
