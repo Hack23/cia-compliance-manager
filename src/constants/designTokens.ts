@@ -10,20 +10,23 @@
 /**
  * Spacing scale following 8px grid system
  * Use these values for padding, margin, and gap properties
+ * 
+ * NOTE: These values have been optimized to reduce widget empty space
+ * and provide more compact layouts while maintaining visual hierarchy.
  */
 export const SPACING = {
   /** 4px - Extra small spacing for tight layouts */
   xs: '4px',
-  /** 8px - Small spacing for compact elements */
-  sm: '8px',
-  /** 16px - Medium spacing (default) */
-  md: '16px',
-  /** 24px - Large spacing for section separation */
-  lg: '24px',
-  /** 32px - Extra large spacing for major sections */
-  xl: '32px',
-  /** 48px - XXL spacing for page-level separation */
-  xxl: '48px',
+  /** 6px - Small spacing for compact elements (optimized from 8px) */
+  sm: '6px',
+  /** 8px - Medium spacing (optimized from 16px for more compact layouts) */
+  md: '8px',
+  /** 16px - Large spacing for section separation (optimized from 24px) */
+  lg: '16px',
+  /** 24px - Extra large spacing for major sections (optimized from 32px) */
+  xl: '24px',
+  /** 40px - XXL spacing for page-level separation (optimized from 48px) */
+  xxl: '40px',
 } as const;
 
 /**
@@ -69,13 +72,16 @@ export const LINE_HEIGHTS = {
 /**
  * Semantic color system
  * These colors should be used based on meaning, not appearance
+ * 
+ * NOTE: Primary color uses purple to restore v1.0.6 appearance.
+ * This provides better visual distinction from info/blue colors.
  */
 export const SEMANTIC_COLORS = {
-  /** Primary brand color for main actions and emphasis */
+  /** Primary brand color for main actions and emphasis (purple for brand identity) */
   primary: {
-    light: '#2b8aff',
-    main: '#0066cc',
-    dark: '#004d99',
+    light: '#c084fc', // purple-400
+    main: '#9333ea',  // purple-600
+    dark: '#7e22ce',  // purple-700
   },
   /** Success states, positive actions, completed items */
   success: {
@@ -95,11 +101,11 @@ export const SEMANTIC_COLORS = {
     main: '#e74c3c',
     dark: '#c0392b',
   },
-  /** Informational states, neutral emphasis */
+  /** Informational states, neutral emphasis (blue colors) */
   info: {
-    light: '#54a0ff',
-    main: '#3498db',
-    dark: '#2980b9',
+    light: '#60a5fa', // blue-400
+    main: '#3b82f6',  // blue-500
+    dark: '#2563eb',  // blue-600
   },
   /** Neutral/secondary elements */
   neutral: {
@@ -111,18 +117,20 @@ export const SEMANTIC_COLORS = {
 
 /**
  * Border radius values for consistent rounded corners
+ * 
+ * NOTE: Values optimized to restore rounded appearance from v1.0.6
  */
 export const BORDER_RADIUS = {
   /** 0 - No rounding (sharp corners) */
   none: '0',
   /** 4px - Small rounding for buttons and badges */
   sm: '4px',
-  /** 8px - Medium rounding (default for cards) */
-  md: '8px',
-  /** 12px - Large rounding for prominent elements */
-  lg: '12px',
-  /** 16px - Extra large rounding */
-  xl: '16px',
+  /** 12px - Medium rounding (optimized from 8px for more rounded appearance) */
+  md: '12px',
+  /** 16px - Large rounding for prominent elements (optimized from 12px) */
+  lg: '16px',
+  /** 20px - Extra large rounding (optimized from 16px) */
+  xl: '20px',
   /** Full circle/pill shape */
   full: '9999px',
 } as const;
@@ -188,24 +196,26 @@ export const Z_INDEX = {
 
 /**
  * Widget-specific design tokens
+ * 
+ * NOTE: Values optimized for compact layout while maintaining readability
  */
 export const WIDGET_DESIGN = {
-  /** Standard padding for widget containers */
-  padding: '24px', // SPACING.lg value
+  /** Standard padding for widget containers (optimized to 16px from 24px) */
+  padding: '16px', // SPACING.lg value
   /** Border radius for widget containers */
-  borderRadius: '8px', // BORDER_RADIUS.md value
+  borderRadius: '12px', // BORDER_RADIUS.md value
   /** Shadow for widget containers */
   shadow: '0 2px 8px 0 rgba(0, 0, 0, 0.1)', // SHADOWS.md value
   /** Gap between widget sections */
-  sectionGap: '16px', // SPACING.md value
+  sectionGap: '8px', // SPACING.md value (optimized from 16px)
   /** Header height */
   headerHeight: '48px',
   /** Header padding */
-  headerPadding: '16px', // SPACING.md value
+  headerPadding: '8px', // SPACING.md value (optimized from 16px)
   /** Content padding */
-  contentPadding: '16px', // SPACING.md value
+  contentPadding: '8px', // SPACING.md value (optimized from 16px)
   /** Footer padding */
-  footerPadding: '16px', // SPACING.md value
+  footerPadding: '8px', // SPACING.md value (optimized from 16px)
 } as const;
 
 /**
@@ -267,6 +277,85 @@ export function getShadow(depth: keyof typeof SHADOWS): string {
 export function getBorderRadius(size: keyof typeof BORDER_RADIUS): string {
   return BORDER_RADIUS[size];
 }
+
+/**
+ * Widget-specific styling utilities
+ * These helpers generate consistent className strings for common widget patterns
+ */
+export const WIDGET_STYLES = {
+  /**
+   * Get widget container classes
+   * @returns Tailwind className string for widget containers
+   */
+  container: (): string => {
+    return 'bg-white dark:bg-gray-800 rounded-md shadow-md border border-gray-200 dark:border-gray-700';
+  },
+  
+  /**
+   * Get widget header classes
+   * @returns Tailwind className string for widget headers
+   */
+  header: (): string => {
+    return 'flex items-center justify-between gap-md mb-md';
+  },
+  
+  /**
+   * Get widget section classes
+   * @returns Tailwind className string for widget sections
+   */
+  section: (): string => {
+    return 'mb-lg space-y-md';
+  },
+  
+  /**
+   * Get widget title classes
+   * @returns Tailwind className string for widget titles
+   */
+  title: (): string => {
+    return 'text-subheading font-semibold text-gray-800 dark:text-gray-100';
+  },
+
+  /**
+   * Get widget subtitle classes
+   * @returns Tailwind className string for widget subtitles
+   */
+  subtitle: (): string => {
+    return 'text-body text-gray-600 dark:text-gray-400';
+  },
+
+  /**
+   * Get widget content classes
+   * @returns Tailwind className string for widget content areas
+   */
+  content: (): string => {
+    return 'p-md space-y-md';
+  },
+
+  /**
+   * Get card classes for nested content
+   * @returns Tailwind className string for cards within widgets
+   */
+  card: (): string => {
+    return 'p-md bg-gray-50 dark:bg-gray-700 rounded-md border border-gray-200 dark:border-gray-600';
+  },
+
+  /**
+   * Get badge classes
+   * @param variant - Color variant (primary, success, warning, error, info, neutral)
+   * @returns Tailwind className string for badges
+   */
+  badge: (variant: keyof typeof SEMANTIC_COLORS = 'neutral'): string => {
+    const variantClasses: Record<keyof typeof SEMANTIC_COLORS, string> = {
+      primary: 'bg-primary text-white',
+      success: 'bg-success text-white',
+      warning: 'bg-warning text-gray-900',
+      error: 'bg-error text-white',
+      info: 'bg-info text-white',
+      neutral: 'bg-neutral text-white',
+    };
+    return `inline-flex items-center px-sm py-xs text-caption font-medium rounded-sm ${variantClasses[variant]}`;
+  },
+} as const;
 
 /**
  * Type exports for TypeScript support
