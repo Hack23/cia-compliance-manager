@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { SPACING, TYPOGRAPHY, BORDER_RADIUS, SHADOWS } from '../../constants/designTokens';
 
-export interface WidgetSectionProps {
+interface WidgetSectionProps {
   /** Section title */
   title: string;
   /** Section content */
@@ -61,23 +61,26 @@ export const WidgetSection: React.FC<WidgetSectionProps> = ({
     error: 'border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20',
   };
 
+  // Generate unique heading ID to avoid circular reference
+  const headingId = ariaLabelledBy || `${testId}-heading`;
+
   return (
     <section
-      className={`rounded-lg border ${variantClasses[variant]} ${className}`}
+      className={`border ${variantClasses[variant]} ${className}`}
       style={{
         padding: SPACING.md,
         borderRadius: BORDER_RADIUS.md,
         boxShadow: SHADOWS.sm,
       }}
       data-testid={testId}
-      aria-labelledby={ariaLabelledBy}
+      aria-labelledby={headingId}
     >
       <div className="flex items-center gap-2 mb-4">
         {icon && <span aria-hidden="true">{icon}</span>}
         <h3
           style={{ fontSize: TYPOGRAPHY.subheading }}
           className="font-semibold text-gray-800 dark:text-gray-200"
-          id={ariaLabelledBy}
+          id={headingId}
         >
           {title}
         </h3>

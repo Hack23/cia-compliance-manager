@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
-import { SPACING, TYPOGRAPHY, BORDER_RADIUS, SHADOWS } from '../../constants/designTokens';
+import { TYPOGRAPHY, BORDER_RADIUS, SHADOWS } from '../../constants/designTokens';
 
-export interface MetricCardProps {
+interface MetricCardProps {
   /** Metric label */
   label: string;
   /** Metric value */
@@ -99,7 +99,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
 
   return (
     <div
-      className={`p-4 rounded-lg border ${colors.container} ${className}`}
+      className={`p-4 border ${colors.container} ${className}`}
       style={{
         borderRadius: BORDER_RADIUS.md,
         boxShadow: SHADOWS.sm,
