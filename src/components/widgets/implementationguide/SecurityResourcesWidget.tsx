@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState, useRef } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { SECURITY_RESOURCES_WIDGET_IDS } from "../../../constants/testIds";
 import { SECURITY_RESOURCES_TEST_IDS } from "../../../constants/testIds";
@@ -71,7 +71,7 @@ const getResourceRelevanceScore = (resource: SecurityResource): number => {
  *   availabilityLevel="High"
  *   integrityLevel="Very High"
  *   confidentialityLevel="Moderate"
- *   limit={12}
+ *   maxItems={12}
  *   showTopResourcesOnly={true}
  *   className="border-2 border-gray-200 p-4"
  *   testId="main-security-resources"
@@ -84,8 +84,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   confidentialityLevel,
   className = "",
   testId = SECURITY_RESOURCES_TEST_IDS.WIDGET,
-  maxItems,
-  limit,
+  maxItems = 8,
   showTopResourcesOnly = false,
 }) => {
   // Use the CIA content service
@@ -95,39 +94,16 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
     isLoading,
   } = useCIAContentService();
 
-  // Use maxItems if provided, otherwise fall back to limit (or default 8)
-  const itemsPerPage = maxItems ?? limit ?? 8;
-
-  // Track if deprecation warning has been shown to avoid duplicates
-  const hasShownWarning = useRef(false);
-
-  // Warn in development when deprecated `limit` prop is used instead of `maxItems`
-  React.useEffect(() => {
-    if (
-      process.env.NODE_ENV === "development" &&
-      !hasShownWarning.current &&
-      typeof maxItems === "undefined" &&
-      typeof limit !== "undefined"
-    ) {
-      // eslint-disable-next-line no-console
-      console.warn(
-        "SecurityResourcesWidget: The `limit` prop is deprecated. " +
-          "Please use the `maxItems` prop instead for controlling the number of resources displayed."
-      );
-      hasShownWarning.current = true;
-    }
-  }, [limit, maxItems]);
-
   // State for resource filtering and pagination
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [resourcesPerPage, setResourcesPerPage] = useState(itemsPerPage);
+  const [resourcesPerPage, setResourcesPerPage] = useState(maxItems);
 
-  // Update resourcesPerPage when itemsPerPage changes
+  // Update resourcesPerPage when maxItems changes
   React.useEffect(() => {
-    setResourcesPerPage(itemsPerPage);
-  }, [itemsPerPage]);
+    setResourcesPerPage(maxItems);
+  }, [maxItems]);
 
   // Calculate security resources with proper error handling and type safety
   const securityResources = useMemo((): SecurityResource[] => {

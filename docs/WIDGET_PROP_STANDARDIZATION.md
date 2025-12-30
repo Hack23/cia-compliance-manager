@@ -172,7 +172,6 @@ interface TechnicalDetailsWidgetProps extends AllCIAComponentsProps {
 ```typescript
 interface SecurityResourcesWidgetProps extends AllCIAComponentsProps {
   maxItems?: number;
-  limit?: number; // @deprecated Use maxItems instead
   showTopResourcesOnly?: boolean;
 }
 ```
@@ -411,7 +410,7 @@ describe('SecurityLevelWidget', () => {
 - **v1.1.3** (2025-12-30): Props implementation standardization
   - ✅ Removed duplicate prop interface definitions from 10 widgets
   - ✅ All 12 standalone widgets now import props from `widget-props.ts`
-  - ✅ Updated `SecurityResourcesWidgetProps` to include `limit` and `showTopResourcesOnly`
+  - ✅ Updated `SecurityResourcesWidgetProps` to include `maxItems` and `showTopResourcesOnly`
   - ✅ Verified TypeScript strict mode compliance (no `any` types)
   - ✅ All 2271 tests passing
   - ✅ Zero breaking changes to widget APIs
