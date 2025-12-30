@@ -325,6 +325,95 @@ export interface WidgetErrorBoundaryProps {
   testId?: string;
 }
 
+export interface WidgetSectionProps {
+  /**
+   * Section title
+   */
+  title: string;
+  
+  /**
+   * Section content
+   */
+  children: ReactNode;
+  
+  /**
+   * Optional subtitle
+   */
+  subtitle?: string;
+  
+  /**
+   * Optional icon
+   */
+  icon?: ReactNode;
+  
+  /**
+   * Optional CSS class
+   */
+  className?: string;
+  
+  /**
+   * Test ID
+   */
+  testId?: string;
+  
+  /**
+   * Optional aria-labelledby for accessibility
+   */
+  ariaLabelledBy?: string;
+  
+  /**
+   * Section background color variant
+   */
+  variant?: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'error';
+}
+
+export interface MetricCardProps {
+  /**
+   * Metric label
+   */
+  label: string;
+  
+  /**
+   * Metric value
+   */
+  value: string | number;
+  
+  /**
+   * Optional unit (e.g., '%', '$')
+   */
+  unit?: string;
+  
+  /**
+   * Optional icon
+   */
+  icon?: ReactNode;
+  
+  /**
+   * Optional description/subtitle
+   */
+  description?: string;
+  
+  /**
+   * Optional color variant
+   */
+  variant?: 'default' | 'primary' | 'success' | 'warning' | 'error' | 'info';
+  
+  /**
+   * Test ID
+   */
+  testId?: string;
+  
+  /**
+   * Optional CSS class
+   */
+  className?: string;
+  
+  /**
+   * Optional aria-label for accessibility
+   */
+  ariaLabel?: string;
+}
+
 // ============================================================================
 // STANDARDIZED WIDGET PROP INTERFACES
 // ============================================================================
