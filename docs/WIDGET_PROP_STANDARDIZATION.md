@@ -93,36 +93,27 @@ interface SecurityLevelWidgetProps extends AllCIAComponentsProps {
 
 #### `SecuritySummaryWidgetProps`
 ```typescript
-interface SecuritySummaryWidgetProps extends AllCIAComponentsProps {
-  onLevelChange?: (component: CIAComponent, level: SecurityLevel) => void;
-  defaultTab?: number;
-}
+// Simplified to base props only - matches implementation
+type SecuritySummaryWidgetProps = AllCIAComponentsProps;
 ```
 
 #### `BusinessImpactAnalysisWidgetProps`
 ```typescript
-interface BusinessImpactAnalysisWidgetProps extends AllCIAComponentsProps {
-  organizationSize?: 'small' | 'medium' | 'large' | 'enterprise';
-  industrySector?: string;
-}
+// Simplified to base props only - matches implementation
+type BusinessImpactAnalysisWidgetProps = AllCIAComponentsProps;
 ```
 
 ### Business Value Widgets
 
 #### `CostEstimationWidgetProps`
 ```typescript
-interface CostEstimationWidgetProps extends AllCIAComponentsProps {
-  showBreakdown?: boolean;
-  currency?: string;
-  onCostCalculated?: (totalCost: number) => void;
-}
+// Simplified to base props only - matches implementation
+type CostEstimationWidgetProps = AllCIAComponentsProps;
 ```
 
 #### `ComplianceStatusWidgetProps`
 ```typescript
 interface ComplianceStatusWidgetProps extends AllCIAComponentsProps {
-  frameworks?: string[];
-  showRequirements?: boolean;
   industry?: string;
   region?: string;
 }
@@ -130,9 +121,8 @@ interface ComplianceStatusWidgetProps extends AllCIAComponentsProps {
 
 #### `ValueCreationWidgetProps`
 ```typescript
-interface ValueCreationWidgetProps extends AllCIAComponentsProps {
-  timePeriod?: number; // in years
-}
+// Simplified to base props only - matches implementation
+type ValueCreationWidgetProps = AllCIAComponentsProps;
 ```
 
 ### Impact Analysis Widgets
@@ -185,18 +175,16 @@ interface TechnicalDetailsWidgetProps extends AllCIAComponentsProps {
 #### `SecurityResourcesWidgetProps`
 ```typescript
 interface SecurityResourcesWidgetProps extends AllCIAComponentsProps {
-  category?: 'documentation' | 'tools' | 'frameworks' | 'all';
-  filter?: string;
   maxItems?: number;
+  limit?: number; // @deprecated Use maxItems instead
+  showTopResourcesOnly?: boolean;
 }
 ```
 
 #### `SecurityVisualizationWidgetProps`
 ```typescript
-interface SecurityVisualizationWidgetProps extends AllCIAComponentsProps {
-  chartType?: 'radar' | 'bar' | 'line' | 'pie' | 'gauge';
-  interactive?: boolean;
-}
+// Simplified to base props only - matches implementation
+type SecurityVisualizationWidgetProps = AllCIAComponentsProps;
 ```
 
 ## Utility Types
@@ -476,3 +464,4 @@ All standalone widgets have been migrated to use centralized prop definitions:
 4. **Reusability**: Base interfaces can be extended for custom widgets
 5. **Documentation**: Centralized JSDoc documentation for all props
 6. **Testing**: Consistent prop types make testing easier and more reliable
+7. **Accurate Interfaces**: Props interfaces match actual widget implementations - no unused props

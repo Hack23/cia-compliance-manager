@@ -70,7 +70,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   className = "",
   testId = SECURITY_RESOURCES_TEST_IDS.WIDGET,
   maxItems,
-  limit = 8,
+  limit,
   showTopResourcesOnly = false,
 }) => {
   // Use the CIA content service
@@ -80,8 +80,8 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
     isLoading,
   } = useCIAContentService();
 
-  // Use maxItems if provided, otherwise fall back to limit for backward compatibility
-  const itemsPerPage = maxItems ?? limit;
+  // Use maxItems if provided, otherwise fall back to limit (or default 8)
+  const itemsPerPage = maxItems ?? limit ?? 8;
 
   // Warn in development when deprecated `limit` prop is used instead of `maxItems`
   React.useEffect(() => {
