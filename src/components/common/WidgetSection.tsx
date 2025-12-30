@@ -63,8 +63,9 @@ export const WidgetSection: React.FC<WidgetSectionProps> = ({
 
   return (
     <section
-      className={`rounded-lg border p-${SPACING.md} ${variantClasses[variant]} ${className}`}
+      className={`rounded-lg border ${variantClasses[variant]} ${className}`}
       style={{
+        padding: SPACING.md,
         borderRadius: BORDER_RADIUS.md,
         boxShadow: SHADOWS.sm,
       }}

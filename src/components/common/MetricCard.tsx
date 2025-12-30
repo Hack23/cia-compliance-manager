@@ -107,7 +107,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
       data-testid={testId}
       aria-label={ariaLabel || `${label}: ${value}${unit || ''}`}
     >
-      <div className="flex items-center justify-between mb-2">
+      <div className={`flex items-center ${icon ? 'justify-between' : 'justify-end'} mb-2`}>
         {icon && (
           <span className="text-xl" aria-hidden="true">
             {icon}
@@ -119,7 +119,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
           data-testid={`${testId}-value`}
         >
           {value}
-          {unit}
+          {unit && <span className={unit.startsWith(' ') ? '' : 'ml-1'}>{unit}</span>}
         </span>
       </div>
       <p

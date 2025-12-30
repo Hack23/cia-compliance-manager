@@ -13,7 +13,8 @@ describe('MetricCard', () => {
   it('renders with unit', () => {
     render(<MetricCard label="Test Metric" value="99.9" unit="%" />);
 
-    expect(screen.getByText('99.9%')).toBeInTheDocument();
+    expect(screen.getByText('99.9')).toBeInTheDocument();
+    expect(screen.getByText('%')).toBeInTheDocument();
   });
 
   it('renders with icon', () => {
@@ -146,6 +147,8 @@ describe('MetricCard', () => {
   it('renders with string value and unit', () => {
     render(<MetricCard label="Duration" value="4-8" unit=" hours" />);
 
-    expect(screen.getByText('4-8 hours')).toBeInTheDocument();
+    expect(screen.getByText('4-8')).toBeInTheDocument();
+    // The unit text with leading space is rendered but testing library normalizes whitespace
+    expect(screen.getByText(/hours/)).toBeInTheDocument();
   });
 });
