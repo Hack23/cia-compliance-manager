@@ -4,6 +4,7 @@ import { TECHNICAL_DETAILS_WIDGET_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { useTechnicalDetailsData } from "../../../hooks/useTechnicalDetailsData";
 import { SecurityLevel } from "../../../types/cia";
+import { TechnicalDetailsWidgetProps } from "../../../types/widget-props";
 import { 
   getTabAriaProps, 
   getTabPanelAriaProps, 
@@ -14,36 +15,6 @@ import {
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 import { CIAComponentDetails } from "./CIAComponentDetails";
-
-/**
- * Props for TechnicalDetailsWidget
- */
-interface TechnicalDetailsWidgetProps {
-  /**
-   * Selected availability level
-   */
-  availabilityLevel: SecurityLevel;
-
-  /**
-   * Selected integrity level
-   */
-  integrityLevel: SecurityLevel;
-
-  /**
-   * Selected confidentiality level
-   */
-  confidentialityLevel: SecurityLevel;
-
-  /**
-   * Optional CSS class name
-   */
-  className?: string;
-
-  /**
-   * Optional test ID for testing
-   */
-  testId?: string;
-}
 
 /**
  * Tab configuration for CIA components

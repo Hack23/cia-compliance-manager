@@ -460,24 +460,10 @@ export interface SecurityLevelWidgetProps extends AllCIAComponentsProps {
  *   availabilityLevel="High"
  *   integrityLevel="Very High"
  *   confidentialityLevel="Moderate"
- *   onLevelChange={(component, level) => handleChange(component, level)}
  * />
  * ```
  */
-export interface SecuritySummaryWidgetProps extends AllCIAComponentsProps {
-  /**
-   * Callback fired when any security level changes
-   * @param component - Which CIA component changed
-   * @param level - New security level
-   */
-  onLevelChange?: (component: CIAComponent, level: SecurityLevel) => void;
-
-  /**
-   * Initial active tab index
-   * @default 0
-   */
-  defaultTab?: number;
-}
+export type SecuritySummaryWidgetProps = AllCIAComponentsProps;
 
 /**
  * Props for BusinessImpactAnalysisWidget component
@@ -491,22 +477,10 @@ export interface SecuritySummaryWidgetProps extends AllCIAComponentsProps {
  *   availabilityLevel="High"
  *   integrityLevel="Very High"
  *   confidentialityLevel="Moderate"
- *   organizationSize="large"
  * />
  * ```
  */
-export interface BusinessImpactAnalysisWidgetProps extends AllCIAComponentsProps {
-  /**
-   * Organization size for impact calculations
-   * @default 'medium'
-   */
-  organizationSize?: 'small' | 'medium' | 'large' | 'enterprise';
-
-  /**
-   * Industry sector for impact analysis
-   */
-  industrySector?: string;
-}
+export type BusinessImpactAnalysisWidgetProps = AllCIAComponentsProps;
 
 // ============================================================================
 // BUSINESS VALUE WIDGET PROPS
@@ -524,30 +498,10 @@ export interface BusinessImpactAnalysisWidgetProps extends AllCIAComponentsProps
  *   availabilityLevel="High"
  *   integrityLevel="Very High"
  *   confidentialityLevel="Moderate"
- *   showBreakdown
- *   currency="EUR"
  * />
  * ```
  */
-export interface CostEstimationWidgetProps extends AllCIAComponentsProps {
-  /**
-   * If true, displays detailed cost breakdown
-   * @default true
-   */
-  showBreakdown?: boolean;
-
-  /**
-   * Currency code for cost display
-   * @default 'USD'
-   */
-  currency?: string;
-
-  /**
-   * Callback fired when cost estimation is complete
-   * @param totalCost - Total estimated cost
-   */
-  onCostCalculated?: (totalCost: number) => void;
-}
+export type CostEstimationWidgetProps = AllCIAComponentsProps;
 
 /**
  * Props for ComplianceStatusWidget component
@@ -561,24 +515,12 @@ export interface CostEstimationWidgetProps extends AllCIAComponentsProps {
  *   availabilityLevel="High"
  *   integrityLevel="Very High"
  *   confidentialityLevel="Moderate"
- *   frameworks={['NIST', 'ISO27001', 'GDPR']}
- *   showRequirements
+ *   industry="healthcare"
+ *   region="EU"
  * />
  * ```
  */
 export interface ComplianceStatusWidgetProps extends AllCIAComponentsProps {
-  /**
-   * Compliance frameworks to check
-   * @default ['NIST', 'ISO27001', 'GDPR']
-   */
-  frameworks?: string[];
-
-  /**
-   * If true, displays detailed compliance requirements
-   * @default false
-   */
-  showRequirements?: boolean;
-
   /**
    * Optional industry context for compliance
    */
@@ -602,17 +544,10 @@ export interface ComplianceStatusWidgetProps extends AllCIAComponentsProps {
  *   availabilityLevel="High"
  *   integrityLevel="Very High"
  *   confidentialityLevel="Moderate"
- *   timePeriod={5}
  * />
  * ```
  */
-export interface ValueCreationWidgetProps extends AllCIAComponentsProps {
-  /**
-   * Time period for ROI calculation (in years)
-   * @default 3
-   */
-  timePeriod?: number;
-}
+export type ValueCreationWidgetProps = AllCIAComponentsProps;
 
 // ============================================================================
 // IMPACT ANALYSIS WIDGET PROPS
@@ -767,25 +702,23 @@ export type TechnicalDetailsWidgetProps = AllCIAComponentsProps;
  *   availabilityLevel="High"
  *   integrityLevel="Very High"
  *   confidentialityLevel="Moderate"
- *   category="frameworks"
+ *   maxItems={10}
+ *   showTopResourcesOnly
  * />
  * ```
  */
 export interface SecurityResourcesWidgetProps extends AllCIAComponentsProps {
   /**
-   * Filter resources by category
-   */
-  category?: 'documentation' | 'tools' | 'frameworks' | 'all';
-
-  /**
-   * Optional filter string for resource filtering
-   */
-  filter?: string;
-
-  /**
    * Maximum number of items to display
+   * @default 8
    */
   maxItems?: number;
+
+  /**
+   * Optional flag to show only top/priority resources
+   * @default false
+   */
+  showTopResourcesOnly?: boolean;
 }
 
 /**
@@ -800,21 +733,7 @@ export interface SecurityResourcesWidgetProps extends AllCIAComponentsProps {
  *   availabilityLevel="High"
  *   integrityLevel="Very High"
  *   confidentialityLevel="Moderate"
- *   chartType="bar"
- *   interactive
  * />
  * ```
  */
-export interface SecurityVisualizationWidgetProps extends AllCIAComponentsProps {
-  /**
-   * Chart type to display
-   * @default 'radar'
-   */
-  chartType?: 'radar' | 'bar' | 'line' | 'pie' | 'gauge';
-
-  /**
-   * If true, chart is interactive
-   * @default true
-   */
-  interactive?: boolean;
-}
+export type SecurityVisualizationWidgetProps = AllCIAComponentsProps;

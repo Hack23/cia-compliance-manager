@@ -3,6 +3,7 @@ import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { VALUE_CREATION_WIDGET_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
+import { ValueCreationWidgetProps } from "../../../types/widget-props";
 import { calculateROIEstimate } from "../../../utils/businessValueUtils";
 import { calculateBusinessImpactLevel } from "../../../utils/riskUtils";
 import { hasMethod, isNullish } from "../../../utils/typeGuards";
@@ -10,36 +11,6 @@ import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
-
-/**
- * Props for ValueCreationWidget component
- */
-export interface ValueCreationWidgetProps {
-  /**
-   * Selected availability level
-   */
-  availabilityLevel: SecurityLevel;
-
-  /**
-   * Selected integrity level
-   */
-  integrityLevel: SecurityLevel;
-
-  /**
-   * Selected confidentiality level
-   */
-  confidentialityLevel: SecurityLevel;
-
-  /**
-   * Optional CSS class name
-   */
-  className?: string;
-
-  /**
-   * Optional test ID for testing
-   */
-  testId?: string;
-}
 
 /**
  * Interface for business value metric

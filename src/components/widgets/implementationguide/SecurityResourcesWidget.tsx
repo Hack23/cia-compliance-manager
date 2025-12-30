@@ -5,6 +5,7 @@ import { SECURITY_RESOURCES_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { SecurityResource } from "../../../types/securityResources";
+import { SecurityResourcesWidgetProps } from "../../../types/widget-props";
 import {
   isArray,
   isNullish,
@@ -16,96 +17,20 @@ import ResourceCard from "../../common/ResourceCard";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 
+// Constants for top resources filtering
+const TOP_RESOURCES_PERCENTAGE = 0.5; // 50%
+const MIN_TOP_RESOURCES = 5;
+
 /**
- * Props for SecurityResourcesWidget component
- * 
- * Defines the configuration for displaying security resources and implementation
- * guides based on selected security levels across all CIA components.
- * 
- * @example
- * ```tsx
- * <SecurityResourcesWidget
- *   availabilityLevel="High"
- *   integrityLevel="Very High"
- *   confidentialityLevel="Moderate"
- *   limit={10}
- *   showTopResourcesOnly={true}
- *   className="mt-4"
- *   testId="security-resources"
- * />
- * ```
+ * Helper function to extract relevance score from a security resource
+ * @param resource - The security resource to extract score from
+ * @returns The relevance score, defaulting to 0 if not available
  */
-export interface SecurityResourcesWidgetProps {
-  /**
-   * Selected availability level
-   * 
-   * Determines which availability-specific resources and guides to display.
-   * 
-   * @example 'High'
-   */
-  availabilityLevel: SecurityLevel;
-
-  /**
-   * Selected integrity level
-   * 
-   * Determines which integrity-specific resources and guides to display.
-   * 
-   * @example 'Very High'
-   */
-  integrityLevel: SecurityLevel;
-
-  /**
-   * Selected confidentiality level
-   * 
-   * Determines which confidentiality-specific resources and guides to display.
-   * 
-   * @example 'Moderate'
-   */
-  confidentialityLevel: SecurityLevel;
-
-  /**
-   * Optional CSS class name for custom styling
-   * 
-   * Allows consumers to apply custom CSS classes via Tailwind or custom styles.
-   * 
-   * @default ""
-   * @example "mt-4 shadow-lg rounded-lg"
-   */
-  className?: string;
-
-  /**
-   * Optional test ID for automated testing
-   * 
-   * Used by Cypress and Vitest for component identification in tests.
-   * Defaults to SECURITY_RESOURCES_TEST_IDS.WIDGET constant.
-   * 
-   * @default SECURITY_RESOURCES_TEST_IDS.WIDGET
-   * @example "custom-security-resources"
-   */
-  testId?: string;
-
-  /**
-   * Optional limit for the number of resources to display
-   * 
-   * Controls how many resource cards are shown. Higher limits provide
-   * more comprehensive guidance but require more screen space.
-   * 
-   * @default 8
-   * @example 10
-   */
-  limit?: number;
-
-  /**
-   * Optional flag to show only top/priority resources
-   * 
-   * When true, filters to show only the most relevant and high-priority
-   * resources for the selected security levels, providing focused guidance.
-   * 
-   * @default false
-   * @example true
-   */
-  showTopResourcesOnly?: boolean;
-}
+const getResourceRelevanceScore = (resource: SecurityResource): number => {
+  return isObject(resource) && "relevance" in resource && typeof resource.relevance === "number"
+    ? resource.relevance
+    : 0;
+};
 
 /**
  * Widget that displays security resources and implementation guides
@@ -146,7 +71,7 @@ export interface SecurityResourcesWidgetProps {
  *   availabilityLevel="High"
  *   integrityLevel="Very High"
  *   confidentialityLevel="Moderate"
- *   limit={12}
+ *   maxItems={12}
  *   showTopResourcesOnly={true}
  *   className="border-2 border-gray-200 p-4"
  *   testId="main-security-resources"
@@ -159,7 +84,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   confidentialityLevel,
   className = "",
   testId = SECURITY_RESOURCES_TEST_IDS.WIDGET,
-  limit = 8,
+  maxItems = 8,
   showTopResourcesOnly = false,
 }) => {
   // Use the CIA content service
@@ -173,7 +98,12 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [resourcesPerPage, setResourcesPerPage] = useState(limit);
+  const [resourcesPerPage, setResourcesPerPage] = useState(maxItems);
+
+  // Update resourcesPerPage when maxItems changes
+  React.useEffect(() => {
+    setResourcesPerPage(maxItems);
+  }, [maxItems]);
 
   // Calculate security resources with proper error handling and type safety
   const securityResources = useMemo((): SecurityResource[] => {
@@ -234,17 +164,12 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
       // Sort by relevance score if available, otherwise by title
       return uniqueResources.sort((a, b) => {
-        // Use type safe approach to access properties
-        const aScore =
-          isObject(a) && "relevanceScore" in a
-            ? (a.relevanceScore as number)
-            : 0;
-        const bScore =
-          isObject(b) && "relevanceScore" in b
-            ? (b.relevanceScore as number)
-            : 0;
+        // Extract scores using helper (0 is default for missing scores)
+        const aScore = getResourceRelevanceScore(a);
+        const bScore = getResourceRelevanceScore(b);
 
-        if (aScore !== undefined && bScore !== undefined) {
+        // Sort by score (higher first), then by title
+        if (aScore !== bScore) {
           return bScore - aScore;
         }
         return a.title.localeCompare(b.title);
@@ -271,9 +196,27 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
     return Array.from(categories).sort();
   }, [securityResources]);
 
-  // Filter resources based on category and search term
+  // Filter resources based on category, search term, and top resources flag
   const filteredResources = useMemo(() => {
     let filtered = securityResources;
+
+    // Filter to show only top priority resources if requested
+    if (showTopResourcesOnly) {
+      // Filter resources with high relevance scores
+      // Shows top 50% with a minimum of 5 resources (or all if less than 10 total)
+      const sortedByRelevance = [...filtered].sort((a, b) => {
+        const aScore = getResourceRelevanceScore(a);
+        const bScore = getResourceRelevanceScore(b);
+        return bScore - aScore;
+      });
+      
+      // Take top percentage of resources with a minimum to ensure meaningful results
+      const topCount = Math.max(
+        Math.ceil(sortedByRelevance.length * TOP_RESOURCES_PERCENTAGE), 
+        MIN_TOP_RESOURCES
+      );
+      filtered = sortedByRelevance.slice(0, topCount);
+    }
 
     // Apply category filter
     if (selectedCategory) {
@@ -297,7 +240,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
     }
 
     return filtered;
-  }, [securityResources, selectedCategory, searchTerm]);
+  }, [securityResources, selectedCategory, searchTerm, showTopResourcesOnly]);
 
   // Paginate resources
   const currentResources = useMemo(() => {

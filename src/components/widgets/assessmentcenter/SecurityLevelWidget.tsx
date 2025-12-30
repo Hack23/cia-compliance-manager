@@ -9,6 +9,7 @@ import { SECURITY_LEVEL_WIDGET_IDS, CIA_TEST_IDS } from "../../../constants/test
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
 import { CIADetails } from "../../../types/cia-services";
+import { SecurityLevelWidgetProps } from "../../../types/widget-props";
 import { 
   getWidgetAriaDescription,
   announceToScreenReader 
@@ -16,51 +17,6 @@ import {
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
-
-/**
- * Props for SecurityLevelWidget component
- */
-export interface SecurityLevelWidgetProps {
-  /**
-   * Selected availability level
-   */
-  availabilityLevel: SecurityLevel;
-
-  /**
-   * Selected integrity level
-   */
-  integrityLevel: SecurityLevel;
-
-  /**
-   * Selected confidentiality level
-   */
-  confidentialityLevel: SecurityLevel;
-
-  /**
-   * Handler for availability level changes
-   */
-  onAvailabilityChange?: (level: SecurityLevel) => void;
-
-  /**
-   * Handler for integrity level changes
-   */
-  onIntegrityChange?: (level: SecurityLevel) => void;
-
-  /**
-   * Handler for confidentiality level changes
-   */
-  onConfidentialityChange?: (level: SecurityLevel) => void;
-
-  /**
-   * Optional CSS class name
-   */
-  className?: string;
-
-  /**
-   * Optional test ID for testing
-   */
-  testId?: string;
-}
 
 /**
  * Widget for configuring CIA triad security levels

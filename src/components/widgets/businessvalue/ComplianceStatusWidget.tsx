@@ -6,6 +6,7 @@ import { useComplianceService } from "../../../hooks/useComplianceService";
 import { CIAComponent, SecurityLevel } from "../../../types/cia";
 import { StatusType } from "../../../types/common/StatusTypes";
 import { ComplianceStatusDetails } from "../../../types/compliance";
+import { ComplianceStatusWidgetProps } from "../../../types/widget-props";
 import { isNullish } from "../../../utils/typeGuards";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import StatusBadge from "../../common/StatusBadge";
@@ -18,46 +19,6 @@ const getBadgeStatus = (complianceScore: number): StatusType => {
   if (complianceScore >= 50) return "warning";
   return "error";
 };
-
-/**
- * Props for ComplianceStatusWidget component
- */
-export interface ComplianceStatusWidgetProps {
-  /**
-   * Selected availability level
-   */
-  availabilityLevel: SecurityLevel;
-
-  /**
-   * Selected integrity level
-   */
-  integrityLevel: SecurityLevel;
-
-  /**
-   * Selected confidentiality level
-   */
-  confidentialityLevel: SecurityLevel;
-
-  /**
-   * Optional industry for compliance context
-   */
-  industry?: string;
-
-  /**
-   * Optional region for compliance context
-   */
-  region?: string;
-
-  /**
-   * Optional CSS class name
-   */
-  className?: string;
-
-  /**
-   * Optional test ID for automated testing
-   */
-  testId?: string;
-}
 
 /**
  * ComplianceStatusWidget displays status of compliance with various frameworks

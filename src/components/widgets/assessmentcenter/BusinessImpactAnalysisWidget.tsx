@@ -8,6 +8,7 @@ import {
 } from "../../../types/businessImpact";
 import { SecurityLevel } from "../../../types/cia";
 import { BusinessImpactDetails } from "../../../types/cia-services";
+import { BusinessImpactAnalysisWidgetProps } from "../../../types/widget-props";
 import { isNullish } from "../../../utils/typeGuards";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import KeyValuePair from "../../common/KeyValuePair";
@@ -15,36 +16,6 @@ import RiskLevelBadge from "../../common/RiskLevelBadge";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
-
-/**
- * Props for BusinessImpactAnalysisWidget component
- */
-interface BusinessImpactAnalysisWidgetProps {
-  /**
-   * Selected availability level
-   */
-  availabilityLevel: SecurityLevel;
-
-  /**
-   * Selected integrity level
-   */
-  integrityLevel: SecurityLevel;
-
-  /**
-   * Selected confidentiality level
-   */
-  confidentialityLevel: SecurityLevel;
-
-  /**
-   * Optional CSS class name
-   */
-  className?: string;
-
-  /**
-   * Optional test ID for automated testing
-   */
-  testId?: string;
-}
 
 /**
  * Business Impact Analysis Widget provides insights on security impacts
