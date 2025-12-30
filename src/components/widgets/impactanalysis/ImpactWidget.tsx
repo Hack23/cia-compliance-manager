@@ -104,7 +104,7 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         ariaDescription: "Business impact of confidentiality controls including data classification and privacy measures",
         categoryLabel: "Confidentiality",
         containerClassName: "overflow-visible",
-        contentClassName: `max-h-[${MAX_CONFIDENTIALITY_WIDGET_HEIGHT}] overflow-y-auto pr-1`,
+        contentClassName: "max-h-[550px] overflow-y-auto pr-1",
         getSecurityBadgeTestId: (_effectiveTestId, widgetIds) => widgetIds.label("security-badge"),
       };
     default: {

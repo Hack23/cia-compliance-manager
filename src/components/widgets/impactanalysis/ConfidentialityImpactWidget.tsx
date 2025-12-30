@@ -20,7 +20,7 @@ const ConfidentialityImpactWidget: React.FC<
   integrityLevel: _integrityLevel,
   confidentialityLevel,
   className = "",
-  testId = CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_PREFIX,
+  testId = `widget-${CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_PREFIX}`,
   showExtendedDetails = false,
   onError,
 }) => {

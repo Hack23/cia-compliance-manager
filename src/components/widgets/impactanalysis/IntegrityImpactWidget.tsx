@@ -17,7 +17,7 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
   integrityLevel,
   confidentialityLevel: _confidentialityLevel,
   className = "",
-  testId = INTEGRITY_IMPACT_TEST_IDS.INTEGRITY_IMPACT_PREFIX,
+  testId = `widget-${INTEGRITY_IMPACT_TEST_IDS.INTEGRITY_IMPACT_PREFIX}`,
   showExtendedDetails = false,
   onError,
 }) => {
