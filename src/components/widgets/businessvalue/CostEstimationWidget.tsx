@@ -3,7 +3,7 @@ import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { COST_ESTIMATION_WIDGET_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { CIAComponent, SecurityLevel } from "../../../types/cia";
-import { CostEstimationWidgetProps } from "../../../types/widgets";
+import { CostEstimationWidgetProps } from "../../../types/widget-props";
 import { calculateTotalSecurityCost } from "../../../utils/costCalculationUtils";
 import { formatCurrency } from "../../../utils/formatUtils";
 import { getImplementationComplexity } from "../../../utils/riskUtils";

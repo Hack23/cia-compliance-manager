@@ -6,6 +6,7 @@ import { useComplianceService } from "../../../hooks/useComplianceService";
 import { useSecurityMetricsService } from "../../../hooks/useSecurityMetricsService";
 import { useSecuritySummaryData } from "../../../hooks/useSecuritySummaryData";
 import { SecurityLevel } from "../../../types/cia";
+import { SecuritySummaryWidgetProps } from "../../../types/widget-props";
 import { 
   getTabAriaProps, 
   getTabPanelAriaProps, 
@@ -19,41 +20,6 @@ import { SecurityBusinessTab } from "./SecurityBusinessTab";
 import { SecurityComplianceTab } from "./SecurityComplianceTab";
 import { SecurityImplementationTab } from "./SecurityImplementationTab";
 import { SecurityOverviewTab } from "./SecurityOverviewTab";
-
-/**
- * Props for SecuritySummaryWidget component
- */
-export interface SecuritySummaryWidgetProps {
-  /**
-   * Selected availability level
-   */
-  availabilityLevel: SecurityLevel;
-
-  /**
-   * Selected integrity level
-   */
-  integrityLevel: SecurityLevel;
-
-  /**
-   * Selected confidentiality level
-   */
-  confidentialityLevel: SecurityLevel;
-
-  /**
-   * Optional overall security level
-   */
-  securityLevel?: SecurityLevel;
-
-  /**
-   * Optional CSS class name
-   */
-  className?: string;
-
-  /**
-   * Optional test ID
-   */
-  testId?: string;
-}
 
 /**
  * Tab options for the summary widget
