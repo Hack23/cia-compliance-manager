@@ -24,8 +24,8 @@ const config: Config = {
   darkMode: 'class',
   theme: {
     extend: {
-      // Spacing scale based on 8px grid system
-      // Imported from designTokens.ts - optimized to reduce widget empty space
+      // Spacing scale imported from designTokens.ts
+      // Primarily aligned to an 8px grid, with optimized values to reduce widget empty space
       spacing: {
         xs: SPACING.xs,
         sm: SPACING.sm,

@@ -66,15 +66,22 @@ function scanFile(filePath) {
         const lines = content.split('\n');
         const matchDetails = [];
         
+        // Track positions to avoid reporting the same match location multiple times
+        let searchStartIndex = 0;
         matches.forEach(match => {
-          const index = content.indexOf(match);
-          const lineNumber = content.substring(0, index).split('\n').length;
-          const lineContent = lines[lineNumber - 1].trim();
-          
-          matchDetails.push({
-            line: lineNumber,
-            content: lineContent.substring(0, 100) + (lineContent.length > 100 ? '...' : '')
-          });
+          const index = content.indexOf(match, searchStartIndex);
+          if (index !== -1) {
+            const lineNumber = content.substring(0, index).split('\n').length;
+            const lineContent = lines[lineNumber - 1]?.trim() || '';
+            
+            matchDetails.push({
+              line: lineNumber,
+              content: lineContent.substring(0, 100) + (lineContent.length > 100 ? '...' : '')
+            });
+            
+            // Move search position forward to find next occurrence
+            searchStartIndex = index + match.length;
+          }
         });
 
         violations.push({

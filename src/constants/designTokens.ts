@@ -8,7 +8,7 @@
  */
 
 /**
- * Spacing scale following 8px grid system
+ * Spacing scale based on a flexible grid system with optimizations
  * Use these values for padding, margin, and gap properties
  * 
  * NOTE: These values have been optimized to reduce widget empty space
@@ -16,7 +16,7 @@
  * 
  * ⚠️ EXCEPTION: `sm: 6px` breaks the strict 4px/8px grid system but was
  * intentionally optimized to fix 50% blank space issues in widgets.
- * This value matches the current tailwind.config.js and preserves
+ * This value matches the current tailwind.config.ts and preserves
  * the optimized UI appearance from v1.0.6+.
  */
 export const SPACING = {
@@ -286,6 +286,11 @@ export function getBorderRadius(size: keyof typeof BORDER_RADIUS): string {
 /**
  * Widget-specific styling utilities
  * These helpers generate consistent className strings for common widget patterns
+ * 
+ * NOTE: These utilities are provided for convenience and future use. While all widgets
+ * have been refactored to use design tokens via inline Tailwind classes, these helpers
+ * can be adopted in future refactoring to further reduce code duplication and improve
+ * maintainability. They are kept for forward compatibility and as reference patterns.
  */
 export const WIDGET_STYLES = {
   /**
