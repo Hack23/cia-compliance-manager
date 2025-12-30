@@ -13,6 +13,11 @@
  * 
  * NOTE: These values have been optimized to reduce widget empty space
  * and provide more compact layouts while maintaining visual hierarchy.
+ * 
+ * ⚠️ EXCEPTION: `sm: 6px` breaks the strict 4px/8px grid system but was
+ * intentionally optimized to fix 50% blank space issues in widgets.
+ * This value matches the current tailwind.config.js and preserves
+ * the optimized UI appearance from v1.0.6+.
  */
 export const SPACING = {
   /** 4px - Extra small spacing for tight layouts */
