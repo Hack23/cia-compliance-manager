@@ -1,5 +1,6 @@
 import React from "react";
 import type { ConfidentialityImpactWidgetProps } from "../../../types/widget-props";
+import { CONFIDENTIALITY_IMPACT_TEST_IDS } from "../../../constants/testIds";
 import ImpactWidget from "./ImpactWidget";
 
 /**
@@ -19,7 +20,7 @@ const ConfidentialityImpactWidget: React.FC<
   integrityLevel: _integrityLevel,
   confidentialityLevel,
   className = "",
-  testId = "widget-confidentiality-impact",
+  testId = CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_PREFIX,
   showExtendedDetails = false,
   onError,
 }) => {

@@ -17,6 +17,7 @@ import {
 import { useBusinessImpact, useComponentDetails } from "../../../hooks";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import type { CIAComponent, SecurityLevel } from "../../../types/cia";
+import type { ImpactWidgetProps } from "../../../types/widget-props";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
@@ -28,25 +29,19 @@ import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 import WidgetSection from "../../common/WidgetSection";
 
 /**
- * Props for the shared ImpactWidget component
+ * Maximum height for the confidentiality widget content area.
+ * This value (550px) ensures the widget content remains scrollable
+ * and doesn't overflow the container when displaying extensive
+ * privacy and data protection information.
  */
-export interface ImpactWidgetProps {
-  /** CIA component (availability, integrity, or confidentiality) */
-  component: CIAComponent;
-  /** Selected security level for this component */
-  level: SecurityLevel;
-  /** Optional CSS class */
-  className?: string;
-  /** Test ID */
-  testId?: string;
-  /** If true, displays extended details (e.g., recommendations) */
-  showExtendedDetails?: boolean;
-  /** Optional error callback */
-  onError?: (error: Error) => void;
-}
+const MAX_CONFIDENTIALITY_WIDGET_HEIGHT = "550px";
 
 /**
  * Configuration for each CIA component type
+ * 
+ * Defines component-specific settings including titles, icons, colors,
+ * ARIA descriptions, and CSS classes for consistent rendering across
+ * all three impact widgets.
  */
 interface ComponentConfig {
   titleKey: keyof typeof WIDGET_TITLES;
@@ -57,6 +52,12 @@ interface ComponentConfig {
   textClass: string;
   ariaDescription: string;
   categoryLabel: string;
+  /** Container-specific CSS classes */
+  containerClassName: string;
+  /** Content area-specific CSS classes */
+  contentClassName: string;
+  /** Function to generate security badge testId */
+  getSecurityBadgeTestId: (effectiveTestId: string, widgetIds: typeof AVAILABILITY_IMPACT_WIDGET_IDS) => string;
 }
 
 /**
@@ -74,6 +75,9 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         textClass: "text-blue-800 dark:text-blue-300",
         ariaDescription: "Business impact of availability controls including uptime targets and recovery objectives",
         categoryLabel: "Availability",
+        containerClassName: "cia-availability",
+        contentClassName: "cia-widget",
+        getSecurityBadgeTestId: (_effectiveTestId, widgetIds) => widgetIds.label("security-level"),
       };
     case "integrity":
       return {
@@ -85,6 +89,9 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         textClass: "text-green-800 dark:text-green-300",
         ariaDescription: "Business impact of integrity controls including data accuracy and validation mechanisms",
         categoryLabel: "Integrity",
+        containerClassName: "",
+        contentClassName: "",
+        getSecurityBadgeTestId: (effectiveTestId, _widgetIds) => `${effectiveTestId}-integrity-badge`,
       };
     case "confidentiality":
       return {
@@ -96,7 +103,15 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         textClass: "text-purple-800 dark:text-purple-300",
         ariaDescription: "Business impact of confidentiality controls including data classification and privacy measures",
         categoryLabel: "Confidentiality",
+        containerClassName: "overflow-visible",
+        contentClassName: `max-h-[${MAX_CONFIDENTIALITY_WIDGET_HEIGHT}] overflow-y-auto pr-1`,
+        getSecurityBadgeTestId: (_effectiveTestId, widgetIds) => widgetIds.label("security-badge"),
       };
+    default: {
+      // Exhaustive check to ensure all CIAComponent values are handled
+      const exhaustiveCheck: never = component;
+      throw new Error(`Unsupported CIA component in ImpactWidget: ${String(exhaustiveCheck)}`);
+    }
   }
 };
 
@@ -120,6 +135,11 @@ const getTestIds = (component: CIAComponent) => {
         prefix: CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_PREFIX,
         widgetIds: CONFIDENTIALITY_IMPACT_WIDGET_IDS,
       };
+    default: {
+      // Exhaustive check to ensure all CIAComponent values are handled
+      const exhaustiveCheck: never = component;
+      throw new Error(`Unsupported CIA component in getTestIds: ${String(exhaustiveCheck)}`);
+    }
   }
 };
 
@@ -201,15 +221,17 @@ const ImpactWidget: React.FC<ImpactWidgetProps> = ({
           },
         };
       case "confidentiality": {
-        const dataClassification = ciaContentService
-          ? (() => {
-              try {
-                return ciaContentService.getInformationSensitivity(effectiveLevel);
-              } catch {
-                return `${effectiveLevel} Classification`;
-              }
-            })()
-          : `${effectiveLevel} Classification`;
+        // Get data classification with proper error handling
+        let dataClassification: string;
+        if (ciaContentService) {
+          try {
+            dataClassification = ciaContentService.getInformationSensitivity(effectiveLevel);
+          } catch {
+            dataClassification = `${effectiveLevel} Classification`;
+          }
+        } else {
+          dataClassification = `${effectiveLevel} Classification`;
+        }
 
         return {
           type: "confidentiality" as const,
@@ -219,6 +241,11 @@ const ImpactWidget: React.FC<ImpactWidgetProps> = ({
           },
         };
       }
+      default: {
+        // Exhaustive check to ensure all CIAComponent values are handled
+        const exhaustiveCheck: never = component;
+        throw new Error(`Unsupported CIA component in metrics calculation: ${String(exhaustiveCheck)}`);
+      }
     }
   }, [component, effectiveLevel, details, ciaContentService]);
 
@@ -227,17 +254,13 @@ const ImpactWidget: React.FC<ImpactWidgetProps> = ({
       <WidgetContainer
         title={WIDGET_TITLES[config.titleKey] || config.defaultTitle}
         icon={WIDGET_ICONS[config.iconKey] || config.defaultIcon}
-        className={`${className} ${component === "availability" ? "cia-availability" : ""} ${
-          component === "confidentiality" ? "overflow-visible" : ""
-        }`}
+        className={`${className} ${config.containerClassName}`}
         testId={effectiveTestId}
         isLoading={isLoading}
         error={error}
       >
         <div
-          className={`p-md sm:p-lg ${component === "availability" ? "cia-widget" : ""} ${
-            component === "confidentiality" ? "max-h-[550px] overflow-y-auto pr-1" : ""
-          }`}
+          className={`p-md sm:p-lg ${config.contentClassName}`}
           role="region"
           aria-label={getWidgetAriaDescription(config.defaultTitle, config.ariaDescription)}
         >
@@ -254,35 +277,23 @@ const ImpactWidget: React.FC<ImpactWidgetProps> = ({
               level={effectiveLevel}
               colorClass={getSecurityLevelBackgroundClass(config.color)}
               textClass={config.textClass}
-              testId={
-                component === "integrity"
-                  ? `${effectiveTestId}-integrity-badge`
-                  : component === "confidentiality"
-                  ? testIds.widgetIds.label("security-badge")
-                  : testIds.widgetIds.label("security-level")
-              }
+              testId={config.getSecurityBadgeTestId(effectiveTestId, testIds.widgetIds)}
             />
           </section>
 
           {/* Business Impact Analysis */}
           {businessImpact && (
             <section
-              className={component === "integrity" ? "mt-md" : "mb-md"}
+              className="mb-md"
               aria-labelledby={`${component}-business-impact-heading`}
             >
-              {component !== "integrity" && (
-                <h3 id={`${component}-business-impact-heading`} className="text-lg font-medium mb-sm">
-                  Business Impact
-                </h3>
-              )}
+              <h3 id={`${component}-business-impact-heading`} className="text-lg font-medium mb-sm">
+                Business Impact
+              </h3>
               <BusinessImpactSection
                 impact={businessImpact}
                 color={config.color}
-                testId={
-                  component === "integrity"
-                    ? `${effectiveTestId}-business-impact`
-                    : testIds.widgetIds.section("business-impact")
-                }
+                testId={testIds.widgetIds.section("business-impact")}
               />
             </section>
           )}

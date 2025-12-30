@@ -669,6 +669,30 @@ export interface ConfidentialityImpactWidgetProps extends BaseWidgetProps {
   showExtendedDetails?: boolean;
 }
 
+/**
+ * Props for the shared ImpactWidget component
+ * 
+ * This is the base component used by all three impact widgets (Availability,
+ * Integrity, Confidentiality). It provides a unified interface for displaying
+ * CIA component-specific business impact analysis.
+ * 
+ * @example
+ * ```typescript
+ * <ImpactWidget
+ *   component="availability"
+ *   level="High"
+ *   showExtendedDetails
+ * />
+ * ```
+ */
+export interface ImpactWidgetProps extends CIAComponentWidgetProps {
+  /**
+   * If true, displays extended details (e.g., recommendations for integrity)
+   * @default false
+   */
+  showExtendedDetails?: boolean;
+}
+
 // ============================================================================
 // IMPLEMENTATION GUIDE WIDGET PROPS
 // ============================================================================

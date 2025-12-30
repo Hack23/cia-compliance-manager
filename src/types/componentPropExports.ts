@@ -445,6 +445,7 @@ export type {
   AvailabilityImpactWidgetProps,
   IntegrityImpactWidgetProps,
   ConfidentialityImpactWidgetProps,
+  ImpactWidgetProps,
   
   // Implementation Guide widgets
   TechnicalDetailsWidgetProps,
