@@ -8,9 +8,11 @@ import type { ConfidentialityImpactWidgetProps } from "../../../types/widget-pro
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
+import MetricCard from "../../common/MetricCard";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
+import WidgetSection from "../../common/WidgetSection";
 
 /**
  * Displays confidentiality impact details for the selected security level
@@ -125,37 +127,43 @@ const ConfidentialityImpactWidget: React.FC<
           )}
 
           {/* Data Protection & Classification */}
-          <div className="mb-6">
-            <h4 className="text-md font-medium mb-3 flex items-center">
-              <span className="mr-2" aria-hidden="true">📊</span>Data Protection
-            </h4>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-              <div className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light dark:border-primary-dark">
-                <div className="text-sm font-medium mb-1 text-purple-700 dark:text-purple-300">
-                  Data Classification
-                </div>
-                <div className="text-lg font-bold">{dataClassification}</div>
-                <div className="text-xs text-purple-600 dark:text-purple-400">
-                  Level of data sensitivity
-                </div>
-              </div>
+          <WidgetSection
+            title="Data Protection"
+            icon="📊"
+            variant="primary"
+            className="mb-6"
+            testId={CONFIDENTIALITY_IMPACT_WIDGET_IDS.section('data-protection')}
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <MetricCard
+                label="Data Classification"
+                value={dataClassification}
+                icon="🏷️"
+                description="Level of data sensitivity"
+                variant="primary"
+                testId={CONFIDENTIALITY_IMPACT_WIDGET_IDS.label('classification')}
+              />
             </div>
-          </div>
+          </WidgetSection>
 
           {/* Privacy Impact */}
-          <div className="mb-6">
-            <h4 className="text-md font-medium mb-3 flex items-center">
-              <span className="mr-2" aria-hidden="true">🔒</span>Privacy Impact
-            </h4>
+          <WidgetSection
+            title="Privacy Impact"
+            icon="🔒"
+            variant="primary"
+            className="mb-6"
+            testId={CONFIDENTIALITY_IMPACT_WIDGET_IDS.section('privacy-impact')}
+          >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <div className="p-sm bg-white dark:bg-gray-800 rounded-md">
-                <div className="text-sm font-medium mb-1">Privacy Impact:</div>
-                <div className="text-lg font-bold text-purple-600 dark:text-purple-400">
-                  {privacyImpact}
-                </div>
-              </div>
+              <MetricCard
+                label="Privacy Impact"
+                value={privacyImpact}
+                icon="🛡️"
+                variant="primary"
+                testId={CONFIDENTIALITY_IMPACT_WIDGET_IDS.label('privacy')}
+              />
             </div>
-          </div>
+          </WidgetSection>
         </section>
       </div>
     </WidgetContainer>

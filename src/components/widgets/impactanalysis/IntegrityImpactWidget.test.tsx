@@ -131,9 +131,9 @@ describe("IntegrityImpactWidget", () => {
   it("displays data integrity metrics", () => {
     createComponent();
     expect(screen.getByText("Data Integrity Metrics")).toBeInTheDocument();
-    expect(screen.getByText("Data Validation Controls:")).toBeInTheDocument();
+    expect(screen.getByText("Data Validation Controls")).toBeInTheDocument();
     expect(screen.getByText("Moderate validation level")).toBeInTheDocument();
-    expect(screen.getByText("Acceptable Error Rate:")).toBeInTheDocument();
+    expect(screen.getByText("Acceptable Error Rate")).toBeInTheDocument();
     expect(screen.getByText("< 3%")).toBeInTheDocument();
   });
 

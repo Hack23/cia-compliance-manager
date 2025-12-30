@@ -13,9 +13,11 @@ import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
+import MetricCard from "../../common/MetricCard";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
+import WidgetSection from "../../common/WidgetSection";
 
 /**
  * Widget that displays the impact of selected integrity level
@@ -127,32 +129,30 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
         )}
 
         {/* Data Integrity metrics */}
-        <div
-          className="mb-4 p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
-          data-testid={INTEGRITY_IMPACT_WIDGET_IDS.section('metrics')}
+        <WidgetSection
+          title="Data Integrity Metrics"
+          icon="📊"
+          variant="success"
+          className="mb-4"
+          testId={INTEGRITY_IMPACT_WIDGET_IDS.section('metrics')}
         >
-          <h3 className="text-lg font-medium mb-2 text-green-800 dark:text-green-300">
-            Data Integrity Metrics
-          </h3>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="p-sm bg-white dark:bg-gray-800 rounded-md">
-              <div className="text-sm font-medium mb-1">
-                Data Validation Controls:
-              </div>
-              <div className="text-lg font-bold text-green-600 dark:text-green-400">
-                {validationLevel}
-              </div>
-            </div>
-            <div className="p-sm bg-white dark:bg-gray-800 rounded-md">
-              <div className="text-sm font-medium mb-1">
-                Acceptable Error Rate:
-              </div>
-              <div className="text-lg font-bold text-green-600 dark:text-green-400">
-                {errorRate}
-              </div>
-            </div>
+            <MetricCard
+              label="Data Validation Controls"
+              value={validationLevel}
+              icon="✓"
+              variant="success"
+              testId={INTEGRITY_IMPACT_WIDGET_IDS.label('validation')}
+            />
+            <MetricCard
+              label="Acceptable Error Rate"
+              value={errorRate}
+              icon="📉"
+              variant="success"
+              testId={INTEGRITY_IMPACT_WIDGET_IDS.label('error-rate')}
+            />
           </div>
-        </div>
+        </WidgetSection>
 
         {/* Recommendations (visible only when showExtendedDetails is true) */}
         {showExtendedDetails && recommendations.length > 0 && (

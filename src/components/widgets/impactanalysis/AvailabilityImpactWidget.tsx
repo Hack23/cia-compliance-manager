@@ -9,9 +9,11 @@ import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
+import MetricCard from "../../common/MetricCard";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
+import WidgetSection from "../../common/WidgetSection";
 
 // Extended interface for SLA metrics to improve type safety
 interface SLAMetrics {
@@ -125,66 +127,55 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
         )}
 
         {/* SLA Metrics */}
-        <section 
+        <WidgetSection 
+          title="SLA Metrics"
+          icon="⏱️"
+          variant="info"
           className="mb-4"
-          aria-labelledby="sla-metrics-heading"
+          ariaLabelledBy="sla-metrics-heading"
+          testId={AVAILABILITY_IMPACT_WIDGET_IDS.section('sla-metrics')}
         >
-          <h3 id="sla-metrics-heading" className="text-lg font-medium mb-2 flex items-center">
-            <span className="mr-2" aria-hidden="true">⏱️</span>SLA Metrics
-          </h3>
           <div 
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4"
             role="group"
             aria-label="Service level agreement metrics"
           >
-            <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light dark:border-info-dark">
-              <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
-                Uptime Target
-              </div>
-              <div className="text-lg font-bold" aria-label={`Uptime target: ${slaMetrics.uptime}`}>
-                {slaMetrics.uptime}
-              </div>
-              <div className="text-xs text-blue-600 dark:text-blue-400">
-                Expected system availability
-              </div>
-            </div>
-            <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light dark:border-info-dark">
-              <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
-                Recovery Time Objective
-              </div>
-              <div className="text-lg font-bold" aria-label={`Recovery time objective: ${slaMetrics.rto}`}>
-                {slaMetrics.rto}
-              </div>
-              <div className="text-xs text-blue-600 dark:text-blue-400">
-                Time to restore service
-              </div>
-            </div>
-            <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light dark:border-info-dark">
-              <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
-                Recovery Point Objective
-              </div>
-              <div className="text-lg font-bold" aria-label={`Recovery point objective: ${slaMetrics.rpo}`}>
-                {slaMetrics.rpo}
-              </div>
-              <div className="text-xs text-blue-600 dark:text-blue-400">
-                Maximum data loss allowed
-              </div>
-            </div>
+            <MetricCard
+              label="Uptime Target"
+              value={slaMetrics.uptime}
+              icon="📈"
+              description="Expected system availability"
+              variant="info"
+              testId={AVAILABILITY_IMPACT_WIDGET_IDS.label('uptime')}
+            />
+            <MetricCard
+              label="Recovery Time Objective"
+              value={slaMetrics.rto}
+              icon="⏱️"
+              description="Time to restore service"
+              variant="info"
+              testId={AVAILABILITY_IMPACT_WIDGET_IDS.label('rto')}
+            />
+            <MetricCard
+              label="Recovery Point Objective"
+              value={slaMetrics.rpo}
+              icon="💾"
+              description="Maximum data loss allowed"
+              variant="info"
+              testId={AVAILABILITY_IMPACT_WIDGET_IDS.label('rpo')}
+            />
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light dark:border-info-dark">
-              <div className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
-                Service Level Agreement
-              </div>
-              <div className="text-lg font-bold" aria-label={`Service level agreement: ${slaMetrics.sla}`}>
-                {slaMetrics.sla}
-              </div>
-              <div className="text-xs text-blue-600 dark:text-blue-400">
-                Support coverage period
-              </div>
-            </div>
+            <MetricCard
+              label="Service Level Agreement"
+              value={slaMetrics.sla}
+              icon="📋"
+              description="Support coverage period"
+              variant="info"
+              testId={AVAILABILITY_IMPACT_WIDGET_IDS.label('sla')}
+            />
           </div>
-        </section>
+        </WidgetSection>
       </div>
     </WidgetContainer>
     </WidgetErrorBoundary>
