@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import ImpactWidget from "./ImpactWidget";
 import type { CIAComponent, SecurityLevel } from "../../../types/cia";
 
