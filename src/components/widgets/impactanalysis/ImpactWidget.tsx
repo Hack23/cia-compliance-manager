@@ -5,6 +5,7 @@ import {
   AVAILABILITY_IMPACT_WIDGET_IDS,
   INTEGRITY_IMPACT_TEST_IDS,
   INTEGRITY_IMPACT_WIDGET_IDS,
+  CONFIDENTIALITY_IMPACT_TEST_IDS,
   CONFIDENTIALITY_IMPACT_WIDGET_IDS,
 } from "../../../constants/testIds";
 import { 
@@ -116,7 +117,7 @@ const getTestIds = (component: CIAComponent) => {
       };
     case "confidentiality":
       return {
-        prefix: "widget-confidentiality-impact",
+        prefix: CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_PREFIX,
         widgetIds: CONFIDENTIALITY_IMPACT_WIDGET_IDS,
       };
   }
@@ -407,7 +408,11 @@ const ImpactWidget: React.FC<ImpactWidgetProps> = ({
             </>
           )}
 
-          {/* Recommendations (visible only for integrity when showExtendedDetails is true) */}
+          {/* 
+            Recommendations (visible only for integrity when showExtendedDetails is true)
+            Note: Only IntegrityImpactWidget supports recommendations in the original implementation.
+            This maintains backward compatibility with the existing API.
+          */}
           {showExtendedDetails && component === "integrity" && recommendations.length > 0 && (
             <div className="mt-md">
               <h3 className="text-lg font-medium mb-sm">Recommendations</h3>
