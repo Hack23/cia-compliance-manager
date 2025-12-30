@@ -73,7 +73,7 @@ const getResourceRelevanceScore = (resource: SecurityResource): number => {
  *   confidentialityLevel="Moderate"
  *   maxItems={12}
  *   showTopResourcesOnly={true}
- *   className="border-2 border-gray-200 p-4"
+ *   className="border-2 border-gray-200 p-md"
  *   testId="main-security-resources"
  * />
  * ```
@@ -324,7 +324,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       >
         {/* Widget introduction */}
         <section 
-          className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+          className="mb-md p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
           aria-labelledby="resources-intro-heading"
         >
           <h2 id="resources-intro-heading" className="sr-only">Security Resources Introduction</h2>
@@ -335,16 +335,16 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
           </p>
         </section>
 
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-md">
           {/* Filters and search - left column on larger screens */}
           <aside 
             className="md:w-1/4"
             aria-label="Resource filters and search"
           >
-            <div className="mb-4">
+            <div className="mb-md">
               <label
                 htmlFor="resource-search"
-                className="block text-sm font-medium mb-1"
+                className="block text-sm font-medium mb-xs"
               >
                 Search Resources
               </label>
@@ -370,10 +370,10 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
             {resourceCategories.length > 0 && (
               <nav 
-                className="mb-4"
+                className="mb-md"
                 aria-label="Resource categories"
               >
-                <h3 className="text-sm font-medium mb-2">Categories</h3>
+                <h3 className="text-sm font-medium mb-sm">Categories</h3>
                 <ul 
                   className="space-y-2"
                   role="list"
@@ -414,28 +414,28 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
             )}
 
             {/* Implementation Guidelines */}
-            <section className="mb-4" aria-labelledby="implementation-guidelines-heading">
-              <h3 id="implementation-guidelines-heading" className="text-sm font-medium mb-2">
+            <section className="mb-md" aria-labelledby="implementation-guidelines-heading">
+              <h3 id="implementation-guidelines-heading" className="text-sm font-medium mb-sm">
                 Implementation Guidelines
               </h3>
-              <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg text-sm">
-                <p className="mb-2 font-medium">Selected Security Levels:</p>
-                <dl className="mb-2 text-xs">
+              <div className="bg-gray-50 dark:bg-gray-800 p-md rounded-lg text-sm">
+                <p className="mb-sm font-medium">Selected Security Levels:</p>
+                <dl className="mb-sm text-xs">
                   <div className="flex justify-between">
                     <dt>Confidentiality:</dt>
                     <dd className="font-medium">{confidentialityLevel}</dd>
                   </div>
-                  <div className="flex justify-between mb-1">
+                  <div className="flex justify-between mb-xs">
                     <dt>Integrity:</dt>
                     <dd className="font-medium">{integrityLevel}</dd>
                   </div>
-                  <div className="flex justify-between mb-1">
+                  <div className="flex justify-between mb-xs">
                     <dt>Availability:</dt>
                     <dd className="font-medium">{availabilityLevel}</dd>
                   </div>
                 </dl>
 
-                <p className="mb-2 text-xs text-gray-600 dark:text-gray-400">
+                <p className="mb-sm text-xs text-gray-600 dark:text-gray-400">
                   Focus on implementing controls that satisfy all three
                   components for a balanced security posture.
                 </p>
@@ -446,8 +446,8 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
           {/* Resources grid - right column on larger screens */}
           <div className="md:w-3/4">
             {/* Resources list */}
-            <div className="mb-4">
-              <div className="flex justify-between items-center mb-2">
+            <div className="mb-md">
+              <div className="flex justify-between items-center mb-sm">
                 <h3 className="text-lg font-medium">Security Resources</h3>
                 <div className="text-sm text-gray-600 dark:text-gray-400">
                   {filteredResources.length}{" "}
@@ -459,10 +459,10 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
               {/* Empty state */}
               {filteredResources.length === 0 && (
                 <div
-                  className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center text-gray-500 dark:text-gray-400"
+                  className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg text-center text-gray-500 dark:text-gray-400"
                   data-testid={SECURITY_RESOURCES_WIDGET_IDS.label('no-resources')}
                 >
-                  <p className="mb-2">No resources found.</p>
+                  <p className="mb-sm">No resources found.</p>
                   <p className="text-sm">
                     {searchTerm
                       ? "Try adjusting your search terms or clearing filters."
@@ -473,7 +473,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
               {/* Resources grid */}
               {filteredResources.length > 0 && (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
                   {currentResources.map((resource, index) => (
                     <ResourceCard
                       key={`${resource.url || ""}-${index}`}
@@ -486,7 +486,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
               {/* Pagination controls */}
               {totalPages > 1 && (
-                <div className="mt-4 flex justify-center">
+                <div className="mt-md flex justify-center">
                   <nav
                     className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
                     aria-label="Pagination"
@@ -535,13 +535,13 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
             </div>
 
             {/* Implementation Tips Section */}
-            <div className="mt-6">
-              <h3 className="text-lg font-medium mb-3">Implementation Tips</h3>
+            <div className="mt-lg">
+              <h3 className="text-lg font-medium mb-md">Implementation Tips</h3>
 
               <div className="space-y-4">
                 {/* General implementation tips */}
                 <div className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md">
-                  <h4 className="text-md font-medium mb-2">
+                  <h4 className="text-md font-medium mb-sm">
                     Getting Started with Implementation
                   </h4>
                   <ol className="list-decimal list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400 pl-2">
@@ -567,16 +567,16 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
                 {/* Component-specific tips */}
                 {implementationGuides.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
                     {/* Confidentiality Implementation */}
                     {implementationGuides[2] && (
                       <div className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light dark:border-primary-dark">
-                        <h4 className="text-md font-medium mb-2 text-primary-dark dark:text-primary-light flex items-center">
-                          <span className="mr-2">🔒</span>Confidentiality (
+                        <h4 className="text-md font-medium mb-sm text-primary-dark dark:text-primary-light flex items-center">
+                          <span className="mr-sm">🔒</span>Confidentiality (
                           {confidentialityLevel})
                         </h4>
                         <div className="text-sm text-gray-600 dark:text-gray-400">
-                          <p className="mb-2">
+                          <p className="mb-sm">
                             {implementationGuides[2].description ||
                               "Focus on data protection and access controls."}
                           </p>
@@ -597,12 +597,12 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                     {/* Integrity Implementation */}
                     {implementationGuides[1] && (
                       <div className="p-md bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light dark:border-success-dark">
-                        <h4 className="text-md font-medium mb-2 text-green-700 dark:text-green-300 flex items-center">
-                          <span className="mr-2">✓</span>Integrity (
+                        <h4 className="text-md font-medium mb-sm text-green-700 dark:text-green-300 flex items-center">
+                          <span className="mr-sm">✓</span>Integrity (
                           {integrityLevel})
                         </h4>
                         <div className="text-sm text-gray-600 dark:text-gray-400">
-                          <p className="mb-2">
+                          <p className="mb-sm">
                             {implementationGuides[1].description ||
                               "Focus on data accuracy and validation mechanisms."}
                           </p>
@@ -623,12 +623,12 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                     {/* Availability Implementation */}
                     {implementationGuides[0] && (
                       <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light dark:border-info-dark">
-                        <h4 className="text-md font-medium mb-2 text-blue-700 dark:text-blue-300 flex items-center">
-                          <span className="mr-2">⏱️</span>Availability (
+                        <h4 className="text-md font-medium mb-sm text-blue-700 dark:text-blue-300 flex items-center">
+                          <span className="mr-sm">⏱️</span>Availability (
                           {availabilityLevel})
                         </h4>
                         <div className="text-sm text-gray-600 dark:text-gray-400">
-                          <p className="mb-2">
+                          <p className="mb-sm">
                             {implementationGuides[0].description ||
                               "Focus on systems uptime and recovery capabilities."}
                           </p>
@@ -649,9 +649,9 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                 )}
 
                 {/* Common Implementation Challenges */}
-                <div className="p-3 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg border border-yellow-100 dark:border-yellow-800">
-                  <h4 className="text-md font-medium mb-2 text-yellow-700 dark:text-yellow-300 flex items-center">
-                    <span className="mr-2">⚠️</span>Common Implementation
+                <div className="p-md bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg border border-yellow-100 dark:border-yellow-800">
+                  <h4 className="text-md font-medium mb-sm text-yellow-700 dark:text-yellow-300 flex items-center">
+                    <span className="mr-sm">⚠️</span>Common Implementation
                     Challenges
                   </h4>
                   <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 pl-2">

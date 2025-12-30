@@ -32,7 +32,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
   return (
     <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-compliance')} className="space-y-4">
       {/* Compliance introduction */}
-      <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4">
+      <div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-md">
         <p className="text-sm">
           This section summarizes your compliance status based on selected
           security levels, highlighting alignment with regulatory frameworks and
@@ -41,18 +41,18 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
       </div>
 
       {/* Compliance Status */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
+        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
           Compliance Status Overview
         </h3>
 
         {!complianceStatus ? (
-          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="flex justify-between items-center mb-2">
+          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="flex justify-between items-center mb-sm">
               <span className="font-medium">Compliance Score</span>
-              <span className="text-xl font-bold">{securityScore}%</span>
+              <span className="text-subheading font-bold">{securityScore}%</span>
             </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5 mb-2">
+            <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5 mb-sm">
               <div
                 className={`h-2.5 rounded-full ${
                   securityScore >= 80
@@ -69,14 +69,14 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
             </p>
           </div>
         ) : (
-          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="flex justify-between items-center mb-2">
+          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="flex justify-between items-center mb-sm">
               <span className="font-medium">Compliance Score</span>
-              <span className="text-xl font-bold">
+              <span className="text-subheading font-bold">
                 {complianceStatus.complianceScore}%
               </span>
             </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5 mb-2">
+            <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5 mb-sm">
               <div
                 className={`h-2.5 rounded-full ${
                   (complianceStatus.complianceScore || 0) >= 80
@@ -99,8 +99,8 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
       </div>
 
       {/* Framework Status */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
+        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
           Framework Compliance Status
         </h3>
 
@@ -109,8 +109,8 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
             Detailed compliance information is not available.
           </p>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
+            <div className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
               <h4 className="font-medium text-green-700 dark:text-green-300 flex items-center justify-between">
                 <span>Compliant</span>
                 <span className="text-sm bg-green-100 dark:bg-green-800 px-2 py-0.5 rounded-full">
@@ -118,7 +118,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
                 </span>
               </h4>
               {complianceStatus.compliantFrameworks.length > 0 ? (
-                <ul className="mt-2 space-y-1 list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
+                <ul className="mt-sm space-y-1 list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
                   {complianceStatus.compliantFrameworks.map(
                     (framework, idx) => (
                       <li key={`compliant-${idx}`}>{framework}</li>
@@ -126,13 +126,13 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
                   )}
                 </ul>
               ) : (
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 italic">
+                <p className="mt-sm text-sm text-gray-600 dark:text-gray-400 italic">
                   No fully compliant frameworks
                 </p>
               )}
             </div>
 
-            <div className="p-3 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg">
+            <div className="p-md bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg">
               <h4 className="font-medium text-yellow-700 dark:text-yellow-300 flex items-center justify-between">
                 <span>Partially Compliant</span>
                 <span className="text-sm bg-yellow-100 dark:bg-yellow-800 px-2 py-0.5 rounded-full">
@@ -140,7 +140,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
                 </span>
               </h4>
               {complianceStatus.partiallyCompliantFrameworks.length > 0 ? (
-                <ul className="mt-2 space-y-1 list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
+                <ul className="mt-sm space-y-1 list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
                   {complianceStatus.partiallyCompliantFrameworks.map(
                     (framework, idx) => (
                       <li key={`partial-${idx}`}>{framework}</li>
@@ -148,7 +148,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
                   )}
                 </ul>
               ) : (
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 italic">
+                <p className="mt-sm text-sm text-gray-600 dark:text-gray-400 italic">
                   No partially compliant frameworks
                 </p>
               )}
@@ -158,21 +158,21 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
       </div>
 
       {/* Component Requirements */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
+        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
           Component Compliance Requirements
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
           {/* Confidentiality compliance */}
-          <div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
-            <h5 className="text-sm font-medium mb-1 text-purple-700 dark:text-purple-300">
+          <div className="p-md bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
+            <h5 className="text-sm font-medium mb-xs text-purple-700 dark:text-purple-300">
               Confidentiality
             </h5>
             <p className="text-xs">
               <span className="font-medium">Level:</span> {confidentialityLevel}
             </p>
-            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-xs">
               {getComplianceRequirementText(
                 "confidentiality",
                 confidentialityLevel
@@ -181,27 +181,27 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
           </div>
 
           {/* Integrity compliance */}
-          <div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded">
-            <h5 className="text-sm font-medium mb-1 text-green-700 dark:text-green-300">
+          <div className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded">
+            <h5 className="text-sm font-medium mb-xs text-green-700 dark:text-green-300">
               Integrity
             </h5>
             <p className="text-xs">
               <span className="font-medium">Level:</span> {integrityLevel}
             </p>
-            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-xs">
               {getComplianceRequirementText("integrity", integrityLevel)}
             </p>
           </div>
 
           {/* Availability compliance */}
-          <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded">
-            <h5 className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300">
+          <div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded">
+            <h5 className="text-sm font-medium mb-xs text-blue-700 dark:text-blue-300">
               Availability
             </h5>
             <p className="text-xs">
               <span className="font-medium">Level:</span> {availabilityLevel}
             </p>
-            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-xs">
               {getComplianceRequirementText("availability", availabilityLevel)}
             </p>
           </div>

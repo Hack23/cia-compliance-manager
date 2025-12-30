@@ -156,8 +156,8 @@ const IntegrityImpactWidget: React.FC<IntegrityImpactWidgetProps> = ({
 
         {/* Recommendations (visible only when showExtendedDetails is true) */}
         {showExtendedDetails && recommendations.length > 0 && (
-          <div className="mt-4">
-            <h3 className="text-lg font-medium mb-2">Recommendations</h3>
+          <div className="mt-md">
+            <h3 className="text-lg font-medium mb-sm">Recommendations</h3>
             <ul className="list-disc pl-5 space-y-1">
               {recommendations.map((rec, index) => (
                 <li

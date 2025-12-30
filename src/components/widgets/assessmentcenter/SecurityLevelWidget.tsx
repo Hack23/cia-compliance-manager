@@ -285,7 +285,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 <select
                   id="confidentiality-select"
-                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-purple-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
+                  className="w-full p-sm border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-purple-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
                   value={confidentialityLevel}
                   onChange={handleConfidentialityChange}
                   data-testid={CIA_TEST_IDS.CONFIDENTIALITY_SELECT}
@@ -298,7 +298,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </select>
 
                 <div
-                  className="mt-2 text-xs text-gray-600 dark:text-gray-400"
+                  className="mt-sm text-xs text-gray-600 dark:text-gray-400"
                   data-testid={SECURITY_LEVEL_WIDGET_IDS.label('confidentiality-summary')}
                 >
                   {confidentialityLevel}:{" "}
@@ -306,7 +306,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </div>
 
                 <button
-                  className="mt-2 px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+                  className="mt-sm px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
                   onClick={() => setActiveComponent("confidentiality")}
                   data-testid={SECURITY_LEVEL_WIDGET_IDS.button('confidentiality-details')}
                 >
@@ -315,7 +315,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 {lastChangedComponent === "confidentiality" && (
                   <div
-                    className="mt-2 text-xs text-green-600 dark:text-green-400 animate-pulse"
+                    className="mt-sm text-xs text-green-600 dark:text-green-400 animate-pulse"
                     data-testid={SECURITY_LEVEL_WIDGET_IDS.label('confidentiality-changed')}
                   >
                     ✓ Security level updated
@@ -325,15 +325,15 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
               {/* Integrity selector */}
               <div
-                className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
                 data-testid={SECURITY_LEVEL_WIDGET_IDS.section('integrity')}
               >
-                <div className="flex justify-between items-center mb-2">
+                <div className="flex justify-between items-center mb-sm">
                   <label
                     htmlFor="integrity-select"
                     className="text-sm font-medium flex items-center"
                   >
-                    <span className="text-green-500 dark:text-green-400 mr-2">
+                    <span className="text-green-500 dark:text-green-400 mr-sm">
                       {CIA_COMPONENT_ICONS.integrity}
                     </span>
                     Integrity
@@ -349,7 +349,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 <select
                   id="integrity-select"
-                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-green-400 focus:border-green-500 focus:ring-2 focus:ring-green-200"
+                  className="w-full p-sm border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-green-400 focus:border-green-500 focus:ring-2 focus:ring-green-200"
                   value={integrityLevel}
                   onChange={handleIntegrityChange}
                   data-testid={CIA_TEST_IDS.INTEGRITY_SELECT}
@@ -362,7 +362,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </select>
 
                 <div
-                  className="mt-2 text-xs text-gray-600 dark:text-gray-400"
+                  className="mt-sm text-xs text-gray-600 dark:text-gray-400"
                   data-testid={SECURITY_LEVEL_WIDGET_IDS.label('integrity-summary')}
                 >
                   {integrityLevel}:{" "}
@@ -370,7 +370,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </div>
 
                 <button
-                  className="mt-2 px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-green-600 text-white rounded hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600 transition-colors"
+                  className="mt-sm px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-green-600 text-white rounded hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600 transition-colors"
                   onClick={() => setActiveComponent("integrity")}
                   data-testid={SECURITY_LEVEL_WIDGET_IDS.button('integrity-details')}
                 >
@@ -379,7 +379,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 {lastChangedComponent === "integrity" && (
                   <div
-                    className="mt-2 text-xs text-green-600 dark:text-green-400 animate-pulse"
+                    className="mt-sm text-xs text-green-600 dark:text-green-400 animate-pulse"
                     data-testid={SECURITY_LEVEL_WIDGET_IDS.label('integrity-changed')}
                   >
                     ✓ Security level updated
@@ -389,15 +389,15 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
               {/* Availability selector */}
               <div
-                className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
                 data-testid={SECURITY_LEVEL_WIDGET_IDS.section('availability')}
               >
-                <div className="flex justify-between items-center mb-2">
+                <div className="flex justify-between items-center mb-sm">
                   <label
                     htmlFor="availability-select"
                     className="text-sm font-medium flex items-center"
                   >
-                    <span className="text-blue-500 dark:text-blue-400 mr-2">
+                    <span className="text-blue-500 dark:text-blue-400 mr-sm">
                       {CIA_COMPONENT_ICONS.availability}
                     </span>
                     Availability
@@ -413,7 +413,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 <select
                   id="availability-select"
-                  className="w-full p-2 border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-blue-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                  className="w-full p-sm border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-blue-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                   value={availabilityLevel}
                   onChange={handleAvailabilityChange}
                   data-testid={CIA_TEST_IDS.AVAILABILITY_SELECT}
@@ -426,7 +426,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </select>
 
                 <div
-                  className="mt-2 text-xs text-gray-600 dark:text-gray-400"
+                  className="mt-sm text-xs text-gray-600 dark:text-gray-400"
                   data-testid={SECURITY_LEVEL_WIDGET_IDS.label('availability-summary')}
                 >
                   {availabilityLevel}:{" "}
@@ -434,7 +434,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </div>
 
                 <button
-                  className="mt-2 px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+                  className="mt-sm px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
                   onClick={() => setActiveComponent("availability")}
                   data-testid={SECURITY_LEVEL_WIDGET_IDS.button('availability-details')}
                 >
@@ -443,7 +443,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 {lastChangedComponent === "availability" && (
                   <div
-                    className="mt-2 text-xs text-green-600 dark:text-green-400 animate-pulse"
+                    className="mt-sm text-xs text-green-600 dark:text-green-400 animate-pulse"
                     data-testid={SECURITY_LEVEL_WIDGET_IDS.label('availability-changed')}
                   >
                     ✓ Security level updated
@@ -455,14 +455,14 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
           {/* Security level details */}
           <div>
-            <h3 className="text-base sm:text-lg font-medium mb-4">
+            <h3 className="text-base sm:text-lg font-medium mb-md">
               {activeComponent.charAt(0).toUpperCase() +
                 activeComponent.slice(1)}{" "}
               Details
             </h3>
 
             <div
-              className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 h-full"
+              className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 h-full"
               data-testid={`${activeComponent}-details-content`}
             >
               {activeDetails ? (
@@ -483,7 +483,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                   <div className="space-y-3">
                     {/* Description */}
                     <div>
-                      <h5 className="text-sm font-medium mb-1">Description</h5>
+                      <h5 className="text-sm font-medium mb-xs">Description</h5>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
                         {activeDetails.description ||
                           "No description available"}
@@ -492,7 +492,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                     {/* Technical implementation */}
                     <div>
-                      <h5 className="text-sm font-medium mb-1">
+                      <h5 className="text-sm font-medium mb-xs">
                         Technical Implementation
                       </h5>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -503,7 +503,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                     {/* Business impact */}
                     <div>
-                      <h5 className="text-sm font-medium mb-1">
+                      <h5 className="text-sm font-medium mb-xs">
                         Business Impact
                       </h5>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -514,17 +514,17 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                     {/* Component-specific details */}
                     {activeComponent === "availability" && (
-                      <div className="mt-4 grid grid-cols-2 gap-3">
-                        <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-2 rounded">
-                          <div className="text-xs font-medium mb-1 text-blue-700 dark:text-blue-300">
+                      <div className="mt-md grid grid-cols-2 gap-md">
+                        <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-sm rounded">
+                          <div className="text-xs font-medium mb-xs text-blue-700 dark:text-blue-300">
                             Uptime
                           </div>
                           <div className="text-sm">
                             {activeDetails.uptime || "N/A"}
                           </div>
                         </div>
-                        <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-2 rounded">
-                          <div className="text-xs font-medium mb-1 text-blue-700 dark:text-blue-300">
+                        <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-sm rounded">
+                          <div className="text-xs font-medium mb-xs text-blue-700 dark:text-blue-300">
                             Recovery Time
                           </div>
                           <div className="text-sm">
@@ -536,8 +536,8 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                     {activeComponent === "integrity" &&
                       activeDetails.validationMethod && (
-                        <div className="mt-4 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 p-2 rounded">
-                          <div className="text-xs font-medium mb-1 text-green-700 dark:text-green-300">
+                        <div className="mt-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 p-sm rounded">
+                          <div className="text-xs font-medium mb-xs text-green-700 dark:text-green-300">
                             Validation Method
                           </div>
                           <div className="text-sm">
@@ -548,8 +548,8 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                     {activeComponent === "confidentiality" &&
                       activeDetails.protectionMethod && (
-                        <div className="mt-4 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 p-2 rounded">
-                          <div className="text-xs font-medium mb-1 text-purple-700 dark:text-purple-300">
+                        <div className="mt-md bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 p-sm rounded">
+                          <div className="text-xs font-medium mb-xs text-purple-700 dark:text-purple-300">
                             Protection Method
                           </div>
                           <div className="text-sm">
@@ -569,16 +569,16 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         </div>
 
         {/* Security level overview */}
-        <div className="mt-6 bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
-          <h3 className="text-md font-medium mb-2">Security Level Overview</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+        <div className="mt-lg bg-gray-100 dark:bg-gray-800 p-md rounded-lg">
+          <h3 className="text-md font-medium mb-sm">Security Level Overview</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-md">
             Higher security levels provide stronger protection but typically
             require more resources to implement and maintain. Consider your
             organization's needs and constraints when selecting security levels.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 text-xs">
-            <div className="p-2 bg-red-50 dark:bg-red-900 dark:bg-opacity-20 rounded">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-sm text-xs">
+            <div className="p-sm bg-red-50 dark:bg-red-900 dark:bg-opacity-20 rounded">
               <div className="font-medium text-red-700 dark:text-red-300">
                 None
               </div>
@@ -586,7 +586,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 Minimal to no security controls
               </div>
             </div>
-            <div className="p-2 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded">
+            <div className="p-sm bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded">
               <div className="font-medium text-yellow-700 dark:text-yellow-300">
                 Low
               </div>
@@ -594,7 +594,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 Basic security controls
               </div>
             </div>
-            <div className="p-2 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded">
+            <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded">
               <div className="font-medium text-blue-700 dark:text-blue-300">
                 Moderate
               </div>
@@ -602,7 +602,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 Standard security controls
               </div>
             </div>
-            <div className="p-2 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded">
+            <div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded">
               <div className="font-medium text-green-700 dark:text-green-300">
                 High
               </div>
@@ -610,7 +610,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 Advanced security controls
               </div>
             </div>
-            <div className="p-2 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
+            <div className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
               <div className="font-medium text-purple-700 dark:text-purple-300">
                 Very High
               </div>

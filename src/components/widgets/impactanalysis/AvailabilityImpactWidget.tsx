@@ -115,7 +115,7 @@ const AvailabilityImpactWidget: React.FC<AvailabilityImpactWidgetProps> = ({
             className="mb-md"
             aria-labelledby="availability-business-impact-heading"
           >
-            <h3 id="availability-business-impact-heading" className="text-lg font-medium mb-2">
+            <h3 id="availability-business-impact-heading" className="text-lg font-medium mb-sm">
               Business Impact
             </h3>
             <BusinessImpactSection

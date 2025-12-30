@@ -33,7 +33,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
   return (
     <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-business')} className="space-y-4">
       {/* Business Value content */}
-      <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4">
+      <div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-md">
         <p className="text-sm">
           This section summarizes the business value and financial impact of
           your selected security levels, helping justify security investments to
@@ -42,34 +42,34 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
       </div>
 
       {/* Business Impact Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
+        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
           Business Value Summary
         </h3>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
           {/* Business Maturity */}
-          <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+          <div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
             <h4 className="font-medium text-blue-700 dark:text-blue-300">
               Business Maturity Level
             </h4>
-            <div className="text-xl font-bold text-blue-600 dark:text-blue-400 mt-2">
+            <div className="text-subheading font-bold text-blue-600 dark:text-blue-400 mt-sm">
               {businessMaturityLevel}
             </div>
-            <p className="text-sm text-blue-600 dark:text-blue-400 mt-1">
+            <p className="text-sm text-blue-600 dark:text-blue-400 mt-xs">
               {businessMaturityDescription}
             </p>
           </div>
 
           {/* ROI Estimation */}
-          <div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
+          <div className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
             <h4 className="font-medium text-green-700 dark:text-green-300">
               Estimated ROI
             </h4>
-            <div className="text-xl font-bold text-green-600 dark:text-green-400 mt-2">
+            <div className="text-subheading font-bold text-green-600 dark:text-green-400 mt-sm">
               {roiEstimate}
             </div>
-            <p className="text-sm text-green-600 dark:text-green-400 mt-1">
+            <p className="text-sm text-green-600 dark:text-green-400 mt-xs">
               {securityScore >= 80
                 ? "Strong return from security investments"
                 : securityScore >= 60
@@ -83,16 +83,16 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
       </div>
 
       {/* Cost Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
+        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
           Cost Summary
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
           {/* Implementation Cost */}
-          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-1">Implementation Cost</div>
-            <div className="text-xl font-bold text-blue-600 dark:text-blue-400">
+          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="text-sm font-medium mb-xs">Implementation Cost</div>
+            <div className="text-subheading font-bold text-blue-600 dark:text-blue-400">
               {formatCurrency(costDetails.totalCapex)}
             </div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
@@ -101,9 +101,9 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
           </div>
 
           {/* Operational Cost */}
-          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-1">Operational Cost</div>
-            <div className="text-xl font-bold text-green-600 dark:text-green-400">
+          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="text-sm font-medium mb-xs">Operational Cost</div>
+            <div className="text-subheading font-bold text-green-600 dark:text-green-400">
               {formatCurrency(costDetails.totalOpex)}
             </div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
@@ -112,11 +112,11 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
           </div>
 
           {/* Total Cost */}
-          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-1">
+          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="text-sm font-medium mb-xs">
               Total First-Year Cost
             </div>
-            <div className="text-xl font-bold text-purple-600 dark:text-purple-400">
+            <div className="text-subheading font-bold text-purple-600 dark:text-purple-400">
               {formatCurrency(costDetails.totalCost)}
             </div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
@@ -127,14 +127,14 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
       </div>
 
       {/* Business Enablement */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
+        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
           Business Enablement
         </h3>
 
         <div className="space-y-3">
-          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <h4 className="text-sm font-medium mb-2">Business Capabilities</h4>
+          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <h4 className="text-sm font-medium mb-sm">Business Capabilities</h4>
             <ul className="list-disc pl-5 space-y-1 text-sm">
               {securityScore >= 80 ? (
                 <>

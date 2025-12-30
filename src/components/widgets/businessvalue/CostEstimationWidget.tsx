@@ -275,11 +275,11 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         <div className="mb-lg">
           <h3 className="text-heading font-medium mb-md">Cost Breakdown</h3>
           <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
-            <div className="flex justify-between items-center mb-1">
+            <div className="flex justify-between items-center mb-xs">
               <div className="text-sm font-medium">CAPEX</div>
               <div className="text-sm font-medium">OPEX</div>
             </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-2">
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-sm">
               <div
                 className="h-3 bg-blue-500 rounded-l-full"
                 style={{ width: `${costRatio.capex}%` }}
@@ -297,17 +297,17 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         </div>
 
         {/* Implementation details grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-md mb-lg">
           {/* Implementation complexity */}
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <h4 className="text-md font-medium mb-3">
+          <div className="p-md bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+            <h4 className="text-md font-medium mb-md">
               Implementation Complexity
             </h4>
-            <div className="mb-3">
+            <div className="mb-md">
               <div className="text-lg font-bold text-primary-dark dark:text-primary-light">
                 {implementationComplexity}
               </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mt-2">
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mt-sm">
                 <div
                   className="h-2.5 bg-primary dark:bg-primary-light rounded-full"
                   style={{ width: `${complexityPercentage}%` }}
@@ -320,9 +320,9 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           </div>
 
           {/* Personnel requirements */}
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <h4 className="text-md font-medium mb-3">Personnel Requirements</h4>
-            <div className="grid grid-cols-1 gap-3">
+          <div className="p-md bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+            <h4 className="text-md font-medium mb-md">Personnel Requirements</h4>
+            <div className="grid grid-cols-1 gap-md">
               <div className="flex justify-between items-center">
                 <div className="text-sm text-gray-600 dark:text-gray-400">
                   Implementation Team
@@ -339,7 +339,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                   {fteRequirements.maintenance} FTE
                 </div>
               </div>
-              <div className="flex justify-between items-center pt-2 mt-2 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex justify-between items-center pt-2 mt-sm border-t border-gray-200 dark:border-gray-700">
                 <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
                   Annual Personnel Cost
                 </div>
@@ -352,16 +352,16 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         </div>
 
         {/* Component breakdown */}
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-3">
+        <div className="mb-lg">
+          <h3 className="text-lg font-medium mb-md">
             Cost by Security Component
           </h3>
-          <div className="grid grid-cols-1 gap-3">
+          <div className="grid grid-cols-1 gap-md">
             {/* Using SecurityLevelBadge component for consistency with other widgets */}
             <div className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md">
-              <div className="flex justify-between items-center mb-2">
+              <div className="flex justify-between items-center mb-sm">
                 <div className="font-medium text-primary-dark dark:text-primary-light flex items-center">
-                  <span className="mr-2">🔒</span>Confidentiality
+                  <span className="mr-sm">🔒</span>Confidentiality
                 </div>
                 <SecurityLevelBadge
                   category=""
@@ -381,16 +381,16 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                   {costBreakdown.confidentiality}% of total
                 </div>
               </div>
-              <div className="text-xs mt-2 text-gray-600 dark:text-gray-400 flex justify-between">
+              <div className="text-xs mt-sm text-gray-600 dark:text-gray-400 flex justify-between">
                 <span>CAPEX: {formatCurrency(confidentialityCost.capex)}</span>
                 <span>OPEX: {formatCurrency(confidentialityCost.opex)}</span>
               </div>
             </div>
 
-            <div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
-              <div className="flex justify-between items-center mb-2">
+            <div className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
+              <div className="flex justify-between items-center mb-sm">
                 <div className="font-medium text-green-800 dark:text-green-300 flex items-center">
-                  <span className="mr-2">✓</span>Integrity
+                  <span className="mr-sm">✓</span>Integrity
                 </div>
                 <SecurityLevelBadge
                   category=""
@@ -408,16 +408,16 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                   {costBreakdown.integrity}% of total
                 </div>
               </div>
-              <div className="text-xs mt-2 text-gray-600 dark:text-gray-400 flex justify-between">
+              <div className="text-xs mt-sm text-gray-600 dark:text-gray-400 flex justify-between">
                 <span>CAPEX: {formatCurrency(integrityCost.capex)}</span>
                 <span>OPEX: {formatCurrency(integrityCost.opex)}</span>
               </div>
             </div>
 
-            <div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
-              <div className="flex justify-between items-center mb-2">
+            <div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+              <div className="flex justify-between items-center mb-sm">
                 <div className="font-medium text-blue-800 dark:text-blue-300 flex items-center">
-                  <span className="mr-2">⏱️</span>Availability
+                  <span className="mr-sm">⏱️</span>Availability
                 </div>
                 <SecurityLevelBadge
                   category=""
@@ -437,7 +437,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                   {costBreakdown.availability}% of total
                 </div>
               </div>
-              <div className="text-xs mt-2 text-gray-600 dark:text-gray-400 flex justify-between">
+              <div className="text-xs mt-sm text-gray-600 dark:text-gray-400 flex justify-between">
                 <span>CAPEX: {formatCurrency(availabilityCost.capex)}</span>
                 <span>OPEX: {formatCurrency(availabilityCost.opex)}</span>
               </div>
@@ -446,16 +446,16 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         </div>
 
         {/* Expertise required */}
-        <div className="mb-6">
-          <h3 className="text-lg font-medium mb-3">Expertise Required</h3>
-          <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div className="mb-lg">
+          <h3 className="text-lg font-medium mb-md">Expertise Required</h3>
+          <div className="p-md bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-sm">
               {expertiseRequired.map((expertise: string, index: number) => (
                 <li
                   key={`expertise-${index}`}
                   className="flex items-center text-sm"
                 >
-                  <span className="mr-2 text-blue-500">•</span>
+                  <span className="mr-sm text-blue-500">•</span>
                   <span>{expertise}</span>
                 </li>
               ))}
@@ -464,9 +464,9 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         </div>
 
         {/* Cost notes */}
-        <div className="p-3 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg">
-          <h4 className="text-md font-medium mb-2 flex items-center">
-            <span className="mr-2">💡</span>Cost Notes
+        <div className="p-md bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg">
+          <h4 className="text-md font-medium mb-sm flex items-center">
+            <span className="mr-sm">💡</span>Cost Notes
           </h4>
           <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 pl-2">
             <li>

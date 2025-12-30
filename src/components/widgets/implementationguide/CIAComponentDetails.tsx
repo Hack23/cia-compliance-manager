@@ -120,8 +120,8 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
   };
 
   return (
-    <div className="mb-6" data-testid={TECHNICAL_DETAILS_WIDGET_IDS.section(component)}>
-      <div className="flex items-center mb-4" data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header()}>
+    <div className="mb-lg" data-testid={TECHNICAL_DETAILS_WIDGET_IDS.section(component)}>
+      <div className="flex items-center mb-md" data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header()}>
         <span className={`text-xl mr-2 ${theme.accentClass}`}>
           {theme.icon}
         </span>
@@ -137,7 +137,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-md mb-md">
         {/* Main technical details card */}
         <div
           className={`p-4 ${theme.bgClass} rounded-lg shadow-sm border ${theme.borderClass}`}
@@ -156,7 +156,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             )}
           </p>
 
-          <div className="mt-4">
+          <div className="mt-md">
             <h5 className={`text-sm font-medium ${theme.textClass} mb-2`}>
               Implementation Complexity
             </h5>
@@ -164,7 +164,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
               className="flex items-center"
               data-testid={TECHNICAL_DETAILS_WIDGET_IDS.label('development-effort')}
             >
-              <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
+              <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-sm">
                 <div
                   className={`h-2 ${theme.accentBgClass} rounded-full`}
                   style={{ width: `${complexity.value}%` }}
@@ -174,7 +174,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             </div>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-md">
             <h5 className={`text-sm font-medium ${theme.textClass} mb-2`}>
               Personnel Requirements
             </h5>
@@ -193,7 +193,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         {/* Implementation requirements card */}
         <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
           <h4
-            className="text-md font-medium mb-3"
+            className="text-md font-medium mb-md"
             data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header('implementation')}
           >
             Implementation Requirements
@@ -214,10 +214,10 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
         {/* Technologies card */}
         <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
-          <h4 className="text-md font-medium flex items-center mb-3">
+          <h4 className="text-md font-medium flex items-center mb-md">
             <span className={`mr-2 ${theme.accentClass}`}>💻</span>Technologies
           </h4>
           <p className={`text-sm ${theme.textClass}`}>
@@ -231,7 +231,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
 
         {/* Configurations card */}
         <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
-          <h4 className="text-md font-medium flex items-center mb-3">
+          <h4 className="text-md font-medium flex items-center mb-md">
             <span className={`mr-2 ${theme.accentClass}`}>⚙️</span>
             Configurations
           </h4>
@@ -246,13 +246,13 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
       </div>
 
       {/* Expertise Required card */}
-      <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-4">
-        <h4 className="text-md font-medium flex items-center mb-3">
+      <div className="p-md bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-md">
+        <h4 className="text-md font-medium flex items-center mb-md">
           <span className={`mr-2 ${theme.accentClass}`}>👨‍💻</span>Expertise
           Required
         </h4>
         <ul
-          className="grid grid-cols-1 lg:grid-cols-2 gap-2"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-sm"
           data-testid={TECHNICAL_DETAILS_WIDGET_IDS.list('required-expertise')}
         >
           {getExpertiseRequired(component, level).map((expertise, index) => (

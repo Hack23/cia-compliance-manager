@@ -122,7 +122,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         </section>
 
         {/* Tab Navigation */}
-        <div className="flex border-b border-gray-200 dark:border-gray-700 mb-4">
+        <div className="flex border-b border-gray-200 dark:border-gray-700 mb-md">
           <div
             ref={tabListRef}
             role={ARIA_ROLES.TABLIST}
@@ -157,7 +157,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                   {...getTabAriaProps(tabId, isSelected, panelId)}
                   aria-describedby="tech-tab-keyboard-instructions"
                 >
-                  <span className="mr-1" aria-hidden="true">{tab.icon}</span> {tab.label}
+                  <span className="mr-xs" aria-hidden="true">{tab.icon}</span> {tab.label}
                 </button>
               );
             })}
@@ -237,34 +237,34 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         </div>
 
         {/* Implementation considerations */}
-        <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-          <h3 className="text-lg font-medium mb-3 flex items-center">
-            <span className="mr-2">💡</span>Implementation Notes
+        <div className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+          <h3 className="text-lg font-medium mb-md flex items-center">
+            <span className="mr-sm">💡</span>Implementation Notes
           </h3>
           <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
             <li className="flex items-start">
-              <span className="mr-2 text-blue-500">•</span>
+              <span className="mr-sm text-blue-500">•</span>
               <span>
                 Implement these technical controls in a layered approach,
                 starting with foundational controls.
               </span>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 text-blue-500">•</span>
+              <span className="mr-sm text-blue-500">•</span>
               <span>
                 Regular testing and validation are required to ensure controls
                 are functioning as intended.
               </span>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 text-blue-500">•</span>
+              <span className="mr-sm text-blue-500">•</span>
               <span>
                 Consider integrating with existing security infrastructure to
                 maximize effectiveness.
               </span>
             </li>
             <li className="flex items-start">
-              <span className="mr-2 text-blue-500">•</span>
+              <span className="mr-sm text-blue-500">•</span>
               <span>
                 Document all implementation details and maintain up-to-date
                 configuration records.
