@@ -163,9 +163,7 @@ interface ConfidentialityImpactWidgetProps extends BaseWidgetProps {
 
 #### `TechnicalDetailsWidgetProps`
 ```typescript
-interface TechnicalDetailsWidgetProps extends AllCIAComponentsProps {
-  showCodeExamples?: boolean;
-}
+export type TechnicalDetailsWidgetProps = AllCIAComponentsProps;
 ```
 
 #### `SecurityResourcesWidgetProps`
