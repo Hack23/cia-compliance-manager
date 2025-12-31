@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.3**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.4**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: SecurityResourcesWidgetProps
 
-Defined in: [types/widget-props.ts:774](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/widget-props.ts#L774)
+Defined in: [types/widget-props.ts:734](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/widget-props.ts#L734)
 
 Props for SecurityResourcesWidget component
 
@@ -20,7 +20,8 @@ on current security configuration.
   availabilityLevel="High"
   integrityLevel="Very High"
   confidentialityLevel="Moderate"
-  category="frameworks"
+  maxItems={10}
+  showTopResourcesOnly
 />
 ```
 
@@ -34,7 +35,7 @@ on current security configuration.
 
 > **availabilityLevel**: [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:325](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/widget-props.ts#L325)
+Defined in: [types/widget-props.ts:325](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/widget-props.ts#L325)
 
 Security level for availability component
 
@@ -44,21 +45,11 @@ Security level for availability component
 
 ***
 
-### category?
-
-> `optional` **category**: `"frameworks"` \| `"tools"` \| `"all"` \| `"documentation"`
-
-Defined in: [types/widget-props.ts:778](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/widget-props.ts#L778)
-
-Filter resources by category
-
-***
-
 ### children?
 
 > `optional` **children**: `ReactNode`
 
-Defined in: [types/widget-props.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/widget-props.ts#L244)
+Defined in: [types/widget-props.ts:244](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/widget-props.ts#L244)
 
 Optional children elements
 
@@ -72,7 +63,7 @@ Optional children elements
 
 > `optional` **className**: `string`
 
-Defined in: [types/widget-props.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/widget-props.ts#L124)
+Defined in: [types/widget-props.ts:124](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/widget-props.ts#L124)
 
 Optional CSS class name for custom styling
 
@@ -95,7 +86,7 @@ Use Tailwind CSS classes or custom CSS classes.
 
 > **confidentialityLevel**: [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:335](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/widget-props.ts#L335)
+Defined in: [types/widget-props.ts:335](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/widget-props.ts#L335)
 
 Security level for confidentiality component
 
@@ -105,21 +96,11 @@ Security level for confidentiality component
 
 ***
 
-### filter?
-
-> `optional` **filter**: `string`
-
-Defined in: [types/widget-props.ts:783](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/widget-props.ts#L783)
-
-Optional filter string for resource filtering
-
-***
-
 ### integrityLevel
 
 > **integrityLevel**: [`SecurityLevel`](../cia/type-aliases/SecurityLevel.md)
 
-Defined in: [types/widget-props.ts:330](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/widget-props.ts#L330)
+Defined in: [types/widget-props.ts:330](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/widget-props.ts#L330)
 
 Security level for integrity component
 
@@ -133,9 +114,15 @@ Security level for integrity component
 
 > `optional` **maxItems**: `number`
 
-Defined in: [types/widget-props.ts:788](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/widget-props.ts#L788)
+Defined in: [types/widget-props.ts:739](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/widget-props.ts#L739)
 
 Maximum number of items to display
+
+#### Default
+
+```ts
+8
+```
 
 ***
 
@@ -143,7 +130,7 @@ Maximum number of items to display
 
 > `optional` **onError**: (`error`) => `void`
 
-Defined in: [types/widget-props.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/widget-props.ts#L250)
+Defined in: [types/widget-props.ts:250](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/widget-props.ts#L250)
 
 Optional callback when widget encounters an error
 
@@ -165,11 +152,27 @@ Error that occurred
 
 ***
 
+### showTopResourcesOnly?
+
+> `optional` **showTopResourcesOnly**: `boolean`
+
+Defined in: [types/widget-props.ts:745](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/widget-props.ts#L745)
+
+Optional flag to show only top/priority resources
+
+#### Default
+
+```ts
+false
+```
+
+***
+
 ### testId?
 
 > `optional` **testId**: `string`
 
-Defined in: [types/widget-props.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/widget-props.ts#L135)
+Defined in: [types/widget-props.ts:135](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/widget-props.ts#L135)
 
 Optional test ID for automated testing
 

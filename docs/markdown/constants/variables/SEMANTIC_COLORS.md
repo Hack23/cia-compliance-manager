@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.3**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.4**](../../README.md)
 
 ***
 
@@ -8,10 +8,13 @@
 
 > `const` **SEMANTIC\_COLORS**: `object`
 
-Defined in: [constants/designTokens.ts:73](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/constants/designTokens.ts#L73)
+Defined in: [constants/designTokens.ts:84](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/constants/designTokens.ts#L84)
 
 Semantic color system
 These colors should be used based on meaning, not appearance
+
+NOTE: Primary color uses purple to restore v1.0.6 appearance.
+This provides better visual distinction from info/blue colors.
 
 ## Type Declaration
 
@@ -37,19 +40,19 @@ Error states, critical issues, destructive actions
 
 > `readonly` **info**: `object`
 
-Informational states, neutral emphasis
+Informational states, neutral emphasis (blue colors)
 
 #### info.dark
 
-> `readonly` **dark**: `"#2980b9"` = `'#2980b9'`
+> `readonly` **dark**: `"#2563eb"` = `'#2563eb'`
 
 #### info.light
 
-> `readonly` **light**: `"#54a0ff"` = `'#54a0ff'`
+> `readonly` **light**: `"#60a5fa"` = `'#60a5fa'`
 
 #### info.main
 
-> `readonly` **main**: `"#3498db"` = `'#3498db'`
+> `readonly` **main**: `"#3b82f6"` = `'#3b82f6'`
 
 ### neutral
 
@@ -73,19 +76,19 @@ Neutral/secondary elements
 
 > `readonly` **primary**: `object`
 
-Primary brand color for main actions and emphasis
+Primary brand color for main actions and emphasis (purple for brand identity)
 
 #### primary.dark
 
-> `readonly` **dark**: `"#004d99"` = `'#004d99'`
+> `readonly` **dark**: `"#7e22ce"` = `'#7e22ce'`
 
 #### primary.light
 
-> `readonly` **light**: `"#2b8aff"` = `'#2b8aff'`
+> `readonly` **light**: `"#c084fc"` = `'#c084fc'`
 
 #### primary.main
 
-> `readonly` **main**: `"#0066cc"` = `'#0066cc'`
+> `readonly` **main**: `"#9333ea"` = `'#9333ea'`
 
 ### success
 

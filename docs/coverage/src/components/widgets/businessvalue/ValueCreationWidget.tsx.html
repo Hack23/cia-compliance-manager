@@ -658,56 +658,7 @@
 <a name='L593'></a><a href='#L593'>593</a>
 <a name='L594'></a><a href='#L594'>594</a>
 <a name='L595'></a><a href='#L595'>595</a>
-<a name='L596'></a><a href='#L596'>596</a>
-<a name='L597'></a><a href='#L597'>597</a>
-<a name='L598'></a><a href='#L598'>598</a>
-<a name='L599'></a><a href='#L599'>599</a>
-<a name='L600'></a><a href='#L600'>600</a>
-<a name='L601'></a><a href='#L601'>601</a>
-<a name='L602'></a><a href='#L602'>602</a>
-<a name='L603'></a><a href='#L603'>603</a>
-<a name='L604'></a><a href='#L604'>604</a>
-<a name='L605'></a><a href='#L605'>605</a>
-<a name='L606'></a><a href='#L606'>606</a>
-<a name='L607'></a><a href='#L607'>607</a>
-<a name='L608'></a><a href='#L608'>608</a>
-<a name='L609'></a><a href='#L609'>609</a>
-<a name='L610'></a><a href='#L610'>610</a>
-<a name='L611'></a><a href='#L611'>611</a>
-<a name='L612'></a><a href='#L612'>612</a>
-<a name='L613'></a><a href='#L613'>613</a>
-<a name='L614'></a><a href='#L614'>614</a>
-<a name='L615'></a><a href='#L615'>615</a>
-<a name='L616'></a><a href='#L616'>616</a>
-<a name='L617'></a><a href='#L617'>617</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L596'></a><a href='#L596'>596</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1079,6 +1030,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">54x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1300,43 +1258,15 @@ import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { VALUE_CREATION_WIDGET_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
+import { ValueCreationWidgetProps } from "../../../types/widget-props";
 import { calculateROIEstimate } from "../../../utils/businessValueUtils";
 import { calculateBusinessImpactLevel } from "../../../utils/riskUtils";
 import { hasMethod, isNullish } from "../../../utils/typeGuards";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
-&nbsp;
-/**
- * Props for ValueCreationWidget component
- */
-export interface ValueCreationWidgetProps {
-  /**
-   * Selected availability level
-   */
-  availabilityLevel: SecurityLevel;
-&nbsp;
-  /**
-   * Selected integrity level
-   */
-  integrityLevel: SecurityLevel;
-&nbsp;
-  /**
-   * Selected confidentiality level
-   */
-  confidentialityLevel: SecurityLevel;
-&nbsp;
-  /**
-   * Optional CSS class name
-   */
-  className?: string;
-&nbsp;
-  /**
-   * Optional test ID for testing
-   */
-  testId?: string;
-}
 &nbsp;
 /**
  * Interface for business value metric
@@ -1646,18 +1576,22 @@ const ValueCreationWidget: React.FC&lt;ValueCreationWidgetProps&gt; = ({
           className="mb-lg"
           aria-labelledby="value-profile-heading"
         &gt;
-          &lt;div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md mb-md"&gt;
-            &lt;p className="text-body" data-testid={VALUE_CREATION_WIDGET_IDS.label('summary')}&gt;
+          &lt;div className={cn(
+            WidgetClasses.section,
+            "p-md rounded-md",
+            "bg-info-light/10 dark:bg-info-dark/20"
+          )}&gt;
+            &lt;p className={WidgetClasses.body} data-testid={VALUE_CREATION_WIDGET_IDS.label('summary')}&gt;
               {getBusinessValueSummary()}
             &lt;/p&gt;
           &lt;/div&gt;
 &nbsp;
           &lt;div className="flex justify-between items-center mb-md"&gt;
-            &lt;h3 id="value-profile-heading" className="text-heading font-medium"&gt;
+            &lt;h3 id="value-profile-heading" className={WidgetClasses.heading}&gt;
               Overall Value Profile
             &lt;/h3&gt;
             &lt;div className="flex items-center"&gt;
-              &lt;span className="mr-sm text-body text-neutral dark:text-neutral-light"&gt;
+              &lt;span className={cn(WidgetClasses.body, "mr-sm")}&gt;
                 Security Level:
               &lt;/span&gt;
               &lt;SecurityLevelIndicator level={securityScoreAsLevel} size="md" /&gt;
@@ -1666,7 +1600,10 @@ const ValueCreationWidget: React.FC&lt;ValueCreationWidgetProps&gt; = ({
 &nbsp;
           {/* ROI estimate */}
           &lt;div 
-            className="p-md bg-success-light/10 dark:bg-success-dark/20 rounded-md mb-md"
+            className={cn(
+              WidgetClasses.card,
+              "bg-success-light/10 dark:bg-success-dark/20 mb-md shadow-none"
+            )}
             role="region"
             aria-labelledby="roi-heading"
           &gt;
@@ -1675,7 +1612,7 @@ const ValueCreationWidget: React.FC&lt;ValueCreationWidgetProps&gt; = ({
                 &lt;h4 id="roi-heading" className="font-medium text-success-dark dark:text-success-light"&gt;
                   Estimated Return on Investment
                 &lt;/h4&gt;
-                &lt;p className="text-body text-success dark:text-success-light mt-1"&gt;
+                &lt;p className="text-body text-success dark:text-success-light mt-xs"&gt;
                   {roiEstimate.description}
                 &lt;/p&gt;
               &lt;/div&gt;
@@ -1706,7 +1643,7 @@ const ValueCreationWidget: React.FC&lt;ValueCreationWidgetProps&gt; = ({
                   &lt;/span&gt;
                   &lt;h4 className="font-medium"&gt;{metric.category}&lt;/h4&gt;
                 &lt;/div&gt;
-                &lt;div className="text-heading font-bold text-info dark:text-info-light mb-1"&gt;
+                &lt;div className="text-heading font-bold text-info dark:text-info-light mb-xs"&gt;
                   {metric.value}
                 &lt;/div&gt;
                 &lt;p className="text-body text-neutral dark:text-neutral-light"&gt;
@@ -1739,7 +1676,7 @@ const ValueCreationWidget: React.FC&lt;ValueCreationWidgetProps&gt; = ({
               ).map((statement, index) =&gt; (
                 &lt;li
                   key={index}
-                  className="mb-1"
+                  className="mb-xs"
                   data-testid={`confidentiality-value-item-${index}`}
                 &gt;
                   {statement}
@@ -1750,11 +1687,11 @@ const ValueCreationWidget: React.FC&lt;ValueCreationWidgetProps&gt; = ({
 &nbsp;
           {/* Integrity value */}
           &lt;div
-            className="mb-4 p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
+            className="mb-md p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
             data-testid={VALUE_CREATION_WIDGET_IDS.section('integrity-value')}
           &gt;
-            &lt;div className="flex items-center mb-2"&gt;
-              &lt;span className="text-xl mr-2"&gt;✓&lt;/span&gt;
+            &lt;div className="flex items-center mb-sm"&gt;
+              &lt;span className="text-subheading mr-sm"&gt;✓&lt;/span&gt;
               &lt;h4 className="font-medium"&gt;
                 Integrity Value ({integrityLevel})
               &lt;/h4&gt;
@@ -1764,7 +1701,7 @@ const ValueCreationWidget: React.FC&lt;ValueCreationWidgetProps&gt; = ({
                 (statement, index) =&gt; (
                   &lt;li
                     key={index}
-                    className="mb-1"
+                    className="mb-xs"
                     data-testid={`integrity-value-item-${index}`}
                   &gt;
                     {statement}
@@ -1776,11 +1713,11 @@ const ValueCreationWidget: React.FC&lt;ValueCreationWidgetProps&gt; = ({
 &nbsp;
           {/* Availability value */}
           &lt;div
-            className="mb-4 p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+            className="mb-md p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
             data-testid={VALUE_CREATION_WIDGET_IDS.section('availability-value')}
           &gt;
-            &lt;div className="flex items-center mb-2"&gt;
-              &lt;span className="text-xl mr-2"&gt;⏱️&lt;/span&gt;
+            &lt;div className="flex items-center mb-sm"&gt;
+              &lt;span className="text-subheading mr-sm"&gt;⏱️&lt;/span&gt;
               &lt;h4 className="font-medium"&gt;
                 Availability Value ({availabilityLevel})
               &lt;/h4&gt;
@@ -1792,7 +1729,7 @@ const ValueCreationWidget: React.FC&lt;ValueCreationWidgetProps&gt; = ({
               ).map((statement, index) =&gt; (
                 &lt;li
                   key={index}
-                  className="mb-1"
+                  className="mb-xs"
                   data-testid={`availability-value-item-${index}`}
                 &gt;
                   {statement}
@@ -1804,33 +1741,33 @@ const ValueCreationWidget: React.FC&lt;ValueCreationWidgetProps&gt; = ({
 &nbsp;
         {/* Business case section */}
         &lt;div&gt;
-          &lt;h3 className="text-lg font-medium mb-3"&gt;
+          &lt;h3 className="text-lg font-medium mb-md"&gt;
             Security Investment Business Case
           &lt;/h3&gt;
-          &lt;div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"&gt;
-            &lt;p className="text-sm text-gray-600 dark:text-gray-400 mb-3"&gt;
+          &lt;div className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"&gt;
+            &lt;p className="text-sm text-gray-600 dark:text-gray-400 mb-md"&gt;
               Use these value statements to build your business case for
               security investments:
             &lt;/p&gt;
             &lt;div className="space-y-3"&gt;
-              &lt;div className="p-2 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded"&gt;
-                &lt;h5 className="text-sm font-medium mb-1"&gt;Executive Summary&lt;/h5&gt;
+              &lt;div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded"&gt;
+                &lt;h5 className="text-sm font-medium mb-xs"&gt;Executive Summary&lt;/h5&gt;
                 &lt;p className="text-sm"&gt;
                   Our {securityScore.toLowerCase()} security investment strategy
                   delivers business value through improved operational
                   reliability, data integrity, and information protection.
                 &lt;/p&gt;
               &lt;/div&gt;
-              &lt;div className="p-2 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded"&gt;
-                &lt;h5 className="text-sm font-medium mb-1"&gt;Financial Value&lt;/h5&gt;
+              &lt;div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded"&gt;
+                &lt;h5 className="text-sm font-medium mb-xs"&gt;Financial Value&lt;/h5&gt;
                 &lt;p className="text-sm"&gt;
                   With an estimated ROI of {roiEstimate.value}, our security
                   investments provide strong financial returns through risk
                   reduction, operational improvements, and business enablement.
                 &lt;/p&gt;
               &lt;/div&gt;
-              &lt;div className="p-2 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded"&gt;
-                &lt;h5 className="text-sm font-medium mb-1"&gt;Strategic Value&lt;/h5&gt;
+              &lt;div className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded"&gt;
+                &lt;h5 className="text-sm font-medium mb-xs"&gt;Strategic Value&lt;/h5&gt;
                 &lt;p className="text-sm"&gt;
                   Beyond direct financial returns, our security program creates
                   strategic value by enabling digital initiatives, protecting
@@ -1918,7 +1855,7 @@ export default ValueCreationWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-29T20:28:14.224Z
+                at 2025-12-31T21:46:27.662Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

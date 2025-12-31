@@ -1,0 +1,284 @@
+{
+  "stats": {
+    "suites": 4,
+    "tests": 7,
+    "passes": 7,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-12-31T21:42:08.147Z",
+    "end": "2025-12-31T21:42:18.219Z",
+    "duration": 10072,
+    "testsRegistered": 7,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "4e3a6453-e400-4cb1-ac3e-37e24f384577",
+      "title": "",
+      "fullFile": "cypress/e2e/performance/widget-performance.cy.ts",
+      "file": "cypress/e2e/performance/widget-performance.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "06a5badb-b388-4654-ac9b-dd9d66f9027a",
+          "title": "Widget Performance Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "877b8683-0466-4362-ba8f-429d2e70d1b0",
+              "title": "Page Load Performance",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should load initial page within acceptable time",
+                  "fullTitle": "Widget Performance Tests Page Load Performance should load initial page within acceptable time",
+                  "timedOut": null,
+                  "duration": 1344,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"⏱️ Measuring initial page load time\");\ncy.then(() => {\n    const startTime = Date.now();\n    cy.visit(\"/\");\n    cy.ensureAppLoaded();\n    cy.then(() => {\n        const loadTime = Date.now() - startTime;\n        cy.log(`✓ Page loaded in ${loadTime}ms`);\n        // Target: <3000ms (3 seconds)\n        expect(loadTime).to.be.lessThan(3000);\n    });\n});",
+                  "err": {},
+                  "uuid": "8b566c7d-b6d9-41f2-aa2e-095972887fb9",
+                  "parentUUID": "877b8683-0466-4362-ba8f-429d2e70d1b0",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "should render all critical widgets quickly",
+                  "fullTitle": "Widget Performance Tests Page Load Performance should render all critical widgets quickly",
+                  "timedOut": null,
+                  "duration": 409,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"⏱️ Measuring widget rendering time\");\ncy.then(() => {\n    const startTime = Date.now();\n    // Wait for widgets to render\n    cy.verifyMinimumWidgets(5);\n    cy.then(() => {\n        const renderTime = Date.now() - startTime;\n        cy.log(`✓ Widgets rendered in ${renderTime}ms`);\n        // Target: <1000ms for all widgets\n        expect(renderTime).to.be.lessThan(1000);\n    });\n});",
+                  "err": {},
+                  "uuid": "7adfc3a6-e078-41d1-adcc-2958bad23839",
+                  "parentUUID": "877b8683-0466-4362-ba8f-429d2e70d1b0",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "8b566c7d-b6d9-41f2-aa2e-095972887fb9",
+                "7adfc3a6-e078-41d1-adcc-2958bad23839"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 1753,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "a509cc68-11c6-457e-b43a-014260ff0521",
+              "title": "Widget Interaction Performance",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should respond quickly to security level changes",
+                  "fullTitle": "Widget Performance Tests Widget Interaction Performance should respond quickly to security level changes",
+                  "timedOut": null,
+                  "duration": 1543,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"⚡ Testing security level change response time\");\n// Test multiple security level changes and measure response time\n// Using recursive chaining to properly capture timing with Cypress async behavior\nconst levels = [\n    _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW,\n    _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE,\n    _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH,\n    _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE,\n    _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW,\n];\nconst measurements = [];\n// Recursive function to chain commands properly\nconst measureChange = (index) => {\n    if (index >= levels.length) {\n        // After all measurements, calculate average\n        cy.then(() => {\n            const avgTime = measurements.reduce((sum, time) => sum + time, 0) /\n                measurements.length;\n            cy.log(`✓ Average response time: ${avgTime.toFixed(0)}ms`);\n            // Target: <500ms per interaction\n            expect(avgTime).to.be.lessThan(500);\n        });\n        return;\n    }\n    cy.then(() => {\n        const startTime = Date.now();\n        cy.get(\"select\").eq(0).select(levels[index], { force: true });\n        cy.then(() => {\n            const responseTime = Date.now() - startTime;\n            measurements.push(responseTime);\n            cy.log(`Change ${index + 1}: ${responseTime}ms`);\n        });\n        // Wait after measurement, not during\n        cy.then(() => {\n            // Continue to next measurement\n            measureChange(index + 1);\n        });\n    });\n};\n// Start the measurement chain\nmeasureChange(0);",
+                  "err": {},
+                  "uuid": "3adc44aa-634b-4987-bbb0-7d9ff489b3c3",
+                  "parentUUID": "a509cc68-11c6-457e-b43a-014260ff0521",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "should update all widgets quickly when state changes",
+                  "fullTitle": "Widget Performance Tests Widget Interaction Performance should update all widgets quickly when state changes",
+                  "timedOut": null,
+                  "duration": 2448,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(\"🔄 Testing widget update performance\");\n// Set initial state\ncy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.LOW);\n// Measure time to update all widgets\ncy.then(() => {\n    const startTime = Date.now();\n    cy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n    // Wait for all widgets to update\n    cy.get('[data-testid*=\"widget\"]').should(\"be.visible\");\n    cy.then(() => {\n        const updateTime = Date.now() - startTime;\n        cy.log(`✓ All widgets updated in ${updateTime}ms`);\n        // Target adjusted for setSecurityLevels internal waits (~1400ms)\n        // Overall propagation to all widgets should complete within 2000ms\n        expect(updateTime).to.be.lessThan(2000);\n    });\n});",
+                  "err": {},
+                  "uuid": "4dcebdbc-926d-4075-a1bf-024ad5cc7e71",
+                  "parentUUID": "a509cc68-11c6-457e-b43a-014260ff0521",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "3adc44aa-634b-4987-bbb0-7d9ff489b3c3",
+                "4dcebdbc-926d-4075-a1bf-024ad5cc7e71"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 3991,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            },
+            {
+              "uuid": "3dff11d4-8462-4299-a04a-ce6b0bee8110",
+              "title": "Responsive Performance",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "should perform well on Mobile (375x667)",
+                  "fullTitle": "Widget Performance Tests Responsive Performance should perform well on Mobile (375x667)",
+                  "timedOut": null,
+                  "duration": 1327,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(`📱 Testing ${viewport.name} performance`);\ncy.viewport(viewport.width, viewport.height);\ncy.then(() => {\n    const startTime = Date.now();\n    cy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n    // Verify widgets render on this viewport\n    cy.verifyMinimumWidgets(1);\n    cy.then(() => {\n        const renderTime = Date.now() - startTime;\n        cy.log(`✓ ${viewport.name} rendered in ${renderTime}ms`);\n        // Performance targets adjusted for setSecurityLevels internal waits\n        // setSecurityLevels includes ~1400ms of internal waits, so targets are:\n        // Mobile: <2500ms total, Desktop: <2000ms total\n        const maxTime = viewport.width < 768 ? 2500 : 2000;\n        expect(renderTime).to.be.lessThan(maxTime);\n    });\n    // Wait for stability after measurement\n});",
+                  "err": {},
+                  "uuid": "20b558d7-30cf-4d7d-935b-bb92045e22cb",
+                  "parentUUID": "3dff11d4-8462-4299-a04a-ce6b0bee8110",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "should perform well on Tablet (768x1024)",
+                  "fullTitle": "Widget Performance Tests Responsive Performance should perform well on Tablet (768x1024)",
+                  "timedOut": null,
+                  "duration": 1320,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(`📱 Testing ${viewport.name} performance`);\ncy.viewport(viewport.width, viewport.height);\ncy.then(() => {\n    const startTime = Date.now();\n    cy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n    // Verify widgets render on this viewport\n    cy.verifyMinimumWidgets(1);\n    cy.then(() => {\n        const renderTime = Date.now() - startTime;\n        cy.log(`✓ ${viewport.name} rendered in ${renderTime}ms`);\n        // Performance targets adjusted for setSecurityLevels internal waits\n        // setSecurityLevels includes ~1400ms of internal waits, so targets are:\n        // Mobile: <2500ms total, Desktop: <2000ms total\n        const maxTime = viewport.width < 768 ? 2500 : 2000;\n        expect(renderTime).to.be.lessThan(maxTime);\n    });\n    // Wait for stability after measurement\n});",
+                  "err": {},
+                  "uuid": "659d4d84-b040-4b66-9db0-41b5630c1945",
+                  "parentUUID": "3dff11d4-8462-4299-a04a-ce6b0bee8110",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "should perform well on Desktop (1280x800)",
+                  "fullTitle": "Widget Performance Tests Responsive Performance should perform well on Desktop (1280x800)",
+                  "timedOut": null,
+                  "duration": 1315,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "cy.log(`📱 Testing ${viewport.name} performance`);\ncy.viewport(viewport.width, viewport.height);\ncy.then(() => {\n    const startTime = Date.now();\n    cy.setSecurityLevels(_support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.MODERATE, _support_constants__WEBPACK_IMPORTED_MODULE_0__.SECURITY_LEVELS.HIGH);\n    // Verify widgets render on this viewport\n    cy.verifyMinimumWidgets(1);\n    cy.then(() => {\n        const renderTime = Date.now() - startTime;\n        cy.log(`✓ ${viewport.name} rendered in ${renderTime}ms`);\n        // Performance targets adjusted for setSecurityLevels internal waits\n        // setSecurityLevels includes ~1400ms of internal waits, so targets are:\n        // Mobile: <2500ms total, Desktop: <2000ms total\n        const maxTime = viewport.width < 768 ? 2500 : 2000;\n        expect(renderTime).to.be.lessThan(maxTime);\n    });\n    // Wait for stability after measurement\n});",
+                  "err": {},
+                  "uuid": "95768f37-bb9c-4200-97e6-59807d937aee",
+                  "parentUUID": "3dff11d4-8462-4299-a04a-ce6b0bee8110",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "20b558d7-30cf-4d7d-935b-bb92045e22cb",
+                "659d4d84-b040-4b66-9db0-41b5630c1945",
+                "95768f37-bb9c-4200-97e6-59807d937aee"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 3962,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "build/cypress/mochawesome",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "code": true,
+        "timestamp": "mmddyyyy_HHMMss",
+        "charts": true,
+        "showHooks": "failed",
+        "embeddedScreenshots": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

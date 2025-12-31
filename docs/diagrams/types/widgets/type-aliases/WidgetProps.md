@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.3**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.4**](../../../README.md)
 
 ***
 
@@ -8,6 +8,6 @@
 
 > **WidgetProps** = [`WidgetBaseProps`](../interfaces/WidgetBaseProps.md)
 
-Defined in: [types/widgets.ts:105](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/widgets.ts#L105)
+Defined in: [types/widgets.ts:105](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/widgets.ts#L105)
 
 Alias type for WidgetBaseProps to maintain backward compatibility

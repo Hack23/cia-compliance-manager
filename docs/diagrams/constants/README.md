@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.3**](../README.md)
+[**CIA Compliance Manager Diagrams v1.1.4**](../README.md)
 
 ***
 
@@ -77,6 +77,7 @@
 - [VALUE\_CREATION\_WIDGET\_IDS](variables/VALUE_CREATION_WIDGET_IDS.md)
 - [WIDGET\_DESIGN](variables/WIDGET_DESIGN.md)
 - [WIDGET\_REGISTRY\_TEST\_IDS](variables/WIDGET_REGISTRY_TEST_IDS.md)
+- [WIDGET\_STYLES](variables/WIDGET_STYLES.md)
 - [WIDGET\_TEST\_IDS](variables/WIDGET_TEST_IDS.md)
 - [Z\_INDEX](variables/Z_INDEX.md)
 

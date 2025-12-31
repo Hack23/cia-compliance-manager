@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.3**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.4**](../../README.md)
 
 ***
 
@@ -8,27 +8,29 @@
 
 > `const` **WIDGET\_DESIGN**: `object`
 
-Defined in: [constants/designTokens.ts:192](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/constants/designTokens.ts#L192)
+Defined in: [constants/designTokens.ts:207](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/constants/designTokens.ts#L207)
 
 Widget-specific design tokens
+
+NOTE: Values optimized for compact layout while maintaining readability
 
 ## Type Declaration
 
 ### borderRadius
 
-> `readonly` **borderRadius**: `"8px"` = `'8px'`
+> `readonly` **borderRadius**: `"12px"` = `'12px'`
 
 Border radius for widget containers
 
 ### contentPadding
 
-> `readonly` **contentPadding**: `"16px"` = `'16px'`
+> `readonly` **contentPadding**: `"8px"` = `'8px'`
 
 Content padding
 
 ### footerPadding
 
-> `readonly` **footerPadding**: `"16px"` = `'16px'`
+> `readonly` **footerPadding**: `"8px"` = `'8px'`
 
 Footer padding
 
@@ -40,19 +42,19 @@ Header height
 
 ### headerPadding
 
-> `readonly` **headerPadding**: `"16px"` = `'16px'`
+> `readonly` **headerPadding**: `"8px"` = `'8px'`
 
 Header padding
 
 ### padding
 
-> `readonly` **padding**: `"24px"` = `'24px'`
+> `readonly` **padding**: `"16px"` = `'16px'`
 
-Standard padding for widget containers
+Standard padding for widget containers (optimized to 16px from 24px)
 
 ### sectionGap
 
-> `readonly` **sectionGap**: `"16px"` = `'16px'`
+> `readonly` **sectionGap**: `"8px"` = `'8px'`
 
 Gap between widget sections
 

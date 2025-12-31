@@ -446,7 +446,7 @@ export const SecurityBusinessTab: React.FC&lt;SecurityBusinessTabProps&gt; = ({
   return (
     &lt;div data-testid={testId || <span class="branch-1 cbranch-no" title="branch not covered" >SECURITY_SUMMARY_WIDGET_IDS.section('content-business')} c</span>lassName="space-y-4"&gt;
       {/* Business Value content */}
-      &lt;div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4"&gt;
+      &lt;div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-md"&gt;
         &lt;p className="text-sm"&gt;
           This section summarizes the business value and financial impact of
           your selected security levels, helping justify security investments to
@@ -455,34 +455,34 @@ export const SecurityBusinessTab: React.FC&lt;SecurityBusinessTabProps&gt; = ({
       &lt;/div&gt;
 &nbsp;
       {/* Business Impact Summary */}
-      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700"&gt;
-        &lt;h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100"&gt;
+      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700"&gt;
+        &lt;h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100"&gt;
           Business Value Summary
         &lt;/h3&gt;
 &nbsp;
-        &lt;div className="grid grid-cols-1 lg:grid-cols-2 gap-4"&gt;
+        &lt;div className="grid grid-cols-1 lg:grid-cols-2 gap-md"&gt;
           {/* Business Maturity */}
-          &lt;div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"&gt;
+          &lt;div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"&gt;
             &lt;h4 className="font-medium text-blue-700 dark:text-blue-300"&gt;
               Business Maturity Level
             &lt;/h4&gt;
-            &lt;div className="text-xl font-bold text-blue-600 dark:text-blue-400 mt-2"&gt;
+            &lt;div className="text-subheading font-bold text-blue-600 dark:text-blue-400 mt-sm"&gt;
               {businessMaturityLevel}
             &lt;/div&gt;
-            &lt;p className="text-sm text-blue-600 dark:text-blue-400 mt-1"&gt;
+            &lt;p className="text-sm text-blue-600 dark:text-blue-400 mt-xs"&gt;
               {businessMaturityDescription}
             &lt;/p&gt;
           &lt;/div&gt;
 &nbsp;
           {/* ROI Estimation */}
-          &lt;div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"&gt;
+          &lt;div className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"&gt;
             &lt;h4 className="font-medium text-green-700 dark:text-green-300"&gt;
               Estimated ROI
             &lt;/h4&gt;
-            &lt;div className="text-xl font-bold text-green-600 dark:text-green-400 mt-2"&gt;
+            &lt;div className="text-subheading font-bold text-green-600 dark:text-green-400 mt-sm"&gt;
               {roiEstimate}
             &lt;/div&gt;
-            &lt;p className="text-sm text-green-600 dark:text-green-400 mt-1"&gt;
+            &lt;p className="text-sm text-green-600 dark:text-green-400 mt-xs"&gt;
               {securityScore &gt;= 80
                 ? <span class="branch-0 cbranch-no" title="branch not covered" >"Strong return from security investments"</span>
                 : securityScore &gt;= 60
@@ -496,16 +496,16 @@ export const SecurityBusinessTab: React.FC&lt;SecurityBusinessTabProps&gt; = ({
       &lt;/div&gt;
 &nbsp;
       {/* Cost Summary */}
-      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700"&gt;
-        &lt;h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100"&gt;
+      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700"&gt;
+        &lt;h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100"&gt;
           Cost Summary
         &lt;/h3&gt;
 &nbsp;
-        &lt;div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"&gt;
+        &lt;div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md"&gt;
           {/* Implementation Cost */}
-          &lt;div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
-            &lt;div className="text-sm font-medium mb-1"&gt;Implementation Cost&lt;/div&gt;
-            &lt;div className="text-xl font-bold text-blue-600 dark:text-blue-400"&gt;
+          &lt;div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
+            &lt;div className="text-sm font-medium mb-xs"&gt;Implementation Cost&lt;/div&gt;
+            &lt;div className="text-subheading font-bold text-blue-600 dark:text-blue-400"&gt;
               {formatCurrency(costDetails.totalCapex)}
             &lt;/div&gt;
             &lt;div className="text-xs text-gray-600 dark:text-gray-400"&gt;
@@ -514,9 +514,9 @@ export const SecurityBusinessTab: React.FC&lt;SecurityBusinessTabProps&gt; = ({
           &lt;/div&gt;
 &nbsp;
           {/* Operational Cost */}
-          &lt;div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
-            &lt;div className="text-sm font-medium mb-1"&gt;Operational Cost&lt;/div&gt;
-            &lt;div className="text-xl font-bold text-green-600 dark:text-green-400"&gt;
+          &lt;div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
+            &lt;div className="text-sm font-medium mb-xs"&gt;Operational Cost&lt;/div&gt;
+            &lt;div className="text-subheading font-bold text-green-600 dark:text-green-400"&gt;
               {formatCurrency(costDetails.totalOpex)}
             &lt;/div&gt;
             &lt;div className="text-xs text-gray-600 dark:text-gray-400"&gt;
@@ -525,11 +525,11 @@ export const SecurityBusinessTab: React.FC&lt;SecurityBusinessTabProps&gt; = ({
           &lt;/div&gt;
 &nbsp;
           {/* Total Cost */}
-          &lt;div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
-            &lt;div className="text-sm font-medium mb-1"&gt;
+          &lt;div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
+            &lt;div className="text-sm font-medium mb-xs"&gt;
               Total First-Year Cost
             &lt;/div&gt;
-            &lt;div className="text-xl font-bold text-purple-600 dark:text-purple-400"&gt;
+            &lt;div className="text-subheading font-bold text-purple-600 dark:text-purple-400"&gt;
               {formatCurrency(costDetails.totalCost)}
             &lt;/div&gt;
             &lt;div className="text-xs text-gray-600 dark:text-gray-400"&gt;
@@ -540,14 +540,14 @@ export const SecurityBusinessTab: React.FC&lt;SecurityBusinessTabProps&gt; = ({
       &lt;/div&gt;
 &nbsp;
       {/* Business Enablement */}
-      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700"&gt;
-        &lt;h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100"&gt;
+      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700"&gt;
+        &lt;h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100"&gt;
           Business Enablement
         &lt;/h3&gt;
 &nbsp;
         &lt;div className="space-y-3"&gt;
-          &lt;div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
-            &lt;h4 className="text-sm font-medium mb-2"&gt;Business Capabilities&lt;/h4&gt;
+          &lt;div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
+            &lt;h4 className="text-sm font-medium mb-sm"&gt;Business Capabilities&lt;/h4&gt;
             &lt;ul className="list-disc pl-5 space-y-1 text-sm"&gt;
               {securityScore &gt;= 80 ? (
 <span class="branch-0 cbranch-no" title="branch not covered" >                &lt;&gt;</span>
@@ -592,7 +592,7 @@ export const SecurityBusinessTab: React.FC&lt;SecurityBusinessTabProps&gt; = ({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-29T20:28:14.224Z
+                at 2025-12-31T21:46:27.662Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

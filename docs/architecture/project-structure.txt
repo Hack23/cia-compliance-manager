@@ -29,6 +29,8 @@ src/components/common/LoadingSkeleton.test.tsx
 src/components/common/LoadingSkeleton.tsx
 src/components/common/LoadingSpinner.test.tsx
 src/components/common/LoadingSpinner.tsx
+src/components/common/MetricCard.test.tsx
+src/components/common/MetricCard.tsx
 src/components/common/ResourceCard.test.tsx
 src/components/common/ResourceCard.tsx
 src/components/common/RiskLevelBadge.test.tsx
@@ -41,12 +43,16 @@ src/components/common/ShortcutBadge.test.tsx
 src/components/common/ShortcutBadge.tsx
 src/components/common/StatusBadge.test.tsx
 src/components/common/StatusBadge.tsx
+src/components/common/TabContainer.test.tsx
+src/components/common/TabContainer.tsx
 src/components/common/ValueDisplay.test.tsx
 src/components/common/ValueDisplay.tsx
 src/components/common/WidgetContainer.test.tsx
 src/components/common/WidgetContainer.tsx
 src/components/common/WidgetErrorBoundary.test.tsx
 src/components/common/WidgetErrorBoundary.tsx
+src/components/common/WidgetSection.test.tsx
+src/components/common/WidgetSection.tsx
 src/components/common/__tests__/ErrorHandlingIntegration.test.tsx
 src/components/index.ts
 src/components/widgets/__tests__/widget-error-boundaries.test.tsx
@@ -75,6 +81,8 @@ src/components/widgets/impactanalysis/AvailabilityImpactWidget.test.tsx
 src/components/widgets/impactanalysis/AvailabilityImpactWidget.tsx
 src/components/widgets/impactanalysis/ConfidentialityImpactWidget.test.tsx
 src/components/widgets/impactanalysis/ConfidentialityImpactWidget.tsx
+src/components/widgets/impactanalysis/ImpactWidget.test.tsx
+src/components/widgets/impactanalysis/ImpactWidget.tsx
 src/components/widgets/impactanalysis/IntegrityImpactWidget.test.tsx
 src/components/widgets/impactanalysis/IntegrityImpactWidget.tsx
 src/components/widgets/implementationguide/CIAComponentDetails.test.tsx
@@ -160,7 +168,11 @@ src/hooks/useSecurityMetricsService.ts
 src/hooks/useSecuritySummaryData.ts
 src/hooks/useServiceData.test.ts
 src/hooks/useServiceData.ts
+src/hooks/useTabs.test.tsx
+src/hooks/useTabs.ts
 src/hooks/useTechnicalDetailsData.ts
+src/hooks/useWidgetError.test.ts
+src/hooks/useWidgetError.ts
 src/index.css
 src/index.ts
 src/index.tsx
@@ -256,6 +268,7 @@ src/types/keyboard.ts
 src/types/risk.ts
 src/types/securityResources.ts
 src/types/services.ts
+src/types/tabs.ts
 src/types/vitest.d.ts
 src/types/widget-props.ts
 src/types/widgets.test.ts
@@ -293,6 +306,8 @@ src/utils/securityLevelUtils.ts
 src/utils/serviceUtils.ts
 src/utils/statusUtils.test.ts
 src/utils/statusUtils.ts
+src/utils/tailwindClassHelpers.test.ts
+src/utils/tailwindClassHelpers.ts
 src/utils/technicalDetailsDefaults.ts
 src/utils/typeGuards.enhanced.test.ts
 src/utils/typeGuards.test.ts

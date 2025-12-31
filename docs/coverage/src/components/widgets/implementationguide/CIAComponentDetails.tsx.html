@@ -727,8 +727,8 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
   };
 &nbsp;
   return (
-    &lt;div className="mb-6" data-testid={TECHNICAL_DETAILS_WIDGET_IDS.section(component)}&gt;
-      &lt;div className="flex items-center mb-4" data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header()}&gt;
+    &lt;div className="mb-lg" data-testid={TECHNICAL_DETAILS_WIDGET_IDS.section(component)}&gt;
+      &lt;div className="flex items-center mb-md" data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header()}&gt;
         &lt;span className={`text-xl mr-2 ${theme.accentClass}`}&gt;
           {theme.icon}
         &lt;/span&gt;
@@ -744,7 +744,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
         &lt;/div&gt;
       &lt;/div&gt;
 &nbsp;
-      &lt;div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4"&gt;
+      &lt;div className="grid grid-cols-1 lg:grid-cols-2 gap-md mb-md"&gt;
         {/* Main technical details card */}
         &lt;div
           className={`p-4 ${theme.bgClass} rounded-lg shadow-sm border ${theme.borderClass}`}
@@ -763,7 +763,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
             )}
           &lt;/p&gt;
 &nbsp;
-          &lt;div className="mt-4"&gt;
+          &lt;div className="mt-md"&gt;
             &lt;h5 className={`text-sm font-medium ${theme.textClass} mb-2`}&gt;
               Implementation Complexity
             &lt;/h5&gt;
@@ -771,7 +771,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
               className="flex items-center"
               data-testid={TECHNICAL_DETAILS_WIDGET_IDS.label('development-effort')}
             &gt;
-              &lt;div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2"&gt;
+              &lt;div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-sm"&gt;
                 &lt;div
                   className={`h-2 ${theme.accentBgClass} rounded-full`}
                   style={{ width: `${complexity.value}%` }}
@@ -781,7 +781,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
             &lt;/div&gt;
           &lt;/div&gt;
 &nbsp;
-          &lt;div className="mt-4"&gt;
+          &lt;div className="mt-md"&gt;
             &lt;h5 className={`text-sm font-medium ${theme.textClass} mb-2`}&gt;
               Personnel Requirements
             &lt;/h5&gt;
@@ -800,7 +800,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
         {/* Implementation requirements card */}
         &lt;div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark"&gt;
           &lt;h4
-            className="text-md font-medium mb-3"
+            className="text-md font-medium mb-md"
             data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header('implementation')}
           &gt;
             Implementation Requirements
@@ -821,10 +821,10 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
         &lt;/div&gt;
       &lt;/div&gt;
 &nbsp;
-      &lt;div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"&gt;
+      &lt;div className="grid grid-cols-1 md:grid-cols-2 gap-md mb-md"&gt;
         {/* Technologies card */}
         &lt;div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark"&gt;
-          &lt;h4 className="text-md font-medium flex items-center mb-3"&gt;
+          &lt;h4 className="text-md font-medium flex items-center mb-md"&gt;
             &lt;span className={`mr-2 ${theme.accentClass}`}&gt;💻&lt;/span&gt;Technologies
           &lt;/h4&gt;
           &lt;p className={`text-sm ${theme.textClass}`}&gt;
@@ -838,7 +838,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
 &nbsp;
         {/* Configurations card */}
         &lt;div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark"&gt;
-          &lt;h4 className="text-md font-medium flex items-center mb-3"&gt;
+          &lt;h4 className="text-md font-medium flex items-center mb-md"&gt;
             &lt;span className={`mr-2 ${theme.accentClass}`}&gt;⚙️&lt;/span&gt;
             Configurations
           &lt;/h4&gt;
@@ -853,13 +853,13 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
       &lt;/div&gt;
 &nbsp;
       {/* Expertise Required card */}
-      &lt;div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-4"&gt;
-        &lt;h4 className="text-md font-medium flex items-center mb-3"&gt;
+      &lt;div className="p-md bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-md"&gt;
+        &lt;h4 className="text-md font-medium flex items-center mb-md"&gt;
           &lt;span className={`mr-2 ${theme.accentClass}`}&gt;👨‍💻&lt;/span&gt;Expertise
           Required
         &lt;/h4&gt;
         &lt;ul
-          className="grid grid-cols-1 lg:grid-cols-2 gap-2"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-sm"
           data-testid={TECHNICAL_DETAILS_WIDGET_IDS.list('required-expertise')}
         &gt;
           {getExpertiseRequired(component, level).map((expertise, index) =&gt; (
@@ -883,7 +883,7 @@ export const CIAComponentDetails: React.FC&lt;CIAComponentDetailsProps&gt; = ({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-29T20:28:14.224Z
+                at 2025-12-31T21:46:27.662Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

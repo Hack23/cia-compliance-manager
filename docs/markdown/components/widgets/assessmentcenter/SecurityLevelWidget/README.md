@@ -1,14 +1,10 @@
-[**CIA Compliance Manager Documentation v1.1.3**](../../../../README.md)
+[**CIA Compliance Manager Documentation v1.1.4**](../../../../README.md)
 
 ***
 
 [CIA Compliance Manager Documentation](../../../../modules.md) / components/widgets/assessmentcenter/SecurityLevelWidget
 
 # components/widgets/assessmentcenter/SecurityLevelWidget
-
-## Interfaces
-
-- [SecurityLevelWidgetProps](interfaces/SecurityLevelWidgetProps.md)
 
 ## References
 

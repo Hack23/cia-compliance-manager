@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.3**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.4**](../../README.md)
 
 ***
 
@@ -8,9 +8,11 @@
 
 > `const` **BORDER\_RADIUS**: `object`
 
-Defined in: [constants/designTokens.ts:115](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/constants/designTokens.ts#L115)
+Defined in: [constants/designTokens.ts:128](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/constants/designTokens.ts#L128)
 
 Border radius values for consistent rounded corners
+
+NOTE: Values optimized to restore rounded appearance from v1.0.6
 
 ## Type Declaration
 
@@ -22,15 +24,15 @@ Full circle/pill shape
 
 ### lg
 
-> `readonly` **lg**: `"12px"` = `'12px'`
+> `readonly` **lg**: `"16px"` = `'16px'`
 
-12px - Large rounding for prominent elements
+16px - Large rounding for prominent elements (optimized from 12px)
 
 ### md
 
-> `readonly` **md**: `"8px"` = `'8px'`
+> `readonly` **md**: `"12px"` = `'12px'`
 
-8px - Medium rounding (default for cards)
+12px - Medium rounding (optimized from 8px for more rounded appearance)
 
 ### none
 
@@ -46,6 +48,6 @@ Full circle/pill shape
 
 ### xl
 
-> `readonly` **xl**: `"16px"` = `'16px'`
+> `readonly` **xl**: `"20px"` = `'20px'`
 
-16px - Extra large rounding
+20px - Extra large rounding (optimized from 16px)

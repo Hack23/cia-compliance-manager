@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.3**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.4**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CIAService
 
-Defined in: [services/BaseService.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/BaseService.ts#L21)
+Defined in: [services/BaseService.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/services/BaseService.ts#L21)
 
 Common interface for CIA services
 
@@ -16,7 +16,7 @@ Common interface for CIA services
 
 > **getComponentDetails**(`component`, `level`): [`CIADetails`](../../../types/interfaces/CIADetails.md) \| `undefined`
 
-Defined in: [services/BaseService.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/BaseService.ts#L22)
+Defined in: [services/BaseService.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/services/BaseService.ts#L22)
 
 #### Parameters
 
@@ -38,7 +38,7 @@ Defined in: [services/BaseService.ts:22](https://github.com/Hack23/cia-complianc
 
 > **getRiskLevelFromSecurityLevel**(`level`): `string`
 
-Defined in: [services/BaseService.ts:27](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/BaseService.ts#L27)
+Defined in: [services/BaseService.ts:27](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/services/BaseService.ts#L27)
 
 #### Parameters
 
@@ -56,7 +56,7 @@ Defined in: [services/BaseService.ts:27](https://github.com/Hack23/cia-complianc
 
 > **getSecurityLevelDescription**(`level`): `string`
 
-Defined in: [services/BaseService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/services/BaseService.ts#L26)
+Defined in: [services/BaseService.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/services/BaseService.ts#L26)
 
 #### Parameters
 

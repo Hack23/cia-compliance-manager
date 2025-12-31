@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.3**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.4**](../../README.md)
 
 ***
 
@@ -8,36 +8,44 @@
 
 > `const` **SPACING**: `object`
 
-Defined in: [constants/designTokens.ts:14](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/constants/designTokens.ts#L14)
+Defined in: [constants/designTokens.ts:22](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/constants/designTokens.ts#L22)
 
-Spacing scale following 8px grid system
+Spacing scale based on a flexible grid system with optimizations
 Use these values for padding, margin, and gap properties
+
+NOTE: These values have been optimized to reduce widget empty space
+and provide more compact layouts while maintaining visual hierarchy.
+
+⚠️ EXCEPTION: `sm: 6px` breaks the strict 4px/8px grid system but was
+intentionally optimized to fix 50% blank space issues in widgets.
+This value matches the current tailwind.config.ts and preserves
+the optimized UI appearance from v1.0.6+.
 
 ## Type Declaration
 
 ### lg
 
-> `readonly` **lg**: `"24px"` = `'24px'`
+> `readonly` **lg**: `"16px"` = `'16px'`
 
-24px - Large spacing for section separation
+16px - Large spacing for section separation (optimized from 24px)
 
 ### md
 
-> `readonly` **md**: `"16px"` = `'16px'`
+> `readonly` **md**: `"8px"` = `'8px'`
 
-16px - Medium spacing (default)
+8px - Medium spacing (optimized from 16px for more compact layouts)
 
 ### sm
 
-> `readonly` **sm**: `"8px"` = `'8px'`
+> `readonly` **sm**: `"6px"` = `'6px'`
 
-8px - Small spacing for compact elements
+6px - Small spacing for compact elements (optimized from 8px)
 
 ### xl
 
-> `readonly` **xl**: `"32px"` = `'32px'`
+> `readonly` **xl**: `"24px"` = `'24px'`
 
-32px - Extra large spacing for major sections
+24px - Extra large spacing for major sections (optimized from 32px)
 
 ### xs
 
@@ -47,6 +55,6 @@ Use these values for padding, margin, and gap properties
 
 ### xxl
 
-> `readonly` **xxl**: `"48px"` = `'48px'`
+> `readonly` **xxl**: `"40px"` = `'40px'`
 
-48px - XXL spacing for page-level separation
+40px - XXL spacing for page-level separation (optimized from 48px)

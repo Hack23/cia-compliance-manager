@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.3**](../README.md)
+[**CIA Compliance Manager Documentation v1.1.4**](../README.md)
 
 ***
 
@@ -25,7 +25,6 @@ Centralized type exports simplify imports and enforce type consistency.
 
 - [AvailabilityImpactWidgetProps](interfaces/AvailabilityImpactWidgetProps.md)
 - [BaseWidgetProps](interfaces/BaseWidgetProps.md)
-- [BusinessImpactAnalysisWidgetProps](interfaces/BusinessImpactAnalysisWidgetProps.md)
 - [BusinessImpactDetail](interfaces/BusinessImpactDetail.md)
 - [BusinessImpactDetails](interfaces/BusinessImpactDetails.md)
 - [BusinessImpactSectionProps](interfaces/BusinessImpactSectionProps.md)
@@ -38,7 +37,6 @@ Centralized type exports simplify imports and enforce type consistency.
 - [ComplianceImpact](interfaces/ComplianceImpact.md)
 - [ComplianceStatusWidgetProps](interfaces/ComplianceStatusWidgetProps.md)
 - [ConfidentialityImpactWidgetProps](interfaces/ConfidentialityImpactWidgetProps.md)
-- [CostEstimationWidgetProps](interfaces/CostEstimationWidgetProps.md)
 - [ImplementationEffort](interfaces/ImplementationEffort.md)
 - [IntegrityImpactWidgetProps](interfaces/IntegrityImpactWidgetProps.md)
 - [KeyboardShortcut](interfaces/KeyboardShortcut.md)
@@ -54,19 +52,25 @@ Centralized type exports simplify imports and enforce type consistency.
 - [SecurityResourcesWidgetProps](interfaces/SecurityResourcesWidgetProps.md)
 - [ShortcutBadgeProps](interfaces/ShortcutBadgeProps.md)
 - [StatusBadgeProps](interfaces/StatusBadgeProps.md)
+- [Tab](interfaces/Tab.md)
+- [TabsState](interfaces/TabsState.md)
 - [TechnicalImplementationDetails](interfaces/TechnicalImplementationDetails.md)
 - [UseKeyboardShortcutsOptions](interfaces/UseKeyboardShortcutsOptions.md)
-- [ValueCreationWidgetProps](interfaces/ValueCreationWidgetProps.md)
+- [UseTabsOptions](interfaces/UseTabsOptions.md)
+- [UseTabsReturn](interfaces/UseTabsReturn.md)
 - [WidgetHeaderProps](interfaces/WidgetHeaderProps.md)
 - [WithSecurityLevelProps](interfaces/WithSecurityLevelProps.md)
 
 ## Type Aliases
 
+- [BusinessImpactAnalysisWidgetProps](type-aliases/BusinessImpactAnalysisWidgetProps.md)
 - [CIAComponentType](type-aliases/CIAComponentType.md)
+- [CostEstimationWidgetProps](type-aliases/CostEstimationWidgetProps.md)
 - [Platform](type-aliases/Platform.md)
 - [ShortcutCategory](type-aliases/ShortcutCategory.md)
 - [ShortcutMap](type-aliases/ShortcutMap.md)
 - [TechnicalDetailsWidgetProps](type-aliases/TechnicalDetailsWidgetProps.md)
+- [ValueCreationWidgetProps](type-aliases/ValueCreationWidgetProps.md)
 
 ## Functions
 

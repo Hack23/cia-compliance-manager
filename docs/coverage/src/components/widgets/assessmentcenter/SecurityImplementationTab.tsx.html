@@ -488,7 +488,7 @@ export const SecurityImplementationTab: React.FC&lt;
       className="space-y-4"
     &gt;
       {/* Implementation introduction */}
-      &lt;div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4"&gt;
+      &lt;div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-md"&gt;
         &lt;p className="text-sm"&gt;
           This section summarizes implementation requirements for your selected
           security levels, helping plan resources, timelines, and technical
@@ -497,13 +497,13 @@ export const SecurityImplementationTab: React.FC&lt;
       &lt;/div&gt;
 &nbsp;
       {/* Implementation Overview */}
-      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700"&gt;
-        &lt;h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100"&gt;
+      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700"&gt;
+        &lt;h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100"&gt;
           Implementation Overview
         &lt;/h3&gt;
 &nbsp;
-        &lt;div className="mb-4"&gt;
-          &lt;div className="flex items-center justify-between mb-2"&gt;
+        &lt;div className="mb-md"&gt;
+          &lt;div className="flex items-center justify-between mb-sm"&gt;
             &lt;div className="text-md font-medium"&gt;Implementation Complexity:&lt;/div&gt;
             &lt;div className="font-medium"&gt;{implementationComplexity}&lt;/div&gt;
           &lt;/div&gt;
@@ -520,7 +520,7 @@ export const SecurityImplementationTab: React.FC&lt;
               }`}
             &gt;&lt;/div&gt;
           &lt;/div&gt;
-          &lt;p className="text-sm text-gray-600 dark:text-gray-400 mt-2"&gt;
+          &lt;p className="text-sm text-gray-600 dark:text-gray-400 mt-sm"&gt;
             {implementationComplexity === "Low"
               ? "Basic security controls with straightforward implementation"
               : implementationComplexity === "Moderate"
@@ -531,10 +531,10 @@ export const SecurityImplementationTab: React.FC&lt;
           &lt;/p&gt;
         &lt;/div&gt;
 &nbsp;
-        &lt;div className="grid grid-cols-1 lg:grid-cols-2 gap-4"&gt;
+        &lt;div className="grid grid-cols-1 lg:grid-cols-2 gap-md"&gt;
           {/* Implementation Timeline */}
-          &lt;div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
-            &lt;div className="text-sm font-medium mb-1"&gt;
+          &lt;div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
+            &lt;div className="text-sm font-medium mb-xs"&gt;
               Estimated Implementation Time
             &lt;/div&gt;
             &lt;div className="text-lg font-bold"&gt;{implementationTime}&lt;/div&gt;
@@ -544,8 +544,8 @@ export const SecurityImplementationTab: React.FC&lt;
           &lt;/div&gt;
 &nbsp;
           {/* Required Resources */}
-          &lt;div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
-            &lt;div className="text-sm font-medium mb-1"&gt;Required Resources&lt;/div&gt;
+          &lt;div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
+            &lt;div className="text-sm font-medium mb-xs"&gt;Required Resources&lt;/div&gt;
             &lt;div className="text-lg font-bold"&gt;{requiredResources}&lt;/div&gt;
             &lt;div className="text-xs text-gray-600 dark:text-gray-400"&gt;
               Resource allocation recommendation
@@ -555,15 +555,15 @@ export const SecurityImplementationTab: React.FC&lt;
       &lt;/div&gt;
 &nbsp;
       {/* Component Implementation Summary */}
-      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700"&gt;
-        &lt;h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100"&gt;
+      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700"&gt;
+        &lt;h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100"&gt;
           Component Implementation Summary
         &lt;/h3&gt;
 &nbsp;
-        &lt;div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"&gt;
+        &lt;div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md"&gt;
           {/* Confidentiality Implementation */}
-          &lt;div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800"&gt;
-            &lt;h4 className="font-medium text-purple-700 dark:text-purple-300 mb-2"&gt;
+          &lt;div className="p-md bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800"&gt;
+            &lt;h4 className="font-medium text-purple-700 dark:text-purple-300 mb-sm"&gt;
               Confidentiality Implementation
             &lt;/h4&gt;
             &lt;p className="text-sm text-gray-600 dark:text-gray-400"&gt;
@@ -572,33 +572,33 @@ export const SecurityImplementationTab: React.FC&lt;
                 confidentialityLevel
               )}
             &lt;/p&gt;
-            &lt;div className="mt-2 text-xs font-medium text-purple-700 dark:text-purple-300"&gt;
+            &lt;div className="mt-sm text-xs font-medium text-purple-700 dark:text-purple-300"&gt;
               Level: {confidentialityLevel}
             &lt;/div&gt;
           &lt;/div&gt;
 &nbsp;
           {/* Integrity Implementation */}
-          &lt;div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800"&gt;
-            &lt;h4 className="font-medium text-green-700 dark:text-green-300 mb-2"&gt;
+          &lt;div className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800"&gt;
+            &lt;h4 className="font-medium text-green-700 dark:text-green-300 mb-sm"&gt;
               Integrity Implementation
             &lt;/h4&gt;
             &lt;p className="text-sm text-gray-600 dark:text-gray-400"&gt;
               {getImplementationDescription("integrity", integrityLevel)}
             &lt;/p&gt;
-            &lt;div className="mt-2 text-xs font-medium text-green-700 dark:text-green-300"&gt;
+            &lt;div className="mt-sm text-xs font-medium text-green-700 dark:text-green-300"&gt;
               Level: {integrityLevel}
             &lt;/div&gt;
           &lt;/div&gt;
 &nbsp;
           {/* Availability Implementation */}
-          &lt;div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800"&gt;
-            &lt;h4 className="font-medium text-blue-700 dark:text-blue-300 mb-2"&gt;
+          &lt;div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800"&gt;
+            &lt;h4 className="font-medium text-blue-700 dark:text-blue-300 mb-sm"&gt;
               Availability Implementation
             &lt;/h4&gt;
             &lt;p className="text-sm text-gray-600 dark:text-gray-400"&gt;
               {getImplementationDescription("availability", availabilityLevel)}
             &lt;/p&gt;
-            &lt;div className="mt-2 text-xs font-medium text-blue-700 dark:text-blue-300"&gt;
+            &lt;div className="mt-sm text-xs font-medium text-blue-700 dark:text-blue-300"&gt;
               Level: {availabilityLevel}
             &lt;/div&gt;
           &lt;/div&gt;
@@ -606,17 +606,17 @@ export const SecurityImplementationTab: React.FC&lt;
       &lt;/div&gt;
 &nbsp;
       {/* Implementation Considerations */}
-      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700"&gt;
-        &lt;h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100"&gt;
+      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700"&gt;
+        &lt;h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100"&gt;
           Implementation Considerations
         &lt;/h3&gt;
 &nbsp;
-        &lt;div className="grid grid-cols-1 sm:grid-cols-2 gap-4"&gt;
-          &lt;div className="p-3 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg"&gt;
+        &lt;div className="grid grid-cols-1 sm:grid-cols-2 gap-md"&gt;
+          &lt;div className="p-md bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg"&gt;
             &lt;h4 className="font-medium text-yellow-700 dark:text-yellow-300"&gt;
               Success Factors
             &lt;/h4&gt;
-            &lt;ul className="mt-2 space-y-1 list-disc list-inside text-sm"&gt;
+            &lt;ul className="mt-sm space-y-1 list-disc list-inside text-sm"&gt;
               &lt;li&gt;Executive sponsorship and support&lt;/li&gt;
               &lt;li&gt;Clear security requirements definition&lt;/li&gt;
               &lt;li&gt;Adequate resource allocation&lt;/li&gt;
@@ -625,11 +625,11 @@ export const SecurityImplementationTab: React.FC&lt;
             &lt;/ul&gt;
           &lt;/div&gt;
 &nbsp;
-          &lt;div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"&gt;
+          &lt;div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"&gt;
             &lt;h4 className="font-medium text-blue-700 dark:text-blue-300"&gt;
               Key Challenges
             &lt;/h4&gt;
-            &lt;ul className="mt-2 space-y-1 list-disc list-inside text-sm"&gt;
+            &lt;ul className="mt-sm space-y-1 list-disc list-inside text-sm"&gt;
               &lt;li&gt;Balancing security with usability&lt;/li&gt;
               &lt;li&gt;Integration with existing systems&lt;/li&gt;
               &lt;li&gt;Managing scope and expectations&lt;/li&gt;
@@ -649,7 +649,7 @@ export const SecurityImplementationTab: React.FC&lt;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-29T20:28:14.224Z
+                at 2025-12-31T21:46:27.662Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

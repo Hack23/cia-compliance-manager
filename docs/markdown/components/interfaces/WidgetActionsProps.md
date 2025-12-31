@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.3**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.4**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetActionsProps
 
-Defined in: [types/componentPropExports.ts:150](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/componentPropExports.ts#L150)
+Defined in: [types/componentPropExports.ts:150](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L150)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:150](https://github.com/Hack23/cia-co
 
 > **actions**: `WidgetActionButtonProps`[]
 
-Defined in: [types/componentPropExports.ts:151](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/componentPropExports.ts#L151)
+Defined in: [types/componentPropExports.ts:151](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L151)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types/componentPropExports.ts:151](https://github.com/Hack23/cia-co
 
 > `optional` **className**: `string`
 
-Defined in: [types/componentPropExports.ts:152](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/componentPropExports.ts#L152)
+Defined in: [types/componentPropExports.ts:152](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L152)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [types/componentPropExports.ts:152](https://github.com/Hack23/cia-co
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:153](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/componentPropExports.ts#L153)
+Defined in: [types/componentPropExports.ts:153](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L153)

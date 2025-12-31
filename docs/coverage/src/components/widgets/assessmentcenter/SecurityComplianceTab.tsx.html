@@ -521,7 +521,7 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
   return (
     &lt;div data-testid={testId || <span class="branch-1 cbranch-no" title="branch not covered" >SECURITY_SUMMARY_WIDGET_IDS.section('content-compliance')} c</span>lassName="space-y-4"&gt;
       {/* Compliance introduction */}
-      &lt;div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-4"&gt;
+      &lt;div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-md"&gt;
         &lt;p className="text-sm"&gt;
           This section summarizes your compliance status based on selected
           security levels, highlighting alignment with regulatory frameworks and
@@ -530,18 +530,18 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
       &lt;/div&gt;
 &nbsp;
       {/* Compliance Status */}
-      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700"&gt;
-        &lt;h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100"&gt;
+      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700"&gt;
+        &lt;h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100"&gt;
           Compliance Status Overview
         &lt;/h3&gt;
 &nbsp;
         {!complianceStatus ? (
-          &lt;div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
-            &lt;div className="flex justify-between items-center mb-2"&gt;
+          &lt;div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
+            &lt;div className="flex justify-between items-center mb-sm"&gt;
               &lt;span className="font-medium"&gt;Compliance Score&lt;/span&gt;
-              &lt;span className="text-xl font-bold"&gt;{securityScore}%&lt;/span&gt;
+              &lt;span className="text-subheading font-bold"&gt;{securityScore}%&lt;/span&gt;
             &lt;/div&gt;
-            &lt;div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5 mb-2"&gt;
+            &lt;div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5 mb-sm"&gt;
               &lt;div
                 className={`h-2.5 rounded-full ${
                   securityScore &gt;= 80
@@ -558,14 +558,14 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
             &lt;/p&gt;
           &lt;/div&gt;
         ) : (
-          &lt;div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
-            &lt;div className="flex justify-between items-center mb-2"&gt;
+          &lt;div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
+            &lt;div className="flex justify-between items-center mb-sm"&gt;
               &lt;span className="font-medium"&gt;Compliance Score&lt;/span&gt;
-              &lt;span className="text-xl font-bold"&gt;
+              &lt;span className="text-subheading font-bold"&gt;
                 {complianceStatus.complianceScore}%
               &lt;/span&gt;
             &lt;/div&gt;
-            &lt;div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5 mb-2"&gt;
+            &lt;div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5 mb-sm"&gt;
               &lt;div
                 className={`h-2.5 rounded-full ${
                   (complianceStatus.complianceScore || <span class="branch-1 cbranch-no" title="branch not covered" >0) &gt;= 8</span>0
@@ -588,8 +588,8 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
       &lt;/div&gt;
 &nbsp;
       {/* Framework Status */}
-      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700"&gt;
-        &lt;h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100"&gt;
+      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700"&gt;
+        &lt;h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100"&gt;
           Framework Compliance Status
         &lt;/h3&gt;
 &nbsp;
@@ -598,8 +598,8 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
             Detailed compliance information is not available.
           &lt;/p&gt;
         ) : (
-          &lt;div className="grid grid-cols-1 lg:grid-cols-2 gap-4"&gt;
-            &lt;div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"&gt;
+          &lt;div className="grid grid-cols-1 lg:grid-cols-2 gap-md"&gt;
+            &lt;div className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"&gt;
               &lt;h4 className="font-medium text-green-700 dark:text-green-300 flex items-center justify-between"&gt;
                 &lt;span&gt;Compliant&lt;/span&gt;
                 &lt;span className="text-sm bg-green-100 dark:bg-green-800 px-2 py-0.5 rounded-full"&gt;
@@ -607,7 +607,7 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
                 &lt;/span&gt;
               &lt;/h4&gt;
               {complianceStatus.compliantFrameworks.length &gt; 0 ? (
-                &lt;ul className="mt-2 space-y-1 list-disc list-inside text-sm text-gray-600 dark:text-gray-400"&gt;
+                &lt;ul className="mt-sm space-y-1 list-disc list-inside text-sm text-gray-600 dark:text-gray-400"&gt;
                   {complianceStatus.compliantFrameworks.map(
                     (framework, idx) =&gt; (
                       &lt;li key={`compliant-${idx}`}&gt;{framework}&lt;/li&gt;
@@ -615,13 +615,13 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
                   )}
                 &lt;/ul&gt;
               ) : (
-                &lt;p className="mt-2 text-sm text-gray-600 dark:text-gray-400 italic"&gt;
+                &lt;p className="mt-sm text-sm text-gray-600 dark:text-gray-400 italic"&gt;
                   No fully compliant frameworks
                 &lt;/p&gt;
               )}
             &lt;/div&gt;
 &nbsp;
-            &lt;div className="p-3 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg"&gt;
+            &lt;div className="p-md bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg"&gt;
               &lt;h4 className="font-medium text-yellow-700 dark:text-yellow-300 flex items-center justify-between"&gt;
                 &lt;span&gt;Partially Compliant&lt;/span&gt;
                 &lt;span className="text-sm bg-yellow-100 dark:bg-yellow-800 px-2 py-0.5 rounded-full"&gt;
@@ -629,7 +629,7 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
                 &lt;/span&gt;
               &lt;/h4&gt;
               {complianceStatus.partiallyCompliantFrameworks.length &gt; 0 ? (
-                &lt;ul className="mt-2 space-y-1 list-disc list-inside text-sm text-gray-600 dark:text-gray-400"&gt;
+                &lt;ul className="mt-sm space-y-1 list-disc list-inside text-sm text-gray-600 dark:text-gray-400"&gt;
                   {complianceStatus.partiallyCompliantFrameworks.map(
                     (framework, idx) =&gt; (
                       &lt;li key={`partial-${idx}`}&gt;{framework}&lt;/li&gt;
@@ -637,7 +637,7 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
                   )}
                 &lt;/ul&gt;
               ) : (
-                &lt;p className="mt-2 text-sm text-gray-600 dark:text-gray-400 italic"&gt;
+                &lt;p className="mt-sm text-sm text-gray-600 dark:text-gray-400 italic"&gt;
                   No partially compliant frameworks
                 &lt;/p&gt;
               )}
@@ -647,21 +647,21 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
       &lt;/div&gt;
 &nbsp;
       {/* Component Requirements */}
-      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-100 dark:border-gray-700"&gt;
-        &lt;h3 className="text-lg font-medium mb-3 text-gray-800 dark:text-gray-100"&gt;
+      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700"&gt;
+        &lt;h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100"&gt;
           Component Compliance Requirements
         &lt;/h3&gt;
 &nbsp;
-        &lt;div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"&gt;
+        &lt;div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md"&gt;
           {/* Confidentiality compliance */}
-          &lt;div className="p-3 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded"&gt;
-            &lt;h5 className="text-sm font-medium mb-1 text-purple-700 dark:text-purple-300"&gt;
+          &lt;div className="p-md bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded"&gt;
+            &lt;h5 className="text-sm font-medium mb-xs text-purple-700 dark:text-purple-300"&gt;
               Confidentiality
             &lt;/h5&gt;
             &lt;p className="text-xs"&gt;
               &lt;span className="font-medium"&gt;Level:&lt;/span&gt; {confidentialityLevel}
             &lt;/p&gt;
-            &lt;p className="text-xs text-gray-600 dark:text-gray-400 mt-1"&gt;
+            &lt;p className="text-xs text-gray-600 dark:text-gray-400 mt-xs"&gt;
               {getComplianceRequirementText(
                 "confidentiality",
                 confidentialityLevel
@@ -670,27 +670,27 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
           &lt;/div&gt;
 &nbsp;
           {/* Integrity compliance */}
-          &lt;div className="p-3 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded"&gt;
-            &lt;h5 className="text-sm font-medium mb-1 text-green-700 dark:text-green-300"&gt;
+          &lt;div className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded"&gt;
+            &lt;h5 className="text-sm font-medium mb-xs text-green-700 dark:text-green-300"&gt;
               Integrity
             &lt;/h5&gt;
             &lt;p className="text-xs"&gt;
               &lt;span className="font-medium"&gt;Level:&lt;/span&gt; {integrityLevel}
             &lt;/p&gt;
-            &lt;p className="text-xs text-gray-600 dark:text-gray-400 mt-1"&gt;
+            &lt;p className="text-xs text-gray-600 dark:text-gray-400 mt-xs"&gt;
               {getComplianceRequirementText("integrity", integrityLevel)}
             &lt;/p&gt;
           &lt;/div&gt;
 &nbsp;
           {/* Availability compliance */}
-          &lt;div className="p-3 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded"&gt;
-            &lt;h5 className="text-sm font-medium mb-1 text-blue-700 dark:text-blue-300"&gt;
+          &lt;div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded"&gt;
+            &lt;h5 className="text-sm font-medium mb-xs text-blue-700 dark:text-blue-300"&gt;
               Availability
             &lt;/h5&gt;
             &lt;p className="text-xs"&gt;
               &lt;span className="font-medium"&gt;Level:&lt;/span&gt; {availabilityLevel}
             &lt;/p&gt;
-            &lt;p className="text-xs text-gray-600 dark:text-gray-400 mt-1"&gt;
+            &lt;p className="text-xs text-gray-600 dark:text-gray-400 mt-xs"&gt;
               {getComplianceRequirementText("availability", availabilityLevel)}
             &lt;/p&gt;
           &lt;/div&gt;
@@ -706,7 +706,7 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-29T20:28:14.224Z
+                at 2025-12-31T21:46:27.662Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

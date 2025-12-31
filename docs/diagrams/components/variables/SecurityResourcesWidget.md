@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.3**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.4**](../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Variable: SecurityResourcesWidget
 
-> `const` **SecurityResourcesWidget**: `React.FC`\<[`SecurityResourcesWidgetProps`](../widgets/implementationguide/SecurityResourcesWidget/interfaces/SecurityResourcesWidgetProps.md)\>
+> `const` **SecurityResourcesWidget**: `React.FC`\<[`SecurityResourcesWidgetProps`](../../types/interfaces/SecurityResourcesWidgetProps.md)\>
 
-Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:156](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L156)
+Defined in: [components/widgets/implementationguide/SecurityResourcesWidget.tsx:82](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/components/widgets/implementationguide/SecurityResourcesWidget.tsx#L82)
 
 Widget that displays security resources and implementation guides
 
@@ -49,9 +49,9 @@ implement controls correctly the first time. 📚
   availabilityLevel="High"
   integrityLevel="Very High"
   confidentialityLevel="Moderate"
-  limit={12}
+  maxItems={12}
   showTopResourcesOnly={true}
-  className="border-2 border-gray-200 p-4"
+  className="border-2 border-gray-200 p-md"
   testId="main-security-resources"
 />
 ```

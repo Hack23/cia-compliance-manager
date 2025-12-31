@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.3**](../README.md)
+[**CIA Compliance Manager Diagrams v1.1.4**](../README.md)
 
 ***
 
@@ -27,6 +27,7 @@ Centralized component exports simplify imports and promote component reuse.
 - [KeyValuePairProps](interfaces/KeyValuePairProps.md)
 - [LoadingSkeletonProps](interfaces/LoadingSkeletonProps.md)
 - [LoadingSpinnerProps](interfaces/LoadingSpinnerProps.md)
+- [MetricCardProps](interfaces/MetricCardProps.md)
 - [RiskLevelBadgeProps](interfaces/RiskLevelBadgeProps.md)
 - [SecurityLevelBadgeProps](interfaces/SecurityLevelBadgeProps.md)
 - [SecurityRiskScoreProps](interfaces/SecurityRiskScoreProps.md)
@@ -36,6 +37,7 @@ Centralized component exports simplify imports and promote component reuse.
 - [WidgetActionsProps](interfaces/WidgetActionsProps.md)
 - [WidgetContainerProps](interfaces/WidgetContainerProps.md)
 - [WidgetErrorBoundaryProps](interfaces/WidgetErrorBoundaryProps.md)
+- [WidgetSectionProps](interfaces/WidgetSectionProps.md)
 
 ## Variables
 
@@ -51,6 +53,7 @@ Centralized component exports simplify imports and promote component reuse.
 - [IntegrityImpactWidget](variables/IntegrityImpactWidget.md)
 - [LoadingSkeleton](variables/LoadingSkeleton.md)
 - [LoadingSpinner](variables/LoadingSpinner.md)
+- [MetricCard](variables/MetricCard.md)
 - [RadarChart](variables/RadarChart.md)
 - [RiskLevelBadge](variables/RiskLevelBadge.md)
 - [SecurityLevelBadge](variables/SecurityLevelBadge.md)
@@ -61,6 +64,7 @@ Centralized component exports simplify imports and promote component reuse.
 - [StatusBadge](variables/StatusBadge.md)
 - [TechnicalDetailsWidget](variables/TechnicalDetailsWidget.md)
 - [ValueCreationWidget](variables/ValueCreationWidget.md)
+- [WidgetSection](variables/WidgetSection.md)
 
 ## References
 

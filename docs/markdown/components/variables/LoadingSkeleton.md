@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.3**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.4**](../../README.md)
 
 ***
 
@@ -6,9 +6,9 @@
 
 # Variable: LoadingSkeleton
 
-> `const` **LoadingSkeleton**: `React.FC`\<`LoadingSkeletonProps`\>
+> `const` **LoadingSkeleton**: `React.FC`\<[`LoadingSkeletonProps`](../interfaces/LoadingSkeletonProps.md)\>
 
-Defined in: [components/common/LoadingSkeleton.tsx:51](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/components/common/LoadingSkeleton.tsx#L51)
+Defined in: [components/common/LoadingSkeleton.tsx:54](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/components/common/LoadingSkeleton.tsx#L54)
 
 Loading skeleton component for better perceived performance
 
@@ -22,7 +22,8 @@ user anxiety during loading operations. 📊
 
 Provides animated placeholder content that mimics the structure of
 the actual content being loaded. Uses CSS animations for smooth
-skeleton shimmer effect.
+skeleton shimmer effect. Supports multiple variants for different
+widget layouts.
 
 ## Example
 
@@ -33,6 +34,12 @@ skeleton shimmer effect.
 // Custom number of lines
 <LoadingSkeleton lines={5} />
 
-// With custom test ID
-<LoadingSkeleton lines={4} testId="metrics-skeleton" />
+// Summary widget skeleton
+<LoadingSkeleton variant="summary" />
+
+// Chart widget skeleton
+<LoadingSkeleton variant="chart" />
+
+// Metrics widget skeleton
+<LoadingSkeleton variant="metrics" />
 ```

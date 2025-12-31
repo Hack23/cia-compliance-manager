@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.3**](../README.md)
+[**CIA Compliance Manager Documentation v1.1.4**](../README.md)
 
 ***
 
@@ -10,6 +10,10 @@ Central export of utility functions for CIA Compliance Manager
 
 This index file provides organized exports of all utility functions
 to ensure they're properly accessible throughout the application.
+
+## Type Aliases
+
+- [WidgetClassKey](type-aliases/WidgetClassKey.md)
 
 ## Variables
 
@@ -112,6 +116,7 @@ to ensure they're properly accessible throughout the application.
 - [SecurityLevelBadge](variables/SecurityLevelBadge.md)
 - [toErrorObject](variables/toErrorObject.md)
 - [toTitleCase](variables/toTitleCase.md)
+- [WidgetClasses](variables/WidgetClasses.md)
 - [WidgetEmptyState](variables/WidgetEmptyState.md)
 - [WidgetError](variables/WidgetError.md)
 - [WidgetLoading](variables/WidgetLoading.md)
@@ -120,6 +125,7 @@ to ensure they're properly accessible throughout the application.
 
 - [areKeyboardShortcutsSupported](functions/areKeyboardShortcutsSupported.md)
 - [calculateWidgetRiskLevel](functions/calculateWidgetRiskLevel.md)
+- [cn](functions/cn.md)
 - [detectPlatform](functions/detectPlatform.md)
 - [formatSecurityMetric](functions/formatSecurityMetric.md)
 - [formatShortcut](functions/formatShortcut.md)

@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.3**](../README.md)
+[**CIA Compliance Manager Documentation v1.1.4**](../README.md)
 
 ***
 
@@ -24,6 +24,7 @@ Centralized hook exports simplify imports and promote hook reuse.
 - [SecurityLevelState](interfaces/SecurityLevelState.md)
 - [ServiceDataState](interfaces/ServiceDataState.md)
 - [UseSecurityLevelStateReturn](interfaces/UseSecurityLevelStateReturn.md)
+- [WidgetErrorState](interfaces/WidgetErrorState.md)
 
 ## Type Aliases
 
@@ -39,6 +40,8 @@ Centralized hook exports simplify imports and promote hook reuse.
 - [useResponsiveBreakpoint](functions/useResponsiveBreakpoint.md)
 - [useSecurityLevelState](functions/useSecurityLevelState.md)
 - [useServiceData](functions/useServiceData.md)
+- [useTabs](functions/useTabs.md)
+- [useWidgetError](functions/useWidgetError.md)
 
 ## References
 
@@ -69,3 +72,15 @@ Re-exports [UseKeyboardShortcutsOptions](../types/interfaces/UseKeyboardShortcut
 ### useSecurityMetricsService
 
 Re-exports [useSecurityMetricsService](useSecurityMetricsService/functions/useSecurityMetricsService.md)
+
+***
+
+### UseTabsOptions
+
+Re-exports [UseTabsOptions](../types/interfaces/UseTabsOptions.md)
+
+***
+
+### UseTabsReturn
+
+Re-exports [UseTabsReturn](../types/interfaces/UseTabsReturn.md)

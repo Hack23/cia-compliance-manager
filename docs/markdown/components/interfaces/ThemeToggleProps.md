@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.3**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.4**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: ThemeToggleProps
 
-Defined in: [types/componentPropExports.ts:129](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/componentPropExports.ts#L129)
+Defined in: [types/componentPropExports.ts:129](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L129)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:129](https://github.com/Hack23/cia-co
 
 > `optional` **className**: `string`
 
-Defined in: [types/componentPropExports.ts:132](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/componentPropExports.ts#L132)
+Defined in: [types/componentPropExports.ts:132](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L132)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [types/componentPropExports.ts:132](https://github.com/Hack23/cia-co
 
 > **isDarkMode**: `boolean`
 
-Defined in: [types/componentPropExports.ts:130](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/componentPropExports.ts#L130)
+Defined in: [types/componentPropExports.ts:130](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L130)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [types/componentPropExports.ts:130](https://github.com/Hack23/cia-co
 
 > **onToggle**: () => `void`
 
-Defined in: [types/componentPropExports.ts:131](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/componentPropExports.ts#L131)
+Defined in: [types/componentPropExports.ts:131](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L131)
 
 #### Returns
 
@@ -42,4 +42,4 @@ Defined in: [types/componentPropExports.ts:131](https://github.com/Hack23/cia-co
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:133](https://github.com/Hack23/cia-compliance-manager/blob/3cff826a4aee0338a550571cbd8e427564a36426/src/types/componentPropExports.ts#L133)
+Defined in: [types/componentPropExports.ts:133](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L133)

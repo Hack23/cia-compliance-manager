@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.23% </span>
+                <span class="strong">82.05% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>27/39</span>
+                <span class='fraction'>32/39</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -273,7 +273,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -281,9 +281,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">29x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">29x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -438,7 +438,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -580,7 +580,7 @@ const BusinessImpactSection: React.FC&lt;BusinessImpactSectionProps&gt; = ({
 &nbsp;
         {/* Strategic Impact */}
         {impact.strategic &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >          &lt;div</span>
+          &lt;div
             className={`p-3 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
           &gt;
             &lt;div className="flex items-center mb-2"&gt;
@@ -593,10 +593,10 @@ const BusinessImpactSection: React.FC&lt;BusinessImpactSectionProps&gt; = ({
             &lt;/div&gt;
             &lt;p className="text-sm text-gray-700 dark:text-gray-300"&gt;
               {impact.strategic.description ||
-                "No strategic impact information available"}
+<span class="branch-1 cbranch-no" title="branch not covered" >                "No strategic impact information available"}</span>
             &lt;/p&gt;
             {impact.strategic.competitiveAdvantage &amp;&amp; (
-              &lt;p className="text-sm text-gray-700 dark:text-gray-300 mt-1"&gt;
+<span class="branch-1 cbranch-no" title="branch not covered" >              &lt;p className="text-sm text-gray-700 dark:text-gray-300 mt-1"&gt;</span>
                 &lt;span className="font-medium"&gt;Competitive Advantage: &lt;/span&gt;
                 {impact.strategic.competitiveAdvantage}
               &lt;/p&gt;
@@ -627,15 +627,15 @@ const BusinessImpactSection: React.FC&lt;BusinessImpactSectionProps&gt; = ({
               &lt;/p&gt;
             )}
             {impact.regulatory.complianceViolations &amp;&amp;
-<span class="branch-1 cbranch-no" title="branch not covered" >              impact.regulatory.complianceViolations.length &gt; 0 &amp;&amp; (</span>
-<span class="branch-2 cbranch-no" title="branch not covered" >                &lt;div className="mt-1"&gt;</span>
+              impact.regulatory.complianceViolations.length &gt; 0 &amp;&amp; (
+                &lt;div className="mt-1"&gt;
                   &lt;span className="text-sm font-medium text-gray-700 dark:text-gray-300"&gt;
                     Potential Violations:{" "}
                   &lt;/span&gt;
                   &lt;div className="flex flex-wrap gap-1 mt-1"&gt;
                     {impact.regulatory.complianceViolations.map(
-<span class="fstat-no" title="function not covered" >                      (v</span>iolation, index) =&gt; (
-<span class="cstat-no" title="statement not covered" >                        &lt;span</span>
+                      (violation, index) =&gt; (
+                        &lt;span
                           key={index}
                           className={`px-2 py-0.5 text-xs rounded-full bg-${color}-50 text-${color}-700 dark:bg-${color}-900 dark:bg-opacity-50 dark:text-${color}-300`}
                         &gt;
@@ -661,7 +661,7 @@ export default BusinessImpactSection;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-29T20:28:14.224Z
+                at 2025-12-31T21:46:27.662Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
