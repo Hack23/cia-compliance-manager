@@ -7,7 +7,7 @@
  * @module hooks/useTabs
  */
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useMemo } from 'react';
 import { Tab, UseTabsOptions, UseTabsReturn } from '../types/tabs';
 
 /**
@@ -41,6 +41,11 @@ export function useTabs(tabs: Tab[], options: UseTabsOptions = {}): UseTabsRetur
   const [activeTab, setActiveTab] = useState<string>(initialTab || tabs[0]?.id || '');
   const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
 
+  // Memoize non-disabled tab IDs to avoid recalculating on every keydown
+  const enabledTabIds = useMemo(() => {
+    return tabs.filter(t => !t.disabled).map(t => t.id);
+  }, [tabs]);
+
   /**
    * Select a tab programmatically
    * Ignores disabled tabs and triggers onChange callback
@@ -58,9 +63,7 @@ export function useTabs(tabs: Tab[], options: UseTabsOptions = {}): UseTabsRetur
    * Supports Arrow Left/Right, Home, and End keys
    */
   const handleKeyDown = useCallback((event: React.KeyboardEvent, currentTabId: string): void => {
-    // Get only non-disabled tab IDs
-    const tabIds = tabs.filter(t => !t.disabled).map(t => t.id);
-    const currentIndex = tabIds.indexOf(currentTabId);
+    const currentIndex = enabledTabIds.indexOf(currentTabId);
 
     let newIndex = currentIndex;
 
@@ -68,12 +71,12 @@ export function useTabs(tabs: Tab[], options: UseTabsOptions = {}): UseTabsRetur
       case 'ArrowLeft':
         event.preventDefault();
         // Wrap to end if at beginning
-        newIndex = currentIndex > 0 ? currentIndex - 1 : tabIds.length - 1;
+        newIndex = currentIndex > 0 ? currentIndex - 1 : enabledTabIds.length - 1;
         break;
       case 'ArrowRight':
         event.preventDefault();
         // Wrap to beginning if at end
-        newIndex = currentIndex < tabIds.length - 1 ? currentIndex + 1 : 0;
+        newIndex = currentIndex < enabledTabIds.length - 1 ? currentIndex + 1 : 0;
         break;
       case 'Home':
         event.preventDefault();
@@ -81,19 +84,19 @@ export function useTabs(tabs: Tab[], options: UseTabsOptions = {}): UseTabsRetur
         break;
       case 'End':
         event.preventDefault();
-        newIndex = tabIds.length - 1;
+        newIndex = enabledTabIds.length - 1;
         break;
       default:
         // Don't handle other keys
         return;
     }
 
-    const newTabId = tabIds[newIndex];
+    const newTabId = enabledTabIds[newIndex];
     selectTab(newTabId);
     
     // Focus the new tab button
     tabRefs.current.get(newTabId)?.focus();
-  }, [tabs, selectTab]);
+  }, [enabledTabIds, selectTab]);
 
   return {
     activeTab,
