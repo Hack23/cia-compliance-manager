@@ -11,6 +11,7 @@ import { BusinessImpactDetails } from "../../../types/cia-services";
 import { BusinessImpactAnalysisWidgetProps } from "../../../types/widget-props";
 import { isNullish } from "../../../utils/typeGuards";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import KeyValuePair from "../../common/KeyValuePair";
 import RiskLevelBadge from "../../common/RiskLevelBadge";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
@@ -216,11 +217,11 @@ const BusinessImpactAnalysisWidget: React.FC<
     return (
       <div
         key={`impact-${category}`}
-        className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg mb-md"
+        className={cn(WidgetClasses.card, "bg-gray-50 dark:bg-gray-800 mb-md")}
         data-testid={BUSINESS_IMPACT_WIDGET_IDS.section(`impact-${category.toLowerCase()}`)}
       >
         <div className="flex justify-between items-center mb-sm">
-          <h3 className="text-md font-medium flex items-center">
+          <h3 className={cn(WidgetClasses.subheading, "flex items-center")}>
             <span className="mr-sm">{icons[category] || "📊"}</span>
             {category} Impact
           </h3>
@@ -231,7 +232,7 @@ const BusinessImpactAnalysisWidget: React.FC<
             />
           )}
         </div>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
+        <p className={cn(WidgetClasses.body)}>
           {impact.description || "No description available"}
         </p>
       </div>
@@ -363,33 +364,36 @@ const BusinessImpactAnalysisWidget: React.FC<
   const renderImpactHeatMap = () => {
     // Create a visual representation of impact across CIA components
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-sm mt-md mb-md">
+      <div className={cn(WidgetClasses.grid3Cols, "mt-md mb-md")}>
         <div
-          className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
-            confidentialityLevel
-          )}`}
+          className={cn(
+            "p-2 sm:p-3 rounded text-center",
+            getImpactColorClass(confidentialityLevel)
+          )}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-confidentiality')}
         >
-          <div className="text-xs sm:text-sm font-medium">Confidentiality</div>
-          <div className="text-sm sm:text-base font-bold">{confidentialityLevel}</div>
+          <div className={cn(WidgetClasses.label, "lowercase")}>Confidentiality</div>
+          <div className={cn(WidgetClasses.body, "font-bold")}>{confidentialityLevel}</div>
         </div>
         <div
-          className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
-            integrityLevel
-          )}`}
+          className={cn(
+            "p-2 sm:p-3 rounded text-center",
+            getImpactColorClass(integrityLevel)
+          )}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-integrity')}
         >
-          <div className="text-xs sm:text-sm font-medium">Integrity</div>
-          <div className="text-sm sm:text-base font-bold">{integrityLevel}</div>
+          <div className={cn(WidgetClasses.label, "lowercase")}>Integrity</div>
+          <div className={cn(WidgetClasses.body, "font-bold")}>{integrityLevel}</div>
         </div>
         <div
-          className={`p-2 sm:p-3 rounded text-center ${getImpactColorClass(
-            availabilityLevel
-          )}`}
+          className={cn(
+            "p-2 sm:p-3 rounded text-center",
+            getImpactColorClass(availabilityLevel)
+          )}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-availability')}
         >
-          <div className="text-xs sm:text-sm font-medium">Availability</div>
-          <div className="text-sm sm:text-base font-bold">{availabilityLevel}</div>
+          <div className={cn(WidgetClasses.label, "lowercase")}>Availability</div>
+          <div className={cn(WidgetClasses.body, "font-bold")}>{availabilityLevel}</div>
         </div>
       </div>
     );
@@ -399,13 +403,16 @@ const BusinessImpactAnalysisWidget: React.FC<
   const renderExecutiveSummary = () => {
     return (
       <div
-        className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-md"
+        className={cn(
+          WidgetClasses.card,
+          "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 mb-md shadow-none"
+        )}
         data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('executive-summary')}
       >
-        <h3 className="text-lg font-medium mb-sm flex items-center">
+        <h3 className={cn(WidgetClasses.heading, "flex items-center")}>
           <span className="mr-sm">📊</span>Executive Summary
         </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-md">
+        <p className={cn(WidgetClasses.body, "mb-md")}>
           Current security posture provides{" "}
           <span className="font-medium">{impactLevel}</span> protection for
           business operations. Business impacts are most significant in{" "}
@@ -416,14 +423,12 @@ const BusinessImpactAnalysisWidget: React.FC<
           )}{" "}
           areas.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-sm">
+        <div className={cn(WidgetClasses.grid3Cols)}>
           <KeyValuePair
             label="Overall Impact"
             value={impactLevel}
             testId={`${testId}-overall-impact`}
-            valueClassName={`font-medium ${getImpactTextColorClass(
-              impactLevel
-            )}`}
+            valueClassName={cn("font-medium", getImpactTextColorClass(impactLevel))}
           />
           <KeyValuePair
             label="Implementation Complexity"
