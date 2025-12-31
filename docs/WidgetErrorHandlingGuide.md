@@ -120,7 +120,6 @@ const MyWidget: React.FC<MyWidgetProps> = ({
             message={error?.message || 'Failed to load data'}
             retry={loadData}
             testId={`${testId}-error`}
-            aria-live="assertive"
           />
         )}
         
@@ -579,9 +578,10 @@ Always include proper ARIA attributes for error and loading states:
   // Automatically includes:
   // role="alert"
   // aria-live="polite"
-  // Add for critical errors:
-  aria-live="assertive"
 />
+
+// For critical errors, use announceToScreenReader() with 'assertive' priority
+// (see "Screen Reader Announcements" section below)
 
 // Content updates
 <div 
@@ -647,11 +647,11 @@ Ensure retry buttons are keyboard accessible:
 
 ## Additional Resources
 
-- [WidgetErrorBoundary Component](../../common/WidgetErrorBoundary.tsx)
-- [useWidgetError Hook](../../../hooks/useWidgetError.ts)
-- [ErrorMessage Component](../../common/ErrorMessage.tsx)
-- [LoadingSkeleton Component](../../common/LoadingSkeleton.tsx)
-- [Accessibility Utils](../../../utils/accessibility.ts)
+- [WidgetErrorBoundary Component](../src/components/common/WidgetErrorBoundary.tsx)
+- [useWidgetError Hook](../src/hooks/useWidgetError.ts)
+- [ErrorMessage Component](../src/components/common/ErrorMessage.tsx)
+- [LoadingSkeleton Component](../src/components/common/LoadingSkeleton.tsx)
+- [Accessibility Utils](../src/utils/accessibility.ts)
 
 ---
 
