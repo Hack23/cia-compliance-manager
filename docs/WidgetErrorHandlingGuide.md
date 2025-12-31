@@ -118,7 +118,7 @@ const MyWidget: React.FC<MyWidgetProps> = ({
         {hasError && (
           <ErrorMessage
             message={error?.message || 'Failed to load data'}
-            onRetry={loadData}
+            retry={loadData}
             testId={`${testId}-error`}
             aria-live="assertive"
           />
@@ -355,7 +355,7 @@ const ExampleWidget: React.FC<MyWidgetProps> = ({
           <ErrorMessage
             title="Failed to Load Metrics"
             message={error?.message || 'An unexpected error occurred'}
-            onRetry={loadData}
+            retry={loadData}
             testId={`${testId}-error`}
           />
         )}
@@ -574,7 +574,7 @@ Always include proper ARIA attributes for error and loading states:
 // Error state
 <ErrorMessage
   message="Failed to load"
-  onRetry={retry}
+  retry={retry}
   testId="widget-error"
   // Automatically includes:
   // role="alert"

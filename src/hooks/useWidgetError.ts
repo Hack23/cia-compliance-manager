@@ -70,7 +70,7 @@ export interface WidgetErrorState {
  *   };
  * 
  *   if (hasError) {
- *     return <ErrorMessage message={error?.message} onRetry={loadData} />;
+ *     return <ErrorMessage message={error?.message} retry={loadData} />;
  *   }
  * 
  *   return <div>Widget content</div>;

@@ -20,10 +20,6 @@ describe('useWidgetError', () => {
     vi.clearAllMocks();
   });
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   describe('Initial State', () => {
     it('should initialize with no error', () => {
       const { result } = renderHook(() => useWidgetError(widgetName));

@@ -452,3 +452,35 @@ export type {
   SecurityResourcesWidgetProps,
   SecurityVisualizationWidgetProps,
 } from './widget-props';
+
+/**
+ * Skeleton variant types for different widget layouts
+ */
+export type SkeletonVariant = 'summary' | 'chart' | 'list' | 'metrics' | 'tabs' | 'default';
+
+/**
+ * Props for LoadingSkeleton component
+ */
+export interface LoadingSkeletonProps {
+  /**
+   * Number of skeleton lines to display (used for 'default' variant)
+   * @default 3
+   */
+  lines?: number;
+  
+  /**
+   * Skeleton variant for different widget types
+   * @default 'default'
+   */
+  variant?: SkeletonVariant;
+  
+  /**
+   * Optional test ID for automated testing
+   */
+  testId?: string;
+  
+  /**
+   * Optional CSS class name
+   */
+  className?: string;
+}
