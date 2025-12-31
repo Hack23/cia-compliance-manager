@@ -232,7 +232,7 @@ const BusinessImpactAnalysisWidget: React.FC<
             />
           )}
         </div>
-        <p className={cn(WidgetClasses.body)}>
+        <p className={WidgetClasses.body}>
           {impact.description || "No description available"}
         </p>
       </div>
@@ -372,7 +372,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           )}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-confidentiality')}
         >
-          <div className={cn(WidgetClasses.labelNormal)}>Confidentiality</div>
+          <div className={WidgetClasses.labelNormal}>Confidentiality</div>
           <div className={cn(WidgetClasses.body, "font-bold")}>{confidentialityLevel}</div>
         </div>
         <div
@@ -382,7 +382,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           )}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-integrity')}
         >
-          <div className={cn(WidgetClasses.labelNormal)}>Integrity</div>
+          <div className={WidgetClasses.labelNormal}>Integrity</div>
           <div className={cn(WidgetClasses.body, "font-bold")}>{integrityLevel}</div>
         </div>
         <div
@@ -392,7 +392,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           )}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-availability')}
         >
-          <div className={cn(WidgetClasses.labelNormal)}>Availability</div>
+          <div className={WidgetClasses.labelNormal}>Availability</div>
           <div className={cn(WidgetClasses.body, "font-bold")}>{availabilityLevel}</div>
         </div>
       </div>
@@ -423,7 +423,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           )}{" "}
           areas.
         </p>
-        <div className={cn(WidgetClasses.grid3Cols)}>
+        <div className={WidgetClasses.grid3Cols}>
           <KeyValuePair
             label="Overall Impact"
             value={impactLevel}

@@ -340,7 +340,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
           </p>
         </section>
 
-        <div className={cn(WidgetClasses.flexRow, "md:flex-row")}>
+        <div className={WidgetClasses.flexRow}>
           {/* Filters and search - left column on larger screens */}
           <aside 
             className="md:w-1/4"

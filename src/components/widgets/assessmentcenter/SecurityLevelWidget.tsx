@@ -232,7 +232,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           "p-md rounded-md",
           "bg-info-light/10 dark:bg-info-dark/20"
         )}>
-          <p className={cn(WidgetClasses.body)}>
+          <p className={WidgetClasses.body}>
             Configure security levels for each CIA component to set your
             organization's security posture. Higher levels provide stronger
             protection but may require more resources to implement.
@@ -246,7 +246,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
             "mb-md bg-error-light/10 dark:bg-error-dark/20 text-error-dark dark:text-error-light shadow-none"
           )}>
             <h4 className="font-medium">Error</h4>
-            <p className={cn(WidgetClasses.body)}>
+            <p className={WidgetClasses.body}>
               Unable to load component details. Please try again later.
             </p>
           </div>
@@ -259,14 +259,14 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
             WidgetClasses.loading,
             "mb-md bg-info-light/10 dark:bg-info-dark/20 text-info-dark dark:text-info-light shadow-none"
           )}>
-            <p className={cn(WidgetClasses.body)}>Loading security level details...</p>
+            <p className={WidgetClasses.body}>Loading security level details...</p>
           </div>
         )}
 
-        <div className={cn(WidgetClasses.grid2Cols)}>
+        <div className={WidgetClasses.grid2Cols}>
           {/* Security level selectors */}
           <div>
-            <h3 className={cn(WidgetClasses.heading)}>
+            <h3 className={WidgetClasses.heading}>
               Configure Security Levels
             </h3>
 

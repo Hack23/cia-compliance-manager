@@ -334,7 +334,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
               className="mb-md"
               aria-labelledby={`${component}-business-impact-heading`}
             >
-              <h3 id={`${component}-business-impact-heading`} className={cn(WidgetClasses.heading)}>
+              <h3 id={`${component}-business-impact-heading`} className={WidgetClasses.heading}>
                 Business Impact
               </h3>
               <BusinessImpactSection
@@ -385,7 +385,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
                   testId={testIds.widgetIds.label("rpo")}
                 />
               </div>
-              <div className={cn(WidgetClasses.grid2Cols)}>
+              <div className={WidgetClasses.grid2Cols}>
                 <MetricCard
                   label="Service Level Agreement"
                   value={metrics.data.sla}
@@ -406,7 +406,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
               className="mb-md"
               testId={testIds.widgetIds.section("metrics")}
             >
-              <div className={cn(WidgetClasses.grid2Cols)}>
+              <div className={WidgetClasses.grid2Cols}>
                 <MetricCard
                   label="Data Validation Controls"
                   value={metrics.data.validationLevel}
@@ -434,7 +434,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
                 className="mb-lg"
                 testId={testIds.widgetIds.section("data-protection")}
               >
-                <div className={cn(WidgetClasses.grid2Cols)}>
+                <div className={WidgetClasses.grid2Cols}>
                   <MetricCard
                     label="Data Classification"
                     value={metrics.data.dataClassification}

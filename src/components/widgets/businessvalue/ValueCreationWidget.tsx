@@ -326,13 +326,13 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
             "p-md rounded-md",
             "bg-info-light/10 dark:bg-info-dark/20"
           )}>
-            <p className={cn(WidgetClasses.body)} data-testid={VALUE_CREATION_WIDGET_IDS.label('summary')}>
+            <p className={WidgetClasses.body} data-testid={VALUE_CREATION_WIDGET_IDS.label('summary')}>
               {getBusinessValueSummary()}
             </p>
           </div>
 
           <div className="flex justify-between items-center mb-md">
-            <h3 id="value-profile-heading" className={cn(WidgetClasses.heading)}>
+            <h3 id="value-profile-heading" className={WidgetClasses.heading}>
               Overall Value Profile
             </h3>
             <div className="flex items-center">

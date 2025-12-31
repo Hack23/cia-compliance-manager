@@ -296,7 +296,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
           )}
           aria-labelledby="compliance-description-heading"
         >
-          <p id="compliance-description-heading" className={cn(WidgetClasses.body)}>
+          <p id="compliance-description-heading" className={WidgetClasses.body}>
             This widget shows your compliance status with various regulatory
             frameworks and industry standards based on your selected security
             levels.
@@ -308,7 +308,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
           className="mb-lg"
           aria-labelledby="overall-compliance-heading"
         >
-          <h3 id="overall-compliance-heading" className={cn(WidgetClasses.heading)}>
+          <h3 id="overall-compliance-heading" className={WidgetClasses.heading}>
             Overall Compliance Status
           </h3>
           <div
@@ -383,7 +383,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
             <div className="mb-lg">
               <h3 className={cn(WidgetClasses.heading)}>Compliant Frameworks</h3>
               <div
-                className={cn(WidgetClasses.grid2Cols)}
+                className={WidgetClasses.grid2Cols}
                 data-testid={COMPLIANCE_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST}
               >
                 {complianceStatus.compliantFrameworks.map(

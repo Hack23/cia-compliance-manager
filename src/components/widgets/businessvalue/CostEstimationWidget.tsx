@@ -278,7 +278,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
 
         {/* CAPEX vs OPEX ratio visualization */}
         <div className="mb-lg">
-          <h3 className={cn(WidgetClasses.heading)}>Cost Breakdown</h3>
+          <h3 className={WidgetClasses.heading}>Cost Breakdown</h3>
           <div className={cn(WidgetClasses.card, "shadow-md")}>
             <div className="flex justify-between items-center mb-xs">
               <div className={cn(WidgetClasses.body, "font-medium")}>CAPEX</div>
@@ -305,7 +305,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         <div className={cn(WidgetClasses.grid2Cols, "mb-lg")}>
           {/* Implementation complexity */}
           <div className={cn(WidgetClasses.card, "shadow-sm")}>
-            <h4 className={cn(WidgetClasses.subheading)}>
+            <h4 className={WidgetClasses.subheading}>
               Implementation Complexity
             </h4>
             <div className="mb-md">
@@ -319,17 +319,17 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 ></div>
               </div>
             </div>
-            <div className={cn(WidgetClasses.labelNormal)}>
+            <div className={WidgetClasses.labelNormal}>
               Based on combined complexity across CIA components
             </div>
           </div>
 
           {/* Personnel requirements */}
           <div className={cn(WidgetClasses.card, "shadow-sm")}>
-            <h4 className={cn(WidgetClasses.subheading)}>Personnel Requirements</h4>
+            <h4 className={WidgetClasses.subheading}>Personnel Requirements</h4>
             <div className="grid grid-cols-1 gap-md">
               <div className="flex justify-between items-center">
-                <div className={cn(WidgetClasses.body)}>
+                <div className={WidgetClasses.body}>
                   Implementation Team
                 </div>
                 <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
@@ -337,7 +337,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 </div>
               </div>
               <div className="flex justify-between items-center">
-                <div className={cn(WidgetClasses.body)}>
+                <div className={WidgetClasses.body}>
                   Ongoing Maintenance
                 </div>
                 <div className="text-lg font-bold text-green-600 dark:text-green-400">
@@ -359,7 +359,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
 
         {/* Component breakdown */}
         <div className="mb-lg">
-          <h3 className={cn(WidgetClasses.heading)}>
+          <h3 className={WidgetClasses.heading}>
             Cost by Security Component
           </h3>
           <div className="grid grid-cols-1 gap-md">
@@ -453,9 +453,9 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
 
         {/* Expertise required */}
         <div className="mb-lg">
-          <h3 className={cn(WidgetClasses.heading)}>Expertise Required</h3>
+          <h3 className={WidgetClasses.heading}>Expertise Required</h3>
           <div className={cn(WidgetClasses.card, "shadow-sm")}>
-            <ul className={cn(WidgetClasses.grid2Cols)}>
+            <ul className={WidgetClasses.grid2Cols}>
               {expertiseRequired.map((expertise: string, index: number) => (
                 <li
                   key={`expertise-${index}`}
