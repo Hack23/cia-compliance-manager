@@ -48,3 +48,7 @@ export { useLocalStorage } from "./useLocalStorage";
 // Keyboard Shortcuts Hooks
 export { useKeyboardShortcuts } from "./useKeyboardShortcuts";
 export type { UseKeyboardShortcutsOptions } from "../types/keyboard";
+
+// Error Handling Hooks
+export { useWidgetError } from "./useWidgetError";
+export type { WidgetErrorState } from "./useWidgetError";
