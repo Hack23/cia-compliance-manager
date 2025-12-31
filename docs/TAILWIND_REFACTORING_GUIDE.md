@@ -51,10 +51,10 @@ import { WidgetClasses, cn } from '@/utils/tailwindClassHelpers';
 
 **After:**
 ```tsx
-<h2 className={cn(WidgetClasses.heading)}>Title</h2>
-<h3 className={cn(WidgetClasses.subheading)}>Subtitle</h3>
-<p className={cn(WidgetClasses.body)}>Body text</p>
-<div className={cn(WidgetClasses.label)}>Label</div>
+<h2 className={WidgetClasses.heading}>Title</h2>
+<h3 className={WidgetClasses.subheading}>Subtitle</h3>
+<p className={WidgetClasses.body}>Body text</p>
+<div className={WidgetClasses.label}>Label</div>
 ```
 
 ### Card Patterns
@@ -91,12 +91,12 @@ import { WidgetClasses, cn } from '@/utils/tailwindClassHelpers';
 
 **After:**
 ```tsx
-<div className={cn(WidgetClasses.grid2Cols)}>
+<div className={WidgetClasses.grid2Cols}>
   <div>Item 1</div>
   <div>Item 2</div>
 </div>
 
-<div className={cn(WidgetClasses.grid3Cols)}>
+<div className={WidgetClasses.grid3Cols}>
   <div>Item 1</div>
   <div>Item 2</div>
   <div>Item 3</div>
@@ -143,8 +143,8 @@ import { WidgetClasses, cn } from '@/utils/tailwindClassHelpers';
 
 **After:**
 ```tsx
-<div className={cn(WidgetClasses.dividerHorizontal)}></div>
-<div className={cn(WidgetClasses.dividerVertical)}></div>
+<div className={WidgetClasses.dividerHorizontal}></div>
+<div className={WidgetClasses.dividerVertical}></div>
 ```
 
 ### Section Borders
@@ -238,11 +238,11 @@ className="p-md bg-white dark:bg-gray-800 rounded-md border border-gray-200 dark
 
 ### ✅ Do
 ```tsx
-// Use cn() utility
+// Use cn() utility when combining classes or conditionals
 className={cn(WidgetClasses.body, isActive && 'text-primary', !isActive && 'text-neutral')}
 
-// Use WidgetClasses constants
-className={cn(WidgetClasses.card)}
+// Use WidgetClasses constants directly when no conditionals are needed
+className={WidgetClasses.card}
 ```
 
 ## Maintaining Color Customizations
