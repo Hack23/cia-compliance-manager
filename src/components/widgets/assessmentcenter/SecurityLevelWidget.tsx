@@ -14,6 +14,7 @@ import {
   getWidgetAriaDescription,
   announceToScreenReader 
 } from "../../../utils/accessibility";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -219,15 +220,18 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         testId={testId}
       >
       <div 
-        className="p-md sm:p-lg"
+        className={cn("p-md sm:p-lg")}
         role="region"
         aria-label={getWidgetAriaDescription(
           "Security Level Configuration",
           "Configure security levels for each CIA component to set your organization's security posture"
         )}
       >
-        <div className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md">
-          <p className="text-body">
+        <div className={cn(
+          WidgetClasses.section,
+          "bg-info-light/10 dark:bg-info-dark/20"
+        )}>
+          <p className={cn(WidgetClasses.body)}>
             Configure security levels for each CIA component to set your
             organization's security posture. Higher levels provide stronger
             protection but may require more resources to implement.
@@ -236,9 +240,12 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
         {/* Display error message if there's an error */}
         {(error || serviceError) && (
-          <div className="p-md mb-md bg-error-light/10 dark:bg-error-dark/20 text-error-dark dark:text-error-light rounded-md">
+          <div className={cn(
+            WidgetClasses.card,
+            "mb-md bg-error-light/10 dark:bg-error-dark/20 text-error-dark dark:text-error-light shadow-none"
+          )}>
             <h4 className="font-medium">Error</h4>
-            <p className="text-body">
+            <p className={cn(WidgetClasses.body)}>
               Unable to load component details. Please try again later.
             </p>
           </div>
@@ -246,28 +253,35 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
         {/* Display loading state */}
         {isLoading && (
-          <div className="p-md mb-md bg-info-light/10 dark:bg-info-dark/20 text-info-dark dark:text-info-light rounded-md">
-            <p className="text-body">Loading security level details...</p>
+          <div className={cn(
+            WidgetClasses.card,
+            WidgetClasses.loading,
+            "mb-md bg-info-light/10 dark:bg-info-dark/20 text-info-dark dark:text-info-light shadow-none"
+          )}>
+            <p className={cn(WidgetClasses.body)}>Loading security level details...</p>
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-lg">
+        <div className={cn(WidgetClasses.grid2Cols)}>
           {/* Security level selectors */}
           <div>
-            <h3 className="text-heading font-medium mb-md">
+            <h3 className={cn(WidgetClasses.heading)}>
               Configure Security Levels
             </h3>
 
             <div className="space-y-md">
               {/* Confidentiality selector */}
               <div
-                className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md border border-neutral-light dark:border-neutral-dark"
+                className={cn(
+                  WidgetClasses.card,
+                  "bg-neutral-light/10 dark:bg-neutral-dark/20"
+                )}
                 data-testid={SECURITY_LEVEL_WIDGET_IDS.section('confidentiality')}
               >
                 <div className="flex justify-between items-center mb-sm">
                   <label
                     htmlFor="confidentiality-select"
-                    className="text-body font-medium flex items-center"
+                    className={cn(WidgetClasses.body, "font-medium flex items-center")}
                   >
                     <span className="text-purple-500 dark:text-purple-400 mr-sm">
                       {CIA_COMPONENT_ICONS.confidentiality}
@@ -285,7 +299,10 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 <select
                   id="confidentiality-select"
-                  className="w-full p-sm border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-300 hover:border-purple-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
+                  className={cn(
+                    "w-full p-sm border rounded-md bg-white dark:bg-gray-700 dark:border-gray-600 transition-all duration-normal hover:border-purple-400",
+                    WidgetClasses.focusVisible
+                  )}
                   value={confidentialityLevel}
                   onChange={handleConfidentialityChange}
                   data-testid={CIA_TEST_IDS.CONFIDENTIALITY_SELECT}
@@ -298,7 +315,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </select>
 
                 <div
-                  className="mt-sm text-xs text-gray-600 dark:text-gray-400"
+                  className={cn(WidgetClasses.label, "mt-sm lowercase")}
                   data-testid={SECURITY_LEVEL_WIDGET_IDS.label('confidentiality-summary')}
                 >
                   {confidentialityLevel}:{" "}
@@ -306,7 +323,10 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </div>
 
                 <button
-                  className="mt-sm px-4 py-3 sm:px-3 sm:py-2 text-sm sm:text-xs min-h-[44px] min-w-[44px] bg-blue-600 text-white rounded hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+                  className={cn(
+                    WidgetClasses.buttonPrimary,
+                    "mt-sm min-h-[44px] min-w-[44px]"
+                  )}
                   onClick={() => setActiveComponent("confidentiality")}
                   data-testid={SECURITY_LEVEL_WIDGET_IDS.button('confidentiality-details')}
                 >
@@ -315,7 +335,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 {lastChangedComponent === "confidentiality" && (
                   <div
-                    className="mt-sm text-xs text-green-600 dark:text-green-400 animate-pulse"
+                    className={cn(WidgetClasses.label, "mt-sm text-green-600 dark:text-green-400 animate-pulse lowercase")}
                     data-testid={SECURITY_LEVEL_WIDGET_IDS.label('confidentiality-changed')}
                   >
                     ✓ Security level updated
