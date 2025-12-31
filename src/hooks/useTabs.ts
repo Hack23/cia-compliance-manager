@@ -63,9 +63,13 @@ export function useTabs(tabs: Tab[], options: UseTabsOptions = {}): UseTabsRetur
    * Supports Arrow Left/Right, Home, and End keys
    */
   const handleKeyDown = useCallback((event: React.KeyboardEvent, currentTabId: string): void => {
-    const currentIndex = enabledTabIds.indexOf(currentTabId);
+    // Early return if no enabled tabs
+    if (enabledTabIds.length === 0) {
+      return;
+    }
 
-    let newIndex = currentIndex;
+    const currentIndex = enabledTabIds.indexOf(currentTabId);
+    let newIndex: number;
 
     switch (event.key) {
       case 'ArrowLeft':

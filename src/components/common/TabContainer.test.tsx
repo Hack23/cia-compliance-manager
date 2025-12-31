@@ -295,7 +295,7 @@ describe('TabContainer', () => {
       
       const badge = screen.getByText('3');
       expect(badge).toBeInTheDocument();
-      expect(badge).toHaveClass('bg-blue-100');
+      expect(badge).toHaveClass('bg-info-light/10');
     });
   });
 

@@ -115,9 +115,9 @@ export const TabContainer: React.FC<TabContainerProps> = ({
               className={`
                 px-4 py-2 font-medium text-sm rounded-t-lg
                 transition-colors
-                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                focus:outline-none focus:ring-2 focus:ring-info focus:ring-offset-2
                 ${isActive 
-                  ? 'bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400' 
+                  ? 'bg-white dark:bg-gray-800 text-info-dark dark:text-info-light border-b-2 border-info-dark dark:border-info-light' 
                   : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }
                 ${tab.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
@@ -128,7 +128,7 @@ export const TabContainer: React.FC<TabContainerProps> = ({
                 {tab.icon}
                 <span>{tab.label}</span>
                 {tab.badge && (
-                  <span className="ml-2 px-2 py-0.5 text-xs bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full">
+                  <span className="ml-2 px-2 py-0.5 text-xs bg-info-light/10 dark:bg-info-dark/20 text-info-dark dark:text-info-light rounded-full">
                     {tab.badge}
                   </span>
                 )}
@@ -148,7 +148,7 @@ export const TabContainer: React.FC<TabContainerProps> = ({
           hidden={activeTab !== tab.id}
           data-testid={`${testId}-panel-${tab.id}`}
           className="focus:outline-none"
-          tabIndex={0}
+          tabIndex={activeTab === tab.id ? 0 : -1}
         >
           {activeTab === tab.id && tab.content}
         </div>
