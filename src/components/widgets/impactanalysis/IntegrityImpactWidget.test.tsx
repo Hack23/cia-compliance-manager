@@ -113,10 +113,10 @@ describe("IntegrityImpactWidget", () => {
   it("displays security level badge", () => {
     createComponent();
     expect(
-      screen.getByTestId("test-integrity-widget-integrity-badge")
+      screen.getByTestId("widget-integrity-impact-label-security-badge")
     ).toBeInTheDocument();
     expect(
-      screen.getByTestId("test-integrity-widget-integrity-badge")
+      screen.getByTestId("widget-integrity-impact-label-security-badge")
     ).toHaveTextContent("Moderate");
   });
 
@@ -159,7 +159,7 @@ describe("IntegrityImpactWidget", () => {
       integrityLevel: "High",
     });
     expect(
-      screen.getByTestId("test-integrity-widget-integrity-badge")
+      screen.getByTestId("widget-integrity-impact-label-security-badge")
     ).toHaveTextContent("High");
   });
 
@@ -168,7 +168,7 @@ describe("IntegrityImpactWidget", () => {
       integrityLevel: "Low",
     });
     expect(
-      screen.getByTestId("test-integrity-widget-integrity-badge")
+      screen.getByTestId("widget-integrity-impact-label-security-badge")
     ).toHaveTextContent("Low");
   });
 
@@ -178,7 +178,7 @@ describe("IntegrityImpactWidget", () => {
       integrityLevel: "None" as SecurityLevel,
     });
     expect(
-      screen.getByTestId("test-integrity-widget-integrity-badge")
+      screen.getByTestId("widget-integrity-impact-label-security-badge")
     ).toHaveTextContent("None");
 
     // Look for the text with the "< " prefix
@@ -190,7 +190,7 @@ describe("IntegrityImpactWidget", () => {
       integrityLevel: "Very High" as SecurityLevel,
     });
     expect(
-      screen.getByTestId("test-integrity-widget-integrity-badge")
+      screen.getByTestId("widget-integrity-impact-label-security-badge")
     ).toHaveTextContent("Very High");
 
     // Look for the text with the "< " prefix
