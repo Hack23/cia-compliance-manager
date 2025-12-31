@@ -2,7 +2,14 @@ import React from 'react';
 import type { LoadingSkeletonProps, SkeletonVariant } from '../../types/componentPropExports';
 
 /**
- * Configuration for skeleton variants
+ * Configuration structure for skeleton variants
+ * 
+ * Defines the rendering configuration for each skeleton variant including
+ * accessibility attributes and the render function that produces the skeleton DOM.
+ * 
+ * @property ariaLabel - ARIA label for screen readers describing what's loading
+ * @property srText - Screen reader text announced when skeleton is rendered
+ * @property render - Function that generates the skeleton DOM elements
  */
 interface SkeletonVariantConfig {
   ariaLabel: string;
@@ -156,7 +163,17 @@ export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({
 
   // Get the configuration for the current variant, fallback to default
   const config = variantConfigs[variant] || variantConfigs.default;
-  const spaceClass = variant === 'list' ? 'space-y-3' : variant === 'metrics' ? '' : 'space-y-4';
+  
+  // Explicit spacing configuration per variant for maintainability
+  const spaceClassMap: Record<SkeletonVariant, string> = {
+    default: 'space-y-4',
+    summary: 'space-y-4',
+    chart: 'space-y-4',
+    tabs: 'space-y-4',
+    list: 'space-y-3',
+    metrics: ''
+  };
+  const spaceClass = spaceClassMap[variant] ?? 'space-y-4';
 
   return (
     <div 

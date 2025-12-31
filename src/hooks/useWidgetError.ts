@@ -90,7 +90,20 @@ export function useWidgetError(widgetName: string): WidgetErrorState {
     } else if (typeof err === 'string') {
       return new Error(err);
     } else {
-      return new Error(`${widgetName}: Unknown error occurred`);
+      // Attempt to preserve error details for debugging
+      let errorDetails: string;
+      
+      if (typeof err === 'object' && err !== null) {
+        try {
+          errorDetails = JSON.stringify(err, null, 2);
+        } catch {
+          errorDetails = '[Unserializable error object]';
+        }
+      } else {
+        errorDetails = String(err);
+      }
+      
+      return new Error(`${widgetName}: Unknown error occurred - ${errorDetails}`);
     }
   }, [widgetName]);
 

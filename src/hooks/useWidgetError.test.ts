@@ -104,7 +104,7 @@ describe('useWidgetError', () => {
       expect(result.current.hasError).toBe(true);
     });
 
-    it('should handle unknown error types with generic message', () => {
+    it('should handle unknown error types with detailed message', () => {
       const { result } = renderHook(() => useWidgetError(widgetName));
       const unknownError = { code: 500, status: 'failed' };
 
@@ -113,7 +113,9 @@ describe('useWidgetError', () => {
       });
 
       expect(result.current.error).toBeInstanceOf(Error);
-      expect(result.current.error?.message).toBe(`${widgetName}: Unknown error occurred`);
+      expect(result.current.error?.message).toContain(`${widgetName}: Unknown error occurred`);
+      expect(result.current.error?.message).toContain('"code": 500');
+      expect(result.current.error?.message).toContain('"status": "failed"');
       expect(result.current.hasError).toBe(true);
     });
 

@@ -16,8 +16,12 @@ describe('LoadingSkeleton', () => {
     it('should render with custom number of lines', () => {
       render(<LoadingSkeleton lines={5} />);
       
-      expect(screen.getByTestId('loading-skeleton-line-0')).toBeInTheDocument();
-      expect(screen.getByTestId('loading-skeleton-line-4')).toBeInTheDocument();
+      // Verify all 5 lines exist (0-4)
+      for (let i = 0; i < 5; i++) {
+        expect(screen.getByTestId(`loading-skeleton-line-${i}`)).toBeInTheDocument();
+      }
+      
+      // Verify line 5 does not exist
       expect(screen.queryByTestId('loading-skeleton-line-5')).not.toBeInTheDocument();
     });
 

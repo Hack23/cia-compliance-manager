@@ -35,10 +35,6 @@ import ErrorMessage from '../../common/ErrorMessage';
 import LoadingSkeleton from '../../common/LoadingSkeleton';
 import LoadingSpinner from '../../common/LoadingSpinner';
 import WidgetContainer from '../../common/WidgetContainer';
-
-// Alternatively, use absolute imports via TypeScript path mapping (if configured)
-import { useWidgetError } from '@/hooks/useWidgetError';
-import { WidgetErrorBoundary, ErrorMessage, LoadingSkeleton } from '@/components/common';
 ```
 
 ## Error Handling Pattern
