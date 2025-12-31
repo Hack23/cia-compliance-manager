@@ -53,7 +53,32 @@ interface ComponentConfig {
 }
 
 /**
- * Get configuration for a specific CIA component
+ * Retrieves the configuration used to render a specific CIA (Confidentiality, Integrity, Availability)
+ * impact widget variant.
+ *
+ * Maps the provided {@link CIAComponent} to its corresponding {@link ComponentConfig}, which includes
+ * titles, icons, colors, ARIA descriptions, layout classes, and test ID helpers for the widget UI.
+ *
+ * @param component - The CIA component type to configure. Supported values are
+ * `"availability"`, `"integrity"`, and `"confidentiality"`. Any other value will cause an error
+ * to be thrown to preserve exhaustive type checking.
+ * @returns A {@link ComponentConfig} object containing all visual and accessibility settings for
+ * the specified CIA component.
+ *
+ * @example
+ * ```ts
+ * // Get configuration for the availability impact widget
+ * const availabilityConfig = getComponentConfig("availability");
+ *
+ * console.log(availabilityConfig.defaultTitle);
+ * // → "Availability Impact Analysis"
+ *
+ * // Use the test ID helper to build a badge test ID
+ * const badgeTestId = availabilityConfig.getSecurityBadgeTestId(
+ *   "availability-impact",
+ *   AVAILABILITY_IMPACT_WIDGET_IDS
+ * );
+ * ```
  */
 const getComponentConfig = (component: CIAComponent): ComponentConfig => {
   switch (component) {
@@ -83,7 +108,7 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         categoryLabel: "Integrity",
         containerClassName: "",
         contentClassName: "",
-        getSecurityBadgeTestId: (effectiveTestId, _widgetIds) => `${effectiveTestId}-integrity-badge`,
+        getSecurityBadgeTestId: (_effectiveTestId, widgetIds) => widgetIds.label("security-badge"),
       };
     case "confidentiality":
       return {
@@ -108,7 +133,27 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
 };
 
 /**
- * Get test IDs based on component type
+ * Resolves test ID configuration for a given CIA component.
+ *
+ * Maps the logical CIA component (`availability`, `integrity`, or `confidentiality`)
+ * to the corresponding test ID prefix and widget-specific test ID constants.
+ * This ensures that all impact widgets use a consistent and centrally managed
+ * set of test IDs for automated testing and QA tooling.
+ *
+ * @param component - The CIA component type for which test IDs should be resolved.
+ * @returns An object containing:
+ * - `prefix`: The base test ID prefix for the selected CIA component.
+ * - `widgetIds`: The collection of widget-specific test ID constants associated
+ *   with the selected CIA component.
+ *
+ * @example
+ * ```ts
+ * // Get test ID configuration for the availability impact widget
+ * const { prefix, widgetIds } = getTestIds("availability");
+ *
+ * // Example usage when building a test ID for the security level badge
+ * const securityBadgeTestId = `${prefix}${widgetIds.SECURITY_LEVEL_BADGE}`;
+ * ```
  */
 const getTestIds = (component: CIAComponent) => {
   switch (component) {
