@@ -333,7 +333,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
           aria-labelledby="resources-intro-heading"
         >
           <h2 id="resources-intro-heading" className="sr-only">Security Resources Introduction</h2>
-          <p className={cn(WidgetClasses.body)}>
+          <p className={WidgetClasses.body}>
             This widget provides curated security resources to help implement
             controls that align with your selected security levels across the
             CIA triad.

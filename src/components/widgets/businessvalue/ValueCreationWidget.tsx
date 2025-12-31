@@ -309,7 +309,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         error={error}
       >
       <div 
-        className={cn("p-md sm:p-lg")}
+        className="p-md sm:p-lg"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Business Value Creation",

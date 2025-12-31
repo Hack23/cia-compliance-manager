@@ -280,7 +280,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         error={serviceError}
       >
       <div 
-        className={cn("p-md sm:p-lg")}
+        className="p-md sm:p-lg"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Compliance Status",
@@ -339,7 +339,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
               <div className="mt-md">
                 <div className="flex justify-between items-center mb-sm">
                   <span 
-                    className={cn(WidgetClasses.body)}
+                    className={WidgetClasses.body}
                     id="compliance-score-label"
                   >
                     Compliance Score

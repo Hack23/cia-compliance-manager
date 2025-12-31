@@ -137,7 +137,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
         error={error}
       >
         <div 
-          className={cn("p-md sm:p-lg")}
+          className="p-md sm:p-lg"
           role={ARIA_ROLES.REGION}
           aria-label={getWidgetAriaDescription(
             "Security Summary",
@@ -167,7 +167,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                   {securityClassification}
                 </h2>
                 <p 
-                  className={cn(WidgetClasses.body)}
+                  className={WidgetClasses.body}
                   id="security-classification-description"
                 >
                   {securityLevelDescription}
@@ -175,7 +175,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               </div>
               <div className="text-right" role="group" aria-label="Security metrics">
                 <div 
-                  className={cn(WidgetClasses.label)}
+                  className={WidgetClasses.label}
                   id="security-score-label"
                 >
                   Security Score

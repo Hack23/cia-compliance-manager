@@ -119,7 +119,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
           )}
           aria-labelledby="technical-description-heading"
         >
-          <p id="technical-description-heading" className={cn(WidgetClasses.body)}>
+          <p id="technical-description-heading" className={WidgetClasses.body}>
             This widget provides technical implementation details for achieving
             your selected security levels. Use these guidelines when designing
             and implementing your security controls.

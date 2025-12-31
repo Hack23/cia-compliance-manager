@@ -221,7 +221,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         error={serviceError}
       >
       <div 
-        className={cn("p-md sm:p-lg")}
+        className="p-md sm:p-lg"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Cost Estimation",
@@ -344,10 +344,8 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                   {fteRequirements.maintenance} FTE
                 </div>
               </div>
-              <div className={cn(
-                "flex justify-between items-center pt-2 mt-sm",
-                WidgetClasses.dividerHorizontal
-              )}>
+              <div className={cn(WidgetClasses.dividerHorizontal)} />
+              <div className="flex justify-between items-center pt-2 mt-sm">
                 <div className={cn(WidgetClasses.body, "font-medium")}>
                   Annual Personnel Cost
                 </div>
