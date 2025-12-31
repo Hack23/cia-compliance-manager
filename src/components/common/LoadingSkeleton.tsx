@@ -210,7 +210,8 @@ export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({
     );
   }
 
-  // Fallback to default
+  // Fallback to default variant for any unknown variant
+  // This ensures backward compatibility and prevents errors
   return (
     <div 
       className={`${baseClasses} space-y-4 ${className}`}

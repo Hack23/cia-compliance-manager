@@ -81,6 +81,20 @@ export function useWidgetError(widgetName: string): WidgetErrorState {
   const [error, setErrorState] = useState<Error | null>(null);
 
   /**
+   * Normalize unknown error types to Error objects
+   * Centralizes error conversion logic for consistency
+   */
+  const normalizeError = useCallback((err: unknown): Error => {
+    if (err instanceof Error) {
+      return err;
+    } else if (typeof err === 'string') {
+      return new Error(err);
+    } else {
+      return new Error(`${widgetName}: Unknown error occurred`);
+    }
+  }, [widgetName]);
+
+  /**
    * Clear the current error state
    */
   const clearError = useCallback(() => {
@@ -96,17 +110,12 @@ export function useWidgetError(widgetName: string): WidgetErrorState {
   }, [widgetName]);
 
   /**
-   * Handle an unknown error by converting it to Error type
+   * Handle an unknown error by converting it to Error type and logging
    */
   const handleError = useCallback((err: unknown) => {
-    if (err instanceof Error) {
-      setError(err);
-    } else if (typeof err === 'string') {
-      setError(new Error(err));
-    } else {
-      setError(new Error(`${widgetName}: Unknown error occurred`));
-    }
-  }, [widgetName, setError]);
+    const normalizedError = normalizeError(err);
+    setError(normalizedError);
+  }, [normalizeError, setError]);
 
   return {
     error,

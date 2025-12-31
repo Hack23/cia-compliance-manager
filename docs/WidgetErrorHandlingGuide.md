@@ -25,13 +25,20 @@ This guide provides comprehensive patterns and best practices for implementing c
 
 ### Component Locations
 
+**Note:** Import paths shown are relative to widget files in `src/components/widgets/`. Adjust paths based on your actual widget location.
+
 ```typescript
+// From widgets in src/components/widgets/[category]/
 import { useWidgetError } from '../../../hooks/useWidgetError';
 import WidgetErrorBoundary from '../../common/WidgetErrorBoundary';
 import ErrorMessage from '../../common/ErrorMessage';
 import LoadingSkeleton from '../../common/LoadingSkeleton';
 import LoadingSpinner from '../../common/LoadingSpinner';
 import WidgetContainer from '../../common/WidgetContainer';
+
+// Alternatively, use absolute imports via TypeScript path mapping (if configured)
+import { useWidgetError } from '@/hooks/useWidgetError';
+import { WidgetErrorBoundary, ErrorMessage, LoadingSkeleton } from '@/components/common';
 ```
 
 ## Error Handling Pattern
