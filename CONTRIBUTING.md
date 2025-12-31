@@ -151,6 +151,177 @@ An ESLint rule enforces this convention by preventing hardcoded test ID strings.
 3. Import and use the constant in your component
 4. Run `npm run lint` to verify compliance
 
+## TailwindCSS Usage Guidelines
+
+The CIA Compliance Manager uses TailwindCSS v4.1.16 with custom design tokens for consistent styling across all widgets. Follow these guidelines to maintain visual consistency.
+
+### Core Principles
+
+1. **Use Tailwind utility classes** - Avoid inline styles except for design token values
+2. **Use design tokens** - Import spacing, colors, typography from `src/constants/designTokens.ts`
+3. **Use helper utilities** - Import class patterns from `src/utils/tailwindClassHelpers.ts`
+4. **Responsive by default** - Apply mobile-first responsive breakpoints
+5. **Accessibility first** - Include focus states, ARIA attributes, and semantic HTML
+
+### Standard Widget Container
+
+```tsx
+import { WidgetClasses, cn } from '@/utils/tailwindClassHelpers';
+
+function MyWidget() {
+  return (
+    <div className={cn(WidgetClasses.container, WidgetClasses.containerHover)}>
+      <h2 className={WidgetClasses.heading}>Widget Title</h2>
+      <div className={WidgetClasses.section}>
+        <p className={WidgetClasses.body}>Widget content goes here</p>
+      </div>
+    </div>
+  );
+}
+```
+
+### Responsive Grid Layouts
+
+```tsx
+// Two columns: stacks on mobile, 2 cols on tablet+
+<div className={WidgetClasses.grid2Cols}>
+  <div className={WidgetClasses.card}>Card 1</div>
+  <div className={WidgetClasses.card}>Card 2</div>
+</div>
+
+// Three columns: stacks on mobile, 2 cols tablet, 3 cols desktop
+<div className={WidgetClasses.grid3Cols}>
+  <div className={WidgetClasses.card}>Card 1</div>
+  <div className={WidgetClasses.card}>Card 2</div>
+  <div className={WidgetClasses.card}>Card 3</div>
+</div>
+```
+
+### Interactive States
+
+```tsx
+// Buttons with hover and focus states
+<button className={WidgetClasses.buttonPrimary}>
+  Primary Action
+</button>
+
+<button className={WidgetClasses.buttonSecondary}>
+  Secondary Action
+</button>
+
+// Cards with hover effects
+<div className={cn(WidgetClasses.card, WidgetClasses.cardInteractive)}>
+  Interactive Card
+</div>
+```
+
+### Conditional Classes
+
+Use the `cn()` utility for conditional styling:
+
+```tsx
+import { WidgetClasses, cn } from '@/utils/tailwindClassHelpers';
+
+function StatusCard({ isActive, isLoading }) {
+  return (
+    <div className={cn(
+      WidgetClasses.card,
+      isActive && WidgetClasses.cardInteractive,
+      isLoading && WidgetClasses.loading
+    )}>
+      {/* Card content */}
+    </div>
+  );
+}
+```
+
+### Accessibility
+
+Always include focus-visible states for keyboard navigation:
+
+```tsx
+// Links with keyboard navigation support
+<a 
+  href="#section" 
+  className={cn(
+    'text-primary hover:text-primary-dark',
+    WidgetClasses.focusVisible
+  )}
+>
+  Link text
+</a>
+
+// Buttons are included in buttonPrimary/buttonSecondary patterns
+<button className={WidgetClasses.buttonPrimary}>
+  Button with built-in focus state
+</button>
+```
+
+### Design Token Reference
+
+Common design token classes available in Tailwind:
+
+**Spacing:**
+- `p-xs`, `p-sm`, `p-md`, `p-lg`, `p-xl`, `p-xxl`
+- `m-xs`, `m-sm`, `m-md`, `m-lg`, `m-xl`, `m-xxl`
+- `gap-xs`, `gap-sm`, `gap-md`, `gap-lg`, `gap-xl`, `gap-xxl`
+
+**Typography:**
+- `text-caption`, `text-body`, `text-body-lg`, `text-subheading`, `text-heading`, `text-title`, `text-display`
+- `font-normal`, `font-medium`, `font-semibold`, `font-bold`
+
+**Colors:**
+- `bg-primary`, `text-primary`, `border-primary` (and `-light`, `-dark` variants)
+- `bg-success`, `bg-warning`, `bg-error`, `bg-info`, `bg-neutral`
+
+**Shadows:**
+- `shadow-sm`, `shadow-md`, `shadow-lg`, `shadow-xl`, `shadow-xxl`
+
+**Border Radius:**
+- `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-full`
+
+### What NOT to Do
+
+❌ **Inline styles:**
+```tsx
+// BAD
+<div style={{ padding: '24px', borderRadius: '8px' }}>
+  Content
+</div>
+```
+
+✅ **Use Tailwind classes:**
+```tsx
+// GOOD
+<div className="p-lg rounded-md">
+  Content
+</div>
+```
+
+❌ **Custom CSS classes:**
+```tsx
+// BAD - Creating custom CSS
+.my-custom-card {
+  padding: 16px;
+  background: #f0f0f0;
+}
+```
+
+✅ **Use WidgetClasses patterns:**
+```tsx
+// GOOD - Use predefined patterns
+<div className={WidgetClasses.card}>
+  Content
+</div>
+```
+
+### Additional Resources
+
+- [TailwindCSS Documentation](https://tailwindcss.com/docs)
+- [Design Tokens](/src/constants/designTokens.ts)
+- [Widget Class Helpers](/src/utils/tailwindClassHelpers.ts)
+- [Tailwind Configuration](/tailwind.config.ts)
+
 ## Resources
 
 - [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)
