@@ -381,7 +381,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         {complianceStatus &&
           complianceStatus.compliantFrameworks.length > 0 && (
             <div className="mb-lg">
-              <h3 className={cn(WidgetClasses.heading)}>Compliant Frameworks</h3>
+              <h3 className={WidgetClasses.heading}>Compliant Frameworks</h3>
               <div
                 className={WidgetClasses.grid2Cols}
                 data-testid={COMPLIANCE_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST}
