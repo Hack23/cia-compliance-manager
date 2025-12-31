@@ -173,7 +173,7 @@ export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({
     list: 'space-y-3',
     metrics: ''
   };
-  const spaceClass = spaceClassMap[variant] ?? 'space-y-4';
+  const spaceClass = spaceClassMap[variant] || spaceClassMap.default;
 
   return (
     <div 
