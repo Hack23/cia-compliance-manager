@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
 import { BUSINESS_IMPACT_WIDGET_IDS, BUSINESS_IMPACT_TEST_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
@@ -9,6 +9,7 @@ import {
 import { SecurityLevel } from "../../../types/cia";
 import { BusinessImpactDetails } from "../../../types/cia-services";
 import { BusinessImpactAnalysisWidgetProps } from "../../../types/widget-props";
+import { Tab } from "../../../types/tabs";
 import { isNullish } from "../../../utils/typeGuards";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
@@ -17,6 +18,7 @@ import RiskLevelBadge from "../../common/RiskLevelBadge";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
+import TabContainer from "../../common/TabContainer";
 
 /**
  * Business Impact Analysis Widget provides insights on security impacts
@@ -43,11 +45,6 @@ const BusinessImpactAnalysisWidget: React.FC<
     error: serviceError,
     isLoading,
   } = useCIAContentService();
-
-  // State for active tab
-  const [activeTab, setActiveTab] = useState<"considerations" | "benefits">(
-    "considerations"
-  );
 
   // Calculate overall impact level with proper error handling
   const impactLevel = useMemo(() => {
@@ -454,6 +451,64 @@ const BusinessImpactAnalysisWidget: React.FC<
     );
   };
 
+  // Configure tabs with content
+  const tabs: Tab[] = [
+    {
+      id: 'considerations',
+      label: 'Implementation Considerations',
+      content: (
+        <div
+          className="grid grid-cols-1 gap-md"
+          data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('considerations')}
+        >
+          {considerations.map((item, index) => (
+            <div
+              key={`consideration-${index}`}
+              className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg"
+              data-testid={BUSINESS_IMPACT_WIDGET_IDS.item(`consideration-${index}`)}
+            >
+              <div className="flex items-center mb-sm">
+                <span className="mr-sm text-blue-500">{item.icon}</span>
+                <h4 className="text-md font-medium">{item.title}</h4>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      ),
+      testId: BUSINESS_IMPACT_WIDGET_IDS.button('tab-considerations'),
+    },
+    {
+      id: 'benefits',
+      label: 'Business Benefits',
+      content: (
+        <div
+          className="grid grid-cols-1 gap-md"
+          data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('benefits')}
+        >
+          {benefits.map((item, index) => (
+            <div
+              key={`benefit-${index}`}
+              className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg"
+              data-testid={BUSINESS_IMPACT_WIDGET_IDS.item(`benefit-${index}`)}
+            >
+              <div className="flex items-center mb-sm">
+                <span className="mr-sm text-green-500">{item.icon}</span>
+                <h4 className="text-md font-medium">{item.title}</h4>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      ),
+      testId: BUSINESS_IMPACT_WIDGET_IDS.button('tab-benefits'),
+    },
+  ];
+
   return (
     <WidgetErrorBoundary widgetName="Business Impact Analysis">
       <WidgetContainer
@@ -573,76 +628,11 @@ const BusinessImpactAnalysisWidget: React.FC<
 
         {/* Business Considerations & Benefits */}
         <div className="mt-md">
-          <div className="border-b border-gray-200 dark:border-gray-700 mb-md">
-            <div className="flex">
-              <button
-                className={`py-3 px-4 sm:py-2 font-medium text-sm sm:text-base min-h-[44px] ${
-                  activeTab === "considerations"
-                    ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
-                    : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-                }`}
-                onClick={() => setActiveTab("considerations")}
-                data-testid={BUSINESS_IMPACT_WIDGET_IDS.button('tab-considerations')}
-              >
-                Implementation Considerations
-              </button>
-              <button
-                className={`py-3 px-4 sm:py-2 font-medium text-sm sm:text-base min-h-[44px] ${
-                  activeTab === "benefits"
-                    ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
-                    : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-                }`}
-                onClick={() => setActiveTab("benefits")}
-                data-testid={BUSINESS_IMPACT_WIDGET_IDS.button('tab-benefits')}
-              >
-                Business Benefits
-              </button>
-            </div>
-          </div>
-
-          {activeTab === "considerations" ? (
-            <div
-              className="grid grid-cols-1 gap-md"
-              data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('considerations')}
-            >
-              {considerations.map((item, index) => (
-                <div
-                  key={`consideration-${index}`}
-                  className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg"
-                  data-testid={BUSINESS_IMPACT_WIDGET_IDS.item(`consideration-${index}`)}
-                >
-                  <div className="flex items-center mb-sm">
-                    <span className="mr-sm text-blue-500">{item.icon}</span>
-                    <h4 className="text-md font-medium">{item.title}</h4>
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div
-              className="grid grid-cols-1 gap-md"
-              data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('benefits')}
-            >
-              {benefits.map((item, index) => (
-                <div
-                  key={`benefit-${index}`}
-                  className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg"
-                  data-testid={BUSINESS_IMPACT_WIDGET_IDS.item(`benefit-${index}`)}
-                >
-                  <div className="flex items-center mb-sm">
-                    <span className="mr-sm text-green-500">{item.icon}</span>
-                    <h4 className="text-md font-medium">{item.title}</h4>
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
+          <TabContainer
+            tabs={tabs}
+            initialTab="considerations"
+            testId={`${testId}-tabs`}
+          />
         </div>
       </div>
     </WidgetContainer>

@@ -297,7 +297,7 @@ describe("BusinessImpactAnalysisWidget", () => {
     expect(screen.getByTestId(customTestId)).toBeInTheDocument();
   });
 
-  // Test for tab switching - made more resilient by using conditional checks
+  // Test for tab switching - updated for TabContainer with role="tab"
   it("switches between considerations and benefits tabs", async () => {
     await act(async () => {
       render(
@@ -310,20 +310,20 @@ describe("BusinessImpactAnalysisWidget", () => {
       );
     });
 
-    // Look for tab buttons using a more flexible approach
-    const tabButtons = screen.getAllByRole("button");
+    // Look for tab elements (TabContainer uses role="tab", not role="button")
+    const tabElements = screen.getAllByRole("tab");
 
-    // Find buttons that might be our tabs
-    const considerationsTab = tabButtons.find(
-      (btn) =>
-        btn.textContent?.toLowerCase().includes("consideration") ||
-        btn.textContent?.toLowerCase().includes("implement")
+    // Find tabs by their text content
+    const considerationsTab = tabElements.find(
+      (tab) =>
+        tab.textContent?.toLowerCase().includes("consideration") ||
+        tab.textContent?.toLowerCase().includes("implement")
     );
 
-    const benefitsTab = tabButtons.find(
-      (btn) =>
-        btn.textContent?.toLowerCase().includes("benefit") ||
-        btn.textContent?.toLowerCase().includes("business")
+    const benefitsTab = tabElements.find(
+      (tab) =>
+        tab.textContent?.toLowerCase().includes("benefit") ||
+        tab.textContent?.toLowerCase().includes("business")
     );
 
     // If we found tabs, test the tab switching

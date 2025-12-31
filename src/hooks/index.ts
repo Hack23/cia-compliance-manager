@@ -49,6 +49,10 @@ export { useLocalStorage } from "./useLocalStorage";
 export { useKeyboardShortcuts } from "./useKeyboardShortcuts";
 export type { UseKeyboardShortcutsOptions } from "../types/keyboard";
 
+// Tab Navigation Hooks
+export { useTabs } from "./useTabs";
+export type { UseTabsOptions, UseTabsReturn } from "../types/tabs";
+
 // Error Handling Hooks
 export { useWidgetError } from "./useWidgetError";
 export type { WidgetErrorState } from "./useWidgetError";

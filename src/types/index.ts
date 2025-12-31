@@ -123,3 +123,11 @@ export type {
   ShortcutMap,
   UseKeyboardShortcutsOptions,
 } from './keyboard';
+
+// Tab navigation types
+export type {
+  Tab,
+  TabsState,
+  UseTabsOptions,
+  UseTabsReturn,
+} from './tabs';
