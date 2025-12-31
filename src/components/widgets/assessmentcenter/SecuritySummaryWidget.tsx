@@ -14,6 +14,7 @@ import {
   getWidgetAriaDescription,
   ARIA_ROLES 
 } from "../../../utils/accessibility";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 import { SecurityBusinessTab } from "./SecurityBusinessTab";
@@ -145,7 +146,11 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
         >
           {/* Security Classification Banner */}
           <section 
-            className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border-l-4 border-info dark:border-info-light shadow-md"
+            className={cn(
+              WidgetClasses.section,
+              "p-md rounded-md shadow-md border-l-4 border-info dark:border-info-light pl-md",
+              "bg-info-light/10 dark:bg-info-dark/20"
+            )}
             aria-labelledby="security-classification-heading"
             data-testid={SECURITY_SUMMARY_WIDGET_IDS.section('classification-banner')}
           >
@@ -153,7 +158,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               <div>
                 <h2 
                   id="security-classification-heading"
-                  className="text-heading font-semibold flex items-center gap-sm"
+                  className={cn(WidgetClasses.heading, "flex items-center gap-sm")}
                 >
                   <span 
                     className="inline-block w-3 h-3 rounded-full bg-info dark:bg-info-light pulse-dot"
@@ -162,7 +167,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                   {securityClassification}
                 </h2>
                 <p 
-                  className="text-body text-neutral dark:text-neutral-light"
+                  className={WidgetClasses.body}
                   id="security-classification-description"
                 >
                   {securityLevelDescription}
@@ -170,7 +175,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               </div>
               <div className="text-right" role="group" aria-label="Security metrics">
                 <div 
-                  className="text-caption text-neutral dark:text-neutral-light"
+                  className={WidgetClasses.label}
                   id="security-score-label"
                 >
                   Security Score
@@ -183,9 +188,11 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                   {securityScore}%
                 </div>
                 <div
-                  className={`text-body font-medium ${getRiskColorClass(
-                    riskLevel
-                  )}`}
+                  className={cn(
+                    WidgetClasses.body,
+                    "font-medium",
+                    getRiskColorClass(riskLevel)
+                  )}
                   data-testid={SECURITY_SUMMARY_WIDGET_IDS.label('risk-level')}
                   aria-label={`Risk level: ${riskLevel}`}
                   role="status"
@@ -200,7 +207,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
           <div className="border-b border-neutral-light dark:border-neutral-dark mb-md">
             <nav
               ref={tabListRef}
-              className="flex flex-wrap -mb-px gap-sm"
+              className={cn(WidgetClasses.flexRow, "-mb-px")}
               aria-label="Security Summary Tabs"
               role={ARIA_ROLES.TABLIST}
               data-testid={ACCESSIBILITY_TEST_IDS.WIDGET_KEYBOARD_INSTRUCTIONS}
@@ -216,11 +223,13 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
                 return (
                   <button
                     key={tab.id}
-                    className={`py-sm px-md text-body font-medium border-b-2 transition-all duration-normal ${
+                    className={cn(
+                      "py-sm px-md font-medium border-b-2 transition-all duration-normal",
+                      WidgetClasses.textResponsive,
                       isSelected
                         ? "border-primary text-primary dark:text-primary-light dark:border-primary-light"
                         : "border-transparent text-neutral hover:text-neutral-dark dark:text-neutral-light dark:hover:text-white hover:border-neutral-light"
-                    }`}
+                    )}
                     onClick={() => {
                       setActiveTab(tab.id);
                     }}

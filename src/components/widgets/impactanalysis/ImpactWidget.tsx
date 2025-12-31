@@ -21,6 +21,7 @@ import type { ImpactWidgetProps } from "../../../types/widget-props";
 import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import MetricCard from "../../common/MetricCard";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
@@ -306,7 +307,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
         error={error}
       >
         <div
-          className={`p-md sm:p-lg ${config.contentClassName}`}
+          className={cn("p-md sm:p-lg", config.contentClassName)}
           role="region"
           aria-label={getWidgetAriaDescription(config.defaultTitle, config.ariaDescription)}
         >
@@ -333,7 +334,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
               className="mb-md"
               aria-labelledby={`${component}-business-impact-heading`}
             >
-              <h3 id={`${component}-business-impact-heading`} className="text-lg font-medium mb-sm">
+              <h3 id={`${component}-business-impact-heading`} className={WidgetClasses.heading}>
                 Business Impact
               </h3>
               <BusinessImpactSection
@@ -355,7 +356,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
               testId={testIds.widgetIds.section("sla-metrics")}
             >
               <div
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md mb-md"
+                className={cn(WidgetClasses.grid3Cols, "mb-md")}
                 role="group"
                 aria-label="Service level agreement metrics"
               >
@@ -384,7 +385,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
                   testId={testIds.widgetIds.label("rpo")}
                 />
               </div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
+              <div className={WidgetClasses.grid2Cols}>
                 <MetricCard
                   label="Service Level Agreement"
                   value={metrics.data.sla}
@@ -405,7 +406,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
               className="mb-md"
               testId={testIds.widgetIds.section("metrics")}
             >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
+              <div className={WidgetClasses.grid2Cols}>
                 <MetricCard
                   label="Data Validation Controls"
                   value={metrics.data.validationLevel}
@@ -433,7 +434,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
                 className="mb-lg"
                 testId={testIds.widgetIds.section("data-protection")}
               >
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
+                <div className={WidgetClasses.grid2Cols}>
                   <MetricCard
                     label="Data Classification"
                     value={metrics.data.dataClassification}

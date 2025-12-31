@@ -8,6 +8,7 @@ import { calculateROIEstimate } from "../../../utils/businessValueUtils";
 import { calculateBusinessImpactLevel } from "../../../utils/riskUtils";
 import { hasMethod, isNullish } from "../../../utils/typeGuards";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -320,18 +321,22 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           className="mb-lg"
           aria-labelledby="value-profile-heading"
         >
-          <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md mb-md">
-            <p className="text-body" data-testid={VALUE_CREATION_WIDGET_IDS.label('summary')}>
+          <div className={cn(
+            WidgetClasses.section,
+            "p-md rounded-md",
+            "bg-info-light/10 dark:bg-info-dark/20"
+          )}>
+            <p className={WidgetClasses.body} data-testid={VALUE_CREATION_WIDGET_IDS.label('summary')}>
               {getBusinessValueSummary()}
             </p>
           </div>
 
           <div className="flex justify-between items-center mb-md">
-            <h3 id="value-profile-heading" className="text-heading font-medium">
+            <h3 id="value-profile-heading" className={WidgetClasses.heading}>
               Overall Value Profile
             </h3>
             <div className="flex items-center">
-              <span className="mr-sm text-body text-neutral dark:text-neutral-light">
+              <span className={cn(WidgetClasses.body, "mr-sm")}>
                 Security Level:
               </span>
               <SecurityLevelIndicator level={securityScoreAsLevel} size="md" />
@@ -340,7 +345,10 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
           {/* ROI estimate */}
           <div 
-            className="p-md bg-success-light/10 dark:bg-success-dark/20 rounded-md mb-md"
+            className={cn(
+              WidgetClasses.card,
+              "bg-success-light/10 dark:bg-success-dark/20 mb-md shadow-none"
+            )}
             role="region"
             aria-labelledby="roi-heading"
           >

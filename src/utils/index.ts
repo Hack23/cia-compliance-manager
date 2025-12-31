@@ -232,3 +232,7 @@ export { BUSINESS_IMPACT_CATEGORIES, calculateRiskLevel, RISK_LEVELS };
 // and should be imported directly from "./keyboardUtils" in tests/internal modules
 // to avoid exposing them as part of the public API surface.
 export * from "./keyboardUtils";
+
+// TailwindCSS class helpers for consistent widget styling
+export { cn, WidgetClasses } from "./tailwindClassHelpers";
+export type { WidgetClassKey } from "./tailwindClassHelpers";

@@ -9,6 +9,7 @@ import { ComplianceStatusDetails } from "../../../types/compliance";
 import { ComplianceStatusWidgetProps } from "../../../types/widget-props";
 import { isNullish } from "../../../utils/typeGuards";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import StatusBadge from "../../common/StatusBadge";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -288,10 +289,14 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
       >
         {/* Add high-level description */}
         <section 
-          className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md"
+          className={cn(
+            WidgetClasses.section,
+            "p-md rounded-md",
+            "bg-info-light/10 dark:bg-info-dark/20"
+          )}
           aria-labelledby="compliance-description-heading"
         >
-          <p id="compliance-description-heading" className="text-body">
+          <p id="compliance-description-heading" className={WidgetClasses.body}>
             This widget shows your compliance status with various regulatory
             frameworks and industry standards based on your selected security
             levels.
@@ -303,11 +308,14 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
           className="mb-lg"
           aria-labelledby="overall-compliance-heading"
         >
-          <h3 id="overall-compliance-heading" className="text-heading font-medium mb-sm">
+          <h3 id="overall-compliance-heading" className={WidgetClasses.heading}>
             Overall Compliance Status
           </h3>
           <div
-            className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md border border-neutral-light dark:border-neutral-dark"
+            className={cn(
+              WidgetClasses.card,
+              "bg-neutral-light/10 dark:bg-neutral-dark/20"
+            )}
             data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_SUMMARY}
             role="group"
             aria-label="Compliance status summary"
@@ -331,7 +339,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
               <div className="mt-md">
                 <div className="flex justify-between items-center mb-sm">
                   <span 
-                    className="text-body text-neutral dark:text-neutral-light"
+                    className={WidgetClasses.body}
                     id="compliance-score-label"
                   >
                     Compliance Score
@@ -373,20 +381,22 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         {complianceStatus &&
           complianceStatus.compliantFrameworks.length > 0 && (
             <div className="mb-lg">
-              <h3 className="text-heading font-medium mb-sm">Compliant Frameworks</h3>
+              <h3 className={WidgetClasses.heading}>Compliant Frameworks</h3>
               <div
-                className="grid grid-cols-1 sm:grid-cols-2 gap-md"
+                className={WidgetClasses.grid2Cols}
                 data-testid={COMPLIANCE_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST}
               >
                 {complianceStatus.compliantFrameworks.map(
                   (framework, index) => (
                     <div
                       key={framework}
-                      className={`p-md bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light dark:border-success-dark cursor-pointer transition-all duration-normal ${
-                        activeFramework === framework
-                          ? "ring-2 ring-success dark:ring-success-light"
-                          : ""
-                      }`}
+                      className={cn(
+                        WidgetClasses.card,
+                        WidgetClasses.cardInteractive,
+                        "bg-success-light/10 dark:bg-success-dark/20 border-success-light dark:border-success-dark",
+                        activeFramework === framework &&
+                          "ring-2 ring-success dark:ring-success-light"
+                      )}
                       onClick={() => setActiveFramework(framework)}
                       data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-${index}`}
                     >

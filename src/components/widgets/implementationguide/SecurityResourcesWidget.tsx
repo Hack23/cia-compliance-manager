@@ -13,6 +13,7 @@ import {
   isString,
 } from "../../../utils/typeGuards";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import ResourceCard from "../../common/ResourceCard";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
@@ -324,18 +325,22 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
       >
         {/* Widget introduction */}
         <section 
-          className="mb-md p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+          className={cn(
+            WidgetClasses.section,
+            "p-md rounded-lg",
+            "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
+          )}
           aria-labelledby="resources-intro-heading"
         >
           <h2 id="resources-intro-heading" className="sr-only">Security Resources Introduction</h2>
-          <p className="text-sm">
+          <p className={WidgetClasses.body}>
             This widget provides curated security resources to help implement
             controls that align with your selected security levels across the
             CIA triad.
           </p>
         </section>
 
-        <div className="flex flex-col md:flex-row gap-md">
+        <div className={WidgetClasses.flexRow}>
           {/* Filters and search - left column on larger screens */}
           <aside 
             className="md:w-1/4"
@@ -344,7 +349,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
             <div className="mb-md">
               <label
                 htmlFor="resource-search"
-                className="block text-sm font-medium mb-xs"
+                className={cn(WidgetClasses.body, "block font-medium mb-xs")}
               >
                 Search Resources
               </label>
@@ -352,7 +357,10 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                 <input
                   id="resource-search"
                   type="text"
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md dark:bg-gray-800 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className={cn(
+                    "w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md dark:bg-gray-800",
+                    WidgetClasses.focusVisible
+                  )}
                   placeholder="Search by title, description..."
                   value={searchTerm}
                   onChange={handleSearchChange}
@@ -373,18 +381,20 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                 className="mb-md"
                 aria-label="Resource categories"
               >
-                <h3 className="text-sm font-medium mb-sm">Categories</h3>
+                <h3 className={cn(WidgetClasses.body, "font-medium mb-sm")}>Categories</h3>
                 <ul 
                   className="space-y-2"
                   role="list"
                 >
                   <li>
                     <button
-                      className={`w-full text-left px-3 py-2 rounded-md text-sm ${
+                      className={cn(
+                        "w-full text-left px-3 py-2 rounded-md",
+                        WidgetClasses.textResponsive,
                         selectedCategory === null
                           ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300"
                           : "bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
-                      }`}
+                      )}
                       onClick={() => handleCategorySelect(null)}
                       data-testid={SECURITY_RESOURCES_WIDGET_IDS.button('category-all')}
                       aria-pressed={selectedCategory === null}
@@ -396,11 +406,13 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                   {resourceCategories.map((category, index) => (
                     <li key={category}>
                       <button
-                        className={`w-full text-left px-3 py-2 rounded-md text-sm ${
+                        className={cn(
+                          "w-full text-left px-3 py-2 rounded-md",
+                          WidgetClasses.textResponsive,
                           selectedCategory === category
                             ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300"
                             : "bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
-                        }`}
+                        )}
                         onClick={() => handleCategorySelect(category)}
                         data-testid={SECURITY_RESOURCES_WIDGET_IDS.button(`category-${index}`)}
                         aria-pressed={selectedCategory === category}
@@ -415,12 +427,12 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
             {/* Implementation Guidelines */}
             <section className="mb-md" aria-labelledby="implementation-guidelines-heading">
-              <h3 id="implementation-guidelines-heading" className="text-sm font-medium mb-sm">
+              <h3 id="implementation-guidelines-heading" className={cn(WidgetClasses.body, "font-medium mb-sm")}>
                 Implementation Guidelines
               </h3>
-              <div className="bg-gray-50 dark:bg-gray-800 p-md rounded-lg text-sm">
-                <p className="mb-sm font-medium">Selected Security Levels:</p>
-                <dl className="mb-sm text-xs">
+              <div className={cn(WidgetClasses.card, "bg-gray-50 dark:bg-gray-800 shadow-none")}>
+                <p className={cn(WidgetClasses.body, "mb-sm font-medium")}>Selected Security Levels:</p>
+                <dl className={cn(WidgetClasses.labelNormal, "mb-sm")}>
                   <div className="flex justify-between">
                     <dt>Confidentiality:</dt>
                     <dd className="font-medium">{confidentialityLevel}</dd>

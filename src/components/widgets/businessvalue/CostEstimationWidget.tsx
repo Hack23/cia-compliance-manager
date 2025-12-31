@@ -10,6 +10,7 @@ import { getImplementationComplexity } from "../../../utils/riskUtils";
 import { getSecurityLevelValue } from "../../../utils/securityLevelUtils";
 import { isArray, isNullish, isString } from "../../../utils/typeGuards";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import MetricCard from "../../common/MetricCard";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
 import WidgetContainer from "../../common/WidgetContainer";
@@ -229,10 +230,14 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
       >
         {/* Introduction */}
         <section 
-          className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md"
+          className={cn(
+            WidgetClasses.section,
+            "p-md rounded-md",
+            "bg-info-light/10 dark:bg-info-dark/20"
+          )}
           aria-labelledby="cost-intro-heading"
         >
-          <p id="cost-intro-heading" className="text-body">
+          <p id="cost-intro-heading" className={WidgetClasses.body}>
             This widget provides cost estimates for implementing and maintaining
             security controls based on your selected security levels across the
             CIA triad.
@@ -241,7 +246,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
 
         {/* Summary cost section */}
         <section 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md mb-lg"
+          className={cn(WidgetClasses.grid3Cols, "mb-lg")}
           aria-labelledby="cost-summary-heading"
         >
           <h3 id="cost-summary-heading" className="sr-only">Cost Summary</h3>
@@ -273,11 +278,11 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
 
         {/* CAPEX vs OPEX ratio visualization */}
         <div className="mb-lg">
-          <h3 className="text-heading font-medium mb-md">Cost Breakdown</h3>
-          <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
+          <h3 className={WidgetClasses.heading}>Cost Breakdown</h3>
+          <div className={cn(WidgetClasses.card, "shadow-md")}>
             <div className="flex justify-between items-center mb-xs">
-              <div className="text-sm font-medium">CAPEX</div>
-              <div className="text-sm font-medium">OPEX</div>
+              <div className={cn(WidgetClasses.body, "font-medium")}>CAPEX</div>
+              <div className={cn(WidgetClasses.body, "font-medium")}>OPEX</div>
             </div>
             <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-sm">
               <div
@@ -285,7 +290,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 style={{ width: `${costRatio.capex}%` }}
               ></div>
             </div>
-            <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+            <div className={cn(WidgetClasses.labelNormal, "flex justify-between")}>
               <div>
                 {costRatio.capex}% ({formatCurrency(totalCapex)})
               </div>
@@ -297,10 +302,10 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         </div>
 
         {/* Implementation details grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-md mb-lg">
+        <div className={cn(WidgetClasses.grid2Cols, "mb-lg")}>
           {/* Implementation complexity */}
-          <div className="p-md bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <h4 className="text-md font-medium mb-md">
+          <div className={cn(WidgetClasses.card, "shadow-sm")}>
+            <h4 className={WidgetClasses.subheading}>
               Implementation Complexity
             </h4>
             <div className="mb-md">
@@ -314,17 +319,17 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 ></div>
               </div>
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-500">
+            <div className={WidgetClasses.labelNormal}>
               Based on combined complexity across CIA components
             </div>
           </div>
 
           {/* Personnel requirements */}
-          <div className="p-md bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <h4 className="text-md font-medium mb-md">Personnel Requirements</h4>
+          <div className={cn(WidgetClasses.card, "shadow-sm")}>
+            <h4 className={WidgetClasses.subheading}>Personnel Requirements</h4>
             <div className="grid grid-cols-1 gap-md">
               <div className="flex justify-between items-center">
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className={WidgetClasses.body}>
                   Implementation Team
                 </div>
                 <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
@@ -332,15 +337,16 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 </div>
               </div>
               <div className="flex justify-between items-center">
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className={WidgetClasses.body}>
                   Ongoing Maintenance
                 </div>
                 <div className="text-lg font-bold text-green-600 dark:text-green-400">
                   {fteRequirements.maintenance} FTE
                 </div>
               </div>
-              <div className="flex justify-between items-center pt-2 mt-sm border-t border-gray-200 dark:border-gray-700">
-                <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              <div className={WidgetClasses.dividerHorizontal} />
+              <div className="flex justify-between items-center pt-2 mt-sm">
+                <div className={cn(WidgetClasses.body, "font-medium")}>
                   Annual Personnel Cost
                 </div>
                 <div className="text-lg font-bold">
@@ -353,12 +359,12 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
 
         {/* Component breakdown */}
         <div className="mb-lg">
-          <h3 className="text-lg font-medium mb-md">
+          <h3 className={WidgetClasses.heading}>
             Cost by Security Component
           </h3>
           <div className="grid grid-cols-1 gap-md">
             {/* Using SecurityLevelBadge component for consistency with other widgets */}
-            <div className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md">
+            <div className={cn(WidgetClasses.card, "bg-primary-light/10 dark:bg-primary-dark/20 shadow-none")}>
               <div className="flex justify-between items-center mb-sm">
                 <div className="font-medium text-primary-dark dark:text-primary-light flex items-center">
                   <span className="mr-sm">🔒</span>Confidentiality
@@ -377,17 +383,17 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                     confidentialityCost.capex + confidentialityCost.opex
                   )}
                 </div>
-                <div className="text-sm bg-primary-light/20 dark:bg-primary-dark/30 px-2 py-1 rounded">
+                <div className={cn(WidgetClasses.badge, "bg-primary-light/20 dark:bg-primary-dark/30")}>
                   {costBreakdown.confidentiality}% of total
                 </div>
               </div>
-              <div className="text-xs mt-sm text-gray-600 dark:text-gray-400 flex justify-between">
+              <div className={cn(WidgetClasses.labelNormal, "mt-sm flex justify-between")}>
                 <span>CAPEX: {formatCurrency(confidentialityCost.capex)}</span>
                 <span>OPEX: {formatCurrency(confidentialityCost.opex)}</span>
               </div>
             </div>
 
-            <div className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
+            <div className={cn(WidgetClasses.card, "bg-green-50 dark:bg-green-900 dark:bg-opacity-20 shadow-none")}>
               <div className="flex justify-between items-center mb-sm">
                 <div className="font-medium text-green-800 dark:text-green-300 flex items-center">
                   <span className="mr-sm">✓</span>Integrity
@@ -404,17 +410,17 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 <div className="text-md font-bold text-green-600 dark:text-green-400">
                   {formatCurrency(integrityCost.capex + integrityCost.opex)}
                 </div>
-                <div className="text-sm bg-green-100 dark:bg-green-900 dark:bg-opacity-30 px-2 py-1 rounded">
+                <div className={cn(WidgetClasses.badge, "bg-green-100 dark:bg-green-900 dark:bg-opacity-30")}>
                   {costBreakdown.integrity}% of total
                 </div>
               </div>
-              <div className="text-xs mt-sm text-gray-600 dark:text-gray-400 flex justify-between">
+              <div className={cn(WidgetClasses.labelNormal, "mt-sm flex justify-between")}>
                 <span>CAPEX: {formatCurrency(integrityCost.capex)}</span>
                 <span>OPEX: {formatCurrency(integrityCost.opex)}</span>
               </div>
             </div>
 
-            <div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+            <div className={cn(WidgetClasses.card, "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 shadow-none")}>
               <div className="flex justify-between items-center mb-sm">
                 <div className="font-medium text-blue-800 dark:text-blue-300 flex items-center">
                   <span className="mr-sm">⏱️</span>Availability
@@ -433,11 +439,11 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                     availabilityCost.capex + availabilityCost.opex
                   )}
                 </div>
-                <div className="text-sm bg-blue-100 dark:bg-blue-900 dark:bg-opacity-30 px-2 py-1 rounded">
+                <div className={cn(WidgetClasses.badge, "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-30")}>
                   {costBreakdown.availability}% of total
                 </div>
               </div>
-              <div className="text-xs mt-sm text-gray-600 dark:text-gray-400 flex justify-between">
+              <div className={cn(WidgetClasses.labelNormal, "mt-sm flex justify-between")}>
                 <span>CAPEX: {formatCurrency(availabilityCost.capex)}</span>
                 <span>OPEX: {formatCurrency(availabilityCost.opex)}</span>
               </div>
@@ -447,13 +453,13 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
 
         {/* Expertise required */}
         <div className="mb-lg">
-          <h3 className="text-lg font-medium mb-md">Expertise Required</h3>
-          <div className="p-md bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-sm">
+          <h3 className={WidgetClasses.heading}>Expertise Required</h3>
+          <div className={cn(WidgetClasses.card, "shadow-sm")}>
+            <ul className={WidgetClasses.grid2Cols}>
               {expertiseRequired.map((expertise: string, index: number) => (
                 <li
                   key={`expertise-${index}`}
-                  className="flex items-center text-sm"
+                  className={cn(WidgetClasses.body, "flex items-center")}
                 >
                   <span className="mr-sm text-blue-500">•</span>
                   <span>{expertise}</span>
@@ -464,11 +470,11 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         </div>
 
         {/* Cost notes */}
-        <div className="p-md bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg">
-          <h4 className="text-md font-medium mb-sm flex items-center">
+        <div className={cn(WidgetClasses.card, "bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 shadow-none")}>
+          <h4 className={cn(WidgetClasses.subheading, "flex items-center")}>
             <span className="mr-sm">💡</span>Cost Notes
           </h4>
-          <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 pl-2">
+          <ul className={cn(WidgetClasses.body, "list-disc list-inside space-y-1 pl-2")}>
             <li>
               Estimates are based on industry averages for the selected security
               levels
