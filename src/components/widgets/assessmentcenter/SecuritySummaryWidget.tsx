@@ -148,7 +148,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
           <section 
             className={cn(
               WidgetClasses.section,
-              WidgetClasses.sectionBorder,
+              "p-md rounded-md shadow-md border-l-4 border-info dark:border-info-light pl-md",
               "bg-info-light/10 dark:bg-info-dark/20"
             )}
             aria-labelledby="security-classification-heading"
@@ -204,7 +204,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
           </section>
 
           {/* Tab Navigation */}
-          <div className={cn(WidgetClasses.dividerHorizontal)}>
+          <div className="border-b border-neutral-light dark:border-neutral-dark mb-md">
             <nav
               ref={tabListRef}
               className={cn(WidgetClasses.flexRow, "-mb-px")}

@@ -30,8 +30,8 @@ This guide documents the systematic refactoring of widgets to use TailwindCSS he
 ```tsx
 import { WidgetClasses, cn } from '@/utils/tailwindClassHelpers';
 
-<div className={cn("p-md sm:p-lg")} role="region" aria-label="...">
-  <section className={cn(WidgetClasses.section, "bg-info-light/10 dark:bg-info-dark/20")}>
+<div className="p-md sm:p-lg" role="region" aria-label="...">
+  <section className={cn(WidgetClasses.section, "p-md rounded-md", "bg-info-light/10 dark:bg-info-dark/20")}>
     ...
   </section>
 </div>

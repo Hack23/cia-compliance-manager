@@ -92,6 +92,13 @@ export const WidgetClasses = {
    */
   label: 'text-caption font-medium text-gray-500 dark:text-gray-500 uppercase tracking-wide',
   
+  /**
+   * Small label text for form labels and metadata in normal case
+   * Use this when label text should preserve its original casing
+   * instead of being forced to uppercase.
+   */
+  labelNormal: 'text-caption font-medium text-gray-500 dark:text-gray-500 tracking-wide',
+  
   // ========================================
   // Card patterns
   // ========================================

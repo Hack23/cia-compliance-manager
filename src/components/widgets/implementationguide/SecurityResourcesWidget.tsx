@@ -316,7 +316,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
         error={serviceError}
       >
       <div 
-        className={cn("p-md sm:p-lg")}
+        className="p-md sm:p-lg"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Security Resources",
@@ -327,6 +327,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
         <section 
           className={cn(
             WidgetClasses.section,
+            "p-md rounded-lg",
             "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
           )}
           aria-labelledby="resources-intro-heading"
@@ -431,7 +432,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
               </h3>
               <div className={cn(WidgetClasses.card, "bg-gray-50 dark:bg-gray-800 shadow-none")}>
                 <p className={cn(WidgetClasses.body, "mb-sm font-medium")}>Selected Security Levels:</p>
-                <dl className={cn(WidgetClasses.label, "mb-sm lowercase")}>
+                <dl className={cn(WidgetClasses.labelNormal, "mb-sm")}>
                   <div className="flex justify-between">
                     <dt>Confidentiality:</dt>
                     <dd className="font-medium">{confidentialityLevel}</dd>

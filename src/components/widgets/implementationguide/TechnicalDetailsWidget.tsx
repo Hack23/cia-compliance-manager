@@ -103,7 +103,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         error={error}
       >
       <div 
-        className={cn("p-md sm:p-lg")}
+        className="p-md sm:p-lg"
         role={ARIA_ROLES.REGION}
         aria-label={getWidgetAriaDescription(
           "Technical Implementation Details",
@@ -114,6 +114,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         <section 
           className={cn(
             WidgetClasses.section,
+            "p-md rounded-md",
             "bg-info-light/10 dark:bg-info-dark/20"
           )}
           aria-labelledby="technical-description-heading"
@@ -126,7 +127,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         </section>
 
         {/* Tab Navigation */}
-        <div className={cn(WidgetClasses.dividerHorizontal)}>
+        <div className="flex border-b border-gray-200 dark:border-gray-700 mb-md">
           <div
             ref={tabListRef}
             role={ARIA_ROLES.TABLIST}

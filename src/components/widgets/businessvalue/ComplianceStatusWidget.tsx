@@ -291,6 +291,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         <section 
           className={cn(
             WidgetClasses.section,
+            "p-md rounded-md",
             "bg-info-light/10 dark:bg-info-dark/20"
           )}
           aria-labelledby="compliance-description-heading"

@@ -323,6 +323,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         >
           <div className={cn(
             WidgetClasses.section,
+            "p-md rounded-md",
             "bg-info-light/10 dark:bg-info-dark/20"
           )}>
             <p className={cn(WidgetClasses.body)} data-testid={VALUE_CREATION_WIDGET_IDS.label('summary')}>

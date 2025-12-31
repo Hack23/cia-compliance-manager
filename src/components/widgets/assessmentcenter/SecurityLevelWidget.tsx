@@ -229,6 +229,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       >
         <div className={cn(
           WidgetClasses.section,
+          "p-md rounded-md",
           "bg-info-light/10 dark:bg-info-dark/20"
         )}>
           <p className={cn(WidgetClasses.body)}>
@@ -315,7 +316,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 </select>
 
                 <div
-                  className={cn(WidgetClasses.label, "mt-sm lowercase")}
+                  className={cn(WidgetClasses.labelNormal, "mt-sm")}
                   data-testid={SECURITY_LEVEL_WIDGET_IDS.label('confidentiality-summary')}
                 >
                   {confidentialityLevel}:{" "}
@@ -335,7 +336,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                 {lastChangedComponent === "confidentiality" && (
                   <div
-                    className={cn(WidgetClasses.label, "mt-sm text-green-600 dark:text-green-400 animate-pulse lowercase")}
+                    className={cn(WidgetClasses.labelNormal, "mt-sm text-green-600 dark:text-green-400 animate-pulse")}
                     data-testid={SECURITY_LEVEL_WIDGET_IDS.label('confidentiality-changed')}
                   >
                     ✓ Security level updated

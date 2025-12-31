@@ -232,6 +232,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         <section 
           className={cn(
             WidgetClasses.section,
+            "p-md rounded-md",
             "bg-info-light/10 dark:bg-info-dark/20"
           )}
           aria-labelledby="cost-intro-heading"
@@ -289,7 +290,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 style={{ width: `${costRatio.capex}%` }}
               ></div>
             </div>
-            <div className={cn(WidgetClasses.label, "flex justify-between lowercase")}>
+            <div className={cn(WidgetClasses.labelNormal, "flex justify-between")}>
               <div>
                 {costRatio.capex}% ({formatCurrency(totalCapex)})
               </div>
@@ -318,7 +319,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 ></div>
               </div>
             </div>
-            <div className={cn(WidgetClasses.label, "lowercase")}>
+            <div className={cn(WidgetClasses.labelNormal)}>
               Based on combined complexity across CIA components
             </div>
           </div>
@@ -388,7 +389,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                   {costBreakdown.confidentiality}% of total
                 </div>
               </div>
-              <div className={cn(WidgetClasses.label, "mt-sm flex justify-between lowercase")}>
+              <div className={cn(WidgetClasses.labelNormal, "mt-sm flex justify-between")}>
                 <span>CAPEX: {formatCurrency(confidentialityCost.capex)}</span>
                 <span>OPEX: {formatCurrency(confidentialityCost.opex)}</span>
               </div>
@@ -415,7 +416,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                   {costBreakdown.integrity}% of total
                 </div>
               </div>
-              <div className={cn(WidgetClasses.label, "mt-sm flex justify-between lowercase")}>
+              <div className={cn(WidgetClasses.labelNormal, "mt-sm flex justify-between")}>
                 <span>CAPEX: {formatCurrency(integrityCost.capex)}</span>
                 <span>OPEX: {formatCurrency(integrityCost.opex)}</span>
               </div>
@@ -444,7 +445,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                   {costBreakdown.availability}% of total
                 </div>
               </div>
-              <div className={cn(WidgetClasses.label, "mt-sm flex justify-between lowercase")}>
+              <div className={cn(WidgetClasses.labelNormal, "mt-sm flex justify-between")}>
                 <span>CAPEX: {formatCurrency(availabilityCost.capex)}</span>
                 <span>OPEX: {formatCurrency(availabilityCost.opex)}</span>
               </div>
