@@ -12,6 +12,7 @@ import {
   getWidgetAriaDescription,
   ARIA_ROLES 
 } from "../../../utils/accessibility";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import WidgetContainer from "../../common/WidgetContainer";
 import WidgetErrorBoundary from "../../common/WidgetErrorBoundary";
 import { CIAComponentDetails } from "./CIAComponentDetails";
@@ -102,7 +103,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         error={error}
       >
       <div 
-        className="p-md sm:p-lg"
+        className={cn("p-md sm:p-lg")}
         role={ARIA_ROLES.REGION}
         aria-label={getWidgetAriaDescription(
           "Technical Implementation Details",
@@ -111,10 +112,13 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
       >
         {/* Technical details description */}
         <section 
-          className="mb-md p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md"
+          className={cn(
+            WidgetClasses.section,
+            "bg-info-light/10 dark:bg-info-dark/20"
+          )}
           aria-labelledby="technical-description-heading"
         >
-          <p id="technical-description-heading" className="text-sm">
+          <p id="technical-description-heading" className={cn(WidgetClasses.body)}>
             This widget provides technical implementation details for achieving
             your selected security levels. Use these guidelines when designing
             and implementing your security controls.
@@ -122,7 +126,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         </section>
 
         {/* Tab Navigation */}
-        <div className="flex border-b border-gray-200 dark:border-gray-700 mb-md">
+        <div className={cn(WidgetClasses.dividerHorizontal)}>
           <div
             ref={tabListRef}
             role={ARIA_ROLES.TABLIST}
@@ -144,15 +148,15 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
                     setActiveTab(tab.id);
                   }}
                   onKeyDown={(e) => handleTabKeyDown(e, index)}
-                  className={`py-2 px-4 font-medium text-sm focus:outline-none ${
-                    isSelected
-                      ? tab.id === "confidentiality"
-                        ? "border-b-2 border-primary text-primary-dark dark:text-primary-light"
-                        : tab.id === "integrity"
-                        ? "border-b-2 border-green-500 text-green-600 dark:text-green-400"
-                        : "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
-                      : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-                  }`}
+                  className={cn(
+                    "py-2 px-4 font-medium",
+                    WidgetClasses.textResponsive,
+                    WidgetClasses.focusVisible,
+                    isSelected && tab.id === "confidentiality" && "border-b-2 border-primary text-primary-dark dark:text-primary-light",
+                    isSelected && tab.id === "integrity" && "border-b-2 border-green-500 text-green-600 dark:text-green-400",
+                    isSelected && tab.id === "availability" && "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400",
+                    !isSelected && "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                  )}
                   data-testid={TECHNICAL_DETAILS_WIDGET_IDS.button(`${tab.id}-tab`)}
                   {...getTabAriaProps(tabId, isSelected, panelId)}
                   aria-describedby="tech-tab-keyboard-instructions"
