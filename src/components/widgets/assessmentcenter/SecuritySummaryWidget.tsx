@@ -141,7 +141,11 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
     {
       id: 'compliance',
       label: 'Compliance',
-      badge: complianceStatus?.complianceFrameworks?.length,
+      badge: complianceStatus 
+        ? (complianceStatus.compliantFrameworks?.length || 0) + 
+          (complianceStatus.partiallyCompliantFrameworks?.length || 0) + 
+          (complianceStatus.nonCompliantFrameworks?.length || 0)
+        : undefined,
       content: (
         <SecurityComplianceTab
           availabilityLevel={availabilityLevel}
