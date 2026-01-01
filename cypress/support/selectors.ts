@@ -98,12 +98,12 @@ export const costEstimationWidget = {
 
 /**
  * Security Summary Widget Selectors
- * Widget uses WidgetContainer with testId="security-summary-widget"
+ * Widget uses WidgetContainer with testId="widget-security-summary"
  * Widget file: SecuritySummaryWidget.tsx
  */
 export const securitySummaryWidget = {
-  // WidgetContainer creates: widget-container-security-summary-widget
-  root: getByTestId('widget-container-security-summary-widget'),
+  // WidgetContainer creates: widget-container-widget-security-summary
+  root: getByTestId('widget-container-widget-security-summary'),
   overallRating: getByTestId(SECURITY_SUMMARY_TEST_IDS.OVERALL_LEVEL),
   levelBadge: getByTestId(SECURITY_SUMMARY_TEST_IDS.SECURITY_LEVEL_BADGE),
   description: getByTestId(SECURITY_SUMMARY_TEST_IDS.SUMMARY_DESCRIPTION),
@@ -117,12 +117,12 @@ export const securitySummaryWidget = {
 
 /**
  * Value Creation Widget Selectors
- * Widget uses WidgetContainer with testId="value-creation-widget"
+ * Widget uses WidgetContainer with testId="widget-value-creation"
  * Widget file: ValueCreationWidget.tsx
  */
 export const valueCreationWidget = {
-  // WidgetContainer creates: widget-container-value-creation-widget
-  root: getByTestId('widget-container-value-creation-widget'),
+  // WidgetContainer creates: widget-container-widget-value-creation
+  root: getByTestId('widget-container-widget-value-creation'),
   roiValue: getByTestId(VALUE_CREATION_TEST_IDS.ROI_VALUE),
   riskReduction: getByTestId(VALUE_CREATION_TEST_IDS.RISK_REDUCTION),
   valuePointsList: getByTestId(VALUE_CREATION_TEST_IDS.VALUE_POINTS_LIST),
@@ -133,12 +133,12 @@ export const valueCreationWidget = {
 
 /**
  * Compliance Status Widget Selectors
- * Widget uses WidgetContainer with testId="compliance-status-widget"
+ * Widget uses WidgetContainer with testId="widget-compliance-status"
  * Widget file: ComplianceStatusWidget.tsx
  */
 export const complianceStatusWidget = {
-  // WidgetContainer creates: widget-container-compliance-status-widget
-  root: getByTestId('widget-container-compliance-status-widget'),
+  // WidgetContainer creates: widget-container-widget-compliance-status
+  root: getByTestId('widget-container-widget-compliance-status'),
   statusBadge: getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_BADGE),
   frameworksContainer: getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_FRAMEWORKS_CONTAINER),
   compliantFrameworks: getByTestId(COMPLIANCE_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST),
@@ -149,12 +149,12 @@ export const complianceStatusWidget = {
 
 /**
  * Business Impact Widget Selectors
- * Widget uses WidgetContainer with testId="business-impact-widget"
+ * Widget uses WidgetContainer with testId="widget-business-impact"
  * Widget file: BusinessImpactAnalysisWidget.tsx
  */
 export const businessImpactWidget = {
-  // WidgetContainer creates: widget-container-business-impact-widget
-  root: getByTestId('widget-container-business-impact-widget'),
+  // WidgetContainer creates: widget-container-widget-business-impact
+  root: getByTestId('widget-container-widget-business-impact'),
   financialSection: getByTestId(BUSINESS_IMPACT_TEST_IDS.FINANCIAL_IMPACT_SECTION),
   operationalSection: getByTestId(BUSINESS_IMPACT_TEST_IDS.OPERATIONAL_IMPACT_SECTION),
   reputationalSection: getByTestId(BUSINESS_IMPACT_TEST_IDS.REPUTATIONAL_IMPACT_SECTION),
@@ -188,12 +188,12 @@ export const technicalDetailsWidget = {
 
 /**
  * Security Resources Widget Selectors
- * Widget uses WidgetContainer with testId="security-resources-widget" (SECURITY_RESOURCES_TEST_IDS.WIDGET)
+ * Widget uses WidgetContainer with testId="widget-security-resources"
  * Widget file: SecurityResourcesWidget.tsx
  */
 export const securityResourcesWidget = {
-  // WidgetContainer creates: widget-container-security-resources-widget
-  root: getByTestId('widget-container-security-resources-widget'),
+  // WidgetContainer creates: widget-container-widget-security-resources
+  root: getByTestId('widget-container-widget-security-resources'),
   description: getByTestId(SECURITY_RESOURCES_TEST_IDS.DESCRIPTION),
   resourceGroup: getByTestId(SECURITY_RESOURCES_TEST_IDS.RESOURCE_GROUP),
   resourceItem: getByTestId(SECURITY_RESOURCES_TEST_IDS.RESOURCE_ITEM),
