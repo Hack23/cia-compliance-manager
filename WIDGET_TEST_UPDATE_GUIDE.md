@@ -93,7 +93,6 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { WIDGET_NAME_IDS } from "../../../constants/testIds";
 import { mockWidgetProps, mockHighSecurityProps, mockLowSecurityProps } from "../../../utils/testUtils";
-import { testAccessibility } from "../../../utils/accessibilityTestUtils";
 import WidgetName from "./WidgetName";
 ```
 
@@ -119,12 +118,15 @@ describe("WidgetName", () => {
   });
 
   describe('Accessibility', () => {
-    it('should have no accessibility violations', async () => {
-      const { container } = render(<WidgetName {...defaultProps} />);
-      await waitFor(() => {
-        expect(screen.getByTestId(`widget-container-${WIDGET_NAME_IDS.root}`)).toBeInTheDocument();
-      });
-      await testAccessibility(container, 'WidgetName');
+    it('should render with proper ARIA attributes', () => {
+      render(<WidgetName {...defaultProps} />);
+      
+      const widgetContainer = screen.getByTestId(`widget-container-${WIDGET_NAME_IDS.root}`);
+      expect(widgetContainer).toBeInTheDocument();
+      
+      // Verify basic accessibility attributes
+      expect(widgetContainer).toHaveAttribute('role', 'region');
+      expect(widgetContainer).toHaveAttribute('aria-label');
     });
   });
 
@@ -177,9 +179,13 @@ it.skip('should have no accessibility violations - KNOWN ISSUE: heading-order', 
 - `expectCustomTestId(testId)` - Check custom testId
 
 ### Accessibility Testing
-- `testAccessibility(container, widgetName)` - Run axe tests
-- `expectAriaAttributes(testId, attributes)` - Check ARIA attributes
-- `expectAccessibleName(testId)` - Verify accessible name
+**Note:** Automated accessibility testing with axe-core has been removed due to license compliance requirements.
+
+**Current Approach:**
+- Focus on basic ARIA and semantic validation within each widget test file
+- Prefer `getByRole` (with the `name` option) and other accessible queries over test ID-based queries when possible
+- Assert key ARIA attributes directly (e.g., `role`, `aria-label`, `aria-labelledby`, `aria-describedby`) using standard Jest DOM matchers
+- Document notable accessibility findings in test descriptions
 
 ## 📊 Progress Tracking
 
@@ -218,8 +224,8 @@ it.skip('should have no accessibility violations - KNOWN ISSUE: heading-order', 
 ## 🔗 References
 
 - Test utilities: `src/utils/testUtils.tsx`
-- Accessibility utils: `src/utils/accessibilityTestUtils.ts`
+- Accessibility checks: use manual testing and approved tools (automated accessibility test utilities have been removed)
 - Test ID constants: `src/constants/testIds.ts`
 - Example widgets: 
-  - `src/components/widgets/businessvalue/CostEstimationWidget.test.tsx`
-  - `src/components/widgets/businessvalue/ValueCreationWidget.test.tsx`
+  - `src/components/widgets/businessvalue/CostEstimationWidget.test.tsx` (45 tests)
+  - `src/components/widgets/businessvalue/ValueCreationWidget.test.tsx` (9 tests)
