@@ -176,7 +176,7 @@ describe("ComplianceStatusWidget", () => {
   });
 
   describe("Data Display", () => {
-      it("displays compliance status summary", async () => {
+    it("displays compliance status summary", async () => {
       await act(async () => {
         render(<ComplianceStatusWidget {...defaultProps} />);
       });

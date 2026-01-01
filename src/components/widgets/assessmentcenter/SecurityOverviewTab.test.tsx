@@ -28,7 +28,6 @@ vi.mock("../../common/StatusBadge", () => ({
 describe("SecurityOverviewTab", () => {
   const defaultProps: SecurityOverviewTabProps = {
     ...mockWidgetProps,
-    confidentialityLevel: "Moderate" as SecurityLevel,
     dataClassification: "Confidential",
     implementationComplexity: "Medium",
     businessMaturityLevel: "Optimizing",

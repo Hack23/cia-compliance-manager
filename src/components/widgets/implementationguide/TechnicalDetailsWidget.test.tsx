@@ -2,7 +2,6 @@ import { act, fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { TECHNICAL_DETAILS_WIDGET_IDS } from "../../../constants/testIds";
 import { SecurityLevel } from "../../../types/cia";
-import { mockWidgetProps } from "../../../utils/testUtils";
 import TechnicalDetailsWidget from "./TechnicalDetailsWidget";
 
 // Mock the useCIAContentService hook with correct path

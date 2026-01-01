@@ -8,7 +8,6 @@ import {
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
 import { CIAComponentType } from "../../../types/cia-services";
-import { mockWidgetProps } from "../../../utils/testUtils";
 import BusinessImpactAnalysisWidget from "./BusinessImpactAnalysisWidget";
 
 // Define separate mocks for normal and error cases - hoisted to top of file

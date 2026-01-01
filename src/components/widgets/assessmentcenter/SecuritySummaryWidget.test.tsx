@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { SECURITY_SUMMARY_TEST_IDS } from "../../../constants/testIds";
 import { mockWidgetProps } from "../../../utils/testUtils";
 import SecuritySummaryWidget from "./SecuritySummaryWidget";
@@ -55,14 +55,14 @@ describe("SecuritySummaryWidget", () => {
 
   describe("Rendering", () => {
     it("renders without crashing", () => {
-      const { container } = render(
+      render(
         <SecuritySummaryWidget {...defaultProps} className="custom-class" />
       );
 
-    // Check that the widget container renders
-    expect(
-      screen.getByTestId("widget-container-custom-test-id")
-    ).toBeInTheDocument();
+      // Check that the widget container renders
+      expect(
+        screen.getByTestId("widget-container-custom-test-id")
+      ).toBeInTheDocument();
   });
 
     it("applies custom class name when provided", () => {
@@ -71,7 +71,7 @@ describe("SecuritySummaryWidget", () => {
       );
 
       const element = screen.getByTestId("widget-container-custom-test-id");
-      expect(element.classList.contains("custom-class")).equal(true);
+      expect(element).toHaveClass("custom-class");
     });
 
     it("uses default test ID when not provided", () => {
@@ -89,10 +89,10 @@ describe("SecuritySummaryWidget", () => {
     it("displays the overall security level", () => {
       render(<SecuritySummaryWidget {...defaultProps} />);
 
-    // Wait for content to load and check for the tab navigation
-    expect(
-      screen.getByTestId("custom-test-id-tab-overview")
-    ).toBeInTheDocument();
+      // Wait for content to load and check for the tab navigation
+      expect(
+        screen.getByTestId("custom-test-id-tab-overview")
+      ).toBeInTheDocument();
   });
 
     it("displays individual component levels", () => {
@@ -173,7 +173,7 @@ describe("SecuritySummaryWidget", () => {
         "widget-container-custom-test-id"
       );
       expect(widgetContainer).toBeInTheDocument();
-      expect(widgetContainer.tagName).equal("DIV");
+      expect(widgetContainer.tagName.toLowerCase()).toBe("div");
     });
   });
 });
