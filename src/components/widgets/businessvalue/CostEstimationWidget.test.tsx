@@ -2,7 +2,7 @@ import { act, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
 import { COST_ESTIMATION_WIDGET_IDS } from "../../../constants/testIds";
-import { mockWidgetProps, mockHighSecurityProps, mockLowSecurityProps, mockVeryHighSecurityProps } from "../../../utils/testUtils";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import { testAccessibility } from "../../../utils/accessibilityTestUtils";
 import CostEstimationWidget from "./CostEstimationWidget";
 

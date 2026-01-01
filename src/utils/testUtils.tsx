@@ -1,5 +1,5 @@
 import { render, RenderOptions, waitFor, screen } from '@testing-library/react';
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { SecurityLevel } from '../types/cia';
 
 /**
@@ -228,9 +228,3 @@ export const testDataFactories = {
     confidentialityLevel: confidentiality,
   }),
 };
-
-/**
- * Vitest mock import - should be imported in test files
- * This is a re-export for convenience
- */
-export { vi } from 'vitest';

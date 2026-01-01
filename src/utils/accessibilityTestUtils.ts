@@ -1,6 +1,7 @@
 import { axe } from 'vitest-axe';
 import * as matchers from 'vitest-axe/matchers';
 import { expect } from 'vitest';
+import type { RunOptions } from 'axe-core';
 
 // Extend Vitest matchers to include axe matchers
 expect.extend(matchers);
@@ -44,7 +45,7 @@ export async function testAccessibility(
  */
 export async function testAccessibilityWithOptions(
   container: Element,
-  options: any
+  options: RunOptions
 ): Promise<void> {
   const results = await axe(container, options);
   expect(results).toHaveNoViolations();

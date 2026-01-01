@@ -1,8 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { SecurityLevel } from "../../../types/cia";
 import { VALUE_CREATION_WIDGET_IDS } from "../../../constants/testIds";
-import { mockWidgetProps, mockLowSecurityProps, mockHighSecurityProps } from "../../../utils/testUtils";
+import { mockWidgetProps, mockLowSecurityProps, mockHighSecurityProps, mockMixedSecurityProps } from "../../../utils/testUtils";
 import { testAccessibility } from "../../../utils/accessibilityTestUtils";
 import ValueCreationWidget from "./ValueCreationWidget";
 
@@ -126,8 +125,9 @@ describe("ValueCreationWidget", () => {
 
   describe('Accessibility', () => {
     it.skip('should have no accessibility violations - KNOWN ISSUE: heading-order', async () => {
-      // Known issue: Heading levels should only increase by one
-      // This is a component-level issue that needs to be fixed in the ValueCreationWidget component
+      // Known issue: Heading levels should only increase by one (tracked in accessibility backlog)
+      // This is a component-level issue in ValueCreationWidget; update the heading hierarchy
+      // from h5 to h4 to maintain proper document outline, then remove `.skip` to re-enable this test
       const { container } = render(<ValueCreationWidget {...defaultProps} />);
       
       await waitFor(() => {
@@ -154,9 +154,7 @@ describe("ValueCreationWidget", () => {
     it("should handle mixed security levels", async () => {
       render(
         <ValueCreationWidget
-          availabilityLevel={"Low" as SecurityLevel}
-          integrityLevel={"Moderate" as SecurityLevel}
-          confidentialityLevel={"High" as SecurityLevel}
+          {...mockMixedSecurityProps}
           testId={VALUE_CREATION_WIDGET_IDS.root}
         />
       );
