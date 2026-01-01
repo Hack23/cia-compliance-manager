@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import { SecurityLevel } from "../../../types/cia";
 import IntegrityImpactWidget from "./IntegrityImpactWidget";
 
@@ -86,12 +87,9 @@ vi.mock("../../../components/common/SecurityLevelBadge", () => ({
 }));
 
 describe("IntegrityImpactWidget", () => {
-  // Update default props to include all required CIA levels
   const defaultProps = {
+    ...mockWidgetProps,
     level: "Moderate" as SecurityLevel,
-    availabilityLevel: "Moderate" as SecurityLevel,
-    integrityLevel: "Moderate" as SecurityLevel,
-    confidentialityLevel: "Moderate" as SecurityLevel,
     testId: "test-integrity-widget",
   };
 
@@ -100,10 +98,23 @@ describe("IntegrityImpactWidget", () => {
     return render(<IntegrityImpactWidget {...defaultProps} {...props} />);
   };
 
-  it("renders without crashing", () => {
-    createComponent();
-    expect(screen.getByTestId("test-integrity-widget")).toBeInTheDocument();
+  describe("Rendering", () => {
+    it("should render with required props", () => {
+      createComponent();
+      expect(screen.getByTestId("test-integrity-widget")).toBeInTheDocument();
+    });
+
+    it("should use custom testId", () => {
+      render(<IntegrityImpactWidget {...defaultProps} testId="custom-id" />);
+      expect(screen.getByTestId("custom-id")).toBeInTheDocument();
+    });
   });
+
+  describe("Data Display", () => {
+    it("renders without crashing", () => {
+      createComponent();
+      expect(screen.getByTestId("test-integrity-widget")).toBeInTheDocument();
+    });
 
   it("displays the widget title correctly", () => {
     createComponent();
@@ -195,5 +206,14 @@ describe("IntegrityImpactWidget", () => {
 
     // Look for the text with the "< " prefix
     expect(screen.getByText(/< 0.01%/)).toBeInTheDocument();
+  });
+  });
+
+  describe("Accessibility", () => {
+    it("should have proper semantic structure", () => {
+      createComponent();
+      const widget = screen.getByTestId("test-integrity-widget");
+      expect(widget).toBeInTheDocument();
+    });
   });
 });

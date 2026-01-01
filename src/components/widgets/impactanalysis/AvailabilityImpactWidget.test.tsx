@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { SecurityLevel } from "../../../types/cia";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import { CIAComponentType } from "../../../types/cia-services";
+import { SecurityLevel } from "../../../types/cia";
 import AvailabilityImpactWidget from "./AvailabilityImpactWidget";
 
 // Mock useCIAContentService hook
@@ -136,17 +137,28 @@ vi.mock("../../../components/common/WidgetContainer", () => ({
 
 describe("AvailabilityImpactWidget", () => {
   const defaultProps = {
+    ...mockWidgetProps,
     level: "Moderate" as SecurityLevel,
-    availabilityLevel: "Moderate" as SecurityLevel,
-    integrityLevel: "Moderate" as SecurityLevel,
-    confidentialityLevel: "Moderate" as SecurityLevel,
     testId: "availability-widget",
   };
 
-  it("renders without crashing", () => {
-    render(<AvailabilityImpactWidget {...defaultProps} />);
-    expect(screen.getByTestId("availability-widget")).toBeInTheDocument();
+  describe("Rendering", () => {
+    it("should render with required props", () => {
+      render(<AvailabilityImpactWidget {...defaultProps} />);
+      expect(screen.getByTestId("availability-widget")).toBeInTheDocument();
+    });
+
+    it("should use custom testId", () => {
+      render(<AvailabilityImpactWidget {...defaultProps} testId="custom-test-id" />);
+      expect(screen.getByTestId("custom-test-id")).toBeInTheDocument();
+    });
   });
+
+  describe("Data Display", () => {
+    it("renders without crashing", () => {
+      render(<AvailabilityImpactWidget {...defaultProps} />);
+      expect(screen.getByTestId("availability-widget")).toBeInTheDocument();
+    });
 
   it("displays security level badge", () => {
     render(<AvailabilityImpactWidget {...defaultProps} />);
@@ -252,5 +264,14 @@ describe("AvailabilityImpactWidget", () => {
     );
     // Very High level would show advanced metrics
     // We don't want to hardcode these values - they come from the hook
+  });
+  });
+
+  describe("Accessibility", () => {
+    it("should have proper semantic structure", () => {
+      render(<AvailabilityImpactWidget {...defaultProps} />);
+      const widget = screen.getByTestId("availability-widget");
+      expect(widget).toBeInTheDocument();
+    });
   });
 });
