@@ -782,3 +782,200 @@ declare global {
 Cypress.Commands.add("verifyMinimumWidgets", (count: number) => {
   cy.get('[data-testid*="widget"]').should("have.length.at.least", count);
 });
+
+/**
+ * ============================================================================
+ * Enhanced Custom Commands for Widget Refactoring E2E Tests
+ * ============================================================================
+ */
+
+/**
+ * Wait for a widget to finish loading
+ * Checks for loading state to disappear and content to be visible
+ */
+Cypress.Commands.add('waitForWidget', (testId: string) => {
+  cy.log(`⏳ Waiting for widget: ${testId}`);
+  
+  // Widget should exist
+  cy.get(`[data-testid="${testId}"]`, { timeout: 10000 }).should('exist');
+  
+  // Wait for loading state to disappear if it exists
+  cy.get('body').then($body => {
+    const loadingSelector = `[data-testid="${testId}-loading"]`;
+    if ($body.find(loadingSelector).length > 0) {
+      cy.get(loadingSelector).should('not.exist');
+    }
+  });
+  
+  // Widget should be visible
+  cy.get(`[data-testid="${testId}"]`).should('be.visible');
+  
+  cy.log(`✅ Widget loaded: ${testId}`);
+});
+
+/**
+ * Test widget error state
+ * Note: This is a helper for future error testing scenarios
+ * Currently sets up expectations but doesn't force errors
+ */
+Cypress.Commands.add('testWidgetError', (testId: string) => {
+  cy.log(`Testing error handling for widget: ${testId}`);
+  
+  // Check if error element exists (it shouldn't in normal operation)
+  cy.get('body').then($body => {
+    const errorSelector = `[data-testid="${testId}-error"]`;
+    if ($body.find(errorSelector).length > 0) {
+      cy.log(`Error state detected in widget: ${testId}`);
+      cy.get(errorSelector).should('be.visible');
+    } else {
+      cy.log(`No error state in widget: ${testId} (as expected)`);
+    }
+  });
+});
+
+/**
+ * Test tab navigation with keyboard
+ * Tests arrow keys, Home, and End navigation for accessible tabs
+ */
+Cypress.Commands.add('testTabNavigation', (containerSelector: string, tabCount: number) => {
+  cy.log(`Testing tab navigation in ${containerSelector} with ${tabCount} tabs`);
+  
+  cy.get(containerSelector).within(() => {
+    // Get first tab and focus it
+    cy.get('[role="tab"]').first().focus();
+    cy.wait(200);
+    
+    // Verify first tab is selected
+    cy.get('[role="tab"]').first().should('have.attr', 'aria-selected', 'true');
+    
+    // Navigate right with arrow key
+    if (tabCount > 1) {
+      cy.focused().type('{rightarrow}');
+      cy.wait(200);
+      
+      // Verify second tab is now selected
+      cy.get('[role="tab"]').eq(1).should('have.attr', 'aria-selected', 'true');
+      
+      // Navigate left back to first
+      cy.focused().type('{leftarrow}');
+      cy.wait(200);
+      cy.get('[role="tab"]').first().should('have.attr', 'aria-selected', 'true');
+    }
+    
+    // Test End key to go to last tab
+    if (tabCount > 2) {
+      cy.focused().type('{end}');
+      cy.wait(200);
+      cy.get('[role="tab"]').last().should('have.attr', 'aria-selected', 'true');
+      
+      // Test Home key to go back to first tab
+      cy.focused().type('{home}');
+      cy.wait(200);
+      cy.get('[role="tab"]').first().should('have.attr', 'aria-selected', 'true');
+    }
+  });
+  
+  cy.log('✅ Tab navigation tests passed');
+});
+
+/**
+ * Test responsive layout across different viewports
+ */
+Cypress.Commands.add('testResponsiveLayout', (viewports: string[]) => {
+  viewports.forEach(viewport => {
+    cy.log(`Testing viewport: ${viewport}`);
+    cy.viewport(viewport as Cypress.ViewportPreset);
+    cy.wait(500); // Allow time for responsive layout to adjust
+    
+    // Verify app container is visible
+    cy.get('[data-testid="app-container"]').should('be.visible');
+    
+    cy.log(`✅ Viewport ${viewport} rendered correctly`);
+  });
+});
+
+/**
+ * Check basic accessibility (placeholder for future cypress-axe integration)
+ * Currently performs basic ARIA checks
+ */
+Cypress.Commands.add('checkA11y', () => {
+  cy.log('Checking basic accessibility');
+  
+  // Check for basic ARIA attributes
+  cy.get('[role="button"]').each($btn => {
+    // Buttons should have accessible names
+    const hasName = $btn.attr('aria-label') || $btn.text().trim().length > 0;
+    expect(hasName, 'Button should have accessible name').to.be.true;
+  });
+  
+  // Check tabs have proper ARIA
+  cy.get('[role="tab"]').each($tab => {
+    cy.wrap($tab).should('have.attr', 'aria-selected');
+  });
+  
+  // Check for images with alt text
+  cy.get('img').each($img => {
+    cy.wrap($img).should('have.attr', 'alt');
+  });
+  
+  cy.log('✅ Basic accessibility checks passed');
+});
+
+/**
+ * Verify widget contains expected content
+ */
+Cypress.Commands.add('verifyWidgetContent', (testId: string, expectedContent: string[]) => {
+  cy.log(`Verifying content in widget: ${testId}`);
+  
+  cy.get(`[data-testid="${testId}"]`).within(() => {
+    expectedContent.forEach(content => {
+      cy.contains(content).should('be.visible');
+    });
+  });
+  
+  cy.log(`✅ Widget content verified: ${testId}`);
+});
+
+// Type declarations for new commands
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      /**
+       * Wait for widget to finish loading
+       * @param testId The test ID of the widget
+       */
+      waitForWidget(testId: string): Chainable<void>;
+      
+      /**
+       * Test widget error state handling
+       * @param testId The test ID of the widget
+       */
+      testWidgetError(testId: string): Chainable<void>;
+      
+      /**
+       * Test tab navigation with keyboard
+       * @param containerSelector Selector for the tab container
+       * @param tabCount Number of tabs to test
+       */
+      testTabNavigation(containerSelector: string, tabCount: number): Chainable<void>;
+      
+      /**
+       * Test responsive layout across viewports
+       * @param viewports Array of viewport preset names
+       */
+      testResponsiveLayout(viewports: string[]): Chainable<void>;
+      
+      /**
+       * Check basic accessibility (placeholder for cypress-axe)
+       */
+      checkA11y(): Chainable<void>;
+      
+      /**
+       * Verify widget contains expected content
+       * @param testId The test ID of the widget
+       * @param expectedContent Array of expected text content
+       */
+      verifyWidgetContent(testId: string, expectedContent: string[]): Chainable<void>;
+    }
+  }
+}
