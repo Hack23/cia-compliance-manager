@@ -290,7 +290,7 @@ See these files for complete examples:
 ## Future Enhancements
 
 ### Planned Improvements
-1. **Cypress-axe Integration**: More comprehensive accessibility testing
+1. **cypress-axe Integration**: More comprehensive accessibility testing
 2. **Visual Regression**: Screenshot comparison tests
 3. **API Mocking**: Mock backend responses for error testing
 4. **Component Testing**: Isolated component tests with Cypress

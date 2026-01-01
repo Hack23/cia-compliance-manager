@@ -901,21 +901,28 @@ Cypress.Commands.add('testResponsiveLayout', (viewports: string[]) => {
 Cypress.Commands.add('checkA11y', () => {
   cy.log('Checking basic accessibility');
   
-  // Check for basic ARIA attributes
+  // Check for basic ARIA attributes on buttons
   cy.get('[role="button"]').each($btn => {
-    // Buttons should have accessible names
-    const hasName = $btn.attr('aria-label') || $btn.text().trim().length > 0;
-    expect(hasName, 'Button should have accessible name').to.be.true;
+    cy.wrap($btn).then(() => {
+      // Buttons should have accessible names
+      const hasName = $btn.attr('aria-label') || $btn.text().trim().length > 0;
+      expect(hasName, 'Button should have accessible name').to.be.true;
+    });
   });
   
   // Check tabs have proper ARIA
-  cy.get('[role="tab"]').each($tab => {
-    cy.wrap($tab).should('have.attr', 'aria-selected');
+  cy.get('body').then($body => {
+    if ($body.find('[role="tab"]').length > 0) {
+      cy.get('[role="tab"]').each($tab => {
+        cy.wrap($tab).should('have.attr', 'aria-selected');
+      });
+    }
   });
   
-  // Check for images with alt text
+  // Check for images with alt attributes (decorative images can have empty alt='')
   cy.get('img').each($img => {
     cy.wrap($img).should('have.attr', 'alt');
+    // Note: Empty alt='' is valid for decorative images per WCAG guidelines
   });
   
   cy.log('✅ Basic accessibility checks passed');
