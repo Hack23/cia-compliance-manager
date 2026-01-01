@@ -8,6 +8,9 @@
 import { costEstimationWidget, securityLevelWidget } from '../../../support/selectors';
 import { SECURITY_LEVELS } from '../../../support/constants';
 
+// Constants for test timing
+const INTERACTION_DELAY = 200; // 200ms delay between security level changes to allow UI to update
+
 describe('Cost Estimation Widget - Enhanced', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -27,9 +30,9 @@ describe('Cost Estimation Widget - Enhanced', () => {
     it('should display cost values after security level selection', () => {
       // Select moderate security levels
       cy.get(securityLevelWidget.availabilitySelect).select(SECURITY_LEVELS.MODERATE, { force: true });
-      cy.wait(200);
+      cy.wait(INTERACTION_DELAY);
       cy.get(securityLevelWidget.integritySelect).select(SECURITY_LEVELS.MODERATE, { force: true });
-      cy.wait(200);
+      cy.wait(INTERACTION_DELAY);
       cy.get(securityLevelWidget.confidentialitySelect).select(SECURITY_LEVELS.MODERATE, { force: true });
       cy.wait(500);
       
@@ -61,9 +64,9 @@ describe('Cost Estimation Widget - Enhanced', () => {
     it('should update costs when security levels change', () => {
       // Set low security levels
       cy.get(securityLevelWidget.availabilitySelect).select(SECURITY_LEVELS.LOW, { force: true });
-      cy.wait(200);
+      cy.wait(INTERACTION_DELAY);
       cy.get(securityLevelWidget.integritySelect).select(SECURITY_LEVELS.LOW, { force: true });
-      cy.wait(200);
+      cy.wait(INTERACTION_DELAY);
       cy.get(securityLevelWidget.confidentialitySelect).select(SECURITY_LEVELS.LOW, { force: true });
       cy.wait(500);
       
@@ -75,9 +78,9 @@ describe('Cost Estimation Widget - Enhanced', () => {
         
         // Set high security levels
         cy.get(securityLevelWidget.availabilitySelect).select(SECURITY_LEVELS.HIGH, { force: true });
-        cy.wait(200);
+        cy.wait(INTERACTION_DELAY);
         cy.get(securityLevelWidget.integritySelect).select(SECURITY_LEVELS.HIGH, { force: true });
-        cy.wait(200);
+        cy.wait(INTERACTION_DELAY);
         cy.get(securityLevelWidget.confidentialitySelect).select(SECURITY_LEVELS.HIGH, { force: true });
         cy.wait(500);
         
@@ -111,9 +114,9 @@ describe('Cost Estimation Widget - Enhanced', () => {
       
       levels.forEach(level => {
         cy.get(securityLevelWidget.availabilitySelect).select(level, { force: true });
-        cy.wait(200);
+        cy.wait(INTERACTION_DELAY);
         cy.get(securityLevelWidget.integritySelect).select(level, { force: true });
-        cy.wait(200);
+        cy.wait(INTERACTION_DELAY);
         cy.get(securityLevelWidget.confidentialitySelect).select(level, { force: true });
         cy.wait(500);
         

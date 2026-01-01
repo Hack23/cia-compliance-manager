@@ -91,15 +91,8 @@ import { allWidgets } from './support/selectors';
 Object.entries(allWidgets).forEach(([name, selectors]) => {
   cy.get(selectors.root).should('exist');
 });
-```
 
-#### `allWidgets`
-Object containing all widget selectors for iteration:
-
-```typescript
-import { allWidgets } from './support/selectors';
-
-// Use specific widget selectors from allWidgets
+// Or use specific widget selectors
 Object.values(allWidgets).forEach(widget => {
   cy.get(widget.root).should('be.visible');
 });

@@ -30,12 +30,15 @@ The actual DOM element will have: `data-testid="widget-container-cost-estimation
 | SecurityLevelWidget | `security-level-widget` | `widget-container-security-level-widget` |
 | CostEstimationWidget | `cost-estimation-widget` | `widget-container-cost-estimation-widget` |
 | SecuritySummaryWidget | `security-summary-widget` | `widget-container-security-summary-widget` |
-| AvailabilityImpactWidget | `widget-availability-impact` | `widget-container-widget-availability-impact` |
+| AvailabilityImpactWidget | `widget-widget-availability-impact` | `widget-container-widget-widget-availability-impact` |
 | IntegrityImpactWidget | `widget-integrity-impact` | `widget-container-widget-integrity-impact` |
 | ConfidentialityImpactWidget | `widget-confidentiality-impact` | `widget-container-widget-confidentiality-impact` |
 | SecurityVisualizationWidget | `security-visualization-widget` | `widget-container-security-visualization-widget` |
 
-**Important**: All widget root selectors in `cypress/support/selectors.ts` already account for this prefix. Always use the centralized selectors rather than constructing test IDs manually.
+**Important**: 
+- **Widget selector objects** (e.g., `costEstimationWidget.root`, `securityLevelWidget.root`) exported from `cypress/support/selectors.ts` already include the full, prefixed `data-testid` value (e.g., `widget-container-cost-estimation-widget`).
+- **Cypress helper commands** (e.g., `waitForWidget`, `testWidgetError`, `verifyWidgetContent`) expect the widget's base `testId` prop value (e.g., `cost-estimation-widget`) and apply the `widget-container-` prefix internally.
+- Always use these centralized selectors and helper commands rather than constructing test IDs manually.
 
 ## New Infrastructure
 

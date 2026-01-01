@@ -187,10 +187,13 @@ export const securityResourcesWidget = {
 /**
  * Availability Impact Widget Selectors
  * Note: WidgetContainer prefixes testId with 'widget-container-'
- * Widget default testId: "widget-availability-impact" (from AVAILABILITY_IMPACT_PREFIX)
+ * Widget constructs testId as: "widget-" + AVAILABILITY_IMPACT_PREFIX
+ * Where AVAILABILITY_IMPACT_PREFIX = "widget-availability-impact"
+ * Result: testId = "widget-widget-availability-impact" (double "widget-" prefix)
+ * After WidgetContainer: "widget-container-widget-widget-availability-impact"
  */
 export const availabilityImpactWidget = {
-  root: getByTestId('widget-container-widget-availability-impact'),
+  root: getByTestId('widget-container-widget-widget-availability-impact'),
   title: getByTestId(AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_TITLE),
   description: getByTestId(AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_DESCRIPTION),
   businessImpact: getByTestId(AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_BUSINESS_IMPACT),
@@ -203,7 +206,10 @@ export const availabilityImpactWidget = {
 /**
  * Integrity Impact Widget Selectors
  * Note: WidgetContainer prefixes testId with 'widget-container-'
- * Widget default testId: "widget-integrity-impact" (from INTEGRITY_IMPACT_PREFIX)
+ * Widget constructs testId as: "widget-" + INTEGRITY_IMPACT_PREFIX
+ * Where INTEGRITY_IMPACT_PREFIX = "integrity-impact"
+ * Result: testId = "widget-integrity-impact"
+ * After WidgetContainer: "widget-container-widget-integrity-impact"
  */
 export const integrityImpactWidget = {
   root: getByTestId('widget-container-widget-integrity-impact'),
@@ -214,7 +220,10 @@ export const integrityImpactWidget = {
 /**
  * Confidentiality Impact Widget Selectors
  * Note: WidgetContainer prefixes testId with 'widget-container-'
- * Widget default testId: "widget-confidentiality-impact" (from CONFIDENTIALITY_IMPACT_PREFIX)
+ * Widget constructs testId as: "widget-" + CONFIDENTIALITY_IMPACT_PREFIX
+ * Where CONFIDENTIALITY_IMPACT_PREFIX = "confidentiality-impact"
+ * Result: testId = "widget-confidentiality-impact"
+ * After WidgetContainer: "widget-container-widget-confidentiality-impact"
  */
 export const confidentialityImpactWidget = {
   root: getByTestId('widget-container-widget-confidentiality-impact'),

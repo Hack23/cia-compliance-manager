@@ -789,6 +789,9 @@ Cypress.Commands.add("verifyMinimumWidgets", (count: number) => {
  * ============================================================================
  */
 
+// Constants for timeouts
+const WIDGET_LOAD_TIMEOUT = 10000; // 10 seconds for widget to render
+
 /**
  * Wait for a widget to finish loading
  * Checks for loading state to disappear and content to be visible
@@ -806,7 +809,7 @@ Cypress.Commands.add('waitForWidget', (testId: string) => {
     const hasWidget = $body.find(`[data-testid="${testId}"]`).length > 0;
     
     if (hasContainer) {
-      cy.get(`[data-testid="${containerTestId}"]`, { timeout: 10000 }).should('exist');
+      cy.get(`[data-testid="${containerTestId}"]`, { timeout: WIDGET_LOAD_TIMEOUT }).should('exist');
       
       // Wait for loading state to disappear if it exists
       const loadingSelector = `[data-testid="widget-container-loading-container-${testId}"]`;
@@ -817,7 +820,7 @@ Cypress.Commands.add('waitForWidget', (testId: string) => {
       // Widget should be visible
       cy.get(`[data-testid="${containerTestId}"]`).should('be.visible');
     } else if (hasWidget) {
-      cy.get(`[data-testid="${testId}"]`, { timeout: 10000 }).should('exist');
+      cy.get(`[data-testid="${testId}"]`, { timeout: WIDGET_LOAD_TIMEOUT }).should('exist');
       
       // Wait for loading state to disappear if it exists
       const loadingSelector = `[data-testid="${testId}-loading"]`;
@@ -829,7 +832,7 @@ Cypress.Commands.add('waitForWidget', (testId: string) => {
       cy.get(`[data-testid="${testId}"]`).should('be.visible');
     } else {
       // Neither found yet, wait for container prefix (most common case)
-      cy.get(`[data-testid="${containerTestId}"]`, { timeout: 10000 }).should('exist').and('be.visible');
+      cy.get(`[data-testid="${containerTestId}"]`, { timeout: WIDGET_LOAD_TIMEOUT }).should('exist').and('be.visible');
     }
   });
   

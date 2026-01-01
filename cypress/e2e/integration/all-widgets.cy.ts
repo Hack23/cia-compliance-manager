@@ -29,9 +29,9 @@ describe('All Widgets Integration', () => {
   });
 
   describe('Widget Rendering', () => {
-    it('should render all essential widgets', () => {
-      // Core widgets that should always be present
-      cy.log('Checking for essential widgets');
+    it('should render core widgets', () => {
+      // Core widgets that should always be present (most critical 5 widgets)
+      cy.log('Checking for core essential widgets');
       cy.get(securityLevelWidget.root).should('exist').and('be.visible');
       cy.get(securitySummaryWidget.root).should('exist').and('be.visible');
       cy.get(costEstimationWidget.root).should('exist').and('be.visible');
