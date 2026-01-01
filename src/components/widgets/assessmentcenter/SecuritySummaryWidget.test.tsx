@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import { SECURITY_SUMMARY_TEST_IDS } from "../../../constants/testIds";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import SecuritySummaryWidget from "./SecuritySummaryWidget";
 
 // Mock the content service
@@ -47,16 +48,16 @@ vi.mock("../../../hooks/useCIAContentService", () => ({
 }));
 
 describe("SecuritySummaryWidget", () => {
-  it("renders without crashing", () => {
-    const { container } = render(
-      <SecuritySummaryWidget
-        availabilityLevel="Moderate"
-        integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
-        testId="custom-test-id"
-        className="custom-class"
-      />
-    );
+  const defaultProps = {
+    ...mockWidgetProps,
+    testId: "custom-test-id",
+  };
+
+  describe("Rendering", () => {
+    it("renders without crashing", () => {
+      const { container } = render(
+        <SecuritySummaryWidget {...defaultProps} className="custom-class" />
+      );
 
     // Check that the widget container renders
     expect(
@@ -64,15 +65,29 @@ describe("SecuritySummaryWidget", () => {
     ).toBeInTheDocument();
   });
 
-  it("displays the overall security level", () => {
-    render(
-      <SecuritySummaryWidget
-        availabilityLevel="Moderate"
-        integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
-        testId="custom-test-id"
-      />
-    );
+    it("applies custom class name when provided", () => {
+      render(
+        <SecuritySummaryWidget {...defaultProps} className="custom-class" />
+      );
+
+      const element = screen.getByTestId("widget-container-custom-test-id");
+      expect(element.classList.contains("custom-class")).toBe(true);
+    });
+
+    it("uses default test ID when not provided", () => {
+      render(<SecuritySummaryWidget {...mockWidgetProps} />);
+
+      expect(
+        screen.getByTestId(
+          `widget-container-${SECURITY_SUMMARY_TEST_IDS.WIDGET}`
+        )
+      ).toBeInTheDocument();
+    });
+  });
+
+  describe("Data Display", () => {
+    it("displays the overall security level", () => {
+      render(<SecuritySummaryWidget {...defaultProps} />);
 
     // Wait for content to load and check for the tab navigation
     expect(
@@ -80,14 +95,8 @@ describe("SecuritySummaryWidget", () => {
     ).toBeInTheDocument();
   });
 
-  it("displays individual component levels", () => {
-    render(
-      <SecuritySummaryWidget
-        availabilityLevel="Moderate"
-        integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
-      />
-    );
+    it("displays individual component levels", () => {
+      render(<SecuritySummaryWidget {...mockWidgetProps} />);
 
     // Check for component cards in the overview tab once loaded
     expect(
@@ -101,15 +110,8 @@ describe("SecuritySummaryWidget", () => {
     ).toBeInTheDocument();
   });
 
-  it("displays security summary description", () => {
-    render(
-      <SecuritySummaryWidget
-        availabilityLevel="Moderate"
-        integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
-        testId="custom-test-id"
-      />
-    );
+    it("displays security summary description", () => {
+      render(<SecuritySummaryWidget {...defaultProps} />);
 
     // The description is part of the Banner section
     expect(
@@ -117,85 +119,61 @@ describe("SecuritySummaryWidget", () => {
     ).toBeInTheDocument();
   });
 
-  it("calculates correct overall level for mixed inputs", () => {
-    render(
-      <SecuritySummaryWidget
-        availabilityLevel="High"
-        integrityLevel="Moderate"
-        confidentialityLevel="Low"
-      />
-    );
+    it("displays security cards for each component", () => {
+      render(<SecuritySummaryWidget {...defaultProps} />);
+
+      expect(
+        screen.getByTestId("custom-test-id-tab-overview")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId("custom-test-id-tab-business")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId("custom-test-id-tab-implementation")
+      ).toBeInTheDocument();
+    });
+
+    it("shows appropriate risk levels for security levels", () => {
+      render(
+        <SecuritySummaryWidget
+          availabilityLevel="None"
+          integrityLevel="None"
+          confidentialityLevel="None"
+        />
+      );
+
+      const riskLevel = screen.getByTestId(
+        "widget-security-summary-label-risk-level"
+      );
+      expect(riskLevel).toBeInTheDocument();
+    });
+  });
+
+  describe("Edge Cases", () => {
+    it("calculates correct overall level for mixed inputs", () => {
+      render(
+        <SecuritySummaryWidget
+          availabilityLevel="High"
+          integrityLevel="Moderate"
+          confidentialityLevel="Low"
+        />
+      );
 
     // Overall level should be displayed based on mixed inputs
     expect(screen.getByText("Security Summary")).toBeInTheDocument();
   });
 
-  it("displays security cards for each component", () => {
-    render(
-      <SecuritySummaryWidget
-        availabilityLevel="Moderate"
-        integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
-        testId="custom-test-id"
-      />
-    );
-
-    // Check for the tab buttons
-    expect(
-      screen.getByTestId("custom-test-id-tab-overview")
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId("custom-test-id-tab-business")
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId("custom-test-id-tab-implementation")
-    ).toBeInTheDocument();
   });
 
-  it("shows appropriate risk levels for security levels", () => {
-    render(
-      <SecuritySummaryWidget
-        availabilityLevel="None"
-        integrityLevel="None"
-        confidentialityLevel="None"
-      />
-    );
+  describe("Accessibility", () => {
+    it("should have proper ARIA attributes on widget container", () => {
+      render(<SecuritySummaryWidget {...defaultProps} />);
 
-    // Check for risk level displayed in the widget
-    const riskLevel = screen.getByTestId(
-      "widget-security-summary-label-risk-level"
-    );
-    expect(riskLevel).toBeInTheDocument();
-  });
-
-  it("applies custom class name when provided", () => {
-    render(
-      <SecuritySummaryWidget
-        availabilityLevel="Moderate"
-        integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
-        className="custom-class"
-        testId="custom-test-id"
-      />
-    );
-
-    // Use classList.contains or className checks instead of toHaveClass
-    const element = screen.getByTestId("widget-container-custom-test-id");
-    expect(element.classList.contains("custom-class")).true;
-  });
-
-  it("uses default test ID when not provided", () => {
-    render(
-      <SecuritySummaryWidget
-        availabilityLevel="Moderate"
-        integrityLevel="Moderate"
-        confidentialityLevel="Moderate"
-      />
-    );
-
-    // Update to use the correct testId without the loading-container prefix
-    expect(
-      screen.getByTestId(`widget-container-${SECURITY_SUMMARY_TEST_IDS.WIDGET}`)
-    ).toBeInTheDocument();
+      const widgetContainer = screen.getByTestId(
+        "widget-container-custom-test-id"
+      );
+      expect(widgetContainer).toBeInTheDocument();
+      expect(widgetContainer.tagName).toBe("DIV");
+    });
   });
 });
