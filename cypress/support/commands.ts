@@ -828,8 +828,8 @@ Cypress.Commands.add('waitForWidget', (testId: string) => {
       // Widget should be visible
       cy.get(`[data-testid="${testId}"]`).should('be.visible');
     } else {
-      // Neither found, try original selector and let it fail with proper error
-      cy.get(`[data-testid="${testId}"]`, { timeout: 10000 }).should('exist');
+      // Neither found yet, wait for container prefix (most common case)
+      cy.get(`[data-testid="${containerTestId}"]`, { timeout: 10000 }).should('exist').and('be.visible');
     }
   });
   
