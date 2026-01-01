@@ -11,7 +11,7 @@ import { SECURITY_LEVELS } from '../../../support/constants';
 describe('Security Summary Widget - Enhanced', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.waitForWidget('security-summary-widget');
+    cy.waitForWidget('widget-security-summary');
   });
 
   describe('Rendering', () => {
@@ -236,7 +236,7 @@ describe('Security Summary Widget - Enhanced', () => {
 
   describe('Error Handling', () => {
     it('should not display error state in normal operation', () => {
-      cy.testWidgetError('security-summary-widget');
+      cy.testWidgetError('widget-security-summary');
     });
 
     it('should handle empty state gracefully', () => {

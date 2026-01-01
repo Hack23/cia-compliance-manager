@@ -25,19 +25,25 @@ The actual DOM element will have: `data-testid="widget-container-cost-estimation
 
 ### Widget Test ID Patterns
 
-| Widget | Default testId | Actual DOM test ID |
-|--------|---------------|-------------------|
+| Widget Component | Configured testId prop | Rendered DOM data-testid |
+|------------------|------------------------|---------------------------|
 | SecurityLevelWidget | `widget-security-level` | `widget-container-widget-security-level` |
-| CostEstimationWidget | `cost-estimation-widget` | `widget-container-cost-estimation-widget` |
-| SecuritySummaryWidget | `security-summary-widget` | `widget-container-security-summary-widget` |
+| CostEstimationWidget | `widget-cost-estimation` | `widget-container-widget-cost-estimation` |
+| SecuritySummaryWidget | `widget-security-summary` | `widget-container-widget-security-summary` |
+| ValueCreationWidget | `widget-value-creation` | `widget-container-widget-value-creation` |
+| ComplianceStatusWidget | `widget-compliance-status` | `widget-container-widget-compliance-status` |
+| BusinessImpactWidget | `widget-business-impact` | `widget-container-widget-business-impact` |
+| TechnicalDetailsWidget | `widget-technical-details` | `widget-container-widget-technical-details` |
+| SecurityResourcesWidget | `widget-security-resources` | `widget-container-widget-security-resources` |
+| SecurityVisualizationWidget | `widget-security-visualization` | `widget-container-widget-security-visualization` |
 | AvailabilityImpactWidget | `widget-widget-availability-impact` | `widget-container-widget-widget-availability-impact` |
 | IntegrityImpactWidget | `widget-integrity-impact` | `widget-container-widget-integrity-impact` |
 | ConfidentialityImpactWidget | `widget-confidentiality-impact` | `widget-container-widget-confidentiality-impact` |
-| SecurityVisualizationWidget | `security-visualization-widget` | `widget-container-security-visualization-widget` |
 
 **Important**: 
-- **Widget selector objects** (e.g., `costEstimationWidget.root`, `securityLevelWidget.root`) exported from `cypress/support/selectors.ts` already include the full, prefixed `data-testid` value (e.g., `widget-container-cost-estimation-widget`).
-- **Cypress helper commands** (e.g., `waitForWidget`, `testWidgetError`, `verifyWidgetContent`) expect the widget's base `testId` prop value (e.g., `cost-estimation-widget`) and apply the `widget-container-` prefix internally.
+- **Widget selector objects** (e.g., `costEstimationWidget.root`, `securityLevelWidget.root`) exported from `cypress/support/selectors.ts` already include the full, prefixed `data-testid` value (e.g., `widget-container-widget-cost-estimation`).
+- **Cypress helper commands** (e.g., `waitForWidget`, `testWidgetError`, `verifyWidgetContent`) expect the widget's base `testId` prop value (e.g., `widget-cost-estimation`) and apply the `widget-container-` prefix internally.
+- **All widgets now follow the `widget-{name}` naming convention** as documented in `src/constants/testIds.ts`.
 - Always use these centralized selectors and helper commands rather than constructing test IDs manually.
 
 ## New Infrastructure
@@ -82,19 +88,20 @@ cy.get(securityLevelWidget.availabilitySelect).select('High');
 #### `waitForWidget(testId: string)`
 Wait for a widget to finish loading and be visible.
 
-**Note**: Pass the widget's actual testId prop value (e.g., `'cost-estimation-widget'`), not a prefixed version. The command automatically handles the WidgetContainer prefix pattern.
+**Note**: Pass the widget's actual testId prop value following the `widget-{name}` convention (e.g., `'widget-cost-estimation'`). The command automatically handles the WidgetContainer prefix pattern.
 
 ```typescript
-cy.waitForWidget('cost-estimation-widget');
+cy.waitForWidget('widget-cost-estimation');
+cy.waitForWidget('widget-security-level');
 ```
 
 #### `testWidgetError(testId: string)`
 Check for error states in widgets (helpful for validation).
 
-**Note**: Pass the widget's actual testId prop value.
+**Note**: Pass the widget's actual testId prop value following the `widget-{name}` convention.
 
 ```typescript
-cy.testWidgetError('cost-estimation-widget');
+cy.testWidgetError('widget-cost-estimation');
 ```
 
 #### `testTabNavigation(containerSelector: string, tabCount: number)`
@@ -121,10 +128,10 @@ cy.checkA11y();
 #### `verifyWidgetContent(testId: string, expectedContent: string[])`
 Verify widget contains expected content.
 
-**Note**: Pass the widget's actual testId prop value.
+**Note**: Pass the widget's actual testId prop value following the `widget-{name}` convention.
 
 ```typescript
-cy.verifyWidgetContent('cost-estimation-widget', ['CAPEX', 'OPEX', 'Total']);
+cy.verifyWidgetContent('widget-cost-estimation', ['CAPEX', 'OPEX', 'Total']);
 ```
 
 ## Test Patterns
@@ -245,21 +252,21 @@ describe('All Widgets Integration', () => {
 1. **Import selectors instead of hardcoding**:
 ```typescript
 // Before: What you see in the DOM
-cy.get('[data-testid="widget-container-cost-estimation-widget"]')
+cy.get('[data-testid="widget-container-widget-cost-estimation"]')
 
 // After: Use centralized selectors
 import { costEstimationWidget } from '../../support/selectors';
 cy.get(costEstimationWidget.root)
 ```
 
-2. **Use custom commands**:
+2. **Use custom commands with widget-{name} convention**:
 ```typescript
 // Before
-cy.get('[data-testid="widget-container-cost-estimation-widget"]').should('exist');
-cy.get('[data-testid="widget-container-loading-container-cost-estimation-widget"]').should('not.exist');
+cy.get('[data-testid="widget-container-widget-cost-estimation"]').should('exist');
+cy.get('[data-testid="widget-container-loading-container-widget-cost-estimation"]').should('not.exist');
 
-// After: Pass the widget's actual testId prop value
-cy.waitForWidget('cost-estimation-widget');
+// After: Pass the widget's actual testId prop value (widget-{name})
+cy.waitForWidget('widget-cost-estimation');
 ```
 
 3. **Add responsive tests**:

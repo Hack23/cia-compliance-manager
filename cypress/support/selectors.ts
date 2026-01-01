@@ -80,10 +80,10 @@ export const securityLevelWidget = {
 /**
  * Cost Estimation Widget Selectors
  * Note: WidgetContainer prefixes testId with 'widget-container-'
- * Widget default testId: "cost-estimation-widget"
+ * Widget default testId: "widget-cost-estimation" (from COST_ESTIMATION_WIDGET_IDS.root)
  */
 export const costEstimationWidget = {
-  root: getByTestId('widget-container-cost-estimation-widget'),
+  root: getByTestId('widget-container-widget-cost-estimation'),
   capex: getByTestId(COST_TEST_IDS.CAPEX_VALUE),
   opex: getByTestId(COST_TEST_IDS.OPEX_VALUE),
   total: getByTestId(COST_TEST_IDS.TOTAL_COST),
@@ -234,10 +234,10 @@ export const confidentialityImpactWidget = {
 /**
  * Security Visualization Widget Selectors (Radar Chart)
  * Note: WidgetContainer prefixes testId with 'widget-container-'
- * Widget default testId: "security-visualization-widget"
+ * Widget default testId: "widget-security-visualization" (from SECURITY_VISUALIZATION_WIDGET_IDS.root)
  */
 export const securityVisualizationWidget = {
-  root: getByTestId('widget-container-security-visualization-widget'),
+  root: getByTestId('widget-container-widget-security-visualization'),
   radarChart: getByTestId(CHART_TEST_IDS.RADAR_CHART),
   radarChartContainer: getByTestId(CHART_TEST_IDS.RADAR_CHART_CONTAINER),
   availabilityValue: getByTestId(CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE),

@@ -31,7 +31,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
   integrityLevel,
   confidentialityLevel,
   className = "",
-  testId = "cost-estimation-widget",
+  testId = COST_ESTIMATION_WIDGET_IDS.root,
 }) => {
   // Use the content service
   const {

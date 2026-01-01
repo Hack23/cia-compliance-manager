@@ -38,7 +38,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   integrityLevel,
   confidentialityLevel,
   className = "",
-  testId = "value-creation-widget",
+  testId = VALUE_CREATION_WIDGET_IDS.root,
 }) => {
   // Get CIA content service for value creation data
   const { ciaContentService, error, isLoading } = useCIAContentService();

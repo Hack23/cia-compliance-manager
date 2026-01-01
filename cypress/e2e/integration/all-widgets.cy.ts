@@ -25,7 +25,7 @@ import { SECURITY_LEVELS } from '../../support/constants';
 describe('All Widgets Integration', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.waitForWidget('security-level-widget');
+    cy.waitForWidget('widget-security-level');
   });
 
   describe('Widget Rendering', () => {

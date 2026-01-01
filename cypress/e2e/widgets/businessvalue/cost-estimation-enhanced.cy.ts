@@ -14,7 +14,7 @@ const INTERACTION_DELAY = 200; // 200ms delay between security level changes to 
 describe('Cost Estimation Widget - Enhanced', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.waitForWidget('cost-estimation-widget');
+    cy.waitForWidget('widget-cost-estimation');
   });
 
   describe('Rendering', () => {
@@ -141,7 +141,7 @@ describe('Cost Estimation Widget - Enhanced', () => {
 
   describe('Error Handling', () => {
     it('should not display error state in normal operation', () => {
-      cy.testWidgetError('cost-estimation-widget');
+      cy.testWidgetError('widget-cost-estimation');
     });
 
     it('should handle missing data gracefully', () => {
