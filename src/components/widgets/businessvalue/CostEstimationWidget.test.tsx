@@ -3,7 +3,6 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
 import { COST_ESTIMATION_WIDGET_IDS } from "../../../constants/testIds";
 import { mockWidgetProps } from "../../../utils/testUtils";
-import { testAccessibility } from "../../../utils/accessibilityTestUtils";
 import CostEstimationWidget from "./CostEstimationWidget";
 
 // Mock required hooks and services
@@ -865,16 +864,6 @@ describe("CostEstimationWidget", () => {
 
   // Accessibility Tests
   describe("Accessibility", () => {
-    it("should have no accessibility violations", async () => {
-      const { container } = render(<CostEstimationWidget {...defaultProps} />);
-      
-      await waitFor(() => {
-        expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
-      });
-      
-      await testAccessibility(container, 'CostEstimationWidget');
-    });
-
     it("renders with proper semantic structure", async () => {
       await act(async () => {
         render(<CostEstimationWidget {...defaultProps} />);

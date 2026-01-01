@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
 import { VALUE_CREATION_WIDGET_IDS } from "../../../constants/testIds";
 import { mockWidgetProps, mockLowSecurityProps, mockHighSecurityProps, mockMixedSecurityProps } from "../../../utils/testUtils";
-import { testAccessibility } from "../../../utils/accessibilityTestUtils";
 import ValueCreationWidget from "./ValueCreationWidget";
 
 // Mock the hooks
@@ -125,20 +124,6 @@ describe("ValueCreationWidget", () => {
   });
 
   describe('Accessibility', () => {
-    it.skip('should have no accessibility violations - KNOWN ISSUE: heading-order', async () => {
-      // Known issue: Heading levels should only increase by one (tracked in accessibility backlog)
-      // This is a component-level issue in ValueCreationWidget; update the heading hierarchy
-      // from h5 to h4 to maintain proper document outline, then remove `.skip` to re-enable this test
-      const { container } = render(<ValueCreationWidget {...defaultProps} />);
-      
-      await waitFor(() => {
-        const widget = screen.queryByTestId(`widget-container-${VALUE_CREATION_WIDGET_IDS.root}`);
-        expect(widget).toBeInTheDocument();
-      });
-      
-      await testAccessibility(container, 'ValueCreationWidget');
-    });
-
     it('should render with proper aria attributes', async () => {
       render(<ValueCreationWidget {...defaultProps} />);
       

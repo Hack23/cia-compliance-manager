@@ -32,9 +32,6 @@ declare module "vitest" {
     toThrow(expected?: string | RegExp | Error): Assertion<T>;
     toThrowError(expected?: string | RegExp | Error): Assertion<T>;
     
-    // vitest-axe matchers
-    toHaveNoViolations(): Assertion<T>;
-    
     // Additional testing-library matchers that may not be in TestingLibraryMatchers
     toHaveClass(...classNames: string[]): Assertion<T>;
   }
