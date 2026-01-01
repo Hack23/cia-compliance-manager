@@ -792,23 +792,46 @@ Cypress.Commands.add("verifyMinimumWidgets", (count: number) => {
 /**
  * Wait for a widget to finish loading
  * Checks for loading state to disappear and content to be visible
+ * Automatically handles WidgetContainer's 'widget-container-' prefix
  */
 Cypress.Commands.add('waitForWidget', (testId: string) => {
   cy.log(`⏳ Waiting for widget: ${testId}`);
   
-  // Widget should exist
-  cy.get(`[data-testid="${testId}"]`, { timeout: 10000 }).should('exist');
+  // WidgetContainer prefixes testId with 'widget-container-'
+  const containerTestId = `widget-container-${testId}`;
   
-  // Wait for loading state to disappear if it exists
+  // Widget should exist (try both with and without prefix for flexibility)
   cy.get('body').then($body => {
-    const loadingSelector = `[data-testid="${testId}-loading"]`;
-    if ($body.find(loadingSelector).length > 0) {
-      cy.get(loadingSelector).should('not.exist');
+    const hasContainer = $body.find(`[data-testid="${containerTestId}"]`).length > 0;
+    const hasWidget = $body.find(`[data-testid="${testId}"]`).length > 0;
+    
+    if (hasContainer) {
+      cy.get(`[data-testid="${containerTestId}"]`, { timeout: 10000 }).should('exist');
+      
+      // Wait for loading state to disappear if it exists
+      const loadingSelector = `[data-testid="widget-container-loading-container-${testId}"]`;
+      if ($body.find(loadingSelector).length > 0) {
+        cy.get(loadingSelector).should('not.exist');
+      }
+      
+      // Widget should be visible
+      cy.get(`[data-testid="${containerTestId}"]`).should('be.visible');
+    } else if (hasWidget) {
+      cy.get(`[data-testid="${testId}"]`, { timeout: 10000 }).should('exist');
+      
+      // Wait for loading state to disappear if it exists
+      const loadingSelector = `[data-testid="${testId}-loading"]`;
+      if ($body.find(loadingSelector).length > 0) {
+        cy.get(loadingSelector).should('not.exist');
+      }
+      
+      // Widget should be visible
+      cy.get(`[data-testid="${testId}"]`).should('be.visible');
+    } else {
+      // Neither found, try original selector and let it fail with proper error
+      cy.get(`[data-testid="${testId}"]`, { timeout: 10000 }).should('exist');
     }
   });
-  
-  // Widget should be visible
-  cy.get(`[data-testid="${testId}"]`).should('be.visible');
   
   cy.log(`✅ Widget loaded: ${testId}`);
 });

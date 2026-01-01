@@ -64,9 +64,10 @@ export const securityLevelWidget = {
 
 /**
  * Cost Estimation Widget Selectors
+ * Note: WidgetContainer prefixes testId with 'widget-container-'
  */
 export const costEstimationWidget = {
-  root: getByTestId(COST_TEST_IDS.COST_ESTIMATION_WIDGET),
+  root: getByTestId(`widget-container-${COST_TEST_IDS.COST_ESTIMATION_WIDGET}`),
   capex: getByTestId(COST_TEST_IDS.CAPEX_VALUE),
   opex: getByTestId(COST_TEST_IDS.OPEX_VALUE),
   total: getByTestId(COST_TEST_IDS.TOTAL_COST),
@@ -79,9 +80,10 @@ export const costEstimationWidget = {
 
 /**
  * Security Summary Widget Selectors
+ * Note: WidgetContainer prefixes testId with 'widget-container-'
  */
 export const securitySummaryWidget = {
-  root: getByTestId(SECURITY_SUMMARY_TEST_IDS.SECURITY_SUMMARY_WIDGET),
+  root: getByTestId(`widget-container-${SECURITY_SUMMARY_TEST_IDS.WIDGET}`),
   overallRating: getByTestId(SECURITY_SUMMARY_TEST_IDS.OVERALL_LEVEL),
   levelBadge: getByTestId(SECURITY_SUMMARY_TEST_IDS.SECURITY_LEVEL_BADGE),
   description: getByTestId(SECURITY_SUMMARY_TEST_IDS.SUMMARY_DESCRIPTION),
@@ -95,9 +97,10 @@ export const securitySummaryWidget = {
 
 /**
  * Value Creation Widget Selectors
+ * Note: WidgetContainer prefixes testId with 'widget-container-'
  */
 export const valueCreationWidget = {
-  root: getByTestId(VALUE_CREATION_TEST_IDS.VALUE_CREATION_WIDGET),
+  root: getByTestId(`widget-container-${VALUE_CREATION_TEST_IDS.VALUE_CREATION_WIDGET}`),
   roiValue: getByTestId(VALUE_CREATION_TEST_IDS.ROI_VALUE),
   riskReduction: getByTestId(VALUE_CREATION_TEST_IDS.RISK_REDUCTION),
   valuePointsList: getByTestId(VALUE_CREATION_TEST_IDS.VALUE_POINTS_LIST),
@@ -108,9 +111,10 @@ export const valueCreationWidget = {
 
 /**
  * Compliance Status Widget Selectors
+ * Note: WidgetContainer prefixes testId with 'widget-container-'
  */
 export const complianceStatusWidget = {
-  root: getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_WIDGET),
+  root: getByTestId(`widget-container-${COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_WIDGET}`),
   statusBadge: getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_BADGE),
   frameworksContainer: getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_FRAMEWORKS_CONTAINER),
   compliantFrameworks: getByTestId(COMPLIANCE_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST),
@@ -121,9 +125,10 @@ export const complianceStatusWidget = {
 
 /**
  * Business Impact Widget Selectors
+ * Note: WidgetContainer prefixes testId with 'widget-container-'
  */
 export const businessImpactWidget = {
-  root: getByTestId(BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_WIDGET),
+  root: getByTestId(`widget-container-${BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_WIDGET}`),
   financialSection: getByTestId(BUSINESS_IMPACT_TEST_IDS.FINANCIAL_IMPACT_SECTION),
   operationalSection: getByTestId(BUSINESS_IMPACT_TEST_IDS.OPERATIONAL_IMPACT_SECTION),
   reputationalSection: getByTestId(BUSINESS_IMPACT_TEST_IDS.REPUTATIONAL_IMPACT_SECTION),
@@ -134,9 +139,10 @@ export const businessImpactWidget = {
 
 /**
  * Technical Details Widget Selectors
+ * Note: WidgetContainer prefixes testId with 'widget-container-'
  */
 export const technicalDetailsWidget = {
-  root: getByTestId(TECHNICAL_DETAILS_TEST_IDS.TECHNICAL_DETAILS_WIDGET),
+  root: getByTestId(`widget-container-${TECHNICAL_DETAILS_TEST_IDS.TECHNICAL_DETAILS_WIDGET}`),
   availabilityTab: getByTestId(TECHNICAL_DETAILS_TEST_IDS.AVAILABILITY_TAB),
   integrityTab: getByTestId(TECHNICAL_DETAILS_TEST_IDS.INTEGRITY_TAB),
   confidentialityTab: getByTestId(TECHNICAL_DETAILS_TEST_IDS.CONFIDENTIALITY_TAB),
@@ -151,9 +157,10 @@ export const technicalDetailsWidget = {
 
 /**
  * Security Resources Widget Selectors
+ * Note: WidgetContainer prefixes testId with 'widget-container-'
  */
 export const securityResourcesWidget = {
-  root: getByTestId(SECURITY_RESOURCES_TEST_IDS.WIDGET),
+  root: getByTestId(`widget-container-${SECURITY_RESOURCES_TEST_IDS.WIDGET}`),
   description: getByTestId(SECURITY_RESOURCES_TEST_IDS.DESCRIPTION),
   resourceGroup: getByTestId(SECURITY_RESOURCES_TEST_IDS.RESOURCE_GROUP),
   resourceItem: getByTestId(SECURITY_RESOURCES_TEST_IDS.RESOURCE_ITEM),
