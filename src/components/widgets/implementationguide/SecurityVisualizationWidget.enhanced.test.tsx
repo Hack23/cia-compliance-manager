@@ -50,7 +50,7 @@ describe("SecurityVisualizationWidget Enhanced Tests", () => {
     );
     expect(chartElement).toBeInTheDocument();
 
-    // Check for radar values - using correct case from mockWidgetProps
+    // Check for radar values - mockWidgetProps uses PascalCase SecurityLevel values
     const availabilityValue = screen.getByTestId("radar-availability-value");
     expect(availabilityValue).toBeInTheDocument();
     expect(availabilityValue.textContent).toBe("Moderate");

@@ -28,7 +28,6 @@ describe("CIAComponentDetails", () => {
   };
 
   const defaultProps: CIAComponentDetailsProps = {
-    ...mockWidgetProps,
     component: "confidentiality" as CIAComponent,
     level: "Moderate" as SecurityLevel,
     details: mockDetails,

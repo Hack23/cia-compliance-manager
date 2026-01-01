@@ -160,7 +160,7 @@ export function expectCustomTestId(customTestId: string) {
  *   'widget-cost-estimation'
  * );
  */
-export function testBaseWidgetProps<P extends Record<string, unknown>>(
+export function testBaseWidgetProps<P extends { className?: string; testId?: string }>(
   Widget: React.ComponentType<P>,
   baseProps: P,
   defaultTestId: string

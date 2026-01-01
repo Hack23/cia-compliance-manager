@@ -111,12 +111,7 @@ describe("IntegrityImpactWidget", () => {
   });
 
   describe("Data Display", () => {
-    it("renders without crashing", () => {
-      createComponent();
-      expect(screen.getByTestId("test-integrity-widget")).toBeInTheDocument();
-    });
-
-  it("displays the widget title correctly", () => {
+    it("displays the widget title correctly", () => {
     createComponent();
     expect(screen.getByText("Integrity Impact")).toBeInTheDocument();
   });

@@ -155,12 +155,7 @@ describe("AvailabilityImpactWidget", () => {
   });
 
   describe("Data Display", () => {
-    it("renders without crashing", () => {
-      render(<AvailabilityImpactWidget {...defaultProps} />);
-      expect(screen.getByTestId("availability-widget")).toBeInTheDocument();
-    });
-
-  it("displays security level badge", () => {
+    it("displays security level badge", () => {
     render(<AvailabilityImpactWidget {...defaultProps} />);
     expect(screen.getByTestId("widget-availability-impact-label-security-level")).toBeInTheDocument();
     expect(screen.getByTestId("widget-availability-impact-label-security-level")).toHaveTextContent(

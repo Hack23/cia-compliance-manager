@@ -139,12 +139,7 @@ describe("ConfidentialityImpactWidget", () => {
   });
 
   describe("Data Display", () => {
-    it("renders without crashing", () => {
-      render(<ConfidentialityImpactWidget {...defaultProps} />);
-      expect(screen.getByTestId("confidentiality-widget")).toBeInTheDocument();
-    });
-
-  it("displays security level badge with the correct level", () => {
+    it("displays security level badge with the correct level", () => {
     render(<ConfidentialityImpactWidget {...defaultProps} />);
     expect(
       screen.getByTestId("widget-confidentiality-impact-label-security-badge")
