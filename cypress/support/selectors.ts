@@ -61,10 +61,11 @@ export const widgetState = {
 
 /**
  * Security Level Widget Selectors
- * Note: WidgetContainer prefixes testId with 'widget-container-'
- * Widget default testId: "widget-security-level" (uses SECURITY_LEVEL_WIDGET_IDS.root)
+ * Widget uses WidgetContainer with testId="widget-security-level"
+ * Widget file: SecurityLevelWidget.tsx
  */
 export const securityLevelWidget = {
+  // WidgetContainer creates: widget-container-widget-security-level
   root: getByTestId('widget-container-widget-security-level'),
   availabilitySelect: getByTestId(CIA_TEST_IDS.AVAILABILITY_SELECT),
   integritySelect: getByTestId(CIA_TEST_IDS.INTEGRITY_SELECT),
@@ -79,27 +80,33 @@ export const securityLevelWidget = {
 
 /**
  * Cost Estimation Widget Selectors
- * Note: WidgetContainer prefixes testId with 'widget-container-'
- * Widget default testId: "widget-cost-estimation" (from COST_ESTIMATION_WIDGET_IDS.root)
+ * Widget uses WidgetContainer with testId="widget-cost-estimation"
+ * Widget file: CostEstimationWidget.tsx
+ * Note: Component uses COST_ESTIMATION_WIDGET_IDS.label() for MetricCards
  */
 export const costEstimationWidget = {
+  // WidgetContainer creates: widget-container-widget-cost-estimation
   root: getByTestId('widget-container-widget-cost-estimation'),
-  capex: getByTestId(COST_TEST_IDS.CAPEX_VALUE),
-  opex: getByTestId(COST_TEST_IDS.OPEX_VALUE),
-  total: getByTestId(COST_TEST_IDS.TOTAL_COST),
+  // MetricCard test IDs use label() function: widget-cost-estimation-label-{name}
+  capex: getByTestId('widget-cost-estimation-label-capex'),
+  opex: getByTestId('widget-cost-estimation-label-opex'),
+  total: getByTestId('widget-cost-estimation-label-total'),
   roi: getByTestId(COST_TEST_IDS.ROI_ESTIMATE),
   implementationTime: getByTestId(COST_TEST_IDS.IMPLEMENTATION_TIME),
-  capexSection: getByTestId(COST_TEST_IDS.CAPEX_SECTION),
-  opexSection: getByTestId(COST_TEST_IDS.OPEX_SECTION),
+  // Section test IDs - these may not exist in current implementation
+  capexSection: getByTestId('widget-cost-estimation-section-capex'),
+  opexSection: getByTestId('widget-cost-estimation-section-opex'),
   threeYearTotal: getByTestId(COST_TEST_IDS.THREE_YEAR_TOTAL),
 };
 
 /**
  * Security Summary Widget Selectors
- * Note: WidgetContainer prefixes testId with 'widget-container-'
+ * Widget uses WidgetContainer with testId="widget-security-summary"
+ * Widget file: SecuritySummaryWidget.tsx
  */
 export const securitySummaryWidget = {
-  root: getByTestId(`widget-container-${SECURITY_SUMMARY_TEST_IDS.WIDGET}`),
+  // WidgetContainer creates: widget-container-widget-security-summary
+  root: getByTestId('widget-container-widget-security-summary'),
   overallRating: getByTestId(SECURITY_SUMMARY_TEST_IDS.OVERALL_LEVEL),
   levelBadge: getByTestId(SECURITY_SUMMARY_TEST_IDS.SECURITY_LEVEL_BADGE),
   description: getByTestId(SECURITY_SUMMARY_TEST_IDS.SUMMARY_DESCRIPTION),
@@ -113,10 +120,12 @@ export const securitySummaryWidget = {
 
 /**
  * Value Creation Widget Selectors
- * Note: WidgetContainer prefixes testId with 'widget-container-'
+ * Widget uses WidgetContainer with testId="widget-value-creation"
+ * Widget file: ValueCreationWidget.tsx
  */
 export const valueCreationWidget = {
-  root: getByTestId(`widget-container-${VALUE_CREATION_TEST_IDS.VALUE_CREATION_WIDGET}`),
+  // WidgetContainer creates: widget-container-widget-value-creation
+  root: getByTestId('widget-container-widget-value-creation'),
   roiValue: getByTestId(VALUE_CREATION_TEST_IDS.ROI_VALUE),
   riskReduction: getByTestId(VALUE_CREATION_TEST_IDS.RISK_REDUCTION),
   valuePointsList: getByTestId(VALUE_CREATION_TEST_IDS.VALUE_POINTS_LIST),
@@ -127,10 +136,12 @@ export const valueCreationWidget = {
 
 /**
  * Compliance Status Widget Selectors
- * Note: WidgetContainer prefixes testId with 'widget-container-'
+ * Widget uses WidgetContainer with testId="widget-compliance-status"
+ * Widget file: ComplianceStatusWidget.tsx
  */
 export const complianceStatusWidget = {
-  root: getByTestId(`widget-container-${COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_WIDGET}`),
+  // WidgetContainer creates: widget-container-widget-compliance-status
+  root: getByTestId('widget-container-widget-compliance-status'),
   statusBadge: getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_BADGE),
   frameworksContainer: getByTestId(COMPLIANCE_TEST_IDS.COMPLIANCE_FRAMEWORKS_CONTAINER),
   compliantFrameworks: getByTestId(COMPLIANCE_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST),
@@ -141,10 +152,12 @@ export const complianceStatusWidget = {
 
 /**
  * Business Impact Widget Selectors
- * Note: WidgetContainer prefixes testId with 'widget-container-'
+ * Widget uses WidgetContainer with testId="widget-business-impact"
+ * Widget file: BusinessImpactAnalysisWidget.tsx
  */
 export const businessImpactWidget = {
-  root: getByTestId(`widget-container-${BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_WIDGET}`),
+  // WidgetContainer creates: widget-container-widget-business-impact
+  root: getByTestId('widget-container-widget-business-impact'),
   financialSection: getByTestId(BUSINESS_IMPACT_TEST_IDS.FINANCIAL_IMPACT_SECTION),
   operationalSection: getByTestId(BUSINESS_IMPACT_TEST_IDS.OPERATIONAL_IMPACT_SECTION),
   reputationalSection: getByTestId(BUSINESS_IMPACT_TEST_IDS.REPUTATIONAL_IMPACT_SECTION),
@@ -155,13 +168,18 @@ export const businessImpactWidget = {
 
 /**
  * Technical Details Widget Selectors
- * Note: WidgetContainer prefixes testId with 'widget-container-'
+ * Widget uses WidgetContainer with testId="widget-technical-details" (TECHNICAL_DETAILS_WIDGET_IDS.root)
+ * Widget file: TechnicalDetailsWidget.tsx
  */
 export const technicalDetailsWidget = {
-  root: getByTestId(`widget-container-${TECHNICAL_DETAILS_TEST_IDS.TECHNICAL_DETAILS_WIDGET}`),
+  // WidgetContainer creates: widget-container-widget-technical-details
+  root: getByTestId('widget-container-widget-technical-details'),
   availabilityTab: getByTestId(TECHNICAL_DETAILS_TEST_IDS.AVAILABILITY_TAB),
   integrityTab: getByTestId(TECHNICAL_DETAILS_TEST_IDS.INTEGRITY_TAB),
   confidentialityTab: getByTestId(TECHNICAL_DETAILS_TEST_IDS.CONFIDENTIALITY_TAB),
+  availabilityButton: getByTestId(TECHNICAL_DETAILS_TEST_IDS.AVAILABILITY_BUTTON),
+  integrityButton: getByTestId(TECHNICAL_DETAILS_TEST_IDS.INTEGRITY_BUTTON),
+  confidentialityButton: getByTestId(TECHNICAL_DETAILS_TEST_IDS.CONFIDENTIALITY_BUTTON),
   implementationSteps: getByTestId(TECHNICAL_DETAILS_TEST_IDS.IMPLEMENTATION_STEPS),
   developmentEffort: getByTestId(TECHNICAL_DETAILS_TEST_IDS.DEVELOPMENT_EFFORT),
   maintenanceLevel: getByTestId(TECHNICAL_DETAILS_TEST_IDS.MAINTENANCE_LEVEL),
@@ -173,27 +191,29 @@ export const technicalDetailsWidget = {
 
 /**
  * Security Resources Widget Selectors
- * Note: WidgetContainer prefixes testId with 'widget-container-'
+ * Widget uses WidgetContainer with testId="widget-security-resources"
+ * Widget file: SecurityResourcesWidget.tsx
  */
 export const securityResourcesWidget = {
-  root: getByTestId(`widget-container-${SECURITY_RESOURCES_TEST_IDS.WIDGET}`),
+  // WidgetContainer creates: widget-container-widget-security-resources
+  root: getByTestId('widget-container-widget-security-resources'),
   description: getByTestId(SECURITY_RESOURCES_TEST_IDS.DESCRIPTION),
   resourceGroup: getByTestId(SECURITY_RESOURCES_TEST_IDS.RESOURCE_GROUP),
   resourceItem: getByTestId(SECURITY_RESOURCES_TEST_IDS.RESOURCE_ITEM),
   noResources: getByTestId(SECURITY_RESOURCES_TEST_IDS.NO_RESOURCES),
   viewAllButton: getByTestId(SECURITY_RESOURCES_TEST_IDS.VIEW_ALL_BUTTON),
+  resourceSearch: getByTestId(SECURITY_RESOURCES_TEST_IDS.RESOURCE_SEARCH),
+  resourceCategoryFilter: getByTestId(SECURITY_RESOURCES_TEST_IDS.RESOURCE_CATEGORY_FILTER),
 };
 
 /**
  * Availability Impact Widget Selectors
- * Note: WidgetContainer prefixes testId with 'widget-container-'
- * Widget constructs testId as: "widget-" + AVAILABILITY_IMPACT_PREFIX
- * Where AVAILABILITY_IMPACT_PREFIX = "widget-availability-impact"
- * Result: testId = "widget-widget-availability-impact" (double "widget-" prefix)
- * After WidgetContainer: "widget-container-widget-widget-availability-impact"
+ * Widget uses WidgetContainer with testId="widget-availability-impact"
+ * Widget file: AvailabilityImpactWidget.tsx (extends ImpactWidget)
  */
 export const availabilityImpactWidget = {
-  root: getByTestId('widget-container-widget-widget-availability-impact'),
+  // WidgetContainer creates: widget-container-widget-availability-impact
+  root: getByTestId('widget-container-widget-availability-impact'),
   title: getByTestId(AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_TITLE),
   description: getByTestId(AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_DESCRIPTION),
   businessImpact: getByTestId(AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_BUSINESS_IMPACT),
@@ -233,10 +253,11 @@ export const confidentialityImpactWidget = {
 
 /**
  * Security Visualization Widget Selectors (Radar Chart)
- * Note: WidgetContainer prefixes testId with 'widget-container-'
- * Widget default testId: "widget-security-visualization" (from SECURITY_VISUALIZATION_WIDGET_IDS.root)
+ * Widget uses WidgetContainer with testId="widget-security-visualization"
+ * Widget file: SecurityVisualizationWidget.tsx
  */
 export const securityVisualizationWidget = {
+  // WidgetContainer creates: widget-container-widget-security-visualization
   root: getByTestId('widget-container-widget-security-visualization'),
   radarChart: getByTestId(CHART_TEST_IDS.RADAR_CHART),
   radarChartContainer: getByTestId(CHART_TEST_IDS.RADAR_CHART_CONTAINER),
