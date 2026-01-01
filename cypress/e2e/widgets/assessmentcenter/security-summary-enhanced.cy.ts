@@ -318,12 +318,9 @@ describe('Security Summary Widget - Enhanced', () => {
 
   describe('Content Validation', () => {
     it('should display security-related terminology', () => {
-      cy.get(securitySummaryWidget.root).within(() => {
-        cy.get('body').then($body => {
-          const text = $body.text();
-          const hasSecurityTerms = /security|risk|level|assessment|availability|integrity|confidentiality/i.test(text);
-          expect(hasSecurityTerms).to.be.true;
-        });
+      cy.get(securitySummaryWidget.root).invoke('text').then((text: string) => {
+        const hasSecurityTerms = /security|risk|level|assessment|availability|integrity|confidentiality/i.test(text);
+        expect(hasSecurityTerms).to.be.true;
       });
     });
 

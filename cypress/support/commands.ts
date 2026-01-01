@@ -838,18 +838,28 @@ Cypress.Commands.add('waitForWidget', (testId: string) => {
 
 /**
  * Test widget error state
+ * 
+ * @param testId - The widget's testId prop value (e.g., 'cost-estimation-widget')
+ * 
  * Note: This is a helper for future error testing scenarios
  * Currently sets up expectations but doesn't force errors
+ * Automatically handles WidgetContainer's 'widget-container-error-' prefix
  */
 Cypress.Commands.add('testWidgetError', (testId: string) => {
   cy.log(`Testing error handling for widget: ${testId}`);
   
+  // WidgetContainer prefixes error testId with 'widget-container-error-'
+  const containerErrorSelector = `[data-testid="widget-container-error-${testId}"]`;
+  const standardErrorSelector = `[data-testid="${testId}-error"]`;
+  
   // Check if error element exists (it shouldn't in normal operation)
   cy.get('body').then($body => {
-    const errorSelector = `[data-testid="${testId}-error"]`;
-    if ($body.find(errorSelector).length > 0) {
-      cy.log(`Error state detected in widget: ${testId}`);
-      cy.get(errorSelector).should('be.visible');
+    if ($body.find(containerErrorSelector).length > 0) {
+      cy.log(`Error state detected in widget (WidgetContainer): ${testId}`);
+      cy.get(containerErrorSelector).should('be.visible');
+    } else if ($body.find(standardErrorSelector).length > 0) {
+      cy.log(`Error state detected in widget (standard): ${testId}`);
+      cy.get(standardErrorSelector).should('be.visible');
     } else {
       cy.log(`No error state in widget: ${testId} (as expected)`);
     }
@@ -953,13 +963,28 @@ Cypress.Commands.add('checkA11y', () => {
 
 /**
  * Verify widget contains expected content
+ * 
+ * @param testId - The widget's testId prop value (e.g., 'cost-estimation-widget')
+ * @param expectedContent - Array of content strings to verify are present
+ * 
+ * Automatically handles WidgetContainer's 'widget-container-' prefix
  */
 Cypress.Commands.add('verifyWidgetContent', (testId: string, expectedContent: string[]) => {
   cy.log(`Verifying content in widget: ${testId}`);
   
-  cy.get(`[data-testid="${testId}"]`).within(() => {
-    expectedContent.forEach(content => {
-      cy.contains(content).should('be.visible');
+  // WidgetContainer prefixes testId with 'widget-container-'
+  const containerTestId = `widget-container-${testId}`;
+  
+  // Try to find widget with container prefix first
+  cy.get('body').then($body => {
+    const selector = $body.find(`[data-testid="${containerTestId}"]`).length > 0
+      ? `[data-testid="${containerTestId}"]`
+      : `[data-testid="${testId}"]`;
+    
+    cy.get(selector).within(() => {
+      expectedContent.forEach(content => {
+        cy.contains(content).should('be.visible');
+      });
     });
   });
   

@@ -253,17 +253,10 @@ describe('Cost Estimation Widget - Enhanced', () => {
 
   describe('Content Validation', () => {
     it('should display expected cost-related content', () => {
-      cy.verifyWidgetContent('widget-cost-estimation', [
-        // At least one of these should be present
-      ]);
-      
       // Verify financial terminology is present
-      cy.get(costEstimationWidget.root).within(() => {
-        cy.get('body').then($body => {
-          const text = $body.text();
-          const hasFinancialTerms = /cost|expense|budget|investment|estimate|capex|opex/i.test(text);
-          expect(hasFinancialTerms).to.be.true;
-        });
+      cy.get(costEstimationWidget.root).invoke('text').then((text: string) => {
+        const hasFinancialTerms = /cost|expense|budget|investment|estimate|capex|opex/i.test(text);
+        expect(hasFinancialTerms).to.be.true;
       });
     });
   });

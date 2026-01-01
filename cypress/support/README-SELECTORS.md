@@ -93,8 +93,8 @@ Object.entries(allWidgets).forEach(([name, selectors]) => {
 });
 ```
 
-#### `widgetNames`
-Array of all widget names:
+#### `allWidgets`
+Object containing all widget selectors for iteration:
 
 ```typescript
 import { allWidgets } from './support/selectors';
