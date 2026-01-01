@@ -8,59 +8,49 @@
  * across the entire application.
  */
 
-import { widgetNames, widgetSelector } from '../../support/selectors';
+import {
+  securityLevelWidget,
+  costEstimationWidget,
+  securitySummaryWidget,
+  valueCreationWidget,
+  complianceStatusWidget,
+  availabilityImpactWidget,
+  integrityImpactWidget,
+  confidentialityImpactWidget,
+  technicalDetailsWidget,
+  securityResourcesWidget,
+  securityVisualizationWidget,
+} from '../../support/selectors';
 import { SECURITY_LEVELS } from '../../support/constants';
 
 describe('All Widgets Integration', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.waitForWidget('widget-security-level');
+    cy.waitForWidget('security-level-widget');
   });
 
   describe('Widget Rendering', () => {
     it('should render all essential widgets', () => {
       // Core widgets that should always be present
-      const essentialWidgets = [
-        'security-level',
-        'security-summary',
-        'cost-estimation',
-        'value-creation',
-        'compliance-status',
-      ];
-
-      essentialWidgets.forEach(widget => {
-        cy.log(`Checking for widget: ${widget}`);
-        cy.get(widgetSelector(widget))
-          .should('exist')
-          .and('be.visible');
-      });
+      cy.log('Checking for essential widgets');
+      cy.get(securityLevelWidget.root).should('exist').and('be.visible');
+      cy.get(securitySummaryWidget.root).should('exist').and('be.visible');
+      cy.get(costEstimationWidget.root).should('exist').and('be.visible');
+      cy.get(valueCreationWidget.root).should('exist').and('be.visible');
+      cy.get(complianceStatusWidget.root).should('exist').and('be.visible');
     });
 
     it('should render CIA impact widgets', () => {
-      const impactWidgets = [
-        'availability-impact',
-        'integrity-impact',
-        'confidentiality-impact',
-      ];
-
-      impactWidgets.forEach(widget => {
-        cy.log(`Checking for widget: ${widget}`);
-        cy.get(widgetSelector(widget))
-          .should('exist');
-      });
+      cy.log('Checking for CIA impact widgets');
+      cy.get(availabilityImpactWidget.root).should('exist');
+      cy.get(integrityImpactWidget.root).should('exist');
+      cy.get(confidentialityImpactWidget.root).should('exist');
     });
 
     it('should render implementation widgets', () => {
-      const implementationWidgets = [
-        'technical-details',
-        'security-resources',
-      ];
-
-      implementationWidgets.forEach(widget => {
-        cy.log(`Checking for widget: ${widget}`);
-        cy.get(widgetSelector(widget))
-          .should('exist');
-      });
+      cy.log('Checking for implementation widgets');
+      cy.get(technicalDetailsWidget.root).should('exist');
+      cy.get(securityResourcesWidget.root).should('exist');
     });
   });
 
@@ -75,13 +65,13 @@ describe('All Widgets Integration', () => {
       cy.wait(500); // Wait for all widgets to update
 
       // Verify key widgets updated their content
-      cy.get(widgetSelector('security-summary'))
+      cy.get(securitySummaryWidget.root)
         .should('contain', 'High');
 
-      cy.get(widgetSelector('cost-estimation'))
+      cy.get(costEstimationWidget.root)
         .should('be.visible');
 
-      cy.get(widgetSelector('value-creation'))
+      cy.get(valueCreationWidget.root)
         .should('be.visible');
     });
 
@@ -105,7 +95,7 @@ describe('All Widgets Integration', () => {
         cy.wait(500);
 
         // Verify at least the security summary reflects the change
-        cy.get(widgetSelector('security-summary'))
+        cy.get(securitySummaryWidget.root)
           .should('be.visible')
           .and('contain', label);
       });
@@ -121,7 +111,7 @@ describe('All Widgets Integration', () => {
         .should('be.visible');
       
       // Widgets should still be accessible
-      cy.get(widgetSelector('security-level'))
+      cy.get(securityLevelWidget.root)
         .should('be.visible');
     });
 
@@ -137,9 +127,9 @@ describe('All Widgets Integration', () => {
       cy.testResponsiveLayout(['macbook-15']);
       
       // Verify all widgets are accessible on desktop
-      cy.get(widgetSelector('security-level'))
+      cy.get(securityLevelWidget.root)
         .should('be.visible');
-      cy.get(widgetSelector('security-summary'))
+      cy.get(securitySummaryWidget.root)
         .should('be.visible');
     });
   });
@@ -155,10 +145,10 @@ describe('All Widgets Integration', () => {
 
     it('should display content after loading completes', () => {
       // Verify widgets show content, not loading states
-      const widgets = ['security-level', 'security-summary', 'cost-estimation'];
+      const widgets = [securityLevelWidget, securitySummaryWidget, costEstimationWidget];
       
       widgets.forEach(widget => {
-        cy.get(widgetSelector(widget))
+        cy.get(widget.root)
           .should('exist')
           .and('be.visible')
           .and('not.contain', 'Loading...');
@@ -244,13 +234,13 @@ describe('All Widgets Integration', () => {
       cy.get('[data-testid="confidentiality-selector"]').should('have.value', SECURITY_LEVELS.HIGH);
 
       // Interact with another widget (scroll to it)
-      cy.get(widgetSelector('cost-estimation')).scrollIntoView();
+      cy.get(costEstimationWidget.root).scrollIntoView();
       cy.wait(300);
 
       // Verify levels are still set
-      cy.get('[data-testid="availability-selector"]').should('have.value', SECURITY_LEVELS.HIGH);
-      cy.get('[data-testid="integrity-selector"]').should('have.value', SECURITY_LEVELS.MODERATE);
-      cy.get('[data-testid="confidentiality-selector"]').should('have.value', SECURITY_LEVELS.HIGH);
+      cy.get(securityLevelWidget.availabilitySelect).should('have.value', SECURITY_LEVELS.HIGH);
+      cy.get(securityLevelWidget.integritySelect).should('have.value', SECURITY_LEVELS.MODERATE);
+      cy.get(securityLevelWidget.confidentialitySelect).should('have.value', SECURITY_LEVELS.HIGH);
     });
   });
 });

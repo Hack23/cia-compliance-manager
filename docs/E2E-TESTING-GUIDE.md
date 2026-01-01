@@ -4,6 +4,39 @@
 
 This document describes the enhanced E2E testing infrastructure added after widget refactoring. These improvements provide better test reliability, maintainability, and coverage.
 
+## Critical: Understanding WidgetContainer Test ID Pattern
+
+**Most widgets in this application use the `WidgetContainer` component**, which automatically prefixes all test IDs with `widget-container-`. This is crucial to understand when writing E2E tests.
+
+### How WidgetContainer Affects Test IDs
+
+When a widget uses `WidgetContainer` and passes a `testId` prop:
+
+```typescript
+// In the widget component:
+<WidgetContainer testId="cost-estimation-widget">
+  {/* widget content */}
+</WidgetContainer>
+```
+
+The actual DOM element will have: `data-testid="widget-container-cost-estimation-widget"`
+
+**NOT**: `data-testid="cost-estimation-widget"`
+
+### Widget Test ID Patterns
+
+| Widget | Default testId | Actual DOM test ID |
+|--------|---------------|-------------------|
+| SecurityLevelWidget | `security-level-widget` | `widget-container-security-level-widget` |
+| CostEstimationWidget | `cost-estimation-widget` | `widget-container-cost-estimation-widget` |
+| SecuritySummaryWidget | `security-summary-widget` | `widget-container-security-summary-widget` |
+| AvailabilityImpactWidget | `widget-availability-impact` | `widget-container-widget-availability-impact` |
+| IntegrityImpactWidget | `widget-integrity-impact` | `widget-container-widget-integrity-impact` |
+| ConfidentialityImpactWidget | `widget-confidentiality-impact` | `widget-container-widget-confidentiality-impact` |
+| SecurityVisualizationWidget | `security-visualization-widget` | `widget-container-security-visualization-widget` |
+
+**Important**: All widget root selectors in `cypress/support/selectors.ts` already account for this prefix. Always use the centralized selectors rather than constructing test IDs manually.
+
 ## New Infrastructure
 
 ### 1. Centralized Selectors (`cypress/support/selectors.ts`)

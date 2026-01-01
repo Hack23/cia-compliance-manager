@@ -48,9 +48,11 @@ export const widgetState = {
 
 /**
  * Security Level Widget Selectors
+ * Note: WidgetContainer prefixes testId with 'widget-container-'
+ * Widget default testId: "security-level-widget"
  */
 export const securityLevelWidget = {
-  root: getByTestId(WIDGET_TEST_IDS.SECURITY_LEVEL_WIDGET),
+  root: getByTestId('widget-container-security-level-widget'),
   availabilitySelect: getByTestId(CIA_TEST_IDS.AVAILABILITY_SELECT),
   integritySelect: getByTestId(CIA_TEST_IDS.INTEGRITY_SELECT),
   confidentialitySelect: getByTestId(CIA_TEST_IDS.CONFIDENTIALITY_SELECT),
@@ -65,9 +67,10 @@ export const securityLevelWidget = {
 /**
  * Cost Estimation Widget Selectors
  * Note: WidgetContainer prefixes testId with 'widget-container-'
+ * Widget default testId: "cost-estimation-widget"
  */
 export const costEstimationWidget = {
-  root: getByTestId(`widget-container-${COST_TEST_IDS.COST_ESTIMATION_WIDGET}`),
+  root: getByTestId('widget-container-cost-estimation-widget'),
   capex: getByTestId(COST_TEST_IDS.CAPEX_VALUE),
   opex: getByTestId(COST_TEST_IDS.OPEX_VALUE),
   total: getByTestId(COST_TEST_IDS.TOTAL_COST),
@@ -170,9 +173,11 @@ export const securityResourcesWidget = {
 
 /**
  * Availability Impact Widget Selectors
+ * Note: WidgetContainer prefixes testId with 'widget-container-'
+ * Widget default testId: "widget-availability-impact" (from AVAILABILITY_IMPACT_PREFIX)
  */
 export const availabilityImpactWidget = {
-  root: widgetSelector('availability-impact'),
+  root: getByTestId('widget-container-widget-availability-impact'),
   title: getByTestId(AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_TITLE),
   description: getByTestId(AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_DESCRIPTION),
   businessImpact: getByTestId(AVAILABILITY_IMPACT_TEST_IDS.AVAILABILITY_IMPACT_BUSINESS_IMPACT),
@@ -184,27 +189,33 @@ export const availabilityImpactWidget = {
 
 /**
  * Integrity Impact Widget Selectors
+ * Note: WidgetContainer prefixes testId with 'widget-container-'
+ * Widget default testId: "widget-integrity-impact" (from INTEGRITY_IMPACT_PREFIX)
  */
 export const integrityImpactWidget = {
-  root: widgetSelector('integrity-impact'),
+  root: getByTestId('widget-container-widget-integrity-impact'),
   description: getByTestId(INTEGRITY_IMPACT_TEST_IDS.INTEGRITY_IMPACT_DESCRIPTION),
   value: getByTestId(INTEGRITY_IMPACT_TEST_IDS.INTEGRITY_IMPACT_VALUE),
 };
 
 /**
  * Confidentiality Impact Widget Selectors
+ * Note: WidgetContainer prefixes testId with 'widget-container-'
+ * Widget default testId: "widget-confidentiality-impact" (from CONFIDENTIALITY_IMPACT_PREFIX)
  */
 export const confidentialityImpactWidget = {
-  root: widgetSelector('confidentiality-impact'),
+  root: getByTestId('widget-container-widget-confidentiality-impact'),
   description: getByTestId(CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_DESCRIPTION),
   value: getByTestId(CONFIDENTIALITY_IMPACT_TEST_IDS.CONFIDENTIALITY_IMPACT_VALUE),
 };
 
 /**
  * Security Visualization Widget Selectors (Radar Chart)
+ * Note: WidgetContainer prefixes testId with 'widget-container-'
+ * Widget default testId: "security-visualization-widget"
  */
 export const securityVisualizationWidget = {
-  root: widgetSelector('security-visualization'),
+  root: getByTestId('widget-container-security-visualization-widget'),
   radarChart: getByTestId(CHART_TEST_IDS.RADAR_CHART),
   radarChartContainer: getByTestId(CHART_TEST_IDS.RADAR_CHART_CONTAINER),
   availabilityValue: getByTestId(CHART_TEST_IDS.RADAR_AVAILABILITY_VALUE),

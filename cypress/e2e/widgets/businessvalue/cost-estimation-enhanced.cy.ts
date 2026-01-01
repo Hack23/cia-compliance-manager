@@ -151,7 +151,8 @@ describe('Cost Estimation Widget - Enhanced', () => {
 
   describe('Loading States', () => {
     it('should not show loading indicator after initial load', () => {
-      cy.get('[data-testid="widget-cost-estimation-loading"]').should('not.exist');
+      // Check for loading indicator with WidgetContainer pattern
+      cy.get('[data-testid="widget-container-loading-container-cost-estimation-widget"]').should('not.exist');
     });
 
     it('should display content instead of loading state', () => {
