@@ -71,7 +71,7 @@ describe("SecuritySummaryWidget", () => {
       );
 
       const element = screen.getByTestId("widget-container-custom-test-id");
-      expect(element.classList.contains("custom-class")).toBe(true);
+      expect(element.classList.contains("custom-class")).equal(true);
     });
 
     it("uses default test ID when not provided", () => {
@@ -173,7 +173,7 @@ describe("SecuritySummaryWidget", () => {
         "widget-container-custom-test-id"
       );
       expect(widgetContainer).toBeInTheDocument();
-      expect(widgetContainer.tagName).toBe("DIV");
+      expect(widgetContainer.tagName).equal("DIV");
     });
   });
 });
