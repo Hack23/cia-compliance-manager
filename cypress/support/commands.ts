@@ -803,36 +803,23 @@ Cypress.Commands.add('waitForWidget', (testId: string) => {
   // WidgetContainer prefixes testId with 'widget-container-'
   const containerTestId = `widget-container-${testId}`;
   
-  // Widget should exist (try both with and without prefix for flexibility)
+  // Try container testId first (most common case after widget refactoring)
   cy.get('body').then($body => {
-    const hasContainer = $body.find(`[data-testid="${containerTestId}"]`).length > 0;
-    const hasWidget = $body.find(`[data-testid="${testId}"]`).length > 0;
-    
-    if (hasContainer) {
-      cy.get(`[data-testid="${containerTestId}"]`, { timeout: WIDGET_LOAD_TIMEOUT }).should('exist');
-      
-      // Wait for loading state to disappear if it exists
-      const loadingSelector = `[data-testid="widget-container-loading-container-${testId}"]`;
-      if ($body.find(loadingSelector).length > 0) {
-        cy.get(loadingSelector).should('not.exist');
-      }
-      
-      // Widget should be visible
-      cy.get(`[data-testid="${containerTestId}"]`).should('be.visible');
-    } else if (hasWidget) {
-      cy.get(`[data-testid="${testId}"]`, { timeout: WIDGET_LOAD_TIMEOUT }).should('exist');
-      
-      // Wait for loading state to disappear if it exists
-      const loadingSelector = `[data-testid="${testId}-loading"]`;
-      if ($body.find(loadingSelector).length > 0) {
-        cy.get(loadingSelector).should('not.exist');
-      }
-      
-      // Widget should be visible
-      cy.get(`[data-testid="${testId}"]`).should('be.visible');
+    if ($body.find(`[data-testid="${containerTestId}"]`).length > 0) {
+      // Container exists, wait for it to be visible
+      cy.get(`[data-testid="${containerTestId}"]`, { timeout: WIDGET_LOAD_TIMEOUT })
+        .should('exist')
+        .and('be.visible');
+    } else if ($body.find(`[data-testid="${testId}"]`).length > 0) {
+      // Widget exists without container prefix
+      cy.get(`[data-testid="${testId}"]`, { timeout: WIDGET_LOAD_TIMEOUT })
+        .should('exist')
+        .and('be.visible');
     } else {
-      // Neither found yet, wait for container prefix (most common case)
-      cy.get(`[data-testid="${containerTestId}"]`, { timeout: WIDGET_LOAD_TIMEOUT }).should('exist').and('be.visible');
+      // Neither found, wait with longer timeout for container (most common case)
+      cy.get(`[data-testid="${containerTestId}"]`, { timeout: WIDGET_LOAD_TIMEOUT })
+        .should('exist')
+        .and('be.visible');
     }
   });
   
