@@ -1,6 +1,6 @@
 import { render, RenderOptions, waitFor, screen } from '@testing-library/react';
 import React, { ReactElement } from 'react';
-import { expect } from 'vitest';
+import { expect, vi } from 'vitest';
 import { SecurityLevel } from '../types/cia';
 
 /**
