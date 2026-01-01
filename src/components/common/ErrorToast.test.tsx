@@ -6,6 +6,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ErrorToast } from './ErrorToast';
+import { ERROR_TOAST_TEST_IDS } from '../../constants/testIds';
 
 describe('ErrorToast', () => {
   beforeEach(() => {
@@ -25,7 +26,7 @@ describe('ErrorToast', () => {
       />
     );
 
-    expect(screen.getByTestId('error-toast')).toBeInTheDocument();
+    expect(screen.getByTestId(ERROR_TOAST_TEST_IDS.ERROR_TOAST)).toBeInTheDocument();
     expect(screen.getByText('Test error message')).toBeInTheDocument();
   });
 
@@ -38,7 +39,7 @@ describe('ErrorToast', () => {
       />
     );
 
-    expect(screen.queryByTestId('error-toast')).not.toBeInTheDocument();
+    expect(screen.queryByTestId(ERROR_TOAST_TEST_IDS.ERROR_TOAST)).not.toBeInTheDocument();
   });
 
   it('should render custom title when provided', () => {
@@ -51,7 +52,7 @@ describe('ErrorToast', () => {
       />
     );
 
-    expect(screen.getByTestId('error-toast-title')).toHaveTextContent('Custom Error');
+    expect(screen.getByTestId(ERROR_TOAST_TEST_IDS.ERROR_TOAST_TITLE)).toHaveTextContent('Custom Error');
   });
 
   it('should render default title when not provided', () => {
@@ -63,7 +64,7 @@ describe('ErrorToast', () => {
       />
     );
 
-    expect(screen.getByTestId('error-toast-title')).toHaveTextContent('Error');
+    expect(screen.getByTestId(ERROR_TOAST_TEST_IDS.ERROR_TOAST_TITLE)).toHaveTextContent('Error');
   });
 
   it('should call onDismiss when close button is clicked', async () => {
@@ -80,7 +81,7 @@ describe('ErrorToast', () => {
       />
     );
 
-    const closeButton = screen.getByTestId('error-toast-close-button');
+    const closeButton = screen.getByTestId(ERROR_TOAST_TEST_IDS.ERROR_TOAST_CLOSE_BUTTON);
     await user.click(closeButton);
 
     // Wait for animation
@@ -141,7 +142,7 @@ describe('ErrorToast', () => {
       />
     );
 
-    expect(screen.getByTestId('error-toast-retry-button')).toBeInTheDocument();
+    expect(screen.getByTestId(ERROR_TOAST_TEST_IDS.ERROR_TOAST_RETRY_BUTTON)).toBeInTheDocument();
   });
 
   it('should call retry and onDismiss when retry button is clicked', async () => {
@@ -160,7 +161,7 @@ describe('ErrorToast', () => {
       />
     );
 
-    const retryButton = screen.getByTestId('error-toast-retry-button');
+    const retryButton = screen.getByTestId(ERROR_TOAST_TEST_IDS.ERROR_TOAST_RETRY_BUTTON);
     await user.click(retryButton);
 
     expect(retry).toHaveBeenCalledTimes(1);
@@ -181,7 +182,7 @@ describe('ErrorToast', () => {
       />
     );
 
-    expect(screen.queryByTestId('error-toast-retry-button')).not.toBeInTheDocument();
+    expect(screen.queryByTestId(ERROR_TOAST_TEST_IDS.ERROR_TOAST_RETRY_BUTTON)).not.toBeInTheDocument();
   });
 
   it('should apply correct position classes for top-left', () => {
@@ -195,7 +196,7 @@ describe('ErrorToast', () => {
       />
     );
 
-    const toast = screen.getByTestId('error-toast');
+    const toast = screen.getByTestId(ERROR_TOAST_TEST_IDS.ERROR_TOAST);
     expect(toast.className).toContain('top-4');
     expect(toast.className).toContain('left-4');
   });
@@ -211,7 +212,7 @@ describe('ErrorToast', () => {
       />
     );
 
-    const toast = screen.getByTestId('error-toast');
+    const toast = screen.getByTestId(ERROR_TOAST_TEST_IDS.ERROR_TOAST);
     expect(toast.className).toContain('top-4');
     expect(toast.className).toContain('left-1/2');
     expect(toast.className).toContain('-translate-x-1/2');
@@ -228,7 +229,7 @@ describe('ErrorToast', () => {
       />
     );
 
-    const toast = screen.getByTestId('error-toast');
+    const toast = screen.getByTestId(ERROR_TOAST_TEST_IDS.ERROR_TOAST);
     expect(toast.className).toContain('bottom-4');
     expect(toast.className).toContain('right-4');
   });
@@ -256,7 +257,7 @@ describe('ErrorToast', () => {
       />
     );
 
-    const toast = screen.getByTestId('error-toast');
+    const toast = screen.getByTestId(ERROR_TOAST_TEST_IDS.ERROR_TOAST);
     expect(toast).toHaveAttribute('role', 'alert');
     expect(toast).toHaveAttribute('aria-live', 'assertive');
     expect(toast).toHaveAttribute('aria-atomic', 'true');

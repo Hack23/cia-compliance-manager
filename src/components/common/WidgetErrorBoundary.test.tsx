@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
 import WidgetErrorBoundary from './WidgetErrorBoundary';
+import { COMMON_COMPONENT_TEST_IDS } from '../../constants/testIds';
 
 // Component that throws an error
 const ThrowError: React.FC<{ shouldThrow?: boolean }> = ({ shouldThrow = true }) => {
@@ -40,8 +41,8 @@ describe('WidgetErrorBoundary', () => {
       </WidgetErrorBoundary>
     );
 
-    expect(screen.getByTestId('widget-error-boundary')).toBeInTheDocument();
-    expect(screen.getByTestId('widget-error-boundary-message')).toBeInTheDocument();
+    expect(screen.getByTestId(COMMON_COMPONENT_TEST_IDS.WIDGET_ERROR_BOUNDARY)).toBeInTheDocument();
+    expect(screen.getByTestId(COMMON_COMPONENT_TEST_IDS.WIDGET_ERROR_BOUNDARY_MESSAGE)).toBeInTheDocument();
     expect(screen.getByText(/test error/i)).toBeInTheDocument();
   });
 

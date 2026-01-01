@@ -10,6 +10,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { describe, it, expect, beforeEach } from 'vitest';
 import ErrorMessage from '../ErrorMessage';
 import LoadingSpinner from '../LoadingSpinner';
+import { WIDGET_CONTAINER_TEST_IDS } from '../../../constants/testIds';
 
 // Mock service that can simulate different scenarios
 class MockService {
@@ -106,10 +107,10 @@ describe('Error Handling Integration Tests', () => {
       render(<ExampleWidget service={mockService} />);
 
       // Should show loading spinner immediately
-      expect(screen.getByTestId('widget-loader')).toBeInTheDocument();
+      expect(screen.getByTestId(WIDGET_CONTAINER_TEST_IDS.WIDGET_LOADER)).toBeInTheDocument();
 
       // Content should not be visible
-      expect(screen.queryByTestId('widget-content')).not.toBeInTheDocument();
+      expect(screen.queryByTestId(WIDGET_CONTAINER_TEST_IDS.WIDGET_CONTENT)).not.toBeInTheDocument();
     });
 
     it('removes loading spinner when data loads successfully', async () => {
@@ -119,11 +120,11 @@ describe('Error Handling Integration Tests', () => {
 
       // Wait for loading to complete
       await waitFor(() => {
-        expect(screen.queryByTestId('widget-loader')).not.toBeInTheDocument();
+        expect(screen.queryByTestId(WIDGET_CONTAINER_TEST_IDS.WIDGET_LOADER)).not.toBeInTheDocument();
       });
 
       // Content should now be visible
-      expect(screen.getByTestId('widget-content')).toBeInTheDocument();
+      expect(screen.getByTestId(WIDGET_CONTAINER_TEST_IDS.WIDGET_CONTENT)).toBeInTheDocument();
     });
   });
 
@@ -135,7 +136,7 @@ describe('Error Handling Integration Tests', () => {
 
       // Wait for error to appear
       await waitFor(() => {
-        expect(screen.getByTestId('widget-error')).toBeInTheDocument();
+        expect(screen.getByTestId(WIDGET_CONTAINER_TEST_IDS.WIDGET_ERROR)).toBeInTheDocument();
       });
 
       // Error message should be visible
@@ -149,7 +150,7 @@ describe('Error Handling Integration Tests', () => {
       render(<ExampleWidget service={mockService} />);
 
       await waitFor(() => {
-        expect(screen.getByTestId('widget-error-retry-button')).toBeInTheDocument();
+        expect(screen.getByTestId(WIDGET_CONTAINER_TEST_IDS.WIDGET_ERROR_RETRY_BUTTON)).toBeInTheDocument();
       });
 
       const retryButton = screen.getByRole('button', { name: /try again/i });
@@ -164,7 +165,7 @@ describe('Error Handling Integration Tests', () => {
       render(<ExampleWidget service={mockService} />);
 
       await waitFor(() => {
-        expect(screen.getByTestId('widget-content')).toBeInTheDocument();
+        expect(screen.getByTestId(WIDGET_CONTAINER_TEST_IDS.WIDGET_CONTENT)).toBeInTheDocument();
       });
 
       expect(screen.getByText(/test data/i)).toBeInTheDocument();

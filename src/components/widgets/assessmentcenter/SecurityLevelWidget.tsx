@@ -49,7 +49,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
   onIntegrityChange,
   onConfidentialityChange,
   className = "",
-  testId = "security-level-widget",
+  testId = SECURITY_LEVEL_WIDGET_IDS.root,
 }) => {
   // Use the content service for security level details
   const { ciaContentService } = useCIAContentService();

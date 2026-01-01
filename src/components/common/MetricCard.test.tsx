@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import MetricCard from './MetricCard';
+import { COMMON_COMPONENT_TEST_IDS } from '../../constants/testIds';
 
 describe('MetricCard', () => {
   it('renders with required props', () => {
@@ -40,7 +41,7 @@ describe('MetricCard', () => {
       <MetricCard label="Test Metric" value="100" className="custom-class" />
     );
 
-    const card = container.querySelector('div[data-testid="metric-card"]');
+    const card = container.querySelector(`div[data-testid="${COMMON_COMPONENT_TEST_IDS.METRIC_CARD}"]`);
     expect(card).toHaveClass('custom-class');
   });
 
@@ -63,7 +64,7 @@ describe('MetricCard', () => {
       <MetricCard label="Test Metric" value="100" variant="success" />
     );
 
-    const card = container.querySelector('div[data-testid="metric-card"]');
+    const card = container.querySelector(`div[data-testid="${COMMON_COMPONENT_TEST_IDS.METRIC_CARD}"]`);
     expect(card).toHaveClass('border-green-300');
     expect(card).toHaveClass('bg-green-50');
   });
@@ -73,7 +74,7 @@ describe('MetricCard', () => {
       <MetricCard label="Test Metric" value="0" variant="error" />
     );
 
-    const card = container.querySelector('div[data-testid="metric-card"]');
+    const card = container.querySelector(`div[data-testid="${COMMON_COMPONENT_TEST_IDS.METRIC_CARD}"]`);
     expect(card).toHaveClass('border-red-300');
     expect(card).toHaveClass('bg-red-50');
   });
@@ -83,7 +84,7 @@ describe('MetricCard', () => {
       <MetricCard label="Test Metric" value="50" variant="warning" />
     );
 
-    const card = container.querySelector('div[data-testid="metric-card"]');
+    const card = container.querySelector(`div[data-testid="${COMMON_COMPONENT_TEST_IDS.METRIC_CARD}"]`);
     expect(card).toHaveClass('border-yellow-300');
     expect(card).toHaveClass('bg-yellow-50');
   });
@@ -93,7 +94,7 @@ describe('MetricCard', () => {
       <MetricCard label="Test Metric" value="100" variant="primary" />
     );
 
-    const card = container.querySelector('div[data-testid="metric-card"]');
+    const card = container.querySelector(`div[data-testid="${COMMON_COMPONENT_TEST_IDS.METRIC_CARD}"]`);
     expect(card).toHaveClass('border-primary-light');
   });
 
@@ -102,7 +103,7 @@ describe('MetricCard', () => {
       <MetricCard label="Test Metric" value="100" variant="info" />
     );
 
-    const card = container.querySelector('div[data-testid="metric-card"]');
+    const card = container.querySelector(`div[data-testid="${COMMON_COMPONENT_TEST_IDS.METRIC_CARD}"]`);
     expect(card).toHaveClass('border-blue-300');
     expect(card).toHaveClass('bg-blue-50');
   });

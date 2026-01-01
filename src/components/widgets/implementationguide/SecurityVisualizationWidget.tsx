@@ -39,7 +39,7 @@ const SecurityVisualizationWidget: React.FC<
   integrityLevel,
   confidentialityLevel,
   className = "",
-  testId = "security-visualization-widget",
+  testId = SECURITY_VISUALIZATION_WIDGET_IDS.root,
 }) => {
   // Get the security metrics service
   const { securityMetricsService, error, isLoading } =

@@ -33,7 +33,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
   integrityLevel,
   confidentialityLevel,
   className = "",
-  testId = "technical-details-widget",
+  testId = TECHNICAL_DETAILS_WIDGET_IDS.root,
 }) => {
   // Get CIA content service
   const { ciaContentService, error, isLoading } = useCIAContentService();
