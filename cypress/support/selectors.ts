@@ -61,12 +61,12 @@ export const widgetState = {
 
 /**
  * Security Level Widget Selectors
- * Widget uses SECURITY_LEVEL_WIDGET_IDS.root as testId
+ * Widget uses WidgetContainer with testId="widget-security-level"
  * Widget file: SecurityLevelWidget.tsx
  */
 export const securityLevelWidget = {
-  // Direct widget selector without container wrapper (SecurityLevelWidget doesn't use WidgetContainer)
-  root: getByTestId('widget-security-level'),
+  // WidgetContainer creates: widget-container-widget-security-level
+  root: getByTestId('widget-container-widget-security-level'),
   availabilitySelect: getByTestId(CIA_TEST_IDS.AVAILABILITY_SELECT),
   integritySelect: getByTestId(CIA_TEST_IDS.INTEGRITY_SELECT),
   confidentialitySelect: getByTestId(CIA_TEST_IDS.CONFIDENTIALITY_SELECT),
@@ -98,12 +98,12 @@ export const costEstimationWidget = {
 
 /**
  * Security Summary Widget Selectors
- * Widget does NOT use WidgetContainer - renders directly
+ * Widget uses WidgetContainer with testId="security-summary-widget"
  * Widget file: SecuritySummaryWidget.tsx
  */
 export const securitySummaryWidget = {
-  // Direct selector - no widget-container prefix
-  root: getByTestId(SECURITY_SUMMARY_TEST_IDS.WIDGET),
+  // WidgetContainer creates: widget-container-security-summary-widget
+  root: getByTestId('widget-container-security-summary-widget'),
   overallRating: getByTestId(SECURITY_SUMMARY_TEST_IDS.OVERALL_LEVEL),
   levelBadge: getByTestId(SECURITY_SUMMARY_TEST_IDS.SECURITY_LEVEL_BADGE),
   description: getByTestId(SECURITY_SUMMARY_TEST_IDS.SUMMARY_DESCRIPTION),
@@ -117,12 +117,12 @@ export const securitySummaryWidget = {
 
 /**
  * Value Creation Widget Selectors
- * Widget does NOT use WidgetContainer - renders directly
+ * Widget uses WidgetContainer with testId="value-creation-widget"
  * Widget file: ValueCreationWidget.tsx
  */
 export const valueCreationWidget = {
-  // Direct selector - no widget-container prefix
-  root: getByTestId(VALUE_CREATION_TEST_IDS.VALUE_CREATION_WIDGET),
+  // WidgetContainer creates: widget-container-value-creation-widget
+  root: getByTestId('widget-container-value-creation-widget'),
   roiValue: getByTestId(VALUE_CREATION_TEST_IDS.ROI_VALUE),
   riskReduction: getByTestId(VALUE_CREATION_TEST_IDS.RISK_REDUCTION),
   valuePointsList: getByTestId(VALUE_CREATION_TEST_IDS.VALUE_POINTS_LIST),
@@ -149,12 +149,12 @@ export const complianceStatusWidget = {
 
 /**
  * Business Impact Widget Selectors
- * Widget does NOT use WidgetContainer - renders directly
+ * Widget uses WidgetContainer with testId="business-impact-widget"
  * Widget file: BusinessImpactAnalysisWidget.tsx
  */
 export const businessImpactWidget = {
-  // Direct selector - no widget-container prefix
-  root: getByTestId(BUSINESS_IMPACT_TEST_IDS.BUSINESS_IMPACT_WIDGET),
+  // WidgetContainer creates: widget-container-business-impact-widget
+  root: getByTestId('widget-container-business-impact-widget'),
   financialSection: getByTestId(BUSINESS_IMPACT_TEST_IDS.FINANCIAL_IMPACT_SECTION),
   operationalSection: getByTestId(BUSINESS_IMPACT_TEST_IDS.OPERATIONAL_IMPACT_SECTION),
   reputationalSection: getByTestId(BUSINESS_IMPACT_TEST_IDS.REPUTATIONAL_IMPACT_SECTION),
