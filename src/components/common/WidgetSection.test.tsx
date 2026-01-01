@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import WidgetSection from './WidgetSection';
+import { COMMON_COMPONENT_TEST_IDS } from '../../constants/testIds';
 
 describe('WidgetSection', () => {
   it('renders with required props', () => {
@@ -77,7 +78,7 @@ describe('WidgetSection', () => {
       </WidgetSection>
     );
 
-    const section = screen.getByTestId('widget-section');
+    const section = screen.getByTestId(COMMON_COMPONENT_TEST_IDS.WIDGET_SECTION);
     expect(section).toHaveAttribute('aria-labelledby', 'test-section-heading');
   });
 

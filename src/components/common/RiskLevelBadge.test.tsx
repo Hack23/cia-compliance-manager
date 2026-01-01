@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import RiskLevelBadge from "./RiskLevelBadge";
+import { COMMON_COMPONENT_TEST_IDS } from "../../constants/testIds";
 
 describe("RiskLevelBadge", () => {
   it("displays risk level text", () => {

@@ -1,12 +1,13 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import ErrorMessage from './ErrorMessage';
+import { ERROR_MESSAGE_TEST_IDS } from '../../constants/testIds';
 
 describe('ErrorMessage', () => {
   it('renders with required message prop', () => {
     render(<ErrorMessage message="Test error message" />);
     
-    const message = screen.getByTestId('error-message-text');
+    const message = screen.getByTestId(ERROR_MESSAGE_TEST_IDS.ERROR_MESSAGE_TEXT);
     expect(message).toBeInTheDocument();
     expect(message).toHaveTextContent('Test error message');
   });
@@ -14,14 +15,14 @@ describe('ErrorMessage', () => {
   it('renders with default title', () => {
     render(<ErrorMessage message="Test error" />);
     
-    const title = screen.getByTestId('error-message-title');
+    const title = screen.getByTestId(ERROR_MESSAGE_TEST_IDS.ERROR_MESSAGE_TITLE);
     expect(title).toHaveTextContent('Error');
   });
 
   it('renders with custom title', () => {
     render(<ErrorMessage title="Custom Error" message="Test error" />);
     
-    const title = screen.getByTestId('error-message-title');
+    const title = screen.getByTestId(ERROR_MESSAGE_TEST_IDS.ERROR_MESSAGE_TITLE);
     expect(title).toHaveTextContent('Custom Error');
   });
 
@@ -29,7 +30,7 @@ describe('ErrorMessage', () => {
     const retryFn = vi.fn();
     render(<ErrorMessage message="Test error" retry={retryFn} />);
     
-    const retryButton = screen.getByTestId('error-message-retry-button');
+    const retryButton = screen.getByTestId(ERROR_MESSAGE_TEST_IDS.ERROR_MESSAGE_RETRY_BUTTON);
     expect(retryButton).toBeInTheDocument();
     expect(retryButton).toHaveTextContent('Try Again');
   });
@@ -37,7 +38,7 @@ describe('ErrorMessage', () => {
   it('does not render retry button when retry function is not provided', () => {
     render(<ErrorMessage message="Test error" />);
     
-    const retryButton = screen.queryByTestId('error-message-retry-button');
+    const retryButton = screen.queryByTestId(ERROR_MESSAGE_TEST_IDS.ERROR_MESSAGE_RETRY_BUTTON);
     expect(retryButton).not.toBeInTheDocument();
   });
 
@@ -45,7 +46,7 @@ describe('ErrorMessage', () => {
     const retryFn = vi.fn();
     render(<ErrorMessage message="Test error" retry={retryFn} />);
     
-    const retryButton = screen.getByTestId('error-message-retry-button');
+    const retryButton = screen.getByTestId(ERROR_MESSAGE_TEST_IDS.ERROR_MESSAGE_RETRY_BUTTON);
     fireEvent.click(retryButton);
     
     expect(retryFn).toHaveBeenCalledTimes(1);
@@ -83,7 +84,7 @@ describe('ErrorMessage', () => {
     const retryFn = vi.fn();
     render(<ErrorMessage message="Test error" retry={retryFn} />);
     
-    const retryButton = screen.getByTestId('error-message-retry-button');
+    const retryButton = screen.getByTestId(ERROR_MESSAGE_TEST_IDS.ERROR_MESSAGE_RETRY_BUTTON);
     expect(retryButton).toHaveAttribute('aria-label', 'Try again');
   });
 });

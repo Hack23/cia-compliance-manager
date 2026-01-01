@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import WidgetContainer from './WidgetContainer';
+import { WIDGET_CONTAINER_TEST_IDS } from '../../constants/testIds';
 
 describe('WidgetContainer', () => {
   it('renders with title and content', () => {
@@ -12,7 +13,7 @@ describe('WidgetContainer', () => {
 
     expect(screen.getByText('Test Widget')).toBeInTheDocument();
     expect(screen.getByTestId('test-content')).toBeInTheDocument();
-    expect(screen.getByTestId('widget-container')).toBeInTheDocument();
+    expect(screen.getByTestId(WIDGET_CONTAINER_TEST_IDS.WIDGET_CONTAINER)).toBeInTheDocument();
   });
 
   it('renders with loading state', () => {
@@ -23,8 +24,8 @@ describe('WidgetContainer', () => {
     );
 
     expect(screen.getByText('Test Widget')).toBeInTheDocument();
-    expect(screen.getByTestId('widget-spinner')).toBeInTheDocument();
-    expect(screen.getByTestId('widget-container-loading-container')).toBeInTheDocument();
+    expect(screen.getByTestId(WIDGET_CONTAINER_TEST_IDS.WIDGET_SPINNER)).toBeInTheDocument();
+    expect(screen.getByTestId(WIDGET_CONTAINER_TEST_IDS.WIDGET_CONTAINER_LOADING_CONTAINER)).toBeInTheDocument();
   });
 
   it('renders with error state', () => {
@@ -36,7 +37,7 @@ describe('WidgetContainer', () => {
 
     expect(screen.getByText('Test Widget')).toBeInTheDocument();
     expect(screen.getByTestId('test-widget-error')).toHaveTextContent('Test error');
-    expect(screen.getByTestId('widget-container-error')).toBeInTheDocument();
+    expect(screen.getByTestId(WIDGET_CONTAINER_TEST_IDS.WIDGET_CONTAINER_ERROR)).toBeInTheDocument();
   });
 
   it('renders with icon', () => {
@@ -58,7 +59,7 @@ describe('WidgetContainer', () => {
       </WidgetContainer>
     );
 
-    expect(screen.getByTestId('widget-container')).toHaveClass(customClass);
+    expect(screen.getByTestId(WIDGET_CONTAINER_TEST_IDS.WIDGET_CONTAINER)).toHaveClass(customClass);
   });
 
   it('renders children', () => {
@@ -80,7 +81,7 @@ describe('WidgetContainer', () => {
       </WidgetContainer>
     );
 
-    expect(screen.getByTestId('widget-container')).toHaveClass(customClass);
+    expect(screen.getByTestId(WIDGET_CONTAINER_TEST_IDS.WIDGET_CONTAINER)).toHaveClass(customClass);
   });
 
   it('renders with title', () => {
@@ -101,7 +102,7 @@ describe('WidgetContainer', () => {
       </WidgetContainer>
     );
 
-    expect(screen.getByTestId('widget-spinner')).toBeInTheDocument();
+    expect(screen.getByTestId(WIDGET_CONTAINER_TEST_IDS.WIDGET_SPINNER)).toBeInTheDocument();
   });
 
   it('renders with test ID', () => {
