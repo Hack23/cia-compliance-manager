@@ -11,7 +11,7 @@ import { SECURITY_LEVELS } from '../../../support/constants';
 describe('Cost Estimation Widget - Enhanced', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.waitForWidget('widget-cost-estimation');
+    cy.waitForWidget('cost-estimation-widget');
   });
 
   describe('Rendering', () => {
@@ -138,7 +138,7 @@ describe('Cost Estimation Widget - Enhanced', () => {
 
   describe('Error Handling', () => {
     it('should not display error state in normal operation', () => {
-      cy.testWidgetError('widget-cost-estimation');
+      cy.testWidgetError('cost-estimation-widget');
     });
 
     it('should handle missing data gracefully', () => {
@@ -151,8 +151,12 @@ describe('Cost Estimation Widget - Enhanced', () => {
 
   describe('Loading States', () => {
     it('should not show loading indicator after initial load', () => {
-      // Check for loading indicator with WidgetContainer pattern
-      cy.get('[data-testid="widget-container-loading-container-cost-estimation-widget"]').should('not.exist');
+      // Check for loading indicator - will not exist after page load
+      cy.get('body').then($body => {
+        if ($body.find('[data-testid="widget-container-loading-container-cost-estimation-widget"]').length > 0) {
+          cy.get('[data-testid="widget-container-loading-container-cost-estimation-widget"]').should('not.exist');
+        }
+      });
     });
 
     it('should display content instead of loading state', () => {

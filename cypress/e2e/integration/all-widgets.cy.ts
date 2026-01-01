@@ -19,7 +19,6 @@ import {
   confidentialityImpactWidget,
   technicalDetailsWidget,
   securityResourcesWidget,
-  securityVisualizationWidget,
 } from '../../support/selectors';
 import { SECURITY_LEVELS } from '../../support/constants';
 
@@ -57,11 +56,11 @@ describe('All Widgets Integration', () => {
   describe('Security Level Synchronization', () => {
     it('should update all widgets when security levels change', () => {
       // Change all security levels to High
-      cy.get('[data-testid="availability-selector"]').select(SECURITY_LEVELS.HIGH, { force: true });
+      cy.get(securityLevelWidget.availabilitySelect).select(SECURITY_LEVELS.HIGH, { force: true });
       cy.wait(300);
-      cy.get('[data-testid="integrity-selector"]').select(SECURITY_LEVELS.HIGH, { force: true });
+      cy.get(securityLevelWidget.integritySelect).select(SECURITY_LEVELS.HIGH, { force: true });
       cy.wait(300);
-      cy.get('[data-testid="confidentiality-selector"]').select(SECURITY_LEVELS.HIGH, { force: true });
+      cy.get(securityLevelWidget.confidentialitySelect).select(SECURITY_LEVELS.HIGH, { force: true });
       cy.wait(500); // Wait for all widgets to update
 
       // Verify key widgets updated their content
@@ -87,11 +86,11 @@ describe('All Widgets Integration', () => {
         cy.log(`Testing security level: ${label}`);
         
         // Set all levels
-        cy.get('[data-testid="availability-selector"]').select(level, { force: true });
+        cy.get(securityLevelWidget.availabilitySelect).select(level, { force: true });
         cy.wait(200);
-        cy.get('[data-testid="integrity-selector"]').select(level, { force: true });
+        cy.get(securityLevelWidget.integritySelect).select(level, { force: true });
         cy.wait(200);
-        cy.get('[data-testid="confidentiality-selector"]').select(level, { force: true });
+        cy.get(securityLevelWidget.confidentialitySelect).select(level, { force: true });
         cy.wait(500);
 
         // Verify at least the security summary reflects the change
@@ -172,15 +171,15 @@ describe('All Widgets Integration', () => {
     });
 
     it('should have accessible labels on security level selectors', () => {
-      cy.get('[data-testid="availability-selector"]')
+      cy.get(securityLevelWidget.availabilitySelect)
         .should('have.attr', 'aria-label')
         .or('be.visible'); // Either has label or is clearly visible
       
-      cy.get('[data-testid="integrity-selector"]')
+      cy.get(securityLevelWidget.integritySelect)
         .should('have.attr', 'aria-label')
         .or('be.visible');
       
-      cy.get('[data-testid="confidentiality-selector"]')
+      cy.get(securityLevelWidget.confidentialitySelect)
         .should('have.attr', 'aria-label')
         .or('be.visible');
     });
@@ -205,7 +204,7 @@ describe('All Widgets Integration', () => {
     it('should respond to interactions quickly', () => {
       const startTime = Date.now();
       
-      cy.get('[data-testid="availability-selector"]')
+      cy.get(securityLevelWidget.availabilitySelect)
         .select(SECURITY_LEVELS.HIGH, { force: true });
       
       cy.then(() => {
@@ -221,17 +220,17 @@ describe('All Widgets Integration', () => {
   describe('State Persistence', () => {
     it('should maintain security levels across widget interactions', () => {
       // Set initial levels
-      cy.get('[data-testid="availability-selector"]').select(SECURITY_LEVELS.HIGH, { force: true });
+      cy.get(securityLevelWidget.availabilitySelect).select(SECURITY_LEVELS.HIGH, { force: true });
       cy.wait(200);
-      cy.get('[data-testid="integrity-selector"]').select(SECURITY_LEVELS.MODERATE, { force: true });
+      cy.get(securityLevelWidget.integritySelect).select(SECURITY_LEVELS.MODERATE, { force: true });
       cy.wait(200);
-      cy.get('[data-testid="confidentiality-selector"]').select(SECURITY_LEVELS.HIGH, { force: true });
+      cy.get(securityLevelWidget.confidentialitySelect).select(SECURITY_LEVELS.HIGH, { force: true });
       cy.wait(500);
 
       // Verify levels are set
-      cy.get('[data-testid="availability-selector"]').should('have.value', SECURITY_LEVELS.HIGH);
-      cy.get('[data-testid="integrity-selector"]').should('have.value', SECURITY_LEVELS.MODERATE);
-      cy.get('[data-testid="confidentiality-selector"]').should('have.value', SECURITY_LEVELS.HIGH);
+      cy.get(securityLevelWidget.availabilitySelect).should('have.value', SECURITY_LEVELS.HIGH);
+      cy.get(securityLevelWidget.integritySelect).should('have.value', SECURITY_LEVELS.MODERATE);
+      cy.get(securityLevelWidget.confidentialitySelect).should('have.value', SECURITY_LEVELS.HIGH);
 
       // Interact with another widget (scroll to it)
       cy.get(costEstimationWidget.root).scrollIntoView();

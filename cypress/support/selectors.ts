@@ -7,7 +7,6 @@
 
 // Import test ID constants from the source
 import {
-  WIDGET_TEST_IDS,
   CIA_TEST_IDS,
   COST_TEST_IDS,
   SECURITY_SUMMARY_TEST_IDS,
@@ -31,6 +30,13 @@ export function getByTestId(testId: string): string {
 
 /**
  * Get widget container by widget name
+ * 
+ * @deprecated This helper is deprecated for widgets using WidgetContainer.
+ * WidgetContainer prefixes test IDs with 'widget-container-', so this function
+ * will not work correctly for most widgets.
+ * 
+ * Instead, use the specific widget selector objects (e.g., costEstimationWidget.root,
+ * securityLevelWidget.root) which account for the WidgetContainer prefix pattern.
  */
 export function widgetSelector(widgetName: string): string {
   return getByTestId(`widget-${widgetName}`);
@@ -38,6 +44,13 @@ export function widgetSelector(widgetName: string): string {
 
 /**
  * Common widget state selectors
+ * 
+ * Note: These helpers work for non-WidgetContainer components.
+ * For widgets using WidgetContainer, state test IDs follow different patterns:
+ *   - loading: `widget-container-loading-container-${testId}`
+ *   - error: `widget-container-error-${testId}`
+ * 
+ * Consider using widget-specific selectors or checking the actual DOM structure.
  */
 export const widgetState = {
   loading: (widgetName: string) => getByTestId(`${widgetName}-loading`),

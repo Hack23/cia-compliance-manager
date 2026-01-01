@@ -97,12 +97,15 @@ Object.entries(allWidgets).forEach(([name, selectors]) => {
 Array of all widget names:
 
 ```typescript
-import { widgetNames } from './support/selectors';
+import { allWidgets } from './support/selectors';
 
-widgetNames.forEach(widget => {
-  cy.get(widgetSelector(widget)).should('be.visible');
+// Use specific widget selectors from allWidgets
+Object.values(allWidgets).forEach(widget => {
+  cy.get(widget.root).should('be.visible');
 });
 ```
+
+**Note**: The `widgetSelector()` helper function is deprecated for WidgetContainer-based widgets. Use specific widget selector objects instead.
 
 ## Examples
 
@@ -125,14 +128,15 @@ describe('Cost Estimation Widget', () => {
 ### Testing Multiple Widgets
 
 ```typescript
-import { widgetNames, widgetSelector } from '../../support/selectors';
+import { allWidgets } from '../../support/selectors';
 
 describe('All Widgets', () => {
   it('should render all widgets', () => {
     cy.visit('/');
     
-    widgetNames.forEach(widget => {
-      cy.get(widgetSelector(widget)).should('exist');
+    // Use specific widget selectors that account for WidgetContainer prefix
+    Object.values(allWidgets).forEach(widget => {
+      cy.get(widget.root).should('exist');
     });
   });
 });

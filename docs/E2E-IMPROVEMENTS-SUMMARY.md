@@ -141,7 +141,7 @@ cy.get(costEstimationWidget.capex).should('contain', '$');
 
 ### Using Custom Commands
 ```typescript
-cy.waitForWidget('widget-cost-estimation');
+cy.waitForWidget('cost-estimation-widget'); // Use widget's actual testId prop
 cy.testTabNavigation('[data-testid="tabs"]', 4);
 cy.testResponsiveLayout(['iphone-x', 'ipad-2', 'macbook-15']);
 cy.checkA11y();
@@ -149,10 +149,11 @@ cy.checkA11y();
 
 ### Integration Testing
 ```typescript
-import { widgetNames, widgetSelector } from '../../support/selectors';
+import { allWidgets } from '../../support/selectors';
 
-widgetNames.forEach(widget => {
-  cy.get(widgetSelector(widget)).should('exist');
+// Use specific widget selectors
+Object.values(allWidgets).forEach(widget => {
+  cy.get(widget.root).should('exist');
 });
 ```
 
@@ -169,12 +170,12 @@ For existing tests:
 
 Example:
 ```typescript
-// Before
-cy.get('[data-testid="widget-cost-estimation"]').should('exist');
+// Before: What you see in the DOM
+cy.get('[data-testid="widget-container-cost-estimation-widget"]').should('exist');
 
-// After
+// After: Use centralized selectors and commands
 import { costEstimationWidget } from '../../support/selectors';
-cy.waitForWidget('widget-cost-estimation');
+cy.waitForWidget('cost-estimation-widget'); // Pass widget's actual testId prop
 cy.get(costEstimationWidget.root).should('be.visible');
 ```
 

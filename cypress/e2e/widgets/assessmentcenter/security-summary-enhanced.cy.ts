@@ -248,7 +248,12 @@ describe('Security Summary Widget - Enhanced', () => {
 
   describe('Loading States', () => {
     it('should not show loading indicator after initial load', () => {
-      cy.get('[data-testid="security-summary-widget-loading"]').should('not.exist');
+      // Check for loading indicator - will not exist after page load
+      cy.get('body').then($body => {
+        if ($body.find('[data-testid="widget-container-loading-container-security-summary-widget"]').length > 0) {
+          cy.get('[data-testid="widget-container-loading-container-security-summary-widget"]').should('not.exist');
+        }
+      });
     });
 
     it('should display content instead of loading state', () => {

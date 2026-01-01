@@ -79,15 +79,19 @@ cy.get(securityLevelWidget.availabilitySelect).select('High');
 #### `waitForWidget(testId: string)`
 Wait for a widget to finish loading and be visible.
 
+**Note**: Pass the widget's actual testId prop value (e.g., `'cost-estimation-widget'`), not a prefixed version. The command automatically handles the WidgetContainer prefix pattern.
+
 ```typescript
-cy.waitForWidget('widget-cost-estimation');
+cy.waitForWidget('cost-estimation-widget');
 ```
 
 #### `testWidgetError(testId: string)`
 Check for error states in widgets (helpful for validation).
 
+**Note**: Pass the widget's actual testId prop value.
+
 ```typescript
-cy.testWidgetError('widget-cost-estimation');
+cy.testWidgetError('cost-estimation-widget');
 ```
 
 #### `testTabNavigation(containerSelector: string, tabCount: number)`
@@ -114,8 +118,10 @@ cy.checkA11y();
 #### `verifyWidgetContent(testId: string, expectedContent: string[])`
 Verify widget contains expected content.
 
+**Note**: Pass the widget's actual testId prop value.
+
 ```typescript
-cy.verifyWidgetContent('widget-cost-estimation', ['CAPEX', 'OPEX', 'Total']);
+cy.verifyWidgetContent('cost-estimation-widget', ['CAPEX', 'OPEX', 'Total']);
 ```
 
 ## Test Patterns
@@ -127,7 +133,7 @@ cy.verifyWidgetContent('widget-cost-estimation', ['CAPEX', 'OPEX', 'Total']);
 describe('Widget Name - Enhanced', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.waitForWidget('widget-name');
+    cy.waitForWidget('actual-widget-testid'); // Use widget's actual testId prop
   });
 
   describe('Rendering', () => {
@@ -235,10 +241,10 @@ describe('All Widgets Integration', () => {
 
 1. **Import selectors instead of hardcoding**:
 ```typescript
-// Before
-cy.get('[data-testid="widget-cost-estimation"]')
+// Before: What you see in the DOM
+cy.get('[data-testid="widget-container-cost-estimation-widget"]')
 
-// After
+// After: Use centralized selectors
 import { costEstimationWidget } from '../../support/selectors';
 cy.get(costEstimationWidget.root)
 ```
@@ -246,11 +252,11 @@ cy.get(costEstimationWidget.root)
 2. **Use custom commands**:
 ```typescript
 // Before
-cy.get('[data-testid="widget-name"]').should('exist');
-cy.get('[data-testid="widget-name-loading"]').should('not.exist');
+cy.get('[data-testid="widget-container-cost-estimation-widget"]').should('exist');
+cy.get('[data-testid="widget-container-loading-container-cost-estimation-widget"]').should('not.exist');
 
-// After
-cy.waitForWidget('widget-name');
+// After: Pass the widget's actual testId prop value
+cy.waitForWidget('cost-estimation-widget');
 ```
 
 3. **Add responsive tests**:
