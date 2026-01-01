@@ -60,7 +60,7 @@ describe("TechnicalDetailsWidget", () => {
       render(<TechnicalDetailsWidget {...defaultProps} />);
     });
 
-    expect(screen.getByTestId("widget-container-widget-technical-details")).toBeInTheDocument();
+    expect(screen.getByTestId("technical-details-widget")).toBeInTheDocument();
   });
 
   it("displays technical implementation details", async () => {

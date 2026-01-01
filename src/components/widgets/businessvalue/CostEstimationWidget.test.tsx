@@ -176,7 +176,7 @@ describe("CostEstimationWidget", () => {
       render(<CostEstimationWidget {...defaultProps} />);
     });
 
-    expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+    expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
   });
 
   it("displays implementation and operational costs", async () => {
@@ -292,7 +292,7 @@ describe("CostEstimationWidget", () => {
       );
     });
 
-    expect(screen.getByTestId("widget-container-widget-cost-estimation")).toHaveClass(
+    expect(screen.getByTestId("cost-estimation-widget")).toHaveClass(
       "custom-class"
     );
   });
@@ -341,7 +341,7 @@ describe("CostEstimationWidget", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
     });
   });
 
@@ -357,7 +357,7 @@ describe("CostEstimationWidget", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
     });
   });
 
@@ -373,7 +373,7 @@ describe("CostEstimationWidget", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
     });
   });
 
@@ -389,7 +389,7 @@ describe("CostEstimationWidget", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
     });
   });
 
@@ -442,7 +442,7 @@ describe("CostEstimationWidget", () => {
     render(<CostEstimationWidget {...defaultProps} />);
 
     // Widget should handle loading state gracefully
-    expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+    expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
   });
 
   it("handles service error state", async () => {
@@ -450,7 +450,7 @@ describe("CostEstimationWidget", () => {
 
     // Widget should handle error state gracefully
     await waitFor(() => {
-      expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
     });
   });
 
@@ -466,7 +466,7 @@ describe("CostEstimationWidget", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
     });
   });
 
@@ -495,7 +495,7 @@ describe("CostEstimationWidget", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
     });
 
     // Rerender with higher security levels
@@ -510,7 +510,7 @@ describe("CostEstimationWidget", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
     });
   });
 
@@ -527,7 +527,7 @@ describe("CostEstimationWidget", () => {
       );
 
       await waitFor(() => {
-        expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+        expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
       });
 
       unmount();
@@ -567,7 +567,7 @@ describe("CostEstimationWidget", () => {
       });
 
       await waitFor(() => {
-        expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+        expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
       });
     });
 
@@ -851,7 +851,7 @@ describe("CostEstimationWidget", () => {
       });
 
       await waitFor(() => {
-        const widget = screen.getByTestId("widget-container-widget-cost-estimation");
+        const widget = screen.getByTestId("cost-estimation-widget");
         expect(widget).toBeInTheDocument();
         // Widget should have text content
         expect(widget.textContent).toBeTruthy();
@@ -888,7 +888,7 @@ describe("CostEstimationWidget", () => {
       });
 
       await waitFor(() => {
-        expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+        expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
       });
     });
 
@@ -904,7 +904,7 @@ describe("CostEstimationWidget", () => {
       });
 
       await waitFor(() => {
-        expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+        expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
       });
     });
 
@@ -920,7 +920,7 @@ describe("CostEstimationWidget", () => {
       });
 
       await waitFor(() => {
-        expect(screen.getByTestId("widget-container-widget-cost-estimation")).toBeInTheDocument();
+        expect(screen.getByTestId("cost-estimation-widget")).toBeInTheDocument();
       });
     });
   });

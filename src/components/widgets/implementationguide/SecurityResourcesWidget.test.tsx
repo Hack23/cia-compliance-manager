@@ -121,7 +121,7 @@ describe("SecurityResourcesWidget", () => {
 
   it("renders without crashing", () => {
     render(<SecurityResourcesWidget {...defaultProps} />);
-    expect(screen.getByTestId("widget-container-widget-security-resources")).toBeInTheDocument();
+    expect(screen.getByTestId("security-resources-widget")).toBeInTheDocument();
   });
 
   it("displays widget title and description", () => {
@@ -215,7 +215,7 @@ describe("SecurityResourcesWidget", () => {
     );
 
     // Check if the class is applied to the component
-    const widgetElement = screen.getByTestId("widget-container-widget-security-resources");
+    const widgetElement = screen.getByTestId("security-resources-widget");
     expect(widgetElement).toHaveClass("custom-class");
   });
 
