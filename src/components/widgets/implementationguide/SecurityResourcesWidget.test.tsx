@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
 import { EnhancedSecurityResource } from "../../../types/securityResources";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import SecurityResourcesWidget from "./SecurityResourcesWidget";
 
 // Mock data for security resources

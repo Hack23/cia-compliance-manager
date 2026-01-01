@@ -1,9 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import { SecurityBusinessTab, SecurityBusinessTabProps } from "./SecurityBusinessTab";
 
 describe("SecurityBusinessTab", () => {
   const defaultProps: SecurityBusinessTabProps = {
+    ...mockWidgetProps,
     businessMaturityLevel: "Optimizing",
     businessMaturityDescription: "Advanced security practices with continuous improvement",
     securityScore: 75,

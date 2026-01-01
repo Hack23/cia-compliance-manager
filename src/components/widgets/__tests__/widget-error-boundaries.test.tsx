@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
+import { mockWidgetProps } from '../../../utils/testUtils';
 import WidgetErrorBoundary from '../../common/WidgetErrorBoundary';
 
 /**
