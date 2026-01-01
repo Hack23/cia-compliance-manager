@@ -771,6 +771,51 @@ export const COMMON_COMPONENT_TEST_IDS = {
   EMPTY_STATE: "empty-state",
   VALUE_DISPLAY: "value-display",
   CONTEXT_INFO: "context-info",
+  // Additional common component test IDs
+  METRIC_CARD: "metric-card",
+  RISK_LEVEL_BADGE: "risk-level-badge",
+  WIDGET_SECTION: "widget-section",
+  WIDGET_ERROR_BOUNDARY: "widget-error-boundary",
+  WIDGET_ERROR_BOUNDARY_MESSAGE: "widget-error-boundary-message",
+  TAB_CONTAINER: "tab-container",
+};
+
+// Error Toast Test IDs
+export const ERROR_TOAST_TEST_IDS = {
+  ERROR_TOAST: "error-toast",
+  ERROR_TOAST_TITLE: "error-toast-title",
+  ERROR_TOAST_MESSAGE: "error-toast-message",
+  ERROR_TOAST_CLOSE_BUTTON: "error-toast-close-button",
+  ERROR_TOAST_RETRY_BUTTON: "error-toast-retry-button",
+  ERROR_TOAST_ICON: "error-toast-icon",
+  ERROR_TOAST_CONTAINER: "error-toast-container",
+  ERROR_TOAST_DISMISS_TIMER: "error-toast-dismiss-timer",
+  ERROR_TOAST_AUTO_DISMISS: "error-toast-auto-dismiss",
+  ERROR_TOAST_SEVERITY: "error-toast-severity",
+};
+
+// Error Message Test IDs
+export const ERROR_MESSAGE_TEST_IDS = {
+  ERROR_MESSAGE: "error-message",
+  ERROR_MESSAGE_TEXT: "error-message-text",
+  ERROR_MESSAGE_TITLE: "error-message-title",
+  ERROR_MESSAGE_RETRY_BUTTON: "error-message-retry-button",
+  ERROR_MESSAGE_ICON: "error-message-icon",
+  ERROR_MESSAGE_CONTAINER: "error-message-container",
+  ERROR_MESSAGE_DESCRIPTION: "error-message-description",
+};
+
+// Widget Container Test IDs
+export const WIDGET_CONTAINER_TEST_IDS = {
+  WIDGET_CONTAINER: "widget-container",
+  WIDGET_SPINNER: "widget-spinner",
+  WIDGET_LOADER: "widget-loader",
+  WIDGET_ERROR: "widget-error",
+  WIDGET_ERROR_RETRY_BUTTON: "widget-error-retry-button",
+  WIDGET_CONTENT: "widget-content",
+  WIDGET_CONTAINER_LOADING_CONTAINER: "widget-container-loading-container",
+  WIDGET_CONTAINER_ERROR: "widget-container-error",
+  WIDGET_CONTAINER_CONTENT: "widget-container-content",
 };
 
 // ---------------------------------------------------------------
