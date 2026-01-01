@@ -27,7 +27,7 @@ The actual DOM element will have: `data-testid="widget-container-cost-estimation
 
 | Widget | Default testId | Actual DOM test ID |
 |--------|---------------|-------------------|
-| SecurityLevelWidget | `security-level-widget` | `widget-container-security-level-widget` |
+| SecurityLevelWidget | `widget-security-level` | `widget-container-widget-security-level` |
 | CostEstimationWidget | `cost-estimation-widget` | `widget-container-cost-estimation-widget` |
 | SecuritySummaryWidget | `security-summary-widget` | `widget-container-security-summary-widget` |
 | AvailabilityImpactWidget | `widget-widget-availability-impact` | `widget-container-widget-widget-availability-impact` |

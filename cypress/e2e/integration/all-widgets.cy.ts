@@ -190,7 +190,7 @@ describe('All Widgets Integration', () => {
       const startTime = Date.now();
       
       cy.visit('/');
-      cy.waitForWidget('security-level-widget');
+      cy.waitForWidget('widget-security-level');
       
       cy.then(() => {
         const loadTime = Date.now() - startTime;

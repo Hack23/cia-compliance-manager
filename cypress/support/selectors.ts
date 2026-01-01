@@ -62,10 +62,10 @@ export const widgetState = {
 /**
  * Security Level Widget Selectors
  * Note: WidgetContainer prefixes testId with 'widget-container-'
- * Widget default testId: "security-level-widget"
+ * Widget default testId: "widget-security-level" (uses SECURITY_LEVEL_WIDGET_IDS.root)
  */
 export const securityLevelWidget = {
-  root: getByTestId('widget-container-security-level-widget'),
+  root: getByTestId('widget-container-widget-security-level'),
   availabilitySelect: getByTestId(CIA_TEST_IDS.AVAILABILITY_SELECT),
   integritySelect: getByTestId(CIA_TEST_IDS.INTEGRITY_SELECT),
   confidentialitySelect: getByTestId(CIA_TEST_IDS.CONFIDENTIALITY_SELECT),
