@@ -82,17 +82,20 @@ export const securityLevelWidget = {
  * Cost Estimation Widget Selectors
  * Widget uses WidgetContainer with testId="widget-cost-estimation"
  * Widget file: CostEstimationWidget.tsx
+ * Note: Component uses COST_ESTIMATION_WIDGET_IDS.label() for MetricCards
  */
 export const costEstimationWidget = {
   // WidgetContainer creates: widget-container-widget-cost-estimation
   root: getByTestId('widget-container-widget-cost-estimation'),
-  capex: getByTestId(COST_TEST_IDS.CAPEX_VALUE),
-  opex: getByTestId(COST_TEST_IDS.OPEX_VALUE),
-  total: getByTestId(COST_TEST_IDS.TOTAL_COST),
+  // MetricCard test IDs use label() function: widget-cost-estimation-label-{name}
+  capex: getByTestId('widget-cost-estimation-label-capex'),
+  opex: getByTestId('widget-cost-estimation-label-opex'),
+  total: getByTestId('widget-cost-estimation-label-total'),
   roi: getByTestId(COST_TEST_IDS.ROI_ESTIMATE),
   implementationTime: getByTestId(COST_TEST_IDS.IMPLEMENTATION_TIME),
-  capexSection: getByTestId(COST_TEST_IDS.CAPEX_SECTION),
-  opexSection: getByTestId(COST_TEST_IDS.OPEX_SECTION),
+  // Section test IDs - these may not exist in current implementation
+  capexSection: getByTestId('widget-cost-estimation-section-capex'),
+  opexSection: getByTestId('widget-cost-estimation-section-opex'),
   threeYearTotal: getByTestId(COST_TEST_IDS.THREE_YEAR_TOTAL),
 };
 
