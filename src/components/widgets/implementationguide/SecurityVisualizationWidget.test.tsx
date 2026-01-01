@@ -21,7 +21,7 @@ describe("SecurityVisualizationWidget", () => {
 
     // Check that widget container is rendered
     const widget = screen.getByTestId(
-      "widget-container-security-visualization-widget"
+      "widget-container-widget-security-visualization"
     );
     expect(widget).toBeInTheDocument();
 
