@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { SecurityLevel } from "../../../types/cia";
 import { VALUE_CREATION_WIDGET_IDS } from "../../../constants/testIds";
 import { mockWidgetProps, mockLowSecurityProps, mockHighSecurityProps, mockMixedSecurityProps } from "../../../utils/testUtils";
 import { testAccessibility } from "../../../utils/accessibilityTestUtils";
