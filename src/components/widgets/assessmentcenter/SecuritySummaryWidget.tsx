@@ -171,7 +171,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
         error={error}
       >
         <div 
-          className="p-md sm:p-lg"
+          className="p-sm"
           role={ARIA_ROLES.REGION}
           aria-label={getWidgetAriaDescription(
             "Security Summary",

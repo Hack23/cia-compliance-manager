@@ -46,10 +46,10 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
   getStatusVariant,
 }) => {
   return (
-    <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-overview')} className="space-y-4">
+    <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-overview')} className="space-y-sm">
       {/* Security Radar Chart */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
+        <h3 className="text-base font-medium mb-sm text-gray-800 dark:text-gray-100">
           Security Profile
         </h3>
         <div className="h-[300px]">
@@ -63,15 +63,15 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
       </div>
 
       {/* Security Level Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
+        <h3 className="text-base font-medium mb-sm text-gray-800 dark:text-gray-100">
           Security Components
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-md">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-sm">
           {/* Confidentiality Card */}
           <div
-            className="p-md bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800"
+            className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.CONFIDENTIALITY_CARD}
           >
             <div className="flex items-center mb-sm">
@@ -101,7 +101,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
 
           {/* Integrity Card */}
           <div
-            className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800"
+            className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.INTEGRITY_CARD}
           >
             <div className="flex items-center mb-sm">
@@ -133,7 +133,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
 
           {/* Availability Card */}
           <div
-            className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800"
+            className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.AVAILABILITY_CARD}
           >
             <div className="flex items-center mb-sm">
@@ -166,12 +166,12 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
       </div>
 
       {/* Key Metrics Dashboard */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
+        <h3 className="text-base font-medium mb-sm text-gray-800 dark:text-gray-100">
           Key Security Metrics
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-md">
-          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-sm">
+          <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-sm font-medium mb-xs">
               Implementation Complexity
             </div>
@@ -181,7 +181,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
             </div>
           </div>
 
-          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-sm font-medium mb-xs">Business Maturity</div>
             <div className="text-lg font-bold">{businessMaturityLevel}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
@@ -189,7 +189,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
             </div>
           </div>
 
-          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-sm font-medium mb-xs">Compliance Status</div>
             <div className="text-lg font-bold">
               {complianceScore || securityScore}%

@@ -132,7 +132,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         error={error}
       >
       <div 
-        className="p-md sm:p-lg"
+        className="p-sm"
         role={ARIA_ROLES.REGION}
         aria-label={getWidgetAriaDescription(
           "Technical Implementation Details",
@@ -143,7 +143,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         <section 
           className={cn(
             WidgetClasses.section,
-            "p-md rounded-md",
+            "p-sm rounded-md",
             "bg-info-light/10 dark:bg-info-dark/20"
           )}
           aria-labelledby="technical-description-heading"
@@ -163,8 +163,8 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
         />
 
         {/* Implementation considerations */}
-        <div className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-          <h3 className="text-lg font-medium mb-md flex items-center">
+        <div className="p-sm bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+          <h3 className="text-base font-medium mb-sm flex items-center">
             <span className="mr-sm">💡</span>Implementation Notes
           </h3>
           <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
