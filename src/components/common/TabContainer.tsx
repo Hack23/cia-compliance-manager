@@ -12,7 +12,6 @@ import { Tab } from '../../types/tabs';
 import { useTabs } from '../../hooks/useTabs';
 import { TRANSITIONS } from '../../constants/designTokens';
 import { ARIA_ROLES } from '../../utils/accessibility';
-import { WidgetClasses } from '../../utils/tailwindClassHelpers';
 
 /**
  * Props for TabContainer component
@@ -87,7 +86,7 @@ export const TabContainer: React.FC<TabContainerProps> = ({
       {/* Tab List */}
       <div
         role={ARIA_ROLES.TABLIST}
-        className={WidgetClasses.tabList}
+        className="flex space-x-2 border-b border-gray-200 dark:border-gray-700 mb-6"
         data-testid={`${testId}-list`}
         aria-label="Tab navigation"
       >
@@ -139,22 +138,21 @@ export const TabContainer: React.FC<TabContainerProps> = ({
         })}
       </div>
 
-      {/* Tab Panels - Only render active panel to avoid empty containers */}
-      {tabs.map((tab) => 
-        activeTab === tab.id ? (
-          <div
-            key={tab.id}
-            role={ARIA_ROLES.TABPANEL}
-            id={`${testId}-panel-${tab.id}`}
-            aria-labelledby={`${testId}-tab-${tab.id}`}
-            data-testid={`${testId}-panel-${tab.id}`}
-            className="focus:outline-none"
-            tabIndex={0}
-          >
-            {tab.content}
-          </div>
-        ) : null
-      )}
+      {/* Tab Panels */}
+      {tabs.map((tab) => (
+        <div
+          key={tab.id}
+          role={ARIA_ROLES.TABPANEL}
+          id={`${testId}-panel-${tab.id}`}
+          aria-labelledby={`${testId}-tab-${tab.id}`}
+          hidden={activeTab !== tab.id}
+          data-testid={`${testId}-panel-${tab.id}`}
+          className="focus:outline-none"
+          tabIndex={activeTab === tab.id ? 0 : -1}
+        >
+          {activeTab === tab.id && tab.content}
+        </div>
+      ))}
     </div>
   );
 };

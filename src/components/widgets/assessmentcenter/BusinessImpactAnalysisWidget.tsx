@@ -458,13 +458,13 @@ const BusinessImpactAnalysisWidget: React.FC<
       label: 'Implementation Considerations',
       content: (
         <div
-          className="grid grid-cols-1 gap-sm"
+          className="grid grid-cols-1 gap-md"
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('considerations')}
         >
           {considerations.map((item, index) => (
             <div
               key={`consideration-${index}`}
-              className="p-sm bg-gray-50 dark:bg-gray-800 rounded-lg"
+              className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg"
               data-testid={BUSINESS_IMPACT_WIDGET_IDS.item(`consideration-${index}`)}
             >
               <div className="flex items-center mb-sm">
@@ -485,13 +485,13 @@ const BusinessImpactAnalysisWidget: React.FC<
       label: 'Business Benefits',
       content: (
         <div
-          className="grid grid-cols-1 gap-sm"
+          className="grid grid-cols-1 gap-md"
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('benefits')}
         >
           {benefits.map((item, index) => (
             <div
               key={`benefit-${index}`}
-              className="p-sm bg-gray-50 dark:bg-gray-800 rounded-lg"
+              className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg"
               data-testid={BUSINESS_IMPACT_WIDGET_IDS.item(`benefit-${index}`)}
             >
               <div className="flex items-center mb-sm">
@@ -522,7 +522,7 @@ const BusinessImpactAnalysisWidget: React.FC<
         error={serviceError}
       >
       <div 
-        className="p-sm"
+        className="p-md"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Business Impact Analysis",
@@ -590,7 +590,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           )}
         </section>
 
-        <div className="mb-sm p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+        <div className="mb-md p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
           <p className="text-sm">
             {/* Executive Summary Section */}
             {renderExecutiveSummary()}

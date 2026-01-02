@@ -78,9 +78,9 @@ describe('TabContainer', () => {
       fireEvent.click(tab2Button);
       
       expect(screen.getByText('Content 2')).toBeVisible();
-      // Content 1 should not be in DOM anymore (only active panel is rendered)
-      const panel1 = screen.queryByTestId('test-tabs-panel-tab1');
-      expect(panel1).not.toBeInTheDocument();
+      // Content 1 should still be in DOM but hidden
+      const panel1 = screen.getByTestId('test-tabs-panel-tab1');
+      expect(panel1).toHaveAttribute('hidden');
     });
 
     it('should call onChange callback when tab changes', () => {
@@ -251,25 +251,25 @@ describe('TabContainer', () => {
       render(<TabContainer tabs={mockTabs} testId="test-tabs" />);
       
       expect(screen.getByText('Content 1')).toBeVisible();
-      // Content 2 and 3 are not in DOM (only active panel is rendered)
-      const panel2 = screen.queryByTestId('test-tabs-panel-tab2');
-      expect(panel2).not.toBeInTheDocument();
-      const panel3 = screen.queryByTestId('test-tabs-panel-tab3');
-      expect(panel3).not.toBeInTheDocument();
+      // Content 2 is in DOM but panel is hidden
+      const panel2 = screen.getByTestId('test-tabs-panel-tab2');
+      expect(panel2).toHaveAttribute('hidden');
+      // Content 3 is in DOM but panel is hidden (disabled tab)
+      const panel3 = screen.getByTestId('test-tabs-panel-tab3');
+      expect(panel3).toHaveAttribute('hidden');
     });
 
-    it('should not render inactive tab panels in DOM', () => {
+    it('should hide inactive tab panels', () => {
       render(<TabContainer tabs={mockTabs} testId="test-tabs" />);
       
-      const panel2 = screen.queryByTestId('test-tabs-panel-tab2');
-      expect(panel2).not.toBeInTheDocument();
+      const panel2 = screen.getByTestId('test-tabs-panel-tab2');
+      expect(panel2).toHaveAttribute('hidden');
     });
 
-    it('should render active tab panel without hidden attribute', () => {
+    it('should not hide active tab panel', () => {
       render(<TabContainer tabs={mockTabs} testId="test-tabs" />);
       
       const panel1 = screen.getByTestId('test-tabs-panel-tab1');
-      expect(panel1).toBeInTheDocument();
       expect(panel1).not.toHaveAttribute('hidden');
     });
   });

@@ -280,7 +280,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         error={serviceError}
       >
       <div 
-        className="p-sm"
+        className="p-md sm:p-lg"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Compliance Status",
