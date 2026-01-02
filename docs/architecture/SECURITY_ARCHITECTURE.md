@@ -1361,7 +1361,7 @@ flowchart LR
 
 **Implementation:**
 - **COMPLIANCE_EVIDENCE.md**: Single catalog of 40+ evidence artifacts across 8 categories
-- **Test Coverage Evidence**: 83% line, 75.39% branch (exceeds 80%/70% requirements)
+- **Test Coverage Evidence**: 83.81% line, 76.15% branch (exceeds 80%/70% requirements)
 - **Security Scanning Evidence**: SAST, SCA, DAST, Secret Scanning results
 - **Supply Chain Evidence**: SLSA Level 3, SBOM, OpenSSF Scorecard
 - **Accessibility Evidence**: WCAG 2.1 AA conformance documentation
@@ -1383,7 +1383,7 @@ flowchart LR
 | **Performance** | 85.6% bundle reduction | DoS resilience, faster updates | [PERFORMANCE_COMPLIANCE.md](../PERFORMANCE_COMPLIANCE.md) |
 | **Error Handling** | Error boundaries (11/11 widgets) | No information disclosure | [ERROR_HANDLING.md](../ERROR_HANDLING.md) |
 | **Design System** | Centralized tokens & components | Reduced bug surface | [DESIGN_SYSTEM.md](../DESIGN_SYSTEM.md) |
-| **Test Coverage** | 83% line, 75.39% branch | Better security validation | [COMPLIANCE_EVIDENCE.md](../COMPLIANCE_EVIDENCE.md) |
+| **Test Coverage** | 83.81% line, 76.15% branch | Better security validation | [COMPLIANCE_EVIDENCE.md](../COMPLIANCE_EVIDENCE.md) |
 | **Compliance Evidence** | 40+ artifacts in 8 categories | Audit efficiency | [COMPLIANCE_EVIDENCE.md](../COMPLIANCE_EVIDENCE.md) |
 
 ---

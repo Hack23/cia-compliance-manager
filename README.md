@@ -265,10 +265,10 @@ The CIA Compliance Manager follows rigorous testing standards as defined in our 
 [![E2E Plan](https://img.shields.io/badge/E2E%20Plan-Documentation-blue?style=flat-square&logo=markdown&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md)
 [![Code Quality](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
 
-- **Statements**: 81.18% (Target: 80%+) ✅
-- **Branches**: 75.39% (Target: 70%+) ✅ (v1.1.0: Improved from 73.1%)
-- **Functions**: 85.62% (Target: 80%+) ✅
-- **Lines**: 83% (Target: 80%+) ✅ (v1.1.0: Improved from 81.7%)
+- **Statements**: 83.44% (Target: 80%+) ✅ (v1.1.0: Improved from 81.18%)
+- **Branches**: 76.15% (Target: 70%+) ✅ (v1.1.0: Improved from 73.1%)
+- **Functions**: 86.06% (Target: 80%+) ✅ (v1.1.0: Improved from 85.62%)
+- **Lines**: 83.81% (Target: 80%+) ✅ (v1.1.0: Improved from 81.7%)
 
 **🎯 ISMS Compliance Status**: All coverage thresholds now **EXCEED** requirements for v1.1.0 release.
 

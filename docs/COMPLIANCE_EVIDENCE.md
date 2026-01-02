@@ -39,8 +39,9 @@ _— Security Team, Hack23 AB_
 
 | 📊 **Evidence Type** | 🎯 **Requirement** | ✅ **Current Status** | 🔗 **Evidence Location** |
 |---------------------|-------------------|---------------------|------------------------|
-| **Unit Test Coverage** | ≥80% line, ≥70% branch | 83% line, 75.39% branch | [Coverage Report](https://hack23.github.io/cia-compliance-manager/docs/coverage/) |
-| **Function Coverage** | ≥80% functions | 85.62% functions | [Coverage Report](https://hack23.github.io/cia-compliance-manager/docs/coverage/) |
+| **Unit Test Coverage** | ≥80% line, ≥70% branch | 83.81% line, 76.15% branch | [Coverage Report](https://hack23.github.io/cia-compliance-manager/docs/coverage/) |
+| **Function Coverage** | ≥80% functions | 86.06% functions | [Coverage Report](https://hack23.github.io/cia-compliance-manager/docs/coverage/) |
+| **Statement Coverage** | ≥80% statements | 83.44% statements | [Coverage Report](https://hack23.github.io/cia-compliance-manager/docs/coverage/) |
 | **Test Results** | 100% pass rate | All tests passing | [Test Results](https://hack23.github.io/cia-compliance-manager/docs/test-results/) |
 | **Test Plan Documentation** | Documented strategy | Complete | [Unit Test Plan](../UnitTestPlan.md) |
 | **CI/CD Integration** | Automated execution | Active | [![CI Tests](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml) |
@@ -273,7 +274,7 @@ curl -s https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compli
 
 | 🎯 **Category** | 📋 **Requirement** | ✅ **Status** | 📈 **Trend** |
 |----------------|-------------------|--------------|-------------|
-| **Test Coverage** | ≥80% line, ≥70% branch | 83% / 75.39% | ✅ Exceeds |
+| **Test Coverage** | ≥80% line, ≥70% branch | 83.81% / 76.15% | ✅ Exceeds |
 | **Security Scanning** | Zero critical/high | 0 Open | ✅ Exceeds |
 | **Performance** | <500 KB, <2s load | 207 KB, <2s | ✅ Exceeds |
 | **Supply Chain** | SLSA Level 3 | ✅ Attested | ✅ Exceeds |
