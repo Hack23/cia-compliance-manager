@@ -12,6 +12,7 @@ import { Tab } from '../../types/tabs';
 import { useTabs } from '../../hooks/useTabs';
 import { TRANSITIONS } from '../../constants/designTokens';
 import { ARIA_ROLES } from '../../utils/accessibility';
+import { WidgetClasses } from '../../utils/tailwindClassHelpers';
 
 /**
  * Props for TabContainer component
@@ -86,7 +87,7 @@ export const TabContainer: React.FC<TabContainerProps> = ({
       {/* Tab List */}
       <div
         role={ARIA_ROLES.TABLIST}
-        className="flex space-x-2 border-b border-gray-200 dark:border-gray-700 mb-sm"
+        className={WidgetClasses.tabList}
         data-testid={`${testId}-list`}
         aria-label="Tab navigation"
       >
