@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { TECHNICAL_DETAILS_WIDGET_IDS } from "../../../constants/testIds";
 import { CIAComponent, SecurityLevel } from "../../../types/cia";
-import { mockWidgetProps } from "../../../utils/testUtils";
 import {
   CIAComponentDetails,
   CIAComponentDetailsProps,

@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { mockWidgetProps } from "../../../utils/testUtils";
 import { CIAComponentType } from "../../../types/cia-services";
 import { SecurityLevel } from "../../../types/cia";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import AvailabilityImpactWidget from "./AvailabilityImpactWidget";
 
 // Mock useCIAContentService hook
