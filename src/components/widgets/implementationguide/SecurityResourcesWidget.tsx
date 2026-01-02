@@ -316,7 +316,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
         error={serviceError}
       >
       <div 
-        className="p-sm"
+        className="p-md sm:p-lg"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Security Resources",
@@ -471,7 +471,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
               {/* Empty state */}
               {filteredResources.length === 0 && (
                 <div
-                  className="p-sm bg-gray-50 dark:bg-gray-800 rounded-lg text-center text-gray-500 dark:text-gray-400"
+                  className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg text-center text-gray-500 dark:text-gray-400"
                   data-testid={SECURITY_RESOURCES_WIDGET_IDS.label('no-resources')}
                 >
                   <p className="mb-sm">No resources found.</p>
@@ -485,7 +485,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
               {/* Resources grid */}
               {filteredResources.length > 0 && (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-sm">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
                   {currentResources.map((resource, index) => (
                     <ResourceCard
                       key={`${resource.url || ""}-${index}`}
@@ -550,9 +550,9 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
             <div className="mt-lg">
               <h3 className="text-lg font-medium mb-md">Implementation Tips</h3>
 
-              <div className="space-y-sm">
+              <div className="space-y-4">
                 {/* General implementation tips */}
-                <div className="p-sm bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md">
+                <div className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md">
                   <h4 className="text-md font-medium mb-sm">
                     Getting Started with Implementation
                   </h4>
@@ -579,10 +579,10 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
                 {/* Component-specific tips */}
                 {implementationGuides.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-sm">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
                     {/* Confidentiality Implementation */}
                     {implementationGuides[2] && (
-                      <div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light dark:border-primary-dark">
+                      <div className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light dark:border-primary-dark">
                         <h4 className="text-md font-medium mb-sm text-primary-dark dark:text-primary-light flex items-center">
                           <span className="mr-sm">🔒</span>Confidentiality (
                           {confidentialityLevel})
@@ -608,7 +608,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
                     {/* Integrity Implementation */}
                     {implementationGuides[1] && (
-                      <div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light dark:border-success-dark">
+                      <div className="p-md bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light dark:border-success-dark">
                         <h4 className="text-md font-medium mb-sm text-green-700 dark:text-green-300 flex items-center">
                           <span className="mr-sm">✓</span>Integrity (
                           {integrityLevel})
@@ -634,7 +634,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
 
                     {/* Availability Implementation */}
                     {implementationGuides[0] && (
-                      <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light dark:border-info-dark">
+                      <div className="p-md bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light dark:border-info-dark">
                         <h4 className="text-md font-medium mb-sm text-blue-700 dark:text-blue-300 flex items-center">
                           <span className="mr-sm">⏱️</span>Availability (
                           {availabilityLevel})
@@ -661,7 +661,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                 )}
 
                 {/* Common Implementation Challenges */}
-                <div className="p-sm bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg border border-yellow-100 dark:border-yellow-800">
+                <div className="p-md bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg border border-yellow-100 dark:border-yellow-800">
                   <h4 className="text-md font-medium mb-sm text-yellow-700 dark:text-yellow-300 flex items-center">
                     <span className="mr-sm">⚠️</span>Common Implementation
                     Challenges

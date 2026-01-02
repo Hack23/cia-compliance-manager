@@ -309,7 +309,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         error={error}
       >
       <div 
-        className="p-sm"
+        className="p-md sm:p-lg"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Business Value Creation",
@@ -373,13 +373,13 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 
           {/* Business value metrics grid */}
           <div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-sm"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md"
             data-testid={VALUE_CREATION_WIDGET_IDS.section('metrics-grid')}
           >
             {valueMetrics.map((metric, index) => (
               <div
                 key={index}
-                className="p-sm bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md border border-neutral-light dark:border-neutral-dark"
+                className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md border border-neutral-light dark:border-neutral-dark"
                 data-testid={`value-metric-${index}`}
               >
                 <div className="flex items-center mb-sm">

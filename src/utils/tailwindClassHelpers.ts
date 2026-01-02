@@ -246,16 +246,6 @@ export const WidgetClasses = {
    */
   dividerVertical: 'border-l border-gray-200 dark:border-gray-700 mx-md',
   
-  // ========================================
-  // Tab patterns
-  // ========================================
-  
-  /**
-   * Tab list container styling
-   * Bottom border with small margin below for tab content
-   */
-  tabList: 'flex space-x-2 border-b border-gray-200 dark:border-gray-700 mb-sm',
-  
 } as const;
 
 /**
