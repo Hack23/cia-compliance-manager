@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import SecurityLevelWidget from "./SecurityLevelWidget";
 
 describe("SecurityLevelWidget", () => {
@@ -11,9 +12,7 @@ describe("SecurityLevelWidget", () => {
 
   // Default props for the component
   const defaultProps = {
-    availabilityLevel: "Moderate" as SecurityLevel,
-    integrityLevel: "Moderate" as SecurityLevel,
-    confidentialityLevel: "Moderate" as SecurityLevel,
+    ...mockWidgetProps,
     onAvailabilityChange: mockAvailabilityChange,
     onIntegrityChange: mockIntegrityChange,
     onConfidentialityChange: mockConfidentialityChange,

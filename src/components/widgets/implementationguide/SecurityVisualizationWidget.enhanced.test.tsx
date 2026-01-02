@@ -3,6 +3,7 @@ import type { Chart } from "chart.js";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { setupChartEnvironment } from "../../../tests/testUtils/chartTestUtils";
 import { SecurityLevel } from "../../../types/cia";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import SecurityVisualizationWidget from "./SecurityVisualizationWidget"; // Fixed import syntax
 
 // Add proper Chart type declaration
@@ -20,9 +21,7 @@ setupChartEnvironment();
 
 describe("SecurityVisualizationWidget Enhanced Tests", () => {
   const defaultProps = {
-    availabilityLevel: "moderate" as SecurityLevel,
-    integrityLevel: "moderate" as SecurityLevel,
-    confidentialityLevel: "moderate" as SecurityLevel,
+    ...mockWidgetProps,
     testId: "security-visualization-widget",
   };
 
@@ -51,10 +50,10 @@ describe("SecurityVisualizationWidget Enhanced Tests", () => {
     );
     expect(chartElement).toBeInTheDocument();
 
-    // Check for radar values - updated to match actual lowercase values
+    // Check for radar values - mockWidgetProps uses PascalCase SecurityLevel values
     const availabilityValue = screen.getByTestId("radar-availability-value");
     expect(availabilityValue).toBeInTheDocument();
-    expect(availabilityValue.textContent).toBe("moderate");
+    expect(availabilityValue.textContent).toBe("Moderate");
   });
 
   it("displays appropriate security levels", () => {

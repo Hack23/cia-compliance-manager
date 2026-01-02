@@ -1,6 +1,8 @@
 import { act, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
+import { COST_ESTIMATION_WIDGET_IDS } from "../../../constants/testIds";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import CostEstimationWidget from "./CostEstimationWidget";
 
 // Mock required hooks and services
@@ -161,22 +163,39 @@ vi.mock("../../../components/common/WidgetContainer", () => ({
 
 describe("CostEstimationWidget", () => {
   const defaultProps = {
-    availabilityLevel: "Moderate" as SecurityLevel,
-    integrityLevel: "Moderate" as SecurityLevel,
-    confidentialityLevel: "Moderate" as SecurityLevel,
-    testId: "widget-cost-estimation",
+    ...mockWidgetProps,
+    testId: COST_ESTIMATION_WIDGET_IDS.root,
   };
 
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it("renders without crashing", async () => {
-    await act(async () => {
-      render(<CostEstimationWidget {...defaultProps} />);
+  describe('Rendering', () => {
+    it("should render with required props", async () => {
+      await act(async () => {
+        render(<CostEstimationWidget {...defaultProps} />);
+      });
+
+      expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+    it('should apply custom className', async () => {
+      await act(async () => {
+        render(<CostEstimationWidget {...defaultProps} className="custom-class" />);
+      });
+
+      expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toHaveClass('custom-class');
+    });
+
+    it('should use custom testId', async () => {
+      const customId = 'custom-cost-id';
+      await act(async () => {
+        render(<CostEstimationWidget {...defaultProps} testId={customId} />);
+      });
+
+      expect(screen.getByTestId(customId)).toBeInTheDocument();
+    });
   });
 
   it("displays implementation and operational costs", async () => {
@@ -186,7 +205,7 @@ describe("CostEstimationWidget", () => {
 
     await waitFor(() => {
       const widgetContent = screen.getByTestId(
-        "widget-cost-estimation"
+        COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
 
       // Check for cost-related terms to be present
@@ -210,7 +229,7 @@ describe("CostEstimationWidget", () => {
     await waitFor(() => {
       // Use the correct testId that matches what's rendered in the component
       const widgetContent = screen.getByTestId(
-        "widget-cost-estimation"
+        COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
 
       // Update the expected pattern to match the actual output
@@ -225,7 +244,7 @@ describe("CostEstimationWidget", () => {
 
     await waitFor(() => {
       const widgetContent = screen.getByTestId(
-        "widget-cost-estimation"
+        COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
 
       // Should mention breakdown categories
@@ -250,7 +269,7 @@ describe("CostEstimationWidget", () => {
     await waitFor(() => {
       // Use the correct testId that matches what's rendered in the component
       firstRenderContent = screen.getByTestId(
-        "widget-cost-estimation"
+        COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
       expect(firstRenderContent).toContain("Moderate");
     });
@@ -268,7 +287,7 @@ describe("CostEstimationWidget", () => {
 
     await waitFor(() => {
       const newContent = screen.getByTestId(
-        "widget-cost-estimation"
+        COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
       // Now TypeScript knows firstRenderContent is a string
       expect(newContent).not.toBe(firstRenderContent);
@@ -292,7 +311,7 @@ describe("CostEstimationWidget", () => {
       );
     });
 
-    expect(screen.getByTestId("widget-cost-estimation")).toHaveClass(
+    expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toHaveClass(
       "custom-class"
     );
   });
@@ -304,7 +323,7 @@ describe("CostEstimationWidget", () => {
 
     await waitFor(() => {
       const widgetContent = screen.getByTestId(
-        "widget-cost-estimation"
+        COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
 
       // Should contain terms related to monthly/annual costs
@@ -320,7 +339,7 @@ describe("CostEstimationWidget", () => {
 
     await waitFor(() => {
       const widgetContent = screen.getByTestId(
-        "widget-cost-estimation"
+        COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
 
       // Look for terms that are actually in the component
@@ -341,7 +360,7 @@ describe("CostEstimationWidget", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
     });
   });
 
@@ -357,7 +376,7 @@ describe("CostEstimationWidget", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
     });
   });
 
@@ -373,7 +392,7 @@ describe("CostEstimationWidget", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
     });
   });
 
@@ -389,7 +408,7 @@ describe("CostEstimationWidget", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
     });
   });
 
@@ -400,7 +419,7 @@ describe("CostEstimationWidget", () => {
 
     await waitFor(() => {
       const widgetContent = screen.getByTestId(
-        "widget-cost-estimation"
+        COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
 
       // Should display FTE-related information
@@ -415,7 +434,7 @@ describe("CostEstimationWidget", () => {
 
     await waitFor(() => {
       const widgetContent = screen.getByTestId(
-        "widget-cost-estimation"
+        COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
 
       // Should display complexity information
@@ -430,7 +449,7 @@ describe("CostEstimationWidget", () => {
 
     await waitFor(() => {
       const widgetContent = screen.getByTestId(
-        "widget-cost-estimation"
+        COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
 
       // Should display expertise information
@@ -442,7 +461,7 @@ describe("CostEstimationWidget", () => {
     render(<CostEstimationWidget {...defaultProps} />);
 
     // Widget should handle loading state gracefully
-    expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+    expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
   });
 
   it("handles service error state", async () => {
@@ -450,7 +469,7 @@ describe("CostEstimationWidget", () => {
 
     // Widget should handle error state gracefully
     await waitFor(() => {
-      expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
     });
   });
 
@@ -466,7 +485,7 @@ describe("CostEstimationWidget", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
     });
   });
 
@@ -477,7 +496,7 @@ describe("CostEstimationWidget", () => {
 
     await waitFor(() => {
       const widgetContent = screen.getByTestId(
-        "widget-cost-estimation"
+        COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
 
       // Should show breakdown by CIA components
@@ -495,7 +514,7 @@ describe("CostEstimationWidget", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
     });
 
     // Rerender with higher security levels
@@ -510,7 +529,7 @@ describe("CostEstimationWidget", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+      expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
     });
   });
 
@@ -527,7 +546,7 @@ describe("CostEstimationWidget", () => {
       );
 
       await waitFor(() => {
-        expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+        expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
       });
 
       unmount();
@@ -549,7 +568,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const widgetContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(widgetContent).toMatch(/CAPEX|OPEX/i);
       });
@@ -567,7 +586,7 @@ describe("CostEstimationWidget", () => {
       });
 
       await waitFor(() => {
-        expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+        expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
       });
     });
 
@@ -584,7 +603,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const widgetContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(widgetContent).toMatch(/complexity/i);
       });
@@ -603,7 +622,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const widgetContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(widgetContent).toMatch(/moderate/i);
       });
@@ -625,7 +644,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const widgetContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(widgetContent).toMatch(/expertise/i);
       });
@@ -644,7 +663,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const widgetContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(widgetContent).toMatch(/expertise/i);
       });
@@ -663,7 +682,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const widgetContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(widgetContent).toMatch(/expertise/i);
       });
@@ -682,7 +701,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const widgetContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(widgetContent).toMatch(/expertise/i);
       });
@@ -701,7 +720,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const widgetContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(widgetContent).toMatch(/expertise/i);
       });
@@ -720,7 +739,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const widgetContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(widgetContent).toMatch(/expertise/i);
       });
@@ -742,7 +761,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const widgetContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(widgetContent).toMatch(/FTE|fte|personnel/i);
       });
@@ -761,7 +780,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const widgetContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(widgetContent).toMatch(/FTE|fte|personnel/i);
       });
@@ -779,7 +798,7 @@ describe("CostEstimationWidget", () => {
       let lowLevelContent = "";
       await waitFor(() => {
         lowLevelContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent!;
         expect(lowLevelContent).toMatch(/FTE/i);
       });
@@ -796,7 +815,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const highLevelContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(highLevelContent).toBeDefined();
       });
@@ -836,7 +855,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const widgetContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(widgetContent).toMatch(/%/);
       });
@@ -851,7 +870,7 @@ describe("CostEstimationWidget", () => {
       });
 
       await waitFor(() => {
-        const widget = screen.getByTestId("widget-cost-estimation");
+        const widget = screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root);
         expect(widget).toBeInTheDocument();
         // Widget should have text content
         expect(widget.textContent).toBeTruthy();
@@ -865,7 +884,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const widgetContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(widgetContent).toMatch(
           /implementation cost|annual operations|total first year cost/i
@@ -888,7 +907,7 @@ describe("CostEstimationWidget", () => {
       });
 
       await waitFor(() => {
-        expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+        expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
       });
     });
 
@@ -904,7 +923,7 @@ describe("CostEstimationWidget", () => {
       });
 
       await waitFor(() => {
-        expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+        expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
       });
     });
 
@@ -920,7 +939,7 @@ describe("CostEstimationWidget", () => {
       });
 
       await waitFor(() => {
-        expect(screen.getByTestId("widget-cost-estimation")).toBeInTheDocument();
+        expect(screen.getByTestId(COST_ESTIMATION_WIDGET_IDS.root)).toBeInTheDocument();
       });
     });
   });
@@ -934,7 +953,7 @@ describe("CostEstimationWidget", () => {
 
       await waitFor(() => {
         const widgetContent = screen.getByTestId(
-          "widget-cost-estimation"
+          COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
         expect(widgetContent).toMatch(/cost notes|estimates/i);
       });

@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
 import { ComplianceStatusType } from "../../../types/compliance";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import {
   SecurityComplianceTab,
   SecurityComplianceTabProps,
@@ -17,9 +18,7 @@ describe("SecurityComplianceTab", () => {
   };
 
   const defaultProps: SecurityComplianceTabProps = {
-    availabilityLevel: "Moderate" as SecurityLevel,
-    integrityLevel: "Moderate" as SecurityLevel,
-    confidentialityLevel: "Moderate" as SecurityLevel,
+    ...mockWidgetProps,
     securityScore: 75,
     complianceStatus: defaultComplianceStatus,
     testId: "security-compliance",

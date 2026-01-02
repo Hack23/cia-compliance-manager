@@ -10,10 +10,26 @@ describe("ImpactWidget", () => {
   };
 
   describe("Rendering", () => {
-    it("renders availability widget correctly", async () => {
+    it("should render with required props", async () => {
       render(<ImpactWidget {...defaultProps} />);
       await waitFor(() => {
         expect(screen.getByText(/Availability Impact/i)).toBeInTheDocument();
+      });
+    });
+
+    it("should apply custom className", async () => {
+      const { container } = render(
+        <ImpactWidget {...defaultProps} className="custom-class" />
+      );
+      await waitFor(() => {
+        expect(container.querySelector(".custom-class")).toBeInTheDocument();
+      });
+    });
+
+    it("should use custom testId", async () => {
+      render(<ImpactWidget {...defaultProps} testId="custom-test-id" />);
+      await waitFor(() => {
+        expect(screen.getByTestId("widget-container-loading-container-custom-test-id")).toBeInTheDocument();
       });
     });
 
@@ -40,19 +56,17 @@ describe("ImpactWidget", () => {
         expect(screen.getByText(/Confidentiality Impact/i)).toBeInTheDocument();
       });
     });
+  });
 
+  describe("Data Display", () => {
     it("displays business impact section when available", async () => {
       render(<ImpactWidget {...defaultProps} />);
       await waitFor(() => {
-        // Check for the SLA metrics section which indicates component loaded
         expect(screen.getByText("SLA Metrics")).toBeInTheDocument();
       });
-      // Now check for business impact
       expect(screen.getAllByText(/Business Impact/i).length).toBeGreaterThan(0);
     });
-  });
 
-  describe("Component-specific metrics", () => {
     it("displays availability-specific metrics", async () => {
       render(<ImpactWidget component="availability" level="High" />);
       await waitFor(() => {
@@ -78,8 +92,8 @@ describe("ImpactWidget", () => {
     });
   });
 
-  describe("Extended details and recommendations", () => {
-    it("shows recommendations for integrity when showExtendedDetails is true", async () => {
+  describe("Extended Details", () => {
+    it("shows recommendations when showExtendedDetails is true", async () => {
       render(
         <ImpactWidget
           component="integrity"
@@ -88,12 +102,11 @@ describe("ImpactWidget", () => {
         />
       );
       await waitFor(() => {
-        // Recommendations should be visible
         expect(screen.getByText("Recommendations")).toBeInTheDocument();
       });
     });
 
-    it("hides recommendations for integrity when showExtendedDetails is false", async () => {
+    it("hides recommendations when showExtendedDetails is false", async () => {
       render(
         <ImpactWidget
           component="integrity"
@@ -102,40 +115,18 @@ describe("ImpactWidget", () => {
         />
       );
       await waitFor(() => {
-        // Wait for content to load
         expect(screen.getByText("Data Integrity Metrics")).toBeInTheDocument();
       });
-      // Recommendations should not be visible
       expect(screen.queryByText("Recommendations")).not.toBeInTheDocument();
     });
   });
 
-  describe("Props and customization", () => {
-    it("accepts custom className", async () => {
-      const { container } = render(
-        <ImpactWidget {...defaultProps} className="custom-class" />
-      );
-      await waitFor(() => {
-        expect(container.querySelector(".custom-class")).toBeInTheDocument();
-      });
-    });
-
-    it("accepts custom testId", async () => {
-      render(<ImpactWidget {...defaultProps} testId="custom-test-id" />);
-      await waitFor(() => {
-        // The testId is used in the WidgetContainer
-        expect(screen.getByTestId("widget-container-loading-container-custom-test-id")).toBeInTheDocument();
-      });
-    });
-  });
-
-  describe("Styling and layout", () => {
+  describe("Styling", () => {
     it("applies correct color classes for availability", async () => {
       const { container } = render(
         <ImpactWidget component="availability" level="High" />
       );
       await waitFor(() => {
-        // Check that the component has the availability-specific class
         expect(container.querySelector(".cia-availability")).toBeInTheDocument();
       });
     });
@@ -145,13 +136,12 @@ describe("ImpactWidget", () => {
         <ImpactWidget component="confidentiality" level="High" />
       );
       await waitFor(() => {
-        // Check that the component has the overflow-visible class
         expect(container.querySelector(".overflow-visible")).toBeInTheDocument();
       });
     });
   });
 
-  describe("Security levels", () => {
+  describe("Edge Cases", () => {
     const levels: SecurityLevel[] = ["None", "Low", "Moderate", "High", "Very High"];
 
     levels.forEach((level) => {
@@ -161,6 +151,17 @@ describe("ImpactWidget", () => {
           expect(screen.getByText(/Availability Impact/i)).toBeInTheDocument();
         });
       });
+    });
+  });
+
+  describe("Accessibility", () => {
+    it("should have proper semantic structure", async () => {
+      const { container } = render(<ImpactWidget {...defaultProps} />);
+      await waitFor(() => {
+        expect(screen.getByText(/Availability Impact/i)).toBeInTheDocument();
+      });
+      // Widget should render in a container
+      expect(container.firstChild).toBeInTheDocument();
     });
   });
 });
