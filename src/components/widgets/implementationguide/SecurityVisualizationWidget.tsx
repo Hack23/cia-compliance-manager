@@ -148,7 +148,7 @@ const SecurityVisualizationWidget: React.FC<
         error={error}
       >
       <div 
-        className="p-md sm:p-lg"
+        className="p-sm"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Security Visualization",

@@ -221,7 +221,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         error={serviceError}
       >
       <div 
-        className="p-md sm:p-lg"
+        className="p-sm"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Cost Estimation",

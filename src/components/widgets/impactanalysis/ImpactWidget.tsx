@@ -307,7 +307,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
         error={error}
       >
         <div
-          className={cn("p-md sm:p-lg", config.contentClassName)}
+          className={cn("p-sm", config.contentClassName)}
           role="region"
           aria-label={getWidgetAriaDescription(config.defaultTitle, config.ariaDescription)}
         >

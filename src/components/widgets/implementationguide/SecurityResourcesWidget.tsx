@@ -316,7 +316,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
         error={serviceError}
       >
       <div 
-        className="p-md sm:p-lg"
+        className="p-sm"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Security Resources",
@@ -550,7 +550,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
             <div className="mt-lg">
               <h3 className="text-lg font-medium mb-md">Implementation Tips</h3>
 
-              <div className="space-y-4">
+              <div className="space-y-sm">
                 {/* General implementation tips */}
                 <div className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md">
                   <h4 className="text-md font-medium mb-sm">

@@ -220,7 +220,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         testId={testId}
       >
       <div 
-        className="p-md sm:p-lg"
+        className="p-sm"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Security Level Configuration",
@@ -487,7 +487,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
               data-testid={`${activeComponent}-details-content`}
             >
               {activeDetails ? (
-                <div className="space-y-4">
+                <div className="space-y-sm">
                   <h4
                     className={`font-medium ${getComponentColor(
                       activeComponent
