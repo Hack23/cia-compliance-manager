@@ -490,7 +490,7 @@ npm run lighthouse
 | 🎯 **Feature** | 📋 **Implementation** | ✅ **Status** | 🔗 **Evidence** |
 |---------------|---------------------|--------------|----------------|
 | **ARIA Labels** | All interactive elements | ✅ Complete | 11/11 widgets |
-| **ARIA Descriptions** | Complex widgets | ✅ Complete | [Accessibility utils](../../src/utils/accessibility.ts) |
+| **ARIA Descriptions** | Complex widgets | ✅ Complete | [Accessibility utils](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/accessibility.ts) |
 | **ARIA Live Regions** | Status messages | ✅ Complete | Toast & ErrorMessage |
 | **ARIA Roles** | Custom components | ✅ Complete | All widgets |
 | **ARIA States** | Dynamic updates | ✅ Complete | `aria-expanded`, `aria-pressed` |
@@ -503,11 +503,11 @@ npm run lighthouse
 | 🎯 **Feature** | 📋 **Implementation** | ✅ **Status** | 🔗 **Evidence** |
 |---------------|---------------------|--------------|----------------|
 | **Tab Navigation** | Logical tab order | ✅ Complete | All pages |
-| **Arrow Key Navigation** | Lists and dropdowns | ✅ Complete | [Keyboard utils](../../src/utils/accessibility.ts) |
+| **Arrow Key Navigation** | Lists and dropdowns | ✅ Complete | [Keyboard utils](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/accessibility.ts) |
 | **Skip Links** | Bypass navigation | ✅ Complete | Main content skip link |
 | **Focus Indicators** | Visible focus | ✅ Complete | High-contrast rings |
 | **Focus Management** | Modal dialogs | ✅ Complete | Focus trap implementation |
-| **Keyboard Shortcuts** | Quick actions | ✅ Planned | [Keyboard shortcuts](../../src/hooks/useKeyboardShortcuts.ts) |
+| **Keyboard Shortcuts** | Quick actions | ✅ Planned | [Keyboard shortcuts](https://github.com/Hack23/cia-compliance-manager/blob/main/src/hooks/useKeyboardShortcuts.ts) |
 
 ---
 
@@ -618,7 +618,7 @@ npm run lighthouse
 - ARIA 1.2
 
 **Additional Information:**
-- Accessibility utilities: [src/utils/accessibility.ts](../../src/utils/accessibility.ts)
+- Accessibility utilities: [src/utils/accessibility.ts](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/accessibility.ts)
 - Widget accessibility guide: [WIDGET_ACCESSIBILITY_GUIDE.md](./WIDGET_ACCESSIBILITY_GUIDE.md)
 - Complete accessibility report: [ACCESSIBILITY_REPORT.md](./ACCESSIBILITY_REPORT.md)
 

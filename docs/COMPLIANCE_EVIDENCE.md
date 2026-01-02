@@ -176,8 +176,8 @@ curl -s https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compli
 | 📊 **Evidence Type** | 🎯 **Requirement** | ✅ **Current Status** | 🔗 **Evidence Location** |
 |---------------------|-------------------|---------------------|------------------------|
 | **WCAG 2.1 AA Compliance** | Level AA conformance | ✅ Implemented | [Accessibility Report](./ACCESSIBILITY_REPORT.md) |
-| **ARIA Implementation** | Semantic HTML + ARIA | ✅ Complete | [Accessibility Utilities](../../src/utils/accessibility.ts) |
-| **Color Contrast** | 4.5:1 minimum | ⏳ Validation pending | [Contrast validation utilities](../../src/utils/accessibility.ts) |
+| **ARIA Implementation** | Semantic HTML + ARIA | ✅ Complete | [Accessibility Utilities](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/accessibility.ts) |
+| **Color Contrast** | 4.5:1 minimum | ⏳ Validation pending | [Contrast validation utilities](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/accessibility.ts) |
 | **Keyboard Navigation** | Full keyboard access | ✅ Complete | [Widget Accessibility Guide](./WIDGET_ACCESSIBILITY_GUIDE.md) |
 | **Screen Reader Testing** | NVDA, VoiceOver tested | ✅ Validated | [Accessibility Report](./ACCESSIBILITY_REPORT.md) |
 | **Automated Testing** | axe-core integration | ✅ Implemented | Cypress accessibility tests |
@@ -204,11 +204,11 @@ curl -s https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compli
 | 📊 **Evidence Type** | 🎯 **Implementation** | ✅ **Current Status** | 🔗 **Evidence Location** |
 |---------------------|---------------------|---------------------|------------------------|
 | **Error Boundaries** | React Error Boundaries | ✅ 11/11 widgets | [Error Handling](./ERROR_HANDLING.md) |
-| **Centralized Error Service** | ErrorService with logging | ✅ Implemented | [ErrorService](../../src/services/ErrorService.ts) |
-| **User-Friendly Messages** | ErrorMessage component | ✅ Implemented | [ErrorMessage component](../../src/components/common/ErrorMessage.tsx) |
+| **Centralized Error Service** | ErrorService with logging | ✅ Implemented | [ErrorService](https://github.com/Hack23/cia-compliance-manager/blob/main/src/services/ErrorService.ts) |
+| **User-Friendly Messages** | ErrorMessage component | ✅ Implemented | [ErrorMessage component](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/common/ErrorMessage.tsx) |
 | **Error Recovery** | Graceful degradation | ✅ Implemented | Widget-level recovery |
-| **Error Context** | Application-wide error state | ✅ Implemented | [ErrorProvider](../../src/contexts/ErrorContext.tsx) |
-| **Error Monitoring** | Toast notifications | ✅ Implemented | [Toast component](../../src/components/common/Toast.tsx) |
+| **Error Context** | Application-wide error state | ✅ Implemented | [ErrorProvider](https://github.com/Hack23/cia-compliance-manager/blob/main/src/contexts/ErrorContext.tsx) |
+| **Error Monitoring** | Toast notifications | ✅ Implemented | [Toast component](https://github.com/Hack23/cia-compliance-manager/blob/main/src/components/common/Toast.tsx) |
 
 **🎯 Compliance Status:** ✅ **MEETS** Error handling security requirements
 
@@ -226,12 +226,12 @@ curl -s https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compli
 
 | 📊 **Evidence Type** | 🎯 **Implementation** | ✅ **Current Status** | 🔗 **Evidence Location** |
 |---------------------|---------------------|---------------------|------------------------|
-| **Design Tokens** | Centralized token system | ✅ Implemented | [Design Tokens](../../src/constants/designTokens.ts) |
-| **TailwindCSS Integration** | Extended theme configuration | ✅ Implemented | [tailwind.config.js](../../tailwind.config.js) |
+| **Design Tokens** | Centralized token system | ✅ Implemented | [Design Tokens](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/designTokens.ts) |
+| **TailwindCSS Integration** | Extended theme configuration | ✅ Implemented | [tailwind.config.js](https://github.com/Hack23/cia-compliance-manager/blob/main/tailwind.config.js) |
 | **Consistent Spacing** | 8px grid system | ✅ Applied | [Design System](./DESIGN_SYSTEM.md) |
-| **Typography Scale** | Semantic font sizes | ✅ Implemented | [Design Tokens](../../src/constants/designTokens.ts) |
-| **Color Palette** | Semantic color system | ✅ Defined | [Design Tokens](../../src/constants/designTokens.ts) |
-| **Component Library** | Reusable common components | ✅ 11/11 widgets | [Common Components](../../src/components/common/) |
+| **Typography Scale** | Semantic font sizes | ✅ Implemented | [Design Tokens](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/designTokens.ts) |
+| **Color Palette** | Semantic color system | ✅ Defined | [Design Tokens](https://github.com/Hack23/cia-compliance-manager/blob/main/src/constants/designTokens.ts) |
+| **Component Library** | Reusable common components | ✅ 11/11 widgets | [Common Components](https://github.com/Hack23/cia-compliance-manager/tree/main/src/components/common) |
 
 **🎯 Compliance Status:** ✅ **MEETS** Design consistency requirements
 
@@ -313,7 +313,7 @@ curl -s https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compli
 # Access live coverage report
 open https://hack23.github.io/cia-compliance-manager/docs/coverage/
 
-# Verify metrics: Line 83%, Branch 75.39%, Function 85.62%
+# Verify metrics: Line 83.81%, Branch 76.15%, Functions 86.06%
 ```
 
 **Step 2: Verify Security Scanning**
