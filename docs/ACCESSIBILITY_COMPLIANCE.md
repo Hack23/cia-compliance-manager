@@ -564,7 +564,7 @@ npm run lighthouse
 
 | 🎯 **NIST 800-53** | 📋 **ISO 27001** | 🎯 **CIS Controls** | 🔗 **Implementation** |
 |-------------------|-----------------|-------------------|---------------------|
-| SC-20 | A.8.11 | 14.6 | Accessibility features |
+| No direct NIST 800-53 mapping (WCAG 2.1 / Section 508 accessibility requirement) | A.8.11 | 14.6 | Accessibility features |
 | IA-11 | A.9.2.6 | 5.1 | Alternative authentication |
 
 **Related ISMS Policies:**
