@@ -453,7 +453,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
                 className="mb-lg"
                 testId={testIds.widgetIds.section("privacy-impact")}
               >
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-sm">
                   <MetricCard
                     label="Privacy Impact"
                     value={metrics.data.privacyImpact}
