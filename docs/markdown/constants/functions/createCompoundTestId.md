@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.4**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.5**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **createCompoundTestId**(`prefix`, `suffix`): `string`
 
-Defined in: [constants/testIds.ts:1118](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/constants/testIds.ts#L1118)
+Defined in: [constants/testIds.ts:1163](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/constants/testIds.ts#L1163)
 
 Create a compound test ID by combining a prefix and a suffix
 

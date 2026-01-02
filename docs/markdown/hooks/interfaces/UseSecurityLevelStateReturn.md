@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.4**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.5**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: UseSecurityLevelStateReturn
 
-Defined in: [hooks/useSecurityLevelState.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/hooks/useSecurityLevelState.ts#L23)
+Defined in: [hooks/useSecurityLevelState.ts:23](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/hooks/useSecurityLevelState.ts#L23)
 
 Return type for useSecurityLevelState hook
 
@@ -16,7 +16,7 @@ Return type for useSecurityLevelState hook
 
 > **getLevel**: (`component`) => [`SecurityLevel`](../../types/cia/type-aliases/SecurityLevel.md)
 
-Defined in: [hooks/useSecurityLevelState.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/hooks/useSecurityLevelState.ts#L34)
+Defined in: [hooks/useSecurityLevelState.ts:34](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/hooks/useSecurityLevelState.ts#L34)
 
 Gets security level for a specific component
 
@@ -36,7 +36,7 @@ Gets security level for a specific component
 
 > **levels**: [`SecurityLevelState`](SecurityLevelState.md)
 
-Defined in: [hooks/useSecurityLevelState.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/hooks/useSecurityLevelState.ts#L25)
+Defined in: [hooks/useSecurityLevelState.ts:25](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/hooks/useSecurityLevelState.ts#L25)
 
 Current security levels for all components
 
@@ -46,7 +46,7 @@ Current security levels for all components
 
 > **resetLevels**: (`defaultLevel?`) => `void`
 
-Defined in: [hooks/useSecurityLevelState.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/hooks/useSecurityLevelState.ts#L31)
+Defined in: [hooks/useSecurityLevelState.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/hooks/useSecurityLevelState.ts#L31)
 
 Resets all security levels to default
 
@@ -66,7 +66,7 @@ Resets all security levels to default
 
 > **setLevel**: (`component`, `level`) => `void`
 
-Defined in: [hooks/useSecurityLevelState.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/hooks/useSecurityLevelState.ts#L28)
+Defined in: [hooks/useSecurityLevelState.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/hooks/useSecurityLevelState.ts#L28)
 
 Updates security level for a specific component
 

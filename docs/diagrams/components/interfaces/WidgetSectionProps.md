@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.4**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.5**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetSectionProps
 
-Defined in: [types/componentPropExports.ts:328](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L328)
+Defined in: [types/componentPropExports.ts:328](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L328)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:328](https://github.com/Hack23/cia-co
 
 > `optional` **ariaLabelledBy**: `string`
 
-Defined in: [types/componentPropExports.ts:362](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L362)
+Defined in: [types/componentPropExports.ts:362](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L362)
 
 Optional aria-labelledby for accessibility
 
@@ -24,7 +24,7 @@ Optional aria-labelledby for accessibility
 
 > **children**: `ReactNode`
 
-Defined in: [types/componentPropExports.ts:337](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L337)
+Defined in: [types/componentPropExports.ts:337](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L337)
 
 Section content
 
@@ -34,7 +34,7 @@ Section content
 
 > `optional` **className**: `string`
 
-Defined in: [types/componentPropExports.ts:352](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L352)
+Defined in: [types/componentPropExports.ts:352](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L352)
 
 Optional CSS class
 
@@ -44,7 +44,7 @@ Optional CSS class
 
 > `optional` **icon**: `ReactNode`
 
-Defined in: [types/componentPropExports.ts:347](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L347)
+Defined in: [types/componentPropExports.ts:347](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L347)
 
 Optional icon
 
@@ -54,7 +54,7 @@ Optional icon
 
 > `optional` **subtitle**: `string`
 
-Defined in: [types/componentPropExports.ts:342](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L342)
+Defined in: [types/componentPropExports.ts:342](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L342)
 
 Optional subtitle
 
@@ -64,7 +64,7 @@ Optional subtitle
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:357](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L357)
+Defined in: [types/componentPropExports.ts:357](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L357)
 
 Test ID
 
@@ -74,7 +74,7 @@ Test ID
 
 > **title**: `string`
 
-Defined in: [types/componentPropExports.ts:332](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L332)
+Defined in: [types/componentPropExports.ts:332](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L332)
 
 Section title
 
@@ -84,6 +84,6 @@ Section title
 
 > `optional` **variant**: `"success"` \| `"info"` \| `"warning"` \| `"error"` \| `"primary"` \| `"default"`
 
-Defined in: [types/componentPropExports.ts:367](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/types/componentPropExports.ts#L367)
+Defined in: [types/componentPropExports.ts:367](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L367)
 
 Section background color variant

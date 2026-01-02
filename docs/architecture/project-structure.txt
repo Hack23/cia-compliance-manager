@@ -309,6 +309,7 @@ src/utils/statusUtils.ts
 src/utils/tailwindClassHelpers.test.ts
 src/utils/tailwindClassHelpers.ts
 src/utils/technicalDetailsDefaults.ts
+src/utils/testUtils.tsx
 src/utils/typeGuards.enhanced.test.ts
 src/utils/typeGuards.test.ts
 src/utils/typeGuards.ts

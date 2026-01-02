@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.4**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.5**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **COMMON\_COMPONENT\_TEST\_IDS**: `object`
 
-Defined in: [constants/testIds.ts:751](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/constants/testIds.ts#L751)
+Defined in: [constants/testIds.ts:751](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/constants/testIds.ts#L751)
 
 ## Type Declaration
 
@@ -48,6 +48,10 @@ Defined in: [constants/testIds.ts:751](https://github.com/Hack23/cia-compliance-
 
 > **LOADING**: `string` = `"loading-indicator"`
 
+### METRIC\_CARD
+
+> **METRIC\_CARD**: `string` = `"metric-card"`
+
 ### METRICS\_CARD
 
 > **METRICS\_CARD**: `string` = `"metrics-card"`
@@ -68,6 +72,10 @@ Defined in: [constants/testIds.ts:751](https://github.com/Hack23/cia-compliance-
 
 > **METRICS\_CARD\_VALUE**: `string` = `"metrics-card-value"`
 
+### RISK\_LEVEL\_BADGE
+
+> **RISK\_LEVEL\_BADGE**: `string` = `"risk-level-badge"`
+
 ### STATUS\_BADGE
 
 > **STATUS\_BADGE**: `string` = `"status-badge"`
@@ -75,6 +83,10 @@ Defined in: [constants/testIds.ts:751](https://github.com/Hack23/cia-compliance-
 ### SUCCESS
 
 > **SUCCESS**: `string` = `"success-message"`
+
+### TAB\_CONTAINER
+
+> **TAB\_CONTAINER**: `string` = `"tab-container"`
 
 ### VALUE\_DISPLAY
 
@@ -92,9 +104,21 @@ Defined in: [constants/testIds.ts:751](https://github.com/Hack23/cia-compliance-
 
 > **WIDGET\_CONTENT**: `string` = `"widget-content"`
 
+### WIDGET\_ERROR\_BOUNDARY
+
+> **WIDGET\_ERROR\_BOUNDARY**: `string` = `"widget-error-boundary"`
+
+### WIDGET\_ERROR\_BOUNDARY\_MESSAGE
+
+> **WIDGET\_ERROR\_BOUNDARY\_MESSAGE**: `string` = `"widget-error-boundary-message"`
+
 ### WIDGET\_HEADER
 
 > **WIDGET\_HEADER**: `string` = `"widget-header"`
+
+### WIDGET\_SECTION
+
+> **WIDGET\_SECTION**: `string` = `"widget-section"`
 
 ### WIDGET\_TITLE
 

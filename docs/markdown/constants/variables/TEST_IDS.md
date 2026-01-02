@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.4**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.5**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > `const` **TEST\_IDS**: `object`
 
-Defined in: [constants/testIds.ts:1075](https://github.com/Hack23/cia-compliance-manager/blob/fba74cc782d525f67b6f2f9479471d38ebdbdb99/src/constants/testIds.ts#L1075)
+Defined in: [constants/testIds.ts:1120](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/constants/testIds.ts#L1120)
 
 Consolidated export of all test IDs for easier imports
 
@@ -1382,6 +1382,10 @@ Use createTestId() instead for consistency
 
 > **MEAN\_RECOVERY\_TIME**: `string` = `"mean-recovery-time"`
 
+### METRIC\_CARD
+
+> **METRIC\_CARD**: `string` = `"metric-card"`
+
 ### METRICS\_CARD
 
 > **METRICS\_CARD**: `string` = `"metrics-card"`
@@ -1614,6 +1618,10 @@ Use createTestId() instead for consistency
 
 > **RISK\_LEVEL**: `string` = `"risk-level"`
 
+### RISK\_LEVEL\_BADGE
+
+> **RISK\_LEVEL\_BADGE**: `string` = `"risk-level-badge"`
+
 ### RISK\_REDUCTION
 
 > **RISK\_REDUCTION**: `string` = `"risk-reduction"`
@@ -1826,6 +1834,10 @@ Use createTestId() instead for consistency
 
 > **TAB\_CONSIDERATIONS**: `string` = `"tab-considerations"`
 
+### TAB\_CONTAINER
+
+> **TAB\_CONTAINER**: `string` = `"tab-container"`
+
 ### TAB\_INTEGRITY
 
 > **TAB\_INTEGRITY**: `string` = `"tab-integrity"`
@@ -2034,6 +2046,14 @@ Convert string to SecurityLevel type safely
 
 > **WIDGET\_CONTENT**: `string` = `"widget-content"`
 
+### WIDGET\_ERROR\_BOUNDARY
+
+> **WIDGET\_ERROR\_BOUNDARY**: `string` = `"widget-error-boundary"`
+
+### WIDGET\_ERROR\_BOUNDARY\_MESSAGE
+
+> **WIDGET\_ERROR\_BOUNDARY\_MESSAGE**: `string` = `"widget-error-boundary-message"`
+
 ### WIDGET\_HEADER
 
 > **WIDGET\_HEADER**: `string` = `"widget-header"`
@@ -2041,6 +2061,10 @@ Convert string to SecurityLevel type safely
 ### WIDGET\_PREFIX
 
 > **WIDGET\_PREFIX**: `string` = `"widget-"`
+
+### WIDGET\_SECTION
+
+> **WIDGET\_SECTION**: `string` = `"widget-section"`
 
 ### WIDGET\_TITLE
 
