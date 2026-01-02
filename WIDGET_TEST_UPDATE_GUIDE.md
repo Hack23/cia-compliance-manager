@@ -38,45 +38,45 @@ All 20 widgets listed below have been updated with standardized test patterns. T
 ## 📋 Widget Reference List (All Updated)
 
 ### Business Value Widgets (1):
-- [ ] `src/components/widgets/businessvalue/ComplianceStatusWidget.test.tsx`
+- [x] `src/components/widgets/businessvalue/ComplianceStatusWidget.test.tsx`
   - Test ID constant: `COMPLIANCE_STATUS_WIDGET_IDS`
   - Expected patterns: compliance status, framework checks, gap analysis
 
 ### Impact Analysis Widgets (4):
-- [ ] `src/components/widgets/impactanalysis/AvailabilityImpactWidget.test.tsx`
+- [x] `src/components/widgets/impactanalysis/AvailabilityImpactWidget.test.tsx`
   - Test ID constant: `AVAILABILITY_IMPACT_WIDGET_IDS`
   - Expected patterns: uptime metrics, RTO/RPO, business continuity
 
-- [ ] `src/components/widgets/impactanalysis/IntegrityImpactWidget.test.tsx`
+- [x] `src/components/widgets/impactanalysis/IntegrityImpactWidget.test.tsx`
   - Test ID constant: `INTEGRITY_IMPACT_WIDGET_IDS`
   - Expected patterns: data validation, audit trails, verification
 
-- [ ] `src/components/widgets/impactanalysis/ConfidentialityImpactWidget.test.tsx`
+- [x] `src/components/widgets/impactanalysis/ConfidentialityImpactWidget.test.tsx`
   - Test ID constant: `CONFIDENTIALITY_IMPACT_WIDGET_IDS`
   - Expected patterns: encryption, access control, data classification
 
-- [ ] `src/components/widgets/impactanalysis/ImpactWidget.test.tsx`
+- [x] `src/components/widgets/impactanalysis/ImpactWidget.test.tsx`
   - Test ID constant: Check testIds.ts for appropriate constant
   - Expected patterns: combined impact analysis, risk assessment
 
 ### Assessment Center Widgets (7):
-- [ ] `src/components/widgets/assessmentcenter/SecuritySummaryWidget.test.tsx`
+- [x] `src/components/widgets/assessmentcenter/SecuritySummaryWidget.test.tsx`
   - Test ID constant: `SECURITY_SUMMARY_WIDGET_IDS`
   - Expected patterns: overall security level, CIA ratings, recommendations
 
-- [ ] `src/components/widgets/assessmentcenter/SecurityLevelWidget.test.tsx`
+- [x] `src/components/widgets/assessmentcenter/SecurityLevelWidget.test.tsx`
   - Test ID constant: `SECURITY_LEVEL_WIDGET_IDS`
   - Expected patterns: level selection, CIA components, indicators
 
-- [ ] `src/components/widgets/assessmentcenter/BusinessImpactAnalysisWidget.test.tsx`
+- [x] `src/components/widgets/assessmentcenter/BusinessImpactAnalysisWidget.test.tsx`
   - Test ID constant: `BUSINESS_IMPACT_WIDGET_IDS`
   - Expected patterns: impact categories, financial/operational/regulatory impacts
 
-- [ ] `src/components/widgets/assessmentcenter/SecurityImplementationTab.test.tsx`
+- [x] `src/components/widgets/assessmentcenter/SecurityImplementationTab.test.tsx`
   - Test ID constant: Check testIds.ts
   - Expected patterns: implementation steps, technical details
 
-- [ ] `src/components/widgets/assessmentcenter/SecurityBusinessTab.test.tsx`
+- [x] `src/components/widgets/assessmentcenter/SecurityBusinessTab.test.tsx`
   - Test ID constant: Check testIds.ts
   - Expected patterns: business considerations, ROI, value creation
 
@@ -204,8 +204,8 @@ it.skip('should have no accessibility violations - KNOWN ISSUE: heading-order', 
 - `waitForWidgetLoad(testId)` - Wait for loading to complete
 - `waitForWidgetContent(testId)` - Wait for content to appear
 - `waitForWidgetError(testId)` - Wait for error state
-- `expectCustomClassName(testId, className)` - Check className
-- `expectCustomTestId(testId)` - Check custom testId
+
+**Note:** Previously documented helpers `expectCustomClassName`, `expectCustomTestId`, `testBaseWidgetProps`, `spyOnConsoleError`, and `testDataFactories` have been removed. Tests now implement these checks inline for better clarity and maintainability.
 
 ### Accessibility Testing
 **Note:** Automated accessibility testing with axe-core has been removed due to license compliance requirements.

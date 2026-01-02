@@ -54,7 +54,7 @@ describe("SecuritySummaryWidget", () => {
   };
 
   describe("Rendering", () => {
-    it("renders without crashing", () => {
+    it("should render with required props", () => {
       render(
         <SecuritySummaryWidget {...defaultProps} className="custom-class" />
       );
