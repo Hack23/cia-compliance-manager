@@ -123,5 +123,3 @@ export async function waitForWidgetError(testId: string) {
     expect(error).toBeInTheDocument();
   }, { timeout: 3000 });
 }
-
-
