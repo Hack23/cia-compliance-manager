@@ -138,7 +138,7 @@ export function meetsContrastRequirement(
 - ✅ Utilities implemented for validation
 - ✅ Design tokens defined for compliant colors
 
-**Test Results:** [Color Contrast Utilities](../../src/utils/accessibility.ts)
+**Test Results:** [Color Contrast Utilities](https://github.com/Hack23/cia-compliance-manager/blob/main/src/utils/accessibility.ts)
 
 ---
 
