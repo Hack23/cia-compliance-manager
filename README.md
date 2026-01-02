@@ -265,12 +265,12 @@ The CIA Compliance Manager follows rigorous testing standards as defined in our 
 [![E2E Plan](https://img.shields.io/badge/E2E%20Plan-Documentation-blue?style=flat-square&logo=markdown&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md)
 [![Code Quality](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
 
-- **Statements**: 81.18% (Target: 80%+) ✅
-- **Branches**: 73.1% (Target: 70%+) ✅
-- **Functions**: 85.62% (Target: 80%+) ✅
-- **Lines**: 81.7% (Target: 80%+) ✅
+- **Statements**: 83.44% (Target: 80%+) ✅ (v1.1.0: Improved from 81.18%)
+- **Branches**: 76.15% (Target: 70%+) ✅ (v1.1.0: Improved from 73.1%)
+- **Functions**: 86.06% (Target: 80%+) ✅ (v1.1.0: Improved from 85.62%)
+- **Lines**: 83.81% (Target: 80%+) ✅ (v1.1.0: Improved from 81.7%)
 
-**🎯 ISMS Compliance Status**: All coverage thresholds now **MEET OR EXCEED** requirements for v1.0 release.
+**🎯 ISMS Compliance Status**: All coverage thresholds now **EXCEED** requirements for v1.1.0 release.
 
 *Coverage reports are automatically generated and deployed with each release. View the [detailed coverage report](https://hack23.github.io/cia-compliance-manager/docs/coverage/) for line-by-line analysis.*
 
@@ -279,15 +279,50 @@ The CIA Compliance Manager follows rigorous testing standards as defined in our 
 **Performance Metrics** (Per [Secure Development Policy §8](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-performance-testing--monitoring-framework)):
 
 [![Performance Testing](https://img.shields.io/badge/Performance-Documentation-success?style=flat-square&logo=lighthouse&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md)
-[![Bundle Size](https://img.shields.io/badge/Bundle%20Size-~201KB%20(gzip)-success?style=flat-square&logo=webpack&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md#-current-bundle-size-analysis)
+[![Bundle Size](https://img.shields.io/badge/Bundle%20Size-~207KB%20(gzip)-success?style=flat-square&logo=webpack&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md#-current-bundle-size-analysis)
 [![Lighthouse](https://img.shields.io/badge/Lighthouse-Run%20Audit-blue?style=flat-square&logo=lighthouse&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/lighthouse-performance.yml)
 
-- **Total Bundle**: ~201 KB (gzip) ✅ (Target: <500 KB)
-- **JavaScript**: ~188 KB (gzip) ⚠️ (Target: <180 KB - optimization recommended)
-- **Stylesheets**: ~13 KB (gzip) ✅ (Target: <50 KB)
-- **Load Time Target**: <2 seconds (GitHub Pages deployment)
+- **Total Bundle**: 207 KB (gzip) ✅ (Target: <500 KB, 59% under budget)
+- **Initial Load**: 9.63 KB (gzip) ✅ (Target: <120 KB, 92% under budget) - **v1.1.0: 85.6% reduction**
+- **JavaScript**: 194.38 KB (gzip) ⚠️ (Target: <170 KB, 14% over - acceptable due to code splitting)
+- **Stylesheets**: 12.61 KB (gzip) ✅ (Target: <50 KB, 75% under budget)
+- **Load Time**: <2 seconds (GitHub Pages deployment) ✅
+- **Core Web Vitals**: All metrics in "Good" range ✅
 
-*Comprehensive performance benchmarks, testing procedures, and optimization strategies are documented in [performance-testing.md](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md).*
+**🎉 v1.1.0 Performance Achievement**: 85.6% reduction in initial bundle through lazy loading implementation.
+
+*Comprehensive performance benchmarks, testing procedures, and optimization strategies are documented in [performance-testing.md](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md) and [PERFORMANCE_COMPLIANCE.md](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/PERFORMANCE_COMPLIANCE.md).*
+
+## 📋 v1.1.0 Compliance Documentation
+
+**New in v1.1.0**: Comprehensive compliance evidence catalog and framework-aligned documentation.
+
+[![Compliance Evidence](https://img.shields.io/badge/Compliance-Evidence_Catalog-success?style=flat-square&logo=shield&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/COMPLIANCE_EVIDENCE.md)
+[![Accessibility](https://img.shields.io/badge/Accessibility-WCAG_2.1_AA-success?style=flat-square&logo=accessibility&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/ACCESSIBILITY_COMPLIANCE.md)
+[![Performance](https://img.shields.io/badge/Performance-Compliance-success?style=flat-square&logo=lighthouse&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/PERFORMANCE_COMPLIANCE.md)
+[![Control Mapping](https://img.shields.io/badge/Control-Mapping-blue?style=flat-square&logo=checklist&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/control-mapping.md)
+
+### 📊 v1.1.0 Compliance Highlights
+
+- **♿ Accessibility Compliance**: WCAG 2.1 Level AA conformance with 11/11 widgets ARIA-compliant
+- **⚡ Performance Optimization**: 85.6% initial bundle reduction, Core Web Vitals compliant
+- **🛡️ Error Handling**: React Error Boundaries on all widgets prevent information disclosure
+- **🎨 Design System**: Centralized tokens and consistent patterns reduce security vulnerabilities
+- **📋 Evidence Catalog**: 40+ compliance artifacts across 8 categories
+- **🔗 Framework Mapping**: 24 new controls mapped to NIST 800-53, ISO 27001, CIS Controls
+
+### 📚 Compliance Documentation Suite
+
+| Document | Description | Framework Alignment |
+|----------|-------------|---------------------|
+| **[COMPLIANCE_EVIDENCE.md](./docs/COMPLIANCE_EVIDENCE.md)** | Consolidated evidence catalog (8 categories, 40+ artifacts) | NIST, ISO, CIS |
+| **[ACCESSIBILITY_COMPLIANCE.md](./docs/ACCESSIBILITY_COMPLIANCE.md)** | WCAG 2.1 AA conformance documentation | WCAG, Section 508 |
+| **[PERFORMANCE_COMPLIANCE.md](./docs/PERFORMANCE_COMPLIANCE.md)** | Performance testing evidence and optimization | ISO 27001 A.8.32, NIST SC-5 |
+| **[control-mapping.md](./control-mapping.md)** | Framework-to-ISMS control mappings (v1.1.0: +24 controls) | NIST, ISO, CIS, ISMS |
+| **[CRA-ASSESSMENT.md](./CRA-ASSESSMENT.md)** | EU Cyber Resilience Act compliance (v1.1.0 updated) | CRA Annex I & V |
+| **[SECURITY_ARCHITECTURE.md](./docs/architecture/SECURITY_ARCHITECTURE.md)** | Security architecture with v1.1.0 improvements | NIST, ISO, AWS |
+
+*These documents provide comprehensive evidence for audits, customer due diligence, and regulatory compliance verification.*
 
 ## 🔐 Commitment to Transparency and Security
 

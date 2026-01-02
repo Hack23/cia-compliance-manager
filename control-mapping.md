@@ -244,6 +244,108 @@ Confidentiality controls ensure information is accessible only to authorized use
 | Physical security controls   | [PE-3 Physical Access Control](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=PE-3)                                               | [Protect.Physical Security.PR.PS](https://www.nist.gov/cyberframework/framework): Physical devices and systems are managed                               | A.11.1.2 Physical entry controls                     | CIS 7.6 | [🔐 Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md) |
 | Secure facilities            | [PE-18 Location of System Components](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=PE-18)                                       | [Protect.Physical Security.PR.PS-4](https://www.nist.gov/cyberframework/framework): Physical access is monitored and managed                             | A.11.1.3 Securing offices, rooms and facilities      | CIS 7.7 | [🔐 Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md) |
 
+---
+
+## 4. ♿ **Accessibility Controls** (New in v1.1.0)
+
+### 📊 **Control Mapping Overview**
+
+Accessibility controls ensure the application is usable by all users, including those using assistive technologies, mapped to WCAG 2.1 Level AA requirements and universal design principles.
+
+**🎯 Business Impact:** Enhanced user experience for users with disabilities, legal compliance, expanded market reach  
+**💰 Investment Level:** CAPEX 15% / OPEX 10%  
+**📋 ISMS Policies:** [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md), [🔐 Information Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Information_Security_Policy.md)
+
+| Technical Control | NIST 800-53 Rev. 5 | NIST CSF 2.0 | ISO 27001:2022 | CIS Controls v8.1 | ISMS Policy Mapping |
+|-------------------|-------------------|--------------|----------------|------------------|---------------------|
+| ARIA labels and descriptions | No direct NIST 800-53 mapping (WCAG 2.1 / Section 508 accessibility requirement) | [Protect.Data Security.PR.DS-6](https://www.nist.gov/cyberframework/framework): Integrity checking mechanisms | A.8.11 Security of development and support processes | CIS 14.6 | [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| Color contrast validation (WCAG 4.5:1) | No direct NIST 800-53 mapping (WCAG 2.1 / Section 508 accessibility requirement) | [Protect.Data Security.PR.DS-6](https://www.nist.gov/cyberframework/framework): Integrity checking mechanisms | A.8.11 Security of development and support | CIS 14.6 | [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| Full keyboard navigation | No direct NIST 800-53 mapping (WCAG 2.1 / Section 508 accessibility requirement) | [Protect.Data Security.PR.DS-6](https://www.nist.gov/cyberframework/framework): Integrity checking mechanisms | A.8.11 Security of development and support | CIS 14.6 | [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| Screen reader support (NVDA, VoiceOver) | No direct NIST 800-53 mapping (WCAG 2.1 / Section 508 accessibility requirement) | [Protect.Data Security.PR.DS-6](https://www.nist.gov/cyberframework/framework): Integrity checking mechanisms | A.8.11 Security of development and support | CIS 14.6 | [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| Accessible error messages | [SI-11 Error Handling](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=SI-11) | [Protect.Data Security.PR.DS-6](https://www.nist.gov/cyberframework/framework): Integrity checking mechanisms | A.14.2.6 Secure development environment | CIS 16.6 | [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| Focus management and visible indicators | No direct NIST 800-53 mapping (WCAG 2.1 / Section 508 accessibility requirement) | [Protect.Identity Management.PR.IM-4](https://www.nist.gov/cyberframework/framework): Access permissions managed | A.9.2.2 User access provisioning | CIS 5.1 | [🔑 Access Control Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Access_Control_Policy.md) |
+
+**📊 Evidence:** [ACCESSIBILITY_COMPLIANCE.md](./docs/ACCESSIBILITY_COMPLIANCE.md), [ACCESSIBILITY_REPORT.md](./docs/ACCESSIBILITY_REPORT.md)
+
+**🎯 Framework Compliance:** WCAG 2.1 Level AA, Section 508, EN 301 549
+
+---
+
+## 5. ⚡ **Performance Controls** (New in v1.1.0)
+
+### 📊 **Control Mapping Overview**
+
+Performance controls ensure optimal application responsiveness and resource efficiency, mapped to capacity management and availability requirements.
+
+**🎯 Business Impact:** Enhanced user experience, reduced bandwidth costs, improved SEO, better availability  
+**💰 Investment Level:** CAPEX 10% / OPEX 5%  
+**📋 ISMS Policies:** [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md), [🔄 Business Continuity Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Business_Continuity_Plan.md)
+
+| Technical Control | NIST 800-53 Rev. 5 | NIST CSF 2.0 | ISO 27001:2022 | CIS Controls v8.1 | ISMS Policy Mapping |
+|-------------------|-------------------|--------------|----------------|------------------|---------------------|
+| Bundle size optimization (<500 KB) | [SC-5 Denial of Service Protection](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=SC-5) | [Protect.Data Security.PR.DS-4](https://www.nist.gov/cyberframework/framework): Adequate capacity maintained | A.12.1.3 Capacity management | CIS 8.8 | [🔄 Business Continuity Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Business_Continuity_Plan.md) |
+| Lazy loading for non-critical resources | [SC-5 Denial of Service Protection](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=SC-5) | [Protect.Data Security.PR.DS-4](https://www.nist.gov/cyberframework/framework): Adequate capacity maintained | A.12.1.3 Capacity management | CIS 8.8 | [🔄 Business Continuity Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Business_Continuity_Plan.md) |
+| Code splitting and caching strategy | [SC-6 Resource Availability](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=SC-6) | [Protect.Data Security.PR.DS-4](https://www.nist.gov/cyberframework/framework): Adequate capacity maintained | A.12.1.3 Capacity management | CIS 12.2 | [🌐 Network Security Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Network_Security_Policy.md) |
+| Performance monitoring (Lighthouse) | [SI-4 System Monitoring](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=SI-4) | [Detect.Continuous Monitoring.DE.CM](https://www.nist.gov/cyberframework/framework): Information system monitored | A.12.4.1 Event logging | CIS 8.2 | [📊 Security Metrics](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Security_Metrics.md) |
+| Performance budget enforcement | [CP-2 Contingency Plan](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=CP-2) | [Identify.Business Environment.ID.BE-5](https://www.nist.gov/cyberframework/framework): Resilience requirements established | A.17.2.1 Availability of information processing | CIS 11.4 | [🔄 Business Continuity Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Business_Continuity_Plan.md) |
+| Core Web Vitals optimization (LCP, FID, CLS) | [SC-5 Denial of Service Protection](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=SC-5) | [Protect.Data Security.PR.DS-4](https://www.nist.gov/cyberframework/framework): Adequate capacity maintained | A.12.1.3 Capacity management | CIS 8.8 | [🔄 Business Continuity Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Business_Continuity_Plan.md) |
+
+**📊 Evidence:** [PERFORMANCE_COMPLIANCE.md](./docs/PERFORMANCE_COMPLIANCE.md), [performance-testing.md](./docs/performance-testing.md), [BUNDLE_ANALYSIS.md](./docs/BUNDLE_ANALYSIS.md)
+
+**🎯 Key Metrics:** 207 KB total bundle (59% under budget), 9.63 KB initial load (92% under budget), <2s page load time
+
+---
+
+## 6. 🛡️ **Error Handling & Resilience Controls** (New in v1.1.0)
+
+### 📊 **Control Mapping Overview**
+
+Error handling controls ensure graceful degradation, prevent information disclosure, and maintain application stability during failures.
+
+**🎯 Business Impact:** Improved security posture, better user experience, reduced information disclosure risk  
+**💰 Investment Level:** CAPEX 10% / OPEX 10%  
+**📋 ISMS Policies:** [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md), [🚨 Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md)
+
+| Technical Control | NIST 800-53 Rev. 5 | NIST CSF 2.0 | ISO 27001:2022 | CIS Controls v8.1 | ISMS Policy Mapping |
+|-------------------|-------------------|--------------|----------------|------------------|---------------------|
+| React Error Boundaries (11 widgets) | [SI-11 Error Handling](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=SI-11) | [Protect.Data Security.PR.DS-6](https://www.nist.gov/cyberframework/framework): Integrity checking mechanisms | A.14.2.6 Secure development environment | CIS 16.6 | [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| Centralized error service | [AU-3 Content of Audit Records](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=AU-3) | [Detect.Security Continuous Monitoring.DE.CM-7](https://www.nist.gov/cyberframework/framework): Monitoring performed | A.12.4.1 Event logging | CIS 8.2 | [🚨 Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md) |
+| User-friendly error messages (no stack traces) | [SI-11 Error Handling](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=SI-11) | [Protect.Data Security.PR.DS-6](https://www.nist.gov/cyberframework/framework): Integrity checking mechanisms | A.14.2.6 Secure development environment | CIS 16.6 | [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| Error context for debugging | [AU-3 Content of Audit Records](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=AU-3) | [Detect.Security Continuous Monitoring.DE.CM-7](https://www.nist.gov/cyberframework/framework): Monitoring performed | A.12.4.1 Event logging | CIS 8.2 | [🚨 Incident Response Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Incident_Response_Plan.md) |
+| Toast notifications for non-blocking errors | [SI-11 Error Handling](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=SI-11) | [Protect.Data Security.PR.DS-6](https://www.nist.gov/cyberframework/framework): Integrity checking mechanisms | A.14.2.6 Secure development environment | CIS 16.6 | [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| Graceful degradation on failure | [CP-10 System Recovery and Reconstitution](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=CP-10) | [Recover.Recovery Planning.RC.RP](https://www.nist.gov/cyberframework/framework): Recovery processes executed | A.17.1.2 Implementing information security continuity | CIS 11.5 | [🆘 Disaster Recovery Plan](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Disaster_Recovery_Plan.md) |
+
+**📊 Evidence:** [ERROR_HANDLING.md](./docs/ERROR_HANDLING.md), [WidgetErrorHandlingGuide.md](./docs/WidgetErrorHandlingGuide.md)
+
+**🛡️ Security Benefits:** Prevents sensitive information disclosure, maintains application stability, enables security monitoring
+
+---
+
+## 7. 🎨 **Design System & UI Consistency Controls** (New in v1.1.0)
+
+### 📊 **Control Mapping Overview**
+
+Design system controls ensure visual consistency, maintainability, and security through standardized UI patterns and components.
+
+**🎯 Business Impact:** Improved maintainability, reduced cognitive load, enhanced security through consistent patterns  
+**💰 Investment Level:** CAPEX 15% / OPEX 5%  
+**📋 ISMS Policies:** [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md)
+
+| Technical Control | NIST 800-53 Rev. 5 | NIST CSF 2.0 | ISO 27001:2022 | CIS Controls v8.1 | ISMS Policy Mapping |
+|-------------------|-------------------|--------------|----------------|------------------|---------------------|
+| Centralized design tokens | [CM-6 Configuration Settings](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=CM-6) | [Protect.Configuration Management.PR.CM-1](https://www.nist.gov/cyberframework/framework): Baseline configurations established | A.12.1.2 Change management | CIS 3.14 | [📝 Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md) |
+| Consistent spacing (8px grid) | [CM-6 Configuration Settings](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=CM-6) | [Protect.Configuration Management.PR.CM-1](https://www.nist.gov/cyberframework/framework): Baseline configurations established | A.12.1.2 Change management | CIS 3.14 | [📝 Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md) |
+| Semantic color system | [CM-6 Configuration Settings](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=CM-6) | [Protect.Configuration Management.PR.CM-1](https://www.nist.gov/cyberframework/framework): Baseline configurations established | A.12.1.2 Change management | CIS 3.14 | [📝 Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md) |
+| Typography scale | [CM-6 Configuration Settings](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=CM-6) | [Protect.Configuration Management.PR.CM-1](https://www.nist.gov/cyberframework/framework): Baseline configurations established | A.12.1.2 Change management | CIS 3.14 | [📝 Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md) |
+| Reusable component library | [SA-15 Development Process, Standards, and Tools](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=SA-15) | [Protect.Applications Security.PR.AP-8](https://www.nist.gov/cyberframework/framework): Security reviews conducted | A.14.2.5 Secure system engineering principles | CIS 16.10 | [🛠️ Secure Development Policy](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md) |
+| TailwindCSS configuration | [CM-3 Configuration Change Control](https://csrc.nist.gov/projects/risk-management/sp800-53-controls/release-search#!/control?version=5.1&number=CM-3) | [Protect.Configuration Management.PR.CM-3](https://www.nist.gov/cyberframework/framework): Configurations managed | A.12.1.2 Change management | CIS 3.14 | [📝 Change Management](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Change_Management.md) |
+
+**📊 Evidence:** [DESIGN_SYSTEM.md](./docs/DESIGN_SYSTEM.md), [DESIGN_SYSTEM_IMPLEMENTATION_GUIDE.md](./docs/DESIGN_SYSTEM_IMPLEMENTATION_GUIDE.md)
+
+**🎯 Benefits:** Consistent UI patterns reduce user errors, standardized components reduce security vulnerabilities, maintainability improves patch application
+
+---
+
 ## 🎯 **Implementation Guidance**
 
 ### 🔐 **Security-First Approach**

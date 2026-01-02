@@ -45,16 +45,23 @@ This project is under active development, and we provide security updates for th
 
 CIA Compliance Manager maintains strong security practices as documented in our [ISMS Implementation Guide](./ISMS_IMPLEMENTATION_GUIDE.md):
 
+### v1.1.0 Security Enhancements
+
 - ✅ **Zero Critical/High Vulnerabilities** - Continuous scanning with automated remediation
 - ✅ **SLSA Level 3** - Supply chain security with build attestation
-- ✅ **80%+ Test Coverage** - Comprehensive automated testing
+- ✅ **83.81% Test Coverage** - Exceeds 80% line / 70% branch requirements (83.81% line, 76.15% branch)
 - ✅ **Automated Security Scanning** - SAST, SCA, DAST, Secret Scanning
 - ✅ **Comprehensive Security Headers** - Protection against XSS, clickjacking, MIME-sniffing, and Spectre vulnerabilities
+- ✅ **WCAG 2.1 AA Accessibility** - Full keyboard navigation, ARIA labels, screen reader support (11/11 widgets)
+- ✅ **Performance Optimized** - 85.6% initial bundle reduction, Core Web Vitals compliant
+- ✅ **Error Handling Security** - React Error Boundaries prevent information disclosure (11/11 widgets)
+- ✅ **Design System Security** - Consistent UI patterns reduce security vulnerabilities
 
 **Evidence:**
 - [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compliance-manager/badge)](https://scorecard.dev/viewer/?uri=github.com/Hack23/cia-compliance-manager)
 - [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/10365/badge)](https://bestpractices.coreinfrastructure.org/projects/10365)
 - [Security Overview](https://github.com/Hack23/cia-compliance-manager/security)
+- [Compliance Evidence Catalog](./docs/COMPLIANCE_EVIDENCE.md)
 
 ---
 
