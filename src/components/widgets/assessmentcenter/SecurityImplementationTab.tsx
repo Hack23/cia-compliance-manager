@@ -86,7 +86,7 @@ export const SecurityImplementationTab: React.FC<
             <div className="text-sm font-medium mb-xs">
               Estimated Implementation Time
             </div>
-            <div className="text-lg font-bold">{implementationTime}</div>
+            <div className="text-base font-bold">{implementationTime}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Typical project timeline
             </div>
@@ -95,7 +95,7 @@ export const SecurityImplementationTab: React.FC<
           {/* Required Resources */}
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-sm font-medium mb-xs">Required Resources</div>
-            <div className="text-lg font-bold">{requiredResources}</div>
+            <div className="text-base font-bold">{requiredResources}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Resource allocation recommendation
             </div>

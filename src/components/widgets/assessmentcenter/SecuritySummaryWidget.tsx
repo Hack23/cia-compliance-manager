@@ -182,7 +182,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
           <section 
             className={cn(
               WidgetClasses.section,
-              "p-md rounded-md shadow-md border-l-4 border-info dark:border-info-light pl-md",
+              "p-sm rounded-md shadow-sm border-l-4 border-info dark:border-info-light pl-sm",
               "bg-info-light/10 dark:bg-info-dark/20"
             )}
             aria-labelledby="security-classification-heading"
