@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { SecurityLevel } from "../../../types/cia";
 import { CIAComponentType } from "../../../types/cia-services";
+import { SecurityLevel } from "../../../types/cia";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import ConfidentialityImpactWidget from "./ConfidentialityImpactWidget";
 
 // Mock useCIAContentService hook
@@ -120,19 +121,25 @@ vi.mock("../../../components/common/WidgetContainer", () => ({
 
 describe("ConfidentialityImpactWidget", () => {
   const defaultProps = {
+    ...mockWidgetProps,
     level: "Moderate" as SecurityLevel,
-    confidentialityLevel: "Moderate" as SecurityLevel,
-    integrityLevel: "Moderate" as SecurityLevel,
-    availabilityLevel: "Moderate" as SecurityLevel,
     testId: "confidentiality-widget",
   };
 
-  it("renders without crashing", () => {
-    render(<ConfidentialityImpactWidget {...defaultProps} />);
-    expect(screen.getByTestId("confidentiality-widget")).toBeInTheDocument();
+  describe("Rendering", () => {
+    it("should render with required props", () => {
+      render(<ConfidentialityImpactWidget {...defaultProps} />);
+      expect(screen.getByTestId("confidentiality-widget")).toBeInTheDocument();
+    });
+
+    it("should use custom testId", () => {
+      render(<ConfidentialityImpactWidget {...defaultProps} testId="custom-id" />);
+      expect(screen.getByTestId("custom-id")).toBeInTheDocument();
+    });
   });
 
-  it("displays security level badge with the correct level", () => {
+  describe("Data Display", () => {
+    it("displays security level badge with the correct level", () => {
     render(<ConfidentialityImpactWidget {...defaultProps} />);
     expect(
       screen.getByTestId("widget-confidentiality-impact-label-security-badge")
@@ -235,5 +242,14 @@ describe("ConfidentialityImpactWidget", () => {
     expect(
       screen.getByTestId("widget-confidentiality-impact-section-business-impact")
     ).toBeInTheDocument();
+  });
+  });
+
+  describe("Accessibility", () => {
+    it("should have proper semantic structure", () => {
+      render(<ConfidentialityImpactWidget {...defaultProps} />);
+      const widget = screen.getByTestId("confidentiality-widget");
+      expect(widget).toBeInTheDocument();
+    });
   });
 });

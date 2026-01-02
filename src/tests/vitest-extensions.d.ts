@@ -31,6 +31,9 @@ declare module "vitest" {
     toStrictEqual(expected: any): Assertion<T>;
     toThrow(expected?: string | RegExp | Error): Assertion<T>;
     toThrowError(expected?: string | RegExp | Error): Assertion<T>;
+    
+    // Additional testing-library matchers that may not be in TestingLibraryMatchers
+    toHaveClass(...classNames: string[]): Assertion<T>;
   }
 
   interface AsymmetricMatchersContaining

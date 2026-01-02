@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import { SecurityOverviewTab, SecurityOverviewTabProps } from "./SecurityOverviewTab";
 
 // Mock RadarChart component
@@ -26,9 +27,7 @@ vi.mock("../../common/StatusBadge", () => ({
 
 describe("SecurityOverviewTab", () => {
   const defaultProps: SecurityOverviewTabProps = {
-    availabilityLevel: "Moderate" as SecurityLevel,
-    integrityLevel: "Moderate" as SecurityLevel,
-    confidentialityLevel: "Moderate" as SecurityLevel,
+    ...mockWidgetProps,
     dataClassification: "Confidential",
     implementationComplexity: "Medium",
     businessMaturityLevel: "Optimizing",

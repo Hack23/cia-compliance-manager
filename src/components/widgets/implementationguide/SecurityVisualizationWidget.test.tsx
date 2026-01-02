@@ -1,13 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import SecurityVisualizationWidget from "./SecurityVisualizationWidget"; // Fixed import syntax
 
 describe("SecurityVisualizationWidget", () => {
   const defaultProps = {
-    availabilityLevel: "moderate" as SecurityLevel,
-    integrityLevel: "moderate" as SecurityLevel,
-    confidentialityLevel: "moderate" as SecurityLevel,
+    ...mockWidgetProps,
   };
 
   it("renders with default props", async () => {

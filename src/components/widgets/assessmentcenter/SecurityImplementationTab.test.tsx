@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
+import { mockWidgetProps } from "../../../utils/testUtils";
 import {
   SecurityImplementationTab,
   SecurityImplementationTabProps,
@@ -8,9 +9,7 @@ import {
 
 describe("SecurityImplementationTab", () => {
   const defaultProps: SecurityImplementationTabProps = {
-    availabilityLevel: "Moderate" as SecurityLevel,
-    integrityLevel: "Moderate" as SecurityLevel,
-    confidentialityLevel: "Moderate" as SecurityLevel,
+    ...mockWidgetProps,
     implementationComplexity: "Medium",
     implementationTime: "3-6 months",
     requiredResources: "2-3 FTEs",
