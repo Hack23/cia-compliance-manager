@@ -34,10 +34,10 @@ export const SecurityImplementationTab: React.FC<
   return (
     <div
       data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-implementation')}
-      className="space-y-4"
+      className="space-y-sm"
     >
       {/* Implementation introduction */}
-      <div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-md">
+      <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-sm">
         <p className="text-sm">
           This section summarizes implementation requirements for your selected
           security levels, helping plan resources, timelines, and technical
@@ -46,12 +46,12 @@ export const SecurityImplementationTab: React.FC<
       </div>
 
       {/* Implementation Overview */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
+        <h3 className="text-base font-medium mb-sm text-gray-800 dark:text-gray-100">
           Implementation Overview
         </h3>
 
-        <div className="mb-md">
+        <div className="mb-sm">
           <div className="flex items-center justify-between mb-sm">
             <div className="text-md font-medium">Implementation Complexity:</div>
             <div className="font-medium">{implementationComplexity}</div>
@@ -80,22 +80,22 @@ export const SecurityImplementationTab: React.FC<
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-sm">
           {/* Implementation Timeline */}
-          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-sm font-medium mb-xs">
               Estimated Implementation Time
             </div>
-            <div className="text-lg font-bold">{implementationTime}</div>
+            <div className="text-base font-bold">{implementationTime}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Typical project timeline
             </div>
           </div>
 
           {/* Required Resources */}
-          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-sm font-medium mb-xs">Required Resources</div>
-            <div className="text-lg font-bold">{requiredResources}</div>
+            <div className="text-base font-bold">{requiredResources}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Resource allocation recommendation
             </div>
@@ -104,14 +104,14 @@ export const SecurityImplementationTab: React.FC<
       </div>
 
       {/* Component Implementation Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
+        <h3 className="text-base font-medium mb-sm text-gray-800 dark:text-gray-100">
           Component Implementation Summary
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-sm">
           {/* Confidentiality Implementation */}
-          <div className="p-md bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
+          <div className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
             <h4 className="font-medium text-purple-700 dark:text-purple-300 mb-sm">
               Confidentiality Implementation
             </h4>
@@ -127,7 +127,7 @@ export const SecurityImplementationTab: React.FC<
           </div>
 
           {/* Integrity Implementation */}
-          <div className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800">
+          <div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800">
             <h4 className="font-medium text-green-700 dark:text-green-300 mb-sm">
               Integrity Implementation
             </h4>
@@ -140,7 +140,7 @@ export const SecurityImplementationTab: React.FC<
           </div>
 
           {/* Availability Implementation */}
-          <div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+          <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
             <h4 className="font-medium text-blue-700 dark:text-blue-300 mb-sm">
               Availability Implementation
             </h4>
@@ -155,13 +155,13 @@ export const SecurityImplementationTab: React.FC<
       </div>
 
       {/* Implementation Considerations */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
+        <h3 className="text-base font-medium mb-sm text-gray-800 dark:text-gray-100">
           Implementation Considerations
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-md">
-          <div className="p-md bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-sm">
+          <div className="p-sm bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg">
             <h4 className="font-medium text-yellow-700 dark:text-yellow-300">
               Success Factors
             </h4>
@@ -174,7 +174,7 @@ export const SecurityImplementationTab: React.FC<
             </ul>
           </div>
 
-          <div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+          <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
             <h4 className="font-medium text-blue-700 dark:text-blue-300">
               Key Challenges
             </h4>

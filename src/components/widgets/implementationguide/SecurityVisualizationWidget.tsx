@@ -95,7 +95,7 @@ const SecurityVisualizationWidget: React.FC<
         return (
           <div
             data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('balanced-recommendation')}
-            className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg mt-md"
+            className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg mt-sm"
           >
             <p className="text-sm">
               Your security posture is well-balanced with strong controls across
@@ -108,7 +108,7 @@ const SecurityVisualizationWidget: React.FC<
 
     // Component-specific recommendations
     return (
-      <div className="space-y-2 mt-md" data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('recommendations')}>
+      <div className="space-y-2 mt-sm" data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('recommendations')}>
         {availabilityValue < 2 && (
           <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded">
             <p className="text-sm">
@@ -148,7 +148,7 @@ const SecurityVisualizationWidget: React.FC<
         error={error}
       >
       <div 
-        className="p-md sm:p-lg"
+        className="p-sm"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Security Visualization",
@@ -162,7 +162,7 @@ const SecurityVisualizationWidget: React.FC<
         >
           <h3 id="security-posture-heading" className="text-lg font-medium mb-md">Security Posture</h3>
           <div 
-            className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md"
+            className="p-sm bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md"
             role="group"
             aria-label="Security metrics"
           >
@@ -226,7 +226,7 @@ const SecurityVisualizationWidget: React.FC<
           <h3 className="text-lg font-medium mb-md">Security Components</h3>
 
           {/* Reuse the RadarChart component */}
-          <div className="p-md bg-white dark:bg-gray-800 rounded-md border border-neutral-light dark:border-neutral-dark">
+          <div className="p-sm bg-white dark:bg-gray-800 rounded-md border border-neutral-light dark:border-neutral-dark">
             <RadarChart
               availabilityLevel={availabilityLevel}
               integrityLevel={integrityLevel}
@@ -239,10 +239,10 @@ const SecurityVisualizationWidget: React.FC<
         {/* Component Details Section */}
         <div className="mb-lg">
           <h3 className="text-lg font-medium mb-md">Component Details</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-sm">
             {/* Confidentiality component */}
             <div
-              className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md"
+              className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md"
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('confidentiality-component')}
             >
               <div className="flex items-center justify-between mb-sm">
@@ -269,7 +269,7 @@ const SecurityVisualizationWidget: React.FC<
 
             {/* Integrity component */}
             <div
-              className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
+              className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('integrity-component')}
             >
               <div className="flex items-center justify-between mb-sm">
@@ -296,7 +296,7 @@ const SecurityVisualizationWidget: React.FC<
 
             {/* Availability component */}
             <div
-              className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+              className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('availability-component')}
             >
               <div className="flex items-center justify-between mb-sm">
@@ -327,7 +327,7 @@ const SecurityVisualizationWidget: React.FC<
         {getSecurityRecommendations()}
 
         {/* Explanation section */}
-        <div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mt-md">
+        <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mt-sm">
           <h3 className="text-md font-medium mb-sm">
             Security Visualization Key
           </h3>
