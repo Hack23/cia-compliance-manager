@@ -137,7 +137,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-md mb-md">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-sm mb-sm">
         {/* Main technical details card */}
         <div
           className={`p-4 ${theme.bgClass} rounded-lg shadow-sm border ${theme.borderClass}`}
@@ -191,7 +191,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </div>
 
         {/* Implementation requirements card */}
-        <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
+        <div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
           <h4
             className="text-md font-medium mb-md"
             data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header('implementation')}
@@ -214,9 +214,9 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-sm mb-sm">
         {/* Technologies card */}
-        <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
+        <div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
           <h4 className="text-md font-medium flex items-center mb-md">
             <span className={`mr-2 ${theme.accentClass}`}>💻</span>Technologies
           </h4>
@@ -230,7 +230,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </div>
 
         {/* Configurations card */}
-        <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
+        <div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
           <h4 className="text-md font-medium flex items-center mb-md">
             <span className={`mr-2 ${theme.accentClass}`}>⚙️</span>
             Configurations
@@ -246,7 +246,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
       </div>
 
       {/* Expertise Required card */}
-      <div className="p-md bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-md">
+      <div className="p-sm bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-sm">
         <h4 className="text-md font-medium flex items-center mb-md">
           <span className={`mr-2 ${theme.accentClass}`}>👨‍💻</span>Expertise
           Required
