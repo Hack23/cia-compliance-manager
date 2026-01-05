@@ -325,7 +325,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         )}
       >
         {/* Summary cards at top - Compact 3-column grid (responsive) */}
-        <section className="grid grid-cols-1 sm:grid-cols-3 gap-sm mb-md">
+        <section className="grid grid-cols-1 sm:grid-cols-3 gap-sm mb-md" aria-label="Summary metrics">
           <div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30">
             <div className="text-caption text-success-dark dark:text-success-light font-medium mb-xs">ROI</div>
             <div className="text-heading font-bold text-success-dark dark:text-success-light" data-testid={VALUE_CREATION_WIDGET_IDS.value('roi')}>
@@ -364,9 +364,10 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
             className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
             aria-expanded={expandedSection === "summary"}
             aria-controls="value-overview-content"
+            aria-label="Toggle Value Overview section"
           >
-            <span className="text-body-lg font-medium">📊 Value Overview</span>
-            <span className="text-body">{expandedSection === "summary" ? "▼" : "▶"}</span>
+            <span className="text-body-lg font-medium"><span aria-hidden="true">📊</span> Value Overview</span>
+            <span className="text-body" aria-hidden="true">{expandedSection === "summary" ? "▼" : "▶"}</span>
           </button>
           {expandedSection === "summary" && (
             <div
@@ -411,9 +412,10 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
             className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
             aria-expanded={expandedSection === "components"}
             aria-controls="component-value-content"
+            aria-label="Toggle Component Business Value section"
           >
-            <span className="text-body-lg font-medium">🔒 Component Business Value</span>
-            <span className="text-body">{expandedSection === "components" ? "▼" : "▶"}</span>
+            <span className="text-body-lg font-medium"><span aria-hidden="true">🔒</span> Component Business Value</span>
+            <span className="text-body" aria-hidden="true">{expandedSection === "components" ? "▼" : "▶"}</span>
           </button>
           {expandedSection === "components" && (
             <div
@@ -482,9 +484,10 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
             className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
             aria-expanded={expandedSection === "business-case"}
             aria-controls="business-case-content"
+            aria-label="Toggle Investment Business Case section"
           >
-            <span className="text-body-lg font-medium">💼 Investment Business Case</span>
-            <span className="text-body">{expandedSection === "business-case" ? "▼" : "▶"}</span>
+            <span className="text-body-lg font-medium"><span aria-hidden="true">💼</span> Investment Business Case</span>
+            <span className="text-body" aria-hidden="true">{expandedSection === "business-case" ? "▼" : "▶"}</span>
           </button>
           {expandedSection === "business-case" && (
             <div

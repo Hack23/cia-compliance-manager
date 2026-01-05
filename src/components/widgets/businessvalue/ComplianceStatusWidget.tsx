@@ -292,7 +292,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
           className="mb-md"
           aria-label="Overall Compliance Status"
         >
-          <div className="grid grid-cols-2 gap-sm mb-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-sm mb-sm">
             <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30">
               <div className="text-caption text-info-dark dark:text-info-light font-medium mb-xs">Compliance Status</div>
               <div className="text-body-lg font-bold text-info-dark dark:text-info-light">
@@ -504,7 +504,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         {/* Compliance Tips - Compact */}
         <div className="p-sm bg-info-light/5 dark:bg-info-dark/10 rounded-md border border-info-light/20 dark:border-info-dark/20">
           <div className="flex items-center mb-xs">
-            <span className="text-info-dark dark:text-info-light mr-xs">💡</span>
+            <span className="text-info-dark dark:text-info-light mr-xs" aria-hidden="true">💡</span>
             <h3 className="text-body font-medium">Tips</h3>
           </div>
           <ul className="text-caption text-neutral-dark dark:text-neutral-light space-y-xs pl-sm">

@@ -301,5 +301,53 @@ describe("ValueCreationWidget", () => {
         expect(businessCaseButton).toHaveAttribute('aria-controls', 'business-case-content');
       });
     });
+
+    it('should support keyboard navigation with Enter key', async () => {
+      render(<ValueCreationWidget {...defaultProps} />);
+
+      await waitFor(() => {
+        // Find and trigger Enter key on Value Overview button
+        const overviewButton = screen.getByRole('button', { name: /value overview/i });
+        fireEvent.keyDown(overviewButton, { key: 'Enter' });
+      });
+
+      await waitFor(() => {
+        // Content should be visible
+        const summaryText = screen.getByTestId(VALUE_CREATION_WIDGET_IDS.label('summary'));
+        expect(summaryText).toBeInTheDocument();
+      });
+    });
+
+    it('should support keyboard navigation with Space key', async () => {
+      render(<ValueCreationWidget {...defaultProps} />);
+
+      await waitFor(() => {
+        // Find and trigger Space key on Component Business Value button
+        const componentButton = screen.getByRole('button', { name: /component business value/i });
+        fireEvent.keyDown(componentButton, { key: ' ' });
+      });
+
+      await waitFor(() => {
+        // Component section should be visible
+        const componentButton = screen.getByRole('button', { name: /component business value/i });
+        expect(componentButton).toHaveAttribute('aria-expanded', 'true');
+      });
+    });
+
+    it('should not respond to other keys', async () => {
+      render(<ValueCreationWidget {...defaultProps} />);
+
+      await waitFor(() => {
+        // Find button and trigger an unhandled key
+        const overviewButton = screen.getByRole('button', { name: /value overview/i });
+        fireEvent.keyDown(overviewButton, { key: 'a' });
+      });
+
+      await waitFor(() => {
+        // Button should remain collapsed
+        const overviewButton = screen.getByRole('button', { name: /value overview/i });
+        expect(overviewButton).toHaveAttribute('aria-expanded', 'false');
+      });
+    });
   });
 });
