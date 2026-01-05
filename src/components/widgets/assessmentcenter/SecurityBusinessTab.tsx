@@ -1,6 +1,7 @@
 import React from "react";
 import { SECURITY_SUMMARY_WIDGET_IDS } from "../../../constants/testIds";
 import { formatCurrency } from "../../../utils/formatUtils";
+import { WidgetClasses } from "../../../utils/tailwindClassHelpers";
 
 /**
  * Props for SecurityBusinessTab component
@@ -47,7 +48,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
           Business Value Summary
         </h3>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-sm">
+        <div className={WidgetClasses.grid2Cols}>
           {/* Business Maturity */}
           <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
             <h4 className="font-medium text-blue-700 dark:text-blue-300">
@@ -88,7 +89,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
           Cost Summary
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-sm">
+        <div className={WidgetClasses.grid3Cols}>
           {/* Implementation Cost */}
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">Implementation Cost</div>

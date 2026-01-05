@@ -2,6 +2,7 @@ import React from "react";
 import { SECURITY_SUMMARY_WIDGET_IDS } from "../../../constants/testIds";
 import { SecurityLevel } from "../../../types/cia";
 import { getImplementationDescription } from "../../../utils/implementationUtils";
+import { WidgetClasses } from "../../../utils/tailwindClassHelpers";
 
 /**
  * Props for SecurityImplementationTab component
@@ -80,7 +81,7 @@ export const SecurityImplementationTab: React.FC<
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-sm">
+        <div className={WidgetClasses.grid2Cols}>
           {/* Implementation Timeline */}
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">
@@ -109,7 +110,7 @@ export const SecurityImplementationTab: React.FC<
           Component Implementation Summary
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-sm">
+        <div className={WidgetClasses.grid3Cols}>
           {/* Confidentiality Implementation */}
           <div className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
             <h4 className="font-medium text-purple-700 dark:text-purple-300 mb-sm">
@@ -160,7 +161,7 @@ export const SecurityImplementationTab: React.FC<
           Implementation Considerations
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-sm">
+        <div className={WidgetClasses.grid2Cols}>
           <div className="p-sm bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg">
             <h4 className="font-medium text-yellow-700 dark:text-yellow-300">
               Success Factors

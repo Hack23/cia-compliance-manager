@@ -420,7 +420,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           )}{" "}
           areas.
         </p>
-        <div className={cn(WidgetClasses.grid3Cols, "gap-sm")}>
+        <div className={WidgetClasses.grid3Cols}>
           <KeyValuePair
             label="Overall Impact"
             value={impactLevel}

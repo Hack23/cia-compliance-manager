@@ -69,7 +69,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
           Security Components
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-sm">
+        <div className={WidgetClasses.grid3Cols}>
           {/* Confidentiality Card */}
           <div
             className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800"
@@ -171,7 +171,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
         <h3 className={cn(WidgetClasses.subheading, "mb-sm")}>
           Key Security Metrics
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-sm">
+        <div className={WidgetClasses.grid3Cols}>
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div className={cn(WidgetClasses.subheading, "mb-xs")}>
               Implementation Complexity
