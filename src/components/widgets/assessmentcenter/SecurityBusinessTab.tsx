@@ -91,7 +91,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-sm">
           {/* Implementation Cost */}
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs">Implementation Cost</div>
+            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">Implementation Cost</div>
             <div className="text-subheading font-bold text-blue-600 dark:text-blue-400">
               {formatCurrency(costDetails.totalCapex)}
             </div>
@@ -102,7 +102,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
 
           {/* Operational Cost */}
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs">Operational Cost</div>
+            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">Operational Cost</div>
             <div className="text-subheading font-bold text-green-600 dark:text-green-400">
               {formatCurrency(costDetails.totalOpex)}
             </div>
@@ -113,7 +113,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
 
           {/* Total Cost */}
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs">
+            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">
               Total First-Year Cost
             </div>
             <div className="text-subheading font-bold text-purple-600 dark:text-purple-400">
@@ -134,7 +134,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
 
         <div className="space-y-3">
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <h4 className="text-sm font-medium mb-sm">Business Capabilities</h4>
+            <h4 className="text-sm font-medium mb-sm text-gray-800 dark:text-gray-200">Business Capabilities</h4>
             <ul className="list-disc pl-5 space-y-1 text-sm">
               {securityScore >= 80 ? (
                 <>

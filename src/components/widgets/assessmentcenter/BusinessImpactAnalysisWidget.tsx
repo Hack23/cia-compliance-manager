@@ -522,7 +522,7 @@ const BusinessImpactAnalysisWidget: React.FC<
         error={serviceError}
       >
       <div 
-        className="space-y-sm"
+        className="p-sm space-y-sm"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Business Impact Analysis",
@@ -538,43 +538,44 @@ const BusinessImpactAnalysisWidget: React.FC<
             Business Impacts by Component
           </h3>
 
-          {/* Use 2-column grid on md+ screens */}
-          <div className={cn(WidgetClasses.grid2Cols, "gap-sm")}>
-            {/* Confidentiality impact */}
-            {confidentialityImpact && (
-              <div className="mb-sm">
-                <h4 className={cn(WidgetClasses.subheading, "flex items-center")}>
-                  <span className="mr-sm" aria-hidden="true">🔒</span>Confidentiality Impact
-                </h4>
+          {/* Confidentiality impact */}
+          {confidentialityImpact && (
+            <div className="mb-sm">
+              <h4 className={cn(WidgetClasses.subheading, "flex items-center")}>
+                <span className="mr-sm" aria-hidden="true">🔒</span>Confidentiality Impact
+              </h4>
+              <div className={cn(WidgetClasses.grid2Cols, "gap-sm")}>
                 {confidentialityImpact.reputational &&
-                  renderImpactCategory(
+                  <div>{renderImpactCategory(
                     "Reputational",
                     confidentialityImpact.reputational
-                  )}
+                  )}</div>}
                 {confidentialityImpact.regulatory &&
-                  renderImpactCategory(
+                  <div>{renderImpactCategory(
                     "Regulatory",
                     confidentialityImpact.regulatory
-                  )}
+                  )}</div>}
               </div>
-            )}
+            </div>
+          )}
 
-            {/* Integrity impact */}
-            {integrityImpact && (
-              <div className="mb-sm">
-                <h4 className={cn(WidgetClasses.subheading, "flex items-center")}>
-                  <span className="mr-sm" aria-hidden="true">✅</span>Integrity Impact
-                </h4>
+          {/* Integrity impact */}
+          {integrityImpact && (
+            <div className="mb-sm">
+              <h4 className={cn(WidgetClasses.subheading, "flex items-center")}>
+                <span className="mr-sm" aria-hidden="true">✅</span>Integrity Impact
+              </h4>
+              <div className={cn(WidgetClasses.grid2Cols, "gap-sm")}>
                 {integrityImpact.financial &&
-                  renderImpactCategory("Financial", integrityImpact.financial)}
+                  <div>{renderImpactCategory("Financial", integrityImpact.financial)}</div>}
                 {integrityImpact.operational &&
-                  renderImpactCategory(
+                  <div>{renderImpactCategory(
                     "Operational",
                     integrityImpact.operational
-                  )}
+                  )}</div>}
               </div>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Availability impact - Full width */}
           {availabilityImpact && (

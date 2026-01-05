@@ -53,8 +53,8 @@ export const SecurityImplementationTab: React.FC<
 
         <div className="mb-sm">
           <div className="flex items-center justify-between mb-sm">
-            <div className="text-md font-medium">Implementation Complexity:</div>
-            <div className="font-medium">{implementationComplexity}</div>
+            <div className="text-md font-medium text-gray-800 dark:text-gray-200">Implementation Complexity:</div>
+            <div className="font-medium text-gray-800 dark:text-gray-200">{implementationComplexity}</div>
           </div>
           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
             <div
@@ -83,10 +83,10 @@ export const SecurityImplementationTab: React.FC<
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-sm">
           {/* Implementation Timeline */}
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs">
+            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">
               Estimated Implementation Time
             </div>
-            <div className="text-lg font-bold">{implementationTime}</div>
+            <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{implementationTime}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Typical project timeline
             </div>
@@ -94,8 +94,8 @@ export const SecurityImplementationTab: React.FC<
 
           {/* Required Resources */}
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs">Required Resources</div>
-            <div className="text-lg font-bold">{requiredResources}</div>
+            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">Required Resources</div>
+            <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{requiredResources}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Resource allocation recommendation
             </div>

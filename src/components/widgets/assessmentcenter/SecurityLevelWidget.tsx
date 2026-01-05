@@ -220,7 +220,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         testId={testId}
       >
       <div 
-        className="space-y-sm"
+        className="p-sm space-y-sm"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Security Level Configuration",
