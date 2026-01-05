@@ -1,6 +1,7 @@
 import React from "react";
 import { SECURITY_SUMMARY_WIDGET_IDS } from "../../../constants/testIds";
 import { formatCurrency } from "../../../utils/formatUtils";
+import { WidgetClasses } from "../../../utils/tailwindClassHelpers";
 
 /**
  * Props for SecurityBusinessTab component
@@ -33,7 +34,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
   return (
     <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-business')} className="space-y-4">
       {/* Business Value content */}
-      <div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-md">
+      <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-sm">
         <p className="text-sm">
           This section summarizes the business value and financial impact of
           your selected security levels, helping justify security investments to
@@ -42,14 +43,14 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
       </div>
 
       {/* Business Impact Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
+        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
           Business Value Summary
         </h3>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
+        <div className={WidgetClasses.grid2Cols}>
           {/* Business Maturity */}
-          <div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+          <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
             <h4 className="font-medium text-blue-700 dark:text-blue-300">
               Business Maturity Level
             </h4>
@@ -62,7 +63,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
           </div>
 
           {/* ROI Estimation */}
-          <div className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
+          <div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
             <h4 className="font-medium text-green-700 dark:text-green-300">
               Estimated ROI
             </h4>
@@ -83,15 +84,15 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
       </div>
 
       {/* Cost Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
+        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
           Cost Summary
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
+        <div className={WidgetClasses.grid3Cols}>
           {/* Implementation Cost */}
-          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs">Implementation Cost</div>
+          <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">Implementation Cost</div>
             <div className="text-subheading font-bold text-blue-600 dark:text-blue-400">
               {formatCurrency(costDetails.totalCapex)}
             </div>
@@ -101,8 +102,8 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
           </div>
 
           {/* Operational Cost */}
-          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs">Operational Cost</div>
+          <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">Operational Cost</div>
             <div className="text-subheading font-bold text-green-600 dark:text-green-400">
               {formatCurrency(costDetails.totalOpex)}
             </div>
@@ -112,8 +113,8 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
           </div>
 
           {/* Total Cost */}
-          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs">
+          <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">
               Total First-Year Cost
             </div>
             <div className="text-subheading font-bold text-purple-600 dark:text-purple-400">
@@ -127,14 +128,14 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
       </div>
 
       {/* Business Enablement */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
+        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
           Business Enablement
         </h3>
 
         <div className="space-y-3">
-          <div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <h4 className="text-sm font-medium mb-sm">Business Capabilities</h4>
+          <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <h4 className="text-sm font-medium mb-sm text-gray-800 dark:text-gray-200">Business Capabilities</h4>
             <ul className="list-disc pl-5 space-y-1 text-sm">
               {securityScore >= 80 ? (
                 <>

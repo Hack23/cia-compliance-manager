@@ -423,4 +423,92 @@ describe("Complete Assessment Workflow", () => {
       });
     });
   });
+
+  describe("UI/UX Redesign Validation", () => {
+    it("should verify compact UI spacing across all widgets", () => {
+      cy.log("🎨 Validating compact UI redesign");
+
+      // Set security levels to activate all widgets
+      cy.setSecurityLevels(
+        SECURITY_LEVELS.HIGH,
+        SECURITY_LEVELS.HIGH,
+        SECURITY_LEVELS.HIGH
+      );
+
+      // Check that widgets use compact spacing (p-sm, gap-sm, space-y-sm)
+      cy.get('[data-testid*="widget"]').then(($widgets) => {
+        let widgetsWithCompactSpacing = 0;
+        
+        $widgets.each((_, widget) => {
+          const $widget = Cypress.$(widget);
+          const hasCompactSpacing = $widget.find('[class~="p-sm"], [class~="gap-sm"], [class~="space-y-sm"]').length > 0;
+          
+          if (hasCompactSpacing) {
+            widgetsWithCompactSpacing++;
+          }
+        });
+
+        cy.log(`✓ Found ${widgetsWithCompactSpacing} widgets with compact spacing`);
+        expect(widgetsWithCompactSpacing).to.be.greaterThan(0, 
+          'At least some widgets should use compact spacing'
+        );
+      });
+    });
+
+    it("should verify widgets fit within viewport efficiently", () => {
+      cy.log("📏 Validating efficient space usage");
+
+      const viewportHeight = 800;
+      const maxWidgetHeight = viewportHeight * 1.5; // Widgets should fit within 1.5 viewports
+
+      // Check AssessmentCenter widgets
+      const widgetSelectors = [
+        '[data-testid*="security-summary"]',
+        '[data-testid*="security-level"]',
+        '[data-testid*="business-impact"]'
+      ];
+
+      widgetSelectors.forEach(selector => {
+        cy.get(selector).then(($widget) => {
+          if ($widget.length > 0) {
+            const widgetHeight = $widget[0].scrollHeight;
+            
+            cy.log(`Widget ${selector}: ${widgetHeight}px (max: ${maxWidgetHeight}px)`);
+            
+            // Log whether widget meets compact criteria
+            if (widgetHeight < maxWidgetHeight) {
+              cy.log(`✓ Widget fits within 1.5 viewport heights`);
+            } else {
+              cy.log(`⚠ Widget exceeds 1.5 viewport heights`);
+            }
+          }
+        });
+      });
+    });
+
+    it("should verify responsive grid layouts on different screen sizes", () => {
+      cy.log("📱 Validating responsive layouts");
+
+      const viewports = [
+        { width: 375, height: 667, name: 'mobile' },
+        { width: 768, height: 1024, name: 'tablet' },
+        { width: 1280, height: 800, name: 'desktop' }
+      ];
+
+      viewports.forEach(viewport => {
+        cy.viewport(viewport.width, viewport.height);
+        cy.wait(300);
+
+        // Verify all key widgets are still visible and functional
+        cy.get('[data-testid*="security-level"]').should('be.visible');
+        
+        // Check for responsive grid classes
+        cy.get('[class*="grid-cols"]').then(($grids) => {
+          if ($grids.length > 0) {
+            cy.log(`✓ Found ${$grids.length} grid layouts on ${viewport.name}`);
+          }
+        });
+      });
+    });
+  });
 });

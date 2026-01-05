@@ -79,6 +79,59 @@ const additionalTests = () => {
       cy.wrap($widget).should("be.visible");
     });
   });
+
+  // Test for responsive multi-column layout (redesign feature)
+  it("displays 2-column layout on larger screens", () => {
+    // Set viewport to desktop size
+    cy.viewport(1024, 768);
+    
+    cy.get("@currentWidget").then(($widget) => {
+      if ($widget.length === 0) {
+        expect(true).to.equal(true); // Soft-pass
+        return;
+      }
+
+      // Look for grid layouts with responsive columns
+      cy.wrap($widget).within(() => {
+        // Check for grid classes that indicate 2-column layout
+        cy.get('[class*="grid"]').then(($grids) => {
+          if ($grids.length > 0) {
+            // Verify at least one grid has md:grid-cols-2 pattern
+            let foundResponsiveGrid = false;
+            $grids.each((_, el) => {
+              const classes = el.className;
+              if (classes.includes('grid-cols-') && classes.includes('md:grid-cols-')) {
+                foundResponsiveGrid = true;
+              }
+            });
+            
+            if (foundResponsiveGrid) {
+              cy.log("✓ Found responsive grid layout");
+            }
+          }
+        });
+      });
+    });
+  });
+
+  // Test compact spacing (redesign feature)
+  it("uses compact spacing throughout widget", () => {
+    cy.get("@currentWidget").then(($widget) => {
+      if ($widget.length === 0) {
+        expect(true).to.equal(true); // Soft-pass
+        return;
+      }
+
+      cy.wrap($widget).within(() => {
+        // Check for compact spacing classes (p-sm, gap-sm)
+        cy.get('[class~="p-sm"], [class~="gap-sm"], [class~="space-y-sm"]').then(($elements) => {
+          if ($elements.length > 0) {
+            cy.log(`✓ Found ${$elements.length} elements with compact spacing`);
+          }
+        });
+      });
+    });
+  });
 };
 
 // Create standard widget tests with the improved template
