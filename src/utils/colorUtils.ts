@@ -234,3 +234,4 @@ export function getSecurityScoreColorClass(score: number): string {
   if (score <= 80) return "bg-green-500"; // Low
   return "bg-blue-500"; // Minimal
 }
+
