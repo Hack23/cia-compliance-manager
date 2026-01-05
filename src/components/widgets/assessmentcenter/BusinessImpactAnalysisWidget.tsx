@@ -546,15 +546,15 @@ const BusinessImpactAnalysisWidget: React.FC<
               </h4>
               <div className={cn(WidgetClasses.grid2Cols, "gap-sm")}>
                 {confidentialityImpact.reputational &&
-                  <div>{renderImpactCategory(
+                  renderImpactCategory(
                     "Reputational",
                     confidentialityImpact.reputational
-                  )}</div>}
+                  )}
                 {confidentialityImpact.regulatory &&
-                  <div>{renderImpactCategory(
+                  renderImpactCategory(
                     "Regulatory",
                     confidentialityImpact.regulatory
-                  )}</div>}
+                  )}
               </div>
             </div>
           )}
@@ -567,12 +567,12 @@ const BusinessImpactAnalysisWidget: React.FC<
               </h4>
               <div className={cn(WidgetClasses.grid2Cols, "gap-sm")}>
                 {integrityImpact.financial &&
-                  <div>{renderImpactCategory("Financial", integrityImpact.financial)}</div>}
+                  renderImpactCategory("Financial", integrityImpact.financial)}
                 {integrityImpact.operational &&
-                  <div>{renderImpactCategory(
+                  renderImpactCategory(
                     "Operational",
                     integrityImpact.operational
-                  )}</div>}
+                  )}
               </div>
             </div>
           )}
@@ -585,12 +585,12 @@ const BusinessImpactAnalysisWidget: React.FC<
               </h4>
               <div className={cn(WidgetClasses.grid2Cols, "gap-sm")}>
                 {availabilityImpact.financial &&
-                  <div>{renderImpactCategory("Financial", availabilityImpact.financial)}</div>}
+                  renderImpactCategory("Financial", availabilityImpact.financial)}
                 {availabilityImpact.operational &&
-                  <div>{renderImpactCategory(
+                  renderImpactCategory(
                     "Operational",
                     availabilityImpact.operational
-                  )}</div>}
+                  )}
               </div>
             </div>
           )}
