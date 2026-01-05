@@ -458,7 +458,7 @@ const BusinessImpactAnalysisWidget: React.FC<
       label: 'Implementation Considerations',
       content: (
         <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-sm"
+          className={cn(WidgetClasses.grid2Cols, "gap-sm")}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('considerations')}
         >
           {considerations.map((item, index) => (
@@ -485,7 +485,7 @@ const BusinessImpactAnalysisWidget: React.FC<
       label: 'Business Benefits',
       content: (
         <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-sm"
+          className={cn(WidgetClasses.grid2Cols, "gap-sm")}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('benefits')}
         >
           {benefits.map((item, index) => (

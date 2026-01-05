@@ -173,26 +173,26 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-sm">
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs text-gray-800 dark:text-gray-200">
+            <div className={cn(WidgetClasses.subheading, "mb-xs")}>
               Implementation Complexity
             </div>
-            <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{implementationComplexity}</div>
+            <div className={cn(WidgetClasses.heading, "text-lg mb-0")}>{implementationComplexity}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Based on combined security levels
             </div>
           </div>
 
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs text-gray-800 dark:text-gray-200">Business Maturity</div>
-            <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{businessMaturityLevel}</div>
+            <div className={cn(WidgetClasses.subheading, "mb-xs")}>Business Maturity</div>
+            <div className={cn(WidgetClasses.heading, "text-lg mb-0")}>{businessMaturityLevel}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               {businessMaturityDescription}
             </div>
           </div>
 
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs text-gray-800 dark:text-gray-200">Compliance Status</div>
-            <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
+            <div className={cn(WidgetClasses.subheading, "mb-xs")}>Compliance Status</div>
+            <div className={cn(WidgetClasses.heading, "text-lg mb-0")}>
               {complianceScore || securityScore}%
             </div>
             <div className="text-xs text-gray-600 dark:text-gray-400">

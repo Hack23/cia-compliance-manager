@@ -441,7 +441,7 @@ describe("Complete Assessment Workflow", () => {
         
         $widgets.each((_, widget) => {
           const $widget = Cypress.$(widget);
-          const hasCompactSpacing = $widget.find('[class*="p-sm"], [class*="gap-sm"], [class*="space-y-sm"]').length > 0;
+          const hasCompactSpacing = $widget.find('[class~="p-sm"], [class~="gap-sm"], [class~="space-y-sm"]').length > 0;
           
           if (hasCompactSpacing) {
             widgetsWithCompactSpacing++;

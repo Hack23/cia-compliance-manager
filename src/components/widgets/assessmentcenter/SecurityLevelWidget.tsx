@@ -346,7 +346,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
               {/* Integrity selector */}
               <div
-                className="p-sm bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                className={cn(WidgetClasses.card, "p-sm")}
                 data-testid={SECURITY_LEVEL_WIDGET_IDS.section('integrity')}
               >
                 <div className="flex justify-between items-center mb-sm">
@@ -410,7 +410,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
               {/* Availability selector */}
               <div
-                className="p-sm bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                className={cn(WidgetClasses.card, "p-sm")}
                 data-testid={SECURITY_LEVEL_WIDGET_IDS.section('availability')}
               >
                 <div className="flex justify-between items-center mb-sm">
@@ -483,7 +483,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
             </h3>
 
             <div
-              className="p-sm bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 h-full"
+              className={cn(WidgetClasses.card, "p-sm h-full")}
               data-testid={`${activeComponent}-details-content`}
             >
               {activeDetails ? (
