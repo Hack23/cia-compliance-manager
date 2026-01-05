@@ -88,7 +88,7 @@ export const SECURITY_LEVEL_COLORS: Record<
  * Color schemes for CIA triad components with enhanced distinctiveness.
  * 
  * Each CIA component has a unique color palette to aid visual recognition:
- * - **Confidentiality** (Purple): Represents data privacy and access control
+ * - **Confidentiality** (Orange): Represents data privacy and access control
  * - **Integrity** (Green): Represents data accuracy and validation
  * - **Availability** (Blue): Represents uptime and system accessibility
  * 
@@ -121,9 +121,9 @@ export const SECURITY_LEVEL_COLORS: Record<
  */
 export const CIA_COMPONENT_COLORS = {
   CONFIDENTIALITY: {
-    PRIMARY: "#8e44ad", // Purple
-    SECONDARY: "#e1bee7", // Light purple
-    DARK: "#a742ff", // Dark purple
+    PRIMARY: "#f97316", // Orange
+    SECONDARY: "#fed7aa", // Light orange
+    DARK: "#fb923c", // Dark orange
   },
   INTEGRITY: {
     PRIMARY: "#27ae60", // Green

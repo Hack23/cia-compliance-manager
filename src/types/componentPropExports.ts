@@ -14,15 +14,25 @@
 // Import common component prop interfaces
 import type { ReactNode } from "react";
 import { CIAComponent, SecurityLevel } from "./cia";
+import { BusinessImpactDetails } from "./cia-services";
 import { TechnicalImplementationDetails } from "./cia-services";
 
-// Re-export from components/common
+/**
+ * Valid color values for CIA component visualizations
+ * Limited to colors actually used by CIA components (Availability=blue, Integrity=green, Confidentiality=orange)
+ */
+export type CIAComponentColor = "blue" | "green" | "orange";
+
+/**
+ * Props for the BusinessImpactSection component
+ * @property {BusinessImpactDetails} impact - Business impact data to display
+ * @property {CIAComponentColor} color - Color theme for the section (blue, green, or orange)
+ * @property {string} [testId] - Optional test ID for testing purposes
+ */
 export interface BusinessImpactSectionProps {
-  title: string;
-  description: string;
+  impact: BusinessImpactDetails;
+  color: CIAComponentColor;
   testId?: string;
-  className?: string;
-  icon?: string;
 }
 
 export interface BusinessRiskDisplayProps {

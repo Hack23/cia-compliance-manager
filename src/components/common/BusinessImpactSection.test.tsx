@@ -126,7 +126,7 @@ describe("BusinessImpactSection", () => {
     render(
       <BusinessImpactSection
         impact={highRiskImpact}
-        color="red"
+        color="orange"
         testId="risk-badges"
       />
     );
