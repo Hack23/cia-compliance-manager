@@ -1,5 +1,4 @@
 import React from "react";
-import { BusinessImpactDetails } from "../../types/cia-services";
 import type { BusinessImpactSectionProps, CIAComponentColor } from "../../types/componentPropExports";
 
 /**

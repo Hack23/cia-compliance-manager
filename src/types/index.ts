@@ -94,6 +94,7 @@ export type {
 export type {
   BusinessImpactSectionProps,
   BusinessRiskDisplayProps,
+  CIAComponentColor,
   CIAImpactCardProps,
   MetricsCardProps,
   RadarChartProps,
