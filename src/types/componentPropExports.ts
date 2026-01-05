@@ -14,6 +14,7 @@
 // Import common component prop interfaces
 import type { ReactNode } from "react";
 import { CIAComponent, SecurityLevel } from "./cia";
+import { TechnicalImplementationDetails } from "./cia-services";
 
 // Re-export from components/common
 export interface BusinessImpactSectionProps {
@@ -43,9 +44,69 @@ export interface CIAImpactCardProps {
 }
 
 export interface CodeBlockProps {
+  /**
+   * The code content to display
+   */
   code: string;
+  
+  /**
+   * The programming language for syntax highlighting
+   * @example "typescript", "javascript", "python", "bash"
+   */
   language?: string;
+  
+  /**
+   * Whether to show line numbers
+   * @default false
+   */
   showLineNumbers?: boolean;
+  
+  /**
+   * Whether to show a copy button
+   * @default true
+   */
+  copyable?: boolean;
+  
+  /**
+   * Additional CSS classes
+   */
+  className?: string;
+  
+  /**
+   * Test ID for testing
+   */
+  testId?: string;
+}
+
+export interface ImplementationGuidancePanelProps {
+  /**
+   * Implementation guides for the CIA components
+   */
+  implementationGuides: (TechnicalImplementationDetails | undefined)[];
+
+  /**
+   * The selected availability level
+   */
+  availabilityLevel: SecurityLevel;
+
+  /**
+   * The selected integrity level
+   */
+  integrityLevel: SecurityLevel;
+
+  /**
+   * The selected confidentiality level
+   */
+  confidentialityLevel: SecurityLevel;
+
+  /**
+   * Additional CSS classes
+   */
+  className?: string;
+
+  /**
+   * Test ID for testing
+   */
   testId?: string;
 }
 
