@@ -1,6 +1,11 @@
 import React from "react";
 import { BusinessImpactDetails } from "../../types/cia-services";
 
+/**
+ * Valid color values for business impact sections
+ */
+type ImpactColor = "blue" | "green" | "orange" | "purple" | "cyan" | "red";
+
 interface BusinessImpactSectionProps {
   impact: BusinessImpactDetails;
   color: string;
@@ -9,10 +14,10 @@ interface BusinessImpactSectionProps {
 
 /**
  * Get explicit background color classes to avoid dynamic Tailwind class generation
- * @param color - Color name (blue, green, orange, purple)
+ * @param color - Color name (blue, green, orange, purple, cyan, red)
  * @returns Explicit className string for background colors
  */
-const getBackgroundColorClasses = (color: string): string => {
+const getBackgroundColorClasses = (color: ImpactColor): string => {
   switch (color) {
     case "blue":
       return "bg-blue-100 dark:bg-blue-900 border-blue-200 dark:border-blue-800";
@@ -26,17 +31,20 @@ const getBackgroundColorClasses = (color: string): string => {
       return "bg-cyan-100 dark:bg-cyan-900 border-cyan-200 dark:border-cyan-800";
     case "red":
       return "bg-red-100 dark:bg-red-900 border-red-200 dark:border-red-800";
-    default:
-      return "bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-800";
+    default: {
+      // Exhaustive check - TypeScript will error if new colors are added
+      const exhaustiveCheck: never = color;
+      throw new Error(`Unsupported color: ${String(exhaustiveCheck)}`);
+    }
   }
 };
 
 /**
  * Get explicit text color classes to avoid dynamic Tailwind class generation
- * @param color - Color name (blue, green, orange, purple)
+ * @param color - Color name (blue, green, orange, purple, cyan, red)
  * @returns Explicit className string for text colors
  */
-const getTextColorClasses = (color: string): string => {
+const getTextColorClasses = (color: ImpactColor): string => {
   switch (color) {
     case "blue":
       return "text-blue-700 dark:text-blue-300";
@@ -50,8 +58,39 @@ const getTextColorClasses = (color: string): string => {
       return "text-cyan-700 dark:text-cyan-300";
     case "red":
       return "text-red-700 dark:text-red-300";
-    default:
-      return "text-gray-700 dark:text-gray-300";
+    default: {
+      // Exhaustive check - TypeScript will error if new colors are added
+      const exhaustiveCheck: never = color;
+      throw new Error(`Unsupported color: ${String(exhaustiveCheck)}`);
+    }
+  }
+};
+
+/**
+ * Get explicit badge color classes for rounded-full badges
+ * This provides complete styling for small badges including dark mode support
+ * @param color - Color name (blue, green, orange, purple, cyan, red)
+ * @returns Explicit className string for badge styling
+ */
+const getBadgeColorClasses = (color: ImpactColor): string => {
+  switch (color) {
+    case "blue":
+      return "bg-blue-50 text-blue-700 dark:bg-blue-900 dark:bg-opacity-50 dark:text-blue-300";
+    case "green":
+      return "bg-green-50 text-green-700 dark:bg-green-900 dark:bg-opacity-50 dark:text-green-300";
+    case "orange":
+      return "bg-orange-50 text-orange-700 dark:bg-orange-900 dark:bg-opacity-50 dark:text-orange-300";
+    case "purple":
+      return "bg-purple-50 text-purple-700 dark:bg-purple-900 dark:bg-opacity-50 dark:text-purple-300";
+    case "cyan":
+      return "bg-cyan-50 text-cyan-700 dark:bg-cyan-900 dark:bg-opacity-50 dark:text-cyan-300";
+    case "red":
+      return "bg-red-50 text-red-700 dark:bg-red-900 dark:bg-opacity-50 dark:text-red-300";
+    default: {
+      // Exhaustive check - TypeScript will error if new colors are added
+      const exhaustiveCheck: never = color;
+      throw new Error(`Unsupported color: ${String(exhaustiveCheck)}`);
+    }
   }
 };
 
@@ -69,9 +108,15 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
   const riskLevelForDisplay =
     impact.financial?.riskLevel || impact.operational?.riskLevel || "Unknown";
 
+  // Safely cast color to ImpactColor type with fallback to gray for invalid values
+  const safeColor = (["blue", "green", "orange", "purple", "cyan", "red"].includes(color) 
+    ? color 
+    : "blue") as ImpactColor;
+
   // Get explicit color classes for this color scheme
-  const bgClasses = getBackgroundColorClasses(color);
-  const textClasses = getTextColorClasses(color);
+  const bgClasses = getBackgroundColorClasses(safeColor);
+  const textClasses = getTextColorClasses(safeColor);
+  const badgeClasses = getBadgeColorClasses(safeColor);
 
   return (
     <div
@@ -220,7 +265,7 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
                       (violation, index) => (
                         <span
                           key={index}
-                          className={`px-2 py-0.5 text-xs rounded-full ${bgClasses.split(' ')[0]} ${textClasses.split(' ')[0]}`}
+                          className={`px-2 py-0.5 text-xs rounded-full ${badgeClasses}`}
                         >
                           {violation}
                         </span>
