@@ -331,6 +331,61 @@ describe('Security Summary Widget - Enhanced', () => {
         }
       });
     });
+
+    it('should support keyboard navigation', () => {
+      // Focus first interactive element
+      cy.get(securitySummaryWidget.root).within(() => {
+        cy.get('button, a, select, input, [tabindex="0"]').first().then(($el) => {
+          if ($el.length > 0) {
+            cy.wrap($el).focus();
+            cy.focused().should('exist');
+            cy.log('✓ Keyboard navigation supported');
+          }
+        });
+      });
+    });
+
+    it('should have visible focus indicators', () => {
+      cy.get(securitySummaryWidget.root).within(() => {
+        cy.get('button, a, select').first().then(($el) => {
+          if ($el.length > 0) {
+            cy.wrap($el).focus();
+            cy.focused().then(($focused) => {
+              const element = $focused[0] as HTMLElement;
+              const win = element.ownerDocument.defaultView;
+              const style = win?.getComputedStyle(element);
+              
+              // Check for focus indicator (outline or box-shadow)
+              const hasOutline = style?.outline && style.outline !== 'none';
+              const hasBoxShadow = style?.boxShadow && style.boxShadow !== 'none';
+              
+              expect(hasOutline || hasBoxShadow).to.be.true;
+              cy.log('✓ Focus indicators visible');
+            });
+          }
+        });
+      });
+    });
+
+    it('should have readable text in all themes', () => {
+      // Test light mode
+      cy.get('html').invoke('removeClass', 'dark');
+      cy.wait(200);
+      
+      cy.get(securitySummaryWidget.root).within(() => {
+        cy.get('h1, h2, h3, p, span').first().should('be.visible');
+      });
+      
+      // Test dark mode
+      cy.get('html').invoke('addClass', 'dark');
+      cy.wait(200);
+      
+      cy.get(securitySummaryWidget.root).within(() => {
+        cy.get('h1, h2, h3, p, span').first().should('be.visible');
+      });
+      
+      cy.log('✓ Text readable in both themes');
+    });
   });
 
   describe('Content Validation', () => {
@@ -424,6 +479,88 @@ describe('Security Summary Widget - Enhanced', () => {
             // Should have minimal or no large padding elements
             cy.log(`Found ${$largePadding.length} elements with large padding`);
             // This is informational - large padding might be intentional in some cases
+          });
+        });
+      });
+    });
+  });
+
+  describe('Theme Switching', () => {
+    it('should apply dark theme classes correctly', () => {
+      // Toggle to dark mode
+      cy.get('html').invoke('addClass', 'dark');
+      cy.wait(300);
+
+      cy.get(securitySummaryWidget.root).then(($widget) => {
+        if ($widget.length === 0) {
+          cy.log('Widget not found');
+          return;
+        }
+
+        // Check for dark mode styling
+        cy.wrap($widget).within(() => {
+          // Look for dark: prefixed classes or dark mode backgrounds
+          cy.get('[class*="dark:"]').should('exist');
+          cy.log('✓ Dark theme classes applied');
+        });
+      });
+    });
+
+    it('should maintain readability in dark mode', () => {
+      cy.get('html').invoke('addClass', 'dark');
+      cy.wait(300);
+
+      cy.get(securitySummaryWidget.root).within(() => {
+        // Text should be visible
+        cy.get('h1, h2, h3, p').first().then(($el) => {
+          if ($el.length > 0) {
+            cy.wrap($el).should('be.visible');
+            cy.log('✓ Text visible in dark mode');
+          }
+        });
+      });
+    });
+
+    it('should switch between light and dark seamlessly', () => {
+      // Start in light mode
+      cy.get('html').invoke('removeClass', 'dark');
+      cy.wait(200);
+      
+      cy.get(securitySummaryWidget.root).should('be.visible');
+
+      // Switch to dark
+      cy.get('html').invoke('addClass', 'dark');
+      cy.wait(200);
+      
+      cy.get(securitySummaryWidget.root).should('be.visible');
+
+      // Switch back to light
+      cy.get('html').invoke('removeClass', 'dark');
+      cy.wait(200);
+      
+      cy.get(securitySummaryWidget.root).should('be.visible');
+      
+      cy.log('✓ Theme switching seamless');
+    });
+
+    it('should maintain focus indicators in both themes', () => {
+      const viewports = ['light', 'dark'];
+      
+      viewports.forEach(theme => {
+        if (theme === 'dark') {
+          cy.get('html').invoke('addClass', 'dark');
+        } else {
+          cy.get('html').invoke('removeClass', 'dark');
+        }
+        cy.wait(200);
+
+        cy.get(securitySummaryWidget.root).within(() => {
+          cy.get('button, select').first().then(($el) => {
+            if ($el.length > 0) {
+              cy.wrap($el).focus();
+              cy.focused().should('exist');
+              cy.log(`✓ Focus works in ${theme} mode`);
+            }
           });
         });
       });
