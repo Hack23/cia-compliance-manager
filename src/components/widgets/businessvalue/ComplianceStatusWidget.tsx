@@ -21,6 +21,9 @@ const getBadgeStatus = (complianceScore: number): StatusType => {
   return "error";
 };
 
+// Maximum number of gaps to display in compact view
+const MAX_DISPLAYED_GAPS = 3;
+
 /**
  * ComplianceStatusWidget displays status of compliance with various frameworks
  *
@@ -471,7 +474,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                     <div className="text-caption text-error-dark dark:text-error-light">
                       <div className="font-medium mb-xs">Gaps:</div>
                       <ul className="space-y-xs pl-sm">
-                        {gapAnalysis.gaps.slice(0, 3).map((gap, index) => (
+                        {gapAnalysis.gaps.slice(0, MAX_DISPLAYED_GAPS).map((gap, index) => (
                           <li key={index}>
                             • {typeof gap === "string" ? gap : gap.framework || gap.frameworkDescription || "Undefined gap"}
                           </li>

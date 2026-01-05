@@ -23,6 +23,9 @@ interface BusinessValueMetric {
   icon?: string;
 }
 
+// Maximum number of metrics to display in preview
+const MAX_PREVIEW_METRICS = 4;
+
 /**
  * Display value creation information for chosen security levels
  *
@@ -43,8 +46,8 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
   // Get CIA content service for value creation data
   const { ciaContentService, error, isLoading } = useCIAContentService();
 
-  // State for collapsible sections
-  const [expandedSection, setExpandedSection] = React.useState<string | null>("summary");
+  // State for collapsible sections - start collapsed for compact design
+  const [expandedSection, setExpandedSection] = React.useState<string | null>(null);
 
   // Calculate overall security level
   const securityScore = useMemo(() => {
@@ -366,7 +369,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
                 {getBusinessValueSummary()}
               </p>
               <div className="grid grid-cols-2 gap-xs">
-                {valueMetrics.slice(0, 4).map((metric, index) => (
+                {valueMetrics.slice(0, MAX_PREVIEW_METRICS).map((metric, index) => (
                   <div key={index} className="p-xs bg-white/50 dark:bg-gray-800/50 rounded">
                     <div className="flex items-center mb-xs">
                       <span className="mr-xs">{metric.icon || "📈"}</span>
@@ -455,7 +458,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               <div className="p-xs bg-info-light/10 dark:bg-info-dark/20 rounded">
                 <h5 className="text-caption font-medium mb-xs">Executive Summary</h5>
                 <p className="text-caption">
-                  Our {securityScore.toLowerCase()} security investment strategy delivers business value through improved operational reliability, data integrity, and information protection.
+                  Our {typeof securityScore === 'string' ? securityScore.toLowerCase() : securityScore} security investment strategy delivers business value through improved operational reliability, data integrity, and information protection.
                 </p>
               </div>
               <div className="p-xs bg-success-light/10 dark:bg-success-dark/20 rounded">

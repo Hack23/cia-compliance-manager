@@ -271,6 +271,11 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
               <div
                 className="h-1.5 bg-primary dark:bg-primary-light rounded-full"
                 style={{ width: `${complexityPercentage}%` }}
+                role="progressbar"
+                aria-valuenow={complexityPercentage}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label={`Implementation complexity: ${implementationComplexity}`}
               ></div>
             </div>
           </div>
