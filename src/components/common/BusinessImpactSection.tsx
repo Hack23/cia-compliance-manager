@@ -8,6 +8,54 @@ interface BusinessImpactSectionProps {
 }
 
 /**
+ * Get explicit background color classes to avoid dynamic Tailwind class generation
+ * @param color - Color name (blue, green, orange, purple)
+ * @returns Explicit className string for background colors
+ */
+const getBackgroundColorClasses = (color: string): string => {
+  switch (color) {
+    case "blue":
+      return "bg-blue-100 dark:bg-blue-900 border-blue-200 dark:border-blue-800";
+    case "green":
+      return "bg-green-100 dark:bg-green-900 border-green-200 dark:border-green-800";
+    case "orange":
+      return "bg-orange-100 dark:bg-orange-900 border-orange-200 dark:border-orange-800";
+    case "purple":
+      return "bg-purple-100 dark:bg-purple-900 border-purple-200 dark:border-purple-800";
+    case "cyan":
+      return "bg-cyan-100 dark:bg-cyan-900 border-cyan-200 dark:border-cyan-800";
+    case "red":
+      return "bg-red-100 dark:bg-red-900 border-red-200 dark:border-red-800";
+    default:
+      return "bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-800";
+  }
+};
+
+/**
+ * Get explicit text color classes to avoid dynamic Tailwind class generation
+ * @param color - Color name (blue, green, orange, purple)
+ * @returns Explicit className string for text colors
+ */
+const getTextColorClasses = (color: string): string => {
+  switch (color) {
+    case "blue":
+      return "text-blue-700 dark:text-blue-300";
+    case "green":
+      return "text-green-700 dark:text-green-300";
+    case "orange":
+      return "text-orange-700 dark:text-orange-300";
+    case "purple":
+      return "text-purple-700 dark:text-purple-300";
+    case "cyan":
+      return "text-cyan-700 dark:text-cyan-300";
+    case "red":
+      return "text-red-700 dark:text-red-300";
+    default:
+      return "text-gray-700 dark:text-gray-300";
+  }
+};
+
+/**
  * Reusable component for displaying business impact information
  * Used by various CIA impact widgets to provide consistent UI
  */
@@ -20,6 +68,10 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
   // Using the risk level in the UI
   const riskLevelForDisplay =
     impact.financial?.riskLevel || impact.operational?.riskLevel || "Unknown";
+
+  // Get explicit color classes for this color scheme
+  const bgClasses = getBackgroundColorClasses(color);
+  const textClasses = getTextColorClasses(color);
 
   return (
     <div
@@ -45,13 +97,11 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
         {/* Financial Impact */}
         {impact.financial && (
           <div
-            className={`p-2 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
+            className={`p-2 rounded-md bg-opacity-10 dark:bg-opacity-20 border ${bgClasses}`}
           >
             <div className="flex items-center mb-2">
               <span className="mr-2">💰</span>
-              <span
-                className={`font-medium text-${color}-700 dark:text-${color}-300`}
-              >
+              <span className={`font-medium ${textClasses}`}>
                 Financial Impact
               </span>
             </div>
@@ -71,13 +121,11 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
         {/* Operational Impact */}
         {impact.operational && (
           <div
-            className={`p-2 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
+            className={`p-2 rounded-md bg-opacity-10 dark:bg-opacity-20 border ${bgClasses}`}
           >
             <div className="flex items-center mb-2">
               <span className="mr-2">⚙️</span>
-              <span
-                className={`font-medium text-${color}-700 dark:text-${color}-300`}
-              >
+              <span className={`font-medium ${textClasses}`}>
                 Operational Impact
               </span>
             </div>
@@ -97,13 +145,11 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
         {/* Reputational Impact */}
         {impact.reputational && (
           <div
-            className={`p-2 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
+            className={`p-2 rounded-md bg-opacity-10 dark:bg-opacity-20 border ${bgClasses}`}
           >
             <div className="flex items-center mb-2">
               <span className="mr-2">🏆</span>
-              <span
-                className={`font-medium text-${color}-700 dark:text-${color}-300`}
-              >
+              <span className={`font-medium ${textClasses}`}>
                 Reputational Impact
               </span>
             </div>
@@ -122,13 +168,11 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
         {/* Strategic Impact */}
         {impact.strategic && (
           <div
-            className={`p-2 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
+            className={`p-2 rounded-md bg-opacity-10 dark:bg-opacity-20 border ${bgClasses}`}
           >
             <div className="flex items-center mb-2">
               <span className="mr-2">🎯</span>
-              <span
-                className={`font-medium text-${color}-700 dark:text-${color}-300`}
-              >
+              <span className={`font-medium ${textClasses}`}>
                 Strategic Impact
               </span>
             </div>
@@ -148,13 +192,11 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
         {/* Regulatory Impact */}
         {impact.regulatory && (
           <div
-            className={`p-2 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
+            className={`p-2 rounded-md bg-opacity-10 dark:bg-opacity-20 border ${bgClasses}`}
           >
             <div className="flex items-center mb-2">
               <span className="mr-2">📜</span>
-              <span
-                className={`font-medium text-${color}-700 dark:text-${color}-300`}
-              >
+              <span className={`font-medium ${textClasses}`}>
                 Regulatory Impact
               </span>
             </div>
@@ -178,7 +220,7 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
                       (violation, index) => (
                         <span
                           key={index}
-                          className={`px-2 py-0.5 text-xs rounded-full bg-${color}-50 text-${color}-700 dark:bg-${color}-900 dark:bg-opacity-50 dark:text-${color}-300`}
+                          className={`px-2 py-0.5 text-xs rounded-full ${bgClasses.split(' ')[0]} ${textClasses.split(' ')[0]}`}
                         >
                           {violation}
                         </span>
