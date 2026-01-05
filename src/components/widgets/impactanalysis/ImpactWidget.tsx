@@ -182,6 +182,24 @@ const getTestIds = (component: CIAComponent) => {
 };
 
 /**
+ * Get border color class based on component color (explicit for Tailwind purging)
+ * @param color - Color name (blue, green, orange)
+ * @returns Explicit border color className string
+ */
+const getBorderColorClass = (color: "blue" | "green" | "orange"): string => {
+  switch (color) {
+    case "blue": return "border-blue-500";
+    case "green": return "border-green-500";
+    case "orange": return "border-orange-500";
+    default: {
+      // Exhaustive check - TypeScript will error if new colors are added
+      const exhaustiveCheck: never = color;
+      throw new Error(`Unsupported color: ${String(exhaustiveCheck)}`);
+    }
+  }
+};
+
+/**
  * Shared widget component for displaying CIA component impact analysis
  * 
  * ## Business Perspective
@@ -295,20 +313,6 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
       }
     }
   }, [component, effectiveLevel, details, ciaContentService]);
-
-  // Get border color class based on component color (explicit for Tailwind purging)
-  const getBorderColorClass = (color: "blue" | "green" | "orange"): string => {
-    switch (color) {
-      case "blue": return "border-blue-500";
-      case "green": return "border-green-500";
-      case "orange": return "border-orange-500";
-      default: {
-        // Exhaustive check - TypeScript will error if new colors are added
-        const exhaustiveCheck: never = color;
-        throw new Error(`Unsupported color: ${String(exhaustiveCheck)}`);
-      }
-    }
-  };
 
   return (
     <WidgetErrorBoundary widgetName={`${config.categoryLabel} Impact`}>

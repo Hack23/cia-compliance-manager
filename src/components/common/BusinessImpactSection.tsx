@@ -7,7 +7,13 @@ import { BusinessImpactDetails } from "../../types/cia-services";
  */
 type ImpactColor = "blue" | "green" | "orange";
 
-interface BusinessImpactSectionProps {
+/**
+ * Props for the BusinessImpactSection component
+ * @property {BusinessImpactDetails} impact - Business impact data to display
+ * @property {ImpactColor} color - Color theme for the section (blue, green, or orange)
+ * @property {string} [testId] - Optional test ID for testing purposes
+ */
+export interface BusinessImpactSectionProps {
   impact: BusinessImpactDetails;
   color: ImpactColor;
   testId?: string;
