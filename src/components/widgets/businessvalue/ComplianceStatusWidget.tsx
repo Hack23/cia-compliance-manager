@@ -290,7 +290,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         {/* Overall Compliance Status - Compact */}
         <section 
           className="mb-md"
-          aria-labelledby="overall-compliance-heading"
+          aria-label="Overall Compliance Status"
         >
           <div className="grid grid-cols-2 gap-sm mb-sm">
             <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30">
@@ -479,6 +479,12 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                             • {typeof gap === "string" ? gap : gap.framework || gap.frameworkDescription || "Undefined gap"}
                           </li>
                         ))}
+                        {gapAnalysis.gaps.length > UI_DISPLAY_LIMITS.MAX_DISPLAYED_GAPS && (
+                          <li className="opacity-70">
+                            + {gapAnalysis.gaps.length - UI_DISPLAY_LIMITS.MAX_DISPLAYED_GAPS} more gap
+                            {gapAnalysis.gaps.length - UI_DISPLAY_LIMITS.MAX_DISPLAYED_GAPS !== 1 ? "s" : ""}
+                          </li>
+                        )}
                       </ul>
                     </div>
                   )}

@@ -380,6 +380,12 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
                   </div>
                 ))}
               </div>
+              {valueMetrics.length > UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS && (
+                <div className="text-caption text-neutral-dark/70 dark:text-neutral-light/70 mt-xs text-center">
+                  + {valueMetrics.length - UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS} more metric
+                  {valueMetrics.length - UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS !== 1 ? "s" : ""}
+                </div>
+              )}
             </div>
           )}
         </div>

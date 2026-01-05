@@ -307,7 +307,6 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 <SecurityLevelBadge
                   category=""
                   level={confidentialityLevel}
-                  colorClass="text-xs"
                   textClass="text-primary-dark dark:text-primary-light"
                   testId={COST_ESTIMATION_WIDGET_IDS.label('conf-level')}
                 />
@@ -328,7 +327,6 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 <SecurityLevelBadge
                   category=""
                   level={integrityLevel}
-                  colorClass="text-xs"
                   textClass="text-success-dark dark:text-success-light"
                   testId={COST_ESTIMATION_WIDGET_IDS.label('int-level')}
                 />
@@ -349,7 +347,6 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
                 <SecurityLevelBadge
                   category=""
                   level={availabilityLevel}
-                  colorClass="text-xs"
                   textClass="text-info-dark dark:text-info-light"
                   testId={COST_ESTIMATION_WIDGET_IDS.label('avail-level')}
                 />
