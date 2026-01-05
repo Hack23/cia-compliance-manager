@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { TECHNICAL_DETAILS_WIDGET_IDS } from "../../../constants/testIds";
 import { CIAComponent, SecurityLevel } from "../../../types/cia";
@@ -121,18 +121,24 @@ describe("CIAComponentDetails", () => {
     expect(screen.getByText(/Implement role-based access control/i)).toBeInTheDocument();
   });
 
-  it("displays required technologies", () => {
+  it("displays required technologies when advanced details are shown", () => {
     render(<CIAComponentDetails {...defaultProps} />);
+    const toggleButton = screen.getByTestId("cia-component-confidentiality-toggle-advanced");
+    fireEvent.click(toggleButton);
     expect(screen.getByText(/AES-256, TLS 1.3/i)).toBeInTheDocument();
   });
 
-  it("displays required configurations", () => {
+  it("displays required configurations when advanced details are shown", () => {
     render(<CIAComponentDetails {...defaultProps} />);
+    const toggleButton = screen.getByTestId("cia-component-confidentiality-toggle-advanced");
+    fireEvent.click(toggleButton);
     expect(screen.getByText(/Configure firewall rules, Set up VPN/i)).toBeInTheDocument();
   });
 
-  it("displays required expertise", () => {
+  it("displays required expertise when advanced details are shown", () => {
     render(<CIAComponentDetails {...defaultProps} />);
+    const toggleButton = screen.getByTestId("cia-component-confidentiality-toggle-advanced");
+    fireEvent.click(toggleButton);
     expect(screen.getByText(/Security Engineer/i)).toBeInTheDocument();
     expect(screen.getByText(/DevOps Engineer/i)).toBeInTheDocument();
   });
@@ -147,8 +153,10 @@ describe("CIAComponentDetails", () => {
     expect(screen.getByTestId("widget-technical-details-label-maintenance-level")).toBeInTheDocument();
   });
 
-  it("displays required expertise section", () => {
+  it("displays required expertise section when advanced details are shown", () => {
     render(<CIAComponentDetails {...defaultProps} />);
+    const toggleButton = screen.getByTestId("cia-component-confidentiality-toggle-advanced");
+    fireEvent.click(toggleButton);
     expect(screen.getByTestId("widget-technical-details-list-required-expertise")).toBeInTheDocument();
   });
 
@@ -224,7 +232,7 @@ describe("CIAComponentDetails", () => {
     );
   });
 
-  it("calls getTechnologies with correct parameters", () => {
+  it("calls getTechnologies with correct parameters when advanced details are shown", () => {
     const mockGetTechnologies = vi.fn(() => "Tech");
     render(
       <CIAComponentDetails
@@ -233,13 +241,16 @@ describe("CIAComponentDetails", () => {
       />
     );
     
+    const toggleButton = screen.getByTestId("cia-component-confidentiality-toggle-advanced");
+    fireEvent.click(toggleButton);
+    
     expect(mockGetTechnologies).toHaveBeenCalledWith(
       "confidentiality",
       "Moderate"
     );
   });
 
-  it("calls getConfigurations with correct parameters", () => {
+  it("calls getConfigurations with correct parameters when advanced details are shown", () => {
     const mockGetConfigurations = vi.fn(() => "Config");
     render(
       <CIAComponentDetails
@@ -248,13 +259,16 @@ describe("CIAComponentDetails", () => {
       />
     );
     
+    const toggleButton = screen.getByTestId("cia-component-confidentiality-toggle-advanced");
+    fireEvent.click(toggleButton);
+    
     expect(mockGetConfigurations).toHaveBeenCalledWith(
       "confidentiality",
       "Moderate"
     );
   });
 
-  it("calls getExpertiseRequired with correct parameters", () => {
+  it("calls getExpertiseRequired with correct parameters when advanced details are shown", () => {
     const mockGetExpertiseRequired = vi.fn(() => ["Expert"]);
     render(
       <CIAComponentDetails
@@ -262,6 +276,9 @@ describe("CIAComponentDetails", () => {
         getExpertiseRequired={mockGetExpertiseRequired}
       />
     );
+    
+    const toggleButton = screen.getByTestId("cia-component-confidentiality-toggle-advanced");
+    fireEvent.click(toggleButton);
     
     expect(mockGetExpertiseRequired).toHaveBeenCalledWith(
       "confidentiality",
@@ -304,13 +321,15 @@ describe("CIAComponentDetails", () => {
     expect(screen.getByTestId("widget-technical-details-list-implementation-steps")).toBeInTheDocument();
   });
 
-  it("handles empty expertise requirements", () => {
+  it("handles empty expertise requirements when advanced details are shown", () => {
     const emptyExpertiseProps = {
       ...defaultProps,
       getExpertiseRequired: vi.fn(() => []),
     };
     
     render(<CIAComponentDetails {...emptyExpertiseProps} />);
+    const toggleButton = screen.getByTestId("cia-component-confidentiality-toggle-advanced");
+    fireEvent.click(toggleButton);
     expect(screen.getByTestId("widget-technical-details-list-required-expertise")).toBeInTheDocument();
   });
 
