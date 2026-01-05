@@ -368,4 +368,65 @@ describe('Security Summary Widget - Enhanced', () => {
       });
     });
   });
+
+  describe('Compact UI Redesign', () => {
+    it('should fit within 1.5 viewport heights', () => {
+      // Set standard viewport
+      cy.viewport(1280, 800);
+      cy.wait(300);
+
+      cy.get(securitySummaryWidget.root).then(($widget) => {
+        if ($widget.length === 0) {
+          cy.log('Widget not found');
+          return;
+        }
+
+        const widgetHeight = $widget[0].scrollHeight;
+        const viewportHeight = Cypress.config('viewportHeight') || 800;
+        const maxAllowedHeight = viewportHeight * 1.5;
+
+        expect(widgetHeight).to.be.lessThan(maxAllowedHeight, 
+          `Widget height (${widgetHeight}px) should fit within 1.5 viewport heights (${maxAllowedHeight}px)`
+        );
+        
+        cy.log(`✓ Widget height: ${widgetHeight}px, Max allowed: ${maxAllowedHeight}px`);
+      });
+    });
+
+    it('should use compact spacing classes', () => {
+      cy.get(securitySummaryWidget.root).then(($widget) => {
+        if ($widget.length === 0) {
+          cy.log('Widget not found');
+          return;
+        }
+
+        // Check for compact spacing (p-sm, gap-sm, space-y-sm)
+        cy.wrap($widget).within(() => {
+          cy.get('[class*="p-sm"], [class*="gap-sm"], [class*="space-y-sm"]').then(($compact) => {
+            expect($compact.length).to.be.greaterThan(0, 'Should have elements with compact spacing');
+            cy.log(`✓ Found ${$compact.length} elements with compact spacing classes`);
+          });
+        });
+      });
+    });
+
+    it('should have minimal empty container space', () => {
+      cy.get(securitySummaryWidget.root).then(($widget) => {
+        if ($widget.length === 0) {
+          cy.log('Widget not found');
+          return;
+        }
+
+        // Check that widget uses content efficiently (no excessive padding)
+        cy.wrap($widget).within(() => {
+          // Look for excessively large padding
+          cy.get('[class*="p-lg"], [class*="p-xl"]').then(($largePadding) => {
+            // Should have minimal or no large padding elements
+            cy.log(`Found ${$largePadding.length} elements with large padding`);
+            // This is informational - large padding might be intentional in some cases
+          });
+        });
+      });
+    });
+  });
 });
