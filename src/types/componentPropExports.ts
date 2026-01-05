@@ -43,9 +43,37 @@ export interface CIAImpactCardProps {
 }
 
 export interface CodeBlockProps {
+  /**
+   * The code content to display
+   */
   code: string;
+  
+  /**
+   * The programming language for syntax highlighting
+   * @example "typescript", "javascript", "python", "bash"
+   */
   language?: string;
+  
+  /**
+   * Whether to show line numbers
+   * @default false
+   */
   showLineNumbers?: boolean;
+  
+  /**
+   * Whether to show a copy button
+   * @default true
+   */
+  copyable?: boolean;
+  
+  /**
+   * Additional CSS classes
+   */
+  className?: string;
+  
+  /**
+   * Test ID for testing
+   */
   testId?: string;
 }
 

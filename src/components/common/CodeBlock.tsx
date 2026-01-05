@@ -1,42 +1,5 @@
 import React, { useState } from "react";
-
-/**
- * Props for the CodeBlock component
- */
-export interface CodeBlockProps {
-  /**
-   * The programming language for syntax highlighting
-   * @example "typescript", "javascript", "python", "bash"
-   */
-  language?: string;
-
-  /**
-   * The code content to display
-   */
-  code: string;
-
-  /**
-   * Whether to show line numbers
-   * @default false
-   */
-  showLineNumbers?: boolean;
-
-  /**
-   * Whether to show a copy button
-   * @default true
-   */
-  copyable?: boolean;
-
-  /**
-   * Additional CSS classes
-   */
-  className?: string;
-
-  /**
-   * Test ID for testing
-   */
-  testId?: string;
-}
+import { CodeBlockProps } from "../../types/componentPropExports";
 
 /**
  * Simple syntax highlighting for common tokens
@@ -120,8 +83,23 @@ const highlightCode = (code: string, language?: string): string => {
 /**
  * CodeBlock component - displays code with optional syntax highlighting and copy functionality
  * 
+ * ## Business Perspective
+ * 
+ * Provides clear, readable code examples to technical teams implementing
+ * security controls, improving comprehension and reducing implementation errors.
+ * Critical for effective knowledge transfer and documentation. 📝
+ * 
+ * ## Technical Perspective
+ * 
  * This component provides theme-aware code display without external dependencies.
- * It uses simple regex-based syntax highlighting for common languages.
+ * It uses simple regex-based syntax highlighting for common languages (TypeScript,
+ * JavaScript, Python, Bash). Supports copy-to-clipboard functionality and optional
+ * line numbers.
+ * 
+ * **Security Note**: The 'code' prop should only contain trusted content. This
+ * component uses dangerouslySetInnerHTML for syntax highlighting with HTML spans.
+ * While HTML characters are escaped (&, <, >) before processing, the code input
+ * should not come from untrusted user sources to prevent potential XSS risks.
  * 
  * @component
  * 
@@ -155,7 +133,6 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     }
   };
 
-  const lines = code.split("\n");
   const highlightedCode = highlightCode(code, language);
   const highlightedLines = highlightedCode.split("\n");
 

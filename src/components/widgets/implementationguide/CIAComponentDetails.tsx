@@ -221,6 +221,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
           onClick={() => setShowAdvancedDetails(!showAdvancedDetails)}
           className="w-full flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           aria-expanded={showAdvancedDetails}
+          aria-controls={`${testId}-${component}-advanced-content`}
           data-testid={`${testId}-${component}-toggle-advanced`}
         >
           <span className="text-sm font-medium">
@@ -232,7 +233,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </button>
         
         {showAdvancedDetails && (
-          <div className="mt-2 space-y-sm">
+          <div id={`${testId}-${component}-advanced-content`} className="mt-2 space-y-sm">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-sm">
               {/* Technologies card */}
               <div className="p-3 bg-white dark:bg-gray-800 rounded-md shadow-sm border border-neutral-light dark:border-neutral-dark">
