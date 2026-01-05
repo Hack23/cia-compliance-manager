@@ -425,7 +425,7 @@ describe('Security Summary Widget - Enhanced', () => {
   });
 
   describe('Compact UI Redesign', () => {
-    it('should fit within 1.5 viewport heights', () => {
+    it('should fit within 3.5 viewport heights', () => {
       // Set standard viewport
       cy.viewport(1280, 800);
       cy.wait(300);

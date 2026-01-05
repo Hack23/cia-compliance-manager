@@ -76,7 +76,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
             data-testid={SECURITY_SUMMARY_TEST_IDS.CONFIDENTIALITY_CARD}
           >
             <div className="flex items-center mb-sm">
-              <span className="text-subheading mr-sm text-purple-500 dark:text-purple-400">
+              <span className="text-subheading mr-sm text-purple-500 dark:text-purple-400" aria-hidden="true">
                 🔒
               </span>
               <h4 className="font-medium text-purple-700 dark:text-purple-300">
@@ -106,7 +106,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
             data-testid={SECURITY_SUMMARY_TEST_IDS.INTEGRITY_CARD}
           >
             <div className="flex items-center mb-sm">
-              <span className="text-subheading mr-sm text-green-500 dark:text-green-400">
+              <span className="text-subheading mr-sm text-green-500 dark:text-green-400" aria-hidden="true">
                 ✓
               </span>
               <h4 className="font-medium text-green-700 dark:text-green-300">
@@ -138,7 +138,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
             data-testid={SECURITY_SUMMARY_TEST_IDS.AVAILABILITY_CARD}
           >
             <div className="flex items-center mb-sm">
-              <span className="text-subheading mr-sm text-blue-500 dark:text-blue-400">
+              <span className="text-subheading mr-sm text-blue-500 dark:text-blue-400" aria-hidden="true">
                 ⏱️
               </span>
               <h4 className="font-medium text-blue-700 dark:text-blue-300">

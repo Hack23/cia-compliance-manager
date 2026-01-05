@@ -219,7 +219,7 @@ const BusinessImpactAnalysisWidget: React.FC<
       >
         <div className="flex justify-between items-center mb-sm">
           <h3 className={cn(WidgetClasses.subheading, "flex items-center")}>
-            <span className="mr-sm">{icons[category] || "📊"}</span>
+            <span className="mr-sm" aria-hidden="true">{icons[category] || "📊"}</span>
             {category} Impact
           </h3>
           {impact.riskLevel && (
@@ -458,7 +458,7 @@ const BusinessImpactAnalysisWidget: React.FC<
       label: 'Implementation Considerations',
       content: (
         <div
-          className={cn(WidgetClasses.grid2Cols, "gap-sm")}
+          className={WidgetClasses.grid2Cols}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('considerations')}
         >
           {considerations.map((item, index) => (
@@ -468,7 +468,7 @@ const BusinessImpactAnalysisWidget: React.FC<
               data-testid={BUSINESS_IMPACT_WIDGET_IDS.item(`consideration-${index}`)}
             >
               <div className="flex items-center mb-sm">
-                <span className="mr-sm text-blue-500 dark:text-blue-400">{item.icon}</span>
+                <span className="mr-sm text-blue-500 dark:text-blue-400" aria-hidden="true">{item.icon}</span>
                 <h4 className={WidgetClasses.subheading}>{item.title}</h4>
               </div>
               <p className={WidgetClasses.body}>
@@ -485,7 +485,7 @@ const BusinessImpactAnalysisWidget: React.FC<
       label: 'Business Benefits',
       content: (
         <div
-          className={cn(WidgetClasses.grid2Cols, "gap-sm")}
+          className={WidgetClasses.grid2Cols}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('benefits')}
         >
           {benefits.map((item, index) => (
@@ -495,7 +495,7 @@ const BusinessImpactAnalysisWidget: React.FC<
               data-testid={BUSINESS_IMPACT_WIDGET_IDS.item(`benefit-${index}`)}
             >
               <div className="flex items-center mb-sm">
-                <span className="mr-sm text-green-500 dark:text-green-400">{item.icon}</span>
+                <span className="mr-sm text-green-500 dark:text-green-400" aria-hidden="true">{item.icon}</span>
                 <h4 className={WidgetClasses.subheading}>{item.title}</h4>
               </div>
               <p className={WidgetClasses.body}>
@@ -544,7 +544,7 @@ const BusinessImpactAnalysisWidget: React.FC<
               <h4 className={cn(WidgetClasses.subheading, "flex items-center")}>
                 <span className="mr-sm" aria-hidden="true">🔒</span>Confidentiality Impact
               </h4>
-              <div className={cn(WidgetClasses.grid2Cols, "gap-sm")}>
+              <div className={WidgetClasses.grid2Cols}>
                 {confidentialityImpact.reputational &&
                   renderImpactCategory(
                     "Reputational",
@@ -565,7 +565,7 @@ const BusinessImpactAnalysisWidget: React.FC<
               <h4 className={cn(WidgetClasses.subheading, "flex items-center")}>
                 <span className="mr-sm" aria-hidden="true">✅</span>Integrity Impact
               </h4>
-              <div className={cn(WidgetClasses.grid2Cols, "gap-sm")}>
+              <div className={WidgetClasses.grid2Cols}>
                 {integrityImpact.financial &&
                   renderImpactCategory("Financial", integrityImpact.financial)}
                 {integrityImpact.operational &&
@@ -583,7 +583,7 @@ const BusinessImpactAnalysisWidget: React.FC<
               <h4 className={cn(WidgetClasses.subheading, "flex items-center")}>
                 <span className="mr-sm" aria-hidden="true">⏱️</span>Availability Impact
               </h4>
-              <div className={cn(WidgetClasses.grid2Cols, "gap-sm")}>
+              <div className={WidgetClasses.grid2Cols}>
                 {availabilityImpact.financial &&
                   renderImpactCategory("Financial", availabilityImpact.financial)}
                 {availabilityImpact.operational &&
