@@ -1,23 +1,12 @@
 import React from "react";
 import { BusinessImpactDetails } from "../../types/cia-services";
+import type { BusinessImpactSectionProps } from "../../types/componentPropExports";
 
 /**
  * Valid color values for business impact sections
  * Limited to colors actually used by CIA components
  */
 type ImpactColor = "blue" | "green" | "orange";
-
-/**
- * Props for the BusinessImpactSection component
- * @property {BusinessImpactDetails} impact - Business impact data to display
- * @property {ImpactColor} color - Color theme for the section (blue, green, or orange)
- * @property {string} [testId] - Optional test ID for testing purposes
- */
-export interface BusinessImpactSectionProps {
-  impact: BusinessImpactDetails;
-  color: ImpactColor;
-  testId?: string;
-}
 
 /**
  * Get explicit background color classes to avoid dynamic Tailwind class generation
