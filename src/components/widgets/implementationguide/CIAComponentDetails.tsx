@@ -141,9 +141,9 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-sm mb-md">
         {/* Main technical details card */}
         <div
-          className={`p-3 ${theme.bgClass} rounded-lg shadow-sm border ${theme.borderClass}`}
+          className={`p-sm ${theme.bgClass} rounded-lg shadow-sm border ${theme.borderClass}`}
         >
-          <h4 className={`text-md font-medium ${theme.textClass} mb-2`}>
+          <h4 className={`text-md font-medium ${theme.textClass} mb-md`}>
             Technical Description
           </h4>
           <p
@@ -157,8 +157,8 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             )}
           </p>
 
-          <div className="mt-3">
-            <h5 className={`text-sm font-medium ${theme.textClass} mb-1`}>
+          <div className="mt-md">
+            <h5 className={`text-sm font-medium ${theme.textClass} mb-xs`}>
               Implementation Complexity
             </h5>
             <div
@@ -175,8 +175,8 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             </div>
           </div>
 
-          <div className="mt-3">
-            <h5 className={`text-sm font-medium ${theme.textClass} mb-1`}>
+          <div className="mt-md">
+            <h5 className={`text-sm font-medium ${theme.textClass} mb-xs`}>
               Personnel Requirements
             </h5>
             <div
@@ -192,15 +192,15 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </div>
 
         {/* Implementation requirements card */}
-        <div className="p-3 bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
+        <div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
           <h4
-            className="text-md font-medium mb-2"
+            className="text-md font-medium mb-md"
             data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header('implementation')}
           >
             Implementation Requirements
           </h4>
           <ul
-            className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400"
+            className="list-disc list-inside space-y-xs text-sm text-gray-600 dark:text-gray-400"
             data-testid={TECHNICAL_DETAILS_WIDGET_IDS.list('implementation-steps')}
           >
             {getTechnicalRequirements(component, level).map((req, index) => (

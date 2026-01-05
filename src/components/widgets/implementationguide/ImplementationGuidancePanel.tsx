@@ -46,7 +46,7 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
           <h4 className="text-md font-medium mb-sm">
             Getting Started with Implementation
           </h4>
-          <ol className="list-decimal list-inside space-y-xs text-sm text-gray-600 dark:text-gray-400 pl-2">
+          <ol className="list-decimal list-inside space-y-xs text-sm text-gray-600 dark:text-gray-400 pl-md">
             <li>Begin with a thorough assessment of your current security controls</li>
             <li>Prioritize implementations based on risk exposure and business impact</li>
             <li>Implement controls gradually, starting with foundational elements</li>
@@ -140,7 +140,7 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
           <h4 className="text-md font-medium mb-sm text-yellow-700 dark:text-yellow-300 flex items-center">
             <span className="mr-sm">⚠️</span>Common Implementation Challenges
           </h4>
-          <ul className="list-disc list-inside space-y-xs text-sm text-gray-600 dark:text-gray-400 pl-2">
+          <ul className="list-disc list-inside space-y-xs text-sm text-gray-600 dark:text-gray-400 pl-md">
             <li>Balancing security with usability and performance</li>
             <li>Maintaining consistent controls across different environments</li>
             <li>Integration with legacy systems and applications</li>

@@ -146,14 +146,14 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
       data-testid={testId}
     >
       {/* Header with language and copy button */}
-      <div className="flex items-center justify-between px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+      <div className="flex items-center justify-between px-lg py-md bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
           {language || "code"}
         </span>
         {copyable && (
           <button
             onClick={handleCopy}
-            className="text-xs px-2 py-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+            className="text-xs px-md py-xs rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
             data-testid={`${testId}-copy-button`}
             aria-label="Copy code to clipboard"
           >
@@ -164,14 +164,14 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
 
       {/* Code content */}
       <div className="bg-gray-50 dark:bg-gray-900 overflow-x-auto">
-        <pre className="p-4 text-sm">
+        <pre className="p-lg text-sm">
           <code className="font-mono">
             {showLineNumbers ? (
               <table className="w-full border-collapse">
                 <tbody>
                   {highlightedLines.map((line, index) => (
                     <tr key={index}>
-                      <td className="pr-4 text-right text-gray-400 dark:text-gray-600 select-none align-top">
+                      <td className="pr-lg text-right text-gray-400 dark:text-gray-600 select-none align-top">
                         {index + 1}
                       </td>
                       <td
