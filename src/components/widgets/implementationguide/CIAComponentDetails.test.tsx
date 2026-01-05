@@ -358,4 +358,38 @@ describe("CIAComponentDetails", () => {
     // Check that blue theme classes are applied
     expect(container.querySelector('.text-blue-800')).toBeTruthy();
   });
+
+  it("advanced details toggle button should start with aria-expanded=false", () => {
+    render(<CIAComponentDetails {...defaultProps} />);
+    const toggleButton = screen.getByTestId("cia-component-confidentiality-toggle-advanced");
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it("advanced details toggle button should have aria-expanded=true after clicking", () => {
+    render(<CIAComponentDetails {...defaultProps} />);
+    const toggleButton = screen.getByTestId("cia-component-confidentiality-toggle-advanced");
+    
+    // Initially collapsed
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
+    
+    // Click to expand
+    fireEvent.click(toggleButton);
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'true');
+  });
+
+  it("advanced details toggle button should return to aria-expanded=false after clicking twice", () => {
+    render(<CIAComponentDetails {...defaultProps} />);
+    const toggleButton = screen.getByTestId("cia-component-confidentiality-toggle-advanced");
+    
+    // Initially collapsed
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
+    
+    // Click to expand
+    fireEvent.click(toggleButton);
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'true');
+    
+    // Click again to collapse
+    fireEvent.click(toggleButton);
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
+  });
 });
