@@ -17,6 +17,8 @@ src/components/charts/RadarChart.tsx
 src/components/common/BusinessImpactSection.extended.test.tsx
 src/components/common/BusinessImpactSection.test.tsx
 src/components/common/BusinessImpactSection.tsx
+src/components/common/CodeBlock.test.tsx
+src/components/common/CodeBlock.tsx
 src/components/common/ErrorMessage.test.tsx
 src/components/common/ErrorMessage.tsx
 src/components/common/ErrorToast.test.tsx
@@ -87,6 +89,8 @@ src/components/widgets/impactanalysis/IntegrityImpactWidget.test.tsx
 src/components/widgets/impactanalysis/IntegrityImpactWidget.tsx
 src/components/widgets/implementationguide/CIAComponentDetails.test.tsx
 src/components/widgets/implementationguide/CIAComponentDetails.tsx
+src/components/widgets/implementationguide/ImplementationGuidancePanel.test.tsx
+src/components/widgets/implementationguide/ImplementationGuidancePanel.tsx
 src/components/widgets/implementationguide/SecurityResourcesWidget.test.tsx
 src/components/widgets/implementationguide/SecurityResourcesWidget.tsx
 src/components/widgets/implementationguide/SecurityVisualizationWidget.enhanced.test.tsx

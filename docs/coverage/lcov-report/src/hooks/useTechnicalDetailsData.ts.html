@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.04% </span>
+                <span class="strong">63.93% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>47/61</span>
+                <span class='fraction'>39/61</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.5% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>15/24</span>
+                <span class='fraction'>12/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.53% </span>
+                <span class="strong">53.84% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>8/13</span>
+                <span class='fraction'>7/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.04% </span>
+                <span class="strong">63.93% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>47/61</span>
+                <span class='fraction'>39/61</span>
             </div>
         
             
@@ -341,8 +341,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -520,28 +520,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -766,28 +766,28 @@ export function useTechnicalDetailsData(
    * @param level - The security level
    * @returns Array of expertise requirements
    */
-  const getExpertiseRequired = (
+  const getExpertiseRequired = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span></span>
     component: CIAComponent,
     level: SecurityLevel
   ): string[] =&gt; {
-    try {
-      if (!isNullish(ciaContentService)) {
-        const expertise = (ciaContentService as CIAContentService).getRequiredExpertise?.(
+<span class="cstat-no" title="statement not covered" >    try {</span>
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!isNullish(ciaContentService)) {
+        const expertise = (<span class="cstat-no" title="statement not covered" >ciaContentService as CIAContentService).getRequiredExpertise?.(</span>
           component,
           level
         );
-        <span class="missing-if-branch" title="else path not taken" >E</span>if (Array.isArray(expertise) &amp;&amp; expertise.length &gt; 0) {
-          return expertise;
+<span class="cstat-no" title="statement not covered" >        if (Array.isArray(expertise) &amp;&amp; expertise.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >          return expertise;</span>
         }
       }
-      return getDefaultExpertise(component, level);
+<span class="cstat-no" title="statement not covered" >      return getDefaultExpertise(component, level);</span>
     } catch (err) {
-      console.error(`Error getting ${component} expertise requirements:`, err);
+<span class="cstat-no" title="statement not covered" >      console.error(`Error getting ${component} expertise requirements:`, err);</span>
 <span class="cstat-no" title="statement not covered" >      return getDefaultExpertise(component, level);</span>
     }
   };
 &nbsp;
-  return {
+<span class="cstat-no" title="statement not covered" >  return {</span>
     confidentialityDetails,
     integrityDetails,
     availabilityDetails,
@@ -808,7 +808,7 @@ export function useTechnicalDetailsData(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-02T01:19:05.655Z
+                at 2026-01-05T23:14:57.776Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

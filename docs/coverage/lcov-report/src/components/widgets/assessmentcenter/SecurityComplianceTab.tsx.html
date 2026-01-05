@@ -275,7 +275,9 @@
 <a name='L210'></a><a href='#L210'>210</a>
 <a name='L211'></a><a href='#L211'>211</a>
 <a name='L212'></a><a href='#L212'>212</a>
-<a name='L213'></a><a href='#L213'>213</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L213'></a><a href='#L213'>213</a>
+<a name='L214'></a><a href='#L214'>214</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -493,6 +495,7 @@ import { SecurityLevel } from "../../../types/cia";
 import { ComplianceStatusType } from "../../../types/compliance";
 import { getComplianceRequirementText } from "../../../utils/complianceTextUtils";
 import { getComplianceStatusText } from "../../../utils/statusUtils";
+import { WidgetClasses } from "../../../utils/tailwindClassHelpers";
 &nbsp;
 /**
  * Props for SecurityComplianceTab component
@@ -521,7 +524,7 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
   return (
     &lt;div data-testid={testId || <span class="branch-1 cbranch-no" title="branch not covered" >SECURITY_SUMMARY_WIDGET_IDS.section('content-compliance')} c</span>lassName="space-y-4"&gt;
       {/* Compliance introduction */}
-      &lt;div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-md"&gt;
+      &lt;div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-sm"&gt;
         &lt;p className="text-sm"&gt;
           This section summarizes your compliance status based on selected
           security levels, highlighting alignment with regulatory frameworks and
@@ -530,13 +533,13 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
       &lt;/div&gt;
 &nbsp;
       {/* Compliance Status */}
-      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700"&gt;
-        &lt;h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100"&gt;
+      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700"&gt;
+        &lt;h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100"&gt;
           Compliance Status Overview
         &lt;/h3&gt;
 &nbsp;
         {!complianceStatus ? (
-          &lt;div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
+          &lt;div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
             &lt;div className="flex justify-between items-center mb-sm"&gt;
               &lt;span className="font-medium"&gt;Compliance Score&lt;/span&gt;
               &lt;span className="text-subheading font-bold"&gt;{securityScore}%&lt;/span&gt;
@@ -558,7 +561,7 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
             &lt;/p&gt;
           &lt;/div&gt;
         ) : (
-          &lt;div className="p-md bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
+          &lt;div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;
             &lt;div className="flex justify-between items-center mb-sm"&gt;
               &lt;span className="font-medium"&gt;Compliance Score&lt;/span&gt;
               &lt;span className="text-subheading font-bold"&gt;
@@ -588,8 +591,8 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
       &lt;/div&gt;
 &nbsp;
       {/* Framework Status */}
-      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700"&gt;
-        &lt;h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100"&gt;
+      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700"&gt;
+        &lt;h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100"&gt;
           Framework Compliance Status
         &lt;/h3&gt;
 &nbsp;
@@ -598,8 +601,8 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
             Detailed compliance information is not available.
           &lt;/p&gt;
         ) : (
-          &lt;div className="grid grid-cols-1 lg:grid-cols-2 gap-md"&gt;
-            &lt;div className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"&gt;
+          &lt;div className={WidgetClasses.grid2Cols}&gt;
+            &lt;div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"&gt;
               &lt;h4 className="font-medium text-green-700 dark:text-green-300 flex items-center justify-between"&gt;
                 &lt;span&gt;Compliant&lt;/span&gt;
                 &lt;span className="text-sm bg-green-100 dark:bg-green-800 px-2 py-0.5 rounded-full"&gt;
@@ -621,7 +624,7 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
               )}
             &lt;/div&gt;
 &nbsp;
-            &lt;div className="p-md bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg"&gt;
+            &lt;div className="p-sm bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg"&gt;
               &lt;h4 className="font-medium text-yellow-700 dark:text-yellow-300 flex items-center justify-between"&gt;
                 &lt;span&gt;Partially Compliant&lt;/span&gt;
                 &lt;span className="text-sm bg-yellow-100 dark:bg-yellow-800 px-2 py-0.5 rounded-full"&gt;
@@ -647,14 +650,14 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
       &lt;/div&gt;
 &nbsp;
       {/* Component Requirements */}
-      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700"&gt;
-        &lt;h3 className="text-lg font-medium mb-md text-gray-800 dark:text-gray-100"&gt;
+      &lt;div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700"&gt;
+        &lt;h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100"&gt;
           Component Compliance Requirements
         &lt;/h3&gt;
 &nbsp;
-        &lt;div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md"&gt;
+        &lt;div className={WidgetClasses.grid3Cols}&gt;
           {/* Confidentiality compliance */}
-          &lt;div className="p-md bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded"&gt;
+          &lt;div className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded"&gt;
             &lt;h5 className="text-sm font-medium mb-xs text-purple-700 dark:text-purple-300"&gt;
               Confidentiality
             &lt;/h5&gt;
@@ -670,7 +673,7 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
           &lt;/div&gt;
 &nbsp;
           {/* Integrity compliance */}
-          &lt;div className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded"&gt;
+          &lt;div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded"&gt;
             &lt;h5 className="text-sm font-medium mb-xs text-green-700 dark:text-green-300"&gt;
               Integrity
             &lt;/h5&gt;
@@ -683,7 +686,7 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
           &lt;/div&gt;
 &nbsp;
           {/* Availability compliance */}
-          &lt;div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded"&gt;
+          &lt;div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded"&gt;
             &lt;h5 className="text-sm font-medium mb-xs text-blue-700 dark:text-blue-300"&gt;
               Availability
             &lt;/h5&gt;
@@ -706,7 +709,7 @@ export const SecurityComplianceTab: React.FC&lt;SecurityComplianceTabProps&gt; =
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-02T01:19:05.655Z
+                at 2026-01-05T23:14:57.776Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

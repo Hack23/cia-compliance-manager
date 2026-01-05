@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.5**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.6**](../../README.md)
 
 ***
 
@@ -12,6 +12,7 @@
 - [CIA\_COMPONENT\_ICONS](variables/CIA_COMPONENT_ICONS.md)
 - [SECURITY\_ICONS](variables/SECURITY_ICONS.md)
 - [SECURITY\_LEVEL\_COLORS](variables/SECURITY_LEVEL_COLORS.md)
+- [UI\_DISPLAY\_LIMITS](variables/UI_DISPLAY_LIMITS.md)
 - [WIDGET\_ICONS](variables/WIDGET_ICONS.md)
 
 ## Functions

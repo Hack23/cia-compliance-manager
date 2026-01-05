@@ -891,7 +891,11 @@
 <a name='L826'></a><a href='#L826'>826</a>
 <a name='L827'></a><a href='#L827'>827</a>
 <a name='L828'></a><a href='#L828'>828</a>
-<a name='L829'></a><a href='#L829'>829</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L829'></a><a href='#L829'>829</a>
+<a name='L830'></a><a href='#L830'>830</a>
+<a name='L831'></a><a href='#L831'>831</a>
+<a name='L832'></a><a href='#L832'>832</a>
+<a name='L833'></a><a href='#L833'>833</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1403,6 +1407,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1935,12 +1943,12 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
     return (
       &lt;div
         key={`impact-${category}`}
-        className={cn(WidgetClasses.card, "bg-gray-50 dark:bg-gray-800 mb-md")}
+        className={cn(WidgetClasses.card, "bg-gray-50 dark:bg-gray-800 mb-sm")}
         data-testid={BUSINESS_IMPACT_WIDGET_IDS.section(`impact-${category.toLowerCase()}`)}
       &gt;
         &lt;div className="flex justify-between items-center mb-sm"&gt;
           &lt;h3 className={cn(WidgetClasses.subheading, "flex items-center")}&gt;
-            &lt;span className="mr-sm"&gt;{icons[category] || "📊"}&lt;/span&gt;
+            &lt;span className="mr-sm" aria-hidden="true"&gt;{icons[category] || "📊"}&lt;/span&gt;
             {category} Impact
           &lt;/h3&gt;
           {impact.riskLevel &amp;&amp; (
@@ -2082,10 +2090,10 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
   const renderImpactHeatMap = () =&gt; {
     // Create a visual representation of impact across CIA components
     return (
-      &lt;div className={cn(WidgetClasses.grid3Cols, "mt-md mb-md")}&gt;
+      &lt;div className={cn(WidgetClasses.grid3Cols, "mt-sm mb-sm")}&gt;
         &lt;div
           className={cn(
-            "p-2 sm:p-3 rounded text-center",
+            "p-sm rounded text-center",
             getImpactColorClass(confidentialityLevel)
           )}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-confidentiality')}
@@ -2095,7 +2103,7 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
         &lt;/div&gt;
         &lt;div
           className={cn(
-            "p-2 sm:p-3 rounded text-center",
+            "p-sm rounded text-center",
             getImpactColorClass(integrityLevel)
           )}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-integrity')}
@@ -2105,7 +2113,7 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
         &lt;/div&gt;
         &lt;div
           className={cn(
-            "p-2 sm:p-3 rounded text-center",
+            "p-sm rounded text-center",
             getImpactColorClass(availabilityLevel)
           )}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('heatmap-availability')}
@@ -2123,14 +2131,14 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
       &lt;div
         className={cn(
           WidgetClasses.card,
-          "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 mb-md shadow-none"
+          "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 mb-sm shadow-none"
         )}
         data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('executive-summary')}
       &gt;
         &lt;h3 className={cn(WidgetClasses.heading, "flex items-center")}&gt;
-          &lt;span className="mr-sm"&gt;📊&lt;/span&gt;Executive Summary
+          &lt;span className="mr-sm" aria-hidden="true"&gt;📊&lt;/span&gt;Executive Summary
         &lt;/h3&gt;
-        &lt;p className={cn(WidgetClasses.body, "mb-md")}&gt;
+        &lt;p className={cn(WidgetClasses.body, "mb-sm")}&gt;
           Current security posture provides{" "}
           &lt;span className="font-medium"&gt;{impactLevel}&lt;/span&gt; protection for
           business operations. Business impacts are most significant in{" "}
@@ -2179,20 +2187,20 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
       label: 'Implementation Considerations',
       content: (
         &lt;div
-          className="grid grid-cols-1 gap-md"
+          className={WidgetClasses.grid2Cols}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('considerations')}
         &gt;
           {considerations.map((item, index) =&gt; (
             &lt;div
               key={`consideration-${index}`}
-              className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg"
+              className="p-sm bg-gray-50 dark:bg-gray-800 rounded-lg"
               data-testid={BUSINESS_IMPACT_WIDGET_IDS.item(`consideration-${index}`)}
             &gt;
               &lt;div className="flex items-center mb-sm"&gt;
-                &lt;span className="mr-sm text-blue-500"&gt;{item.icon}&lt;/span&gt;
-                &lt;h4 className="text-md font-medium"&gt;{item.title}&lt;/h4&gt;
+                &lt;span className="mr-sm text-blue-500 dark:text-blue-400" aria-hidden="true"&gt;{item.icon}&lt;/span&gt;
+                &lt;h4 className="text-body-lg font-medium text-gray-700 dark:text-gray-200"&gt;{item.title}&lt;/h4&gt;
               &lt;/div&gt;
-              &lt;p className="text-sm text-gray-600 dark:text-gray-400"&gt;
+              &lt;p className={WidgetClasses.body}&gt;
                 {item.description}
               &lt;/p&gt;
             &lt;/div&gt;
@@ -2206,20 +2214,20 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
       label: 'Business Benefits',
       content: (
         &lt;div
-          className="grid grid-cols-1 gap-md"
+          className={WidgetClasses.grid2Cols}
           data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('benefits')}
         &gt;
           {benefits.map((item, index) =&gt; (
             &lt;div
               key={`benefit-${index}`}
-              className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg"
+              className="p-sm bg-gray-50 dark:bg-gray-800 rounded-lg"
               data-testid={BUSINESS_IMPACT_WIDGET_IDS.item(`benefit-${index}`)}
             &gt;
               &lt;div className="flex items-center mb-sm"&gt;
-                &lt;span className="mr-sm text-green-500"&gt;{item.icon}&lt;/span&gt;
-                &lt;h4 className="text-md font-medium"&gt;{item.title}&lt;/h4&gt;
+                &lt;span className="mr-sm text-green-500 dark:text-green-400" aria-hidden="true"&gt;{item.icon}&lt;/span&gt;
+                &lt;h4 className="text-body-lg font-medium text-gray-700 dark:text-gray-200"&gt;{item.title}&lt;/h4&gt;
               &lt;/div&gt;
-              &lt;p className="text-sm text-gray-600 dark:text-gray-400"&gt;
+              &lt;p className={WidgetClasses.body}&gt;
                 {item.description}
               &lt;/p&gt;
             &lt;/div&gt;
@@ -2243,7 +2251,7 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
         error={serviceError}
       &gt;
       &lt;div 
-        className="p-md"
+        className="p-sm space-y-sm"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Business Impact Analysis",
@@ -2252,75 +2260,79 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
       &gt;
         {/* Component Business Impacts */}
         &lt;section 
-          className="mb-md"
+          className="mb-sm"
           aria-labelledby="business-impacts-heading"
         &gt;
-          &lt;h3 id="business-impacts-heading" className="text-lg font-medium mb-md"&gt;
+          &lt;h3 id="business-impacts-heading" className={WidgetClasses.subheading}&gt;
             Business Impacts by Component
           &lt;/h3&gt;
 &nbsp;
           {/* Confidentiality impact */}
           {confidentialityImpact &amp;&amp; (
-            &lt;div className="mb-md"&gt;
-              &lt;h4 className="text-md font-medium mb-sm flex items-center"&gt;
+            &lt;div className="mb-sm"&gt;
+              &lt;h4 className={cn(WidgetClasses.subheading, "flex items-center")}&gt;
                 &lt;span className="mr-sm" aria-hidden="true"&gt;🔒&lt;/span&gt;Confidentiality Impact
               &lt;/h4&gt;
-              {confidentialityImpact.reputational &amp;&amp;
-                renderImpactCategory(
-                  "Reputational",
-                  confidentialityImpact.reputational
-                )}
-              {confidentialityImpact.regulatory &amp;&amp;
-                renderImpactCategory(
-                  "Regulatory",
-                  confidentialityImpact.regulatory
-                )}
+              &lt;div className={WidgetClasses.grid2Cols}&gt;
+                {confidentialityImpact.reputational &amp;&amp;
+                  renderImpactCategory(
+                    "Reputational",
+                    confidentialityImpact.reputational
+                  )}
+                {confidentialityImpact.regulatory &amp;&amp;
+                  renderImpactCategory(
+                    "Regulatory",
+                    confidentialityImpact.regulatory
+                  )}
+              &lt;/div&gt;
             &lt;/div&gt;
           )}
 &nbsp;
           {/* Integrity impact */}
           {integrityImpact &amp;&amp; (
-            &lt;div className="mb-md"&gt;
-              &lt;h4 className="text-md font-medium mb-sm flex items-center"&gt;
-                &lt;span className="mr-sm"&gt;✅&lt;/span&gt;Integrity Impact
+            &lt;div className="mb-sm"&gt;
+              &lt;h4 className={cn(WidgetClasses.subheading, "flex items-center")}&gt;
+                &lt;span className="mr-sm" aria-hidden="true"&gt;✅&lt;/span&gt;Integrity Impact
               &lt;/h4&gt;
-              {integrityImpact.financial &amp;&amp;
-                renderImpactCategory("Financial", integrityImpact.financial)}
-              {integrityImpact.operational &amp;&amp;
-                renderImpactCategory(
-                  "Operational",
-                  integrityImpact.operational
-                )}
+              &lt;div className={WidgetClasses.grid2Cols}&gt;
+                {integrityImpact.financial &amp;&amp;
+                  renderImpactCategory("Financial", integrityImpact.financial)}
+                {integrityImpact.operational &amp;&amp;
+                  renderImpactCategory(
+                    "Operational",
+                    integrityImpact.operational
+                  )}
+              &lt;/div&gt;
             &lt;/div&gt;
           )}
 &nbsp;
-          {/* Availability impact */}
+          {/* Availability impact - Full width */}
           {availabilityImpact &amp;&amp; (
-            &lt;div className="mb-md"&gt;
-              &lt;h4 className="text-md font-medium mb-sm flex items-center"&gt;
+            &lt;div className="mb-sm"&gt;
+              &lt;h4 className={cn(WidgetClasses.subheading, "flex items-center")}&gt;
                 &lt;span className="mr-sm" aria-hidden="true"&gt;⏱️&lt;/span&gt;Availability Impact
               &lt;/h4&gt;
-              {availabilityImpact.financial &amp;&amp;
-                renderImpactCategory("Financial", availabilityImpact.financial)}
-              {availabilityImpact.operational &amp;&amp;
-                renderImpactCategory(
-                  "Operational",
-                  availabilityImpact.operational
-                )}
+              &lt;div className={WidgetClasses.grid2Cols}&gt;
+                {availabilityImpact.financial &amp;&amp;
+                  renderImpactCategory("Financial", availabilityImpact.financial)}
+                {availabilityImpact.operational &amp;&amp;
+                  renderImpactCategory(
+                    "Operational",
+                    availabilityImpact.operational
+                  )}
+              &lt;/div&gt;
             &lt;/div&gt;
           )}
         &lt;/section&gt;
 &nbsp;
-        &lt;div className="mb-md p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"&gt;
-          &lt;p className="text-sm"&gt;
-            {/* Executive Summary Section */}
-            {renderExecutiveSummary()}
-          &lt;/p&gt;
+        {/* Executive Summary and Heatmap combined */}
+        &lt;div className="mb-sm"&gt;
+          {renderExecutiveSummary()}
         &lt;/div&gt;
 &nbsp;
         {/* Current Security Levels &amp; Impact */}
-        &lt;div className="mb-md"&gt;
-          &lt;h3 className="text-lg font-medium mb-sm"&gt;Current Security Levels&lt;/h3&gt;
+        &lt;div className="mb-sm"&gt;
+          &lt;h3 className={WidgetClasses.subheading}&gt;Current Security Levels&lt;/h3&gt;
           &lt;div className="flex flex-wrap gap-sm"&gt;
             &lt;SecurityLevelBadge
               category="Confidentiality"
@@ -2348,7 +2360,7 @@ const BusinessImpactAnalysisWidget: React.FC&lt;
         &lt;/div&gt;
 &nbsp;
         {/* Business Considerations &amp; Benefits */}
-        &lt;div className="mt-md"&gt;
+        &lt;div className="mt-sm"&gt;
           &lt;TabContainer
             tabs={tabs}
             initialTab="considerations"
@@ -2554,7 +2566,7 @@ export default BusinessImpactAnalysisWidget;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-02T01:19:05.655Z
+                at 2026-01-05T23:14:57.776Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

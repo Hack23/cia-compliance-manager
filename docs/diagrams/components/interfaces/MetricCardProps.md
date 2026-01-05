@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.5**](../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.6**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: MetricCardProps
 
-Defined in: [types/componentPropExports.ts:370](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L370)
+Defined in: [types/componentPropExports.ts:441](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/types/componentPropExports.ts#L441)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/componentPropExports.ts:370](https://github.com/Hack23/cia-co
 
 > `optional` **ariaLabel**: `string`
 
-Defined in: [types/componentPropExports.ts:414](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L414)
+Defined in: [types/componentPropExports.ts:485](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/types/componentPropExports.ts#L485)
 
 Optional aria-label for accessibility
 
@@ -24,7 +24,7 @@ Optional aria-label for accessibility
 
 > `optional` **className**: `string`
 
-Defined in: [types/componentPropExports.ts:409](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L409)
+Defined in: [types/componentPropExports.ts:480](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/types/componentPropExports.ts#L480)
 
 Optional CSS class
 
@@ -34,7 +34,7 @@ Optional CSS class
 
 > `optional` **description**: `string`
 
-Defined in: [types/componentPropExports.ts:394](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L394)
+Defined in: [types/componentPropExports.ts:465](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/types/componentPropExports.ts#L465)
 
 Optional description/subtitle
 
@@ -44,7 +44,7 @@ Optional description/subtitle
 
 > `optional` **icon**: `ReactNode`
 
-Defined in: [types/componentPropExports.ts:389](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L389)
+Defined in: [types/componentPropExports.ts:460](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/types/componentPropExports.ts#L460)
 
 Optional icon
 
@@ -54,7 +54,7 @@ Optional icon
 
 > **label**: `string`
 
-Defined in: [types/componentPropExports.ts:374](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L374)
+Defined in: [types/componentPropExports.ts:445](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/types/componentPropExports.ts#L445)
 
 Metric label
 
@@ -64,7 +64,7 @@ Metric label
 
 > `optional` **testId**: `string`
 
-Defined in: [types/componentPropExports.ts:404](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L404)
+Defined in: [types/componentPropExports.ts:475](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/types/componentPropExports.ts#L475)
 
 Test ID
 
@@ -74,7 +74,7 @@ Test ID
 
 > `optional` **unit**: `string`
 
-Defined in: [types/componentPropExports.ts:384](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L384)
+Defined in: [types/componentPropExports.ts:455](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/types/componentPropExports.ts#L455)
 
 Optional unit (e.g., '%', '$')
 
@@ -84,7 +84,7 @@ Optional unit (e.g., '%', '$')
 
 > **value**: `string` \| `number`
 
-Defined in: [types/componentPropExports.ts:379](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L379)
+Defined in: [types/componentPropExports.ts:450](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/types/componentPropExports.ts#L450)
 
 Metric value
 
@@ -94,6 +94,6 @@ Metric value
 
 > `optional` **variant**: `"success"` \| `"info"` \| `"warning"` \| `"error"` \| `"primary"` \| `"default"`
 
-Defined in: [types/componentPropExports.ts:399](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/types/componentPropExports.ts#L399)
+Defined in: [types/componentPropExports.ts:470](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/types/componentPropExports.ts#L470)
 
 Optional color variant

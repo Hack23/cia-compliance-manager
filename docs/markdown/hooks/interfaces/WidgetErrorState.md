@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.5**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.6**](../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: WidgetErrorState
 
-Defined in: [hooks/useWidgetError.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/hooks/useWidgetError.ts#L7)
+Defined in: [hooks/useWidgetError.ts:7](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/hooks/useWidgetError.ts#L7)
 
 State interface for widget error management
 
@@ -16,7 +16,7 @@ State interface for widget error management
 
 > **clearError**: () => `void`
 
-Defined in: [hooks/useWidgetError.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/hooks/useWidgetError.ts#L21)
+Defined in: [hooks/useWidgetError.ts:21](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/hooks/useWidgetError.ts#L21)
 
 Clear the current error state
 
@@ -30,7 +30,7 @@ Clear the current error state
 
 > **error**: `Error` \| `null`
 
-Defined in: [hooks/useWidgetError.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/hooks/useWidgetError.ts#L11)
+Defined in: [hooks/useWidgetError.ts:11](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/hooks/useWidgetError.ts#L11)
 
 The current error, if any
 
@@ -40,7 +40,7 @@ The current error, if any
 
 > **handleError**: (`error`) => `void`
 
-Defined in: [hooks/useWidgetError.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/hooks/useWidgetError.ts#L31)
+Defined in: [hooks/useWidgetError.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/hooks/useWidgetError.ts#L31)
 
 Handle an unknown error (automatically converts to Error type)
 
@@ -60,7 +60,7 @@ Handle an unknown error (automatically converts to Error type)
 
 > **hasError**: `boolean`
 
-Defined in: [hooks/useWidgetError.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/hooks/useWidgetError.ts#L16)
+Defined in: [hooks/useWidgetError.ts:16](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/hooks/useWidgetError.ts#L16)
 
 Whether an error is currently present
 
@@ -70,7 +70,7 @@ Whether an error is currently present
 
 > **setError**: (`error`) => `void`
 
-Defined in: [hooks/useWidgetError.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/hooks/useWidgetError.ts#L26)
+Defined in: [hooks/useWidgetError.ts:26](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/hooks/useWidgetError.ts#L26)
 
 Set a specific error
 

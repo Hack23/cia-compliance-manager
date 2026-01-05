@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.5**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.6**](../../README.md)
 
 ***
 
@@ -57,3 +57,9 @@ Re-exports [BUSINESS_IMPACT_CATEGORIES](../riskConstants/variables/BUSINESS_IMPA
 ### RISK\_LEVELS
 
 Re-exports [RISK_LEVELS](../riskConstants/variables/RISK_LEVELS.md)
+
+***
+
+### UI\_DISPLAY\_LIMITS
+
+Re-exports [UI_DISPLAY_LIMITS](../uiConstants/variables/UI_DISPLAY_LIMITS.md)

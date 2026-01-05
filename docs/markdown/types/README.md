@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.5**](../README.md)
+[**CIA Compliance Manager Documentation v1.1.6**](../README.md)
 
 ***
 
@@ -64,6 +64,7 @@ Centralized type exports simplify imports and enforce type consistency.
 ## Type Aliases
 
 - [BusinessImpactAnalysisWidgetProps](type-aliases/BusinessImpactAnalysisWidgetProps.md)
+- [CIAComponentColor](type-aliases/CIAComponentColor.md)
 - [CIAComponentType](type-aliases/CIAComponentType.md)
 - [CostEstimationWidgetProps](type-aliases/CostEstimationWidgetProps.md)
 - [Platform](type-aliases/Platform.md)

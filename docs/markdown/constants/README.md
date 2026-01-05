@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.5**](../README.md)
+[**CIA Compliance Manager Documentation v1.1.6**](../README.md)
 
 ***
 
@@ -524,6 +524,12 @@ Re-exports [TEST_MATCHERS](appConstants/variables/TEST_MATCHERS.md)
 ### THEMES
 
 Re-exports [THEMES](appConstants/variables/THEMES.md)
+
+***
+
+### UI\_DISPLAY\_LIMITS
+
+Re-exports [UI_DISPLAY_LIMITS](uiConstants/variables/UI_DISPLAY_LIMITS.md)
 
 ***
 

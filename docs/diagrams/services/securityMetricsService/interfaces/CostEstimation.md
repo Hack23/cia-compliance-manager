@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Diagrams v1.1.5**](../../../README.md)
+[**CIA Compliance Manager Diagrams v1.1.6**](../../../README.md)
 
 ***
 
@@ -6,7 +6,7 @@
 
 # Interface: CostEstimation
 
-Defined in: [services/securityMetricsService.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/services/securityMetricsService.ts#L28)
+Defined in: [services/securityMetricsService.ts:28](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/services/securityMetricsService.ts#L28)
 
 Cost estimation details for security implementation
 
@@ -16,7 +16,7 @@ Cost estimation details for security implementation
 
 > **annualMaintenanceCost**: `string` \| `number`
 
-Defined in: [services/securityMetricsService.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/services/securityMetricsService.ts#L30)
+Defined in: [services/securityMetricsService.ts:30](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/services/securityMetricsService.ts#L30)
 
 Ongoing annual maintenance cost (formatted string or numeric value)
 
@@ -26,7 +26,7 @@ Ongoing annual maintenance cost (formatted string or numeric value)
 
 > **costBreakdown**: `Record`\<`string`, `unknown`\>
 
-Defined in: [services/securityMetricsService.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/services/securityMetricsService.ts#L31)
+Defined in: [services/securityMetricsService.ts:31](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/services/securityMetricsService.ts#L31)
 
 Detailed breakdown by component (availability, integrity, confidentiality)
 
@@ -36,7 +36,7 @@ Detailed breakdown by component (availability, integrity, confidentiality)
 
 > `optional` **roi**: `Record`\<`string`, `unknown`\>
 
-Defined in: [services/securityMetricsService.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/services/securityMetricsService.ts#L32)
+Defined in: [services/securityMetricsService.ts:32](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/services/securityMetricsService.ts#L32)
 
 Optional ROI analysis including payback period, risk reduction, and business benefits
 
@@ -46,6 +46,6 @@ Optional ROI analysis including payback period, risk reduction, and business ben
 
 > **totalImplementationCost**: `string` \| `number`
 
-Defined in: [services/securityMetricsService.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/services/securityMetricsService.ts#L29)
+Defined in: [services/securityMetricsService.ts:29](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/services/securityMetricsService.ts#L29)
 
 Total upfront implementation cost (formatted string like "$50,000" or numeric value)

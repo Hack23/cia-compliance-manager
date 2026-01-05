@@ -1,4 +1,4 @@
-[**CIA Compliance Manager Documentation v1.1.5**](../../README.md)
+[**CIA Compliance Manager Documentation v1.1.6**](../../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **isServiceError**(`error`): `error is ServiceError`
 
-Defined in: [services/errors.ts:242](https://github.com/Hack23/cia-compliance-manager/blob/a17ff8a572d7423ca01410dd8a5a66308c170558/src/services/errors.ts#L242)
+Defined in: [services/errors.ts:242](https://github.com/Hack23/cia-compliance-manager/blob/45ff919c9b0da6c872e8e8f6d592563dd8c89b13/src/services/errors.ts#L242)
 
 Type guard to check if an error is a ServiceError
 
