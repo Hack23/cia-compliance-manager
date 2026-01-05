@@ -4,6 +4,11 @@ import { CodeBlockProps } from "../../types/componentPropExports";
 /**
  * Simple syntax highlighting for common tokens
  * No external libraries - just basic regex-based highlighting
+ * 
+ * Note: Applies highlighting in order of precedence:
+ * 1. Comments (first, to avoid matching keywords in comments)
+ * 2. Strings (second, to avoid matching keywords in strings)
+ * 3. Keywords and numbers (last, only in actual code)
  */
 const highlightCode = (code: string, language?: string): string => {
   let highlighted = code;
@@ -16,64 +21,64 @@ const highlightCode = (code: string, language?: string): string => {
 
   // Apply syntax highlighting based on language
   if (language === "typescript" || language === "javascript" || language === "jsx" || language === "tsx") {
-    // Keywords
-    highlighted = highlighted.replace(
-      /\b(const|let|var|function|return|if|else|for|while|class|interface|type|import|export|from|default|async|await|try|catch|throw|new|this|extends|implements|public|private|protected|static|readonly)\b/g,
-      '<span class="text-purple-600 dark:text-purple-400">$1</span>'
-    );
-    
-    // Strings
-    highlighted = highlighted.replace(
-      /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)/g,
-      '<span class="text-green-600 dark:text-green-400">$1</span>'
-    );
-    
-    // Comments
+    // Comments (first priority - match before keywords)
     highlighted = highlighted.replace(
       /(\/\/.*$|\/\*[\s\S]*?\*\/)/gm,
       '<span class="text-gray-500 dark:text-gray-400 italic">$1</span>'
     );
     
-    // Numbers
+    // Strings (second priority - match before keywords)
+    highlighted = highlighted.replace(
+      /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)/g,
+      '<span class="text-green-600 dark:text-green-400">$1</span>'
+    );
+    
+    // Keywords (third priority - only match in actual code)
+    highlighted = highlighted.replace(
+      /\b(const|let|var|function|return|if|else|for|while|class|interface|type|import|export|from|default|async|await|try|catch|throw|new|this|extends|implements|public|private|protected|static|readonly)\b/g,
+      '<span class="text-purple-600 dark:text-purple-400">$1</span>'
+    );
+    
+    // Numbers (last priority)
     highlighted = highlighted.replace(
       /\b(\d+)\b/g,
       '<span class="text-blue-600 dark:text-blue-400">$1</span>'
     );
   } else if (language === "python") {
-    // Keywords
+    // Comments (first priority)
     highlighted = highlighted.replace(
-      /\b(def|class|if|elif|else|for|while|return|import|from|as|try|except|finally|with|lambda|yield|raise|pass|break|continue|True|False|None)\b/g,
-      '<span class="text-purple-600 dark:text-purple-400">$1</span>'
+      /(#.*$)/gm,
+      '<span class="text-gray-500 dark:text-gray-400 italic">$1</span>'
     );
     
-    // Strings
+    // Strings (second priority)
     highlighted = highlighted.replace(
       /("""[\s\S]*?"""|'''[\s\S]*?'''|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g,
       '<span class="text-green-600 dark:text-green-400">$1</span>'
     );
     
-    // Comments
+    // Keywords (third priority)
+    highlighted = highlighted.replace(
+      /\b(def|class|if|elif|else|for|while|return|import|from|as|try|except|finally|with|lambda|yield|raise|pass|break|continue|True|False|None)\b/g,
+      '<span class="text-purple-600 dark:text-purple-400">$1</span>'
+    );
+  } else if (language === "bash" || language === "shell") {
+    // Comments (first priority)
     highlighted = highlighted.replace(
       /(#.*$)/gm,
       '<span class="text-gray-500 dark:text-gray-400 italic">$1</span>'
     );
-  } else if (language === "bash" || language === "shell") {
-    // Commands and keywords
-    highlighted = highlighted.replace(
-      /\b(if|then|else|elif|fi|for|do|done|while|case|esac|function|return|exit|cd|ls|mkdir|rm|cp|mv|echo|cat|grep|sed|awk)\b/g,
-      '<span class="text-purple-600 dark:text-purple-400">$1</span>'
-    );
     
-    // Strings
+    // Strings (second priority)
     highlighted = highlighted.replace(
       /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g,
       '<span class="text-green-600 dark:text-green-400">$1</span>'
     );
     
-    // Comments
+    // Commands and keywords (third priority)
     highlighted = highlighted.replace(
-      /(#.*$)/gm,
-      '<span class="text-gray-500 dark:text-gray-400 italic">$1</span>'
+      /\b(if|then|else|elif|fi|for|do|done|while|case|esac|function|return|exit|cd|ls|mkdir|rm|cp|mv|echo|cat|grep|sed|awk)\b/g,
+      '<span class="text-purple-600 dark:text-purple-400">$1</span>'
     );
   }
 

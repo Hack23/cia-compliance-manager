@@ -77,6 +77,38 @@ export interface CodeBlockProps {
   testId?: string;
 }
 
+export interface ImplementationGuidancePanelProps {
+  /**
+   * Implementation guides for the CIA components
+   */
+  implementationGuides: (import('../types/cia-services').TechnicalImplementationDetails | undefined)[];
+
+  /**
+   * The selected availability level
+   */
+  availabilityLevel: import('../types/cia').SecurityLevel;
+
+  /**
+   * The selected integrity level
+   */
+  integrityLevel: import('../types/cia').SecurityLevel;
+
+  /**
+   * The selected confidentiality level
+   */
+  confidentialityLevel: import('../types/cia').SecurityLevel;
+
+  /**
+   * Additional CSS classes
+   */
+  className?: string;
+
+  /**
+   * Test ID for testing
+   */
+  testId?: string;
+}
+
 export interface KeyValuePairProps {
   label: string;
   value: string | number | React.ReactNode;

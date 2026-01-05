@@ -219,9 +219,10 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
       <div className="mb-sm">
         <button
           onClick={() => setShowAdvancedDetails(!showAdvancedDetails)}
-          className="w-full flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          className="w-full flex items-center justify-between p-sm bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           aria-expanded={showAdvancedDetails}
           aria-controls={`${testId}-${component}-advanced-content`}
+          aria-label={`Toggle ${component} advanced details section`}
           data-testid={`${testId}-${component}-toggle-advanced`}
         >
           <span className="text-sm font-medium">
@@ -233,12 +234,12 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </button>
         
         {showAdvancedDetails && (
-          <div id={`${testId}-${component}-advanced-content`} className="mt-2 space-y-sm">
+          <div id={`${testId}-${component}-advanced-content`} className="mt-sm space-y-sm">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-sm">
               {/* Technologies card */}
-              <div className="p-3 bg-white dark:bg-gray-800 rounded-md shadow-sm border border-neutral-light dark:border-neutral-dark">
-                <h4 className="text-sm font-medium flex items-center mb-2">
-                  <span className={`mr-1 ${theme.accentClass}`}>💻</span>Technologies
+              <div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-sm border border-neutral-light dark:border-neutral-dark">
+                <h4 className="text-sm font-medium flex items-center mb-sm">
+                  <span className={`mr-xs ${theme.accentClass}`}>💻</span>Technologies
                 </h4>
                 <p className={`text-sm ${theme.textClass}`}>
                   {getOptionalProperty(
@@ -250,9 +251,9 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
               </div>
 
               {/* Configurations card */}
-              <div className="p-3 bg-white dark:bg-gray-800 rounded-md shadow-sm border border-neutral-light dark:border-neutral-dark">
-                <h4 className="text-sm font-medium flex items-center mb-2">
-                  <span className={`mr-1 ${theme.accentClass}`}>⚙️</span>
+              <div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-sm border border-neutral-light dark:border-neutral-dark">
+                <h4 className="text-sm font-medium flex items-center mb-sm">
+                  <span className={`mr-xs ${theme.accentClass}`}>⚙️</span>
                   Configurations
                 </h4>
                 <p className={`text-sm ${theme.textClass}`}>
@@ -266,12 +267,12 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             </div>
 
             {/* Expertise Required card */}
-            <div className="p-3 bg-white dark:bg-gray-800 rounded-md shadow-sm border border-gray-200 dark:border-gray-700">
-              <h4 className="text-sm font-medium flex items-center mb-2">
-                <span className={`mr-1 ${theme.accentClass}`}>👨‍💻</span>Expertise Required
+            <div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-sm border border-gray-200 dark:border-gray-700">
+              <h4 className="text-sm font-medium flex items-center mb-sm">
+                <span className={`mr-xs ${theme.accentClass}`}>👨‍💻</span>Expertise Required
               </h4>
               <ul
-                className="grid grid-cols-1 lg:grid-cols-2 gap-1"
+                className="grid grid-cols-1 lg:grid-cols-2 gap-xs"
                 data-testid={TECHNICAL_DETAILS_WIDGET_IDS.list('required-expertise')}
               >
                 {getExpertiseRequired(component, level).map((expertise, index) => (
@@ -279,7 +280,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
                     key={`${component}-exp-${index}`}
                     className="flex items-center text-sm"
                   >
-                    <span className={`mr-1 ${theme.accentClass}`}>•</span>
+                    <span className={`mr-xs ${theme.accentClass}`}>•</span>
                     <span>{expertise}</span>
                   </li>
                 ))}

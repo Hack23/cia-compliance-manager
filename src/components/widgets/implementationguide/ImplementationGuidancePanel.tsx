@@ -1,41 +1,5 @@
 import React from "react";
-import { SecurityLevel } from "../../../types/cia";
-import { TechnicalImplementationDetails } from "../../../types/cia-services";
-
-/**
- * Props for the ImplementationGuidancePanel component
- */
-export interface ImplementationGuidancePanelProps {
-  /**
-   * Implementation guides for the CIA components
-   */
-  implementationGuides: (TechnicalImplementationDetails | undefined)[];
-
-  /**
-   * The selected availability level
-   */
-  availabilityLevel: SecurityLevel;
-
-  /**
-   * The selected integrity level
-   */
-  integrityLevel: SecurityLevel;
-
-  /**
-   * The selected confidentiality level
-   */
-  confidentialityLevel: SecurityLevel;
-
-  /**
-   * Additional CSS classes
-   */
-  className?: string;
-
-  /**
-   * Test ID for testing
-   */
-  testId?: string;
-}
+import { ImplementationGuidancePanelProps } from "../../../types/componentPropExports";
 
 /**
  * ImplementationGuidancePanel component - displays implementation tips and guidance
@@ -82,7 +46,7 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
           <h4 className="text-md font-medium mb-sm">
             Getting Started with Implementation
           </h4>
-          <ol className="list-decimal list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 pl-2">
+          <ol className="list-decimal list-inside space-y-xs text-sm text-gray-600 dark:text-gray-400 pl-2">
             <li>Begin with a thorough assessment of your current security controls</li>
             <li>Prioritize implementations based on risk exposure and business impact</li>
             <li>Implement controls gradually, starting with foundational elements</li>
@@ -105,7 +69,7 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
                     {implementationGuides[2].description ||
                       "Focus on data protection and access controls."}
                   </p>
-                  <div className="text-xs space-y-1">
+                  <div className="text-xs space-y-xs">
                     <div>
                       <span className="font-medium">Expertise:</span>{" "}
                       {implementationGuides[2].expertiseLevel || "Standard"}
@@ -130,7 +94,7 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
                     {implementationGuides[1].description ||
                       "Focus on data accuracy and validation mechanisms."}
                   </p>
-                  <div className="text-xs space-y-1">
+                  <div className="text-xs space-y-xs">
                     <div>
                       <span className="font-medium">Expertise:</span>{" "}
                       {implementationGuides[1].expertiseLevel || "Standard"}
@@ -155,7 +119,7 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
                     {implementationGuides[0].description ||
                       "Focus on systems uptime and recovery capabilities."}
                   </p>
-                  <div className="text-xs space-y-1">
+                  <div className="text-xs space-y-xs">
                     <div>
                       <span className="font-medium">Expertise:</span>{" "}
                       {implementationGuides[0].expertiseLevel || "Standard"}
@@ -176,7 +140,7 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
           <h4 className="text-md font-medium mb-sm text-yellow-700 dark:text-yellow-300 flex items-center">
             <span className="mr-sm">⚠️</span>Common Implementation Challenges
           </h4>
-          <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400 pl-2">
+          <ul className="list-disc list-inside space-y-xs text-sm text-gray-600 dark:text-gray-400 pl-2">
             <li>Balancing security with usability and performance</li>
             <li>Maintaining consistent controls across different environments</li>
             <li>Integration with legacy systems and applications</li>
