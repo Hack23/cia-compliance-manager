@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { CodeBlockProps } from "../../types/componentPropExports";
 
 /**
@@ -137,7 +137,8 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     }
   };
 
-  const highlightedCode = highlightCode(code, language);
+  // Memoize highlighted code to avoid re-computing on every render
+  const highlightedCode = useMemo(() => highlightCode(code, language), [code, language]);
   const highlightedLines = highlightedCode.split("\n");
 
   return (
@@ -157,7 +158,9 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
             data-testid={`${testId}-copy-button`}
             aria-label="Copy code to clipboard"
           >
-            {copied ? "Copied!" : "Copy"}
+            <span aria-live="polite" aria-atomic="true">
+              {copied ? "Copied!" : "Copy"}
+            </span>
           </button>
         )}
       </div>

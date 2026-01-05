@@ -219,6 +219,12 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
       <div className="mb-sm">
         <button
           onClick={() => setShowAdvancedDetails(!showAdvancedDetails)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              setShowAdvancedDetails(!showAdvancedDetails);
+            }
+          }}
           className="w-full flex items-center justify-between p-sm bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           aria-expanded={showAdvancedDetails}
           aria-controls={`${testId}-${component}-advanced-content`}
