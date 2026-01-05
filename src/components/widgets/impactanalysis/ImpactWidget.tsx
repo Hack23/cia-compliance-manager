@@ -41,7 +41,7 @@ interface ComponentConfig {
   iconKey: keyof typeof WIDGET_ICONS;
   defaultTitle: string;
   defaultIcon: string;
-  color: "blue" | "green" | "purple" | "orange";
+  color: "blue" | "green" | "orange";
   textClass: string;
   ariaDescription: string;
   categoryLabel: string;
@@ -297,12 +297,11 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
   }, [component, effectiveLevel, details, ciaContentService]);
 
   // Get border color class based on component color (explicit for Tailwind purging)
-  const getBorderColorClass = (color: "blue" | "green" | "purple" | "orange"): string => {
+  const getBorderColorClass = (color: "blue" | "green" | "orange"): string => {
     switch (color) {
       case "blue": return "border-blue-500";
       case "green": return "border-green-500";
       case "orange": return "border-orange-500";
-      case "purple": return "border-purple-500";
       default: {
         // Exhaustive check - TypeScript will error if new colors are added
         const exhaustiveCheck: never = color;

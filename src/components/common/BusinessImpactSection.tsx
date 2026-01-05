@@ -3,18 +3,19 @@ import { BusinessImpactDetails } from "../../types/cia-services";
 
 /**
  * Valid color values for business impact sections
+ * Limited to colors actually used by CIA components
  */
-type ImpactColor = "blue" | "green" | "orange" | "purple" | "cyan" | "red";
+type ImpactColor = "blue" | "green" | "orange";
 
 interface BusinessImpactSectionProps {
   impact: BusinessImpactDetails;
-  color: string;
+  color: ImpactColor;
   testId?: string;
 }
 
 /**
  * Get explicit background color classes to avoid dynamic Tailwind class generation
- * @param color - Color name (blue, green, orange, purple, cyan, red)
+ * @param color - Color name (blue, green, orange)
  * @returns Explicit className string for background colors
  */
 const getBackgroundColorClasses = (color: ImpactColor): string => {
@@ -25,12 +26,6 @@ const getBackgroundColorClasses = (color: ImpactColor): string => {
       return "bg-green-100 dark:bg-green-900 border-green-200 dark:border-green-800";
     case "orange":
       return "bg-orange-100 dark:bg-orange-900 border-orange-200 dark:border-orange-800";
-    case "purple":
-      return "bg-purple-100 dark:bg-purple-900 border-purple-200 dark:border-purple-800";
-    case "cyan":
-      return "bg-cyan-100 dark:bg-cyan-900 border-cyan-200 dark:border-cyan-800";
-    case "red":
-      return "bg-red-100 dark:bg-red-900 border-red-200 dark:border-red-800";
     default: {
       // Exhaustive check - TypeScript will error if new colors are added
       const exhaustiveCheck: never = color;
@@ -41,7 +36,7 @@ const getBackgroundColorClasses = (color: ImpactColor): string => {
 
 /**
  * Get explicit text color classes to avoid dynamic Tailwind class generation
- * @param color - Color name (blue, green, orange, purple, cyan, red)
+ * @param color - Color name (blue, green, orange)
  * @returns Explicit className string for text colors
  */
 const getTextColorClasses = (color: ImpactColor): string => {
@@ -52,12 +47,6 @@ const getTextColorClasses = (color: ImpactColor): string => {
       return "text-green-700 dark:text-green-300";
     case "orange":
       return "text-orange-700 dark:text-orange-300";
-    case "purple":
-      return "text-purple-700 dark:text-purple-300";
-    case "cyan":
-      return "text-cyan-700 dark:text-cyan-300";
-    case "red":
-      return "text-red-700 dark:text-red-300";
     default: {
       // Exhaustive check - TypeScript will error if new colors are added
       const exhaustiveCheck: never = color;
@@ -69,7 +58,7 @@ const getTextColorClasses = (color: ImpactColor): string => {
 /**
  * Get explicit badge color classes for rounded-full badges
  * This provides complete styling for small badges including dark mode support
- * @param color - Color name (blue, green, orange, purple, cyan, red)
+ * @param color - Color name (blue, green, orange)
  * @returns Explicit className string for badge styling
  */
 const getBadgeColorClasses = (color: ImpactColor): string => {
@@ -80,12 +69,6 @@ const getBadgeColorClasses = (color: ImpactColor): string => {
       return "bg-green-50 text-green-700 dark:bg-green-900 dark:bg-opacity-50 dark:text-green-300";
     case "orange":
       return "bg-orange-50 text-orange-700 dark:bg-orange-900 dark:bg-opacity-50 dark:text-orange-300";
-    case "purple":
-      return "bg-purple-50 text-purple-700 dark:bg-purple-900 dark:bg-opacity-50 dark:text-purple-300";
-    case "cyan":
-      return "bg-cyan-50 text-cyan-700 dark:bg-cyan-900 dark:bg-opacity-50 dark:text-cyan-300";
-    case "red":
-      return "bg-red-50 text-red-700 dark:bg-red-900 dark:bg-opacity-50 dark:text-red-300";
     default: {
       // Exhaustive check - TypeScript will error if new colors are added
       const exhaustiveCheck: never = color;
@@ -108,15 +91,10 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
   const riskLevelForDisplay =
     impact.financial?.riskLevel || impact.operational?.riskLevel || "Unknown";
 
-  // Safely cast color to ImpactColor type with fallback to gray for invalid values
-  const safeColor = (["blue", "green", "orange", "purple", "cyan", "red"].includes(color) 
-    ? color 
-    : "blue") as ImpactColor;
-
   // Get explicit color classes for this color scheme
-  const bgClasses = getBackgroundColorClasses(safeColor);
-  const textClasses = getTextColorClasses(safeColor);
-  const badgeClasses = getBadgeColorClasses(safeColor);
+  const bgClasses = getBackgroundColorClasses(color);
+  const textClasses = getTextColorClasses(color);
+  const badgeClasses = getBadgeColorClasses(color);
 
   return (
     <div
