@@ -457,7 +457,7 @@ describe('Security Summary Widget - Enhanced', () => {
 
         // Check for compact spacing (p-sm, gap-sm, space-y-sm)
         cy.wrap($widget).within(() => {
-          cy.get('[class*="p-sm"], [class*="gap-sm"], [class*="space-y-sm"]').then(($compact) => {
+          cy.get('[class~="p-sm"], [class~="gap-sm"], [class~="space-y-sm"]').then(($compact) => {
             expect($compact.length).to.be.greaterThan(0, 'Should have elements with compact spacing');
             cy.log(`✓ Found ${$compact.length} elements with compact spacing classes`);
           });
@@ -475,7 +475,7 @@ describe('Security Summary Widget - Enhanced', () => {
         // Check that widget uses content efficiently (no excessive padding)
         cy.wrap($widget).within(() => {
           // Look for excessively large padding
-          cy.get('[class*="p-lg"], [class*="p-xl"]').then(($largePadding) => {
+          cy.get('[class~="p-lg"], [class~="p-xl"]').then(($largePadding) => {
             // Should have minimal or no large padding elements
             cy.log(`Found ${$largePadding.length} elements with large padding`);
             // This is informational - large padding might be intentional in some cases

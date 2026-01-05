@@ -124,7 +124,7 @@ const additionalTests = () => {
 
       cy.wrap($widget).within(() => {
         // Check for compact spacing classes (p-sm, gap-sm)
-        cy.get('[class*="p-sm"], [class*="gap-sm"], [class*="space-y-sm"]').then(($elements) => {
+        cy.get('[class~="p-sm"], [class~="gap-sm"], [class~="space-y-sm"]').then(($elements) => {
           if ($elements.length > 0) {
             cy.log(`✓ Found ${$elements.length} elements with compact spacing`);
           }

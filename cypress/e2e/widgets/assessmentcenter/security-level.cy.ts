@@ -58,7 +58,7 @@ const additionalTests = () => {
 
       cy.wrap($widget).within(() => {
         // Check for consistent p-sm usage in CIA component cards
-        cy.get('[class*="p-sm"]').then(($cards) => {
+        cy.get('[class~="p-sm"]').then(($cards) => {
           if ($cards.length > 0) {
             cy.log(`✓ Found ${$cards.length} elements with consistent compact padding (p-sm)`);
           }

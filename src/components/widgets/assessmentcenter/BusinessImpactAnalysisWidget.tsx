@@ -407,7 +407,7 @@ const BusinessImpactAnalysisWidget: React.FC<
         data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('executive-summary')}
       >
         <h3 className={cn(WidgetClasses.heading, "flex items-center")}>
-          <span className="mr-sm">📊</span>Executive Summary
+          <span className="mr-sm" aria-hidden="true">📊</span>Executive Summary
         </h3>
         <p className={cn(WidgetClasses.body, "mb-sm")}>
           Current security posture provides{" "}
@@ -563,7 +563,7 @@ const BusinessImpactAnalysisWidget: React.FC<
             {integrityImpact && (
               <div className="mb-sm">
                 <h4 className={cn(WidgetClasses.subheading, "flex items-center")}>
-                  <span className="mr-sm">✅</span>Integrity Impact
+                  <span className="mr-sm" aria-hidden="true">✅</span>Integrity Impact
                 </h4>
                 {integrityImpact.financial &&
                   renderImpactCategory("Financial", integrityImpact.financial)}
