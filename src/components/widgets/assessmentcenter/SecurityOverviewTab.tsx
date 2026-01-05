@@ -7,6 +7,7 @@ import {
   getIntegrityValidationLevel,
   getAvailabilityUptimeTarget,
 } from "../../../utils/implementationUtils";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import RadarChart from "../../charts/RadarChart";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import StatusBadge from "../../common/StatusBadge";
@@ -167,7 +168,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
 
       {/* Key Metrics Dashboard */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+        <h3 className={cn(WidgetClasses.subheading, "mb-sm")}>
           Key Security Metrics
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-sm">

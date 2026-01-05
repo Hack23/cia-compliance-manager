@@ -218,7 +218,7 @@ const BusinessImpactAnalysisWidget: React.FC<
         data-testid={BUSINESS_IMPACT_WIDGET_IDS.section(`impact-${category.toLowerCase()}`)}
       >
         <div className="flex justify-between items-center mb-sm">
-          <h3 className={cn(WidgetClasses.subheading, "flex items-center text-gray-800 dark:text-gray-200")}>
+          <h3 className={cn(WidgetClasses.subheading, "flex items-center")}>
             <span className="mr-sm">{icons[category] || "📊"}</span>
             {category} Impact
           </h3>
@@ -406,7 +406,7 @@ const BusinessImpactAnalysisWidget: React.FC<
         )}
         data-testid={BUSINESS_IMPACT_WIDGET_IDS.section('executive-summary')}
       >
-        <h3 className={cn(WidgetClasses.heading, "flex items-center text-gray-800 dark:text-gray-200")}>
+        <h3 className={cn(WidgetClasses.heading, "flex items-center")}>
           <span className="mr-sm">📊</span>Executive Summary
         </h3>
         <p className={cn(WidgetClasses.body, "mb-sm")}>
@@ -420,7 +420,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           )}{" "}
           areas.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-sm">
+        <div className={cn(WidgetClasses.grid3Cols, "gap-sm")}>
           <KeyValuePair
             label="Overall Impact"
             value={impactLevel}
@@ -469,9 +469,9 @@ const BusinessImpactAnalysisWidget: React.FC<
             >
               <div className="flex items-center mb-sm">
                 <span className="mr-sm text-blue-500 dark:text-blue-400">{item.icon}</span>
-                <h4 className="text-md font-medium text-gray-800 dark:text-gray-200">{item.title}</h4>
+                <h4 className={WidgetClasses.subheading}>{item.title}</h4>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className={WidgetClasses.body}>
                 {item.description}
               </p>
             </div>
@@ -496,9 +496,9 @@ const BusinessImpactAnalysisWidget: React.FC<
             >
               <div className="flex items-center mb-sm">
                 <span className="mr-sm text-green-500 dark:text-green-400">{item.icon}</span>
-                <h4 className="text-md font-medium text-gray-800 dark:text-gray-200">{item.title}</h4>
+                <h4 className={WidgetClasses.subheading}>{item.title}</h4>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className={WidgetClasses.body}>
                 {item.description}
               </p>
             </div>
@@ -534,16 +534,16 @@ const BusinessImpactAnalysisWidget: React.FC<
           className="mb-sm"
           aria-labelledby="business-impacts-heading"
         >
-          <h3 id="business-impacts-heading" className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-200">
+          <h3 id="business-impacts-heading" className={cn(WidgetClasses.subheading, "mb-sm")}>
             Business Impacts by Component
           </h3>
 
           {/* Use 2-column grid on md+ screens */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-sm">
+          <div className={cn(WidgetClasses.grid2Cols, "gap-sm")}>
             {/* Confidentiality impact */}
             {confidentialityImpact && (
               <div className="mb-sm">
-                <h4 className="text-md font-medium mb-sm flex items-center text-gray-800 dark:text-gray-200">
+                <h4 className={cn(WidgetClasses.subheading, "flex items-center")}>
                   <span className="mr-sm" aria-hidden="true">🔒</span>Confidentiality Impact
                 </h4>
                 {confidentialityImpact.reputational &&
@@ -562,7 +562,7 @@ const BusinessImpactAnalysisWidget: React.FC<
             {/* Integrity impact */}
             {integrityImpact && (
               <div className="mb-sm">
-                <h4 className="text-md font-medium mb-sm flex items-center text-gray-800 dark:text-gray-200">
+                <h4 className={cn(WidgetClasses.subheading, "flex items-center")}>
                   <span className="mr-sm">✅</span>Integrity Impact
                 </h4>
                 {integrityImpact.financial &&
@@ -579,10 +579,10 @@ const BusinessImpactAnalysisWidget: React.FC<
           {/* Availability impact - Full width */}
           {availabilityImpact && (
             <div className="mb-sm">
-              <h4 className="text-md font-medium mb-sm flex items-center text-gray-800 dark:text-gray-200">
+              <h4 className={cn(WidgetClasses.subheading, "flex items-center")}>
                 <span className="mr-sm" aria-hidden="true">⏱️</span>Availability Impact
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-sm">
+              <div className={cn(WidgetClasses.grid2Cols, "gap-sm")}>
                 {availabilityImpact.financial &&
                   <div>{renderImpactCategory("Financial", availabilityImpact.financial)}</div>}
                 {availabilityImpact.operational &&
@@ -602,7 +602,7 @@ const BusinessImpactAnalysisWidget: React.FC<
 
         {/* Current Security Levels & Impact */}
         <div className="mb-sm">
-          <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-200">Current Security Levels</h3>
+          <h3 className={cn(WidgetClasses.subheading, "mb-sm")}>Current Security Levels</h3>
           <div className="flex flex-wrap gap-sm">
             <SecurityLevelBadge
               category="Confidentiality"
