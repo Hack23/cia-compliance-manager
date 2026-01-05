@@ -247,8 +247,15 @@ export function getSecurityScoreColorClass(score: number): string {
  * const color = getCIAComponentColor("availability");
  * console.log(color); // "blue"
  *
- * // Use in Tailwind classes
- * const className = `border-${color}-500`;
+ * // Map to explicit Tailwind class to avoid dynamic class generation
+ * const getBorderClass = (color: string): string => {
+ *   switch (color) {
+ *     case "blue": return "border-blue-500";
+ *     case "green": return "border-green-500";
+ *     case "orange": return "border-orange-500";
+ *     default: return "border-gray-500";
+ *   }
+ * };
  * ```
  */
 export function getCIAComponentColor(
@@ -280,13 +287,17 @@ export function getCIAComponentHexColor(
 ): string {
   const isDarkMode = document.documentElement.classList.contains("dark");
 
-  if (component === "availability")
-    return isDarkMode ? "#60a5fa" : "#3b82f6"; // Blue
-  if (component === "integrity") return isDarkMode ? "#34d399" : "#10b981"; // Green
-  if (component === "confidentiality")
-    return isDarkMode ? "#fb923c" : "#f97316"; // Orange
-
-  return isDarkMode ? "#9e9e9e" : "#757575";
+  switch (component) {
+    case "availability":
+      return isDarkMode ? "#60a5fa" : "#3b82f6"; // Blue
+    case "integrity":
+      return isDarkMode ? "#34d399" : "#10b981"; // Green
+    case "confidentiality":
+      return isDarkMode ? "#fb923c" : "#f97316"; // Orange
+    default: {
+      // Exhaustive check - TypeScript will error if new CIA components are added
+      const exhaustiveCheck: never = component;
+      throw new Error(`Unsupported CIA component: ${String(exhaustiveCheck)}`);
+    }
+  }
 }
-
-
