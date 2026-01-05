@@ -474,11 +474,13 @@ describe('Security Summary Widget - Enhanced', () => {
 
         // Check that widget uses content efficiently (no excessive padding)
         cy.wrap($widget).within(() => {
-          // Look for excessively large padding
-          cy.get('[class~="p-lg"], [class~="p-xl"]').then(($largePadding) => {
-            // Should have minimal or no large padding elements
-            cy.log(`Found ${$largePadding.length} elements with large padding`);
-            // This is informational - large padding might be intentional in some cases
+          // Look for excessively large padding - should have few or none
+          cy.get('body').then(($body) => {
+            const largePaddingElements = $widget.find('[class~="p-lg"], [class~="p-xl"]');
+            const count = largePaddingElements.length;
+            cy.log(`Found ${count} elements with large padding (p-lg/p-xl)`);
+            // Should have minimal large padding - less than 3 elements is acceptable
+            expect(count).to.be.lessThan(3, 'Should have minimal elements with large padding');
           });
         });
       });
