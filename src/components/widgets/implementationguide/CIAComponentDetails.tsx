@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { TECHNICAL_DETAILS_WIDGET_IDS } from "../../../constants/testIds";
 import { SecurityLevel, CIAComponent } from "../../../types/cia";
 import { getImplementationComplexity } from "../../../utils/riskUtils";
@@ -89,6 +89,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
   getExpertiseRequired,
 }) => {
   const theme = COMPONENT_THEMES[component];
+  const [showAdvancedDetails, setShowAdvancedDetails] = useState(false);
 
   // Helper to convert complexity string to numeric value for UI
   const getComplexityValue = (complexity: string): number => {
@@ -137,12 +138,12 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-md mb-md">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-sm mb-md">
         {/* Main technical details card */}
         <div
-          className={`p-4 ${theme.bgClass} rounded-lg shadow-sm border ${theme.borderClass}`}
+          className={`p-3 ${theme.bgClass} rounded-lg shadow-sm border ${theme.borderClass}`}
         >
-          <h4 className={`text-md font-medium ${theme.textClass} mb-3`}>
+          <h4 className={`text-md font-medium ${theme.textClass} mb-2`}>
             Technical Description
           </h4>
           <p
@@ -156,15 +157,15 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             )}
           </p>
 
-          <div className="mt-md">
-            <h5 className={`text-sm font-medium ${theme.textClass} mb-2`}>
+          <div className="mt-3">
+            <h5 className={`text-sm font-medium ${theme.textClass} mb-1`}>
               Implementation Complexity
             </h5>
             <div
               className="flex items-center"
               data-testid={TECHNICAL_DETAILS_WIDGET_IDS.label('development-effort')}
             >
-              <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-sm">
+              <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
                 <div
                   className={`h-2 ${theme.accentBgClass} rounded-full`}
                   style={{ width: `${complexity.value}%` }}
@@ -174,8 +175,8 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             </div>
           </div>
 
-          <div className="mt-md">
-            <h5 className={`text-sm font-medium ${theme.textClass} mb-2`}>
+          <div className="mt-3">
+            <h5 className={`text-sm font-medium ${theme.textClass} mb-1`}>
               Personnel Requirements
             </h5>
             <div
@@ -191,15 +192,15 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </div>
 
         {/* Implementation requirements card */}
-        <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
+        <div className="p-3 bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
           <h4
-            className="text-md font-medium mb-md"
+            className="text-md font-medium mb-2"
             data-testid={TECHNICAL_DETAILS_WIDGET_IDS.header('implementation')}
           >
             Implementation Requirements
           </h4>
           <ul
-            className="list-disc list-inside space-y-2 text-sm text-gray-600 dark:text-gray-400"
+            className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400"
             data-testid={TECHNICAL_DETAILS_WIDGET_IDS.list('implementation-steps')}
           >
             {getTechnicalRequirements(component, level).map((req, index) => (
@@ -214,57 +215,77 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
-        {/* Technologies card */}
-        <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
-          <h4 className="text-md font-medium flex items-center mb-md">
-            <span className={`mr-2 ${theme.accentClass}`}>💻</span>Technologies
-          </h4>
-          <p className={`text-sm ${theme.textClass}`}>
-            {getOptionalProperty(
-              details,
-              "technologies",
-              getTechnologies(component, level)
-            )}
-          </p>
-        </div>
-
-        {/* Configurations card */}
-        <div className="p-md bg-white dark:bg-gray-800 rounded-md shadow-md border border-neutral-light dark:border-neutral-dark">
-          <h4 className="text-md font-medium flex items-center mb-md">
-            <span className={`mr-2 ${theme.accentClass}`}>⚙️</span>
-            Configurations
-          </h4>
-          <p className={`text-sm ${theme.textClass}`}>
-            {getOptionalProperty(
-              details,
-              "configurations",
-              getConfigurations(component, level)
-            )}
-          </p>
-        </div>
-      </div>
-
-      {/* Expertise Required card */}
-      <div className="p-md bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-md">
-        <h4 className="text-md font-medium flex items-center mb-md">
-          <span className={`mr-2 ${theme.accentClass}`}>👨‍💻</span>Expertise
-          Required
-        </h4>
-        <ul
-          className="grid grid-cols-1 lg:grid-cols-2 gap-sm"
-          data-testid={TECHNICAL_DETAILS_WIDGET_IDS.list('required-expertise')}
+      {/* Advanced Details - Collapsible */}
+      <div className="mb-sm">
+        <button
+          onClick={() => setShowAdvancedDetails(!showAdvancedDetails)}
+          className="w-full flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          aria-expanded={showAdvancedDetails}
+          data-testid={`${testId}-${component}-toggle-advanced`}
         >
-          {getExpertiseRequired(component, level).map((expertise, index) => (
-            <li
-              key={`${component}-exp-${index}`}
-              className="flex items-center text-sm"
-            >
-              <span className={`mr-2 ${theme.accentClass}`}>•</span>
-              <span>{expertise}</span>
-            </li>
-          ))}
-        </ul>
+          <span className="text-sm font-medium">
+            {showAdvancedDetails ? "Hide" : "Show"} Advanced Details
+          </span>
+          <span className="text-gray-500">
+            {showAdvancedDetails ? "▲" : "▼"}
+          </span>
+        </button>
+        
+        {showAdvancedDetails && (
+          <div className="mt-2 space-y-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-sm">
+              {/* Technologies card */}
+              <div className="p-3 bg-white dark:bg-gray-800 rounded-md shadow-sm border border-neutral-light dark:border-neutral-dark">
+                <h4 className="text-sm font-medium flex items-center mb-2">
+                  <span className={`mr-1 ${theme.accentClass}`}>💻</span>Technologies
+                </h4>
+                <p className={`text-sm ${theme.textClass}`}>
+                  {getOptionalProperty(
+                    details,
+                    "technologies",
+                    getTechnologies(component, level)
+                  )}
+                </p>
+              </div>
+
+              {/* Configurations card */}
+              <div className="p-3 bg-white dark:bg-gray-800 rounded-md shadow-sm border border-neutral-light dark:border-neutral-dark">
+                <h4 className="text-sm font-medium flex items-center mb-2">
+                  <span className={`mr-1 ${theme.accentClass}`}>⚙️</span>
+                  Configurations
+                </h4>
+                <p className={`text-sm ${theme.textClass}`}>
+                  {getOptionalProperty(
+                    details,
+                    "configurations",
+                    getConfigurations(component, level)
+                  )}
+                </p>
+              </div>
+            </div>
+
+            {/* Expertise Required card */}
+            <div className="p-3 bg-white dark:bg-gray-800 rounded-md shadow-sm border border-gray-200 dark:border-gray-700">
+              <h4 className="text-sm font-medium flex items-center mb-2">
+                <span className={`mr-1 ${theme.accentClass}`}>👨‍💻</span>Expertise Required
+              </h4>
+              <ul
+                className="grid grid-cols-1 lg:grid-cols-2 gap-1"
+                data-testid={TECHNICAL_DETAILS_WIDGET_IDS.list('required-expertise')}
+              >
+                {getExpertiseRequired(component, level).map((expertise, index) => (
+                  <li
+                    key={`${component}-exp-${index}`}
+                    className="flex items-center text-sm"
+                  >
+                    <span className={`mr-1 ${theme.accentClass}`}>•</span>
+                    <span>{expertise}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

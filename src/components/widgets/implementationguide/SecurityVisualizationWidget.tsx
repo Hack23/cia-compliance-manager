@@ -225,21 +225,23 @@ const SecurityVisualizationWidget: React.FC<
         <div className="mb-lg">
           <h3 className="text-lg font-medium mb-md">Security Components</h3>
 
-          {/* Reuse the RadarChart component */}
+          {/* Reuse the RadarChart component with responsive container */}
           <div className="p-md bg-white dark:bg-gray-800 rounded-md border border-neutral-light dark:border-neutral-dark">
-            <RadarChart
-              availabilityLevel={availabilityLevel}
-              integrityLevel={integrityLevel}
-              confidentialityLevel={confidentialityLevel}
-              testId={`${testId}-radar-chart`}
-            />
+            <div className="w-full aspect-square max-h-[400px] mx-auto">
+              <RadarChart
+                availabilityLevel={availabilityLevel}
+                integrityLevel={integrityLevel}
+                confidentialityLevel={confidentialityLevel}
+                testId={`${testId}-radar-chart`}
+              />
+            </div>
           </div>
         </div>
 
         {/* Component Details Section */}
         <div className="mb-lg">
           <h3 className="text-lg font-medium mb-md">Component Details</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-sm">
             {/* Confidentiality component */}
             <div
               className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md"
