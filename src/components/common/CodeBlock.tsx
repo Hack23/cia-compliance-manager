@@ -137,9 +137,14 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     }
   };
 
-  // Memoize highlighted code to avoid re-computing on every render
-  const highlightedCode = useMemo(() => highlightCode(code, language), [code, language]);
-  const highlightedLines = highlightedCode.split("\n");
+  // Memoize highlighted code and lines to avoid re-computing on every render
+  const { highlightedCode, highlightedLines } = useMemo(() => {
+    const highlighted = highlightCode(code, language);
+    return {
+      highlightedCode: highlighted,
+      highlightedLines: highlighted.split("\n"),
+    };
+  }, [code, language]);
 
   return (
     <div
