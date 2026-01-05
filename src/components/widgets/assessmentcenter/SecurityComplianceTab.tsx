@@ -41,7 +41,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
       </div>
 
       {/* Compliance Status */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
         <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
           Compliance Status Overview
         </h3>
@@ -99,7 +99,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
       </div>
 
       {/* Framework Status */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
         <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
           Framework Compliance Status
         </h3>
@@ -158,7 +158,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
       </div>
 
       {/* Component Requirements */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
         <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
           Component Compliance Requirements
         </h3>

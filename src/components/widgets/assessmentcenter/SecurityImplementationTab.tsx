@@ -46,7 +46,7 @@ export const SecurityImplementationTab: React.FC<
       </div>
 
       {/* Implementation Overview */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
         <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
           Implementation Overview
         </h3>
@@ -104,7 +104,7 @@ export const SecurityImplementationTab: React.FC<
       </div>
 
       {/* Component Implementation Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
         <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
           Component Implementation Summary
         </h3>
@@ -155,7 +155,7 @@ export const SecurityImplementationTab: React.FC<
       </div>
 
       {/* Implementation Considerations */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-md border border-gray-100 dark:border-gray-700">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
         <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
           Implementation Considerations
         </h3>
