@@ -221,277 +221,158 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         error={serviceError}
       >
       <div 
-        className="p-md sm:p-lg"
+        className="p-md"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Cost Estimation",
           "Cost estimates for implementing and maintaining security controls"
         )}
       >
-        {/* Introduction */}
+        {/* Summary cost section - Compact 3-column grid */}
         <section 
-          className={cn(
-            WidgetClasses.section,
-            "p-md rounded-md",
-            "bg-info-light/10 dark:bg-info-dark/20"
-          )}
-          aria-labelledby="cost-intro-heading"
-        >
-          <p id="cost-intro-heading" className={WidgetClasses.body}>
-            This widget provides cost estimates for implementing and maintaining
-            security controls based on your selected security levels across the
-            CIA triad.
-          </p>
-        </section>
-
-        {/* Summary cost section */}
-        <section 
-          className={cn(WidgetClasses.grid3Cols, "mb-lg")}
+          className="grid grid-cols-3 gap-sm mb-md"
           aria-labelledby="cost-summary-heading"
         >
           <h3 id="cost-summary-heading" className="sr-only">Cost Summary</h3>
-          <MetricCard
-            label="Implementation Cost"
-            value={formatCurrency(totalCapex)}
-            icon="💼"
-            description="One-time capital expenditure"
-            variant="info"
-            testId={COST_ESTIMATION_WIDGET_IDS.label('capex')}
-          />
-          <MetricCard
-            label="Annual Operations"
-            value={formatCurrency(totalOpex)}
-            icon="🔄"
-            description="Yearly operational expenses"
-            variant="success"
-            testId={COST_ESTIMATION_WIDGET_IDS.label('opex')}
-          />
-          <MetricCard
-            label="Total First Year Cost"
-            value={formatCurrency(totalCost)}
-            icon="💲"
-            description="Implementation + first year operations"
-            variant="primary"
-            testId={COST_ESTIMATION_WIDGET_IDS.label('total')}
-          />
+          <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30">
+            <div className="text-caption text-info-dark dark:text-info-light font-medium mb-xs">CAPEX</div>
+            <div className="text-heading font-bold text-info-dark dark:text-info-light" data-testid={COST_ESTIMATION_WIDGET_IDS.label('capex')}>
+              {formatCurrency(totalCapex)}
+            </div>
+            <div className="text-caption text-info-dark/70 dark:text-info-light/70">One-time</div>
+          </div>
+          <div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30">
+            <div className="text-caption text-success-dark dark:text-success-light font-medium mb-xs">OPEX</div>
+            <div className="text-heading font-bold text-success-dark dark:text-success-light" data-testid={COST_ESTIMATION_WIDGET_IDS.label('opex')}>
+              {formatCurrency(totalOpex)}
+            </div>
+            <div className="text-caption text-success-dark/70 dark:text-success-light/70">Annual</div>
+          </div>
+          <div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light/30 dark:border-primary-dark/30">
+            <div className="text-caption text-primary-dark dark:text-primary-light font-medium mb-xs">TOTAL</div>
+            <div className="text-heading font-bold text-primary-dark dark:text-primary-light" data-testid={COST_ESTIMATION_WIDGET_IDS.label('total')}>
+              {formatCurrency(totalCost)}
+            </div>
+            <div className="text-caption text-primary-dark/70 dark:text-primary-light/70">First Year</div>
+          </div>
         </section>
 
-        {/* CAPEX vs OPEX ratio visualization */}
-        <div className="mb-lg">
-          <h3 className={WidgetClasses.heading}>Cost Breakdown</h3>
-          <div className={cn(WidgetClasses.card, "shadow-md")}>
+        {/* Implementation details - Compact inline layout */}
+        <div className="grid grid-cols-2 gap-sm mb-md">
+          {/* Implementation complexity */}
+          <div className="p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20">
             <div className="flex justify-between items-center mb-xs">
-              <div className={cn(WidgetClasses.body, "font-medium")}>CAPEX</div>
-              <div className={cn(WidgetClasses.body, "font-medium")}>OPEX</div>
+              <span className="text-caption font-medium">Complexity</span>
+              <span className="text-body-lg font-bold text-primary-dark dark:text-primary-light">
+                {implementationComplexity}
+              </span>
             </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-sm">
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
               <div
-                className="h-3 bg-blue-500 rounded-l-full"
-                style={{ width: `${costRatio.capex}%` }}
+                className="h-1.5 bg-primary dark:bg-primary-light rounded-full"
+                style={{ width: `${complexityPercentage}%` }}
               ></div>
             </div>
-            <div className={cn(WidgetClasses.labelNormal, "flex justify-between")}>
-              <div>
-                {costRatio.capex}% ({formatCurrency(totalCapex)})
-              </div>
-              <div>
-                {costRatio.opex}% ({formatCurrency(totalOpex)})
-              </div>
+          </div>
+
+          {/* Personnel requirements - Compact */}
+          <div className="p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20">
+            <div className="flex justify-between items-center mb-xs">
+              <span className="text-caption font-medium">Personnel</span>
+              <span className="text-body-lg font-bold text-info-dark dark:text-info-light">
+                {fteRequirements.total} FTE
+              </span>
+            </div>
+            <div className="flex justify-between text-caption">
+              <span className="text-neutral-dark/70 dark:text-neutral-light/70">
+                Impl: {fteRequirements.implementation} | Maint: {fteRequirements.maintenance}
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Implementation details grid */}
-        <div className={cn(WidgetClasses.grid2Cols, "mb-lg")}>
-          {/* Implementation complexity */}
-          <div className={cn(WidgetClasses.card, "shadow-sm")}>
-            <h4 className={WidgetClasses.subheading}>
-              Implementation Complexity
-            </h4>
-            <div className="mb-md">
-              <div className="text-lg font-bold text-primary-dark dark:text-primary-light">
-                {implementationComplexity}
-              </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mt-sm">
-                <div
-                  className="h-2.5 bg-primary dark:bg-primary-light rounded-full"
-                  style={{ width: `${complexityPercentage}%` }}
-                ></div>
-              </div>
-            </div>
-            <div className={WidgetClasses.labelNormal}>
-              Based on combined complexity across CIA components
-            </div>
-          </div>
-
-          {/* Personnel requirements */}
-          <div className={cn(WidgetClasses.card, "shadow-sm")}>
-            <h4 className={WidgetClasses.subheading}>Personnel Requirements</h4>
-            <div className="grid grid-cols-1 gap-md">
-              <div className="flex justify-between items-center">
-                <div className={WidgetClasses.body}>
-                  Implementation Team
-                </div>
-                <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
-                  {fteRequirements.implementation} FTE
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <div className={WidgetClasses.body}>
-                  Ongoing Maintenance
-                </div>
-                <div className="text-lg font-bold text-green-600 dark:text-green-400">
-                  {fteRequirements.maintenance} FTE
-                </div>
-              </div>
-              <div className={WidgetClasses.dividerHorizontal} />
-              <div className="flex justify-between items-center pt-2 mt-sm">
-                <div className={cn(WidgetClasses.body, "font-medium")}>
-                  Annual Personnel Cost
-                </div>
-                <div className="text-lg font-bold">
-                  {formatCurrency(fteRequirements.total * 120000)}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Component breakdown */}
-        <div className="mb-lg">
-          <h3 className={WidgetClasses.heading}>
-            Cost by Security Component
-          </h3>
-          <div className="grid grid-cols-1 gap-md">
-            {/* Using SecurityLevelBadge component for consistency with other widgets */}
-            <div className={cn(WidgetClasses.card, "bg-primary-light/10 dark:bg-primary-dark/20 shadow-none")}>
-              <div className="flex justify-between items-center mb-sm">
-                <div className="font-medium text-primary-dark dark:text-primary-light flex items-center">
-                  <span className="mr-sm">🔒</span>Confidentiality
-                </div>
+        {/* Component breakdown - Horizontal cards */}
+        <div className="mb-md">
+          <h3 className="text-body-lg font-medium mb-sm">Cost by Component</h3>
+          <div className="grid grid-cols-3 gap-sm">
+            {/* Confidentiality */}
+            <div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light/30 dark:border-primary-dark/30">
+              <div className="flex items-center justify-between mb-xs">
+                <span className="text-caption font-medium text-primary-dark dark:text-primary-light">🔒 Confidentiality</span>
                 <SecurityLevelBadge
                   category=""
                   level={confidentialityLevel}
-                  colorClass="bg-primary-light/20 dark:bg-primary-dark/20"
+                  colorClass="text-xs"
                   textClass="text-primary-dark dark:text-primary-light"
                   testId={COST_ESTIMATION_WIDGET_IDS.label('conf-level')}
                 />
               </div>
-              <div className="flex justify-between items-center">
-                <div className="text-md font-bold text-primary-dark dark:text-primary-light">
-                  {formatCurrency(
-                    confidentialityCost.capex + confidentialityCost.opex
-                  )}
-                </div>
-                <div className={cn(WidgetClasses.badge, "bg-primary-light/20 dark:bg-primary-dark/30")}>
-                  {costBreakdown.confidentiality}% of total
-                </div>
+              <div className="text-subheading font-bold text-primary-dark dark:text-primary-light mb-xs">
+                {formatCurrency(confidentialityCost.capex + confidentialityCost.opex)}
               </div>
-              <div className={cn(WidgetClasses.labelNormal, "mt-sm flex justify-between")}>
-                <span>CAPEX: {formatCurrency(confidentialityCost.capex)}</span>
-                <span>OPEX: {formatCurrency(confidentialityCost.opex)}</span>
+              <div className="flex justify-between text-caption text-primary-dark/70 dark:text-primary-light/70">
+                <span>{formatCurrency(confidentialityCost.capex)}</span>
+                <span>{formatCurrency(confidentialityCost.opex)}</span>
               </div>
             </div>
 
-            <div className={cn(WidgetClasses.card, "bg-green-50 dark:bg-green-900 dark:bg-opacity-20 shadow-none")}>
-              <div className="flex justify-between items-center mb-sm">
-                <div className="font-medium text-green-800 dark:text-green-300 flex items-center">
-                  <span className="mr-sm">✓</span>Integrity
-                </div>
+            {/* Integrity */}
+            <div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30">
+              <div className="flex items-center justify-between mb-xs">
+                <span className="text-caption font-medium text-success-dark dark:text-success-light">✓ Integrity</span>
                 <SecurityLevelBadge
                   category=""
                   level={integrityLevel}
-                  colorClass="bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
-                  textClass="text-green-800 dark:text-green-300"
+                  colorClass="text-xs"
+                  textClass="text-success-dark dark:text-success-light"
                   testId={COST_ESTIMATION_WIDGET_IDS.label('int-level')}
                 />
               </div>
-              <div className="flex justify-between items-center">
-                <div className="text-md font-bold text-green-600 dark:text-green-400">
-                  {formatCurrency(integrityCost.capex + integrityCost.opex)}
-                </div>
-                <div className={cn(WidgetClasses.badge, "bg-green-100 dark:bg-green-900 dark:bg-opacity-30")}>
-                  {costBreakdown.integrity}% of total
-                </div>
+              <div className="text-subheading font-bold text-success-dark dark:text-success-light mb-xs">
+                {formatCurrency(integrityCost.capex + integrityCost.opex)}
               </div>
-              <div className={cn(WidgetClasses.labelNormal, "mt-sm flex justify-between")}>
-                <span>CAPEX: {formatCurrency(integrityCost.capex)}</span>
-                <span>OPEX: {formatCurrency(integrityCost.opex)}</span>
+              <div className="flex justify-between text-caption text-success-dark/70 dark:text-success-light/70">
+                <span>{formatCurrency(integrityCost.capex)}</span>
+                <span>{formatCurrency(integrityCost.opex)}</span>
               </div>
             </div>
 
-            <div className={cn(WidgetClasses.card, "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 shadow-none")}>
-              <div className="flex justify-between items-center mb-sm">
-                <div className="font-medium text-blue-800 dark:text-blue-300 flex items-center">
-                  <span className="mr-sm">⏱️</span>Availability
-                </div>
+            {/* Availability */}
+            <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30">
+              <div className="flex items-center justify-between mb-xs">
+                <span className="text-caption font-medium text-info-dark dark:text-info-light">⏱️ Availability</span>
                 <SecurityLevelBadge
                   category=""
                   level={availabilityLevel}
-                  colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
-                  textClass="text-blue-800 dark:text-blue-300"
+                  colorClass="text-xs"
+                  textClass="text-info-dark dark:text-info-light"
                   testId={COST_ESTIMATION_WIDGET_IDS.label('avail-level')}
                 />
               </div>
-              <div className="flex justify-between items-center">
-                <div className="text-md font-bold text-blue-600 dark:text-blue-400">
-                  {formatCurrency(
-                    availabilityCost.capex + availabilityCost.opex
-                  )}
-                </div>
-                <div className={cn(WidgetClasses.badge, "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-30")}>
-                  {costBreakdown.availability}% of total
-                </div>
+              <div className="text-subheading font-bold text-info-dark dark:text-info-light mb-xs">
+                {formatCurrency(availabilityCost.capex + availabilityCost.opex)}
               </div>
-              <div className={cn(WidgetClasses.labelNormal, "mt-sm flex justify-between")}>
-                <span>CAPEX: {formatCurrency(availabilityCost.capex)}</span>
-                <span>OPEX: {formatCurrency(availabilityCost.opex)}</span>
+              <div className="flex justify-between text-caption text-info-dark/70 dark:text-info-light/70">
+                <span>{formatCurrency(availabilityCost.capex)}</span>
+                <span>{formatCurrency(availabilityCost.opex)}</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Expertise required */}
-        <div className="mb-lg">
-          <h3 className={WidgetClasses.heading}>Expertise Required</h3>
-          <div className={cn(WidgetClasses.card, "shadow-sm")}>
-            <ul className={WidgetClasses.grid2Cols}>
-              {expertiseRequired.map((expertise: string, index: number) => (
-                <li
-                  key={`expertise-${index}`}
-                  className={cn(WidgetClasses.body, "flex items-center")}
-                >
-                  <span className="mr-sm text-blue-500">•</span>
-                  <span>{expertise}</span>
-                </li>
-              ))}
-            </ul>
+        {/* Expertise required - Compact grid */}
+        <div className="p-sm bg-info-light/5 dark:bg-info-dark/10 rounded-md border border-info-light/20 dark:border-info-dark/20">
+          <h3 className="text-body-lg font-medium mb-sm flex items-center">
+            <span className="mr-xs">💡</span>Expertise Required
+          </h3>
+          <div className="grid grid-cols-2 gap-x-md gap-y-xs text-caption text-neutral-dark dark:text-neutral-light">
+            {expertiseRequired.map((expertise: string, index: number) => (
+              <div key={`expertise-${index}`} className="flex items-start">
+                <span className="text-info-dark dark:text-info-light mr-xs">•</span>
+                <span>{expertise}</span>
+              </div>
+            ))}
           </div>
-        </div>
-
-        {/* Cost notes */}
-        <div className={cn(WidgetClasses.card, "bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 shadow-none")}>
-          <h4 className={cn(WidgetClasses.subheading, "flex items-center")}>
-            <span className="mr-sm">💡</span>Cost Notes
-          </h4>
-          <ul className={cn(WidgetClasses.body, "list-disc list-inside space-y-1 pl-2")}>
-            <li>
-              Estimates are based on industry averages for the selected security
-              levels
-            </li>
-            <li>
-              Actual costs may vary based on your organization's size and
-              industry
-            </li>
-            <li>
-              FTE calculations assume an average annual cost of $120,000 per
-              full-time employee
-            </li>
-            <li>
-              Consider consulting with security professionals for more accurate
-              cost projections
-            </li>
-          </ul>
         </div>
       </div>
     </WidgetContainer>

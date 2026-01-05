@@ -342,9 +342,9 @@ describe("CostEstimationWidget", () => {
         COST_ESTIMATION_WIDGET_IDS.root
       ).textContent;
 
-      // Look for terms that are actually in the component
-      expect(widgetContent).toMatch(/implementation cost|operational cost/i);
-      expect(widgetContent).toMatch(/one-time cost|annual cost/i);
+      // Look for terms that are actually in the component (compact layout)
+      expect(widgetContent).toMatch(/CAPEX|OPEX/i);
+      expect(widgetContent).toMatch(/one-time|annual/i);
     });
   });
 
@@ -842,7 +842,7 @@ describe("CostEstimationWidget", () => {
       });
     });
 
-    it("displays cost percentages for each component", async () => {
+    it("displays costs for each component", async () => {
       await act(async () => {
         render(
           <CostEstimationWidget
@@ -857,7 +857,11 @@ describe("CostEstimationWidget", () => {
         const widgetContent = screen.getByTestId(
           COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
-        expect(widgetContent).toMatch(/%/);
+        // Check for component names and costs (new compact layout doesn't show percentages)
+        expect(widgetContent).toMatch(/Confidentiality|Integrity|Availability/i);
+        expect(widgetContent).toMatch(/\$[\d,]+/); // Check for currency formatting
+      });
+    });
       });
     });
   });
@@ -886,9 +890,8 @@ describe("CostEstimationWidget", () => {
         const widgetContent = screen.getByTestId(
           COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
-        expect(widgetContent).toMatch(
-          /implementation cost|annual operations|total first year cost/i
-        );
+        // New compact layout uses CAPEX, OPEX, TOTAL labels
+        expect(widgetContent).toMatch(/CAPEX|OPEX|TOTAL/i);
       });
     });
   });
@@ -946,7 +949,7 @@ describe("CostEstimationWidget", () => {
 
   // Cost Notes Tests
   describe("Cost Notes", () => {
-    it("displays cost estimation notes", async () => {
+    it("displays expertise required information", async () => {
       await act(async () => {
         render(<CostEstimationWidget {...defaultProps} />);
       });
@@ -955,7 +958,8 @@ describe("CostEstimationWidget", () => {
         const widgetContent = screen.getByTestId(
           COST_ESTIMATION_WIDGET_IDS.root
         ).textContent;
-        expect(widgetContent).toMatch(/cost notes|estimates/i);
+        // New compact layout shows "Expertise Required" instead of "Cost Notes"
+        expect(widgetContent).toMatch(/Expertise Required|expertise/i);
       });
     });
   });
