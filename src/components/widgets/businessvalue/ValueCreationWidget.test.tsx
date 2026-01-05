@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { SecurityLevel } from "../../../types/cia";
 import { VALUE_CREATION_WIDGET_IDS } from "../../../constants/testIds";
@@ -183,6 +183,122 @@ describe("ValueCreationWidget", () => {
       await waitFor(() => {
         const container = screen.queryByTestId(`widget-container-${VALUE_CREATION_WIDGET_IDS.root}`);
         expect(container).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('Collapsible Sections', () => {
+    it('should start with all sections collapsed', async () => {
+      render(<ValueCreationWidget {...defaultProps} />);
+
+      await waitFor(() => {
+        // Get all collapsible buttons
+        const buttons = screen.getAllByRole('button', { expanded: false });
+        // Filter to only the section toggle buttons (not widget container buttons)
+        const sectionButtons = buttons.filter(button => 
+          button.textContent?.includes('Value Overview') ||
+          button.textContent?.includes('Component Business Value') ||
+          button.textContent?.includes('Investment Business Case')
+        );
+        
+        // All section buttons should start collapsed (aria-expanded=false)
+        sectionButtons.forEach(button => {
+          expect(button).toHaveAttribute('aria-expanded', 'false');
+        });
+
+        // Content regions should not be visible initially
+        expect(screen.queryByText(/security investment strategy delivers/i)).not.toBeInTheDocument();
+      });
+    });
+
+    it('should expand a section when its button is clicked', async () => {
+      render(<ValueCreationWidget {...defaultProps} />);
+
+      await waitFor(() => {
+        // Find and click the Value Overview button
+        const overviewButton = screen.getByRole('button', { name: /value overview/i });
+        fireEvent.click(overviewButton);
+      });
+
+      await waitFor(() => {
+        // Button should now be expanded
+        const overviewButton = screen.getByRole('button', { name: /value overview/i });
+        expect(overviewButton).toHaveAttribute('aria-expanded', 'true');
+
+        // Content should be visible
+        const summaryText = screen.getByTestId(VALUE_CREATION_WIDGET_IDS.label('summary'));
+        expect(summaryText).toBeInTheDocument();
+      });
+    });
+
+    it('should collapse a section when its button is clicked again', async () => {
+      render(<ValueCreationWidget {...defaultProps} />);
+
+      await waitFor(() => {
+        // Find and click the Value Overview button to expand
+        const overviewButton = screen.getByRole('button', { name: /value overview/i });
+        fireEvent.click(overviewButton);
+      });
+
+      await waitFor(() => {
+        // Verify it's expanded
+        const overviewButton = screen.getByRole('button', { name: /value overview/i });
+        expect(overviewButton).toHaveAttribute('aria-expanded', 'true');
+      });
+
+      // Click again to collapse
+      const overviewButton = screen.getByRole('button', { name: /value overview/i });
+      fireEvent.click(overviewButton);
+
+      await waitFor(() => {
+        // Button should now be collapsed
+        expect(overviewButton).toHaveAttribute('aria-expanded', 'false');
+      });
+    });
+
+    it('should allow only one section to be expanded at a time', async () => {
+      render(<ValueCreationWidget {...defaultProps} />);
+
+      await waitFor(() => {
+        // Expand Value Overview
+        const overviewButton = screen.getByRole('button', { name: /value overview/i });
+        fireEvent.click(overviewButton);
+      });
+
+      await waitFor(() => {
+        const overviewButton = screen.getByRole('button', { name: /value overview/i });
+        expect(overviewButton).toHaveAttribute('aria-expanded', 'true');
+      });
+
+      // Now expand Component Business Value
+      const componentButton = screen.getByRole('button', { name: /component business value/i });
+      fireEvent.click(componentButton);
+
+      await waitFor(() => {
+        // Component Business Value should be expanded
+        expect(componentButton).toHaveAttribute('aria-expanded', 'true');
+        
+        // Value Overview should be collapsed
+        const overviewButton = screen.getByRole('button', { name: /value overview/i });
+        expect(overviewButton).toHaveAttribute('aria-expanded', 'false');
+      });
+    });
+
+    it('should have proper aria-controls attributes on collapsible buttons', async () => {
+      render(<ValueCreationWidget {...defaultProps} />);
+
+      await waitFor(() => {
+        // Check Value Overview button
+        const overviewButton = screen.getByRole('button', { name: /value overview/i });
+        expect(overviewButton).toHaveAttribute('aria-controls', 'value-overview-content');
+
+        // Check Component Business Value button
+        const componentButton = screen.getByRole('button', { name: /component business value/i });
+        expect(componentButton).toHaveAttribute('aria-controls', 'component-value-content');
+
+        // Check Investment Business Case button
+        const businessCaseButton = screen.getByRole('button', { name: /investment business case/i });
+        expect(businessCaseButton).toHaveAttribute('aria-controls', 'business-case-content');
       });
     });
   });

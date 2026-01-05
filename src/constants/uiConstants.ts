@@ -108,3 +108,13 @@ export const SECURITY_LEVEL_COLORS = {
   HIGH: "#2ecc71", // Green
   VERY_HIGH: "#9b59b6", // Purple
 };
+
+/**
+ * UI display limits for compact layouts
+ */
+export const UI_DISPLAY_LIMITS = {
+  /** Maximum number of metrics to display in preview */
+  MAX_PREVIEW_METRICS: 4,
+  /** Maximum number of gaps to display in compact view */
+  MAX_DISPLAYED_GAPS: 3,
+};

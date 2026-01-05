@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
-import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { WIDGET_ICONS, WIDGET_TITLES, UI_DISPLAY_LIMITS } from "../../../constants/appConstants";
 import { COMPLIANCE_TEST_IDS } from "../../../constants/testIds";
 import { SECURITY_ICONS } from "../../../constants/uiConstants";
 import { useComplianceService } from "../../../hooks/useComplianceService";
@@ -20,9 +20,6 @@ const getBadgeStatus = (complianceScore: number): StatusType => {
   if (complianceScore >= 50) return "warning";
   return "error";
 };
-
-// Maximum number of gaps to display in compact view
-const MAX_DISPLAYED_GAPS = 3;
 
 /**
  * ComplianceStatusWidget displays status of compliance with various frameworks
@@ -359,6 +356,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                         activeFramework === framework && "ring-2 ring-success dark:ring-success-light"
                       )}
                       data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-${index}`}
+                      aria-label={`View ${framework} compliance details`}
                     >
                       {framework}
                     </button>
@@ -384,6 +382,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                         activeFramework === framework && "ring-2 ring-warning dark:ring-warning-light"
                       )}
                       data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-partial-${index}`}
+                      aria-label={`View ${framework} compliance details`}
                     >
                       {framework}
                     </button>
@@ -409,6 +408,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                         activeFramework === framework && "ring-2 ring-error dark:ring-error-light"
                       )}
                       data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-non-${index}`}
+                      aria-label={`View ${framework} compliance details`}
                     >
                       {framework}
                     </button>
@@ -435,7 +435,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                   </div>
 
                   {/* Component Requirements - Compact Grid */}
-                  <div className="grid grid-cols-3 gap-xs">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-xs">
                     {["availability", "integrity", "confidentiality"].map((comp) => {
                       const componentType = comp as CIAComponent;
                       const currentLevel =
@@ -474,7 +474,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                     <div className="text-caption text-error-dark dark:text-error-light">
                       <div className="font-medium mb-xs">Gaps:</div>
                       <ul className="space-y-xs pl-sm">
-                        {gapAnalysis.gaps.slice(0, MAX_DISPLAYED_GAPS).map((gap, index) => (
+                        {gapAnalysis.gaps.slice(0, UI_DISPLAY_LIMITS.MAX_DISPLAYED_GAPS).map((gap, index) => (
                           <li key={index}>
                             • {typeof gap === "string" ? gap : gap.framework || gap.frameworkDescription || "Undefined gap"}
                           </li>

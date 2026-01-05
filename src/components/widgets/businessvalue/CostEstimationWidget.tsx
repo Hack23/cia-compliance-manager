@@ -230,7 +230,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
       >
         {/* Summary cost section - Compact 3-column grid */}
         <section 
-          className="grid grid-cols-3 gap-sm mb-md"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-sm mb-md"
           aria-labelledby="cost-summary-heading"
         >
           <h3 id="cost-summary-heading" className="sr-only">Cost Summary</h3>
@@ -299,7 +299,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         {/* Component breakdown - Horizontal cards */}
         <div className="mb-md">
           <h3 className="text-body-lg font-medium mb-sm">Cost by Component</h3>
-          <div className="grid grid-cols-3 gap-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-sm">
             {/* Confidentiality */}
             <div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light/30 dark:border-primary-dark/30">
               <div className="flex items-center justify-between mb-xs">

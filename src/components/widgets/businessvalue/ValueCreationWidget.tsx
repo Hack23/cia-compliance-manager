@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { WIDGET_ICONS, WIDGET_TITLES, UI_DISPLAY_LIMITS } from "../../../constants/appConstants";
 import { VALUE_CREATION_WIDGET_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
@@ -22,9 +22,6 @@ interface BusinessValueMetric {
   description: string;
   icon?: string;
 }
-
-// Maximum number of metrics to display in preview
-const MAX_PREVIEW_METRICS = 4;
 
 /**
  * Display value creation information for chosen security levels
@@ -327,8 +324,8 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
           "Business value and return on investment created by security investments"
         )}
       >
-        {/* Summary cards at top - Compact 3-column grid */}
-        <section className="grid grid-cols-3 gap-sm mb-md">
+        {/* Summary cards at top - Compact 3-column grid (responsive) */}
+        <section className="grid grid-cols-1 sm:grid-cols-3 gap-sm mb-md">
           <div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30">
             <div className="text-caption text-success-dark dark:text-success-light font-medium mb-xs">ROI</div>
             <div className="text-heading font-bold text-success-dark dark:text-success-light" data-testid={VALUE_CREATION_WIDGET_IDS.value('roi')}>
@@ -359,17 +356,21 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
             onClick={() => toggleSection("summary")}
             className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
             aria-expanded={expandedSection === "summary"}
+            aria-controls="value-overview-content"
           >
             <span className="text-body-lg font-medium">📊 Value Overview</span>
             <span className="text-body">{expandedSection === "summary" ? "▼" : "▶"}</span>
           </button>
           {expandedSection === "summary" && (
-            <div className="p-sm mt-xs bg-info-light/5 dark:bg-info-dark/10 rounded-md border border-info-light/20 dark:border-info-dark/20">
+            <div
+              id="value-overview-content"
+              className="p-sm mt-xs bg-info-light/5 dark:bg-info-dark/10 rounded-md border border-info-light/20 dark:border-info-dark/20"
+            >
               <p className="text-body text-neutral-dark dark:text-neutral-light mb-sm" data-testid={VALUE_CREATION_WIDGET_IDS.label('summary')}>
                 {getBusinessValueSummary()}
               </p>
               <div className="grid grid-cols-2 gap-xs">
-                {valueMetrics.slice(0, MAX_PREVIEW_METRICS).map((metric, index) => (
+                {valueMetrics.slice(0, UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS).map((metric, index) => (
                   <div key={index} className="p-xs bg-white/50 dark:bg-gray-800/50 rounded">
                     <div className="flex items-center mb-xs">
                       <span className="mr-xs">{metric.icon || "📈"}</span>
@@ -389,12 +390,16 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
             onClick={() => toggleSection("components")}
             className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
             aria-expanded={expandedSection === "components"}
+            aria-controls="component-value-content"
           >
             <span className="text-body-lg font-medium">🔒 Component Business Value</span>
             <span className="text-body">{expandedSection === "components" ? "▼" : "▶"}</span>
           </button>
           {expandedSection === "components" && (
-            <div className="p-sm mt-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 space-y-sm">
+            <div
+              id="component-value-content"
+              className="p-sm mt-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 space-y-sm"
+            >
               {/* Confidentiality */}
               <div className="p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded">
                 <div className="flex items-center mb-xs">
@@ -449,16 +454,20 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
             onClick={() => toggleSection("business-case")}
             className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
             aria-expanded={expandedSection === "business-case"}
+            aria-controls="business-case-content"
           >
             <span className="text-body-lg font-medium">💼 Investment Business Case</span>
             <span className="text-body">{expandedSection === "business-case" ? "▼" : "▶"}</span>
           </button>
           {expandedSection === "business-case" && (
-            <div className="p-sm mt-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 space-y-xs">
+            <div
+              id="business-case-content"
+              className="p-sm mt-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 space-y-xs"
+            >
               <div className="p-xs bg-info-light/10 dark:bg-info-dark/20 rounded">
                 <h5 className="text-caption font-medium mb-xs">Executive Summary</h5>
                 <p className="text-caption">
-                  Our {typeof securityScore === 'string' ? securityScore.toLowerCase() : securityScore} security investment strategy delivers business value through improved operational reliability, data integrity, and information protection.
+                  Our {securityScore.toLowerCase()} security investment strategy delivers business value through improved operational reliability, data integrity, and information protection.
                 </p>
               </div>
               <div className="p-xs bg-success-light/10 dark:bg-success-dark/20 rounded">

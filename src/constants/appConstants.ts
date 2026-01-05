@@ -7,10 +7,10 @@ import { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS } from "./riskConstants";
 // Import CIADetails from the correct module
 import { CIADetails } from "../types/cia-services";
 // Import the UI constants for clean references
-import { getComponentIcon } from "./uiConstants";
+import { getComponentIcon, UI_DISPLAY_LIMITS } from "./uiConstants";
 
 // Export the risk levels and business impact categories from here as well for consistency
-export { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS };
+export { BUSINESS_IMPACT_CATEGORIES, RISK_LEVELS, UI_DISPLAY_LIMITS };
 
 // SecurityLevelMap type for cleaner lookups
 export type SecurityLevelKey =
