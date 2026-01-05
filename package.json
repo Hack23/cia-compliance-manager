@@ -7,7 +7,7 @@
     "chart.js": "^4.5.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-error-boundary": "^6.0.1"
+    "react-error-boundary": "^6.0.2"
   },
   "scripts": {
     "start": "vite",
