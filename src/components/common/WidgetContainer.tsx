@@ -63,11 +63,11 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
             {title}
           </h3>
         </div>
-        <div className="widget-body p-md sm:p-lg bg-white dark:bg-gray-900 rounded-b-md">
+        <div className="widget-body p-sm sm:p-md bg-white dark:bg-gray-900 rounded-b-md">
           <div className="text-error dark:text-error-light" data-testid={errorTestId}>
             {errorMessage}
           </div>
-          {errorContent && <div className="mt-md">{errorContent}</div>}
+          {errorContent && <div className="mt-sm">{errorContent}</div>}
         </div>
       </div>
     );
@@ -83,7 +83,7 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
         </h3>
         {actions && <div className="widget-actions">{actions}</div>}
       </div>
-      <div className={`widget-body p-md sm:p-lg bg-white dark:bg-gray-900 rounded-b-md ${isLoadingState ? 'flex items-center justify-center min-h-[100px]' : ''}`}>
+      <div className={`widget-body p-sm sm:p-md bg-white dark:bg-gray-900 rounded-b-md ${isLoadingState ? 'flex items-center justify-center min-h-[100px]' : ''}`}>
         {isLoadingState ? (
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" data-testid={spinnerTestId} />
         ) : (

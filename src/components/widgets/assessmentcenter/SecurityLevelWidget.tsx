@@ -220,7 +220,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         testId={testId}
       >
       <div 
-        className="p-md sm:p-lg"
+        className="space-y-sm"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Security Level Configuration",
@@ -229,7 +229,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
       >
         <div className={cn(
           WidgetClasses.section,
-          "p-md rounded-md",
+          "p-sm rounded-md",
           "bg-info-light/10 dark:bg-info-dark/20"
         )}>
           <p className={WidgetClasses.body}>
@@ -243,7 +243,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         {(error || serviceError) && (
           <div className={cn(
             WidgetClasses.card,
-            "mb-md bg-error-light/10 dark:bg-error-dark/20 text-error-dark dark:text-error-light shadow-none"
+            "mb-sm bg-error-light/10 dark:bg-error-dark/20 text-error-dark dark:text-error-light shadow-none"
           )}>
             <h4 className="font-medium">Error</h4>
             <p className={WidgetClasses.body}>
@@ -257,7 +257,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           <div className={cn(
             WidgetClasses.card,
             WidgetClasses.loading,
-            "mb-md bg-info-light/10 dark:bg-info-dark/20 text-info-dark dark:text-info-light shadow-none"
+            "mb-sm bg-info-light/10 dark:bg-info-dark/20 text-info-dark dark:text-info-light shadow-none"
           )}>
             <p className={WidgetClasses.body}>Loading security level details...</p>
           </div>
@@ -270,7 +270,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
               Configure Security Levels
             </h3>
 
-            <div className="space-y-md">
+            <div className="space-y-sm">
               {/* Confidentiality selector */}
               <div
                 className={cn(
@@ -346,7 +346,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
               {/* Integrity selector */}
               <div
-                className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                className="p-sm bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
                 data-testid={SECURITY_LEVEL_WIDGET_IDS.section('integrity')}
               >
                 <div className="flex justify-between items-center mb-sm">
@@ -410,7 +410,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
               {/* Availability selector */}
               <div
-                className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                className="p-sm bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
                 data-testid={SECURITY_LEVEL_WIDGET_IDS.section('availability')}
               >
                 <div className="flex justify-between items-center mb-sm">
@@ -476,14 +476,14 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
           {/* Security level details */}
           <div>
-            <h3 className="text-base sm:text-lg font-medium mb-md">
+            <h3 className="text-base sm:text-lg font-medium mb-sm text-gray-800 dark:text-gray-200">
               {activeComponent.charAt(0).toUpperCase() +
                 activeComponent.slice(1)}{" "}
               Details
             </h3>
 
             <div
-              className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 h-full"
+              className="p-sm bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 h-full"
               data-testid={`${activeComponent}-details-content`}
             >
               {activeDetails ? (
@@ -590,9 +590,9 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
         </div>
 
         {/* Security level overview */}
-        <div className="mt-lg bg-gray-100 dark:bg-gray-800 p-md rounded-lg">
-          <h3 className="text-md font-medium mb-sm">Security Level Overview</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-md">
+        <div className="mt-sm bg-gray-100 dark:bg-gray-800 p-sm rounded-lg">
+          <h3 className="text-md font-medium mb-sm text-gray-800 dark:text-gray-200">Security Level Overview</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-sm">
             Higher security levels provide stronger protection but typically
             require more resources to implement and maintain. Consider your
             organization's needs and constraints when selecting security levels.
