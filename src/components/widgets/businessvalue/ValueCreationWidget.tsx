@@ -381,7 +381,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
                 {valueMetrics.slice(0, UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS).map((metric, index) => (
                   <div key={index} className="p-xs bg-white/50 dark:bg-gray-800/50 rounded">
                     <div className="flex items-center mb-xs">
-                      <span className="mr-xs">{metric.icon || "📈"}</span>
+                      <span className="mr-xs" aria-hidden="true">{metric.icon || "📈"}</span>
                       <span className="text-caption font-medium">{metric.category}</span>
                     </div>
                     <div className="text-body font-bold text-info-dark dark:text-info-light">{metric.value}</div>
@@ -425,7 +425,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               {/* Confidentiality */}
               <div className="p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded">
                 <div className="flex items-center mb-xs">
-                  <span className="mr-xs">🔒</span>
+                  <span className="mr-xs" aria-hidden="true">🔒</span>
                   <span className="text-body font-medium text-primary-dark dark:text-primary-light">
                     Confidentiality ({confidentialityLevel})
                   </span>
@@ -440,7 +440,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               {/* Integrity */}
               <div className="p-xs bg-success-light/10 dark:bg-success-dark/20 rounded">
                 <div className="flex items-center mb-xs">
-                  <span className="mr-xs">✓</span>
+                  <span className="mr-xs" aria-hidden="true">✓</span>
                   <span className="text-body font-medium text-success-dark dark:text-success-light">
                     Integrity ({integrityLevel})
                   </span>
@@ -455,7 +455,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               {/* Availability */}
               <div className="p-xs bg-info-light/10 dark:bg-info-dark/20 rounded">
                 <div className="flex items-center mb-xs">
-                  <span className="mr-xs">⏱️</span>
+                  <span className="mr-xs" aria-hidden="true">⏱️</span>
                   <span className="text-body font-medium text-info-dark dark:text-info-light">
                     Availability ({availabilityLevel})
                   </span>

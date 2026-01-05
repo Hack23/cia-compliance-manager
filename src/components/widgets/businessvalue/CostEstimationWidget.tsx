@@ -303,7 +303,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
             {/* Confidentiality */}
             <div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light/30 dark:border-primary-dark/30">
               <div className="flex items-center justify-between mb-xs">
-                <span className="text-caption font-medium text-primary-dark dark:text-primary-light">🔒 Confidentiality</span>
+                <span className="text-caption font-medium text-primary-dark dark:text-primary-light"><span aria-hidden="true">🔒</span> Confidentiality</span>
                 <SecurityLevelBadge
                   category=""
                   level={confidentialityLevel}
@@ -323,7 +323,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
             {/* Integrity */}
             <div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30">
               <div className="flex items-center justify-between mb-xs">
-                <span className="text-caption font-medium text-success-dark dark:text-success-light">✓ Integrity</span>
+                <span className="text-caption font-medium text-success-dark dark:text-success-light"><span aria-hidden="true">✓</span> Integrity</span>
                 <SecurityLevelBadge
                   category=""
                   level={integrityLevel}
@@ -343,7 +343,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
             {/* Availability */}
             <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30">
               <div className="flex items-center justify-between mb-xs">
-                <span className="text-caption font-medium text-info-dark dark:text-info-light">⏱️ Availability</span>
+                <span className="text-caption font-medium text-info-dark dark:text-info-light"><span aria-hidden="true">⏱️</span> Availability</span>
                 <SecurityLevelBadge
                   category=""
                   level={availabilityLevel}
@@ -365,7 +365,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         {/* Expertise required - Compact grid */}
         <div className="p-sm bg-info-light/5 dark:bg-info-dark/10 rounded-md border border-info-light/20 dark:border-info-dark/20">
           <h3 className="text-body-lg font-medium mb-sm flex items-center">
-            <span className="mr-xs">💡</span>Expertise Required
+            <span className="mr-xs" aria-hidden="true">💡</span>Expertise Required
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-md gap-y-xs text-caption text-neutral-dark dark:text-neutral-light">
             {expertiseRequired.map((expertise: string, index: number) => (

@@ -342,7 +342,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
             {/* Compliant Frameworks - Horizontal badges */}
             {complianceStatus.compliantFrameworks.length > 0 && (
               <div className="mb-sm">
-                <div className="text-caption text-success-dark dark:text-success-light font-medium mb-xs">✓ Compliant</div>
+                <div className="text-caption text-success-dark dark:text-success-light font-medium mb-xs"><span aria-hidden="true">✓</span> Compliant</div>
                 <div className="flex flex-wrap gap-xs" data-testid={COMPLIANCE_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST}>
                   {complianceStatus.compliantFrameworks.map((framework, index) => (
                     <button
@@ -369,7 +369,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
             {/* Partially Compliant - Horizontal badges */}
             {complianceStatus.partiallyCompliantFrameworks.length > 0 && (
               <div className="mb-sm">
-                <div className="text-caption text-warning-dark dark:text-warning-light font-medium mb-xs">⚠ Partial</div>
+                <div className="text-caption text-warning-dark dark:text-warning-light font-medium mb-xs"><span aria-hidden="true">⚠</span> Partial</div>
                 <div className="flex flex-wrap gap-xs" data-testid={COMPLIANCE_TEST_IDS.PARTIALLY_COMPLIANT_FRAMEWORKS_LIST}>
                   {complianceStatus.partiallyCompliantFrameworks.map((framework, index) => (
                     <button
@@ -396,7 +396,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
             {/* Non-Compliant - Horizontal badges */}
             {complianceStatus.nonCompliantFrameworks.length > 0 && (
               <div className="mb-sm">
-                <div className="text-caption text-error-dark dark:text-error-light font-medium mb-xs">✗ Non-Compliant</div>
+                <div className="text-caption text-error-dark dark:text-error-light font-medium mb-xs"><span aria-hidden="true">✗</span> Non-Compliant</div>
                 <div className="flex flex-wrap gap-xs" data-testid={COMPLIANCE_TEST_IDS.NON_COMPLIANT_FRAMEWORKS_LIST}>
                   {complianceStatus.nonCompliantFrameworks.map((framework, index) => (
                     <button
