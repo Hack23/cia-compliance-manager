@@ -1,19 +1,13 @@
 import React from "react";
 import { BusinessImpactDetails } from "../../types/cia-services";
-import type { BusinessImpactSectionProps } from "../../types/componentPropExports";
-
-/**
- * Valid color values for business impact sections
- * Limited to colors actually used by CIA components
- */
-type ImpactColor = "blue" | "green" | "orange";
+import type { BusinessImpactSectionProps, CIAComponentColor } from "../../types/componentPropExports";
 
 /**
  * Get explicit background color classes to avoid dynamic Tailwind class generation
  * @param color - Color name (blue, green, orange)
  * @returns Explicit className string for background colors
  */
-const getBackgroundColorClasses = (color: ImpactColor): string => {
+const getBackgroundColorClasses = (color: CIAComponentColor): string => {
   switch (color) {
     case "blue":
       return "bg-blue-100 dark:bg-blue-900 border-blue-200 dark:border-blue-800";
@@ -34,7 +28,7 @@ const getBackgroundColorClasses = (color: ImpactColor): string => {
  * @param color - Color name (blue, green, orange)
  * @returns Explicit className string for text colors
  */
-const getTextColorClasses = (color: ImpactColor): string => {
+const getTextColorClasses = (color: CIAComponentColor): string => {
   switch (color) {
     case "blue":
       return "text-blue-700 dark:text-blue-300";
@@ -56,7 +50,7 @@ const getTextColorClasses = (color: ImpactColor): string => {
  * @param color - Color name (blue, green, orange)
  * @returns Explicit className string for badge styling
  */
-const getBadgeColorClasses = (color: ImpactColor): string => {
+const getBadgeColorClasses = (color: CIAComponentColor): string => {
   switch (color) {
     case "blue":
       return "bg-blue-50 text-blue-700 dark:bg-blue-900 dark:bg-opacity-50 dark:text-blue-300";

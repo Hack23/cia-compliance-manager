@@ -8,6 +8,7 @@ import {
   CONFIDENTIALITY_IMPACT_TEST_IDS,
   CONFIDENTIALITY_IMPACT_WIDGET_IDS,
 } from "../../../constants/testIds";
+import type { CIAComponentColor } from "../../../types/componentPropExports";
 import { 
   getDefaultSLAMetrics,
   getDefaultErrorRate,
@@ -41,7 +42,7 @@ interface ComponentConfig {
   iconKey: keyof typeof WIDGET_ICONS;
   defaultTitle: string;
   defaultIcon: string;
-  color: "blue" | "green" | "orange";
+  color: CIAComponentColor;
   textClass: string;
   ariaDescription: string;
   categoryLabel: string;
@@ -186,7 +187,7 @@ const getTestIds = (component: CIAComponent) => {
  * @param color - Color name (blue, green, orange)
  * @returns Explicit border color className string
  */
-const getBorderColorClass = (color: "blue" | "green" | "orange"): string => {
+const getBorderColorClass = (color: CIAComponentColor): string => {
   switch (color) {
     case "blue": return "border-blue-500";
     case "green": return "border-green-500";
