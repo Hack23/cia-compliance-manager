@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
-import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { WIDGET_ICONS, WIDGET_TITLES, UI_DISPLAY_LIMITS } from "../../../constants/appConstants";
 import { COMPLIANCE_TEST_IDS } from "../../../constants/testIds";
 import { SECURITY_ICONS } from "../../../constants/uiConstants";
 import { useComplianceService } from "../../../hooks/useComplianceService";
@@ -280,417 +280,255 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
         error={serviceError}
       >
       <div 
-        className="p-md sm:p-lg"
+        className="p-md"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Compliance Status",
           "Status of compliance with regulatory frameworks and industry standards"
         )}
       >
-        {/* Add high-level description */}
+        {/* Overall Compliance Status - Compact */}
         <section 
-          className={cn(
-            WidgetClasses.section,
-            "p-md rounded-md",
-            "bg-info-light/10 dark:bg-info-dark/20"
-          )}
-          aria-labelledby="compliance-description-heading"
+          className="mb-md"
+          aria-label="Overall Compliance Status"
         >
-          <p id="compliance-description-heading" className={WidgetClasses.body}>
-            This widget shows your compliance status with various regulatory
-            frameworks and industry standards based on your selected security
-            levels.
-          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-sm mb-sm">
+            <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30">
+              <div className="text-caption text-info-dark dark:text-info-light font-medium mb-xs">Compliance Status</div>
+              <div className="text-body-lg font-bold text-info-dark dark:text-info-light">
+                {statusText}
+              </div>
+            </div>
+            <div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30">
+              <div className="text-caption text-success-dark dark:text-success-light font-medium mb-xs">Score</div>
+              <div className="flex items-center">
+                <div className="text-body-lg font-bold text-success-dark dark:text-success-light mr-sm" data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_SCORE}>
+                  {complianceStatus?.complianceScore ?? 0}%
+                </div>
+                <StatusBadge
+                  status={getBadgeStatus(complianceStatus?.complianceScore ?? 0)}
+                  testId={COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_BADGE}
+                >
+                  {getBadgeStatus(complianceStatus?.complianceScore ?? 0)}
+                </StatusBadge>
+              </div>
+            </div>
+          </div>
+          
+          {/* Progress bar */}
+          {complianceStatus && (
+            <div 
+              className="relative h-1.5 rounded-full bg-info-light/20 dark:bg-info-dark overflow-hidden"
+              role="progressbar"
+              aria-valuenow={complianceStatus.complianceScore ?? 0}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label={`Compliance score: ${complianceStatus.complianceScore ?? 0} percent`}
+            >
+              <div
+                style={{ width: `${complianceStatus.complianceScore ?? 0}%` }}
+                className="h-full bg-info dark:bg-info-light"
+                data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_SCORE_BAR}
+              ></div>
+            </div>
+          )}
         </section>
 
-        {/* Overall Compliance Status */}
-        <section 
-          className="mb-lg"
-          aria-labelledby="overall-compliance-heading"
-        >
-          <h3 id="overall-compliance-heading" className={WidgetClasses.heading}>
-            Overall Compliance Status
-          </h3>
-          <div
-            className={cn(
-              WidgetClasses.card,
-              "bg-neutral-light/10 dark:bg-neutral-dark/20"
-            )}
-            data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_SUMMARY}
-            role="group"
-            aria-label="Compliance status summary"
-          >
-            <div className="flex justify-between items-center">
-              <div className="flex items-center">
-                <span className="text-title mr-sm text-info" aria-hidden="true">
-                  {SECURITY_ICONS.compliance || "📋"}
-                </span>
-                <span className="font-medium">Compliance Status</span>
-              </div>
-              <StatusBadge
-                status={getBadgeStatus(complianceStatus?.complianceScore ?? 0)}
-                testId={COMPLIANCE_TEST_IDS.COMPLIANCE_STATUS_BADGE}
-              >
-                {statusText}
-              </StatusBadge>
-            </div>
-
-            {complianceStatus && (
-              <div className="mt-md">
-                <div className="flex justify-between items-center mb-sm">
-                  <span 
-                    className={WidgetClasses.body}
-                    id="compliance-score-label"
-                  >
-                    Compliance Score
-                  </span>
-                  <span
-                    className="font-bold"
-                    data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_SCORE}
-                    aria-labelledby="compliance-score-label"
-                    role="status"
-                    aria-live="polite"
-                  >
-                    {complianceStatus.complianceScore ?? 0}%
-                  </span>
+        {/* Framework Status - Horizontal Badge Layout */}
+        {complianceStatus && (
+          <div className="mb-md">
+            <h3 className="text-body-lg font-medium mb-sm">Framework Status</h3>
+            
+            {/* Compliant Frameworks - Horizontal badges */}
+            {complianceStatus.compliantFrameworks.length > 0 && (
+              <div className="mb-sm">
+                <div className="text-caption text-success-dark dark:text-success-light font-medium mb-xs"><span aria-hidden="true">✓</span> Compliant</div>
+                <div className="flex flex-wrap gap-xs" data-testid={COMPLIANCE_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST}>
+                  {complianceStatus.compliantFrameworks.map((framework, index) => (
+                    <button
+                      type="button"
+                      key={framework}
+                      onClick={() => setActiveFramework(framework)}
+                      className={cn(
+                        "px-sm py-xs rounded-md text-caption font-medium transition-all",
+                        "bg-success-light/20 dark:bg-success-dark/30 text-success-dark dark:text-success-light",
+                        "border border-success-light/50 dark:border-success-dark/50",
+                        "hover:bg-success-light/30 dark:hover:bg-success-dark/40",
+                        activeFramework === framework && "ring-2 ring-success dark:ring-success-light"
+                      )}
+                      data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-${index}`}
+                      aria-label={`View ${framework} compliance details`}
+                    >
+                      {framework}
+                    </button>
+                  ))}
                 </div>
-                <div className="relative pt-1">
-                  <div 
-                    className="overflow-hidden h-2 mb-sm text-xs flex rounded bg-info-light/20 dark:bg-info-dark"
-                    role="progressbar"
-                    aria-valuenow={complianceStatus.complianceScore ?? 0}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    aria-label={`Compliance score: ${complianceStatus.complianceScore ?? 0} percent`}
-                  >
-                    <div
-                      style={{
-                        width: `${complianceStatus.complianceScore ?? 0}%`,
-                      }}
-                      className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-info dark:bg-info-light"
-                      data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_SCORE_BAR}
-                    ></div>
-                  </div>
+              </div>
+            )}
+
+            {/* Partially Compliant - Horizontal badges */}
+            {complianceStatus.partiallyCompliantFrameworks.length > 0 && (
+              <div className="mb-sm">
+                <div className="text-caption text-warning-dark dark:text-warning-light font-medium mb-xs"><span aria-hidden="true">⚠</span> Partial</div>
+                <div className="flex flex-wrap gap-xs" data-testid={COMPLIANCE_TEST_IDS.PARTIALLY_COMPLIANT_FRAMEWORKS_LIST}>
+                  {complianceStatus.partiallyCompliantFrameworks.map((framework, index) => (
+                    <button
+                      type="button"
+                      key={framework}
+                      onClick={() => setActiveFramework(framework)}
+                      className={cn(
+                        "px-sm py-xs rounded-md text-caption font-medium transition-all",
+                        "bg-warning-light/20 dark:bg-warning-dark/30 text-warning-dark dark:text-warning-light",
+                        "border border-warning-light/50 dark:border-warning-dark/50",
+                        "hover:bg-warning-light/30 dark:hover:bg-warning-dark/40",
+                        activeFramework === framework && "ring-2 ring-warning dark:ring-warning-light"
+                      )}
+                      data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-partial-${index}`}
+                      aria-label={`View ${framework} compliance details`}
+                    >
+                      {framework}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Non-Compliant - Horizontal badges */}
+            {complianceStatus.nonCompliantFrameworks.length > 0 && (
+              <div className="mb-sm">
+                <div className="text-caption text-error-dark dark:text-error-light font-medium mb-xs"><span aria-hidden="true">✗</span> Non-Compliant</div>
+                <div className="flex flex-wrap gap-xs" data-testid={COMPLIANCE_TEST_IDS.NON_COMPLIANT_FRAMEWORKS_LIST}>
+                  {complianceStatus.nonCompliantFrameworks.map((framework, index) => (
+                    <button
+                      type="button"
+                      key={framework}
+                      onClick={() => setActiveFramework(framework)}
+                      className={cn(
+                        "px-sm py-xs rounded-md text-caption font-medium transition-all",
+                        "bg-error-light/20 dark:bg-error-dark/30 text-error-dark dark:text-error-light",
+                        "border border-error-light/50 dark:border-error-dark/50",
+                        "hover:bg-error-light/30 dark:hover:bg-error-dark/40",
+                        activeFramework === framework && "ring-2 ring-error dark:ring-error-light"
+                      )}
+                      data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-non-${index}`}
+                      aria-label={`View ${framework} compliance details`}
+                    >
+                      {framework}
+                    </button>
+                  ))}
                 </div>
               </div>
             )}
           </div>
-        </section>
+        )}
 
-        {/* Compliant Frameworks */}
-        {complianceStatus &&
-          complianceStatus.compliantFrameworks.length > 0 && (
-            <div className="mb-lg">
-              <h3 className={WidgetClasses.heading}>Compliant Frameworks</h3>
-              <div
-                className={WidgetClasses.grid2Cols}
-                data-testid={COMPLIANCE_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST}
-              >
-                {complianceStatus.compliantFrameworks.map(
-                  (framework, index) => (
-                    <div
-                      key={framework}
-                      className={cn(
-                        WidgetClasses.card,
-                        WidgetClasses.cardInteractive,
-                        "bg-success-light/10 dark:bg-success-dark/20 border-success-light dark:border-success-dark",
-                        activeFramework === framework &&
-                          "ring-2 ring-success dark:ring-success-light"
-                      )}
-                      onClick={() => setActiveFramework(framework)}
-                      data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-${index}`}
-                    >
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium">{framework}</span>
-                        <StatusBadge
-                          status={getFrameworkStatusBadge(framework)}
-                          testId={`framework-status-badge-${index}`}
-                        >
-                          Compliant
-                        </StatusBadge>
-                      </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-xs">
-                        {getFrameworkDescription(framework)}
-                      </p>
-                    </div>
-                  )
-                )}
-              </div>
-            </div>
-          )}
-
-        {/* Partially Compliant Frameworks */}
-        {complianceStatus &&
-          complianceStatus.partiallyCompliantFrameworks.length > 0 && (
-            <div className="mb-lg">
-              <h3 className="text-lg font-medium mb-sm">
-                Partially Compliant Frameworks
-              </h3>
-              <div
-                className="grid grid-cols-1 sm:grid-cols-2 gap-md"
-                data-testid={
-                  COMPLIANCE_TEST_IDS.PARTIALLY_COMPLIANT_FRAMEWORKS_LIST
-                }
-              >
-                {complianceStatus.partiallyCompliantFrameworks.map(
-                  (framework, index) => (
-                    <div
-                      key={framework}
-                      className={`p-3 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg border border-yellow-200 dark:border-yellow-800 cursor-pointer ${
-                        activeFramework === framework
-                          ? "ring-2 ring-yellow-500 dark:ring-yellow-400"
-                          : ""
-                      }`}
-                      onClick={() => setActiveFramework(framework)}
-                      data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-partial-${index}`}
-                    >
-                      <div className="flex justify-between items-center mb-xs">
-                        <span className="font-medium">{framework}</span>
-                        <StatusBadge
-                          status={getFrameworkStatusBadge(framework)}
-                          testId={`framework-partial-status-badge-${index}`}
-                        >
-                          Partially Compliant
-                        </StatusBadge>
-                      </div>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">
-                        {getFrameworkDescription(framework)}
-                      </p>
-                    </div>
-                  )
-                )}
-              </div>
-            </div>
-          )}
-
-        {/* Non-Compliant Frameworks */}
-        {complianceStatus &&
-          complianceStatus.nonCompliantFrameworks.length > 0 && (
-            <div className="mb-lg">
-              <h3 className="text-lg font-medium mb-sm">
-                Non-Compliant Frameworks
-              </h3>
-              <div
-                className="grid grid-cols-1 sm:grid-cols-2 gap-md"
-                data-testid={COMPLIANCE_TEST_IDS.NON_COMPLIANT_FRAMEWORKS_LIST}
-              >
-                {complianceStatus.nonCompliantFrameworks.map(
-                  (framework, index) => (
-                    <div
-                      key={framework}
-                      className={`p-3 bg-red-50 dark:bg-red-900 dark:bg-opacity-20 rounded-lg border border-red-200 dark:border-red-800 cursor-pointer ${
-                        activeFramework === framework
-                          ? "ring-2 ring-red-500 dark:ring-red-400"
-                          : ""
-                      }`}
-                      onClick={() => setActiveFramework(framework)}
-                      data-testid={`${COMPLIANCE_TEST_IDS.FRAMEWORK_ITEM_PREFIX}-non-${index}`}
-                    >
-                      <div className="flex justify-between items-center mb-xs">
-                        <span className="font-medium">{framework}</span>
-                        <StatusBadge
-                          status={getFrameworkStatusBadge(framework)}
-                          testId={`framework-non-status-badge-${index}`}
-                        >
-                          Non-Compliant
-                        </StatusBadge>
-                      </div>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">
-                        {getFrameworkDescription(framework)}
-                      </p>
-                    </div>
-                  )
-                )}
-              </div>
-            </div>
-          )}
-
-        {/* Framework Gap Analysis */}
+        {/* Framework Gap Analysis - Compact */}
         {activeFramework && (
-          <div className="mt-lg">
-            <h3 className="text-lg font-medium mb-sm">
-              {activeFramework} Gap Analysis
-            </h3>
-            <div
-              className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
-              data-testid={COMPLIANCE_TEST_IDS.FRAMEWORK_GAP_ANALYSIS}
-            >
+          <div className="mb-md">
+            <div className="p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20">
+              <h3 className="text-body-lg font-medium mb-sm">{activeFramework} Gap Analysis</h3>
+              
               {gapAnalysis ? (
-                <div>
-                  <div className="mb-md">
-                    <h4 className="font-medium mb-xs">Status</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {gapAnalysis.isCompliant
-                        ? `Your security controls meet the requirements for ${activeFramework}.`
-                        : `Your security controls do not fully meet the requirements for ${activeFramework}.`}
-                    </p>
+                <div className="space-y-sm">
+                  {/* Status */}
+                  <div className="text-caption text-neutral-dark dark:text-neutral-light">
+                    {gapAnalysis.isCompliant
+                      ? `✓ Meeting ${activeFramework} requirements`
+                      : `✗ Not fully meeting ${activeFramework} requirements`}
                   </div>
 
-                  {/* CIA Component Analysis */}
-                  <div className="mb-md">
-                    <h4 className="font-medium mb-xs">Component Requirements</h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-sm mt-sm">
-                      {["availability", "integrity", "confidentiality"].map(
-                        (comp) => {
-                          const componentType = comp as CIAComponent;
-                          const currentLevel =
-                            componentType === "availability"
-                              ? availabilityLevel
-                              : componentType === "integrity"
-                              ? integrityLevel
-                              : confidentialityLevel;
-                          const requiredLevel = getFrameworkRequiredLevel(
-                            activeFramework,
-                            componentType
-                          );
-                          const isMeeting =
-                            getSecurityLevelValue(currentLevel) >=
-                            getSecurityLevelValue(requiredLevel);
+                  {/* Component Requirements - Compact Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-xs">
+                    {["availability", "integrity", "confidentiality"].map((comp) => {
+                      const componentType = comp as CIAComponent;
+                      const currentLevel =
+                        componentType === "availability"
+                          ? availabilityLevel
+                          : componentType === "integrity"
+                          ? integrityLevel
+                          : confidentialityLevel;
+                      const requiredLevel = getFrameworkRequiredLevel(activeFramework, componentType);
+                      const isMeeting = getSecurityLevelValue(currentLevel) >= getSecurityLevelValue(requiredLevel);
 
-                          return (
-                            <div
-                              key={comp}
-                              className={`p-2 rounded-lg ${
-                                isMeeting
-                                  ? "bg-green-50 dark:bg-green-900 dark:bg-opacity-20"
-                                  : "bg-red-50 dark:bg-red-900 dark:bg-opacity-20"
-                              }`}
-                            >
-                              <div className="text-xs font-medium mb-xs">
-                                {componentType.charAt(0).toUpperCase() +
-                                  componentType.slice(1)}
-                              </div>
-                              <div className="flex justify-between text-sm">
-                                <span>
-                                  Current:{" "}
-                                  <span className="font-medium">
-                                    {currentLevel}
-                                  </span>
-                                </span>
-                                <span>
-                                  Required:{" "}
-                                  <span className="font-medium">
-                                    {requiredLevel}
-                                  </span>
-                                </span>
-                              </div>
-                              <div className="mt-xs text-xs text-right">
-                                <StatusBadge
-                                  status={isMeeting ? "success" : "error"}
-                                  testId={`${comp}-requirement-status`}
-                                >
-                                  {isMeeting ? "Meeting" : "Not Meeting"}
-                                </StatusBadge>
-                              </div>
-                            </div>
-                          );
-                        }
-                      )}
-                    </div>
+                      return (
+                        <div
+                          key={comp}
+                          className={cn(
+                            "p-xs rounded text-caption",
+                            isMeeting
+                              ? "bg-success-light/10 dark:bg-success-dark/20 text-success-dark dark:text-success-light"
+                              : "bg-error-light/10 dark:bg-error-dark/20 text-error-dark dark:text-error-light"
+                          )}
+                        >
+                          <div className="font-medium mb-xs">
+                            {componentType.charAt(0).toUpperCase() + componentType.slice(1)}
+                          </div>
+                          <div className="flex flex-col">
+                            <span>{currentLevel}</span>
+                            <span className="opacity-70">→ {requiredLevel}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
 
-                  {/* Gap Analysis */}
+                  {/* Gaps and Recommendations - Compact */}
                   {gapAnalysis.gaps && gapAnalysis.gaps.length > 0 && (
-                    <div className="mb-md">
-                      <h4 className="font-medium mb-xs">Compliance Gaps</h4>
-                      <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
-                        {gapAnalysis.gaps.map((gap, index) => (
+                    <div className="text-caption text-error-dark dark:text-error-light">
+                      <div className="font-medium mb-xs">Gaps:</div>
+                      <ul className="space-y-xs pl-sm">
+                        {gapAnalysis.gaps.slice(0, UI_DISPLAY_LIMITS.MAX_DISPLAYED_GAPS).map((gap, index) => (
                           <li key={index}>
-                            {typeof gap === "string"
-                              ? gap
-                              : gap.framework ||
-                                gap.frameworkDescription ||
-                                "Undefined compliance gap"}
+                            • {typeof gap === "string" ? gap : gap.framework || gap.frameworkDescription || "Undefined gap"}
                           </li>
                         ))}
+                        {gapAnalysis.gaps.length > UI_DISPLAY_LIMITS.MAX_DISPLAYED_GAPS && (
+                          <li className="opacity-70">
+                            + {gapAnalysis.gaps.length - UI_DISPLAY_LIMITS.MAX_DISPLAYED_GAPS} more gap
+                            {gapAnalysis.gaps.length - UI_DISPLAY_LIMITS.MAX_DISPLAYED_GAPS !== 1 ? "s" : ""}
+                          </li>
+                        )}
                       </ul>
                     </div>
                   )}
-
-                  {/* Recommendations */}
-                  {gapAnalysis.recommendations &&
-                    gapAnalysis.recommendations.length > 0 && (
-                      <div>
-                        <h4 className="font-medium mb-xs">Recommendations</h4>
-                        <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
-                          {gapAnalysis.recommendations.map((rec, index) => (
-                            <li key={index}>{rec}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
                 </div>
               ) : (
-                <div
-                  className="text-center text-gray-500 dark:text-gray-400 py-6"
-                  data-testid={COMPLIANCE_TEST_IDS.NO_GAP_ANALYSIS}
-                >
-                  No gap analysis available for this framework.
+                <div className="text-center text-caption text-neutral-dark/70 dark:text-neutral-light/70 py-sm">
+                  No gap analysis available
                 </div>
               )}
             </div>
           </div>
         )}
 
-        {/* Compliance Tips */}
-        <div className="mt-lg p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-200 dark:border-blue-800">
-          <div className="flex items-center mb-sm">
-            <span className="text-blue-500 dark:text-blue-400 mr-sm">💡</span>
-            <h3 className="font-medium">Compliance Tips</h3>
+        {/* Compliance Tips - Compact */}
+        <div className="p-sm bg-info-light/5 dark:bg-info-dark/10 rounded-md border border-info-light/20 dark:border-info-dark/20">
+          <div className="flex items-center mb-xs">
+            <span className="text-info-dark dark:text-info-light mr-xs" aria-hidden="true">💡</span>
+            <h3 className="text-body font-medium">Tips</h3>
           </div>
-          <ul
-            className="text-sm space-y-1 list-disc list-inside text-gray-600 dark:text-gray-400"
-            data-testid={COMPLIANCE_TEST_IDS.COMPLIANCE_TIPS_LIST}
-          >
+          <ul className="text-caption text-neutral-dark dark:text-neutral-light space-y-xs pl-sm">
             {complianceStatus && complianceStatus.complianceScore ? (
               complianceStatus.complianceScore < 50 ? (
                 <>
-                  <li>Focus on implementing foundational security controls</li>
-                  <li>
-                    Prioritize controls that address multiple compliance
-                    frameworks
-                  </li>
-                  <li>
-                    Consider engaging a compliance specialist to create a
-                    roadmap
-                  </li>
+                  <li>• Focus on foundational security controls</li>
+                  <li>• Prioritize multi-framework controls</li>
                 </>
               ) : complianceStatus.complianceScore < 80 ? (
                 <>
-                  <li>
-                    Address specific gaps in partially compliant frameworks
-                  </li>
-                  <li>
-                    Implement regular compliance monitoring and validation
-                  </li>
-                  <li>Document your compliance controls and processes</li>
+                  <li>• Address specific gaps in partial frameworks</li>
+                  <li>• Implement regular compliance monitoring</li>
                 </>
               ) : (
                 <>
-                  <li>
-                    Maintain your strong compliance posture with regular reviews
-                  </li>
-                  <li>
-                    Prepare for upcoming regulatory changes and new frameworks
-                  </li>
-                  <li>
-                    Consider compliance certification to showcase your
-                    capabilities
-                  </li>
+                  <li>• Maintain strong posture with regular reviews</li>
+                  <li>• Prepare for upcoming regulatory changes</li>
                 </>
               )
             ) : (
               <>
-                <li>
-                  Implement controls across all CIA components for balanced
-                  compliance
-                </li>
-                <li>
-                  Start with the frameworks most relevant to your industry
-                </li>
-                <li>
-                  Document your security controls to demonstrate compliance
-                </li>
+                <li>• Implement controls across all CIA components</li>
+                <li>• Start with industry-relevant frameworks</li>
               </>
             )}
           </ul>

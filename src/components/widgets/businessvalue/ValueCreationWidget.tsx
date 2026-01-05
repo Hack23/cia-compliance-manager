@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { WIDGET_ICONS, WIDGET_TITLES } from "../../../constants/appConstants";
+import { WIDGET_ICONS, WIDGET_TITLES, UI_DISPLAY_LIMITS } from "../../../constants/appConstants";
 import { VALUE_CREATION_WIDGET_IDS } from "../../../constants/testIds";
 import { useCIAContentService } from "../../../hooks/useCIAContentService";
 import { SecurityLevel } from "../../../types/cia";
@@ -42,6 +42,9 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
 }) => {
   // Get CIA content service for value creation data
   const { ciaContentService, error, isLoading } = useCIAContentService();
+
+  // State for collapsible sections - start collapsed for compact design
+  const [expandedSection, setExpandedSection] = React.useState<string | null>(null);
 
   // Calculate overall security level
   const securityScore = useMemo(() => {
@@ -298,6 +301,11 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
     ]
   );
 
+  // Toggle section expansion
+  const toggleSection = (section: string): void => {
+    setExpandedSection(expandedSection === section ? null : section);
+  };
+
   return (
     <WidgetErrorBoundary widgetName="Value Creation">
       <WidgetContainer
@@ -309,218 +317,203 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         error={error}
       >
       <div 
-        className="p-md sm:p-lg"
+        className="p-md"
         role="region"
         aria-label={getWidgetAriaDescription(
           "Business Value Creation",
           "Business value and return on investment created by security investments"
         )}
       >
-        {/* Overview section */}
-        <section 
-          className="mb-lg"
-          aria-labelledby="value-profile-heading"
-        >
-          <div className={cn(
-            WidgetClasses.section,
-            "p-md rounded-md",
-            "bg-info-light/10 dark:bg-info-dark/20"
-          )}>
-            <p className={WidgetClasses.body} data-testid={VALUE_CREATION_WIDGET_IDS.label('summary')}>
-              {getBusinessValueSummary()}
-            </p>
+        {/* Summary cards at top - Compact 3-column grid (responsive) */}
+        <section className="grid grid-cols-1 sm:grid-cols-3 gap-sm mb-md" aria-label="Summary metrics">
+          <div className="p-sm bg-success-light/10 dark:bg-success-dark/20 rounded-md border border-success-light/30 dark:border-success-dark/30">
+            <div className="text-caption text-success-dark dark:text-success-light font-medium mb-xs">ROI</div>
+            <div className="text-heading font-bold text-success-dark dark:text-success-light" data-testid={VALUE_CREATION_WIDGET_IDS.value('roi')}>
+              {roiEstimate.value}
+            </div>
+            <div className="text-caption text-success-dark/70 dark:text-success-light/70">{roiEstimate.description}</div>
           </div>
-
-          <div className="flex justify-between items-center mb-md">
-            <h3 id="value-profile-heading" className={WidgetClasses.heading}>
-              Overall Value Profile
-            </h3>
+          <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded-md border border-info-light/30 dark:border-info-dark/30">
+            <div className="text-caption text-info-dark dark:text-info-light font-medium mb-xs">Security Level</div>
             <div className="flex items-center">
-              <span className={cn(WidgetClasses.body, "mr-sm")}>
-                Security Level:
-              </span>
-              <SecurityLevelIndicator level={securityScoreAsLevel} size="md" />
+              <SecurityLevelIndicator level={securityScoreAsLevel} size="sm" />
+              <span className="text-body-lg font-bold text-info-dark dark:text-info-light ml-xs">{securityScore}</span>
             </div>
           </div>
-
-          {/* ROI estimate */}
-          <div 
-            className={cn(
-              WidgetClasses.card,
-              "bg-success-light/10 dark:bg-success-dark/20 mb-md shadow-none"
-            )}
-            role="region"
-            aria-labelledby="roi-heading"
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <h4 id="roi-heading" className="font-medium text-success-dark dark:text-success-light">
-                  Estimated Return on Investment
-                </h4>
-                <p className="text-body text-success dark:text-success-light mt-xs">
-                  {roiEstimate.description}
-                </p>
-              </div>
-              <div
-                className="text-title font-bold text-success dark:text-success-light"
-                data-testid={VALUE_CREATION_WIDGET_IDS.value('roi')}
-                aria-label={`Return on investment: ${roiEstimate.value}`}
-              >
-                {roiEstimate.value}
-              </div>
+          <div className="p-sm bg-primary-light/10 dark:bg-primary-dark/20 rounded-md border border-primary-light/30 dark:border-primary-dark/30">
+            <div className="text-caption text-primary-dark dark:text-primary-light font-medium mb-xs">Value Metrics</div>
+            <div className="text-heading font-bold text-primary-dark dark:text-primary-light">
+              {valueMetrics.length}
             </div>
-          </div>
-
-          {/* Business value metrics grid */}
-          <div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md"
-            data-testid={VALUE_CREATION_WIDGET_IDS.section('metrics-grid')}
-          >
-            {valueMetrics.map((metric, index) => (
-              <div
-                key={index}
-                className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md border border-neutral-light dark:border-neutral-dark"
-                data-testid={`value-metric-${index}`}
-              >
-                <div className="flex items-center mb-sm">
-                  <span className="text-title mr-sm text-info">
-                    {metric.icon || "📈"}
-                  </span>
-                  <h4 className="font-medium">{metric.category}</h4>
-                </div>
-                <div className="text-heading font-bold text-info dark:text-info-light mb-xs">
-                  {metric.value}
-                </div>
-                <p className="text-body text-neutral dark:text-neutral-light">
-                  {metric.description}
-                </p>
-              </div>
-            ))}
+            <div className="text-caption text-primary-dark/70 dark:text-primary-light/70">Categories</div>
           </div>
         </section>
 
-        {/* Component-specific value sections */}
-        <div className="mb-lg">
-          <h3 className="text-heading font-medium mb-md">Component Business Value</h3>
-
-          {/* Confidentiality value */}
-          <div
-            className="p-md bg-primary-light/10 dark:bg-primary-dark/20 rounded-md"
-            data-testid={VALUE_CREATION_WIDGET_IDS.section('confidentiality-value')}
+        {/* Collapsible sections */}
+        {/* Value Overview */}
+        <div className="mb-sm">
+          <button
+            type="button"
+            onClick={() => toggleSection("summary")}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleSection("summary");
+              }
+            }}
+            className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
+            aria-expanded={expandedSection === "summary"}
+            aria-controls="value-overview-content"
+            aria-label="Toggle Value Overview section"
           >
-            <div className="flex items-center mb-sm">
-              <span className="text-title mr-sm">🔒</span>
-              <h4 className="font-medium">
-                Confidentiality Value ({confidentialityLevel})
-              </h4>
-            </div>
-            <ul className="list-disc list-inside pl-2 text-body text-neutral dark:text-neutral-light">
-              {getComponentValueStatements(
-                "confidentiality",
-                confidentialityLevel
-              ).map((statement, index) => (
-                <li
-                  key={index}
-                  className="mb-xs"
-                  data-testid={`confidentiality-value-item-${index}`}
-                >
-                  {statement}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Integrity value */}
-          <div
-            className="mb-md p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
-            data-testid={VALUE_CREATION_WIDGET_IDS.section('integrity-value')}
-          >
-            <div className="flex items-center mb-sm">
-              <span className="text-subheading mr-sm">✓</span>
-              <h4 className="font-medium">
-                Integrity Value ({integrityLevel})
-              </h4>
-            </div>
-            <ul className="list-disc list-inside pl-2 text-sm text-gray-600 dark:text-gray-400">
-              {getComponentValueStatements("integrity", integrityLevel).map(
-                (statement, index) => (
-                  <li
-                    key={index}
-                    className="mb-xs"
-                    data-testid={`integrity-value-item-${index}`}
-                  >
-                    {statement}
-                  </li>
-                )
+            <span className="text-body-lg font-medium"><span aria-hidden="true">📊</span> Value Overview</span>
+            <span className="text-body" aria-hidden="true">{expandedSection === "summary" ? "▼" : "▶"}</span>
+          </button>
+          {expandedSection === "summary" && (
+            <div
+              id="value-overview-content"
+              className="p-sm mt-xs bg-info-light/5 dark:bg-info-dark/10 rounded-md border border-info-light/20 dark:border-info-dark/20"
+            >
+              <p className="text-body text-neutral-dark dark:text-neutral-light mb-sm" data-testid={VALUE_CREATION_WIDGET_IDS.label('summary')}>
+                {getBusinessValueSummary()}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-xs">
+                {valueMetrics.slice(0, UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS).map((metric, index) => (
+                  <div key={index} className="p-xs bg-white/50 dark:bg-gray-800/50 rounded">
+                    <div className="flex items-center mb-xs">
+                      <span className="mr-xs" aria-hidden="true">{metric.icon || "📈"}</span>
+                      <span className="text-caption font-medium">{metric.category}</span>
+                    </div>
+                    <div className="text-body font-bold text-info-dark dark:text-info-light">{metric.value}</div>
+                  </div>
+                ))}
+              </div>
+              {valueMetrics.length > UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS && (
+                <div className="text-caption text-neutral-dark/70 dark:text-neutral-light/70 mt-xs text-center">
+                  + {valueMetrics.length - UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS} more metric
+                  {valueMetrics.length - UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS !== 1 ? "s" : ""}
+                </div>
               )}
-            </ul>
-          </div>
-
-          {/* Availability value */}
-          <div
-            className="mb-md p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
-            data-testid={VALUE_CREATION_WIDGET_IDS.section('availability-value')}
-          >
-            <div className="flex items-center mb-sm">
-              <span className="text-subheading mr-sm">⏱️</span>
-              <h4 className="font-medium">
-                Availability Value ({availabilityLevel})
-              </h4>
             </div>
-            <ul className="list-disc list-inside pl-2 text-sm text-gray-600 dark:text-gray-400">
-              {getComponentValueStatements(
-                "availability",
-                availabilityLevel
-              ).map((statement, index) => (
-                <li
-                  key={index}
-                  className="mb-xs"
-                  data-testid={`availability-value-item-${index}`}
-                >
-                  {statement}
-                </li>
-              ))}
-            </ul>
-          </div>
+          )}
         </div>
 
-        {/* Business case section */}
-        <div>
-          <h3 className="text-lg font-medium mb-md">
-            Security Investment Business Case
-          </h3>
-          <div className="p-md bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-md">
-              Use these value statements to build your business case for
-              security investments:
-            </p>
-            <div className="space-y-3">
-              <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded">
-                <h5 className="text-sm font-medium mb-xs">Executive Summary</h5>
-                <p className="text-sm">
-                  Our {securityScore.toLowerCase()} security investment strategy
-                  delivers business value through improved operational
-                  reliability, data integrity, and information protection.
+        {/* Component Value - Collapsible */}
+        <div className="mb-sm">
+          <button
+            type="button"
+            onClick={() => toggleSection("components")}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleSection("components");
+              }
+            }}
+            className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
+            aria-expanded={expandedSection === "components"}
+            aria-controls="component-value-content"
+            aria-label="Toggle Component Business Value section"
+          >
+            <span className="text-body-lg font-medium"><span aria-hidden="true">🔒</span> Component Business Value</span>
+            <span className="text-body" aria-hidden="true">{expandedSection === "components" ? "▼" : "▶"}</span>
+          </button>
+          {expandedSection === "components" && (
+            <div
+              id="component-value-content"
+              className="p-sm mt-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 space-y-sm"
+            >
+              {/* Confidentiality */}
+              <div className="p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded">
+                <div className="flex items-center mb-xs">
+                  <span className="mr-xs" aria-hidden="true">🔒</span>
+                  <span className="text-body font-medium text-primary-dark dark:text-primary-light">
+                    Confidentiality ({confidentialityLevel})
+                  </span>
+                </div>
+                <ul className="text-caption text-neutral-dark dark:text-neutral-light space-y-xs pl-sm">
+                  {getComponentValueStatements("confidentiality", confidentialityLevel).map((statement, index) => (
+                    <li key={index} data-testid={`confidentiality-value-item-${index}`}>• {statement}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Integrity */}
+              <div className="p-xs bg-success-light/10 dark:bg-success-dark/20 rounded">
+                <div className="flex items-center mb-xs">
+                  <span className="mr-xs" aria-hidden="true">✓</span>
+                  <span className="text-body font-medium text-success-dark dark:text-success-light">
+                    Integrity ({integrityLevel})
+                  </span>
+                </div>
+                <ul className="text-caption text-neutral-dark dark:text-neutral-light space-y-xs pl-sm">
+                  {getComponentValueStatements("integrity", integrityLevel).map((statement, index) => (
+                    <li key={index} data-testid={`integrity-value-item-${index}`}>• {statement}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Availability */}
+              <div className="p-xs bg-info-light/10 dark:bg-info-dark/20 rounded">
+                <div className="flex items-center mb-xs">
+                  <span className="mr-xs" aria-hidden="true">⏱️</span>
+                  <span className="text-body font-medium text-info-dark dark:text-info-light">
+                    Availability ({availabilityLevel})
+                  </span>
+                </div>
+                <ul className="text-caption text-neutral-dark dark:text-neutral-light space-y-xs pl-sm">
+                  {getComponentValueStatements("availability", availabilityLevel).map((statement, index) => (
+                    <li key={index} data-testid={`availability-value-item-${index}`}>• {statement}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Business Case - Collapsible */}
+        <div className="mb-sm">
+          <button
+            type="button"
+            onClick={() => toggleSection("business-case")}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleSection("business-case");
+              }
+            }}
+            className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
+            aria-expanded={expandedSection === "business-case"}
+            aria-controls="business-case-content"
+            aria-label="Toggle Investment Business Case section"
+          >
+            <span className="text-body-lg font-medium"><span aria-hidden="true">💼</span> Investment Business Case</span>
+            <span className="text-body" aria-hidden="true">{expandedSection === "business-case" ? "▼" : "▶"}</span>
+          </button>
+          {expandedSection === "business-case" && (
+            <div
+              id="business-case-content"
+              className="p-sm mt-xs bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 space-y-xs"
+            >
+              <div className="p-xs bg-info-light/10 dark:bg-info-dark/20 rounded">
+                <h5 className="text-caption font-medium mb-xs">Executive Summary</h5>
+                <p className="text-caption">
+                  Our {securityScore.toLowerCase()} security investment strategy delivers business value through improved operational reliability, data integrity, and information protection.
                 </p>
               </div>
-              <div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded">
-                <h5 className="text-sm font-medium mb-xs">Financial Value</h5>
-                <p className="text-sm">
-                  With an estimated ROI of {roiEstimate.value}, our security
-                  investments provide strong financial returns through risk
-                  reduction, operational improvements, and business enablement.
+              <div className="p-xs bg-success-light/10 dark:bg-success-dark/20 rounded">
+                <h5 className="text-caption font-medium mb-xs">Financial Value</h5>
+                <p className="text-caption">
+                  With an estimated ROI of {roiEstimate.value}, our security investments provide strong financial returns through risk reduction, operational improvements, and business enablement.
                 </p>
               </div>
-              <div className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
-                <h5 className="text-sm font-medium mb-xs">Strategic Value</h5>
-                <p className="text-sm">
-                  Beyond direct financial returns, our security program creates
-                  strategic value by enabling digital initiatives, protecting
-                  our brand, and building customer trust.
+              <div className="p-xs bg-primary-light/10 dark:bg-primary-dark/20 rounded">
+                <h5 className="text-caption font-medium mb-xs">Strategic Value</h5>
+                <p className="text-caption">
+                  Beyond direct financial returns, our security program creates strategic value by enabling digital initiatives, protecting our brand, and building customer trust.
                 </p>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </WidgetContainer>
