@@ -5,10 +5,9 @@ import { CodeBlockProps } from "../../types/componentPropExports";
  * Simple syntax highlighting for common tokens
  * No external libraries - just basic regex-based highlighting
  * 
- * Note: Applies highlighting in order of precedence:
- * 1. Comments (first, to avoid matching keywords in comments)
- * 2. Strings (second, to avoid matching keywords in strings)
- * 3. Keywords and numbers (last, only in actual code)
+ * Uses single-pass tokenizer approach to avoid matching keywords inside
+ * comments or strings. The combined regex matches all patterns at once,
+ * and the replacement function decides how to highlight each match.
  */
 const highlightCode = (code: string, language?: string): string => {
   let highlighted = code;
@@ -19,66 +18,66 @@ const highlightCode = (code: string, language?: string): string => {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
-  // Apply syntax highlighting based on language
+  // Apply syntax highlighting based on language using single-pass tokenizer
   if (language === "typescript" || language === "javascript" || language === "jsx" || language === "tsx") {
-    // Comments (first priority - match before keywords)
-    highlighted = highlighted.replace(
-      /(\/\/.*$|\/\*[\s\S]*?\*\/)/gm,
-      '<span class="text-gray-500 dark:text-gray-400 italic">$1</span>'
-    );
+    // Combined pattern matches comments, strings, keywords, and numbers in one pass
+    const tsPattern = /(\/\/.*$|\/\*[\s\S]*?\*\/)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)|(\b(?:const|let|var|function|return|if|else|for|while|class|interface|type|import|export|from|default|async|await|try|catch|throw|new|this|extends|implements|public|private|protected|static|readonly)\b)|(\b\d+\b)/gm;
     
-    // Strings (second priority - match before keywords)
     highlighted = highlighted.replace(
-      /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)/g,
-      '<span class="text-green-600 dark:text-green-400">$1</span>'
-    );
-    
-    // Keywords (third priority - only match in actual code)
-    highlighted = highlighted.replace(
-      /\b(const|let|var|function|return|if|else|for|while|class|interface|type|import|export|from|default|async|await|try|catch|throw|new|this|extends|implements|public|private|protected|static|readonly)\b/g,
-      '<span class="text-purple-600 dark:text-purple-400">$1</span>'
-    );
-    
-    // Numbers (last priority)
-    highlighted = highlighted.replace(
-      /\b(\d+)\b/g,
-      '<span class="text-blue-600 dark:text-blue-400">$1</span>'
+      tsPattern,
+      (match: string, comment: string, str: string, keyword: string, num: string): string => {
+        if (comment) {
+          return `<span class="text-gray-500 dark:text-gray-400 italic">${comment}</span>`;
+        }
+        if (str) {
+          return `<span class="text-green-600 dark:text-green-400">${str}</span>`;
+        }
+        if (keyword) {
+          return `<span class="text-purple-600 dark:text-purple-400">${keyword}</span>`;
+        }
+        if (num) {
+          return `<span class="text-blue-600 dark:text-blue-400">${num}</span>`;
+        }
+        return match;
+      }
     );
   } else if (language === "python") {
-    // Comments (first priority)
-    highlighted = highlighted.replace(
-      /(#.*$)/gm,
-      '<span class="text-gray-500 dark:text-gray-400 italic">$1</span>'
-    );
+    // Combined pattern for Python
+    const pythonPattern = /(#.*$)|("""[\s\S]*?"""|'''[\s\S]*?'''|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|(\b(?:def|class|if|elif|else|for|while|return|import|from|as|try|except|finally|with|lambda|yield|raise|pass|break|continue|True|False|None)\b)/gm;
     
-    // Strings (second priority)
     highlighted = highlighted.replace(
-      /("""[\s\S]*?"""|'''[\s\S]*?'''|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g,
-      '<span class="text-green-600 dark:text-green-400">$1</span>'
-    );
-    
-    // Keywords (third priority)
-    highlighted = highlighted.replace(
-      /\b(def|class|if|elif|else|for|while|return|import|from|as|try|except|finally|with|lambda|yield|raise|pass|break|continue|True|False|None)\b/g,
-      '<span class="text-purple-600 dark:text-purple-400">$1</span>'
+      pythonPattern,
+      (match: string, comment: string, str: string, keyword: string): string => {
+        if (comment) {
+          return `<span class="text-gray-500 dark:text-gray-400 italic">${comment}</span>`;
+        }
+        if (str) {
+          return `<span class="text-green-600 dark:text-green-400">${str}</span>`;
+        }
+        if (keyword) {
+          return `<span class="text-purple-600 dark:text-purple-400">${keyword}</span>`;
+        }
+        return match;
+      }
     );
   } else if (language === "bash" || language === "shell") {
-    // Comments (first priority)
-    highlighted = highlighted.replace(
-      /(#.*$)/gm,
-      '<span class="text-gray-500 dark:text-gray-400 italic">$1</span>'
-    );
+    // Combined pattern for Bash
+    const bashPattern = /(#.*$)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|(\b(?:if|then|else|elif|fi|for|do|done|while|case|esac|function|return|exit|cd|ls|mkdir|rm|cp|mv|echo|cat|grep|sed|awk)\b)/gm;
     
-    // Strings (second priority)
     highlighted = highlighted.replace(
-      /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g,
-      '<span class="text-green-600 dark:text-green-400">$1</span>'
-    );
-    
-    // Commands and keywords (third priority)
-    highlighted = highlighted.replace(
-      /\b(if|then|else|elif|fi|for|do|done|while|case|esac|function|return|exit|cd|ls|mkdir|rm|cp|mv|echo|cat|grep|sed|awk)\b/g,
-      '<span class="text-purple-600 dark:text-purple-400">$1</span>'
+      bashPattern,
+      (match: string, comment: string, str: string, keyword: string): string => {
+        if (comment) {
+          return `<span class="text-gray-500 dark:text-gray-400 italic">${comment}</span>`;
+        }
+        if (str) {
+          return `<span class="text-green-600 dark:text-green-400">${str}</span>`;
+        }
+        if (keyword) {
+          return `<span class="text-purple-600 dark:text-purple-400">${keyword}</span>`;
+        }
+        return match;
+      }
     );
   }
 

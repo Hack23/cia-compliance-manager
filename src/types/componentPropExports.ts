@@ -14,6 +14,7 @@
 // Import common component prop interfaces
 import type { ReactNode } from "react";
 import { CIAComponent, SecurityLevel } from "./cia";
+import { TechnicalImplementationDetails } from "./cia-services";
 
 // Re-export from components/common
 export interface BusinessImpactSectionProps {
@@ -81,22 +82,22 @@ export interface ImplementationGuidancePanelProps {
   /**
    * Implementation guides for the CIA components
    */
-  implementationGuides: (import('../types/cia-services').TechnicalImplementationDetails | undefined)[];
+  implementationGuides: (TechnicalImplementationDetails | undefined)[];
 
   /**
    * The selected availability level
    */
-  availabilityLevel: import('../types/cia').SecurityLevel;
+  availabilityLevel: SecurityLevel;
 
   /**
    * The selected integrity level
    */
-  integrityLevel: import('../types/cia').SecurityLevel;
+  integrityLevel: SecurityLevel;
 
   /**
    * The selected confidentiality level
    */
-  confidentialityLevel: import('../types/cia').SecurityLevel;
+  confidentialityLevel: SecurityLevel;
 
   /**
    * Additional CSS classes

@@ -165,7 +165,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
               className="flex items-center"
               data-testid={TECHNICAL_DETAILS_WIDGET_IDS.label('development-effort')}
             >
-              <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-2">
+              <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full mr-sm">
                 <div
                   className={`h-2 ${theme.accentBgClass} rounded-full`}
                   style={{ width: `${complexity.value}%` }}
