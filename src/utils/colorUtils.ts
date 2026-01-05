@@ -289,32 +289,4 @@ export function getCIAComponentHexColor(
   return isDarkMode ? "#9e9e9e" : "#757575";
 }
 
-/**
- * Get severity color class for impact severity levels
- * Used for styling impact severity indicators
- *
- * @param severity - Impact severity level
- * @returns Tailwind CSS color class
- *
- * @example
- * ```typescript
- * const colorClass = getSeverityColorClass("Critical");
- * console.log(colorClass); // "text-red-600 dark:text-red-400"
- * ```
- */
-export function getSeverityColorClass(
-  severity: "Low" | "Moderate" | "High" | "Critical"
-): string {
-  switch (severity) {
-    case "Critical":
-      return "text-red-600 dark:text-red-400";
-    case "High":
-      return "text-orange-600 dark:text-orange-400";
-    case "Moderate":
-      return "text-yellow-600 dark:text-yellow-400";
-    case "Low":
-      return "text-green-600 dark:text-green-400";
-    default:
-      return "text-gray-600 dark:text-gray-400";
-  }
-}
+

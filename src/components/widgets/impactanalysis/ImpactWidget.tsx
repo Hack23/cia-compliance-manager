@@ -296,6 +296,17 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
     }
   }, [component, effectiveLevel, details, ciaContentService]);
 
+  // Get border color class based on component color (explicit for Tailwind purging)
+  const getBorderColorClass = (color: string): string => {
+    switch (color) {
+      case "blue": return "border-blue-500";
+      case "green": return "border-green-500";
+      case "orange": return "border-orange-500";
+      case "purple": return "border-purple-500";
+      default: return "border-gray-500";
+    }
+  };
+
   return (
     <WidgetErrorBoundary widgetName={`${config.categoryLabel} Impact`}>
       <WidgetContainer
@@ -309,7 +320,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
         <div
           className={cn(
             "p-sm sm:p-md border-l-4",
-            `border-${config.color}-500`,
+            getBorderColorClass(config.color),
             config.contentClassName
           )}
           role="region"
