@@ -168,31 +168,31 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
 
       {/* Key Metrics Dashboard */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className={cn(WidgetClasses.subheading, "mb-sm")}>
+        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
           Key Security Metrics
         </h3>
         <div className={WidgetClasses.grid3Cols}>
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className={cn(WidgetClasses.subheading, "mb-xs")}>
+            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">
               Implementation Complexity
             </div>
-            <div className={cn(WidgetClasses.heading, "mb-0")}>{implementationComplexity}</div>
+            <div className="text-subheading font-bold">{implementationComplexity}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Based on combined security levels
             </div>
           </div>
 
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className={cn(WidgetClasses.subheading, "mb-xs")}>Business Maturity</div>
-            <div className={cn(WidgetClasses.heading, "mb-0")}>{businessMaturityLevel}</div>
+            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">Business Maturity</div>
+            <div className="text-subheading font-bold">{businessMaturityLevel}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               {businessMaturityDescription}
             </div>
           </div>
 
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className={cn(WidgetClasses.subheading, "mb-xs")}>Compliance Status</div>
-            <div className={cn(WidgetClasses.heading, "mb-0")}>
+            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">Compliance Status</div>
+            <div className="text-subheading font-bold">
               {complianceScore || securityScore}%
             </div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
