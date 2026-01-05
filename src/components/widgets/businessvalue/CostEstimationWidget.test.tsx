@@ -862,8 +862,6 @@ describe("CostEstimationWidget", () => {
         expect(widgetContent).toMatch(/\$[\d,]+/); // Check for currency formatting
       });
     });
-      });
-    });
   });
 
   // Accessibility Tests
