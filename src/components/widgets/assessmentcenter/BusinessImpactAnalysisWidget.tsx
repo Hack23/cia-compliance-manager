@@ -469,7 +469,7 @@ const BusinessImpactAnalysisWidget: React.FC<
             >
               <div className="flex items-center mb-sm">
                 <span className="mr-sm text-blue-500 dark:text-blue-400" aria-hidden="true">{item.icon}</span>
-                <h4 className={WidgetClasses.subheading}>{item.title}</h4>
+                <h4 className="text-body-lg font-medium text-gray-700 dark:text-gray-200">{item.title}</h4>
               </div>
               <p className={WidgetClasses.body}>
                 {item.description}
@@ -496,7 +496,7 @@ const BusinessImpactAnalysisWidget: React.FC<
             >
               <div className="flex items-center mb-sm">
                 <span className="mr-sm text-green-500 dark:text-green-400" aria-hidden="true">{item.icon}</span>
-                <h4 className={WidgetClasses.subheading}>{item.title}</h4>
+                <h4 className="text-body-lg font-medium text-gray-700 dark:text-gray-200">{item.title}</h4>
               </div>
               <p className={WidgetClasses.body}>
                 {item.description}
@@ -534,7 +534,7 @@ const BusinessImpactAnalysisWidget: React.FC<
           className="mb-sm"
           aria-labelledby="business-impacts-heading"
         >
-          <h3 id="business-impacts-heading" className={cn(WidgetClasses.subheading, "mb-sm")}>
+          <h3 id="business-impacts-heading" className={WidgetClasses.subheading}>
             Business Impacts by Component
           </h3>
 
@@ -603,7 +603,7 @@ const BusinessImpactAnalysisWidget: React.FC<
 
         {/* Current Security Levels & Impact */}
         <div className="mb-sm">
-          <h3 className={cn(WidgetClasses.subheading, "mb-sm")}>Current Security Levels</h3>
+          <h3 className={WidgetClasses.subheading}>Current Security Levels</h3>
           <div className="flex flex-wrap gap-sm">
             <SecurityLevelBadge
               category="Confidentiality"
