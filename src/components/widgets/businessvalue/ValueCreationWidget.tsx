@@ -353,7 +353,14 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         {/* Value Overview */}
         <div className="mb-sm">
           <button
+            type="button"
             onClick={() => toggleSection("summary")}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleSection("summary");
+              }
+            }}
             className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
             aria-expanded={expandedSection === "summary"}
             aria-controls="value-overview-content"
@@ -369,7 +376,7 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
               <p className="text-body text-neutral-dark dark:text-neutral-light mb-sm" data-testid={VALUE_CREATION_WIDGET_IDS.label('summary')}>
                 {getBusinessValueSummary()}
               </p>
-              <div className="grid grid-cols-2 gap-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-xs">
                 {valueMetrics.slice(0, UI_DISPLAY_LIMITS.MAX_PREVIEW_METRICS).map((metric, index) => (
                   <div key={index} className="p-xs bg-white/50 dark:bg-gray-800/50 rounded">
                     <div className="flex items-center mb-xs">
@@ -393,7 +400,14 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         {/* Component Value - Collapsible */}
         <div className="mb-sm">
           <button
+            type="button"
             onClick={() => toggleSection("components")}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleSection("components");
+              }
+            }}
             className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
             aria-expanded={expandedSection === "components"}
             aria-controls="component-value-content"
@@ -457,7 +471,14 @@ const ValueCreationWidget: React.FC<ValueCreationWidgetProps> = ({
         {/* Business Case - Collapsible */}
         <div className="mb-sm">
           <button
+            type="button"
             onClick={() => toggleSection("business-case")}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleSection("business-case");
+              }
+            }}
             className="w-full p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20 flex justify-between items-center hover:bg-neutral-light/10 dark:hover:bg-neutral-dark/15 transition-colors"
             aria-expanded={expandedSection === "business-case"}
             aria-controls="business-case-content"

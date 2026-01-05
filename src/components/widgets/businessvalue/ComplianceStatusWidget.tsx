@@ -346,6 +346,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                 <div className="flex flex-wrap gap-xs" data-testid={COMPLIANCE_TEST_IDS.COMPLIANT_FRAMEWORKS_LIST}>
                   {complianceStatus.compliantFrameworks.map((framework, index) => (
                     <button
+                      type="button"
                       key={framework}
                       onClick={() => setActiveFramework(framework)}
                       className={cn(
@@ -372,6 +373,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                 <div className="flex flex-wrap gap-xs" data-testid={COMPLIANCE_TEST_IDS.PARTIALLY_COMPLIANT_FRAMEWORKS_LIST}>
                   {complianceStatus.partiallyCompliantFrameworks.map((framework, index) => (
                     <button
+                      type="button"
                       key={framework}
                       onClick={() => setActiveFramework(framework)}
                       className={cn(
@@ -398,6 +400,7 @@ const ComplianceStatusWidget: React.FC<ComplianceStatusWidgetProps> = ({
                 <div className="flex flex-wrap gap-xs" data-testid={COMPLIANCE_TEST_IDS.NON_COMPLIANT_FRAMEWORKS_LIST}>
                   {complianceStatus.nonCompliantFrameworks.map((framework, index) => (
                     <button
+                      type="button"
                       key={framework}
                       onClick={() => setActiveFramework(framework)}
                       className={cn(

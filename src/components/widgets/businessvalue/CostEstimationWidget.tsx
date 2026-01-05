@@ -258,7 +258,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
         </section>
 
         {/* Implementation details - Compact inline layout */}
-        <div className="grid grid-cols-2 gap-sm mb-md">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-sm mb-md">
           {/* Implementation complexity */}
           <div className="p-sm bg-neutral-light/5 dark:bg-neutral-dark/10 rounded-md border border-neutral-light/20 dark:border-neutral-dark/20">
             <div className="flex justify-between items-center mb-xs">
@@ -367,7 +367,7 @@ const CostEstimationWidget: React.FC<CostEstimationWidgetProps> = ({
           <h3 className="text-body-lg font-medium mb-sm flex items-center">
             <span className="mr-xs">💡</span>Expertise Required
           </h3>
-          <div className="grid grid-cols-2 gap-x-md gap-y-xs text-caption text-neutral-dark dark:text-neutral-light">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-md gap-y-xs text-caption text-neutral-dark dark:text-neutral-light">
             {expertiseRequired.map((expertise: string, index: number) => (
               <div key={`expertise-${index}`} className="flex items-start">
                 <span className="text-info-dark dark:text-info-light mr-xs">•</span>
