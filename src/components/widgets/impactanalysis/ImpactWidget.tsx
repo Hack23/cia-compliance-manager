@@ -41,7 +41,7 @@ interface ComponentConfig {
   iconKey: keyof typeof WIDGET_ICONS;
   defaultTitle: string;
   defaultIcon: string;
-  color: "blue" | "green" | "purple";
+  color: "blue" | "green" | "purple" | "orange";
   textClass: string;
   ariaDescription: string;
   categoryLabel: string;
@@ -117,8 +117,8 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         iconKey: "CONFIDENTIALITY_IMPACT",
         defaultTitle: "Confidentiality Impact Analysis",
         defaultIcon: "🔒",
-        color: "purple",
-        textClass: "text-purple-800 dark:text-purple-300",
+        color: "orange",
+        textClass: "text-orange-800 dark:text-orange-300",
         ariaDescription: "Business impact of confidentiality controls including data classification and privacy measures",
         categoryLabel: "Confidentiality",
         containerClassName: "overflow-visible",
@@ -307,7 +307,11 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
         error={error}
       >
         <div
-          className={cn("p-md sm:p-lg", config.contentClassName)}
+          className={cn(
+            "p-sm sm:p-md border-l-4",
+            `border-${config.color}-500`,
+            config.contentClassName
+          )}
           role="region"
           aria-label={getWidgetAriaDescription(config.defaultTitle, config.ariaDescription)}
         >
@@ -331,7 +335,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
           {/* Business Impact Analysis */}
           {businessImpact && (
             <section
-              className="mb-md"
+              className="mb-sm"
               aria-labelledby={`${component}-business-impact-heading`}
             >
               <h3 id={`${component}-business-impact-heading`} className={WidgetClasses.heading}>

@@ -41,11 +41,11 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
         {impact.summary || "No business impact data available"}
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {/* Financial Impact */}
         {impact.financial && (
           <div
-            className={`p-3 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
+            className={`p-2 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
           >
             <div className="flex items-center mb-2">
               <span className="mr-2">💰</span>
@@ -55,12 +55,12 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
                 Financial Impact
               </span>
             </div>
-            <p className="text-sm text-gray-700 dark:text-gray-300">
+            <p className="text-xs text-gray-700 dark:text-gray-300">
               {impact.financial.description ||
                 "No financial impact information available"}
             </p>
             {impact.financial.annualRevenueLoss && (
-              <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+              <p className="text-xs text-gray-700 dark:text-gray-300 mt-1">
                 <span className="font-medium">Annual Revenue Loss: </span>
                 {impact.financial.annualRevenueLoss}
               </p>
@@ -71,7 +71,7 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
         {/* Operational Impact */}
         {impact.operational && (
           <div
-            className={`p-3 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
+            className={`p-2 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
           >
             <div className="flex items-center mb-2">
               <span className="mr-2">⚙️</span>
@@ -81,12 +81,12 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
                 Operational Impact
               </span>
             </div>
-            <p className="text-sm text-gray-700 dark:text-gray-300">
+            <p className="text-xs text-gray-700 dark:text-gray-300">
               {impact.operational.description ||
                 "No operational impact information available"}
             </p>
             {impact.operational.meanTimeToRecover && (
-              <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+              <p className="text-xs text-gray-700 dark:text-gray-300 mt-1">
                 <span className="font-medium">Mean Time to Recover: </span>
                 {impact.operational.meanTimeToRecover}
               </p>
@@ -97,7 +97,7 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
         {/* Reputational Impact */}
         {impact.reputational && (
           <div
-            className={`p-3 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
+            className={`p-2 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
           >
             <div className="flex items-center mb-2">
               <span className="mr-2">🏆</span>
@@ -107,12 +107,12 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
                 Reputational Impact
               </span>
             </div>
-            <p className="text-sm text-gray-700 dark:text-gray-300">
+            <p className="text-xs text-gray-700 dark:text-gray-300">
               {impact.reputational.description ||
                 "No reputational impact information available"}
             </p>
             {impact.reputational.reputationalImpact && (
-              <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+              <p className="text-xs text-gray-700 dark:text-gray-300 mt-1">
                 {impact.reputational.reputationalImpact}
               </p>
             )}
@@ -122,7 +122,7 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
         {/* Strategic Impact */}
         {impact.strategic && (
           <div
-            className={`p-3 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
+            className={`p-2 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
           >
             <div className="flex items-center mb-2">
               <span className="mr-2">🎯</span>
@@ -132,12 +132,12 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
                 Strategic Impact
               </span>
             </div>
-            <p className="text-sm text-gray-700 dark:text-gray-300">
+            <p className="text-xs text-gray-700 dark:text-gray-300">
               {impact.strategic.description ||
                 "No strategic impact information available"}
             </p>
             {impact.strategic.competitiveAdvantage && (
-              <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+              <p className="text-xs text-gray-700 dark:text-gray-300 mt-1">
                 <span className="font-medium">Competitive Advantage: </span>
                 {impact.strategic.competitiveAdvantage}
               </p>
@@ -148,7 +148,7 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
         {/* Regulatory Impact */}
         {impact.regulatory && (
           <div
-            className={`p-3 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
+            className={`p-2 rounded-md bg-opacity-10 bg-${color}-100 dark:bg-${color}-900 dark:bg-opacity-20 border border-${color}-200 dark:border-${color}-800`}
           >
             <div className="flex items-center mb-2">
               <span className="mr-2">📜</span>
@@ -158,19 +158,19 @@ const BusinessImpactSection: React.FC<BusinessImpactSectionProps> = ({
                 Regulatory Impact
               </span>
             </div>
-            <p className="text-sm text-gray-700 dark:text-gray-300">
+            <p className="text-xs text-gray-700 dark:text-gray-300">
               {impact.regulatory.description ||
                 "No regulatory impact information available"}
             </p>
             {impact.regulatory.complianceImpact && (
-              <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+              <p className="text-xs text-gray-700 dark:text-gray-300 mt-1">
                 {impact.regulatory.complianceImpact}
               </p>
             )}
             {impact.regulatory.complianceViolations &&
               impact.regulatory.complianceViolations.length > 0 && (
                 <div className="mt-1">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
                     Potential Violations:{" "}
                   </span>
                   <div className="flex flex-wrap gap-1 mt-1">

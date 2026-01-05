@@ -234,3 +234,87 @@ export function getSecurityScoreColorClass(score: number): string {
   if (score <= 80) return "bg-green-500"; // Low
   return "bg-blue-500"; // Minimal
 }
+
+/**
+ * Get CIA component color for theming
+ * Used for color-coding CIA components in widgets
+ *
+ * @param component - The CIA component type
+ * @returns Color name for Tailwind CSS classes
+ *
+ * @example
+ * ```typescript
+ * const color = getCIAComponentColor("availability");
+ * console.log(color); // "blue"
+ *
+ * // Use in Tailwind classes
+ * const className = `border-${color}-500`;
+ * ```
+ */
+export function getCIAComponentColor(
+  component: "availability" | "integrity" | "confidentiality"
+): string {
+  const colors = {
+    availability: "blue",
+    integrity: "green",
+    confidentiality: "orange",
+  };
+  return colors[component];
+}
+
+/**
+ * Get CIA component hex color for charts (theme-aware)
+ * Provides hex color codes that adapt to dark/light theme
+ *
+ * @param component - The CIA component type
+ * @returns Hex color code (theme-aware)
+ *
+ * @example
+ * ```typescript
+ * const color = getCIAComponentHexColor("availability");
+ * console.log(color); // "#3b82f6" (light mode) or "#60a5fa" (dark mode)
+ * ```
+ */
+export function getCIAComponentHexColor(
+  component: "availability" | "integrity" | "confidentiality"
+): string {
+  const isDarkMode = document.documentElement.classList.contains("dark");
+
+  if (component === "availability")
+    return isDarkMode ? "#60a5fa" : "#3b82f6"; // Blue
+  if (component === "integrity") return isDarkMode ? "#34d399" : "#10b981"; // Green
+  if (component === "confidentiality")
+    return isDarkMode ? "#fb923c" : "#f97316"; // Orange
+
+  return isDarkMode ? "#9e9e9e" : "#757575";
+}
+
+/**
+ * Get severity color class for impact severity levels
+ * Used for styling impact severity indicators
+ *
+ * @param severity - Impact severity level
+ * @returns Tailwind CSS color class
+ *
+ * @example
+ * ```typescript
+ * const colorClass = getSeverityColorClass("Critical");
+ * console.log(colorClass); // "text-red-600 dark:text-red-400"
+ * ```
+ */
+export function getSeverityColorClass(
+  severity: "Low" | "Moderate" | "High" | "Critical"
+): string {
+  switch (severity) {
+    case "Critical":
+      return "text-red-600 dark:text-red-400";
+    case "High":
+      return "text-orange-600 dark:text-orange-400";
+    case "Moderate":
+      return "text-yellow-600 dark:text-yellow-400";
+    case "Low":
+      return "text-green-600 dark:text-green-400";
+    default:
+      return "text-gray-600 dark:text-gray-400";
+  }
+}
