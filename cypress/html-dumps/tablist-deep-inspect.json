@@ -1,0 +1,22 @@
+{
+  "html": "<div role=\"tablist\" class=\"flex space-x-2 border-b border-gray-200 dark:border-gray-700 mb-6\" data-testid=\"widget-business-impact-tabs-list\" aria-label=\"Tab navigation\"><span class=\"sr-only\" id=\"widget-business-impact-tabs-keyboard-instructions\">Use arrow keys to navigate between tabs. Press Enter or Space to activate a tab.</span><button role=\"tab\" aria-selected=\"true\" aria-controls=\"widget-business-impact-tabs-panel-considerations\" id=\"widget-business-impact-tabs-tab-considerations\" tabindex=\"",
+  "computedStyles": {
+    "display": "flex",
+    "flexDirection": "row",
+    "flexWrap": "wrap",
+    "gap": "6px",
+    "gridTemplateColumns": "none",
+    "gridAutoFlow": "row"
+  },
+  "classes": "flex space-x-2 border-b border-gray-200 dark:border-gray-700 mb-6",
+  "bounds": {
+    "x": 466.65625,
+    "y": 1834.953125,
+    "width": 355.671875,
+    "height": 207.34375,
+    "top": 1834.953125,
+    "right": 822.328125,
+    "bottom": 2042.296875,
+    "left": 466.65625
+  }
+}

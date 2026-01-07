@@ -1,0 +1,11 @@
+{
+  "testId": "widget-security-level-button-confidentiality-details",
+  "width": "355.656px",
+  "height": "33px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "8px 16px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

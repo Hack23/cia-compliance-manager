@@ -2315,13 +2315,22 @@ button.more-info:hover::before {
 }
 
 /* Ensure tab gap is consistent within widgets without overriding Tailwind utilities */
+/* CRITICAL FIX: Force horizontal tab layout - override any conflicting rules */
 [data-testid^="widget-"] nav.flex,
 [data-testid^="widget-"] nav[role="tablist"],
+[data-testid^="widget-"] div[role="tablist"],
 [data-testid="widget-security-summary"] nav.flex,
 [data-testid="widget-security-summary"] nav[role="tablist"],
+[data-testid="widget-security-summary"] div[role="tablist"],
 [data-testid="widget-business-impact"] nav.flex,
-[data-testid="widget-business-impact"] nav[role="tablist"] {
+[data-testid="widget-business-impact"] nav[role="tablist"],
+[data-testid="widget-business-impact"] div[role="tablist"] {
   gap: 0.375rem; /* Consistent spacing between tabs */
+  display: flex !important; /* Force flex display */
+  flex-direction: row !important; /* Force horizontal layout */
+  flex-wrap: nowrap !important; /* Prevent wrapping - keep tabs in single row */
+  overflow-x: auto !important; /* Allow horizontal scrolling if tabs don't fit */
+  overflow-y: hidden !important; /* Prevent vertical scrolling */
 }
 
 /* Universal tab styling for consistency across all widgets */

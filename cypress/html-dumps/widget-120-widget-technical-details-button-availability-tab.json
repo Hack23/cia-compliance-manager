@@ -1,0 +1,11 @@
+{
+  "testId": "widget-technical-details-button-availability-tab",
+  "width": "141.359px",
+  "height": "87.7188px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "12px 16px",
+  "margin": "0px 0px 0px 8px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

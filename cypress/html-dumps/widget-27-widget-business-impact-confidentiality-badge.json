@@ -1,0 +1,11 @@
+{
+  "testId": "widget-business-impact-confidentiality-badge",
+  "width": "129.672px",
+  "height": "18px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

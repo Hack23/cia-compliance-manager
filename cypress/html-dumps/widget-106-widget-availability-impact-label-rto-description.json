@@ -1,0 +1,11 @@
+{
+  "testId": "widget-availability-impact-label-rto-description",
+  "width": "297.656px",
+  "height": "31.5px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px",
+  "margin": "12px 0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

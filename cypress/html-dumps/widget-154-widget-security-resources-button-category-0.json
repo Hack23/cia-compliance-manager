@@ -1,0 +1,11 @@
+{
+  "testId": "widget-security-resources-button-category-0",
+  "width": "192.25px",
+  "height": "33px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "8px 16px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

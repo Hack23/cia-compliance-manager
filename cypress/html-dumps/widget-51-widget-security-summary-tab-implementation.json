@@ -1,0 +1,11 @@
+{
+  "testId": "widget-security-summary-tab-implementation",
+  "width": "153.719px",
+  "height": "47.75px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "12px 16px",
+  "margin": "0px 0px 0px 8px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

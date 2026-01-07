@@ -1,0 +1,11 @@
+{
+  "testId": "widget-security-visualization-section-integrity-gauge",
+  "width": "177.828px",
+  "height": "0px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

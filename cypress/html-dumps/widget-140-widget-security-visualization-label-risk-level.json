@@ -1,0 +1,11 @@
+{
+  "testId": "widget-security-visualization-label-risk-level",
+  "width": "81.7031px",
+  "height": "23px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

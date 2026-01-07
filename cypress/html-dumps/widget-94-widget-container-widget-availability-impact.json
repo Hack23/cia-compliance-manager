@@ -1,0 +1,11 @@
+{
+  "testId": "widget-container-widget-availability-impact",
+  "width": "395.656px",
+  "height": "1355.64px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

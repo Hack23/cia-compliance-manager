@@ -1,0 +1,11 @@
+{
+  "testId": "widget-cost-estimation-label-avail-level",
+  "width": "61.3125px",
+  "height": "18px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

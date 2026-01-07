@@ -1,0 +1,11 @@
+{
+  "testId": "widget-availability-impact-section-sla-metrics",
+  "width": "329.656px",
+  "height": "1285.05px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "8px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

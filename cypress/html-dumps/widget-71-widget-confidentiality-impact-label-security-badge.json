@@ -1,0 +1,11 @@
+{
+  "testId": "widget-confidentiality-impact-label-security-badge",
+  "width": "166.641px",
+  "height": "18px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px",
+  "margin": "0px",
+  "display": "inline-flex",
+  "flex": "0 1 auto"
+}

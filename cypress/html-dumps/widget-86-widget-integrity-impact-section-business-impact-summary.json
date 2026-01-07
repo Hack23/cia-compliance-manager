@@ -1,0 +1,11 @@
+{
+  "testId": "widget-integrity-impact-section-business-impact-summary",
+  "width": "311.672px",
+  "height": "18px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px",
+  "margin": "16px 0px 8px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

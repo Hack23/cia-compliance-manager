@@ -1,0 +1,11 @@
+{
+  "testId": "widget-confidentiality-impact-label-privacy",
+  "width": "297.656px",
+  "height": "111.781px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "16px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

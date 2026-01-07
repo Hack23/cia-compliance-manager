@@ -1,0 +1,11 @@
+{
+  "testId": "widget-technical-details-item-requirement-3",
+  "width": "311.656px",
+  "height": "30.7031px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px",
+  "margin": "0px 0px 5.6px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

@@ -1,0 +1,11 @@
+{
+  "testId": "widget-business-impact-tabs-list",
+  "width": "331.672px",
+  "height": "181.562px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "6.4px 12px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

@@ -1,0 +1,11 @@
+{
+  "testId": "widget-security-resources-input-search",
+  "width": "212.25px",
+  "height": "15px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "8px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

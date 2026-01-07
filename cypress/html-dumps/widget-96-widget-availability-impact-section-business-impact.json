@@ -1,0 +1,11 @@
+{
+  "testId": "widget-availability-impact-section-business-impact",
+  "width": "311.656px",
+  "height": "404.266px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "16px",
+  "margin": "0px 0px 12px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

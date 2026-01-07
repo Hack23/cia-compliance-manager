@@ -1,0 +1,11 @@
+{
+  "testId": "widget-technical-details-list-implementation-steps",
+  "width": "311.656px",
+  "height": "181.5px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px 0px 0px 20px",
+  "margin": "14px 0px 12px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

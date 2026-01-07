@@ -47,13 +47,13 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
   getStatusVariant,
 }) => {
   return (
-    <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-overview')} className="space-y-sm">
+    <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-overview')} className="space-y-3">
       {/* Security Radar Chart */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-3 border border-gray-100 dark:border-gray-700">
+        <h3 className="text-base font-medium mb-2 text-gray-800 dark:text-gray-100">
           Security Profile
         </h3>
-        <div className="h-[300px]">
+        <div className="h-56">
           <RadarChart
             availabilityLevel={availabilityLevel}
             integrityLevel={integrityLevel}
@@ -64,26 +64,26 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
       </div>
 
       {/* Security Level Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-3 border border-gray-100 dark:border-gray-700">
+        <h3 className="text-base font-medium mb-2 text-gray-800 dark:text-gray-100">
           Security Components
         </h3>
 
         <div className={WidgetClasses.grid3Cols}>
           {/* Confidentiality Card */}
           <div
-            className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800"
+            className="p-2 bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.CONFIDENTIALITY_CARD}
           >
-            <div className="flex items-center mb-sm">
-              <span className="text-subheading mr-sm text-purple-500 dark:text-purple-400" aria-hidden="true">
+            <div className="flex items-center mb-1">
+              <span className="text-base mr-2 text-purple-500 dark:text-purple-400" aria-hidden="true">
                 🔒
               </span>
-              <h4 className="font-medium text-purple-700 dark:text-purple-300">
+              <h4 className="font-medium text-purple-700 dark:text-purple-300 text-sm">
                 Confidentiality
               </h4>
             </div>
-            <div className="flex items-center justify-between mb-xs">
+            <div className="flex items-center justify-between mb-1">
               <SecurityLevelIndicator level={confidentialityLevel} />
               <StatusBadge
                 status={getStatusVariant(
@@ -94,7 +94,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
                 {getRiskLevelFromSecurityLevel(confidentialityLevel)}
               </StatusBadge>
             </div>
-            <div className="mt-sm text-xs text-gray-600 dark:text-gray-400">
+            <div className="mt-1 text-xs text-gray-600 dark:text-gray-400">
               Classification:{" "}
               <span className="font-medium">{dataClassification}</span>
             </div>
@@ -102,18 +102,18 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
 
           {/* Integrity Card */}
           <div
-            className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800"
+            className="p-2 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.INTEGRITY_CARD}
           >
-            <div className="flex items-center mb-sm">
-              <span className="text-subheading mr-sm text-green-500 dark:text-green-400" aria-hidden="true">
+            <div className="flex items-center mb-1">
+              <span className="text-base mr-2 text-green-500 dark:text-green-400" aria-hidden="true">
                 ✓
               </span>
-              <h4 className="font-medium text-green-700 dark:text-green-300">
+              <h4 className="font-medium text-green-700 dark:text-green-300 text-sm">
                 Integrity
               </h4>
             </div>
-            <div className="flex items-center justify-between mb-xs">
+            <div className="flex items-center justify-between mb-1">
               <SecurityLevelIndicator level={integrityLevel} />
               <StatusBadge
                 status={getStatusVariant(
@@ -124,7 +124,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
                 {getRiskLevelFromSecurityLevel(integrityLevel)}
               </StatusBadge>
             </div>
-            <div className="mt-sm text-xs text-gray-600 dark:text-gray-400">
+            <div className="mt-1 text-xs text-gray-600 dark:text-gray-400">
               Validation Level:{" "}
               <span className="font-medium">
                 {getIntegrityValidationLevel(integrityLevel)}
@@ -134,18 +134,18 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
 
           {/* Availability Card */}
           <div
-            className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800"
+            className="p-2 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.AVAILABILITY_CARD}
           >
-            <div className="flex items-center mb-sm">
-              <span className="text-subheading mr-sm text-blue-500 dark:text-blue-400" aria-hidden="true">
+            <div className="flex items-center mb-1">
+              <span className="text-base mr-2 text-blue-500 dark:text-blue-400" aria-hidden="true">
                 ⏱️
               </span>
-              <h4 className="font-medium text-blue-700 dark:text-blue-300">
+              <h4 className="font-medium text-blue-700 dark:text-blue-300 text-sm">
                 Availability
               </h4>
             </div>
-            <div className="flex items-center justify-between mb-xs">
+            <div className="flex items-center justify-between mb-1">
               <SecurityLevelIndicator level={availabilityLevel} />
               <StatusBadge
                 status={getStatusVariant(
@@ -156,7 +156,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
                 {getRiskLevelFromSecurityLevel(availabilityLevel)}
               </StatusBadge>
             </div>
-            <div className="mt-sm text-xs text-gray-600 dark:text-gray-400">
+            <div className="mt-1 text-xs text-gray-600 dark:text-gray-400">
               Uptime Target:{" "}
               <span className="font-medium">
                 {getAvailabilityUptimeTarget(availabilityLevel)}
@@ -167,32 +167,32 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
       </div>
 
       {/* Key Metrics Dashboard */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-3 border border-gray-100 dark:border-gray-700">
+        <h3 className="text-base font-medium mb-2 text-gray-800 dark:text-gray-100">
           Key Security Metrics
         </h3>
         <div className={WidgetClasses.grid3Cols}>
-          <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">
+          <div className="p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="text-sm font-medium mb-1 text-gray-700 dark:text-gray-200">
               Implementation Complexity
             </div>
-            <div className="text-subheading font-bold">{implementationComplexity}</div>
+            <div className="text-lg font-bold">{implementationComplexity}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Based on combined security levels
             </div>
           </div>
 
-          <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">Business Maturity</div>
-            <div className="text-subheading font-bold">{businessMaturityLevel}</div>
+          <div className="p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="text-sm font-medium mb-1 text-gray-700 dark:text-gray-200">Business Maturity</div>
+            <div className="text-lg font-bold">{businessMaturityLevel}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               {businessMaturityDescription}
             </div>
           </div>
 
-          <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">Compliance Status</div>
-            <div className="text-subheading font-bold">
+          <div className="p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="text-sm font-medium mb-1 text-gray-700 dark:text-gray-200">Compliance Status</div>
+            <div className="text-lg font-bold">
               {complianceScore || securityScore}%
             </div>
             <div className="text-xs text-gray-600 dark:text-gray-400">

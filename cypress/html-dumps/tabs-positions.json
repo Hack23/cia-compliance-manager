@@ -1,0 +1,101 @@
+[
+  {
+    "index": 0,
+    "text": "Implementation Considerations",
+    "top": 1883.34375,
+    "left": 486.65625,
+    "width": 267.25,
+    "height": 72.78125,
+    "display": "flex",
+    "float": "none",
+    "position": "relative"
+  },
+  {
+    "index": 1,
+    "text": "Business Benefits",
+    "top": 1962.125,
+    "left": 486.65625,
+    "width": 169.296875,
+    "height": 72.78125,
+    "display": "flex",
+    "float": "none",
+    "position": "relative"
+  },
+  {
+    "index": 2,
+    "text": "Overview",
+    "top": 1265.03125,
+    "left": 896.328125,
+    "width": 120.265625,
+    "height": 200.296875,
+    "display": "flex",
+    "float": "none",
+    "position": "relative"
+  },
+  {
+    "index": 3,
+    "text": "Business Value",
+    "top": 1265.03125,
+    "left": 1066.515625,
+    "width": 153.46875,
+    "height": 200.296875,
+    "display": "flex",
+    "float": "none",
+    "position": "relative"
+  },
+  {
+    "index": 4,
+    "text": "Implementation",
+    "top": 1471.328125,
+    "left": 896.328125,
+    "width": 153.71875,
+    "height": 200.296875,
+    "display": "flex",
+    "float": "none",
+    "position": "relative"
+  },
+  {
+    "index": 5,
+    "text": "Compliance12",
+    "top": 1471.328125,
+    "left": 1064.46875,
+    "width": 155.515625,
+    "height": 200.296875,
+    "display": "flex",
+    "float": "none",
+    "position": "relative"
+  },
+  {
+    "index": 6,
+    "text": "🔒Confidentiality",
+    "top": 4979.515625,
+    "left": 77,
+    "width": 172.703125,
+    "height": 283.96875,
+    "display": "flex",
+    "float": "none",
+    "position": "relative"
+  },
+  {
+    "index": 7,
+    "text": "✓Integrity",
+    "top": 4979.515625,
+    "left": 281.109375,
+    "width": 119.546875,
+    "height": 283.96875,
+    "display": "flex",
+    "float": "none",
+    "position": "relative"
+  },
+  {
+    "index": 8,
+    "text": "⏱️Availability",
+    "top": 5269.484375,
+    "left": 77,
+    "width": 141.359375,
+    "height": 283.96875,
+    "display": "flex",
+    "float": "none",
+    "position": "relative"
+  }
+]

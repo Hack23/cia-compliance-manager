@@ -1,0 +1,11 @@
+{
+  "testId": "widget-security-summary-section-classification-banner",
+  "width": "355.656px",
+  "height": "1212.81px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

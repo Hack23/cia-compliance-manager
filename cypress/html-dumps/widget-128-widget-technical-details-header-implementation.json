@@ -1,0 +1,11 @@
+{
+  "testId": "widget-technical-details-header-implementation",
+  "width": "331.656px",
+  "height": "181.5px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px",
+  "margin": "21.28px 0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

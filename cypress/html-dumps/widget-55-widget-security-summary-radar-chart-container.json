@@ -1,0 +1,11 @@
+{
+  "testId": "widget-security-summary-radar-chart-container",
+  "width": "446.656px",
+  "height": "492.438px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

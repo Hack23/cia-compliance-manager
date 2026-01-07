@@ -1,0 +1,11 @@
+{
+  "testId": "widget-integrity-impact-label-error-rate-value",
+  "width": "74.2344px",
+  "height": "32px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

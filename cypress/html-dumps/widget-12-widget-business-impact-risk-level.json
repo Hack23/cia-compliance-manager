@@ -1,0 +1,11 @@
+{
+  "testId": "widget-business-impact-risk-level",
+  "width": "87.5625px",
+  "height": "32px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "0px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}

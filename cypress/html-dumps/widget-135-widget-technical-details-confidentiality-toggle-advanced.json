@@ -1,0 +1,11 @@
+{
+  "testId": "widget-technical-details-confidentiality-toggle-advanced",
+  "width": "181.109px",
+  "height": "49px",
+  "minHeight": "0px",
+  "maxHeight": "none",
+  "padding": "8px 16px",
+  "margin": "0px",
+  "display": "flex",
+  "flex": "0 1 auto"
+}
