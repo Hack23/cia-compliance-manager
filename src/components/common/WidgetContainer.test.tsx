@@ -115,4 +115,77 @@ describe('WidgetContainer', () => {
 
     expect(screen.getByTestId(`widget-container-${testId}`)).toBeInTheDocument();
   });
+
+  it('renders with actions', () => {
+    const actionsTestId = 'test-actions';
+    render(
+      <WidgetContainer 
+        title="Test Widget" 
+        actions={<button data-testid={actionsTestId}>Action</button>}
+      >
+        <div>Content</div>
+      </WidgetContainer>
+    );
+
+    expect(screen.getByTestId(actionsTestId)).toBeInTheDocument();
+  });
+
+  it('renders error with Error object', () => {
+    const errorObj = new Error('Test error object');
+    render(
+      <WidgetContainer title="Test Widget" error={errorObj}>
+        <div>Content</div>
+      </WidgetContainer>
+    );
+
+    expect(screen.getByText('Test error object')).toBeInTheDocument();
+  });
+
+  it('renders error with errorContent', () => {
+    const errorContentTestId = 'error-content';
+    render(
+      <WidgetContainer 
+        title="Test Widget" 
+        error="Test error"
+        errorContent={<div data-testid={errorContentTestId}>Additional error info</div>}
+      >
+        <div>Content</div>
+      </WidgetContainer>
+    );
+
+    expect(screen.getByTestId(errorContentTestId)).toBeInTheDocument();
+  });
+
+  it('applies design token spacing via inline styles', () => {
+    const { container } = render(
+      <WidgetContainer title="Test Widget">
+        <div>Content</div>
+      </WidgetContainer>
+    );
+
+    // Check that widget header has inline styles
+    const header = container.querySelector('.widget-header');
+    expect(header).toHaveStyle({ paddingTop: '6px' }); // SPACING.sm
+    expect(header).toHaveStyle({ paddingLeft: '8px' }); // SPACING.md
+
+    // Check that widget body has inline styles  
+    const body = container.querySelector('.widget-body');
+    expect(body).toHaveStyle({ padding: '8px' }); // SPACING.md
+  });
+
+  it('renders icon with proper spacing', () => {
+    const iconTestId = 'widget-icon';
+    const { container } = render(
+      <WidgetContainer 
+        title="Test Widget" 
+        icon={<span data-testid={iconTestId}>🔒</span>}
+      >
+        <div>Content</div>
+      </WidgetContainer>
+    );
+
+    const icon = screen.getByTestId(iconTestId);
+    const iconParent = icon.parentElement;
+    expect(iconParent).toHaveStyle({ marginRight: '6px' }); // SPACING.sm
+  });
 });

@@ -11,6 +11,7 @@ import {
   TRANSITIONS,
   TYPOGRAPHY,
   WIDGET_DESIGN,
+  WIDGET_STYLES,
   Z_INDEX,
   getBorderRadius,
   getSemanticColor,
@@ -341,6 +342,91 @@ describe('Design Tokens', () => {
       const values = Object.values(SPACING);
       const uniqueValues = [...new Set(values)];
       expect(values.length).toBe(uniqueValues.length);
+    });
+  });
+
+  describe('WIDGET_STYLES helpers', () => {
+    it('should return container classes', () => {
+      const containerClasses = WIDGET_STYLES.container();
+      expect(containerClasses).toContain('bg-white');
+      expect(containerClasses).toContain('dark:bg-gray-800');
+      expect(containerClasses).toContain('rounded-md');
+      expect(containerClasses).toContain('shadow-md');
+    });
+
+    it('should return header classes', () => {
+      const headerClasses = WIDGET_STYLES.header();
+      expect(headerClasses).toContain('flex');
+      expect(headerClasses).toContain('items-center');
+      expect(headerClasses).toContain('justify-between');
+    });
+
+    it('should return section classes', () => {
+      const sectionClasses = WIDGET_STYLES.section();
+      expect(sectionClasses).toContain('mb-lg');
+      expect(sectionClasses).toContain('space-y-md');
+    });
+
+    it('should return title classes', () => {
+      const titleClasses = WIDGET_STYLES.title();
+      expect(titleClasses).toContain('text-subheading');
+      expect(titleClasses).toContain('font-semibold');
+    });
+
+    it('should return subtitle classes', () => {
+      const subtitleClasses = WIDGET_STYLES.subtitle();
+      expect(subtitleClasses).toContain('text-body');
+      expect(subtitleClasses).toContain('text-gray-600');
+    });
+
+    it('should return content classes', () => {
+      const contentClasses = WIDGET_STYLES.content();
+      expect(contentClasses).toContain('p-md');
+      expect(contentClasses).toContain('space-y-md');
+    });
+
+    it('should return card classes', () => {
+      const cardClasses = WIDGET_STYLES.card();
+      expect(cardClasses).toContain('p-md');
+      expect(cardClasses).toContain('rounded-md');
+      expect(cardClasses).toContain('border');
+    });
+
+    it('should return badge classes with default variant', () => {
+      const badgeClasses = WIDGET_STYLES.badge();
+      expect(badgeClasses).toContain('bg-neutral');
+      expect(badgeClasses).toContain('text-white');
+      expect(badgeClasses).toContain('rounded-sm');
+    });
+
+    it('should return badge classes with primary variant', () => {
+      const badgeClasses = WIDGET_STYLES.badge('primary');
+      expect(badgeClasses).toContain('bg-primary');
+      expect(badgeClasses).toContain('text-white');
+    });
+
+    it('should return badge classes with success variant', () => {
+      const badgeClasses = WIDGET_STYLES.badge('success');
+      expect(badgeClasses).toContain('bg-success');
+      expect(badgeClasses).toContain('text-white');
+    });
+
+    it('should return badge classes with warning variant', () => {
+      const badgeClasses = WIDGET_STYLES.badge('warning');
+      expect(badgeClasses).toContain('bg-warning');
+      expect(badgeClasses).toContain('text-gray-900');
+    });
+
+    it('should return badge classes with error variant', () => {
+      const badgeClasses = WIDGET_STYLES.badge('error');
+      expect(badgeClasses).toContain('bg-error');
+      expect(badgeClasses).toContain('text-white');
+    });
+
+    it('should return badge classes with info variant', () => {
+      const badgeClasses = WIDGET_STYLES.badge('info');
+      expect(badgeClasses).toContain('bg-info');
+      expect(badgeClasses).toContain('text-white');
     });
   });
 });
