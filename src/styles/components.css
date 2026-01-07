@@ -2601,3 +2601,122 @@ button[role="tab"]:not([aria-selected="true"]) {
 }
 
 /* END WIDGET CONTAINER FLEXIBLE SIZING IMPROVEMENTS */
+
+/* ========== ADDITIONAL WIDGET IMPROVEMENTS - TAB & BALANCE FIXES ========== */
+
+/* Ensure hidden tab panels are truly hidden and don't take up space */
+[role="tabpanel"][hidden] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Prevent tab panels from creating empty space when not active */
+[role="tabpanel"]:not([hidden]) {
+  display: block !important;
+}
+
+/* Ensure all widgets have consistent flexible height behavior */
+[data-testid^="widget-"] {
+  display: flex !important;
+  flex-direction: column !important;
+  height: auto !important;
+  min-height: fit-content !important;
+}
+
+/* Widget body should expand to fit content but not create extra space */
+[data-testid^="widget-"] > div:nth-child(2) {
+  flex: 0 1 auto !important; /* Don't grow unnecessarily */
+  min-height: fit-content !important;
+  padding: 0.5rem !important; /* Further reduced padding */
+}
+
+/* Tab navigation spacing - reduce bottom margin */
+[role="tablist"] {
+  margin-bottom: 0.5rem !important; /* Reduced from 0.75rem-1.5rem */
+}
+
+/* Tab panels should have minimal padding */
+[role="tabpanel"] {
+  padding: 0.5rem 0 !important; /* Reduced vertical padding */
+}
+
+/* Reduce spacing in widget headers */
+.widget-header,
+[data-testid^="widget-"] > div:first-child {
+  padding: 0.35rem 0.5rem !important; /* Further reduced from 0.4rem 0.6rem */
+  min-height: 32px !important; /* Slightly smaller header */
+}
+
+/* Make widget grid items more flexible */
+[data-testid="dashboard-grid"] {
+  grid-auto-rows: minmax(min-content, auto) !important; /* Use min-content for better sizing */
+}
+
+/* Fix spacing in tab content areas */
+[data-testid^="widget-"] [role="tabpanel"] > div {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Reduce spacing in KeyValuePair components */
+.flex.items-start.justify-between,
+.flex.flex-col.gap-1 {
+  gap: 0.25rem !important; /* Tighter spacing */
+  margin-bottom: 0.35rem !important;
+}
+
+/* Compact badge spacing */
+.px-2.py-1.rounded-md,
+.px-2.py-1.rounded-full {
+  padding: 0.15rem 0.4rem !important; /* Smaller badges */
+}
+
+/* Fix widget content areas - remove double padding */
+[data-testid^="widget-"] .widget-body > div {
+  padding: 0 !important; /* Remove inner padding since body already has padding */
+}
+
+/* Ensure grids inside widgets are compact */
+[data-testid^="widget-"] .grid {
+  gap: 0.5rem !important; /* Tighter grid gaps */
+}
+
+/* Fix heading spacing inside widgets */
+[data-testid^="widget-"] h4,
+[data-testid^="widget-"] h5 {
+  margin-top: 0.35rem !important;
+  margin-bottom: 0.35rem !important;
+}
+
+/* Compact description text */
+[data-testid^="widget-"] p {
+  margin-bottom: 0.35rem !important;
+  line-height: 1.4 !important; /* Tighter line height */
+}
+
+/* Fix empty space in flex containers */
+.flex-1 {
+  flex: 0 1 auto !important; /* Don't grow unnecessarily */
+}
+
+/* Ensure widget cards don't create extra height */
+.rounded-lg.border {
+  padding: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Fix spacing in widget sections with borders */
+[data-testid^="widget-"] > div > div {
+  margin-bottom: 0.35rem !important;
+}
+
+/* Compact chart containers */
+.radar-chart-container,
+[data-testid*="chart"] {
+  padding: 0.5rem !important;
+  margin: 0 !important;
+}
+
+/* END ADDITIONAL WIDGET IMPROVEMENTS */
