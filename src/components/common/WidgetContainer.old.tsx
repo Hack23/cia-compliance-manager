@@ -1,5 +1,4 @@
 import React from 'react';
-import { SPACING } from '../../constants/designTokens';
 
 export interface WidgetContainerProps {
   title: string;
@@ -22,16 +21,6 @@ export interface WidgetContainerProps {
  * This component provides a consistent presentation for all security dashboard
  * widgets, with standardized loading, error states, and styling. Consistency
  * in presentation helps users navigate security information more effectively. 🎨
- * 
- * ## Design Token Usage
- * 
- * Uses design tokens from constants/designTokens.ts for spacing:
- * - SPACING.sm (6px) - Compact vertical spacing
- * - SPACING.md (8px) - Standard horizontal spacing
- * - SPACING.lg (16px) - Comfortable padding for larger screens
- * 
- * This ensures consistency across all widgets and makes spacing adjustments
- * centralized and maintainable.
  */
 const WidgetContainer: React.FC<WidgetContainerProps> = ({
   title,
@@ -68,28 +57,17 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
   if (errorMessage) {
     return (
       <div className={`widget-container widget-error border border-error rounded-md shadow-md ${className}`} data-testid={containerTestId}>
-        <div 
-          className="widget-header bg-error-light/10 dark:bg-error-dark/20 border-b border-error-light dark:border-error-dark rounded-t-md"
-          style={{ 
-            paddingTop: SPACING.sm,
-            paddingBottom: SPACING.sm,
-            paddingLeft: SPACING.md,
-            paddingRight: SPACING.md,
-          }}
-        >
-          <h3 className="text-base sm:text-lg font-semibold text-error-dark dark:text-error-light flex items-center">
-            <span style={{ marginRight: SPACING.sm }}>⚠️</span>
+        <div className="widget-header bg-error-light/10 dark:bg-error-dark/20 px-md py-sm sm:px-lg sm:py-md border-b border-error-light dark:border-error-dark rounded-t-md">
+          <h3 className="text-body-lg sm:text-heading font-semibold text-error-dark dark:text-error-light flex items-center">
+            <span className="mr-sm">⚠️</span>
             {title}
           </h3>
         </div>
-        <div 
-          className="widget-body bg-white dark:bg-gray-900 rounded-b-md"
-          style={{ padding: SPACING.md }}
-        >
+        <div className="widget-body p-sm sm:p-md bg-white dark:bg-gray-900 rounded-b-md">
           <div className="text-error dark:text-error-light" data-testid={errorTestId}>
             {errorMessage}
           </div>
-          {errorContent && <div style={{ marginTop: SPACING.sm }}>{errorContent}</div>}
+          {errorContent && <div className="mt-sm">{errorContent}</div>}
         </div>
       </div>
     );
@@ -98,25 +76,14 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
   // Handle loading or normal state
   return (
     <div className={`widget-container border border-neutral-light dark:border-neutral-dark rounded-md shadow-md ${className}`} data-testid={containerTestId}>
-      <div 
-        className="widget-header bg-neutral-light/10 dark:bg-neutral-dark/20 border-b border-neutral-light dark:border-neutral-dark rounded-t-md flex justify-between items-center"
-        style={{ 
-          paddingTop: SPACING.sm,
-          paddingBottom: SPACING.sm,
-          paddingLeft: SPACING.md,
-          paddingRight: SPACING.md,
-        }}
-      >
+      <div className="widget-header bg-neutral-light/10 dark:bg-neutral-dark/20 px-3 py-2 sm:px-4 sm:py-2 border-b border-neutral-light dark:border-neutral-dark rounded-t-md flex justify-between items-center">
         <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200 flex items-center">
-          {icon && <span style={{ marginRight: SPACING.sm }}>{icon}</span>}
+          {icon && <span className="mr-2">{icon}</span>}
           {title}
         </h3>
         {actions && <div className="widget-actions">{actions}</div>}
       </div>
-      <div 
-        className={`widget-body bg-white dark:bg-gray-900 rounded-b-md ${isLoadingState ? 'flex items-center justify-center min-h-[100px]' : ''}`}
-        style={{ padding: SPACING.md }}
-      >
+      <div className={`widget-body p-3 sm:p-4 bg-white dark:bg-gray-900 rounded-b-md ${isLoadingState ? 'flex items-center justify-center min-h-[100px]' : ''}`}>
         {isLoadingState ? (
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" data-testid={spinnerTestId} />
         ) : (
