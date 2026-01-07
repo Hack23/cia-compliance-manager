@@ -2602,9 +2602,40 @@ button[role="tab"]:not([aria-selected="true"]) {
 
 /* END WIDGET CONTAINER FLEXIBLE SIZING IMPROVEMENTS */
 
-/* ========== ADDITIONAL WIDGET IMPROVEMENTS - TAB & BALANCE FIXES ========== */
+/* ========== COMPREHENSIVE WIDGET LAYOUT FIXES (V2) ========== */
 
-/* Ensure hidden tab panels are truly hidden and don't take up space */
+/* Fix 1: Equal height widgets per row */
+[data-testid="dashboard-grid"] {
+  grid-auto-rows: 1fr !important;
+  align-items: stretch !important;
+}
+
+[data-testid="dashboard-grid"] > div {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+}
+
+/* Fix 2: Widget containers fill grid cells */
+[data-testid="dashboard-grid"] > div > [data-testid^="widget-"] {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+/* Fix 3: Widget body fills space */
+[data-testid^="widget-"] > .widget-body,
+[data-testid^="widget-"] > div:nth-child(2) {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 0.75rem !important;
+}
+
+/* Fix 4: Hidden tabs */
 [role="tabpanel"][hidden] {
   display: none !important;
   visibility: hidden !important;
@@ -2612,111 +2643,88 @@ button[role="tab"]:not([aria-selected="true"]) {
   overflow: hidden !important;
 }
 
-/* Prevent tab panels from creating empty space when not active */
-[role="tabpanel"]:not([hidden]) {
-  display: block !important;
+/* Fix 5: Horizontal tab list */
+[role="tablist"] {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  margin-bottom: 0.75rem !important;
 }
 
-/* Ensure all widgets have consistent flexible height behavior */
-[data-testid^="widget-"] {
+/* Fix 6: Tab panels fill space */
+[role="tabpanel"]:not([hidden]) {
   display: flex !important;
   flex-direction: column !important;
-  height: auto !important;
-  min-height: fit-content !important;
+  flex: 1 !important;
+  padding: 0 !important;
 }
 
-/* Widget body should expand to fit content but not create extra space */
-[data-testid^="widget-"] > div:nth-child(2) {
-  flex: 0 1 auto !important; /* Don't grow unnecessarily */
-  min-height: fit-content !important;
-  padding: 0.5rem !important; /* Further reduced padding */
+[role="tabpanel"] > div {
+  display: flex !important;
+  flex-direction: column !important;
 }
 
-/* Tab navigation spacing - reduce bottom margin */
-[role="tablist"] {
-  margin-bottom: 0.5rem !important; /* Reduced from 0.75rem-1.5rem */
+/* Fix 7: Radar chart constraints */
+.radar-chart-container,
+[data-testid*="radar-chart"] {
+  width: 100% !important;
+  max-height: 260px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
 }
 
-/* Tab panels should have minimal padding */
-[role="tabpanel"] {
-  padding: 0.5rem 0 !important; /* Reduced vertical padding */
+.h-\[300px\] {
+  height: 260px !important;
+  overflow: hidden !important;
 }
 
-/* Reduce spacing in widget headers */
+/* Fix 8: Compact sections */
+.space-y-sm > div {
+  margin-bottom: 0.75rem !important;
+}
+
+.space-y-sm > div:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Fix 9: Grid gaps */
+[data-testid^="widget-"] .grid {
+  gap: 0.5rem !important;
+}
+
+/* Fix 10: Header padding */
 .widget-header,
 [data-testid^="widget-"] > div:first-child {
-  padding: 0.35rem 0.5rem !important; /* Further reduced from 0.4rem 0.6rem */
-  min-height: 32px !important; /* Slightly smaller header */
+  padding: 0.5rem 0.75rem !important;
+  min-height: 40px !important;
 }
 
-/* Make widget grid items more flexible */
-[data-testid="dashboard-grid"] {
-  grid-auto-rows: minmax(min-content, auto) !important; /* Use min-content for better sizing */
+/* Fix 11: Card padding */
+[data-testid^="widget-"] .rounded-lg {
+  padding: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
 }
 
-/* Fix spacing in tab content areas */
-[data-testid^="widget-"] [role="tabpanel"] > div {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
+[data-testid^="widget-"] .rounded-lg:last-child {
+  margin-bottom: 0 !important;
 }
 
-/* Reduce spacing in KeyValuePair components */
-.flex.items-start.justify-between,
-.flex.flex-col.gap-1 {
-  gap: 0.25rem !important; /* Tighter spacing */
-  margin-bottom: 0.35rem !important;
-}
-
-/* Compact badge spacing */
-.px-2.py-1.rounded-md,
-.px-2.py-1.rounded-full {
-  padding: 0.15rem 0.4rem !important; /* Smaller badges */
-}
-
-/* Fix widget content areas - remove double padding */
-[data-testid^="widget-"] .widget-body > div {
-  padding: 0 !important; /* Remove inner padding since body already has padding */
-}
-
-/* Ensure grids inside widgets are compact */
-[data-testid^="widget-"] .grid {
-  gap: 0.5rem !important; /* Tighter grid gaps */
-}
-
-/* Fix heading spacing inside widgets */
-[data-testid^="widget-"] h4,
-[data-testid^="widget-"] h5 {
-  margin-top: 0.35rem !important;
-  margin-bottom: 0.35rem !important;
-}
-
-/* Compact description text */
-[data-testid^="widget-"] p {
-  margin-bottom: 0.35rem !important;
-  line-height: 1.4 !important; /* Tighter line height */
-}
-
-/* Fix empty space in flex containers */
-.flex-1 {
-  flex: 0 1 auto !important; /* Don't grow unnecessarily */
-}
-
-/* Ensure widget cards don't create extra height */
-.rounded-lg.border {
-  padding: 0.5rem !important;
+/* Fix 12: Heading spacing */
+[data-testid^="widget-"] h3 {
   margin-bottom: 0.5rem !important;
 }
 
-/* Fix spacing in widget sections with borders */
-[data-testid^="widget-"] > div > div {
-  margin-bottom: 0.35rem !important;
+[data-testid^="widget-"] h4,
+[data-testid^="widget-"] h5 {
+  margin-top: 0 !important;
+  margin-bottom: 0.25rem !important;
 }
 
-/* Compact chart containers */
-.radar-chart-container,
-[data-testid*="chart"] {
-  padding: 0.5rem !important;
-  margin: 0 !important;
+/* Fix 13: Text spacing */
+[data-testid^="widget-"] p {
+  margin-bottom: 0.5rem !important;
+  line-height: 1.5 !important;
 }
 
-/* END ADDITIONAL WIDGET IMPROVEMENTS */
+/* END COMPREHENSIVE WIDGET LAYOUT FIXES (V2) */
