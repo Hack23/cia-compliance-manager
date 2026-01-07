@@ -2482,12 +2482,8 @@ button[role="tab"]:not([aria-selected="true"]) {
 
 /* ========== WIDGET CONTAINER FLEXIBLE SIZING IMPROVEMENTS ========== */
 /* Surgical fixes to allow content-driven sizing and eliminate excessive empty space */
-/* These rules use !important to override existing constraints safely */
-
-/* Let grid items size naturally to their content */
-[data-testid="dashboard-grid"] > div {
-  min-height: 0 !important;
-}
+/* Note: Using !important to override existing constraints with high specificity */
+/* This approach is safer than modifying 2400+ lines of existing CSS rules */
 
 /* Remove forced minimum heights from widget containers */
 .widget-container,
@@ -2595,12 +2591,10 @@ button[role="tab"]:not([aria-selected="true"]) {
   margin-bottom: 0.5rem !important; /* Reduced from 1rem */
 }
 
-/* Ensure recommendation sections are compact */
+/* Ensure recommendation sections are compact - using flexible selector */
 [class*="recommendation"],
 .recommendation,
-[data-testid$="-recommendation-0"],
-[data-testid$="-recommendation-1"],
-[data-testid$="-recommendation-2"] {
+[data-testid*="-recommendation-"] {
   min-height: 0 !important;
   padding: 0.35rem !important; /* Reduced from 0.5rem */
   margin-bottom: 0.35rem !important; /* Reduced from 0.5rem */
