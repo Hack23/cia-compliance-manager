@@ -171,7 +171,6 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
         error={error}
       >
         <div 
-          className="space-y-sm"
           role={ARIA_ROLES.REGION}
           aria-label={getWidgetAriaDescription(
             "Security Summary",
@@ -182,7 +181,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
           <section 
             className={cn(
               WidgetClasses.section,
-              "p-sm rounded-md shadow-sm border-l-4 border-info dark:border-info-light",
+              "p-2 rounded-md shadow-sm border-l-4 border-info dark:border-info-light",
               "bg-info-light/10 dark:bg-info-dark/20"
             )}
             aria-labelledby="security-classification-heading"
@@ -192,7 +191,7 @@ const SecuritySummaryWidget: React.FC<SecuritySummaryWidgetProps> = ({
               <div>
                 <h2 
                   id="security-classification-heading"
-                  className={cn(WidgetClasses.heading, "flex items-center gap-sm")}
+                  className={cn(WidgetClasses.heading, "flex items-center gap-2")}
                 >
                   <span 
                     className="inline-block w-3 h-3 rounded-full bg-info dark:bg-info-light pulse-dot"
