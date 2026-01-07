@@ -76,14 +76,14 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
   // Handle loading or normal state
   return (
     <div className={`widget-container border border-neutral-light dark:border-neutral-dark rounded-md shadow-md ${className}`} data-testid={containerTestId}>
-      <div className="widget-header bg-neutral-light/10 dark:bg-neutral-dark/20 px-md py-sm sm:px-lg sm:py-md border-b border-neutral-light dark:border-neutral-dark rounded-t-md flex justify-between items-center">
-        <h3 className="text-body-lg sm:text-heading font-semibold text-gray-800 dark:text-gray-200 flex items-center">
-          {icon && <span className="mr-sm">{icon}</span>}
+      <div className="widget-header bg-neutral-light/10 dark:bg-neutral-dark/20 px-3 py-2 sm:px-4 sm:py-2 border-b border-neutral-light dark:border-neutral-dark rounded-t-md flex justify-between items-center">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-200 flex items-center">
+          {icon && <span className="mr-2">{icon}</span>}
           {title}
         </h3>
         {actions && <div className="widget-actions">{actions}</div>}
       </div>
-      <div className={`widget-body p-sm sm:p-md bg-white dark:bg-gray-900 rounded-b-md ${isLoadingState ? 'flex items-center justify-center min-h-[100px]' : ''}`}>
+      <div className={`widget-body p-3 sm:p-4 bg-white dark:bg-gray-900 rounded-b-md ${isLoadingState ? 'flex items-center justify-center min-h-[100px]' : ''}`}>
         {isLoadingState ? (
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" data-testid={spinnerTestId} />
         ) : (
