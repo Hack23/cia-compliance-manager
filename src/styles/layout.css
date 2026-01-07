@@ -18,7 +18,7 @@
   margin: 0 auto;
   padding: 0.75rem; /* Reduced from 1rem */
   /* Add explicit grid-auto-rows property to ensure rows are created */
-  grid-auto-rows: minmax(250px, auto); /* Reduced from 300px */
+  grid-auto-rows: auto; /* Let content determine height naturally */
 }
 
 /* Apply responsive grid columns - these override the base definition at breakpoints */
@@ -39,7 +39,7 @@
 /* Fix the direct children of the grid (the widget containers) */
 [data-testid="dashboard-grid"] > div {
   height: 100%; /* Fill the grid cell */
-  min-height: 250px; /* Reduced from 300px */
+  min-height: auto; /* Let content determine minimum height */
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -90,8 +90,8 @@
   flex-direction: column;
   overflow: visible;
   height: auto;
-  min-height: 200px; /* Reduced from original */
-  max-height: 700px; /* Reduced from 800px */
+  min-height: auto; /* Let content determine minimum height */
+  max-height: none; /* Remove maximum height constraint */
 }
 
 /* Fix widget content scrolling */

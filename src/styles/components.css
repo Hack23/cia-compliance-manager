@@ -2479,3 +2479,131 @@ button[role="tab"]:not([aria-selected="true"]) {
     transform: translateY(0);
   }
 }
+
+/* ========== WIDGET CONTAINER FLEXIBLE SIZING IMPROVEMENTS ========== */
+/* Surgical fixes to allow content-driven sizing and eliminate excessive empty space */
+/* These rules use !important to override existing constraints safely */
+
+/* Let grid items size naturally to their content */
+[data-testid="dashboard-grid"] > div {
+  min-height: 0 !important;
+}
+
+/* Remove forced minimum heights from widget containers */
+.widget-container,
+[data-testid^="widget-container"],
+[data-testid^="widget-"] {
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* Optimize padding to reduce empty space - consolidate to single layer */
+.widget-body,
+[data-testid^="widget-"] > div:nth-child(2),
+[data-testid^="widget-"] > div.p-4 {
+  padding: 0.75rem !important; /* Consistent 12px padding, reduced from multiple layers */
+}
+
+/* Ensure proper overflow behavior for widget containers */
+.widget-container,
+[data-testid^="widget-container"] {
+  overflow: hidden !important;
+}
+
+/* Allow widget bodies to scroll only when content exceeds available space */
+.widget-body,
+[data-testid^="widget-"] > div:nth-child(2) {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  max-height: 100% !important;
+}
+
+/* Remove minimum height from widget size variants */
+.widget-size-xs,
+.widget-size-sm,
+.widget-size-md,
+.widget-size-lg,
+.widget-size-xl {
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+/* Ensure widgets in loading state don't create excessive space */
+.widget-body.flex.items-center.justify-center {
+  min-height: 80px !important; /* Reduced from 100px */
+}
+
+/* Fix section containers to use consistent compact spacing */
+.section-container,
+[data-testid^="widget-"] .section-container {
+  padding: 0.5rem !important; /* Reduced from 0.75rem */
+  margin-bottom: 0.5rem !important; /* Reduced from 0.75rem - 1rem */
+}
+
+/* Optimize metric cards and info cards */
+.info-card,
+.tech-metric-card,
+.resource-card,
+.metric-card {
+  padding: 0.5rem !important; /* Reduced from 0.75rem */
+  margin-bottom: 0.5rem !important; /* Reduced from 0.75rem */
+  min-height: auto !important; /* Remove forced minimum */
+}
+
+/* Fix content sections to reduce empty space */
+.content-section,
+[data-testid^="widget-"] .content-section {
+  padding: 0.5rem !important; /* Reduced from 1rem */
+  margin-bottom: 0.75rem !important; /* Reduced from 1.5rem */
+}
+
+/* Ensure widget content wrappers don't create extra space */
+.widget-content-wrapper,
+.widget-content {
+  padding: 0 !important; /* Remove extra padding layer */
+  margin: 0 !important;
+}
+
+/* Fix list spacing to be more compact */
+.widget-container ul,
+.widget-container ol,
+[data-testid^="widget-"] ul,
+[data-testid^="widget-"] ol {
+  margin-bottom: 0.5rem !important; /* Reduced from 0.75rem */
+}
+
+.widget-container li,
+[data-testid^="widget-"] li {
+  margin-bottom: 0.25rem !important; /* Reduced from 0.35rem */
+}
+
+/* Ensure primary and secondary info sections are compact */
+.primary-info {
+  padding: 0.5rem !important; /* Reduced from 0.75rem */
+  margin-bottom: 0.5rem !important; /* Reduced from 1rem */
+}
+
+.secondary-info {
+  margin-bottom: 0.35rem !important; /* Reduced from 0.75rem */
+}
+
+/* Fix alert padding */
+.alert {
+  padding: 0.5rem 0.75rem !important; /* Reduced from 0.75rem 1rem */
+  padding-left: 2rem !important; /* Keep space for icon */
+  margin-bottom: 0.5rem !important; /* Reduced from 1rem */
+}
+
+/* Ensure recommendation sections are compact */
+[class*="recommendation"],
+.recommendation,
+[data-testid$="-recommendation-0"],
+[data-testid$="-recommendation-1"],
+[data-testid$="-recommendation-2"] {
+  min-height: 0 !important;
+  padding: 0.35rem !important; /* Reduced from 0.5rem */
+  margin-bottom: 0.35rem !important; /* Reduced from 0.5rem */
+}
+
+/* END WIDGET CONTAINER FLEXIBLE SIZING IMPROVEMENTS */
