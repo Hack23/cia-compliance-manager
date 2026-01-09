@@ -63,7 +63,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default description for unknown level', () => {
-        const result = getDefaultDescription('confidentiality', 'Unknown' as SecurityLevel);
+        const result = getDefaultDescription('confidentiality', 'Unknown' as unknown as SecurityLevel);
         expect(result).toBe('Standard confidentiality controls.');
       });
     });

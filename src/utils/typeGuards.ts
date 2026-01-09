@@ -986,3 +986,19 @@ export function hasMethod<T extends object, K extends PropertyKey>(
     typeof (obj as Record<PropertyKey, unknown>)[methodName] === "function"
   );
 }
+
+/**
+ * Type guard to check if an object has a description property
+ * @param obj The object to check
+ * @returns True if the object has a description property of type string
+ */
+export function hasDescription(
+  obj: unknown
+): obj is { description: string; [key: string]: unknown } {
+  return (
+    typeof obj === "object" &&
+    obj !== null &&
+    "description" in obj &&
+    typeof (obj as { description: unknown }).description === "string"
+  );
+}

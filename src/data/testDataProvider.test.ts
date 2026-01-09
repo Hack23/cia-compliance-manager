@@ -336,17 +336,17 @@ describe("TestDataProvider", () => {
 
     it("should handle invalid security level for getDefaultSecurityIcon with fallback", () => {
       // Test fallback path when invalid level is passed
-      const invalidLevel = "Invalid" as SecurityLevel;
+      const invalidLevel = "Invalid" as unknown as SecurityLevel;
       expect(dataProvider.getDefaultSecurityIcon?.(invalidLevel)).toBe("❓");
     });
 
     it("should handle invalid security level for getDefaultExpertiseLevel with fallback", () => {
-      const invalidLevel = "Invalid" as SecurityLevel;
+      const invalidLevel = "Invalid" as unknown as SecurityLevel;
       expect(dataProvider.getDefaultExpertiseLevel?.(invalidLevel)).toBe("Unknown");
     });
 
     it("should handle invalid security level for getProtectionLevel with fallback", () => {
-      const invalidLevel = "Invalid" as SecurityLevel;
+      const invalidLevel = "Invalid" as unknown as SecurityLevel;
       expect(dataProvider.getProtectionLevel?.(invalidLevel)).toBe("Unknown");
     });
 

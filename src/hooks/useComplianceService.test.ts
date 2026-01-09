@@ -1,8 +1,16 @@
 import { renderHook, waitFor } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { useComplianceService } from "./useComplianceService";
 
 describe("useComplianceService", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  });
   it("should provide compliance service immediately", () => {
     const { result } = renderHook(() => useComplianceService());
 

@@ -1,16 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { hasDescription } from "../utils/typeGuards";
 import { useTechnicalDetailsData } from "./useTechnicalDetailsData";
-
-// Type guard for component details with description
-interface ComponentDetailsWithDescription {
-  description: string;
-  [key: string]: unknown;
-}
-
-function hasDescription(obj: unknown): obj is ComponentDetailsWithDescription {
-  return typeof obj === 'object' && obj !== null && 'description' in obj && typeof (obj as ComponentDetailsWithDescription).description === 'string';
-}
 
 describe("useTechnicalDetailsData", () => {
   const mockCIAContentService = {
