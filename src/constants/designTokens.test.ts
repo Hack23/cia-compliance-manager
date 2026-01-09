@@ -409,40 +409,25 @@ describe('Design Tokens', () => {
       expect(badgeClasses).toContain('bg-neutral');
     });
 
-    it('should provide badge style function with primary variant', () => {
-      const badgeClasses = WIDGET_STYLES.badge('primary');
-      expect(badgeClasses).toContain('bg-primary');
-      expect(badgeClasses).toContain('text-white');
-    });
+    type BadgeVariant = 'primary' | 'success' | 'warning' | 'error' | 'info' | 'neutral';
+    const badgeVariantCases: Array<[BadgeVariant, string, string]> = [
+      ['primary', 'bg-primary', 'text-white'],
+      ['success', 'bg-success', 'text-white'],
+      ['warning', 'bg-warning', 'text-gray-900'],
+      ['error', 'bg-error', 'text-white'],
+      ['info', 'bg-info', 'text-white'],
+      ['neutral', 'bg-neutral', 'text-white'],
+    ];
 
-    it('should provide badge style function with success variant', () => {
-      const badgeClasses = WIDGET_STYLES.badge('success');
-      expect(badgeClasses).toContain('bg-success');
-      expect(badgeClasses).toContain('text-white');
-    });
-
-    it('should provide badge style function with warning variant', () => {
-      const badgeClasses = WIDGET_STYLES.badge('warning');
-      expect(badgeClasses).toContain('bg-warning');
-      expect(badgeClasses).toContain('text-gray-900');
-    });
-
-    it('should provide badge style function with error variant', () => {
-      const badgeClasses = WIDGET_STYLES.badge('error');
-      expect(badgeClasses).toContain('bg-error');
-      expect(badgeClasses).toContain('text-white');
-    });
-
-    it('should provide badge style function with info variant', () => {
-      const badgeClasses = WIDGET_STYLES.badge('info');
-      expect(badgeClasses).toContain('bg-info');
-      expect(badgeClasses).toContain('text-white');
-    });
-
-    it('should provide badge style function with neutral variant', () => {
-      const badgeClasses = WIDGET_STYLES.badge('neutral');
-      expect(badgeClasses).toContain('bg-neutral');
-      expect(badgeClasses).toContain('text-white');
-    });
+    it.each(badgeVariantCases)(
+      'should provide badge style with %s variant containing %s and %s',
+      (variant, expectedBgClass, expectedTextClass) => {
+        const badgeClasses = WIDGET_STYLES.badge(variant);
+        expect(badgeClasses).toContain(expectedBgClass);
+        expect(badgeClasses).toContain(expectedTextClass);
+        expect(badgeClasses).toContain('inline-flex');
+        expect(badgeClasses).toContain('items-center');
+      }
+    );
   });
 });

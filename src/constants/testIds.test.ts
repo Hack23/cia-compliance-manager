@@ -160,9 +160,12 @@ describe("testIds utility functions", () => {
   });
 
   describe("TEST_HELPERS", () => {
-    it("getValuePointsForLevel returns expected value points", () => {
-      // Mock the VALUE_CREATION_POINTS if needed for this test
-      expect(typeof TEST_HELPERS.getValuePointsForLevel).toBe("function");
+    it("getValuePointsForLevel returns an array for security levels", () => {
+      const highPoints = TEST_HELPERS.getValuePointsForLevel("High");
+      const lowPoints = TEST_HELPERS.getValuePointsForLevel("Low");
+      
+      expect(Array.isArray(highPoints)).toBe(true);
+      expect(Array.isArray(lowPoints)).toBe(true);
     });
 
     it("toSecurityLevel converts string to SecurityLevel type", () => {
@@ -296,41 +299,6 @@ describe("testIds utility functions", () => {
       const widgetIds = createWidgetTestId("widget");
       expect(widgetIds.footer("actions")).toBe("widget-widget-footer-actions");
       expect(widgetIds.footer("info")).toBe("widget-widget-footer-info");
-    });
-  });
-
-  describe("categorySpecific", () => {
-    it("creates category-specific test ID", () => {
-      expect(categorySpecific("impact", "financial")).toBe("impact-financial");
-      expect(categorySpecific("risk", "operational")).toBe("risk-operational");
-    });
-  });
-
-  describe("TEST_HELPERS", () => {
-    it("matchTextAndClass returns a matcher function", () => {
-      const matcher = TEST_HELPERS.matchTextAndClass("test", "className");
-      expect(typeof matcher).toBe("function");
-      
-      const mockElement = {
-        className: "test-className-other"
-      } as Element;
-      
-      expect(matcher("test content", mockElement)).toBe(true);
-      expect(matcher("other content", mockElement)).toBe(false);
-      
-      const mockElementNoClass = {
-        className: "other-class"
-      } as Element;
-      expect(matcher("test content", mockElementNoClass)).toBe(false);
-    });
-
-    it("getValuePointsForLevel returns expected value points", () => {
-      // Mock the VALUE_CREATION_POINTS if needed for this test
-      expect(typeof TEST_HELPERS.getValuePointsForLevel).toBe("function");
-    });
-
-    it("toSecurityLevel converts string to SecurityLevel type", () => {
-      expect(TEST_HELPERS.toSecurityLevel("High")).toBe("High");
     });
   });
 });
