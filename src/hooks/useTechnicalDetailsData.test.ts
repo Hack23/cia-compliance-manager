@@ -18,7 +18,7 @@ describe("useTechnicalDetailsData", () => {
     );
 
     expect(result.current.confidentialityDetails).toBeDefined();
-    expect(result.current.confidentialityDetails.description).toContain("confidentiality");
+    expect((result.current.confidentialityDetails as any).description).toContain("confidentiality");
   });
 
   it("should use fallback for confidentiality details when service is null", () => {
@@ -27,7 +27,7 @@ describe("useTechnicalDetailsData", () => {
     );
 
     expect(result.current.confidentialityDetails).toBeDefined();
-    expect(result.current.confidentialityDetails.description).toBeDefined();
+    expect((result.current.confidentialityDetails as any).description).toBeDefined();
   });
 
   it("should handle errors when getting confidentiality details", () => {
@@ -62,7 +62,7 @@ describe("useTechnicalDetailsData", () => {
     );
 
     expect(result.current.integrityDetails).toBeDefined();
-    expect(result.current.integrityDetails.description).toContain("integrity");
+    expect((result.current.integrityDetails as any).description).toContain("integrity");
   });
 
   it("should use fallback for integrity details when service is null", () => {
@@ -71,7 +71,7 @@ describe("useTechnicalDetailsData", () => {
     );
 
     expect(result.current.integrityDetails).toBeDefined();
-    expect(result.current.integrityDetails.description).toBeDefined();
+    expect((result.current.integrityDetails as any).description).toBeDefined();
   });
 
   it("should handle errors when getting integrity details", () => {
@@ -106,7 +106,7 @@ describe("useTechnicalDetailsData", () => {
     );
 
     expect(result.current.availabilityDetails).toBeDefined();
-    expect(result.current.availabilityDetails.description).toContain("availability");
+    expect((result.current.availabilityDetails as any).description).toContain("availability");
   });
 
   it("should use fallback for availability details when service is null", () => {
@@ -115,7 +115,7 @@ describe("useTechnicalDetailsData", () => {
     );
 
     expect(result.current.availabilityDetails).toBeDefined();
-    expect(result.current.availabilityDetails.description).toBeDefined();
+    expect((result.current.availabilityDetails as any).description).toBeDefined();
   });
 
   it("should handle errors when getting availability details", () => {
@@ -404,14 +404,20 @@ describe("useTechnicalDetailsData", () => {
   });
 
   it("should memoize details correctly on re-renders", () => {
+    type Props = {
+      a: "None" | "Low" | "Moderate" | "High" | "Very High";
+      i: "None" | "Low" | "Moderate" | "High" | "Very High";
+      c: "None" | "Low" | "Moderate" | "High" | "Very High";
+    };
+
     const { result, rerender } = renderHook(
-      ({ a, i, c }) => useTechnicalDetailsData(a, i, c, mockCIAContentService),
+      ({ a, i, c }: Props) => useTechnicalDetailsData(a, i, c, mockCIAContentService),
       {
         initialProps: {
-          a: "High" as const,
-          i: "High" as const,
-          c: "High" as const,
-        },
+          a: "High",
+          i: "High",
+          c: "High",
+        } as Props,
       }
     );
 
@@ -419,9 +425,9 @@ describe("useTechnicalDetailsData", () => {
 
     // Re-render with same props
     rerender({
-      a: "High" as const,
-      i: "High" as const,
-      c: "High" as const,
+      a: "High",
+      i: "High",
+      c: "High",
     });
 
     // Should be the same object reference (memoized)
@@ -429,14 +435,20 @@ describe("useTechnicalDetailsData", () => {
   });
 
   it("should update details when security level changes", () => {
+    type Props = {
+      a: "None" | "Low" | "Moderate" | "High" | "Very High";
+      i: "None" | "Low" | "Moderate" | "High" | "Very High";
+      c: "None" | "Low" | "Moderate" | "High" | "Very High";
+    };
+
     const { result, rerender } = renderHook(
-      ({ a, i, c }) => useTechnicalDetailsData(a, i, c, null),
+      ({ a, i, c }: Props) => useTechnicalDetailsData(a, i, c, null),
       {
         initialProps: {
-          a: "Low" as const,
-          i: "Low" as const,
-          c: "Low" as const,
-        },
+          a: "Low",
+          i: "Low",
+          c: "Low",
+        } as Props,
       }
     );
 
@@ -444,9 +456,9 @@ describe("useTechnicalDetailsData", () => {
 
     // Re-render with different props
     rerender({
-      a: "Very High" as const,
-      i: "Very High" as const,
-      c: "Very High" as const,
+      a: "Very High",
+      i: "Very High",
+      c: "Very High",
     });
 
     // Complexity should be different

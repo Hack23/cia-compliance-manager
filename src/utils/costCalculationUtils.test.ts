@@ -98,15 +98,12 @@ describe("Cost Calculation Utilities", () => {
       const nullLevelCost = calculateImplementationCost(null);
       // @ts-expect-error - Testing invalid input
       const undefinedLevelCost = calculateImplementationCost(undefined);
-      // @ts-expect-error - Testing invalid input
       const invalidLevelCost = calculateImplementationCost("Invalid");
-      // @ts-expect-error - Testing invalid input
-      const invalidOrgSize = calculateImplementationCost("Moderate", "invalid");
-      // @ts-expect-error - Testing invalid input
+      const invalidOrgSize = calculateImplementationCost("Moderate", "invalid" as any);
       const invalidIndustry = calculateImplementationCost(
         "Moderate",
         "medium",
-        "invalid"
+        "invalid" as any
       );
 
       // All should default gracefully
