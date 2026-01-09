@@ -135,7 +135,6 @@ export default defineConfig(({ mode }) => ({
         forks: {
           singleFork: false,
           maxForks: 3,
-          minForks: 1,
         },
       },
       // Isolate tests to prevent memory leaks

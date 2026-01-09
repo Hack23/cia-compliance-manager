@@ -127,7 +127,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default description for unknown level', () => {
-        const result = getDefaultDescription('availability', 'Unknown' as SecurityLevel);
+        const result = getDefaultDescription('availability', 'Unknown' as unknown as SecurityLevel);
         expect(result).toBe('Standard availability controls.');
       });
     });
@@ -144,7 +144,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default technical description for unknown level', () => {
-        const result = getDefaultTechDescription('confidentiality', 'Unknown' as SecurityLevel);
+        const result = getDefaultTechDescription('confidentiality', 'Unknown' as unknown as SecurityLevel);
         expect(result).toBe('Standard confidentiality technical controls.');
       });
     });
@@ -159,7 +159,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default technical description for unknown level', () => {
-        const result = getDefaultTechDescription('integrity', 'Unknown' as SecurityLevel);
+        const result = getDefaultTechDescription('integrity', 'Unknown' as unknown as SecurityLevel);
         expect(result).toBe('Standard integrity technical controls.');
       });
     });
@@ -174,7 +174,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default technical description for unknown level', () => {
-        const result = getDefaultTechDescription('availability', 'Unknown' as SecurityLevel);
+        const result = getDefaultTechDescription('availability', 'Unknown' as unknown as SecurityLevel);
         expect(result).toBe('Standard availability technical controls.');
       });
     });
@@ -216,7 +216,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default requirements for unknown level', () => {
-        const result = getDefaultRequirements('confidentiality', 'Unknown' as SecurityLevel);
+        const result = getDefaultRequirements('confidentiality', 'Unknown' as unknown as SecurityLevel);
         expect(result).toEqual(['Standard confidentiality requirements.']);
       });
     });
@@ -255,7 +255,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default requirements for unknown level', () => {
-        const result = getDefaultRequirements('integrity', 'Unknown' as SecurityLevel);
+        const result = getDefaultRequirements('integrity', 'Unknown' as unknown as SecurityLevel);
         expect(result).toEqual(['Standard integrity requirements.']);
       });
     });
@@ -295,7 +295,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default requirements for unknown level', () => {
-        const result = getDefaultRequirements('availability', 'Unknown' as SecurityLevel);
+        const result = getDefaultRequirements('availability', 'Unknown' as unknown as SecurityLevel);
         expect(result).toEqual(['Standard availability requirements.']);
       });
     });
@@ -312,7 +312,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default technologies for unknown level', () => {
-        const result = getDefaultTechnologies('confidentiality', 'Unknown' as SecurityLevel);
+        const result = getDefaultTechnologies('confidentiality', 'Unknown' as unknown as SecurityLevel);
         expect(result).toBe('Standard encryption and access control tools');
       });
     });
@@ -327,7 +327,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default technologies for unknown level', () => {
-        const result = getDefaultTechnologies('integrity', 'Unknown' as SecurityLevel);
+        const result = getDefaultTechnologies('integrity', 'Unknown' as unknown as SecurityLevel);
         expect(result).toBe('Standard integrity verification tools');
       });
     });
@@ -342,7 +342,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default technologies for unknown level', () => {
-        const result = getDefaultTechnologies('availability', 'Unknown' as SecurityLevel);
+        const result = getDefaultTechnologies('availability', 'Unknown' as unknown as SecurityLevel);
         expect(result).toBe('Standard availability tools');
       });
     });
@@ -359,7 +359,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default configurations for unknown level', () => {
-        const result = getDefaultConfigurations('confidentiality', 'Unknown' as SecurityLevel);
+        const result = getDefaultConfigurations('confidentiality', 'Unknown' as unknown as SecurityLevel);
         expect(result).toBe('Standard security configurations');
       });
     });
@@ -374,7 +374,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default configurations for unknown level', () => {
-        const result = getDefaultConfigurations('integrity', 'Unknown' as SecurityLevel);
+        const result = getDefaultConfigurations('integrity', 'Unknown' as unknown as SecurityLevel);
         expect(result).toBe('Standard integrity configurations');
       });
     });
@@ -389,7 +389,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default configurations for unknown level', () => {
-        const result = getDefaultConfigurations('availability', 'Unknown' as SecurityLevel);
+        const result = getDefaultConfigurations('availability', 'Unknown' as unknown as SecurityLevel);
         expect(result).toBe('Standard availability configurations');
       });
     });
@@ -430,7 +430,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default expertise for unknown level', () => {
-        const result = getDefaultExpertise('confidentiality', 'Unknown' as SecurityLevel);
+        const result = getDefaultExpertise('confidentiality', 'Unknown' as unknown as SecurityLevel);
         expect(result).toEqual(['General security knowledge']);
       });
     });
@@ -469,7 +469,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default expertise for unknown level', () => {
-        const result = getDefaultExpertise('integrity', 'Unknown' as SecurityLevel);
+        const result = getDefaultExpertise('integrity', 'Unknown' as unknown as SecurityLevel);
         expect(result).toEqual(['Data integrity fundamentals']);
       });
     });
@@ -510,7 +510,7 @@ describe('Technical Details Defaults', () => {
       });
 
       it('returns default expertise for unknown level', () => {
-        const result = getDefaultExpertise('availability', 'Unknown' as SecurityLevel);
+        const result = getDefaultExpertise('availability', 'Unknown' as unknown as SecurityLevel);
         expect(result).toEqual(['System reliability fundamentals']);
       });
     });
