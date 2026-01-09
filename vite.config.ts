@@ -129,6 +129,20 @@ export default defineConfig(({ mode }) => ({
       environment: "jsdom",
       setupFiles: ["./src/tests/vitest-setup.ts", "./src/tests/setup-tests.ts"],
       include: ["src/**/*.test.{ts,tsx}"],
+      // Limit concurrency to reduce memory usage
+      pool: "forks",
+      poolOptions: {
+        forks: {
+          singleFork: false,
+          maxForks: 3,
+          minForks: 1,
+        },
+      },
+      // Isolate tests to prevent memory leaks
+      isolate: true,
+      // Set timeouts to prevent hanging tests
+      testTimeout: 10000,
+      hookTimeout: 10000,
       coverage: {
         provider: "v8",
         reporter: ["text", "json", "html", "lcov"],
