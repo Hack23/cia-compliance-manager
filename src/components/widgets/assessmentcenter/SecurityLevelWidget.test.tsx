@@ -4,6 +4,30 @@ import { SecurityLevel } from "../../../types/cia";
 import { mockWidgetProps } from "../../../utils/testUtils";
 import SecurityLevelWidget from "./SecurityLevelWidget";
 
+// Mock the useCIAContentService hook to prevent "Content service unavailable" errors
+vi.mock("../../../hooks/useCIAContentService", () => ({
+  useCIAContentService: () => ({
+    ciaContentService: {
+      getCIADetails: vi.fn().mockReturnValue({
+        description: "Test description",
+        technical: "Test technical details",
+        businessImpact: "Test business impact",
+        recommendations: ["Test recommendation 1", "Test recommendation 2"],
+      }),
+      getComponentDetails: vi.fn().mockReturnValue({
+        description: "Test component description",
+        technical: "Test component technical details",
+        businessImpact: "Test component business impact",
+        recommendations: ["Component recommendation 1", "Component recommendation 2"],
+      }),
+      initialize: vi.fn().mockResolvedValue(undefined),
+    },
+    isLoading: false,
+    error: null,
+    refresh: vi.fn(),
+  }),
+}));
+
 describe("SecurityLevelWidget", () => {
   // Mock the expected change handlers
   const mockAvailabilityChange = vi.fn();
