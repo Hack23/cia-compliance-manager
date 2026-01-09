@@ -36,7 +36,7 @@
     "pretest:e2e": "bash .devcontainer/init-xvfb.sh",
     "cypress:install": "cypress install",
     "cypress:verify": "cypress verify",
-    "test:ci": "cross-env CI=true NODE_OPTIONS=--max-old-space-size=4096 vitest run --coverage",
+    "test:ci": "cross-env CI=true vitest run --coverage",
     "cypress:open:with-server": "start-server-and-test 'vite --port 5173' http://localhost:5173 'cypress open'",
     "merge-test-reports": "node --experimental-json-modules ./cypress/support/plugins/merge-reports.js",
     "docs": "typedoc --options typedoc.enhanced.json",
