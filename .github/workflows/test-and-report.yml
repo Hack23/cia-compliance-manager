@@ -139,7 +139,7 @@ jobs:
         run: npm install
 
       - name: Run unit tests with coverage
-        run: xvfb-run --auto-servernum npm run test:ci
+        run: npm run test:ci
         env:
           JEST_JUNIT_OUTPUT_DIR: "build/coverage"
           JEST_JUNIT_OUTPUT_NAME: "junit.xml"
