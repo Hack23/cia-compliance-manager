@@ -79,4 +79,60 @@ describe("useCIADataProvider", () => {
     expect(result.current.dataProvider).not.toBe(null);
     expect(result.current.dataProvider).not.toBe(originalProvider);
   });
+
+  it("should handle errors during initialization", async () => {
+    // Mock the module to throw an error
+    vi.resetModules();
+    vi.doMock("../services/dataProviders", () => ({
+      createDefaultDataProvider: vi.fn(() => {
+        throw new Error("Test initialization error");
+      }),
+    }));
+
+    const { useCIADataProvider: useCIADataProviderWithError } = await import(
+      "./useCIADataProvider"
+    );
+    const { result } = renderHook(() => useCIADataProviderWithError());
+
+    // Wait for error handling to complete
+    await waitFor(
+      () => {
+        expect(result.current.isLoading).toBe(false);
+      },
+      { timeout: 1000 }
+    );
+
+    expect(result.current.error).not.toBe(null);
+    expect(result.current.error?.message).toBe("Test initialization error");
+    expect(result.current.dataProvider).toBe(null);
+  });
+
+  it("should handle non-Error exceptions during initialization", async () => {
+    // Mock the module to throw a non-Error value
+    vi.resetModules();
+    vi.doMock("../services/dataProviders", () => ({
+      createDefaultDataProvider: vi.fn(() => {
+        throw "String error"; // eslint-disable-line no-throw-literal
+      }),
+    }));
+
+    const { useCIADataProvider: useCIADataProviderWithError } = await import(
+      "./useCIADataProvider"
+    );
+    const { result } = renderHook(() => useCIADataProviderWithError());
+
+    // Wait for error handling to complete
+    await waitFor(
+      () => {
+        expect(result.current.isLoading).toBe(false);
+      },
+      { timeout: 1000 }
+    );
+
+    expect(result.current.error).not.toBe(null);
+    expect(result.current.error?.message).toBe(
+      "Failed to initialize data provider"
+    );
+    expect(result.current.dataProvider).toBe(null);
+  });
 });
