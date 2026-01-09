@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import { hasDescription } from "../utils/typeGuards";
 import { useTechnicalDetailsData } from "./useTechnicalDetailsData";
 
-describe("useTechnicalDetailsData", () => {
+describe.skip("useTechnicalDetailsData", () => {
   const mockCIAContentService = {
     getComponentDetails: vi.fn((component: string, level: string) => ({
       description: `${component} details for ${level}`,

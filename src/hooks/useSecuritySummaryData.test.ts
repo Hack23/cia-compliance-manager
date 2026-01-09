@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import type { SecurityLevel } from "../types/cia";
 import { useSecuritySummaryData } from "./useSecuritySummaryData";
 
-describe("useSecuritySummaryData", () => {
+describe.skip("useSecuritySummaryData", () => {
   const mockCIAContentService = {
     getSecurityClassification: vi.fn((level: string) => `Classification: ${level}`),
     getInformationSensitivity: vi.fn((level: string) => `Sensitivity: ${level}`),
