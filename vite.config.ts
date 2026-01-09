@@ -129,14 +129,11 @@ export default defineConfig(({ mode }) => ({
       environment: "jsdom",
       setupFiles: ["./src/tests/vitest-setup.ts", "./src/tests/setup-tests.ts"],
       include: ["src/**/*.test.{ts,tsx}"],
-      // Limit concurrency to reduce memory usage
+      // Limit concurrency to reduce memory usage (Vitest 4 format)
       pool: "forks",
-      poolOptions: {
-        forks: {
-          singleFork: false,
-          maxForks: 3,
-        },
-      },
+      // Pool options are now top-level in Vitest 4
+      singleFork: false,
+      maxForks: 2, // Reduced from 3 to further limit memory usage
       // Isolate tests to prevent memory leaks
       isolate: true,
       // Set timeouts to prevent hanging tests

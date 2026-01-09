@@ -15,7 +15,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "find:unused": "npm run knip",
-    "test": "NODE_OPTIONS=\"--max-old-space-size=6144\" vitest",
+    "test": "NODE_OPTIONS=\"--max-old-space-size=8192\" vitest",
     "lint": "eslint",
     "lint:src": "eslint src",
     "test:licenses": "license-compliance --direct --allow 'MIT;ISC;0BSD;BSD-2-Clause;BSD-3-Clause;Apache-2.0;Unlicense;CC0-1.0'",
