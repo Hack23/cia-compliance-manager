@@ -316,6 +316,162 @@ describe("TestDataProvider", () => {
       });
     });
   });
+
+  describe("Additional Utility Functions", () => {
+    it("should return appropriate expertise levels", () => {
+      expect(dataProvider.getDefaultExpertiseLevel?.("None")).toBe("No expertise required");
+      expect(dataProvider.getDefaultExpertiseLevel?.("Low")).toBe("Basic IT knowledge");
+      expect(dataProvider.getDefaultExpertiseLevel?.("Moderate")).toBe("Security professional");
+      expect(dataProvider.getDefaultExpertiseLevel?.("High")).toBe("Senior security specialist");
+      expect(dataProvider.getDefaultExpertiseLevel?.("Very High")).toBe("Security architect/expert");
+    });
+
+    it("should return appropriate protection levels", () => {
+      expect(dataProvider.getProtectionLevel?.("None")).toBe("No protection");
+      expect(dataProvider.getProtectionLevel?.("Low")).toBe("Basic protection");
+      expect(dataProvider.getProtectionLevel?.("Moderate")).toBe("Standard protection");
+      expect(dataProvider.getProtectionLevel?.("High")).toBe("Advanced protection");
+      expect(dataProvider.getProtectionLevel?.("Very High")).toBe("Maximum protection");
+    });
+
+    it("should handle invalid security level for getDefaultSecurityIcon with fallback", () => {
+      // Test fallback path when invalid level is passed
+      const invalidLevel = "Invalid" as SecurityLevel;
+      expect(dataProvider.getDefaultSecurityIcon?.(invalidLevel)).toBe("❓");
+    });
+
+    it("should handle invalid security level for getDefaultExpertiseLevel with fallback", () => {
+      const invalidLevel = "Invalid" as SecurityLevel;
+      expect(dataProvider.getDefaultExpertiseLevel?.(invalidLevel)).toBe("Unknown");
+    });
+
+    it("should handle invalid security level for getProtectionLevel with fallback", () => {
+      const invalidLevel = "Invalid" as SecurityLevel;
+      expect(dataProvider.getProtectionLevel?.(invalidLevel)).toBe("Unknown");
+    });
+
+    it("should return different value points for None vs other levels", () => {
+      const nonePoints = dataProvider.getDefaultValuePoints?.("None") || [];
+      const highPoints = dataProvider.getDefaultValuePoints?.("High") || [];
+      
+      // None should have specific messages about no security
+      expect(nonePoints[0]).toContain("No security controls");
+      
+      // High should have different messages
+      expect(highPoints[0]).toContain("high");
+      expect(highPoints[1]).toContain("advanced");
+    });
+
+    it("should differentiate between basic and advanced security requirements in value points", () => {
+      const lowPoints = dataProvider.getDefaultValuePoints?.("Low") || [];
+      const veryHighPoints = dataProvider.getDefaultValuePoints?.("Very High") || [];
+      
+      // Low should mention basic requirements
+      expect(lowPoints[1]).toContain("basic");
+      
+      // Very High should mention advanced requirements
+      expect(veryHighPoints[1]).toContain("advanced");
+    });
+  });
+
+  describe("Availability-Specific Metrics", () => {
+    it("should return appropriate uptime for all levels", () => {
+      expect(dataProvider.availabilityOptions.None.uptime).toBe("<90%");
+      expect(dataProvider.availabilityOptions.Low.uptime).toBe("95%");
+      expect(dataProvider.availabilityOptions.Moderate.uptime).toBe("99%");
+      expect(dataProvider.availabilityOptions.High.uptime).toBe("99.9%");
+      expect(dataProvider.availabilityOptions["Very High"].uptime).toBe("99.999%");
+    });
+
+    it("should return appropriate RTO for all levels", () => {
+      expect(dataProvider.availabilityOptions.None.rto).toBe("Days");
+      expect(dataProvider.availabilityOptions.Low.rto).toBe("24 hours");
+      expect(dataProvider.availabilityOptions.Moderate.rto).toBe("4 hours");
+      expect(dataProvider.availabilityOptions.High.rto).toBe("1 hour");
+      expect(dataProvider.availabilityOptions["Very High"].rto).toBe("15 minutes");
+    });
+
+    it("should return appropriate RPO for all levels", () => {
+      expect(dataProvider.availabilityOptions.None.rpo).toBe("No backup");
+      expect(dataProvider.availabilityOptions.Low.rpo).toBe("24 hours");
+      expect(dataProvider.availabilityOptions.Moderate.rpo).toBe("4 hours");
+      expect(dataProvider.availabilityOptions.High.rpo).toBe("1 hour");
+      expect(dataProvider.availabilityOptions["Very High"].rpo).toBe("Near-zero");
+    });
+
+    it("should return appropriate MTTR for all levels", () => {
+      expect(dataProvider.availabilityOptions.None.mttr).toBe("Undefined");
+      expect(dataProvider.availabilityOptions.Low.mttr).toBe("12+ hours");
+      expect(dataProvider.availabilityOptions.Moderate.mttr).toBe("4-8 hours");
+      expect(dataProvider.availabilityOptions.High.mttr).toBe("1-2 hours");
+      expect(dataProvider.availabilityOptions["Very High"].mttr).toBe("<1 hour");
+    });
+  });
+
+  describe("Technical Implementation Effort", () => {
+    it("should have development effort defined for all levels", () => {
+      const securityLevels: SecurityLevel[] = [
+        "None",
+        "Low",
+        "Moderate",
+        "High",
+        "Very High",
+      ];
+
+      securityLevels.forEach((level) => {
+        const availabilityOption = dataProvider.availabilityOptions[level];
+        expect(availabilityOption.technicalImplementation?.effort?.development).toBeDefined();
+        
+        const integrityOption = dataProvider.integrityOptions[level];
+        expect(integrityOption.technicalImplementation?.effort?.development).toBeDefined();
+        
+        const confidentialityOption = dataProvider.confidentialityOptions[level];
+        expect(confidentialityOption.technicalImplementation?.effort?.development).toBeDefined();
+      });
+    });
+
+    it("should have maintenance effort defined for all levels", () => {
+      const securityLevels: SecurityLevel[] = [
+        "None",
+        "Low",
+        "Moderate",
+        "High",
+        "Very High",
+      ];
+
+      securityLevels.forEach((level) => {
+        const availabilityOption = dataProvider.availabilityOptions[level];
+        expect(availabilityOption.technicalImplementation?.effort?.maintenance).toBeDefined();
+        
+        const integrityOption = dataProvider.integrityOptions[level];
+        expect(integrityOption.technicalImplementation?.effort?.maintenance).toBeDefined();
+        
+        const confidentialityOption = dataProvider.confidentialityOptions[level];
+        expect(confidentialityOption.technicalImplementation?.effort?.maintenance).toBeDefined();
+      });
+    });
+
+    it("should have expertise requirements defined for all levels", () => {
+      const securityLevels: SecurityLevel[] = [
+        "None",
+        "Low",
+        "Moderate",
+        "High",
+        "Very High",
+      ];
+
+      securityLevels.forEach((level) => {
+        const availabilityOption = dataProvider.availabilityOptions[level];
+        expect(availabilityOption.technicalImplementation?.effort?.expertise).toBeDefined();
+        
+        const integrityOption = dataProvider.integrityOptions[level];
+        expect(integrityOption.technicalImplementation?.effort?.expertise).toBeDefined();
+        
+        const confidentialityOption = dataProvider.confidentialityOptions[level];
+        expect(confidentialityOption.technicalImplementation?.effort?.expertise).toBeDefined();
+      });
+    });
+  });
 });
 
 describe("Test Data Provider", () => {
