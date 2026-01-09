@@ -94,19 +94,19 @@ describe("Cost Calculation Utilities", () => {
     });
 
     it("should handle invalid or undefined inputs gracefully", () => {
-      // @ts-ignore - Testing invalid input
+      // @ts-expect-error - Testing invalid input
       const nullLevelCost = calculateImplementationCost(null);
-      // @ts-ignore - Testing invalid input
+      // @ts-expect-error - Testing invalid input
       const undefinedLevelCost = calculateImplementationCost(undefined);
-      // @ts-ignore - Testing invalid input
+      // @ts-expect-error - Testing invalid input
       const invalidLevelCost = calculateImplementationCost("Invalid");
-      // @ts-ignore - Testing invalid input
+      // @ts-expect-error - Testing invalid input
       const invalidOrgSize = calculateImplementationCost("Moderate", "invalid");
-      // @ts-ignore was not working, use type assertion instead
+      // @ts-expect-error - Testing invalid input
       const invalidIndustry = calculateImplementationCost(
         "Moderate",
         "medium",
-        "invalid" as any // Cast to any to bypass type checking for testing
+        "invalid"
       );
 
       // All should default gracefully

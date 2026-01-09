@@ -25,7 +25,7 @@ describe("Color Utilities", () => {
     });
 
     it("should return None colors for invalid security levels", () => {
-      // @ts-ignore - Testing invalid input
+      // @ts-expect-error - Testing invalid input
       const invalidColors = colorUtils.getSecurityLevelColorPair("Invalid");
       expect(invalidColors).toEqual({ bg: "#f5f5f5", text: "#a0a0a0" });
     });
