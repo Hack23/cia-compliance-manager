@@ -129,21 +129,6 @@ export default defineConfig(({ mode }) => ({
       environment: "jsdom",
       setupFiles: ["./src/tests/vitest-setup.ts", "./src/tests/setup-tests.ts"],
       include: ["src/**/*.test.{ts,tsx}"],
-      /**
-       * Vitest worker pool configuration (Vitest 4 format).
-       *
-       * Uses single fork mode in CI to eliminate memory issues, parallel forks locally.
-       * - pool: "forks" - Uses separate Node.js processes for better test isolation
-       * - singleFork: true in CI, false locally - Eliminates parallel execution in CI to prevent OOM
-       * - maxForks: 2 locally - Balances parallelism with memory usage
-       * - isolate: true - Each test file runs in isolation to prevent memory leaks
-       */
-      pool: "forks",
-      singleFork: process.env.CI === "true", // Force single fork in CI to eliminate memory issues
-      maxForks: process.env.CI === "true" ? 1 : 2, // No parallelism in CI
-      isolate: true,
-      testTimeout: 10000,
-      hookTimeout: 10000,
       coverage: {
         provider: "v8",
         reporter: ["text", "json", "html", "lcov"],
