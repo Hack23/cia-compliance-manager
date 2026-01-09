@@ -2,6 +2,16 @@ import { renderHook } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { useTechnicalDetailsData } from "./useTechnicalDetailsData";
 
+// Type guard for component details with description
+interface ComponentDetailsWithDescription {
+  description: string;
+  [key: string]: unknown;
+}
+
+function hasDescription(obj: unknown): obj is ComponentDetailsWithDescription {
+  return typeof obj === 'object' && obj !== null && 'description' in obj && typeof (obj as ComponentDetailsWithDescription).description === 'string';
+}
+
 describe("useTechnicalDetailsData", () => {
   const mockCIAContentService = {
     getComponentDetails: vi.fn((component: string, level: string) => ({
@@ -18,7 +28,10 @@ describe("useTechnicalDetailsData", () => {
     );
 
     expect(result.current.confidentialityDetails).toBeDefined();
-    expect((result.current.confidentialityDetails as any).description).toContain("confidentiality");
+    const details = result.current.confidentialityDetails;
+    if (hasDescription(details)) {
+      expect(details.description).toContain("confidentiality");
+    }
   });
 
   it("should use fallback for confidentiality details when service is null", () => {
@@ -27,7 +40,10 @@ describe("useTechnicalDetailsData", () => {
     );
 
     expect(result.current.confidentialityDetails).toBeDefined();
-    expect((result.current.confidentialityDetails as any).description).toBeDefined();
+    const details = result.current.confidentialityDetails;
+    if (hasDescription(details)) {
+      expect(details.description).toBeDefined();
+    }
   });
 
   it("should handle errors when getting confidentiality details", () => {
@@ -62,7 +78,10 @@ describe("useTechnicalDetailsData", () => {
     );
 
     expect(result.current.integrityDetails).toBeDefined();
-    expect((result.current.integrityDetails as any).description).toContain("integrity");
+    const details = result.current.integrityDetails;
+    if (hasDescription(details)) {
+      expect(details.description).toContain("integrity");
+    }
   });
 
   it("should use fallback for integrity details when service is null", () => {
@@ -71,7 +90,10 @@ describe("useTechnicalDetailsData", () => {
     );
 
     expect(result.current.integrityDetails).toBeDefined();
-    expect((result.current.integrityDetails as any).description).toBeDefined();
+    const details = result.current.integrityDetails;
+    if (hasDescription(details)) {
+      expect(details.description).toBeDefined();
+    }
   });
 
   it("should handle errors when getting integrity details", () => {
@@ -106,7 +128,10 @@ describe("useTechnicalDetailsData", () => {
     );
 
     expect(result.current.availabilityDetails).toBeDefined();
-    expect((result.current.availabilityDetails as any).description).toContain("availability");
+    const details = result.current.availabilityDetails;
+    if (hasDescription(details)) {
+      expect(details.description).toContain("availability");
+    }
   });
 
   it("should use fallback for availability details when service is null", () => {
@@ -115,7 +140,10 @@ describe("useTechnicalDetailsData", () => {
     );
 
     expect(result.current.availabilityDetails).toBeDefined();
-    expect((result.current.availabilityDetails as any).description).toBeDefined();
+    const details = result.current.availabilityDetails;
+    if (hasDescription(details)) {
+      expect(details.description).toBeDefined();
+    }
   });
 
   it("should handle errors when getting availability details", () => {

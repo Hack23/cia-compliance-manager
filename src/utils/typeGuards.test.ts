@@ -693,7 +693,7 @@ describe("Type Guards", () => {
     it("returns true for arrays", () => {
       expect(isArray([])).toBe(true);
       expect(isArray([1, 2, 3])).toBe(true);
-      expect(isArray([])).toBe(true);
+      expect(isArray(Array.from([1, 2, 3]))).toBe(true);
     });
 
     it("returns false for non-arrays", () => {

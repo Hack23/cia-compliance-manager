@@ -18,6 +18,7 @@ import {
   getShadow,
   getSpacing,
   getTypography,
+  type SemanticColorType,
 } from './designTokens';
 
 describe('Design Tokens', () => {
@@ -409,8 +410,7 @@ describe('Design Tokens', () => {
       expect(badgeClasses).toContain('bg-neutral');
     });
 
-    type BadgeVariant = 'primary' | 'success' | 'warning' | 'error' | 'info' | 'neutral';
-    const badgeVariantCases: Array<[BadgeVariant, string, string]> = [
+    const badgeVariantCases: Array<[SemanticColorType, string, string]> = [
       ['primary', 'bg-primary', 'text-white'],
       ['success', 'bg-success', 'text-white'],
       ['warning', 'bg-warning', 'text-gray-900'],

@@ -1,5 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import type { SecurityLevel } from "../types/cia";
 import { useSecuritySummaryData } from "./useSecuritySummaryData";
 
 describe("useSecuritySummaryData", () => {
@@ -98,7 +99,7 @@ describe("useSecuritySummaryData", () => {
 
     testCases.forEach(([a, i, c, expected]) => {
       const { result } = renderHook(() =>
-        useSecuritySummaryData(a as any, i as any, c as any, null, mockComplianceService)
+        useSecuritySummaryData(a as unknown as SecurityLevel, i as unknown as SecurityLevel, c as unknown as SecurityLevel, null, mockComplianceService)
       );
       expect(result.current.securityClassification).toBe(expected);
     });
@@ -131,7 +132,7 @@ describe("useSecuritySummaryData", () => {
 
     testCases.forEach(([level, expected]) => {
       const { result } = renderHook(() =>
-        useSecuritySummaryData("High", "High", level as any, null, mockComplianceService)
+        useSecuritySummaryData("High", "High", level as unknown as SecurityLevel, null, mockComplianceService)
       );
       expect(result.current.dataClassification).toBe(expected);
     });

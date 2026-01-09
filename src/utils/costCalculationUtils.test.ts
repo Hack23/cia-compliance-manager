@@ -11,6 +11,8 @@ import {
   calculateSecurityROI,
   calculateTotalSecurityCost,
   getRecommendedBudgetAllocation,
+  type OrganizationSize,
+  type Industry as IndustryType,
 } from "./costCalculationUtils";
 
 // Add missing Industry type import or definition
@@ -99,11 +101,11 @@ describe("Cost Calculation Utilities", () => {
       // @ts-expect-error - Testing invalid input
       const undefinedLevelCost = calculateImplementationCost(undefined);
       const invalidLevelCost = calculateImplementationCost("Invalid");
-      const invalidOrgSize = calculateImplementationCost("Moderate", "invalid" as any);
+      const invalidOrgSize = calculateImplementationCost("Moderate", "invalid" as unknown as OrganizationSize);
       const invalidIndustry = calculateImplementationCost(
         "Moderate",
         "medium",
-        "invalid" as any
+        "invalid" as unknown as IndustryType
       );
 
       // All should default gracefully
