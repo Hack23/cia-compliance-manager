@@ -11,13 +11,13 @@
 
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/Owner-Security_Architect-0A66C2?style=for-the-badge" alt="Owner"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Version-1.0-555?style=for-the-badge" alt="Version"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Updated-2025--11--22-success?style=for-the-badge" alt="Last Updated"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Version-1.1-555?style=for-the-badge" alt="Version"/></a>
+  <a href="#"><img src="https://img.shields.io/badge/Updated-2026--01--11-success?style=for-the-badge" alt="Last Updated"/></a>
   <a href="#"><img src="https://img.shields.io/badge/Review-Quarterly-orange?style=for-the-badge" alt="Review Cycle"/></a>
 </p>
 
-**📋 Document Owner:** Security Architect | **📄 Version:** 1.0 | **📅 Last Updated:** 2025-11-22 (UTC)  
-**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2026-02-22
+**📋 Document Owner:** Security Architect | **📄 Version:** 1.1 | **📅 Last Updated:** 2026-01-11 (UTC)  
+**🔄 Review Cycle:** Quarterly | **⏰ Next Review:** 2026-04-11
 
 ---
 
@@ -78,15 +78,60 @@ Real-time status of all CI/CD workflows:
 
 The project uses GitHub Actions for automation with the following workflows:
 
-1. **🚀 Build, Attest and Release** (`.github/workflows/release.yml`) - Builds, attests, and releases new versions with comprehensive security scanning
-2. **🧪 Test and Report** (`.github/workflows/test-and-report.yml`) - Runs unit and E2E tests with coverage reporting
-3. **🔍 CodeQL Analysis** (`.github/workflows/codeql.yml`) - SAST scanning for code vulnerabilities
-4. **📦 Dependency Review** (`.github/workflows/dependency-review.yml`) - SCA scanning of dependency changes for vulnerabilities
-5. **⭐ Scorecard Analysis** (`.github/workflows/scorecards.yml`) - OSSF security scorecard for supply chain security
-6. **🏷️ PR Labeler** (`.github/workflows/labeler.yml`) - Automated labeling of pull requests
-7. **🔆 Lighthouse Performance** (`.github/workflows/lighthouse-performance.yml`) - Performance, accessibility, and best practices auditing
-8. **🔒 ZAP Scan** (`.github/workflows/zap-scan.yml`) - DAST scanning of deployed application
-9. **🤖 Copilot Setup Steps** (`.github/workflows/copilot-setup-steps.yml`) - GitHub Copilot workspace environment setup and validation
+### Core CI/CD Workflows
+
+1. **🚀 Build, Attest and Release** (`.github/workflows/release.yml`)
+   - **Triggers:** Manual workflow dispatch, version tags (v*)
+   - **Jobs:** 3 jobs - prepare, build, release
+   - **Purpose:** Builds, attests, and releases new versions with comprehensive security scanning
+   - **Key Features:** SLSA Level 3 attestation, SBOM generation, automated documentation deployment
+
+2. **🧪 Test and Report** (`.github/workflows/test-and-report.yml`)
+   - **Triggers:** Push to main, pull requests to main
+   - **Jobs:** 5 jobs - prepare, build-validation, unit-tests, e2e-tests, report
+   - **Purpose:** Comprehensive testing suite with coverage reporting
+   - **Key Features:** Unit tests, E2E tests with Cypress, license checking, build validation
+
+### Security Scanning Workflows
+
+3. **🔍 CodeQL Analysis** (`.github/workflows/codeql.yml`)
+   - **Triggers:** Push to main, pull requests to main, weekly schedule (Mondays)
+   - **Purpose:** Static Application Security Testing (SAST) for code vulnerabilities
+   - **Key Features:** JavaScript/TypeScript analysis, security vulnerability detection
+
+4. **📦 Dependency Review** (`.github/workflows/dependency-review.yml`)
+   - **Triggers:** Pull requests
+   - **Purpose:** Software Composition Analysis (SCA) for dependency vulnerabilities
+   - **Key Features:** PR comments with vulnerability details, blocks vulnerable dependencies
+
+5. **⭐ Scorecard Analysis** (`.github/workflows/scorecards.yml`)
+   - **Triggers:** Branch protection rule changes, weekly schedule (Tuesdays), push to main
+   - **Purpose:** OSSF security scorecard for supply chain security assessment
+   - **Key Features:** Branch protection checks, security best practices evaluation
+
+### Quality & Performance Workflows
+
+6. **🔆 Lighthouse Performance** (`.github/workflows/lighthouse-performance.yml`)
+   - **Triggers:** Manual workflow dispatch
+   - **Purpose:** Performance, accessibility, SEO, and best practices auditing
+   - **Key Features:** Performance budgets, artifacts upload, temporary public reports
+
+7. **🔒 ZAP Scan** (`.github/workflows/zap-scan.yml`)
+   - **Triggers:** Manual workflow dispatch
+   - **Purpose:** Dynamic Application Security Testing (DAST) for deployed application
+   - **Key Features:** OWASP ZAP full scan, runtime vulnerability detection
+
+### Automation Workflows
+
+8. **🏷️ PR Labeler** (`.github/workflows/labeler.yml`)
+   - **Triggers:** Pull request events (opened, synchronize, reopened, edited)
+   - **Purpose:** Automated labeling of pull requests based on file changes
+   - **Key Features:** Consistent PR categorization, improved workflow organization
+
+9. **🤖 Copilot Setup Steps** (`.github/workflows/copilot-setup-steps.yml`)
+   - **Triggers:** Manual dispatch, workflow file changes, pull requests affecting workflow
+   - **Purpose:** GitHub Copilot workspace environment setup and validation
+   - **Key Features:** Node.js 24 setup, dependency caching, environment validation
 
 ### 📊 Security Gates & Quality Thresholds
 
@@ -172,42 +217,126 @@ The project employs the following security hardening techniques in its workflows
 
 ## 🧪 Test and Report Workflow
 
-The test-and-report workflow runs comprehensive testing and generates quality metrics for pull requests and pushes to the main branch:
+The test-and-report workflow runs comprehensive testing and generates quality metrics for pull requests and pushes to the main branch. The workflow consists of 5 distinct jobs that run in a coordinated pipeline:
+
+### Workflow Jobs
+
+**1. Prepare Job**
+- Sets up the base environment and installs dependencies
+- Caches apt packages, npm dependencies, and Cypress binary
+- Verifies Cypress installation
+- Prepares the environment for parallel test execution
+
+**2. Build Validation Job** (depends on prepare)
+- Validates the application can build successfully
+- Runs license compliance checks
+- Creates and uploads build artifacts
+- Blocks pipeline if build fails or licenses are non-compliant
+
+**3. Unit Tests Job** (depends on prepare, build-validation)
+- Executes Vitest unit tests with coverage measurement
+- Runs in xvfb (headless display) for component tests
+- Generates coverage reports (lcov, html, json)
+- Uploads coverage artifacts for analysis
+
+**4. E2E Tests Job** (depends on prepare, build-validation)
+- Runs Cypress end-to-end tests in headless mode
+- Executes in xvfb with 1280x720x24 screen resolution
+- Captures videos and screenshots of test execution
+- Uploads Cypress results, videos, and screenshots
+
+**5. Report Job** (depends on unit-tests, e2e-tests, runs always)
+- Aggregates results from all test jobs
+- Downloads all test artifacts
+- Generates combined test reports
+- Always runs even if tests fail to capture failure data
 
 ```mermaid
 flowchart TD
-    CodeChange[Code Change] --> UnitTests[Run Unit Tests]
-    UnitTests --> IntegrationTests[Run Integration Tests]
-    IntegrationTests --> UITests[Run UI Tests]
-    UITests --> CoverageMeasurement[Measure Code Coverage]
-    CoverageMeasurement --> Adequate{Coverage<br>Adequate?}
-    Adequate -->|Yes| MergeCode[Merge Code]
-    Adequate -->|No| AddTests[Add More Tests]
-    AddTests --> UnitTests
+    CodeChange[Code Change] --> PrepareJob[Prepare Job]
+    PrepareJob --> BuildValidation[Build Validation]
+    BuildValidation --> Adequate{Build & License<br>Checks Pass?}
+    Adequate -->|Yes| ParallelTests[Run Tests in Parallel]
+    Adequate -->|No| FixBuild[Fix Build/License Issues]
+    FixBuild --> CodeChange
+    
+    ParallelTests --> UnitTests[Unit Tests]
+    ParallelTests --> E2ETests[E2E Tests]
+    
+    UnitTests --> CoverageMeasurement[Measure Code Coverage]
+    E2ETests --> UIValidation[UI Validation]
+    
+    CoverageMeasurement --> Report[Generate Reports]
+    UIValidation --> Report
+    
+    Report --> CoverageCheck{Coverage<br>Adequate?}
+    CoverageCheck -->|Yes| MergeCode[Ready to Merge]
+    CoverageCheck -->|No| AddTests[Add More Tests]
+    AddTests --> CodeChange
     
     %% Apply styles using class definitions
     classDef start fill:#3498db,stroke:#2980b9,stroke-width:2px,color:white
     classDef process fill:#34495e,stroke:#2c3e50,stroke-width:2px,color:white
     classDef decision fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:white
     classDef endProcess fill:#16a085,stroke:#1abc9c,stroke-width:2px,color:white
+    classDef parallel fill:#e67e22,stroke:#d35400,stroke-width:2px,color:white
     
     class CodeChange start
-    class UnitTests,IntegrationTests,UITests,CoverageMeasurement,AddTests process
-    class Adequate decision
+    class PrepareJob,BuildValidation,UnitTests,E2ETests,CoverageMeasurement,UIValidation,Report,AddTests,FixBuild process
+    class Adequate,CoverageCheck decision
     class MergeCode endProcess
+    class ParallelTests parallel
 ```
 
 ### Test Workflow Implementation
 
-The test-and-report workflow is implemented as a GitHub Action and includes the following key steps:
+The test-and-report workflow is implemented with comprehensive job coordination:
 
-1. **Repository Checkout**: Securely checks out code with proper permissions
-2. **Node.js Setup**: Sets up Node.js environment with caching for faster builds
-3. **Dependency Installation**: Installs dependencies with audit checks
-4. **Linting**: Runs code quality checks with ESLint
-5. **Unit Tests**: Runs Vitest unit tests with coverage reporting
-6. **E2E Tests**: Runs end-to-end tests with Cypress
-7. **Report Generation**: Creates and uploads coverage and test reports
+**Prepare Job Steps:**
+1. **Harden Runner**: StepSecurity runner hardening with egress policy audit
+2. **Repository Checkout**: Securely checks out code with proper permissions
+3. **Node.js Setup**: Sets up Node.js 24 environment with npm caching
+4. **Apt Package Caching**: Caches system packages for faster builds
+5. **Display Setup**: Configures xvfb and GUI dependencies for headless testing
+6. **Dependency Caching**: Multi-level caching (npm, Cypress binary)
+7. **Dependency Installation**: Installs npm packages with `npm install`
+8. **Cypress Verification**: Validates Cypress binary installation
+
+**Build Validation Job Steps:**
+1. **Harden Runner**: Security hardening of the build environment
+2. **Environment Setup**: Node.js 24 with dependency caching
+3. **Dependency Installation**: Uses `npm ci` for clean install
+4. **Application Build**: Executes production build with `npm run build`
+5. **License Verification**: Runs `npm run test:licenses` to ensure compliance
+6. **Artifact Upload**: Uploads build output for downstream jobs
+
+**Unit Tests Job Steps:**
+1. **Environment Preparation**: Setup with caching and dependencies
+2. **Unit Test Execution**: Runs `npm run test:ci` with xvfb for headless testing
+3. **Coverage Generation**: Creates lcov, html, and json coverage reports
+4. **Artifact Upload**: Uploads coverage reports to build/coverage directory
+
+**E2E Tests Job Steps:**
+1. **Environment Setup**: Node.js, dependencies, and Cypress binary caching
+2. **Cypress Test Execution**: Runs `npm run test:e2e` in xvfb (1280x720x24)
+3. **Video Recording**: Captures test execution videos (CYPRESS_VIDEO=true)
+4. **Screenshot Capture**: Takes screenshots on test failures
+5. **Result Upload**: Uploads videos, screenshots, and test results
+
+**Report Job Steps:**
+1. **Artifact Collection**: Downloads all artifacts from previous jobs
+2. **Report Aggregation**: Combines coverage and test results
+3. **Unified Upload**: Creates comprehensive test-reports artifact
+
+### Pipeline Execution Flow
+
+The jobs execute in the following dependency order:
+```
+prepare → build-validation → unit-tests ↘
+                          ↘ e2e-tests   → report
+```
+
+Both unit-tests and e2e-tests run in parallel after build-validation completes, maximizing pipeline efficiency.
 
 ### Test Report and Metrics Generation
 
@@ -342,6 +471,12 @@ flowchart TB
         PR[Pull Request] --> TestReport[Test and Report]
         PR --> DependencyReview[Dependency Review]
         PR --> Labeler[PR Labeler]
+        TestReport --> PrepareJob[Prepare Job]
+        PrepareJob --> BuildValidation[Build Validation]
+        BuildValidation --> UnitTests[Unit Tests]
+        BuildValidation --> E2ETests[E2E Tests]
+        UnitTests --> ReportJob[Report Job]
+        E2ETests --> ReportJob
         TestReport --> LicenseCheck[License Check]
         TestReport --> CodeQL[CodeQL Analysis]
         CodeQL --> Scorecard[Scorecard Analysis]
@@ -349,10 +484,12 @@ flowchart TB
 
     subgraph "Continuous Deployment"
         direction TB
-        Release[Release Trigger] --> BuildTest[Prepare & Test]
-        BuildTest --> LicenseCheck2[License Check]
-        LicenseCheck2 --> Build[Build Package]
-        Build --> GenerateSBOM[Generate SBOM]
+        Release[Release Trigger] --> PrepareRelease[Prepare Release]
+        PrepareRelease --> LicenseCheck2[License Check]
+        PrepareRelease --> TestsRelease[Run Tests]
+        LicenseCheck2 --> BuildRelease[Build Package]
+        TestsRelease --> BuildRelease
+        BuildRelease --> GenerateSBOM[Generate SBOM]
         GenerateSBOM --> Attestations[Create Attestations]
         Attestations --> CreateRelease[Create GitHub Release]
         CreateRelease --> DeployGHPages[Deploy to GitHub Pages]
@@ -373,9 +510,9 @@ flowchart TB
     classDef security fill:#ffccbc,stroke:#333,stroke-width:1.5px,color:black
     classDef audit fill:#ffecb3,stroke:#333,stroke-width:1.5px,color:black
 
-    class PR,TestReport,DependencyReview,Labeler integration
+    class PR,TestReport,DependencyReview,Labeler,PrepareJob,BuildValidation,UnitTests,E2ETests,ReportJob integration
     class CodeQL,Scorecard,LicenseCheck,LicenseCheck2 security
-    class Release,BuildTest,Build,CreateRelease,DeployGHPages,GenerateSBOM,Attestations deployment
+    class Release,PrepareRelease,BuildRelease,CreateRelease,DeployGHPages,GenerateSBOM,Attestations,TestsRelease deployment
     class Lighthouse,ZAPScan audit
     class main process
 ```
@@ -411,53 +548,165 @@ License checks are run both during PR verification and before releases to ensure
 
 ## 🚀 Release Workflow
 
-The release workflow handles the build, attestation, and deployment process for new versions, triggered by version tags or manual workflow dispatch:
+The release workflow handles the build, attestation, and deployment process for new versions. It consists of 3 coordinated jobs that ensure comprehensive testing, security attestation, and reliable deployment.
+
+### Release Workflow Structure
+
+**Triggers:**
+- **Manual Workflow Dispatch**: Allows manual triggering with version input (vX.Y.Z format) and prerelease flag
+- **Tag Push**: Automatically triggered when version tags (v*) are pushed to the repository
+
+**Job Architecture:**
+```
+prepare → build → release
+```
+
+**1. Prepare Release Job**
+
+This job handles environment preparation, testing, and documentation generation:
+
+**Key Steps:**
+1. **Environment Setup**: Ubuntu latest with Node.js 24, dependency caching
+2. **Version Detection**: Extracts version from tag or workflow input
+3. **Display Configuration**: Sets up xvfb for headless Cypress testing
+4. **Dependency Installation**: Full `npm ci` with audit
+5. **Version Bumping**: Updates package.json version for workflow dispatch releases
+6. **License Verification**: Ensures all dependencies have acceptable licenses (`npm run test:licenses`)
+7. **Cypress Testing**: Full E2E test suite in xvfb environment
+8. **Coverage Generation**: Runs `npm run coverage` for test coverage
+9. **Documentation Bundle**: Generates complete documentation with `npm run docs:bundle`
+10. **E2E Report Generation**: Creates merged and HTML E2E test reports
+11. **Test Results Copy**: Moves coverage, cypress, and test-results to docs directory
+12. **Documentation Deployment**: Deploys documentation to GitHub Pages (main branch)
+
+**Outputs:**
+- `version`: Extracted or provided version string
+- `is_prerelease`: Boolean flag for prerelease status
+
+**2. Build Release Package Job** (depends on prepare)
+
+This job creates the production build with full SLSA Level 3 attestation:
+
+**Key Steps:**
+1. **Repository Checkout**: Checks out the appropriate ref (tag or branch)
+2. **Environment Setup**: Node.js 24 with comprehensive caching
+3. **Dependency Installation**: Clean install with `npm ci`
+4. **Production Build**: Creates optimized build with version embedding
+5. **Artifact Creation**: Zips build directory for distribution
+6. **SBOM Generation**: Creates SPDX JSON format Software Bill of Materials
+7. **Build Attestation**: Generates SLSA build provenance attestation
+8. **SBOM Attestation**: Creates attestation for the SBOM document
+
+**Security Features:**
+- OIDC authentication for attestation signing
+- Cryptographic proof of build provenance
+- Complete dependency inventory
+- Immutable artifact records
+
+**Artifacts:**
+- `build-artifacts`: Application zip and build directory
+- `security-artifacts`: SBOM, build attestation, SBOM attestation
+
+**3. Create Release Job** (depends on prepare, build)
+
+This job publishes the release and deploys the application:
+
+**Key Steps:**
+1. **Checkout Main Branch**: Always uses main for deployment consistency
+2. **Artifact Download**: Retrieves build and security artifacts
+3. **Release Notes Drafting**: Uses release-drafter for automated release notes
+4. **GitHub Release Creation**: Creates immutable release with all artifacts
+5. **Application Cleanup**: Removes old application files (preserves documentation)
+6. **Application Deployment**: Extracts new version to docs directory
+7. **GitHub Pages Deployment**: Final deployment of application and documentation
+
+**Release Artifacts:**
+- Application zip package
+- SPDX SBOM (JSON)
+- Build attestation (intoto.jsonl)
+- SBOM attestation (intoto.jsonl)
+
+**Deployment Strategy:**
+- Clean deployment of application files
+- Preservation of documentation
+- Version tracking with timestamp markers
+- Zero-downtime deployment via GitHub Pages atomic updates
 
 ```mermaid
 flowchart TD
-    Start[Release Trigger] --> Prepare[Prepare Release]
-    Prepare --> TestBuild[Test & Build]
-    TestBuild --> LicenseCheck[Check Licenses]
-    LicenseCheck --> Build[Build Package]
-    Build --> SBOM[Generate SBOM]
-    SBOM --> Attestation[Generate Attestations]
-    Attestation --> CreateRelease[Create GitHub Release]
-    CreateRelease --> Deploy[Deploy to GitHub Pages]
-    Deploy --> LighthouseAudit[Lighthouse Audit]
-    Deploy --> ZAPScan[ZAP Security Scan]
-    LighthouseAudit --> End[End]
-    ZAPScan --> End
+    Start[Release Trigger] --> Prepare[Prepare Release Job]
+    Prepare --> PrepareTests[Run E2E Tests]
+    PrepareTests --> PrepareDocs[Generate Documentation]
+    PrepareDocs --> PrepareDeployDocs[Deploy Documentation]
+    
+    Prepare --> Build[Build Release Package Job]
+    Build --> BuildApp[Build Application]
+    BuildApp --> BuildSBOM[Generate SBOM]
+    BuildSBOM --> BuildAttest[Create Attestations]
+    
+    PrepareDeployDocs --> Release[Create Release Job]
+    BuildAttest --> Release
+    Release --> CreateGHRelease[Create GitHub Release]
+    CreateGHRelease --> DeployApp[Deploy Application]
+    DeployApp --> End[Deployment Complete]
+    
+    End -.-> PostDeploy[Post-Deployment]
+    PostDeploy --> Lighthouse[Lighthouse Audit]
+    PostDeploy --> ZAPScan[ZAP Security Scan]
 
     %% Enhanced styling with better visual hierarchy
     classDef startNode fill:#bbdefb,stroke:#333,stroke-width:2px,color:black
-    classDef processNode fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
+    classDef prepareNode fill:#a0c8e0,stroke:#333,stroke-width:1.5px,color:black
+    classDef buildNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
     classDef securityNode fill:#d1c4e9,stroke:#333,stroke-width:1.5px,color:black
-    classDef deployNode fill:#c8e6c9,stroke:#333,stroke-width:1.5px,color:black
-    classDef endNode fill:#86b5d9,stroke:#333,stroke-width:2px,color:black
-    classDef checkNode fill:#ffccbc,stroke:#333,stroke-width:1.5px,color:black
-    classDef auditNode fill:#ffecb3,stroke:#333,stroke-width:1.5px,color:black
+    classDef deployNode fill:#86b5d9,stroke:#333,stroke-width:1.5px,color:black
+    classDef endNode fill:#ffecb3,stroke:#333,stroke-width:2px,color:black
+    classDef auditNode fill:#ffccbc,stroke:#333,stroke-width:1.5px,color:black
 
     class Start,End startNode
-    class Prepare,TestBuild,Build processNode
-    class SBOM,Attestation,ZAPScan securityNode
-    class CreateRelease,Deploy deployNode
-    class LicenseCheck checkNode
-    class LighthouseAudit auditNode
+    class Prepare,PrepareTests,PrepareDocs,PrepareDeployDocs prepareNode
+    class Build,BuildApp buildNode
+    class BuildSBOM,BuildAttest securityNode
+    class Release,CreateGHRelease,DeployApp deployNode
+    class PostDeploy endNode
+    class Lighthouse,ZAPScan auditNode
 ```
 
-### Key Release Steps
+### Release Workflow Permissions
 
-The release workflow includes the following key steps:
+The release workflow uses granular permissions per job:
 
-1. **Setup Environment**: Configures Node.js with dependency caching
-2. **Install Dependencies**: Uses `npm ci` with audit checks
-3. **License Verification**: Ensures all dependencies have acceptable licenses
-4. **Build Package**: Creates optimized production build
-5. **SBOM Generation**: Creates Software Bill of Materials
-6. **Create Attestations**: Generates and signs build provenance and dependency attestations
-7. **Release Creation**: Creates GitHub release with artifacts
-8. **GitHub Pages Deployment**: Deploys to GitHub Pages
-9. **Post-Deployment Tests**: Runs Lighthouse and ZAP security scans
+**Prepare Job:**
+- `contents: write` - Required for git auto-commit and tagging
+
+**Build Job:**
+- `contents: read` - Repository access
+- `id-token: write` - Required for OIDC attestation signing
+- `attestations: write` - Required for SBOM and build attestations
+
+**Release Job:**
+- `contents: write` - Required to create GitHub releases
+- `id-token: write` - Required for OIDC authentication
+
+### SLSA Level 3 Compliance
+
+The release workflow achieves SLSA Level 3 through:
+
+1. **Build Provenance**: Cryptographically signed build attestations
+2. **Non-Falsifiable**: OIDC tokens prevent impersonation
+3. **Complete SBOM**: Full dependency inventory with versions and licenses
+4. **Isolated Build**: Ephemeral environments prevent tampering
+5. **Two-Person Review**: Branch protection enforces code review
+6. **Retained Indefinitely**: Attestations stored with releases permanently
+
+### Security Hardening Features
+
+All jobs implement StepSecurity Harden Runner with:
+- Egress policy auditing
+- Network traffic monitoring
+- SHA-pinned action versions for immutability
+- Minimal permission grants per job
+- Comprehensive artifact validation
 
 ## 🔍 Security and Quality Scanning Workflows
 
@@ -839,6 +1088,6 @@ For details on the future architecture direction, see [FUTURE_ARCHITECTURE.md](F
 **✅ Approved by:** Security Architect, Hack23 AB  
 **📤 Distribution:** Public  
 **🏷️ Classification:** [![Confidentiality: Public](https://img.shields.io/badge/C-Public-green?style=flat-square)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md#confidentiality-levels)  
-**📅 Effective Date:** 2025-11-14  
-**⏰ Next Review:** 2026-02-14  
+**📅 Effective Date:** 2026-01-11  
+**⏰ Next Review:** 2026-04-11  
 **🎯 Framework Compliance:** [![ISO 27001](https://img.shields.io/badge/ISO_27001-2022_Aligned-blue?style=flat-square&logo=iso&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![NIST CSF 2.0](https://img.shields.io/badge/NIST_CSF-2.0_Aligned-green?style=flat-square&logo=nist&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md) [![CIS Controls](https://img.shields.io/badge/CIS_Controls-v8.1_Aligned-orange?style=flat-square&logo=cisecurity&logoColor=white)](https://github.com/Hack23/ISMS-PUBLIC/blob/main/CLASSIFICATION.md)
