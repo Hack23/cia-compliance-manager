@@ -11,3 +11,4 @@ paths-ignore:
   - '**/*.test.tsx'
   - '**/*.spec.ts'
   - '**/*.spec.tsx'
+  - 'docs/**'
