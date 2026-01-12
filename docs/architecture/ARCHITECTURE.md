@@ -476,9 +476,9 @@ C4Component
 
 ### **Test Coverage Metrics (v1.0)**
 
-[![Coverage Report](https://img.shields.io/badge/Coverage_Report-Live_Results-success?style=flat-square&logo=vitest&logoColor=white)](https://hack23.github.io/cia-compliance-manager/coverage/index.html)
+[![Coverage Report](https://img.shields.io/badge/Coverage_Report-Live_Results-success?style=flat-square&logo=vitest&logoColor=white)](https://ciacompliancemanager.com/coverage/index.html)
 
-Current coverage from latest build ([view full report](https://hack23.github.io/cia-compliance-manager/coverage/index.html)):
+Current coverage from latest build ([view full report](https://ciacompliancemanager.com/coverage/index.html)):
 
 | Coverage Type | Current | Target | Status |
 |--------------|---------|--------|---------|

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://hack23.github.io/cia-compliance-manager/icon-192.png" alt="CIA Compliance Manager Logo" width="192" height="192">
+  <img src="https://ciacompliancemanager.com/icon-192.png" alt="CIA Compliance Manager Logo" width="192" height="192">
 </p>
 
 <h1 align="center">⚡ CIA Compliance Manager — Performance Testing & Benchmarks</h1>
@@ -166,7 +166,7 @@ The performance testing framework ensures the application meets performance requ
 ```bash
 # Via GitHub Actions workflow dispatch
 # Navigate to: Actions → "Lighthouse Performance Test" → Run workflow
-# Default URL: https://hack23.github.io/cia-compliance-manager/
+# Default URL: https://ciacompliancemanager.com/
 ```
 
 **Local Testing:**
@@ -175,10 +175,10 @@ The performance testing framework ensures the application meets performance requ
 npm install -g lighthouse
 
 # Run Lighthouse audit
-lighthouse https://hack23.github.io/cia-compliance-manager/ --view
+lighthouse https://ciacompliancemanager.com/ --view
 
 # Run with budget validation
-lighthouse https://hack23.github.io/cia-compliance-manager/ \
+lighthouse https://ciacompliancemanager.com/ \
   --budget-path=./budget.json \
   --output=html \
   --output-path=./lighthouse-report.html
@@ -457,7 +457,7 @@ npm run build && npm run test:e2e
 
 - 📊 [Lighthouse Performance Workflow](https://github.com/Hack23/cia-compliance-manager/actions/workflows/lighthouse-performance.yml) - Run and view Lighthouse reports
 - 📦 [Performance Budget](https://github.com/Hack23/cia-compliance-manager/blob/main/budget.json) - Resource size and timing budgets
-- 🚀 [GitHub Pages Deployment](https://hack23.github.io/cia-compliance-manager/) - Live application for testing
+- 🚀 [GitHub Pages Deployment](https://ciacompliancemanager.com/) - Live application for testing
 - 📈 [GitHub Actions Dashboard](https://github.com/Hack23/cia-compliance-manager/actions) - CI/CD performance metrics
 
 ### Local Performance Reports

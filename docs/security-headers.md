@@ -264,7 +264,7 @@ npm run test:e2e
 
 **Test with curl:**
 ```bash
-curl -I https://hack23.github.io/cia-compliance-manager/
+curl -I https://ciacompliancemanager.com/
 ```
 
 **Online Security Scanners:**

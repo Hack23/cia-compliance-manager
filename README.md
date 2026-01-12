@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://hack23.github.io/cia-compliance-manager/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+  <img src="https://ciacompliancemanager.com/icon-192.png" alt="Hack23 Logo" width="192" height="192">
 </p>
 
 <h1 align="center">📋 Hack23 AB — CIA Compliance Manager</h1>
@@ -25,7 +25,7 @@ This compliance tool demonstrates Hack23 AB's commitment to **security by design
 
 ## Try It Now!
 
-Experience the CIA Compliance Manager in action by testing the application here: [CIA Compliance Manager Application](https://hack23.github.io/cia-compliance-manager/). See how it can help you enhance your organization's security posture today!
+Experience the CIA Compliance Manager in action by testing the application here: [CIA Compliance Manager Application](https://ciacompliancemanager.com/). See how it can help you enhance your organization's security posture today!
 
 ---
 
@@ -258,10 +258,10 @@ The CIA Compliance Manager follows rigorous testing standards as defined in our 
 
 **Current Metrics** (Per [Secure Development Policy §4.1](https://github.com/Hack23/ISMS-PUBLIC/blob/main/Secure_Development_Policy.md#-unit-test-coverage--quality)):
 
-[![Coverage](https://img.shields.io/badge/Coverage-Live%20Results-success?style=flat-square&logo=vitest&logoColor=white)](https://hack23.github.io/cia-compliance-manager/docs/coverage/)
-[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-Live%20Results-success?style=flat-square&logo=vitest&logoColor=white)](https://hack23.github.io/cia-compliance-manager/docs/test-results/)
+[![Coverage](https://img.shields.io/badge/Coverage-Live%20Results-success?style=flat-square&logo=vitest&logoColor=white)](https://ciacompliancemanager.com/docs/coverage/)
+[![Unit Tests](https://img.shields.io/badge/Unit%20Tests-Live%20Results-success?style=flat-square&logo=vitest&logoColor=white)](https://ciacompliancemanager.com/docs/test-results/)
 [![Test Plan](https://img.shields.io/badge/Test%20Plan-Documentation-blue?style=flat-square&logo=markdown&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md)
-[![E2E Tests](https://img.shields.io/badge/E2E%20Tests-Cypress-success?style=flat-square&logo=cypress&logoColor=white)](https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/)
+[![E2E Tests](https://img.shields.io/badge/E2E%20Tests-Cypress-success?style=flat-square&logo=cypress&logoColor=white)](https://ciacompliancemanager.com/cypress/mochawesome/)
 [![E2E Plan](https://img.shields.io/badge/E2E%20Plan-Documentation-blue?style=flat-square&logo=markdown&logoColor=white)](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md)
 [![Code Quality](https://sonarcloud.io/api/project_badges/measure?project=Hack23_cia-compliance-manager&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Hack23_cia-compliance-manager)
 
@@ -272,7 +272,7 @@ The CIA Compliance Manager follows rigorous testing standards as defined in our 
 
 **🎯 ISMS Compliance Status**: All coverage thresholds now **EXCEED** requirements for v1.1.0 release.
 
-*Coverage reports are automatically generated and deployed with each release. View the [detailed coverage report](https://hack23.github.io/cia-compliance-manager/docs/coverage/) for line-by-line analysis.*
+*Coverage reports are automatically generated and deployed with each release. View the [detailed coverage report](https://ciacompliancemanager.com/docs/coverage/) for line-by-line analysis.*
 
 ## ⚡ Performance & Optimization
 
@@ -644,26 +644,26 @@ Comprehensive architectural documentation with 20+ diagrams covering current imp
   <td width="50%">
     <h3>🧪 Unit Tests</h3>
     <p>Visual representation of unit test results and coverage of the codebase.</p>
-    <a href="https://hack23.github.io/cia-compliance-manager/docs/test-results">Test Results</a> •
+    <a href="https://ciacompliancemanager.com/docs/test-results">Test Results</a> •
     <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md">Test Plan</a>
   </td>
   <td width="50%">
     <h3>📊 Test Coverage</h3>
     <p>Test coverage reports showing how much of the codebase is covered by tests.</p>
-    <a href="https://hack23.github.io/cia-compliance-manager/docs/coverage">View Coverage Report</a>
+    <a href="https://ciacompliancemanager.com/docs/coverage">View Coverage Report</a>
   </td>
 </tr>
 <tr>
   <td width="50%">
     <h3>🔍 E2E System Tests</h3>
     <p>End-to-end test reports showing full system validation results.</p>
-    <a href="https://hack23.github.io/cia-compliance-manager/docs/cypress/mochawesome">View Test Report</a> •
+    <a href="https://ciacompliancemanager.com/docs/cypress/mochawesome">View Test Report</a> •
     <a href="https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md">E2E Plan</a>
   </td>
   <td width="50%">
     <h3>⚡ Performance Tests</h3>
     <p>Benchmarks and performance analysis under various load conditions.</p>
-    <a href="https://hack23.github.io/cia-compliance-manager/performance">View Performance Data</a>
+    <a href="https://ciacompliancemanager.com/performance">View Performance Data</a>
   </td>
 </tr>
 </table>
@@ -673,12 +673,12 @@ Comprehensive architectural documentation with 20+ diagrams covering current imp
 ### 📘 API Documentation
 Detailed API reference for all components, types, and functions in the application.
 
-[View API Docs](https://hack23.github.io/cia-compliance-manager/api-docs)
+[View API Docs](https://ciacompliancemanager.com/api-docs)
 
 ### 🔄 Business Continuity
 Comprehensive business continuity planning and recovery strategies aligned with CIA principles.
 
-[View Interactive Plan](https://hack23.github.io/cia-compliance-manager/business-continuity) | [Markdown Version](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/BCPPlan.md)
+[View Interactive Plan](https://ciacompliancemanager.com/business-continuity) | [Markdown Version](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/BCPPlan.md)
 
 ### 📅 Lifecycle Management
 Product lifecycle management documentation covering development, deployment, maintenance, and retirement phases.
@@ -976,7 +976,7 @@ The CIA Compliance Manager isn't just another compliance tool—it's a platform 
 
 This project serves as a **reference implementation** of security best practices:
 - See how [SLSA Level 3](https://github.com/Hack23/cia-compliance-manager/attestations) is achieved in practice
-- Understand [80%+ test coverage](https://hack23.github.io/cia-compliance-manager/docs/coverage) implementation
+- Understand [80%+ test coverage](https://ciacompliancemanager.com/docs/coverage) implementation
 - Review our [threat modeling](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/THREAT_MODEL.md) approach
 - Explore [supply chain security](https://github.com/Hack23/cia-compliance-manager/blob/main/ISMS_IMPLEMENTATION_GUIDE.md) controls
 
@@ -1016,13 +1016,13 @@ flowchart TD
   Reports --> User
 ```
 
-For detailed architecture diagrams and documentation, see the [Architecture section](https://hack23.github.io/cia-compliance-manager/documentation.html#architecture) in our Documentation Portal. The project also includes [future architecture plans](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md) outlining the roadmap for upcoming enhancements.
+For detailed architecture diagrams and documentation, see the [Architecture section](https://ciacompliancemanager.com/documentation.html#architecture) in our Documentation Portal. The project also includes [future architecture plans](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md) outlining the roadmap for upcoming enhancements.
 
 ### Module Dependencies
 
 This diagram shows the relationship between different modules in the codebase:
 
-![Module Dependencies](https://hack23.github.io/cia-compliance-manager/dependencies/module-dependencies.svg)
+![Module Dependencies](https://ciacompliancemanager.com/dependencies/module-dependencies.svg)
 
 ## 🔒 Security Features
 
@@ -1033,7 +1033,7 @@ The application itself is built with security as a priority:
 - **Data Encryption** - All sensitive data is encrypted at rest and in transit
 - **Secure Development** - Built following secure coding practices and regular security testing
 
-For comprehensive security documentation, visit the [Security Documentation](https://hack23.github.io/cia-compliance-manager/documentation.html#security) in our Documentation Portal.
+For comprehensive security documentation, visit the [Security Documentation](https://ciacompliancemanager.com/documentation.html#security) in our Documentation Portal.
 
 ## 👥 Contributing
 
@@ -1220,7 +1220,7 @@ Complete system design with 20+ architectural diagrams including C4 models, secu
 | **Concept Mindmaps** | System structure and component relationships | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/MINDMAP.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_MINDMAP.md) |
 | **SWOT Analysis** | Strategic analysis and market positioning | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/SWOT.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_SWOT.md) |
 | **CI/CD Workflows** | DevOps pipelines and automation | [Current](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/WORKFLOWS.md) • [Future](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_WORKFLOWS.md) |
-| **Business Continuity** | BCP planning and recovery strategies | [Interactive](https://hack23.github.io/cia-compliance-manager/business-continuity) • [Markdown](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/BCPPlan.md) |
+| **Business Continuity** | BCP planning and recovery strategies | [Interactive](https://ciacompliancemanager.com/business-continuity) • [Markdown](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/BCPPlan.md) |
 
 ### 🔒 **Security & Compliance Documentation**
 
@@ -1240,10 +1240,10 @@ Comprehensive testing strategies following [Secure Development Policy §4-5](htt
 
 | Resource | Description | Links |
 |----------|-------------|-------|
-| **Unit Tests** | Vitest-based component and utility testing | [Results](https://hack23.github.io/cia-compliance-manager/docs/test-results) • [Plan](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md) |
-| **Test Coverage** | Line, branch, and function coverage reports | [Coverage Report](https://hack23.github.io/cia-compliance-manager/docs/coverage) |
-| **E2E Tests** | Cypress end-to-end system validation | [Report](https://hack23.github.io/cia-compliance-manager/docs/cypress/mochawesome) • [Plan](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md) |
-| **Performance Tests** | Benchmarks and optimization metrics | [View Data](https://hack23.github.io/cia-compliance-manager/performance) • [Documentation](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md) |
+| **Unit Tests** | Vitest-based component and utility testing | [Results](https://ciacompliancemanager.com/docs/test-results) • [Plan](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/UnitTestPlan.md) |
+| **Test Coverage** | Line, branch, and function coverage reports | [Coverage Report](https://ciacompliancemanager.com/docs/coverage) |
+| **E2E Tests** | Cypress end-to-end system validation | [Report](https://ciacompliancemanager.com/docs/cypress/mochawesome) • [Plan](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/E2ETestPlan.md) |
+| **Performance Tests** | Benchmarks and optimization metrics | [View Data](https://ciacompliancemanager.com/performance) • [Documentation](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/performance-testing.md) |
 
 ### 📘 **API & Developer Documentation**
 
@@ -1251,15 +1251,15 @@ Technical reference documentation for developers and integrators.
 
 | Resource | Description | Link |
 |----------|-------------|------|
-| **API Documentation** | TypeDoc-generated API reference for all components | [View API Docs](https://hack23.github.io/cia-compliance-manager/api-docs) |
-| **UML Diagrams** | Class diagrams and component relationships | [View Diagrams](https://hack23.github.io/cia-compliance-manager/diagrams) |
-| **Dependencies** | Module dependency visualization | [View Graph](https://hack23.github.io/cia-compliance-manager/dependencies/module-dependencies.svg) |
+| **API Documentation** | TypeDoc-generated API reference for all components | [View API Docs](https://ciacompliancemanager.com/api-docs) |
+| **UML Diagrams** | Class diagrams and component relationships | [View Diagrams](https://ciacompliancemanager.com/diagrams) |
+| **Dependencies** | Module dependency visualization | [View Graph](https://ciacompliancemanager.com/dependencies/module-dependencies.svg) |
 | **Contributing Guide** | How to contribute code and documentation | [View Guide](https://github.com/Hack23/cia-compliance-manager/blob/main/CONTRIBUTING.md) |
 
 <div align="center">
   <h3>🌐 Live Documentation Portal</h3>
   <p>Access all documentation through our centralized portal</p>
-  <a href="https://hack23.github.io/cia-compliance-manager/documentation.html">
+  <a href="https://ciacompliancemanager.com/documentation.html">
     <img src="https://img.shields.io/badge/Documentation-Portal-0066CC?style=for-the-badge&logo=read-the-docs&logoColor=white" alt="Documentation Portal">
   </a>
 </div>

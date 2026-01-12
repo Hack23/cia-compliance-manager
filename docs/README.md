@@ -6,7 +6,7 @@
 ![Coverage](https://img.shields.io/badge/coverage-85%25-yellow.svg)
 ![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compliance-manager/badge)
 
-> For an interactive documentation experience, visit our [Documentation Portal](https://hack23.github.io/cia-compliance-manager/documentation.html)
+> For an interactive documentation experience, visit our [Documentation Portal](https://ciacompliancemanager.com/documentation.html)
 
 ## 📑 Table of Contents
 
@@ -53,13 +53,13 @@ flowchart TD
   Reports --> User
 ```
 
-For detailed architecture diagrams and documentation, see the [Architecture section](https://hack23.github.io/cia-compliance-manager/documentation.html#architecture) in our Documentation Portal. The project also includes [future architecture plans](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md) outlining the roadmap for upcoming enhancements.
+For detailed architecture diagrams and documentation, see the [Architecture section](https://ciacompliancemanager.com/documentation.html#architecture) in our Documentation Portal. The project also includes [future architecture plans](https://github.com/Hack23/cia-compliance-manager/blob/main/docs/architecture/FUTURE_ARCHITECTURE.md) outlining the roadmap for upcoming enhancements.
 
 ### Module Dependencies
 
 This diagram shows the relationship between different modules in the codebase:
 
-![Module Dependencies](https://hack23.github.io/cia-compliance-manager/dependencies/module-dependencies.svg)
+![Module Dependencies](https://ciacompliancemanager.com/dependencies/module-dependencies.svg)
 
 ## 🔒 Security Features
 
@@ -70,19 +70,19 @@ The application itself is built with security as a priority:
 - **Data Encryption** - All sensitive data is encrypted at rest and in transit
 - **Secure Development** - Built following secure coding practices and regular security testing
 
-For comprehensive security documentation, visit the [Security Documentation](https://hack23.github.io/cia-compliance-manager/documentation.html#security) in our Documentation Portal.
+For comprehensive security documentation, visit the [Security Documentation](https://ciacompliancemanager.com/documentation.html#security) in our Documentation Portal.
 
 ## 📚 Documentation Resources
 
-The following resources are available in our [Documentation Portal](https://hack23.github.io/cia-compliance-manager/documentation.html):
+The following resources are available in our [Documentation Portal](https://ciacompliancemanager.com/documentation.html):
 
 | Resource                  | Description                                           | Link                                                                                         |
 | ------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| API Documentation         | Detailed API reference for all components             | [View](https://hack23.github.io/cia-compliance-manager/api)                                  |
+| API Documentation         | Detailed API reference for all components             | [View](https://ciacompliancemanager.com/api)                                  |
 | Architecture Diagrams     | C4 model diagrams and architecture documentation      | [View](/workspaces/cia-compliance-manager/docs/architecture/ARCHITECTURE.md)                 |
-| Diagrams & Visualizations | UML and Mermaid diagrams showing system relationships | [View](https://hack23.github.io/cia-compliance-manager/diagrams)                             |
-| Code Coverage             | Test coverage reports and metrics                     | [View](https://hack23.github.io/cia-compliance-manager/coverage)                             |
-| Dependencies              | Visual representation of module dependencies          | [View](https://hack23.github.io/cia-compliance-manager/dependencies/module-dependencies.svg) |
+| Diagrams & Visualizations | UML and Mermaid diagrams showing system relationships | [View](https://ciacompliancemanager.com/diagrams)                             |
+| Code Coverage             | Test coverage reports and metrics                     | [View](https://ciacompliancemanager.com/coverage)                             |
+| Dependencies              | Visual representation of module dependencies          | [View](https://ciacompliancemanager.com/dependencies/module-dependencies.svg) |
 
 ## 📝 Key Documentation Sections
 

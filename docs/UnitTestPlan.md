@@ -19,8 +19,8 @@ Per Hack23 AB's Secure Development Policy, this project maintains:
 
 **Evidence Links:**
 - [![CI Tests](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml)
-- [Coverage Reports](https://hack23.github.io/cia-compliance-manager/coverage)
-- [Test Results](https://hack23.github.io/cia-compliance-manager/test-results)
+- [Coverage Reports](https://ciacompliancemanager.com/coverage)
+- [Test Results](https://ciacompliancemanager.com/test-results)
 
 **See Also:** [ISMS Implementation Guide - Testing Strategy](../ISMS_IMPLEMENTATION_GUIDE.md#-testing-strategy--quality-assurance)
 

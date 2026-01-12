@@ -57,10 +57,10 @@ mindmap
 
 | Document                                      | Purpose                          | Link                                                                                 |
 | --------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------ |
-| [Architecture Overview](ARCHITECTURE.md)      | Current system architecture      | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| [Future Architecture](FUTURE_ARCHITECTURE.md) | Planned architectural evolution  | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| [Process Flowcharts](FLOWCHART.md)            | Critical workflows and processes | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
-| [CI/CD Workflows](WORKFLOWS.md)               | Build and deployment automation  | [View in Portal](https://hack23.github.io/cia-compliance-manager/documentation.html) |
+| [Architecture Overview](ARCHITECTURE.md)      | Current system architecture      | [View in Portal](https://ciacompliancemanager.com/documentation.html) |
+| [Future Architecture](FUTURE_ARCHITECTURE.md) | Planned architectural evolution  | [View in Portal](https://ciacompliancemanager.com/documentation.html) |
+| [Process Flowcharts](FLOWCHART.md)            | Critical workflows and processes | [View in Portal](https://ciacompliancemanager.com/documentation.html) |
+| [CI/CD Workflows](WORKFLOWS.md)               | Build and deployment automation  | [View in Portal](https://ciacompliancemanager.com/documentation.html) |
 
 ## 🔍 Business Impact Analysis (BIA)
 

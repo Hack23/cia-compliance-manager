@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://hack23.github.io/cia-compliance-manager/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+  <img src="https://ciacompliancemanager.com/icon-192.png" alt="Hack23 Logo" width="192" height="192">
 </p>
 
 <h1 align="center">🧪 Hack23 AB — End-to-End Test Plan</h1>
@@ -50,7 +50,7 @@ Per Hack23 AB's Secure Development Policy Section 4.2, this project maintains:
 | **Performance Assertions** | <3s load time, <500ms interactions | ✅ Monitored | Section 4.2.6 |
 
 **Evidence Links:**
-- **📈 Mochawesome Reports**: [https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/](https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/)
+- **📈 Mochawesome Reports**: [https://ciacompliancemanager.com/cypress/mochawesome/](https://ciacompliancemanager.com/cypress/mochawesome/)
 - **🔄 Test Workflow**: [test-and-report.yml](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml)
 - **📊 Test History**: [GitHub Actions](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml)
 
@@ -1409,7 +1409,7 @@ describe('Accessibility Compliance', () => {
 
 All E2E test results are publicly accessible for transparency and compliance verification:
 
-- **📈 Latest Mochawesome Report**: [https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/](https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/)
+- **📈 Latest Mochawesome Report**: [https://ciacompliancemanager.com/cypress/mochawesome/](https://ciacompliancemanager.com/cypress/mochawesome/)
 - **🔄 GitHub Actions Workflow**: [test-and-report.yml](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml)
 - **📊 Test Execution History**: [GitHub Actions Runs](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml)
 - **🏆 Test Attestations**: [Release Attestations](https://github.com/Hack23/cia-compliance-manager/attestations)
@@ -1736,7 +1736,7 @@ npm run test:e2ereportmerge
 # Generate consolidated HTML report
 npm run test:e2ereporthtmlall
 
-# Reports published to: https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/
+# Reports published to: https://ciacompliancemanager.com/cypress/mochawesome/
 ```
 
 **JUnit XML Reports:**
