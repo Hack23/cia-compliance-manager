@@ -67,7 +67,7 @@ function findFiles(dir, fileList = []) {
   files.forEach(file => {
     const filePath = path.join(dir, file);
     
-    // Use lstat to detect symbolic links and avoid following them
+    // Read file stats to check file type and handle potential errors
     let stat;
     try {
       stat = fs.lstatSync(filePath);
@@ -144,11 +144,8 @@ function pathToURL(relativePath) {
     return BASE_URL;
   }
 
-  // Encode each path segment to produce a valid URL path
-  const encodedPath = urlPath
-    .split('/')
-    .map(segment => encodeURIComponent(segment))
-    .join('/');
+  // Use encodeURI for proper URL encoding that preserves path structure
+  const encodedPath = encodeURI(urlPath);
   
   return `${BASE_URL}/${encodedPath}`;
 }
@@ -584,7 +581,7 @@ function generateSitemapHTML(entries) {
 
     <footer>
       <p>Generated on ${CURRENT_DATE}</p>
-      <p>CIA Compliance Manager &copy; ${new Date().getFullYear()} Hack23 AB</p>
+      <p>CIA Compliance Manager &copy; ${CURRENT_DATE.split('-')[0]} Hack23 AB</p>
       <p><a href="${BASE_URL}" style="color: var(--accent-teal);">Return to Home</a></p>
     </footer>
   </div>
