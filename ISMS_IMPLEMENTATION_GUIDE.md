@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://hack23.github.io/cia-compliance-manager/icon-192.png" alt="CIA Compliance Manager Logo" width="192" height="192">
+  <img src="https://ciacompliancemanager.com/icon-192.png" alt="CIA Compliance Manager Logo" width="192" height="192">
 </p>
 
 <h1 align="center">🛡️ CIA Compliance Manager — ISMS Implementation Guide</h1>
@@ -159,8 +159,8 @@ graph TD
 
 **Evidence:** 
 - [![CI Tests](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml)
-- [Coverage Reports](https://hack23.github.io/cia-compliance-manager/coverage)
-- [Test Results](https://hack23.github.io/cia-compliance-manager/test-results)
+- [Coverage Reports](https://ciacompliancemanager.com/coverage)
+- [Test Results](https://ciacompliancemanager.com/test-results)
 
 ### **End-to-End Testing**
 
@@ -174,7 +174,7 @@ graph TD
 | **Accessibility** | WCAG 2.1 AA compliance | Every PR | ✅ Automated |
 
 **Evidence:**
-- [E2E Test Reports](https://hack23.github.io/cia-compliance-manager/e2e-report)
+- [E2E Test Reports](https://ciacompliancemanager.com/e2e-report)
 - Cypress test execution in CI/CD pipeline
 
 ### **Code Quality**

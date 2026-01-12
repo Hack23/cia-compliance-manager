@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://hack23.github.io/cia-compliance-manager/icon-192.png" alt="Hack23 Logo" width="192" height="192">
+  <img src="https://ciacompliancemanager.com/icon-192.png" alt="Hack23 Logo" width="192" height="192">
 </p>
 
 <h1 align="center">🔐 Security Policy — CIA Compliance Manager</h1>
@@ -128,7 +128,7 @@ npm run dev
 **Production Deployment:**
 ```bash
 # Test with curl
-curl -I https://hack23.github.io/cia-compliance-manager/
+curl -I https://ciacompliancemanager.com/
 
 # Test with online tools
 # https://securityheaders.com/

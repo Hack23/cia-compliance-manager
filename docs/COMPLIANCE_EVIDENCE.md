@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://hack23.github.io/cia-compliance-manager/icon-192.png" alt="CIA Compliance Manager Logo" width="192" height="192">
+  <img src="https://ciacompliancemanager.com/icon-192.png" alt="CIA Compliance Manager Logo" width="192" height="192">
 </p>
 
 <h1 align="center">📋 CIA Compliance Manager — Compliance Evidence Catalog</h1>
@@ -39,10 +39,10 @@ _— Security Team, Hack23 AB_
 
 | 📊 **Evidence Type** | 🎯 **Requirement** | ✅ **Current Status** | 🔗 **Evidence Location** |
 |---------------------|-------------------|---------------------|------------------------|
-| **Unit Test Coverage** | ≥80% line, ≥70% branch | 83.81% line, 76.15% branch | [Coverage Report](https://hack23.github.io/cia-compliance-manager/docs/coverage/) |
-| **Function Coverage** | ≥80% functions | 86.06% functions | [Coverage Report](https://hack23.github.io/cia-compliance-manager/docs/coverage/) |
-| **Statement Coverage** | ≥80% statements | 83.44% statements | [Coverage Report](https://hack23.github.io/cia-compliance-manager/docs/coverage/) |
-| **Test Results** | 100% pass rate | All tests passing | [Test Results](https://hack23.github.io/cia-compliance-manager/docs/test-results/) |
+| **Unit Test Coverage** | ≥80% line, ≥70% branch | 83.81% line, 76.15% branch | [Coverage Report](https://ciacompliancemanager.com/docs/coverage/) |
+| **Function Coverage** | ≥80% functions | 86.06% functions | [Coverage Report](https://ciacompliancemanager.com/docs/coverage/) |
+| **Statement Coverage** | ≥80% statements | 83.44% statements | [Coverage Report](https://ciacompliancemanager.com/docs/coverage/) |
+| **Test Results** | 100% pass rate | All tests passing | [Test Results](https://ciacompliancemanager.com/docs/test-results/) |
 | **Test Plan Documentation** | Documented strategy | Complete | [Unit Test Plan](../UnitTestPlan.md) |
 | **CI/CD Integration** | Automated execution | Active | [![CI Tests](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml/badge.svg)](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml) |
 
@@ -51,7 +51,7 @@ _— Security Team, Hack23 AB_
 **📝 Verification Commands:**
 ```bash
 # View live coverage report
-open https://hack23.github.io/cia-compliance-manager/docs/coverage/
+open https://ciacompliancemanager.com/docs/coverage/
 
 # Run tests locally
 npm test
@@ -68,7 +68,7 @@ npm run test:coverage
 
 | 📊 **Evidence Type** | 🎯 **Requirement** | ✅ **Current Status** | 🔗 **Evidence Location** |
 |---------------------|-------------------|---------------------|------------------------|
-| **E2E Test Coverage** | Critical user journeys | 11 widgets + workflows | [E2E Report](https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/) |
+| **E2E Test Coverage** | Critical user journeys | 11 widgets + workflows | [E2E Report](https://ciacompliancemanager.com/cypress/mochawesome/) |
 | **Test Plan Documentation** | Documented scenarios | Complete | [E2E Test Plan](../E2ETestPlan.md) |
 | **Browser Compatibility** | Major browsers validated | Chrome, Firefox, Edge | [CI Workflow](https://github.com/Hack23/cia-compliance-manager/actions/workflows/test-and-report.yml) |
 | **Accessibility E2E Tests** | WCAG 2.1 AA validation | Implemented | Cypress axe-core integration |
@@ -79,7 +79,7 @@ npm run test:coverage
 **📝 Verification Commands:**
 ```bash
 # View E2E test report
-open https://hack23.github.io/cia-compliance-manager/cypress/mochawesome/
+open https://ciacompliancemanager.com/cypress/mochawesome/
 
 # Run E2E tests locally
 npm run cypress:run
@@ -311,7 +311,7 @@ curl -s https://api.securityscorecards.dev/projects/github.com/Hack23/cia-compli
 **Step 1: Verify Test Coverage**
 ```bash
 # Access live coverage report
-open https://hack23.github.io/cia-compliance-manager/docs/coverage/
+open https://ciacompliancemanager.com/docs/coverage/
 
 # Verify metrics: Line 83.81%, Branch 76.15%, Functions 86.06%
 ```
