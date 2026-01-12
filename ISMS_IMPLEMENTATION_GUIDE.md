@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://ciacompliancemanager.com/icon-192.png" alt="CIA Compliance Manager Logo" width="192" height="192">
+  <img src="https://hack23.com/icon-192.png" alt="CIA Compliance Manager Logo" width="192" height="192">
 </p>
 
 <h1 align="center">🛡️ CIA Compliance Manager — ISMS Implementation Guide</h1>
