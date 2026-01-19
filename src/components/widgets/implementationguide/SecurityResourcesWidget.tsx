@@ -461,7 +461,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
             {/* Resources list */}
             <div className="mb-md">
               <div className="flex justify-between items-center mb-sm">
-                <h3 className="text-lg font-medium">Security Resources</h3>
+                <h3 className="text-subheading font-medium">Security Resources</h3>
                 <div className="text-sm text-gray-600 dark:text-gray-400">
                   {filteredResources.length}{" "}
                   {filteredResources.length === 1 ? "resource" : "resources"}{" "}

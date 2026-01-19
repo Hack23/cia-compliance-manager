@@ -38,7 +38,7 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
 }) => {
   return (
     <div className={`mt-lg ${className}`} data-testid={testId}>
-      <h3 className="text-lg font-medium mb-md">Implementation Tips</h3>
+      <h3 className="text-subheading font-medium mb-md">Implementation Tips</h3>
 
       <div className="space-y-sm">
         {/* General implementation tips */}

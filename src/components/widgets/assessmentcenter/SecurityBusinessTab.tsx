@@ -1,7 +1,7 @@
 import React from "react";
 import { SECURITY_SUMMARY_WIDGET_IDS } from "../../../constants/testIds";
 import { formatCurrency } from "../../../utils/formatUtils";
-import { WidgetClasses } from "../../../utils/tailwindClassHelpers";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 
 /**
  * Props for SecurityBusinessTab component
@@ -43,8 +43,8 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
       </div>
 
       {/* Business Impact Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Business Value Summary
         </h3>
 
@@ -84,8 +84,8 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
       </div>
 
       {/* Cost Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Cost Summary
         </h3>
 
@@ -128,8 +128,8 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
       </div>
 
       {/* Business Enablement */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Business Enablement
         </h3>
 

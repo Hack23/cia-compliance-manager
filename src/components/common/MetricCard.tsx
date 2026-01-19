@@ -109,7 +109,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
     >
       <div className={`flex items-center ${icon ? 'justify-between' : 'justify-end'} mb-2`}>
         {icon && (
-          <span className="text-xl" aria-hidden="true">
+          <span className="text-heading" aria-hidden="true">
             {icon}
           </span>
         )}

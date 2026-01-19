@@ -42,7 +42,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
       data-testid={testId || "resource-item"}
     >
       <div className="flex justify-between items-start mb-2">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+        <h3 className="text-subheading font-semibold text-gray-800 dark:text-gray-100">
           {resource.title}
         </h3>
         <div className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 px-2 py-1 rounded">

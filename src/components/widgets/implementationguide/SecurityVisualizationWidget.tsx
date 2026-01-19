@@ -160,7 +160,7 @@ const SecurityVisualizationWidget: React.FC<
           className="mb-lg"
           aria-labelledby="security-posture-heading"
         >
-          <h3 id="security-posture-heading" className="text-lg font-medium mb-md">Security Posture</h3>
+          <h3 id="security-posture-heading" className="text-subheading font-medium mb-md">Security Posture</h3>
           <div 
             className="p-md bg-neutral-light/10 dark:bg-neutral-dark/20 rounded-md"
             role="group"
@@ -223,7 +223,7 @@ const SecurityVisualizationWidget: React.FC<
 
         {/* Security Radar Chart using existing component */}
         <div className="mb-lg">
-          <h3 className="text-lg font-medium mb-md">Security Components</h3>
+          <h3 className="text-subheading font-medium mb-md">Security Components</h3>
 
           {/* Reuse the RadarChart component with responsive container */}
           <div className="p-md bg-white dark:bg-gray-800 rounded-md border border-neutral-light dark:border-neutral-dark">
@@ -240,7 +240,7 @@ const SecurityVisualizationWidget: React.FC<
 
         {/* Component Details Section */}
         <div className="mb-lg">
-          <h3 className="text-lg font-medium mb-md">Component Details</h3>
+          <h3 className="text-subheading font-medium mb-md">Component Details</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-sm">
             {/* Confidentiality component */}
             <div

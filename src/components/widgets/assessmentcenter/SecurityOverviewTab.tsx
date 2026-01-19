@@ -7,7 +7,7 @@ import {
   getIntegrityValidationLevel,
   getAvailabilityUptimeTarget,
 } from "../../../utils/implementationUtils";
-import { WidgetClasses } from "../../../utils/tailwindClassHelpers";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 import RadarChart from "../../charts/RadarChart";
 import SecurityLevelIndicator from "../../common/SecurityLevelIndicator";
 import StatusBadge from "../../common/StatusBadge";
@@ -49,8 +49,8 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
   return (
     <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-overview')} className="space-y-sm">
       {/* Security Radar Chart */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Security Profile
         </h3>
         <div className="h-[300px]">
@@ -64,8 +64,8 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
       </div>
 
       {/* Security Level Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Security Components
         </h3>
 
@@ -167,8 +167,8 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
       </div>
 
       {/* Key Metrics Dashboard */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Key Security Metrics
         </h3>
         <div className={WidgetClasses.grid3Cols}>

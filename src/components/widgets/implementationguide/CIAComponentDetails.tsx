@@ -126,7 +126,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
         <span className={`text-xl mr-2 ${theme.accentClass}`}>
           {theme.icon}
         </span>
-        <h3 className="text-lg font-medium">{theme.title}</h3>
+        <h3 className="text-subheading font-medium">{theme.title}</h3>
         <div className="ml-auto">
           <SecurityLevelBadge
             category=""

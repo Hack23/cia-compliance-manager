@@ -2,7 +2,7 @@ import React from "react";
 import { SECURITY_SUMMARY_WIDGET_IDS } from "../../../constants/testIds";
 import { SecurityLevel } from "../../../types/cia";
 import { getImplementationDescription } from "../../../utils/implementationUtils";
-import { WidgetClasses } from "../../../utils/tailwindClassHelpers";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 
 /**
  * Props for SecurityImplementationTab component
@@ -47,14 +47,14 @@ export const SecurityImplementationTab: React.FC<
       </div>
 
       {/* Implementation Overview */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className={WidgetClasses.subheading}>
           Implementation Overview
         </h3>
 
         <div className="mb-sm">
           <div className="flex items-center justify-between mb-sm">
-            <div className="text-md font-medium text-gray-800 dark:text-gray-200">Implementation Complexity:</div>
+            <div className="text-body-lg font-medium text-gray-800 dark:text-gray-200">Implementation Complexity:</div>
             <div className="font-medium text-gray-800 dark:text-gray-200">{implementationComplexity}</div>
           </div>
           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
@@ -70,7 +70,7 @@ export const SecurityImplementationTab: React.FC<
               }`}
             ></div>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-sm">
+          <p className="text-body text-gray-600 dark:text-gray-400 mt-sm">
             {implementationComplexity === "Low"
               ? "Basic security controls with straightforward implementation"
               : implementationComplexity === "Moderate"
@@ -84,7 +84,7 @@ export const SecurityImplementationTab: React.FC<
         <div className={WidgetClasses.grid2Cols}>
           {/* Implementation Timeline */}
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">
+            <div className="text-body font-medium mb-xs text-gray-700 dark:text-gray-200">
               Estimated Implementation Time
             </div>
             <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{implementationTime}</div>
@@ -95,7 +95,7 @@ export const SecurityImplementationTab: React.FC<
 
           {/* Required Resources */}
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="text-sm font-medium mb-xs text-gray-700 dark:text-gray-200">Required Resources</div>
+            <div className="text-body font-medium mb-xs text-gray-700 dark:text-gray-200">Required Resources</div>
             <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{requiredResources}</div>
             <div className="text-xs text-gray-600 dark:text-gray-400">
               Resource allocation recommendation
@@ -105,8 +105,8 @@ export const SecurityImplementationTab: React.FC<
       </div>
 
       {/* Component Implementation Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Component Implementation Summary
         </h3>
 
@@ -116,7 +116,7 @@ export const SecurityImplementationTab: React.FC<
             <h4 className="font-medium text-purple-700 dark:text-purple-300 mb-sm">
               Confidentiality Implementation
             </h4>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-body text-gray-600 dark:text-gray-400">
               {getImplementationDescription(
                 "confidentiality",
                 confidentialityLevel
@@ -132,7 +132,7 @@ export const SecurityImplementationTab: React.FC<
             <h4 className="font-medium text-green-700 dark:text-green-300 mb-sm">
               Integrity Implementation
             </h4>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-body text-gray-600 dark:text-gray-400">
               {getImplementationDescription("integrity", integrityLevel)}
             </p>
             <div className="mt-sm text-xs font-medium text-green-700 dark:text-green-300">
@@ -145,7 +145,7 @@ export const SecurityImplementationTab: React.FC<
             <h4 className="font-medium text-blue-700 dark:text-blue-300 mb-sm">
               Availability Implementation
             </h4>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-body text-gray-600 dark:text-gray-400">
               {getImplementationDescription("availability", availabilityLevel)}
             </p>
             <div className="mt-sm text-xs font-medium text-blue-700 dark:text-blue-300">
@@ -156,8 +156,8 @@ export const SecurityImplementationTab: React.FC<
       </div>
 
       {/* Implementation Considerations */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Implementation Considerations
         </h3>
 

@@ -4,7 +4,7 @@ import { SecurityLevel } from "../../../types/cia";
 import { ComplianceStatusType } from "../../../types/compliance";
 import { getComplianceRequirementText } from "../../../utils/complianceTextUtils";
 import { getComplianceStatusText } from "../../../utils/statusUtils";
-import { WidgetClasses } from "../../../utils/tailwindClassHelpers";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 
 /**
  * Props for SecurityComplianceTab component
@@ -42,8 +42,8 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
       </div>
 
       {/* Compliance Status */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Compliance Status Overview
         </h3>
 
@@ -100,8 +100,8 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
       </div>
 
       {/* Framework Status */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Framework Compliance Status
         </h3>
 
@@ -159,8 +159,8 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
       </div>
 
       {/* Component Requirements */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Component Compliance Requirements
         </h3>
 
