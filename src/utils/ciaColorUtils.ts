@@ -5,7 +5,7 @@
  * across the application. These utilities ensure visual consistency and proper theme support.
  */
 
-export type CIAComponent = 'confidentiality' | 'integrity' | 'availability';
+import type { CIAComponent } from '../types/cia';
 
 export interface CIAColors {
   bg: string;

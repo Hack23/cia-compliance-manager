@@ -248,7 +248,7 @@ const SecurityVisualizationWidget: React.FC<
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('confidentiality-component')}
             >
               <div className="flex items-center justify-between mb-sm">
-                <div className="text-md font-medium text-primary-dark dark:text-primary-light">
+                <div className="text-body-lg font-medium text-primary-dark dark:text-primary-light">
                   Confidentiality
                 </div>
                 <SecurityLevelIndicator
@@ -275,7 +275,7 @@ const SecurityVisualizationWidget: React.FC<
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('integrity-component')}
             >
               <div className="flex items-center justify-between mb-sm">
-                <div className="text-md font-medium text-green-800 dark:text-green-300">
+                <div className="text-body-lg font-medium text-green-800 dark:text-green-300">
                   Integrity
                 </div>
                 <SecurityLevelIndicator
@@ -302,7 +302,7 @@ const SecurityVisualizationWidget: React.FC<
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('availability-component')}
             >
               <div className="flex items-center justify-between mb-sm">
-                <div className="text-md font-medium text-blue-800 dark:text-blue-300">
+                <div className="text-body-lg font-medium text-blue-800 dark:text-blue-300">
                   Availability
                 </div>
                 <SecurityLevelIndicator
@@ -330,7 +330,7 @@ const SecurityVisualizationWidget: React.FC<
 
         {/* Explanation section */}
         <div className="p-md bg-blue-50 dark:bg-blue-900/20 rounded-lg mt-md">
-          <h3 className="text-md font-medium mb-sm">
+          <h3 className="text-body-lg font-medium mb-sm">
             Security Visualization Key
           </h3>
           <p className="text-body text-gray-600 dark:text-gray-400 mb-sm">
