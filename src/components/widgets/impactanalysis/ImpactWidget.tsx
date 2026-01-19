@@ -497,7 +497,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
           {showExtendedDetails && component === "integrity" && recommendations.length > 0 && (
             <div className="mt-md">
               <h3 className="text-lg font-medium mb-sm">Recommendations</h3>
-              <ul className="list-disc pl-5 space-y-1">
+              <ul className="list-disc pl-5 space-y-xs">
                 {recommendations.map((rec, index) => (
                   <li
                     key={index}

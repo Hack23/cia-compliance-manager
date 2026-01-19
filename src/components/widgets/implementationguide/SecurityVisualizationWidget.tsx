@@ -108,7 +108,7 @@ const SecurityVisualizationWidget: React.FC<
 
     // Component-specific recommendations
     return (
-      <div className="space-y-2 mt-md" data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('recommendations')}>
+      <div className="space-y-xs mt-md" data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('recommendations')}>
         {availabilityValue < 2 && (
           <div className="p-sm bg-info-light/10 dark:bg-info-dark/20 rounded">
             <p className="text-sm">

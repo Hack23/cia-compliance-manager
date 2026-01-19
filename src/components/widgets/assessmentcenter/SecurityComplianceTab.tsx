@@ -31,7 +31,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
   testId,
 }) => {
   return (
-    <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-compliance')} className="space-y-4">
+    <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-compliance')} className="space-y-md">
       {/* Compliance introduction */}
       <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg mb-sm">
         <p className="text-sm">
@@ -119,7 +119,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
                 </span>
               </h4>
               {complianceStatus.compliantFrameworks.length > 0 ? (
-                <ul className="mt-sm space-y-1 list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
+                <ul className="mt-sm space-y-xs list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
                   {complianceStatus.compliantFrameworks.map(
                     (framework, idx) => (
                       <li key={`compliant-${idx}`}>{framework}</li>
@@ -141,7 +141,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
                 </span>
               </h4>
               {complianceStatus.partiallyCompliantFrameworks.length > 0 ? (
-                <ul className="mt-sm space-y-1 list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
+                <ul className="mt-sm space-y-xs list-disc list-inside text-sm text-gray-600 dark:text-gray-400">
                   {complianceStatus.partiallyCompliantFrameworks.map(
                     (framework, idx) => (
                       <li key={`partial-${idx}`}>{framework}</li>

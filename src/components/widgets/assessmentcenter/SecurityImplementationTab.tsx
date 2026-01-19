@@ -35,7 +35,7 @@ export const SecurityImplementationTab: React.FC<
   return (
     <div
       data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-implementation')}
-      className="space-y-4"
+      className="space-y-md"
     >
       {/* Implementation introduction */}
       <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg mb-sm">
@@ -166,7 +166,7 @@ export const SecurityImplementationTab: React.FC<
             <h4 className="font-medium text-yellow-700 dark:text-yellow-300">
               Success Factors
             </h4>
-            <ul className="mt-sm space-y-1 list-disc list-inside text-sm">
+            <ul className="mt-sm space-y-xs list-disc list-inside text-sm">
               <li>Executive sponsorship and support</li>
               <li>Clear security requirements definition</li>
               <li>Adequate resource allocation</li>
@@ -179,7 +179,7 @@ export const SecurityImplementationTab: React.FC<
             <h4 className="font-medium text-blue-700 dark:text-blue-300">
               Key Challenges
             </h4>
-            <ul className="mt-sm space-y-1 list-disc list-inside text-sm">
+            <ul className="mt-sm space-y-xs list-disc list-inside text-sm">
               <li>Balancing security with usability</li>
               <li>Integration with existing systems</li>
               <li>Managing scope and expectations</li>

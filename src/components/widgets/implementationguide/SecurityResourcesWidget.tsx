@@ -384,7 +384,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
               >
                 <h3 className={cn(WidgetClasses.body, "font-medium mb-sm")}>Categories</h3>
                 <ul 
-                  className="space-y-2"
+                  className="space-y-xs"
                   role="list"
                 >
                   <li>

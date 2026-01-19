@@ -167,7 +167,7 @@ const TechnicalDetailsWidget: React.FC<TechnicalDetailsWidgetProps> = ({
           <h3 className="text-subheading font-medium mb-md flex items-center">
             <span className="mr-sm">💡</span>Implementation Notes
           </h3>
-          <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+          <ul className="space-y-xs text-sm text-gray-600 dark:text-gray-400">
             <li className="flex items-start">
               <span className="mr-sm text-blue-500">•</span>
               <span>

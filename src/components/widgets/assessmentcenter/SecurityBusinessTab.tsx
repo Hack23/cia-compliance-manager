@@ -32,7 +32,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
   roiEstimate,
 }) => {
   return (
-    <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-business')} className="space-y-4">
+    <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-business')} className="space-y-md">
       {/* Business Value content */}
       <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg mb-sm">
         <p className="text-sm">
@@ -133,10 +133,10 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
           Business Enablement
         </h3>
 
-        <div className="space-y-3">
+        <div className="space-y-sm">
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
             <h4 className="text-sm font-medium mb-sm text-gray-800 dark:text-gray-200">Business Capabilities</h4>
-            <ul className="list-disc pl-5 space-y-1 text-sm">
+            <ul className="list-disc pl-5 space-y-xs text-sm">
               {securityScore >= 80 ? (
                 <>
                   <li>Enables digital transformation initiatives</li>

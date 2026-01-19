@@ -487,7 +487,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
               data-testid={`${activeComponent}-details-content`}
             >
               {activeDetails ? (
-                <div className="space-y-4">
+                <div className="space-y-md">
                   <h4
                     className={`font-medium ${getComponentColor(
                       activeComponent
@@ -501,7 +501,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                     Level
                   </h4>
 
-                  <div className="space-y-3">
+                  <div className="space-y-sm">
                     {/* Description */}
                     <div>
                       <h5 className="text-sm font-medium mb-xs">Description</h5>
