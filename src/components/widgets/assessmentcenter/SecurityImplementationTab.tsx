@@ -47,7 +47,7 @@ export const SecurityImplementationTab: React.FC<
       </div>
 
       {/* Implementation Overview */}
-      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+      <div className={cn(WidgetClasses.cardWhite, "shadow-sm")}>
         <h3 className={WidgetClasses.subheading}>
           Implementation Overview
         </h3>

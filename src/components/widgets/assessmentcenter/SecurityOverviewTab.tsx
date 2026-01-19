@@ -49,7 +49,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
   return (
     <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-overview')} className="space-y-sm">
       {/* Security Radar Chart */}
-      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+      <div className={cn(WidgetClasses.cardWhite, "shadow-sm")}>
         <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Security Profile
         </h3>
@@ -64,7 +64,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
       </div>
 
       {/* Security Level Summary */}
-      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+      <div className={cn(WidgetClasses.cardWhite, "shadow-sm")}>
         <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Security Components
         </h3>
@@ -167,7 +167,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
       </div>
 
       {/* Key Metrics Dashboard */}
-      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+      <div className={cn(WidgetClasses.cardWhite, "shadow-sm")}>
         <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Key Security Metrics
         </h3>

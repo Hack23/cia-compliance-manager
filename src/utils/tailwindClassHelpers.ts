@@ -110,6 +110,12 @@ export const WidgetClasses = {
   card: 'rounded-md border border-gray-200 dark:border-gray-600 p-md bg-gray-50 dark:bg-gray-700',
   
   /**
+   * White card container with clean appearance
+   * Use for primary content cards and widget sections
+   */
+  cardWhite: 'rounded-lg border border-gray-100 dark:border-gray-700 p-sm bg-white dark:bg-gray-800',
+  
+  /**
    * Interactive card with hover effect
    * Use for clickable cards and list items
    */

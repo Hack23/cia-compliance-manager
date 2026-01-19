@@ -23,6 +23,7 @@ import { getSecurityLevelBackgroundClass } from "../../../utils/colorUtils";
 import { normalizeSecurityLevel } from "../../../utils/securityLevelUtils";
 import { getWidgetAriaDescription } from "../../../utils/accessibility";
 import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
+import { getCIAColors } from "../../../utils/ciaColorUtils";
 import BusinessImpactSection from "../../common/BusinessImpactSection";
 import MetricCard from "../../common/MetricCard";
 import SecurityLevelBadge from "../../common/SecurityLevelBadge";
@@ -83,6 +84,9 @@ interface ComponentConfig {
  * ```
  */
 const getComponentConfig = (component: CIAComponent): ComponentConfig => {
+  // Get consistent CIA colors from utility
+  const ciaColors = getCIAColors(component);
+  
   switch (component) {
     case "availability":
       return {
@@ -91,7 +95,7 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         defaultTitle: "Availability Impact Analysis",
         defaultIcon: "⏱️",
         color: "blue",
-        textClass: "text-blue-800 dark:text-blue-300",
+        textClass: ciaColors.text,
         ariaDescription: "Business impact of availability controls including uptime targets and recovery objectives",
         categoryLabel: "Availability",
         containerClassName: "cia-availability",
@@ -105,7 +109,7 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         defaultTitle: "Integrity Impact Analysis",
         defaultIcon: "✓",
         color: "green",
-        textClass: "text-green-800 dark:text-green-300",
+        textClass: ciaColors.text,
         ariaDescription: "Business impact of integrity controls including data accuracy and validation mechanisms",
         categoryLabel: "Integrity",
         containerClassName: "",
@@ -119,7 +123,7 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         defaultTitle: "Confidentiality Impact Analysis",
         defaultIcon: "🔒",
         color: "orange",
-        textClass: "text-orange-800 dark:text-orange-300",
+        textClass: ciaColors.text,
         ariaDescription: "Business impact of confidentiality controls including data classification and privacy measures",
         categoryLabel: "Confidentiality",
         containerClassName: "overflow-visible",
