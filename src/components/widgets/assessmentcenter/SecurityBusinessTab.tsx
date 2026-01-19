@@ -1,7 +1,7 @@
 import React from "react";
 import { SECURITY_SUMMARY_WIDGET_IDS } from "../../../constants/testIds";
 import { formatCurrency } from "../../../utils/formatUtils";
-import { WidgetClasses } from "../../../utils/tailwindClassHelpers";
+import { WidgetClasses, cn } from "../../../utils/tailwindClassHelpers";
 
 /**
  * Props for SecurityBusinessTab component
@@ -32,9 +32,9 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
   roiEstimate,
 }) => {
   return (
-    <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-business')} className="space-y-4">
+    <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-business')} className="space-y-md">
       {/* Business Value content */}
-      <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-sm">
+      <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg mb-sm">
         <p className="text-sm">
           This section summarizes the business value and financial impact of
           your selected security levels, helping justify security investments to
@@ -43,14 +43,14 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
       </div>
 
       {/* Business Impact Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Business Value Summary
         </h3>
 
         <div className={WidgetClasses.grid2Cols}>
           {/* Business Maturity */}
-          <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+          <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg">
             <h4 className="font-medium text-blue-700 dark:text-blue-300">
               Business Maturity Level
             </h4>
@@ -63,7 +63,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
           </div>
 
           {/* ROI Estimation */}
-          <div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
+          <div className="p-sm bg-green-50 dark:bg-green-900/20 rounded-lg">
             <h4 className="font-medium text-green-700 dark:text-green-300">
               Estimated ROI
             </h4>
@@ -84,8 +84,8 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
       </div>
 
       {/* Cost Summary */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Cost Summary
         </h3>
 
@@ -128,15 +128,15 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
       </div>
 
       {/* Business Enablement */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-sm border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-medium mb-sm text-gray-800 dark:text-gray-100">
+      <div className={cn(WidgetClasses.card, "shadow-sm")}>
+        <h3 className="text-subheading font-medium mb-sm text-gray-800 dark:text-gray-100">
           Business Enablement
         </h3>
 
-        <div className="space-y-3">
+        <div className="space-y-sm">
           <div className="p-sm bg-gray-50 dark:bg-gray-700 rounded-lg">
             <h4 className="text-sm font-medium mb-sm text-gray-800 dark:text-gray-200">Business Capabilities</h4>
-            <ul className="list-disc pl-5 space-y-1 text-sm">
+            <ul className="list-disc pl-5 space-y-xs text-sm">
               {securityScore >= 80 ? (
                 <>
                   <li>Enables digital transformation initiatives</li>

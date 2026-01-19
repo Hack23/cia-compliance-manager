@@ -95,37 +95,37 @@ describe("Color Utilities", () => {
   describe("getSecurityLevelBackgroundClass", () => {
     it("should return correct background classes for each security level", () => {
       expect(colorUtils.getSecurityLevelBackgroundClass("None")).toBe(
-        "bg-red-100 dark:bg-red-900 dark:bg-opacity-20"
+        "bg-red-100 dark:bg-red-900/20"
       );
       expect(colorUtils.getSecurityLevelBackgroundClass("Low")).toBe(
-        "bg-yellow-100 dark:bg-yellow-900 dark:bg-opacity-20"
+        "bg-yellow-100 dark:bg-yellow-900/20"
       );
       expect(colorUtils.getSecurityLevelBackgroundClass("Moderate")).toBe(
-        "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+        "bg-blue-100 dark:bg-blue-900/20"
       );
       expect(colorUtils.getSecurityLevelBackgroundClass("High")).toBe(
-        "bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
+        "bg-green-100 dark:bg-green-900/20"
       );
       expect(colorUtils.getSecurityLevelBackgroundClass("Very High")).toBe(
-        "bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
+        "bg-purple-100 dark:bg-purple-900/20"
       );
     });
 
     it("should handle case insensitivity", () => {
       expect(colorUtils.getSecurityLevelBackgroundClass("none")).toBe(
-        "bg-red-100 dark:bg-red-900 dark:bg-opacity-20"
+        "bg-red-100 dark:bg-red-900/20"
       );
       expect(colorUtils.getSecurityLevelBackgroundClass("MODERATE")).toBe(
-        "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+        "bg-blue-100 dark:bg-blue-900/20"
       );
     });
 
     it("should return default background class for unknown levels", () => {
       expect(colorUtils.getSecurityLevelBackgroundClass("Unknown")).toBe(
-        "bg-gray-100 dark:bg-gray-800 dark:bg-opacity-20"
+        "bg-gray-100 dark:bg-gray-800/20"
       );
       expect(colorUtils.getSecurityLevelBackgroundClass("")).toBe(
-        "bg-gray-100 dark:bg-gray-800 dark:bg-opacity-20"
+        "bg-gray-100 dark:bg-gray-800/20"
       );
     });
   });

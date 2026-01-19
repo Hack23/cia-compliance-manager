@@ -41,15 +41,15 @@ const SecurityLevelIndicator: React.FC<SecurityLevelIndicatorProps> = ({
   const getColor = (): string => {
     switch (level) {
       case "None":
-        return "bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-20 dark:text-red-300";
+        return "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-300";
       case "Low":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:bg-opacity-20 dark:text-yellow-300";
+        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-300";
       case "Moderate":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-20 dark:text-blue-300";
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300";
       case "High":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-20 dark:text-green-300";
+        return "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300";
       case "Very High":
-        return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:bg-opacity-20 dark:text-purple-300";
+        return "bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-300";
       default:
         return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300";
     }
