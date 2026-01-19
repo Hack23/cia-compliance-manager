@@ -27,9 +27,9 @@ interface ComponentTheme {
 const COMPONENT_THEMES: Record<CIAComponent, ComponentTheme> = {
   confidentiality: {
     icon: "🔒",
-    colorClass: "bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20",
+    colorClass: "bg-purple-100 dark:bg-purple-900/20",
     textClass: "text-purple-800 dark:text-purple-300",
-    bgClass: "bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20",
+    bgClass: "bg-purple-50 dark:bg-purple-900/20",
     borderClass: "border-purple-100 dark:border-purple-800",
     accentClass: "text-purple-500",
     accentBgClass: "bg-purple-500 dark:bg-purple-600",
@@ -37,9 +37,9 @@ const COMPONENT_THEMES: Record<CIAComponent, ComponentTheme> = {
   },
   integrity: {
     icon: "✓",
-    colorClass: "bg-green-100 dark:bg-green-900 dark:bg-opacity-20",
+    colorClass: "bg-green-100 dark:bg-green-900/20",
     textClass: "text-green-800 dark:text-green-300",
-    bgClass: "bg-green-50 dark:bg-green-900 dark:bg-opacity-20",
+    bgClass: "bg-green-50 dark:bg-green-900/20",
     borderClass: "border-green-100 dark:border-green-800",
     accentClass: "text-green-500",
     accentBgClass: "bg-green-500 dark:bg-green-600",
@@ -47,9 +47,9 @@ const COMPONENT_THEMES: Record<CIAComponent, ComponentTheme> = {
   },
   availability: {
     icon: "⏱️",
-    colorClass: "bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20",
+    colorClass: "bg-blue-100 dark:bg-blue-900/20",
     textClass: "text-blue-800 dark:text-blue-300",
-    bgClass: "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20",
+    bgClass: "bg-blue-50 dark:bg-blue-900/20",
     borderClass: "border-blue-100 dark:border-blue-800",
     accentClass: "text-blue-500",
     accentBgClass: "bg-blue-500 dark:bg-blue-600",

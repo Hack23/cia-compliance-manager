@@ -33,7 +33,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
   return (
     <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-compliance')} className="space-y-4">
       {/* Compliance introduction */}
-      <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-sm">
+      <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg mb-sm">
         <p className="text-sm">
           This section summarizes your compliance status based on selected
           security levels, highlighting alignment with regulatory frameworks and
@@ -111,7 +111,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
           </p>
         ) : (
           <div className={WidgetClasses.grid2Cols}>
-            <div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
+            <div className="p-sm bg-green-50 dark:bg-green-900/20 rounded-lg">
               <h4 className="font-medium text-green-700 dark:text-green-300 flex items-center justify-between">
                 <span>Compliant</span>
                 <span className="text-sm bg-green-100 dark:bg-green-800 px-2 py-0.5 rounded-full">
@@ -133,7 +133,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
               )}
             </div>
 
-            <div className="p-sm bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg">
+            <div className="p-sm bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
               <h4 className="font-medium text-yellow-700 dark:text-yellow-300 flex items-center justify-between">
                 <span>Partially Compliant</span>
                 <span className="text-sm bg-yellow-100 dark:bg-yellow-800 px-2 py-0.5 rounded-full">
@@ -166,7 +166,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
 
         <div className={WidgetClasses.grid3Cols}>
           {/* Confidentiality compliance */}
-          <div className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
+          <div className="p-sm bg-purple-50 dark:bg-purple-900/20 rounded">
             <h5 className="text-sm font-medium mb-xs text-purple-700 dark:text-purple-300">
               Confidentiality
             </h5>
@@ -182,7 +182,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
           </div>
 
           {/* Integrity compliance */}
-          <div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded">
+          <div className="p-sm bg-green-50 dark:bg-green-900/20 rounded">
             <h5 className="text-sm font-medium mb-xs text-green-700 dark:text-green-300">
               Integrity
             </h5>
@@ -195,7 +195,7 @@ export const SecurityComplianceTab: React.FC<SecurityComplianceTabProps> = ({
           </div>
 
           {/* Availability compliance */}
-          <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded">
+          <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded">
             <h5 className="text-sm font-medium mb-xs text-blue-700 dark:text-blue-300">
               Availability
             </h5>

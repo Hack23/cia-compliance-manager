@@ -166,23 +166,23 @@ export const RISK_LEVEL_CSS_CLASSES: Record<
   { bg: string; text: string }
 > = {
   [RISK_LEVELS.MINIMAL]: {
-    bg: "bg-green-100 dark:bg-green-900 dark:bg-opacity-20",
+    bg: "bg-green-100 dark:bg-green-900/20",
     text: "text-green-800 dark:text-green-300",
   },
   [RISK_LEVELS.LOW]: {
-    bg: "bg-lime-100 dark:bg-lime-900 dark:bg-opacity-20",
+    bg: "bg-lime-100 dark:bg-lime-900/20",
     text: "text-lime-800 dark:text-lime-300",
   },
   [RISK_LEVELS.MEDIUM]: {
-    bg: "bg-yellow-100 dark:bg-yellow-900 dark:bg-opacity-20",
+    bg: "bg-yellow-100 dark:bg-yellow-900/20",
     text: "text-yellow-800 dark:text-yellow-300",
   },
   [RISK_LEVELS.HIGH]: {
-    bg: "bg-orange-100 dark:bg-orange-900 dark:bg-opacity-20",
+    bg: "bg-orange-100 dark:bg-orange-900/20",
     text: "text-orange-800 dark:text-orange-300",
   },
   [RISK_LEVELS.CRITICAL]: {
-    bg: "bg-red-100 dark:bg-red-900 dark:bg-opacity-20",
+    bg: "bg-red-100 dark:bg-red-900/20",
     text: "text-red-800 dark:text-red-300",
   },
 };

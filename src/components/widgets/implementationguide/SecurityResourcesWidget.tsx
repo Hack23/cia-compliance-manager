@@ -329,7 +329,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
           className={cn(
             WidgetClasses.section,
             "p-sm rounded-lg",
-            "bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20"
+            "bg-blue-50 dark:bg-blue-900/20"
           )}
           aria-labelledby="resources-intro-heading"
         >
@@ -393,7 +393,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                         "w-full text-left px-3 py-2 rounded-md",
                         WidgetClasses.textResponsive,
                         selectedCategory === null
-                          ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300"
+                          ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
                           : "bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
                       )}
                       onClick={() => handleCategorySelect(null)}
@@ -411,7 +411,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                           "w-full text-left px-3 py-2 rounded-md",
                           WidgetClasses.textResponsive,
                           selectedCategory === category
-                            ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300"
+                            ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
                             : "bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
                         )}
                         onClick={() => handleCategorySelect(category)}
@@ -523,7 +523,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                         onClick={() => handlePageChange(index + 1)}
                         className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                           currentPage === index + 1
-                            ? "z-10 bg-blue-50 border-blue-500 text-blue-600 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300"
+                            ? "z-10 bg-blue-50 border-blue-500 text-blue-600 dark:bg-blue-900/30 dark:text-blue-300"
                             : "bg-white text-gray-500 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
                         }`}
                       >

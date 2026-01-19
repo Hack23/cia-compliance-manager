@@ -38,7 +38,7 @@ export const SecurityImplementationTab: React.FC<
       className="space-y-4"
     >
       {/* Implementation introduction */}
-      <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-sm">
+      <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg mb-sm">
         <p className="text-sm">
           This section summarizes implementation requirements for your selected
           security levels, helping plan resources, timelines, and technical
@@ -112,7 +112,7 @@ export const SecurityImplementationTab: React.FC<
 
         <div className={WidgetClasses.grid3Cols}>
           {/* Confidentiality Implementation */}
-          <div className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800">
+          <div className="p-sm bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-100 dark:border-purple-800">
             <h4 className="font-medium text-purple-700 dark:text-purple-300 mb-sm">
               Confidentiality Implementation
             </h4>
@@ -128,7 +128,7 @@ export const SecurityImplementationTab: React.FC<
           </div>
 
           {/* Integrity Implementation */}
-          <div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800">
+          <div className="p-sm bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800">
             <h4 className="font-medium text-green-700 dark:text-green-300 mb-sm">
               Integrity Implementation
             </h4>
@@ -141,7 +141,7 @@ export const SecurityImplementationTab: React.FC<
           </div>
 
           {/* Availability Implementation */}
-          <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800">
+          <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800">
             <h4 className="font-medium text-blue-700 dark:text-blue-300 mb-sm">
               Availability Implementation
             </h4>
@@ -162,7 +162,7 @@ export const SecurityImplementationTab: React.FC<
         </h3>
 
         <div className={WidgetClasses.grid2Cols}>
-          <div className="p-sm bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg">
+          <div className="p-sm bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
             <h4 className="font-medium text-yellow-700 dark:text-yellow-300">
               Success Factors
             </h4>
@@ -175,7 +175,7 @@ export const SecurityImplementationTab: React.FC<
             </ul>
           </div>
 
-          <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+          <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg">
             <h4 className="font-medium text-blue-700 dark:text-blue-300">
               Key Challenges
             </h4>

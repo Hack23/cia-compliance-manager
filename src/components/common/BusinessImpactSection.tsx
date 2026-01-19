@@ -52,11 +52,11 @@ const getTextColorClasses = (color: CIAComponentColor): string => {
 const getBadgeColorClasses = (color: CIAComponentColor): string => {
   switch (color) {
     case "blue":
-      return "bg-blue-50 text-blue-700 dark:bg-blue-900 dark:bg-opacity-50 dark:text-blue-300";
+      return "bg-blue-50 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300";
     case "green":
-      return "bg-green-50 text-green-700 dark:bg-green-900 dark:bg-opacity-50 dark:text-green-300";
+      return "bg-green-50 text-green-700 dark:bg-green-900/50 dark:text-green-300";
     case "orange":
-      return "bg-orange-50 text-orange-700 dark:bg-orange-900 dark:bg-opacity-50 dark:text-orange-300";
+      return "bg-orange-50 text-orange-700 dark:bg-orange-900/50 dark:text-orange-300";
     default: {
       // Exhaustive check - TypeScript will error if new colors are added
       const exhaustiveCheck: never = color;

@@ -95,7 +95,7 @@ const SecurityVisualizationWidget: React.FC<
         return (
           <div
             data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('balanced-recommendation')}
-            className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg mt-md"
+            className="p-md bg-green-50 dark:bg-green-900/20 rounded-lg mt-md"
           >
             <p className="text-sm">
               Your security posture is well-balanced with strong controls across
@@ -271,7 +271,7 @@ const SecurityVisualizationWidget: React.FC<
 
             {/* Integrity component */}
             <div
-              className="p-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg"
+              className="p-md bg-green-50 dark:bg-green-900/20 rounded-lg"
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('integrity-component')}
             >
               <div className="flex items-center justify-between mb-sm">
@@ -298,7 +298,7 @@ const SecurityVisualizationWidget: React.FC<
 
             {/* Availability component */}
             <div
-              className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg"
+              className="p-md bg-blue-50 dark:bg-blue-900/20 rounded-lg"
               data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('availability-component')}
             >
               <div className="flex items-center justify-between mb-sm">
@@ -329,7 +329,7 @@ const SecurityVisualizationWidget: React.FC<
         {getSecurityRecommendations()}
 
         {/* Explanation section */}
-        <div className="p-md bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mt-md">
+        <div className="p-md bg-blue-50 dark:bg-blue-900/20 rounded-lg mt-md">
           <h3 className="text-md font-medium mb-sm">
             Security Visualization Key
           </h3>
@@ -339,19 +339,19 @@ const SecurityVisualizationWidget: React.FC<
             business risk associated with your current security posture.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-sm text-xs">
-            <div className="p-xs bg-red-100 text-red-800 dark:bg-red-900 dark:bg-opacity-30 dark:text-red-300 rounded text-center">
+            <div className="p-xs bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300 rounded text-center">
               Critical Risk
             </div>
-            <div className="p-xs bg-orange-100 text-orange-800 dark:bg-orange-900 dark:bg-opacity-30 dark:text-orange-300 rounded text-center">
+            <div className="p-xs bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300 rounded text-center">
               High Risk
             </div>
-            <div className="p-xs bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:bg-opacity-30 dark:text-yellow-300 rounded text-center">
+            <div className="p-xs bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300 rounded text-center">
               Medium Risk
             </div>
-            <div className="p-xs bg-green-100 text-green-800 dark:bg-green-900 dark:bg-opacity-30 dark:text-green-300 rounded text-center">
+            <div className="p-xs bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 rounded text-center">
               Low Risk
             </div>
-            <div className="p-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:bg-opacity-30 dark:text-blue-300 rounded text-center">
+            <div className="p-xs bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded text-center">
               Minimal Risk
             </div>
           </div>

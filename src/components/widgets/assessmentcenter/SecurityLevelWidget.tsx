@@ -292,7 +292,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                   <SecurityLevelBadge
                     category=""
                     level={confidentialityLevel}
-                    colorClass="bg-purple-100 dark:bg-purple-900 dark:bg-opacity-20"
+                    colorClass="bg-purple-100 dark:bg-purple-900/20"
                     textClass="text-purple-800 dark:text-purple-300"
                     testId="security-level-widget-confidentiality-badge"
                   />
@@ -362,7 +362,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                   <SecurityLevelBadge
                     category=""
                     level={integrityLevel}
-                    colorClass="bg-green-100 dark:bg-green-900 dark:bg-opacity-20"
+                    colorClass="bg-green-100 dark:bg-green-900/20"
                     textClass="text-green-800 dark:text-green-300"
                     testId="security-level-widget-integrity-badge"
                   />
@@ -426,7 +426,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                   <SecurityLevelBadge
                     category=""
                     level={availabilityLevel}
-                    colorClass="bg-blue-100 dark:bg-blue-900 dark:bg-opacity-20"
+                    colorClass="bg-blue-100 dark:bg-blue-900/20"
                     textClass="text-blue-800 dark:text-blue-300"
                     testId="security-level-widget-availability-badge"
                   />
@@ -536,7 +536,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                     {/* Component-specific details */}
                     {activeComponent === "availability" && (
                       <div className="mt-md grid grid-cols-2 gap-md">
-                        <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-sm rounded">
+                        <div className="bg-blue-50 dark:bg-blue-900/20 p-sm rounded">
                           <div className="text-xs font-medium mb-xs text-blue-700 dark:text-blue-300">
                             Uptime
                           </div>
@@ -544,7 +544,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                             {activeDetails.uptime || "N/A"}
                           </div>
                         </div>
-                        <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-sm rounded">
+                        <div className="bg-blue-50 dark:bg-blue-900/20 p-sm rounded">
                           <div className="text-xs font-medium mb-xs text-blue-700 dark:text-blue-300">
                             Recovery Time
                           </div>
@@ -557,7 +557,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                     {activeComponent === "integrity" &&
                       activeDetails.validationMethod && (
-                        <div className="mt-md bg-green-50 dark:bg-green-900 dark:bg-opacity-20 p-sm rounded">
+                        <div className="mt-md bg-green-50 dark:bg-green-900/20 p-sm rounded">
                           <div className="text-xs font-medium mb-xs text-green-700 dark:text-green-300">
                             Validation Method
                           </div>
@@ -569,7 +569,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
 
                     {activeComponent === "confidentiality" &&
                       activeDetails.protectionMethod && (
-                        <div className="mt-md bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 p-sm rounded">
+                        <div className="mt-md bg-purple-50 dark:bg-purple-900/20 p-sm rounded">
                           <div className="text-xs font-medium mb-xs text-purple-700 dark:text-purple-300">
                             Protection Method
                           </div>
@@ -599,7 +599,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-sm text-xs">
-            <div className="p-sm bg-red-50 dark:bg-red-900 dark:bg-opacity-20 rounded">
+            <div className="p-sm bg-red-50 dark:bg-red-900/20 rounded">
               <div className="font-medium text-red-700 dark:text-red-300">
                 None
               </div>
@@ -607,7 +607,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 Minimal to no security controls
               </div>
             </div>
-            <div className="p-sm bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded">
+            <div className="p-sm bg-yellow-50 dark:bg-yellow-900/20 rounded">
               <div className="font-medium text-yellow-700 dark:text-yellow-300">
                 Low
               </div>
@@ -615,7 +615,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 Basic security controls
               </div>
             </div>
-            <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded">
+            <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded">
               <div className="font-medium text-blue-700 dark:text-blue-300">
                 Moderate
               </div>
@@ -623,7 +623,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 Standard security controls
               </div>
             </div>
-            <div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded">
+            <div className="p-sm bg-green-50 dark:bg-green-900/20 rounded">
               <div className="font-medium text-green-700 dark:text-green-300">
                 High
               </div>
@@ -631,7 +631,7 @@ const SecurityLevelWidget: React.FC<SecurityLevelWidgetProps> = ({
                 Advanced security controls
               </div>
             </div>
-            <div className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded">
+            <div className="p-sm bg-purple-50 dark:bg-purple-900/20 rounded">
               <div className="font-medium text-purple-700 dark:text-purple-300">
                 Very High
               </div>

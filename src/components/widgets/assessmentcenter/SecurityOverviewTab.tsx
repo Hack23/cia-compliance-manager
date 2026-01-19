@@ -72,7 +72,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
         <div className={WidgetClasses.grid3Cols}>
           {/* Confidentiality Card */}
           <div
-            className="p-sm bg-purple-50 dark:bg-purple-900 dark:bg-opacity-20 rounded-lg border border-purple-100 dark:border-purple-800"
+            className="p-sm bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-100 dark:border-purple-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.CONFIDENTIALITY_CARD}
           >
             <div className="flex items-center mb-sm">
@@ -102,7 +102,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
 
           {/* Integrity Card */}
           <div
-            className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-100 dark:border-green-800"
+            className="p-sm bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.INTEGRITY_CARD}
           >
             <div className="flex items-center mb-sm">
@@ -134,7 +134,7 @@ export const SecurityOverviewTab: React.FC<SecurityOverviewTabProps> = ({
 
           {/* Availability Card */}
           <div
-            className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-100 dark:border-blue-800"
+            className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800"
             data-testid={SECURITY_SUMMARY_TEST_IDS.AVAILABILITY_CARD}
           >
             <div className="flex items-center mb-sm">

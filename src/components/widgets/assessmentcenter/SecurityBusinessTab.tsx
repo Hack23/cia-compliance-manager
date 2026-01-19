@@ -34,7 +34,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
   return (
     <div data-testid={testId || SECURITY_SUMMARY_WIDGET_IDS.section('content-business')} className="space-y-4">
       {/* Business Value content */}
-      <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg mb-sm">
+      <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg mb-sm">
         <p className="text-sm">
           This section summarizes the business value and financial impact of
           your selected security levels, helping justify security investments to
@@ -50,7 +50,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
 
         <div className={WidgetClasses.grid2Cols}>
           {/* Business Maturity */}
-          <div className="p-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg">
+          <div className="p-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg">
             <h4 className="font-medium text-blue-700 dark:text-blue-300">
               Business Maturity Level
             </h4>
@@ -63,7 +63,7 @@ export const SecurityBusinessTab: React.FC<SecurityBusinessTabProps> = ({
           </div>
 
           {/* ROI Estimation */}
-          <div className="p-sm bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg">
+          <div className="p-sm bg-green-50 dark:bg-green-900/20 rounded-lg">
             <h4 className="font-medium text-green-700 dark:text-green-300">
               Estimated ROI
             </h4>

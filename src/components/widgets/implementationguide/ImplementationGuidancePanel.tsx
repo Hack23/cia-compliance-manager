@@ -136,7 +136,7 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
         )}
 
         {/* Common Implementation Challenges */}
-        <div className="p-sm bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg border border-yellow-100 dark:border-yellow-800">
+        <div className="p-sm bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-100 dark:border-yellow-800">
           <h4 className="text-md font-medium mb-sm text-yellow-700 dark:text-yellow-300 flex items-center">
             <span className="mr-sm">⚠️</span>Common Implementation Challenges
           </h4>
