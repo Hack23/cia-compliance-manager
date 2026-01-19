@@ -147,7 +147,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             Technical Description
           </h4>
           <p
-            className="text-sm text-gray-600 dark:text-gray-400"
+            className="text-body text-gray-600 dark:text-gray-400"
             data-testid={TECHNICAL_DETAILS_WIDGET_IDS.label('description')}
           >
             {getOptionalProperty(
@@ -171,7 +171,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
                   style={{ width: `${complexity.value}%` }}
                 ></div>
               </div>
-              <span className="text-xs font-medium">{complexity.label}</span>
+              <span className="text-caption font-medium">{complexity.label}</span>
             </div>
           </div>
 
@@ -184,7 +184,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
               data-testid={TECHNICAL_DETAILS_WIDGET_IDS.label('maintenance-level')}
             >
               <span className="text-sm">Estimated staffing: </span>
-              <span className={`ml-2 text-sm font-medium ${theme.textClass}`}>
+              <span className={`ml-2 text-body font-medium ${theme.textClass}`}>
                 {getPersonnelRequirements(level)}
               </span>
             </div>
@@ -200,7 +200,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             Implementation Requirements
           </h4>
           <ul
-            className="list-disc list-inside space-y-xs text-sm text-gray-600 dark:text-gray-400"
+            className="list-disc list-inside space-y-xs text-body text-gray-600 dark:text-gray-400"
             data-testid={TECHNICAL_DETAILS_WIDGET_IDS.list('implementation-steps')}
           >
             {getTechnicalRequirements(component, level).map((req, index) => (
@@ -231,7 +231,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
           aria-label={`Toggle ${component} advanced details section`}
           data-testid={`${testId}-${component}-toggle-advanced`}
         >
-          <span className="text-sm font-medium">
+          <span className="text-body font-medium">
             {showAdvancedDetails ? "Hide" : "Show"} Advanced Details
           </span>
           <span className="text-gray-500">
@@ -244,7 +244,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-sm">
               {/* Technologies card */}
               <div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-sm border border-neutral-light dark:border-neutral-dark">
-                <h4 className="text-sm font-medium flex items-center mb-sm">
+                <h4 className="text-body font-medium flex items-center mb-sm">
                   <span className={`mr-xs ${theme.accentClass}`}>💻</span>Technologies
                 </h4>
                 <p className={`text-sm ${theme.textClass}`}>
@@ -258,7 +258,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
 
               {/* Configurations card */}
               <div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-sm border border-neutral-light dark:border-neutral-dark">
-                <h4 className="text-sm font-medium flex items-center mb-sm">
+                <h4 className="text-body font-medium flex items-center mb-sm">
                   <span className={`mr-xs ${theme.accentClass}`}>⚙️</span>
                   Configurations
                 </h4>
@@ -274,7 +274,7 @@ export const CIAComponentDetails: React.FC<CIAComponentDetailsProps> = ({
 
             {/* Expertise Required card */}
             <div className="p-sm bg-white dark:bg-gray-800 rounded-md shadow-sm border border-gray-200 dark:border-gray-700">
-              <h4 className="text-sm font-medium flex items-center mb-sm">
+              <h4 className="text-body font-medium flex items-center mb-sm">
                 <span className={`mr-xs ${theme.accentClass}`}>👨‍💻</span>Expertise Required
               </h4>
               <ul

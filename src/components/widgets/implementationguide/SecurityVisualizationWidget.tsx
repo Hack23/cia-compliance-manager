@@ -168,7 +168,7 @@ const SecurityVisualizationWidget: React.FC<
           >
             <div className="flex justify-between items-center mb-md">
               <div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-body text-gray-600 dark:text-gray-400">
                   Security Score
                 </div>
                 <div
@@ -180,7 +180,7 @@ const SecurityVisualizationWidget: React.FC<
                 </div>
               </div>
               <div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-body text-gray-600 dark:text-gray-400">
                   Risk Level
                 </div>
                 <div
@@ -198,7 +198,7 @@ const SecurityVisualizationWidget: React.FC<
 
             {/* Score gauge */}
             <div className="mb-sm" aria-label="Security score visualization">
-              <div className="text-xs text-gray-600 dark:text-gray-400 mb-xs">
+              <div className="text-caption text-gray-600 dark:text-gray-400 mb-xs">
                 Security Level
               </div>
               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
@@ -210,7 +210,7 @@ const SecurityVisualizationWidget: React.FC<
                   data-testid={SECURITY_VISUALIZATION_WIDGET_IDS.section('security-score-bar')}
                 ></div>
               </div>
-              <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mt-xs">
+              <div className="flex justify-between text-caption text-gray-600 dark:text-gray-400 mt-xs">
                 <div>Critical</div>
                 <div>High</div>
                 <div>Medium</div>
@@ -333,7 +333,7 @@ const SecurityVisualizationWidget: React.FC<
           <h3 className="text-md font-medium mb-sm">
             Security Visualization Key
           </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-sm">
+          <p className="text-body text-gray-600 dark:text-gray-400 mb-sm">
             The security score represents your overall security posture based on
             your CIA triad levels. The risk level indicates the potential
             business risk associated with your current security posture.

@@ -448,7 +448,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                   </div>
                 </dl>
 
-                <p className="mb-sm text-xs text-gray-600 dark:text-gray-400">
+                <p className="mb-sm text-caption text-gray-600 dark:text-gray-400">
                   Focus on implementing controls that satisfy all three
                   components for a balanced security posture.
                 </p>
@@ -462,7 +462,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
             <div className="mb-md">
               <div className="flex justify-between items-center mb-sm">
                 <h3 className="text-subheading font-medium">Security Resources</h3>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-body text-gray-600 dark:text-gray-400">
                   {filteredResources.length}{" "}
                   {filteredResources.length === 1 ? "resource" : "resources"}{" "}
                   found
@@ -511,7 +511,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                         currentPage === 1
                           ? "bg-gray-100 text-gray-400 dark:bg-gray-800 dark:text-gray-600 cursor-not-allowed"
                           : "bg-white text-gray-500 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
-                      } text-sm font-medium`}
+                      } text-body font-medium`}
                     >
                       Previous
                     </button>
@@ -521,7 +521,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                       <button
                         key={index}
                         onClick={() => handlePageChange(index + 1)}
-                        className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
+                        className={`relative inline-flex items-center px-4 py-2 border text-body font-medium ${
                           currentPage === index + 1
                             ? "z-10 bg-blue-50 border-blue-500 text-blue-600 dark:bg-blue-900/30 dark:text-blue-300"
                             : "bg-white text-gray-500 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
@@ -538,7 +538,7 @@ const SecurityResourcesWidget: React.FC<SecurityResourcesWidgetProps> = ({
                         currentPage === totalPages
                           ? "bg-gray-100 text-gray-400 dark:bg-gray-800 dark:text-gray-600 cursor-not-allowed"
                           : "bg-white text-gray-500 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
-                      } text-sm font-medium`}
+                      } text-body font-medium`}
                     >
                       Next
                     </button>

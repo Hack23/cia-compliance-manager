@@ -46,7 +46,7 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
           <h4 className="text-md font-medium mb-sm">
             Getting Started with Implementation
           </h4>
-          <ol className="list-decimal list-inside space-y-xs text-sm text-gray-600 dark:text-gray-400 pl-md">
+          <ol className="list-decimal list-inside space-y-xs text-body text-gray-600 dark:text-gray-400 pl-md">
             <li>Begin with a thorough assessment of your current security controls</li>
             <li>Prioritize implementations based on risk exposure and business impact</li>
             <li>Implement controls gradually, starting with foundational elements</li>
@@ -64,12 +64,12 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
                 <h4 className="text-md font-medium mb-sm text-primary-dark dark:text-primary-light flex items-center">
                   <span className="mr-sm">🔒</span>Confidentiality ({confidentialityLevel})
                 </h4>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-body text-gray-600 dark:text-gray-400">
                   <p className="mb-sm">
                     {implementationGuides[2].description ||
                       "Focus on data protection and access controls."}
                   </p>
-                  <div className="text-xs space-y-xs">
+                  <div className="text-caption space-y-xs">
                     <div>
                       <span className="font-medium">Expertise:</span>{" "}
                       {implementationGuides[2].expertiseLevel || "Standard"}
@@ -89,12 +89,12 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
                 <h4 className="text-md font-medium mb-sm text-green-700 dark:text-green-300 flex items-center">
                   <span className="mr-sm">✓</span>Integrity ({integrityLevel})
                 </h4>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-body text-gray-600 dark:text-gray-400">
                   <p className="mb-sm">
                     {implementationGuides[1].description ||
                       "Focus on data accuracy and validation mechanisms."}
                   </p>
-                  <div className="text-xs space-y-xs">
+                  <div className="text-caption space-y-xs">
                     <div>
                       <span className="font-medium">Expertise:</span>{" "}
                       {implementationGuides[1].expertiseLevel || "Standard"}
@@ -114,12 +114,12 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
                 <h4 className="text-md font-medium mb-sm text-blue-700 dark:text-blue-300 flex items-center">
                   <span className="mr-sm">⏱️</span>Availability ({availabilityLevel})
                 </h4>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-body text-gray-600 dark:text-gray-400">
                   <p className="mb-sm">
                     {implementationGuides[0].description ||
                       "Focus on systems uptime and recovery capabilities."}
                   </p>
-                  <div className="text-xs space-y-xs">
+                  <div className="text-caption space-y-xs">
                     <div>
                       <span className="font-medium">Expertise:</span>{" "}
                       {implementationGuides[0].expertiseLevel || "Standard"}
@@ -140,7 +140,7 @@ const ImplementationGuidancePanel: React.FC<ImplementationGuidancePanelProps> = 
           <h4 className="text-md font-medium mb-sm text-yellow-700 dark:text-yellow-300 flex items-center">
             <span className="mr-sm">⚠️</span>Common Implementation Challenges
           </h4>
-          <ul className="list-disc list-inside space-y-xs text-sm text-gray-600 dark:text-gray-400 pl-md">
+          <ul className="list-disc list-inside space-y-xs text-body text-gray-600 dark:text-gray-400 pl-md">
             <li>Balancing security with usability and performance</li>
             <li>Maintaining consistent controls across different environments</li>
             <li>Integration with legacy systems and applications</li>
