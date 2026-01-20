@@ -1,56 +1,60 @@
-import { renderHook } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { useBusinessImpact } from './useBusinessImpact';
-import * as useCIAContentServiceModule from './useCIAContentService';
-import * as riskUtilsModule from '../utils/riskUtils';
-import { CIAComponent, SecurityLevel } from '../types/cia';
-import { BusinessImpactDetails } from '../types/businessImpact';
-import { CIAContentService } from '../services/ciaContentService';
+import { renderHook } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { CIAContentService } from "../services/ciaContentService";
+import { BusinessImpactDetails } from "../types/businessImpact";
+import { CIAComponent, SecurityLevel } from "../types/cia";
+import * as riskUtilsModule from "../utils/riskUtils";
+import { useBusinessImpact } from "./useBusinessImpact";
+import * as useCIAContentServiceModule from "./useCIAContentService";
 
 // Mock dependencies
-vi.mock('./useCIAContentService');
-vi.mock('../utils/riskUtils');
+vi.mock("./useCIAContentService");
+vi.mock("../utils/riskUtils");
 
-describe('useBusinessImpact', () => {
+describe("useBusinessImpact", () => {
   const mockDefaultImpact: BusinessImpactDetails = {
-    summary: 'Moderate impact',
+    summary: "Moderate impact",
     financial: {
-      description: 'Moderate financial impact',
-      riskLevel: 'Medium',
+      description: "Moderate financial impact",
+      riskLevel: "Medium",
     },
     operational: {
-      description: 'Moderate operational impact',
-      riskLevel: 'Medium',
+      description: "Moderate operational impact",
+      riskLevel: "Medium",
     },
     reputational: {
-      description: 'Moderate reputational impact',
-      riskLevel: 'Medium',
+      description: "Moderate reputational impact",
+      riskLevel: "Medium",
     },
   };
 
   beforeEach(() => {
     vi.clearAllMocks();
-    
+
     // Mock getDefaultComponentImpact to return a consistent value
-    vi.spyOn(riskUtilsModule, 'getDefaultComponentImpact').mockReturnValue(
-      mockDefaultImpact
+    vi.spyOn(riskUtilsModule, "getDefaultComponentImpact").mockReturnValue(
+      mockDefaultImpact,
     );
   });
 
-  it('should return business impact when service is available', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("should return business impact when service is available", () => {
     const mockImpact: BusinessImpactDetails = {
-      summary: 'High impact',
+      summary: "High impact",
       financial: {
-        description: 'High financial impact',
-        riskLevel: 'High',
+        description: "High financial impact",
+        riskLevel: "High",
       },
       operational: {
-        description: 'High operational impact',
-        riskLevel: 'High',
+        description: "High operational impact",
+        riskLevel: "High",
       },
       reputational: {
-        description: 'High reputational impact',
-        riskLevel: 'High',
+        description: "High reputational impact",
+        riskLevel: "High",
       },
     };
 
@@ -58,7 +62,10 @@ describe('useBusinessImpact', () => {
       getBusinessImpact: vi.fn().mockReturnValue(mockImpact),
     } as unknown as CIAContentService;
 
-    vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
+    vi.spyOn(
+      useCIAContentServiceModule,
+      "useCIAContentService",
+    ).mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
@@ -66,15 +73,24 @@ describe('useBusinessImpact', () => {
     });
 
     const { result } = renderHook(() =>
-      useBusinessImpact('availability' as CIAComponent, 'High' as SecurityLevel)
+      useBusinessImpact(
+        "availability" as CIAComponent,
+        "High" as SecurityLevel,
+      ),
     );
 
     expect(result.current).toEqual(mockImpact);
-    expect(mockService.getBusinessImpact).toHaveBeenCalledWith('availability', 'High');
+    expect(mockService.getBusinessImpact).toHaveBeenCalledWith(
+      "availability",
+      "High",
+    );
   });
 
-  it('should return default impact when service is null', () => {
-    vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
+  it("should return default impact when service is null", () => {
+    vi.spyOn(
+      useCIAContentServiceModule,
+      "useCIAContentService",
+    ).mockReturnValue({
       ciaContentService: null,
       error: null,
       isLoading: false,
@@ -82,18 +98,24 @@ describe('useBusinessImpact', () => {
     });
 
     const { result } = renderHook(() =>
-      useBusinessImpact('integrity' as CIAComponent, 'Moderate' as SecurityLevel)
+      useBusinessImpact(
+        "integrity" as CIAComponent,
+        "Moderate" as SecurityLevel,
+      ),
     );
 
     expect(result.current).toEqual(mockDefaultImpact);
     expect(riskUtilsModule.getDefaultComponentImpact).toHaveBeenCalledWith(
-      'integrity',
-      'Moderate'
+      "integrity",
+      "Moderate",
     );
   });
 
-  it('should return default impact when service is undefined', () => {
-    vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
+  it("should return default impact when service is undefined", () => {
+    vi.spyOn(
+      useCIAContentServiceModule,
+      "useCIAContentService",
+    ).mockReturnValue({
       ciaContentService: null,
       error: null,
       isLoading: false,
@@ -101,22 +123,28 @@ describe('useBusinessImpact', () => {
     });
 
     const { result } = renderHook(() =>
-      useBusinessImpact('confidentiality' as CIAComponent, 'Low' as SecurityLevel)
+      useBusinessImpact(
+        "confidentiality" as CIAComponent,
+        "Low" as SecurityLevel,
+      ),
     );
 
     expect(result.current).toEqual(mockDefaultImpact);
     expect(riskUtilsModule.getDefaultComponentImpact).toHaveBeenCalledWith(
-      'confidentiality',
-      'Low'
+      "confidentiality",
+      "Low",
     );
   });
 
-  it('should return default impact when getBusinessImpact returns null', () => {
+  it("should return default impact when getBusinessImpact returns null", () => {
     const mockService = {
       getBusinessImpact: vi.fn().mockReturnValue(null),
     } as unknown as CIAContentService;
 
-    vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
+    vi.spyOn(
+      useCIAContentServiceModule,
+      "useCIAContentService",
+    ).mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
@@ -124,22 +152,28 @@ describe('useBusinessImpact', () => {
     });
 
     const { result } = renderHook(() =>
-      useBusinessImpact('availability' as CIAComponent, 'Very High' as SecurityLevel)
+      useBusinessImpact(
+        "availability" as CIAComponent,
+        "Very High" as SecurityLevel,
+      ),
     );
 
     expect(result.current).toEqual(mockDefaultImpact);
     expect(riskUtilsModule.getDefaultComponentImpact).toHaveBeenCalledWith(
-      'availability',
-      'Very High'
+      "availability",
+      "Very High",
     );
   });
 
-  it('should return default impact when getBusinessImpact returns undefined', () => {
+  it("should return default impact when getBusinessImpact returns undefined", () => {
     const mockService = {
       getBusinessImpact: vi.fn().mockReturnValue(undefined),
     } as unknown as CIAContentService;
 
-    vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
+    vi.spyOn(
+      useCIAContentServiceModule,
+      "useCIAContentService",
+    ).mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
@@ -147,26 +181,31 @@ describe('useBusinessImpact', () => {
     });
 
     const { result } = renderHook(() =>
-      useBusinessImpact('integrity' as CIAComponent, 'High' as SecurityLevel)
+      useBusinessImpact("integrity" as CIAComponent, "High" as SecurityLevel),
     );
 
     expect(result.current).toEqual(mockDefaultImpact);
     expect(riskUtilsModule.getDefaultComponentImpact).toHaveBeenCalledWith(
-      'integrity',
-      'High'
+      "integrity",
+      "High",
     );
   });
 
-  it('should handle errors gracefully and return default impact', () => {
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    
+  it("should handle errors gracefully and return default impact", () => {
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+
     const mockService = {
       getBusinessImpact: vi.fn().mockImplementation(() => {
-        throw new Error('Service error');
+        throw new Error("Service error");
       }),
     } as unknown as CIAContentService;
 
-    vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
+    vi.spyOn(
+      useCIAContentServiceModule,
+      "useCIAContentService",
+    ).mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
@@ -174,25 +213,32 @@ describe('useBusinessImpact', () => {
     });
 
     const { result } = renderHook(() =>
-      useBusinessImpact('confidentiality' as CIAComponent, 'Moderate' as SecurityLevel)
+      useBusinessImpact(
+        "confidentiality" as CIAComponent,
+        "Moderate" as SecurityLevel,
+      ),
     );
 
     expect(result.current).toEqual(mockDefaultImpact);
     expect(consoleErrorSpy).toHaveBeenCalledWith(
-      'Error getting confidentiality business impact:',
-      expect.any(Error)
+      "Error getting confidentiality business impact:",
+      expect.any(Error),
     );
     expect(riskUtilsModule.getDefaultComponentImpact).toHaveBeenCalledWith(
-      'confidentiality',
-      'Moderate'
+      "confidentiality",
+      "Moderate",
     );
 
     consoleErrorSpy.mockRestore();
   });
 
-  it('should work with all CIA components', () => {
-    const components: CIAComponent[] = ['availability', 'integrity', 'confidentiality'];
-    
+  it("should work with all CIA components", () => {
+    const components: CIAComponent[] = [
+      "availability",
+      "integrity",
+      "confidentiality",
+    ];
+
     components.forEach((component) => {
       const mockImpact = {
         financialImpact: `${component} financial impact`,
@@ -204,25 +250,37 @@ describe('useBusinessImpact', () => {
         getBusinessImpact: vi.fn().mockReturnValue(mockImpact),
       } as unknown as CIAContentService;
 
-      vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
+      vi.spyOn(
+        useCIAContentServiceModule,
+        "useCIAContentService",
+      ).mockReturnValue({
         ciaContentService: mockService,
         error: null,
         isLoading: false,
-      refresh: vi.fn(),
-    });
+        refresh: vi.fn(),
+      });
 
       const { result } = renderHook(() =>
-        useBusinessImpact(component, 'High' as SecurityLevel)
+        useBusinessImpact(component, "High" as SecurityLevel),
       );
 
       expect(result.current).toEqual(mockImpact);
-      expect(mockService.getBusinessImpact).toHaveBeenCalledWith(component, 'High');
+      expect(mockService.getBusinessImpact).toHaveBeenCalledWith(
+        component,
+        "High",
+      );
     });
   });
 
-  it('should work with all security levels', () => {
-    const levels: SecurityLevel[] = ['None', 'Low', 'Moderate', 'High', 'Very High'];
-    
+  it("should work with all security levels", () => {
+    const levels: SecurityLevel[] = [
+      "None",
+      "Low",
+      "Moderate",
+      "High",
+      "Very High",
+    ];
+
     levels.forEach((level) => {
       const mockImpact = {
         financialImpact: `${level} financial impact`,
@@ -234,34 +292,43 @@ describe('useBusinessImpact', () => {
         getBusinessImpact: vi.fn().mockReturnValue(mockImpact),
       } as unknown as CIAContentService;
 
-      vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
+      vi.spyOn(
+        useCIAContentServiceModule,
+        "useCIAContentService",
+      ).mockReturnValue({
         ciaContentService: mockService,
         error: null,
         isLoading: false,
-      refresh: vi.fn(),
-    });
+        refresh: vi.fn(),
+      });
 
       const { result } = renderHook(() =>
-        useBusinessImpact('availability' as CIAComponent, level)
+        useBusinessImpact("availability" as CIAComponent, level),
       );
 
       expect(result.current).toEqual(mockImpact);
-      expect(mockService.getBusinessImpact).toHaveBeenCalledWith('availability', level);
+      expect(mockService.getBusinessImpact).toHaveBeenCalledWith(
+        "availability",
+        level,
+      );
     });
   });
 
-  it('should memoize results correctly', () => {
+  it("should memoize results correctly", () => {
     const mockImpact = {
-      financialImpact: 'High financial impact',
-      operationalImpact: 'High operational impact',
-      reputationalImpact: 'High reputational impact',
+      financialImpact: "High financial impact",
+      operationalImpact: "High operational impact",
+      reputationalImpact: "High reputational impact",
     };
 
     const mockService = {
       getBusinessImpact: vi.fn().mockReturnValue(mockImpact),
     } as unknown as CIAContentService;
 
-    vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
+    vi.spyOn(
+      useCIAContentServiceModule,
+      "useCIAContentService",
+    ).mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
@@ -269,7 +336,10 @@ describe('useBusinessImpact', () => {
     });
 
     const { result, rerender } = renderHook(() =>
-      useBusinessImpact('availability' as CIAComponent, 'High' as SecurityLevel)
+      useBusinessImpact(
+        "availability" as CIAComponent,
+        "High" as SecurityLevel,
+      ),
     );
 
     const firstResult = result.current;
@@ -282,14 +352,18 @@ describe('useBusinessImpact', () => {
     expect(mockService.getBusinessImpact).toHaveBeenCalledTimes(1);
   });
 
-  it('should recalculate when component changes', () => {
+  it("should recalculate when component changes", () => {
     const mockService = {
-      getBusinessImpact: vi.fn()
-        .mockReturnValueOnce({ financialImpact: 'availability impact' })
-        .mockReturnValueOnce({ financialImpact: 'integrity impact' }),
+      getBusinessImpact: vi
+        .fn()
+        .mockReturnValueOnce({ financialImpact: "availability impact" })
+        .mockReturnValueOnce({ financialImpact: "integrity impact" }),
     } as unknown as CIAContentService;
 
-    vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
+    vi.spyOn(
+      useCIAContentServiceModule,
+      "useCIAContentService",
+    ).mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
@@ -300,32 +374,36 @@ describe('useBusinessImpact', () => {
       ({ component, level }) => useBusinessImpact(component, level),
       {
         initialProps: {
-          component: 'availability' as CIAComponent,
-          level: 'High' as SecurityLevel,
+          component: "availability" as CIAComponent,
+          level: "High" as SecurityLevel,
         },
-      }
+      },
     );
 
-    expect(result.current).toEqual({ financialImpact: 'availability impact' });
+    expect(result.current).toEqual({ financialImpact: "availability impact" });
 
     // Change component
     rerender({
-      component: 'integrity' as CIAComponent,
-      level: 'High' as SecurityLevel,
+      component: "integrity" as CIAComponent,
+      level: "High" as SecurityLevel,
     });
 
-    expect(result.current).toEqual({ financialImpact: 'integrity impact' });
+    expect(result.current).toEqual({ financialImpact: "integrity impact" });
     expect(mockService.getBusinessImpact).toHaveBeenCalledTimes(2);
   });
 
-  it('should recalculate when security level changes', () => {
+  it("should recalculate when security level changes", () => {
     const mockService = {
-      getBusinessImpact: vi.fn()
-        .mockReturnValueOnce({ financialImpact: 'high impact' })
-        .mockReturnValueOnce({ financialImpact: 'low impact' }),
+      getBusinessImpact: vi
+        .fn()
+        .mockReturnValueOnce({ financialImpact: "high impact" })
+        .mockReturnValueOnce({ financialImpact: "low impact" }),
     } as unknown as CIAContentService;
 
-    vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
+    vi.spyOn(
+      useCIAContentServiceModule,
+      "useCIAContentService",
+    ).mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
@@ -336,31 +414,34 @@ describe('useBusinessImpact', () => {
       ({ component, level }) => useBusinessImpact(component, level),
       {
         initialProps: {
-          component: 'availability' as CIAComponent,
-          level: 'High' as SecurityLevel,
+          component: "availability" as CIAComponent,
+          level: "High" as SecurityLevel,
         },
-      }
+      },
     );
 
-    expect(result.current).toEqual({ financialImpact: 'high impact' });
+    expect(result.current).toEqual({ financialImpact: "high impact" });
 
     // Change level
     rerender({
-      component: 'availability' as CIAComponent,
-      level: 'Low' as SecurityLevel,
+      component: "availability" as CIAComponent,
+      level: "Low" as SecurityLevel,
     });
 
-    expect(result.current).toEqual({ financialImpact: 'low impact' });
+    expect(result.current).toEqual({ financialImpact: "low impact" });
     expect(mockService.getBusinessImpact).toHaveBeenCalledTimes(2);
   });
 
-  it('should always return a non-null value', () => {
+  it("should always return a non-null value", () => {
     // Test with service returning null
     const mockService = {
       getBusinessImpact: vi.fn().mockReturnValue(null),
     } as unknown as CIAContentService;
 
-    vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
+    vi.spyOn(
+      useCIAContentServiceModule,
+      "useCIAContentService",
+    ).mockReturnValue({
       ciaContentService: mockService,
       error: null,
       isLoading: false,
@@ -368,14 +449,20 @@ describe('useBusinessImpact', () => {
     });
 
     const { result: result1 } = renderHook(() =>
-      useBusinessImpact('availability' as CIAComponent, 'High' as SecurityLevel)
+      useBusinessImpact(
+        "availability" as CIAComponent,
+        "High" as SecurityLevel,
+      ),
     );
 
     expect(result1.current).not.toBeNull();
     expect(result1.current).toBeDefined();
 
     // Test with service unavailable
-    vi.spyOn(useCIAContentServiceModule, 'useCIAContentService').mockReturnValue({
+    vi.spyOn(
+      useCIAContentServiceModule,
+      "useCIAContentService",
+    ).mockReturnValue({
       ciaContentService: null,
       error: null,
       isLoading: false,
@@ -383,7 +470,10 @@ describe('useBusinessImpact', () => {
     });
 
     const { result: result2 } = renderHook(() =>
-      useBusinessImpact('integrity' as CIAComponent, 'Moderate' as SecurityLevel)
+      useBusinessImpact(
+        "integrity" as CIAComponent,
+        "Moderate" as SecurityLevel,
+      ),
     );
 
     expect(result2.current).not.toBeNull();

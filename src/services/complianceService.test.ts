@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockDataProvider } from "../tests/testMocks/mockTypes";
 import { getSecurityLevelValue, SecurityLevel } from "../types/cia";
 import { CIADataProvider, CIADetails } from "../types/cia-services";
@@ -472,6 +472,10 @@ describe("ComplianceServiceAdapter", () => {
     vi.clearAllMocks();
     // Use the adapter instead of the service directly
     service = new ComplianceServiceAdapter(mockDataProvider);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   describe("getComplianceStatus", () => {

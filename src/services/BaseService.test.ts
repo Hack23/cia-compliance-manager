@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { TEST_SECURITY_LEVELS } from "../test";
 import { createMockDataProvider } from "../tests/testMocks/mockTypes";
 import { SecurityLevel } from "../types/cia";
@@ -10,7 +10,7 @@ class TestBaseService extends BaseService {
   // Expose protected methods for testing
   public testGetComponentDetails(
     component: CIAComponentType,
-    level: SecurityLevel
+    level: SecurityLevel,
   ) {
     return this.getComponentDetails(component, level);
   }
@@ -49,11 +49,15 @@ describe("BaseService", () => {
     service = new TestBaseService(mockDataProvider);
   });
 
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   describe("getComponentDetails", () => {
     it("should return details for valid component and level", () => {
       const result = service.testGetComponentDetails(
         "availability",
-        "Moderate"
+        "Moderate",
       );
       expect(result).toBeDefined();
       expect(result).toHaveProperty("description");
@@ -79,7 +83,7 @@ describe("BaseService", () => {
 
       const result = service.testGetComponentDetails(
         "availability",
-        "Moderate"
+        "Moderate",
       );
       expect(result).toBeUndefined();
     });
@@ -107,15 +111,15 @@ describe("BaseService", () => {
   describe("getRiskLevelFromSecurityLevel", () => {
     it("should return correct risk level for each security level", () => {
       expect(service.testGetRiskLevelFromSecurityLevel("None")).toBe(
-        "Critical"
+        "Critical",
       );
       expect(service.testGetRiskLevelFromSecurityLevel("Low")).toBe("High");
       expect(service.testGetRiskLevelFromSecurityLevel("Moderate")).toBe(
-        "Medium"
+        "Medium",
       );
       expect(service.testGetRiskLevelFromSecurityLevel("High")).toBe("Low");
       expect(service.testGetRiskLevelFromSecurityLevel("Very High")).toBe(
-        "Minimal"
+        "Minimal",
       );
     });
   });
@@ -139,7 +143,7 @@ describe("BaseService", () => {
     it("should capitalize the first letter of a string", () => {
       expect(service.testCapitalizeFirstLetter("test")).toBe("Test");
       expect(service.testCapitalizeFirstLetter("hello world")).toBe(
-        "Hello world"
+        "Hello world",
       );
     });
 
@@ -158,7 +162,7 @@ describe("BaseService", () => {
       const result = service.testGetDefaultSecurityIcon("Low");
       expect(result).toBe(mockIcon);
       expect(mockDataProvider.getDefaultSecurityIcon).toHaveBeenCalledWith(
-        "Low"
+        "Low",
       );
     });
 
@@ -191,7 +195,7 @@ describe("BaseService", () => {
       const result = service.testGetValuePoints("Moderate");
       expect(result).toEqual(mockPoints);
       expect(mockDataProvider.getDefaultValuePoints).toHaveBeenCalledWith(
-        "Moderate"
+        "Moderate",
       );
     });
 

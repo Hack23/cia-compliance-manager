@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createCIAOptionsMock } from "../tests/testMocks/ciaOptionsMocks";
 import {
   TEST_SECURITY_LEVELS,
@@ -274,6 +274,10 @@ describe("SecurityMetricsService", () => {
     service = createSecurityMetricsService(mockDataProvider);
     dataProvider = createTestDataProvider();
     service = new SecurityMetricsService(dataProvider);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   describe("calculateRoi", () => {

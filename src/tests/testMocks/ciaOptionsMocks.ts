@@ -1,13 +1,21 @@
 // Use vi.hoisted to create mocks that can be used at the top level
-import { vi, Mock } from "vitest";
+import { Mock, vi } from "vitest";
 import { SecurityLevel } from "../../types/cia";
+
+// Define dataset type for Chart.js mock
+interface ChartDataset {
+  data: number[];
+  label?: string;
+  backgroundColor?: string | string[];
+  borderColor?: string | string[];
+}
 
 // Define types for Chart.js mock
 interface ChartMock {
   destroy: Mock;
   update: Mock;
   resize: Mock;
-  data: { datasets: any[] };
+  data: { datasets: ChartDataset[] };
 }
 
 // ChartConstructor is a callable function that returns ChartMock
@@ -19,7 +27,7 @@ type ChartConstructor = {
     font: { family: string };
     plugins: { legend: { display: boolean } };
   };
-}
+};
 
 // Proper hoisted mock for chart.js
 const mockChartInstance = vi.hoisted(
@@ -28,11 +36,13 @@ const mockChartInstance = vi.hoisted(
     update: vi.fn(),
     resize: vi.fn(),
     data: { datasets: [] },
-  })
+  }),
 );
 
 const mockChartConstructor = vi.hoisted((): ChartConstructor => {
-  const constructor = vi.fn(() => mockChartInstance) as unknown as ChartConstructor;
+  const constructor = vi.fn(
+    () => mockChartInstance,
+  ) as unknown as ChartConstructor;
   constructor.register = vi.fn();
   constructor.defaults = {
     font: { family: "Arial" },
