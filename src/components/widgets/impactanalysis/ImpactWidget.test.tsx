@@ -123,7 +123,7 @@ describe("ImpactWidget", () => {
 
   describe("Styling", () => {
     it("applies consistent styling for all CIA components", async () => {
-      const { container } = render(
+      render(
         <ImpactWidget component="availability" level="High" />
       );
       await waitFor(() => {
