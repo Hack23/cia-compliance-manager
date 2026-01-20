@@ -86,7 +86,7 @@ export const TabContainer: React.FC<TabContainerProps> = ({
       {/* Tab List */}
       <div
         role={ARIA_ROLES.TABLIST}
-        className="flex space-x-2 border-b border-gray-200 dark:border-gray-700 mb-6"
+        className="flex space-x-2 border-b border-gray-200 dark:border-gray-700 mb-sm"
         data-testid={`${testId}-list`}
         aria-label="Tab navigation"
       >

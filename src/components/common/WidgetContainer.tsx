@@ -83,7 +83,7 @@ const WidgetContainer: React.FC<WidgetContainerProps> = ({
         </h3>
         {actions && <div className="widget-actions">{actions}</div>}
       </div>
-      <div className={`widget-body p-sm sm:p-md bg-white dark:bg-gray-900 rounded-b-md ${isLoadingState ? 'flex items-center justify-center min-h-[80px]' : ''}`}>
+      <div className={`widget-body p-xs sm:p-sm bg-white dark:bg-gray-900 rounded-b-md ${isLoadingState ? 'flex items-center justify-center min-h-[60px]' : ''}`}>
         {isLoadingState ? (
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" data-testid={spinnerTestId} />
         ) : (
