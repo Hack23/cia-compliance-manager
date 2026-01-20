@@ -37,6 +37,9 @@ import WidgetSection from "../../common/WidgetSection";
  * Defines component-specific settings including titles, icons, colors,
  * ARIA descriptions, and CSS classes for consistent rendering across
  * all three impact widgets.
+ *
+ * **DESIGN SYSTEM**: Standardized config - no custom container/content classes.
+ * All three CIA widgets use identical layout structure for balanced heights.
  */
 interface ComponentConfig {
   titleKey: keyof typeof WIDGET_TITLES;
@@ -47,10 +50,6 @@ interface ComponentConfig {
   textClass: string;
   ariaDescription: string;
   categoryLabel: string;
-  /** Container-specific CSS classes */
-  containerClassName: string;
-  /** Content area-specific CSS classes */
-  contentClassName: string;
   /** Function to generate security badge testId */
   getSecurityBadgeTestId: (effectiveTestId: string, widgetIds: typeof AVAILABILITY_IMPACT_WIDGET_IDS) => string;
 }
@@ -98,8 +97,6 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         textClass: ciaColors.text,
         ariaDescription: "Business impact of availability controls including uptime targets and recovery objectives",
         categoryLabel: "Availability",
-        containerClassName: "",
-        contentClassName: "",
         getSecurityBadgeTestId: (_effectiveTestId, widgetIds) => widgetIds.label("security-level"),
       };
     case "integrity":
@@ -112,8 +109,6 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         textClass: ciaColors.text,
         ariaDescription: "Business impact of integrity controls including data accuracy and validation mechanisms",
         categoryLabel: "Integrity",
-        containerClassName: "",
-        contentClassName: "",
         getSecurityBadgeTestId: (_effectiveTestId, widgetIds) => widgetIds.label("security-badge"),
       };
     case "confidentiality":
@@ -126,8 +121,6 @@ const getComponentConfig = (component: CIAComponent): ComponentConfig => {
         textClass: ciaColors.text,
         ariaDescription: "Business impact of confidentiality controls including data classification and privacy measures",
         categoryLabel: "Confidentiality",
-        containerClassName: "",
-        contentClassName: "",
         getSecurityBadgeTestId: (_effectiveTestId, widgetIds) => widgetIds.label("security-badge"),
       };
     default: {
@@ -324,23 +317,19 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
       <WidgetContainer
         title={WIDGET_TITLES[config.titleKey] || config.defaultTitle}
         icon={WIDGET_ICONS[config.iconKey] || config.defaultIcon}
-        className={`${className} ${config.containerClassName}`}
+        className={className}
         testId={effectiveTestId}
         isLoading={isLoading}
         error={error}
       >
         <div
-          className={cn(
-            "p-sm sm:p-md border-l-4",
-            getBorderColorClass(config.color),
-            config.contentClassName
-          )}
+          className="p-xs space-y-xs"
           role="region"
           aria-label={getWidgetAriaDescription(config.defaultTitle, config.ariaDescription)}
         >
           {/* Security level indicator */}
           <section
-            className="mb-md"
+            className="mb-xs"
             aria-labelledby={`${component}-level-heading`}
           >
             <h3 id={`${component}-level-heading`} className="sr-only">
@@ -358,10 +347,10 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
           {/* Business Impact Analysis */}
           {businessImpact && (
             <section
-              className="mb-sm"
+              className="mb-xs"
               aria-labelledby={`${component}-business-impact-heading`}
             >
-              <h3 id={`${component}-business-impact-heading`} className={WidgetClasses.heading}>
+              <h3 id={`${component}-business-impact-heading`} className="text-body-lg font-semibold text-gray-800 dark:text-gray-100 mb-xs">
                 Business Impact
               </h3>
               <BusinessImpactSection
@@ -378,12 +367,12 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
               title="SLA Metrics"
               icon="⏱️"
               variant="info"
-              className="mb-md"
+              className="mb-xs"
               ariaLabelledBy="sla-metrics-heading"
               testId={testIds.widgetIds.section("sla-metrics")}
             >
               <div
-                className={cn(WidgetClasses.grid3Cols, "mb-md")}
+                className="grid grid-cols-1 md:grid-cols-3 gap-xs mb-xs"
                 role="group"
                 aria-label="Service level agreement metrics"
               >
@@ -412,7 +401,7 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
                   testId={testIds.widgetIds.label("rpo")}
                 />
               </div>
-              <div className={WidgetClasses.grid2Cols}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-xs">
                 <MetricCard
                   label="Service Level Agreement"
                   value={metrics.data.sla}
@@ -430,10 +419,10 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
               title="Data Integrity Metrics"
               icon="📊"
               variant="success"
-              className="mb-md"
+              className="mb-xs"
               testId={testIds.widgetIds.section("metrics")}
             >
-              <div className={WidgetClasses.grid2Cols}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-xs">
                 <MetricCard
                   label="Data Validation Controls"
                   value={metrics.data.validationLevel}
@@ -458,10 +447,10 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
                 title="Data Protection"
                 icon="📊"
                 variant="primary"
-                className="mb-lg"
+                className="mb-xs"
                 testId={testIds.widgetIds.section("data-protection")}
               >
-                <div className={WidgetClasses.grid2Cols}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-xs">
                   <MetricCard
                     label="Data Classification"
                     value={metrics.data.dataClassification}
@@ -477,10 +466,10 @@ const ImpactWidget = React.memo<ImpactWidgetProps>(({
                 title="Privacy Impact"
                 icon="🔒"
                 variant="primary"
-                className="mb-lg"
+                className="mb-xs"
                 testId={testIds.widgetIds.section("privacy-impact")}
               >
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-md">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-xs">
                   <MetricCard
                     label="Privacy Impact"
                     value={metrics.data.privacyImpact}

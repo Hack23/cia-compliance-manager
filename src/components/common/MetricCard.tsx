@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import { TYPOGRAPHY, BORDER_RADIUS, SHADOWS } from '../../constants/designTokens';
 
 interface MetricCardProps {
   /** Metric label */
@@ -31,6 +30,9 @@ interface MetricCardProps {
  * easy-to-scan format. Standardized metric cards help stakeholders
  * quickly understand critical security indicators. 📊
  *
+ * **DESIGN SYSTEM**: Uses Tailwind classes only - no inline styles.
+ * Compact sizing (p-xs=4px, text-body-lg=16px) for balanced layouts.
+ *
  * @example
  * ```tsx
  * <MetricCard
@@ -55,7 +57,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   className = '',
   ariaLabel,
 }) => {
-  // Variant color classes for borders and backgrounds
+  // Variant color classes for borders and backgrounds - Tailwind only
   const variantClasses = {
     default: {
       container: 'border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800',
@@ -99,23 +101,18 @@ export const MetricCard: React.FC<MetricCardProps> = ({
 
   return (
     <div
-      className={`p-4 border ${colors.container} ${className}`}
-      style={{
-        borderRadius: BORDER_RADIUS.md,
-        boxShadow: SHADOWS.sm,
-      }}
+      className={`p-xs border rounded-md shadow-sm ${colors.container} ${className}`}
       data-testid={testId}
       aria-label={ariaLabel || `${label}: ${value}${unit || ''}`}
     >
-      <div className={`flex items-center ${icon ? 'justify-between' : 'justify-end'} mb-2`}>
+      <div className={`flex items-center ${icon ? 'justify-between' : 'justify-end'} mb-xs`}>
         {icon && (
-          <span className="text-heading" aria-hidden="true">
+          <span className="text-body" aria-hidden="true">
             {icon}
           </span>
         )}
         <span
-          className={`text-2xl font-bold ${colors.value}`}
-          style={{ fontSize: TYPOGRAPHY.title }}
+          className={`text-heading font-bold leading-none ${colors.value}`}
           data-testid={`${testId}-value`}
         >
           {value}
@@ -123,16 +120,14 @@ export const MetricCard: React.FC<MetricCardProps> = ({
         </span>
       </div>
       <p
-        className={`text-sm font-medium mb-1 ${colors.label}`}
-        style={{ fontSize: TYPOGRAPHY.body }}
+        className={`text-caption font-medium ${colors.label}`}
         data-testid={`${testId}-label`}
       >
         {label}
       </p>
       {description && (
         <p
-          className={`text-xs ${colors.description}`}
-          style={{ fontSize: TYPOGRAPHY.caption }}
+          className={`text-xs mt-xs ${colors.description}`}
           data-testid={`${testId}-description`}
         >
           {description}
